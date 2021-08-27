@@ -16,7 +16,7 @@ private const val SETTING_DEBUG = "isInDebugMode"
 private const val FULLSCREEN_DEFAULT = true
 private const val MUSIC_DEFAULT = true
 private const val SOUND_DEFAULT = true
-private const val DEBUG_MODE_DEFAULT = true
+private const val DEBUG_MODE_DEFAULT = false
 
 class PreferenceManager {
 

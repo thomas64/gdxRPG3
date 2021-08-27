@@ -18,7 +18,7 @@ class GraphicsDoor(private val door: Door) : GraphicsComponent() {
 
     private val openAnimation: Animation<TextureRegion> = loadAnimation(false)
     private val shadowAnimation: Animation<TextureRegion>? =
-        if (door.type == DoorType.LARGE_WOODEN_GATE) loadAnimation(true) else null
+        if (door.type == DoorType.LARGE_WOODEN_CAVE_GATE) loadAnimation(true) else null
     private var shadowFrame: TextureRegion? = null
 
     override fun receive(event: Event) {
