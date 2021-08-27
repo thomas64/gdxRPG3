@@ -1,0 +1,58 @@
+{
+  "quest0006": {
+    "title"     : "Key in the shadows",
+    "entityId"  : "duke01",
+    "summary"   : "In the Mysterious Tunnel is a man named Herington who wants a key to get through the gate. He strikes you as a very demanding person.",
+    "linkedWith": "quest0007",
+    "tasks"     : {
+      "1": {
+        "taskPhrase": "[Optional] Search for clues about the key",
+        "type"      : "CHECK",
+        "isOptional": true
+      },
+      "2": {
+        "taskPhrase": "Retrieve the key",
+        "type"      : "FETCH_ITEM",
+        "target"    : {"key_mysterious_tunnel": 1}
+      },
+      "3": {
+        "taskPhrase": "[Optional] Open the gate yourself (Will fail quest)",
+        "type"      : "CHECK",
+        "target"    : {"key_mysterious_tunnel": 1},
+        "isOptional": true
+      },
+      "4": {
+        "taskPhrase": "Deliver the key to Herington",
+        "type"      : "RETURN"
+      }
+    }
+  },
+  "quest0007": {
+    "title"     : "Another key in the shadows",
+    "entityId"  : "man02",
+    "summary"   : "Solomon heard your conversation with Herington and implores you to reconsider giving the key to him. He says Herington is not trustworthy, but he himself will use the key for good.",
+    "linkedWith": "quest0006",
+    "tasks"     : {
+      "1": {
+        "taskPhrase": "[Optional] Search for clues about the key",
+        "type"      : "CHECK",
+        "isOptional": true
+      },
+      "2": {
+        "taskPhrase": "Retrieve the key",
+        "type"      : "FETCH_ITEM",
+        "target"    : {"key_mysterious_tunnel": 1}
+      },
+      "3": {
+        "taskPhrase": "[Optional] Open the gate yourself (Will fail quest)",
+        "type"      : "CHECK",
+        "target"    : {"key_mysterious_tunnel": 1},
+        "isOptional": true
+      },
+      "4": {
+        "taskPhrase": "Deliver the key to Solomon",
+        "type"      : "RETURN"
+      }
+    }
+  }
+}

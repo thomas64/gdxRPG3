@@ -1,0 +1,47 @@
+{
+  "elias01"      : {
+    "phrases": {
+      "1"   : {
+        "text"   : ["May I join your party?"],
+        "choices": [
+          {"text": "Yes", "destinationId": "2"},
+          {"text": "No", "destinationId": "3"}
+        ]
+      },
+      "2"   : {
+        "text"   : ["Alright, thanks!"],
+        "choices": [{"conversationCommand": "HERO_JOIN"}]
+      },
+      "3"   : {
+        "text"   : ["Okay, perhaps another time then."],
+        "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]
+      },
+      "9000": {
+        "text"   : ["It seems your party is already full.", "I cannot join you if there's no room."],
+        "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]
+      }
+    }
+  },
+  "dismiss_elias": {
+    "phrases": {
+      "1": {
+        "text"   : ["Hero specific text.", "Do you want me to leave your party?"],
+        "choices": [
+          {"text": "Yes, you may leave.", "conversationCommand": "HERO_DISMISS"},
+          {"text": "No, I want you to stay.", "conversationCommand": "EXIT_CONVERSATION"}
+        ]
+      }
+    }
+  },
+  "bury_elias"   : {
+    "phrases": {
+      "1": {
+        "text"   : ["Hero specific text.", "All his equipment will also be gone once you bury him."],
+        "choices": [
+          {"text": "Yes, the funeral may continue.", "conversationCommand": "HERO_DISMISS"},
+          {"text": "No, I need to take precautions first.", "conversationCommand": "EXIT_CONVERSATION"}
+        ]
+      }
+    }
+  }
+}

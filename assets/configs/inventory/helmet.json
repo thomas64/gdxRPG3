@@ -1,0 +1,200 @@
+{
+  "basic_light_helmet"      : {
+    "name"      : "Basic Light Helmet",
+    "group"     : "HELMET",
+    "sort"      : 60100,
+    "price"     : 10,
+    "weight"    : 1,
+    "protection": 1,
+    "agility"   : 0,
+    "stealth"   : 0
+  },
+  "fine_light_helmet"       : {
+    "name"      : "Fine Light Helmet",
+    "group"     : "HELMET",
+    "sort"      : 60200,
+    "price"     : 20,
+    "weight"    : 1,
+    "protection": 2,
+    "agility"   : 0,
+    "stealth"   : 0
+  },
+  "specialist_light_helmet" : {
+    "name"      : "Specialist Light Helmet",
+    "group"     : "HELMET",
+    "sort"      : 60300,
+    "price"     : 30,
+    "weight"    : 1,
+    "protection": 3,
+    "agility"   : 0,
+    "stealth"   : 0
+  },
+  "masterwork_light_helmet" : {
+    "name"      : "Masterwork Light Helmet",
+    "group"     : "HELMET",
+    "sort"      : 60400,
+    "price"     : 40,
+    "weight"    : 1,
+    "protection": 4,
+    "agility"   : 0,
+    "stealth"   : 0
+  },
+  "basic_medium_helmet"     : {
+    "name"      : "Basic Medium Helmet",
+    "group"     : "HELMET",
+    "sort"      : 60120,
+    "price"     : 40,
+    "weight"    : 2,
+    "protection": 5,
+    "agility"   : -1,
+    "stealth"   : -1
+  },
+  "fine_medium_helmet"      : {
+    "name"      : "Fine Medium Helmet",
+    "group"     : "HELMET",
+    "sort"      : 60220,
+    "price"     : 50,
+    "weight"    : 2,
+    "protection": 6,
+    "agility"   : -1,
+    "stealth"   : -1
+  },
+  "specialist_medium_helmet": {
+    "name"      : "Specialist Medium Helmet",
+    "group"     : "HELMET",
+    "sort"      : 60320,
+    "price"     : 60,
+    "weight"    : 2,
+    "protection": 7,
+    "agility"   : -1,
+    "stealth"   : -1
+  },
+  "masterwork_medium_helmet": {
+    "name"      : "Masterwork Medium Helmet",
+    "group"     : "HELMET",
+    "sort"      : 60420,
+    "price"     : 70,
+    "weight"    : 2,
+    "protection": 8,
+    "agility"   : -1,
+    "stealth"   : -1
+  },
+  "basic_heavy_helmet"      : {
+    "name"      : "Basic Heavy Helmet",
+    "group"     : "HELMET",
+    "sort"      : 60140,
+    "price"     : 70,
+    "weight"    : 3,
+    "protection": 9,
+    "agility"   : -3,
+    "stealth"   : -2
+  },
+  "fine_heavy_helmet"       : {
+    "name"      : "Fine Heavy Helmet",
+    "group"     : "HELMET",
+    "sort"      : 60240,
+    "price"     : 80,
+    "weight"    : 3,
+    "protection": 10,
+    "agility"   : -3,
+    "stealth"   : -2
+  },
+  "specialist_heavy_helmet" : {
+    "name"      : "Specialist Heavy Helmet",
+    "group"     : "HELMET",
+    "sort"      : 60340,
+    "price"     : 90,
+    "weight"    : 3,
+    "protection": 11,
+    "agility"   : -3,
+    "stealth"   : -2
+  },
+  "masterwork_heavy_helmet" : {
+    "name"      : "Masterwork Heavy Helmet",
+    "group"     : "HELMET",
+    "sort"      : 60440,
+    "price"     : 100,
+    "weight"    : 3,
+    "protection": 12,
+    "agility"   : -3,
+    "stealth"   : -2
+  },
+  "mask_of_ardor"           : {
+    "name"      : "Mask of Ardor",
+    "group"     : "HELMET",
+    "sort"      : 61000,
+    "price"     : 1,
+    "weight"    : 1,
+    "protection": 0,
+    "agility"   : 0,
+    "stealth"   : 0,
+    "wizard"    : 1
+  },
+  "epic_helm_of_knowledge"  : {
+    "name"        : "Helm of Knowledge",
+    "group"       : "HELMET",
+    "sort"        : 61000,
+    "price"       : 50,
+    "weight"      : 1,
+    "protection"  : 1,
+    "agility"     : 0,
+    "stealth"     : 0,
+    "intelligence": 3
+  },
+  "epic_hat_of_wisdom"      : {
+    "name"      : "Hat of Wisdom",
+    "group"     : "HELMET",
+    "sort"      : 61000,
+    "price"     : 50,
+    "weight"    : 1,
+    "protection": 0,
+    "agility"   : 0,
+    "stealth"   : 0,
+    "willpower" : 5
+  },
+  "epic_helm_of_charisma"   : {
+    "name"      : "Helm of Charisma",
+    "group"     : "HELMET",
+    "sort"      : 61000,
+    "price"     : 50,
+    "weight"    : 1,
+    "protection": 1,
+    "agility"   : 0,
+    "stealth"   : 0,
+    "diplomat"  : 2
+  },
+  "epic_hat_of_insight"     : {
+    "name"      : "Hat of Insight",
+    "group"     : "HELMET",
+    "sort"      : 61000,
+    "price"     : 50,
+    "weight"    : 1,
+    "protection": 0,
+    "agility"   : 0,
+    "stealth"   : 0,
+    "loremaster": 2
+  },
+  "epic_helm_of_tempests"   : {
+    "name"      : "Helm of Tempests",
+    "group"     : "HELMET",
+    "sort"      : 61000,
+    "price"     : 50,
+    "weight"    : 1,
+    "protection": 1,
+    "agility"   : 0,
+    "stealth"   : 0,
+    "warrior"   : 2
+  },
+  "epic_wizard_hat"         : {
+    "name"         : "Wizard Hat",
+    "group"        : "HELMET",
+    "sort"         : 61000,
+    "price"        : 50,
+    "weight"       : 1,
+    "protection"   : 0,
+    "agility"      : 0,
+    "stealth"      : 0,
+    "wizard"       : 1,
+    "spell_battery": 10
+  }
+}

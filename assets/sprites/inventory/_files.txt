@@ -1,0 +1,13 @@
+armor.atlas
+armor2.atlas
+armor3.atlas
+group.atlas
+hafted.atlas
+item.atlas
+missile.atlas
+pole.atlas
+potion.atlas
+resource.atlas
+shield.atlas
+sword.atlas
+thrown.atlas

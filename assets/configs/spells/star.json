@@ -1,0 +1,170 @@
+{
+  "clumsiness": {
+    "name": "Clumsiness",
+    "school": "STAR",
+    "sort": 410,
+    "upgrade": 3.2,
+    "min_wizard": 2,
+    "resource": "SPICE",
+    "stamina_cost": 6,
+    "range": 3,
+    "number_of_targets": "INCREASES_BY_RANK",
+    "target": "ENEMY_ONLY_IN_TARGET_AREA",
+    "damage": 0,
+    "description": [
+      "Target loses 2 Dexterity for each Rank of the spell.",
+      "May only be cast once on each target."
+    ]
+  },
+  "dexterity": {
+    "name": "Dexterity",
+    "school": "STAR",
+    "sort": 415,
+    "upgrade": 3.2,
+    "min_wizard": 2,
+    "resource": "SPICE",
+    "stamina_cost": 7,
+    "range": 3,
+    "number_of_targets": "INCREASES_BY_RANK",
+    "target": "PARTY_ONLY_IN_TARGET_AREA",
+    "damage": 0,
+    "description": [
+      "Target gains 2 Dexterity for each Rank of the spell.",
+      "May only be cast once on each target."
+    ]
+  },
+  "frozen_doom": {
+    "name": "Frozen Doom",
+    "school": "STAR",
+    "sort": 420,
+    "upgrade": 6,
+    "min_wizard": 6,
+    "resource": "HERB",
+    "stamina_cost": 10,
+    "range": 1,
+    "number_of_targets": "ONE",
+    "target": "ENEMY_ONLY_IN_TARGET_AREA",
+    "damage": 3,
+    "description": [
+      "The target of this spell is frozen solid for the duration of the spell.",
+      "Only affects targets of human size or smaller."
+    ]
+  },
+  "light": {
+    "name": "Light",
+    "school": "STAR",
+    "sort": 425,
+    "upgrade": 3.2,
+    "min_wizard": 2,
+    "resource": "SPICE",
+    "stamina_cost": 5,
+    "range": 1,
+    "number_of_targets": "SELF",
+    "target": "EVERYONE",
+    "damage": 0,
+    "description": [
+      "This spell raises the level of light over the",
+      "battlefield to full sunlight, making it easier",
+      "for Solar-aspected characters to fight effectively."
+    ]
+  },
+  "photosynthesis": {
+    "name": "Photosynthesis",
+    "school": "STAR",
+    "sort": 430,
+    "upgrade": 1.6,
+    "min_wizard": 3,
+    "resource": "HERB",
+    "stamina_cost": 8,
+    "range": 1,
+    "number_of_targets": "INCREASES_BY_RANK",
+    "target": "PARTY_ONLY_IN_TARGET_AREA",
+    "damage": 0,
+    "description": [
+      "Affected targets regenerate some Stamina",
+      "every round for the duration of the spell,",
+      "as long they are in sunlight."
+    ]
+  },
+  "solar_wrath": {
+    "name": "Solar Wrath",
+    "school": "STAR",
+    "sort": 435,
+    "upgrade": 0.8,
+    "min_wizard": 4,
+    "resource": "GEMSTONE",
+    "stamina_cost": 5,
+    "range": 10,
+    "number_of_targets": "UNLIMITED",
+    "target": "ENEMY_ONLY_IN_TARGET_AREA",
+    "damage": 0,
+    "description": ["Penalizes enemy Morale, 1 per Rank."]
+  },
+  "starlight_shield": {
+    "name": "Starlight Shield",
+    "school": "STAR",
+    "sort": 440,
+    "upgrade": 4,
+    "min_wizard": 3,
+    "resource": "GEMSTONE",
+    "stamina_cost": 8,
+    "range": 1,
+    "number_of_targets": "UNLIMITED",
+    "target": "PARTY_ONLY_IN_TARGET_AREA",
+    "damage": 0,
+    "description": [
+      "All friendly entities within the range of the spell",
+      "add 1 per Rank to their Protection value."
+    ]
+  },
+  "stellar_gravity": {
+    "name": "Stellar Gravity",
+    "school": "STAR",
+    "sort": 445,
+    "upgrade": 3.2,
+    "min_wizard": 2,
+    "resource": "SPICE",
+    "stamina_cost": 6,
+    "range": 2,
+    "number_of_targets": "ONE",
+    "target": "ENEMY_ONLY_IN_TARGET_AREA",
+    "damage": 0,
+    "description": [
+      "Target of this spell has his Movement Rate reduced by 1 per Rank.",
+      "If the target's Movement Rate is reduced to zero, then he cannot move.",
+      "May only be cast once on each target."
+    ]
+  },
+  "web_of_starlight": {
+    "name": "Web of Starlight",
+    "school": "STAR",
+    "sort": 450,
+    "upgrade": 4,
+    "min_wizard": 3,
+    "resource": "GEMSTONE",
+    "stamina_cost": 10,
+    "range": 1,
+    "number_of_targets": "ONE",
+    "target": "ENEMY_ONLY_IN_TARGET_AREA",
+    "damage": 2,
+    "description": [
+      "Target is encased in a web of energy that causes damage each round.",
+      "Depending on their Strength, there is a chance that they may break out of the web.",
+      "Only affects targets of human size or smaller."
+    ]
+  },
+  "whitefire": {
+    "name": "Whitefire",
+    "school": "STAR",
+    "sort": 455,
+    "upgrade": 6,
+    "min_wizard": 6,
+    "resource": "SPICE",
+    "stamina_cost": 15,
+    "range": 1,
+    "number_of_targets": "ONE",
+    "target": "ENEMY_ONLY_IN_TARGET_AREA",
+    "damage": 4,
+    "description": ["Any single target within range is flash-fried by white fire."]
+  }
+}

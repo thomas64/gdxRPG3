@@ -1,0 +1,36 @@
+{
+  "fallen_tree"          : {
+    "type"          : "conversation",
+    "condition"     : ["quest_intro_not_finished"],
+    "conversationId": "fallen_tree",
+    "entityId"      : "mozes",
+    "doesRepeat"    : true
+  },
+  "guide_event_action"   : {
+    "type": "messagebox",
+    "text": ["Press %action% for an action.", "To talk with a person or to open a chest or door."]
+  },
+  "guide_event_inventory": {
+    "type"     : "messagebox",
+    "condition": ["3_starting_potions"],
+    "text"     : ["Press %inventory% to see your inventory,", "along with your equipment, stats, skills and spells."]
+  },
+  "guide_event_enemy"    : {
+    "type": "messagebox",
+    "text": ["Coming near an enemy will start a battle.", "By winning battles, you'll earn XP,", "which you can use to improve your character."]
+  },
+  "guide_event_fast"     : {
+    "type": "messagebox",
+    "text": ["Keep %fast% pressed to run.", "You'll be faster, but enemies will detect you much sooner."]
+  },
+  "guide_event_slow"     : {
+    "type": "messagebox",
+    "text": ["Keep %slow% pressed to move stealthily.", "Enemies will detect you less easy.", "This way you can avoid battles."]
+  },
+  "found_grace_ribbon"   : {
+    "type"          : "conversation",
+    "condition"     : ["grace_ribbon"],
+    "conversationId": "found_grace_ribbon",
+    "entityId"      : "mozes"
+  }
+}

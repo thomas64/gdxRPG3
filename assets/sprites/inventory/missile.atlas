@@ -1,0 +1,118 @@
+
+missile.png
+size: 248,248
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+basic_crossbow
+  rotate: false
+  xy: 0, 0
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+basic_greatbow
+  rotate: false
+  xy: 62, 0
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+basic_longbow
+  rotate: false
+  xy: 124, 0
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+basic_shortbow
+  rotate: false
+  xy: 186, 0
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+fine_crossbow
+  rotate: false
+  xy: 0, 62
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+fine_greatbow
+  rotate: false
+  xy: 62, 62
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+fine_longbow
+  rotate: false
+  xy: 124, 62
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+fine_shortbow
+  rotate: false
+  xy: 186, 62
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+masterwork_crossbow
+  rotate: false
+  xy: 0, 124
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+masterwork_greatbow
+  rotate: false
+  xy: 62, 124
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+masterwork_longbow
+  rotate: false
+  xy: 124, 124
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+masterwork_shortbow
+  rotate: false
+  xy: 186, 124
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+specialist_crossbow
+  rotate: false
+  xy: 0, 186
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+specialist_greatbow
+  rotate: false
+  xy: 62, 186
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+specialist_longbow
+  rotate: false
+  xy: 124, 186
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+specialist_shortbow
+  rotate: false
+  xy: 186, 186
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1

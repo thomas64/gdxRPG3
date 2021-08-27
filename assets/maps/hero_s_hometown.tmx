@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="96" height="78" tilewidth="24" tileheight="24" infinite="0" nextlayerid="54" nextobjectid="345">
+ <properties>
+  <property name="bgm" value="bgm_town"/>
+  <property name="lightmap_camera" value="sunlight"/>
+ </properties>
+ <tileset firstgid="1" name="hero_s_hometown" tilewidth="24" tileheight="24" tilecount="8294" columns="143">
+  <image source="tilesets/hero_s_hometown.png" width="3432" height="1392"/>
+ </tileset>
+ <tileset firstgid="8295" source="tilesets/fsm_forest01_a1.tsx"/>
+ <tileset firstgid="9063" source="tilesets/fsm_town01_a1.tsx"/>
+ <tileset firstgid="9831" source="tilesets/fsm_town01_a2.tsx"/>
+ <tileset firstgid="10599" source="tilesets/fsm_town01_b.tsx"/>
+ <tileset firstgid="11623" source="tilesets/fsm_town01_e.tsx"/>
+ <tileset firstgid="12647" source="tilesets/fsm_town01_d.tsx"/>
+ <tileset firstgid="13671" source="tilesets/fsm_town01_c.tsx"/>
+ <tileset firstgid="14695" source="tilesets/fsm_town01_a3.tsx"/>
+ <tileset firstgid="15207" source="tilesets/fsm_flame01.tsx"/>
+ <tileset firstgid="15975" source="tilesets/fsm_smoke01.tsx"/>
+ <layer id="33" name="under0_none" width="96" height="78">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5U1/gCFUBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHwDdQAAAQ==
+  </data>
+ </layer>
+ <layer id="34" name="under1_ground" width="96" height="78">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <layer id="35" name="under2_water" width="96" height="78">
+  <data encoding="base64" compression="zlib">
+   eJzt2EsKwjAUBdBMdR0tfjZScCOCG/GzUdFVmCKFCrY0SaGDngMhgySTx30QXggAAAAAAAAAAAAAAAAAAADAkGcVwr4O4VB/9yHdebsfR+6Rpom13MZ1j+s2UtfufBPXSf2Ldbl/xf2SUM9zvPuu9EGpfu4fCXW86oNZtDlOyf3c79euKcxv6XsAANbF/39Z/v/Lyp3j7Oq8uRG/cuc4uXMj/uv3wZT5v9zPq+uDqfN/uQcAAAAAAIDlfQBBhCo9
+  </data>
+ </layer>
+ <layer id="36" name="under3_objects" width="96" height="78">
+  <data encoding="base64" compression="zlib">
+   eJzt0AENACAMBLEXNe/gBOSAC0LWKrhcAgAAAP8Ylcx6XdHXuu+3/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANDKARFBA+8=
+  </data>
+ </layer>
+ <layer id="37" name="under4_none" width="96" height="78">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5U1/gCFUBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHwDdQAAAQ==
+  </data>
+ </layer>
+ <layer id="38" name="under5_none" width="96" height="78">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5U1/gCFUBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHwDdQAAAQ==
+  </data>
+ </layer>
+ <layer id="39" name="over6_objects" width="96" height="78">
+  <data encoding="base64" compression="zlib">
+   eJztnMlPFEEUxh8ER/QgEUdAgT+AAGLCYkxEvRg9ubEYPYgaxYMmKpJA3FCPJkYvCpK4gAfRf8AN3PeDHBRXFnFDPZm4Ahr9jFaEThfTTHfX0lO/5KNgepqp+vrVe0U1M0QGg8FgMIjjVA5RC3QaOpMjuzexx214fge6C90z/gunD56/g95DH4z/whmbS5QIjYPG58rujXtqCohqC2T34j/bi4h2FEV/XDfq4X2DIv43wtcTKURVIaKjNh7/OV6ZRLQ+yf64IXq+wc/SSURN8L8ZOgnRjOHHW1L4x0UR1HXXvDEYGzzNTUBtTSPqhe4lOD8uCrPuGs5NzItbAnORWXcN5w28fyvQ/6Csu2SxoZBoY6HsXsQm++B7w0SiI9B+cw2E0ge/O+OwxoKakol+xhN9NNdAGHXwuwPrpbK4v/HfCPXHy+5V7NAF37uh8n/xvxLtwAj+W/dZRe+7stcLAneQZ6qnEvXA82VD4n8Q/rdzcpB1n1X0vit7vViDxZ11n9X6s1/zwPr6sQaLO+s+q/Vnv+aB9fVVR3ReZnE52vrgtJ+63d8QnZdZXI62Pjjtp1f3N0TFpax4cVofePWE4ZdPouJS1v0wp/WBV08YXvvEu97bwkStqVh3O2iLM7zLp6KJNC8iPd8tvOudN4GoDf5WhCO3szO8y6eiiTQvIj3fLV5dT9FxExS8up6i48Zgj651ICjoWgeCgqkDcjF1IDoKEYtFAuNRlzogqp9l+N3lAn3QpQ6o0k+v40CXOqBKP72OA13qgCr9FL0f6Ba3/eKdL2u8ovYDvcJtv3jnqzZe67xQZT64zdu881WpBwzrvFAlPtzmbd75ftUDXtzWzCSqhXLSiXKhaVB78vA2L/3/81WLD13gxW09vG+A6hOJ1oX4LUOV9YJu8OJ2dSbRGmhhmGhtyL6tDPF/b9Dwq77x4vYQ4vtwovP4Dzqi69vyED/uh8b//eSR60JQEPV/dYwV8HYxPF4U5reZ45CjQmrOiwf5RA/z+Y93QI9sjvMQ9X9114uIbkh8z+gcjGmuB+P6BG8/2/jLHv8CfR2F/wy/13mv4P1rif5XYEyrPBjXpAKisM37pdnjk6GUKN5PbdZ5/rIT12QXVAfthvZAexV533sscBReH4OOQyegJqhZQ/83ZRFtzpLdi9HTBq8vQZehK9BV6JqN/6rsd/E4AO8Pauh/F7zuhnqgF1Av9NLGf1X2u2IVs98lF6/XQarnM79QZdyxms9UGbeq97P8RpU8rur9rGhZkk20FCqBSrP5z1P171nd58MWeF4FbYWqh/ifh++nj3A9eIgef9Dmg1tkj99pntRtnjhFdp1wmidlx4lfqFonrPhdN4I6v7zC77oR1PnlF17nTdl5WDci5c1fs/ClmH++9bgueVg3zuYTnYPOQxegi1BrFPdnDSNTwvnb5zG8fgI9hZ5Bz6HOIf7PR65ZYPKNZ7DPc2ftN3j9HeqHBqBB6Ee+ep/7HhTY57mzNhVKg6ZAU6F0KKNArc99NxgMBoPBYDBE5jeHh4gr
+  </data>
+ </layer>
+ <layer id="40" name="over7_over" width="96" height="78">
+  <data encoding="base64" compression="zlib">
+   eJzt2bkRwjAQBVBlHLXYKf1BJ5BwNMLRCEcVbMIAHgglY/TezE8cyJ7VfCebEgAAAAAAAAAM17pJaRPZRnZNvvfkPn+o9jGTQ+QYOWWcT+7zh+ocM7k05XrAu1Gb0rgt1wM+e/TgGrm9zL/bCz3J49GDSWTaPp93e1G6J7Xfd7cX33qSS+3/xW4vvvUkl9L3zbvS9w0AAAAAPM1nKS1mfX9FvZYx+5X5A/yM2vfmfat9b943e/N+2ZsDAAAAAAAAAAAA/Lc78phN5Q==
+  </data>
+ </layer>
+ <layer id="41" name="over8_over" width="96" height="78">
+  <data encoding="base64" compression="zlib">
+   eJzt0FcNAgEURNH3R9ECFtYPxQHFAcUFxQjFCEUFI4LshnBOcv8nUwUAAAAAAAAAwC87jKqO6ZTOo67X/J9LPr+mW7r7v3WPfP5Mr/T2f+t646p+GqThuOs1AAAAAABMmqppmqV50/Wa/7PI58u0Smv/t26Tz7dpl/b+BwAAAAAAAAAAAAAAAPi6D+a0FQs=
+  </data>
+ </layer>
+ <objectgroup color="#0055ff" id="52" name="sound" visible="0">
+  <object id="228" name="sand" x="1920" y="0" width="48" height="24"/>
+  <object id="229" name="sand" x="1632" y="384" width="408" height="48"/>
+  <object id="231" name="sand" x="1680" y="432" width="336" height="24"/>
+  <object id="232" name="sand" x="1704" y="456" width="288" height="24"/>
+  <object id="234" name="sand" x="1800" y="504" width="168" height="24"/>
+  <object id="235" name="sand" x="1776" y="480" width="192" height="24"/>
+  <object id="236" name="sand" x="1728" y="360" width="240" height="24"/>
+  <object id="238" name="sand" x="1776" y="312" width="144" height="24"/>
+  <object id="239" name="sand" x="1800" y="288" width="120" height="24"/>
+  <object id="240" name="sand" x="1800" y="1200" width="192" height="240"/>
+  <object id="241" name="sand" x="1992" y="1224" width="24" height="168"/>
+  <object id="242" name="sand" x="2040" y="1272" width="24" height="120"/>
+  <object id="243" name="sand" x="1728" y="1248" width="48" height="168"/>
+  <object id="244" name="sand" x="1440" y="1248" width="288" height="96"/>
+  <object id="245" name="sand" x="1296" y="1152" width="144" height="264"/>
+  <object id="246" name="sand" x="1056" y="1656" width="48" height="144"/>
+  <object id="249" name="sand" x="1152" y="1344" width="96" height="240"/>
+  <object id="250" name="sand" x="1248" y="1344" width="48" height="216"/>
+  <object id="251" name="sand" x="1296" y="1464" width="72" height="24"/>
+  <object id="252" name="sand" x="1296" y="1416" width="120" height="24"/>
+  <object id="259" name="sand" x="1152" y="912" width="120" height="24"/>
+  <object id="260" name="sand" x="1152" y="936" width="144" height="168"/>
+  <object id="261" name="sand" x="1296" y="960" width="72" height="192"/>
+  <object id="262" name="sand" x="1368" y="984" width="24" height="168"/>
+  <object id="263" name="sand" x="672" y="1392" width="336" height="48"/>
+  <object id="264" name="sand" x="552" y="1464" width="456" height="24"/>
+  <object id="265" name="sand" x="528" y="1440" width="480" height="24"/>
+  <object id="266" name="sand" x="792" y="1512" width="216" height="24"/>
+  <object id="267" name="sand" x="768" y="1488" width="240" height="24"/>
+  <object id="268" name="sand" x="864" y="1536" width="144" height="48"/>
+  <object id="269" name="sand" x="936" y="1608" width="240" height="24"/>
+  <object id="270" name="sand" x="720" y="1344" width="288" height="48"/>
+  <object id="271" name="sand" x="768" y="888" width="96" height="456"/>
+  <object id="272" name="sand" x="720" y="1008" width="48" height="48"/>
+  <object id="274" name="sand" x="984" y="912" width="24" height="192"/>
+  <object id="276" name="sand" x="192" y="864" width="648" height="24"/>
+  <object id="277" name="sand" x="336" y="912" width="432" height="48"/>
+  <object id="279" name="sand" x="336" y="960" width="48" height="24"/>
+  <object id="280" name="sand" x="624" y="960" width="144" height="24"/>
+  <object id="281" name="sand" x="648" y="984" width="120" height="24"/>
+  <object id="282" name="sand" x="720" y="1056" width="24" height="24"/>
+  <object id="283" name="sand" x="912" y="1584" width="288" height="24"/>
+  <object id="286" name="sand" x="1296" y="1440" width="96" height="24"/>
+  <object id="288" name="sand" x="960" y="936" width="24" height="168"/>
+  <object id="289" name="sand" x="336" y="984" width="24" height="24"/>
+  <object id="290" name="sand" x="2016" y="1248" width="24" height="144"/>
+  <object id="291" name="sand" x="1776" y="1224" width="24" height="192"/>
+  <object id="292" name="sand" x="1728" y="336" width="216" height="24"/>
+  <object id="294" name="sand" x="192" y="888" width="576" height="24"/>
+  <object id="295" name="sand" x="1008" y="1632" width="144" height="24"/>
+  <object id="296" name="sand" x="720" y="768" width="96" height="96"/>
+  <object id="297" name="sand" x="528" y="552" width="48" height="48"/>
+  <object id="298" name="sand" x="720" y="552" width="48" height="48"/>
+  <object id="299" name="sand" x="672" y="624" width="48" height="120"/>
+  <object id="300" name="sand" x="672" y="744" width="96" height="24"/>
+  <object id="301" name="sand" x="720" y="720" width="24" height="24"/>
+  <object id="302" name="sand" x="672" y="600" width="72" height="24"/>
+  <object id="303" name="sand" x="696" y="576" width="24" height="24"/>
+  <object id="304" name="sand" x="552" y="600" width="72" height="24"/>
+  <object id="305" name="sand" x="576" y="576" width="24" height="24"/>
+  <object id="306" name="sand" x="576" y="624" width="96" height="24"/>
+  <object id="307" name="sand" x="600" y="648" width="72" height="24"/>
+  <object id="308" name="sand" x="432" y="336" width="48" height="144"/>
+  <object id="310" name="sand" x="288" y="480" width="144" height="48"/>
+  <object id="311" name="sand" x="744" y="1056" width="24" height="48"/>
+  <object id="312" name="sand" x="864" y="960" width="96" height="192"/>
+  <object id="314" name="sand" x="1200" y="1104" width="96" height="48"/>
+  <object id="315" name="sand" x="912" y="1296" width="48" height="48"/>
+  <object id="318" name="sand" x="1200" y="1296" width="48" height="48"/>
+  <object id="319" name="stone" x="1008" y="912" width="144" height="96"/>
+  <object id="320" name="stone" x="1008" y="1440" width="144" height="144"/>
+  <object id="321" name="sand" x="480" y="1392" width="144" height="48"/>
+  <object id="322" name="stone" x="624" y="1392" width="48" height="48"/>
+  <object id="323" name="stone" x="912" y="1152" width="336" height="144"/>
+  <object id="324" name="stone" x="960" y="1104" width="240" height="48"/>
+  <object id="325" name="stone" x="1008" y="1056" width="144" height="48"/>
+  <object id="326" name="stone" x="960" y="1296" width="240" height="48"/>
+  <object id="327" name="stone" x="1008" y="1344" width="144" height="48"/>
+  <object id="328" name="wood" x="864" y="1152" width="48" height="192"/>
+  <object id="329" name="wood" x="1008" y="1008" width="144" height="48"/>
+  <object id="330" name="wood" x="1248" y="1152" width="48" height="192"/>
+  <object id="331" name="wood" x="1008" y="1392" width="144" height="48"/>
+  <object id="332" name="stone" x="1056" y="864" width="48" height="48"/>
+  <object id="333" name="sand" x="288" y="456" width="48" height="24"/>
+  <object id="335" name="sand" x="336" y="336" width="48" height="24"/>
+ </objectgroup>
+ <objectgroup color="#aa0000" id="8" name="collision" visible="0">
+  <object id="2" x="768" y="0" width="1152" height="240"/>
+  <object id="3" x="0" y="0" width="768" height="144"/>
+  <object id="4" x="720" y="192" width="48" height="48"/>
+  <object id="5" x="0" y="144" width="576" height="48"/>
+  <object id="6" x="432" y="192" width="96" height="48"/>
+  <object id="7" x="0" y="192" width="384" height="96"/>
+  <object id="9" x="0" y="288" width="432" height="48"/>
+  <object id="10" x="0" y="336" width="336" height="48"/>
+  <object id="11" x="0" y="384" width="288" height="144"/>
+  <object id="12" x="0" y="672" width="288" height="48"/>
+  <object id="13" x="0" y="528" width="192" height="144"/>
+  <object id="14" x="0" y="720" width="240" height="48"/>
+  <object id="15" x="0" y="768" width="144" height="1104"/>
+  <object id="16" x="144" y="864" width="96" height="48"/>
+  <object id="17" x="144" y="912" width="48" height="960"/>
+  <object id="18" x="192" y="1056" width="96" height="96"/>
+  <object id="19" x="288" y="1056" width="48" height="48"/>
+  <object id="20" x="864" y="240" width="768" height="48"/>
+  <object id="21" x="960" y="288" width="528" height="48"/>
+  <object id="22" x="1200" y="336" width="336" height="48"/>
+  <object id="23" x="1296" y="384" width="192" height="48"/>
+  <object id="24" x="1968" y="0" width="336" height="144"/>
+  <object id="25" x="2016" y="144" width="288" height="96"/>
+  <object id="26" x="2064" y="240" width="240" height="48"/>
+  <object id="27" x="2160" y="288" width="144" height="1584"/>
+  <object id="28" x="2064" y="576" width="96" height="48"/>
+  <object id="29" x="2112" y="528" width="48" height="48"/>
+  <object id="30" x="1968" y="624" width="192" height="192"/>
+  <object id="31" x="2016" y="816" width="144" height="144"/>
+  <object id="32" x="1968" y="1008" width="192" height="96"/>
+  <object id="33" x="2064" y="960" width="96" height="48"/>
+  <object id="34" x="1968" y="1152" width="192" height="48"/>
+  <object id="35" x="2016" y="1200" width="144" height="48"/>
+  <object id="36" x="2064" y="1104" width="96" height="48"/>
+  <object id="37" x="2064" y="1296" width="96" height="576"/>
+  <object id="38" x="2112" y="1248" width="48" height="48"/>
+  <object id="39" x="480" y="288" width="144" height="144"/>
+  <object id="40" x="672" y="288" width="144" height="144"/>
+  <object id="41" x="480" y="432" width="384" height="72"/>
+  <object id="42" x="816" y="336" width="48" height="96"/>
+  <object id="43" x="288" y="672" width="288" height="168"/>
+  <object id="44" x="576" y="720" width="96" height="48"/>
+  <object id="45" x="624" y="816" width="96" height="48"/>
+  <object id="46" x="816" y="624" width="96" height="48"/>
+  <object id="47" x="768" y="720" width="96" height="48"/>
+  <object id="48" x="816" y="816" width="96" height="48"/>
+  <object id="49" x="864" y="912" width="96" height="48"/>
+  <object id="50" x="912" y="528" width="144" height="336"/>
+  <object id="51" x="960" y="480" width="336" height="48"/>
+  <object id="52" x="1344" y="480" width="192" height="48"/>
+  <object id="53" x="960" y="864" width="96" height="48"/>
+  <object id="54" x="1104" y="864" width="192" height="48"/>
+  <object id="55" x="1584" y="624" width="336" height="240"/>
+  <object id="56" x="1584" y="576" width="96" height="48"/>
+  <object id="57" x="1344" y="864" width="528" height="48"/>
+  <object id="58" x="1392" y="912" width="480" height="48"/>
+  <object id="59" x="1440" y="1008" width="480" height="96"/>
+  <object id="60" x="1536" y="960" width="336" height="48"/>
+  <object id="61" x="1872" y="912" width="96" height="48"/>
+  <object id="62" x="1440" y="1104" width="288" height="144"/>
+  <object id="63" x="1728" y="1104" width="144" height="48"/>
+  <object id="64" x="1728" y="1152" width="48" height="48"/>
+  <object id="65" x="1440" y="1248" width="48" height="48"/>
+  <object id="66" x="1584" y="1248" width="48" height="48"/>
+  <object id="67" x="1848" y="1296" width="96" height="96"/>
+  <object id="68" x="1824" y="384" width="48" height="48"/>
+  <object id="69" x="1728" y="1488" width="336" height="384"/>
+  <object id="72" x="2016" y="1440" width="48" height="48"/>
+  <object id="73" x="1440" y="1464" width="288" height="408"/>
+  <object id="74" x="1344" y="1632" width="96" height="240"/>
+  <object id="75" x="1440" y="1344" width="48" height="120"/>
+  <object id="76" x="1680" y="1344" width="48" height="120"/>
+  <object id="77" x="1632" y="1344" width="48" height="48"/>
+  <object id="78" x="1488" y="1344" width="48" height="48"/>
+  <object id="79" x="1056" y="1200" width="48" height="48"/>
+  <object id="80" x="912" y="1008" width="96" height="48"/>
+  <object id="81" x="864" y="1056" width="96" height="48"/>
+  <object id="82" x="864" y="1104" width="48" height="48"/>
+  <object id="83" x="864" y="1296" width="48" height="96"/>
+  <object id="84" x="912" y="1344" width="48" height="96"/>
+  <object id="85" x="960" y="1392" width="48" height="48"/>
+  <object id="86" x="1152" y="1392" width="96" height="48"/>
+  <object id="87" x="1200" y="1344" width="96" height="48"/>
+  <object id="88" x="1248" y="1296" width="48" height="48"/>
+  <object id="89" x="1152" y="1008" width="96" height="48"/>
+  <object id="90" x="1200" y="1056" width="96" height="48"/>
+  <object id="91" x="1248" y="1104" width="48" height="48"/>
+  <object id="92" x="336" y="1152" width="384" height="216"/>
+  <object id="93" x="288" y="1200" width="48" height="168"/>
+  <object id="94" x="624" y="1056" width="96" height="48"/>
+  <object id="95" x="528" y="1008" width="96" height="48"/>
+  <object id="96" x="384" y="960" width="96" height="48"/>
+  <object id="97" x="192" y="1584" width="576" height="288"/>
+  <object id="99" x="192" y="1536" width="336" height="48"/>
+  <object id="103" x="192" y="1488" width="240" height="48"/>
+  <object id="104" x="240" y="1440" width="96" height="48"/>
+  <object id="105" x="768" y="1632" width="96" height="48"/>
+  <object id="106" x="768" y="1728" width="576" height="48"/>
+  <object id="108" x="960" y="1632" width="48" height="48"/>
+  <object id="109" x="1152" y="1632" width="48" height="48"/>
+  <object id="110" x="1248" y="1584" width="96" height="96"/>
+  <object id="111" x="1200" y="1680" width="144" height="48"/>
+  <object id="112" x="768" y="1680" width="144" height="48"/>
+  <object id="115" x="1296" y="1536" width="96" height="48"/>
+  <object id="116" x="1344" y="1488" width="48" height="48"/>
+  <object id="117" x="1728" y="1440" width="96" height="48"/>
+  <object id="137" x="1104" y="528" width="480" height="336"/>
+  <object id="138" x="1056" y="528" width="48" height="312"/>
+  <object id="143" x="576" y="504" width="144" height="24"/>
+  <object id="144" x="768" y="504" width="48" height="24"/>
+  <object id="147" x="480" y="504" width="48" height="24"/>
+  <object id="150" x="288" y="840" width="192" height="24"/>
+  <object id="151" x="528" y="840" width="48" height="24"/>
+  <object id="154" x="672" y="1368" width="48" height="24"/>
+  <object id="155" x="336" y="1368" width="288" height="24"/>
+  <object id="213" x="1968" y="216" width="48" height="36"/>
+ </objectgroup>
+ <objectgroup color="#5500ff" id="43" name="rest">
+  <object id="164" name="note_well_hero_s_hometown" x="1848" y="1296" width="96" height="96"/>
+  <object id="163" name="note_stump_hero_s_hometown" x="1824" y="384" width="48" height="48"/>
+  <object id="165" name="note_resource_shop" x="1440" y="1248" width="48" height="48"/>
+  <object id="166" name="note_equipment_shop" x="1584" y="1248" width="48" height="48"/>
+  <object id="337" name="door_simple_left4" x="480" y="768" width="48" height="96"/>
+  <object id="338" name="door_simple_left3" x="528" y="432" width="48" height="96"/>
+  <object id="339" name="door_simple_left2" x="720" y="432" width="48" height="96"/>
+  <object id="336" name="door_simple_left1" x="624" y="1296" width="48" height="96"/>
+  <object id="340" name="door_forged_left" x="1056" y="768" width="48" height="96"/>
+ </objectgroup>
+ <objectgroup color="#aa55ff" id="13" name="hero">
+  <object id="118" name="luana" x="984" y="1128" width="48" height="24">
+   <properties>
+    <property name="conversation" value="luana01"/>
+    <property name="direction" value="south"/>
+   </properties>
+  </object>
+  <object id="119" name="reignald" x="1056" y="1128" width="48" height="24">
+   <properties>
+    <property name="conversation" value="reignald01"/>
+    <property name="direction" value="south"/>
+   </properties>
+  </object>
+  <object id="120" name="ryiah" x="1128" y="1128" width="48" height="24">
+   <properties>
+    <property name="conversation" value="ryiah01"/>
+    <property name="direction" value="south"/>
+   </properties>
+  </object>
+  <object id="121" name="valter" x="1152" y="1200" width="48" height="24">
+   <properties>
+    <property name="conversation" value="valter01"/>
+    <property name="direction" value="south"/>
+   </properties>
+  </object>
+  <object id="122" name="galen" x="1152" y="1272" width="48" height="24">
+   <properties>
+    <property name="conversation" value="galen01"/>
+    <property name="direction" value="south"/>
+   </properties>
+  </object>
+  <object id="123" name="jaspar" x="1128" y="1344" width="48" height="24">
+   <properties>
+    <property name="conversation" value="jaspar01"/>
+    <property name="direction" value="south"/>
+   </properties>
+  </object>
+  <object id="124" name="kiara" x="1056" y="1344" width="48" height="24">
+   <properties>
+    <property name="conversation" value="kiara01"/>
+    <property name="direction" value="south"/>
+   </properties>
+  </object>
+  <object id="125" name="luthais" x="984" y="1344" width="48" height="24">
+   <properties>
+    <property name="conversation" value="luthais01"/>
+    <property name="direction" value="south"/>
+   </properties>
+  </object>
+  <object id="126" name="elias" x="960" y="1272" width="48" height="24">
+   <properties>
+    <property name="conversation" value="elias01"/>
+    <property name="direction" value="south"/>
+   </properties>
+  </object>
+  <object id="127" name="onarr" x="960" y="1200" width="48" height="24">
+   <properties>
+    <property name="conversation" value="onarr01"/>
+    <property name="direction" value="south"/>
+   </properties>
+  </object>
+  <object id="128" name="duilio" x="1248" y="1224" width="48" height="24">
+   <properties>
+    <property name="conversation" value="duilio01"/>
+    <property name="direction" value="south"/>
+   </properties>
+  </object>
+  <object id="129" name="iellwen" x="864" y="1224" width="48" height="24">
+   <properties>
+    <property name="conversation" value="iellwen01"/>
+    <property name="direction" value="south"/>
+   </properties>
+  </object>
+  <object id="130" name="faeron" type="w" x="1056" y="1512" width="48" height="24">
+   <properties>
+    <property name="conversation" value="faeron01"/>
+    <property name="direction" value="south"/>
+   </properties>
+  </object>
+  <object id="162" name="luana" type="w" x="1968" y="1392" width="48" height="24">
+   <properties>
+    <property name="conversation" value="luana02"/>
+    <property name="hasBeenRecruited" type="bool" value="true"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup color="#55ff7f" id="42" name="npc">
+  <object id="158" name="woman01" x="1488" y="1176" width="48" height="24">
+   <properties>
+    <property name="conversation" value="resourceshop01"/>
+    <property name="direction" value="south"/>
+   </properties>
+  </object>
+  <object id="161" name="woman01" type="inv" x="1488" y="1224" width="48" height="12">
+   <properties>
+    <property name="conversation" value="resourceshop01"/>
+   </properties>
+  </object>
+  <object id="159" name="man01" x="1632" y="1176" width="48" height="24">
+   <properties>
+    <property name="conversation" value="armorshop01"/>
+    <property name="direction" value="south"/>
+   </properties>
+  </object>
+  <object id="160" name="man01" type="inv" x="1632" y="1224" width="48" height="12">
+   <properties>
+    <property name="conversation" value="armorshop01"/>
+   </properties>
+  </object>
+  <object id="167" name="soldier01" x="1968" y="168" width="48" height="24">
+   <properties>
+    <property name="conversation" value="quest0002"/>
+    <property name="direction" value="west"/>
+   </properties>
+  </object>
+  <object id="227" name="youngwoman01" type="w" x="648" y="936" width="48" height="24">
+   <properties>
+    <property name="conversation" value="quest0004-1"/>
+   </properties>
+  </object>
+  <object id="341" name="man01" x="1680" y="1176" width="48" height="24">
+   <properties>
+    <property name="conversation" value="weaponshop01"/>
+    <property name="direction" value="south"/>
+   </properties>
+  </object>
+  <object id="342" name="man01" type="inv" x="1680" y="1224" width="48" height="12">
+   <properties>
+    <property name="conversation" value="weaponshop01"/>
+   </properties>
+  </object>
+  <object id="343" name="man01" x="1560" y="1392" width="48" height="24">
+   <properties>
+    <property name="conversation" value="epicshop01"/>
+    <property name="direction" value="north"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup color="#55aaff" id="11" name="spawn">
+  <object id="113" name="starter_path" x="1920" y="24" width="48" height="24"/>
+  <object id="132" name="hero_s_hometown" x="1056" y="1272" width="48" height="24">
+   <properties>
+    <property name="direction" value="north"/>
+   </properties>
+  </object>
+  <object id="136" name="hero_s_hometown_chief_s_house" x="1056" y="864" width="48" height="24"/>
+  <object id="141" name="map1" x="1056" y="1848" width="48" height="24"/>
+  <object id="145" name="hero_s_hometown_house_3" x="720" y="528" width="48" height="24"/>
+  <object id="148" name="hero_s_hometown_house_2" x="528" y="528" width="48" height="24"/>
+  <object id="153" name="hero_s_hometown_house_1" x="480" y="864" width="48" height="24"/>
+  <object id="157" name="hero_s_hometown_inn" x="624" y="1392" width="48" height="24"/>
+ </objectgroup>
+ <objectgroup color="#ffff7f" id="12" name="portal">
+  <object id="114" name="starter_path" x="1896" y="-24" width="96" height="24"/>
+  <object id="135" name="hero_s_hometown_chief_s_house" x="1056" y="840" width="48" height="24"/>
+  <object id="139" name="map1" x="744" y="1872" width="624" height="24"/>
+  <object id="146" name="hero_s_hometown_house_3" x="720" y="504" width="48" height="24"/>
+  <object id="149" name="hero_s_hometown_house_2" x="528" y="504" width="48" height="24"/>
+  <object id="152" name="hero_s_hometown_house_1" x="480" y="840" width="48" height="24"/>
+  <object id="156" name="hero_s_hometown_inn" x="624" y="1368" width="48" height="24"/>
+ </objectgroup>
+ <objectgroup color="#ffaa7f" id="14" name="save">
+  <object id="131" x="1056" y="1200" width="48" height="48"/>
+ </objectgroup>
+ <objectgroup id="50" name="lower_texture">
+  <object id="218" type="quest0002" gid="13495" x="1872" y="240" width="24" height="24">
+   <properties>
+    <property name="isVisible" type="bool" value="false"/>
+    <property name="task" value="2"/>
+    <property name="visibleIfComplete" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="219" type="quest0002" gid="13496" x="1896" y="240" width="24" height="24">
+   <properties>
+    <property name="isVisible" type="bool" value="false"/>
+    <property name="task" value="2"/>
+    <property name="visibleIfComplete" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="220" type="quest0002" gid="13527" x="1872" y="264" width="24" height="24">
+   <properties>
+    <property name="isVisible" type="bool" value="false"/>
+    <property name="task" value="2"/>
+    <property name="visibleIfComplete" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="221" type="quest0002" gid="13528" x="1896" y="264" width="24" height="24">
+   <properties>
+    <property name="isVisible" type="bool" value="false"/>
+    <property name="task" value="2"/>
+    <property name="visibleIfComplete" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="209" type="quest0002" gid="13495" x="1920" y="240" width="24" height="24">
+   <properties>
+    <property name="isVisible" type="bool" value="true"/>
+    <property name="task" value="2"/>
+    <property name="visibleIfComplete" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="210" type="quest0002" gid="13496" x="1944" y="240" width="24" height="24">
+   <properties>
+    <property name="isVisible" type="bool" value="true"/>
+    <property name="task" value="2"/>
+    <property name="visibleIfComplete" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="211" type="quest0002" gid="13527" x="1920" y="264" width="24" height="24">
+   <properties>
+    <property name="isVisible" type="bool" value="true"/>
+    <property name="task" value="2"/>
+    <property name="visibleIfComplete" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="212" type="quest0002" gid="13528" x="1944" y="264" width="24" height="24">
+   <properties>
+    <property name="isVisible" type="bool" value="true"/>
+    <property name="task" value="2"/>
+    <property name="visibleIfComplete" type="bool" value="false"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="51" name="upper_texture">
+  <object id="205" type="quest0002" gid="13431" x="1920" y="192" width="24" height="24">
+   <properties>
+    <property name="isVisible" type="bool" value="true"/>
+    <property name="task" value="2"/>
+    <property name="visibleIfComplete" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="206" type="quest0002" gid="13432" x="1944" y="192" width="24" height="24">
+   <properties>
+    <property name="isVisible" type="bool" value="true"/>
+    <property name="task" value="2"/>
+    <property name="visibleIfComplete" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="207" type="quest0002" gid="13463" x="1920" y="216" width="24" height="24">
+   <properties>
+    <property name="isVisible" type="bool" value="true"/>
+    <property name="task" value="2"/>
+    <property name="visibleIfComplete" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="208" type="quest0002" gid="13464" x="1944" y="216" width="24" height="24">
+   <properties>
+    <property name="isVisible" type="bool" value="true"/>
+    <property name="task" value="2"/>
+    <property name="visibleIfComplete" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="214" type="quest0002" gid="13431" x="1872" y="192" width="24" height="24">
+   <properties>
+    <property name="isVisible" type="bool" value="false"/>
+    <property name="task" value="2"/>
+    <property name="visibleIfComplete" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="215" type="quest0002" gid="13432" x="1896" y="192" width="24" height="24">
+   <properties>
+    <property name="isVisible" type="bool" value="false"/>
+    <property name="task" value="2"/>
+    <property name="visibleIfComplete" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="216" type="quest0002" gid="13463" x="1872" y="216" width="24" height="24">
+   <properties>
+    <property name="isVisible" type="bool" value="false"/>
+    <property name="task" value="2"/>
+    <property name="visibleIfComplete" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="217" type="quest0002" gid="13464" x="1896" y="216" width="24" height="24">
+   <properties>
+    <property name="isVisible" type="bool" value="false"/>
+    <property name="task" value="2"/>
+    <property name="visibleIfComplete" type="bool" value="true"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup color="#ffff00" id="44" name="quest">
+  <object id="169" name="quest0002" type="blocker" x="1920" y="216" width="48" height="36">
+   <properties>
+    <property name="activeIfComplete" type="bool" value="false"/>
+    <property name="isActive" type="bool" value="true"/>
+    <property name="task" value="2"/>
+   </properties>
+  </object>
+  <object id="222" name="quest0002" type="blocker" x="1872" y="216" width="48" height="36">
+   <properties>
+    <property name="activeIfComplete" type="bool" value="true"/>
+    <property name="isActive" type="bool" value="false"/>
+    <property name="task" value="2"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup color="#ff00ff" id="53" name="cutscene">
+  <object id="344" name="scene001" type="discover" x="1968" y="264" width="48" height="24"/>
+ </objectgroup>
+</map>

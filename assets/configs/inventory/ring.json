@@ -1,0 +1,45 @@
+{
+  "basic_silver_ring"   : {
+    "name" : "Silver Ring",
+    "group": "RING",
+    "sort" : 60100,
+    "price": 5
+  },
+  "basic_gold_ring"     : {
+    "name" : "Gold Ring",
+    "group": "RING",
+    "sort" : 60100,
+    "price": 10
+  },
+  "epic_namers_ring"    : {
+    "name"         : "Namer's Ring",
+    "group"        : "RING",
+    "sort"         : 61000,
+    "price"        : 50,
+    "spell_battery": 10
+  },
+  "epic_witch_ring"     : {
+    "name"            : "Witch Ring",
+    "group"           : "RING",
+    "sort"            : 61000,
+    "price"           : 50,
+    "min_intelligence": 25,
+    "wizard"          : 2
+  },
+  "epic_ethereal_ring"  : {
+    "name"      : "Ethereal Ring",
+    "group"     : "RING",
+    "sort"      : 61000,
+    "price"     : 50,
+    "protection": 5
+  },
+  "epic_ring_of_healing": {
+    "name"       : "Ring of Healing",
+    "group"      : "RING",
+    "sort"       : 61000,
+    "price"      : 50,
+    "endurance"  : 1,
+    "cheat_death": true,
+    "description": ["Once per battle, survive", "against an otherwise killing blow."]
+  }
+}

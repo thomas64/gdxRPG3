@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="48" height="50" tilewidth="24" tileheight="24" infinite="0" nextlayerid="16" nextobjectid="81">
+ <properties>
+  <property name="bgm" value="bgm_great_tree"/>
+  <property name="bgs" value="bgs_birds"/>
+  <property name="lightmap_camera" value="sunlight, forest"/>
+ </properties>
+ <tileset firstgid="1" name="honeywood_great_tree" tilewidth="24" tileheight="24" tilecount="3404" columns="74">
+  <image source="tilesets/honeywood_great_tree.png" width="1776" height="1104"/>
+ </tileset>
+ <tileset firstgid="3405" source="tilesets/fsm_forest01_a1.tsx"/>
+ <tileset firstgid="4173" source="tilesets/fsm_forest01_b.tsx"/>
+ <tileset firstgid="5197" source="tilesets/fsm_forest01_c.tsx"/>
+ <layer id="3" name="under0_none" width="48" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20Hb6AAAAAAAAAAAAB4DCWAAAE=
+  </data>
+ </layer>
+ <layer id="1" name="under1_ground" width="48" height="50">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <layer id="4" name="under2_none" width="48" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20Hb6AAAAAAAAAAAAB4DCWAAAE=
+  </data>
+ </layer>
+ <layer id="5" name="under3_none" width="48" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20Hb6AAAAAAAAAAAAB4DCWAAAE=
+  </data>
+ </layer>
+ <layer id="6" name="under4_none" width="48" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20Hb6AAAAAAAAAAAAB4DCWAAAE=
+  </data>
+ </layer>
+ <layer id="7" name="under5_none" width="48" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20Hb6AAAAAAAAAAAAB4DCWAAAE=
+  </data>
+ </layer>
+ <layer id="8" name="over6_trees" width="48" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztl0lOxDAQRYsOEsOuAQEHAa7CeAG4AOOS4QwMAo4BrBlWjBvGKzBuoAEBD0XZWLLUbcWxLdWTvpKV/arKURIRRVGUnL12kR6y3SZy1CmynIkcch2qifyQ/g6R6VpoSzv7uPeSHfyP8V7J8jqGcf4lA/jPROx/gHsf2cVfukVWs7yOkX9n7gfxb3SFtrRj9n8N55OE+1+QSv+VtBmvi0zUQ1u4M4/7QgX+o+wxlnCfZnGfS9hfURRFUcpE3+txcEoNZwnX8Yj7Uwn+56xxQS7Jlcd+XLP2DbkldyXu88xaL+SVvHn0f2ftD9Ignx738T0H39jmUPz3TZKpBOoz51D89y2SpRb8i3NfNeYc1rnfIJtkqwWf4tyH4p69Hxz2D9V3ky8cvh08QvfdpNk5xNJ3k2bnEFvfTVyfh1hwfR5iw5xDrOfehjmH2M+9jbK/J6vG9/ekoihKKP4AkOFhLw==
+  </data>
+ </layer>
+ <layer id="9" name="over7_trees" width="48" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztzlENABAABcBXgD8x6B+PDGbMdpfgEgAAAAAAgLNKS2p7vdjX1318/AcAAO6ZAmoAyw==
+  </data>
+ </layer>
+ <layer id="10" name="over8_none" width="48" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20Hb6AAAAAAAAAAAAB4DCWAAAE=
+  </data>
+ </layer>
+ <objectgroup color="#0055ff" id="14" name="sound" visible="0">
+  <object id="49" name="wood" x="576" y="222" width="48" height="162"/>
+  <object id="50" name="sand" x="480" y="552" width="240" height="96"/>
+  <object id="51" name="sand" x="576" y="648" width="96" height="96"/>
+  <object id="52" name="sand" x="576" y="936" width="48" height="120"/>
+  <object id="53" name="sand" x="576" y="744" width="48" height="48"/>
+  <object id="54" name="sand" x="624" y="744" width="24" height="24"/>
+  <object id="55" name="sand" x="528" y="648" width="48" height="48"/>
+  <object id="56" name="sand" x="552" y="696" width="24" height="24"/>
+  <object id="57" name="sand" x="504" y="648" width="24" height="24"/>
+  <object id="58" name="sand" x="672" y="648" width="24" height="24"/>
+  <object id="59" name="sand" x="552" y="480" width="96" height="72"/>
+  <object id="60" name="sand" x="528" y="504" width="24" height="48"/>
+  <object id="61" name="sand" x="504" y="528" width="24" height="24"/>
+  <object id="62" name="sand" x="648" y="504" width="24" height="48"/>
+  <object id="63" name="sand" x="672" y="528" width="24" height="24"/>
+  <object id="64" name="sand" x="576" y="456" width="48" height="24"/>
+ </objectgroup>
+ <objectgroup color="#aa0000" id="11" name="collision" visible="0">
+  <object id="1" x="960" y="0" width="192" height="1200"/>
+  <object id="2" x="0" y="0" width="192" height="1200"/>
+  <object id="3" x="192" y="0" width="48" height="480"/>
+  <object id="4" x="240" y="0" width="48" height="336"/>
+  <object id="5" x="288" y="0" width="48" height="288"/>
+  <object id="6" x="336" y="0" width="96" height="240"/>
+  <object id="7" x="432" y="0" width="528" height="192"/>
+  <object id="9" x="336" y="384" width="48" height="48"/>
+  <object id="10" x="432" y="816" width="96" height="48"/>
+  <object id="11" x="864" y="624" width="48" height="48"/>
+  <object id="12" x="240" y="528" width="48" height="48"/>
+  <object id="13" x="864" y="336" width="96" height="48"/>
+  <object id="14" x="912" y="192" width="48" height="144"/>
+  <object id="15" x="864" y="192" width="48" height="96"/>
+  <object id="18" x="816" y="192" width="48" height="48"/>
+  <object id="19" x="732" y="192" width="84" height="24"/>
+  <object id="21" x="192" y="720" width="96" height="480"/>
+  <object id="22" x="288" y="768" width="48" height="432"/>
+  <object id="23" x="336" y="816" width="48" height="384"/>
+  <object id="25" x="384" y="864" width="48" height="336"/>
+  <object id="26" x="432" y="912" width="48" height="288"/>
+  <object id="27" x="480" y="960" width="48" height="240"/>
+  <object id="28" x="624" y="1008" width="48" height="192"/>
+  <object id="34" x="912" y="672" width="48" height="528"/>
+  <object id="35" x="768" y="816" width="48" height="384"/>
+  <object id="36" x="720" y="864" width="48" height="336"/>
+  <object id="37" x="672" y="912" width="48" height="288"/>
+  <object id="38" x="576" y="1056" width="48" height="144"/>
+  <object id="39" x="480" y="240" width="96" height="144"/>
+  <object id="40" x="624" y="240" width="96" height="144"/>
+  <object id="41" x="720" y="288" width="24" height="48"/>
+  <object id="42" x="456" y="288" width="24" height="48"/>
+  <object id="71" x="570" y="216" width="60" height="6"/>
+  <object id="72" x="564" y="222" width="12" height="18"/>
+  <object id="73" x="624" y="222" width="12" height="18"/>
+  <object id="74" x="558" y="228" width="6" height="12"/>
+  <object id="75" x="552" y="234" width="6" height="6"/>
+  <object id="76" x="636" y="228" width="6" height="12"/>
+  <object id="77" x="642" y="234" width="6" height="6"/>
+  <object id="78" x="528" y="1008" width="48" height="192"/>
+  <object id="79" x="816" y="720" width="96" height="480"/>
+ </objectgroup>
+ <objectgroup color="#55ff7f" id="15" name="npc">
+  <object id="80" name="fairy01" type="ia" x="600" y="936" width="48" height="24">
+   <properties>
+    <property name="conversation" value="fairy_welcome"/>
+    <property name="direction" value="south"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup color="#55aaff" id="12" name="spawn">
+  <object id="47" name="honeywood_cave_4" x="576" y="1008" width="48" height="24"/>
+ </objectgroup>
+ <objectgroup color="#ffff7f" id="13" name="portal">
+  <object id="48" name="honeywood_cave_4" x="576" y="1032" width="48" height="24"/>
+ </objectgroup>
+</map>

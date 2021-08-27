@@ -1,0 +1,134 @@
+{
+  "basic_light_bracers"      : {
+    "name"      : "Basic Light Bracers",
+    "group"     : "BRACERS",
+    "sort"      : 60100,
+    "price"     : 10,
+    "weight"    : 1,
+    "protection": 1,
+    "agility"   : 0,
+    "stealth"   : 0
+  },
+  "fine_light_bracers"       : {
+    "name"      : "Fine Light Bracers",
+    "group"     : "BRACERS",
+    "sort"      : 60200,
+    "price"     : 20,
+    "weight"    : 1,
+    "protection": 2,
+    "agility"   : 0,
+    "stealth"   : 0
+  },
+  "specialist_light_bracers" : {
+    "name"      : "Specialist Light Bracers",
+    "group"     : "BRACERS",
+    "sort"      : 60300,
+    "price"     : 30,
+    "weight"    : 1,
+    "protection": 3,
+    "agility"   : 0,
+    "stealth"   : 0
+  },
+  "masterwork_light_bracers" : {
+    "name"      : "Masterwork Light Bracers",
+    "group"     : "BRACERS",
+    "sort"      : 60400,
+    "price"     : 40,
+    "weight"    : 1,
+    "protection": 4,
+    "agility"   : 0,
+    "stealth"   : 0
+  },
+  "basic_medium_bracers"     : {
+    "name"      : "Basic Medium Bracers",
+    "group"     : "BRACERS",
+    "sort"      : 60120,
+    "price"     : 40,
+    "weight"    : 2,
+    "protection": 5,
+    "agility"   : -1,
+    "stealth"   : -1
+  },
+  "fine_medium_bracers"      : {
+    "name"      : "Fine Medium Bracers",
+    "group"     : "BRACERS",
+    "sort"      : 60220,
+    "price"     : 50,
+    "weight"    : 2,
+    "protection": 6,
+    "agility"   : -1,
+    "stealth"   : -1
+  },
+  "specialist_medium_bracers": {
+    "name"      : "Specialist Medium Bracers",
+    "group"     : "BRACERS",
+    "sort"      : 60320,
+    "price"     : 60,
+    "weight"    : 2,
+    "protection": 7,
+    "agility"   : -1,
+    "stealth"   : -1
+  },
+  "masterwork_medium_bracers": {
+    "name"      : "Masterwork Medium Bracers",
+    "group"     : "BRACERS",
+    "sort"      : 60420,
+    "price"     : 70,
+    "weight"    : 2,
+    "protection": 8,
+    "agility"   : -1,
+    "stealth"   : -1
+  },
+  "basic_heavy_bracers"      : {
+    "name"      : "Basic Heavy Bracers",
+    "group"     : "BRACERS",
+    "sort"      : 60140,
+    "price"     : 70,
+    "weight"    : 3,
+    "protection": 9,
+    "agility"   : -3,
+    "stealth"   : -2
+  },
+  "fine_heavy_bracers"       : {
+    "name"      : "Fine Heavy Bracers",
+    "group"     : "BRACERS",
+    "sort"      : 60240,
+    "price"     : 80,
+    "weight"    : 3,
+    "protection": 10,
+    "agility"   : -3,
+    "stealth"   : -2
+  },
+  "specialist_heavy_bracers" : {
+    "name"      : "Specialist Heavy Bracers",
+    "group"     : "BRACERS",
+    "sort"      : 60340,
+    "price"     : 90,
+    "weight"    : 3,
+    "protection": 11,
+    "agility"   : -3,
+    "stealth"   : -2
+  },
+  "masterwork_heavy_bracers" : {
+    "name"      : "Masterwork Heavy Bracers",
+    "group"     : "BRACERS",
+    "sort"      : 60440,
+    "price"     : 100,
+    "weight"    : 3,
+    "protection": 12,
+    "agility"   : -3,
+    "stealth"   : -2
+  },
+  "epic_power_bracelet"      : {
+    "name"         : "Power Bracelet",
+    "group"        : "BRACERS",
+    "sort"         : 61000,
+    "price"        : 50,
+    "weight"       : 0,
+    "min_willpower": 20,
+    "protection"   : 0,
+    "agility"      : 0,
+    "stealth"      : 0,
+    "strength"     : 5
+  }
+}

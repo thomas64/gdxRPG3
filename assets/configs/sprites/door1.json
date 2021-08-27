@@ -1,0 +1,8 @@
+{
+  "gate_with_lock" : {"source": "gate1", "col": 2, "row": 1},
+  "simple_right"   : {"source": "small_door1", "col": 1, "row": 1},
+  "simple_left"    : {"source": "small_door1", "col": 4, "row": 1},
+  "forged_left"    : {"source": "small_door2", "col": 4, "row": 1},
+  "large_round"    : {"source": "large_door3", "col": 1, "row": 1},
+  "large_cave_gate": {"source": "cave_gate1", "col": 1, "row": 1}
+}

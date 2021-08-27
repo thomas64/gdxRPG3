@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="130" height="106" tilewidth="24" tileheight="24" infinite="0" nextlayerid="23" nextobjectid="84">
+ <properties>
+  <property name="bgm" value="bgm_mysterious_tunnel"/>
+  <property name="bgs" value="bgs_river"/>
+  <property name="lightmap_player" value="light_player"/>
+  <property name="step_sound" value="stone"/>
+ </properties>
+ <tileset firstgid="1" name="hero_s_hometown_mysterious_tunnel_b2_1" tilewidth="24" tileheight="24" tilecount="1180" columns="59">
+  <image source="tilesets/hero_s_hometown_mysterious_tunnel_b2_1.png" width="1416" height="480"/>
+ </tileset>
+ <tileset firstgid="1181" source="tilesets/fsm_flame02.tsx"/>
+ <tileset firstgid="1949" source="tilesets/fsm_inside01_a4.tsx"/>
+ <tileset firstgid="2909" source="tilesets/fsm_inside01_b.tsx"/>
+ <tileset firstgid="3933" source="tilesets/fsm_inside01_a1.tsx"/>
+ <tileset firstgid="4701" source="tilesets/fsm_waterobject01.tsx"/>
+ <tileset firstgid="5469" source="tilesets/fsm_inside01_e.tsx"/>
+ <layer id="15" name="under0_none" width="130" height="106">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHgw11AAAQ==
+  </data>
+ </layer>
+ <layer id="1" name="under1_ground" width="130" height="106">
+  <data encoding="base64" compression="zlib">
+   eJztXVmPHDUQbvcMJAsPPCBAgpd95i8gngGJS+JKQhII2exyhISEHCRc4Ug4E3gKZyTE8Vs4BSQRCU8gJG4I4j4F4bNW1nZ73NM1HrvL7lRJ39R4dtozvVX1je1yVxfF9KIESYBbuM9fIH4gED8QiB8IxA+6xHo8/An84dDLFf/3Ez/oBnN4WAB+BN5H+wPgQ+Aw8K/4QU24z98H4+K8qjeWRXE13v8Tnv8M/AL8CvwG/E44vkve4BZum/rAxLmO689h689Kd3thUBQrgJXAKuBGYDWwBlg7aD++S97gFm6b+mADHtbBjjcDX8Bmr5bu9i3Am3j/W8BqYA2wFrhJg3C8bv8nfpAsNB98OlMUF8BOX8JmrwHnD0bb64FNeP42jrmuqOtjRfvxui18kC40H5yEHxzB869gs9eBW9Voew52PABsxfN5VdfHi/bjdVv4IF1oPtg/WIzr49AfA7fhtWODpbYd/03afr/dFj5IF5oP7Dh/F6/foUbjflpNnVdMq7mF26Y+0HzQ9Ls/rTa8YtpmXmHmD7E0t3Db1AcuPtD6MF47Apzroc8buHnFzCvWRdbcwm3TkHywAf/PwbAotuBvd5V0fRTHvqjGzyvM/CGW5hZum4bkg3m8NoQfPK4mw0HgnAaeMPMKM3+IpbmF26ah+eDAhD6gMT8hf8TQ3MJtUx+E5oMUwC3cNvVBlQ+q43tfPkgB3MJtUx9U+aA6vhc+8Bdum/qgup4YYnzQBbaBvzZC71NuzS3cNvVBjuODtjwFt3Db1Aeh+eAjHHsW/OcM4GkVR7flKbiF26Y+GMcHr5R1G19YtvvBOvT5kgqbl7C18EEcPnCtHxwq6nG4X7n5wRX/Zw7d64mTSlPeInU+oObDlrecR5do4gPqeEGvH1Ljf5L9Bxum6IdbqPm0lPb3jss3UtYTNB805RPsfiY5b/29Loffna3y4wNqPq2rfTnUuGviA8p6AoUPTD+T8sGl+LwHHP2lzgfUfFpKfHDxsPl8KPMHFx80yckJzlvzwSX4bg9Cf1vWeSF1PqDm01Lig3Hx6Ds+CHF+hg/2QH9X1nkhdT6g5udT4oMm2OsKVD7YosKcn+GD9fifzZV1XkidDyjrLAcDxUts2OMGbj6o8kLqfEBdb8uRD06gfRrs8pxDv6yW5gW3q/B88D3wkFrkhfsJ/XNLn/ngB+B02OV5hz6k/OcF4z5f88FlwAnY/2G0H1F58EE17/VYgx/kxAfVdQU9PlgGm6wq6nhBjc4XQvKBjn/T76MqDz6w/dm1Hp8rH3CMD67A5+2o9LtXLbZT5wPbn5c5/m858wF1/SAUHzStc+bGB7OF8EGoz89pPdH259z5YO9wKS+yMIYP7LxKKD64Ep+/E/q9oq6FD5YQu16R/v77hkvroHNj+MBeRw3FB3fid+Ee6F2qroUP6v3r+NuOz9gF7Ab+UmHjUcYHfmL782wRjw90/7pe0Y7h0mt/q8V6RTF+n2V8QBfbn2Pzga5jsrPiB//g4ZOZcP377D8ImV8QPqDFi65jcg2eXwtsQnuz7nsmXP+++w+ED7rlA9c+45DxyJ1vNHywW+W1/8D259kiLh/4xotP/5x8cK/Ka/+B7c+x+cDev+ezD3Bc/6nMF0xeQfjAHS/2+nvofF8qfGDyCsIH7njxXW+j9s/NB88M6vWVzDihL3wQom6YrnfctN4Wqn9uPnh2UK+vZMYJfeEDaj3itnrH9vzaxEuM/il8EHN8kvP+g9nCHT/UesRt9Y7t+YKJlxj9U/gg5vikj3xArUdMrXds4tDES+j+uecLmufuBu7rGR9Q6xFT6x2bODTj6tD9c88XNA/ofYrbVb/2I5n4aatn3Naett5xU9uug8q9ntjX9QM7fmLVM/bVru/DzQd9XE9suz44Rc3BB3q9tDou6Bsf2PVGr8f7Lir96xl3oa9i4ANz/YIZF/SJD1z1Rm/A+1cARwe8dUjb9Nay2/mCff0CdX2CWyh84MITwMpi8boQyvtTQmw+qI4LqOsT3GL7s4sPXDB8kKMfdMkHfRofnAp8ECq/YedT+zQ+OBX4IHb+JDc+WE70g1z4oOl6TZsPYudPcuODGWJd0Sehn1Lx6o+G0OPqJ9p8ECO/kXO+kVKXMBc9yXpijPxGrnwwrg5ZLuJbL83od4A3Snp+42u895tytD5azvnG3DFNvTTfvInOl25To+uHmgf2qHzqI3HbLiR8r19waRPPdpzb2s5zVnnA1E0TPuieD3z3H1DjvI0/qsdVjxc+yIMPYktbXVZu4bZdSHBfvzANuIXbdiHhe/1CqP0H4gdpQPjAX7htFxL29UTCB3Thtl1I2NcTCR/Qhdt2ITHNfEH4oD+Q8YG/cNsuJIQP/IXbdiEhfOAv3LYLCe76B+IHaUD4wF+4bRcSsp7oL9Psz01Nc9dDydkPqPdzzUHb+4W7vj9Tzn5AvZ9rDtreL9z1/Zly9gPq/Vxz0K56KF3enylnP6DezzUHrfcLby75rnfO2Q+4r0fu0/XOOfvBuGuB+grhg1HhtgkHhA9Ghdsmwgdp+EH1fq6nkralbT9x3/2A89wF4gcC8QOB+IFA/EAgfiAQPxCIHwjEDwTiBwLxA0G3fvA/HbfNQw==
+  </data>
+ </layer>
+ <layer id="16" name="under2_objects" width="130" height="106">
+  <data encoding="base64" compression="zlib">
+   eJzt0qERACAMBMEUQP9tYOgDQ0EUQExEDLMrz/5HAAAAAAAAAAAAAAAAAAAAAAAAAAAAANBtjretpPG3nWx+/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAICCC2jRAzc=
+  </data>
+ </layer>
+ <layer id="18" name="under3_water" width="130" height="106">
+  <data encoding="base64" compression="zlib">
+   eJztzrsNgDAAQ0G3fIpk/wmBDEHKDIASId1JT26dAAAAAAAAAAAAAAAAAAAAAAAAAADwd1dJ7t4zbCurXzHbVpO9dwx71tWvAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD40guKVQaF
+  </data>
+ </layer>
+ <layer id="17" name="under4_shadows" width="130" height="106">
+  <data encoding="base64" compression="zlib">
+   eJzt0jEBADAIwDAE7J4T/FtDBmwkCno0AgAAAAAAAAAAAAAAAAAAAAAAAACA1+XtLmACHwDslqe7gAl8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8CDO8BGQ==
+  </data>
+ </layer>
+ <layer id="19" name="under5_water" width="130" height="106">
+  <data encoding="base64" compression="zlib">
+   eJzt00kRwDAMBEFhUEDbLBKmPt5C4Lj7MwC2NgIAAAAAAAAAAAAAAAAAAAAAAAAAOFnLiJ613OVdm39ZC9xn7O8/tQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAP0wxTQsv
+  </data>
+ </layer>
+ <layer id="20" name="over6_objects" width="130" height="106">
+  <data encoding="base64" compression="zlib">
+   eJzt3TtOxDAQAFAHsQXcAm6HRMkFaOAMHAGQuAMgUXAFOo5BhafbIijG8ea37zWuEkXySLvxTGZSAgAAAKDU2S6l891817MMF3kPL0fs49jrmcfz6dxPwBK8iwOyL3EAAAAAABS6khMiuxUHZA/iAJjYzUlK111Kd93wet/N/bQAcNxa/z7/9T8AWK+aOuZPZxGbU1PH/C0ONqemjvlHHAAAAADAIvXVGb807GVQU8csvzC9vjrjj4ZxUFPHLL8wvb4645bn+zV1zPILAADQ1lA/4sf8Lvg04n3w0PenjaF+xK95j95G7NOh7w8AAFBC3pkg70yQdwYAAChX0jd0qat+psA+c58J5j4Tauc+/6eves0KrIO8M6Hl99asl7wzbJO5jgRzHQnmOgIALThPJPiOheA8EQAAAOijnhgAAAAAgGP1C9noVGk=
+  </data>
+ </layer>
+ <layer id="21" name="over7_none" width="130" height="106">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHgw11AAAQ==
+  </data>
+ </layer>
+ <layer id="22" name="over8_none" width="130" height="106">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHgw11AAAQ==
+  </data>
+ </layer>
+ <objectgroup color="#0055ff" id="5" name="sound">
+  <object id="1" name="wood" x="744" y="1416" width="48" height="192"/>
+  <object id="2" name="wood" x="1728" y="2064" width="192" height="72"/>
+  <object id="3" name="wood" x="1728" y="816" width="192" height="72"/>
+ </objectgroup>
+ <objectgroup color="#aa0000" id="4" name="collision">
+  <object id="4" x="408" y="0" width="672" height="1344"/>
+  <object id="5" x="408" y="1344" width="264" height="264"/>
+  <object id="6" x="672" y="1416" width="72" height="192"/>
+  <object id="7" x="792" y="1416" width="936" height="192"/>
+  <object id="9" x="408" y="1656" width="1248" height="888"/>
+  <object id="10" x="408" y="1608" width="96" height="48"/>
+  <object id="11" x="1080" y="0" width="432" height="1080"/>
+  <object id="13" x="1512" y="744" width="144" height="600"/>
+  <object id="14" x="1224" y="1080" width="288" height="264"/>
+  <object id="15" x="696" y="1344" width="48" height="24"/>
+  <object id="16" x="792" y="1344" width="48" height="24"/>
+  <object id="17" x="888" y="1344" width="48" height="24"/>
+  <object id="18" x="984" y="1344" width="48" height="24"/>
+  <object id="19" x="1272" y="1344" width="48" height="24"/>
+  <object id="20" x="1368" y="1344" width="48" height="24"/>
+  <object id="21" x="1464" y="1344" width="48" height="24"/>
+  <object id="22" x="1560" y="1344" width="48" height="24"/>
+  <object id="23" x="1656" y="2136" width="72" height="408"/>
+  <object id="24" x="1728" y="2112" width="192" height="432"/>
+  <object id="25" x="1920" y="2280" width="72" height="264"/>
+  <object id="26" x="1992" y="1752" width="768" height="792"/>
+  <object id="27" x="2568" y="600" width="192" height="1152"/>
+  <object id="28" x="1992" y="744" width="432" height="888"/>
+  <object id="29" x="2136" y="648" width="288" height="96"/>
+  <object id="30" x="2040" y="1632" width="48" height="24"/>
+  <object id="31" x="2136" y="1632" width="48" height="24"/>
+  <object id="32" x="2232" y="1632" width="48" height="24"/>
+  <object id="33" x="2328" y="1632" width="48" height="24"/>
+  <object id="34" x="1728" y="864" width="192" height="1200"/>
+  <object id="35" x="1656" y="960" width="72" height="48"/>
+  <object id="36" x="1920" y="960" width="72" height="48"/>
+  <object id="37" x="1632" y="360" width="384" height="288"/>
+  <object id="38" x="1728" y="648" width="192" height="168"/>
+  <object id="39" x="2016" y="408" width="744" height="192"/>
+  <object id="40" x="2136" y="0" width="624" height="408"/>
+  <object id="41" x="1512" y="0" width="240" height="288"/>
+  <object id="42" x="1752" y="0" width="144" height="216"/>
+  <object id="43" x="1896" y="0" width="240" height="288"/>
+  <object id="44" x="2040" y="288" width="48" height="24"/>
+  <object id="45" x="1944" y="288" width="48" height="24"/>
+  <object id="46" x="1656" y="288" width="48" height="24"/>
+  <object id="47" x="1560" y="288" width="48" height="24"/>
+  <object id="76" x="1200" y="1080" width="24" height="24"/>
+  <object id="77" x="1080" y="1080" width="24" height="24"/>
+  <object id="78" x="1752" y="216" width="24" height="24"/>
+  <object id="79" x="1872" y="216" width="24" height="24"/>
+ </objectgroup>
+ <objectgroup color="#5500ff" id="7" name="rest">
+  <object id="82" name="door_large_round" x="1752" y="144" width="144" height="96"/>
+ </objectgroup>
+ <objectgroup color="#aa55ff" id="12" name="hero"/>
+ <objectgroup color="#55ff7f" id="13" name="npc"/>
+ <objectgroup color="#55aaff" id="3" name="spawn">
+  <object id="74" name="hero_s_hometown_mysterious_tunnel_b1_1" x="1128" y="1104" width="48" height="24"/>
+  <object id="81" name="hero_s_hometown_mysterious_tunnel_b2_2" x="1800" y="240" width="48" height="24"/>
+ </objectgroup>
+ <objectgroup color="#ffff7f" id="2" name="portal">
+  <object id="75" name="hero_s_hometown_mysterious_tunnel_b1_1" x="1104" y="1080" width="96" height="24"/>
+  <object id="80" name="hero_s_hometown_mysterious_tunnel_b2_2" x="1776" y="216" width="96" height="24"/>
+ </objectgroup>
+ <objectgroup color="#ffaa7f" id="14" name="warp"/>
+ <objectgroup color="#ffaa7f" id="11" name="save"/>
+ <objectgroup id="9" name="lower_texture"/>
+ <objectgroup id="10" name="upper_texture"/>
+ <objectgroup color="#ffff00" id="8" name="quest"/>
+ <objectgroup color="#ffffff" id="6" name="lights">
+  <object id="48" x="762" y="1278" width="12" height="12"/>
+  <object id="50" x="1080" y="1086" width="12" height="12"/>
+  <object id="53" x="1338" y="1278" width="12" height="12"/>
+  <object id="58" x="1146" y="1650" width="12" height="12"/>
+  <object id="60" x="1656" y="1902" width="12" height="12"/>
+  <object id="62" x="1980" y="2046" width="12" height="12"/>
+  <object id="63" x="1980" y="1446" width="12" height="12"/>
+  <object id="64" x="1980" y="1086" width="12" height="12"/>
+  <object id="65" x="1656" y="1086" width="12" height="12"/>
+  <object id="67" x="1980" y="798" width="12" height="12"/>
+  <object id="68" x="1512" y="558" width="12" height="12"/>
+  <object id="71" x="2010" y="222" width="12" height="12"/>
+  <object id="73" x="2250" y="642" width="12" height="12"/>
+  <object id="83" x="1626" y="222" width="12" height="12"/>
+ </objectgroup>
+</map>

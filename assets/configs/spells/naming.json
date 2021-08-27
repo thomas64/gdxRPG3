@@ -1,0 +1,157 @@
+{
+  "banishing": {
+    "name": "Banishing",
+    "school": "NAMING",
+    "sort": 210,
+    "upgrade": 5.2,
+    "min_wizard": 4,
+    "resource": "GEMSTONE",
+    "stamina_cost": 15,
+    "range": 1,
+    "number_of_targets": "ONE",
+    "target": "ENEMY_ONLY_IN_TARGET_AREA",
+    "damage": 0,
+    "description": [
+      "Any single elemental within range",
+      "is banished from this plane of existence."
+    ]
+  },
+  "brilliance": {
+    "name": "Brilliance",
+    "school": "NAMING",
+    "sort": 215,
+    "upgrade": 1.2,
+    "min_wizard": 2,
+    "resource": "GEMSTONE",
+    "stamina_cost": 6,
+    "range": 3,
+    "number_of_targets": "INCREASES_BY_RANK",
+    "target": "PARTY_ONLY_IN_TARGET_AREA",
+    "damage": 0,
+    "description": [
+      "Target gains 2 Intelligence per Rank of the spell.",
+      "May only be cast once on each target."
+    ]
+  },
+  "charming": {
+    "name": "Charming",
+    "school": "NAMING",
+    "sort": 220,
+    "upgrade": 4,
+    "min_wizard": 3,
+    "resource": "GEMSTONE",
+    "stamina_cost": 6,
+    "range": 1,
+    "number_of_targets": "ONE",
+    "target": "ENEMY_ONLY_IN_TARGET_AREA",
+    "damage": 0,
+    "description": [
+      "Charms one enemy, causing it to fight for",
+      "the party for the remainder of the battle",
+      "or until it is killed.",
+      "Does not affect undead or certain other types of creatures."
+    ]
+  },
+  "control_marquis": {
+    "name": "Control Marquis",
+    "school": "NAMING",
+    "sort": 225,
+    "upgrade": 4,
+    "min_wizard": 3,
+    "resource": "GEMSTONE",
+    "stamina_cost": 10,
+    "range": 1,
+    "number_of_targets": "ONE",
+    "target": "ENEMY_ONLY_IN_TARGET_AREA",
+    "damage": 0,
+    "description": [
+      "Charms one Marquis, causing it to fight",
+      "for the party for the remainder of the battle",
+      "or until it is killed."
+    ]
+  },
+  "endurance": {
+    "name": "Endurance",
+    "school": "NAMING",
+    "sort": 230,
+    "upgrade": 3.2,
+    "min_wizard": 2,
+    "resource": "SPICE",
+    "stamina_cost": 6,
+    "range": 3,
+    "number_of_targets": "INCREASES_BY_RANK",
+    "target": "PARTY_ONLY_IN_TARGET_AREA",
+    "damage": 0,
+    "description": [
+      "Target gains 2 Endurance for each Rank of the spell.",
+      "May only be cast once on each target."
+    ]
+  },
+  "sense_aura": {
+    "name": "Sense Aura",
+    "school": "NAMING",
+    "sort": 235,
+    "upgrade": 4,
+    "min_wizard": 3,
+    "resource": "HERB",
+    "stamina_cost": 2,
+    "range": 4,
+    "number_of_targets": "ONE",
+    "target": "ENEMY_ONLY_IN_TARGET_AREA",
+    "damage": 0,
+    "description": [
+      "Reveals a variety of information about the target:",
+      "the higher the caster's rank in Sense Aura,",
+      "the more information is revealed.",
+      "May only be cast once on each target."
+    ]
+  },
+  "stupidity": {
+    "name": "Stupidity",
+    "school": "NAMING",
+    "sort": 240,
+    "upgrade": 1.2,
+    "min_wizard": 2,
+    "resource": "HERB",
+    "stamina_cost": 6,
+    "range": 3,
+    "number_of_targets": "INCREASES_BY_RANK",
+    "target": "ENEMY_ONLY_IN_TARGET_AREA",
+    "damage": 0,
+    "description": [
+      "Target loses 2 Intelligence per Rank of the spell.",
+      "May only be cast once on each target."
+    ]
+  },
+  "teleportation": {
+    "name": "Teleportation",
+    "school": "NAMING",
+    "sort": 245,
+    "upgrade": 3.2,
+    "min_wizard": 8,
+    "resource": "GEMSTONE",
+    "stamina_cost": 10,
+    "range": 3,
+    "number_of_targets": "ONE",
+    "target": "PARTY_ONLY_IN_TARGET_AREA",
+    "damage": 0,
+    "description": ["Caster teleports to a chosen point on the battlefield."]
+  },
+  "weakness": {
+    "name": "Weakness",
+    "school": "NAMING",
+    "sort": 250,
+    "upgrade": 3.2,
+    "min_wizard": 2,
+    "resource": "HERB",
+    "stamina_cost": 6,
+    "range": 3,
+    "number_of_targets": "INCREASES_BY_RANK",
+    "target": "ENEMY_ONLY_IN_TARGET_AREA",
+    "damage": 0,
+    "description": [
+      "Target loses 2 Endurance for each Rank of the spell.",
+      "May only be cast once on each target."
+    ]
+  }
+}

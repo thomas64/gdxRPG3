@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="34" height="48" tilewidth="24" tileheight="24" infinite="0" nextlayerid="16" nextobjectid="35">
+ <properties>
+  <property name="bgm" value="bgm_cave"/>
+  <property name="lightmap_player" value="light_player"/>
+  <property name="step_sound" value="stone"/>
+ </properties>
+ <tileset firstgid="1" name="honeywood_cave_3" tilewidth="24" tileheight="24" tilecount="589" columns="31">
+  <image source="tilesets/honeywood_cave_3.png" width="744" height="456"/>
+ </tileset>
+ <tileset firstgid="590" source="tilesets/fsm_dungeon01_a1.tsx"/>
+ <tileset firstgid="1358" source="tilesets/fsm_dungeon01_b.tsx"/>
+ <tileset firstgid="2382" source="tilesets/fsm_flame04.tsx"/>
+ <layer id="2" name="under0_none" width="34" height="48">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20JT6AAAAAAAAB4GhmAAAE=
+  </data>
+ </layer>
+ <layer id="1" name="under1_ground" width="34" height="48">
+  <data encoding="base64" compression="zlib">
+   eJztl0ly00AUhrsbQkjIyLRg3nCOYDt24gCJnYThGHAHyACJ7UBRzOMBGE7AFDJBBbJjhgVrhhvwqaRXUhrZlUVLbLz49LdsVXXr1/+eWloppZs0SZg2aE95zj6YgGfwNNBN/HEEzut01nDVmw+dhAzjBdjBeLP2z2vQncJarnG4hE5BlvEi7GTcov3zOehJYR3XOVxGpyHHeAl2Md6i/fO0/LjB4SZcYDyPLsNuxq1of4p+eLzncBG9h65oX7dCHirQm9A6ovXxHD7w4wx6G32tfW2DH1CF7Qmsw66PF+jHBn4UEvLCro+X6KcGfgzAOe2+j9j1MY9+RlvNej/aYQwGoYX/Jhyvw66PV+gX7zmY9X5sg3EoetfCJBjjzhfJh+RhAf2KftOh7jGhL0NedmAKprW7fiL5kDwsokvw3ctCoHtN6MtROAbHA19c9RPbjzy6DBXmrkIN5ozvU9SX4cCXpPwYVv79P4RH8BieGN+nogp9GYEZh35IvYgf4kMJ3sI7WDO+TwUV5qWEzmp3/VXqRfyI+hD1w/PJy8tg4EuZa0e1u/4q+ZgNnv9qxAfRciQnkh/pJ67zUQnu8ydz/YIzdXyRnEg/cZ2PqvX8V9S/vqxF/BiBvHHnh+SjZj3/aE7Owm/4Y8J62gcF43Y/0gU56Ffh/a5aPkj/8HwowWHGA8b9fqQDOlX4/CUncT6UGY963hn3+xGpm0wkJ3Hvl/2BD2Nc80C790PqJqvC90rc++WA8X0Y579TKpn9WTQncv+iGea+wu8H0SIMwWnOex3OH5cTuX/RLPPm4BB0Ob7/OKSfvLF8kDyk/f1yy/JB8pDW94u9H7mvfR9OqGTqox72fuQO3IWTKrn6aJQP+/vF9ft1o/mwv19cv183Qlwf6fAyopPrF/Ww+0inTqdv1POlG3pU+j40adLk//MXgb3nAg==
+  </data>
+ </layer>
+ <layer id="3" name="under2_shadow" width="34" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt0NEJgDAQBNElZRrsxFJMI4E0ErARRchaRMgJ82C/bzgJAAAA+L8tSTmtrpCqG1qAju6G3Tu9srDn9u3HOwL95QrQ8f3lDdABAAAAYJ4BTrgLmQ==
+  </data>
+ </layer>
+ <layer id="4" name="under3_objects" width="34" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt07ERABAUBcGX/tbpgkZJ5WYIdiu45BIAgD+1Snq9rkjGbpgfdMBN/oKTJwAAuG0BXdEHew==
+  </data>
+ </layer>
+ <layer id="5" name="under4_none" width="34" height="48">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20JT6AAAAAAAAB4GhmAAAE=
+  </data>
+ </layer>
+ <layer id="6" name="under5_none" width="34" height="48">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20JT6AAAAAAAAB4GhmAAAE=
+  </data>
+ </layer>
+ <layer id="7" name="over6_rock" width="34" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt1DkKwDAQQ1FVvv/Jst4j6wWixo0JOI0Xwn+gapqBGSQBAAAAAP5sCdIaWm8hXd7h7mAPvMv9yeDZ6EzOXPCOuT/ZPNudwzn5J6AraY/E3qgt7ZHYG62U7s2v6E2gvgfSXxk/
+  </data>
+ </layer>
+ <layer id="8" name="over7_objects" width="34" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt07ERABAABMFPtUgX9D9DKmcIdiu45BIA4Be1JK28rkj6ahgfdMBJ/oKdJwAA4K4JAIkFOw==
+  </data>
+ </layer>
+ <layer id="9" name="over8_none" width="34" height="48">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20JT6AAAAAAAAB4GhmAAAE=
+  </data>
+ </layer>
+ <objectgroup color="#aa0000" id="11" name="collision">
+  <object id="4" x="336" y="432" width="96" height="240"/>
+  <object id="5" x="288" y="480" width="48" height="96"/>
+  <object id="6" x="432" y="528" width="48" height="96"/>
+  <object id="7" x="0" y="0" width="336" height="384"/>
+  <object id="8" x="480" y="0" width="336" height="432"/>
+  <object id="9" x="336" y="0" width="144" height="216"/>
+  <object id="10" x="336" y="216" width="48" height="24"/>
+  <object id="11" x="432" y="216" width="48" height="24"/>
+  <object id="12" x="576" y="432" width="240" height="720"/>
+  <object id="14" x="0" y="384" width="240" height="768"/>
+  <object id="16" x="528" y="432" width="48" height="96"/>
+  <object id="17" x="480" y="768" width="96" height="384"/>
+  <object id="18" x="240" y="768" width="96" height="384"/>
+  <object id="20" x="336" y="1008" width="144" height="144"/>
+  <object id="21" x="336" y="960" width="48" height="48"/>
+  <object id="22" x="432" y="960" width="48" height="48"/>
+  <object id="23" x="240" y="672" width="48" height="96"/>
+  <object id="28" x="360" y="672" width="48" height="48"/>
+  <object id="29" x="528" y="528" width="48" height="48"/>
+  <object id="30" x="240" y="384" width="48" height="48"/>
+ </objectgroup>
+ <objectgroup color="#55ff7f" id="15" name="npc">
+  <object id="34" name="orc_scout" x="432" y="624" width="48" height="24">
+   <properties>
+    <property name="conversation" value="lonely_orc_scout"/>
+    <property name="direction" value="north"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup color="#55aaff" id="12" name="spawn">
+  <object id="24" name="honeywood_cave_2" type="2" x="384" y="240" width="48" height="24"/>
+  <object id="25" name="honeywood_cave_2" type="1" x="384" y="960" width="48" height="24"/>
+ </objectgroup>
+ <objectgroup color="#ffff7f" id="13" name="portal">
+  <object id="26" name="honeywood_cave_2" type="2" x="384" y="216" width="48" height="24"/>
+  <object id="27" name="honeywood_cave_2" type="1" x="384" y="984" width="48" height="24"/>
+ </objectgroup>
+ <objectgroup color="#ffffff" id="14" name="lights">
+  <object id="31" x="360" y="624" width="48" height="48"/>
+  <object id="32" x="528" y="480" width="48" height="48"/>
+  <object id="33" x="240" y="336" width="48" height="48"/>
+ </objectgroup>
+</map>

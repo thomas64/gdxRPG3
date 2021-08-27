@@ -1,0 +1,181 @@
+{
+  "healing_potion"     : {
+    "name"       : "Healing Potion",
+    "group"      : "POTION",
+    "sort"       : 80005,
+    "price"      : 4,
+    "description": [
+      "Restores a fifth of the drinker's lost Endurance and Stamina.",
+      "Creating a Healing Potion requires 3 Herbs",
+      "and an Alchemist rank of at least 1."
+    ]
+  },
+  "curing_potion"      : {
+    "name"       : "Curing Potion",
+    "group"      : "POTION",
+    "sort"       : 80010,
+    "price"      : 8,
+    "description": [
+      "A more powerful version of the Healing Potion,",
+      "restores a third of the drinker's lost Endurance and Stamina.",
+      "Creating a Curing Potion requires 3 Herbs, 2 Spices",
+      "and an Alchemist rank of at least 3."
+    ]
+  },
+  "stamina_potion"     : {
+    "name"       : "Stamina Potion",
+    "group"      : "POTION",
+    "sort"       : 80015,
+    "price"      : 11,
+    "description": [
+      "Restores all Stamina to the drinker.",
+      "Creating a Stamina Potion requires 4 Herbs, 2 Spices",
+      "and an Alchemist rank of at least 5."
+    ]
+  },
+  "restore_potion"     : {
+    "name"       : "Restore Potion",
+    "group"      : "POTION",
+    "sort"       : 80020,
+    "price"      : 15,
+    "description": [
+      "Restores full health to the drinker.",
+      "Creating a Restore Potion requires 5 Herbs, 3 Spices",
+      "and an Alchemist rank of at least 7."
+    ]
+  },
+  "fire_flask"         : {
+    "name"       : "Fire Flask",
+    "group"      : "POTION",
+    "sort"       : 80025,
+    "price"      : 4,
+    "description": [
+      "A sticky, incendiary liquid that bursts into flame on contact with air.",
+      "Creating a Fire Flask requires 1 Spice, 2 Gemstones",
+      "and an Alchemist rank of at least 1."
+    ]
+  },
+  "inferno_flask"      : {
+    "name"       : "Inferno Flask",
+    "group"      : "POTION",
+    "sort"       : 80030,
+    "price"      : 9,
+    "description": [
+      "A more powerful version of the Fire Flask.",
+      "A sticky, incendiary liquid that bursts into flame on contact with air.",
+      "Creating an Inferno Flask requires 3 Spices, 3 Gemstones",
+      "and an Alchemist rank of at least 3."
+    ]
+  },
+  "acid_flask"         : {
+    "name"       : "Acid Flask",
+    "group"      : "POTION",
+    "sort"       : 80035,
+    "price"      : 10,
+    "description": [
+      "This vicious fluid eats into the flesh of any creature it touches, doing continuous damage.",
+      "Creating an Acid Flask requires 2 Spices, 3 Gemstones",
+      "and an Alchemist rank of at least 5."
+    ]
+  },
+  "sleep_flask"        : {
+    "name"       : "Sleep Gas Flask",
+    "group"      : "POTION",
+    "sort"       : 80040,
+    "price"      : 13,
+    "description": [
+      "A liquid that vaporizes when exposed to air,",
+      "forming a gas that drains the mobility of those who breathe it.",
+      "Creating a Sleep Gas Flask requires 3 Herbs, 3 Gemstones",
+      "and an Alchemist rank of at least 7."
+    ]
+  },
+  "antidote_potion"    : {
+    "name"       : "Antidote Potion",
+    "group"      : "POTION",
+    "sort"       : 80045,
+    "price"      : 5,
+    "description": [
+      "Halts the effects of poison, but does not restore damage already inflicted by poison.",
+      "Creating an Antidote Potion requires 1 Herb, 2 Spices",
+      "and an Alchemist rank of at least 2."
+    ]
+  },
+  "protection_potion"  : {
+    "name"       : "Protection Potion",
+    "group"      : "POTION",
+    "sort"       : 80050,
+    "price"      : 8,
+    "description": [
+      "Temporarily increases the Protection of the drinker by 5 points during 1 battle.",
+      "Creating a Protection Potion requires 2 Herbs, 3 Spices, 1 Gemstone",
+      "and an Alchemist rank of at least 2."
+    ]
+  },
+  "intelligence_potion": {
+    "name"       : "Intelligence Potion",
+    "group"      : "POTION",
+    "sort"       : 80055,
+    "price"      : 12,
+    "description": [
+      "Temporarily increases the Intelligence of the drinker by 5 points during 1 battle.",
+      "Creating a Intelligence Potion requires 2 Herbs, 1 Spice, 3 Gemstones",
+      "and an Alchemist rank of at least 6."
+    ]
+  },
+  "willpower_potion"   : {
+    "name"       : "Willpower Potion",
+    "group"      : "POTION",
+    "sort"       : 80060,
+    "price"      : 12,
+    "description": [
+      "Temporarily increases the Willpower of the drinker by 5 points during 1 battle.",
+      "Creating a Willpower Potion requires 3 Herbs, 2 Spices, 1 Gemstone",
+      "and an Alchemist rank of at least 6."
+    ]
+  },
+  "dexterity_potion"   : {
+    "name"       : "Dexterity Potion",
+    "group"      : "POTION",
+    "sort"       : 80065,
+    "price"      : 12,
+    "description": [
+      "Temporarily increases the Dexterity of the drinker by 5 points during 1 battle.",
+      "Creating a Dexterity Potion requires 1 Herb, 3 Spices, 2 Gemstones",
+      "and an Alchemist rank of at least 6."
+    ]
+  },
+  "agility_potion"     : {
+    "name"       : "Agility Potion",
+    "group"      : "POTION",
+    "sort"       : 80070,
+    "price"      : 12,
+    "description": [
+      "Temporarily increases the Agility of the drinker by 5 points during 1 battle.",
+      "Creating a Agility Potion requires 3 Herbs, 1 Spice, 2 Gemstones",
+      "and an Alchemist rank of at least 6."
+    ]
+  },
+  "strength_potion"    : {
+    "name"       : "Strength Potion",
+    "group"      : "POTION",
+    "sort"       : 80075,
+    "price"      : 12,
+    "description": [
+      "Temporarily increases the Strength of the drinker by 5 points during 1 battle.",
+      "Creating a Strength Potion requires 1 Herb, 2 Spices, 3 Gemstones",
+      "and an Alchemist rank of at least 6."
+    ]
+  },
+  "stealth_potion"     : {
+    "name"       : "Stealth Potion",
+    "group"      : "POTION",
+    "sort"       : 80080,
+    "price"      : 10,
+    "description": [
+      "Temporarily increases the Stealth rank of the drinker by 3 points during 1 battle.",
+      "Creating a Stealth Potion requires 2 Herbs, 2 Spices, 2 Gemstones",
+      "and an Alchemist rank of at least 4."
+    ]
+  }
+}

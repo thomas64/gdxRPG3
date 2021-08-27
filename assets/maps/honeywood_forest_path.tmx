@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="44" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="25" nextobjectid="82">
+ <properties>
+  <property name="bgm" value="bgm_forest"/>
+  <property name="bgs" value="bgs_birds, bgs_creek"/>
+  <property name="lightmap_camera" value="sunlight, forest"/>
+ </properties>
+ <tileset firstgid="1" name="honeywood_forest_path" tilewidth="24" tileheight="24" tilecount="4352" columns="128">
+  <image source="tilesets/honeywood_forest_path.png" width="3072" height="816"/>
+ </tileset>
+ <tileset firstgid="4353" source="tilesets/fsm_town01_a1.tsx"/>
+ <tileset firstgid="5121" source="tilesets/fsm_town01_b.tsx"/>
+ <tileset firstgid="6145" source="tilesets/fsm_town01_e.tsx"/>
+ <tileset firstgid="7169" source="tilesets/fsm_forest01_b.tsx"/>
+ <layer id="1" name="under0_none" width="44" height="70">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAAAAAIB3AzAgAAE=
+  </data>
+ </layer>
+ <layer id="2" name="under1_ground" width="44" height="70">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <layer id="3" name="under2_water" width="44" height="70">
+  <data encoding="base64" compression="zlib">
+   eJzt08EJAjEUBNAcbCA12MlqJWojaiVqo+YSDEjiBlY34HuXOS3M/iEhAAAAAAAA8E92MYQptnMf1275ckxdDrGdp4H6XlOXS2zn5sP9p+J/vr3XI317j++5nXH3MrO19jrPuHuZ2VJ79e5xq9y9ltlSe639fnr3qu3xK7171fYYVW2PUdX2AAAAAEJ4AqV3YGc=
+  </data>
+ </layer>
+ <layer id="4" name="under3_waterplants" width="44" height="70">
+  <data encoding="base64" compression="zlib">
+   eJzt07ENgCAQBdBbABMGwVF0U11RGwoKKyNifK+5kp/7XAQAAAAAAAB/suaIJbdzym+nuraf2bbcznngvE9LH+uvvNxf6ryndPOd0nlPZbB78r/HUHv4itoDAAAAEHEAuHoVkw==
+  </data>
+ </layer>
+ <layer id="5" name="under4_none" width="44" height="70">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAAAAAIB3AzAgAAE=
+  </data>
+ </layer>
+ <layer id="6" name="under5_none" width="44" height="70">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAAAAAIB3AzAgAAE=
+  </data>
+ </layer>
+ <layer id="7" name="over6_objects" width="44" height="70">
+  <data encoding="base64" compression="zlib">
+   eJzt1rkNwlAQhOENKcDSC1wNRyMcjXCkHC1wpBx9EOFO6IBJnDwHxhJi19L/SRNsNlpr9WwGAAAQ06swqwrvFt97q+tz4N0C3ral2U7ZK4fSu027qzrelLvy6EFfAMB/5e9a9P8z3jUAABDFMJmNlLEySe2zt6k6zJS5skjtczRLdVopa2WTmnO0fR/V4aSclUtqztH3/Wtd78P7e3a9j758z3qf+f1EVe8zvx8AAAAAAGD2AaN0Oak=
+  </data>
+ </layer>
+ <layer id="8" name="over7_over" width="44" height="70">
+  <data encoding="base64" compression="zlib">
+   eJzt0rcNAkAQRNGrAYGuHkwjmEYwjWAawTSCKYSRKOAQBJe8J/1kowm2FAAAAAD4zmDYewF8jPwiAAAAAAD8bFxLmaRpmtX2vbd5tizSMq1q+97bOls2aZt2tX3vbZ8th3RMp9q+93bOlku6pltt33u7Z8sjPdOrtu//egM9mSAY
+  </data>
+ </layer>
+ <layer id="9" name="over8_none" width="44" height="70">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAAAAAIB3AzAgAAE=
+  </data>
+ </layer>
+ <objectgroup color="#0055ff" id="17" name="sound" visible="0">
+  <object id="43" name="sand" x="576" y="0" width="48" height="120"/>
+  <object id="44" name="sand" x="576" y="168" width="48" height="264"/>
+  <object id="45" name="sand" x="528" y="408" width="48" height="144"/>
+  <object id="46" name="sand" x="480" y="552" width="48" height="240"/>
+  <object id="47" name="sand" x="432" y="792" width="48" height="120"/>
+  <object id="48" name="wood" x="432" y="912" width="48" height="192"/>
+  <object id="49" name="sand" x="432" y="1104" width="48" height="24"/>
+  <object id="50" name="sand" x="480" y="1128" width="48" height="192"/>
+  <object id="51" name="sand" x="480" y="1368" width="48" height="144"/>
+  <object id="52" name="sand" x="480" y="1560" width="48" height="144"/>
+ </objectgroup>
+ <objectgroup color="#aa0000" id="11" name="collision" visible="0">
+  <object id="1" x="336" y="960" width="96" height="96"/>
+  <object id="2" x="480" y="960" width="192" height="96"/>
+  <object id="3" x="336" y="1056" width="48" height="192"/>
+  <object id="5" x="336" y="1248" width="96" height="288"/>
+  <object id="6" x="336" y="1536" width="144" height="144"/>
+  <object id="7" x="528" y="1488" width="144" height="192"/>
+  <object id="8" x="576" y="1104" width="96" height="384"/>
+  <object id="9" x="624" y="1056" width="48" height="48"/>
+  <object id="10" x="336" y="0" width="240" height="240"/>
+  <object id="11" x="336" y="240" width="192" height="96"/>
+  <object id="12" x="336" y="336" width="144" height="96"/>
+  <object id="14" x="336" y="432" width="96" height="192"/>
+  <object id="16" x="624" y="0" width="48" height="192"/>
+  <object id="17" x="336" y="624" width="48" height="336"/>
+  <object id="20" x="576" y="720" width="96" height="240"/>
+  <object id="21" x="0" y="0" width="336" height="1680"/>
+  <object id="22" x="624" y="648" width="48" height="72"/>
+  <object id="24" x="624" y="312" width="48" height="120"/>
+  <object id="25" x="672" y="0" width="384" height="1680"/>
+  <object id="26" x="384" y="768" width="48" height="48"/>
+  <object id="27" x="576" y="432" width="96" height="48"/>
+  <object id="28" x="528" y="672" width="96" height="48"/>
+ </objectgroup>
+ <objectgroup color="#5500ff" id="15" name="rest">
+  <object id="67" name="chest0001" x="528" y="1296" width="48" height="48"/>
+  <object id="77" name="sparkle0005" x="624" y="264" width="48" height="48"/>
+ </objectgroup>
+ <objectgroup color="#ff007f" id="22" name="enemy">
+  <object id="70" name="green_slime" type="w" x="480" y="576" width="48" height="24">
+   <properties>
+    <property name="battleId" value="battle0001"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup color="#55ff7f" id="16" name="npc"/>
+ <objectgroup color="#55aaff" id="12" name="spawn">
+  <object id="29" name="honeywood_forest_cave" x="576" y="24" width="48" height="24"/>
+  <object id="32" name="honeywood" x="480" y="1656" width="48" height="24"/>
+  <object id="66" name="scene_intro" x="480" y="1596" width="48" height="24">
+   <properties>
+    <property name="direction" value="south"/>
+   </properties>
+  </object>
+  <object id="76" name="honeywood_forest_path" x="480" y="1536" width="48" height="24">
+   <properties>
+    <property name="direction" value="north"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup color="#ffff7f" id="13" name="portal">
+  <object id="30" name="honeywood_forest_cave" x="552" y="-24" width="96" height="24"/>
+  <object id="31" name="honeywood" x="456" y="1680" width="96" height="24"/>
+ </objectgroup>
+ <objectgroup color="#ffaa7f" id="14" name="save"/>
+ <objectgroup id="21" name="lower_texture">
+  <object id="62" name="quest_intro" gid="7462" x="528" y="1644" width="24" height="24">
+   <properties>
+    <property name="isVisible" type="bool" value="false"/>
+    <property name="task" value="1"/>
+    <property name="visibleIfComplete" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="61" name="quest_intro" gid="7461" x="504" y="1644" width="24" height="24">
+   <properties>
+    <property name="isVisible" type="bool" value="false"/>
+    <property name="task" value="1"/>
+    <property name="visibleIfComplete" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="60" name="quest_intro" gid="7460" x="480" y="1644" width="24" height="24">
+   <properties>
+    <property name="isVisible" type="bool" value="false"/>
+    <property name="task" value="1"/>
+    <property name="visibleIfComplete" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="59" name="quest_intro" gid="7459" x="456" y="1644" width="24" height="24">
+   <properties>
+    <property name="isVisible" type="bool" value="false"/>
+    <property name="task" value="1"/>
+    <property name="visibleIfComplete" type="bool" value="false"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="20" name="upper_texture">
+  <object id="55" name="quest_intro" gid="7427" x="456" y="1620" width="24" height="24">
+   <properties>
+    <property name="isVisible" type="bool" value="false"/>
+    <property name="task" value="1"/>
+    <property name="visibleIfComplete" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="56" name="quest_intro" gid="7428" x="480" y="1620" width="24" height="24">
+   <properties>
+    <property name="isVisible" type="bool" value="false"/>
+    <property name="task" value="1"/>
+    <property name="visibleIfComplete" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="57" name="quest_intro" gid="7429" x="504" y="1620" width="24" height="24">
+   <properties>
+    <property name="isVisible" type="bool" value="false"/>
+    <property name="task" value="1"/>
+    <property name="visibleIfComplete" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="58" name="quest_intro" gid="7430" x="528" y="1620" width="24" height="24">
+   <properties>
+    <property name="isVisible" type="bool" value="false"/>
+    <property name="task" value="1"/>
+    <property name="visibleIfComplete" type="bool" value="false"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup color="#ffff00" id="19" name="quest">
+  <object id="64" name="quest_intro" type="blocker" x="480" y="1620" width="48" height="36">
+   <properties>
+    <property name="activeIfComplete" type="bool" value="false"/>
+    <property name="isActive" type="bool" value="true"/>
+    <property name="task" value="1"/>
+   </properties>
+  </object>
+  <object id="65" name="quest_intro" type="discover" x="576" y="1056" width="48" height="48">
+   <properties>
+    <property name="task" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup color="#ff55ff" id="23" name="event">
+  <object id="69" name="guide_event_action" type="discover" x="432" y="1464" width="144" height="24"/>
+  <object id="70" name="guide_event_inventory" type="discover" x="432" y="1344" width="144" height="24"/>
+  <object id="71" name="guide_event_enemy" type="discover" x="384" y="888" width="192" height="24"/>
+  <object id="81" name="guide_event_fast" type="discover" x="432" y="432" width="144" height="24"/>
+  <object id="80" name="fallen_tree" type="check" x="480" y="1608" width="48" height="24"/>
+ </objectgroup>
+</map>

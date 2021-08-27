@@ -1,0 +1,4 @@
+buttons.atlas
+schools.atlas
+skills.atlas
+tiers.atlas

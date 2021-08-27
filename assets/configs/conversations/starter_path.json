@@ -1,0 +1,132 @@
+{
+  "quest0001": {
+    "phrases": {
+      "1"   : {"text": ["Hi mister."]},
+      "2"   : {"text": ["I need 3 herbs for my mommy. She's ill."]},
+      "3"   : {"text": ["Can you please help me find some?"]},
+      "4"   : {"text": ["I also need 5 gemstones because the developer programmed me to ask that."]},
+      "5"   : {
+        "text"   : ["Please help me mister!", "We're in desperate need."],
+        "choices": [
+          {"text": "Yes, of course!", "conversationCommand": "ACCEPT_QUEST"},
+          {"text": "No, you'll have to dop your own beans.", "conversationCommand": "KNOW_QUEST", "destinationId": "6"}
+        ]
+      },
+      "6"   : {
+        "text"   : ["Aaaw... Booohooo! *SNIF*"],
+        "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]
+      },
+      "101" : {
+        "text": ["Hi mister."]
+      },
+      "102" : {
+        "text"   : ["If you got the herbs and gemstones, please give them to me."],
+        "choices": [
+          {"text": "Here you are, brave boy.", "conversationCommand": "RETURN_QUEST"},
+          {"text": "No, these are my herbs!", "destinationId": "103"}
+        ]
+      },
+      "103" : {
+        "text"   : ["Aaaw... Booohooo! *SNIF*"],
+        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "101"}]
+      },
+      "1000": {
+        "text"   : ["Thank you mister!"],
+        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "101"}]
+      },
+      "2000": {
+        "text"   : ["As a matter of fact, I've already got your herbs and gemstones."],
+        "choices": [
+          {"text": "Here you are, brave boy.", "conversationCommand": "RETURN_QUEST"},
+          {"text": "But these are my mine. So... No.", "destinationId": "103"}
+        ]
+      },
+      "2100": {
+        "text": ["Thanks a lot mister!", "Now my mommy will be better soon."]
+      },
+      "2101": {
+        "text"   : ["Instead of the herbs and gemstones, I found this here in the forest.", "You can have it, for helping my mommy."],
+        "choices": [{"conversationCommand": "REWARD_QUEST"}]
+      },
+      "2200": {
+        "text"   : ["No mister I'm sorry, but this is not enough."],
+        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "101"}]
+      },
+      "2300": {
+        "text"   : ["Hi mister. It seems my mommy is all better now. Thanks to you!", "But you still didn't receive what I found that I wanted you to give."],
+        "choices": [{"conversationCommand": "REWARD_QUEST", "destinationId": "2300"}]
+      },
+      "2400": {
+        "text"   : ["Hi mister. It seems my mommy is all better now. Thanks to you!"],
+        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "2400"}]
+      }
+    }
+  },
+  "quest0003": {
+    "phrases": {
+      "1"   : {"text": ["I've heard that there's a secret chamber in town."]},
+      "2"   : {"text": ["It's supposed to be hidden in a basement behind a portal."]},
+      "3"   : {"text": ["For real? A portal? I can hardly believe it."]},
+      "4"   : {
+        "text"   : ["Would you be so kind to take a look?"],
+        "choices": [
+          {"text": "Yes of course! You've raised my curiosity.", "conversationCommand": "ACCEPT_QUEST"},
+          {"text": "No way! Portals don't exist.", "conversationCommand": "KNOW_QUEST", "destinationId": "6"}
+        ]
+      },
+      "6"   : {
+        "text"   : ["I guess I'll have to take a look myself then."],
+        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "7"}]
+      },
+      "7"   : {
+        "text"   : ["Have you changed you mind?"],
+        "choices": [{"destinationId": "1"}]
+      },
+      "101" : {
+        "text"   : ["And? And? Have you found it?"],
+        "choices": [
+          {"text": "Yes! Portals exist! Unbelievable!", "conversationCommand": "RETURN_QUEST"},
+          {"text": "No, give up your believe!", "destinationId": "102"}
+        ]
+      },
+      "102" : {
+        "text"   : ["I'm sorry, I can't."],
+        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "101"}]
+      },
+      "103" : {
+        "text"   : [". . . ."],
+        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "101"}]
+      },
+      "1000": {
+        "text"   : ["You are to kind, thank you."],
+        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "101"}]
+      },
+      "2000": {
+        "text"   : ["(You've already been there. Tell her?)"],
+        "choices": [
+          {"text": "Yes of course! She has to believe.", "conversationCommand": "RETURN_QUEST"},
+          {"text": "No, she is stupid.", "destinationId": "103"}
+        ]
+      },
+      "2100": {"text": ["I can see it in your eyes! You have been there!"]},
+      "2101": {"text": ["You have seen the statue of Legend!", "That's unreal!"]},
+      "2102": {"text": ["Thank you! Thank you!", "I can't thank you enough."]},
+      "2103": {
+        "text"   : ["My believes have been restored.", "Here, this is for you."],
+        "choices": [{"conversationCommand": "REWARD_QUEST"}]
+      },
+      "2200": {
+        "text"   : ["You're lying. I can see it in your eyes.", "You haven't seen the statue of Legend."],
+        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "101"}]
+      },
+      "2300": {
+        "text"   : ["So the legends are true. But you still didn't receive what I wanted you to give."],
+        "choices": [{"conversationCommand": "REWARD_QUEST", "destinationId": "2300"}]
+      },
+      "2400": {
+        "text"   : ["So the legends are true."],
+        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "2400"}]
+      }
+    }
+  }
+}

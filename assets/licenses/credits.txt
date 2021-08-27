@@ -1,0 +1,66 @@
+CREDITS
+Adan Chronicles
+Crystal of Time
+
+---
+
+GAME DESIGN
+Thomas M. Hesselink
+
+PROGRAMMING
+Thomas M. Hesselink
+
+MUSIC SELECTION
+Machteld Hesselink
+Thomas M. Hesselink
+
+TESTING
+Martijn Hazendonk
+Daniel Rosenkranz
+Machteld Hesselink
+Sieger Noppe
+
+---
+
+Graphics Copyright Notice
+
+"Titlescreen"
+by N. van der Stoep
+
+
+"Titlelogo"
+by F. Stellingwerf
+
+
+"Painterly Spell Icons"
+by J.W. Bjerk (eleazzaar)
+www.jwbjerk.com/art
+
+---
+
+Music Copyright Notice
+
+"Brave"
+"Cave"
+"Den"
+"Journey"
+"Quiet town"
+"Remains"
+"Store"
+"Town"
+"Volcano"
+"Wake up"
+"Wayfarer"
+"Woods"
+by Yusaku Kishigami
+www.presence-of-music.com
+
+
+Some of the sounds in this project were created
+by David McKee (ViRiX)
+www.soundcloud.com/virix
+
+---
+
+COPYRIGHT
+T64.nl

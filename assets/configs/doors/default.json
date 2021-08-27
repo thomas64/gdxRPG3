@@ -1,0 +1,9 @@
+{
+  "door_simple_left" : {"type": "SMALL", "spriteId": "simple_left"},
+  "door_simple_left1": {"type": "SMALL", "spriteId": "simple_left"},
+  "door_simple_left2": {"type": "SMALL", "spriteId": "simple_left"},
+  "door_simple_left3": {"type": "SMALL", "spriteId": "simple_left"},
+  "door_simple_left4": {"type": "SMALL", "spriteId": "simple_left"},
+  "door_forged_left" : {"type": "SMALL", "spriteId": "forged_left"},
+  "door_large_round" : {"type": "LARGE", "spriteId": "large_round"}
+}

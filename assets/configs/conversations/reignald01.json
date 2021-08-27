@@ -1,0 +1,71 @@
+{
+  "reignald01"      : {
+    "phrases": {
+      "1"   : {"text": ["Squire!"]},
+      "2"   : {"text": ["Look at me when I'm yelling at you!"]},
+      "3"   : {"text": ["Squire!"]},
+      "4"   : {"text": ["If it wasn't for me you wouldn't be standing here before me now! You cannot let yourself get killed again!"]},
+      "5"   : {
+        "text"   : ["If you go along without me, you'll probably end up dead! So I will join you now!"],
+        "choices": [
+          {"text": "Sir! Yes sir!", "destinationId": "6"},
+          {"text": "Uhh, look at the time. I need to go. Bye!", "destinationId": "7"}
+        ]
+      },
+      "6"   : {
+        "text"   : ["Excellent!"],
+        "choices": [{"conversationCommand": "HERO_JOIN", "destinationId": "301"}]
+      },
+      "7"   : {
+        "text"   : ["Squire! Come back here!"],
+        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "101"}]
+      },
+      "101" : {
+        "text": ["Squire!"]
+      },
+      "102" : {
+        "text"   : ["Don't you dare to run away from me again!", "I will join you now!"],
+        "choices": [
+          {"text": "Sir! Yes sir!", "destinationId": "6"},
+          {"text": "Well... Whoa! Look over there, what's that?!", "destinationId": "7"}
+        ]
+      },
+      "201" : {
+        "text": ["Squire!"]
+      },
+      "202" : {
+        "text"   : ["You tell me you have made room in your party!", "I will join you now!"],
+        "choices": [
+          {"text": "Sir! Yes sir!", "destinationId": "6"},
+          {"text": "Well... Whoa! Look over there, what's that?!", "destinationId": "7"}
+        ]
+      },
+      "9000": {
+        "text"   : ["It seems your party is already full.", "I cannot join you if there's no room."],
+        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "201"}]
+      }
+    }
+  },
+  "dismiss_reignald": {
+    "phrases": {
+      "1": {
+        "text"   : ["Hero specific text.", "Do you want me to leave your party?"],
+        "choices": [
+          {"text": "Yes, you may leave.", "conversationCommand": "HERO_DISMISS"},
+          {"text": "No, I want you to stay.", "conversationCommand": "EXIT_CONVERSATION"}
+        ]
+      }
+    }
+  },
+  "bury_reignald"   : {
+    "phrases": {
+      "1": {
+        "text"   : ["Hero specific text.", "All his equipment will also be gone once you bury him."],
+        "choices": [
+          {"text": "Yes, the funeral may continue.", "conversationCommand": "HERO_DISMISS"},
+          {"text": "No, I need to take precautions first.", "conversationCommand": "EXIT_CONVERSATION"}
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "armorshop01" : {
+    "phrases": {
+      "1": {
+        "text"   : ["Hello Traveler. Would you like to see my wares?"],
+        "choices": [
+          {"text": "Yes", "conversationCommand": "LOAD_SHOP"},
+          {"text": "No", "conversationCommand": "EXIT_CONVERSATION"}
+        ]
+      }
+    }
+  },
+  "weaponshop01": {
+    "phrases": {
+      "1": {
+        "text"   : ["Hello Traveler. Would you like to see my wares?"],
+        "choices": [
+          {"text": "Yes", "conversationCommand": "LOAD_SHOP"},
+          {"text": "No", "conversationCommand": "EXIT_CONVERSATION"}
+        ]
+      }
+    }
+  },
+  "epicshop01"  : {
+    "phrases": {
+      "1": {
+        "text"   : ["Hello Traveler. Would you like to see my epic wares?"],
+        "choices": [
+          {"text": "Yes", "conversationCommand": "LOAD_SHOP"},
+          {"text": "No", "conversationCommand": "EXIT_CONVERSATION"}
+        ]
+      }
+    }
+  }
+}

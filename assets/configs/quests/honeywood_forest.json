@@ -1,0 +1,42 @@
+{
+  "quest_intro"     : {
+    "title"   : "Remove the fallen tree",
+    "entityId": "girl01",
+    "summary" : "It will be removed once Grace is 'found'.",
+    "isHidden": true,
+    "tasks"   : {
+      "1": {
+        "taskPhrase": "Find Grace",
+        "type"      : "DISCOVER"
+      }
+    }
+  },
+  "quest_orc_guards": {
+    "title"   : "Get past the 2 Orc guards",
+    "entityId": "orc_sergeant",
+    "summary" : "2 Orc guards won't let you through unless you show something.",
+    "isHidden": true,
+    "tasks"   : {
+      "1": {
+        "taskPhrase": "Find that something.",
+        "type"      : "SHOW_ITEM",
+        "target"    : {"mask_of_ardor": 1},
+        "isOptional": true
+      },
+      "2": {
+        "taskPhrase": "Bluff your way through (Diplomat 2).",
+        "type"      : "NONE",
+        "isOptional": true
+      },
+      "3": {
+        "taskPhrase": "Kill the guards.",
+        "type"      : "NONE",
+        "isOptional": true
+      },
+      "4": {
+        "taskPhrase": "Show it to the guards.",
+        "type"      : "RETURN"
+      }
+    }
+  }
+}

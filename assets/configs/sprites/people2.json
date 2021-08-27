@@ -1,0 +1,6 @@
+{
+  "priest01": {"source": "people2", "col": 2, "row": 1},
+  "fairy01": {"source": "nature1", "col": 1, "row": 2},
+  "soldier01": {"source": "people3", "col": 4, "row": 2},
+  "duke01": {"source": "people3", "col": 1, "row": 2}
+}

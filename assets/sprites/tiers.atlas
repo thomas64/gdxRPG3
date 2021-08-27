@@ -1,0 +1,55 @@
+
+tiers.png
+size: 186,186
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+basic
+  rotate: false
+  xy: 0, 0
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+epic
+  rotate: false
+  xy: 62, 0
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+legendary
+  rotate: false
+  xy: 124, 0
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+masterwork
+  rotate: false
+  xy: 0, 62
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+nothing
+  rotate: false
+  xy: 62, 62
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+fine
+  rotate: false
+  xy: 124, 62
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+specialist
+  rotate: false
+  xy: 0, 124
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1

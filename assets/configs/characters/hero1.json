@@ -1,0 +1,489 @@
+{
+  "mozes"   : {
+    "name"     : "Mozes",
+    "school"   : "UNKNOWN",
+    "stats"    : {
+      "level"       : 1,
+      "intelligence": 18,
+      "willpower"   : 12,
+      "dexterity"   : 15,
+      "agility"     : 15,
+      "endurance"   : 15,
+      "strength"    : 15,
+      "stamina"     : 30
+    },
+    "skills"   : {
+      "stealth"   : 1,
+      "troubadour": 1,
+      "warrior"   : 3,
+      "wizard"    : 1,
+      "hafted"    : 1,
+      "missile"   : 3,
+      "shield"    : 3,
+      "sword"     : 3
+    },
+    "spells"   : {
+    },
+    "inventory": {
+      "weapon": "basic_shortsword",
+      "shield": "basic_light_shield",
+      "chest" : "basic_medium_chest"
+    }
+  },
+  "luana"   : {
+    "name"     : "Luana",
+    "school"   : "ELEMENTAL",
+    "stats"    : {
+      "level"       : 1,
+      "intelligence": 14,
+      "willpower"   : 10,
+      "dexterity"   : 22,
+      "agility"     : 20,
+      "endurance"   : 10,
+      "strength"    : 8,
+      "stamina"     : 20
+    },
+    "skills"   : {
+      "mechanic": 1,
+      "stealth" : 3,
+      "thief"   : 3,
+      "hafted"  : -1,
+      "missile" : -1,
+      "shield"  : -1,
+      "sword"   : 1,
+      "thrown"  : 2
+    },
+    "spells"   : {
+    },
+    "inventory": {
+      "weapon": "basic_dart",
+      "chest" : "basic_light_chest"
+    }
+  },
+  "reignald": {
+    "name"     : "Reignald",
+    "school"   : "NONE",
+    "stats"    : {
+      "level"       : 8,
+      "intelligence": 10,
+      "willpower"   : 8,
+      "dexterity"   : 25,
+      "agility"     : 10,
+      "endurance"   : 20,
+      "strength"    : 20,
+      "stamina"     : 40
+    },
+    "skills"   : {
+      "alchemist": -1,
+      "stealth"  : 1,
+      "thief"    : -1,
+      "warrior"  : 4,
+      "wizard"   : -1,
+      "missile"  : -1,
+      "shield"   : 2,
+      "sword"    : 4,
+      "thrown"   : 2
+    },
+    "spells"   : {
+    },
+    "inventory": {
+      "weapon": "fine_shortsword",
+      "shield": "fine_light_shield",
+      "chest" : "fine_medium_chest"
+    }
+  },
+  "ryiah"   : {
+    "name"     : "Ryiah",
+    "school"   : "NAMING",
+    "stats"    : {
+      "level"       : 3,
+      "intelligence": 22,
+      "willpower"   : 16,
+      "dexterity"   : 20,
+      "agility"     : 15,
+      "endurance"   : 16,
+      "strength"    : 10,
+      "stamina"     : 31
+    },
+    "skills"   : {
+      "loremaster": 1,
+      "merchant"  : 1,
+      "wizard"    : 4,
+      "missile"   : -1,
+      "pole"      : 3,
+      "sword"     : 3,
+      "thrown"    : -1
+    },
+    "spells"   : {
+      "vs_necromancy": 1,
+      "endurance"    : 4,
+      "sense_aura"   : 1,
+      "weakness"     : 4
+    },
+    "inventory": {
+      "weapon": "basic_staff",
+      "chest" : "basic_light_chest"
+    }
+  },
+  "valter"  : {
+    "name"     : "Valter",
+    "school"   : "ELEMENTAL",
+    "stats"    : {
+      "level"       : 2,
+      "intelligence": 22,
+      "willpower"   : 18,
+      "dexterity"   : 15,
+      "agility"     : 12,
+      "endurance"   : 15,
+      "strength"    : 10,
+      "stamina"     : 20
+    },
+    "skills"   : {
+      "alchemist" : 3,
+      "loremaster": 2,
+      "mechanic"  : 2,
+      "wizard"    : 2,
+      "hafted"    : -1,
+      "missile"   : -1,
+      "shield"    : -1,
+      "sword"     : 1,
+      "thrown"    : 1
+    },
+    "spells"   : {
+      "dragon_flames": 2
+    },
+    "inventory": {
+      "weapon": "basic_dart",
+      "chest" : "basic_light_chest"
+    }
+  },
+  "galen"   : {
+    "name"     : "Galen",
+    "school"   : "NONE",
+    "stats"    : {
+      "level"       : 4,
+      "intelligence": 15,
+      "willpower"   : 15,
+      "dexterity"   : 18,
+      "agility"     : 10,
+      "endurance"   : 20,
+      "strength"    : 25,
+      "stamina"     : 40
+    },
+    "skills"   : {
+      "alchemist": -1,
+      "ranger"   : 4,
+      "stealth"  : 3,
+      "warrior"  : 5,
+      "wizard"   : -1,
+      "hafted"   : 5,
+      "missile"  : 3,
+      "shield"   : 3,
+      "sword"    : -1,
+      "thrown"   : -1
+    },
+    "spells"   : {
+    },
+    "inventory": {
+      "weapon": "basic_axe",
+      "shield": "basic_medium_shield",
+      "chest" : "basic_medium_chest"
+    }
+  },
+  "jaspar"  : {
+    "name"     : "Jaspar",
+    "school"   : "NONE",
+    "stats"    : {
+      "level"       : 12,
+      "intelligence": 6,
+      "willpower"   : 11,
+      "dexterity"   : 14,
+      "agility"     : 8,
+      "endurance"   : 30,
+      "strength"    : 30,
+      "stamina"     : 60
+    },
+    "skills"   : {
+      "alchemist" : -1,
+      "loremaster": -1,
+      "stealth"   : 1,
+      "thief"     : -1,
+      "troubadour": -1,
+      "warrior"   : 6,
+      "wizard"    : -1,
+      "missile"   : -1,
+      "pole"      : 6,
+      "shield"    : 4,
+      "sword"     : 6,
+      "thrown"    : -1
+    },
+    "spells"   : {
+    },
+    "inventory": {
+      "weapon": "basic_lance",
+      "shield": "basic_heavy_shield",
+      "chest" : "basic_heavy_chest"
+    }
+  },
+  "kiara"   : {
+    "name"     : "Kiara",
+    "school"   : "ELEMENTAL",
+    "stats"    : {
+      "level"       : 12,
+      "intelligence": 15,
+      "willpower"   : 10,
+      "dexterity"   : 30,
+      "agility"     : 26,
+      "endurance"   : 20,
+      "strength"    : 15,
+      "stamina"     : 40
+    },
+    "skills"   : {
+      "healer"  : 1,
+      "merchant": 4,
+      "stealth" : 5,
+      "thief"   : 8,
+      "wizard"  : 4,
+      "hafted"  : -1,
+      "missile" : 7,
+      "pole"    : 2,
+      "shield"  : -1,
+      "sword"   : 7,
+      "thrown"  : -1
+    },
+    "spells"   : {
+      "vs_elemental" : 2,
+      "remove_poison": 3,
+      "wind"         : 3
+    },
+    "inventory": {
+      "weapon": "fine_dagger",
+      "chest" : "fine_light_chest"
+    }
+  },
+  "luthais" : {
+    "name"     : "Luthais",
+    "school"   : "ELEMENTAL",
+    "stats"    : {
+      "level"       : 20,
+      "intelligence": 30,
+      "willpower"   : 30,
+      "dexterity"   : 20,
+      "agility"     : 12,
+      "endurance"   : 18,
+      "strength"    : 8,
+      "stamina"     : 50
+    },
+    "skills"   : {
+      "alchemist" : 7,
+      "healer"    : 8,
+      "loremaster": 9,
+      "mechanic"  : 6,
+      "stealth"   : 5,
+      "wizard"    : 10,
+      "missile"   : -1,
+      "pole"      : 8,
+      "shield"    : -1,
+      "thrown"    : 8
+    },
+    "spells"   : {
+      "vs_star"          : 8,
+      "vs_necromancy"    : 10,
+      "fireball"         : 8,
+      "mirror"           : 8,
+      "dispel_necromancy": 10
+    },
+    "inventory": {
+      "weapon": "epic_staff",
+      "chest" : "specialist_light_chest"
+    }
+  },
+  "elias"   : {
+    "name"     : "Elias",
+    "school"   : "NAMING",
+    "stats"    : {
+      "level"       : 18,
+      "intelligence": 30,
+      "willpower"   : 30,
+      "dexterity"   : 25,
+      "agility"     : 18,
+      "endurance"   : 30,
+      "strength"    : 20,
+      "stamina"     : 60
+    },
+    "skills"   : {
+      "diplomat": 8,
+      "warrior" : 7,
+      "wizard"  : 7,
+      "hafted"  : 5,
+      "missile" : -1,
+      "pole"    : 5,
+      "shield"  : -1,
+      "sword"   : 7,
+      "thrown"  : -1
+    },
+    "spells"   : {
+      "vs_star"      : 7,
+      "banishing"    : 7,
+      "sense_aura"   : 7,
+      "teleportation": 7
+    },
+    "inventory": {
+      "weapon": "fine_longsword",
+      "chest" : "fine_medium_chest"
+    }
+  },
+  "onarr"   : {
+    "name"     : "Onarr",
+    "school"   : "NONE",
+    "stats"    : {
+      "level"       : 18,
+      "intelligence": 30,
+      "willpower"   : 25,
+      "dexterity"   : 23,
+      "agility"     : 15,
+      "endurance"   : 30,
+      "strength"    : 25,
+      "stamina"     : 60
+    },
+    "skills"   : {
+      "alchemist" : -1,
+      "healer"    : 4,
+      "loremaster": 6,
+      "troubadour": 7,
+      "warrior"   : 9,
+      "wizard"    : -1,
+      "hafted"    : 8,
+      "missile"   : -1,
+      "pole"      : 8,
+      "shield"    : 9,
+      "sword"     : 5,
+      "thrown"    : 8
+    },
+    "spells"   : {
+    },
+    "inventory": {
+      "weapon": "fine_morningstar",
+      "shield": "fine_medium_shield",
+      "chest" : "fine_heavy_chest"
+    }
+  },
+  "duilio"  : {
+    "name"     : "Duilio",
+    "school"   : "ELEMENTAL",
+    "stats"    : {
+      "level"       : 22,
+      "intelligence": 25,
+      "willpower"   : 25,
+      "dexterity"   : 30,
+      "agility"     : 20,
+      "endurance"   : 25,
+      "strength"    : 25,
+      "stamina"     : 75
+    },
+    "skills"   : {
+      "alchemist" : 5,
+      "diplomat"  : 10,
+      "loremaster": 5,
+      "merchant"  : 5,
+      "ranger"    : 5,
+      "stealth"   : 5,
+      "thief"     : 5,
+      "troubadour": 10,
+      "warrior"   : 10,
+      "wizard"    : 10,
+      "hafted"    : 10,
+      "missile"   : -1,
+      "pole"      : 10,
+      "shield"    : 10,
+      "sword"     : 10,
+      "thrown"    : 10
+    },
+    "spells"   : {
+      "fireball"    : 6,
+      "air_shield"  : 9,
+      "strength"    : 9,
+      "debilitation": 9,
+      "mirror"      : 9
+    },
+    "inventory": {
+      "weapon": "specialist_shortsword",
+      "shield": "specialist_light_shield",
+      "chest" : "specialist_medium_chest"
+    }
+  },
+  "iellwen" : {
+    "name"     : "Iellwen",
+    "school"   : "STAR",
+    "stats"    : {
+      "level"       : 20,
+      "intelligence": 35,
+      "willpower"   : 25,
+      "dexterity"   : 30,
+      "agility"     : 25,
+      "endurance"   : 30,
+      "strength"    : 20,
+      "stamina"     : 60
+    },
+    "skills"   : {
+      "healer" : 10,
+      "ranger" : 6,
+      "stealth": 6,
+      "warrior": 10,
+      "wizard" : 8,
+      "hafted" : 5,
+      "missile": 7,
+      "shield" : -1,
+      "sword"  : 10,
+      "thrown" : -1
+    },
+    "spells"   : {
+      "web_of_starlight": 8,
+      "dispel_star"     : 8,
+      "stellar_gravity" : 8,
+      "dispel_naming"   : 8,
+      "solar_wrath"     : 8
+    },
+    "inventory": {
+      "weapon": "specialist_shortsword",
+      "chest" : "specialist_medium_chest"
+    }
+  },
+  "faeron"  : {
+    "name"     : "Faeron",
+    "school"   : "NAMING",
+    "stats"    : {
+      "level"       : 25,
+      "intelligence": 30,
+      "willpower"   : 30,
+      "dexterity"   : 30,
+      "agility"     : 30,
+      "endurance"   : 25,
+      "strength"    : 15,
+      "stamina"     : 80
+    },
+    "skills"   : {
+      "alchemist" : 10,
+      "diplomat"  : 10,
+      "loremaster": 10,
+      "merchant"  : 10,
+      "ranger"    : 10,
+      "stealth"   : 10,
+      "thief"     : 10,
+      "troubadour": 10,
+      "warrior"   : 10,
+      "wizard"    : -1,
+      "hafted"    : 10,
+      "missile"   : -1,
+      "pole"      : -1,
+      "sword"     : 10,
+      "thrown"    : -1
+    },
+    "spells"   : {
+    },
+    "inventory": {
+      "weapon": "epic_mace",
+      "chest" : "masterwork_light_chest"
+    }
+  }
+}

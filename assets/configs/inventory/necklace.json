@@ -1,0 +1,30 @@
+{
+  "basic_silver_necklace": {
+    "name" : "Silver Necklace",
+    "group": "NECKLACE",
+    "sort" : 60100,
+    "price": 5
+  },
+  "basic_gold_necklace"  : {
+    "name" : "Gold Necklace",
+    "group": "NECKLACE",
+    "sort" : 60100,
+    "price": 10
+  },
+  "epic_mage_amulet"     : {
+    "name"            : "Mage Amulet",
+    "group"           : "NECKLACE",
+    "sort"            : 61000,
+    "price"           : 50,
+    "min_intelligence": 26,
+    "spell_battery"   : 20
+  },
+  "epic_shield_amulet"   : {
+    "name"         : "Shield Amulet",
+    "group"        : "NECKLACE",
+    "sort"         : 61000,
+    "price"        : 50,
+    "min_willpower": 22,
+    "protection"   : 10
+  }
+}

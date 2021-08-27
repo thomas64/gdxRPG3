@@ -1,0 +1,26 @@
+{
+  "note_bed01"         : {
+    "phrases": {
+      "1": {
+        "text"   : ["What are you thinking?", "You've got no time to sleep."],
+        "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]
+      }
+    }
+  },
+  "note_resource_shop" : {
+    "phrases": {
+      "1": {
+        "text"   : ["Resource Shop"],
+        "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]
+      }
+    }
+  },
+  "note_equipment_shop": {
+    "phrases": {
+      "1": {
+        "text"   : ["Equipment Shop"],
+        "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]
+      }
+    }
+  }
+}

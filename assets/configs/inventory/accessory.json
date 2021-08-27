@@ -1,0 +1,85 @@
+{
+  "grace_ribbon"           : {
+    "name"    : "Grace's Ribbon",
+    "group"   : "ACCESSORY",
+    "sort"    : 61000,
+    "price"   : 1,
+    "weight"  : 0,
+    "diplomat": 1,
+    "stealth" : -1
+  },
+  "epic_rope"              : {
+    "name"         : "Rope",
+    "group"        : "ACCESSORY",
+    "sort"         : 61000,
+    "price"        : 50,
+    "weight"       : 1,
+    "min_dexterity": 21,
+    "thief"        : 2
+  },
+  "epic_smiths_hammer"     : {
+    "name"        : "Smith's Hammer",
+    "group"       : "ACCESSORY",
+    "sort"        : 61000,
+    "price"       : 50,
+    "weight"      : 1,
+    "min_strength": 23,
+    "mechanic"    : 2
+  },
+  "epic_chemset"           : {
+    "name"            : "Chemset",
+    "group"           : "ACCESSORY",
+    "sort"            : 61000,
+    "price"           : 50,
+    "weight"          : 1,
+    "min_intelligence": 22,
+    "alchemist"       : 2
+  },
+  "epic_medkit"            : {
+    "name"            : "Medkit",
+    "group"           : "ACCESSORY",
+    "sort"            : 61000,
+    "price"           : 50,
+    "weight"          : 1,
+    "min_intelligence": 20,
+    "healer"          : 2
+  },
+  "epic_harp_of_igone"     : {
+    "name"            : "Harp of Igone",
+    "group"           : "ACCESSORY",
+    "sort"            : 61000,
+    "price"           : 50,
+    "weight"          : 1,
+    "min_intelligence": 20,
+    "troubadour"      : 3
+  },
+  "legendary_horn_of_kynon": {
+    "name"            : "Horn of Kynon",
+    "group"           : "ACCESSORY",
+    "sort"            : 62000,
+    "price"           : 50,
+    "weight"          : 1,
+    "min_intelligence": 24,
+    "troubadour"      : 6
+  },
+  "legendary_spellbook"    : {
+    "name"            : "Spellbook",
+    "group"           : "ACCESSORY",
+    "sort"            : 62000,
+    "price"           : 50,
+    "weight"          : 1,
+    "min_intelligence": 28,
+    "min_willpower"   : 26,
+    "spell_boost"     : true,
+    "description"     : ["All spells increases by 1."]
+  },
+  "epic_wizard_wand"       : {
+    "name"            : "Wizard Wand",
+    "group"           : "ACCESSORY",
+    "sort"            : 61000,
+    "price"           : 50,
+    "weight"          : 1,
+    "min_intelligence": 27,
+    "wizard"          : 2
+  }
+}

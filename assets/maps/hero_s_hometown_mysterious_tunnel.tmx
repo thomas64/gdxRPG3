@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="22" height="18" tilewidth="24" tileheight="24" infinite="0" nextlayerid="23" nextobjectid="53">
+ <properties>
+  <property name="bgm" value="bgm_mysterious_tunnel"/>
+  <property name="lightmap_player" value="light_player"/>
+  <property name="step_sound" value="stone"/>
+ </properties>
+ <tileset firstgid="1" name="hero_s_hometown_mysterious_tunnel" tilewidth="24" tileheight="24" tilecount="527" columns="31">
+  <image source="tilesets/hero_s_hometown_mysterious_tunnel.png" width="744" height="408"/>
+ </tileset>
+ <tileset firstgid="528" source="tilesets/fsm_inside01_e.tsx"/>
+ <tileset firstgid="1552" source="tilesets/fsm_flame02.tsx"/>
+ <layer id="15" name="under0_none" width="22" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMAoIAwAGMAAB
+  </data>
+ </layer>
+ <layer id="1" name="under1_ground" width="22" height="18">
+  <data encoding="base64" compression="zlib">
+   eJzVkmdSAjEcRxOQ7oxewUuo39QRUIoK3kfHShGxnsMb2AUpFkCvY3uZ3R1CWBj54Ad35u0vjT8vyUohhPwjghCH2C8yN0LdEMzBvJ0V8DIxBj7ZHVeZH6FuGHweIfywxUBVm/PzWpDd+egI+1G+izQeYVulNhfgdaHNv4hef5XHsAQtYz/KN0rjAXagRr8OJXX29EOyO1+RlrfjP82aE1iGNhQM3xiNSdiFVfoN9X+yP6u2dw0C1J1h/BQS0HHxjdNowR6s0b8l72R/3tvedQhSd5a1Z5CENxffBI027EOG/ge5ASW41Hwn7H011PlQNwznzKXgfYBvBw4gS/+T9PCbQ/JK8y0La19NeIJndZeQZnxlgK/uuQle6pbJKc07r+3LyVftXkzfpIunmcq7AEV7Xypzxr2Yvilpnd+X5mmm462fu+6fcfFN2+f3rQaoIz2DvQf5Zw3fiDpz2fudDvN28tr4vtehqNUdF9YT0e7d8T4akjfa+qZdw6n5354fxS11Zg==
+  </data>
+ </layer>
+ <layer id="16" name="under2_none" width="22" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMAoIAwAGMAAB
+  </data>
+ </layer>
+ <layer id="17" name="under3_none" width="22" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMAoIAwAGMAAB
+  </data>
+ </layer>
+ <layer id="18" name="under4_none" width="22" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMAoIAwAGMAAB
+  </data>
+ </layer>
+ <layer id="19" name="under5_none" width="22" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMAoIAwAGMAAB
+  </data>
+ </layer>
+ <layer id="20" name="over6_objects" width="22" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxjYBiaoIaNgaGWjXx5XGAKUM9UPPoIyY+CgQF3aBQnX0bjekgCKVbKzbDBYoYfIwODNQVmg8wMRuIzQrE/kOAB4n4gnkAGfRpoRgiSeciYlxG7ODGYD40PAIYrEWs=
+  </data>
+ </layer>
+ <layer id="21" name="over7_none" width="22" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMAoIAwAGMAAB
+  </data>
+ </layer>
+ <layer id="22" name="over8_none" width="22" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMAoIAwAGMAAB
+  </data>
+ </layer>
+ <objectgroup color="#0055ff" id="5" name="sound">
+  <object id="52" name="wood" x="336" y="144" width="24" height="96"/>
+ </objectgroup>
+ <objectgroup color="#aa0000" id="4" name="collision">
+  <object id="1" x="0" y="0" width="48" height="432"/>
+  <object id="2" x="48" y="0" width="72" height="144"/>
+  <object id="3" x="216" y="0" width="312" height="144"/>
+  <object id="4" x="48" y="408" width="480" height="24"/>
+  <object id="5" x="480" y="144" width="48" height="264"/>
+  <object id="7" x="288" y="144" width="48" height="48"/>
+  <object id="8" x="48" y="384" width="24" height="24"/>
+  <object id="9" x="456" y="384" width="24" height="24"/>
+  <object id="10" x="120" y="0" width="96" height="120"/>
+  <object id="26" x="336" y="228" width="144" height="12"/>
+  <object id="30" x="342" y="222" width="138" height="6"/>
+  <object id="31" x="348" y="216" width="132" height="6"/>
+  <object id="32" x="354" y="210" width="126" height="6"/>
+ </objectgroup>
+ <objectgroup color="#5500ff" id="7" name="rest"/>
+ <objectgroup color="#aa55ff" id="12" name="hero"/>
+ <objectgroup color="#55ff7f" id="13" name="npc"/>
+ <objectgroup color="#55aaff" id="3" name="spawn">
+  <object id="18" name="hero_s_hometown_chief_s_house_b2" x="312" y="192" width="48" height="18"/>
+  <object id="21" name="hero_s_hometown_mysterious_tunnel_b1_1" x="144" y="144" width="48" height="24"/>
+  <object id="23" name="hero_s_hometown_mysterious_tunnel" x="144" y="264" width="48" height="24">
+   <properties>
+    <property name="direction" value="north"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup color="#ffff7f" id="2" name="portal">
+  <object id="19" name="hero_s_hometown_chief_s_house_b2" x="360" y="144" width="24" height="66"/>
+  <object id="20" name="hero_s_hometown_mysterious_tunnel_b1_1" x="120" y="120" width="96" height="24"/>
+ </objectgroup>
+ <objectgroup color="#ffaa7f" id="14" name="warp"/>
+ <objectgroup color="#ffaa7f" id="11" name="save">
+  <object id="22" x="288" y="144" width="48" height="48"/>
+ </objectgroup>
+ <objectgroup id="9" name="lower_texture"/>
+ <objectgroup id="10" name="upper_texture"/>
+ <objectgroup color="#ffff00" id="8" name="quest"/>
+ <objectgroup color="#ffffff" id="6" name="lights">
+  <object id="14" x="66" y="78" width="12" height="12"/>
+  <object id="15" x="258" y="78" width="12" height="12"/>
+  <object id="16" x="48" y="222" width="12" height="12"/>
+ </objectgroup>
+</map>

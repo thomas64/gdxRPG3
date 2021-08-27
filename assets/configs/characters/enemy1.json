@@ -1,0 +1,154 @@
+{
+  "green_slime"                 : {
+    "name"     : "Green Slime",
+    "school"   : "NONE",
+    "xp"       : 2,
+    "drops"    : {"green_jelly": 25},
+    "stats"    : {
+      "level"       : 1,
+      "intelligence": 10,
+      "willpower"   : 7,
+      "dexterity"   : 15,
+      "agility"     : 10,
+      "endurance"   : 10,
+      "strength"    : 8,
+      "stamina"     : 20
+    },
+    "skills"   : {
+      "stealth": 10,
+      "sword"  : 1,
+      "bite"   : 4
+    },
+    "spells"   : {
+    },
+    "inventory": {
+      "weapon": "slime_slam",
+      "chest": "armor_3"
+    }
+  },
+  "blue_bat"                    : {
+    "name"     : "Blue Bat",
+    "school"   : "NONE",
+    "xp"       : 1,
+    "drops"    : {"leather": 25},
+    "stats"    : {
+      "level"       : 2,
+      "intelligence": 5,
+      "willpower"   : 7,
+      "dexterity"   : 13,
+      "agility"     : 15,
+      "endurance"   : 5,
+      "strength"    : 8,
+      "stamina"     : 10
+    },
+    "skills"   : {
+      "stealth": 2,
+      "wizard" : 3,
+      "bite"   : 3
+    },
+    "spells"   : {
+    },
+    "inventory": {
+      "weapon": "bat_bite",
+      "chest" : "armor_2"
+    }
+  },
+  "orc_scout_with_mask_of_ardor": {
+    "name"     : "Orc Scout",
+    "school"   : "NONE",
+    "xp"       : 2,
+    "drops"    : {"mask_of_ardor": 100},
+    "stats"    : {
+      "level"       : 1,
+      "intelligence": 9,
+      "willpower"   : 9,
+      "dexterity"   : 15,
+      "agility"     : 16,
+      "endurance"   : 14,
+      "strength"    : 12,
+      "stamina"     : 28
+    },
+    "skills"   : {
+      "ranger" : 2,
+      "stealth": 2,
+      "warrior": 8,
+      "wizard" : 3,
+      "hafted" : 1,
+      "missile": 7,
+      "shield" : 3,
+      "sword"  : 2
+    },
+    "spells"   : {
+    },
+    "inventory": {
+      "weapon": "basic_dagger",
+      "shield": "basic_light_shield",
+      "chest" : "armor_2"
+    }
+  },
+  "orc_scout"                   : {
+    "name"     : "Orc Scout",
+    "school"   : "NONE",
+    "xp"       : 2,
+    "drops"    : {"basic_dagger": 20, "basic_light_shield": 20, "healing_potion": 5, "gold": 50},
+    "stats"    : {
+      "level"       : 1,
+      "intelligence": 9,
+      "willpower"   : 9,
+      "dexterity"   : 15,
+      "agility"     : 16,
+      "endurance"   : 14,
+      "strength"    : 12,
+      "stamina"     : 28
+    },
+    "skills"   : {
+      "ranger" : 2,
+      "stealth": 2,
+      "warrior": 8,
+      "wizard" : 3,
+      "hafted" : 1,
+      "missile": 7,
+      "shield" : 3,
+      "sword"  : 2
+    },
+    "spells"   : {
+    },
+    "inventory": {
+      "weapon": "basic_dagger",
+      "shield": "basic_light_shield",
+      "chest" : "armor_2"
+    }
+  },
+  "orc_sergeant"                : {
+    "name"     : "Orc Sergeant",
+    "school"   : "NONE",
+    "xp"       : 20,
+    "drops"    : {"specialist_longsword": 20, "specialist_medium_shield": 20, "healing_potion": 5, "gold": 75},
+    "stats"    : {
+      "level"       : 10,
+      "intelligence": 15,
+      "willpower"   : 18,
+      "dexterity"   : 23,
+      "agility"     : 16,
+      "endurance"   : 25,
+      "strength"    : 17,
+      "stamina"     : 50
+    },
+    "skills"   : {
+      "stealth": 8,
+      "warrior": 8,
+      "wizard" : 3,
+      "hafted" : 6,
+      "shield" : 8,
+      "sword"  : 6,
+      "thrown" : 7
+    },
+    "spells"   : {
+    },
+    "inventory": {
+      "weapon": "specialist_longsword",
+      "shield": "specialist_medium_shield",
+      "chest" : "armor_8"
+    }
+  }
+}

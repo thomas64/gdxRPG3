@@ -1,0 +1,155 @@
+{
+  "dispel_elemental": {
+    "name": "Dispel Elemental",
+    "school": "NEUTRAL",
+    "sort": 10,
+    "upgrade": 3.2,
+    "min_wizard": 2,
+    "resource": "GEMSTONE",
+    "stamina_cost": 6,
+    "range": 1,
+    "number_of_targets": "UNLIMITED",
+    "target": "ANYONE_IN_TARGET_AREA",
+    "damage": 0,
+    "description": [
+      "This spell attempts to dispel any",
+      "Elemental Magic spell currently in effect."
+    ]
+  },
+  "dispel_naming": {
+    "name": "Dispel Naming",
+    "school": "NEUTRAL",
+    "sort": 15,
+    "upgrade": 3.2,
+    "min_wizard": 2,
+    "resource": "GEMSTONE",
+    "stamina_cost": 6,
+    "range": 1,
+    "number_of_targets": "UNLIMITED",
+    "target": "ANYONE_IN_TARGET_AREA",
+    "damage": 0,
+    "description": [
+      "This spell attempts to dispel any",
+      "Naming Magic spell currently in effect."
+    ]
+  },
+  "dispel_necromancy": {
+    "name": "Dispel Necromancy",
+    "school": "NEUTRAL",
+    "sort": 20,
+    "upgrade": 3.2,
+    "min_wizard": 2,
+    "resource": "GEMSTONE",
+    "stamina_cost": 6,
+    "range": 1,
+    "number_of_targets": "UNLIMITED",
+    "target": "ANYONE_IN_TARGET_AREA",
+    "damage": 0,
+    "description": [
+      "This spell attempts to dispel any",
+      "Necromancy Magic spell currently in effect."
+    ]
+  },
+  "dispel_star": {
+    "name": "Dispel Star",
+    "school": "NEUTRAL",
+    "sort": 25,
+    "upgrade": 3.2,
+    "min_wizard": 2,
+    "resource": "GEMSTONE",
+    "stamina_cost": 6,
+    "range": 1,
+    "number_of_targets": "UNLIMITED",
+    "target": "ANYONE_IN_TARGET_AREA",
+    "damage": 0,
+    "description": [
+      "This spell attempts to dispel any",
+      "Star Magic spell currently in effect."
+    ]
+  },
+  "mirror": {
+    "name": "Mirror",
+    "school": "NEUTRAL",
+    "sort": 30,
+    "upgrade": 2,
+    "min_wizard": 6,
+    "resource": "GEMSTONE",
+    "stamina_cost": 10,
+    "range": 1,
+    "number_of_targets": "ONE",
+    "target": "PARTY_ONLY_IN_TARGET_AREA",
+    "damage": 0,
+    "description": [
+      "Creates a shield that provides total resistance",
+      "against the next incoming attack spells."
+    ]
+  },
+  "vs_elemental": {
+    "name": "vs. Elemental",
+    "school": "NEUTRAL",
+    "sort": 35,
+    "upgrade": 2.4,
+    "min_wizard": 1,
+    "resource": "GEMSTONE",
+    "stamina_cost": 5,
+    "range": 2,
+    "number_of_targets": "INCREASES_BY_RANK",
+    "target": "PARTY_ONLY_IN_TARGET_AREA",
+    "damage": 0,
+    "description": [
+      "Increases the magic resistance to any",
+      "Elemental Magic spell by 6 percent per Rank."
+    ]
+  },
+  "vs_naming": {
+    "name": "vs. Naming",
+    "school": "NEUTRAL",
+    "sort": 40,
+    "upgrade": 2.4,
+    "min_wizard": 1,
+    "resource": "GEMSTONE",
+    "stamina_cost": 5,
+    "range": 2,
+    "number_of_targets": "INCREASES_BY_RANK",
+    "target": "PARTY_ONLY_IN_TARGET_AREA",
+    "damage": 0,
+    "description": [
+      "Increases the magic resistance to any",
+      "Naming Magic spell by 6 percent per Rank."
+    ]
+  },
+  "vs_necromancy": {
+    "name": "vs. Necromancy",
+    "school": "NEUTRAL",
+    "sort": 45,
+    "upgrade": 2.4,
+    "min_wizard": 1,
+    "resource": "GEMSTONE",
+    "stamina_cost": 5,
+    "range": 2,
+    "number_of_targets": "INCREASES_BY_RANK",
+    "target": "PARTY_ONLY_IN_TARGET_AREA",
+    "damage": 0,
+    "description": [
+      "Increases the magic resistance to any",
+      "Necromancy Magic spell by 6 percent per Rank."
+    ]
+  },
+  "vs_star": {
+    "name": "vs. Star",
+    "school": "NEUTRAL",
+    "sort": 50,
+    "upgrade": 2.4,
+    "min_wizard": 1,
+    "resource": "GEMSTONE",
+    "stamina_cost": 5,
+    "range": 2,
+    "number_of_targets": "INCREASES_BY_RANK",
+    "target": "PARTY_ONLY_IN_TARGET_AREA",
+    "damage": 0,
+    "description": [
+      "Increases the magic resistance to any",
+      "Star Magic spell by 6 percent per Rank."
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "default": {
+    "phrases": {
+      "1": {
+        "text"   : ["Hello."],
+        "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]
+      }
+    }
+  }
+}

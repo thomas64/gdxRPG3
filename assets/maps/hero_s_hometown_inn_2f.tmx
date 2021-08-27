@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="22" height="22" tilewidth="24" tileheight="24" infinite="0" nextlayerid="15" nextobjectid="25">
+ <properties>
+  <property name="bgm" value="bgm_inn"/>
+  <property name="step_sound" value="wood"/>
+ </properties>
+ <tileset firstgid="1" name="hero_s_hometown_inn_2f" tilewidth="24" tileheight="24" tilecount="384" columns="24">
+  <image source="tilesets/hero_s_hometown_inn_2f.png" width="576" height="384"/>
+ </tileset>
+ <tileset firstgid="385" source="tilesets/fsm_inside01_c.tsx"/>
+ <tileset firstgid="1409" source="tilesets/fsm_inside01_b.tsx"/>
+ <tileset firstgid="2433" source="tilesets/fsm_inside01_a2.tsx"/>
+ <layer id="2" name="under0_none" width="22" height="22">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUADAAeQAAE=
+  </data>
+ </layer>
+ <layer id="1" name="under1_ground" width="22" height="22">
+  <data encoding="base64" compression="zlib">
+   eJy1kNlKAlEch89cBlaaZkYqQU/RAhWURWV73fQMQQQRrVeVLc/SvtcT1Fu0b/d12zfkH4+HUeeECh+/328cZr45jlLKqRBNEIdEGTKpPXcQlmEJ9uFB27Y5rT13AIKUAHkAj9DLboUVeo9TektOGb4hSjV5CE+QYrfBKr3Tx5Y0fesoNeQRPEMfux3W6F0+tqTpG6bUksfwAv3sDvimzzi5vc7uVoXT9I1QguQJvELAPRf4cb9F2/J/oTR96ymhIh5+0/SNOn9epXxsfRsoYXKRfCNPVf6Wc5brfn1jlAiZJt/JM5W/5Zzlul/fRsoCbNA/4Nw9c5Xb4uNe1++T75Bt+rrvu4RN+IR5/ohqW3wujPvkO2SbvndVSt3DFv1K/S+/PHzjlDnI0K9hDIaV3Z708E1QkrBNv4FxmLXcEx6+6ez7d+BW87HZXr5D2ffvknuaj80u5jsCo5qPzTZ9m1X5fi3acyvBL27upvM=
+  </data>
+ </layer>
+ <layer id="4" name="under2_shadows" width="22" height="22">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIKBAZFsQ8vcUTAKaAkALNoAvw==
+  </data>
+ </layer>
+ <layer id="3" name="under3_objects" width="22" height="22">
+  <data encoding="base64" compression="zlib">
+   eJztzE0KgkAAhuFvcKNL7ecemXaPfm9QN8nLKeQ9FPpv3QsthIg2jlAyHzyLGWZeye2ft/WknWe/u6eZddD9lZ196YIrbrjj4bfvhoEUYYAhRhgH7bsTGjGmSJBiZqE7p7HAEiussbHQzY1U4IDSNOf3HT/cfVvF+9q8/p1Mc3Zz68OeZ8oXXw==
+  </data>
+ </layer>
+ <layer id="5" name="under4_lights" width="22" height="22">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo4By0MzKwNDCSn1zFwPNXEIDc0fBKBgFo2CwAQAlIAJj
+  </data>
+ </layer>
+ <layer id="6" name="under5_none" width="22" height="22">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUADAAeQAAE=
+  </data>
+ </layer>
+ <layer id="7" name="over6_objects" width="22" height="22">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AU0Bv0MzIwTADibiDuYcTkk6oOBtYDxTYA8WogXsOIySdV3SjADj6zMDB8YSGfPwroCxSBWIkKNK0BAFrTHeg=
+  </data>
+ </layer>
+ <layer id="8" name="over7_lights" width="22" height="22">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFQxm8ZWVgeMdKfXN52RgY+Niob+4oGAXIYDT9joJRgAAAD+oEGQ==
+  </data>
+ </layer>
+ <layer id="9" name="over8_none" width="22" height="22">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUADAAeQAAE=
+  </data>
+ </layer>
+ <objectgroup color="#0055ff" id="14" name="sound">
+  <object id="24" name="carpet" x="48" y="336" width="432" height="192"/>
+ </objectgroup>
+ <objectgroup color="#aa0000" id="10" name="collision" visible="0">
+  <object id="1" x="0" y="0" width="48" height="528"/>
+  <object id="2" x="48" y="504" width="480" height="24"/>
+  <object id="3" x="48" y="0" width="480" height="144"/>
+  <object id="4" x="480" y="144" width="48" height="360"/>
+  <object id="5" x="48" y="144" width="96" height="24"/>
+  <object id="6" x="96" y="384" width="48" height="96"/>
+  <object id="7" x="192" y="384" width="48" height="96"/>
+  <object id="8" x="288" y="384" width="48" height="96"/>
+  <object id="9" x="384" y="384" width="48" height="96"/>
+  <object id="10" x="288" y="288" width="192" height="48"/>
+  <object id="13" x="432" y="192" width="48" height="96"/>
+  <object id="14" x="48" y="288" width="192" height="48"/>
+  <object id="15" x="360" y="192" width="24" height="96"/>
+ </objectgroup>
+ <objectgroup color="#5500ff" id="13" name="rest">
+  <object id="19" name="note_bed01" x="96" y="384" width="48" height="96"/>
+  <object id="20" name="note_bed01" x="192" y="384" width="48" height="96"/>
+  <object id="21" name="note_bed01" x="288" y="384" width="48" height="96"/>
+  <object id="22" name="note_bed01" x="384" y="384" width="48" height="96"/>
+ </objectgroup>
+ <objectgroup color="#55aaff" id="11" name="spawn">
+  <object id="16" name="hero_s_hometown_inn" x="384" y="240" width="48" height="24"/>
+ </objectgroup>
+ <objectgroup color="#ffff7f" id="12" name="portal">
+  <object id="17" name="hero_s_hometown_inn" x="384" y="264" width="48" height="24"/>
+ </objectgroup>
+</map>

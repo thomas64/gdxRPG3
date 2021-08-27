@@ -1,0 +1,122 @@
+{
+  "basic_light_chest"      : {
+    "name"      : "Basic Light Chest",
+    "group"     : "CHEST",
+    "sort"      : 60100,
+    "price"     : 10,
+    "weight"    : 1,
+    "protection": 1,
+    "agility"   : 0,
+    "stealth"   : 0
+  },
+  "fine_light_chest"       : {
+    "name"      : "Fine Light Chest",
+    "group"     : "CHEST",
+    "sort"      : 60200,
+    "price"     : 20,
+    "weight"    : 1,
+    "protection": 2,
+    "agility"   : 0,
+    "stealth"   : 0
+  },
+  "specialist_light_chest" : {
+    "name"      : "Specialist Light Chest",
+    "group"     : "CHEST",
+    "sort"      : 60300,
+    "price"     : 30,
+    "weight"    : 1,
+    "protection": 3,
+    "agility"   : 0,
+    "stealth"   : 0
+  },
+  "masterwork_light_chest" : {
+    "name"      : "Masterwork Light Chest",
+    "group"     : "CHEST",
+    "sort"      : 60400,
+    "price"     : 40,
+    "weight"    : 1,
+    "protection": 4,
+    "agility"   : 0,
+    "stealth"   : 0
+  },
+  "basic_medium_chest"     : {
+    "name"      : "Basic Medium Chest",
+    "group"     : "CHEST",
+    "sort"      : 60120,
+    "price"     : 40,
+    "weight"    : 2,
+    "protection": 5,
+    "agility"   : -1,
+    "stealth"   : -1
+  },
+  "fine_medium_chest"      : {
+    "name"      : "Fine Medium Chest",
+    "group"     : "CHEST",
+    "sort"      : 60220,
+    "price"     : 50,
+    "weight"    : 2,
+    "protection": 6,
+    "agility"   : -1,
+    "stealth"   : -1
+  },
+  "specialist_medium_chest": {
+    "name"      : "Specialist Medium Chest",
+    "group"     : "CHEST",
+    "sort"      : 60320,
+    "price"     : 60,
+    "weight"    : 2,
+    "protection": 7,
+    "agility"   : -1,
+    "stealth"   : -1
+  },
+  "masterwork_medium_chest": {
+    "name"      : "Masterwork Medium Chest",
+    "group"     : "CHEST",
+    "sort"      : 60420,
+    "price"     : 70,
+    "weight"    : 2,
+    "protection": 8,
+    "agility"   : -1,
+    "stealth"   : -1
+  },
+  "basic_heavy_chest"      : {
+    "name"      : "Basic Heavy Chest",
+    "group"     : "CHEST",
+    "sort"      : 60140,
+    "price"     : 70,
+    "weight"    : 3,
+    "protection": 9,
+    "agility"   : -3,
+    "stealth"   : -2
+  },
+  "fine_heavy_chest"       : {
+    "name"      : "Fine Heavy Chest",
+    "group"     : "CHEST",
+    "sort"      : 60240,
+    "price"     : 80,
+    "weight"    : 3,
+    "protection": 10,
+    "agility"   : -3,
+    "stealth"   : -2
+  },
+  "specialist_heavy_chest" : {
+    "name"      : "Specialist Heavy Chest",
+    "group"     : "CHEST",
+    "sort"      : 60340,
+    "price"     : 90,
+    "weight"    : 3,
+    "protection": 11,
+    "agility"   : -3,
+    "stealth"   : -2
+  },
+  "masterwork_heavy_chest" : {
+    "name"      : "Masterwork Heavy Chest",
+    "group"     : "CHEST",
+    "sort"      : 60440,
+    "price"     : 100,
+    "weight"    : 3,
+    "protection": 12,
+    "agility"   : -3,
+    "stealth"   : -2
+  }
+}

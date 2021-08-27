@@ -1,0 +1,42 @@
+{
+  "quest0001": {
+    "title"   : "Herbs for boy",
+    "entityId": "boy01",
+    "summary" : "Johnny's mother is ill and he need to find 3 herbs in the woods for his mother to get better.",
+    "tasks"   : {
+      "1": {
+        "taskPhrase": "Collect 3 herbs",
+        "type"      : "FETCH_ITEM",
+        "target"    : {"herb": 3}
+      },
+      "2": {
+        "taskPhrase": "Collect 5 gemstones for the programmer",
+        "type"      : "FETCH_ITEM",
+        "target"    : {"gemstone": 5}
+      },
+      "3": {
+        "taskPhrase": "Give them to Johnny at Starter Path",
+        "type"      : "RETURN"
+      }
+    }
+  },
+  "quest0003": {
+    "title"   : "Secret Gypsy chamber",
+    "entityId": "youngwoman02",
+    "summary" : "Angela heard about a special chamber and want to know if the rumors are true.",
+    "tasks"   : {
+      "1": {
+        "taskPhrase": "Find the secret chamber",
+        "type"      : "DISCOVER"
+      },
+      "2": {
+        "taskPhrase": "See the statue of Legend with your own eyes",
+        "type"      : "CHECK"
+      },
+      "3": {
+        "taskPhrase": "Inform Angela at Starter Path about the chamber",
+        "type"      : "RETURN"
+      }
+    }
+  }
+}

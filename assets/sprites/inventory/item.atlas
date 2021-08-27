@@ -1,0 +1,13 @@
+
+item.png
+size: 62,62
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+key_mysterious_tunnel
+  rotate: false
+  xy: 0, 0
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1

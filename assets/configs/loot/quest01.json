@@ -1,0 +1,8 @@
+{
+  "quest0001": {"content": {"masterwork_longsword": 1}, "xp": 2},
+  "quest0003": {"content": {"gemstone": 3, "herb": 3}, "xp": 2},
+  "quest0004": {"content": {"gold": 4000}, "xp": 2},
+  "quest0005": {"content": {"gold": 2}, "xp": 2},
+  "quest0006": {"content": {"gold": 1, "bonus_gold": 1, "bonus_herb": 1}, "xp": 2},
+  "quest0007": {"content": {"legendary_staff": 1}, "xp": 16}
+}

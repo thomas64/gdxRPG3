@@ -1,0 +1,178 @@
+{
+  "basic_dart"        : {
+    "name"         : "Basic Dart",
+    "group"        : "WEAPON",
+    "sort"         : 1300,
+    "skill"        : "THROWN",
+    "price"        : 25,
+    "min_strength" : 2,
+    "min_dexterity": 13,
+    "base_hit"     : 35,
+    "damage"       : 8
+  },
+  "fine_dart"         : {
+    "name"         : "Fine Dart",
+    "group"        : "WEAPON",
+    "sort"         : 2300,
+    "skill"        : "THROWN",
+    "price"        : 50,
+    "min_strength" : 3,
+    "min_dexterity": 14,
+    "base_hit"     : 45,
+    "damage"       : 10
+  },
+  "specialist_dart"   : {
+    "name"         : "Specialist Dart",
+    "group"        : "WEAPON",
+    "sort"         : 3300,
+    "skill"        : "THROWN",
+    "price"        : 75,
+    "min_strength" : 4,
+    "min_dexterity": 15,
+    "base_hit"     : 55,
+    "damage"       : 12
+  },
+  "masterwork_dart"   : {
+    "name"         : "Masterwork Dart",
+    "group"        : "WEAPON",
+    "sort"         : 4300,
+    "skill"        : "THROWN",
+    "price"        : 100,
+    "min_strength" : 5,
+    "min_dexterity": 16,
+    "base_hit"     : 65,
+    "damage"       : 14
+  },
+  "basic_knife"       : {
+    "name"         : "Basic Knife",
+    "group"        : "WEAPON",
+    "sort"         : 1320,
+    "skill"        : "THROWN",
+    "price"        : 35,
+    "min_strength" : 7,
+    "min_dexterity": 15,
+    "base_hit"     : 35,
+    "damage"       : 10
+  },
+  "fine_knife"        : {
+    "name"         : "Fine Knife",
+    "group"        : "WEAPON",
+    "sort"         : 2320,
+    "skill"        : "THROWN",
+    "price"        : 60,
+    "min_strength" : 8,
+    "min_dexterity": 16,
+    "base_hit"     : 45,
+    "damage"       : 12
+  },
+  "specialist_knife"  : {
+    "name"         : "Specialist Knife",
+    "group"        : "WEAPON",
+    "sort"         : 3320,
+    "skill"        : "THROWN",
+    "price"        : 85,
+    "min_strength" : 9,
+    "min_dexterity": 17,
+    "base_hit"     : 55,
+    "damage"       : 14
+  },
+  "masterwork_knife"  : {
+    "name"         : "Masterwork Knife",
+    "group"        : "WEAPON",
+    "sort"         : 4320,
+    "skill"        : "THROWN",
+    "price"        : 110,
+    "min_strength" : 10,
+    "min_dexterity": 18,
+    "base_hit"     : 65,
+    "damage"       : 16
+  },
+  "basic_hatchet"     : {
+    "name"         : "Basic Hatchet",
+    "group"        : "WEAPON",
+    "sort"         : 1340,
+    "skill"        : "THROWN",
+    "price"        : 45,
+    "min_strength" : 12,
+    "min_dexterity": 17,
+    "base_hit"     : 35,
+    "damage"       : 12
+  },
+  "fine_hatchet"      : {
+    "name"         : "Fine Hatchet",
+    "group"        : "WEAPON",
+    "sort"         : 2340,
+    "skill"        : "THROWN",
+    "price"        : 70,
+    "min_strength" : 13,
+    "min_dexterity": 18,
+    "base_hit"     : 45,
+    "damage"       : 14
+  },
+  "specialist_hatchet": {
+    "name"         : "Specialist Hatchet",
+    "group"        : "WEAPON",
+    "sort"         : 3340,
+    "skill"        : "THROWN",
+    "price"        : 95,
+    "min_strength" : 14,
+    "min_dexterity": 19,
+    "base_hit"     : 55,
+    "damage"       : 16
+  },
+  "masterwork_hatchet": {
+    "name"         : "Masterwork Hatchet",
+    "group"        : "WEAPON",
+    "sort"         : 4340,
+    "skill"        : "THROWN",
+    "price"        : 120,
+    "min_strength" : 15,
+    "min_dexterity": 20,
+    "base_hit"     : 65,
+    "damage"       : 18
+  },
+  "basic_javelin"     : {
+    "name"         : "Basic Javelin",
+    "group"        : "WEAPON",
+    "sort"         : 1360,
+    "skill"        : "THROWN",
+    "price"        : 55,
+    "min_strength" : 17,
+    "min_dexterity": 19,
+    "base_hit"     : 35,
+    "damage"       : 14
+  },
+  "fine_javelin"      : {
+    "name"         : "Fine Javelin",
+    "group"        : "WEAPON",
+    "sort"         : 2360,
+    "skill"        : "THROWN",
+    "price"        : 80,
+    "min_strength" : 18,
+    "min_dexterity": 20,
+    "base_hit"     : 45,
+    "damage"       : 16
+  },
+  "specialist_javelin": {
+    "name"         : "Specialist Javelin",
+    "group"        : "WEAPON",
+    "sort"         : 3360,
+    "skill"        : "THROWN",
+    "price"        : 105,
+    "min_strength" : 19,
+    "min_dexterity": 21,
+    "base_hit"     : 55,
+    "damage"       : 18
+  },
+  "masterwork_javelin": {
+    "name"         : "Masterwork Javelin",
+    "group"        : "WEAPON",
+    "sort"         : 4360,
+    "skill"        : "THROWN",
+    "price"        : 130,
+    "min_strength" : 20,
+    "min_dexterity": 22,
+    "base_hit"     : 65,
+    "damage"       : 20
+  }
+}

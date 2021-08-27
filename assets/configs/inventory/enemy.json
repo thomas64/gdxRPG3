@@ -1,0 +1,34 @@
+{
+  "slime_slam": {
+    "name"        : "",
+    "group"       : "WEAPON",
+    "sort"        : 0,
+    "skill"       : "BITE",
+    "price"       : 0,
+    "min_strength": 1,
+    "base_hit"    : 30,
+    "damage"      : 1
+  },
+  "bat_bite"  : {
+    "name"        : "",
+    "group"       : "WEAPON",
+    "sort"        : 0,
+    "skill"       : "BITE",
+    "price"       : 0,
+    "min_strength": 1,
+    "base_hit"    : 30,
+    "damage"      : 2
+  },
+  "armor_2"   : {
+    "group"     : "CHEST",
+    "protection": 2
+  },
+  "armor_3"   : {
+    "group"     : "CHEST",
+    "protection": 3
+  },
+  "armor_8"   : {
+    "group"     : "CHEST",
+    "protection": 8
+  }
+}

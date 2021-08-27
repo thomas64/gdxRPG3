@@ -1,0 +1,22 @@
+{
+  "fallen_tree"       : {
+    "phrases": {
+      "1": {"text": ["The tree is blocking my path.", "I can't remove it like this."], "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]}
+    }
+  },
+  "found_grace_ribbon": {
+    "phrases": {
+      "1": {"text": ["Oh no, what's this?"]},
+      "2": {"text": ["It's one of Grace's ribbons!", "So she has been here."]},
+      "3": {"text": ["But what is there to find here?"], "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]}
+    }
+  },
+  "fairy_welcome"     : {
+    "phrases": {
+      "1": {"face": "fairy01", "text": ["Ah young Mozes. You may enter here."], "choices": [{"conversationCommand": "RECEIVE_XP", "destinationId": "2"}]},
+      "2": {"face": "mozes", "text": ["You know who I am?"]},
+      "3": {"face": "fairy01", "text": ["Yes we do."], "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "4"}]},
+      "4": {"face": "fairy01", "text": ["Young Mozes, please be welcome."], "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "4"}]}
+    }
+  }
+}

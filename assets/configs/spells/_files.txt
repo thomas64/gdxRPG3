@@ -1,0 +1,5 @@
+neutral.json
+elemental.json
+naming.json
+necromancy.json
+star.json

@@ -1,0 +1,104 @@
+
+group.png
+size: 248,248
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+accessory
+  rotate: false
+  xy: 0, 0
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+belt
+  rotate: false
+  xy: 62, 0
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+boots
+  rotate: false
+  xy: 124, 0
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+bracers
+  rotate: false
+  xy: 186, 0
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+chest
+  rotate: false
+  xy: 0, 62
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+cloak
+  rotate: false
+  xy: 62, 62
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+gloves
+  rotate: false
+  xy: 124, 62
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+helmet
+  rotate: false
+  xy: 186, 62
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+necklace
+  rotate: false
+  xy: 0, 124
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+pants
+  rotate: false
+  xy: 62, 124
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+ring
+  rotate: false
+  xy: 124, 124
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+shield
+  rotate: false
+  xy: 186, 124
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+shoulders
+  rotate: false
+  xy: 0, 186
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+weapon
+  rotate: false
+  xy: 62, 186
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1

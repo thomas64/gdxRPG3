@@ -1,0 +1,5 @@
+eclipse.project.name = appName + '-shared'
+
+dependencies {
+	implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+}

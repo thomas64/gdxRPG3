@@ -1,0 +1,65 @@
+{
+  "mozes_calls_grace_inside" : {
+    "phrases": {
+      "1": {"face": "mozes", "text": ["Grace!"]},
+      "2": {"face": "mozes", "text": ["Come in the house, it's time to go to bed."]},
+      "3": {"face": "girl01", "text": ["But Mozes, I'm not sleepy yet. I don't wanna!"]},
+      "4": {"face": "mozes", "text": ["It's going to be dark soon, you have to."]},
+      "5": {"face": "girl01", "text": ["Aw man!", "Mommy and daddy always allowed me to stay outside after dark!"]},
+      "6": {"face": "mozes", "text": ["Heh, that's not entirely true, but come, you must listen to me now."]},
+      "7": {"face": "girl01", "text": [" .......... "]},
+      "8": {"face": "girl01", "text": ["Okay ..."], "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]}
+    }
+  },
+  "mozes_puts_grace_to_bed"  : {
+    "phrases": {
+      "1" : {"face": "mozes", "text": ["I'm sorry Grace, but after mother and father died, you know it's not safe here in the village anymore after dark. Orcs sometimes come in the village and I don't want to lose you too."]},
+      "2" : {"face": "girl01", "text": ["Boohoo! I miss mommy and daddy!"]},
+      "3" : {"face": "mozes", "text": ["Me too Grace, me too."]},
+      "4" : {"face": "mozes", "text": ["Anyway, not only is it going to be dark, it's also past your bedtime, so in your bed you belong."]},
+      "5" : {"face": "girl01", "text": ["But I really wanna play outside!", "And I'm not afraid of the dark."]},
+      "6" : {"face": "mozes", "text": ["Tomorrow you may play outside again, when it's safe."]},
+      "7" : {"face": "girl01", "text": ["But ..."]},
+      "8" : {"face": "mozes", "text": ["No more buts. You go to sleep now."]},
+      "9" : {"face": "mozes", "text": ["I love you. Sweet dreams."]},
+      "10": {"face": "girl01", "text": ["Love you too."], "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]}
+    }
+  },
+  "mozes_finds_grace_missing": {
+    "phrases": {
+      "1": {"text": ["Good morning Grace. Did you sleep well?"]},
+      "2": {"text": ["Grace?"]},
+      "3": {"text": ["Grace, where are you?"]},
+      "4": {"text": ["Is she gone?", "She knows better than to leave without telling me."]},
+      "5": {"text": ["I hope she didn't run off again.", "It's still dangerous outside the village."]},
+      "6": {"text": ["Oh no! I have to make sure."]},
+      "7": {"text": ["I'll get my sword, hopefully I don't need it."], "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]}
+    }
+  },
+  "mozes_talks_to_johanna"   : {
+    "phrases": {
+      "1": {"face": "mozes", "text": ["Mrs. Johanna!", "Have you seen Grace?"]},
+      "2": {"face": "oldwoman01", "text": ["I am sorry dear, I have not seen Grace this morning.", "Is something the matter?"]},
+      "3": {"face": "mozes", "text": ["I don't know where she is.", "She wasn't in her bed this morning."]},
+      "4": {"face": "oldwoman01", "text": ["Maybe she went north? She likes to go there."]},
+      "5": {"face": "mozes", "text": ["I'm afraid she did, there are orcs there."]},
+      "6": {"face": "oldwoman01", "text": ["I will ask around if perhaps someone else saw her."]},
+      "7": {"face": "mozes", "text": ["Please do, I'll go north."], "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]}
+    }
+  },
+  "tree_has_fallen_1"        : {
+    "phrases": {
+      "1": {"text": ["What was that loud noise?"], "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]}
+    }
+  },
+  "tree_has_fallen_2"        : {
+    "phrases": {
+      "1": {"text": ["Dang! That's just great."]},
+      "2": {"text": [" .......... "]},
+      "3": {"text": ["Umph! I can't get it out of the way.", "Now I can't return."]},
+      "4": {"text": ["Well, there's nothing I can do about that now."]},
+      "5": {"text": ["The people of the village will remove it soon probably,", "at least I hope so."]},
+      "6": {"text": ["I have to find Grace first."], "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]}
+    }
+  }
+}

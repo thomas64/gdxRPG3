@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="40" height="56" tilewidth="24" tileheight="24" infinite="0" nextlayerid="18" nextobjectid="34">
+ <properties>
+  <property name="bgm" value="bgm_secret_chamber"/>
+  <property name="bgs" value="bgs_spring_flow"/>
+  <property name="lightmap_camera" value="heaven"/>
+  <property name="lightmap_map" value="bubbles"/>
+  <property name="step_sound" value="stone"/>
+ </properties>
+ <tileset firstgid="1" name="hero_s_hometown_hero_s_chamber" tilewidth="24" tileheight="24" tilecount="950" columns="38">
+  <image source="tilesets/hero_s_hometown_hero_s_chamber.png" width="912" height="600"/>
+ </tileset>
+ <tileset firstgid="951" source="tilesets/fsm_inside01_a1.tsx"/>
+ <tileset firstgid="1719" source="tilesets/fsm_waterobject01.tsx"/>
+ <tileset firstgid="2487" source="tilesets/fsm_inside01_b.tsx"/>
+ <tileset firstgid="3511" source="tilesets/fsm_inside01_e.tsx"/>
+ <tileset firstgid="4535" source="tilesets/fsm_town01_b.tsx"/>
+ <tileset firstgid="5559" source="tilesets/fsm_object02.tsx"/>
+ <tileset firstgid="6327" source="tilesets/fsm_inside01_a2.tsx"/>
+ <tileset firstgid="7095" source="tilesets/fsm_glow.tsx"/>
+ <layer id="2" name="under0_none" width="40" height="56">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAODXACMAAAE=
+  </data>
+ </layer>
+ <layer id="1" name="under1_ground" width="40" height="56">
+  <data encoding="base64" compression="zlib">
+   eJztmFeMHEUURau7vAZ2bYyNkwQGDNggkgQ/5JyW4BxxwIsDAgRIOIMJNjnjgE3GXts44LxgkPgg54wQQYBAYLH8gMgZBKfoeeqiprqna3YJH/txdauqX72ZunP79ZtuVko1t6EN/xMcGCl1EJj9H/CHUeXv9xV4j7j9YqX2BvuAfeNkfnlpXeaGFxPfC74AHMz1Q4BmPCfKjpe5m/+jAt/vS/A+cVeCvdjzKKgvza8ocb3FS4jfiZjJ4GPmh4LDwOE58fUZ+U8tqN/D4KgoPd9bUTI/ssRHg2OiZL2R2J2JmQKmgoVgETgiJ17yuflbqt+FjP/gumJ8LNgCljLdhfXeYBqYDmaAmXF2/D+l30WMdwUR4+PA8WCZStisu7ybJ/4EcCJ4JG59/WYxXs71deB8xruX5pXYjv8kbrl+nbVfv01cawIPgAfBbK49F1dmid8MHsr4fd4O0K+L9p+vlvU60AF01MX1k/htQW3s/33eCdBve/JEYBx4jP0j4dPApYwv8+gzmWtrwFzGn/IZ+8MHeOI6EbMn/AExV0Vp/pMYvxugX1f2xaABPB4nPArcFPl9N4Vra8E85s3EfAaaPPoaH64Hd0RpXsMnMz8lQL9u7PsOHg6PMNoxngRujlIfNVn+m0rMBjCf8QKwkfEmnV6XeOPDDeDaKMkr+cezNkEV1687e96M0vMNZe1McEuU+qhOl+u3DqzX5fpJvPHhkqhcv7OImaiK6yfnG8R4sEr1mxulPrJ9KPpttNjWz45vjLLzF9VPzqfJMUSl+mXVv2nETQczLJ6ps+tfVv6i+vVTyfm+h2t0uX7V1j9XPzv/qAD9+qt8/aqtf3n6jQ7QbwAYqLL1K6qbj336DYPHBOgn9e8Hxj9b+s1jfzuYS3/xOaqyfrEVb3iFTvWT/MPB2AD9pP4Z3X6x7q/57K+BG3XCRfQ0enVR6b6VOtVP8o8ApwfoJ/XP6DZUp/otMM9N5kt1wrNydBM2fqtT6b5Vln6SfyQ8LkA/93ymzjfAt7K+nPEynXBR/TqodN9qXf78kPyh9U/OJ8/fhawvAreVWPzo86H4zvito0r33e55fkj+0Ppnn8+w6WNM3yH9jPixPegEtrO4s0p8Z/wm/Yrsv9rz+4zW4fXPPp/vvOLHrYjfGmxjca1KfGf7zc1j/z5jAvST+meejzU6Zdcv4kefD8V3Pr/ZdcHwZuLHBugn9c/U97PZ+5NK6pSrn/jRdx+b+9b4zuc3uy4Yrrb/k/oufYaro/gwSz/xnes323dmvdr6J/VdnpMyd3XM0q+SbrLe0vrn6ujWxSz9fHVU+j7X1w0B+rn1z+j3RpT60K2LlfRz9TK/Q3tz34N2Vp7Q+ufTr0ZXr5+t22DV8v5Pzi2+s/uZavTTJb3EzzKvtv9zfePWr1D9RC+Xq+3/XN/46n5L9GvN/s+n4xlgfE79uxN0tfa5urX0/29WvRJ+AkzI0e8ucnRTf79vbR9X+/+3h67sOzN/ktwTc/S7G3RX5fuznudF9RuiK/vuenI9xdqkHP3uIaYH854Z9aDa/u9zVV7vfc+Np8n9DHjW0zfPAffyeYsz+j23vwzp/75Q5fXeV/fkfUze/17zvuWajOeIzSH939dgmC5e954HL4B+O/AZoA/X++rsOmj70Pwuof3fN+Bble8/u+6tBC8yPo/vdi7ozfz1OLsOuj6stv9zn5eufhfzmffBq8ArjHeEe4FXGb8G+oAtcXn/LPlao//7UWX3LZfw2Sss/V4CL8epfn3BHp4+0L1/Q/s/qX9595vRT95Hi35GN2Gjn7xv9v3fdf0Y8v6vJ3t/hX9TCd8QJfXO5huj9H30amLuB2ssXqvS983XefYblvyGfy+oX39iBoCBAZyVKzTPoALfrw1t+DfxJ8HsZCY=
+  </data>
+ </layer>
+ <layer id="3" name="under2_water" width="40" height="56">
+  <data encoding="base64" compression="zlib">
+   eJztlksKwkAQRBs6OYOfi/jZCl7BxK3gHfUmehE/KxskMIoO41RPEK2CphdJiq7HMGkRiqJytKhFlvX3+m/s223B+VB/8iM/ROSHKdf/pCJnq0vQr+o3F+o/qESGVqOgjyu/+VD/ib07tZoFfe44H+pPfuSHiPwwkR8m8sP0j/z2+rh3fLJvPH9Xgh+S19vvVT4kr7ffL/ALz+M7dedtp/3zS8nt5ZPDLyW3lw/5kR/5kR/5pec+2j+rtb6O+K7sWWN1UO4vSF7uf+RHfv35dfdWG+mxe6+0H0VRd90AcQefFA==
+  </data>
+ </layer>
+ <layer id="4" name="under3_reflection" width="40" height="56">
+  <data encoding="base64" compression="zlib">
+   eJztllsKwjAQRecjXYPWnepOdCM+NqJ2Iz6+HJBAkJqGzkSlngPDfDRcOochRAQAAABgmG0Q2Wntk34Iv5N/1LMnrXPSO8f/s+Zf9OxV65b0u+P/WfPxhz8L+LOBPxv4s/GP/lZh/Hvj9b2yrODPMq93Xp8/y7zeeVPwF/cxt4dx7/r2rba/krm9csb4K5nbKwd/+MMf/vBXPvdGq21EFs37nJl+m2utv+CP98vn5sUf/qbkL95bbabn7r3aeQDw5AFyPmi5
+  </data>
+ </layer>
+ <layer id="5" name="under4_plants" width="40" height="56">
+  <data encoding="base64" compression="zlib">
+   eJztmEkKwkAURBsiBEQP4IH0DrrXizhsPYTDRRwu4nAHd34ItWloNX9IWvIfBFdVVH4q3W1CcBzHcZyK16DtBJ8ZDdtO0G22/ep3WoYwK/Pzh94Kqb/n09FfeiFce/I82v7QP0j7NMzH9Yd+TdqNYT6uP/QH0h4N83H9oR+TdmKY71SEcC74+jllWxjmu1G2uyCfFV1Z/6zwfO73ix/WP+k6aJUP6590HbSeH84Zdedo9Z7F88M5o+4crfMBnDOWdK0U8kl7HfvinLGja6+QT9rr2Jd7vykfbp9Tvtz7Tflw+5zy5ZKaH/qsNT+tfJgX+pzr/HLZj7R6/M1X2yfX+QHt+dXdN6yJ89XdN6xp6nzKfS5N5eM+l/j7iLR/2n2Ov49I+6fd53/5f5Srn+M4FW+XkG4O
+  </data>
+ </layer>
+ <layer id="6" name="under5_lights" width="40" height="56">
+  <data encoding="base64" compression="zlib">
+   eJzt1LcRAkEQRNEJ4GwSQiQAGSAcyAKRCCIRRCKIOGh3LWqYqsbgP3uveuqMHwEAAPDZuovYdL69rbZ2ib293h6M9x21dUrsnfX2Yrzvqq1bYu+utw/jfU9tvYx7/66vfz0w/u+htkaJvanezoz3zbW1SOzRvxb9q6F/XvSvRf9q6F8N/fOify36V0P/auifF/1r0b8aV//GvYhJL/+dq39L3bb64j76B+AX3mpOSg8=
+  </data>
+ </layer>
+ <layer id="7" name="over6_objects" width="40" height="56">
+  <data encoding="base64" compression="zlib">
+   eJzt17ENwkAMhWFngqSIsgBsAT10sAVsAh1sAR1sAZvAGLgliLMuxpCg/2tSnCO7eLJkEQDoj0spci3j6r1u2uue0S+33mtTiWyruHqvg/Y6ZvTLre/Km6PoHHpzFJ1DK0e7WmRfd//fy8rRSWc7J+braw7Zf8/YfwAAAAAwLDO9eeaJu8d6j7bS3utEf+s9mnXXfvvubbPuWu7e/zJqRMbNr6d4b6KzTXs0H/vPh/33GYtCZFm8foGhewBJJTwI
+  </data>
+ </layer>
+ <layer id="8" name="over7_glow" width="40" height="56">
+  <data encoding="base64" compression="zlib">
+   eJzt1MkNgDAQQ9GBNqD/FliaYGmCpQkwR24Jk0iR+E/ybSRfrDED8BddY9YrgzI26e+9JnXMyqKsAX2x916bOnblUM6Avth7r+vpaM0qpW7T33/l3VHuHXp3lHuH3h3l3qF3R6XukP/3xv8DAAAAAAAAAACluwFX+Erj
+  </data>
+ </layer>
+ <layer id="9" name="over8_none" width="40" height="56">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAODXACMAAAE=
+  </data>
+ </layer>
+ <objectgroup color="#0055ff" id="17" name="sound"/>
+ <objectgroup color="#aa0000" id="10" name="collision" visible="0">
+  <object id="1" x="696" y="96" width="168" height="1176"/>
+  <object id="2" x="96" y="96" width="168" height="1176"/>
+  <object id="4" x="264" y="96" width="432" height="120"/>
+  <object id="5" x="600" y="264" width="48" height="48"/>
+  <object id="6" x="312" y="264" width="48" height="48"/>
+  <object id="7" x="264" y="360" width="48" height="48"/>
+  <object id="8" x="312" y="456" width="48" height="48"/>
+  <object id="9" x="456" y="360" width="48" height="48"/>
+  <object id="10" x="648" y="360" width="48" height="48"/>
+  <object id="11" x="600" y="456" width="48" height="48"/>
+  <object id="12" x="264" y="552" width="96" height="720"/>
+  <object id="13" x="600" y="552" width="96" height="720"/>
+  <object id="14" x="552" y="648" width="48" height="432"/>
+  <object id="15" x="360" y="648" width="48" height="432"/>
+  <object id="16" x="456" y="1128" width="48" height="48"/>
+  <object id="19" x="408" y="1248" width="144" height="24"/>
+  <object id="32" x="360" y="1224" width="48" height="48"/>
+  <object id="33" x="552" y="1224" width="48" height="48"/>
+ </objectgroup>
+ <objectgroup color="#5500ff" id="14" name="rest">
+  <object id="23" name="note_statue_hero_s_hometown_hero_s_chamber" x="456" y="384" width="48" height="24"/>
+  <object id="24" name="note_plaque_hero_s_hometown_hero_s_chamber" x="432" y="192" width="96" height="24"/>
+ </objectgroup>
+ <objectgroup color="#55ff7f" id="13" name="npc">
+  <object id="21" name="fairy01" type="f" x="456" y="240" width="48" height="24">
+   <properties>
+    <property name="conversation" value="save01"/>
+    <property name="direction" value="south"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup color="#55aaff" id="11" name="spawn">
+  <object id="18" name="hero_s_hometown_chief_s_house_b2" x="456" y="1080" width="48" height="24">
+   <properties>
+    <property name="direction" value="north"/>
+   </properties>
+  </object>
+  <object id="22" name="hero_s_hometown_hero_s_chamber" x="456" y="432" width="48" height="24">
+   <properties>
+    <property name="direction" value="north"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup color="#ffaa7f" id="12" name="warp">
+  <object id="17" name="hero_s_hometown_chief_s_house_b2" x="456" y="1128" width="48" height="48"/>
+ </objectgroup>
+ <objectgroup color="#ffff00" id="16" name="quest">
+  <object id="25" name="quest0003" type="discover" x="408" y="1032" width="144" height="48">
+   <properties>
+    <property name="task" value="1"/>
+   </properties>
+  </object>
+  <object id="26" name="quest0003" type="check" x="456" y="384" width="48" height="24">
+   <properties>
+    <property name="task" value="2"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

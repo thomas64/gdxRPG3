@@ -1,0 +1,24 @@
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+eclipse.project.name = appName + '-core'
+
+dependencies {
+	api "com.badlogicgames.gdx:gdx:$gdxVersion"
+	api "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+	api "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+	api "com.badlogicgames.gdx:gdx-ai:$aiVersion"
+	api "com.badlogicgames.gdx-controllers:gdx-controllers-core:$gdxControllersVersion"
+	api "de.golfgl.gdxcontrollerutils:gdx-controllerutils-mapping:$controllerMappingVersion"
+	api "com.github.tommyettinger:regexodus:$regExodusVersion"
+	api "com.github.tommyettinger:libgdx-utils:$utilsVersion"
+	api "com.github.tommyettinger:colorful:$colorfulVersion"
+	api "io.github.libktx:ktx-tiled:$ktxVersion"
+	api "io.github.libktx:ktx-assets:$ktxVersion"
+	api "io.github.libktx:ktx-collections:$ktxVersion"
+	api "io.github.libktx:ktx-freetype:$ktxVersion"
+	api "io.github.libktx:ktx-preferences:$ktxVersion"
+	api "io.github.libktx:ktx-json:$ktxVersion"
+	api "com.rafaskoberg.gdx:typing-label:$typingLabelVersion"
+	api "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+	api "com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion"
+	api project(':shared')
+}

@@ -1,0 +1,28 @@
+{
+  "save01": {
+    "phrases": {
+      "1": {"text": ["Good day sir."]},
+      "2": {"text": ["Congratulations, you've discovered this secret chamber."]},
+      "3": {
+        "text"   : ["If you'd like, I could \"save the game\" for you.", "How does that sound?"],
+        "choices": [
+          {"text": "Yes please, I would like that.", "conversationCommand": "SAVE_GAME", "destinationId": "4"},
+          {"text": "No thanks, that's not necessary.", "destinationId": "5"}
+        ]
+      },
+      "4": {
+        "text"   : ["It is done."],
+        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "6"}]
+      },
+      "5": {
+        "text"   : ["No problem. Have a good day sir."],
+        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "6"}]
+      },
+      "6": {"text": ["Good day sir."]},
+      "7": {
+        "text"   : ["Have you returned to me for a special reason?"],
+        "choices": [{"destinationId": "3"}]
+      }
+    }
+  }
+}

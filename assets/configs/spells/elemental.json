@@ -1,0 +1,187 @@
+{
+  "air_shield": {
+    "name": "Air Shield",
+    "school": "ELEMENTAL",
+    "sort": 110,
+    "upgrade": 3.2,
+    "min_wizard": 1,
+    "resource": "GEMSTONE",
+    "stamina_cost": 6,
+    "range": 5,
+    "number_of_targets": "UNLIMITED",
+    "target": "PARTY_ONLY_IN_TARGET_AREA",
+    "damage": 0,
+    "description": [
+      "All friendly entities within the range of the spell",
+      "add 1 per Rank to their Protection value."
+    ]
+  },
+  "control_elemental": {
+    "name": "Control Elemental",
+    "school": "ELEMENTAL",
+    "sort": 115,
+    "upgrade": 5.2,
+    "min_wizard": 4,
+    "resource": "SPICE",
+    "stamina_cost": 20,
+    "range": 2,
+    "number_of_targets": "ONE",
+    "target": "ENEMY_ONLY_IN_TARGET_AREA",
+    "damage": 0,
+    "description": [
+      "Charms one Elemental, causing it to fight",
+      "for the party for the remainder of the battle",
+      "or until it is killed."
+    ]
+  },
+  "debilitation": {
+    "name": "Debilitation",
+    "school": "ELEMENTAL",
+    "sort": 120,
+    "upgrade": 3.2,
+    "min_wizard": 2,
+    "resource": "HERB",
+    "stamina_cost": 6,
+    "range": 3,
+    "number_of_targets": "INCREASES_BY_RANK",
+    "target": "ENEMY_ONLY_IN_TARGET_AREA",
+    "damage": 0,
+    "description": [
+      "Target loses 2 Strength for each Rank of the spell.",
+      "May only be cast once on each target."
+    ]
+  },
+  "dragon_flames": {
+    "name": "Dragon Flames",
+    "school": "ELEMENTAL",
+    "sort": 125,
+    "upgrade": 5.2,
+    "min_wizard": 2,
+    "resource": "GEMSTONE",
+    "stamina_cost": 10,
+    "range": 4,
+    "number_of_targets": "INCREASES_BY_RANK",
+    "target": "ENEMY_ONLY_IN_TARGET_AREA",
+    "damage": 2,
+    "description": [
+      "The target(s) of this spell are attacked by",
+      "wicked dragon flames emanating from the caster."
+    ]
+  },
+  "earth_smite": {
+    "name": "Earth Smite",
+    "school": "ELEMENTAL",
+    "sort": 130,
+    "upgrade": 6,
+    "min_wizard": 4,
+    "resource": "GEMSTONE",
+    "stamina_cost": 10,
+    "range": 4,
+    "number_of_targets": "ONE",
+    "target": "ENEMY_ONLY_IN_TARGET_AREA",
+    "damage": 4,
+    "description": [
+      "The target of this spell is struck by a large chunk of earth.",
+      "Only affects targets of human size or smaller."
+    ]
+  },
+  "fireball": {
+    "name": "Fireball",
+    "school": "ELEMENTAL",
+    "sort": 135,
+    "upgrade": 4,
+    "min_wizard": 5,
+    "resource": "SPICE",
+    "stamina_cost": 15,
+    "range": 3,
+    "number_of_targets": "UNLIMITED",
+    "target": "ANYONE_IN_TARGET_AREA",
+    "damage": 5,
+    "description": [
+      "Fireballs are fired from the fingertips of the caster,",
+      "striking each target in the area of effect - friend and foe alike."
+    ]
+  },
+  "immolation": {
+    "name": "Immolation",
+    "school": "ELEMENTAL",
+    "sort": 140,
+    "upgrade": 1.6,
+    "min_wizard": 4,
+    "resource": "SPICE",
+    "stamina_cost": 8,
+    "range": 3,
+    "number_of_targets": "ONE",
+    "target": "ENEMY_ONLY_IN_TARGET_AREA",
+    "damage": 1,
+    "description": [
+      "Fires a burst of flame at the target,",
+      "who catches fire and takes 1-6 points of damage",
+      "per round thereafter until the spell expires."
+    ]
+  },
+  "lightning": {
+    "name": "Lightning",
+    "school": "ELEMENTAL",
+    "sort": 145,
+    "upgrade": 4,
+    "min_wizard": 3,
+    "resource": "GEMSTONE",
+    "stamina_cost": 3,
+    "range": 2,
+    "number_of_targets": "INCREASES_BY_RANK",
+    "target": "ENEMY_ONLY_IN_TARGET_AREA",
+    "damage": 2,
+    "description": ["Targets of the spell are attacked by lightning."]
+  },
+  "remove_poison": {
+    "name": "Remove Poison",
+    "school": "ELEMENTAL",
+    "sort": 150,
+    "upgrade": 0.8,
+    "min_wizard": 2,
+    "resource": "HERB",
+    "stamina_cost": 2,
+    "range": 1,
+    "number_of_targets": "ONE",
+    "target": "PARTY_ONLY_IN_TARGET_AREA",
+    "damage": 0,
+    "description": ["Neutralizes the effects of poison if successful."]
+  },
+  "strength": {
+    "name": "Strength",
+    "school": "ELEMENTAL",
+    "sort": 155,
+    "upgrade": 1.6,
+    "min_wizard": 1,
+    "resource": "HERB",
+    "stamina_cost": 7,
+    "range": 3,
+    "number_of_targets": "INCREASES_BY_RANK",
+    "target": "PARTY_ONLY_IN_TARGET_AREA",
+    "damage": 0,
+    "description": [
+      "Target gains 2 Strength for each Rank of the spell.",
+      "May only be cast once on each target."
+    ]
+  },
+  "wind": {
+    "name": "Wind",
+    "school": "ELEMENTAL",
+    "sort": 160,
+    "upgrade": 5.2,
+    "min_wizard": 2,
+    "resource": "HERB",
+    "stamina_cost": 7,
+    "range": 5,
+    "number_of_targets": "ONE",
+    "target": "ANYONE_IN_TARGET_AREA",
+    "damage": 2,
+    "description": [
+      "The caster creates a vicious blast",
+      "of wind which will attack one target,",
+      "and dispels any fog that may be present",
+      "on the battlefield."
+    ]
+  }
+}

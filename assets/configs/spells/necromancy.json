@@ -1,0 +1,223 @@
+{
+  "acid_bolt": {
+    "name": "Acid Bolt",
+    "school": "NECROMANCY",
+    "sort": 310,
+    "upgrade": 1.6,
+    "min_wizard": 4,
+    "resource": "SPICE",
+    "stamina_cost": 8,
+    "range": 3,
+    "number_of_targets": "ONE",
+    "target": "ENEMY_ONLY_IN_TARGET_AREA",
+    "damage": 1,
+    "description": [
+      "Fires a spurt of acid at the target,",
+      "who continues to be burned by acid",
+      "for 1-6 points of damage per round thereafter",
+      "until the spell expires."
+    ]
+  },
+  "aura_of_death": {
+    "name": "Aura of Death",
+    "school": "NECROMANCY",
+    "sort": 315,
+    "upgrade": 0.8,
+    "min_wizard": 4,
+    "resource": "SPICE",
+    "stamina_cost": 5,
+    "range": 10,
+    "number_of_targets": "UNLIMITED",
+    "target": "ENEMY_ONLY_IN_TARGET_AREA",
+    "damage": 0,
+    "description": ["Penalizes enemy Morale, 1 per Rank."]
+  },
+  "cheat_death": {
+    "name": "Cheat Death",
+    "school": "NECROMANCY",
+    "sort": 320,
+    "upgrade": 2.4,
+    "min_wizard": 6,
+    "resource": "GEMSTONE",
+    "stamina_cost": 10,
+    "range": 1,
+    "number_of_targets": "ONE",
+    "target": "PARTY_ONLY_IN_TARGET_AREA",
+    "damage": 0,
+    "description": [
+      "If the target receives a lethal wound while spell is in effect,",
+      "this spell raises him or her with partial health."
+    ]
+  },
+  "control_zombies": {
+    "name": "Control Zombies",
+    "school": "NECROMANCY",
+    "sort": 325,
+    "upgrade": 4,
+    "min_wizard": 3,
+    "resource": "HERB",
+    "stamina_cost": 10,
+    "range": 1,
+    "number_of_targets": "ONE",
+    "target": "ENEMY_ONLY_IN_TARGET_AREA",
+    "damage": 0,
+    "description": [
+      "Charms one Zombie, causing it to fight",
+      "for the party for the remainder of the battle",
+      "or until it is killed."
+    ]
+  },
+  "crushing_death": {
+    "name": "Crushing Death",
+    "school": "NECROMANCY",
+    "sort": 330,
+    "upgrade": 6,
+    "min_wizard": 7,
+    "resource": "SPICE",
+    "stamina_cost": 10,
+    "range": 1,
+    "number_of_targets": "ONE",
+    "target": "ENEMY_ONLY_IN_TARGET_AREA",
+    "damage": 4,
+    "description": [
+      "Crushes the target's heart, inflicting severe",
+      "damage and frequently killing the target outright.",
+      "Only affects targets of human size or smaller."
+    ]
+  },
+  "darkness": {
+    "name": "Darkness",
+    "school": "NECROMANCY",
+    "sort": 335,
+    "upgrade": 3.2,
+    "min_wizard": 2,
+    "resource": "GEMSTONE",
+    "stamina_cost": 6,
+    "range": 1,
+    "number_of_targets": "SELF",
+    "target": "EVERYONE",
+    "damage": 0,
+    "description": [
+      "This spell lowers the level of light over the",
+      "battlefield to night time, making it more difficult",
+      "for Solar-aspected characters to fight effectively."
+    ]
+  },
+  "exhaustion": {
+    "name": "Exhaustion",
+    "school": "NECROMANCY",
+    "sort": 340,
+    "upgrade": 3.2,
+    "min_wizard": 2,
+    "resource": "GEMSTONE",
+    "stamina_cost": 6,
+    "range": 3,
+    "number_of_targets": "INCREASES_BY_RANK",
+    "target": "ENEMY_ONLY_IN_TARGET_AREA",
+    "damage": 0,
+    "description": [
+      "Target loses 2 Stamina for each Rank of the spell.",
+      "May only be cast once on each target."
+    ]
+  },
+  "haste": {
+    "name": "Haste",
+    "school": "NECROMANCY",
+    "sort": 345,
+    "upgrade": 5.2,
+    "min_wizard": 4,
+    "resource": "SPICE",
+    "stamina_cost": 5,
+    "range": 3,
+    "number_of_targets": "UNLIMITED",
+    "target": "PARTY_ONLY_IN_TARGET_AREA",
+    "damage": 0,
+    "description": [
+      "All targets within range of this spell have",
+      "their movement rate increased by 2 per Rank.",
+      "May only be cast once on each target."
+    ]
+  },
+  "spirit_shield": {
+    "name": "Spirit Shield",
+    "school": "NECROMANCY",
+    "sort": 350,
+    "upgrade": 4,
+    "min_wizard": 3,
+    "resource": "GEMSTONE",
+    "stamina_cost": 6,
+    "range": 3,
+    "number_of_targets": "UNLIMITED",
+    "target": "PARTY_ONLY_IN_TARGET_AREA",
+    "damage": 0,
+    "description": [
+      "All friendly entities within the range of the spell",
+      "add 1 per Rank to their Protection value."
+    ]
+  },
+  "stamina": {
+    "name": "Stamina",
+    "school": "NECROMANCY",
+    "sort": 355,
+    "upgrade": 3.2,
+    "min_wizard": 2,
+    "resource": "GEMSTONE",
+    "stamina_cost": 6,
+    "range": 3,
+    "number_of_targets": "INCREASES_BY_RANK",
+    "target": "PARTY_ONLY_IN_TARGET_AREA",
+    "damage": 0,
+    "description": [
+      "Target gains 2 Stamina for each Rank of the spell.",
+      "May only be cast once on each target."
+    ]
+  },
+  "tap_stamina": {
+    "name": "Tap Stamina",
+    "school": "NECROMANCY",
+    "sort": 360,
+    "upgrade": 4,
+    "min_wizard": 3,
+    "resource": "SPICE",
+    "stamina_cost": 5,
+    "range": 3,
+    "number_of_targets": "ONE",
+    "target": "ENEMY_ONLY_IN_TARGET_AREA",
+    "damage": 0,
+    "description": [
+      "The caster drains 2 points of Stamina per rank from the target,",
+      "and adds the Stamina to his or her own."
+    ]
+  },
+  "wall_of_bones": {
+    "name": "Wall of Bones",
+    "school": "NECROMANCY",
+    "sort": 365,
+    "upgrade": 5.2,
+    "min_wizard": 5,
+    "resource": "HERB",
+    "stamina_cost": 15,
+    "range": 1,
+    "number_of_targets": "ONE",
+    "target": "ENEMY_ONLY_IN_TARGET_AREA",
+    "damage": 0,
+    "description": ["Target is completely immobilized by a wall of bones."]
+  },
+  "wraith_touch": {
+    "name": "Wraith Touch",
+    "school": "NECROMANCY",
+    "sort": 370,
+    "upgrade": 1.6,
+    "min_wizard": 8,
+    "resource": "GEMSTONE",
+    "stamina_cost": 2,
+    "range": 1,
+    "number_of_targets": "ONE",
+    "target": "ENEMY_ONLY_IN_TARGET_AREA",
+    "damage": 2,
+    "description": [
+      "Spell drains 2-12 points from one randomly",
+      "chosen characteristic of the target."
+    ]
+  }
+}

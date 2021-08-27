@@ -1,0 +1,36 @@
+{
+  "battle0001"      : {
+    "battlers": [{"id": "green_slime", "amount": 1}]
+  },
+  "battle0002"      : {
+    "battlers": [{"id": "green_slime", "amount": 1}]
+  },
+  "battle0003"      : {
+    "battlers": [{"id": "blue_bat", "amount": 1}]
+  },
+  "battle0004"      : {
+    "battlers": [{"id": "blue_bat", "amount": 1}]
+  },
+  "battle0005"      : {
+    "battlers": [{"id": "blue_bat", "amount": 1}]
+  },
+  "battle0006"      : {
+    "battlers": [{"id": "blue_bat", "amount": 1}]
+  },
+  "battle0007"      : {
+    "battlers": [{"id": "blue_bat", "amount": 1}]
+  },
+  "battle0008"      : {
+    "battlers": [{"id": "blue_bat", "amount": 2}]
+  },
+  "battle0009"      : {
+    "battlers": [{"id": "blue_bat", "amount": 2}]
+  },
+  "lonely_orc_scout": {
+    "battlers"   : [{"id": "orc_scout_with_mask_of_ardor", "amount": 1}],
+    "isEscapable": false
+  },
+  "quest_orc_guards": {
+    "battlers": [{"id": "orc_sergeant", "amount": 2}]
+  }
+}

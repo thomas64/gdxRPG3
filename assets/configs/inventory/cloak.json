@@ -1,0 +1,153 @@
+{
+  "basic_light_cloak"      : {
+    "name"      : "Basic Light Cloak",
+    "group"     : "CLOAK",
+    "sort"      : 60100,
+    "price"     : 10,
+    "weight"    : 1,
+    "protection": 0,
+    "agility"   : 0,
+    "stealth"   : 1
+  },
+  "fine_light_cloak"       : {
+    "name"      : "Fine Light Cloak",
+    "group"     : "CLOAK",
+    "sort"      : 60200,
+    "price"     : 20,
+    "weight"    : 1,
+    "protection": 0,
+    "agility"   : 0,
+    "stealth"   : 2
+  },
+  "specialist_light_cloak": {
+    "name"      : "Specialist Light Cloak",
+    "group"     : "CLOAK",
+    "sort"      : 60300,
+    "price"     : 30,
+    "weight"    : 1,
+    "protection": 0,
+    "agility"   : 0,
+    "stealth"   : 3
+  },
+  "masterwork_light_cloak": {
+    "name"      : "Masterwork Light Cloak",
+    "group"     : "CLOAK",
+    "sort"      : 60400,
+    "price"     : 40,
+    "weight"    : 1,
+    "protection": 0,
+    "agility"   : 0,
+    "stealth"   : 4
+  },
+  "epic_light_cloak"      : {
+    "name"      : "Epic Light Cloak",
+    "group"     : "CLOAK",
+    "sort"      : 61000,
+    "price"     : 50,
+    "weight"    : 1,
+    "protection": 0,
+    "agility"   : 0,
+    "stealth"   : 6
+  },
+  "legendary_light_cloak" : {
+    "name"      : "Legendary Light Cloak",
+    "group"     : "CLOAK",
+    "sort"      : 62000,
+    "price"     : 60,
+    "weight"    : 1,
+    "protection": 0,
+    "agility"   : 0,
+    "stealth"   : 8
+  },
+  "basic_medium_cloak"    : {
+    "name"      : "Basic Medium Cloak",
+    "group"     : "CLOAK",
+    "sort"      : 60120,
+    "price"     : 40,
+    "weight"    : 2,
+    "protection": 1,
+    "agility"   : -1,
+    "stealth"   : 1
+  },
+  "fine_medium_cloak"     : {
+    "name"      : "Fine Medium Cloak",
+    "group"     : "CLOAK",
+    "sort"      : 60220,
+    "price"     : 50,
+    "weight"    : 2,
+    "protection": 1,
+    "agility"   : -1,
+    "stealth"   : 2
+  },
+  "specialist_medium_cloak": {
+    "name"      : "Specialist Medium Cloak",
+    "group"     : "CLOAK",
+    "sort"      : 60320,
+    "price"     : 60,
+    "weight"    : 2,
+    "protection": 1,
+    "agility"   : -1,
+    "stealth"   : 3
+  },
+  "masterwork_medium_cloak": {
+    "name"      : "Masterwork Medium Cloak",
+    "group"     : "CLOAK",
+    "sort"      : 60420,
+    "price"     : 70,
+    "weight"    : 2,
+    "protection": 1,
+    "agility"   : -1,
+    "stealth"   : 4
+  },
+  "basic_heavy_cloak"      : {
+    "name"      : "Basic Heavy Cloak",
+    "group"     : "CLOAK",
+    "sort"      : 60140,
+    "price"     : 70,
+    "weight"    : 3,
+    "protection": 2,
+    "agility"   : -2,
+    "stealth"   : 1
+  },
+  "fine_heavy_cloak"       : {
+    "name"      : "Fine Heavy Cloak",
+    "group"     : "CLOAK",
+    "sort"      : 60240,
+    "price"     : 80,
+    "weight"    : 3,
+    "protection": 2,
+    "agility"   : -2,
+    "stealth"   : 2
+  },
+  "specialist_heavy_cloak" : {
+    "name"      : "Specialist Heavy Cloak",
+    "group"     : "CLOAK",
+    "sort"      : 60340,
+    "price"     : 90,
+    "weight"    : 3,
+    "protection": 2,
+    "agility"   : -2,
+    "stealth"   : 3
+  },
+  "masterwork_heavy_cloak" : {
+    "name"      : "Masterwork Heavy Cloak",
+    "group"     : "CLOAK",
+    "sort"      : 60440,
+    "price"     : 100,
+    "weight"    : 3,
+    "protection": 2,
+    "agility"   : -2,
+    "stealth"   : 4
+  },
+  "epic_dark_cloak"        : {
+    "name"      : "Dark Cloak",
+    "group"     : "CLOAK",
+    "sort"      : 61000,
+    "price"     : 50,
+    "weight"    : 1,
+    "protection": 0,
+    "agility"   : 0,
+    "stealth"   : 0,
+    "thief"     : 2
+  }
+}

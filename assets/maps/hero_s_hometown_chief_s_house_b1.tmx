@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="20" height="14" tilewidth="24" tileheight="24" infinite="0" nextlayerid="24" nextobjectid="19">
+ <properties>
+  <property name="bgm" value="bgm_cellar"/>
+  <property name="lightmap_player" value="light_player"/>
+  <property name="step_sound" value="stone"/>
+ </properties>
+ <tileset firstgid="1" name="hero_s_hometown_chief_s_house_b1" tilewidth="24" tileheight="24" tilecount="384" columns="24">
+  <image source="tilesets/hero_s_hometown_chief_s_house_b1.png" width="576" height="384"/>
+ </tileset>
+ <tileset firstgid="385" source="tilesets/fsm_inside01_c.tsx"/>
+ <layer id="13" name="under0_none" width="20" height="14">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALaAAAEYAAB
+  </data>
+ </layer>
+ <layer id="14" name="under1_ground" width="20" height="14">
+  <data encoding="base64" compression="zlib">
+   eJyt02dOw0AQhuFdSAiQhGuk0lsQhGPQi1LoLUCQuAa993oVevlJvQYdXsuKsrI2EihIfvR51iN7vJadQgjnP6tBLUJZZJ1yvyhmcIIXeFAqhSiRmdODiFJPKfeLYBaneIUXTfRwiDujhxMX3ChDGF5ElTppmW8OZ3iDD8305JD3eMAjilgrl+Z1HxlTaut88zjHO1xooS+XtMGOJzyjgnU/6SfjMl1b51vABT7gRit9bWhHHrUD+ShAIQKsB1GJgGa+RVzi05Id9HeiS8lumb5exXm1Zv+WMM36lzCfl3p+pkzNFUSxZr5lrOAbxoeVxvcw9hA22I33hkOac13hGje41exfDKtYwzo2sIktbGMHu9jDPg5wiCMca+aLowe96EM/BjCIIQxjBKMYQwLjmMCkZb56NCCcRTaK3/3bf/UDFBhS/g==
+  </data>
+ </layer>
+ <layer id="15" name="under2_none" width="20" height="14">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALaAAAEYAAB
+  </data>
+ </layer>
+ <layer id="16" name="under3_none" width="20" height="14">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALaAAAEYAAB
+  </data>
+ </layer>
+ <layer id="17" name="under4_none" width="20" height="14">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALaAAAEYAAB
+  </data>
+ </layer>
+ <layer id="18" name="under5_none" width="20" height="14">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALaAAAEYAAB
+  </data>
+ </layer>
+ <layer id="19" name="over6_objects" width="20" height="14">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2DgQTMTA0MLELcCcRsT8fpmMzIwzGHEFF8MNGMJEC8F4mVAXArEZUBcDsQVQLwXqGcfEO+H6t0JpHdhMWcUUAYAhnQLgg==
+  </data>
+ </layer>
+ <layer id="20" name="over7_none" width="20" height="14">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALaAAAEYAAB
+  </data>
+ </layer>
+ <layer id="21" name="over8_none" width="20" height="14">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALaAAAEYAAB
+  </data>
+ </layer>
+ <objectgroup color="#0055ff" id="22" name="sound">
+  <object id="14" name="wood" x="48" y="48" width="48" height="120"/>
+ </objectgroup>
+ <objectgroup color="#aa0000" id="4" name="collision" visible="0">
+  <object id="1" x="0" y="0" width="48" height="336"/>
+  <object id="2" x="432" y="0" width="48" height="336"/>
+  <object id="3" x="48" y="240" width="384" height="96"/>
+  <object id="4" x="96" y="48" width="240" height="96"/>
+  <object id="5" x="48" y="0" width="384" height="48"/>
+  <object id="6" x="384" y="48" width="48" height="96"/>
+  <object id="7" x="336" y="48" width="48" height="72"/>
+  <object id="8" x="96" y="144" width="192" height="24"/>
+  <object id="13" x="384" y="216" width="48" height="24"/>
+ </objectgroup>
+ <objectgroup color="#5500ff" id="23" name="rest">
+  <object id="18" name="door_forged_left" x="336" y="48" width="48" height="96"/>
+ </objectgroup>
+ <objectgroup color="#55aaff" id="11" name="spawn">
+  <object id="9" name="hero_s_hometown_chief_s_house" x="48" y="72" width="48" height="24"/>
+  <object id="12" name="hero_s_hometown_chief_s_house_b2" x="336" y="144" width="48" height="24"/>
+ </objectgroup>
+ <objectgroup color="#ffff7f" id="12" name="portal">
+  <object id="10" name="hero_s_hometown_chief_s_house" x="48" y="48" width="48" height="24"/>
+  <object id="11" name="hero_s_hometown_chief_s_house_b2" x="336" y="120" width="48" height="24"/>
+ </objectgroup>
+</map>

@@ -1,0 +1,16 @@
+{
+  "mozes"   : {"source": "hero1", "col": 1, "row": 1},
+  "luana"   : {"source": "hero1", "col": 2, "row": 1},
+  "reignald": {"source": "hero1", "col": 3, "row": 1},
+  "ryiah"   : {"source": "hero1", "col": 4, "row": 1},
+  "valter"  : {"source": "hero1", "col": 1, "row": 2},
+  "galen"   : {"source": "hero1", "col": 2, "row": 2},
+  "jaspar"  : {"source": "hero1", "col": 3, "row": 2},
+  "kiara"   : {"source": "hero1", "col": 4, "row": 2},
+  "luthais" : {"source": "hero2", "col": 1, "row": 1},
+  "elias"   : {"source": "hero2", "col": 2, "row": 1},
+  "onarr"   : {"source": "hero2", "col": 3, "row": 1},
+  "duilio"  : {"source": "hero2", "col": 4, "row": 1},
+  "iellwen" : {"source": "hero2", "col": 1, "row": 2},
+  "faeron"  : {"source": "hero2", "col": 2, "row": 2}
+}

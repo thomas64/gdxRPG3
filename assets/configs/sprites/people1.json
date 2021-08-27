@@ -1,0 +1,18 @@
+{
+  "boy01"       : {"source": "people1", "col": 1, "row": 1},
+  "boy02"       : {"source": "people4", "col": 1, "row": 1},
+  "girl01"      : {"source": "people1", "col": 2, "row": 1},
+  "girl02"      : {"source": "people4", "col": 2, "row": 1},
+  "youngman01"  : {"source": "people1", "col": 3, "row": 1},
+  "youngman02"  : {"source": "people4", "col": 3, "row": 1},
+  "youngwoman01": {"source": "people1", "col": 4, "row": 1},
+  "youngwoman02": {"source": "people4", "col": 4, "row": 1},
+  "man01"       : {"source": "people1", "col": 1, "row": 2},
+  "man02"       : {"source": "people4", "col": 1, "row": 2},
+  "woman01"     : {"source": "people1", "col": 2, "row": 2},
+  "woman02"     : {"source": "people4", "col": 2, "row": 2},
+  "oldman01"    : {"source": "people1", "col": 3, "row": 2},
+  "oldman02"    : {"source": "people4", "col": 3, "row": 2},
+  "oldwoman01"  : {"source": "people1", "col": 4, "row": 2},
+  "oldwoman02"  : {"source": "people4", "col": 4, "row": 2}
+}

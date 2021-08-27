@@ -1,0 +1,27 @@
+{
+  "found_honeywood_cave" : {
+    "type"          : "conversation",
+    "conversationId": "found_honeywood_cave",
+    "entityId"      : "mozes"
+  },
+  "guide_event_minimap"  : {
+    "type": "messagebox",
+    "text": ["Press %minimap% in large areas to see an overview of that area.", "This way it's hard to get lost, like in dark caves."]
+  },
+  "guide_event_equipment": {
+    "type"     : "messagebox",
+    "condition": ["first_equipment_item"],
+    "text"     : ["Press %inventory% to see your inventory.", "Here you can equip items that will make you stronger,", "upgrade your skills or give you special abilities."]
+  },
+  "find_dead_orcs"       : {
+    "type"          : "conversation",
+    "conversationId": "find_dead_orcs",
+    "entityId"      : "mozes"
+  },
+  "defeated_orc_guards"  : {
+    "type"          : "conversation",
+    "condition"     : ["defeated_orc_guards"],
+    "conversationId": "defeated_orc_guards",
+    "entityId"      : "mozes"
+  }
+}
