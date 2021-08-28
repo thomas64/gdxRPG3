@@ -32,5 +32,10 @@
     "condition"     : ["grace_ribbon"],
     "conversationId": "found_grace_ribbon",
     "entityId"      : "mozes"
+  },
+  "find_great_tree"      : {
+    "type"          : "conversation",
+    "conversationId": "find_great_tree",
+    "entityId"      : "mozes"
   }
 }

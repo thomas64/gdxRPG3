@@ -20,7 +20,7 @@ object Constant {
     const val MOVE_SPEED_1 = 48f    // = pixels/second
     const val MOVE_SPEED_2 = 144f   // 48 * 3
     const val MOVE_SPEED_3 = 192f   // 48 * 4
-    const val MOVE_SPEED_4 = 480f   // 48 * 10
+    const val MOVE_SPEED_4 = 720f   // 48 * 15
 
     const val SLOW_FRAMES = 0.50f
     const val NORMAL_FRAMES = 0.25f

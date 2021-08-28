@@ -12,12 +12,14 @@ class InputNpc : InputComponent() {
 
     private var stateTime = 0f
     private lateinit var state: EntityState
+    private lateinit var originalState: EntityState
     private lateinit var originalDirection: Direction
 
     override fun receive(event: Event) {
         if (event is LoadEntityEvent) {
             state = event.state!!
             direction = event.direction!!
+            originalState = state
             originalDirection = direction
         }
         if (event is CollisionEvent) {
@@ -50,7 +52,11 @@ class InputNpc : InputComponent() {
                 state = EntityState.WALKING
                 direction = Direction.getRandom()
             }
+            EntityState.FLYING -> {
+                direction = Direction.getRandom()
+            }
             EntityState.IMMOBILE, EntityState.IDLE_ANIMATING -> {
+                state = originalState
                 direction = originalDirection
             }
             else -> throw IllegalArgumentException("EntityState '$state' not usable.")
@@ -61,8 +67,9 @@ class InputNpc : InputComponent() {
         val npcPosition: Vector2 = event.npcPosition
         val playerPosition: Vector2 = event.playerPosition
         stateTime = DEFAULT_STATE_TIME
-        if (state == EntityState.WALKING) {
-            state = EntityState.IDLE
+        when (state) {
+            EntityState.WALKING -> state = EntityState.IDLE
+            EntityState.FLYING -> state = EntityState.IDLE_ANIMATING
         }
         turnToPlayer(npcPosition, playerPosition)
     }

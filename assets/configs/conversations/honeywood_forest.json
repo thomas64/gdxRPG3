@@ -15,8 +15,18 @@
     "phrases": {
       "1": {"face": "fairy01", "text": ["Ah young Mozes. You may enter here."], "choices": [{"conversationCommand": "RECEIVE_XP", "destinationId": "2"}]},
       "2": {"face": "mozes", "text": ["You know who I am?"]},
-      "3": {"face": "fairy01", "text": ["Yes we do."], "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "4"}]},
-      "4": {"face": "fairy01", "text": ["Young Mozes, please be welcome."], "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "4"}]}
+      "3": {"face": "fairy01", "text": ["Yes we do."]},
+      "4": {"face": "mozes", "text": ["But how..."], "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "5"}]},
+      "5": {"face": "fairy01", "text": ["Young Mozes, please be welcome."], "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "5"}]}
+    }
+  },
+  "find_great_tree"   : {
+    "phrases": {
+      "1": {"text": ["What is this place?"]},
+      "2": {"text": ["It's... it's..."]},
+      "3": {"text": ["so..."]},
+      "4": {"text": ["magical!"]},
+      "5": {"text": ["And friendly."], "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]}
     }
   }
 }
