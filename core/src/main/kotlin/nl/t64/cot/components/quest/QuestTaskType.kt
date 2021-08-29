@@ -1,6 +1,7 @@
 package nl.t64.cot.components.quest
 
-enum class QuestType {
+enum class QuestTaskType {
+    FIND_ITEM,
     FETCH_ITEM,
     SHOW_ITEM,
     DISCOVER,

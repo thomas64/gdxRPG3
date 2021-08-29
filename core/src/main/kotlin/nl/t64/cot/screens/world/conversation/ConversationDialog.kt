@@ -267,6 +267,7 @@ class ConversationDialog {
             ConversationCommand.ACCEPT_QUEST -> acceptQuest()
             ConversationCommand.KNOW_QUEST -> knowQuest(destinationId)
             ConversationCommand.TOLERATE_QUEST -> tolerateQuest()
+            ConversationCommand.SHOW_QUEST_ITEM -> showQuestItem(destinationId)
             ConversationCommand.RECEIVE_ITEM -> receiveItem(destinationId)
             ConversationCommand.RECEIVE_XP -> receiveXp(destinationId)
             ConversationCommand.CHECK_IF_LINKED_QUEST_KNOWN -> checkIfLinkedQuestKnown(destinationId)
@@ -327,6 +328,11 @@ class ConversationDialog {
     private fun tolerateQuest() {
         gameData.quests.handleTolerate(conversationId!!)
         continueConversation(Constant.PHRASE_ID_QUEST_TOLERATE)
+    }
+
+    private fun showQuestItem(destinationId: String) {
+        gameData.quests.handleShowQuestItem(conversationId!!)
+        continueConversation(destinationId)
     }
 
     private fun receiveItem(destinationId: String) {

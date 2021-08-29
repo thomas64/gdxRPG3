@@ -5,9 +5,13 @@ import nl.t64.cot.Utils.gameData
 
 class QuestTask(
     val taskPhrase: String = "",
-    val type: QuestType = QuestType.NONE,
+    val type: QuestTaskType = QuestTaskType.NONE,
     val target: Map<String, Int> = emptyMap(),
     val isOptional: Boolean = false,
+    val isAnyOf: Boolean = false,
+    var isHidden: Boolean = false,
+    val linkedWith: String? = null
+
 ) {
     var isComplete: Boolean = false
     var isFailed: Boolean = false
@@ -15,10 +19,10 @@ class QuestTask(
 
     override fun toString(): String {
         return when {
-            type == QuestType.NONE -> System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + taskPhrase
+            type == QuestTaskType.NONE -> System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + taskPhrase
             isFailed -> "x  $taskPhrase"
             isQuestFinished -> "v  $taskPhrase"
-            type == QuestType.RETURN -> "     $taskPhrase"
+            type == QuestTaskType.RETURN -> "     $taskPhrase"
             isCompleteForReturn() -> "v  $taskPhrase"
             else -> "     $taskPhrase"
         }
@@ -33,13 +37,14 @@ class QuestTask(
 
     fun setComplete() {
         when (type) {
-            QuestType.ITEM_DELIVERY -> {
+            QuestTaskType.ITEM_DELIVERY -> {
                 target.forEach { (itemId, amount) -> gameData.inventory.autoRemoveItem(itemId, amount) }
                 isComplete = true
             }
-            QuestType.DISCOVER,
-            QuestType.MESSAGE_DELIVERY -> isComplete = true
-            QuestType.CHECK -> setCheckTypePossibleComplete()
+            QuestTaskType.SHOW_ITEM,
+            QuestTaskType.DISCOVER,
+            QuestTaskType.MESSAGE_DELIVERY -> isComplete = true
+            QuestTaskType.CHECK -> setCheckTypePossibleComplete()
             else -> throw IllegalArgumentException("Only possible to complete a DISCOVER, CHECK or DELIVERY task.")
         }
     }
@@ -65,12 +70,15 @@ class QuestTask(
 
     fun isCompleteForReturn(): Boolean {
         return when (type) {
-            QuestType.RETURN -> true
-            QuestType.FETCH_ITEM -> doesInventoryContainsTarget()
-            QuestType.DISCOVER,
-            QuestType.CHECK,
-            QuestType.MESSAGE_DELIVERY,
-            QuestType.ITEM_DELIVERY -> isComplete
+            QuestTaskType.RETURN -> true
+            QuestTaskType.FIND_ITEM,
+            QuestTaskType.FETCH_ITEM -> doesInventoryContainsTarget()
+            QuestTaskType.DISCOVER,
+            QuestTaskType.CHECK,
+            QuestTaskType.KILL, // temp for now
+            QuestTaskType.MESSAGE_DELIVERY,
+            QuestTaskType.SHOW_ITEM, // test temp?
+            QuestTaskType.ITEM_DELIVERY -> isComplete
             else -> throw IllegalArgumentException("No '$type' task for now.")
         }
     }

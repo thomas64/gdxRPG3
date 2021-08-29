@@ -12,29 +12,39 @@
     }
   },
   "quest_orc_guards": {
-    "title"   : "Get past the 2 Orc guards",
+    "title"   : "The guards of Ardor",
     "entityId": "orc_sergeant",
-    "summary" : "2 Orc guards won't let you through unless you show something.",
-    "isHidden": true,
+    "summary" : "You found out that Grace probably is where Ardor is. Two orc guards won't let you get to Ardor. Find a way to get past them.",
     "tasks"   : {
       "1": {
-        "taskPhrase": "Find that something.",
-        "type"      : "SHOW_ITEM",
+        "taskPhrase": "Retrieve the mask of Ardor from an orc",
+        "type"      : "FIND_ITEM",
         "target"    : {"mask_of_ardor": 1},
-        "isOptional": true
+        "isOptional": true,
+        "isHidden"  : true,
+        "linkedWith": "2"
       },
       "2": {
-        "taskPhrase": "Bluff your way through (Diplomat 2).",
-        "type"      : "NONE",
-        "isOptional": true
+        "taskPhrase": "Show the mask to the guards",
+        "type"      : "SHOW_ITEM",
+        "target"    : {"mask_of_ardor": 1},
+        "isAnyOf"   : true,
+        "isHidden"  : true
       },
       "3": {
-        "taskPhrase": "Kill the guards.",
-        "type"      : "NONE",
-        "isOptional": true
+        "taskPhrase": "Bluff your way through [Diplomat 2]",
+        "type"      : "MESSAGE_DELIVERY",
+        "isAnyOf"   : true,
+        "isHidden"  : true
       },
       "4": {
-        "taskPhrase": "Show it to the guards.",
+        "taskPhrase": "Kill the guards",
+        "type"      : "KILL",
+        "isAnyOf"   : true,
+        "isHidden"  : true
+      },
+      "5": {
+        "taskPhrase": "Get past the guards",
         "type"      : "RETURN"
       }
     }

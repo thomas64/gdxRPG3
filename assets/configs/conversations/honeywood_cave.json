@@ -59,7 +59,7 @@
       }
     }
   },
-  "quest_orc_guards"    : {
+  "quest_orc_guards": {
     "phrases": {
       "1"   : {"text": ["Halt! Forbidden area!"]},
       "2"   : {"text": ["This is domain of Great Wizard Ardor.", "Leave now, or die!"]},
@@ -68,10 +68,10 @@
         "text"   : ["Wait wait wait! Don't kill me."],
         "choices": [
           {"text": "I'm looking for a little girl, have you guys maybe seen her?", "destinationId": "10"},
-          {"condition": ["i_mask_of_ardor"], "text": "[Mask of Ardor] Your boss needs this for the ritual, let me through.", "destinationId": "20"},
+          {"condition": ["i_mask_of_ardor"], "text": "[Mask of Ardor] Your boss needs this for the ritual, let me through.", "conversationCommand": "SHOW_QUEST_ITEM", "destinationId": "20"},
           {"condition": ["i_diplomat2"], "text": "[Diplomat 2] Don't threaten me! Do you know who I am?", "destinationId": "30"},
           {"condition": ["i_level10"], "text": "Alright then, I'll have to go through you! (Start battle)", "destinationId": "40"},
-          {"text": "Okay, I'll go away... For now. (Leave conversation)", "conversationCommand": "EXIT_CONVERSATION"}
+          {"text": "Okay, I'll go away... For now. (Leave conversation)", "conversationCommand": "ACCEPT_QUEST"}
         ]
       },
       "10"  : {
@@ -132,6 +132,11 @@
         "face"   : "orc_sergeant",
         "text"   : ["You will die!"],
         "choices": [{"conversationCommand": "START_BATTLE", "destinationId": "1"}]
+      },
+      "1000": {
+        "face"   : "orc_sergeant",
+        "text"   : ["You watch it."],
+        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "1"}]
       },
       "2000": {
         "face"   : "orc_sergeant",

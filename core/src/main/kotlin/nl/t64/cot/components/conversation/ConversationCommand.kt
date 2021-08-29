@@ -10,6 +10,7 @@ enum class ConversationCommand {
     KNOW_QUEST,
     TOLERATE_QUEST,
     ACCEPT_QUEST,
+    SHOW_QUEST_ITEM,
     RECEIVE_ITEM,
     RECEIVE_XP,
     CHECK_IF_LINKED_QUEST_KNOWN,

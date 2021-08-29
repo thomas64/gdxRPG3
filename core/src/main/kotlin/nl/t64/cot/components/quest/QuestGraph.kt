@@ -39,7 +39,24 @@ class QuestGraph(
     fun getAllTasksForVisual(): Array<QuestTask> = tasks.entries
         .sortedBy { it.key }
         .map { it.value }
+        .onEach { possibleUnhide(it) }
+        .filter { !it.isHidden }
         .toTypedArray()
+
+    private fun possibleUnhide(it: QuestTask) {
+        if (it.isCompleteForReturn()) {
+            it.isHidden = false
+            it.linkedWith?.let {
+                tasks[it]!!.isHidden = false
+            }
+        }
+    }
+
+    fun handleShowQuestItem() {
+        tasks.entries
+            .filter { it.value.type == QuestTaskType.SHOW_ITEM }
+            .forEach { setTaskComplete(it.key) }
+    }
 
     fun setTaskComplete(taskId: String) {
         tasks[taskId]!!.setComplete()
@@ -72,7 +89,7 @@ class QuestGraph(
     fun handleReceive(observers: ConversationSubject) {
         know()
         val receiveLoot = getAllQuestTasks()
-            .filter { it.type == QuestType.ITEM_DELIVERY }
+            .filter { it.type == QuestTaskType.ITEM_DELIVERY }
             .map { Loot(it.target as MutableMap<String, Int>) }
             .first()
         observers.notifyShowReceiveDialog(receiveLoot)
@@ -194,7 +211,7 @@ class QuestGraph(
 
     private fun takeDemands() {
         getAllQuestTasks()
-            .filter { it.type == QuestType.FETCH_ITEM }
+            .filter { it.type == QuestTaskType.FETCH_ITEM }
             .forEach { it.removeTargetFromInventory() }
     }
 
@@ -210,8 +227,24 @@ class QuestGraph(
     }
 
     private fun doesReturnMeetDemand(): Boolean {
+        val anyOfs = getAllQuestTasks().filter { it.isAnyOf }
+        return when {
+            anyOfs.isEmpty() -> doesReturnMeetDemandWithoutAnyOfs()
+            else -> doesReturnMeetDemandWithAnyOfs(anyOfs)
+        }
+    }
+
+    private fun doesReturnMeetDemandWithAnyOfs(anyOfs: List<QuestTask>): Boolean {
+        return when {
+            anyOfs.none { it.isCompleteForReturn() } -> false
+            else -> doesReturnMeetDemandWithoutAnyOfs()
+        }
+    }
+
+    private fun doesReturnMeetDemandWithoutAnyOfs(): Boolean {
         return getAllQuestTasks()
             .filter { !it.isOptional }
+            .filter { !it.isAnyOf }
             .all { it.isCompleteForReturn() }
     }
 

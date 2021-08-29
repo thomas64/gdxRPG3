@@ -47,7 +47,7 @@ internal class QuestTest : GameTest() {
         val tasks = quest0001.tasks
         assertThat(tasks).hasSize(3)
         assertThat(tasks["1"]!!.taskPhrase).isEqualTo("Collect 3 herbs")
-        assertThat(tasks["1"]!!.type).isEqualTo(QuestType.FETCH_ITEM)
+        assertThat(tasks["1"]!!.type).isEqualTo(QuestTaskType.FETCH_ITEM)
         assertThat(tasks["1"]!!.target).containsOnly(entry("herb", 3))
         assertThat(tasks["1"]).hasToString("     Collect 3 herbs")
     }
@@ -287,7 +287,7 @@ internal class QuestTest : GameTest() {
     fun whenQuestTaskWithMessageIsCreated_ShouldShowThatMessage() {
         val message = "(No tasks visible until this quest is accepted)"
         val questTask = QuestTask(message)
-        assertThat(questTask.type).isEqualTo(QuestType.NONE)
+        assertThat(questTask.type).isEqualTo(QuestTaskType.NONE)
         assertThat(questTask).hasToString(
             System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + message
         )

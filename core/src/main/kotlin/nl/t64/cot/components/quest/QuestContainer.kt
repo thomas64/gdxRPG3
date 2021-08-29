@@ -86,6 +86,8 @@ class QuestContainer {
                                        endConversation: (String) -> Unit) =
         getQuestById(questId).handleCheckIfAcceptedInventory(taskId, phraseId, continueConversation, endConversation)
 
+    fun handleShowQuestItem(questId: String) =
+        getQuestById(questId).handleShowQuestItem()
 
     fun contains(questId: String): Boolean = quests.containsKey(questId)
     fun getQuestById(questId: String): QuestGraph = quests[questId]!!
