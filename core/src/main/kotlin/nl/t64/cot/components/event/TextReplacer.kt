@@ -21,6 +21,7 @@ object TextReplacer {
             "%fast%" -> str.replace(substr, if (hasGamePad) "'R1' button" else "'Shift' key")
             "%slow%" -> str.replace(substr, if (hasGamePad) "'L1' button" else "'Ctrl' key")
             "%minimap%" -> str.replace(substr, if (hasGamePad) "'Select' button" else "'M' key")
+            "%logbook%" -> str.replace(substr, if (hasGamePad) "'X' button" else "'L' key")
             else -> throw IllegalArgumentException("Unexpected value: '$substr'")
         }
     }

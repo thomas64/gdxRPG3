@@ -12,8 +12,10 @@ object ConditionDatabase {
         Pair("3_starting_potions") { startingPotions },
         Pair("grace_ribbon") { graceRibbon },
         Pair("first_equipment_item") { firstEquipmentItem },
-        Pair("diplomat2") { diplomat2 },
+        Pair("first_quest") { firstQuest },
         Pair("i_mask_of_ardor") { maskOfArdor },
+        Pair("i_diplomat2") { diplomat2 },
+        Pair("i_level10") { level10 },
         Pair("defeated_orc_guards") { defeatedOrcGuards },
 
         Pair("diplomat3") { diplomat3 },
@@ -40,8 +42,10 @@ object ConditionDatabase {
     private val startingPotions get() = hasEnoughOfItem("healing_potion", 3)
     private val graceRibbon get() = hasEnoughOfItem("grace_ribbon", 1)
     private val firstEquipmentItem get() = hasEnoughOfOneOfTheseItems("basic_light_helmet", "basic_light_boots")
+    private val firstQuest get() = isFirstQuestAccepted()
     private val diplomat2 get() = hasEnoughOfSkill(SkillItemId.DIPLOMAT, 2)
     private val maskOfArdor get() = hasEnoughOfItem("mask_of_ardor", 1)
+    private val level10 get() = hasMinimumLevelOf(10)
     private val defeatedOrcGuards get() = isBattleWon("quest_orc_guards")
 
     private val diplomat3 get() = hasEnoughOfSkill(SkillItemId.DIPLOMAT, 3)
@@ -59,12 +63,18 @@ object ConditionDatabase {
     private fun hasEnoughOfSkill(skillItemId: SkillItemId, rank: Int): Boolean =
         gameData.party.hasEnoughOfSkill(skillItemId, rank)
 
+    private fun hasMinimumLevelOf(requestedLevel: Int): Boolean =
+        gameData.party.getHero(0).getLevel() >= requestedLevel
+
     private fun hasEnoughOfOneOfTheseItems(vararg inventoryItemIds: String): Boolean =
         inventoryItemIds.any { hasEnoughOfItem(it, 1) }
 
     private fun hasEnoughOfItem(inventoryItemId: String, amount: Int): Boolean =
         gameData.inventory.hasEnoughOfItem(inventoryItemId, amount)
                 || gameData.party.getAllHeroes().count { it.hasInventoryItem(inventoryItemId) } >= amount
+
+    private fun isFirstQuestAccepted(): Boolean =
+        gameData.quests.getAllKnownQuests().size == 1
 
     private fun isQuestTaskNumberComplete(questId: String, taskNumber: Int): Boolean =
         gameData.quests.isTaskNumberComplete(questId, taskNumber)

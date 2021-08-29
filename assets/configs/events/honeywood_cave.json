@@ -11,7 +11,12 @@
   "guide_event_equipment": {
     "type"     : "messagebox",
     "condition": ["first_equipment_item"],
-    "text"     : ["Press %inventory% to see your inventory.", "Here you can equip items that will make you stronger,", "upgrade your skills or give you special abilities."]
+    "text"     : ["Press %inventory% to see your inventory.", "Here you can equip items that will give you more protection in battles like this item.", "You can also switch to different weapons, if you have them in your inventory."]
+  },
+  "guide_event_quest"    : {
+    "type"     : "messagebox",
+    "condition": ["first_quest"],
+    "text"     : ["Press %logbook% to see your logbook.", "Here you can see everything quest related."]
   },
   "find_dead_orcs"       : {
     "type"          : "conversation",

@@ -58,8 +58,7 @@ internal class QuestTest : GameTest() {
         val quest0001 = quests.getQuestById("quest0001")
         assertThatIllegalArgumentException().isThrownBy { quest0001.setTaskComplete("1") }
         assertThat(quest0001.isCurrentStateEqualOrHigherThan(QuestState.FINISHED)).isFalse
-        quest0001.handleAccept({ assertThat(it).isEqualTo(Constant.PHRASE_ID_QUEST_ACCEPT) },
-                               ConversationSubject())
+        quest0001.handleAccept { assertThat(it).isEqualTo(Constant.PHRASE_ID_QUEST_ACCEPT) }
         assertThat(quest0001.currentState).isEqualTo(QuestState.ACCEPTED)
         quest0001.handleReturn { assertThat(it).isEqualTo(Constant.PHRASE_ID_QUEST_NO_SUCCESS) }
         assertThatIllegalStateException().isThrownBy { quest0001.handleReward({}, ConversationSubject()) }
@@ -83,17 +82,14 @@ internal class QuestTest : GameTest() {
         inventory.autoSetItem(InventoryDatabase.createInventoryItem("gemstone", 5))
         inventory.autoSetItem(InventoryDatabase.createInventoryItem("herb", 3))
         val quest0001 = quests.getQuestById("quest0001")
-        quest0001.handleAccept(
-            { assertThat(it).isEqualTo(Constant.PHRASE_ID_QUEST_IMMEDIATE_SUCCESS) },
-            ConversationSubject()
-        )
+        quest0001.handleAccept { assertThat(it).isEqualTo(Constant.PHRASE_ID_QUEST_IMMEDIATE_SUCCESS) }
     }
 
     @Test
     fun whenQuestIsTolerated_ShouldNotHandleQuickFlow() {
         val quest0002 = quests.getQuestById("quest0002")
         assertThat(quest0002.currentState).isEqualTo(QuestState.UNKNOWN)
-        quest0002.handleTolerate(ConversationSubject())
+        quest0002.handleTolerate()
         assertThat(quest0002.currentState).isEqualTo(QuestState.ACCEPTED)
     }
 
@@ -107,10 +103,10 @@ internal class QuestTest : GameTest() {
         assertThat(quest0001.currentState).isEqualTo(QuestState.KNOWN)
         assertThatExceptionOfType(NoSuchElementException::class.java)
             .isThrownBy { quest0001.handleReceive(ConversationSubject()) }
-        quest0001.handleAccept({}, ConversationSubject())
+        quest0001.handleAccept {}
         assertThat(quest0001.currentState).isEqualTo(QuestState.ACCEPTED)
         assertThatIllegalStateException().isThrownBy { quest0001.know() }
-        assertThatIllegalStateException().isThrownBy { quest0001.accept(ConversationSubject()) }
+        assertThatIllegalStateException().isThrownBy { quest0001.accept() }
         inventory.autoSetItem(InventoryDatabase.createInventoryItem("gemstone", 5))
         inventory.autoSetItem(InventoryDatabase.createInventoryItem("herb", 3))
         quest0001.handleReward({}, ConversationSubject())
@@ -138,7 +134,7 @@ internal class QuestTest : GameTest() {
         quest0005.handleCheckIfAcceptedInventory(
             "1", "xxx", { assertThat(it).isNull() }, { assertThat(it).isEqualTo("xxx") })
 
-        quest0005.accept(ConversationSubject())
+        quest0005.accept()
 
         quest0005.handleCheckIfAcceptedInventory(
             "1", "xxx",
@@ -156,7 +152,7 @@ internal class QuestTest : GameTest() {
         quest0004.handleCheckIfAccepted(
             "xxx", { assertThat(it).isNull() }, { s: String? -> assertThat(s).isEqualTo("xxx") })
 
-        quest0004.handleAccept({ assertThat(it).isEqualTo(Constant.PHRASE_ID_QUEST_ACCEPT) }, ConversationSubject())
+        quest0004.handleAccept { assertThat(it).isEqualTo(Constant.PHRASE_ID_QUEST_ACCEPT) }
 
         quest0004.handleCheckIfAccepted(
             "xxx", { assertThat(it).isEqualTo(Constant.PHRASE_ID_QUEST_DELIVERY) }, { assertThat(it).isNull() })
@@ -170,7 +166,7 @@ internal class QuestTest : GameTest() {
         val quest0001 = quests.getQuestById("quest0001")
         val questLoot = loot.getLoot("quest0001")
         assertThat(questLoot.isXpGained()).isFalse
-        quest0001.handleAccept({}, ConversationSubject())
+        quest0001.handleAccept {}
         quest0001.handleReturn {}
         questLoot.clearContent()
         quest0001.handleReward({}, ConversationSubject())
@@ -182,9 +178,9 @@ internal class QuestTest : GameTest() {
         inventory.autoSetItem(InventoryDatabase.createInventoryItem("key_mysterious_tunnel", 1))
 
         val quest0006 = quests.getQuestById("quest0006")
-        assertThat(quest0006.getAllTasks()).extracting("isOptional").containsExactly(true, false, true, false)
-        quest0006.handleAccept({}, ConversationSubject())
-        val allTasks = quest0006.getAllTasks()
+        assertThat(quest0006.getAllTasksForVisual()).extracting("isOptional").containsExactly(true, false, true, false)
+        quest0006.handleAccept {}
+        val allTasks = quest0006.getAllTasksForVisual()
         assertThat(allTasks[0].isFailed).isFalse
         assertThat(allTasks[1].isFailed).isFalse
         assertThat(allTasks[2].isFailed).isFalse
@@ -213,12 +209,12 @@ internal class QuestTest : GameTest() {
         quest0001.know()
         assertThat(quests.getAllKnownQuests()).extracting("id").containsExactly("quest0001")
         quest0003.know()
-        quest0003.accept(ConversationSubject())
+        quest0003.accept()
         assertThat(quests.getAllKnownQuests()).extracting("id").containsExactly("quest0001", "quest0003")
-        quest0001.accept(ConversationSubject())
+        quest0001.accept()
         quest0001.unclaim()
         assertThat(quests.getAllKnownQuests()).extracting("id").containsExactly("quest0003", "quest0001")
-        quest0003.handleFail(ConversationSubject())
+        quest0003.handleFail()
         assertThat(quests.getAllKnownQuests()).extracting("id").containsExactly("quest0001", "quest0003")
     }
 
@@ -228,14 +224,14 @@ internal class QuestTest : GameTest() {
         assertThat(quest0001).hasToString("     Herbs for boy")
         quest0001.know()
         assertThat(quest0001).hasToString("     Herbs for boy")
-        quest0001.accept(ConversationSubject())
+        quest0001.accept()
         assertThat(quest0001).hasToString("     Herbs for boy")
         quest0001.unclaim()
         assertThat(quest0001).hasToString("o   Herbs for boy")
         quest0001.finish()
         assertThat(quest0001).hasToString("v  Herbs for boy")
         assertThat(quest0001.isFailed).isFalse
-        quest0001.handleFail(ConversationSubject())
+        quest0001.handleFail()
         assertThat(quest0001).hasToString("x  Herbs for boy")
         assertThat(quest0001.isFailed).isTrue
     }
@@ -262,7 +258,7 @@ internal class QuestTest : GameTest() {
     @Test
     fun whenQuestIsShownInQuestLog_ShouldShowTasksInCorrectOrder() {
         val quest0001 = quests.getQuestById("quest0001")
-        assertThat(quest0001.getAllTasks()).extracting("taskPhrase").containsExactly(
+        assertThat(quest0001.getAllTasksForVisual()).extracting("taskPhrase").containsExactly(
             "Collect 3 herbs", "Collect 5 gemstones for the programmer", "Give them to Johnny at Starter Path"
         )
     }

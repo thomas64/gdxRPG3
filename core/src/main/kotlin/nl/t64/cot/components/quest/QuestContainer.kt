@@ -43,17 +43,17 @@ class QuestContainer {
     fun know(questId: String) =
         getQuestById(questId).know()
 
-    fun accept(questId: String, observers: ConversationSubject) =
-        getQuestById(questId).accept(observers)
+    fun accept(questId: String) =
+        getQuestById(questId).accept()
 
     fun finish(questId: String) =
         getQuestById(questId).finish()
 
-    fun handleTolerate(questId: String, observers: ConversationSubject) =
-        getQuestById(questId).handleTolerate(observers)
+    fun handleTolerate(questId: String) =
+        getQuestById(questId).handleTolerate()
 
-    fun handleAccept(questId: String, continueConversation: (String) -> Unit, observers: ConversationSubject) =
-        getQuestById(questId).handleAccept(continueConversation, observers)
+    fun handleAccept(questId: String, continueConversation: (String) -> Unit) =
+        getQuestById(questId).handleAccept(continueConversation)
 
     fun handleReceive(questId: String, observers: ConversationSubject) =
         getQuestById(questId).handleReceive(observers)
@@ -61,14 +61,14 @@ class QuestContainer {
     fun handleReturn(questId: String, continueConversation: (String) -> Unit) =
         getQuestById(questId).handleReturn(continueConversation)
 
-    fun handleAcceptOrReturn(questId: String, continueConversation: (String) -> Unit, observers: ConversationSubject) =
-        getQuestById(questId).handleAcceptOrReturn(continueConversation, observers)
+    fun handleAcceptOrReturn(questId: String, continueConversation: (String) -> Unit) =
+        getQuestById(questId).handleAcceptOrReturn(continueConversation)
 
     fun handleReward(questId: String, endConversation: (String) -> Unit, observers: ConversationSubject) =
         getQuestById(questId).handleReward(endConversation, observers)
 
-    fun handleFail(questId: String, observers: ConversationSubject) =
-        getQuestById(questId).handleFail(observers)
+    fun handleFail(questId: String) =
+        getQuestById(questId).handleFail()
 
     fun handleCheckIfLinkedIsKnown(questId: String, phraseId: String, continueConversation: (String) -> Unit) =
         getQuestById(questId).handleCheckIfLinkedIsKnown(phraseId, continueConversation)

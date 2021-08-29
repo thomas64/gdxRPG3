@@ -316,9 +316,7 @@ class ConversationDialog {
     }
 
     private fun acceptQuest() {
-        gameData.quests.handleAccept(conversationId!!,
-                                     { continueConversation(it) },                  // sets new phraseId
-                                     conversationObservers)
+        gameData.quests.handleAccept(conversationId!!) { continueConversation(it) } // sets new phraseId
     }
 
     private fun knowQuest(destinationId: String) {
@@ -327,7 +325,7 @@ class ConversationDialog {
     }
 
     private fun tolerateQuest() {
-        gameData.quests.handleTolerate(conversationId!!, conversationObservers)
+        gameData.quests.handleTolerate(conversationId!!)
         continueConversation(Constant.PHRASE_ID_QUEST_TOLERATE)
     }
 
@@ -393,9 +391,7 @@ class ConversationDialog {
     }
 
     private fun acceptOrReturnQuest() {
-        gameData.quests.handleAcceptOrReturn(conversationId!!,
-                                             { continueConversation(it) },            // sets new phraseId
-                                             conversationObservers)
+        gameData.quests.handleAcceptOrReturn(conversationId!!) { continueConversation(it) } // sets new phraseId
     }
 
     private fun bonusRewardQuest() {
@@ -413,7 +409,7 @@ class ConversationDialog {
 
     private fun failQuest(destinationId: String) {
         audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_QUEST_FAIL)
-        gameData.quests.handleFail(conversationId!!, conversationObservers)
+        gameData.quests.handleFail(conversationId!!)
         continueConversation(destinationId)
     }
 
@@ -421,7 +417,7 @@ class ConversationDialog {
         if (gameData.quests.contains(conversationId!!)
             && gameData.quests.isCurrentStateEqualOrLowerThan(conversationId!!, QuestState.KNOWN)
         ) {
-            gameData.quests.handleTolerate(conversationId!!, conversationObservers)
+            gameData.quests.handleTolerate(conversationId!!)
         }
         endConversation(destinationId)
         brokerManager.componentObservers.notifyShowBattleScreen(conversationId!!)

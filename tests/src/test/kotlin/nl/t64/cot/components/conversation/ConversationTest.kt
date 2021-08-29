@@ -5,7 +5,6 @@ import nl.t64.cot.GameTest
 import nl.t64.cot.ProfileManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.components.party.inventory.InventoryDatabase
-import nl.t64.cot.screens.world.conversation.ConversationSubject
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -130,7 +129,7 @@ internal class ConversationTest : GameTest() {
 
         val quest7 = gameData.quests.getQuestById("quest0007")
         quest7.know()
-        quest7.accept(ConversationSubject())
+        quest7.accept()
         quest7.unclaim()
 
         assertThat(graph.getAssociatedChoices()).hasSize(2)

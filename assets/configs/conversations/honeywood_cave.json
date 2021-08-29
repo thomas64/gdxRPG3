@@ -51,7 +51,10 @@
         "text": ["You have to get past guards, but they are far too strong for you.", "They kill you with ease."]
       },
       "14": {
-        "text"   : ["I need to go to Ardor now to deliver his mask for ritual and you are standing in my way.", "She will die and so will you!"],
+        "text": ["I need to go to Ardor now to deliver his mask for ritual and you are standing in my way.", "She will die and so will you!"]
+      },
+      "15": {
+        "text"   : ["Now die!"],
         "choices": [{"conversationCommand": "START_BATTLE"}]
       }
     }
@@ -66,8 +69,8 @@
         "choices": [
           {"text": "I'm looking for a little girl, have you guys maybe seen her?", "destinationId": "10"},
           {"condition": ["i_mask_of_ardor"], "text": "[Mask of Ardor] Your boss needs this for the ritual, let me through.", "destinationId": "20"},
-          {"condition": ["diplomat2"], "text": "[Diplomat 2] Don't threaten me! Do you know who I am?", "destinationId": "30"},
-          {"text": "Alright then, I'll have to go through you! (Start battle)", "destinationId": "40"},
+          {"condition": ["i_diplomat2"], "text": "[Diplomat 2] Don't threaten me! Do you know who I am?", "destinationId": "30"},
+          {"condition": ["i_level10"], "text": "Alright then, I'll have to go through you! (Start battle)", "destinationId": "40"},
           {"text": "Okay, I'll go away... For now. (Leave conversation)", "conversationCommand": "EXIT_CONVERSATION"}
         ]
       },
@@ -152,31 +155,36 @@
       "2": {"text": ["What kind of terrible force is there behind that gate?"], "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]}
     }
   },
-  "scared_orc_scout"    : {
+  "quest_scared_orc": {
     "phrases": {
-      "1": {"text": ["Don't hurt me! What do you want?"]},
-      "2": {
+      "1"   : {"text": ["Don't hurt me! What do you want?"]},
+      "2"   : {
         "face": "mozes",
         "text": ["I'm looking for a little girl, have you seen her?"]
       },
-      "3": {
+      "3"   : {
         "face": "orc_scout",
         "text": ["No, I know nothing."]
       },
-      "4": {
+      "4"   : {
         "face": "mozes",
         "text": ["You know nothing? What do you know?"]
       },
-      "5": {
+      "5"   : {
         "face": "orc_scout",
         "text": ["No, no! If you let me live, I tell you secret."]
       },
-      "6": {
-        "text": ["At other side of cave, all way to south, past guards, more south, then east, upper wall, there is hidden door in dark."]
+      "6"   : {
+        "text"   : ["Here inside cave, at complete other side, go all way to south, then east, search north wall, there is hidden door in dark."],
+        "choices": [{"conversationCommand": "ACCEPT_QUEST"}]
       },
-      "7": {
+      "1000": {
         "text"   : ["Don't hurt me!"],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "6"}]
+        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "1000"}]
+      },
+      "2000": {
+        "text"   : ["Don't hurt me!"],
+        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "2000"}]
       }
     }
   },

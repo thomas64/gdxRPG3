@@ -15,15 +15,9 @@
     "battlers": [{"id": "blue_bat", "amount": 1}]
   },
   "battle0006"      : {
-    "battlers": [{"id": "blue_bat", "amount": 1}]
-  },
-  "battle0007"      : {
-    "battlers": [{"id": "blue_bat", "amount": 1}]
-  },
-  "battle0008"      : {
     "battlers": [{"id": "blue_bat", "amount": 2}]
   },
-  "battle0009"      : {
+  "battle0007": {
     "battlers": [{"id": "blue_bat", "amount": 2}]
   },
   "lonely_orc_scout": {

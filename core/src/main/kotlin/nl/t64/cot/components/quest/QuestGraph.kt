@@ -1,6 +1,10 @@
 package nl.t64.cot.components.quest
 
+import nl.t64.cot.Utils.audioManager
+import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
+import nl.t64.cot.audio.AudioCommand
+import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.world.conversation.ConversationSubject
@@ -32,13 +36,17 @@ class QuestGraph(
     fun isCurrentStateEqualOrHigherThan(questState: QuestState): Boolean = currentState.isEqualOrHigherThan(questState)
     fun isCurrentStateEqualOrLowerThan(questState: QuestState): Boolean = currentState.isEqualOrLowerThan(questState)
 
-    fun getAllTasks(): Array<QuestTask> = tasks.entries
+    fun getAllTasksForVisual(): Array<QuestTask> = tasks.entries
         .sortedBy { it.key }
         .map { it.value }
         .toTypedArray()
 
     fun setTaskComplete(taskId: String) {
         tasks[taskId]!!.setComplete()
+        if (currentState == QuestState.ACCEPTED) {
+            showMessageTooltipQuestUpdated()
+        }
+        checkIfAllTasksAreComplete()
     }
 
     fun isTaskComplete(taskId: String?): Boolean {
@@ -46,16 +54,19 @@ class QuestGraph(
         return tasks[taskId]!!.isComplete
     }
 
-    fun handleAccept(continueConversation: (String) -> Unit, observers: ConversationSubject) {
-        handleTolerate(observers)
+    fun handleAccept(continueConversation: (String) -> Unit) {
+        handleTolerate()
         val phraseId =
             if (doesReturnMeetDemand()) Constant.PHRASE_ID_QUEST_IMMEDIATE_SUCCESS else Constant.PHRASE_ID_QUEST_ACCEPT
         continueConversation.invoke(phraseId)
     }
 
-    fun handleTolerate(observers: ConversationSubject) {
+    fun handleTolerate() {
         know()
-        accept(observers)
+        accept()
+        if (areAllQuestTasksComplete()) {
+            completeQuest()
+        }
     }
 
     fun handleReceive(observers: ConversationSubject) {
@@ -106,9 +117,9 @@ class QuestGraph(
         continueConversation.invoke(phraseId)
     }
 
-    fun handleAcceptOrReturn(continueConversation: (String) -> Unit, observers: ConversationSubject) {
+    fun handleAcceptOrReturn(continueConversation: (String) -> Unit) {
         if (isCurrentStateEqualOrLowerThan(QuestState.KNOWN)) {
-            handleAccept(continueConversation, observers)
+            handleAccept(continueConversation)
         } else if (currentState == QuestState.ACCEPTED) {
             handleReturn(continueConversation)
         } else {
@@ -118,7 +129,7 @@ class QuestGraph(
 
     fun handleReward(endConversation: (String) -> Unit, observers: ConversationSubject) {
         if (currentState == QuestState.ACCEPTED) {
-            handleRewardPart1(observers)
+            handleRewardPart1()
         }
         if (currentState == QuestState.UNCLAIMED) {
             handleRewardPart2(observers, endConversation)
@@ -127,26 +138,21 @@ class QuestGraph(
         }
     }
 
-    fun handleFail(observers: ConversationSubject) {
+    fun handleFail() {
         isFailed = true
-        observers.notifyShowMessageTooltip("Quest failed:" + System.lineSeparator() + System.lineSeparator() + title)
+        showMessageTooltipQuestFailed()
     }
 
     fun know() {
-        when (currentState) {
-            QuestState.KNOWN -> {
-            }
-            QuestState.UNKNOWN -> currentState = QuestState.KNOWN
-            else -> throw IllegalStateException("Only quest UNKNOWN can be KNOWN.")
+        if (currentState == QuestState.UNKNOWN) {
+            currentState = QuestState.KNOWN
         }
     }
 
-    fun accept(observers: ConversationSubject) {
+    fun accept() {
         if (currentState == QuestState.KNOWN) {
             currentState = QuestState.ACCEPTED
-            if (!isHidden) observers.notifyShowMessageTooltip("New quest:" + System.lineSeparator() + System.lineSeparator() + title)
-        } else {
-            throw IllegalStateException("Only quest KNOWN can be ACCEPTED.")
+            if (!isHidden) showMessageTooltipQuestNew()
         }
     }
 
@@ -166,17 +172,17 @@ class QuestGraph(
         }
     }
 
-    private fun handleRewardPart1(observers: ConversationSubject) {
+    private fun handleRewardPart1() {
         takeDemands()
         unclaim()
         getAllQuestTasks().forEach { it.forceFinished() }
-        if (!isHidden) observers.notifyShowMessageTooltip("Quest completed:" + System.lineSeparator() + System.lineSeparator() + title)
+        if (!isHidden) showMessageTooltipQuestCompleted()
     }
 
     private fun handleRewardPart2(observers: ConversationSubject, endConversation: (String) -> Unit) {
         val reward = gameData.loot.getLoot(id)
         reward.removeBonus()
-        val levelUpMessage = partyGainXp(reward, observers)
+        val levelUpMessage = partyGainXp(reward)
         if (reward.isTaken()) {
             finish()
             endConversation.invoke(Constant.PHRASE_ID_QUEST_FINISHED)
@@ -192,13 +198,13 @@ class QuestGraph(
             .forEach { it.removeTargetFromInventory() }
     }
 
-    private fun partyGainXp(reward: Loot, observers: ConversationSubject): String? {
+    private fun partyGainXp(reward: Loot): String? {
         if (reward.isXpGained()) {
             return null
         }
         val levelUpMessage = StringBuilder()
         gameData.party.gainXp(reward.xp, levelUpMessage)
-        observers.notifyShowMessageTooltip("+ ${reward.xp} XP")
+        showMessageTooltipRewardXp(reward)
         reward.clearXp()
         return levelUpMessage.toString().trim().ifEmpty { null }
     }
@@ -209,6 +215,48 @@ class QuestGraph(
             .all { it.isCompleteForReturn() }
     }
 
+    private fun checkIfAllTasksAreComplete() {
+        if (isCurrentStateEqualOrHigherThan(QuestState.ACCEPTED)
+            && currentState != QuestState.FINISHED
+            && areAllQuestTasksComplete()
+        ) {
+            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_REWARD)
+            completeQuest()
+        }
+    }
+
+    private fun completeQuest() {
+        unclaim()
+        finish()
+        showMessageTooltipQuestCompleted()
+    }
+
+    private fun areAllQuestTasksComplete(): Boolean {
+        return getAllQuestTasks()
+            .filter { !it.isOptional }
+            .all { it.isComplete }
+    }
+
     private fun getAllQuestTasks(): List<QuestTask> = ArrayList(tasks.values)
+
+    private fun showMessageTooltipQuestNew() {
+        brokerManager.questObservers.notifyShowMessageTooltip("New quest:" + System.lineSeparator() + System.lineSeparator() + title)
+    }
+
+    private fun showMessageTooltipQuestUpdated() {
+        brokerManager.questObservers.notifyShowMessageTooltip("Quest updated:" + System.lineSeparator() + System.lineSeparator() + title)
+    }
+
+    private fun showMessageTooltipQuestCompleted() {
+        brokerManager.questObservers.notifyShowMessageTooltip("Quest completed:" + System.lineSeparator() + System.lineSeparator() + title)
+    }
+
+    private fun showMessageTooltipQuestFailed() {
+        brokerManager.questObservers.notifyShowMessageTooltip("Quest failed:" + System.lineSeparator() + System.lineSeparator() + title)
+    }
+
+    private fun showMessageTooltipRewardXp(reward: Loot) {
+        brokerManager.questObservers.notifyShowMessageTooltip("+ ${reward.xp} XP")
+    }
 
 }

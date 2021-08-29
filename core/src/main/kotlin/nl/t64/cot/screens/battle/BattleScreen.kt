@@ -59,7 +59,6 @@ class BattleScreen : Screen {
                 Actions.alpha(0f),
                 Actions.visible(true),
                 Actions.fadeIn(Constant.FADE_DURATION),
-                Actions.run { audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_FIGHT_ON) },
                 Actions.delay(1f),
                 Actions.fadeOut(Constant.FADE_DURATION),
                 Actions.visible(false)

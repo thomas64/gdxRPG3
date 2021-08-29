@@ -38,5 +38,16 @@
         "type"      : "RETURN"
       }
     }
+  },
+  "quest_scared_orc": {
+    "title"   : "Find hidden door",
+    "entityId": "orc_scout",
+    "summary" : "The frightened orc said: Here inside cave, at complete other side, go all way to south, then east, search north wall, there is hidden door in dark.",
+    "tasks"   : {
+      "1": {
+        "taskPhrase": "Open hidden door",
+        "type"      : "CHECK"
+      }
+    }
   }
 }

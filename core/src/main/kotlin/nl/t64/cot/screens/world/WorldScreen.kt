@@ -44,7 +44,7 @@ import nl.t64.cot.subjects.*
 
 
 class WorldScreen : Screen,
-    MapObserver, ComponentObserver, PartyObserver, LootObserver, ConversationObserver, BattleObserver {
+    MapObserver, ComponentObserver, PartyObserver, LootObserver, ConversationObserver, QuestObserver, BattleObserver {
 
     private lateinit var previousGameState: GameState
     private lateinit var gameState: GameState
@@ -74,6 +74,7 @@ class WorldScreen : Screen,
 
     init {
         conversationDialog.conversationObservers.addObserver(this)
+        brokerManager.questObservers.addObserver(this)
         brokerManager.componentObservers.addObserver(this)
         brokerManager.mapObservers.addObserver(this)
         brokerManager.partyObservers.addObserver(this)
@@ -195,7 +196,7 @@ class WorldScreen : Screen,
 
     override fun onNotifyReceiveTaken() {
         val conversationId = currentNpcEntity.getConversationId()
-        gameData.quests.accept(conversationId, conversationDialog.conversationObservers)
+        gameData.quests.accept(conversationId)
         val conversation = gameData.conversations.getConversationById(conversationId)
         conversation.currentPhraseId = Constant.PHRASE_ID_QUEST_ACCEPT
     }
@@ -207,6 +208,7 @@ class WorldScreen : Screen,
         show()
     }
 
+    // also QuestObserver
     override fun onNotifyShowMessageTooltip(message: String) {
         messageTooltip.show(message, stage)
     }
