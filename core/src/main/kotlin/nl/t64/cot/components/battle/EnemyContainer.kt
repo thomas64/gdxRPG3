@@ -5,6 +5,8 @@ import nl.t64.cot.components.loot.Loot
 import kotlin.random.Random
 
 
+private const val LEVEL_DIFFERENCE_FOR_WANTING_BATTLE = 5
+
 class EnemyContainer(battleId: String) {
 
     private val enemies: List<EnemyItem> = createEnemies(battleId)
@@ -38,6 +40,12 @@ class EnemyContainer(battleId: String) {
             }
         }
         return Loot(spoils)
+    }
+
+    fun doEnemiesWantToBattle(): Boolean {
+        val averageEnemies = enemies.map { it.getLevel() }.average()
+        val averageHeroes = gameData.party.getAllHeroesAlive().map { it.getLevel() }.average()
+        return averageEnemies > averageHeroes - LEVEL_DIFFERENCE_FOR_WANTING_BATTLE
     }
 
 }

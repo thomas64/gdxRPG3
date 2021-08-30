@@ -2,6 +2,7 @@ package nl.t64.cot.screens.world
 
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
+import nl.t64.cot.components.battle.EnemyContainer
 import nl.t64.cot.components.condition.ConditionDatabase
 import nl.t64.cot.screens.world.entity.*
 import nl.t64.cot.screens.world.entity.events.LoadEntityEvent
@@ -49,7 +50,9 @@ internal class NpcEntitiesLoader(private val currentMap: GameMap) {
         val entityId = gameMapEnemy.name
         val enemyEntity = Entity(entityId, InputEnemy(), PhysicsEnemy(), GraphicsEnemy(entityId))
         npcEntities.add(enemyEntity)
-        brokerManager.detectionObservers.addObserver(enemyEntity)
+        if (EnemyContainer(gameMapEnemy.battleId).doEnemiesWantToBattle()) {
+            brokerManager.detectionObservers.addObserver(enemyEntity)
+        }
         brokerManager.bumpObservers.addObserver(enemyEntity)
         enemyEntity.send(LoadEntityEvent(gameMapEnemy.state,
                                          gameMapEnemy.direction,

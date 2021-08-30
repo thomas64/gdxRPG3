@@ -17,6 +17,7 @@ class PhysicsEnemy : PhysicsComponent() {
     private lateinit var battleId: String
     private lateinit var path: DefaultGraphPath<TiledNode>
     private var isDetectingPlayer: Boolean = false
+    private var isBumped = false
 
     init {
         velocity = Constant.MOVE_SPEED_1
@@ -43,6 +44,11 @@ class PhysicsEnemy : PhysicsComponent() {
         if (event is DetectionEvent) {
             isDetectingPlayer = event.isDetectingPlayer
         }
+        if (event is OnBumpEvent) {
+            if (event.biggerBoundingBox.overlaps(boundingBox)) {
+                isBumped = true
+            }
+        }
     }
 
     private fun initNpc(loadEvent: LoadEntityEvent) {
@@ -64,6 +70,10 @@ class PhysicsEnemy : PhysicsComponent() {
         }
         entity.send(PositionEvent(currentPosition))
         if (isNearbyPlayer()) {
+            brokerManager.componentObservers.notifyShowBattleScreen(battleId, entity)
+        }
+        if (isBumped) {
+            isBumped = false
             brokerManager.componentObservers.notifyShowBattleScreen(battleId, entity)
         }
     }
