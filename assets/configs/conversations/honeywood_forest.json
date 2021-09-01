@@ -8,7 +8,7 @@
     "phrases": {
       "1": {"text": ["Oh no, what's this?"]},
       "2": {"text": ["It's one of Grace's ribbons!", "So she has been here."]},
-      "3": {"text": ["But what is there to find here?"], "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]}
+      "3": {"text": ["But why here? What is there to find here?"], "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]}
     }
   },
   "fairy_welcome"     : {
@@ -27,6 +27,16 @@
       "3": {"text": ["so..."]},
       "4": {"text": ["magical!"]},
       "5": {"text": ["And friendly."], "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]}
+    }
+  },
+  "quest_mother_fairy": {
+    "phrases": {
+      "1": {"text": ["[A lot of explanation]"]},
+      "2": {"text": ["Inside the cave, at the complete other side, go all way to south, then east and search the north wall. There is a hidden door in the dark."]},
+      "3": {
+        "text"   : ["Farewell our lovely Mozes."],
+        "choices": [{"conversationCommand": "ACCEPT_QUEST", "destinationId": "3"}]
+      }
     }
   }
 }

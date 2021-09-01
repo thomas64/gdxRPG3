@@ -178,9 +178,10 @@ internal class QuestTest : GameTest() {
         inventory.autoSetItem(InventoryDatabase.createInventoryItem("key_mysterious_tunnel", 1))
 
         val quest0006 = quests.getQuestById("quest0006")
-        assertThat(quest0006.getAllTasksForVisual()).extracting("isOptional").containsExactly(true, false, true, false)
+        assertThat(quest0006.getAllQuestTasksForVisual()).extracting("isOptional")
+            .containsExactly(true, false, true, false)
         quest0006.handleAccept {}
-        val allTasks = quest0006.getAllTasksForVisual()
+        val allTasks = quest0006.getAllQuestTasksForVisual()
         assertThat(allTasks[0].isFailed).isFalse
         assertThat(allTasks[1].isFailed).isFalse
         assertThat(allTasks[2].isFailed).isFalse
@@ -205,17 +206,17 @@ internal class QuestTest : GameTest() {
     fun whenQuestsAreNotUnknown_ShouldBecomeVisibleInQuestLogInCorrectOrder() {
         val quest0001 = quests.getQuestById("quest0001")
         val quest0003 = quests.getQuestById("quest0003")
-        assertThat(quests.getAllKnownQuests()).isEmpty()
+        assertThat(quests.getAllKnownQuestsForVisual()).isEmpty()
         quest0001.know()
-        assertThat(quests.getAllKnownQuests()).extracting("id").containsExactly("quest0001")
+        assertThat(quests.getAllKnownQuestsForVisual()).extracting("id").containsExactly("quest0001")
         quest0003.know()
         quest0003.accept()
-        assertThat(quests.getAllKnownQuests()).extracting("id").containsExactly("quest0001", "quest0003")
+        assertThat(quests.getAllKnownQuestsForVisual()).extracting("id").containsExactly("quest0001", "quest0003")
         quest0001.accept()
         quest0001.unclaim()
-        assertThat(quests.getAllKnownQuests()).extracting("id").containsExactly("quest0003", "quest0001")
+        assertThat(quests.getAllKnownQuestsForVisual()).extracting("id").containsExactly("quest0003", "quest0001")
         quest0003.handleFail()
-        assertThat(quests.getAllKnownQuests()).extracting("id").containsExactly("quest0001", "quest0003")
+        assertThat(quests.getAllKnownQuestsForVisual()).extracting("id").containsExactly("quest0001", "quest0003")
     }
 
     @Test
@@ -258,7 +259,7 @@ internal class QuestTest : GameTest() {
     @Test
     fun whenQuestIsShownInQuestLog_ShouldShowTasksInCorrectOrder() {
         val quest0001 = quests.getQuestById("quest0001")
-        assertThat(quest0001.getAllTasksForVisual()).extracting("taskPhrase").containsExactly(
+        assertThat(quest0001.getAllQuestTasksForVisual()).extracting("taskPhrase").containsExactly(
             "Collect 3 herbs", "Collect 5 gemstones for the programmer", "Give them to Johnny at Starter Path"
         )
     }

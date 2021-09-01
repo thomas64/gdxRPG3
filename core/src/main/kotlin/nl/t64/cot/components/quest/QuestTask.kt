@@ -4,11 +4,11 @@ import nl.t64.cot.Utils.gameData
 
 
 class QuestTask(
-    val taskPhrase: String = "",
+    var taskPhrase: String = "",
+    val updatedPhrase: String? = null,
     val type: QuestTaskType = QuestTaskType.NONE,
     val target: Map<String, Int> = emptyMap(),
     val isOptional: Boolean = false,
-    val isAnyOf: Boolean = false,
     var isHidden: Boolean = false,
     val linkedWith: String? = null
 
@@ -21,70 +21,40 @@ class QuestTask(
         return when {
             type == QuestTaskType.NONE -> System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + taskPhrase
             isFailed -> "x  $taskPhrase"
-            isQuestFinished -> "v  $taskPhrase"
-            type == QuestTaskType.RETURN -> "     $taskPhrase"
-            isCompleteForReturn() -> "v  $taskPhrase"
+            isComplete -> "v  $taskPhrase"
             else -> "     $taskPhrase"
         }
     }
 
-    fun forceFinished() {
-        isQuestFinished = true
-        if (isOptional && !isComplete) {
-            isFailed = true
+    fun handleLinked() {
+        isHidden = false
+        if (type == QuestTaskType.FREE) {
+            setComplete()
         }
     }
 
     fun setComplete() {
         when (type) {
-            QuestTaskType.ITEM_DELIVERY -> {
-                target.forEach { (itemId, amount) -> gameData.inventory.autoRemoveItem(itemId, amount) }
+            QuestTaskType.FREE,
+            QuestTaskType.DISCOVER,
+            QuestTaskType.CHECK,
+            QuestTaskType.FIND_ITEM,
+            QuestTaskType.SHOW_ITEM,
+            QuestTaskType.SAY_THE_RIGHT_THING,
+            QuestTaskType.KILL -> {
+                updatedPhrase?.let { taskPhrase = it }
                 isComplete = true
             }
-            QuestTaskType.SHOW_ITEM,
-            QuestTaskType.DISCOVER,
-            QuestTaskType.MESSAGE_DELIVERY -> isComplete = true
-            QuestTaskType.CHECK -> setCheckTypePossibleComplete()
-            else -> throw IllegalArgumentException("Only possible to complete a DISCOVER, CHECK or DELIVERY task.")
+            else -> throw IllegalArgumentException("Only some types are completable this way for now.")
         }
-    }
-
-    private fun setCheckTypePossibleComplete() {
-        if (target.isEmpty()) {
-            isComplete = true
-            return
-        }
-
-        if (doesInventoryContainsTarget()) {
-            isComplete = true
-        }
-    }
-
-    fun removeTargetFromInventory() {
-        gameData.inventory.autoRemoveItem(getTargetEntry().key, getTargetEntry().value)
     }
 
     fun hasTargetInInventory(): Boolean {
         return gameData.inventory.contains(target)
     }
 
-    fun isCompleteForReturn(): Boolean {
-        return when (type) {
-            QuestTaskType.RETURN -> true
-            QuestTaskType.FIND_ITEM,
-            QuestTaskType.FETCH_ITEM -> doesInventoryContainsTarget()
-            QuestTaskType.DISCOVER,
-            QuestTaskType.CHECK,
-            QuestTaskType.KILL, // temp for now
-            QuestTaskType.MESSAGE_DELIVERY,
-            QuestTaskType.SHOW_ITEM, // test temp?
-            QuestTaskType.ITEM_DELIVERY -> isComplete
-            else -> throw IllegalArgumentException("No '$type' task for now.")
-        }
-    }
-
-    private fun doesInventoryContainsTarget(): Boolean {
-        return gameData.inventory.hasEnoughOfItem(getTargetEntry().key, getTargetEntry().value)
+    private fun removeTargetFromInventory() {
+        gameData.inventory.autoRemoveItem(getTargetEntry().key, getTargetEntry().value)
     }
 
     private fun getTargetEntry(): Map.Entry<String, Int> {

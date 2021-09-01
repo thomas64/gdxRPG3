@@ -7,12 +7,19 @@ enum class ConversationCommand {
     HERO_DISMISS,
     LOAD_SHOP,
     SAVE_GAME,
-    KNOW_QUEST,
-    TOLERATE_QUEST,
+    RECEIVE_XP,
+    START_BATTLE,
+
     ACCEPT_QUEST,
     SHOW_QUEST_ITEM,
+    SAY_QUEST_THING,
+
+    NONE,
+
+
+    KNOW_QUEST,
+    TOLERATE_QUEST,
     RECEIVE_ITEM,
-    RECEIVE_XP,
     CHECK_IF_LINKED_QUEST_KNOWN,
     CHECK_IF_QUEST_ACCEPTED,
     CHECK_IF_IN_INVENTORY,
@@ -22,6 +29,5 @@ enum class ConversationCommand {
     REWARD_QUEST,
     BONUS_REWARD_QUEST,
     FAIL_QUEST,
-    START_BATTLE,
-    NONE
+
 }

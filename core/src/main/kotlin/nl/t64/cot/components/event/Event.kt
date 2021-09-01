@@ -12,17 +12,23 @@ class Event(
     val conversationId: String? = null,
     val entityId: String? = null,
     val text: List<String> = emptyList(),
-    private val doesRepeat: Boolean = false
+    private val doesRepeat: Boolean = false,
+    private var isRepeated: Boolean = false
 ) {
     var hasPlayed: Boolean = false
 
     fun possibleStart() {
         if ((!hasPlayed && isMeetingCondition())
-            || (hasPlayed && doesRepeat && isMeetingCondition())
+            || (hasPlayed && doesRepeat && !isRepeated && isMeetingCondition())
         ) {
+            isRepeated = true
             hasPlayed = true
             start()
         }
+    }
+
+    fun resetRepeat() {
+        isRepeated = false
     }
 
     private fun isMeetingCondition(): Boolean {

@@ -6,13 +6,14 @@ import com.badlogic.gdx.math.Vector2
 import ktx.tiled.property
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
+import nl.t64.cot.components.quest.QuestGraph
 import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.subjects.ActionObserver
 
 
 class GameMapQuestChecker(rectObject: RectangleMapObject) : GameMapObject(rectObject.rectangle), ActionObserver {
 
-    private val questId: String = rectObject.name
+    private val quest: QuestGraph = gameData.quests.getQuestById(rectObject.name)
     private val taskId: String = rectObject.property("task")
 
     init {
@@ -21,7 +22,7 @@ class GameMapQuestChecker(rectObject: RectangleMapObject) : GameMapObject(rectOb
 
     override fun onNotifyActionPressed(checkRect: Rectangle, playerDirection: Direction, playerPosition: Vector2) {
         if (checkRect.overlaps(rectangle)) {
-            gameData.quests.setTaskComplete(questId, taskId)
+            quest.setTaskComplete(taskId)
         }
     }
 

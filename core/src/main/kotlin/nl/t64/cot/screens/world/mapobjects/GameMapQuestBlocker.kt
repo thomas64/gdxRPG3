@@ -8,13 +8,14 @@ import ktx.tiled.propertyOrNull
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.mapManager
+import nl.t64.cot.components.quest.QuestGraph
 import nl.t64.cot.components.quest.QuestState
 import nl.t64.cot.subjects.BlockObserver
 
 
 class GameMapQuestBlocker(rectObject: RectangleMapObject) : GameMapObject(rectObject.rectangle), BlockObserver {
 
-    private val questId: String = rectObject.name
+    private val quest: QuestGraph = gameData.quests.getQuestById(rectObject.name)
     private val isActiveIfComplete: Boolean = rectObject.property("activeIfComplete")
     private val taskId: String? = rectObject.propertyOrNull("task")
     private var isActive: Boolean = rectObject.property<Boolean>("isActive").also {
@@ -30,8 +31,8 @@ class GameMapQuestBlocker(rectObject: RectangleMapObject) : GameMapObject(rectOb
     }
 
     fun update() {
-        val isFinished = gameData.quests.isCurrentStateEqualOrHigherThan(questId, QuestState.FINISHED)
-        val isComplete = gameData.quests.isTaskComplete(questId, taskId)
+        val isFinished = quest.isCurrentStateEqualOrHigherThan(QuestState.FINISHED)
+        val isComplete = quest.isTaskComplete(taskId)
 
         val before = isActive
         isActive = (isFinished || isComplete) == isActiveIfComplete

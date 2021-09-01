@@ -96,15 +96,15 @@ class TextureMapObjectRenderer(private val camera: Camera) : OrthogonalTiledMapR
         batch.projectionMatrix = camera.combined
         render(UNDER_LAYERS)
         batch.begin()
-        renderTextures(mapManager.getLowerMapTextures())
+        renderQuestTextures(mapManager.getLowerMapQuestTextures())
         renderEntities.invoke()
-        renderTextures(mapManager.getUpperMapTextures())
+        renderQuestTextures(mapManager.getUpperMapQuestTextures())
         batch.end()
         render(OVER_LAYERS)
         renderLightmap()
     }
 
-    private fun renderTextures(gameMapQuestTextures: List<GameMapQuestTexture>) {
+    private fun renderQuestTextures(gameMapQuestTextures: List<GameMapQuestTexture>) {
         gameMapQuestTextures
             .filter { it.isVisible }
             .map { it.texture }

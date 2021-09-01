@@ -28,7 +28,6 @@ import nl.t64.cot.components.conversation.ConversationChoice
 import nl.t64.cot.components.conversation.ConversationCommand
 import nl.t64.cot.components.conversation.ConversationGraph
 import nl.t64.cot.components.conversation.NoteDatabase.getNoteById
-import nl.t64.cot.components.quest.QuestState
 import nl.t64.cot.constants.Constant
 
 
@@ -264,22 +263,13 @@ class ConversationDialog {
             ConversationCommand.HERO_DISMISS -> dismissHero(destinationId)
             ConversationCommand.LOAD_SHOP -> loadShop(destinationId)
             ConversationCommand.SAVE_GAME -> saveGame(destinationId)
-            ConversationCommand.ACCEPT_QUEST -> acceptQuest()
-            ConversationCommand.KNOW_QUEST -> knowQuest(destinationId)
-            ConversationCommand.TOLERATE_QUEST -> tolerateQuest()
-            ConversationCommand.SHOW_QUEST_ITEM -> showQuestItem(destinationId)
-            ConversationCommand.RECEIVE_ITEM -> receiveItem(destinationId)
             ConversationCommand.RECEIVE_XP -> receiveXp(destinationId)
-            ConversationCommand.CHECK_IF_LINKED_QUEST_KNOWN -> checkIfLinkedQuestKnown(destinationId)
-            ConversationCommand.CHECK_IF_QUEST_ACCEPTED -> checkIfQuestAccepted(destinationId)
-            ConversationCommand.CHECK_IF_IN_INVENTORY -> checkIfInInventory(destinationId)
-            ConversationCommand.COMPLETE_QUEST_TASK -> completeTask(destinationId)
-            ConversationCommand.RETURN_QUEST -> returnQuest()
-            ConversationCommand.ACCEPT_OR_RETURN_QUEST -> acceptOrReturnQuest()
-            ConversationCommand.REWARD_QUEST -> rewardQuest()
-            ConversationCommand.BONUS_REWARD_QUEST -> bonusRewardQuest()
-            ConversationCommand.FAIL_QUEST -> failQuest(destinationId)
             ConversationCommand.START_BATTLE -> startBattle(destinationId)
+
+            ConversationCommand.ACCEPT_QUEST -> acceptQuest(destinationId)
+            ConversationCommand.SHOW_QUEST_ITEM -> showQuestItem(destinationId)
+            ConversationCommand.SAY_QUEST_THING -> sayQuestThing(destinationId)
+
             else -> throw IllegalArgumentException("ConversationCommand '$conversationCommand' cannot be reached here.")
         }
     }
@@ -316,30 +306,6 @@ class ConversationDialog {
         continueConversation(destinationId)
     }
 
-    private fun acceptQuest() {
-        gameData.quests.handleAccept(conversationId!!) { continueConversation(it) } // sets new phraseId
-    }
-
-    private fun knowQuest(destinationId: String) {
-        gameData.quests.know(conversationId!!)
-        continueConversation(destinationId)
-    }
-
-    private fun tolerateQuest() {
-        gameData.quests.handleTolerate(conversationId!!)
-        continueConversation(Constant.PHRASE_ID_QUEST_TOLERATE)
-    }
-
-    private fun showQuestItem(destinationId: String) {
-        gameData.quests.handleShowQuestItem(conversationId!!)
-        continueConversation(destinationId)
-    }
-
-    private fun receiveItem(destinationId: String) {
-        graph.currentPhraseId = destinationId
-        gameData.quests.handleReceive(conversationId!!, conversationObservers)      // ends conversation, sets possible new phraseId
-    }
-
     private fun receiveXp(destinationId: String) {
         val reward = gameData.loot.getLoot(conversationId!!)
         if (reward.isXpGained()) {
@@ -360,73 +326,24 @@ class ConversationDialog {
         }
     }
 
-    private fun checkIfLinkedQuestKnown(destinationId: String) {
-        gameData.quests.handleCheckIfLinkedIsKnown(conversationId!!,
-                                                   destinationId,
-                                                   { continueConversation(it) })    // sets possible new phraseId
-    }
-
-    private fun checkIfQuestAccepted(destinationId: String) {
-        val questId = conversationId!!.substring(0, conversationId!!.length - 2)
-        gameData.quests.handleCheckIfAccepted(questId,
-                                              destinationId,
-                                              { continueConversation(it) },
-                                              { endConversation(it) })
-    }
-
-    private fun checkIfInInventory(destinationId: String) {
-        val questId = conversationId!!.substring(0, conversationId!!.length - 2)
-        val questTaskId = conversationId!!.substring(conversationId!!.length - 1)
-        gameData.quests.handleCheckIfAcceptedInventory(questId,
-                                                       questTaskId,
-                                                       destinationId,
-                                                       { continueConversation(it) },
-                                                       { endConversation(it) })
-    }
-
-    private fun completeTask(destinationId: String) {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_REWARD)
-        val questId = conversationId!!.substring(0, conversationId!!.length - 2)
-        val questTaskId = conversationId!!.substring(conversationId!!.length - 1)
-        gameData.quests.setTaskComplete(questId, questTaskId)
-        continueConversationWithoutSound(destinationId)
-    }
-
-    private fun returnQuest() {
-        gameData.quests.handleReturn(conversationId!!) { continueConversation(it) } // sets new phraseId
-    }
-
-    private fun acceptOrReturnQuest() {
-        gameData.quests.handleAcceptOrReturn(conversationId!!) { continueConversation(it) } // sets new phraseId
-    }
-
-    private fun bonusRewardQuest() {
-        gameData.loot.getLoot(conversationId!!).handleBonus()
-        rewardQuest()
-    }
-
-    private fun rewardQuest() {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_REWARD)
-        graph.currentPhraseId = Constant.PHRASE_ID_QUEST_UNCLAIMED
-        gameData.quests.handleReward(conversationId!!,
-                                     { endConversationWithoutSound(it) },           // ends conversation, sets possible new phraseId
-                                     conversationObservers)
-    }
-
-    private fun failQuest(destinationId: String) {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_QUEST_FAIL)
-        gameData.quests.handleFail(conversationId!!)
-        continueConversation(destinationId)
-    }
-
     private fun startBattle(destinationId: String) {
-        if (gameData.quests.contains(conversationId!!)
-            && gameData.quests.isCurrentStateEqualOrLowerThan(conversationId!!, QuestState.KNOWN)
-        ) {
-            gameData.quests.handleTolerate(conversationId!!)
-        }
         endConversation(destinationId)
         brokerManager.componentObservers.notifyShowBattleScreen(conversationId!!)
+    }
+
+    private fun acceptQuest(destinationId: String) {
+        gameData.quests.getQuestById(conversationId!!).accept()
+        endConversation(destinationId)
+    }
+
+    private fun showQuestItem(destinationId: String) {
+        gameData.quests.getQuestById(conversationId!!).possibleSetShowItemTaskComplete()
+        endConversation(destinationId)
+    }
+
+    private fun sayQuestThing(destinationId: String) {
+        gameData.quests.getQuestById(conversationId!!).setSayTheRightThingTaskComplete()
+        endConversation(destinationId)
     }
 
 }

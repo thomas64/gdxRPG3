@@ -1,7 +1,7 @@
 package nl.t64.cot.components.quest
 
 
-enum class QuestState(val index: Int) {
+enum class QuestState(private val index: Int) {
     UNKNOWN(0),
     KNOWN(1),
     ACCEPTED(2),

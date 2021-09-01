@@ -32,7 +32,7 @@
         "text"   : ["If anything has happened to Grace!"],
         "choices": [
           {"text": "Who is this Ardor?", "destinationId": "11"},
-          {"text": "What has she to do with him?", "destinationId": "12"},
+          {"text": "What has Grace to do with him?", "destinationId": "12"},
           {"text": "Where is Ardor?", "destinationId": "13"}
         ]
       },
@@ -51,7 +51,7 @@
         "text": ["You have to get past guards, but they are far too strong for you.", "They kill you with ease."]
       },
       "14": {
-        "text": ["I need to go to Ardor now to deliver his mask for ritual and you are standing in my way.", "She will die and so will you!"]
+        "text": ["I need to go to Ardor now to deliver his mask for ritual and you are standing in my way."]
       },
       "15": {
         "text"   : ["Now die!"],
@@ -61,24 +61,24 @@
   },
   "quest_orc_guards": {
     "phrases": {
-      "1"   : {"text": ["Halt! Forbidden area!"]},
-      "2"   : {"text": ["This is domain of Great Wizard Ardor.", "Leave now, or die!"]},
-      "3"   : {
+      "1" : {"text": ["Halt! Forbidden area!"]},
+      "2" : {"text": ["This is domain of Great Wizard Ardor.", "Leave now, or die!"]},
+      "3" : {
         "face"   : "mozes",
         "text"   : ["Wait wait wait! Don't kill me."],
         "choices": [
           {"text": "I'm looking for a little girl, have you guys maybe seen her?", "destinationId": "10"},
-          {"condition": ["i_mask_of_ardor"], "text": "[Mask of Ardor] Your boss needs this for the ritual, let me through.", "conversationCommand": "SHOW_QUEST_ITEM", "destinationId": "20"},
+          {"condition": ["i_mask_of_ardor"], "text": "[Mask of Ardor] Your boss needs this for the ritual, let me through.", "destinationId": "20"},
           {"condition": ["i_diplomat2"], "text": "[Diplomat 2] Don't threaten me! Do you know who I am?", "destinationId": "30"},
           {"condition": ["i_level10"], "text": "Alright then, I'll have to go through you! (Start battle)", "destinationId": "40"},
           {"text": "Okay, I'll go away... For now. (Leave conversation)", "conversationCommand": "ACCEPT_QUEST"}
         ]
       },
-      "10"  : {
+      "10": {
         "face": "orc_sergeant",
         "text": ["Ardor has girl. Leave now, or die!"]
       },
-      "11"  : {
+      "11": {
         "face"   : "mozes",
         "text"   : ["If anything has happened to Grace!"],
         "choices": [
@@ -87,70 +87,61 @@
           {"text": "If this Ardor has Grace, bring me to him!", "destinationId": "14"}
         ]
       },
-      "12"  : {
+      "12": {
         "face"   : "orc_sergeant",
         "text"   : ["Ardor is great wizard, soon ruler of Adan."],
         "choices": [{"destinationId": "11"}]
       },
-      "13"  : {
+      "13": {
         "face"   : "orc_sergeant",
         "text"   : ["None of your business."],
         "choices": [{"destinationId": "11"}]
       },
-      "14"  : {
+      "14": {
         "face"   : "orc_sergeant",
         "text"   : ["No! You leave, or die!"],
         "choices": [{"destinationId": "3"}]
       },
-      "20"  : {
+      "20": {
         "face": "orc_sergeant",
         "text": ["That is mask of Ardor, he does need that.", "Why do you have mask?"]
       },
-      "21"  : {
+      "21": {
         "face": "mozes",
         "text": ["An orcish fellow needed to deliver it, but he wasn't able to.", "That's where I come in."]
       },
-      "22"  : {
-        "face"   : "orc_sergeant",
-        "text"   : [". . ."],
-        "choices": [{"conversationCommand": "ACCEPT_OR_RETURN_QUEST"}]
+      "22": {
+        "face": "orc_sergeant",
+        "text": [". . ."]
       },
-      "30"  : {
+      "23": {
+        "text"   : ["You go through."],
+        "choices": [{"conversationCommand": "SHOW_QUEST_ITEM", "destinationId": "50"}]
+      },
+      "30": {
         "face": "orc_sergeant",
         "text": ["No, who are you?"]
       },
-      "31"  : {
+      "31": {
         "face": "mozes",
         "text": ["I am the Great Wizard Mozes! You'll be sorry if Ardor hears that you wouldn't let me through. He will incinerate you on the spot.", "You know he will."]
       },
-      "32"  : {
-        "face"   : "orc_sergeant",
-        "text"   : ["I know he could.", "Job is not worth life."],
-        "choices": [{"conversationCommand": "ACCEPT_OR_RETURN_QUEST"}]
+      "32": {
+        "face": "orc_sergeant",
+        "text": ["I know he could.", "Job is not worth life."]
       },
-      "40"  : {
+      "33": {
+        "text"   : ["You go through."],
+        "choices": [{"conversationCommand": "SAY_QUEST_THING", "destinationId": "50"}]
+      },
+      "40": {
         "face"   : "orc_sergeant",
         "text"   : ["You will die!"],
-        "choices": [{"conversationCommand": "START_BATTLE", "destinationId": "1"}]
+        "choices": [{"conversationCommand": "START_BATTLE"}]
       },
-      "1000": {
-        "face"   : "orc_sergeant",
-        "text"   : ["You watch it."],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "1"}]
-      },
-      "2000": {
-        "face"   : "orc_sergeant",
-        "text"   : ["You go through."],
-        "choices": [{"conversationCommand": "REWARD_QUEST"}]
-      },
-      "2100": {
-        "face"   : "orc_sergeant",
-        "text"   : ["You go through."],
-        "choices": [{"conversationCommand": "REWARD_QUEST"}]
-      },
-      "2400": {
+      "50": {
         "text"   : ["Go!"],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "2400"}]
+        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "50"}]
       }
     }
   },
@@ -158,39 +149,6 @@
     "phrases": {
       "1": {"text": ["All those dead orcs... What happened here?"]},
       "2": {"text": ["What kind of terrible force is there behind that gate?"], "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]}
-    }
-  },
-  "quest_scared_orc": {
-    "phrases": {
-      "1"   : {"text": ["Don't hurt me! What do you want?"]},
-      "2"   : {
-        "face": "mozes",
-        "text": ["I'm looking for a little girl, have you seen her?"]
-      },
-      "3"   : {
-        "face": "orc_scout",
-        "text": ["No, I know nothing."]
-      },
-      "4"   : {
-        "face": "mozes",
-        "text": ["You know nothing? What do you know?"]
-      },
-      "5"   : {
-        "face": "orc_scout",
-        "text": ["No, no! If you let me live, I tell you secret."]
-      },
-      "6"   : {
-        "text"   : ["Here inside cave, at complete other side, go all way to south, then east, search north wall, there is hidden door in dark."],
-        "choices": [{"conversationCommand": "ACCEPT_QUEST"}]
-      },
-      "1000": {
-        "text"   : ["Don't hurt me!"],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "1000"}]
-      },
-      "2000": {
-        "text"   : ["Don't hurt me!"],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "2000"}]
-      }
     }
   },
   "defeated_orc_guards" : {

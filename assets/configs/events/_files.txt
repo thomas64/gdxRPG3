@@ -1,3 +1,3 @@
+guide_events.json
 honeywood_forest.json
-honeywood_cave.json
 mysterious_tunnel.json

@@ -127,8 +127,8 @@
   </object>
   <object id="82" name="fairy01" type="ia" x="576" y="384" width="48" height="24">
    <properties>
+    <property name="conversation" value="quest_mother_fairy"/>
     <property name="direction" value="south"/>
-    <property name="head" value=""/>
    </properties>
   </object>
   <object id="85" name="fairy01" type="ia" x="816" y="360" width="48" height="24">

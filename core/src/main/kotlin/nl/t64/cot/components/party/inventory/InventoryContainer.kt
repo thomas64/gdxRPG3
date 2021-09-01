@@ -1,5 +1,7 @@
 package nl.t64.cot.components.party.inventory
 
+import nl.t64.cot.Utils.gameData
+
 
 private const val NUMBER_OF_SLOTS = 66
 private const val SORTING_SPLIT = 70000 // atm, item.json starts with this number.
@@ -26,11 +28,13 @@ class InventoryContainer(numberOfSlots: Int = NUMBER_OF_SLOTS) {
     fun incrementAmountAt(index: Int, amount: Int) {
         inventory[index]?.increaseAmountWith(amount)
             ?: throw IllegalArgumentException("There is no item to increment amount.")
+        gameData.quests.update()
     }
 
     fun decrementAmountAt(index: Int, amount: Int) {
         inventory[index]?.decreaseAmountWith(amount)
             ?: throw IllegalArgumentException("There is no item to decrement amount.")
+        gameData.quests.update()
     }
 
     fun getItemAt(index: Int): InventoryItem? {
@@ -68,6 +72,7 @@ class InventoryContainer(numberOfSlots: Int = NUMBER_OF_SLOTS) {
 
     fun forceSetItemAt(index: Int, newItem: InventoryItem?) {
         inventory[index] = newItem
+        gameData.quests.update()
     }
 
     fun getSize(): Int {

@@ -34,8 +34,8 @@ internal class TaskListTable {
 
     fun populateTaskList(quest: QuestGraph) {
         taskList.clearItems()
-        if (quest.currentState != QuestState.KNOWN) {
-            val questTasks = GdxArray(quest.getAllTasksForVisual())
+        if (quest.isCurrentStateEqualOrHigherThan(QuestState.KNOWN)) {
+            val questTasks = GdxArray(quest.getAllQuestTasksForVisual())
             taskList.setItems(questTasks)
             taskList.setAlignment(Align.left)
         } else {

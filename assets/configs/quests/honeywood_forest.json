@@ -1,62 +1,98 @@
 {
-  "quest_intro"     : {
-    "title"   : "Remove the fallen tree",
-    "entityId": "girl01",
-    "summary" : "It will be removed once Grace is 'found'.",
+  "quest_intro"           : {
+    "title"   : "Quest Intro",
+    "entityId": "mozes",
+    "summary" : "Quest Intro",
     "isHidden": true,
     "tasks"   : {
       "1": {
-        "taskPhrase": "Find Grace",
+        "taskPhrase": "Quest Intro",
         "type"      : "DISCOVER"
       }
     }
   },
-  "quest_orc_guards": {
-    "title"   : "The guards of Ardor",
-    "entityId": "orc_sergeant",
-    "summary" : "You found out that Grace probably is where Ardor is. Two orc guards won't let you get to Ardor. Find a way to get past them.",
+  "quest_grace_is_missing": {
+    "title"   : "Grace is missing",
+    "entityId": "girl01",
+    "summary" : "Grace wasn't in her bed when you woke up. She probably went to Honeywood Forest in the north. But since there are orcs roaming in the forest, it's dangerous at night.",
     "tasks"   : {
       "1": {
-        "taskPhrase": "Retrieve the mask of Ardor from an orc",
-        "type"      : "FIND_ITEM",
-        "target"    : {"mask_of_ardor": 1},
-        "isOptional": true,
-        "isHidden"  : true,
-        "linkedWith": "2"
+        "taskPhrase"   : "Search for a clue about where Grace went",
+        "updatedPhrase": "Found one of Grace's ribbons",
+        "type"         : "FIND_ITEM",
+        "target"       : {"grace_ribbon": 1},
+        "isOptional"   : true,
+        "linkedWith"   : "2"
       },
       "2": {
-        "taskPhrase": "Show the mask to the guards",
-        "type"      : "SHOW_ITEM",
-        "target"    : {"mask_of_ardor": 1},
-        "isAnyOf"   : true,
-        "isHidden"  : true
+        "taskPhrase"   : "Search for where Grace went",
+        "updatedPhrase": "Found a hidden cave",
+        "type"         : "DISCOVER",
+        "isHidden"     : true,
+        "linkedWith"   : "3"
       },
       "3": {
-        "taskPhrase": "Bluff your way through [Diplomat 2]",
-        "type"      : "MESSAGE_DELIVERY",
-        "isAnyOf"   : true,
+        "taskPhrase": "Find out if Grace is in the cave",
+        "type"      : "DISCOVER",
         "isHidden"  : true
-      },
-      "4": {
-        "taskPhrase": "Kill the guards",
-        "type"      : "KILL",
-        "isAnyOf"   : true,
-        "isHidden"  : true
-      },
-      "5": {
-        "taskPhrase": "Get past the guards",
-        "type"      : "RETURN"
       }
     }
   },
-  "quest_scared_orc": {
-    "title"   : "Find hidden door",
-    "entityId": "orc_scout",
-    "summary" : "The frightened orc said: Here inside cave, at complete other side, go all way to south, then east, search north wall, there is hidden door in dark.",
+  "quest_orc_guards"      : {
+    "title"   : "The guards of Ardor",
+    "entityId": "orc_sergeant",
+    "summary" : "Grace is said to be where Ardor is. But two intimidating orc guards won't let you get to Ardor.",
     "tasks"   : {
       "1": {
-        "taskPhrase": "Open hidden door",
-        "type"      : "CHECK"
+        "taskPhrase": "Retrieved a mask from an orc who was supposed to deliver it to Ardor",
+        "type"      : "FIND_ITEM",
+        "target"    : {"mask_of_ardor": 1},
+        "isOptional": true,
+        "isHidden"  : true
+      },
+      "2": {
+        "taskPhrase": "Showed the mask to the guards",
+        "type"      : "SHOW_ITEM",
+        "target"    : {"mask_of_ardor": 1},
+        "isOptional": true,
+        "isHidden"  : true,
+        "linkedWith": "5"
+      },
+      "3": {
+        "taskPhrase": "Impersonated a powerful wizard equal to Ardor",
+        "type"      : "SAY_THE_RIGHT_THING",
+        "isOptional": true,
+        "isHidden"  : true,
+        "linkedWith": "5"
+      },
+      "4": {
+        "taskPhrase": "Killed the guards",
+        "type"      : "KILL",
+        "isOptional": true,
+        "isHidden"  : true,
+        "linkedWith": "5"
+      },
+      "5": {
+        "taskPhrase"   : "Find a way to get past the guards",
+        "updatedPhrase": "Found a way to get past the guards",
+        "type"         : "FREE"
+      }
+    }
+  },
+  "quest_mother_fairy"    : {
+    "title"   : "It's fairy secret",
+    "entityId": "fairy01",
+    "summary" : "The mother of fairies said: Inside the cave, at the complete other side, go all way to south, then east and search the north wall. There is a hidden door in the dark.",
+    "tasks"   : {
+      "1": {
+        "taskPhrase": "Search at the described area",
+        "type"      : "CHECK",
+        "linkedWith": "2"
+      },
+      "2": {
+        "taskPhrase": "Found the secret door",
+        "type"      : "FREE",
+        "isHidden"  : true
       }
     }
   }

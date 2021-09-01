@@ -49,6 +49,7 @@ class GameData : ProfileObserver {
         isComparingEnabled = true
         addFirstHeroToParty()
         addFirstItemsToInventory()
+        addFirstQuestToLogbook()
         onNotifySaveProfile(profileManager)
     }
 
@@ -98,6 +99,10 @@ class GameData : ProfileObserver {
         val gold = createInventoryItem("gold")
         inventory.autoSetItem(mace)
         inventory.autoSetItem(gold)
+    }
+
+    private fun addFirstQuestToLogbook() {
+        quests.getQuestById("quest_grace_is_missing").accept()
     }
 
 }

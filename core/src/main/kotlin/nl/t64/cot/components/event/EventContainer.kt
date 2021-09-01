@@ -17,5 +17,6 @@ class EventContainer {
         .toMap()
 
     fun getEventById(eventId: String): Event = events[eventId]!!
+    fun hasEventPlayed(eventId: String): Boolean = events[eventId]!!.hasPlayed
 
 }

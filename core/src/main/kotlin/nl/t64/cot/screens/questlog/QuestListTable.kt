@@ -41,7 +41,7 @@ internal class QuestListTable {
         listStyle.selection = SpriteDrawable(spriteTransparent)
 
         return List<QuestGraph>(listStyle).apply {
-            val knownQuests = GdxArray(gameData.quests.getAllKnownQuests())
+            val knownQuests = GdxArray(gameData.quests.getAllKnownQuestsForVisual())
             setItems(knownQuests)
             selectedIndex = -1
         }

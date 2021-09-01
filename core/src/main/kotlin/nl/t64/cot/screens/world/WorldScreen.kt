@@ -188,17 +188,17 @@ class WorldScreen : Screen,
     }
 
     override fun onNotifyRewardTaken() {
-        val conversationId = currentNpcEntity.getConversationId()
-        gameData.quests.finish(conversationId)
-        val conversation = gameData.conversations.getConversationById(conversationId)
-        conversation.currentPhraseId = Constant.PHRASE_ID_QUEST_FINISHED
+//        val conversationId = currentNpcEntity.getConversationId()
+//        gameData.quests.finish(conversationId)
+//        val conversation = gameData.conversations.getConversationById(conversationId)
+//        conversation.currentPhraseId = Constant.PHRASE_ID_QUEST_FINISHED
     }
 
     override fun onNotifyReceiveTaken() {
-        val conversationId = currentNpcEntity.getConversationId()
-        gameData.quests.accept(conversationId)
-        val conversation = gameData.conversations.getConversationById(conversationId)
-        conversation.currentPhraseId = Constant.PHRASE_ID_QUEST_ACCEPT
+//        val conversationId = currentNpcEntity.getConversationId()
+//        gameData.quests.accept(conversationId)
+//        val conversation = gameData.conversations.getConversationById(conversationId)
+//        conversation.currentPhraseId = Constant.PHRASE_ID_QUEST_ACCEPT
     }
 
     // ConversationObserver ////////////////////////////////////////////////////////////////////////////////////////////
@@ -247,7 +247,7 @@ class WorldScreen : Screen,
 
     override fun onNotifyBattleWon(battleId: String, spoils: Loot, levelUpMessage: String?) {
         if (gameData.quests.contains(battleId)) {
-            gameData.quests.handleReward(battleId, { }, conversationDialog.conversationObservers)
+            gameData.quests.getQuestById(battleId).setKillTaskComplete()
         }
 
         refreshNpcEntitiesListAfterBattle(battleId)

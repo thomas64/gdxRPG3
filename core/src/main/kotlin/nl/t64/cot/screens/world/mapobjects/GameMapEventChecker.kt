@@ -5,13 +5,14 @@ import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
+import nl.t64.cot.components.event.Event
 import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.subjects.ActionObserver
 
 
 class GameMapEventChecker(rectObject: RectangleMapObject) : GameMapObject(rectObject.rectangle), ActionObserver {
 
-    private val eventId: String = rectObject.name
+    private val event: Event = gameData.events.getEventById(rectObject.name)
 
     init {
         brokerManager.actionObservers.addObserver(this)
@@ -19,13 +20,9 @@ class GameMapEventChecker(rectObject: RectangleMapObject) : GameMapObject(rectOb
 
     override fun onNotifyActionPressed(checkRect: Rectangle, playerDirection: Direction, playerPosition: Vector2) {
         if (checkRect.overlaps(rectangle)) {
-            possibleStartEvent()
+            event.possibleStart()
+            event.resetRepeat()
         }
-    }
-
-    private fun possibleStartEvent() {
-        val event = gameData.events.getEventById(eventId)
-        event.possibleStart()
     }
 
 }

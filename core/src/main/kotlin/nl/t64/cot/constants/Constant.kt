@@ -42,15 +42,6 @@ object Constant {
     const val DESCRIPTION_KEY_SELL_PIECE = "Sell value per piece"
     const val DESCRIPTION_KEY_SELL_TOTAL = "Total sell value"
 
-    const val PHRASE_ID_QUEST_ACCEPT = "1000"
-    const val PHRASE_ID_QUEST_TOLERATE = "1500"
-    const val PHRASE_ID_QUEST_IMMEDIATE_SUCCESS = "2000"
-    const val PHRASE_ID_QUEST_SUCCESS = "2100"
-    const val PHRASE_ID_QUEST_NO_SUCCESS = "2200"
-    const val PHRASE_ID_QUEST_UNCLAIMED = "2300"
-    const val PHRASE_ID_QUEST_FINISHED = "2400"
-    const val PHRASE_ID_QUEST_DELIVERY = "2500"
-    const val PHRASE_ID_QUEST_LINKED = "2600"
     const val PHRASE_ID_PARTY_FULL = "9000"
 
     const val KEYCODE_L1 = 1000

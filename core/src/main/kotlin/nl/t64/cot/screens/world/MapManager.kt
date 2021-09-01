@@ -106,8 +106,8 @@ class MapManager : ProfileObserver {
     fun getLightmapMap(): Sprite = currentMap.lightmapMap
     fun getGameMapLights(): List<GameMapLight> = currentMap.lights
     fun getLightmapPlayer(): Sprite? = currentMap.lightmapPlayer
-    fun getLowerMapTextures(): List<GameMapQuestTexture> = currentMap.lowerTextures
-    fun getUpperMapTextures(): List<GameMapQuestTexture> = currentMap.upperTextures
+    fun getLowerMapQuestTextures(): List<GameMapQuestTexture> = currentMap.lowerTextures
+    fun getUpperMapQuestTextures(): List<GameMapQuestTexture> = currentMap.upperTextures
 
     fun findPath(startPoint: Vector2, endPoint: Vector2): DefaultGraphPath<TiledNode> {
         return currentMap.tiledGraph.findPath(startPoint, endPoint)

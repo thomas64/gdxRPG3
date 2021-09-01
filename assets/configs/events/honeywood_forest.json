@@ -1,41 +1,43 @@
 {
-  "fallen_tree"          : {
+  "fallen_tree"         : {
     "type"          : "conversation",
     "condition"     : ["quest_intro_not_finished"],
     "conversationId": "fallen_tree",
     "entityId"      : "mozes",
     "doesRepeat"    : true
   },
-  "guide_event_action"   : {
-    "type": "messagebox",
-    "text": ["Press %action% for an action.", "To talk with a person or to open a chest or door."]
-  },
-  "guide_event_inventory": {
-    "type"     : "messagebox",
-    "condition": ["3_starting_potions"],
-    "text"     : ["Press %inventory% to see your inventory,", "along with your equipment, stats, skills and spells."]
-  },
-  "guide_event_enemy"    : {
-    "type": "messagebox",
-    "text": ["Coming near an enemy will start a battle.", "By winning battles, you'll earn XP,", "which you can use to improve your character."]
-  },
-  "guide_event_fast"     : {
-    "type": "messagebox",
-    "text": ["Keep %fast% pressed to run.", "You'll be faster, but enemies will detect you much sooner."]
-  },
-  "guide_event_slow"     : {
-    "type": "messagebox",
-    "text": ["Keep %slow% pressed to move stealthily.", "Enemies will detect you less easy.", "This way you can avoid battles."]
-  },
-  "found_grace_ribbon"   : {
+  "found_grace_ribbon"  : {
     "type"          : "conversation",
     "condition"     : ["grace_ribbon"],
     "conversationId": "found_grace_ribbon",
     "entityId"      : "mozes"
   },
-  "find_great_tree"      : {
+  "found_honeywood_cave": {
+    "type"          : "conversation",
+    "conversationId": "found_honeywood_cave",
+    "entityId"      : "mozes"
+  },
+  "talking_orc_guards": {
+    "type"          : "conversation",
+    "condition"     : ["quest_orc_guards_not_finished"],
+    "conversationId": "quest_orc_guards",
+    "entityId"      : "orc_sergeant",
+    "doesRepeat"    : true
+  },
+  "find_dead_orcs"      : {
+    "type"          : "conversation",
+    "conversationId": "find_dead_orcs",
+    "entityId"      : "mozes"
+  },
+  "find_great_tree"     : {
     "type"          : "conversation",
     "conversationId": "find_great_tree",
+    "entityId"      : "mozes"
+  },
+  "defeated_orc_guards" : {
+    "type"          : "conversation",
+    "condition"     : ["defeated_orc_guards"],
+    "conversationId": "defeated_orc_guards",
     "entityId"      : "mozes"
   }
 }
