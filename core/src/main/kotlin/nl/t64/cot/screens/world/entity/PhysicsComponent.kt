@@ -34,7 +34,7 @@ abstract class PhysicsComponent : Component {
     abstract fun debug(shapeRenderer: ShapeRenderer)
 
     fun doesBoundingBoxOverlapsBlockers(): Boolean {
-        return brokerManager.blockObservers.getCurrentBlockersFor(boundingBox)
+        return brokerManager.blockObservers.getCurrentBlockersFor(boundingBox, state)
             .filter { boundingBox != it }
             .any { boundingBox.overlaps(it) }
     }

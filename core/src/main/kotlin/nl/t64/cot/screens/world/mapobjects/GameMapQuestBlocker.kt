@@ -10,6 +10,7 @@ import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.components.quest.QuestGraph
 import nl.t64.cot.components.quest.QuestState
+import nl.t64.cot.screens.world.entity.EntityState
 import nl.t64.cot.subjects.BlockObserver
 
 
@@ -22,11 +23,11 @@ class GameMapQuestBlocker(rectObject: RectangleMapObject) : GameMapObject(rectOb
         if (it) brokerManager.blockObservers.addObserver(this)
     }
 
-    override fun getBlockerFor(boundingBox: Rectangle): Rectangle? {
+    override fun getBlockerFor(boundingBox: Rectangle, state: EntityState): Rectangle? {
         return rectangle.takeIf { isActive && boundingBox.overlaps(it) }
     }
 
-    override fun isBlocking(point: Vector2): Boolean {
+    override fun isBlocking(point: Vector2, state: EntityState): Boolean {
         return isActive && rectangle.contains(point)
     }
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="34" height="48" tilewidth="24" tileheight="24" infinite="0" nextlayerid="17" nextobjectid="36">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="34" height="48" tilewidth="24" tileheight="24" infinite="0" nextlayerid="18" nextobjectid="36">
  <properties>
   <property name="bgm" value="bgm_cave"/>
   <property name="lightmap_player" value="light_player"/>
@@ -56,10 +56,12 @@
    eJztwTEBAAAAwqD1T20JT6AAAAAAAAB4GhmAAAE=
   </data>
  </layer>
- <objectgroup color="#aa0000" id="11" name="collision">
+ <objectgroup color="#aa5500" id="17" name="collision_low">
   <object id="4" x="336" y="432" width="96" height="240"/>
-  <object id="5" x="288" y="480" width="48" height="96"/>
   <object id="6" x="432" y="528" width="48" height="96"/>
+  <object id="5" x="288" y="480" width="48" height="96"/>
+ </objectgroup>
+ <objectgroup color="#aa0000" id="11" name="collision">
   <object id="7" x="0" y="0" width="336" height="384"/>
   <object id="8" x="480" y="0" width="336" height="432"/>
   <object id="9" x="336" y="0" width="144" height="216"/>
@@ -74,12 +76,12 @@
   <object id="21" x="336" y="960" width="48" height="48"/>
   <object id="22" x="432" y="960" width="48" height="48"/>
   <object id="23" x="240" y="672" width="48" height="96"/>
-  <object id="28" x="360" y="672" width="48" height="48"/>
+  <object id="28" x="360" y="624" width="48" height="96"/>
   <object id="29" x="528" y="528" width="48" height="48"/>
   <object id="30" x="240" y="384" width="48" height="48"/>
  </objectgroup>
  <objectgroup color="#ff007f" id="16" name="enemy">
-  <object id="35" name="blue_bat" type="f" x="456" y="648" width="48" height="24">
+  <object id="35" name="blue_bat" type="f" x="360" y="528" width="48" height="24">
    <properties>
     <property name="battleId" value="battle0007"/>
    </properties>

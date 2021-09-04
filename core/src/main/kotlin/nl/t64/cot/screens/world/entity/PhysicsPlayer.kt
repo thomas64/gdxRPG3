@@ -63,7 +63,7 @@ class PhysicsPlayer : PhysicsComponent() {
     }
 
     private fun collisionBlockers(dt: Float) {
-        val blockers = brokerManager.blockObservers.getCurrentBlockersFor(boundingBox)
+        val blockers = brokerManager.blockObservers.getCurrentBlockersFor(boundingBox, state)
         if (blockers.isNotEmpty()) handleBlockers(blockers, dt)
     }
 
@@ -81,7 +81,7 @@ class PhysicsPlayer : PhysicsComponent() {
     }
 
     private fun hasHitAnotherBlockWhileSideStepping(): Boolean {
-        val blockers = brokerManager.blockObservers.getCurrentBlockersFor(boundingBox)
+        val blockers = brokerManager.blockObservers.getCurrentBlockersFor(boundingBox, state)
         if (blockers.size > 1) {
             currentPosition.set(oldPosition)
             setBoundingBox()

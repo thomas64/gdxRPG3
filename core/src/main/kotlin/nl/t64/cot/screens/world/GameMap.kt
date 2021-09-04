@@ -29,6 +29,7 @@ private const val NPC_LAYER = "npc"
 private const val HERO_LAYER = "hero"
 private const val ENEMY_LAYER = "enemy"
 private const val COLLISION_LAYER = "collision"
+private const val COLLISION_LOW_LAYER = "collision_low"
 private const val SPAWN_LAYER = "spawn"
 private const val PORTAL_LAYER = "portal"
 private const val WARP_LAYER = "warp"
@@ -69,6 +70,7 @@ class GameMap(val mapTitle: String) {
 
     private val sounds: List<RectangleMapObject> = loader.loadLayer(SOUND_LAYER)
     private val blockers: List<GameMapBlocker> = loader.loadLayer(COLLISION_LAYER) { GameMapBlocker(it) }
+    private val lowBlockers: List<GameMapBlockerLow> = loader.loadLayer(COLLISION_LOW_LAYER) { GameMapBlockerLow(it) }
     private val eventDiscovers: List<GameMapEventDiscover> = loader.equalsIgnoreCase(EVENT_LAYER, "discover") { GameMapEventDiscover(it) }
     private val eventCheckers: List<GameMapEventChecker> = loader.equalsIgnoreCase(EVENT_LAYER, "check") { GameMapEventChecker(it) }
     private val cutsceneDiscovers: List<GameMapCutscene> = loader.equalsIgnoreCase(CUTSCENE_LAYER, "discover") { GameMapCutscene(it) }
@@ -133,7 +135,7 @@ class GameMap(val mapTitle: String) {
 
         shapeRenderer.color = Color.YELLOW
 
-        listOf(blockers, questBlockers)
+        listOf(blockers, lowBlockers, questBlockers)
             .flatten()
             .map { it.rectangle }
             .forEach { shapeRenderer.rect(it.x, it.y, it.width, it.height) }

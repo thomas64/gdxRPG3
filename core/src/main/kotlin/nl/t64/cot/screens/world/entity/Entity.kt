@@ -28,11 +28,11 @@ class Entity(
         send(OnActionEvent(checkRect, playerDirection, playerPosition))
     }
 
-    override fun getBlockerFor(boundingBox: Rectangle): Rectangle? {
+    override fun getBlockerFor(boundingBox: Rectangle, state: EntityState): Rectangle? {
         return physicsComponent.boundingBox.takeIf { boundingBox.overlaps(it) }
     }
 
-    override fun isBlocking(point: Vector2): Boolean {
+    override fun isBlocking(point: Vector2, state: EntityState): Boolean {
         return physicsComponent.boundingBox.contains(point)
     }
 
