@@ -146,7 +146,7 @@ class ConversationDialog {
         label.setAlignment(Align.left)
         val mainTable = Table()
         mainTable.left()
-        faceImage = getFaceImage()
+        faceImage = Utils.getFaceImage(faceId!!)
         mainTable.add<Actor>(faceImage).width(Constant.FACE_SIZE).padLeft(PAD * 4f)
 
         val textTable = Table()
@@ -159,10 +159,6 @@ class ConversationDialog {
         mainTable.add(textTable)
         dialog.contentTable.clear()
         dialog.contentTable.add(mainTable)
-    }
-
-    private fun getFaceImage(): Image {
-        return faceId?.let { Utils.getFaceImage(it) } ?: Image()
     }
 
     private fun fillDialogForNote() {
@@ -268,6 +264,7 @@ class ConversationDialog {
 
             ConversationCommand.ACCEPT_QUEST -> acceptQuest(destinationId)
             ConversationCommand.SHOW_QUEST_ITEM -> showQuestItem(destinationId)
+            ConversationCommand.WEAR_QUEST_ITEM -> wearQuestItem(destinationId)
             ConversationCommand.SAY_QUEST_THING -> sayQuestThing(destinationId)
 
             else -> throw IllegalArgumentException("ConversationCommand '$conversationCommand' cannot be reached here.")
@@ -338,6 +335,11 @@ class ConversationDialog {
 
     private fun showQuestItem(destinationId: String) {
         gameData.quests.getQuestById(conversationId!!).possibleSetShowItemTaskComplete()
+        endConversation(destinationId)
+    }
+
+    private fun wearQuestItem(destinationId: String) {
+        gameData.quests.getQuestById(conversationId!!).possibleSetWearItemTaskComplete()
         endConversation(destinationId)
     }
 

@@ -1,7 +1,6 @@
 {
   "green_slime"                 : {"source": "slimes", "col": 3, "row": 1},
   "blue_bat"                    : {"source": "bats", "col": 2, "row": 2},
-  "orc_scout_with_mask_of_ardor": {"source": "orcs", "col": 1, "row": 1},
   "orc_scout"                   : {"source": "orcs", "col": 1, "row": 1},
   "orc_sergeant"                : {"source": "orcs", "col": 4, "row": 2}
 }

@@ -26,5 +26,18 @@
     "price"        : 50,
     "min_willpower": 22,
     "protection"   : 10
+  },
+  "transformation_orc"   : {
+    "name"          : "Amulet of Orc",
+    "group"         : "NECKLACE",
+    "sort"          : 61000,
+    "price"         : 1,
+    "transformation": 1,
+    "description"   : [
+      "Manipulates the minds of orcs to perceive",
+      "you as an orc, but only to orcs.",
+      "Be warned: It has a lasting effect on them!",
+      "Even after you take the amulet off."
+    ]
   }
 }

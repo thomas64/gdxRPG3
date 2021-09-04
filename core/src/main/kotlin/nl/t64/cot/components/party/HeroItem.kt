@@ -205,6 +205,13 @@ class HeroItem(
         return skillItem.rank + inventory.getSumOfSkill(skillItem.id) + skillItem.bonus
     }
 
+    fun getTransformation(): String {
+        return when (getTotalCalcOf(CalcAttributeId.TRANSFORMATION)) {
+            1 -> Constant.TRANSFORMATION_ORC
+            else -> Constant.PLAYER_ID
+        }
+    }
+
     fun getTotalCalcOf(calcAttributeId: CalcAttributeId): Int {
         // todo, er moet nog wel een bonus komen voor protection en etc. bijv met een protection spell.
         // of hieronder

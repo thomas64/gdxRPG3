@@ -163,8 +163,9 @@ open class ItemSlotTooltip : BaseTooltip() {
 
     fun addPossibleDescription(inventoryImage: InventoryImage, table: Table) {
         if (inventoryImage.inventoryItem.description.isNotEmpty()) {
+            table.add(createLabel(EMPTY_ROW, Color.WHITE)).row()
             val description = inventoryImage.inventoryItem.description.joinToString(System.lineSeparator())
-            table.add(createLabel(description, Color.VIOLET)).colspan(2)
+            table.add(createLabel(description, Color.WHITE)).colspan(2)
         }
     }
 

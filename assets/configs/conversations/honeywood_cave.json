@@ -6,62 +6,15 @@
       "3": {"text": ["Are you in here?!"], "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]}
     }
   },
-  "lonely_orc_scout"    : {
-    "phrases": {
-      "1" : {"text": ["Who are you and what are you doing here!"]},
-      "2" : {
-        "face"   : "mozes",
-        "text"   : ["Woah! Easy there."],
-        "choices": [
-          {"text": "I'm Mozes and I'm looking for a little girl.", "destinationId": "5"},
-          {"text": "No, you answer my questions!", "destinationId": "6"}
-        ]
-      },
-      "5" : {
-        "face"   : "orc_scout",
-        "text"   : ["Hah! Little girl? You won't find her anymore.", "We found her snooping around in forest, so we brought her to Ardor.", "She is goner. And so are you!"],
-        "choices": [{"destinationId": "10"}]
-      },
-      "6" : {
-        "face"   : "orc_scout",
-        "text"   : ["Hah! Watch your mouth!", "Don't tell me you came here for little girl we found snooping in forest earlier.", "We brought her to Ardor. She is goner. And so are you!"],
-        "choices": [{"destinationId": "10"}]
-      },
-      "10": {
-        "face"   : "mozes",
-        "text"   : ["If anything has happened to Grace!"],
-        "choices": [
-          {"text": "Who is this Ardor?", "destinationId": "11"},
-          {"text": "What has Grace to do with him?", "destinationId": "12"},
-          {"text": "Where is Ardor?", "destinationId": "13"}
-        ]
-      },
-      "11": {
-        "face"   : "orc_scout",
-        "text"   : ["Ardor is great wizard, soon ruler of Adan."],
-        "choices": [{"destinationId": "10"}]
-      },
-      "12": {
-        "face"   : "orc_scout",
-        "text"   : ["You don't want to know! And I make sure you will not know!"],
-        "choices": [{"destinationId": "10"}]
-      },
-      "13": {
-        "face": "orc_scout",
-        "text": ["You have to get past guards, but they are far too strong for you.", "They kill you with ease."]
-      },
-      "14": {
-        "text": ["I need to go to Ardor now to deliver his mask for ritual and you are standing in my way."]
-      },
-      "15": {
-        "text"   : ["Now die!"],
-        "choices": [{"conversationCommand": "START_BATTLE"}]
-      }
-    }
-  },
   "quest_orc_guards": {
     "phrases": {
-      "1" : {"text": ["Halt! Forbidden area!"]},
+      "1" : {
+        "text"   : ["Halt! Forbidden area!"],
+        "choices": [
+          {"condition": ["i_!orc_amulet"], "text": "->", "destinationId": "2"},
+          {"condition": ["i_orc_amulet"], "text": "->", "destinationId": "60"}
+        ]
+      },
       "2" : {"text": ["This is domain of Great Wizard Ardor.", "Leave now, or die!"]},
       "3" : {
         "face"   : "mozes",
@@ -94,7 +47,7 @@
       },
       "13": {
         "face"   : "orc_sergeant",
-        "text"   : ["None of your business."],
+        "text"   : ["We found girl in forest, Ardor says she must die!"],
         "choices": [{"destinationId": "11"}]
       },
       "14": {
@@ -142,6 +95,15 @@
       "50": {
         "text"   : ["Go!"],
         "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "50"}]
+      },
+      "60": {
+        "face": "mozes",
+        "text": ["I need to get to Ardor. Let me through."]
+      },
+      "61": {
+        "face"   : "orc_sergeant",
+        "text"   : ["You go through."],
+        "choices": [{"conversationCommand": "WEAR_QUEST_ITEM", "destinationId": "50"}]
       }
     }
   },

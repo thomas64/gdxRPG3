@@ -1,5 +1,5 @@
 {
-  "green_slime"                 : {
+  "green_slime" : {
     "name"     : "Green Slime",
     "school"   : "NONE",
     "xp"       : 2,
@@ -26,7 +26,7 @@
       "chest": "armor_3"
     }
   },
-  "blue_bat"                    : {
+  "blue_bat"    : {
     "name"     : "Blue Bat",
     "school"   : "NONE",
     "xp"       : 1,
@@ -53,43 +53,10 @@
       "chest" : "armor_2"
     }
   },
-  "orc_scout_with_mask_of_ardor": {
+  "orc_scout"   : {
     "name"     : "Orc Scout",
     "school"   : "NONE",
-    "xp"       : 2,
-    "drops"    : {"mask_of_ardor": 100},
-    "stats"    : {
-      "level"       : 1,
-      "intelligence": 9,
-      "willpower"   : 9,
-      "dexterity"   : 15,
-      "agility"     : 16,
-      "endurance"   : 14,
-      "strength"    : 12,
-      "stamina"     : 28
-    },
-    "skills"   : {
-      "ranger" : 2,
-      "stealth": 2,
-      "warrior": 8,
-      "wizard" : 3,
-      "hafted" : 1,
-      "missile": 7,
-      "shield" : 3,
-      "sword"  : 2
-    },
-    "spells"   : {
-    },
-    "inventory": {
-      "weapon": "basic_dagger",
-      "shield": "basic_light_shield",
-      "chest" : "armor_2"
-    }
-  },
-  "orc_scout"                   : {
-    "name"     : "Orc Scout",
-    "school"   : "NONE",
-    "xp"       : 2,
+    "xp"       : 3,
     "drops"    : {"basic_dagger": 20, "basic_light_shield": 20, "healing_potion": 5, "gold": 50},
     "stats"    : {
       "level"       : 1,
@@ -119,10 +86,10 @@
       "chest" : "armor_2"
     }
   },
-  "orc_sergeant"                : {
+  "orc_sergeant": {
     "name"     : "Orc Sergeant",
     "school"   : "NONE",
-    "xp"       : 20,
+    "xp"       : 27,
     "drops"    : {"specialist_longsword": 20, "specialist_medium_shield": 20, "healing_potion": 5, "gold": 75},
     "stats"    : {
       "level"       : 10,

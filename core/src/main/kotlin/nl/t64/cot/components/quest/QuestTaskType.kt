@@ -5,6 +5,7 @@ enum class QuestTaskType {
     CHECK,
     FIND_ITEM,
     SHOW_ITEM,
+    WEAR_ITEM,
     SAY_THE_RIGHT_THING,
     KILL,
 

@@ -51,14 +51,21 @@ class QuestGraph(
 
     fun possibleSetFindItemTaskComplete() {
         tasks.filter { it.value.type == QuestTaskType.FIND_ITEM }
-            .filter { it.value.hasTargetInInventory() }
+            .filter { it.value.hasTargetInInventoryOrEquipment() }
             .forEach { setTaskComplete(it.key) }
     }
 
     fun possibleSetShowItemTaskComplete() {
         accept()
         tasks.filter { it.value.type == QuestTaskType.SHOW_ITEM }
-            .filter { it.value.hasTargetInInventory() }
+            .filter { it.value.hasTargetInInventoryOrEquipment() }
+            .forEach { setTaskComplete(it.key) }
+    }
+
+    fun possibleSetWearItemTaskComplete() {
+        accept()
+        tasks.filter { it.value.type == QuestTaskType.WEAR_ITEM }
+            .filter { it.value.hasTargetInPlayerEquipment() }
             .forEach { setTaskComplete(it.key) }
     }
 
@@ -86,8 +93,14 @@ class QuestGraph(
 
     private fun unhideTaskWithLinkedTask(questTask: QuestTask) {
         questTask.isHidden = false
+        handleLinked(questTask)
+    }
+
+    private fun handleLinked(questTask: QuestTask) {
         questTask.linkedWith?.let {
-            tasks[it]!!.handleLinked()
+            val nextTask = tasks[it]!!
+            nextTask.handleLinked()
+            handleLinked(nextTask)
         }
     }
 

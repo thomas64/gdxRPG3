@@ -1,6 +1,6 @@
 
 armor3.png
-size: 124, 62
+size: 186, 62
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
@@ -14,6 +14,13 @@ grace_ribbon
 mask_of_ardor
   rotate: false
   xy: 62, 0
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+transformation_orc
+  rotate: false
+  xy: 124, 0
   size: 62, 62
   orig: 62, 62
   offset: 0, 0

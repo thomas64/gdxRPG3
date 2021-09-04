@@ -40,6 +40,7 @@ class QuestTask(
             QuestTaskType.CHECK,
             QuestTaskType.FIND_ITEM,
             QuestTaskType.SHOW_ITEM,
+            QuestTaskType.WEAR_ITEM,
             QuestTaskType.SAY_THE_RIGHT_THING,
             QuestTaskType.KILL -> {
                 updatedPhrase?.let { taskPhrase = it }
@@ -49,8 +50,13 @@ class QuestTask(
         }
     }
 
-    fun hasTargetInInventory(): Boolean {
+    fun hasTargetInInventoryOrEquipment(): Boolean {
         return gameData.inventory.contains(target)
+                || gameData.party.hasItemInEquipment(getTargetEntry().key, getTargetEntry().value)
+    }
+
+    fun hasTargetInPlayerEquipment(): Boolean {
+        return gameData.party.getPlayer().hasInventoryItem(getTargetEntry().key)
     }
 
     private fun removeTargetFromInventory() {

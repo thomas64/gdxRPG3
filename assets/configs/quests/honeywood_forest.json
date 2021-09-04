@@ -44,16 +44,16 @@
     "summary" : "Grace is said to be where Ardor is. But two intimidating orc guards won't let you get to Ardor.",
     "tasks"   : {
       "1": {
-        "taskPhrase": "Retrieved a mask from an orc who was supposed to deliver it to Ardor",
+        "taskPhrase": "Found a strange amulet for manipulating orcs?",
         "type"      : "FIND_ITEM",
-        "target"    : {"mask_of_ardor": 1},
+        "target"    : {"transformation_orc": 1},
         "isOptional": true,
         "isHidden"  : true
       },
       "2": {
-        "taskPhrase": "Showed the mask to the guards",
-        "type"      : "SHOW_ITEM",
-        "target"    : {"mask_of_ardor": 1},
+        "taskPhrase": "Used the amulet on the guards",
+        "type"      : "WEAR_ITEM",
+        "target"    : {"transformation_orc": 1},
         "isOptional": true,
         "isHidden"  : true,
         "linkedWith": "5"
@@ -92,7 +92,15 @@
       "2": {
         "taskPhrase": "Found the secret door",
         "type"      : "FREE",
-        "isHidden"  : true
+        "isHidden"  : true,
+        "linkedWith": "3"
+      },
+      "3": {
+        "taskPhrase"   : "Look for the mighty artifact",
+        "updatedPhrase": "Found a strange amulet for manipulating orcs?",
+        "type"         : "FIND_ITEM",
+        "target"       : {"transformation_orc": 1},
+        "isHidden"     : true
       }
     }
   }

@@ -54,6 +54,12 @@ enum class CalcAttributeId(override val title: String) : SuperEnum {
         override fun getDescription(): String {
             return "ToDo Spell Battery"
         }
+    },
+
+    TRANSFORMATION("Transformation") {
+        override fun getDescription(): String {
+            return "No description"
+        }
     };
 
     abstract fun getDescription(): String

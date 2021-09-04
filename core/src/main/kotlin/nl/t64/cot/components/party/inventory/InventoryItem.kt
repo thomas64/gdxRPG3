@@ -34,6 +34,7 @@ class InventoryItem(
     private val defense: Int = 0,
     @JsonProperty("spell_battery")
     private val spellBattery: Int = 0,
+    private val transformation: Int = 0,
     private val intelligence: Int = 0,
     private val willpower: Int = 0,
     private val dexterity: Int = 0,
@@ -67,7 +68,7 @@ class InventoryItem(
         val itemCopy = InventoryItem(
             name, sort, description, group, isTwoHanded, skill, price, weight,
             minIntelligence, minWillpower, minDexterity, minStrength,
-            movepoints, baseHit, damage, protection, defense, spellBattery,
+            movepoints, baseHit, damage, protection, defense, spellBattery, transformation,
             intelligence, willpower, dexterity, strength, agility, endurance,
             alchemist, diplomat, healer, loremaster, mechanic, ranger, stealth, thief, troubadour, warrior, wizard,
             cheatDeath, quickSwitch, spellBoost)
@@ -143,6 +144,7 @@ class InventoryItem(
             CalcAttributeId.PROTECTION -> protection
             CalcAttributeId.DEFENSE -> defense
             CalcAttributeId.SPELL_BATTERY -> spellBattery
+            CalcAttributeId.TRANSFORMATION -> transformation
         }
     }
 

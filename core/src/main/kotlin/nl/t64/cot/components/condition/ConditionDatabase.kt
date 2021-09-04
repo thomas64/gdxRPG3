@@ -14,6 +14,8 @@ object ConditionDatabase {
         Pair("first_equipment_item") { firstEquipmentItem },
         Pair("quest_orc_guards_not_finished") { questOrcGuardsNotFinished },
         Pair("been_in_fairy_town") { beenInFairyTown },
+        Pair("i_!orc_amulet") { !orcAmulet },
+        Pair("i_orc_amulet") { orcAmulet },
         Pair("i_mask_of_ardor") { maskOfArdor },
         Pair("i_diplomat2") { diplomat2 },
         Pair("i_level10") { level10 },
@@ -45,6 +47,7 @@ object ConditionDatabase {
     private val firstEquipmentItem get() = hasEnoughOfOneOfTheseItems("basic_light_helmet", "basic_light_boots")
     private val questOrcGuardsNotFinished get() = isQuestStateEqualOrLower("quest_orc_guards", QuestState.ACCEPTED)
     private val beenInFairyTown get() = hasEventPlayed("find_great_tree")
+    private val orcAmulet get() = hasItemEquipped("transformation_orc")
     private val diplomat2 get() = hasEnoughOfSkill(SkillItemId.DIPLOMAT, 2)
     private val maskOfArdor get() = hasEnoughOfItem("mask_of_ardor", 1)
     private val level10 get() = hasMinimumLevelOf(10)
@@ -52,13 +55,13 @@ object ConditionDatabase {
 
 //    private val diplomat3 get() = hasEnoughOfSkill(SkillItemId.DIPLOMAT, 3)
 //    private val keyMysteriousTunnel get() = hasEnoughOfItem("key_mysterious_tunnel", 1)
-//    private val quest4Known get() = isQuestStateAtLeast("quest0004", QuestState.KNOWN)
+//    private val quest4Known get() = isQuestStateEqualOrHigher("quest0004", QuestState.KNOWN)
 //    private val quest6Task3 get() = isQuestTaskNumberComplete("quest0006", 3)
-//    private val quest6Known get() = isQuestStateAtLeast("quest0006", QuestState.KNOWN)
-//    private val quest6Unclaimed get() = isQuestStateAtLeast("quest0006", QuestState.UNCLAIMED)
+//    private val quest6Known get() = isQuestStateEqualOrHigher("quest0006", QuestState.KNOWN)
+//    private val quest6Unclaimed get() = isQuestStateEqualOrHigher("quest0006", QuestState.UNCLAIMED)
 //    private val quest7Task3 get() = isQuestTaskNumberComplete("quest0007", 3)
-//    private val quest7Unknown get() = isQuestStateAtMost("quest0007", QuestState.UNKNOWN)
-//    private val quest7Unclaimed get() = isQuestStateAtLeast("quest0007", QuestState.UNCLAIMED)
+//    private val quest7Unknown get() = isQuestStateEqualOrLower("quest0007", QuestState.UNKNOWN)
+//    private val quest7Unclaimed get() = isQuestStateEqualOrHigher("quest0007", QuestState.UNCLAIMED)
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -73,7 +76,10 @@ object ConditionDatabase {
 
     private fun hasEnoughOfItem(inventoryItemId: String, amount: Int): Boolean =
         gameData.inventory.hasEnoughOfItem(inventoryItemId, amount)
-                || gameData.party.getAllHeroes().count { it.hasInventoryItem(inventoryItemId) } >= amount
+                || gameData.party.hasItemInEquipment(inventoryItemId, amount)
+
+    private fun hasItemEquipped(inventoryItemId: String): Boolean =
+        gameData.party.getPlayer().hasInventoryItem(inventoryItemId)
 
     private fun isQuestTaskNumberComplete(questId: String, taskNumber: Int): Boolean =
         gameData.quests.getQuestById(questId).isTaskComplete(taskNumber.toString())

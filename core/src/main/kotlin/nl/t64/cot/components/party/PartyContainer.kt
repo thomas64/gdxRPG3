@@ -74,12 +74,20 @@ class PartyContainer {
         return getBestSkillLevel(skillItemId) >= rank
     }
 
+    fun hasItemInEquipment(inventoryItemId: String, amount: Int): Boolean {
+        return getAllHeroes().count { it.hasInventoryItem(inventoryItemId) } >= amount
+    }
+
     fun contains(heroId: String): Boolean {
         return party.containsKey(heroId)
     }
 
     fun contains(index: Int): Boolean {
         return index <= party.size - 1
+    }
+
+    fun getPlayer(): HeroItem {
+        return getHero(0)
     }
 
     fun getHero(index: Int): HeroItem {

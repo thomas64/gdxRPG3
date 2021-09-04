@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Vector2
 import nl.t64.cot.Utils.audioManager
+import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.constants.Constant
@@ -16,6 +17,7 @@ class GraphicsPlayer : GraphicsComponent() {
     private var feetPosition = Vector2()
     private var moveSpeed: Float = Constant.MOVE_SPEED_2
     private var stepCount: Float = 0f
+    private var currentTransformation: String = Constant.PLAYER_ID
 
     init {
         super.loadWalkingAnimation(Constant.PLAYER_ID)
@@ -42,6 +44,7 @@ class GraphicsPlayer : GraphicsComponent() {
     }
 
     override fun update(dt: Float) {
+        checkTransformation()
         setFrame(dt)
         playStepSoundWhenWalking(dt)
     }
@@ -90,6 +93,14 @@ class GraphicsPlayer : GraphicsComponent() {
             }
         } else {
             stepCount = 0f
+        }
+    }
+
+    private fun checkTransformation() {
+        val newTransformation: String = gameData.party.getPlayer().getTransformation()
+        if (currentTransformation != newTransformation) {
+            currentTransformation = newTransformation
+            super.loadWalkingAnimation(currentTransformation)
         }
     }
 

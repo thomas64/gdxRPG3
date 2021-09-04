@@ -64,7 +64,7 @@ class GraphicsSparkle(animationType: AnimationType) : GraphicsComponent() {
 
     private fun createShortAnimation(): Animation<TextureRegion> {
         val textures = Utils.getSplitTexture(SPARKLE_PATH, Constant.TILE_SIZE.toInt())
-        val frames = Array(arrayOf(textures[4][0],
+        val frames = Array(arrayOf(textures[4][0], textures[4][0], textures[4][0], textures[4][0], textures[4][0],
                                    textures[3][2],
                                    textures[3][1],
                                    textures[0][1],

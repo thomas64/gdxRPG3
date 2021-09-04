@@ -151,6 +151,9 @@ class DescriptionCreator(
         if (description.value is SkillItemId) {
             return true
         }
+        if (description.key == CalcAttributeId.TRANSFORMATION) {
+            return false
+        }
         if ((description.key == CalcAttributeId.PROTECTION
                     || description.key == StatItemId.AGILITY
                     || description.key == SkillItemId.STEALTH)
@@ -163,7 +166,9 @@ class DescriptionCreator(
                     || inventoryItem.group == InventoryGroup.WEAPON
                     || inventoryItem.group == InventoryGroup.RESOURCE
                     || inventoryItem.group == InventoryGroup.POTION
-                    || inventoryItem.group == InventoryGroup.ITEM)
+                    || inventoryItem.group == InventoryGroup.ITEM
+                    || inventoryItem.group == InventoryGroup.RING
+                    || inventoryItem.group == InventoryGroup.NECKLACE)
         ) {
             return false
         }
