@@ -178,22 +178,22 @@ class ConversationDialog {
         scrollPane.addListener(ConversationDialogListener(answers) { selectAnswer() })
     }
 
-    private fun continueConversation(destinationId: String) {
+    private fun continueConversation(nextId: String) {
         audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_CONVERSATION_NEXT)
-        continueConversationWithoutSound(destinationId)
+        continueConversationWithoutSound(nextId)
     }
 
-    private fun continueConversationWithoutSound(destinationId: String) {
-        populateConversationDialog(destinationId)
+    private fun continueConversationWithoutSound(nextId: String) {
+        populateConversationDialog(nextId)
     }
 
-    private fun endConversation(destinationId: String) {
+    private fun endConversation(nextId: String) {
         audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_CONVERSATION_END)
-        endConversationWithoutSound(destinationId)
+        endConversationWithoutSound(nextId)
     }
 
-    private fun endConversationWithoutSound(destinationId: String) {
-        graph.currentPhraseId = destinationId
+    private fun endConversationWithoutSound(nextId: String) {
+        graph.currentPhraseId = nextId
         conversationObservers.notifyExitConversation()
     }
 
@@ -249,30 +249,30 @@ class ConversationDialog {
             audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_ERROR)
             return
         }
-        val destinationId = selectedAnswer.destinationId
-        val conversationCommand = selectedAnswer.conversationCommand
+        val nextId = selectedAnswer.nextId
+        val conversationCommand = selectedAnswer.command
 
         when (conversationCommand) {
-            ConversationCommand.NONE -> continueConversation(destinationId)
-            ConversationCommand.EXIT_CONVERSATION -> endConversation(destinationId)
-            ConversationCommand.HERO_JOIN -> tryToAddHeroToParty(destinationId)
-            ConversationCommand.HERO_DISMISS -> dismissHero(destinationId)
-            ConversationCommand.LOAD_SHOP -> loadShop(destinationId)
-            ConversationCommand.SAVE_GAME -> saveGame(destinationId)
-            ConversationCommand.HEAL_LIFE -> healLife(destinationId)
-            ConversationCommand.RECEIVE_XP -> receiveXp(destinationId)
-            ConversationCommand.START_BATTLE -> startBattle(destinationId)
+            ConversationCommand.NONE -> continueConversation(nextId)
+            ConversationCommand.EXIT -> endConversation(nextId)
+            ConversationCommand.HERO_JOIN -> tryToAddHeroToParty(nextId)
+            ConversationCommand.HERO_DISMISS -> dismissHero(nextId)
+            ConversationCommand.LOAD_SHOP -> loadShop(nextId)
+            ConversationCommand.SAVE_GAME -> saveGame(nextId)
+            ConversationCommand.HEAL_LIFE -> healLife(nextId)
+            ConversationCommand.RECEIVE_XP -> receiveXp(nextId)
+            ConversationCommand.START_BATTLE -> startBattle(nextId)
 
-            ConversationCommand.ACCEPT_QUEST -> acceptQuest(destinationId)
-            ConversationCommand.SHOW_QUEST_ITEM -> showQuestItem(destinationId)
-            ConversationCommand.WEAR_QUEST_ITEM -> wearQuestItem(destinationId)
-            ConversationCommand.SAY_QUEST_THING -> sayQuestThing(destinationId)
+            ConversationCommand.ACCEPT_QUEST -> acceptQuest(nextId)
+            ConversationCommand.SHOW_QUEST_ITEM -> showQuestItem(nextId)
+            ConversationCommand.WEAR_QUEST_ITEM -> wearQuestItem(nextId)
+            ConversationCommand.SAY_QUEST_THING -> sayQuestThing(nextId)
 
             else -> throw IllegalArgumentException("ConversationCommand '$conversationCommand' cannot be reached here.")
         }
     }
 
-    private fun tryToAddHeroToParty(destinationId: String) {
+    private fun tryToAddHeroToParty(nextId: String) {
         val heroes = gameData.heroes
         val party = gameData.party
         val hero = heroes.getCertainHero(faceId!!)
@@ -284,27 +284,27 @@ class ConversationDialog {
             heroes.removeHero(faceId!!)
             party.addHero(hero)
             conversationObservers.notifyHeroJoined()
-            endConversationWithoutSound(destinationId)
+            endConversationWithoutSound(nextId)
         }
     }
 
-    private fun dismissHero(destinationId: String) {
+    private fun dismissHero(nextId: String) {
         audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_CONVERSATION_END)
-        graph.currentPhraseId = destinationId
+        graph.currentPhraseId = nextId
         conversationObservers.notifyHeroDismiss()                                   // ends conversation
     }
 
-    private fun loadShop(destinationId: String) {
-        graph.currentPhraseId = destinationId
+    private fun loadShop(nextId: String) {
+        graph.currentPhraseId = nextId
         conversationObservers.notifyLoadShop()                                      // ends conversation
     }
 
-    private fun saveGame(destinationId: String) {
-        endConversation(destinationId)
+    private fun saveGame(nextId: String) {
+        endConversation(nextId)
         profileManager.saveProfile()
     }
 
-    private fun healLife(destinationId: String) {
+    private fun healLife(nextId: String) {
         val price = conversationId!!.substringAfterLast("-").toInt()
         if (price > 0) {
             if (gameData.inventory.hasEnoughOfItem("gold", price)) {
@@ -317,14 +317,14 @@ class ConversationDialog {
         }
         gameData.party.recoverFullHp()
         brokerManager.mapObservers.notifyFadeOut(
-            { continueConversation(destinationId) }
+            { continueConversation(nextId) }
         )
     }
 
-    private fun receiveXp(destinationId: String) {
+    private fun receiveXp(nextId: String) {
         val reward = gameData.loot.getLoot(conversationId!!)
         if (reward.isXpGained()) {
-            continueConversation(destinationId)
+            continueConversation(nextId)
         } else {
             audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_REWARD)
             val levelUpMessage = StringBuilder()
@@ -337,33 +337,33 @@ class ConversationDialog {
                                                                        + System.lineSeparator() + finalMessage)
             }
             reward.clearXp()
-            continueConversationWithoutSound(destinationId)
+            continueConversationWithoutSound(nextId)
         }
     }
 
-    private fun startBattle(destinationId: String) {
-        endConversation(destinationId)
+    private fun startBattle(nextId: String) {
+        endConversation(nextId)
         brokerManager.componentObservers.notifyShowBattleScreen(conversationId!!)
     }
 
-    private fun acceptQuest(destinationId: String) {
+    private fun acceptQuest(nextId: String) {
         gameData.quests.getQuestById(conversationId!!).accept()
-        endConversation(destinationId)
+        endConversation(nextId)
     }
 
-    private fun showQuestItem(destinationId: String) {
+    private fun showQuestItem(nextId: String) {
         gameData.quests.getQuestById(conversationId!!).possibleSetShowItemTaskComplete()
-        endConversation(destinationId)
+        endConversation(nextId)
     }
 
-    private fun wearQuestItem(destinationId: String) {
+    private fun wearQuestItem(nextId: String) {
         gameData.quests.getQuestById(conversationId!!).possibleSetWearItemTaskComplete()
-        endConversation(destinationId)
+        endConversation(nextId)
     }
 
-    private fun sayQuestThing(destinationId: String) {
+    private fun sayQuestThing(nextId: String) {
         gameData.quests.getQuestById(conversationId!!).setSayTheRightThingTaskComplete()
-        endConversation(destinationId)
+        endConversation(nextId)
     }
 
 }

@@ -15,8 +15,8 @@ class ConversationPhrase(
     }
 
     private fun createArrowChoiceThatPointsToNextPhraseId(currentPhraseId: String): List<ConversationChoice> {
-        val nextDestinationId = (currentPhraseId.toInt() + 1).toString()
-        return listOf(ConversationChoice(destinationId = nextDestinationId))
+        val nextId = (currentPhraseId.toInt() + 1).toString()
+        return listOf(ConversationChoice(nextId = nextId))
     }
 
     private fun getVisibleChoices(): List<ConversationChoice> = choices.filter { it.isVisible() }

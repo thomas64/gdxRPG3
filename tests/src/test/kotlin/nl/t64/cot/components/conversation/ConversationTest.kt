@@ -53,8 +53,8 @@ internal class ConversationTest : GameTest() {
         assertThat(graph.getAssociatedChoices()).hasSize(1)
         assertThat(graph.getAssociatedChoices()[0].text).isEqualTo("->")
         assertThat(graph.getAssociatedChoices()[0]).hasToString("->")
-        assertThat(graph.getAssociatedChoices()[0].destinationId).isEqualTo("2")
-        assertThat(graph.getAssociatedChoices()[0].conversationCommand).isEqualTo(ConversationCommand.NONE)
+        assertThat(graph.getAssociatedChoices()[0].nextId).isEqualTo("2")
+        assertThat(graph.getAssociatedChoices()[0].command).isEqualTo(ConversationCommand.NONE)
         assertThat(graph.getAssociatedChoices()[0].conditionIds).isEmpty()
         assertThat(graph.getAssociatedChoices()[0].isMeetingCondition()).isTrue
     }
@@ -68,11 +68,11 @@ internal class ConversationTest : GameTest() {
         assertThat(graph.getCurrentPhrase()).containsOnly("Okay, here's the deal. You are taking me with you and MAYBE I'll forgive you.")
         assertThat(graph.getAssociatedChoices()).hasSize(2)
         assertThat(graph.getAssociatedChoices()[0].text).isEqualTo("Alright Luana, I will endure your presence.")
-        assertThat(graph.getAssociatedChoices()[0].destinationId).isEqualTo("9")
-        assertThat(graph.getAssociatedChoices()[0].conversationCommand).isEqualTo(ConversationCommand.NONE)
+        assertThat(graph.getAssociatedChoices()[0].nextId).isEqualTo("9")
+        assertThat(graph.getAssociatedChoices()[0].command).isEqualTo(ConversationCommand.NONE)
         assertThat(graph.getAssociatedChoices()[1].text).isEqualTo("No, I don't WANT your protection.")
-        assertThat(graph.getAssociatedChoices()[1].destinationId).isEqualTo("10")
-        assertThat(graph.getAssociatedChoices()[1].conversationCommand).isEqualTo(ConversationCommand.NONE)
+        assertThat(graph.getAssociatedChoices()[1].nextId).isEqualTo("10")
+        assertThat(graph.getAssociatedChoices()[1].command).isEqualTo(ConversationCommand.NONE)
     }
 
     @Test
@@ -84,8 +84,8 @@ internal class ConversationTest : GameTest() {
         assertThat(graph.getCurrentPhrase()).containsOnly("Alright! Now were talking!", "You are so not gonna regret this.")
         assertThat(graph.getAssociatedChoices()).hasSize(1)
         assertThat(graph.getAssociatedChoices()[0].text).isEqualTo("->")
-        assertThat(graph.getAssociatedChoices()[0].destinationId).isEqualTo("301")
-        assertThat(graph.getAssociatedChoices()[0].conversationCommand).isEqualTo(ConversationCommand.HERO_JOIN)
+        assertThat(graph.getAssociatedChoices()[0].nextId).isEqualTo("301")
+        assertThat(graph.getAssociatedChoices()[0].command).isEqualTo(ConversationCommand.HERO_JOIN)
     }
 
     @Test

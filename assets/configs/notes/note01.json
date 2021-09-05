@@ -3,7 +3,7 @@
     "phrases": {
       "1": {
         "text"   : ["What are you thinking?", "You've got no time to sleep."],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]
+        "choices": [{"command": "EXIT"}]
       }
     }
   },
@@ -11,7 +11,7 @@
     "phrases": {
       "1": {
         "text"   : ["Resource Shop"],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]
+        "choices": [{"command": "EXIT"}]
       }
     }
   },
@@ -19,7 +19,7 @@
     "phrases": {
       "1": {
         "text"   : ["Equipment Shop"],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]
+        "choices": [{"command": "EXIT"}]
       }
     }
   }

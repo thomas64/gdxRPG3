@@ -2,7 +2,7 @@ package nl.t64.cot.components.conversation
 
 
 enum class ConversationCommand {
-    EXIT_CONVERSATION,
+    EXIT,
     HERO_JOIN,
     HERO_DISMISS,
     LOAD_SHOP,

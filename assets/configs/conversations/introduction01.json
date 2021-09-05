@@ -7,23 +7,23 @@
       "2"  : {
         "text"   : ["I am the Fairy of Introduction.", "Do you want me to repeat what I just said?"],
         "choices": [
-          {"text": "Yes, I would.", "destinationId": "3"},
-          {"text": "Please stop talking to me.", "destinationId": "4"}
+          {"text": "Yes, I would.", "nextId": "3"},
+          {"text": "Please stop talking to me.", "nextId": "4"}
         ]
       },
       "3"  : {
         "text"   : ["I am happy to repeat myself as much as you need me to. Here I go:"],
-        "choices": [{"destinationId": "1"}]
+        "choices": [{"nextId": "1"}]
       },
       "4"  : {
         "text"   : ["Oh... Okay."],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "101"}]
+        "choices": [{"command": "EXIT", "nextId": "101"}]
       },
       "101": {
         "text"   : ["May I talk to you again?"],
         "choices": [
-          {"text": "Yeah, you may.", "destinationId": "102"},
-          {"text": "Not a chance.", "destinationId": "4"}
+          {"text": "Yeah, you may.", "nextId": "102"},
+          {"text": "Not a chance.", "nextId": "4"}
         ]
       },
       "102": {
@@ -35,13 +35,13 @@
       "104": {
         "text"   : ["I am the Fairy of Introduction.", "Do you want me to repeat what I just said?"],
         "choices": [
-          {"text": "Please do.", "destinationId": "105"},
-          {"text": "Argh, I changed my mind. Silence!", "destinationId": "4"}
+          {"text": "Please do.", "nextId": "105"},
+          {"text": "Argh, I changed my mind. Silence!", "nextId": "4"}
         ]
       },
       "105": {
         "text"   : ["I am happy to repeat myself as much as you need me to. Here I go:"],
-        "choices": [{"destinationId": "103"}]
+        "choices": [{"nextId": "103"}]
       }
     }
   }

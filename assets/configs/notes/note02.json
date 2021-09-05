@@ -6,7 +6,7 @@
       },
       "2": {
         "text"   : ["You're stumped."],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]
+        "choices": [{"command": "EXIT"}]
       }
     }
   },
@@ -14,7 +14,7 @@
     "phrases": {
       "1": {
         "text"   : ["What a deep water well.", "Better not fall in and get wet."],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]
+        "choices": [{"command": "EXIT"}]
       }
     }
   },
@@ -25,7 +25,7 @@
       },
       "2": {
         "text"   : ["That's strange..."],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]
+        "choices": [{"command": "EXIT"}]
       }
     }
   },
@@ -33,7 +33,7 @@
     "phrases": {
       "1": {
         "text"   : ["TIME IS ONLY RELATIVE TO THE ONE WHO CAN MANIPULATE TIME. BE WARNED. THIS WORLD IS BUT AN ILLUSION. ONE MUST NOT TAKE IT LIGHTLY. HE WHO WOULD STEAL THE FLAME MUST DIE."],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]
+        "choices": [{"command": "EXIT"}]
       }
     }
   },
@@ -41,7 +41,7 @@
     "phrases": {
       "1": {
         "text"   : ["Check the middle of the low floor.", "That will open the path."],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]
+        "choices": [{"command": "EXIT"}]
       }
     }
   },
@@ -49,7 +49,7 @@
     "phrases": {
       "1": {
         "text"   : ["Well done finding your way through the dark.", "This treasure is not for everybody.", "You may find it hard to open the chest."],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]
+        "choices": [{"command": "EXIT"}]
       }
     }
   }

@@ -5,15 +5,15 @@ import nl.t64.cot.components.condition.ConditionDatabase
 
 
 private const val DEFAULT_ANSWER_TEXT = "->"
-private const val DEFAULT_DESTINATION_ID = "1"
+private const val DEFAULT_NEXT_ID = "1"
 private val DEFAULT_CONVERSATION_COMMAND = ConversationCommand.NONE
 private val DEFAULT_CONDITION: List<String> = emptyList()
 private const val INVISIBLE_PREFIX = "i_"
 
 class ConversationChoice(
     val text: String = DEFAULT_ANSWER_TEXT,
-    val destinationId: String = DEFAULT_DESTINATION_ID,
-    val conversationCommand: ConversationCommand = DEFAULT_CONVERSATION_COMMAND,
+    val nextId: String = DEFAULT_NEXT_ID,
+    val command: ConversationCommand = DEFAULT_CONVERSATION_COMMAND,
     @JsonProperty("condition")
     val conditionIds: List<String> = DEFAULT_CONDITION
 ) {

@@ -11,40 +11,40 @@
       "8"   : {
         "text"   : ["Okay, here's the deal. You are taking me with you and MAYBE I'll forgive you."],
         "choices": [
-          {"text": "Alright Luana, I will endure your presence.", "destinationId": "9"},
-          {"text": "No, I don't WANT your protection.", "destinationId": "10"}
+          {"text": "Alright Luana, I will endure your presence.", "nextId": "9"},
+          {"text": "No, I don't WANT your protection.", "nextId": "10"}
         ]
       },
       "9"   : {
         "text"   : ["Alright! Now were talking!", "You are so not gonna regret this."],
-        "choices": [{"conversationCommand": "HERO_JOIN", "destinationId": "301"}]
+        "choices": [{"command": "HERO_JOIN", "nextId": "301"}]
       },
       "10"  : {
         "text"   : ["Ugh! This is so unfair!"],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "101"}]
+        "choices": [{"command": "EXIT", "nextId": "101"}]
       },
       "101" : {"text": ["Have you changed your mind?", "Perhaps I don't wanna join you anymore."]},
       "102" : {
         "text"   : ["But maybe if you beg me, I will consider it."],
         "choices": [
-          {"text": "Oh mighty Luana! I beg of you, please join me.", "destinationId": "9"},
-          {"text": "Psh, in your dreams.", "destinationId": "103"}
+          {"text": "Oh mighty Luana! I beg of you, please join me.", "nextId": "9"},
+          {"text": "Psh, in your dreams.", "nextId": "103"}
         ]
       },
       "103" : {
         "text"   : ["Ugh! Suit yourself!"],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "101"}]
+        "choices": [{"command": "EXIT", "nextId": "101"}]
       },
       "201" : {
         "text"   : ["Well, did you learn to count? Lemme join!"],
         "choices": [
-          {"text": "Sure...", "destinationId": "9"},
-          {"text": "I can count, buuuut... no.", "destinationId": "103"}
+          {"text": "Sure...", "nextId": "9"},
+          {"text": "I can count, buuuut... no.", "nextId": "103"}
         ]
       },
       "9000": {
         "text"   : ["Mozes... I was always the best of us two at counting. I cannot join you if there's no room."],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "201"}]
+        "choices": [{"command": "EXIT", "nextId": "201"}]
       }
     }
   },
@@ -53,21 +53,21 @@
       "1"   : {
         "text"   : ["Are you back to beg me to join you?"],
         "choices": [
-          {"text": "Yes, I would like you to come back.", "destinationId": "2"},
-          {"text": "No, I'm just here to gloat at you.", "destinationId": "3"}
+          {"text": "Yes, I would like you to come back.", "nextId": "2"},
+          {"text": "No, I'm just here to gloat at you.", "nextId": "3"}
         ]
       },
       "2"   : {
         "text"   : ["Ha! I knew it! You can't do without me!"],
-        "choices": [{"conversationCommand": "HERO_JOIN"}]
+        "choices": [{"command": "HERO_JOIN"}]
       },
       "3"   : {
         "text"   : ["Fine! I don't even wanna join you anymore!"],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]
+        "choices": [{"command": "EXIT"}]
       },
       "9000": {
         "text"   : ["Mozes... I was always the best of us two at counting. I cannot join you if there's no room."],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]
+        "choices": [{"command": "EXIT"}]
       }
     }
   },
@@ -76,13 +76,13 @@
       "1": {
         "text"   : ["No Mozes, if I leave, who is gonna tell you when you're being stupid?"],
         "choices": [
-          {"text": "Luana, I think I can manage. You can go.", "destinationId": "2"},
-          {"text": "You're right, I want you to stay.", "conversationCommand": "EXIT_CONVERSATION"}
+          {"text": "Luana, I think I can manage. You can go.", "nextId": "2"},
+          {"text": "You're right, I want you to stay.", "command": "EXIT"}
         ]
       },
       "2": {
         "text"   : ["Ugh! This is so unfair!"],
-        "choices": [{"conversationCommand": "HERO_DISMISS"}]
+        "choices": [{"command": "HERO_DISMISS"}]
       }
     }
   },
@@ -91,8 +91,8 @@
       "1": {
         "text"   : ["Hero specific text.", "All her equipment will also be gone once you bury her."],
         "choices": [
-          {"text": "Yes, the funeral may continue.", "conversationCommand": "HERO_DISMISS"},
-          {"text": "No, I need to take precautions first.", "conversationCommand": "EXIT_CONVERSATION"}
+          {"text": "Yes, the funeral may continue.", "command": "HERO_DISMISS"},
+          {"text": "No, I need to take precautions first.", "command": "EXIT"}
         ]
       }
     }

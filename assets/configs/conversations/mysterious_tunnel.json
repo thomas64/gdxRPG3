@@ -2,7 +2,7 @@
   "event0001": {
     "phrases": {
       "1": {"text": ["Psst!"]},
-      "2": {"text": ["Over here! On your right!"], "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]}
+      "2": {"text": ["Over here! On your right!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "quest0007": {
@@ -10,147 +10,147 @@
       "1"   : {
         "text"   : ["Hi there."],
         "choices": [
-          {"text": "What are you doing here in the dark?", "conversationCommand": "CHECK_IF_LINKED_QUEST_KNOWN", "destinationId": "2"},
-          {"text": "Go away, you... shadow mister! (Leave conversation)", "conversationCommand": "EXIT_CONVERSATION"}
+          {"text": "What are you doing here in the dark?", "command": "CHECK_IF_LINKED_QUEST_KNOWN", "nextId": "2"},
+          {"text": "Go away, you... shadow mister! (Leave conversation)", "command": "EXIT"}
         ]
       },
       "2"   : {
         "text"   : ["Erm... Nothing... Just standing here."],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]
+        "choices": [{"command": "EXIT"}]
       },
       "100" : {
         "text"   : ["You didn't gave the key to Herington I hope?"],
         "choices": [
-          {"condition": ["i_quest6_unclaimed"], "text": "Yes I did. (Fails quest)", "conversationCommand": "FAIL_QUEST", "destinationId": "250"},
-          {"condition": ["i_quest7_task3"], "text": "No I didn't, but I don't have it for you either. (Fails quest)", "conversationCommand": "FAIL_QUEST", "destinationId": "251"},
-          {"text": "Don't worry. My allegiance is to you.", "conversationCommand": "ACCEPT_QUEST"},
-          {"text": "I have to go. Bye. (Leave conversation)", "conversationCommand": "EXIT_CONVERSATION", "destinationId": "100"}
+          {"condition": ["i_quest6_unclaimed"], "text": "Yes I did. (Fails quest)", "command": "FAIL_QUEST", "nextId": "250"},
+          {"condition": ["i_quest7_task3"], "text": "No I didn't, but I don't have it for you either. (Fails quest)", "command": "FAIL_QUEST", "nextId": "251"},
+          {"text": "Don't worry. My allegiance is to you.", "command": "ACCEPT_QUEST"},
+          {"text": "I have to go. Bye. (Leave conversation)", "command": "EXIT", "nextId": "100"}
         ]
       },
       "200" : {
         "text"   : ["Here comes the saint marching in."],
         "choices": [
-          {"text": "That's right, I've got the key right here.", "conversationCommand": "RETURN_QUEST"},
-          {"text": "Not so much, I don't have it.", "destinationId": "201"},
-          {"text": "I have to go. Bye. (Leave conversation)", "conversationCommand": "EXIT_CONVERSATION", "destinationId": "200"}
+          {"text": "That's right, I've got the key right here.", "command": "RETURN_QUEST"},
+          {"text": "Not so much, I don't have it.", "nextId": "201"},
+          {"text": "I have to go. Bye. (Leave conversation)", "command": "EXIT", "nextId": "200"}
         ]
       },
       "201" : {
         "text"   : ["You sound like there is a problem?"],
         "choices": [
-          {"text": "A slight one... I can't give you the key.", "destinationId": "202"},
-          {"text": "Nah, got you. (Leave conversation)", "conversationCommand": "EXIT_CONVERSATION", "destinationId": "200"}
+          {"text": "A slight one... I can't give you the key.", "nextId": "202"},
+          {"text": "Nah, got you. (Leave conversation)", "command": "EXIT", "nextId": "200"}
         ]
       },
       "202" : {
         "text"   : ["No! No! No! You gave it to Herington?"],
         "choices": [
-          {"condition": ["i_quest6_unclaimed"], "text": "That I did. (Fails quest)", "conversationCommand": "FAIL_QUEST", "destinationId": "250"},
-          {"condition": ["i_quest7_task3"], "text": "Hold your horses! No, I used it myself. (Fails quest)", "conversationCommand": "FAIL_QUEST", "destinationId": "251"},
-          {"text": "Woah, you're awfully tense about this matter.", "destinationId": "203"}
+          {"condition": ["i_quest6_unclaimed"], "text": "That I did. (Fails quest)", "command": "FAIL_QUEST", "nextId": "250"},
+          {"condition": ["i_quest7_task3"], "text": "Hold your horses! No, I used it myself. (Fails quest)", "command": "FAIL_QUEST", "nextId": "251"},
+          {"text": "Woah, you're awfully tense about this matter.", "nextId": "203"}
         ]
       },
       "203" : {
         "text"   : ["That's right. The world depends on it."],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "200"}]
+        "choices": [{"command": "EXIT", "nextId": "200"}]
       },
       "250" : {
         "text"   : ["That's terrible!! The whole world is doomed now!"],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "252"}]
+        "choices": [{"command": "EXIT", "nextId": "252"}]
       },
       "251" : {
         "text"   : ["That's too bad! But at least Herington won't have it."],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "253"}]
+        "choices": [{"command": "EXIT", "nextId": "253"}]
       },
       "252" : {
         "text"   : ["Doomed you hear!? The world is doomed!"],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "252"}]
+        "choices": [{"command": "EXIT", "nextId": "252"}]
       },
       "253" : {
         "text"   : ["Sssst! I'm standing in the dark."],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "253"}]
+        "choices": [{"command": "EXIT", "nextId": "253"}]
       },
       "1000": {
         "text"   : ["You are a saint!"],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "200"}]
+        "choices": [{"command": "EXIT", "nextId": "200"}]
       },
       "2000": {
         "text"   : ["You are a saint!"],
         "choices": [
-          {"text": "Here is the key. I got it already.", "conversationCommand": "RETURN_QUEST"},
-          {"text": "No, I'd like to keep it, slim shady.", "destinationId": "2001"}
+          {"text": "Here is the key. I got it already.", "command": "RETURN_QUEST"},
+          {"text": "No, I'd like to keep it, slim shady.", "nextId": "2001"}
         ]
       },
       "2001": {
         "text"   : ["Please don't give it to Herington!"],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "200"}]
+        "choices": [{"command": "EXIT", "nextId": "200"}]
       },
       "2100": {
         "text"   : ["Thank the heavens! I make sure it will be used for good. Here is a small token of appreciation."],
-        "choices": [{"conversationCommand": "REWARD_QUEST"}]
+        "choices": [{"command": "REWARD_QUEST"}]
       },
       "2200": {
         "text"   : ["I'm afraid that's not what I'm looking for."],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "200"}]
+        "choices": [{"command": "EXIT", "nextId": "200"}]
       },
       "2300": {
         "text"   : ["You are a saint!", "Here is my small token of appreciation."],
-        "choices": [{"conversationCommand": "REWARD_QUEST", "destinationId": "2300"}]
+        "choices": [{"command": "REWARD_QUEST", "nextId": "2300"}]
       },
       "2400": {
         "text"   : ["Do you already feel the joy of goodness?"],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "2400"}]
+        "choices": [{"command": "EXIT", "nextId": "2400"}]
       },
       "2600": {
         "text"   : ["I heard what Herington told you. You should not give that man the key. He cannot be trusted! He would only use it for personal gain."],
         "choices": [
-          {"text": "Don't worry, I'll use it myself.", "conversationCommand": "KNOW_QUEST", "destinationId": "2601"},
-          {"text": "What should I do with it then?", "conversationCommand": "KNOW_QUEST", "destinationId": "2602"},
-          {"text": "There is something I need to tell you...", "conversationCommand": "KNOW_QUEST", "destinationId": "2608"}
+          {"text": "Don't worry, I'll use it myself.", "command": "KNOW_QUEST", "nextId": "2601"},
+          {"text": "What should I do with it then?", "command": "KNOW_QUEST", "nextId": "2602"},
+          {"text": "There is something I need to tell you...", "command": "KNOW_QUEST", "nextId": "2608"}
         ]
       },
       "2601": {
         "text"   : ["Okay, that is... somewhat a relief. At least Herington won't get it. But..."],
-        "choices": [{"destinationId": "2603"}]
+        "choices": [{"nextId": "2603"}]
       },
       "2602": {
         "text"   : ["Well..."],
-        "choices": [{"destinationId": "2603"}]
+        "choices": [{"nextId": "2603"}]
       },
       "2603": {
         "text"   : ["I was hoping that you could give it to me. I can do a lot of good with it."],
         "choices": [
-          {"text": "A lot of good? What do you mean?", "destinationId": "2604"},
-          {"text": "Alright, I will.", "conversationCommand": "ACCEPT_QUEST"},
-          {"text": "No way, shady guy!", "destinationId": "2605"}
+          {"text": "A lot of good? What do you mean?", "nextId": "2604"},
+          {"text": "Alright, I will.", "command": "ACCEPT_QUEST"},
+          {"text": "No way, shady guy!", "nextId": "2605"}
         ]
       },
       "2604": {
         "text"   : ["Behind the gate it is rumored to contain an enormous treasure. I will use that treasure to help those who needs the help the most."],
         "choices": [
-          {"text": "That sounds honorable. I will help.", "conversationCommand": "ACCEPT_QUEST"},
-          {"text": "I don't believe a thing of what you just said.", "destinationId": "2606"},
-          {"text": "Too bad! That treasure is mine, shadow dude!", "destinationId": "2607"}
+          {"text": "That sounds honorable. I will help.", "command": "ACCEPT_QUEST"},
+          {"text": "I don't believe a thing of what you just said.", "nextId": "2606"},
+          {"text": "Too bad! That treasure is mine, shadow dude!", "nextId": "2607"}
         ]
       },
       "2605": {
         "text"   : ["No need to be disrespectful, I mean you no harm."],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "100"}]
+        "choices": [{"command": "EXIT", "nextId": "100"}]
       },
       "2606": {
         "text"   : ["It is the truth. I can't tell you otherwise."],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "100"}]
+        "choices": [{"command": "EXIT", "nextId": "100"}]
       },
       "2607": {
         "text"   : ["I hope you are not as bad as Herington."],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "100"}]
+        "choices": [{"command": "EXIT", "nextId": "100"}]
       },
       "2608": {
         "text"   : ["You sound like there is a problem?"],
         "choices": [
-          {"condition": ["i_quest6_unclaimed"], "text": "I already gave it to Herington. (Fails quest)", "conversationCommand": "FAIL_QUEST", "destinationId": "250"},
-          {"condition": ["i_quest7_task3"], "text": "Don't worry. I used it myself. (Fails quest)", "conversationCommand": "FAIL_QUEST", "destinationId": "251"},
-          {"text": "No, it's nothing. What did you want to say about that key?", "destinationId": "2602"}
+          {"condition": ["i_quest6_unclaimed"], "text": "I already gave it to Herington. (Fails quest)", "command": "FAIL_QUEST", "nextId": "250"},
+          {"condition": ["i_quest7_task3"], "text": "Don't worry. I used it myself. (Fails quest)", "command": "FAIL_QUEST", "nextId": "251"},
+          {"text": "No, it's nothing. What did you want to say about that key?", "nextId": "2602"}
         ]
       }
     }
@@ -160,9 +160,9 @@
       "1"   : {
         "text"   : ["Who are you? What are you doing here?"],
         "choices": [
-          {"text": "I'm Mozes and I just discovered this mysterious tunnel.", "destinationId": "10"},
-          {"condition": ["diplomat2"], "text": "[Diplomat 2] Who are you? This tunnel is mine.", "destinationId": "20"},
-          {"text": "Sir, I don't like the way you talk to me. (Leave conversation)", "conversationCommand": "EXIT_CONVERSATION"}
+          {"text": "I'm Mozes and I just discovered this mysterious tunnel.", "nextId": "10"},
+          {"condition": ["diplomat2"], "text": "[Diplomat 2] Who are you? This tunnel is mine.", "nextId": "20"},
+          {"text": "Sir, I don't like the way you talk to me. (Leave conversation)", "command": "EXIT"}
         ]
       },
       "10"  : {
@@ -171,9 +171,9 @@
       "11"  : {
         "text"   : ["My name is Herington. I... erm... lost the key of this gate here and I like to get through it. Do you by accident happen to be in possession of said key?"],
         "choices": [
-          {"text": "What is your business behind this gate?", "destinationId": "30"},
-          {"condition": ["key_mysterious_tunnel"], "text": "[Mysterious Tunnel Key] Yes, I've got it right here in my pocket.", "conversationCommand": "TOLERATE_QUEST"},
-          {"text": "I'm sorry, I don't have it.", "destinationId": "32"}
+          {"text": "What is your business behind this gate?", "nextId": "30"},
+          {"condition": ["key_mysterious_tunnel"], "text": "[Mysterious Tunnel Key] Yes, I've got it right here in my pocket.", "command": "TOLERATE_QUEST"},
+          {"text": "I'm sorry, I don't have it.", "nextId": "32"}
         ]
       },
       "20"  : {
@@ -182,9 +182,9 @@
       "21"  : {
         "text"   : ["Well, let's be blunt then.", "My name is Herington and would like to get through this gate here, but it's locked. Of course I don't have the necessary key, but you probably do. May I borrow your key? I will pay you for it."],
         "choices": [
-          {"condition": ["diplomat2"], "text": "[Diplomat 2] What is your business behind this gate?", "destinationId": "100"},
-          {"condition": ["key_mysterious_tunnel"], "text": "[Mysterious Tunnel Key] Yes, I've got it right here in my pocket.", "conversationCommand": "TOLERATE_QUEST"},
-          {"text": "I'm sorry, I don't have it.", "destinationId": "102"}
+          {"condition": ["diplomat2"], "text": "[Diplomat 2] What is your business behind this gate?", "nextId": "100"},
+          {"condition": ["key_mysterious_tunnel"], "text": "[Mysterious Tunnel Key] Yes, I've got it right here in my pocket.", "command": "TOLERATE_QUEST"},
+          {"text": "I'm sorry, I don't have it.", "nextId": "102"}
         ]
       },
       "30"  : {
@@ -193,51 +193,51 @@
       "31"  : {
         "text"   : ["So, when you have the key, you give it to me, and I'll reward you."],
         "choices": [
-          {"text": "What can you tell me about this mysterious tunnel?", "destinationId": "33"},
-          {"text": "You got yourself a deal.", "conversationCommand": "ACCEPT_QUEST"},
-          {"text": "I don't know...", "conversationCommand": "KNOW_QUEST", "destinationId": "36"},
-          {"text": "I can't give you the key.", "conversationCommand": "KNOW_QUEST", "destinationId": "37"}
+          {"text": "What can you tell me about this mysterious tunnel?", "nextId": "33"},
+          {"text": "You got yourself a deal.", "command": "ACCEPT_QUEST"},
+          {"text": "I don't know...", "command": "KNOW_QUEST", "nextId": "36"},
+          {"text": "I can't give you the key.", "command": "KNOW_QUEST", "nextId": "37"}
         ]
       },
       "32"  : {
         "text"   : ["Damn! If you find that key somewhere, bring it back to me!"],
         "choices": [
-          {"text": "What is your business behind this gate?", "destinationId": "30"},
-          {"text": "What can you tell me about this mysterious tunnel?", "destinationId": "33"},
-          {"text": "You got yourself a deal.", "conversationCommand": "ACCEPT_QUEST"},
-          {"text": "I don't know...", "conversationCommand": "KNOW_QUEST", "destinationId": "36"},
-          {"text": "I can't give you the key.", "conversationCommand": "KNOW_QUEST", "destinationId": "37"}
+          {"text": "What is your business behind this gate?", "nextId": "30"},
+          {"text": "What can you tell me about this mysterious tunnel?", "nextId": "33"},
+          {"text": "You got yourself a deal.", "command": "ACCEPT_QUEST"},
+          {"text": "I don't know...", "command": "KNOW_QUEST", "nextId": "36"},
+          {"text": "I can't give you the key.", "command": "KNOW_QUEST", "nextId": "37"}
         ]
       },
       "33"  : {"text": ["This tunnel is quite mysterious indeed. I don't know very much about it, but I know it's old. Some say there is a river flowing deep below, but I have yet to find any water here."]},
       "34"  : {"text": ["I also heard some of what I think are creatures down the tunnel. It didn't sound very pleasant. It sounded quite scary actually."]},
       "35"  : {
         "text"   : ["What more do I have to say? It's very dark, but for some strange reason, some fires are still lit. Mysterious indeed."],
-        "choices": [{"destinationId": "31"}]
+        "choices": [{"nextId": "31"}]
       },
       "36"  : {
         "text"   : ["What do you mean you don't know? It's easy! Just give me the key and you will receive gold. It's that simple."],
         "choices": [
-          {"text": "I will think about it. (Leave conversation)", "conversationCommand": "EXIT_CONVERSATION", "destinationId": "40"},
-          {"text": "I will go through the gate myself. (Leave conversation)", "conversationCommand": "EXIT_CONVERSATION", "destinationId": "40"}
+          {"text": "I will think about it. (Leave conversation)", "command": "EXIT", "nextId": "40"},
+          {"text": "I will go through the gate myself. (Leave conversation)", "command": "EXIT", "nextId": "40"}
         ]
       },
       "37"  : {
         "text"   : ["What do you mean you can't give me the key?"],
         "choices": [
-          {"text": "I was just kidding.", "destinationId": "32"},
-          {"condition": ["i_quest7_unclaimed"], "text": "I gave it to someone else. (Fails quest)", "conversationCommand": "FAIL_QUEST", "destinationId": "250"},
-          {"condition": ["i_quest6_task3"], "text": "I already used it myself. (Fails quest)", "conversationCommand": "FAIL_QUEST", "destinationId": "250"}
+          {"text": "I was just kidding.", "nextId": "32"},
+          {"condition": ["i_quest7_unclaimed"], "text": "I gave it to someone else. (Fails quest)", "command": "FAIL_QUEST", "nextId": "250"},
+          {"condition": ["i_quest6_task3"], "text": "I already used it myself. (Fails quest)", "command": "FAIL_QUEST", "nextId": "250"}
         ]
       },
       "40"  : {
         "text"   : ["You have come back to me with the key right?"],
         "choices": [
-          {"text": "What is your business behind this gate?", "destinationId": "30"},
-          {"text": "What can you tell me about this mysterious tunnel?", "destinationId": "33"},
-          {"condition": ["key_mysterious_tunnel"], "text": "[Mysterious Tunnel Key] Yes, I've got it right here in my pocket.", "conversationCommand": "TOLERATE_QUEST"},
-          {"text": "I'm sorry, I don't have it.", "destinationId": "32"},
-          {"text": "I have to go. Bye. (Leave conversation)", "conversationCommand": "EXIT_CONVERSATION", "destinationId": "40"}
+          {"text": "What is your business behind this gate?", "nextId": "30"},
+          {"text": "What can you tell me about this mysterious tunnel?", "nextId": "33"},
+          {"condition": ["key_mysterious_tunnel"], "text": "[Mysterious Tunnel Key] Yes, I've got it right here in my pocket.", "command": "TOLERATE_QUEST"},
+          {"text": "I'm sorry, I don't have it.", "nextId": "32"},
+          {"text": "I have to go. Bye. (Leave conversation)", "command": "EXIT", "nextId": "40"}
         ]
       },
       "100" : {
@@ -246,93 +246,93 @@
       "101" : {
         "text"   : ["So, may I have your key? And again, I will pay you for it."],
         "choices": [
-          {"text": "What do you know about my mysterious tunnel?", "destinationId": "103"},
-          {"text": "I'll look into it.", "conversationCommand": "ACCEPT_QUEST"},
-          {"text": "I don't think so.", "conversationCommand": "KNOW_QUEST", "destinationId": "106"},
-          {"text": "I can't give you the key.", "conversationCommand": "KNOW_QUEST", "destinationId": "107"}
+          {"text": "What do you know about my mysterious tunnel?", "nextId": "103"},
+          {"text": "I'll look into it.", "command": "ACCEPT_QUEST"},
+          {"text": "I don't think so.", "command": "KNOW_QUEST", "nextId": "106"},
+          {"text": "I can't give you the key.", "command": "KNOW_QUEST", "nextId": "107"}
         ]
       },
       "102" : {
         "text"   : ["That's too bad... But you can probably get it somewhere? Again, I will pay you for it."],
         "choices": [
-          {"text": "What do you know about my mysterious tunnel?", "destinationId": "103"},
-          {"text": "Yes, of course I can.", "conversationCommand": "ACCEPT_QUEST"},
-          {"text": "No, I'm not interested.", "conversationCommand": "KNOW_QUEST", "destinationId": "106"},
-          {"text": "I can't give you the key.", "conversationCommand": "KNOW_QUEST", "destinationId": "107"}
+          {"text": "What do you know about my mysterious tunnel?", "nextId": "103"},
+          {"text": "Yes, of course I can.", "command": "ACCEPT_QUEST"},
+          {"text": "No, I'm not interested.", "command": "KNOW_QUEST", "nextId": "106"},
+          {"text": "I can't give you the key.", "command": "KNOW_QUEST", "nextId": "107"}
         ]
       },
       "103" : {"text": ["This tunnel is quite mysterious indeed. I don't know very much about it, but I know it's old. Some say there is a river flowing deep below, but I have yet to find any water here."]},
       "104" : {"text": ["I also heard some of what I think are creatures down the tunnel. It didn't sound very pleasant. It sounded quite scary actually."]},
       "105" : {
         "text"   : ["What more do I have to say? It's very dark, but for some strange reason, not knowing people came down here, some fires are still lit. A little less mysterious now."],
-        "choices": [{"destinationId": "101"}]
+        "choices": [{"nextId": "101"}]
       },
       "106" : {
         "text"   : ["Hopefully you will change your mind."],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "110"}]
+        "choices": [{"command": "EXIT", "nextId": "110"}]
       },
       "107" : {
         "text"   : ["What do you mean you can't give me the key?"],
         "choices": [
-          {"text": "I can, but I don't have it.", "destinationId": "102"},
-          {"condition": ["i_quest7_unclaimed"], "text": "I gave it to someone else. (Fails quest)", "conversationCommand": "FAIL_QUEST", "destinationId": "250"},
-          {"condition": ["i_quest6_task3"], "text": "I already used it myself. (Fails quest)", "conversationCommand": "FAIL_QUEST", "destinationId": "250"}
+          {"text": "I can, but I don't have it.", "nextId": "102"},
+          {"condition": ["i_quest7_unclaimed"], "text": "I gave it to someone else. (Fails quest)", "command": "FAIL_QUEST", "nextId": "250"},
+          {"condition": ["i_quest6_task3"], "text": "I already used it myself. (Fails quest)", "command": "FAIL_QUEST", "nextId": "250"}
         ]
       },
       "110" : {
         "text"   : ["You have come back to me with the key right?"],
         "choices": [
-          {"text": "What do you know about my mysterious tunnel?", "destinationId": "103"},
-          {"condition": ["key_mysterious_tunnel"], "text": "[Mysterious Tunnel Key] Yes, I've got it right here in my pocket.", "conversationCommand": "TOLERATE_QUEST"},
-          {"text": "I'm sorry, I don't have it.", "destinationId": "102"},
-          {"text": "I have to go. Bye. (Leave conversation)", "conversationCommand": "EXIT_CONVERSATION", "destinationId": "110"}
+          {"text": "What do you know about my mysterious tunnel?", "nextId": "103"},
+          {"condition": ["key_mysterious_tunnel"], "text": "[Mysterious Tunnel Key] Yes, I've got it right here in my pocket.", "command": "TOLERATE_QUEST"},
+          {"text": "I'm sorry, I don't have it.", "nextId": "102"},
+          {"text": "I have to go. Bye. (Leave conversation)", "command": "EXIT", "nextId": "110"}
         ]
       },
       "200" : {
         "text"   : ["You have come back to me with the key right?"],
         "choices": [
-          {"text": "Yes, I've got it right here.", "conversationCommand": "RETURN_QUEST"},
-          {"text": "I'm sorry, I don't have it.", "destinationId": "201"},
-          {"text": "I have to go. Bye. (Leave conversation)", "conversationCommand": "EXIT_CONVERSATION", "destinationId": "200"}
+          {"text": "Yes, I've got it right here.", "command": "RETURN_QUEST"},
+          {"text": "I'm sorry, I don't have it.", "nextId": "201"},
+          {"text": "I have to go. Bye. (Leave conversation)", "command": "EXIT", "nextId": "200"}
         ]
       },
       "201" : {
         "text"   : ["Damn! If you get that key somewhere, bring it back to me!"],
         "choices": [
-          {"text": "You got it. (Leave conversation)", "conversationCommand": "EXIT_CONVERSATION", "destinationId": "200"},
-          {"text": "I'm not sure...", "destinationId": "202"},
-          {"text": "I can't give you the key.", "destinationId": "203"}
+          {"text": "You got it. (Leave conversation)", "command": "EXIT", "nextId": "200"},
+          {"text": "I'm not sure...", "nextId": "202"},
+          {"text": "I can't give you the key.", "nextId": "203"}
         ]
       },
       "202" : {
         "text"   : ["What do you mean you're not sure? It's easy! Just give me the key and you will receive gold. It's that simple."],
         "choices": [
-          {"text": "I will think about it. (Leave conversation)", "conversationCommand": "EXIT_CONVERSATION", "destinationId": "200"},
-          {"text": "I will go through the gate myself. (Leave conversation)", "conversationCommand": "EXIT_CONVERSATION", "destinationId": "200"}
+          {"text": "I will think about it. (Leave conversation)", "command": "EXIT", "nextId": "200"},
+          {"text": "I will go through the gate myself. (Leave conversation)", "command": "EXIT", "nextId": "200"}
         ]
       },
       "203" : {
         "text"   : ["What do you mean you can't give me the key?"],
         "choices": [
-          {"text": "I can, but I don't have it.", "destinationId": "201"},
-          {"condition": ["i_quest7_unclaimed"], "text": "I gave it to someone else. (Fails quest)", "conversationCommand": "FAIL_QUEST", "destinationId": "250"},
-          {"condition": ["i_quest6_task3"], "text": "I already used it myself. (Fails quest)", "conversationCommand": "FAIL_QUEST", "destinationId": "250"}
+          {"text": "I can, but I don't have it.", "nextId": "201"},
+          {"condition": ["i_quest7_unclaimed"], "text": "I gave it to someone else. (Fails quest)", "command": "FAIL_QUEST", "nextId": "250"},
+          {"condition": ["i_quest6_task3"], "text": "I already used it myself. (Fails quest)", "command": "FAIL_QUEST", "nextId": "250"}
         ]
       },
       "250" : {"text": ["You did what?!"]},
       "251" : {
         "text"   : ["I've got nothing to say to you anymore."],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "251"}]
+        "choices": [{"command": "EXIT", "nextId": "251"}]
       },
       "1000": {
         "text"   : ["Good boy."],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "200"}]
+        "choices": [{"command": "EXIT", "nextId": "200"}]
       },
       "1500": {
         "text"   : ["Really? Give it to me! I'll give you something good in return."],
         "choices": [
-          {"text": "That sounds good. Here you are.", "conversationCommand": "RETURN_QUEST"},
-          {"text": "No, I'd like to keep it.", "destinationId": "1501"}
+          {"text": "That sounds good. Here you are.", "command": "RETURN_QUEST"},
+          {"text": "No, I'd like to keep it.", "nextId": "1501"}
         ]
       },
       "1501": {
@@ -341,43 +341,43 @@
       "1502": {
         "text"   : ["Ahem... You will change your mind. There is a reward involved in it."],
         "choices": [
-          {"text": "Let me think about it. (Leave conversation)", "conversationCommand": "EXIT_CONVERSATION", "destinationId": "200"},
-          {"text": "Still not interested. (Leave conversation)", "conversationCommand": "EXIT_CONVERSATION", "destinationId": "200"}
+          {"text": "Let me think about it. (Leave conversation)", "command": "EXIT", "nextId": "200"},
+          {"text": "Still not interested. (Leave conversation)", "command": "EXIT", "nextId": "200"}
         ]
       },
       "2000": {
         "text"   : ["Good boy."],
         "choices": [
-          {"text": "Here is the key. I got it already.", "conversationCommand": "RETURN_QUEST"},
-          {"text": "No wait. Maybe I'll go through the gate myself.", "destinationId": "1501"}
+          {"text": "Here is the key. I got it already.", "command": "RETURN_QUEST"},
+          {"text": "No wait. Maybe I'll go through the gate myself.", "nextId": "1501"}
         ]
       },
       "2100": {
         "text"   : ["That's good... Everything will be mine!", "Ahem... Here is your reward."],
         "choices": [
-          {"text": "Thank you very much.", "destinationId": "2101"},
-          {"condition": ["diplomat3"], "text": "[Diplomat 3] Hey wait, I went through a lot of trouble for this.", "destinationId": "2102"}
+          {"text": "Thank you very much.", "nextId": "2101"},
+          {"condition": ["diplomat3"], "text": "[Diplomat 3] Hey wait, I went through a lot of trouble for this.", "nextId": "2102"}
         ]
       },
       "2101": {
         "text"   : ["Now shoo, get out of here!"],
-        "choices": [{"conversationCommand": "REWARD_QUEST"}]
+        "choices": [{"command": "REWARD_QUEST"}]
       },
       "2102": {
         "text"   : ["Well well, alright then, here's a little extra.", "Now shoo, get out of here!"],
-        "choices": [{"conversationCommand": "BONUS_REWARD_QUEST"}]
+        "choices": [{"command": "BONUS_REWARD_QUEST"}]
       },
       "2200": {
         "text"   : ["You've got nothing boy! You'll have to do better than that!"],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "200"}]
+        "choices": [{"command": "EXIT", "nextId": "200"}]
       },
       "2300": {
         "text"   : ["Thanks for the key boy.", "I guess you're back for your reward."],
-        "choices": [{"conversationCommand": "REWARD_QUEST", "destinationId": "2300"}]
+        "choices": [{"command": "REWARD_QUEST", "nextId": "2300"}]
       },
       "2400": {
         "text"   : ["Thanks for the key boy.", "Now shoo, get out of here!"],
-        "choices": [{"conversationCommand": "EXIT_CONVERSATION", "destinationId": "2400"}]
+        "choices": [{"command": "EXIT", "nextId": "2400"}]
       }
     }
   }

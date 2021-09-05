@@ -19,8 +19,8 @@ internal class NoteTest : GameTest() {
         assertThat(graph.getAssociatedChoices()).hasSize(1)
         assertThat(graph.getAssociatedChoices()[0].text).isEqualTo("->")
         assertThat(graph.getAssociatedChoices()[0]).hasToString("->")
-        assertThat(graph.getAssociatedChoices()[0].destinationId).isEqualTo("1")
-        assertThat(graph.getAssociatedChoices()[0].conversationCommand).isEqualTo(ConversationCommand.EXIT_CONVERSATION)
+        assertThat(graph.getAssociatedChoices()[0].nextId).isEqualTo("1")
+        assertThat(graph.getAssociatedChoices()[0].command).isEqualTo(ConversationCommand.EXIT)
     }
 
 }
