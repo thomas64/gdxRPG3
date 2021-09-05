@@ -20,7 +20,7 @@ class MapSubject {
         observers.clear()
     }
 
-    fun notifyFadeOut(actionAfterFade: () -> Unit, transitionColor: Color) {
+    fun notifyFadeOut(actionAfterFade: () -> Unit, transitionColor: Color = Color.BLACK) {
         observers.forEach { it.onNotifyFadeOut(actionAfterFade, transitionColor) }
     }
 

@@ -29,13 +29,72 @@
       "5": {"text": ["And friendly."], "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]}
     }
   },
+  "fairy_general"     : {
+    "phrases": {
+      "1": {"text": ["Young lovely Mozes, what a wonderful thing to have you finally in our midst."]},
+      "2": {"face": "mozes", "text": ["Why, thank you."], "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]}
+    }
+  },
   "quest_mother_fairy": {
     "phrases": {
       "1": {"text": ["[A lot of explanation]"]},
-      "2": {"text": ["Inside the cave, at the complete other side, go all way to south, then east and search the north wall. There is a hidden door in the dark."]},
-      "3": {
+      "2": {"text": ["[About how they know Mozes, maybe about what happened to Grace, that they want to help, and they have a mighty artifact for you to help you.]"]},
+      "3": {"text": ["Inside the cave, at the complete other side, go all way to south, then east and search the north wall. There is a hidden door in the dark."]},
+      "4": {
         "text"   : ["Farewell our lovely Mozes."],
-        "choices": [{"conversationCommand": "ACCEPT_QUEST", "destinationId": "3"}]
+        "choices": [{"conversationCommand": "ACCEPT_QUEST", "destinationId": "4"}]
+      }
+    }
+  },
+  "fairy_save"        : {
+    "phrases": {
+      "1": {"text": ["Dear young Mozes,", "shall we pray to the Goddess Tree so that your life will be in Her safe hands?"]},
+      "2": {
+        "face"   : "mozes", "text": ["Pray? To a tree?"],
+        "choices": [
+          {"text": "Yes please, I would like that. (Save game)", "destinationId": "3"},
+          {"text": "No thanks, that's not necessary. (Leave conversation)", "conversationCommand": "EXIT_CONVERSATION"}
+        ]
+      },
+      "3": {"face": "fairy01", "text": ["Your prayer has been heard."], "choices": [{"conversationCommand": "SAVE_GAME"}]}
+    }
+  },
+  "fairy_heal_price-0": {
+    "phrases": {
+      "1": {"text": ["Wonderful dear Mozes, please lie down here on this bed of healing flowers so that your weary bones may find some rest."]},
+      "2": {
+        "face"   : "mozes", "text": ["Healing flowers? Are they a thing?"],
+        "choices": [
+          {"text": "Yes please, that would be interesting. (Restore health)", "conversationCommand": "HEAL_LIFE", "destinationId": "3"},
+          {"text": "No thanks, I'll pass this time. (Leave conversation)", "conversationCommand": "EXIT_CONVERSATION"}
+        ]
+      },
+      "3": {"face": "fairy01", "text": ["Your health has been restored.", "Please come back anytime you feel weary."], "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]}
+    }
+  },
+  "fairy_crystal"     : {
+    "phrases": {
+      "1": {"text": ["[Explanation about warp crystals.]"], "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]}
+    }
+  },
+  "fairy_teacher"     : {
+    "phrases": {
+      "1": {"text": ["[Here you can learn spells.]"], "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]}
+    }
+  },
+  "fairy_trainer"     : {
+    "phrases": {
+      "1": {"text": ["[Here you can learn skills.]"], "choices": [{"conversationCommand": "EXIT_CONVERSATION"}]}
+    }
+  },
+  "fairy_shop"        : {
+    "phrases": {
+      "1": {
+        "text"   : ["Young Mozes, would you like to see my wares?"],
+        "choices": [
+          {"text": "Yes please. (Open shop)", "conversationCommand": "LOAD_SHOP"},
+          {"text": "No thanks. (Leave Conversation)", "conversationCommand": "EXIT_CONVERSATION"}
+        ]
       }
     }
   }

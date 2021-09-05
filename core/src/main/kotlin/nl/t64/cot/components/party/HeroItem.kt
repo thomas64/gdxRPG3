@@ -42,6 +42,10 @@ class HeroItem(
         }
     }
 
+    fun recoverFullHp() {
+        stats.recoverFullHp()
+    }
+
     fun gainXp(amount: Int, levelUpMessage: StringBuilder) {
         stats.gainXp(amount) { gainLevel(levelUpMessage) }
     }
@@ -254,7 +258,7 @@ class HeroItem(
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun gainLevel(levelUpMessage: StringBuilder) {
-        stats.recoverFullHp()
+        recoverFullHp()
         levelUpMessage.append("$name gained a level!").append(System.lineSeparator())
     }
 

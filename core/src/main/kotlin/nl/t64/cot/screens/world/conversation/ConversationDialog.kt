@@ -259,6 +259,7 @@ class ConversationDialog {
             ConversationCommand.HERO_DISMISS -> dismissHero(destinationId)
             ConversationCommand.LOAD_SHOP -> loadShop(destinationId)
             ConversationCommand.SAVE_GAME -> saveGame(destinationId)
+            ConversationCommand.HEAL_LIFE -> healLife(destinationId)
             ConversationCommand.RECEIVE_XP -> receiveXp(destinationId)
             ConversationCommand.START_BATTLE -> startBattle(destinationId)
 
@@ -299,8 +300,25 @@ class ConversationDialog {
     }
 
     private fun saveGame(destinationId: String) {
+        endConversation(destinationId)
         profileManager.saveProfile()
-        continueConversation(destinationId)
+    }
+
+    private fun healLife(destinationId: String) {
+        val price = conversationId!!.substringAfterLast("-").toInt()
+        if (price > 0) {
+            if (gameData.inventory.hasEnoughOfItem("gold", price)) {
+                gameData.inventory.autoRemoveItem("gold", price)
+                audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_COINS_BUY)
+            } else {
+                continueConversation(Constant.PHRASE_ID_INN_NEGATIVE)
+                return
+            }
+        }
+        gameData.party.recoverFullHp()
+        brokerManager.mapObservers.notifyFadeOut(
+            { continueConversation(destinationId) }
+        )
     }
 
     private fun receiveXp(destinationId: String) {

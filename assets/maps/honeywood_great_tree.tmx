@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="48" height="50" tilewidth="24" tileheight="24" infinite="0" nextlayerid="17" nextobjectid="97">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="48" height="50" tilewidth="24" tileheight="24" infinite="0" nextlayerid="17" nextobjectid="102">
  <properties>
   <property name="bgm" value="bgm_great_tree"/>
   <property name="bgs" value="bgs_birds"/>
@@ -119,7 +119,7 @@
   <object id="79" x="816" y="720" width="96" height="480"/>
  </objectgroup>
  <objectgroup color="#55ff7f" id="15" name="npc">
-  <object id="80" name="fairy01" type="ia" x="600" y="936" width="48" height="24">
+  <object id="80" name="fairy01" type="ia" x="594" y="912" width="48" height="24">
    <properties>
     <property name="conversation" value="fairy_welcome"/>
     <property name="direction" value="south"/>
@@ -133,48 +133,63 @@
   </object>
   <object id="85" name="fairy01" type="ia" x="816" y="360" width="48" height="24">
    <properties>
+    <property name="conversation" value="fairy_save"/>
     <property name="direction" value="south"/>
-    <property name="save" value=""/>
    </properties>
   </object>
   <object id="96" name="fairy01" type="ia" x="768" y="720" width="48" height="24">
    <properties>
+    <property name="conversation" value="fairy_shop"/>
     <property name="direction" value="west"/>
-    <property name="shop" value=""/>
    </properties>
   </object>
-  <object id="86" name="fairy01" type="ia" x="888" y="504" width="48" height="24">
+  <object id="86" name="fairy01" type="ia" x="882" y="504" width="48" height="24">
    <properties>
+    <property name="conversation" value="fairy_heal_price-0"/>
     <property name="direction" value="west"/>
-    <property name="heal" value=""/>
    </properties>
   </object>
   <object id="87" name="fairy01" type="ia" x="336" y="696" width="48" height="24">
    <properties>
+    <property name="conversation" value="fairy_teacher"/>
     <property name="direction" value="east"/>
-    <property name="teacher" value=""/>
    </properties>
   </object>
   <object id="95" name="fairy01" type="ia" x="408" y="744" width="48" height="24">
    <properties>
+    <property name="conversation" value="fairy_trainer"/>
     <property name="direction" value="north"/>
-    <property name="trainer" value=""/>
    </properties>
   </object>
-  <object id="88" name="fairy01" type="f" x="576" y="600" width="48" height="24"/>
-  <object id="89" name="fairy01" type="f" x="624" y="624" width="48" height="24"/>
-  <object id="90" name="fairy01" type="f" x="528" y="624" width="48" height="24"/>
-  <object id="91" name="fairy01" type="f" x="624" y="576" width="48" height="24"/>
-  <object id="92" name="fairy01" type="f" x="528" y="576" width="48" height="24"/>
   <object id="84" name="fairy01" type="ia" x="288" y="288" width="48" height="24">
    <properties>
-    <property name="crystal" value=""/>
+    <property name="conversation" value="fairy_crystal"/>
     <property name="direction" value="east"/>
+   </properties>
+  </object>
+  <object id="92" name="fairy01" type="f" x="576" y="576" width="48" height="24">
+   <properties>
+    <property name="conversation" value="fairy_general"/>
+   </properties>
+  </object>
+  <object id="97" name="fairy01" type="f" x="576" y="624" width="48" height="24">
+   <properties>
+    <property name="conversation" value="fairy_general"/>
+   </properties>
+  </object>
+  <object id="98" name="fairy01" type="f" x="576" y="600" width="48" height="24">
+   <properties>
+    <property name="conversation" value="fairy_general"/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup color="#55aaff" id="12" name="spawn">
   <object id="47" name="honeywood_cave_4" x="576" y="1008" width="48" height="24"/>
+  <object id="101" name="honeywood_great_tree" x="576" y="768" width="48" height="24">
+   <properties>
+    <property name="direction" value="south"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup color="#ffff7f" id="13" name="portal">
   <object id="48" name="honeywood_cave_4" x="576" y="1032" width="48" height="24"/>

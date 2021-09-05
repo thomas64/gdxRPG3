@@ -21,6 +21,10 @@ class PartyContainer {
         getAllHeroesAlive().forEach { it.gainXp(amount, levelUpMessage) }
     }
 
+    fun recoverFullHp() {
+        getAllHeroesAlive().forEach { it.recoverFullHp() }
+    }
+
     fun getPreviousHero(hero: HeroItem): HeroItem {
         return when {
             isHeroFirst(hero) -> lastHero
@@ -60,6 +64,10 @@ class PartyContainer {
 
     private fun isHeroFirst(hero: HeroItem): Boolean {
         return getIndex(hero) == 0
+    }
+
+    fun getAverageLevel(): Double {
+        return getAllHeroesAlive().map { it.getLevel() }.average()
     }
 
     fun getSumOfSkill(skillItemId: SkillItemId): Int {

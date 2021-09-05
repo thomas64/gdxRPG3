@@ -427,6 +427,7 @@ class WorldScreen : Screen,
 
     private val isInTransition: Boolean
         get() = stage.actors.notEmpty()
+                && gameState != GameState.DIALOG
                 && stage.actors.peek() is TransitionImage
 
     override fun resize(width: Int, height: Int) {

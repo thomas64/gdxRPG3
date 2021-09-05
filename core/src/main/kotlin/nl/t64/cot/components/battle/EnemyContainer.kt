@@ -44,7 +44,7 @@ class EnemyContainer(battleId: String) {
 
     fun doEnemiesWantToBattle(): Boolean {
         val averageEnemies = enemies.map { it.getLevel() }.average()
-        val averageHeroes = gameData.party.getAllHeroesAlive().map { it.getLevel() }.average()
+        val averageHeroes = gameData.party.getAverageLevel()
         return averageEnemies > averageHeroes - LEVEL_DIFFERENCE_FOR_WANTING_BATTLE
     }
 

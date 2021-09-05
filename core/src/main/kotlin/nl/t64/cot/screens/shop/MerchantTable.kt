@@ -13,7 +13,7 @@ private const val TABLE_WIDTH = 390f
 private const val TABLE_HEIGHT = 501f
 private const val PADDING = 20f
 private val TEXT = """
-    Good day sir, and welcome to my shop.
+    Please be welcome to my shop.
     
     On the left you will find my wares, and on the right is your inventory.
     

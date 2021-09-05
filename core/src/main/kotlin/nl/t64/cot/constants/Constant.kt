@@ -43,6 +43,7 @@ object Constant {
     const val DESCRIPTION_KEY_SELL_PIECE = "Sell value per piece"
     const val DESCRIPTION_KEY_SELL_TOTAL = "Total sell value"
 
+    const val PHRASE_ID_INN_NEGATIVE = "1000"
     const val PHRASE_ID_PARTY_FULL = "9000"
 
     const val KEYCODE_L1 = 1000
