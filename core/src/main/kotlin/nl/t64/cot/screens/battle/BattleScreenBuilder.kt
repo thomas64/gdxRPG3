@@ -57,7 +57,7 @@ object BattleScreenBuilder {
             add().row()
             add("(W)in battle").row()
             add("(F)lee battle").row()
-            add("Kill hero (1-6)")
+            add("(1-6) Damage hero (20 HP)")
         }
     }
 

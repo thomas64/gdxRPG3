@@ -52,7 +52,7 @@ class BattleScreen : Screen {
         stage.addActor(buttonTable)
         val enemyTable = BattleScreenBuilder.createEnemyTable(enemies.getAll())
         stage.addActor(enemyTable)
-        listener = BattleScreenListener({ winBattle() }, { fleeBattle() }, { killHero(it) })
+        listener = BattleScreenListener({ winBattle() }, { fleeBattle() }, { damageHero(it) })
 
         stage.addAction(Actions.sequence(
             Actions.addAction(Actions.sequence(
@@ -148,11 +148,19 @@ class BattleScreen : Screen {
         }
     }
 
-    private fun killHero(index: Int) {
-        if (index == 1) {
-            gameOver()
-        } else {
-            killPartyMember(index)
+    private fun damageHero(index: Int) {
+        if (gameData.party.contains(index - 1)) {
+            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_CONVERSATION_NEXT)
+            val hero = gameData.party.getHero(index - 1)
+            hero.takeDamage(20)
+            if (!hero.isAlive) {
+                val heroTable = stage.actors[1] as Table
+                val heroFace = heroTable.cells[(index * 3) - 2].actor as Image
+                heroFace.color = Color.DARK_GRAY
+                if (hero.isPlayer) {
+                    gameOver()
+                }
+            }
         }
     }
 
@@ -169,16 +177,6 @@ class BattleScreen : Screen {
     private fun gameOverExitScreen() {
         exitScreen {
             screenManager.setScreen(ScreenType.SCENE_DEATH)
-        }
-    }
-
-    private fun killPartyMember(index: Int) {
-        if (gameData.party.contains(index - 1)) {
-            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_CONVERSATION_NEXT)
-            gameData.party.getHero(index - 1).takeDamage(1000)
-            val heroTable = stage.actors[1] as Table
-            val heroFace = heroTable.cells[(index * 3) - 2].actor as Image
-            heroFace.color = Color.DARK_GRAY
         }
     }
 
