@@ -51,6 +51,8 @@ class QuestLogScreen : ParchmentScreen() {
         stage.addActor(buttonLabel)
         stage.keyboardFocus = questLogUI.questListTable.questList
         stage.scrollFocus = questLogUI.questListTable.scrollPane
+
+        questLogUI.selectPossibleFirstQuest()
     }
 
     override fun render(dt: Float) {

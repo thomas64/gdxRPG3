@@ -25,6 +25,14 @@ internal class QuestLogUI {
         stage.addActor(taskListWindow)
     }
 
+    fun selectPossibleFirstQuest() {
+        val questList = questListTable.questList
+        if (questList.items.size == 1) {
+            questList.selectedIndex = 0
+            populateQuestSpecifics(questList.items[0])
+        }
+    }
+
     fun applyListeners() {
         val questListListener = QuestListListener(questListTable.questList) { populateQuestSpecifics(it) }
         questListWindow.addListener(questListListener)

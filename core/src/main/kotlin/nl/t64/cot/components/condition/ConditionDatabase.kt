@@ -13,6 +13,10 @@ object ConditionDatabase {
         Pair("grace_ribbon") { graceRibbon },
         Pair("first_equipment_item") { firstEquipmentItem },
         Pair("quest_orc_guards_not_finished") { questOrcGuardsNotFinished },
+        Pair("i_!quest_orc_guards_accepted") { !questOrcGuardsAccepted },
+        Pair("i_quest_orc_guards_accepted") { questOrcGuardsAccepted },
+        Pair("i_!quest_mother_fairy_accepted") { !questMotherFairyAccepted },
+        Pair("i_quest_mother_fairy_accepted") { questMotherFairyAccepted },
         Pair("been_in_fairy_town") { beenInFairyTown },
         Pair("i_!orc_amulet") { !orcAmulet },
         Pair("i_orc_amulet") { orcAmulet },
@@ -46,6 +50,8 @@ object ConditionDatabase {
     private val graceRibbon get() = hasEnoughOfItem("grace_ribbon", 1)
     private val firstEquipmentItem get() = hasEnoughOfOneOfTheseItems("basic_light_helmet", "basic_light_boots")
     private val questOrcGuardsNotFinished get() = isQuestStateEqualOrLower("quest_orc_guards", QuestState.ACCEPTED)
+    private val questOrcGuardsAccepted get() = isQuestStateEqualOrHigher("quest_orc_guards", QuestState.ACCEPTED)
+    private val questMotherFairyAccepted get() = isQuestStateEqualOrHigher("quest_mother_fairy", QuestState.ACCEPTED)
     private val beenInFairyTown get() = hasEventPlayed("find_great_tree")
     private val orcAmulet get() = hasItemEquipped("transformation_orc")
     private val diplomat2 get() = hasEnoughOfSkill(SkillItemId.DIPLOMAT, 2)

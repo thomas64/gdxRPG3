@@ -40,7 +40,7 @@
     "phrases": {
       "1" : {"text": ["Dear young Mozes, I'm so glad you finally entered our peaceful domain.", "Unfortunately it has to be in these dark times."]},
       "2" : {
-        "face": "mozes", "text": ["Thank you."], "choices": [
+        "face": "mozes", "text": ["Why, thank you."], "choices": [
           {"text": "How do you all seem to know me?", "nextId": "10"},
           {"text": "What do you mean with dark times?", "nextId": "20"},
           {"text": "I'm looking for my little sister Grace.", "nextId": "30"},
@@ -50,24 +50,40 @@
       "10": {"face": "fairy01", "text": ["We all watch over the people of Honeywood and we try to protect the people where possible. So Mozes, we've known you since you were born."]},
       "11": {"face": "mozes", "text": ["I guess I should thank you then on behalf of all the people of Honeywood."]},
       "12": {"face": "mozes", "text": ["But if that's so, what about my parents?", "Couldn't you have saved them with the orcs back then?"]},
-      "13": {"face": "fairy01", "text": ["Unfortunately no, we were unable to prevent that.", "I'm very sorry, my brave young Mozes."], "choices": [{"nextId": "2"}]},
+      "13": {
+        "face": "fairy01", "text": ["Unfortunately no, we were unable to prevent that.", "I'm very sorry, my brave young Mozes."], "choices": [
+          {"condition": ["i_!quest_mother_fairy_accepted"], "nextId": "2"},
+          {"condition": ["i_quest_mother_fairy_accepted"], "nextId": "71"}
+        ]
+      },
       "20": {"face": "fairy01", "text": ["A new evil force has arrived in Adan."]},
       "21": {"face": "fairy01", "text": ["It goes by the name of Ardor.", "His power is rising rapidly and he wants to take over Adan."]},
       "22": {"face": "fairy01", "text": ["If he's not stopped soon, things won't look too good for us or all the other people of Adan."]},
-      "23": {"face": "mozes", "text": ["That's terrible!"]},
-      "24": {"face": "mozes", "text": ["Isn't there anything I can do to help against Ardor?"]},
-      "25": {"face": "fairy01", "text": ["See, this is why you are so lovely."]},
-      "26": {"face": "fairy01", "text": ["But no, Ardor is far out of your league.", "There won't be anything you could do in this short amount of time."]},
-      "27": {"face": "fairy01", "text": ["You must rely on the larger forces of good to handle Ardor."], "choices": [{"nextId": "2"}]},
+      "23": {
+        "face": "mozes", "text": ["That's terrible!"], "choices": [
+          {"condition": ["i_!quest_orc_guards_accepted"], "nextId": "24"},
+          {"condition": ["i_quest_orc_guards_accepted"], "nextId": "25"}
+        ]
+      },
+      "24": {"face": "mozes", "text": ["After I find Grace, isn't there anything I can do to help against Ardor?"], "choices": [{"nextId": "26"}]},
+      "25": {"face": "mozes", "text": ["Ardor has Grace! Isn't there anything I can do to help against Ardor?"], "choices": [{"nextId": "26"}]},
+      "26": {"face": "fairy01", "text": ["See, this is why you are so lovely."]},
+      "27": {"face": "fairy01", "text": ["But no, Ardor is far out of your league.", "There won't be anything you could do in this short amount of time."]},
+      "28": {
+        "face": "fairy01", "text": ["You must rely on the larger forces of good to handle Ardor."], "choices": [
+          {"condition": ["i_!quest_mother_fairy_accepted"], "nextId": "2"},
+          {"condition": ["i_quest_mother_fairy_accepted"], "nextId": "71"}
+        ]
+      },
       "30": {"face": "fairy01", "text": ["Ah yes of course."]},
-      "31": {"face": "fairy01", "text": ["Unfortunately Grace is in the possession of Ardor..."]},
-      "32": {"face": "fairy01", "text": ["but there is a possibility for you to rescue her."]},
+      "31": {"face": "fairy01", "text": ["Unfortunately Grace is in the possession of Ardor."]},
+      "32": {"face": "fairy01", "text": ["We tried, but we weren't able to prevent that.", "But there might still be one possibility for you."]},
       "33": {"face": "fairy01", "text": ["You are brave Mozes, but bravery alone won't do the trick."]},
       "34": {"face": "fairy01", "text": ["We would like to help you in your search for Grace."]},
       "35": {"face": "fairy01", "text": ["In the cave you came from we've hidden a mighty artifact, and you may use it against any orcs you might encounter on your quest."]},
       "36": {
-        "face": "mozes", "text": ["A mighty artifact you say?"], "choices": [
-          {"text": "But what has Ardor to do with Grace?", "nextId": "40"},
+        "face": "mozes", "text": ["I'll do anything to get Grace back safe!"], "choices": [
+          {"text": "But what has Ardor to do with her?", "nextId": "40"},
           {"text": "What does the artifact do? How do I use it?", "nextId": "50"},
           {"text": "How can I get it, if it is hidden?", "nextId": "60"}
         ]
@@ -75,8 +91,17 @@
       "40": {"face": "fairy01", "text": ["I'm not sure about that at the moment.", "Maybe she was at the wrong place at the wrong time. I sincerely hope so."], "choices": [{"nextId": "36"}]},
       "50": {"face": "fairy01", "text": ["You'll see when you get there.", "Don't worry, I wouldn't let you use it if I thought it wouldn't be safe."], "choices": [{"nextId": "36"}]},
       "60": {"face": "fairy01", "text": ["Inside the cave, at the complete other side, go all way to south, then east and search the north wall. There is a hidden door in the dark."]},
-      "61": {"face": "fairy01", "text": ["Now go! Before the time is up. I know you have it in you!"]},
-      "62": {"face": "fairy01", "text": ["Farewell our lovely Mozes.", "May the Goddess Tree smile upon you and your search."], "choices": [{"command": "ACCEPT_QUEST", "nextId": "62"}]}
+      "61": {"face": "fairy01", "text": ["Before you go, please talk to the other fairies.", "They'll offer you much needed help."]},
+      "62": {"face": "fairy01", "text": ["After that, hurry and go! Before the time is up."]},
+      "63": {"face": "fairy01", "text": ["Farewell our lovely Mozes. Grace is blessed with a brother like you.", "May the Goddess Tree smile upon you and your search."], "choices": [{"command": "ACCEPT_QUEST", "nextId": "70"}]},
+      "70": {"text": ["Dear young Mozes, you've returned."]},
+      "71": {
+        "face": "mozes", "text": ["I still have some questions."], "choices": [
+          {"text": "How do you all seem to know me?", "nextId": "10"},
+          {"text": "What did you meant with dark times?", "nextId": "20"},
+          {"text": "I really need to be on my way. (Leave conversation)", "command": "EXIT", "nextId": "70"}
+        ]
+      }
     }
   },
   "fairy_save"        : {

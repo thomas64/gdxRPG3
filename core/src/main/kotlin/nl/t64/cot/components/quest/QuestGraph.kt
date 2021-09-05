@@ -100,7 +100,9 @@ class QuestGraph(
         questTask.linkedWith?.let {
             val nextTask = tasks[it]!!
             nextTask.handleLinked()
-            handleLinked(nextTask)
+            if (nextTask.isComplete) {
+                handleLinked(nextTask)
+            }
         }
     }
 

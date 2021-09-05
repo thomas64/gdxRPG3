@@ -10,8 +10,8 @@
     "phrases": {
       "1" : {
         "text": ["Halt! Forbidden area!"], "choices": [
-          {"condition": ["i_!orc_amulet"], "text": "->", "nextId": "2"},
-          {"condition": ["i_orc_amulet"], "text": "->", "nextId": "60"}
+          {"condition": ["i_!orc_amulet"], "nextId": "2"},
+          {"condition": ["i_orc_amulet"], "nextId": "60"}
         ]
       },
       "2" : {"text": ["This is domain of Great Wizard Ardor.", "Leave now, or die!"]},
@@ -38,13 +38,13 @@
       "20": {"face": "orc_sergeant", "text": ["That is mask of Ardor, he does need that.", "Why do you have mask?"]},
       "21": {"face": "mozes", "text": ["An orcish fellow needed to deliver it, but he wasn't able to.", "That's where I come in."]},
       "22": {"face": "orc_sergeant", "text": [". . ."]},
-      "23": {"text": ["You go through."], "choices": [{"command": "SHOW_QUEST_ITEM", "nextId": "50"}]},
+      "23": {"face": "orc_sergeant", "text": ["You go through."], "choices": [{"command": "SHOW_QUEST_ITEM", "nextId": "50"}]},
       "30": {"face": "orc_sergeant", "text": ["No, who are you?"]},
       "31": {"face": "mozes", "text": ["I am the Great Wizard Mozes! You'll be sorry if Ardor hears that you wouldn't let me through. He will incinerate you on the spot.", "You know he will."]},
       "32": {"face": "orc_sergeant", "text": ["I know he could.", "Job is not worth life."]},
-      "33": {"text": ["You go through."], "choices": [{"command": "SAY_QUEST_THING", "nextId": "50"}]},
+      "33": {"face": "orc_sergeant", "text": ["You go through."], "choices": [{"command": "SAY_QUEST_THING", "nextId": "50"}]},
       "40": {"face": "orc_sergeant", "text": ["You will die!"], "choices": [{"command": "START_BATTLE"}]},
-      "50": {"text": ["Go!"], "choices": [{"command": "EXIT", "nextId": "50"}]},
+      "50": {"face": "orc_sergeant", "text": ["Go!"], "choices": [{"command": "EXIT", "nextId": "50"}]},
       "60": {"face": "mozes", "text": ["I need to get to Ardor. Let me through."]},
       "61": {"face": "orc_sergeant", "text": ["You go through."], "choices": [{"command": "WEAR_QUEST_ITEM", "nextId": "50"}]}
     }
