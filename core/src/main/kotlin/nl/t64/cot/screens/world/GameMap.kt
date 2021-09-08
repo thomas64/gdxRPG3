@@ -12,8 +12,10 @@ import ktx.tiled.*
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.screens.world.entity.Direction
+import nl.t64.cot.screens.world.entity.EntityState
 import nl.t64.cot.screens.world.mapobjects.*
 import nl.t64.cot.screens.world.pathfinding.TiledGraph
+import java.util.*
 
 
 const val LIGHTMAP_REGION_MULTIPLIER = 10
@@ -55,7 +57,7 @@ class GameMap(val mapTitle: String) {
 
     lateinit var playerSpawnLocation: Vector2
     lateinit var playerSpawnDirection: Direction
-    lateinit var tiledGraph: TiledGraph
+    private val tiledGraphs: EnumMap<EntityState, TiledGraph> = EnumMap(EntityState::class.java)
 
     val npcs: List<GameMapNpc> = loader.loadLayer(NPC_LAYER) { GameMapNpc(it) }
     val heroes: List<GameMapHero> = loader.loadLayer(HERO_LAYER, { gameData.heroes.contains(it.name) }, { GameMapHero(it) })
@@ -87,8 +89,13 @@ class GameMap(val mapTitle: String) {
     val width: Int get() = tiledMap.width
     val height: Int get() = tiledMap.height
 
-    fun setTiledGraph() {
-        tiledGraph = TiledGraph(tiledMap.width, tiledMap.height)
+    fun setTiledGraphs() {
+        tiledGraphs[EntityState.WALKING] = TiledGraph(tiledMap.width, tiledMap.height, EntityState.WALKING)
+        tiledGraphs[EntityState.FLYING] = TiledGraph(tiledMap.width, tiledMap.height, EntityState.FLYING)
+    }
+
+    fun getTiledGraph(state: EntityState): TiledGraph {
+        return tiledGraphs[state] ?: tiledGraphs[EntityState.WALKING]!!
     }
 
     fun getUnderground(point: Vector2): String {

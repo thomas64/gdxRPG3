@@ -107,7 +107,7 @@
   <object id="77" name="sparkle0004" x="600" y="480" width="48" height="48"/>
  </objectgroup>
  <objectgroup color="#ff007f" id="21" name="enemy">
-  <object id="68" name="green_slime" type="w" x="456" y="240" width="48" height="24">
+  <object id="68" name="green_slime" type="w" x="648" y="336" width="48" height="24">
    <properties>
     <property name="battleId" value="battle0002"/>
    </properties>

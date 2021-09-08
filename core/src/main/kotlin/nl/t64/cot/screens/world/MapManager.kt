@@ -17,6 +17,7 @@ import nl.t64.cot.audio.toAudioEvent
 import nl.t64.cot.components.cutscene.CutsceneId
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.world.entity.Direction
+import nl.t64.cot.screens.world.entity.EntityState
 import nl.t64.cot.screens.world.mapobjects.*
 import nl.t64.cot.screens.world.pathfinding.TiledNode
 import nl.t64.cot.subjects.ProfileObserver
@@ -109,8 +110,8 @@ class MapManager : ProfileObserver {
     fun getLowerMapQuestTextures(): List<GameMapQuestTexture> = currentMap.lowerTextures
     fun getUpperMapQuestTextures(): List<GameMapQuestTexture> = currentMap.upperTextures
 
-    fun findPath(startPoint: Vector2, endPoint: Vector2): DefaultGraphPath<TiledNode> {
-        return currentMap.tiledGraph.findPath(startPoint, endPoint)
+    fun findPath(startPoint: Vector2, endPoint: Vector2, state: EntityState): DefaultGraphPath<TiledNode> {
+        return currentMap.getTiledGraph(state).findPath(startPoint, endPoint)
     }
 
     fun updateFogOfWar(playerPosition: Vector2, dt: Float) {
@@ -171,7 +172,7 @@ class MapManager : ProfileObserver {
     }
 
     fun setTiledGraph() {
-        currentMap.setTiledGraph()
+        currentMap.setTiledGraphs()
     }
 
     fun continueAudio() {

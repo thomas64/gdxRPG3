@@ -96,7 +96,7 @@ class WorldScreen : Screen,
         lootList = LootLoader(currentMap).createLoot()
         doorList = DoorLoader(currentMap).createDoors()
         partyMembers = PartyMembersLoader(player).loadPartyMembers()
-        currentMap.setTiledGraph()
+        currentMap.setTiledGraphs()
     }
 
     override fun onNotifyShakeCamera() {
@@ -160,7 +160,7 @@ class WorldScreen : Screen,
     }
 
     override fun onNotifyShowBattleScreen(battleId: String, enemyEntity: Entity) {
-        if (player.moveSpeed != Constant.MOVE_SPEED_4) {
+        if (player.moveSpeed != Constant.MOVE_SPEED_4 && !isInTransition) {
             currentNpcEntity = enemyEntity
             mapManager.prepareForBattle()
             gameState = GameState.BATTLE
@@ -368,7 +368,7 @@ class WorldScreen : Screen,
     private fun getPathOf(npc: Entity): DefaultGraphPath<TiledNode> {
         val startPoint = npc.getPositionInGrid()
         val endPoint = getEndPoint(npc)
-        return mapManager.findPath(startPoint, endPoint)
+        return mapManager.findPath(startPoint, endPoint, npc.state)
     }
 
     private fun getEndPoint(npc: Entity): Vector2 {

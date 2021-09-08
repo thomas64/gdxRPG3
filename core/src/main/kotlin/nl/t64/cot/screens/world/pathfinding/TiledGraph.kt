@@ -7,11 +7,13 @@ import com.badlogic.gdx.ai.pfa.indexed.IndexedAStarPathFinder
 import com.badlogic.gdx.ai.pfa.indexed.IndexedGraph
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.Array
+import nl.t64.cot.screens.world.entity.EntityState
 
 
 class TiledGraph(
     private val width: Int,
-    private val height: Int
+    private val height: Int,
+    private val state: EntityState
 ) : IndexedGraph<TiledNode> {
 
     private val nodes: Array<TiledNode> = Array(width * height)
@@ -52,7 +54,7 @@ class TiledGraph(
 
     private fun addConnection(tiledNode: TiledNode, xOffset: Int, yOffset: Int) {
         val target = getNode(tiledNode.x + xOffset, tiledNode.y + yOffset)
-        if (!target.isCollision) {
+        if (!target.isCollision(state)) {
             tiledNode.connections.add(DefaultConnection(tiledNode, target))
         }
     }
