@@ -80,8 +80,12 @@ open class InventorySlot(
     }
 
     override fun decrementAmountBy(amount: Int) {
-        inventory.decrementAmountAt(index, amount)
-        refreshSlot()
+        if (amount == getAmount()) {
+            clearStack()
+        } else {
+            inventory.decrementAmountAt(index, amount)
+            refreshSlot()
+        }
     }
 
     private fun refreshSlot() {

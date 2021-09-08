@@ -46,6 +46,14 @@ class HeroItem(
         stats.recoverFullHp()
     }
 
+    fun recoverPartHp(healPoints: Int) {
+        stats.recoverPartHp(healPoints)
+    }
+
+    fun recoverFullStamina() {
+        stats.recoverFullStamina()
+    }
+
     fun gainXp(amount: Int, levelUpMessage: StringBuilder) {
         stats.gainXp(amount) { gainLevel(levelUpMessage) }
     }
@@ -66,6 +74,8 @@ class HeroItem(
     fun getAllHpStats(): Map<String, Int> = stats.getAllHpStats()
     fun getMaximumHp(): Int = stats.getMaximumHp()
     fun getCurrentHp(): Int = stats.getCurrentHp()
+    fun getMaximumStamina(): Int = stats.getMaximumStamina()
+    fun getCurrentStamina(): Int = stats.getCurrentStamina()
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

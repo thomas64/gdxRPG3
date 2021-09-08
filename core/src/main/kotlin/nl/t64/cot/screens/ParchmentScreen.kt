@@ -11,7 +11,7 @@ import nl.t64.cot.constants.ScreenType
 
 abstract class ParchmentScreen : Screen {
 
-    protected val stage: Stage = Stage()
+    val stage: Stage = Stage()
 
     open fun getScreenUI(): ScreenUI {
         throw IllegalStateException("ScreenUI not implemented here.")
@@ -29,7 +29,7 @@ abstract class ParchmentScreen : Screen {
         // empty
     }
 
-    protected fun fadeParchment() {
+    fun fadeParchment() {
         val screenshot = stage.actors[0] as Image
         val parchment = stage.actors[1] as Image
         stage.clear()

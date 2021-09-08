@@ -10,10 +10,10 @@ import nl.t64.cot.screens.shop.ShopSlotsTable
 
 
 abstract class ScreenUI(
-    protected val equipWindow: Window,
+    val equipWindow: Window,
     val equipSlotsTables: EquipSlotsTables,
     val inventorySlotsTable: InventorySlotsTable,
-    protected val heroesTable: HeroesTable,
+    val heroesTable: HeroesTable,
     private val tableList: List<WindowSelector>,
     private var selectedTableIndex: Int
 ) {
@@ -74,12 +74,12 @@ abstract class ScreenUI(
         heroesTable.disposePixmapTextures()
     }
 
-    protected fun setFocusOnSelectedTable() {
+    fun setFocusOnSelectedTable() {
         getSelectedTable().setKeyboardFocus(stage)
         stage.draw()
     }
 
-    protected fun getSelectedTable(): WindowSelector {
+    fun getSelectedTable(): WindowSelector {
         return tableList[selectedTableIndex]
     }
 

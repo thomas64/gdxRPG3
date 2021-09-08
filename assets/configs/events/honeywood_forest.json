@@ -17,7 +17,7 @@
     "conversationId": "found_honeywood_cave",
     "entityId"      : "mozes"
   },
-  "talking_orc_guards": {
+  "talking_orc_guards"  : {
     "type"          : "conversation",
     "condition"     : ["quest_orc_guards_not_finished"],
     "conversationId": "quest_orc_guards",
@@ -28,6 +28,11 @@
     "type"          : "conversation",
     "conversationId": "find_dead_orcs",
     "entityId"      : "mozes"
+  },
+  "enter_great_tree"    : {
+    "type"          : "conversation",
+    "conversationId": "fairy_welcome",
+    "entityId"      : "fairy01"
   },
   "find_great_tree"     : {
     "type"          : "conversation",

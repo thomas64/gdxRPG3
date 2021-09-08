@@ -26,6 +26,16 @@ class Stamina(rank: Int = 0) : StatItem(
         return null
     }
 
+    fun restorePart(healPoints: Int): Int? {
+        variable += healPoints
+        if (variable > rank) {
+            val remainingHealPoints = variable - rank
+            variable = rank
+            return remainingHealPoints
+        }
+        return null
+    }
+
     fun restore() {
         variable = rank
     }

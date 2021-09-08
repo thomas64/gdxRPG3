@@ -76,7 +76,12 @@ class InventorySlotsTable(private val tooltip: ItemSlotTooltip) : WindowSelector
     }
 
     override fun doAction() {
-        taker.equip(selector.getCurrentSlot())
+        val currentSlot: ItemSlot = selector.getCurrentSlot()
+        if (currentSlot.getPossibleInventoryImage()?.inventoryGroup == InventoryGroup.POTION) {
+            InventorySlotUser().drink(currentSlot)
+        } else {
+            taker.equip(currentSlot)
+        }
     }
 
     fun addResource(inventoryItem: InventoryItem) {

@@ -53,6 +53,13 @@ class Level(var rank: Int = 1) {
         return null
     }
 
+    fun restorePart(healPoints: Int) {
+        variable += healPoints
+        if (variable > rank) {
+            variable = rank
+        }
+    }
+
     fun restore() {
         variable = rank
     }

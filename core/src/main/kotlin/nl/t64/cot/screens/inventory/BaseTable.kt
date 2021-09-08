@@ -72,7 +72,7 @@ abstract class BaseTable(val tooltip: PersonalityTooltip) : WindowSelector {
         fillRows()
     }
 
-    protected abstract fun fillRows()
+    abstract fun fillRows()
 
     fun addExtraToTable(totalExtra: Int) {
         if (totalExtra > 0) {

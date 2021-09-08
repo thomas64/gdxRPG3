@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="48" height="50" tilewidth="24" tileheight="24" infinite="0" nextlayerid="17" nextobjectid="102">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="48" height="50" tilewidth="24" tileheight="24" infinite="0" nextlayerid="17" nextobjectid="103">
  <properties>
   <property name="bgm" value="bgm_great_tree"/>
   <property name="bgs" value="bgs_birds"/>
@@ -119,7 +119,7 @@
   <object id="79" x="816" y="720" width="96" height="480"/>
  </objectgroup>
  <objectgroup color="#55ff7f" id="15" name="npc">
-  <object id="80" name="fairy01" type="ia" x="594" y="912" width="48" height="24">
+  <object id="80" name="fairy01" type="ia" x="594" y="900" width="48" height="24">
    <properties>
     <property name="conversation" value="fairy_welcome"/>
     <property name="direction" value="south"/>
@@ -195,6 +195,7 @@
   <object id="48" name="honeywood_cave_4" x="576" y="1032" width="48" height="24"/>
  </objectgroup>
  <objectgroup color="#ff55ff" id="16" name="event">
-  <object id="81" name="find_great_tree" type="discover" x="528" y="840" width="192" height="24"/>
+  <object id="81" name="find_great_tree" type="discover" x="528" y="816" width="240" height="24"/>
+  <object id="102" name="enter_great_tree" type="discover" x="480" y="936" width="192" height="12"/>
  </objectgroup>
 </map>

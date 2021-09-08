@@ -66,6 +66,9 @@ class StatContainer() {
                 + stats[StatItemId.ENDURANCE.name]!!.bonus)
     }
 
+    fun getMaximumStamina(): Int = stats[StatItemId.STAMINA.name]!!.rank
+    fun getCurrentStamina(): Int = stats[StatItemId.STAMINA.name]!!.variable
+
     fun getById(statItemId: StatItemId): StatItem {
         return stats[statItemId.name]!!
     }
@@ -86,6 +89,18 @@ class StatContainer() {
         (stats[StatItemId.ENDURANCE.name] as Endurance).restore()
         (stats[StatItemId.STAMINA.name] as Stamina).restore()
         level.restore()
+    }
+
+    fun recoverPartHp(healPoints: Int) {
+        (stats[StatItemId.ENDURANCE.name] as Endurance).restorePart(healPoints)?.let { it1 ->
+            (stats[StatItemId.STAMINA.name] as Stamina).restorePart(it1)?.let { it2 ->
+                level.restorePart(it2)
+            }
+        }
+    }
+
+    fun recoverFullStamina() {
+        (stats[StatItemId.STAMINA.name] as Stamina).restore()
     }
 
     fun getInflictDamageStaminaPenalty(): Int {
