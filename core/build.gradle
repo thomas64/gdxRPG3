@@ -21,4 +21,11 @@ dependencies {
 	api "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
 	api "com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion"
 	api project(':shared')
+
+	testApi "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+	testApi "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
+	testApi "org.assertj:assertj-core:$assertjVersion"
+	testApi "org.mockito:mockito-core:$mockitoVersion"
+	testApi "org.mockito.kotlin:mockito-kotlin:$kockitoVersion"
+	testApi "org.junit.jupiter:junit-jupiter-api:$junitVersion"
 }

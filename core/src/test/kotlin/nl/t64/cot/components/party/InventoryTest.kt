@@ -1,11 +1,15 @@
 package nl.t64.cot.components.party
 
 import nl.t64.cot.GameTest
+import nl.t64.cot.ProfileManager
+import nl.t64.cot.Utils
+import nl.t64.cot.Utils.gameData
 import nl.t64.cot.components.party.inventory.*
 import nl.t64.cot.components.party.skills.Hafted
 import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.components.party.stats.StatItemId
 import nl.t64.cot.components.party.stats.Strength
+import nl.t64.cot.components.quest.QuestContainer
 import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Disabled
@@ -26,6 +30,7 @@ internal class InventoryTest : GameTest() {
 
     @BeforeEach
     private fun setup() {
+        gameData.onNotifyCreateProfile(ProfileManager())
         inventory = InventoryContainer()
         val mace = InventoryDatabase.createInventoryItem(BASIC_MACE)
         inventory.autoSetItem(mace)

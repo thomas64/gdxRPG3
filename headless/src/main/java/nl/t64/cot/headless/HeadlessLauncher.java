@@ -18,7 +18,7 @@ public class HeadlessLauncher {
 
 	private static HeadlessApplicationConfiguration getDefaultConfiguration() {
 		HeadlessApplicationConfiguration configuration = new HeadlessApplicationConfiguration();
-		configuration.renderInterval = -1f; // When this value is negative, GdxRpg3#render() is never called.
+		configuration.updatesPerSecond = -1; // When this value is negative, GdxRpg3#render() is never called.
 		return configuration;
 	}
 }
