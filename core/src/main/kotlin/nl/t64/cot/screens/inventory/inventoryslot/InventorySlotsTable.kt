@@ -78,6 +78,7 @@ class InventorySlotsTable(private val tooltip: ItemSlotTooltip) : WindowSelector
     override fun doAction() {
         val currentSlot: ItemSlot = selector.getCurrentSlot()
         if (currentSlot.getPossibleInventoryImage()?.inventoryGroup == InventoryGroup.POTION) {
+            // todo, in battle not allowed to drink this way.
             InventorySlotUser().drink(currentSlot)
         } else {
             taker.equip(currentSlot)

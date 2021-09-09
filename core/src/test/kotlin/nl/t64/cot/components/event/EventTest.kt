@@ -31,7 +31,7 @@ internal class EventTest : GameTest() {
         event.possibleStart()
         assertThat(event.hasPlayed).isFalse
 
-        gameData.quests.getQuestById("quest0006").know()
+//        gameData.quests.getQuestById("quest0006").know()
         event.possibleStart()
         assertThat(event.hasPlayed).isTrue
     }

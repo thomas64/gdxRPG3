@@ -128,9 +128,9 @@ internal class ConversationTest : GameTest() {
         assertThat(graph.getAssociatedChoices()[0].isMeetingCondition()).isTrue
 
         val quest7 = gameData.quests.getQuestById("quest0007")
-        quest7.know()
+//        quest7.know()
         quest7.accept()
-        quest7.unclaim()
+//        quest7.unclaim()
 
         assertThat(graph.getAssociatedChoices()).hasSize(2)
         assertThat(graph.getAssociatedChoices()[1].text).startsWith("I gave it to someone else. (Fails ")

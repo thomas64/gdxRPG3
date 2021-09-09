@@ -25,15 +25,15 @@ object ConditionDatabase {
         Pair("i_level10") { level10 },
         Pair("defeated_orc_guards") { defeatedOrcGuards },
 
-//        Pair("diplomat3") { diplomat3 },
-//        Pair("key_mysterious_tunnel") { keyMysteriousTunnel },
-//        Pair("quest4_known") { quest4Known },
-//        Pair("i_quest6_task3") { quest6Task3 },
-//        Pair("quest6_known") { quest6Known },
-//        Pair("i_quest6_unclaimed") { quest6Unclaimed },
-//        Pair("i_quest7_task3") { quest7Task3 },
-//        Pair("quest7_unknown") { quest7Unknown },
-//        Pair("i_quest7_unclaimed") { quest7Unclaimed }
+        Pair("diplomat3") { diplomat3 },
+        Pair("key_mysterious_tunnel") { keyMysteriousTunnel },
+        Pair("quest4_known") { quest4Known },
+        Pair("i_quest6_task3") { quest6Task3 },
+        Pair("quest6_known") { quest6Known },
+        Pair("i_quest6_unclaimed") { quest6Unclaimed },
+        Pair("i_quest7_task3") { quest7Task3 },
+        Pair("quest7_unknown") { quest7Unknown },
+        Pair("i_quest7_unclaimed") { quest7Unclaimed }
     )
 
     fun isMeetingConditions(conditionIds: List<String?>): Boolean {
@@ -59,15 +59,15 @@ object ConditionDatabase {
     private val level10 get() = hasMinimumLevelOf(10)
     private val defeatedOrcGuards get() = isBattleWon("quest_orc_guards")
 
-//    private val diplomat3 get() = hasEnoughOfSkill(SkillItemId.DIPLOMAT, 3)
-//    private val keyMysteriousTunnel get() = hasEnoughOfItem("key_mysterious_tunnel", 1)
-//    private val quest4Known get() = isQuestStateEqualOrHigher("quest0004", QuestState.KNOWN)
-//    private val quest6Task3 get() = isQuestTaskNumberComplete("quest0006", 3)
-//    private val quest6Known get() = isQuestStateEqualOrHigher("quest0006", QuestState.KNOWN)
-//    private val quest6Unclaimed get() = isQuestStateEqualOrHigher("quest0006", QuestState.UNCLAIMED)
-//    private val quest7Task3 get() = isQuestTaskNumberComplete("quest0007", 3)
-//    private val quest7Unknown get() = isQuestStateEqualOrLower("quest0007", QuestState.UNKNOWN)
-//    private val quest7Unclaimed get() = isQuestStateEqualOrHigher("quest0007", QuestState.UNCLAIMED)
+    private val diplomat3 get() = hasEnoughOfSkill(SkillItemId.DIPLOMAT, 3)
+    private val keyMysteriousTunnel get() = hasEnoughOfItem("key_mysterious_tunnel", 1)
+    private val quest4Known get() = isQuestStateEqualOrHigher("quest0004", QuestState.KNOWN)
+    private val quest6Task3 get() = isQuestTaskNumberComplete("quest0006", 3)
+    private val quest6Known get() = isQuestStateEqualOrHigher("quest0006", QuestState.KNOWN)
+    private val quest6Unclaimed get() = isQuestStateEqualOrHigher("quest0006", QuestState.UNCLAIMED)
+    private val quest7Task3 get() = isQuestTaskNumberComplete("quest0007", 3)
+    private val quest7Unknown get() = isQuestStateEqualOrLower("quest0007", QuestState.UNKNOWN)
+    private val quest7Unclaimed get() = isQuestStateEqualOrHigher("quest0007", QuestState.UNCLAIMED)
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
