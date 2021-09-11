@@ -43,14 +43,14 @@ internal class KiaraTest : GameTest() {
         assertThat(kiara.getCalculatedTotalSkillOf(SkillItemId.DIPLOMAT)).isZero
         assertThat(kiara.getSkillById(SkillItemId.HEALER).rank).isEqualTo(1)
         assertThat(kiara.getCalculatedTotalSkillOf(SkillItemId.HEALER)).isEqualTo(1)
-        assertThat(kiara.getSkillById(SkillItemId.LOREMASTER).rank).isZero
-        assertThat(kiara.getCalculatedTotalSkillOf(SkillItemId.LOREMASTER)).isZero
         assertThat(kiara.getSkillById(SkillItemId.MECHANIC).rank).isZero
         assertThat(kiara.getCalculatedTotalSkillOf(SkillItemId.MECHANIC)).isZero
         assertThat(kiara.getSkillById(SkillItemId.MERCHANT).rank).isEqualTo(4)
         assertThat(kiara.getCalculatedTotalSkillOf(SkillItemId.MERCHANT)).isEqualTo(4)
         assertThat(kiara.getSkillById(SkillItemId.RANGER).rank).isZero
         assertThat(kiara.getCalculatedTotalSkillOf(SkillItemId.RANGER)).isZero
+        assertThat(kiara.getSkillById(SkillItemId.SCHOLAR).rank).isZero
+        assertThat(kiara.getCalculatedTotalSkillOf(SkillItemId.SCHOLAR)).isZero
         assertThat(kiara.getSkillById(SkillItemId.STEALTH).rank).isEqualTo(5)
         assertThat(kiara.getCalculatedTotalSkillOf(SkillItemId.STEALTH)).isEqualTo(5)
         assertThat(kiara.getSkillById(SkillItemId.THIEF).rank).isEqualTo(8)

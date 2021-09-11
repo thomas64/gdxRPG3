@@ -14,7 +14,7 @@ abstract class StatItem(
     var bonus: Int = 0,
 ) : PersonalityItem {
 
-    override fun getDescription(totalLoremaster: Int): String {
+    override fun getDescription(totalScholar: Int): String {
         return (getDescription() + System.lineSeparator() + System.lineSeparator()
                 + "No trainer is needed to upgrade a stat." + System.lineSeparator()
                 + getNeededXpForNextRank())

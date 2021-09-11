@@ -106,13 +106,13 @@
       "stamina"     : 31
     },
     "skills"   : {
-      "loremaster": 1,
-      "merchant"  : 1,
-      "wizard"    : 4,
-      "missile"   : -1,
-      "pole"      : 3,
-      "sword"     : 3,
-      "thrown"    : -1
+      "merchant": 1,
+      "scholar" : 1,
+      "wizard"  : 4,
+      "missile" : -1,
+      "pole"    : 3,
+      "sword"   : 3,
+      "thrown"  : -1
     },
     "spells"   : {
       "vs_necromancy": 1,
@@ -139,15 +139,15 @@
       "stamina"     : 20
     },
     "skills"   : {
-      "alchemist" : 3,
-      "loremaster": 2,
-      "mechanic"  : 2,
-      "wizard"    : 2,
-      "hafted"    : -1,
-      "missile"   : -1,
-      "shield"    : -1,
-      "sword"     : 1,
-      "thrown"    : 1
+      "alchemist": 3,
+      "mechanic" : 2,
+      "scholar"  : 2,
+      "wizard"   : 2,
+      "hafted"   : -1,
+      "missile"  : -1,
+      "shield"   : -1,
+      "sword"    : 1,
+      "thrown"   : 1
     },
     "spells"   : {
       "dragon_flames": 2
@@ -205,7 +205,7 @@
     },
     "skills"   : {
       "alchemist" : -1,
-      "loremaster": -1,
+      "scholar"   : -1,
       "stealth"   : 1,
       "thief"     : -1,
       "troubadour": -1,
@@ -275,16 +275,16 @@
       "stamina"     : 50
     },
     "skills"   : {
-      "alchemist" : 7,
-      "healer"    : 8,
-      "loremaster": 9,
-      "mechanic"  : 6,
-      "stealth"   : 5,
-      "wizard"    : 10,
-      "missile"   : -1,
-      "pole"      : 8,
-      "shield"    : -1,
-      "thrown"    : 8
+      "alchemist": 7,
+      "healer"   : 8,
+      "mechanic" : 6,
+      "scholar"  : 9,
+      "stealth"  : 5,
+      "wizard"   : 10,
+      "missile"  : -1,
+      "pole"     : 8,
+      "shield"   : -1,
+      "thrown"   : 8
     },
     "spells"   : {
       "vs_star"          : 8,
@@ -349,7 +349,7 @@
     "skills"   : {
       "alchemist" : -1,
       "healer"    : 4,
-      "loremaster": 6,
+      "scholar"   : 6,
       "troubadour": 7,
       "warrior"   : 9,
       "wizard"    : -1,
@@ -384,9 +384,9 @@
     "skills"   : {
       "alchemist" : 5,
       "diplomat"  : 10,
-      "loremaster": 5,
       "merchant"  : 5,
       "ranger"    : 5,
+      "scholar"   : 5,
       "stealth"   : 5,
       "thief"     : 5,
       "troubadour": 10,
@@ -465,9 +465,9 @@
     "skills"   : {
       "alchemist" : 10,
       "diplomat"  : 10,
-      "loremaster": 10,
       "merchant"  : 10,
       "ranger"    : 10,
+      "scholar"   : 10,
       "stealth"   : 10,
       "thief"     : 10,
       "troubadour": 10,

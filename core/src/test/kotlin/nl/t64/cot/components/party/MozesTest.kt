@@ -43,14 +43,14 @@ internal class MozesTest : GameTest() {
         assertThat(mozes.getCalculatedTotalSkillOf(SkillItemId.DIPLOMAT)).isZero
         assertThat(mozes.getSkillById(SkillItemId.HEALER).rank).isZero
         assertThat(mozes.getCalculatedTotalSkillOf(SkillItemId.HEALER)).isZero
-        assertThat(mozes.getSkillById(SkillItemId.LOREMASTER).rank).isZero
-        assertThat(mozes.getCalculatedTotalSkillOf(SkillItemId.LOREMASTER)).isZero
         assertThat(mozes.getSkillById(SkillItemId.MECHANIC).rank).isZero
         assertThat(mozes.getCalculatedTotalSkillOf(SkillItemId.MECHANIC)).isZero
         assertThat(mozes.getSkillById(SkillItemId.MERCHANT).rank).isZero
         assertThat(mozes.getCalculatedTotalSkillOf(SkillItemId.MERCHANT)).isZero
         assertThat(mozes.getSkillById(SkillItemId.RANGER).rank).isZero
         assertThat(mozes.getCalculatedTotalSkillOf(SkillItemId.RANGER)).isZero
+        assertThat(mozes.getSkillById(SkillItemId.SCHOLAR).rank).isZero
+        assertThat(mozes.getCalculatedTotalSkillOf(SkillItemId.SCHOLAR)).isZero
         assertThat(mozes.getSkillById(SkillItemId.STEALTH).rank).isEqualTo(1)
         assertThat(mozes.getCalculatedTotalSkillOf(SkillItemId.STEALTH)).isZero
         assertThat(mozes.getSkillById(SkillItemId.THIEF).rank).isZero

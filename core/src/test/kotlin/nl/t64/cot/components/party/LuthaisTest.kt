@@ -43,14 +43,14 @@ internal class LuthaisTest : GameTest() {
         assertThat(luthais.getCalculatedTotalSkillOf(SkillItemId.DIPLOMAT)).isZero
         assertThat(luthais.getSkillById(SkillItemId.HEALER).rank).isEqualTo(8)
         assertThat(luthais.getCalculatedTotalSkillOf(SkillItemId.HEALER)).isEqualTo(8)
-        assertThat(luthais.getSkillById(SkillItemId.LOREMASTER).rank).isEqualTo(9)
-        assertThat(luthais.getCalculatedTotalSkillOf(SkillItemId.LOREMASTER)).isEqualTo(9)
         assertThat(luthais.getSkillById(SkillItemId.MECHANIC).rank).isEqualTo(6)
         assertThat(luthais.getCalculatedTotalSkillOf(SkillItemId.MECHANIC)).isEqualTo(6)
         assertThat(luthais.getSkillById(SkillItemId.MERCHANT).rank).isZero
         assertThat(luthais.getCalculatedTotalSkillOf(SkillItemId.MERCHANT)).isZero
         assertThat(luthais.getSkillById(SkillItemId.RANGER).rank).isZero
         assertThat(luthais.getCalculatedTotalSkillOf(SkillItemId.RANGER)).isZero
+        assertThat(luthais.getSkillById(SkillItemId.SCHOLAR).rank).isEqualTo(9)
+        assertThat(luthais.getCalculatedTotalSkillOf(SkillItemId.SCHOLAR)).isEqualTo(9)
         assertThat(luthais.getSkillById(SkillItemId.STEALTH).rank).isEqualTo(5)
         assertThat(luthais.getCalculatedTotalSkillOf(SkillItemId.STEALTH)).isEqualTo(5)
         assertThat(luthais.getSkillById(SkillItemId.THIEF).rank).isZero

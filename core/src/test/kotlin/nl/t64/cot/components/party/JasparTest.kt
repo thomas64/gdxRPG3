@@ -43,14 +43,14 @@ internal class JasparTest : GameTest() {
         assertThat(jaspar.getCalculatedTotalSkillOf(SkillItemId.DIPLOMAT)).isZero
         assertThat(jaspar.getSkillById(SkillItemId.HEALER).rank).isZero
         assertThat(jaspar.getCalculatedTotalSkillOf(SkillItemId.HEALER)).isZero
-        assertThat(jaspar.getSkillById(SkillItemId.LOREMASTER).rank).isEqualTo(-1)
-        assertThat(jaspar.getCalculatedTotalSkillOf(SkillItemId.LOREMASTER)).isZero
         assertThat(jaspar.getSkillById(SkillItemId.MECHANIC).rank).isZero
         assertThat(jaspar.getCalculatedTotalSkillOf(SkillItemId.MECHANIC)).isZero
         assertThat(jaspar.getSkillById(SkillItemId.MERCHANT).rank).isZero
         assertThat(jaspar.getCalculatedTotalSkillOf(SkillItemId.MERCHANT)).isZero
         assertThat(jaspar.getSkillById(SkillItemId.RANGER).rank).isZero
         assertThat(jaspar.getCalculatedTotalSkillOf(SkillItemId.RANGER)).isZero
+        assertThat(jaspar.getSkillById(SkillItemId.SCHOLAR).rank).isEqualTo(-1)
+        assertThat(jaspar.getCalculatedTotalSkillOf(SkillItemId.SCHOLAR)).isZero
         assertThat(jaspar.getSkillById(SkillItemId.STEALTH).rank).isEqualTo(1)
         assertThat(jaspar.getCalculatedTotalSkillOf(SkillItemId.STEALTH)).isZero
         assertThat(jaspar.getSkillById(SkillItemId.THIEF).rank).isEqualTo(-1)

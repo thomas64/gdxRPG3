@@ -172,7 +172,7 @@
     "protection": 0,
     "agility"   : 0,
     "stealth"   : 0,
-    "loremaster": 2
+    "scholar": 2
   },
   "epic_helm_of_tempests"   : {
     "name"      : "Helm of Tempests",

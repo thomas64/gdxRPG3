@@ -263,8 +263,8 @@ class HeroTest : GameTest() {
         assertThat(valter.getAllSpells()).extracting("id").containsExactly("dragon_flames")
 
         assertThat(luthais.getAllSpells()).extracting("id", "rank").contains(Tuple.tuple("fireball", 8))
-        val loremaster = luthais.getCalculatedTotalSkillOf(SkillItemId.LOREMASTER)
-        assertThat(luthais.getSkillById(SkillItemId.WIZARD).getXpCostForNextLevel(loremaster)).isZero
+        val scholar = luthais.getCalculatedTotalSkillOf(SkillItemId.SCHOLAR)
+        assertThat(luthais.getSkillById(SkillItemId.WIZARD).getXpCostForNextLevel(scholar)).isZero
 
         assertThat(StatItemId.INTELLIGENCE.title).isEqualTo("Intelligence")
         assertThat(SkillItemId.ALCHEMIST.title).isEqualTo("Alchemist")

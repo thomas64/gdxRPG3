@@ -43,14 +43,14 @@ internal class GalenTest : GameTest() {
         assertThat(galen.getCalculatedTotalSkillOf(SkillItemId.DIPLOMAT)).isZero
         assertThat(galen.getSkillById(SkillItemId.HEALER).rank).isZero
         assertThat(galen.getCalculatedTotalSkillOf(SkillItemId.HEALER)).isZero
-        assertThat(galen.getSkillById(SkillItemId.LOREMASTER).rank).isZero
-        assertThat(galen.getCalculatedTotalSkillOf(SkillItemId.LOREMASTER)).isZero
         assertThat(galen.getSkillById(SkillItemId.MECHANIC).rank).isZero
         assertThat(galen.getCalculatedTotalSkillOf(SkillItemId.MECHANIC)).isZero
         assertThat(galen.getSkillById(SkillItemId.MERCHANT).rank).isZero
         assertThat(galen.getCalculatedTotalSkillOf(SkillItemId.MERCHANT)).isZero
         assertThat(galen.getSkillById(SkillItemId.RANGER).rank).isEqualTo(4)
         assertThat(galen.getCalculatedTotalSkillOf(SkillItemId.RANGER)).isEqualTo(4)
+        assertThat(galen.getSkillById(SkillItemId.SCHOLAR).rank).isZero
+        assertThat(galen.getCalculatedTotalSkillOf(SkillItemId.SCHOLAR)).isZero
         assertThat(galen.getSkillById(SkillItemId.STEALTH).rank).isEqualTo(3)
         assertThat(galen.getCalculatedTotalSkillOf(SkillItemId.STEALTH)).isZero
         assertThat(galen.getSkillById(SkillItemId.THIEF).rank).isZero

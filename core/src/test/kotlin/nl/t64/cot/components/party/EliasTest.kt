@@ -43,14 +43,14 @@ internal class EliasTest : GameTest() {
         assertThat(elias.getCalculatedTotalSkillOf(SkillItemId.DIPLOMAT)).isEqualTo(8)
         assertThat(elias.getSkillById(SkillItemId.HEALER).rank).isZero
         assertThat(elias.getCalculatedTotalSkillOf(SkillItemId.HEALER)).isZero
-        assertThat(elias.getSkillById(SkillItemId.LOREMASTER).rank).isZero
-        assertThat(elias.getCalculatedTotalSkillOf(SkillItemId.LOREMASTER)).isZero
         assertThat(elias.getSkillById(SkillItemId.MECHANIC).rank).isZero
         assertThat(elias.getCalculatedTotalSkillOf(SkillItemId.MECHANIC)).isZero
         assertThat(elias.getSkillById(SkillItemId.MERCHANT).rank).isZero
         assertThat(elias.getCalculatedTotalSkillOf(SkillItemId.MERCHANT)).isZero
         assertThat(elias.getSkillById(SkillItemId.RANGER).rank).isZero
         assertThat(elias.getCalculatedTotalSkillOf(SkillItemId.RANGER)).isZero
+        assertThat(elias.getSkillById(SkillItemId.SCHOLAR).rank).isZero
+        assertThat(elias.getCalculatedTotalSkillOf(SkillItemId.SCHOLAR)).isZero
         assertThat(elias.getSkillById(SkillItemId.STEALTH).rank).isZero
         assertThat(elias.getCalculatedTotalSkillOf(SkillItemId.STEALTH)).isZero
         assertThat(elias.getSkillById(SkillItemId.THIEF).rank).isZero

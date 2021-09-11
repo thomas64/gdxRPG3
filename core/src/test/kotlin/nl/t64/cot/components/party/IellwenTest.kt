@@ -43,14 +43,14 @@ internal class IellwenTest : GameTest() {
         assertThat(iellwen.getCalculatedTotalSkillOf(SkillItemId.DIPLOMAT)).isZero
         assertThat(iellwen.getSkillById(SkillItemId.HEALER).rank).isEqualTo(10)
         assertThat(iellwen.getCalculatedTotalSkillOf(SkillItemId.HEALER)).isEqualTo(10)
-        assertThat(iellwen.getSkillById(SkillItemId.LOREMASTER).rank).isZero
-        assertThat(iellwen.getCalculatedTotalSkillOf(SkillItemId.LOREMASTER)).isZero
         assertThat(iellwen.getSkillById(SkillItemId.MECHANIC).rank).isZero
         assertThat(iellwen.getCalculatedTotalSkillOf(SkillItemId.MECHANIC)).isZero
         assertThat(iellwen.getSkillById(SkillItemId.MERCHANT).rank).isZero
         assertThat(iellwen.getCalculatedTotalSkillOf(SkillItemId.MERCHANT)).isZero
         assertThat(iellwen.getSkillById(SkillItemId.RANGER).rank).isEqualTo(6)
         assertThat(iellwen.getCalculatedTotalSkillOf(SkillItemId.RANGER)).isEqualTo(6)
+        assertThat(iellwen.getSkillById(SkillItemId.SCHOLAR).rank).isZero
+        assertThat(iellwen.getCalculatedTotalSkillOf(SkillItemId.SCHOLAR)).isZero
         assertThat(iellwen.getSkillById(SkillItemId.STEALTH).rank).isEqualTo(6)
         assertThat(iellwen.getCalculatedTotalSkillOf(SkillItemId.STEALTH)).isEqualTo(5)
         assertThat(iellwen.getSkillById(SkillItemId.THIEF).rank).isZero

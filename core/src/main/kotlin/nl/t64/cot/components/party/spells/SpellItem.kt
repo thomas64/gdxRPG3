@@ -39,19 +39,19 @@ class SpellItem(
         return spellCopy
     }
 
-    override fun getDescription(totalLoremaster: Int): String {
+    override fun getDescription(totalScholar: Int): String {
         return (description.joinToString(System.lineSeparator()) + System.lineSeparator()
                 + System.lineSeparator()
                 + "School: " + school.title + System.lineSeparator()
                 + "Requires: " + requiredResource.title + System.lineSeparator()
                 + "Stamina cost: " + staminaCost + System.lineSeparator()
                 + System.lineSeparator()
-                + getNeededXpForNextRank(totalLoremaster) + System.lineSeparator()
+                + getNeededXpForNextRank(totalScholar) + System.lineSeparator()
                 + getNeededGoldForNextRank())
     }
 
-    private fun getNeededXpForNextRank(totalLoremaster: Int): String {
-        val xpNeeded = getXpCostForNextRank(totalLoremaster).toString().takeIf { it != "0" } ?: "Max"
+    private fun getNeededXpForNextRank(totalScholar: Int): String {
+        val xpNeeded = getXpCostForNextRank(totalScholar).toString().takeIf { it != "0" } ?: "Max"
         return "XP needed for next rank: $xpNeeded"
     }
 
@@ -60,10 +60,10 @@ class SpellItem(
         return "Gold needed for next rank: $goldNeeded"
     }
 
-    private fun getXpCostForNextRank(totalLoremaster: Int): Int {
+    private fun getXpCostForNextRank(totalScholar: Int): Int {
         return when {
             rank >= MAXIMUM -> 0
-            else -> (getUpgradeFormula() - ((getUpgradeFormula() / 100) * totalLoremaster)).roundToInt()
+            else -> (getUpgradeFormula() - ((getUpgradeFormula() / 100f) * totalScholar)).roundToInt()
         }
     }
 

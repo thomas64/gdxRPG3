@@ -32,7 +32,7 @@ healer
   orig: 48, 48
   offset: 0, 0
   index: -1
-loremaster
+scholar
   rotate: false
   xy: 192, 0
   size: 48, 48

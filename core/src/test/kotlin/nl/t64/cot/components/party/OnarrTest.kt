@@ -43,14 +43,14 @@ internal class OnarrTest : GameTest() {
         assertThat(onarr.getCalculatedTotalSkillOf(SkillItemId.DIPLOMAT)).isZero
         assertThat(onarr.getSkillById(SkillItemId.HEALER).rank).isEqualTo(4)
         assertThat(onarr.getCalculatedTotalSkillOf(SkillItemId.HEALER)).isEqualTo(4)
-        assertThat(onarr.getSkillById(SkillItemId.LOREMASTER).rank).isEqualTo(6)
-        assertThat(onarr.getCalculatedTotalSkillOf(SkillItemId.LOREMASTER)).isEqualTo(6)
         assertThat(onarr.getSkillById(SkillItemId.MECHANIC).rank).isZero
         assertThat(onarr.getCalculatedTotalSkillOf(SkillItemId.MECHANIC)).isZero
         assertThat(onarr.getSkillById(SkillItemId.MERCHANT).rank).isZero
         assertThat(onarr.getCalculatedTotalSkillOf(SkillItemId.MERCHANT)).isZero
         assertThat(onarr.getSkillById(SkillItemId.RANGER).rank).isZero
         assertThat(onarr.getCalculatedTotalSkillOf(SkillItemId.RANGER)).isZero
+        assertThat(onarr.getSkillById(SkillItemId.SCHOLAR).rank).isEqualTo(6)
+        assertThat(onarr.getCalculatedTotalSkillOf(SkillItemId.SCHOLAR)).isEqualTo(6)
         assertThat(onarr.getSkillById(SkillItemId.STEALTH).rank).isZero
         assertThat(onarr.getCalculatedTotalSkillOf(SkillItemId.STEALTH)).isZero
         assertThat(onarr.getSkillById(SkillItemId.THIEF).rank).isZero

@@ -43,14 +43,14 @@ internal class RyiahTest : GameTest() {
         assertThat(ryiah.getCalculatedTotalSkillOf(SkillItemId.DIPLOMAT)).isZero
         assertThat(ryiah.getSkillById(SkillItemId.HEALER).rank).isZero
         assertThat(ryiah.getCalculatedTotalSkillOf(SkillItemId.HEALER)).isZero
-        assertThat(ryiah.getSkillById(SkillItemId.LOREMASTER).rank).isEqualTo(1)
-        assertThat(ryiah.getCalculatedTotalSkillOf(SkillItemId.LOREMASTER)).isEqualTo(1)
         assertThat(ryiah.getSkillById(SkillItemId.MECHANIC).rank).isZero
         assertThat(ryiah.getCalculatedTotalSkillOf(SkillItemId.MECHANIC)).isZero
         assertThat(ryiah.getSkillById(SkillItemId.MERCHANT).rank).isEqualTo(1)
         assertThat(ryiah.getCalculatedTotalSkillOf(SkillItemId.MERCHANT)).isEqualTo(1)
         assertThat(ryiah.getSkillById(SkillItemId.RANGER).rank).isZero
         assertThat(ryiah.getCalculatedTotalSkillOf(SkillItemId.RANGER)).isZero
+        assertThat(ryiah.getSkillById(SkillItemId.SCHOLAR).rank).isEqualTo(1)
+        assertThat(ryiah.getCalculatedTotalSkillOf(SkillItemId.SCHOLAR)).isEqualTo(1)
         assertThat(ryiah.getSkillById(SkillItemId.STEALTH).rank).isZero
         assertThat(ryiah.getCalculatedTotalSkillOf(SkillItemId.STEALTH)).isZero
         assertThat(ryiah.getSkillById(SkillItemId.THIEF).rank).isZero

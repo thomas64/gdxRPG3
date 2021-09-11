@@ -43,14 +43,14 @@ internal class FaeronTest : GameTest() {
         assertThat(faeron.getCalculatedTotalSkillOf(SkillItemId.DIPLOMAT)).isEqualTo(10)
         assertThat(faeron.getSkillById(SkillItemId.HEALER).rank).isZero
         assertThat(faeron.getCalculatedTotalSkillOf(SkillItemId.HEALER)).isZero
-        assertThat(faeron.getSkillById(SkillItemId.LOREMASTER).rank).isEqualTo(10)
-        assertThat(faeron.getCalculatedTotalSkillOf(SkillItemId.LOREMASTER)).isEqualTo(10)
         assertThat(faeron.getSkillById(SkillItemId.MECHANIC).rank).isZero
         assertThat(faeron.getCalculatedTotalSkillOf(SkillItemId.MECHANIC)).isZero
         assertThat(faeron.getSkillById(SkillItemId.MERCHANT).rank).isEqualTo(10)
         assertThat(faeron.getCalculatedTotalSkillOf(SkillItemId.MERCHANT)).isEqualTo(10)
         assertThat(faeron.getSkillById(SkillItemId.RANGER).rank).isEqualTo(10)
         assertThat(faeron.getCalculatedTotalSkillOf(SkillItemId.RANGER)).isEqualTo(10)
+        assertThat(faeron.getSkillById(SkillItemId.SCHOLAR).rank).isEqualTo(10)
+        assertThat(faeron.getCalculatedTotalSkillOf(SkillItemId.SCHOLAR)).isEqualTo(10)
         assertThat(faeron.getSkillById(SkillItemId.STEALTH).rank).isEqualTo(10)
         assertThat(faeron.getCalculatedTotalSkillOf(SkillItemId.STEALTH)).isEqualTo(10)
         assertThat(faeron.getSkillById(SkillItemId.THIEF).rank).isEqualTo(10)

@@ -43,14 +43,14 @@ internal class ValterTest : GameTest() {
         assertThat(valter.getCalculatedTotalSkillOf(SkillItemId.DIPLOMAT)).isZero
         assertThat(valter.getSkillById(SkillItemId.HEALER).rank).isZero
         assertThat(valter.getCalculatedTotalSkillOf(SkillItemId.HEALER)).isZero
-        assertThat(valter.getSkillById(SkillItemId.LOREMASTER).rank).isEqualTo(2)
-        assertThat(valter.getCalculatedTotalSkillOf(SkillItemId.LOREMASTER)).isEqualTo(2)
         assertThat(valter.getSkillById(SkillItemId.MECHANIC).rank).isEqualTo(2)
         assertThat(valter.getCalculatedTotalSkillOf(SkillItemId.MECHANIC)).isEqualTo(2)
         assertThat(valter.getSkillById(SkillItemId.MERCHANT).rank).isZero
         assertThat(valter.getCalculatedTotalSkillOf(SkillItemId.MERCHANT)).isZero
         assertThat(valter.getSkillById(SkillItemId.RANGER).rank).isZero
         assertThat(valter.getCalculatedTotalSkillOf(SkillItemId.RANGER)).isZero
+        assertThat(valter.getSkillById(SkillItemId.SCHOLAR).rank).isEqualTo(2)
+        assertThat(valter.getCalculatedTotalSkillOf(SkillItemId.SCHOLAR)).isEqualTo(2)
         assertThat(valter.getSkillById(SkillItemId.STEALTH).rank).isZero
         assertThat(valter.getCalculatedTotalSkillOf(SkillItemId.STEALTH)).isZero
         assertThat(valter.getSkillById(SkillItemId.THIEF).rank).isZero

@@ -51,8 +51,8 @@ class PersonalityTooltip : BaseTooltip() {
     private fun updateDescription(personalityItem: PersonalityItem) {
         window.clear()
 
-        val totalLoremaster = InventoryUtils.getSelectedHero().getCalculatedTotalSkillOf(SkillItemId.LOREMASTER)
-        val description = personalityItem.getDescription(totalLoremaster)
+        val totalScholar = InventoryUtils.getSelectedHero().getCalculatedTotalSkillOf(SkillItemId.SCHOLAR)
+        val description = personalityItem.getDescription(totalScholar)
         val labelStyle = LabelStyle(BitmapFont(), Color.WHITE)
         val label = Label(description, labelStyle)
         window.add(label)

@@ -43,14 +43,14 @@ internal class DuilioTest : GameTest() {
         assertThat(duilio.getCalculatedTotalSkillOf(SkillItemId.DIPLOMAT)).isEqualTo(10)
         assertThat(duilio.getSkillById(SkillItemId.HEALER).rank).isZero
         assertThat(duilio.getCalculatedTotalSkillOf(SkillItemId.HEALER)).isZero
-        assertThat(duilio.getSkillById(SkillItemId.LOREMASTER).rank).isEqualTo(5)
-        assertThat(duilio.getCalculatedTotalSkillOf(SkillItemId.LOREMASTER)).isEqualTo(5)
         assertThat(duilio.getSkillById(SkillItemId.MECHANIC).rank).isZero
         assertThat(duilio.getCalculatedTotalSkillOf(SkillItemId.MECHANIC)).isZero
         assertThat(duilio.getSkillById(SkillItemId.MERCHANT).rank).isEqualTo(5)
         assertThat(duilio.getCalculatedTotalSkillOf(SkillItemId.MERCHANT)).isEqualTo(5)
         assertThat(duilio.getSkillById(SkillItemId.RANGER).rank).isEqualTo(5)
         assertThat(duilio.getCalculatedTotalSkillOf(SkillItemId.RANGER)).isEqualTo(5)
+        assertThat(duilio.getSkillById(SkillItemId.SCHOLAR).rank).isEqualTo(5)
+        assertThat(duilio.getCalculatedTotalSkillOf(SkillItemId.SCHOLAR)).isEqualTo(5)
         assertThat(duilio.getSkillById(SkillItemId.STEALTH).rank).isEqualTo(5)
         assertThat(duilio.getCalculatedTotalSkillOf(SkillItemId.STEALTH)).isZero
         assertThat(duilio.getSkillById(SkillItemId.THIEF).rank).isEqualTo(5)

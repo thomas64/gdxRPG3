@@ -44,9 +44,9 @@ class InventoryItem(
     private val alchemist: Int = 0,
     private val diplomat: Int = 0,
     private val healer: Int = 0,
-    private val loremaster: Int = 0,
     private val mechanic: Int = 0,
     private val ranger: Int = 0,
+    private val scholar: Int = 0,
     private val stealth: Int = 0,
     private val thief: Int = 0,
     private val troubadour: Int = 0,
@@ -70,7 +70,7 @@ class InventoryItem(
             minIntelligence, minWillpower, minDexterity, minStrength,
             movepoints, baseHit, damage, protection, defense, spellBattery, transformation,
             intelligence, willpower, dexterity, strength, agility, endurance,
-            alchemist, diplomat, healer, loremaster, mechanic, ranger, stealth, thief, troubadour, warrior, wizard,
+            alchemist, diplomat, healer, mechanic, ranger, scholar, stealth, thief, troubadour, warrior, wizard,
             cheatDeath, quickSwitch, spellBoost)
         itemCopy.id = id
         itemCopy.amount = amount
@@ -116,8 +116,8 @@ class InventoryItem(
             SkillItemId.ALCHEMIST -> alchemist
             SkillItemId.DIPLOMAT -> diplomat
             SkillItemId.HEALER -> healer
-            SkillItemId.LOREMASTER -> loremaster
             SkillItemId.MECHANIC -> mechanic
+            SkillItemId.SCHOLAR -> scholar
             SkillItemId.STEALTH -> stealth
             SkillItemId.RANGER -> ranger
             SkillItemId.THIEF -> thief

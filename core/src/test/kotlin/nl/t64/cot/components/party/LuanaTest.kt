@@ -43,14 +43,14 @@ internal class LuanaTest : GameTest() {
         assertThat(luana.getCalculatedTotalSkillOf(SkillItemId.DIPLOMAT)).isZero
         assertThat(luana.getSkillById(SkillItemId.HEALER).rank).isZero
         assertThat(luana.getCalculatedTotalSkillOf(SkillItemId.HEALER)).isZero
-        assertThat(luana.getSkillById(SkillItemId.LOREMASTER).rank).isZero
-        assertThat(luana.getCalculatedTotalSkillOf(SkillItemId.LOREMASTER)).isZero
         assertThat(luana.getSkillById(SkillItemId.MECHANIC).rank).isEqualTo(1)
         assertThat(luana.getCalculatedTotalSkillOf(SkillItemId.MECHANIC)).isEqualTo(1)
         assertThat(luana.getSkillById(SkillItemId.MERCHANT).rank).isZero
         assertThat(luana.getCalculatedTotalSkillOf(SkillItemId.MERCHANT)).isZero
         assertThat(luana.getSkillById(SkillItemId.RANGER).rank).isZero
         assertThat(luana.getCalculatedTotalSkillOf(SkillItemId.RANGER)).isZero
+        assertThat(luana.getSkillById(SkillItemId.SCHOLAR).rank).isZero
+        assertThat(luana.getCalculatedTotalSkillOf(SkillItemId.SCHOLAR)).isZero
         assertThat(luana.getSkillById(SkillItemId.STEALTH).rank).isEqualTo(3)
         assertThat(luana.getCalculatedTotalSkillOf(SkillItemId.STEALTH)).isEqualTo(3)
         assertThat(luana.getSkillById(SkillItemId.THIEF).rank).isEqualTo(3)

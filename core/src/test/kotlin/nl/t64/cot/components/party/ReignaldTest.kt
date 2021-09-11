@@ -43,14 +43,14 @@ internal class ReignaldTest : GameTest() {
         assertThat(reignald.getCalculatedTotalSkillOf(SkillItemId.DIPLOMAT)).isZero
         assertThat(reignald.getSkillById(SkillItemId.HEALER).rank).isZero
         assertThat(reignald.getCalculatedTotalSkillOf(SkillItemId.HEALER)).isZero
-        assertThat(reignald.getSkillById(SkillItemId.LOREMASTER).rank).isZero
-        assertThat(reignald.getCalculatedTotalSkillOf(SkillItemId.LOREMASTER)).isZero
         assertThat(reignald.getSkillById(SkillItemId.MECHANIC).rank).isZero
         assertThat(reignald.getCalculatedTotalSkillOf(SkillItemId.MECHANIC)).isZero
         assertThat(reignald.getSkillById(SkillItemId.MERCHANT).rank).isZero
         assertThat(reignald.getCalculatedTotalSkillOf(SkillItemId.MERCHANT)).isZero
         assertThat(reignald.getSkillById(SkillItemId.RANGER).rank).isZero
         assertThat(reignald.getCalculatedTotalSkillOf(SkillItemId.RANGER)).isZero
+        assertThat(reignald.getSkillById(SkillItemId.SCHOLAR).rank).isZero
+        assertThat(reignald.getCalculatedTotalSkillOf(SkillItemId.SCHOLAR)).isZero
         assertThat(reignald.getSkillById(SkillItemId.STEALTH).rank).isEqualTo(1)
         assertThat(reignald.getCalculatedTotalSkillOf(SkillItemId.STEALTH)).isZero
         assertThat(reignald.getSkillById(SkillItemId.THIEF).rank).isEqualTo(-1)

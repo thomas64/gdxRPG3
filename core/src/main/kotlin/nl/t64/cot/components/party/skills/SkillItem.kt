@@ -15,17 +15,17 @@ abstract class SkillItem(
 ) : PersonalityItem {
     var bonus: Int = 0
 
-    override fun getDescription(totalLoremaster: Int): String {
+    override fun getDescription(totalScholar: Int): String {
         return (getDescription() + System.lineSeparator() + System.lineSeparator()
                 + "A trainer is needed to upgrade a skill." + System.lineSeparator()
-                + getNeededXpForNextLevel(totalLoremaster) + System.lineSeparator()
+                + getNeededXpForNextLevel(totalScholar) + System.lineSeparator()
                 + getNeededGoldForNextLevel())
     }
 
     abstract fun getDescription(): String
 
-    private fun getNeededXpForNextLevel(totalLoremaster: Int): String {
-        val xpNeeded = getXpCostForNextLevel(totalLoremaster).toString().takeIf { it != "0" } ?: "Max"
+    private fun getNeededXpForNextLevel(totalScholar: Int): String {
+        val xpNeeded = getXpCostForNextLevel(totalScholar).toString().takeIf { it != "0" } ?: "Max"
         return "XP needed for next level: $xpNeeded"
     }
 
@@ -34,10 +34,10 @@ abstract class SkillItem(
         return "Gold needed for next level: $goldNeeded"
     }
 
-    fun getXpCostForNextLevel(totalLoremaster: Int): Int {
+    fun getXpCostForNextLevel(totalScholar: Int): Int {
         return when {
             rank >= MAXIMUM -> 0
-            else -> (getUpgradeFormula() - ((getUpgradeFormula() / 100) * totalLoremaster)).roundToInt()
+            else -> (getUpgradeFormula() - ((getUpgradeFormula() / 100f) * totalScholar)).roundToInt()
         }
     }
 
