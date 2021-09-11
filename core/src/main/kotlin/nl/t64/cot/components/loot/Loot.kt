@@ -1,5 +1,9 @@
 package nl.t64.cot.components.loot
 
+import nl.t64.cot.components.party.inventory.InventoryDatabase
+import nl.t64.cot.components.party.inventory.InventoryGroup
+import kotlin.math.roundToInt
+
 
 private const val BONUS_PREFIX = "bonus_"
 
@@ -50,8 +54,16 @@ class Loot(
     fun isXpGained(): Boolean =
         xp == 0
 
+    fun handleRanger(totalRanger: Int) {
+        content
+            .map { InventoryDatabase.createInventoryItem(it.key, it.value) }
+            .filter { it.group == InventoryGroup.RESOURCE }
+            .map { Pair(it.id, (it.amount + ((it.amount / 100f) * (totalRanger * 2f))).roundToInt()) }
+            .forEach { content[it.first] = it.second }
+    }
+
     fun handleBonus() {
-        content.entries
+        content
             .filter { it.key.startsWith(BONUS_PREFIX) }
             .forEach { handleBonus(it.key, it.value) }
         removeBonus()

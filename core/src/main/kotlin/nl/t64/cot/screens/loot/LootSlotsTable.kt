@@ -75,7 +75,7 @@ class LootSlotsTable(
     }
 
     private fun fillLootInventoryContainer() {
-        loot.content.entries
+        loot.content
             .map { createInventoryItem(it) }
             .forEach { inventory.autoSetItem(it) }
     }

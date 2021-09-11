@@ -94,7 +94,7 @@ class InventoryContainer(numberOfSlots: Int = NUMBER_OF_SLOTS) {
         return if (items.isEmpty()) {
             false
         } else {
-            items.entries.all { hasEnoughOfItem(it.key, it.value) }
+            items.all { hasEnoughOfItem(it.key, it.value) }
         }
     }
 

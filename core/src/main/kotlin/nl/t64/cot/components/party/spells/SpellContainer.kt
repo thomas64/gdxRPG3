@@ -9,7 +9,7 @@ class SpellContainer() {
 
     @JsonCreator
     constructor(startingSpells: Map<String, Int>) : this() {
-        startingSpells.entries
+        startingSpells
             .map { SpellDatabase.createSpellItem(it.key, it.value) }
             .forEach { this.spells[it.id] = it }
     }

@@ -125,7 +125,7 @@ internal class QuestTest : GameTest() {
 //        quest0005.handleCheckIfAcceptedInventory(
 //            "1", "xxx", { assertThat(it).isNull() }, { assertThat(it).isEqualTo("xxx") })
 //
-//        val targetId = quest0005.tasks["1"]!!.target.entries.iterator().next().key
+//        val targetId = quest0005.tasks["1"]!!.target.iterator().next().key
 //        val targetItem = InventoryDatabase.createInventoryItem(targetId)
 //        inventory.autoSetItem(targetItem)
 //

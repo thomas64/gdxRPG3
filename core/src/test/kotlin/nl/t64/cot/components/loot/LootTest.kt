@@ -22,7 +22,7 @@ internal class LootTest : GameTest() {
         val expected = mapOf(Pair("gemstone", 1))
         assertThat(sparkle.isTaken()).isFalse
         assertThat(sparkle.content).hasSize(1)
-        val (key, value) = expected.entries.iterator().next()
+        val (key, value) = expected.iterator().next()
         assertThat(sparkle.content).containsOnly(entry(key, value))
     }
 
@@ -34,7 +34,7 @@ internal class LootTest : GameTest() {
         assertThat(chest.isTrapped()).isFalse
         assertThat(chest.isLocked()).isFalse
         assertThat(chest.content).hasSize(1)
-        val (key, value) = expected.entries.iterator().next()
+        val (key, value) = expected.iterator().next()
         assertThat(chest.content).containsOnly(entry(key, value))
     }
 

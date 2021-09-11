@@ -64,7 +64,7 @@ class QuestTask(
     }
 
     private fun getTargetEntry(): Map.Entry<String, Int> {
-        return target.entries.iterator().next()
+        return target.iterator().next()
     }
 
 }
