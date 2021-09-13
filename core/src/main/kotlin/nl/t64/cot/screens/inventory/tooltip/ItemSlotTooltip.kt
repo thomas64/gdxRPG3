@@ -143,6 +143,9 @@ open class ItemSlotTooltip : BaseTooltip() {
         val descriptionList = hoveredImage.getDualDescription(equippedImage, totalMerchant).toMutableList()
         removeLeftUnnecessaryAttributes(descriptionList)
         descriptionList.forEach { addToTable(hoveredTable, it, createLeftLabelStyle(it)) }
+        if (equippedImage.inventoryItem.description.isNotEmpty() && hoveredImage.inventoryItem.description.isEmpty()) {
+            hoveredTable.add(createLabel(EMPTY_ROW, Color.WHITE)).row()
+        }
         addPossibleDescription(hoveredImage, hoveredTable)
         return hoveredTable
     }
@@ -157,6 +160,9 @@ open class ItemSlotTooltip : BaseTooltip() {
         val descriptionList = equippedImage.getDualDescription(hoveredImage, totalMerchant).toMutableList()
         removeRightUnnecessaryAttributes(descriptionList)
         descriptionList.forEach { addToTable(equippedTable, it, createRightLabelStyle(it)) }
+        if (equippedImage.inventoryItem.description.isEmpty() && hoveredImage.inventoryItem.description.isNotEmpty()) {
+            equippedTable.add(createLabel(EMPTY_ROW, Color.WHITE)).row()
+        }
         addPossibleDescription(equippedImage, equippedTable)
         return equippedTable
     }
