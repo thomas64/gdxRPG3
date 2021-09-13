@@ -22,7 +22,10 @@ enum class CalcAttributeId(override val title: String) : SuperEnum {
 
     BASE_HIT("Base Hit") {
         override fun getDescription(): String {
-            return "ToDo Base Hit"
+            return """
+                Defines the change-to-hit an enemy with physical weapons in combat.
+                $title is that of the weapon itself clean with no modifiers.
+                Total Hit is modified with Warrior skill and current weapon skill.""".trimIndent()
         }
     },
 
@@ -46,13 +49,17 @@ enum class CalcAttributeId(override val title: String) : SuperEnum {
 
     DEFENSE("Defense") {
         override fun getDescription(): String {
-            return "ToDo Defense"
+            return """
+                Increases the possibility to block an enemy's
+                attack with physical weapons in combat.""".trimIndent()
         }
     },
 
     SPELL_BATTERY("Spell Battery") {
         override fun getDescription(): String {
-            return "ToDo Spell Battery"
+            return """
+                When casting magic spells,
+                $title is used instead of Stamina.""".trimIndent()
         }
     },
 
@@ -66,6 +73,9 @@ enum class CalcAttributeId(override val title: String) : SuperEnum {
 
 }
 
-fun String.toCalcAttributeId(): CalcAttributeId? {
-    return CalcAttributeId.values().firstOrNull { this.lowercase().contains(it.title.lowercase()) }
+fun String.toCalcAttributeId(): CalcAttributeId {
+    return when {
+        this.lowercase().contains("hit") -> CalcAttributeId.BASE_HIT
+        else -> CalcAttributeId.values().first { this.lowercase().contains(it.title.lowercase()) }
+    }
 }

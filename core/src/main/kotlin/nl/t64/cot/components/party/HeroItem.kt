@@ -248,13 +248,27 @@ class HeroItem(
             .takeIf { it > 0f } ?: 1
     }
 
+    fun getCalculatedTotalHit(): Int {
+        // todo, is nu alleen nog maar voor hand to hand wapens.
+        return inventory.getWeaponSkill()
+            ?.takeIf { it.isHandToHandWeaponSkill() }
+            ?.let { getCalculatedTotalHit(it) }
+            ?: 0
+    }
+
     fun getCalculatedTotalDamage(): Int {
         // todo, is nu alleen nog maar voor hand to hand wapens.
         return inventory.getWeaponSkill()
             ?.takeIf { it.isHandToHandWeaponSkill() }
             ?.let { getCalculatedTotalDamage(it) }
             ?: 0
+    }
 
+    private fun getCalculatedTotalHit(weaponSkill: SkillItemId): Int {
+        return (getTotalCalcOf(CalcAttributeId.BASE_HIT)
+                + ((47f - (getTotalCalcOf(CalcAttributeId.BASE_HIT) / 2f))
+                * ((getCalculatedTotalSkillOf(weaponSkill) + getCalculatedTotalSkillOf(SkillItemId.WARRIOR)) / 20f))
+                ).roundToInt()
     }
 
     private fun getCalculatedTotalDamage(weaponSkill: SkillItemId): Int {

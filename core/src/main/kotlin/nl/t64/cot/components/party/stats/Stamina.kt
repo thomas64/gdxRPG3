@@ -8,7 +8,11 @@ class Stamina(rank: Int = 0) : StatItem(
     StatItemId.STAMINA, StatItemId.STAMINA.title, 90, 0.04f, rank, variable = rank
 ) {
     override fun getDescription(): String {
-        return "Tekst en uitleg over $name."
+        return """
+            Affects movepoints in battle and is used by magic spells
+            and some skill actions. $name is also lost when 
+            taking damage from attacks. When $name hits zero,
+            your character will experience combat penalties.""".trimIndent()
     }
 
     override fun doUpgrade() {

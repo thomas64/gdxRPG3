@@ -7,6 +7,6 @@ class Diplomat(rank: Int = 0) : SkillItem(
     override fun getDescription(): String {
         return """
             Allows for additional conversation responses
-            with possibly more favorable outcomes.""".trimMargin()
+            with possibly more favorable outcomes.""".trimIndent()
     }
 }

@@ -6,6 +6,7 @@ class Willpower(rank: Int = 0) : StatItem(
     StatItemId.WILLPOWER, StatItemId.WILLPOWER.title, 30, 0.12f, rank, bonus = 0
 ) {
     override fun getDescription(): String {
-        return "Tekst en uitleg over $name."
+        return """
+            Improves defenses against enemy magic spells.""".trimIndent()
     }
 }

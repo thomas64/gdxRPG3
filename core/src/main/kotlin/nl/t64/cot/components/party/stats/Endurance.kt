@@ -6,7 +6,10 @@ class Endurance(rank: Int = 0) : StatItem(
     StatItemId.ENDURANCE, StatItemId.ENDURANCE.title, 40, 0.12f, rank, variable = rank
 ) {
     override fun getDescription(): String {
-        return "Tekst en uitleg over $name."
+        return """
+            Affects HP directly. Represents the real physical
+            damage your character can take before dying.
+            $name also affects turn speed.""".trimIndent()
     }
 
     override fun doUpgrade() {

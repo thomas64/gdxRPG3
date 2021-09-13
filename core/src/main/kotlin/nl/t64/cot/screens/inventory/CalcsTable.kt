@@ -54,7 +54,7 @@ internal class CalcsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
         table.add("").row()
 
         table.add(Label("Total Hit", createLabelStyle()))
-        table.add("?")
+        table.add(selectedHero.getCalculatedTotalHit().toString() + "%")
         table.add("").row()
 
         table.add(Label("Weapon " + CalcAttributeId.DAMAGE.title, createLabelStyle()))
@@ -99,9 +99,7 @@ internal class CalcsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
     private fun getPersonalityItemForDescriptionOnly(child: Label): PersonalityItem {
         return object : PersonalityItem {
             override fun getDescription(totalScholar: Int): String {
-                return child.text.toString().toCalcAttributeId()
-                    ?.getDescription()
-                    ?: "ToDo from CalcsTable"
+                return child.text.toString().toCalcAttributeId().getDescription()
             }
         }
     }
