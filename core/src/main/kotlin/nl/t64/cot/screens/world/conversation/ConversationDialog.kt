@@ -258,6 +258,7 @@ class ConversationDialog {
             ConversationCommand.HERO_JOIN -> tryToAddHeroToParty(nextId)
             ConversationCommand.HERO_DISMISS -> dismissHero(nextId)
             ConversationCommand.LOAD_SHOP -> loadShop(nextId)
+            ConversationCommand.LOAD_ACADEMY -> loadAcademy(nextId)
             ConversationCommand.SAVE_GAME -> saveGame(nextId)
             ConversationCommand.HEAL_LIFE -> healLife(nextId)
             ConversationCommand.RECEIVE_XP -> receiveXp(nextId)
@@ -297,6 +298,11 @@ class ConversationDialog {
     private fun loadShop(nextId: String) {
         graph.currentPhraseId = nextId
         conversationObservers.notifyLoadShop()                                      // ends conversation
+    }
+
+    private fun loadAcademy(nextId: String) {
+        graph.currentPhraseId = nextId
+        conversationObservers.notifyLoadAcademy()                                   // ends conversation
     }
 
     private fun saveGame(nextId: String) {

@@ -5,7 +5,7 @@ import nl.t64.cot.components.party.PersonalityItem
 import kotlin.math.roundToInt
 
 
-private val TRAINING_COSTS = listOf(20, 8, 12, 16, 20, 24, 28, 32, 36, 40, 0)
+private val TRAINING_COSTS = listOf(20, 8, 12, 16, 20, 24, 28, 32, 36, 40, 0) // todo, de laatste 0 weghalen zoals bij skillitem
 private const val MAXIMUM = 10
 
 /* todo: moeten alle stats en skills ipv in individuele classes in json komen net zoals spells?
@@ -52,7 +52,7 @@ class SpellItem(
 
     private fun getNeededXpForNextRank(totalScholar: Int): String {
         val xpNeeded = getXpCostForNextRank(totalScholar).toString().takeIf { it != "0" } ?: "Max"
-        return "XP needed for next rank: $xpNeeded"
+        return "'XP to Invest' needed for next rank: $xpNeeded"
     }
 
     private fun getNeededGoldForNextRank(): String {

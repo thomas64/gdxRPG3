@@ -1,5 +1,6 @@
 package nl.t64.cot.components.party
 
+import nl.t64.cot.Utils.gameData
 import nl.t64.cot.components.party.inventory.EquipContainer
 import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.components.party.inventory.InventoryItem
@@ -63,14 +64,21 @@ class HeroItem(
     }
 
     fun doUpgrade(statItem: StatItem, xpCost: Int) {
-        stats.doUpgrade(statItem, xpCost)
+        stats.takeXpToInvest(xpCost)
+        statItem.doUpgrade()
+    }
+
+    fun doUpgrade(skillItem: SkillItem, xpCost: Int, goldCost: Int) {
+        stats.takeXpToInvest(xpCost)
+        gameData.inventory.autoRemoveItem("gold", goldCost)
+        skillItem.doUpgrade()
     }
 
     val xpNeededForNextLevel: Int get() = stats.getXpNeededForNextLevel()
     val xpDeltaBetweenLevels: Int get() = stats.getXpDeltaBetweenLevels()
     val totalXp: Int get() = stats.totalXp
     val xpToInvest: Int get() = stats.xpToInvest
-    fun getLevel(): Int = stats.getLevel()
+    fun getLevel(): Int = stats.levelRank
     fun getAllHpStats(): Map<String, Int> = stats.getAllHpStats()
     fun getMaximumHp(): Int = stats.getMaximumHp()
     fun getCurrentHp(): Int = stats.getCurrentHp()

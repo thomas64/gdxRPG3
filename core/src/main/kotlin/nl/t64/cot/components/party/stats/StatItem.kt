@@ -16,7 +16,6 @@ abstract class StatItem(
 
     override fun getDescription(totalScholar: Int): String {
         return (getDescription() + System.lineSeparator() + System.lineSeparator()
-                + "No trainer is needed to upgrade a stat." + System.lineSeparator()
                 + getNeededXpForNextRank())
     }
 
@@ -24,7 +23,7 @@ abstract class StatItem(
 
     private fun getNeededXpForNextRank(): String {
         val xpNeeded = getXpCostForNextRank().toString().takeIf { it != "0" } ?: "Max"
-        return "XP needed for next rank: $xpNeeded"
+        return "'XP to Invest' needed for next rank: $xpNeeded"
     }
 
     fun getXpCostForNextRank(): Int {

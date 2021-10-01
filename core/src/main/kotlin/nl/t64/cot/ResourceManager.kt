@@ -17,6 +17,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader
 import com.badlogic.gdx.maps.tiled.TiledMap
 import com.badlogic.gdx.maps.tiled.TmxMapLoader
 import com.badlogic.gdx.utils.Json
+import com.badlogic.gdx.utils.OrderedMap
 import ktx.assets.getAsset
 import ktx.assets.loadOnDemand
 import ktx.assets.setLoader
@@ -29,6 +30,7 @@ private const val FILE_LIST = "_files.txt"
 private const val SPRITE_CONFIGS = "configs/sprites/"
 private const val FILE_LIST_SPRITE_CONFIGS = SPRITE_CONFIGS + FILE_LIST
 private const val SHOP_CONFIGS = "configs/shops/"
+private const val ACADEMY_CONFIGS = "configs/academies/"
 private const val CONFIG_SUFFIX = ".json"
 private const val ATLAS_FILES = "sprites/"
 private const val FILE_LIST_ATLAS_FILES = ATLAS_FILES + FILE_LIST
@@ -119,6 +121,11 @@ class ResourceManager {
     fun getShopInventory(shopId: String): List<String> {
         val fullFilenamePath = SHOP_CONFIGS + shopId + CONFIG_SUFFIX
         return json.fromJson(Gdx.files.internal(fullFilenamePath))
+    }
+
+    fun getAcademyInventory(academyId: String): GdxMap<String, Int> {
+        val fullFileNamePath = ACADEMY_CONFIGS + academyId + CONFIG_SUFFIX
+        return json.fromJson(OrderedMap::class.java, Int::class.java, Gdx.files.internal(fullFileNamePath)) as OrderedMap<String, Int>
     }
 
 }

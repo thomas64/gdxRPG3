@@ -6,6 +6,7 @@ enum class ConversationCommand {
     HERO_JOIN,
     HERO_DISMISS,
     LOAD_SHOP,
+    LOAD_ACADEMY,
     SAVE_GAME,
     HEAL_LIFE,
     RECEIVE_XP,

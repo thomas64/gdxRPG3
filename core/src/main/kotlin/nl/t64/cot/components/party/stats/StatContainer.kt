@@ -27,15 +27,14 @@ class StatContainer() {
     fun getXpDeltaBetweenLevels(): Int = level.getXpDeltaBetweenLevels()
     val totalXp: Int get() = level.totalXp
     val xpToInvest: Int get() = level.xpToInvest
-    fun getLevel(): Int = level.rank
+    val levelRank: Int get() = level.rank
 
     fun hasEnoughXpFor(xpCost: Int): Boolean {
         return xpToInvest >= xpCost
     }
 
-    fun doUpgrade(statItem: StatItem, xpCost: Int) {
+    fun takeXpToInvest(xpCost: Int) {
         level.takeXpToInvest(xpCost)
-        statItem.doUpgrade()
     }
 
     fun gainXp(amount: Int, hasGainedLevel: (Boolean) -> Unit) {

@@ -1,0 +1,8 @@
+{
+  "diplomat": 1,
+  "healer"  : 4,
+  "stealth" : 2,
+  "wizard"  : 4,
+  "sword"   : 3,
+  "thrown"  : 2
+}

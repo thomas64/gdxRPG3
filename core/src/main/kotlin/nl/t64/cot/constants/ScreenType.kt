@@ -2,6 +2,7 @@ package nl.t64.cot.constants
 
 import com.badlogic.gdx.Screen
 import nl.t64.cot.screens.LoadScreen
+import nl.t64.cot.screens.academy.AcademyScreen
 import nl.t64.cot.screens.battle.BattleScreen
 import nl.t64.cot.screens.cutscene.SceneDeath
 import nl.t64.cot.screens.cutscene.SceneIntro
@@ -31,6 +32,7 @@ enum class ScreenType(val screenClass: Class<out Screen>) {
     INVENTORY(InventoryScreen::class.java),
     QUEST_LOG(QuestLogScreen::class.java),
     SHOP(ShopScreen::class.java),
+    ACADEMY(AcademyScreen::class.java),
     FIND(FindScreen::class.java),
     REWARD(RewardScreen::class.java),
     RECEIVE(ReceiveScreen::class.java),

@@ -15,7 +15,7 @@ import nl.t64.cot.screens.inventory.itemslot.ItemSlot
 
 private const val DELAY = 0.5f
 
-class PersonalityTooltip : BaseTooltip() {
+open class PersonalityTooltip : BaseTooltip() {
 
     private var x: Float = 0f
     private lateinit var y: () -> Float
@@ -52,12 +52,16 @@ class PersonalityTooltip : BaseTooltip() {
         window.clear()
 
         val totalScholar = InventoryUtils.getSelectedHero().getCalculatedTotalSkillOf(SkillItemId.SCHOLAR)
-        val description = personalityItem.getDescription(totalScholar)
+        val description = getDescription(personalityItem, totalScholar)
         val labelStyle = LabelStyle(BitmapFont(), Color.WHITE)
         val label = Label(description, labelStyle)
         window.add(label)
 
         window.pack()
+    }
+
+    open fun getDescription(personalityItem: PersonalityItem, totalScholar: Int): String {
+        return personalityItem.getDescription(totalScholar)
     }
 
 }

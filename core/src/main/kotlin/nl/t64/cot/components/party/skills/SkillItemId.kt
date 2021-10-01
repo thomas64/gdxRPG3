@@ -1,31 +1,32 @@
 package nl.t64.cot.components.party.skills
 
 import nl.t64.cot.components.party.SuperEnum
+import kotlin.reflect.KClass
 
 
-enum class SkillItemId(override val title: String) : SuperEnum {
+enum class SkillItemId(override val title: String, val skillClass: KClass<out SkillItem>) : SuperEnum {
 
-    ALCHEMIST("Alchemist"),
-    DIPLOMAT("Diplomat"),
-    HEALER("Healer"),
-    MECHANIC("Mechanic"),
-    MERCHANT("Merchant"),
-    RANGER("Ranger"),
-    SCHOLAR("Scholar"),
-    STEALTH("Stealth"),
-    THIEF("Thief"),
-    TROUBADOUR("Troubadour"),
-    WARRIOR("Warrior"),
-    WIZARD("Wizard"),
+    ALCHEMIST("Alchemist", Alchemist::class),
+    DIPLOMAT("Diplomat", Diplomat::class),
+    HEALER("Healer", Healer::class),
+    MECHANIC("Mechanic", Mechanic::class),
+    MERCHANT("Merchant", Merchant::class),
+    RANGER("Ranger", Ranger::class),
+    SCHOLAR("Scholar", Scholar::class),
+    STEALTH("Stealth", Stealth::class),
+    THIEF("Thief", Thief::class),
+    TROUBADOUR("Troubadour", Troubadour::class),
+    WARRIOR("Warrior", Warrior::class),
+    WIZARD("Wizard", Wizard::class),
 
-    HAFTED("Hafted"),
-    MISSILE("Missile"),
-    POLE("Pole"),
-    SHIELD("Shield"),
-    SWORD("Sword"),
-    THROWN("Thrown"),
+    HAFTED("Hafted", Hafted::class),
+    MISSILE("Missile", Missile::class),
+    POLE("Pole", Pole::class),
+    SHIELD("Shield", Shield::class),
+    SWORD("Sword", Sword::class),
+    THROWN("Thrown", Thrown::class),
 
-    BITE("Bite");
+    BITE("Bite", Bite::class);
 
     fun isHandToHandWeaponSkill(): Boolean {
         return when (this) {
@@ -35,6 +36,10 @@ enum class SkillItemId(override val title: String) : SuperEnum {
         }
     }
 
+}
+
+fun String.toSkillItemClass(): KClass<SkillItem> {
+    return this.toSkillItemId().skillClass as KClass<SkillItem>
 }
 
 fun String.toSkillItemId(): SkillItemId {

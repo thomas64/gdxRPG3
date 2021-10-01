@@ -26,6 +26,6 @@ class EnemyItem(
         return enemyCopy
     }
 
-    fun getLevel(): Int = stats.getLevel()
+    fun getLevel(): Int = stats.levelRank
 
 }

@@ -43,7 +43,7 @@ internal class StatsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
         } else if (selectedHero.hasEnoughXpFor(xpCost)) {
             DialogQuestion({ upgradeStat(statItem, xpCost) }, """
                 Are you sure you wish to train 
-                $statName for $xpCost 'XP to Invest'?""".trimIndent())
+                $statName for $xpCost XP?""".trimIndent())
                 .show(table.stage, AudioEvent.SE_CONVERSATION_NEXT, 0)
         } else {
             MessageDialog("You need $xpCost 'XP to Invest' to train $statName.")

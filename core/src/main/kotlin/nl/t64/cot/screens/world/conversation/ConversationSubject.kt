@@ -35,6 +35,10 @@ class ConversationSubject {
         observers.forEach { it.onNotifyLoadShop() }
     }
 
+    fun notifyLoadAcademy() {
+        observers.forEach { it.onNotifyLoadAcademy() }
+    }
+
     fun notifyShowRewardDialog(reward: Loot, levelUpMessage: String?) {
         observers.forEach { it.onNotifyShowRewardDialog(reward, levelUpMessage) }
     }

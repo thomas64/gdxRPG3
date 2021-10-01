@@ -133,14 +133,19 @@
       "1": {"text": ["[Explanation about warp crystals.]"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "fairy_teacher"     : {
+  "fairy_school" : {
     "phrases": {
       "1": {"text": ["[Here you can learn spells.]"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "fairy_trainer"     : {
+  "fairy_academy": {
     "phrases": {
-      "1": {"text": ["[Here you can learn skills.]"], "choices": [{"command": "EXIT"}]}
+      "1": {
+        "text": ["Young Mozes, would you like to train a skill?"], "choices": [
+          {"text": "Yes please. (Open academy)", "command": "LOAD_ACADEMY"},
+          {"text": "No thanks. (Leave conversation)", "command": "EXIT"}
+        ]
+      }
     }
   },
   "fairy_shop"        : {
@@ -148,7 +153,7 @@
       "1": {
         "text": ["Young Mozes, would you like to see my wares?"], "choices": [
           {"text": "Yes please. (Open shop)", "command": "LOAD_SHOP"},
-          {"text": "No thanks. (Leave Conversation)", "command": "EXIT"}
+          {"text": "No thanks. (Leave conversation)", "command": "EXIT"}
         ]
       }
     }
