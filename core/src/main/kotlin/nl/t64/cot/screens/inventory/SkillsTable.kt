@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane
-import nl.t64.cot.Utils.createTopBorder
+import nl.t64.cot.Utils
 import nl.t64.cot.components.party.skills.SkillItem
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.inventory.tooltip.PersonalityTooltip
@@ -31,8 +31,8 @@ internal class SkillsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
         table.defaults().height(ROW_HEIGHT)
         scrollPane = ScrollPane(table)
         container.add(scrollPane).height(CONTAINER_HEIGHT)
-        container.background = createTopBorder()
-        container.addListener(ListenerKeyVertical { updateIndex(it) })
+        container.background = Utils.createTopBorder()
+        container.addListener(ListenerKeyVertical { updateIndex(it, selectedHero.getAllSkillsAboveZero().size) })
     }
 
     override fun selectCurrentSlot() {
@@ -45,16 +45,6 @@ internal class SkillsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
     override fun fillRows() {
         val skillItemList = selectedHero.getAllSkillsAboveZero()
         skillItemList.indices.forEach { fillRow(skillItemList[it], it) }
-    }
-
-    private fun updateIndex(deltaIndex: Int) {
-        selectedIndex += deltaIndex
-        if (selectedIndex < 0) {
-            selectedIndex = selectedHero.getAllSkillsAboveZero().size - 1
-        } else if (selectedIndex >= selectedHero.getAllSkillsAboveZero().size) {
-            selectedIndex = 0
-        }
-        hasJustUpdated = true
     }
 
     private fun fillRow(skillItem: SkillItem, index: Int) {

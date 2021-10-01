@@ -9,11 +9,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Scaling
+import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.resourceManager
+import nl.t64.cot.audio.AudioCommand
+import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.components.party.HeroItem
-import nl.t64.cot.screens.inventory.InventoryUtils.getSelectedHero
-import nl.t64.cot.screens.inventory.InventoryUtils.setWindowDeselected
-import nl.t64.cot.screens.inventory.InventoryUtils.setWindowSelected
 import nl.t64.cot.screens.inventory.itemslot.ItemSlot
 import nl.t64.cot.screens.inventory.tooltip.BaseTooltip
 import nl.t64.cot.screens.inventory.tooltip.PersonalityTooltip
@@ -39,9 +39,9 @@ abstract class BaseTable(val tooltip: PersonalityTooltip) : WindowSelector {
     var hasJustUpdated = true
 
     override fun setKeyboardFocus(stage: Stage) {
-        selectedHero = getSelectedHero()
+        selectedHero = InventoryUtils.getSelectedHero()
         stage.keyboardFocus = table
-        setWindowSelected(container)
+        InventoryUtils.setWindowSelected(container)
     }
 
     override fun getCurrentSlot(): ItemSlot? {
@@ -54,7 +54,7 @@ abstract class BaseTable(val tooltip: PersonalityTooltip) : WindowSelector {
 
     override fun deselectCurrentSlot() {
         hideTooltip()
-        setWindowDeselected(container)
+        InventoryUtils.setWindowDeselected(container)
     }
 
     override fun selectCurrentSlot() {
@@ -66,8 +66,19 @@ abstract class BaseTable(val tooltip: PersonalityTooltip) : WindowSelector {
         tooltip.hide()
     }
 
+    fun updateIndex(deltaIndex: Int, size: Int) {
+        selectedIndex += deltaIndex
+        if (selectedIndex < 0) {
+            selectedIndex = size - 1
+        } else if (selectedIndex >= size) {
+            selectedIndex = 0
+        }
+        hasJustUpdated = true
+        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_CURSOR)
+    }
+
     fun update() {
-        selectedHero = getSelectedHero()
+        selectedHero = InventoryUtils.getSelectedHero()
         table.clear()
         fillRows()
     }

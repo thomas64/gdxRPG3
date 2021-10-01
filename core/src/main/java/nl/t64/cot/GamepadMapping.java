@@ -32,6 +32,9 @@ public class GamepadMapping extends ControllerMappings {
     private static final int RIGHT_BUTTON = 16;
     private static final int BOTTOM_BUTTON = 17;
 
+    private static final int TRIGGER_LEFT = 18;
+    private static final int TRIGGER_RIGHT = 19;
+
     final ControllerToInputAdapter controllerToInputAdapter;
 
     GamepadMapping() {
@@ -60,6 +63,10 @@ public class GamepadMapping extends ControllerMappings {
         defaultMapping.putMapping(new MappedInput(STICK_RIGHT, new ControllerButton(mapping.buttonRightStick)));
         defaultMapping.putMapping(new MappedInput(SHOULDER_LEFT, new ControllerButton(mapping.buttonL1)));
         defaultMapping.putMapping(new MappedInput(SHOULDER_RIGHT, new ControllerButton(mapping.buttonR1)));
+
+        defaultMapping.putMapping(new MappedInput(TRIGGER_LEFT, new ControllerButton(mapping.buttonL2)));
+        defaultMapping.putMapping(new MappedInput(TRIGGER_RIGHT, new ControllerButton(mapping.buttonR2)));
+
         defaultMapping.putMapping(new MappedInput(START_BUTTON, new ControllerButton(mapping.buttonStart)));
         defaultMapping.putMapping(new MappedInput(SELECT_BUTTON, new ControllerButton(mapping.buttonBack)));
         defaultMapping.putMapping(new MappedInput(TOP_BUTTON, new ControllerButton(mapping.buttonY)));
@@ -83,6 +90,10 @@ public class GamepadMapping extends ControllerMappings {
         addConfiguredInput(new ConfiguredInput(ConfiguredInput.Type.button, STICK_RIGHT));
         addConfiguredInput(new ConfiguredInput(ConfiguredInput.Type.button, SHOULDER_LEFT));
         addConfiguredInput(new ConfiguredInput(ConfiguredInput.Type.button, SHOULDER_RIGHT));
+
+        addConfiguredInput(new ConfiguredInput(ConfiguredInput.Type.button, TRIGGER_LEFT));
+        addConfiguredInput(new ConfiguredInput(ConfiguredInput.Type.button, TRIGGER_RIGHT));
+
         addConfiguredInput(new ConfiguredInput(ConfiguredInput.Type.button, START_BUTTON));
         addConfiguredInput(new ConfiguredInput(ConfiguredInput.Type.button, SELECT_BUTTON));
         addConfiguredInput(new ConfiguredInput(ConfiguredInput.Type.button, TOP_BUTTON));
@@ -105,6 +116,10 @@ public class GamepadMapping extends ControllerMappings {
         adapter.addButtonMapping(STICK_RIGHT, Constant.KEYCODE_R3);
         adapter.addButtonMapping(SHOULDER_LEFT, Constant.KEYCODE_L1);
         adapter.addButtonMapping(SHOULDER_RIGHT, Constant.KEYCODE_R1);
+
+        adapter.addButtonMapping(TRIGGER_LEFT, Constant.KEYCODE_L1);
+        adapter.addButtonMapping(TRIGGER_RIGHT, Constant.KEYCODE_R1);
+
         adapter.addButtonMapping(START_BUTTON, Constant.KEYCODE_START);
         adapter.addButtonMapping(SELECT_BUTTON, Constant.KEYCODE_SELECT);
         adapter.addButtonMapping(TOP_BUTTON, Constant.KEYCODE_TOP);

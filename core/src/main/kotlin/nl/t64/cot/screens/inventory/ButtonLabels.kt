@@ -73,9 +73,9 @@ open class ButtonLabels(private val stage: Stage) {
 
     open fun createBottomLeftText(): String? {
         return if (Utils.isGamepadConnected()) {
-            "[A] De/Equip      [Y] Dismiss hero      [Start] Sort inventory"
+            "[A] De/Equip/Upgrade      [Y] Dismiss hero      [Start] Sort inventory"
         } else {
-            "[A] De/Equip      [D] Dismiss hero      [Space] Sort inventory"
+            "[A] De/Equip/Upgrade      [D] Dismiss hero      [Space] Sort inventory"
         }
     }
 

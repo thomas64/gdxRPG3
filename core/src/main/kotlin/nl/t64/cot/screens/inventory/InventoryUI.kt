@@ -33,67 +33,38 @@ private const val TITLE_STATS = "   Stats"
 private const val TITLE_CALCS = "   Calcs"
 private const val TITLE_HEROES = "   Heroes"
 
-internal class InventoryUI private constructor(
+internal class InventoryUI(
     stage: Stage,
-    private val itemSlotTooltip: ItemSlotTooltip,
-    private val personalityTooltip: PersonalityTooltip,
-    private val spellsWindow: Window,
-    private val inventoryWindow: Window,
-    equipWindow: Window,
-    private val skillsWindow: Window,
-    private val statsWindow: Window,
-    private val calcsWindow: Window,
-    private val heroesWindow: Window,
-    private val spellsTable: SpellsTable,
-    inventorySlotsTable: InventorySlotsTable,
-    equipSlotsTables: EquipSlotsTables,
-    private val skillsTable: SkillsTable,
-    private val statsTable: StatsTable,
-    private val calcsTable: CalcsTable,
-    heroesTable: HeroesTable,
-    tableList: List<WindowSelector>,
-    selectedTableIndex: Int
+
+    private val itemSlotTooltip: ItemSlotTooltip = ItemSlotTooltip(),
+    private val personalityTooltip: PersonalityTooltip = PersonalityTooltip(),
+
+    private val spellsTable: SpellsTable = SpellsTable(personalityTooltip),
+    private val spellsWindow: Window = createDefaultWindow(TITLE_SPELLS, spellsTable.container),
+
+    inventorySlotsTable: InventorySlotsTable = InventorySlotsTable(itemSlotTooltip),
+    private val inventoryWindow: Window = createDefaultWindow(TITLE_GLOBAL, inventorySlotsTable.container),
+
+    equipSlotsTables: EquipSlotsTables = EquipSlotsTables(itemSlotTooltip),
+    equipWindow: Window = createDefaultWindow(TITLE_PERSONAL, equipSlotsTables.getCurrentEquipTable()),
+
+    private val skillsTable: SkillsTable = SkillsTable(personalityTooltip),
+    private val skillsWindow: Window = createDefaultWindow(TITLE_SKILLS, skillsTable.container),
+
+    private val statsTable: StatsTable = StatsTable(personalityTooltip),
+    private val statsWindow: Window = createDefaultWindow(TITLE_STATS, statsTable.container),
+
+    private val calcsTable: CalcsTable = CalcsTable(personalityTooltip),
+    private val calcsWindow: Window = createDefaultWindow(TITLE_CALCS, calcsTable.container),
+
+    heroesTable: HeroesTable = HeroesTable(),
+    private val heroesWindow: Window = createDefaultWindow(TITLE_HEROES, heroesTable.heroes),
+
+    tableList: List<WindowSelector> = listOf(calcsTable, statsTable, skillsTable,
+                                             equipSlotsTables, inventorySlotsTable, spellsTable),
+    selectedTableIndex: Int = 4
+
 ) : ScreenUI(equipWindow, equipSlotsTables, inventorySlotsTable, heroesTable, tableList, selectedTableIndex) {
-
-    companion object {
-        fun create(stage: Stage): InventoryUI {
-
-            val itemSlotTooltip = ItemSlotTooltip()
-            val personalityTooltip = PersonalityTooltip()
-
-            val spellsTable = SpellsTable(personalityTooltip)
-            val spellsWindow = createDefaultWindow(TITLE_SPELLS, spellsTable.container)
-
-            val inventorySlotsTable = InventorySlotsTable(itemSlotTooltip)
-            val inventoryWindow = createDefaultWindow(TITLE_GLOBAL, inventorySlotsTable.container)
-
-            val equipSlotsTables = EquipSlotsTables(itemSlotTooltip)
-            val equipWindow = createDefaultWindow(TITLE_PERSONAL, equipSlotsTables.getCurrentEquipTable())
-
-            val skillsTable = SkillsTable(personalityTooltip)
-            val skillsWindow = createDefaultWindow(TITLE_SKILLS, skillsTable.container)
-
-            val statsTable = StatsTable(personalityTooltip)
-            val statsWindow = createDefaultWindow(TITLE_STATS, statsTable.container)
-
-            val calcsTable = CalcsTable(personalityTooltip)
-            val calcsWindow = createDefaultWindow(TITLE_CALCS, calcsTable.container)
-
-            val heroesTable = HeroesTable()
-            val heroesWindow = createDefaultWindow(TITLE_HEROES, heroesTable.heroes)
-
-            val tableList = listOf(calcsTable, statsTable, skillsTable,
-                                   equipSlotsTables, inventorySlotsTable, spellsTable)
-            val selectedTableIndex = 4
-
-            return InventoryUI(stage, itemSlotTooltip, personalityTooltip,
-                               spellsWindow, inventoryWindow, equipWindow, skillsWindow,
-                               statsWindow, calcsWindow, heroesWindow,
-                               spellsTable, inventorySlotsTable, equipSlotsTables, skillsTable,
-                               statsTable, calcsTable, heroesTable,
-                               tableList, selectedTableIndex)
-        }
-    }
 
     init {
         setWindowPositions()

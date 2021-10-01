@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane
-import nl.t64.cot.Utils.createTopBorder
+import nl.t64.cot.Utils
 import nl.t64.cot.components.party.spells.SpellItem
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.inventory.tooltip.PersonalityTooltip
@@ -31,8 +31,8 @@ internal class SpellsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
         table.defaults().height(ROW_HEIGHT)
         scrollPane = ScrollPane(table)
         container.add(scrollPane).height(CONTAINER_HEIGHT)
-        container.background = createTopBorder()
-        container.addListener(ListenerKeyVertical { updateIndex(it) })
+        container.background = Utils.createTopBorder()
+        container.addListener(ListenerKeyVertical { updateIndex(it, selectedHero.getAllSpells().size) })
     }
 
     override fun selectCurrentSlot() {
@@ -47,16 +47,6 @@ internal class SpellsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
     override fun fillRows() {
         fillSchoolRow()
         fillSpellRows()
-    }
-
-    private fun updateIndex(deltaIndex: Int) {
-        selectedIndex += deltaIndex
-        if (selectedIndex < 0) {
-            selectedIndex = selectedHero.getAllSpells().size - 1
-        } else if (selectedIndex >= selectedHero.getAllSpells().size) {
-            selectedIndex = 0
-        }
-        hasJustUpdated = true
     }
 
     private fun fillSchoolRow() {

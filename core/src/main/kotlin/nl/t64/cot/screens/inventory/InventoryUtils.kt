@@ -15,15 +15,11 @@ object InventoryUtils {
     private var selectedHero: HeroItem? = null
 
     fun getSelectedHero(): HeroItem {
-        return selectedHero!!
-    }
-
-    fun getSelectedHeroId(): String {
         val party = gameData.party
         if (selectedHero == null || !party.containsExactlyEqualTo(selectedHero!!)) {
             selectedHero = party.getHero(0)
         }
-        return selectedHero!!.id
+        return selectedHero!!
     }
 
     fun selectPreviousHero() {

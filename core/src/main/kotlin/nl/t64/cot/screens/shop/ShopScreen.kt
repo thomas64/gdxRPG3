@@ -49,7 +49,7 @@ class ShopScreen : ParchmentScreen() {
                                              { toggleTooltip() },
                                              { toggleCompare() }))
 
-        shopUI = ShopUI.create(stage, npcId, shopId)
+        shopUI = ShopUI(stage, npcId, shopId)
         ShopButtonLabels(stage).create()
     }
 

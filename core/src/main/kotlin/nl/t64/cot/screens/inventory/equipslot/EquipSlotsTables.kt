@@ -62,7 +62,7 @@ class EquipSlotsTables(private val tooltip: ItemSlotTooltip) : WindowSelector {
     }
 
     fun getCurrentEquipSlots(): EquipSlotsTable =
-        equipSlots[InventoryUtils.getSelectedHeroId()]!!
+        equipSlots[InventoryUtils.getSelectedHero().id]!!
 
     private fun fillEquipSlotsTables() {
         gameData.party.getAllHeroes().forEach { equipSlots[it.id] = EquipSlotsTable(it, tooltip) }

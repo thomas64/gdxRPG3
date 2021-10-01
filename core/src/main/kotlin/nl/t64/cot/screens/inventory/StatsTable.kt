@@ -3,7 +3,7 @@ package nl.t64.cot.screens.inventory
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
-import nl.t64.cot.Utils.createTopBorder
+import nl.t64.cot.Utils
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.components.party.stats.StatItem
 import nl.t64.cot.constants.Constant
@@ -24,8 +24,8 @@ internal class StatsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
         table.columnDefaults(2).width(THIRD_COLUMN_WIDTH)
 
         container.add(table)
-        container.background = createTopBorder()
-        container.addListener(ListenerKeyVertical { updateIndex(it) })
+        container.background = Utils.createTopBorder()
+        container.addListener(ListenerKeyVertical { updateIndex(it, selectedHero.getAllStats().size) })
     }
 
     override fun fillRows() {
@@ -54,18 +54,6 @@ internal class StatsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
     private fun upgradeStat(statItem: StatItem, xpCost: Int) {
         selectedHero.doUpgrade(statItem, xpCost)
         tooltip.hide()
-    }
-
-    private fun updateIndex(deltaIndex: Int) {
-        selectedIndex += deltaIndex
-        if (selectedIndex < 0) {
-            selectedIndex = selectedHero.getAllStats().size - 1
-        } else {
-            if (selectedIndex >= selectedHero.getAllStats().size) {
-                selectedIndex = 0
-            }
-        }
-        hasJustUpdated = true
     }
 
     private fun fillStats() {

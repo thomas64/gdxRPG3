@@ -3,7 +3,7 @@ package nl.t64.cot.screens.inventory
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
-import nl.t64.cot.Utils.createTopBorder
+import nl.t64.cot.Utils
 import nl.t64.cot.components.party.CalcAttributeId
 import nl.t64.cot.components.party.PersonalityItem
 import nl.t64.cot.components.party.inventory.InventoryGroup
@@ -24,20 +24,8 @@ internal class CalcsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
         table.columnDefaults(2).width(THIRD_COLUMN_WIDTH)
 
         container.add(table)
-        container.background = createTopBorder()
-        container.addListener(ListenerKeyVertical { updateIndex(it) })
-    }
-
-    private fun updateIndex(deltaIndex: Int) {
-        selectedIndex += deltaIndex
-        if (selectedIndex < 0) {
-            selectedIndex = table.rows - 1
-        } else {
-            if (selectedIndex >= table.rows) {
-                selectedIndex = 0
-            }
-        }
-        hasJustUpdated = true
+        container.background = Utils.createTopBorder()
+        container.addListener(ListenerKeyVertical { updateIndex(it, table.rows) })
     }
 
     override fun fillRows() {

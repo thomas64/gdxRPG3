@@ -23,59 +23,40 @@ private const val MERCHANT_WINDOW_POSITION_X = 63f
 private const val MERCHANT_WINDOW_POSITION_Y = 50f
 private const val HEROES_WINDOW_POSITION_X = 63f
 private const val HEROES_WINDOW_POSITION_Y = 834f
+
 private const val TITLE_PERSONAL = "   Equipment"
 private const val TITLE_GLOBAL = "   Inventory"
 private const val TITLE_SHOP = "   Shop"
 private const val TITLE_MERCHANT = "   Merchant"
 private const val TITLE_HEROES = "   Heroes"
 
-internal class ShopUI private constructor(
+internal class ShopUI(
     stage: Stage,
-    private val shopSlotTooltipSell: ItemSlotTooltip,
-    private val shopSlotTooltipBuy: ItemSlotTooltip,
-    equipWindow: Window,
-    private val inventoryWindow: Window,
-    private val shopWindow: Window,
-    private val merchantWindow: Window,
-    private val heroesWindow: Window,
-    equipSlotsTables: EquipSlotsTables,
-    inventorySlotsTable: InventorySlotsTable,
-    private val shopSlotsTable: ShopSlotsTable,
-    heroesTable: HeroesTable,
-    tableList: List<WindowSelector>,
-    selectedTableIndex: Int
+    npcId: String,
+    shopId: String,
+
+    private val shopSlotTooltipSell: ItemSlotTooltip = ShopSlotTooltipSell(),
+    private val shopSlotTooltipBuy: ItemSlotTooltip = ShopSlotTooltipBuy(),
+
+    equipSlotsTables: EquipSlotsTables = EquipSlotsTables(shopSlotTooltipSell),
+    equipWindow: Window = createDefaultWindow(TITLE_PERSONAL, equipSlotsTables.getCurrentEquipTable()),
+
+    inventorySlotsTable: InventorySlotsTable = InventorySlotsTable(shopSlotTooltipSell),
+    private val inventoryWindow: Window = createDefaultWindow(TITLE_GLOBAL, inventorySlotsTable.container),
+
+    private val shopSlotsTable: ShopSlotsTable = ShopSlotsTable(shopId, shopSlotTooltipBuy),
+    private val shopWindow: Window = createDefaultWindow(TITLE_SHOP, shopSlotsTable.container),
+
+    merchantTable: MerchantTable = MerchantTable(npcId),
+    private val merchantWindow: Window = createDefaultWindow(TITLE_MERCHANT, merchantTable.table),
+
+    heroesTable: HeroesTable = HeroesTable(),
+    private val heroesWindow: Window = createDefaultWindow(TITLE_HEROES, heroesTable.heroes),
+
+    tableList: List<WindowSelector> = listOf(shopSlotsTable, inventorySlotsTable, equipSlotsTables),
+    selectedTableIndex: Int = 0
+
 ) : ScreenUI(equipWindow, equipSlotsTables, inventorySlotsTable, heroesTable, tableList, selectedTableIndex) {
-
-    companion object {
-        fun create(stage: Stage, npcId: String, shopId: String): ShopUI {
-
-            val shopSlotTooltipSell = ShopSlotTooltipSell()
-            val shopSlotTooltipBuy = ShopSlotTooltipBuy()
-
-            val equipSlotsTables = EquipSlotsTables(shopSlotTooltipSell)
-            val equipWindow = createDefaultWindow(TITLE_PERSONAL, equipSlotsTables.getCurrentEquipTable())
-
-            val inventorySlotsTable = InventorySlotsTable(shopSlotTooltipSell)
-            val inventoryWindow = createDefaultWindow(TITLE_GLOBAL, inventorySlotsTable.container)
-
-            val shopSlotsTable = ShopSlotsTable(shopId, shopSlotTooltipBuy)
-            val shopWindow = createDefaultWindow(TITLE_SHOP, shopSlotsTable.container)
-
-            val merchantTable = MerchantTable(npcId)
-            val merchantWindow = createDefaultWindow(TITLE_MERCHANT, merchantTable.table)
-
-            val heroesTable = HeroesTable()
-            val heroesWindow = createDefaultWindow(TITLE_HEROES, heroesTable.heroes)
-
-            val tableList = listOf(shopSlotsTable, inventorySlotsTable, equipSlotsTables)
-            val selectedTableIndex = 0
-
-            return ShopUI(stage, shopSlotTooltipSell, shopSlotTooltipBuy,
-                          equipWindow, inventoryWindow, shopWindow, merchantWindow, heroesWindow,
-                          equipSlotsTables, inventorySlotsTable, shopSlotsTable, heroesTable,
-                          tableList, selectedTableIndex)
-        }
-    }
 
     init {
         setWindowPositions()

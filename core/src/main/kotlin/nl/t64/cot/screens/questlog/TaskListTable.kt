@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable
 import com.badlogic.gdx.utils.Align
 import ktx.collections.GdxArray
-import nl.t64.cot.Utils.createTopBorder
+import nl.t64.cot.Utils
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.components.quest.QuestGraph
 import nl.t64.cot.components.quest.QuestState
@@ -67,7 +67,7 @@ internal class TaskListTable {
 
     private fun fillContainer(): Table {
         val newContainer = Table()
-        newContainer.background = createTopBorder()
+        newContainer.background = Utils.createTopBorder()
         newContainer.padLeft(PAD_LEFT)
         newContainer.add(scrollPane).width(Gdx.graphics.width / 2f + WIDTH).height(HEIGHT)
         return newContainer

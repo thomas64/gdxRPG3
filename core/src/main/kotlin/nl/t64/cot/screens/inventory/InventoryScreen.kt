@@ -70,7 +70,7 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
                                                   { toggleCompare() },
                                                   { cheatAddGold() },
                                                   { cheatRemoveGold() }))
-        inventoryUI = InventoryUI.create(stage)
+        inventoryUI = InventoryUI(stage)
         ButtonLabels(stage).create()
     }
 

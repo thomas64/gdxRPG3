@@ -45,7 +45,7 @@ class InventoryImage(val inventoryItem: InventoryItem) : Image() {
 
     fun getSingleDescription(totalMerchant: Int): List<InventoryDescription> {
         val descriptionCreator = DescriptionCreator(inventoryItem, totalMerchant)
-        val selectedHeroId = InventoryUtils.getSelectedHeroId()
+        val selectedHeroId = InventoryUtils.getSelectedHero().id
         val heroItem = gameData.party.getCertainHero(selectedHeroId)
         return descriptionCreator.createItemDescriptionComparingToHero(heroItem)
     }
