@@ -8,9 +8,6 @@ buildscript {
 	}
 	dependencies {
 		classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-		classpath "com.mobidevelop.robovm:robovm-gradle-plugin:$robovmVersion"
-		classpath "org.wisepersist:gwt-gradle-plugin:$gwtPluginVersion"
-		classpath "com.android.tools.build:gradle:$androidPluginVersion"
 	}
 }
 
@@ -19,7 +16,7 @@ allprojects {
 	apply plugin: 'idea'
 }
 
-configure(subprojects - project(':android')) {
+configure(subprojects) {
 	apply plugin: 'java-library'
 	apply plugin: 'kotlin'
 	sourceCompatibility = 8.0

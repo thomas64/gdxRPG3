@@ -20,7 +20,6 @@ dependencies {
 	api "com.rafaskoberg.gdx:typing-label:$typingLabelVersion"
 	api "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
 	api "com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion"
-	api project(':shared')
 
 	testApi "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
 	testApi "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
