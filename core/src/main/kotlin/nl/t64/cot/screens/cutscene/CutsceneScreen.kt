@@ -193,11 +193,6 @@ abstract class CutsceneScreen : Screen, ConversationObserver {
         camera.setNewMapSize(currentMap.pixelWidth, currentMap.pixelHeight)
     }
 
-    fun showConversationDialog(conversationId: String) {
-        conversationDialog.loadConversation(conversationId)
-        conversationDialog.show()
-    }
-
     fun showConversationDialog(conversationId: String, entityId: String) {
         conversationDialog.loadConversation(conversationId, entityId)
         conversationDialog.show()

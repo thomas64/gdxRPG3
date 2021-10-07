@@ -110,7 +110,7 @@ class SceneIntro : CutsceneScreen() {
                 Actions.delay(1f),
                 Actions.run { mozes.direction = Direction.WEST },
                 Actions.delay(1f),
-                Actions.run { showConversationDialog("mozes_calls_grace_inside") }
+                Actions.run { showConversationDialog("mozes_calls_grace_inside", "mozes") }
             ), mozes)
         )
     }
@@ -167,7 +167,7 @@ class SceneIntro : CutsceneScreen() {
             actionFadeIn(),
 
             Actions.delay(1f),
-            Actions.run { showConversationDialog("mozes_puts_grace_to_bed") }
+            Actions.run { showConversationDialog("mozes_puts_grace_to_bed", "mozes") }
         )
     }
 
@@ -318,7 +318,7 @@ class SceneIntro : CutsceneScreen() {
                     actionWalkSound(mozes, 4.8f, FAST_STEP)
                 ),
                 Actions.run { mozes.entityState = EntityState.IDLE },
-                Actions.run { showConversationDialog("mozes_talks_to_johanna") },
+                Actions.run { showConversationDialog("mozes_talks_to_johanna", "mozes") },
                 Actions.delay(1f),
                 Actions.run { oldWoman.direction = Direction.WEST }
             ), mozes)

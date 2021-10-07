@@ -98,7 +98,7 @@ class ConversationDialog {
         stage.draw()
     }
 
-    fun loadConversation(conversationId: String, entityId: String? = null) {
+    fun loadConversation(conversationId: String, entityId: String) {
         this.conversationId = conversationId
         faceId = entityId
         graph = gameData.conversations.getConversationById(conversationId)
