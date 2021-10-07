@@ -188,7 +188,6 @@
   <object id="64" name="quest_intro" type="blocker" x="480" y="1620" width="48" height="36">
    <properties>
     <property name="activeIfComplete" type="bool" value="false"/>
-    <property name="isActive" type="bool" value="true"/>
     <property name="task" value="1"/>
    </properties>
   </object>

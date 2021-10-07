@@ -18,10 +18,9 @@ class GameMapQuestBlocker(rectObject: RectangleMapObject) : GameMapObject(rectOb
 
     private val quest: QuestGraph = gameData.quests.getQuestById(rectObject.name)
     private val isActiveIfComplete: Boolean = rectObject.property("activeIfComplete")
+    private val isOnlyActiveWhenTaskIsActive: Boolean = rectObject.propertyOrNull("onlyActiveWhenTaskIsActive") ?: false
     private val taskId: String? = rectObject.propertyOrNull("task")
-    private var isActive: Boolean = rectObject.property<Boolean>("isActive").also {
-        if (it) brokerManager.blockObservers.addObserver(this)
-    }
+    private var isActive: Boolean = false
 
     override fun getBlockerFor(boundingBox: Rectangle, state: EntityState): Rectangle? {
         return rectangle.takeIf { isActive && boundingBox.overlaps(it) }
@@ -35,8 +34,16 @@ class GameMapQuestBlocker(rectObject: RectangleMapObject) : GameMapObject(rectOb
         val isFinished = quest.isCurrentStateEqualOrHigherThan(QuestState.FINISHED)
         val isComplete = quest.isTaskComplete(taskId)
 
+        if (isOnlyActiveWhenTaskIsActive) {
+            checkBlocker(quest.isTaskActive(taskId!!))
+        } else {
+            checkBlocker((isFinished || isComplete) == isActiveIfComplete)
+        }
+    }
+
+    private fun checkBlocker(condition: Boolean) {
         val before = isActive
-        isActive = (isFinished || isComplete) == isActiveIfComplete
+        isActive = condition
         val after = isActive
         if (before != after) {
             changeBlocker()

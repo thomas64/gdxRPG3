@@ -12,6 +12,13 @@
     "conversationId": "found_grace_ribbon",
     "entityId"      : "mozes"
   },
+  "cave_not_yet_found"  : {
+    "type"          : "conversation",
+    "condition"     : ["cave_not_yet_found"],
+    "conversationId": "dont_go_south",
+    "entityId"      : "mozes",
+    "doesRepeat"    : true
+  },
   "found_honeywood_cave": {
     "type"          : "conversation",
     "conversationId": "found_honeywood_cave",

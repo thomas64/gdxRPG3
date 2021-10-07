@@ -110,6 +110,17 @@ class QuestGraph(
         return tasks[taskId]?.isComplete ?: false
     }
 
+    fun isTaskActive(taskId: String): Boolean {
+        val questTask = tasks[taskId]!!
+        check(!questTask.isOptional) { "An optional task cannot be the active one." }
+        if (questTask.isHidden) return false
+        if (questTask.isComplete) return false
+        return tasks
+            .filter { !it.value.isOptional }
+            .filter { it.key.toInt() < taskId.toInt() }
+            .all { it.value.isComplete }
+    }
+
 //    fun handleReceive() {
 //        val receiveLoot = tasks.values
 //            .filter { it.type == QuestTaskType.ITEM_DELIVERY }

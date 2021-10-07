@@ -25,12 +25,12 @@
  </layer>
  <layer id="3" name="under1_ground" width="36" height="36">
   <data encoding="base64" compression="zlib">
-   eJztlUlPFEEYhutLnDPKBVnCpgZRg/4CPZgIKpvsSAT+hBcjoOwuiEYv/gaOKCg4AiG4Av8CA4LKpld9KtLpGuhpkq5pTEwfnnmqqifh4523ZkQpJRERB0w25OzznvKQZ7gDo7AMuRxkwFHIhDTOlpS7z4IK9tclvHku8fICr0CeJPowfDH22bgSN4Ywj87lLotueMn6K+RLoo9AurHPwVW4CTdLanPSuZRCD4yxX4XbkugCXO3hetwgqcnJzKUMemGcs5vQIa7XcCG+5uEafDEFOd3Qsyg3l8vQB684G8DT8ted8I2zE/gHHoYzcIx9Da7FdeLm1KJnCjBPK0wYuVyBfnjN+Vs8BYPQBd85m4KnrB/jJ3CcdS2u05+ZkdNPaAn4eU365KI9I24uyazzMnP6ZdGfNz653IP74uaSzDovM6eGgLM4/bkq/n1xPIdXoQhK2J+Fcx7va4Qhi/7Exb8vjt/BGpyEYjgFpz3yasLNFv1x8tmdyyP83OjPe/1cz6r3sA4bxvNlPIKLLPsT38klrvtj5DKsu2H83x/gI3yCzzAPm8bzFXhoMYvZH697tA4bHv1wcljAW7ANi2KXi9mfcvG+RwP4lkePbHPwYw4qWDzQfwOGZG9vzDxSkcN+VPJSBdXQr/b2Jsw8/HrUDX1Gb6bhmQT/PrHtUY9KzGeG9bay+z4JQhu0Q++ufDZhSwX/vQ5KLuRB/k4+zr1y8rH5vQ6KvmcFoGJKXYDz8PuQUrMq/PuUDH3PWpmjLeb6IO9Vspy6mKMz9u9yiYiI+H/4AwKX0oc=
+   eJztlUlPFEEYhutLnDPKRRHCohBEjfoL9GCCqGyyIxH8E16IgrKKimjgwm/wqCigbDG467+QsCmrXvGpSKdroLtJuqYxMX145qmqnoSPd96aEaWUxMTsM5mQtcd7SiOe4S48h3nI5uAwHIEMSOPsu3L3R6GM/XWJbp5iXl7gBciRZB+EOWOfictxfQTz6FzuseiAEdaLkCvJPgTpxj4LV+AG3CipzUnncgk64SX7Jbgtyc7DlR6uxXWSmpzMXEqgC15xdgvuiOtlfAxf83AVvpiCnG7oWZSby2XohlHOevG0/HUb/OCsAK/gATgNx9lX4WpcI25OTXqmEPM0w7iRyxXogTHOJ/EU3Id2+MnZFAyyfoKfQj7ralyjPzMjp1/QFPLzeh2Qi/aMuLn4Wedl5vTboj9vAnLpgwfi5uJnnZeZU13IWZz+XJXgvjiexUtQCGfYn4VzHu+rh36L/kxIcF8cv4NlOAFFcBJOeeTVgBst+uPkszOXx3jY6M97/VzPqvewCmvG83n8DBda9mfCJ5cB3Q3j//4AH+ETfIYvsG48X4BHFrOY/fG6R6uw5tEPJ4eveAM24ZvY5WL2p1S871EvbvXokW0OQcxCGYuH+m9Av+zujZlHKnLYi3JeKqASetTu3kSZR1CPOqDb6M00DEn47xPbHnWq5HxmWG8qu++TMLTATejakc86bKjwv9dhyYYcyN3Ox7lXTj42v9dh0fcsD1RCqQtwHrYOKPVWRX+f/ND3rJk5WhKu9/Ne+eXUzhxtiX+XS0xMzP/DH3jf0no=
   </data>
  </layer>
  <layer id="1" name="under2_fire" width="36" height="36">
   <data encoding="base64" compression="zlib">
-   eJztzjEBAAAIA6A1sX88TWABfx9IQAIAwKUrmfpeAADArwWvLwIi
+   eJztzrEVABAQBbDfssTZfzsmUJrAo0gmSAIA8L9ZyarXi6ONpI/XCwAAuG8DNToCdQ==
   </data>
  </layer>
  <layer id="4" name="under3_none" width="36" height="36">
@@ -50,7 +50,7 @@
  </layer>
  <layer id="7" name="over6_light" width="36" height="36">
   <data encoding="base64" compression="zlib">
-   eJztzkkRgDAUBNFxkIqCuGU5gAwWGcQFqGE4IeGnoF9V31sCAAB/dRSpluiL1+mXq6EfAEC7uiT1bnBjir6RFj+sbnN7Az+PKUtzjr4A8AU3GboKJA==
+   eJztzksNgDAUBdHroKmCuuWzABl8ZFAXoIbLChy8hsxJZj8SAABowVGkWqIvXqdfroZ+AAD46pLUu8GNKfpGWvywus3tDfw8pizNOfoCwB/cxnEKJA==
   </data>
  </layer>
  <layer id="8" name="over7_rocks" width="36" height="36">
@@ -79,7 +79,7 @@
   <object id="15" x="0" y="720" width="864" height="144"/>
   <object id="16" x="336" y="672" width="528" height="48"/>
   <object id="17" x="0" y="672" width="288" height="48"/>
-  <object id="20" x="240" y="384" width="48" height="48"/>
+  <object id="20" x="408" y="360" width="48" height="48"/>
   <object id="27" x="456" y="348" width="24" height="84"/>
   <object id="28" x="480" y="408" width="48" height="24"/>
   <object id="29" x="528" y="348" width="24" height="84"/>
@@ -103,7 +103,7 @@
   <object id="25" name="found_honeywood_cave" type="discover" x="288" y="672" width="48" height="24"/>
  </objectgroup>
  <objectgroup color="#ffffff" id="14" name="lights">
-  <object id="42" x="240" y="336" width="48" height="48"/>
+  <object id="42" x="408" y="312" width="48" height="48"/>
   <object id="43" x="216" y="528" width="48" height="48"/>
   <object id="44" x="360" y="528" width="48" height="48"/>
   <object id="45" x="288" y="552" width="48" height="48"/>

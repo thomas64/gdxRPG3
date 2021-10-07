@@ -11,6 +11,11 @@
       "3": {"text": ["But why here? What is there to find here?"], "choices": [{"command": "EXIT"}]}
     }
   },
+  "dont_go_south"     : {
+    "phrases": {
+      "1": {"text": ["No, I shouldn't go back. I have to find Grace first.", "There must be some clues near where I found the ribbon."], "choices": [{"command": "EXIT"}]}
+    }
+  },
   "fairy_welcome"     : {
     "phrases": {
       "1": {"face": "fairy01", "text": ["Ah young Mozes. You may enter here."], "choices": [{"command": "RECEIVE_XP", "nextId": "2"}]},

@@ -11,6 +11,7 @@ object ConditionDatabase {
         Pair("quest_intro_not_finished") { questIntroNotFinished },
         Pair("3_starting_potions") { startingPotions },
         Pair("grace_ribbon") { graceRibbon },
+        Pair("cave_not_yet_found") { caveNotYetFound },
         Pair("first_equipment_item") { firstEquipmentItem },
         Pair("quest_orc_guards_not_finished") { questOrcGuardsNotFinished },
         Pair("i_!quest_orc_guards_accepted") { !questOrcGuardsAccepted },
@@ -48,6 +49,8 @@ object ConditionDatabase {
     private val questIntroNotFinished get() = !isQuestTaskNumberComplete("quest_intro", 1)
     private val startingPotions get() = hasEnoughOfItem("healing_potion", 3)
     private val graceRibbon get() = hasEnoughOfItem("grace_ribbon", 1)
+    private val caveNotYetFound get() = isQuestTaskNumberComplete("quest_grace_is_missing", 1)
+                                        && !isQuestTaskNumberComplete("quest_grace_is_missing", 2)
     private val firstEquipmentItem get() = hasEnoughOfOneOfTheseItems("basic_light_helmet", "basic_light_boots")
     private val questOrcGuardsNotFinished get() = isQuestStateEqualOrLower("quest_orc_guards", QuestState.ACCEPTED)
     private val questOrcGuardsAccepted get() = isQuestStateEqualOrHigher("quest_orc_guards", QuestState.ACCEPTED)
