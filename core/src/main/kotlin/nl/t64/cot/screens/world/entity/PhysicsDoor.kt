@@ -55,7 +55,7 @@ class PhysicsDoor(private val door: Door) : PhysicsComponent() {
     }
 
     private fun isFailingOnLock(): Boolean {
-        return if (door.isLocked) isUnableToUnlockWithKey(door.keyId) else false
+        return door.isLocked && isUnableToUnlockWithKey(door.keyId)
     }
 
     private fun isUnableToUnlockWithKey(keyId: String?): Boolean {

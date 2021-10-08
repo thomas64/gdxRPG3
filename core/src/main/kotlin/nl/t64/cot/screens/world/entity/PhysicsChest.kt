@@ -54,7 +54,7 @@ class PhysicsChest(private val chest: Loot) : PhysicsComponent() {
     }
 
     private fun isFailingOnTrap(): Boolean {
-        return if (chest.isTrapped()) isTrapToDifficult() else false
+        return chest.isTrapped() && isTrapToDifficult()
     }
 
     private fun isTrapToDifficult(): Boolean {
@@ -87,7 +87,7 @@ class PhysicsChest(private val chest: Loot) : PhysicsComponent() {
     }
 
     private fun isFailingOnLock(): Boolean {
-        return if (chest.isLocked()) isLockToDifficult() else false
+        return chest.isLocked() && isLockToDifficult()
     }
 
     private fun isLockToDifficult(): Boolean {

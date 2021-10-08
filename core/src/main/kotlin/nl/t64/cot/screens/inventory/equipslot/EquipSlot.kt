@@ -52,7 +52,7 @@ internal class EquipSlot(
     }
 
     override fun doesAcceptItem(draggedItem: InventoryImage): Boolean {
-        return if (filterGroup == draggedItem.inventoryGroup) doesHeroAcceptItem(draggedItem) else false
+        return filterGroup == draggedItem.inventoryGroup && doesHeroAcceptItem(draggedItem)
     }
 
     override fun clearStack() {
