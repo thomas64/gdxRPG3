@@ -25,7 +25,8 @@ enum class CalcAttributeId(override val title: String) : SuperEnum {
             return """
                 Defines the change-to-hit an enemy with physical weapons in combat.
                 $title is that of the weapon itself clean with no modifiers.
-                Total Hit is modified with Warrior skill and current weapon skill.""".trimIndent()
+                Total Hit is modified with Strength (only for hand-to-hand combat) or
+                Dexterity (only for ranged combat), Warrior skill and current weapon skill.""".trimIndent()
         }
     },
 
@@ -34,7 +35,10 @@ enum class CalcAttributeId(override val title: String) : SuperEnum {
             return """
                 Defines the amount of damage-to-inflict to an enemy with physical weapons in combat.
                 Damage is the counterpart of Protection.
-                An enemy's protection decreases the damage you inflict.""".trimIndent()
+                An enemy's protection decreases the damage you inflict.
+                Weapon Damage is that of the weapon itself clean with no modifiers. 
+                Total Damage is modified with Strength (only for hand-to-hand combat) or
+                Dexterity (only for ranged combat), Warrior skill and current weapon skill.""".trimIndent()
         }
     },
 
@@ -50,7 +54,7 @@ enum class CalcAttributeId(override val title: String) : SuperEnum {
     DEFENSE("Defense") {
         override fun getDescription(): String {
             return """
-                Increases the possibility to block an enemy's
+                Defines the possibility to block an enemy's
                 attack with physical weapons in combat.""".trimIndent()
         }
     },

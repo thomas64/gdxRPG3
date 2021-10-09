@@ -47,4 +47,13 @@ class Stamina(rank: Int = 0) : StatItem(
     fun getInflictDamagePenalty(): Int {
         return if (variable <= 0) 5 else 1
     }
+
+    fun getDefensePenalty(): Int {
+        return if (variable <= 0) 3 else 1
+    }
+
+    fun getChanceToHitPenalty(): Int {
+        return if (variable <= 0) 3 else 1
+    }
+
 }

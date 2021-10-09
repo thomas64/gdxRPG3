@@ -74,6 +74,14 @@ class HeroItem(
         skillItem.doUpgrade()
     }
 
+    fun doTempUpgrade(skillItem: SkillItem) {
+        skillItem.doUpgrade()
+    }
+
+    fun doTempDowngrade(skillItem: SkillItem) {
+        skillItem.doDowngrade()
+    }
+
     val xpNeededForNextLevel: Int get() = stats.getXpNeededForNextLevel()
     val xpDeltaBetweenLevels: Int get() = stats.getXpDeltaBetweenLevels()
     val totalXp: Int get() = stats.totalXp
@@ -206,6 +214,10 @@ class HeroItem(
         return if (extra < 0 && extra < -skillItem.rank) -skillItem.rank else extra
     }
 
+    fun getWeaponSkillForVisual(): String {
+        return inventory.getWeaponSkill()?.title ?: "None"
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     fun getCalculatedTotalStatOf(statItemId: StatItemId): Int {
@@ -272,19 +284,32 @@ class HeroItem(
             ?: 0
     }
 
+    fun getCalculatedTotalDefense(): Int {
+        return when {
+            inventory.getInventoryItem(InventoryGroup.SHIELD) == null -> 0
+            else -> (getTotalCalcOf(CalcAttributeId.DEFENSE)
+                    // + getLevel() todo, this one shouldn't be shown in calculation but should be calculated in battle.
+                    + (getCalculatedTotalStatOf(StatItemId.AGILITY) / stats.getDefenseStaminaPenalty())
+                    + getCalculatedTotalSkillOf(SkillItemId.WARRIOR)
+                    + (getCalculatedTotalSkillOf(SkillItemId.SHIELD) * 2f)).roundToInt()
+        }
+    }
+
     private fun getCalculatedTotalHit(weaponSkill: SkillItemId): Int {
         return (getTotalCalcOf(CalcAttributeId.BASE_HIT)
                 + ((47f - (getTotalCalcOf(CalcAttributeId.BASE_HIT) / 2f))
                 * ((getCalculatedTotalSkillOf(weaponSkill) + getCalculatedTotalSkillOf(SkillItemId.WARRIOR)) / 20f))
+                // + getLevel() todo, this one shouldn't be shown in calculation but should be calculated in battle.
+                + (getCalculatedTotalStatOf(StatItemId.STRENGTH) / stats.getChanceToHitStaminaPenalty())
                 ).roundToInt()
     }
 
     private fun getCalculatedTotalDamage(weaponSkill: SkillItemId): Int {
         return (getTotalCalcOf(CalcAttributeId.DAMAGE)
                 // + getLevel() todo, this one shouldn't be shown in calculation but should be calculated in battle.
-                + getCalculatedTotalStatOf(StatItemId.STRENGTH) / stats.getInflictDamageStaminaPenalty()
+                + (getCalculatedTotalStatOf(StatItemId.STRENGTH) / stats.getInflictDamageStaminaPenalty())
                 + getCalculatedTotalSkillOf(SkillItemId.WARRIOR)
-                + getCalculatedTotalSkillOf(weaponSkill) * 2)
+                + (getCalculatedTotalSkillOf(weaponSkill) * 2f)).roundToInt()
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

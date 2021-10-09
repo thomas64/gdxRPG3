@@ -106,4 +106,12 @@ class StatContainer() {
         return (stats[StatItemId.STAMINA.name] as Stamina).getInflictDamagePenalty()
     }
 
+    fun getDefenseStaminaPenalty(): Int {
+        return (stats[StatItemId.STAMINA.name] as Stamina).getDefensePenalty()
+    }
+
+    fun getChanceToHitStaminaPenalty(): Int {
+        return (stats[StatItemId.STAMINA.name] as Stamina).getChanceToHitPenalty()
+    }
+
 }

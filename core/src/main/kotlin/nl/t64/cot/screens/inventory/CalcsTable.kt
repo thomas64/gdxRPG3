@@ -54,12 +54,16 @@ internal class CalcsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
         table.add("").row()
 
         table.add(Label("Shield " + CalcAttributeId.DEFENSE.title, createLabelStyle()))
-        table.add(selectedHero.getCalcValueOf(InventoryGroup.SHIELD, CalcAttributeId.DEFENSE).toString())
+        table.add(selectedHero.getCalcValueOf(InventoryGroup.SHIELD, CalcAttributeId.DEFENSE).toString() + "%")
         table.add("").row()
 
-        table.add(Label("Shield " + CalcAttributeId.PROTECTION.title, createLabelStyle()))
-        table.add(selectedHero.getCalcValueOf(InventoryGroup.SHIELD, CalcAttributeId.PROTECTION).toString())
+        table.add(Label("Total " + CalcAttributeId.DEFENSE.title, createLabelStyle()))
+        table.add(selectedHero.getCalculatedTotalDefense().toString() + "%")
         table.add("").row()
+
+//        table.add(Label("Shield " + CalcAttributeId.PROTECTION.title, createLabelStyle()))
+//        table.add(selectedHero.getCalcValueOf(InventoryGroup.SHIELD, CalcAttributeId.PROTECTION).toString())
+//        table.add("").row()
 
         table.add(Label("Total " + CalcAttributeId.PROTECTION.title, createLabelStyle()))
         table.add(selectedHero.getTotalCalcOf(CalcAttributeId.PROTECTION).toString())
