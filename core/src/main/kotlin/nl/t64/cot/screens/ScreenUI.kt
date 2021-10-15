@@ -1,7 +1,7 @@
 package nl.t64.cot.screens
 
 import com.badlogic.gdx.scenes.scene2d.Stage
-import com.badlogic.gdx.scenes.scene2d.ui.Window
+import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import nl.t64.cot.screens.inventory.HeroesTable
 import nl.t64.cot.screens.inventory.WindowSelector
 import nl.t64.cot.screens.inventory.equipslot.EquipSlotsTables
@@ -10,30 +10,36 @@ import nl.t64.cot.screens.shop.ShopSlotsTable
 
 
 abstract class ScreenUI(
-    val equipWindow: Window,
-    val equipSlotsTables: EquipSlotsTables,
-    val inventorySlotsTable: InventorySlotsTable,
+    val stage: Stage,
     val heroesTable: HeroesTable,
     private val tableList: List<WindowSelector>,
     private var selectedTableIndex: Int
 ) {
-    private val stage: Stage get() = equipWindow.stage
+
+    fun init() {
+        setWindowPositions()
+        addToStage()
+        setFocusOnSelectedTable()
+        stage.addAction(Actions.sequence(
+            Actions.delay(0.1f),
+            Actions.run { getSelectedTable().selectCurrentSlot() }
+        ))
+    }
+
+    abstract fun setWindowPositions()
+
+    abstract fun addToStage()
+
+    open fun getEquipSlotsTables(): EquipSlotsTables {
+        throw IllegalStateException("EquipSlotsTables not implemented here.")
+    }
+
+    open fun getInventorySlotsTable(): InventorySlotsTable {
+        throw IllegalStateException("InventorySlotsTable not implemented here.")
+    }
 
     open fun getShopSlotsTable(): ShopSlotsTable {
         throw IllegalStateException("ShopSlotsTable not implemented here.")
-    }
-
-    fun updateSelectedHero(updateHero: () -> Unit) {
-        getSelectedTable().deselectCurrentSlot()
-
-        val oldCurrentIndex = equipSlotsTables.getIndexOfCurrentSlot()
-        equipWindow.getChild(1).remove()
-        updateHero.invoke()
-        equipWindow.add(equipSlotsTables.getCurrentEquipTable())
-        equipSlotsTables.setCurrentByIndex(oldCurrentIndex)
-
-        setFocusOnSelectedTable()
-        getSelectedTable().selectCurrentSlot()
     }
 
     fun selectPreviousTable() {

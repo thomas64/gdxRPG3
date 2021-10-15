@@ -38,10 +38,10 @@ internal class ShopUI(
     private val shopSlotTooltipSell: ItemSlotTooltip = ShopSlotTooltipSell(),
     private val shopSlotTooltipBuy: ItemSlotTooltip = ShopSlotTooltipBuy(),
 
-    equipSlotsTables: EquipSlotsTables = EquipSlotsTables(shopSlotTooltipSell),
-    equipWindow: Window = createDefaultWindow(TITLE_PERSONAL, equipSlotsTables.getCurrentEquipTable()),
+    private val equipSlotsTables: EquipSlotsTables = EquipSlotsTables(shopSlotTooltipSell),
+    private val equipWindow: Window = createDefaultWindow(TITLE_PERSONAL, equipSlotsTables.getCurrentEquipTable()),
 
-    inventorySlotsTable: InventorySlotsTable = InventorySlotsTable(shopSlotTooltipSell),
+    private val inventorySlotsTable: InventorySlotsTable = InventorySlotsTable(shopSlotTooltipSell),
     private val inventoryWindow: Window = createDefaultWindow(TITLE_GLOBAL, inventorySlotsTable.container),
 
     private val shopSlotsTable: ShopSlotsTable = ShopSlotsTable(shopId, shopSlotTooltipBuy),
@@ -56,17 +56,35 @@ internal class ShopUI(
     tableList: List<WindowSelector> = listOf(shopSlotsTable, inventorySlotsTable, equipSlotsTables),
     selectedTableIndex: Int = 0
 
-) : ScreenUI(equipWindow, equipSlotsTables, inventorySlotsTable, heroesTable, tableList, selectedTableIndex) {
+) : ScreenUI(stage, heroesTable, tableList, selectedTableIndex) {
 
     init {
-        setWindowPositions()
-        addToStage(stage)
-        setFocusOnSelectedTable()
-        getSelectedTable().selectCurrentSlot()
+        super.init()
+    }
+
+    override fun getEquipSlotsTables(): EquipSlotsTables {
+        return equipSlotsTables
+    }
+
+    override fun getInventorySlotsTable(): InventorySlotsTable {
+        return inventorySlotsTable
     }
 
     override fun getShopSlotsTable(): ShopSlotsTable {
         return shopSlotsTable
+    }
+
+    fun updateSelectedHero(updateHero: () -> Unit) {
+        getSelectedTable().deselectCurrentSlot()
+
+        val oldCurrentIndex = equipSlotsTables.getIndexOfCurrentSlot()
+        equipWindow.getChild(1).remove()
+        updateHero.invoke()
+        equipWindow.add(equipSlotsTables.getCurrentEquipTable())
+        equipSlotsTables.setCurrentByIndex(oldCurrentIndex)
+
+        setFocusOnSelectedTable()
+        getSelectedTable().selectCurrentSlot()
     }
 
     fun takeOne() {
@@ -92,7 +110,7 @@ internal class ShopUI(
         heroesWindow.pack()
     }
 
-    private fun setWindowPositions() {
+    override fun setWindowPositions() {
         equipWindow.setPosition(EQUIP_WINDOW_POSITION_X, EQUIP_WINDOW_POSITION_Y)
         inventoryWindow.setPosition(INVENTORY_WINDOW_POSITION_X, INVENTORY_WINDOW_POSITION_Y)
         shopWindow.setPosition(SHOP_WINDOW_POSITION_X, SHOP_WINDOW_POSITION_Y)
@@ -100,7 +118,7 @@ internal class ShopUI(
         heroesWindow.setPosition(HEROES_WINDOW_POSITION_X, HEROES_WINDOW_POSITION_Y)
     }
 
-    private fun addToStage(stage: Stage) {
+    override fun addToStage() {
         shopSlotTooltipSell.addToStage(stage)
         shopSlotTooltipBuy.addToStage(stage)
         stage.addActor(equipWindow)

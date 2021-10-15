@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Dialog
 import nl.t64.cot.constants.Constant
 
 
-internal class AcademyScreenListener(
+class AcademyScreenListener(
     private val closeScreenFunction: () -> Unit,
     private val upgradeSkillFunction: () -> Unit,
     private val previousHeroFunction: () -> Unit,

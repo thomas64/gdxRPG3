@@ -23,6 +23,10 @@ interface ConversationObserver {
         throw IllegalStateException("Implement this method in child.")
     }
 
+    fun onNotifyLoadSchool() {
+        throw IllegalStateException("Implement this method in child.")
+    }
+
     fun onNotifyShowRewardDialog(reward: Loot, levelUpMessage: String?) {
         throw IllegalStateException("Implement this method in child.")
     }

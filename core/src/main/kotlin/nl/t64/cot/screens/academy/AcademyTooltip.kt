@@ -1,8 +1,9 @@
-package nl.t64.cot.screens.inventory.tooltip
+package nl.t64.cot.screens.academy
 
 import nl.t64.cot.components.party.PersonalityItem
 import nl.t64.cot.components.party.skills.SkillItem
 import nl.t64.cot.screens.inventory.InventoryUtils
+import nl.t64.cot.screens.inventory.tooltip.PersonalityTooltip
 
 
 class AcademyTooltip : PersonalityTooltip() {

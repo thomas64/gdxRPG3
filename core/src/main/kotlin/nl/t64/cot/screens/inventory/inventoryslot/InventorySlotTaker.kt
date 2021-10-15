@@ -28,7 +28,7 @@ internal class InventorySlotTaker(private val selector: ItemSlotSelector) {
 
     private fun tryPutInventorySlotToEquipSlot(candidateItem: InventoryImage) {
         this.candidateItem = candidateItem
-        InventoryUtils.getScreenUI().equipSlotsTables.getCurrentEquipSlots()
+        InventoryUtils.getScreenUI().getEquipSlotsTables().getCurrentEquipSlots()
             .getPossibleSlotOfGroup(candidateItem.inventoryGroup)?.let {
                 exchangeWithEquipSlotOfSameInventoryGroup(it)
             }

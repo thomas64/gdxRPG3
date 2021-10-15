@@ -157,7 +157,12 @@
   },
   "fairy_school"      : {
     "phrases": {
-      "1": {"text": ["[Here you can learn spells.]"], "choices": [{"command": "EXIT"}]}
+      "1": {
+        "text": ["Young Mozes, would you like to learn a spell?"], "choices": [
+          {"text": "Yes please. (Open school)", "command": "LOAD_SCHOOL"},
+          {"text": "No thanks. (Leave conversation)", "command": "EXIT"}
+        ]
+      }
     }
   },
   "fairy_academy"     : {

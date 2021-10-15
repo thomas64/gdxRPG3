@@ -13,6 +13,7 @@ import nl.t64.cot.screens.loot.RewardScreen
 import nl.t64.cot.screens.loot.SpoilsScreen
 import nl.t64.cot.screens.menu.*
 import nl.t64.cot.screens.questlog.QuestLogScreen
+import nl.t64.cot.screens.school.SchoolScreen
 import nl.t64.cot.screens.shop.ShopScreen
 import nl.t64.cot.screens.world.WorldScreen
 
@@ -33,6 +34,7 @@ enum class ScreenType(val screenClass: Class<out Screen>) {
     QUEST_LOG(QuestLogScreen::class.java),
     SHOP(ShopScreen::class.java),
     ACADEMY(AcademyScreen::class.java),
+    SCHOOL(SchoolScreen::class.java),
     FIND(FindScreen::class.java),
     REWARD(RewardScreen::class.java),
     RECEIVE(ReceiveScreen::class.java),

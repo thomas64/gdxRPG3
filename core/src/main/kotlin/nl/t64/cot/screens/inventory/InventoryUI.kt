@@ -42,11 +42,11 @@ internal class InventoryUI(
     private val spellsTable: SpellsTable = SpellsTable(personalityTooltip),
     private val spellsWindow: Window = createDefaultWindow(TITLE_SPELLS, spellsTable.container),
 
-    inventorySlotsTable: InventorySlotsTable = InventorySlotsTable(itemSlotTooltip),
+    private val inventorySlotsTable: InventorySlotsTable = InventorySlotsTable(itemSlotTooltip),
     private val inventoryWindow: Window = createDefaultWindow(TITLE_GLOBAL, inventorySlotsTable.container),
 
-    equipSlotsTables: EquipSlotsTables = EquipSlotsTables(itemSlotTooltip),
-    equipWindow: Window = createDefaultWindow(TITLE_PERSONAL, equipSlotsTables.getCurrentEquipTable()),
+    private val equipSlotsTables: EquipSlotsTables = EquipSlotsTables(itemSlotTooltip),
+    private val equipWindow: Window = createDefaultWindow(TITLE_PERSONAL, equipSlotsTables.getCurrentEquipTable()),
 
     private val skillsTable: SkillsTable = SkillsTable(personalityTooltip),
     private val skillsWindow: Window = createDefaultWindow(TITLE_SKILLS, skillsTable.container),
@@ -64,11 +64,29 @@ internal class InventoryUI(
                                              equipSlotsTables, inventorySlotsTable, spellsTable),
     selectedTableIndex: Int = 4
 
-) : ScreenUI(equipWindow, equipSlotsTables, inventorySlotsTable, heroesTable, tableList, selectedTableIndex) {
+) : ScreenUI(stage, heroesTable, tableList, selectedTableIndex) {
 
     init {
-        setWindowPositions()
-        addToStage(stage)
+        super.init()
+    }
+
+    override fun getEquipSlotsTables(): EquipSlotsTables {
+        return equipSlotsTables
+    }
+
+    override fun getInventorySlotsTable(): InventorySlotsTable {
+        return inventorySlotsTable
+    }
+
+    fun updateSelectedHero(updateHero: () -> Unit) {
+        getSelectedTable().deselectCurrentSlot()
+
+        val oldCurrentIndex = equipSlotsTables.getIndexOfCurrentSlot()
+        equipWindow.getChild(1).remove()
+        updateHero.invoke()
+        equipWindow.add(equipSlotsTables.getCurrentEquipTable())
+        equipSlotsTables.setCurrentByIndex(oldCurrentIndex)
+
         setFocusOnSelectedTable()
         getSelectedTable().selectCurrentSlot()
     }
@@ -94,7 +112,7 @@ internal class InventoryUI(
         heroesWindow.pack()
     }
 
-    private fun setWindowPositions() {
+    override fun setWindowPositions() {
         spellsWindow.setPosition(SPELLS_WINDOW_POSITION_X, SPELLS_WINDOW_POSITION_Y)
         inventoryWindow.setPosition(INVENTORY_WINDOW_POSITION_X, INVENTORY_WINDOW_POSITION_Y)
         equipWindow.setPosition(EQUIP_WINDOW_POSITION_X, EQUIP_WINDOW_POSITION_Y)
@@ -104,7 +122,7 @@ internal class InventoryUI(
         heroesWindow.setPosition(HEROES_WINDOW_POSITION_X, HEROES_WINDOW_POSITION_Y)
     }
 
-    private fun addToStage(stage: Stage) {
+    override fun addToStage() {
         itemSlotTooltip.addToStage(stage)
         personalityTooltip.addToStage(stage)
         stage.addActor(spellsWindow)

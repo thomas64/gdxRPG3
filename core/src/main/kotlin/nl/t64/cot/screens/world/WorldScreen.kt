@@ -29,6 +29,7 @@ import nl.t64.cot.screens.loot.FindScreen
 import nl.t64.cot.screens.loot.ReceiveScreen
 import nl.t64.cot.screens.loot.RewardScreen
 import nl.t64.cot.screens.loot.SpoilsScreen
+import nl.t64.cot.screens.school.SchoolScreen
 import nl.t64.cot.screens.shop.ShopScreen
 import nl.t64.cot.screens.world.conversation.ConversationDialog
 import nl.t64.cot.screens.world.conversation.ConversationObserver
@@ -231,6 +232,13 @@ class WorldScreen : Screen,
         show()
         doBeforeLoadScreen()
         AcademyScreen.load(currentNpcEntity.id, currentNpcEntity.getConversationId())
+    }
+
+    override fun onNotifyLoadSchool() {
+        conversationDialog.hide()
+        show()
+        doBeforeLoadScreen()
+        SchoolScreen.load(currentNpcEntity.id, currentNpcEntity.getConversationId())
     }
 
     override fun onNotifyShowRewardDialog(reward: Loot, levelUpMessage: String?) {

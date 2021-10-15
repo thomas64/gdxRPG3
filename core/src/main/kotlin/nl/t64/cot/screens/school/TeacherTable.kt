@@ -1,4 +1,4 @@
-package nl.t64.cot.screens.academy
+package nl.t64.cot.screens.school
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.utils.Align
@@ -12,17 +12,15 @@ private const val TABLE_WIDTH = 390f
 private const val TABLE_HEIGHT = 501f
 private const val PADDING = 20f
 private val TEXT = """
-    Please be welcome to my academy.
+    Please be welcome to my school.
     
-    On the left you see in which skills and to what rank I can train you, and on the right are the skills with the ranks you already have been trained in.
+    On the left you see in which spells and to what rank I can teach you, and on the right are the spells with the ranks you already have been taught in.
     
-    You cannot train a skill here above the rank I can train you.
+    You cannot learn a spell here above the rank I can teach you.
     
-    To train a skill will cost you 'XP to Invest' and gold.
-    
-    In the most right column you see the effect of upgrading battle related skills, but only the effect of the weapon you currently have equipped!""".trimIndent()
+    To learn a spell will cost you 'XP to Invest' and gold.""".trimIndent()
 
-internal class TrainerTable(npcId: String) : BaseTable(PersonalityTooltip()) {
+internal class TeacherTable(npcId: String) : BaseTable(PersonalityTooltip()) {
 
     init {
         table.defaults().reset()

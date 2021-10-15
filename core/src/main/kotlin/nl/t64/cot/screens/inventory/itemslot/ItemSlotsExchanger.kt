@@ -56,7 +56,7 @@ class ItemSlotsExchanger {
         if (gameData.inventory.hasEnoughOfItem("gold", totalPrice)) {
             handlePossibleExchange()
             if (isSuccessfullyExchanged) {
-                InventoryUtils.getScreenUI().inventorySlotsTable.removeResource("gold", totalPrice)
+                InventoryUtils.getScreenUI().getInventorySlotsTable().removeResource("gold", totalPrice)
             }
         } else {
             val errorMessage = "I'm sorry. You don't seem to have enough gold."
@@ -79,7 +79,7 @@ class ItemSlotsExchanger {
             handlePossibleExchange()
             if (isSuccessfullyExchanged) {
                 val gold = InventoryDatabase.createInventoryItem("gold", totalValue)
-                InventoryUtils.getScreenUI().inventorySlotsTable.addResource(gold)
+                InventoryUtils.getScreenUI().getInventorySlotsTable().addResource(gold)
             }
         } else {
             val errorMessage = "I'm sorry. You don't seem to have room for gold."

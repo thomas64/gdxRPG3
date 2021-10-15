@@ -74,6 +74,15 @@ class HeroItem(
         skillItem.doUpgrade()
     }
 
+    fun doUpgrade(spellItem: SpellItem, xpCost: Int, goldCost: Int) {
+        stats.takeXpToInvest(xpCost)
+        gameData.inventory.autoRemoveItem("gold", goldCost)
+        spellItem.doUpgrade()
+        if (spellItem.rank == 1) {
+            spells.add(spellItem)
+        }
+    }
+
     fun doTempUpgrade(skillItem: SkillItem) {
         skillItem.doUpgrade()
     }
@@ -101,6 +110,10 @@ class HeroItem(
 
     fun getSkillById(skillItemId: SkillItemId): SkillItem {
         return skills.getById(skillItemId)
+    }
+
+    fun getSpellById(spellId: String): SpellItem {
+        return spells.getById(spellId)
     }
 
     fun getAllStats(): List<StatItem> = stats.getAll()

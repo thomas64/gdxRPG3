@@ -27,7 +27,7 @@ internal class EquipSlotTaker(private val selector: EquipSlotSelector) {
 
     private fun tryPutEquipSlotToInventorySlot(candidateItem: InventoryImage) {
         this.candidateItem = candidateItem
-        InventoryUtils.getScreenUI().inventorySlotsTable.getPossibleEmptySlot()?.let {
+        InventoryUtils.getScreenUI().getInventorySlotsTable().getPossibleEmptySlot()?.let {
             exchangeWithEmptyInventorySlot(it)
         }
     }

@@ -15,7 +15,6 @@ import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.inventory.BaseTable
 import nl.t64.cot.screens.inventory.ListenerKeyVertical
 import nl.t64.cot.screens.inventory.messagedialog.MessageDialog
-import nl.t64.cot.screens.inventory.tooltip.AcademyTooltip
 import nl.t64.cot.screens.menu.DialogQuestion
 import kotlin.reflect.full.primaryConstructor
 

@@ -37,7 +37,7 @@ internal class ShopSlotTaker(
     private fun tryPutShopSlotToInventorySlot(candidateItem: InventoryImage) {
         this.candidateItem = candidateItem
         InventoryUtils.getScreenUI()
-            .inventorySlotsTable
+            .getInventorySlotsTable()
             .getPossibleSameStackableItemSlotWith(candidateItem.inventoryItem)?.let {
                 exchangeWithInventorySlot(it)
             } ?: exchangeWithPossibleEmptyInventorySlot()
@@ -45,7 +45,7 @@ internal class ShopSlotTaker(
 
     private fun exchangeWithPossibleEmptyInventorySlot() {
         InventoryUtils.getScreenUI()
-            .inventorySlotsTable
+            .getInventorySlotsTable()
             .getPossibleEmptySlot()?.let {
                 exchangeWithInventorySlot(it)
             }

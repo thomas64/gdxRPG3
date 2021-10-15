@@ -31,6 +31,7 @@ private const val SPRITE_CONFIGS = "configs/sprites/"
 private const val FILE_LIST_SPRITE_CONFIGS = SPRITE_CONFIGS + FILE_LIST
 private const val SHOP_CONFIGS = "configs/shops/"
 private const val ACADEMY_CONFIGS = "configs/academies/"
+private const val SCHOOL_CONFIGS = "configs/schools/"
 private const val CONFIG_SUFFIX = ".json"
 private const val ATLAS_FILES = "sprites/"
 private const val FILE_LIST_ATLAS_FILES = ATLAS_FILES + FILE_LIST
@@ -125,6 +126,11 @@ class ResourceManager {
 
     fun getAcademyInventory(academyId: String): GdxMap<String, Int> {
         val fullFileNamePath = ACADEMY_CONFIGS + academyId + CONFIG_SUFFIX
+        return json.fromJson(OrderedMap::class.java, Int::class.java, Gdx.files.internal(fullFileNamePath)) as OrderedMap<String, Int>
+    }
+
+    fun getSchoolInventory(schoolId: String): GdxMap<String, Int> {
+        val fullFileNamePath = SCHOOL_CONFIGS + schoolId + CONFIG_SUFFIX
         return json.fromJson(OrderedMap::class.java, Int::class.java, Gdx.files.internal(fullFileNamePath)) as OrderedMap<String, Int>
     }
 

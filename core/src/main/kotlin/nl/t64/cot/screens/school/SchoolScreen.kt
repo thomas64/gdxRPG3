@@ -1,4 +1,4 @@
-package nl.t64.cot.screens.academy
+package nl.t64.cot.screens.school
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
@@ -10,22 +10,24 @@ import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.ParchmentScreen
+import nl.t64.cot.screens.academy.AcademyButtonLabels
+import nl.t64.cot.screens.academy.AcademyScreenListener
 import nl.t64.cot.screens.inventory.InventoryUtils
 
 
-class AcademyScreen : ParchmentScreen() {
+class SchoolScreen : ParchmentScreen() {
 
-    private lateinit var academyUI: AcademyUI
+    private lateinit var schoolUI: SchoolUI
     private lateinit var npcId: String
-    private lateinit var academyId: String
+    private lateinit var schoolId: String
 
     companion object {
-        fun load(npcId: String, academyId: String) {
+        fun load(npcId: String, schoolId: String) {
             audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_SCROLL)
-            val academyScreen = screenManager.getScreen(ScreenType.ACADEMY) as AcademyScreen
-            academyScreen.npcId = npcId
-            academyScreen.academyId = academyId
-            screenManager.openParchmentLoadScreen(ScreenType.ACADEMY)
+            val schoolScreen = screenManager.getScreen(ScreenType.SCHOOL) as SchoolScreen
+            schoolScreen.npcId = npcId
+            schoolScreen.schoolId = schoolId
+            screenManager.openParchmentLoadScreen(ScreenType.SCHOOL)
         }
     }
 
@@ -33,14 +35,14 @@ class AcademyScreen : ParchmentScreen() {
         Gdx.input.inputProcessor = stage
         Utils.setGamepadInputProcessor(stage)
         stage.addListener(AcademyScreenListener({ closeScreen() },
-                                                { upgradeSkill() },
+                                                { upgradeSpell() },
                                                 { selectPreviousHero() },
                                                 { selectNextHero() },
                                                 { selectPreviousTable() },
                                                 { selectNextTable() },
                                                 { toggleTooltip() }))
 
-        academyUI = AcademyUI(stage, npcId, academyId)
+        schoolUI = SchoolUI(stage, npcId, schoolId)
         AcademyButtonLabels(stage).create()
     }
 
@@ -48,11 +50,11 @@ class AcademyScreen : ParchmentScreen() {
         ScreenUtils.clear(Color.BLACK)
         stage.act(dt)
         stage.draw()
-        academyUI.update()
+        schoolUI.update()
     }
 
     override fun hide() {
-        academyUI.unloadAssets()
+        schoolUI.unloadAssets()
         stage.clear()
     }
 
@@ -64,38 +66,36 @@ class AcademyScreen : ParchmentScreen() {
         Gdx.input.inputProcessor = null
         Utils.setGamepadInputProcessor(null)
         audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_SCROLL)
-        AcademyUtils.trainerSkill = null
-        AcademyUtils.heroSkill = null
         fadeParchment()
     }
 
-    private fun upgradeSkill() {
-        academyUI.upgradeSkill()
+    private fun upgradeSpell() {
+        schoolUI.upgradeSpell()
     }
 
     private fun selectPreviousHero() {
         audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_CURSOR)
-        academyUI.updateSelectedHero { InventoryUtils.selectPreviousHero() }
+        schoolUI.updateSelectedHero { InventoryUtils.selectPreviousHero() }
     }
 
     private fun selectNextHero() {
         audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_CURSOR)
-        academyUI.updateSelectedHero { InventoryUtils.selectNextHero() }
+        schoolUI.updateSelectedHero { InventoryUtils.selectNextHero() }
     }
 
     private fun selectPreviousTable() {
         audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_CURSOR)
-        academyUI.selectPreviousTable()
+        schoolUI.selectPreviousTable()
     }
 
     private fun selectNextTable() {
         audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_CURSOR)
-        academyUI.selectNextTable()
+        schoolUI.selectNextTable()
     }
 
     private fun toggleTooltip() {
         audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_CONFIRM)
-        academyUI.toggleTooltip()
+        schoolUI.toggleTooltip()
     }
 
 }

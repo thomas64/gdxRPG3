@@ -5,7 +5,7 @@ import nl.t64.cot.components.party.PersonalityItem
 import kotlin.math.roundToInt
 
 
-private val TRAINING_COSTS = listOf(20, 8, 12, 16, 20, 24, 28, 32, 36, 40, 0) // todo, de laatste 0 weghalen zoals bij skillitem
+private val LEARNING_COSTS = listOf(20, 8, 12, 16, 20, 24, 28, 32, 36, 40)
 private const val MAXIMUM = 10
 
 /* todo: moeten alle stats en skills ipv in individuele classes in json komen net zoals spells?
@@ -13,10 +13,10 @@ private const val MAXIMUM = 10
 
 class SpellItem(
     val name: String = "",
-    private val school: SchoolType = SchoolType.UNKNOWN,
+    val school: SchoolType = SchoolType.UNKNOWN,
     val sort: Int = 0,
     private val upgrade: Float = 0f,
-    @JsonProperty("min_wizard") private val minWizard: Int = 0,
+    @JsonProperty("min_wizard") val minWizard: Int = 0,
     @JsonProperty("resource") private val requiredResource: ResourceType = ResourceType.GOLD,
     @JsonProperty("stamina_cost") private val staminaCost: Int = 0,
     private val range: Int = 0,
@@ -40,36 +40,66 @@ class SpellItem(
     }
 
     override fun getDescription(totalScholar: Int): String {
+        return (getDescription()
+                + "A teacher is needed to upgrade a spell.")
+    }
+
+    fun getTeacherDescription(teacherSpell: SpellItem, wizardRank: Int, totalScholar: Int): String {
+        return (getDescription()
+                + getNeededXpForNextRank(teacherSpell, wizardRank, totalScholar) + System.lineSeparator()
+                + getNeededGoldForNextRank(teacherSpell, wizardRank))
+    }
+
+    private fun getDescription(): String {
         return (description.joinToString(System.lineSeparator()) + System.lineSeparator()
                 + System.lineSeparator()
                 + "School: " + school.title + System.lineSeparator()
                 + "Requires: " + requiredResource.title + System.lineSeparator()
                 + "Stamina cost: " + staminaCost + System.lineSeparator()
-                + System.lineSeparator()
-                + getNeededXpForNextRank(totalScholar) + System.lineSeparator()
-                + getNeededGoldForNextRank())
+                + System.lineSeparator())
     }
 
-    private fun getNeededXpForNextRank(totalScholar: Int): String {
-        val xpNeeded = getXpCostForNextRank(totalScholar).toString().takeIf { it != "0" } ?: "Max"
-        return "'XP to Invest' needed for next rank: $xpNeeded"
+    fun doUpgrade() {
+        rank += 1
     }
 
-    private fun getNeededGoldForNextRank(): String {
-        val goldNeeded = getGoldCostForNextRank().toString().takeIf { it != "0" } ?: "Max"
-        return "Gold needed for next rank: $goldNeeded"
+    private fun getNeededXpForNextRank(teacherSpell: SpellItem, wizardRank: Int, totalScholar: Int): String {
+        val xpNeeded = when (val cost = getXpCostForNextRank(teacherSpell, wizardRank, totalScholar).toString()) {
+            "0" -> "Max"
+            "-1" -> "N/A"
+            "-2" -> "0"
+            else -> cost
+        }
+        return "'XP to Invest' needed for next level: $xpNeeded"
     }
 
-    private fun getXpCostForNextRank(totalScholar: Int): Int {
+    private fun getNeededGoldForNextRank(teacherSpell: SpellItem, wizardRank: Int): String {
+        val goldNeeded = when (val cost = getGoldCostForNextRank(teacherSpell, wizardRank).toString()) {
+            "0" -> "Max"
+            "-1" -> "N/A"
+            "-2" -> "0"
+            else -> cost
+        }
+        return "Gold needed for next level: $goldNeeded"
+    }
+
+    fun getXpCostForNextRank(teacherSpell: SpellItem, wizardRank: Int, totalScholar: Int): Int {
         return when {
             rank >= MAXIMUM -> 0
+            wizardRank < 1 -> -1
+            rank >= teacherSpell.rank -> -2
             else -> (getUpgradeFormula() - ((getUpgradeFormula() / 100f) * totalScholar)).roundToInt()
         }
     }
 
-    private fun getGoldCostForNextRank(): Int {
+    fun getGoldCostForNextRank(teacherSpell: SpellItem, wizardRank: Int): Int {
         val nextRank = rank + 1
-        return TRAINING_COSTS[nextRank - 1]
+        return when {
+            rank >= MAXIMUM -> 0
+            wizardRank < 1 -> -1
+            rank >= teacherSpell.rank -> -2
+            else -> LEARNING_COSTS[nextRank - 1]
+        }
     }
 
     private fun getUpgradeFormula(): Float {
