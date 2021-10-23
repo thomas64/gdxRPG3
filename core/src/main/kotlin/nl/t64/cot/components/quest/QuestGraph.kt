@@ -162,24 +162,24 @@ class QuestGraph(
 
     private fun showMessageTooltipQuestNew() {
         if (!isHidden) {
-            brokerManager.questObservers.notifyShowMessageTooltip("New quest:" + System.lineSeparator() + System.lineSeparator() + title)
+            brokerManager.questObservers.notifyShowMessageTooltip("New quest:" + System.lineSeparator() + title)
         }
     }
 
     private fun showMessageTooltipQuestUpdated() {
         if (!isHidden && currentState == QuestState.ACCEPTED) {
-            brokerManager.questObservers.notifyShowMessageTooltip("Quest updated:" + System.lineSeparator() + System.lineSeparator() + title)
+            brokerManager.questObservers.notifyShowMessageTooltip("Quest updated:" + System.lineSeparator() + title)
         }
     }
 
     private fun showMessageTooltipQuestCompleted() {
         if (!isHidden) {
-            brokerManager.questObservers.notifyShowMessageTooltip("Quest completed:" + System.lineSeparator() + System.lineSeparator() + title)
+            brokerManager.questObservers.notifyShowMessageTooltip("Quest completed:" + System.lineSeparator() + title)
         }
     }
 
     private fun showMessageTooltipQuestFailed() {
-        brokerManager.questObservers.notifyShowMessageTooltip("Quest failed:" + System.lineSeparator() + System.lineSeparator() + title)
+        brokerManager.questObservers.notifyShowMessageTooltip("Quest failed:" + System.lineSeparator() + title)
     }
 
     private fun showMessageTooltipRewardXp(reward: Loot) {

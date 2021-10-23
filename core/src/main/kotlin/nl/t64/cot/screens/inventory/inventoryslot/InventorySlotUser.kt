@@ -31,9 +31,11 @@ class InventorySlotUser {
         if (filter.invoke()) {
             currentSlot.decrementAmountBy(1)
             action.invoke()
-            MessageDialog("${selectedHero.name} used a ${inventoryItem.name}.").show(currentSlot.stage, AudioEvent.SE_CONVERSATION_NEXT)
+            MessageDialog("${selectedHero.name} used a ${inventoryItem.name}.")
+                .show(currentSlot.stage, AudioEvent.SE_CONVERSATION_NEXT)
         } else {
-            MessageDialog("A ${inventoryItem.name} cannot be used right now.").show(currentSlot.stage, AudioEvent.SE_MENU_ERROR)
+            MessageDialog("A ${inventoryItem.name} cannot be used right now.")
+                .show(currentSlot.stage, AudioEvent.SE_MENU_ERROR)
         }
     }
 

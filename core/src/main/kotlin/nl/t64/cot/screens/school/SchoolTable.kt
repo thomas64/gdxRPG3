@@ -90,7 +90,11 @@ class SchoolTable(
 
     private fun upgradeSpell(spellItem: SpellItem, xpCost: Int, goldCost: Int) {
         selectedHero.doUpgrade(spellItem, xpCost, goldCost)
-        tooltip.hide()
+        hasJustUpdated = true
+        MessageDialog("""
+            ${spellItem.name}:
+            ${spellItem.rank - 1} -> ${spellItem.rank}""".trimIndent())
+            .show(table.stage, AudioEvent.SE_UPGRADE)
     }
 
     override fun selectCurrentSlot() {

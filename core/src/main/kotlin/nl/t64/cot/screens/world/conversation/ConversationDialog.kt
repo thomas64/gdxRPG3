@@ -65,10 +65,6 @@ class ConversationDialog {
     private var faceImage: Image? = null
     private lateinit var graph: ConversationGraph
 
-    init {
-        applyListeners()
-    }
-
     fun dispose() {
         stage.dispose()
         try {
@@ -86,10 +82,12 @@ class ConversationDialog {
     }
 
     fun hideWithFade() {
+        scrollPane.clearListeners()
         dialog.hide()
     }
 
     fun hide() {
+        scrollPane.clearListeners()
         dialog.hide(null)
     }
 
@@ -105,6 +103,7 @@ class ConversationDialog {
         fillDialogForConversation()
         audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_CONVERSATION_START)
         populateConversationDialog(graph.currentPhraseId)
+        applyListeners()
     }
 
     fun loadNote(noteId: String) {
@@ -114,6 +113,7 @@ class ConversationDialog {
         fillDialogForNote()
         audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_CONVERSATION_START)
         populateConversationDialog(graph.currentPhraseId)
+        applyListeners()
     }
 
     private fun createDialog(): Dialog {
@@ -174,8 +174,19 @@ class ConversationDialog {
         dialog.contentTable.add(textTable)
     }
 
+    private fun delayInputListeners() {
+        stage.addAction(Actions.sequence(
+            Actions.run { scrollPane.clearListeners() },
+            Actions.delay(1f),
+            Actions.run { applyListeners() }
+        ))
+    }
+
     private fun applyListeners() {
-        scrollPane.addListener(ConversationDialogListener(answers) { selectAnswer() })
+        scrollPane.addAction(Actions.sequence(
+            Actions.delay(0.5f),
+            Actions.addListener(ConversationDialogListener(answers) { selectAnswer() }, false)
+        ))
     }
 
     private fun continueConversation(nextId: String) {
@@ -312,20 +323,28 @@ class ConversationDialog {
     }
 
     private fun saveGame(nextId: String) {
+        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_SAVE_GAME)
         endConversation(nextId)
         profileManager.saveProfile()
     }
 
     private fun healLife(nextId: String) {
+        delayInputListeners()
         val price = conversationId!!.substringAfterLast("-").toInt()
         if (price > 0) {
             if (gameData.inventory.hasEnoughOfItem("gold", price)) {
                 gameData.inventory.autoRemoveItem("gold", price)
-                audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_COINS_BUY)
+                stage.addAction(Actions.sequence(
+                    Actions.run { audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_COINS_BUY) },
+                    Actions.delay(1f),
+                    Actions.run { audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_RESTORE) }
+                ))
             } else {
                 continueConversation(Constant.PHRASE_ID_INN_NEGATIVE)
                 return
             }
+        } else {
+            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_RESTORE)
         }
         gameData.party.recoverFullHp()
         brokerManager.mapObservers.notifyFadeOut(
@@ -345,8 +364,7 @@ class ConversationDialog {
             if (finalMessage.isEmpty()) {
                 conversationObservers.notifyShowMessageTooltip("+ ${reward.xp} XP")
             } else {
-                conversationObservers.notifyShowMessageTooltip("+ ${reward.xp} XP" + System.lineSeparator()
-                                                                       + System.lineSeparator() + finalMessage)
+                conversationObservers.notifyShowMessageTooltip("+ ${reward.xp} XP" + System.lineSeparator() + finalMessage)
             }
             reward.clearXp()
             continueConversationWithoutSound(nextId)

@@ -54,6 +54,7 @@ class SpellItem(
         return (description.joinToString(System.lineSeparator()) + System.lineSeparator()
                 + System.lineSeparator()
                 + "School: " + school.title + System.lineSeparator()
+                + "Min. Wizard rank: " + minWizard + System.lineSeparator()
                 + "Requires: " + requiredResource.title + System.lineSeparator()
                 + "Stamina cost: " + staminaCost + System.lineSeparator()
                 + System.lineSeparator())
@@ -66,8 +67,8 @@ class SpellItem(
     private fun getNeededXpForNextRank(teacherSpell: SpellItem, wizardRank: Int, totalScholar: Int): String {
         val xpNeeded = when (val cost = getXpCostForNextRank(teacherSpell, wizardRank, totalScholar).toString()) {
             "0" -> "Max"
-            "-1" -> "N/A"
-            "-2" -> "0"
+            "-1",
+            "-2" -> "N/A"
             else -> cost
         }
         return "'XP to Invest' needed for next level: $xpNeeded"
@@ -76,8 +77,8 @@ class SpellItem(
     private fun getNeededGoldForNextRank(teacherSpell: SpellItem, wizardRank: Int): String {
         val goldNeeded = when (val cost = getGoldCostForNextRank(teacherSpell, wizardRank).toString()) {
             "0" -> "Max"
-            "-1" -> "N/A"
-            "-2" -> "0"
+            "-1",
+            "-2" -> "N/A"
             else -> cost
         }
         return "Gold needed for next level: $goldNeeded"

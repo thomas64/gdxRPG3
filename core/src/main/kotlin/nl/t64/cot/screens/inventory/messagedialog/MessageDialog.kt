@@ -52,6 +52,7 @@ class MessageDialog(private val message: String) {
 
     private fun createDialog(): Dialog {
         val label = Label(message, LabelStyle(font, Color.BLACK))
+        label.setAlignment(Align.center)
         return Utils.createParchmentDialog(font).apply {
             padLeft(DIALOG_PAD)
             padRight(DIALOG_PAD)

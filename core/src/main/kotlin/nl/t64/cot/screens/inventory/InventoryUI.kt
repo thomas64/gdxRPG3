@@ -30,7 +30,7 @@ private const val TITLE_PERSONAL = "   Equipment"
 private const val TITLE_SPELLS = "   Spells"
 private const val TITLE_SKILLS = "   Skills"
 private const val TITLE_STATS = "   Stats"
-private const val TITLE_CALCS = "   Calcs"
+private const val TITLE_CALCS = "   Calculations"
 private const val TITLE_HEROES = "   Heroes"
 
 internal class InventoryUI(

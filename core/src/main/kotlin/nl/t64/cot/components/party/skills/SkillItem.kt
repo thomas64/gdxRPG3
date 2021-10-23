@@ -40,8 +40,8 @@ abstract class SkillItem(
     private fun getNeededXpForNextLevel(trainerSkill: SkillItem, totalScholar: Int): String {
         val xpNeeded = when (val cost = getXpCostForNextLevel(trainerSkill, totalScholar).toString()) {
             "0" -> "Max"
-            "-1" -> "N/A"
-            "-2" -> "0"
+            "-1",
+            "-2" -> "N/A"
             else -> cost
         }
         return "'XP to Invest' needed for next level: $xpNeeded"
@@ -50,8 +50,8 @@ abstract class SkillItem(
     private fun getNeededGoldForNextLevel(trainerSkill: SkillItem): String {
         val goldNeeded = when (val cost = getGoldCostForNextLevel(trainerSkill).toString()) {
             "0" -> "Max"
-            "-1" -> "N/A"
-            "-2" -> "0"
+            "-1",
+            "-2" -> "N/A"
             else -> cost
         }
         return "Gold needed for next level: $goldNeeded"

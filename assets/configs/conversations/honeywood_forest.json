@@ -8,7 +8,8 @@
     "phrases": {
       "1": {"text": ["Oh no, what's this?"]},
       "2": {"text": ["It's one of Grace's ribbons!", "So she has been here."]},
-      "3": {"text": ["But why here? What is there to find here?"], "choices": [{"command": "EXIT"}]}
+      "3": {"text": ["But where is she? I see nothing here."]},
+      "4": {"text": ["Wait! There is something behind the tree."], "choices": [{"command": "EXIT"}]}
     }
   },
   "dont_go_south"     : {
@@ -103,7 +104,7 @@
       },
       "40": {"face": "fairy01", "text": ["I'm not sure about that at the moment.", "Maybe she was at the wrong place at the wrong time. I sincerely hope so."], "choices": [{"nextId": "35"}]},
       "50": {"face": "fairy01", "text": ["You'll see when you get there.", "Don't worry, I wouldn't let you use it if I thought it wouldn't be safe."], "choices": [{"nextId": "35"}]},
-      "60": {"face": "fairy01", "text": ["Inside the cave, at the complete other side, go all way to south, then east and search the north wall. There is a hidden door in the dark."]},
+      "60": {"face": "fairy01", "text": ["When you go back inside the cave, go all the way south, then east and search the north wall. There is a hidden door in the dark."]},
       "61": {"face": "fairy01", "text": ["But before you go, please talk to the other fairies.", "They'll also offer you much needed help."]},
       "62": {"face": "fairy01", "text": ["After that, hurry and go! Before the time is up."]},
       "63": {"face": "fairy01", "text": ["Farewell our lovely Mozes. Grace is blessed with a brother like you.", "May the Goddess Tree smile upon you and your search."]},

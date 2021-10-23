@@ -112,7 +112,7 @@ class BattleScreen : Screen {
 
         val xpMessage = """
             The enemy is defeated!
-                Party gained $totalXpWon XP.""".trimIndent()
+            Party gained $totalXpWon XP.""".trimIndent()
         val messageDialog = MessageDialog(xpMessage)
         messageDialog.setActionAfterHide { battleWonExitScreen(finalLevelUpMessage) }
         messageDialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT)

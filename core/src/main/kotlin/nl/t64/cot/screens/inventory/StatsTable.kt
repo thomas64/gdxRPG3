@@ -53,7 +53,11 @@ internal class StatsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
 
     private fun upgradeStat(statItem: StatItem, xpCost: Int) {
         selectedHero.doUpgrade(statItem, xpCost)
-        tooltip.hide()
+        hasJustUpdated = true
+        MessageDialog("""
+            ${statItem.name}:
+            ${statItem.rank - 1} -> ${statItem.rank}""".trimIndent())
+            .show(table.stage, AudioEvent.SE_UPGRADE)
     }
 
     private fun fillStats() {

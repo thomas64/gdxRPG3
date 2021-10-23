@@ -81,7 +81,11 @@ internal class AcademyTable(
 
     private fun upgradeSkill(skillItem: SkillItem, xpCost: Int, goldCost: Int) {
         selectedHero.doUpgrade(skillItem, xpCost, goldCost)
-        tooltip.hide()
+        hasJustUpdated = true
+        MessageDialog("""
+            ${skillItem.name}:
+            ${skillItem.rank - 1} -> ${skillItem.rank}""".trimIndent())
+            .show(table.stage, AudioEvent.SE_UPGRADE)
     }
 
     private fun updateIndexAndSetSelectedSkill(deltaIndex: Int, size: Int) {

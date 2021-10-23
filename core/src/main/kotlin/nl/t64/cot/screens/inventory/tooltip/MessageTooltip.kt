@@ -2,15 +2,17 @@ package nl.t64.cot.screens.inventory.tooltip
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.utils.Align
+import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.constants.Constant
 
 
+private const val FONT = "fonts/calibri_light_32.ttf"
+private const val FONT_SIZE = 32
 private const val PAD = 50f
 private const val DELAY = 1f
 private const val SHOW_DURATION = 5f
@@ -22,7 +24,7 @@ class MessageTooltip : BaseTooltip() {
     init {
         super.window.padLeft(PAD)
         super.window.padRight(PAD)
-        val labelStyle = LabelStyle(BitmapFont(), Color.WHITE)
+        val labelStyle = LabelStyle(resourceManager.getTrueTypeAsset(FONT, FONT_SIZE), Color.WHITE)
         label = Label(null, labelStyle)
         label.setAlignment(Align.center)
         super.window.add(label)

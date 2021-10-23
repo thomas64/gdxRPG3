@@ -91,7 +91,8 @@ class MenuNew : MenuScreen() {
     }
 
     private fun fadeBeforeCreateNewGame() {
-        stage.addAction(Actions.sequence(Actions.run { isBgmFading = true },
+        stage.addAction(Actions.sequence(Actions.run { table.clearListeners() },
+                                         Actions.run { isBgmFading = true },
                                          Actions.fadeOut(Constant.FADE_DURATION),
                                          Actions.run { isBgmFading = false },
                                          Actions.run { createNewGame() }))

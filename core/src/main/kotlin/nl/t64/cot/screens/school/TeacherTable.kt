@@ -16,7 +16,7 @@ private val TEXT = """
     
     On the left you see in which spells and to what rank I can teach you, and on the right are the spells with the ranks you already have been taught in.
     
-    You cannot learn a spell here above the rank I can teach you.
+    You cannot learn a spell here above the spell ranks I have myself.
     
     To learn a spell will cost you 'XP to Invest' and gold.""".trimIndent()
 
