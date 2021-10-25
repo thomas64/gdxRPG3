@@ -144,7 +144,9 @@ internal class DebugBox(private val player: Entity) {
         val pixmap = Pixmap(1, 1, Pixmap.Format.Alpha)
         pixmap.setColor(TRANSPARENT)
         pixmap.fill()
-        return Image(Texture(pixmap)).drawable
+        val drawable = Image(Texture(pixmap)).drawable
+        pixmap.dispose()
+        return drawable
     }
 
 }

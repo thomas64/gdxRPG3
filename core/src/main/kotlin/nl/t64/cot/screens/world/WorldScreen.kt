@@ -63,6 +63,7 @@ class WorldScreen : Screen,
 
     private val player = Entity(Constant.PLAYER_ID, InputPlayer(multiplexer), PhysicsPlayer(), GraphicsPlayer())
     private val debugBox = DebugBox(player)
+    private val buttonsBox = ButtonBox()
 
     private lateinit var partyMembers: List<Entity>
     private lateinit var npcEntities: List<Entity>
@@ -335,6 +336,7 @@ class WorldScreen : Screen,
         renderGrid()
         renderObjects()
         updateDebugBox(dt)
+        buttonsBox.update(dt)
         partyWindow.update(dt)
         conversationDialog.update(dt)
         messageDialog.update(dt)
@@ -473,6 +475,7 @@ class WorldScreen : Screen,
         conversationDialog.dispose()
         messageDialog.dispose()
         debugBox.dispose()
+        buttonsBox.dispose()
         stage.dispose()
     }
 

@@ -5,8 +5,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane
 import nl.t64.cot.Utils
+import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.resourceManager
+import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.components.party.skills.SkillItem
 import nl.t64.cot.components.party.skills.SkillItemId
@@ -82,6 +84,7 @@ internal class AcademyTable(
     private fun upgradeSkill(skillItem: SkillItem, xpCost: Int, goldCost: Int) {
         selectedHero.doUpgrade(skillItem, xpCost, goldCost)
         hasJustUpdated = true
+        audioManager.handle(AudioCommand.SE_STOP_ALL)
         MessageDialog("""
             ${skillItem.name}:
             ${skillItem.rank - 1} -> ${skillItem.rank}""".trimIndent())

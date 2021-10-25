@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import nl.t64.cot.Utils
+import nl.t64.cot.Utils.audioManager
+import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.components.party.stats.StatItem
 import nl.t64.cot.constants.Constant
@@ -54,6 +56,7 @@ internal class StatsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
     private fun upgradeStat(statItem: StatItem, xpCost: Int) {
         selectedHero.doUpgrade(statItem, xpCost)
         hasJustUpdated = true
+        audioManager.handle(AudioCommand.SE_STOP_ALL)
         MessageDialog("""
             ${statItem.name}:
             ${statItem.rank - 1} -> ${statItem.rank}""".trimIndent())
