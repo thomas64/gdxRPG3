@@ -28,8 +28,6 @@ internal class LuanaTest : GameTest() {
         assertThat(luana.getCalculatedTotalStatOf(StatItemId.WILLPOWER)).isEqualTo(10)
         assertThat(luana.getStatById(StatItemId.DEXTERITY).rank).isEqualTo(22)
         assertThat(luana.getCalculatedTotalStatOf(StatItemId.DEXTERITY)).isEqualTo(22)
-        assertThat(luana.getStatById(StatItemId.AGILITY).rank).isEqualTo(20)
-        assertThat(luana.getCalculatedTotalStatOf(StatItemId.AGILITY)).isEqualTo(20)
         assertThat(luana.getStatById(StatItemId.ENDURANCE).rank).isEqualTo(10)
         assertThat(luana.getCalculatedTotalStatOf(StatItemId.ENDURANCE)).isEqualTo(10)
         assertThat(luana.getStatById(StatItemId.STRENGTH).rank).isEqualTo(8)
@@ -82,8 +80,8 @@ internal class LuanaTest : GameTest() {
 
         assertThat(luana.getTotalCalcOf(CalcAttributeId.DAMAGE)).isEqualTo(8)
         assertThat(luana.getCalculatedTotalDamage()).isEqualTo(0)
-        assertThat(luana.getTotalCalcOf(CalcAttributeId.MOVEPOINTS)).isEqualTo(0)
-        assertThat(luana.getCalculatedMovepoints()).isEqualTo(12)
+        assertThat(luana.getTotalCalcOf(CalcAttributeId.ACTION_POINTS)).isEqualTo(0)
+        assertThat(luana.getCalculatedActionPoints()).isEqualTo(12)
     }
 
 }

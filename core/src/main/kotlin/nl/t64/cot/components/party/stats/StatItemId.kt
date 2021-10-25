@@ -9,7 +9,6 @@ enum class StatItemId(override val title: String) : SuperEnum {
     WILLPOWER("Willpower"),
     STRENGTH("Strength"),
     DEXTERITY("Dexterity"),
-    AGILITY("Agility"),
     ENDURANCE("Endurance"),
     STAMINA("Stamina");
 

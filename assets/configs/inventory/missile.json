@@ -7,7 +7,7 @@
     "is_two_handed": true,
     "price"        : 20,
     "min_dexterity": 15,
-    "base_hit"     : 30,
+    "base_hit"     : 65,
     "damage"       : 4
   },
   "fine_shortbow"      : {
@@ -16,9 +16,9 @@
     "sort"         : 2400,
     "skill"        : "MISSILE",
     "is_two_handed": true,
-    "price"        : 40,
+    "price"        : 30,
     "min_dexterity": 16,
-    "base_hit"     : 40,
+    "base_hit"     : 65,
     "damage"       : 6
   },
   "specialist_shortbow": {
@@ -27,9 +27,9 @@
     "sort"         : 3400,
     "skill"        : "MISSILE",
     "is_two_handed": true,
-    "price"        : 60,
+    "price"        : 40,
     "min_dexterity": 17,
-    "base_hit"     : 50,
+    "base_hit"     : 65,
     "damage"       : 8
   },
   "masterwork_shortbow": {
@@ -38,9 +38,9 @@
     "sort"         : 4400,
     "skill"        : "MISSILE",
     "is_two_handed": true,
-    "price"        : 80,
+    "price"        : 50,
     "min_dexterity": 18,
-    "base_hit"     : 60,
+    "base_hit"     : 65,
     "damage"       : 10
   },
   "basic_longbow"      : {
@@ -49,10 +49,10 @@
     "sort"         : 1420,
     "skill"        : "MISSILE",
     "is_two_handed": true,
-    "price"        : 30,
+    "price"        : 40,
     "min_dexterity": 19,
-    "base_hit"     : 30,
-    "damage"       : 6
+    "base_hit"     : 50,
+    "damage"       : 10
   },
   "fine_longbow"       : {
     "name"         : "Fine Longbow",
@@ -62,8 +62,8 @@
     "is_two_handed": true,
     "price"        : 50,
     "min_dexterity": 20,
-    "base_hit"     : 40,
-    "damage"       : 8
+    "base_hit"     : 50,
+    "damage"       : 12
   },
   "specialist_longbow" : {
     "name"         : "Specialist Longbow",
@@ -71,10 +71,10 @@
     "sort"         : 3420,
     "skill"        : "MISSILE",
     "is_two_handed": true,
-    "price"        : 70,
+    "price"        : 60,
     "min_dexterity": 21,
     "base_hit"     : 50,
-    "damage"       : 10
+    "damage"       : 14
   },
   "masterwork_longbow" : {
     "name"         : "Masterwork Longbow",
@@ -82,10 +82,10 @@
     "sort"         : 4420,
     "skill"        : "MISSILE",
     "is_two_handed": true,
-    "price"        : 90,
+    "price"        : 70,
     "min_dexterity": 22,
-    "base_hit"     : 60,
-    "damage"       : 12
+    "base_hit"     : 50,
+    "damage"       : 16
   },
   "basic_greatbow"     : {
     "name"         : "Basic Greatbow",
@@ -93,10 +93,10 @@
     "sort"         : 1440,
     "skill"        : "MISSILE",
     "is_two_handed": true,
-    "price"        : 40,
+    "price"        : 60,
     "min_dexterity": 23,
-    "base_hit"     : 30,
-    "damage"       : 8
+    "base_hit"     : 35,
+    "damage"       : 16
   },
   "fine_greatbow"      : {
     "name"         : "Fine Greatbow",
@@ -104,10 +104,10 @@
     "sort"         : 2440,
     "skill"        : "MISSILE",
     "is_two_handed": true,
-    "price"        : 60,
+    "price"        : 70,
     "min_dexterity": 24,
-    "base_hit"     : 40,
-    "damage"       : 10
+    "base_hit"     : 35,
+    "damage"       : 18
   },
   "specialist_greatbow": {
     "name"         : "Specialist Greatbow",
@@ -117,8 +117,8 @@
     "is_two_handed": true,
     "price"        : 80,
     "min_dexterity": 25,
-    "base_hit"     : 50,
-    "damage"       : 12
+    "base_hit"     : 35,
+    "damage"       : 20
   },
   "masterwork_greatbow": {
     "name"         : "Masterwork Greatbow",
@@ -126,10 +126,10 @@
     "sort"         : 4440,
     "skill"        : "MISSILE",
     "is_two_handed": true,
-    "price"        : 100,
+    "price"        : 90,
     "min_dexterity": 26,
-    "base_hit"     : 60,
-    "damage"       : 14
+    "base_hit"     : 35,
+    "damage"       : 22
   },
   "basic_crossbow"     : {
     "name"         : "Basic Crossbow",
@@ -137,10 +137,10 @@
     "sort"         : 1460,
     "skill"        : "MISSILE",
     "is_two_handed": true,
-    "price"        : 50,
+    "price"        : 80,
     "min_dexterity": 27,
-    "base_hit"     : 30,
-    "damage"       : 10
+    "base_hit"     : 20,
+    "damage"       : 22
   },
   "fine_crossbow"      : {
     "name"         : "Fine Crossbow",
@@ -148,10 +148,10 @@
     "sort"         : 2460,
     "skill"        : "MISSILE",
     "is_two_handed": true,
-    "price"        : 70,
+    "price"        : 90,
     "min_dexterity": 28,
-    "base_hit"     : 40,
-    "damage"       : 12
+    "base_hit"     : 20,
+    "damage"       : 24
   },
   "specialist_crossbow": {
     "name"         : "Specialist Crossbow",
@@ -159,10 +159,10 @@
     "sort"         : 3460,
     "skill"        : "MISSILE",
     "is_two_handed": true,
-    "price"        : 90,
+    "price"        : 100,
     "min_dexterity": 29,
-    "base_hit"     : 50,
-    "damage"       : 14
+    "base_hit"     : 20,
+    "damage"       : 26
   },
   "masterwork_crossbow": {
     "name"         : "Masterwork Crossbow",
@@ -172,7 +172,7 @@
     "is_two_handed": true,
     "price"        : 110,
     "min_dexterity": 30,
-    "base_hit"     : 60,
-    "damage"       : 16
+    "base_hit"     : 20,
+    "damage"       : 28
   }
 }

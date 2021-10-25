@@ -155,9 +155,8 @@ class DescriptionCreator(
             return false
         }
         if ((description.key == CalcAttributeId.PROTECTION
-                    || description.key == StatItemId.AGILITY
                     || description.key == SkillItemId.STEALTH)
-            && inventoryItem.group.hasImpactOnPrtAgiStl()
+            && inventoryItem.group.hasImpactOnPrtStl()
         ) {
             return true
         }

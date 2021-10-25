@@ -33,10 +33,6 @@ abstract class SkillItem(
         rank += 1
     }
 
-    fun doDowngrade() {
-        rank -= 1
-    }
-
     private fun getNeededXpForNextLevel(trainerSkill: SkillItem, totalScholar: Int): String {
         val xpNeeded = when (val cost = getXpCostForNextLevel(trainerSkill, totalScholar).toString()) {
             "0" -> "Max"

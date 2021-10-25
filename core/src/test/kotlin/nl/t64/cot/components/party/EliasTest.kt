@@ -28,8 +28,6 @@ internal class EliasTest : GameTest() {
         assertThat(elias.getCalculatedTotalStatOf(StatItemId.WILLPOWER)).isEqualTo(30)
         assertThat(elias.getStatById(StatItemId.DEXTERITY).rank).isEqualTo(25)
         assertThat(elias.getCalculatedTotalStatOf(StatItemId.DEXTERITY)).isEqualTo(25)
-        assertThat(elias.getStatById(StatItemId.AGILITY).rank).isEqualTo(18)
-        assertThat(elias.getCalculatedTotalStatOf(StatItemId.AGILITY)).isEqualTo(17)
         assertThat(elias.getStatById(StatItemId.ENDURANCE).rank).isEqualTo(30)
         assertThat(elias.getCalculatedTotalStatOf(StatItemId.ENDURANCE)).isEqualTo(30)
         assertThat(elias.getStatById(StatItemId.STRENGTH).rank).isEqualTo(20)
@@ -82,8 +80,8 @@ internal class EliasTest : GameTest() {
 
         assertThat(elias.getTotalCalcOf(CalcAttributeId.DAMAGE)).isEqualTo(17)
         assertThat(elias.getCalculatedTotalDamage()).isEqualTo(58)
-        assertThat(elias.getTotalCalcOf(CalcAttributeId.MOVEPOINTS)).isEqualTo(0)
-        assertThat(elias.getCalculatedMovepoints()).isEqualTo(15)
+        assertThat(elias.getTotalCalcOf(CalcAttributeId.ACTION_POINTS)).isEqualTo(0)
+        assertThat(elias.getCalculatedActionPoints()).isEqualTo(15)
     }
 
 }

@@ -228,7 +228,6 @@ class HeroTest : GameTest() {
                              StatItemId.WILLPOWER,
                              StatItemId.STRENGTH,
                              StatItemId.DEXTERITY,
-                             StatItemId.AGILITY,
                              StatItemId.ENDURANCE,
                              StatItemId.STAMINA)
         assertThat(mozes.getStatById(StatItemId.INTELLIGENCE).getXpCostForNextRank()).isEqualTo(43)

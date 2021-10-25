@@ -95,7 +95,7 @@ class GameData : ProfileObserver {
     }
 
     private fun addFirstItemsToInventory() {
-        val mace = createInventoryItem("basic_mace")
+        val mace = createInventoryItem("basic_light_shield")
         val gold = createInventoryItem("gold")
         inventory.autoSetItem(mace)
         inventory.autoSetItem(gold)

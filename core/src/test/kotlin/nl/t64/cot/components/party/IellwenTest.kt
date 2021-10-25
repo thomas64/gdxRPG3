@@ -28,8 +28,6 @@ internal class IellwenTest : GameTest() {
         assertThat(iellwen.getCalculatedTotalStatOf(StatItemId.WILLPOWER)).isEqualTo(25)
         assertThat(iellwen.getStatById(StatItemId.DEXTERITY).rank).isEqualTo(30)
         assertThat(iellwen.getCalculatedTotalStatOf(StatItemId.DEXTERITY)).isEqualTo(30)
-        assertThat(iellwen.getStatById(StatItemId.AGILITY).rank).isEqualTo(25)
-        assertThat(iellwen.getCalculatedTotalStatOf(StatItemId.AGILITY)).isEqualTo(24)
         assertThat(iellwen.getStatById(StatItemId.ENDURANCE).rank).isEqualTo(30)
         assertThat(iellwen.getCalculatedTotalStatOf(StatItemId.ENDURANCE)).isEqualTo(30)
         assertThat(iellwen.getStatById(StatItemId.STRENGTH).rank).isEqualTo(20)
@@ -82,8 +80,8 @@ internal class IellwenTest : GameTest() {
 
         assertThat(iellwen.getTotalCalcOf(CalcAttributeId.DAMAGE)).isEqualTo(17)
         assertThat(iellwen.getCalculatedTotalDamage()).isEqualTo(67)
-        assertThat(iellwen.getTotalCalcOf(CalcAttributeId.MOVEPOINTS)).isEqualTo(0)
-        assertThat(iellwen.getCalculatedMovepoints()).isEqualTo(15)
+        assertThat(iellwen.getTotalCalcOf(CalcAttributeId.ACTION_POINTS)).isEqualTo(0)
+        assertThat(iellwen.getCalculatedActionPoints()).isEqualTo(15)
     }
 
 }

@@ -9,7 +9,7 @@ class Stamina(rank: Int = 0) : StatItem(
 ) {
     override fun getDescription(): String {
         return """
-            Affects movepoints in battle and is used by magic spells
+            Affects Action Points in battle and is used by magic spells
             and some skill actions. $name is also lost when 
             taking damage from attacks. When $name hits zero,
             your character will experience combat penalties.""".trimIndent()
@@ -49,11 +49,11 @@ class Stamina(rank: Int = 0) : StatItem(
     }
 
     fun getDefensePenalty(): Int {
-        return if (variable <= 0) 3 else 1
+        return if (variable <= 0) 50 else 0
     }
 
     fun getChanceToHitPenalty(): Int {
-        return if (variable <= 0) 3 else 1
+        return if (variable <= 0) 25 else 0
     }
 
 }

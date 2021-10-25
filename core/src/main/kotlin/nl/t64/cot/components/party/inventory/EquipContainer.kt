@@ -24,11 +24,13 @@ class EquipContainer() {
         Pair(InventoryGroup.PANTS.name, null),
         Pair(InventoryGroup.BOOTS.name, null))
 
-    @ConstructorProperties("weapon", "shield", "chest")
-    constructor(weaponId: String, shieldId: String?, chestId: String) : this() {
+    @ConstructorProperties("weapon", "shield", "chest", "pants", "boots")
+    constructor(weaponId: String, shieldId: String?, chestId: String, pantsId: String?, bootsId: String?) : this() {
         this.equipment[InventoryGroup.WEAPON.name] = InventoryDatabase.createInventoryItem(weaponId)
         shieldId?.let { this.equipment[InventoryGroup.SHIELD.name] = InventoryDatabase.createInventoryItem(it) }
         this.equipment[InventoryGroup.CHEST.name] = InventoryDatabase.createInventoryItem(chestId)
+        pantsId?.let { this.equipment[InventoryGroup.PANTS.name] = InventoryDatabase.createInventoryItem(it) }
+        bootsId?.let { this.equipment[InventoryGroup.BOOTS.name] = InventoryDatabase.createInventoryItem(it) }
     }
 
     fun hasInventoryItem(itemId: String): Boolean {
@@ -79,7 +81,7 @@ class EquipContainer() {
         return equipment.values.filterNotNull().sumOf { it.getAttributeOfCalcAttributeId(calcAttributeId) }
     }
 
-    fun getWeaponSkill(): SkillItemId? {
+    fun getSkillOfCurrentWeapon(): SkillItemId? {
         return getInventoryItem(InventoryGroup.WEAPON)?.getAttributeOfMinimal(InventoryMinimal.SKILL) as SkillItemId?
     }
 

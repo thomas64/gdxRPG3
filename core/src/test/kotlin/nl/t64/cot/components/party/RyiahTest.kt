@@ -28,8 +28,6 @@ internal class RyiahTest : GameTest() {
         assertThat(ryiah.getCalculatedTotalStatOf(StatItemId.WILLPOWER)).isEqualTo(16)
         assertThat(ryiah.getStatById(StatItemId.DEXTERITY).rank).isEqualTo(20)
         assertThat(ryiah.getCalculatedTotalStatOf(StatItemId.DEXTERITY)).isEqualTo(20)
-        assertThat(ryiah.getStatById(StatItemId.AGILITY).rank).isEqualTo(15)
-        assertThat(ryiah.getCalculatedTotalStatOf(StatItemId.AGILITY)).isEqualTo(15)
         assertThat(ryiah.getStatById(StatItemId.ENDURANCE).rank).isEqualTo(16)
         assertThat(ryiah.getCalculatedTotalStatOf(StatItemId.ENDURANCE)).isEqualTo(16)
         assertThat(ryiah.getStatById(StatItemId.STRENGTH).rank).isEqualTo(10)
@@ -82,8 +80,8 @@ internal class RyiahTest : GameTest() {
 
         assertThat(ryiah.getTotalCalcOf(CalcAttributeId.DAMAGE)).isEqualTo(4)
         assertThat(ryiah.getCalculatedTotalDamage()).isEqualTo(20)
-        assertThat(ryiah.getTotalCalcOf(CalcAttributeId.MOVEPOINTS)).isEqualTo(0)
-        assertThat(ryiah.getCalculatedMovepoints()).isEqualTo(13)
+        assertThat(ryiah.getTotalCalcOf(CalcAttributeId.ACTION_POINTS)).isEqualTo(0)
+        assertThat(ryiah.getCalculatedActionPoints()).isEqualTo(13)
     }
 
 }

@@ -28,8 +28,6 @@ internal class MozesTest : GameTest() {
         assertThat(mozes.getCalculatedTotalStatOf(StatItemId.WILLPOWER)).isEqualTo(12)
         assertThat(mozes.getStatById(StatItemId.DEXTERITY).rank).isEqualTo(15)
         assertThat(mozes.getCalculatedTotalStatOf(StatItemId.DEXTERITY)).isEqualTo(15)
-        assertThat(mozes.getStatById(StatItemId.AGILITY).rank).isEqualTo(15)
-        assertThat(mozes.getCalculatedTotalStatOf(StatItemId.AGILITY)).isEqualTo(14)
         assertThat(mozes.getStatById(StatItemId.ENDURANCE).rank).isEqualTo(15)
         assertThat(mozes.getCalculatedTotalStatOf(StatItemId.ENDURANCE)).isEqualTo(15)
         assertThat(mozes.getStatById(StatItemId.STRENGTH).rank).isEqualTo(15)
@@ -82,8 +80,8 @@ internal class MozesTest : GameTest() {
 
         assertThat(mozes.getTotalCalcOf(CalcAttributeId.DAMAGE)).isEqualTo(13)
         assertThat(mozes.getCalculatedTotalDamage()).isEqualTo(37)
-        assertThat(mozes.getTotalCalcOf(CalcAttributeId.MOVEPOINTS)).isEqualTo(0)
-        assertThat(mozes.getCalculatedMovepoints()).isEqualTo(12)
+        assertThat(mozes.getTotalCalcOf(CalcAttributeId.ACTION_POINTS)).isEqualTo(0)
+        assertThat(mozes.getCalculatedActionPoints()).isEqualTo(12)
     }
 
 }

@@ -28,8 +28,6 @@ internal class LuthaisTest : GameTest() {
         assertThat(luthais.getCalculatedTotalStatOf(StatItemId.WILLPOWER)).isEqualTo(30)
         assertThat(luthais.getStatById(StatItemId.DEXTERITY).rank).isEqualTo(20)
         assertThat(luthais.getCalculatedTotalStatOf(StatItemId.DEXTERITY)).isEqualTo(20)
-        assertThat(luthais.getStatById(StatItemId.AGILITY).rank).isEqualTo(12)
-        assertThat(luthais.getCalculatedTotalStatOf(StatItemId.AGILITY)).isEqualTo(12)
         assertThat(luthais.getStatById(StatItemId.ENDURANCE).rank).isEqualTo(18)
         assertThat(luthais.getCalculatedTotalStatOf(StatItemId.ENDURANCE)).isEqualTo(18)
         assertThat(luthais.getStatById(StatItemId.STRENGTH).rank).isEqualTo(8)
@@ -82,8 +80,8 @@ internal class LuthaisTest : GameTest() {
 
         assertThat(luthais.getTotalCalcOf(CalcAttributeId.DAMAGE)).isEqualTo(10)
         assertThat(luthais.getCalculatedTotalDamage()).isEqualTo(34)
-        assertThat(luthais.getTotalCalcOf(CalcAttributeId.MOVEPOINTS)).isEqualTo(0)
-        assertThat(luthais.getCalculatedMovepoints()).isEqualTo(15)
+        assertThat(luthais.getTotalCalcOf(CalcAttributeId.ACTION_POINTS)).isEqualTo(0)
+        assertThat(luthais.getCalculatedActionPoints()).isEqualTo(15)
     }
 
 }

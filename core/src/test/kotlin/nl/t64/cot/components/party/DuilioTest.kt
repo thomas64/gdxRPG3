@@ -28,8 +28,6 @@ internal class DuilioTest : GameTest() {
         assertThat(duilio.getCalculatedTotalStatOf(StatItemId.WILLPOWER)).isEqualTo(25)
         assertThat(duilio.getStatById(StatItemId.DEXTERITY).rank).isEqualTo(30)
         assertThat(duilio.getCalculatedTotalStatOf(StatItemId.DEXTERITY)).isEqualTo(30)
-        assertThat(duilio.getStatById(StatItemId.AGILITY).rank).isEqualTo(20)
-        assertThat(duilio.getCalculatedTotalStatOf(StatItemId.AGILITY)).isEqualTo(19)
         assertThat(duilio.getStatById(StatItemId.ENDURANCE).rank).isEqualTo(25)
         assertThat(duilio.getCalculatedTotalStatOf(StatItemId.ENDURANCE)).isEqualTo(25)
         assertThat(duilio.getStatById(StatItemId.STRENGTH).rank).isEqualTo(25)
@@ -82,8 +80,8 @@ internal class DuilioTest : GameTest() {
 
         assertThat(duilio.getTotalCalcOf(CalcAttributeId.DAMAGE)).isEqualTo(17)
         assertThat(duilio.getCalculatedTotalDamage()).isEqualTo(72)
-        assertThat(duilio.getTotalCalcOf(CalcAttributeId.MOVEPOINTS)).isEqualTo(0)
-        assertThat(duilio.getCalculatedMovepoints()).isEqualTo(17)
+        assertThat(duilio.getTotalCalcOf(CalcAttributeId.ACTION_POINTS)).isEqualTo(0)
+        assertThat(duilio.getCalculatedActionPoints()).isEqualTo(17)
     }
 
 }

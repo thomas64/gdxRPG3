@@ -6,17 +6,17 @@ enum class CalcAttributeId(override val title: String) : SuperEnum {
     WEIGHT("Weight") {
         override fun getDescription(): String {
             return """
-                Decreases amount of movepoints in combat.
+                Decreases amount of Action Points in combat.
                 Allows the possibility of shoving a less weighted character in combat.""".trimIndent()
         }
     },
 
-    MOVEPOINTS("Movepoints") {
+    ACTION_POINTS("Action Points") {
         override fun getDescription(): String {
             return """
-                Defines how many steps this character is able to take in combat.
-                Movepoints are calculated from Stamina and Weight.
-                More stamina, more movepoints. More weight, less movepoints.""".trimIndent()
+                Defines how many actions this character is able to do in combat.
+                Action Points are calculated from Stamina and Weight.
+                More stamina, more AP. More weight, less AP.""".trimIndent()
         }
     },
 
@@ -25,8 +25,7 @@ enum class CalcAttributeId(override val title: String) : SuperEnum {
             return """
                 Defines the change-to-hit an enemy with physical weapons in combat.
                 $title is that of the weapon itself clean with no modifiers.
-                Total Hit is modified with Strength (only for hand-to-hand combat) or
-                Dexterity (only for ranged combat), Warrior skill and current weapon skill.""".trimIndent()
+                Total Hit is modified with the skill of the weapon you are currently holding.""".trimIndent()
         }
     },
 
@@ -37,8 +36,8 @@ enum class CalcAttributeId(override val title: String) : SuperEnum {
                 Damage is the counterpart of Protection.
                 An enemy's protection decreases the damage you inflict.
                 Weapon Damage is that of the weapon itself clean with no modifiers. 
-                Total Damage is modified with Strength (only for hand-to-hand combat) or
-                Dexterity (only for ranged combat), Warrior skill and current weapon skill.""".trimIndent()
+                Total Damage is modified with Strength for hand-to-hand combat,
+                or Dexterity for ranged combat.""".trimIndent()
         }
     },
 

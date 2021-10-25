@@ -83,14 +83,6 @@ class HeroItem(
         }
     }
 
-    fun doTempUpgrade(skillItem: SkillItem) {
-        skillItem.doUpgrade()
-    }
-
-    fun doTempDowngrade(skillItem: SkillItem) {
-        skillItem.doDowngrade()
-    }
-
     val xpNeededForNextLevel: Int get() = stats.getXpNeededForNextLevel()
     val xpDeltaBetweenLevels: Int get() = stats.getXpDeltaBetweenLevels()
     val totalXp: Int get() = stats.totalXp
@@ -227,10 +219,6 @@ class HeroItem(
         return if (extra < 0 && extra < -skillItem.rank) -skillItem.rank else extra
     }
 
-    fun getWeaponSkillForVisual(): String {
-        return inventory.getWeaponSkill()?.title ?: "None"
-    }
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     fun getCalculatedTotalStatOf(statItemId: StatItemId): Int {
@@ -271,58 +259,82 @@ class HeroItem(
         return inventory.getBonusProtectionWhenArmorSetIsComplete()
     }
 
-    fun getCalculatedMovepoints(): Int {
-        return (10f
-                + stats.getById(StatItemId.STAMINA).variable / 10f
-                - getTotalCalcOf(CalcAttributeId.WEIGHT) / 3f)
-            // todo:
-            //  + bonus movepoints van equipment
-            .roundToInt()
+    fun getCalculatedActionPoints(): Int {
+        return ((10f
+                + (stats.getById(StatItemId.STAMINA).variable / 8f))    // todo, is dit de perfecte tweak voor AP?
+                - (getTotalCalcOf(CalcAttributeId.WEIGHT) / 2f)         // samen met deze.
+                // todo:
+                //  + bonus actionpoints van equipment
+                // een step is 1 AP, een attack is 5 AP.
+                // loskomen van een close attack is x AP, wapen wisselen is x AP.
+                ).roundToInt()
             .takeIf { it > 0f } ?: 1
     }
 
     fun getCalculatedTotalHit(): Int {
-        // todo, is nu alleen nog maar voor hand to hand wapens.
-        return inventory.getWeaponSkill()
-            ?.takeIf { it.isHandToHandWeaponSkill() }
-            ?.let { getCalculatedTotalHit(it) }
-            ?: 0
+        // todo, is nu alleen nog maar voor wapens, niet voor potions.
+        return inventory.getSkillOfCurrentWeapon()?.let {
+            getCalculatedTotalHit(it)
+        } ?: 0
     }
 
     fun getCalculatedTotalDamage(): Int {
-        // todo, is nu alleen nog maar voor hand to hand wapens.
-        return inventory.getWeaponSkill()
-            ?.takeIf { it.isHandToHandWeaponSkill() }
-            ?.let { getCalculatedTotalDamage(it) }
-            ?: 0
+        // todo, is nu alleen nog maar voor wapens, niet voor potions.
+        val currentWeaponSkill = inventory.getSkillOfCurrentWeapon()
+        return when {
+            currentWeaponSkill == null -> 0
+            currentWeaponSkill.isHandToHandWeaponSkill() -> getCalculatedTotalDamageClose()
+            else -> getCalculatedTotalDamageRange()
+        }
     }
 
     fun getCalculatedTotalDefense(): Int {
         return when {
             inventory.getInventoryItem(InventoryGroup.SHIELD) == null -> 0
-            else -> (getTotalCalcOf(CalcAttributeId.DEFENSE)
-                    // + getLevel() todo, this one shouldn't be shown in calculation but should be calculated in battle.
-                    + (getCalculatedTotalStatOf(StatItemId.AGILITY) / stats.getDefenseStaminaPenalty())
-                    + getCalculatedTotalSkillOf(SkillItemId.WARRIOR)
-                    + (getCalculatedTotalSkillOf(SkillItemId.SHIELD) * 2f)).roundToInt()
+            else -> {
+                val shieldDefense = getTotalCalcOf(CalcAttributeId.DEFENSE)
+                val wielderSkill = getCalculatedTotalSkillOf(SkillItemId.SHIELD)
+                val staminaPenalty = stats.getDefenseStaminaPenalty()
+                val formula = shieldDefense + ((shieldDefense / 100f) * (10f * wielderSkill)) - staminaPenalty
+                // + getLevel() todo, this one shouldn't be shown in calculation but should be calculated in battle.
+                formula.roundToInt()
+            }
         }
     }
 
     private fun getCalculatedTotalHit(weaponSkill: SkillItemId): Int {
-        return (getTotalCalcOf(CalcAttributeId.BASE_HIT)
-                + ((47f - (getTotalCalcOf(CalcAttributeId.BASE_HIT) / 2f))
-                * ((getCalculatedTotalSkillOf(weaponSkill) + getCalculatedTotalSkillOf(SkillItemId.WARRIOR)) / 20f))
+        val weaponHit = getTotalCalcOf(CalcAttributeId.BASE_HIT)
+        val wielderSkill = getCalculatedTotalSkillOf(weaponSkill)
+        val staminaPenalty = stats.getChanceToHitStaminaPenalty()
+        val formula = weaponHit + ((weaponHit / 100f) * (10f * wielderSkill)) - staminaPenalty
+        return (formula
+                // + troubadour
+                // + back attack + thief bonus
                 // + getLevel() todo, this one shouldn't be shown in calculation but should be calculated in battle.
-                + (getCalculatedTotalStatOf(StatItemId.STRENGTH) / stats.getChanceToHitStaminaPenalty())
                 ).roundToInt()
     }
 
-    private fun getCalculatedTotalDamage(weaponSkill: SkillItemId): Int {
-        return (getTotalCalcOf(CalcAttributeId.DAMAGE)
+    private fun getCalculatedTotalDamageClose(): Int {
+        val weaponDamage = getTotalCalcOf(CalcAttributeId.DAMAGE)
+        val staminaPenalty = stats.getInflictDamageStaminaPenalty()
+        val wielderStrength = getCalculatedTotalStatOf(StatItemId.STRENGTH) / staminaPenalty
+        val formula = weaponDamage + ((weaponDamage / 100f) * (5f * wielderStrength))
+        return (formula
+                // + back thief
                 // + getLevel() todo, this one shouldn't be shown in calculation but should be calculated in battle.
-                + (getCalculatedTotalStatOf(StatItemId.STRENGTH) / stats.getInflictDamageStaminaPenalty())
-                + getCalculatedTotalSkillOf(SkillItemId.WARRIOR)
-                + (getCalculatedTotalSkillOf(weaponSkill) * 2f)).roundToInt()
+                // + crit warrior
+                ).roundToInt()
+    }
+
+    private fun getCalculatedTotalDamageRange(): Int {
+        val weaponDamage = getTotalCalcOf(CalcAttributeId.DAMAGE)
+        val staminaPenalty = stats.getInflictDamageStaminaPenalty()
+        val wielderDexterity = getCalculatedTotalStatOf(StatItemId.DEXTERITY) / staminaPenalty
+        val formula = weaponDamage + ((weaponDamage / 100f) * (5f * wielderDexterity))
+        return (formula
+                // + getLevel() todo, this one shouldn't be shown in calculation but should be calculated in battle.
+                // + crit warrior
+                ).roundToInt()
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

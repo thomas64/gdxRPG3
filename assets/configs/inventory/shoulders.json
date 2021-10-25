@@ -6,7 +6,6 @@
     "price"     : 10,
     "weight"    : 1,
     "protection": 1,
-    "agility"   : 0,
     "stealth"   : 0
   },
   "fine_light_shoulders"       : {
@@ -16,7 +15,6 @@
     "price"     : 20,
     "weight"    : 1,
     "protection": 2,
-    "agility"   : 0,
     "stealth"   : 0
   },
   "specialist_light_shoulders" : {
@@ -26,7 +24,6 @@
     "price"     : 30,
     "weight"    : 1,
     "protection": 3,
-    "agility"   : 0,
     "stealth"   : 0
   },
   "masterwork_light_shoulders" : {
@@ -36,7 +33,6 @@
     "price"     : 40,
     "weight"    : 1,
     "protection": 4,
-    "agility"   : 0,
     "stealth"   : 0
   },
   "basic_medium_shoulders"     : {
@@ -46,7 +42,6 @@
     "price"     : 40,
     "weight"    : 2,
     "protection": 5,
-    "agility"   : -1,
     "stealth"   : -1
   },
   "fine_medium_shoulders"      : {
@@ -56,7 +51,6 @@
     "price"     : 50,
     "weight"    : 2,
     "protection": 6,
-    "agility"   : -1,
     "stealth"   : -1
   },
   "specialist_medium_shoulders": {
@@ -66,7 +60,6 @@
     "price"     : 60,
     "weight"    : 2,
     "protection": 7,
-    "agility"   : -1,
     "stealth"   : -1
   },
   "masterwork_medium_shoulders": {
@@ -76,7 +69,6 @@
     "price"     : 70,
     "weight"    : 2,
     "protection": 8,
-    "agility"   : -1,
     "stealth"   : -1
   },
   "basic_heavy_shoulders"      : {
@@ -86,7 +78,6 @@
     "price"     : 70,
     "weight"    : 3,
     "protection": 9,
-    "agility"   : -3,
     "stealth"   : -2
   },
   "fine_heavy_shoulders"       : {
@@ -96,7 +87,6 @@
     "price"     : 80,
     "weight"    : 3,
     "protection": 10,
-    "agility"   : -3,
     "stealth"   : -2
   },
   "specialist_heavy_shoulders" : {
@@ -106,7 +96,6 @@
     "price"     : 90,
     "weight"    : 3,
     "protection": 11,
-    "agility"   : -3,
     "stealth"   : -2
   },
   "masterwork_heavy_shoulders" : {
@@ -116,7 +105,6 @@
     "price"     : 100,
     "weight"    : 3,
     "protection": 12,
-    "agility"   : -3,
     "stealth"   : -2
   }
 }

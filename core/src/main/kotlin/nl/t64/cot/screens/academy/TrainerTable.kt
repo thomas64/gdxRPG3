@@ -18,9 +18,7 @@ private val TEXT = """
     
     You cannot train a skill here above the skill ranks I have myself.
     
-    To train a skill will cost you 'XP to Invest' and gold.
-    
-    In the most right column you see the modified effect of upgrading battle related skills, but only the effect of the weapon you currently have equipped!""".trimIndent()
+    To train a skill will cost you 'XP to Invest' and gold.""".trimIndent()
 
 internal class TrainerTable(npcId: String) : BaseTable(PersonalityTooltip()) {
 

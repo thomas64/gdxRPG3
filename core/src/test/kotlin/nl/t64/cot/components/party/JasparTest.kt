@@ -28,8 +28,6 @@ internal class JasparTest : GameTest() {
         assertThat(jaspar.getCalculatedTotalStatOf(StatItemId.WILLPOWER)).isEqualTo(11)
         assertThat(jaspar.getStatById(StatItemId.DEXTERITY).rank).isEqualTo(14)
         assertThat(jaspar.getCalculatedTotalStatOf(StatItemId.DEXTERITY)).isEqualTo(14)
-        assertThat(jaspar.getStatById(StatItemId.AGILITY).rank).isEqualTo(8)
-        assertThat(jaspar.getCalculatedTotalStatOf(StatItemId.AGILITY)).isEqualTo(2)
         assertThat(jaspar.getStatById(StatItemId.ENDURANCE).rank).isEqualTo(30)
         assertThat(jaspar.getCalculatedTotalStatOf(StatItemId.ENDURANCE)).isEqualTo(30)
         assertThat(jaspar.getStatById(StatItemId.STRENGTH).rank).isEqualTo(30)
@@ -82,8 +80,8 @@ internal class JasparTest : GameTest() {
 
         assertThat(jaspar.getTotalCalcOf(CalcAttributeId.DAMAGE)).isEqualTo(10)
         assertThat(jaspar.getCalculatedTotalDamage()).isEqualTo(58)
-        assertThat(jaspar.getTotalCalcOf(CalcAttributeId.MOVEPOINTS)).isEqualTo(0)
-        assertThat(jaspar.getCalculatedMovepoints()).isEqualTo(15)
+        assertThat(jaspar.getTotalCalcOf(CalcAttributeId.ACTION_POINTS)).isEqualTo(0)
+        assertThat(jaspar.getCalculatedActionPoints()).isEqualTo(15)
     }
 
 }

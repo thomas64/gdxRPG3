@@ -11,13 +11,12 @@ class StatContainer() {
     private val stats: MutableMap<String, StatItem> = HashMap(NUMBER_OF_STAT_SLOTS)
 
     @ConstructorProperties(
-        "level", "intelligence", "willpower", "dexterity", "agility", "endurance", "strength", "stamina")
-    constructor(lvl: Int, inl: Int, wil: Int, dex: Int, agi: Int, edu: Int, str: Int, sta: Int) : this() {
+        "level", "intelligence", "willpower", "dexterity", "endurance", "strength", "stamina")
+    constructor(lvl: Int, inl: Int, wil: Int, dex: Int, edu: Int, str: Int, sta: Int) : this() {
         this.level = Level(lvl)
         this.stats[StatItemId.INTELLIGENCE.name] = Intelligence(inl)
         this.stats[StatItemId.WILLPOWER.name] = Willpower(wil)
         this.stats[StatItemId.DEXTERITY.name] = Dexterity(dex)
-        this.stats[StatItemId.AGILITY.name] = Agility(agi)
         this.stats[StatItemId.ENDURANCE.name] = Endurance(edu)
         this.stats[StatItemId.STRENGTH.name] = Strength(str)
         this.stats[StatItemId.STAMINA.name] = Stamina(sta)

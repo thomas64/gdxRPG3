@@ -7,7 +7,6 @@
       "intelligence": 18,
       "willpower"   : 12,
       "dexterity"   : 15,
-      "agility"     : 15,
       "endurance"   : 15,
       "strength"    : 15,
       "stamina"     : 30
@@ -25,9 +24,10 @@
     "spells"   : {
     },
     "inventory": {
-      "weapon": "basic_shortsword",
-      "shield": "basic_light_shield",
-      "chest" : "basic_medium_chest"
+      "weapon": "basic_dagger",
+      "chest" : "basic_light_chest",
+      "pants" : "basic_light_pants",
+      "boots" : "basic_light_boots"
     }
   },
   "luana"   : {
@@ -38,7 +38,6 @@
       "intelligence": 14,
       "willpower"   : 10,
       "dexterity"   : 22,
-      "agility"     : 20,
       "endurance"   : 10,
       "strength"    : 8,
       "stamina"     : 20
@@ -57,7 +56,9 @@
     },
     "inventory": {
       "weapon": "basic_dart",
-      "chest" : "basic_light_chest"
+      "chest" : "basic_light_chest",
+      "pants" : "basic_light_pants",
+      "boots" : "basic_light_boots"
     }
   },
   "reignald": {
@@ -68,7 +69,6 @@
       "intelligence": 10,
       "willpower"   : 8,
       "dexterity"   : 25,
-      "agility"     : 10,
       "endurance"   : 20,
       "strength"    : 20,
       "stamina"     : 40
@@ -89,7 +89,9 @@
     "inventory": {
       "weapon": "fine_shortsword",
       "shield": "fine_light_shield",
-      "chest" : "fine_medium_chest"
+      "chest" : "fine_medium_chest",
+      "pants" : "fine_medium_pants",
+      "boots" : "fine_medium_boots"
     }
   },
   "ryiah"   : {
@@ -100,7 +102,6 @@
       "intelligence": 22,
       "willpower"   : 16,
       "dexterity"   : 20,
-      "agility"     : 15,
       "endurance"   : 16,
       "strength"    : 10,
       "stamina"     : 31
@@ -122,7 +123,9 @@
     },
     "inventory": {
       "weapon": "basic_staff",
-      "chest" : "basic_light_chest"
+      "chest" : "basic_light_chest",
+      "pants" : "basic_light_pants",
+      "boots" : "basic_light_boots"
     }
   },
   "valter"  : {
@@ -133,7 +136,6 @@
       "intelligence": 22,
       "willpower"   : 18,
       "dexterity"   : 15,
-      "agility"     : 12,
       "endurance"   : 15,
       "strength"    : 10,
       "stamina"     : 20
@@ -154,7 +156,9 @@
     },
     "inventory": {
       "weapon": "basic_dart",
-      "chest" : "basic_light_chest"
+      "chest" : "basic_light_chest",
+      "pants" : "basic_light_pants",
+      "boots" : "basic_light_boots"
     }
   },
   "galen"   : {
@@ -165,7 +169,6 @@
       "intelligence": 15,
       "willpower"   : 15,
       "dexterity"   : 18,
-      "agility"     : 10,
       "endurance"   : 20,
       "strength"    : 25,
       "stamina"     : 40
@@ -187,7 +190,9 @@
     "inventory": {
       "weapon": "basic_axe",
       "shield": "basic_medium_shield",
-      "chest" : "basic_medium_chest"
+      "chest" : "basic_medium_chest",
+      "pants" : "basic_medium_pants",
+      "boots" : "basic_medium_boots"
     }
   },
   "jaspar"  : {
@@ -198,7 +203,6 @@
       "intelligence": 6,
       "willpower"   : 11,
       "dexterity"   : 14,
-      "agility"     : 8,
       "endurance"   : 30,
       "strength"    : 30,
       "stamina"     : 60
@@ -222,7 +226,9 @@
     "inventory": {
       "weapon": "basic_lance",
       "shield": "basic_heavy_shield",
-      "chest" : "basic_heavy_chest"
+      "chest" : "basic_heavy_chest",
+      "pants" : "basic_heavy_pants",
+      "boots" : "basic_heavy_boots"
     }
   },
   "kiara"   : {
@@ -233,7 +239,6 @@
       "intelligence": 15,
       "willpower"   : 10,
       "dexterity"   : 30,
-      "agility"     : 26,
       "endurance"   : 20,
       "strength"    : 15,
       "stamina"     : 40
@@ -258,7 +263,9 @@
     },
     "inventory": {
       "weapon": "fine_dagger",
-      "chest" : "fine_light_chest"
+      "chest" : "fine_light_chest",
+      "pants" : "fine_light_pants",
+      "boots" : "fine_light_boots"
     }
   },
   "luthais" : {
@@ -269,7 +276,6 @@
       "intelligence": 30,
       "willpower"   : 30,
       "dexterity"   : 20,
-      "agility"     : 12,
       "endurance"   : 18,
       "strength"    : 8,
       "stamina"     : 50
@@ -295,7 +301,9 @@
     },
     "inventory": {
       "weapon": "epic_staff",
-      "chest" : "specialist_light_chest"
+      "chest" : "specialist_light_chest",
+      "pants" : "specialist_light_pants",
+      "boots" : "specialist_light_boots"
     }
   },
   "elias"   : {
@@ -306,7 +314,6 @@
       "intelligence": 30,
       "willpower"   : 30,
       "dexterity"   : 25,
-      "agility"     : 18,
       "endurance"   : 30,
       "strength"    : 20,
       "stamina"     : 60
@@ -330,7 +337,9 @@
     },
     "inventory": {
       "weapon": "fine_longsword",
-      "chest" : "fine_medium_chest"
+      "chest" : "fine_medium_chest",
+      "pants" : "fine_medium_pants",
+      "boots" : "fine_medium_boots"
     }
   },
   "onarr"   : {
@@ -341,7 +350,6 @@
       "intelligence": 30,
       "willpower"   : 25,
       "dexterity"   : 23,
-      "agility"     : 15,
       "endurance"   : 30,
       "strength"    : 25,
       "stamina"     : 60
@@ -365,7 +373,9 @@
     "inventory": {
       "weapon": "fine_morningstar",
       "shield": "fine_medium_shield",
-      "chest" : "fine_heavy_chest"
+      "chest" : "fine_heavy_chest",
+      "pants" : "fine_heavy_pants",
+      "boots" : "fine_heavy_boots"
     }
   },
   "duilio"  : {
@@ -376,7 +386,6 @@
       "intelligence": 25,
       "willpower"   : 25,
       "dexterity"   : 30,
-      "agility"     : 20,
       "endurance"   : 25,
       "strength"    : 25,
       "stamina"     : 75
@@ -409,7 +418,9 @@
     "inventory": {
       "weapon": "specialist_shortsword",
       "shield": "specialist_light_shield",
-      "chest" : "specialist_medium_chest"
+      "chest" : "specialist_medium_chest",
+      "pants" : "specialist_medium_pants",
+      "boots" : "specialist_medium_boots"
     }
   },
   "iellwen" : {
@@ -420,7 +431,6 @@
       "intelligence": 35,
       "willpower"   : 25,
       "dexterity"   : 30,
-      "agility"     : 25,
       "endurance"   : 30,
       "strength"    : 20,
       "stamina"     : 60
@@ -446,7 +456,9 @@
     },
     "inventory": {
       "weapon": "specialist_shortsword",
-      "chest" : "specialist_medium_chest"
+      "chest" : "specialist_medium_chest",
+      "pants" : "specialist_medium_pants",
+      "boots" : "specialist_medium_boots"
     }
   },
   "faeron"  : {
@@ -457,7 +469,6 @@
       "intelligence": 30,
       "willpower"   : 30,
       "dexterity"   : 30,
-      "agility"     : 30,
       "endurance"   : 25,
       "strength"    : 15,
       "stamina"     : 80
@@ -483,7 +494,9 @@
     },
     "inventory": {
       "weapon": "epic_mace",
-      "chest" : "masterwork_light_chest"
+      "chest" : "masterwork_light_chest",
+      "pants" : "masterwork_light_pants",
+      "boots" : "masterwork_light_boots"
     }
   }
 }

@@ -26,7 +26,8 @@ class InventoryItem(
     private val minDexterity: Int = 0,
     @JsonProperty("min_strength")
     private val minStrength: Int = 0,
-    private val movepoints: Int = 0,
+    @JsonProperty("action_points")
+    private val actionPoints: Int = 0,
     @JsonProperty("base_hit")
     private val baseHit: Int = 0,
     private val damage: Int = 0,
@@ -39,7 +40,6 @@ class InventoryItem(
     private val willpower: Int = 0,
     private val dexterity: Int = 0,
     private val strength: Int = 0,
-    private val agility: Int = 0,
     private val endurance: Int = 0,
     private val alchemist: Int = 0,
     private val diplomat: Int = 0,
@@ -57,7 +57,9 @@ class InventoryItem(
     @JsonProperty("quick_switch")
     private val quickSwitch: Boolean = false,
     @JsonProperty("spell_boost")
-    private val spellBoost: Boolean = false
+    private val spellBoost: Boolean = false,
+    @JsonProperty("move_points")
+    private val movePoints: Int = 0,
 ) {
 
     lateinit var id: String
@@ -68,10 +70,10 @@ class InventoryItem(
         val itemCopy = InventoryItem(
             name, sort, description, group, isTwoHanded, skill, price, weight,
             minIntelligence, minWillpower, minDexterity, minStrength,
-            movepoints, baseHit, damage, protection, defense, spellBattery, transformation,
-            intelligence, willpower, dexterity, strength, agility, endurance,
+            actionPoints, baseHit, damage, protection, defense, spellBattery, transformation,
+            intelligence, willpower, dexterity, strength, endurance,
             alchemist, diplomat, healer, mechanic, ranger, scholar, stealth, thief, troubadour, warrior, wizard,
-            cheatDeath, quickSwitch, spellBoost)
+            cheatDeath, quickSwitch, spellBoost, movePoints)
         itemCopy.id = id
         itemCopy.amount = amount
         return itemCopy
@@ -93,7 +95,6 @@ class InventoryItem(
             StatItemId.WILLPOWER -> minWillpower
             StatItemId.DEXTERITY -> minDexterity
             StatItemId.STRENGTH -> minStrength
-            StatItemId.AGILITY,
             StatItemId.ENDURANCE,
             StatItemId.STAMINA -> 0
         }
@@ -105,7 +106,6 @@ class InventoryItem(
             StatItemId.WILLPOWER -> willpower
             StatItemId.DEXTERITY -> dexterity
             StatItemId.STRENGTH -> strength
-            StatItemId.AGILITY -> agility
             StatItemId.ENDURANCE -> endurance
             StatItemId.STAMINA -> 0
         }
@@ -138,7 +138,7 @@ class InventoryItem(
     fun getAttributeOfCalcAttributeId(calcAttributeId: CalcAttributeId): Int {
         return when (calcAttributeId) {
             CalcAttributeId.WEIGHT -> weight
-            CalcAttributeId.MOVEPOINTS -> movepoints
+            CalcAttributeId.ACTION_POINTS -> actionPoints
             CalcAttributeId.BASE_HIT -> baseHit
             CalcAttributeId.DAMAGE -> damage
             CalcAttributeId.PROTECTION -> protection

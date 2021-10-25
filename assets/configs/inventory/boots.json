@@ -6,7 +6,6 @@
     "price"     : 10,
     "weight"    : 1,
     "protection": 1,
-    "agility"   : 0,
     "stealth"   : 0
   },
   "fine_light_boots"        : {
@@ -16,7 +15,6 @@
     "price"     : 20,
     "weight"    : 1,
     "protection": 2,
-    "agility"   : 0,
     "stealth"   : 0
   },
   "specialist_light_boots"  : {
@@ -26,7 +24,6 @@
     "price"     : 30,
     "weight"    : 1,
     "protection": 3,
-    "agility"   : 0,
     "stealth"   : 0
   },
   "masterwork_light_boots"  : {
@@ -36,7 +33,6 @@
     "price"     : 40,
     "weight"    : 1,
     "protection": 4,
-    "agility"   : 0,
     "stealth"   : 0
   },
   "basic_medium_boots"      : {
@@ -46,7 +42,6 @@
     "price"     : 40,
     "weight"    : 2,
     "protection": 5,
-    "agility"   : -1,
     "stealth"   : -1
   },
   "fine_medium_boots"       : {
@@ -56,7 +51,6 @@
     "price"     : 50,
     "weight"    : 2,
     "protection": 6,
-    "agility"   : -1,
     "stealth"   : -1
   },
   "specialist_medium_boots" : {
@@ -66,7 +60,6 @@
     "price"     : 60,
     "weight"    : 2,
     "protection": 7,
-    "agility"   : -1,
     "stealth"   : -1
   },
   "masterwork_medium_boots" : {
@@ -76,7 +69,6 @@
     "price"     : 70,
     "weight"    : 2,
     "protection": 8,
-    "agility"   : -1,
     "stealth"   : -1
   },
   "basic_heavy_boots"       : {
@@ -86,7 +78,6 @@
     "price"     : 70,
     "weight"    : 3,
     "protection": 9,
-    "agility"   : -3,
     "stealth"   : -2
   },
   "fine_heavy_boots"        : {
@@ -96,7 +87,6 @@
     "price"     : 80,
     "weight"    : 3,
     "protection": 10,
-    "agility"   : -3,
     "stealth"   : -2
   },
   "specialist_heavy_boots"  : {
@@ -106,7 +96,6 @@
     "price"     : 90,
     "weight"    : 3,
     "protection": 11,
-    "agility"   : -3,
     "stealth"   : -2
   },
   "masterwork_heavy_boots"  : {
@@ -116,30 +105,29 @@
     "price"     : 100,
     "weight"    : 3,
     "protection": 12,
-    "agility"   : -3,
     "stealth"   : -2
   },
   "epic_boots_of_motion"    : {
-    "name"      : "Boots of Motion",
-    "group"     : "BOOTS",
-    "sort"      : 61000,
-    "price"     : 50,
-    "weight"    : 1,
-    "protection": 0,
-    "agility"   : 0,
-    "stealth"   : 0,
-    "movepoints": 1
+    "name"       : "Boots of Motion",
+    "group"      : "BOOTS",
+    "sort"       : 61000,
+    "price"      : 50,
+    "weight"     : 1,
+    "protection" : 0,
+    "stealth"    : 0,
+    "move_points": 1,
+    "description": ["One extra movement", "without the cost of AP."]
   },
   "legendary_boots_of_speed": {
-    "name"      : "Boots of Speed",
-    "group"     : "BOOTS",
-    "sort"      : 62000,
-    "price"     : 50,
-    "weight"    : 1,
-    "protection": 0,
-    "agility"   : 0,
-    "stealth"   : 0,
-    "movepoints": 2
+    "name"       : "Boots of Speed",
+    "group"      : "BOOTS",
+    "sort"       : 62000,
+    "price"      : 50,
+    "weight"     : 1,
+    "protection" : 0,
+    "stealth"    : 0,
+    "move_points": 2,
+    "description": ["Two extra movements", "without the cost of AP."]
   },
   "epic_woodsmans_boots"    : {
     "name"      : "Woodsman's Boots",
@@ -148,7 +136,6 @@
     "price"     : 50,
     "weight"    : 1,
     "protection": 1,
-    "agility"   : 0,
     "stealth"   : 0,
     "ranger"    : 2
   },
@@ -159,7 +146,6 @@
     "price"     : 50,
     "weight"    : 1,
     "protection": 0,
-    "agility"   : 0,
     "stealth"   : 2
   }
 }

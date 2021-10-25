@@ -7,7 +7,7 @@ class Strength(rank: Int = 0) : StatItem(
 ) {
     override fun getDescription(): String {
         return """
-            Increases chance-to-hit with weapons in hand-to-hand combat.
-            Increases damage-to-inflict with weapons in hand-to-hand combat.""".trimIndent()
+            Increases damage-to-inflict with weapons in hand-to-hand combat.
+            Each rank in Strength increases Damage by 5%.""".trimIndent()
     }
 }

@@ -46,7 +46,7 @@ internal class AcademyTable(
         scrollPane = ScrollPane(table)
         container.add(scrollPane).height(CONTAINER_HEIGHT)
         container.background = Utils.createTopBorder()
-        container.addListener(ListenerKeyVertical { updateIndexAndSetSelectedSkill(it, skillsToTrain.size) })
+        container.addListener(ListenerKeyVertical { updateIndex(it, skillsToTrain.size) })
     }
 
     fun upgradeSkill() {
@@ -88,30 +88,11 @@ internal class AcademyTable(
             .show(table.stage, AudioEvent.SE_UPGRADE)
     }
 
-    private fun updateIndexAndSetSelectedSkill(deltaIndex: Int, size: Int) {
-        super.updateIndex(deltaIndex, size)
-        setSelectedSkill()
-    }
-
-    override fun deselectCurrentSlot() {
-        super.deselectCurrentSlot()
-        AcademyUtils.trainerSkill = null
-        AcademyUtils.heroSkill = null
-    }
-
     override fun selectCurrentSlot() {
         super.selectCurrentSlot()
         if (selectedIndex >= skillsToTrain.size) {
             selectedIndex = skillsToTrain.size - 1
         }
-        setSelectedSkill()
-    }
-
-    private fun setSelectedSkill() {
-        val trainerSkill = skillsToTrain[selectedIndex]
-        val heroSkill = selectedHero.getSkillById(trainerSkill.id)
-        AcademyUtils.trainerSkill = trainerSkill
-        AcademyUtils.heroSkill = heroSkill
     }
 
     override fun fillRows() {

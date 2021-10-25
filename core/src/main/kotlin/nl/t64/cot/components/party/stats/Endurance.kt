@@ -7,9 +7,8 @@ class Endurance(rank: Int = 0) : StatItem(
 ) {
     override fun getDescription(): String {
         return """
-            Affects HP directly. Represents the real physical
-            damage your character can take before dying.
-            $name also affects turn speed.""".trimIndent()
+            Affects HP directly. Represents the real physical damage your
+            character can take before dying. $name also affects turn speed.""".trimIndent()
     }
 
     override fun doUpgrade() {

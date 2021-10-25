@@ -28,8 +28,6 @@ internal class ReignaldTest : GameTest() {
         assertThat(reignald.getCalculatedTotalStatOf(StatItemId.WILLPOWER)).isEqualTo(8)
         assertThat(reignald.getStatById(StatItemId.DEXTERITY).rank).isEqualTo(25)
         assertThat(reignald.getCalculatedTotalStatOf(StatItemId.DEXTERITY)).isEqualTo(25)
-        assertThat(reignald.getStatById(StatItemId.AGILITY).rank).isEqualTo(10)
-        assertThat(reignald.getCalculatedTotalStatOf(StatItemId.AGILITY)).isEqualTo(9)
         assertThat(reignald.getStatById(StatItemId.ENDURANCE).rank).isEqualTo(20)
         assertThat(reignald.getCalculatedTotalStatOf(StatItemId.ENDURANCE)).isEqualTo(20)
         assertThat(reignald.getStatById(StatItemId.STRENGTH).rank).isEqualTo(20)
@@ -82,8 +80,8 @@ internal class ReignaldTest : GameTest() {
 
         assertThat(reignald.getTotalCalcOf(CalcAttributeId.DAMAGE)).isEqualTo(15)
         assertThat(reignald.getCalculatedTotalDamage()).isEqualTo(47)
-        assertThat(reignald.getTotalCalcOf(CalcAttributeId.MOVEPOINTS)).isEqualTo(0)
-        assertThat(reignald.getCalculatedMovepoints()).isEqualTo(13)
+        assertThat(reignald.getTotalCalcOf(CalcAttributeId.ACTION_POINTS)).isEqualTo(0)
+        assertThat(reignald.getCalculatedActionPoints()).isEqualTo(13)
     }
 
 }

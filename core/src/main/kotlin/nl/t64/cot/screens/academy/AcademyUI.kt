@@ -18,8 +18,8 @@ private const val ACADEMY_WINDOW_POSITION_X = 630f
 private const val ACADEMY_WINDOW_POSITION_Y = 50f
 private const val SKILLS_WINDOW_POSITION_X = 985f
 private const val SKILLS_WINDOW_POSITION_Y = 50f
-private const val CALCS_WINDOW_POSITION_X = 1501f
-private const val CALCS_WINDOW_POSITION_Y = 480f
+private const val CALCS_WINDOW_POSITION_X = 1536f
+private const val CALCS_WINDOW_POSITION_Y = 662f
 
 private const val TITLE_HEROES = "   Heroes"
 private const val TITLE_TRAINER = "   Trainer"

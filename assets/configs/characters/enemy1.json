@@ -9,7 +9,6 @@
       "intelligence": 10,
       "willpower"   : 7,
       "dexterity"   : 15,
-      "agility"     : 10,
       "endurance"   : 10,
       "strength"    : 8,
       "stamina"     : 20
@@ -36,7 +35,6 @@
       "intelligence": 5,
       "willpower"   : 7,
       "dexterity"   : 13,
-      "agility"     : 15,
       "endurance"   : 5,
       "strength"    : 8,
       "stamina"     : 10
@@ -63,7 +61,6 @@
       "intelligence": 9,
       "willpower"   : 9,
       "dexterity"   : 15,
-      "agility"     : 16,
       "endurance"   : 14,
       "strength"    : 12,
       "stamina"     : 28
@@ -96,7 +93,6 @@
       "intelligence": 15,
       "willpower"   : 18,
       "dexterity"   : 23,
-      "agility"     : 16,
       "endurance"   : 25,
       "strength"    : 17,
       "stamina"     : 50

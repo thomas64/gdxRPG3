@@ -8,6 +8,6 @@ class Sword(rank: Int = 0) : SkillItem(
         return """
             Allows the possibility of equipping swords and daggers.
             Increases chance-to-hit with swords and daggers in combat.
-            Increases damage-to-inflict with swords and daggers in combat.""".trimIndent()
+            Each rank in Sword increases Total Hit by 10%.""".trimIndent()
     }
 }

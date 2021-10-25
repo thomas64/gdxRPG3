@@ -6,7 +6,6 @@
     "price"     : 10,
     "weight"    : 1,
     "protection": 0,
-    "agility"   : 0,
     "stealth"   : 1
   },
   "fine_light_cloak"       : {
@@ -16,7 +15,6 @@
     "price"     : 20,
     "weight"    : 1,
     "protection": 0,
-    "agility"   : 0,
     "stealth"   : 2
   },
   "specialist_light_cloak": {
@@ -26,7 +24,6 @@
     "price"     : 30,
     "weight"    : 1,
     "protection": 0,
-    "agility"   : 0,
     "stealth"   : 3
   },
   "masterwork_light_cloak": {
@@ -36,7 +33,6 @@
     "price"     : 40,
     "weight"    : 1,
     "protection": 0,
-    "agility"   : 0,
     "stealth"   : 4
   },
   "epic_light_cloak"      : {
@@ -46,7 +42,6 @@
     "price"     : 50,
     "weight"    : 1,
     "protection": 0,
-    "agility"   : 0,
     "stealth"   : 6
   },
   "legendary_light_cloak" : {
@@ -56,7 +51,6 @@
     "price"     : 60,
     "weight"    : 1,
     "protection": 0,
-    "agility"   : 0,
     "stealth"   : 8
   },
   "basic_medium_cloak"    : {
@@ -66,7 +60,6 @@
     "price"     : 40,
     "weight"    : 2,
     "protection": 1,
-    "agility"   : -1,
     "stealth"   : 1
   },
   "fine_medium_cloak"     : {
@@ -76,7 +69,6 @@
     "price"     : 50,
     "weight"    : 2,
     "protection": 1,
-    "agility"   : -1,
     "stealth"   : 2
   },
   "specialist_medium_cloak": {
@@ -86,7 +78,6 @@
     "price"     : 60,
     "weight"    : 2,
     "protection": 1,
-    "agility"   : -1,
     "stealth"   : 3
   },
   "masterwork_medium_cloak": {
@@ -96,7 +87,6 @@
     "price"     : 70,
     "weight"    : 2,
     "protection": 1,
-    "agility"   : -1,
     "stealth"   : 4
   },
   "basic_heavy_cloak"      : {
@@ -106,7 +96,6 @@
     "price"     : 70,
     "weight"    : 3,
     "protection": 2,
-    "agility"   : -2,
     "stealth"   : 1
   },
   "fine_heavy_cloak"       : {
@@ -116,7 +105,6 @@
     "price"     : 80,
     "weight"    : 3,
     "protection": 2,
-    "agility"   : -2,
     "stealth"   : 2
   },
   "specialist_heavy_cloak" : {
@@ -126,7 +114,6 @@
     "price"     : 90,
     "weight"    : 3,
     "protection": 2,
-    "agility"   : -2,
     "stealth"   : 3
   },
   "masterwork_heavy_cloak" : {
@@ -136,7 +123,6 @@
     "price"     : 100,
     "weight"    : 3,
     "protection": 2,
-    "agility"   : -2,
     "stealth"   : 4
   },
   "epic_dark_cloak"        : {
@@ -146,7 +132,6 @@
     "price"     : 50,
     "weight"    : 1,
     "protection": 0,
-    "agility"   : 0,
     "stealth"   : 0,
     "thief"     : 2
   }

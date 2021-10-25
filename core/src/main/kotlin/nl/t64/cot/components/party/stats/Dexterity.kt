@@ -7,7 +7,7 @@ class Dexterity(rank: Int = 0) : StatItem(
 ) {
     override fun getDescription(): String {
         return """
-            Increases chance-to-hit with ranged weapons in combat.
-            Increases damage-to-inflict with ranged weapons in combat.""".trimIndent()
+            Increases damage-to-inflict with ranged weapons in combat.
+            Each rank in Dexterity increases Damage by 5%.""".trimIndent()
     }
 }

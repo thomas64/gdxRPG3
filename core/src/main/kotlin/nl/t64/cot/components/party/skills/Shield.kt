@@ -7,6 +7,7 @@ class Shield(rank: Int = 0) : SkillItem(
     override fun getDescription(): String {
         return """
             Allows the possibility of equipping shields.
-            Improves shield defenses while blocking in combat.""".trimIndent()
+            In combat, a shield may block the enemy's attack with physical weapons.
+            Each rank in Shield increases Defense by 10%.""".trimIndent()
     }
 }

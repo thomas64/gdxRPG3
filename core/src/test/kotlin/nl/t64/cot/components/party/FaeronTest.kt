@@ -28,8 +28,6 @@ internal class FaeronTest : GameTest() {
         assertThat(faeron.getCalculatedTotalStatOf(StatItemId.WILLPOWER)).isEqualTo(30)
         assertThat(faeron.getStatById(StatItemId.DEXTERITY).rank).isEqualTo(30)
         assertThat(faeron.getCalculatedTotalStatOf(StatItemId.DEXTERITY)).isEqualTo(30)
-        assertThat(faeron.getStatById(StatItemId.AGILITY).rank).isEqualTo(30)
-        assertThat(faeron.getCalculatedTotalStatOf(StatItemId.AGILITY)).isEqualTo(30)
         assertThat(faeron.getStatById(StatItemId.ENDURANCE).rank).isEqualTo(25)
         assertThat(faeron.getCalculatedTotalStatOf(StatItemId.ENDURANCE)).isEqualTo(25)
         assertThat(faeron.getStatById(StatItemId.STRENGTH).rank).isEqualTo(15)
@@ -82,8 +80,8 @@ internal class FaeronTest : GameTest() {
 
         assertThat(faeron.getTotalCalcOf(CalcAttributeId.DAMAGE)).isEqualTo(24)
         assertThat(faeron.getCalculatedTotalDamage()).isEqualTo(69)
-        assertThat(faeron.getTotalCalcOf(CalcAttributeId.MOVEPOINTS)).isEqualTo(0)
-        assertThat(faeron.getCalculatedMovepoints()).isEqualTo(18)
+        assertThat(faeron.getTotalCalcOf(CalcAttributeId.ACTION_POINTS)).isEqualTo(0)
+        assertThat(faeron.getCalculatedActionPoints()).isEqualTo(18)
     }
 
 }

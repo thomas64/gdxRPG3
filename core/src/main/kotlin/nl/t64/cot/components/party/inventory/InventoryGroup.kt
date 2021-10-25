@@ -21,7 +21,7 @@ enum class InventoryGroup(override val title: String) : SuperEnum {
     BRACERS("Bracers"),             // 12 prt
     GLOVES("Gloves"),               // 12 prt
     RING("Ring"),
-    BELT("Belt"),                   // 2 prt    extra agility
+    BELT("Belt"),                   // 2 prt    extra AP
     PANTS("Pants"),                 // 12 prt
     BOOTS("Boots"),                 // 12 prt   bij complete set prt omhoog
 
@@ -31,7 +31,7 @@ enum class InventoryGroup(override val title: String) : SuperEnum {
     ITEM("Item"),
     RESOURCE("Resource");
 
-    fun hasImpactOnPrtAgiStl(): Boolean {
+    fun hasImpactOnPrtStl(): Boolean {
         return when (this) {
             SHIELD, HELMET, SHOULDERS, CHEST, CLOAK, BRACERS, GLOVES, BELT, PANTS, BOOTS -> true
             else -> false

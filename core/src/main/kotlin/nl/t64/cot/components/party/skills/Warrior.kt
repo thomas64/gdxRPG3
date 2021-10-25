@@ -7,8 +7,6 @@ class Warrior(rank: Int = 0) : SkillItem(
     override fun getDescription(): String {
         return """
             Allows the possibility of scoring critical hits in combat.
-            Increases chance-to-hit with physical weapons in combat.
-            Increases damage-to-inflict with physical weapons in combat.
-            Improves shield defenses while blocking in combat.""".trimIndent()
+            Each rank in Warrior increases the probability of this by 4%.""".trimIndent()
     }
 }

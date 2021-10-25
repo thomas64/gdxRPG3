@@ -28,8 +28,6 @@ internal class KiaraTest : GameTest() {
         assertThat(kiara.getCalculatedTotalStatOf(StatItemId.WILLPOWER)).isEqualTo(10)
         assertThat(kiara.getStatById(StatItemId.DEXTERITY).rank).isEqualTo(30)
         assertThat(kiara.getCalculatedTotalStatOf(StatItemId.DEXTERITY)).isEqualTo(30)
-        assertThat(kiara.getStatById(StatItemId.AGILITY).rank).isEqualTo(26)
-        assertThat(kiara.getCalculatedTotalStatOf(StatItemId.AGILITY)).isEqualTo(26)
         assertThat(kiara.getStatById(StatItemId.ENDURANCE).rank).isEqualTo(20)
         assertThat(kiara.getCalculatedTotalStatOf(StatItemId.ENDURANCE)).isEqualTo(20)
         assertThat(kiara.getStatById(StatItemId.STRENGTH).rank).isEqualTo(15)
@@ -82,8 +80,8 @@ internal class KiaraTest : GameTest() {
 
         assertThat(kiara.getTotalCalcOf(CalcAttributeId.DAMAGE)).isEqualTo(13)
         assertThat(kiara.getCalculatedTotalDamage()).isEqualTo(42)
-        assertThat(kiara.getTotalCalcOf(CalcAttributeId.MOVEPOINTS)).isEqualTo(0)
-        assertThat(kiara.getCalculatedMovepoints()).isEqualTo(14)
+        assertThat(kiara.getTotalCalcOf(CalcAttributeId.ACTION_POINTS)).isEqualTo(0)
+        assertThat(kiara.getCalculatedActionPoints()).isEqualTo(14)
     }
 
 }

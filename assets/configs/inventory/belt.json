@@ -1,155 +1,155 @@
 {
   "basic_light_belt"      : {
-    "name"      : "Basic Light Belt",
-    "group"     : "BELT",
-    "sort"      : 60100,
-    "price"     : 10,
-    "weight"    : 1,
-    "protection": 0,
-    "agility"   : 1,
-    "stealth"   : 0
+    "name"         : "Basic Light Belt",
+    "group"        : "BELT",
+    "sort"         : 60100,
+    "price"        : 10,
+    "weight"       : 1,
+    "protection"   : 0,
+    "action_points": 1,
+    "stealth"      : 0
   },
   "fine_light_belt"       : {
-    "name"      : "Fine Light Belt",
-    "group"     : "BELT",
-    "sort"      : 60200,
-    "price"     : 20,
-    "weight"    : 1,
-    "protection": 0,
-    "agility"   : 2,
-    "stealth"   : 0
+    "name"         : "Fine Light Belt",
+    "group"        : "BELT",
+    "sort"         : 60200,
+    "price"        : 20,
+    "weight"       : 1,
+    "protection"   : 0,
+    "action_points": 2,
+    "stealth"      : 0
   },
-  "specialist_light_belt": {
-    "name"      : "Specialist Light Belt",
-    "group"     : "BELT",
-    "sort"      : 60300,
-    "price"     : 30,
-    "weight"    : 1,
-    "protection": 0,
-    "agility"   : 3,
-    "stealth"   : 0
+  "specialist_light_belt" : {
+    "name"         : "Specialist Light Belt",
+    "group"        : "BELT",
+    "sort"         : 60300,
+    "price"        : 30,
+    "weight"       : 1,
+    "protection"   : 0,
+    "action_points": 3,
+    "stealth"      : 0
   },
-  "masterwork_light_belt": {
-    "name"      : "Masterwork Light Belt",
-    "group"     : "BELT",
-    "sort"      : 60400,
-    "price"     : 40,
-    "weight"    : 1,
-    "protection": 0,
-    "agility"   : 4,
-    "stealth"   : 0
+  "masterwork_light_belt" : {
+    "name"         : "Masterwork Light Belt",
+    "group"        : "BELT",
+    "sort"         : 60400,
+    "price"        : 40,
+    "weight"       : 1,
+    "protection"   : 0,
+    "action_points": 4,
+    "stealth"      : 0
   },
-  "epic_light_belt"      : {
-    "name"      : "Epic Light Belt",
-    "group"     : "BELT",
-    "sort"      : 61000,
-    "price"     : 50,
-    "weight"    : 1,
-    "protection": 0,
-    "agility"   : 5,
-    "stealth"   : 0
+  "epic_light_belt"       : {
+    "name"         : "Epic Light Belt",
+    "group"        : "BELT",
+    "sort"         : 61000,
+    "price"        : 50,
+    "weight"       : 1,
+    "protection"   : 0,
+    "action_points": 5,
+    "stealth"      : 0
   },
-  "basic_medium_belt"    : {
-    "name"      : "Basic Medium Belt",
-    "group"     : "BELT",
-    "sort"      : 60120,
-    "price"     : 40,
-    "weight"    : 2,
-    "protection": 1,
-    "agility"   : 1,
-    "stealth"   : -1
+  "basic_medium_belt"     : {
+    "name"         : "Basic Medium Belt",
+    "group"        : "BELT",
+    "sort"         : 60120,
+    "price"        : 40,
+    "weight"       : 2,
+    "protection"   : 1,
+    "action_points": 1,
+    "stealth"      : -1
   },
-  "fine_medium_belt"     : {
-    "name"      : "Fine Medium Belt",
-    "group"     : "BELT",
-    "sort"      : 60220,
-    "price"     : 50,
-    "weight"    : 2,
-    "protection": 1,
-    "agility"   : 2,
-    "stealth"   : -1
+  "fine_medium_belt"      : {
+    "name"         : "Fine Medium Belt",
+    "group"        : "BELT",
+    "sort"         : 60220,
+    "price"        : 50,
+    "weight"       : 2,
+    "protection"   : 1,
+    "action_points": 2,
+    "stealth"      : -1
   },
   "specialist_medium_belt": {
-    "name"      : "Specialist Medium Belt",
-    "group"     : "BELT",
-    "sort"      : 60320,
-    "price"     : 60,
-    "weight"    : 2,
-    "protection": 1,
-    "agility"   : 3,
-    "stealth"   : -1
+    "name"         : "Specialist Medium Belt",
+    "group"        : "BELT",
+    "sort"         : 60320,
+    "price"        : 60,
+    "weight"       : 2,
+    "protection"   : 1,
+    "action_points": 3,
+    "stealth"      : -1
   },
   "masterwork_medium_belt": {
-    "name"      : "Masterwork Medium Belt",
-    "group"     : "BELT",
-    "sort"      : 60420,
-    "price"     : 70,
-    "weight"    : 2,
-    "protection": 1,
-    "agility"   : 4,
-    "stealth"   : -1
+    "name"         : "Masterwork Medium Belt",
+    "group"        : "BELT",
+    "sort"         : 60420,
+    "price"        : 70,
+    "weight"       : 2,
+    "protection"   : 1,
+    "action_points": 4,
+    "stealth"      : -1
   },
   "basic_heavy_belt"      : {
-    "name"      : "Basic Heavy Belt",
-    "group"     : "BELT",
-    "sort"      : 60140,
-    "price"     : 70,
-    "weight"    : 3,
-    "protection": 2,
-    "agility"   : 1,
-    "stealth"   : -2
+    "name"         : "Basic Heavy Belt",
+    "group"        : "BELT",
+    "sort"         : 60140,
+    "price"        : 70,
+    "weight"       : 3,
+    "protection"   : 2,
+    "action_points": 1,
+    "stealth"      : -2
   },
-  "fine_heavy_belt"      : {
-    "name"      : "Fine Heavy Belt",
-    "group"     : "BELT",
-    "sort"      : 60240,
-    "price"     : 80,
-    "weight"    : 3,
-    "protection": 2,
-    "agility"   : 2,
-    "stealth"   : -2
+  "fine_heavy_belt"       : {
+    "name"         : "Fine Heavy Belt",
+    "group"        : "BELT",
+    "sort"         : 60240,
+    "price"        : 80,
+    "weight"       : 3,
+    "protection"   : 2,
+    "action_points": 2,
+    "stealth"      : -2
   },
-  "specialist_heavy_belt": {
-    "name"      : "Specialist Heavy Belt",
-    "group"     : "BELT",
-    "sort"      : 60340,
-    "price"     : 90,
-    "weight"    : 3,
-    "protection": 2,
-    "agility"   : 3,
-    "stealth"   : -2
+  "specialist_heavy_belt" : {
+    "name"         : "Specialist Heavy Belt",
+    "group"        : "BELT",
+    "sort"         : 60340,
+    "price"        : 90,
+    "weight"       : 3,
+    "protection"   : 2,
+    "action_points": 3,
+    "stealth"      : -2
   },
-  "masterwork_heavy_belt": {
-    "name"      : "Masterwork Heavy Belt",
-    "group"     : "BELT",
-    "sort"      : 60440,
-    "price"     : 100,
-    "weight"    : 3,
-    "protection": 2,
-    "agility"   : 4,
-    "stealth"   : -2
+  "masterwork_heavy_belt" : {
+    "name"         : "Masterwork Heavy Belt",
+    "group"        : "BELT",
+    "sort"         : 60440,
+    "price"        : 100,
+    "weight"       : 3,
+    "protection"   : 2,
+    "action_points": 4,
+    "stealth"      : -2
   },
-  "epic_utility_belt"    : {
-    "name"        : "Utility Belt",
-    "group"       : "BELT",
-    "sort"        : 61000,
-    "price"       : 50,
-    "weight"      : 1,
-    "protection"  : 0,
-    "agility"     : -3,
-    "stealth"     : 0,
-    "quick_switch": true,
-    "description" : ["Change equipment in combat", "without skipping a turn."]
+  "epic_utility_belt"     : {
+    "name"         : "Utility Belt",
+    "group"        : "BELT",
+    "sort"         : 61000,
+    "price"        : 50,
+    "weight"       : 1,
+    "protection"   : 0,
+    "action_points": 1,
+    "stealth"      : 0,
+    "quick_switch" : true,
+    "description"  : ["Change equipment in combat", "without the cost of AP."]
   },
-  "epic_woodsman_belt"   : {
-    "name"      : "Woodsman Belt",
-    "group"     : "BELT",
-    "sort"      : 61000,
-    "price"     : 50,
-    "weight"    : 1,
-    "protection": 0,
-    "agility"   : 0,
-    "stealth"   : 0,
-    "ranger"    : 1
+  "epic_woodsman_belt"    : {
+    "name"         : "Woodsman Belt",
+    "group"        : "BELT",
+    "sort"         : 61000,
+    "price"        : 50,
+    "weight"       : 1,
+    "protection"   : 0,
+    "action_points": 1,
+    "stealth"      : 0,
+    "ranger"       : 1
   }
 }

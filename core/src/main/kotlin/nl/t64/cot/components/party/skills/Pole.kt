@@ -8,6 +8,6 @@ class Pole(rank: Int = 0) : SkillItem(
         return """
             Allows the possibility of equipping pole weapons.
             Increases chance-to-hit with pole weapons in combat.
-            Increases damage-to-inflict with pole weapons in combat.""".trimIndent()
+            Each rank in Pole increases Total Hit by 10%.""".trimIndent()
     }
 }

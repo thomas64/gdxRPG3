@@ -28,8 +28,6 @@ internal class ValterTest : GameTest() {
         assertThat(valter.getCalculatedTotalStatOf(StatItemId.WILLPOWER)).isEqualTo(18)
         assertThat(valter.getStatById(StatItemId.DEXTERITY).rank).isEqualTo(15)
         assertThat(valter.getCalculatedTotalStatOf(StatItemId.DEXTERITY)).isEqualTo(15)
-        assertThat(valter.getStatById(StatItemId.AGILITY).rank).isEqualTo(12)
-        assertThat(valter.getCalculatedTotalStatOf(StatItemId.AGILITY)).isEqualTo(12)
         assertThat(valter.getStatById(StatItemId.ENDURANCE).rank).isEqualTo(15)
         assertThat(valter.getCalculatedTotalStatOf(StatItemId.ENDURANCE)).isEqualTo(15)
         assertThat(valter.getStatById(StatItemId.STRENGTH).rank).isEqualTo(10)
@@ -82,8 +80,8 @@ internal class ValterTest : GameTest() {
 
         assertThat(valter.getTotalCalcOf(CalcAttributeId.DAMAGE)).isEqualTo(8)
         assertThat(valter.getCalculatedTotalDamage()).isEqualTo(0)
-        assertThat(valter.getTotalCalcOf(CalcAttributeId.MOVEPOINTS)).isEqualTo(0)
-        assertThat(valter.getCalculatedMovepoints()).isEqualTo(12)
+        assertThat(valter.getTotalCalcOf(CalcAttributeId.ACTION_POINTS)).isEqualTo(0)
+        assertThat(valter.getCalculatedActionPoints()).isEqualTo(12)
     }
 
 }

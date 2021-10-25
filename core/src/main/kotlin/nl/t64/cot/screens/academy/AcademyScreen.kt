@@ -64,8 +64,6 @@ class AcademyScreen : ParchmentScreen() {
         Gdx.input.inputProcessor = null
         Utils.setGamepadInputProcessor(null)
         audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_SCROLL)
-        AcademyUtils.trainerSkill = null
-        AcademyUtils.heroSkill = null
         fadeParchment()
     }
 

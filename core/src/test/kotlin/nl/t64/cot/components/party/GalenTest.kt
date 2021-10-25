@@ -28,8 +28,6 @@ internal class GalenTest : GameTest() {
         assertThat(galen.getCalculatedTotalStatOf(StatItemId.WILLPOWER)).isEqualTo(15)
         assertThat(galen.getStatById(StatItemId.DEXTERITY).rank).isEqualTo(18)
         assertThat(galen.getCalculatedTotalStatOf(StatItemId.DEXTERITY)).isEqualTo(18)
-        assertThat(galen.getStatById(StatItemId.AGILITY).rank).isEqualTo(10)
-        assertThat(galen.getCalculatedTotalStatOf(StatItemId.AGILITY)).isEqualTo(8)
         assertThat(galen.getStatById(StatItemId.ENDURANCE).rank).isEqualTo(20)
         assertThat(galen.getCalculatedTotalStatOf(StatItemId.ENDURANCE)).isEqualTo(20)
         assertThat(galen.getStatById(StatItemId.STRENGTH).rank).isEqualTo(25)
@@ -82,8 +80,8 @@ internal class GalenTest : GameTest() {
 
         assertThat(galen.getTotalCalcOf(CalcAttributeId.DAMAGE)).isEqualTo(20)
         assertThat(galen.getCalculatedTotalDamage()).isEqualTo(60)
-        assertThat(galen.getTotalCalcOf(CalcAttributeId.MOVEPOINTS)).isEqualTo(0)
-        assertThat(galen.getCalculatedMovepoints()).isEqualTo(13)
+        assertThat(galen.getTotalCalcOf(CalcAttributeId.ACTION_POINTS)).isEqualTo(0)
+        assertThat(galen.getCalculatedActionPoints()).isEqualTo(13)
     }
 
 }
