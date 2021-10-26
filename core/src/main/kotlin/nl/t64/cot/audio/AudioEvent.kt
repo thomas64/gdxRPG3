@@ -85,6 +85,10 @@ enum class AudioEvent(val filePath: String, val volume: Float = 1f) {
     SE_STEP_WOOD2("audio/se/footsteps/oot_step_wood2.ogg"),
     SE_STEP_WOOD3("audio/se/footsteps/oot_step_wood3.ogg"),
     SE_STEP_WOOD4("audio/se/footsteps/oot_step_wood4.ogg"),
+    SE_STEP_WATER1("audio/se/footsteps/oot_step_water1.wav"),
+    SE_STEP_WATER2("audio/se/footsteps/oot_step_water2.wav"),
+    SE_STEP_WATER3("audio/se/footsteps/oot_step_water3.wav"),
+    SE_STEP_WATER4("audio/se/footsteps/oot_step_water4.wav"),
 
     NONE("");
 

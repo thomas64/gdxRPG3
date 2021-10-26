@@ -7,7 +7,7 @@
     "tasks"   : {
       "1": {
         "taskPhrase": "Quest Intro",
-        "type"      : "DISCOVER"
+        "type": "CHECK"
       }
     }
   },
@@ -32,7 +32,14 @@
         "linkedWith"   : "3"
       },
       "3": {
-        "taskPhrase": "Find out if Grace is in the cave",
+        "taskPhrase"   : "Find out if Grace is in the cave",
+        "updatedPhrase": "Exited the cave past the guards",
+        "type"         : "DISCOVER",
+        "isHidden"     : true,
+        "linkedWith"   : "4"
+      },
+      "4": {
+        "taskPhrase": "Rescue Grace from Ardor",
         "type"      : "DISCOVER",
         "isHidden"  : true
       }

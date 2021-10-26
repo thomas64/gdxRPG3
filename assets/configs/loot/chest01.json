@@ -7,5 +7,6 @@
   "chest0006": {"content": {"spice": 9999, "herb": 9999, "gemstone": 9999}, "lockLevel": 10},
   "chest0007": {"content": {"basic_light_helmet": 1, "gold": 10}},
   "chest0008": {"content": {"transformation_orc": 1, "gold": 10, "healing_potion": 2}},
-  "chest0009": {"content": {"gold": 30}}
+  "chest0009": {"content": {"gold": 30}},
+  "chest0010": {"content": {"healing_potion": 2, "gold": 3, "herb": 2, "spice": 4, "gemstone": 1}}
 }

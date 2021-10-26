@@ -11,8 +11,8 @@ import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.constants.Constant
 
 
-private const val FONT = "fonts/calibri_light_32.ttf"
-private const val FONT_SIZE = 32
+private const val FONT = "fonts/calibri_light_28.ttf"
+private const val FONT_SIZE = 28
 private const val PAD = 50f
 private const val DELAY = 1f
 private const val SHOW_DURATION = 5f

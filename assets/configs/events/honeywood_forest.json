@@ -31,25 +31,30 @@
     "entityId"      : "orc_sergeant",
     "doesRepeat"    : true
   },
-  "find_dead_orcs"      : {
+  "find_dead_orcs"     : {
     "type"          : "conversation",
     "conversationId": "find_dead_orcs",
     "entityId"      : "mozes"
   },
-  "enter_great_tree"    : {
+  "enter_great_tree"   : {
     "type"          : "conversation",
     "conversationId": "fairy_welcome",
     "entityId"      : "fairy01"
   },
-  "find_great_tree"     : {
+  "find_great_tree"    : {
     "type"          : "conversation",
     "conversationId": "find_great_tree",
     "entityId"      : "mozes"
   },
-  "defeated_orc_guards" : {
+  "defeated_orc_guards": {
     "type"          : "conversation",
     "condition"     : ["defeated_orc_guards"],
     "conversationId": "defeated_orc_guards",
+    "entityId"      : "mozes"
+  },
+  "notice_dense_fog"   : {
+    "type"          : "conversation",
+    "conversationId": "notice_dense_fog",
     "entityId"      : "mozes"
   }
 }

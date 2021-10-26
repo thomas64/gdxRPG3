@@ -185,5 +185,11 @@
         ]
       }
     }
+  },
+  "notice_dense_fog"  : {
+    "phrases": {
+      "1": {"text": ["What a dense fog all of the sudden."]},
+      "2": {"text": ["How strange..."], "choices": [{"command": "EXIT"}]}
+    }
   }
 }

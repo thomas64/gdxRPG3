@@ -123,8 +123,6 @@ class TextureMapObjectRenderer(private val camera: Camera) : OrthogonalTiledMapR
     }
 
     private fun renderLightmap() {
-        batch.setBlendFunction(GL20.GL_ONE, GL20.GL_ONE)
-
         batch.begin()
         renderLightmapCamera()
         renderLightmapMap()
@@ -133,6 +131,7 @@ class TextureMapObjectRenderer(private val camera: Camera) : OrthogonalTiledMapR
 
     private fun renderLightmapCamera() {
         batch.projectionMatrix = camera.projection
+        batch.setBlendFunction(GL20.GL_ONE, GL20.GL_ONE)
         mapManager.getLightmapCamera(camera).forEach { it.draw(batch) }
     }
 
@@ -148,6 +147,9 @@ class TextureMapObjectRenderer(private val camera: Camera) : OrthogonalTiledMapR
             scrollerY = 0f
         }
         scrollDefinedLightmaps(lightmap)
+        if (lightmap.texture.toString().contains("fog")) {
+            batch.setBlendFunction(GL20.GL_ONE_MINUS_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA)
+        }
         lightmap.draw(batch)
     }
 
@@ -156,7 +158,9 @@ class TextureMapObjectRenderer(private val camera: Camera) : OrthogonalTiledMapR
         if (textureName.contains("forest")) {
             lightmap.x = -scrollerX
             lightmap.y = -scrollerY
-        } else if (textureName.contains("bubbles")) {
+        } else if (textureName.contains("bubbles")
+            || textureName.contains("fog")
+        ) {
             lightmap.x = -camera.getHorizontalSpaceBetweenCameraAndMapEdge()
             lightmap.y = -scrollerY
         }

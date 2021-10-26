@@ -8,5 +8,6 @@
   "sparkle0007": {"content": {"gemstone": 1}},
   "sparkle0008": {"content": {"gemstone": 1}},
   "sparkle0009": {"content": {"gold": 2}},
-  "sparkle0010": {"content": {"gemstone": 3}}
+  "sparkle0010": {"content": {"gemstone": 3}},
+  "sparkle0011": {"content": {"spice": 2}}
 }
