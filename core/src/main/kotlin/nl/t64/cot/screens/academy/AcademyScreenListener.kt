@@ -23,7 +23,7 @@ class AcademyScreenListener(
         }
         when (keycode) {
             Constant.KEYCODE_RIGHT, Input.Keys.ESCAPE -> closeScreenFunction.invoke()
-            Constant.KEYCODE_BOTTOM, Input.Keys.A -> upgradeSkillFunction.invoke()
+            Constant.KEYCODE_BOTTOM, Input.Keys.A, Input.Keys.ENTER -> upgradeSkillFunction.invoke()
             Constant.KEYCODE_L1, Input.Keys.Q -> previousHeroFunction.invoke()
             Constant.KEYCODE_R1, Input.Keys.W -> nextHeroFunction.invoke()
             Constant.KEYCODE_R3_L, Input.Keys.Z -> previousTableFunction.invoke()

@@ -8,13 +8,15 @@
     "phrases": {
       "1": {"text": ["Oh no, what's this?"]},
       "2": {"text": ["It's one of Grace's ribbons!", "So she has been here."]},
-      "3": {"text": ["But where is she? I see nothing here."]},
-      "4": {"text": ["Wait! There is something behind the tree."], "choices": [{"command": "EXIT"}]}
+      "3": {"text": ["But where is she?"]},
+      "4": {"text": ["Grace!!"]},
+      "5": {"text": ["Where are you?!"]},
+      "6": {"text": ["Are you there?!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "dont_go_south"     : {
     "phrases": {
-      "1": {"text": ["No, I shouldn't go back. I have to find Grace first.", "There must be some clues near where I found the ribbon."], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["No, I shouldn't go back. I have to find Grace first.", "There must be a clue near where I found the ribbon."], "choices": [{"command": "EXIT"}]}
     }
   },
   "fairy_welcome"     : {

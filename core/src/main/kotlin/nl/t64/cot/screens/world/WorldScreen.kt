@@ -39,7 +39,6 @@ import nl.t64.cot.screens.world.entity.InputPlayer
 import nl.t64.cot.screens.world.entity.PhysicsPlayer
 import nl.t64.cot.screens.world.entity.events.LoadEntityEvent
 import nl.t64.cot.screens.world.entity.events.PathUpdateEvent
-import nl.t64.cot.screens.world.messagedialog.MessageDialog
 import nl.t64.cot.screens.world.pathfinding.TiledNode
 import nl.t64.cot.sfx.TransitionImage
 import nl.t64.cot.subjects.*
@@ -343,6 +342,7 @@ class WorldScreen : Screen,
 
         stage.act(dt)
         if (isInTransition) {
+            player.resetInput()
             mapManager.fadeAudio()
         }
         stage.draw()

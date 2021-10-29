@@ -27,7 +27,7 @@ internal class InventoryScreenListener(
 
         when (keycode) {
             Constant.KEYCODE_RIGHT, Input.Keys.I, Input.Keys.ESCAPE -> closeScreenFunction.invoke()
-            Constant.KEYCODE_BOTTOM, Input.Keys.A -> actionFunction.invoke()
+            Constant.KEYCODE_BOTTOM, Input.Keys.A, Input.Keys.ENTER -> actionFunction.invoke()
             Constant.KEYCODE_L1, Input.Keys.Q -> previousHeroFunction.invoke()
             Constant.KEYCODE_R1, Input.Keys.W -> nextHeroFunction.invoke()
             Constant.KEYCODE_R3_L, Input.Keys.Z -> previousTableFunction.invoke()

@@ -20,7 +20,8 @@ internal class ListenerKeyCancel : InputListener {
 
     override fun keyDown(event: InputEvent, keycode: Int): Boolean {
         when (keycode) {
-            Constant.KEYCODE_RIGHT, Input.Keys.ESCAPE -> listenerInput.inputCancel()
+            Constant.KEYCODE_RIGHT,
+            Input.Keys.ESCAPE -> listenerInput.inputCancel()
         }
         return true
     }

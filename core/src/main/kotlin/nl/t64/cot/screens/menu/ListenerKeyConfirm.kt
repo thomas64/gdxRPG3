@@ -12,7 +12,10 @@ internal class ListenerKeyConfirm(selectItemFunction: () -> Unit) : InputListene
 
     override fun keyDown(event: InputEvent, keycode: Int): Boolean {
         when (keycode) {
-            Constant.KEYCODE_BOTTOM, Input.Keys.ENTER -> listenerInput.inputConfirm()
+            Constant.KEYCODE_BOTTOM,
+            Input.Keys.A,
+            Input.Keys.SPACE,
+            Input.Keys.ENTER -> listenerInput.inputConfirm()
         }
         return true
     }

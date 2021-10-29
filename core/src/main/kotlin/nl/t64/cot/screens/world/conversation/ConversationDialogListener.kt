@@ -20,7 +20,10 @@ internal class ConversationDialogListener(
         when (keycode) {
             Input.Keys.UP -> inputUp()
             Input.Keys.DOWN -> inputDown()
-            Constant.KEYCODE_BOTTOM, Input.Keys.ENTER, Input.Keys.A -> inputConfirm()
+            Constant.KEYCODE_BOTTOM,
+            Input.Keys.ENTER,
+            Input.Keys.SPACE,
+            Input.Keys.A -> inputConfirm()
         }
         return true
     }

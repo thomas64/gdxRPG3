@@ -1,4 +1,4 @@
-package nl.t64.cot.screens.world.messagedialog
+package nl.t64.cot.screens.world
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.InputMultiplexer
@@ -18,6 +18,7 @@ import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.constants.Constant
+import nl.t64.cot.screens.inventory.messagedialog.MessageDialogListener
 
 
 private const val FONT = "fonts/spectral_regular_24.ttf"

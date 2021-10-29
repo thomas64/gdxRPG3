@@ -30,8 +30,10 @@ class InventorySlotUser {
     private fun handlePotions(filter: () -> Boolean, action: () -> Unit) {
         if (filter.invoke()) {
             currentSlot.decrementAmountBy(1)
+            val oldHp = selectedHero.getCurrentHp()
             action.invoke()
-            MessageDialog("${selectedHero.name} used a ${inventoryItem.name}.")
+            val newHp = selectedHero.getCurrentHp()
+            MessageDialog("${selectedHero.name} used a ${inventoryItem.name} and recovered ${newHp - oldHp} HP.")
                 .show(currentSlot.stage, AudioEvent.SE_CONVERSATION_NEXT)
         } else {
             MessageDialog("A ${inventoryItem.name} cannot be used right now.")
