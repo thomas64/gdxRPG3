@@ -32,7 +32,16 @@ internal class FogOfWar {
     }
 
     private fun fillFogOfWar(gameMap: GameMap): Set<FogPoint> {
-        return (0 until gameMap.width)
+        val leftOfScreen: Int
+        val screenWidth: Int
+        if (gameMap.width < gameMap.height) {
+            screenWidth = ((gameMap.height / 9f) * 16f).toInt()     // 16:9
+            leftOfScreen = (0f - ((screenWidth - gameMap.width) / 2f) - (gameMap.width / 2f)).toInt()
+        } else {
+            screenWidth = gameMap.width
+            leftOfScreen = 0
+        }
+        return (leftOfScreen until screenWidth)
             .map { createFogPoints(it, gameMap) }
             .flatten()
             .toSet()

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="44" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="16" nextobjectid="62">
+ <properties>
+  <property name="bgm" value="bgm_ardor"/>
+  <property name="bgs" value="bgs_creek"/>
+  <property name="lightmap_map" value="fog"/>
+ </properties>
+ <tileset firstgid="1" name="honeywood_forest_ardor_2" tilewidth="24" tileheight="24" tilecount="5548" columns="146">
+  <image source="tilesets/honeywood_forest_ardor_2.png" width="3504" height="912"/>
+ </tileset>
+ <tileset firstgid="5549" source="tilesets/fsm_forest01_b.tsx"/>
+ <tileset firstgid="6573" source="tilesets/fsm_forest01_c.tsx"/>
+ <tileset firstgid="7597" source="tilesets/fsm_forest01_a1.tsx"/>
+ <layer id="2" name="under0_none" width="44" height="70">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAAAAAIB3AzAgAAE=
+  </data>
+ </layer>
+ <layer id="1" name="under1_ground" width="44" height="70">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <layer id="3" name="under2_water" width="44" height="70">
+  <data encoding="base64" compression="zlib">
+   eJzt08ENwjAQBMCrAGjA7gDoBFqlEzqBlED4gxSdrciBmc/+bGtXjgAAAAAAAOCfPEvEo+RyKuu/d18jdjWXh7r+e8/znaeay1tyl5a9WvrtnUv2aum3d37bK/tPRu79kxF6z7jMZ1xr37yXZX2P4riw75Fsqd+3rfULAADA73gBO25pYQ==
+  </data>
+ </layer>
+ <layer id="4" name="under3_water_stuff" width="44" height="70">
+  <data encoding="base64" compression="zlib">
+   eJzt1LkNwkAQheFpgCNDHLbr4mgBiRYgR9QABQApFAGk0AMQcwS8BMkOLBmL1SDxf9LThH47u7IZAAAAAAAAAAAA/skjMrtH2fmMvFvl68dmvTg7B7F3q3CGOttSWaXmusB5b073OlW3amI209wpe+VQoG/X+V7P+tZFuSqjD/acZ9wwmygb7XwbYO+VpNye88zVdaEc1fUU8J18e8+hvfdcS8164t3q+7z+F2U19WZaSjs1Oz/8jgAAAAAA8PQC+9s5MA==
+  </data>
+ </layer>
+ <layer id="5" name="under4_water_trees" width="44" height="70">
+  <data encoding="base64" compression="zlib">
+   eJzt1LENwjAQQNFbgySbsAprAVNABSIFK0BLRqHkmgiJyiDAifSedLIsN7+wLgIAAAAAAAD4tl0bsW8/f/+XdROxyblky7V93l/P8X3b1O09dhGHruzsc07Z21duLjVk7y1bh5n03rN3mX/ivKhd8p7VBP5xbXPZT6PS/TQlJXsKAAAAfuEBngYw0g==
+  </data>
+ </layer>
+ <layer id="6" name="under5_none" width="44" height="70">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAAAAAIB3AzAgAAE=
+  </data>
+ </layer>
+ <layer id="7" name="over6_trees" width="44" height="70">
+  <data encoding="base64" compression="zlib">
+   eJzt2ksKwjAQBuA5hLRgvIKuBU/iUbyHCh5C3Qg+r6BuhPo6hjs3TnChlERTaM2M/B/MorufMKRDEiIAgLimJnaCYvbC896F58szjdgJiunk8qJ/y+Hr2179tzlCufq2LzSrle9bayY4r8tBWV6sb7VuyvLWBO69n+aFtsB/s/Z5AcpRdM5tpkSttJosIf61b2OvK4C1TIhWXGuuTRI7zXcnznjmunBdFeQFAAAAAIBwY0M0eTuzkHivYe8vBlxDri1n3ZnX90hgXgAAqM48IVo4zqekvnvIOOvRkVfquwcfifOBj50bukrWV2rf+mjrWwDNsD88PQAzJyq0
+  </data>
+ </layer>
+ <layer id="8" name="over7_none" width="44" height="70">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAAAAAIB3AzAgAAE=
+  </data>
+ </layer>
+ <layer id="9" name="over8_none" width="44" height="70">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAAAAAIB3AzAgAAE=
+  </data>
+ </layer>
+ <objectgroup color="#0055ff" id="11" name="sound" visible="0">
+  <object id="48" name="sand" x="480" y="1296" width="48" height="384"/>
+  <object id="49" name="sand" x="528" y="1104" width="48" height="240"/>
+  <object id="50" name="sand" x="432" y="768" width="48" height="192"/>
+  <object id="52" name="sand" x="480" y="528" width="48" height="288"/>
+  <object id="53" name="sand" x="528" y="384" width="48" height="192"/>
+  <object id="54" name="sand" x="576" y="0" width="48" height="432"/>
+  <object id="55" name="water" x="384" y="960" width="144" height="48"/>
+  <object id="56" name="water" x="432" y="1008" width="144" height="48"/>
+  <object id="57" name="water" x="480" y="1056" width="144" height="48"/>
+ </objectgroup>
+ <objectgroup color="#aa0000" id="10" name="collision" visible="0">
+  <object id="1" x="384" y="1512" width="72" height="168"/>
+  <object id="2" x="552" y="1488" width="96" height="192"/>
+  <object id="4" x="432" y="1440" width="48" height="48"/>
+  <object id="5" x="288" y="768" width="96" height="48"/>
+  <object id="6" x="360" y="1296" width="72" height="216"/>
+  <object id="9" x="360" y="1200" width="120" height="96"/>
+  <object id="10" x="264" y="1008" width="168" height="192"/>
+  <object id="11" x="192" y="912" width="192" height="96"/>
+  <object id="12" x="192" y="720" width="48" height="192"/>
+  <object id="13" x="240" y="720" width="48" height="96"/>
+  <object id="14" x="456" y="0" width="96" height="264"/>
+  <object id="15" x="648" y="0" width="72" height="312"/>
+  <object id="17" x="552" y="48" width="24" height="72"/>
+  <object id="18" x="624" y="312" width="96" height="216"/>
+  <object id="19" x="624" y="648" width="48" height="216"/>
+  <object id="20" x="576" y="774" width="48" height="42"/>
+  <object id="21" x="672" y="600" width="168" height="312"/>
+  <object id="22" x="528" y="960" width="96" height="48"/>
+  <object id="26" x="768" y="1104" width="72" height="48"/>
+  <object id="27" x="600" y="1200" width="48" height="288"/>
+  <object id="28" x="648" y="1200" width="192" height="48"/>
+  <object id="29" x="792" y="1152" width="48" height="48"/>
+  <object id="30" x="720" y="912" width="120" height="48"/>
+  <object id="31" x="720" y="480" width="48" height="120"/>
+  <object id="33" x="408" y="264" width="72" height="168"/>
+  <object id="34" x="480" y="264" width="48" height="72"/>
+  <object id="36" x="192" y="552" width="192" height="168"/>
+  <object id="37" x="384" y="552" width="48" height="72"/>
+  <object id="38" x="384" y="432" width="72" height="120"/>
+  <object id="39" x="624" y="960" width="216" height="144"/>
+  <object id="40" x="576" y="1008" width="48" height="48"/>
+  <object id="41" x="432" y="1056" width="48" height="48"/>
+  <object id="42" x="648" y="528" width="72" height="24"/>
+ </objectgroup>
+ <objectgroup color="#5500ff" id="14" name="rest" visible="0">
+  <object id="58" name="sparkle0012" x="768" y="1104" width="48" height="48"/>
+  <object id="59" name="sparkle0013" x="240" y="768" width="48" height="48"/>
+ </objectgroup>
+ <objectgroup color="#ff007f" id="15" name="enemy">
+  <object id="61" name="green_slime" type="w" x="528" y="576" width="48" height="24">
+   <properties>
+    <property name="battleId" value="battle0011"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup color="#55aaff" id="12" name="spawn">
+  <object id="46" name="honeywood_forest_ardor_1" x="480" y="1656" width="48" height="24"/>
+ </objectgroup>
+ <objectgroup color="#ffff7f" id="13" name="portal">
+  <object id="44" name="honeywood_forest_ardor_1" x="432" y="1680" width="144" height="24"/>
+ </objectgroup>
+</map>

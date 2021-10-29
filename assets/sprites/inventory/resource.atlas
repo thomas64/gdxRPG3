@@ -1,26 +1,33 @@
 
 resource.png
-size: 186, 124
+size: 248, 186
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
-gemstone
+cloth
   rotate: false
   xy: 0, 0
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-gold
+gemstone
   rotate: false
   xy: 62, 0
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-green_jelly
+gold
   rotate: false
   xy: 124, 0
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+green_jelly
+  rotate: false
+  xy: 186, 0
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
@@ -39,9 +46,30 @@ leather
   orig: 62, 62
   offset: 0, 0
   index: -1
-spice
+metal
   rotate: false
   xy: 124, 62
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+spice
+  rotate: false
+  xy: 186, 62
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+stone
+  rotate: false
+  xy: 0, 124
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+wood
+  rotate: false
+  xy: 62, 124
   size: 62, 62
   orig: 62, 62
   offset: 0, 0

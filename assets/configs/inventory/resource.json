@@ -45,10 +45,38 @@
     "price"      : 1,
     "description": ["ToDo", "ToDo"]
   },
+  "cloth"      : {
+    "name"       : "Cloth",
+    "group"      : "RESOURCE",
+    "sort"       : 90050,
+    "price"      : 1,
+    "description": ["ToDo", "ToDo"]
+  },
   "leather"    : {
     "name"       : "Leather",
     "group"      : "RESOURCE",
-    "sort"       : 90050,
+    "sort"       : 90060,
+    "price"      : 1,
+    "description": ["ToDo", "ToDo"]
+  },
+  "wood"       : {
+    "name"       : "Wood",
+    "group"      : "RESOURCE",
+    "sort"       : 90070,
+    "price"      : 1,
+    "description": ["ToDo", "ToDo"]
+  },
+  "stone"      : {
+    "name"       : "Stone",
+    "group"      : "RESOURCE",
+    "sort"       : 90080,
+    "price"      : 1,
+    "description": ["ToDo", "ToDo"]
+  },
+  "metal"      : {
+    "name"       : "Metal",
+    "group"      : "RESOURCE",
+    "sort"       : 90090,
     "price"      : 1,
     "description": ["ToDo", "ToDo"]
   }

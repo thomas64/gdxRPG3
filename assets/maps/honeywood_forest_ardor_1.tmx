@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="72" height="48" tilewidth="24" tileheight="24" infinite="0" nextlayerid="19" nextobjectid="123">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="72" height="48" tilewidth="24" tileheight="24" infinite="0" nextlayerid="19" nextobjectid="125">
  <properties>
   <property name="bgm" value="bgm_ardor"/>
   <property name="lightmap_map" value="fog"/>
@@ -173,9 +173,11 @@
  </objectgroup>
  <objectgroup color="#55aaff" id="12" name="spawn">
   <object id="2" name="honeywood_cave_2" x="1344" y="528" width="48" height="24"/>
+  <object id="123" name="honeywood_forest_ardor_2" x="288" y="24" width="48" height="24"/>
  </objectgroup>
  <objectgroup color="#ffff7f" id="11" name="portal">
   <object id="1" name="honeywood_cave_2" x="1332" y="504" width="72" height="24"/>
+  <object id="124" name="honeywood_forest_ardor_2" x="240" y="-24" width="144" height="24"/>
  </objectgroup>
  <objectgroup color="#ffff00" id="17" name="quest">
   <object id="121" name="quest_grace_is_missing" type="discover" x="1344" y="528" width="48" height="24">

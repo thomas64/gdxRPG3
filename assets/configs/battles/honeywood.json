@@ -13,5 +13,6 @@
   },
   "quest_orc_guards": {"battlers": [{"id": "orc_sergeant", "amount": 2}]},
   "battle0009"      : {"battlers": [{"id": "green_slime", "amount": 1}]},
-  "battle0010"      : {"battlers": [{"id": "green_slime", "amount": 2}]}
+  "battle0010"      : {"battlers": [{"id": "green_slime", "amount": 2}]},
+  "battle0011"      : {"battlers": [{"id": "green_slime", "amount": 1}]}
 }
