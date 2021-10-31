@@ -61,7 +61,7 @@ open class PersonalityTooltip : BaseTooltip() {
     }
 
     open fun getDescription(personalityItem: PersonalityItem, totalScholar: Int): String {
-        return personalityItem.getDescription(totalScholar)
+        return personalityItem.getTotalDescription()
     }
 
 }

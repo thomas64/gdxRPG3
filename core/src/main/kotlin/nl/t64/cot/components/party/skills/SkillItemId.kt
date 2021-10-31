@@ -7,8 +7,13 @@ import kotlin.reflect.KClass
 enum class SkillItemId(override val title: String, val skillClass: KClass<out SkillItem>) : SuperEnum {
 
     ALCHEMIST("Alchemist", Alchemist::class),
+    BARBARIAN("Barbarian", Barbarian::class),
     DIPLOMAT("Diplomat", Diplomat::class),
+    DRUID("Druid", Druid::class),
+    GAMBLER("Gambler", Gambler::class),
     HEALER("Healer", Healer::class),
+    JESTER("Jester", Jester::class),
+    LOREMASTER("Loremaster", Loremaster::class),
     MECHANIC("Mechanic", Mechanic::class),
     MERCHANT("Merchant", Merchant::class),
     RANGER("Ranger", Ranger::class),

@@ -4,7 +4,7 @@ import kotlin.math.abs
 import kotlin.math.roundToInt
 
 
-private const val MAXIMUM = 25
+private const val MAXIMUM = 40
 
 class Level(var rank: Int = 1) {
 

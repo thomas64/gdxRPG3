@@ -15,7 +15,7 @@ internal class MagicTest : GameTest() {
         assertThat(airShield.name).isEqualTo("Air Shield")
         assertThat(airShield.sort).isEqualTo(110)
         assertThat(airShield.rank).isEqualTo(1)
-        assertThat(airShield.getDescription(0)).isEqualToIgnoringWhitespace("""
+        assertThat(airShield.getTotalDescription()).isEqualToIgnoringWhitespace("""
             All friendly entities within the range of the spell
             add 1 per Rank to their Protection value.
 
@@ -34,7 +34,7 @@ internal class MagicTest : GameTest() {
         assertThat(airShield.name).isEqualTo("Air Shield")
         assertThat(airShield.sort).isEqualTo(110)
         assertThat(airShield.rank).isEqualTo(10)
-        assertThat(airShield.getDescription(0)).isEqualToIgnoringWhitespace("""
+        assertThat(airShield.getTotalDescription()).isEqualToIgnoringWhitespace("""
             All friendly entities within the range of the spell
             add 1 per Rank to their Protection value.
 

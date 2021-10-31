@@ -13,10 +13,9 @@ abstract class SkillItem(
     val upgrade: Float,     // Constant value for upgrading formula.
     var rank: Int
 ) : PersonalityItem {
-    val maximum: Int = MAXIMUM
     var bonus: Int = 0
 
-    override fun getDescription(totalScholar: Int): String { // todo, nagaan of totalScholar meegegeven moet worden
+    override fun getTotalDescription(): String {
         return (getDescription() + System.lineSeparator() + System.lineSeparator()
                 + "A trainer is needed to upgrade a skill.")
     }

@@ -2,7 +2,7 @@ package nl.t64.cot.components.party.skills
 
 
 class Scholar(rank: Int = 0) : SkillItem(
-    SkillItemId.SCHOLAR, SkillItemId.SCHOLAR.title, 6f, rank
+    SkillItemId.SCHOLAR, SkillItemId.SCHOLAR.title, 1f, rank
 ) {
     override fun getDescription(): String {
         return """

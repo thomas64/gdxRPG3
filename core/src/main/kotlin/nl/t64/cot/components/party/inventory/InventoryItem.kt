@@ -44,9 +44,9 @@ class InventoryItem(
     private val alchemist: Int = 0,
     private val diplomat: Int = 0,
     private val healer: Int = 0,
+    private val loremaster: Int = 0,
     private val mechanic: Int = 0,
     private val ranger: Int = 0,
-    private val scholar: Int = 0,
     private val stealth: Int = 0,
     private val thief: Int = 0,
     private val troubadour: Int = 0,
@@ -72,7 +72,7 @@ class InventoryItem(
             minIntelligence, minWillpower, minDexterity, minStrength,
             actionPoints, baseHit, damage, protection, defense, spellBattery, transformation,
             intelligence, willpower, dexterity, strength, endurance,
-            alchemist, diplomat, healer, mechanic, ranger, scholar, stealth, thief, troubadour, warrior, wizard,
+            alchemist, diplomat, healer, loremaster, mechanic, ranger, stealth, thief, troubadour, warrior, wizard,
             cheatDeath, quickSwitch, spellBoost, movePoints)
         itemCopy.id = id
         itemCopy.amount = amount
@@ -114,17 +114,22 @@ class InventoryItem(
     fun getAttributeOfSkillItemId(skillItemId: SkillItemId): Int {
         return when (skillItemId) {
             SkillItemId.ALCHEMIST -> alchemist
+            SkillItemId.BARBARIAN -> 0
             SkillItemId.DIPLOMAT -> diplomat
+            SkillItemId.DRUID -> 0
+            SkillItemId.GAMBLER -> 0
             SkillItemId.HEALER -> healer
+            SkillItemId.JESTER -> 0
+            SkillItemId.LOREMASTER -> loremaster
             SkillItemId.MECHANIC -> mechanic
-            SkillItemId.SCHOLAR -> scholar
+            SkillItemId.MERCHANT -> 0
             SkillItemId.STEALTH -> stealth
             SkillItemId.RANGER -> ranger
+            SkillItemId.SCHOLAR -> 0
             SkillItemId.THIEF -> thief
             SkillItemId.TROUBADOUR -> troubadour
             SkillItemId.WARRIOR -> warrior
             SkillItemId.WIZARD -> wizard
-            SkillItemId.MERCHANT,
             SkillItemId.HAFTED,
             SkillItemId.MISSILE,
             SkillItemId.POLE,

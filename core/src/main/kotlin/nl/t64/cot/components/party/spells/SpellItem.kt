@@ -39,7 +39,7 @@ class SpellItem(
         return spellCopy
     }
 
-    override fun getDescription(totalScholar: Int): String {
+    override fun getTotalDescription(): String {
         return (getDescription()
                 + "A teacher is needed to upgrade a spell.")
     }

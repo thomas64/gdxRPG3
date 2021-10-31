@@ -1,8 +1,8 @@
 
 skills.png
-size: 240,192
+size: 240, 240
 format: RGBA8888
-filter: Nearest,Nearest
+filter: Nearest, Nearest
 repeat: none
 alchemist
   rotate: false
@@ -11,121 +11,156 @@ alchemist
   orig: 48, 48
   offset: 0, 0
   index: -1
-diplomat
+barbarian
   rotate: false
   xy: 48, 0
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-hafted
+diplomat
   rotate: false
   xy: 96, 0
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-healer
+druid
   rotate: false
   xy: 144, 0
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-scholar
+gambler
   rotate: false
   xy: 192, 0
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-mechanic
+hafted
   rotate: false
   xy: 0, 48
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-merchant
+healer
   rotate: false
   xy: 48, 48
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-missile
+jester
   rotate: false
   xy: 96, 48
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-pole
+loremaster
   rotate: false
   xy: 144, 48
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-ranger
+mechanic
   rotate: false
   xy: 192, 48
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-shield
+merchant
   rotate: false
   xy: 0, 96
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-stealth
+missile
   rotate: false
   xy: 48, 96
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-sword
+pole
   rotate: false
   xy: 96, 96
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-thief
+ranger
   rotate: false
   xy: 144, 96
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-thrown
+scholar
   rotate: false
   xy: 192, 96
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-troubadour
+shield
   rotate: false
   xy: 0, 144
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-warrior
+stealth
   rotate: false
   xy: 48, 144
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-wizard
+sword
   rotate: false
   xy: 96, 144
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+thief
+  rotate: false
+  xy: 144, 144
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+thrown
+  rotate: false
+  xy: 192, 144
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+troubadour
+  rotate: false
+  xy: 0, 192
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+warrior
+  rotate: false
+  xy: 48, 192
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+wizard
+  rotate: false
+  xy: 96, 192
   size: 48, 48
   orig: 48, 48
   offset: 0, 0

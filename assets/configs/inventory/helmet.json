@@ -155,7 +155,7 @@
     "weight"    : 1,
     "protection": 0,
     "stealth"   : 0,
-    "scholar": 2
+    "loremaster": 2
   },
   "epic_helm_of_tempests"   : {
     "name"      : "Helm of Tempests",

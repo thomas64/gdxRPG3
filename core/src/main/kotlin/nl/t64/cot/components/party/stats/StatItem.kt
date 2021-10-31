@@ -14,7 +14,7 @@ abstract class StatItem(
     var bonus: Int = 0,
 ) : PersonalityItem {
 
-    override fun getDescription(totalScholar: Int): String {
+    override fun getTotalDescription(): String {
         return (getDescription() + System.lineSeparator() + System.lineSeparator()
                 + getNeededXpForNextRank())
     }

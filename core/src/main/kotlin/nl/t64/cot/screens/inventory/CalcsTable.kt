@@ -90,7 +90,7 @@ internal class CalcsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
 
     private fun getPersonalityItemForDescriptionOnly(child: Label): PersonalityItem {
         return object : PersonalityItem {
-            override fun getDescription(totalScholar: Int): String {
+            override fun getTotalDescription(): String {
                 return child.text.toString().toCalcAttributeId().getDescription()
             }
         }

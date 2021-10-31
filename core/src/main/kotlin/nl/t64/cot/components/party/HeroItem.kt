@@ -310,6 +310,11 @@ class HeroItem(
         return (formula
                 // + troubadour
                 // + back attack + thief bonus
+                // - movement penalty voor ranged
+                // - weight penalty voor ranged
+                // - distance penalty voor ranged
+                // - obstacle penalty voor ranged
+                // + gambler todo, overal
                 // + getLevel() todo, this one shouldn't be shown in calculation but should be calculated in battle.
                 ).roundToInt()
     }
