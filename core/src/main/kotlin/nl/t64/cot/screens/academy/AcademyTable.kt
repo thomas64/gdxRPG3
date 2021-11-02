@@ -10,15 +10,14 @@ import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.components.party.skills.SkillDatabase
 import nl.t64.cot.components.party.skills.SkillItem
 import nl.t64.cot.components.party.skills.SkillItemId
-import nl.t64.cot.components.party.skills.toSkillItemClass
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.inventory.BaseTable
 import nl.t64.cot.screens.inventory.ListenerKeyVertical
 import nl.t64.cot.screens.inventory.messagedialog.MessageDialog
 import nl.t64.cot.screens.menu.DialogQuestion
-import kotlin.reflect.full.primaryConstructor
 
 
 private const val FIRST_COLUMN_WIDTH = 48f
@@ -35,7 +34,7 @@ internal class AcademyTable(
 ) : BaseTable(tooltip) {
 
     private val skillsToTrain: List<SkillItem> = resourceManager.getAcademyInventory(academyId)
-        .map { it.key.toSkillItemClass().primaryConstructor!!.call(it.value) }
+        .map { SkillDatabase.createSkillItem(it.key, it.value) }
     private val scrollPane: ScrollPane
 
     init {

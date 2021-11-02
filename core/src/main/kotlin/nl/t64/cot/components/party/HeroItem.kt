@@ -72,6 +72,9 @@ class HeroItem(
         stats.takeXpToInvest(xpCost)
         gameData.inventory.autoRemoveItem("gold", goldCost)
         skillItem.doUpgrade()
+        if (skillItem.rank == 1) {
+            skills.add(skillItem)
+        }
     }
 
     fun doUpgrade(spellItem: SpellItem, xpCost: Int, goldCost: Int) {

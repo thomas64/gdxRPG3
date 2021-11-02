@@ -7,13 +7,23 @@ import kotlin.math.roundToInt
 private val TRAINING_COSTS = listOf(20, 8, 12, 16, 20, 24, 28, 32, 36, 40)
 private const val MAXIMUM = 10
 
-abstract class SkillItem(
-    val id: SkillItemId,    // Constant value
-    val name: String,       // Constant value
-    val upgrade: Float,     // Constant value for upgrading formula.
-    var rank: Int
+class SkillItem(
+    private val upgrade: Float = 0f,                        // Constant value for upgrading formula.
+    private val description: List<String> = emptyList()
 ) : PersonalityItem {
+
+    lateinit var id: SkillItemId
+    lateinit var name: String
+    var rank: Int = 0
     var bonus: Int = 0
+
+    fun createCopy(rank: Int): SkillItem {
+        val skillCopy = SkillItem(upgrade, description)
+        skillCopy.id = id
+        skillCopy.name = name
+        skillCopy.rank = rank
+        return skillCopy
+    }
 
     fun isWeaponSkill(): Boolean {
         return id.isWeaponSkill()
@@ -28,17 +38,17 @@ abstract class SkillItem(
     }
 
     override fun getTotalDescription(): String {
-        return (getDescription() + System.lineSeparator() + System.lineSeparator()
+        return (description.joinToString(System.lineSeparator()) + System.lineSeparator()
+                + System.lineSeparator()
                 + "A trainer is needed to upgrade a skill.")
     }
 
     fun getTrainerDescription(trainerSkill: SkillItem, totalScholar: Int): String {
-        return (getDescription() + System.lineSeparator() + System.lineSeparator()
+        return (description.joinToString(System.lineSeparator()) + System.lineSeparator()
+                + System.lineSeparator()
                 + getNeededXpForNextLevel(trainerSkill, totalScholar) + System.lineSeparator()
                 + getNeededGoldForNextLevel(trainerSkill))
     }
-
-    abstract fun getDescription(): String
 
     fun doUpgrade() {
         rank += 1

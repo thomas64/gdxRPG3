@@ -1,0 +1,4 @@
+civil.json
+combat.json
+enemy.json
+weapon.json

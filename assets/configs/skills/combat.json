@@ -1,0 +1,53 @@
+{
+  "gambler"   : {
+    "upgrade"    : 1,
+    "description": [
+      "Randomly increases/ decreases chance-to-hit with all attacks in combat.",
+      "Each rank in Gambler increases/ decreases Total Hit by 5%.",
+      "",
+      "Randomly increases/ decreases damage-to-inflict with all attacks in combat.",
+      "Each rank in Gambler increases/ decreases Damage by 5%."
+    ]
+  },
+  "healer"    : {
+    "upgrade"    : 8,
+    "description": [
+      "Tekst en uitleg over Healer."
+    ]
+  },
+  "stealth"   : {
+    "upgrade"    : 4,
+    "description": [
+      "Tekst en uitleg over Stealth."
+    ]
+  },
+  "thief"     : {
+    "upgrade"    : 8,
+    "description": [
+      "Allows the possibility to pick locks on treasure chests.",
+      "Increases chance-to-hit with weapons FROM BEHIND in hand-to-hand combat.",
+      "Increases damage-to-inflict with weapons FROM BEHIND in hand-to-hand combat."
+    ]
+  },
+  "troubadour": {
+    "upgrade"    : 8,
+    "description": [
+      "Allows the possibility to play and sing inspirationally in combat,",
+      "increasing your party's chance-to-hit",
+      "and decreasing the enemy's chance-to-hit."
+    ]
+  },
+  "warrior"   : {
+    "upgrade"    : 8,
+    "description": [
+      "Allows the possibility of scoring critical hits in combat.",
+      "Each rank in Warrior increases the probability of this by 4%."
+    ]
+  },
+  "wizard"    : {
+    "upgrade"    : 12,
+    "description": [
+      "Tekst en uitleg over Wizard."
+    ]
+  }
+}
