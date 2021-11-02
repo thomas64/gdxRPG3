@@ -112,7 +112,7 @@ class DialogQuestion(
     private fun applyListeners(startIndex: Int) {
         val listenerKeyHorizontal = ListenerKeyHorizontal({ updateIndex(it) }, NUMBER_OF_ITEMS)
         listenerKeyHorizontal.updateSelectedIndex(startIndex)
-        val listenerKeyConfirm = ListenerKeyConfirm { selectDialogItem() }
+        val listenerKeyConfirm = ListenerKeyConfirmDialog { selectDialogItem() }
         val listenerKeyCancel = ListenerKeyCancel({ updateIndex(it) }, { selectDialogItem() }, EXIT_INDEX)
         dialog.addListener(listenerKeyHorizontal)
         dialog.addListener(listenerKeyConfirm)
