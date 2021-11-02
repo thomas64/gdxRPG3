@@ -11,14 +11,18 @@ import nl.t64.cot.screens.inventory.tooltip.PersonalityTooltip
 
 
 private const val FIRST_COLUMN_WIDTH = 48f
-private const val SECOND_COLUMN_WIDTH = 210f
+private const val SECOND_COLUMN_WIDTH = 205f
 private const val THIRD_COLUMN_WIDTH = 40f
-private const val FOURTH_COLUMN_WIDTH = 30f
-private const val CONTAINER_HEIGHT = 704f
+private const val FOURTH_COLUMN_WIDTH = 35f
+private const val CONTAINER_HEIGHT = 313f
 private const val ROW_HEIGHT = 48f
 private const val SECOND_COLUMN_PAD_LEFT = 15f
+private const val SCHOOL_TITLE_PAD_BOTTOM = 20f
 
-internal class SpellsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
+internal class SpellsTable(
+    tooltip: PersonalityTooltip,
+    private val containerHeight: Float = CONTAINER_HEIGHT
+) : BaseTable(tooltip) {
 
     private val scrollPane: ScrollPane
 
@@ -30,7 +34,7 @@ internal class SpellsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
         table.top()
         table.defaults().height(ROW_HEIGHT)
         scrollPane = ScrollPane(table)
-        container.add(scrollPane).height(CONTAINER_HEIGHT)
+        container.add(scrollPane).height(containerHeight)
         container.background = Utils.createTopBorder()
         container.addListener(ListenerKeyVertical { updateIndex(it, selectedHero.getAllSpells().size) })
     }
@@ -53,8 +57,7 @@ internal class SpellsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
         table.add(createImageOf(selectedHero.school.name))
         table.add(selectedHero.school.title + " School").padLeft(SECOND_COLUMN_PAD_LEFT)
         table.add("")
-        table.add("").row()
-        table.add("").row()
+        table.add("").padBottom(SCHOOL_TITLE_PAD_BOTTOM).row()
     }
 
     private fun fillSpellRows() {
@@ -84,10 +87,10 @@ internal class SpellsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
     }
 
     private fun getTooltipY(): Float =
-        CONTAINER_HEIGHT - (ROW_HEIGHT * selectedIndex) - (ROW_HEIGHT * 2f) - (ROW_HEIGHT * 0.4f)
+        containerHeight - (ROW_HEIGHT * selectedIndex) - (ROW_HEIGHT * 2f) - (ROW_HEIGHT * 0.4f)
 
     private fun scrollScrollPane() {
-        val selectedY = CONTAINER_HEIGHT - (ROW_HEIGHT * selectedIndex)
+        val selectedY = containerHeight - (ROW_HEIGHT * selectedIndex)
         scrollPane.scrollTo(0f, selectedY, 0f, 0f, false, true)
     }
 

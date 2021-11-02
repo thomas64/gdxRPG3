@@ -15,6 +15,18 @@ abstract class SkillItem(
 ) : PersonalityItem {
     var bonus: Int = 0
 
+    fun isWeaponSkill(): Boolean {
+        return id.isWeaponSkill()
+    }
+
+    fun isCombatSkill(): Boolean {
+        return id.isCombatSkill()
+    }
+
+    fun isCivilSkill(): Boolean {
+        return id.isCivilSkill()
+    }
+
     override fun getTotalDescription(): String {
         return (getDescription() + System.lineSeparator() + System.lineSeparator()
                 + "A trainer is needed to upgrade a skill.")

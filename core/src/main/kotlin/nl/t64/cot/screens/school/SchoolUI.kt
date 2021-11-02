@@ -21,6 +21,8 @@ private const val SPELLS_WINDOW_POSITION_Y = 50f
 private const val CALCS_WINDOW_POSITION_X = 1536f
 private const val CALCS_WINDOW_POSITION_Y = 610f
 
+private const val SPELLS_CONTAINER_HEIGHT = 704f
+
 private const val TITLE_HEROES = "   Heroes"
 private const val TITLE_TEACHER = "   Teacher"
 private const val TITLE_SCHOOL = "   Spells to learn"
@@ -38,7 +40,7 @@ internal class SchoolUI(
     private val calcsTable: CalcsTable = CalcsTable(personalityTooltip),
     private val calcsWindow: Window = Utils.createDefaultWindow(TITLE_CALCS, calcsTable.container),
 
-    private val spellsTable: SpellsTable = SpellsTable(personalityTooltip),
+    private val spellsTable: SpellsTable = SpellsTable(personalityTooltip, SPELLS_CONTAINER_HEIGHT),
     private val spellsWindow: Window = Utils.createDefaultWindow(TITLE_SPELLS, spellsTable.container),
 
     private val schoolTable: SchoolTable = SchoolTable(schoolId, schoolTooltip),

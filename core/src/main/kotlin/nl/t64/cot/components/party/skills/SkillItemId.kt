@@ -41,6 +41,33 @@ enum class SkillItemId(override val title: String, val skillClass: KClass<out Sk
         }
     }
 
+    fun isWeaponSkill(): Boolean {
+        return when (this) {
+            HAFTED, MISSILE, POLE, SHIELD, SWORD, THROWN -> true
+            GAMBLER, HEALER, STEALTH, THIEF, TROUBADOUR, WARRIOR, WIZARD -> false
+            ALCHEMIST, BARBARIAN, DIPLOMAT, DRUID, JESTER, LOREMASTER, MECHANIC, MERCHANT, RANGER, SCHOLAR -> false
+            else -> throw IllegalArgumentException("Only possible to ask a player skill.")
+        }
+    }
+
+    fun isCombatSkill(): Boolean {
+        return when (this) {
+            HAFTED, MISSILE, POLE, SHIELD, SWORD, THROWN -> false
+            GAMBLER, HEALER, STEALTH, THIEF, TROUBADOUR, WARRIOR, WIZARD -> true
+            ALCHEMIST, BARBARIAN, DIPLOMAT, DRUID, JESTER, LOREMASTER, MECHANIC, MERCHANT, RANGER, SCHOLAR -> false
+            else -> throw IllegalArgumentException("Only possible to ask a player skill.")
+        }
+    }
+
+    fun isCivilSkill(): Boolean {
+        return when (this) {
+            HAFTED, MISSILE, POLE, SHIELD, SWORD, THROWN -> false
+            GAMBLER, HEALER, STEALTH, THIEF, TROUBADOUR, WARRIOR, WIZARD -> false
+            ALCHEMIST, BARBARIAN, DIPLOMAT, DRUID, JESTER, LOREMASTER, MECHANIC, MERCHANT, RANGER, SCHOLAR -> true
+            else -> throw IllegalArgumentException("Only possible to ask a player skill.")
+        }
+    }
+
 }
 
 fun String.toSkillItemClass(): KClass<SkillItem> {

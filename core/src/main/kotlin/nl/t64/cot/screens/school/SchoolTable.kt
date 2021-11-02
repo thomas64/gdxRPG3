@@ -27,6 +27,7 @@ private const val FOURTH_COLUMN_WIDTH = 30f
 private const val CONTAINER_HEIGHT = 704f
 private const val ROW_HEIGHT = 48f
 private const val SECOND_COLUMN_PAD_LEFT = 15f
+private const val SCHOOL_TITLE_PAD_BOTTOM = 20f
 
 class SchoolTable(
     schoolId: String,
@@ -117,8 +118,7 @@ class SchoolTable(
         table.add(createImageOf(lastSpell.school.name))
         table.add(lastSpell.school.title + " School").padLeft(SECOND_COLUMN_PAD_LEFT)
         table.add("")
-        table.add("").row()
-        table.add("").row()
+        table.add("").padBottom(SCHOOL_TITLE_PAD_BOTTOM).row()
     }
 
     private fun fillSpellRows() {
