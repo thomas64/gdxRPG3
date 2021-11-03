@@ -194,7 +194,7 @@ object Utils {
         if (hpStats["staVari"]!! < hpStats["staRank"]!!) {
             color = Color.GOLD
         }
-        if (hpStats["eduVari"]!! < hpStats["eduRank"]!!) {
+        if (hpStats["conVari"]!! < hpStats["conRank"]!!) {
             color = Color.FIREBRICK
             if (hpStats["staVari"]!! > 0) {
                 color = Color.ORANGE

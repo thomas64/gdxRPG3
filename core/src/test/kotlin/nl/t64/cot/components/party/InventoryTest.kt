@@ -2,14 +2,12 @@ package nl.t64.cot.components.party
 
 import nl.t64.cot.GameTest
 import nl.t64.cot.ProfileManager
-import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.components.party.inventory.*
 import nl.t64.cot.components.party.skills.Hafted
 import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.components.party.stats.StatItemId
 import nl.t64.cot.components.party.stats.Strength
-import nl.t64.cot.components.quest.QuestContainer
 import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Disabled
@@ -56,7 +54,7 @@ internal class InventoryTest : GameTest() {
         assertThat(potion.sort).isEqualTo(80005)
         assertThat(potion.group).isEqualTo(InventoryGroup.POTION)
         assertThat(potion.description).isEqualTo(
-            listOf("Restores a fifth of the drinker's lost Endurance and Stamina.",
+            listOf("Restores a fifth of the drinker's lost Constitution and Stamina.",
                    "Creating a Healing Potion requires 3 Herbs",
                    "and an Alchemist rank of at least 1."))
     }

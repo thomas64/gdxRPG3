@@ -5,7 +5,7 @@
     "sort"       : 80005,
     "price"      : 4,
     "description": [
-      "Restores a fifth of the drinker's lost Endurance and Stamina.",
+      "Restores a fifth of the drinker's lost Constitution and Stamina.",
       "Creating a Healing Potion requires 3 Herbs",
       "and an Alchemist rank of at least 1."
     ]
@@ -17,7 +17,7 @@
     "price"      : 8,
     "description": [
       "A more powerful version of the Healing Potion,",
-      "restores a third of the drinker's lost Endurance and Stamina.",
+      "restores a third of the drinker's lost Constitution and Stamina.",
       "Creating a Curing Potion requires 3 Herbs, 2 Spices",
       "and an Alchemist rank of at least 3."
     ]

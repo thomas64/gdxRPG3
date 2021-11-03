@@ -48,7 +48,7 @@ open class StatItem(
         variable += 1
     }
 
-    // todo, speciale bonus toepassen inventoryItem: epic_ring_of_healing, die 1 edu geeft om je leven 1malig te redden.
+    // todo, speciale bonus toepassen inventoryItem: epic_ring_of_healing, die 1 con geeft om je leven 1malig te redden.
     fun takeDamage(damage: Int): Int? {
         variable -= damage
         if (variable < 0) {

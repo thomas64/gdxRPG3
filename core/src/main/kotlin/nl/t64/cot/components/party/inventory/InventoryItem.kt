@@ -22,10 +22,10 @@ class InventoryItem(
     private val minIntelligence: Int = 0,
     @JsonProperty("min_willpower")
     private val minWillpower: Int = 0,
-    @JsonProperty("min_dexterity")
-    private val minDexterity: Int = 0,
     @JsonProperty("min_strength")
     private val minStrength: Int = 0,
+    @JsonProperty("min_dexterity")
+    private val minDexterity: Int = 0,
     @JsonProperty("action_points")
     private val actionPoints: Int = 0,
     @JsonProperty("base_hit")
@@ -38,9 +38,9 @@ class InventoryItem(
     private val transformation: Int = 0,
     private val intelligence: Int = 0,
     private val willpower: Int = 0,
-    private val dexterity: Int = 0,
     private val strength: Int = 0,
-    private val endurance: Int = 0,
+    private val dexterity: Int = 0,
+    private val constitution: Int = 0,
     private val alchemist: Int = 0,
     private val diplomat: Int = 0,
     private val healer: Int = 0,
@@ -69,9 +69,9 @@ class InventoryItem(
     fun createCopy(amount: Int): InventoryItem {
         val itemCopy = InventoryItem(
             name, sort, description, group, isTwoHanded, skill, price, weight,
-            minIntelligence, minWillpower, minDexterity, minStrength,
+            minIntelligence, minWillpower, minStrength, minDexterity,
             actionPoints, baseHit, damage, protection, defense, spellBattery, transformation,
-            intelligence, willpower, dexterity, strength, endurance,
+            intelligence, willpower, strength, dexterity, constitution,
             alchemist, diplomat, healer, loremaster, mechanic, ranger, stealth, thief, troubadour, warrior, wizard,
             cheatDeath, quickSwitch, spellBoost, movePoints)
         itemCopy.id = id
@@ -93,9 +93,9 @@ class InventoryItem(
         return when (statItemId) {
             StatItemId.INTELLIGENCE -> minIntelligence
             StatItemId.WILLPOWER -> minWillpower
-            StatItemId.DEXTERITY -> minDexterity
             StatItemId.STRENGTH -> minStrength
-            StatItemId.ENDURANCE,
+            StatItemId.DEXTERITY -> minDexterity
+            StatItemId.CONSTITUTION,
             StatItemId.STAMINA -> 0
         }
     }
@@ -104,9 +104,9 @@ class InventoryItem(
         return when (statItemId) {
             StatItemId.INTELLIGENCE -> intelligence
             StatItemId.WILLPOWER -> willpower
-            StatItemId.DEXTERITY -> dexterity
             StatItemId.STRENGTH -> strength
-            StatItemId.ENDURANCE -> endurance
+            StatItemId.DEXTERITY -> dexterity
+            StatItemId.CONSTITUTION -> constitution
             StatItemId.STAMINA -> 0
         }
     }

@@ -34,12 +34,12 @@
     "protection": 5
   },
   "epic_ring_of_healing": {
-    "name"       : "Ring of Healing",
-    "group"      : "RING",
-    "sort"       : 61000,
-    "price"      : 50,
-    "endurance"  : 1,
-    "cheat_death": true,
-    "description": ["Once per battle, survive", "against an otherwise killing blow."]
+    "name"        : "Ring of Healing",
+    "group"       : "RING",
+    "sort"        : 61000,
+    "price"       : 50,
+    "constitution": 1,
+    "cheat_death" : true,
+    "description" : ["Once per battle, survive", "against an otherwise killing blow."]
   }
 }

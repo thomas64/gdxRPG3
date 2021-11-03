@@ -83,7 +83,7 @@
     "target": "PARTY_ONLY_IN_TARGET_AREA",
     "damage": 0,
     "description": [
-      "Target gains 2 Endurance for each Rank of the spell.",
+      "Target gains 2 Constitution for each Rank of the spell.",
       "May only be cast once on each target."
     ]
   },
@@ -150,7 +150,7 @@
     "target": "ENEMY_ONLY_IN_TARGET_AREA",
     "damage": 0,
     "description": [
-      "Target loses 2 Endurance for each Rank of the spell.",
+      "Target loses 2 Constitution for each Rank of the spell.",
       "May only be cast once on each target."
     ]
   }

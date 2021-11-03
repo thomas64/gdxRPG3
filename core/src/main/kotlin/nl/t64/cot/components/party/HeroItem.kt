@@ -210,7 +210,7 @@ class HeroItem(
 
     fun getExtraStatForVisualOf(statItem: StatItem): Int {
         return when (statItem.id) {
-            StatItemId.ENDURANCE,
+            StatItemId.CONSTITUTION,
             StatItemId.STAMINA -> statItem.variable - statItem.rank
             else -> {
                 val extra = inventory.getSumOfStat(statItem.id) + statItem.bonus

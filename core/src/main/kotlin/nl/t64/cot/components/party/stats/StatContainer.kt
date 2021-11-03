@@ -42,23 +42,23 @@ class StatContainer() {
                      Pair("lvlVari", level.variable),
                      Pair("staRank", stats[StatItemId.STAMINA].rank),
                      Pair("staVari", stats[StatItemId.STAMINA].variable),
-                     Pair("eduRank", stats[StatItemId.ENDURANCE].rank),
-                     Pair("eduVari", stats[StatItemId.ENDURANCE].variable),
-                     Pair("eduBon", stats[StatItemId.ENDURANCE].bonus))
+                     Pair("conRank", stats[StatItemId.CONSTITUTION].rank),
+                     Pair("conVari", stats[StatItemId.CONSTITUTION].variable),
+                     Pair("conBon", stats[StatItemId.CONSTITUTION].bonus))
     }
 
     fun getMaximumHp(): Int {
         return (level.rank
                 + stats[StatItemId.STAMINA].rank
-                + stats[StatItemId.ENDURANCE].rank
-                + stats[StatItemId.ENDURANCE].bonus)
+                + stats[StatItemId.CONSTITUTION].rank
+                + stats[StatItemId.CONSTITUTION].bonus)
     }
 
     fun getCurrentHp(): Int {
         return (level.variable
                 + stats[StatItemId.STAMINA].variable
-                + stats[StatItemId.ENDURANCE].variable
-                + stats[StatItemId.ENDURANCE].bonus)
+                + stats[StatItemId.CONSTITUTION].variable
+                + stats[StatItemId.CONSTITUTION].bonus)
     }
 
     fun getMaximumStamina(): Int = stats[StatItemId.STAMINA].rank
@@ -75,19 +75,19 @@ class StatContainer() {
     fun takeDamage(damage: Int) {
         level.takeDamage(damage)?.let { it1 ->
             stats[StatItemId.STAMINA].takeDamage(it1)?.let { it2 ->
-                stats[StatItemId.ENDURANCE].takeDamage(it2)
+                stats[StatItemId.CONSTITUTION].takeDamage(it2)
             }
         }
     }
 
     fun recoverFullHp() {
-        stats[StatItemId.ENDURANCE].restore()
+        stats[StatItemId.CONSTITUTION].restore()
         stats[StatItemId.STAMINA].restore()
         level.restore()
     }
 
     fun recoverPartHp(healPoints: Int) {
-        stats[StatItemId.ENDURANCE].restorePart(healPoints)?.let { it1 ->
+        stats[StatItemId.CONSTITUTION].restorePart(healPoints)?.let { it1 ->
             stats[StatItemId.STAMINA].restorePart(it1)?.let { it2 ->
                 level.restorePart(it2)
             }

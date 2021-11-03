@@ -228,7 +228,7 @@ class HeroTest : GameTest() {
                              StatItemId.WILLPOWER,
                              StatItemId.STRENGTH,
                              StatItemId.DEXTERITY,
-                             StatItemId.ENDURANCE,
+                             StatItemId.CONSTITUTION,
                              StatItemId.STAMINA)
         assertThat(mozes.getStatById(StatItemId.INTELLIGENCE).getXpCostForNextRank()).isEqualTo(43)
         assertThat(mozes.getSkillById(SkillItemId.STEALTH).getXpCostForNextLevel(0)).isEqualTo(16)
@@ -282,9 +282,9 @@ class HeroTest : GameTest() {
                              Pair("lvlVari", 1),
                              Pair("staRank", 30),
                              Pair("staVari", 30),
-                             Pair("eduRank", 15),
-                             Pair("eduVari", 15),
-                             Pair("eduBon", 0))
+                             Pair("conRank", 15),
+                             Pair("conVari", 15),
+                             Pair("conBon", 0))
         assertThat(actual).isEqualTo(expected)
     }
 

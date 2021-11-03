@@ -6,9 +6,9 @@
       "level"       : 1,
       "intelligence": 18,
       "willpower"   : 12,
-      "dexterity"   : 15,
-      "endurance"   : 15,
       "strength"    : 15,
+      "dexterity"   : 15,
+      "constitution": 15,
       "stamina"     : 30
     },
     "skills"   : {
@@ -37,9 +37,9 @@
       "level"       : 1,
       "intelligence": 14,
       "willpower"   : 10,
-      "dexterity"   : 22,
-      "endurance"   : 10,
       "strength"    : 8,
+      "dexterity"   : 22,
+      "constitution": 10,
       "stamina"     : 20
     },
     "skills"   : {
@@ -68,9 +68,9 @@
       "level"       : 8,
       "intelligence": 10,
       "willpower"   : 8,
-      "dexterity"   : 25,
-      "endurance"   : 20,
       "strength"    : 20,
+      "dexterity"   : 25,
+      "constitution": 20,
       "stamina"     : 40
     },
     "skills"   : {
@@ -101,9 +101,9 @@
       "level"       : 3,
       "intelligence": 22,
       "willpower"   : 16,
-      "dexterity"   : 20,
-      "endurance"   : 16,
       "strength"    : 10,
+      "dexterity"   : 20,
+      "constitution": 16,
       "stamina"     : 31
     },
     "skills"   : {
@@ -135,9 +135,9 @@
       "level"       : 2,
       "intelligence": 22,
       "willpower"   : 18,
-      "dexterity"   : 15,
-      "endurance"   : 15,
       "strength"    : 10,
+      "dexterity"   : 15,
+      "constitution": 15,
       "stamina"     : 20
     },
     "skills"   : {
@@ -168,9 +168,9 @@
       "level"       : 4,
       "intelligence": 15,
       "willpower"   : 15,
-      "dexterity"   : 18,
-      "endurance"   : 20,
       "strength"    : 25,
+      "dexterity"   : 18,
+      "constitution": 20,
       "stamina"     : 40
     },
     "skills"   : {
@@ -202,9 +202,9 @@
       "level"       : 12,
       "intelligence": 6,
       "willpower"   : 11,
-      "dexterity"   : 14,
-      "endurance"   : 30,
       "strength"    : 30,
+      "dexterity"   : 14,
+      "constitution": 30,
       "stamina"     : 60
     },
     "skills"   : {
@@ -238,9 +238,9 @@
       "level"       : 12,
       "intelligence": 15,
       "willpower"   : 10,
-      "dexterity"   : 30,
-      "endurance"   : 20,
       "strength"    : 15,
+      "dexterity"   : 30,
+      "constitution": 20,
       "stamina"     : 40
     },
     "skills"   : {
@@ -275,9 +275,9 @@
       "level"       : 20,
       "intelligence": 30,
       "willpower"   : 30,
-      "dexterity"   : 20,
-      "endurance"   : 18,
       "strength"    : 8,
+      "dexterity"   : 20,
+      "constitution": 18,
       "stamina"     : 50
     },
     "skills"   : {
@@ -313,9 +313,9 @@
       "level"       : 18,
       "intelligence": 30,
       "willpower"   : 30,
-      "dexterity"   : 25,
-      "endurance"   : 30,
       "strength"    : 20,
+      "dexterity"   : 25,
+      "constitution": 30,
       "stamina"     : 60
     },
     "skills"   : {
@@ -349,9 +349,9 @@
       "level"       : 18,
       "intelligence": 30,
       "willpower"   : 25,
-      "dexterity"   : 23,
-      "endurance"   : 30,
       "strength"    : 25,
+      "dexterity"   : 23,
+      "constitution": 30,
       "stamina"     : 60
     },
     "skills"   : {
@@ -385,9 +385,9 @@
       "level"       : 22,
       "intelligence": 25,
       "willpower"   : 25,
-      "dexterity"   : 30,
-      "endurance"   : 25,
       "strength"    : 25,
+      "dexterity"   : 30,
+      "constitution": 25,
       "stamina"     : 75
     },
     "skills"   : {
@@ -430,9 +430,9 @@
       "level"       : 20,
       "intelligence": 35,
       "willpower"   : 25,
-      "dexterity"   : 30,
-      "endurance"   : 30,
       "strength"    : 20,
+      "dexterity"   : 30,
+      "constitution": 30,
       "stamina"     : 60
     },
     "skills"   : {
@@ -468,9 +468,9 @@
       "level"       : 25,
       "intelligence": 30,
       "willpower"   : 30,
-      "dexterity"   : 30,
-      "endurance"   : 25,
       "strength"    : 15,
+      "dexterity"   : 30,
+      "constitution": 25,
       "stamina"     : 80
     },
     "skills"   : {

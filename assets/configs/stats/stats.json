@@ -29,12 +29,12 @@
       "Each rank in Dexterity increases Damage by 5%."
     ]
   },
-  "endurance"   : {
+  "constitution": {
     "maximum"    : 40,
     "upgrade"    : 0.12,
     "description": [
-      "Affects HP directly. Represents the real physical damage your",
-      "character can take before dying. Endurance also affects turn speed."
+      "Represents the real physical damage your character can take",
+      "before dying. Each rank in Constitution increases 1 HP."
     ]
   },
   "stamina"     : {
