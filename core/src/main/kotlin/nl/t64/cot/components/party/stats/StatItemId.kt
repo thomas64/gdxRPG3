@@ -3,13 +3,15 @@ package nl.t64.cot.components.party.stats
 import nl.t64.cot.components.party.SuperEnum
 
 
-enum class StatItemId(override val title: String) : SuperEnum {
+enum class StatItemId : SuperEnum {
 
-    INTELLIGENCE("Intelligence"),
-    WILLPOWER("Willpower"),
-    STRENGTH("Strength"),
-    DEXTERITY("Dexterity"),
-    ENDURANCE("Endurance"),
-    STAMINA("Stamina");
+    INTELLIGENCE,
+    WILLPOWER,
+    STRENGTH,
+    DEXTERITY,
+    ENDURANCE,
+    STAMINA;
+
+    override val title: String get() = this.name.lowercase().replaceFirstChar { it.uppercase() }
 
 }

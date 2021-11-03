@@ -11,7 +11,9 @@ import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.components.party.spells.SchoolType
 import nl.t64.cot.components.party.spells.SpellContainer
 import nl.t64.cot.components.party.spells.SpellItem
-import nl.t64.cot.components.party.stats.*
+import nl.t64.cot.components.party.stats.StatContainer
+import nl.t64.cot.components.party.stats.StatItem
+import nl.t64.cot.components.party.stats.StatItemId
 import nl.t64.cot.constants.Constant
 import kotlin.math.roundToInt
 
@@ -207,9 +209,9 @@ class HeroItem(
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     fun getExtraStatForVisualOf(statItem: StatItem): Int {
-        return when (statItem) {
-            is Endurance,
-            is Stamina -> statItem.variable - statItem.rank
+        return when (statItem.id) {
+            StatItemId.ENDURANCE,
+            StatItemId.STAMINA -> statItem.variable - statItem.rank
             else -> {
                 val extra = inventory.getSumOfStat(statItem.id) + statItem.bonus
                 if (extra < 0 && extra < -statItem.rank) -statItem.rank else extra

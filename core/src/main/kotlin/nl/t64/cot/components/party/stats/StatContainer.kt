@@ -1,25 +1,21 @@
 package nl.t64.cot.components.party.stats
 
-import java.beans.ConstructorProperties
+import com.fasterxml.jackson.annotation.JsonCreator
+import java.util.*
 
-
-private const val NUMBER_OF_STAT_SLOTS = 7
 
 class StatContainer() {
 
     private lateinit var level: Level
-    private val stats: MutableMap<String, StatItem> = HashMap(NUMBER_OF_STAT_SLOTS)
+    private val stats: EnumMap<StatItemId, StatItem> = EnumMap(StatItemId::class.java)
 
-    @ConstructorProperties(
-        "level", "intelligence", "willpower", "dexterity", "endurance", "strength", "stamina")
-    constructor(lvl: Int, inl: Int, wil: Int, dex: Int, edu: Int, str: Int, sta: Int) : this() {
-        this.level = Level(lvl)
-        this.stats[StatItemId.INTELLIGENCE.name] = Intelligence(inl)
-        this.stats[StatItemId.WILLPOWER.name] = Willpower(wil)
-        this.stats[StatItemId.DEXTERITY.name] = Dexterity(dex)
-        this.stats[StatItemId.ENDURANCE.name] = Endurance(edu)
-        this.stats[StatItemId.STRENGTH.name] = Strength(str)
-        this.stats[StatItemId.STAMINA.name] = Stamina(sta)
+    @JsonCreator
+    constructor(startingStats: Map<String, Int>) : this() {
+        this.level = Level(startingStats["level"]!!)
+        startingStats
+            .filter { it.key != "level" }
+            .map { StatDatabase.createStatItem(it.key, it.value) }
+            .forEach { this.stats[it.id] = it }
     }
 
     fun getXpNeededForNextLevel(): Int = level.getXpNeededForNextLevel()
@@ -43,74 +39,74 @@ class StatContainer() {
     fun getAllHpStats(): Map<String, Int> {
         return mapOf(Pair("lvlRank", level.rank),
                      Pair("lvlVari", level.variable),
-                     Pair("staRank", stats[StatItemId.STAMINA.name]!!.rank),
-                     Pair("staVari", stats[StatItemId.STAMINA.name]!!.variable),
-                     Pair("eduRank", stats[StatItemId.ENDURANCE.name]!!.rank),
-                     Pair("eduVari", stats[StatItemId.ENDURANCE.name]!!.variable),
-                     Pair("eduBon", stats[StatItemId.ENDURANCE.name]!!.bonus))
+                     Pair("staRank", stats.getValue(StatItemId.STAMINA).rank),
+                     Pair("staVari", stats.getValue(StatItemId.STAMINA).variable),
+                     Pair("eduRank", stats.getValue(StatItemId.ENDURANCE).rank),
+                     Pair("eduVari", stats.getValue(StatItemId.ENDURANCE).variable),
+                     Pair("eduBon", stats.getValue(StatItemId.ENDURANCE).bonus))
     }
 
     fun getMaximumHp(): Int {
         return (level.rank
-                + stats[StatItemId.STAMINA.name]!!.rank
-                + stats[StatItemId.ENDURANCE.name]!!.rank
-                + stats[StatItemId.ENDURANCE.name]!!.bonus)
+                + stats.getValue(StatItemId.STAMINA).rank
+                + stats.getValue(StatItemId.ENDURANCE).rank
+                + stats.getValue(StatItemId.ENDURANCE).bonus)
     }
 
     fun getCurrentHp(): Int {
         return (level.variable
-                + stats[StatItemId.STAMINA.name]!!.variable
-                + stats[StatItemId.ENDURANCE.name]!!.variable
-                + stats[StatItemId.ENDURANCE.name]!!.bonus)
+                + stats.getValue(StatItemId.STAMINA).variable
+                + stats.getValue(StatItemId.ENDURANCE).variable
+                + stats.getValue(StatItemId.ENDURANCE).bonus)
     }
 
-    fun getMaximumStamina(): Int = stats[StatItemId.STAMINA.name]!!.rank
-    fun getCurrentStamina(): Int = stats[StatItemId.STAMINA.name]!!.variable
+    fun getMaximumStamina(): Int = stats.getValue(StatItemId.STAMINA).rank
+    fun getCurrentStamina(): Int = stats.getValue(StatItemId.STAMINA).variable
 
     fun getById(statItemId: StatItemId): StatItem {
-        return stats[statItemId.name]!!
+        return stats.getValue(statItemId)
     }
 
     fun getAll(): List<StatItem> {
-        return StatItemId.values().map { stats[it.name]!! }
+        return StatItemId.values().map { stats.getValue(it) }
     }
 
     fun takeDamage(damage: Int) {
         level.takeDamage(damage)?.let { it1 ->
-            (stats[StatItemId.STAMINA.name] as Stamina).takeDamage(it1)?.let { it2 ->
-                (stats[StatItemId.ENDURANCE.name] as Endurance).takeDamage(it2)
+            stats.getValue(StatItemId.STAMINA).takeDamage(it1)?.let { it2 ->
+                stats.getValue(StatItemId.ENDURANCE).takeDamage(it2)
             }
         }
     }
 
     fun recoverFullHp() {
-        (stats[StatItemId.ENDURANCE.name] as Endurance).restore()
-        (stats[StatItemId.STAMINA.name] as Stamina).restore()
+        stats.getValue(StatItemId.ENDURANCE).restore()
+        stats.getValue(StatItemId.STAMINA).restore()
         level.restore()
     }
 
     fun recoverPartHp(healPoints: Int) {
-        (stats[StatItemId.ENDURANCE.name] as Endurance).restorePart(healPoints)?.let { it1 ->
-            (stats[StatItemId.STAMINA.name] as Stamina).restorePart(it1)?.let { it2 ->
+        stats.getValue(StatItemId.ENDURANCE).restorePart(healPoints)?.let { it1 ->
+            stats.getValue(StatItemId.STAMINA).restorePart(it1)?.let { it2 ->
                 level.restorePart(it2)
             }
         }
     }
 
     fun recoverFullStamina() {
-        (stats[StatItemId.STAMINA.name] as Stamina).restore()
+        stats.getValue(StatItemId.STAMINA).restore()
     }
 
     fun getInflictDamageStaminaPenalty(): Int {
-        return (stats[StatItemId.STAMINA.name] as Stamina).getInflictDamagePenalty()
+        return stats.getValue(StatItemId.STAMINA).getInflictDamagePenalty()
     }
 
     fun getDefenseStaminaPenalty(): Int {
-        return (stats[StatItemId.STAMINA.name] as Stamina).getDefensePenalty()
+        return stats.getValue(StatItemId.STAMINA).getDefensePenalty()
     }
 
     fun getChanceToHitStaminaPenalty(): Int {
-        return (stats[StatItemId.STAMINA.name] as Stamina).getChanceToHitPenalty()
+        return stats.getValue(StatItemId.STAMINA).getChanceToHitPenalty()
     }
 
 }

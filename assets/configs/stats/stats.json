@@ -1,0 +1,50 @@
+{
+  "intelligence": {
+    "maximum"    : 30,
+    "upgrade"    : 0.12,
+    "description": [
+      "Affects chances of successfully casting magic spells."
+    ]
+  },
+  "willpower"   : {
+    "maximum"    : 30,
+    "upgrade"    : 0.12,
+    "description": [
+      "Improves defenses against enemy magic spells."
+    ]
+  },
+  "strength"    : {
+    "maximum"    : 30,
+    "upgrade"    : 0.12,
+    "description": [
+      "Increases damage-to-inflict with weapons in hand-to-hand combat.",
+      "Each rank in Strength increases Damage by 5%."
+    ]
+  },
+  "dexterity"   : {
+    "maximum"    : 30,
+    "upgrade"    : 0.12,
+    "description": [
+      "Increases damage-to-inflict with ranged weapons in combat.",
+      "Each rank in Dexterity increases Damage by 5%."
+    ]
+  },
+  "endurance"   : {
+    "maximum"    : 40,
+    "upgrade"    : 0.12,
+    "description": [
+      "Affects HP directly. Represents the real physical damage your",
+      "character can take before dying. Endurance also affects turn speed."
+    ]
+  },
+  "stamina"     : {
+    "maximum"    : 90,
+    "upgrade"    : 0.04,
+    "description": [
+      "Affects Action Points in battle and is used by magic spells",
+      "and some skill actions. Stamina is also lost when",
+      "taking damage from attacks. When Stamina hits zero,",
+      "your character will experience combat penalties."
+    ]
+  }
+}
