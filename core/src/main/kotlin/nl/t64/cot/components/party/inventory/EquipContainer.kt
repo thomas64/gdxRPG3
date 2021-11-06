@@ -85,6 +85,10 @@ class EquipContainer() {
         return getInventoryItem(InventoryGroup.WEAPON)?.getAttributeOfMinimal(InventoryMinimal.SKILL) as SkillItemId?
     }
 
+    fun getStatItemIdOfMinimalOfCurrentWeapon(): StatItemId? {
+        return getInventoryItem(InventoryGroup.WEAPON)?.getStatItemIdOfMinimalTypeOfWeapon()
+    }
+
     fun getBonusProtectionWhenArmorSetIsComplete(): Int {
         return getInventoryItem(InventoryGroup.HELMET)
             ?.takeIf { doesEquippedArmorAllHaveSamePrefix(getPrefixOfId(it)) }

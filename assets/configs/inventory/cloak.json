@@ -1,115 +1,143 @@
 {
   "basic_light_cloak"      : {
-    "name"      : "Basic Light Cloak",
-    "group"     : "CLOAK",
-    "sort"      : 60100,
-    "price"     : 10,
-    "protection": 0,
-    "stealth"   : 1
+    "name"         : "Basic Light Cloak",
+    "group"        : "CLOAK",
+    "sort"         : 60100,
+    "price"        : 10,
+    "min_dexterity": 10,
+    "protection"   : 0,
+    "speed"        : 0,
+    "stealth"      : 1
   },
   "fine_light_cloak"       : {
-    "name"      : "Fine Light Cloak",
-    "group"     : "CLOAK",
-    "sort"      : 60200,
-    "price"     : 20,
-    "protection": 0,
-    "stealth"   : 2
+    "name"         : "Fine Light Cloak",
+    "group"        : "CLOAK",
+    "sort"         : 60200,
+    "price"        : 20,
+    "min_dexterity": 12,
+    "protection"   : 0,
+    "speed"        : 0,
+    "stealth"      : 2
   },
-  "specialist_light_cloak": {
-    "name"      : "Specialist Light Cloak",
-    "group"     : "CLOAK",
-    "sort"      : 60300,
-    "price"     : 30,
-    "protection": 0,
-    "stealth"   : 3
+  "specialist_light_cloak" : {
+    "name"         : "Specialist Light Cloak",
+    "group"        : "CLOAK",
+    "sort"         : 60300,
+    "price"        : 30,
+    "min_dexterity": 14,
+    "protection"   : 0,
+    "speed"        : 0,
+    "stealth"      : 3
   },
-  "masterwork_light_cloak": {
-    "name"      : "Masterwork Light Cloak",
-    "group"     : "CLOAK",
-    "sort"      : 60400,
-    "price"     : 40,
-    "protection": 0,
-    "stealth"   : 4
+  "masterwork_light_cloak" : {
+    "name"         : "Masterwork Light Cloak",
+    "group"        : "CLOAK",
+    "sort"         : 60400,
+    "price"        : 40,
+    "min_dexterity": 16,
+    "protection"   : 0,
+    "speed"        : 0,
+    "stealth"      : 4
   },
-  "epic_light_cloak"      : {
-    "name"      : "Epic Light Cloak",
-    "group"     : "CLOAK",
-    "sort"      : 61000,
-    "price"     : 50,
-    "protection": 0,
-    "stealth"   : 6
+  "epic_light_cloak"       : {
+    "name"         : "Epic Light Cloak",
+    "group"        : "CLOAK",
+    "sort"         : 61000,
+    "price"        : 50,
+    "min_dexterity": 18,
+    "protection"   : 0,
+    "speed"        : 0,
+    "stealth"      : 6
   },
-  "legendary_light_cloak" : {
-    "name"      : "Legendary Light Cloak",
-    "group"     : "CLOAK",
-    "sort"      : 62000,
-    "price"     : 60,
-    "protection": 0,
-    "stealth"   : 8
+  "legendary_light_cloak"  : {
+    "name"         : "Legendary Light Cloak",
+    "group"        : "CLOAK",
+    "sort"         : 62000,
+    "price"        : 60,
+    "min_dexterity": 20,
+    "protection"   : 0,
+    "speed"        : 0,
+    "stealth"      : 8
   },
-  "basic_medium_cloak"    : {
-    "name"      : "Basic Medium Cloak",
-    "group"     : "CLOAK",
-    "sort"      : 60120,
-    "price"     : 40,
-    "protection": 1,
-    "stealth"   : 1
+  "basic_medium_cloak"     : {
+    "name"        : "Basic Medium Cloak",
+    "group"       : "CLOAK",
+    "sort"        : 60120,
+    "price"       : 40,
+    "min_strength": 12,
+    "protection"  : 1,
+    "speed"       : -1,
+    "stealth"     : 1
   },
-  "fine_medium_cloak"     : {
-    "name"      : "Fine Medium Cloak",
-    "group"     : "CLOAK",
-    "sort"      : 60220,
-    "price"     : 50,
-    "protection": 1,
-    "stealth"   : 2
+  "fine_medium_cloak"      : {
+    "name"        : "Fine Medium Cloak",
+    "group"       : "CLOAK",
+    "sort"        : 60220,
+    "price"       : 50,
+    "min_strength": 14,
+    "protection"  : 1,
+    "speed"       : -1,
+    "stealth"     : 2
   },
   "specialist_medium_cloak": {
-    "name"      : "Specialist Medium Cloak",
-    "group"     : "CLOAK",
-    "sort"      : 60320,
-    "price"     : 60,
-    "protection": 1,
-    "stealth"   : 3
+    "name"        : "Specialist Medium Cloak",
+    "group"       : "CLOAK",
+    "sort"        : 60320,
+    "price"       : 60,
+    "min_strength": 16,
+    "protection"  : 1,
+    "speed"       : -1,
+    "stealth"     : 3
   },
   "masterwork_medium_cloak": {
-    "name"      : "Masterwork Medium Cloak",
-    "group"     : "CLOAK",
-    "sort"      : 60420,
-    "price"     : 70,
-    "protection": 1,
-    "stealth"   : 4
+    "name"        : "Masterwork Medium Cloak",
+    "group"       : "CLOAK",
+    "sort"        : 60420,
+    "price"       : 70,
+    "min_strength": 18,
+    "protection"  : 1,
+    "speed"       : -1,
+    "stealth"     : 4
   },
   "basic_heavy_cloak"      : {
-    "name"      : "Basic Heavy Cloak",
-    "group"     : "CLOAK",
-    "sort"      : 60140,
-    "price"     : 70,
-    "protection": 2,
-    "stealth"   : 1
+    "name"        : "Basic Heavy Cloak",
+    "group"       : "CLOAK",
+    "sort"        : 60140,
+    "price"       : 70,
+    "min_strength": 22,
+    "protection"  : 2,
+    "speed"       : -2,
+    "stealth"     : 1
   },
   "fine_heavy_cloak"       : {
-    "name"      : "Fine Heavy Cloak",
-    "group"     : "CLOAK",
-    "sort"      : 60240,
-    "price"     : 80,
-    "protection": 2,
-    "stealth"   : 2
+    "name"        : "Fine Heavy Cloak",
+    "group"       : "CLOAK",
+    "sort"        : 60240,
+    "price"       : 80,
+    "min_strength": 24,
+    "protection"  : 2,
+    "speed"       : -2,
+    "stealth"     : 2
   },
   "specialist_heavy_cloak" : {
-    "name"      : "Specialist Heavy Cloak",
-    "group"     : "CLOAK",
-    "sort"      : 60340,
-    "price"     : 90,
-    "protection": 2,
-    "stealth"   : 3
+    "name"        : "Specialist Heavy Cloak",
+    "group"       : "CLOAK",
+    "sort"        : 60340,
+    "price"       : 90,
+    "min_strength": 26,
+    "protection"  : 2,
+    "speed"       : -2,
+    "stealth"     : 3
   },
   "masterwork_heavy_cloak" : {
-    "name"      : "Masterwork Heavy Cloak",
-    "group"     : "CLOAK",
-    "sort"      : 60440,
-    "price"     : 100,
-    "protection": 2,
-    "stealth"   : 4
+    "name"        : "Masterwork Heavy Cloak",
+    "group"       : "CLOAK",
+    "sort"        : 60440,
+    "price"       : 100,
+    "min_strength": 28,
+    "protection"  : 2,
+    "speed"       : -2,
+    "stealth"     : 4
   },
   "epic_dark_cloak"        : {
     "name"      : "Dark Cloak",
@@ -117,6 +145,7 @@
     "sort"      : 61000,
     "price"     : 50,
     "protection": 0,
+    "speed"     : 0,
     "stealth"   : 0,
     "thief"     : 2
   }

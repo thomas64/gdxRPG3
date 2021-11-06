@@ -1,98 +1,122 @@
 {
   "basic_light_shoulders"      : {
-    "name"      : "Basic Light Shoulders",
-    "group"     : "SHOULDERS",
-    "sort"      : 60100,
-    "price"     : 10,
-    "protection": 1,
-    "stealth"   : 0
+    "name"         : "Basic Light Shoulders",
+    "group"        : "SHOULDERS",
+    "sort"         : 60100,
+    "price"        : 10,
+    "min_dexterity": 10,
+    "protection"   : 1,
+    "speed"        : 0,
+    "stealth"      : 0
   },
   "fine_light_shoulders"       : {
-    "name"      : "Fine Light Shoulders",
-    "group"     : "SHOULDERS",
-    "sort"      : 60200,
-    "price"     : 20,
-    "protection": 2,
-    "stealth"   : 0
+    "name"         : "Fine Light Shoulders",
+    "group"        : "SHOULDERS",
+    "sort"         : 60200,
+    "price"        : 20,
+    "min_dexterity": 12,
+    "protection"   : 2,
+    "speed"        : 0,
+    "stealth"      : 0
   },
   "specialist_light_shoulders" : {
-    "name"      : "Specialist Light Shoulders",
-    "group"     : "SHOULDERS",
-    "sort"      : 60300,
-    "price"     : 30,
-    "protection": 3,
-    "stealth"   : 0
+    "name"         : "Specialist Light Shoulders",
+    "group"        : "SHOULDERS",
+    "sort"         : 60300,
+    "price"        : 30,
+    "min_dexterity": 14,
+    "protection"   : 3,
+    "speed"        : 0,
+    "stealth"      : 0
   },
   "masterwork_light_shoulders" : {
-    "name"      : "Masterwork Light Shoulders",
-    "group"     : "SHOULDERS",
-    "sort"      : 60400,
-    "price"     : 40,
-    "protection": 4,
-    "stealth"   : 0
+    "name"         : "Masterwork Light Shoulders",
+    "group"        : "SHOULDERS",
+    "sort"         : 60400,
+    "price"        : 40,
+    "min_dexterity": 16,
+    "protection"   : 4,
+    "speed"        : 0,
+    "stealth"      : 0
   },
   "basic_medium_shoulders"     : {
-    "name"      : "Basic Medium Shoulders",
-    "group"     : "SHOULDERS",
-    "sort"      : 60120,
-    "price"     : 40,
-    "protection": 5,
-    "stealth"   : -1
+    "name"        : "Basic Medium Shoulders",
+    "group"       : "SHOULDERS",
+    "sort"        : 60120,
+    "price"       : 40,
+    "min_strength": 12,
+    "protection"  : 5,
+    "speed"       : -1,
+    "stealth"     : -1
   },
   "fine_medium_shoulders"      : {
-    "name"      : "Fine Medium Shoulders",
-    "group"     : "SHOULDERS",
-    "sort"      : 60220,
-    "price"     : 50,
-    "protection": 6,
-    "stealth"   : -1
+    "name"        : "Fine Medium Shoulders",
+    "group"       : "SHOULDERS",
+    "sort"        : 60220,
+    "price"       : 50,
+    "min_strength": 14,
+    "protection"  : 6,
+    "speed"       : -1,
+    "stealth"     : -1
   },
   "specialist_medium_shoulders": {
-    "name"      : "Specialist Medium Shoulders",
-    "group"     : "SHOULDERS",
-    "sort"      : 60320,
-    "price"     : 60,
-    "protection": 7,
-    "stealth"   : -1
+    "name"        : "Specialist Medium Shoulders",
+    "group"       : "SHOULDERS",
+    "sort"        : 60320,
+    "price"       : 60,
+    "min_strength": 16,
+    "protection"  : 7,
+    "speed"       : -1,
+    "stealth"     : -1
   },
   "masterwork_medium_shoulders": {
-    "name"      : "Masterwork Medium Shoulders",
-    "group"     : "SHOULDERS",
-    "sort"      : 60420,
-    "price"     : 70,
-    "protection": 8,
-    "stealth"   : -1
+    "name"        : "Masterwork Medium Shoulders",
+    "group"       : "SHOULDERS",
+    "sort"        : 60420,
+    "price"       : 70,
+    "min_strength": 18,
+    "protection"  : 8,
+    "speed"       : -1,
+    "stealth"     : -1
   },
   "basic_heavy_shoulders"      : {
-    "name"      : "Basic Heavy Shoulders",
-    "group"     : "SHOULDERS",
-    "sort"      : 60140,
-    "price"     : 70,
-    "protection": 9,
-    "stealth"   : -2
+    "name"        : "Basic Heavy Shoulders",
+    "group"       : "SHOULDERS",
+    "sort"        : 60140,
+    "price"       : 70,
+    "min_strength": 22,
+    "protection"  : 9,
+    "speed"       : -3,
+    "stealth"     : -2
   },
   "fine_heavy_shoulders"       : {
-    "name"      : "Fine Heavy Shoulders",
-    "group"     : "SHOULDERS",
-    "sort"      : 60240,
-    "price"     : 80,
-    "protection": 10,
-    "stealth"   : -2
+    "name"        : "Fine Heavy Shoulders",
+    "group"       : "SHOULDERS",
+    "sort"        : 60240,
+    "price"       : 80,
+    "min_strength": 24,
+    "protection"  : 10,
+    "speed"       : -3,
+    "stealth"     : -2
   },
   "specialist_heavy_shoulders" : {
-    "name"      : "Specialist Heavy Shoulders",
-    "group"     : "SHOULDERS",
-    "sort"      : 60340,
-    "price"     : 90,
-    "protection": 11,
-    "stealth"   : -2
+    "name"        : "Specialist Heavy Shoulders",
+    "group"       : "SHOULDERS",
+    "sort"        : 60340,
+    "price"       : 90,
+    "min_strength": 26,
+    "protection"  : 11,
+    "speed"       : -3,
+    "stealth"     : -2
   },
   "masterwork_heavy_shoulders" : {
-    "name"      : "Masterwork Heavy Shoulders",
-    "group"     : "SHOULDERS",
-    "sort"      : 60440,
-    "price"     : 100,
-    "protection": 12,
-    "stealth"   : -2
+    "name"        : "Masterwork Heavy Shoulders",
+    "group"       : "SHOULDERS",
+    "sort"        : 60440,
+    "price"       : 100,
+    "min_strength": 28,
+    "protection"  : 12,
+    "speed"       : -3,
+    "stealth"     : -2
   }
 }

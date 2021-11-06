@@ -276,7 +276,7 @@ class HeroItem(
     }
 
     fun getCalculatedTotalHit(): Int {
-        // todo, is nu alleen nog maar voor wapens, niet voor potions.
+        // todo, is nu alleen nog maar voor wapens, niet voor potions. en ook niet voor ranged in de battle zelf.
         return inventory.getSkillOfCurrentWeapon()?.let {
             getCalculatedTotalHit(it)
         } ?: 0
@@ -285,9 +285,10 @@ class HeroItem(
     fun getCalculatedTotalDamage(): Int {
         // todo, is nu alleen nog maar voor wapens, niet voor potions.
         val currentWeaponSkill = inventory.getSkillOfCurrentWeapon()
+        val currentWeaponMinimal = inventory.getStatItemIdOfMinimalOfCurrentWeapon()!!
         return when {
             currentWeaponSkill == null -> 0
-            currentWeaponSkill.isHandToHandWeaponSkill() -> getCalculatedTotalDamageClose()
+            currentWeaponSkill.isHandToHandWeaponSkill() -> getCalculatedTotalDamageClose(currentWeaponMinimal)
             else -> getCalculatedTotalDamageRange()
         }
     }
@@ -323,11 +324,11 @@ class HeroItem(
                 ).roundToInt()
     }
 
-    private fun getCalculatedTotalDamageClose(): Int {
+    private fun getCalculatedTotalDamageClose(minimalType: StatItemId): Int {
         val weaponDamage = getTotalCalcOf(CalcAttributeId.DAMAGE)
         val staminaPenalty = stats.getInflictDamageStaminaPenalty()
-        val wielderStrength = getCalculatedTotalStatOf(StatItemId.STRENGTH) / staminaPenalty
-        val formula = weaponDamage + ((weaponDamage / 100f) * (5f * wielderStrength))
+        val statOfWielder = getCalculatedTotalStatOf(minimalType) / staminaPenalty
+        val formula = weaponDamage + ((weaponDamage / 100f) * (5f * statOfWielder))
         return (formula
                 // + back thief
                 // + getLevel() todo, this one shouldn't be shown in calculation but should be calculated in battle.

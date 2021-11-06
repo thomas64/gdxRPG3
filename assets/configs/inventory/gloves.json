@@ -1,161 +1,192 @@
 {
   "basic_light_gloves"      : {
-    "name"      : "Basic Light Gloves",
-    "group"     : "GLOVES",
-    "sort"      : 60100,
-    "price"     : 10,
-    "protection": 1,
-    "stealth"   : 0
+    "name"         : "Basic Light Gloves",
+    "group"        : "GLOVES",
+    "sort"         : 60100,
+    "price"        : 10,
+    "min_dexterity": 10,
+    "protection"   : 1,
+    "speed"        : 0,
+    "stealth"      : 0
   },
   "fine_light_gloves"       : {
-    "name"      : "Fine Light Gloves",
-    "group"     : "GLOVES",
-    "sort"      : 60200,
-    "price"     : 20,
-    "protection": 2,
-    "stealth"   : 0
+    "name"         : "Fine Light Gloves",
+    "group"        : "GLOVES",
+    "sort"         : 60200,
+    "price"        : 20,
+    "min_dexterity": 12,
+    "protection"   : 2,
+    "speed"        : 0,
+    "stealth"      : 0
   },
   "specialist_light_gloves" : {
-    "name"      : "Specialist Light Gloves",
-    "group"     : "GLOVES",
-    "sort"      : 60300,
-    "price"     : 30,
-    "protection": 3,
-    "stealth"   : 0
+    "name"         : "Specialist Light Gloves",
+    "group"        : "GLOVES",
+    "sort"         : 60300,
+    "price"        : 30,
+    "min_dexterity": 14,
+    "protection"   : 3,
+    "speed"        : 0,
+    "stealth"      : 0
   },
   "masterwork_light_gloves" : {
-    "name"      : "Masterwork Light Gloves",
-    "group"     : "GLOVES",
-    "sort"      : 60400,
-    "price"     : 40,
-    "protection": 4,
-    "stealth"   : 0
+    "name"         : "Masterwork Light Gloves",
+    "group"        : "GLOVES",
+    "sort"         : 60400,
+    "price"        : 40,
+    "min_dexterity": 16,
+    "protection"   : 4,
+    "speed"        : 0,
+    "stealth"      : 0
   },
   "basic_medium_gloves"     : {
-    "name"      : "Basic Medium Gloves",
-    "group"     : "GLOVES",
-    "sort"      : 60120,
-    "price"     : 40,
-    "protection": 5,
-    "stealth"   : -1
+    "name"        : "Basic Medium Gloves",
+    "group"       : "GLOVES",
+    "sort"        : 60120,
+    "price"       : 40,
+    "min_strength": 12,
+    "protection"  : 5,
+    "speed"       : -1,
+    "stealth"     : -1
   },
   "fine_medium_gloves"      : {
-    "name"      : "Fine Medium Gloves",
-    "group"     : "GLOVES",
-    "sort"      : 60220,
-    "price"     : 50,
-    "protection": 6,
-    "stealth"   : -1
+    "name"        : "Fine Medium Gloves",
+    "group"       : "GLOVES",
+    "sort"        : 60220,
+    "price"       : 50,
+    "min_strength": 14,
+    "protection"  : 6,
+    "speed"       : -1,
+    "stealth"     : -1
   },
   "specialist_medium_gloves": {
-    "name"      : "Specialist Medium Gloves",
-    "group"     : "GLOVES",
-    "sort"      : 60320,
-    "price"     : 60,
-    "protection": 7,
-    "stealth"   : -1
+    "name"        : "Specialist Medium Gloves",
+    "group"       : "GLOVES",
+    "sort"        : 60320,
+    "price"       : 60,
+    "min_strength": 16,
+    "protection"  : 7,
+    "speed"       : -1,
+    "stealth"     : -1
   },
   "masterwork_medium_gloves": {
-    "name"      : "Masterwork Medium Gloves",
-    "group"     : "GLOVES",
-    "sort"      : 60420,
-    "price"     : 70,
-    "protection": 8,
-    "stealth"   : -1
+    "name"        : "Masterwork Medium Gloves",
+    "group"       : "GLOVES",
+    "sort"        : 60420,
+    "price"       : 70,
+    "min_strength": 18,
+    "protection"  : 8,
+    "speed"       : -1,
+    "stealth"     : -1
   },
   "basic_heavy_gloves"      : {
-    "name"      : "Basic Heavy Gloves",
-    "group"     : "GLOVES",
-    "sort"      : 60140,
-    "price"     : 70,
-    "protection": 9,
-    "stealth"   : -2
+    "name"        : "Basic Heavy Gloves",
+    "group"       : "GLOVES",
+    "sort"        : 60140,
+    "price"       : 70,
+    "min_strength": 22,
+    "protection"  : 9,
+    "speed"       : -3,
+    "stealth"     : -2
   },
   "fine_heavy_gloves"       : {
-    "name"      : "Fine Heavy Gloves",
-    "group"     : "GLOVES",
-    "sort"      : 60240,
-    "price"     : 80,
-    "protection": 10,
-    "stealth"   : -2
+    "name"        : "Fine Heavy Gloves",
+    "group"       : "GLOVES",
+    "sort"        : 60240,
+    "price"       : 80,
+    "min_strength": 24,
+    "protection"  : 10,
+    "speed"       : -3,
+    "stealth"     : -2
   },
-  "specialist_heavy_gloves": {
-    "name"      : "Specialist Heavy Gloves",
-    "group"     : "GLOVES",
-    "sort"      : 60340,
-    "price"     : 90,
-    "protection": 11,
-    "stealth"   : -2
+  "specialist_heavy_gloves" : {
+    "name"        : "Specialist Heavy Gloves",
+    "group"       : "GLOVES",
+    "sort"        : 60340,
+    "price"       : 90,
+    "min_strength": 26,
+    "protection"  : 11,
+    "speed"       : -3,
+    "stealth"     : -2
   },
-  "masterwork_heavy_gloves": {
-    "name"      : "Masterwork Heavy Gloves",
-    "group"     : "GLOVES",
-    "sort"      : 60440,
-    "price"     : 100,
-    "protection": 12,
-    "stealth"   : -2
+  "masterwork_heavy_gloves" : {
+    "name"        : "Masterwork Heavy Gloves",
+    "group"       : "GLOVES",
+    "sort"        : 60440,
+    "price"       : 100,
+    "min_strength": 28,
+    "protection"  : 12,
+    "speed"       : -3,
+    "stealth"     : -2
   },
-  "epic_gauntlets_of_might": {
+  "epic_gauntlets_of_might" : {
     "name"      : "Gauntlets of Might",
     "group"     : "GLOVES",
     "sort"      : 61000,
     "price"     : 50,
     "protection": 1,
+    "speed"     : 0,
     "stealth"   : 0,
     "strength"  : 3
   },
-  "epic_laboratory_gloves" : {
+  "epic_laboratory_gloves"  : {
     "name"      : "Laboratory Gloves",
     "group"     : "GLOVES",
     "sort"      : 61000,
     "price"     : 50,
     "protection": 0,
+    "speed"     : 0,
     "stealth"   : 0,
     "alchemist" : 2
   },
-  "epic_tinkers_gloves"    : {
+  "epic_tinkers_gloves"     : {
     "name"      : "Tinker's Gloves",
     "group"     : "GLOVES",
     "sort"      : 61000,
     "price"     : 50,
     "protection": 0,
+    "speed"     : 0,
     "stealth"   : 0,
     "dexterity" : 1,
     "mechanic"  : 2
   },
-  "epic_hands_of_healing"  : {
+  "epic_hands_of_healing"   : {
     "name"      : "Hands of Healing",
     "group"     : "GLOVES",
     "sort"      : 61000,
     "price"     : 50,
     "protection": 0,
+    "speed"     : 0,
     "stealth"   : 0,
     "healer"    : 2
   },
-  "epic_sticky_gloves"     : {
+  "epic_sticky_gloves"      : {
     "name"      : "Sticky Gloves",
     "group"     : "GLOVES",
     "sort"      : 61000,
     "price"     : 50,
     "protection": 0,
+    "speed"     : 0,
     "stealth"   : 0,
     "thief"     : 2
   },
-  "epic_bardic_gloves"     : {
+  "epic_bardic_gloves"      : {
     "name"      : "Bardic Gloves",
     "group"     : "GLOVES",
     "sort"      : 61000,
     "price"     : 50,
     "protection": 0,
+    "speed"     : 0,
     "stealth"   : 0,
     "troubadour": 2
   },
-  "epic_heros_gauntlets"   : {
+  "epic_heros_gauntlets"    : {
     "name"      : "Hero's Gauntlets",
     "group"     : "GLOVES",
     "sort"      : 61000,
     "price"     : 50,
     "protection": 1,
+    "speed"     : 0,
     "stealth"   : 0,
     "warrior"   : 2
   }

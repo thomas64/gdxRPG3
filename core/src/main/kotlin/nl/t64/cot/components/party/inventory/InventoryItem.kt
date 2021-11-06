@@ -97,6 +97,19 @@ class InventoryItem(
         }
     }
 
+    fun getStatItemIdOfMinimalTypeOfWeapon(): StatItemId {
+        val weaponMinimals = setOf(minIntelligence, minStrength, minDexterity)
+        if (weaponMinimals.count { it > 0 } > 1) {
+            throw IllegalStateException("Only one minimal possible for a weapon.")
+        }
+        return when {
+            minIntelligence != 0 -> StatItemId.INTELLIGENCE
+            minStrength != 0 -> StatItemId.STRENGTH
+            minDexterity != 0 -> StatItemId.DEXTERITY
+            else -> throw IllegalStateException("Not all minimals can be 0 for a weapon.")
+        }
+    }
+
     fun getAttributeOfStatItemId(statItemId: StatItemId): Int {
         return when (statItemId) {
             StatItemId.INTELLIGENCE -> intelligence

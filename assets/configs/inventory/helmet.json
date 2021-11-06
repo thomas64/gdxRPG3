@@ -1,99 +1,123 @@
 {
   "basic_light_helmet"      : {
-    "name"      : "Basic Light Helmet",
-    "group"     : "HELMET",
-    "sort"      : 60100,
-    "price"     : 10,
-    "protection": 1,
-    "stealth"   : 0
+    "name"         : "Basic Light Helmet",
+    "group"        : "HELMET",
+    "sort"         : 60100,
+    "price"        : 10,
+    "min_dexterity": 10,
+    "protection"   : 1,
+    "speed"        : 0,
+    "stealth"      : 0
   },
   "fine_light_helmet"       : {
-    "name"      : "Fine Light Helmet",
-    "group"     : "HELMET",
-    "sort"      : 60200,
-    "price"     : 20,
-    "protection": 2,
-    "stealth"   : 0
+    "name"         : "Fine Light Helmet",
+    "group"        : "HELMET",
+    "sort"         : 60200,
+    "price"        : 20,
+    "min_dexterity": 12,
+    "protection"   : 2,
+    "speed"        : 0,
+    "stealth"      : 0
   },
   "specialist_light_helmet" : {
-    "name"      : "Specialist Light Helmet",
-    "group"     : "HELMET",
-    "sort"      : 60300,
-    "price"     : 30,
-    "protection": 3,
-    "stealth"   : 0
+    "name"         : "Specialist Light Helmet",
+    "group"        : "HELMET",
+    "sort"         : 60300,
+    "price"        : 30,
+    "min_dexterity": 14,
+    "protection"   : 3,
+    "speed"        : 0,
+    "stealth"      : 0
   },
   "masterwork_light_helmet" : {
-    "name"      : "Masterwork Light Helmet",
-    "group"     : "HELMET",
-    "sort"      : 60400,
-    "price"     : 40,
-    "protection": 4,
-    "stealth"   : 0
+    "name"         : "Masterwork Light Helmet",
+    "group"        : "HELMET",
+    "sort"         : 60400,
+    "price"        : 40,
+    "min_dexterity": 16,
+    "protection"   : 4,
+    "speed"        : 0,
+    "stealth"      : 0
   },
   "basic_medium_helmet"     : {
-    "name"      : "Basic Medium Helmet",
-    "group"     : "HELMET",
-    "sort"      : 60120,
-    "price"     : 40,
-    "protection": 5,
-    "stealth"   : -1
+    "name"        : "Basic Medium Helmet",
+    "group"       : "HELMET",
+    "sort"        : 60120,
+    "price"       : 40,
+    "min_strength": 12,
+    "protection"  : 5,
+    "speed"       : -1,
+    "stealth"     : -1
   },
   "fine_medium_helmet"      : {
-    "name"      : "Fine Medium Helmet",
-    "group"     : "HELMET",
-    "sort"      : 60220,
-    "price"     : 50,
-    "protection": 6,
-    "stealth"   : -1
+    "name"        : "Fine Medium Helmet",
+    "group"       : "HELMET",
+    "sort"        : 60220,
+    "price"       : 50,
+    "min_strength": 14,
+    "protection"  : 6,
+    "speed"       : -1,
+    "stealth"     : -1
   },
   "specialist_medium_helmet": {
-    "name"      : "Specialist Medium Helmet",
-    "group"     : "HELMET",
-    "sort"      : 60320,
-    "price"     : 60,
-    "protection": 7,
-    "stealth"   : -1
+    "name"        : "Specialist Medium Helmet",
+    "group"       : "HELMET",
+    "sort"        : 60320,
+    "price"       : 60,
+    "min_strength": 16,
+    "protection"  : 7,
+    "speed"       : -1,
+    "stealth"     : -1
   },
   "masterwork_medium_helmet": {
-    "name"      : "Masterwork Medium Helmet",
-    "group"     : "HELMET",
-    "sort"      : 60420,
-    "price"     : 70,
-    "protection": 8,
-    "stealth"   : -1
+    "name"        : "Masterwork Medium Helmet",
+    "group"       : "HELMET",
+    "sort"        : 60420,
+    "price"       : 70,
+    "min_strength": 18,
+    "protection"  : 8,
+    "speed"       : -1,
+    "stealth"     : -1
   },
   "basic_heavy_helmet"      : {
-    "name"      : "Basic Heavy Helmet",
-    "group"     : "HELMET",
-    "sort"      : 60140,
-    "price"     : 70,
-    "protection": 9,
-    "stealth"   : -2
+    "name"        : "Basic Heavy Helmet",
+    "group"       : "HELMET",
+    "sort"        : 60140,
+    "price"       : 70,
+    "min_strength": 22,
+    "protection"  : 9,
+    "speed"       : -3,
+    "stealth"     : -2
   },
   "fine_heavy_helmet"       : {
-    "name"      : "Fine Heavy Helmet",
-    "group"     : "HELMET",
-    "sort"      : 60240,
-    "price"     : 80,
-    "protection": 10,
-    "stealth"   : -2
+    "name"        : "Fine Heavy Helmet",
+    "group"       : "HELMET",
+    "sort"        : 60240,
+    "price"       : 80,
+    "min_strength": 24,
+    "protection"  : 10,
+    "speed"       : -3,
+    "stealth"     : -2
   },
   "specialist_heavy_helmet" : {
-    "name"      : "Specialist Heavy Helmet",
-    "group"     : "HELMET",
-    "sort"      : 60340,
-    "price"     : 90,
-    "protection": 11,
-    "stealth"   : -2
+    "name"        : "Specialist Heavy Helmet",
+    "group"       : "HELMET",
+    "sort"        : 60340,
+    "price"       : 90,
+    "min_strength": 26,
+    "protection"  : 11,
+    "speed"       : -3,
+    "stealth"     : -2
   },
   "masterwork_heavy_helmet" : {
-    "name"      : "Masterwork Heavy Helmet",
-    "group"     : "HELMET",
-    "sort"      : 60440,
-    "price"     : 100,
-    "protection": 12,
-    "stealth"   : -2
+    "name"        : "Masterwork Heavy Helmet",
+    "group"       : "HELMET",
+    "sort"        : 60440,
+    "price"       : 100,
+    "min_strength": 28,
+    "protection"  : 12,
+    "speed"       : -3,
+    "stealth"     : -2
   },
   "mask_of_ardor"           : {
     "name"      : "Mask of Ardor",
@@ -101,6 +125,7 @@
     "sort"      : 61000,
     "price"     : 1,
     "protection": 0,
+    "speed"     : 0,
     "stealth"   : 0,
     "wizard"    : 1
   },
@@ -110,6 +135,7 @@
     "sort"        : 61000,
     "price"       : 50,
     "protection"  : 1,
+    "speed"       : 0,
     "stealth"     : 0,
     "intelligence": 3
   },
@@ -119,6 +145,7 @@
     "sort"      : 61000,
     "price"     : 50,
     "protection": 0,
+    "speed"     : 0,
     "stealth"   : 0,
     "willpower" : 5
   },
@@ -128,6 +155,7 @@
     "sort"      : 61000,
     "price"     : 50,
     "protection": 1,
+    "speed"     : 0,
     "stealth"   : 0,
     "diplomat"  : 2
   },
@@ -137,6 +165,7 @@
     "sort"      : 61000,
     "price"     : 50,
     "protection": 0,
+    "speed"     : 0,
     "stealth"   : 0,
     "loremaster": 2
   },
@@ -146,6 +175,7 @@
     "sort"      : 61000,
     "price"     : 50,
     "protection": 1,
+    "speed"     : 0,
     "stealth"   : 0,
     "warrior"   : 2
   },
@@ -155,6 +185,7 @@
     "sort"         : 61000,
     "price"        : 50,
     "protection"   : 0,
+    "speed"        : 0,
     "stealth"      : 0,
     "wizard"       : 1,
     "spell_battery": 10

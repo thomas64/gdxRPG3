@@ -155,13 +155,9 @@ class DescriptionCreator(
             return false
         }
         if ((description.key == CalcAttributeId.PROTECTION
+                    || description.key == StatItemId.SPEED
                     || description.key == SkillItemId.STEALTH)
-            && inventoryItem.group.hasImpactOnProtectionAndStealth()
-        ) {
-            return true
-        }
-        if (description.key == StatItemId.SPEED
-            && inventoryItem.group.hasImpactOnSpeed()
+            && inventoryItem.group.hasImpactOnPrtSpdStl()
         ) {
             return true
         }

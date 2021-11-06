@@ -31,16 +31,9 @@ enum class InventoryGroup(override val title: String) : SuperEnum {
     ITEM("Item"),
     RESOURCE("Resource");
 
-    fun hasImpactOnProtectionAndStealth(): Boolean {
+    fun hasImpactOnPrtSpdStl(): Boolean {
         return when (this) {
             SHIELD, HELMET, SHOULDERS, CHEST, CLOAK, BRACERS, GLOVES, BELT, PANTS, BOOTS -> true
-            else -> false
-        }
-    }
-
-    fun hasImpactOnSpeed(): Boolean {
-        return when (this) {
-            SHIELD, BELT -> true
             else -> false
         }
     }

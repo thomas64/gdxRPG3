@@ -1,43 +1,43 @@
 {
   "basic_staff"     : {
-    "name"        : "Basic Staff",
-    "group"       : "WEAPON",
-    "sort"        : 1200,
-    "skill"       : "POLE",
-    "price"       : 5,
-    "min_strength": 8,
-    "base_hit"    : 85,
-    "damage"      : 4
+    "name"            : "Basic Staff",
+    "group"           : "WEAPON",
+    "sort"            : 1200,
+    "skill"           : "POLE",
+    "price"           : 5,
+    "min_intelligence": 15,
+    "base_hit"        : 85,
+    "damage"          : 4
   },
   "fine_staff"      : {
-    "name"        : "Fine Staff",
-    "group"       : "WEAPON",
-    "sort"        : 2200,
-    "skill"       : "POLE",
-    "price"       : 10,
-    "min_strength": 9,
-    "base_hit"    : 85,
-    "damage"      : 6
+    "name"            : "Fine Staff",
+    "group"           : "WEAPON",
+    "sort"            : 2200,
+    "skill"           : "POLE",
+    "price"           : 10,
+    "min_intelligence": 18,
+    "base_hit"        : 85,
+    "damage"          : 7
   },
   "specialist_staff": {
-    "name"        : "Specialist Staff",
-    "group"       : "WEAPON",
-    "sort"        : 3200,
-    "skill"       : "POLE",
-    "price"       : 15,
-    "min_strength": 10,
-    "base_hit"    : 85,
-    "damage"      : 8
+    "name"            : "Specialist Staff",
+    "group"           : "WEAPON",
+    "sort"            : 3200,
+    "skill"           : "POLE",
+    "price"           : 15,
+    "min_intelligence": 21,
+    "base_hit"        : 85,
+    "damage"          : 10
   },
   "masterwork_staff": {
-    "name"        : "Masterwork Staff",
-    "group"       : "WEAPON",
-    "sort"        : 4200,
-    "skill"       : "POLE",
-    "price"       : 20,
-    "min_strength": 11,
-    "base_hit"    : 85,
-    "damage"      : 10
+    "name"            : "Masterwork Staff",
+    "group"           : "WEAPON",
+    "sort"            : 4200,
+    "skill"           : "POLE",
+    "price"           : 20,
+    "min_intelligence": 24,
+    "base_hit"        : 85,
+    "damage"          : 13
   },
   "epic_staff"      : {
     "name"            : "Epic Staff",
@@ -45,10 +45,9 @@
     "sort"            : 5200,
     "skill"           : "POLE",
     "price"           : 25,
-    "min_intelligence": 26,
-    "min_strength"    : 8,
+    "min_intelligence": 27,
     "base_hit"        : 85,
-    "damage"          : 12
+    "damage"          : 16
   },
   "legendary_staff" : {
     "name"            : "Legendary Staff",
@@ -57,9 +56,8 @@
     "skill"           : "POLE",
     "price"           : 30,
     "min_intelligence": 30,
-    "min_strength"    : 12,
     "base_hit"        : 85,
-    "damage"          : 14
+    "damage": 19
   },
   "basic_spear"     : {
     "name"        : "Basic Spear",
