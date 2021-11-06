@@ -3,20 +3,14 @@ package nl.t64.cot.components.party
 
 enum class CalcAttributeId(override val title: String) : SuperEnum {
 
-    WEIGHT("Weight") {
-        override fun getDescription(): String {
-            return """
-                Decreases amount of Action Points in combat.
-                Allows the possibility of shoving a less weighted character in combat.""".trimIndent()
-        }
-    },
-
     ACTION_POINTS("Action Points") {
         override fun getDescription(): String {
             return """
-                Defines how many actions this character is able to do in combat.
-                Action Points are calculated from Stamina and Weight.
-                More stamina, more AP. More weight, less AP.""".trimIndent()
+                Defines how many actions this character is able to do each turn in combat.
+                Each 6 ranks in Intelligence increases AP by 1.
+                Each 6 ranks in Strength increases AP by 1.
+                Each 6 ranks in Dexterity increases AP by 1.
+                Each 3 ranks in Speed increases AP by 1.""".trimIndent()
         }
     },
 

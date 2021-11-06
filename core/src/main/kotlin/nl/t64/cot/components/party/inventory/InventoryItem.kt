@@ -17,7 +17,6 @@ class InventoryItem(
     val isTwoHanded: Boolean = false,
     val skill: SkillItemId? = null,
     private val price: Int = 0,
-    private val weight: Int = 0,
     @JsonProperty("min_intelligence")
     private val minIntelligence: Int = 0,
     @JsonProperty("min_willpower")
@@ -26,8 +25,6 @@ class InventoryItem(
     private val minStrength: Int = 0,
     @JsonProperty("min_dexterity")
     private val minDexterity: Int = 0,
-    @JsonProperty("action_points")
-    private val actionPoints: Int = 0,
     @JsonProperty("base_hit")
     private val baseHit: Int = 0,
     private val damage: Int = 0,
@@ -41,6 +38,7 @@ class InventoryItem(
     private val strength: Int = 0,
     private val dexterity: Int = 0,
     private val constitution: Int = 0,
+    private val speed: Int = 0,
     private val alchemist: Int = 0,
     private val diplomat: Int = 0,
     private val healer: Int = 0,
@@ -57,9 +55,7 @@ class InventoryItem(
     @JsonProperty("quick_switch")
     private val quickSwitch: Boolean = false,
     @JsonProperty("spell_boost")
-    private val spellBoost: Boolean = false,
-    @JsonProperty("move_points")
-    private val movePoints: Int = 0,
+    private val spellBoost: Boolean = false
 ) {
 
     lateinit var id: String
@@ -68,12 +64,12 @@ class InventoryItem(
 
     fun createCopy(amount: Int): InventoryItem {
         val itemCopy = InventoryItem(
-            name, sort, description, group, isTwoHanded, skill, price, weight,
+            name, sort, description, group, isTwoHanded, skill, price,
             minIntelligence, minWillpower, minStrength, minDexterity,
-            actionPoints, baseHit, damage, protection, defense, spellBattery, transformation,
-            intelligence, willpower, strength, dexterity, constitution,
+            baseHit, damage, protection, defense, spellBattery, transformation,
+            intelligence, willpower, strength, dexterity, constitution, speed,
             alchemist, diplomat, healer, loremaster, mechanic, ranger, stealth, thief, troubadour, warrior, wizard,
-            cheatDeath, quickSwitch, spellBoost, movePoints)
+            cheatDeath, quickSwitch, spellBoost)
         itemCopy.id = id
         itemCopy.amount = amount
         return itemCopy
@@ -96,7 +92,8 @@ class InventoryItem(
             StatItemId.STRENGTH -> minStrength
             StatItemId.DEXTERITY -> minDexterity
             StatItemId.CONSTITUTION,
-            StatItemId.STAMINA -> 0
+            StatItemId.STAMINA,
+            StatItemId.SPEED -> 0
         }
     }
 
@@ -108,6 +105,7 @@ class InventoryItem(
             StatItemId.DEXTERITY -> dexterity
             StatItemId.CONSTITUTION -> constitution
             StatItemId.STAMINA -> 0
+            StatItemId.SPEED -> speed
         }
     }
 
@@ -142,8 +140,7 @@ class InventoryItem(
 
     fun getAttributeOfCalcAttributeId(calcAttributeId: CalcAttributeId): Int {
         return when (calcAttributeId) {
-            CalcAttributeId.WEIGHT -> weight
-            CalcAttributeId.ACTION_POINTS -> actionPoints
+            CalcAttributeId.ACTION_POINTS -> 0
             CalcAttributeId.BASE_HIT -> baseHit
             CalcAttributeId.DAMAGE -> damage
             CalcAttributeId.PROTECTION -> protection

@@ -6,17 +6,16 @@
     "drops"    : {"green_jelly": 25},
     "stats"    : {
       "level"       : 1,
-      "intelligence": 10,
-      "willpower"   : 7,
+      "intelligence": 1,
+      "willpower"   : 1,
       "strength"    : 8,
-      "dexterity"   : 15,
+      "dexterity"   : 1,
       "constitution": 10,
-      "stamina"     : 20
+      "stamina"     : 20,
+      "speed"       : 5
     },
     "skills"   : {
-      "stealth": 10,
-      "sword"  : 1,
-      "bite"   : 4
+      "bite": 1
     },
     "spells"   : {
     },
@@ -31,18 +30,17 @@
     "xp"       : 1,
     "drops"    : {"leather": 25},
     "stats"    : {
-      "level"       : 2,
-      "intelligence": 5,
-      "willpower"   : 7,
-      "strength"    : 8,
-      "dexterity"   : 13,
+      "level"       : 1,
+      "intelligence": 1,
+      "willpower"   : 1,
+      "strength"    : 5,
+      "dexterity"   : 1,
       "constitution": 5,
-      "stamina"     : 10
+      "stamina"     : 10,
+      "speed"       : 15
     },
     "skills"   : {
-      "stealth": 2,
-      "wizard" : 3,
-      "bite"   : 3
+      "bite": 1
     },
     "spells"   : {
     },
@@ -51,35 +49,28 @@
       "chest" : "armor_2"
     }
   },
-  "orc_scout"   : {
-    "name"     : "Orc Scout",
+  "orc_1"       : {
+    "name"     : "Orc",
     "school"   : "NONE",
     "xp"       : 3,
-    "drops"    : {"basic_dagger": 20, "basic_light_shield": 20, "healing_potion": 5, "gold": 50},
+    "drops"    : {"basic_dagger": 20, "healing_potion": 5, "gold": 50},
     "stats"    : {
       "level"       : 1,
-      "intelligence": 9,
-      "willpower"   : 9,
-      "strength"    : 12,
-      "dexterity"   : 15,
+      "intelligence": 6,
+      "willpower"   : 1,
+      "strength"    : 10,
+      "dexterity"   : 10,
       "constitution": 14,
-      "stamina"     : 28
+      "stamina"     : 28,
+      "speed"       : 10
     },
     "skills"   : {
-      "ranger" : 2,
-      "stealth": 2,
-      "warrior": 8,
-      "wizard" : 3,
-      "hafted" : 1,
-      "missile": 7,
-      "shield" : 3,
-      "sword"  : 2
+      "sword": 1
     },
     "spells"   : {
     },
     "inventory": {
       "weapon": "basic_dagger",
-      "shield": "basic_light_shield",
       "chest" : "armor_2"
     }
   },
@@ -91,16 +82,15 @@
     "stats"    : {
       "level"       : 10,
       "intelligence": 15,
-      "willpower"   : 18,
+      "willpower"   : 12,
       "strength"    : 17,
-      "dexterity"   : 23,
+      "dexterity"   : 13,
       "constitution": 25,
-      "stamina"     : 50
+      "stamina"     : 50,
+      "speed"       : 16
     },
     "skills"   : {
-      "stealth": 8,
       "warrior": 8,
-      "wizard" : 3,
       "hafted" : 6,
       "shield" : 8,
       "sword"  : 6,
@@ -111,7 +101,7 @@
     "inventory": {
       "weapon": "specialist_longsword",
       "shield": "specialist_medium_shield",
-      "chest" : "armor_8"
+      "chest": "armor_50"
     }
   }
 }

@@ -4,22 +4,23 @@
     "school"   : "UNKNOWN",
     "stats"    : {
       "level"       : 1,
-      "intelligence": 18,
-      "willpower"   : 12,
-      "strength"    : 15,
-      "dexterity"   : 15,
+      "intelligence": 10,
+      "willpower"   : 10,
+      "strength"    : 10,
+      "dexterity"   : 10,
       "constitution": 15,
-      "stamina"     : 30
+      "stamina"     : 30,
+      "speed"       : 10
     },
     "skills"   : {
       "stealth"   : 1,
       "troubadour": 1,
-      "warrior"   : 3,
+      "warrior"   : 1,
       "wizard"    : 1,
       "hafted"    : 1,
-      "missile"   : 3,
-      "shield"    : 3,
-      "sword"     : 3
+      "missile"   : 2,
+      "shield"    : 2,
+      "sword"     : 2
     },
     "spells"   : {
     },
@@ -34,13 +35,14 @@
     "name"     : "Luana",
     "school"   : "ELEMENTAL",
     "stats"    : {
-      "level"       : 1,
-      "intelligence": 14,
+      "level"       : 2,
+      "intelligence": 10,
       "willpower"   : 10,
       "strength"    : 8,
-      "dexterity"   : 22,
+      "dexterity"   : 16,
       "constitution": 10,
-      "stamina"     : 20
+      "stamina"     : 20,
+      "speed"       : 15
     },
     "skills"   : {
       "mechanic": 1,
@@ -71,10 +73,12 @@
       "strength"    : 20,
       "dexterity"   : 25,
       "constitution": 20,
-      "stamina"     : 40
+      "stamina"     : 40,
+      "speed"       : 14
     },
     "skills"   : {
       "alchemist": -1,
+      "druid"    : -1,
       "stealth"  : 1,
       "thief"    : -1,
       "warrior"  : 4,
@@ -104,7 +108,8 @@
       "strength"    : 10,
       "dexterity"   : 20,
       "constitution": 16,
-      "stamina"     : 31
+      "stamina"     : 31,
+      "speed"       : 15
     },
     "skills"   : {
       "loremaster": 1,
@@ -138,10 +143,12 @@
       "strength"    : 10,
       "dexterity"   : 15,
       "constitution": 15,
-      "stamina"     : 20
+      "stamina"     : 20,
+      "speed"       : 14
     },
     "skills"   : {
       "alchemist" : 3,
+      "jester"    : 1,
       "loremaster": 2,
       "mechanic"  : 2,
       "wizard"    : 2,
@@ -171,7 +178,8 @@
       "strength"    : 25,
       "dexterity"   : 18,
       "constitution": 20,
-      "stamina"     : 40
+      "stamina"     : 40,
+      "speed"       : 12
     },
     "skills"   : {
       "alchemist": -1,
@@ -205,10 +213,13 @@
       "strength"    : 30,
       "dexterity"   : 14,
       "constitution": 30,
-      "stamina"     : 60
+      "stamina"     : 60,
+      "speed"       : 10
     },
     "skills"   : {
       "alchemist" : -1,
+      "barbarian" : 4,
+      "druid"     : -1,
       "loremaster": -1,
       "stealth"   : 1,
       "thief"     : -1,
@@ -241,7 +252,8 @@
       "strength"    : 15,
       "dexterity"   : 30,
       "constitution": 20,
-      "stamina"     : 40
+      "stamina"     : 40,
+      "speed"       : 30
     },
     "skills"   : {
       "healer"  : 1,
@@ -278,13 +290,16 @@
       "strength"    : 8,
       "dexterity"   : 20,
       "constitution": 18,
-      "stamina"     : 50
+      "stamina"     : 50,
+      "speed"       : 12
     },
     "skills"   : {
       "alchemist" : 7,
+      "druid"     : 4,
       "healer"    : 8,
       "loremaster": 9,
       "mechanic"  : 6,
+      "scholar"   : 7,
       "stealth"   : 5,
       "wizard"    : 10,
       "missile"   : -1,
@@ -316,7 +331,8 @@
       "strength"    : 20,
       "dexterity"   : 25,
       "constitution": 30,
-      "stamina"     : 60
+      "stamina"     : 60,
+      "speed"       : 22
     },
     "skills"   : {
       "diplomat": 8,
@@ -352,10 +368,12 @@
       "strength"    : 25,
       "dexterity"   : 23,
       "constitution": 30,
-      "stamina"     : 60
+      "stamina"     : 60,
+      "speed"       : 18
     },
     "skills"   : {
       "alchemist" : -1,
+      "barbarian" : 5,
       "healer"    : 4,
       "loremaster": 6,
       "troubadour": 7,
@@ -386,16 +404,20 @@
       "intelligence": 25,
       "willpower"   : 25,
       "strength"    : 25,
-      "dexterity"   : 30,
+      "dexterity"   : 25,
       "constitution": 25,
-      "stamina"     : 75
+      "stamina"     : 75,
+      "speed"       : 25
     },
     "skills"   : {
       "alchemist" : 5,
       "diplomat"  : 10,
+      "druid"     : -1,
+      "gambler"   : 10,
       "loremaster": 5,
       "merchant"  : 5,
       "ranger"    : 5,
+      "scholar"   : -1,
       "stealth"   : 5,
       "thief"     : 5,
       "troubadour": 10,
@@ -433,9 +455,11 @@
       "strength"    : 20,
       "dexterity"   : 30,
       "constitution": 30,
-      "stamina"     : 60
+      "stamina"     : 60,
+      "speed"       : 23
     },
     "skills"   : {
+      "druid"  : 5,
       "healer" : 10,
       "ranger" : 6,
       "stealth": 6,
@@ -471,11 +495,14 @@
       "strength"    : 15,
       "dexterity"   : 30,
       "constitution": 25,
-      "stamina"     : 80
+      "stamina"     : 80,
+      "speed"       : 30
     },
     "skills"   : {
       "alchemist" : 10,
-      "diplomat"  : 10,
+      "druid"     : 10,
+      "gambler"   : 10,
+      "jester"    : 10,
       "loremaster": 10,
       "merchant"  : 10,
       "ranger"    : 10,

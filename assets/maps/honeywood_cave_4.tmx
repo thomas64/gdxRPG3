@@ -94,7 +94,7 @@
  </objectgroup>
  <objectgroup color="#ffaa7f" id="15" name="save"/>
  <objectgroup color="#ff55ff" id="16" name="event">
-  <object id="35" name="find_dead_orcs" type="discover" x="336" y="240" width="216" height="144"/>
+  <object id="35" name="find_dead_orcs" type="discover" x="288" y="336" width="336" height="48"/>
  </objectgroup>
  <objectgroup color="#ffffff" id="13" name="lights" visible="0">
   <object id="22" x="432" y="240" width="48" height="48"/>

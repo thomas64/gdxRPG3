@@ -4,7 +4,6 @@
     "group"     : "BOOTS",
     "sort"      : 60100,
     "price"     : 10,
-    "weight"    : 1,
     "protection": 1,
     "stealth"   : 0
   },
@@ -13,7 +12,6 @@
     "group"     : "BOOTS",
     "sort"      : 60200,
     "price"     : 20,
-    "weight"    : 1,
     "protection": 2,
     "stealth"   : 0
   },
@@ -22,7 +20,6 @@
     "group"     : "BOOTS",
     "sort"      : 60300,
     "price"     : 30,
-    "weight"    : 1,
     "protection": 3,
     "stealth"   : 0
   },
@@ -31,7 +28,6 @@
     "group"     : "BOOTS",
     "sort"      : 60400,
     "price"     : 40,
-    "weight"    : 1,
     "protection": 4,
     "stealth"   : 0
   },
@@ -40,7 +36,6 @@
     "group"     : "BOOTS",
     "sort"      : 60120,
     "price"     : 40,
-    "weight"    : 2,
     "protection": 5,
     "stealth"   : -1
   },
@@ -49,7 +44,6 @@
     "group"     : "BOOTS",
     "sort"      : 60220,
     "price"     : 50,
-    "weight"    : 2,
     "protection": 6,
     "stealth"   : -1
   },
@@ -58,7 +52,6 @@
     "group"     : "BOOTS",
     "sort"      : 60320,
     "price"     : 60,
-    "weight"    : 2,
     "protection": 7,
     "stealth"   : -1
   },
@@ -67,7 +60,6 @@
     "group"     : "BOOTS",
     "sort"      : 60420,
     "price"     : 70,
-    "weight"    : 2,
     "protection": 8,
     "stealth"   : -1
   },
@@ -76,7 +68,6 @@
     "group"     : "BOOTS",
     "sort"      : 60140,
     "price"     : 70,
-    "weight"    : 3,
     "protection": 9,
     "stealth"   : -2
   },
@@ -85,7 +76,6 @@
     "group"     : "BOOTS",
     "sort"      : 60240,
     "price"     : 80,
-    "weight"    : 3,
     "protection": 10,
     "stealth"   : -2
   },
@@ -94,7 +84,6 @@
     "group"     : "BOOTS",
     "sort"      : 60340,
     "price"     : 90,
-    "weight"    : 3,
     "protection": 11,
     "stealth"   : -2
   },
@@ -103,38 +92,32 @@
     "group"     : "BOOTS",
     "sort"      : 60440,
     "price"     : 100,
-    "weight"    : 3,
     "protection": 12,
     "stealth"   : -2
   },
   "epic_boots_of_motion"    : {
-    "name"       : "Boots of Motion",
-    "group"      : "BOOTS",
-    "sort"       : 61000,
-    "price"      : 50,
-    "weight"     : 1,
-    "protection" : 0,
-    "stealth"    : 0,
-    "move_points": 1,
-    "description": ["One extra movement", "without the cost of AP."]
+    "name"      : "Boots of Motion",
+    "group"     : "BOOTS",
+    "sort"      : 61000,
+    "price"     : 50,
+    "protection": 0,
+    "stealth"   : 0,
+    "speed"     : 3
   },
   "legendary_boots_of_speed": {
-    "name"       : "Boots of Speed",
-    "group"      : "BOOTS",
-    "sort"       : 62000,
-    "price"      : 50,
-    "weight"     : 1,
-    "protection" : 0,
-    "stealth"    : 0,
-    "move_points": 2,
-    "description": ["Two extra movements", "without the cost of AP."]
+    "name"      : "Boots of Speed",
+    "group"     : "BOOTS",
+    "sort"      : 62000,
+    "price"     : 50,
+    "protection": 0,
+    "stealth"   : 0,
+    "speed"     : 6
   },
   "epic_woodsmans_boots"    : {
     "name"      : "Woodsman's Boots",
     "group"     : "BOOTS",
     "sort"      : 61000,
     "price"     : 50,
-    "weight"    : 1,
     "protection": 1,
     "stealth"   : 0,
     "ranger"    : 2
@@ -144,7 +127,6 @@
     "group"     : "BOOTS",
     "sort"      : 61000,
     "price"     : 50,
-    "weight"    : 1,
     "protection": 0,
     "stealth"   : 2
   }

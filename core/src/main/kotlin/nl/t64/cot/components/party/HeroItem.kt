@@ -265,12 +265,11 @@ class HeroItem(
     }
 
     fun getCalculatedActionPoints(): Int {
-        return ((10f
-                + (stats.getById(StatItemId.STAMINA).variable / 8f))    // todo, is dit de perfecte tweak voor AP?
-                - (getTotalCalcOf(CalcAttributeId.WEIGHT) / 2f)         // samen met deze.
-                // todo:
-                //  + bonus actionpoints van equipment
-                // een step is 1 AP, een attack is 5 AP.
+        return ((getCalculatedTotalStatOf(StatItemId.SPEED) / 3f)
+                + ((getCalculatedTotalStatOf(StatItemId.INTELLIGENCE)
+                + getCalculatedTotalStatOf(StatItemId.STRENGTH)
+                + getCalculatedTotalStatOf(StatItemId.DEXTERITY)) / 6f)
+                // een step is 1 AP, een attack is 5 AP?
                 // loskomen van een close attack is x AP, wapen wisselen is x AP.
                 ).roundToInt()
             .takeIf { it > 0f } ?: 1

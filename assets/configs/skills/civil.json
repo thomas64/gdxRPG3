@@ -1,12 +1,13 @@
 {
   "alchemist" : {
-    "upgrade"    : 12,
+    "upgrade"    : 8,
     "description": [
-      "Tekst en uitleg over Alchemist."
+      "Allows for manufacturing various magical",
+      "potions out of various resources."
     ]
   },
   "barbarian" : {
-    "upgrade"    : 1,
+    "upgrade"    : 4,
     "description": [
       "Allows for additional conversation responses",
       "with possibly more favorable outcomes."
@@ -20,29 +21,31 @@
     ]
   },
   "druid"     : {
-    "upgrade"    : 1,
+    "upgrade"    : 4,
     "description": [
       "Allows the possibility of talking to animals."
     ]
   },
   "jester"    : {
-    "upgrade"    : 1,
+    "upgrade"    : 4,
     "description": [
       "Allows for additional conversation responses",
       "with possibly more favorable outcomes."
     ]
   },
   "loremaster": {
-    "upgrade"    : 6,
+    "upgrade"    : 4,
     "description": [
       "Allows the possibility of deciphering",
       "books, scrolls and other old writings."
     ]
   },
   "mechanic"  : {
-    "upgrade"    : 4,
+    "upgrade"    : 8,
     "description": [
-      "Tekst en uitleg over Mechanic."
+      "Allows the possibility to disarm traps on treasure chests.",
+      "Allows for manufacturing various weapons and armor out of",
+      "various resources."
     ]
   },
   "merchant"  : {
@@ -55,7 +58,7 @@
     ]
   },
   "ranger"    : {
-    "upgrade"    : 8,
+    "upgrade"    : 6,
     "description": [
       "Increases the amount of resources you'll find in the world.",
       "For every rank of Ranger, 2% more resources.",
@@ -63,7 +66,7 @@
     ]
   },
   "scholar"   : {
-    "upgrade"    : 1,
+    "upgrade"    : 6,
     "description": [
       "Lowers the 'XP to Invest' needed for training Skills and learning Spells.",
       "For every 1 rank of Scholar, 1% less XP."

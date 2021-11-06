@@ -33,7 +33,7 @@ object Constant {
     val DARK_RED = Color(0.5f, 0f, 0f, 1f)
 
     const val PLAYER_ID = "mozes"
-    const val TRANSFORMATION_ORC = "orc_scout"
+    const val TRANSFORMATION_ORC = "orc_1"
     const val STARTING_MAP = "honeywood_forest_path"
 
     const val DESCRIPTION_KEY_BUY = "Price"

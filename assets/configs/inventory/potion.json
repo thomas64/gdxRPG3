@@ -145,14 +145,14 @@
       "and an Alchemist rank of at least 6."
     ]
   },
-  "agility_potion"     : {
-    "name"       : "Agility Potion",
+  "speed_potion"       : {
+    "name"       : "Speed Potion",
     "group"      : "POTION",
     "sort"       : 80070,
     "price"      : 12,
     "description": [
-      "Temporarily increases the Agility of the drinker by 5 points during 1 battle.",
-      "Creating a Agility Potion requires 3 Herbs, 1 Spice, 2 Gemstones",
+      "Temporarily increases the Speed of the drinker by 5 points during 1 battle.",
+      "Creating a Speed Potion requires 3 Herbs, 1 Spice, 2 Gemstones",
       "and an Alchemist rank of at least 6."
     ]
   },

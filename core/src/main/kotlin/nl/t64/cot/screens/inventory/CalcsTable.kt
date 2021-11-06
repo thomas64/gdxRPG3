@@ -29,13 +29,9 @@ internal class CalcsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
     }
 
     override fun fillRows() {
-        table.add(Label(CalcAttributeId.WEIGHT.title, createLabelStyle()))
-        table.add(selectedHero.getTotalCalcOf(CalcAttributeId.WEIGHT).toString())
-        table.add("").row()
-
         table.add(Label(CalcAttributeId.ACTION_POINTS.title, createLabelStyle()))
         table.add(selectedHero.getCalculatedActionPoints().toString())
-        addExtraToTable(selectedHero.getTotalCalcOf(CalcAttributeId.ACTION_POINTS))
+        table.add("").row()
 
         table.add(Label(CalcAttributeId.BASE_HIT.title, createLabelStyle()))
         table.add(selectedHero.getCalcValueOf(InventoryGroup.WEAPON, CalcAttributeId.BASE_HIT).toString() + "%")

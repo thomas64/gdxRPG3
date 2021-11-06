@@ -27,6 +27,7 @@ private const val FOURTH_COLUMN_WIDTH = 30f
 private const val CONTAINER_HEIGHT = 704f
 private const val ROW_HEIGHT = 48f
 private const val SECOND_COLUMN_PAD_LEFT = 15f
+private const val SCHOOL_TITLE_PAD_TOP = 10f
 private const val SCHOOL_TITLE_PAD_BOTTOM = 20f
 
 class SchoolTable(
@@ -45,6 +46,7 @@ class SchoolTable(
         table.columnDefaults(3).width(FOURTH_COLUMN_WIDTH)
         table.top()
         table.defaults().height(ROW_HEIGHT)
+        table.padTop(SCHOOL_TITLE_PAD_TOP)
         scrollPane = ScrollPane(table)
         container.add(scrollPane).height(CONTAINER_HEIGHT)
         container.background = Utils.createTopBorder()

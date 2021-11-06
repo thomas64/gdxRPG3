@@ -17,6 +17,7 @@ private const val FOURTH_COLUMN_WIDTH = 35f
 private const val CONTAINER_HEIGHT = 313f
 private const val ROW_HEIGHT = 48f
 private const val SECOND_COLUMN_PAD_LEFT = 15f
+private const val SCHOOL_TITLE_PAD_TOP = 10f
 private const val SCHOOL_TITLE_PAD_BOTTOM = 20f
 
 internal class SpellsTable(
@@ -33,6 +34,7 @@ internal class SpellsTable(
         table.columnDefaults(3).width(FOURTH_COLUMN_WIDTH)
         table.top()
         table.defaults().height(ROW_HEIGHT)
+        table.padTop(SCHOOL_TITLE_PAD_TOP)
         scrollPane = ScrollPane(table)
         container.add(scrollPane).height(containerHeight)
         container.background = Utils.createTopBorder()

@@ -4,7 +4,6 @@
     "group"   : "ACCESSORY",
     "sort"    : 61000,
     "price"   : 1,
-    "weight"  : 0,
     "diplomat": 1,
     "stealth" : -1
   },
@@ -13,7 +12,6 @@
     "group"        : "ACCESSORY",
     "sort"         : 61000,
     "price"        : 50,
-    "weight"       : 1,
     "min_dexterity": 21,
     "thief"        : 2
   },
@@ -22,7 +20,6 @@
     "group"       : "ACCESSORY",
     "sort"        : 61000,
     "price"       : 50,
-    "weight"      : 1,
     "min_strength": 23,
     "mechanic"    : 2
   },
@@ -31,7 +28,6 @@
     "group"           : "ACCESSORY",
     "sort"            : 61000,
     "price"           : 50,
-    "weight"          : 1,
     "min_intelligence": 22,
     "alchemist"       : 2
   },
@@ -40,7 +36,6 @@
     "group"           : "ACCESSORY",
     "sort"            : 61000,
     "price"           : 50,
-    "weight"          : 1,
     "min_intelligence": 20,
     "healer"          : 2
   },
@@ -49,7 +44,6 @@
     "group"           : "ACCESSORY",
     "sort"            : 61000,
     "price"           : 50,
-    "weight"          : 1,
     "min_intelligence": 20,
     "troubadour"      : 3
   },
@@ -58,7 +52,6 @@
     "group"           : "ACCESSORY",
     "sort"            : 62000,
     "price"           : 50,
-    "weight"          : 1,
     "min_intelligence": 24,
     "troubadour"      : 6
   },
@@ -67,7 +60,6 @@
     "group"           : "ACCESSORY",
     "sort"            : 62000,
     "price"           : 50,
-    "weight"          : 1,
     "min_intelligence": 28,
     "min_willpower"   : 26,
     "spell_boost"     : true,
@@ -78,7 +70,6 @@
     "group"           : "ACCESSORY",
     "sort"            : 61000,
     "price"           : 50,
-    "weight"          : 1,
     "min_intelligence": 27,
     "wizard"          : 2
   }

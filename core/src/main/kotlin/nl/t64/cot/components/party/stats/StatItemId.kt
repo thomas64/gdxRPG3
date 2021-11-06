@@ -10,7 +10,8 @@ enum class StatItemId : SuperEnum {
     STRENGTH,
     DEXTERITY,
     CONSTITUTION,
-    STAMINA;
+    STAMINA,
+    SPEED;
 
     override val title: String get() = this.name.lowercase().replaceFirstChar { it.uppercase() }
 

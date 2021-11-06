@@ -1,6 +1,6 @@
 {
   "gambler"   : {
-    "upgrade"    : 1,
+    "upgrade"    : 6,
     "description": [
       "Randomly increases/ decreases chance-to-hit with all attacks in combat.",
       "Each rank in Gambler increases/ decreases Total Hit by 5%.",
@@ -12,13 +12,15 @@
   "healer"    : {
     "upgrade"    : 8,
     "description": [
-      "Tekst en uitleg over Healer."
+      "Allows for healing other party members in combat.",
+      "Also possible to use herbs to double the healing effect."
     ]
   },
   "stealth"   : {
-    "upgrade"    : 4,
+    "upgrade"    : 6,
     "description": [
-      "Tekst en uitleg over Stealth."
+      "Increases the chance to successfully flee combat.",
+      "Decreases the attention your character draws from enemies in combat."
     ]
   },
   "thief"     : {
@@ -40,14 +42,19 @@
   "warrior"   : {
     "upgrade"    : 8,
     "description": [
-      "Allows the possibility of scoring critical hits in combat.",
+      "Allows the possibility of scoring critical hits with weapons in combat.",
       "Each rank in Warrior increases the probability of this by 4%."
     ]
   },
   "wizard"    : {
     "upgrade"    : 12,
     "description": [
-      "Tekst en uitleg over Wizard."
+      "Allows the possibility to learn and cast magical spells in combat.",
+      "Each rank in Wizard increases the chance to successfully cast a spell by 10%.",
+      "Each rank in Wizard increases the spell range by 1 step.",
+      "",
+      "Allows the possibility of scoring critical hits with magic in combat.",
+      "Each rank in Wizard increases the probability of this by 1%."
     ]
   }
 }

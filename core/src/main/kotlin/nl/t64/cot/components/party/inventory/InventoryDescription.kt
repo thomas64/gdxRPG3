@@ -72,7 +72,6 @@ class InventoryDescription {
     private fun compareCalcs(item1: InventoryItem, item2: InventoryItem): ThreeState {
         key as CalcAttributeId
         return when {
-            key == CalcAttributeId.WEIGHT -> ThreeState.SAME
             item1.getAttributeOfCalcAttributeId(key) < item2.getAttributeOfCalcAttributeId(key) -> ThreeState.LESS
             item1.getAttributeOfCalcAttributeId(key) > item2.getAttributeOfCalcAttributeId(key) -> ThreeState.MORE
             else -> ThreeState.SAME

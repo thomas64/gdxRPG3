@@ -156,22 +156,13 @@ class DescriptionCreator(
         }
         if ((description.key == CalcAttributeId.PROTECTION
                     || description.key == SkillItemId.STEALTH)
-            && inventoryItem.group.hasImpactOnPrtStl()
+            && inventoryItem.group.hasImpactOnProtectionAndStealth()
         ) {
             return true
         }
-        if (description.key == CalcAttributeId.WEIGHT
-            && (inventoryItem.group == InventoryGroup.SHIELD
-                    || inventoryItem.group == InventoryGroup.WEAPON
-                    || inventoryItem.group == InventoryGroup.RESOURCE
-                    || inventoryItem.group == InventoryGroup.POTION
-                    || inventoryItem.group == InventoryGroup.ITEM
-                    || inventoryItem.group == InventoryGroup.RING
-                    || inventoryItem.group == InventoryGroup.NECKLACE)
+        if (description.key == StatItemId.SPEED
+            && inventoryItem.group.hasImpactOnSpeed()
         ) {
-            return false
-        }
-        if (description.key == CalcAttributeId.WEIGHT) {
             return true
         }
         if (description.value == 0) {

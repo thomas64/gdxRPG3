@@ -1,6 +1,6 @@
 {
   "hafted" : {
-    "upgrade"    : 3.2,
+    "upgrade"    : 6,
     "description": [
       "Allows the possibility of equipping hafted weapons.",
       "Increases chance-to-hit with hafted weapons in combat.",
@@ -8,7 +8,7 @@
     ]
   },
   "missile": {
-    "upgrade"    : 4.8,
+    "upgrade"    : 6,
     "description": [
       "Allows the possibility of equipping missile weapons.",
       "Increases chance-to-hit with missile weapons in combat.",
@@ -16,7 +16,7 @@
     ]
   },
   "pole"   : {
-    "upgrade"    : 3.2,
+    "upgrade"    : 6,
     "description": [
       "Allows the possibility of equipping pole weapons.",
       "Increases chance-to-hit with pole weapons in combat.",
@@ -24,7 +24,7 @@
     ]
   },
   "shield" : {
-    "upgrade"    : 4,
+    "upgrade"    : 6,
     "description": [
       "Allows the possibility of equipping shields.",
       "In combat, a shield may block the enemy's attack with physical weapons.",
@@ -32,7 +32,7 @@
     ]
   },
   "sword"  : {
-    "upgrade"    : 4.8,
+    "upgrade"    : 6,
     "description": [
       "Allows the possibility of equipping swords and daggers.",
       "Increases chance-to-hit with swords and daggers in combat.",
@@ -40,7 +40,7 @@
     ]
   },
   "thrown" : {
-    "upgrade"    : 3.2,
+    "upgrade"    : 6,
     "description": [
       "Allows the possibility of equipping thrown weapons.",
       "Increases chance-to-hit with thrown weapons in combat.",
