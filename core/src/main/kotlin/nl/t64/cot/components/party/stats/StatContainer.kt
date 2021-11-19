@@ -3,12 +3,10 @@ package nl.t64.cot.components.party.stats
 import com.fasterxml.jackson.annotation.JsonCreator
 
 
-private const val NUMBER_OF_STAT_SLOTS = 7
-
 class StatContainer() {
 
     private lateinit var level: Level
-    private val stats: MutableMap<StatItemId, StatItem> = HashMap(NUMBER_OF_STAT_SLOTS)
+    private val stats: StatItemMap<StatItemId, StatItem> = StatItemMap()
 
     @JsonCreator
     constructor(startingStats: Map<String, Int>) : this() {
@@ -40,74 +38,82 @@ class StatContainer() {
     fun getAllHpStats(): Map<String, Int> {
         return mapOf(Pair("lvlRank", level.rank),
                      Pair("lvlVari", level.variable),
-                     Pair("staRank", stats.getValue(StatItemId.STAMINA).rank),
-                     Pair("staVari", stats.getValue(StatItemId.STAMINA).variable),
-                     Pair("conRank", stats.getValue(StatItemId.CONSTITUTION).rank),
-                     Pair("conVari", stats.getValue(StatItemId.CONSTITUTION).variable),
-                     Pair("conBon", stats.getValue(StatItemId.CONSTITUTION).bonus))
+                     Pair("staRank", stats[StatItemId.STAMINA].rank),
+                     Pair("staVari", stats[StatItemId.STAMINA].variable),
+                     Pair("conRank", stats[StatItemId.CONSTITUTION].rank),
+                     Pair("conVari", stats[StatItemId.CONSTITUTION].variable),
+                     Pair("conBon", stats[StatItemId.CONSTITUTION].bonus))
     }
 
     fun getMaximumHp(): Int {
         return (level.rank
-                + stats.getValue(StatItemId.STAMINA).rank
-                + stats.getValue(StatItemId.CONSTITUTION).rank
-                + stats.getValue(StatItemId.CONSTITUTION).bonus)
+                + stats[StatItemId.STAMINA].rank
+                + stats[StatItemId.CONSTITUTION].rank
+                + stats[StatItemId.CONSTITUTION].bonus)
     }
 
     fun getCurrentHp(): Int {
         return (level.variable
-                + stats.getValue(StatItemId.STAMINA).variable
-                + stats.getValue(StatItemId.CONSTITUTION).variable
-                + stats.getValue(StatItemId.CONSTITUTION).bonus)
+                + stats[StatItemId.STAMINA].variable
+                + stats[StatItemId.CONSTITUTION].variable
+                + stats[StatItemId.CONSTITUTION].bonus)
     }
 
-    fun getMaximumStamina(): Int = stats.getValue(StatItemId.STAMINA).rank
-    fun getCurrentStamina(): Int = stats.getValue(StatItemId.STAMINA).variable
+    fun getMaximumStamina(): Int = stats[StatItemId.STAMINA].rank
+    fun getCurrentStamina(): Int = stats[StatItemId.STAMINA].variable
 
     fun getById(statItemId: StatItemId): StatItem {
-        return stats.getValue(statItemId)
+        return stats[statItemId]
     }
 
     fun getAll(): List<StatItem> {
-        return StatItemId.values().map { stats.getValue(it) }
+        return StatItemId.values().map { stats[it] }
     }
 
     fun takeDamage(damage: Int) {
         level.takeDamage(damage)?.let { it1 ->
-            stats.getValue(StatItemId.STAMINA).takeDamage(it1)?.let { it2 ->
-                stats.getValue(StatItemId.CONSTITUTION).takeDamage(it2)
+            stats[StatItemId.STAMINA].takeDamage(it1)?.let { it2 ->
+                stats[StatItemId.CONSTITUTION].takeDamage(it2)
             }
         }
     }
 
     fun recoverFullHp() {
-        stats.getValue(StatItemId.CONSTITUTION).restore()
-        stats.getValue(StatItemId.STAMINA).restore()
+        stats[StatItemId.CONSTITUTION].restore()
+        stats[StatItemId.STAMINA].restore()
         level.restore()
     }
 
     fun recoverPartHp(healPoints: Int) {
-        stats.getValue(StatItemId.CONSTITUTION).restorePart(healPoints)?.let { it1 ->
-            stats.getValue(StatItemId.STAMINA).restorePart(it1)?.let { it2 ->
+        stats[StatItemId.CONSTITUTION].restorePart(healPoints)?.let { it1 ->
+            stats[StatItemId.STAMINA].restorePart(it1)?.let { it2 ->
                 level.restorePart(it2)
             }
         }
     }
 
     fun recoverFullStamina() {
-        stats.getValue(StatItemId.STAMINA).restore()
+        stats[StatItemId.STAMINA].restore()
     }
 
     fun getInflictDamageStaminaPenalty(): Int {
-        return stats.getValue(StatItemId.STAMINA).getInflictDamagePenalty()
+        return stats[StatItemId.STAMINA].getInflictDamagePenalty()
     }
 
     fun getDefenseStaminaPenalty(): Int {
-        return stats.getValue(StatItemId.STAMINA).getDefensePenalty()
+        return stats[StatItemId.STAMINA].getDefensePenalty()
     }
 
     fun getChanceToHitStaminaPenalty(): Int {
-        return stats.getValue(StatItemId.STAMINA).getChanceToHitPenalty()
+        return stats[StatItemId.STAMINA].getChanceToHitPenalty()
     }
 
+}
+
+private class StatItemMap<K : Enum<K>, V> {
+    private val map: MutableMap<String, V> = HashMap(StatItemId.values().size)
+    operator fun get(key: Enum<K>): V = map[key.name]!!
+    operator fun set(key: Enum<K>, value: V) {
+        map[key.name] = value
+    }
 }

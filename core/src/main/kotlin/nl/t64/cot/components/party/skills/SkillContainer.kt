@@ -3,11 +3,9 @@ package nl.t64.cot.components.party.skills
 import com.fasterxml.jackson.annotation.JsonCreator
 
 
-private const val NUMBER_OF_SKILL_SLOTS = 23
-
 class SkillContainer() {
 
-    private val skills: MutableMap<SkillItemId, SkillItem> = HashMap(NUMBER_OF_SKILL_SLOTS)
+    private val skills: SkillItemMap<SkillItemId, SkillItem> = SkillItemMap()
 
     @JsonCreator
     constructor(startingSkills: Map<String, Int>) : this() {
@@ -34,4 +32,12 @@ class SkillContainer() {
         return skillItem.rank > 0
     }
 
+}
+
+private class SkillItemMap<K : Enum<K>, V> {
+    private val map: MutableMap<String, V> = HashMap()
+    operator fun get(key: Enum<K>): V? = map[key.name]
+    operator fun set(key: Enum<K>, value: V) {
+        map[key.name] = value
+    }
 }
