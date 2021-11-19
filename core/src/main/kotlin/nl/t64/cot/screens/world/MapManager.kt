@@ -183,8 +183,9 @@ class MapManager : ProfileObserver {
     }
 
     fun fadeAudio() {
-        audioManager.possibleBgmFade(currentMap.bgm, getBgmOfMap(getTiledMap(nextMapTitle)))
-        audioManager.possibleBgsFade(currentMap.bgs, getBgsOfMap(getTiledMap(nextMapTitle)))
+        val nextMap = getTiledMap(nextMapTitle)
+        audioManager.possibleBgmFade(currentMap.bgm, getBgmOfMap(nextMap))
+        audioManager.possibleBgsFade(currentMap.bgs, getBgsOfMap(nextMap))
     }
 
     fun loadMapWithBgmBgs(mapTitle: String) {

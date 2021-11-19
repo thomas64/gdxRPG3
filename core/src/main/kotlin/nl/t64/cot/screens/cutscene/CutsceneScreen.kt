@@ -66,6 +66,8 @@ abstract class CutsceneScreen : Screen, ConversationObserver {
         conversationDialog.conversationObservers.addObserver(this)
         actionId = 0
 
+        audioManager.handle(AudioCommand.BGM_STOP_ALL)
+
         title.setText("")
         title.clearActions()
 
