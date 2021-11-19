@@ -45,9 +45,9 @@ private const val DIALOG_HEIGHT = 300f
 private const val PAD = 25f
 private const val ALL_PADS = PAD * 4f + Constant.FACE_SIZE + PAD + PAD * 3f
 
-class ConversationDialog {
+class ConversationDialog(conversationObserver: ConversationObserver) {
 
-    val conversationObservers: ConversationSubject = ConversationSubject()
+    private val conversationObserver: ConversationSubject = ConversationSubject(conversationObserver)
 
     private val stage: Stage = Stage()
     private val font: BitmapFont = resourceManager.getTrueTypeAsset(FONT, FONT_SIZE).apply {
@@ -205,7 +205,7 @@ class ConversationDialog {
 
     private fun endConversationWithoutSound(nextId: String) {
         graph.currentPhraseId = nextId
-        conversationObservers.notifyExitConversation()
+        conversationObserver.notifyExitConversation()
     }
 
     private fun populateConversationDialog(phraseId: String) {
@@ -296,7 +296,7 @@ class ConversationDialog {
             audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_JOIN)
             heroes.removeHero(faceId!!)
             party.addHero(hero)
-            conversationObservers.notifyHeroJoined()
+            conversationObserver.notifyHeroJoined()
             endConversationWithoutSound(nextId)
         }
     }
@@ -304,22 +304,22 @@ class ConversationDialog {
     private fun dismissHero(nextId: String) {
         audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_CONVERSATION_END)
         graph.currentPhraseId = nextId
-        conversationObservers.notifyHeroDismiss()                                   // ends conversation
+        conversationObserver.notifyHeroDismiss()                                   // ends conversation
     }
 
     private fun loadShop(nextId: String) {
         graph.currentPhraseId = nextId
-        conversationObservers.notifyLoadShop()                                      // ends conversation
+        conversationObserver.notifyLoadShop()                                      // ends conversation
     }
 
     private fun loadAcademy(nextId: String) {
         graph.currentPhraseId = nextId
-        conversationObservers.notifyLoadAcademy()                                   // ends conversation
+        conversationObserver.notifyLoadAcademy()                                   // ends conversation
     }
 
     private fun loadSchool(nextId: String) {
         graph.currentPhraseId = nextId
-        conversationObservers.notifyLoadSchool()                                    // ends conversation
+        conversationObserver.notifyLoadSchool()                                    // ends conversation
     }
 
     private fun saveGame(nextId: String) {
@@ -362,9 +362,9 @@ class ConversationDialog {
             gameData.party.gainXp(reward.xp, levelUpMessage)
             val finalMessage = levelUpMessage.toString().trim()
             if (finalMessage.isEmpty()) {
-                conversationObservers.notifyShowMessageTooltip("+ ${reward.xp} XP")
+                conversationObserver.notifyShowMessageTooltip("+ ${reward.xp} XP")
             } else {
-                conversationObservers.notifyShowMessageTooltip("+ ${reward.xp} XP" + System.lineSeparator() + finalMessage)
+                conversationObserver.notifyShowMessageTooltip("+ ${reward.xp} XP" + System.lineSeparator() + finalMessage)
             }
             reward.clearXp()
             continueConversationWithoutSound(nextId)
@@ -373,7 +373,7 @@ class ConversationDialog {
 
     private fun startBattle(nextId: String) {
         endConversation(nextId)
-        brokerManager.componentObservers.notifyShowBattleScreen(conversationId!!)
+        conversationObserver.notifyShowBattleScreen(conversationId!!)
     }
 
     private fun acceptQuest(nextId: String) {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="44" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="16" nextobjectid="62">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="44" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="17" nextobjectid="63">
  <properties>
   <property name="bgm" value="bgm_ardor"/>
   <property name="bgs" value="bgs_creek"/>
@@ -118,5 +118,8 @@
  </objectgroup>
  <objectgroup color="#ffff7f" id="13" name="portal">
   <object id="44" name="honeywood_forest_ardor_1" x="432" y="1680" width="144" height="24"/>
+ </objectgroup>
+ <objectgroup color="#ff00ff" id="16" name="cutscene">
+  <object id="62" name="scene_ardor_1" type="discover" x="528" y="-24" width="144" height="24"/>
  </objectgroup>
 </map>

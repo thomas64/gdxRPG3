@@ -101,7 +101,84 @@
     "inventory": {
       "weapon": "specialist_longsword",
       "shield": "specialist_medium_shield",
-      "chest": "armor_50"
+      "chest" : "armor_50"
+    }
+  },
+  "orc_general" : {
+    "name"     : "Orc General",
+    "school"   : "NECROMANCY",
+    "xp"       : 90,
+    "drops"    : {"masterwork_maul": 50, "masterwork_heavy_shield": 50, "stamina_potion": 90, "gold": 90},
+    "stats"    : {
+      "level"       : 40,
+      "intelligence": 50,
+      "willpower"   : 30,
+      "strength"    : 50,
+      "dexterity"   : 50,
+      "constitution": 50,
+      "stamina"     : 100,
+      "speed"       : 30
+    },
+    "skills"   : {
+      "warrior": 10,
+      "wizard" : 10,
+      "hafted" : 10,
+      "missile": 10,
+      "sword"  : 10,
+      "shield" : 10
+    },
+    "spells"   : {
+      "mirror"        : 10,
+      "vs_naming"     : 10,
+      "acid_bolt"     : 10,
+      "crushing_death": 10,
+      "haste"         : 10,
+      "spirit_shield" : 10,
+      "tap_stamina"   : 10,
+      "wall_of_bones" : 10
+    },
+    "inventory": {
+      "weapon": "masterwork_maul",
+      "shield": "masterwork_heavy_shield",
+      "chest" : "armor_100"
+    }
+  },
+  "ardor"       : {
+    "name"     : "Ardor",
+    "school"   : "UNKNOWN",
+    "xp"       : 100,
+    "drops"    : {"gold": 90},
+    "stats"    : {
+      "level"       : 40,
+      "intelligence": 60,
+      "willpower"   : 30,
+      "strength"    : 1,
+      "dexterity"   : 1,
+      "constitution": 60,
+      "stamina"     : 120,
+      "speed"       : 30
+    },
+    "skills"   : {
+      "thief"  : 10,
+      "warrior": 10,
+      "wizard" : 10,
+      "pole"   : 10
+    },
+    "spells"   : {
+      "mirror"         : 10,
+      "vs_naming"      : 10,
+      "debilitation"   : 10,
+      "fireball"       : 10,
+      "crushing_death" : 10,
+      "wraith_touch"   : 10,
+      "frozen_doom"    : 10,
+      "stellar_gravity": 10,
+      "stupidity"      : 10,
+      "teleportation"  : 10
+    },
+    "inventory": {
+      "weapon": "legendary_staff",
+      "chest" : "armor_400"
     }
   }
 }

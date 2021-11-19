@@ -1,0 +1,56 @@
+{
+  "mozes_finds_grace"              : {
+    "phrases": {
+      "1" : {"face": "mozes", "text": ["(There is Grace! I found her!)"]},
+      "2" : {"face": "mozes", "text": [". . ."]},
+      "3" : {"face": "mozes", "text": ["(Who is that guy? He is no orc.)"]},
+      "4" : {"face": "mozes", "text": ["(What is happening here?)"]},
+      "5" : {"face": "mozes", "text": ["(Why are they holding her?)"]},
+      "6" : {"face": "mozes", "text": [". . ."]},
+      "7" : {"face": "ardor", "text": ["Oh great Lord Ulrog, God of Power, it is time!"]},
+      "8" : {"face": "ardor", "text": ["The Royal Sacrifice is ready!"]},
+      "9" : {"face": "girl01", "text": ["Let me go!"]},
+      "10": {"face": "ardor", "text": ["Guards, bring forth the princess."]},
+      "11": {"face": "mozes", "text": ["(Princess? Who is he talking about?)"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "grace_is_no_princess"           : {
+    "phrases": {
+      "1": {"face": "mozes", "text": ["(Huh?)"]},
+      "2": {"face": "mozes", "text": ["(Grace is no princess...?)"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "ardor_starts_to_pray"           : {
+    "phrases": {
+      "1": {"face": "ardor", "text": ["Mighty and powerful Ulrog!"]},
+      "2": {"face": "ardor", "text": ["Please hear my prayer!"]},
+      "3": {"face": "ardor", "text": ["Everything is prepared!"]},
+      "4": {"face": "ardor", "text": ["My quest for ultimate power is finally fulfilled!"]},
+      "5": {"face": "ardor", "text": ["With the blood of this princess, I will rule all of Ardor!"]},
+      "6": {"face": "ardor", "text": ["Now slay her and take her life!"]},
+      "7": {"face": "mozes", "text": ["No!!"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "mozes_steps_in"                 : {
+    "phrases": {
+      "1": {"face": "girl01", "text": ["Mozes!"]},
+      "2": {"face": "mozes", "text": ["You will not harm my sister!!"]},
+      "3": {"face": "mozes", "text": ["Face me!!"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "ardor_commands_to_kill_mozes"   : {
+    "phrases": {
+      "1": {"face": "ardor", "text": ["Sister? Hmmmm..."]},
+      "2": {"face": "ardor", "text": [". . ."]},
+      "3": {"face": "ardor", "text": ["The insolence."]},
+      "4": {"face": "ardor", "text": ["Guards! Kill him!"]},
+      "5": {"face": "mozes", "text": ["? ?"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "mozes_wins_battle_from_generals": {
+    "phrases": {
+      "1": {"face": "ardor", "text": ["What a nuisance."]},
+      "2": {"face": "ardor", "text": ["I'll handle you myself then."], "choices": [{"command": "EXIT"}]}
+    }
+  }
+}

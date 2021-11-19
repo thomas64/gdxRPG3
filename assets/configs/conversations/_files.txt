@@ -1,4 +1,5 @@
 cutscene01.json
+cutscene_ardor01.json
 honeywood_forest.json
 honeywood_cave.json
 default.json

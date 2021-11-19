@@ -4,7 +4,8 @@ package nl.t64.cot.components.cutscene
 class CutsceneContainer {
 
     private val cutscenes: MutableMap<String, Boolean> = mutableMapOf(
-        Pair(CutsceneId.SCENE_INTRO, false)
+        Pair(CutsceneId.SCENE_INTRO, false),
+        Pair(CutsceneId.SCENE_ARDOR_1, false)
     )
 
     fun isPlayed(cutsceneId: String): Boolean {

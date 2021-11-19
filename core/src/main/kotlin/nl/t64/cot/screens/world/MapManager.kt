@@ -140,7 +140,7 @@ class MapManager : ProfileObserver {
         return currentMap.getUnderground(playerFeetPosition).toAudioEvent()
     }
 
-    fun prepareForBattle() {
+    fun setNextMapTitleNull() {
         nextMapTitle = null
     }
 
@@ -186,6 +186,12 @@ class MapManager : ProfileObserver {
         val nextMap = getTiledMap(nextMapTitle)
         audioManager.possibleBgmFade(currentMap.bgm, getBgmOfMap(nextMap))
         audioManager.possibleBgsFade(currentMap.bgs, getBgsOfMap(nextMap))
+    }
+
+    fun loadMapWithHardBgmBgsSwitch(mapTitle: String) {
+        loadMap(mapTitle)
+        audioManager.bgmSwitch(currentMap.bgm)
+        audioManager.bgsSwitch(currentMap.bgs)
     }
 
     fun loadMapWithBgmBgs(mapTitle: String) {

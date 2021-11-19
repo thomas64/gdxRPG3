@@ -22,5 +22,13 @@
   "armor_50"  : {
     "group"     : "CHEST",
     "protection": 50
+  },
+  "armor_100" : {
+    "group"     : "CHEST",
+    "protection": 100
+  },
+  "armor_400" : {
+    "group"     : "CHEST",
+    "protection": 400
   }
 }

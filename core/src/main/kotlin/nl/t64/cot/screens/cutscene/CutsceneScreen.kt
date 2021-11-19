@@ -18,8 +18,10 @@ import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioCommand
+import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
+import nl.t64.cot.screens.battle.BattleObserver
 import nl.t64.cot.screens.world.Camera
 import nl.t64.cot.screens.world.TextureMapObjectRenderer
 import nl.t64.cot.screens.world.conversation.ConversationDialog
@@ -34,7 +36,7 @@ private const val FONT_SIZE = 24
 const val NORMAL_STEP = 0.5f
 const val FAST_STEP = 0.25f
 
-abstract class CutsceneScreen : Screen, ConversationObserver {
+abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
 
     val camera = Camera()
     val mapRenderer = TextureMapObjectRenderer(camera)
@@ -62,8 +64,7 @@ abstract class CutsceneScreen : Screen, ConversationObserver {
     }
 
     override fun show() {
-        conversationDialog = ConversationDialog()
-        conversationDialog.conversationObservers.addObserver(this)
+        conversationDialog = ConversationDialog(this)
         actionId = 0
 
         audioManager.handle(AudioCommand.BGM_STOP_ALL)
@@ -137,6 +138,18 @@ abstract class CutsceneScreen : Screen, ConversationObserver {
         actorsStage.addAction(actions[actionId])
     }
 
+    override fun onNotifyBattleWon(battleId: String, spoils: Loot, levelUpMessage: String?) {
+        throw IllegalStateException("Implement this method in child.")
+    }
+
+    override fun onNotifyBattleLost() {
+        throw IllegalStateException("Implement this method in child.")
+    }
+
+    override fun onNotifyBattleFled() {
+        throw IllegalStateException("Implement this method in child.")
+    }
+
     abstract fun prepare()
 
     abstract fun exitScreen()
@@ -149,7 +162,6 @@ abstract class CutsceneScreen : Screen, ConversationObserver {
     }
 
     fun endCutsceneAnd(actionAfter: () -> Unit) {
-        conversationDialog.conversationObservers.removeObserver(this)
         Gdx.input.inputProcessor = null
         Utils.setGamepadInputProcessor(null)
         actorsStage.addAction(Actions.sequence(
@@ -177,6 +189,11 @@ abstract class CutsceneScreen : Screen, ConversationObserver {
             Actions.delay(1f),
             Actions.addAction(Actions.alpha(1f), transition)
         )
+    }
+
+    fun setMapWithHardBgmBgs(mapId: String) {
+        mapManager.loadMapWithHardBgmBgsSwitch(mapId)
+        setNewMap()
     }
 
     fun setMapWithBgmBgs(mapId: String) {

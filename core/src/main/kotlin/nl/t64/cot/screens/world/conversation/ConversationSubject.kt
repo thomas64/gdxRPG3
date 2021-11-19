@@ -3,60 +3,50 @@ package nl.t64.cot.screens.world.conversation
 import nl.t64.cot.components.loot.Loot
 
 
-class ConversationSubject {
-
-    private val observers: MutableList<ConversationObserver> = ArrayList()
-
-    fun addObserver(observer: ConversationObserver) {
-        observers.add(observer)
-    }
-
-    fun removeObserver(observer: ConversationObserver) {
-        observers.remove(observer)
-    }
-
-    fun removeAllObservers() {
-        observers.clear()
-    }
+class ConversationSubject(private val observer: ConversationObserver) {
 
     fun notifyExitConversation() {
-        observers.forEach { it.onNotifyExitConversation() }
+        observer.onNotifyExitConversation()
     }
 
     fun notifyShowMessageTooltip(message: String) {
-        observers.forEach { it.onNotifyShowMessageTooltip(message) }
+        observer.onNotifyShowMessageTooltip(message)
     }
 
     fun notifyShowLevelUpDialog(message: String) {
-        observers.forEach { it.onNotifyShowLevelUpDialog(message) }
+        observer.onNotifyShowLevelUpDialog(message)
     }
 
     fun notifyLoadShop() {
-        observers.forEach { it.onNotifyLoadShop() }
+        observer.onNotifyLoadShop()
     }
 
     fun notifyLoadAcademy() {
-        observers.forEach { it.onNotifyLoadAcademy() }
+        observer.onNotifyLoadAcademy()
     }
 
     fun notifyLoadSchool() {
-        observers.forEach { it.onNotifyLoadSchool() }
+        observer.onNotifyLoadSchool()
     }
 
     fun notifyShowRewardDialog(reward: Loot, levelUpMessage: String?) {
-        observers.forEach { it.onNotifyShowRewardDialog(reward, levelUpMessage) }
+        observer.onNotifyShowRewardDialog(reward, levelUpMessage)
     }
 
     fun notifyShowReceiveDialog(receive: Loot) {
-        observers.forEach { it.onNotifyShowReceiveDialog(receive) }
+        observer.onNotifyShowReceiveDialog(receive)
     }
 
     fun notifyHeroJoined() {
-        observers.forEach { it.onNotifyHeroJoined() }
+        observer.onNotifyHeroJoined()
     }
 
     fun notifyHeroDismiss() {
-        observers.forEach { it.onNotifyHeroDismiss() }
+        observer.onNotifyHeroDismiss()
+    }
+
+    fun notifyShowBattleScreen(battleId: String) {
+        observer.onNotifyShowBattleScreen(battleId)
     }
 
 }

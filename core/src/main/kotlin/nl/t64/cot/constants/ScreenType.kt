@@ -4,8 +4,7 @@ import com.badlogic.gdx.Screen
 import nl.t64.cot.screens.LoadScreen
 import nl.t64.cot.screens.academy.AcademyScreen
 import nl.t64.cot.screens.battle.BattleScreen
-import nl.t64.cot.screens.cutscene.SceneDeath
-import nl.t64.cot.screens.cutscene.SceneIntro
+import nl.t64.cot.screens.cutscene.*
 import nl.t64.cot.screens.inventory.InventoryScreen
 import nl.t64.cot.screens.loot.FindScreen
 import nl.t64.cot.screens.loot.ReceiveScreen
@@ -41,6 +40,10 @@ enum class ScreenType(val screenClass: Class<out Screen>) {
     SPOILS(SpoilsScreen::class.java),
 
     SCENE_INTRO(SceneIntro::class.java),
-    SCENE_DEATH(SceneDeath::class.java);
+    SCENE_DEATH(SceneDeath::class.java),
+    SCENE_ARDOR_1(SceneArdor1::class.java),
+    SCENE_ARDOR_1_WIN(SceneArdor1Win::class.java),
+    SCENE_ARDOR_1_LOSE(SceneArdor1Lose::class.java),
+    SCENE_GAME_ENDING(SceneGameEnding::class.java);
 
 }

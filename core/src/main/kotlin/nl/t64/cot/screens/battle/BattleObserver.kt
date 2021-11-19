@@ -1,4 +1,4 @@
-package nl.t64.cot.subjects
+package nl.t64.cot.screens.battle
 
 import nl.t64.cot.components.loot.Loot
 
@@ -6,5 +6,7 @@ import nl.t64.cot.components.loot.Loot
 interface BattleObserver {
 
     fun onNotifyBattleWon(battleId: String, spoils: Loot, levelUpMessage: String?)
+    fun onNotifyBattleLost()
+    fun onNotifyBattleFled()
 
 }

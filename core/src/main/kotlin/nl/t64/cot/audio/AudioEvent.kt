@@ -16,7 +16,8 @@ enum class AudioEvent(val filePath: String, val volume: Float = 1f) {
     BGM_TENSION("audio/bgm/volcano.ogg"),
     BGM_CAVE("audio/bgm/den.ogg"),
     BGM_GREAT_TREE("audio/bgm/wayfarer.mp3"),
-    BGM_ARDOR("audio/bgm/remains.ogg"),
+    BGM_ARDOR("audio/bgm/approach.ogg"),
+    BGM_VICTORY("audio/bgm/riverside_ride.mp3"),
 
     BGS_BIRDS("audio/bgs/birds.ogg"),
     BGS_CREEK("audio/bgs/creek.ogg"),
@@ -51,6 +52,7 @@ enum class AudioEvent(val filePath: String, val volume: Float = 1f) {
 
     SE_WARP("audio/se/whooshes_impacts_impact_01.ogg", 0.4f),
     SE_BANG("audio/se/whooshes_impacts2_whooshes_032.ogg", 0.4f),
+    SE_MAGIC("audio/se/just_transitions_creepy_008.ogg", 0.5f),
     SE_LEVELUP("audio/se/copyc4t_levelup.ogg", 0.3f),
     SE_DEATH_SCREAM("audio/se/death_7_ian.ogg"),
 

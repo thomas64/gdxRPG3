@@ -7,40 +7,34 @@ interface ConversationObserver {
 
     fun onNotifyExitConversation()
 
-    fun onNotifyShowMessageTooltip(message: String) {
+    fun onNotifyShowMessageTooltip(message: String): Unit =
         throw IllegalStateException("Implement this method in child.")
-    }
 
-    fun onNotifyShowLevelUpDialog(message: String) {
+    fun onNotifyShowLevelUpDialog(message: String): Unit =
         throw IllegalStateException("Implement this method in child.")
-    }
 
-    fun onNotifyLoadShop() {
+    fun onNotifyLoadShop(): Unit =
         throw IllegalStateException("Implement this method in child.")
-    }
 
-    fun onNotifyLoadAcademy() {
+    fun onNotifyLoadAcademy(): Unit =
         throw IllegalStateException("Implement this method in child.")
-    }
 
-    fun onNotifyLoadSchool() {
+    fun onNotifyLoadSchool(): Unit =
         throw IllegalStateException("Implement this method in child.")
-    }
 
-    fun onNotifyShowRewardDialog(reward: Loot, levelUpMessage: String?) {
+    fun onNotifyShowRewardDialog(reward: Loot, levelUpMessage: String?): Unit =
         throw IllegalStateException("Implement this method in child.")
-    }
 
-    fun onNotifyShowReceiveDialog(receive: Loot) {
+    fun onNotifyShowReceiveDialog(receive: Loot): Unit =
         throw IllegalStateException("Implement this method in child.")
-    }
 
-    fun onNotifyHeroJoined() {
+    fun onNotifyHeroJoined(): Unit =
         throw IllegalStateException("Implement this method in child.")
-    }
 
-    fun onNotifyHeroDismiss() {
+    fun onNotifyHeroDismiss(): Unit =
         throw IllegalStateException("Implement this method in child.")
-    }
+
+    fun onNotifyShowBattleScreen(battleId: String): Unit =
+        throw IllegalStateException("Implement this method in child.")
 
 }

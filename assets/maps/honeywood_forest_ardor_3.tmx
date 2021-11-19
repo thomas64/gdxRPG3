@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="24" tileheight="24" infinite="0" nextlayerid="11" nextobjectid="17">
+ <properties>
+  <property name="bgm" value="bgm_ardor"/>
+  <property name="lightmap_map" value="fog"/>
+ </properties>
+ <tileset firstgid="1" name="honeywood_forest_ardor_3" tilewidth="24" tileheight="24" tilecount="2580" columns="86">
+  <image source="tilesets/honeywood_forest_ardor_3.png" width="2064" height="720"/>
+ </tileset>
+ <tileset firstgid="2581" source="tilesets/fsm_forest01_c.tsx"/>
+ <tileset firstgid="3605" source="tilesets/fsm_forest01_a2.tsx"/>
+ <tileset firstgid="4373" source="tilesets/fsm_forest01_d.tsx"/>
+ <tileset firstgid="5397" source="tilesets/fsm_forest01_b.tsx"/>
+ <tileset firstgid="6421" source="tilesets/fsm_flame04.tsx"/>
+ <layer id="2" name="under0_none" width="40" height="26">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5U9/gBFUBAAAAfAMQQAAB
+  </data>
+ </layer>
+ <layer id="1" name="under1_ground" width="40" height="26">
+  <data encoding="base64" compression="zlib">
+   eJyll9d2G1UUho+lkS1fmFeAhBL3HhfFcUkhlBeAK3rvxI7tJHbce2+RbZIAobMgBHgKWhqxHffuOIW6KJd8e41mnZE8kazFxbf+OXvO2WfPrz1F/gSlvjSU8gf0C8PURkj1KJUGF9xKTaNtxNrhVbiXWHusUuUupSqgME6p72KUSkHf4fwpOA1n4F14D96HszDNvBmYhTlojdX7io4maC2AekNrA6RQSyd7NnOczvFFaplBs9AOYq/B69BB3k44wlwfdX3PXqloGrzM+SfgSXgKnoZn4AP4ED6Cj+ET+BQ+g89hTa41QetjAd8stfvWwnET+1+irlnGczAPm+z/BufehC7OV5JrD7EfqO9HSOf4FcP08SVD+/ksPAfPwwsww7yr5Ot2Bfv4eILWqoBvlua5tW+taDNrLhO7Aj/DAvEb8ht6lXqL892cryJ/EbG98BP7ZKB+zo/CgFf7uYP1O6GROS8yniU+Qb4e1s8T2+02fatO0OoP6T/xr4OcGbZ+s3zrEj85d5O89dT1NuMetJpcR6GY+AX2uQh3wy4Y9Go/rb61fJ0jPkneKViw+Reu/8S/TnJm2vrN8q1bfCXPLfI2kOsw4160D45RXwnxUrjEnHsgEYa82s9D8Urd59a+zhNfgEXB5l+k/utibRb19DGn09C+Ncte5LlNvl+gnHgF9FPfcebWQBnxy8zZAUkwLNdKrIzaHoL7qWHMa/av5esSuhRF/3WzPpv6+tlvwKV9a5G95DdjPARFzD2CDpB3EGqZu4+9rjBnJyTDiFwrsX3U9jA8wJpxr9m/lq/L6HIU/dfDmhzb/dpjBPs2BddghHilYeoQ9Z0g5/5AfPYunlMx5vxfYYOcj1DfLrepp2y+rqArUfRfIjXlenTf9RLvM7RvbdTRDi0ucyw6TO469EBccFz0N2K/S69RUyI5H6Wm0zZfV9HVKPpvQjGXuq4yf1Gez4z75Xe0+SVaTO4R6qp3aT0Y4qulfxD/E5LImQxnpIcY73fwL1L/TVJPHnVNcLzk2dp3li8l5D5JzgaX1gcd/Av1MYW8qZDD8QEH/yL1XxI15cMk85flOS2/BeuzoShe+zJOTX5odGk9FBfez2rD9C2N3Gnk8sEa47Uo+i8f8lg3ha7Ic5r65uR6yZEbo/0YlhzkTI41dSw2sp+HlelbOvkK4k3/1hmvR9F/cv/2wjXmr1LfGlSSdxPdHePcX3fys8m11b9j5EqnrsKAf9H2n9y/fdQ37TZ9W2dcpbb6F6qhfoo2B+7zKs6dhBoH/6LtP8u/GeY3kG+D+q57IvsXTkP7zu5ftP1n+Tcb8G9enoPQJvd1jOlDIcc+5eyjXe/k2//pP+v+LfCY/olvi/K9zHE+efxybQ7PQ0tbXfr94uRbsTxf5LsLDjLeCPEvUv9Z928hdTVS0w10Sb5lOC4gT57UKcfK2Uf7+yX0fhXNgFK3+U0o30jCehT9V8C8QvBRVxP5b6LLjP8iv5/jURjzRPYx9H61fMt0B76riWVDjuDefv+dQ33oHmpoJvctdIXx3+T5J177OMLxmBHso9VvMrb3XQZzSwK+iV/ZUELeUnnXcy7Xvb3+k9q+gvNQJO828t9GV2Ut/EuuTqmH+nwwbujv4YGAX0fFM6iVby7m5lJfJuuyQvyqZc6JwH6idUbk/pO6LR/3UlexR1/nOrENuA6btusv85i9JO9n6bdyOC57yjeXfGtQXx7kxzn7Zd83Uv9Z/0PP2a4rnIrPX8M3Nv8G2b/GMP05H2Z9nRH8v3c7/3+driecWt8734b4V6FMf+R8tHnt/fcfs2EsAA==
+  </data>
+ </layer>
+ <layer id="3" name="under2_objects" width="40" height="26">
+  <data encoding="base64" compression="zlib">
+   eJztzrkNgEAQBMFJYde41HgS4ckaImD8Ex7SnkSX1H5LAICvXCHdUX3xLlLKrL4AAOB/pibNbnFrq77pbX7a3eHOAf8whgd43AZB
+  </data>
+ </layer>
+ <layer id="4" name="under3_flames" width="40" height="26">
+  <data encoding="base64" compression="zlib">
+   eJzt08ENABAURMFfh/57ogtKoAASEnGQmeM77WUjAPhRThEl7ffX6tjQJjtWHW7yDwA41wGoiw/Z
+  </data>
+ </layer>
+ <layer id="5" name="under4_none" width="40" height="26">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5U9/gBFUBAAAAfAMQQAAB
+  </data>
+ </layer>
+ <layer id="6" name="under5_none" width="40" height="26">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5U9/gBFUBAAAAfAMQQAAB
+  </data>
+ </layer>
+ <layer id="7" name="over6_trees" width="40" height="26">
+  <data encoding="base64" compression="zlib">
+   eJzt0z0OQEAAhNEJKralwDWonI04DSUn4DJugZh2ExIRf8W8ZJotNl82WUBE5J+aGGjj8+dvG9gw7nQcnYvcSf9DRESeEhogMl9X2GYfWLiVy9iW/6gvCYCUKz2g5zqu8r6ushXsy1y+G1ezbXKu3bMBPpAVkw==
+  </data>
+ </layer>
+ <layer id="8" name="over7_none" width="40" height="26">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5U9/gBFUBAAAAfAMQQAAB
+  </data>
+ </layer>
+ <layer id="9" name="over8_none" width="40" height="26">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5U9/gBFUBAAAAfAMQQAAB
+  </data>
+ </layer>
+ <objectgroup color="#0055ff" id="10" name="sound">
+  <object id="3" name="stone" x="432" y="240" width="120" height="120"/>
+  <object id="4" name="sand" x="456" y="576" width="48" height="144"/>
+  <object id="15" name="sand" x="552" y="240" width="120" height="120"/>
+  <object id="16" name="sand" x="432" y="360" width="96" height="192"/>
+ </objectgroup>
+</map>

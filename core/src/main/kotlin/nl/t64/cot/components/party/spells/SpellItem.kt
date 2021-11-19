@@ -8,9 +8,6 @@ import kotlin.math.roundToInt
 private val LEARNING_COSTS = listOf(20, 8, 12, 16, 20, 24, 28, 32, 36, 40)
 private const val MAXIMUM = 10
 
-/* todo: moeten alle stats en skills ipv in individuele classes in json komen net zoals spells?
-    wellicht komt er nog een hoop verschillende logica in de verschillende classes. dan is json niet handig. */
-
 class SpellItem(
     val name: String = "",
     val school: SchoolType = SchoolType.UNKNOWN,

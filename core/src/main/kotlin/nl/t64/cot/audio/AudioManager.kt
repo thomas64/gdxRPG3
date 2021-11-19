@@ -36,7 +36,7 @@ class AudioManager {
     }
 
     fun possibleBgmFade(currentBgm: AudioEvent, newBgm: AudioEvent) {
-        if (currentBgm !== newBgm) {
+        if (currentBgm != newBgm) {
             queuedBgm.values.forEach { fade(it, BGM_VOLUME) }
         }
     }
@@ -49,10 +49,14 @@ class AudioManager {
     }
 
     fun possibleBgmSwitch(prevBgm: AudioEvent, nextBgm: AudioEvent) {
-        if (prevBgm !== nextBgm) {
-            handle(AudioCommand.BGM_STOP_ALL)
-            handle(AudioCommand.BGM_PLAY_LOOP, nextBgm)
+        if (prevBgm != nextBgm) {
+            bgmSwitch(nextBgm)
         }
+    }
+
+    fun bgmSwitch(nextBgm: AudioEvent) {
+        handle(AudioCommand.BGM_STOP_ALL)
+        handle(AudioCommand.BGM_PLAY_LOOP, nextBgm)
     }
 
     fun possibleBgsSwitch(prevBgs: List<AudioEvent>, nextBgs: List<AudioEvent>) {
@@ -64,6 +68,11 @@ class AudioManager {
             .filter { it != AudioEvent.NONE }
             .filter { !prevBgs.contains(it) }
             .forEach { handle(AudioCommand.BGS_PLAY_LOOP, it) }
+    }
+
+    fun bgsSwitch(nextBgs: List<AudioEvent>) {
+        handle(AudioCommand.BGS_STOP_ALL)
+        nextBgs.forEach { handle(AudioCommand.BGS_PLAY_LOOP, it) }
     }
 
     fun fadeBgmBgs() {

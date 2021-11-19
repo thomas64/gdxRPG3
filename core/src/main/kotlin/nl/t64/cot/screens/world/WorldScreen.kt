@@ -14,6 +14,7 @@ import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.mapManager
+import nl.t64.cot.Utils.profileManager
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
@@ -23,6 +24,7 @@ import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.GameState
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.academy.AcademyScreen
+import nl.t64.cot.screens.battle.BattleObserver
 import nl.t64.cot.screens.battle.BattleScreen
 import nl.t64.cot.screens.inventory.tooltip.MessageTooltip
 import nl.t64.cot.screens.loot.FindScreen
@@ -56,7 +58,7 @@ class WorldScreen : Screen,
     private val multiplexer = InputMultiplexer().apply { addProcessor(createListener()) }
     private val shapeRenderer = ShapeRenderer()
     private val partyWindow = PartyWindow()
-    private val conversationDialog = ConversationDialog()
+    private val conversationDialog = ConversationDialog(this)
     private val messageDialog = MessageDialog(multiplexer)
     private val messageTooltip = MessageTooltip()
 
@@ -75,13 +77,11 @@ class WorldScreen : Screen,
     private var showDebug = false
 
     init {
-        conversationDialog.conversationObservers.addObserver(this)
         brokerManager.questObservers.addObserver(this)
         brokerManager.componentObservers.addObserver(this)
         brokerManager.mapObservers.addObserver(this)
         brokerManager.partyObservers.addObserver(this)
         brokerManager.lootObservers.addObserver(this)
-        brokerManager.battleObservers.addObserver(this)
     }
 
     // MapObserver /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -99,6 +99,7 @@ class WorldScreen : Screen,
         doorList = DoorLoader(currentMap).createDoors()
         partyMembers = PartyMembersLoader(player).loadPartyMembers()
         currentMap.setTiledGraphs()
+        mapManager.setNextMapTitleNull()
     }
 
     override fun onNotifyShakeCamera() {
@@ -157,17 +158,12 @@ class WorldScreen : Screen,
         messageDialog.show(message, AudioEvent.SE_CONVERSATION_NEXT)
     }
 
-    override fun onNotifyShowBattleScreen(battleId: String) {
-        onNotifyShowBattleScreen(battleId, currentNpcEntity)
-    }
-
     override fun onNotifyShowBattleScreen(battleId: String, enemyEntity: Entity) {
         if (player.moveSpeed != Constant.MOVE_SPEED_4 && !isInTransition) {
             currentNpcEntity = enemyEntity
-            mapManager.prepareForBattle()
             gameState = GameState.BATTLE
             doBeforeLoadScreen()
-            fadeOut({ BattleScreen.load(battleId) }, Color.BLACK)
+            fadeOut({ BattleScreen.load(battleId, this) }, Color.BLACK)
         }
     }
 
@@ -259,9 +255,15 @@ class WorldScreen : Screen,
         partyMembers = PartyMembersLoader(player).loadPartyMembers()
     }
 
+    override fun onNotifyShowBattleScreen(battleId: String) {
+        gameState = GameState.BATTLE
+        fadeOut({ BattleScreen.load(battleId, this) }, Color.BLACK)
+    }
+
     // BattleObserver //////////////////////////////////////////////////////////////////////////////////////////////////
 
     override fun onNotifyBattleWon(battleId: String, spoils: Loot, levelUpMessage: String?) {
+        screenManager.setScreen(ScreenType.WORLD)
         if (gameData.quests.contains(battleId)) {
             gameData.quests.getQuestById(battleId).setKillTaskComplete()
         }
@@ -292,6 +294,16 @@ class WorldScreen : Screen,
         } else {
             npcEntities = npcEntities.filter { it != currentNpcEntity }
         }
+    }
+
+    override fun onNotifyBattleLost() {
+        screenManager.setScreen(ScreenType.SCENE_DEATH)
+    }
+
+    override fun onNotifyBattleFled() {
+        val mapTitle = profileManager.getLastSaveLocation()
+        mapManager.loadMapAfterFleeing(mapTitle)
+        screenManager.setScreen(ScreenType.WORLD)
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

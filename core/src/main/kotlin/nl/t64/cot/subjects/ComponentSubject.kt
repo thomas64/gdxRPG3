@@ -45,10 +45,6 @@ class ComponentSubject {
         observers.forEach { it.onNotifyShowMessageDialog(message) }
     }
 
-    fun notifyShowBattleScreen(battleId: String) {
-        observers.forEach { it.onNotifyShowBattleScreen(battleId) }
-    }
-
     fun notifyShowBattleScreen(battleId: String, enemyEntity: Entity) {
         observers.forEach { it.onNotifyShowBattleScreen(battleId, enemyEntity) }
     }

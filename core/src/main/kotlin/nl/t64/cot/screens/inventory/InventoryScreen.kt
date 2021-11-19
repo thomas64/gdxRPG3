@@ -22,7 +22,7 @@ import nl.t64.cot.screens.world.conversation.ConversationObserver
 
 class InventoryScreen : ParchmentScreen(), ConversationObserver {
 
-    private val conversationDialog: ConversationDialog = ConversationDialog()
+    private val conversationDialog: ConversationDialog = ConversationDialog(this)
     private lateinit var inventoryUI: InventoryUI
 
     companion object {
@@ -31,11 +31,6 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
             screenManager.openParchmentLoadScreen(ScreenType.INVENTORY)
         }
     }
-
-    init {
-        conversationDialog.conversationObservers.addObserver(this)
-    }
-
 
     override fun onNotifyExitConversation() {
         hideConversationDialog()

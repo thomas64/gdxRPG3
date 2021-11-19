@@ -10,10 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.ScreenUtils
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.audioManager
-import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
-import nl.t64.cot.Utils.mapManager
-import nl.t64.cot.Utils.profileManager
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
@@ -27,14 +24,16 @@ import nl.t64.cot.screens.world.Camera
 
 class BattleScreen : Screen {
 
+    private lateinit var battleObserver: BattleSubject
     private lateinit var battleId: String
     private lateinit var enemies: EnemyContainer
     private lateinit var stage: Stage
     private lateinit var listener: BattleScreenListener
 
     companion object {
-        fun load(battleId: String) {
+        fun load(battleId: String, battleObserver: BattleObserver) {
             val screen = screenManager.getScreen(ScreenType.BATTLE) as BattleScreen
+            screen.battleObserver = BattleSubject(battleObserver)
             screen.battleId = battleId
             screen.enemies = EnemyContainer(battleId)
             screenManager.setScreen(ScreenType.BATTLE)
@@ -119,10 +118,7 @@ class BattleScreen : Screen {
     }
 
     private fun battleWonExitScreen(levelUpMessage: String?) {
-        exitScreen {
-            screenManager.setScreen(ScreenType.WORLD)
-            brokerManager.battleObservers.notifyBattleWon(battleId, enemies.getSpoils(), levelUpMessage)
-        }
+        exitScreen { battleObserver.notifyBattleWon(battleId, enemies.getSpoils(), levelUpMessage) }
     }
 
     private fun fleeBattle() {
@@ -133,7 +129,7 @@ class BattleScreen : Screen {
 
         val message = """
             Fleeing will return you to the location of 
-            your last save with all the progress intact.
+            your last save with all progress intact.
             
             Do you want to flee?""".trimIndent()
         DialogQuestion({ battleFledExitScreen() }, message)
@@ -141,11 +137,7 @@ class BattleScreen : Screen {
     }
 
     private fun battleFledExitScreen() {
-        exitScreen {
-            val mapTitle = profileManager.getLastSaveLocation()
-            mapManager.loadMapAfterFleeing(mapTitle)
-            screenManager.setScreen(ScreenType.WORLD)
-        }
+        exitScreen { battleObserver.notifyBattleFled() }
     }
 
     private fun damageHero(index: Int) {
@@ -168,16 +160,14 @@ class BattleScreen : Screen {
         val message = """
             Mozes took a fatal blow.
             
-                       Game Over.""".trimIndent()
+            Game Over.""".trimIndent()
         val messageDialog = MessageDialog(message)
         messageDialog.setActionAfterHide { gameOverExitScreen() }
         messageDialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT)
     }
 
     private fun gameOverExitScreen() {
-        exitScreen {
-            screenManager.setScreen(ScreenType.SCENE_DEATH)
-        }
+        exitScreen { battleObserver.notifyBattleLost() }
     }
 
     private fun exitScreen(actionAfterExit: () -> Unit) {
