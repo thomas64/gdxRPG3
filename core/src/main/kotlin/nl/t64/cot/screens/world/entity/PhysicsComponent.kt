@@ -58,6 +58,8 @@ abstract class PhysicsComponent : Component {
         when (state) {
             EntityState.WALKING, EntityState.FLYING -> move(dt)
             EntityState.ALIGNING -> alignToGrid()
+            EntityState.IDLE, EntityState.IMMOBILE, EntityState.INVISIBLE, EntityState.IDLE_ANIMATING -> {}
+            else -> throw IllegalArgumentException("EntityState '$state' not usable.")
         }
     }
 
@@ -102,6 +104,8 @@ abstract class PhysicsComponent : Component {
                     entity.send(CollisionEvent())
                 }
             }
+            EntityState.IDLE, EntityState.IMMOBILE, EntityState.INVISIBLE, EntityState.IDLE_ANIMATING -> {}
+            else -> throw IllegalStateException("EntityState '$state' not usable.")
         }
     }
 

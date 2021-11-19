@@ -17,6 +17,7 @@ public class Lwjgl3Launcher {
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 
         config.setTitle(Constant.TITLE);
+        config.useVsync(true);
         config.setWindowIcon("sprites/icon.png", "libgdx128.png", "libgdx64.png", "libgdx32.png", "libgdx16.png");
         config.setResizable(false);
         config.setIdleFPS(60);

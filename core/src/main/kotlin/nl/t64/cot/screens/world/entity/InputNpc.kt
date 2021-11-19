@@ -70,6 +70,8 @@ class InputNpc : InputComponent() {
         when (state) {
             EntityState.WALKING -> state = EntityState.IDLE
             EntityState.FLYING -> state = EntityState.IDLE_ANIMATING
+            EntityState.IMMOBILE, EntityState.IDLE_ANIMATING -> {}
+            else -> throw IllegalArgumentException("EntityState '$state' not usable.")
         }
         turnToPlayer(npcPosition, playerPosition)
     }

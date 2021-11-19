@@ -2,7 +2,7 @@
 
 A [libGDX](https://libgdx.com/) project generated with [gdx-liftoff](https://github.com/tommyettinger/gdx-liftoff).
 
-Project template includes simple launchers and a `Game` extension that sets the first screen.
+This project was generated with a template including simple application launchers and a main class extending `Game` that sets the first screen.
 
 ## Gradle
 
