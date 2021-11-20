@@ -26,5 +26,10 @@ dependencies {
 	testApi "org.assertj:assertj-core:$assertjVersion"
 	testApi "org.mockito:mockito-core:$mockitoVersion"
 	testApi "org.mockito.kotlin:mockito-kotlin:$kockitoVersion"
-	testApi "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+	testApi "org.junit.jupiter:junit-jupiter:$junitVersion"
+}
+
+test {
+    useJUnitPlatform()
+	workingDir("..\\assets")
 }

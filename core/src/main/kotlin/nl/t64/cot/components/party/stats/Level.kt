@@ -30,7 +30,7 @@ class Level(rank: Int = 1) : StatItem() {
         }
     }
 
-    fun gainXp(amount: Int, hasGainedLevel: (Boolean) -> Unit) {
+    fun gainXp(amount: Int, gainLevel: (Boolean) -> Unit) {
         if (rank < MAXIMUM) {
             xpToInvest += amount
             totalXp += amount
@@ -38,7 +38,7 @@ class Level(rank: Int = 1) : StatItem() {
         while (getXpNeededForNextLevel() <= 0) {
             rank += 1
             variable += 1
-            hasGainedLevel.invoke(true)
+            gainLevel.invoke(true)
         }
     }
 

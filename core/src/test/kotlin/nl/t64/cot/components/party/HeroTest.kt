@@ -5,12 +5,13 @@ import nl.t64.cot.components.party.inventory.InventoryDatabase
 import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.components.party.inventory.InventoryItem
 import nl.t64.cot.components.party.inventory.InventoryMinimal
+import nl.t64.cot.components.party.skills.SkillDatabase
 import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.components.party.spells.ResourceType
 import nl.t64.cot.components.party.spells.SchoolType
 import nl.t64.cot.components.party.stats.StatItemId
 import nl.t64.cot.constants.Constant
-import org.assertj.core.api.Assertions.*
+import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.groups.Tuple
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -18,7 +19,7 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 
 
-class HeroTest : GameTest() {
+internal class HeroTest : GameTest() {
 
     private lateinit var heroes: HeroContainer
     private lateinit var party: PartyContainer
@@ -27,132 +28,9 @@ class HeroTest : GameTest() {
     private fun setup() {
         heroes = HeroContainer()
         party = PartyContainer()
-        addHeroToParty(Constant.PLAYER_ID)
-    }
-
-    private fun addHeroToParty(heroId: String) {
-        val hero = heroes.getCertainHero(heroId)
-        heroes.removeHero(heroId)
+        val hero = heroes.getCertainHero(Constant.PLAYER_ID)
+        heroes.removeHero(Constant.PLAYER_ID)
         party.addHero(hero)
-    }
-
-    private fun removeHeroFromParty(heroId: String) {
-        val hero = party.getCertainHero(heroId)
-        party.removeHero(heroId)
-        heroes.addHero(hero)
-    }
-
-    @Test
-    fun whenDataIsCreated_ShouldContainPlayer() {
-        val mozes = party.getCertainHero("mozes")
-        assertThat(heroes.contains(Constant.PLAYER_ID)).isFalse
-        assertThat(heroes.size).isEqualTo(13)
-        assertThat(party.contains(Constant.PLAYER_ID)).isTrue
-        assertThat(party.size).isEqualTo(1)
-        assertThat(party.containsExactlyEqualTo(mozes)).isTrue
-    }
-
-    @Test
-    fun `When other savegame is started, should recognize old objects are wrong`() {
-        val luanaString = "luana"
-        val luanaObject = heroes.getCertainHero(luanaString)
-
-        assertThat(party.contains(luanaString)).isFalse
-        assertThat(party.containsExactlyEqualTo(luanaObject)).isFalse
-        addHeroToParty(luanaString)
-        assertThat(party.contains(luanaString)).isTrue
-        assertThat(party.containsExactlyEqualTo(luanaObject)).isTrue
-
-        setup()
-
-        assertThat(party.contains(luanaString)).isFalse
-        assertThat(party.containsExactlyEqualTo(luanaObject)).isFalse
-        addHeroToParty(luanaString)
-        assertThat(party.contains(luanaString)).isTrue
-        assertThat(party.containsExactlyEqualTo(luanaObject)).isFalse
-    }
-
-    @Test
-    fun whenPlayerIsRemovedFromParty_ShouldThrowException() {
-        assertThat(party.contains(Constant.PLAYER_ID)).isTrue
-        assertThat(party.size).isEqualTo(1)
-
-        assertThatIllegalArgumentException()
-            .isThrownBy { removeHeroFromParty(Constant.PLAYER_ID) }
-            .withMessage("Cannot remove player from party.")
-    }
-
-    @Test
-    fun whenHeroIsAddedToParty_ShouldBeLastInParty() {
-        val mozes = party.getCertainHero("mozes")
-        assertThat(party.isHeroLast(mozes)).isTrue
-
-        addHeroToParty("luana")
-        val luana = party.getCertainHero("luana")
-        assertThat(party.isHeroLast(mozes)).isFalse
-        assertThat(party.isHeroLast(luana)).isTrue
-    }
-
-    @Test
-    fun whenHeroIsAddedToParty_ShouldSetRecruitedTrue() {
-        val luana = "luana"
-        assertThat(heroes.getCertainHero(luana).hasBeenRecruited).isFalse
-        addHeroToParty(luana)
-        assertThat(party.getCertainHero(luana).hasBeenRecruited).isTrue
-        removeHeroFromParty(luana)
-        assertThat(heroes.getCertainHero(luana).hasBeenRecruited).isTrue
-    }
-
-    @Test
-    fun whenHeroIsAddedToParty_ShouldBeRemovedFromHeroContainer() {
-        val luana = "luana"
-
-        assertThat(heroes.size).isEqualTo(13)
-        assertThat(heroes.contains(luana)).isTrue
-        assertThat(party.size).isEqualTo(1)
-        assertThat(party.contains(luana)).isFalse
-
-        addHeroToParty(luana)
-
-        assertThat(heroes.size).isEqualTo(12)
-        assertThat(heroes.contains(luana)).isFalse
-        assertThat(party.size).isEqualTo(2)
-        assertThat(party.contains(luana)).isTrue
-    }
-
-    @Test
-    fun whenHeroIsRemovedFromParty_ShouldBeAddedToHeroContainer() {
-        val luana = "luana"
-
-        addHeroToParty(luana)
-
-        assertThat(heroes.size).isEqualTo(12)
-        assertThat(heroes.contains(luana)).isFalse
-        assertThat(party.size).isEqualTo(2)
-        assertThat(party.contains(luana)).isTrue
-
-        removeHeroFromParty(luana)
-
-        assertThat(heroes.size).isEqualTo(13)
-        assertThat(heroes.contains(luana)).isTrue
-        assertThat(party.size).isEqualTo(1)
-        assertThat(party.contains(luana)).isFalse
-    }
-
-    @Test
-    fun whenPartyIsFull_ShouldThrowException() {
-        addHeroToParty("luana")
-        addHeroToParty("reignald")
-        addHeroToParty("ryiah")
-        addHeroToParty("valter")
-        addHeroToParty("galen")
-
-        assertThat(heroes.size).isEqualTo(8)
-        assertThat(party.size).isEqualTo(6)
-
-        assertThatIllegalStateException()
-            .isThrownBy { addHeroToParty("jaspar") }
-            .withMessage("Party is full.")
     }
 
     @Test
@@ -213,10 +91,14 @@ class HeroTest : GameTest() {
         val luthais = heroes.getCertainHero("luthais")
         val iellwen = heroes.getCertainHero("iellwen")
 
+        val trainerStealth = SkillDatabase.createSkillItem("STEALTH", 10)
+        val trainerWizard = SkillDatabase.createSkillItem("WIZARD", 10)
+
+
         assertThat(party.getHero(0)).isEqualTo(mozes)
 
         assertThat(mozes.getSkillValueOf(InventoryGroup.SHIELD, SkillItemId.STEALTH)).isEqualTo(-5)
-        assertThat(mozes.getStatValueOf(InventoryGroup.SHIELD, StatItemId.AGILITY)).isEqualTo(0)
+        assertThat(mozes.getStatValueOf(InventoryGroup.SHIELD, StatItemId.SPEED)).isEqualTo(0)
         assertThat(mozes.id).isEqualTo("mozes")
         assertThat(mozes.name).isEqualTo("Mozes")
         assertThat(mozes.school).isEqualTo(SchoolType.UNKNOWN)
@@ -231,10 +113,10 @@ class HeroTest : GameTest() {
                              StatItemId.CONSTITUTION,
                              StatItemId.STAMINA)
         assertThat(mozes.getStatById(StatItemId.INTELLIGENCE).getXpCostForNextRank()).isEqualTo(43)
-        assertThat(mozes.getSkillById(SkillItemId.STEALTH).getXpCostForNextLevel(0)).isEqualTo(16)
-        assertThat(mozes.getSkillById(SkillItemId.STEALTH).getGoldCostForNextLevel()).isEqualTo(8)
+        assertThat(mozes.getSkillById(SkillItemId.STEALTH).getXpCostForNextLevel(trainerStealth, 0)).isEqualTo(16)
+        assertThat(mozes.getSkillById(SkillItemId.STEALTH).getGoldCostForNextLevel(trainerStealth)).isEqualTo(8)
 
-        assertThat(mozes.getExtraStatForVisualOf(mozes.getStatById(StatItemId.AGILITY))).isEqualTo(-1)
+        assertThat(mozes.getExtraStatForVisualOf(mozes.getStatById(StatItemId.SPEED))).isEqualTo(-1)
         assertThat(iellwen.getExtraSkillForVisualOf(iellwen.getSkillById(SkillItemId.STEALTH))).isEqualTo(-1)
 
         assertThat(mozes.getInventoryItem(InventoryGroup.WEAPON))
@@ -263,11 +145,11 @@ class HeroTest : GameTest() {
 
         assertThat(luthais.getAllSpells()).extracting("id", "rank").contains(Tuple.tuple("fireball", 8))
         val scholar = luthais.getCalculatedTotalSkillOf(SkillItemId.SCHOLAR)
-        assertThat(luthais.getSkillById(SkillItemId.WIZARD).getXpCostForNextLevel(scholar)).isZero
+        assertThat(luthais.getSkillById(SkillItemId.WIZARD).getXpCostForNextLevel(trainerWizard, scholar)).isZero
 
         assertThat(StatItemId.INTELLIGENCE.title).isEqualTo("Intelligence")
         assertThat(SkillItemId.ALCHEMIST.title).isEqualTo("Alchemist")
-        assertThat(CalcAttributeId.WEIGHT.title).isEqualTo("Weight")
+        assertThat(CalcAttributeId.ACTION_POINTS.title).isEqualTo("Weight")
         assertThat(SchoolType.NONE.title).isEqualTo("No")
         assertThat(ResourceType.GOLD.title).isEqualTo("Gold")
         assertThat(InventoryGroup.WEAPON.title).isEqualTo("Weapon")
@@ -310,54 +192,6 @@ class HeroTest : GameTest() {
         assertThat(faeron.getExtraSkillForVisualOf(faeron.getSkillById(SkillItemId.STEALTH))).isEqualTo(-10)
     }
 
-    @Test
-    fun whenGetPreviousOrNextHeroFromParty_ShouldReturnThePreviousOrNextHero() {
-        addHeroToParty("luana")
-        addHeroToParty("reignald")
-        addHeroToParty("ryiah")
-        addHeroToParty("valter")
-        addHeroToParty("galen")
-        val mozes = party.getCertainHero("mozes")
-        val galen = party.getCertainHero("galen")
-        val luana = party.getCertainHero("luana")
-        val ryiah = party.getCertainHero("ryiah")
-        val reignald = party.getCertainHero("reignald")
-        val valter = party.getCertainHero("valter")
-
-        assertThat(party.getPreviousHero(mozes)).isEqualTo(galen)
-        assertThat(party.getNextHero(mozes)).isEqualTo(luana)
-        assertThat(party.getPreviousHero(ryiah)).isEqualTo(reignald)
-        assertThat(party.getNextHero(ryiah)).isEqualTo(valter)
-        assertThat(party.getPreviousHero(galen)).isEqualTo(valter)
-        assertThat(party.getNextHero(galen)).isEqualTo(mozes)
-    }
-
-    @Test
-    fun whenHeroesAreAdded_ShouldIncreaseTheSumOfSkill() {
-        assertThat(party.getSumOfSkill(SkillItemId.MERCHANT)).isZero
-        addHeroToParty("kiara")
-        assertThat(party.getSumOfSkill(SkillItemId.MERCHANT)).isEqualTo(4)
-        addHeroToParty("duilio")
-        assertThat(party.getSumOfSkill(SkillItemId.MERCHANT)).isEqualTo(9)
-    }
-
-    @Test
-    fun whenAskedForHighestSkill_ShouldReturnThatBestHero() {
-        addHeroToParty("luana")
-        addHeroToParty("reignald")
-        addHeroToParty("ryiah")
-        addHeroToParty("valter")
-        val luana = party.getCertainHero("luana")
-        val valter = party.getCertainHero("valter")
-        val mozes = party.getCertainHero("mozes")
-
-        assertThat(party.getHeroWithHighestSkill(SkillItemId.THIEF)).isEqualTo(luana)
-        assertThat(party.getHeroWithHighestSkill(SkillItemId.MECHANIC)).isEqualTo(valter)
-        // no ranger present
-        assertThat(party.getHeroWithHighestSkill(SkillItemId.RANGER)).isEqualTo(mozes)
-        // two with same highest
-        assertThat(party.getHeroWithHighestSkill(SkillItemId.THROWN)).isEqualTo(luana)
-    }
 
     @Test
     fun whenHeroGainsXp_ShouldGainXp() {
@@ -404,7 +238,7 @@ class HeroTest : GameTest() {
 
         mozes.clearInventory()
 
-        assertThat(mozes.getTotalCalcOf(CalcAttributeId.PROTECTION)).isEqualTo(0)
+        assertThat(mozes.getSumOfEquipmentOfCalc(CalcAttributeId.PROTECTION)).isEqualTo(0)
         assertThat(mozes.getPossibleExtraProtection()).isEqualTo(0)
 
         mozes.forceSetInventoryItemFor(InventoryGroup.HELMET, helmet)
@@ -416,12 +250,12 @@ class HeroTest : GameTest() {
         mozes.forceSetInventoryItemFor(InventoryGroup.BELT, belt)
         mozes.forceSetInventoryItemFor(InventoryGroup.PANTS, pants)
 
-        assertThat(mozes.getTotalCalcOf(CalcAttributeId.PROTECTION)).isEqualTo(6)
+        assertThat(mozes.getSumOfEquipmentOfCalc(CalcAttributeId.PROTECTION)).isEqualTo(6)
         assertThat(mozes.getPossibleExtraProtection()).isEqualTo(0)
 
         mozes.forceSetInventoryItemFor(InventoryGroup.BOOTS, boots)
 
-        assertThat(mozes.getTotalCalcOf(CalcAttributeId.PROTECTION)).isEqualTo(7)
+        assertThat(mozes.getSumOfEquipmentOfCalc(CalcAttributeId.PROTECTION)).isEqualTo(7)
         assertThat(mozes.getPossibleExtraProtection()).isEqualTo(1)
     }
 

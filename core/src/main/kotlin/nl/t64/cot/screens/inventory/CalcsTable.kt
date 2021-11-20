@@ -62,11 +62,11 @@ internal class CalcsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
 //        table.add("").row()
 
         table.add(Label("Total " + CalcAttributeId.PROTECTION.title, createLabelStyle()))
-        table.add(selectedHero.getTotalCalcOf(CalcAttributeId.PROTECTION).toString())
+        table.add(selectedHero.getSumOfEquipmentOfCalc(CalcAttributeId.PROTECTION).toString())
         addExtraToTable(selectedHero.getPossibleExtraProtection())
 
         table.add(Label(CalcAttributeId.SPELL_BATTERY.title, createLabelStyle()))
-        table.add(selectedHero.getTotalCalcOf(CalcAttributeId.SPELL_BATTERY).toString())
+        table.add(selectedHero.getSumOfEquipmentOfCalc(CalcAttributeId.SPELL_BATTERY).toString())
         table.add("").row()
 
         if (table.hasKeyboardFocus()) {

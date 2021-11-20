@@ -246,13 +246,13 @@ class HeroItem(
     }
 
     fun getTransformation(): String {
-        return when (getTotalCalcOf(CalcAttributeId.TRANSFORMATION)) {
+        return when (getSumOfEquipmentOfCalc(CalcAttributeId.TRANSFORMATION)) {
             1 -> Constant.TRANSFORMATION_ORC
             else -> Constant.PLAYER_ID
         }
     }
 
-    fun getTotalCalcOf(calcAttributeId: CalcAttributeId): Int {
+    fun getSumOfEquipmentOfCalc(calcAttributeId: CalcAttributeId): Int {
         // todo, er moet nog wel een bonus komen voor protection en etc. bijv met een protection spell.
         // of hieronder
         return inventory.getSumOfCalc(calcAttributeId)
@@ -297,7 +297,7 @@ class HeroItem(
         return when {
             inventory.getInventoryItem(InventoryGroup.SHIELD) == null -> 0
             else -> {
-                val shieldDefense = getTotalCalcOf(CalcAttributeId.DEFENSE)
+                val shieldDefense = getSumOfEquipmentOfCalc(CalcAttributeId.DEFENSE)
                 val wielderSkill = getCalculatedTotalSkillOf(SkillItemId.SHIELD)
                 val staminaPenalty = stats.getDefenseStaminaPenalty()
                 val formula = shieldDefense + ((shieldDefense / 100f) * (10f * wielderSkill)) - staminaPenalty
@@ -308,7 +308,7 @@ class HeroItem(
     }
 
     private fun getCalculatedTotalHit(weaponSkill: SkillItemId): Int {
-        val weaponHit = getTotalCalcOf(CalcAttributeId.BASE_HIT)
+        val weaponHit = getSumOfEquipmentOfCalc(CalcAttributeId.BASE_HIT)
         val wielderSkill = getCalculatedTotalSkillOf(weaponSkill)
         val staminaPenalty = stats.getChanceToHitStaminaPenalty()
         val formula = weaponHit + ((weaponHit / 100f) * (10f * wielderSkill)) - staminaPenalty
@@ -325,7 +325,7 @@ class HeroItem(
     }
 
     private fun getCalculatedTotalDamageClose(minimalType: StatItemId): Int {
-        val weaponDamage = getTotalCalcOf(CalcAttributeId.DAMAGE)
+        val weaponDamage = getSumOfEquipmentOfCalc(CalcAttributeId.DAMAGE)
         val staminaPenalty = stats.getInflictDamageStaminaPenalty()
         val statOfWielder = getCalculatedTotalStatOf(minimalType) / staminaPenalty
         val formula = weaponDamage + ((weaponDamage / 100f) * (5f * statOfWielder))
@@ -337,7 +337,7 @@ class HeroItem(
     }
 
     private fun getCalculatedTotalDamageRange(): Int {
-        val weaponDamage = getTotalCalcOf(CalcAttributeId.DAMAGE)
+        val weaponDamage = getSumOfEquipmentOfCalc(CalcAttributeId.DAMAGE)
         val staminaPenalty = stats.getInflictDamageStaminaPenalty()
         val wielderDexterity = getCalculatedTotalStatOf(StatItemId.DEXTERITY) / staminaPenalty
         val formula = weaponDamage + ((weaponDamage / 100f) * (5f * wielderDexterity))

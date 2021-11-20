@@ -31,8 +31,8 @@ class StatContainer() {
         level.takeXpToInvest(xpCost)
     }
 
-    fun gainXp(amount: Int, hasGainedLevel: (Boolean) -> Unit) {
-        level.gainXp(amount, hasGainedLevel)
+    fun gainXp(amount: Int, gainLevel: (Boolean) -> Unit) {
+        level.gainXp(amount, gainLevel)
     }
 
     fun getAllHpStats(): Map<String, Int> {

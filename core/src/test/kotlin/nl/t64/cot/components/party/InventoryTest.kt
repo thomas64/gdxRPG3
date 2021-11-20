@@ -4,10 +4,10 @@ import nl.t64.cot.GameTest
 import nl.t64.cot.ProfileManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.components.party.inventory.*
-import nl.t64.cot.components.party.skills.Hafted
+import nl.t64.cot.components.party.skills.SkillDatabase
 import nl.t64.cot.components.party.skills.SkillItemId
+import nl.t64.cot.components.party.stats.StatDatabase
 import nl.t64.cot.components.party.stats.StatItemId
-import nl.t64.cot.components.party.stats.Strength
 import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Disabled
@@ -379,7 +379,7 @@ internal class InventoryTest : GameTest() {
         assertThat(description[5].value).isEqualTo(1)
         assertThat(description[6].key).isEqualTo(CalcAttributeId.DEFENSE)
         assertThat(description[6].value).isEqualTo(5)
-        assertThat(description[7].key).isEqualTo(StatItemId.AGILITY)
+        assertThat(description[7].key).isEqualTo(StatItemId.SPEED)
         assertThat(description[7].value).isEqualTo(0)
         assertThat(description[8].key).isEqualTo(SkillItemId.STEALTH)
         assertThat(description[8].value).isEqualTo(-5)
@@ -396,11 +396,11 @@ internal class InventoryTest : GameTest() {
         assertThat(description[1].value).isEqualTo(10)
         assertThat(description[2].key).isEqualTo("Sell value")
         assertThat(description[2].value).isEqualTo(3)
-        assertThat(description[3].key).isEqualTo(CalcAttributeId.WEIGHT)
+        assertThat(description[3].key).isEqualTo(CalcAttributeId.ACTION_POINTS)
         assertThat(description[3].value).isEqualTo(1)
         assertThat(description[4].key).isEqualTo(CalcAttributeId.PROTECTION)
         assertThat(description[4].value).isEqualTo(1)
-        assertThat(description[5].key).isEqualTo(StatItemId.AGILITY)
+        assertThat(description[5].key).isEqualTo(StatItemId.SPEED)
         assertThat(description[5].value).isEqualTo(0)
         assertThat(description[6].key).isEqualTo(SkillItemId.STEALTH)
         assertThat(description[6].value).isEqualTo(0)
@@ -435,8 +435,10 @@ internal class InventoryTest : GameTest() {
     fun whenItemIsComparedToHero_ShouldReturnSpecificThreeStates() {
         val weapon = InventoryDatabase.createInventoryItem(BASIC_MACE)
         val heroMock = mock<HeroItem>()
-        whenever(heroMock.getSkillById(SkillItemId.HAFTED)).thenReturn(Hafted(1))
-        whenever(heroMock.getStatById(StatItemId.STRENGTH)).thenReturn(Strength(10))
+        val haftedSkill = SkillDatabase.createSkillItem("HAFTED", 1)
+        whenever(heroMock.getSkillById(SkillItemId.HAFTED)).thenReturn(haftedSkill)
+        val strengthStat = StatDatabase.createStatItem("STRENGTH", 10)
+        whenever(heroMock.getStatById(StatItemId.STRENGTH)).thenReturn(strengthStat)
         val description = DescriptionCreator(weapon, 0).createItemDescriptionComparingToHero(heroMock)
         assertThat(description[4].key).isEqualTo(InventoryMinimal.SKILL)
         assertThat(description[4].compare).isEqualTo(ThreeState.SAME)
@@ -471,12 +473,12 @@ internal class InventoryTest : GameTest() {
         val light = InventoryDatabase.createInventoryItem("basic_light_shield")
         val medium = InventoryDatabase.createInventoryItem("basic_medium_shield")
         val description1 = DescriptionCreator(light, 0).createItemDescriptionComparingToItem(medium)
-        assertThat(description1[7].key).isEqualTo(StatItemId.AGILITY)
+        assertThat(description1[7].key).isEqualTo(StatItemId.SPEED)
         assertThat(description1[7].compare).isEqualTo(ThreeState.MORE)
         assertThat(description1[8].key).isEqualTo(SkillItemId.STEALTH)
         assertThat(description1[8].compare).isEqualTo(ThreeState.MORE)
         val description2 = DescriptionCreator(medium, 0).createItemDescriptionComparingToItem(light)
-        assertThat(description2[7].key).isEqualTo(StatItemId.AGILITY)
+        assertThat(description2[7].key).isEqualTo(StatItemId.SPEED)
         assertThat(description2[7].compare).isEqualTo(ThreeState.LESS)
         assertThat(description2[8].key).isEqualTo(SkillItemId.STEALTH)
         assertThat(description2[8].compare).isEqualTo(ThreeState.LESS)
