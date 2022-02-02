@@ -325,10 +325,10 @@ class HeroItem(
     }
 
     private fun getCalculatedTotalDamageClose(minimalType: StatItemId): Int {
-        val weaponDamage = getSumOfEquipmentOfCalc(CalcAttributeId.DAMAGE)
+        val totalDamageOfAllEquipment = getSumOfEquipmentOfCalc(CalcAttributeId.DAMAGE)
         val staminaPenalty = stats.getInflictDamageStaminaPenalty()
         val statOfWielder = getCalculatedTotalStatOf(minimalType) / staminaPenalty
-        val formula = weaponDamage + ((weaponDamage / 100f) * (5f * statOfWielder))
+        val formula = totalDamageOfAllEquipment + ((totalDamageOfAllEquipment / 100f) * (5f * statOfWielder))
         return (formula
                 // + back thief
                 // + getLevel() todo, this one shouldn't be shown in calculation but should be calculated in battle.
