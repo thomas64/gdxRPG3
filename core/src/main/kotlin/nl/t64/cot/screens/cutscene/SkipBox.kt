@@ -1,4 +1,4 @@
-package nl.t64.cot.screens.world
+package nl.t64.cot.screens.cutscene
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
@@ -13,11 +13,10 @@ import nl.t64.cot.Utils
 
 private const val TABLE_POSITION = 30f
 private const val TABLE_WIDTH = 90f
-private const val SECOND_COLUMN_WIDTH = 50f
 private const val PAD_LEFT = 25f
 private const val PAD = 15f
 
-internal class ButtonBox {
+internal class SkipBox {
 
     private val table: Table = createTable()
     private val stage: Stage = Stage().apply { addActor(table) }
@@ -32,23 +31,9 @@ internal class ButtonBox {
         table.clear()
 
         if (Utils.isGamepadConnected()) {
-            table.add("Inventory")
-            table.add("[ Y ]").row()
-            table.add("Quest log")
-            table.add("[ X ]").row()
-            table.add("Map")
-            table.add("[ Select ]").row()
-            table.add("Party")
-            table.add("[ R3 ]")
+            table.add("Skip  [ Start ]")
         } else {
-            table.add("Inventory")
-            table.add("[ I ]").row()
-            table.add("Quest log")
-            table.add("[ L ]").row()
-            table.add("Map")
-            table.add("[ M ]").row()
-            table.add("Party")
-            table.add("[ P ]")
+            table.add("Skip  [ Esc ]")
         }
 
         table.pack()
@@ -69,11 +54,9 @@ internal class ButtonBox {
 
         return Table(debugSkin).apply {
             defaults().width(TABLE_WIDTH).align(Align.left)
-            columnDefaults(1).width(SECOND_COLUMN_WIDTH)
-            padLeft(PAD_LEFT).padTop(PAD).padBottom(PAD)
+            pad(PAD, PAD_LEFT, PAD, PAD)
             background = Utils.createTransparency()
         }
     }
-
 
 }

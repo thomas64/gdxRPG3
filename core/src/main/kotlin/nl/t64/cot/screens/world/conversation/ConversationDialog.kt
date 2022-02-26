@@ -96,6 +96,10 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         stage.draw()
     }
 
+    fun isVisible(): Boolean {
+        return scrollPane.hasKeyboardFocus()
+    }
+
     fun loadConversation(conversationId: String, entityId: String) {
         this.conversationId = conversationId
         faceId = entityId

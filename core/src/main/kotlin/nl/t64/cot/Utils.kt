@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.InputProcessor
 import com.badlogic.gdx.controllers.Controllers
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.graphics.Pixmap
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.NinePatch
@@ -43,6 +44,8 @@ private const val SPRITE_PARCHMENT = "sprites/parchment.png"
 private const val SMALL_PARCHMENT_WIDTH = 400f
 private const val SMALL_PARCHMENT_HEIGHT = 280f
 private const val LIGHTMAP_PATH = "sprites/lightmaps/%s.png"
+
+private val TRANSPARENT = Color(0f, 0f, 0f, 0.5f)
 
 object Utils {
 
@@ -209,6 +212,15 @@ object Utils {
             screenshot.color = Color.DARK_GRAY
         }
         return screenshot
+    }
+
+    fun createTransparency(): Drawable {
+        val pixmap = Pixmap(1, 1, Pixmap.Format.Alpha)
+        pixmap.setColor(TRANSPARENT)
+        pixmap.fill()
+        val drawable = Image(Texture(pixmap)).drawable
+        pixmap.dispose()
+        return drawable
     }
 
     fun createLargeParchment(): Image {

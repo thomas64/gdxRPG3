@@ -2,23 +2,19 @@ package nl.t64.cot.screens.world
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.graphics.Pixmap
-import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.scenes.scene2d.Stage
-import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.scenes.scene2d.ui.Table
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable
 import com.badlogic.gdx.utils.Align
 import nl.t64.cot.GdxRpg3
+import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.world.entity.Entity
 
 
-private val TRANSPARENT = Color(0f, 0f, 0f, 0.5f)
 private const val TABLE_WIDTH = 200f
 private const val SECOND_COLUMN_WIDTH = 100f
 
@@ -136,17 +132,9 @@ internal class DebugBox(private val player: Entity) {
         return Table(debugSkin).apply {
             defaults().width(TABLE_WIDTH).align(Align.left)
             columnDefaults(1).width(SECOND_COLUMN_WIDTH)
-            background = createTransparency()
+            background = Utils.createTransparency()
         }
     }
 
-    private fun createTransparency(): Drawable {
-        val pixmap = Pixmap(1, 1, Pixmap.Format.Alpha)
-        pixmap.setColor(TRANSPARENT)
-        pixmap.fill()
-        val drawable = Image(Texture(pixmap)).drawable
-        pixmap.dispose()
-        return drawable
-    }
 
 }

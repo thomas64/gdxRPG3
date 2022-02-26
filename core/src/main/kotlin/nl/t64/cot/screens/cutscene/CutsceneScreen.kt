@@ -52,6 +52,8 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
     private var actionId = 0
     private var followingActor = Actor()
     private var isCameraFixed: Boolean = true
+    private val skipBox = SkipBox()
+    private var isEnding: Boolean = false
 
 
     private fun createTitle(): Label {
@@ -66,6 +68,7 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
     override fun show() {
         conversationDialog = ConversationDialog(this)
         actionId = 0
+        isEnding = false
 
         audioManager.handle(AudioCommand.BGM_STOP_ALL)
 
@@ -105,6 +108,9 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
             audioManager.fadeBgmBgs()
         }
         transitionStage.draw()
+        if (!conversationDialog.isVisible() && !isEnding) {
+            skipBox.update(dt)
+        }
     }
 
     override fun resize(width: Int, height: Int) {
@@ -128,6 +134,7 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
         conversationDialog.dispose()
         actorsStage.dispose()
         transitionStage.dispose()
+        skipBox.dispose()
     }
 
     override fun onNotifyExitConversation() {
@@ -162,6 +169,7 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
     }
 
     fun endCutsceneAnd(actionAfter: () -> Unit) {
+        isEnding = true
         Gdx.input.inputProcessor = null
         Utils.setGamepadInputProcessor(null)
         actorsStage.addAction(Actions.sequence(
