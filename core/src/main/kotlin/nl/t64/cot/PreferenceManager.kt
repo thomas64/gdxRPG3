@@ -5,8 +5,8 @@ import com.badlogic.gdx.Graphics
 import com.badlogic.gdx.Preferences
 import ktx.preferences.get
 import ktx.preferences.set
-import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.constants.Constant
+
 
 private const val SETTINGS_FILE = "settings.dat"
 private const val SETTING_SCREEN = "isFullscreen"
@@ -41,16 +41,14 @@ class PreferenceManager {
         if (isFullscreen) setFullscreenMode()
     }
 
-    fun toggleMusic(mustPlayBgmImmediately: Boolean) {
+    fun toggleMusic() {
         isMusicOn = isMusicOn.not()
-        audioManager.toggleMusic(isMusicOn, mustPlayBgmImmediately)
         preferences[SETTING_MUSIC] = isMusicOn
         preferences.flush()
     }
 
     fun toggleSound() {
         isSoundOn = isSoundOn.not()
-        audioManager.toggleSound(isSoundOn)
         preferences[SETTING_SOUND] = isSoundOn
         preferences.flush()
     }

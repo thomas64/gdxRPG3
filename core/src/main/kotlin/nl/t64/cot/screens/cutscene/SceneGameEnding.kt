@@ -70,7 +70,7 @@ class SceneGameEnding : CutsceneScreen() {
     override fun exitScreen() {
         endCutsceneAnd {
             val mainMenu = screenManager.getMenuScreen(ScreenType.MENU_MAIN)
-            mainMenu.processButton(ScreenType.MENU_MAIN, ScreenType.MENU_CREDITS)
+            mainMenu.processButton(ScreenType.MENU_CREDITS)
             audioManager.handle(AudioCommand.BGM_PLAY_LOOP, AudioEvent.BGM_TITLE)
         }
     }

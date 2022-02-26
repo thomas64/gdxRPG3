@@ -1,11 +1,15 @@
 package nl.t64.cot.screens.menu
 
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle
 import com.badlogic.gdx.utils.ScreenUtils
+import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.preferenceManager
+import nl.t64.cot.Utils.resourceManager
+import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.constants.ScreenType
 
 
@@ -24,7 +28,23 @@ private const val MENU_X = 604f
 private const val NUMBER_OF_ITEMS = 6
 private const val EXIT_INDEX = 5
 
-class MenuSettings : MenuScreen() {
+class MenuSettingsMain : MenuSettings() {
+    override val titleLogo: Texture = resourceManager.getTextureAsset(TITLE_LOGO_B)
+    override val fontColor: Color = Color.BLACK
+    override val backScreen: ScreenType = ScreenType.MENU_MAIN
+    override fun processControlsButton() = processButton(ScreenType.MENU_CONTROLS_MAIN)
+    override fun toggleMusic() = audioManager.toggleMusic(preferenceManager.isMusicOn, AudioEvent.BGM_TITLE)
+}
+
+class MenuSettingsPause : MenuSettings() {
+    override val titleLogo: Texture = resourceManager.getTextureAsset(TITLE_LOGO_W)
+    override val fontColor: Color = Color.WHITE
+    override val backScreen: ScreenType = ScreenType.MENU_PAUSE
+    override fun processControlsButton() = processButton(ScreenType.MENU_CONTROLS_PAUSE)
+    override fun toggleMusic() { /* do nothing*/ }
+}
+
+abstract class MenuSettings : MenuScreen() {
 
     private lateinit var fullscreenButton: TextButton
     private lateinit var musicButton: TextButton
@@ -37,7 +57,6 @@ class MenuSettings : MenuScreen() {
     }
 
     override fun setupScreen() {
-        setFontColor()
         table = createTable()
         applyListeners()
         stage.addActor(table)
@@ -58,7 +77,7 @@ class MenuSettings : MenuScreen() {
             1 -> processMusicButton()
             2 -> processSoundButton()
             3 -> processDebugModeButton()
-            4 -> processButton(ScreenType.MENU_SETTINGS, ScreenType.MENU_CONTROLS)
+            4 -> processControlsButton()
             5 -> processBackButton()
             else -> throw IllegalArgumentException("SelectedIndex not found.")
         }
@@ -70,13 +89,16 @@ class MenuSettings : MenuScreen() {
     }
 
     private fun processMusicButton() {
-        val mustPlayBgmImmediately = startScreen == ScreenType.MENU_MAIN
-        preferenceManager.toggleMusic(mustPlayBgmImmediately)
+        preferenceManager.toggleMusic()
+        toggleMusic()
         musicButton.setText(getMenuItemMusic())
     }
 
+    abstract fun toggleMusic()
+
     private fun processSoundButton() {
         preferenceManager.toggleSound()
+        audioManager.toggleSound(preferenceManager.isSoundOn)
         soundButton.setText(getMenuItemSound())
     }
 
@@ -84,6 +106,8 @@ class MenuSettings : MenuScreen() {
         preferenceManager.toggleDebugMode()
         debugModeButton.setText(getMenuItemDebugMode())
     }
+
+    abstract fun processControlsButton()
 
     private fun createTable(): Table {
         // styles

@@ -2,12 +2,15 @@ package nl.t64.cot.screens.menu
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.ScreenUtils
+import nl.t64.cot.Utils.resourceManager
+import nl.t64.cot.constants.ScreenType
 
 
 private const val CREDITS_PATH = "licenses/credits.txt"
@@ -15,6 +18,10 @@ private const val SCROLL_SPEED = 100
 private const val EMPTY_LINES = 20
 
 class MenuCredits : MenuScreen() {
+
+    override val titleLogo: Texture = resourceManager.getTextureAsset(TITLE_LOGO_B)
+    override val fontColor: Color = Color.BLACK
+    override val backScreen: ScreenType = ScreenType.MENU_MAIN
 
     private val scrollPane: ScrollPane
 

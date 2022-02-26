@@ -1,6 +1,7 @@
 package nl.t64.cot.screens.menu
 
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle
@@ -8,6 +9,7 @@ import com.badlogic.gdx.utils.ScreenUtils
 import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.createScreenshot
 import nl.t64.cot.Utils.mapManager
+import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
@@ -28,6 +30,10 @@ private val DIALOG_MESSAGE = """
 
 class MenuPause : MenuScreen() {
 
+    override val titleLogo: Texture = resourceManager.getTextureAsset(TITLE_LOGO_W)
+    override val fontColor: Color = Color.WHITE
+    override val backScreen: ScreenType = ScreenType.MENU_PAUSE
+
     private lateinit var listenerKeyVertical: ListenerKeyVertical
 
     companion object {
@@ -41,12 +47,10 @@ class MenuPause : MenuScreen() {
     }
 
     init {
-        super.startScreen = ScreenType.MENU_PAUSE
         super.selectedMenuIndex = EXIT_INDEX
     }
 
     override fun setupScreen() {
-        setFontColor()
         table = createTable()
         applyListeners()
         stage.addActor(table)
@@ -65,8 +69,8 @@ class MenuPause : MenuScreen() {
     private fun selectMenuItem() {
         when (selectedMenuIndex) {
             0 -> processContinueButton()
-            1 -> processButton(ScreenType.MENU_PAUSE, ScreenType.MENU_LOAD)
-            2 -> processButton(ScreenType.MENU_PAUSE, ScreenType.MENU_SETTINGS)
+            1 -> processButton(ScreenType.MENU_LOAD_PAUSE)
+            2 -> processButton(ScreenType.MENU_SETTINGS_PAUSE)
             3 -> processMainMenuButton()
             else -> throw IllegalArgumentException("SelectedIndex not found.")
         }

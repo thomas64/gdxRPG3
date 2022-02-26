@@ -19,9 +19,9 @@ class AudioManager {
     private val queuedMe: MutableMap<String, Sound> = HashMap()
     private val queuedSe: MutableMap<String, Sound> = HashMap()
 
-    fun toggleMusic(isMusicOn: Boolean, mustPlayBgmImmediately: Boolean) {
-        if (isMusicOn && mustPlayBgmImmediately) {
-            handle(AudioCommand.BGM_PLAY_LOOP, AudioEvent.BGM_TITLE)
+    fun toggleMusic(isMusicOn: Boolean, audioEvent: AudioEvent) {
+        if (isMusicOn) {
+            handle(AudioCommand.BGM_PLAY_LOOP, audioEvent)
         } else {
             handle(AudioCommand.BGM_STOP_ALL)
         }

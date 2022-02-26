@@ -2,6 +2,7 @@ package nl.t64.cot.screens.menu
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.*
@@ -49,7 +50,25 @@ private const val DELETE_INDEX = 1
 private const val EXIT_INDEX = 2
 
 
-class MenuLoad : MenuScreen() {
+class MenuLoadMain : MenuLoad() {
+    override val titleLogo: Texture = resourceManager.getTextureAsset(TITLE_LOGO_B)
+    override val fontColor: Color = Color.BLACK
+    override val backScreen: ScreenType = ScreenType.MENU_MAIN
+    override val loadButtonName: String = MENU_ITEM_START
+    override fun possibleNewGame() = newGame()
+    override fun possibleLoadGame() = fadeBeforeOpenWorldScreen()
+}
+
+class MenuLoadPause : MenuLoad() {
+    override val titleLogo: Texture = resourceManager.getTextureAsset(TITLE_LOGO_W)
+    override val fontColor: Color = Color.WHITE
+    override val backScreen: ScreenType = ScreenType.MENU_PAUSE
+    override val loadButtonName: String = MENU_ITEM_LOAD
+    override fun possibleNewGame() = errorSound()
+    override fun possibleLoadGame() = DialogQuestion({ fadeBeforeOpenWorldScreen() }, LOAD_MESSAGE).show(stage)
+}
+
+abstract class MenuLoad : MenuScreen() {
 
     private lateinit var profiles: Array<String>
 
@@ -65,11 +84,12 @@ class MenuLoad : MenuScreen() {
     private var isBgmFading = false
     private var isLoaded = false
 
+    abstract val loadButtonName: String
+
     override fun setupScreen() {
         isLoaded = false
         profiles = profileManager.getVisualLoadingArray()
 
-        setFontColor()
         createTables()
         createSomeListeners()
 
@@ -117,13 +137,15 @@ class MenuLoad : MenuScreen() {
 
     private fun processLoadButton() {
         if (profileManager.doesProfileExist(selectedListIndex)) {
-            loadGame()
-        } else if (startScreen == ScreenType.MENU_MAIN) {
-            newGame()
+            possibleLoadGame()
         } else {
-            errorSound()
+            possibleNewGame()
         }
     }
+
+    abstract fun possibleLoadGame()
+
+    abstract fun possibleNewGame()
 
     private fun processDeleteButton() {
         if (profileManager.doesProfileExist(selectedListIndex)) {
@@ -133,25 +155,17 @@ class MenuLoad : MenuScreen() {
         }
     }
 
-    private fun loadGame() {
-        if (startScreen == ScreenType.MENU_PAUSE) {
-            DialogQuestion({ fadeBeforeOpenWorldScreen() }, LOAD_MESSAGE).show(stage)
-        } else {
-            fadeBeforeOpenWorldScreen()
-        }
-    }
-
-    private fun newGame() {
+    fun newGame() {
         profileManager.selectedIndex = selectedListIndex
-        processButton(ScreenType.MENU_LOAD, ScreenType.MENU_NEW)
+        processButton(ScreenType.MENU_NEW)
     }
 
-    private fun errorSound() {
+    fun errorSound() {
         audioManager.handle(AudioCommand.SE_STOP, AudioEvent.SE_MENU_CONFIRM)
         audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_ERROR)
     }
 
-    private fun fadeBeforeOpenWorldScreen() {
+    fun fadeBeforeOpenWorldScreen() {
         Gdx.input.inputProcessor = null
         stage.addAction(Actions.sequence(Actions.run { isBgmFading = true },
                                          Actions.fadeOut(Constant.FADE_DURATION),
@@ -194,8 +208,7 @@ class MenuLoad : MenuScreen() {
 
         // actors
         val titleLabel = Label(TITLE_LABEL, titleStyle)
-        val loadButton = TextButton(if (startScreen == ScreenType.MENU_PAUSE) MENU_ITEM_LOAD else MENU_ITEM_START,
-                                    TextButtonStyle(buttonStyle))
+        val loadButton = TextButton(loadButtonName, TextButtonStyle(buttonStyle))
         val deleteButton = TextButton(MENU_ITEM_DELETE, TextButtonStyle(buttonStyle))
         val backButton = TextButton(MENU_ITEM_BACK, TextButtonStyle(buttonStyle))
 

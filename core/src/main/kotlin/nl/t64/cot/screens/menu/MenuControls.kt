@@ -1,24 +1,38 @@
 package nl.t64.cot.screens.menu
 
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.ScreenUtils
 import nl.t64.cot.Utils
+import nl.t64.cot.Utils.resourceManager
+import nl.t64.cot.constants.ScreenType
 
 
 private const val COLUMN_0_WIDTH = 240f
 private const val COLUMN_1_WIDTH = 120f
 
-class MenuControls : MenuScreen() {
+class MenuControlsMain : MenuControls() {
+    override val titleLogo: Texture = resourceManager.getTextureAsset(TITLE_LOGO_B)
+    override val fontColor: Color = Color.BLACK
+    override val backScreen: ScreenType = ScreenType.MENU_SETTINGS_MAIN
+}
+
+class MenuControlsPause : MenuControls() {
+    override val titleLogo: Texture = resourceManager.getTextureAsset(TITLE_LOGO_W)
+    override val fontColor: Color = Color.WHITE
+    override val backScreen: ScreenType = ScreenType.MENU_SETTINGS_PAUSE
+}
+
+abstract class MenuControls : MenuScreen() {
 
     private var isGamepadConnected = false
 
     override fun setupScreen() {
         isGamepadConnected = Utils.isGamepadConnected()
-        setFontColor()
         createTables()
         applyListeners()
         stage.addActor(table)

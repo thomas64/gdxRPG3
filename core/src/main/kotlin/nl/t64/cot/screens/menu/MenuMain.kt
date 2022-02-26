@@ -2,6 +2,7 @@ package nl.t64.cot.screens.menu
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
@@ -23,10 +24,13 @@ private const val NUMBER_OF_ITEMS = 4
 
 class MenuMain : MenuScreen() {
 
+    override val titleLogo: Texture = resourceManager.getTextureAsset(TITLE_LOGO_B)
+    override val fontColor: Color = Color.BLACK
+    override val backScreen: ScreenType = ScreenType.MENU_MAIN
+
     private lateinit var listenerKeyVertical: ListenerKeyVertical
 
     init {
-        super.startScreen = ScreenType.MENU_MAIN
         super.selectedMenuIndex = 0
     }
 
@@ -34,7 +38,6 @@ class MenuMain : MenuScreen() {
         audioManager.handle(AudioCommand.BGM_PLAY_LOOP, AudioEvent.BGM_TITLE)
         val texture = resourceManager.getTextureAsset(BACKGROUND)
         setBackground(Image(texture))
-        setFontColor()
         table = createTable()
         applyListeners()
         stage.addActor(table)
@@ -51,9 +54,9 @@ class MenuMain : MenuScreen() {
 
     private fun selectMenuItem() {
         when (selectedMenuIndex) {
-            0 -> processButton(ScreenType.MENU_MAIN, ScreenType.MENU_LOAD)
-            1 -> processButton(ScreenType.MENU_MAIN, ScreenType.MENU_SETTINGS)
-            2 -> processButton(ScreenType.MENU_MAIN, ScreenType.MENU_CREDITS)
+            0 -> processButton(ScreenType.MENU_LOAD_MAIN)
+            1 -> processButton(ScreenType.MENU_SETTINGS_MAIN)
+            2 -> processButton(ScreenType.MENU_CREDITS)
             3 -> processExitButton()
             else -> throw IllegalArgumentException("SelectedIndex not found.")
         }

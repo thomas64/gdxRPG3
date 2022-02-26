@@ -1,6 +1,7 @@
 package nl.t64.cot.screens.menu
 
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
@@ -15,6 +16,7 @@ import nl.t64.cot.Utils
 import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.profileManager
+import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.components.cutscene.CutsceneId
 import nl.t64.cot.constants.Constant
@@ -37,6 +39,10 @@ private const val EXIT_INDEX = 1
 
 class MenuNew : MenuScreen() {
 
+    override val titleLogo: Texture = resourceManager.getTextureAsset(TITLE_LOGO_B)
+    override val fontColor: Color = Color.BLACK
+    override val backScreen: ScreenType = ScreenType.MENU_LOAD_MAIN
+
     private lateinit var profileText: TextField
     private lateinit var listenerKeyInputField: ListenerKeyInputField
     private lateinit var listenerKeyHorizontal: ListenerKeyHorizontal
@@ -45,7 +51,6 @@ class MenuNew : MenuScreen() {
     private var isBgmFading = false
 
     override fun setupScreen() {
-        setFontColor()
         table = createTable()
 
         applyListeners()
