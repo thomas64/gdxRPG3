@@ -10,6 +10,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap
 import com.badlogic.gdx.math.Vector2
 import ktx.tiled.*
 import nl.t64.cot.Utils.gameData
+import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.screens.world.entity.EntityState
@@ -41,12 +42,13 @@ private const val LIGHTS_LAYER = "lights"
 private const val STEP_SOUND_PROPERTY = "step_sound"
 private const val DEFAULT_STEP_SOUND = "grass"
 
+private const val BGM_PROPERTY = "bgm"
+private const val BGS_PROPERTY = "bgs"
+private const val DEFAULT_BG = "NONE"
+
 class GameMap(val mapTitle: String) {
 
-    val tiledMap: TiledMap = MapManager.getTiledMap(mapTitle)
-    val bgm: AudioEvent = MapManager.getBgmOfMap(tiledMap)
-    val bgs: List<AudioEvent> = MapManager.getBgsOfMap(tiledMap)
-
+    val tiledMap: TiledMap = resourceManager.getTiledMapAsset(mapTitle)
     private val loader = GameMapLayerLoader(tiledMap)
 
     val parallaxBackground: TextureRegion = loader.loadParallaxBackground()
@@ -84,10 +86,12 @@ class GameMap(val mapTitle: String) {
     private val portals: List<GameMapPortal> = loader.loadLayer(PORTAL_LAYER) { GameMapPortal(it, mapTitle) }
     private val warpPoints: List<GameMapWarpPoint> = loader.loadLayer(WARP_LAYER) { GameMapWarpPoint(it, mapTitle) }
 
-    val pixelWidth: Float get() = tiledMap.totalWidth().toFloat()
-    val pixelHeight: Float get() = tiledMap.totalHeight().toFloat()
-    val width: Int get() = tiledMap.width
-    val height: Int get() = tiledMap.height
+    val bgm: AudioEvent = tiledMap.bgm
+    val bgs: List<AudioEvent> = tiledMap.bgs
+    val pixelWidth: Float = tiledMap.totalWidth().toFloat()
+    val pixelHeight: Float = tiledMap.totalHeight().toFloat()
+    val width: Int = tiledMap.width
+    val height: Int = tiledMap.height
 
     fun setTiledGraphs() {
         tiledGraphs[EntityState.WALKING] = TiledGraph(tiledMap.width, tiledMap.height, EntityState.WALKING)
@@ -164,3 +168,19 @@ class GameMap(val mapTitle: String) {
     }
 
 }
+
+val TiledMap.bgm: AudioEvent
+    get() {
+        val audioEvent: String = property(BGM_PROPERTY, DEFAULT_BG)
+        return AudioEvent.valueOf(audioEvent.uppercase())
+    }
+
+val TiledMap.bgs: List<AudioEvent>
+    get() {
+        val audioEvents: String = property(BGS_PROPERTY, DEFAULT_BG)
+        return audioEvents
+            .uppercase()
+            .split(",")
+            .map { it.trim() }
+            .map { AudioEvent.valueOf(it) }
+    }

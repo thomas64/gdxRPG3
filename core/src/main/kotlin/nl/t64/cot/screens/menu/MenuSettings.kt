@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.ScreenUtils
 import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.Utils.resourceManager
+import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.constants.ScreenType
 
@@ -32,16 +33,32 @@ class MenuSettingsMain : MenuSettings() {
     override val titleLogo: Texture = resourceManager.getTextureAsset(TITLE_LOGO_B)
     override val fontColor: Color = Color.BLACK
     override val backScreen: ScreenType = ScreenType.MENU_MAIN
-    override fun processControlsButton() = processButton(ScreenType.MENU_CONTROLS_MAIN)
-    override fun toggleMusic() = audioManager.toggleMusic(preferenceManager.isMusicOn, AudioEvent.BGM_TITLE)
+
+    override fun processControlsButton() {
+        processButton(ScreenType.MENU_CONTROLS_MAIN)
+    }
+
+    override fun toggleMusic() {
+        if (preferenceManager.isMusicOn) {
+            audioManager.handle(AudioCommand.BGM_PLAY_LOOP, AudioEvent.BGM_TITLE)
+        } else {
+            audioManager.handle(AudioCommand.BGM_STOP_ALL)
+        }
+    }
 }
 
 class MenuSettingsPause : MenuSettings() {
     override val titleLogo: Texture = resourceManager.getTextureAsset(TITLE_LOGO_W)
     override val fontColor: Color = Color.WHITE
     override val backScreen: ScreenType = ScreenType.MENU_PAUSE
-    override fun processControlsButton() = processButton(ScreenType.MENU_CONTROLS_PAUSE)
-    override fun toggleMusic() { /* do nothing*/ }
+
+    override fun processControlsButton() {
+        processButton(ScreenType.MENU_CONTROLS_PAUSE)
+    }
+
+    override fun toggleMusic() {
+        // do nothing
+    }
 }
 
 abstract class MenuSettings : MenuScreen() {
@@ -98,8 +115,16 @@ abstract class MenuSettings : MenuScreen() {
 
     private fun processSoundButton() {
         preferenceManager.toggleSound()
-        audioManager.toggleSound(preferenceManager.isSoundOn)
+        toggleSound()
         soundButton.setText(getMenuItemSound())
+    }
+
+    private fun toggleSound() {
+        if (preferenceManager.isSoundOn) {
+            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_CONFIRM)
+        } else {
+            audioManager.handle(AudioCommand.SE_STOP, AudioEvent.SE_MENU_CONFIRM)
+        }
     }
 
     private fun processDebugModeButton() {

@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.maps.tiled.TiledMap
 import com.badlogic.gdx.math.Vector2
-import ktx.tiled.property
 import nl.t64.cot.ProfileManager
 import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.brokerManager
@@ -23,12 +22,6 @@ import nl.t64.cot.screens.world.pathfinding.TiledNode
 import nl.t64.cot.subjects.ProfileObserver
 import kotlin.math.min
 
-
-private const val MAP_PATH = "maps/"
-private const val MAPFILE_SUFFIX = ".tmx"
-private const val BGM_PROPERTY = "bgm"
-private const val BGS_PROPERTY = "bgs"
-private const val DEFAULT_BG = "NONE"
 
 class MapManager : ProfileObserver {
 
@@ -183,9 +176,9 @@ class MapManager : ProfileObserver {
     }
 
     fun fadeAudio() {
-        val nextMap = getTiledMap(nextMapTitle)
-        audioManager.possibleBgmFade(currentMap.bgm, getBgmOfMap(nextMap))
-        audioManager.possibleBgsFade(currentMap.bgs, getBgsOfMap(nextMap))
+        val nextMap: TiledMap = resourceManager.getTiledMapAsset(nextMapTitle)
+        audioManager.possibleBgmFade(currentMap.bgm, nextMap.bgm)
+        audioManager.possibleBgsFade(currentMap.bgs, nextMap.bgs)
     }
 
     fun loadMapWithHardBgmBgsSwitch(mapTitle: String) {
@@ -227,26 +220,6 @@ class MapManager : ProfileObserver {
         if (isMapLoaded) {
             currentMap.dispose()
             isMapLoaded = false
-        }
-    }
-
-    companion object {
-
-        fun getBgmOfMap(tiledMap: TiledMap): AudioEvent {
-            val audioEventString = tiledMap.property(BGM_PROPERTY, DEFAULT_BG)
-            return AudioEvent.valueOf(audioEventString.uppercase())
-        }
-
-        fun getBgsOfMap(tiledMap: TiledMap): List<AudioEvent> {
-            val audioEventStrings = tiledMap.property(BGS_PROPERTY, DEFAULT_BG)
-            return audioEventStrings.uppercase().split(",").map { it.trim() }
-                .map { AudioEvent.valueOf(it) }
-        }
-
-        fun getTiledMap(mapTitle: String?): TiledMap {
-            return mapTitle?.let {
-                resourceManager.getMapAsset("$MAP_PATH$it$MAPFILE_SUFFIX")
-            } ?: TiledMap()
         }
     }
 

@@ -33,6 +33,8 @@ private const val SHOP_CONFIGS = "configs/shops/"
 private const val ACADEMY_CONFIGS = "configs/academies/"
 private const val SCHOOL_CONFIGS = "configs/schools/"
 private const val CONFIG_SUFFIX = ".json"
+private const val MAP_FILES_PATH = "maps/"
+private const val MAP_FILE_SUFFIX = ".tmx"
 private const val ATLAS_FILES = "sprites/"
 private const val FILE_LIST_ATLAS_FILES = ATLAS_FILES + FILE_LIST
 private const val ATLAS_FILES2 = "sprites/inventory/"
@@ -58,8 +60,10 @@ class ResourceManager {
         assetManager.unloadSafely(assetFilenamePath)
     }
 
-    fun getMapAsset(mapFilenamePath: String): TiledMap {
-        return getAsset(mapFilenamePath)
+    fun getTiledMapAsset(mapTitle: String?): TiledMap {
+        return mapTitle?.let {
+            getAsset("$MAP_FILES_PATH$it$MAP_FILE_SUFFIX")
+        } ?: TiledMap()
     }
 
     fun getTrueTypeAsset(trueTypeFilenamePath: String, fontSize: Int): BitmapFont {
