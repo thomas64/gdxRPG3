@@ -224,19 +224,19 @@ object Utils {
     }
 
     fun createLargeParchment(): Image {
-        val parchment = Image(resourceManager.getTextureAsset(SPRITE_PARCHMENT))
-        parchment.setSize(Gdx.graphics.width.toFloat(), Gdx.graphics.height.toFloat())
-        return parchment
+        return Image(resourceManager.getTextureAsset(SPRITE_PARCHMENT)).apply {
+            setSize(Gdx.graphics.width.toFloat(), Gdx.graphics.height.toFloat())
+        }
     }
 
     fun createSmallParchment(): Image {
-        val parchment = Image(resourceManager.getTextureAsset(SPRITE_PARCHMENT))
-        parchment.setSize(SMALL_PARCHMENT_WIDTH, SMALL_PARCHMENT_HEIGHT)
-        parchment.setPosition(
-            Gdx.graphics.width / 2f - SMALL_PARCHMENT_WIDTH / 2f,
-            Gdx.graphics.height / 2f - SMALL_PARCHMENT_HEIGHT / 2f
-        )
-        return parchment
+        return Image(resourceManager.getTextureAsset(SPRITE_PARCHMENT)).apply {
+            setSize(SMALL_PARCHMENT_WIDTH, SMALL_PARCHMENT_HEIGHT)
+            setPosition(
+                Gdx.graphics.width / 2f - SMALL_PARCHMENT_WIDTH / 2f,
+                Gdx.graphics.height / 2f - SMALL_PARCHMENT_HEIGHT / 2f
+            )
+        }
     }
 
     fun <T> readValue(json: String, clazz: Class<T>): HashMap<String, T> {

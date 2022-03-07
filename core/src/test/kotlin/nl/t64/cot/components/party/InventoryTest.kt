@@ -27,7 +27,7 @@ internal class InventoryTest : GameTest() {
     private lateinit var inventory: InventoryContainer
 
     @BeforeEach
-    private fun setup() {
+    private fun beforeEach() {
         gameData.onNotifyCreateProfile(ProfileManager())
         inventory = InventoryContainer()
         val mace = InventoryDatabase.createInventoryItem(BASIC_MACE)

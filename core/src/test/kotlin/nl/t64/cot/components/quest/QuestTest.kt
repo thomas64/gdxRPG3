@@ -4,7 +4,6 @@ import nl.t64.cot.GameTest
 import nl.t64.cot.ProfileManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.components.loot.LootContainer
-import nl.t64.cot.components.party.PartyContainer
 import nl.t64.cot.components.party.inventory.InventoryContainer
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.entry
@@ -16,11 +15,10 @@ internal class QuestTest : GameTest() {
 
     private lateinit var quests: QuestContainer
     private lateinit var inventory: InventoryContainer
-    private lateinit var party: PartyContainer
     private lateinit var loot: LootContainer
 
     @BeforeEach
-    private fun setup() {
+    private fun beforeEach() {
         gameData.onNotifyCreateProfile(ProfileManager())
         quests = gameData.quests
         inventory = gameData.inventory

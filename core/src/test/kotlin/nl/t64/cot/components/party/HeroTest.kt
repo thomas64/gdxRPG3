@@ -10,28 +10,14 @@ import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.components.party.spells.ResourceType
 import nl.t64.cot.components.party.spells.SchoolType
 import nl.t64.cot.components.party.stats.StatItemId
-import nl.t64.cot.constants.Constant
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.groups.Tuple
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 
 
 internal class HeroTest : GameTest() {
-
-    private lateinit var heroes: HeroContainer
-    private lateinit var party: PartyContainer
-
-    @BeforeEach
-    private fun setup() {
-        heroes = HeroContainer()
-        party = PartyContainer()
-        val hero = heroes.getCertainHero(Constant.PLAYER_ID)
-        heroes.removeHero(Constant.PLAYER_ID)
-        party.addHero(hero)
-    }
 
     @Test
     fun whenImpossibleItemIsForceSet_ShouldOverwriteExistingItem() {

@@ -14,7 +14,7 @@ internal class EventTest : GameTest() {
     private lateinit var eventContainer: EventContainer
 
     @BeforeEach
-    private fun setup() {
+    private fun beforeEach() {
         gameData.onNotifyCreateProfile(ProfileManager())
         eventContainer = EventContainer()
     }

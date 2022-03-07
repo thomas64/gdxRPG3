@@ -12,7 +12,7 @@ internal class DoorTest : GameTest() {
     private lateinit var doorContainer: DoorContainer
 
     @BeforeEach
-    private fun setup() {
+    private fun beforeEach() {
         doorContainer = DoorContainer()
     }
 

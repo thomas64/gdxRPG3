@@ -12,7 +12,7 @@ internal class LootTest : GameTest() {
     private lateinit var lootContainer: LootContainer
 
     @BeforeEach
-    private fun setup() {
+    private fun beforeEach() {
         lootContainer = LootContainer()
     }
 

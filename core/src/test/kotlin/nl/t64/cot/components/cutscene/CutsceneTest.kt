@@ -11,7 +11,7 @@ internal class CutsceneTest : GameTest() {
     private lateinit var cutsceneContainer: CutsceneContainer
 
     @BeforeEach
-    private fun setup() {
+    private fun beforeEach() {
         cutsceneContainer = CutsceneContainer()
     }
 

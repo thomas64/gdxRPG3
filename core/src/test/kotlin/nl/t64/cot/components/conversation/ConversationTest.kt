@@ -15,7 +15,7 @@ internal class ConversationTest : GameTest() {
     private lateinit var conversations: ConversationContainer
 
     @BeforeEach
-    private fun setup() {
+    private fun beforeEach() {
         conversations = ConversationContainer()
     }
 

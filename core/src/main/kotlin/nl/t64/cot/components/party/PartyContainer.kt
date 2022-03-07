@@ -55,7 +55,7 @@ class PartyContainer {
     }
 
     fun containsExactlyEqualTo(candidateHeroObject: HeroItem): Boolean {
-        return getPossibleHero(candidateHeroObject.id) == candidateHeroObject
+        return getPossibleHero(candidateHeroObject.id) === candidateHeroObject
     }
 
     fun isHeroLast(hero: HeroItem): Boolean {
