@@ -28,6 +28,7 @@ import nl.t64.cot.components.conversation.ConversationChoice
 import nl.t64.cot.components.conversation.ConversationCommand
 import nl.t64.cot.components.conversation.ConversationGraph
 import nl.t64.cot.components.conversation.NoteDatabase.getNoteById
+import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.constants.Constant
 
 
@@ -277,7 +278,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             ConversationCommand.LOAD_SCHOOL -> loadSchool(nextId)
             ConversationCommand.SAVE_GAME -> saveGame(nextId)
             ConversationCommand.HEAL_LIFE -> healLife(nextId)
-            ConversationCommand.RECEIVE_XP -> receiveXp(nextId)
+            ConversationCommand.RECEIVE_XP -> possibleReceiveXp(nextId)
             ConversationCommand.START_BATTLE -> startBattle(nextId)
 
             ConversationCommand.ACCEPT_QUEST -> acceptQuest(nextId)
@@ -356,23 +357,27 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         )
     }
 
-    private fun receiveXp(nextId: String) {
+    private fun possibleReceiveXp(nextId: String) {
         val reward = gameData.loot.getLoot(conversationId!!)
         if (reward.isXpGained()) {
             continueConversation(nextId)
         } else {
-            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_REWARD)
-            val levelUpMessage = StringBuilder()
-            gameData.party.gainXp(reward.xp, levelUpMessage)
-            val finalMessage = levelUpMessage.toString().trim()
-            if (finalMessage.isEmpty()) {
-                conversationObserver.notifyShowMessageTooltip("+ ${reward.xp} XP")
-            } else {
-                conversationObserver.notifyShowMessageTooltip("+ ${reward.xp} XP" + System.lineSeparator() + finalMessage)
-            }
-            reward.clearXp()
-            continueConversationWithoutSound(nextId)
+            receiveXp(reward, nextId)
         }
+    }
+
+    private fun receiveXp(reward: Loot, nextId: String) {
+        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_REWARD)
+        val levelUpMessage = StringBuilder()
+        gameData.party.gainXp(reward.xp, levelUpMessage)
+        val finalMessage = levelUpMessage.toString().trim()
+        if (finalMessage.isEmpty()) {
+            conversationObserver.notifyShowMessageTooltip("+ ${reward.xp} XP")
+        } else {
+            conversationObserver.notifyShowMessageTooltip("+ ${reward.xp} XP" + System.lineSeparator() + finalMessage)
+        }
+        reward.clearXp()
+        continueConversationWithoutSound(nextId)
     }
 
     private fun startBattle(nextId: String) {

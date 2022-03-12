@@ -13,6 +13,6 @@ enum class StatItemId : SuperEnum {
     STAMINA,
     SPEED;
 
-    override val title: String get() = this.name.lowercase().replaceFirstChar { it.uppercase() }
+    override val title: String = name.lowercase().replaceFirstChar { it.uppercase() }
 
 }

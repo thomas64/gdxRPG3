@@ -33,7 +33,7 @@ enum class SkillItemId : SuperEnum {
 
     BITE;
 
-    override val title: String get() = this.name.lowercase().replaceFirstChar { it.uppercase() }
+    override val title: String = name.lowercase().replaceFirstChar { it.uppercase() }
 
     fun isHandToHandWeaponSkill(): Boolean {
         return when (this) {

@@ -10,10 +10,9 @@ class GameMapSpawnPoint(rectObject: RectangleMapObject) : GameMapObject(rectObje
 
     private val fromMapName: String = rectObject.name
     private val fromMapLocation: String = rectObject.type ?: ""
+    val x: Float = rectObject.rectangle.x
+    val y: Float = rectObject.rectangle.y
     val direction: Direction = Direction.valueOf(rectObject.property("direction", "NONE").uppercase())
-
-    val x: Float get() = rectangle.getX()
-    val y: Float get() = rectangle.getY()
 
     fun isInConnectionWith(portal: GameMapRelocator): Boolean {
         return fromMapName == portal.fromMapName &&

@@ -49,36 +49,19 @@ private val TRANSPARENT = Color(0f, 0f, 0f, 0.5f)
 
 object Utils {
 
-    val resourceManager: ResourceManager
-        get() = gdxRpg3.resourceManager
-
-    val preferenceManager: PreferenceManager
-        get() = gdxRpg3.preferenceManager
-
-    val profileManager: ProfileManager
-        get() = gdxRpg3.profileManager
-
-    val gameData: GameData
-        get() = gdxRpg3.gameData
-
-    val screenManager: ScreenManager
-        get() = gdxRpg3.screenManager
-
-    val audioManager: AudioManager
-        get() = gdxRpg3.audioManager
-
-    val mapManager: MapManager
-        get() = gdxRpg3.mapManager
-
-    val brokerManager: BrokerManager
-        get() = gdxRpg3.brokerManager
+    private val gdxRpg3: GdxRpg3 get() = Gdx.app.applicationListener as GdxRpg3
+    val resourceManager: ResourceManager get() = gdxRpg3.resourceManager
+    val preferenceManager: PreferenceManager get() = gdxRpg3.preferenceManager
+    val profileManager: ProfileManager get() = gdxRpg3.profileManager
+    val gameData: GameData get() = gdxRpg3.gameData
+    val screenManager: ScreenManager get() = gdxRpg3.screenManager
+    val audioManager: AudioManager get() = gdxRpg3.audioManager
+    val mapManager: MapManager get() = gdxRpg3.mapManager
+    val brokerManager: BrokerManager get() = gdxRpg3.brokerManager
 
     fun setGamepadInputProcessor(inputProcessor: InputProcessor?) {
         gdxRpg3.gamepadMapping.setInputProcessor(inputProcessor)
     }
-
-    private val gdxRpg3: GdxRpg3
-        get() = Gdx.app.applicationListener as GdxRpg3
 
     fun isGamepadConnected(): Boolean {
         return Controllers.getCurrent()?.isConnected ?: false
