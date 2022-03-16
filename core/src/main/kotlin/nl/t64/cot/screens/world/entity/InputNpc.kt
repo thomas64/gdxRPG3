@@ -3,7 +3,6 @@ package nl.t64.cot.screens.world.entity
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.Vector2
 import nl.t64.cot.screens.world.entity.events.*
-import kotlin.math.abs
 
 
 private const val DEFAULT_STATE_TIME = 5f
@@ -67,21 +66,19 @@ class InputNpc : InputComponent() {
         val npcPosition: Vector2 = event.npcPosition
         val playerPosition: Vector2 = event.playerPosition
         stateTime = DEFAULT_STATE_TIME
-        when (state) {
-            EntityState.WALKING -> state = EntityState.IDLE
-            EntityState.FLYING -> state = EntityState.IDLE_ANIMATING
-            EntityState.IMMOBILE, EntityState.IDLE_ANIMATING -> {}
-            else -> throw IllegalArgumentException("EntityState '$state' not usable.")
-        }
-        turnToPlayer(npcPosition, playerPosition)
+        state = stopMoving()
+        direction = npcPosition.turnToPlayer(playerPosition)
     }
 
-    private fun turnToPlayer(npcPos: Vector2, playerPos: Vector2) {
-        when {
-            npcPos.x < playerPos.x && abs(npcPos.y - playerPos.y) < abs(npcPos.x - playerPos.x) -> direction = Direction.EAST
-            npcPos.x > playerPos.x && abs(npcPos.y - playerPos.y) < abs(npcPos.x - playerPos.x) -> direction = Direction.WEST
-            npcPos.y < playerPos.y && abs(npcPos.y - playerPos.y) > abs(npcPos.x - playerPos.x) -> direction = Direction.NORTH
-            npcPos.y > playerPos.y && abs(npcPos.y - playerPos.y) > abs(npcPos.x - playerPos.x) -> direction = Direction.SOUTH
+    private fun stopMoving(): EntityState {
+        return when (state) {
+            EntityState.WALKING -> EntityState.IDLE
+            EntityState.FLYING -> EntityState.IDLE_ANIMATING
+            EntityState.IMMOBILE,
+            EntityState.IDLE,
+            EntityState.IDLE_ANIMATING,
+            EntityState.INVISIBLE -> state
+            else -> throw IllegalArgumentException("EntityState '$state' not usable.")
         }
     }
 

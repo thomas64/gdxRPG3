@@ -49,11 +49,8 @@ abstract class ItemSlot(
     }
 
     fun deselect() {
-        if (isSelected()) {
-            super.getChildren().pop()
-        } else {
-            throw IllegalStateException("Tried to deselect an unselected ItemSlot.")
-        }
+        check(isSelected()) { "Tried to deselect an unselected ItemSlot." }
+        super.getChildren().pop()
     }
 
     fun isSelected(): Boolean {

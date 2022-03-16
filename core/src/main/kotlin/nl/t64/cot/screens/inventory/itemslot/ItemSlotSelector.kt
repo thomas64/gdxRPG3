@@ -27,12 +27,15 @@ class ItemSlotSelector(
     }
 
     fun findNextSlot() {
-        val nextIndex: Int =
-            itemContainer.findNextFilledSlotFrom(itemSLot.index)
-                ?: itemContainer.findFirstFilledSlot()
-                ?: itemSLot.index
+        val nextIndex = findNextSlotIndex()
         itemSLot.deselect()
         setNewSelectedByIndex(nextIndex)
+    }
+
+    private fun findNextSlotIndex(): Int {
+        return itemContainer.findNextFilledSlotIndexFrom(itemSLot.index)
+            ?: itemContainer.findFirstFilledSlotIndex()
+            ?: itemSLot.index
     }
 
     fun selectNewSlot(deltaIndex: Int) {

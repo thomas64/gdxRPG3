@@ -103,27 +103,27 @@ class InventoryContainer(numberOfSlots: Int = NUMBER_OF_SLOTS) {
     }
 
     fun hasEmptySlot(): Boolean {
-        return findFirstEmptySlot() != null
+        return findFirstEmptySlotIndex() != null
     }
 
     fun hasRoomForResource(itemId: String): Boolean {
-        return (findFirstSlotWithItem(itemId) != null
-                || findFirstEmptySlot() != null)
+        return (findFirstSlotIndexWithItem(itemId) != null
+                || findFirstEmptySlotIndex() != null)
     }
 
-    fun findFirstSlotWithItem(itemId: String): Int? {
+    fun findFirstSlotIndexWithItem(itemId: String): Int? {
         return (0 until getSize()).firstOrNull { containsItemAt(it, itemId) }
     }
 
-    fun findFirstFilledSlot(): Int? {
-        return findNextFilledSlotFrom(0)
+    fun findFirstFilledSlotIndex(): Int? {
+        return findNextFilledSlotIndexFrom(0)
     }
 
-    fun findNextFilledSlotFrom(index: Int): Int? {
+    fun findNextFilledSlotIndexFrom(index: Int): Int? {
         return (index until getSize()).firstOrNull { isSlotFilled(it) }
     }
 
-    fun findFirstEmptySlot(): Int? {
+    fun findFirstEmptySlotIndex(): Int? {
         return (0 until getSize()).firstOrNull { isSlotEmpty(it) }
     }
 
@@ -151,7 +151,7 @@ class InventoryContainer(numberOfSlots: Int = NUMBER_OF_SLOTS) {
     }
 
     private fun addItemAtEmptySlot(newItem: InventoryItem) {
-        findFirstEmptySlot()?.let { slotIsEmptySoSetItemAt(it, newItem) }
+        findFirstEmptySlotIndex()?.let { slotIsEmptySoSetItemAt(it, newItem) }
             ?: throw IllegalStateException("Inventory is full.")
     }
 

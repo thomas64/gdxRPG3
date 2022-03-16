@@ -79,7 +79,7 @@ class InventorySlotsTable(private val tooltip: ItemSlotTooltip) : WindowSelector
         val currentSlot: ItemSlot = selector.getCurrentSlot()
         if (currentSlot.getPossibleInventoryImage()?.inventoryGroup == InventoryGroup.POTION) {
             // todo, in battle not allowed to drink this way.
-            InventorySlotUser().drink(currentSlot)
+            InventorySlotUser.drink(currentSlot)
         } else {
             taker.equip(currentSlot)
         }
@@ -111,17 +111,17 @@ class InventorySlotsTable(private val tooltip: ItemSlotTooltip) : WindowSelector
     }
 
     fun getPossibleSameStackableItemSlotWith(candidateItem: InventoryItem): ItemSlot? {
-        return when {
-            candidateItem.isStackable ->
-                inventory.findFirstSlotWithItem(candidateItem.id)?.let {
-                    inventorySlotTable.getChild(it) as ItemSlot
-                }
-            else -> null
+        return if (candidateItem.isStackable) getPossibleSameItemSlotWith(candidateItem) else null
+    }
+
+    private fun getPossibleSameItemSlotWith(candidateItem: InventoryItem): ItemSlot? {
+        return inventory.findFirstSlotIndexWithItem(candidateItem.id)?.let { index ->
+            inventorySlotTable.getChild(index) as ItemSlot
         }
     }
 
     fun getPossibleEmptySlot(): ItemSlot? {
-        return inventory.findFirstEmptySlot()?.let {
+        return inventory.findFirstEmptySlotIndex()?.let {
             inventorySlotTable.getChild(it) as ItemSlot
         }
     }

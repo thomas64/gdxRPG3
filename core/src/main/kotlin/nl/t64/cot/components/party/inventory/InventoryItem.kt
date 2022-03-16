@@ -61,6 +61,7 @@ class InventoryItem(
     lateinit var id: String
     var amount: Int = 0
     val isStackable: Boolean get() = group.isStackable()
+    val isShield: Boolean get() = group == InventoryGroup.SHIELD
 
     fun createCopy(amount: Int): InventoryItem {
         val itemCopy = InventoryItem(
@@ -98,10 +99,8 @@ class InventoryItem(
     }
 
     fun getStatItemIdOfMinimalTypeOfWeapon(): StatItemId {
-        val weaponMinimals = setOf(minIntelligence, minStrength, minDexterity)
-        if (weaponMinimals.count { it > 0 } > 1) {
-            throw IllegalStateException("Only one minimal possible for a weapon.")
-        }
+        val weaponMinimals = listOf(minIntelligence, minStrength, minDexterity)
+        check(weaponMinimals.count { it > 0 } == 1) { "Only one minimal possible for a weapon." }
         return when {
             minIntelligence != 0 -> StatItemId.INTELLIGENCE
             minStrength != 0 -> StatItemId.STRENGTH

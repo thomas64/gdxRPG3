@@ -28,9 +28,9 @@ class HeroItem(
 ) {
 
     lateinit var id: String
+    var isAlive = true
     var hasBeenRecruited = false
     val isPlayer: Boolean get() = id == Constant.PLAYER_ID
-    var isAlive = true
 
     fun hasSameIdAs(candidateHero: HeroItem): Boolean {
         return id == candidateHero.id
@@ -184,16 +184,22 @@ class HeroItem(
 
     private fun createMessageIfWeaponAndShieldAreNotCompatible(inventoryItem: InventoryItem): String? {
         return when {
-            inventoryItem.isTwoHanded ->
-                inventory.getInventoryItem(InventoryGroup.SHIELD)?.let {
-                    inventoryItem.createMessageFailToEquipTwoHanded(it)
-                }
-            inventoryItem.group == InventoryGroup.SHIELD ->
-                inventory.getInventoryItem(InventoryGroup.WEAPON)
-                    ?.takeIf { it.isTwoHanded }
-                    ?.let { inventoryItem.createMessageFailToEquipTwoHanded(it) }
+            inventoryItem.isTwoHanded -> createMessageIfShieldIsEquipped(inventoryItem)
+            inventoryItem.isShield -> createMessageIfEquippedWeaponIsTwoHanded(inventoryItem)
             else -> null
         }
+    }
+
+    private fun createMessageIfShieldIsEquipped(twoHandedWeapon: InventoryItem): String? {
+        return inventory.getInventoryItem(InventoryGroup.SHIELD)?.let { shieldItem ->
+            twoHandedWeapon.createMessageFailToEquipTwoHanded(shieldItem)
+        }
+    }
+
+    private fun createMessageIfEquippedWeaponIsTwoHanded(shieldItem: InventoryItem): String? {
+        return inventory.getInventoryItem(InventoryGroup.WEAPON)
+            ?.takeIf { it.isTwoHanded }
+            ?.let { twoHandedWeapon -> shieldItem.createMessageFailToEquipTwoHanded(twoHandedWeapon) }
     }
 
     fun createMessageIfHeroHasNotEnoughFor(inventoryItem: InventoryItem): String? {
@@ -285,10 +291,10 @@ class HeroItem(
     fun getCalculatedTotalDamage(): Int {
         // todo, is nu alleen nog maar voor wapens, niet voor potions.
         val currentWeaponSkill = inventory.getSkillOfCurrentWeapon()
-        val currentWeaponMinimal = inventory.getStatItemIdOfMinimalOfCurrentWeapon()!!
+        val currentWeaponMinimal = inventory.getStatItemIdOfMinimalOfCurrentWeapon()
         return when {
             currentWeaponSkill == null -> 0
-            currentWeaponSkill.isHandToHandWeaponSkill() -> getCalculatedTotalDamageClose(currentWeaponMinimal)
+            currentWeaponSkill.isHandToHandWeaponSkill() -> getCalculatedTotalDamageClose(currentWeaponMinimal!!)
             else -> getCalculatedTotalDamageRange()
         }
     }

@@ -15,7 +15,7 @@ import nl.t64.cot.screens.inventory.tooltip.ItemSlotTooltip
 
 private val TRANSPARENT = Color(1f, 1f, 1f, 0.3f)
 
-private fun createShadowImage(inventoryGroup: InventoryGroup): Image {
+private fun createShadowImageOf(inventoryGroup: InventoryGroup): Image {
     val groupId = inventoryGroup.name.lowercase()
     val textureRegion = resourceManager.getAtlasTexture(groupId)
     return Image(textureRegion).apply {
@@ -32,7 +32,7 @@ internal class EquipSlot(
 ) : ItemSlot(index, filterGroup, tooltip) {
 
     init {
-        imagesBackground.addActorBefore(imagesBackground.children.peek(), createShadowImage(filterGroup))
+        imagesBackground.addActorBefore(imagesBackground.children.peek(), createShadowImageOf(filterGroup))
     }
 
     override fun addToStack(actor: Actor) {

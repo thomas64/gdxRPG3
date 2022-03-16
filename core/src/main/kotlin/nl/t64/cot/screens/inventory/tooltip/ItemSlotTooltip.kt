@@ -222,16 +222,16 @@ open class ItemSlotTooltip : BaseTooltip() {
     }
 
     private fun createRightLabelStyle(attribute: InventoryDescription): LabelStyle {
-        return if (isBuyOrSellValue(attribute)) {
-            createLabelStyle(Color.GOLD)
-        } else createLabelStyle(Color.WHITE)
+        return when {
+            isBuyOrSellValue(attribute) -> createLabelStyle(Color.GOLD)
+            else -> createLabelStyle(Color.WHITE)
+        }
     }
 
     private fun getKey(attribute: InventoryDescription): String {
-        return if (attribute.key is SuperEnum) {
-            attribute.key.title
-        } else {
-            attribute.key.toString()
+        return when (attribute.key) {
+            is SuperEnum -> attribute.key.title
+            else -> attribute.key.toString()
         }
     }
 

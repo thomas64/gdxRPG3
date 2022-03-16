@@ -260,8 +260,8 @@ internal class InventoryTest : GameTest() {
 
     @Test
     fun whenSearchingForSlotWithItem_ShouldReturnIndexOrNot() {
-        assertThat(inventory.findFirstSlotWithItem(GOLD)).isEqualTo(65)
-        assertThat(inventory.findFirstSlotWithItem(HERB)).isNull()
+        assertThat(inventory.findFirstSlotIndexWithItem(GOLD)).isEqualTo(65)
+        assertThat(inventory.findFirstSlotIndexWithItem(HERB)).isNull()
     }
 
     @Test
@@ -278,7 +278,7 @@ internal class InventoryTest : GameTest() {
         inventory.clearItemAt(inventory.getLastIndex())
         assertThat(inventory.isEmpty()).isTrue
         inventory.forceSetItemAt(8, InventoryItem())
-        assertThat(inventory.findFirstFilledSlot()).isEqualTo(8)
+        assertThat(inventory.findFirstFilledSlotIndex()).isEqualTo(8)
     }
 
     @Test

@@ -87,17 +87,17 @@ class ShopSlotsTable(
     }
 
     fun getPossibleSameStackableItemSlotWith(candidateItem: InventoryItem): ItemSlot? {
-        return when {
-            candidateItem.isStackable ->
-                inventory.findFirstSlotWithItem(candidateItem.id)?.let {
-                    shopSlotTable.getChild(it) as ItemSlot
-                }
-            else -> null
+        return if (candidateItem.isStackable) getPossibleSameItemSlotWith(candidateItem) else null
+    }
+
+    private fun getPossibleSameItemSlotWith(candidateItem: InventoryItem): ItemSlot? {
+        return inventory.findFirstSlotIndexWithItem(candidateItem.id)?.let { index ->
+            shopSlotTable.getChild(index) as ItemSlot
         }
     }
 
     fun getPossibleEmptySlot(): ItemSlot? {
-        return inventory.findFirstEmptySlot()?.let {
+        return inventory.findFirstEmptySlotIndex()?.let {
             shopSlotTable.getChild(it) as ItemSlot
         }
     }

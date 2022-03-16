@@ -9,43 +9,60 @@ import nl.t64.cot.screens.inventory.messagedialog.MessageDialog
 import kotlin.math.roundToInt
 
 
-class InventorySlotUser {
+class InventorySlotUser private constructor(itemSlot: ItemSlot) {
 
-    private lateinit var currentSlot: ItemSlot
-    private lateinit var inventoryItem: InventoryItem
-    private lateinit var selectedHero: HeroItem
+    companion object {
+        fun drink(itemSlot: ItemSlot) {
+            InventorySlotUser(itemSlot).selectActionBasedOnItemId()
+        }
+    }
 
-    fun drink(itemSlot: ItemSlot) {
-        currentSlot = itemSlot
-        inventoryItem = itemSlot.getCertainInventoryImage().inventoryItem
-        selectedHero = InventoryUtils.getSelectedHero()
+    private val currentSlot: ItemSlot = itemSlot
+    private val inventoryItem: InventoryItem = itemSlot.getCertainInventoryImage().inventoryItem
+    private val selectedHero: HeroItem = InventoryUtils.getSelectedHero()
+
+    private fun selectActionBasedOnItemId() {
         when (inventoryItem.id) {
-            "healing_potion" -> handlePotions(::potionFilter, ::doHealing)
-            "curing_potion" -> handlePotions(::potionFilter, ::doCuring)
-            "stamina_potion" -> handlePotions(::staminaFilter, ::doStamina)
-            "restore_potion" -> handlePotions(::potionFilter, ::doRestore)
+            "healing_potion" -> possibleHandleAction(::potionCondition, ::doHealing)
+            "curing_potion" -> possibleHandleAction(::potionCondition, ::doCuring)
+            "stamina_potion" -> possibleHandleAction(::staminaCondition, ::doStamina)
+            "restore_potion" -> possibleHandleAction(::potionCondition, ::doRestore)
+            else -> throw IllegalStateException("${inventoryItem.id} is not specified to handle drinking.")
         }
     }
 
-    private fun handlePotions(filter: () -> Boolean, action: () -> Unit) {
-        if (filter.invoke()) {
-            currentSlot.decrementAmountBy(1)
-            val oldHp = selectedHero.getCurrentHp()
-            action.invoke()
-            val newHp = selectedHero.getCurrentHp()
-            MessageDialog("${selectedHero.name} used a ${inventoryItem.name} and recovered ${newHp - oldHp} HP.")
-                .show(currentSlot.stage, AudioEvent.SE_CONVERSATION_NEXT)
-        } else {
-            MessageDialog("A ${inventoryItem.name} cannot be used right now.")
-                .show(currentSlot.stage, AudioEvent.SE_MENU_ERROR)
-        }
+    private fun possibleHandleAction(condition: () -> Boolean, drinkAction: () -> Unit) {
+        if (condition.invoke()) certainHandleAction(drinkAction) else showFailMessage()
     }
 
-    private fun potionFilter(): Boolean {
+    private fun certainHandleAction(drinkAction: () -> Unit) {
+        currentSlot.decrementAmountBy(1)
+        val recoveredHp = drinkPotion(drinkAction)
+        showSuccessMessage(recoveredHp)
+    }
+
+    private fun drinkPotion(drinkAction: () -> Unit): Int {
+        val oldHp = selectedHero.getCurrentHp()
+        drinkAction.invoke()
+        val newHp = selectedHero.getCurrentHp()
+        return newHp - oldHp
+    }
+
+    private fun showSuccessMessage(recoveredHp: Int) {
+        MessageDialog("${selectedHero.name} used a ${inventoryItem.name} and recovered $recoveredHp HP.")
+            .show(currentSlot.stage, AudioEvent.SE_CONVERSATION_NEXT)
+    }
+
+    private fun showFailMessage() {
+        MessageDialog("A ${inventoryItem.name} cannot be used right now.")
+            .show(currentSlot.stage, AudioEvent.SE_MENU_ERROR)
+    }
+
+    private fun potionCondition(): Boolean {
         return selectedHero.getCurrentHp() < selectedHero.getMaximumHp()
     }
 
-    private fun staminaFilter(): Boolean {
+    private fun staminaCondition(): Boolean {
         return selectedHero.getCurrentStamina() < selectedHero.getMaximumStamina()
     }
 
