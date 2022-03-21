@@ -1,6 +1,7 @@
 package nl.t64.cot.screens.inventory
 
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import nl.t64.cot.Utils
@@ -8,7 +9,6 @@ import nl.t64.cot.components.party.CalcAttributeId
 import nl.t64.cot.components.party.PersonalityItem
 import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.components.party.toCalcAttributeId
-import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.inventory.tooltip.PersonalityTooltip
 
 
@@ -26,6 +26,10 @@ internal class CalcsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
         container.add(table)
         container.background = Utils.createTopBorder()
         container.addListener(ListenerKeyVertical { updateIndex(it, table.rows) })
+    }
+
+    override fun selectAnotherSlotWhenIndexBecameOutOfBounds() {
+        // empty
     }
 
     override fun fillRows() {
@@ -69,25 +73,20 @@ internal class CalcsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
         table.add(selectedHero.getSumOfEquipmentOfCalc(CalcAttributeId.SPELL_BATTERY).toString())
         table.add("").row()
 
+        possibleSetSelected()
+    }
+
+    private fun possibleSetSelected() {
         if (table.hasKeyboardFocus()) {
-            setSelected()
+            val calcTitle = table.getChild(selectedIndex * 3) as Label
+            super.setSelected(calcTitle, getPersonalityItemForDescriptionOnly(calcTitle))
         }
     }
 
-    private fun setSelected() {
-        val child = table.getChild(selectedIndex * 3) as Label
-        child.style.fontColor = Constant.DARK_RED
-        if (hasJustUpdated) {
-            hasJustUpdated = false
-            tooltip.setPosition(FIRST_COLUMN_WIDTH / 1.5f) { getTooltipY() }
-            tooltip.refresh(child, getPersonalityItemForDescriptionOnly(child))
-        }
-    }
-
-    private fun getPersonalityItemForDescriptionOnly(child: Label): PersonalityItem {
+    private fun getPersonalityItemForDescriptionOnly(calcTitle: Label): PersonalityItem {
         return object : PersonalityItem {
             override fun getTotalDescription(): String {
-                return child.text.toString().toCalcAttributeId().getDescription()
+                return calcTitle.text.toString().toCalcAttributeId().getDescription()
             }
         }
     }
@@ -96,9 +95,11 @@ internal class CalcsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
         return LabelStyle(font, Color.BLACK)
     }
 
-    private fun getTooltipY(): Float {
+    override fun getTooltipPosition(): Vector2 {
+        val x = FIRST_COLUMN_WIDTH / 1.5f
         val rowHeight = table.getRowHeight(0)
-        return container.height - (rowHeight * selectedIndex) - (rowHeight * 0.5f)
+        val y = container.height - (rowHeight * selectedIndex) - (rowHeight * 0.5f)
+        return Vector2(x, y)
     }
 
 }

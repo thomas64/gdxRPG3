@@ -1,12 +1,12 @@
 package nl.t64.cot.screens.inventory
 
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane
 import nl.t64.cot.Utils
 import nl.t64.cot.components.party.spells.SpellItem
-import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.inventory.tooltip.PersonalityTooltip
 
 
@@ -41,8 +41,7 @@ internal class SpellsTable(
         container.addListener(ListenerKeyVertical { updateIndex(it, selectedHero.getAllSpells().size) })
     }
 
-    override fun selectCurrentSlot() {
-        super.selectCurrentSlot()
+    override fun selectAnotherSlotWhenIndexBecameOutOfBounds() {
         if (selectedIndex >= selectedHero.getAllSpells().size) {
             selectedIndex = selectedHero.getAllSpells().size - 1
         } else if (selectedIndex == -1) {
@@ -71,29 +70,21 @@ internal class SpellsTable(
         table.add(createImageOf(spellItem.id))
         val spellName = Label(spellItem.name, LabelStyle(font, Color.BLACK))
         table.add(spellName).padLeft(SECOND_COLUMN_PAD_LEFT)
-        if (table.hasKeyboardFocus() && index == selectedIndex) {
-            setSelected(spellName, spellItem)
-        }
+        super.possibleSetSelected(index, spellName, spellItem)
         table.add(spellItem.rank.toString())
         table.add("").row()
         scrollScrollPane()
     }
 
-    private fun setSelected(spellName: Label, spellItem: SpellItem) {
-        spellName.style.fontColor = Constant.DARK_RED
-        if (hasJustUpdated) {
-            hasJustUpdated = false
-            tooltip.setPosition(FIRST_COLUMN_WIDTH + SECOND_COLUMN_WIDTH) { getTooltipY() }
-            tooltip.refresh(spellName, spellItem)
-        }
-    }
-
-    private fun getTooltipY(): Float =
-        containerHeight - (ROW_HEIGHT * selectedIndex) - (ROW_HEIGHT * 2f) - (ROW_HEIGHT * 0.4f)
-
     private fun scrollScrollPane() {
         val selectedY = containerHeight - (ROW_HEIGHT * selectedIndex)
         scrollPane.scrollTo(0f, selectedY, 0f, 0f, false, true)
+    }
+
+    override fun getTooltipPosition(): Vector2 {
+        val x = SECOND_COLUMN_WIDTH - FIRST_COLUMN_WIDTH
+        val y = containerHeight - (ROW_HEIGHT * selectedIndex) - (ROW_HEIGHT * 2f) - (ROW_HEIGHT * 0.4f)
+        return Vector2(x, y)
     }
 
 }

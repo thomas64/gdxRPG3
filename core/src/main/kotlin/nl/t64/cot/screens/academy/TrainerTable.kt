@@ -36,8 +36,4 @@ internal class TrainerTable(npcId: String) : BaseTable(PersonalityTooltip()) {
         table.add(text).padTop(PADDING).row()
     }
 
-    override fun fillRows() {
-        // empty
-    }
-
 }

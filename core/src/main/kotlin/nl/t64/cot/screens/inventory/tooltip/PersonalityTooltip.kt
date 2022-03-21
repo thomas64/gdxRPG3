@@ -18,7 +18,7 @@ private const val DELAY = 0.5f
 open class PersonalityTooltip : BaseTooltip() {
 
     private var x: Float = 0f
-    private lateinit var y: () -> Float
+    private var y: Float = 0f
 
     override fun toggle(notUsedHere: ItemSlot?) {
         val isEnabled = gameData.isTooltipEnabled
@@ -26,25 +26,25 @@ open class PersonalityTooltip : BaseTooltip() {
         window.isVisible = !isEnabled
     }
 
-    fun setPosition(x: Float, y: () -> Float) {
-        this.x = x
-        this.y = y
+    fun setPosition(newPosition: Vector2) {
+        x = newPosition.x
+        y = newPosition.y
     }
 
-    fun refresh(label: Label, personalityItem: PersonalityItem) {
+    fun refresh(personalityTitle: Label, personalityItem: PersonalityItem) {
         hide()
-        setupTooltip(label, personalityItem)
+        setupTooltip(personalityTitle, personalityItem)
         if (gameData.isTooltipEnabled) {
             window.addAction(Actions.sequence(Actions.delay(DELAY),
                                               Actions.show()))
         }
     }
 
-    private fun setupTooltip(label: Label, personalityItem: PersonalityItem) {
-        val localCoords = Vector2(label.x, label.y)
-        label.localToStageCoordinates(localCoords)
+    private fun setupTooltip(personalityTitle: Label, personalityItem: PersonalityItem) {
+        val localCoords = Vector2(personalityTitle.x, personalityTitle.y)
+        personalityTitle.localToStageCoordinates(localCoords)
         updateDescription(personalityItem)
-        window.setPosition(localCoords.x + x, localCoords.y + y.invoke())
+        window.setPosition(localCoords.x + x, localCoords.y + y)
         window.toFront()
     }
 

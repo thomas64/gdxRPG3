@@ -1,12 +1,12 @@
 package nl.t64.cot.screens.inventory
 
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane
 import nl.t64.cot.Utils
 import nl.t64.cot.components.party.skills.SkillItem
-import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.inventory.tooltip.PersonalityTooltip
 
 
@@ -42,10 +42,11 @@ internal class SkillsTable(
         container.addListener(ListenerKeyVertical { updateIndex(it, filteredSkills().size) })
     }
 
-    override fun selectCurrentSlot() {
-        super.selectCurrentSlot()
+    override fun selectAnotherSlotWhenIndexBecameOutOfBounds() {
         if (selectedIndex >= filteredSkills().size) {
             selectedIndex = filteredSkills().size - 1
+        } else if (selectedIndex == -1) {
+            selectedIndex = 0
         }
     }
 
@@ -61,32 +62,28 @@ internal class SkillsTable(
         table.add(createImageOf(skillItem.id.name))
         val skillName = Label(skillItem.name, LabelStyle(font, Color.BLACK))
         table.add(skillName).padLeft(SECOND_COLUMN_PAD_LEFT)
-        if (table.hasKeyboardFocus() && index == selectedIndex) {
-            setSelected(skillName, skillItem)
-        }
+        super.possibleSetSelected(index, skillName, skillItem)
         table.add(skillItem.rank.toString())
         val totalExtra = selectedHero.getExtraSkillForVisualOf(skillItem)
         addExtraToTable(totalExtra)
+        possibleScrollScrollPane()
+    }
+
+    private fun possibleScrollScrollPane() {
         if (filteredSkills().size > SCROLL_THRESHOLD) {
             scrollScrollPane()
         }
     }
 
-    private fun setSelected(skillName: Label, skillItem: SkillItem) {
-        skillName.style.fontColor = Constant.DARK_RED
-        if (hasJustUpdated) {
-            hasJustUpdated = false
-            tooltip.setPosition(FIRST_COLUMN_WIDTH + SECOND_COLUMN_WIDTH) { getTooltipY() }
-            tooltip.refresh(skillName, skillItem)
-        }
-    }
-
-    private fun getTooltipY(): Float =
-        containerHeight - (ROW_HEIGHT * selectedIndex) - (ROW_HEIGHT * 0.5f)
-
     private fun scrollScrollPane() {
         val selectedY = containerHeight - (ROW_HEIGHT * selectedIndex)
         scrollPane.scrollTo(0f, selectedY, 0f, 0f, false, true)
+    }
+
+    override fun getTooltipPosition(): Vector2 {
+        val x = SECOND_COLUMN_WIDTH - FIRST_COLUMN_WIDTH
+        val y = containerHeight - (ROW_HEIGHT * selectedIndex) - (ROW_HEIGHT * 0.5f)
+        return Vector2(x, y)
     }
 
 }

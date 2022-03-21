@@ -35,8 +35,4 @@ internal class MerchantTable(npcId: String) : BaseTable(PersonalityTooltip()) {
         table.background = Utils.createTopBorder()
     }
 
-    override fun fillRows() {
-        // empty
-    }
-
 }
