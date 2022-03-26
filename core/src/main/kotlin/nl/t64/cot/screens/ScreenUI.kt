@@ -65,15 +65,11 @@ abstract class ScreenUI(
     }
 
     fun toggleTooltip() {
-        val currentSlot = getSelectedTable().getCurrentSlot()
-        val currentTooltip = getSelectedTable().getCurrentTooltip()
-        currentTooltip.toggle(currentSlot)
+        getSelectedTable().toggleTooltip()
     }
 
     fun toggleCompare() {
-        val currentSlot = getSelectedTable().getCurrentSlot()
-        val currentTooltip = getSelectedTable().getCurrentTooltip()
-        currentTooltip.toggleCompare(currentSlot)
+        getSelectedTable().toggleCompare()
     }
 
     fun unloadAssets() {

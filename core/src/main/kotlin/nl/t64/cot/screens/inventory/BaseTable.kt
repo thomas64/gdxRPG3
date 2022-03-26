@@ -17,8 +17,6 @@ import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.PersonalityItem
 import nl.t64.cot.constants.Constant
-import nl.t64.cot.screens.inventory.itemslot.ItemSlot
-import nl.t64.cot.screens.inventory.tooltip.BaseTooltip
 import nl.t64.cot.screens.inventory.tooltip.PersonalityTooltip
 
 
@@ -47,9 +45,6 @@ abstract class BaseTable(private val tooltip: PersonalityTooltip) : WindowSelect
         InventoryUtils.setWindowSelected(container)
     }
 
-    override fun getCurrentSlot(): ItemSlot? = null     // not used in BaseTables.
-    override fun getCurrentTooltip(): BaseTooltip = tooltip
-
     override fun deselectCurrentSlot() {
         hideTooltip()
         InventoryUtils.setWindowDeselected(container)
@@ -66,6 +61,16 @@ abstract class BaseTable(private val tooltip: PersonalityTooltip) : WindowSelect
     override fun hideTooltip() {
         setHasJustUpdate(false)
         tooltip.hide()
+    }
+
+    override fun toggleTooltip() {
+        if (table.hasContent()) {
+            tooltip.toggle(null)
+        }
+    }
+
+    override fun toggleCompare() {
+        // do nothing. tooltips in tables based on BaseTable don't need to toggle compare.
     }
 
     fun updateIndex(deltaIndex: Int, size: Int) {
@@ -139,6 +144,12 @@ abstract class BaseTable(private val tooltip: PersonalityTooltip) : WindowSelect
 
     fun setHasJustUpdate(setValue: Boolean) {
         hasJustUpdated = setValue
+    }
+
+    private fun Table.hasContent(): Boolean {
+        val firstLineFirstNumber = children[2] as Label
+        return children.size > 4
+                || firstLineFirstNumber.text.isNotEmpty()
     }
 
 }

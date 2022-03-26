@@ -6,7 +6,6 @@ import nl.t64.cot.Utils.gameData
 import nl.t64.cot.components.party.PartyContainer
 import nl.t64.cot.screens.inventory.InventoryUtils
 import nl.t64.cot.screens.inventory.WindowSelector
-import nl.t64.cot.screens.inventory.itemslot.ItemSlot
 import nl.t64.cot.screens.inventory.tooltip.ItemSlotTooltip
 
 
@@ -25,14 +24,6 @@ class EquipSlotsTables(private val tooltip: ItemSlotTooltip) : WindowSelector {
         InventoryUtils.setWindowSelected(container)
     }
 
-    override fun getCurrentSlot(): ItemSlot {
-        return getCurrentEquipSlots().getCurrentSlot()
-    }
-
-    override fun getCurrentTooltip(): ItemSlotTooltip {
-        return tooltip
-    }
-
     override fun deselectCurrentSlot() {
         getCurrentEquipSlots().deselectCurrentSlot()
         InventoryUtils.setWindowDeselected(getCurrentEquipTable())
@@ -44,6 +35,14 @@ class EquipSlotsTables(private val tooltip: ItemSlotTooltip) : WindowSelector {
 
     override fun hideTooltip() {
         tooltip.hide()
+    }
+
+    override fun toggleTooltip() {
+        getCurrentEquipSlots().toggleTooltip()
+    }
+
+    override fun toggleCompare() {
+        getCurrentEquipSlots().toggleCompare()
     }
 
     override fun doAction() {

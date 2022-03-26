@@ -60,12 +60,19 @@ class EquipSlotsTable(
         return EquipSlot(index, inventoryGroup, tooltip, heroItem)
     }
 
+    fun toggleTooltip() {
+        tooltip.toggle(selector.getCurrentSlot())
+    }
+
+    fun toggleCompare() {
+        tooltip.toggleCompare(selector.getCurrentSlot())
+    }
+
     fun dequipItem() {
         taker.dequip(selector.getCurrentSlot())
     }
 
     fun getIndexOfCurrentSlot(): Int = selector.getIndex()
-    fun getCurrentSlot(): ItemSlot = selector.getCurrentSlot()
 
     fun deselectCurrentSlot() {
         selector.deselectCurrentSlot()

@@ -42,14 +42,6 @@ class InventorySlotsTable(private val tooltip: ItemSlotTooltip) : WindowSelector
         InventoryUtils.setWindowSelected(container)
     }
 
-    override fun getCurrentSlot(): ItemSlot {
-        return selector.getCurrentSlot()
-    }
-
-    override fun getCurrentTooltip(): ItemSlotTooltip {
-        return tooltip
-    }
-
     override fun deselectCurrentSlot() {
         selector.deselectCurrentSlot()
         InventoryUtils.setWindowDeselected(container)
@@ -61,6 +53,14 @@ class InventorySlotsTable(private val tooltip: ItemSlotTooltip) : WindowSelector
 
     override fun hideTooltip() {
         tooltip.hide()
+    }
+
+    override fun toggleTooltip() {
+        tooltip.toggle(selector.getCurrentSlot())
+    }
+
+    override fun toggleCompare() {
+        tooltip.toggleCompare(selector.getCurrentSlot())
     }
 
     override fun takeOne() {

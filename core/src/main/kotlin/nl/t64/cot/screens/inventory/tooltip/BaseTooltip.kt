@@ -18,13 +18,8 @@ abstract class BaseTooltip {
         isVisible = false
     }
 
-    open fun toggle(itemSlot: ItemSlot?) {
-        throw IllegalStateException("Implement this method in child.")
-    }
-
-    open fun toggleCompare(itemSlot: ItemSlot?) {
-        // do nothing. some tooltips don't need compare.
-    }
+    open fun toggle(itemSlot: ItemSlot?): Unit = throw IllegalStateException("Implement this method in child.")
+    open fun toggleCompare(itemSlot: ItemSlot?): Unit = throw IllegalStateException("Implement this method in child.")
 
     fun addToStage(stage: Stage) {
         stage.addActor(window)
