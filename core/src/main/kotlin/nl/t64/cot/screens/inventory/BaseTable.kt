@@ -2,7 +2,6 @@ package nl.t64.cot.screens.inventory
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
-import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Label
@@ -119,22 +118,20 @@ abstract class BaseTable(private val tooltip: PersonalityTooltip) : WindowSelect
 
     fun setSelected(personalityTitle: Label, personalityItem: PersonalityItem) {
         personalityTitle.style.fontColor = Constant.DARK_RED
-        refreshTooltipOnlyOnce(personalityTitle, personalityItem)
+        refreshTooltipOnlyOnce(personalityItem)
     }
 
-    private fun refreshTooltipOnlyOnce(personalityTitle: Label, personalityItem: PersonalityItem) {
+    private fun refreshTooltipOnlyOnce(personalityItem: PersonalityItem) {
         if (hasJustUpdated) {
             setHasJustUpdate(false)
-            refreshTooltip(personalityTitle, personalityItem)
+            refreshTooltip(personalityItem)
         }
     }
 
-    private fun refreshTooltip(personalityTitle: Label, personalityItem: PersonalityItem) {
-        tooltip.setPosition(getTooltipPosition())
-        tooltip.refresh(personalityTitle, personalityItem)
+    private fun refreshTooltip(personalityItem: PersonalityItem) {
+        tooltip.setPosition(table)
+        tooltip.refresh(personalityItem)
     }
-
-    open fun getTooltipPosition(): Vector2 = throw IllegalStateException("Implement this method in child if necessary.")
 
     private fun createSkin(): Skin {
         return Skin().apply {

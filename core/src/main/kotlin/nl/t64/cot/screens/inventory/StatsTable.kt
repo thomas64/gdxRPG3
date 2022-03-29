@@ -1,7 +1,6 @@
 package nl.t64.cot.screens.inventory
 
 import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import nl.t64.cot.Utils
@@ -54,23 +53,16 @@ internal class StatsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
     private fun fillRow(statItem: StatItem, index: Int) {
         val statTitle = Label(statItem.name, LabelStyle(font, Color.BLACK))
         table.add(statTitle)
-        super.possibleSetSelected(index, statTitle, statItem)
         table.add(statItem.rank.toString())
         val totalExtra = selectedHero.getExtraStatForVisualOf(statItem)
         addExtraToTable(totalExtra)
+        super.possibleSetSelected(index, statTitle, statItem)
     }
 
     private fun fillRow(key: String, value: Int) {
         table.add(key)
         table.add(value.toString())
         table.add("").row()
-    }
-
-    override fun getTooltipPosition(): Vector2 {
-        val x = FIRST_COLUMN_WIDTH / 1.5f
-        val rowHeight = table.getRowHeight(0)
-        val y = container.height - (rowHeight * selectedIndex) - (rowHeight * 0.5f)
-        return Vector2(x, y)
     }
 
 }

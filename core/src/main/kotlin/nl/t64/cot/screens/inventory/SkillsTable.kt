@@ -1,7 +1,6 @@
 package nl.t64.cot.screens.inventory
 
 import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane
@@ -17,8 +16,6 @@ private const val FOURTH_COLUMN_WIDTH = 35f
 private const val CONTAINER_HEIGHT = 313f
 private const val ROW_HEIGHT = 48f
 private const val SECOND_COLUMN_PAD_LEFT = 15f
-
-private const val SCROLL_THRESHOLD = 6
 
 internal class SkillsTable(
     skillFilter: (SkillItem) -> Boolean,
@@ -62,28 +59,16 @@ internal class SkillsTable(
         table.add(createImageOf(skillItem.id.name))
         val skillName = Label(skillItem.name, LabelStyle(font, Color.BLACK))
         table.add(skillName).padLeft(SECOND_COLUMN_PAD_LEFT)
-        super.possibleSetSelected(index, skillName, skillItem)
         table.add(skillItem.rank.toString())
         val totalExtra = selectedHero.getExtraSkillForVisualOf(skillItem)
         addExtraToTable(totalExtra)
-        possibleScrollScrollPane()
-    }
-
-    private fun possibleScrollScrollPane() {
-        if (filteredSkills().size > SCROLL_THRESHOLD) {
-            scrollScrollPane()
-        }
+        scrollScrollPane()
+        super.possibleSetSelected(index, skillName, skillItem)
     }
 
     private fun scrollScrollPane() {
         val selectedY = containerHeight - (ROW_HEIGHT * selectedIndex)
-        scrollPane.scrollTo(0f, selectedY, 0f, 0f, false, true)
-    }
-
-    override fun getTooltipPosition(): Vector2 {
-        val x = SECOND_COLUMN_WIDTH - FIRST_COLUMN_WIDTH
-        val y = containerHeight - (ROW_HEIGHT * selectedIndex) - (ROW_HEIGHT * 0.5f)
-        return Vector2(x, y)
+        scrollPane.scrollTo(0f, selectedY, 0f, 0f)
     }
 
 }

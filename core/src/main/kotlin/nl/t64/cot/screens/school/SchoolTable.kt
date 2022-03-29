@@ -1,7 +1,6 @@
 package nl.t64.cot.screens.school
 
 import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane
 import nl.t64.cot.Utils
@@ -77,21 +76,15 @@ class SchoolTable(
         table.add(createImageOf(spellItem.id))
         val spellName = Label(spellItem.name, Label.LabelStyle(font, Color.BLACK))
         table.add(spellName).padLeft(SECOND_COLUMN_PAD_LEFT)
-        super.possibleSetSelected(index, spellName, spellItem)
         table.add(spellItem.rank.toString())
         table.add("").row()
         scrollScrollPane()
+        super.possibleSetSelected(index, spellName, spellItem)
     }
 
     private fun scrollScrollPane() {
         val selectedY = CONTAINER_HEIGHT - (ROW_HEIGHT * selectedIndex)
-        scrollPane.scrollTo(0f, selectedY, 0f, 0f, false, true)
-    }
-
-    override fun getTooltipPosition(): Vector2 {
-        val x = SECOND_COLUMN_WIDTH - FIRST_COLUMN_WIDTH
-        val y = CONTAINER_HEIGHT - (ROW_HEIGHT * selectedIndex) - (ROW_HEIGHT * 2f) - (ROW_HEIGHT * 0.4f)
-        return Vector2(x, y)
+        scrollPane.scrollTo(0f, selectedY, 0f, 0f)
     }
 
 }

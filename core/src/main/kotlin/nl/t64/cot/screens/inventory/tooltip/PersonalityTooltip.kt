@@ -6,6 +6,8 @@ import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
+import com.badlogic.gdx.scenes.scene2d.ui.Table
+import com.badlogic.gdx.scenes.scene2d.ui.Window
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.components.party.PersonalityItem
 import nl.t64.cot.components.party.skills.SkillItemId
@@ -14,11 +16,10 @@ import nl.t64.cot.screens.inventory.itemslot.ItemSlot
 
 
 private const val DELAY = 0.5f
+private const val OFFSET_X = 250f
+private const val OFFSET_Y = 0f
 
 open class PersonalityTooltip : BaseTooltip() {
-
-    private var x: Float = 0f
-    private var y: Float = 0f
 
     override fun toggle(notUsedHere: ItemSlot?) {
         val isEnabled = gameData.isTooltipEnabled
@@ -26,26 +27,27 @@ open class PersonalityTooltip : BaseTooltip() {
         window.isVisible = !isEnabled
     }
 
-    fun setPosition(newPosition: Vector2) {
-        x = newPosition.x
-        y = newPosition.y
+    fun setPosition(table: Table) {
+        val titleTable: Table =
+            if (table.parent.parent is Window) {
+                // table -> container -> window -> titletable (like stats and calcs)
+                (table.parent.parent as Window).titleTable
+            } else {
+                // table -> scrollpane -> container -> window -> titletable (like skills and spells)
+                (table.parent.parent.parent as Window).titleTable
+            }
+        val localPosition = titleTable.localToStageCoordinates(Vector2(OFFSET_X, OFFSET_Y))
+        window.setPosition(localPosition.x, localPosition.y)
     }
 
-    fun refresh(personalityTitle: Label, personalityItem: PersonalityItem) {
+    fun refresh(personalityItem: PersonalityItem) {
         hide()
-        setupTooltip(personalityTitle, personalityItem)
+        updateDescription(personalityItem)
+        window.toFront()
         if (gameData.isTooltipEnabled) {
             window.addAction(Actions.sequence(Actions.delay(DELAY),
                                               Actions.show()))
         }
-    }
-
-    private fun setupTooltip(personalityTitle: Label, personalityItem: PersonalityItem) {
-        val localCoords = Vector2(personalityTitle.x, personalityTitle.y)
-        personalityTitle.localToStageCoordinates(localCoords)
-        updateDescription(personalityItem)
-        window.setPosition(localCoords.x + x, localCoords.y + y)
-        window.toFront()
     }
 
     private fun updateDescription(personalityItem: PersonalityItem) {

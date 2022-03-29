@@ -1,7 +1,6 @@
 package nl.t64.cot.screens.academy
 
 import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane
@@ -62,21 +61,15 @@ internal class AcademyTable(
         table.add(createImageOf(skillItem.id.name))
         val skillName = Label(skillItem.name, LabelStyle(font, Color.BLACK))
         table.add(skillName).padLeft(SECOND_COLUMN_PAD_LEFT)
-        super.possibleSetSelected(index, skillName, skillItem)
         table.add(skillItem.rank.toString())
         table.add("").row()
         scrollScrollPane()
+        super.possibleSetSelected(index, skillName, skillItem)
     }
 
     private fun scrollScrollPane() {
         val selectedY = CONTAINER_HEIGHT - (ROW_HEIGHT * selectedIndex)
-        scrollPane.scrollTo(0f, selectedY, 0f, 0f, false, true)
-    }
-
-    override fun getTooltipPosition(): Vector2 {
-        val x = SECOND_COLUMN_WIDTH - FIRST_COLUMN_WIDTH
-        val y = CONTAINER_HEIGHT - (ROW_HEIGHT * selectedIndex) - (ROW_HEIGHT * 0.5f)
-        return Vector2(x, y)
+        scrollPane.scrollTo(0f, selectedY, 0f, 0f)
     }
 
 }
