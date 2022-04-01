@@ -1,6 +1,7 @@
 package nl.t64.cot.screens.inventory.equipslot
 
 import com.badlogic.gdx.graphics.g2d.Sprite
+import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable
 import nl.t64.cot.Utils.resourceManager
@@ -53,7 +54,10 @@ class EquipSlotsTable(
     private val taker = EquipSlotTaker(selector)
 
     init {
-        container.addListener(EquipSlotsTableListener { selector.trySelectNewSlot(it) })
+        container.addAction(Actions.sequence(
+                Actions.delay(.1f),
+                Actions.addListener(EquipSlotsTableListener { selector.trySelectNewSlot(it) }, false))
+        )
     }
 
     private fun createEquipSlot(index: Int, inventoryGroup: InventoryGroup): EquipSlot {

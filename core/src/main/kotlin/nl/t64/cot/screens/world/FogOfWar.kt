@@ -41,14 +41,20 @@ internal class FogOfWar {
             screenWidth = gameMap.width
             leftOfScreen = 0
         }
+        return createFogPoints(leftOfScreen, screenWidth, gameMap.height)
+    }
+
+    private fun createFogPoints(leftOfScreen: Int, screenWidth: Int, gameMapHeight: Int): Set<FogPoint> {
         return (leftOfScreen until screenWidth)
-            .map { createFogPoints(it, gameMap) }
+            .map { x -> createFogPoints(x, gameMapHeight) }
             .flatten()
             .toSet()
     }
 
-    private fun createFogPoints(x: Int, gameMap: GameMap): Set<FogPoint> {
-        return (0 until gameMap.height).map { FogPoint(x.toFloat(), it.toFloat()) }.toSet()
+    private fun createFogPoints(x: Int, gameMapHeight: Int): Set<FogPoint> {
+        return (0 until gameMapHeight)
+            .map { y -> FogPoint(x.toFloat(), y.toFloat()) }
+            .toSet()
     }
 
 }

@@ -2,6 +2,7 @@ package nl.t64.cot.screens.inventory
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.utils.ScreenUtils
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.audioManager
@@ -53,18 +54,7 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
     override fun show() {
         Gdx.input.inputProcessor = stage
         Utils.setGamepadInputProcessor(stage)
-        stage.addListener(InventoryScreenListener({ closeScreen() },
-                                                  { doAction() },
-                                                  { selectPreviousHero() },
-                                                  { selectNextHero() },
-                                                  { selectPreviousTable() },
-                                                  { selectNextTable() },
-                                                  { tryToDismissHero() },
-                                                  { sortInventory() },
-                                                  { toggleTooltip() },
-                                                  { toggleCompare() },
-                                                  { cheatAddGold() },
-                                                  { cheatRemoveGold() }))
+        addInputListenerWithSmallDelay()
         inventoryUI = InventoryUI(stage)
         ButtonLabels(stage).create()
     }
@@ -85,6 +75,23 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
     override fun dispose() {
         stage.dispose()
         conversationDialog.dispose()
+    }
+
+    private fun addInputListenerWithSmallDelay() {
+        stage.addAction(Actions.sequence(Actions.delay(.1f),
+                                         Actions.addListener(InventoryScreenListener({ closeScreen() },
+                                                                                     { doAction() },
+                                                                                     { selectPreviousHero() },
+                                                                                     { selectNextHero() },
+                                                                                     { selectPreviousTable() },
+                                                                                     { selectNextTable() },
+                                                                                     { tryToDismissHero() },
+                                                                                     { sortInventory() },
+                                                                                     { toggleTooltip() },
+                                                                                     { toggleCompare() },
+                                                                                     { cheatAddGold() },
+                                                                                     { cheatRemoveGold() }),
+                                                             false)))
     }
 
     private fun closeScreen() {
