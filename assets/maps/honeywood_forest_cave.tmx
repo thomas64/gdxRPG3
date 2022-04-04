@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="24" tileheight="24" infinite="0" nextlayerid="23" nextobjectid="87">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="24" tileheight="24" infinite="0" nextlayerid="23" nextobjectid="87">
  <properties>
   <property name="bgm" value="bgm_forest"/>
   <property name="bgs" value="bgs_birds"/>
@@ -104,16 +104,9 @@
  </objectgroup>
  <objectgroup color="#5500ff" id="16" name="rest">
   <object id="76" name="sparkle0003" type="short" x="360" y="120" width="48" height="48"/>
-  <object id="77" name="sparkle0004" x="600" y="480" width="48" height="48"/>
   <object id="85" name="note_grace_to_parents" x="456" y="192" width="48" height="48"/>
  </objectgroup>
- <objectgroup color="#ff007f" id="21" name="enemy">
-  <object id="68" name="green_slime" type="w" x="648" y="336" width="48" height="24">
-   <properties>
-    <property name="battleId" value="battle0002"/>
-   </properties>
-  </object>
- </objectgroup>
+ <objectgroup color="#ff007f" id="21" name="enemy"/>
  <objectgroup color="#55ff7f" id="15" name="npc"/>
  <objectgroup color="#55aaff" id="12" name="spawn">
   <object id="22" name="honeywood_forest_path" x="456" y="600" width="48" height="24"/>
@@ -135,7 +128,6 @@
   </object>
  </objectgroup>
  <objectgroup color="#ff55ff" id="20" name="event">
-  <object id="67" name="guide_event_slow" type="discover" x="456" y="576" width="96" height="24"/>
   <object id="82" name="found_grace_ribbon" type="discover" x="312" y="96" width="144" height="120"/>
   <object id="83" name="cave_not_yet_found" type="discover" x="456" y="582" width="96" height="6"/>
  </objectgroup>

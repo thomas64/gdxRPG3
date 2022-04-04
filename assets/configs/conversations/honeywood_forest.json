@@ -16,7 +16,7 @@
   },
   "dont_go_south"     : {
     "phrases": {
-      "1": {"text": ["No, I shouldn't go back. I have to find Grace first.", "There must be a clue near where I found the ribbon."], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["No, I shouldn't go back. I have to find Grace first.", "There must be something near where I found the ribbon."], "choices": [{"command": "EXIT"}]}
     }
   },
   "fairy_welcome"     : {
@@ -119,8 +119,8 @@
           {"text": "I really need to be on my way. (Leave conversation)", "command": "EXIT", "nextId": "70"}
         ]
       },
-      "80": {"face": "fairy01", "text": ["The Council of the Three Wizards along with the Elven Queen are planning an attack. This attack is gonna be on a whole different level than what you know to be a battle."]},
-      "81": {"face": "fairy01", "text": ["Humans, and so also the people of Honeywood won't be able to do anything against Ardor. His power is rising rapidly and we don't know the source of his power yet. There isn't much time, he's planning something..."]},
+      "80": {"face": "fairy01", "text": ["The Council of the Three Wizards, along with the Elven Queen are planning an attack. This attack is going to be on a whole different level than what you know to be a battle."]},
+      "81": {"face": "fairy01", "text": ["Humans, and thus the people of Honeywood won't be able to do anything against Ardor. His power is rising rapidly and we don't know the source of his power yet. Buy there isn't much time, he's planning something..."]},
       "82": {
         "face": "fairy01", "text": ["Best is really that you stay out of his way.", "Don't try to come near him."], "choices": [
           {"condition": ["i_!quest_mother_fairy_accepted"], "nextId": "3"},
