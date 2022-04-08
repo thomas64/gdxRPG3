@@ -26,6 +26,7 @@ object ConditionDatabase {
         Pair("i_level10") { level10 },
         Pair("defeated_orc_guards") { defeatedOrcGuards },
 
+        Pair("diplomat2") { diplomat2 },
         Pair("diplomat3") { diplomat3 },
         Pair("key_mysterious_tunnel") { keyMysteriousTunnel },
         Pair("quest4_known") { quest4Known },

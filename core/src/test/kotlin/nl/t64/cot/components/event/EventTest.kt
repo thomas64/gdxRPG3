@@ -3,6 +3,7 @@ package nl.t64.cot.components.event
 import nl.t64.cot.GameTest
 import nl.t64.cot.ProfileManager
 import nl.t64.cot.Utils.gameData
+import nl.t64.cot.components.party.inventory.InventoryDatabase
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.BeforeEach
@@ -21,17 +22,17 @@ internal class EventTest : GameTest() {
 
     @Test
     fun `When event meets conditions, should be able to play`() {
-        val event = eventContainer.getEventById("event0001")
-        assertThat(event.conversationId).isEqualTo("event0001")
-        assertThat(event.entityId).isEqualTo("man02")
+        val event = eventContainer.getEventById("found_grace_ribbon")
+        assertThat(event.conversationId).isEqualTo("found_grace_ribbon")
+        assertThat(event.entityId).isEqualTo("mozes")
 
-        assertThat(event.conditionIds).containsExactly("quest6_known", "quest7_unknown")
+        assertThat(event.conditionIds).containsExactly("grace_ribbon")
         assertThat(event.hasPlayed).isFalse
 
         event.possibleStart()
         assertThat(event.hasPlayed).isFalse
 
-//        gameData.quests.getQuestById("quest0006").know()
+        gameData.inventory.autoSetItem(InventoryDatabase.createInventoryItem("grace_ribbon"))
         event.possibleStart()
         assertThat(event.hasPlayed).isTrue
     }
@@ -50,17 +51,17 @@ internal class EventTest : GameTest() {
         val event1 = eventContainer.getEventById("guide_event_action")
         assertThat(event1.text).contains("Press %action% for an action.")
         val replace1 = TextReplacer.replace(event1.text)
-        assertThat(replace1).contains("Press 'A' key for an action.")
+        assertThat(replace1).contains("Press [A] key for an action.")
 
         val event2 = eventContainer.getEventById("guide_event_inventory")
         assertThat(event2.text).contains("Press %inventory% to see your inventory,")
         val replace2 = TextReplacer.replace(event2.text)
-        assertThat(replace2).contains("Press 'I' key to see your inventory,")
+        assertThat(replace2).contains("Press [I] key to see your inventory,")
 
         val event3 = eventContainer.getEventById("guide_event_slow")
         assertThat(event3.text).contains("Keep %slow% pressed to move stealthily.")
         val replace3 = TextReplacer.replace(event3.text)
-        assertThat(replace3).contains("Keep 'Ctrl' key pressed to move stealthily.")
+        assertThat(replace3).contains("Keep [Ctrl] key pressed to move stealthily.")
 
         assertThatIllegalArgumentException().isThrownBy { TextReplacer.replace(listOf("%pipo%")) }
             .withMessage("Unexpected value: '%pipo%'")

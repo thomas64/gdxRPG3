@@ -8,7 +8,7 @@ import kotlin.math.floor
 import kotlin.math.roundToInt
 
 
-class InventoryItem(
+class InventoryItem private constructor(
     val name: String = "",
     val sort: Int = 0,
     val description: List<String> = emptyList(),

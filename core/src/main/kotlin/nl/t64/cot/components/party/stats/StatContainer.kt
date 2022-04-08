@@ -71,9 +71,9 @@ class StatContainer() {
     }
 
     fun takeDamage(damage: Int) {
-        level.takeDamage(damage)?.let { it1 ->
-            stats[StatItemId.STAMINA].takeDamage(it1)?.let { it2 ->
-                stats[StatItemId.CONSTITUTION].takeDamage(it2)
+        level.takeDamage(damage)?.let { remainingDamage ->
+            stats[StatItemId.STAMINA].takeDamage(remainingDamage)?.let { leftoverDamage ->
+                stats[StatItemId.CONSTITUTION].takeDamage(leftoverDamage)
             }
         }
     }
@@ -85,9 +85,9 @@ class StatContainer() {
     }
 
     fun recoverPartHp(healPoints: Int) {
-        stats[StatItemId.CONSTITUTION].restorePart(healPoints)?.let { it1 ->
-            stats[StatItemId.STAMINA].restorePart(it1)?.let { it2 ->
-                level.restorePart(it2)
+        stats[StatItemId.CONSTITUTION].restorePart(healPoints)?.let { remainingHealPoints ->
+            stats[StatItemId.STAMINA].restorePart(remainingHealPoints)?.let { leftoverHealPoints ->
+                level.restorePart(leftoverHealPoints)
             }
         }
     }

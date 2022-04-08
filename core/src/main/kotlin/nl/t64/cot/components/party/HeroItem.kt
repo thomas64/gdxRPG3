@@ -159,8 +159,7 @@ class HeroItem(
         return createMessageIfHeroIsDead()
             ?: createMessageIfHeroHasNotEnoughFor(inventoryItem)
             ?: createMessageIfWeaponAndShieldAreNotCompatible(inventoryItem)
-            ?: createMessageIfNotAbleToDequip(getInventoryItem(inventoryItem.group)
-                                                  ?: InventoryItem())   // does nothing
+            ?: createMessageIfNotAbleToDequip(getInventoryItem(inventoryItem.group)!!)
     }
 
     fun createMessageIfNotAbleToDequip(enhancerItem: InventoryItem): String? {

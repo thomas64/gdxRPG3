@@ -97,14 +97,14 @@ internal class InventoryTest : GameTest() {
         assertThat(basicMace.getBuyPriceTotal(100)).isEqualTo(1)
         assertThat(basicMace.getSellValueTotal(100)).isEqualTo(7)
         val fineMace = InventoryDatabase.createInventoryItem("fine_mace")
-        assertThat(fineMace.getBuyPriceTotal(0)).isEqualTo(45)
-        assertThat(fineMace.getSellValueTotal(0)).isEqualTo(15)
+        assertThat(fineMace.getBuyPriceTotal(0)).isEqualTo(30)
+        assertThat(fineMace.getSellValueTotal(0)).isEqualTo(10)
         val specialistMace = InventoryDatabase.createInventoryItem("specialist_mace")
-        assertThat(specialistMace.getBuyPriceTotal(0)).isEqualTo(75)
-        assertThat(specialistMace.getSellValueTotal(0)).isEqualTo(25)
+        assertThat(specialistMace.getBuyPriceTotal(0)).isEqualTo(45)
+        assertThat(specialistMace.getSellValueTotal(0)).isEqualTo(15)
         val masterworkMace = InventoryDatabase.createInventoryItem("masterwork_mace")
-        assertThat(masterworkMace.getBuyPriceTotal(0)).isEqualTo(105)
-        assertThat(masterworkMace.getSellValueTotal(0)).isEqualTo(35)
+        assertThat(masterworkMace.getBuyPriceTotal(0)).isEqualTo(60)
+        assertThat(masterworkMace.getSellValueTotal(0)).isEqualTo(20)
         val potion = InventoryDatabase.createInventoryItem(POTION)
         assertThat(potion.getBuyPricePiece(0)).isEqualTo(4)
         assertThat(potion.getBuyPriceTotal(0)).isEqualTo(4)
@@ -277,7 +277,7 @@ internal class InventoryTest : GameTest() {
         inventory.clearItemAt(0)
         inventory.clearItemAt(inventory.getLastIndex())
         assertThat(inventory.isEmpty()).isTrue
-        inventory.forceSetItemAt(8, InventoryItem())
+        inventory.forceSetItemAt(8, InventoryDatabase.createInventoryItem(BASIC_MACE))
         assertThat(inventory.findFirstFilledSlotIndex()).isEqualTo(8)
     }
 
@@ -345,9 +345,9 @@ internal class InventoryTest : GameTest() {
         assertThat(description[5].key).isEqualTo(InventoryMinimal.MIN_STRENGTH)
         assertThat(description[5].value).isEqualTo(15)
         assertThat(description[6].key).isEqualTo(CalcAttributeId.BASE_HIT)
-        assertThat(description[6].value).isEqualTo(30)
+        assertThat(description[6].value).isEqualTo(65)
         assertThat(description[7].key).isEqualTo(CalcAttributeId.DAMAGE)
-        assertThat(description[7].value).isEqualTo(18)
+        assertThat(description[7].value).isEqualTo(20)
         assertThatExceptionOfType(IndexOutOfBoundsException::class.java).isThrownBy { description[8] }
     }
 
@@ -396,8 +396,8 @@ internal class InventoryTest : GameTest() {
         assertThat(description[1].value).isEqualTo(10)
         assertThat(description[2].key).isEqualTo("Sell value")
         assertThat(description[2].value).isEqualTo(3)
-        assertThat(description[3].key).isEqualTo(CalcAttributeId.ACTION_POINTS)
-        assertThat(description[3].value).isEqualTo(1)
+        assertThat(description[3].key).isEqualTo(InventoryMinimal.MIN_DEXTERITY)
+        assertThat(description[3].value).isEqualTo(10)
         assertThat(description[4].key).isEqualTo(CalcAttributeId.PROTECTION)
         assertThat(description[4].value).isEqualTo(1)
         assertThat(description[5].key).isEqualTo(StatItemId.SPEED)
@@ -435,9 +435,9 @@ internal class InventoryTest : GameTest() {
     fun whenItemIsComparedToHero_ShouldReturnSpecificThreeStates() {
         val weapon = InventoryDatabase.createInventoryItem(BASIC_MACE)
         val heroMock = mock<HeroItem>()
-        val haftedSkill = SkillDatabase.createSkillItem("HAFTED", 1)
+        val haftedSkill = SkillDatabase.createSkillItem("hafted", 1)
         whenever(heroMock.getSkillById(SkillItemId.HAFTED)).thenReturn(haftedSkill)
-        val strengthStat = StatDatabase.createStatItem("STRENGTH", 10)
+        val strengthStat = StatDatabase.createStatItem("strength", 10)
         whenever(heroMock.getStatById(StatItemId.STRENGTH)).thenReturn(strengthStat)
         val description = DescriptionCreator(weapon, 0).createItemDescriptionComparingToHero(heroMock)
         assertThat(description[4].key).isEqualTo(InventoryMinimal.SKILL)
@@ -452,20 +452,23 @@ internal class InventoryTest : GameTest() {
         val sword = InventoryDatabase.createInventoryItem("basic_shortsword")
         val description = DescriptionCreator(mace, 0).createItemDescriptionComparingToItem(sword)
         assertThat(description[6].key).isEqualTo(CalcAttributeId.BASE_HIT)
-        assertThat(description[6].compare).isEqualTo(ThreeState.LESS)
+        assertThat(description[6].compare).isEqualTo(ThreeState.MORE)
         assertThat(description[7].key).isEqualTo(CalcAttributeId.DAMAGE)
         assertThat(description[7].compare).isEqualTo(ThreeState.MORE)
     }
 
     @Test
     fun whenWeaponIsComparedToOtherTypeWeapon_ShouldReturnEmptyMinimalLines() {
-        val mace = InventoryDatabase.createInventoryItem(BASIC_MACE)
-        val javelin = InventoryDatabase.createInventoryItem("basic_javelin")
-        val description = DescriptionCreator(mace, 0).createItemDescriptionComparingToItem(javelin)
-        assertThat(description[4].key).isEqualTo(InventoryMinimal.SKILL)
-        assertThat(description[5].key).isEqualTo(InventoryMinimal.MIN_STRENGTH)
+        val horn = InventoryDatabase.createInventoryItem("legendary_horn_of_kynon")
+        val spellbook = InventoryDatabase.createInventoryItem("legendary_spellbook")
+        val description = DescriptionCreator(horn, 0).createItemDescriptionComparingToItem(spellbook)
+        assertThat(description[0].key).isEqualTo(InventoryGroup.ACCESSORY)
+        assertThat(description[1].key).isEqualTo("Price")
+        assertThat(description[2].key).isEqualTo("Sell value")
+        assertThat(description[3].key).isEqualTo(InventoryMinimal.MIN_INTELLIGENCE)
+        assertThat(description[4].key).isEqualTo("")
+        assertThat(description[5].key).isEqualTo(SkillItemId.TROUBADOUR)
         assertThat(description[6].key).isEqualTo("")
-        assertThat(description[7].key).isEqualTo(CalcAttributeId.BASE_HIT)
     }
 
     @Test

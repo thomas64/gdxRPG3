@@ -23,7 +23,7 @@ internal class HeroTest : GameTest() {
     fun whenImpossibleItemIsForceSet_ShouldOverwriteExistingItem() {
         val mozes = party.getCertainHero("mozes")
         assertThat(mozes.getInventoryItem(InventoryGroup.WEAPON))
-            .hasFieldOrPropertyWithValue("id", "basic_shortsword")
+            .hasFieldOrPropertyWithValue("id", "basic_dagger")
 
         val newWeapon = InventoryDatabase.createInventoryItem("masterwork_lance")
         mozes.forceSetInventoryItemFor(InventoryGroup.WEAPON, newWeapon)
@@ -36,6 +36,7 @@ internal class HeroTest : GameTest() {
     fun whenImpossibleItemIsChecked_ShouldGetMessage() {
         val mozes = party.getCertainHero("mozes")
         val ryiah = heroes.getCertainHero("ryiah")
+        val galen = heroes.getCertainHero("galen")
         val legendaryStaff = InventoryDatabase.createInventoryItem("legendary_staff")
         val masterworkLance = InventoryDatabase.createInventoryItem("masterwork_lance")
         val basicDagger = InventoryDatabase.createInventoryItem("basic_dagger")
@@ -60,12 +61,12 @@ internal class HeroTest : GameTest() {
         message = mozes.createMessageIfNotAbleToEquip(chest)
         assertThat(message).isNull()
 
-        message = mozes.createMessageIfNotAbleToEquip(bow)
-        assertThat(message).contains("Cannot equip the Basic Shortbow.\nFirst unequip the Basic Light Shield.")
+        message = galen.createMessageIfNotAbleToEquip(bow)
+        assertThat(message).contains("Cannot equip the Basic Shortbow.\nFirst unequip the Basic Medium Shield.")
 
-        mozes.clearInventoryItemFor(InventoryGroup.SHIELD)
-        mozes.forceSetInventoryItemFor(InventoryGroup.WEAPON, bow)
-        message = mozes.createMessageIfNotAbleToEquip(shield)
+        galen.clearInventoryItemFor(InventoryGroup.SHIELD)
+        galen.forceSetInventoryItemFor(InventoryGroup.WEAPON, bow)
+        message = galen.createMessageIfNotAbleToEquip(shield)
         assertThat(message).contains("Cannot equip the Basic Light Shield.\nFirst unequip the Basic Shortbow.")
     }
 
@@ -80,15 +81,13 @@ internal class HeroTest : GameTest() {
         val trainerStealth = SkillDatabase.createSkillItem("STEALTH", 10)
         val trainerWizard = SkillDatabase.createSkillItem("WIZARD", 10)
 
-
         assertThat(party.getHero(0)).isEqualTo(mozes)
 
-        assertThat(mozes.getSkillValueOf(InventoryGroup.SHIELD, SkillItemId.STEALTH)).isEqualTo(-5)
-        assertThat(mozes.getStatValueOf(InventoryGroup.SHIELD, StatItemId.SPEED)).isEqualTo(0)
         assertThat(mozes.id).isEqualTo("mozes")
         assertThat(mozes.name).isEqualTo("Mozes")
         assertThat(mozes.school).isEqualTo(SchoolType.UNKNOWN)
         assertThat(mozes.hasSameIdAs(mozes)).isTrue
+        assertThat(mozes.hasSameIdAs(luana)).isFalse
         assertThat(mozes.isPlayer).isTrue
         assertThat(mozes.xpDeltaBetweenLevels).isEqualTo(20)
         assertThat(mozes.getAllStats()).extracting("id")
@@ -97,21 +96,32 @@ internal class HeroTest : GameTest() {
                              StatItemId.STRENGTH,
                              StatItemId.DEXTERITY,
                              StatItemId.CONSTITUTION,
-                             StatItemId.STAMINA)
-        assertThat(mozes.getStatById(StatItemId.INTELLIGENCE).getXpCostForNextRank()).isEqualTo(43)
-        assertThat(mozes.getSkillById(SkillItemId.STEALTH).getXpCostForNextLevel(trainerStealth, 0)).isEqualTo(16)
+                             StatItemId.STAMINA,
+                             StatItemId.SPEED)
+        assertThat(mozes.getStatById(StatItemId.INTELLIGENCE).getXpCostForNextRank()).isEqualTo(15)
+        assertThat(mozes.getSkillById(SkillItemId.STEALTH).getXpCostForNextLevel(trainerStealth, 0)).isEqualTo(24)
         assertThat(mozes.getSkillById(SkillItemId.STEALTH).getGoldCostForNextLevel(trainerStealth)).isEqualTo(8)
 
-        assertThat(mozes.getExtraStatForVisualOf(mozes.getStatById(StatItemId.SPEED))).isEqualTo(-1)
-        assertThat(iellwen.getExtraSkillForVisualOf(iellwen.getSkillById(SkillItemId.STEALTH))).isEqualTo(-1)
-
         assertThat(mozes.getInventoryItem(InventoryGroup.WEAPON))
-            .hasFieldOrPropertyWithValue("id", "basic_shortsword")
-        assertThat(mozes.getInventoryItem(InventoryGroup.SHIELD))
-            .hasFieldOrPropertyWithValue("id", "basic_light_shield")
+            .hasFieldOrPropertyWithValue("id", "basic_dagger")
+        assertThat(mozes.getInventoryItem(InventoryGroup.SHIELD)).isNull()
         assertThat(mozes.getInventoryItem(InventoryGroup.HELMET)).isNull()
         assertThat(mozes.getInventoryItem(InventoryGroup.CHEST))
-            .hasFieldOrPropertyWithValue("id", "basic_medium_chest")
+            .hasFieldOrPropertyWithValue("id", "basic_light_chest")
+        assertThat(mozes.getInventoryItem(InventoryGroup.PANTS))
+            .hasFieldOrPropertyWithValue("id", "basic_light_pants")
+        assertThat(mozes.getInventoryItem(InventoryGroup.BOOTS))
+            .hasFieldOrPropertyWithValue("id", "basic_light_boots")
+
+        assertThat(mozes.getAllSkillsAboveZero()).extracting("id")
+            .containsExactly(SkillItemId.STEALTH,
+                             SkillItemId.TROUBADOUR,
+                             SkillItemId.WARRIOR,
+                             SkillItemId.WIZARD,
+                             SkillItemId.HAFTED,
+                             SkillItemId.MISSILE,
+                             SkillItemId.SHIELD,
+                             SkillItemId.SWORD)
 
         assertThat(luana.getInventoryItem(InventoryGroup.WEAPON))
             .hasFieldOrPropertyWithValue("id", "basic_dart")
@@ -119,6 +129,10 @@ internal class HeroTest : GameTest() {
         assertThat(luana.getInventoryItem(InventoryGroup.HELMET)).isNull()
         assertThat(luana.getInventoryItem(InventoryGroup.CHEST))
             .hasFieldOrPropertyWithValue("id", "basic_light_chest")
+        assertThat(mozes.getInventoryItem(InventoryGroup.PANTS))
+            .hasFieldOrPropertyWithValue("id", "basic_light_pants")
+        assertThat(mozes.getInventoryItem(InventoryGroup.BOOTS))
+            .hasFieldOrPropertyWithValue("id", "basic_light_boots")
 
         assertThat(luana.getAllSkillsAboveZero()).extracting("id")
             .containsExactly(SkillItemId.MECHANIC,
@@ -135,7 +149,7 @@ internal class HeroTest : GameTest() {
 
         assertThat(StatItemId.INTELLIGENCE.title).isEqualTo("Intelligence")
         assertThat(SkillItemId.ALCHEMIST.title).isEqualTo("Alchemist")
-        assertThat(CalcAttributeId.ACTION_POINTS.title).isEqualTo("Weight")
+        assertThat(CalcAttributeId.ACTION_POINTS.title).isEqualTo("Action Points")
         assertThat(SchoolType.NONE.title).isEqualTo("No")
         assertThat(ResourceType.GOLD.title).isEqualTo("Gold")
         assertThat(InventoryGroup.WEAPON.title).isEqualTo("Weapon")
@@ -195,17 +209,20 @@ internal class HeroTest : GameTest() {
     }
 
     @Test
-    fun whenHeroGainsEnoughXp_ShouldGainLevel() {
+    fun `When hero gains enough xp, should gain level which also restores hp`() {
         val mozes = party.getCertainHero("mozes")
+        mozes.takeDamage(45)
         val sb = StringBuilder()
         assertThat(mozes.totalXp).isEqualTo(5)
         assertThat(mozes.xpToInvest).isZero
         assertThat(mozes.getLevel()).isEqualTo(1)
+        assertThat(mozes.getCurrentHp()).isEqualTo(1)
         assertThat(sb).isBlank
         mozes.gainXp(20, sb)
         assertThat(mozes.totalXp).isEqualTo(25)
         assertThat(mozes.xpToInvest).isEqualTo(20)
         assertThat(mozes.getLevel()).isEqualTo(2)
+        assertThat(mozes.getCurrentHp()).isEqualTo(47)
         assertThat(sb.toString().trim()).isEqualTo("Mozes gained a level!")
     }
 
@@ -248,26 +265,175 @@ internal class HeroTest : GameTest() {
     @Test
     fun `When enhancer item is used to equip otherwise impossible item, should not be able to dequip enhancer item`() {
         val mozes = party.getCertainHero("mozes")
-        val sword = InventoryDatabase.createInventoryItem("basic_longsword")
+        val sword = InventoryDatabase.createInventoryItem("basic_shortsword")
         val strengthEnhancer = InventoryDatabase.createInventoryItem("epic_gauntlets_of_might")
 
-        assertThat(mozes.getStatById(StatItemId.STRENGTH).rank).isEqualTo(15)
-        assertThat(mozes.getCalculatedTotalStatOf(StatItemId.STRENGTH)).isEqualTo(15)
-        assertThat(sword.getMinimalAttributeOfStatItemId(StatItemId.STRENGTH)).isEqualTo(17)
+        assertThat(mozes.getStatById(StatItemId.STRENGTH).rank).isEqualTo(10)
+        assertThat(mozes.getCalculatedTotalStatOf(StatItemId.STRENGTH)).isEqualTo(10)
+        assertThat(sword.getMinimalAttributeOfStatItemId(StatItemId.STRENGTH)).isEqualTo(12)
 
         mozes.forceSetInventoryItemFor(InventoryGroup.GLOVES, strengthEnhancer)
 
-        assertThat(mozes.getStatById(StatItemId.STRENGTH).rank).isEqualTo(15)
-        assertThat(mozes.getCalculatedTotalStatOf(StatItemId.STRENGTH)).isEqualTo(18)
-        assertThat(sword.getMinimalAttributeOfStatItemId(StatItemId.STRENGTH)).isEqualTo(17)
+        assertThat(mozes.getStatById(StatItemId.STRENGTH).rank).isEqualTo(10)
+        assertThat(mozes.getCalculatedTotalStatOf(StatItemId.STRENGTH)).isEqualTo(13)
+        assertThat(sword.getMinimalAttributeOfStatItemId(StatItemId.STRENGTH)).isEqualTo(12)
 
         assertThat(mozes.createMessageIfNotAbleToDequip(strengthEnhancer)).isNull()
 
         mozes.forceSetInventoryItemFor(InventoryGroup.WEAPON, sword)
 
-        assertThat(mozes.createMessageIfNotAbleToDequip(strengthEnhancer)).isEqualToIgnoringWhitespace("""
-            Cannot unequip the Gauntlets of Might.
-            The Basic Longsword depends on it.""")
+        assertThat(mozes.createMessageIfNotAbleToDequip(strengthEnhancer))
+            .isEqualToIgnoringWhitespace("""
+                Cannot unequip the Gauntlets of Might.
+                The Basic Shortsword depends on it.""")
+    }
+
+    @Test
+    fun `When hero takes damage, should lose hp from right stats and when zero die`() {
+        val mozes = party.getCertainHero("mozes")
+
+        assertThat(mozes.getCurrentHp()).isEqualTo(46)
+        assertThat(mozes.getAllHpStats()["lvlRank"]).isEqualTo(1)
+        assertThat(mozes.getAllHpStats()["staRank"]).isEqualTo(30)
+        assertThat(mozes.getAllHpStats()["conRank"]).isEqualTo(15)
+        assertThat(mozes.getAllHpStats()["lvlVari"]).isEqualTo(1)
+        assertThat(mozes.getAllHpStats()["staVari"]).isEqualTo(30)
+        assertThat(mozes.getAllHpStats()["conVari"]).isEqualTo(15)
+        assertThat(mozes.isAlive).isTrue
+
+        mozes.takeDamage(10)
+
+        assertThat(mozes.getCurrentHp()).isEqualTo(36)
+        assertThat(mozes.getAllHpStats()["lvlRank"]).isEqualTo(1)
+        assertThat(mozes.getAllHpStats()["staRank"]).isEqualTo(30)
+        assertThat(mozes.getAllHpStats()["conRank"]).isEqualTo(15)
+        assertThat(mozes.getAllHpStats()["lvlVari"]).isEqualTo(0)
+        assertThat(mozes.getAllHpStats()["staVari"]).isEqualTo(21)
+        assertThat(mozes.getAllHpStats()["conVari"]).isEqualTo(15)
+        assertThat(mozes.isAlive).isTrue
+
+        mozes.takeDamage(25)
+
+        assertThat(mozes.getCurrentHp()).isEqualTo(11)
+        assertThat(mozes.getAllHpStats()["lvlRank"]).isEqualTo(1)
+        assertThat(mozes.getAllHpStats()["staRank"]).isEqualTo(30)
+        assertThat(mozes.getAllHpStats()["conRank"]).isEqualTo(15)
+        assertThat(mozes.getAllHpStats()["lvlVari"]).isEqualTo(0)
+        assertThat(mozes.getAllHpStats()["staVari"]).isEqualTo(0)
+        assertThat(mozes.getAllHpStats()["conVari"]).isEqualTo(11)
+        assertThat(mozes.isAlive).isTrue
+
+        mozes.takeDamage(15)
+
+        assertThat(mozes.getCurrentHp()).isEqualTo(0)
+        assertThat(mozes.getAllHpStats()["lvlRank"]).isEqualTo(1)
+        assertThat(mozes.getAllHpStats()["staRank"]).isEqualTo(30)
+        assertThat(mozes.getAllHpStats()["conRank"]).isEqualTo(15)
+        assertThat(mozes.getAllHpStats()["lvlVari"]).isEqualTo(0)
+        assertThat(mozes.getAllHpStats()["staVari"]).isEqualTo(0)
+        assertThat(mozes.getAllHpStats()["conVari"]).isEqualTo(0)
+        assertThat(mozes.isAlive).isFalse
+    }
+
+    @Test
+    fun `When hero recovers part hp, should restore from right stats but not make alive`() {
+        val mozes = party.getCertainHero("mozes")
+        mozes.takeDamage(45)
+
+        assertThat(mozes.getCurrentHp()).isEqualTo(1)
+        assertThat(mozes.getAllHpStats()["lvlRank"]).isEqualTo(1)
+        assertThat(mozes.getAllHpStats()["staRank"]).isEqualTo(30)
+        assertThat(mozes.getAllHpStats()["conRank"]).isEqualTo(15)
+        assertThat(mozes.getAllHpStats()["lvlVari"]).isEqualTo(0)
+        assertThat(mozes.getAllHpStats()["staVari"]).isEqualTo(0)
+        assertThat(mozes.getAllHpStats()["conVari"]).isEqualTo(1)
+
+        mozes.recoverPartHp(20)
+
+        assertThat(mozes.getCurrentHp()).isEqualTo(21)
+        assertThat(mozes.getAllHpStats()["lvlRank"]).isEqualTo(1)
+        assertThat(mozes.getAllHpStats()["staRank"]).isEqualTo(30)
+        assertThat(mozes.getAllHpStats()["conRank"]).isEqualTo(15)
+        assertThat(mozes.getAllHpStats()["lvlVari"]).isEqualTo(0)
+        assertThat(mozes.getAllHpStats()["staVari"]).isEqualTo(6)
+        assertThat(mozes.getAllHpStats()["conVari"]).isEqualTo(15)
+
+        mozes.recoverPartHp(23)
+
+        assertThat(mozes.getCurrentHp()).isEqualTo(44)
+        assertThat(mozes.getAllHpStats()["lvlRank"]).isEqualTo(1)
+        assertThat(mozes.getAllHpStats()["staRank"]).isEqualTo(30)
+        assertThat(mozes.getAllHpStats()["conRank"]).isEqualTo(15)
+        assertThat(mozes.getAllHpStats()["lvlVari"]).isEqualTo(0)
+        assertThat(mozes.getAllHpStats()["staVari"]).isEqualTo(29)
+        assertThat(mozes.getAllHpStats()["conVari"]).isEqualTo(15)
+
+        mozes.recoverPartHp(500)
+
+        assertThat(mozes.getCurrentHp()).isEqualTo(46)
+        assertThat(mozes.getAllHpStats()["lvlRank"]).isEqualTo(1)
+        assertThat(mozes.getAllHpStats()["staRank"]).isEqualTo(30)
+        assertThat(mozes.getAllHpStats()["conRank"]).isEqualTo(15)
+        assertThat(mozes.getAllHpStats()["lvlVari"]).isEqualTo(1)
+        assertThat(mozes.getAllHpStats()["staVari"]).isEqualTo(30)
+        assertThat(mozes.getAllHpStats()["conVari"]).isEqualTo(15)
+
+        assertThat(mozes.isAlive).isTrue
+        mozes.takeDamage(50)
+        assertThat(mozes.isAlive).isFalse
+        mozes.recoverPartHp(10)
+        assertThat(mozes.getCurrentHp()).isEqualTo(10)
+        assertThat(mozes.isAlive).isFalse
+    }
+
+    @Test
+    fun `When hero recovers full hp, should restore full hp but not make alive`() {
+        val mozes = party.getCertainHero("mozes")
+        val luana = heroes.getCertainHero("luana")
+        mozes.takeDamage(45)
+        luana.takeDamage(100)
+
+        assertThat(mozes.getCurrentHp()).isEqualTo(1)
+        assertThat(mozes.isAlive).isTrue
+        assertThat(luana.getCurrentHp()).isEqualTo(0)
+        assertThat(luana.isAlive).isFalse
+
+        mozes.recoverFullHp()
+        luana.recoverFullHp()
+
+        assertThat(mozes.getCurrentHp()).isEqualTo(46)
+        assertThat(mozes.isAlive).isTrue
+        assertThat(luana.getCurrentHp()).isEqualTo(32)
+        assertThat(luana.isAlive).isFalse
+    }
+
+    @Test
+    fun `When hero recovers full stamina, should restore full stamina but not make alive`() {
+        val mozes = party.getCertainHero("mozes")
+        val luana = heroes.getCertainHero("luana")
+        mozes.takeDamage(45)
+        luana.takeDamage(100)
+
+        assertThat(mozes.getCurrentHp()).isEqualTo(1)
+        assertThat(mozes.isAlive).isTrue
+        assertThat(luana.getCurrentHp()).isEqualTo(0)
+        assertThat(luana.isAlive).isFalse
+
+        mozes.recoverFullStamina()
+        luana.recoverFullStamina()
+
+        assertThat(mozes.getCurrentHp()).isEqualTo(31)
+        assertThat(mozes.isAlive).isTrue
+        assertThat(luana.getCurrentHp()).isEqualTo(20)
+        assertThat(luana.isAlive).isFalse
+    }
+
+    @Test
+    fun `When hero has enough XP for something, should return true or false`() {
+        val mozes = party.getCertainHero("mozes")
+        assertThat(mozes.hasEnoughXpFor(1)).isFalse
+        mozes.gainXp(1, StringBuilder())
+        assertThat(mozes.hasEnoughXpFor(1)).isTrue
     }
 
 }
