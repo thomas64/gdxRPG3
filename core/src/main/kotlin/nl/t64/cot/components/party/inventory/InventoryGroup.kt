@@ -52,4 +52,12 @@ enum class InventoryGroup(override val title: String) : SuperEnum {
         }
     }
 
+    fun getDefaultShopAmount(): Int {
+        return when (this) {
+            RESOURCE -> 100
+            POTION -> 20
+            else -> 1
+        }
+    }
+
 }

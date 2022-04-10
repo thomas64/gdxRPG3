@@ -102,6 +102,8 @@ internal class HeroTest : GameTest() {
         assertThat(mozes.getSkillById(SkillItemId.STEALTH).getXpCostForNextLevel(trainerStealth, 0)).isEqualTo(24)
         assertThat(mozes.getSkillById(SkillItemId.STEALTH).getGoldCostForNextLevel(trainerStealth)).isEqualTo(8)
 
+        assertThat(iellwen.getExtraSkillForVisualOf(iellwen.getSkillById(SkillItemId.STEALTH))).isEqualTo(-3)
+
         assertThat(mozes.getInventoryItem(InventoryGroup.WEAPON))
             .hasFieldOrPropertyWithValue("id", "basic_dagger")
         assertThat(mozes.getInventoryItem(InventoryGroup.SHIELD)).isNull()

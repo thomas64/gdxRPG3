@@ -20,8 +20,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.ScreenUtils
-import com.fasterxml.jackson.core.type.TypeReference
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import nl.t64.cot.audio.AudioManager
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.ScreenManager
@@ -220,24 +218,6 @@ object Utils {
                 Gdx.graphics.height / 2f - SMALL_PARCHMENT_HEIGHT / 2f
             )
         }
-    }
-
-    fun <T> readValue(json: String, clazz: Class<T>): HashMap<String, T> {
-        val mapper = jacksonObjectMapper()
-        val valueType = mapper.typeFactory.constructMapType(HashMap::class.java, String::class.java, clazz)
-        return mapper.readValue(json, valueType)
-    }
-
-    inline fun <reified T> readValue(json: String): HashMap<String, T> {
-        val mapper = jacksonObjectMapper()
-        val valueType = mapper.typeFactory.constructMapType(HashMap::class.java, String::class.java, T::class.java)
-        return mapper.readValue(json, valueType)
-    }
-
-    fun <T> readListValue(json: String, clazz: Class<T>): Map<String, List<T>> {
-        val mapper = jacksonObjectMapper()
-        val valueType: TypeReference<Map<String, List<T>>> = object : TypeReference<Map<String, List<T>>>() {}
-        return mapper.readValue(json, valueType)
     }
 
 }

@@ -9,11 +9,11 @@ class Door(
     val keyId: String? = null
 ) {
 
-    lateinit var audio: AudioEvent
-    var width: Float = 0f
-    var height: Float = 0f
-    var isLocked = false
-    var isClosed = false
+    val audio: AudioEvent = type.audioEvent
+    val width: Float = type.width
+    val height: Float = type.height
+    var isLocked: Boolean = keyId != null
+    var isClosed: Boolean = true
 
     fun unlock() {
         isLocked = false

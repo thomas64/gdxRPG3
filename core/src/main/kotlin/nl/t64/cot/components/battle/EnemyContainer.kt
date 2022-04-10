@@ -2,7 +2,6 @@ package nl.t64.cot.components.battle
 
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.components.loot.Loot
-import kotlin.random.Random
 
 
 private const val LEVEL_DIFFERENCE_FOR_WANTING_BATTLE = 5
@@ -10,17 +9,6 @@ private const val LEVEL_DIFFERENCE_FOR_WANTING_BATTLE = 5
 class EnemyContainer(battleId: String) {
 
     private val enemies: List<EnemyItem> = createEnemies(battleId)
-
-    private fun createEnemies(battleId: String): List<EnemyItem> {
-        val enemies: MutableList<EnemyItem> = ArrayList()
-        gameData.battles.getBattlers(battleId).forEach {
-            (0 until it.amount).forEach { _ ->
-                val enemy = EnemyDatabase.createEnemy(it.id)
-                enemies.add(enemy)
-            }
-        }
-        return enemies
-    }
 
     fun getAll(): List<EnemyItem> {
         return enemies
@@ -32,13 +20,7 @@ class EnemyContainer(battleId: String) {
 
     fun getSpoils(): Loot {
         val spoils = mutableMapOf<String, Int>()
-        enemies.forEach { enemy ->
-            enemy.drops.forEach { drop ->
-                if (drop.value >= Random.nextInt(0, 100)) {
-                    spoils[drop.key] = (spoils[drop.key] ?: 0) + 1
-                }
-            }
-        }
+        enemies.forEach { it.addDropsTo(spoils) }
         return Loot(spoils)
     }
 
@@ -46,6 +28,12 @@ class EnemyContainer(battleId: String) {
         val averageEnemies = enemies.map { it.getLevel() }.average()
         val averageHeroes = gameData.party.getAverageLevel()
         return averageEnemies > averageHeroes - LEVEL_DIFFERENCE_FOR_WANTING_BATTLE
+    }
+
+    private fun createEnemies(battleId: String): List<EnemyItem> {
+        return gameData.battles.getBattlers(battleId)
+            .map { it.createEnemyList() }
+            .flatten()
     }
 
 }

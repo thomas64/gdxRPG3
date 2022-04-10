@@ -8,7 +8,9 @@ import kotlin.math.floor
 import kotlin.math.roundToInt
 
 
-class InventoryItem private constructor(
+data class InventoryItem(
+    var amount: Int = 0,
+    val id: String = "",
     val name: String = "",
     val sort: Int = 0,
     val description: List<String> = emptyList(),
@@ -58,22 +60,11 @@ class InventoryItem private constructor(
     private val spellBoost: Boolean = false
 ) {
 
-    lateinit var id: String
-    var amount: Int = 0
     val isStackable: Boolean get() = group.isStackable()
     val isShield: Boolean get() = group == InventoryGroup.SHIELD
 
     fun createCopy(amount: Int): InventoryItem {
-        val itemCopy = InventoryItem(
-            name, sort, description, group, isTwoHanded, skill, price,
-            minIntelligence, minWillpower, minStrength, minDexterity,
-            baseHit, damage, protection, defense, spellBattery, transformation,
-            intelligence, willpower, strength, dexterity, constitution, speed,
-            alchemist, diplomat, healer, loremaster, mechanic, ranger, stealth, thief, troubadour, warrior, wizard,
-            cheatDeath, quickSwitch, spellBoost)
-        itemCopy.id = id
-        itemCopy.amount = amount
-        return itemCopy
+        return copy(amount = amount)
     }
 
     fun getAttributeOfMinimal(minimal: InventoryMinimal): Any {

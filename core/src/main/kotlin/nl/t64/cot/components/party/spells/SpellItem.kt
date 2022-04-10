@@ -8,10 +8,12 @@ import kotlin.math.roundToInt
 private val LEARNING_COSTS = listOf(20, 8, 12, 16, 20, 24, 28, 32, 36, 40)
 private const val MAXIMUM = 10
 
-class SpellItem(
+data class SpellItem(
+    val id: String = "",
     val name: String = "",
     val school: SchoolType = SchoolType.UNKNOWN,
     val sort: Int = 0,
+    var rank: Int = 0,
     private val upgrade: Float = 0f,
     @JsonProperty("min_wizard") val minWizard: Int = 0,
     @JsonProperty("resource") private val requiredResource: ResourceType = ResourceType.GOLD,
@@ -23,17 +25,10 @@ class SpellItem(
     private val description: List<String> = emptyList()
 ) : PersonalityItem {
 
-    lateinit var id: String
-    var rank: Int = 0
     private var bonus: Int = 0
 
     fun createCopy(rank: Int): SpellItem {
-        val spellCopy = SpellItem(
-            name, school, sort, upgrade, minWizard, requiredResource,
-            staminaCost, range, numberOfTargets, target, damage, description)
-        spellCopy.id = id
-        spellCopy.rank = rank
-        return spellCopy
+        return copy(rank = rank)
     }
 
     override fun getTotalDescription(): String {

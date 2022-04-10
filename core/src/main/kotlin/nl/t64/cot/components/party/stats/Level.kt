@@ -1,19 +1,17 @@
 package nl.t64.cot.components.party.stats
 
+import kotlin.math.abs
 import kotlin.math.roundToInt
 
 
 private const val MAXIMUM = 40
 
-class Level(rank: Int = 1) : StatItem() {
-
+class Level(
+    var rank: Int = 1,
+) {
+    var variable: Int = rank
     var totalXp: Int = getTotalXpForLevel(rank.toFloat())
     var xpToInvest: Int = 0
-
-    init {
-        super.rank = rank
-        super.variable = rank
-    }
 
     fun getXpDeltaBetweenLevels(): Int {
         val nextLevel = rank + 1
@@ -44,6 +42,25 @@ class Level(rank: Int = 1) : StatItem() {
 
     fun takeXpToInvest(xpCost: Int) {
         xpToInvest -= xpCost
+    }
+
+    fun takeDamage(damage: Int): Int? {
+        variable -= damage
+        if (variable < 0) {
+            val remainingDamage = abs(variable)
+            variable = 0
+            return remainingDamage
+        }
+        return null
+    }
+
+    fun restorePart(healPoints: Int) {
+        variable += healPoints
+        if (variable > rank) restore()
+    }
+
+    fun restore() {
+        variable = rank
     }
 
     private fun getTotalXpForLevel(level: Float): Int {

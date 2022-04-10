@@ -5,9 +5,11 @@ import nl.t64.cot.components.party.skills.SkillContainer
 import nl.t64.cot.components.party.spells.SchoolType
 import nl.t64.cot.components.party.spells.SpellContainer
 import nl.t64.cot.components.party.stats.StatContainer
+import kotlin.random.Random
 
 
-class EnemyItem(
+data class EnemyItem(
+    val id: String = "",
     val name: String = "",
     private val school: SchoolType = SchoolType.NONE,
     private val stats: StatContainer = StatContainer(),
@@ -18,14 +20,24 @@ class EnemyItem(
     val drops: Map<String, Int> = emptyMap()
 ) {
 
-    lateinit var id: String
+    fun getLevel(): Int = stats.levelRank
 
-    fun createCopy(): EnemyItem {
-        val enemyCopy = EnemyItem(name, school, stats, skills, spells, inventory, xp, drops)
-        enemyCopy.id = id
-        return enemyCopy
+    fun addDropsTo(spoils: MutableMap<String, Int>) {
+        drops.forEach { it.addPossibleDropTo(spoils) }
     }
 
-    fun getLevel(): Int = stats.levelRank
+    private fun Map.Entry<String, Int>.addPossibleDropTo(spoils: MutableMap<String, Int>) {
+        if (value >= Random.nextInt(0, 100)) {
+            addDropTo(spoils)
+        }
+    }
+
+    private fun Map.Entry<String, Int>.addDropTo(spoils: MutableMap<String, Int>) {
+        spoils[key] = (spoils[key] ?: 0) + getDropAmount()
+    }
+
+    private fun Map.Entry<String, Int>.getDropAmount(): Int {
+        return if (key == "gold") Random.nextInt(1, getLevel()) else 1
+    }
 
 }

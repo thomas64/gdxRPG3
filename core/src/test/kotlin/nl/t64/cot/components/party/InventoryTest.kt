@@ -64,13 +64,7 @@ internal class InventoryTest : GameTest() {
         val potion = InventoryDatabase.createInventoryItem(POTION)
         val copyPotion = potion.createCopy(potion.amount)
         assertThat(potion.hasSameIdAs(copyPotion)).isTrue
-        assertThat(potion).isNotEqualTo(copyPotion)
-        potion.id = "aap"
-        assertThat(potion.id).isEqualTo("aap")
-        assertThat(copyPotion.id).isEqualTo("healing_potion")
-        copyPotion.id = "pipo"
-        assertThat(potion.id).isEqualTo("aap")
-        assertThat(copyPotion.id).isEqualTo("pipo")
+        assertThat(potion).isNotSameAs(copyPotion)
     }
 
     @Test

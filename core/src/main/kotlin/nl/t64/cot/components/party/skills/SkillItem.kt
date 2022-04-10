@@ -7,22 +7,18 @@ import kotlin.math.roundToInt
 private val TRAINING_COSTS = listOf(20, 8, 12, 16, 20, 24, 28, 32, 36, 40)
 private const val MAXIMUM = 10
 
-class SkillItem(
+data class SkillItem(
+    val id: SkillItemId = SkillItemId.BITE,                 // Value will be replaced when constructed.
+    val name: String = "",
+    var rank: Int = 0,
     private val upgrade: Float = 0f,                        // Constant value for upgrading formula.
     private val description: List<String> = emptyList()
 ) : PersonalityItem {
 
-    lateinit var id: SkillItemId
-    lateinit var name: String
-    var rank: Int = 0
     var bonus: Int = 0
 
     fun createCopy(rank: Int): SkillItem {
-        val skillCopy = SkillItem(upgrade, description)
-        skillCopy.id = id
-        skillCopy.name = name
-        skillCopy.rank = rank
-        return skillCopy
+        return copy(rank = rank)
     }
 
     fun isWeaponSkill(): Boolean {

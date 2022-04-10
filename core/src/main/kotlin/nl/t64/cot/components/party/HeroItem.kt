@@ -18,7 +18,8 @@ import nl.t64.cot.constants.Constant
 import kotlin.math.roundToInt
 
 
-class HeroItem(
+data class HeroItem(
+    val id: String = "",
     val name: String = "",
     val school: SchoolType = SchoolType.NONE,
     private val stats: StatContainer = StatContainer(),
@@ -27,7 +28,6 @@ class HeroItem(
     private val inventory: EquipContainer = EquipContainer()
 ) {
 
-    lateinit var id: String
     var isAlive = true
     var hasBeenRecruited = false
     val isPlayer: Boolean get() = id == Constant.PLAYER_ID

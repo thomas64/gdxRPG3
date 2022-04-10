@@ -9,7 +9,8 @@ import nl.t64.cot.components.loot.Loot
 
 private val DEFAULT_STATE = QuestState.UNKNOWN
 
-class QuestGraph(
+data class QuestGraph(
+    val id: String = "",
     val title: String = "",
     val entityId: String = "",
     val summary: String = "",
@@ -17,7 +18,6 @@ class QuestGraph(
     val linkedWith: String? = null,
     val tasks: Map<String, QuestTask> = emptyMap()
 ) {
-    lateinit var id: String
     var currentState: QuestState = DEFAULT_STATE
     var isFailed: Boolean = false
 

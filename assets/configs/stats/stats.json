@@ -3,6 +3,7 @@
     "maximum"    : 30,
     "upgrade"    : 0.12,
     "description": [
+      "Increases damage-to-inflict with intelligence based weapons in combat.",
       "Increases damage-to-inflict with offensive magic spells in combat.",
       "Each rank in Intelligence increases spell damage by 5%.",
       "Also, each 6 ranks in Intelligence increases AP by 1."
@@ -20,7 +21,7 @@
     "maximum"    : 30,
     "upgrade"    : 0.12,
     "description": [
-      "Increases damage-to-inflict with weapons in hand-to-hand combat.",
+      "Increases damage-to-inflict with strength based weapons in combat.",
       "Each rank in Strength increases Damage by 5%.",
       "Also, each 6 ranks in Strength increases AP by 1."
     ]
@@ -29,7 +30,7 @@
     "maximum"    : 30,
     "upgrade"    : 0.12,
     "description": [
-      "Increases damage-to-inflict with ranged weapons in combat.",
+      "Increases damage-to-inflict with dexterity based weapons in combat.",
       "Each rank in Dexterity increases Damage by 5%.",
       "Also, each 6 ranks in Dexterity increases AP by 1."
     ]

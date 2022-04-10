@@ -5,25 +5,20 @@ import kotlin.math.abs
 import kotlin.math.roundToInt
 
 
-open class StatItem(
-    private val maximum: Int = 0,       // Constant value for maximum rank possible.
-    private val upgrade: Float = 0f,    // Constant value for upgrading formula.
+data class StatItem(
+    val id: StatItemId = StatItemId.INTELLIGENCE,   // Value will be replaced when constructed.
+    val name: String = "",
+    var rank: Int = 0,
+    var variable: Int = 0,
+    private val maximum: Int = 0,                   // Constant value for maximum rank possible.
+    private val upgrade: Float = 0f,                // Constant value for upgrading formula.
     private val description: List<String> = emptyList()
 ) : PersonalityItem {
 
-    lateinit var id: StatItemId
-    lateinit var name: String
-    var rank: Int = 0
-    var variable: Int = 0
     var bonus: Int = 0
 
     fun createCopy(rank: Int): StatItem {
-        val statCopy = StatItem(maximum, upgrade, description)
-        statCopy.id = id
-        statCopy.name = name
-        statCopy.rank = rank
-        statCopy.variable = rank
-        return statCopy
+        return copy(rank = rank, variable = rank)
     }
 
     override fun getTotalDescription(): String {
