@@ -35,6 +35,9 @@ import nl.t64.cot.screens.school.SchoolScreen
 import nl.t64.cot.screens.shop.ShopScreen
 import nl.t64.cot.screens.world.conversation.ConversationDialog
 import nl.t64.cot.screens.world.conversation.ConversationObserver
+import nl.t64.cot.screens.world.debug.DebugBox
+import nl.t64.cot.screens.world.debug.DebugRenderer
+import nl.t64.cot.screens.world.debug.GridRenderer
 import nl.t64.cot.screens.world.entity.Entity
 import nl.t64.cot.screens.world.entity.GraphicsPlayer
 import nl.t64.cot.screens.world.entity.InputPlayer
@@ -63,6 +66,8 @@ class WorldScreen : Screen,
     private val messageTooltip = MessageTooltip()
 
     private val player = Entity(Constant.PLAYER_ID, InputPlayer(multiplexer), PhysicsPlayer(), GraphicsPlayer())
+    private val gridRenderer = GridRenderer(camera)
+    private val debugRenderer = DebugRenderer(camera, player)
     private val debugBox = DebugBox(player)
     private val buttonsBox = ButtonBox()
 
@@ -72,10 +77,6 @@ class WorldScreen : Screen,
     private lateinit var lootList: List<Entity>
     private lateinit var doorList: List<Entity>
 
-    private var showGrid = false
-    private var showObjects = false
-    private var showDebug = false
-
     init {
         brokerManager.questObservers.addObserver(this)
         brokerManager.componentObservers.addObserver(this)
@@ -84,7 +85,7 @@ class WorldScreen : Screen,
         brokerManager.lootObservers.addObserver(this)
     }
 
-    // MapObserver /////////////////////////////////////////////////////////////////////////////////////////////////////
+    //region MapObserver ///////////////////////////////////////////////////////////////////////////////////////////////
 
     override fun onNotifyFadeOut(actionAfterFade: () -> Unit, transitionColor: Color) {
         fadeOut(actionAfterFade, transitionColor)
@@ -114,10 +115,11 @@ class WorldScreen : Screen,
             fadeOut({ screenManager.setScreen(ScreenType.valueOf(cutsceneId.uppercase())) }, Color.BLACK)
         }
     }
+    //endregion
 
-    // ComponentObserver ///////////////////////////////////////////////////////////////////////////////////////////////
+    //region ComponentObserver /////////////////////////////////////////////////////////////////////////////////////////
 
-    override fun onNotifyShowConversationDialog(conversationId: String, npcEntity: Entity) {
+    override fun onNotifyShowConversationDialogFromNpc(conversationId: String, npcEntity: Entity) {
         currentNpcEntity = npcEntity
         player.resetInput()
         gameState = GameState.DIALOG
@@ -125,11 +127,21 @@ class WorldScreen : Screen,
         conversationDialog.show()
     }
 
-    override fun onNotifyShowConversationDialog(conversationId: String, entityId: String) {
+    override fun onNotifyShowConversationDialogFromEvent(conversationId: String, entityId: String) {
+        if (entityId != Constant.PLAYER_ID) {
+            currentNpcEntity = getEntityBasedOnEventData(conversationId, entityId)
+        }
         player.resetInput()
         gameState = GameState.DIALOG
         conversationDialog.loadConversation(conversationId, entityId)
         conversationDialog.show()
+    }
+
+    private fun getEntityBasedOnEventData(conversationId: String, entityId: String): Entity {
+        return npcEntities
+            .filter { it.id == entityId }
+            .filter { it.getConversationId() == conversationId }
+            .first()
     }
 
     override fun onNotifyShowNoteDialog(noteId: String) {
@@ -166,14 +178,16 @@ class WorldScreen : Screen,
             fadeOut({ BattleScreen.load(battleId, this) }, Color.BLACK)
         }
     }
+    //endregion
 
-    // PartyObserver ///////////////////////////////////////////////////////////////////////////////////////////////////
+    //region PartyObserver /////////////////////////////////////////////////////////////////////////////////////////////
 
     override fun onNotifyHeroDismissed() {
         partyMembers = PartyMembersLoader(player).loadPartyMembers()
     }
+    //endregion
 
-    // LootObserver ////////////////////////////////////////////////////////////////////////////////////////////////////
+    //region LootObserver //////////////////////////////////////////////////////////////////////////////////////////////
 
     override fun onNotifySpoilsUpdated() {
         onNotifyLootTaken()
@@ -198,8 +212,9 @@ class WorldScreen : Screen,
 //        val conversation = gameData.conversations.getConversationById(conversationId)
 //        conversation.currentPhraseId = Constant.PHRASE_ID_QUEST_ACCEPT
     }
+    //endregion
 
-    // ConversationObserver ////////////////////////////////////////////////////////////////////////////////////////////
+    //region ConversationObserver //////////////////////////////////////////////////////////////////////////////////////
 
     override fun onNotifyExitConversation() {
         conversationDialog.hideWithFade()
@@ -259,8 +274,9 @@ class WorldScreen : Screen,
         gameState = GameState.BATTLE
         fadeOut({ BattleScreen.load(battleId, this) }, Color.BLACK)
     }
+    //endregion
 
-    // BattleObserver //////////////////////////////////////////////////////////////////////////////////////////////////
+    //region BattleObserver ////////////////////////////////////////////////////////////////////////////////////////////
 
     override fun onNotifyBattleWon(battleId: String, spoils: Loot, levelUpMessage: String?) {
         screenManager.setScreen(ScreenType.WORLD)
@@ -271,29 +287,43 @@ class WorldScreen : Screen,
         refreshNpcEntitiesListAfterBattle(battleId)
         partyMembers = PartyMembersLoader(player).loadPartyMembers()
         if (!spoils.isTaken()) {
-            gameData.spoils.addSpoil(battleId, Spoil(mapManager.currentMap.mapTitle,
-                                                     player.position.x, player.position.y, spoils))
-            doBeforeLoadScreen()
-            SpoilsScreen.load(spoils, levelUpMessage)
+            loadSpoilsDialog(battleId, spoils, levelUpMessage)
         } else {
             levelUpMessage?.let { messageDialog.show(levelUpMessage, AudioEvent.SE_LEVELUP) }
         }
     }
 
+    private fun loadSpoilsDialog(battleId: String, spoils: Loot, levelUpMessage: String?) {
+        val spoil = Spoil(mapManager.currentMap.mapTitle, player.position.x, player.position.y, spoils)
+        gameData.spoils.addSpoil(battleId, spoil)
+        doBeforeLoadScreen()
+        SpoilsScreen.load(spoils, levelUpMessage)
+    }
+
     private fun refreshNpcEntitiesListAfterBattle(battleId: String) {
         if (currentNpcEntity.isNpc()) {
-            val remainingNpcEntities = mutableListOf<Entity>()
-            npcEntities.forEach {
-                if (it.isNpc() && it.getConversationId() == battleId) {
-                    brokerManager.blockObservers.removeObserver(it)
-                } else {
-                    remainingNpcEntities.add(it)
-                }
-            }
-            npcEntities = remainingNpcEntities
+            npcEntities = getRefreshedListAfterConversationBattle(battleId)
         } else {
-            npcEntities = npcEntities.filter { it != currentNpcEntity }
+            npcEntities = getRefreshedListAfterNormalBattle()
         }
+    }
+
+    private fun getRefreshedListAfterConversationBattle(battleId: String): List<Entity> {
+        val remainingNpcEntities = mutableListOf<Entity>()
+        npcEntities.forEach { it.removeFromBlockersOrAddTo(remainingNpcEntities, battleId) }
+        return remainingNpcEntities
+    }
+
+    private fun Entity.removeFromBlockersOrAddTo(remainingNpcEntities: MutableList<Entity>, battleId: String) {
+        if (isNpc() && getConversationId() == battleId) {
+            brokerManager.blockObservers.removeObserver(this)
+        } else {
+            remainingNpcEntities.add(this)
+        }
+    }
+
+    private fun getRefreshedListAfterNormalBattle(): List<Entity> {
+        return npcEntities.filter { it != currentNpcEntity }
     }
 
     override fun onNotifyBattleLost() {
@@ -305,8 +335,7 @@ class WorldScreen : Screen,
         mapManager.loadMapAfterFleeing(mapTitle)
         screenManager.setScreen(ScreenType.WORLD)
     }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //endregion
 
     override fun show() {
         gameState = GameState.RUNNING
@@ -344,9 +373,9 @@ class WorldScreen : Screen,
         }
         updateCameraPosition()
         mapRenderer.renderAll(player.position) { renderEntities() }
-        renderGrid()
-        renderObjects()
-        updateDebugBox(dt)
+        gridRenderer.possibleRender()
+        debugRenderer.possibleRenderObjects(doorList, lootList, npcEntities, partyMembers)
+        debugBox.possibleUpdate(dt)
         buttonsBox.update(dt)
         partyWindow.update(dt)
         conversationDialog.update(dt)
@@ -450,9 +479,9 @@ class WorldScreen : Screen,
         return WorldScreenListener({ doBeforeLoadScreen() },
                                    { showHidePartyWindow() },
                                    { openMiniMap() },
-                                   { setShowGrid() },
-                                   { setShowObjects() },
-                                   { setShowDebug() })
+                                   { gridRenderer.setShowGrid() },
+                                   { debugRenderer.setShowObjects() },
+                                   { debugBox.setShowDebug() })
     }
 
     private val isInTransition: Boolean
@@ -486,63 +515,11 @@ class WorldScreen : Screen,
         partyWindow.dispose()
         conversationDialog.dispose()
         messageDialog.dispose()
+        debugRenderer.dispose()
+        gridRenderer.dispose()
         debugBox.dispose()
         buttonsBox.dispose()
         stage.dispose()
-    }
-
-    private fun setShowGrid() {
-        if (Utils.preferenceManager.isInDebugMode) showGrid = !showGrid
-    }
-
-    private fun setShowObjects() {
-        if (Utils.preferenceManager.isInDebugMode) showObjects = !showObjects
-    }
-
-    private fun setShowDebug() {
-        if (Utils.preferenceManager.isInDebugMode) showDebug = !showDebug
-    }
-
-    private fun renderGrid() {
-        if (showGrid) {
-            shapeRenderer.projectionMatrix = camera.combined
-            shapeRenderer.color = Color.DARK_GRAY
-            shapeRenderer.begin(ShapeRenderer.ShapeType.Line)
-
-            val mapPixelWidth = mapManager.currentMap.pixelWidth
-            val mapPixelHeight = mapManager.currentMap.pixelHeight
-            var x = 0f
-            while (x < mapPixelWidth) {
-                shapeRenderer.line(x, 0f, x, mapPixelHeight)
-                x += Constant.TILE_SIZE
-            }
-            var y = 0f
-            while (y < mapPixelHeight) {
-                shapeRenderer.line(0f, y, mapPixelWidth, y)
-                y += Constant.TILE_SIZE
-            }
-            shapeRenderer.end()
-        }
-    }
-
-    private fun renderObjects() {
-        if (showObjects) {
-            shapeRenderer.projectionMatrix = camera.combined
-            shapeRenderer.begin(ShapeRenderer.ShapeType.Line)
-            player.debug(shapeRenderer)
-            doorList.forEach { it.debug(shapeRenderer) }
-            lootList.forEach { it.debug(shapeRenderer) }
-            npcEntities.forEach { it.debug(shapeRenderer) }
-            partyMembers.forEach { it.debug(shapeRenderer) }
-            mapManager.currentMap.debug(shapeRenderer)
-            shapeRenderer.end()
-        }
-    }
-
-    private fun updateDebugBox(dt: Float) {
-        if (showDebug) {
-            debugBox.update(dt)
-        }
     }
 
 }

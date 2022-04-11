@@ -1,4 +1,4 @@
-package nl.t64.cot.screens.world
+package nl.t64.cot.screens.world.debug
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.Align
 import nl.t64.cot.GdxRpg3
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
+import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.world.entity.Entity
 
@@ -18,16 +19,30 @@ import nl.t64.cot.screens.world.entity.Entity
 private const val TABLE_WIDTH = 200f
 private const val SECOND_COLUMN_WIDTH = 100f
 
-internal class DebugBox(private val player: Entity) {
-
+internal class DebugBox(
+    private val player: Entity
+) {
     private val table: Table = createTable()
     private val stage: Stage = Stage().apply { addActor(table) }
+    private var showDebug = false
 
     fun dispose() {
         stage.dispose()
     }
 
-    fun update(dt: Float) {
+    fun setShowDebug() {
+        if (preferenceManager.isInDebugMode) {
+            showDebug = !showDebug
+        }
+    }
+
+    fun possibleUpdate(dt: Float) {
+        if (showDebug) {
+            update(dt)
+        }
+    }
+
+    private fun update(dt: Float) {
         table.clear()
 
         table.add("FPS:")

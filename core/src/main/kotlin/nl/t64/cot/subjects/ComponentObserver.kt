@@ -7,8 +7,8 @@ import nl.t64.cot.screens.world.entity.Entity
 
 interface ComponentObserver {
 
-    fun onNotifyShowConversationDialog(conversationId: String, npcEntity: Entity)
-    fun onNotifyShowConversationDialog(conversationId: String, entityId: String)
+    fun onNotifyShowConversationDialogFromNpc(conversationId: String, npcEntity: Entity)
+    fun onNotifyShowConversationDialogFromEvent(conversationId: String, entityId: String)
     fun onNotifyShowNoteDialog(noteId: String)
     fun onNotifyShowFindDialog(loot: Loot, event: AudioEvent, message: String)
     fun onNotifyShowFindDialog(loot: Loot, event: AudioEvent)

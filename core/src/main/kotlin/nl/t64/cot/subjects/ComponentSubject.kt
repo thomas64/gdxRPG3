@@ -22,11 +22,11 @@ class ComponentSubject {
     }
 
     fun notifyShowConversationDialog(conversationId: String, npcEntity: Entity) {
-        observers.forEach { it.onNotifyShowConversationDialog(conversationId, npcEntity) }
+        observers.forEach { it.onNotifyShowConversationDialogFromNpc(conversationId, npcEntity) }
     }
 
     fun notifyShowConversationDialog(conversationId: String, entityId: String) {
-        observers.forEach { it.onNotifyShowConversationDialog(conversationId, entityId) }
+        observers.forEach { it.onNotifyShowConversationDialogFromEvent(conversationId, entityId) }
     }
 
     fun notifyShowNoteDialog(noteId: String) {
