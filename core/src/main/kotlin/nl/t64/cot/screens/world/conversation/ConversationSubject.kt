@@ -13,10 +13,6 @@ class ConversationSubject(private val observer: ConversationObserver) {
         observer.onNotifyShowMessageTooltip(message)
     }
 
-    fun notifyShowLevelUpDialog(message: String) {
-        observer.onNotifyShowLevelUpDialog(message)
-    }
-
     fun notifyLoadShop() {
         observer.onNotifyLoadShop()
     }

@@ -145,7 +145,7 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
         actorsStage.addAction(actions[actionId])
     }
 
-    override fun onNotifyBattleWon(battleId: String, spoils: Loot, levelUpMessage: String?) {
+    override fun onNotifyBattleWon(battleId: String, spoils: Loot) {
         throw IllegalStateException("Implement this method in child.")
     }
 

@@ -108,17 +108,30 @@ class BattleScreen : Screen {
         val totalXpWon = enemies.getTotalXp()
         gameData.party.gainXp(totalXpWon, levelUpMessage)
         val finalLevelUpMessage = levelUpMessage.toString().trim().ifEmpty { null }
+        val winMessage = createWinMessage(totalXpWon, finalLevelUpMessage)
 
+        val messageDialog = MessageDialog(winMessage)
+        messageDialog.setActionAfterHide { battleWonExitScreen() }
+        messageDialog.show(stage, getAudio(finalLevelUpMessage))
+    }
+
+    private fun createWinMessage(totalXpWon: Int, finalLevelUpMessage: String?): String {
         val xpMessage = """
             The enemy is defeated!
             Party gained $totalXpWon XP.""".trimIndent()
-        val messageDialog = MessageDialog(xpMessage)
-        messageDialog.setActionAfterHide { battleWonExitScreen(finalLevelUpMessage) }
-        messageDialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT)
+        return finalLevelUpMessage
+            ?.let { xpMessage + System.lineSeparator() + System.lineSeparator() + it }
+            ?: xpMessage
     }
 
-    private fun battleWonExitScreen(levelUpMessage: String?) {
-        exitScreen { battleObserver.notifyBattleWon(battleId, enemies.getSpoils(), levelUpMessage) }
+    private fun getAudio(levelUpMessage: String?): AudioEvent {
+        return levelUpMessage
+            ?.let { AudioEvent.SE_LEVELUP }
+            ?: AudioEvent.SE_CONVERSATION_NEXT
+    }
+
+    private fun battleWonExitScreen() {
+        exitScreen { battleObserver.notifyBattleWon(battleId, enemies.getSpoils()) }
     }
 
     private fun fleeBattle() {

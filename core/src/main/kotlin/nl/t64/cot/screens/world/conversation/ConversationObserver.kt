@@ -10,9 +10,6 @@ interface ConversationObserver {
     fun onNotifyShowMessageTooltip(message: String): Unit =
         throw IllegalStateException("Implement this method in child.")
 
-    fun onNotifyShowLevelUpDialog(message: String): Unit =
-        throw IllegalStateException("Implement this method in child.")
-
     fun onNotifyLoadShop(): Unit =
         throw IllegalStateException("Implement this method in child.")
 

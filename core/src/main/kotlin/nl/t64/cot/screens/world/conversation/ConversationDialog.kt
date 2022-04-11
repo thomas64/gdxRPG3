@@ -367,13 +367,14 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun receiveXp(reward: Loot, nextId: String) {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_REWARD)
         val levelUpMessage = StringBuilder()
         gameData.party.gainXp(reward.xp, levelUpMessage)
         val finalMessage = levelUpMessage.toString().trim()
         if (finalMessage.isEmpty()) {
+            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_REWARD)
             conversationObserver.notifyShowMessageTooltip("+ ${reward.xp} XP")
         } else {
+            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_LEVELUP)
             conversationObserver.notifyShowMessageTooltip("+ ${reward.xp} XP" + System.lineSeparator() + finalMessage)
         }
         reward.clearXp()

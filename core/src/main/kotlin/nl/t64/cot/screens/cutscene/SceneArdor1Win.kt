@@ -53,7 +53,7 @@ class SceneArdor1Win : CutsceneScreen() {
         return Actions.run { exitScreen() }
     }
 
-    override fun onNotifyBattleWon(battleId: String, spoils: Loot, levelUpMessage: String?) {
+    override fun onNotifyBattleWon(battleId: String, spoils: Loot) {
         screenManager.setScreen(ScreenType.SCENE_GAME_ENDING)
     }
 

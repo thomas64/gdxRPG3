@@ -226,11 +226,6 @@ class WorldScreen : Screen,
         messageTooltip.show(message, stage)
     }
 
-    override fun onNotifyShowLevelUpDialog(message: String) {
-        player.resetInput()
-        messageDialog.show(message, AudioEvent.SE_LEVELUP)
-    }
-
     override fun onNotifyLoadShop() {
         conversationDialog.hide()
         show()
@@ -278,7 +273,7 @@ class WorldScreen : Screen,
 
     //region BattleObserver ////////////////////////////////////////////////////////////////////////////////////////////
 
-    override fun onNotifyBattleWon(battleId: String, spoils: Loot, levelUpMessage: String?) {
+    override fun onNotifyBattleWon(battleId: String, spoils: Loot) {
         screenManager.setScreen(ScreenType.WORLD)
         if (gameData.quests.contains(battleId)) {
             gameData.quests.getQuestById(battleId).setKillTaskComplete()
@@ -287,24 +282,21 @@ class WorldScreen : Screen,
         refreshNpcEntitiesListAfterBattle(battleId)
         partyMembers = PartyMembersLoader(player).loadPartyMembers()
         if (!spoils.isTaken()) {
-            loadSpoilsDialog(battleId, spoils, levelUpMessage)
-        } else {
-            levelUpMessage?.let { messageDialog.show(levelUpMessage, AudioEvent.SE_LEVELUP) }
+            loadSpoilsDialog(battleId, spoils)
         }
     }
 
-    private fun loadSpoilsDialog(battleId: String, spoils: Loot, levelUpMessage: String?) {
+    private fun loadSpoilsDialog(battleId: String, spoils: Loot) {
         val spoil = Spoil(mapManager.currentMap.mapTitle, player.position.x, player.position.y, spoils)
         gameData.spoils.addSpoil(battleId, spoil)
         doBeforeLoadScreen()
-        SpoilsScreen.load(spoils, levelUpMessage)
+        SpoilsScreen.load(spoils)
     }
 
     private fun refreshNpcEntitiesListAfterBattle(battleId: String) {
-        if (currentNpcEntity.isNpc()) {
-            npcEntities = getRefreshedListAfterConversationBattle(battleId)
-        } else {
-            npcEntities = getRefreshedListAfterNormalBattle()
+        npcEntities = when (currentNpcEntity.isNpc()) {
+            true -> getRefreshedListAfterConversationBattle(battleId)
+            false -> getRefreshedListAfterNormalBattle()
         }
     }
 
