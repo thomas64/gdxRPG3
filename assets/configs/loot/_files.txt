@@ -1,0 +1,4 @@
+chest01.json
+conversation01.json
+quest01.json
+sparkle01.json

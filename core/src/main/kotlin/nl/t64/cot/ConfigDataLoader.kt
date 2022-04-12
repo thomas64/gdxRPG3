@@ -37,6 +37,10 @@ object ConfigDataLoader {
         return loadConfigData<Event>("events")
     }
 
+    fun createLoot(): Map<String, Loot> {
+        return loadConfigData<Loot>("loot")
+    }
+
     fun createNotes(): Map<String, ConversationGraph> {
         return loadConfigData<ConversationGraph>("notes")
     }
@@ -64,15 +68,6 @@ object ConfigDataLoader {
             }
     }
 
-    fun createLoot(): Map<String, Loot> {
-        val sparks = getListWithFilenames("loot", "_files_sparkles.txt")
-        val chests = getListWithFilenames("loot", "_files_chests.txt")
-        val quests = getListWithFilenames("loot", "_files_quests.txt")
-        val convrs = getListWithFilenames("loot", "_files_conversations.txt")
-        val listWithFilenames = listOf(sparks, chests, quests, convrs).flatten()
-        return loadConfigData("loot", listWithFilenames)
-    }
-
     fun createHeroes(): MutableMap<String, HeroItem> {
         val json = readString("characters", "hero1.json")
         return readValue<HeroItem>(json)
@@ -98,35 +93,30 @@ object ConfigDataLoader {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private inline fun <reified T> loadConfigData(path: String): Map<String, T> {
-        val listWithFilenames = getListWithFilenames(path, "_files.txt")
-        return loadConfigData(path, listWithFilenames)
-    }
-
-    private fun getListWithFilenames(path: String, filename: String): List<String> {
-        return readString(path, filename)
-            .split(System.lineSeparator())
-            .filter { it.isNotBlank() }
-    }
-
-    private inline fun <reified T> loadConfigData(path: String, listWithFilenames: List<String>): Map<String, T> {
-        return listWithFilenames
+        return getListWithFilenames(path)
             .map { readString(path, it) }
             .map { readValue<T>(it) }
             .flatMap { it.toList() }
             .toMap()
     }
 
+    private fun getListWithFilenames(path: String): List<String> {
+        return readString(path, "_files.txt")
+            .split(System.lineSeparator())
+            .filter { it.isNotBlank() }
+    }
+
     private fun readString(path: String, filename: String): String {
         return Gdx.files.internal("configs/${path}/${filename}").readString()
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    private inline fun <reified T> readValue(json: String): HashMap<String, T> {
+    private inline fun <reified T> readValue(json: String): Map<String, T> {
         val mapper = jacksonObjectMapper()
-        val valueType = mapper.typeFactory.constructMapType(HashMap::class.java, String::class.java, T::class.java)
+        val valueType = mapper.typeFactory.constructMapType(Map::class.java, String::class.java, T::class.java)
         return mapper.readValue(json, valueType)
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun <T> readValue(json: String, clazz: Class<T>): HashMap<String, T> {
         val mapper = jacksonObjectMapper()
@@ -136,7 +126,7 @@ object ConfigDataLoader {
 
     private fun <T> readListValue(json: String, clazz: Class<T>): Map<String, List<T>> {
         val mapper = jacksonObjectMapper()
-        val valueType: TypeReference<Map<String, List<T>>> = object : TypeReference<Map<String, List<T>>>() {}
+        val valueType = object : TypeReference<Map<String, List<T>>>() {}
         return mapper.readValue(json, valueType)
     }
 
