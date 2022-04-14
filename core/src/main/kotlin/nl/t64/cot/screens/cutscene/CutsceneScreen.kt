@@ -138,7 +138,6 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
     }
 
     override fun onNotifyExitConversation() {
-        conversationDialog.hideWithFade()
         Gdx.input.inputProcessor = actorsStage
         Utils.setGamepadInputProcessor(actorsStage)
         actionId++

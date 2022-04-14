@@ -5,6 +5,7 @@ import com.badlogic.gdx.InputMultiplexer
 import com.badlogic.gdx.Screen
 import com.badlogic.gdx.ai.pfa.DefaultGraphPath
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.Stage
@@ -23,16 +24,11 @@ import nl.t64.cot.components.loot.Spoil
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.GameState
 import nl.t64.cot.constants.ScreenType
-import nl.t64.cot.screens.academy.AcademyScreen
 import nl.t64.cot.screens.battle.BattleObserver
 import nl.t64.cot.screens.battle.BattleScreen
 import nl.t64.cot.screens.inventory.tooltip.MessageTooltip
 import nl.t64.cot.screens.loot.FindScreen
-import nl.t64.cot.screens.loot.ReceiveScreen
-import nl.t64.cot.screens.loot.RewardScreen
 import nl.t64.cot.screens.loot.SpoilsScreen
-import nl.t64.cot.screens.school.SchoolScreen
-import nl.t64.cot.screens.shop.ShopScreen
 import nl.t64.cot.screens.world.conversation.ConversationDialog
 import nl.t64.cot.screens.world.conversation.ConversationObserver
 import nl.t64.cot.screens.world.debug.DebugBox
@@ -217,46 +213,13 @@ class WorldScreen : Screen,
     //region ConversationObserver //////////////////////////////////////////////////////////////////////////////////////
 
     override fun onNotifyExitConversation() {
-        conversationDialog.hideWithFade()
         show()
+        doBeforeLoadScreen()
     }
 
     // also QuestObserver
     override fun onNotifyShowMessageTooltip(message: String) {
         messageTooltip.show(message, stage)
-    }
-
-    override fun onNotifyLoadShop() {
-        conversationDialog.hide()
-        show()
-        doBeforeLoadScreen()
-        ShopScreen.load(currentNpcEntity.id, currentNpcEntity.getConversationId())
-    }
-
-    override fun onNotifyLoadAcademy() {
-        conversationDialog.hide()
-        show()
-        doBeforeLoadScreen()
-        AcademyScreen.load(currentNpcEntity.id, currentNpcEntity.getConversationId())
-    }
-
-    override fun onNotifyLoadSchool() {
-        conversationDialog.hide()
-        show()
-        doBeforeLoadScreen()
-        SchoolScreen.load(currentNpcEntity.id, currentNpcEntity.getConversationId())
-    }
-
-    override fun onNotifyShowRewardDialog(reward: Loot, levelUpMessage: String?) {
-        stage.addAction(Actions.sequence(Actions.run { conversationDialog.hideWithFade() },
-                                         Actions.delay(Constant.DIALOG_FADE_OUT_DURATION),
-                                         Actions.run { RewardScreen.load(reward, levelUpMessage) }))
-    }
-
-    override fun onNotifyShowReceiveDialog(receive: Loot) {
-        stage.addAction(Actions.sequence(Actions.run { conversationDialog.hideWithFade() },
-                                         Actions.delay(Constant.DIALOG_FADE_OUT_DURATION),
-                                         Actions.run { ReceiveScreen.load(receive) }))
     }
 
     override fun onNotifyHeroJoined() {
@@ -364,7 +327,7 @@ class WorldScreen : Screen,
             updateEntities(dt)
         }
         updateCameraPosition()
-        mapRenderer.renderAll(player.position) { renderEntities() }
+        mapRenderer.renderAll(player.position) { renderEntities(it) }
         gridRenderer.possibleRender()
         debugRenderer.possibleRenderObjects(doorList, lootList, npcEntities, partyMembers)
         debugBox.possibleUpdate(dt)
@@ -398,22 +361,22 @@ class WorldScreen : Screen,
         mapRenderer.updateCamera()
     }
 
-    private fun renderEntities() {
-        lootList.forEach { it.render(mapRenderer.batch) }
+    private fun renderEntities(batch: Batch) {
+        lootList.forEach { it.render(batch) }
         doorList
             .filter { it.position.y >= player.position.y }
-            .forEach { it.render(mapRenderer.batch) }
+            .forEach { it.render(batch) }
 
         val allEntities: MutableList<Entity> = ArrayList()
         allEntities.addAll(partyMembers)
         allEntities.addAll(npcEntities)
         allEntities.add(player)
         allEntities.sortByDescending { it.position.y }
-        allEntities.forEach { it.render(mapRenderer.batch) }
+        allEntities.forEach { it.render(batch) }
 
         doorList
             .filter { it.position.y < player.position.y }
-            .forEach { it.render(mapRenderer.batch) }
+            .forEach { it.render(batch) }
     }
 
     private fun getPathOf(npc: Entity): DefaultGraphPath<TiledNode> {
@@ -444,10 +407,6 @@ class WorldScreen : Screen,
         render(0f)
     }
 
-    private fun showHidePartyWindow() {
-        partyWindow.showHide()
-    }
-
     private fun openMiniMap() {
         if (camera.zoom()) {
             audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MINIMAP)
@@ -469,7 +428,7 @@ class WorldScreen : Screen,
 
     private fun createListener(): WorldScreenListener {
         return WorldScreenListener({ doBeforeLoadScreen() },
-                                   { showHidePartyWindow() },
+                                   { partyWindow.showHide() },
                                    { openMiniMap() },
                                    { gridRenderer.setShowGrid() },
                                    { debugRenderer.setShowObjects() },

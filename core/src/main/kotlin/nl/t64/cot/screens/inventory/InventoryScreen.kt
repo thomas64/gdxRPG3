@@ -34,7 +34,8 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
     }
 
     override fun onNotifyExitConversation() {
-        hideConversationDialog()
+        Gdx.input.inputProcessor = stage
+        Utils.setGamepadInputProcessor(stage)
     }
 
     override fun onNotifyHeroDismiss() {
@@ -43,7 +44,6 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
         val heroToDismiss = selectedHero.id
         selectPreviousHero()
         gameData.party.removeHero(heroToDismiss)
-        hideConversationDialog()
         brokerManager.partyObservers.notifyHeroDismissed()
     }
 
@@ -138,12 +138,6 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
             conversationDialog.loadConversation("bury_${currentHero.id}", currentHero.id)
             conversationDialog.show()
         }
-    }
-
-    private fun hideConversationDialog() {
-        conversationDialog.hideWithFade()
-        Gdx.input.inputProcessor = stage
-        Utils.setGamepadInputProcessor(stage)
     }
 
     private fun sortInventory() {

@@ -30,6 +30,11 @@ import nl.t64.cot.components.conversation.ConversationGraph
 import nl.t64.cot.components.conversation.NoteDatabase.getNoteById
 import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.constants.Constant
+import nl.t64.cot.screens.academy.AcademyScreen
+import nl.t64.cot.screens.loot.ReceiveScreen
+import nl.t64.cot.screens.loot.RewardScreen
+import nl.t64.cot.screens.school.SchoolScreen
+import nl.t64.cot.screens.shop.ShopScreen
 
 
 private const val SPRITE_TRANSPARENT = "sprites/transparent.png"
@@ -80,16 +85,6 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         Utils.setGamepadInputProcessor(stage)
         dialog.show(stage, Actions.sequence(Actions.alpha(0f), Actions.fadeIn(0.4f, Interpolation.fade)))
         stage.keyboardFocus = scrollPane
-    }
-
-    fun hideWithFade() {
-        scrollPane.clearListeners()
-        dialog.hide()
-    }
-
-    fun hide() {
-        scrollPane.clearListeners()
-        dialog.hide(null)
     }
 
     fun update(dt: Float) {
@@ -179,84 +174,6 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         dialog.contentTable.add(textTable)
     }
 
-    private fun delayInputListeners() {
-        stage.addAction(Actions.sequence(
-            Actions.run { scrollPane.clearListeners() },
-            Actions.delay(1f),
-            Actions.run { applyListeners() }
-        ))
-    }
-
-    private fun applyListeners() {
-        scrollPane.addAction(Actions.sequence(
-            Actions.delay(0.5f),
-            Actions.addListener(ConversationDialogListener(answers) { selectAnswer() }, false)
-        ))
-    }
-
-    private fun continueConversation(nextId: String) {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_CONVERSATION_NEXT)
-        continueConversationWithoutSound(nextId)
-    }
-
-    private fun continueConversationWithoutSound(nextId: String) {
-        populateConversationDialog(nextId)
-    }
-
-    private fun endConversation(nextId: String) {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_CONVERSATION_END)
-        endConversationWithoutSound(nextId)
-    }
-
-    private fun endConversationWithoutSound(nextId: String) {
-        graph.currentPhraseId = nextId
-        conversationObserver.notifyExitConversation()
-    }
-
-    private fun populateConversationDialog(phraseId: String) {
-        graph.currentPhraseId = phraseId
-        populateFace()
-        populatePhrase()
-        populateChoices()
-    }
-
-    private fun populateFace() {
-        if (graph.getCurrentFace().isNotBlank()) {
-            val mainTable = dialog.contentTable.getChild(0) as Table
-            val faceCell = mainTable.getCell(faceImage)
-            faceImage = Utils.getFaceImage(graph.getCurrentFace())
-            faceCell.setActor<Actor>(faceImage)
-        }
-    }
-
-    private fun populatePhrase() {
-        val text = graph.getCurrentPhrase().joinToString(System.lineSeparator())
-        label.setText(text)
-    }
-
-    private fun populateChoices() {
-        val choices = GdxArray(graph.getAssociatedChoices())
-        answers.setItems(choices)
-        setDefaultSelectedChoice(choices)
-        setScrollPaneHeight(choices)
-    }
-
-    private fun setDefaultSelectedChoice(choices: GdxArray<ConversationChoice>) {
-        if (choices.size == 1) {
-            answers.setSelectedIndex(0)
-        } else {
-            answers.setSelectedIndex(-1)
-        }
-    }
-
-    private fun setScrollPaneHeight(choices: GdxArray<ConversationChoice>) {
-        if (choices.size % 2 == 0) {
-            rowWithScrollPane.height(choices.size * SCROLL_PANE_LINE_HEIGHT)
-        } else {
-            rowWithScrollPane.height(choices.size * SCROLL_PANE_LINE_HEIGHT + 2f)
-        }
-    }
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun selectAnswer() {
@@ -308,23 +225,23 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
 
     private fun dismissHero(nextId: String) {
         audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_CONVERSATION_END)
-        graph.currentPhraseId = nextId
-        conversationObserver.notifyHeroDismiss()                                   // ends conversation
+        endConversationWithoutSound(nextId)
+        conversationObserver.notifyHeroDismiss()
     }
 
     private fun loadShop(nextId: String) {
-        graph.currentPhraseId = nextId
-        conversationObserver.notifyLoadShop()                                      // ends conversation
+        endConversationBeforeLoadScreen(nextId)
+        ShopScreen.load(faceId!!, conversationId!!)
     }
 
     private fun loadAcademy(nextId: String) {
-        graph.currentPhraseId = nextId
-        conversationObserver.notifyLoadAcademy()                                   // ends conversation
+        endConversationBeforeLoadScreen(nextId)
+        AcademyScreen.load(faceId!!, conversationId!!)
     }
 
     private fun loadSchool(nextId: String) {
-        graph.currentPhraseId = nextId
-        conversationObserver.notifyLoadSchool()                                    // ends conversation
+        endConversationBeforeLoadScreen(nextId)
+        SchoolScreen.load(faceId!!, conversationId!!)
     }
 
     private fun saveGame(nextId: String) {
@@ -338,12 +255,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         val price = conversationId!!.substringAfterLast("-").toInt()
         if (price > 0) {
             if (gameData.inventory.hasEnoughOfItem("gold", price)) {
-                gameData.inventory.autoRemoveItem("gold", price)
-                stage.addAction(Actions.sequence(
-                    Actions.run { audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_COINS_BUY) },
-                    Actions.delay(1f),
-                    Actions.run { audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_RESTORE) }
-                ))
+                pay(price)
             } else {
                 continueConversation(Constant.PHRASE_ID_INN_NEGATIVE)
                 return
@@ -355,6 +267,15 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         brokerManager.mapObservers.notifyFadeOut(
             { continueConversation(nextId) }
         )
+    }
+
+    private fun pay(price: Int) {
+        gameData.inventory.autoRemoveItem("gold", price)
+        stage.addAction(Actions.sequence(
+            Actions.run { audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_COINS_BUY) },
+            Actions.delay(1f),
+            Actions.run { audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_RESTORE) }
+        ))
     }
 
     private fun possibleReceiveXp(nextId: String) {
@@ -404,6 +325,117 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     private fun sayQuestThing(nextId: String) {
         gameData.quests.getQuestById(conversationId!!).setSayTheRightThingTaskComplete()
         endConversation(nextId)
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // todo, these 2 methods are from the huge quest clean up, they were in WorldScreen.
+    // i think they fit better here, the moment they will become in use again.
+    private fun onNotifyShowRewardDialog(reward: Loot, levelUpMessage: String?) {
+        stage.addAction(Actions.sequence(Actions.run { hideWithFade() },
+                                         Actions.delay(Constant.DIALOG_FADE_OUT_DURATION),
+                                         Actions.run { RewardScreen.load(reward, levelUpMessage) }))
+    }
+
+    private fun onNotifyShowReceiveDialog(receive: Loot) {
+        stage.addAction(Actions.sequence(Actions.run { hideWithFade() },
+                                         Actions.delay(Constant.DIALOG_FADE_OUT_DURATION),
+                                         Actions.run { ReceiveScreen.load(receive) }))
+    }
+
+    private fun delayInputListeners() {
+        stage.addAction(Actions.sequence(
+            Actions.run { scrollPane.clearListeners() },
+            Actions.delay(1f),
+            Actions.run { applyListeners() }
+        ))
+    }
+
+    private fun applyListeners() {
+        scrollPane.addAction(Actions.sequence(
+            Actions.delay(0.5f),
+            Actions.addListener(ConversationDialogListener(answers) { selectAnswer() }, false)
+        ))
+    }
+
+    private fun continueConversation(nextId: String) {
+        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_CONVERSATION_NEXT)
+        continueConversationWithoutSound(nextId)
+    }
+
+    private fun continueConversationWithoutSound(nextId: String) {
+        populateConversationDialog(nextId)
+    }
+
+    private fun endConversation(nextId: String) {
+        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_CONVERSATION_END)
+        endConversationWithoutSound(nextId)
+    }
+
+    private fun endConversationWithoutSound(nextId: String) {
+        graph.currentPhraseId = nextId
+        hideWithFade()
+        conversationObserver.notifyExitConversation()
+    }
+
+    private fun endConversationBeforeLoadScreen(nextId: String) {
+        graph.currentPhraseId = nextId
+        hide()
+        conversationObserver.notifyExitConversation()
+    }
+
+    private fun hideWithFade() {
+        scrollPane.clearListeners()
+        dialog.hide()
+    }
+
+    private fun hide() {
+        scrollPane.clearListeners()
+        dialog.hide(null)
+    }
+
+    private fun populateConversationDialog(phraseId: String) {
+        graph.currentPhraseId = phraseId
+        populateFace()
+        populatePhrase()
+        populateChoices()
+    }
+
+    private fun populateFace() {
+        if (graph.getCurrentFace().isNotBlank()) {
+            val mainTable = dialog.contentTable.getChild(0) as Table
+            val faceCell = mainTable.getCell(faceImage)
+            faceImage = Utils.getFaceImage(graph.getCurrentFace())
+            faceCell.setActor<Actor>(faceImage)
+        }
+    }
+
+    private fun populatePhrase() {
+        val text = graph.getCurrentPhrase().joinToString(System.lineSeparator())
+        label.setText(text)
+    }
+
+    private fun populateChoices() {
+        val choices = GdxArray(graph.getAssociatedChoices())
+        answers.setItems(choices)
+        setDefaultSelectedChoice(choices)
+        setScrollPaneHeight(choices)
+    }
+
+    private fun setDefaultSelectedChoice(choices: GdxArray<ConversationChoice>) {
+        if (choices.size == 1) {
+            answers.setSelectedIndex(0)
+        } else {
+            answers.setSelectedIndex(-1)
+        }
+    }
+
+    private fun setScrollPaneHeight(choices: GdxArray<ConversationChoice>) {
+        if (choices.size % 2 == 0) {
+            rowWithScrollPane.height(choices.size * SCROLL_PANE_LINE_HEIGHT)
+        } else {
+            rowWithScrollPane.height(choices.size * SCROLL_PANE_LINE_HEIGHT + 2f)
+        }
     }
 
 }

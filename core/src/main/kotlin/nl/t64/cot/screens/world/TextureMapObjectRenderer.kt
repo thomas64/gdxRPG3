@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.Pixmap
+import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.graphics.glutils.FrameBuffer
 import com.badlogic.gdx.maps.objects.TextureMapObject
@@ -31,13 +32,13 @@ class TextureMapObjectRenderer(private val camera: Camera) : OrthogonalTiledMapR
         renderWithoutPlayerLight {}
     }
 
-    fun renderAll(playerPosition: Vector2, renderEntities: () -> Unit) {
+    fun renderAll(playerPosition: Vector2, renderEntities: (Batch) -> Unit) {
         mapManager.getLightmapPlayer()?.let {
             renderWithPlayerLight(playerPosition, it, renderEntities)
         } ?: renderWithoutPlayerLight(renderEntities)
     }
 
-    private fun renderWithPlayerLight(playerPosition: Vector2, sprite: Sprite, renderEntities: () -> Unit) {
+    private fun renderWithPlayerLight(playerPosition: Vector2, sprite: Sprite, renderEntities: (Batch) -> Unit) {
         frameBuffer.begin()
         ScreenUtils.clear(Color.BLACK)
         renderLightmapPlayer(playerPosition, sprite)
@@ -46,7 +47,7 @@ class TextureMapObjectRenderer(private val camera: Camera) : OrthogonalTiledMapR
         renderFrameBuffer()
     }
 
-    private fun renderWithoutPlayerLight(renderEntities: () -> Unit) {
+    private fun renderWithoutPlayerLight(renderEntities: (Batch) -> Unit) {
         ScreenUtils.clear(Color.BLACK)
         renderMapLayers(renderEntities)
     }
@@ -89,7 +90,7 @@ class TextureMapObjectRenderer(private val camera: Camera) : OrthogonalTiledMapR
         }
     }
 
-    private fun renderMapLayers(renderEntities: () -> Unit) {
+    private fun renderMapLayers(renderEntities: (Batch) -> Unit) {
         batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA)
 
         renderBackground()
@@ -97,7 +98,7 @@ class TextureMapObjectRenderer(private val camera: Camera) : OrthogonalTiledMapR
         render(UNDER_LAYERS)
         batch.begin()
         renderQuestTextures(mapManager.getLowerMapQuestTextures())
-        renderEntities.invoke()
+        renderEntities.invoke(batch)
         renderQuestTextures(mapManager.getUpperMapQuestTextures())
         batch.end()
         render(OVER_LAYERS)
