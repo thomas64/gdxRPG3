@@ -58,7 +58,7 @@ data class HeroItem(
     }
 
     fun gainXp(amount: Int, levelUpMessage: StringBuilder) {
-        stats.gainXp(amount) { gainLevel(levelUpMessage) }
+        stats.gainXp(amount) { gainLevel(levelUpMessage, it) }
     }
 
     fun hasEnoughXpFor(xpCost: Int): Boolean {
@@ -355,9 +355,13 @@ data class HeroItem(
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private fun gainLevel(levelUpMessage: StringBuilder) {
+    private fun gainLevel(levelUpMessage: StringBuilder, amountOfLevels: Int) {
         recoverFullHp()
-        levelUpMessage.append("$name gained a level!").append(System.lineSeparator())
+        if (amountOfLevels == 1) {
+            levelUpMessage.append("$name gained a level!").append(System.lineSeparator())
+        } else {
+            levelUpMessage.append("$name gained $amountOfLevels levels!").append(System.lineSeparator())
+        }
     }
 
 }

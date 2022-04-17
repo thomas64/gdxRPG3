@@ -31,7 +31,7 @@ class StatContainer() {
         level.takeXpToInvest(xpCost)
     }
 
-    fun gainXp(amount: Int, gainLevel: (Boolean) -> Unit) {
+    fun gainXp(amount: Int, gainLevel: (Int) -> Unit) {
         level.gainXp(amount, gainLevel)
     }
 

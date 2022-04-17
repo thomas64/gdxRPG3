@@ -28,16 +28,18 @@ class Level(
         }
     }
 
-    fun gainXp(amount: Int, gainLevel: (Boolean) -> Unit) {
+    fun gainXp(amount: Int, gainLevel: (Int) -> Unit) {
         if (rank < MAXIMUM) {
             xpToInvest += amount
             totalXp += amount
         }
+        var amountOfLevelsGained = 0
         while (getXpNeededForNextLevel() <= 0) {
             rank += 1
             variable += 1
-            gainLevel.invoke(true)
+            amountOfLevelsGained += 1
         }
+        if (amountOfLevelsGained >= 1) gainLevel.invoke(amountOfLevelsGained)
     }
 
     fun takeXpToInvest(xpCost: Int) {
