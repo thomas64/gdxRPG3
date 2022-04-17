@@ -12,7 +12,7 @@ import nl.t64.cot.screens.world.pathfinding.TiledNode
 
 class PhysicsPartyMember : PhysicsComponent() {
 
-    private lateinit var path: DefaultGraphPath<TiledNode>
+    private var path: DefaultGraphPath<TiledNode> = DefaultGraphPath()
 
     init {
         boundingBoxWidthPercentage = 0.50f

@@ -3,11 +3,9 @@ package nl.t64.cot.screens.world
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.InputMultiplexer
 import com.badlogic.gdx.Screen
-import com.badlogic.gdx.ai.pfa.DefaultGraphPath
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
-import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import nl.t64.cot.Utils
@@ -20,15 +18,14 @@ import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.components.loot.Loot
-import nl.t64.cot.components.loot.Spoil
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.GameState
 import nl.t64.cot.constants.ScreenType
+import nl.t64.cot.screens.BattleResolver
 import nl.t64.cot.screens.battle.BattleObserver
 import nl.t64.cot.screens.battle.BattleScreen
 import nl.t64.cot.screens.inventory.tooltip.MessageTooltip
 import nl.t64.cot.screens.loot.FindScreen
-import nl.t64.cot.screens.loot.SpoilsScreen
 import nl.t64.cot.screens.world.conversation.ConversationDialog
 import nl.t64.cot.screens.world.conversation.ConversationObserver
 import nl.t64.cot.screens.world.debug.DebugBox
@@ -38,15 +35,14 @@ import nl.t64.cot.screens.world.entity.Entity
 import nl.t64.cot.screens.world.entity.GraphicsPlayer
 import nl.t64.cot.screens.world.entity.InputPlayer
 import nl.t64.cot.screens.world.entity.PhysicsPlayer
+import nl.t64.cot.screens.world.entity.events.FindPathEvent
 import nl.t64.cot.screens.world.entity.events.LoadEntityEvent
-import nl.t64.cot.screens.world.entity.events.PathUpdateEvent
-import nl.t64.cot.screens.world.pathfinding.TiledNode
 import nl.t64.cot.sfx.TransitionImage
 import nl.t64.cot.subjects.*
 
 
 class WorldScreen : Screen,
-    MapObserver, ComponentObserver, PartyObserver, LootObserver, ConversationObserver, QuestObserver, BattleObserver {
+    MapObserver, ComponentObserver, EntityObserver, LootObserver, ConversationObserver, QuestObserver, BattleObserver {
 
     private lateinit var previousGameState: GameState
     private lateinit var gameState: GameState
@@ -77,7 +73,7 @@ class WorldScreen : Screen,
         brokerManager.questObservers.addObserver(this)
         brokerManager.componentObservers.addObserver(this)
         brokerManager.mapObservers.addObserver(this)
-        brokerManager.partyObservers.addObserver(this)
+        brokerManager.entityObservers.addObserver(this)
         brokerManager.lootObservers.addObserver(this)
     }
 
@@ -176,10 +172,14 @@ class WorldScreen : Screen,
     }
     //endregion
 
-    //region PartyObserver /////////////////////////////////////////////////////////////////////////////////////////////
+    //region EntityObserver ////////////////////////////////////////////////////////////////////////////////////////////
 
-    override fun onNotifyHeroDismissed() {
+    override fun onNotifyPartyUpdate() {
         partyMembers = PartyMembersLoader(player).loadPartyMembers()
+    }
+
+    override fun onNotifyNpcsUpdate(newNpcEntities: List<Entity>) {
+        npcEntities = newNpcEntities
     }
     //endregion
 
@@ -238,47 +238,8 @@ class WorldScreen : Screen,
 
     override fun onNotifyBattleWon(battleId: String, spoils: Loot) {
         screenManager.setScreen(ScreenType.WORLD)
-        if (gameData.quests.contains(battleId)) {
-            gameData.quests.getQuestById(battleId).setKillTaskComplete()
-        }
-
-        refreshNpcEntitiesListAfterBattle(battleId)
-        partyMembers = PartyMembersLoader(player).loadPartyMembers()
-        if (!spoils.isTaken()) {
-            loadSpoilsDialog(battleId, spoils)
-        }
-    }
-
-    private fun loadSpoilsDialog(battleId: String, spoils: Loot) {
-        val spoil = Spoil(mapManager.currentMap.mapTitle, player.position.x, player.position.y, spoils)
-        gameData.spoils.addSpoil(battleId, spoil)
         doBeforeLoadScreen()
-        SpoilsScreen.load(spoils)
-    }
-
-    private fun refreshNpcEntitiesListAfterBattle(battleId: String) {
-        npcEntities = when (currentNpcEntity.isNpc()) {
-            true -> getRefreshedListAfterConversationBattle(battleId)
-            false -> getRefreshedListAfterNormalBattle()
-        }
-    }
-
-    private fun getRefreshedListAfterConversationBattle(battleId: String): List<Entity> {
-        val remainingNpcEntities = mutableListOf<Entity>()
-        npcEntities.forEach { it.removeFromBlockersOrAddTo(remainingNpcEntities, battleId) }
-        return remainingNpcEntities
-    }
-
-    private fun Entity.removeFromBlockersOrAddTo(remainingNpcEntities: MutableList<Entity>, battleId: String) {
-        if (isNpc() && getConversationId() == battleId) {
-            brokerManager.blockObservers.removeObserver(this)
-        } else {
-            remainingNpcEntities.add(this)
-        }
-    }
-
-    private fun getRefreshedListAfterNormalBattle(): List<Entity> {
-        return npcEntities.filter { it != currentNpcEntity }
+        BattleResolver.resolveWin(battleId, spoils, player.position, currentNpcEntity, npcEntities)
     }
 
     override fun onNotifyBattleLost() {
@@ -350,10 +311,11 @@ class WorldScreen : Screen,
         }
         doorList.forEach { it.update(dt) }
         lootList.forEach { it.update(dt) }
-        npcEntities.forEach { it.send(PathUpdateEvent(getPathOf(it))) }
+        val playerGridPosition = player.getPositionInGrid()
         npcEntities.forEach { it.update(dt) }
-        partyMembers.forEach { it.send(PathUpdateEvent(getPathOf(it))) }
+        npcEntities.forEach { it.send(FindPathEvent(playerGridPosition)) }
         partyMembers.forEach { it.update(dt) }
+        partyMembers.forEach { it.send(FindPathEvent(playerGridPosition, partyMembers)) }
     }
 
     private fun updateCameraPosition() {
@@ -377,20 +339,6 @@ class WorldScreen : Screen,
         doorList
             .filter { it.position.y < player.position.y }
             .forEach { it.render(batch) }
-    }
-
-    private fun getPathOf(npc: Entity): DefaultGraphPath<TiledNode> {
-        val startPoint = npc.getPositionInGrid()
-        val endPoint = getEndPoint(npc)
-        return mapManager.findPath(startPoint, endPoint, npc.state)
-    }
-
-    private fun getEndPoint(npc: Entity): Vector2 {
-        val index = partyMembers.indexOf(npc)
-        return when {
-            index <= 0 -> player.getPositionInGrid()
-            else -> partyMembers[index - 1].getPositionInGrid()
-        }
     }
 
     private fun fadeOut(actionAfterFade: () -> Unit, transitionColor: Color) {

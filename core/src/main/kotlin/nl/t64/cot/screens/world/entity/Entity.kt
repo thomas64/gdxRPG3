@@ -83,7 +83,7 @@ class Entity(
 
     fun getPositionInGrid(): Vector2 =
         Vector2(((position.x + Constant.HALF_TILE_SIZE) / Constant.HALF_TILE_SIZE).toInt().toFloat(),
-                ((position.y + (Constant.TILE_SIZE / 8f)) / Constant.HALF_TILE_SIZE).toInt().toFloat())
+                ((position.y + (Constant.TILE_SIZE / 4f)) / Constant.HALF_TILE_SIZE).toInt().toFloat())
 
     val position: Vector2 get() = physicsComponent.currentPosition
     val direction: Direction get() = physicsComponent.direction

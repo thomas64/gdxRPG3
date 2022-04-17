@@ -15,9 +15,9 @@ private const val MINIMAL_NODES_BEFORE_STARTING_A_BATTLE = 5
 class PhysicsEnemy : PhysicsComponent() {
 
     private lateinit var battleId: String
-    private lateinit var path: DefaultGraphPath<TiledNode>
+    private var path: DefaultGraphPath<TiledNode> = DefaultGraphPath()
     private var isDetectingPlayer: Boolean = false
-    private var isBumped = false
+    private var isBumped: Boolean = false
 
     init {
         velocity = Constant.MOVE_SPEED_1

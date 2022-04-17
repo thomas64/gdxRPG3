@@ -44,7 +44,7 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
         val heroToDismiss = selectedHero.id
         selectPreviousHero()
         gameData.party.removeHero(heroToDismiss)
-        brokerManager.partyObservers.notifyHeroDismissed()
+        brokerManager.entityObservers.notifyPartyUpdate()
     }
 
     override fun getScreenUI(): ScreenUI {

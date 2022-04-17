@@ -2,10 +2,8 @@ package nl.t64.cot.screens.world.entity
 
 import com.badlogic.gdx.ai.pfa.DefaultGraphPath
 import com.badlogic.gdx.math.Vector2
-import nl.t64.cot.screens.world.entity.events.DirectionEvent
-import nl.t64.cot.screens.world.entity.events.Event
-import nl.t64.cot.screens.world.entity.events.PathUpdateEvent
-import nl.t64.cot.screens.world.entity.events.StateEvent
+import nl.t64.cot.Utils.mapManager
+import nl.t64.cot.screens.world.entity.events.*
 import nl.t64.cot.screens.world.pathfinding.TiledNode
 
 
@@ -15,11 +13,27 @@ private const val SECOND_NODE = 1
 class InputPartyMember : InputComponent() {
 
     private lateinit var partyMember: Entity
-    private lateinit var path: DefaultGraphPath<TiledNode>
+    private var path: DefaultGraphPath<TiledNode> = DefaultGraphPath()
 
     override fun receive(event: Event) {
-        if (event is PathUpdateEvent) {
-            path = event.path
+        if (event is FindPathEvent) {
+            if (::partyMember.isInitialized) {
+                path = getPathToMemberInFrontOfYou(event)
+                partyMember.send(PathUpdateEvent(path))
+            }
+        }
+    }
+
+    private fun getPathToMemberInFrontOfYou(event: FindPathEvent): DefaultGraphPath<TiledNode> {
+        val startPoint = partyMember.getPositionInGrid()
+        val endPoint = getEndPoint(event)
+        return mapManager.findPath(startPoint, endPoint, EntityState.WALKING)
+    }
+
+    private fun getEndPoint(event: FindPathEvent): Vector2 {
+        return when (val index = event.partyMembers!!.indexOf(partyMember)) {
+            0 -> event.playerGridPosition
+            else -> event.partyMembers[index - 1].getPositionInGrid()
         }
     }
 

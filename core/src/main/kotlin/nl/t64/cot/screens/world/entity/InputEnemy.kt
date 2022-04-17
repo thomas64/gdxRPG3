@@ -3,6 +3,7 @@ package nl.t64.cot.screens.world.entity
 import com.badlogic.gdx.ai.pfa.DefaultGraphPath
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.Vector2
+import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.world.entity.events.*
 import nl.t64.cot.screens.world.pathfinding.TiledNode
@@ -15,9 +16,9 @@ private const val MAXIMUM_DETECTION_RANGE = 20
 
 class InputEnemy : InputComponent() {
 
-    private var enemyEntity: Entity? = null
+    private lateinit var enemyEntity: Entity
     private lateinit var state: EntityState
-    private var path: DefaultGraphPath<TiledNode>? = null
+    private var path: DefaultGraphPath<TiledNode> = DefaultGraphPath()
     private var stateTime = 0f
     private var isDetectingPlayer = false
 
@@ -29,33 +30,47 @@ class InputEnemy : InputComponent() {
         if (event is CollisionEvent) {
             stateTime = 0f
         }
-        if (event is PathUpdateEvent) {
-            path = event.path
+        if (event is FindPathEvent) {
+            if (::enemyEntity.isInitialized) {
+                path = getPathToPlayer(event)
+                enemyEntity.send(PathUpdateEvent(path))
+            }
         }
         if (event is OnDetectionEvent) {
-            setIsDetectingPlayer(event)
+            if (::enemyEntity.isInitialized) {
+                setIsDetectingPlayer(event)
+            }
         }
+    }
+
+    private fun getPathToPlayer(event: FindPathEvent): DefaultGraphPath<TiledNode> {
+        val startPoint = enemyEntity.getPositionInGrid()
+        val endPoint = event.playerGridPosition
+        return mapManager.findPath(startPoint, endPoint, state)
     }
 
     private fun setIsDetectingPlayer(onDetectionEvent: OnDetectionEvent) {
         if (onDetectionEvent.moveSpeed == Constant.MOVE_SPEED_4) {
             isDetectingPlayer = false
-            enemyEntity?.send(SpeedEvent(Constant.MOVE_SPEED_1))
-        } else if (path != null && path!!.count > 0
-            && path!!.count < onDetectionEvent.moveSpeed / DETECTION_RANGE_DIVIDER
+            enemyEntity.send(SpeedEvent(Constant.MOVE_SPEED_1))
+        } else if (path.count > 0
+            && path.count < onDetectionEvent.moveSpeed / DETECTION_RANGE_DIVIDER
         ) {
             isDetectingPlayer = true
-            enemyEntity?.send(SpeedEvent(Constant.MOVE_SPEED_2))
-        } else if (path != null && path!!.count > MAXIMUM_DETECTION_RANGE) {
+            enemyEntity.send(SpeedEvent(Constant.MOVE_SPEED_2))
+        } else if (path.count > MAXIMUM_DETECTION_RANGE) {
             isDetectingPlayer = false
-            enemyEntity?.send(SpeedEvent(Constant.MOVE_SPEED_1))
+            enemyEntity.send(SpeedEvent(Constant.MOVE_SPEED_1))
+        } else if (path.count == 0) {
+            isDetectingPlayer = false
+            enemyEntity.send(SpeedEvent(Constant.MOVE_SPEED_1))
         }
-        enemyEntity?.send(DetectionEvent(isDetectingPlayer))
+        enemyEntity.send(DetectionEvent(isDetectingPlayer))
     }
 
     override fun update(entity: Entity, dt: Float) {
         this.enemyEntity = entity
-        if (path!!.count in 1 until MINIMUM_DETECTION_RANGE) {
+        if (isDetectingPlayer && path.count in 1 until MINIMUM_DETECTION_RANGE) {
             setIdleState()
         } else if (isDetectingPlayer) {
             setFollowPath()
@@ -75,9 +90,9 @@ class InputEnemy : InputComponent() {
     }
 
     private fun setFollowPath() {
-        val tiledNode = path!![SECOND_NODE]
+        val tiledNode = path[SECOND_NODE]
         val nodePosition = Vector2(tiledNode.x.toFloat(), tiledNode.y.toFloat())
-        val currentGridPosition = Vector2(enemyEntity!!.getPositionInGrid())
+        val currentGridPosition = Vector2(enemyEntity.getPositionInGrid())
         state = getFollowState()
         direction = getFollowDirection(nodePosition, currentGridPosition)
     }
