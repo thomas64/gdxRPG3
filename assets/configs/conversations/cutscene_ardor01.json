@@ -16,8 +16,8 @@
   },
   "grace_is_no_princess"           : {
     "phrases": {
-      "1": {"face": "mozes", "text": ["(Huh?)"]},
-      "2": {"face": "mozes", "text": ["(Grace is no princess...?)"], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["(Huh?)"]},
+      "2": {"text": ["(Grace is no princess...?)"], "choices": [{"command": "EXIT"}]}
     }
   },
   "ardor_starts_to_pray"           : {
@@ -42,15 +42,61 @@
     "phrases": {
       "1": {"face": "ardor", "text": ["Sister? Hmmmm..."]},
       "2": {"face": "ardor", "text": [". . ."]},
-      "3": {"face": "ardor", "text": ["The insolence."]},
-      "4": {"face": "ardor", "text": ["Guards! Kill him!"]},
-      "5": {"face": "mozes", "text": ["? ?"], "choices": [{"command": "EXIT"}]}
+      "3": {"face": "ardor", "text": ["Guards! Kill him!"]},
+      "4": {"face": "mozes", "text": ["? ?"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "mozes_last_words"               : {
+    "phrases": {
+      "1": {"face": "ardor", "text": ["The insolence."]},
+      "2": {"face": "mozes", "text": ["Ugh..."]},
+      "3": {"face": "mozes", "text": ["G... G..."]},
+      "4": {"face": "mozes", "text": ["Grace..."], "choices": [{"command": "EXIT"}]}
     }
   },
   "mozes_wins_battle_from_generals": {
     "phrases": {
-      "1": {"face": "ardor", "text": ["What a nuisance."]},
-      "2": {"face": "ardor", "text": ["I'll handle you myself then."], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["What a nuisance."]},
+      "2": {"text": ["I'll handle you myself then."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "ardor_continues_to_pray"        : {
+    "phrases": {
+      "1": {"text": ["Mighty and powerful Ulrog!"]},
+      "2": {"text": ["Please hear my prayer!"]},
+      "3": {"text": ["Everything is prepared!"]},
+      "4": {"text": ["My quest for ultimate power is finally fulfilled!"]},
+      "5": {"text": ["With the blood of this princess, I will rule all of Ardor!"]},
+      "6": {"text": ["Now slay her and take her life!"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "grace_dies"                     : {
+    "phrases": {
+      "1": {"face": "mozes", "text": ["Nooooooo!!"]},
+      "2": {"face": "ardor", "text": ["Finally! Ultimate power is mine!"]},
+      "3": {"face": "ardor", "text": [". . ."]},
+      "4": {"face": "ardor", "text": ["Wait, something's wrong!"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "what_went_wrong"                : {
+    "phrases": {
+      "1": {"text": ["No! What went wrong?!"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "mozes_wakes_up_again"           : {
+    "phrases": {
+      "1": {"text": ["What the..."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "grace_is_missing_again"         : {
+    "phrases": {
+      "1": {"text": ["What just happened?"]},
+      "2": {"text": ["Did I just die? Did the world just end in flames?"]},
+      "3": {"text": ["Was it a dream?"]},
+      "4": {"text": ["\"You have been given another chance...\" ??"]},
+      "5": {"text": [". . ."]},
+      "6": {"text": ["What is happening to me?"]},
+      "7": {"text": ["If it's true, if I've got another chance, I have to save Grace!"], "choices": [{"command": "EXIT"}]}
     }
   }
 }

@@ -124,6 +124,12 @@ object Utils {
         return resourceManager.getTextureAsset(String.format(LIGHTMAP_PATH, lightmapId))
     }
 
+    fun createImage(path: String, x: Int, y: Int, width: Int, height: Int): Image {
+        val texture = resourceManager.getTextureAsset(path)
+        val region = TextureRegion(texture, x, y, width, height)
+        return Image(region)
+    }
+
     fun getCharImage(spriteId: String): Array<Array<TextureRegion>> {
         val charConfig = resourceManager.getSpriteConfig(spriteId)
         val path = String.format(CHAR_PATH, charConfig.source)

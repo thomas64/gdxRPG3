@@ -60,6 +60,7 @@ enum class AudioEvent(val filePath: String, val volume: Float = 1f) {
     SE_RESTORE("audio/se/healing.ogg", 0.2f),
     SE_UPGRADE("audio/se/upgrade.ogg", 0.5f),
 
+    SE_MAGIC_BANG("audio/se/mv_collapse2.ogg", 0.4f),
     SE_SCROLL("audio/se/mv_book2.ogg", 0.2f),
     SE_SPARKLE("audio/se/mv_key.ogg", 0.2f),
     SE_SMALL_DOOR("audio/se/mv_open1.ogg", 0.2f),

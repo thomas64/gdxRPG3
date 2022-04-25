@@ -1,11 +1,10 @@
 package nl.t64.cot.screens.cutscene
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.scenes.scene2d.Action
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.Image
+import nl.t64.cot.Utils
 import nl.t64.cot.Utils.audioManager
-import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
@@ -31,21 +30,19 @@ class SceneArdor1 : CutsceneScreen() {
         ardor = CutsceneActor.createCharacter("ardor")
         guard1 = CutsceneActor.createCharacter("orc_general")
         guard2 = CutsceneActor.createCharacter("orc_general")
-        val texture = resourceManager.getTextureAsset("sprites/objects/magic_inside_d2.png")
-        val region = TextureRegion(texture, 0, 96, 144, 144)
-        magic = Image(region)
+        magic = Utils.createImage("sprites/objects/magic_inside_d2.png", 0, 96, 144, 144)
         actorsStage.addActor(magic)
+        actorsStage.addActor(ardor)
         actorsStage.addActor(guard2)
         actorsStage.addActor(grace)
         actorsStage.addActor(guard1)
-        actorsStage.addActor(ardor)
         actorsStage.addActor(mozes)
         actions = listOf(mozesEntersTheScene(),
                          graceIsCalledInTheCircle(),
                          ardorStartsToPray(),
                          mozesStepsIn(),
                          ardorCommandsToKillMozes(),
-                         startBattleWithGuards())
+                         guardsWalkToMozes())
     }
 
     private fun mozesEntersTheScene(): Action {
@@ -186,6 +183,33 @@ class SceneArdor1 : CutsceneScreen() {
         )
     }
 
+    private fun guardsWalkToMozes(): Action {
+        return Actions.sequence(
+            Actions.delay(0.5f),
+            Actions.addAction(Actions.sequence(
+                Actions.run { guard1.direction = Direction.SOUTH },
+                Actions.run { guard1.entityState = EntityState.RUNNING },
+                Actions.moveBy(0f, -90f, 0.8f),
+                Actions.run { guard1.direction = Direction.WEST },
+                Actions.moveBy(-175f, 0f, 1.2f),
+                Actions.run { guard1.entityState = EntityState.IDLE },
+                Actions.run { guard1.direction = Direction.SOUTH },
+            ), guard1),
+            Actions.addAction(Actions.sequence(
+                Actions.run { guard2.direction = Direction.SOUTH },
+                Actions.run { guard2.entityState = EntityState.RUNNING },
+                Actions.moveBy(0f, -120f, 1f),
+                Actions.run { guard2.direction = Direction.WEST },
+                Actions.moveBy(-140f, 0f, 1f),
+                Actions.run { guard2.entityState = EntityState.IDLE },
+                Actions.run { guard2.direction = Direction.SOUTH },
+            ), guard2),
+            actionWalkSound(guard2, 2f, FAST_STEP),
+            Actions.delay(0.5f),
+            startBattleWithGuards()
+        )
+    }
+
     private fun startBattleWithGuards(): Action {
         return Actions.run { exitScreen() }
     }
@@ -195,6 +219,7 @@ class SceneArdor1 : CutsceneScreen() {
     }
 
     override fun onNotifyBattleLost() {
+        (screenManager.getScreen(ScreenType.SCENE_ARDOR_1_LOSE) as SceneArdor1Lose).apply { areGeneralsAlive = true }
         screenManager.setScreen(ScreenType.SCENE_ARDOR_1_LOSE)
     }
 

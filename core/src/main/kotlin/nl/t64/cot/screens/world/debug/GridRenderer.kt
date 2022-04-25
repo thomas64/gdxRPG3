@@ -2,7 +2,7 @@ package nl.t64.cot.screens.world.debug
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
-import nl.t64.cot.Utils
+import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.world.Camera
@@ -47,8 +47,8 @@ class GridRenderer(
     }
 
     private fun setMapSizes() {
-        mapPixelWidth = Utils.mapManager.currentMap.pixelWidth
-        mapPixelHeight = Utils.mapManager.currentMap.pixelHeight
+        mapPixelWidth = mapManager.currentMap.pixelWidth
+        mapPixelHeight = mapManager.currentMap.pixelHeight
     }
 
     private fun setHorizontalLines() {

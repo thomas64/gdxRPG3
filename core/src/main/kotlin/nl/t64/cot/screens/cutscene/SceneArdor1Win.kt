@@ -58,6 +58,7 @@ class SceneArdor1Win : CutsceneScreen() {
     }
 
     override fun onNotifyBattleLost() {
+        (screenManager.getScreen(ScreenType.SCENE_ARDOR_1_LOSE) as SceneArdor1Lose).apply { areGeneralsAlive = false }
         screenManager.setScreen(ScreenType.SCENE_ARDOR_1_LOSE)
     }
 
