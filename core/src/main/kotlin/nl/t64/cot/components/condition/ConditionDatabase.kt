@@ -21,12 +21,12 @@ object ConditionDatabase {
         Pair("been_in_fairy_town") { beenInFairyTown },
         Pair("i_!orc_amulet") { !orcAmulet },
         Pair("i_orc_amulet") { orcAmulet },
-        Pair("i_mask_of_ardor") { maskOfArdor },
-        Pair("i_diplomat2") { diplomat2 },
-        Pair("i_level10") { level10 },
+        Pair("i_scroll_of_obedience") { scrollOfObedience },
+        Pair("diplomat2") { diplomat2 },
+        Pair("level10") { level10 },
         Pair("defeated_orc_guards") { defeatedOrcGuards },
 
-        Pair("diplomat2") { diplomat2 },
+        Pair("i_mask_of_ardor") { maskOfArdor },
         Pair("diplomat3") { diplomat3 },
         Pair("key_mysterious_tunnel") { keyMysteriousTunnel },
         Pair("quest4_known") { quest4Known },
@@ -59,11 +59,12 @@ object ConditionDatabase {
     private val questMotherFairyAccepted get() = isQuestStateEqualOrHigher("quest_mother_fairy", QuestState.ACCEPTED)
     private val beenInFairyTown get() = hasEventPlayed("find_great_tree")
     private val orcAmulet get() = hasItemEquipped("transformation_orc")
+    private val scrollOfObedience get() = hasEnoughOfItem("scroll_of_obedience", 1)
     private val diplomat2 get() = hasEnoughOfSkill(SkillItemId.DIPLOMAT, 2)
-    private val maskOfArdor get() = hasEnoughOfItem("mask_of_ardor", 1)
     private val level10 get() = hasMinimumLevelOf(10)
     private val defeatedOrcGuards get() = isBattleWon("quest_orc_guards")
 
+    private val maskOfArdor get() = hasEnoughOfItem("mask_of_ardor", 1)
     private val diplomat3 get() = hasEnoughOfSkill(SkillItemId.DIPLOMAT, 3)
     private val keyMysteriousTunnel get() = hasEnoughOfItem("key_mysterious_tunnel", 1)
     private val quest4Known get() = isQuestStateEqualOrHigher("quest0004", QuestState.KNOWN)

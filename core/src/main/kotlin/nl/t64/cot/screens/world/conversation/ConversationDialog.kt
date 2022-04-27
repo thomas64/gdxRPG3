@@ -201,6 +201,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             ConversationCommand.ACCEPT_QUEST -> acceptQuest(nextId)
             ConversationCommand.SHOW_QUEST_ITEM -> showQuestItem(nextId)
             ConversationCommand.WEAR_QUEST_ITEM -> wearQuestItem(nextId)
+            ConversationCommand.GIVE_QUEST_ITEM -> giveQuestItem(nextId)
             ConversationCommand.SAY_QUEST_THING -> sayQuestThing(nextId)
 
             else -> throw IllegalArgumentException("ConversationCommand '$conversationCommand' cannot be reached here.")
@@ -319,6 +320,11 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
 
     private fun wearQuestItem(nextId: String) {
         gameData.quests.getQuestById(conversationId!!).possibleSetWearItemTaskComplete()
+        endConversation(nextId)
+    }
+
+    private fun giveQuestItem(nextId: String) {
+        gameData.quests.getQuestById(conversationId!!).possibleSetGiveItemTaskComplete()
         endConversation(nextId)
     }
 

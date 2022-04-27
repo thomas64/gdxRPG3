@@ -5,5 +5,12 @@
     "sort"       : 70010,
     "price"      : 1,
     "description": ["An old key for inside the Mysterious Tunnel."]
+  },
+  "scroll_of_obedience"  : {
+    "name"       : "Scroll of Obedience",
+    "group"      : "ITEM",
+    "sort"       : 70015,
+    "price"      : 25,
+    "description": ["Makes someone follow your command unconditionally."]
   }
 }

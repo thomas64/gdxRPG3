@@ -96,11 +96,11 @@
       "31": {"face": "fairy01", "text": ["Unfortunately Grace is in the possession of Ardor."]},
       "32": {"face": "fairy01", "text": ["We tried, but we weren't able to prevent that.", "But there might still be one possibility for you."]},
       "33": {"face": "fairy01", "text": ["You are brave Mozes, but bravery alone won't do the trick.", "We would like to help you in your search for Grace."]},
-      "34": {"face": "fairy01", "text": ["In the cave you came from we've hidden a mighty artifact, and you may use it against any orcs you might encounter on your quest."]},
+      "34": {"face": "fairy01", "text": ["In the cave you came from we've hidden a magic scroll, and you may use it against any orcs you might encounter on your quest."]},
       "35": {
         "face": "mozes", "text": ["I'll do anything to get Grace back safe!"], "choices": [
           {"text": "But what has Ardor to do with her?", "nextId": "40"},
-          {"text": "What does the artifact do? How do I use it?", "nextId": "50"},
+          {"text": "What does the scroll do? How do I use it?", "nextId": "50"},
           {"text": "How can I get it, if it is hidden?", "nextId": "60"}
         ]
       },

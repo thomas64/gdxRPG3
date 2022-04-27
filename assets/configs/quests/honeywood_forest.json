@@ -51,22 +51,22 @@
     "summary" : "Grace is said to be where Ardor is. But two intimidating orc guards won't let you get to Ardor.",
     "tasks"   : {
       "1": {
-        "taskPhrase": "Found a strange amulet for manipulating orcs?",
+        "taskPhrase": "Found a magic scroll for manipulating orcs?",
         "type"      : "FIND_ITEM",
-        "target"    : {"transformation_orc": 1},
+        "target"    : {"scroll_of_obedience": 1},
         "isOptional": true,
         "isHidden"  : true
       },
       "2": {
-        "taskPhrase": "Used the amulet on the guards",
-        "type"      : "WEAR_ITEM",
-        "target"    : {"transformation_orc": 1},
+        "taskPhrase": "Used the scroll on the guards",
+        "type"      : "GIVE_ITEM",
+        "target"    : {"scroll_of_obedience": 1},
         "isOptional": true,
         "isHidden"  : true,
         "linkedWith": "5"
       },
       "3": {
-        "taskPhrase": "Impersonated a powerful wizard equal to Ardor",
+        "taskPhrase": "Convinced the guards to really fear Ardor",
         "type"      : "SAY_THE_RIGHT_THING",
         "isOptional": true,
         "isHidden"  : true,
@@ -103,10 +103,10 @@
         "linkedWith": "3"
       },
       "3": {
-        "taskPhrase"   : "Look for the mighty artifact",
-        "updatedPhrase": "Found a strange amulet for manipulating orcs?",
+        "taskPhrase"   : "Look for the magic scroll",
+        "updatedPhrase": "Found a magic scroll for manipulating orcs?",
         "type"         : "FIND_ITEM",
-        "target"       : {"transformation_orc": 1},
+        "target"       : {"scroll_of_obedience": 1},
         "isHidden"     : true
       }
     }

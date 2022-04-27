@@ -1,6 +1,6 @@
 package nl.t64.cot.components.quest
 
-import nl.t64.cot.Utils
+import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
@@ -66,6 +66,13 @@ data class QuestGraph(
         accept()
         tasks.filter { it.value.type == QuestTaskType.WEAR_ITEM }
             .filter { it.value.hasTargetInPlayerEquipment() }
+            .forEach { setTaskComplete(it.key) }
+    }
+
+    fun possibleSetGiveItemTaskComplete() {
+        accept()
+        tasks.filter { it.value.type == QuestTaskType.GIVE_ITEM }
+            .filter { it.value.hasTargetInInventory() }
             .forEach { setTaskComplete(it.key) }
     }
 
@@ -149,7 +156,7 @@ data class QuestGraph(
     }
 
     private fun completeQuest() {
-        Utils.audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_REWARD)
+        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_REWARD)
         currentState = QuestState.FINISHED
         showMessageTooltipQuestCompleted()
     }

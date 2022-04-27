@@ -42,9 +42,10 @@ class QuestTask(
             QuestTaskType.SHOW_ITEM,
             QuestTaskType.WEAR_ITEM,
             QuestTaskType.SAY_THE_RIGHT_THING,
-            QuestTaskType.KILL -> {
-                updatedPhrase?.let { taskPhrase = it }
-                isComplete = true
+            QuestTaskType.KILL -> completeTask()
+            QuestTaskType.GIVE_ITEM -> {
+                removeTargetFromInventory()
+                completeTask()
             }
             else -> throw IllegalArgumentException("Only some types are completable this way for now.")
         }
@@ -55,8 +56,17 @@ class QuestTask(
                 || gameData.party.hasItemInEquipment(getTargetEntry().key, getTargetEntry().value)
     }
 
+    fun hasTargetInInventory(): Boolean {
+        return gameData.inventory.contains(target)
+    }
+
     fun hasTargetInPlayerEquipment(): Boolean {
         return gameData.party.getPlayer().hasInventoryItem(getTargetEntry().key)
+    }
+
+    private fun completeTask() {
+        updatedPhrase?.let { taskPhrase = it }
+        isComplete = true
     }
 
     private fun removeTargetFromInventory() {

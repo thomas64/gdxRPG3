@@ -18,19 +18,23 @@
       "3" : {
         "face": "mozes", "text": ["Wait wait wait! Don't kill me."], "choices": [
           {"text": "I'm looking for a little girl, have you guys maybe seen her?", "nextId": "10"},
+          {"text": "Could you please let me through?", "nextId": "14"},
           {"condition": ["i_mask_of_ardor"], "text": "[Mask of Ardor] Your boss needs this for the ritual, let me through.", "nextId": "20"},
-          {"condition": ["i_diplomat2"], "text": "[Diplomat 2] Don't threaten me! Do you know who I am?", "nextId": "30"},
-          {"condition": ["i_level10"], "text": "Alright then, I'll have to go through you! (Start battle)", "nextId": "40"},
+          {"condition": ["diplomat2"], "text": "[Diplomat 2] You have to let me through.", "nextId": "30"},
+          {"condition": ["i_scroll_of_obedience"], "text": "[Scroll of Obedience] I command you to let me through.", "nextId": "60"},
+          {"condition": ["level10"], "text": "[Level 10] If you won't let me through, I'll get through YOU! (Start battle)", "nextId": "40"},
           {"text": "Okay, I'll go away... For now. (Leave conversation)", "command": "EXIT"}
         ]
       },
       "4" : {
         "face": "mozes", "text": ["Wait wait wait! Don't kill me."], "choices": [
           {"text": "I'm looking for a little girl, have you guys maybe seen her?", "nextId": "10"},
+          {"text": "Could you please let me through?", "nextId": "15"},
           {"condition": ["i_mask_of_ardor"], "text": "[Mask of Ardor] Your boss needs this for the ritual, let me through.", "nextId": "20"},
-          {"condition": ["i_diplomat2"], "text": "[Diplomat 2] Don't threaten me! Do you know who I am?", "nextId": "30"},
-          {"condition": ["i_level10"], "text": "Alright then, I'll have to go through you! (Start battle)", "nextId": "40"},
-          {"text": "Okay, I'll go away... For now. (Leave conversation)", "command": "ACCEPT_QUEST"}
+          {"condition": ["diplomat2"], "text": "[Diplomat 2] You have to let me through.", "nextId": "30"},
+          {"condition": ["i_scroll_of_obedience"], "text": "[Scroll of Obedience] I command you to let me through.", "nextId": "60"},
+          {"condition": ["level10"], "text": "[Level 10] If you won't let me through, I'll get through YOU! (Start battle)", "nextId": "40"},
+          {"text": "Okay, I'll go away... For now. (Leave conversation)", "command": "EXIT"}
         ]
       },
       "10": {"face": "orc_sergeant", "text": ["Ardor has girl. Leave now, or die!"]},
@@ -38,24 +42,29 @@
         "face": "mozes", "text": ["If anything has happened to Grace!"], "choices": [
           {"text": "Who is this Ardor?", "nextId": "12"},
           {"text": "What has this Ardor to do with her?", "nextId": "13"},
-          {"text": "If this Ardor has Grace, bring me to him!", "nextId": "14"}
+          {"text": "If this Ardor has Grace, bring me to him!", "nextId": "15"}
         ]
       },
       "12": {"face": "orc_sergeant", "text": ["Ardor is great wizard, soon ruler of Adan."], "choices": [{"nextId": "11"}]},
       "13": {"face": "orc_sergeant", "text": ["We found girl in forest, Ardor says she must die!"], "choices": [{"nextId": "11"}]},
-      "14": {"face": "orc_sergeant", "text": ["No! You leave, or die!"], "choices": [{"nextId": "4"}]},
+      "14": {"face": "orc_sergeant", "text": ["No! You leave, or die!"], "choices": [{"nextId": "3"}]},
+      "15": {"face": "orc_sergeant", "text": ["No! You leave, or die!"], "choices": [{"nextId": "4"}]},
       "20": {"face": "orc_sergeant", "text": ["That is mask of Ardor, he does need that.", "Why do you have mask?"]},
       "21": {"face": "mozes", "text": ["An orcish fellow needed to deliver it, but he wasn't able to.", "That's where I come in."]},
       "22": {"face": "orc_sergeant", "text": [". . ."]},
       "23": {"face": "orc_sergeant", "text": ["You go through."], "choices": [{"command": "SHOW_QUEST_ITEM", "nextId": "50"}]},
-      "30": {"face": "orc_sergeant", "text": ["No, who are you?"]},
-      "31": {"face": "mozes", "text": ["I am the Great Wizard Mozes! You'll be sorry if Ardor hears that you wouldn't let me through. He will incinerate you on the spot.", "You know he will."]},
-      "32": {"face": "orc_sergeant", "text": ["I know he could.", "Job is not worth life."]},
-      "33": {"face": "orc_sergeant", "text": ["You go through."], "choices": [{"command": "SAY_QUEST_THING", "nextId": "50"}]},
+      "30": {"face": "orc_sergeant", "text": ["No! You leave, or die!"]},
+      "31": {"face": "mozes", "text": ["It is of utmost importance! What do you think will happen when Ardor hears when you didn't let someone through who has some really important business with him?"]},
+      "32": {"face": "orc_sergeant", "text": ["I'm not sure..."]},
+      "33": {"face": "mozes", "text": ["He will incinerate you on the spot!"]},
+      "34": {"face": "orc_sergeant", "text": ["But..."]},
+      "35": {"face": "mozes", "text": ["Trust me."]},
+      "36": {"face": "orc_sergeant", "text": [". . ."]},
+      "37": {"face": "orc_sergeant", "text": ["For this time, you go through."]},
+      "38": {"face": "mozes", "text": ["Thank you."], "choices": [{"command": "SAY_QUEST_THING", "nextId": "50"}]},
       "40": {"face": "orc_sergeant", "text": ["You will die!"], "choices": [{"command": "START_BATTLE"}]},
       "50": {"face": "orc_sergeant", "text": ["Go!"], "choices": [{"command": "EXIT", "nextId": "50"}]},
-      "60": {"face": "mozes", "text": ["I need to get to Ardor. Let me through."]},
-      "61": {"face": "orc_sergeant", "text": ["You go through."], "choices": [{"command": "WEAR_QUEST_ITEM", "nextId": "50"}]}
+      "60": {"face": "orc_sergeant", "text": ["You go through."], "choices": [{"command": "GIVE_QUEST_ITEM", "nextId": "50"}]}
     }
   },
   "find_dead_orcs"      : {

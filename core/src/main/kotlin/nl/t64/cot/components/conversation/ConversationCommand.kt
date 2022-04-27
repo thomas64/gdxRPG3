@@ -16,6 +16,7 @@ enum class ConversationCommand {
     ACCEPT_QUEST,
     SHOW_QUEST_ITEM,
     WEAR_QUEST_ITEM,
+    GIVE_QUEST_ITEM,
     SAY_QUEST_THING,
 
     NONE,
