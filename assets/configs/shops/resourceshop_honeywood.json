@@ -2,6 +2,11 @@
   "herb",
   "spice",
   "gemstone",
+  "cloth",
+  "leather",
+  "wood",
+  "stone",
+  "metal",
   "healing_potion",
   "curing_potion"
 ]

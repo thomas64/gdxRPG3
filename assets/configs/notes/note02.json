@@ -1,5 +1,5 @@
 {
-  "note_stump_hero_s_hometown"                : {
+  "note_stump_honeywood": {
     "phrases": {
       "1": {
         "text": ["It's a stump."]
@@ -10,10 +10,10 @@
       }
     }
   },
-  "note_well_hero_s_hometown"                 : {
+  "note_well_honeywood" : {
     "phrases": {
       "1": {
-        "text"   : ["What a deep water well.", "Better not fall in and get wet."],
+        "text"   : ["What a deep water well.", "Better not fall in."],
         "choices": [{"command": "EXIT"}]
       }
     }

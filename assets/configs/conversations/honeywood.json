@@ -1,0 +1,24 @@
+{
+  "resourceshop_honeywood": {
+    "phrases": {
+      "1": {
+        "text"   : ["Hi Mozes, would you like to see my wares?"],
+        "choices": [
+          {"text": "Yes please. (Open shop)", "command": "LOAD_SHOP"},
+          {"text": "No thanks. (Leave conversation)", "command": "EXIT"}
+        ]
+      }
+    }
+  },
+  "equipshop_honeywood"   : {
+    "phrases": {
+      "1": {
+        "text"   : ["Hello Mozes, what can I do for you today?"],
+        "choices": [
+          {"text": "I would like to see your wares please. (Open shop)", "command": "LOAD_SHOP"},
+          {"text": "Nothing thank you, just passing by. (Leave conversation)", "command": "EXIT"}
+        ]
+      }
+    }
+  }
+}
