@@ -1,0 +1,13 @@
+{
+  "quest_royal_sacrifice": {
+    "title"   : "Royal sacrifice?",
+    "entityId": "ardor",
+    "summary" : "Grace will become sacrificed by the wizard Ardor to gain ultimate power from the God Ulrog. Something seems to go wrong and everything gets engulfed in flames, including Ardor and you.",
+    "tasks"   : {
+      "1": {
+        "taskPhrase": "Rescue Grace from Ardor",
+        "type"      : "DISCOVER"
+      }
+    }
+  }
+}

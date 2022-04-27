@@ -59,11 +59,11 @@ class InventorySlotUser private constructor(itemSlot: ItemSlot) {
     }
 
     private fun potionCondition(): Boolean {
-        return selectedHero.getCurrentHp() < selectedHero.getMaximumHp()
+        return selectedHero.isAlive && selectedHero.getCurrentHp() < selectedHero.getMaximumHp()
     }
 
     private fun staminaCondition(): Boolean {
-        return selectedHero.getCurrentStamina() < selectedHero.getMaximumStamina()
+        return selectedHero.isAlive && selectedHero.getCurrentStamina() < selectedHero.getMaximumStamina()
     }
 
     private fun doHealing() {

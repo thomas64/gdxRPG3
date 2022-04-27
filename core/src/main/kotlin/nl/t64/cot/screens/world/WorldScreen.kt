@@ -238,8 +238,8 @@ class WorldScreen : Screen,
 
     override fun onNotifyBattleWon(battleId: String, spoils: Loot) {
         screenManager.setScreen(ScreenType.WORLD)
-        doBeforeLoadScreen()
         BattleResolver.resolveWin(battleId, spoils, player.position, currentNpcEntity, npcEntities)
+        doBeforeLoadScreen()
     }
 
     override fun onNotifyBattleLost() {

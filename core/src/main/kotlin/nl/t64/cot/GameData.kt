@@ -1,5 +1,6 @@
 package nl.t64.cot
 
+import nl.t64.cot.Utils.scenario
 import nl.t64.cot.components.battle.BattleContainer
 import nl.t64.cot.components.conversation.ConversationContainer
 import nl.t64.cot.components.conversation.PhraseIdContainer
@@ -11,9 +12,7 @@ import nl.t64.cot.components.loot.SpoilsContainer
 import nl.t64.cot.components.party.HeroContainer
 import nl.t64.cot.components.party.PartyContainer
 import nl.t64.cot.components.party.inventory.InventoryContainer
-import nl.t64.cot.components.party.inventory.InventoryDatabase.createInventoryItem
 import nl.t64.cot.components.quest.QuestContainer
-import nl.t64.cot.constants.Constant
 import nl.t64.cot.subjects.ProfileObserver
 
 
@@ -33,6 +32,13 @@ class GameData : ProfileObserver {
     var isTooltipEnabled = false
     var isComparingEnabled = false
 
+    fun resetCycle() {
+        battles = BattleContainer()
+        conversations = ConversationContainer()
+        loot = LootContainer()
+        spoils = SpoilsContainer()
+    }
+
     override fun onNotifyCreateProfile(profileManager: ProfileManager) {
         heroes = HeroContainer()
         party = PartyContainer()
@@ -47,9 +53,7 @@ class GameData : ProfileObserver {
         cutscenes = CutsceneContainer()
         isTooltipEnabled = true
         isComparingEnabled = true
-        addFirstHeroToParty()
-        addFirstItemsToInventory()
-        addFirstQuestToLogbook()
+        scenario.startNewGame()
         onNotifySaveProfile(profileManager)
     }
 
@@ -86,21 +90,6 @@ class GameData : ProfileObserver {
         cutscenes = profileManager.getProperty("cutscenes")
         isTooltipEnabled = profileManager.getProperty("isTooltipEnabled")
         isComparingEnabled = profileManager.getProperty("isComparingEnabled")
-    }
-
-    private fun addFirstHeroToParty() {
-        val hero = heroes.getCertainHero(Constant.PLAYER_ID)
-        heroes.removeHero(Constant.PLAYER_ID)
-        party.addHero(hero)
-    }
-
-    private fun addFirstItemsToInventory() {
-        val gold = createInventoryItem("gold")
-        inventory.autoSetItem(gold)
-    }
-
-    private fun addFirstQuestToLogbook() {
-        quests.getQuestById("quest_grace_is_missing").accept()
     }
 
 }

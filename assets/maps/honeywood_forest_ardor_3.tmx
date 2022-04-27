@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="24" tileheight="24" infinite="0" nextlayerid="11" nextobjectid="17">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="24" tileheight="24" infinite="0" nextlayerid="11" nextobjectid="18">
  <properties>
   <property name="bgm" value="bgm_ardor"/>
   <property name="lightmap_map" value="fog"/>
@@ -62,5 +62,6 @@
   <object id="4" name="sand" x="456" y="576" width="48" height="144"/>
   <object id="15" name="sand" x="552" y="240" width="120" height="120"/>
   <object id="16" name="sand" x="432" y="360" width="96" height="192"/>
+  <object id="17" name="sand" x="528" y="360" width="120" height="72"/>
  </objectgroup>
 </map>

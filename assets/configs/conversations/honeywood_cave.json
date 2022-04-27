@@ -34,7 +34,7 @@
           {"condition": ["diplomat2"], "text": "[Diplomat 2] You have to let me through.", "nextId": "30"},
           {"condition": ["i_scroll_of_obedience"], "text": "[Scroll of Obedience] I command you to let me through.", "nextId": "60"},
           {"condition": ["level10"], "text": "[Level 10] If you won't let me through, I'll get through YOU! (Start battle)", "nextId": "40"},
-          {"text": "Okay, I'll go away... For now. (Leave conversation)", "command": "EXIT"}
+          {"text": "Okay, I'll go away... For now. (Leave conversation)", "command": "ACCEPT_QUEST"}
         ]
       },
       "10": {"face": "orc_sergeant", "text": ["Ardor has girl. Leave now, or die!"]},

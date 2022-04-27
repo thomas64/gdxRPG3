@@ -28,6 +28,7 @@ open class GdxRpg3 : Game() {
     val profileManager: ProfileManager = ProfileManager()
     val resourceManager: ResourceManager = ResourceManager()
     val gameData: GameData = GameData()
+    val scenario: Scenario = Scenario()
     val screenManager: ScreenManager = ScreenManager()
     val audioManager: AudioManager = AudioManager()
     val mapManager: MapManager = MapManager()

@@ -45,6 +45,11 @@ data class HeroItem(
         }
     }
 
+    fun revive() {
+        isAlive = true
+        recoverFullHp()
+    }
+
     fun recoverFullHp() {
         stats.recoverFullHp()
     }

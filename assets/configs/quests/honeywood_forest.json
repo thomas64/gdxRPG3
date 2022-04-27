@@ -39,7 +39,13 @@
         "linkedWith"   : "4"
       },
       "4": {
-        "taskPhrase": "Rescue Grace from Ardor",
+        "taskPhrase"   : "Rescue Grace from Ardor",
+        "updatedPhrase": "Found Grace being murdered by Ardor",
+        "type"         : "DISCOVER",
+        "isHidden"     : true
+      },
+      "5": {
+        "taskPhrase": "Something went wrong and everything burned, including Ardor",
         "type"      : "DISCOVER",
         "isHidden"  : true
       }

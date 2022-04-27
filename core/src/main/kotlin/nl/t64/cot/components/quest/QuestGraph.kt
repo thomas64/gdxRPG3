@@ -88,12 +88,12 @@ data class QuestGraph(
             .forEach { setTaskComplete(it.key) }
     }
 
-    fun setTaskComplete(taskId: String) {
+    fun setTaskComplete(taskId: String, showTooltip: Boolean = true) {
         if (!isTaskComplete(taskId)) {
             val questTask = tasks[taskId]!!
             questTask.setComplete()
             unhideTaskWithLinkedTask(questTask)
-            showMessageTooltipQuestUpdated()
+            if (showTooltip) showMessageTooltipQuestUpdated()
             possibleCompleteQuest()
         }
     }
@@ -128,6 +128,12 @@ data class QuestGraph(
             .all { it.value.isComplete }
     }
 
+    fun forceCompleteQuest(playSound: Boolean = false, showTooltip: Boolean = false) {
+        if (currentState != QuestState.FINISHED) {
+            completeQuest(playSound, showTooltip)
+        }
+    }
+
 //    fun handleReceive() {
 //        val receiveLoot = tasks.values
 //            .filter { it.type == QuestTaskType.ITEM_DELIVERY }
@@ -155,10 +161,10 @@ data class QuestGraph(
         }
     }
 
-    private fun completeQuest() {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_REWARD)
+    private fun completeQuest(playSound: Boolean = true, showTooltip: Boolean = true) {
+        if (playSound) audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_REWARD)
         currentState = QuestState.FINISHED
-        showMessageTooltipQuestCompleted()
+        if (showTooltip) showMessageTooltipQuestCompleted()
     }
 
     private fun areAllQuestTasksComplete(): Boolean {

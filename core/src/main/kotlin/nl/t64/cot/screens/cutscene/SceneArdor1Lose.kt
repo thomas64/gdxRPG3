@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.audioManager
+import nl.t64.cot.Utils.scenario
 import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.constants.Constant
@@ -271,6 +272,8 @@ class SceneArdor1Lose : CutsceneScreen() {
     }
 
     override fun exitScreen() {
+        audioManager.handle(AudioCommand.SE_STOP_ALL)
+        scenario.startSecondCycle()
         endCutsceneAndOpenMap("honeywood_mozes_house", "scene_ardor_1")
     }
 

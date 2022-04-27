@@ -52,6 +52,7 @@ object Utils {
     val preferenceManager: PreferenceManager get() = gdxRpg3.preferenceManager
     val profileManager: ProfileManager get() = gdxRpg3.profileManager
     val gameData: GameData get() = gdxRpg3.gameData
+    val scenario: Scenario get() = gdxRpg3.scenario
     val screenManager: ScreenManager get() = gdxRpg3.screenManager
     val audioManager: AudioManager get() = gdxRpg3.audioManager
     val mapManager: MapManager get() = gdxRpg3.mapManager
