@@ -29,13 +29,13 @@ abstract class ParchmentScreen : Screen {
         // empty
     }
 
-    fun fadeParchment() {
+    fun fadeParchment(fadeToScreen: ScreenType = ScreenType.WORLD) {
         val screenshot = stage.actors[0] as Image
         val parchment = stage.actors[1] as Image
         stage.clear()
         setBackground(screenshot, parchment)
         parchment.addAction(Actions.sequence(Actions.fadeOut(Constant.FADE_DURATION),
-                                             Actions.run { screenManager.setScreen(ScreenType.WORLD) }))
+                                             Actions.run { screenManager.setScreen(fadeToScreen) }))
     }
 
     fun setBackground(screenshot: Image, parchment: Image) {

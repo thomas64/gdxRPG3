@@ -11,6 +11,7 @@ import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.battle.BattleScreen
+import nl.t64.cot.screens.loot.SpoilsCutsceneScreen
 import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.screens.world.entity.EntityState
 
@@ -214,17 +215,19 @@ class SceneArdor1 : CutsceneScreen() {
         return Actions.run { exitScreen() }
     }
 
+    override fun exitScreen() {
+        audioManager.handle(AudioCommand.SE_STOP_ALL)
+        endCutsceneAnd { BattleScreen.load("ardor_orc_generals", this) }
+    }
+
     override fun onNotifyBattleWon(battleId: String, spoils: Loot) {
         screenManager.setScreen(ScreenType.SCENE_ARDOR_1_WIN)
+        SpoilsCutsceneScreen.load(spoils, ScreenType.SCENE_ARDOR_1_WIN)
     }
 
     override fun onNotifyBattleLost() {
         (screenManager.getScreen(ScreenType.SCENE_ARDOR_1_LOSE) as SceneArdor1Lose).apply { areGeneralsAlive = true }
         screenManager.setScreen(ScreenType.SCENE_ARDOR_1_LOSE)
-    }
-
-    override fun exitScreen() {
-        endCutsceneAnd { BattleScreen.load("ardor_orc_generals", this) }
     }
 
 }

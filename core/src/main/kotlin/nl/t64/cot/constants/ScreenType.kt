@@ -6,10 +6,7 @@ import nl.t64.cot.screens.academy.AcademyScreen
 import nl.t64.cot.screens.battle.BattleScreen
 import nl.t64.cot.screens.cutscene.*
 import nl.t64.cot.screens.inventory.InventoryScreen
-import nl.t64.cot.screens.loot.FindScreen
-import nl.t64.cot.screens.loot.ReceiveScreen
-import nl.t64.cot.screens.loot.RewardScreen
-import nl.t64.cot.screens.loot.SpoilsScreen
+import nl.t64.cot.screens.loot.*
 import nl.t64.cot.screens.menu.*
 import nl.t64.cot.screens.questlog.QuestLogScreen
 import nl.t64.cot.screens.school.SchoolScreen
@@ -41,6 +38,7 @@ enum class ScreenType(val screenClass: Class<out Screen>) {
     REWARD(RewardScreen::class.java),
     RECEIVE(ReceiveScreen::class.java),
     SPOILS(SpoilsScreen::class.java),
+    SPOILS_CUTSCENE(SpoilsCutsceneScreen::class.java),
 
     SCENE_INTRO(SceneIntro::class.java),
     SCENE_DEATH(SceneDeath::class.java),

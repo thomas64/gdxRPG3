@@ -53,6 +53,10 @@ class SceneArdor1Win : CutsceneScreen() {
         return Actions.run { exitScreen() }
     }
 
+    override fun exitScreen() {
+        endCutsceneAnd { BattleScreen.load("ardor", this) }
+    }
+
     override fun onNotifyBattleWon(battleId: String, spoils: Loot) {
         screenManager.setScreen(ScreenType.SCENE_GAME_ENDING)
     }
@@ -60,10 +64,6 @@ class SceneArdor1Win : CutsceneScreen() {
     override fun onNotifyBattleLost() {
         (screenManager.getScreen(ScreenType.SCENE_ARDOR_1_LOSE) as SceneArdor1Lose).apply { areGeneralsAlive = false }
         screenManager.setScreen(ScreenType.SCENE_ARDOR_1_LOSE)
-    }
-
-    override fun exitScreen() {
-        endCutsceneAnd { BattleScreen.load("ardor", this) }
     }
 
 }

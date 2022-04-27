@@ -8,6 +8,7 @@ import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.components.loot.Loot
+import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.ParchmentScreen
 
 
@@ -38,15 +39,18 @@ abstract class LootScreen : ParchmentScreen() {
         stage.dispose()
     }
 
-    open fun closeScreen(isAllTheLootCleared: Boolean) {
+    open fun resolveLootAndCloseScreen(isAllTheLootCleared: Boolean) {
         if (isAllTheLootCleared) {
             resolveAfterClearingContent()
         }
+        closeScreen()
+    }
 
+    fun closeScreen(fadeToScreen: ScreenType = ScreenType.WORLD) {
         Gdx.input.inputProcessor = null
         Utils.setGamepadInputProcessor(null)
         audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_CONVERSATION_NEXT)
-        fadeParchment()
+        fadeParchment(fadeToScreen)
     }
 
     abstract fun resolveAfterClearingContent()

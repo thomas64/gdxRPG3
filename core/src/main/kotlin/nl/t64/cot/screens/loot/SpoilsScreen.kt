@@ -9,7 +9,7 @@ import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.constants.ScreenType
 
 
-class SpoilsScreen : LootScreen() {
+open class SpoilsScreen : LootScreen() {
 
     companion object {
         fun load(spoils: Loot) {
@@ -21,10 +21,10 @@ class SpoilsScreen : LootScreen() {
         }
     }
 
-    override fun closeScreen(isAllTheLootCleared: Boolean) {
+    override fun resolveLootAndCloseScreen(notUsedHere: Boolean) {
         brokerManager.lootObservers.notifySpoilsUpdated()
-        super.closeScreen(false)
-        // Above argument is false so that resolveAfterClearingContent() is not called in closeScreen(),
+        closeScreen()
+        // For spoils, resolveAfterClearingContent() must not be called in resolveLootAndCloseScreen(),
         // which is empty anyway and also already resolved at the line with notifySpoilsUpdated().
         // This is necessary, so that loot is always updated, even if the spoils are not taken.
     }

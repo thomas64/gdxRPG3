@@ -66,7 +66,7 @@ class LootSlotsTable(
         } else {
             loot.updateContent(inventory.getAllContent())
         }
-        lootScreen.closeScreen(inventory.isEmpty())
+        lootScreen.resolveLootAndCloseScreen(inventory.isEmpty())
     }
 
     private fun toggleTooltip() {

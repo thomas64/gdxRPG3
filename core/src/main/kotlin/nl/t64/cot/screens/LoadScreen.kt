@@ -77,7 +77,7 @@ class LoadScreen : Screen {
 
     private fun hasSmallParchment(): Boolean {
         return when (screenTypeToLoad) {
-            ScreenType.FIND, ScreenType.REWARD, ScreenType.RECEIVE, ScreenType.SPOILS -> true
+            ScreenType.FIND, ScreenType.REWARD, ScreenType.RECEIVE, ScreenType.SPOILS, ScreenType.SPOILS_CUTSCENE -> true
             else -> false
         }
     }
