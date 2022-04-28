@@ -111,7 +111,7 @@ class ResourceManager {
             loadAtlasTexture(FILE_LIST_ATLAS_FILES2, ATLAS_FILES2)
             loadAtlasTexture(FILE_LIST_ATLAS_FILES3, ATLAS_FILES3)
         }
-        return atlasList.mapNotNull { it.findRegion(atlasId) }.first()
+        return atlasList.firstNotNullOf { it.findRegion(atlasId) }
     }
 
     private fun loadAtlasTexture(fileName: String, directory: String) {

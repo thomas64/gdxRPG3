@@ -130,7 +130,7 @@ internal class ConversationTest : GameTest() {
 
         val quest7 = gameData.quests.getQuestById("quest0007")
         quest7.currentState = QuestState.UNCLAIMED
-        // todo, the state is now forced set. sometime when i continue with quests,
+        // todo, the state is now forced set. sometime when I continue with quests,
         // the unclaimed state won't be set this way and this needs to be changed here.
 
         assertThat(graph.getAssociatedChoices()).hasSize(2)

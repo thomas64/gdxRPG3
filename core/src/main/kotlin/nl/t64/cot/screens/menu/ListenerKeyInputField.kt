@@ -8,7 +8,7 @@ import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
 
 
-private const val VALID_CHARACTERS = "^[0-9a-zA-Z]*$"
+private const val VALID_CHARACTERS = """^[\da-zA-Z]*$"""
 
 internal class ListenerKeyInputField(
     private val updateInputFunction: (StringBuilder) -> Unit,

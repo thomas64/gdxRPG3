@@ -18,10 +18,10 @@ abstract class GraphicsComponent : Component {
     lateinit var state: EntityState
     lateinit var position: Vector2
     lateinit var direction: Direction
-    lateinit var walkNorthAnimation: Animation<TextureRegion>
-    lateinit var walkSouthAnimation: Animation<TextureRegion>
-    lateinit var walkWestAnimation: Animation<TextureRegion>
-    lateinit var walkEastAnimation: Animation<TextureRegion>
+    private lateinit var walkNorthAnimation: Animation<TextureRegion>
+    private lateinit var walkSouthAnimation: Animation<TextureRegion>
+    private lateinit var walkWestAnimation: Animation<TextureRegion>
+    private lateinit var walkEastAnimation: Animation<TextureRegion>
 
     abstract fun update(dt: Float)
     abstract fun render(batch: Batch)

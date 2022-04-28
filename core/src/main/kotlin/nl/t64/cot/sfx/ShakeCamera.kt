@@ -10,9 +10,6 @@ private const val DIMINISH_FACTOR = 0.9f
 
 class ShakeCamera(x: Float = 0f, y: Float = 0f, aShakeRadius: Float = SHAKE_RADIUS) {
 
-    constructor(x: Float, y: Float) : this(x, y, SHAKE_RADIUS)
-    constructor(shakeRadius: Float) : this(0f, 0f, shakeRadius)
-
     private val originalPosition: Vector2 = Vector2(x, y)
     private val currentPosition: Vector2 = Vector2()
     private val offset: Vector2 = Vector2()

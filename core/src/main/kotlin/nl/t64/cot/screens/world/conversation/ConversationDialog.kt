@@ -336,7 +336,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // todo, these 2 methods are from the huge quest clean up, they were in WorldScreen.
-    // i think they fit better here, the moment they will become in use again.
+    // I think they fit better here, the moment they will become in use again.
     private fun onNotifyShowRewardDialog(reward: Loot, levelUpMessage: String?) {
         stage.addAction(Actions.sequence(Actions.run { hideWithFade() },
                                          Actions.delay(Constant.DIALOG_FADE_OUT_DURATION),
