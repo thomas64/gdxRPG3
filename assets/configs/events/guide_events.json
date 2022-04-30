@@ -38,5 +38,9 @@
     "type"     : "messagebox",
     "condition": ["been_in_fairy_town"],
     "text"     : ["Remember, press %logbook% to see your logbook.", "Here you can see everything quest related."]
+  },
+  "guide_event_storage"       : {
+    "type": "messagebox",
+    "text": ["The closet behind you can be used for storage.", "When your inventory becomes full, put your items in your closet.", "They will be kept there and they will be safe."]
   }
 }

@@ -45,41 +45,41 @@ internal class InventorySlotTaker(private val selector: ItemSlotSelector) {
 
     fun sellOne(itemSlot: ItemSlot) {
         choice = Choice.ONE
-        tryPutInventorySlotToShopSlot(itemSlot)
+        tryPutInventorySlotToCounterpartSlot(itemSlot)
     }
 
     fun sellHalf(itemSlot: ItemSlot) {
         choice = Choice.HALF
-        tryPutInventorySlotToShopSlot(itemSlot)
+        tryPutInventorySlotToCounterpartSlot(itemSlot)
     }
 
     fun sellFull(itemSlot: ItemSlot) {
         choice = Choice.FULL
-        tryPutInventorySlotToShopSlot(itemSlot)
+        tryPutInventorySlotToCounterpartSlot(itemSlot)
     }
 
-    private fun tryPutInventorySlotToShopSlot(sourceSlot: ItemSlot) {
+    private fun tryPutInventorySlotToCounterpartSlot(sourceSlot: ItemSlot) {
         this.sourceSlot = sourceSlot
         sourceSlot.getPossibleInventoryImage()?.let {
-            tryPutInventorySlotToShopSlot(it)
+            tryPutInventorySlotToCounterpartSlot(it)
         }
     }
 
-    private fun tryPutInventorySlotToShopSlot(candidateItem: InventoryImage) {
+    private fun tryPutInventorySlotToCounterpartSlot(candidateItem: InventoryImage) {
         this.candidateItem = candidateItem
-        InventoryUtils.getScreenUI().getShopSlotsTable()
+        InventoryUtils.getScreenUI().getCounterpartSlotsTable()
             .getPossibleSameStackableItemSlotWith(candidateItem.inventoryItem)?.let {
-                exchangeWithShopSlot(it)
-            } ?: exchangeWithPossibleEmptyShopSlot()
+                exchangeWithCounterpartSlot(it)
+            } ?: exchangeWithPossibleEmptyCounterpartSlot()
     }
 
-    private fun exchangeWithPossibleEmptyShopSlot() {
-        InventoryUtils.getScreenUI().getShopSlotsTable().getPossibleEmptySlot()?.let {
-            exchangeWithShopSlot(it)
+    private fun exchangeWithPossibleEmptyCounterpartSlot() {
+        InventoryUtils.getScreenUI().getCounterpartSlotsTable().getPossibleEmptySlot()?.let {
+            exchangeWithCounterpartSlot(it)
         }
     }
 
-    private fun exchangeWithShopSlot(targetSlot: ItemSlot) {
+    private fun exchangeWithCounterpartSlot(targetSlot: ItemSlot) {
         sourceSlot.deselect()
         val takeAmount: Int = getAndTakeAmount()
         ItemSlotsExchanger(candidateItem, takeAmount, sourceSlot, targetSlot).exchange()

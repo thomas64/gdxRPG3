@@ -21,6 +21,7 @@ class GameData : ProfileObserver {
     lateinit var heroes: HeroContainer
     lateinit var party: PartyContainer
     lateinit var inventory: InventoryContainer
+    lateinit var storage: InventoryContainer
     lateinit var battles: BattleContainer
     lateinit var conversations: ConversationContainer
     lateinit var quests: QuestContainer
@@ -42,7 +43,8 @@ class GameData : ProfileObserver {
     override fun onNotifyCreateProfile(profileManager: ProfileManager) {
         heroes = HeroContainer()
         party = PartyContainer()
-        inventory = InventoryContainer()
+        inventory = InventoryContainer(66)
+        storage = InventoryContainer(176)
         battles = BattleContainer()
         conversations = ConversationContainer()
         quests = QuestContainer()
@@ -61,6 +63,7 @@ class GameData : ProfileObserver {
         profileManager.setProperty("heroes", heroes)
         profileManager.setProperty("party", party)
         profileManager.setProperty("inventory", inventory)
+        profileManager.setProperty("storage", storage)
         profileManager.setProperty("battles", battles)
         profileManager.setProperty("conversations", conversations.createPhraseIdContainer())
         profileManager.setProperty("quests", quests)
@@ -77,6 +80,7 @@ class GameData : ProfileObserver {
         heroes = profileManager.getProperty("heroes")
         party = profileManager.getProperty("party")
         inventory = profileManager.getProperty("inventory")
+        storage = profileManager.getProperty("storage")
         battles = profileManager.getProperty("battles")
         conversations = ConversationContainer().apply {
             val container: PhraseIdContainer = profileManager.getProperty("conversations")

@@ -30,7 +30,7 @@ class PhysicsSparkle(private val sparkle: Loot) : PhysicsComponent() {
         if (isSelected) {
             isSelected = false
             sparkle.handleRanger(gameData.party.getSumOfSkill(SkillItemId.RANGER))
-            brokerManager.componentObservers.notifyShowFindDialog(sparkle, AudioEvent.SE_SPARKLE)
+            brokerManager.componentObservers.notifyShowFindScreen(sparkle, AudioEvent.SE_SPARKLE)
         }
     }
 

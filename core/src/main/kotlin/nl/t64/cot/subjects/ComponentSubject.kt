@@ -33,12 +33,16 @@ class ComponentSubject {
         observers.forEach { it.onNotifyShowNoteDialog(noteId) }
     }
 
-    fun notifyShowFindDialog(loot: Loot, event: AudioEvent, message: String) {
-        observers.forEach { it.onNotifyShowFindDialog(loot, event, message) }
+    fun notifyShowFindScreenWithMessageDialog(loot: Loot, event: AudioEvent, message: String) {
+        observers.forEach { it.onNotifyShowFindScreenWithMessageDialog(loot, event, message) }
     }
 
-    fun notifyShowFindDialog(loot: Loot, event: AudioEvent) {
-        observers.forEach { it.onNotifyShowFindDialog(loot, event) }
+    fun notifyShowFindScreen(loot: Loot, event: AudioEvent) {
+        observers.forEach { it.onNotifyShowFindScreen(loot, event) }
+    }
+
+    fun notifyShowStorageScreen() {
+        observers.forEach { it.onNotifyShowStorageScreen() }
     }
 
     fun notifyShowMessageDialog(message: String) {

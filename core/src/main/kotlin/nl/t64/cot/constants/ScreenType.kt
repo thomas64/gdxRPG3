@@ -11,6 +11,7 @@ import nl.t64.cot.screens.menu.*
 import nl.t64.cot.screens.questlog.QuestLogScreen
 import nl.t64.cot.screens.school.SchoolScreen
 import nl.t64.cot.screens.shop.ShopScreen
+import nl.t64.cot.screens.storage.StorageScreen
 import nl.t64.cot.screens.world.WorldScreen
 
 
@@ -31,6 +32,7 @@ enum class ScreenType(val screenClass: Class<out Screen>) {
     LOAD_SCREEN(LoadScreen::class.java),
     INVENTORY(InventoryScreen::class.java),
     QUEST_LOG(QuestLogScreen::class.java),
+    STORAGE(StorageScreen::class.java),
     SHOP(ShopScreen::class.java),
     ACADEMY(AcademyScreen::class.java),
     SCHOOL(SchoolScreen::class.java),

@@ -10,8 +10,9 @@ interface ComponentObserver {
     fun onNotifyShowConversationDialogFromNpc(conversationId: String, npcEntity: Entity)
     fun onNotifyShowConversationDialogFromEvent(conversationId: String, entityId: String)
     fun onNotifyShowNoteDialog(noteId: String)
-    fun onNotifyShowFindDialog(loot: Loot, event: AudioEvent, message: String)
-    fun onNotifyShowFindDialog(loot: Loot, event: AudioEvent)
+    fun onNotifyShowFindScreenWithMessageDialog(loot: Loot, event: AudioEvent, message: String)
+    fun onNotifyShowFindScreen(loot: Loot, event: AudioEvent)
+    fun onNotifyShowStorageScreen()
     fun onNotifyShowMessageDialog(message: String)
     fun onNotifyShowBattleScreen(battleId: String, enemyEntity: Entity)
 

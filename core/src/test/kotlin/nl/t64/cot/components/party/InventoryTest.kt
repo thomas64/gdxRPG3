@@ -29,7 +29,7 @@ internal class InventoryTest : GameTest() {
     @BeforeEach
     private fun beforeEach() {
         gameData.onNotifyCreateProfile(ProfileManager())
-        inventory = InventoryContainer()
+        inventory = InventoryContainer(66)
         val mace = InventoryDatabase.createInventoryItem(BASIC_MACE)
         inventory.autoSetItem(mace)
         val gold = InventoryDatabase.createInventoryItem(GOLD)

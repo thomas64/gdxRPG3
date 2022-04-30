@@ -132,8 +132,8 @@ class ItemSlotsExchanger {
             audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_COINS_SELL)
         } else if (isEquipingOrDequiping()) {
             audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_EQUIP)
-        } else if (isSameSlotOrBox()) {
-            // do nothing
+        } else if (isSameSlotOrBoxOrStorage()) {
+            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_TAKE)
         } else {
             audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_TAKE)
         }
@@ -158,7 +158,7 @@ class ItemSlotsExchanger {
         (!sourceSlot.isOnHero() && targetSlot.isOnHero())
                 || (sourceSlot.isOnHero() && !targetSlot.isOnHero())
 
-    private fun isSameSlotOrBox(): Boolean =
+    private fun isSameSlotOrBoxOrStorage(): Boolean =
         targetSlot == sourceSlot
                 || targetSlot.filterGroup == sourceSlot.filterGroup
 

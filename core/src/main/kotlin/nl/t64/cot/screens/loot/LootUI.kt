@@ -15,10 +15,10 @@ import nl.t64.cot.screens.inventory.tooltip.LootSlotTooltip
 private const val WINDOW_PADDING_BOTTOM = 10f
 private const val LABEL_PADDING_TOP = 15f
 
-internal class LootUI(lootScreen: LootScreen, loot: Loot, title: String) {
+internal class LootUI(resolveLootAndCloseScreen: (Boolean) -> Unit, loot: Loot, title: String) {
 
     private val tooltip = LootSlotTooltip()
-    private val lootSlotsContainer = LootSlotsTable(lootScreen, loot, tooltip).apply {
+    private val lootSlotsContainer = LootSlotsTable(resolveLootAndCloseScreen, loot, tooltip).apply {
         lootSlots.background = Utils.createTopBorder()
     }
     private val lootWindow: Window = Utils.createDefaultWindow(title, lootSlotsContainer.lootSlots).apply {

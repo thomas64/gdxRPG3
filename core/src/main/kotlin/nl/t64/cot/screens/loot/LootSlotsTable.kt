@@ -22,7 +22,7 @@ private const val SLOTS_IN_ROW = 4
 private const val INPUT_DELAY = 0.2f
 
 class LootSlotsTable(
-    private val lootScreen: LootScreen,
+    private val resolveLootAndCloseScreen: (Boolean) -> Unit,
     private val loot: Loot,
     private val tooltip: LootSlotTooltip
 ) {
@@ -66,7 +66,7 @@ class LootSlotsTable(
         } else {
             loot.updateContent(inventory.getAllContent())
         }
-        lootScreen.resolveLootAndCloseScreen(inventory.isEmpty())
+        resolveLootAndCloseScreen.invoke(inventory.isEmpty())
     }
 
     private fun toggleTooltip() {

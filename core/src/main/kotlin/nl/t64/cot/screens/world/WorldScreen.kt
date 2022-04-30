@@ -26,6 +26,7 @@ import nl.t64.cot.screens.battle.BattleObserver
 import nl.t64.cot.screens.battle.BattleScreen
 import nl.t64.cot.screens.inventory.tooltip.MessageTooltip
 import nl.t64.cot.screens.loot.FindScreen
+import nl.t64.cot.screens.storage.StorageScreen
 import nl.t64.cot.screens.world.conversation.ConversationDialog
 import nl.t64.cot.screens.world.conversation.ConversationObserver
 import nl.t64.cot.screens.world.debug.DebugBox
@@ -143,16 +144,21 @@ class WorldScreen : Screen,
         conversationDialog.show()
     }
 
-    override fun onNotifyShowFindDialog(loot: Loot, event: AudioEvent, message: String) {
+    override fun onNotifyShowFindScreenWithMessageDialog(loot: Loot, event: AudioEvent, message: String) {
         doBeforeLoadScreen()
         gameState = GameState.DIALOG
         messageDialog.setActionAfterHide { FindScreen.load(loot, event) }
         messageDialog.show(message, AudioEvent.SE_CONVERSATION_NEXT)
     }
 
-    override fun onNotifyShowFindDialog(loot: Loot, event: AudioEvent) {
+    override fun onNotifyShowFindScreen(loot: Loot, event: AudioEvent) {
         doBeforeLoadScreen()
         FindScreen.load(loot, event)
+    }
+
+    override fun onNotifyShowStorageScreen() {
+        player.resetInput()
+        StorageScreen.load()
     }
 
     override fun onNotifyShowMessageDialog(message: String) {

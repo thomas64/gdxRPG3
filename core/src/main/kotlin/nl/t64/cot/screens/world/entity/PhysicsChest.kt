@@ -141,9 +141,9 @@ class PhysicsChest(private val chest: Loot) : PhysicsComponent() {
     private fun showFindDialog() {
         val message = finishStringBuilder()
         if (message.isBlank()) {
-            brokerManager.componentObservers.notifyShowFindDialog(chest, AudioEvent.SE_CHEST)
+            brokerManager.componentObservers.notifyShowFindScreen(chest, AudioEvent.SE_CHEST)
         } else {
-            brokerManager.componentObservers.notifyShowFindDialog(chest, AudioEvent.SE_CHEST, message)
+            brokerManager.componentObservers.notifyShowFindScreenWithMessageDialog(chest, AudioEvent.SE_CHEST, message)
         }
     }
 

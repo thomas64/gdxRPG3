@@ -21,7 +21,7 @@ abstract class LootScreen : ParchmentScreen() {
         Gdx.input.inputProcessor = stage
         Utils.setGamepadInputProcessor(stage)
 
-        val lootUI = LootUI(this, loot, lootTitle)
+        val lootUI = LootUI({ resolveLootAndCloseScreen(it) }, loot, lootTitle)
         lootUI.show(stage)
     }
 

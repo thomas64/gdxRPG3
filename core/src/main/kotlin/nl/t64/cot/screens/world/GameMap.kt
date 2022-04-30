@@ -71,6 +71,7 @@ class GameMap(val mapTitle: String) {
     val sparkles: List<GameMapSparkle> = loader.startsWith(REST_LAYER, "sparkle") { GameMapSparkle(it) }
     val chests: List<RectangleMapObject> = loader.startsWith(REST_LAYER, "chest")
     val doors: List<RectangleMapObject> = loader.startsWith(REST_LAYER, "door")
+    val storage: List<GameMapStorage> = loader.startsWith(REST_LAYER, "storage") { GameMapStorage(it) }
 
     private val sounds: List<RectangleMapObject> = loader.loadLayer(SOUND_LAYER)
     private val blockers: List<GameMapBlocker> = loader.loadLayer(COLLISION_LAYER) { GameMapBlocker(it) }

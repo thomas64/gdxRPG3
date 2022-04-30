@@ -10,6 +10,7 @@ class Scenario {
     fun startNewGame() {
         addMozesToParty()
         addGoldToInventory()
+        addItemsToStorage()
         addQuestGraceToLogbook()
     }
 
@@ -29,6 +30,21 @@ class Scenario {
     private fun addGoldToInventory() {
         val gold = InventoryDatabase.createInventoryItem("gold")
         gameData.inventory.autoSetItem(gold)
+    }
+
+    private fun addItemsToStorage() {
+        val hafted = InventoryDatabase.createInventoryItem("basic_mace")
+        val missile = InventoryDatabase.createInventoryItem("basic_shortbow")
+        val shield = InventoryDatabase.createInventoryItem("basic_light_shield")
+        val gloves = InventoryDatabase.createInventoryItem("basic_light_gloves")
+        val gold = InventoryDatabase.createInventoryItem("gold", 8)
+        val potion = InventoryDatabase.createInventoryItem("curing_potion")
+        gameData.storage.autoSetItem(hafted)
+        gameData.storage.autoSetItem(missile)
+        gameData.storage.autoSetItem(shield)
+        gameData.storage.autoSetItem(gloves)
+        gameData.storage.autoSetItem(gold)
+        gameData.storage.autoSetItem(potion)
     }
 
     private fun addQuestGraceToLogbook() {
