@@ -147,7 +147,7 @@
   <object id="227" x="912" y="360" width="48" height="216"/>
  </objectgroup>
  <objectgroup color="#5500ff" id="13" name="rest">
-  <object id="100" name="chest0008" x="1008" y="384" width="48" height="48"/>
+  <object id="100" name="chest00011" x="1008" y="384" width="48" height="48"/>
   <object id="99" name="chest0007" x="336" y="1776" width="48" height="48"/>
   <object id="101" name="sparkle0001" x="1344" y="2472" width="48" height="48"/>
   <object id="103" name="sparkle0006" x="1098" y="1488" width="48" height="48"/>

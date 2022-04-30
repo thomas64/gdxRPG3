@@ -90,13 +90,17 @@
   },
   "grace_is_missing_again"         : {
     "phrases": {
-      "1": {"text": ["What just happened?"]},
-      "2": {"text": ["Did I just die? Did the world just end in flames?"]},
-      "3": {"text": ["Was it a dream?"]},
-      "4": {"text": ["\"You have been given another chance...\" ??"]},
-      "5": {"text": [". . ."]},
-      "6": {"text": ["What is happening to me?"]},
-      "7": {"text": ["If it's true, if I've got another chance, I have to save Grace!"], "choices": [{"command": "EXIT"}]}
+      "1" : {"text": ["What just happened? Did I just die?", "Did the whole world just ended in flames?"]},
+      "2" : {"text": ["Or was it a dream?"]},
+      "3" : {"text": ["No, I don't think it was a dream, everything felt so real."]},
+      "4" : {"text": ["Because of the pain..."]},
+      "5" : {"text": ["Grace got murdered by this Ardor! No!! Aaargh!!", "He's got to pay for this! I'll make sure!"]},
+      "6" : {"text": ["But also... I heard a voice."]},
+      "7" : {"text": ["\"You have been given another chance...\" ??"]},
+      "8" : {"text": ["What did that voice mean? Another chance?", "Does that mean Grace is alive again? Right now?"]},
+      "9" : {"text": ["If that's true...", "If I've got another chance to save Grace, I've got to hurry!"]},
+      "10": {"text": ["I can not be to late again! I now have to be in time to save her!"]},
+      "11": {"text": ["Ardor, you'll be sorry you ever laid your hands on my little sister!"], "choices": [{"command": "EXIT"}]}
     }
   }
 }

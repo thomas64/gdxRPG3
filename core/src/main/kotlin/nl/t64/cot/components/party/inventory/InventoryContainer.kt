@@ -5,7 +5,7 @@ import nl.t64.cot.Utils.gameData
 
 private const val SORTING_SPLIT = 70000 // atm, item.json starts with this number.
 
-class InventoryContainer(numberOfSlots: Int) {
+class InventoryContainer(numberOfSlots: Int = 0) {
 
     private val inventory: MutableList<InventoryItem?> = arrayOfNulls<InventoryItem>(numberOfSlots).toMutableList()
 

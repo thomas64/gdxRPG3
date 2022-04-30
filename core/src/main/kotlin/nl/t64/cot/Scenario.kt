@@ -36,7 +36,7 @@ class Scenario {
         val hafted = InventoryDatabase.createInventoryItem("basic_mace")
         val missile = InventoryDatabase.createInventoryItem("basic_shortbow")
         val shield = InventoryDatabase.createInventoryItem("basic_light_shield")
-        val gloves = InventoryDatabase.createInventoryItem("basic_light_gloves")
+        val gloves = InventoryDatabase.createInventoryItem("basic_light_shoulders")
         val gold = InventoryDatabase.createInventoryItem("gold", 8)
         val potion = InventoryDatabase.createInventoryItem("curing_potion")
         gameData.storage.autoSetItem(hafted)
@@ -59,8 +59,8 @@ class Scenario {
 
     private fun setQuestGraceComplete() {
         val questGrace = gameData.quests.getQuestById("quest_grace_is_missing")
-        questGrace.setTaskComplete("4", false)
-        questGrace.setTaskComplete("5", false)
+        questGrace.setTaskComplete("4", playSound = false, showTooltip = false)
+        questGrace.setTaskComplete("5", playSound = false, showTooltip = false)
         questGrace.forceCompleteQuest()
     }
 

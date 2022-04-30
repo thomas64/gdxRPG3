@@ -247,6 +247,7 @@ class SceneArdor1Lose : CutsceneScreen() {
 
             actionFadeIn(),
 
+            Actions.run { audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_SAVE_GAME) },
             Actions.delay(1f),
             Actions.run { showConversationDialog("mozes_wakes_up_again", "mozes") }
         )
@@ -272,7 +273,7 @@ class SceneArdor1Lose : CutsceneScreen() {
     }
 
     override fun exitScreen() {
-        audioManager.handle(AudioCommand.SE_STOP_ALL)
+        audioManager.handle(AudioCommand.SE_STOP, AudioEvent.SE_MAGIC)
         scenario.startSecondCycle()
         endCutsceneAndOpenMap("honeywood_mozes_house", "scene_ardor_1")
     }

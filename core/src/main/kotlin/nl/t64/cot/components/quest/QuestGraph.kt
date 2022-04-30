@@ -88,13 +88,13 @@ data class QuestGraph(
             .forEach { setTaskComplete(it.key) }
     }
 
-    fun setTaskComplete(taskId: String, showTooltip: Boolean = true) {
+    fun setTaskComplete(taskId: String, playSound: Boolean = true, showTooltip: Boolean = true) {
         if (!isTaskComplete(taskId)) {
             val questTask = tasks[taskId]!!
             questTask.setComplete()
             unhideTaskWithLinkedTask(questTask)
             if (showTooltip) showMessageTooltipQuestUpdated()
-            possibleCompleteQuest()
+            possibleCompleteQuest(playSound, showTooltip)
         }
     }
 
@@ -152,12 +152,12 @@ data class QuestGraph(
 //        return levelUpMessage.toString().trim().ifEmpty { null }
 //    }
 
-    private fun possibleCompleteQuest() {
+    private fun possibleCompleteQuest(playSound: Boolean = true, showTooltip: Boolean = true) {
         if (isCurrentStateEqualOrHigherThan(QuestState.ACCEPTED)
             && currentState != QuestState.FINISHED
             && areAllQuestTasksComplete()
         ) {
-            completeQuest()
+            completeQuest(playSound, showTooltip)
         }
     }
 
