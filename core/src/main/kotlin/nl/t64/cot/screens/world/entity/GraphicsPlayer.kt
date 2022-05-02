@@ -8,12 +8,14 @@ import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.audio.AudioCommand
+import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.world.entity.events.*
 
 
 class GraphicsPlayer : GraphicsComponent() {
 
+    private var lastFeetPosition = Vector2()
     private var feetPosition = Vector2()
     private var moveSpeed: Float = Constant.MOVE_SPEED_2
     private var stepCount: Float = 0f
@@ -35,6 +37,7 @@ class GraphicsPlayer : GraphicsComponent() {
         }
         if (event is PositionEvent) {
             position = event.position
+            lastFeetPosition = feetPosition
             feetPosition = Vector2(position.x + Constant.HALF_TILE_SIZE, position.y)
         }
         if (event is SpeedEvent) {
@@ -89,10 +92,30 @@ class GraphicsPlayer : GraphicsComponent() {
             stepCount -= dt
             if (stepCount < 0f) {
                 stepCount = frameDuration * 2f
-                audioManager.handle(AudioCommand.SE_PLAY_ONCE, mapManager.getGroundSound(feetPosition))
+                playStepSound()
             }
         } else {
             stepCount = 0f
+        }
+    }
+
+    private fun playStepSound() {
+        val offsetFeetPosition: Vector2 = getOffsetFeetPosition()
+        val audio: AudioEvent = mapManager.getGroundSound(offsetFeetPosition)
+        audioManager.handle(AudioCommand.SE_PLAY_ONCE, audio)
+    }
+
+    private fun getOffsetFeetPosition(): Vector2 {
+        return if (lastFeetPosition == feetPosition) {
+            feetPosition
+        } else {
+            when (direction) {
+                Direction.NORTH -> Vector2(feetPosition.x, feetPosition.y + (moveSpeed / 4f))
+                Direction.SOUTH -> Vector2(feetPosition.x, feetPosition.y - (moveSpeed / 4f))
+                Direction.WEST -> Vector2(feetPosition.x - (moveSpeed / 4f), feetPosition.y)
+                Direction.EAST -> Vector2(feetPosition.x + (moveSpeed / 4f), feetPosition.y)
+                Direction.NONE -> throw IllegalArgumentException("Direction 'NONE' is not usable.")
+            }
         }
     }
 
