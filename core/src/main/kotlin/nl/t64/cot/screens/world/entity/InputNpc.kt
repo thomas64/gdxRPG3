@@ -2,11 +2,13 @@ package nl.t64.cot.screens.world.entity
 
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.Vector2
+import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.world.entity.events.*
 import kotlin.math.abs
 
 
-private const val DEFAULT_STATE_TIME = 5f
+private const val DEFAULT_WAITING_TIME = 5f
+private const val PLAYING_WAITING_TIME = 0.5f
 
 class InputNpc : InputComponent() {
 
@@ -37,6 +39,7 @@ class InputNpc : InputComponent() {
         }
         entity.send(StateEvent(state))
         entity.send(DirectionEvent(direction))
+        if (state == EntityState.PLAYING) entity.send(SpeedEvent(Constant.MOVE_SPEED_3))
     }
 
     private fun setRandom() {
@@ -52,6 +55,7 @@ class InputNpc : InputComponent() {
                 state = EntityState.WALKING
                 direction = Direction.getRandom()
             }
+            EntityState.PLAYING,
             EntityState.FLYING -> {
                 direction = Direction.getRandom()
             }
@@ -66,7 +70,7 @@ class InputNpc : InputComponent() {
     private fun handleEvent(event: WaitEvent) {
         val npcPosition: Vector2 = event.npcPosition
         val playerPosition: Vector2 = event.playerPosition
-        stateTime = DEFAULT_STATE_TIME
+        stateTime = if (originalState == EntityState.PLAYING) PLAYING_WAITING_TIME else DEFAULT_WAITING_TIME
         state = stopMoving()
         direction = npcPosition.turnToPlayer(playerPosition)
     }
@@ -74,7 +78,7 @@ class InputNpc : InputComponent() {
     private fun stopMoving(): EntityState {
         return when (state) {
             EntityState.WALKING -> EntityState.IDLE
-            EntityState.FLYING -> EntityState.IDLE_ANIMATING
+            EntityState.FLYING, EntityState.PLAYING -> EntityState.IDLE_ANIMATING
             EntityState.IMMOBILE,
             EntityState.IDLE,
             EntityState.IDLE_ANIMATING,

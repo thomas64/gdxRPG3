@@ -26,6 +26,7 @@ open class GameMapNpc(rectObject: RectangleMapObject) : GameMapObject(rectObject
             entityState.equals("w", true) -> EntityState.getRandomIdleOrWalking()
             entityState.equals("ia", true) -> EntityState.IDLE_ANIMATING
             entityState.equals("f", true) -> EntityState.FLYING
+            entityState.equals("p", true) -> EntityState.PLAYING
             else -> throw IllegalArgumentException("EntityState '$entityState' unknown.")
         }
     }

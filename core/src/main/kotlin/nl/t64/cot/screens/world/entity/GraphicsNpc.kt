@@ -28,6 +28,9 @@ class GraphicsNpc(spriteId: String) : GraphicsComponent() {
         if (event is PositionEvent) {
             position = event.position
         }
+        if (event is SpeedEvent) {
+            setNewFrameDuration(event.moveSpeed)
+        }
     }
 
     override fun update(dt: Float) {

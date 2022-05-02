@@ -8,6 +8,7 @@ enum class EntityState {
     WALKING,
 
     IDLE_ANIMATING,
+    PLAYING,
     FLYING,
     IMMOBILE,
     ALIGNING,

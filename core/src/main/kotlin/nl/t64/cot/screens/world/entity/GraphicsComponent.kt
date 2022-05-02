@@ -43,6 +43,7 @@ abstract class GraphicsComponent : Component {
             }
             EntityState.WALKING,
             EntityState.FLYING,
+            EntityState.PLAYING,
             EntityState.IDLE_ANIMATING -> {
                 frameTime = (frameTime + dt) % 12 // dividable by 0.15, 0.25 and 0.5, these are player speed frames.
                 if (frameDuration == Constant.NO_FRAMES) { // no player animation when high speed moving.
