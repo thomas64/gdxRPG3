@@ -39,7 +39,7 @@
   "enter_great_tree"   : {
     "type"          : "conversation",
     "conversationId": "fairy_welcome",
-    "entityId"      : "fairy01"
+    "entityId": "fairy3"
   },
   "find_great_tree"    : {
     "type"          : "conversation",

@@ -94,7 +94,7 @@
   },
   "quest_mother_fairy"    : {
     "title"   : "It's fairy secret",
-    "entityId": "fairy01",
+    "entityId": "fairy1",
     "summary" : "The mother of fairies said: When you go back inside the cave, go all the way south, then east and search the north wall. There is a hidden door in the dark.",
     "tasks"   : {
       "1": {

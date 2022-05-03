@@ -1,6 +1,15 @@
 {
-  "priest01": {"source": "people2", "col": 2, "row": 1},
-  "fairy01": {"source": "nature1", "col": 1, "row": 2},
-  "soldier01": {"source": "people3", "col": 4, "row": 2},
-  "duke01": {"source": "people3", "col": 1, "row": 2}
+  "priest01"   : {"source": "people2", "col": 2, "row": 1},
+  "soldier01"  : {"source": "people3", "col": 4, "row": 2},
+  "duke01"     : {"source": "people3", "col": 1, "row": 2},
+  "maid01"     : {"source": "people2", "col": 2, "row": 2},
+  "gypsy_man01": {"source": "people4", "col": 1, "row": 2},
+  "fairy1"     : {"source": "fairies", "col": 1, "row": 1},
+  "fairy2"     : {"source": "fairies", "col": 2, "row": 1},
+  "fairy3"     : {"source": "fairies", "col": 3, "row": 1},
+  "fairy4"     : {"source": "fairies", "col": 4, "row": 1},
+  "fairy5"     : {"source": "fairies", "col": 1, "row": 2},
+  "fairy6"     : {"source": "fairies", "col": 2, "row": 2},
+  "fairy7"     : {"source": "fairies", "col": 3, "row": 2},
+  "fairy8"     : {"source": "fairies", "col": 4, "row": 2}
 }

@@ -21,12 +21,12 @@
   },
   "fairy_welcome"     : {
     "phrases": {
-      "1": {"face": "fairy01", "text": ["Ah young Mozes. You may enter here."], "choices": [{"command": "RECEIVE_XP", "nextId": "2"}]},
+      "1": {"face": "fairy3", "text": ["Ah young Mozes. You may enter here."], "choices": [{"command": "RECEIVE_XP", "nextId": "2"}]},
       "2": {"face": "mozes", "text": ["You know who I am?"]},
-      "3": {"face": "fairy01", "text": ["Yes we do."]},
+      "3": {"face": "fairy3", "text": ["Yes we do."]},
       "4": {"face": "mozes", "text": ["But how..."]},
-      "5": {"face": "fairy01", "text": ["Please go see our Mother Fairy near the Great Tree."], "choices": [{"command": "EXIT", "nextId": "6"}]},
-      "6": {"face": "fairy01", "text": ["Young Mozes, please be welcome."], "choices": [{"command": "EXIT", "nextId": "6"}]}
+      "5": {"face": "fairy3", "text": ["Please go see our Mother Fairy near the Great Tree."], "choices": [{"command": "EXIT", "nextId": "6"}]},
+      "6": {"face": "fairy3", "text": ["Young Mozes, please be welcome."], "choices": [{"command": "EXIT", "nextId": "6"}]}
     }
   },
   "find_great_tree"   : {
@@ -63,18 +63,18 @@
           {"text": "I really need to be on my way. (Leave conversation)", "command": "EXIT", "nextId": "1"}
         ]
       },
-      "10": {"face": "fairy01", "text": ["We all watch over the people of Honeywood and we try to protect the people where possible. So Mozes, we've known you since you were born."]},
+      "10": {"face": "fairy1", "text": ["We all watch over the people of Honeywood and we try to protect the people where possible. So Mozes, we've known you since you were born."]},
       "11": {"face": "mozes", "text": ["I guess I should thank you then on behalf of all the people of Honeywood."]},
       "12": {"face": "mozes", "text": ["But if that's so, what about my parents?", "Couldn't you have saved them with the orcs back then?"]},
       "13": {
-        "face": "fairy01", "text": ["Unfortunately no, we were unable to prevent that.", "I'm very sorry, my brave young Mozes."], "choices": [
+        "face": "fairy1", "text": ["Unfortunately no, we were unable to prevent that.", "I'm very sorry, my brave young Mozes."], "choices": [
           {"condition": ["i_!quest_mother_fairy_accepted"], "nextId": "3"},
           {"condition": ["i_quest_mother_fairy_accepted"], "nextId": "71"}
         ]
       },
-      "20": {"face": "fairy01", "text": ["A new evil force has arrived in Adan."]},
-      "21": {"face": "fairy01", "text": ["It goes by the name of Ardor.", "His power is rising rapidly and he wants to take over Adan."]},
-      "22": {"face": "fairy01", "text": ["If he's not stopped soon, things won't look too good for us or all the other people of Adan."]},
+      "20": {"face": "fairy1", "text": ["A new evil force has arrived in Adan."]},
+      "21": {"face": "fairy1", "text": ["It goes by the name of Ardor.", "His power is rising rapidly and he wants to take over Adan."]},
+      "22": {"face": "fairy1", "text": ["If he's not stopped soon, things won't look too good for us or all the other people of Adan."]},
       "23": {
         "face": "mozes", "text": ["That's terrible!"], "choices": [
           {"condition": ["i_!quest_orc_guards_accepted"], "nextId": "24"},
@@ -83,8 +83,8 @@
       },
       "24": {"face": "mozes", "text": ["After I find Grace, isn't there anything I can do to help against Ardor?"], "choices": [{"nextId": "26"}]},
       "25": {"face": "mozes", "text": ["Ardor has Grace! Isn't there anything I can do to help against Ardor?"], "choices": [{"nextId": "26"}]},
-      "26": {"face": "fairy01", "text": ["See, this is why you are so lovely."]},
-      "27": {"face": "fairy01", "text": ["But no, Ardor is far out of your league.", "There won't be anything you could do in this short amount of time.", "You must rely on the larger forces of good to handle Ardor."]},
+      "26": {"face": "fairy1", "text": ["See, this is why you are so lovely."]},
+      "27": {"face": "fairy1", "text": ["But no, Ardor is far out of your league.", "There won't be anything you could do in this short amount of time.", "You must rely on the larger forces of good to handle Ardor."]},
       "28": {
         "face": "mozes", "text": ["Rely on the larger forces of good?"], "choices": [
           {"text": "Who are these larger forces of good?", "nextId": "80"},
@@ -92,11 +92,11 @@
           {"condition": ["i_quest_mother_fairy_accepted"], "text": "If we must, I will.", "nextId": "71"}
         ]
       },
-      "30": {"face": "fairy01", "text": ["Ah yes of course."]},
-      "31": {"face": "fairy01", "text": ["Unfortunately Grace is in the possession of Ardor."]},
-      "32": {"face": "fairy01", "text": ["We tried, but we weren't able to prevent that.", "But there might still be one possibility for you."]},
-      "33": {"face": "fairy01", "text": ["You are brave Mozes, but bravery alone won't do the trick.", "We would like to help you in your search for Grace."]},
-      "34": {"face": "fairy01", "text": ["In the cave you came from we've hidden a magic scroll, and you may use it against any orcs you might encounter on your quest."]},
+      "30": {"face": "fairy1", "text": ["Ah yes of course."]},
+      "31": {"face": "fairy1", "text": ["Unfortunately Grace is in the possession of Ardor."]},
+      "32": {"face": "fairy1", "text": ["We tried, but we weren't able to prevent that.", "But there might still be one possibility for you."]},
+      "33": {"face": "fairy1", "text": ["You are brave Mozes, but bravery alone won't do the trick.", "We would like to help you in your search for Grace."]},
+      "34": {"face": "fairy1", "text": ["In the cave you came from we've hidden a magic scroll, and you may use it against any orcs you might encounter on your quest."]},
       "35": {
         "face": "mozes", "text": ["I'll do anything to get Grace back safe!"], "choices": [
           {"text": "But what has Ardor to do with her?", "nextId": "40"},
@@ -104,13 +104,13 @@
           {"text": "How can I get it, if it is hidden?", "nextId": "60"}
         ]
       },
-      "40": {"face": "fairy01", "text": ["I'm not sure about that at the moment.", "Maybe she was at the wrong place at the wrong time. I sincerely hope so."], "choices": [{"nextId": "35"}]},
-      "50": {"face": "fairy01", "text": ["You'll see when you get there.", "Don't worry, I wouldn't let you use it if I thought it wouldn't be safe."], "choices": [{"nextId": "35"}]},
-      "60": {"face": "fairy01", "text": ["When you go back inside the cave, go all the way south, then east and search the north wall. There is a hidden door in the dark."]},
-      "61": {"face": "fairy01", "text": ["But before you go, please talk to the other fairies.", "They'll also offer you much needed help."]},
-      "62": {"face": "fairy01", "text": ["After that, hurry and go! Before the time is up."]},
-      "63": {"face": "fairy01", "text": ["Farewell our lovely Mozes. Grace is blessed with a brother like you.", "May the Goddess Tree smile upon you and your search."]},
-      "64": {"face": "fairy01", "text": ["And watch out for Ardor! He is not one to be trifled with!"], "choices": [{"command": "ACCEPT_QUEST", "nextId": "70"}]},
+      "40": {"face": "fairy1", "text": ["I'm not sure about that at the moment.", "Maybe she was at the wrong place at the wrong time. I sincerely hope so."], "choices": [{"nextId": "35"}]},
+      "50": {"face": "fairy1", "text": ["You'll see when you get there.", "Don't worry, I wouldn't let you use it if I thought it wouldn't be safe."], "choices": [{"nextId": "35"}]},
+      "60": {"face": "fairy1", "text": ["When you go back inside the cave, go all the way south, then east and search the north wall. There is a hidden door in the dark."]},
+      "61": {"face": "fairy1", "text": ["But before you go, please talk to the other fairies.", "They'll also offer you much needed help."]},
+      "62": {"face": "fairy1", "text": ["After that, hurry and go! Before the time is up."]},
+      "63": {"face": "fairy1", "text": ["Farewell our lovely Mozes. Grace is blessed with a brother like you.", "May the Goddess Tree smile upon you and your search."]},
+      "64": {"face": "fairy1", "text": ["And watch out for Ardor! He is not one to be trifled with!"], "choices": [{"command": "ACCEPT_QUEST", "nextId": "70"}]},
       "70": {"text": ["Dear young Mozes, you've returned."]},
       "71": {
         "face": "mozes", "text": ["I still have some questions."], "choices": [
@@ -119,10 +119,10 @@
           {"text": "I really need to be on my way. (Leave conversation)", "command": "EXIT", "nextId": "70"}
         ]
       },
-      "80": {"face": "fairy01", "text": ["The Council of the Three Wizards, along with the Elven Queen are planning an attack. This attack is going to be on a whole different level than what you know to be a battle."]},
-      "81": {"face": "fairy01", "text": ["Humans, and thus the people of Honeywood won't be able to do anything against Ardor. His power is rising rapidly and we don't know the source of his power yet. Buy there isn't much time, he's planning something..."]},
+      "80": {"face": "fairy1", "text": ["The Council of the Three Wizards, along with the Elven Queen are planning an attack. This attack is going to be on a whole different level than what you know to be a battle."]},
+      "81": {"face": "fairy1", "text": ["Humans, and thus the people of Honeywood won't be able to do anything against Ardor. His power is rising rapidly and we don't know the source of his power yet. Buy there isn't much time, he's planning something..."]},
       "82": {
-        "face": "fairy01", "text": ["Best is really that you stay out of his way.", "Don't try to come near him."], "choices": [
+        "face": "fairy1", "text": ["Best is really that you stay out of his way.", "Don't try to come near him."], "choices": [
           {"condition": ["i_!quest_mother_fairy_accepted"], "nextId": "3"},
           {"condition": ["i_quest_mother_fairy_accepted"], "nextId": "71"}
         ]
@@ -131,14 +131,14 @@
   },
   "fairy_save"        : {
     "phrases": {
-      "1": {"text": ["Dear young Mozes,", "shall we pray to the Goddess Tree so that your life will be in Her safe hands?"]},
+      "1": {"text": ["Dear young Mozes, shall we pray to the Goddess Tree so that your life will be in Her safe hands?"]},
       "2": {
         "face": "mozes", "text": ["Pray? To a tree?"], "choices": [
           {"text": "Yes please, I would like that. (Save game)", "nextId": "3"},
           {"text": "No thanks, that's not necessary. (Leave conversation)", "command": "EXIT"}
         ]
       },
-      "3": {"face": "fairy01", "text": ["Your prayer has been heard."], "choices": [{"command": "SAVE_GAME"}]}
+      "3": {"face": "fairy4", "text": ["Your prayer has been heard."], "choices": [{"command": "SAVE_GAME"}]}
     }
   },
   "fairy_heal_price-0": {
@@ -150,7 +150,7 @@
           {"text": "No thanks, I'll pass this time. (Leave conversation)", "command": "EXIT"}
         ]
       },
-      "3": {"face": "fairy01", "text": ["Your health has been restored.", "Please come back anytime you feel weary."], "choices": [{"command": "EXIT"}]}
+      "3": {"face": "fairy6", "text": ["Your health has been restored.", "Please come back anytime you feel weary."], "choices": [{"command": "EXIT"}]}
     }
   },
   "fairy_crystal"     : {
