@@ -7,8 +7,6 @@ import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.components.loot.Loot
 
 
-private val DEFAULT_STATE = QuestState.UNKNOWN
-
 data class QuestGraph(
     val id: String = "",
     val title: String = "",
@@ -18,7 +16,7 @@ data class QuestGraph(
     val linkedWith: String? = null,
     val tasks: Map<String, QuestTask> = emptyMap()
 ) {
-    var currentState: QuestState = DEFAULT_STATE
+    var currentState: QuestState = QuestState.UNKNOWN
     var isFailed: Boolean = false
 
     override fun toString(): String {
@@ -39,6 +37,10 @@ data class QuestGraph(
             .map { it.value }
             .filter { !it.isHidden }
             .toTypedArray()
+    }
+
+    fun know() {
+        currentState = QuestState.KNOWN
     }
 
     fun accept() {

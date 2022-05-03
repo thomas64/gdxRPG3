@@ -198,6 +198,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             ConversationCommand.RECEIVE_XP -> possibleReceiveXp(nextId)
             ConversationCommand.START_BATTLE -> startBattle(nextId)
 
+            ConversationCommand.KNOW_QUEST -> knowQuest(nextId)
             ConversationCommand.ACCEPT_QUEST -> acceptQuest(nextId)
             ConversationCommand.SHOW_QUEST_ITEM -> showQuestItem(nextId)
             ConversationCommand.WEAR_QUEST_ITEM -> wearQuestItem(nextId)
@@ -252,7 +253,6 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun healLife(nextId: String) {
-        delayInputListeners()
         val price = conversationId!!.substringAfterLast("-").toInt()
         if (price > 0) {
             if (gameData.inventory.hasEnoughOfItem("gold", price)) {
@@ -264,6 +264,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         } else {
             audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_RESTORE)
         }
+        delayInputListeners()
         gameData.party.recoverFullHp()
         brokerManager.mapObservers.notifyFadeOut(
             { continueConversation(nextId) }
@@ -306,6 +307,11 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     private fun startBattle(nextId: String) {
         endConversation(nextId)
         conversationObserver.notifyShowBattleScreen(conversationId!!)
+    }
+
+    private fun knowQuest(nextId: String) {
+        gameData.quests.getQuestById(conversationId!!).know()
+        endConversation(nextId)
     }
 
     private fun acceptQuest(nextId: String) {

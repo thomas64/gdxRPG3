@@ -13,6 +13,7 @@ enum class ConversationCommand {
     RECEIVE_XP,
     START_BATTLE,
 
+    KNOW_QUEST,
     ACCEPT_QUEST,
     SHOW_QUEST_ITEM,
     WEAR_QUEST_ITEM,
@@ -22,7 +23,6 @@ enum class ConversationCommand {
     NONE,
 
 
-    KNOW_QUEST,
     TOLERATE_QUEST,
     RECEIVE_ITEM,
     CHECK_IF_LINKED_QUEST_KNOWN,

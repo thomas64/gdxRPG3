@@ -86,7 +86,7 @@ class AudioManager {
 
             AudioCommand.SE_PLAY_ONCE -> playSe(event, false)
             AudioCommand.SE_PLAY_LOOP -> playSe(event, true)
-            AudioCommand.SE_STOP -> queuedSe[event.filePath]!!.stop()
+            AudioCommand.SE_STOP -> queuedSe[event.filePath]?.stop()
             else -> throw IllegalArgumentException("Call 'ALL' AudioCommands without second argument.")
         }
     }
