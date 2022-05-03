@@ -38,6 +38,7 @@ class GameData : ProfileObserver {
         conversations = ConversationContainer()
         loot = LootContainer()
         spoils = SpoilsContainer()
+        quests.reset()
     }
 
     override fun onNotifyCreateProfile(profileManager: ProfileManager) {

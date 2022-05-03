@@ -13,6 +13,7 @@ class QuestTask(
     val linkedWith: String? = null
 
 ) {
+    var isReset: Boolean = false
     var isComplete: Boolean = false
     var isFailed: Boolean = false
     var isQuestFinished: Boolean = false
@@ -22,7 +23,15 @@ class QuestTask(
             type == QuestTaskType.NONE -> System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + taskPhrase
             isFailed -> "x  $taskPhrase"
             isComplete -> "v  $taskPhrase"
+            isReset -> "r  $taskPhrase"
             else -> "     $taskPhrase"
+        }
+    }
+
+    fun possibleReset() {
+        if (isComplete) {
+            isReset = true
+            isComplete = false
         }
     }
 

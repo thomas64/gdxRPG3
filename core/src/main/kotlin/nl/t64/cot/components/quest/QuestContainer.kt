@@ -9,17 +9,19 @@ class QuestContainer {
 
     fun getAllKnownQuestsForVisual(): Array<QuestGraph> = quests.values
         .filter { !it.isHidden }
-        .filter { it.isCurrentStateEqualOrHigherThan(QuestState.KNOWN) }
+        .filter { it.isOneOfBothStatesEqualOrHigherThan(QuestState.KNOWN) }
         .sortedWith(compareBy({ it.isFailed }, { it.currentState }, { it.id }))
         .toTypedArray()
 
-    fun update() = possibleSetCompleteFindItemTask()
+    fun reset() {
+        quests.values.forEach { it.reset() }
+    }
+
+    fun update() {
+        quests.values.forEach { it.possibleSetFindItemTaskComplete() }
+    }
 
     fun contains(questId: String): Boolean = quests.containsKey(questId)
     fun getQuestById(questId: String): QuestGraph = quests[questId]!!
-
-    private fun possibleSetCompleteFindItemTask() = quests.values
-        .filter { it.isCurrentStateEqualOrLowerThan(QuestState.ACCEPTED) }
-        .forEach { it.possibleSetFindItemTaskComplete() }
 
 }

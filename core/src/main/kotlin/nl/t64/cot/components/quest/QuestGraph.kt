@@ -17,16 +17,21 @@ data class QuestGraph(
     val tasks: Map<String, QuestTask> = emptyMap()
 ) {
     var currentState: QuestState = QuestState.UNKNOWN
+    var resetState: QuestState = QuestState.UNKNOWN
     var isFailed: Boolean = false
 
     override fun toString(): String {
         return when {
             isFailed -> "x  $title"
+            resetState == QuestState.FINISHED -> "r  $title"
             currentState == QuestState.FINISHED -> "v  $title"
             currentState == QuestState.UNCLAIMED -> "o   $title"
             else -> "     $title"
         }
     }
+
+    fun isOneOfBothStatesEqualOrHigherThan(questState: QuestState): Boolean =
+        resetState.isEqualOrHigherThan(questState) || currentState.isEqualOrHigherThan(questState)
 
     fun isCurrentStateEqualOrHigherThan(questState: QuestState): Boolean = currentState.isEqualOrHigherThan(questState)
     fun isCurrentStateEqualOrLowerThan(questState: QuestState): Boolean = currentState.isEqualOrLowerThan(questState)
@@ -37,6 +42,14 @@ data class QuestGraph(
             .map { it.value }
             .filter { !it.isHidden }
             .toTypedArray()
+    }
+
+    fun reset() {
+        if (resetState.isLowerThan(currentState)) {
+            resetState = currentState
+        }
+        currentState = QuestState.UNKNOWN
+        tasks.values.forEach { it.possibleReset() }
     }
 
     fun know() {
@@ -52,9 +65,11 @@ data class QuestGraph(
     }
 
     fun possibleSetFindItemTaskComplete() {
-        tasks.filter { it.value.type == QuestTaskType.FIND_ITEM }
-            .filter { it.value.hasTargetInInventoryOrEquipment() }
-            .forEach { setTaskComplete(it.key) }
+        if (isCurrentStateEqualOrLowerThan(QuestState.ACCEPTED)) {
+            tasks.filter { it.value.type == QuestTaskType.FIND_ITEM }
+                .filter { it.value.hasTargetInInventoryOrEquipment() }
+                .forEach { setTaskComplete(it.key) }
+        }
     }
 
     fun possibleSetShowItemTaskComplete() {
@@ -159,7 +174,11 @@ data class QuestGraph(
             && currentState != QuestState.FINISHED
             && areAllQuestTasksComplete()
         ) {
-            completeQuest(playSound, showTooltip)
+            if (resetState == QuestState.FINISHED) {
+                completeQuest(playSound = false, showTooltip = false)
+            } else {
+                completeQuest(playSound, showTooltip)
+            }
         }
     }
 

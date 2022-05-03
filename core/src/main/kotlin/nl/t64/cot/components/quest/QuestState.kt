@@ -10,5 +10,6 @@ enum class QuestState(private val index: Int) {
 
     fun isEqualOrHigherThan(otherState: QuestState): Boolean = index >= otherState.index
     fun isEqualOrLowerThan(otherState: QuestState): Boolean = index <= otherState.index
+    fun isLowerThan(otherState: QuestState): Boolean = index < otherState.index
 
 }
