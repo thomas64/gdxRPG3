@@ -64,7 +64,7 @@ class Loot(
 
     fun handleBonus() {
         content
-            .filter { it.key.startsWith(BONUS_PREFIX) }
+            .filterKeys { it.startsWith(BONUS_PREFIX) }
             .forEach { handleBonus(it.key, it.value) }
         removeBonus()
     }

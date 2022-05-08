@@ -73,36 +73,36 @@ data class QuestGraph(
 
     fun possibleSetFindItemTaskComplete() {
         if (currentState.isEqualOrLowerThan(QuestState.ACCEPTED)) {
-            tasks.filter { it.value.type == QuestTaskType.FIND_ITEM }
-                .filter { it.value.hasTargetInInventoryOrEquipment() }
+            tasks.filterValues { it.type == QuestTaskType.FIND_ITEM }
+                .filterValues { it.hasTargetInInventoryOrEquipment() }
                 .forEach { setTaskComplete(it.key) }
         }
     }
 
     fun possibleSetShowItemTaskComplete() {
         accept()
-        tasks.filter { it.value.type == QuestTaskType.SHOW_ITEM }
-            .filter { it.value.hasTargetInInventoryOrEquipment() }
+        tasks.filterValues { it.type == QuestTaskType.SHOW_ITEM }
+            .filterValues { it.hasTargetInInventoryOrEquipment() }
             .forEach { setTaskComplete(it.key) }
     }
 
     fun possibleSetWearItemTaskComplete() {
         accept()
-        tasks.filter { it.value.type == QuestTaskType.WEAR_ITEM }
-            .filter { it.value.hasTargetInPlayerEquipment() }
+        tasks.filterValues { it.type == QuestTaskType.WEAR_ITEM }
+            .filterValues { it.hasTargetInPlayerEquipment() }
             .forEach { setTaskComplete(it.key) }
     }
 
     fun possibleSetGiveItemTaskComplete() {
         accept()
-        tasks.filter { it.value.type == QuestTaskType.GIVE_ITEM }
-            .filter { it.value.hasTargetInInventory() }
+        tasks.filterValues { it.type == QuestTaskType.GIVE_ITEM }
+            .filterValues { it.hasTargetInInventory() }
             .forEach { setTaskComplete(it.key) }
     }
 
     fun setSayTheRightThingTaskComplete() {
         accept()
-        tasks.filter { it.value.type == QuestTaskType.SAY_THE_RIGHT_THING }
+        tasks.filterValues { it.type == QuestTaskType.SAY_THE_RIGHT_THING }
             .forEach { setTaskComplete(it.key) }
     }
 
@@ -149,8 +149,8 @@ data class QuestGraph(
         if (questTask.isHidden) return false
         if (questTask.isComplete) return false
         return tasks
-            .filter { !it.value.isOptional }
-            .filter { it.key.toInt() < taskId.toInt() }
+            .filterValues { !it.isOptional }
+            .filterKeys { it.toInt() < taskId.toInt() }
             .all { it.value.isComplete }
     }
 

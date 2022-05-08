@@ -24,7 +24,7 @@ class LootLoader(private val currentMap: GameMap) {
 
     private fun loadSpoils() {
         gameData.spoils.getByMapId(currentMap.mapTitle)
-            .filter { !it.value.loot.isTaken() }
+            .filterValues { !it.loot.isTaken() }
             .forEach { loadSpoil(it) }
     }
 

@@ -12,7 +12,7 @@ class StatContainer() {
     constructor(startingStats: Map<String, Int>) : this() {
         this.level = Level(startingStats["level"]!!)
         startingStats
-            .filter { it.key != "level" }
+            .filterKeys { it != "level" }
             .map { StatDatabase.createStatItem(it.key, it.value) }
             .forEach { this.stats[it.id] = it }
     }
