@@ -5,9 +5,6 @@ interface ConversationObserver {
 
     fun onNotifyExitConversation()
 
-    fun onNotifyShowMessageTooltip(message: String): Unit =
-        throw IllegalStateException("Implement this method in child.")
-
     fun onNotifyHeroJoined(): Unit =
         throw IllegalStateException("Implement this method in child.")
 

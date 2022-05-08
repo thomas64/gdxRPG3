@@ -8,34 +8,31 @@ import nl.t64.cot.components.quest.QuestState
 object ConditionDatabase {
 
     private val conditions: Map<String, () -> Boolean> = mapOf(
-        Pair("quest_intro_not_finished") { questIntroNotFinished },
+
         Pair("3_starting_potions") { startingPotions },
         Pair("grace_ribbon") { graceRibbon },
-        Pair("cave_not_yet_found") { caveNotYetFound },
+        Pair("!cave_found") { caveNotYetFoundFirstCycle },
         Pair("first_equipment_item") { firstEquipmentItem },
-        Pair("quest_orc_guards_not_finished") { questOrcGuardsNotFinished },
-        Pair("i_!quest_orc_guards_accepted") { !questOrcGuardsAccepted },
-        Pair("i_quest_orc_guards_accepted") { questOrcGuardsAccepted },
+        Pair("!quest_orc_guards_finished") { !questOrcGuardsFinished },
+
+        Pair("i_!know_about_grace") { !knowAboutGrace },
+        Pair("i_know_about_grace") { knowAboutGrace },
         Pair("i_!quest_mother_fairy_accepted") { !questMotherFairyAccepted },
-        Pair("i_quest_mother_fairy_accepted") { questMotherFairyAccepted },
+
         Pair("been_in_fairy_town") { beenInFairyTown },
-        Pair("i_!orc_amulet") { !orcAmulet },
-        Pair("i_orc_amulet") { orcAmulet },
         Pair("i_scroll_of_obedience") { scrollOfObedience },
         Pair("diplomat2") { diplomat2 },
         Pair("level10") { level10 },
         Pair("defeated_orc_guards") { defeatedOrcGuards },
 
-        Pair("i_mask_of_ardor") { maskOfArdor },
-        Pair("diplomat3") { diplomat3 },
-        Pair("key_mysterious_tunnel") { keyMysteriousTunnel },
-        Pair("quest4_known") { quest4Known },
-        Pair("i_quest6_task3") { quest6Task3 },
-        Pair("quest6_known") { quest6Known },
-        Pair("i_quest6_unclaimed") { quest6Unclaimed },
-        Pair("i_quest7_task3") { quest7Task3 },
-        Pair("quest7_unknown") { quest7Unknown },
-        Pair("i_quest7_unclaimed") { quest7Unclaimed }
+        Pair("!has_talked_to_lennor") { hasNotYetTalkedToLennorFirstCycle },
+        Pair("i_c_!quest_a_helping_horse_finished") { !questHelpingHorseCurrentFinished },
+        Pair("i_r_quest_a_helping_horse_finished") { questHelpingHorseResetFinished },
+
+        Pair("i_c_quest_pest_removal_unknown") { questPestRemovalUnknown },
+        Pair("i_c_quest_pest_removal_known") { questPestRemovalKnown },
+        Pair("i_c_quest_pest_removal_task_complete") { questPestRemovalTaskComplete },
+        Pair("c_quest_pest_removal_known_or_lower") { questPestRemovalKnownOrLower },
     )
 
     fun isMeetingConditions(conditionIds: List<String?>): Boolean {
@@ -47,33 +44,38 @@ object ConditionDatabase {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private val questIntroNotFinished get() = !isQuestTaskNumberComplete("quest_intro", 1)
     private val startingPotions get() = hasEnoughOfItem("healing_potion", 3)
     private val graceRibbon get() = hasEnoughOfItem("grace_ribbon", 1)
-    private val caveNotYetFound
-        get() = isQuestTaskNumberComplete("quest_grace_is_missing", 1)
+    private val caveNotYetFoundFirstCycle
+        get() = isQuestResetStateEqual("quest_grace_is_missing", QuestState.UNKNOWN)
+                && isQuestTaskNumberComplete("quest_grace_is_missing", 1)
                 && !isQuestTaskNumberComplete("quest_grace_is_missing", 2)
     private val firstEquipmentItem get() = hasEnoughOfOneOfTheseItems("basic_light_helmet")
-    private val questOrcGuardsNotFinished get() = isQuestStateEqualOrLower("quest_orc_guards", QuestState.ACCEPTED)
-    private val questOrcGuardsAccepted get() = isQuestStateEqualOrHigher("quest_orc_guards", QuestState.ACCEPTED)
-    private val questMotherFairyAccepted get() = isQuestStateEqualOrHigher("quest_mother_fairy", QuestState.ACCEPTED)
+    private val questOrcGuardsFinished get() = isQuestCurrentStateEqual("quest_orc_guards", QuestState.FINISHED)
+
+    private val knowAboutGrace
+        get() = isOneOfBothStatesEqualOrHigher("quest_orc_guards", QuestState.ACCEPTED)
+                || isOneOfBothStatesEqualOrHigher("quest_mother_fairy", QuestState.ACCEPTED)
+    private val questMotherFairyAccepted get() = isQuestCurrentStateEqualOrHigher("quest_mother_fairy", QuestState.ACCEPTED)
+
     private val beenInFairyTown get() = hasEventPlayed("find_great_tree")
-    private val orcAmulet get() = hasItemEquipped("transformation_orc")
     private val scrollOfObedience get() = hasEnoughOfItem("scroll_of_obedience", 1)
     private val diplomat2 get() = hasEnoughOfSkill(SkillItemId.DIPLOMAT, 2)
     private val level10 get() = hasMinimumLevelOf(10)
     private val defeatedOrcGuards get() = isBattleWon("quest_orc_guards")
 
-    private val maskOfArdor get() = hasEnoughOfItem("mask_of_ardor", 1)
-    private val diplomat3 get() = hasEnoughOfSkill(SkillItemId.DIPLOMAT, 3)
-    private val keyMysteriousTunnel get() = hasEnoughOfItem("key_mysterious_tunnel", 1)
-    private val quest4Known get() = isQuestStateEqualOrHigher("quest0004", QuestState.KNOWN)
-    private val quest6Task3 get() = isQuestTaskNumberComplete("quest0006", 3)
-    private val quest6Known get() = isQuestStateEqualOrHigher("quest0006", QuestState.KNOWN)
-    private val quest6Unclaimed get() = isQuestStateEqualOrHigher("quest0006", QuestState.UNCLAIMED)
-    private val quest7Task3 get() = isQuestTaskNumberComplete("quest0007", 3)
-    private val quest7Unknown get() = isQuestStateEqualOrLower("quest0007", QuestState.UNKNOWN)
-    private val quest7Unclaimed get() = isQuestStateEqualOrHigher("quest0007", QuestState.UNCLAIMED)
+    private val hasNotYetTalkedToLennorFirstCycle
+        get() = isQuestResetStateEqual("quest_grace_is_missing", QuestState.UNKNOWN)
+                && isCurrentPhraseId("quest_a_helping_horse", "1")
+    private val questHelpingHorseCurrentFinished get() = isQuestCurrentStateEqual("quest_a_helping_horse", QuestState.FINISHED)
+    private val questHelpingHorseResetFinished get() = isQuestResetStateEqual("quest_a_helping_horse", QuestState.FINISHED)
+
+    private val questPestRemovalUnknown get() = isQuestCurrentStateEqual("quest_honeywood_inn_price-1", QuestState.UNKNOWN)
+    private val questPestRemovalKnown get() = isQuestCurrentStateEqual("quest_honeywood_inn_price-1", QuestState.KNOWN)
+    private val questPestRemovalTaskComplete
+        get() = isQuestTaskNumberComplete("quest_honeywood_inn_price-1", 1)
+                && !isQuestTaskNumberComplete("quest_honeywood_inn_price-1", 2)
+    private val questPestRemovalKnownOrLower get() = isQuestCurrentStateEqualOrLower("quest_honeywood_inn_price-1", QuestState.KNOWN)
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -96,10 +98,19 @@ object ConditionDatabase {
     private fun isQuestTaskNumberComplete(questId: String, taskNumber: Int): Boolean =
         gameData.quests.getQuestById(questId).isTaskComplete(taskNumber.toString())
 
-    private fun isQuestStateEqualOrHigher(questId: String, questState: QuestState): Boolean =
+    private fun isQuestCurrentStateEqual(questId: String, questState: QuestState): Boolean =
+        gameData.quests.getQuestById(questId).currentState == questState
+
+    private fun isQuestResetStateEqual(questId: String, questState: QuestState): Boolean =
+        gameData.quests.getQuestById(questId).resetState == questState
+
+    private fun isQuestCurrentStateEqualOrHigher(questId: String, questState: QuestState): Boolean =
         gameData.quests.getQuestById(questId).isCurrentStateEqualOrHigherThan(questState)
 
-    private fun isQuestStateEqualOrLower(questId: String, questState: QuestState): Boolean =
+    private fun isOneOfBothStatesEqualOrHigher(questId: String, questState: QuestState): Boolean =
+        gameData.quests.getQuestById(questId).isOneOfBothStatesEqualOrHigherThan(questState)
+
+    private fun isQuestCurrentStateEqualOrLower(questId: String, questState: QuestState): Boolean =
         gameData.quests.getQuestById(questId).isCurrentStateEqualOrLowerThan(questState)
 
     private fun hasEventPlayed(eventId: String): Boolean =
@@ -107,5 +118,8 @@ object ConditionDatabase {
 
     private fun isBattleWon(battleId: String): Boolean =
         gameData.battles.isBattleWon(battleId)
+
+    private fun isCurrentPhraseId(conversationId: String, currentPhraseId: String): Boolean =
+        gameData.conversations.getConversationById(conversationId).currentPhraseId == currentPhraseId
 
 }

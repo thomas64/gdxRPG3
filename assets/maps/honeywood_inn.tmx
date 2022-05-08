@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="34" height="30" tilewidth="24" tileheight="24" infinite="0" nextlayerid="14" nextobjectid="44">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="34" height="30" tilewidth="24" tileheight="24" infinite="0" nextlayerid="17" nextobjectid="53">
  <properties>
   <property name="bgm" value="bgm_inn"/>
   <property name="bgs" value="bgs_fireplace"/>
   <property name="step_sound" value="wood"/>
  </properties>
- <tileset firstgid="1" name="hero_s_hometown_inn" tilewidth="24" tileheight="24" tilecount="936" columns="36">
-  <image source="tilesets/hero_s_hometown_inn.png" width="864" height="624"/>
+ <tileset firstgid="1" name="honeywood_inn" tilewidth="24" tileheight="24" tilecount="936" columns="36">
+  <image source="tilesets/honeywood_inn.png" width="864" height="624"/>
  </tileset>
  <tileset firstgid="937" source="tilesets/fsm_inside01_c.tsx"/>
  <tileset firstgid="1961" source="tilesets/fsm_inside01_a2.tsx"/>
@@ -62,7 +62,7 @@
   <object id="34" name="carpet" x="48" y="192" width="240" height="144"/>
   <object id="35" name="carpet" x="528" y="432" width="240" height="48"/>
  </objectgroup>
- <objectgroup color="#aa0000" id="10" name="collision" visible="0">
+ <objectgroup color="#aa0000" id="10" name="collision">
   <object id="1" x="0" y="0" width="48" height="720"/>
   <object id="2" x="768" y="0" width="48" height="720"/>
   <object id="3" x="672" y="600" width="96" height="120"/>
@@ -90,12 +90,57 @@
   <object id="32" x="192" y="480" height="24"/>
   <object id="33" x="240" y="480" height="24"/>
  </objectgroup>
+ <objectgroup color="#55ff7f" id="14" name="npc">
+  <object id="44" name="woman02" x="600" y="360" width="48" height="24">
+   <properties>
+    <property name="conversation" value="quest_honeywood_inn_price-1"/>
+    <property name="direction" value="south"/>
+   </properties>
+  </object>
+  <object id="45" name="woman02" type="inv" x="600" y="408" width="48" height="12">
+   <properties>
+    <property name="conversation" value="quest_honeywood_inn_price-1"/>
+   </properties>
+  </object>
+  <object id="48" name="woman02" type="inv" x="480" y="90" width="6" height="6">
+   <properties>
+    <property name="conversation" value="dont_go_up_there"/>
+   </properties>
+  </object>
+  <object id="50" name="maid01" x="576" y="168" width="48" height="24">
+   <properties>
+    <property name="conversation" value="get_out_of_kitchen"/>
+    <property name="direction" value="north"/>
+   </properties>
+  </object>
+  <object id="51" name="gypsy_man01" x="240" y="192" width="48" height="24">
+   <properties>
+    <property name="conversation" value="pleasant_honeywood"/>
+    <property name="direction" value="north"/>
+   </properties>
+  </object>
+  <object id="52" name="cat1" type="w" x="360" y="384" width="48" height="24">
+   <properties>
+    <property name="conversation" value="meow"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup color="#55aaff" id="11" name="spawn">
-  <object id="25" name="hero_s_hometown" x="624" y="624" width="48" height="24"/>
-  <object id="31" name="hero_s_hometown_inn_2f" x="384" y="120" width="48" height="24"/>
+  <object id="25" name="honeywood" x="624" y="624" width="48" height="24"/>
+  <object id="31" name="honeywood_inn_2f" x="384" y="120" width="48" height="24"/>
  </objectgroup>
  <objectgroup color="#ffff7f" id="12" name="portal">
-  <object id="26" name="hero_s_hometown" x="624" y="648" width="48" height="24"/>
-  <object id="30" name="hero_s_hometown_inn_2f" x="384" y="96" width="48" height="24"/>
+  <object id="26" name="honeywood" x="624" y="648" width="48" height="24"/>
+  <object id="30" name="honeywood_inn_2f" x="384" y="96" width="48" height="24"/>
+ </objectgroup>
+ <objectgroup color="#ffff00" id="16" name="quest">
+  <object id="47" name="quest_honeywood_inn_price-1" type="blocker" x="384" y="222" width="48" height="12">
+   <properties>
+    <property name="activeWhenQuestIsAccepted" type="bool" value="false"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup color="#ff55ff" id="15" name="event">
+  <object id="46" name="dont_go_up_there" type="discover" x="384" y="234" width="48" height="6"/>
  </objectgroup>
 </map>

@@ -7,10 +7,6 @@ class ConversationSubject(private val observer: ConversationObserver) {
         observer.onNotifyExitConversation()
     }
 
-    fun notifyShowMessageTooltip(message: String) {
-        observer.onNotifyShowMessageTooltip(message)
-    }
-
     fun notifyHeroJoined() {
         observer.onNotifyHeroJoined()
     }

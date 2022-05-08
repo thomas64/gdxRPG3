@@ -1,5 +1,5 @@
 {
-  "quest_royal_sacrifice": {
+  "quest_royal_sacrifice"      : {
     "title"   : "Royal sacrifice?",
     "entityId": "ardor",
     "summary" : "Grace will become sacrificed by the wizard Ardor to gain ultimate power from the God Ulrog. Something seems to go wrong and everything gets engulfed in flames, including Ardor and you.",
@@ -7,6 +7,42 @@
       "1": {
         "taskPhrase": "Rescue Grace from Ardor",
         "type"      : "DISCOVER"
+      }
+    }
+  },
+  "quest_a_helping_horse"      : {
+    "title"   : "A helping horse",
+    "entityId": "man01",
+    "summary" : "A fallen tree has blocked the road to Honeywood Forest. Lennor needs your help to get a strong horse and some ropes if you want to speed up the process of clearing the road.",
+    "tasks"   : {
+      "1": {
+        "taskPhrase": "Deliver a strong horse",
+        "type"      : "GIVE_ITEM",
+        "target"    : {"horse": 1}
+      },
+      "2": {
+        "taskPhrase": "Deliver 3 ropes",
+        "type"      : "GIVE_ITEM",
+        "target"    : {"rope": 3}
+      },
+      "3": {
+        "taskPhrase": "Let the tree be dragged out of the way",
+        "type"      : "FREE"
+      }
+    }
+  },
+  "quest_honeywood_inn_price-1": {
+    "title"   : "Pest removal",
+    "entityId": "woman02",
+    "summary" : "The innkeeper has a problem with bats",
+    "tasks"   : {
+      "1": {
+        "taskPhrase": "Kill all the bats",
+        "type"      : "KILL"
+      },
+      "2": {
+        "taskPhrase": "Report back",
+        "type"      : "RETURN"
       }
     }
   }

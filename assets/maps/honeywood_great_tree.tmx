@@ -122,9 +122,9 @@
   <object id="104" name="chest0009" x="192" y="624" width="48" height="48"/>
  </objectgroup>
  <objectgroup color="#55ff7f" id="15" name="npc">
-  <object id="80" name="fairy3" type="ia" x="594" y="900" width="48" height="24">
+  <object id="80" name="fairy3" type="ia" x="600" y="900" width="48" height="24">
    <properties>
-    <property name="conversation" value="fairy_welcome"/>
+    <property name="conversation" value="quest_fairy_welcome"/>
     <property name="direction" value="south"/>
    </properties>
   </object>

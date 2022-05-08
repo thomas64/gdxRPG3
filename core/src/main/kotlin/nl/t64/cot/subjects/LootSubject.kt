@@ -25,10 +25,6 @@ class LootSubject {
         observers.forEach { it.onNotifyLootTaken() }
     }
 
-    fun notifyRewardTaken() {
-        observers.forEach { it.onNotifyRewardTaken() }
-    }
-
     fun notifyReceiveTaken() {
         observers.forEach { it.onNotifyReceiveTaken() }
     }

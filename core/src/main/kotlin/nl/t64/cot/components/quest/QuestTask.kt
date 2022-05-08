@@ -51,7 +51,8 @@ class QuestTask(
             QuestTaskType.SHOW_ITEM,
             QuestTaskType.WEAR_ITEM,
             QuestTaskType.SAY_THE_RIGHT_THING,
-            QuestTaskType.KILL -> completeTask()
+            QuestTaskType.KILL,
+            QuestTaskType.RETURN -> completeTask()
             QuestTaskType.GIVE_ITEM -> {
                 removeTargetFromInventory()
                 completeTask()

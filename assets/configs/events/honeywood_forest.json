@@ -1,7 +1,7 @@
 {
   "fallen_tree"         : {
     "type"          : "conversation",
-    "condition"     : ["quest_intro_not_finished"],
+    "condition"     : ["i_c_!quest_a_helping_horse_finished"],
     "conversationId": "fallen_tree",
     "entityId"      : "mozes",
     "doesRepeat"    : true
@@ -14,7 +14,7 @@
   },
   "cave_not_yet_found"  : {
     "type"          : "conversation",
-    "condition"     : ["cave_not_yet_found"],
+    "condition"     : ["!cave_found"],
     "conversationId": "dont_go_south",
     "entityId"      : "mozes",
     "doesRepeat"    : true
@@ -26,7 +26,7 @@
   },
   "talking_orc_guards"  : {
     "type"          : "conversation",
-    "condition"     : ["quest_orc_guards_not_finished"],
+    "condition"     : ["!quest_orc_guards_finished"],
     "conversationId": "quest_orc_guards",
     "entityId"      : "orc_sergeant",
     "doesRepeat"    : true
@@ -38,8 +38,8 @@
   },
   "enter_great_tree"   : {
     "type"          : "conversation",
-    "conversationId": "fairy_welcome",
-    "entityId": "fairy3"
+    "conversationId": "quest_fairy_welcome",
+    "entityId"      : "fairy3"
   },
   "find_great_tree"    : {
     "type"          : "conversation",

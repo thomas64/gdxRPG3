@@ -1,16 +1,4 @@
 {
-  "quest_intro"           : {
-    "title"   : "Quest Intro",
-    "entityId": "mozes",
-    "summary" : "Quest Intro",
-    "isHidden": true,
-    "tasks"   : {
-      "1": {
-        "taskPhrase": "Quest Intro",
-        "type": "CHECK"
-      }
-    }
-  },
   "quest_grace_is_missing": {
     "title"   : "Grace is missing",
     "entityId": "girl01",
@@ -18,7 +6,7 @@
     "tasks"   : {
       "1": {
         "taskPhrase"   : "Search for a clue about where Grace went",
-        "updatedPhrase": "Found one of Grace's ribbons",
+        "updatedPhrase": "Find one of Grace's ribbons",
         "type"         : "FIND_ITEM",
         "target"       : {"grace_ribbon": 1},
         "isOptional"   : true,
@@ -26,14 +14,14 @@
       },
       "2": {
         "taskPhrase"   : "Search for where Grace went",
-        "updatedPhrase": "Found a hidden cave",
+        "updatedPhrase": "Find a hidden cave",
         "type"         : "DISCOVER",
         "isHidden"     : true,
         "linkedWith"   : "3"
       },
       "3": {
         "taskPhrase"   : "Find out if Grace is in the cave",
-        "updatedPhrase": "Exited the cave past the guards",
+        "updatedPhrase": "Exit the cave past the guards",
         "type"         : "DISCOVER",
         "isHidden"     : true,
         "linkedWith"   : "4"
@@ -57,14 +45,14 @@
     "summary" : "Grace is said to be where Ardor is. But two intimidating orc guards won't let you get to Ardor.",
     "tasks"   : {
       "1": {
-        "taskPhrase": "Found a magic scroll for manipulating orcs?",
+        "taskPhrase": "Find a magic scroll for manipulating orcs?",
         "type"      : "FIND_ITEM",
         "target"    : {"scroll_of_obedience": 1},
         "isOptional": true,
         "isHidden"  : true
       },
       "2": {
-        "taskPhrase": "Used the scroll on the guards",
+        "taskPhrase": "Use the scroll on the guards",
         "type"      : "GIVE_ITEM",
         "target"    : {"scroll_of_obedience": 1},
         "isOptional": true,
@@ -72,23 +60,34 @@
         "linkedWith": "5"
       },
       "3": {
-        "taskPhrase": "Convinced the guards to really fear Ardor",
+        "taskPhrase": "Convince the guards to really fear Ardor",
         "type"      : "SAY_THE_RIGHT_THING",
         "isOptional": true,
         "isHidden"  : true,
         "linkedWith": "5"
       },
       "4": {
-        "taskPhrase": "Killed the guards",
+        "taskPhrase": "Kill the guards",
         "type"      : "KILL",
         "isOptional": true,
         "isHidden"  : true,
         "linkedWith": "5"
       },
       "5": {
-        "taskPhrase"   : "Find a way to get past the guards",
-        "updatedPhrase": "Found a way to get past the guards",
-        "type"         : "FREE"
+        "taskPhrase": "Find a way to get past the guards",
+        "type"      : "FREE"
+      }
+    }
+  },
+  "quest_fairy_welcome"   : {
+    "title"   : "Fairy welcome",
+    "entityId": "fairy3",
+    "summary" : "Fairy welcome",
+    "isHidden": true,
+    "tasks"   : {
+      "1": {
+        "taskPhrase": "Talk",
+        "type"      : "FREE"
       }
     }
   },
@@ -103,14 +102,14 @@
         "linkedWith": "2"
       },
       "2": {
-        "taskPhrase": "Found the secret door",
+        "taskPhrase": "Find the secret door",
         "type"      : "FREE",
         "isHidden"  : true,
         "linkedWith": "3"
       },
       "3": {
         "taskPhrase"   : "Look for the magic scroll",
-        "updatedPhrase": "Found a magic scroll for manipulating orcs?",
+        "updatedPhrase": "Find a magic scroll for manipulating orcs?",
         "type"         : "FIND_ITEM",
         "target"       : {"scroll_of_obedience": 1},
         "isHidden"     : true

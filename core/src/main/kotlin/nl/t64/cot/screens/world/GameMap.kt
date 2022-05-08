@@ -65,7 +65,7 @@ class GameMap(val mapTitle: String) {
     val heroes: List<GameMapHero> = loader.loadLayer(HERO_LAYER, { gameData.heroes.contains(it.name) }, { GameMapHero(it) })
     val enemies: List<GameMapEnemy> = loader.loadLayer(ENEMY_LAYER) { GameMapEnemy(it) }
     val lights: List<GameMapLight> = loader.loadLayer(LIGHTS_LAYER) { GameMapLight(it) }
-    val questBlockers: List<GameMapQuestBlocker> = loader.equalsIgnoreCase(QUEST_LAYER, "blocker") { GameMapQuestBlocker(it) }
+    val questBlockers: List<GameMapQuestBlocker> = loader.equalsIgnoreCase(QUEST_LAYER, "blocker") { GameMapQuestBlocker.load(it) }
     val upperTextures: List<GameMapQuestTexture> = loader.loadTextureLayer(UPPER_TEXTURE_LAYER) { GameMapQuestTexture(it) }
     val lowerTextures: List<GameMapQuestTexture> = loader.loadTextureLayer(LOWER_TEXTURE_LAYER) { GameMapQuestTexture(it) }
     val sparkles: List<GameMapSparkle> = loader.startsWith(REST_LAYER, "sparkle") { GameMapSparkle(it) }
@@ -84,8 +84,8 @@ class GameMap(val mapTitle: String) {
     private val notes: List<GameMapNote> = loader.startsWith(REST_LAYER, "note") { GameMapNote(it) }
     private val savePoints: List<GameMapSavePoint> = loader.loadLayer(SAVE_LAYER) { GameMapSavePoint(it) }
     private val spawnPoints: List<GameMapSpawnPoint> = loader.loadLayer(SPAWN_LAYER) { GameMapSpawnPoint(it) }
-    private val portals: List<GameMapPortal> = loader.loadLayer(PORTAL_LAYER) { GameMapPortal(it, mapTitle) }
-    private val warpPoints: List<GameMapWarpPoint> = loader.loadLayer(WARP_LAYER) { GameMapWarpPoint(it, mapTitle) }
+    private val portals: List<GameMapRelocator> = loader.loadLayer(PORTAL_LAYER) { GameMapPortal(it, mapTitle) }
+    private val warpPoints: List<GameMapRelocator> = loader.loadLayer(WARP_LAYER) { GameMapWarpPoint(it, mapTitle) }
 
     val bgm: AudioEvent = tiledMap.bgm
     val bgs: List<AudioEvent> = tiledMap.bgs

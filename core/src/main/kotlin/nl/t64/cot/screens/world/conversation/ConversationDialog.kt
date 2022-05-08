@@ -195,7 +195,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             ConversationCommand.LOAD_SCHOOL -> loadSchool(nextId)
             ConversationCommand.SAVE_GAME -> saveGame(nextId)
             ConversationCommand.HEAL_LIFE -> healLife(nextId)
-            ConversationCommand.RECEIVE_XP -> possibleReceiveXp(nextId)
+            ConversationCommand.RECEIVE_XP -> receiveXp(nextId)
             ConversationCommand.START_BATTLE -> startBattle(nextId)
 
             ConversationCommand.KNOW_QUEST -> knowQuest(nextId)
@@ -204,6 +204,8 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             ConversationCommand.WEAR_QUEST_ITEM -> wearQuestItem(nextId)
             ConversationCommand.GIVE_QUEST_ITEM -> giveQuestItem(nextId)
             ConversationCommand.SAY_QUEST_THING -> sayQuestThing(nextId)
+
+            ConversationCommand.REWARD_QUEST -> rewardQuest()
 
             else -> throw IllegalArgumentException("ConversationCommand '$conversationCommand' cannot be reached here.")
         }
@@ -280,28 +282,15 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         ))
     }
 
-    private fun possibleReceiveXp(nextId: String) {
+    private fun receiveXp(nextId: String) {
+        val quest = gameData.quests.getQuestById(conversationId!!)
         val reward = gameData.loot.getLoot(conversationId!!)
         if (reward.isXpGained()) {
             continueConversation(nextId)
         } else {
-            receiveXp(reward, nextId)
+            quest.receivePossibleXp()
+            continueConversationWithoutSound(nextId)
         }
-    }
-
-    private fun receiveXp(reward: Loot, nextId: String) {
-        val levelUpMessage = StringBuilder()
-        gameData.party.gainXp(reward.xp, levelUpMessage)
-        val finalMessage = levelUpMessage.toString().trim()
-        if (finalMessage.isEmpty()) {
-            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_REWARD)
-            conversationObserver.notifyShowMessageTooltip("+ ${reward.xp} XP")
-        } else {
-            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_LEVELUP)
-            conversationObserver.notifyShowMessageTooltip("+ ${reward.xp} XP" + System.lineSeparator() + finalMessage)
-        }
-        reward.clearXp()
-        continueConversationWithoutSound(nextId)
     }
 
     private fun startBattle(nextId: String) {
@@ -311,12 +300,12 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
 
     private fun knowQuest(nextId: String) {
         gameData.quests.getQuestById(conversationId!!).know()
-        endConversation(nextId)
+        continueConversation(nextId)
     }
 
     private fun acceptQuest(nextId: String) {
         gameData.quests.getQuestById(conversationId!!).accept()
-        endConversation(nextId)
+        continueConversation(nextId)
     }
 
     private fun showQuestItem(nextId: String) {
@@ -339,16 +328,20 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         endConversation(nextId)
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    // todo, these 2 methods are from the huge quest clean up, they were in WorldScreen.
-    // I think they fit better here, the moment they will become in use again.
-    private fun onNotifyShowRewardDialog(reward: Loot, levelUpMessage: String?) {
+    private fun rewardQuest() {
+        val quest = gameData.quests.getQuestById(conversationId!!)
+        val reward = gameData.loot.getLoot(conversationId!!)
+        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_CONVERSATION_END)
         stage.addAction(Actions.sequence(Actions.run { hideWithFade() },
                                          Actions.delay(Constant.DIALOG_FADE_OUT_DURATION),
-                                         Actions.run { RewardScreen.load(reward, levelUpMessage) }))
+                                         Actions.run { RewardScreen.load(reward, quest, graph) })
+        )
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // todo, this method is from the huge quest clean up, it was in WorldScreen.
+    // I think they fit better here, the moment they will become in use again.
     private fun onNotifyShowReceiveDialog(receive: Loot) {
         stage.addAction(Actions.sequence(Actions.run { hideWithFade() },
                                          Actions.delay(Constant.DIALOG_FADE_OUT_DURATION),
@@ -431,7 +424,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         val choices = GdxArray(graph.getAssociatedChoices())
         answers.setItems(choices)
         setDefaultSelectedChoice(choices)
-        setScrollPaneHeight(choices)
+        repositionScrollPaneBasedOnContent(choices)
     }
 
     private fun setDefaultSelectedChoice(choices: GdxArray<ConversationChoice>) {
@@ -442,11 +435,24 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         }
     }
 
+    private fun repositionScrollPaneBasedOnContent(choices: GdxArray<ConversationChoice>) {
+        setScrollPaneHeight(choices)
+        setScrollPanePadding()
+    }
+
     private fun setScrollPaneHeight(choices: GdxArray<ConversationChoice>) {
         if (choices.size % 2 == 0) {
             rowWithScrollPane.height(choices.size * SCROLL_PANE_LINE_HEIGHT)
         } else {
             rowWithScrollPane.height(choices.size * SCROLL_PANE_LINE_HEIGHT + 2f)
+        }
+    }
+
+    private fun setScrollPanePadding() {
+        if (label.text.isBlank()) {
+            rowWithScrollPane.padTop(-SCROLL_PANE_LINE_HEIGHT - SCROLL_PANE_TOP_PAD).padLeft(0f)
+        } else {
+            rowWithScrollPane.padTop(0f).padLeft(PAD)
         }
     }
 

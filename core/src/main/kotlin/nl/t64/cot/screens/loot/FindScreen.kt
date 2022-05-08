@@ -21,8 +21,11 @@ class FindScreen : LootScreen() {
         }
     }
 
-    override fun resolveAfterClearingContent() {
-        brokerManager.lootObservers.notifyLootTaken()
+    override fun resolveLootAndCloseScreen(isAllTheLootCleared: Boolean) {
+        if (isAllTheLootCleared) {
+            brokerManager.lootObservers.notifyLootTaken()
+        }
+        closeScreen()
     }
 
 }

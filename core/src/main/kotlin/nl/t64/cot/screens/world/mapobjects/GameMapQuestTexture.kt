@@ -11,14 +11,14 @@ import nl.t64.cot.components.quest.QuestState
 class GameMapQuestTexture(val texture: TextureMapObject) {
 
     private val quest: QuestGraph = gameData.quests.getQuestById(texture.name)
-    private val isVisibleIfComplete: Boolean = texture.property("visibleIfComplete")
+    private val isVisibleWhenComplete: Boolean = texture.property("visibleWhenComplete")
     private val taskId: String? = texture.propertyOrNull("task")
     var isVisible: Boolean = texture.property("isVisible")
 
     fun update() {
-        val isFinished = quest.isCurrentStateEqualOrHigherThan(QuestState.FINISHED)
+        val isFinished = quest.currentState == QuestState.FINISHED
         val isComplete = quest.isTaskComplete(taskId)
-        isVisible = (isFinished || isComplete) == isVisibleIfComplete
+        isVisible = (isFinished || isComplete) == isVisibleWhenComplete
     }
 
 }

@@ -3,7 +3,7 @@ package nl.t64.cot.screens.world.mapobjects
 import com.badlogic.gdx.maps.objects.RectangleMapObject
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
-import nl.t64.cot.Utils
+import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.screens.world.entity.EntityState
 import nl.t64.cot.subjects.BlockObserver
 
@@ -11,7 +11,7 @@ import nl.t64.cot.subjects.BlockObserver
 class GameMapBlockerLow(rectObject: RectangleMapObject) : GameMapObject(rectObject.rectangle), BlockObserver {
 
     init {
-        Utils.brokerManager.blockObservers.addObserver(this)
+        brokerManager.blockObservers.addObserver(this)
     }
 
     override fun getBlockerFor(boundingBox: Rectangle, state: EntityState): Rectangle? {

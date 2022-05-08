@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="22" height="22" tilewidth="24" tileheight="24" infinite="0" nextlayerid="15" nextobjectid="25">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="22" height="22" tilewidth="24" tileheight="24" infinite="0" nextlayerid="17" nextobjectid="34">
  <properties>
   <property name="bgm" value="bgm_inn"/>
   <property name="step_sound" value="wood"/>
  </properties>
- <tileset firstgid="1" name="hero_s_hometown_inn_2f" tilewidth="24" tileheight="24" tilecount="384" columns="24">
-  <image source="tilesets/hero_s_hometown_inn_2f.png" width="576" height="384"/>
+ <tileset firstgid="1" name="honeywood_inn_2f" tilewidth="24" tileheight="24" tilecount="384" columns="24">
+  <image source="tilesets/honeywood_inn_2f.png" width="576" height="384"/>
  </tileset>
  <tileset firstgid="385" source="tilesets/fsm_inside01_c.tsx"/>
  <tileset firstgid="1409" source="tilesets/fsm_inside01_b.tsx"/>
@@ -55,8 +55,12 @@
    eJxjYBgFo2AUjIJRMApGwUADAAeQAAE=
   </data>
  </layer>
- <objectgroup color="#0055ff" id="14" name="sound">
+ <objectgroup color="#0055ff" id="14" name="sound" visible="0">
   <object id="24" name="carpet" x="48" y="336" width="432" height="192"/>
+ </objectgroup>
+ <objectgroup color="#aa5500" id="16" name="collision_low">
+  <object id="26" x="96" y="420" width="48" height="60"/>
+  <object id="27" x="192" y="420" width="48" height="60"/>
  </objectgroup>
  <objectgroup color="#aa0000" id="10" name="collision" visible="0">
   <object id="1" x="0" y="0" width="48" height="528"/>
@@ -64,25 +68,32 @@
   <object id="3" x="48" y="0" width="480" height="144"/>
   <object id="4" x="480" y="144" width="48" height="360"/>
   <object id="5" x="48" y="144" width="96" height="24"/>
-  <object id="6" x="96" y="384" width="48" height="96"/>
-  <object id="7" x="192" y="384" width="48" height="96"/>
-  <object id="8" x="288" y="384" width="48" height="96"/>
-  <object id="9" x="384" y="384" width="48" height="96"/>
   <object id="10" x="288" y="288" width="192" height="48"/>
   <object id="13" x="432" y="192" width="48" height="96"/>
   <object id="14" x="48" y="288" width="192" height="48"/>
   <object id="15" x="360" y="192" width="24" height="96"/>
+  <object id="30" x="96" y="384" width="48" height="36"/>
+  <object id="31" x="192" y="384" width="48" height="36"/>
+  <object id="32" x="288" y="384" width="48" height="96"/>
+  <object id="33" x="384" y="384" width="48" height="96"/>
  </objectgroup>
- <objectgroup color="#5500ff" id="13" name="rest">
+ <objectgroup color="#5500ff" id="13" name="rest" visible="0">
   <object id="19" name="note_bed01" x="96" y="384" width="48" height="96"/>
   <object id="20" name="note_bed01" x="192" y="384" width="48" height="96"/>
   <object id="21" name="note_bed01" x="288" y="384" width="48" height="96"/>
   <object id="22" name="note_bed01" x="384" y="384" width="48" height="96"/>
  </objectgroup>
+ <objectgroup color="#ff007f" id="15" name="enemy">
+  <object id="25" name="blue_bat" type="f" x="144" y="408" width="48" height="24">
+   <properties>
+    <property name="battleId" value="quest_honeywood_inn_price-1"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup color="#55aaff" id="11" name="spawn">
-  <object id="16" name="hero_s_hometown_inn" x="384" y="240" width="48" height="24"/>
+  <object id="16" name="honeywood_inn" x="384" y="240" width="48" height="24"/>
  </objectgroup>
  <objectgroup color="#ffff7f" id="12" name="portal">
-  <object id="17" name="hero_s_hometown_inn" x="384" y="264" width="48" height="24"/>
+  <object id="17" name="honeywood_inn" x="384" y="264" width="48" height="24"/>
  </objectgroup>
 </map>

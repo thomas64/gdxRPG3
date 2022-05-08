@@ -20,6 +20,8 @@ enum class ConversationCommand {
     GIVE_QUEST_ITEM,
     SAY_QUEST_THING,
 
+    REWARD_QUEST,
+
     NONE,
 
 
@@ -31,7 +33,6 @@ enum class ConversationCommand {
     COMPLETE_QUEST_TASK,
     RETURN_QUEST,
     ACCEPT_OR_RETURN_QUEST,
-    REWARD_QUEST,
     BONUS_REWARD_QUEST,
     FAIL_QUEST,
 

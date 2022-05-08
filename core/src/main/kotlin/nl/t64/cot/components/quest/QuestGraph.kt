@@ -2,6 +2,7 @@ package nl.t64.cot.components.quest
 
 import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.brokerManager
+import nl.t64.cot.Utils.gameData
 import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.components.loot.Loot
@@ -23,9 +24,9 @@ data class QuestGraph(
     override fun toString(): String {
         return when {
             isFailed -> "x  $title"
-            resetState == QuestState.FINISHED -> "r  $title"
             currentState == QuestState.FINISHED -> "v  $title"
             currentState == QuestState.UNCLAIMED -> "o   $title"
+            resetState == QuestState.FINISHED -> "r  $title"
             else -> "     $title"
         }
     }
@@ -57,15 +58,21 @@ data class QuestGraph(
     }
 
     fun accept() {
-        if (isCurrentStateEqualOrLowerThan(QuestState.KNOWN)) {
+        if (currentState.isEqualOrLowerThan(QuestState.KNOWN)) {
             currentState = QuestState.ACCEPTED
-            showMessageTooltipQuestNew()
+            if (resetState == QuestState.UNKNOWN) {
+                showMessageTooltipQuestNew()
+            }
         }
-        possibleCompleteQuest()
+        possibleFinish()
+    }
+
+    fun unclaim() {
+        currentState = QuestState.UNCLAIMED
     }
 
     fun possibleSetFindItemTaskComplete() {
-        if (isCurrentStateEqualOrLowerThan(QuestState.ACCEPTED)) {
+        if (currentState.isEqualOrLowerThan(QuestState.ACCEPTED)) {
             tasks.filter { it.value.type == QuestTaskType.FIND_ITEM }
                 .filter { it.value.hasTargetInInventoryOrEquipment() }
                 .forEach { setTaskComplete(it.key) }
@@ -100,18 +107,20 @@ data class QuestGraph(
     }
 
     fun setKillTaskComplete() {
-        accept()
-        tasks.filter { it.value.type == QuestTaskType.KILL }
+        if (resetState.isEqualOrHigherThan(QuestState.ACCEPTED)) {
+            accept()
+        }
+        tasks.filterValues { it.type == QuestTaskType.KILL }
             .forEach { setTaskComplete(it.key) }
     }
 
-    fun setTaskComplete(taskId: String, playSound: Boolean = true, showTooltip: Boolean = true) {
+    fun setTaskComplete(taskId: String, showTooltip: Boolean = true) {
         if (!isTaskComplete(taskId)) {
             val questTask = tasks[taskId]!!
             questTask.setComplete()
             unhideTaskWithLinkedTask(questTask)
             if (showTooltip) showMessageTooltipQuestUpdated()
-            possibleCompleteQuest(playSound, showTooltip)
+            possibleFinish(showTooltip)
         }
     }
 
@@ -145,9 +154,9 @@ data class QuestGraph(
             .all { it.value.isComplete }
     }
 
-    fun forceCompleteQuest(playSound: Boolean = false, showTooltip: Boolean = false) {
+    fun forceFinish(showTooltip: Boolean = false) {
         if (currentState != QuestState.FINISHED) {
-            completeQuest(playSound, showTooltip)
+            finish(showTooltip)
         }
     }
 
@@ -157,35 +166,45 @@ data class QuestGraph(
 //            .map { Loot(it.target as MutableMap<String, Int>) }
 //            .first()
 //    }
-//
-//    private fun partyGainXp(reward: Loot): String? {
-//        if (reward.isXpGained()) {
-//            return null
-//        }
-//        val levelUpMessage = StringBuilder()
-//        gameData.party.gainXp(reward.xp, levelUpMessage)
-//        showMessageTooltipRewardXp(reward)
-//        reward.clearXp()
-//        return levelUpMessage.toString().trim().ifEmpty { null }
-//    }
 
-    private fun possibleCompleteQuest(playSound: Boolean = true, showTooltip: Boolean = true) {
-        if (isCurrentStateEqualOrHigherThan(QuestState.ACCEPTED)
+    private fun possibleFinish(showTooltip: Boolean = true) {
+        if (currentState.isEqualOrHigherThan(QuestState.ACCEPTED)
             && currentState != QuestState.FINISHED
             && areAllQuestTasksComplete()
         ) {
             if (resetState == QuestState.FINISHED) {
-                completeQuest(playSound = false, showTooltip = false)
+                finish(false)
             } else {
-                completeQuest(playSound, showTooltip)
+                finish(showTooltip)
             }
         }
     }
 
-    private fun completeQuest(playSound: Boolean = true, showTooltip: Boolean = true) {
-        if (playSound) audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_REWARD)
+    fun finish(showTooltip: Boolean = true) {
+        receivePossibleXp()
+        possibleSetLastReturnTaskComplete()
         currentState = QuestState.FINISHED
         if (showTooltip) showMessageTooltipQuestCompleted()
+    }
+
+    fun receivePossibleXp() {
+        val reward = gameData.loot.getLoot(id)
+        if (!reward.isXpGained()) {
+            val levelUpMessage = StringBuilder()
+            gameData.party.gainXp(reward.xp, levelUpMessage)
+            val finalMessage = levelUpMessage.toString().trim()
+            showMessageTooltipRewardXp(reward, finalMessage)
+            reward.clearXp()
+        }
+    }
+
+    private fun possibleSetLastReturnTaskComplete() {
+        tasks.entries
+            .sortedBy { it.key }
+            .takeLast(1)
+            .filter { it.value.type == QuestTaskType.RETURN }
+            .filter { !it.value.isComplete }
+            .forEach { it.value.setComplete() }
     }
 
     private fun areAllQuestTasksComplete(): Boolean {
@@ -208,6 +227,8 @@ data class QuestGraph(
 
     private fun showMessageTooltipQuestCompleted() {
         if (!isHidden) {
+            audioManager.handle(AudioCommand.SE_STOP_ALL)
+            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_REWARD)
             brokerManager.questObservers.notifyShowMessageTooltip("Quest completed:" + System.lineSeparator() + title)
         }
     }
@@ -216,8 +237,15 @@ data class QuestGraph(
         brokerManager.questObservers.notifyShowMessageTooltip("Quest failed:" + System.lineSeparator() + title)
     }
 
-    private fun showMessageTooltipRewardXp(reward: Loot) {
-        brokerManager.questObservers.notifyShowMessageTooltip("+ ${reward.xp} XP")
+    private fun showMessageTooltipRewardXp(reward: Loot, levelUpMessage: String) {
+        audioManager.handle(AudioCommand.SE_STOP_ALL)
+        if (levelUpMessage.isEmpty()) {
+            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_REWARD)
+            brokerManager.questObservers.notifyShowMessageTooltip("+ ${reward.xp} XP")
+        } else {
+            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_LEVELUP)
+            brokerManager.questObservers.notifyShowMessageTooltip("+ ${reward.xp} XP" + System.lineSeparator() + levelUpMessage)
+        }
     }
 
 }

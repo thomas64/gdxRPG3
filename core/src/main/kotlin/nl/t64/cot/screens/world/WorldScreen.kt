@@ -201,13 +201,6 @@ class WorldScreen : Screen,
         lootList = LootLoader(mapManager.currentMap).createLoot()
     }
 
-    override fun onNotifyRewardTaken() {
-//        val conversationId = currentNpcEntity.getConversationId()
-//        gameData.quests.finish(conversationId)
-//        val conversation = gameData.conversations.getConversationById(conversationId)
-//        conversation.currentPhraseId = Constant.PHRASE_ID_QUEST_FINISHED
-    }
-
     override fun onNotifyReceiveTaken() {
 //        val conversationId = currentNpcEntity.getConversationId()
 //        gameData.quests.accept(conversationId)
@@ -223,11 +216,6 @@ class WorldScreen : Screen,
         doBeforeLoadScreen()
     }
 
-    // also QuestObserver
-    override fun onNotifyShowMessageTooltip(message: String) {
-        messageTooltip.show(message, stage)
-    }
-
     override fun onNotifyHeroJoined() {
         brokerManager.blockObservers.removeObserver(currentNpcEntity)
         npcEntities = npcEntities.filter { it != currentNpcEntity }
@@ -237,6 +225,13 @@ class WorldScreen : Screen,
     override fun onNotifyShowBattleScreen(battleId: String) {
         gameState = GameState.BATTLE
         fadeOut({ BattleScreen.load(battleId, this) }, Color.BLACK)
+    }
+    //endregion
+
+    //region QuestObserver /////////////////////////////////////////////////////////////////////////////////////////////
+
+    override fun onNotifyShowMessageTooltip(message: String) {
+        messageTooltip.show(message, stage)
     }
     //endregion
 

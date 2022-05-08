@@ -24,13 +24,6 @@ open class SpoilsScreen : LootScreen() {
     override fun resolveLootAndCloseScreen(notUsedHere: Boolean) {
         brokerManager.lootObservers.notifySpoilsUpdated()
         closeScreen()
-        // For spoils, resolveAfterClearingContent() must not be called in resolveLootAndCloseScreen(),
-        // which is empty anyway and also already resolved at the line with notifySpoilsUpdated().
-        // This is necessary, so that loot is always updated, even if the spoils are not taken.
-    }
-
-    override fun resolveAfterClearingContent() {
-        // empty
     }
 
 }

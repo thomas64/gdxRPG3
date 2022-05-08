@@ -1,0 +1,15 @@
+{
+  "a_tree_has_fallen": {
+    "type"          : "conversation",
+    "condition"     : ["!has_talked_to_lennor"],
+    "conversationId": "quest_a_helping_horse",
+    "entityId"      : "man02"
+  },
+  "dont_go_up_there" : {
+    "type"          : "conversation",
+    "condition"     : ["c_quest_pest_removal_known_or_lower"],
+    "conversationId": "dont_go_up_there",
+    "entityId"      : "woman02",
+    "doesRepeat"    : true
+  }
+}

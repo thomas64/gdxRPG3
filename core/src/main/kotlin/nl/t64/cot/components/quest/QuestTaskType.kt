@@ -10,6 +10,8 @@ enum class QuestTaskType {
     SAY_THE_RIGHT_THING,
     KILL,
 
+    RETURN,
+
     FREE,
     NONE,
 
@@ -20,6 +22,5 @@ enum class QuestTaskType {
     ITEM_DELIVERY,
     GUARD,
     ESCORT,
-    RETURN,
 
 }

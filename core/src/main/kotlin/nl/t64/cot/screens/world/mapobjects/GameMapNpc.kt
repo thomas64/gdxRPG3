@@ -17,6 +17,7 @@ open class GameMapNpc(rectObject: RectangleMapObject) : GameMapObject(rectObject
     val conversation: String = createConversation(rectObject)
     val conditionIds: List<String> = createConditions(rectObject)
     val position: Vector2 get() = Vector2(rectangle.x, rectangle.y)
+    val isEnemy: Boolean = createIsEnemy(rectObject)
 
     private fun createState(rectObject: RectangleMapObject): EntityState {
         val entityState = rectObject.type
@@ -45,4 +46,7 @@ open class GameMapNpc(rectObject: RectangleMapObject) : GameMapObject(rectObject
         return condition?.split(",")?.map { it.trim() } ?: emptyList()
     }
 
+    private fun createIsEnemy(rectObject: RectangleMapObject): Boolean {
+        return rectObject.property("isEnemy", false)
+    }
 }

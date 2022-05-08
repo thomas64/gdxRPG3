@@ -14,7 +14,7 @@ class PhysicsNpc : PhysicsComponent() {
 
     init {
         velocity = Constant.MOVE_SPEED_1
-        boundingBoxWidthPercentage = 0.50f
+        boundingBoxWidthPercentage = 0.80f
         boundingBoxHeightPercentage = 0.30f
     }
 

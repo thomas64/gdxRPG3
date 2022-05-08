@@ -39,20 +39,13 @@ abstract class LootScreen : ParchmentScreen() {
         stage.dispose()
     }
 
-    open fun resolveLootAndCloseScreen(isAllTheLootCleared: Boolean) {
-        if (isAllTheLootCleared) {
-            resolveAfterClearingContent()
-        }
-        closeScreen()
-    }
+    abstract fun resolveLootAndCloseScreen(isAllTheLootCleared: Boolean)
 
-    fun closeScreen(fadeToScreen: ScreenType = ScreenType.WORLD) {
+    protected fun closeScreen(fadeToScreen: ScreenType = ScreenType.WORLD) {
         Gdx.input.inputProcessor = null
         Utils.setGamepadInputProcessor(null)
         audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_CONVERSATION_NEXT)
         fadeParchment(fadeToScreen)
     }
-
-    abstract fun resolveAfterClearingContent()
 
 }
