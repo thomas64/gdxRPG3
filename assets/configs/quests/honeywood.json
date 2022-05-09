@@ -15,17 +15,92 @@
     "entityId": "man01",
     "summary" : "A fallen tree has blocked the road to Honeywood Forest. Lennor needs your help to get a strong horse and some ropes if you want to speed up the process of clearing the road.",
     "tasks"   : {
-      "1": {
-        "taskPhrase": "Deliver a strong horse",
-        "type"      : "GIVE_ITEM",
-        "target"    : {"horse": 1}
+      "1" : {
+        "taskPhrase": "Get 3 herbs",
+        "type"      : "FIND_ITEM",
+        "target"    : {"herb": 1},
+        "isOptional": true,
+        "isHidden"  : true
       },
-      "2": {
-        "taskPhrase": "Deliver 3 ropes",
-        "type"      : "GIVE_ITEM",
-        "target"    : {"rope": 3}
+      "2" : {
+        "taskPhrase": "Get 1 blue jelly",
+        "type"      : "FIND_ITEM",
+        "target"    : {"herb": 1},
+        "isOptional": true,
+        "isHidden"  : true
       },
-      "3": {
+      "3" : {
+        "taskPhrase": "Deliver to old lady",
+        "type"      : "GIVE_ITEM",
+        "target"    : {"herb": 1},
+        "isOptional": true,
+        "isHidden"  : true
+      },
+      "4" : {
+        "taskPhrase": "Get medicine",
+        "type"      : "FIND_ITEM",
+        "target"    : {"herb": 1},
+        "isOptional": true,
+        "isHidden"  : true
+      },
+      "5" : {
+        "taskPhrase": "Deliver to horse woman",
+        "type"      : "GIVE_ITEM",
+        "target"    : {"herb": 1},
+        "isOptional": true,
+        "isHidden"  : true,
+        "linkedWith": "6"
+      },
+      "6" : {
+        "taskPhrase": "Heal horse",
+        "type"      : "FREE",
+        "isOptional": true,
+        "isHidden"  : true
+      },
+      "7" : {
+        "taskPhrase": "Get 8 metal",
+        "type"      : "FIND_ITEM",
+        "target"    : {"herb": 1},
+        "isOptional": true,
+        "isHidden"  : true
+      },
+      "8" : {
+        "taskPhrase": "Deliver to blacksmith",
+        "type"      : "GIVE_ITEM",
+        "target"    : {"herb": 1},
+        "isOptional": true,
+        "isHidden"  : true
+      },
+      "9" : {
+        "taskPhrase": "Get 4 horseshoes",
+        "type"      : "FIND_ITEM",
+        "target"    : {"herb": 1},
+        "isOptional": true,
+        "isHidden"  : true
+      },
+      "10": {
+        "taskPhrase": "Deliver to horse woman",
+        "type"      : "GIVE_ITEM",
+        "target"    : {"herb": 1},
+        "isOptional": true,
+        "isHidden"  : true
+      },
+      "11": {
+        "taskPhrase": "Get a strong horse",
+        "type"      : "FIND_ITEM",
+        "target"    : {"herb": 1}
+      },
+      "12": {
+        "taskPhrase": "Get 3 ropes",
+        "type"      : "FIND_ITEM",
+        "target"    : {"herb": 1}
+      },
+      "13": {
+        "taskPhrase": "Deliver to Lennor",
+        "type"      : "GIVE_ITEM",
+        "target"    : {"herb": 1}
+      },
+      "14": {
         "taskPhrase": "Let the tree be dragged out of the way",
         "type"      : "FREE"
       }
@@ -43,6 +118,18 @@
       "2": {
         "taskPhrase": "Report back",
         "type"      : "RETURN"
+      }
+    }
+  },
+  "quest_honeywood_soldiers"   : {
+    "title"   : "Honeywood soldiers",
+    "entityId": "soldier01",
+    "summary" : "Honeywood soldiers",
+    "isHidden": true,
+    "tasks"   : {
+      "1": {
+        "taskPhrase": "Talk",
+        "type"      : "FREE"
       }
     }
   }

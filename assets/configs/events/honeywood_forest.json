@@ -26,7 +26,7 @@
   },
   "talking_orc_guards"  : {
     "type"          : "conversation",
-    "condition"     : ["!quest_orc_guards_finished"],
+    "condition"     : ["c_!quest_orc_guards_finished"],
     "conversationId": "quest_orc_guards",
     "entityId"      : "orc_sergeant",
     "doesRepeat"    : true

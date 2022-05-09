@@ -13,7 +13,7 @@ object ConditionDatabase {
         Pair("grace_ribbon") { graceRibbon },
         Pair("!cave_found") { caveNotYetFoundFirstCycle },
         Pair("first_equipment_item") { firstEquipmentItem },
-        Pair("!quest_orc_guards_finished") { !questOrcGuardsFinished },
+        Pair("c_!quest_orc_guards_finished") { !questOrcGuardsFinished },
 
         Pair("i_!know_about_grace") { !knowAboutGrace },
         Pair("i_know_about_grace") { knowAboutGrace },
@@ -33,6 +33,8 @@ object ConditionDatabase {
         Pair("i_c_quest_pest_removal_known") { questPestRemovalKnown },
         Pair("i_c_quest_pest_removal_task_complete") { questPestRemovalTaskComplete },
         Pair("c_quest_pest_removal_known_or_lower") { questPestRemovalKnownOrLower },
+
+        Pair("c_!quest_honeywood_soldiers_finished") { !questHoneywoodSoldiersFinished }
     )
 
     fun isMeetingConditions(conditionIds: List<String?>): Boolean {
@@ -76,6 +78,8 @@ object ConditionDatabase {
         get() = isQuestTaskNumberComplete("quest_honeywood_inn_price-1", 1)
                 && !isQuestTaskNumberComplete("quest_honeywood_inn_price-1", 2)
     private val questPestRemovalKnownOrLower get() = isQuestCurrentStateEqualOrLower("quest_honeywood_inn_price-1", QuestState.KNOWN)
+
+    private val questHoneywoodSoldiersFinished get() = isQuestCurrentStateEqual("quest_honeywood_soldiers", QuestState.FINISHED)
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

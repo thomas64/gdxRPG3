@@ -25,10 +25,10 @@ class EquipContainer() {
         Pair(InventoryGroup.BOOTS.name, null))
 
     @ConstructorProperties("weapon", "shield", "chest", "pants", "boots")
-    constructor(weaponId: String, shieldId: String?, chestId: String, pantsId: String?, bootsId: String?) : this() {
-        this.equipment[InventoryGroup.WEAPON.name] = InventoryDatabase.createInventoryItem(weaponId)
+    constructor(weaponId: String?, shieldId: String?, chestId: String?, pantsId: String?, bootsId: String?) : this() {
+        weaponId?.let { this.equipment[InventoryGroup.WEAPON.name] = InventoryDatabase.createInventoryItem(it) }
         shieldId?.let { this.equipment[InventoryGroup.SHIELD.name] = InventoryDatabase.createInventoryItem(it) }
-        this.equipment[InventoryGroup.CHEST.name] = InventoryDatabase.createInventoryItem(chestId)
+        chestId?.let { this.equipment[InventoryGroup.CHEST.name] = InventoryDatabase.createInventoryItem(it) }
         pantsId?.let { this.equipment[InventoryGroup.PANTS.name] = InventoryDatabase.createInventoryItem(it) }
         bootsId?.let { this.equipment[InventoryGroup.BOOTS.name] = InventoryDatabase.createInventoryItem(it) }
     }

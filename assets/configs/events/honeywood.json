@@ -16,5 +16,12 @@
     "conversationId": "dont_go_up_there",
     "entityId"      : "woman02",
     "doesRepeat"    : true
+  },
+  "event_honeywood_soldiers"  : {
+    "type"          : "conversation",
+    "condition"     : ["c_!quest_honeywood_soldiers_finished"],
+    "conversationId": "quest_honeywood_soldiers",
+    "entityId"      : "soldier01",
+    "doesRepeat"    : true
   }
 }
