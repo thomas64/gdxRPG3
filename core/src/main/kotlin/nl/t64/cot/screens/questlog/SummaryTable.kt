@@ -25,7 +25,7 @@ internal class SummaryTable {
 
     fun populateSummary(quest: QuestGraph) {
         summary.setText(quest.summary)
-        container.cells.peek().setActor<Image>(Utils.getFaceImage(quest.entityId))
+        container.cells.peek().setActor<Image>(Utils.getFaceImage(quest.entityId, isFlipped = false))
     }
 
     private fun createLabel(): Label {

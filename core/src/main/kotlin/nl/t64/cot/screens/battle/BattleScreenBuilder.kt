@@ -71,7 +71,7 @@ object BattleScreenBuilder {
                         Gdx.graphics.height.toFloat() - 50f)
             isVisible = false
             enemies.forEach {
-                add(Utils.getFaceImage(it.id))
+                add(Utils.getFaceImage(it.id, isFlipped = false))
                 add(it.name).padLeft(20f).row()
             }
         }

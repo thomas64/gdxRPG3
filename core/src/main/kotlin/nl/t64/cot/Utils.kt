@@ -141,13 +141,14 @@ object Utils {
         return personSprite.split(Constant.TILE_SIZE.toInt(), Constant.TILE_SIZE.toInt())
     }
 
-    fun getFaceImage(spriteId: String): Image {
+    fun getFaceImage(spriteId: String, isFlipped: Boolean = true): Image {
         val faceConfig = resourceManager.getSpriteConfig(spriteId)
         val path = String.format(FACE_PATH, faceConfig.source)
         val row = faceConfig.row - 1
         val col = faceConfig.col - 1
         val splitOfEight = getSplitTexture(path, Constant.FACE_SIZE.toInt())
         val characterFace = splitOfEight[row][col]
+        if (isFlipped) characterFace.flip(true, false)
         return Image(characterFace)
     }
 
