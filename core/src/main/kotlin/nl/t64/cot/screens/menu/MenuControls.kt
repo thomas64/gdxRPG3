@@ -93,9 +93,9 @@ abstract class MenuControls : MenuScreen() {
         return listOf(
             Label("Movement", textStyle),
             Label("Arrows", textStyle),
-            Label("Move fast", textStyle),
+            Label("Run", textStyle),
             Label("Shift", textStyle),
-            Label("Move slow", textStyle),
+            Label("Crouch", textStyle),
             Label("Ctrl", textStyle),
             Label("Action", textStyle),
             Label("A", textStyle),
@@ -116,9 +116,9 @@ abstract class MenuControls : MenuScreen() {
         return listOf(
             Label("Movement", textStyle),
             Label("L3", textStyle),
-            Label("Move fast", textStyle),
+            Label("Run", textStyle),
             Label("R1", textStyle),
-            Label("Move slow", textStyle),
+            Label("Crouch", textStyle),
             Label("L1", textStyle),
             Label("Action", textStyle),
             Label("A", textStyle),

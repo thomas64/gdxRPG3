@@ -100,9 +100,11 @@ class GraphicsPlayer : GraphicsComponent() {
     }
 
     private fun playStepSound() {
-        val offsetFeetPosition: Vector2 = getOffsetFeetPosition()
-        val audio: AudioEvent = mapManager.getGroundSound(offsetFeetPosition)
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, audio)
+        if (moveSpeed != Constant.MOVE_SPEED_1) {
+            val offsetFeetPosition: Vector2 = getOffsetFeetPosition()
+            val audio: AudioEvent = mapManager.getGroundSound(offsetFeetPosition)
+            audioManager.handle(AudioCommand.SE_PLAY_ONCE, audio)
+        }
     }
 
     private fun getOffsetFeetPosition(): Vector2 {

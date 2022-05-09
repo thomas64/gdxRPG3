@@ -10,7 +10,6 @@ import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.scenario
 import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
-import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.screens.world.entity.EntityState
 import nl.t64.cot.sfx.TransitionAction
@@ -46,7 +45,7 @@ class SceneArdor1Lose : CutsceneScreen() {
         }
         magic = Utils.createImage("sprites/objects/magic_inside_d2.png", 0, 96, 144, 144)
         bloodFlash = TransitionImage(Color.RED)
-        flames = List(1200) { CutsceneActor.createFlame() }
+        flames = List(800) { CutsceneActor.createFlame() }
 
         actorsStage.addActor(mozes)
         actorsStage.addActor(magic)
@@ -66,6 +65,8 @@ class SceneArdor1Lose : CutsceneScreen() {
                          graceDies(),
                          if (areGeneralsAlive) everythingWentWrong() else everythingWentWrongWithoutGuards(),
                          fireKillsAll(),
+                         mozesLiesDead(),
+                         mozesWakesUpAgain(),
                          graceIsMissingAgain(),
                          startSecondCycle()
         )
@@ -76,8 +77,6 @@ class SceneArdor1Lose : CutsceneScreen() {
             Actions.run {
                 setMapWithBgsOnly("honeywood_forest_ardor_3")
                 setCameraPosition(0f, 0f)
-                title.setText(""""You have been given another chance..."""")
-                title.setPosition(camera.position.x - (title.width / 2f), camera.position.y)
                 mozes.isVisible = false
                 ardor.setPosition(456f, 240f)
                 ardor.direction = Direction.SOUTH
@@ -103,7 +102,7 @@ class SceneArdor1Lose : CutsceneScreen() {
                 bloodFlash.isVisible = false
                 flames.forEachIndexed { i, it ->
                     it.setPosition(i % 12 * 100f - 100f,
-                                   Random.nextInt(800, 3000).toFloat())
+                                   Random.nextInt(800, 2000).toFloat())
                 }
             },
 
@@ -212,31 +211,48 @@ class SceneArdor1Lose : CutsceneScreen() {
                     val scale = Random.nextInt(2, 5).toFloat()
                     it.addAction(Actions.sequence(
                         Actions.scaleBy(scale, scale),
-                        Actions.moveBy(0f, -4000f, 15f)
+                        Actions.moveBy(0f, -2600f, 10f)
                     ))
                 }
             },
-            Actions.delay(5f),
+            Actions.delay(6f),
 
             actionFadeOutWithoutBgmFading(),
-            Actions.delay(8f),
+            Actions.delay(3f),
             actionFadeOut(),
 
-            Actions.addAction(Actions.sequence(
-                Actions.alpha(0f),
-                Actions.visible(true),
-                Actions.fadeIn(Constant.FADE_DURATION),
-                Actions.delay(6f),
-                Actions.fadeOut(Constant.FADE_DURATION),
-                Actions.visible(false),
-                Actions.alpha(1f)
-            ), title),
-            Actions.delay(8f),
+            Actions.delay(1f),
             Actions.run {
-                mozesDead.isVisible = false
+                mozesDead.setPosition(456f, 246f)
                 graceDead.isVisible = false
                 magic.isVisible = false
                 ardor.isVisible = false
+                setMapWithBgmBgs("ylarus_place")
+                setCameraPosition(0f, 0f)
+            },
+
+            actionFadeIn(),
+
+            Actions.delay(4f),
+            Actions.run { showConversationDialog("another_chance", "ylarus", Color.BLACK) }
+        )
+    }
+
+    private fun mozesLiesDead(): Action {
+        return Actions.sequence(
+            Actions.delay(2f),
+            Actions.run { showConversationDialog("mozes_lies_dead", "mozes") }
+        )
+    }
+
+    private fun mozesWakesUpAgain(): Action {
+        return Actions.sequence(
+            Actions.delay(2f),
+
+            actionFadeOut(),
+
+            Actions.run {
+                mozesDead.isVisible = false
                 setMapWithBgsOnly("honeywood_mozes_house")
                 setCameraPosition(0f, 720f)
                 mozes.isVisible = true
@@ -244,10 +260,11 @@ class SceneArdor1Lose : CutsceneScreen() {
                 mozes.entityState = EntityState.IDLE
                 mozes.direction = Direction.SOUTH
             },
+            Actions.delay(1f),
+            Actions.run { audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_SAVE_GAME) },
 
             actionFadeIn(),
 
-            Actions.run { audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_SAVE_GAME) },
             Actions.delay(1f),
             Actions.run { showConversationDialog("mozes_wakes_up_again", "mozes") }
         )
@@ -261,7 +278,7 @@ class SceneArdor1Lose : CutsceneScreen() {
             Actions.moveBy(48f, 0f, 2f),
             Actions.run { mozes.entityState = EntityState.IDLE },
             Actions.run { mozes.direction = Direction.WEST },
-            Actions.run { showConversationDialog("grace_is_missing_again", "mozes") }
+            Actions.run { showConversationDialog("what_happened", "mozes") }
         )
     }
 

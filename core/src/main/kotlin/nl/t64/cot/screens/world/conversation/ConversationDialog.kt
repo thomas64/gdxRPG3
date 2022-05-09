@@ -116,6 +116,10 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         applyListeners()
     }
 
+    fun setFaceColor(color: Color) {
+        faceImage!!.color = color
+    }
+
     private fun createDialog(): Dialog {
         label = Label("No Conversation", LabelStyle(font, Color.BLACK)).apply {
             wrap = true

@@ -70,7 +70,7 @@ abstract class GraphicsComponent : Component {
 
     fun setNewFrameDuration(moveSpeed: Float) {
         when (moveSpeed) {
-            Constant.MOVE_SPEED_1 -> frameDuration = Constant.SLOW_FRAMES
+            Constant.MOVE_SPEED_1 -> frameDuration = Constant.NORMAL_FRAMES
             Constant.MOVE_SPEED_2 -> frameDuration = Constant.NORMAL_FRAMES
             Constant.MOVE_SPEED_3 -> frameDuration = Constant.FAST_FRAMES
             Constant.MOVE_SPEED_4 -> frameDuration = Constant.NO_FRAMES

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="36" height="34" tilewidth="24" tileheight="24" infinite="0" nextlayerid="18" nextobjectid="46">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="36" height="34" tilewidth="24" tileheight="24" infinite="0" nextlayerid="18" nextobjectid="53">
  <properties>
   <property name="bgm" value="bgm_cave"/>
   <property name="lightmap_player" value="light_player"/>
@@ -95,6 +95,9 @@
  <objectgroup color="#ffaa7f" id="15" name="save"/>
  <objectgroup color="#ff55ff" id="16" name="event">
   <object id="35" name="find_dead_orcs" type="discover" x="288" y="336" width="336" height="48"/>
+  <object id="46" name="check_dead_orc" type="check" x="360" y="264" width="48" height="24"/>
+  <object id="51" name="check_dead_orc" type="check" x="384" y="312" width="48" height="24"/>
+  <object id="52" name="check_dead_orc" type="check" x="480" y="240" width="48" height="48"/>
  </objectgroup>
  <objectgroup color="#ffffff" id="13" name="lights" visible="0">
   <object id="22" x="432" y="240" width="48" height="48"/>

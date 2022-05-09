@@ -1,5 +1,13 @@
 {
-  "mrs_johanna"                : {
+  "everything_is_normal_again": {
+    "phrases": {
+      "1": {"text": ["Everything is back to normal?"]},
+      "2": {"text": ["The world didn't end in flames?"]},
+      "3": {"text": ["Grace is still alive?"]},
+      "4": {"text": ["I've got find her again, quick!"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "mrs_johanna"               : {
     "phrases": {
       "1": {"text": ["Mozes my dear, how are you?", "What a beautiful day, isn't it?"]},
       "2": {"text": ["I come here often to reminisce about this once enormous tree and my late husband Theodore."]},
@@ -7,7 +15,7 @@
       "4": {"text": ["I miss him..."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "quest_a_helping_horse"      : {
+  "quest_a_helping_horse"     : {
     "phrases": {
       "1" : {"text": ["Hey Mozes, you can't go further up north from here.", "There is a large tree blocking the road."], "choices": [{"nextId": "3"}]},
       "2" : {"text": ["Hey Mozes, you can't go further up north from here.", "There is a large tree blocking the road."], "choices": [{"nextId": "3"}]},

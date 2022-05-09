@@ -13,6 +13,7 @@ import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.ParchmentScreen
+import nl.t64.cot.screens.inventory.messagedialog.MessageDialog
 
 
 private const val QUESTS_WINDOW_POSITION_X = 63f
@@ -35,7 +36,8 @@ class QuestLogScreen : ParchmentScreen() {
     override fun show() {
         Gdx.input.inputProcessor = stage
         Utils.setGamepadInputProcessor(stage)
-        stage.addListener(QuestLogScreenListener { closeScreen() })
+        stage.addListener(QuestLogScreenListener({ closeScreen() },
+                                                 { showLegend() }))
 
         val questLogUI = QuestLogUI().apply {
             questListWindow.setPosition(QUESTS_WINDOW_POSITION_X, QUESTS_WINDOW_POSITION_Y)
@@ -76,11 +78,24 @@ class QuestLogScreen : ParchmentScreen() {
         fadeParchment()
     }
 
+    private fun showLegend() {
+        val message = """
+            These symbols mean:
+            
+            v   -   Quest finished or task complete
+            o   -   Quest finished but reward unclaimed
+            x   -   Quest or task failed
+            r   -   Quest or task reset""".trimIndent()
+        val messageDialog = MessageDialog(message)
+        messageDialog.setLeftAlignment()
+        messageDialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT)
+    }
+
     private fun createText(): String {
         return if (Utils.isGamepadConnected()) {
-            "[L1] Page-up      [R1] Page-down      [B] Back"
+            "[L1] Page-up      [R1] Page-down      [Select] Legend      [B] Back"
         } else {
-            "[Left] Page-up      [Right] Page-down      [L] Back"
+            "[Left] Page-up      [Right] Page-down      [H] Legend      [L] Back"
         }
     }
 

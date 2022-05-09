@@ -1,11 +1,16 @@
 {
-  "a_tree_has_fallen": {
+  "everything_is_normal_again": {
+    "type"          : "conversation",
+    "conversationId": "everything_is_normal_again",
+    "entityId"      : "mozes"
+  },
+  "a_tree_has_fallen"         : {
     "type"          : "conversation",
     "condition"     : ["!has_talked_to_lennor"],
     "conversationId": "quest_a_helping_horse",
     "entityId"      : "man02"
   },
-  "dont_go_up_there" : {
+  "dont_go_up_there"          : {
     "type"          : "conversation",
     "condition"     : ["c_quest_pest_removal_known_or_lower"],
     "conversationId": "dont_go_up_there",

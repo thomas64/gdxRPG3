@@ -83,24 +83,28 @@
       "1": {"text": ["No! What went wrong?!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "mozes_wakes_up_again"           : {
+  "another_chance"                 : {
     "phrases": {
-      "1": {"text": ["What the..."], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["You have been given another chance..."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "grace_is_missing_again"         : {
+  "mozes_lies_dead"                : {
     "phrases": {
-      "1" : {"text": ["What just happened? Did I just die?", "Did the whole world just ended in flames?"]},
-      "2" : {"text": ["Or was it a dream?"]},
-      "3" : {"text": ["No, I don't think it was a dream, everything felt so real."]},
-      "4" : {"text": ["Because of the pain..."]},
-      "5" : {"text": ["Grace got murdered by this Ardor! No!! Aaargh!!", "He's got to pay for this! I'll make sure!"]},
-      "6" : {"text": ["But also... I heard a voice."]},
-      "7" : {"text": ["\"You have been given another chance...\" ??"]},
-      "8" : {"text": ["What did that voice mean? Another chance?", "Does that mean Grace is alive again? Right now?"]},
-      "9" : {"text": ["If that's true...", "If I've got another chance to save Grace, I've got to hurry!"]},
-      "10": {"text": ["I can not be to late again! I now have to be in time to save her!"]},
-      "11": {"text": ["Ardor, you'll be sorry you ever laid your hands on my little sister!"], "choices": [{"command": "EXIT"}]}
+      "1": {"text": [". . ."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "mozes_wakes_up_again"           : {
+    "phrases": {
+      "1": {"text": ["What the..."]},
+      "2": {"text": ["What just happened?"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "what_happened"                  : {
+    "phrases": {
+      "1": {"text": ["Did I just die?"]},
+      "2": {"text": ["Who was that voice?"]},
+      "3": {"text": ["\"You have been given another chance...\" ??"]},
+      "4": {"text": ["What does that mean?"], "choices": [{"command": "EXIT"}]}
     }
   }
 }

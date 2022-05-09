@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="40" height="24" tilewidth="24" tileheight="24" infinite="0" nextlayerid="10" nextobjectid="1">
+ <properties>
+  <property name="bgm" value="bgm_ylarus"/>
+ </properties>
+ <tileset firstgid="1" source="tilesets/fsm_town01_a2.tsx"/>
+ <layer id="2" name="under0_none" width="40" height="24">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20PBxQAAAD8Gw8AAAE=
+  </data>
+ </layer>
+ <layer id="1" name="under1_all" width="40" height="24">
+  <data encoding="base64" compression="zlib">
+   eJzt0EENACAMxdAFZ8MJ+BfBXPwm9ND0/npV7amhP9MFP+2jn34EJ/30Iz7to59+BCf99CM+7aPf334PrqQ5MA==
+  </data>
+ </layer>
+ <layer id="3" name="under2_none" width="40" height="24">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20PBxQAAAD8Gw8AAAE=
+  </data>
+ </layer>
+ <layer id="4" name="under3_none" width="40" height="24">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20PBxQAAAD8Gw8AAAE=
+  </data>
+ </layer>
+ <layer id="5" name="under4_none" width="40" height="24">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20PBxQAAAD8Gw8AAAE=
+  </data>
+ </layer>
+ <layer id="6" name="under5_none" width="40" height="24">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20PBxQAAAD8Gw8AAAE=
+  </data>
+ </layer>
+ <layer id="7" name="over6_none" width="40" height="24">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20PBxQAAAD8Gw8AAAE=
+  </data>
+ </layer>
+ <layer id="8" name="over7_none" width="40" height="24">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20PBxQAAAD8Gw8AAAE=
+  </data>
+ </layer>
+ <layer id="9" name="over8_none" width="40" height="24">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20PBxQAAAD8Gw8AAAE=
+  </data>
+ </layer>
+</map>

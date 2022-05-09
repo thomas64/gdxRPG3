@@ -219,8 +219,9 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
         camera.setNewMapSize(currentMap.pixelWidth, currentMap.pixelHeight)
     }
 
-    fun showConversationDialog(conversationId: String, entityId: String) {
+    fun showConversationDialog(conversationId: String, entityId: String, faceColor: Color? = null) {
         conversationDialog.loadConversation(conversationId, entityId)
+        faceColor?.let { conversationDialog.setFaceColor(it) }
         conversationDialog.show()
     }
 
