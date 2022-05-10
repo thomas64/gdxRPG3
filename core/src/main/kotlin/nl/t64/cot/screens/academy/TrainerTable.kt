@@ -14,9 +14,9 @@ private const val PADDING = 20f
 private val TEXT = """
     Please be welcome to my academy.
     
-    On the left you see in which skills and to what rank I can train you, and on the right are the skills with the ranks you already have been trained in.
+    On the left you see which skills I can train you, and on the right are the skills you already know.
     
-    You cannot train a skill here above the skill ranks I have myself.
+    The numbers on the left represent to which rank I can train you that skill, and the numbers on the right represent your current ranks of these skills.
     
     To train a skill will cost you 'XP to Invest' and gold.""".trimIndent()
 

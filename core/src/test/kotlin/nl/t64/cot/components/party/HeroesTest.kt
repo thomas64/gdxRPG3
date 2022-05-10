@@ -12,7 +12,7 @@ internal class HeroesTest : GameTest() {
     fun whenDataIsCreated_ShouldContainPlayer() {
         val mozes = party.getCertainHero("mozes")
         assertThat(heroes.contains(Constant.PLAYER_ID)).isFalse
-        assertThat(heroes.size).isEqualTo(13)
+        assertThat(heroes.size).isEqualTo(14)
         assertThat(party.contains(Constant.PLAYER_ID)).isTrue
         assertThat(party.size).isEqualTo(1)
         assertThat(party.containsExactlyEqualTo(mozes)).isTrue
@@ -52,14 +52,14 @@ internal class HeroesTest : GameTest() {
     fun whenHeroIsAddedToParty_ShouldBeRemovedFromHeroContainer() {
         val luana = "luana"
 
-        assertThat(heroes.size).isEqualTo(13)
+        assertThat(heroes.size).isEqualTo(14)
         assertThat(heroes.contains(luana)).isTrue
         assertThat(party.size).isEqualTo(1)
         assertThat(party.contains(luana)).isFalse
 
         addHeroToParty(luana)
 
-        assertThat(heroes.size).isEqualTo(12)
+        assertThat(heroes.size).isEqualTo(13)
         assertThat(heroes.contains(luana)).isFalse
         assertThat(party.size).isEqualTo(2)
         assertThat(party.contains(luana)).isTrue
@@ -71,14 +71,14 @@ internal class HeroesTest : GameTest() {
 
         addHeroToParty(luana)
 
-        assertThat(heroes.size).isEqualTo(12)
+        assertThat(heroes.size).isEqualTo(13)
         assertThat(heroes.contains(luana)).isFalse
         assertThat(party.size).isEqualTo(2)
         assertThat(party.contains(luana)).isTrue
 
         removeHeroFromParty(luana)
 
-        assertThat(heroes.size).isEqualTo(13)
+        assertThat(heroes.size).isEqualTo(14)
         assertThat(heroes.contains(luana)).isTrue
         assertThat(party.size).isEqualTo(1)
         assertThat(party.contains(luana)).isFalse

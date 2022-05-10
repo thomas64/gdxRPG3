@@ -99,8 +99,8 @@ internal class HeroTest : GameTest() {
                              StatItemId.STAMINA,
                              StatItemId.SPEED)
         assertThat(mozes.getStatById(StatItemId.INTELLIGENCE).getXpCostForNextRank()).isEqualTo(15)
-        assertThat(mozes.getSkillById(SkillItemId.STEALTH).getXpCostForNextLevel(trainerStealth, 0)).isEqualTo(24)
-        assertThat(mozes.getSkillById(SkillItemId.STEALTH).getGoldCostForNextLevel(trainerStealth)).isEqualTo(8)
+        assertThat(mozes.getSkillById(SkillItemId.STEALTH).getXpCostForNextRank(trainerStealth, 0)).isEqualTo(24)
+        assertThat(mozes.getSkillById(SkillItemId.STEALTH).getGoldCostForNextRank(trainerStealth)).isEqualTo(8)
 
         assertThat(iellwen.getExtraSkillForVisualOf(iellwen.getSkillById(SkillItemId.STEALTH))).isEqualTo(-3)
 
@@ -147,7 +147,7 @@ internal class HeroTest : GameTest() {
 
         assertThat(luthais.getAllSpells()).extracting("id", "rank").contains(Tuple.tuple("fireball", 8))
         val scholar = luthais.getCalculatedTotalSkillOf(SkillItemId.SCHOLAR)
-        assertThat(luthais.getSkillById(SkillItemId.WIZARD).getXpCostForNextLevel(trainerWizard, scholar)).isZero
+        assertThat(luthais.getSkillById(SkillItemId.WIZARD).getXpCostForNextRank(trainerWizard, scholar)).isZero
 
         assertThat(StatItemId.INTELLIGENCE.title).isEqualTo("Intelligence")
         assertThat(SkillItemId.ALCHEMIST.title).isEqualTo("Alchemist")

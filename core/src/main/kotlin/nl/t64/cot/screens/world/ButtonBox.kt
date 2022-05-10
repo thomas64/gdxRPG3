@@ -14,6 +14,7 @@ import nl.t64.cot.Utils
 private const val TABLE_POSITION = 30f
 private const val TABLE_WIDTH = 90f
 private const val SECOND_COLUMN_WIDTH = 50f
+private const val GAMEPAD_EXTRA_MARGIN = 20f
 private const val PAD_LEFT = 25f
 private const val PAD = 15f
 
@@ -31,7 +32,10 @@ internal class ButtonBox {
     fun update(dt: Float) {
         table.clear()
 
+        val extraMargin: Float
         if (Utils.isGamepadConnected()) {
+            table.add("Action")
+            table.add("[ A ]").row()
             table.add("Inventory")
             table.add("[ Y ]").row()
             table.add("Quest log")
@@ -40,7 +44,10 @@ internal class ButtonBox {
             table.add("[ Select ]").row()
             table.add("Party")
             table.add("[ R3 ]")
+            extraMargin = GAMEPAD_EXTRA_MARGIN
         } else {
+            table.add("Action")
+            table.add("[ A ]").row()
             table.add("Inventory")
             table.add("[ I ]").row()
             table.add("Quest log")
@@ -49,7 +56,11 @@ internal class ButtonBox {
             table.add("[ M ]").row()
             table.add("Party")
             table.add("[ P ]")
+            extraMargin = 0f
         }
+
+        table.width = TABLE_WIDTH + extraMargin
+        table.columnDefaults(1).width(SECOND_COLUMN_WIDTH + extraMargin)
 
         table.pack()
         table.setPosition(TABLE_POSITION, TABLE_POSITION)

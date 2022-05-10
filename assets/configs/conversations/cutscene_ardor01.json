@@ -48,10 +48,11 @@
   },
   "mozes_last_words"               : {
     "phrases": {
-      "1": {"face": "ardor", "text": ["The insolence."]},
-      "2": {"face": "mozes", "text": ["Ugh..."]},
-      "3": {"face": "mozes", "text": ["G... G..."]},
-      "4": {"face": "mozes", "text": ["Grace..."], "choices": [{"command": "EXIT"}]}
+      "1": {"face": "mozes", "text": ["Ugh..."]},
+      "2": {"face": "mozes", "text": ["G... G..."]},
+      "3": {"face": "mozes", "text": ["Grace..."]},
+      "4": {"face": "mozes", "text": ["Leave her alone..."]},
+      "5": {"face": "ardor", "text": ["The insolence."], "choices": [{"command": "EXIT"}]}
     }
   },
   "mozes_wins_battle_from_generals": {

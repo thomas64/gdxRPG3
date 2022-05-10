@@ -14,9 +14,9 @@ private const val PADDING = 20f
 private val TEXT = """
     Please be welcome to my school.
     
-    On the left you see in which spells and to what rank I can teach you, and on the right are the spells with the ranks you already have been taught in.
+    On the left you see which spells I can teach you, and on the right are the spells you already know.
     
-    You cannot learn a spell here above the spell ranks I have myself.
+    The numbers on the left represent to which rank I can teach you that spell, and the numbers on the right represent your current ranks of these spells.
     
     To learn a spell will cost you 'XP to Invest' and gold.""".trimIndent()
 

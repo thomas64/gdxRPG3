@@ -42,35 +42,35 @@ data class SkillItem(
     fun getTrainerDescription(trainerSkill: SkillItem, totalScholar: Int): String {
         return (description.joinToString(System.lineSeparator()) + System.lineSeparator()
                 + System.lineSeparator()
-                + getNeededXpForNextLevel(trainerSkill, totalScholar) + System.lineSeparator()
-                + getNeededGoldForNextLevel(trainerSkill))
+                + getNeededXpForNextRank(trainerSkill, totalScholar) + System.lineSeparator()
+                + getNeededGoldForNextRank(trainerSkill))
     }
 
     fun doUpgrade() {
         rank += 1
     }
 
-    private fun getNeededXpForNextLevel(trainerSkill: SkillItem, totalScholar: Int): String {
-        val xpNeeded = when (val cost = getXpCostForNextLevel(trainerSkill, totalScholar).toString()) {
+    private fun getNeededXpForNextRank(trainerSkill: SkillItem, totalScholar: Int): String {
+        val xpNeeded = when (val cost = getXpCostForNextRank(trainerSkill, totalScholar).toString()) {
             "0" -> "Max"
             "-1",
             "-2" -> "N/A"
             else -> cost
         }
-        return "'XP to Invest' needed for next level: $xpNeeded"
+        return "'XP to Invest' needed for next rank: $xpNeeded"
     }
 
-    private fun getNeededGoldForNextLevel(trainerSkill: SkillItem): String {
-        val goldNeeded = when (val cost = getGoldCostForNextLevel(trainerSkill).toString()) {
+    private fun getNeededGoldForNextRank(trainerSkill: SkillItem): String {
+        val goldNeeded = when (val cost = getGoldCostForNextRank(trainerSkill).toString()) {
             "0" -> "Max"
             "-1",
             "-2" -> "N/A"
             else -> cost
         }
-        return "Gold needed for next level: $goldNeeded"
+        return "Gold needed for next rank: $goldNeeded"
     }
 
-    fun getXpCostForNextLevel(trainerSkill: SkillItem, totalScholar: Int): Int {
+    fun getXpCostForNextRank(trainerSkill: SkillItem, totalScholar: Int): Int {
         return when {
             rank == -1 -> -1
             rank >= MAXIMUM -> 0
@@ -79,19 +79,19 @@ data class SkillItem(
         }
     }
 
-    fun getGoldCostForNextLevel(trainerSkill: SkillItem): Int {
-        val nextLevel = rank + 1
+    fun getGoldCostForNextRank(trainerSkill: SkillItem): Int {
+        val nextRank = rank + 1
         return when {
             rank == -1 -> -1
             rank >= MAXIMUM -> 0
             rank >= trainerSkill.rank -> -2
-            else -> TRAINING_COSTS[nextLevel - 1]
+            else -> TRAINING_COSTS[nextRank - 1]
         }
     }
 
     private fun getUpgradeFormula(): Float {
-        val nextLevel = rank + 1
-        return upgrade * (nextLevel * nextLevel)
+        val nextRank = rank + 1
+        return upgrade * (nextRank * nextRank)
     }
 
 }

@@ -26,8 +26,8 @@ internal class MagicTest : GameTest() {
                 Requires: Gemstone
                 Stamina cost: 6
     
-                'XP to Invest' needed for next level: 13
-                Gold needed for next level: 8""")
+                'XP to Invest' needed for next rank: 13
+                Gold needed for next rank: 8""")
     }
 
     @Test
@@ -48,8 +48,8 @@ internal class MagicTest : GameTest() {
                 Requires: Gemstone
                 Stamina cost: 6
     
-                'XP to Invest' needed for next level: Max
-                Gold needed for next level: Max""")
+                'XP to Invest' needed for next rank: Max
+                Gold needed for next rank: Max""")
     }
 
 }

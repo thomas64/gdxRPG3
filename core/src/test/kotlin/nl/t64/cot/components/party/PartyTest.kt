@@ -57,7 +57,7 @@ internal class PartyTest : GameTest() {
         addHeroToParty("valter")
         addHeroToParty("galen")
 
-        assertThat(heroes.size).isEqualTo(8)
+        assertThat(heroes.size).isEqualTo(9)
         assertThat(party.size).isEqualTo(6)
 
         assertThatIllegalStateException()

@@ -38,6 +38,7 @@
   },
   "check_dead_orc"      : {
     "type"          : "conversation",
+    "condition"     : ["been_in_fairy_town"],
     "conversationId": "find_dead_orcs",
     "entityId"      : "mozes",
     "doesRepeat"    : true

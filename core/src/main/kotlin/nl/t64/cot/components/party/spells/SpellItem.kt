@@ -63,7 +63,7 @@ data class SpellItem(
             "-2" -> "N/A"
             else -> cost
         }
-        return "'XP to Invest' needed for next level: $xpNeeded"
+        return "'XP to Invest' needed for next rank: $xpNeeded"
     }
 
     private fun getNeededGoldForNextRank(teacherSpell: SpellItem, wizardRank: Int): String {
@@ -73,7 +73,7 @@ data class SpellItem(
             "-2" -> "N/A"
             else -> cost
         }
-        return "Gold needed for next level: $goldNeeded"
+        return "Gold needed for next rank: $goldNeeded"
     }
 
     fun getXpCostForNextRank(teacherSpell: SpellItem, wizardRank: Int, totalScholar: Int): Int {

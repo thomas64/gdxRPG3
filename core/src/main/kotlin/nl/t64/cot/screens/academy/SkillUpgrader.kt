@@ -30,8 +30,8 @@ class SkillUpgrader private constructor(
     private val totalScholar: Int = selectedHero.getCalculatedTotalSkillOf(SkillItemId.SCHOLAR)
     private val skillName: String = skillToUpgrade.name
 
-    private val xpCost: Int = skillToUpgrade.getXpCostForNextLevel(trainerSkill, totalScholar)
-    private val goldCost: Int = skillToUpgrade.getGoldCostForNextLevel(trainerSkill)
+    private val xpCost: Int = skillToUpgrade.getXpCostForNextRank(trainerSkill, totalScholar)
+    private val goldCost: Int = skillToUpgrade.getGoldCostForNextRank(trainerSkill)
     private val hasEnoughXp: Boolean = selectedHero.hasEnoughXpFor(xpCost)
     private val hasEnoughGold: Boolean = gameData.inventory.hasEnoughOfItem("gold", goldCost)
 
