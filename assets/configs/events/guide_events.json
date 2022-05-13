@@ -34,14 +34,16 @@
     "text": [
       "Keep %slow% pressed to move stealthily.",
       "Enemies will detect you less easy.",
-      "This way you can avoid battles, but you also won't be receiving XP from said battles."
+      "This way you can avoid battles.",
+      "But remember, battles are the main source of XP."
     ]
   },
   "guide_event_minimap"       : {
     "type": "messagebox",
     "text": [
       "Press %minimap% in large areas to see an overview of that area.",
-      "This way it's hard to get lost, like in dark caves."
+      "This way it's hard to get lost, like in dark caves.",
+      "Small areas don't have the option to see it's overview."
     ]
   },
   "guide_event_conversation"  : {

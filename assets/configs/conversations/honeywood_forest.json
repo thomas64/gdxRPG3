@@ -92,7 +92,7 @@
       },
       "40": {"face": "fairy1", "text": ["I'm not sure about that at the moment.", "Maybe she was at the wrong place at the wrong time. I sincerely hope so."], "choices": [{"nextId": "35"}]},
       "50": {"face": "fairy1", "text": ["You'll see when you get there.", "Don't worry, I wouldn't let you use it if I thought it wouldn't be safe."], "choices": [{"nextId": "35"}]},
-      "60": {"face": "fairy1", "text": ["When you go back inside the cave, go all the way south, then east and search the north wall. There is a hidden door in the dark."]},
+      "60": {"face": "fairy1", "text": ["When you go back inside the cave, go all the way south, then east and search the north wall. There is a hidden door in the light."]},
       "61": {"face": "fairy1", "text": ["But before you go, please talk to the other fairies.", "They'll also offer you much needed help."]},
       "62": {"face": "mozes", "text": ["Thank you very much."]},
       "63": {"face": "fairy1", "text": ["Farewell our lovely Mozes. Grace is blessed with a brother like you.", "May the Goddess Tree smile upon you and your search."]},

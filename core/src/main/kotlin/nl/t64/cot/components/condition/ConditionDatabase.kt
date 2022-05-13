@@ -20,8 +20,8 @@ object ConditionDatabase {
         Pair("i_!quest_mother_fairy_accepted") { !questMotherFairyAccepted },
 
         Pair("been_in_fairy_town") { beenInFairyTown },
-        Pair("i_scroll_of_obedience") { scrollOfObedience },
-        Pair("diplomat2") { diplomat2 },
+        Pair("i_scroll_of_orc_obedience") { scrollOfOrcObedience },
+        Pair("diplomat4") { diplomat4 },
         Pair("level10") { level10 },
         Pair("defeated_orc_guards") { defeatedOrcGuards },
 
@@ -61,13 +61,13 @@ object ConditionDatabase {
     private val questMotherFairyAccepted get() = isQuestCurrentStateEqualOrHigher("quest_mother_fairy", QuestState.ACCEPTED)
 
     private val beenInFairyTown get() = hasEventPlayed("find_great_tree")
-    private val scrollOfObedience get() = hasEnoughOfItem("scroll_of_obedience", 1)
-    private val diplomat2 get() = hasEnoughOfSkill(SkillItemId.DIPLOMAT, 2)
+    private val scrollOfOrcObedience get() = hasEnoughOfItem("scroll_of_orc_obedience", 1)
+    private val diplomat4 get() = hasEnoughOfSkill(SkillItemId.DIPLOMAT, 4)
     private val level10 get() = hasMinimumLevelOf(10)
     private val defeatedOrcGuards get() = isBattleWon("quest_orc_guards")
 
     private val hasNotYetTalkedToLennorFirstCycle
-        get() = isQuestResetStateEqual("quest_grace_is_missing", QuestState.UNKNOWN)
+        get() = isQuestResetStateEqual("quest_a_helping_horse", QuestState.UNKNOWN)
                 && isCurrentPhraseId("quest_a_helping_horse", "1")
     private val questHelpingHorseCurrentFinished get() = isQuestCurrentStateEqual("quest_a_helping_horse", QuestState.FINISHED)
     private val questHelpingHorseResetFinished get() = isQuestResetStateEqual("quest_a_helping_horse", QuestState.FINISHED)

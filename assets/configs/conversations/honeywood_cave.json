@@ -14,8 +14,8 @@
         "face": "mozes", "text": [""], "choices": [
           {"text": "I'm looking for a little girl, have you guys maybe seen her?", "command": "ACCEPT_QUEST", "nextId": "10"},
           {"text": "Could you please let me through?", "nextId": "15"},
-          {"condition": ["diplomat2"], "text": "[Diplomat 2] You have to let me through.", "nextId": "30"},
-          {"condition": ["i_scroll_of_obedience"], "text": "[Scroll of Obedience] I command you to let me through.", "nextId": "60"},
+          {"condition": ["diplomat4"], "text": "[Diplomat 4] You have to let me through.", "nextId": "30"},
+          {"condition": ["i_scroll_of_orc_obedience"], "text": "[Scroll of Orc Obedience] I command you to let me through.", "nextId": "60"},
           {"condition": ["level10"], "text": "[Level 10] Let me through, or I'll let myself through! (Start battle)", "nextId": "40"},
           {"text": "Okay, I'll go away... For now. (Leave conversation)", "command": "EXIT"}
         ]

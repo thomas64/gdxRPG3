@@ -184,7 +184,10 @@ class SceneIntro : CutsceneScreen() {
             },
             Actions.delay(2f),
             Actions.addAction(Actions.alpha(0.7f), transition),
-            Actions.run { audioManager.handle(AudioCommand.BGM_PLAY_LOOP, AudioEvent.BGM_CELLAR) },
+            Actions.run {
+                audioManager.handle(AudioCommand.BGM_STOP, AudioEvent.BGM_HOUSE)
+                audioManager.handle(AudioCommand.BGM_PLAY_LOOP, AudioEvent.BGM_CELLAR)
+            },
             Actions.addAction(Actions.sequence(
                 Actions.delay(5f),
                 Actions.run { grace.direction = Direction.EAST },
