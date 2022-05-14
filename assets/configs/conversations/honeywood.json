@@ -52,6 +52,11 @@
       "1": {"text": ["We're playing catch, teehee! Can Grace come and join us?"], "choices": [{"command": "EXIT"}]}
     }
   },
+  "luana01"                    : {
+    "phrases": {
+      "1": {"text": ["Hi Mozes! You really should check out this priest fella.", "He is so funny! Ha ha!"], "choices": [{"command": "EXIT"}]}
+    }
+  },
   "priest_honeywood"           : {
     "phrases": {
       "1": {"text": ["I'm a traveling priest from the city.", "Young man, do you want to be saved?"]},
@@ -67,8 +72,7 @@
   "resourceshop_honeywood"     : {
     "phrases": {
       "1": {
-        "text"   : ["Hi Mozes, would you like to see my wares?"],
-        "choices": [
+        "text": ["Hi Mozes, would you like to see my wares?"], "choices": [
           {"text": "Yes please. (Open shop)", "command": "LOAD_SHOP"},
           {"text": "No thanks. (Leave conversation)", "command": "EXIT"}
         ]
@@ -78,8 +82,7 @@
   "equipshop_honeywood"        : {
     "phrases": {
       "1": {
-        "text"   : ["Hello Mozes, what can I do for you today?"],
-        "choices": [
+        "text": ["Hello Mozes, what can I do for you today?"], "choices": [
           {"text": "I would like to see your wares please. (Open shop)", "command": "LOAD_SHOP"},
           {"text": "Nothing thank you, just passing by. (Leave conversation)", "command": "EXIT"}
         ]
@@ -89,8 +92,7 @@
   "quest_honeywood_inn_price-1": {
     "phrases": {
       "1"   : {
-        "text"   : ["Hey Mozes, would you like to rest here and be totally revitalized for only 1 gold piece?"],
-        "choices": [
+        "text": ["Hey Mozes, would you like to rest here and be totally revitalized for only 1 gold piece?"], "choices": [
           {"text": "Yes please, I could use some rest. (Restore health)", "command": "HEAL_LIFE", "nextId": "2"},
           {"text": "No thanks, now's not necessary. (Leave conversation)", "command": "EXIT"},
           {"condition": ["i_c_==_u_q_this"], "text": "Is something wrong innkeeper? You look troubled...", "nextId": "10"},
@@ -136,9 +138,16 @@
       "1": {"text": ["Honeywood is such a pleasant little village.", "I love to stay here every once in a while."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "meow"                       : {
+  "meow_honeywood_inn"         : {
     "phrases": {
-      "1": {"text": ["Meow."], "choices": [{"command": "EXIT"}]}
+      "1": {
+        "text": ["Meow."], "choices": [
+          {"condition": ["i_druid1"], "nextId": "2"},
+          {"condition": ["i_!druid1"], "nextId": "3"}
+        ]
+      },
+      "2": {"text": ["I'm here only for the mice, there's no way I'll do bats."], "choices": [{"command": "EXIT"}]},
+      "3": {"face": "mozes", "text": ["* Druid skill rank 1 needed. *"], "choices": [{"command": "EXIT"}]}
     }
   },
   "horse_join_party"           : {
@@ -146,7 +155,7 @@
       "1": {"text": ["Neigh."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "honeywood_soldiers": {
+  "honeywood_soldiers"         : {
     "phrases": {
       "1": {"text": ["I'm sorry sir, we can't allow anyone to go outside the village alone."]},
       "2": {"text": ["It's dangerous to go alone. Especially with all the monsters roaming around."]},

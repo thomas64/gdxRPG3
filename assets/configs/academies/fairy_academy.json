@@ -1,7 +1,8 @@
 {
-  "healer"  : 4,
-  "stealth" : 2,
-  "wizard"  : 4,
-  "sword"   : 3,
-  "thrown"  : 2
+  "diplomat"  : 2,
+  "druid"     : 3,
+  "healer"    : 4,
+  "stealth"   : 2,
+  "troubadour": 3,
+  "wizard"    : 4
 }

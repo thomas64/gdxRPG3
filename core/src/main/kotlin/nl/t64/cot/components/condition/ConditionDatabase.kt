@@ -19,6 +19,8 @@ object ConditionDatabase {
         Pair("been_in_fairy_town") { hasBeenInFairyTown },
         Pair("i_scroll_of_orc_obedience") { hasScrollOfOrcObedience },
         Pair("diplomat4") { hasDiplomat4 },
+        Pair("i_druid1") { hasDruid1 },
+        Pair("i_!druid1") { !hasDruid1 },
         Pair("level10") { hasLevel10 },
         Pair("defeated_orc_guards") { hasDefeatedOrcGuards },
         Pair("!talked_to_lennor") { hasNotYetTalkedToLennorFirstCycle },
@@ -101,7 +103,8 @@ object ConditionDatabase {
     private val hasBeenInFairyTown get() = hasEventPlayed("find_great_tree")
     private val hasScrollOfOrcObedience get() = hasEnoughOfItem("scroll_of_orc_obedience", 1)
     private val hasDiplomat4 get() = hasEnoughOfSkill(SkillItemId.DIPLOMAT, 4)
-    private val hasLevel10 get() = hasMinimumLevelOf(10)
+    private val hasDruid1 get() = hasEnoughOfSkill(SkillItemId.DRUID, 1)
+    private val hasLevel10 get() = hasAverageLevelOf(10)
     private val hasDefeatedOrcGuards get() = isBattleWon("quest_orc_guards")
     private val hasNotYetTalkedToLennorFirstCycle
         get() = isQuestResetStateEqual("quest_a_helping_horse", QuestState.UNKNOWN)
@@ -113,8 +116,8 @@ object ConditionDatabase {
     private fun hasEnoughOfSkill(skillItemId: SkillItemId, rank: Int): Boolean =
         gameData.party.hasEnoughOfSkill(skillItemId, rank)
 
-    private fun hasMinimumLevelOf(requestedLevel: Int): Boolean =
-        gameData.party.getHero(0).getLevel() >= requestedLevel
+    private fun hasAverageLevelOf(requestedLevel: Int): Boolean =
+        gameData.party.getAverageLevel() >= requestedLevel
 
     private fun hasEnoughOfOneOfTheseItems(vararg inventoryItemIds: String): Boolean =
         inventoryItemIds.any { hasEnoughOfItem(it, 1) }

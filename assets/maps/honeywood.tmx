@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="96" height="78" tilewidth="24" tileheight="24" infinite="0" nextlayerid="55" nextobjectid="370">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="96" height="78" tilewidth="24" tileheight="24" infinite="0" nextlayerid="55" nextobjectid="372">
  <properties>
   <property name="bgm" value="bgm_town"/>
   <property name="lightmap_camera" value="sunlight"/>
@@ -279,10 +279,15 @@
   <object id="340" name="door_forged_left" x="1056" y="768" width="48" height="96"/>
  </objectgroup>
  <objectgroup color="#aa55ff" id="13" name="hero">
-  <object id="363" name="horse1" x="1392" y="1440" width="48" height="48">
+  <object id="363" name="horse1" x="1392" y="1464" width="48" height="24">
    <properties>
     <property name="conversation" value="horse_join_party"/>
     <property name="direction" value="north"/>
+   </properties>
+  </object>
+  <object id="371" name="luana" type="w" x="1152" y="1128" width="48" height="24">
+   <properties>
+    <property name="conversation" value="luana01"/>
    </properties>
   </object>
  </objectgroup>
@@ -354,7 +359,7 @@
     <property name="direction" value="south"/>
    </properties>
   </object>
-  <object id="368" name="woman03" x="1344" y="1440" width="48" height="48">
+  <object id="368" name="woman03" x="1344" y="1464" width="48" height="24">
    <properties>
     <property name="direction" value="north"/>
    </properties>
