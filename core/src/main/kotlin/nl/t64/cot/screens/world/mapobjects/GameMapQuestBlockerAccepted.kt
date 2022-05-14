@@ -10,7 +10,7 @@ class GameMapQuestBlockerAccepted(
 ) : GameMapQuestBlocker(rectObject) {
 
     override fun update() {
-        val isAccepted = quest.isCurrentStateEqualOrHigherThan(QuestState.ACCEPTED)
+        val isAccepted = quest!!.isCurrentStateEqualOrHigherThan(QuestState.ACCEPTED)
         checkBlocker(isAccepted == isActiveWhenQuestIsAccepted)
     }
 

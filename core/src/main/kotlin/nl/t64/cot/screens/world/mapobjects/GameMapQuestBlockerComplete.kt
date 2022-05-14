@@ -12,7 +12,7 @@ class GameMapQuestBlockerComplete(
     private val taskId: String = rectObject.property("task")
 
     override fun update() {
-        val isComplete = quest.isTaskComplete(taskId)
+        val isComplete = quest!!.isTaskComplete(taskId)
         checkBlocker(isComplete == isActiveWhenTaskIsComplete)
     }
 

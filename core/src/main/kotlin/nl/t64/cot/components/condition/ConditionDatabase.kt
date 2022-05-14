@@ -10,17 +10,18 @@ object ConditionDatabase {
 
     private val conditions: Map<String, () -> Boolean> = mapOf(
 
-        Pair("3_starting_potions") { startingPotions },
-        Pair("grace_ribbon") { graceRibbon },
-        Pair("first_equipment_item") { firstEquipmentItem },
-        Pair("i_!know_about_grace") { !knowAboutGrace },
-        Pair("i_know_about_grace") { knowAboutGrace },
-        Pair("been_in_fairy_town") { beenInFairyTown },
-        Pair("i_scroll_of_orc_obedience") { scrollOfOrcObedience },
-        Pair("diplomat4") { diplomat4 },
-        Pair("level10") { level10 },
-        Pair("defeated_orc_guards") { defeatedOrcGuards },
-        Pair("!has_talked_to_lennor") { hasNotYetTalkedToLennorFirstCycle }
+        Pair("3_starting_potions") { hasStartingPotions },
+        Pair("grace_ribbon") { hasGraceRibbon },
+        Pair("first_equipment_item") { gotFirstEquipmentItem },
+        Pair("i_!know_about_grace") { !doesKnowAboutGrace },
+        Pair("i_know_about_grace") { doesKnowAboutGrace },
+        Pair("been_in_fairy_town") { hasBeenInFairyTown },
+        Pair("i_scroll_of_orc_obedience") { hasScrollOfOrcObedience },
+        Pair("diplomat4") { hasDiplomat4 },
+        Pair("level10") { hasLevel10 },
+        Pair("defeated_orc_guards") { hasDefeatedOrcGuards },
+        Pair("!talked_to_lennor") { hasNotYetTalkedToLennorFirstCycle },
+        Pair("alone_in_party") { isAloneInParty }
 
     )
 
@@ -90,20 +91,21 @@ object ConditionDatabase {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private val startingPotions get() = hasEnoughOfItem("healing_potion", 3)
-    private val graceRibbon get() = hasEnoughOfItem("grace_ribbon", 1)
-    private val firstEquipmentItem get() = hasEnoughOfOneOfTheseItems("basic_light_helmet")
-    private val knowAboutGrace
+    private val hasStartingPotions get() = hasEnoughOfItem("healing_potion", 3)
+    private val hasGraceRibbon get() = hasEnoughOfItem("grace_ribbon", 1)
+    private val gotFirstEquipmentItem get() = hasEnoughOfOneOfTheseItems("basic_light_helmet")
+    private val doesKnowAboutGrace
         get() = isOneOfBothStatesEqualOrHigher("quest_orc_guards", QuestState.ACCEPTED)
                 || isOneOfBothStatesEqualOrHigher("quest_mother_fairy", QuestState.ACCEPTED)
-    private val beenInFairyTown get() = hasEventPlayed("find_great_tree")
-    private val scrollOfOrcObedience get() = hasEnoughOfItem("scroll_of_orc_obedience", 1)
-    private val diplomat4 get() = hasEnoughOfSkill(SkillItemId.DIPLOMAT, 4)
-    private val level10 get() = hasMinimumLevelOf(10)
-    private val defeatedOrcGuards get() = isBattleWon("quest_orc_guards")
+    private val hasBeenInFairyTown get() = hasEventPlayed("find_great_tree")
+    private val hasScrollOfOrcObedience get() = hasEnoughOfItem("scroll_of_orc_obedience", 1)
+    private val hasDiplomat4 get() = hasEnoughOfSkill(SkillItemId.DIPLOMAT, 4)
+    private val hasLevel10 get() = hasMinimumLevelOf(10)
+    private val hasDefeatedOrcGuards get() = isBattleWon("quest_orc_guards")
     private val hasNotYetTalkedToLennorFirstCycle
         get() = isQuestResetStateEqual("quest_a_helping_horse", QuestState.UNKNOWN)
                 && isCurrentPhraseId("quest_a_helping_horse", "1")
+    private val isAloneInParty: Boolean get() = hasAmountOfPartyMembers(1)
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -134,5 +136,8 @@ object ConditionDatabase {
 
     private fun isCurrentPhraseId(conversationId: String, currentPhraseId: String): Boolean =
         gameData.conversations.getConversationById(conversationId).currentPhraseId == currentPhraseId
+
+    private fun hasAmountOfPartyMembers(amount: Int): Boolean =
+        gameData.party.size == amount
 
 }

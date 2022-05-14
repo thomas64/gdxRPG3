@@ -120,17 +120,5 @@
         "type"      : "RETURN"
       }
     }
-  },
-  "quest_honeywood_soldiers"   : {
-    "title"   : "Honeywood soldiers",
-    "entityId": "soldier01",
-    "summary" : "Honeywood soldiers",
-    "isHidden": true,
-    "tasks"   : {
-      "1": {
-        "taskPhrase": "Talk",
-        "type"      : "FREE"
-      }
-    }
   }
 }

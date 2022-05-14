@@ -146,7 +146,7 @@
       "1": {"text": ["Neigh."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "quest_honeywood_soldiers"   : {
+  "honeywood_soldiers": {
     "phrases": {
       "1": {"text": ["I'm sorry sir, we can't allow anyone to go outside the village alone."]},
       "2": {"text": ["It's dangerous to go alone. Especially with all the monsters roaming around."]},

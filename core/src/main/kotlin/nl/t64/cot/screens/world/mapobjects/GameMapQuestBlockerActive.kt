@@ -13,7 +13,7 @@ class GameMapQuestBlockerActive(
 
     override fun update() {
         if (isActiveWhenTaskIsActive) {
-            checkBlocker(quest.isTaskActive(taskId))
+            checkBlocker(quest!!.isTaskActive(taskId))
         }
     }
 

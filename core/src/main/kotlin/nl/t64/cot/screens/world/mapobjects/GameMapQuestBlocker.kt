@@ -16,7 +16,7 @@ abstract class GameMapQuestBlocker(
     rectObject: RectangleMapObject
 ) : GameMapObject(rectObject.rectangle), BlockObserver {
 
-    protected val quest: QuestGraph = gameData.quests.getQuestById(rectObject.name)
+    protected val quest: QuestGraph? = rectObject.name?.let { gameData.quests.getQuestById(it) }
     private var isActive: Boolean = false
 
     companion object {

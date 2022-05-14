@@ -10,7 +10,7 @@ class GameMapQuestBlockerFinished(
 ) : GameMapQuestBlocker(rectObject) {
 
     override fun update() {
-        val isFinished = quest.currentState == QuestState.FINISHED
+        val isFinished = quest!!.currentState == QuestState.FINISHED
         checkBlocker(isFinished == isActiveWhenQuestIsFinished)
     }
 

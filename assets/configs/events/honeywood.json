@@ -6,7 +6,7 @@
   },
   "a_tree_has_fallen"         : {
     "type"          : "conversation",
-    "condition"     : ["!has_talked_to_lennor"],
+    "condition"     : ["!talked_to_lennor"],
     "conversationId": "quest_a_helping_horse",
     "entityId"      : "man02"
   },
@@ -19,8 +19,8 @@
   },
   "event_honeywood_soldiers"  : {
     "type"          : "conversation",
-    "condition"     : ["_c_!=_f_q_this"],
-    "conversationId": "quest_honeywood_soldiers",
+    "condition"     : ["alone_in_party"],
+    "conversationId": "honeywood_soldiers",
     "entityId"      : "soldier01",
     "doesRepeat"    : true
   }
