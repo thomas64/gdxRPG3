@@ -29,6 +29,7 @@ import nl.t64.cot.components.conversation.ConversationCommand
 import nl.t64.cot.components.conversation.ConversationGraph
 import nl.t64.cot.components.conversation.NoteDatabase.getNoteById
 import nl.t64.cot.components.loot.Loot
+import nl.t64.cot.components.party.XpRewarder
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.academy.AcademyScreen
 import nl.t64.cot.screens.loot.ReceiveScreen
@@ -287,14 +288,8 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun receiveXp(nextId: String) {
-        val quest = gameData.quests.getQuestById(conversationId!!)
-        val reward = gameData.loot.getLoot(conversationId!!)
-        if (reward.isXpGained()) {
-            continueConversation(nextId)
-        } else {
-            quest.receivePossibleXp()
-            continueConversationWithoutSound(nextId)
-        }
+        XpRewarder.receivePossibleXp(conversationId!!)
+        continueConversation(nextId)
     }
 
     private fun startBattle(nextId: String) {

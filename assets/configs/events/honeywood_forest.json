@@ -38,14 +38,14 @@
   },
   "check_dead_orc"      : {
     "type"          : "conversation",
-    "condition"     : ["been_in_fairy_town"],
+    "condition"     : ["!been_in_fairy_town"],
     "conversationId": "find_dead_orcs",
     "entityId"      : "mozes",
     "doesRepeat"    : true
   },
   "enter_great_tree"    : {
     "type"          : "conversation",
-    "conversationId": "quest_fairy_welcome",
+    "conversationId": "fairy_welcome",
     "entityId"      : "fairy3"
   },
   "find_great_tree"     : {

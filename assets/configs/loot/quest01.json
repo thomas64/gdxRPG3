@@ -5,6 +5,5 @@
   "quest0005"                  : {"content": {"gold": 2}, "xp": 2},
   "quest0006"                  : {"content": {"gold": 1, "bonus_gold": 1, "bonus_herb": 1}, "xp": 2},
   "quest0007"                  : {"content": {"legendary_staff": 1}, "xp": 16},
-  "quest_fairy_welcome"        : {"xp": 15},
   "quest_honeywood_inn_price-1": {"content": {"gold": 10}, "xp": 10}
 }

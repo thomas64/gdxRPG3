@@ -79,18 +79,6 @@
       }
     }
   },
-  "quest_fairy_welcome"   : {
-    "title"   : "Fairy welcome",
-    "entityId": "fairy3",
-    "summary" : "Fairy welcome",
-    "isHidden": true,
-    "tasks"   : {
-      "1": {
-        "taskPhrase": "Talk",
-        "type"      : "FREE"
-      }
-    }
-  },
   "quest_mother_fairy"    : {
     "title"   : "It's fairy secret",
     "entityId": "fairy1",

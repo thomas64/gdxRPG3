@@ -19,7 +19,7 @@
       "1": {"text": ["No, I shouldn't go back. I have to find Grace first.", "There must be something near where I found the ribbon."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "quest_fairy_welcome": {
+  "fairy_welcome": {
     "phrases": {
       "1": {"face": "fairy3", "text": ["Ah young Mozes. You may enter here."], "choices": [{"command": "RECEIVE_XP", "nextId": "2"}]},
       "2": {"face": "mozes", "text": ["You know who I am?"]},

@@ -15,6 +15,7 @@ object ConditionDatabase {
         Pair("first_equipment_item") { gotFirstEquipmentItem },
         Pair("i_!know_about_grace") { !doesKnowAboutGrace },
         Pair("i_know_about_grace") { doesKnowAboutGrace },
+        Pair("!been_in_fairy_town") { !hasBeenInFairyTown },
         Pair("been_in_fairy_town") { hasBeenInFairyTown },
         Pair("i_scroll_of_orc_obedience") { hasScrollOfOrcObedience },
         Pair("diplomat4") { hasDiplomat4 },
