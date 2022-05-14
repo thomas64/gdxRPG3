@@ -10,7 +10,7 @@ class GameMapQuestBlockerCondition(
 ) : GameMapQuestBlocker(rectObject) {
 
     override fun update() {
-        val isMeetingConditions = ConditionDatabase.isMeetingConditions(conditionIds)
+        val isMeetingConditions = ConditionDatabase.isMeetingConditions(conditionIds, quest.id)
         checkBlocker(isMeetingConditions)
     }
 

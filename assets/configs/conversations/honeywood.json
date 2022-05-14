@@ -22,10 +22,10 @@
       "3" : {"text": ["Luckily, no one was hurt when it fell down.", "But it'll take a while for us to remove it and clear the road for everyone."]},
       "4" : {
         "face": "mozes", "text": [""], "choices": [
-          {"condition": ["i_c_!quest_a_helping_horse_finished"], "text": "Curious, when did the tree fell down?", "nextId": "10"},
-          {"condition": ["i_c_!quest_a_helping_horse_finished"], "text": "Oh no! That's bad, I really need to be in Honeywood Forest.", "nextId": "20"},
-          {"condition": ["i_c_!quest_a_helping_horse_finished"], "text": "Why don't you remove the tree immediately?", "nextId": "20"},
-          {"condition": ["i_r_quest_a_helping_horse_finished"], "text": "Could I help with a horse and 3 ropes?", "command": "ACCEPT_QUEST", "nextId": "40"},
+          {"condition": ["i_r_==_f_q_this"], "text": "Could I by chance help with a horse and 3 ropes?", "command": "ACCEPT_QUEST", "nextId": "40"},
+          {"text": "Curious, when did the tree fell down?", "nextId": "10"},
+          {"text": "Oh no! That's bad, I really need to be in Honeywood Forest.", "nextId": "20"},
+          {"text": "Why don't you remove the tree immediately?", "nextId": "20"},
           {"text": "Alright, good luck with that. (Leave conversation)", "command": "EXIT", "nextId": "2"}
         ]
       },
@@ -36,8 +36,8 @@
       "20": {"face": "man02", "text": ["I'm sorry Mozes, there is nothing I can do about it right now.", "You'll have to wait a while. Unless you bring me a horse and some ropes, ha ha!"]},
       "21": {
         "face": "mozes", "text": [""], "choices": [
-          {"text": "I really don't have time for this.", "command": "KNOW_QUEST", "nextId": "30"},
-          {"text": "Alright, I'll see what I can do.", "command": "ACCEPT_QUEST", "nextId": "35"}
+          {"text": "Alright, I'll see what I can do.", "command": "ACCEPT_QUEST", "nextId": "35"},
+          {"text": "I really don't have time for this.", "command": "KNOW_QUEST", "nextId": "30"}
         ]
       },
       "30": {"face": "man02", "text": ["No problemo! Me neither. I'll see you around."], "choices": [{"command": "EXIT", "nextId": "31"}]},
@@ -93,9 +93,9 @@
         "choices": [
           {"text": "Yes please, I could use some rest. (Restore health)", "command": "HEAL_LIFE", "nextId": "2"},
           {"text": "No thanks, now's not necessary. (Leave conversation)", "command": "EXIT"},
-          {"condition": ["i_c_quest_pest_removal_unknown"], "text": "Is something wrong innkeeper? You look troubled...", "nextId": "10"},
-          {"condition": ["i_c_quest_pest_removal_known"], "text": "[About those bats...]", "nextId": "20"},
-          {"condition": ["i_c_quest_pest_removal_task_complete"], "text": "[It is done.]", "nextId": "30"}
+          {"condition": ["i_c_==_u_q_this"], "text": "Is something wrong innkeeper? You look troubled...", "nextId": "10"},
+          {"condition": ["i_c_==_k_q_this"], "text": "[About those bats...]", "nextId": "20"},
+          {"condition": ["i_t_1_q_this"], "text": "[It is done.]", "nextId": "30"}
         ]
       },
       "2"   : {"text": ["Your health has been restored.", "Please come back anytime you feel weary."], "choices": [{"command": "EXIT"}]},

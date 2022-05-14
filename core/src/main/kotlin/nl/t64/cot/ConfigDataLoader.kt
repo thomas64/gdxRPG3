@@ -25,10 +25,6 @@ object ConfigDataLoader {
         return loadConfigData<Battle>("battles")
     }
 
-    fun createConversations(): Map<String, ConversationGraph> {
-        return loadConfigData<ConversationGraph>("conversations")
-    }
-
     fun createDoors(): Map<String, Door> {
         return loadConfigData<Door>("doors")
     }
@@ -43,6 +39,12 @@ object ConfigDataLoader {
 
     fun createNotes(): Map<String, ConversationGraph> {
         return loadConfigData<ConversationGraph>("notes")
+    }
+
+    fun createConversations(): Map<String, ConversationGraph> {
+        return loadConfigData<ConversationGraph>("conversations")
+            .mapValues { it.value.copy(id = it.key) }
+            .onEach { it.value.initId() }
     }
 
     fun createItems(): Map<String, InventoryItem> {

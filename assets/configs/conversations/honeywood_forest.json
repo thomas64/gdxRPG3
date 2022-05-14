@@ -52,7 +52,7 @@
         "face": "mozes", "text": [""], "choices": [
           {"text": "How do you all seem to know me?", "nextId": "10"},
           {"text": "What do you mean with dark times?", "nextId": "20"},
-          {"condition": ["i_!quest_mother_fairy_accepted"], "text": "I'm looking for my little sister Grace.", "nextId": "30"},
+          {"condition": ["i_c_<=_k_q_this"], "text": "I'm looking for my little sister Grace.", "nextId": "30"},
           {"text": "I really need to be on my way. (Leave conversation)", "command": "EXIT", "nextId": "70"}
         ]
       },

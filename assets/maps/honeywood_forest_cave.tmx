@@ -121,7 +121,7 @@
  <objectgroup color="#ffff00" id="22" name="quest">
   <object id="84" name="quest_grace_is_missing" type="blocker" x="456" y="588" width="96" height="12">
    <properties>
-    <property name="activeWhenCondition" value="!cave_found"/>
+    <property name="activeWhenCondition" value="_r_==_u_q_this, _t_1_q_this"/>
    </properties>
   </object>
  </objectgroup>

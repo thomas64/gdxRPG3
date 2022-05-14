@@ -17,6 +17,11 @@ class ConversationChoice(
     @JsonProperty("condition")
     val conditionIds: List<String> = DEFAULT_CONDITION
 ) {
+    private lateinit var conversationId: String
+
+    fun initId(id: String) {
+        conversationId = id
+    }
 
     override fun toString(): String {
         return if (text == DEFAULT_ANSWER_TEXT) text else "$DEFAULT_ANSWER_TEXT $text"
@@ -27,7 +32,7 @@ class ConversationChoice(
     }
 
     fun isMeetingCondition(): Boolean {
-        return ConditionDatabase.isMeetingConditions(conditionIds)
+        return ConditionDatabase.isMeetingConditions(conditionIds, conversationId)
     }
 
 }

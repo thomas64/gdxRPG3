@@ -12,14 +12,14 @@
   },
   "dont_go_up_there"          : {
     "type"          : "conversation",
-    "condition"     : ["c_quest_pest_removal_known_or_lower"],
+    "condition"     : ["_c_<=_k_q_quest_honeywood_inn_price-1"],
     "conversationId": "dont_go_up_there",
     "entityId"      : "woman02",
     "doesRepeat"    : true
   },
   "event_honeywood_soldiers"  : {
     "type"          : "conversation",
-    "condition"     : ["c_!quest_honeywood_soldiers_finished"],
+    "condition"     : ["_c_!=_f_q_this"],
     "conversationId": "quest_honeywood_soldiers",
     "entityId"      : "soldier01",
     "doesRepeat"    : true

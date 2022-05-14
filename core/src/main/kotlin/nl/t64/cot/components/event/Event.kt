@@ -32,7 +32,7 @@ class Event(
     }
 
     private fun isMeetingCondition(): Boolean {
-        return ConditionDatabase.isMeetingConditions(conditionIds)
+        return ConditionDatabase.isMeetingConditions(conditionIds, conversationId)
     }
 
     private fun start() {
