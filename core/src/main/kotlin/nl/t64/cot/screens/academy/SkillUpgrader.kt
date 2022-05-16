@@ -40,7 +40,7 @@ class SkillUpgrader private constructor(
             xpCost == -2 -> showError("I cannot train you in $skillName any further.")
             xpCost == -1 -> showError("You cannot train $skillName.")
             xpCost == 0 -> showError("You cannot train $skillName any further.")
-            !hasEnoughXp -> showError("I'm sorry. You don't seem to have enough 'XP to Invest'.")
+            !hasEnoughXp -> showError("I'm sorry. You don't seem to have enough XP.")
             !hasEnoughGold -> showError("I'm sorry. You don't seem to have enough gold.")
             else -> showConfirmDialog()
         }

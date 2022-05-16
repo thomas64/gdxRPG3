@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="18" height="30" tilewidth="24" tileheight="24" infinite="0" nextlayerid="21" nextobjectid="30">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="18" height="30" tilewidth="24" tileheight="24" infinite="0" nextlayerid="21" nextobjectid="31">
  <properties>
   <property name="bgm" value="bgm_house"/>
   <property name="step_sound" value="wood"/>
@@ -76,6 +76,11 @@
  <objectgroup color="#55aaff" id="11" name="spawn">
   <object id="15" name="honeywood" x="192" y="624" width="48" height="24"/>
   <object id="23" name="scene_ardor_1" x="240" y="168" width="48" height="24">
+   <properties>
+    <property name="direction" value="west"/>
+   </properties>
+  </object>
+  <object id="30" name="honeywood_mozes_house" x="240" y="168" width="48" height="24">
    <properties>
     <property name="direction" value="west"/>
    </properties>

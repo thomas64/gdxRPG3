@@ -3,8 +3,8 @@
     "phrases": {
       "1": {"text": ["Everything is back to normal?"]},
       "2": {"text": ["The world didn't end in flames?"]},
-      "3": {"text": ["Grace is still alive?"]},
-      "4": {"text": ["I've got find her again, quick!"], "choices": [{"command": "EXIT"}]}
+      "3": {"text": ["Is Grace still alive then?"]},
+      "4": {"text": ["I have to find her again, quick!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "mrs_johanna"                : {
@@ -23,7 +23,7 @@
       "4" : {
         "face": "mozes", "text": [""], "choices": [
           {"condition": ["i_r_==_f_q_this"], "text": "Could I by chance help with a horse and 3 ropes?", "command": "ACCEPT_QUEST", "nextId": "40"},
-          {"text": "Curious, when did the tree fell down?", "nextId": "10"},
+          {"text": "Curious, when did the tree fall down?", "nextId": "10"},
           {"text": "Oh no! That's bad, I really need to be in Honeywood Forest.", "nextId": "20"},
           {"text": "Why don't you remove the tree immediately?", "nextId": "20"},
           {"text": "Alright, good luck with that. (Leave conversation)", "command": "EXIT", "nextId": "2"}

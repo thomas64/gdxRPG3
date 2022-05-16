@@ -1,6 +1,7 @@
 package nl.t64.cot
 
 import nl.t64.cot.Utils.gameData
+import nl.t64.cot.Utils.profileManager
 import nl.t64.cot.components.party.inventory.InventoryDatabase
 import nl.t64.cot.constants.Constant
 
@@ -19,6 +20,7 @@ class Scenario {
         gameData.resetCycle()
         setQuestGraceComplete()
         addQuestArdorToLogbook()
+        profileManager.saveProfile()
     }
 
     private fun addMozesToParty() {

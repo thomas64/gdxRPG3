@@ -27,7 +27,7 @@ private const val TITLE_HEROES = "   Heroes"
 private const val TITLE_TRAINER = "   Trainer"
 private const val TITLE_ACADEMY = "   Skills to train"
 private const val TITLE_SKILLS = "   Trained Skills"
-private const val TITLE_CALCS = "   Stats"
+private const val TITLE_CALCS = "   Your Stats"
 
 internal class AcademyUI(
     stage: Stage,

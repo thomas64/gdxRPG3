@@ -24,15 +24,15 @@ internal class CalcsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
     }
 
     override fun fillRows() {
-        table.add(Label("XP to Invest", createLabelStyle()))
+        table.add(Label("XP", createLabelStyle()))
         table.add(Label(selectedHero.xpToInvest.toString(), createLabelStyle())).row()
 
-        table.add(Label("Amount of Gold", createLabelStyle()))
+        table.add(Label("Gold", createLabelStyle()))
         table.add(Label(gameData.inventory.getTotalOfItem("gold").toString(), createLabelStyle())).row()
 
         table.add("").row()
 
-        table.add(Label("Wizard skill level", createLabelStyle()))
+        table.add(Label("Wizard skill rank", createLabelStyle()))
         table.add(Label(getWizardRankForVisual(), createLabelStyle()))
     }
 

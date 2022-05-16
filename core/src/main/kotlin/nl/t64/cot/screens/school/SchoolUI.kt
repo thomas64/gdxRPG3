@@ -27,7 +27,7 @@ private const val TITLE_HEROES = "   Heroes"
 private const val TITLE_TEACHER = "   Teacher"
 private const val TITLE_SCHOOL = "   Spells to learn"
 private const val TITLE_SPELLS = "   Known Spells"
-private const val TITLE_CALCS = "   Stats"
+private const val TITLE_CALCS = "   Your Stats"
 
 internal class SchoolUI(
     stage: Stage,

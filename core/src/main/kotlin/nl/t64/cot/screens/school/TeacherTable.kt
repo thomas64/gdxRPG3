@@ -16,9 +16,9 @@ private val TEXT = """
     
     On the left you see which spells I can teach you, and on the right are the spells you already know.
     
-    The numbers on the left represent to which rank I can teach you that spell, and the numbers on the right represent your current ranks of these spells.
+    The numbers on the left represent to which rank I can teach you. The numbers on the right represent your current ranks.
     
-    To learn a spell will cost you 'XP to Invest' and gold.""".trimIndent()
+    To learn a spell will cost you XP and gold.""".trimIndent()
 
 internal class TeacherTable(npcId: String) : BaseTable(PersonalityTooltip()) {
 

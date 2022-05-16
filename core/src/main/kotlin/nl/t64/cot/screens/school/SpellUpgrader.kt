@@ -53,7 +53,7 @@ class SpellUpgrader private constructor(
             xpCost == -2 -> showError("I cannot teach you in $spellName any further.")
             xpCost == -1 -> throw IllegalStateException("Should have been handled by '!hasWizardSkill'.")
             xpCost == 0 -> showError("You cannot learn $spellName any further.")
-            !hasEnoughXp -> showError("I'm sorry. You don't seem to have enough 'XP to Invest'.")
+            !hasEnoughXp -> showError("I'm sorry. You don't seem to have enough XP.")
             !hasEnoughGold -> showError("I'm sorry. You don't seem to have enough gold.")
             else -> showConfirmDialog()
         }

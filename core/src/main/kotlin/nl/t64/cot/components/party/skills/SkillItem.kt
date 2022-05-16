@@ -57,7 +57,7 @@ data class SkillItem(
             "-2" -> "N/A"
             else -> cost
         }
-        return "'XP to Invest' needed for ${getFirstOrNext()} rank: $xpNeeded"
+        return "XP needed for ${getFirstOrNext()} rank: $xpNeeded"
     }
 
     private fun getNeededGoldForNextRank(trainerSkill: SkillItem): String {

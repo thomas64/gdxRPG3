@@ -39,6 +39,8 @@ object ConfigDataLoader {
 
     fun createNotes(): Map<String, ConversationGraph> {
         return loadConfigData<ConversationGraph>("notes")
+            .mapValues { it.value.copy(id = it.key) }
+            .onEach { it.value.initId() }
     }
 
     fun createConversations(): Map<String, ConversationGraph> {

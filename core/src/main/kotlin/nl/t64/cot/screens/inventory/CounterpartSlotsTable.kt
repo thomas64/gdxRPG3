@@ -1,6 +1,7 @@
 package nl.t64.cot.screens.inventory
 
 import com.badlogic.gdx.scenes.scene2d.Stage
+import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import nl.t64.cot.Utils
@@ -91,7 +92,9 @@ abstract class CounterpartSlotsTable(
 
     fun selectorAndListener() {
         selector.setNewCurrentByIndex(0)
-        counterpartSlotTable.addListener(InventorySlotsTableListener({ selector.selectNewSlot(it) }, slotsInRow))
+        counterpartSlotTable.addAction(Actions.sequence(
+            Actions.delay(.1f),
+            Actions.addListener(InventorySlotsTableListener({ selector.selectNewSlot(it) }, slotsInRow), false)))
     }
 
 }

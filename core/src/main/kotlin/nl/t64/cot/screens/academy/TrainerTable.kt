@@ -16,9 +16,9 @@ private val TEXT = """
     
     On the left you see which skills I can train you, and on the right are the skills you already know.
     
-    The numbers on the left represent to which rank I can train you that skill, and the numbers on the right represent your current ranks of these skills.
+    The numbers on the left represent to which rank I can train you. The numbers on the right represent your current ranks.
     
-    To train a skill will cost you 'XP to Invest' and gold.""".trimIndent()
+    To train a skill will cost you XP and gold.""".trimIndent()
 
 internal class TrainerTable(npcId: String) : BaseTable(PersonalityTooltip()) {
 

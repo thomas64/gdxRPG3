@@ -68,7 +68,7 @@
   "scholar"   : {
     "upgrade"    : 6,
     "description": [
-      "Lowers the 'XP to Invest' needed for training Skills and learning Spells.",
+      "Lowers the XP needed for training Skills and learning Spells.",
       "For every 1 rank of Scholar, 1% less XP."
     ]
   }
