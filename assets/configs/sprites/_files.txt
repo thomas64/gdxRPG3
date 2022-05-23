@@ -1,6 +1,7 @@
 hero1.json
 people1.json
 people2.json
+people3.json
 enemy1.json
 door1.json
 animal1.json
