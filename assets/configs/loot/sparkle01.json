@@ -11,5 +11,8 @@
   "sparkle0010": {"content": {"gemstone": 3}},
   "sparkle0011": {"content": {"spice": 2}},
   "sparkle0012": {"content": {"stone": 3}},
-  "sparkle0013": {"content": {"wood": 1}}
+  "sparkle0013": {"content": {"wood": 1}},
+  "sparkle0014": {"content": {"herb": 2}},
+  "sparkle0015": {"content": {"herb": 2}},
+  "sparkle0016": {"content": {"herb": 2}}
 }

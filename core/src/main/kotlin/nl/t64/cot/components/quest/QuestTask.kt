@@ -8,10 +8,11 @@ class QuestTask(
     val updatedPhrase: String? = null,
     val type: QuestTaskType = QuestTaskType.NONE,
     val target: Map<String, Int> = emptyMap(),
+    val receive: Map<String, Int> = emptyMap(),
     val isOptional: Boolean = false,
     var isHidden: Boolean = false,
-    val linkedWith: String? = null
-
+    var isRepeatable: Boolean = false,
+    val linkedWith: List<String> = emptyList()
 ) {
     var isReset: Boolean = false
     var isComplete: Boolean = false
@@ -53,6 +54,7 @@ class QuestTask(
             QuestTaskType.SAY_THE_RIGHT_THING,
             QuestTaskType.KILL,
             QuestTaskType.RETURN -> completeTask()
+            QuestTaskType.TRADE_ITEMS,
             QuestTaskType.GIVE_ITEM -> {
                 removeTargetFromInventory()
                 completeTask()
@@ -75,12 +77,14 @@ class QuestTask(
     }
 
     private fun completeTask() {
-        updatedPhrase?.let { taskPhrase = it }
-        isComplete = true
+        if (!isRepeatable) {
+            updatedPhrase?.let { taskPhrase = it }
+            isComplete = true
+        }
     }
 
     private fun removeTargetFromInventory() {
-        gameData.inventory.autoRemoveItem(getTargetEntry().key, getTargetEntry().value)
+        gameData.inventory.autoRemoveItem(target)
     }
 
     private fun getTargetEntry(): Map.Entry<String, Int> {

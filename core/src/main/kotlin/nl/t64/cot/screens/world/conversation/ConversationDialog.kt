@@ -28,12 +28,11 @@ import nl.t64.cot.components.conversation.ConversationChoice
 import nl.t64.cot.components.conversation.ConversationCommand
 import nl.t64.cot.components.conversation.ConversationGraph
 import nl.t64.cot.components.conversation.NoteDatabase.getNoteById
-import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.components.party.XpRewarder
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.academy.AcademyScreen
-import nl.t64.cot.screens.loot.ReceiveScreen
 import nl.t64.cot.screens.loot.RewardScreen
+import nl.t64.cot.screens.loot.TradeScreen
 import nl.t64.cot.screens.school.SchoolScreen
 import nl.t64.cot.screens.shop.ShopScreen
 
@@ -202,9 +201,12 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             ConversationCommand.HEAL_LIFE -> healLife(nextId)
             ConversationCommand.RECEIVE_XP -> receiveXp(nextId)
             ConversationCommand.START_BATTLE -> startBattle(nextId)
+            ConversationCommand.RELOAD_NPCS -> reloadNpcs(nextId)
 
             ConversationCommand.KNOW_QUEST -> knowQuest(nextId)
             ConversationCommand.ACCEPT_QUEST -> acceptQuest(nextId)
+            ConversationCommand.TRADE_QUEST_ITEMS -> tradeQuestItems()
+            ConversationCommand.RE_TRADE_QUEST_ITEMS -> reTradeQuestItems()
             ConversationCommand.SHOW_QUEST_ITEM -> showQuestItem(nextId)
             ConversationCommand.WEAR_QUEST_ITEM -> wearQuestItem(nextId)
             ConversationCommand.GIVE_QUEST_ITEM -> giveQuestItem(nextId)
@@ -273,9 +275,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         }
         delayInputListeners()
         gameData.party.recoverFullHp()
-        brokerManager.mapObservers.notifyFadeOut(
-            { continueConversation(nextId) }
-        )
+        brokerManager.mapObservers.notifyFadeOut({ continueConversation(nextId) }, delay = 1f)
     }
 
     private fun pay(price: Int) {
@@ -297,6 +297,11 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         conversationObserver.notifyShowBattleScreen(conversationId!!)
     }
 
+    private fun reloadNpcs(nextId: String) {
+        endConversation(nextId)
+        conversationObserver.notifyReloadNpcs()
+    }
+
     private fun knowQuest(nextId: String) {
         gameData.quests.getQuestById(conversationId!!).know()
         continueConversation(nextId)
@@ -305,6 +310,24 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     private fun acceptQuest(nextId: String) {
         gameData.quests.getQuestById(conversationId!!).accept()
         continueConversation(nextId)
+    }
+
+    private fun tradeQuestItems() {
+        val quest = gameData.quests.getQuestById(conversationId!!)
+        val receive = quest.possibleSetTradeItemsTaskComplete()
+        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_CONVERSATION_END)
+        stage.addAction(Actions.sequence(Actions.run { hideWithFade() },
+                                         Actions.delay(Constant.DIALOG_FADE_OUT_DURATION),
+                                         Actions.run { TradeScreen.load(receive, graph) }))
+    }
+
+    private fun reTradeQuestItems() {
+        val quest = gameData.quests.getQuestById(conversationId!!)
+        val receive = quest.getReceiveItemsForgottenTradeItemsTask()
+        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_CONVERSATION_END)
+        stage.addAction(Actions.sequence(Actions.run { hideWithFade() },
+                                         Actions.delay(Constant.DIALOG_FADE_OUT_DURATION),
+                                         Actions.run { TradeScreen.load(receive, graph) }))
     }
 
     private fun showQuestItem(nextId: String) {
@@ -319,7 +342,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
 
     private fun giveQuestItem(nextId: String) {
         gameData.quests.getQuestById(conversationId!!).possibleSetGiveItemTaskComplete()
-        endConversation(nextId)
+        continueConversation(nextId)
     }
 
     private fun sayQuestThing(nextId: String) {
@@ -338,14 +361,6 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    // todo, this method is from the huge quest clean up, it was in WorldScreen.
-    // I think they fit better here, the moment they will become in use again.
-    private fun onNotifyShowReceiveDialog(receive: Loot) {
-        stage.addAction(Actions.sequence(Actions.run { hideWithFade() },
-                                         Actions.delay(Constant.DIALOG_FADE_OUT_DURATION),
-                                         Actions.run { ReceiveScreen.load(receive) }))
-    }
 
     private fun delayInputListeners() {
         stage.addAction(Actions.sequence(

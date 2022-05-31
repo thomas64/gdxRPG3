@@ -1,19 +1,26 @@
 
 item.png
-size: 124, 62
+size: 186, 62
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
-key_mysterious_tunnel
+horse_medicine
   rotate: false
   xy: 0, 0
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-scroll_of_orc_obedience
+key_mysterious_tunnel
   rotate: false
   xy: 62, 0
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+scroll_of_orc_obedience
+  rotate: false
+  xy: 124, 0
   size: 62, 62
   orig: 62, 62
   offset: 0, 0

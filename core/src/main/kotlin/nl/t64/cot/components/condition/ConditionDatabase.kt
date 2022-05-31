@@ -2,7 +2,6 @@ package nl.t64.cot.components.condition
 
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.components.party.skills.SkillItemId
-import nl.t64.cot.components.quest.QuestGraph
 import nl.t64.cot.components.quest.QuestState
 
 
@@ -10,85 +9,36 @@ object ConditionDatabase {
 
     private val conditions: Map<String, () -> Boolean> = mapOf(
 
-        Pair("3_starting_potions") { hasStartingPotions },
-        Pair("grace_ribbon") { hasGraceRibbon },
-        Pair("first_equipment_item") { gotFirstEquipmentItem },
-        Pair("i_!know_about_grace") { !doesKnowAboutGrace },
-        Pair("i_know_about_grace") { doesKnowAboutGrace },
-        Pair("!been_in_fairy_town") { !hasBeenInFairyTown },
-        Pair("been_in_fairy_town") { hasBeenInFairyTown },
-        Pair("i_scroll_of_orc_obedience") { hasScrollOfOrcObedience },
-        Pair("diplomat4") { hasDiplomat4 },
-        Pair("i_druid1") { hasDruid1 },
-        Pair("i_!druid1") { !hasDruid1 },
-        Pair("level10") { hasLevel10 },
-        Pair("defeated_orc_guards") { hasDefeatedOrcGuards },
-        Pair("!talked_to_lennor") { hasNotYetTalkedToLennorFirstCycle },
-        Pair("alone_in_party") { isAloneInParty }
+        // @formatter:off
+        "3_starting_potions"        to { hasStartingPotions },
+        "grace_ribbon"              to { hasGraceRibbon },
+        "first_equipment_item"      to { gotFirstEquipmentItem },
+        "i_!know_about_grace"       to { !doesKnowAboutGrace },
+        "i_know_about_grace"        to { doesKnowAboutGrace },
+        "!been_in_fairy_town"       to { !hasBeenInFairyTown },
+        "been_in_fairy_town"        to { hasBeenInFairyTown },
+        "i_scroll_of_orc_obedience" to { hasScrollOfOrcObedience },
+        "diplomat4"                 to { hasDiplomat4 },
+        "i_druid1"                  to { hasDruid1 },
+        "i_!druid1"                 to { !hasDruid1 },
+        "level10"                   to { hasLevel10 },
+        "defeated_orc_guards"       to { hasDefeatedOrcGuards },
+        "!talked_to_lennor"         to { hasNotYetTalkedToLennorFirstCycle },
+        "herb6"                     to { herb6 },
+        "blue_jelly1"               to { blueJelly1 },
+        "horse_medicine1"           to { horseMedicine1 },
+        "metal2"                    to { metal2 },
+        "horseshoe4"                to { horseshoe4 },
+        "alone_in_party"            to { isAloneInParty }
+        // @formatter:on
 
     )
 
     fun isMeetingConditions(conditionIds: List<String?>, questId: String? = null): Boolean {
         return when {
             conditionIds.isEmpty() -> true
-            conditionIds.all { it!!.contains("_q_") } -> conditionIds.all { isMeetingQuestCondition(it!!, questId) }
+            conditionIds.all { it!!.contains("_q_") } -> conditionIds.all { ConditionConverter.isMeetingQuestCondition(it!!, questId) }
             else -> conditionIds.all { conditions[it]!!.invoke() }
-        }
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    private fun isMeetingQuestCondition(conditionId: String, questId: String?): Boolean {
-        val questGraph: QuestGraph = getQuestGraph(conditionId, questId)
-        if (conditionId.contains("_t_")) {
-            return isTaskComplete(conditionId, questGraph)
-        }
-        val questState: QuestState = getQuestState(conditionId, questGraph)
-        val conditionState: QuestState = getConditionState(conditionId)
-        return isQuestInState(conditionId, questState, conditionState)
-    }
-
-    private fun getQuestGraph(conditionId: String, questId: String?): QuestGraph {
-        return when {
-            conditionId.contains("_q_this") -> gameData.quests.getQuestById(questId!!)
-            conditionId.contains("_q_") -> gameData.quests.getQuestById(conditionId.substringAfter("_q_"))
-            else -> throw IllegalArgumentException("No defined quest found.")
-        }
-    }
-
-    private fun isTaskComplete(conditionId: String, questGraph: QuestGraph): Boolean {
-        val startIndex = conditionId.indexOf("_t_")
-        val taskId: Int = conditionId.substring(startIndex + 3, startIndex + 4).toInt()
-        val nextTaskId: Int = taskId + 1
-        return questGraph.isTaskComplete(taskId.toString())
-                && !questGraph.isTaskComplete(nextTaskId.toString())
-    }
-
-    private fun getQuestState(conditionId: String, questGraph: QuestGraph): QuestState {
-        return when {
-            conditionId.contains("_c_") -> questGraph.currentState
-            conditionId.contains("_r_") -> questGraph.resetState
-            else -> throw IllegalArgumentException("No defined state found.")
-        }
-    }
-
-    private fun getConditionState(conditionId: String): QuestState {
-        return when {
-            conditionId.contains("_u_") -> QuestState.UNKNOWN
-            conditionId.contains("_k_") -> QuestState.KNOWN
-            conditionId.contains("_a_") -> QuestState.ACCEPTED
-            conditionId.contains("_f_") -> QuestState.FINISHED
-            else -> throw IllegalArgumentException("No defined conditionState found.")
-        }
-    }
-
-    private fun isQuestInState(conditionId: String, questState: QuestState, conditionState: QuestState): Boolean {
-        return when {
-            conditionId.contains("!=") -> questState != conditionState
-            conditionId.contains("==") -> questState == conditionState
-            conditionId.contains("<=") -> questState.isEqualOrLowerThan(conditionState)
-            conditionId.contains(">=") -> questState.isEqualOrHigherThan(conditionState)
-            else -> throw IllegalArgumentException("No defined operator found.")
         }
     }
 
@@ -109,7 +59,12 @@ object ConditionDatabase {
     private val hasNotYetTalkedToLennorFirstCycle
         get() = isQuestResetStateEqual("quest_a_helping_horse", QuestState.UNKNOWN)
                 && isCurrentPhraseId("quest_a_helping_horse", "1")
-    private val isAloneInParty: Boolean get() = hasAmountOfPartyMembers(1)
+    private val herb6 get() = hasEnoughOfItem("herb", 6)
+    private val blueJelly1 get() = hasEnoughOfItem("blue_jelly", 1)
+    private val horseMedicine1 get() = hasEnoughOfItem("horse_medicine", 1)
+    private val metal2 get() = hasEnoughOfItem("metal", 2)
+    private val horseshoe4 get() = hasEnoughOfItem("horseshoe", 4)
+    private val isAloneInParty get() = hasAmountOfPartyMembers(1)
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

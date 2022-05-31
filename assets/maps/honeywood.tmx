@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="96" height="78" tilewidth="24" tileheight="24" infinite="0" nextlayerid="55" nextobjectid="372">
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="96" height="78" tilewidth="24" tileheight="24" infinite="0" nextlayerid="56" nextobjectid="381">
  <properties>
   <property name="bgm" value="bgm_town"/>
   <property name="lightmap_camera" value="sunlight"/>
@@ -49,7 +49,7 @@
  </layer>
  <layer id="39" name="over6_objects" width="96" height="78">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer id="40" name="over7_over" width="96" height="78">
@@ -149,7 +149,7 @@
   <object id="333" name="sand" x="288" y="456" width="48" height="24"/>
   <object id="335" name="sand" x="336" y="336" width="48" height="24"/>
  </objectgroup>
- <objectgroup color="#aa0000" id="8" name="collision" visible="0">
+ <objectgroup color="#aa0000" id="8" name="collision">
   <object id="2" x="768" y="0" width="1152" height="240"/>
   <object id="3" x="0" y="0" width="768" height="144"/>
   <object id="4" x="720" y="192" width="48" height="48"/>
@@ -228,12 +228,12 @@
   <object id="80" x="912" y="1008" width="96" height="48"/>
   <object id="81" x="864" y="1056" width="96" height="48"/>
   <object id="82" x="864" y="1104" width="48" height="48"/>
-  <object id="83" x="864" y="1296" width="48" height="96"/>
+  <object id="83" x="864" y="1284" width="48" height="108"/>
   <object id="84" x="912" y="1344" width="48" height="96"/>
   <object id="85" x="960" y="1392" width="48" height="48"/>
   <object id="86" x="1152" y="1392" width="96" height="48"/>
   <object id="87" x="1200" y="1344" width="96" height="48"/>
-  <object id="88" x="1248" y="1296" width="48" height="48"/>
+  <object id="88" x="1248" y="1284" width="48" height="60"/>
   <object id="89" x="1152" y="1008" width="96" height="48"/>
   <object id="90" x="1200" y="1056" width="96" height="48"/>
   <object id="91" x="1248" y="1104" width="48" height="48"/>
@@ -277,17 +277,23 @@
   <object id="339" name="door_simple_left2" x="720" y="432" width="48" height="96"/>
   <object id="336" name="door_simple_left1" x="624" y="1296" width="48" height="96"/>
   <object id="340" name="door_forged_left" x="1056" y="768" width="48" height="96"/>
+  <object id="376" name="sparkle0014" x="1968" y="1452" width="48" height="48"/>
+  <object id="377" name="sparkle0015" x="2100" y="462" width="48" height="48"/>
+  <object id="378" name="sparkle0016" x="234" y="1008" width="48" height="48"/>
  </objectgroup>
  <objectgroup color="#aa55ff" id="13" name="hero">
-  <object id="363" name="horse1" x="1392" y="1464" width="48" height="24">
-   <properties>
-    <property name="conversation" value="horse_join_party"/>
-    <property name="direction" value="north"/>
-   </properties>
-  </object>
   <object id="371" name="luana" type="w" x="1152" y="1128" width="48" height="24">
    <properties>
     <property name="conversation" value="luana01"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup color="#ff007f" id="55" name="enemy">
+  <object id="375" name="blue_slime" x="408" y="156" width="48" height="24">
+   <properties>
+    <property name="battleId" value="quest_get_medicine"/>
+    <property name="condition" value="_c_==_a_q_this"/>
+    <property name="direction" value="north"/>
    </properties>
   </object>
  </objectgroup>
@@ -361,7 +367,34 @@
   </object>
   <object id="368" name="woman03" x="1344" y="1464" width="48" height="24">
    <properties>
+    <property name="conversation" value="quest_get_horse"/>
     <property name="direction" value="north"/>
+   </properties>
+  </object>
+  <object id="372" name="horse1" x="1392" y="1464" width="48" height="24">
+   <properties>
+    <property name="condition" value="_c_!=_f_q_quest_get_horse"/>
+    <property name="conversation" value="honeywood_horse_follow"/>
+    <property name="direction" value="north"/>
+   </properties>
+  </object>
+  <object id="374" name="oldwoman11" x="1296" y="864" width="48" height="24">
+   <properties>
+    <property name="conversation" value="quest_get_medicine"/>
+    <property name="direction" value="south"/>
+   </properties>
+  </object>
+  <object id="379" name="man07" x="960" y="912" width="48" height="24">
+   <properties>
+    <property name="conversation" value="quest_get_horseshoes"/>
+    <property name="direction" value="south"/>
+   </properties>
+  </object>
+  <object id="380" name="horse1" x="1968" y="192" width="48" height="24">
+   <properties>
+    <property name="condition" value="_c_==_f_q_quest_get_horse"/>
+    <property name="conversation" value="honeywood_horse_follow"/>
+    <property name="direction" value="west"/>
    </properties>
   </object>
  </objectgroup>

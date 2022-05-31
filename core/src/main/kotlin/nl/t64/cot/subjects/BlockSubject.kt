@@ -3,6 +3,7 @@ package nl.t64.cot.subjects
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
 import nl.t64.cot.constants.Constant
+import nl.t64.cot.screens.world.entity.Entity
 import nl.t64.cot.screens.world.entity.EntityState
 
 
@@ -20,6 +21,13 @@ class BlockSubject {
 
     fun removeAllObservers() {
         observers.clear()
+    }
+
+    fun removeAllNpcObservers() {
+        observers
+            .filterIsInstance<Entity>()
+            .filter { it.isNpc() }
+            .forEach { removeObserver(it) }
     }
 
     fun getCurrentBlockersFor(boundingBox: Rectangle, entityState: EntityState): List<Rectangle> {

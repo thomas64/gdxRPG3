@@ -1,15 +1,5 @@
 {
-  "horse1": {
-    "name"     : "Horse",
-    "school"   : "NONE",
-    "stats"    : {
-      "level": 1
-    },
-    "skills"   : {},
-    "spells"   : {},
-    "inventory": {}
-  },
-  "mozes" : {
+  "mozes": {
     "name"     : "Mozes",
     "school"   : "UNKNOWN",
     "stats"    : {

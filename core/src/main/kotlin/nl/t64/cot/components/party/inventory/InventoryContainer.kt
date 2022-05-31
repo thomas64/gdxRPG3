@@ -48,6 +48,10 @@ class InventoryContainer(numberOfSlots: Int = 0) {
         }
     }
 
+    fun autoRemoveItem(items: Map<String, Int>) {
+        items.forEach { autoRemoveItem(it.key, it.value) }
+    }
+
     fun autoRemoveItem(itemId: String, orgAmount: Int) {
         check(hasEnoughOfItem(itemId, orgAmount)) { "Cannot remove this resource from Inventory." }
 

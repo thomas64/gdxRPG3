@@ -132,7 +132,7 @@ object Utils {
     }
 
     fun getCharImage(spriteId: String): Array<Array<TextureRegion>> {
-        val charConfig = resourceManager.getSpriteConfig(spriteId)
+        val charConfig = resourceManager.getSpriteConfig(spriteId)!!
         val path = String.format(CHAR_PATH, charConfig.source)
         val row = charConfig.row - 1
         val col = charConfig.col - 1
@@ -143,6 +143,7 @@ object Utils {
 
     fun getFaceImage(spriteId: String, isFlipped: Boolean = true): Image {
         val faceConfig = resourceManager.getSpriteConfig(spriteId)
+            ?: resourceManager.getSpriteConfig(spriteId.substringBeforeLast("_"))!!
         val path = String.format(FACE_PATH, faceConfig.source)
         val row = faceConfig.row - 1
         val col = faceConfig.col - 1
@@ -153,7 +154,7 @@ object Utils {
     }
 
     fun getDoorImage(spriteId: String, width: Int, isShadow: Boolean): Array<Array<TextureRegion>> {
-        val doorConfig = resourceManager.getSpriteConfig(spriteId)
+        val doorConfig = resourceManager.getSpriteConfig(spriteId)!!
         val path = String.format(DOOR_PATH, doorConfig.source)
         val row = doorConfig.row - 1
         val col = doorConfig.col - (if (isShadow) 0 else 1)

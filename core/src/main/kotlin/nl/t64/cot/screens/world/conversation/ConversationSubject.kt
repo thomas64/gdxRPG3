@@ -19,4 +19,8 @@ class ConversationSubject(private val observer: ConversationObserver) {
         observer.onNotifyShowBattleScreen(battleId)
     }
 
+    fun notifyReloadNpcs() {
+        observer.onNotifyReloadNpcs()
+    }
+
 }

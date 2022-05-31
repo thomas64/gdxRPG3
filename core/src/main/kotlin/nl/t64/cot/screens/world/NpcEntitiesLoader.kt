@@ -35,6 +35,7 @@ internal class NpcEntitiesLoader(private val currentMap: GameMap) {
 
     private fun loadEnemies() {
         currentMap.enemies
+            .filter { ConditionDatabase.isMeetingConditions(it.conditionIds, it.battleId) }
             .filterNot { gameData.battles.isBattleWon(it.battleId) }
             .forEach { loadEnemy(it) }
     }
@@ -50,27 +51,39 @@ internal class NpcEntitiesLoader(private val currentMap: GameMap) {
         val entityId = gameMapEnemy.name
         val enemyEntity = Entity(entityId, InputEnemy(), PhysicsEnemy(), GraphicsEnemy(entityId))
         npcEntities.add(enemyEntity)
-        if (EnemyContainer(gameMapEnemy.battleId).doEnemiesWantToBattle()) {
-            brokerManager.detectionObservers.addObserver(enemyEntity)
-        }
-        brokerManager.bumpObservers.addObserver(enemyEntity)
+        addObserversForEnemy(gameMapEnemy, enemyEntity)
         enemyEntity.send(LoadEntityEvent(gameMapEnemy.state,
                                          gameMapEnemy.direction,
                                          gameMapEnemy.position,
                                          gameMapEnemy.battleId))
     }
 
+    private fun addObserversForEnemy(gameMapEnemy: GameMapEnemy, enemyEntity: Entity) {
+        if (gameMapEnemy.state == EntityState.IMMOBILE) {
+            brokerManager.actionObservers.addObserver(enemyEntity)
+        } else {
+            if (EnemyContainer(gameMapEnemy.battleId).doEnemiesWantToBattle()) {
+                brokerManager.detectionObservers.addObserver(enemyEntity)
+            }
+            brokerManager.bumpObservers.addObserver(enemyEntity)
+        }
+    }
+
     private fun loadNpcEntity(gameMapNpc: GameMapNpc) {
         val entityId = gameMapNpc.name
         val npcEntity = Entity(entityId, InputNpc(), PhysicsNpc(), GraphicsNpc(entityId))
         npcEntities.add(npcEntity)
-        brokerManager.actionObservers.addObserver(npcEntity)
-        brokerManager.blockObservers.addObserver(npcEntity)
-        brokerManager.bumpObservers.addObserver(npcEntity)
+        addObserversForNpc(npcEntity)
         npcEntity.send(LoadEntityEvent(gameMapNpc.state,
                                        gameMapNpc.direction,
                                        gameMapNpc.position,
                                        gameMapNpc.conversation))
+    }
+
+    private fun addObserversForNpc(npcEntity: Entity) {
+        brokerManager.actionObservers.addObserver(npcEntity)
+        brokerManager.blockObservers.addObserver(npcEntity)
+        brokerManager.bumpObservers.addObserver(npcEntity)
     }
 
 }

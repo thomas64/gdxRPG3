@@ -10,21 +10,21 @@
         "type"         : "FIND_ITEM",
         "target"       : {"grace_ribbon": 1},
         "isOptional"   : true,
-        "linkedWith"   : "2"
+        "linkedWith": ["2"]
       },
       "2": {
         "taskPhrase"   : "Search for where Grace went",
         "updatedPhrase": "Find a hidden cave",
         "type"         : "DISCOVER",
         "isHidden"     : true,
-        "linkedWith"   : "3"
+        "linkedWith": ["3"]
       },
       "3": {
         "taskPhrase"   : "Find out if Grace is in the cave",
         "updatedPhrase": "Exit the cave past the guards",
         "type"         : "DISCOVER",
         "isHidden"     : true,
-        "linkedWith"   : "4"
+        "linkedWith": ["4"]
       },
       "4": {
         "taskPhrase"   : "Rescue Grace from Ardor",
@@ -57,21 +57,21 @@
         "target"    : {"scroll_of_orc_obedience": 1},
         "isOptional": true,
         "isHidden"  : true,
-        "linkedWith": "5"
+        "linkedWith": ["5"]
       },
       "3": {
         "taskPhrase": "Convince the guards to really fear Ardor",
         "type"      : "SAY_THE_RIGHT_THING",
         "isOptional": true,
         "isHidden"  : true,
-        "linkedWith": "5"
+        "linkedWith": ["5"]
       },
       "4": {
         "taskPhrase": "Kill the guards",
         "type"      : "KILL",
         "isOptional": true,
         "isHidden"  : true,
-        "linkedWith": "5"
+        "linkedWith": ["5"]
       },
       "5": {
         "taskPhrase": "Find a way to get past the guards",
@@ -87,13 +87,13 @@
       "1": {
         "taskPhrase": "Search near the described area",
         "type"      : "CHECK",
-        "linkedWith": "2"
+        "linkedWith": ["2"]
       },
       "2": {
         "taskPhrase": "Find the secret door",
         "type"      : "FREE",
         "isHidden"  : true,
-        "linkedWith": "3"
+        "linkedWith": ["3"]
       },
       "3": {
         "taskPhrase"   : "Look for the magic scroll",

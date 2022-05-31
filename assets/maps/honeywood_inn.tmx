@@ -121,7 +121,7 @@
   </object>
   <object id="52" name="cat1" type="w" x="336" y="360" width="48" height="24">
    <properties>
-    <property name="conversation" value="meow_honeywood_inn"/>
+    <property name="conversation" value="honeywood_inn_cat"/>
    </properties>
   </object>
  </objectgroup>

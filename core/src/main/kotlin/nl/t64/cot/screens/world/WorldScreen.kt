@@ -80,8 +80,8 @@ class WorldScreen : Screen,
 
     //region MapObserver ///////////////////////////////////////////////////////////////////////////////////////////////
 
-    override fun onNotifyFadeOut(actionAfterFade: () -> Unit, transitionColor: Color) {
-        fadeOut(actionAfterFade, transitionColor)
+    override fun onNotifyFadeOut(actionAfterFade: () -> Unit, transitionColor: Color, delay: Float) {
+        fadeOut(actionAfterFade, transitionColor, delay)
     }
 
     override fun onNotifyMapChanged(currentMap: GameMap) {
@@ -200,13 +200,6 @@ class WorldScreen : Screen,
         lootList.forEach { brokerManager.blockObservers.removeObserver(it) }
         lootList = LootLoader(mapManager.currentMap).createLoot()
     }
-
-    override fun onNotifyReceiveTaken() {
-//        val conversationId = currentNpcEntity.getConversationId()
-//        gameData.quests.accept(conversationId)
-//        val conversation = gameData.conversations.getConversationById(conversationId)
-//        conversation.currentPhraseId = Constant.PHRASE_ID_QUEST_ACCEPT
-    }
     //endregion
 
     //region ConversationObserver //////////////////////////////////////////////////////////////////////////////////////
@@ -225,6 +218,15 @@ class WorldScreen : Screen,
     override fun onNotifyShowBattleScreen(battleId: String) {
         gameState = GameState.BATTLE
         fadeOut({ BattleScreen.load(battleId, this) }, Color.BLACK)
+    }
+
+    override fun onNotifyReloadNpcs() {
+        fadeOut({ reloadNpcs() }, Color.BLACK, 1f)
+    }
+
+    private fun reloadNpcs() {
+        brokerManager.blockObservers.removeAllNpcObservers()
+        npcEntities = NpcEntitiesLoader(mapManager.currentMap).createNpcs()
     }
     //endregion
 
@@ -342,11 +344,12 @@ class WorldScreen : Screen,
             .forEach { it.render(batch) }
     }
 
-    private fun fadeOut(actionAfterFade: () -> Unit, transitionColor: Color) {
+    private fun fadeOut(actionAfterFade: () -> Unit, transitionColor: Color, delay: Float = 0f) {
         val transition = TransitionImage(transitionColor)
         stage.addActor(transition)
         transition.addAction(Actions.sequence(Actions.alpha(0f),
                                               Actions.fadeIn(Constant.FADE_DURATION),
+                                              Actions.delay(delay),
                                               Actions.run(actionAfterFade),
                                               Actions.removeActor()))
     }

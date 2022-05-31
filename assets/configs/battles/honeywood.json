@@ -12,5 +12,6 @@
   "battle0011"                 : {"battlers": [{"id": "green_slime", "amount": 2}]},
   "ardor_orc_generals"         : {"battlers": [{"id": "orc_general", "amount": 2}], "isEscapable": false},
   "ardor"                      : {"battlers": [{"id": "ardor", "amount": 1}], "isEscapable": false},
-  "quest_honeywood_inn_price-1": {"battlers": [{"id": "blue_bat", "amount": 6}]}
+  "quest_honeywood_inn_price-1": {"battlers": [{"id": "blue_bat", "amount": 6}]},
+  "quest_get_medicine"         : {"battlers": [{"id": "blue_slime_medicine", "amount": 1}]}
 }

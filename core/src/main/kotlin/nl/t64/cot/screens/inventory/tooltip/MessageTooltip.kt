@@ -31,8 +31,10 @@ class MessageTooltip : BaseTooltip() {
     }
 
     fun show(message: String, stage: Stage) {
-        stage.addActor(window)
-        showWindow(message)
+        if (!label.textEquals(message)) {
+            stage.addActor(window)
+            showWindow(message)
+        }
     }
 
     private fun showWindow(message: String) {
@@ -43,7 +45,8 @@ class MessageTooltip : BaseTooltip() {
                                                         Actions.fadeIn(Constant.FADE_DURATION),
                                                         Actions.delay(SHOW_DURATION),
                                                         Actions.fadeOut(Constant.FADE_DURATION),
-                                                        Actions.visible(false))))
+                                                        Actions.visible(false),
+                                                        Actions.run { label.setText("") })))
     }
 
     private fun setupWindow(message: String) {

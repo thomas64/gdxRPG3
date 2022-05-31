@@ -8,7 +8,7 @@ import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.constants.ScreenType
 
 
-class SpoilsCutsceneScreen : SpoilsScreen() {
+class SpoilsCutsceneScreen : LootScreen() {
 
     private lateinit var currentCutsceneScreen: ScreenType
 

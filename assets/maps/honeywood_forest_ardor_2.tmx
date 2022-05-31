@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="44" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="17" nextobjectid="63">
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="44" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="17" nextobjectid="63">
  <properties>
   <property name="bgm" value="bgm_ardor"/>
   <property name="bgs" value="bgs_creek"/>
@@ -102,7 +102,7 @@
   <object id="41" x="432" y="1056" width="48" height="48"/>
   <object id="42" x="648" y="528" width="72" height="24"/>
  </objectgroup>
- <objectgroup color="#5500ff" id="14" name="rest" visible="0">
+ <objectgroup color="#5500ff" id="14" name="rest">
   <object id="58" name="sparkle0012" x="768" y="1104" width="48" height="48"/>
   <object id="59" name="sparkle0013" x="240" y="768" width="48" height="48"/>
  </objectgroup>

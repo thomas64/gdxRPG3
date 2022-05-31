@@ -2,8 +2,10 @@ package nl.t64.cot.components.quest
 
 import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.brokerManager
+import nl.t64.cot.Utils.gameData
 import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.components.party.XpRewarder
 
 
@@ -12,8 +14,9 @@ data class QuestGraph(
     val title: String = "",
     val entityId: String = "",
     val summary: String = "",
+    val isSubQuest: Boolean = false,
     val isHidden: Boolean = false,
-    val linkedWith: String? = null,
+    val linkedWith: List<String> = emptyList(),
     val tasks: Map<String, QuestTask> = emptyMap()
 ) {
     var currentState: QuestState = QuestState.UNKNOWN
@@ -37,11 +40,20 @@ data class QuestGraph(
     fun isCurrentStateEqualOrLowerThan(questState: QuestState): Boolean = currentState.isEqualOrLowerThan(questState)
 
     fun getAllQuestTasksForVisual(): Array<QuestTask> {
-        return tasks.entries
-            .sortedBy { it.key }
+        return (tasks + getTasksOfAcceptedSubQuests())
+            .toSortedMap(compareBy<String> { it.length }.thenBy { it })
             .map { it.value }
             .filter { !it.isHidden }
             .toTypedArray()
+    }
+
+    private fun getTasksOfAcceptedSubQuests(): Map<String, QuestTask> {
+        return linkedWith
+            .map { gameData.quests.getQuestById(it) }
+            .filter { it.isCurrentStateEqualOrHigherThan(QuestState.ACCEPTED) }
+            .map { it.tasks }
+            .flatMap { it.entries }
+            .associate { it.key to it.value }
     }
 
     fun reset() {
@@ -58,12 +70,18 @@ data class QuestGraph(
 
     fun accept() {
         if (currentState.isEqualOrLowerThan(QuestState.KNOWN)) {
-            currentState = QuestState.ACCEPTED
-            if (resetState == QuestState.UNKNOWN) {
-                showMessageTooltipQuestNew()
-            }
+            setAcceptedAndPossiblyShowMessage()
         }
-        possibleFinish()
+        possibleFinish(true)
+    }
+
+    private fun setAcceptedAndPossiblyShowMessage() {
+        currentState = QuestState.ACCEPTED
+        if (isSubQuest) {
+            showMessageTooltipQuestUpdated()
+        } else {
+            showMessageTooltipQuestNew()
+        }
     }
 
     fun unclaim() {
@@ -94,9 +112,31 @@ data class QuestGraph(
 
     fun possibleSetGiveItemTaskComplete() {
         accept()
-        tasks.filterValues { it.type == QuestTaskType.GIVE_ITEM }
+        tasks.toSortedMap(compareBy<String> { it.length }.thenBy { it })
+            .filterValues { it.type == QuestTaskType.GIVE_ITEM }
+            .filterValues { !it.isHidden }
+            .filterValues { !it.isComplete }
             .filterValues { it.hasTargetInInventory() }
-            .forEach { setTaskComplete(it.key) }
+            .entries
+            .first()
+            .let { setTaskComplete(it.key) }
+    }
+
+    fun possibleSetTradeItemsTaskComplete(): Loot {
+        accept()
+        val loot: List<Loot> = tasks
+            .filterValues { it.type == QuestTaskType.TRADE_ITEMS }
+            .filterValues { it.hasTargetInInventory() }
+            .onEach { setTaskComplete(it.key) }
+            .map { Loot(it.value.receive.toMutableMap()) }
+        return if (loot.size == 1) loot[0]
+        else throw IllegalStateException("Can only contain 1 TRADE_ITEMS QuestTaskType.")
+    }
+
+    fun getReceiveItemsForgottenTradeItemsTask(): Loot {
+        return tasks.values
+            .first { it.type == QuestTaskType.TRADE_ITEMS }
+            .let { Loot(it.receive.toMutableMap()) }
     }
 
     fun setSayTheRightThingTaskComplete() {
@@ -125,15 +165,15 @@ data class QuestGraph(
 
     private fun unhideTaskWithLinkedTask(questTask: QuestTask) {
         questTask.isHidden = false
-        handleLinked(questTask)
+        handleLinkedTasksOf(questTask)
     }
 
-    private fun handleLinked(questTask: QuestTask) {
-        questTask.linkedWith?.let {
-            val nextTask = tasks[it]!!
-            nextTask.handleLinked()
-            if (nextTask.isComplete) {
-                handleLinked(nextTask)
+    private fun handleLinkedTasksOf(questTask: QuestTask) {
+        questTask.linkedWith.forEach {
+            val linkedTask = tasks[it] ?: gameData.quests.getQuestById(linkedWith[0]).tasks[it]!!
+            linkedTask.handleLinked()
+            if (linkedTask.isComplete) {
+                handleLinkedTasksOf(linkedTask)
             }
         }
     }
@@ -153,24 +193,14 @@ data class QuestGraph(
             .all { it.value.isComplete }
     }
 
-    fun forceFinish(showTooltip: Boolean = false) {
+    fun forceFinish() {
         if (currentState != QuestState.FINISHED) {
-            finish(showTooltip)
+            finish(false)
         }
     }
 
-//    fun handleReceive() {
-//        val receiveLoot = tasks.values
-//            .filter { it.type == QuestTaskType.ITEM_DELIVERY }
-//            .map { Loot(it.target as MutableMap<String, Int>) }
-//            .first()
-//    }
-
-    private fun possibleFinish(showTooltip: Boolean = true) {
-        if (currentState.isEqualOrHigherThan(QuestState.ACCEPTED)
-            && currentState != QuestState.FINISHED
-            && areAllQuestTasksComplete()
-        ) {
+    private fun possibleFinish(showTooltip: Boolean) {
+        if (isReadyToBeFinished()) {
             if (resetState == QuestState.FINISHED) {
                 finish(false)
             } else {
@@ -179,7 +209,13 @@ data class QuestGraph(
         }
     }
 
-    fun finish(showTooltip: Boolean = true) {
+    private fun isReadyToBeFinished(): Boolean {
+        return currentState.isEqualOrHigherThan(QuestState.ACCEPTED)
+                && currentState != QuestState.FINISHED
+                && areAllQuestTasksComplete()
+    }
+
+    fun finish(showTooltip: Boolean) {
         XpRewarder.receivePossibleXp(id)
         possibleSetLastReturnTaskComplete()
         currentState = QuestState.FINISHED
@@ -187,12 +223,12 @@ data class QuestGraph(
     }
 
     private fun possibleSetLastReturnTaskComplete() {
-        tasks.entries
-            .sortedBy { it.key }
+        tasks.toSortedMap(compareBy<String> { it.length }.thenBy { it })
+            .map { it.value }
             .takeLast(1)
-            .filter { it.value.type == QuestTaskType.RETURN }
-            .filter { !it.value.isComplete }
-            .forEach { it.value.setComplete() }
+            .filter { it.type == QuestTaskType.RETURN }
+            .filter { !it.isComplete }
+            .forEach { it.setComplete() }
     }
 
     private fun areAllQuestTasksComplete(): Boolean {
@@ -202,19 +238,21 @@ data class QuestGraph(
     }
 
     private fun showMessageTooltipQuestNew() {
-        if (!isHidden) {
+        if (!isHidden && resetState == QuestState.UNKNOWN) {
             brokerManager.questObservers.notifyShowMessageTooltip("New quest:" + System.lineSeparator() + title)
         }
     }
 
     private fun showMessageTooltipQuestUpdated() {
-        if (!isHidden && currentState == QuestState.ACCEPTED) {
+        if (!isHidden && currentState == QuestState.ACCEPTED
+            && (!isReadyToBeFinished() || (isSubQuest && isReadyToBeFinished()))
+        ) {
             brokerManager.questObservers.notifyShowMessageTooltip("Quest updated:" + System.lineSeparator() + title)
         }
     }
 
     private fun showMessageTooltipQuestCompleted() {
-        if (!isHidden) {
+        if (!isHidden && !isSubQuest) {
             audioManager.handle(AudioCommand.SE_STOP_ALL)
             audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_REWARD)
             brokerManager.questObservers.notifyShowMessageTooltip("Quest completed:" + System.lineSeparator() + title)

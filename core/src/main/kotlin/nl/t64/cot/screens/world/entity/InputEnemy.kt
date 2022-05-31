@@ -133,6 +133,7 @@ class InputEnemy : InputComponent() {
             EntityState.WALKING -> state = EntityState.IDLE
             EntityState.FLYING -> direction = Direction.getRandom()
             EntityState.IDLE_ANIMATING -> state = EntityState.FLYING
+            EntityState.IMMOBILE -> state = EntityState.IMMOBILE
             else -> throw IllegalArgumentException("Unexpected value: $state")
         }
     }

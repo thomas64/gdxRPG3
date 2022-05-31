@@ -2,7 +2,7 @@
   "gold"       : {
     "name"       : "Gold",
     "group"      : "RESOURCE",
-    "sort"       : 90090,
+    "sort"       : 90500,
     "description": [
       "Gold can be used to pay for goods or services."
     ]
@@ -45,6 +45,13 @@
     "price"      : 1,
     "description": ["ToDo", "ToDo"]
   },
+  "blue_jelly" : {
+    "name"       : "Blue Jelly",
+    "group"      : "RESOURCE",
+    "sort"       : 90041,
+    "price"      : 1,
+    "description": ["ToDo", "ToDo"]
+  },
   "cloth"      : {
     "name"       : "Cloth",
     "group"      : "RESOURCE",
@@ -77,6 +84,13 @@
     "name"       : "Metal",
     "group"      : "RESOURCE",
     "sort"       : 90090,
+    "price"      : 1,
+    "description": ["ToDo", "ToDo"]
+  },
+  "horseshoe"  : {
+    "name"       : "Horseshoe",
+    "group"      : "RESOURCE",
+    "sort"       : 90100,
     "price"      : 1,
     "description": ["ToDo", "ToDo"]
   }

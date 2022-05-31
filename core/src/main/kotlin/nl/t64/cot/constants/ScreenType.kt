@@ -39,6 +39,7 @@ enum class ScreenType(val screenClass: Class<out Screen>) {
     FIND(FindScreen::class.java),
     REWARD(RewardScreen::class.java),
     RECEIVE(ReceiveScreen::class.java),
+    TRADE(TradeScreen::class.java),
     SPOILS(SpoilsScreen::class.java),
     SPOILS_CUTSCENE(SpoilsCutsceneScreen::class.java),
 

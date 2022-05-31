@@ -90,7 +90,7 @@ class ResourceManager {
         return assetManager.getAsset(path)
     }
 
-    fun getSpriteConfig(spriteId: String): SpriteConfig {
+    fun getSpriteConfig(spriteId: String): SpriteConfig? {
         if (spriteConfigs.isEmpty) {
             loadSpriteConfigs()
         }

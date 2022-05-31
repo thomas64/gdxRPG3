@@ -1,7 +1,7 @@
 {
   "fallen_tree"         : {
     "type"          : "conversation",
-    "condition"     : ["i_c_!quest_a_helping_horse_finished"],
+    "condition"     : ["_c_!=_f_q_quest_a_helping_horse"],
     "conversationId": "fallen_tree",
     "entityId"      : "mozes",
     "doesRepeat"    : true
@@ -14,7 +14,7 @@
   },
   "cave_not_yet_found"  : {
     "type"          : "conversation",
-    "condition"     : ["_r_==_u_q_quest_grace_is_missing", "_t_1_q_quest_grace_is_missing"],
+    "condition"     : ["_r_==_u_q_quest_grace_is_missing", "_ta_1_q_quest_grace_is_missing"],
     "conversationId": "dont_go_south",
     "entityId"      : "mozes",
     "doesRepeat"    : true

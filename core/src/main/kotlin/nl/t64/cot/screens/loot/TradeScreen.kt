@@ -10,18 +10,18 @@ import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 
 
-class ReceiveScreen : LootScreen() {
+class TradeScreen : LootScreen() {
 
     private lateinit var conversation: ConversationGraph
 
     companion object {
-        fun load(receive: Loot, conversation: ConversationGraph) {
+        fun load(trade: Loot, conversation: ConversationGraph) {
             audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_SPARKLE)
-            val receiveScreen = screenManager.getScreen(ScreenType.RECEIVE) as ReceiveScreen
-            receiveScreen.loot = receive
-            receiveScreen.lootTitle = "   Receive"
-            receiveScreen.conversation = conversation
-            screenManager.openParchmentLoadScreen(ScreenType.RECEIVE)
+            val tradeScreen = screenManager.getScreen(ScreenType.TRADE) as TradeScreen
+            tradeScreen.loot = trade
+            tradeScreen.lootTitle = "   Exchange"
+            tradeScreen.conversation = conversation
+            screenManager.openParchmentLoadScreen(ScreenType.TRADE)
         }
     }
 

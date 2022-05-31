@@ -12,5 +12,12 @@
     "sort"       : 70015,
     "price"      : 25,
     "description": ["Makes an orc follow your command unconditionally.", "Only works when fairies are near."]
+  },
+  "horse_medicine"         : {
+    "name"       : "Horse Medicine",
+    "group"      : "ITEM",
+    "sort"       : 70020,
+    "price"      : 1,
+    "description": ["ToDo"]
   }
 }

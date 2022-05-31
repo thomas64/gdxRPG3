@@ -17,8 +17,8 @@ class Scenario {
 
     fun startSecondCycle() {
         reviveMozes()
-        gameData.resetCycle()
         setQuestGraceComplete()
+        gameData.resetCycle()
         addQuestArdorToLogbook()
         profileManager.saveProfile()
     }

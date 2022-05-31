@@ -5,6 +5,5 @@ interface LootObserver {
 
     fun onNotifySpoilsUpdated()
     fun onNotifyLootTaken()
-    fun onNotifyReceiveTaken()
 
 }

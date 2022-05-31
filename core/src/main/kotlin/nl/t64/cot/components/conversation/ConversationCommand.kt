@@ -12,9 +12,12 @@ enum class ConversationCommand {
     HEAL_LIFE,
     RECEIVE_XP,
     START_BATTLE,
+    RELOAD_NPCS,
 
     KNOW_QUEST,
     ACCEPT_QUEST,
+    TRADE_QUEST_ITEMS,
+    RE_TRADE_QUEST_ITEMS,
     SHOW_QUEST_ITEM,
     WEAR_QUEST_ITEM,
     GIVE_QUEST_ITEM,

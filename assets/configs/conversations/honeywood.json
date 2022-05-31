@@ -26,7 +26,8 @@
           {"text": "Curious, when did the tree fall down?", "nextId": "10"},
           {"text": "Oh no! That's bad, I really need to be in Honeywood Forest.", "nextId": "20"},
           {"text": "Why don't you remove the tree immediately?", "nextId": "20"},
-          {"text": "Alright, good luck with that. (Leave conversation)", "command": "EXIT", "nextId": "2"}
+          {"condition": ["i_c_!=_k_q_this"], "text": "Alright, good luck with that. (Leave conversation)", "command": "EXIT", "nextId": "2"},
+          {"condition": ["i_c_==_k_q_this"], "text": "Alright, good luck with that. (Leave conversation)", "command": "EXIT", "nextId": "31"}
         ]
       },
       "10": {"face": "man02", "text": ["Just a few minutes ago. I heard a loud bang, so I came straight this way to see what happened."]},
@@ -62,8 +63,8 @@
       "1": {"text": ["I'm a traveling priest from the city.", "Young man, do you want to be saved?"]},
       "2": {
         "face": "mozes", "text": ["Saved? From what?"], "choices": [
-          {"text": "Yes please, I would like that. (Save game)", "nextId": "3"},
-          {"text": "No thanks, that's not necessary. (Leave conversation)", "command": "EXIT"}
+          {"text": "But sure, go ahead. (Save game)", "nextId": "3"},
+          {"text": "No thanks, I think I'm doing pretty well. (Leave conversation)", "command": "EXIT"}
         ]
       },
       "3": {"face": "priest01", "text": ["Your soul is now destined for God."], "choices": [{"command": "SAVE_GAME"}]}
@@ -97,7 +98,7 @@
           {"text": "No thanks, now's not necessary. (Leave conversation)", "command": "EXIT"},
           {"condition": ["i_c_==_u_q_this"], "text": "Is something wrong innkeeper? You look troubled...", "nextId": "10"},
           {"condition": ["i_c_==_k_q_this"], "text": "[About those bats...]", "nextId": "20"},
-          {"condition": ["i_t_1_q_this"], "text": "[It is done.]", "nextId": "30"}
+          {"condition": ["i_ta_1_q_this"], "text": "[It is done.]", "nextId": "30"}
         ]
       },
       "2"   : {"text": ["Your health has been restored.", "Please come back anytime you feel weary."], "choices": [{"command": "EXIT"}]},
@@ -138,7 +139,7 @@
       "1": {"text": ["Honeywood is such a pleasant little village.", "I love to stay here every once in a while."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "meow_honeywood_inn"         : {
+  "honeywood_inn_cat"          : {
     "phrases": {
       "1": {
         "text": ["Meow."], "choices": [
@@ -150,9 +151,92 @@
       "3": {"face": "mozes", "text": ["* Druid skill rank 1 needed. *"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "horse_join_party"           : {
+  "quest_get_horse"            : {
     "phrases": {
-      "1": {"text": ["Neigh."], "choices": [{"command": "EXIT"}]}
+      "1": {
+        "text": ["[Hi Mozes.]"], "choices": [
+          {"condition": ["i_rc_==_a_q_quest_a_helping_horse"], "nextId": "2"},
+          {"condition": ["i_rc_!=_a_q_quest_a_helping_horse"], "command": "EXIT"}
+        ]
+      },
+      "2": {
+        "text": ["[You can have horse. But it is sick. Want to help?]"], "choices": [
+          {"text": "[Yes.]", "command": "ACCEPT_QUEST", "nextId": "3"},
+          {"text": "[No.]", "command": "EXIT"}
+        ]
+      },
+      "3": {"text": ["[Thanks]"], "choices": [{"command": "EXIT", "nextId": "4"}]},
+      "4": {
+        "text": ["[Do you have medicine?]"], "choices": [
+          {"condition": ["horse_medicine1"], "text": "[Horse Medicine 1] [Yes.]", "command": "GIVE_QUEST_ITEM", "nextId": "5"},
+          {"text": "[No.]", "command": "EXIT", "nextId": "4"}
+        ]
+      },
+      "5": {
+        "text": ["[Horse is healed, but I also need 4 horseshoes. Do you got those?]"], "choices": [
+          {"condition": ["horseshoe4"], "text": "[Horseshoe 4] [Yes.]", "command": "GIVE_QUEST_ITEM", "nextId": "6"},
+          {"text": "[No.]", "command": "EXIT", "nextId": "5"}
+        ]
+      },
+      "6": {"text": ["[Good, now I will see that Enopa makes her way to Lennor.]"], "choices": [{"command": "RELOAD_NPCS", "nextId": "7"}]},
+      "7": {"text": ["[Has she been of any help?]"], "choices": [{"command": "EXIT", "nextId": "7"}]}
+    }
+  },
+  "honeywood_horse_follow"     : {
+    "phrases": {
+      "1": {"text": ["Enopa: Neigh."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "quest_get_medicine"         : {
+    "phrases": {
+      "1"   : {
+        "text": ["[Hi Mozes.]"], "choices": [
+          {"condition": ["i_rc_==_a_q_quest_get_horse"], "nextId": "2"},
+          {"condition": ["i_rc_!=_a_q_quest_get_horse"], "command": "EXIT"}
+        ]
+      },
+      "2"   : {
+        "text": ["[I'm out of medicine, get the necessary things for me.]"], "choices": [
+          {"text": "[Yes.]", "command": "ACCEPT_QUEST", "nextId": "3"},
+          {"text": "[No.]", "command": "EXIT"}
+        ]
+      },
+      "3"   : {"text": ["[Thanks]"], "choices": [{"command": "EXIT", "nextId": "4"}]},
+      "4"   : {
+        "text": ["[Do you have the herbs and stuff?]"], "choices": [
+          {"condition": ["herb6", "blue_jelly1"], "text": "[Herbs 6, Blue Jelly 1] [Yes.]", "command": "GIVE_QUEST_ITEM", "nextId": "5"},
+          {"text": "[No.]", "command": "EXIT", "nextId": "4"}
+        ]
+      },
+      "5"   : {"text": ["[Here is the medicine.]"], "choices": [{"command": "REWARD_QUEST"}]},
+      "1100": {"text": ["[You forgot the medicine.]"], "choices": [{"command": "REWARD_QUEST"}]},
+      "1200": {"text": ["[Did it work?]"], "choices": [{"command": "EXIT", "nextId": "1201"}]},
+      "1201": {"text": ["[Hi Mozes.]"], "choices": [{"command": "EXIT", "nextId": "1201"}]}
+    }
+  },
+  "quest_get_horseshoes"       : {
+    "phrases": {
+      "1"   : {
+        "text": ["[Hi Mozes, I'm Black Smith.]"], "choices": [
+          {"condition": ["i_tn_6_q_quest_get_horse"], "command": "EXIT"},
+          {"condition": ["i_ta_6_q_quest_get_horse"], "nextId": "2"},
+          {"condition": ["i_tc_8_q_quest_get_horse"], "command": "EXIT"}
+        ]
+      },
+      "2"   : {
+        "text": ["[For 2 metal I can make 1 horseshoe.]"], "choices": [
+          {"condition": ["metal2"], "text": "[Metal 2] [Yes.]", "nextId": "3"},
+          {"text": "[No.]", "command": "EXIT"}
+        ]
+      },
+      "3"   : {"text": ["[One moment, let me make one for you. Here you go.]"], "choices": [{"command": "TRADE_QUEST_ITEMS"}]},
+      "1100": {"text": ["[You forgot your horseshoe.]"], "choices": [{"command": "RE_TRADE_QUEST_ITEMS"}]},
+      "1200": {
+        "text": ["[Hi there again.]"], "choices": [
+          {"condition": ["i_ta_6_q_quest_get_horse"], "nextId": "2"},
+          {"condition": ["i_tc_8_q_quest_get_horse"], "command": "EXIT"}
+        ]
+      }
     }
   },
   "honeywood_soldiers"         : {

@@ -18,6 +18,7 @@ class PhysicsEnemy : PhysicsComponent() {
     private var path: DefaultGraphPath<TiledNode> = DefaultGraphPath()
     private var isDetectingPlayer: Boolean = false
     private var isBumped: Boolean = false
+    private var isSelected: Boolean = false
 
     init {
         velocity = Constant.MOVE_SPEED_1
@@ -49,6 +50,11 @@ class PhysicsEnemy : PhysicsComponent() {
                 isBumped = true
             }
         }
+        if (event is OnActionEvent) {
+            if (event.checkRect.overlaps(boundingBox)) {
+                isSelected = true
+            }
+        }
     }
 
     private fun initNpc(loadEvent: LoadEntityEvent) {
@@ -74,6 +80,10 @@ class PhysicsEnemy : PhysicsComponent() {
         }
         if (isBumped) {
             isBumped = false
+            brokerManager.componentObservers.notifyShowBattleScreen(battleId, entity)
+        }
+        if (isSelected) {
+            isSelected = false
             brokerManager.componentObservers.notifyShowBattleScreen(battleId, entity)
         }
     }
