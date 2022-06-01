@@ -43,12 +43,29 @@ class GraphicsNpc(spriteId: String) : GraphicsComponent() {
     }
 
     override fun renderOnMiniMap(entity: Entity, batch: Batch, shapeRenderer: ShapeRenderer) {
-        if (entity.getConversationId().contains("shop") && state != EntityState.INVISIBLE) {
-            shapeRenderer.color = Color.YELLOW
-            shapeRenderer.circle(position.x + Constant.HALF_TILE_SIZE,
-                                 position.y + Constant.HALF_TILE_SIZE,
-                                 Constant.HALF_TILE_SIZE)
+        if (state != EntityState.INVISIBLE) {
+            shapeRenderer.color = with(entity.getConversationId()) {
+                when {
+                    containsAnyOf("shop") -> Color.GOLD
+                    containsAnyOf("academy") -> Color.ROYAL
+                    containsAnyOf("school") -> Color.TEAL
+                    containsAnyOf("heal", "inn") -> Color.LIME
+                    containsAnyOf("priest", "save") -> Color.SALMON
+                    else -> return
+                }
+            }
+            shapeRenderer.drawCircle()
         }
+    }
+
+    private fun String.containsAnyOf(vararg strings: String): Boolean {
+        return strings.any { it in this }
+    }
+
+    private fun ShapeRenderer.drawCircle() {
+        circle(position.x + Constant.HALF_TILE_SIZE,
+               position.y + Constant.HALF_TILE_SIZE,
+               Constant.HALF_TILE_SIZE)
     }
 
 }

@@ -90,6 +90,26 @@
       }
     }
   },
+  "honeywood_academy1"         : {
+    "phrases": {
+      "1": {
+        "text": ["Good day young sir, would you like to train a skill?"], "choices": [
+          {"text": "Yes please. (Open academy)", "command": "LOAD_ACADEMY"},
+          {"text": "No thanks. (Leave conversation)", "command": "EXIT"}
+        ]
+      }
+    }
+  },
+  "honeywood_academy2"         : {
+    "phrases": {
+      "1": {
+        "text": ["Hey Mozes, don't say a word. You want to train a skill."], "choices": [
+          {"text": "Yes please. (Open academy)", "command": "LOAD_ACADEMY"},
+          {"text": "No thanks. (Leave conversation)", "command": "EXIT"}
+        ]
+      }
+    }
+  },
   "quest_honeywood_inn_price-1": {
     "phrases": {
       "1"   : {
@@ -141,14 +161,13 @@
   },
   "honeywood_inn_cat"          : {
     "phrases": {
-      "1": {
+      "1"   : {
         "text": ["Meow."], "choices": [
-          {"condition": ["i_druid1"], "nextId": "2"},
-          {"condition": ["i_!druid1"], "nextId": "3"}
+          {"condition": ["i_druid1"], "nextId": "2"}
         ]
       },
-      "2": {"text": ["I'm here only for the mice, there's no way I'll do bats."], "choices": [{"command": "EXIT"}]},
-      "3": {"face": "mozes", "text": ["* Druid skill rank 1 needed. *"], "choices": [{"command": "EXIT"}]}
+      "1300": {"face": "mozes", "text": ["* Druid skill rank 1 needed. *"], "choices": [{"command": "EXIT"}]},
+      "2"   : {"text": ["I'm here only for the mice, there's no way I'll do bats."], "choices": [{"command": "EXIT"}]}
     }
   },
   "quest_get_horse"            : {
@@ -182,9 +201,19 @@
       "7": {"text": ["[Has she been of any help?]"], "choices": [{"command": "EXIT", "nextId": "7"}]}
     }
   },
-  "honeywood_horse_follow"     : {
+  "honeywood_horse"            : {
     "phrases": {
-      "1": {"text": ["Enopa: Neigh."], "choices": [{"command": "EXIT"}]}
+      "1"   : {
+        "text": ["Neigh."], "choices": [
+          {"condition": ["i_druid2", "_tn_6_q_quest_get_horse"], "nextId": "2"},
+          {"condition": ["i_druid2", "_tc_6_q_quest_get_horse", "_c_!=_f_q_quest_get_horse"], "nextId": "3"},
+          {"condition": ["i_druid2", "_c_==_f_q_quest_get_horse"], "nextId": "4"}
+        ]
+      },
+      "1300": {"face": "mozes", "text": ["* Druid skill rank 2 needed. *"], "choices": [{"command": "EXIT"}]},
+      "2"   : {"text": ["[I'm not so feeling well...]"], "choices": [{"command": "EXIT"}]},
+      "3"   : {"text": ["[Thank you so much for getting me a medicine.]"], "choices": [{"command": "EXIT"}]},
+      "4"   : {"text": ["[I will fix that tree for you in no time!]"], "choices": [{"command": "EXIT"}]}
     }
   },
   "quest_get_medicine"         : {

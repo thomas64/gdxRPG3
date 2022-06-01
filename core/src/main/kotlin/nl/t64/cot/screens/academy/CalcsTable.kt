@@ -9,7 +9,7 @@ import nl.t64.cot.screens.inventory.BaseTable
 import nl.t64.cot.screens.inventory.tooltip.PersonalityTooltip
 
 
-private const val FIRST_COLUMN_WIDTH = 230f
+private const val FIRST_COLUMN_WIDTH = 150f
 private const val SECOND_COLUMN_WIDTH = 60f
 
 internal class CalcsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {

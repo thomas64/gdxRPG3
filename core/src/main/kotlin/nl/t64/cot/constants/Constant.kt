@@ -46,6 +46,7 @@ object Constant {
     const val PHRASE_ID_INN_NEGATIVE = "1000"
     const val PHRASE_ID_LOOT_LEFTOVER = "1100"
     const val PHRASE_ID_LOOT_TAKEN = "1200"
+    const val PHRASE_ID_NO_CONDITIONS = "1300"
     const val PHRASE_ID_PARTY_FULL = "9000"
 
     const val KEYCODE_L1 = 1000

@@ -1,5 +1,7 @@
 package nl.t64.cot.components.conversation
 
+import nl.t64.cot.constants.Constant
+
 
 class ConversationPhrase(
     val face: String = "",
@@ -16,6 +18,8 @@ class ConversationPhrase(
     fun getChoices(currentPhraseId: String): List<ConversationChoice> {
         return if (choices.isEmpty()) {
             createArrowChoiceThatPointsToNextPhraseId(currentPhraseId)
+        } else if (choices.none { it.isMeetingCondition() }) {
+            createArrowChoiceThatPointsToNoConditionsPhraseId()
         } else {
             getVisibleChoices()
         }
@@ -24,6 +28,11 @@ class ConversationPhrase(
     private fun createArrowChoiceThatPointsToNextPhraseId(currentPhraseId: String): List<ConversationChoice> {
         val nextId = (currentPhraseId.toInt() + 1).toString()
         val choice = ConversationChoice(nextId = nextId).apply { initId(conversationId) }
+        return listOf(choice)
+    }
+
+    private fun createArrowChoiceThatPointsToNoConditionsPhraseId(): List<ConversationChoice> {
+        val choice = ConversationChoice(nextId = Constant.PHRASE_ID_NO_CONDITIONS).apply { initId(conversationId) }
         return listOf(choice)
     }
 

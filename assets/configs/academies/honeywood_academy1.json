@@ -1,0 +1,10 @@
+{
+  "barbarian": 1,
+  "warrior"  : 1,
+  "shield"   : 1,
+  "hafted"   : 1,
+  "pole"     : 1,
+  "sword"    : 1,
+  "missile"  : 1,
+  "thrown"   : 1
+}
