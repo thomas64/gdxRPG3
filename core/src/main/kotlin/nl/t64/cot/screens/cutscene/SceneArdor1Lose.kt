@@ -44,7 +44,7 @@ class SceneArdor1Lose : CutsceneScreen() {
             guard2 = CutsceneActor.createCharacter("orc_general")
         }
         magic = Utils.createImage("sprites/objects/magic_inside_d2.png", 0, 96, 144, 144)
-        bloodFlash = TransitionImage(Color.RED)
+        bloodFlash = TransitionImage(color = Color.RED)
         flames = List(800) { CutsceneActor.createFlame() }
 
         actorsStage.addActor(mozes)
@@ -253,7 +253,7 @@ class SceneArdor1Lose : CutsceneScreen() {
 
             Actions.run {
                 mozesDead.isVisible = false
-                setMapWithBgsOnly("honeywood_mozes_house")
+                setMapWithBgsOnly("honeywood_house_mozes")
                 setCameraPosition(0f, 720f)
                 mozes.isVisible = true
                 mozes.setPosition(192f, 534f)
@@ -292,7 +292,7 @@ class SceneArdor1Lose : CutsceneScreen() {
     override fun exitScreen() {
         audioManager.handle(AudioCommand.SE_STOP, AudioEvent.SE_MAGIC)
         scenario.startSecondCycle()
-        endCutsceneAndOpenMap("honeywood_mozes_house", "scene_ardor_1")
+        endCutsceneAndOpenMap("honeywood_house_mozes", "scene_ardor_1")
     }
 
 }

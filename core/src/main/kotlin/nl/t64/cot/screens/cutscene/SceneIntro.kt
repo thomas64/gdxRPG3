@@ -151,7 +151,7 @@ class SceneIntro : CutsceneScreen() {
 
             Actions.delay(1f),
             Actions.run {
-                setMapWithBgmBgs("honeywood_mozes_house")
+                setMapWithBgmBgs("honeywood_house_mozes")
                 setCameraPosition(0f, 720f)
                 door1.isVisible = false
                 mozes.setPosition(96f, 528f)

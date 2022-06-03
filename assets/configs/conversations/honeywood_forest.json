@@ -49,7 +49,7 @@
       "1" : {"text": ["Dear young Mozes, I'm so glad you finally entered our peaceful domain.", "Unfortunately it has to be in these dark times."]},
       "2" : {"face": "mozes", "text": ["Why, thank you."]},
       "3" : {
-        "face": "mozes", "text": [""], "choices": [
+        "face": "mozes", "choices": [
           {"text": "How do you all seem to know me?", "nextId": "10"},
           {"text": "What do you mean with dark times?", "nextId": "20"},
           {"condition": ["i_c_<=_k_q_this"], "text": "I'm looking for my little sister Grace.", "nextId": "30"},
@@ -73,7 +73,7 @@
       "26": {"face": "fairy1", "text": ["See, this is why you are so lovely."]},
       "27": {"face": "fairy1", "text": ["But no, Ardor is far out of your league.", "There won't be anything you could do in this short amount of time.", "You must rely on the larger forces of good to handle Ardor."]},
       "28": {
-        "face": "mozes", "text": [""], "choices": [
+        "face": "mozes", "choices": [
           {"text": "What do you mean with the larger forces of good?", "nextId": "80"},
           {"text": "Thanks for telling me, I'll watch out for him.", "nextId": "3"}
         ]
@@ -84,7 +84,7 @@
       "33": {"face": "fairy1", "text": ["You are brave Mozes, but bravery alone won't do the trick.", "We would like to help you in your search for Grace."]},
       "34": {"face": "fairy1", "text": ["In the cave you came from we've hidden a magic scroll, and you may use it against any orcs you might encounter on your quest."]},
       "35": {
-        "face": "mozes", "text": [""], "choices": [
+        "face": "mozes", "choices": [
           {"text": "What do you mean? Why does Ardor has Grace?", "nextId": "40"},
           {"text": "What does the scroll do? How do I use it?", "nextId": "50"},
           {"text": "How can I get it, if it is hidden?", "command": "ACCEPT_QUEST", "nextId": "60"}

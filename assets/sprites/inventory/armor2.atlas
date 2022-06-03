@@ -186,35 +186,35 @@ epic_ring_of_healing
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_rope
+epic_shield_amulet
   rotate: false
   xy: 310, 186
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_shield_amulet
+epic_silence_boots
   rotate: false
   xy: 372, 186
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_silence_boots
+epic_smiths_hammer
   rotate: false
   xy: 0, 248
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_smiths_hammer
+epic_sticky_gloves
   rotate: false
   xy: 62, 248
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_sticky_gloves
+epic_thiefs_rope
   rotate: false
   xy: 124, 248
   size: 62, 62

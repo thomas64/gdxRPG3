@@ -114,7 +114,6 @@ data class QuestGraph(
         accept()
         tasks.toSortedMap(compareBy<String> { it.length }.thenBy { it })
             .filterValues { it.type == QuestTaskType.GIVE_ITEM }
-            .filterValues { !it.isHidden }
             .filterValues { !it.isComplete }
             .filterValues { it.hasTargetInInventory() }
             .entries

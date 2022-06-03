@@ -1,0 +1,5 @@
+{
+  "door_gate_honeywood_cave"     : {"type": "LARGE_WOODEN_CAVE_GATE", "spriteId": "large_wooden_cave_gate"},
+  "door_small_honeywood_cave"    : {"type": "SMALL_HIDDEN_CAVE_DOOR", "spriteId": "small_hidden_cave_door"},
+  "door_honeywood_house_elder_b1": {"type": "SMALL", "spriteId": "forged_left", "keyId": "todo_key"}
+}

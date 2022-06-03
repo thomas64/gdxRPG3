@@ -2,8 +2,12 @@
   "note_grace_to_parents": {
     "phrases": {
       "1": {
-        "text"   : ["\"To mommy and daddy,", "love you forever.          ", "", "                         Grace\""],
-        "choices": [{"command": "EXIT"}]
+        "text"      : [
+          "\"To mommy and daddy,",
+          "love you forever.          ",
+          "",
+          "                         Grace\""
+        ], "choices": [{"command": "EXIT"}]
       }
     }
   }

@@ -22,6 +22,7 @@ private const val SUMMARY_WINDOW_POSITION_X = 18f
 private const val SUMMARY_WINDOW_POSITION_Y = 834f
 private const val TASKS_WINDOW_POSITION_X = 18f
 private const val TASKS_WINDOW_POSITION_Y = 50f
+private const val LABEL_PADDING_LEFT = 100f
 private const val LABEL_PADDING_BOTTOM = 26f
 
 class QuestLogScreen : ParchmentScreen() {
@@ -41,15 +42,16 @@ class QuestLogScreen : ParchmentScreen() {
 
         val questLogUI = QuestLogUI().apply {
             questListWindow.setPosition(QUESTS_WINDOW_POSITION_X, QUESTS_WINDOW_POSITION_Y)
-            summaryWindow.setPosition(Gdx.graphics.width / 2f + SUMMARY_WINDOW_POSITION_X, SUMMARY_WINDOW_POSITION_Y)
-            taskListWindow.setPosition(Gdx.graphics.width / 2f + TASKS_WINDOW_POSITION_X, TASKS_WINDOW_POSITION_Y)
+            val quarterOfScreenX = Gdx.graphics.width * .25f
+            summaryWindow.setPosition(quarterOfScreenX + SUMMARY_WINDOW_POSITION_X, SUMMARY_WINDOW_POSITION_Y)
+            taskListWindow.setPosition(quarterOfScreenX + TASKS_WINDOW_POSITION_X, TASKS_WINDOW_POSITION_Y)
             addToStage(stage)
             applyListeners()
         }
 
         val buttonLabel = Label(createText(), LabelStyle(BitmapFont(), Color.BLACK))
-        buttonLabel.setPosition((QUESTS_WINDOW_POSITION_X + (questLogUI.questListWindow.width / 2f))
-                                        - (buttonLabel.width / 2f), LABEL_PADDING_BOTTOM)
+        val buttonLabelX = (LABEL_PADDING_LEFT + questLogUI.questListWindow.width) - (buttonLabel.width / 2f)
+        buttonLabel.setPosition(buttonLabelX, LABEL_PADDING_BOTTOM)
         stage.addActor(buttonLabel)
         stage.keyboardFocus = questLogUI.questListTable.questList
         stage.scrollFocus = questLogUI.questListTable.scrollPane

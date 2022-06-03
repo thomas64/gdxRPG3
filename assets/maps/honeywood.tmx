@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="96" height="78" tilewidth="24" tileheight="24" infinite="0" nextlayerid="56" nextobjectid="383">
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="96" height="78" tilewidth="24" tileheight="24" infinite="0" nextlayerid="56" nextobjectid="389">
  <properties>
   <property name="bgm" value="bgm_town"/>
   <property name="lightmap_camera" value="sunlight"/>
@@ -149,7 +149,7 @@
   <object id="333" name="sand" x="288" y="456" width="48" height="24"/>
   <object id="335" name="sand" x="336" y="336" width="48" height="24"/>
  </objectgroup>
- <objectgroup color="#aa0000" id="8" name="collision">
+ <objectgroup color="#aa0000" id="8" name="collision" visible="0">
   <object id="2" x="768" y="0" width="1152" height="240"/>
   <object id="3" x="0" y="0" width="768" height="144"/>
   <object id="4" x="720" y="192" width="48" height="48"/>
@@ -268,8 +268,8 @@
   <object id="346" x="1128" y="1728" width="216" height="48"/>
  </objectgroup>
  <objectgroup color="#5500ff" id="43" name="rest">
-  <object id="164" name="note_well_honeywood" x="1848" y="1320" width="96" height="72"/>
-  <object id="163" name="note_stump_honeywood" x="1824" y="384" width="48" height="48"/>
+  <object id="164" name="note_well" x="1848" y="1320" width="96" height="72"/>
+  <object id="163" name="note_stump" x="1824" y="384" width="48" height="48"/>
   <object id="165" name="note_resource_shop" x="1440" y="1248" width="48" height="48"/>
   <object id="166" name="note_equipment_shop" x="1584" y="1248" width="48" height="48"/>
   <object id="337" name="door_simple_left4" x="480" y="768" width="48" height="96"/>
@@ -365,29 +365,17 @@
     <property name="direction" value="south"/>
    </properties>
   </object>
-  <object id="368" name="woman03" x="1344" y="1464" width="48" height="24">
+  <object id="368" name="woman03" x="192" y="1320" width="48" height="24">
    <properties>
     <property name="conversation" value="quest_get_horse"/>
-    <property name="direction" value="north"/>
+    <property name="direction" value="east"/>
    </properties>
   </object>
-  <object id="372" name="horse1" x="1392" y="1464" width="48" height="24">
+  <object id="372" name="horse1" x="192" y="1272" width="48" height="24">
    <properties>
     <property name="condition" value="_c_!=_f_q_quest_get_horse"/>
     <property name="conversation" value="honeywood_horse"/>
-    <property name="direction" value="north"/>
-   </properties>
-  </object>
-  <object id="374" name="oldwoman11" x="1296" y="864" width="48" height="24">
-   <properties>
-    <property name="conversation" value="quest_get_medicine"/>
-    <property name="direction" value="south"/>
-   </properties>
-  </object>
-  <object id="379" name="man07" x="960" y="912" width="48" height="24">
-   <properties>
-    <property name="conversation" value="quest_get_horseshoes"/>
-    <property name="direction" value="south"/>
+    <property name="direction" value="east"/>
    </properties>
   </object>
   <object id="380" name="horse1" x="1968" y="192" width="48" height="24">
@@ -412,18 +400,24 @@
  </objectgroup>
  <objectgroup color="#55aaff" id="11" name="spawn">
   <object id="113" name="honeywood_forest_path" x="1920" y="24" width="48" height="24"/>
-  <object id="148" name="honeywood_mozes_house" x="528" y="528" width="48" height="24"/>
+  <object id="148" name="honeywood_house_mozes" x="528" y="528" width="48" height="24"/>
   <object id="353" name="honeywood" x="1056" y="1320" width="48" height="24">
    <properties>
     <property name="direction" value="north"/>
    </properties>
   </object>
   <object id="359" name="honeywood_inn" x="624" y="1392" width="48" height="24"/>
+  <object id="384" name="honeywood_house_1" x="480" y="864" width="48" height="24"/>
+  <object id="386" name="honeywood_house_smith" x="720" y="528" width="48" height="24"/>
+  <object id="387" name="honeywood_house_elder" x="1056" y="864" width="48" height="24"/>
  </objectgroup>
  <objectgroup color="#ffff7f" id="12" name="portal">
   <object id="114" name="honeywood_forest_path" x="1896" y="-24" width="96" height="24"/>
-  <object id="149" name="honeywood_mozes_house" x="528" y="504" width="48" height="24"/>
+  <object id="149" name="honeywood_house_mozes" x="528" y="504" width="48" height="24"/>
   <object id="358" name="honeywood_inn" x="624" y="1368" width="48" height="24"/>
+  <object id="383" name="honeywood_house_1" x="480" y="840" width="48" height="24"/>
+  <object id="385" name="honeywood_house_smith" x="720" y="504" width="48" height="24"/>
+  <object id="388" name="honeywood_house_elder" x="1056" y="840" width="48" height="24"/>
  </objectgroup>
  <objectgroup color="#ffaa7f" id="14" name="save"/>
  <objectgroup id="50" name="lower_texture"/>

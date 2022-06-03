@@ -39,7 +39,8 @@ internal class SummaryTable {
     private fun createContainer(): Table {
         return Table().apply {
             defaults().align(Align.topLeft)
-            columnDefaults(0).width(Gdx.graphics.width / 2f + WIDTH - Constant.FACE_SIZE - PAD).pad(PAD)
+            val threeQuartersOfScreenWidth = Gdx.graphics.width * .75f
+            columnDefaults(0).width(threeQuartersOfScreenWidth + WIDTH - Constant.FACE_SIZE - PAD).pad(PAD)
             columnDefaults(1).size(Constant.FACE_SIZE)
             background = Utils.createTopBorder()
             add(summary)

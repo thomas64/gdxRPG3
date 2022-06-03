@@ -13,27 +13,28 @@
   "quest_a_helping_horse"      : {
     "title"     : "A helping horse",
     "entityId"  : "man01",
-    "summary"   : "A fallen tree has blocked the road to Honeywood Forest. Lennor needs your help to get a strong horse and some ropes if you want to speed up the process of clearing the road.",
+    "summary"   : "A fallen tree has blocked the road to Honeywood Forest. Lennor needs your help to get a strong horse and some tow ropes if you want to speed up the process of clearing the road.",
     "linkedWith": ["quest_get_horse", "quest_get_medicine", "quest_get_horseshoes"],
     "tasks"     : {
-      "10": {
-        "taskPhrase"   : "Find a strong horse",
-        "updatedPhrase": "Get Enopa",
-        "type": "FREE"
+      "1" : {
+        "taskPhrase": "Bring a strong horse to Lennor.",
+        "type"      : "FREE"
       },
       "11": {
-        "taskPhrase"   : "Find 3 ropes",
-        "updatedPhrase": "Get 3 ropes",
+        "taskPhrase"   : "Find 2 tow ropes.",
+        "updatedPhrase": "Get 2 tow ropes",
         "type"         : "FIND_ITEM",
-        "target"       : {"wood": 1}
+        "target"       : {"tow_rope": 2},
+        "linkedWith"   : ["12"]
       },
       "12": {
-        "taskPhrase": "Deliver horse and ropes to Lennor",
+        "taskPhrase": "Deliver the ropes to Lennor.",
         "type"      : "GIVE_ITEM",
-        "target"    : {"wood": 1}
+        "target"    : {"tow_rope": 2},
+        "isHidden"  : true
       },
       "13": {
-        "taskPhrase": "Let the tree be dragged out of the way",
+        "taskPhrase": "Let the tree be dragged out of the way.",
         "type"      : "FREE"
       }
     }
@@ -45,36 +46,36 @@
     "isSubQuest": true,
     "linkedWith": ["quest_a_helping_horse"],
     "tasks"     : {
-      "4": {
-        "taskPhrase"   : "[Find medicine]",
-        "updatedPhrase": "[Get medicine]",
-        "type"         : "FIND_ITEM",
-        "target"       : {"horse_medicine": 1}
-      },
-      "5": {
-        "taskPhrase": "[Deliver medicine to Angie]",
-        "type"      : "GIVE_ITEM",
+      "2" : {
+        "taskPhrase": "    Horse Enopa is sick. Maybe Elenora, the elder's wife, can help with some medicine.",
+        "type"      : "FIND_ITEM",
         "target"    : {"horse_medicine": 1},
         "linkedWith": ["6"]
       },
-      "6": {
-        "taskPhrase": "[Heal horse Enopa]",
+      "6" : {
+        "taskPhrase": "    Deliver the medicine to Angie.",
+        "type"      : "GIVE_ITEM",
+        "target"    : {"horse_medicine": 1},
+        "isHidden"  : true,
+        "linkedWith": ["7"]
+      },
+      "7" : {
+        "taskPhrase": "    Cure horse Enopa",
         "type"      : "FREE",
-        "linkedWith": ["8", "9"]
+        "isHidden"  : true
       },
-      "8": {
-        "taskPhrase"   : "[Find 4 horseshoes]",
-        "updatedPhrase": "[Get 4 horseshoes]",
-        "type"         : "FIND_ITEM",
-        "target"       : {"horseshoe": 4},
-        "isHidden"     : true
+      "8" : {
+        "taskPhrase": "    Angie won't let Enopa go without horseshoes. She says there must be some around. Go find or make 4 of them.",
+        "type"      : "FIND_ITEM",
+        "target"    : {"horseshoe": 4},
+        "linkedWith": ["10"]
       },
-      "9": {
-        "taskPhrase": "[Deliver horseshoes to Angie]",
+      "10": {
+        "taskPhrase": "    Deliver 4 horseshoes to Angie.",
         "type"      : "GIVE_ITEM",
         "target"    : {"horseshoe": 4},
         "isHidden"  : true,
-        "linkedWith": ["10"]
+        "linkedWith": ["1"]
       }
     }
   },
@@ -84,20 +85,18 @@
     "summary"   : "Get medicine",
     "isSubQuest": true,
     "tasks"     : {
-      "1": {
-        "taskPhrase"   : "[Find 6 herbs]",
-        "updatedPhrase": "[Get 6 herbs]",
-        "type"         : "FIND_ITEM",
-        "target"       : {"herb": 6}
-      },
-      "2": {
-        "taskPhrase"   : "[Find 1 blue jelly]",
-        "updatedPhrase": "[Get 1 blue jelly]",
-        "type"         : "FIND_ITEM",
-        "target"       : {"blue_jelly": 1}
-      },
       "3": {
-        "taskPhrase": "[Deliver ingredients to Elenora]",
+        "taskPhrase": "        Elenora needs some ingredients for the medicine. Get 6 herbs for her.",
+        "type"      : "FIND_ITEM",
+        "target"    : {"herb": 6}
+      },
+      "4": {
+        "taskPhrase": "        For the medicine also 1 blue jelly is needed, which can be extracted from a Blue Slime. Luckily Elenora spotted one in town.",
+        "type"      : "FIND_ITEM",
+        "target"    : {"blue_jelly": 1}
+      },
+      "5": {
+        "taskPhrase": "        Deliver the ingredients to Elenora.",
         "type"      : "GIVE_ITEM",
         "target"    : {"herb": 6, "blue_jelly": 1}
       }
@@ -109,8 +108,8 @@
     "summary"   : "Get horseshoes",
     "isSubQuest": true,
     "tasks"     : {
-      "7": {
-        "taskPhrase"  : "[Optional] [Exchange 2 metal for 1 horseshoe with the blacksmith]",
+      "9": {
+        "taskPhrase"  : "        [Optional] Exchange 2 metal for 1 horseshoe with the blacksmith.",
         "type"        : "TRADE_ITEMS",
         "target"      : {"metal": 2},
         "receive"     : {"horseshoe": 1},

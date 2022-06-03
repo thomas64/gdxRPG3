@@ -5,7 +5,7 @@ import nl.t64.cot.constants.Constant
 
 class ConversationPhrase(
     val face: String = "",
-    val text: List<String> = emptyList(),   // mandatory in Json file
+    val text: List<String> = listOf(""),
     val choices: List<ConversationChoice> = emptyList()
 ) {
     private lateinit var conversationId: String

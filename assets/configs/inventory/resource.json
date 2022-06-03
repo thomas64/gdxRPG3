@@ -86,12 +86,5 @@
     "sort"       : 90090,
     "price"      : 1,
     "description": ["ToDo", "ToDo"]
-  },
-  "horseshoe"  : {
-    "name"       : "Horseshoe",
-    "group"      : "RESOURCE",
-    "sort"       : 90100,
-    "price"      : 1,
-    "description": ["ToDo", "ToDo"]
   }
 }

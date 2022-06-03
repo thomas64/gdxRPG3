@@ -21,8 +21,8 @@
       "2" : {"text": ["Hey Mozes, you can't go further up north from here.", "There is a large tree blocking the road."], "choices": [{"nextId": "3"}]},
       "3" : {"text": ["Luckily, no one was hurt when it fell down.", "But it'll take a while for us to remove it and clear the road for everyone."]},
       "4" : {
-        "face": "mozes", "text": [""], "choices": [
-          {"condition": ["i_r_==_f_q_this"], "text": "Could I by chance help with a horse and 3 ropes?", "command": "ACCEPT_QUEST", "nextId": "40"},
+        "face": "mozes", "choices": [
+          {"condition": ["i_r_==_f_q_this"], "text": "Could I by chance help with a horse and 2 ropes?", "command": "ACCEPT_QUEST", "nextId": "40"},
           {"text": "Curious, when did the tree fall down?", "nextId": "10"},
           {"text": "Oh no! That's bad, I really need to be in Honeywood Forest.", "nextId": "20"},
           {"text": "Why don't you remove the tree immediately?", "nextId": "20"},
@@ -36,15 +36,16 @@
       "13": {"face": "man02", "text": ["But it'll take a while for us to remove it and clear the road for everyone."], "choices": [{"nextId": "4"}]},
       "20": {"face": "man02", "text": ["I'm sorry Mozes, there is nothing I can do about it right now.", "You'll have to wait a while. Unless you bring me a horse and some ropes, ha ha!"]},
       "21": {
-        "face": "mozes", "text": [""], "choices": [
+        "face": "mozes", "choices": [
           {"text": "Alright, I'll see what I can do.", "command": "ACCEPT_QUEST", "nextId": "35"},
           {"text": "I really don't have time for this.", "command": "KNOW_QUEST", "nextId": "30"}
         ]
       },
       "30": {"face": "man02", "text": ["No problemo! Me neither. I'll see you around."], "choices": [{"command": "EXIT", "nextId": "31"}]},
       "31": {"face": "man02", "text": ["Hey Mozes, are you back? The tree is still here, ha ha!"], "choices": [{"nextId": "4"}]},
-      "35": {"face": "man02", "text": ["I was kidding about the horse Mozes, ha ha!", "But sure, if you really bring me a strong horse and 3 ropes, I will clear the road for you immediately."], "choices": [{"command": "EXIT", "nextId": "50"}]},
-      "40": {"face": "man02", "text": ["Uhh, that's exactly what you could help.", "If you really bring me a strong horse and 3 ropes, I will clear the road for you immediately."], "choices": [{"command": "EXIT", "nextId": "50"}]},
+      "35": {"face": "man02", "text": ["I was kidding about the horse Mozes, ha ha!", "But sure, if you really bring me a strong horse and 2 ropes, I will clear the road for you immediately."]},
+      "36": {"face": "man02", "text": ["You could ask the village elder about this matter.", "Maybe he can help you out."], "choices": [{"command": "EXIT", "nextId": "50"}]},
+      "40": {"face": "man02", "text": ["Uhh, that's exactly what you could help.", "If you really bring me a strong horse and 2 ropes, I will clear the road for you immediately."], "choices": [{"command": "EXIT", "nextId": "50"}]},
       "50": {"face": "man02", "text": ["The tree is still here Mozes, ha ha!"], "choices": [{"command": "EXIT", "nextId": "50"}]}
     }
   },
@@ -172,48 +173,73 @@
   },
   "quest_get_horse"            : {
     "phrases": {
-      "1": {
-        "text": ["[Hi Mozes.]"], "choices": [
-          {"condition": ["i_rc_==_a_q_quest_a_helping_horse"], "nextId": "2"},
-          {"condition": ["i_rc_!=_a_q_quest_a_helping_horse"], "command": "EXIT"}
+      "1" : {"face": "woman03", "text": ["Hi Mozes."]},
+      "2" : {
+        "face": "mozes", "text": ["Hello Angie."], "choices": [
+          {"condition": ["i_tn_7_q_quest_get_horse"], "text": "Your horse is looking a little pale today isn't she?", "nextId": "3"},
+          {"condition": ["i_rc_==_a_q_quest_a_helping_horse"], "text": "Lennor could use your horse's help for towing a tree.", "nextId": "10"},
+          {"text": "Good day to you. (Leave conversation)", "command": "EXIT"}
         ]
       },
-      "2": {
-        "text": ["[You can have horse. But it is sick. Want to help?]"], "choices": [
-          {"text": "[Yes.]", "command": "ACCEPT_QUEST", "nextId": "3"},
-          {"text": "[No.]", "command": "EXIT"}
+      "3" : {"face": "woman03", "text": ["That's right, Enopa is not feeling well. Maybe she ate something wrong, but I think with just a couple of days rest will make her up and running again."], "choices": [{"nextId": "2"}]},
+      "10": {"face": "mozes", "text": ["There is a large tree blocking the road to Honeywood Forest and I really need to be there as soon as possible."]},
+      "11": {"face": "mozes", "text": ["May I take your horse to Lennor to help me out?"]},
+      "12": {"face": "woman03", "text": ["She can't! If you really need Enopa right now, she has to get better first."]},
+      "13": {"face": "woman03", "text": ["And then before she may leave, she also need horseshoes, which I don't have right now... So no."]},
+      "14": {
+        "face": "mozes", "choices": [
+          {"condition": ["i_r_!=_f_q_this"], "text": "Isn't there anything I can do to help Enopa?", "command": "ACCEPT_QUEST", "nextId": "20"},
+          {"condition": ["i_r_==_f_q_this"], "text": "What if I get a medicine from Elenora and some horseshoes for her?", "command": "ACCEPT_QUEST", "nextId": "30"},
+          {"text": "I see, I'll try to find another way then. (Leave conversation)", "command": "EXIT"}
         ]
       },
-      "3": {"text": ["[Thanks]"], "choices": [{"command": "EXIT", "nextId": "4"}]},
-      "4": {
-        "text": ["[Do you have medicine?]"], "choices": [
-          {"condition": ["horse_medicine1"], "text": "[Horse Medicine 1] [Yes.]", "command": "GIVE_QUEST_ITEM", "nextId": "5"},
-          {"text": "[No.]", "command": "EXIT", "nextId": "4"}
+      "20": {"face": "woman03", "text": ["Let me think..."]},
+      "21": {"face": "woman03", "text": ["Maybe you can.", "Go talk to Elenora, the elder's wife. Perhaps she has some medicine or something."]},
+      "22": {"face": "woman03", "text": ["And about the horseshoes, you may bring me 4 of them. There must be some around here in the village, and otherwise our blacksmith can help you out,", "I think."], "choices": [{"nextId": "35"}]},
+      "30": {"face": "woman03", "text": ["Really? That certainly would help me out, thanks."], "choices": [{"nextId": "35"}]},
+      "35": {
+        "face": "woman03", "text": ["When she's all better and shoed, I will lend her out to Lennor and you."], "choices": [
+          {"condition": ["i_horse_medicine1"], "text": "Alright, here is that medicine from Elenora.", "command": "GIVE_QUEST_ITEM", "nextId": "40"},
+          {"text": "Thanks, I'll see what I can do. (Leave conversation)", "command": "EXIT", "nextId": "50"}
         ]
       },
-      "5": {
-        "text": ["[Horse is healed, but I also need 4 horseshoes. Do you got those?]"], "choices": [
-          {"condition": ["horseshoe4"], "text": "[Horseshoe 4] [Yes.]", "command": "GIVE_QUEST_ITEM", "nextId": "6"},
-          {"text": "[No.]", "command": "EXIT", "nextId": "5"}
+      "40": {"face": "woman03", "text": ["Wow, really? That's awesome! I will give it to her immediately"], "choices": [{"nextId": "52"}]},
+      "50": {
+        "face": "woman03", "text": ["Hey Mozes, do you have anything for Enopa?"], "choices": [
+          {"condition": ["i_horse_medicine1"], "text": "Yes, here is a medicine from Elenora.", "command": "GIVE_QUEST_ITEM", "nextId": "51"},
+          {"text": "I'm working on it. (Leave conversation)", "command": "EXIT", "nextId": "50"}
         ]
       },
-      "6": {"text": ["[Good, now I will see that Enopa makes her way to Lennor.]"], "choices": [{"command": "RELOAD_NPCS", "nextId": "7"}]},
-      "7": {"text": ["[Has she been of any help?]"], "choices": [{"command": "EXIT", "nextId": "7"}]}
+      "51": {"face": "woman03", "text": ["Great! I will give it to her immediately."]},
+      "52": {"face": "woman03", "text": ["I think she even likes the taste of it! Thank you so much for this."]},
+      "53": {"face": "woman03", "text": ["Now, when she is shoed, I will lend her out to Lennor and you."]},
+      "54": {
+        "face": "woman03", "text": ["Did you manage to get 4 horseshoes for Enopa?"], "choices": [
+          {"condition": ["i_horseshoe4"], "text": "Yes, I've got them, here you are.", "command": "GIVE_QUEST_ITEM", "nextId": "60"},
+          {"text": "No, not yet, I'll come back when I get those. (Leave conversation)", "command": "EXIT", "nextId": "54"}
+        ]
+      },
+      "60": {"face": "woman03", "text": ["Thank you so much! You are such a help Mozes!"]},
+      "61": {"face": "woman03", "text": ["I'll shoe her right now with these. And then I will see to it that Enopa makes her way to Lennor."]},
+      "62": {"face": "woman03", "text": ["There you go, thanks again Mozes. What a good day it turned out to be after all."], "choices": [{"command": "RELOAD_NPCS", "nextId": "70"}]},
+      "70": {"face": "woman03", "text": ["How is my Enopa doing? Has she been of any help to Lennor and you?"], "choices": [{"command": "EXIT", "nextId": "70"}]}
     }
   },
   "honeywood_horse"            : {
     "phrases": {
       "1"   : {
         "text": ["Neigh."], "choices": [
-          {"condition": ["i_druid2", "_tn_6_q_quest_get_horse"], "nextId": "2"},
-          {"condition": ["i_druid2", "_tc_6_q_quest_get_horse", "_c_!=_f_q_quest_get_horse"], "nextId": "3"},
-          {"condition": ["i_druid2", "_c_==_f_q_quest_get_horse"], "nextId": "4"}
+          {"condition": ["i_druid2", "_tn_7_q_quest_get_horse"], "nextId": "2"},
+          {"condition": ["i_druid2", "_tc_7_q_quest_get_horse", "_c_!=_f_q_quest_get_horse"], "nextId": "3"},
+          {"condition": ["i_druid2", "_c_==_f_q_quest_get_horse", "_c_!=_f_q_quest_a_helping_horse"], "nextId": "4"},
+          {"condition": ["i_druid2", "_c_==_f_q_quest_a_helping_horse"], "nextId": "5"}
         ]
       },
       "1300": {"face": "mozes", "text": ["* Druid skill rank 2 needed. *"], "choices": [{"command": "EXIT"}]},
-      "2"   : {"text": ["[I'm not so feeling well...]"], "choices": [{"command": "EXIT"}]},
-      "3"   : {"text": ["[Thank you so much for getting me a medicine.]"], "choices": [{"command": "EXIT"}]},
-      "4"   : {"text": ["[I will fix that tree for you in no time!]"], "choices": [{"command": "EXIT"}]}
+      "2"   : {"text": ["I'm not feeling so well...", "Maybe I shouldn't have eaten those delicious looking mushrooms."], "choices": [{"command": "EXIT"}]},
+      "3"   : {"text": ["I feel great again! Thank you for helping me."], "choices": [{"command": "EXIT"}]},
+      "4"   : {"text": ["I will fix that tree for you in no time!"], "choices": [{"command": "EXIT"}]},
+      "5"   : {"text": ["Did I do good?"], "choices": [{"command": "EXIT"}]}
     }
   },
   "quest_get_medicine"         : {
@@ -230,9 +256,9 @@
           {"text": "[No.]", "command": "EXIT"}
         ]
       },
-      "3"   : {"text": ["[Thanks]"], "choices": [{"command": "EXIT", "nextId": "4"}]},
+      "3"   : {"text": ["[Thanks, I need Blue Jelly from a Blue Slime, luckily I've spotted one in town.]"], "choices": [{"command": "EXIT", "nextId": "4"}]},
       "4"   : {
-        "text": ["[Do you have the herbs and stuff?]"], "choices": [
+        "text": ["[Do you have the herbs and jelly?]"], "choices": [
           {"condition": ["herb6", "blue_jelly1"], "text": "[Herbs 6, Blue Jelly 1] [Yes.]", "command": "GIVE_QUEST_ITEM", "nextId": "5"},
           {"text": "[No.]", "command": "EXIT", "nextId": "4"}
         ]
@@ -243,26 +269,39 @@
       "1201": {"text": ["[Hi Mozes.]"], "choices": [{"command": "EXIT", "nextId": "1201"}]}
     }
   },
+  "honeywood_elder"            : {
+    "phrases": {
+      "1": {
+        "text": ["[Hello Mozes]"], "choices": [
+          {"condition": ["i_tn_7_q_quest_get_horse"], "command": "EXIT"},
+          {"condition": ["i_ta_7_q_quest_get_horse"], "nextId": "2"},
+          {"condition": ["i_tc_8_q_quest_get_horse"], "command": "EXIT"}
+        ]
+      },
+      "2": {"text": ["[I think I got a horseshoe in the basement.]"], "choices": [{"command": "EXIT"}]}
+    }
+  },
   "quest_get_horseshoes"       : {
     "phrases": {
       "1"   : {
         "text": ["[Hi Mozes, I'm Black Smith.]"], "choices": [
-          {"condition": ["i_tn_6_q_quest_get_horse"], "command": "EXIT"},
-          {"condition": ["i_ta_6_q_quest_get_horse"], "nextId": "2"},
+          {"condition": ["i_tn_7_q_quest_get_horse"], "command": "EXIT"},
+          {"condition": ["i_ta_7_q_quest_get_horse"], "nextId": "2"},
           {"condition": ["i_tc_8_q_quest_get_horse"], "command": "EXIT"}
         ]
       },
       "2"   : {
         "text": ["[For 2 metal I can make 1 horseshoe.]"], "choices": [
-          {"condition": ["metal2"], "text": "[Metal 2] [Yes.]", "nextId": "3"},
-          {"text": "[No.]", "command": "EXIT"}
+          {"condition": ["metal2"], "text": "[Metal 2] [Yes.]", "nextId": "4"},
+          {"text": "[No.]", "command": "ACCEPT_QUEST", "nextId": "3"}
         ]
       },
-      "3"   : {"text": ["[One moment, let me make one for you. Here you go.]"], "choices": [{"command": "TRADE_QUEST_ITEMS"}]},
+      "3"   : {"text": ["[Come see me when you are in need.]"], "choices": [{"command": "EXIT"}]},
+      "4"   : {"text": ["[One moment, let me make one for you. Here you go.]"], "choices": [{"command": "TRADE_QUEST_ITEMS"}]},
       "1100": {"text": ["[You forgot your horseshoe.]"], "choices": [{"command": "RE_TRADE_QUEST_ITEMS"}]},
       "1200": {
         "text": ["[Hi there again.]"], "choices": [
-          {"condition": ["i_ta_6_q_quest_get_horse"], "nextId": "2"},
+          {"condition": ["i_ta_7_q_quest_get_horse"], "nextId": "2"},
           {"condition": ["i_tc_8_q_quest_get_horse"], "command": "EXIT"}
         ]
       }

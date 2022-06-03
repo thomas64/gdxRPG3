@@ -11,7 +11,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 
 private const val TEN_TIMES_FULL_HD = 10f
 
-class TransitionImage(color: Color = Color.BLACK) : Image() {
+class TransitionImage(
+    val purpose: TransitionPurpose = TransitionPurpose.JUST_FADE,
+    color: Color = Color.BLACK
+) : Image() {
 
     init {
         super.toFront()

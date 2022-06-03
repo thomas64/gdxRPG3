@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="26" height="26" tilewidth="24" tileheight="24" infinite="0" nextlayerid="16" nextobjectid="33">
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="26" height="26" tilewidth="24" tileheight="24" infinite="0" nextlayerid="16" nextobjectid="38">
  <properties>
   <property name="bgm" value="bgm_house"/>
   <property name="step_sound" value="wood"/>
  </properties>
- <tileset firstgid="1" name="hero_s_hometown_house_1" tilewidth="24" tileheight="24" tilecount="638" columns="29">
-  <image source="tilesets/hero_s_hometown_house_1.png" width="696" height="528"/>
+ <tileset firstgid="1" name="honeywood_house_1" tilewidth="24" tileheight="24" tilecount="638" columns="29">
+  <image source="tilesets/honeywood_house_1.png" width="696" height="528"/>
  </tileset>
  <tileset firstgid="639" source="tilesets/fsm_inside01_a2.tsx"/>
  <tileset firstgid="1407" source="tilesets/fsm_inside01_b.tsx"/>
@@ -79,15 +79,12 @@
  </objectgroup>
  <objectgroup color="#5500ff" id="13" name="rest">
   <object id="22" name="note_bed01" x="96" y="144" width="96" height="96"/>
+  <object id="33" name="note_apples" x="288" y="216" width="48" height="24"/>
+  <object id="34" name="note_closet" x="48" y="120" width="48" height="48"/>
+  <object id="35" name="note_closet" x="312" y="120" width="48" height="48"/>
+  <object id="37" name="sparkle0018" x="336" y="216" width="48" height="48"/>
  </objectgroup>
- <objectgroup color="#55ff7f" id="14" name="npc">
-  <object id="23" name="youngman01" x="528" y="480" width="48" height="24">
-   <properties>
-    <property name="conversation" value="quest0004"/>
-    <property name="direction" value="east"/>
-   </properties>
-  </object>
- </objectgroup>
+ <objectgroup color="#55ff7f" id="14" name="npc"/>
  <objectgroup color="#55aaff" id="11" name="spawn">
   <object id="21" name="honeywood" x="432" y="528" width="48" height="24"/>
  </objectgroup>

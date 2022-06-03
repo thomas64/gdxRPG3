@@ -56,21 +56,22 @@ internal class TaskListTable {
     }
 
     private fun fillScrollPane(): ScrollPane {
-        val newScrollPane = ScrollPane(taskList)
-        newScrollPane.setOverscroll(false, false)
-        newScrollPane.fadeScrollBars = false
-        newScrollPane.setScrollingDisabled(true, true)
-        newScrollPane.setForceScroll(false, false)
-        newScrollPane.setScrollBarPositions(false, false)
-        return newScrollPane
+        return ScrollPane(taskList).apply {
+            setOverscroll(false, false)
+            fadeScrollBars = false
+            setScrollingDisabled(true, true)
+            setForceScroll(false, false)
+            setScrollBarPositions(false, false)
+        }
     }
 
     private fun fillContainer(): Table {
-        val newContainer = Table()
-        newContainer.background = Utils.createTopBorder()
-        newContainer.padLeft(PAD_LEFT)
-        newContainer.add(scrollPane).width(Gdx.graphics.width / 2f + WIDTH).height(HEIGHT)
-        return newContainer
+        return Table().apply {
+            background = Utils.createTopBorder()
+            padLeft(PAD_LEFT)
+            val threeQuartersOfScreenWidth = Gdx.graphics.width * .75f
+            add(scrollPane).width(threeQuartersOfScreenWidth + WIDTH).height(HEIGHT)
+        }
     }
 
 }

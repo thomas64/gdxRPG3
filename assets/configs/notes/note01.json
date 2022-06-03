@@ -1,26 +1,57 @@
 {
-  "note_bed01"         : {
-    "phrases": {
-      "1": {
-        "text"   : ["What are you thinking?", "You've got no time to sleep."],
-        "choices": [{"command": "EXIT"}]
-      }
-    }
-  },
   "note_resource_shop" : {
     "phrases": {
-      "1": {
-        "text"   : ["Resource Shop"],
-        "choices": [{"command": "EXIT"}]
-      }
+      "1": {"text": ["Resource Shop"], "choices": [{"command": "EXIT"}]}
     }
   },
   "note_equipment_shop": {
     "phrases": {
-      "1": {
-        "text"   : ["Equipment Shop"],
-        "choices": [{"command": "EXIT"}]
-      }
+      "1": {"text": ["Equipment Shop"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "note_bed01"         : {
+    "phrases": {
+      "1": {"text": ["It's someone else's bed.", "What could possibly be your plan?"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "note_bed02"         : {
+    "phrases": {
+      "1": {"text": ["If you need to rest, talk to the innkeeper."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "note_bed03"         : {
+    "phrases": {
+      "1": {"text": ["It looks fairly comfortable, but now is not the time."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "note_apples"        : {
+    "phrases": {
+      "1": {"text": ["How do you like them apples?"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "note_food"          : {
+    "phrases": {
+      "1": {"text": ["Did you wash your hands first?"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "note_bookcase"      : {
+    "phrases": {
+      "1": {"text": ["So many books, so little time."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "note_closet"        : {
+    "phrases": {
+      "1": {"text": ["How would you like it when random people went opening your closet?"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "note_shelves"       : {
+    "phrases": {
+      "1": {"text": ["Looks organized, better not touch it."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "note_fireplace"     : {
+    "phrases": {
+      "1": {"text": ["The fire is warm and gentile."], "choices": [{"command": "EXIT"}]}
     }
   }
 }

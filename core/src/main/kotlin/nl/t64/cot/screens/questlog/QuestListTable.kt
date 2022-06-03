@@ -61,7 +61,8 @@ internal class QuestListTable {
         return Table().apply {
             background = Utils.createTopBorder()
             padLeft(PAD_LEFT)
-            add(scrollPane).width(Gdx.graphics.width / 2f + WIDTH).height(Gdx.graphics.height + HEIGHT)
+            val quarterOfScreenWidth = Gdx.graphics.width * .25f
+            add(scrollPane).width(quarterOfScreenWidth + WIDTH).height(Gdx.graphics.height + HEIGHT)
         }
     }
 

@@ -1,21 +1,13 @@
 {
-  "note_stump_honeywood": {
+  "note_stump": {
     "phrases": {
-      "1": {
-        "text": ["It's a stump."]
-      },
-      "2": {
-        "text"   : ["You're stumped."],
-        "choices": [{"command": "EXIT"}]
-      }
+      "1": {"text": ["It's a stump."]},
+      "2": {"text": ["You're stumped."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "note_well_honeywood" : {
+  "note_well" : {
     "phrases": {
-      "1": {
-        "text"   : ["What a deep water well.", "Better not fall in."],
-        "choices": [{"command": "EXIT"}]
-      }
+      "1": {"text": ["What a deep water well.", "Better not fall in."], "choices": [{"command": "EXIT"}]}
     }
   },
   "note_statue_hero_s_hometown_hero_s_chamber": {

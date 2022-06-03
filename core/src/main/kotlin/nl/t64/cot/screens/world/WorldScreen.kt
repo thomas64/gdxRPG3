@@ -39,6 +39,7 @@ import nl.t64.cot.screens.world.entity.PhysicsPlayer
 import nl.t64.cot.screens.world.entity.events.FindPathEvent
 import nl.t64.cot.screens.world.entity.events.LoadEntityEvent
 import nl.t64.cot.sfx.TransitionImage
+import nl.t64.cot.sfx.TransitionPurpose
 import nl.t64.cot.subjects.*
 
 
@@ -169,7 +170,7 @@ class WorldScreen : Screen,
     }
 
     override fun onNotifyShowBattleScreen(battleId: String, enemyEntity: Entity) {
-        if (player.moveSpeed != Constant.MOVE_SPEED_4 && !isInTransition) {
+        if (player.moveSpeed != Constant.MOVE_SPEED_4 && !isInMapTransition) {
             currentNpcEntity = enemyEntity
             gameState = GameState.BATTLE
             doBeforeLoadScreen()
@@ -221,7 +222,7 @@ class WorldScreen : Screen,
     }
 
     override fun onNotifyReloadNpcs() {
-        fadeOut({ reloadNpcs() }, Color.BLACK, 1f)
+        fadeOut({ reloadNpcs() }, Color.BLACK, 1f, TransitionPurpose.JUST_FADE)
     }
 
     private fun reloadNpcs() {
@@ -301,7 +302,7 @@ class WorldScreen : Screen,
         messageDialog.update(dt)
 
         stage.act(dt)
-        if (isInTransition) {
+        if (isInMapTransition) {
             player.resetInput()
             mapManager.fadeAudio()
         }
@@ -344,8 +345,13 @@ class WorldScreen : Screen,
             .forEach { it.render(batch) }
     }
 
-    private fun fadeOut(actionAfterFade: () -> Unit, transitionColor: Color, delay: Float = 0f) {
-        val transition = TransitionImage(transitionColor)
+    private fun fadeOut(
+        actionAfterFade: () -> Unit,
+        transitionColor: Color,
+        delay: Float = 0f,
+        transitionPurpose: TransitionPurpose = TransitionPurpose.MAP_CHANGE
+    ) {
+        val transition = TransitionImage(transitionPurpose, transitionColor)
         stage.addActor(transition)
         transition.addAction(Actions.sequence(Actions.alpha(0f),
                                               Actions.fadeIn(Constant.FADE_DURATION),
@@ -387,6 +393,10 @@ class WorldScreen : Screen,
                                    { debugBox.setShowDebug() })
     }
 
+    private val isInMapTransition: Boolean
+        get() = isInTransition && (stage.actors.peek() as TransitionImage).purpose == TransitionPurpose.MAP_CHANGE
+    private val isJustInTransition: Boolean
+        get() = isInTransition && (stage.actors.peek() as TransitionImage).purpose == TransitionPurpose.JUST_FADE
     private val isInTransition: Boolean
         get() = stage.actors.notEmpty()
                 && gameState != GameState.DIALOG

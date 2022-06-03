@@ -11,7 +11,7 @@
       "1" : {"text": ["Halt! Forbidden area!"]},
       "2" : {"text": ["This is domain of Great Wizard Ardor.", "Leave now, or die!"]},
       "3" : {
-        "face": "mozes", "text": [""], "choices": [
+        "face": "mozes", "choices": [
           {"text": "I'm looking for a little girl, have you guys maybe seen her?", "command": "ACCEPT_QUEST", "nextId": "10"},
           {"text": "Could you please let me through?", "nextId": "15"},
           {"condition": ["diplomat4"], "text": "[Diplomat 4] You have to let me through.", "nextId": "30"},
@@ -22,7 +22,7 @@
       },
       "10": {"face": "orc_sergeant", "text": ["Ardor has girl. Leave now, or die!"]},
       "11": {
-        "face": "mozes", "text": [""], "choices": [
+        "face": "mozes", "choices": [
           {"text": "Who is this Ardor?", "nextId": "12"},
           {"text": "What has this Ardor to do with her?", "nextId": "13"},
           {"text": "You must let me through!", "nextId": "14"},

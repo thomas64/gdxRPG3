@@ -19,5 +19,19 @@
     "sort"       : 70020,
     "price"      : 1,
     "description": ["ToDo"]
+  },
+  "horseshoe"              : {
+    "name"       : "Horseshoe",
+    "group"      : "ITEM",
+    "sort"       : 70025,
+    "price"      : 1,
+    "description": ["ToDo"]
+  },
+  "tow_rope"               : {
+    "name"       : "Tow Rope",
+    "group"      : "ITEM",
+    "sort"       : 70030,
+    "price"      : 1,
+    "description": ["ToDo"]
   }
 }

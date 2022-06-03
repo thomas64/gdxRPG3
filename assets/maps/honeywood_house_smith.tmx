@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="18" height="30" tilewidth="24" tileheight="24" infinite="0" nextlayerid="15" nextobjectid="22">
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="18" height="30" tilewidth="24" tileheight="24" infinite="0" nextlayerid="16" nextobjectid="29">
  <properties>
   <property name="bgm" value="bgm_house"/>
   <property name="step_sound" value="wood"/>
  </properties>
- <tileset firstgid="1" name="hero_s_hometown_house_3" tilewidth="24" tileheight="24" tilecount="620" columns="31">
-  <image source="tilesets/hero_s_hometown_house_3.png" width="744" height="480"/>
+ <tileset firstgid="1" name="honeywood_house_smith" tilewidth="24" tileheight="24" tilecount="620" columns="31">
+  <image source="tilesets/honeywood_house_smith.png" width="744" height="480"/>
  </tileset>
  <tileset firstgid="621" source="tilesets/fsm_inside01_a2.tsx"/>
  <tileset firstgid="1389" source="tilesets/fsm_inside01_b.tsx"/>
@@ -48,7 +48,7 @@
  </layer>
  <layer id="8" name="over7_objects" width="18" height="30">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2Dogfs8DAwPeBD0UAW7GBkYdgPxXn4Ghn38A+cOZw4GBi8Oys1JBpqRRQVzRgEqOA1M42eokM5fA814Q8f8UghM00VAXAzEJTRM33LAPCTPiEqD8hUM7MIiL8+IaQ4jFmyApE6fEbsaYsyRRbJXgQJziMGD1RwAO3kRrA==
+   eJxjYBgFo2Dogfs8DAwPeBD0UAW7GBkYdjMOtCsYGJw5GBi8OCg3JxloRhYVzBkFqOA0MI2foUI6fw004w0d80shPwNDERAXA3EJP+3skQPmIXlGVBo5X+3CIi+PJd8xYsEGSOr0GbGrIcYcWSR7FSgwhxg8WM0BAGerEBM=
   </data>
  </layer>
  <layer id="9" name="over8_none" width="18" height="30">
@@ -66,7 +66,7 @@
   <object id="6" x="192" y="144" width="96" height="24"/>
   <object id="7" x="336" y="144" width="48" height="24"/>
   <object id="8" x="288" y="240" width="96" height="264"/>
-  <object id="9" x="192" y="312" width="96" height="168"/>
+  <object id="9" x="192" y="288" width="96" height="192"/>
   <object id="11" x="144" y="360" width="48" height="72"/>
   <object id="12" x="144" y="432" height="24"/>
   <object id="13" x="48" y="528" width="48" height="48"/>
@@ -77,11 +77,24 @@
  </objectgroup>
  <objectgroup color="#5500ff" id="13" name="rest">
   <object id="20" name="note_bed01" x="288" y="240" width="96" height="96"/>
+  <object id="22" name="note_bookcase" x="192" y="120" width="48" height="48"/>
+  <object id="23" name="note_shelves" x="240" y="120" width="48" height="48"/>
+  <object id="24" name="note_closet" x="336" y="120" width="48" height="48"/>
+  <object id="25" name="note_food" x="288" y="528" width="96" height="48"/>
+  <object id="28" name="sparkle0019" x="240" y="288" width="48" height="48"/>
+ </objectgroup>
+ <objectgroup color="#55ff7f" id="15" name="npc">
+  <object id="27" name="man07" x="288" y="504" width="48" height="24">
+   <properties>
+    <property name="conversation" value="quest_get_horseshoes"/>
+    <property name="direction" value="west"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup color="#55aaff" id="11" name="spawn">
-  <object id="18" name="hero_s_hometown" x="192" y="624" width="48" height="24"/>
+  <object id="18" name="honeywood" x="192" y="624" width="48" height="24"/>
  </objectgroup>
  <objectgroup color="#ffff7f" id="12" name="portal">
-  <object id="17" name="hero_s_hometown" x="192" y="648" width="48" height="24"/>
+  <object id="17" name="honeywood" x="192" y="648" width="48" height="24"/>
  </objectgroup>
 </map>

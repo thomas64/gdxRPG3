@@ -14,9 +14,9 @@ object ConditionDatabase {
         "i_scroll_of_orc_obedience" to { hasEnoughOfItem("scroll_of_orc_obedience", 1) },
         "herb6"                     to { hasEnoughOfItem("herb",                    6) },
         "blue_jelly1"               to { hasEnoughOfItem("blue_jelly",              1) },
-        "horse_medicine1"           to { hasEnoughOfItem("horse_medicine",          1) },
+        "i_horse_medicine1"         to { hasEnoughOfItem("horse_medicine",          1) },
         "metal2"                    to { hasEnoughOfItem("metal",                   2) },
-        "horseshoe4"                to { hasEnoughOfItem("horseshoe",               4) },
+        "i_horseshoe4"              to { hasEnoughOfItem("horseshoe",               4) },
 
         "diplomat4"                 to { hasEnoughOfSkill(SkillItemId.DIPLOMAT,                     4) },
         "i_druid1"                  to { hasEnoughOfSkill(SkillItemId.DRUID,                        1) },
