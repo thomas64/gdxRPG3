@@ -37,9 +37,7 @@ class GraphicsDoor(private val door: Door) : GraphicsComponent() {
 
     override fun render(batch: Batch) {
         batch.draw(currentFrame, position.x, position.y, door.width, door.height)
-        if (shadowFrame != null) {
-            batch.draw(shadowFrame, position.x, position.y - (door.height / 2f), door.width, door.height)
-        }
+        shadowFrame?.let { batch.draw(it, position.x, position.y - (door.height / 2f), door.width, door.height) }
     }
 
     override fun renderOnMiniMap(entity: Entity, batch: Batch, shapeRenderer: ShapeRenderer) {

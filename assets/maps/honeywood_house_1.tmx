@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="26" height="26" tilewidth="24" tileheight="24" infinite="0" nextlayerid="16" nextobjectid="38">
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="26" height="26" tilewidth="24" tileheight="24" infinite="0" nextlayerid="16" nextobjectid="39">
  <properties>
   <property name="bgm" value="bgm_house"/>
   <property name="step_sound" value="wood"/>
@@ -84,7 +84,13 @@
   <object id="35" name="note_closet" x="312" y="120" width="48" height="48"/>
   <object id="37" name="sparkle0018" x="336" y="216" width="48" height="48"/>
  </objectgroup>
- <objectgroup color="#55ff7f" id="14" name="npc"/>
+ <objectgroup color="#55ff7f" id="14" name="npc">
+  <object id="38" name="youngman01" type="w" x="120" y="264" width="48" height="24">
+   <properties>
+    <property name="conversation" value="quest_get_tow_rope"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup color="#55aaff" id="11" name="spawn">
   <object id="21" name="honeywood" x="432" y="528" width="48" height="24"/>
  </objectgroup>
