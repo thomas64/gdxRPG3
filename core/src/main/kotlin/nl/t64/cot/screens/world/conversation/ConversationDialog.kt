@@ -28,6 +28,7 @@ import nl.t64.cot.components.conversation.ConversationChoice
 import nl.t64.cot.components.conversation.ConversationCommand
 import nl.t64.cot.components.conversation.ConversationGraph
 import nl.t64.cot.components.conversation.NoteDatabase.getNoteById
+import nl.t64.cot.components.party.SpellsRewarder
 import nl.t64.cot.components.party.XpRewarder
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.academy.AcademyScreen
@@ -200,6 +201,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             ConversationCommand.SAVE_GAME -> saveGame(nextId)
             ConversationCommand.HEAL_LIFE -> healLife(nextId)
             ConversationCommand.RECEIVE_XP -> receiveXp(nextId)
+            ConversationCommand.RECEIVE_SPELLS -> receiveSpells(nextId)
             ConversationCommand.START_BATTLE -> startBattle(nextId)
             ConversationCommand.RELOAD_NPCS -> reloadNpcs(nextId)
 
@@ -289,6 +291,11 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
 
     private fun receiveXp(nextId: String) {
         XpRewarder.receivePossibleXp(conversationId!!)
+        continueConversation(nextId)
+    }
+
+    private fun receiveSpells(nextId: String) {
+        SpellsRewarder.receivePossibleSpells(conversationId!!)
         continueConversation(nextId)
     }
 

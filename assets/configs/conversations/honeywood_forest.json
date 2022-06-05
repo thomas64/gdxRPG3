@@ -133,14 +133,22 @@
       "1": {"text": ["[Explanation about warp crystals.]"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "fairy_school"      : {
+  "fairy_school" : {
     "phrases": {
       "1": {
         "text": ["Young Mozes, would you like to learn a spell?"], "choices": [
-          {"text": "Yes please. (Open school)", "command": "LOAD_SCHOOL"},
+          {"condition": ["i_!starting_spells"], "text": "Yes please. (Open school)", "nextId": "2"},
+          {"condition": ["i_starting_spells"], "text": "Yes please. (Open school)", "command": "LOAD_SCHOOL"},
           {"text": "No thanks. (Leave conversation)", "command": "EXIT"}
         ]
-      }
+      },
+      "2": {"text": ["It seems that you are not very familiair with spell casting yet.", "I will teach you my 2 spells at rank 1, for free."]},
+      "3": {"text": ["Ready? Here you go!"]},
+      "4": {"text": [". . ."]},
+      "5": {"face": "mozes", "text": [". . . ."]},
+      "6": {"face": "fairy5", "text": [". . . . ."], "choices": [{"command": "RECEIVE_SPELLS", "nextId": "7"}]},
+      "7": {"text": ["You can see all the spells you know in your Inventory Screen, and best of all, now you can also use these spells in battle!"]},
+      "8": {"text": ["Come see me again if you want to learn more spells."], "choices": [{"command": "EXIT"}]}
     }
   },
   "fairy_academy"     : {

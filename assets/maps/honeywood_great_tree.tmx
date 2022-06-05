@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="48" height="50" tilewidth="24" tileheight="24" infinite="0" nextlayerid="18" nextobjectid="105">
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="48" height="50" tilewidth="24" tileheight="24" infinite="0" nextlayerid="18" nextobjectid="105">
  <properties>
   <property name="bgm" value="bgm_great_tree"/>
   <property name="bgs" value="bgs_birds"/>
@@ -178,7 +178,7 @@
  </objectgroup>
  <objectgroup color="#55aaff" id="12" name="spawn">
   <object id="47" name="honeywood_cave_4" x="576" y="1008" width="48" height="24"/>
-  <object id="101" name="honeywood_great_tree" x="576" y="768" width="48" height="24">
+  <object id="101" name="honeywood_great_tree" x="744" y="408" width="48" height="24">
    <properties>
     <property name="direction" value="south"/>
    </properties>

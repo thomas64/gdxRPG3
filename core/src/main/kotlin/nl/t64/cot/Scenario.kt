@@ -39,7 +39,7 @@ class Scenario {
         val missile = InventoryDatabase.createInventoryItem("basic_shortbow")
         val shield = InventoryDatabase.createInventoryItem("basic_light_shield")
         val gloves = InventoryDatabase.createInventoryItem("basic_light_shoulders")
-        val gold = InventoryDatabase.createInventoryItem("gold", 8)
+        val gold = InventoryDatabase.createInventoryItem("gold", 4)
         val potion = InventoryDatabase.createInventoryItem("curing_potion")
         gameData.storage.autoSetItem(hafted)
         gameData.storage.autoSetItem(missile)

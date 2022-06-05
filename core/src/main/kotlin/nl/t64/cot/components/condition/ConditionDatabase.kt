@@ -31,6 +31,8 @@ object ConditionDatabase {
         "!been_in_fairy_town"       to { !hasBeenInFairyTown },
         "been_in_fairy_town"        to { hasBeenInFairyTown },
         "defeated_orc_guards"       to { hasDefeatedOrcGuards },
+        "i_!starting_spells"        to { !hasStartingSpells },
+        "i_starting_spells"         to { hasStartingSpells },
         "!talked_to_lennor"         to { hasNotYetTalkedToLennorFirstCycle },
         "alone_in_party"            to { isAloneInParty }
         // @formatter:on
@@ -59,6 +61,7 @@ object ConditionDatabase {
                 || isOneOfBothStatesEqualOrHigher("quest_mother_fairy", QuestState.ACCEPTED)
     private val hasBeenInFairyTown get() = hasEventPlayed("find_great_tree")
     private val hasDefeatedOrcGuards get() = isBattleWon("quest_orc_guards")
+    private val hasStartingSpells get() = hasAnySpell("mozes")
     private val hasNotYetTalkedToLennorFirstCycle
         get() = isQuestResetStateEqual("quest_a_helping_horse", QuestState.UNKNOWN)
                 && isCurrentPhraseId("quest_a_helping_horse", "1")
@@ -68,6 +71,9 @@ object ConditionDatabase {
 
     private fun hasEnoughOfSkill(skillItemId: SkillItemId, rank: Int): Boolean =
         gameData.party.hasEnoughOfSkill(skillItemId, rank)
+
+    private fun hasAnySpell(heroId: String): Boolean =
+        gameData.party.getCertainHero(heroId).getAllSpells().isNotEmpty()
 
     private fun hasAverageLevelOf(requestedLevel: Int): Boolean =
         gameData.party.getAverageLevel() >= requestedLevel
