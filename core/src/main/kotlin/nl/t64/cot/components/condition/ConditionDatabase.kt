@@ -15,6 +15,7 @@ object ConditionDatabase {
         "i_herb6"                   to { hasEnoughOfItem("herb",                    6) },
         "i_blue_jelly1"             to { hasEnoughOfItem("blue_jelly",              1) },
         "i_horse_medicine1"         to { hasEnoughOfItem("horse_medicine",          1) },
+        "gold1"                     to { hasEnoughOfItem("gold",                    1) },
         "metal2"                    to { hasEnoughOfItem("metal",                   2) },
         "i_horseshoe4"              to { hasEnoughOfItem("horseshoe",               4) },
 

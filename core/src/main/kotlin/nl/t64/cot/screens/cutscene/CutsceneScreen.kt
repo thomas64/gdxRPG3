@@ -161,9 +161,13 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
     abstract fun exitScreen()
 
     fun endCutsceneAndOpenMap(mapTitle: String, cutsceneId: String) {
+        endCutsceneAndOpenMapAnd(mapTitle, cutsceneId) {}
+    }
+
+    fun endCutsceneAndOpenMapAnd(mapTitle: String, cutsceneId: String, actionAfter: () -> Unit) {
         endCutsceneAnd {
-            mapManager.loadMapAfterCutscene(mapTitle, cutsceneId)
-            screenManager.setScreen(ScreenType.WORLD)
+            openMap(mapTitle, cutsceneId)
+            actionAfter.invoke()
         }
     }
 
@@ -173,8 +177,13 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
         Utils.setGamepadInputProcessor(null)
         actorsStage.addAction(Actions.sequence(
             if (title.isVisible) fadeFromTitle() else fadeFromMap(),
-            Actions.run { actionAfter() }
+            Actions.run { actionAfter.invoke() }
         ))
+    }
+
+    private fun openMap(mapTitle: String, cutsceneId: String) {
+        mapManager.loadMapAfterCutscene(mapTitle, cutsceneId)
+        screenManager.setScreen(ScreenType.WORLD)
     }
 
     private fun fadeFromTitle(): Action {

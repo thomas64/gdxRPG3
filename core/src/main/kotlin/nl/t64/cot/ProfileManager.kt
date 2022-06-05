@@ -52,6 +52,7 @@ class ProfileManager {
     fun saveProfile() {
         brokerManager.profileObservers.notifySaveProfile(this)
         writeProfileToDisk(null)
+        brokerManager.messageObservers.notifyShowMessageTooltip("Game saved.")
     }
 
     fun loadProfile(profileIndex: Int) {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="18" height="30" tilewidth="24" tileheight="24" infinite="0" nextlayerid="33" nextobjectid="37">
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="18" height="30" tilewidth="24" tileheight="24" infinite="0" nextlayerid="33" nextobjectid="39">
  <properties>
   <property name="bgm" value="bgm_house"/>
   <property name="step_sound" value="wood"/>
@@ -85,6 +85,7 @@
   <object id="34" name="note_closet" x="48" y="120" width="48" height="48"/>
   <object id="35" name="note_closet" x="336" y="120" width="48" height="48"/>
   <object id="36" name="note_bookcase" x="192" y="504" width="48" height="48"/>
+  <object id="38" name="sparkle0021" x="96" y="336" width="48" height="48"/>
  </objectgroup>
  <objectgroup color="#55aaff" id="11" name="spawn">
   <object id="24" name="honeywood_house_elder" x="336" y="480" width="48" height="24"/>

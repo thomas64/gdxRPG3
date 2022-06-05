@@ -80,7 +80,7 @@
   <object id="22" name="note_bookcase" x="192" y="120" width="48" height="48"/>
   <object id="23" name="note_shelves" x="240" y="120" width="48" height="48"/>
   <object id="24" name="note_closet" x="336" y="120" width="48" height="48"/>
-  <object id="25" name="note_food" x="288" y="528" width="96" height="48"/>
+  <object id="25" name="note_food" x="288" y="552" width="96" height="24"/>
   <object id="28" name="sparkle0019" x="240" y="288" width="48" height="48"/>
  </objectgroup>
  <objectgroup color="#55ff7f" id="15" name="npc">

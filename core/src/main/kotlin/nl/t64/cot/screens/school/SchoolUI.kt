@@ -18,7 +18,7 @@ private const val SCHOOL_WINDOW_POSITION_X = 561f
 private const val SCHOOL_WINDOW_POSITION_Y = 50f
 private const val SPELLS_WINDOW_POSITION_X = 985f
 private const val SPELLS_WINDOW_POSITION_Y = 50f
-private const val CALCS_WINDOW_POSITION_X = 1616f
+private const val CALCS_WINDOW_POSITION_X = 1566f
 private const val CALCS_WINDOW_POSITION_Y = 610f
 
 private const val SPELLS_CONTAINER_HEIGHT = 704f

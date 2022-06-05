@@ -1,7 +1,7 @@
 package nl.t64.cot.subjects
 
 
-interface QuestObserver {
+interface MessageObserver {
 
     fun onNotifyShowMessageTooltip(message: String)
 

@@ -238,7 +238,7 @@ data class QuestGraph(
 
     private fun showMessageTooltipQuestNew() {
         if (!isHidden && resetState == QuestState.UNKNOWN) {
-            brokerManager.questObservers.notifyShowMessageTooltip("New quest:" + System.lineSeparator() + title)
+            brokerManager.messageObservers.notifyShowMessageTooltip("New quest:" + System.lineSeparator() + title)
         }
     }
 
@@ -246,7 +246,7 @@ data class QuestGraph(
         if (!isHidden && currentState == QuestState.ACCEPTED
             && (!isReadyToBeFinished() || (isSubQuest && isReadyToBeFinished()))
         ) {
-            brokerManager.questObservers.notifyShowMessageTooltip("Quest updated:" + System.lineSeparator() + title)
+            brokerManager.messageObservers.notifyShowMessageTooltip("Quest updated:" + System.lineSeparator() + title)
         }
     }
 
@@ -254,12 +254,12 @@ data class QuestGraph(
         if (!isHidden && !isSubQuest) {
             audioManager.handle(AudioCommand.SE_STOP_ALL)
             audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_REWARD)
-            brokerManager.questObservers.notifyShowMessageTooltip("Quest completed:" + System.lineSeparator() + title)
+            brokerManager.messageObservers.notifyShowMessageTooltip("Quest completed:" + System.lineSeparator() + title)
         }
     }
 
     private fun showMessageTooltipQuestFailed() {
-        brokerManager.questObservers.notifyShowMessageTooltip("Quest failed:" + System.lineSeparator() + title)
+        brokerManager.messageObservers.notifyShowMessageTooltip("Quest failed:" + System.lineSeparator() + title)
     }
 
 }

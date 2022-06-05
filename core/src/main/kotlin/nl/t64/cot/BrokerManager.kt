@@ -15,7 +15,7 @@ class BrokerManager {
     val lootObservers = LootSubject()
     val mapObservers = MapSubject()
     val entityObservers = EntitySubject()
-    val questObservers = QuestSubject()
+    val messageObservers = MessageSubject()
 
     val profileObservers = ProfileSubject()
 

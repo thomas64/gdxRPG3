@@ -44,7 +44,8 @@ import nl.t64.cot.subjects.*
 
 
 class WorldScreen : Screen,
-    MapObserver, ComponentObserver, EntityObserver, LootObserver, ConversationObserver, QuestObserver, BattleObserver {
+    MapObserver, ComponentObserver, EntityObserver, LootObserver, ConversationObserver, MessageObserver,
+    BattleObserver {
 
     private lateinit var previousGameState: GameState
     private lateinit var gameState: GameState
@@ -72,7 +73,7 @@ class WorldScreen : Screen,
     private lateinit var doorList: List<Entity>
 
     init {
-        brokerManager.questObservers.addObserver(this)
+        brokerManager.messageObservers.addObserver(this)
         brokerManager.componentObservers.addObserver(this)
         brokerManager.mapObservers.addObserver(this)
         brokerManager.entityObservers.addObserver(this)
@@ -231,7 +232,7 @@ class WorldScreen : Screen,
     }
     //endregion
 
-    //region QuestObserver /////////////////////////////////////////////////////////////////////////////////////////////
+    //region MessageObserver ///////////////////////////////////////////////////////////////////////////////////////////
 
     override fun onNotifyShowMessageTooltip(message: String) {
         messageTooltip.show(message, stage)

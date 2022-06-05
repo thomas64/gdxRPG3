@@ -1,15 +1,15 @@
 package nl.t64.cot.subjects
 
 
-class QuestSubject {
+class MessageSubject {
 
-    private val observers: MutableList<QuestObserver> = ArrayList()
+    private val observers: MutableList<MessageObserver> = ArrayList()
 
-    fun addObserver(observer: QuestObserver) {
+    fun addObserver(observer: MessageObserver) {
         observers.add(observer)
     }
 
-    fun removeObserver(observer: QuestObserver) {
+    fun removeObserver(observer: MessageObserver) {
         observers.remove(observer)
     }
 

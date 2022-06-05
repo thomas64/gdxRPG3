@@ -109,9 +109,9 @@
     "isSubQuest": true,
     "tasks"     : {
       "9": {
-        "taskPhrase"  : "        [Optional] Exchange 2 metal for 1 horseshoe with the blacksmith.",
+        "taskPhrase"  : "        [Optional] Exchange 1 gold and 2 metal for 1 horseshoe with the blacksmith.",
         "type"        : "TRADE_ITEMS",
-        "target"      : {"metal": 2},
+        "target"      : {"gold": 1, "metal": 2},
         "receive"     : {"horseshoe": 1},
         "isOptional"  : true,
         "isRepeatable": true

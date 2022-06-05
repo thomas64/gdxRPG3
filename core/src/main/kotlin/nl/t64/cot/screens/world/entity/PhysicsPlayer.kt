@@ -158,7 +158,7 @@ class PhysicsPlayer : PhysicsComponent() {
     private fun getNorth(): Rectangle {
         return Rectangle().apply {
             setWidth(boundingBox.width / 4f)
-            setHeight(Constant.HALF_TILE_SIZE + 1)
+            setHeight(Constant.HALF_TILE_SIZE - 1f)
             setX(boundingBox.x + (boundingBox.width / 2f) - (boundingBox.width / 8f))
             setY(boundingBox.y + boundingBox.height)
         }
@@ -167,27 +167,27 @@ class PhysicsPlayer : PhysicsComponent() {
     private fun getSouth(): Rectangle {
         return Rectangle().apply {
             setWidth(boundingBox.width / 4f)
-            setHeight(Constant.HALF_TILE_SIZE)
+            setHeight(Constant.HALF_TILE_SIZE - 1f)
             setX(boundingBox.x + (boundingBox.width / 2f) - (boundingBox.width / 8f))
-            setY(boundingBox.y - Constant.HALF_TILE_SIZE)
+            setY(boundingBox.y - Constant.HALF_TILE_SIZE + 1f)
         }
     }
 
     private fun getWest(): Rectangle {
         return Rectangle().apply {
-            setWidth(Constant.HALF_TILE_SIZE)
-            setHeight(boundingBox.height + 6f)
-            setX(boundingBox.x - Constant.HALF_TILE_SIZE)
-            setY(boundingBox.y - 3f)
+            setWidth(Constant.HALF_TILE_SIZE - 1f)
+            setHeight(boundingBox.height)
+            setX(boundingBox.x - Constant.HALF_TILE_SIZE + 1f)
+            setY(boundingBox.y)
         }
     }
 
     private fun getEast(): Rectangle {
         return Rectangle().apply {
-            setWidth(Constant.HALF_TILE_SIZE)
-            setHeight(boundingBox.height + 6f)
+            setWidth(Constant.HALF_TILE_SIZE - 1f)
+            setHeight(boundingBox.height)
             setX(boundingBox.x + boundingBox.width)
-            setY(boundingBox.y - 3f)
+            setY(boundingBox.y)
         }
     }
 

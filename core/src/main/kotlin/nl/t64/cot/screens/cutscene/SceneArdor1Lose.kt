@@ -291,8 +291,7 @@ class SceneArdor1Lose : CutsceneScreen() {
 
     override fun exitScreen() {
         audioManager.handle(AudioCommand.SE_STOP, AudioEvent.SE_MAGIC)
-        scenario.startSecondCycle()
-        endCutsceneAndOpenMap("honeywood_house_mozes", "scene_ardor_1")
+        endCutsceneAndOpenMapAnd("honeywood_house_mozes", "scene_ardor_1") { scenario.startSecondCycle() }
     }
 
 }

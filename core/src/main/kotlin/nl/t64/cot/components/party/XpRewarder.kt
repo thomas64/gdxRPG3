@@ -36,12 +36,12 @@ object XpRewarder {
 
     private fun showMessageTooltipXpOnly(xp: Int) {
         audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_REWARD)
-        brokerManager.questObservers.notifyShowMessageTooltip("+ $xp XP")
+        brokerManager.messageObservers.notifyShowMessageTooltip("+ $xp XP")
     }
 
     private fun showMessageTooltipXpAndLevelUp(xp: Int, levelUpMessage: String) {
         audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_LEVELUP)
-        brokerManager.questObservers.notifyShowMessageTooltip("+ $xp XP" + System.lineSeparator() + levelUpMessage)
+        brokerManager.messageObservers.notifyShowMessageTooltip("+ $xp XP" + System.lineSeparator() + levelUpMessage)
     }
 
 }
