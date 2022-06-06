@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="96" height="78" tilewidth="24" tileheight="24" infinite="0" nextlayerid="56" nextobjectid="389">
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="96" height="78" tilewidth="24" tileheight="24" infinite="0" nextlayerid="56" nextobjectid="390">
  <properties>
   <property name="bgm" value="bgm_town"/>
   <property name="lightmap_camera" value="sunlight"/>
@@ -49,7 +49,7 @@
  </layer>
  <layer id="39" name="over6_objects" width="96" height="78">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer id="40" name="over7_over" width="96" height="78">
@@ -190,7 +190,7 @@
   <object id="40" x="672" y="288" width="144" height="144"/>
   <object id="41" x="480" y="432" width="384" height="72"/>
   <object id="42" x="816" y="336" width="48" height="96"/>
-  <object id="43" x="288" y="672" width="288" height="168"/>
+  <object id="43" x="336" y="672" width="240" height="168"/>
   <object id="44" x="576" y="720" width="96" height="48"/>
   <object id="45" x="624" y="816" width="96" height="48"/>
   <object id="46" x="816" y="624" width="96" height="48"/>
@@ -266,6 +266,7 @@
   <object id="154" x="672" y="1368" width="48" height="24"/>
   <object id="155" x="336" y="1368" width="288" height="24"/>
   <object id="346" x="1128" y="1728" width="216" height="48"/>
+  <object id="389" x="288" y="744" width="48" height="96"/>
  </objectgroup>
  <objectgroup color="#5500ff" id="43" name="rest">
   <object id="164" name="note_well" x="1848" y="1320" width="96" height="72"/>

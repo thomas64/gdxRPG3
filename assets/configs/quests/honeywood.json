@@ -121,14 +121,14 @@
   "quest_honeywood_inn_price-1": {
     "title"   : "Pest removal",
     "entityId": "woman02",
-    "summary" : "[The innkeeper has a problem with bats]",
+    "summary" : "The innkeeper of Honeywood has a problem with some unwanted visitors upstairs. Her guests don't want to stay at her inn as long as these bats are roaming free. She would very much appreciate it if you could get rid of them.",
     "tasks"   : {
       "1": {
-        "taskPhrase": "[Kill all the bats]",
+        "taskPhrase": "Remove all the bats upstairs.",
         "type"      : "KILL"
       },
       "2": {
-        "taskPhrase": "[Report back]",
+        "taskPhrase": "Report back to the innkeeper.",
         "type"      : "RETURN"
       }
     }

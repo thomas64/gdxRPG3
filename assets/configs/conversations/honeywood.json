@@ -115,39 +115,48 @@
     "phrases": {
       "1"   : {
         "text": ["Hey Mozes, would you like to rest here and be totally revitalized for only 1 gold piece?"], "choices": [
+          {"condition": ["i_c_==_a_q_this", "i_tn_1_q_this"], "text": "Where were those bats again?", "nextId": "40"},
+          {"condition": ["i_ta_1_q_this"], "text": "Your troubles are over, all the bats are gone.", "nextId": "50"},
           {"text": "Yes please, I could use some rest. (Restore health)", "command": "HEAL_LIFE", "nextId": "2"},
           {"text": "No thanks, now's not necessary. (Leave conversation)", "command": "EXIT"},
-          {"condition": ["i_c_==_u_q_this"], "text": "Is something wrong innkeeper? You look troubled...", "nextId": "10"},
-          {"condition": ["i_c_==_k_q_this"], "text": "[About those bats...]", "nextId": "20"},
-          {"condition": ["i_ta_1_q_this"], "text": "[It is done.]", "nextId": "30"}
+          {"condition": ["i_r_==_u_q_this", "i_c_==_u_q_this"], "text": "Is something wrong innkeeper? You look troubled...", "nextId": "10"},
+          {"condition": ["i_r_>=_k_q_this", "i_c_==_u_q_this"], "text": "I heard you've got some troubles...", "nextId": "10"},
+          {"condition": ["i_c_==_k_q_this"], "text": "About those bats you mentioned...", "nextId": "18"}
         ]
       },
       "2"   : {"text": ["Your health has been restored.", "Please come back anytime you feel weary."], "choices": [{"command": "EXIT"}]},
-      "10"  : {"text": ["Well..."]},
-      "11"  : {
-        "text": ["[Problems with pests. Want to help?]"], "choices": [
-          {"text": "[Yes.]", "command": "ACCEPT_QUEST", "nextId": "12"},
-          {"text": "[No.]", "command": "KNOW_QUEST", "nextId": "13"}
+      "10"  : {"text": ["Trouble? In this establishment? Ridiculous!"]},
+      "11"  : {"text": ["Nothing could be further from the truth."]},
+      "12"  : {"text": ["Why, you won't find a better resting place in miles from here."]},
+      "13"  : {"text": ["Now... whoever's been spreading that silly gossip about upstairs is... well..."]},
+      "14"  : {"text": ["... obviously just a no good tongue wagger, eager to mislead people.", "I've got nothing to hide here!"]},
+      "15"  : {"face": "mozes", "text": ["What's wrong upstairs?"]},
+      "16"  : {"face": "woman02", "text": ["It's nothing. A trifle. You have no need to be afraid or to find another inn.", "Those bats never did any harm."]},
+      "17"  : {"face": "woman02", "text": ["At least not very much."]},
+      "18"  : {
+        "face": "mozes", "choices": [
+          {"text": "Suppose I get rid of them for you?", "command": "ACCEPT_QUEST", "nextId": "20"},
+          {"text": "Bats! I won't be staying after all.", "command": "KNOW_QUEST", "nextId": "30"}
         ]
       },
-      "12"  : {"text": ["[Thanks]"], "choices": [{"command": "EXIT", "nextId": "15"}]},
-      "13"  : {"text": ["[No thanks]"], "choices": [{"command": "EXIT"}]},
-      "15"  : {"text": ["[Made any progress?]"], "choices": [{"nextId": "1"}]},
-      "20"  : {
-        "text": ["[Want to help now?]"], "choices": [
-          {"text": "[Yes.]", "command": "ACCEPT_QUEST", "nextId": "12"},
-          {"text": "[No.]", "nextId": "13"}
-        ]
-      },
-      "30"  : {"text": ["[Thank you for your help, here is your reward]"], "choices": [{"command": "REWARD_QUEST"}]},
-      "1000": {"text": ["I'm sorry dear, you don't have enough gold."], "choices": [{"command": "EXIT"}]},
-      "1100": {"text": ["[You forgot your reward]"], "choices": [{"command": "REWARD_QUEST"}]},
-      "1200": {"text": ["[Thanks again]"], "choices": [{"nextId": "1"}]}
+      "20"  : {"face": "woman02", "text": ["Would you? They've frightened half my customers away!"]},
+      "21"  : {"face": "woman02", "text": ["I'm not brave enough to scare them away myself, they'd scare me instead."]},
+      "22"  : {"face": "mozes", "text": ["Don't worry, ma'am. I'll be glad to help."]},
+      "23"  : {"face": "woman02", "text": ["You do and I'll make it worth your while.", "I'm not one to overlook a kindness, Mozes."]},
+      "24"  : {"face": "mozes", "text": ["Then I'd better start right away."], "choices": [{"command": "EXIT"}]},
+      "30"  : {"face": "woman02", "text": ["I'm truly sorry for this minor inconvenience.", "Please do return to us again on your next stay."], "choices": [{"command": "EXIT"}]},
+      "40"  : {"text": ["Couldn't you shout any louder?", "Them 'visitors' are up the stairs near the fireplace."], "choices": [{"command": "EXIT"}]},
+      "50"  : {"text": ["Splendid! That's wonderful. I bet those bats must have been trained by an evil imp to harass my customers! Thank you!"]},
+      "51"  : {"text": ["There was a reward, you know... five gold pieces.", "With these you can have five stays for free, sort of. Isn't that great?"], "choices": [{"command": "REWARD_QUEST"}]},
+      "1000": {"text": ["I'm sorry Mozes, you don't have enough gold."], "choices": [{"command": "EXIT"}]},
+      "1100": {"text": ["Such a brave yet modest hero! You didn't even take your reward."], "choices": [{"command": "REWARD_QUEST"}]},
+      "1200": {"text": ["Welcome back my fearless boy! Thanks again for your help..."], "choices": [{"nextId": "1"}]}
     }
   },
   "dont_go_up_there"           : {
     "phrases": {
-      "1": {"text": ["[Don't go up there.]"], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["Please don't go upstairs!"]},
+      "2": {"text": ["It's not eh... safe."], "choices": [{"command": "EXIT"}]}
     }
   },
   "get_out_of_kitchen"         : {
