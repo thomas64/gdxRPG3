@@ -8,6 +8,7 @@ enum class QuestTaskType {
     WEAR_ITEM,
     GIVE_ITEM,
     TRADE_ITEMS,
+    DELIVER_ITEM,
     SAY_THE_RIGHT_THING,
     KILL,
 

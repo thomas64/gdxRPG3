@@ -40,9 +40,9 @@ internal class LootUI(resolveLootAndCloseScreen: (Boolean) -> Unit, loot: Loot, 
 
     private fun createText(): String {
         return if (Utils.isGamepadConnected()) {
-            "[A] Take      [Select] Tooltip      [B] Back"
+            "[A] Take/ Back      [Select] Tooltip      [B] Back"
         } else {
-            "[A] Take      [T] Tooltip      [Esc] Back"
+            "[A] Take/ Back      [T] Tooltip      [Esc] Back"
         }
     }
 

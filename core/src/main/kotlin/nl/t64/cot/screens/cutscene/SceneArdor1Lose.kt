@@ -142,7 +142,7 @@ class SceneArdor1Lose : CutsceneScreen() {
             Actions.addAction(Actions.sequence(
                 Actions.alpha(0f),
                 Actions.visible(true),
-                Actions.delay(1f),
+                Actions.delay(0.5f),
                 Actions.run { audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MAGIC_BANG) },
                 Actions.parallel(
                     Actions.repeat(6, Actions.sequence(

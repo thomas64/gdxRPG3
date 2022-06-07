@@ -9,10 +9,22 @@
   },
   "mrs_johanna"                : {
     "phrases": {
-      "1": {"text": ["Mozes my dear, how are you?", "What a beautiful day, isn't it?"]},
-      "2": {"text": ["I come here often to reminisce about this once enormous tree and my late husband Theodore."]},
-      "3": {"text": ["We had such nice summers together under this tree."]},
-      "4": {"text": ["I miss him..."], "choices": [{"command": "EXIT"}]}
+      "1"   : {"text": ["Mozes my dear, how are you?", "What a beautiful day, isn't it?"]},
+      "2"   : {"text": ["I come here often to reminisce about this once enormous tree and my late husband Theodore."]},
+      "3"   : {"text": ["We had such nice summers together under this tree."]},
+      "4"   : {
+        "text": ["I miss him..."], "choices": [
+          {"condition": ["i_c_==_a_q_quest_get_tow_rope", "i_tn_14_q_quest_get_tow_rope"], "nextId": "10"}
+        ]
+      },
+      "2000": {"face": "oldwoman01", "text": ["Life is over before you know it, don't you think?"]},
+      "2001": {"face": "mozes", "text": ["You sure got that right."], "choices": [{"command": "EXIT"}]},
+      "10"  : {"face": "mozes", "text": ["Speaking of Theodore, Jaron found your lost ring."]},
+      "11"  : {"face": "oldwoman01", "text": ["Mozes, that's wonderful news!"]},
+      "12"  : {"face": "mozes", "text": ["Here you are. One silver ring from Theodore."], "choices": [{"command": "DELIVER_QUEST_ITEM", "nextId": "13"}]},
+      "13"  : {"face": "oldwoman01", "text": ["Thank you. Now I can die in peace."]},
+      "14"  : {"face": "mozes", "text": ["Really?"]},
+      "15"  : {"face": "oldwoman01", "text": ["Nah! Of course not. I've got so much to live for. See ya!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "quest_a_helping_horse"      : {
@@ -149,8 +161,8 @@
       "50"  : {"text": ["Splendid! That's wonderful. I bet those bats must have been trained by an evil imp to harass my customers! Thank you!"]},
       "51"  : {"text": ["There was a reward, you know... five gold pieces.", "With these you can have five stays for free, sort of. Isn't that great?"], "choices": [{"command": "REWARD_QUEST"}]},
       "1000": {"text": ["I'm sorry Mozes, you don't have enough gold."], "choices": [{"command": "EXIT"}]},
-      "1100": {"text": ["Such a brave yet modest hero! You didn't even take your reward."], "choices": [{"command": "REWARD_QUEST"}]},
-      "1200": {"text": ["Welcome back my fearless boy! Thanks again for your help..."], "choices": [{"nextId": "1"}]}
+      "1399": {"text": ["Such a brave yet modest hero! You didn't even take your reward."], "choices": [{"command": "REWARD_QUEST"}]},
+      "1400": {"text": ["Welcome back my fearless boy! Thanks again for your help..."], "choices": [{"nextId": "1"}]}
     }
   },
   "dont_go_up_there"           : {
@@ -176,7 +188,7 @@
           {"condition": ["i_druid1"], "nextId": "2"}
         ]
       },
-      "1300": {"face": "mozes", "text": ["* Druid skill rank 1 needed. *"], "choices": [{"command": "EXIT"}]},
+      "2000": {"face": "mozes", "text": ["* Druid skill rank 1 needed. *"], "choices": [{"command": "EXIT"}]},
       "2"   : {"text": ["I'm here only for the mice, there's no way I'll do bats."], "choices": [{"command": "EXIT"}]}
     }
   },
@@ -247,7 +259,7 @@
           {"condition": ["i_druid2", "_c_==_f_q_quest_a_helping_horse"], "nextId": "5"}
         ]
       },
-      "1300": {"face": "mozes", "text": ["* Druid skill rank 2 needed. *"], "choices": [{"command": "EXIT"}]},
+      "2000": {"face": "mozes", "text": ["* Druid skill rank 2 needed. *"], "choices": [{"command": "EXIT"}]},
       "2"   : {"text": ["I'm not feeling so well...", "Maybe I shouldn't have eaten those delicious looking mushrooms."], "choices": [{"command": "EXIT"}]},
       "3"   : {"text": ["I feel great again! Thank you for helping me."], "choices": [{"command": "EXIT"}]},
       "4"   : {"text": ["I will fix that tree for you in no time!"], "choices": [{"command": "EXIT"}]},
@@ -259,8 +271,8 @@
       "1"   : {"face": "oldwoman11", "text": ["Mozes dear, how do you do?"]},
       "2"   : {
         "face": "mozes", "text": ["Thank you ma'am, I'm fine."], "choices": [
-          {"text": "Can you teach me the skill of potion brewing? (Open academy)", "command": "LOAD_ACADEMY"},
           {"condition": ["i_c_!=_f_q_this", "i_rc_>=_a_q_quest_get_horse", "_tn_7_q_quest_get_horse"], "text": "Angie's horse is sick. Can you help her out?", "nextId": "3"},
+          {"text": "Can you teach me the skill of potion brewing? (Open academy)", "command": "LOAD_ACADEMY"},
           {"text": "Have a good day. (Leave conversation)", "command": "EXIT"}
         ]
       },
@@ -286,17 +298,17 @@
       "32"  : {"face": "mozes", "text": [". . . ."]},
       "33"  : {"face": "oldwoman11", "text": [". . . . ."]},
       "34"  : {"face": "oldwoman11", "text": ["Here it is, good luck with it."], "choices": [{"command": "REWARD_QUEST"}]},
-      "1100": {"text": ["Mozes dear, you forgot something."], "choices": [{"command": "REWARD_QUEST"}]},
-      "1200": {
+      "1399": {"text": ["Mozes dear, you forgot something."], "choices": [{"command": "REWARD_QUEST"}]},
+      "1400": {
         "face": "oldwoman11", "text": ["Mozes dear, did the medicine cure the horse?"], "choices": [
-          {"condition": ["i_tn_7_q_quest_get_horse"], "nextId": "1201"},
-          {"condition": ["i_tc_7_q_quest_get_horse"], "nextId": "1210"}
+          {"condition": ["i_tn_7_q_quest_get_horse"], "nextId": "1401"},
+          {"condition": ["i_tc_7_q_quest_get_horse"], "nextId": "1410"}
         ]
       },
-      "1201": {"face": "mozes", "text": ["I didn't gave it yet."]},
-      "1202": {"face": "oldwoman11", "text": ["See that you do. That poor horse."], "choices": [{"command": "EXIT"}]},
-      "1210": {"face": "mozes", "text": ["Yes thank you, it worked like a charm."]},
-      "1211": {"face": "oldwoman11", "text": ["And how are you, my dear?"], "choices": [{"nextId": "2"}]}
+      "1401": {"face": "mozes", "text": ["I didn't gave it yet."]},
+      "1402": {"face": "oldwoman11", "text": ["See that you do. That poor horse."], "choices": [{"command": "EXIT"}]},
+      "1410": {"face": "mozes", "text": ["Yes thank you, it worked like a charm."]},
+      "1411": {"face": "oldwoman11", "text": ["And how are you, my dear?"], "choices": [{"nextId": "2"}]}
     }
   },
   "honeywood_elder"            : {
@@ -333,6 +345,7 @@
       "1"   : {"face": "man07", "text": ["Good day to you neighbour, I'm Black Smith, the blacksmith.", "It never gets old to say that, ha ha!"]},
       "2"   : {
         "face": "man07", "text": ["Can I help you?"], "choices": [
+          {"condition": ["i_c_==_a_q_quest_get_tow_rope", "i_tn_13_q_quest_get_tow_rope"], "text": "Jaron asked me to pay an outstanding bill for him.", "nextId": "100"},
           {"condition": ["i_rc_>=_a_q_quest_get_horse", "i_tn_8_q_quest_get_horse"], "text": "I'm looking for horseshoes. Can you help me?", "nextId": "3"},
           {"text": "No, not really at the moment. (Leave conversation)", "command": "EXIT"}
         ]
@@ -349,13 +362,33 @@
       "22"  : {"face": "mozes", "text": [". . . ."]},
       "23"  : {"face": "man07", "text": [". . . . ."]},
       "24"  : {"face": "man07", "text": ["Here you go."], "choices": [{"command": "TRADE_QUEST_ITEMS"}]},
-      "1100": {"face": "man07", "text": ["You forgot to take your horseshoe."], "choices": [{"command": "RE_TRADE_QUEST_ITEMS"}]},
-      "1200": {"face": "man07", "text": ["Good day to you neighbour, I'm Black Smith, the blacksmith.", "It never gets old to say that, ha ha!"], "choices": [{"nextId": "2"}]}
+      "100" : {"face": "man07", "text": ["Ah, it's about time! That would be four gold pieces then."]},
+      "101" : {"face": "mozes", "text": ["Really? Jaron told me it was only three."]},
+      "102" : {"face": "man07", "text": ["That's what I call interest. That slacker hasn't payed up in such a long time."]},
+      "103" : {"face": "mozes", "text": ["But I only got three gold pieces from Jaron to pay you."]},
+      "104" : {"face": "man07", "text": ["Alright alright, I'll settle with three for now. It's better than nothing.", "I will see to it that I get that fourth one later."]},
+      "105" : {"face": "mozes", "text": ["Here your are. Three gold pieces then."], "choices": [{"command": "DELIVER_QUEST_ITEM", "nextId": "106"}]},
+      "106" : {"face": "man07", "text": ["Thank you very much on behalf of Black Smith Inc."]},
+      "107" : {"face": "man07", "text": ["(Jaron, you lazy bum.)"], "choices": [{"command": "EXIT"}]},
+      "1199": {"face": "man07", "text": ["You forgot to take your horseshoe."], "choices": [{"command": "TRADE_QUEST_ITEMS"}]},
+      "1200": {"face": "man07", "text": ["Hello neighbour, you're back."], "choices": [{"nextId": "2"}]}
     }
   },
   "quest_get_tow_rope"         : {
     "phrases": {
-      "1": {"text": ["Hi Mozes, when the programmer is ready for it, I will give you a 'deliver items quest', which will result in 1 tow rope for you."], "choices": [{"command": "EXIT"}]}
+      "1"   : {"text": ["[Dialogue not finished. I have tow rope, but you need to do 2 deliveries for me. Details are in your QuestLog.]"], "choices": [{"command": "RECEIVE_QUEST_ITEM"}]},
+      "1199": {"text": ["[Dialogue not finished. You forgot to take the items.]"], "choices": [{"command": "RECEIVE_QUEST_ITEM"}]},
+      "1200": {
+        "text": ["[Dialogue not finished. Thanks for helping. Are you finished?]"], "choices": [
+          {"condition": ["_tc_13_q_this", "_tc_14_q_this"], "text": "[Yes]", "nextId": "1201"},
+          {"text": "[No]", "command": "EXIT", "nextId": "1200"}
+        ]
+      },
+      "1201": {
+        "text": ["[Dialogue not finished. Here is your reward.]"], "choices": [{"command": "REWARD_QUEST"}]
+      },
+      "1399": {"text": ["[Dialogue not finished. Forgot your reward.]"], "choices": [{"command": "REWARD_QUEST"}]},
+      "1400": {"text": ["[Dialogue not finished. Super duper thanks.]"], "choices": [{"command": "EXIT", "nextId": "1400"}]}
     }
   },
   "honeywood_soldiers"         : {

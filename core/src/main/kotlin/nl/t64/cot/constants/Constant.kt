@@ -44,9 +44,11 @@ object Constant {
     const val DESCRIPTION_KEY_SELL_TOTAL = "Total sell value"
 
     const val PHRASE_ID_INN_NEGATIVE = "1000"
-    const val PHRASE_ID_LOOT_LEFTOVER = "1100"
+    const val PHRASE_ID_LOOT_LEFTOVER = "1199"
     const val PHRASE_ID_LOOT_TAKEN = "1200"
-    const val PHRASE_ID_NO_CONDITIONS = "1300"
+    const val PHRASE_ID_REWARD_LEFTOVER = "1399"
+    const val PHRASE_ID_REWARD_TAKEN = "1400"
+    const val PHRASE_ID_NO_CONDITIONS = "2000"
     const val PHRASE_ID_PARTY_FULL = "9000"
 
     const val KEYCODE_L1 = 1000

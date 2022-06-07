@@ -12,7 +12,7 @@ class InventoryContainer(numberOfSlots: Int = 0) {
     fun getAllContent(): MutableMap<String, Int> {
         return inventory
             .filterNotNull()
-            .associate { Pair(it.id, it.amount) }   // .map(Pair(etc)).toMap()
+            .associate { it.id to it.amount }   // .map(Pair(it.id, it.amount)).toMap()
             .toMutableMap()
     }
 
@@ -27,13 +27,13 @@ class InventoryContainer(numberOfSlots: Int = 0) {
     fun incrementAmountAt(index: Int, amount: Int) {
         inventory[index]?.increaseAmountWith(amount)
             ?: throw IllegalArgumentException("There is no item to increment amount.")
-        gameData.quests.update()
+        gameData.quests.updateFindItem()
     }
 
     fun decrementAmountAt(index: Int, amount: Int) {
         inventory[index]?.decreaseAmountWith(amount)
             ?: throw IllegalArgumentException("There is no item to decrement amount.")
-        gameData.quests.update()
+        gameData.quests.updateFindItem()
     }
 
     fun getItemAt(index: Int): InventoryItem? {
@@ -75,7 +75,7 @@ class InventoryContainer(numberOfSlots: Int = 0) {
 
     fun forceSetItemAt(index: Int, newItem: InventoryItem?) {
         inventory[index] = newItem
-        gameData.quests.update()
+        gameData.quests.updateFindItem()
     }
 
     fun getSize(): Int {

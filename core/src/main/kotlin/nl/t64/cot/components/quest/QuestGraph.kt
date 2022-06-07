@@ -52,8 +52,8 @@ data class QuestGraph(
             .map { gameData.quests.getQuestById(it) }
             .filter { it.isCurrentStateEqualOrHigherThan(QuestState.ACCEPTED) }
             .map { it.tasks }
-            .flatMap { it.entries }
-            .associate { it.key to it.value }
+            .flatMap { it.toList() }
+            .toMap()
     }
 
     fun reset() {
@@ -132,16 +132,31 @@ data class QuestGraph(
         else throw IllegalStateException("Can only contain 1 TRADE_ITEMS QuestTaskType.")
     }
 
-    fun getReceiveItemsForgottenTradeItemsTask(): Loot {
-        return tasks.values
-            .first { it.type == QuestTaskType.TRADE_ITEMS }
-            .let { Loot(it.receive.toMutableMap()) }
-    }
-
     fun setSayTheRightThingTaskComplete() {
         accept()
         tasks.filterValues { it.type == QuestTaskType.SAY_THE_RIGHT_THING }
             .forEach { setTaskComplete(it.key) }
+    }
+
+    fun receiveItemsToDeliver(): Loot {
+        accept()
+        return tasks.values
+            .filter { it.type == QuestTaskType.DELIVER_ITEM }
+            .map { it.target }
+            .flatMap { it.toList() }
+            .toMap()
+            .toMutableMap()
+            .let { Loot(it) }
+    }
+
+    fun possibleSetDeliverItemTaskComplete(conversationId: String) {
+        if (currentState.isEqualOrLowerThan(QuestState.ACCEPTED)) {
+            tasks.filterValues { it.type == QuestTaskType.DELIVER_ITEM }
+                .filterValues { it.conversationId == conversationId }
+                .filterValues { !it.isComplete }
+                .filterValues { it.hasTargetInInventory() }
+                .forEach { setTaskComplete(it.key) }
+        }
     }
 
     fun setKillTaskComplete() {
@@ -227,7 +242,10 @@ data class QuestGraph(
             .takeLast(1)
             .filter { it.type == QuestTaskType.RETURN }
             .filter { !it.isComplete }
-            .forEach { it.setComplete() }
+            .forEach {
+                it.setComplete()
+                unhideTaskWithLinkedTask(it)
+            }
     }
 
     private fun areAllQuestTasksComplete(): Boolean {

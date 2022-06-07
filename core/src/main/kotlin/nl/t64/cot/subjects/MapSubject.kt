@@ -20,8 +20,8 @@ class MapSubject {
         observers.clear()
     }
 
-    fun notifyFadeOut(actionAfterFade: () -> Unit, transitionColor: Color = Color.BLACK, delay: Float = 0f) {
-        observers.forEach { it.onNotifyFadeOut(actionAfterFade, transitionColor, delay) }
+    fun notifyFadeOut(actionAfterFade: () -> Unit, transitionColor: Color = Color.BLACK, duration: Float = 0f) {
+        observers.forEach { it.onNotifyFadeOut(actionAfterFade, transitionColor, duration) }
     }
 
     fun notifyMapChanged(currentMap: GameMap) {

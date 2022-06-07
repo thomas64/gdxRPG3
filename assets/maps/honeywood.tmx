@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="96" height="78" tilewidth="24" tileheight="24" infinite="0" nextlayerid="56" nextobjectid="390">
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="96" height="78" tilewidth="24" tileheight="24" infinite="0" nextlayerid="56" nextobjectid="391">
  <properties>
   <property name="bgm" value="bgm_town"/>
   <property name="lightmap_camera" value="sunlight"/>
@@ -34,7 +34,7 @@
  </layer>
  <layer id="36" name="under3_objects" width="96" height="78">
   <data encoding="base64" compression="zlib">
-   eJztwYEAAAAAw6D5U1/gCFUBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHwDdQAAAQ==
+   eJzt0AENACAMBLG3M+ngBFSBC5LRKrhcAgAAAAAAANDDqGTW64p/rft++w8AAAAAAAAAAAAAAAAAAAAAAAAAANDOARffA4s=
   </data>
  </layer>
  <layer id="37" name="under4_none" width="96" height="78">
@@ -281,6 +281,7 @@
   <object id="376" name="sparkle0014" x="1968" y="1452" width="48" height="48"/>
   <object id="377" name="sparkle0015" x="2100" y="462" width="48" height="48"/>
   <object id="378" name="sparkle0016" x="234" y="1008" width="48" height="48"/>
+  <object id="390" name="note_black_smith" x="768" y="456" width="48" height="72"/>
  </objectgroup>
  <objectgroup color="#aa55ff" id="13" name="hero">
   <object id="371" name="luana" type="w" x="1152" y="1128" width="48" height="24">
@@ -408,7 +409,7 @@
    </properties>
   </object>
   <object id="359" name="honeywood_inn" x="624" y="1392" width="48" height="24"/>
-  <object id="384" name="honeywood_house_1" x="480" y="864" width="48" height="24"/>
+  <object id="384" name="honeywood_house_jaron" x="480" y="864" width="48" height="24"/>
   <object id="386" name="honeywood_house_smith" x="720" y="528" width="48" height="24"/>
   <object id="387" name="honeywood_house_elder" x="1056" y="864" width="48" height="24"/>
  </objectgroup>
@@ -416,7 +417,7 @@
   <object id="114" name="honeywood_forest_path" x="1896" y="-24" width="96" height="24"/>
   <object id="149" name="honeywood_house_mozes" x="528" y="504" width="48" height="24"/>
   <object id="358" name="honeywood_inn" x="624" y="1368" width="48" height="24"/>
-  <object id="383" name="honeywood_house_1" x="480" y="840" width="48" height="24"/>
+  <object id="383" name="honeywood_house_jaron" x="480" y="840" width="48" height="24"/>
   <object id="385" name="honeywood_house_smith" x="720" y="504" width="48" height="24"/>
   <object id="388" name="honeywood_house_elder" x="1056" y="840" width="48" height="24"/>
  </objectgroup>

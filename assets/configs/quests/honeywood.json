@@ -14,7 +14,7 @@
     "title"     : "A helping horse",
     "entityId"  : "man01",
     "summary"   : "A fallen tree has blocked the road to Honeywood Forest. Lennor needs your help to get a strong horse and some tow ropes if you want to speed up the process of clearing the road.",
-    "linkedWith": ["quest_get_horse", "quest_get_medicine", "quest_get_horseshoes"],
+    "linkedWith": ["quest_get_horse", "quest_get_tow_rope", "quest_get_medicine", "quest_get_horseshoes"],
     "tasks"     : {
       "1" : {
         "taskPhrase": "Bring a strong horse to Lennor.",
@@ -25,17 +25,46 @@
         "updatedPhrase": "Get 2 tow ropes",
         "type"         : "FIND_ITEM",
         "target"       : {"tow_rope": 2},
-        "linkedWith"   : ["12"]
+        "linkedWith"   : ["16"]
       },
-      "12": {
+      "16": {
         "taskPhrase": "Deliver the ropes to Lennor.",
         "type"      : "GIVE_ITEM",
         "target"    : {"tow_rope": 2},
         "isHidden"  : true
       },
-      "13": {
+      "17": {
         "taskPhrase": "Let the tree be dragged out of the way.",
         "type"      : "FREE"
+      }
+    }
+  },
+  "quest_get_tow_rope"         : {
+    "title"     : "A helping horse",
+    "entityId"  : "youngman01",
+    "summary"   : "Get tow rope",
+    "isSubQuest": true,
+    "tasks"     : {
+      "12": {
+        "taskPhrase": "    Jaron has a tow rope, but needs it at the moment. Do some deliveries for him, so he can give it to you.",
+        "type"      : "FREE"
+      },
+      "13": {
+        "taskPhrase"    : "    Deliver 3 gold pieces to the blacksmith.",
+        "type"          : "DELIVER_ITEM",
+        "target"        : {"gold": 3},
+        "conversationId": "quest_get_horseshoes"
+      },
+      "14": {
+        "taskPhrase"    : "    Deliver Theodore's lost ring to mrs. Johanna.",
+        "type"          : "DELIVER_ITEM",
+        "target"        : {"basic_silver_ring": 1},
+        "conversationId": "mrs_johanna"
+      },
+      "15": {
+        "taskPhrase": "    Report back to Jaron",
+        "type"      : "RETURN",
+        "linkedWith": ["12"]
       }
     }
   },

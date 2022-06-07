@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="34" height="30" tilewidth="24" tileheight="24" infinite="0" nextlayerid="18" nextobjectid="61">
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="34" height="30" tilewidth="24" tileheight="24" infinite="0" nextlayerid="18" nextobjectid="62">
  <properties>
   <property name="bgm" value="bgm_inn"/>
   <property name="bgs" value="bgs_fireplace"/>
@@ -97,6 +97,7 @@
   <object id="57" name="note_fireplace" x="240" y="120" width="48" height="48"/>
   <object id="59" name="note_shelves" x="672" y="96" width="48" height="48"/>
   <object id="60" name="note_shelves" x="720" y="120" width="48" height="48"/>
+  <object id="61" name="note_kitchen" x="528" y="144" width="48" height="24"/>
  </objectgroup>
  <objectgroup color="#55ff7f" id="14" name="npc">
   <object id="44" name="woman02" x="600" y="360" width="48" height="24">

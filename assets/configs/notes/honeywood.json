@@ -10,5 +10,10 @@
         ], "choices": [{"command": "EXIT"}]
       }
     }
+  },
+  "note_black_smith"     : {
+    "phrases": {
+      "1": {"text": ["Black Smith Inc."], "choices": [{"command": "EXIT"}]}
+    }
   }
 }

@@ -9,6 +9,7 @@ class QuestTask(
     val type: QuestTaskType = QuestTaskType.NONE,
     val target: Map<String, Int> = emptyMap(),
     val receive: Map<String, Int> = emptyMap(),
+    val conversationId: String = "",
     val isOptional: Boolean = false,
     var isHidden: Boolean = false,
     var isRepeatable: Boolean = false,
@@ -54,6 +55,7 @@ class QuestTask(
             QuestTaskType.SAY_THE_RIGHT_THING,
             QuestTaskType.KILL,
             QuestTaskType.RETURN -> completeTask()
+            QuestTaskType.DELIVER_ITEM,
             QuestTaskType.TRADE_ITEMS,
             QuestTaskType.GIVE_ITEM -> {
                 removeTargetFromInventory()

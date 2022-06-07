@@ -31,10 +31,10 @@ class RewardScreen : LootScreen() {
     override fun resolveLootAndCloseScreen(isAllTheLootCleared: Boolean) {
         if (isAllTheLootCleared) {
             quest.finish(true)
-            conversation.currentPhraseId = Constant.PHRASE_ID_LOOT_TAKEN
+            conversation.currentPhraseId = Constant.PHRASE_ID_REWARD_TAKEN
         } else {
             quest.unclaim()
-            conversation.currentPhraseId = Constant.PHRASE_ID_LOOT_LEFTOVER
+            conversation.currentPhraseId = Constant.PHRASE_ID_REWARD_LEFTOVER
         }
         closeScreen()
     }

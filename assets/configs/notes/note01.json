@@ -11,7 +11,7 @@
   },
   "note_bed01"         : {
     "phrases": {
-      "1": {"text": ["It's someone else's bed.", "What could possibly be your plan?"], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["It's someone else's bed.", "What could possibly be your idea?"], "choices": [{"command": "EXIT"}]}
     }
   },
   "note_bed02"         : {
@@ -31,7 +31,7 @@
   },
   "note_food"          : {
     "phrases": {
-      "1": {"text": ["Did you wash your hands first?"], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["It's food. Did you wash your hands first?"], "choices": [{"command": "EXIT"}]}
     }
   },
   "note_bookcase"      : {
@@ -46,12 +46,17 @@
   },
   "note_shelves"       : {
     "phrases": {
-      "1": {"text": ["Looks organized, better not touch it."], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["Looks organized. Better not touch it."], "choices": [{"command": "EXIT"}]}
     }
   },
   "note_fireplace"     : {
     "phrases": {
       "1": {"text": ["The fire is warm and gentile."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "note_kitchen"       : {
+    "phrases": {
+      "1": {"text": ["Do you want to prepare a meal or something?"], "choices": [{"command": "EXIT"}]}
     }
   }
 }

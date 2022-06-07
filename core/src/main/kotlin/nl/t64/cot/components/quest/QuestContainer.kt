@@ -18,8 +18,12 @@ class QuestContainer {
         quests.values.forEach { it.reset() }
     }
 
-    fun update() {
+    fun updateFindItem() {
         quests.values.forEach { it.possibleSetFindItemTaskComplete() }
+    }
+
+    fun updateDeliverItem(conversationId: String) {
+        quests.values.forEach { it.possibleSetDeliverItemTaskComplete(conversationId) }
     }
 
     fun contains(questId: String): Boolean = quests.containsKey(questId)

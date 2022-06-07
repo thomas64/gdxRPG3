@@ -32,6 +32,7 @@ import nl.t64.cot.components.party.SpellsRewarder
 import nl.t64.cot.components.party.XpRewarder
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.academy.AcademyScreen
+import nl.t64.cot.screens.loot.ReceiveScreen
 import nl.t64.cot.screens.loot.RewardScreen
 import nl.t64.cot.screens.loot.TradeScreen
 import nl.t64.cot.screens.school.SchoolScreen
@@ -208,11 +209,12 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             ConversationCommand.KNOW_QUEST -> knowQuest(nextId)
             ConversationCommand.ACCEPT_QUEST -> acceptQuest(nextId)
             ConversationCommand.TRADE_QUEST_ITEMS -> tradeQuestItems()
-            ConversationCommand.RE_TRADE_QUEST_ITEMS -> reTradeQuestItems()
             ConversationCommand.SHOW_QUEST_ITEM -> showQuestItem(nextId)
             ConversationCommand.WEAR_QUEST_ITEM -> wearQuestItem(nextId)
             ConversationCommand.GIVE_QUEST_ITEM -> giveQuestItem(nextId)
             ConversationCommand.SAY_QUEST_THING -> sayQuestThing(nextId)
+            ConversationCommand.RECEIVE_QUEST_ITEM -> receiveQuestItem()
+            ConversationCommand.DELIVER_QUEST_ITEM -> deliverQuestItem(nextId)
 
             ConversationCommand.REWARD_QUEST -> rewardQuest()
 
@@ -221,19 +223,20 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun tryToAddHeroToParty(nextId: String) {
-        val heroes = gameData.heroes
-        val party = gameData.party
-        val hero = heroes.getCertainHero(faceId!!)
-
-        if (party.isFull) {
+        if (gameData.party.isFull) {
             continueConversation(Constant.PHRASE_ID_PARTY_FULL)
         } else {
-            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_JOIN)
-            heroes.removeHero(faceId!!)
-            party.addHero(hero)
-            conversationObserver.notifyHeroJoined()
-            endConversationWithoutSound(nextId)
+            addHeroToParty(nextId)
         }
+    }
+
+    private fun addHeroToParty(nextId: String) {
+        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_JOIN)
+        val newHero = gameData.heroes.getCertainHero(faceId!!)
+        gameData.heroes.removeHero(faceId!!)
+        gameData.party.addHero(newHero)
+        conversationObserver.notifyHeroJoined()
+        endConversationWithoutSound(nextId)
     }
 
     private fun dismissHero(nextId: String) {
@@ -277,7 +280,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         }
         delayInputListeners()
         gameData.party.recoverFullHp()
-        brokerManager.mapObservers.notifyFadeOut({ continueConversation(nextId) }, delay = 1f)
+        brokerManager.mapObservers.notifyFadeOut({ continueConversation(nextId) }, duration = 1f)
     }
 
     private fun pay(price: Int) {
@@ -320,21 +323,8 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun tradeQuestItems() {
-        val quest = gameData.quests.getQuestById(conversationId!!)
-        val receive = quest.possibleSetTradeItemsTaskComplete()
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_CONVERSATION_END)
-        stage.addAction(Actions.sequence(Actions.run { hideWithFade() },
-                                         Actions.delay(Constant.DIALOG_FADE_OUT_DURATION),
-                                         Actions.run { TradeScreen.load(receive, graph) }))
-    }
-
-    private fun reTradeQuestItems() {
-        val quest = gameData.quests.getQuestById(conversationId!!)
-        val receive = quest.getReceiveItemsForgottenTradeItemsTask()
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_CONVERSATION_END)
-        stage.addAction(Actions.sequence(Actions.run { hideWithFade() },
-                                         Actions.delay(Constant.DIALOG_FADE_OUT_DURATION),
-                                         Actions.run { TradeScreen.load(receive, graph) }))
+        val receive = ConversationSpoilLoader.getLoot(conversationId!!) { possibleSetTradeItemsTaskComplete() }
+        endConversationAndLoad { TradeScreen.load(receive, graph) }
     }
 
     private fun showQuestItem(nextId: String) {
@@ -357,14 +347,20 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         endConversation(nextId)
     }
 
+    private fun receiveQuestItem() {
+        val receive = ConversationSpoilLoader.getLoot(conversationId!!) { receiveItemsToDeliver() }
+        endConversationAndLoad { ReceiveScreen.load(receive, graph) }
+    }
+
+    private fun deliverQuestItem(nextId: String) {
+        gameData.quests.updateDeliverItem(conversationId!!)
+        continueConversation(nextId)
+    }
+
     private fun rewardQuest() {
         val quest = gameData.quests.getQuestById(conversationId!!)
         val reward = gameData.loot.getLoot(conversationId!!)
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_CONVERSATION_END)
-        stage.addAction(Actions.sequence(Actions.run { hideWithFade() },
-                                         Actions.delay(Constant.DIALOG_FADE_OUT_DURATION),
-                                         Actions.run { RewardScreen.load(reward, quest, graph) })
-        )
+        endConversationAndLoad { RewardScreen.load(reward, quest, graph) }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -408,6 +404,13 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         graph.currentPhraseId = nextId
         hide()
         conversationObserver.notifyExitConversation()
+    }
+
+    private fun endConversationAndLoad(lootScreen: () -> Unit) {
+        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_CONVERSATION_END)
+        stage.addAction(Actions.sequence(Actions.run { hideWithFade() },
+                                         Actions.delay(Constant.DIALOG_FADE_OUT_DURATION),
+                                         Actions.run { lootScreen.invoke() }))
     }
 
     private fun hideWithFade() {

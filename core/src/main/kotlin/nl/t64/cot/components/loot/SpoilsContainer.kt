@@ -9,8 +9,16 @@ class SpoilsContainer {
         return spoils.filterValues { it.mapId == mapId }
     }
 
-    fun addSpoil(battleId: String, spoil: Spoil) {
-        spoils[battleId] = spoil
+    fun containsActiveSpoil(conversationId: String?): Boolean {
+        return spoils[conversationId]?.loot?.isTaken() == false
+    }
+
+    fun getByConversationId(conversationId: String): Spoil {
+        return spoils[conversationId]!!
+    }
+
+    fun addSpoil(battleOrConversationId: String, spoil: Spoil) {
+        spoils[battleOrConversationId] = spoil
     }
 
 }

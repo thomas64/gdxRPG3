@@ -52,7 +52,8 @@
       "2": {"face": "mozes", "text": ["G... G..."]},
       "3": {"face": "mozes", "text": ["Grace..."]},
       "4": {"face": "mozes", "text": ["Leave her alone..."]},
-      "5": {"face": "ardor", "text": ["The insolence."], "choices": [{"command": "EXIT"}]}
+      "5": {"face": "ardor", "text": ["The insolence."]},
+      "6": {"face": "ardor", "text": ["Now watch her die!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "mozes_wins_battle_from_generals": {
@@ -68,7 +69,8 @@
       "3": {"text": ["Everything is prepared!"]},
       "4": {"text": ["My quest for ultimate power is finally fulfilled!"]},
       "5": {"text": ["With the blood of this princess, I will rule all of Ardor!"]},
-      "6": {"text": ["Now slay her and take her life!"], "choices": [{"command": "EXIT"}]}
+      "6": {"text": ["Now slay her and take her life!"]},
+      "7": {"face": "girl01", "text": ["Aaaaaah!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "grace_dies"                     : {
@@ -81,7 +83,8 @@
   },
   "what_went_wrong"                : {
     "phrases": {
-      "1": {"text": ["No! What went wrong?!"], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["No! What went wrong?!"]},
+      "2": {"text": ["Aaaaaaahh!!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "another_chance"                 : {

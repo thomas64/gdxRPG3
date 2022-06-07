@@ -82,8 +82,8 @@ class WorldScreen : Screen,
 
     //region MapObserver ///////////////////////////////////////////////////////////////////////////////////////////////
 
-    override fun onNotifyFadeOut(actionAfterFade: () -> Unit, transitionColor: Color, delay: Float) {
-        fadeOut(actionAfterFade, transitionColor, delay)
+    override fun onNotifyFadeOut(actionAfterFade: () -> Unit, transitionColor: Color, duration: Float) {
+        fadeOut(actionAfterFade, transitionColor, duration)
     }
 
     override fun onNotifyMapChanged(currentMap: GameMap) {
@@ -349,14 +349,14 @@ class WorldScreen : Screen,
     private fun fadeOut(
         actionAfterFade: () -> Unit,
         transitionColor: Color,
-        delay: Float = 0f,
+        duration: Float = 0f,
         transitionPurpose: TransitionPurpose = TransitionPurpose.MAP_CHANGE
     ) {
         val transition = TransitionImage(transitionPurpose, transitionColor)
         stage.addActor(transition)
         transition.addAction(Actions.sequence(Actions.alpha(0f),
                                               Actions.fadeIn(Constant.FADE_DURATION),
-                                              Actions.delay(delay),
+                                              Actions.delay(duration),
                                               Actions.run(actionAfterFade),
                                               Actions.removeActor()))
     }
