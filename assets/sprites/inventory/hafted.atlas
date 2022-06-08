@@ -1,8 +1,8 @@
 
 hafted.png
-size: 248,310
+size: 248, 310
 format: RGBA8888
-filter: Nearest,Nearest
+filter: Nearest, Nearest
 repeat: none
 basic_axe
   rotate: false
@@ -32,100 +32,107 @@ basic_morningstar
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_axe
+basic_mozes_mace
   rotate: false
   xy: 0, 62
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_mace
+epic_axe
   rotate: false
   xy: 62, 62
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-masterwork_axe
+epic_mace
   rotate: false
   xy: 124, 62
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-masterwork_mace
+fine_axe
   rotate: false
   xy: 186, 62
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-masterwork_maul
+fine_mace
   rotate: false
   xy: 0, 124
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-masterwork_morningstar
+fine_maul
   rotate: false
   xy: 62, 124
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-fine_axe
+fine_morningstar
   rotate: false
   xy: 124, 124
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-fine_mace
+masterwork_axe
   rotate: false
   xy: 186, 124
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-fine_maul
+masterwork_mace
   rotate: false
   xy: 0, 186
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-fine_morningstar
+masterwork_maul
   rotate: false
   xy: 62, 186
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-specialist_axe
+masterwork_morningstar
   rotate: false
   xy: 124, 186
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-specialist_mace
+specialist_axe
   rotate: false
   xy: 186, 186
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-specialist_maul
+specialist_mace
   rotate: false
   xy: 0, 248
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-specialist_morningstar
+specialist_maul
   rotate: false
   xy: 62, 248
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+specialist_morningstar
+  rotate: false
+  xy: 124, 248
   size: 62, 62
   orig: 62, 62
   offset: 0, 0

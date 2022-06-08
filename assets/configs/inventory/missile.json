@@ -1,4 +1,15 @@
 {
+  "basic_mozes_bow"    : {
+    "name"         : "Mozes' Bow",
+    "group"        : "WEAPON",
+    "sort"         : 1399,
+    "skill"        : "MISSILE",
+    "is_two_handed": true,
+    "price"        : 1,
+    "min_dexterity": 10,
+    "base_hit"     : 80,
+    "damage"       : 2
+  },
   "basic_shortbow"     : {
     "name"         : "Basic Shortbow",
     "group"        : "WEAPON",

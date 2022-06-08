@@ -33,7 +33,7 @@
       "4": {"text": ["Is she gone?", "She knows better than to leave without telling me."]},
       "5": {"text": ["I hope she didn't run off again.", "It's still dangerous outside the village."]},
       "6": {"text": ["Oh no! I have to make sure."]},
-      "7": {"text": ["I'll get my sword, hopefully I don't need it."], "choices": [{"command": "EXIT"}]}
+      "7": {"text": ["I'll get my gear, hopefully I don't need it."], "choices": [{"command": "EXIT"}]}
     }
   },
   "mozes_talks_to_johanna"   : {

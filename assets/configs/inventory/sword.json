@@ -1,4 +1,14 @@
 {
+  "basic_mozes_sword"    : {
+    "name"         : "Mozes' Sword",
+    "group"        : "WEAPON",
+    "sort"         : 999,
+    "skill"        : "SWORD",
+    "price"        : 1,
+    "min_dexterity": 10,
+    "base_hit"     : 90,
+    "damage"       : 8
+  },
   "basic_dagger"         : {
     "name"         : "Basic Dagger",
     "group"        : "WEAPON",

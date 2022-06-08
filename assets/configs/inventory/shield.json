@@ -1,4 +1,16 @@
 {
+  "basic_mozes_shield"      : {
+    "name"        : "Mozes' Shield",
+    "group"       : "SHIELD",
+    "sort"        : 50099,
+    "skill"       : "SHIELD",
+    "price"       : 1,
+    "min_strength": 10,
+    "protection"  : 1,
+    "defense"     : 2,
+    "speed"       : 0,
+    "stealth"     : -2
+  },
   "basic_light_shield"      : {
     "name"        : "Basic Light Shield",
     "group"       : "SHIELD",

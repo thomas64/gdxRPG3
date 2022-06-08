@@ -1,4 +1,14 @@
 {
+  "basic_mozes_mace"      : {
+    "name"        : "Mozes' Mace",
+    "group"       : "WEAPON",
+    "sort"        : 1099,
+    "skill"       : "HAFTED",
+    "price"       : 1,
+    "min_strength": 10,
+    "base_hit"    : 80,
+    "damage"      : 10
+  },
   "basic_mace"            : {
     "name"        : "Basic Mace",
     "group"       : "WEAPON",

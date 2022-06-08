@@ -1,8 +1,8 @@
 
 shield.png
-size: 186,248
+size: 248, 248
 format: RGBA8888
-filter: Nearest,Nearest
+filter: Nearest, Nearest
 repeat: none
 basic_heavy_shield
   rotate: false
@@ -25,65 +25,72 @@ basic_medium_shield
   orig: 62, 62
   offset: 0, 0
   index: -1
-masterwork_heavy_shield
+basic_mozes_shield
   rotate: false
-  xy: 0, 62
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
-masterwork_light_shield
-  rotate: false
-  xy: 62, 62
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
-masterwork_medium_shield
-  rotate: false
-  xy: 124, 62
+  xy: 186, 0
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
 fine_heavy_shield
   rotate: false
-  xy: 0, 124
+  xy: 0, 62
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
 fine_light_shield
   rotate: false
-  xy: 62, 124
+  xy: 62, 62
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
 fine_medium_shield
   rotate: false
-  xy: 124, 124
+  xy: 124, 62
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+masterwork_heavy_shield
+  rotate: false
+  xy: 186, 62
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+masterwork_light_shield
+  rotate: false
+  xy: 0, 124
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+masterwork_medium_shield
+  rotate: false
+  xy: 62, 124
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
 specialist_heavy_shield
   rotate: false
-  xy: 0, 186
+  xy: 124, 124
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
 specialist_light_shield
   rotate: false
-  xy: 62, 186
+  xy: 186, 124
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
 specialist_medium_shield
   rotate: false
-  xy: 124, 186
+  xy: 0, 186
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
