@@ -117,7 +117,7 @@ abstract class BaseTable(private val tooltip: PersonalityTooltip) : WindowSelect
     }
 
     fun setSelected(personalityTitle: Label, personalityItem: PersonalityItem) {
-        personalityTitle.style.fontColor = Constant.DARK_RED
+        personalityTitle.style.fontColor = Constant.LIGHT_RED
         refreshTooltipOnlyOnce(personalityItem)
     }
 

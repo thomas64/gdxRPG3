@@ -10,8 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Dialog
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.utils.Align
-import com.badlogic.gdx.utils.GdxRuntimeException
 import com.badlogic.gdx.utils.Null
+import ktx.assets.disposeSafely
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.resourceManager
@@ -46,11 +46,7 @@ class MessageDialog(private val multiplexer: InputMultiplexer) {
 
     fun dispose() {
         stage.dispose()
-        try {
-            font.dispose()
-        } catch (e: GdxRuntimeException) {
-            // font is already exposed.
-        }
+        font.disposeSafely()
     }
 
     fun setActionAfterHide(actionAfterHide: () -> Unit) {

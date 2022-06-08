@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.Table
+import ktx.assets.disposeSafely
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.resourceManager
@@ -67,8 +68,8 @@ internal class PartyWindow {
 
     fun dispose() {
         stage.dispose()
-        font.dispose()
-        fontBig.dispose()
+        font.disposeSafely()
+        fontBig.disposeSafely()
         shapeRenderer.dispose()
     }
 

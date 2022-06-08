@@ -3,12 +3,14 @@ package nl.t64.cot.screens.inventory
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.Window
+import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.components.party.HeroItem
-import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.ScreenUI
 
+
+private const val SPRITE_BORDER_TOP_GRAY = "sprites/border_top_gray.png"
 
 object InventoryUtils {
 
@@ -32,12 +34,13 @@ object InventoryUtils {
 
     fun setWindowDeselected(container: Table) {
         val parent = container.parent as Window
-        parent.titleLabel.style.fontColor = Color.BLACK
+        parent.titleTable.background = Utils.createDrawable(Color.CLEAR)
     }
 
     fun setWindowSelected(container: Table) {
         val parent = container.parent as Window
-        parent.titleLabel.style.fontColor = Constant.DARK_RED
+        parent.titleTable.background = Utils.createTopBorder(SPRITE_BORDER_TOP_GRAY)
+        parent.titleTable.padTop(-1f)
     }
 
     fun getScreenUI(): ScreenUI = screenManager.getCurrentParchmentScreen().getScreenUI()

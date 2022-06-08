@@ -83,7 +83,7 @@ abstract class ScreenUI(
     }
 
     fun unloadAssets() {
-        heroesTable.disposePixmapTextures()
+        // empty
     }
 
     fun setFocusOnSelectedTable() {

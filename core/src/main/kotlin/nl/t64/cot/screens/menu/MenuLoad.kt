@@ -3,17 +3,16 @@ package nl.t64.cot.screens.menu
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.Texture
-import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.*
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.List
 import com.badlogic.gdx.scenes.scene2d.ui.List.ListStyle
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle
-import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ScreenUtils
+import nl.t64.cot.Utils
 import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.mapManager
@@ -26,8 +25,6 @@ import nl.t64.cot.components.cutscene.CutsceneId
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 
-
-private const val SPRITE_TRANSPARENT = "sprites/transparent.png"
 
 private const val TITLE_LABEL = "Select profile"
 private const val MENU_ITEM_START = "Start"
@@ -53,6 +50,7 @@ private const val EXIT_INDEX = 2
 class MenuLoadMain : MenuLoad() {
     override val titleLogo: Texture = resourceManager.getTextureAsset(TITLE_LOGO_B)
     override val fontColor: Color = Color.BLACK
+    override val selectColor: Color = Constant.LIGHT_RED
     override val backScreen: ScreenType = ScreenType.MENU_MAIN
     override val loadButtonName: String = MENU_ITEM_START
     override fun possibleNewGame() = newGame()
@@ -62,6 +60,7 @@ class MenuLoadMain : MenuLoad() {
 class MenuLoadPause : MenuLoad() {
     override val titleLogo: Texture = resourceManager.getTextureAsset(TITLE_LOGO_W)
     override val fontColor: Color = Color.WHITE
+    override val selectColor: Color = Constant.DARK_RED
     override val backScreen: ScreenType = ScreenType.MENU_PAUSE
     override val loadButtonName: String = MENU_ITEM_LOAD
     override fun possibleNewGame() = errorSound()
@@ -193,7 +192,6 @@ abstract class MenuLoad : MenuScreen() {
     }
 
     private fun createTables() {
-        val spriteTransparent = Sprite(resourceManager.getTextureAsset(SPRITE_TRANSPARENT))
         // styles
         val titleStyle = LabelStyle(menuFont, fontColor)
         val buttonStyle = TextButtonStyle()
@@ -201,10 +199,10 @@ abstract class MenuLoad : MenuScreen() {
         buttonStyle.fontColor = fontColor
         val listStyle = ListStyle()
         listStyle.font = menuFont
-        listStyle.fontColorSelected = Constant.DARK_RED
+        listStyle.fontColorSelected = selectColor
         listStyle.fontColorUnselected = fontColor
-        listStyle.background = SpriteDrawable(spriteTransparent)
-        listStyle.selection = SpriteDrawable(spriteTransparent)
+        listStyle.background = Utils.createDrawable(Color.CLEAR)
+        listStyle.selection = Utils.createDrawable(Color.CLEAR)
 
         // actors
         val titleLabel = Label(TITLE_LABEL, titleStyle)

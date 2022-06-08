@@ -27,8 +27,8 @@ import nl.t64.cot.screens.world.MapManager
 
 
 private const val TITLE_PADDING = 50f
-private const val TITLE_FONT = "fonts/fff_tusj_bold_30.ttf"
-private const val TITLE_SIZE = 30
+private const val TITLE_FONT = "fonts/spectral_extra_bold_28.ttf"
+private const val TITLE_SIZE = 28
 private const val SPRITE_BORDER = "sprites/border.png"
 private const val SPRITE_BORDER_TOP = "sprites/border_top.png"
 private const val SPRITE_BORDER_RIGHT = "sprites/border_right.png"
@@ -96,8 +96,8 @@ object Utils {
         return NinePatchDrawable(ninepatch)
     }
 
-    fun createTopBorder(): Drawable {
-        val texture = resourceManager.getTextureAsset(SPRITE_BORDER_TOP)
+    fun createTopBorder(sprite: String = SPRITE_BORDER_TOP): Drawable {
+        val texture = resourceManager.getTextureAsset(sprite)
         val ninepatch = NinePatch(texture, 0, 0, 1, 0)
         return NinePatchDrawable(ninepatch)
     }
@@ -205,12 +205,19 @@ object Utils {
     }
 
     fun createTransparency(): Drawable {
-        val pixmap = Pixmap(1, 1, Pixmap.Format.Alpha)
-        pixmap.setColor(TRANSPARENT)
+        return createDrawable(TRANSPARENT)
+    }
+
+    fun createDrawable(color: Color): Drawable {
+        return createImage(color).drawable
+    }
+
+    fun createImage(color: Color): Image {
+        val pixmap = Pixmap(1, 1, Pixmap.Format.RGBA8888)
+        pixmap.setColor(color)
         pixmap.fill()
-        val drawable = Image(Texture(pixmap)).drawable
-        pixmap.dispose()
-        return drawable
+        return Image(Texture(pixmap))
+            .also { pixmap.dispose() }
     }
 
     fun createLargeParchment(): Image {

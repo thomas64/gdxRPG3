@@ -9,14 +9,13 @@ import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
-import com.badlogic.gdx.utils.GdxRuntimeException
+import ktx.assets.disposeSafely
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
-import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 
 
@@ -33,6 +32,7 @@ abstract class MenuScreen : Screen {
 
     abstract val titleLogo: Texture
     abstract val fontColor: Color
+    abstract val selectColor: Color
     abstract val backScreen: ScreenType
 
     val stage: Stage = Stage()
@@ -78,7 +78,7 @@ abstract class MenuScreen : Screen {
     }
 
     open fun setCurrentTextButtonToSelected() {
-        (table.getChild(selectedMenuIndex) as TextButton).style.fontColor = Constant.DARK_RED
+        (table.getChild(selectedMenuIndex) as TextButton).style.fontColor = selectColor
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -96,11 +96,7 @@ abstract class MenuScreen : Screen {
     }
 
     override fun dispose() {
-        try {
-            menuFont.dispose()
-        } catch (e: GdxRuntimeException) {
-            // font is already exposed.
-        }
+        menuFont.disposeSafely()
         stage.dispose()
     }
 

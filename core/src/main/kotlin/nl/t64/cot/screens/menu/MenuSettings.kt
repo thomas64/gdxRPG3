@@ -11,6 +11,7 @@ import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 
 
@@ -32,6 +33,7 @@ private const val EXIT_INDEX = 5
 class MenuSettingsMain : MenuSettings() {
     override val titleLogo: Texture = resourceManager.getTextureAsset(TITLE_LOGO_B)
     override val fontColor: Color = Color.BLACK
+    override val selectColor: Color = Constant.LIGHT_RED
     override val backScreen: ScreenType = ScreenType.MENU_MAIN
 
     override fun processControlsButton() {
@@ -50,6 +52,7 @@ class MenuSettingsMain : MenuSettings() {
 class MenuSettingsPause : MenuSettings() {
     override val titleLogo: Texture = resourceManager.getTextureAsset(TITLE_LOGO_W)
     override val fontColor: Color = Color.WHITE
+    override val selectColor: Color = Constant.DARK_RED
     override val backScreen: ScreenType = ScreenType.MENU_PAUSE
 
     override fun processControlsButton() {

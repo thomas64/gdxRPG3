@@ -24,7 +24,7 @@ class ConversationChoice(
     }
 
     override fun toString(): String {
-        return if (text == DEFAULT_ANSWER_TEXT) text else "$DEFAULT_ANSWER_TEXT $text"
+        return if (isDefault()) text else "$DEFAULT_ANSWER_TEXT $text"
     }
 
     fun isVisible(): Boolean {
@@ -33,6 +33,10 @@ class ConversationChoice(
 
     fun isMeetingCondition(): Boolean {
         return ConditionDatabase.isMeetingConditions(conditionIds, conversationId)
+    }
+
+    fun isDefault(): Boolean {
+        return text == DEFAULT_ANSWER_TEXT
     }
 
 }

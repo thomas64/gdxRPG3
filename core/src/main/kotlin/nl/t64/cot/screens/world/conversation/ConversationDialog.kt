@@ -3,7 +3,6 @@ package nl.t64.cot.screens.world.conversation
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
-import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.scenes.scene2d.Actor
 import com.badlogic.gdx.scenes.scene2d.Stage
@@ -12,16 +11,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.*
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.List
 import com.badlogic.gdx.scenes.scene2d.ui.List.ListStyle
-import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable
+import com.badlogic.gdx.scenes.scene2d.utils.BaseDrawable
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable
 import com.badlogic.gdx.utils.Align
-import com.badlogic.gdx.utils.GdxRuntimeException
+import ktx.assets.disposeSafely
 import ktx.collections.GdxArray
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.profileManager
-import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.components.conversation.ConversationChoice
@@ -38,8 +37,6 @@ import nl.t64.cot.screens.loot.TradeScreen
 import nl.t64.cot.screens.school.SchoolScreen
 import nl.t64.cot.screens.shop.ShopScreen
 
-
-private const val SPRITE_TRANSPARENT = "sprites/transparent.png"
 
 private const val FONT = "fonts/spectral_regular_24.ttf"
 private const val FONT_SIZE = 24
@@ -58,28 +55,21 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     private val conversationObserver: ConversationSubject = ConversationSubject(conversationObserver)
 
     private val stage: Stage = Stage()
-    private val font: BitmapFont = resourceManager.getTrueTypeAsset(FONT, FONT_SIZE).apply {
-        data.setLineHeight(LINE_HEIGHT)
-    }
+    private val font: BitmapFont = createFont()
+    private val label: Label = createLabel()
+    private val answers: List<ConversationChoice> = List(createAnswersStyle())
+    private val scrollPane: ScrollPane = createScrollPane()
     private val dialog: Dialog = createDialog()
 
-    private lateinit var label: Label
-    private lateinit var answers: List<ConversationChoice>
-    private lateinit var scrollPane: ScrollPane
+    private lateinit var conversationId: String
+    private lateinit var faceId: String
+    private lateinit var faceImage: Image
     private lateinit var rowWithScrollPane: Cell<ScrollPane>
-
-    private var conversationId: String? = null
-    private var faceId: String? = null
-    private var faceImage: Image? = null
     private lateinit var graph: ConversationGraph
 
     fun dispose() {
         stage.dispose()
-        try {
-            font.dispose()
-        } catch (e: GdxRuntimeException) {
-            // font is already exposed.
-        }
+        font.disposeSafely()
     }
 
     fun show() {
@@ -98,8 +88,8 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         return scrollPane.hasKeyboardFocus()
     }
 
-    fun loadConversation(conversationId: String, entityId: String) {
-        this.conversationId = conversationId
+    fun loadConversation(newConversationId: String, entityId: String) {
+        conversationId = newConversationId
         faceId = entityId
         graph = gameData.conversations.getConversationById(conversationId)
         fillDialogForConversation()
@@ -109,8 +99,6 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     fun loadNote(noteId: String) {
-        conversationId = null
-        faceId = null
         graph = getNoteById(noteId)
         fillDialogForNote()
         audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_CONVERSATION_START)
@@ -119,40 +107,14 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     fun setFaceColor(color: Color) {
-        faceImage!!.color = color
-    }
-
-    private fun createDialog(): Dialog {
-        label = Label("No Conversation", LabelStyle(font, Color.BLACK)).apply {
-            wrap = true
-        }
-
-        val spriteTransparent = Sprite(resourceManager.getTextureAsset(SPRITE_TRANSPARENT))
-        val drawable = SpriteDrawable(spriteTransparent).apply {
-            topHeight = SCROLL_PANE_LINE_PAD
-            bottomHeight = SCROLL_PANE_LINE_PAD
-        }
-        answers = List(ListStyle(font, Constant.DARK_RED, Color.BLACK, drawable))
-
-        scrollPane = ScrollPane(answers)
-        scrollPane.setOverscroll(false, false)
-        scrollPane.fadeScrollBars = false
-        scrollPane.setScrollingDisabled(true, true)
-        scrollPane.setForceScroll(false, false)
-        scrollPane.setScrollBarPositions(false, false)
-
-        return Utils.createParchmentDialog(font).apply {
-            background.minWidth = DIALOG_WIDTH
-            background.minHeight = DIALOG_HEIGHT
-            setPosition(Gdx.graphics.width / 2f - DIALOG_WIDTH / 2f, 0f)
-        }
+        faceImage.color = color
     }
 
     private fun fillDialogForConversation() {
         label.setAlignment(Align.left)
         val mainTable = Table()
         mainTable.left()
-        faceImage = Utils.getFaceImage(faceId!!)
+        faceImage = Utils.getFaceImage(faceId)
         mainTable.add<Actor>(faceImage).width(Constant.FACE_SIZE).padLeft(PAD * 4f)
 
         val textTable = Table()
@@ -189,9 +151,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             return
         }
         val nextId = selectedAnswer.nextId
-        val conversationCommand = selectedAnswer.command
-
-        when (conversationCommand) {
+        when (val conversationCommand = selectedAnswer.command) {
             ConversationCommand.NONE -> continueConversation(nextId)
             ConversationCommand.EXIT -> endConversation(nextId)
             ConversationCommand.HERO_JOIN -> tryToAddHeroToParty(nextId)
@@ -232,8 +192,8 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
 
     private fun addHeroToParty(nextId: String) {
         audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_JOIN)
-        val newHero = gameData.heroes.getCertainHero(faceId!!)
-        gameData.heroes.removeHero(faceId!!)
+        val newHero = gameData.heroes.getCertainHero(faceId)
+        gameData.heroes.removeHero(faceId)
         gameData.party.addHero(newHero)
         conversationObserver.notifyHeroJoined()
         endConversationWithoutSound(nextId)
@@ -247,17 +207,17 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
 
     private fun loadShop(nextId: String) {
         endConversationBeforeLoadScreen(nextId)
-        ShopScreen.load(faceId!!, conversationId!!)
+        ShopScreen.load(faceId, conversationId)
     }
 
     private fun loadAcademy(nextId: String) {
         endConversationBeforeLoadScreen(nextId)
-        AcademyScreen.load(faceId!!, conversationId!!)
+        AcademyScreen.load(faceId, conversationId)
     }
 
     private fun loadSchool(nextId: String) {
         endConversationBeforeLoadScreen(nextId)
-        SchoolScreen.load(faceId!!, conversationId!!)
+        SchoolScreen.load(faceId, conversationId)
     }
 
     private fun saveGame(nextId: String) {
@@ -267,7 +227,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun healLife(nextId: String) {
-        val price = conversationId!!.substringAfterLast("-").toInt()
+        val price = conversationId.substringAfterLast("-").toInt()
         if (price > 0) {
             if (gameData.inventory.hasEnoughOfItem("gold", price)) {
                 pay(price)
@@ -293,18 +253,18 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun receiveXp(nextId: String) {
-        XpRewarder.receivePossibleXp(conversationId!!)
+        XpRewarder.receivePossibleXp(conversationId)
         continueConversation(nextId)
     }
 
     private fun receiveSpells(nextId: String) {
-        SpellsRewarder.receivePossibleSpells(conversationId!!)
+        SpellsRewarder.receivePossibleSpells(conversationId)
         continueConversation(nextId)
     }
 
     private fun startBattle(nextId: String) {
         endConversation(nextId)
-        conversationObserver.notifyShowBattleScreen(conversationId!!)
+        conversationObserver.notifyShowBattleScreen(conversationId)
     }
 
     private fun reloadNpcs(nextId: String) {
@@ -313,53 +273,53 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun knowQuest(nextId: String) {
-        gameData.quests.getQuestById(conversationId!!).know()
+        gameData.quests.getQuestById(conversationId).know()
         continueConversation(nextId)
     }
 
     private fun acceptQuest(nextId: String) {
-        gameData.quests.getQuestById(conversationId!!).accept()
+        gameData.quests.getQuestById(conversationId).accept()
         continueConversation(nextId)
     }
 
     private fun tradeQuestItems() {
-        val receive = ConversationSpoilLoader.getLoot(conversationId!!) { possibleSetTradeItemsTaskComplete() }
+        val receive = ConversationSpoilLoader.getLoot(conversationId) { possibleSetTradeItemsTaskComplete() }
         endConversationAndLoad { TradeScreen.load(receive, graph) }
     }
 
     private fun showQuestItem(nextId: String) {
-        gameData.quests.getQuestById(conversationId!!).possibleSetShowItemTaskComplete()
+        gameData.quests.getQuestById(conversationId).possibleSetShowItemTaskComplete()
         endConversation(nextId)
     }
 
     private fun wearQuestItem(nextId: String) {
-        gameData.quests.getQuestById(conversationId!!).possibleSetWearItemTaskComplete()
+        gameData.quests.getQuestById(conversationId).possibleSetWearItemTaskComplete()
         endConversation(nextId)
     }
 
     private fun giveQuestItem(nextId: String) {
-        gameData.quests.getQuestById(conversationId!!).possibleSetGiveItemTaskComplete()
+        gameData.quests.getQuestById(conversationId).possibleSetGiveItemTaskComplete()
         continueConversation(nextId)
     }
 
     private fun sayQuestThing(nextId: String) {
-        gameData.quests.getQuestById(conversationId!!).setSayTheRightThingTaskComplete()
+        gameData.quests.getQuestById(conversationId).setSayTheRightThingTaskComplete()
         endConversation(nextId)
     }
 
     private fun receiveQuestItem() {
-        val receive = ConversationSpoilLoader.getLoot(conversationId!!) { receiveItemsToDeliver() }
+        val receive = ConversationSpoilLoader.getLoot(conversationId) { receiveItemsToDeliver() }
         endConversationAndLoad { ReceiveScreen.load(receive, graph) }
     }
 
     private fun deliverQuestItem(nextId: String) {
-        gameData.quests.updateDeliverItem(conversationId!!)
+        gameData.quests.updateDeliverItem(conversationId)
         continueConversation(nextId)
     }
 
     private fun rewardQuest() {
-        val quest = gameData.quests.getQuestById(conversationId!!)
-        val reward = gameData.loot.getLoot(conversationId!!)
+        val quest = gameData.quests.getQuestById(conversationId)
+        val reward = gameData.loot.getLoot(conversationId)
         endConversationAndLoad { RewardScreen.load(reward, quest, graph) }
     }
 
@@ -448,15 +408,28 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         val choices = GdxArray(graph.getAssociatedChoices())
         answers.setItems(choices)
         setDefaultSelectedChoice(choices)
+        setStyleBasedOnContent(choices)
         repositionScrollPaneBasedOnContent(choices)
     }
 
     private fun setDefaultSelectedChoice(choices: GdxArray<ConversationChoice>) {
         if (choices.size == 1) {
-            answers.setSelectedIndex(0)
+            answers.selectedIndex = 0
         } else {
-            answers.setSelectedIndex(-1)
+            answers.selectedIndex = -1
         }
+    }
+
+    private fun setStyleBasedOnContent(choices: GdxArray<ConversationChoice>) {
+        val drawable = if (choices[0].isDefault()) {
+            Utils.createDrawable(Color.CLEAR)
+        } else {
+            Utils.createFullBorder()
+        }.apply {
+            topHeight = SCROLL_PANE_LINE_PAD
+            bottomHeight = SCROLL_PANE_LINE_PAD
+        }
+        answers.style = createAnswersStyle(drawable)
     }
 
     private fun repositionScrollPaneBasedOnContent(choices: GdxArray<ConversationChoice>) {
@@ -465,18 +438,56 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun setScrollPaneHeight(choices: GdxArray<ConversationChoice>) {
-        if (choices.size % 2 == 0) {
-            rowWithScrollPane.height(choices.size * SCROLL_PANE_LINE_HEIGHT)
+        val newHeight = if (choices.size % 2 == 0) {
+            choices.size * SCROLL_PANE_LINE_HEIGHT
         } else {
-            rowWithScrollPane.height(choices.size * SCROLL_PANE_LINE_HEIGHT + 2f)
+            choices.size * SCROLL_PANE_LINE_HEIGHT + 2f
         }
+        rowWithScrollPane.height(newHeight)
     }
 
     private fun setScrollPanePadding() {
         if (label.text.isBlank()) {
-            rowWithScrollPane.padTop(-SCROLL_PANE_LINE_HEIGHT - SCROLL_PANE_TOP_PAD).padLeft(0f)
+            rowWithScrollPane.padTop(-SCROLL_PANE_LINE_HEIGHT - SCROLL_PANE_TOP_PAD).padLeft(-(PAD / 2f))
         } else {
-            rowWithScrollPane.padTop(0f).padLeft(PAD)
+            rowWithScrollPane.padTop(0f).padLeft(-(PAD / 2f))
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private fun createFont(): BitmapFont {
+        return Utils.resourceManager.getTrueTypeAsset(FONT, FONT_SIZE)
+            .apply { data.setLineHeight(LINE_HEIGHT) }
+    }
+
+    private fun createLabel(): Label {
+        return Label("No Conversation", LabelStyle(font, Color.BLACK))
+            .apply { wrap = true }
+    }
+
+    private fun createAnswersStyle(drawable: Drawable = BaseDrawable()): ListStyle {
+        return ListStyle(font, Constant.DARK_RED, Color.BLACK, drawable).apply {
+            selection.leftWidth = PAD
+            selection.rightWidth = PAD
+        }
+    }
+
+    private fun createScrollPane(): ScrollPane {
+        return ScrollPane(answers).apply {
+            setOverscroll(false, false)
+            fadeScrollBars = false
+            setScrollingDisabled(true, true)
+            setForceScroll(false, false)
+            setScrollBarPositions(false, false)
+        }
+    }
+
+    private fun createDialog(): Dialog {
+        return Utils.createParchmentDialog(font).apply {
+            background.minWidth = DIALOG_WIDTH
+            background.minHeight = DIALOG_HEIGHT
+            setPosition(Gdx.graphics.width / 2f - DIALOG_WIDTH / 2f, 0f)
         }
     }
 

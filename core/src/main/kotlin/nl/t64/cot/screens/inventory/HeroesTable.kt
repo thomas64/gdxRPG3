@@ -1,14 +1,11 @@
 package nl.t64.cot.screens.inventory
 
 import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.graphics.Pixmap
-import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.scenes.scene2d.ui.Table
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Scaling
 import nl.t64.cot.Utils
@@ -16,9 +13,9 @@ import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.PartyContainer
+import nl.t64.cot.constants.Constant
 
 
-private const val SPRITE_GRAY = "sprites/gray.png"
 private const val FONT_PATH = "fonts/spectral_extra_bold_20.ttf"
 private const val FONT_BIG_PATH = "fonts/spectral_extra_bold_28.ttf"
 private const val FONT_BIG_SIZE = 28
@@ -34,7 +31,6 @@ class HeroesTable {
     private val nameStyle: LabelStyle
     private val levelStyle: LabelStyle
     private val party: PartyContainer = gameData.party
-    private val colorsOfHpBars: Array<Texture?> = arrayOfNulls(PartyContainer.MAXIMUM)
     val heroes = Table().apply {
         background = Utils.createTopBorder()
     }
@@ -92,9 +88,7 @@ class HeroesTable {
 
     private fun addPossibleGrayBackgroundTo(stack: Stack, hero: HeroItem) {
         if (hero.hasSameIdAs(InventoryUtils.getSelectedHero())) {
-            val textureGray = resourceManager.getTextureAsset(SPRITE_GRAY)
-            val imageGray = Image(textureGray)
-            stack.add(imageGray)
+            stack.add(Utils.createImage(Constant.GRAY))
         }
     }
 
@@ -131,27 +125,12 @@ class HeroesTable {
     }
 
     private fun createFill(hero: HeroItem): Image {
-        val index = party.getIndex(hero)
-        colorsOfHpBars[index]?.dispose()
-
-        val pixmap = Pixmap(1, 1, Pixmap.Format.RGB888)
         val hpStats = hero.getAllHpStats()
         val color = Utils.getHpColor(hpStats)
-        pixmap.setColor(color)
-        pixmap.fill()
-        colorsOfHpBars[index] = Texture(pixmap)
-        pixmap.dispose()
-        val drawable = TextureRegionDrawable(colorsOfHpBars[index])
-        val fillWidth = (STATS_COLUMN_WIDTH / hero.getMaximumHp()) * hero.getCurrentHp()
-        drawable.minWidth = fillWidth
-        return Image(drawable).apply {
+        return Utils.createImage(color).apply {
             setScaling(Scaling.stretchY)
             align = Align.left
-        }
-    }
-
-    fun disposePixmapTextures() {
-        colorsOfHpBars.filterNotNull().forEach { it.dispose() }
+        }.also { it.drawable.minWidth = (STATS_COLUMN_WIDTH / hero.getMaximumHp()) * hero.getCurrentHp() }
     }
 
 }

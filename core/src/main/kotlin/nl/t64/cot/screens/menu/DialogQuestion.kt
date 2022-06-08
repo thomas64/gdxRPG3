@@ -28,6 +28,7 @@ private const val DIALOG_INIT_HEIGHT = 150L
 private const val DIALOG_PAD_TOP = 20f
 private const val DIALOG_PAD_BOTTOM = 40f
 private const val BUTTON_SPACE_RIGHT = 100f
+private const val BUTTON_WIDTH = 130f
 
 private const val NUMBER_OF_ITEMS = 2
 private const val EXIT_INDEX = 1
@@ -81,10 +82,12 @@ class DialogQuestion(
 
     private fun setAllTextButtonsToBlack() {
         dialog.buttonTable.children.forEach { (it as TextButton).style.fontColor = Color.BLACK }
+        dialog.buttonTable.children.forEach { (it as TextButton).label.style.background = Utils.createDrawable(Color.CLEAR) }
     }
 
     private fun setCurrentTextButtonToRed() {
         (dialog.buttonTable.getChild(selectedIndex) as TextButton).style.fontColor = Constant.DARK_RED
+        (dialog.buttonTable.getChild(selectedIndex) as TextButton).label.style.background = Utils.createFullBorder()
     }
 
     private fun createDialog(): Dialog {
@@ -104,8 +107,8 @@ class DialogQuestion(
             contentTable.defaults().width(label.prefWidth + BUTTON_SPACE_RIGHT)
             background.minHeight = dialogHeight
             text(label)
-            buttonTable.add(yesButton).spaceRight(BUTTON_SPACE_RIGHT)
-            buttonTable.add(noButton)
+            buttonTable.add(yesButton).width(BUTTON_WIDTH)
+            buttonTable.add(noButton).width(BUTTON_WIDTH)
         }
     }
 

@@ -13,6 +13,7 @@ import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 
 
@@ -32,6 +33,7 @@ class MenuPause : MenuScreen() {
 
     override val titleLogo: Texture = resourceManager.getTextureAsset(TITLE_LOGO_W)
     override val fontColor: Color = Color.WHITE
+    override val selectColor: Color = Constant.DARK_RED
     override val backScreen: ScreenType = ScreenType.MENU_PAUSE
 
     private lateinit var listenerKeyVertical: ListenerKeyVertical

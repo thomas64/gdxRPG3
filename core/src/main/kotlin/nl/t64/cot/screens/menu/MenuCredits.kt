@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.ScreenUtils
 import nl.t64.cot.Utils.resourceManager
+import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 
 
@@ -21,6 +22,7 @@ class MenuCredits : MenuScreen() {
 
     override val titleLogo: Texture = resourceManager.getTextureAsset(TITLE_LOGO_B)
     override val fontColor: Color = Color.BLACK
+    override val selectColor: Color = Constant.LIGHT_RED
     override val backScreen: ScreenType = ScreenType.MENU_MAIN
 
     private val scrollPane: ScrollPane

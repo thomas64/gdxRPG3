@@ -31,6 +31,8 @@ object Constant {
     const val DIALOG_FADE_OUT_DURATION = 0.4f - 0.1f
 
     val DARK_RED = Color(0.5f, 0f, 0f, 1f)
+    val LIGHT_RED = Color(0.75f, 0.25f, 0.25f, 1f)
+    val GRAY = Color(0.63f, 0.63f, 0.63f, 1f) // -0x5f5f5f01, 0xa0a0a0ff
 
     const val PLAYER_ID = "mozes"
     const val TRANSFORMATION_ORC = "orc_1"

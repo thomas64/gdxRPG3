@@ -41,6 +41,7 @@ class MenuNew : MenuScreen() {
 
     override val titleLogo: Texture = resourceManager.getTextureAsset(TITLE_LOGO_B)
     override val fontColor: Color = Color.BLACK
+    override val selectColor: Color = Constant.LIGHT_RED
     override val backScreen: ScreenType = ScreenType.MENU_LOAD_MAIN
 
     private lateinit var profileText: TextField

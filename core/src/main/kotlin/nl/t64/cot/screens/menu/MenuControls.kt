@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.ScreenUtils
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.resourceManager
+import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 
 
@@ -18,12 +19,14 @@ private const val COLUMN_1_WIDTH = 120f
 class MenuControlsMain : MenuControls() {
     override val titleLogo: Texture = resourceManager.getTextureAsset(TITLE_LOGO_B)
     override val fontColor: Color = Color.BLACK
+    override val selectColor: Color = Constant.LIGHT_RED
     override val backScreen: ScreenType = ScreenType.MENU_SETTINGS_MAIN
 }
 
 class MenuControlsPause : MenuControls() {
     override val titleLogo: Texture = resourceManager.getTextureAsset(TITLE_LOGO_W)
     override val fontColor: Color = Color.WHITE
+    override val selectColor: Color = Constant.DARK_RED
     override val backScreen: ScreenType = ScreenType.MENU_SETTINGS_PAUSE
 }
 

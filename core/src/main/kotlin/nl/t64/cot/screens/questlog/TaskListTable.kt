@@ -3,12 +3,10 @@ package nl.t64.cot.screens.questlog
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
-import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.scenes.scene2d.ui.List
 import com.badlogic.gdx.scenes.scene2d.ui.List.ListStyle
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane
 import com.badlogic.gdx.scenes.scene2d.ui.Table
-import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable
 import com.badlogic.gdx.utils.Align
 import ktx.collections.GdxArray
 import nl.t64.cot.Utils
@@ -18,7 +16,6 @@ import nl.t64.cot.components.quest.QuestState
 import nl.t64.cot.components.quest.QuestTask
 
 
-private const val SPRITE_TRANSPARENT = "sprites/transparent.png"
 private const val TEXT_FONT = "fonts/spectral_extra_bold_20.ttf"
 private const val TEXT_SIZE = 20
 private const val WIDTH = -102f
@@ -45,13 +42,12 @@ internal class TaskListTable {
     }
 
     private fun createList(): List<QuestTask> {
-        val spriteTransparent = Sprite(resourceManager.getTextureAsset(SPRITE_TRANSPARENT))
         val listStyle = ListStyle()
         listStyle.font = font
         listStyle.fontColorSelected = Color.BLACK
         listStyle.fontColorUnselected = Color.BLACK
-        listStyle.background = SpriteDrawable(spriteTransparent)
-        listStyle.selection = SpriteDrawable(spriteTransparent)
+        listStyle.background = Utils.createDrawable(Color.CLEAR)
+        listStyle.selection = Utils.createDrawable(Color.CLEAR)
         return List(listStyle)
     }
 
