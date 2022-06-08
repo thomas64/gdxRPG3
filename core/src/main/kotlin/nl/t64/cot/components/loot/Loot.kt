@@ -1,5 +1,6 @@
 package nl.t64.cot.components.loot
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import nl.t64.cot.components.party.inventory.InventoryDatabase
 import nl.t64.cot.components.party.inventory.InventoryGroup
 import kotlin.math.roundToInt
@@ -9,6 +10,8 @@ private const val BONUS_PREFIX = "bonus_"
 
 class Loot(
     var content: MutableMap<String, Int> = mutableMapOf(),
+    @JsonProperty(value = "condition")
+    val conditionIds: List<String> = emptyList(),
     var trapLevel: Int = 0,
     var lockLevel: Int = 0,
     var xp: Int = 0

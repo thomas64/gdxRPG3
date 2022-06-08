@@ -15,9 +15,9 @@
   "sparkle0014": {"content": {"herb": 2}},
   "sparkle0015": {"content": {"herb": 2}},
   "sparkle0016": {"content": {"herb": 2}},
-  "sparkle0017": {"content": {"horseshoe": 1}},
-  "sparkle0018": {"content": {"horseshoe": 1}},
-  "sparkle0019": {"content": {"horseshoe": 1}},
-  "sparkle0020": {"content": {"horseshoe": 1}},
-  "sparkle0021": {"content": {"tow_rope": 1}}
+  "sparkle0017": {"condition": ["_rc_>=_k_q_quest_get_horse"], "content": {"horseshoe": 1}},
+  "sparkle0018": {"condition": ["_rc_>=_k_q_quest_get_horse"], "content": {"horseshoe": 1}},
+  "sparkle0019": {"condition": ["_rc_>=_k_q_quest_get_horse"], "content": {"horseshoe": 1}},
+  "sparkle0020": {"condition": ["_rc_>=_k_q_quest_get_horse"], "content": {"horseshoe": 1}},
+  "sparkle0021": {"condition": ["_rc_>=_k_q_quest_a_helping_horse"], "content": {"tow_rope": 1}}
 }

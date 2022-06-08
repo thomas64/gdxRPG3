@@ -4,6 +4,7 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject
 import com.badlogic.gdx.math.Vector2
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
+import nl.t64.cot.components.condition.ConditionDatabase
 import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.components.loot.Spoil
 import nl.t64.cot.screens.world.entity.*
@@ -31,7 +32,7 @@ class LootLoader(private val currentMap: GameMap) {
     private fun loadSparkles() {
         currentMap.sparkles.forEach {
             val sparkle = gameData.loot.getLoot(it.name)
-            if (!sparkle.isTaken()) {
+            if (!sparkle.isTaken() && ConditionDatabase.isMeetingConditions(sparkle.conditionIds)) {
                 loadSparkle(it, sparkle)
             }
         }
