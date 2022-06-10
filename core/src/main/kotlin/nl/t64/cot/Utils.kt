@@ -47,19 +47,19 @@ private val TRANSPARENT = Color(0f, 0f, 0f, 0.5f)
 
 object Utils {
 
-    private val gdxRpg3: GdxRpg3 get() = Gdx.app.applicationListener as GdxRpg3
-    val resourceManager: ResourceManager get() = gdxRpg3.resourceManager
-    val preferenceManager: PreferenceManager get() = gdxRpg3.preferenceManager
-    val profileManager: ProfileManager get() = gdxRpg3.profileManager
-    val gameData: GameData get() = gdxRpg3.gameData
-    val scenario: Scenario get() = gdxRpg3.scenario
-    val screenManager: ScreenManager get() = gdxRpg3.screenManager
-    val audioManager: AudioManager get() = gdxRpg3.audioManager
-    val mapManager: MapManager get() = gdxRpg3.mapManager
-    val brokerManager: BrokerManager get() = gdxRpg3.brokerManager
+    private val crystalOfTime: CrystalOfTime get() = Gdx.app.applicationListener as CrystalOfTime
+    val resourceManager: ResourceManager get() = crystalOfTime.resourceManager
+    val preferenceManager: PreferenceManager get() = crystalOfTime.preferenceManager
+    val profileManager: ProfileManager get() = crystalOfTime.profileManager
+    val gameData: GameData get() = crystalOfTime.gameData
+    val scenario: Scenario get() = crystalOfTime.scenario
+    val screenManager: ScreenManager get() = crystalOfTime.screenManager
+    val audioManager: AudioManager get() = crystalOfTime.audioManager
+    val mapManager: MapManager get() = crystalOfTime.mapManager
+    val brokerManager: BrokerManager get() = crystalOfTime.brokerManager
 
     fun setGamepadInputProcessor(inputProcessor: InputProcessor?) {
-        gdxRpg3.gamepadMapping.setInputProcessor(inputProcessor)
+        crystalOfTime.gamepadMapping.setInputProcessor(inputProcessor)
     }
 
     fun isGamepadConnected(): Boolean {

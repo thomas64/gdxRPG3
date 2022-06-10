@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Align
-import nl.t64.cot.GdxRpg3
+import nl.t64.cot.CrystalOfTime
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.preferenceManager
@@ -51,10 +51,10 @@ internal class DebugBox(
         table.add("dt:")
         table.add(dt.toString())
         table.row()
-        table.add("runTime:")
-        val runTime = GdxRpg3.getRunTime().toString()
-        table.add(runTime.substring(0, runTime.length - 4))
-        table.row()
+//        table.add("runTime:")
+//        val runTime = CrystalOfTime.getRunTime().toString()
+//        table.add(runTime.substring(0, runTime.length - 4))
+//        table.row()
         table.add("").row()
 
 //        table.add("timeUp:");

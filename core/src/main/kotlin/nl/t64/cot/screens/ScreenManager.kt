@@ -5,7 +5,7 @@ import com.badlogic.gdx.Screen
 import com.badlogic.gdx.utils.GdxRuntimeException
 import com.badlogic.gdx.utils.reflect.ClassReflection
 import com.badlogic.gdx.utils.reflect.ReflectionException
-import nl.t64.cot.GdxRpg3
+import nl.t64.cot.CrystalOfTime
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.menu.MenuScreen
 import java.util.*
@@ -14,7 +14,7 @@ import java.util.*
 class ScreenManager {
 
     private val screenCache: EnumMap<ScreenType, Screen> = EnumMap(ScreenType::class.java)
-    private val currentScreen: Screen get() = (Gdx.app.applicationListener as GdxRpg3).screen
+    private val currentScreen: Screen get() = (Gdx.app.applicationListener as CrystalOfTime).screen
 
     fun openParchmentLoadScreen(screenTypeToLoad: ScreenType) {
         val loadScreen = getScreen(ScreenType.LOAD_SCREEN) as LoadScreen
@@ -39,7 +39,7 @@ class ScreenManager {
     }
 
     private fun setScreen(screen: Screen) {
-        (Gdx.app.applicationListener as GdxRpg3).screen = screen
+        (Gdx.app.applicationListener as CrystalOfTime).screen = screen
     }
 
     private fun ifNotInScreenCacheAdd(screenType: ScreenType) {

@@ -33,8 +33,8 @@ open class GameTest {
         application = null
     }
 
-    private fun createApplication(): GdxRpg3 {
-        return object : GdxRpg3() {
+    private fun createApplication(): CrystalOfTime {
+        return object : CrystalOfTime() {
             override fun create() {}
             override fun resize(width: Int, height: Int) {}
             override fun render() {}

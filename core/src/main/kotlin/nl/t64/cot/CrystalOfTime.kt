@@ -5,24 +5,15 @@ import com.badlogic.gdx.Game
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.controllers.Controllers
 import nl.t64.cot.audio.AudioManager
+import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.ScreenManager
 import nl.t64.cot.screens.world.MapManager
 
 
-open class GdxRpg3 : Game() {
+open class CrystalOfTime : Game() {
 
-    companion object {
-        private var runTime = 0f
-
-        private fun updateRunTime() {
-            runTime += Gdx.graphics.deltaTime
-        }
-
-        fun getRunTime(): Float {
-            return runTime
-        }
-    }
+    private var runtime: Float = 0f
 
     lateinit var preferenceManager: PreferenceManager
     val profileManager: ProfileManager = ProfileManager()
@@ -50,12 +41,21 @@ open class GdxRpg3 : Game() {
     }
 
     override fun render() {
-        updateRunTime()
+        updateTitleBar()
         super.render()
     }
 
     override fun dispose() {
         screenManager.dispose()
+    }
+
+    private fun updateTitleBar() {
+        runtime += Gdx.graphics.deltaTime
+        Gdx.graphics.setTitle("${Constant.TITLE} - FPS: ${Gdx.graphics.framesPerSecond} - runtime: ${runtime.toTitle()}")
+    }
+
+    private fun Float.toTitle(): String {
+        return with(toString()) { substring(0, if (length > 4) length - 4 else length) }
     }
 
 }

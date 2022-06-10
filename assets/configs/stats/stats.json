@@ -4,6 +4,7 @@
     "upgrade"    : 0.12,
     "description": [
       "Increases damage-to-inflict with intelligence based weapons in combat.",
+      "Each rank in Intelligence increases Damage by 5%.",
       "Increases damage-to-inflict with offensive magic spells in combat.",
       "Each rank in Intelligence increases spell damage by 5%.",
       "Also, each 6 ranks in Intelligence increases AP by 1."
