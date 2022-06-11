@@ -28,6 +28,10 @@ internal class SummaryTable {
         container.cells.peek().setActor<Image>(Utils.getFaceImage(quest.entityId, isFlipped = false))
     }
 
+    fun isEmpty(): Boolean {
+        return summary.text.isNullOrBlank()
+    }
+
     private fun createLabel(): Label {
         val font = resourceManager.getTrueTypeAsset(TEXT_FONT, TEXT_SIZE)
         val labelStyle = LabelStyle(font, Color.BLACK)

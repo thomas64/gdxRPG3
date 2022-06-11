@@ -24,7 +24,7 @@ private const val PAD_LEFT = 20f
 
 internal class TaskListTable {
 
-    private val font: BitmapFont = resourceManager.getTrueTypeAsset(TEXT_FONT, TEXT_SIZE)
+    private val taskListFont: BitmapFont = resourceManager.getTrueTypeAsset(TEXT_FONT, TEXT_SIZE)
     private val taskList: List<QuestTask> = createList()
     private val scrollPane: ScrollPane = fillScrollPane()
     val container: Table = fillContainer()
@@ -42,13 +42,13 @@ internal class TaskListTable {
     }
 
     private fun createList(): List<QuestTask> {
-        val listStyle = ListStyle()
-        listStyle.font = font
-        listStyle.fontColorSelected = Color.BLACK
-        listStyle.fontColorUnselected = Color.BLACK
-        listStyle.background = Utils.createDrawable(Color.CLEAR)
-        listStyle.selection = Utils.createDrawable(Color.CLEAR)
-        return List(listStyle)
+        return List(ListStyle().apply {
+            font = taskListFont
+            fontColorSelected = Color.BLACK
+            fontColorUnselected = Color.BLACK
+            background = Utils.createDrawable(Color.CLEAR)
+            selection = Utils.createDrawable(Color.CLEAR)
+        })
     }
 
     private fun fillScrollPane(): ScrollPane {

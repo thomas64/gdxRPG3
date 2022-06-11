@@ -23,24 +23,24 @@ private const val PAD_LEFT = 20f
 
 internal class QuestListTable {
 
-    private val font: BitmapFont = resourceManager.getTrueTypeAsset(TEXT_FONT, TEXT_SIZE)
-    val questList: List<QuestGraph> = fillList()
+    private val questListFont: BitmapFont = resourceManager.getTrueTypeAsset(TEXT_FONT, TEXT_SIZE)
+    val questList: List<QuestGraph> = createList()
     val scrollPane: ScrollPane = fillScrollPane()
     val container: Table = fillContainer()
 
-    private fun fillList(): List<QuestGraph> {
-        val listStyle = ListStyle()
-        listStyle.font = font
-        listStyle.fontColorSelected = Constant.DARK_RED
-        listStyle.fontColorUnselected = Color.BLACK
-        listStyle.selection = Utils.createFullBorder()
-        listStyle.selection.leftWidth = PAD_LEFT
+    fun populateQuestList() {
+        val knownQuests = GdxArray(gameData.quests.getAllKnownQuestsForVisual())
+        questList.setItems(knownQuests)
+    }
 
-        return List<QuestGraph>(listStyle).apply {
-            val knownQuests = GdxArray(gameData.quests.getAllKnownQuestsForVisual())
-            setItems(knownQuests)
-            selectedIndex = -1
-        }
+    private fun createList(): List<QuestGraph> {
+        return List(ListStyle().apply {
+            font = questListFont
+            fontColorSelected = Constant.DARK_RED
+            fontColorUnselected = Color.BLACK
+            selection = Utils.createFullBorder()
+            selection.leftWidth = PAD_LEFT
+        })
     }
 
     private fun fillScrollPane(): ScrollPane {
