@@ -118,7 +118,7 @@ class MenuNew : MenuScreen() {
 
     override fun setCurrentTextButtonToSelected() {
         val lowerTable = table.getChild(1) as Table // two tables inside the table, get the second.
-        (lowerTable.getChild(selectedMenuIndex) as TextButton).style.fontColor = Constant.DARK_RED
+        (lowerTable.getChild(selectedMenuIndex) as TextButton).style.fontColor = selectColor
     }
 
     private fun createTable(): Table {

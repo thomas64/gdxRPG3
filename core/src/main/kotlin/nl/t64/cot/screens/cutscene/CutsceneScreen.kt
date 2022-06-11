@@ -224,8 +224,8 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
 
     private fun setNewMap() {
         val currentMap = mapManager.currentMap
-        mapRenderer.map = mapManager.getTiledMap()
         camera.setNewMapSize(currentMap.pixelWidth, currentMap.pixelHeight)
+        mapRenderer.map = mapManager.getTiledMap()
     }
 
     fun showConversationDialog(conversationId: String, entityId: String, faceColor: Color? = null) {

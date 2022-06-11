@@ -28,6 +28,7 @@ class GraphicsPlayer : GraphicsComponent() {
     override fun receive(event: Event) {
         if (event is LoadEntityEvent) {
             direction = event.direction!!
+            setEventPosition(event.position)
         }
         if (event is StateEvent) {
             state = event.state
@@ -36,14 +37,18 @@ class GraphicsPlayer : GraphicsComponent() {
             direction = event.direction
         }
         if (event is PositionEvent) {
-            position = event.position
-            lastFeetPosition = feetPosition
-            feetPosition = Vector2(position.x + Constant.HALF_TILE_SIZE, position.y)
+            setEventPosition(event.position)
         }
         if (event is SpeedEvent) {
             setNewFrameDuration(event.moveSpeed)
             moveSpeed = event.moveSpeed
         }
+    }
+
+    private fun setEventPosition(newPosition: Vector2) {
+        position = newPosition
+        lastFeetPosition = feetPosition
+        feetPosition = Vector2(position.x + Constant.HALF_TILE_SIZE, position.y)
     }
 
     override fun update(dt: Float) {

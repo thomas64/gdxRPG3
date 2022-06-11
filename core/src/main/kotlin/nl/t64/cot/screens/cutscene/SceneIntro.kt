@@ -263,6 +263,7 @@ class SceneIntro : CutsceneScreen() {
 
             actionFadeOutWithoutBgmFading(),
 
+            Actions.delay(1f),
             Actions.run {
                 setMapWithBgsOnly("honeywood")
                 door1.isVisible = true
@@ -272,7 +273,6 @@ class SceneIntro : CutsceneScreen() {
                 mozes.setPosition(528f, 1320f)
                 mozes.entityState = EntityState.IDLE
             },
-            Actions.delay(1f),
 
             actionFadeIn(),
 

@@ -172,6 +172,8 @@ class WorldScreen : Screen,
 
     override fun onNotifyShowBattleScreen(battleId: String, enemyEntity: Entity) {
         if (player.moveSpeed != Constant.MOVE_SPEED_4 && !isInMapTransition) {
+            Gdx.input.inputProcessor = null
+            Utils.setGamepadInputProcessor(null)
             currentNpcEntity = enemyEntity
             gameState = GameState.BATTLE
             doBeforeLoadScreen()
@@ -304,7 +306,6 @@ class WorldScreen : Screen,
 
         stage.act(dt)
         if (isInMapTransition) {
-            player.resetInput()
             mapManager.fadeAudio()
         }
         stage.draw()
