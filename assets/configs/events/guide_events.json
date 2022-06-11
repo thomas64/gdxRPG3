@@ -8,7 +8,7 @@
   },
   "guide_event_inventory"     : {
     "type"     : "messagebox",
-    "condition": ["3_starting_potions"],
+    "condition": ["_n_3_item_healing_potion"],
     "text"     : [
       "Press %inventory% to see your inventory,",
       "along with your equipment, stats, skills and spells."
@@ -59,7 +59,7 @@
   },
   "guide_event_equipment"     : {
     "type"     : "messagebox",
-    "condition": ["first_equipment_item"],
+    "condition": ["_n_1_item_basic_light_helmet"],
     "text"     : [
       "Press %inventory% to see your inventory.",
       "Here you can equip items that will give you more protection in battles like this item.",

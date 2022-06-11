@@ -8,7 +8,7 @@
   },
   "found_grace_ribbon"  : {
     "type"          : "conversation",
-    "condition"     : ["grace_ribbon"],
+    "condition"     : ["_n_1_item_grace_ribbon"],
     "conversationId": "found_grace_ribbon",
     "entityId"      : "mozes"
   },

@@ -209,7 +209,7 @@
       "13": {"face": "woman03", "text": ["And then before she may leave, she also need horseshoes, which I don't have right now... So no."]},
       "14": {
         "face": "mozes", "choices": [
-          {"condition": ["i_horse_medicine1"], "text": "Here is some medicine from Elenora for Enopa.", "command": "GIVE_QUEST_ITEM", "nextId": "25"},
+          {"condition": ["i_n_1_item_horse_medicine"], "text": "Here is some medicine from Elenora for Enopa.", "command": "GIVE_QUEST_ITEM", "nextId": "25"},
           {"condition": ["i_r_!=_f_q_this"], "text": "Isn't there anything I can do to help Enopa?", "command": "ACCEPT_QUEST", "nextId": "20"},
           {"condition": ["i_r_==_f_q_this"], "text": "What if I get a medicine from Elenora and some horseshoes for her?", "command": "ACCEPT_QUEST", "nextId": "30"},
           {"text": "I see. I'll try to find another way then. (Leave conversation)", "command": "EXIT"}
@@ -223,14 +223,14 @@
       "30": {"face": "woman03", "text": ["Really? That certainly would help me out, thanks."], "choices": [{"nextId": "35"}]},
       "35": {
         "face": "woman03", "text": ["When she's all better and shoed, I will lend her out to Lennor and you."], "choices": [
-          {"condition": ["i_horse_medicine1"], "text": "Alright, here is that medicine from Elenora.", "command": "GIVE_QUEST_ITEM", "nextId": "40"},
+          {"condition": ["i_n_1_item_horse_medicine"], "text": "Alright, here is that medicine from Elenora.", "command": "GIVE_QUEST_ITEM", "nextId": "40"},
           {"text": "Thanks, I'll see what I can do. (Leave conversation)", "command": "EXIT", "nextId": "50"}
         ]
       },
       "40": {"face": "woman03", "text": ["Wow, really? That's awesome! I will give it to her immediately."], "choices": [{"nextId": "52"}]},
       "50": {
         "face": "woman03", "text": ["Hey Mozes, do you have anything for Enopa?"], "choices": [
-          {"condition": ["i_horse_medicine1"], "text": "Yes, here is a medicine from Elenora.", "command": "GIVE_QUEST_ITEM", "nextId": "51"},
+          {"condition": ["i_n_1_item_horse_medicine"], "text": "Yes, here is a medicine from Elenora.", "command": "GIVE_QUEST_ITEM", "nextId": "51"},
           {"text": "I'm working on it. (Leave conversation)", "command": "EXIT", "nextId": "50"}
         ]
       },
@@ -239,7 +239,7 @@
       "53": {"face": "woman03", "text": ["Now, when she is shoed, I will lend her out to Lennor and you."]},
       "54": {
         "face": "woman03", "text": ["Did you manage to get 4 horseshoes for Enopa?"], "choices": [
-          {"condition": ["i_horseshoe4"], "text": "Yes, I've got them, here you are.", "command": "GIVE_QUEST_ITEM", "nextId": "60"},
+          {"condition": ["i_n_4_item_horseshoe"], "text": "Yes, I've got them, here you are.", "command": "GIVE_QUEST_ITEM", "nextId": "60"},
           {"text": "No, not yet, I'll come back when I get those. (Leave conversation)", "command": "EXIT", "nextId": "54"}
         ]
       },
@@ -281,7 +281,7 @@
       "5"   : {"face": "oldwoman11", "text": ["Luckily I saw one nearby, also here in the village.", "May I ask you to get the herbs and jelly for me?"]},
       "6"   : {
         "face": "mozes", "choices": [
-          {"condition": ["i_herb6", "i_blue_jelly1"], "text": "Better yet, here they are already!", "command": "GIVE_QUEST_ITEM", "nextId": "30"},
+          {"condition": ["i_n_6_item_herb", "i_n_1_item_blue_jelly"], "text": "Better yet, here they are already!", "command": "GIVE_QUEST_ITEM", "nextId": "30"},
           {"text": "Of course, I'll see what I can do.", "command": "ACCEPT_QUEST", "nextId": "10"},
           {"text": "Ew! Jelly? No thank you. (Leave conversation)", "command": "EXIT"}
         ]
@@ -289,7 +289,7 @@
       "10"  : {"face": "oldwoman11", "text": ["I will make the medicine as soon as you can bring me the ingredients."], "choices": [{"command": "EXIT", "nextId": "20"}]},
       "20"  : {
         "face": "oldwoman11", "text": ["Mozes my dear, do you have the ingredients?"], "choices": [
-          {"condition": ["i_herb6", "i_blue_jelly1"], "text": "Yes, here they are.", "command": "GIVE_QUEST_ITEM", "nextId": "30"},
+          {"condition": ["i_n_6_item_herb", "i_n_1_item_blue_jelly"], "text": "Yes, here they are.", "command": "GIVE_QUEST_ITEM", "nextId": "30"},
           {"text": "Not yet, I'm still working on it. (Leave conversation)", "command": "EXIT", "nextId": "20"}
         ]
       },
@@ -352,7 +352,7 @@
       },
       "3"   : {
         "face": "man07", "text": ["Of course! For 1 gold and 2 metal I can make 1 horseshoe for you."], "choices": [
-          {"condition": ["gold1", "metal2"], "text": "[Gold 1, Metal 2] Yes please.", "nextId": "20"},
+          {"condition": ["_n_1_item_gold", "_n_2_item_metal"], "text": "[Gold 1, Metal 2] Yes please.", "nextId": "20"},
           {"text": "No, thank you. Maybe I can get them otherwise.", "command": "ACCEPT_QUEST", "nextId": "10"}
         ]
       },

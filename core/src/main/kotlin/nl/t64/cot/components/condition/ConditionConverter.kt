@@ -17,6 +17,12 @@ object ConditionConverter {
         return isQuestInState(conditionId, questState, conditionState)
     }
 
+    fun isMeetingItemCondition(conditionId: String): Boolean {
+        val amount = getNumber("_n_", conditionId)
+        val inventoryItemId = conditionId.substringAfter("_item_")
+        return gameData.inventory.hasEnoughOfItem(inventoryItemId, amount)
+    }
+
     private fun getQuestGraph(conditionId: String, questId: String?): QuestGraph {
         return when {
             conditionId.contains("_q_this") -> gameData.quests.getQuestById(questId!!)
@@ -35,7 +41,7 @@ object ConditionConverter {
     }
 
     private fun isTaskCompleteAndNextTaskNotYet(conditionId: String, questGraph: QuestGraph): Boolean {
-        val taskId: Int = getTaskNumber("_ta_", conditionId)
+        val taskId: Int = getNumber("_ta_", conditionId)
         var nextTaskId: Int = taskId + 1
         while (!questGraph.tasks.containsKey(nextTaskId.toString())) nextTaskId += 1
         return questGraph.isTaskComplete(taskId.toString())
@@ -43,11 +49,11 @@ object ConditionConverter {
     }
 
     private fun isTaskComplete(prefix: String, conditionId: String, questGraph: QuestGraph): Boolean {
-        val taskId: Int = getTaskNumber(prefix, conditionId)
+        val taskId: Int = getNumber(prefix, conditionId)
         return questGraph.isTaskComplete(taskId.toString())
     }
 
-    private fun getTaskNumber(prefix: String, conditionId: String): Int {
+    private fun getNumber(prefix: String, conditionId: String): Int {
         val startIndex = conditionId.indexOf(prefix) + prefix.length
         val endIndex = conditionId.substring(startIndex).indexOf("_") + startIndex
         return conditionId.substring(startIndex, endIndex).toInt()

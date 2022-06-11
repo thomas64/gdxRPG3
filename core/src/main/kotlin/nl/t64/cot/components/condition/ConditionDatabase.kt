@@ -9,32 +9,21 @@ object ConditionDatabase {
 
     private val conditions: Map<String, () -> Boolean> = mapOf(
         // @formatter:off
-        "3_starting_potions"        to { hasEnoughOfItem("healing_potion",          3) },
-        "grace_ribbon"              to { hasEnoughOfItem("grace_ribbon",            1) },
-        "i_scroll_of_orc_obedience" to { hasEnoughOfItem("scroll_of_orc_obedience", 1) },
-        "i_herb6"                   to { hasEnoughOfItem("herb",                    6) },
-        "i_blue_jelly1"             to { hasEnoughOfItem("blue_jelly",              1) },
-        "i_horse_medicine1"         to { hasEnoughOfItem("horse_medicine",          1) },
-        "gold1"                     to { hasEnoughOfItem("gold",                    1) },
-        "metal2"                    to { hasEnoughOfItem("metal",                   2) },
-        "i_horseshoe4"              to { hasEnoughOfItem("horseshoe",               4) },
+        "diplomat4"            to { hasEnoughOfSkill(SkillItemId.DIPLOMAT, 4) },
+        "i_druid1"             to { hasEnoughOfSkill(SkillItemId.DRUID,    1) },
+        "i_druid2"             to { hasEnoughOfSkill(SkillItemId.DRUID,    2) },
 
-        "diplomat4"                 to { hasEnoughOfSkill(SkillItemId.DIPLOMAT,                     4) },
-        "i_druid1"                  to { hasEnoughOfSkill(SkillItemId.DRUID,                        1) },
-        "i_druid2"                  to { hasEnoughOfSkill(SkillItemId.DRUID,                        2) },
+        "level10"              to { hasAverageLevelOf(              10) },
 
-        "level10"                   to { hasAverageLevelOf(                                 10) },
-
-        "first_equipment_item"      to { gotFirstEquipmentItem },
-        "i_!know_about_grace"       to { !doesKnowAboutGrace },
-        "i_know_about_grace"        to { doesKnowAboutGrace },
-        "!been_in_fairy_town"       to { !hasBeenInFairyTown },
-        "been_in_fairy_town"        to { hasBeenInFairyTown },
-        "defeated_orc_guards"       to { hasDefeatedOrcGuards },
-        "i_!starting_spells"        to { !hasStartingSpells },
-        "i_starting_spells"         to { hasStartingSpells },
-        "!talked_to_lennor"         to { hasNotYetTalkedToLennorFirstCycle },
-        "alone_in_party"            to { isAloneInParty }
+        "i_!know_about_grace"  to { !doesKnowAboutGrace },
+        "i_know_about_grace"   to { doesKnowAboutGrace },
+        "!been_in_fairy_town"  to { !hasBeenInFairyTown },
+        "been_in_fairy_town"   to { hasBeenInFairyTown },
+        "defeated_orc_guards"  to { hasDefeatedOrcGuards },
+        "i_!starting_spells"   to { !hasStartingSpells },
+        "i_starting_spells"    to { hasStartingSpells },
+        "!talked_to_lennor"    to { hasNotYetTalkedToLennorFirstCycle },
+        "alone_in_party"       to { isAloneInParty }
         // @formatter:on
     )
 
@@ -48,6 +37,8 @@ object ConditionDatabase {
     private fun isMeetingCondition(conditionId: String, questId: String?): Boolean {
         return if (conditionId.contains("_q_")) {
             ConditionConverter.isMeetingQuestCondition(conditionId, questId)
+        } else if (conditionId.contains("_item_") && conditionId.contains("_n_")) {
+            ConditionConverter.isMeetingItemCondition(conditionId)
         } else {
             conditions[conditionId]!!.invoke()
         }
@@ -55,7 +46,6 @@ object ConditionDatabase {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private val gotFirstEquipmentItem get() = hasEnoughOfOneOfTheseItems("basic_light_helmet")
     private val doesKnowAboutGrace
         get() = isOneOfBothStatesEqualOrHigher("quest_orc_guards", QuestState.ACCEPTED)
                 || isOneOfBothStatesEqualOrHigher("quest_mother_fairy", QuestState.ACCEPTED)
@@ -77,13 +67,6 @@ object ConditionDatabase {
 
     private fun hasAverageLevelOf(requestedLevel: Int): Boolean =
         gameData.party.getAverageLevel() >= requestedLevel
-
-    private fun hasEnoughOfOneOfTheseItems(vararg inventoryItemIds: String): Boolean =
-        inventoryItemIds.any { hasEnoughOfItem(it, 1) }
-
-    private fun hasEnoughOfItem(inventoryItemId: String, amount: Int): Boolean =
-        gameData.inventory.hasEnoughOfItem(inventoryItemId, amount)
-                || gameData.party.hasItemInEquipment(inventoryItemId, amount)
 
     private fun isQuestResetStateEqual(questId: String, questState: QuestState): Boolean =
         gameData.quests.getQuestById(questId).resetState == questState
