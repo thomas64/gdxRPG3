@@ -6,20 +6,23 @@ import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.components.conversation.ConversationGraph
 import nl.t64.cot.components.loot.Loot
+import nl.t64.cot.components.quest.QuestGraph
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 
 
 class ReceiveScreen : LootScreen() {
 
+    private lateinit var quest: QuestGraph
     private lateinit var conversation: ConversationGraph
 
     companion object {
-        fun load(receive: Loot, conversation: ConversationGraph) {
+        fun load(receive: Loot, quest: QuestGraph, conversation: ConversationGraph) {
             audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_SPARKLE)
             val receiveScreen = screenManager.getScreen(ScreenType.RECEIVE) as ReceiveScreen
             receiveScreen.loot = receive
             receiveScreen.lootTitle = "   Receive"
+            receiveScreen.quest = quest
             receiveScreen.conversation = conversation
             screenManager.openParchmentLoadScreen(ScreenType.RECEIVE)
         }
@@ -27,8 +30,10 @@ class ReceiveScreen : LootScreen() {
 
     override fun resolveLootAndCloseScreen(isAllTheLootCleared: Boolean) {
         if (isAllTheLootCleared) {
+            quest.accept()
             conversation.currentPhraseId = Constant.PHRASE_ID_LOOT_TAKEN
         } else {
+            quest.know()
             conversation.currentPhraseId = Constant.PHRASE_ID_LOOT_LEFTOVER
         }
         closeScreen()

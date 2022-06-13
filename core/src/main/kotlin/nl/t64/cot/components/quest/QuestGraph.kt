@@ -65,7 +65,9 @@ data class QuestGraph(
     }
 
     fun know() {
-        currentState = QuestState.KNOWN
+        if (currentState == QuestState.UNKNOWN) {
+            currentState = QuestState.KNOWN
+        }
     }
 
     fun accept() {
@@ -132,14 +134,21 @@ data class QuestGraph(
         else throw IllegalStateException("Can only contain 1 TRADE_ITEMS QuestTaskType.")
     }
 
-    fun setSayTheRightThingTaskComplete() {
+    fun setSayTheRightThingTaskCompleteAndReceivePossibleTarget(): Loot {
         accept()
-        tasks.filterValues { it.type == QuestTaskType.SAY_THE_RIGHT_THING }
-            .forEach { setTaskComplete(it.key) }
+        return tasks
+            .filterValues { it.type == QuestTaskType.SAY_THE_RIGHT_THING }
+            .filterValues { !it.isComplete }
+            .onEach { setTaskComplete(it.key) }
+            .map { it.value.target }
+            .flatMap { it.toList() }
+            .toMap()
+            .toMutableMap()
+            .let { Loot(it) }
+
     }
 
     fun receiveItemsToDeliver(): Loot {
-        accept()
         return tasks.values
             .filter { it.type == QuestTaskType.DELIVER_ITEM }
             .map { it.target }
@@ -155,6 +164,26 @@ data class QuestGraph(
                 .filterValues { it.conversationId == conversationId }
                 .filterValues { !it.isComplete }
                 .filterValues { it.hasTargetInInventory() }
+                .forEach { setTaskComplete(it.key) }
+        }
+    }
+
+    fun possibleSetDeliverItemAlternateTaskComplete(conversationId: String) {
+        if (currentState.isEqualOrLowerThan(QuestState.ACCEPTED)) {
+            tasks.filterValues { it.type == QuestTaskType.DELIVER_ITEM }
+                .filterValues { it.conversationId == conversationId }
+                .filterValues { !it.isComplete }
+                .filterValues { it.targetAlternate.isNotEmpty() }
+                .onEach { it.value.updateTargetToAlternate() }
+                .filterValues { it.hasTargetInInventory() }
+                .forEach { setTaskComplete(it.key) }
+        }
+    }
+
+    fun possibleSetDeliverMessageTaskComplete(conversationId: String) {
+        if (currentState.isEqualOrLowerThan(QuestState.ACCEPTED)) {
+            tasks.filterValues { it.type == QuestTaskType.DELIVER_MESSAGE }
+                .filterValues { it.conversationId == conversationId }
                 .forEach { setTaskComplete(it.key) }
         }
     }

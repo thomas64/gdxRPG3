@@ -25,15 +25,15 @@
         "updatedPhrase": "Get 2 tow ropes",
         "type"         : "FIND_ITEM",
         "target"       : {"tow_rope": 2},
-        "linkedWith"   : ["16"]
+        "linkedWith": ["18"]
       },
-      "16": {
+      "18": {
         "taskPhrase": "Deliver the ropes to Lennor.",
         "type"      : "GIVE_ITEM",
         "target"    : {"tow_rope": 2},
         "isHidden"  : true
       },
-      "17": {
+      "19": {
         "taskPhrase": "Let the tree be dragged out of the way.",
         "type"      : "FREE"
       }
@@ -50,18 +50,32 @@
         "type"      : "FREE"
       },
       "13": {
-        "taskPhrase"    : "    Deliver 3 gold pieces to the blacksmith.",
-        "type"          : "DELIVER_ITEM",
-        "target"        : {"gold": 3},
-        "conversationId": "quest_get_horseshoes"
+        "taskPhrase"     : "    Deliver 3 gold pieces to the blacksmith.",
+        "updatedPhrase"  : "    Deliver 3 (+1) gold pieces to the blacksmith.",
+        "type"           : "DELIVER_ITEM",
+        "target"         : {"gold": 3},
+        "targetAlternate": {"gold": 4},
+        "conversationId" : "quest_get_horseshoes"
       },
       "14": {
+        "taskPhrase": "        [Optional] Get 1 extra gold piece from Jaron for the blacksmith.",
+        "type"      : "SAY_THE_RIGHT_THING",
+        "target"    : {"gold": 1},
+        "isHidden"  : true,
+        "isOptional": true
+      },
+      "15": {
         "taskPhrase"    : "    Deliver Theodore's lost ring to mrs. Johanna.",
         "type"          : "DELIVER_ITEM",
         "target"        : {"basic_silver_ring": 1},
         "conversationId": "mrs_johanna"
       },
-      "15": {
+      "16": {
+        "taskPhrase"    : "    Tell Kaidan to come home to Jaron.",
+        "type"          : "DELIVER_MESSAGE",
+        "conversationId": "kaidan_come_home"
+      },
+      "17": {
         "taskPhrase": "    Report back to Jaron",
         "type"      : "RETURN",
         "linkedWith": ["12"]

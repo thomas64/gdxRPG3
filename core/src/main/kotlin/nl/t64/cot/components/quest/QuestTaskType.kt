@@ -9,6 +9,7 @@ enum class QuestTaskType {
     GIVE_ITEM,
     TRADE_ITEMS,
     DELIVER_ITEM,
+    DELIVER_MESSAGE,
     SAY_THE_RIGHT_THING,
     KILL,
 
@@ -20,8 +21,8 @@ enum class QuestTaskType {
 
     FETCH_ITEM,
     GAIN_KNOWLEDGE,
-    MESSAGE_DELIVERY,
-    ITEM_DELIVERY,
+    MESSAGE_DELIVERY,   // legacy
+    ITEM_DELIVERY,      // legacy
     GUARD,
     ESCORT,
 

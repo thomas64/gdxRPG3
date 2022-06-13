@@ -9,22 +9,24 @@
   },
   "mrs_johanna"                : {
     "phrases": {
-      "1"   : {"text": ["Mozes my dear, how are you?", "What a beautiful day, isn't it?"]},
-      "2"   : {"text": ["I come here often to reminisce about this once enormous tree and my late husband Theodore."]},
-      "3"   : {"text": ["We had such nice summers together under this tree."]},
-      "4"   : {
-        "text": ["I miss him..."], "choices": [
-          {"condition": ["i_c_==_a_q_quest_get_tow_rope", "i_tn_14_q_quest_get_tow_rope"], "nextId": "10"}
+      "1" : {"text": ["Mozes my dear, how are you?", "What a beautiful day, isn't it?"]},
+      "2" : {"text": ["I come here often to reminisce about this once enormous tree and my late husband Theodore."]},
+      "3" : {"text": ["We had such nice summers together under this tree."]},
+      "4" : {"text": ["I miss him..."]},
+      "5" : {
+        "face": "oldwoman01", "text": ["Life is over before you know it, don't you think?"], "choices": [
+          {
+            "condition": ["i_c_==_a_q_quest_get_tow_rope", "_tn_15_q_quest_get_tow_rope", "_n_1_>=_item_basic_silver_ring"],
+            "text"     : "Speaking of Theodore, Jaron found your lost ring.", "nextId": "11"
+          },
+          {"text": "You sure got that right. (Leave conversation)", "command": "EXIT"}
         ]
       },
-      "2000": {"face": "oldwoman01", "text": ["Life is over before you know it, don't you think?"]},
-      "2001": {"face": "mozes", "text": ["You sure got that right."], "choices": [{"command": "EXIT"}]},
-      "10"  : {"face": "mozes", "text": ["Speaking of Theodore, Jaron found your lost ring."]},
-      "11"  : {"face": "oldwoman01", "text": ["Mozes, that's wonderful news!"]},
-      "12"  : {"face": "mozes", "text": ["Here you are. One silver ring from Theodore."], "choices": [{"command": "DELIVER_QUEST_ITEM", "nextId": "13"}]},
-      "13"  : {"face": "oldwoman01", "text": ["Thank you. Now I can die in peace."]},
-      "14"  : {"face": "mozes", "text": ["Really?"]},
-      "15"  : {"face": "oldwoman01", "text": ["Nah! Of course not. I've got so much to live for. See ya!"], "choices": [{"command": "EXIT"}]}
+      "11": {"face": "oldwoman01", "text": ["Mozes, that's wonderful news!"]},
+      "12": {"face": "mozes", "text": ["Here you are. One silver ring from Theodore."], "choices": [{"command": "DELIVER_QUEST_ITEM", "nextId": "13"}]},
+      "13": {"face": "oldwoman01", "text": ["Thank you. Now I can die in peace."]},
+      "14": {"face": "mozes", "text": ["Really?"]},
+      "15": {"face": "oldwoman01", "text": ["Nah! Of course not. I've got so much to live for. See ya!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "quest_a_helping_horse"      : {
@@ -64,6 +66,34 @@
   "playing_catch"              : {
     "phrases": {
       "1": {"text": ["We're playing catch, teehee! Can Grace come and join us?"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "kaidan_come_home"           : {
+    "phrases": {
+      "1": {
+        "text": ["We're playing catch, teehee! Can Grace come and join us?"], "choices": [
+          {"condition": ["i_c_==_a_q_quest_get_tow_rope"], "nextId": "2"},
+          {"condition": ["i_c_==_u_q_quest_get_tow_rope"], "command": "EXIT"}
+        ]
+      },
+      "2": {"face": "mozes", "text": ["Jaron asked me to call you home."]},
+      "3": {"face": "boy01", "text": ["Awww man! Right now?"]},
+      "4": {"face": "mozes", "text": ["I'm afraid so."]},
+      "5": {"face": "boy01", "text": ["It's not fair! I wanna play! You're dumb!"]},
+      "6": {"face": "mozes", "text": ["Don't shoot the messenger."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "7"}]},
+      "7": {"face": "boy01", "text": ["You're right, I'll go home and shoot Jaron."]},
+      "8": {"face": "mozes", "text": [". . ."], "choices": [{"command": "RELOAD_NPCS"}]}
+    }
+  },
+  "kaidan_is_home"             : {
+    "phrases": {
+      "1": {"text": ["Aw man! This is boring! I wanna play outside."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "life_is_boring"             : {
+    "phrases": {
+      "1": {"text": ["Boohoo! You took Kaidan away from us!"]},
+      "2": {"face": "mozes", "text": ["Don't shoot the messenger."], "choices": [{"command": "EXIT"}]}
     }
   },
   "luana01"                    : {
@@ -209,28 +239,28 @@
       "13": {"face": "woman03", "text": ["And then before she may leave, she also need horseshoes, which I don't have right now... So no."]},
       "14": {
         "face": "mozes", "choices": [
-          {"condition": ["i_n_1_item_horse_medicine"], "text": "Here is some medicine from Elenora for Enopa.", "command": "GIVE_QUEST_ITEM", "nextId": "25"},
+          {"condition": ["i_n_1_>=_item_horse_medicine"], "text": "Here is some medicine from Elenora for Enopa.", "command": "GIVE_QUEST_ITEM", "nextId": "25"},
           {"condition": ["i_r_!=_f_q_this"], "text": "Isn't there anything I can do to help Enopa?", "command": "ACCEPT_QUEST", "nextId": "20"},
           {"condition": ["i_r_==_f_q_this"], "text": "What if I get a medicine from Elenora and some horseshoes for her?", "command": "ACCEPT_QUEST", "nextId": "30"},
           {"text": "I see. I'll try to find another way then. (Leave conversation)", "command": "EXIT"}
         ]
       },
       "20": {"face": "woman03", "text": ["Let me think..."]},
-      "21": {"face": "woman03", "text": ["Maybe you can.", "Go talk to Elenora, the elder's wife. Perhaps she has some medicine or something."]},
-      "22": {"face": "woman03", "text": ["And about the horseshoes, you may bring me 4 of them. There must be some around here in the village, and otherwise our blacksmith can help you out,", "I think."], "choices": [{"nextId": "35"}]},
+      "21": {"face": "woman03", "text": ["Maybe you can.", "Go talk to Elenora, the village elder's wife. Perhaps she has some medicine or something."]},
+      "22": {"face": "woman03", "text": ["And about the horseshoes, you may bring me 4 of them. There must be some around here in the village, and otherwise ask the elder himself. He knows things. Probably even about horseshoes."], "choices": [{"nextId": "35"}]},
       "25": {"face": "woman03", "text": ["How did you know...?"]},
       "26": {"face": "woman03", "text": ["But thanks anyway. I will give it to her immediately."], "choices": [{"nextId": "52"}]},
       "30": {"face": "woman03", "text": ["Really? That certainly would help me out, thanks."], "choices": [{"nextId": "35"}]},
       "35": {
-        "face": "woman03", "text": ["When she's all better and shoed, I will lend her out to Lennor and you."], "choices": [
-          {"condition": ["i_n_1_item_horse_medicine"], "text": "Alright, here is that medicine from Elenora.", "command": "GIVE_QUEST_ITEM", "nextId": "40"},
+        "face": "woman03", "text": ["When Enopa's all better and shoed, I will lend her out to Lennor and you."], "choices": [
+          {"condition": ["i_n_1_>=_item_horse_medicine"], "text": "Alright, here is that medicine from Elenora.", "command": "GIVE_QUEST_ITEM", "nextId": "40"},
           {"text": "Thanks, I'll see what I can do. (Leave conversation)", "command": "EXIT", "nextId": "50"}
         ]
       },
       "40": {"face": "woman03", "text": ["Wow, really? That's awesome! I will give it to her immediately."], "choices": [{"nextId": "52"}]},
       "50": {
         "face": "woman03", "text": ["Hey Mozes, do you have anything for Enopa?"], "choices": [
-          {"condition": ["i_n_1_item_horse_medicine"], "text": "Yes, here is a medicine from Elenora.", "command": "GIVE_QUEST_ITEM", "nextId": "51"},
+          {"condition": ["i_n_1_>=_item_horse_medicine"], "text": "Yes, here is a medicine from Elenora.", "command": "GIVE_QUEST_ITEM", "nextId": "51"},
           {"text": "I'm working on it. (Leave conversation)", "command": "EXIT", "nextId": "50"}
         ]
       },
@@ -239,7 +269,7 @@
       "53": {"face": "woman03", "text": ["Now, when she is shoed, I will lend her out to Lennor and you."]},
       "54": {
         "face": "woman03", "text": ["Did you manage to get 4 horseshoes for Enopa?"], "choices": [
-          {"condition": ["i_n_4_item_horseshoe"], "text": "Yes, I've got them, here you are.", "command": "GIVE_QUEST_ITEM", "nextId": "60"},
+          {"condition": ["i_n_4_>=_item_horseshoe"], "text": "Yes, I've got them, here you are.", "command": "GIVE_QUEST_ITEM", "nextId": "60"},
           {"text": "No, not yet, I'll come back when I get those. (Leave conversation)", "command": "EXIT", "nextId": "54"}
         ]
       },
@@ -253,13 +283,13 @@
     "phrases": {
       "1"   : {
         "text": ["Neigh."], "choices": [
-          {"condition": ["i_druid2", "_tn_7_q_quest_get_horse"], "nextId": "2"},
-          {"condition": ["i_druid2", "_tc_7_q_quest_get_horse", "_c_!=_f_q_quest_get_horse"], "nextId": "3"},
-          {"condition": ["i_druid2", "_c_==_f_q_quest_get_horse", "_c_!=_f_q_quest_a_helping_horse"], "nextId": "4"},
-          {"condition": ["i_druid2", "_c_==_f_q_quest_a_helping_horse"], "nextId": "5"}
+          {"condition": ["i_druid1", "_tn_7_q_quest_get_horse"], "nextId": "2"},
+          {"condition": ["i_druid1", "_tc_7_q_quest_get_horse", "_c_!=_f_q_quest_get_horse"], "nextId": "3"},
+          {"condition": ["i_druid1", "_c_==_f_q_quest_get_horse", "_c_!=_f_q_quest_a_helping_horse"], "nextId": "4"},
+          {"condition": ["i_druid1", "_c_==_f_q_quest_a_helping_horse"], "nextId": "5"}
         ]
       },
-      "2000": {"face": "mozes", "text": ["* Druid skill rank 2 needed. *"], "choices": [{"command": "EXIT"}]},
+      "2000": {"face": "mozes", "text": ["* Druid skill rank 1 needed. *"], "choices": [{"command": "EXIT"}]},
       "2"   : {"text": ["I'm not feeling so well...", "Maybe I shouldn't have eaten those delicious looking mushrooms."], "choices": [{"command": "EXIT"}]},
       "3"   : {"text": ["I feel great again! Thank you for helping me."], "choices": [{"command": "EXIT"}]},
       "4"   : {"text": ["I will fix that tree for you in no time!"], "choices": [{"command": "EXIT"}]},
@@ -281,7 +311,7 @@
       "5"   : {"face": "oldwoman11", "text": ["Luckily I saw one nearby, also here in the village.", "May I ask you to get the herbs and jelly for me?"]},
       "6"   : {
         "face": "mozes", "choices": [
-          {"condition": ["i_n_6_item_herb", "i_n_1_item_blue_jelly"], "text": "Better yet, here they are already!", "command": "GIVE_QUEST_ITEM", "nextId": "30"},
+          {"condition": ["i_n_6_>=_item_herb", "i_n_1_>=_item_blue_jelly"], "text": "Better yet, here they are already!", "command": "GIVE_QUEST_ITEM", "nextId": "30"},
           {"text": "Of course, I'll see what I can do.", "command": "ACCEPT_QUEST", "nextId": "10"},
           {"text": "Ew! Jelly? No thank you. (Leave conversation)", "command": "EXIT"}
         ]
@@ -289,7 +319,7 @@
       "10"  : {"face": "oldwoman11", "text": ["I will make the medicine as soon as you can bring me the ingredients."], "choices": [{"command": "EXIT", "nextId": "20"}]},
       "20"  : {
         "face": "oldwoman11", "text": ["Mozes my dear, do you have the ingredients?"], "choices": [
-          {"condition": ["i_n_6_item_herb", "i_n_1_item_blue_jelly"], "text": "Yes, here they are.", "command": "GIVE_QUEST_ITEM", "nextId": "30"},
+          {"condition": ["i_n_6_>=_item_herb", "i_n_1_>=_item_blue_jelly"], "text": "Yes, here they are.", "command": "GIVE_QUEST_ITEM", "nextId": "30"},
           {"text": "Not yet, I'm still working on it. (Leave conversation)", "command": "EXIT", "nextId": "20"}
         ]
       },
@@ -352,7 +382,7 @@
       },
       "3"   : {
         "face": "man07", "text": ["Of course! For 1 gold and 2 metal I can make 1 horseshoe for you."], "choices": [
-          {"condition": ["_n_1_item_gold", "_n_2_item_metal"], "text": "[Gold 1, Metal 2] Yes please.", "nextId": "20"},
+          {"condition": ["_n_1_>=_item_gold", "_n_2_>=_item_metal"], "text": "[Gold 1, Metal 2] Yes please.", "nextId": "20"},
           {"text": "No, thank you. Maybe I can get them otherwise.", "command": "ACCEPT_QUEST", "nextId": "10"}
         ]
       },
@@ -364,31 +394,71 @@
       "24"  : {"face": "man07", "text": ["Here you go."], "choices": [{"command": "TRADE_QUEST_ITEMS"}]},
       "100" : {"face": "man07", "text": ["Ah, it's about time! That would be four gold pieces then."]},
       "101" : {"face": "mozes", "text": ["Really? Jaron told me it was only three."]},
-      "102" : {"face": "man07", "text": ["That's what I call interest. That slacker hasn't payed up in such a long time."]},
-      "103" : {"face": "mozes", "text": ["But I only got three gold pieces from Jaron to pay you."]},
-      "104" : {"face": "man07", "text": ["Alright alright, I'll settle with three for now. It's better than nothing.", "I will see to it that I get that fourth one later."]},
-      "105" : {"face": "mozes", "text": ["Here your are. Three gold pieces then."], "choices": [{"command": "DELIVER_QUEST_ITEM", "nextId": "106"}]},
-      "106" : {"face": "man07", "text": ["Thank you very much on behalf of Black Smith Inc."]},
-      "107" : {"face": "man07", "text": ["(Jaron, you lazy bum.)"], "choices": [{"command": "EXIT"}]},
+      "102" : {
+        "face": "man07", "text": ["That's what I call interest. That slacker hasn't payed up in such a long time."], "choices": [
+          {"condition": ["_n_4_>=_item_gold"], "text": "[Gold 4] That seems fair.", "nextId": "110"},
+          {"condition": ["_n_4_>=_item_gold"], "text": "[Gold 4] Okay, but that doesn't seems fair at all.", "nextId": "111"},
+          {"condition": ["_n_3_>=_item_gold", "diplomat1"], "text": "[Gold 3, Diplomat 1] But I only got three gold pieces from Jaron to pay you.", "nextId": "120"},
+          {"condition": ["i_n_3_==_item_gold"], "text": "[Gold 3] I'm sorry, but three is all I have with me.", "nextId": "120"},
+          {"text": "*grumble* I'll be back. (Leave conversation)", "command": "EXIT", "nextId": "200"}
+        ]
+      },
+      "110" : {"face": "man07", "text": ["That's what I thought."], "choices": [{"nextId": "115"}]},
+      "111" : {"face": "man07", "text": ["I'm sorry, business is business."], "choices": [{"nextId": "115"}]},
+      "115" : {"face": "mozes", "text": ["Okay then, here you are. Four gold pieces then."], "choices": [{"command": "DELIVER_QUEST_ITEM_ALTERNATE", "nextId": "130"}]},
+      "120" : {"face": "man07", "text": ["Alright alright, I'll settle with three for now. It's better than nothing.", "I will see to it that I get that fourth one later."]},
+      "121" : {"face": "mozes", "text": ["Here your are. Three gold pieces then."], "choices": [{"command": "DELIVER_QUEST_ITEM", "nextId": "130"}]},
+      "130" : {"face": "man07", "text": ["Thank you very much on behalf of Black Smith Inc."]},
+      "131" : {"face": "man07", "text": ["(Jaron, you lazy bum.)"], "choices": [{"command": "EXIT"}]},
+      "200" : {"face": "mozes", "text": ["About that four gold bill for Jaron..."], "choices": [{"nextId": "102"}]},
       "1199": {"face": "man07", "text": ["You forgot to take your horseshoe."], "choices": [{"command": "TRADE_QUEST_ITEMS"}]},
       "1200": {"face": "man07", "text": ["Hello neighbour, you're back."], "choices": [{"nextId": "2"}]}
     }
   },
   "quest_get_tow_rope"         : {
     "phrases": {
-      "1"   : {"text": ["[Dialogue not finished. I have tow rope, but you need to do 2 deliveries for me. Details are in your QuestLog.]"], "choices": [{"command": "RECEIVE_QUEST_ITEM"}]},
-      "1199": {"text": ["[Dialogue not finished. You forgot to take the items.]"], "choices": [{"command": "RECEIVE_QUEST_ITEM"}]},
+      "1"   : {
+        "text": ["Hi Mozes, to what do I owe the pleasure of you entering our home?"], "choices": [
+          {"condition": ["i_rc_>=_a_q_quest_a_helping_horse", "i_tn_11_q_quest_a_helping_horse"], "text": "Do you by chance have a tow rope to spare?", "nextId": "2"},
+          {"text": "Nothing really, just passing by. (Leave conversation)", "command": "EXIT"}
+        ]
+      },
+      "2"   : {"text": ["What a coincidence, I was just in need the tow rope myself.", "So unfortunately, no I don't."]},
+      "3"   : {"face": "mozes", "text": ["That's tough luck."]},
+      "4"   : {"face": "youngman01", "text": ["Hmmm..."]},
+      "5"   : {"face": "youngman01", "text": ["Maybe you can help me with some other couple of things.", "That way you'll give me the time I need, and you can borrow the rope immediately afterward."]},
+      "6"   : {
+        "face": "youngman01", "text": ["How's that?"], "choices": [
+          {"text": "Sure, anything to help.", "nextId": "10"},
+          {"text": "Sorry, I'm a busy man myself. (Leave conversation)", "command": "EXIT"}
+        ]
+      },
+      "10"  : {"text": ["Thanks. Alright, first of all I have to pay an outstanding bill from the blacksmith. Would you bring him these three gold pieces?"]},
+      "11"  : {"text": ["Second, old lady Johanna came here last week to pay me a visit, but somehow she lost her late husband's ring here. We couldn't find it at that moment, but just now I did. Would you give her this ring back?"]},
+      "12"  : {"text": ["And third, I need my little brother Kaidan here. He is playing somewhere outside. Would you go find him and tell him to come home?"]},
+      "13"  : {"text": ["That's it. You may borrow the rope afterward."], "choices": [{"command": "RECEIVE_QUEST_ITEM_TO_DELIVER"}]},
+      "100" : {
+        "text": ["Oh did he now?"], "choices": [
+          {"text": "Could you give me an extra gold piece then?", "nextId": "110"},
+          {"condition": ["barbarian1"], "text": "[Barbarian 1] That gold piece has to come from you of course.", "nextId": "120"},
+          {"text": "[Back]", "nextId": "1200"}
+        ]
+      },
+      "110" : {"text": ["I don't have any more gold at the moment. So maybe you could pay that 1 gold and can see it as my thanks that you'll get that rope."], "choices": [{"nextId": "1200"}]},
+      "120" : {"text": ["Erm... Ah yes yes of course. Okay, alright then...", "Here you are."], "choices": [{"command": "SAY_QUEST_THING", "nextId": "1200"}]},
+      "1199": {"text": ["You forgot something."], "choices": [{"command": "RECEIVE_QUEST_ITEM_TO_DELIVER"}]},
       "1200": {
-        "text": ["[Dialogue not finished. Thanks for helping. Are you finished?]"], "choices": [
-          {"condition": ["_tc_13_q_this", "_tc_14_q_this"], "text": "[Yes]", "nextId": "1201"},
-          {"text": "[No]", "command": "EXIT", "nextId": "1200"}
+        "text": ["There you are. How's it going? Have you made any progress?"], "choices": [
+          {"condition": ["i_not_happy_with_jaron", "_tn_14_q_this"], "text": "The blacksmith asked for 1 gold piece extra.", "nextId": "100"},
+          {"condition": ["_tc_13_q_this", "_tc_15_q_this", "_tc_16_q_this"], "text": "Yes, everything's been taken care of.", "nextId": "1201"},
+          {"text": "I still have some tasks to attend to. (Leave conversation)", "command": "EXIT", "nextId": "1200"}
         ]
       },
       "1201": {
-        "text": ["[Dialogue not finished. Here is your reward.]"], "choices": [{"command": "REWARD_QUEST"}]
+        "text": ["I'm also finished here. So thanks for your help and here's the rope."], "choices": [{"command": "REWARD_QUEST"}]
       },
-      "1399": {"text": ["[Dialogue not finished. Forgot your reward.]"], "choices": [{"command": "REWARD_QUEST"}]},
-      "1400": {"text": ["[Dialogue not finished. Super duper thanks.]"], "choices": [{"command": "EXIT", "nextId": "1400"}]}
+      "1399": {"text": ["Don't you need it anymore?"], "choices": [{"command": "REWARD_QUEST"}]},
+      "1400": {"text": ["Are you finished with the rope?", "If so, I would like it back."], "choices": [{"command": "EXIT", "nextId": "1400"}]}
     }
   },
   "honeywood_soldiers"         : {

@@ -14,8 +14,8 @@
         "face": "mozes", "choices": [
           {"text": "I'm looking for a little girl, have you guys maybe seen her?", "command": "ACCEPT_QUEST", "nextId": "10"},
           {"text": "Could you please let me through?", "nextId": "15"},
-          {"condition": ["diplomat4"], "text": "[Diplomat 4] You have to let me through.", "nextId": "30"},
-          {"condition": ["i_n_1_item_scroll_of_orc_obedience"], "text": "[Scroll of Orc Obedience] I command you to let me through.", "command": "GIVE_QUEST_ITEM", "nextId": "60"},
+          {"condition": ["barbarian4"], "text": "[Barbarian 4] You need to let me through.", "nextId": "30"},
+          {"condition": ["i_n_1_>=_item_scroll_of_orc_obedience"], "text": "[Scroll of Orc Obedience] I command you to let me through.", "command": "GIVE_QUEST_ITEM", "nextId": "60"},
           {"condition": ["level10"], "text": "[Level 10] Let me through, or I'll let myself through! (Start battle)", "nextId": "40"},
           {"text": "Okay, I'll go away... For now. (Leave conversation)", "command": "EXIT"}
         ]
@@ -39,11 +39,11 @@
       "22": {"face": "orc_sergeant", "text": [". . ."]},
       "23": {"face": "orc_sergeant", "text": ["You go through."], "choices": [{"command": "SHOW_QUEST_ITEM", "nextId": "50"}]},
       "30": {"face": "orc_sergeant", "text": ["No! You leave, or die!"]},
-      "31": {"face": "mozes", "text": ["It is of utmost importance! What do you think will happen when Ardor hears when you didn't let someone through who has some really important business with him?"]},
+      "31": {"face": "mozes", "text": ["That will be your demise! What do you think will happen when Ardor hears when you didn't let someone through who has some really important business with him?"]},
       "32": {"face": "orc_sergeant", "text": ["I not sure..."]},
       "33": {"face": "mozes", "text": ["He will incinerate you on the spot!"]},
       "34": {"face": "orc_sergeant", "text": ["But..."]},
-      "35": {"face": "mozes", "text": ["Trust me."]},
+      "35": {"face": "mozes", "text": ["He will!"]},
       "36": {"face": "orc_sergeant", "text": [". . ."]},
       "37": {"face": "orc_sergeant", "text": ["For this time, you go through."]},
       "38": {"face": "mozes", "text": ["Thank you."], "choices": [{"command": "SAY_QUEST_THING", "nextId": "50"}]},

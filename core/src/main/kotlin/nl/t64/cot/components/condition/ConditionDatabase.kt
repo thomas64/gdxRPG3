@@ -9,21 +9,23 @@ object ConditionDatabase {
 
     private val conditions: Map<String, () -> Boolean> = mapOf(
         // @formatter:off
-        "diplomat4"            to { hasEnoughOfSkill(SkillItemId.DIPLOMAT, 4) },
-        "i_druid1"             to { hasEnoughOfSkill(SkillItemId.DRUID,    1) },
-        "i_druid2"             to { hasEnoughOfSkill(SkillItemId.DRUID,    2) },
+        "diplomat1"              to { hasEnoughOfSkill(SkillItemId.DIPLOMAT,  1) },
+        "barbarian1"             to { hasEnoughOfSkill(SkillItemId.BARBARIAN, 1) },
+        "barbarian4"             to { hasEnoughOfSkill(SkillItemId.BARBARIAN, 4) },
+        "i_druid1"               to { hasEnoughOfSkill(SkillItemId.DRUID,     1) },
 
-        "level10"              to { hasAverageLevelOf(              10) },
+        "level10"                to { hasAverageLevelOf(               10) },
 
-        "i_!know_about_grace"  to { !doesKnowAboutGrace },
-        "i_know_about_grace"   to { doesKnowAboutGrace },
-        "!been_in_fairy_town"  to { !hasBeenInFairyTown },
-        "been_in_fairy_town"   to { hasBeenInFairyTown },
-        "defeated_orc_guards"  to { hasDefeatedOrcGuards },
-        "i_!starting_spells"   to { !hasStartingSpells },
-        "i_starting_spells"    to { hasStartingSpells },
-        "!talked_to_lennor"    to { hasNotYetTalkedToLennorFirstCycle },
-        "alone_in_party"       to { isAloneInParty }
+        "i_!know_about_grace"    to { !doesKnowAboutGrace },
+        "i_know_about_grace"     to { doesKnowAboutGrace },
+        "!been_in_fairy_town"    to { !hasBeenInFairyTown },
+        "been_in_fairy_town"     to { hasBeenInFairyTown },
+        "defeated_orc_guards"    to { hasDefeatedOrcGuards },
+        "i_!starting_spells"     to { !hasStartingSpells },
+        "i_starting_spells"      to { hasStartingSpells },
+        "!talked_to_lennor"      to { hasNotYetTalkedToLennorFirstCycle },
+        "i_not_happy_with_jaron" to { notHappyWithJaron },
+        "alone_in_party"         to { isAloneInParty }
         // @formatter:on
     )
 
@@ -55,6 +57,10 @@ object ConditionDatabase {
     private val hasNotYetTalkedToLennorFirstCycle
         get() = isQuestResetStateEqual("quest_a_helping_horse", QuestState.UNKNOWN)
                 && isCurrentPhraseId("quest_a_helping_horse", "1")
+    private val notHappyWithJaron
+        get() = areTargetAndAlternateTheSame("quest_get_tow_rope", "13") // "_13_"
+                || isCurrentPhraseId("quest_get_horseshoes", "200")
+
     private val isAloneInParty get() = hasAmountOfPartyMembers(1)
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -73,6 +79,11 @@ object ConditionDatabase {
 
     private fun isOneOfBothStatesEqualOrHigher(questId: String, questState: QuestState): Boolean =
         gameData.quests.getQuestById(questId).isOneOfBothStatesEqualOrHigherThan(questState)
+
+    private fun areTargetAndAlternateTheSame(questId: String, questTask: String): Boolean {
+        val questTask = gameData.quests.getQuestById(questId).tasks[questTask]!!
+        return questTask.target == questTask.targetAlternate
+    }
 
     private fun hasEventPlayed(eventId: String): Boolean =
         gameData.events.hasEventPlayed(eventId)

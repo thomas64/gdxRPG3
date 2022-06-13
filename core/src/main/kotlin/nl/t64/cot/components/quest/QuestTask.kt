@@ -7,7 +7,8 @@ class QuestTask(
     var taskPhrase: String = "",
     val updatedPhrase: String? = null,
     val type: QuestTaskType = QuestTaskType.NONE,
-    val target: Map<String, Int> = emptyMap(),
+    val target: MutableMap<String, Int> = mutableMapOf(),
+    val targetAlternate: Map<String, Int> = emptyMap(),
     val receive: Map<String, Int> = emptyMap(),
     val conversationId: String = "",
     val isOptional: Boolean = false,
@@ -53,6 +54,7 @@ class QuestTask(
             QuestTaskType.SHOW_ITEM,
             QuestTaskType.WEAR_ITEM,
             QuestTaskType.SAY_THE_RIGHT_THING,
+            QuestTaskType.DELIVER_MESSAGE,
             QuestTaskType.KILL,
             QuestTaskType.RETURN -> completeTask()
             QuestTaskType.DELIVER_ITEM,
@@ -63,6 +65,11 @@ class QuestTask(
             }
             else -> throw IllegalArgumentException("Only some types are completable this way for now.")
         }
+    }
+
+    fun updateTargetToAlternate() {
+        target.clear()
+        target.putAll(targetAlternate)
     }
 
     fun hasTargetInInventoryOrEquipment(): Boolean {

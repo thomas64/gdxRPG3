@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="26" height="26" tilewidth="24" tileheight="24" infinite="0" nextlayerid="16" nextobjectid="40">
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="26" height="26" tilewidth="24" tileheight="24" infinite="0" nextlayerid="16" nextobjectid="41">
  <properties>
   <property name="bgm" value="bgm_house"/>
   <property name="step_sound" value="wood"/>
@@ -78,7 +78,7 @@
   <object id="18" x="480" y="240" width="96" height="48"/>
  </objectgroup>
  <objectgroup color="#5500ff" id="13" name="rest">
-  <object id="22" name="note_bed01" x="96" y="144" width="96" height="96"/>
+  <object id="22" name="note_bed01" x="96" y="144" width="96" height="72"/>
   <object id="33" name="note_apples" x="288" y="216" width="48" height="24"/>
   <object id="34" name="note_closet" x="48" y="120" width="48" height="48"/>
   <object id="35" name="note_closet" x="312" y="120" width="48" height="48"/>
@@ -89,6 +89,12 @@
   <object id="38" name="youngman01" type="w" x="120" y="264" width="48" height="24">
    <properties>
     <property name="conversation" value="quest_get_tow_rope"/>
+   </properties>
+  </object>
+  <object id="40" name="boy01" type="w" x="72" y="360" width="48" height="24">
+   <properties>
+    <property name="condition" value="_tc_16_q_quest_get_tow_rope"/>
+    <property name="conversation" value="kaidan_is_home"/>
    </properties>
   </object>
  </objectgroup>

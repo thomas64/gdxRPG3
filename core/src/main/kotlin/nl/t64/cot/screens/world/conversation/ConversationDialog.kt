@@ -173,8 +173,10 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             ConversationCommand.WEAR_QUEST_ITEM -> wearQuestItem(nextId)
             ConversationCommand.GIVE_QUEST_ITEM -> giveQuestItem(nextId)
             ConversationCommand.SAY_QUEST_THING -> sayQuestThing(nextId)
-            ConversationCommand.RECEIVE_QUEST_ITEM -> receiveQuestItem()
+            ConversationCommand.RECEIVE_QUEST_ITEM_TO_DELIVER -> receiveQuestItemToDeliver()
             ConversationCommand.DELIVER_QUEST_ITEM -> deliverQuestItem(nextId)
+            ConversationCommand.DELIVER_QUEST_ITEM_ALTERNATE -> deliverQuestItemAlternate(nextId)
+            ConversationCommand.DELIVER_QUEST_MESSAGE -> deliverQuestMessage(nextId)
 
             ConversationCommand.REWARD_QUEST -> rewardQuest()
 
@@ -303,17 +305,33 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun sayQuestThing(nextId: String) {
-        gameData.quests.getQuestById(conversationId).setSayTheRightThingTaskComplete()
-        endConversation(nextId)
+        val quest = gameData.quests.getQuestById(conversationId)
+        val receive = ConversationSpoilLoader.getLoot(conversationId) { setSayTheRightThingTaskCompleteAndReceivePossibleTarget() }
+        if (receive.isTaken()) {
+            endConversation(nextId)
+        } else {
+            endConversationAndLoad { ReceiveScreen.load(receive, quest, graph) }
+        }
     }
 
-    private fun receiveQuestItem() {
+    private fun receiveQuestItemToDeliver() {
+        val quest = gameData.quests.getQuestById(conversationId)
         val receive = ConversationSpoilLoader.getLoot(conversationId) { receiveItemsToDeliver() }
-        endConversationAndLoad { ReceiveScreen.load(receive, graph) }
+        endConversationAndLoad { ReceiveScreen.load(receive, quest, graph) }
     }
 
     private fun deliverQuestItem(nextId: String) {
         gameData.quests.updateDeliverItem(conversationId)
+        continueConversation(nextId)
+    }
+
+    private fun deliverQuestItemAlternate(nextId: String) {
+        gameData.quests.updateDeliverItemAlternate(conversationId)
+        continueConversation(nextId)
+    }
+
+    private fun deliverQuestMessage(nextId: String) {
+        gameData.quests.updateDeliverMessage(conversationId)
         continueConversation(nextId)
     }
 

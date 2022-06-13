@@ -101,6 +101,10 @@ class InventoryContainer(numberOfSlots: Int = 0) {
         }
     }
 
+    fun hasExactlyAmountOfItem(itemId: String, amount: Int): Boolean {
+        return getTotalOfItem(itemId) == amount
+    }
+
     fun hasEnoughOfItem(itemId: String?, amount: Int): Boolean {
         return getTotalOfItem(itemId) >= amount
     }

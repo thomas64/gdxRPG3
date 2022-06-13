@@ -225,7 +225,7 @@ class WorldScreen : Screen,
     }
 
     override fun onNotifyReloadNpcs() {
-        fadeOut({ reloadNpcs() }, Color.BLACK, 1f, TransitionPurpose.JUST_FADE)
+        fadeOut({ reloadNpcs() }, Color.BLACK, 1.5f, TransitionPurpose.JUST_FADE)
     }
 
     private fun reloadNpcs() {

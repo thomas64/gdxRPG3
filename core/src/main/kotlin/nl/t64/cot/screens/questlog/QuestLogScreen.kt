@@ -87,10 +87,10 @@ class QuestLogScreen : ParchmentScreen() {
 
     private fun handleQuestList() {
         questListTable.populateQuestList()
-        if (summaryTable.isEmpty()) {
-            val selectedQuest = questListTable.questList.items[0]
-            populateQuestSpecifics(selectedQuest)
-        }
+        val questList = questListTable.questList
+        val selectedIndex = questList.selectedIndex
+        val selectedQuest = questList.items[selectedIndex]
+        populateQuestSpecifics(selectedQuest)
     }
 
     private fun closeScreen() {

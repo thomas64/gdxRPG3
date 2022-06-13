@@ -26,6 +26,14 @@ class QuestContainer {
         quests.values.forEach { it.possibleSetDeliverItemTaskComplete(conversationId) }
     }
 
+    fun updateDeliverItemAlternate(conversationId: String) {
+        quests.values.forEach { it.possibleSetDeliverItemAlternateTaskComplete(conversationId) }
+    }
+
+    fun updateDeliverMessage(conversationId: String) {
+        quests.values.forEach { it.possibleSetDeliverMessageTaskComplete(conversationId) }
+    }
+
     fun contains(questId: String): Boolean = quests.containsKey(questId)
     fun getQuestById(questId: String): QuestGraph = quests[questId]!!
 
