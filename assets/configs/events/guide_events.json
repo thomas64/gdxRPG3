@@ -66,6 +66,15 @@
       "You can also switch to different weapons, if you have them in your inventory."
     ]
   },
+  "guide_event_saving"        : {
+    "type"     : "messagebox",
+    "condition": ["_c_!=_u_q_quest_mother_fairy"],
+    "text"     : [
+      "This game has *no* autosave feature.",
+      "So make sure to save your game when necessary.",
+      "In this case the most upper right fairy can help you out with that."
+    ]
+  },
   "guide_event_fast"          : {
     "type"     : "messagebox",
     "condition": ["been_in_fairy_town"],

@@ -46,37 +46,37 @@
     "isSubQuest": true,
     "tasks"     : {
       "12": {
-        "taskPhrase": "    Jaron has a tow rope, but needs it at the moment. Do some deliveries for him, so he can give it to you.",
+        "taskPhrase": "|__ Jaron has a tow rope, but needs it at the moment. Do some deliveries for him, so he can give it to you.",
         "type"      : "FREE"
       },
       "13": {
-        "taskPhrase"     : "    Deliver 3 gold pieces to the blacksmith.",
-        "updatedPhrase"  : "    Deliver 3 (+1) gold pieces to the blacksmith.",
+        "taskPhrase"     : "|__ Deliver 3 gold pieces to the blacksmith.",
+        "updatedPhrase"  : "|__ Deliver 3 (+1) gold pieces to the blacksmith.",
         "type"           : "DELIVER_ITEM",
         "target"         : {"gold": 3},
         "targetAlternate": {"gold": 4},
         "conversationId" : "quest_get_horseshoes"
       },
       "14": {
-        "taskPhrase": "        [Optional] Get 1 extra gold piece from Jaron for the blacksmith.",
+        "taskPhrase": "       |__ [Optional] Get 1 extra gold piece from Jaron for the blacksmith.",
         "type"      : "SAY_THE_RIGHT_THING",
         "target"    : {"gold": 1},
         "isHidden"  : true,
         "isOptional": true
       },
       "15": {
-        "taskPhrase"    : "    Deliver Theodore's lost ring to mrs. Johanna.",
+        "taskPhrase"    : "|__ Deliver Theodore's lost ring to mrs. Johanna.",
         "type"          : "DELIVER_ITEM",
         "target"        : {"basic_silver_ring": 1},
         "conversationId": "mrs_johanna"
       },
       "16": {
-        "taskPhrase"    : "    Tell Kaidan to come home to Jaron.",
+        "taskPhrase"    : "|__ Tell Kaidan to come home to Jaron.",
         "type"          : "DELIVER_MESSAGE",
         "conversationId": "kaidan_come_home"
       },
       "17": {
-        "taskPhrase": "    Report back to Jaron",
+        "taskPhrase": "|__ Report back to Jaron",
         "type"      : "RETURN",
         "linkedWith": ["12"]
       }
@@ -90,31 +90,31 @@
     "linkedWith": ["quest_a_helping_horse"],
     "tasks"     : {
       "2" : {
-        "taskPhrase": "    Horse Enopa is sick. Maybe Elenora, the elder's wife, can help with some medicine.",
+        "taskPhrase": "|__ Horse Enopa is sick. Maybe Elenora, the elder's wife, can help with some medicine.",
         "type"      : "FIND_ITEM",
         "target"    : {"horse_medicine": 1},
         "linkedWith": ["6"]
       },
       "6" : {
-        "taskPhrase": "    Deliver the medicine to Angie.",
+        "taskPhrase": "|__ Deliver the medicine to Angie.",
         "type"      : "GIVE_ITEM",
         "target"    : {"horse_medicine": 1},
         "isHidden"  : true,
         "linkedWith": ["7"]
       },
       "7" : {
-        "taskPhrase": "    Cure horse Enopa",
+        "taskPhrase": "|__ Cure horse Enopa",
         "type"      : "FREE",
         "isHidden"  : true
       },
       "8" : {
-        "taskPhrase": "    Angie won't let Enopa go without horseshoes. She says there must be some around. Go find or make 4 of them.",
+        "taskPhrase": "|__ Angie won't let Enopa go without horseshoes. She says there must be some around. Go find or make 4 of them.",
         "type"      : "FIND_ITEM",
         "target"    : {"horseshoe": 4},
         "linkedWith": ["10"]
       },
       "10": {
-        "taskPhrase": "    Deliver 4 horseshoes to Angie.",
+        "taskPhrase": "|__ Deliver 4 horseshoes to Angie.",
         "type"      : "GIVE_ITEM",
         "target"    : {"horseshoe": 4},
         "isHidden"  : true,
@@ -129,17 +129,17 @@
     "isSubQuest": true,
     "tasks"     : {
       "3": {
-        "taskPhrase": "        Elenora needs some ingredients for the medicine. Get 6 herbs for her.",
+        "taskPhrase": "|      |__ Elenora needs some ingredients for the medicine. Get 6 herbs for her.",
         "type"      : "FIND_ITEM",
         "target"    : {"herb": 6}
       },
       "4": {
-        "taskPhrase": "        For the medicine also 1 blue jelly is needed, which can be extracted from a Blue Slime. Luckily Elenora spotted one in town.",
+        "taskPhrase": "|      |__ For the medicine also 1 blue jelly is needed, which can be extracted from a Blue Slime. Luckily Elenora spotted one in town.",
         "type"      : "FIND_ITEM",
         "target"    : {"blue_jelly": 1}
       },
       "5": {
-        "taskPhrase": "        Deliver the ingredients to Elenora.",
+        "taskPhrase": "|      |__ Deliver the ingredients to Elenora.",
         "type"      : "GIVE_ITEM",
         "target"    : {"herb": 6, "blue_jelly": 1}
       }
@@ -152,7 +152,7 @@
     "isSubQuest": true,
     "tasks"     : {
       "9": {
-        "taskPhrase"  : "        [Optional] Exchange 1 gold and 2 metal for 1 horseshoe with the blacksmith.",
+        "taskPhrase"  : "       |__ [Optional] Exchange 1 gold and 2 metal for 1 horseshoe with the blacksmith.",
         "type"        : "TRADE_ITEMS",
         "target"      : {"gold": 1, "metal": 2},
         "receive"     : {"horseshoe": 1},

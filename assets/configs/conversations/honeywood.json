@@ -426,7 +426,7 @@
       "2"   : {"text": ["What a coincidence, I was just in need the tow rope myself.", "So unfortunately, no I don't."]},
       "3"   : {"face": "mozes", "text": ["That's tough luck."]},
       "4"   : {"face": "youngman01", "text": ["Hmmm..."]},
-      "5"   : {"face": "youngman01", "text": ["Maybe you can help me with some other couple of things.", "That way you'll give me the time I need, and you can borrow the rope immediately afterward."]},
+      "5"   : {"face": "youngman01", "text": ["Maybe you can help me with a couple of other things. Then afterwards I will borrow you the rope. That way we can help each other out."]},
       "6"   : {
         "face": "youngman01", "text": ["How's that?"], "choices": [
           {"text": "Sure, anything to help.", "nextId": "10"},
@@ -434,21 +434,24 @@
         ]
       },
       "10"  : {"text": ["Thanks. Alright, first of all I have to pay an outstanding bill from the blacksmith. Would you bring him these three gold pieces?"]},
-      "11"  : {"text": ["Second, old lady Johanna came here last week to pay me a visit, but somehow she lost her late husband's ring here. We couldn't find it at that moment, but just now I did. Would you give her this ring back?"]},
-      "12"  : {"text": ["And third, I need my little brother Kaidan here. He is playing somewhere outside. Would you go find him and tell him to come home?"]},
-      "13"  : {"text": ["That's it. You may borrow the rope afterward."], "choices": [{"command": "RECEIVE_QUEST_ITEM_TO_DELIVER"}]},
-      "100" : {
-        "text": ["Oh did he now?"], "choices": [
+      "11"  : {"text": ["Second, mrs. Johanna came here last week to pay me a visit and somehow she lost her late husband's ring here."]},
+      "12"  : {"text": ["That's what old people do I guess, lose stuff."]},
+      "13"  : {"text": ["We searched for it, but we couldn't find it. But today I accidentally stumbled upon it! So, would you give her this ring back?"]},
+      "14"  : {"text": ["And third, I need my little brother Kaidan here. He is playing somewhere outside. Would you go find him and tell him to come home?"]},
+      "15"  : {"text": ["That's it. You may borrow the rope afterward."], "choices": [{"command": "RECEIVE_QUEST_ITEM_TO_DELIVER"}]},
+      "100" : {"face": "youngman01", "text": ["Oh did he now?"]},
+      "101" : {
+        "face": "mozes", "choices": [
           {"text": "Could you give me an extra gold piece then?", "nextId": "110"},
           {"condition": ["barbarian1"], "text": "[Barbarian 1] That gold piece has to come from you of course.", "nextId": "120"},
-          {"text": "[Back]", "nextId": "1200"}
+          {"text": "(Back)", "nextId": "1200"}
         ]
       },
-      "110" : {"text": ["I don't have any more gold at the moment. So maybe you could pay that 1 gold and can see it as my thanks that you'll get that rope."], "choices": [{"nextId": "1200"}]},
-      "120" : {"text": ["Erm... Ah yes yes of course. Okay, alright then...", "Here you are."], "choices": [{"command": "SAY_QUEST_THING", "nextId": "1200"}]},
+      "110" : {"face": "youngman01", "text": ["I don't have any more gold at the moment. So maybe you could pay that 1 gold and can see it as my thanks that you'll get that rope."], "choices": [{"nextId": "101"}]},
+      "120" : {"face": "youngman01", "text": ["Erm... Ah yes yes of course. Okay, alright then...", "Here you are."], "choices": [{"command": "SAY_QUEST_THING", "nextId": "1200"}]},
       "1199": {"text": ["You forgot something."], "choices": [{"command": "RECEIVE_QUEST_ITEM_TO_DELIVER"}]},
       "1200": {
-        "text": ["There you are. How's it going? Have you made any progress?"], "choices": [
+        "face": "youngman01", "text": ["There you are. How's it going? Have you made any progress?"], "choices": [
           {"condition": ["i_not_happy_with_jaron", "_tn_14_q_this"], "text": "The blacksmith asked for 1 gold piece extra.", "nextId": "100"},
           {"condition": ["_tc_13_q_this", "_tc_15_q_this", "_tc_16_q_this"], "text": "Yes, everything's been taken care of.", "nextId": "1201"},
           {"text": "I still have some tasks to attend to. (Leave conversation)", "command": "EXIT", "nextId": "1200"}

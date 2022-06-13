@@ -14,7 +14,7 @@ private const val PADDING = 20f
 private val TEXT = """
     Please be welcome to my school.
     
-    On the left you see which spells I can teach you, and on the right are the spells you already know.
+    On the left you see which spells I can teach you. On the right are the spells you already know.
     
     The numbers on the left represent to which rank I can teach you. The numbers on the right represent your current ranks.
     

@@ -14,7 +14,7 @@ private const val PADDING = 20f
 private val TEXT = """
     Please be welcome to my academy.
     
-    On the left you see which skills I can train you, and on the right are the skills you already know.
+    On the left you see in which skills I can train you. On the right are the skills you already know.
     
     The numbers on the left represent to which rank I can train you. The numbers on the right represent your current ranks.
     

@@ -19,13 +19,14 @@ Martijn Hazendonk
 Daniel Rosenkranz
 Machteld Hesselink
 Sieger Noppe
+Nathan van der Stoep
 
 ---
 
 Graphics Copyright Notice
 
-"Titlescreen"
-by N. van der Stoep
+"On the verge"
+by Studio VDS
 
 
 "Titlelogo"

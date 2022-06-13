@@ -26,7 +26,7 @@
           {"text": "Who is this Ardor?", "nextId": "12"},
           {"text": "What has this Ardor to do with her?", "nextId": "13"},
           {"text": "You must let me through!", "nextId": "14"},
-          {"text": "[Back]", "nextId": "3"},
+          {"text": "(Back)", "nextId": "3"},
           {"text": "Okay, I'll go away... For now. (Leave conversation)", "command": "EXIT"}
         ]
       },
