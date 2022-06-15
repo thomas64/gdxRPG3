@@ -142,59 +142,51 @@
  <objectgroup id="21" name="lower_texture">
   <object id="62" name="quest_helping_horse" gid="7462" x="528" y="1644" width="24" height="24">
    <properties>
-    <property name="isVisible" type="bool" value="false"/>
-    <property name="visibleWhenComplete" type="bool" value="false"/>
+    <property name="condition" value="_c_!=_f_q_this"/>
    </properties>
   </object>
   <object id="61" name="quest_helping_horse" gid="7461" x="504" y="1644" width="24" height="24">
    <properties>
-    <property name="isVisible" type="bool" value="false"/>
-    <property name="visibleWhenComplete" type="bool" value="false"/>
+    <property name="condition" value="_c_!=_f_q_this"/>
    </properties>
   </object>
   <object id="60" name="quest_helping_horse" gid="7460" x="480" y="1644" width="24" height="24">
    <properties>
-    <property name="isVisible" type="bool" value="false"/>
-    <property name="visibleWhenComplete" type="bool" value="false"/>
+    <property name="condition" value="_c_!=_f_q_this"/>
    </properties>
   </object>
   <object id="59" name="quest_helping_horse" gid="7459" x="456" y="1644" width="24" height="24">
    <properties>
-    <property name="isVisible" type="bool" value="false"/>
-    <property name="visibleWhenComplete" type="bool" value="false"/>
+    <property name="condition" value="_c_!=_f_q_this"/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup id="20" name="upper_texture">
   <object id="55" name="quest_helping_horse" gid="7427" x="456" y="1620" width="24" height="24">
    <properties>
-    <property name="isVisible" type="bool" value="false"/>
-    <property name="visibleWhenComplete" type="bool" value="false"/>
+    <property name="condition" value="_c_!=_f_q_this"/>
    </properties>
   </object>
   <object id="56" name="quest_helping_horse" gid="7428" x="480" y="1620" width="24" height="24">
    <properties>
-    <property name="isVisible" type="bool" value="false"/>
-    <property name="visibleWhenComplete" type="bool" value="false"/>
+    <property name="condition" value="_c_!=_f_q_this"/>
    </properties>
   </object>
   <object id="57" name="quest_helping_horse" gid="7429" x="504" y="1620" width="24" height="24">
    <properties>
-    <property name="isVisible" type="bool" value="false"/>
-    <property name="visibleWhenComplete" type="bool" value="false"/>
+    <property name="condition" value="_c_!=_f_q_this"/>
    </properties>
   </object>
   <object id="58" name="quest_helping_horse" gid="7430" x="528" y="1620" width="24" height="24">
    <properties>
-    <property name="isVisible" type="bool" value="false"/>
-    <property name="visibleWhenComplete" type="bool" value="false"/>
+    <property name="condition" value="_c_!=_f_q_this"/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup color="#ffff00" id="19" name="quest">
   <object id="64" name="quest_helping_horse" type="blocker" x="480" y="1620" width="48" height="36">
    <properties>
-    <property name="activeWhenQuestIsFinished" type="bool" value="false"/>
+    <property name="condition" value="_c_!=_f_q_this"/>
    </properties>
   </object>
  </objectgroup>

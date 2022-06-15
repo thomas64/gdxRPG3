@@ -65,9 +65,9 @@ class GameMap(val mapTitle: String) {
     val heroes: List<GameMapHero> = loader.loadLayer(HERO_LAYER, { gameData.heroes.contains(it.name) }, { GameMapHero(it) })
     val enemies: List<GameMapEnemy> = loader.loadLayer(ENEMY_LAYER) { GameMapEnemy(it) }
     val lights: List<GameMapLight> = loader.loadLayer(LIGHTS_LAYER) { GameMapLight(it) }
-    val questBlockers: List<GameMapQuestBlocker> = loader.equalsIgnoreCase(QUEST_LAYER, "blocker") { GameMapQuestBlocker.load(it) }
-    val upperTextures: List<GameMapQuestTexture> = loader.loadTextureLayer(UPPER_TEXTURE_LAYER) { GameMapQuestTexture(it) }
-    val lowerTextures: List<GameMapQuestTexture> = loader.loadTextureLayer(LOWER_TEXTURE_LAYER) { GameMapQuestTexture(it) }
+    val questBlockers: List<GameMapConditionBlocker> = loader.equalsIgnoreCase(QUEST_LAYER, "blocker") { GameMapConditionBlocker(it) }
+    val upperTextures: List<GameMapConditionTexture> = loader.loadTextureLayer(UPPER_TEXTURE_LAYER) { GameMapConditionTexture(it) }
+    val lowerTextures: List<GameMapConditionTexture> = loader.loadTextureLayer(LOWER_TEXTURE_LAYER) { GameMapConditionTexture(it) }
     val sparkles: List<GameMapSparkle> = loader.startsWith(REST_LAYER, "sparkle") { GameMapSparkle(it) }
     val chests: List<RectangleMapObject> = loader.startsWith(REST_LAYER, "chest")
     val doors: List<RectangleMapObject> = loader.startsWith(REST_LAYER, "door")

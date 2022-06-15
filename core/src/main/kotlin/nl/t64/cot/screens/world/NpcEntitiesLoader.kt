@@ -24,7 +24,7 @@ internal class NpcEntitiesLoader(private val currentMap: GameMap) {
 
     private fun loadNpcs() {
         currentMap.npcs
-            .filter { ConditionDatabase.isMeetingConditions(it.conditionIds) }
+            .filter { ConditionDatabase.isMeetingConditions(it.conditionIds, it.conversation) }
             .filterNot { it.isEnemy && gameData.battles.isBattleWon(it.conversation) }
             .forEach { loadNpcEntity(it) }
     }

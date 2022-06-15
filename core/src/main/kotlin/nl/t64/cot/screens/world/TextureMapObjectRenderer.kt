@@ -14,7 +14,7 @@ import com.badlogic.gdx.utils.ScreenUtils
 import nl.t64.cot.Utils.createLightmap
 import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.constants.Constant
-import nl.t64.cot.screens.world.mapobjects.GameMapQuestTexture
+import nl.t64.cot.screens.world.mapobjects.GameMapConditionTexture
 
 
 private val UNDER_LAYERS = intArrayOf(0, 1, 2, 3, 4, 5)
@@ -105,7 +105,7 @@ class TextureMapObjectRenderer(private val camera: Camera) : OrthogonalTiledMapR
         renderLightmap()
     }
 
-    private fun renderQuestTextures(gameMapQuestTextures: List<GameMapQuestTexture>) {
+    private fun renderQuestTextures(gameMapQuestTextures: List<GameMapConditionTexture>) {
         gameMapQuestTextures
             .filter { it.isVisible }
             .map { it.texture }

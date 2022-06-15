@@ -445,7 +445,7 @@
  <objectgroup color="#ffff00" id="44" name="quest">
   <object id="367" type="blocker" x="1062" y="1800" width="36">
    <properties>
-    <property name="activeWhenCondition" value="alone_in_party"/>
+    <property name="condition" value="alone_in_party"/>
    </properties>
   </object>
  </objectgroup>
