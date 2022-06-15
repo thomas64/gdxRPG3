@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="44" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="25" nextobjectid="84">
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="44" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="25" nextobjectid="86">
  <properties>
   <property name="bgm" value="bgm_forest"/>
   <property name="bgs" value="bgs_birds, bgs_creek"/>
@@ -104,7 +104,22 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup color="#55ff7f" id="16" name="npc"/>
+ <objectgroup color="#55ff7f" id="16" name="npc">
+  <object id="84" name="horse1" x="432" y="1464" width="48" height="24">
+   <properties>
+    <property name="condition" value="_c_==_f_q_quest_helping_horse"/>
+    <property name="conversation" value="honeywood_horse"/>
+    <property name="direction" value="east"/>
+   </properties>
+  </object>
+  <object id="85" name="man02" x="432" y="1512" width="48" height="24">
+   <properties>
+    <property name="condition" value="_c_==_f_q_this"/>
+    <property name="conversation" value="quest_helping_horse"/>
+    <property name="direction" value="east"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup color="#55aaff" id="12" name="spawn">
   <object id="29" name="honeywood_forest_cave" x="576" y="24" width="48" height="24"/>
   <object id="32" name="honeywood" x="480" y="1656" width="48" height="24"/>
@@ -125,25 +140,25 @@
  </objectgroup>
  <objectgroup color="#ffaa7f" id="14" name="save"/>
  <objectgroup id="21" name="lower_texture">
-  <object id="62" name="quest_a_helping_horse" gid="7462" x="528" y="1644" width="24" height="24">
+  <object id="62" name="quest_helping_horse" gid="7462" x="528" y="1644" width="24" height="24">
    <properties>
     <property name="isVisible" type="bool" value="false"/>
     <property name="visibleWhenComplete" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="61" name="quest_a_helping_horse" gid="7461" x="504" y="1644" width="24" height="24">
+  <object id="61" name="quest_helping_horse" gid="7461" x="504" y="1644" width="24" height="24">
    <properties>
     <property name="isVisible" type="bool" value="false"/>
     <property name="visibleWhenComplete" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="60" name="quest_a_helping_horse" gid="7460" x="480" y="1644" width="24" height="24">
+  <object id="60" name="quest_helping_horse" gid="7460" x="480" y="1644" width="24" height="24">
    <properties>
     <property name="isVisible" type="bool" value="false"/>
     <property name="visibleWhenComplete" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="59" name="quest_a_helping_horse" gid="7459" x="456" y="1644" width="24" height="24">
+  <object id="59" name="quest_helping_horse" gid="7459" x="456" y="1644" width="24" height="24">
    <properties>
     <property name="isVisible" type="bool" value="false"/>
     <property name="visibleWhenComplete" type="bool" value="false"/>
@@ -151,25 +166,25 @@
   </object>
  </objectgroup>
  <objectgroup id="20" name="upper_texture">
-  <object id="55" name="quest_a_helping_horse" gid="7427" x="456" y="1620" width="24" height="24">
+  <object id="55" name="quest_helping_horse" gid="7427" x="456" y="1620" width="24" height="24">
    <properties>
     <property name="isVisible" type="bool" value="false"/>
     <property name="visibleWhenComplete" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="56" name="quest_a_helping_horse" gid="7428" x="480" y="1620" width="24" height="24">
+  <object id="56" name="quest_helping_horse" gid="7428" x="480" y="1620" width="24" height="24">
    <properties>
     <property name="isVisible" type="bool" value="false"/>
     <property name="visibleWhenComplete" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="57" name="quest_a_helping_horse" gid="7429" x="504" y="1620" width="24" height="24">
+  <object id="57" name="quest_helping_horse" gid="7429" x="504" y="1620" width="24" height="24">
    <properties>
     <property name="isVisible" type="bool" value="false"/>
     <property name="visibleWhenComplete" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="58" name="quest_a_helping_horse" gid="7430" x="528" y="1620" width="24" height="24">
+  <object id="58" name="quest_helping_horse" gid="7430" x="528" y="1620" width="24" height="24">
    <properties>
     <property name="isVisible" type="bool" value="false"/>
     <property name="visibleWhenComplete" type="bool" value="false"/>
@@ -177,7 +192,7 @@
   </object>
  </objectgroup>
  <objectgroup color="#ffff00" id="19" name="quest">
-  <object id="64" name="quest_a_helping_horse" type="blocker" x="480" y="1620" width="48" height="36">
+  <object id="64" name="quest_helping_horse" type="blocker" x="480" y="1620" width="48" height="36">
    <properties>
     <property name="activeWhenQuestIsFinished" type="bool" value="false"/>
    </properties>
@@ -187,7 +202,7 @@
   <object id="69" name="guide_event_action" type="discover" x="432" y="1464" width="144" height="24"/>
   <object id="70" name="guide_event_inventory" type="discover" x="432" y="1344" width="144" height="24"/>
   <object id="71" name="guide_event_enemy" type="discover" x="384" y="816" width="192" height="24"/>
-  <object id="80" name="fallen_tree" type="check" x="480" y="1608" width="48" height="24"/>
+  <object id="80" name="fallen_tree" type="check" x="480" y="1608" width="48" height="36"/>
   <object id="83" name="guide_event_quest" type="discover" x="384" y="1080" width="240" height="24"/>
  </objectgroup>
 </map>

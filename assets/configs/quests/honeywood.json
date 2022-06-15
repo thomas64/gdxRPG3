@@ -10,9 +10,9 @@
       }
     }
   },
-  "quest_a_helping_horse"      : {
+  "quest_helping_horse" : {
     "title"     : "A helping horse",
-    "entityId"  : "man01",
+    "entityId"  : "man02",
     "summary"   : "A fallen tree has blocked the road to Honeywood Forest. Lennor needs your help to get a strong horse and some tow ropes if you want to speed up the process of clearing the road.",
     "linkedWith": ["quest_get_horse", "quest_get_tow_rope", "quest_get_medicine", "quest_get_horseshoes"],
     "tasks"     : {
@@ -25,13 +25,14 @@
         "updatedPhrase": "Get 2 tow ropes",
         "type"         : "FIND_ITEM",
         "target"       : {"tow_rope": 2},
-        "linkedWith": ["18"]
+        "linkedWith"   : ["18"]
       },
       "18": {
         "taskPhrase": "Deliver the ropes to Lennor.",
         "type"      : "GIVE_ITEM",
         "target"    : {"tow_rope": 2},
-        "isHidden"  : true
+        "isHidden"  : true,
+        "linkedWith": ["19"]
       },
       "19": {
         "taskPhrase": "Let the tree be dragged out of the way.",
@@ -39,82 +40,82 @@
       }
     }
   },
-  "quest_get_tow_rope"         : {
+  "quest_get_tow_rope"  : {
     "title"     : "A helping horse",
     "entityId"  : "youngman01",
     "summary"   : "Get tow rope",
     "isSubQuest": true,
     "tasks"     : {
       "12": {
-        "taskPhrase": "|__ Jaron has a tow rope, but needs it at the moment. Do some deliveries for him, so he can give it to you.",
+        "taskPhrase": "      Jaron has a tow rope, but needs it at the moment. Do some deliveries for him and he will borrow it to you.",
         "type"      : "FREE"
       },
       "13": {
-        "taskPhrase"     : "|__ Deliver 3 gold pieces to the blacksmith.",
-        "updatedPhrase"  : "|__ Deliver 3 (+1) gold pieces to the blacksmith.",
+        "taskPhrase"     : "            Deliver 3 gold pieces to the blacksmith.",
+        "updatedPhrase"  : "            Deliver 3 (+1) gold pieces to the blacksmith.",
         "type"           : "DELIVER_ITEM",
         "target"         : {"gold": 3},
         "targetAlternate": {"gold": 4},
         "conversationId" : "quest_get_horseshoes"
       },
       "14": {
-        "taskPhrase": "       |__ [Optional] Get 1 extra gold piece from Jaron for the blacksmith.",
+        "taskPhrase": "                  [Optional] Get 1 extra gold piece from Jaron for the blacksmith.",
         "type"      : "SAY_THE_RIGHT_THING",
         "target"    : {"gold": 1},
         "isHidden"  : true,
         "isOptional": true
       },
       "15": {
-        "taskPhrase"    : "|__ Deliver Theodore's lost ring to mrs. Johanna.",
+        "taskPhrase"    : "            Deliver Theodore's lost ring to mrs. Johanna.",
         "type"          : "DELIVER_ITEM",
         "target"        : {"basic_silver_ring": 1},
         "conversationId": "mrs_johanna"
       },
       "16": {
-        "taskPhrase"    : "|__ Tell Kaidan to come home to Jaron.",
+        "taskPhrase"    : "            Tell Kaidan to come home to Jaron.",
         "type"          : "DELIVER_MESSAGE",
         "conversationId": "kaidan_come_home"
       },
       "17": {
-        "taskPhrase": "|__ Report back to Jaron",
+        "taskPhrase": "            Report back to Jaron",
         "type"      : "RETURN",
         "linkedWith": ["12"]
       }
     }
   },
-  "quest_get_horse"            : {
+  "quest_get_horse"     : {
     "title"     : "A helping horse",
     "entityId"  : "woman03",
     "summary"   : "Get Horse",
     "isSubQuest": true,
-    "linkedWith": ["quest_a_helping_horse"],
+    "linkedWith": ["quest_helping_horse"],
     "tasks"     : {
       "2" : {
-        "taskPhrase": "|__ Horse Enopa is sick. Maybe Elenora, the elder's wife, can help with some medicine.",
+        "taskPhrase": "      Horse Enopa is sick. Maybe Elenora, the elder's wife, can help with some medicine.",
         "type"      : "FIND_ITEM",
         "target"    : {"horse_medicine": 1},
         "linkedWith": ["6"]
       },
       "6" : {
-        "taskPhrase": "|__ Deliver the medicine to Angie.",
+        "taskPhrase": "      Deliver the medicine to Angie.",
         "type"      : "GIVE_ITEM",
         "target"    : {"horse_medicine": 1},
         "isHidden"  : true,
         "linkedWith": ["7"]
       },
       "7" : {
-        "taskPhrase": "|__ Cure horse Enopa",
+        "taskPhrase": "      Cure horse Enopa",
         "type"      : "FREE",
         "isHidden"  : true
       },
       "8" : {
-        "taskPhrase": "|__ Angie won't let Enopa go without horseshoes. She says there must be some around. Go find or make 4 of them.",
+        "taskPhrase": "      Angie won't let Enopa go without horseshoes. She says there must be some around. Go find or make 4 of them.",
         "type"      : "FIND_ITEM",
         "target"    : {"horseshoe": 4},
         "linkedWith": ["10"]
       },
       "10": {
-        "taskPhrase": "|__ Deliver 4 horseshoes to Angie.",
+        "taskPhrase": "      Deliver 4 horseshoes to Angie.",
         "type"      : "GIVE_ITEM",
         "target"    : {"horseshoe": 4},
         "isHidden"  : true,
@@ -122,37 +123,37 @@
       }
     }
   },
-  "quest_get_medicine"         : {
+  "quest_get_medicine"  : {
     "title"     : "A helping horse",
     "entityId"  : "oldwoman11",
     "summary"   : "Get medicine",
     "isSubQuest": true,
     "tasks"     : {
       "3": {
-        "taskPhrase": "|      |__ Elenora needs some ingredients for the medicine. Get 6 herbs for her.",
+        "taskPhrase": "            Elenora needs some ingredients for the medicine. Get 6 herbs for her.",
         "type"      : "FIND_ITEM",
         "target"    : {"herb": 6}
       },
       "4": {
-        "taskPhrase": "|      |__ For the medicine also 1 blue jelly is needed, which can be extracted from a Blue Slime. Luckily Elenora spotted one in town.",
+        "taskPhrase": "            For the medicine also 1 blue jelly is needed, which can be extracted from a Blue Slime. Luckily Elenora spotted one in town.",
         "type"      : "FIND_ITEM",
         "target"    : {"blue_jelly": 1}
       },
       "5": {
-        "taskPhrase": "|      |__ Deliver the ingredients to Elenora.",
+        "taskPhrase": "            Deliver the ingredients to Elenora.",
         "type"      : "GIVE_ITEM",
         "target"    : {"herb": 6, "blue_jelly": 1}
       }
     }
   },
-  "quest_get_horseshoes"       : {
+  "quest_get_horseshoes": {
     "title"     : "A helping horse",
     "entityId"  : "man07",
     "summary"   : "Get horseshoes",
     "isSubQuest": true,
     "tasks"     : {
       "9": {
-        "taskPhrase"  : "       |__ [Optional] Exchange 1 gold and 2 metal for 1 horseshoe with the blacksmith.",
+        "taskPhrase"  : "            [Optional] Exchange 1 gold and 2 metal for 1 horseshoe with the blacksmith.",
         "type"        : "TRADE_ITEMS",
         "target"      : {"gold": 1, "metal": 2},
         "receive"     : {"horseshoe": 1},

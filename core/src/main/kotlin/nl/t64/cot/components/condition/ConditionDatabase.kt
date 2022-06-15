@@ -55,8 +55,8 @@ object ConditionDatabase {
     private val hasDefeatedOrcGuards get() = isBattleWon("quest_orc_guards")
     private val hasStartingSpells get() = hasAnySpell("mozes")
     private val hasNotYetTalkedToLennorFirstCycle
-        get() = isQuestResetStateEqual("quest_a_helping_horse", QuestState.UNKNOWN)
-                && isCurrentPhraseId("quest_a_helping_horse", "1")
+        get() = isQuestResetStateEqual("quest_helping_horse", QuestState.UNKNOWN)
+                && isCurrentPhraseId("quest_helping_horse", "1")
     private val notHappyWithJaron
         get() = areTargetAndAlternateTheSame("quest_get_tow_rope", "13") // "_13_"
                 || isCurrentPhraseId("quest_get_horseshoes", "200")

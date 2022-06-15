@@ -29,13 +29,14 @@
       "15": {"face": "oldwoman01", "text": ["Nah! Of course not. I've got so much to live for. See ya!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "quest_a_helping_horse"      : {
+  "quest_helping_horse": {
     "phrases": {
       "1" : {"text": ["Hey Mozes, you can't go further up north from here.", "There is a large tree blocking the road."], "choices": [{"nextId": "3"}]},
       "2" : {"text": ["Hey Mozes, you can't go further up north from here.", "There is a large tree blocking the road."], "choices": [{"nextId": "3"}]},
       "3" : {"text": ["Luckily, no one was hurt when it fell down.", "But it'll take a while for us to remove it and clear the road for everyone."]},
       "4" : {
         "face": "mozes", "choices": [
+          {"condition": ["i_tc_1_q_this", "i_tc_11_q_this"], "text": "I think not. I brought a horse and some ropes.", "command": "GIVE_QUEST_ITEM", "nextId": "60"},
           {"condition": ["i_r_==_f_q_this"], "text": "Could I by chance help with a horse and 2 ropes?", "command": "ACCEPT_QUEST", "nextId": "40"},
           {"text": "Curious, when did the tree fall down?", "nextId": "10"},
           {"text": "Oh no! That's bad, I really need to be in Honeywood Forest.", "nextId": "20"},
@@ -56,11 +57,19 @@
         ]
       },
       "30": {"face": "man02", "text": ["No problemo! Me neither. I'll see you around."], "choices": [{"command": "EXIT", "nextId": "31"}]},
-      "31": {"face": "man02", "text": ["Hey Mozes, are you back? The tree is still here, ha ha!"], "choices": [{"nextId": "4"}]},
+      "31": {"face": "man02", "text": ["Hey Mozes, are you back? The tree is still blocking the road."], "choices": [{"nextId": "4"}]},
       "35": {"face": "man02", "text": ["I was kidding about the horse Mozes, ha ha!", "But sure, if you really bring me a strong horse and 2 ropes, I will clear the road for you immediately."]},
       "36": {"face": "man02", "text": ["You could ask the village elder about this matter.", "Maybe he can help you out."], "choices": [{"command": "EXIT", "nextId": "50"}]},
       "40": {"face": "man02", "text": ["Uhh, that's exactly what you could help.", "If you really bring me a strong horse and 2 ropes, I will clear the road for you immediately."], "choices": [{"command": "EXIT", "nextId": "50"}]},
-      "50": {"face": "man02", "text": ["The tree is still here Mozes, ha ha!"], "choices": [{"command": "EXIT", "nextId": "50"}]}
+      "50": {
+        "face": "man02", "text": ["The tree is still blocking the road Mozes."], "choices": [
+          {"condition": ["i_tc_1_q_this", "i_tc_11_q_this"], "text": "Not for long! I got you a horse and the ropes.", "command": "GIVE_QUEST_ITEM", "nextId": "60"},
+          {"text": "Not if I can help it. (Leave conversation)", "command": "EXIT", "nextId": "50"}
+        ]
+      },
+      "60": {"face": "man02", "text": ["Fantastic, let's start dragging! Do you want to help me out?", "I think we'll be done in a couple of minutes."]},
+      "61": {"face": "mozes", "text": ["Gladly! The sooner the better."], "choices": [{"command": "RELOAD_NPCS", "nextId": "70"}]},
+      "70": {"face": "man02", "text": ["Thanks for your help Mozes. I could not have done it so soon without your help."], "choices": [{"command": "EXIT", "nextId": "70"}]}
     }
   },
   "playing_catch"              : {
@@ -222,13 +231,13 @@
       "2"   : {"text": ["I'm here only for the mice, there's no way I'll do bats."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "quest_get_horse"            : {
+  "quest_get_horse"    : {
     "phrases": {
       "1" : {"face": "woman03", "text": ["Hi Mozes."]},
       "2" : {
         "face": "mozes", "text": ["Hello Angie."], "choices": [
           {"condition": ["i_tn_7_q_quest_get_horse"], "text": "Your horse is looking a little pale today isn't she?", "nextId": "3"},
-          {"condition": ["i_rc_>=_a_q_quest_a_helping_horse"], "text": "Lennor could use your horse's help for towing a tree.", "nextId": "10"},
+          {"condition": ["i_rc_>=_a_q_quest_helping_horse"], "text": "Lennor could use your horse's help for towing a tree.", "nextId": "10"},
           {"text": "See you later. (Leave conversation)", "command": "EXIT"}
         ]
       },
@@ -279,14 +288,14 @@
       "70": {"face": "woman03", "text": ["How is my Enopa doing? Has she been of any help to Lennor and you?"], "choices": [{"command": "EXIT", "nextId": "70"}]}
     }
   },
-  "honeywood_horse"            : {
+  "honeywood_horse"    : {
     "phrases": {
       "1"   : {
         "text": ["Neigh."], "choices": [
           {"condition": ["i_druid1", "_tn_7_q_quest_get_horse"], "nextId": "2"},
           {"condition": ["i_druid1", "_tc_7_q_quest_get_horse", "_c_!=_f_q_quest_get_horse"], "nextId": "3"},
-          {"condition": ["i_druid1", "_c_==_f_q_quest_get_horse", "_c_!=_f_q_quest_a_helping_horse"], "nextId": "4"},
-          {"condition": ["i_druid1", "_c_==_f_q_quest_a_helping_horse"], "nextId": "5"}
+          {"condition": ["i_druid1", "_c_==_f_q_quest_get_horse", "_c_!=_f_q_quest_helping_horse"], "nextId": "4"},
+          {"condition": ["i_druid1", "_c_==_f_q_quest_helping_horse"], "nextId": "5"}
         ]
       },
       "2000": {"face": "mozes", "text": ["* Druid skill rank 1 needed. *"], "choices": [{"command": "EXIT"}]},
@@ -341,15 +350,15 @@
       "1411": {"face": "oldwoman11", "text": ["And how are you, my dear?"], "choices": [{"nextId": "2"}]}
     }
   },
-  "honeywood_elder"            : {
+  "honeywood_elder"    : {
     "phrases": {
       "1" : {"face": "oldman11", "text": ["Hello Mozes, how can I help you today?"]},
       "2" : {
         "face": "mozes", "choices": [
-          {"condition": ["i_rc_>=_a_q_quest_a_helping_horse", "i_c_<=_a_q_quest_get_horse"], "text": "There is a large tree blocking the road to Honeywood Forest.", "nextId": "10"},
+          {"condition": ["i_rc_>=_a_q_quest_helping_horse", "i_c_<=_a_q_quest_get_horse"], "text": "There is a large tree blocking the road to Honeywood Forest.", "nextId": "10"},
           {"condition": ["i_rc_>=_a_q_quest_get_horse", "i_tn_7_q_quest_get_horse"], "text": "Angie's horse is sick. Can you help her out?", "nextId": "40"},
           {"condition": ["i_rc_>=_a_q_quest_get_horse", "i_tn_8_q_quest_get_horse"], "text": "I'm looking for horseshoes.", "nextId": "20"},
-          {"condition": ["i_rc_>=_a_q_quest_a_helping_horse", "i_tn_11_q_quest_a_helping_horse"], "text": "I'm in need of tow ropes.", "nextId": "30"},
+          {"condition": ["i_rc_>=_a_q_quest_helping_horse", "i_tn_11_q_quest_helping_horse"], "text": "I'm in need of tow ropes.", "nextId": "30"},
           {"text": "Nothing more at this moment, thank you. (Leave conversation)", "nextId": "3"}
         ]
       },
@@ -415,11 +424,11 @@
       "1200": {"face": "man07", "text": ["Hello neighbour, you're back."], "choices": [{"nextId": "2"}]}
     }
   },
-  "quest_get_tow_rope"         : {
+  "quest_get_tow_rope" : {
     "phrases": {
       "1"   : {
         "text": ["Hi Mozes, to what do I owe the pleasure of you entering our home?"], "choices": [
-          {"condition": ["i_rc_>=_a_q_quest_a_helping_horse", "i_tn_11_q_quest_a_helping_horse"], "text": "Do you by chance have a tow rope to spare?", "nextId": "2"},
+          {"condition": ["i_rc_>=_a_q_quest_helping_horse", "i_tn_11_q_quest_helping_horse"], "text": "Do you by chance have a tow rope to spare?", "nextId": "2"},
           {"text": "Nothing really, just passing by. (Leave conversation)", "command": "EXIT"}
         ]
       },
@@ -452,8 +461,8 @@
       "1199": {"text": ["You forgot something."], "choices": [{"command": "RECEIVE_QUEST_ITEM_TO_DELIVER"}]},
       "1200": {
         "face": "youngman01", "text": ["There you are. How's it going? Have you made any progress?"], "choices": [
-          {"condition": ["i_not_happy_with_jaron", "_tn_14_q_this"], "text": "The blacksmith asked for 1 gold piece extra.", "nextId": "100"},
-          {"condition": ["_tc_13_q_this", "_tc_15_q_this", "_tc_16_q_this"], "text": "Yes, everything's been taken care of.", "nextId": "1201"},
+          {"condition": ["i_not_happy_with_jaron", "i_tn_14_q_this"], "text": "The blacksmith asked for 1 gold piece extra.", "nextId": "100"},
+          {"condition": ["i_tc_13_q_this", "i_tc_15_q_this", "i_tc_16_q_this"], "text": "Yes, everything's been taken care of.", "nextId": "1201"},
           {"text": "I still have some tasks to attend to. (Leave conversation)", "command": "EXIT", "nextId": "1200"}
         ]
       },

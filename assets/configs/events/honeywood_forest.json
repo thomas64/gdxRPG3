@@ -1,7 +1,7 @@
 {
   "fallen_tree"         : {
     "type"          : "conversation",
-    "condition"     : ["_c_!=_f_q_quest_a_helping_horse"],
+    "condition"     : ["_c_!=_f_q_quest_helping_horse"],
     "conversationId": "fallen_tree",
     "entityId"      : "mozes",
     "doesRepeat"    : true

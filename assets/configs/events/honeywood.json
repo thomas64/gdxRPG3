@@ -7,7 +7,7 @@
   "a_tree_has_fallen"         : {
     "type"          : "conversation",
     "condition"     : ["!talked_to_lennor"],
-    "conversationId": "quest_a_helping_horse",
+    "conversationId": "quest_helping_horse",
     "entityId"      : "man02"
   },
   "dont_go_up_there"          : {

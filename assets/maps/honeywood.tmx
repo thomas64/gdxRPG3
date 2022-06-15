@@ -324,7 +324,8 @@
   </object>
   <object id="347" name="man02" x="1968" y="144" width="48" height="24">
    <properties>
-    <property name="conversation" value="quest_a_helping_horse"/>
+    <property name="condition" value="_c_!=_f_q_this"/>
+    <property name="conversation" value="quest_helping_horse"/>
     <property name="direction" value="west"/>
    </properties>
   </object>
@@ -385,7 +386,7 @@
   </object>
   <object id="380" name="horse1" x="1968" y="192" width="48" height="24">
    <properties>
-    <property name="condition" value="_c_==_f_q_quest_get_horse"/>
+    <property name="condition" value="_c_==_f_q_quest_get_horse, _c_!=_f_q_quest_helping_horse"/>
     <property name="conversation" value="honeywood_horse"/>
     <property name="direction" value="west"/>
    </properties>
