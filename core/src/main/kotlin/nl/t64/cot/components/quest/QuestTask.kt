@@ -24,10 +24,10 @@ class QuestTask(
     override fun toString(): String {
         return when {
             type == QuestTaskType.NONE -> System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + taskPhrase
-            isFailed -> "x  $taskPhrase"
-            isComplete -> "v  $taskPhrase"
-            isReset -> "r  $taskPhrase"
-            else -> "     $taskPhrase"
+            isFailed -> "x    $taskPhrase"
+            isComplete -> "v    $taskPhrase"
+            isReset -> "r    $taskPhrase"
+            else -> "      $taskPhrase"
         }
     }
 

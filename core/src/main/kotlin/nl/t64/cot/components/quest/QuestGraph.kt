@@ -25,19 +25,16 @@ data class QuestGraph(
 
     override fun toString(): String {
         return when {
-            isFailed -> "x  $title"
-            currentState == QuestState.FINISHED -> "v  $title"
-            currentState == QuestState.UNCLAIMED -> "o   $title"
-            resetState == QuestState.FINISHED -> "r  $title"
-            else -> "     $title"
+            isFailed -> "x    $title"
+            currentState == QuestState.FINISHED -> "v    $title"
+            currentState == QuestState.UNCLAIMED -> "o    $title"
+            resetState == QuestState.FINISHED -> "r    $title"
+            else -> "      $title"
         }
     }
 
     fun isOneOfBothStatesEqualOrHigherThan(questState: QuestState): Boolean =
         resetState.isEqualOrHigherThan(questState) || currentState.isEqualOrHigherThan(questState)
-
-    fun isCurrentStateEqualOrHigherThan(questState: QuestState): Boolean = currentState.isEqualOrHigherThan(questState)
-    fun isCurrentStateEqualOrLowerThan(questState: QuestState): Boolean = currentState.isEqualOrLowerThan(questState)
 
     fun getAllQuestTasksForVisual(): Array<QuestTask> {
         return (tasks + getTasksOfAcceptedSubQuests())
@@ -50,7 +47,7 @@ data class QuestGraph(
     private fun getTasksOfAcceptedSubQuests(): Map<String, QuestTask> {
         return linkedWith
             .map { gameData.quests.getQuestById(it) }
-            .filter { it.isCurrentStateEqualOrHigherThan(QuestState.ACCEPTED) }
+            .filter { it.currentState.isEqualOrHigherThan(QuestState.ACCEPTED) }
             .map { it.tasks }
             .flatMap { it.toList() }
             .toMap()

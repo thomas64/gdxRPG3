@@ -1,10 +1,10 @@
 {
-  "fallen_tree"       : {
+  "fallen_tree"        : {
     "phrases": {
       "1": {"text": ["The tree is blocking my path.", "I can't remove it like this."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "found_grace_ribbon": {
+  "found_grace_ribbon" : {
     "phrases": {
       "1": {"text": ["Oh no, what's this?"]},
       "2": {"text": ["It's one of Grace's ribbons!", "So she has been here."]},
@@ -14,12 +14,12 @@
       "6": {"text": ["Are you there?!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "dont_go_south"     : {
+  "dont_go_south"      : {
     "phrases": {
       "1": {"text": ["No, I shouldn't go back. I have to find Grace first.", "There must be something near where I found the ribbon."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "fairy_welcome": {
+  "fairy_welcome"      : {
     "phrases": {
       "1": {"face": "fairy3", "text": ["Ah young Mozes. You may enter here."], "choices": [{"command": "RECEIVE_XP", "nextId": "2"}]},
       "2": {"face": "mozes", "text": ["You know who I am?"]},
@@ -29,7 +29,7 @@
       "6": {"face": "fairy3", "text": ["Young Mozes, please be welcome."], "choices": [{"command": "EXIT", "nextId": "6"}]}
     }
   },
-  "find_great_tree"   : {
+  "find_great_tree"    : {
     "phrases": {
       "1": {"text": ["What is this place?"]},
       "2": {"text": ["It's... it's..."]},
@@ -38,13 +38,13 @@
       "5": {"text": ["And friendly."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "fairy_general"     : {
+  "fairy_general"      : {
     "phrases": {
       "1": {"text": ["Young lovely Mozes, what a wonderful thing to have you finally in our midst."]},
       "2": {"face": "mozes", "text": ["Why, thank you."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "quest_mother_fairy": {
+  "quest_mother_fairy" : {
     "phrases": {
       "1" : {"text": ["Dear young Mozes, I'm so glad you finally entered our peaceful domain.", "Unfortunately it has to be in these dark times."]},
       "2" : {"face": "mozes", "text": ["Why, thank you."]},
@@ -104,7 +104,7 @@
       "82": {"face": "fairy1", "text": ["Best is really that you stay out of his way.", "Don't try to come near him."], "choices": [{"nextId": "3"}]}
     }
   },
-  "fairy_save"        : {
+  "fairy_save"         : {
     "phrases": {
       "1": {"text": ["Dear young Mozes, shall we pray to the Goddess Tree so that your life will be in Her safe hands?"]},
       "2": {
@@ -116,7 +116,7 @@
       "3": {"face": "fairy4", "text": ["Your prayer has been heard."], "choices": [{"command": "SAVE_GAME"}]}
     }
   },
-  "fairy_heal_price-0": {
+  "fairy_heal_price-0" : {
     "phrases": {
       "1": {"text": ["Wonderful dear Mozes, please lie down here on this bed of healing flowers so that your weary bones may find some rest."]},
       "2": {
@@ -128,12 +128,12 @@
       "3": {"face": "fairy6", "text": ["Your health has been restored.", "Please come back anytime you feel weary."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "fairy_crystal"     : {
+  "fairy_crystal"      : {
     "phrases": {
       "1": {"text": ["[Explanation about warp crystals.]"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "fairy_school" : {
+  "fairy_school"       : {
     "phrases": {
       "1": {
         "text": ["Young Mozes, would you like to learn a spell?"], "choices": [
@@ -151,7 +151,7 @@
       "8": {"text": ["Come see me again if you want to learn more spells."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "fairy_academy"     : {
+  "fairy_academy"      : {
     "phrases": {
       "1": {
         "text": ["Young Mozes, would you like to train a skill?"], "choices": [
@@ -161,7 +161,7 @@
       }
     }
   },
-  "fairy_shop"        : {
+  "fairy_shop"         : {
     "phrases": {
       "1": {
         "text": ["Young Mozes, would you like to see my wares?"], "choices": [
@@ -171,10 +171,17 @@
       }
     }
   },
-  "notice_dense_fog"  : {
+  "notice_dense_fog"   : {
     "phrases": {
       "1": {"text": ["What a dense fog all of the sudden."]},
       "2": {"text": ["How strange..."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "back_were_i_started": {
+    "phrases": {
+      "1": {"text": ["Finally, I'm back were I started!"]},
+      "2": {"text": ["I got that 'another chance'."]},
+      "3": {"text": ["Let's go find Grace again! I hope I'm not to late."], "choices": [{"command": "EXIT"}]}
     }
   }
 }

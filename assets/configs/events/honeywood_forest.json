@@ -43,25 +43,31 @@
     "entityId"      : "mozes",
     "doesRepeat"    : true
   },
-  "enter_great_tree"    : {
+  "enter_great_tree"   : {
     "type"          : "conversation",
     "conversationId": "fairy_welcome",
     "entityId"      : "fairy3"
   },
-  "find_great_tree"     : {
+  "find_great_tree"    : {
     "type"          : "conversation",
     "conversationId": "find_great_tree",
     "entityId"      : "mozes"
   },
-  "defeated_orc_guards" : {
+  "defeated_orc_guards": {
     "type"          : "conversation",
     "condition"     : ["defeated_orc_guards"],
     "conversationId": "defeated_orc_guards",
     "entityId"      : "mozes"
   },
-  "notice_dense_fog"    : {
+  "notice_dense_fog"   : {
     "type"          : "conversation",
     "conversationId": "notice_dense_fog",
+    "entityId"      : "mozes"
+  },
+  "back_were_i_started": {
+    "type"          : "conversation",
+    "condition"     : ["_c_==_f_q_quest_helping_horse"],
+    "conversationId": "back_were_i_started",
     "entityId"      : "mozes"
   }
 }

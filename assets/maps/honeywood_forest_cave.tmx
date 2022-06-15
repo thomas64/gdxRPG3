@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="24" tileheight="24" infinite="0" nextlayerid="23" nextobjectid="88">
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="24" tileheight="24" infinite="0" nextlayerid="23" nextobjectid="89">
  <properties>
   <property name="bgm" value="bgm_forest"/>
   <property name="bgs" value="bgs_birds"/>
@@ -117,7 +117,13 @@
   <object id="78" name="honeywood_cave_1" x="312" y="72" width="48" height="24"/>
  </objectgroup>
  <objectgroup color="#ffaa7f" id="14" name="save"/>
- <objectgroup color="#ff00ff" id="19" name="cutscene"/>
+ <objectgroup color="#ff00ff" id="19" name="cutscene">
+  <object id="88" name="scene_end_of_cycle_2" type="discover" x="168" y="384" width="624" height="24">
+   <properties>
+    <property name="condition" value="_c_==_f_q_quest_helping_horse"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup color="#ffff00" id="22" name="quest">
   <object id="84" name="quest_grace_is_missing" type="blocker" x="456" y="588" width="96" height="12">
    <properties>

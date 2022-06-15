@@ -41,11 +41,6 @@ open class GameMapNpc(rectObject: RectangleMapObject) : GameMapObject(rectObject
         return rectObject.property("conversation", "default")
     }
 
-    private fun createConditions(rectObject: RectangleMapObject): List<String> {
-        val condition = rectObject.propertyOrNull<String>("condition")
-        return condition?.split(",")?.map { it.trim() } ?: emptyList()
-    }
-
     private fun createIsEnemy(rectObject: RectangleMapObject): Boolean {
         return rectObject.property("isEnemy", false)
     }

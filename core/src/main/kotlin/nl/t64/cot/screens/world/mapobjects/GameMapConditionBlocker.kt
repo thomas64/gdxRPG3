@@ -3,7 +3,6 @@ package nl.t64.cot.screens.world.mapobjects
 import com.badlogic.gdx.maps.objects.RectangleMapObject
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
-import ktx.tiled.property
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.mapManager
@@ -16,7 +15,7 @@ import nl.t64.cot.subjects.BlockObserver
 class GameMapConditionBlocker(rectObject: RectangleMapObject) : GameMapObject(rectObject.rectangle), BlockObserver {
 
     private val quest: QuestGraph? = rectObject.name?.let { gameData.quests.getQuestById(it) }
-    private val conditionIds: List<String> = createConditions(rectObject)
+    private val conditionIds: List<String> = createCertainConditions(rectObject)
     private var isActive: Boolean = false
 
     override fun getBlockerFor(boundingBox: Rectangle, state: EntityState): Rectangle? {
@@ -48,11 +47,6 @@ class GameMapConditionBlocker(rectObject: RectangleMapObject) : GameMapObject(re
             brokerManager.blockObservers.removeObserver(this)
         }
         mapManager.setTiledGraph()
-    }
-
-    private fun createConditions(rectObject: RectangleMapObject): List<String> {
-        return rectObject.property<String>("condition")
-            .let { ids -> ids.split(",").map { it.trim() } }
     }
 
 }
