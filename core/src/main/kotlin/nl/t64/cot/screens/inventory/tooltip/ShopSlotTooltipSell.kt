@@ -9,4 +9,8 @@ class ShopSlotTooltipSell : ItemSlotTooltip() {
         removeBuy(descriptionList)
     }
 
+    override fun removeRightUnnecessaryAttributes(descriptionList: MutableList<InventoryDescription>) {
+        removeBuy(descriptionList)
+    }
+
 }

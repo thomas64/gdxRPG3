@@ -9,139 +9,140 @@ import nl.t64.cot.constants.Constant
 
 class DescriptionCreator(
     private val inventoryItem: InventoryItem,
-    private val partySumOfMerchantSkill: Int
+    private val partySumOfMerchantSkill: Int,
 ) {
+    private val descriptionLines: MutableList<InventoryDescription> = ArrayList()
+    private lateinit var createLine: (Any, Any) -> InventoryDescription
 
-    private val descriptionList: MutableList<InventoryDescription> = ArrayList()
+    private var minimalsYouDontHave: Set<InventoryMinimal> = emptySet()
+    private var calcsYouDontHave: Set<CalcAttributeId> = emptySet()
+    private var statsYouDontHave: Set<StatItemId> = emptySet()
+    private var skillsYouDontHave: Set<SkillItemId> = emptySet()
+    private var otherItem: InventoryItem? = null
 
     fun createItemDescription(): List<InventoryDescription> {
-        return createDescriptionList(
-            { key: Any, value: Any -> InventoryDescription(key, value) },
-            emptySet(), emptySet(), emptySet(), emptySet(), null
-        )
+        createLine = { key: Any, value: Any -> InventoryDescription(key, value) }
+        return createDescriptionList()
     }
 
     fun createItemDescriptionComparingToHero(hero: HeroItem): List<InventoryDescription> {
-        return createDescriptionList(
-            { key: Any, value: Any -> InventoryDescription(key, value, inventoryItem, hero) },
-            emptySet(), emptySet(), emptySet(), emptySet(), null
-        )
+        createLine = { key: Any, value: Any -> InventoryDescription(key, value, inventoryItem, hero) }
+        return createDescriptionList()
     }
 
     fun createItemDescriptionComparingToItem(otherItem: InventoryItem): List<InventoryDescription> {
-        return createDescriptionList(
-            { key: Any, value: Any -> InventoryDescription(key, value, inventoryItem, otherItem) },
-            inventoryItem.getMinimalsOtherItemHasAndYouDont(otherItem),
-            inventoryItem.getCalcsOtherItemHasAndYouDont(otherItem),
-            inventoryItem.getStatsOtherItemHasAndYouDont(otherItem),
-            inventoryItem.getSkillsOtherItemHasAndYouDont(otherItem),
-            otherItem
-        )
+        createLine = { key: Any, value: Any -> InventoryDescription(key, value, inventoryItem, otherItem) }
+        minimalsYouDontHave = inventoryItem.getMinimalsOtherItemHasAndYouDont(otherItem)
+        calcsYouDontHave = inventoryItem.getCalcsOtherItemHasAndYouDont(otherItem)
+        statsYouDontHave = inventoryItem.getStatsOtherItemHasAndYouDont(otherItem)
+        skillsYouDontHave = inventoryItem.getSkillsOtherItemHasAndYouDont(otherItem)
+        this.otherItem = otherItem
+        return createDescriptionList()
     }
 
-    private fun createDescriptionList(
-        createDescription: (Any, Any) -> InventoryDescription,
-        minimalsYouDontHave: Set<InventoryMinimal>,
-        calcsYouDontHave: Set<CalcAttributeId>,
-        statsYouDontHave: Set<StatItemId>,
-        skillsYouDontHave: Set<SkillItemId>,
-        otherItem: InventoryItem?
-    ): List<InventoryDescription> {
-        descriptionList.add(createDescription.invoke(inventoryItem.group, inventoryItem.name))
-        addHandiness(createDescription)
-        addPrices(createDescription)
-        addMinimals(createDescription, minimalsYouDontHave)
-        addCalcs(createDescription, calcsYouDontHave)
-        addStats(createDescription, statsYouDontHave)
-        addSkills(createDescription, skillsYouDontHave)
-        addPossibleEmptyLines(createDescription, otherItem)
-        return createFilter()
+    private fun createDescriptionList(): List<InventoryDescription> {
+        addName()
+        addHandiness()
+        addPrices()
+        addMinimals()
+        addCalcs()
+        addStats()
+        addSkills()
+        addPossibleEmptyLines()
+        return getFilteredLines()
     }
 
-    private fun addHandiness(createDescription: (Any, Any) -> InventoryDescription) {
+    private fun addName() {
+        descriptionLines.add(createLine(inventoryItem.group, inventoryItem.name))
+    }
+
+    private fun addHandiness() {
         if (inventoryItem.group == InventoryGroup.WEAPON) {
             val handinessTitle = if (inventoryItem.isTwoHanded) "(Two-handed)" else "(One-handed)"
-            descriptionList.add(createDescription.invoke(handinessTitle, ""))
+            descriptionLines.add(createLine(handinessTitle, ""))
         }
     }
 
-    private fun addPrices(createDescription: (Any, Any) -> InventoryDescription) {
+    private fun addPrices() {
         when {
-            inventoryItem.amount == 1 -> {
-                descriptionList.add(createDescription.invoke(Constant.DESCRIPTION_KEY_BUY, inventoryItem.getBuyPriceTotal(partySumOfMerchantSkill)))
-                descriptionList.add(createDescription.invoke(Constant.DESCRIPTION_KEY_SELL, inventoryItem.getSellValueTotal(partySumOfMerchantSkill)))
-            }
-            inventoryItem.amount > 1 -> {
-                descriptionList.add(createDescription.invoke(Constant.DESCRIPTION_KEY_BUY_PIECE, inventoryItem.getBuyPricePiece(partySumOfMerchantSkill)))
-                descriptionList.add(createDescription.invoke(Constant.DESCRIPTION_KEY_BUY_TOTAL, inventoryItem.getBuyPriceTotal(partySumOfMerchantSkill)))
-                descriptionList.add(createDescription.invoke(Constant.DESCRIPTION_KEY_SELL_PIECE, inventoryItem.getSellValuePiece(partySumOfMerchantSkill)))
-                descriptionList.add(createDescription.invoke(Constant.DESCRIPTION_KEY_SELL_TOTAL, inventoryItem.getSellValueTotal(partySumOfMerchantSkill)))
-            }
-            else -> {
-                throw IllegalStateException("Amount cannot be below 1.")
-            }
+            inventoryItem.amount == 1 -> createLinesWithSinglePrice()
+            inventoryItem.amount > 1 -> createLinesWithMultiPrices()
+            else -> throw IllegalStateException("Amount cannot be below 1.")
         }
     }
 
-    private fun addMinimals(
-        createDescription: (Any, Any) -> InventoryDescription, minimalsYouDontHave: Set<InventoryMinimal>
-    ) {
+    private fun createLinesWithSinglePrice() {
+        listOf(
+            createLine(Constant.DESCRIPTION_KEY_BUY, inventoryItem.getBuyPriceTotal(partySumOfMerchantSkill)),
+            createLine(Constant.DESCRIPTION_KEY_SELL, inventoryItem.getSellValueTotal(partySumOfMerchantSkill))
+        ).forEach { descriptionLines.add(it) }
+    }
+
+    private fun createLinesWithMultiPrices() {
+        listOf(
+            createLine(Constant.DESCRIPTION_KEY_BUY_PIECE, inventoryItem.getBuyPricePiece(partySumOfMerchantSkill)),
+            createLine(Constant.DESCRIPTION_KEY_BUY_TOTAL, inventoryItem.getBuyPriceTotal(partySumOfMerchantSkill)),
+            createLine(Constant.DESCRIPTION_KEY_SELL_PIECE, inventoryItem.getSellValuePiece(partySumOfMerchantSkill)),
+            createLine(Constant.DESCRIPTION_KEY_SELL_TOTAL, inventoryItem.getSellValueTotal(partySumOfMerchantSkill))
+        ).forEach { descriptionLines.add(it) }
+    }
+
+    private fun addMinimals() {
         InventoryMinimal.values().forEach {
-            if (minimalsYouDontHave.contains(it)) {
-                descriptionList.add(createDescription.invoke("", ""))
+            if (it in minimalsYouDontHave) {
+                descriptionLines.add(createEmptyLine())
             } else {
-                descriptionList.add(createDescription.invoke(it, inventoryItem.getAttributeOfMinimal(it)))
+                descriptionLines.add(createLine(it, inventoryItem.getAttributeOfMinimal(it)))
             }
         }
     }
 
-    private fun addCalcs(
-        createDescription: (Any, Any) -> InventoryDescription, calcsYouDontHave: Set<CalcAttributeId>
-    ) {
+    private fun addCalcs() {
         CalcAttributeId.values().forEach {
-            val value = if (calcsYouDontHave.contains(it)) "0" else inventoryItem.getAttributeOfCalcAttributeId(it)
-            descriptionList.add(createDescription.invoke(it, value))
+            val value = if (it in calcsYouDontHave) "0" else inventoryItem.getAttributeOfCalcAttributeId(it)
+            descriptionLines.add(createLine(it, value))
         }
     }
 
-    private fun addStats(
-        createDescription: (Any, Any) -> InventoryDescription, statsYouDontHave: Set<StatItemId>
-    ) {
+    private fun addStats() {
         StatItemId.values().forEach {
-            val value = if (statsYouDontHave.contains(it)) "0" else inventoryItem.getAttributeOfStatItemId(it)
-            descriptionList.add(createDescription.invoke(it, value))
+            val value = if (it in statsYouDontHave) "0" else inventoryItem.getAttributeOfStatItemId(it)
+            descriptionLines.add(createLine(it, value))
         }
     }
 
-    private fun addSkills(
-        createDescription: (Any, Any) -> InventoryDescription, skillsYouDontHave: Set<SkillItemId>
-    ) {
+    private fun addSkills() {
         SkillItemId.values().forEach {
-            val value = if (skillsYouDontHave.contains(it)) "0" else inventoryItem.getAttributeOfSkillItemId(it)
-            descriptionList.add(createDescription.invoke(it, value))
+            val value = if (it in skillsYouDontHave) "0" else inventoryItem.getAttributeOfSkillItemId(it)
+            descriptionLines.add(createLine(it, value))
         }
     }
 
-    private fun addPossibleEmptyLines(
-        createDescription: (Any, Any) -> InventoryDescription, otherItem: InventoryItem?
-    ) {
-        val otherItemDescriptionSize = otherItem?.description?.size ?: 0
-        (0 until otherItemDescriptionSize)
-            .map { createDescription.invoke("", "") }
-            .forEach { descriptionList.add(it) }
+    private fun addPossibleEmptyLines() {
+        (0 until (otherItem?.description?.size ?: 0))
+            .map { createEmptyLine() }
+            .forEach { descriptionLines.add(it) }
     }
 
-    private fun createFilter(): List<InventoryDescription> {
-        return descriptionList.filter { mustBeAdded(it) }
+    private fun createEmptyLine(): InventoryDescription {
+        return createLine("", "")
+    }
+
+    private fun createLine(key: Any, value: Any): InventoryDescription {
+        return createLine.invoke(key, value)
+    }
+
+    private fun getFilteredLines(): List<InventoryDescription> {
+        return descriptionLines.filter { mustBeAdded(it) }
     }
 
     private fun mustBeAdded(description: InventoryDescription): Boolean {
-        if (description.key == Constant.DESCRIPTION_KEY_BUY_TOTAL
-            || description.key == Constant.DESCRIPTION_KEY_SELL_TOTAL
-            || description.key == Constant.DESCRIPTION_KEY_BUY_PIECE
-            || description.key == Constant.DESCRIPTION_KEY_SELL_PIECE
-            || description.key == Constant.DESCRIPTION_KEY_BUY
-            || description.key == Constant.DESCRIPTION_KEY_SELL
+        if (description.key in listOf(Constant.DESCRIPTION_KEY_BUY_TOTAL,
+                                      Constant.DESCRIPTION_KEY_SELL_TOTAL,
+                                      Constant.DESCRIPTION_KEY_BUY_PIECE,
+                                      Constant.DESCRIPTION_KEY_SELL_PIECE,
+                                      Constant.DESCRIPTION_KEY_BUY,
+                                      Constant.DESCRIPTION_KEY_SELL)
         ) {
             return true
         }
@@ -154,9 +155,9 @@ class DescriptionCreator(
         if (description.key == CalcAttributeId.TRANSFORMATION) {
             return false
         }
-        if ((description.key == CalcAttributeId.PROTECTION
-                    || description.key == StatItemId.SPEED
-                    || description.key == SkillItemId.STEALTH)
+        if (description.key in listOf(CalcAttributeId.PROTECTION,
+                                      StatItemId.SPEED,
+                                      SkillItemId.STEALTH)
             && inventoryItem.group.hasImpactOnPrtSpdStl()
         ) {
             return true

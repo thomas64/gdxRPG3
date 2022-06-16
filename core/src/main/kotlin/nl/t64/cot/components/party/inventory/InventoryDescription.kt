@@ -40,13 +40,17 @@ class InventoryDescription {
 
     private fun compare(item1: InventoryItem, item2: InventoryItem): ThreeState {
         return when (value) {
-            is Int -> when (key) {
-                is StatItemId -> compareStats(item1, item2)
-                is SkillItemId -> compareSkills(item1, item2)
-                is CalcAttributeId -> compareCalcs(item1, item2)
-                else -> ThreeState.SAME
-            }
+            is Int -> compareInt(item1, item2)
             "0" -> ThreeState.LESS
+            else -> ThreeState.SAME
+        }
+    }
+
+    private fun compareInt(item1: InventoryItem, item2: InventoryItem): ThreeState {
+        return when (key) {
+            is StatItemId -> compareStats(item1, item2)
+            is SkillItemId -> compareSkills(item1, item2)
+            is CalcAttributeId -> compareCalcs(item1, item2)
             else -> ThreeState.SAME
         }
     }

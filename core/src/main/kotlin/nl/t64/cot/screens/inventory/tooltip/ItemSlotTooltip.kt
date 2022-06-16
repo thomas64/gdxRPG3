@@ -191,15 +191,19 @@ open class ItemSlotTooltip : BaseTooltip() {
     }
 
     fun removeBuy(descriptionList: MutableList<InventoryDescription>) {
-        descriptionList.removeIf { it.key == Constant.DESCRIPTION_KEY_BUY }
-        descriptionList.removeIf { it.key == Constant.DESCRIPTION_KEY_BUY_PIECE }
-        descriptionList.removeIf { it.key == Constant.DESCRIPTION_KEY_BUY_TOTAL }
+        descriptionList.removeAll {
+            it.key in listOf(Constant.DESCRIPTION_KEY_BUY,
+                             Constant.DESCRIPTION_KEY_BUY_PIECE,
+                             Constant.DESCRIPTION_KEY_BUY_TOTAL)
+        }
     }
 
     fun removeSell(descriptionList: MutableList<InventoryDescription>) {
-        descriptionList.removeIf { it.key == Constant.DESCRIPTION_KEY_SELL }
-        descriptionList.removeIf { it.key == Constant.DESCRIPTION_KEY_SELL_PIECE }
-        descriptionList.removeIf { it.key == Constant.DESCRIPTION_KEY_SELL_TOTAL }
+        descriptionList.removeAll {
+            it.key in listOf(Constant.DESCRIPTION_KEY_SELL,
+                             Constant.DESCRIPTION_KEY_SELL_PIECE,
+                             Constant.DESCRIPTION_KEY_SELL_TOTAL)
+        }
     }
 
     fun createSingleLabelStyle(attribute: InventoryDescription): LabelStyle {
@@ -252,12 +256,12 @@ open class ItemSlotTooltip : BaseTooltip() {
     }
 
     private fun isBuyOrSellValue(attribute: InventoryDescription): Boolean {
-        return attribute.key == Constant.DESCRIPTION_KEY_BUY_TOTAL
-                || attribute.key == Constant.DESCRIPTION_KEY_SELL_TOTAL
-                || attribute.key == Constant.DESCRIPTION_KEY_BUY_PIECE
-                || attribute.key == Constant.DESCRIPTION_KEY_SELL_PIECE
-                || attribute.key == Constant.DESCRIPTION_KEY_BUY
-                || attribute.key == Constant.DESCRIPTION_KEY_SELL
+        return attribute.key in listOf(Constant.DESCRIPTION_KEY_BUY_TOTAL,
+                                       Constant.DESCRIPTION_KEY_SELL_TOTAL,
+                                       Constant.DESCRIPTION_KEY_BUY_PIECE,
+                                       Constant.DESCRIPTION_KEY_SELL_PIECE,
+                                       Constant.DESCRIPTION_KEY_BUY,
+                                       Constant.DESCRIPTION_KEY_SELL)
     }
 
 }

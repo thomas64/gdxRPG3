@@ -112,42 +112,40 @@ class AudioManager {
     }
 
     private fun playBgm(filePath: String, isLooping: Boolean) {
-        if (filePath.isEmpty()) {
-            return
-        }
-        val bgm: Music
-        if (queuedBgm.containsKey(filePath)) {
-            bgm = queuedBgm[filePath]!!
-        } else {
-            bgm = resourceManager.getMusicAsset(filePath)
-            queuedBgm[filePath] = bgm
-        }
-        if (preferenceManager.isMusicOn) {
-            bgm.isLooping = isLooping
-            bgm.play()
-            bgm.volume = BGM_VOLUME
-        } else {
-            bgm.stop()
+        if (filePath.isNotEmpty()) {
+            val bgm: Music
+            if (queuedBgm.containsKey(filePath)) {
+                bgm = queuedBgm[filePath]!!
+            } else {
+                bgm = resourceManager.getMusicAsset(filePath)
+                queuedBgm[filePath] = bgm
+            }
+            if (preferenceManager.isMusicOn) {
+                bgm.isLooping = isLooping
+                bgm.play()
+                bgm.volume = BGM_VOLUME
+            } else {
+                bgm.stop()
+            }
         }
     }
 
     private fun playBgs(filePath: String, isLooping: Boolean) {
-        if (filePath.isEmpty()) {
-            return
-        }
-        val bgs: Music
-        if (queuedBgs.containsKey(filePath)) {
-            bgs = queuedBgs[filePath]!!
-        } else {
-            bgs = resourceManager.getMusicAsset(filePath)
-            queuedBgs[filePath] = bgs
-        }
-        if (preferenceManager.isSoundOn) {
-            bgs.isLooping = isLooping
-            bgs.play()
-            bgs.volume = BGS_VOLUME
-        } else {
-            bgs.stop()
+        if (filePath.isNotEmpty()) {
+            val bgs: Music
+            if (queuedBgs.containsKey(filePath)) {
+                bgs = queuedBgs[filePath]!!
+            } else {
+                bgs = resourceManager.getMusicAsset(filePath)
+                queuedBgs[filePath] = bgs
+            }
+            if (preferenceManager.isSoundOn) {
+                bgs.isLooping = isLooping
+                bgs.play()
+                bgs.volume = BGS_VOLUME
+            } else {
+                bgs.stop()
+            }
         }
     }
 
