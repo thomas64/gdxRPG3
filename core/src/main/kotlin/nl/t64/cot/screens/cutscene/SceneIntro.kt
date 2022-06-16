@@ -373,7 +373,7 @@ class SceneIntro : CutsceneScreen() {
                 Actions.run { audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_BANG) },
                 Actions.delay(0.5f),
                 Actions.run { camera.startShaking() },
-                Actions.run { mapManager.updateQuestLayers() },
+                Actions.run { mapManager.updateConditionLayers() },
                 Actions.run { isBgmFading = false }
             ))
         )

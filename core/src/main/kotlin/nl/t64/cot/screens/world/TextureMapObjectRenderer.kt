@@ -7,41 +7,40 @@ import com.badlogic.gdx.graphics.Pixmap
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.graphics.glutils.FrameBuffer
-import com.badlogic.gdx.maps.objects.TextureMapObject
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.ScreenUtils
-import nl.t64.cot.Utils.createLightmap
 import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.constants.Constant
-import nl.t64.cot.screens.world.mapobjects.GameMapConditionTexture
 
 
 private val UNDER_LAYERS = intArrayOf(0, 1, 2, 3, 4, 5)
 private val OVER_LAYERS = intArrayOf(6, 7, 8)
-private const val SCROLL_SPEED = 10f
-private const val LIGHTMAP_ID = "light_object"
 
 class TextureMapObjectRenderer(private val camera: Camera) : OrthogonalTiledMapRenderer(null) {
 
     private val frameBuffer = FrameBuffer(Pixmap.Format.RGBA8888, Gdx.graphics.width, Gdx.graphics.height, false)
-    private var scrollerX = 0f
-    private var scrollerY = 0f
 
-    fun renderMap() {
+    fun updateCamera() {
+        setView(camera)
+    }
+
+    fun renderMapWithoutEntities() {
         renderWithoutPlayerLight {}
     }
 
     fun renderAll(playerPosition: Vector2, renderEntities: (Batch) -> Unit) {
-        mapManager.getLightmapPlayer()?.let {
-            renderWithPlayerLight(playerPosition, it, renderEntities)
-        } ?: renderWithoutPlayerLight(renderEntities)
+        mapManager.getLightmapPlayer()
+            ?.let { renderWithPlayerLight(playerPosition, it, renderEntities) }
+            ?: renderWithoutPlayerLight(renderEntities)
     }
 
-    private fun renderWithPlayerLight(playerPosition: Vector2, sprite: Sprite, renderEntities: (Batch) -> Unit) {
+    private fun renderWithPlayerLight(playerPosition: Vector2,
+                                      lightmapPlayer: Sprite,
+                                      renderEntities: (Batch) -> Unit) {
         frameBuffer.begin()
         ScreenUtils.clear(Color.BLACK)
-        renderLightmapPlayer(playerPosition, sprite)
+        renderLightmapPlayer(playerPosition, lightmapPlayer)
         frameBuffer.end()
         renderMapLayers(renderEntities)
         renderFrameBuffer()
@@ -50,10 +49,6 @@ class TextureMapObjectRenderer(private val camera: Camera) : OrthogonalTiledMapR
     private fun renderWithoutPlayerLight(renderEntities: (Batch) -> Unit) {
         ScreenUtils.clear(Color.BLACK)
         renderMapLayers(renderEntities)
-    }
-
-    fun updateCamera() {
-        setView(camera)
     }
 
     private fun renderFrameBuffer() {
@@ -73,58 +68,37 @@ class TextureMapObjectRenderer(private val camera: Camera) : OrthogonalTiledMapR
         val y = playerPosition.y + Constant.HALF_TILE_SIZE - lightmapPlayer.height / 2f
         lightmapPlayer.setPosition(x, y)
         lightmapPlayer.draw(batch)
-        renderOtherMapLights()
+        mapManager.getGameMapLights().forEach { it.render(batch) }
         batch.end()
-    }
-
-    private fun renderOtherMapLights() {
-        val darkness = createLightmap(LIGHTMAP_ID)
-        mapManager.getGameMapLights().forEach {
-            if (it.id == "blue") {
-                batch.color = Color.ROYAL
-            }
-            val x = it.center.x - darkness.width / 2f
-            val y = it.center.y - darkness.height / 2f
-            batch.draw(darkness, x, y)
-            batch.color = Color.WHITE
-        }
     }
 
     private fun renderMapLayers(renderEntities: (Batch) -> Unit) {
         batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA)
 
-        renderBackground()
+        renderPossibleBackground()
         batch.projectionMatrix = camera.combined
         render(UNDER_LAYERS)
         batch.begin()
-        renderQuestTextures(mapManager.getLowerMapQuestTextures())
+        mapManager.getLowerConditionTextures().forEach { it.render(batch) }
         renderEntities.invoke(batch)
-        renderQuestTextures(mapManager.getUpperMapQuestTextures())
+        mapManager.getUpperConditionTextures().forEach { it.render(batch) }
         batch.end()
         render(OVER_LAYERS)
         renderLightmap()
     }
 
-    private fun renderQuestTextures(gameMapQuestTextures: List<GameMapConditionTexture>) {
-        gameMapQuestTextures
-            .filter { it.isVisible }
-            .map { it.texture }
-            .forEach { renderObject(it) }
-    }
-
-    private fun renderObject(mapObject: TextureMapObject) {
-        batch.draw(mapObject.textureRegion, mapObject.x, mapObject.y)
-    }
-
-    private fun renderBackground() {
-        batch.begin()
-        batch.projectionMatrix = camera.projection
-        mapManager.getParallaxBackground(camera).draw(batch)
-        batch.end()
+    private fun renderPossibleBackground() {
+        mapManager.getParallaxBackground()?.let {
+            batch.begin()
+            batch.projectionMatrix = camera.projection
+            it.render(batch, camera)
+            batch.end()
+        }
     }
 
     private fun renderLightmap() {
         batch.begin()
+        batch.setBlendFunction(GL20.GL_ONE, GL20.GL_ONE)
         renderLightmapCamera()
         renderLightmapMap()
         batch.end()
@@ -132,39 +106,12 @@ class TextureMapObjectRenderer(private val camera: Camera) : OrthogonalTiledMapR
 
     private fun renderLightmapCamera() {
         batch.projectionMatrix = camera.projection
-        batch.setBlendFunction(GL20.GL_ONE, GL20.GL_ONE)
-        mapManager.getLightmapCamera(camera).forEach { it.draw(batch) }
+        mapManager.getLightmapCamera().render(batch, camera)
     }
 
     private fun renderLightmapMap() {
         batch.projectionMatrix = camera.combined
-        val lightmap = mapManager.getLightmapMap()
-        scrollerX += Gdx.graphics.deltaTime * SCROLL_SPEED
-        scrollerY += Gdx.graphics.deltaTime * SCROLL_SPEED
-        if (scrollerX > lightmap.width / LIGHTMAP_REGION_MULTIPLIER) {
-            scrollerX = 0f
-        }
-        if (scrollerY > lightmap.height / LIGHTMAP_REGION_MULTIPLIER) {
-            scrollerY = 0f
-        }
-        scrollDefinedLightmaps(lightmap)
-        if (lightmap.texture.toString().contains("fog")) {
-            batch.setBlendFunction(GL20.GL_ONE_MINUS_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA)
-        }
-        lightmap.draw(batch)
-    }
-
-    private fun scrollDefinedLightmaps(lightmap: Sprite) {
-        val textureName = lightmap.texture.toString()
-        if (textureName.contains("forest")) {
-            lightmap.x = -scrollerX
-            lightmap.y = -scrollerY
-        } else if (textureName.contains("bubbles")
-            || textureName.contains("fog")
-        ) {
-            lightmap.x = -camera.getHorizontalSpaceBetweenCameraAndMapEdge()
-            lightmap.y = -scrollerY
-        }
+        mapManager.getLightmapMap().render(batch, camera)
     }
 
 }

@@ -11,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.brokerManager
-import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.Utils.profileManager
 import nl.t64.cot.Utils.screenManager
@@ -103,12 +102,8 @@ class WorldScreen : Screen,
     }
 
     override fun onNotifyStartCutscene(cutsceneId: String) {
-        val cutscenes = gameData.cutscenes
-        if (!cutscenes.isPlayed(cutsceneId)) {
-            cutscenes.setPlayed(cutsceneId)
-            doBeforeLoadScreen()
-            fadeOut({ screenManager.setScreen(ScreenType.valueOf(cutsceneId.uppercase())) }, Color.BLACK)
-        }
+        doBeforeLoadScreen()
+        fadeOut({ screenManager.setScreen(ScreenType.valueOf(cutsceneId.uppercase())) }, Color.BLACK)
     }
     //endregion
 
@@ -278,7 +273,7 @@ class WorldScreen : Screen,
 
     private fun renderMiniMap() {
         updateCameraPosition()
-        mapRenderer.renderMap()
+        mapRenderer.renderMapWithoutEntities()
         // todo, eventually remove shaperenderer and use sprite icons for minimap.
         shapeRenderer.projectionMatrix = camera.combined
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled)
@@ -290,7 +285,7 @@ class WorldScreen : Screen,
 
     private fun renderAll(dt: Float) {
         mapManager.updateFogOfWar(player.position, dt)
-        mapManager.updateQuestLayers()
+        mapManager.updateConditionLayers()
         if (gameState != GameState.DIALOG && gameState != GameState.BATTLE) {
             updateEntities(dt)
         }

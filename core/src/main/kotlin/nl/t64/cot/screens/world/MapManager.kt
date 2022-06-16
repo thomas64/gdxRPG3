@@ -20,7 +20,6 @@ import nl.t64.cot.screens.world.entity.EntityState
 import nl.t64.cot.screens.world.mapobjects.*
 import nl.t64.cot.screens.world.pathfinding.TiledNode
 import nl.t64.cot.subjects.ProfileObserver
-import kotlin.math.min
 
 
 class MapManager : ProfileObserver {
@@ -66,42 +65,14 @@ class MapManager : ProfileObserver {
         brokerManager.mapObservers.notifyMapChanged(currentMap)
     }
 
-    fun getParallaxBackground(camera: Camera): Sprite {
-        val cameraWidth = camera.zoomedCameraWidth
-        val cameraHeight = camera.zoomedCameraHeight
-        val halfWidth = cameraWidth / 2f
-        val halfHeight = cameraHeight / 2f
-
-        return Sprite(currentMap.parallaxBackground).apply {
-            setSize(cameraWidth, cameraHeight)
-            setPosition(-halfWidth, -halfHeight)
-        }
-    }
-
-    fun getLightmapCamera(camera: Camera): List<Sprite> {
-        val cameraWidth = camera.viewportWidth
-        val cameraHeight = camera.viewportHeight
-        val mapWidth = currentMap.pixelWidth / camera.zoom
-        val mapHeight = currentMap.pixelHeight / camera.zoom
-        val minWidth = min(cameraWidth, mapWidth)
-        val minHeight = min(cameraHeight, mapHeight)
-        val halfWidth = minWidth * camera.zoom
-        val halfHeight = minHeight * camera.zoom
-        val quarterWidth = minWidth * (camera.zoom / 2f)
-        val quarterHeight = minHeight * (camera.zoom / 2f)
-
-        return currentMap.lightmapCamera
-            .map { Sprite(it) }
-            .onEach { it.setSize(halfWidth, halfHeight) }
-            .onEach { it.setPosition(-quarterWidth, -quarterHeight) }
-    }
-
     fun getTiledMap(): TiledMap = currentMap.tiledMap
-    fun getLightmapMap(): Sprite = currentMap.lightmapMap
+    fun getParallaxBackground(): GameMapParallaxBackground? = currentMap.parallaxBackground
+    fun getLightmapCamera(): GameMapLightmapCamera = currentMap.lightmapCamera
+    fun getLightmapMap(): GameMapLightmapMap = currentMap.lightmapMap
     fun getGameMapLights(): List<GameMapLight> = currentMap.lights
     fun getLightmapPlayer(): Sprite? = currentMap.lightmapPlayer
-    fun getLowerMapQuestTextures(): List<GameMapConditionTexture> = currentMap.lowerTextures
-    fun getUpperMapQuestTextures(): List<GameMapConditionTexture> = currentMap.upperTextures
+    fun getLowerConditionTextures(): List<GameMapConditionTexture> = currentMap.lowerTextures
+    fun getUpperConditionTextures(): List<GameMapConditionTexture> = currentMap.upperTextures
 
     fun findPath(startPoint: Vector2, endPoint: Vector2, state: EntityState): DefaultGraphPath<TiledNode> {
         return currentMap.getTiledGraph(state).findPath(startPoint, endPoint)
@@ -119,8 +90,8 @@ class MapManager : ProfileObserver {
         fogOfWar.draw(shapeRenderer, currentMap.mapTitle)
     }
 
-    fun updateQuestLayers() {
-        currentMap.questBlockers.forEach { it.update() }
+    fun updateConditionLayers() {
+        currentMap.conditionBlockers.forEach { it.update() }
         currentMap.upperTextures.forEach { it.update() }
         currentMap.lowerTextures.forEach { it.update() }
     }

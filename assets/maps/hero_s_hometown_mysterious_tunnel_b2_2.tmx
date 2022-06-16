@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="34" height="46" tilewidth="24" tileheight="24" infinite="0" nextlayerid="23" nextobjectid="94">
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="34" height="46" tilewidth="24" tileheight="24" infinite="0" nextlayerid="23" nextobjectid="94">
  <properties>
   <property name="bgm" value="bgm_mysterious_tunnel"/>
   <property name="bgs" value="bgs_fireplace"/>
@@ -142,9 +142,9 @@
   <object id="62" x="708" y="318" width="12" height="12"/>
   <object id="63" x="546" y="126" width="12" height="12"/>
   <object id="64" x="258" y="126" width="12" height="12"/>
-  <object id="79" name="blue" x="306" y="378" width="12" height="12"/>
-  <object id="80" name="blue" x="498" y="378" width="12" height="12"/>
-  <object id="81" name="blue" x="306" y="522" width="12" height="12"/>
-  <object id="83" name="blue" x="498" y="522" width="12" height="12"/>
+  <object id="79" name="royal" x="306" y="378" width="12" height="12"/>
+  <object id="80" name="royal" x="498" y="378" width="12" height="12"/>
+  <object id="81" name="royal" x="306" y="522" width="12" height="12"/>
+  <object id="83" name="royal" x="498" y="522" width="12" height="12"/>
  </objectgroup>
 </map>

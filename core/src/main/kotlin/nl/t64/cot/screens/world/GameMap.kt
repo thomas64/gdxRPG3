@@ -1,14 +1,13 @@
 package nl.t64.cot.screens.world
 
 import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Sprite
-import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.maps.objects.RectangleMapObject
 import com.badlogic.gdx.maps.tiled.TiledMap
 import com.badlogic.gdx.math.Vector2
 import ktx.tiled.*
+import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.audio.AudioEvent
@@ -18,8 +17,6 @@ import nl.t64.cot.screens.world.mapobjects.*
 import nl.t64.cot.screens.world.pathfinding.TiledGraph
 import java.util.*
 
-
-const val LIGHTMAP_REGION_MULTIPLIER = 10
 
 private const val SOUND_LAYER = "sound"
 private const val EVENT_LAYER = "event"
@@ -46,15 +43,30 @@ private const val BGM_PROPERTY = "bgm"
 private const val BGS_PROPERTY = "bgs"
 private const val DEFAULT_BG = "NONE"
 
+private const val PARALLAX_BACKGROUND = "parallax_background"
+private const val LIGHTMAP_CAMERA_PROPERTY = "lightmap_camera"
+private const val LIGHTMAP_MAP_PROPERTY = "lightmap_map"
+private const val LIGHTMAP_PLAYER_PROPERTY = "lightmap_player"
+private const val DEFAULT_LIGHTMAP = "default"
+
 class GameMap(val mapTitle: String) {
 
     val tiledMap: TiledMap = resourceManager.getTiledMapAsset(mapTitle)
     private val loader = GameMapLayerLoader(tiledMap)
 
-    val parallaxBackground: TextureRegion = loader.loadParallaxBackground()
-    val lightmapCamera: List<Texture> = loader.loadLightmapCamera()
-    val lightmapMap: Sprite = loader.loadLightmapMap()
-    val lightmapPlayer: Sprite? = loader.loadLightmapPlayer()
+    val bgm: AudioEvent = tiledMap.bgm
+    val bgs: List<AudioEvent> = tiledMap.bgs
+    val pixelWidth: Float = tiledMap.totalWidth().toFloat()
+    val pixelHeight: Float = tiledMap.totalHeight().toFloat()
+    val width: Int = tiledMap.width
+    val height: Int = tiledMap.height
+
+    val parallaxBackground: GameMapParallaxBackground? = tiledMap.propertyOrNull<String>(PARALLAX_BACKGROUND)
+        ?.let { GameMapParallaxBackground(it) }
+    val lightmapCamera = GameMapLightmapCamera(tiledMap.property(LIGHTMAP_CAMERA_PROPERTY, DEFAULT_LIGHTMAP), pixelWidth, pixelHeight)
+    val lightmapMap = GameMapLightmapMap(tiledMap.property(LIGHTMAP_MAP_PROPERTY, DEFAULT_LIGHTMAP))
+    val lightmapPlayer: Sprite? = tiledMap.propertyOrNull<String>(LIGHTMAP_PLAYER_PROPERTY)
+        ?.let { Sprite(Utils.createLightmap(it)) }
     private val defaultStepSound: String = tiledMap.property(STEP_SOUND_PROPERTY, DEFAULT_STEP_SOUND)
 
     lateinit var playerSpawnLocation: Vector2
@@ -65,7 +77,7 @@ class GameMap(val mapTitle: String) {
     val heroes: List<GameMapHero> = loader.loadLayer(HERO_LAYER, { gameData.heroes.contains(it.name) }, { GameMapHero(it) })
     val enemies: List<GameMapEnemy> = loader.loadLayer(ENEMY_LAYER) { GameMapEnemy(it) }
     val lights: List<GameMapLight> = loader.loadLayer(LIGHTS_LAYER) { GameMapLight(it) }
-    val questBlockers: List<GameMapConditionBlocker> = loader.equalsIgnoreCase(QUEST_LAYER, "blocker") { GameMapConditionBlocker(it) }
+    val conditionBlockers: List<GameMapConditionBlocker> = loader.equalsIgnoreCase(QUEST_LAYER, "blocker") { GameMapConditionBlocker(it) }
     val upperTextures: List<GameMapConditionTexture> = loader.loadTextureLayer(UPPER_TEXTURE_LAYER) { GameMapConditionTexture(it) }
     val lowerTextures: List<GameMapConditionTexture> = loader.loadTextureLayer(LOWER_TEXTURE_LAYER) { GameMapConditionTexture(it) }
     val sparkles: List<GameMapSparkle> = loader.startsWith(REST_LAYER, "sparkle") { GameMapSparkle(it) }
@@ -86,13 +98,6 @@ class GameMap(val mapTitle: String) {
     private val spawnPoints: List<GameMapSpawnPoint> = loader.loadLayer(SPAWN_LAYER) { GameMapSpawnPoint(it) }
     private val portals: List<GameMapRelocator> = loader.loadLayer(PORTAL_LAYER) { GameMapPortal(it, mapTitle) }
     private val warpPoints: List<GameMapRelocator> = loader.loadLayer(WARP_LAYER) { GameMapWarpPoint(it, mapTitle) }
-
-    val bgm: AudioEvent = tiledMap.bgm
-    val bgs: List<AudioEvent> = tiledMap.bgs
-    val pixelWidth: Float = tiledMap.totalWidth().toFloat()
-    val pixelHeight: Float = tiledMap.totalHeight().toFloat()
-    val width: Int = tiledMap.width
-    val height: Int = tiledMap.height
 
     fun setTiledGraphs() {
         tiledGraphs[EntityState.WALKING] = TiledGraph(tiledMap.width, tiledMap.height, EntityState.WALKING)
@@ -147,7 +152,7 @@ class GameMap(val mapTitle: String) {
 
         shapeRenderer.color = Color.YELLOW
 
-        listOf(blockers, lowBlockers, questBlockers)
+        listOf(blockers, lowBlockers, conditionBlockers)
             .flatten()
             .map { it.rectangle }
             .forEach { shapeRenderer.rect(it.x, it.y, it.width, it.height) }
