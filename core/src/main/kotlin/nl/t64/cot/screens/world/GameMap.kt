@@ -100,8 +100,8 @@ class GameMap(val mapTitle: String) {
     private val warpPoints: List<GameMapRelocator> = loader.loadLayer(WARP_LAYER) { GameMapWarpPoint(it, mapTitle) }
 
     fun setTiledGraphs() {
-        tiledGraphs[EntityState.WALKING] = TiledGraph(tiledMap.width, tiledMap.height, EntityState.WALKING)
-        tiledGraphs[EntityState.FLYING] = TiledGraph(tiledMap.width, tiledMap.height, EntityState.FLYING)
+        tiledGraphs[EntityState.WALKING] = TiledGraph(width, height, EntityState.WALKING)
+        tiledGraphs[EntityState.FLYING] = TiledGraph(width, height, EntityState.FLYING)
     }
 
     fun getTiledGraph(state: EntityState): TiledGraph {
@@ -140,8 +140,8 @@ class GameMap(val mapTitle: String) {
     }
 
     fun isOutsideMap(point: Vector2): Boolean {
-        return point.x < 0 || point.x >= tiledMap.width
-                || point.y < 0 || point.y >= tiledMap.height
+        return point.x < 0 || point.x >= pixelWidth
+                || point.y < 0 || point.y >= pixelHeight
     }
 
     fun dispose() {

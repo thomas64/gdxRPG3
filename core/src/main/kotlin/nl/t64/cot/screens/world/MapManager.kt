@@ -28,7 +28,6 @@ class MapManager : ProfileObserver {
     private var isMapLoaded: Boolean = false
     private var nextMapTitle: String? = null
     private lateinit var fogOfWar: FogOfWar
-    private var timer = 0f
 
     override fun onNotifyCreateProfile(profileManager: ProfileManager) {
         fogOfWar = FogOfWar()
@@ -79,11 +78,7 @@ class MapManager : ProfileObserver {
     }
 
     fun updateFogOfWar(playerPosition: Vector2, dt: Float) {
-        timer += dt
-        if (timer > 1f) {
-            timer -= 1f
-            fogOfWar.update(playerPosition, currentMap.mapTitle)
-        }
+        fogOfWar.update(playerPosition, currentMap, dt)
     }
 
     fun drawFogOfWar(shapeRenderer: ShapeRenderer) {

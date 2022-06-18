@@ -11,16 +11,29 @@ private const val FOG_OF_WAR_RADIUS = Constant.TILE_SIZE * 6 - 1
 
 internal class FogOfWar {
 
-    private val container: MutableMap<String, Set<FogPoint>> = HashMap()
-
-    fun putIfAbsent(gameMap: GameMap) {
-        container.putIfAbsent(gameMap.mapTitle, fillFogOfWar(gameMap))
+    companion object {
+        private var timer = 0f
     }
 
-    fun update(playerPosition: Vector2, mapTitle: String) {
+    private val container: MutableMap<String, Set<FogPoint>> = HashMap()
+
+    fun putIfAbsent(currentMap: GameMap) {
+        container.putIfAbsent(currentMap.mapTitle, fillFogOfWar(currentMap))
+    }
+
+    fun update(playerPosition: Vector2, currentMap: GameMap, dt: Float) {
+        timer += dt
+        if (timer > 1f) {
+            timer -= 1f
+            update(playerPosition, currentMap)
+        }
+    }
+
+    private fun update(playerPosition: Vector2, currentMap: GameMap) {
         val sightRadius = Circle(playerPosition, FOG_OF_WAR_RADIUS)
-        container[mapTitle]!!
+        container[currentMap.mapTitle]!!
             .filter { sightRadius.contains(it) }
+            .filter { !it.isOutsideMap(currentMap) }
             .forEach { it.isExplored = true }
     }
 
@@ -63,4 +76,9 @@ private class FogPoint(
     x: Float = 0f, y: Float = 0f
 ) : Vector2(x * Constant.HALF_TILE_SIZE, y * Constant.HALF_TILE_SIZE) {
     var isExplored = false
+
+    fun isOutsideMap(currentMap: GameMap): Boolean {
+        return currentMap.isOutsideMap(this)
+    }
+
 }
