@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="40" height="24" tilewidth="24" tileheight="24" infinite="0" nextlayerid="10" nextobjectid="1">
+<map version="1.8" tiledversion="1.8.6" orientation="orthogonal" renderorder="right-down" width="40" height="24" tilewidth="24" tileheight="24" infinite="0" nextlayerid="10" nextobjectid="1">
  <properties>
   <property name="bgm" value="bgm_ylarus"/>
+  <property name="lightmap_camera" value="heaven"/>
+  <property name="lightmap_map" value="forest"/>
  </properties>
  <tileset firstgid="1" source="tilesets/fsm_town01_a2.tsx"/>
  <layer id="2" name="under0_none" width="40" height="24">

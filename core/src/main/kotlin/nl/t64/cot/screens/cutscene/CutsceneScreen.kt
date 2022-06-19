@@ -160,13 +160,13 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
 
     abstract fun exitScreen()
 
-    fun endCutsceneAndOpenMap(mapTitle: String, cutsceneId: String) {
-        endCutsceneAndOpenMapAnd(mapTitle, cutsceneId) {}
+    fun endCutsceneAndOpenMap(mapTitle: String, spawnId: String) {
+        endCutsceneAndOpenMapAnd(mapTitle, spawnId) {}
     }
 
-    fun endCutsceneAndOpenMapAnd(mapTitle: String, cutsceneId: String, actionAfter: () -> Unit) {
+    fun endCutsceneAndOpenMapAnd(mapTitle: String, spawnId: String = mapTitle, actionAfter: () -> Unit) {
         endCutsceneAnd {
-            openMap(mapTitle, cutsceneId)
+            openMap(mapTitle, spawnId)
             actionAfter.invoke()
         }
     }
@@ -181,8 +181,8 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
         ))
     }
 
-    private fun openMap(mapTitle: String, cutsceneId: String) {
-        mapManager.loadMapAfterCutscene(mapTitle, cutsceneId)
+    private fun openMap(mapTitle: String, spawnId: String) {
+        mapManager.loadMapAfterCutscene(mapTitle, spawnId)
         screenManager.setScreen(ScreenType.WORLD)
     }
 
@@ -209,6 +209,11 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
 
     fun setMapWithHardBgmBgs(mapId: String) {
         mapManager.loadMapWithHardBgmBgsSwitch(mapId)
+        setNewMap()
+    }
+
+    fun setMapWithNoSound(mapId: String) {
+        mapManager.loadMap(mapId)
         setNewMap()
     }
 

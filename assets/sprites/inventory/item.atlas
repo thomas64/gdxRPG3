@@ -1,40 +1,47 @@
 
 item.png
-size: 310, 62
+size: 372, 62
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
-horse_medicine
+crystal_of_time
   rotate: false
   xy: 0, 0
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-horseshoe
+horse_medicine
   rotate: false
   xy: 62, 0
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-key_mysterious_tunnel
+horseshoe
   rotate: false
   xy: 124, 0
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-scroll_of_orc_obedience
+key_mysterious_tunnel
   rotate: false
   xy: 186, 0
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-tow_rope
+scroll_of_orc_obedience
   rotate: false
   xy: 248, 0
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+tow_rope
+  rotate: false
+  xy: 310, 0
   size: 62, 62
   orig: 62, 62
   offset: 0, 0

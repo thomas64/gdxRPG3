@@ -1,8 +1,8 @@
 {
-  "everything_is_normal_again" : {
+  "everything_is_normal_again": {
     "phrases": {
       "1": {"text": ["Everything is back to normal?"]},
-      "2": {"text": ["The world didn't end in flames?"]},
+      "2": {"text": ["Adan didn't end in flames?"]},
       "3": {"text": ["Is Grace still alive then?"]},
       "4": {"text": ["I have to find her again, quick!"], "choices": [{"command": "EXIT"}]}
     }
@@ -29,7 +29,7 @@
       "15": {"face": "oldwoman01", "text": ["Nah! Of course not. I've got so much to live for. See ya!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "quest_helping_horse": {
+  "quest_helping_horse"       : {
     "phrases": {
       "1" : {"text": ["Hey Mozes, you can't go further up north from here.", "There is a large tree blocking the road."], "choices": [{"nextId": "3"}]},
       "2" : {"text": ["Hey Mozes, you can't go further up north from here.", "There is a large tree blocking the road."], "choices": [{"nextId": "3"}]},
@@ -231,7 +231,7 @@
       "2"   : {"text": ["I'm here only for the mice, there's no way I'll do bats."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "quest_get_horse"    : {
+  "quest_get_horse"           : {
     "phrases": {
       "1" : {"face": "woman03", "text": ["Hi Mozes."]},
       "2" : {
@@ -288,7 +288,7 @@
       "70": {"face": "woman03", "text": ["How is my Enopa doing? Has she been of any help to Lennor and you?"], "choices": [{"command": "EXIT", "nextId": "70"}]}
     }
   },
-  "honeywood_horse"    : {
+  "honeywood_horse"           : {
     "phrases": {
       "1"   : {
         "text": ["Neigh."], "choices": [
@@ -350,7 +350,7 @@
       "1411": {"face": "oldwoman11", "text": ["And how are you, my dear?"], "choices": [{"nextId": "2"}]}
     }
   },
-  "honeywood_elder"    : {
+  "honeywood_elder"           : {
     "phrases": {
       "1" : {"face": "oldman11", "text": ["Hello Mozes, how can I help you today?"]},
       "2" : {
@@ -424,7 +424,7 @@
       "1200": {"face": "man07", "text": ["Hello neighbour, you're back."], "choices": [{"nextId": "2"}]}
     }
   },
-  "quest_get_tow_rope" : {
+  "quest_get_tow_rope"        : {
     "phrases": {
       "1"   : {
         "text": ["Hi Mozes, to what do I owe the pleasure of you entering our home?"], "choices": [

@@ -1,16 +1,39 @@
 {
-  "quest_royal_sacrifice"      : {
+  "quest_royal_sacrifice": {
     "title"   : "Royal sacrifice?",
     "entityId": "ardor",
-    "summary" : "Grace will become sacrificed by the wizard Ardor to gain ultimate power from the God Ulrog. Something seems to go wrong and everything gets engulfed in flames, including Ardor and you.",
+    "summary" : "Grace will become sacrificed by the wizard Ardor to gain ultimate power from Ulrog, the God of Power. Something seems to go wrong and everything gets engulfed in flames, including Ardor and you.",
     "tasks"   : {
       "1": {
-        "taskPhrase": "Rescue Grace from Ardor",
+        "taskPhrase": "Receive the Crystal of Time to reset time 12 hours before the disaster.",
+        "type"      : "FIND_ITEM",
+        "target"    : {"crystal_of_time": 1},
+        "isHidden"  : true,
+        "linkedWith": ["3"]
+      },
+      "2": {
+        "taskPhrase": "Rescue Grace from Ardor.",
+        "type"      : "DISCOVER"
+      },
+      "3": {
+        "taskPhrase": "Stop Ardor from destroying Adan.",
+        "type"      : "DISCOVER",
+        "isHidden"  : true
+      }
+    }
+  },
+  "quest_god_of_power"   : {
+    "title"   : "The God of Power",
+    "entityId": "ylarus",
+    "summary" : "For some reason Adan goes up in flames when Grace become sacrificed by the wizard Ardor. Ylarus, the God of Time doesn't know why, so he sends you on a quest to finds answers.",
+    "tasks"   : {
+      "1": {
+        "taskPhrase": "Travel to Lastdenn to find answers.",
         "type"      : "DISCOVER"
       }
     }
   },
-  "quest_helping_horse" : {
+  "quest_helping_horse"  : {
     "title"     : "A helping horse",
     "entityId"  : "man02",
     "summary"   : "A fallen tree has blocked the road to Honeywood Forest. Lennor needs your help to get a strong horse and some tow ropes if you want to speed up the process of clearing the road.",
@@ -40,7 +63,7 @@
       }
     }
   },
-  "quest_get_tow_rope"  : {
+  "quest_get_tow_rope"   : {
     "title"     : "A helping horse",
     "entityId"  : "youngman01",
     "summary"   : "Get tow rope",
@@ -83,7 +106,7 @@
       }
     }
   },
-  "quest_get_horse"     : {
+  "quest_get_horse"      : {
     "title"     : "A helping horse",
     "entityId"  : "woman03",
     "summary"   : "Get Horse",
@@ -123,7 +146,7 @@
       }
     }
   },
-  "quest_get_medicine"  : {
+  "quest_get_medicine"   : {
     "title"     : "A helping horse",
     "entityId"  : "oldwoman11",
     "summary"   : "Get medicine",
@@ -146,7 +169,7 @@
       }
     }
   },
-  "quest_get_horseshoes": {
+  "quest_get_horseshoes" : {
     "title"     : "A helping horse",
     "entityId"  : "man07",
     "summary"   : "Get horseshoes",

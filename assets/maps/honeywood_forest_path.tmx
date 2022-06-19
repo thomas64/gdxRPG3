@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="44" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="25" nextobjectid="87">
+<map version="1.8" tiledversion="1.8.6" orientation="orthogonal" renderorder="right-down" width="44" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="26" nextobjectid="88">
  <properties>
   <property name="bgm" value="bgm_forest"/>
   <property name="bgs" value="bgs_birds, bgs_creek"/>
@@ -139,6 +139,13 @@
   <object id="31" name="honeywood" x="456" y="1680" width="96" height="24"/>
  </objectgroup>
  <objectgroup color="#ffaa7f" id="14" name="save"/>
+ <objectgroup color="#ff00ff" id="25" name="cutscene">
+  <object id="87" name="scene_end_of_cycle_2" type="discover" x="552" y="-18" width="96" height="24">
+   <properties>
+    <property name="condition" value="_c_==_f_q_quest_helping_horse"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup id="21" name="lower_texture">
   <object id="62" name="quest_helping_horse" gid="7462" x="528" y="1644" width="24" height="24">
    <properties>

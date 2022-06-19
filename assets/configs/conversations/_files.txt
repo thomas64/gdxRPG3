@@ -3,3 +3,4 @@ honeywood_forest.json
 honeywood_cave.json
 cutscene_ardor01.json
 honeywood.json
+cutscene_end_of_cycle2.json

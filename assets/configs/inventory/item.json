@@ -1,4 +1,11 @@
 {
+  "crystal_of_time"        : {
+    "name"       : "Crystal of Time",
+    "group"      : "ITEM",
+    "sort"       : "1",
+    "price"      : 1,
+    "description": ["ToDo"]
+  },
   "key_mysterious_tunnel"  : {
     "name"       : "Mysterious Tunnel Key",
     "group"      : "ITEM",

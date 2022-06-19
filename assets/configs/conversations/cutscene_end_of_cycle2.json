@@ -1,0 +1,46 @@
+{
+  "to_late_again"          : {
+    "phrases": {
+      "1": {"text": ["Oh no! That sound!"]},
+      "2": {"text": ["I'm too late again!"]},
+      "3": {"text": ["I'm sorry Grace!"]},
+      "4": {"text": ["I'm sorry I'm too late..."]},
+      "5": {"text": ["again..."]},
+      "6": {"text": [". . ."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "receive_crystal_of_time": {
+    "phrases": {
+      "1" : {"text": ["Human boy, listen to me very carefully!"]},
+      "2" : {"text": ["I am Ylarus, God of Time."]},
+      "3" : {"text": ["Adan is destroyed again."]},
+      "4" : {"text": ["Everytime the wizard sacrifices the human girl you call Grace, Adan starts burning, ending all life. Including the wizard his own and yours."]},
+      "5" : {"text": ["Human boy, you must stop the wizard!"]},
+      "6" : {"text": ["For Adan obviously, but also because of the connection you have with the human girl."]},
+      "7" : {"text": ["For that alone I have seen you will go the extra mile."]},
+      "8" : {"text": ["I have brought you back in time before, but my powers are weakening."]},
+      "9" : {"text": ["As of now I cannot do this much more."]},
+      "10": {"text": ["That is why I put a part of my power in this crystal."]},
+      "11": {"text": ["With this crystal you can reset time 12 hours before the disaster."]},
+      "12": {"text": ["Human boy, it is now yours to use."]},
+      "13": {"text": ["As of the disaster itself, I do not have knowledge of the cause."]},
+      "14": {"text": ["You must travel to the city of Lastdenn, for there you may find an answer to this cause."]},
+      "15": {"text": ["The power of time is in your hands!"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "mozes_wakes_up_again"   : {
+    "phrases": {
+      "1": {"text": ["What the..."]},
+      "2": {"text": ["This is heavy."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "to_lastdenn_then"       : {
+    "phrases": {
+      "1": {"text": ["Ylarus, the God of Time..."]},
+      "2": {"text": [". . ."]},
+      "3": {"text": ["And I've only got 12 hours before the end of the world..."]},
+      "4": {"text": [". . ."]},
+      "5": {"text": ["Alright, on to Lastdenn then, I guess."], "choices": [{"command": "EXIT"}]}
+    }
+  }
+}

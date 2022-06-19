@@ -181,7 +181,7 @@
     "phrases": {
       "1": {"text": ["Finally, I'm back were I started!"]},
       "2": {"text": ["I got that 'another chance'."]},
-      "3": {"text": ["Let's go find Grace again! I hope I'm not to late."], "choices": [{"command": "EXIT"}]}
+      "3": {"text": ["Let's go find Grace again! I hope I'm not too late."], "choices": [{"command": "EXIT"}]}
     }
   }
 }

@@ -23,6 +23,14 @@ class Scenario {
         profileManager.saveProfile()
     }
 
+    fun startThirdCycle() {
+        reviveMozes()
+        gameData.resetCycle()
+        addCrystalToInventory()
+        addQuestLastdennToLogbook()
+        profileManager.saveProfile()
+    }
+
     private fun addMozesToParty() {
         val mozes = gameData.heroes.getCertainHero(Constant.PLAYER_ID)
         gameData.heroes.removeHero(Constant.PLAYER_ID)
@@ -67,6 +75,16 @@ class Scenario {
     private fun addQuestArdorToLogbook() {
         val questArdor = gameData.quests.getQuestById("quest_royal_sacrifice")
         questArdor.accept()
+    }
+
+    private fun addCrystalToInventory() {
+        val crystal = InventoryDatabase.createInventoryItem("crystal_of_time")
+        gameData.inventory.autoSetItem(crystal)
+    }
+
+    private fun addQuestLastdennToLogbook() {
+        val questYlarus = gameData.quests.getQuestById("quest_god_of_power")
+        questYlarus.accept()
     }
 
 }

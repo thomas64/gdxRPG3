@@ -97,7 +97,7 @@
       "1": {"text": [". . ."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "mozes_wakes_up_again"           : {
+  "mozes_wakes_up": {
     "phrases": {
       "1": {"text": ["What the..."]},
       "2": {"text": ["What just happened?"], "choices": [{"command": "EXIT"}]}

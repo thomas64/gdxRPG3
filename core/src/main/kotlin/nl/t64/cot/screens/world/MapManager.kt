@@ -58,9 +58,9 @@ class MapManager : ProfileObserver {
         loadMapAfterCutscene(mapTitle, mapTitle)
     }
 
-    fun loadMapAfterCutscene(mapTitle: String, cutsceneId: String) {
+    fun loadMapAfterCutscene(mapTitle: String, spawnId: String) {
         loadMapWithBgmBgs(mapTitle)
-        currentMap.setPlayerSpawnLocationForNewLoad(cutsceneId)
+        currentMap.setPlayerSpawnLocationForNewLoad(spawnId)
         brokerManager.mapObservers.notifyMapChanged(currentMap)
     }
 
@@ -170,7 +170,7 @@ class MapManager : ProfileObserver {
         audioManager.possibleBgsSwitch(prevBgs, nextBgs)
     }
 
-    private fun loadMap(mapTitle: String) {
+    fun loadMap(mapTitle: String) {
         disposeOldMaps()
         currentMap = GameMap(mapTitle)
         isMapLoaded = true
