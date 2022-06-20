@@ -54,6 +54,7 @@ class WorldScreen : Screen,
     private val mapRenderer = TextureMapObjectRenderer(camera)
     private val multiplexer = InputMultiplexer().apply { addProcessor(createListener()) }
     private val shapeRenderer = ShapeRenderer()
+    private val clockBox = ClockBox()
     private val partyWindow = PartyWindow()
     private val conversationDialog = ConversationDialog(this)
     private val messageDialog = MessageDialog(multiplexer)
@@ -266,8 +267,16 @@ class WorldScreen : Screen,
         when (gameState) {
             GameState.PAUSED -> { // do nothing here
             }
-            GameState.MINIMAP -> renderMiniMap()
-            GameState.RUNNING, GameState.DIALOG, GameState.BATTLE -> renderAll(dt)
+            GameState.MINIMAP -> {
+                clockBox.update(dt)
+                renderMiniMap()
+            }
+            GameState.RUNNING -> {
+                clockBox.update(dt)
+                renderAll(dt)
+            }
+            GameState.DIALOG -> renderAll(dt)
+            GameState.BATTLE -> renderAll(dt)
         }
     }
 
@@ -296,6 +305,7 @@ class WorldScreen : Screen,
         debugBox.possibleUpdate(dt)
         buttonsBox.update(dt)
         partyWindow.update(dt)
+        clockBox.render(dt)
         conversationDialog.update(dt)
         messageDialog.update(dt)
 
@@ -419,6 +429,7 @@ class WorldScreen : Screen,
     }
 
     override fun dispose() {
+        clockBox.dispose()
         player.dispose()
         mapRenderer.dispose()
         shapeRenderer.dispose()

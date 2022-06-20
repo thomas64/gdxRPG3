@@ -25,6 +25,7 @@ class Scenario {
 
     fun startThirdCycle() {
         reviveMozes()
+        gameData.clock.start()
         gameData.resetCycle()
         addCrystalToInventory()
         addQuestLastdennToLogbook()

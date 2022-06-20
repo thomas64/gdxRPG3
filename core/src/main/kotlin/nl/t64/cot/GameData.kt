@@ -13,11 +13,13 @@ import nl.t64.cot.components.party.HeroContainer
 import nl.t64.cot.components.party.PartyContainer
 import nl.t64.cot.components.party.inventory.InventoryContainer
 import nl.t64.cot.components.quest.QuestContainer
+import nl.t64.cot.components.time.Clock
 import nl.t64.cot.subjects.ProfileObserver
 
 
 class GameData : ProfileObserver {
 
+    lateinit var clock: Clock
     lateinit var heroes: HeroContainer
     lateinit var party: PartyContainer
     lateinit var inventory: InventoryContainer
@@ -34,6 +36,7 @@ class GameData : ProfileObserver {
     var isComparingEnabled = false
 
     fun resetCycle() {
+        clock.reset()
         battles = BattleContainer()
         conversations = ConversationContainer()
         loot = LootContainer()
@@ -42,6 +45,7 @@ class GameData : ProfileObserver {
     }
 
     override fun onNotifyCreateProfile(profileManager: ProfileManager) {
+        clock = Clock()
         heroes = HeroContainer()
         party = PartyContainer()
         inventory = InventoryContainer(66)
@@ -61,6 +65,7 @@ class GameData : ProfileObserver {
     }
 
     override fun onNotifySaveProfile(profileManager: ProfileManager) {
+        profileManager.setProperty("clock", clock)
         profileManager.setProperty("heroes", heroes)
         profileManager.setProperty("party", party)
         profileManager.setProperty("inventory", inventory)
@@ -78,6 +83,7 @@ class GameData : ProfileObserver {
     }
 
     override fun onNotifyLoadProfile(profileManager: ProfileManager) {
+        clock = profileManager.getProperty("clock")
         heroes = profileManager.getProperty("heroes")
         party = profileManager.getProperty("party")
         inventory = profileManager.getProperty("inventory")
