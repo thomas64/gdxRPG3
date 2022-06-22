@@ -22,6 +22,7 @@ class GameMapLight(rectObject: RectangleMapObject) {
     fun render(batch: Batch) {
         batch.color = color
         batch.draw(texture, x, y)
+        batch.color = Color.WHITE
     }
 
     private fun String.toColor(): Color {

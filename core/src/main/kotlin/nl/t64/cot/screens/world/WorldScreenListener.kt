@@ -2,6 +2,8 @@ package nl.t64.cot.screens.world
 
 import com.badlogic.gdx.Input
 import com.badlogic.gdx.InputAdapter
+import nl.t64.cot.Utils.gameData
+import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.inventory.InventoryScreen
 import nl.t64.cot.screens.menu.MenuPause
@@ -43,6 +45,7 @@ internal class WorldScreenListener(
             Input.Keys.F10 -> setShowGrid.invoke()
             Input.Keys.F11 -> setShowObjects.invoke()
             Input.Keys.F12 -> setShowDebug.invoke()
+            Input.Keys.R -> if (preferenceManager.isInDebugMode) gameData.resetCycle()
         }
 
         return false

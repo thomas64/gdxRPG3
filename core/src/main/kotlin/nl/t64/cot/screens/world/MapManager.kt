@@ -1,6 +1,7 @@
 package nl.t64.cot.screens.world
 
 import com.badlogic.gdx.ai.pfa.DefaultGraphPath
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.maps.tiled.TiledMap
@@ -9,6 +10,7 @@ import nl.t64.cot.ProfileManager
 import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
+import nl.t64.cot.Utils.profileManager
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
@@ -101,6 +103,19 @@ class MapManager : ProfileObserver {
 
     fun setNextMapTitleNull() {
         nextMapTitle = null
+    }
+
+    fun useCrystal() {
+        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_RESET)
+        val actionAfterFade = {
+            gameData.resetCycle()
+            val mapTitle = "honeywood_house_mozes"
+            loadMap(mapTitle)
+            currentMap.setPlayerSpawnLocationForNewLoad(mapTitle)
+            profileManager.saveProfile()
+            brokerManager.mapObservers.notifyMapChanged(currentMap)
+        }
+        brokerManager.mapObservers.notifyFadeOut(actionAfterFade, Color.GRAY, 1f)
     }
 
     fun checkWarpPoint(warpPoint: GameMapWarpPoint, playerDirection: Direction) {

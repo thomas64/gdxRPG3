@@ -1,18 +1,22 @@
 package nl.t64.cot.screens.inventory.inventoryslot
 
+import nl.t64.cot.Utils.mapManager
+import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.inventory.InventoryItem
+import nl.t64.cot.screens.inventory.InventoryScreen
 import nl.t64.cot.screens.inventory.InventoryUtils
 import nl.t64.cot.screens.inventory.itemslot.ItemSlot
 import nl.t64.cot.screens.inventory.messagedialog.MessageDialog
+import nl.t64.cot.screens.menu.DialogQuestion
 import kotlin.math.roundToInt
 
 
 class InventorySlotUser private constructor(itemSlot: ItemSlot) {
 
     companion object {
-        fun drink(itemSlot: ItemSlot) {
+        fun doAction(itemSlot: ItemSlot) {
             InventorySlotUser(itemSlot).selectActionBasedOnItemId()
         }
     }
@@ -23,19 +27,32 @@ class InventorySlotUser private constructor(itemSlot: ItemSlot) {
 
     private fun selectActionBasedOnItemId() {
         when (inventoryItem.id) {
-            "healing_potion" -> possibleHandleAction(::potionCondition, ::doHealing)
-            "curing_potion" -> possibleHandleAction(::potionCondition, ::doCuring)
-            "stamina_potion" -> possibleHandleAction(::staminaCondition, ::doStamina)
-            "restore_potion" -> possibleHandleAction(::potionCondition, ::doRestore)
-            else -> throw IllegalStateException("${inventoryItem.id} is not specified to handle drinking.")
+            "crystal_of_time" -> possibleHandleResetTime()
+            "healing_potion" -> possibleHandleDrink(::potionCondition, ::doHealing)
+            "curing_potion" -> possibleHandleDrink(::potionCondition, ::doCuring)
+            "stamina_potion" -> possibleHandleDrink(::staminaCondition, ::doStamina)
+            "restore_potion" -> possibleHandleDrink(::potionCondition, ::doRestore)
         }
     }
 
-    private fun possibleHandleAction(condition: () -> Boolean, drinkAction: () -> Unit) {
-        if (condition.invoke()) certainHandleAction(drinkAction) else showFailMessage()
+    private fun possibleHandleResetTime() {
+        DialogQuestion({ certainHandleResetTime() }, """
+                Do you want to save your progress,
+                reset time and everything that happened,
+                and return to your home?""".trimIndent())
+            .show(currentSlot.stage, AudioEvent.SE_CONVERSATION_NEXT, 0)
     }
 
-    private fun certainHandleAction(drinkAction: () -> Unit) {
+    private fun certainHandleResetTime() {
+        (screenManager.getCurrentParchmentScreen() as InventoryScreen)
+            .closeScreenAnd { mapManager.useCrystal() }
+    }
+
+    private fun possibleHandleDrink(condition: () -> Boolean, drinkAction: () -> Unit) {
+        if (condition.invoke()) certainHandleDrink(drinkAction) else showFailMessage()
+    }
+
+    private fun certainHandleDrink(drinkAction: () -> Unit) {
         currentSlot.decrementAmountBy(1)
         val recoveredHp = drinkPotion(drinkAction)
         showSuccessMessage(recoveredHp)

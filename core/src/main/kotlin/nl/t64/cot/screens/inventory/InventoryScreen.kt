@@ -94,6 +94,11 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
                                                              false)))
     }
 
+    fun closeScreenAnd(actionAfter: () -> Unit) {
+        closeScreen()
+        actionAfter.invoke()
+    }
+
     private fun closeScreen() {
         Gdx.input.inputProcessor = null
         Utils.setGamepadInputProcessor(null)
