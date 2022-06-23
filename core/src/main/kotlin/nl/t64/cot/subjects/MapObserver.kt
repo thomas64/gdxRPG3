@@ -9,6 +9,6 @@ interface MapObserver {
     fun onNotifyFadeOut(actionAfterFade: () -> Unit, transitionColor: Color, duration: Float)
     fun onNotifyMapChanged(currentMap: GameMap)
     fun onNotifyShakeCamera()
-    fun onNotifyStartCutscene(cutsceneId: String)
+    fun onNotifyStartCutscene(cutsceneId: String, fadeDuration: Float)
 
 }

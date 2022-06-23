@@ -103,9 +103,9 @@ class WorldScreen : Screen,
         camera.startShaking()
     }
 
-    override fun onNotifyStartCutscene(cutsceneId: String) {
+    override fun onNotifyStartCutscene(cutsceneId: String, fadeDuration: Float) {
         doBeforeLoadScreen()
-        fadeOut({ screenManager.setScreen(ScreenType.valueOf(cutsceneId.uppercase())) }, Color.BLACK)
+        fadeOut({ screenManager.setScreen(ScreenType.valueOf(cutsceneId.uppercase())) }, Color.BLACK, fadeDuration)
     }
     //endregion
 
@@ -266,12 +266,9 @@ class WorldScreen : Screen,
         when (gameState) {
             GameState.PAUSED -> { // do nothing here
             }
-            GameState.MINIMAP -> {
-                clockBox.update(dt)
-                renderMiniMap()
-            }
+            GameState.MINIMAP -> renderMiniMap()
             GameState.RUNNING -> {
-                clockBox.update(dt)
+                updateEntities(dt)
                 renderAll(dt)
             }
             GameState.DIALOG -> renderAll(dt)
@@ -294,9 +291,6 @@ class WorldScreen : Screen,
     private fun renderAll(dt: Float) {
         mapManager.updateFogOfWar(player.position, dt)
         mapManager.updateConditionLayers()
-        if (gameState != GameState.DIALOG && gameState != GameState.BATTLE) {
-            updateEntities(dt)
-        }
         updateCameraPosition()
         mapRenderer.renderAll(player.position) { renderEntities(it) }
         gridRenderer.possibleRender()
@@ -317,6 +311,7 @@ class WorldScreen : Screen,
 
     private fun updateEntities(dt: Float) {
         if (!isInTransition) {
+            clockBox.update(dt)
             player.update(dt)
         }
         doorList.forEach { it.update(dt) }
@@ -391,7 +386,8 @@ class WorldScreen : Screen,
     }
 
     private fun createListener(): WorldScreenListener {
-        return WorldScreenListener({ doBeforeLoadScreen() },
+        return WorldScreenListener({ isInTransition },
+                                   { doBeforeLoadScreen() },
                                    { partyWindow.showHide() },
                                    { openMiniMap() },
                                    { gridRenderer.setShowGrid() },

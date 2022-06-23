@@ -32,8 +32,8 @@ class MapSubject {
         observers.forEach { it.onNotifyShakeCamera() }
     }
 
-    fun notifyStartCutscene(cutsceneId: String) {
-        observers.forEach { it.onNotifyStartCutscene(cutsceneId) }
+    fun notifyStartCutscene(cutsceneId: String, fadeDuration: Float = 0f) {
+        observers.forEach { it.onNotifyStartCutscene(cutsceneId, fadeDuration) }
     }
 
 }

@@ -82,7 +82,8 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
         actorsStage.clear()
         Gdx.input.inputProcessor = actorsStage
         Utils.setGamepadInputProcessor(actorsStage)
-        actorsStage.addListener(CutSceneListener { exitScreen() })
+        actorsStage.addAction(Actions.sequence(Actions.delay(1f),
+                                               Actions.addListener(CutSceneListener { exitScreen() }, false)))
 
         prepare()
         actorsStage.addAction(actions[actionId])

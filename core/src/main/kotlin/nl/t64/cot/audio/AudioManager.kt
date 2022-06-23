@@ -140,9 +140,11 @@ class AudioManager {
                 queuedBgs[event] = bgs
             }
             if (preferenceManager.isSoundOn) {
-                bgs.isLooping = isLooping
-                bgs.play()
-                bgs.volume = event.volume
+                if (!bgs.isPlaying) {
+                    bgs.isLooping = isLooping
+                    bgs.play()
+                    bgs.volume = event.volume
+                }
             } else {
                 bgs.stop()
             }
