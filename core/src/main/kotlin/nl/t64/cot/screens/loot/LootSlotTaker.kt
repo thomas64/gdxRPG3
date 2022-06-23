@@ -1,9 +1,8 @@
 package nl.t64.cot.screens.loot
 
-import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.gameData
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.party.inventory.InventoryItem
 import nl.t64.cot.screens.inventory.itemslot.ItemSlot
 import nl.t64.cot.screens.inventory.itemslot.ItemSlotSelector
@@ -41,7 +40,7 @@ internal class LootSlotTaker(
     }
 
     private fun putLootSlotToInventorySlot(candidateItem: InventoryItem) {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_TAKE)
+        playSe(AudioEvent.SE_TAKE)
         gameData.inventory.autoSetItem(candidateItem)
         sourceSlot.clearStack()
         selector.findNextSlot()

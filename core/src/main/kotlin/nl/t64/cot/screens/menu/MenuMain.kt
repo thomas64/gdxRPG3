@@ -8,10 +8,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle
 import com.badlogic.gdx.utils.ScreenUtils
-import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.resourceManager
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playBgm
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 
@@ -37,7 +36,7 @@ class MenuMain : MenuScreen() {
     }
 
     override fun setupScreen() {
-        audioManager.handle(AudioCommand.BGM_PLAY_LOOP, AudioEvent.BGM_TITLE)
+        playBgm(AudioEvent.BGM_TITLE)
         val texture = resourceManager.getTextureAsset(BACKGROUND)
         setBackground(Image(texture))
         table = createTable()

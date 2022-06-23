@@ -1,10 +1,10 @@
 package nl.t64.cot.components.party
 
-import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playSe
+import nl.t64.cot.audio.stopAllSe
 import nl.t64.cot.components.loot.Loot
 
 
@@ -26,7 +26,7 @@ object XpRewarder {
     }
 
     private fun showMessageTooltipRewardXp(xp: Int, levelUpMessage: String) {
-        audioManager.handle(AudioCommand.SE_STOP_ALL)
+        stopAllSe()
         if (levelUpMessage.isEmpty()) {
             showMessageTooltipXpOnly(xp)
         } else {
@@ -35,12 +35,12 @@ object XpRewarder {
     }
 
     private fun showMessageTooltipXpOnly(xp: Int) {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_REWARD)
+        playSe(AudioEvent.SE_REWARD)
         brokerManager.messageObservers.notifyShowMessageTooltip("+ $xp XP")
     }
 
     private fun showMessageTooltipXpAndLevelUp(xp: Int, levelUpMessage: String) {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_LEVELUP)
+        playSe(AudioEvent.SE_LEVELUP)
         brokerManager.messageObservers.notifyShowMessageTooltip("+ $xp XP" + System.lineSeparator() + levelUpMessage)
     }
 

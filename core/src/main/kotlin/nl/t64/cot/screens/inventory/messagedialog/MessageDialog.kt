@@ -9,10 +9,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Null
 import nl.t64.cot.Utils
-import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.resourceManager
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playSe
 
 
 private const val FONT = "fonts/spectral_regular_24.ttf"
@@ -42,7 +41,7 @@ class MessageDialog(private val message: String) {
     }
 
     fun show(stage: Stage, event: AudioEvent) {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, event)
+        playSe(event)
         dialog.show(stage)
     }
 
@@ -67,7 +66,7 @@ class MessageDialog(private val message: String) {
     }
 
     private fun hide() {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_CONVERSATION_NEXT)
+        playSe(AudioEvent.SE_CONVERSATION_NEXT)
         actionAfterHide?.let { hideWithAction(it) } ?: dialog.hide()
     }
 

@@ -5,11 +5,10 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.utils.ScreenUtils
 import nl.t64.cot.Utils
-import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.screenManager
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playSe
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.ParchmentScreen
 import nl.t64.cot.screens.ScreenUI
@@ -22,7 +21,7 @@ class StorageScreen : ParchmentScreen() {
 
     companion object {
         fun load() {
-            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_CHEST)
+            playSe(AudioEvent.SE_CHEST)
             screenManager.openParchmentLoadScreen(ScreenType.STORAGE)
         }
     }
@@ -75,7 +74,7 @@ class StorageScreen : ParchmentScreen() {
     private fun closeScreen() {
         Gdx.input.inputProcessor = null
         Utils.setGamepadInputProcessor(null)
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_CHEST)
+        playSe(AudioEvent.SE_CHEST)
         fadeParchment()
     }
 
@@ -96,38 +95,38 @@ class StorageScreen : ParchmentScreen() {
     }
 
     private fun selectPreviousHero() {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_CURSOR)
+        playSe(AudioEvent.SE_MENU_CURSOR)
         storageUI.updateSelectedHero { InventoryUtils.selectPreviousHero() }
     }
 
     private fun selectNextHero() {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_CURSOR)
+        playSe(AudioEvent.SE_MENU_CURSOR)
         storageUI.updateSelectedHero { InventoryUtils.selectNextHero() }
     }
 
     private fun selectPreviousTable() {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_CURSOR)
+        playSe(AudioEvent.SE_MENU_CURSOR)
         storageUI.selectPreviousTable()
     }
 
     private fun selectNextTable() {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_CURSOR)
+        playSe(AudioEvent.SE_MENU_CURSOR)
         storageUI.selectNextTable()
     }
 
     private fun sortStorage() {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_CONFIRM)
+        playSe(AudioEvent.SE_MENU_CONFIRM)
         gameData.storage.sort()
         storageUI.reloadInventory()
     }
 
     private fun toggleTooltip() {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_CONFIRM)
+        playSe(AudioEvent.SE_MENU_CONFIRM)
         storageUI.toggleTooltip()
     }
 
     private fun toggleCompare() {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_CONFIRM)
+        playSe(AudioEvent.SE_MENU_CONFIRM)
         storageUI.toggleCompare()
     }
 

@@ -11,11 +11,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
 import ktx.assets.disposeSafely
 import nl.t64.cot.Utils
-import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.Utils.screenManager
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playSe
+import nl.t64.cot.audio.stopAllSe
 import nl.t64.cot.constants.ScreenType
 
 
@@ -67,8 +67,8 @@ abstract class MenuScreen : Screen {
     }
 
     fun processBackButton() {
-        audioManager.handle(AudioCommand.SE_STOP_ALL)
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_BACK)
+        stopAllSe()
+        playSe(AudioEvent.SE_MENU_BACK)
         screenManager.getMenuScreen(backScreen).setBackground(background)
         screenManager.setScreen(backScreen)
     }

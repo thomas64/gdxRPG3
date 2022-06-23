@@ -5,9 +5,8 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.InputListener
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog
 import com.badlogic.gdx.scenes.scene2d.ui.List
-import nl.t64.cot.Utils.audioManager
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.quest.QuestGraph
 import nl.t64.cot.constants.Constant
 import kotlin.math.max
@@ -57,7 +56,7 @@ internal class QuestLogScreenListener(
     }
 
     private fun populateQuestSpecifics(quest: QuestGraph): Boolean {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_CURSOR)
+        playSe(AudioEvent.SE_MENU_CURSOR)
         populateQuestSpecifics.invoke(quest)
         return true
     }

@@ -1,10 +1,10 @@
 package nl.t64.cot.components.quest
 
-import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playSe
+import nl.t64.cot.audio.stopAllSe
 import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.components.party.XpRewarder
 
@@ -296,8 +296,8 @@ data class QuestGraph(
 
     private fun showMessageTooltipQuestCompleted() {
         if (!isHidden && !isSubQuest) {
-            audioManager.handle(AudioCommand.SE_STOP_ALL)
-            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_REWARD)
+            stopAllSe()
+            playSe(AudioEvent.SE_REWARD)
             brokerManager.messageObservers.notifyShowMessageTooltip("Quest completed:" + System.lineSeparator() + title)
         }
     }

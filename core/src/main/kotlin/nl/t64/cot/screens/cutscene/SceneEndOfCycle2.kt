@@ -4,10 +4,10 @@ import com.badlogic.gdx.scenes.scene2d.Action
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import nl.t64.cot.Utils
-import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.scenario
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playBgs
+import nl.t64.cot.audio.playSe
 import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.screens.world.entity.EntityState
 import kotlin.random.Random
@@ -54,7 +54,7 @@ class SceneEndOfCycle2 : CutsceneScreen() {
                 ylarus.isVisible = false
             },
             Actions.delay(1f),
-            Actions.run { audioManager.handle(AudioCommand.BGS_PLAY_LOOP, AudioEvent.BGS_QUAKE) },
+            Actions.run { playBgs(AudioEvent.BGS_QUAKE) },
 
             actionFadeIn(),
 
@@ -126,7 +126,7 @@ class SceneEndOfCycle2 : CutsceneScreen() {
                 mozes.direction = Direction.SOUTH
             },
             Actions.delay(1f),
-            Actions.run { audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_SAVE_GAME) },
+            Actions.run { playSe(AudioEvent.SE_SAVE_GAME) },
 
             actionFadeIn(),
 

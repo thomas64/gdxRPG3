@@ -1,8 +1,7 @@
 package nl.t64.cot.screens.inventory.equipslot
 
-import nl.t64.cot.Utils.audioManager
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playSe
 import nl.t64.cot.screens.inventory.itemslot.ItemSlot
 
 
@@ -46,7 +45,7 @@ internal class EquipSlotSelector(
     }
 
     private fun selectNewSlot(newSlot: ItemSlot) {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_CURSOR)
+        playSe(AudioEvent.SE_MENU_CURSOR)
         itemSlot.deselect()
         setNewSelected(newSlot)
     }

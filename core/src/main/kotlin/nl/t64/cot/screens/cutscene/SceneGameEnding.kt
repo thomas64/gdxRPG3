@@ -2,10 +2,9 @@ package nl.t64.cot.screens.cutscene
 
 import com.badlogic.gdx.scenes.scene2d.Action
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
-import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.screenManager
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playBgm
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.world.entity.Direction
@@ -42,7 +41,7 @@ class SceneGameEnding : CutsceneScreen() {
                 grace.isVisible = true
             },
             Actions.delay(2f),
-            Actions.run { audioManager.handle(AudioCommand.BGM_PLAY_ONCE, AudioEvent.BGM_VICTORY) },
+            Actions.run { playBgm(AudioEvent.BGM_VICTORY, false) },
             Actions.delay(1.7f),
 
             actionFadeIn(),
@@ -71,7 +70,7 @@ class SceneGameEnding : CutsceneScreen() {
         endCutsceneAnd {
             val mainMenu = screenManager.getMenuScreen(ScreenType.MENU_MAIN)
             mainMenu.processButton(ScreenType.MENU_CREDITS)
-            audioManager.handle(AudioCommand.BGM_PLAY_LOOP, AudioEvent.BGM_TITLE)
+            playBgm(AudioEvent.BGM_TITLE)
         }
     }
 

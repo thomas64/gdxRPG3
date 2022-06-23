@@ -5,13 +5,12 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.utils.ScreenUtils
 import nl.t64.cot.Utils
-import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.Utils.screenManager
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.party.inventory.InventoryDatabase
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.ParchmentScreen
@@ -28,7 +27,7 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
 
     companion object {
         fun load() {
-            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_SCROLL)
+            playSe(AudioEvent.SE_SCROLL)
             screenManager.openParchmentLoadScreen(ScreenType.INVENTORY)
         }
     }
@@ -102,7 +101,7 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
     private fun closeScreen() {
         Gdx.input.inputProcessor = null
         Utils.setGamepadInputProcessor(null)
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_SCROLL)
+        playSe(AudioEvent.SE_SCROLL)
         fadeParchment()
     }
 
@@ -111,22 +110,22 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
     }
 
     private fun selectPreviousHero() {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_CURSOR)
+        playSe(AudioEvent.SE_MENU_CURSOR)
         inventoryUI.updateSelectedHero { InventoryUtils.selectPreviousHero() }
     }
 
     private fun selectNextHero() {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_CURSOR)
+        playSe(AudioEvent.SE_MENU_CURSOR)
         inventoryUI.updateSelectedHero { InventoryUtils.selectNextHero() }
     }
 
     private fun selectPreviousTable() {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_CURSOR)
+        playSe(AudioEvent.SE_MENU_CURSOR)
         inventoryUI.selectPreviousTable()
     }
 
     private fun selectNextTable() {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_CURSOR)
+        playSe(AudioEvent.SE_MENU_CURSOR)
         inventoryUI.selectNextTable()
     }
 
@@ -146,18 +145,18 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
     }
 
     private fun sortInventory() {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_CONFIRM)
+        playSe(AudioEvent.SE_MENU_CONFIRM)
         gameData.inventory.sort()
         inventoryUI.reloadInventory()
     }
 
     private fun toggleTooltip() {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_CONFIRM)
+        playSe(AudioEvent.SE_MENU_CONFIRM)
         inventoryUI.toggleTooltip()
     }
 
     private fun toggleCompare() {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_CONFIRM)
+        playSe(AudioEvent.SE_MENU_CONFIRM)
         inventoryUI.toggleCompare()
     }
 
@@ -169,7 +168,7 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
                 && inventory.hasRoomForResource("spice")
                 && inventory.hasRoomForResource("gemstone")
             ) {
-                audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_ERROR)
+                playSe(AudioEvent.SE_MENU_ERROR)
                 gameData.party.gainXp(100, StringBuilder())
                 inventory.autoSetItem(InventoryDatabase.createInventoryItem("gold", 100))
                 inventory.autoSetItem(InventoryDatabase.createInventoryItem("herb", 100))
@@ -184,7 +183,7 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
         if (preferenceManager.isInDebugMode) {
             val inventory = gameData.inventory
             if (inventory.hasEnoughOfItem("gold", 1)) {
-                audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_ERROR)
+                playSe(AudioEvent.SE_MENU_ERROR)
                 gameData.party.getAllHeroesAlive().forEach { it.takeDamage(1) }
                 inventory.autoRemoveItem("gold", 1)
                 inventoryUI.reloadInventory()

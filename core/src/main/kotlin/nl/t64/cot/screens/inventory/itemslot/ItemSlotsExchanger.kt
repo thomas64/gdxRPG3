@@ -1,9 +1,8 @@
 package nl.t64.cot.screens.inventory.itemslot
 
-import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.gameData
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.party.inventory.InventoryDatabase
 import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.components.party.skills.SkillItemId
@@ -127,15 +126,15 @@ class ItemSlotsExchanger {
 
     private fun doAudio() {
         if (isShopPurchase()) {
-            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_COINS_BUY)
+            playSe(AudioEvent.SE_COINS_BUY)
         } else if (isShopBarter()) {
-            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_COINS_SELL)
+            playSe(AudioEvent.SE_COINS_SELL)
         } else if (isEquipingOrDequiping()) {
-            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_EQUIP)
+            playSe(AudioEvent.SE_EQUIP)
         } else if (isSameSlotOrBoxOrStorage()) {
-            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_TAKE)
+            playSe(AudioEvent.SE_TAKE)
         } else {
-            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_TAKE)
+            playSe(AudioEvent.SE_TAKE)
         }
     }
 

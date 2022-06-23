@@ -1,10 +1,10 @@
 package nl.t64.cot.components.party
 
-import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playSe
+import nl.t64.cot.audio.stopAllSe
 import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.components.party.spells.SpellDatabase
 import nl.t64.cot.components.party.spells.SpellItem
@@ -36,8 +36,8 @@ object SpellsRewarder {
     }
 
     private fun showMessageTooltipRewardSpells(spellItems: List<SpellItem>) {
-        audioManager.handle(AudioCommand.SE_STOP_ALL)
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_REWARD)
+        stopAllSe()
+        playSe(AudioEvent.SE_REWARD)
         val builder = StringBuilder()
         // todo, it only shows which spells and not how much ranks.
         spellItems.forEach { builder.appendLine("+ ${it.name}") }

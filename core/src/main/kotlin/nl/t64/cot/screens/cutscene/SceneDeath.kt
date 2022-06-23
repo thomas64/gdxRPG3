@@ -2,10 +2,10 @@ package nl.t64.cot.screens.cutscene
 
 import com.badlogic.gdx.scenes.scene2d.Action
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
-import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.screenManager
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playBgs
+import nl.t64.cot.audio.playSe
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.world.entity.Direction
@@ -42,7 +42,7 @@ class SceneDeath : CutsceneScreen() {
                 mozes.isVisible = true
             },
             Actions.delay(1f),
-            Actions.run { audioManager.handle(AudioCommand.BGS_PLAY_LOOP, AudioEvent.BGS_QUAKE) },
+            Actions.run { playBgs(AudioEvent.BGS_QUAKE) },
 
             actionFadeIn(),
 
@@ -65,7 +65,7 @@ class SceneDeath : CutsceneScreen() {
                 Actions.visible(false)
             ), mozes),
             Actions.delay(4.5f),
-            Actions.run { audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_DEATH_SCREAM) },
+            Actions.run { playSe(AudioEvent.SE_DEATH_SCREAM) },
             Actions.delay(4f),
 
             actionFadeOutWithoutBgmFading(),

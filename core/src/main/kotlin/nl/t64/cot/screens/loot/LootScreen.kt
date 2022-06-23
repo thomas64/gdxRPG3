@@ -4,9 +4,8 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.utils.ScreenUtils
 import nl.t64.cot.Utils
-import nl.t64.cot.Utils.audioManager
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.ParchmentScreen
@@ -44,7 +43,7 @@ abstract class LootScreen : ParchmentScreen() {
     protected fun closeScreen(fadeToScreen: ScreenType = ScreenType.WORLD) {
         Gdx.input.inputProcessor = null
         Utils.setGamepadInputProcessor(null)
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_CONVERSATION_NEXT)
+        playSe(AudioEvent.SE_CONVERSATION_NEXT)
         fadeParchment(fadeToScreen)
     }
 

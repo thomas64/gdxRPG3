@@ -8,10 +8,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.Window
 import com.badlogic.gdx.utils.ScreenUtils
 import nl.t64.cot.Utils
-import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.screenManager
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.quest.QuestGraph
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.ParchmentScreen
@@ -42,7 +41,7 @@ class QuestLogScreen : ParchmentScreen() {
 
     companion object {
         fun load() {
-            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_SCROLL)
+            playSe(AudioEvent.SE_SCROLL)
             screenManager.openParchmentLoadScreen(ScreenType.QUEST_LOG)
         }
     }
@@ -96,7 +95,7 @@ class QuestLogScreen : ParchmentScreen() {
     private fun closeScreen() {
         Gdx.input.inputProcessor = null
         Utils.setGamepadInputProcessor(null)
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_SCROLL)
+        playSe(AudioEvent.SE_SCROLL)
         fadeParchment()
     }
 

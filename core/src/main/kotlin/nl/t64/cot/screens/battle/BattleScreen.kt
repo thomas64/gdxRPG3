@@ -9,11 +9,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.ScreenUtils
 import nl.t64.cot.Utils
-import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.screenManager
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.battle.EnemyContainer
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
@@ -136,7 +135,7 @@ class BattleScreen : Screen {
 
     private fun fleeBattle() {
         if (!gameData.battles.isBattleEscapable(battleId)) {
-            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_ERROR)
+            playSe(AudioEvent.SE_MENU_ERROR)
             return
         }
 
@@ -155,7 +154,7 @@ class BattleScreen : Screen {
 
     private fun damageHero(index: Int) {
         if (gameData.party.contains(index - 1)) {
-            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_CONVERSATION_NEXT)
+            playSe(AudioEvent.SE_CONVERSATION_NEXT)
             val hero = gameData.party.getHero(index - 1)
             hero.takeDamage(20)
             if (!hero.isAlive) {

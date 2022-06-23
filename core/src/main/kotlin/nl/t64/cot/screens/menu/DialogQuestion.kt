@@ -10,10 +10,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle
 import com.badlogic.gdx.utils.Align
 import nl.t64.cot.Utils
-import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.resourceManager
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playSe
+import nl.t64.cot.audio.stopAllSe
 import nl.t64.cot.constants.Constant
 
 
@@ -45,7 +45,7 @@ class DialogQuestion(
     private var selectedIndex = 0
 
     fun show(stage: Stage, event: AudioEvent, startIndex: Int = EXIT_INDEX) {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, event)
+        playSe(event)
         show(stage, startIndex)
     }
 
@@ -75,8 +75,8 @@ class DialogQuestion(
     }
 
     private fun processNoButton() {
-        audioManager.handle(AudioCommand.SE_STOP_ALL)
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_BACK)
+        stopAllSe()
+        playSe(AudioEvent.SE_MENU_BACK)
         dialog.hide()
     }
 

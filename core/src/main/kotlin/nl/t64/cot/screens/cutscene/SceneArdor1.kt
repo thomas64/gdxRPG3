@@ -4,10 +4,11 @@ import com.badlogic.gdx.scenes.scene2d.Action
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import nl.t64.cot.Utils
-import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.screenManager
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playBgm
+import nl.t64.cot.audio.playSe
+import nl.t64.cot.audio.stopSe
 import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.battle.BattleScreen
@@ -87,7 +88,7 @@ class SceneArdor1 : CutsceneScreen() {
                 Actions.delay(1f),
                 Actions.run { showConversationDialog("mozes_finds_grace", "mozes") },
                 Actions.delay(1f),
-                Actions.run { audioManager.handle(AudioCommand.BGM_PLAY_LOOP, AudioEvent.BGM_ARDOR) }
+                Actions.run { playBgm(AudioEvent.BGM_ARDOR) }
             ), mozes)
         )
     }
@@ -141,7 +142,7 @@ class SceneArdor1 : CutsceneScreen() {
             Actions.addAction(Actions.sequence(
                 Actions.alpha(0f),
                 Actions.visible(true),
-                Actions.run { audioManager.handle(AudioCommand.SE_PLAY_LOOP, AudioEvent.SE_MAGIC) },
+                Actions.run { playSe(AudioEvent.SE_MAGIC, true) },
                 Actions.fadeIn(8f)
             ), magic),
             Actions.run { showConversationDialog("ardor_starts_to_pray", "ardor") }
@@ -172,7 +173,7 @@ class SceneArdor1 : CutsceneScreen() {
             Actions.addAction(Actions.sequence(
                 Actions.delay(3f),
                 Actions.run { isBgmFading = true },
-                Actions.run { audioManager.handle(AudioCommand.SE_STOP, AudioEvent.SE_MAGIC) },
+                Actions.run { stopSe(AudioEvent.SE_MAGIC) },
                 Actions.fadeOut(1f)
             ), magic),
             Actions.addAction(Actions.sequence(
@@ -216,7 +217,7 @@ class SceneArdor1 : CutsceneScreen() {
     }
 
     override fun exitScreen() {
-        audioManager.handle(AudioCommand.SE_STOP, AudioEvent.SE_MAGIC)
+        stopSe(AudioEvent.SE_MAGIC)
         endCutsceneAnd { BattleScreen.load("ardor_orc_generals", this) }
     }
 

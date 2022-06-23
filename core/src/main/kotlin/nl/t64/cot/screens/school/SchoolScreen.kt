@@ -4,10 +4,9 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.utils.ScreenUtils
 import nl.t64.cot.Utils
-import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.screenManager
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playSe
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.ParchmentScreen
 import nl.t64.cot.screens.academy.AcademyButtonLabels
@@ -23,7 +22,7 @@ class SchoolScreen : ParchmentScreen() {
 
     companion object {
         fun load(npcId: String, schoolId: String) {
-            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_SCROLL)
+            playSe(AudioEvent.SE_SCROLL)
             val schoolScreen = screenManager.getScreen(ScreenType.SCHOOL) as SchoolScreen
             schoolScreen.npcId = npcId
             schoolScreen.schoolId = schoolId
@@ -65,7 +64,7 @@ class SchoolScreen : ParchmentScreen() {
     private fun closeScreen() {
         Gdx.input.inputProcessor = null
         Utils.setGamepadInputProcessor(null)
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_SCROLL)
+        playSe(AudioEvent.SE_SCROLL)
         fadeParchment()
     }
 
@@ -74,27 +73,27 @@ class SchoolScreen : ParchmentScreen() {
     }
 
     private fun selectPreviousHero() {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_CURSOR)
+        playSe(AudioEvent.SE_MENU_CURSOR)
         schoolUI.updateSelectedHero { InventoryUtils.selectPreviousHero() }
     }
 
     private fun selectNextHero() {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_CURSOR)
+        playSe(AudioEvent.SE_MENU_CURSOR)
         schoolUI.updateSelectedHero { InventoryUtils.selectNextHero() }
     }
 
     private fun selectPreviousTable() {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_CURSOR)
+        playSe(AudioEvent.SE_MENU_CURSOR)
         schoolUI.selectPreviousTable()
     }
 
     private fun selectNextTable() {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_CURSOR)
+        playSe(AudioEvent.SE_MENU_CURSOR)
         schoolUI.selectNextTable()
     }
 
     private fun toggleTooltip() {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_CONFIRM)
+        playSe(AudioEvent.SE_MENU_CONFIRM)
         schoolUI.toggleTooltip()
     }
 

@@ -10,13 +10,12 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import nl.t64.cot.Utils
-import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.Utils.profileManager
 import nl.t64.cot.Utils.screenManager
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.GameState
@@ -368,17 +367,17 @@ class WorldScreen : Screen,
 
     private fun openMiniMap() {
         if (camera.zoom()) {
-            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MINIMAP)
+            playSe(AudioEvent.SE_MINIMAP)
             gameState = GameState.MINIMAP
             multiplexer.removeProcessor(0)
             multiplexer.addProcessor(0, MiniMapListener { closeMiniMap() })
         } else {
-            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_ERROR)
+            playSe(AudioEvent.SE_MENU_ERROR)
         }
     }
 
     private fun closeMiniMap() {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MINIMAP)
+        playSe(AudioEvent.SE_MINIMAP)
         gameState = GameState.RUNNING
         multiplexer.removeProcessor(0)
         multiplexer.addProcessor(0, createListener())

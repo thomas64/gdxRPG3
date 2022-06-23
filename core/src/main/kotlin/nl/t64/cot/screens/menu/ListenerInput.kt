@@ -1,8 +1,7 @@
 package nl.t64.cot.screens.menu
 
-import nl.t64.cot.Utils.audioManager
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playSe
 
 
 private const val NO_MENU_INDEX = 0
@@ -43,10 +42,10 @@ internal class ListenerInput {
         if (numberOfItems == 0) return
 
         if (selectedIndex <= 0) {
-            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_ERROR)
+            playSe(AudioEvent.SE_MENU_ERROR)
             selectedIndex = 0
         } else {
-            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_CURSOR)
+            playSe(AudioEvent.SE_MENU_CURSOR)
             selectedIndex -= 1
         }
         updateIndexFunction.invoke(selectedIndex)
@@ -56,28 +55,28 @@ internal class ListenerInput {
         if (numberOfItems == 0) return
 
         if (selectedIndex >= numberOfItems - 1) {
-            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_ERROR)
+            playSe(AudioEvent.SE_MENU_ERROR)
             selectedIndex = numberOfItems - 1
         } else {
-            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_CURSOR)
+            playSe(AudioEvent.SE_MENU_CURSOR)
             selectedIndex += 1
         }
         updateIndexFunction.invoke(selectedIndex)
     }
 
     fun inputConfirm() {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_CONFIRM)
+        playSe(AudioEvent.SE_MENU_CONFIRM)
         selectItemFunction.invoke()
     }
 
     fun inputCancel() {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_BACK)
+        playSe(AudioEvent.SE_MENU_BACK)
         updateIndexFunction.invoke(definedIndex)
         selectItemFunction.invoke()
     }
 
     fun inputConfirmDefinedIndex() {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_CONFIRM)
+        playSe(AudioEvent.SE_MENU_CONFIRM)
         updateIndexFunction.invoke(definedIndex)
         selectItemFunction.invoke()
     }

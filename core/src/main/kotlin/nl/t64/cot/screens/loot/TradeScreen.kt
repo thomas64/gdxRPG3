@@ -1,9 +1,8 @@
 package nl.t64.cot.screens.loot
 
-import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.screenManager
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.conversation.ConversationGraph
 import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.constants.Constant
@@ -16,7 +15,7 @@ class TradeScreen : LootScreen() {
 
     companion object {
         fun load(trade: Loot, conversation: ConversationGraph) {
-            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_SPARKLE)
+            playSe(AudioEvent.SE_SPARKLE)
             val tradeScreen = screenManager.getScreen(ScreenType.TRADE) as TradeScreen
             tradeScreen.loot = trade
             tradeScreen.lootTitle = "   Exchange"

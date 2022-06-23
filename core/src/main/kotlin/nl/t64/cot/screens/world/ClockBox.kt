@@ -7,12 +7,12 @@ import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.utils.Align
 import nl.t64.cot.Utils
-import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.resourceManager
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playBgs
+import nl.t64.cot.audio.stopBgs
 import nl.t64.cot.constants.Constant
 
 
@@ -54,15 +54,15 @@ internal class ClockBox {
 
     private fun handleWarning() {
         if (gameData.clock.isWarning()) {
-            audioManager.handle(AudioCommand.BGS_PLAY_LOOP, AudioEvent.BGS_END)
+            playBgs(AudioEvent.BGS_END)
         } else {
-            audioManager.handle(AudioCommand.BGS_STOP, AudioEvent.BGS_END)
+            stopBgs(AudioEvent.BGS_END)
         }
     }
 
     private fun handleEnding() {
         if (gameData.clock.isFinished()) {
-            audioManager.handle(AudioCommand.BGS_STOP, AudioEvent.BGS_END)
+            stopBgs(AudioEvent.BGS_END)
             brokerManager.mapObservers.notifyStartCutscene("scene_death", 1f)
         }
     }

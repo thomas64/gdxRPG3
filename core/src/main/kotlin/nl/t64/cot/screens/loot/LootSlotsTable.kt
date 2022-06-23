@@ -2,9 +2,8 @@ package nl.t64.cot.screens.loot
 
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.Table
-import nl.t64.cot.Utils.audioManager
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.components.party.inventory.InventoryContainer
 import nl.t64.cot.components.party.inventory.InventoryDatabase
@@ -70,7 +69,7 @@ class LootSlotsTable(
     }
 
     private fun toggleTooltip() {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_CONFIRM)
+        playSe(AudioEvent.SE_MENU_CONFIRM)
         tooltip.toggle(selector.getCurrentSlot())
     }
 

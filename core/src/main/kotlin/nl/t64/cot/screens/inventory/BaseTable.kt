@@ -9,10 +9,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Scaling
-import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.resourceManager
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.PersonalityItem
 import nl.t64.cot.constants.Constant
@@ -80,7 +79,7 @@ abstract class BaseTable(private val tooltip: PersonalityTooltip) : WindowSelect
             selectedIndex = 0
         }
         setHasJustUpdate(true)
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_CURSOR)
+        playSe(AudioEvent.SE_MENU_CURSOR)
     }
 
     fun update() {

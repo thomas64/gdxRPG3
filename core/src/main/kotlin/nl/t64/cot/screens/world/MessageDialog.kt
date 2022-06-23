@@ -13,10 +13,9 @@ import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Null
 import ktx.assets.disposeSafely
 import nl.t64.cot.Utils
-import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.resourceManager
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playSe
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.inventory.messagedialog.MessageDialogListener
 
@@ -55,7 +54,7 @@ class MessageDialog(private val multiplexer: InputMultiplexer) {
 
     fun show(message: String, audioEvent: AudioEvent) {
         fillDialog(message)
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, audioEvent)
+        playSe(audioEvent)
         dialog.show(stage)
         Gdx.input.inputProcessor = stage
         Utils.setGamepadInputProcessor(stage)
@@ -91,7 +90,7 @@ class MessageDialog(private val multiplexer: InputMultiplexer) {
     private fun hide() {
         Gdx.input.inputProcessor = multiplexer
         Utils.setGamepadInputProcessor(multiplexer)
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_CONVERSATION_NEXT)
+        playSe(AudioEvent.SE_CONVERSATION_NEXT)
         actionAfterHide?.let { hideWithAction(it) } ?: dialog.hide()
     }
 

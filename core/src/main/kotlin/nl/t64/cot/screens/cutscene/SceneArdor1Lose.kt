@@ -6,10 +6,11 @@ import com.badlogic.gdx.scenes.scene2d.Actor
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import nl.t64.cot.Utils
-import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.scenario
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playBgs
+import nl.t64.cot.audio.playSe
+import nl.t64.cot.audio.stopSe
 import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.screens.world.entity.EntityState
 import nl.t64.cot.sfx.TransitionAction
@@ -122,7 +123,7 @@ class SceneArdor1Lose : CutsceneScreen() {
                 Actions.alpha(0f),
                 Actions.visible(true),
                 Actions.delay(1f),
-                Actions.run { audioManager.handle(AudioCommand.SE_PLAY_LOOP, AudioEvent.SE_MAGIC) },
+                Actions.run { playSe(AudioEvent.SE_MAGIC, true) },
                 Actions.fadeIn(8f)
             ), magic),
             Actions.addAction(Actions.sequence(
@@ -143,7 +144,7 @@ class SceneArdor1Lose : CutsceneScreen() {
                 Actions.alpha(0f),
                 Actions.visible(true),
                 Actions.delay(0.5f),
-                Actions.run { audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MAGIC_BANG) },
+                Actions.run { playSe(AudioEvent.SE_MAGIC_BANG) },
                 Actions.parallel(
                     Actions.repeat(6, Actions.sequence(
                         Actions.addAction(TransitionAction(TransitionType.FADE_OUT, 0.05f), bloodFlash),
@@ -164,8 +165,8 @@ class SceneArdor1Lose : CutsceneScreen() {
 
     private fun everythingWentWrong(): Action {
         return Actions.sequence(
-            Actions.run { audioManager.handle(AudioCommand.SE_STOP, AudioEvent.SE_MAGIC) },
-            Actions.run { audioManager.handle(AudioCommand.BGS_PLAY_LOOP, AudioEvent.BGS_QUAKE) },
+            Actions.run { stopSe(AudioEvent.SE_MAGIC) },
+            Actions.run { playBgs(AudioEvent.BGS_QUAKE) },
             Actions.addAction(Actions.sequence(
                 Actions.delay(4.5f),
                 Actions.run { ardor.entityState = EntityState.WALKING },
@@ -191,8 +192,8 @@ class SceneArdor1Lose : CutsceneScreen() {
 
     private fun everythingWentWrongWithoutGuards(): Action {
         return Actions.sequence(
-            Actions.run { audioManager.handle(AudioCommand.SE_STOP, AudioEvent.SE_MAGIC) },
-            Actions.run { audioManager.handle(AudioCommand.BGS_PLAY_LOOP, AudioEvent.BGS_QUAKE) },
+            Actions.run { stopSe(AudioEvent.SE_MAGIC) },
+            Actions.run { playBgs(AudioEvent.BGS_QUAKE) },
             Actions.addAction(Actions.sequence(
                 Actions.delay(4.5f),
                 Actions.run { ardor.entityState = EntityState.WALKING },
@@ -261,7 +262,7 @@ class SceneArdor1Lose : CutsceneScreen() {
                 mozes.direction = Direction.SOUTH
             },
             Actions.delay(1f),
-            Actions.run { audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_SAVE_GAME) },
+            Actions.run { playSe(AudioEvent.SE_SAVE_GAME) },
 
             actionFadeIn(),
 
@@ -290,7 +291,7 @@ class SceneArdor1Lose : CutsceneScreen() {
     }
 
     override fun exitScreen() {
-        audioManager.handle(AudioCommand.SE_STOP, AudioEvent.SE_MAGIC)
+        stopSe(AudioEvent.SE_MAGIC)
         endCutsceneAndOpenMapAnd("honeywood_house_mozes") { scenario.startSecondCycle() }
     }
 

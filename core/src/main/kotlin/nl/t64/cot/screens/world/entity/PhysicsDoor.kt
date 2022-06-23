@@ -1,11 +1,10 @@
 package nl.t64.cot.screens.world.entity
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
-import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.mapManager
-import nl.t64.cot.audio.AudioCommand
+import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.door.Door
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.world.entity.events.Event
@@ -74,7 +73,7 @@ class PhysicsDoor(private val door: Door) : PhysicsComponent() {
     }
 
     private fun openDoor(entity: Entity) {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, door.audio)
+        playSe(door.audio)
         door.open()
         entity.send(StateEvent(EntityState.OPENED))
         brokerManager.blockObservers.removeObserver(entity)

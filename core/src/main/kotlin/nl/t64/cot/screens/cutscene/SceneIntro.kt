@@ -2,10 +2,11 @@ package nl.t64.cot.screens.cutscene
 
 import com.badlogic.gdx.scenes.scene2d.Action
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
-import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.mapManager
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playBgm
+import nl.t64.cot.audio.playSe
+import nl.t64.cot.audio.stopAllBgm
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.screens.world.entity.EntityState
@@ -91,7 +92,7 @@ class SceneIntro : CutsceneScreen() {
                 Actions.delay(5f),
                 Actions.run {
                     door1.entityState = EntityState.OPENED
-                    audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_SMALL_DOOR)
+                    playSe(AudioEvent.SE_SMALL_DOOR)
                 }
             ), door1),
             Actions.addAction(Actions.sequence(
@@ -185,8 +186,8 @@ class SceneIntro : CutsceneScreen() {
             Actions.delay(2f),
             Actions.addAction(Actions.alpha(0.7f), transition),
             Actions.run {
-                audioManager.handle(AudioCommand.BGM_STOP, AudioEvent.BGM_HOUSE)
-                audioManager.handle(AudioCommand.BGM_PLAY_LOOP, AudioEvent.BGM_CELLAR)
+                stopAllBgm()
+                playBgm(AudioEvent.BGM_CELLAR)
             },
             Actions.addAction(Actions.sequence(
                 Actions.delay(5f),
@@ -208,7 +209,7 @@ class SceneIntro : CutsceneScreen() {
                 Actions.delay(0.5f),
                 Actions.run { grace.entityState = EntityState.WALKING },
                 Actions.moveBy(-48f, -360f, 7f),
-                Actions.run { audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_SMALL_DOOR) },
+                Actions.run { playSe(AudioEvent.SE_SMALL_DOOR) },
                 Actions.delay(3f),
                 Actions.visible(false)
             ), grace),
@@ -218,7 +219,7 @@ class SceneIntro : CutsceneScreen() {
 
             Actions.delay(1f),
             Actions.run {
-                audioManager.handle(AudioCommand.BGM_PLAY_LOOP, AudioEvent.BGM_HOUSE)
+                playBgm(AudioEvent.BGM_HOUSE)
                 mozes.setPosition(192f, 534f)
                 followActor(mozes)
             },
@@ -241,11 +242,11 @@ class SceneIntro : CutsceneScreen() {
     private fun startToSearch(): Action {
         return Actions.sequence(
             Actions.run { isBgmFading = false },
-            Actions.run { audioManager.handle(AudioCommand.BGM_PLAY_LOOP, AudioEvent.BGM_TENSION) },
+            Actions.run { playBgm(AudioEvent.BGM_TENSION) },
             Actions.addAction(Actions.sequence(
                 Actions.run { mozes.direction = Direction.NORTH },
                 Actions.delay(0.5f),
-                Actions.run { audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_CHEST) },
+                Actions.run { playSe(AudioEvent.SE_CHEST) },
                 Actions.delay(2f),
                 Actions.parallel(
                     Actions.sequence(
@@ -253,7 +254,7 @@ class SceneIntro : CutsceneScreen() {
                         Actions.run { mozes.entityState = EntityState.RUNNING },
                         Actions.moveBy(0f, -72f, 0.5f),
                         Actions.moveBy(-48f, -400f, 2f),
-                        Actions.run { audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_SMALL_DOOR) },
+                        Actions.run { playSe(AudioEvent.SE_SMALL_DOOR) },
                         Actions.moveBy(0f, -20f, 0.1f)
                     ),
                     actionWalkSound(mozes, 2.6f, FAST_STEP)
@@ -370,7 +371,7 @@ class SceneIntro : CutsceneScreen() {
             Actions.addAction(Actions.sequence(
                 Actions.delay(1.3f),
                 Actions.run { isBgmFading = true },
-                Actions.run { audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_BANG) },
+                Actions.run { playSe(AudioEvent.SE_BANG) },
                 Actions.delay(0.5f),
                 Actions.run { camera.startShaking() },
                 Actions.run { mapManager.updateConditionLayers() },

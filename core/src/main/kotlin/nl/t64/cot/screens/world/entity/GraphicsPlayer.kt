@@ -4,11 +4,10 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Vector2
-import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.mapManager
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playSe
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.world.entity.events.*
 
@@ -108,7 +107,7 @@ class GraphicsPlayer : GraphicsComponent() {
         if (moveSpeed != Constant.MOVE_SPEED_1) {
             val offsetFeetPosition: Vector2 = getOffsetFeetPosition()
             val audio: AudioEvent = mapManager.getGroundSound(offsetFeetPosition)
-            audioManager.handle(AudioCommand.SE_PLAY_ONCE, audio)
+            playSe(audio)
         }
     }
 

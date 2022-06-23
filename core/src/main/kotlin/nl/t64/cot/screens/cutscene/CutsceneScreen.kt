@@ -17,7 +17,8 @@ import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.Utils.screenManager
-import nl.t64.cot.audio.AudioCommand
+import nl.t64.cot.audio.playSe
+import nl.t64.cot.audio.stopAllBgm
 import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
@@ -70,7 +71,7 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
         actionId = 0
         isEnding = false
 
-        audioManager.handle(AudioCommand.BGM_STOP_ALL)
+        stopAllBgm()
 
         title.setText("")
         title.clearActions()
@@ -288,13 +289,11 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
     }
 
     fun actionWalkSound(actor: CutsceneActor, duration: Float, stepSpeed: Float): Action {
-        return Actions.repeat(
-            (duration / stepSpeed).toInt(), Actions.sequence(
-                Actions.run {
-                    audioManager.handle(AudioCommand.SE_PLAY_ONCE, mapManager.getGroundSound(actor.x, actor.y))
-                },
-                Actions.delay(stepSpeed)
-            ))
+        val nTimes = (duration / stepSpeed).toInt()
+        return Actions.repeat(nTimes, Actions.sequence(
+            Actions.run { playSe(mapManager.getGroundSound(actor.x, actor.y)) },
+            Actions.delay(stepSpeed)
+        ))
     }
 
 }

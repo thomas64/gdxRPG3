@@ -11,8 +11,8 @@ import nl.t64.cot.Utils.createScreenshot
 import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.Utils.screenManager
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playSe
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 
@@ -40,7 +40,7 @@ class MenuPause : MenuScreen() {
 
     companion object {
         fun load() {
-            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_CONFIRM)
+            playSe(AudioEvent.SE_MENU_CONFIRM)
             val menuPause = screenManager.getMenuScreen(ScreenType.MENU_PAUSE)
             menuPause.setBackground(createScreenshot(true))
             screenManager.setScreen(ScreenType.MENU_PAUSE)

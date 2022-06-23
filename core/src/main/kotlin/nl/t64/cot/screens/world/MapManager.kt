@@ -12,9 +12,7 @@ import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.profileManager
 import nl.t64.cot.Utils.resourceManager
-import nl.t64.cot.audio.AudioCommand
-import nl.t64.cot.audio.AudioEvent
-import nl.t64.cot.audio.toAudioEvent
+import nl.t64.cot.audio.*
 import nl.t64.cot.components.cutscene.CutsceneId
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.world.entity.Direction
@@ -106,7 +104,7 @@ class MapManager : ProfileObserver {
     }
 
     fun useCrystal() {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_RESET)
+        playSe(AudioEvent.SE_RESET)
         val actionAfterFade = {
             gameData.resetCycle()
             val mapTitle = "honeywood_house_mozes"
@@ -119,7 +117,7 @@ class MapManager : ProfileObserver {
     }
 
     fun checkWarpPoint(warpPoint: GameMapWarpPoint, playerDirection: Direction) {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_WARP)
+        playSe(AudioEvent.SE_WARP)
         nextMapTitle = warpPoint.toMapName
         brokerManager.mapObservers.notifyFadeOut(
             { changeMapWithCameraShake(warpPoint, playerDirection) }, warpPoint.fadeColor
@@ -151,8 +149,8 @@ class MapManager : ProfileObserver {
 
     fun continueAudio() {
         if (isMapLoaded) {
-            audioManager.handle(AudioCommand.BGM_PLAY_LOOP, currentMap.bgm)
-            audioManager.handle(AudioCommand.BGS_PLAY_LOOP, currentMap.bgs)
+            playBgm(currentMap.bgm)
+            playBgs(currentMap.bgs)
         }
     }
 

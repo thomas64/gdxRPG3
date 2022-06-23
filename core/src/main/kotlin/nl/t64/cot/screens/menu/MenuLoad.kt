@@ -19,8 +19,9 @@ import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.Utils.profileManager
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.Utils.screenManager
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playSe
+import nl.t64.cot.audio.stopSe
 import nl.t64.cot.components.cutscene.CutsceneId
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
@@ -160,8 +161,8 @@ abstract class MenuLoad : MenuScreen() {
     }
 
     fun errorSound() {
-        audioManager.handle(AudioCommand.SE_STOP, AudioEvent.SE_MENU_CONFIRM)
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_ERROR)
+        stopSe(AudioEvent.SE_MENU_CONFIRM)
+        playSe(AudioEvent.SE_MENU_ERROR)
     }
 
     fun fadeBeforeOpenWorldScreen() {

@@ -1,9 +1,8 @@
 package nl.t64.cot.screens.inventory
 
 import com.badlogic.gdx.scenes.scene2d.Stage
-import nl.t64.cot.Utils.audioManager
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.stopAllSe
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.stats.StatItem
 import nl.t64.cot.screens.inventory.messagedialog.MessageDialog
@@ -53,7 +52,7 @@ class StatUpgrader private constructor(
     }
 
     private fun showConfirmMessage() {
-        audioManager.handle(AudioCommand.SE_STOP_ALL)
+        stopAllSe()
         MessageDialog("""
                 ${statToUpgrade.name}:
                 ${statToUpgrade.rank - 1} -> ${statToUpgrade.rank}""".trimIndent())

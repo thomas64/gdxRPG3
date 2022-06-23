@@ -1,10 +1,9 @@
 package nl.t64.cot.screens.school
 
 import com.badlogic.gdx.scenes.scene2d.Stage
-import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.gameData
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.stopAllSe
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.components.party.spells.SchoolType
@@ -77,7 +76,7 @@ class SpellUpgrader private constructor(
     }
 
     private fun showConfirmMessage() {
-        audioManager.handle(AudioCommand.SE_STOP_ALL)
+        stopAllSe()
         MessageDialog("""
                 ${spellToUpgrade.name}:
                 ${spellToUpgrade.rank - 1} -> ${spellToUpgrade.rank}""".trimIndent())

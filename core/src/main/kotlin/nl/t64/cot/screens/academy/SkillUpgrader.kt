@@ -1,10 +1,9 @@
 package nl.t64.cot.screens.academy
 
 import com.badlogic.gdx.scenes.scene2d.Stage
-import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.gameData
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.stopAllSe
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.skills.SkillItem
 import nl.t64.cot.components.party.skills.SkillItemId
@@ -64,7 +63,7 @@ class SkillUpgrader private constructor(
     }
 
     private fun showConfirmMessage() {
-        audioManager.handle(AudioCommand.SE_STOP_ALL)
+        stopAllSe()
         MessageDialog("""
                 ${skillToUpgrade.name}:
                 ${skillToUpgrade.rank - 1} -> ${skillToUpgrade.rank}""".trimIndent())

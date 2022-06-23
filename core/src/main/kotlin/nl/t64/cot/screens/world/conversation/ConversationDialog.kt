@@ -17,12 +17,12 @@ import com.badlogic.gdx.utils.Align
 import ktx.assets.disposeSafely
 import ktx.collections.GdxArray
 import nl.t64.cot.Utils
-import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.profileManager
-import nl.t64.cot.audio.AudioCommand
+import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.conversation.ConversationChoice
 import nl.t64.cot.components.conversation.ConversationCommand
 import nl.t64.cot.components.conversation.ConversationGraph
@@ -93,7 +93,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         faceId = entityId
         graph = gameData.conversations.getConversationById(conversationId)
         fillDialogForConversation()
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_CONVERSATION_START)
+        playSe(AudioEvent.SE_CONVERSATION_START)
         populateConversationDialog(graph.currentPhraseId)
         applyListeners()
     }
@@ -101,7 +101,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     fun loadNote(noteId: String) {
         graph = getNoteById(noteId)
         fillDialogForNote()
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_CONVERSATION_START)
+        playSe(AudioEvent.SE_CONVERSATION_START)
         populateConversationDialog(graph.currentPhraseId)
         applyListeners()
     }
@@ -147,7 +147,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     private fun selectAnswer() {
         val selectedAnswer = answers.selected
         if (!selectedAnswer.isMeetingCondition()) {
-            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_ERROR)
+            playSe(AudioEvent.SE_MENU_ERROR)
             return
         }
         val nextId = selectedAnswer.nextId
@@ -193,7 +193,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun addHeroToParty(nextId: String) {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_JOIN)
+        playSe(AudioEvent.SE_JOIN)
         val newHero = gameData.heroes.getCertainHero(faceId)
         gameData.heroes.removeHero(faceId)
         gameData.party.addHero(newHero)
@@ -202,7 +202,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun dismissHero(nextId: String) {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_CONVERSATION_END)
+        playSe(AudioEvent.SE_CONVERSATION_END)
         endConversationWithoutSound(nextId)
         conversationObserver.notifyHeroDismiss()
     }
@@ -223,7 +223,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun saveGame(nextId: String) {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_SAVE_GAME)
+        playSe(AudioEvent.SE_SAVE_GAME)
         endConversation(nextId)
         profileManager.saveProfile()
     }
@@ -238,7 +238,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
                 return
             }
         } else {
-            audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_RESTORE)
+            playSe(AudioEvent.SE_RESTORE)
         }
         delayInputListeners()
         gameData.party.recoverFullHp()
@@ -248,9 +248,9 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     private fun pay(price: Int) {
         gameData.inventory.autoRemoveItem("gold", price)
         stage.addAction(Actions.sequence(
-            Actions.run { audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_COINS_BUY) },
+            Actions.run { playSe(AudioEvent.SE_COINS_BUY) },
             Actions.delay(1f),
-            Actions.run { audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_RESTORE) }
+            Actions.run { playSe(AudioEvent.SE_RESTORE) }
         ))
     }
 
@@ -359,7 +359,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun continueConversation(nextId: String) {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_CONVERSATION_NEXT)
+        playSe(AudioEvent.SE_CONVERSATION_NEXT)
         continueConversationWithoutSound(nextId)
     }
 
@@ -368,7 +368,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun endConversation(nextId: String) {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_CONVERSATION_END)
+        playSe(AudioEvent.SE_CONVERSATION_END)
         endConversationWithoutSound(nextId)
     }
 
@@ -385,7 +385,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun endConversationAndLoad(lootScreen: () -> Unit) {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_CONVERSATION_END)
+        playSe(AudioEvent.SE_CONVERSATION_END)
         stage.addAction(Actions.sequence(Actions.run { hideWithFade() },
                                          Actions.delay(Constant.DIALOG_FADE_OUT_DURATION),
                                          Actions.run { lootScreen.invoke() }))
@@ -475,7 +475,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun createFont(): BitmapFont {
-        return Utils.resourceManager.getTrueTypeAsset(FONT, FONT_SIZE)
+        return resourceManager.getTrueTypeAsset(FONT, FONT_SIZE)
             .apply { data.setLineHeight(LINE_HEIGHT) }
     }
 

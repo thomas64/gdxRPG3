@@ -1,9 +1,8 @@
 package nl.t64.cot.screens.inventory.itemslot
 
 import com.badlogic.gdx.scenes.scene2d.ui.Table
-import nl.t64.cot.Utils.audioManager
-import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.party.inventory.InventoryContainer
 
 
@@ -39,7 +38,7 @@ class ItemSlotSelector(
     }
 
     fun selectNewSlot(deltaIndex: Int) {
-        audioManager.handle(AudioCommand.SE_PLAY_ONCE, AudioEvent.SE_MENU_CURSOR)
+        playSe(AudioEvent.SE_MENU_CURSOR)
         itemSLot.deselect()
         val newSelectedIndex = calculateNewSelectedIndex(deltaIndex)
         setNewSelectedByIndex(newSelectedIndex)

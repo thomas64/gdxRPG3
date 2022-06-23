@@ -3,12 +3,53 @@ package nl.t64.cot.audio
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.audio.Music
 import com.badlogic.gdx.audio.Sound
+import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.constants.Constant
 import java.util.*
 import kotlin.math.max
 
+
+fun playSe(audioEvent: AudioEvent, isLooping: Boolean = false) {
+    if (isLooping) {
+        audioManager.handle(AudioCommand.SE_PLAY_LOOP, audioEvent)
+    } else {
+        audioManager.handle(AudioCommand.SE_PLAY_ONCE, audioEvent)
+    }
+}
+
+fun stopSe(audioEvent: AudioEvent) {
+    audioManager.handle(AudioCommand.SE_STOP, audioEvent)
+}
+
+fun stopAllSe() {
+    audioManager.handle(AudioCommand.SE_STOP_ALL)
+}
+
+fun playBgm(audioEvent: AudioEvent, isLooping: Boolean = true) {
+    if (isLooping) {
+        audioManager.handle(AudioCommand.BGM_PLAY_LOOP, audioEvent)
+    } else {
+        audioManager.handle(AudioCommand.BGM_PLAY_ONCE, audioEvent)
+    }
+}
+
+fun stopAllBgm() {
+    audioManager.handle(AudioCommand.BGM_STOP_ALL)
+}
+
+fun playBgs(audioEvents: List<AudioEvent>) {
+    audioEvents.forEach { playBgs(it) }
+}
+
+fun playBgs(audioEvent: AudioEvent) {
+    audioManager.handle(AudioCommand.BGS_PLAY_LOOP, audioEvent)
+}
+
+fun stopBgs(audioEvent: AudioEvent) {
+    audioManager.handle(AudioCommand.BGS_STOP, audioEvent)
+}
 
 private const val BGM_VOLUME = 0.1f
 
@@ -62,10 +103,6 @@ class AudioManager {
     fun certainBgsSwitch(nextBgs: List<AudioEvent>) {
         handle(AudioCommand.BGS_STOP_ALL)
         nextBgs.forEach { handle(AudioCommand.BGS_PLAY_LOOP, it) }
-    }
-
-    fun handle(command: AudioCommand, events: List<AudioEvent>) {
-        events.forEach { handle(command, it) }
     }
 
     fun handle(command: AudioCommand, event: AudioEvent) {
