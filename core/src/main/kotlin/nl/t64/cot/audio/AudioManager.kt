@@ -6,18 +6,18 @@ import com.badlogic.gdx.audio.Sound
 import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.constants.Constant
+import java.util.*
 import kotlin.math.max
 
 
 private const val BGM_VOLUME = 0.1f
-private const val BGS_VOLUME = 0.2f
 
 class AudioManager {
 
-    private val queuedBgm: MutableMap<String, Music> = HashMap()
-    private val queuedBgs: MutableMap<String, Music> = HashMap()
-    private val queuedMe: MutableMap<String, Sound> = HashMap()
-    private val queuedSe: MutableMap<String, Sound> = HashMap()
+    private val queuedBgm: EnumMap<AudioEvent, Music> = EnumMap(AudioEvent::class.java)
+    private val queuedBgs: EnumMap<AudioEvent, Music> = EnumMap(AudioEvent::class.java)
+    private val queuedMe: EnumMap<AudioEvent, Sound> = EnumMap(AudioEvent::class.java)
+    private val queuedSe: EnumMap<AudioEvent, Sound> = EnumMap(AudioEvent::class.java)
 
     fun possibleBgmFade(currentBgm: AudioEvent, newBgm: AudioEvent) {
         if (currentBgm != newBgm) {
@@ -29,16 +29,21 @@ class AudioManager {
         currentBgs
             .filter { it != AudioEvent.NONE }
             .filter { !newBgs.contains(it) }
-            .forEach { fade(queuedBgs[it.filePath]!!, BGS_VOLUME) }
+            .forEach { fade(queuedBgs[it]!!, it.volume) }
+    }
+
+    fun certainFadeBgmBgs() {
+        queuedBgm.values.forEach { fade(it, BGM_VOLUME) }
+        queuedBgs.forEach { fade(it.value, it.key.volume) }
     }
 
     fun possibleBgmSwitch(prevBgm: AudioEvent, nextBgm: AudioEvent) {
         if (prevBgm != nextBgm) {
-            bgmSwitch(nextBgm)
+            certainBgmSwitch(nextBgm)
         }
     }
 
-    fun bgmSwitch(nextBgm: AudioEvent) {
+    fun certainBgmSwitch(nextBgm: AudioEvent) {
         handle(AudioCommand.BGM_STOP_ALL)
         handle(AudioCommand.BGM_PLAY_LOOP, nextBgm)
     }
@@ -54,14 +59,9 @@ class AudioManager {
             .forEach { handle(AudioCommand.BGS_PLAY_LOOP, it) }
     }
 
-    fun bgsSwitch(nextBgs: List<AudioEvent>) {
+    fun certainBgsSwitch(nextBgs: List<AudioEvent>) {
         handle(AudioCommand.BGS_STOP_ALL)
         nextBgs.forEach { handle(AudioCommand.BGS_PLAY_LOOP, it) }
-    }
-
-    fun fadeBgmBgs() {
-        queuedBgm.values.forEach { fade(it, BGM_VOLUME) }
-        queuedBgs.values.forEach { fade(it, BGS_VOLUME) }
     }
 
     fun handle(command: AudioCommand, events: List<AudioEvent>) {
@@ -70,23 +70,23 @@ class AudioManager {
 
     fun handle(command: AudioCommand, event: AudioEvent) {
         when (command) {
-            AudioCommand.BGM_PLAY_ONCE -> playBgm(event.filePath, false)
-            AudioCommand.BGM_PLAY_LOOP -> playBgm(event.filePath, true)
-            AudioCommand.BGM_STOP -> queuedBgm[event.filePath]?.stop()
-            AudioCommand.BGM_PAUSE -> queuedBgm[event.filePath]!!.pause()
+            AudioCommand.BGM_PLAY_ONCE -> playBgm(event, false)
+            AudioCommand.BGM_PLAY_LOOP -> playBgm(event, true)
+            AudioCommand.BGM_STOP -> queuedBgm[event]?.stop()
+            AudioCommand.BGM_PAUSE -> queuedBgm[event]!!.pause()
 
-            AudioCommand.BGS_PLAY_ONCE -> playBgs(event.filePath, false)
-            AudioCommand.BGS_PLAY_LOOP -> playBgs(event.filePath, true)
-            AudioCommand.BGS_STOP -> queuedBgs[event.filePath]?.stop()
-            AudioCommand.BGS_PAUSE -> queuedBgs[event.filePath]!!.pause()
+            AudioCommand.BGS_PLAY_ONCE -> playBgs(event, false)
+            AudioCommand.BGS_PLAY_LOOP -> playBgs(event, true)
+            AudioCommand.BGS_STOP -> queuedBgs[event]?.stop()
+            AudioCommand.BGS_PAUSE -> queuedBgs[event]!!.pause()
 
-            AudioCommand.ME_PLAY_ONCE -> playMe(event.filePath, false)
-            AudioCommand.ME_PLAY_LOOP -> playMe(event.filePath, true)
-            AudioCommand.ME_STOP -> queuedMe[event.filePath]!!.stop()
+            AudioCommand.ME_PLAY_ONCE -> playMe(event, false)
+            AudioCommand.ME_PLAY_LOOP -> playMe(event, true)
+            AudioCommand.ME_STOP -> queuedMe[event]!!.stop()
 
             AudioCommand.SE_PLAY_ONCE -> playSe(event, false)
             AudioCommand.SE_PLAY_LOOP -> playSe(event, true)
-            AudioCommand.SE_STOP -> queuedSe[event.filePath]?.stop()
+            AudioCommand.SE_STOP -> queuedSe[event]?.stop()
             else -> throw IllegalArgumentException("Call 'ALL' AudioCommands without second argument.")
         }
     }
@@ -111,14 +111,14 @@ class AudioManager {
         queuedSe.values.forEach { it.dispose() }
     }
 
-    private fun playBgm(filePath: String, isLooping: Boolean) {
-        if (filePath.isNotEmpty()) {
+    private fun playBgm(event: AudioEvent, isLooping: Boolean) {
+        if (event.filePath.isNotEmpty()) {
             val bgm: Music
-            if (queuedBgm.containsKey(filePath)) {
-                bgm = queuedBgm[filePath]!!
+            if (queuedBgm.containsKey(event)) {
+                bgm = queuedBgm[event]!!
             } else {
-                bgm = resourceManager.getMusicAsset(filePath)
-                queuedBgm[filePath] = bgm
+                bgm = resourceManager.getMusicAsset(event.filePath)
+                queuedBgm[event] = bgm
             }
             if (preferenceManager.isMusicOn) {
                 bgm.isLooping = isLooping
@@ -130,32 +130,32 @@ class AudioManager {
         }
     }
 
-    private fun playBgs(filePath: String, isLooping: Boolean) {
-        if (filePath.isNotEmpty()) {
+    private fun playBgs(event: AudioEvent, isLooping: Boolean) {
+        if (event.filePath.isNotEmpty()) {
             val bgs: Music
-            if (queuedBgs.containsKey(filePath)) {
-                bgs = queuedBgs[filePath]!!
+            if (queuedBgs.containsKey(event)) {
+                bgs = queuedBgs[event]!!
             } else {
-                bgs = resourceManager.getMusicAsset(filePath)
-                queuedBgs[filePath] = bgs
+                bgs = resourceManager.getMusicAsset(event.filePath)
+                queuedBgs[event] = bgs
             }
             if (preferenceManager.isSoundOn) {
                 bgs.isLooping = isLooping
                 bgs.play()
-                bgs.volume = BGS_VOLUME
+                bgs.volume = event.volume
             } else {
                 bgs.stop()
             }
         }
     }
 
-    private fun playMe(filePath: String, isLooping: Boolean) {
+    private fun playMe(event: AudioEvent, isLooping: Boolean) {
         val me: Sound
-        if (queuedMe.containsKey(filePath)) {
-            me = queuedMe[filePath]!!
+        if (queuedMe.containsKey(event)) {
+            me = queuedMe[event]!!
         } else {
-            me = resourceManager.getSoundAsset(filePath)
-            queuedMe[filePath] = me
+            me = resourceManager.getSoundAsset(event.filePath)
+            queuedMe[event] = me
         }
         if (preferenceManager.isMusicOn) {
             val meId = me.play()
@@ -166,18 +166,16 @@ class AudioManager {
     }
 
     private fun playSe(event: AudioEvent, isLooping: Boolean) {
-        val filePath = event.filePath
-        val volume = event.volume
         val se: Sound
-        if (queuedSe.containsKey(filePath)) {
-            se = queuedSe[filePath]!!
+        if (queuedSe.containsKey(event)) {
+            se = queuedSe[event]!!
         } else {
-            se = resourceManager.getSoundAsset(filePath)
-            queuedSe[filePath] = se
+            se = resourceManager.getSoundAsset(event.filePath)
+            queuedSe[event] = se
         }
         if (preferenceManager.isSoundOn) {
             val seId = se.play()
-            se.setVolume(seId, volume)
+            se.setVolume(seId, event.volume)
             se.setLooping(seId, isLooping)
         } else {
             se.stop()

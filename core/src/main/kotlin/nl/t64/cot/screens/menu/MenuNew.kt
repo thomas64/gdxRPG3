@@ -73,7 +73,7 @@ class MenuNew : MenuScreen() {
         listenerKeyInputField.updateInputField(profileName)
         listenerKeyHorizontal.updateSelectedIndex(selectedMenuIndex)
         if (isBgmFading) {
-            audioManager.fadeBgmBgs()
+            audioManager.certainFadeBgmBgs()
         }
         stage.draw()
     }

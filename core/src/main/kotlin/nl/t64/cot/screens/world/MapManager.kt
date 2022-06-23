@@ -164,8 +164,8 @@ class MapManager : ProfileObserver {
 
     fun loadMapWithHardBgmBgsSwitch(mapTitle: String) {
         loadMap(mapTitle)
-        audioManager.bgmSwitch(currentMap.bgm)
-        audioManager.bgsSwitch(currentMap.bgs)
+        audioManager.certainBgmSwitch(currentMap.bgm)
+        audioManager.certainBgsSwitch(currentMap.bgs)
     }
 
     fun loadMapWithBgmBgs(mapTitle: String) {

@@ -112,7 +112,7 @@ abstract class MenuLoad : MenuScreen() {
         listenerKeyVertical.updateSelectedIndex(selectedListIndex)
         listenerKeyHorizontal.updateSelectedIndex(selectedMenuIndex)
         if (isBgmFading) {
-            audioManager.fadeBgmBgs()
+            audioManager.certainFadeBgmBgs()
         }
         stage.draw()
     }
@@ -212,7 +212,7 @@ abstract class MenuLoad : MenuScreen() {
 
         listItems = List(listStyle)
         listItems.setItems(profiles)
-        listItems.setAlignment(Align.center)
+        listItems.alignment = Align.center
         group = VerticalGroup()
         group.addActor(listItems)
 

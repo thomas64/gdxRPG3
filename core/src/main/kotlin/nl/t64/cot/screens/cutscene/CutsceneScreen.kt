@@ -105,7 +105,7 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
 
         transitionStage.act(dt)
         if (isBgmFading) {
-            audioManager.fadeBgmBgs()
+            audioManager.certainFadeBgmBgs()
         }
         transitionStage.draw()
         if (!conversationDialog.isVisible() && !isEnding) {

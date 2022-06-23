@@ -63,7 +63,7 @@ class MenuPause : MenuScreen() {
     override fun render(dt: Float) {
         ScreenUtils.clear(Color.BLACK)
         stage.act(dt)
-        audioManager.fadeBgmBgs()
+        audioManager.certainFadeBgmBgs()
         listenerKeyVertical.updateSelectedIndex(selectedMenuIndex)
         stage.draw()
     }

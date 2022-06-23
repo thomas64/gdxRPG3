@@ -2,6 +2,7 @@ package nl.t64.cot.screens.world
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.InputMultiplexer
+import com.badlogic.gdx.InputProcessor
 import com.badlogic.gdx.Screen
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.Batch
@@ -168,8 +169,7 @@ class WorldScreen : Screen,
 
     override fun onNotifyShowBattleScreen(battleId: String, enemyEntity: Entity) {
         if (player.moveSpeed != Constant.MOVE_SPEED_4 && !isInMapTransition) {
-            Gdx.input.inputProcessor = null
-            Utils.setGamepadInputProcessor(null)
+            setInputProcessors(null)
             currentNpcEntity = enemyEntity
             gameState = GameState.BATTLE
             doBeforeLoadScreen()
@@ -258,8 +258,7 @@ class WorldScreen : Screen,
 
     override fun show() {
         gameState = GameState.RUNNING
-        Gdx.input.inputProcessor = multiplexer
-        Utils.setGamepadInputProcessor(multiplexer)
+        setInputProcessors(multiplexer)
         mapManager.continueAudio()
     }
 
@@ -400,6 +399,11 @@ class WorldScreen : Screen,
                                    { debugBox.setShowDebug() })
     }
 
+    private fun setInputProcessors(inputProcessor: InputProcessor?) {
+        Gdx.input.inputProcessor = inputProcessor
+        Utils.setGamepadInputProcessor(inputProcessor)
+    }
+
     private val isInMapTransition: Boolean
         get() = isInTransition && (stage.actors.peek() as TransitionImage).purpose == TransitionPurpose.MAP_CHANGE
     private val isJustInTransition: Boolean
@@ -424,8 +428,7 @@ class WorldScreen : Screen,
 
     override fun hide() {
         pause()
-        Gdx.input.inputProcessor = null
-        Utils.setGamepadInputProcessor(null)
+        setInputProcessors(null)
     }
 
     override fun dispose() {
