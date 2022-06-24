@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="24" tileheight="24" infinite="0" nextlayerid="11" nextobjectid="18">
+<map version="1.8" tiledversion="1.8.6" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="24" tileheight="24" infinite="0" nextlayerid="11" nextobjectid="18">
  <properties>
   <property name="bgm" value="bgm_ardor"/>
   <property name="lightmap_map" value="fog"/>
@@ -29,7 +29,7 @@
  </layer>
  <layer id="4" name="under3_flames" width="40" height="26">
   <data encoding="base64" compression="zlib">
-   eJzt08ENABAURMFfh/57ogtKoAASEnGQmeM77WUjAPhRThEl7ffX6tjQJjtWHW7yDwA41wGoiw/Z
+   eJzt07ENACAMA0HPkf13ClvACGEA3CERob/SlZuXAAA/ypBGvH7hzf1tHf65HbjJ9dGlG/oAAHRURZIN9g==
   </data>
  </layer>
  <layer id="5" name="under4_none" width="40" height="26">
@@ -44,7 +44,7 @@
  </layer>
  <layer id="7" name="over6_trees" width="40" height="26">
   <data encoding="base64" compression="zlib">
-   eJzt0z0OQEAAhNEJKralwDWonI04DSUn4DJugZh2ExIRf8W8ZJotNl82WUBE5J+aGGjj8+dvG9gw7nQcnYvcSf9DRESeEhogMl9X2GYfWLiVy9iW/6gvCYCUKz2g5zqu8r6ushXsy1y+G1ezbXKu3bMBPpAVkw==
+   eJzt07ENQEAAheEXVGgpsAaV2YhpKJmALVjAFojXSkhEgivel7zmisufSw4QETFTHQFNdP/8az0bhpOOq3NTjGybDO6Te/Q/RETkLYEPhP7fFUeLC6zcxqVsywzqiz0g4QoH6LiWK52/q45y9qU2342r2DZbz+7ZAaGJF3Y=
   </data>
  </layer>
  <layer id="8" name="over7_none" width="40" height="26">

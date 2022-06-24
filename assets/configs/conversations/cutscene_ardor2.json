@@ -1,0 +1,18 @@
+{
+  "mozes_returns_to_ardor": {
+    "phrases": {
+      "1": {"face": "mozes", "text": ["Ardor! I'm back!"]},
+      "2": {"face": "girl01", "text": ["Mozes!"]},
+      "3": {"face": "mozes", "text": ["Face me!!"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "ardor_turns_around"    : {
+    "phrases": {
+      "1": {"face": "ardor", "text": ["You're back? I don't even know who you are."]},
+      "2": {"face": "mozes", "text": ["I'm here for my sister! Now let her go!"]},
+      "3": {"face": "ardor", "text": ["Sister? Hmmmm..."]},
+      "4": {"face": "ardor", "text": [". . ."]},
+      "5": {"face": "ardor", "text": ["Guards! Kill him!"], "choices": [{"command": "EXIT"}]}
+    }
+  }
+}

@@ -48,6 +48,8 @@ enum class ScreenType(val screenClass: Class<out Screen>) {
     SCENE_ARDOR_1(SceneArdor1::class.java),
     SCENE_ARDOR_1_WIN(SceneArdor1Win::class.java),
     SCENE_ARDOR_1_LOSE(SceneArdor1Lose::class.java),
+    SCENE_ARDOR_2(SceneArdor2::class.java),
+    SCENE_ARDOR_2_WIN(SceneArdor2Win::class.java),
     SCENE_GAME_ENDING(SceneGameEnding::class.java),
     SCENE_END_OF_CYCLE_2(SceneEndOfCycle2::class.java);
 

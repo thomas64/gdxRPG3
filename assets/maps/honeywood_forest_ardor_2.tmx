@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="44" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="17" nextobjectid="63">
+<map version="1.8" tiledversion="1.8.6" orientation="orthogonal" renderorder="right-down" width="44" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="17" nextobjectid="64">
  <properties>
   <property name="bgm" value="bgm_ardor"/>
   <property name="bgs" value="bgs_creek"/>
@@ -120,6 +120,15 @@
   <object id="44" name="honeywood_forest_ardor_1" x="432" y="1680" width="144" height="24"/>
  </objectgroup>
  <objectgroup color="#ff00ff" id="16" name="cutscene">
-  <object id="62" name="scene_ardor_1" type="discover" x="528" y="-24" width="144" height="24"/>
+  <object id="62" name="scene_ardor_2" type="discover" x="528" y="-24" width="168" height="24">
+   <properties>
+    <property name="condition" value="_rc_==_a_q_quest_royal_sacrifice"/>
+   </properties>
+  </object>
+  <object id="63" name="scene_ardor_1" type="discover" x="504" y="-24" width="168" height="24">
+   <properties>
+    <property name="condition" value="_r_==_u_q_quest_royal_sacrifice"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
