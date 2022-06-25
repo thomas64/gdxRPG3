@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="36" height="36" tilewidth="24" tileheight="24" infinite="0" nextlayerid="18" nextobjectid="49">
+<map version="1.8" tiledversion="1.8.6" orientation="orthogonal" renderorder="right-down" width="36" height="36" tilewidth="24" tileheight="24" infinite="0" nextlayerid="18" nextobjectid="49">
  <properties>
   <property name="bgm" value="bgm_cave"/>
   <property name="lightmap_player" value="light_player"/>
@@ -96,14 +96,14 @@
   <object id="30" name="honeywood_cave_2" x="480" y="384" width="48" height="24"/>
  </objectgroup>
  <objectgroup color="#ffff00" id="16" name="quest">
-  <object id="47" name="quest_grace_is_missing" type="discover" x="288" y="672" width="48" height="24">
+  <object id="47" name="quest_grace_is_missing" type="discover" x="240" y="600" width="144" height="96">
    <properties>
     <property name="task" value="2"/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup color="#ff55ff" id="15" name="event">
-  <object id="25" name="found_honeywood_cave" type="discover" x="288" y="672" width="48" height="24"/>
+  <object id="25" name="found_honeywood_cave" type="discover" x="240" y="624" width="144" height="72"/>
  </objectgroup>
  <objectgroup color="#ffffff" id="14" name="lights">
   <object id="42" x="408" y="312" width="48" height="48"/>

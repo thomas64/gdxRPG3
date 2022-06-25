@@ -80,18 +80,19 @@ object ConditionConverter {
 
     private fun isQuestInState(conditionId: String, questState: List<QuestState>, conditionState: QuestState): Boolean {
         return when {
-            conditionId.contains("!=") -> questState.all { it != conditionState }
-            conditionId.contains("==") -> questState.any { it == conditionState }
-            conditionId.contains("<=") -> questState.any { it.isEqualOrLowerThan(conditionState) }
-            conditionId.contains(">=") -> questState.any { it.isEqualOrHigherThan(conditionState) }
+            conditionId.contains("_!=_") -> questState.all { it != conditionState }
+            conditionId.contains("_==_") -> questState.any { it == conditionState }
+            conditionId.contains("_===_") -> questState.all { it == conditionState }
+            conditionId.contains("_<=_") -> questState.any { it.isEqualOrLowerThan(conditionState) }
+            conditionId.contains("_>=_") -> questState.any { it.isEqualOrHigherThan(conditionState) }
             else -> throw IllegalArgumentException("No defined operator found.")
         }
     }
 
     private fun doesInventoryContain(conditionId: String, inventoryItemId: String, amount: Int): Boolean {
         return when {
-            conditionId.contains("==") -> gameData.inventory.hasExactlyAmountOfItem(inventoryItemId, amount)
-            conditionId.contains(">=") -> gameData.inventory.hasEnoughOfItem(inventoryItemId, amount)
+            conditionId.contains("_==_") -> gameData.inventory.hasExactlyAmountOfItem(inventoryItemId, amount)
+            conditionId.contains("_>=_") -> gameData.inventory.hasEnoughOfItem(inventoryItemId, amount)
             else -> throw IllegalArgumentException("No defined operator found.")
         }
     }

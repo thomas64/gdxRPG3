@@ -1,4 +1,5 @@
 {
-  "fairy_welcome": {"xp": 15},
-  "fairy_school" : {"content": {"air_shield": 1, "strength": 1}}
+  "fairy_welcome"        : {"xp": 15},
+  "fairy_school"         : {"content": {"air_shield": 1, "strength": 1}},
+  "quest_honeywood_elder": {"content": {"key_honeywood_basement": 1}}
 }

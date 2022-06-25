@@ -7,7 +7,7 @@ class PhraseIdContainer {
     val size: Int get() = currentPhraseIds.size
 
     fun getPhraseId(conversationId: String): String {
-        return currentPhraseIds[conversationId]!!
+        return currentPhraseIds[conversationId] ?: "1"
     }
 
     fun setPhraseId(conversationId: String, phraseId: String) {

@@ -4,14 +4,14 @@
     "group"      : "ITEM",
     "sort"       : "1",
     "price"      : 1,
-    "description": ["ToDo"]
+    "description": ["A crystal from Ylarus, God of Time,", "to reset time 12 hours."]
   },
-  "key_mysterious_tunnel"  : {
-    "name"       : "Mysterious Tunnel Key",
+  "key_honeywood_basement" : {
+    "name"       : "Basement key",
     "group"      : "ITEM",
     "sort"       : 70010,
     "price"      : 1,
-    "description": ["An old key for inside the Mysterious Tunnel."]
+    "description": ["Key given to you by the elder himself."]
   },
   "scroll_of_orc_obedience": {
     "name"       : "Scroll of Orc Obedience",
@@ -25,20 +25,20 @@
     "group"      : "ITEM",
     "sort"       : 70020,
     "price"      : 1,
-    "description": ["ToDo"]
+    "description": ["A medicine made by Elenora for Enopa."]
   },
   "horseshoe"              : {
     "name"       : "Horseshoe",
     "group"      : "ITEM",
     "sort"       : 70025,
     "price"      : 1,
-    "description": ["ToDo"]
+    "description": ["Just a regular horseshoe."]
   },
   "tow_rope"               : {
     "name"       : "Tow Rope",
     "group"      : "ITEM",
     "sort"       : 70030,
     "price"      : 1,
-    "description": ["ToDo"]
+    "description": ["A strong rope which can be used by a horse."]
   }
 }

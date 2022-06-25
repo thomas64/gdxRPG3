@@ -66,7 +66,6 @@ class WorldScreen : Screen,
     private val debugBox = DebugBox(player)
     private val buttonsBox = ButtonBox()
 
-    private lateinit var partyMembers: List<Entity>
     private lateinit var npcEntities: List<Entity>
     private lateinit var currentNpcEntity: Entity
     private lateinit var lootList: List<Entity>
@@ -93,7 +92,6 @@ class WorldScreen : Screen,
         npcEntities = NpcEntitiesLoader(currentMap).createNpcs()
         lootList = LootLoader(currentMap).createLoot()
         doorList = DoorLoader(currentMap).createDoors()
-        partyMembers = PartyMembersLoader(player).loadPartyMembers()
         currentMap.setTiledGraphs()
         mapManager.setNextMapTitleNull()
     }
@@ -180,7 +178,7 @@ class WorldScreen : Screen,
     //region EntityObserver ////////////////////////////////////////////////////////////////////////////////////////////
 
     override fun onNotifyPartyUpdate() {
-        partyMembers = PartyMembersLoader(player).loadPartyMembers()
+        // atm no party update necessary.
     }
 
     override fun onNotifyNpcsUpdate(newNpcEntities: List<Entity>) {
@@ -211,7 +209,6 @@ class WorldScreen : Screen,
     override fun onNotifyHeroJoined() {
         brokerManager.blockObservers.removeObserver(currentNpcEntity)
         npcEntities = npcEntities.filter { it != currentNpcEntity }
-        partyMembers = PartyMembersLoader(player).loadPartyMembers()
     }
 
     override fun onNotifyShowBattleScreen(battleId: String) {
@@ -293,7 +290,7 @@ class WorldScreen : Screen,
         updateCameraPosition()
         mapRenderer.renderAll(player.position) { renderEntities(it) }
         gridRenderer.possibleRender()
-        debugRenderer.possibleRenderObjects(doorList, lootList, npcEntities, partyMembers)
+        debugRenderer.possibleRenderObjects(doorList, lootList, npcEntities)
         debugBox.possibleUpdate(dt)
         buttonsBox.update(dt)
         partyWindow.update(dt)
@@ -318,8 +315,6 @@ class WorldScreen : Screen,
         val playerGridPosition = player.getPositionInGrid()
         npcEntities.forEach { it.update(dt) }
         npcEntities.forEach { it.send(FindPathEvent(playerGridPosition)) }
-        partyMembers.forEach { it.update(dt) }
-        partyMembers.forEach { it.send(FindPathEvent(playerGridPosition, partyMembers)) }
     }
 
     private fun updateCameraPosition() {
@@ -334,7 +329,6 @@ class WorldScreen : Screen,
             .forEach { it.render(batch) }
 
         val allEntities: MutableList<Entity> = ArrayList()
-        allEntities.addAll(partyMembers)
         allEntities.addAll(npcEntities)
         allEntities.add(player)
         allEntities.sortByDescending { it.position.y }

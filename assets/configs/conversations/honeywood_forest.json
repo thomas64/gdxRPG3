@@ -130,7 +130,7 @@
   },
   "fairy_crystal"      : {
     "phrases": {
-      "1": {"text": ["[Explanation about warp crystals.]"], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["[Explanation about warp portals.]"], "choices": [{"command": "EXIT"}]}
     }
   },
   "fairy_school"       : {

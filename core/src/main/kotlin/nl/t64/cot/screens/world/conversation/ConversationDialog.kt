@@ -163,6 +163,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             ConversationCommand.HEAL_LIFE -> healLife(nextId)
             ConversationCommand.RECEIVE_XP -> receiveXp(nextId)
             ConversationCommand.RECEIVE_SPELLS -> receiveSpells(nextId)
+            ConversationCommand.RECEIVE_ITEMS -> receiveItems()
             ConversationCommand.START_BATTLE -> startBattle(nextId)
             ConversationCommand.RELOAD_NPCS -> reloadNpcs(nextId)
 
@@ -202,8 +203,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun dismissHero(nextId: String) {
-        playSe(AudioEvent.SE_CONVERSATION_END)
-        endConversationWithoutSound(nextId)
+        endConversation(nextId)
         conversationObserver.notifyHeroDismiss()
     }
 
@@ -262,6 +262,12 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     private fun receiveSpells(nextId: String) {
         SpellsRewarder.receivePossibleSpells(conversationId)
         continueConversation(nextId)
+    }
+
+    private fun receiveItems() {
+        val quest = gameData.quests.getQuestById(conversationId)
+        val receive = gameData.loot.getLoot(conversationId)
+        endConversationAndLoad { ReceiveScreen.load(receive, quest, graph) }
     }
 
     private fun startBattle(nextId: String) {

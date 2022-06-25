@@ -1,5 +1,5 @@
 {
-  "everything_is_normal_again": {
+  "everything_is_normal_again" : {
     "phrases": {
       "1": {"text": ["Everything is back to normal?"]},
       "2": {"text": ["Adan didn't end in flames?"]},
@@ -7,13 +7,21 @@
       "4": {"text": ["I have to find her again, quick!"], "choices": [{"command": "EXIT"}]}
     }
   },
+  "everything_is_back_again"   : {
+    "phrases": {
+      "1": {"text": ["This is so weird..."]},
+      "2": {"text": ["Everything is back to how things were..."]},
+      "3": {"text": ["Like nothing ever happened..."], "choices": [{"command": "EXIT"}]}
+    }
+  },
   "mrs_johanna"                : {
     "phrases": {
-      "1" : {"text": ["Mozes my dear, how are you?", "What a beautiful day, isn't it?"]},
-      "2" : {"text": ["I come here often to reminisce about this once enormous tree and my late husband Theodore."]},
-      "3" : {"text": ["We had such nice summers together under this tree."]},
-      "4" : {"text": ["I miss him..."]},
-      "5" : {
+      "1" : {"face": "mozes", "text": ["Hello Mrs. Johanna."]},
+      "2" : {"face": "oldwoman01", "text": ["Mozes my dear, how are you?", "What a beautiful day, isn't it?"]},
+      "3" : {"text": ["I come here often to reminisce about this once enormous tree and my late husband Theodore."]},
+      "4" : {"text": ["We had such nice summers together under this tree."]},
+      "5" : {"text": ["I miss him..."]},
+      "6" : {
         "face": "oldwoman01", "text": ["Life is over before you know it, don't you think?"], "choices": [
           {
             "condition": ["i_c_==_a_q_quest_get_tow_rope", "_tn_15_q_quest_get_tow_rope", "_n_1_>=_item_basic_silver_ring"],
@@ -29,7 +37,7 @@
       "15": {"face": "oldwoman01", "text": ["Nah! Of course not. I've got so much to live for. See ya!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "quest_helping_horse"       : {
+  "quest_helping_horse"        : {
     "phrases": {
       "1" : {"text": ["Hey Mozes, you can't go further up north from here.", "There is a large tree blocking the road."], "choices": [{"nextId": "3"}]},
       "2" : {"text": ["Hey Mozes, you can't go further up north from here.", "There is a large tree blocking the road."], "choices": [{"nextId": "3"}]},
@@ -105,9 +113,31 @@
       "2": {"face": "mozes", "text": ["Don't shoot the messenger."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "luana01"                    : {
+  "luana_join"                 : {
     "phrases": {
-      "1": {"text": ["Hi Mozes! You really should check out this priest fella.", "He is so funny! Ha ha!"], "choices": [{"command": "EXIT"}]}
+      "1" : {"text": ["Hi Mozes! You really should check out this priest fella.", "He is so funny! Ha ha!"]},
+      "2" : {
+        "text": ["It's too bad we're not allowed to leave town alone because of all the monsters outside, but I'm glad this fella came in.", "He can now brighten my dull and secluded life a little."], "choices": [
+          {"condition": ["i_rc_==_a_q_quest_honeywood_elder"], "nextId": "3"},
+          {"condition": ["i_rc_!=_a_q_quest_honeywood_elder"], "command": "EXIT"}
+        ]
+      },
+      "3" : {"face": "mozes", "text": ["Luana, good news! The elder gave us an option to leave the village."]},
+      "4" : {"face": "luana", "text": ["I'm listening..."]},
+      "5" : {"face": "mozes", "text": ["* Explains everything what's happened to Luana. *"]},
+      "6" : {"face": "luana", "text": [". . ."]},
+      "7" : {"face": "luana", "text": ["No way! And you're asking me to come along, traveling through time, risking my life in stopping an evil wizard and rescuing Grace?!"]},
+      "8" : {"face": "mozes", "text": ["Erm..."]},
+      "9" : {"face": "luana", "text": ["Hell yeah! You are going on this HUGE adventure with big stuff and whatnot, slaying monsters and taking loot, and and and..."]},
+      "10": {"face": "luana", "text": ["And why wouldn't I go with you?"]},
+      "11": {"face": "luana", "text": ["What's wrong with you!?"]},
+      "12": {"face": "luana", "text": ["We've been friends since childhood, we always went on adventures together, and now you think I would leave you hanging?"]},
+      "13": {"face": "luana", "text": ["Who will be there to protect you? You need protection...", "From me! You do know that right?"]},
+      "14": {"face": "luana", "text": ["Okay, here's the deal. You are taking me with you and MAYBE I'll forgive you for doubting my adventurous spirit."]},
+      "15": {"face": "mozes", "text": ["Erm... Okay?"], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "20"}]},
+      "20": {"face": "luana", "text": ["Alright! Now were talking!", "You are so not gonna regret this."]},
+      "21": {"face": "luana", "text": ["Let's go!"]},
+      "22": {"face": "mozes", "text": [". . ."], "choices": [{"command": "HERO_JOIN"}]}
     }
   },
   "priest_honeywood"           : {
@@ -170,7 +200,7 @@
           {"condition": ["i_ta_1_q_this"], "text": "Your troubles are over, all the bats are gone.", "nextId": "50"},
           {"text": "Yes please, I could use some rest. (Restore health)", "command": "HEAL_LIFE", "nextId": "2"},
           {"text": "No thanks, now's not necessary. (Leave conversation)", "command": "EXIT"},
-          {"condition": ["i_r_==_u_q_this", "i_c_==_u_q_this"], "text": "Is something wrong innkeeper? You look troubled...", "nextId": "10"},
+          {"condition": ["i_rc_===_u_q_this"], "text": "Is something wrong innkeeper? You look troubled...", "nextId": "10"},
           {"condition": ["i_r_>=_k_q_this", "i_c_==_u_q_this"], "text": "I heard you've got some troubles...", "nextId": "10"},
           {"condition": ["i_c_==_k_q_this"], "text": "About those bats you mentioned...", "nextId": "18"}
         ]
@@ -231,7 +261,7 @@
       "2"   : {"text": ["I'm here only for the mice, there's no way I'll do bats."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "quest_get_horse"           : {
+  "quest_get_horse"            : {
     "phrases": {
       "1" : {"face": "woman03", "text": ["Hi Mozes."]},
       "2" : {
@@ -288,7 +318,7 @@
       "70": {"face": "woman03", "text": ["How is my Enopa doing? Has she been of any help to Lennor and you?"], "choices": [{"command": "EXIT", "nextId": "70"}]}
     }
   },
-  "honeywood_horse"           : {
+  "honeywood_horse"            : {
     "phrases": {
       "1"   : {
         "text": ["Neigh."], "choices": [
@@ -350,11 +380,12 @@
       "1411": {"face": "oldwoman11", "text": ["And how are you, my dear?"], "choices": [{"nextId": "2"}]}
     }
   },
-  "honeywood_elder"           : {
+  "quest_honeywood_elder"      : {
     "phrases": {
-      "1" : {"face": "oldman11", "text": ["Hello Mozes, how can I help you today?"]},
-      "2" : {
+      "1"   : {"face": "oldman11", "text": ["Hello Mozes, how can I help you today?"]},
+      "2"   : {
         "face": "mozes", "choices": [
+          {"condition": ["i_rc_==_a_q_quest_god_of_power", "i_rc_!=_a_q_this"], "text": "I need to go to Lastdenn, but I'm not allowed to leave the village.", "nextId": "50"},
           {"condition": ["i_rc_>=_a_q_quest_helping_horse", "i_c_<=_a_q_quest_get_horse"], "text": "There is a large tree blocking the road to Honeywood Forest.", "nextId": "10"},
           {"condition": ["i_rc_>=_a_q_quest_get_horse", "i_tn_7_q_quest_get_horse"], "text": "Angie's horse is sick. Can you help her out?", "nextId": "40"},
           {"condition": ["i_rc_>=_a_q_quest_get_horse", "i_tn_8_q_quest_get_horse"], "text": "I'm looking for horseshoes.", "nextId": "20"},
@@ -362,21 +393,34 @@
           {"text": "Nothing more at this moment, thank you. (Leave conversation)", "nextId": "3"}
         ]
       },
-      "3" : {"face": "oldman11", "text": ["Come see me again when you've got other questions."], "choices": [{"command": "EXIT"}]},
-      "10": {"face": "mozes", "text": ["Lennor needs a horse for dragging it of the road.", "Do you know where I can find one?"]},
-      "11": {"face": "oldman11", "text": ["Hmmm..."]},
-      "12": {"face": "oldman11", "text": ["Yes of course, Angie has a horse. You can probably find her behind the inn."]},
-      "13": {"face": "oldman11", "text": ["She often likes to go there tending her horse."], "choices": [{"nextId": "2"}]},
-      "20": {"face": "mozes", "text": ["Angie needs them for her horse. Do you know where to get them?"]},
-      "21": {"face": "oldman11", "text": ["Hmmm..."]},
-      "22": {"face": "oldman11", "text": ["I think I've got one in my basement. It's pretty dark in there, but you may go and see if you can find it."]},
-      "23": {"face": "oldman11", "text": ["And if you can't find enough of them, our blacksmith, north of here, can probably help you out."], "choices": [{"nextId": "2"}]},
-      "30": {"face": "mozes", "text": ["Lennor needs them for dragging the tree of the road."]},
-      "31": {"face": "oldman11", "text": ["Hmmm..."]},
-      "32": {"face": "oldman11", "text": ["I've got one upstairs, you may use it if you can find it."]},
-      "33": {"face": "oldman11", "text": ["And if I remember well, Jaron, west of here, also had a tow rope in the past.", "You could check it out."], "choices": [{"nextId": "2"}]},
-      "40": {"face": "oldman11", "text": ["Hmmm..."]},
-      "41": {"face": "oldman11", "text": ["You should definitely ask my wife."], "choices": [{"nextId": "2"}]}
+      "3"   : {"face": "oldman11", "text": ["Come see me again when you've got other questions."], "choices": [{"command": "EXIT"}]},
+      "10"  : {"face": "mozes", "text": ["Lennor needs a horse for dragging it of the road.", "Do you know where I can find one?"]},
+      "11"  : {"face": "oldman11", "text": ["Hmmm..."]},
+      "12"  : {"face": "oldman11", "text": ["Yes of course, Angie has a horse. You can probably find her behind the inn."]},
+      "13"  : {"face": "oldman11", "text": ["She often likes to go there tending her horse."], "choices": [{"nextId": "2"}]},
+      "20"  : {"face": "mozes", "text": ["Angie needs them for her horse. Do you know where to get them?"]},
+      "21"  : {"face": "oldman11", "text": ["Hmmm..."]},
+      "22"  : {"face": "oldman11", "text": ["I think I've got one in my basement. It's pretty dark in there, but you may go and see if you can find it."]},
+      "23"  : {"face": "oldman11", "text": ["And if you can't find enough of them, our blacksmith, north of here, can probably help you out."], "choices": [{"nextId": "2"}]},
+      "30"  : {"face": "mozes", "text": ["Lennor needs them for dragging the tree of the road."]},
+      "31"  : {"face": "oldman11", "text": ["Hmmm..."]},
+      "32"  : {"face": "oldman11", "text": ["I've got one upstairs, you may use it if you can find it."]},
+      "33"  : {"face": "oldman11", "text": ["And if I remember well, Jaron, west of here, also had a tow rope in the past.", "You could check it out."], "choices": [{"nextId": "2"}]},
+      "40"  : {"face": "oldman11", "text": ["Hmmm..."]},
+      "41"  : {"face": "oldman11", "text": ["You should definitely ask my wife."], "choices": [{"nextId": "2"}]},
+      "50"  : {"face": "oldman11", "text": ["That's right, it's dangerous to go alone.", "What's your business in Lastdenn?"]},
+      "51"  : {"face": "mozes", "text": ["Well eh, that's quite the story..."]},
+      "52"  : {"face": "mozes", "text": ["* Explains everything what's happened to the village elder. *"]},
+      "53"  : {"face": "oldman11", "text": ["Wow, that IS quite a story."]},
+      "54"  : {"face": "oldman11", "text": ["It's also hard to believe. Grace sacrificed? Ylarus, God of Time?", "But on the other hand, why should you, Mozes, of all people, make this kind of thing up about Grace?"]},
+      "55"  : {"face": "oldman11", "text": ["Your options are twofold."]},
+      "56"  : {"face": "oldman11", "text": ["First of all I'll give you the key to the basement. In the basement is a warp portal, like the one with the fairies. I'll allow you to use this one at your will. You will need it on your travels."]},
+      "57"  : {"face": "oldman11", "text": ["With what you just told I think you will be out and busy for a while."]},
+      "58"  : {"face": "oldman11", "text": ["Secondly, you need a travel companion."]},
+      "59"  : {"face": "oldman11", "text": ["Luana is outside here near the statue, moping around. She is dying to leave the village, so with some proper explaining, perhaps she wants to join you."]},
+      "60"  : {"face": "oldman11", "text": ["Mozes, good luck on your travels."], "choices": [{"command": "RECEIVE_ITEMS"}]},
+      "1199": {"face": "oldman11", "text": ["Don't forget the key of the basement."], "choices": [{"command": "RECEIVE_ITEMS"}]},
+      "1200": {"face": "oldman11", "text": ["Hello Mozes, how can I help you today?"], "choices": [{"nextId": "2"}]}
     }
   },
   "quest_get_horseshoes"       : {
@@ -424,7 +468,7 @@
       "1200": {"face": "man07", "text": ["Hello neighbour, you're back."], "choices": [{"nextId": "2"}]}
     }
   },
-  "quest_get_tow_rope"        : {
+  "quest_get_tow_rope"         : {
     "phrases": {
       "1"   : {
         "text": ["Hi Mozes, to what do I owe the pleasure of you entering our home?"], "choices": [
@@ -475,9 +519,15 @@
   },
   "honeywood_soldiers"         : {
     "phrases": {
-      "1": {"text": ["I'm sorry sir, we can't allow anyone to go outside the village alone."]},
-      "2": {"text": ["It's dangerous to go alone. Especially with all the monsters roaming around."]},
-      "3": {"text": ["What's up with that anyway?"], "choices": [{"command": "EXIT"}]}
+      "1"   : {"text": ["Sir, by command of the village elder, we are not allowed to let anyone go outside the village alone."]},
+      "2"   : {
+        "text": ["It's dangerous to go alone. Especially with all the monsters roaming around."], "choices": [
+          {"condition": ["alone_in_party"], "nextId": "3"}
+        ]
+      },
+      "3"   : {"text": ["What's up with that anyway?"], "choices": [{"command": "EXIT"}]},
+      "2000": {"text": ["But you seem to be in good company."]},
+      "2001": {"text": ["Move along."], "choices": [{"command": "EXIT"}]}
     }
   }
 }
