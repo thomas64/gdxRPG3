@@ -1,10 +1,6 @@
 package nl.t64.cot.screens.storage
 
-import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
-import com.badlogic.gdx.utils.ScreenUtils
-import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioEvent
@@ -31,27 +27,15 @@ class StorageScreen : ParchmentScreen() {
     }
 
     override fun show() {
-        Gdx.input.inputProcessor = stage
-        Utils.setGamepadInputProcessor(stage)
+        setInputProcessors(stage)
         addInputListenerWithSmallDelay()
         storageUI = StorageUI(stage)
         StorageButtonLabels(stage).create()
     }
 
     override fun render(dt: Float) {
-        ScreenUtils.clear(Color.BLACK)
-        stage.act(dt)
-        stage.draw()
+        renderStage(dt)
         storageUI.update()
-    }
-
-    override fun hide() {
-        storageUI.unloadAssets()
-        stage.clear()
-    }
-
-    override fun dispose() {
-        stage.dispose()
     }
 
     private fun addInputListenerWithSmallDelay() {
@@ -69,13 +53,6 @@ class StorageScreen : ParchmentScreen() {
                                                                                    { toggleTooltip() },
                                                                                    { toggleCompare() }),
                                                              false)))
-    }
-
-    private fun closeScreen() {
-        Gdx.input.inputProcessor = null
-        Utils.setGamepadInputProcessor(null)
-        playSe(AudioEvent.SE_CHEST)
-        fadeParchment()
     }
 
     private fun takeOne() {

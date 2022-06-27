@@ -1,9 +1,5 @@
 package nl.t64.cot.screens.academy
 
-import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.utils.ScreenUtils
-import nl.t64.cot.Utils
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
@@ -29,8 +25,7 @@ class AcademyScreen : ParchmentScreen() {
     }
 
     override fun show() {
-        Gdx.input.inputProcessor = stage
-        Utils.setGamepadInputProcessor(stage)
+        setInputProcessors(stage)
         stage.addListener(AcademyScreenListener({ closeScreen() },
                                                 { upgradeSkill() },
                                                 { selectPreviousHero() },
@@ -44,26 +39,8 @@ class AcademyScreen : ParchmentScreen() {
     }
 
     override fun render(dt: Float) {
-        ScreenUtils.clear(Color.BLACK)
-        stage.act(dt)
-        stage.draw()
+        renderStage(dt)
         academyUI.update()
-    }
-
-    override fun hide() {
-        academyUI.unloadAssets()
-        stage.clear()
-    }
-
-    override fun dispose() {
-        stage.dispose()
-    }
-
-    private fun closeScreen() {
-        Gdx.input.inputProcessor = null
-        Utils.setGamepadInputProcessor(null)
-        playSe(AudioEvent.SE_SCROLL)
-        fadeParchment()
     }
 
     private fun upgradeSkill() {

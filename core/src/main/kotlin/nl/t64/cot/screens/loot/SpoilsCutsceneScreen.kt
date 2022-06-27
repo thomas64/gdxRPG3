@@ -23,7 +23,7 @@ class SpoilsCutsceneScreen : LootScreen() {
     }
 
     override fun resolveLootAndCloseScreen(notUsedHere: Boolean) {
-        closeScreen(currentCutsceneScreen)
+        closeScreen(currentCutsceneScreen, AudioEvent.SE_CONVERSATION_NEXT)
     }
 
 }

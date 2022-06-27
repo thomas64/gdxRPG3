@@ -1,13 +1,6 @@
 package nl.t64.cot.screens.loot
 
-import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.utils.ScreenUtils
-import nl.t64.cot.Utils
-import nl.t64.cot.audio.AudioEvent
-import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.loot.Loot
-import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.ParchmentScreen
 
 
@@ -17,34 +10,15 @@ abstract class LootScreen : ParchmentScreen() {
     lateinit var lootTitle: String
 
     override fun show() {
-        Gdx.input.inputProcessor = stage
-        Utils.setGamepadInputProcessor(stage)
-
+        setInputProcessors(stage)
         val lootUI = LootUI({ resolveLootAndCloseScreen(it) }, loot, lootTitle)
         lootUI.show(stage)
     }
 
     override fun render(dt: Float) {
-        ScreenUtils.clear(Color.BLACK)
-        stage.act(dt)
-        stage.draw()
-    }
-
-    override fun hide() {
-        stage.clear()
-    }
-
-    override fun dispose() {
-        stage.dispose()
+        renderStage(dt)
     }
 
     abstract fun resolveLootAndCloseScreen(isAllTheLootCleared: Boolean)
-
-    protected fun closeScreen(fadeToScreen: ScreenType = ScreenType.WORLD) {
-        Gdx.input.inputProcessor = null
-        Utils.setGamepadInputProcessor(null)
-        playSe(AudioEvent.SE_CONVERSATION_NEXT)
-        fadeParchment(fadeToScreen)
-    }
 
 }

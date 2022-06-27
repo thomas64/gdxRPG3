@@ -1,10 +1,6 @@
 package nl.t64.cot.screens.inventory
 
-import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
-import com.badlogic.gdx.utils.ScreenUtils
-import nl.t64.cot.Utils
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.preferenceManager
@@ -33,8 +29,7 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
     }
 
     override fun onNotifyExitConversation() {
-        Gdx.input.inputProcessor = stage
-        Utils.setGamepadInputProcessor(stage)
+        setInputProcessors(stage)
     }
 
     override fun onNotifyHeroDismiss() {
@@ -51,28 +46,20 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
     }
 
     override fun show() {
-        Gdx.input.inputProcessor = stage
-        Utils.setGamepadInputProcessor(stage)
+        setInputProcessors(stage)
         addInputListenerWithSmallDelay()
         inventoryUI = InventoryUI(stage)
         ButtonLabels(stage).create()
     }
 
     override fun render(dt: Float) {
-        ScreenUtils.clear(Color.BLACK)
-        stage.act(dt)
-        stage.draw()
+        renderStage(dt)
         inventoryUI.update()
         conversationDialog.update(dt)
     }
 
-    override fun hide() {
-        inventoryUI.unloadAssets()
-        stage.clear()
-    }
-
     override fun dispose() {
-        stage.dispose()
+        super.dispose()
         conversationDialog.dispose()
     }
 
@@ -96,13 +83,6 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
     fun closeScreenAnd(actionAfter: () -> Unit) {
         closeScreen()
         actionAfter.invoke()
-    }
-
-    private fun closeScreen() {
-        Gdx.input.inputProcessor = null
-        Utils.setGamepadInputProcessor(null)
-        playSe(AudioEvent.SE_SCROLL)
-        fadeParchment()
     }
 
     private fun doAction() {

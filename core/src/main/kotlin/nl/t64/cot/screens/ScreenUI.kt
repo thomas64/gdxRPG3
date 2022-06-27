@@ -82,10 +82,6 @@ abstract class ScreenUI(
         getSelectedTable().toggleCompare()
     }
 
-    fun unloadAssets() {
-        // empty
-    }
-
     fun setFocusOnSelectedTable() {
         getSelectedTable().setKeyboardFocus(stage)
         stage.draw()

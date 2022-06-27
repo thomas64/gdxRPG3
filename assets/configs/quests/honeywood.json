@@ -5,7 +5,7 @@
     "summary" : "Grace will become sacrificed by the wizard Ardor to gain ultimate power from Ulrog, the God of Power. Something seems to go wrong and everything gets engulfed in flames, including Ardor and you.",
     "tasks"   : {
       "1": {
-        "taskPhrase": "Receive the Crystal of Time to reset time 12 hours before the disaster.",
+        "taskPhrase": "Receive the Crystal of Time to reset time to 12 hours before the disaster.",
         "type"      : "FIND_ITEM",
         "target"    : {"crystal_of_time": 1},
         "isHidden"  : true,
@@ -28,6 +28,10 @@
     "summary" : "For some reason Adan goes up in flames when Grace become sacrificed by the wizard Ardor. Ylarus, the God of Time doesn't know why, so he sends you on a quest to finds answers.",
     "tasks"   : {
       "1": {
+        "taskPhrase": "Leave Honeywood Village through the south past the guards.",
+        "type"      : "DISCOVER"
+      },
+      "2": {
         "taskPhrase": "Travel to Lastdenn to find answers.",
         "type"      : "DISCOVER"
       }

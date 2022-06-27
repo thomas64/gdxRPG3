@@ -122,13 +122,12 @@ data class QuestGraph(
 
     fun possibleSetTradeItemsTaskComplete(): Loot {
         accept()
-        val loot: List<Loot> = tasks
+        return tasks
             .filterValues { it.type == QuestTaskType.TRADE_ITEMS }
             .filterValues { it.hasTargetInInventory() }
             .onEach { setTaskComplete(it.key) }
             .map { Loot(it.value.receive.toMutableMap()) }
-        return if (loot.size == 1) loot[0]
-        else throw IllegalStateException("Can only contain 1 TRADE_ITEMS QuestTaskType.")
+            .single()
     }
 
     fun setSayTheRightThingTaskCompleteAndReceivePossibleTarget(): Loot {
@@ -198,7 +197,7 @@ data class QuestGraph(
             val questTask = tasks[taskId]!!
             questTask.setComplete()
             unhideTaskWithLinkedTask(questTask)
-            if (showTooltip) showMessageTooltipQuestUpdated()
+            if (showTooltip && !questTask.isReset) showMessageTooltipQuestUpdated()
             possibleFinish(showTooltip)
         }
     }
@@ -250,7 +249,7 @@ data class QuestGraph(
     }
 
     private fun isReadyToBeFinished(): Boolean {
-        return currentState.isEqualOrHigherThan(QuestState.ACCEPTED)
+        return isOneOfBothStatesEqualOrHigherThan(QuestState.ACCEPTED)
                 && currentState != QuestState.FINISHED
                 && areAllQuestTasksComplete()
     }
@@ -287,7 +286,8 @@ data class QuestGraph(
     }
 
     private fun showMessageTooltipQuestUpdated() {
-        if (!isHidden && currentState == QuestState.ACCEPTED
+        if (!isHidden
+            && (currentState == QuestState.ACCEPTED || resetState == QuestState.ACCEPTED)
             && (!isReadyToBeFinished() || (isSubQuest && isReadyToBeFinished()))
         ) {
             brokerManager.messageObservers.notifyShowMessageTooltip("Quest updated:" + System.lineSeparator() + title)

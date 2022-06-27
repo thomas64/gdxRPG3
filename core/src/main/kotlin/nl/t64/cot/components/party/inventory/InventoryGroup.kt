@@ -32,24 +32,15 @@ enum class InventoryGroup(override val title: String) : SuperEnum {
     RESOURCE("Resource");
 
     fun hasImpactOnPrtSpdStl(): Boolean {
-        return when (this) {
-            SHIELD, HELMET, SHOULDERS, CHEST, CLOAK, BRACERS, GLOVES, BELT, PANTS, BOOTS -> true
-            else -> false
-        }
+        return this in listOf(SHIELD, HELMET, SHOULDERS, CHEST, CLOAK, BRACERS, GLOVES, BELT, PANTS, BOOTS)
     }
 
     fun isPartArmorOfSet(): Boolean {
-        return when (this) {
-            HELMET, SHOULDERS, CHEST, CLOAK, BRACERS, GLOVES, BELT, PANTS, BOOTS -> true
-            else -> false
-        }
+        return this in listOf(HELMET, SHOULDERS, CHEST, CLOAK, BRACERS, GLOVES, BELT, PANTS, BOOTS)
     }
 
     fun isStackable(): Boolean {
-        return when (this) {
-            POTION, RESOURCE -> true
-            else -> false
-        }
+        return this in listOf(POTION, RESOURCE)
     }
 
     fun getDefaultShopAmount(): Int {

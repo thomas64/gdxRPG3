@@ -35,7 +35,7 @@ class RewardScreen : LootScreen() {
             quest.unclaim()
             conversation.currentPhraseId = Constant.PHRASE_ID_REWARD_LEFTOVER
         }
-        closeScreen()
+        closeScreen(audioEvent = AudioEvent.SE_CONVERSATION_NEXT)
     }
 
 }

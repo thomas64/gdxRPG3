@@ -35,7 +35,7 @@ class ReceiveScreen : LootScreen() {
             quest.know()
             conversation.currentPhraseId = Constant.PHRASE_ID_LOOT_LEFTOVER
         }
-        closeScreen()
+        closeScreen(audioEvent = AudioEvent.SE_CONVERSATION_NEXT)
     }
 
 }

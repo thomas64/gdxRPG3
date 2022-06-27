@@ -1,10 +1,6 @@
 package nl.t64.cot.screens.shop
 
-import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
-import com.badlogic.gdx.utils.ScreenUtils
-import nl.t64.cot.Utils
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
@@ -35,27 +31,15 @@ class ShopScreen : ParchmentScreen() {
     }
 
     override fun show() {
-        Gdx.input.inputProcessor = stage
-        Utils.setGamepadInputProcessor(stage)
+        setInputProcessors(stage)
         addInputListenerWithSmallDelay()
         shopUI = ShopUI(stage, npcId, shopId)
         ShopButtonLabels(stage).create()
     }
 
     override fun render(dt: Float) {
-        ScreenUtils.clear(Color.BLACK)
-        stage.act(dt)
-        stage.draw()
+        renderStage(dt)
         shopUI.update()
-    }
-
-    override fun hide() {
-        shopUI.unloadAssets()
-        stage.clear()
-    }
-
-    override fun dispose() {
-        stage.dispose()
     }
 
     private fun addInputListenerWithSmallDelay() {
@@ -72,13 +56,6 @@ class ShopScreen : ParchmentScreen() {
                                                                                 { toggleTooltip() },
                                                                                 { toggleCompare() }),
                                                              false)))
-    }
-
-    private fun closeScreen() {
-        Gdx.input.inputProcessor = null
-        Utils.setGamepadInputProcessor(null)
-        playSe(AudioEvent.SE_SCROLL)
-        fadeParchment()
     }
 
     private fun takeOne() {

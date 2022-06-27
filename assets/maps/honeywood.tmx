@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.6" orientation="orthogonal" renderorder="right-down" width="96" height="78" tilewidth="24" tileheight="24" infinite="0" nextlayerid="56" nextobjectid="395">
+<map version="1.8" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="96" height="78" tilewidth="24" tileheight="24" infinite="0" nextlayerid="56" nextobjectid="396">
  <properties>
   <property name="bgm" value="bgm_town"/>
   <property name="lightmap_camera" value="sunlight"/>
@@ -446,6 +446,11 @@
   <object id="367" type="blocker" x="1062" y="1800" width="36">
    <properties>
     <property name="condition" value="alone_in_party"/>
+   </properties>
+  </object>
+  <object id="395" name="quest_god_of_power" type="discover" x="1008" y="1800" width="144" height="48">
+   <properties>
+    <property name="task" value="1"/>
    </properties>
   </object>
  </objectgroup>

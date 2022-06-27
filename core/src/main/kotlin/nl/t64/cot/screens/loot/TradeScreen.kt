@@ -30,7 +30,7 @@ class TradeScreen : LootScreen() {
         } else {
             conversation.currentPhraseId = Constant.PHRASE_ID_LOOT_LEFTOVER
         }
-        closeScreen()
+        closeScreen(audioEvent = AudioEvent.SE_CONVERSATION_NEXT)
     }
 
 }

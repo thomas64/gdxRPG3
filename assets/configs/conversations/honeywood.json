@@ -117,7 +117,7 @@
     "phrases": {
       "1" : {"text": ["Hi Mozes! You really should check out this priest fella.", "He is so funny! Ha ha!"]},
       "2" : {
-        "text": ["It's too bad we're not allowed to leave town alone because of all the monsters outside, but I'm glad this fella came in.", "He can now brighten my dull and secluded life a little."], "choices": [
+        "text": ["It's too bad we're not allowed to leave the village alone because of all those monsters outside lately, but I'm glad this fella came in.", "He can now brighten my dull and secluded life a little."], "choices": [
           {"condition": ["i_rc_==_a_q_quest_honeywood_elder"], "nextId": "3"},
           {"condition": ["i_rc_!=_a_q_quest_honeywood_elder"], "command": "EXIT"}
         ]
@@ -521,7 +521,7 @@
     "phrases": {
       "1"   : {"text": ["Sir, by command of the village elder, we are not allowed to let anyone go outside the village alone."]},
       "2"   : {
-        "text": ["It's dangerous to go alone. Especially with all the monsters roaming around."], "choices": [
+        "text": ["It's dangerous to go alone. Especially with all the monsters roaming around lately."], "choices": [
           {"condition": ["alone_in_party"], "nextId": "3"}
         ]
       },

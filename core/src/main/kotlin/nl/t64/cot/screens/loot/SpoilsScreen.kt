@@ -22,7 +22,7 @@ open class SpoilsScreen : LootScreen() {
 
     override fun resolveLootAndCloseScreen(notUsedHere: Boolean) {
         brokerManager.lootObservers.notifySpoilsUpdated()
-        closeScreen()
+        closeScreen(audioEvent = AudioEvent.SE_CONVERSATION_NEXT)
     }
 
 }

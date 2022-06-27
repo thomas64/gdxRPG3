@@ -24,7 +24,7 @@ class FindScreen : LootScreen() {
         if (isAllTheLootCleared) {
             brokerManager.lootObservers.notifyLootTaken()
         }
-        closeScreen()
+        closeScreen(audioEvent = AudioEvent.SE_CONVERSATION_NEXT)
     }
 
 }
