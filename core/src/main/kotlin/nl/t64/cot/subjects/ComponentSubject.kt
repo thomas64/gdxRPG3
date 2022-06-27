@@ -45,6 +45,10 @@ class ComponentSubject {
         observers.forEach { it.onNotifyShowStorageScreen() }
     }
 
+    fun notifyShowWarpScreen(currentMapName: String) {
+        observers.forEach { it.onNotifyShowWarpScreen(currentMapName) }
+    }
+
     fun notifyShowMessageDialog(message: String) {
         observers.forEach { it.onNotifyShowMessageDialog(message) }
     }

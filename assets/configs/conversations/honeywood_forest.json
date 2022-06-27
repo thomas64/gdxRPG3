@@ -130,7 +130,11 @@
   },
   "fairy_crystal"      : {
     "phrases": {
-      "1": {"text": ["[Explanation about warp portals.]"], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["Our endearing Mozes, do you know about these so called warp portals?"]},
+      "2": {"text": ["Warp portals, like this one here, are scattered throughout Adan."]},
+      "3": {"text": ["If one touches one, one can travel instantaneous to other places."]},
+      "4": {"text": ["This is powerful and dangerous at the same time.", "But they are only usable by the gentle of heart."]},
+      "5": {"text": ["Don't be shy Mozes, go ahead and try touching it.", "We all know you are a gentle of heart."], "choices": [{"command": "EXIT"}]}
     }
   },
   "fairy_school"       : {

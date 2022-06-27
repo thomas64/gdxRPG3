@@ -18,9 +18,8 @@ abstract class GameMapRelocator(
     lateinit var enterDirection: Direction
 
     companion object {
-        fun createToMapLocation(rectObject: RectangleMapObject): String {
-            return rectObject.type ?: ""
-        }
+        val RectangleMapObject.toMapName: String get() = name
+        val RectangleMapObject.toMapLocation: String get() = type ?: ""
     }
 
 }

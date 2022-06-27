@@ -12,6 +12,7 @@ import nl.t64.cot.components.loot.SpoilsContainer
 import nl.t64.cot.components.party.HeroContainer
 import nl.t64.cot.components.party.PartyContainer
 import nl.t64.cot.components.party.inventory.InventoryContainer
+import nl.t64.cot.components.portal.PortalContainer
 import nl.t64.cot.components.quest.QuestContainer
 import nl.t64.cot.components.time.Clock
 import nl.t64.cot.subjects.ProfileObserver
@@ -32,6 +33,7 @@ class GameData : ProfileObserver {
     lateinit var spoils: SpoilsContainer
     lateinit var doors: DoorContainer
     lateinit var cutscenes: CutsceneContainer
+    lateinit var portals: PortalContainer
     var isTooltipEnabled = false
     var isComparingEnabled = false
 
@@ -58,6 +60,7 @@ class GameData : ProfileObserver {
         spoils = SpoilsContainer()
         doors = DoorContainer()
         cutscenes = CutsceneContainer()
+        portals = PortalContainer()
         isTooltipEnabled = true
         isComparingEnabled = true
         scenario.startNewGame()
@@ -78,6 +81,7 @@ class GameData : ProfileObserver {
         profileManager.setProperty("spoils", spoils)
         profileManager.setProperty("doors", doors)
         profileManager.setProperty("cutscenes", cutscenes)
+        profileManager.setProperty("portals", portals)
         profileManager.setProperty("isTooltipEnabled", isTooltipEnabled)
         profileManager.setProperty("isComparingEnabled", isComparingEnabled)
     }
@@ -99,6 +103,7 @@ class GameData : ProfileObserver {
         spoils = profileManager.getProperty("spoils")
         doors = profileManager.getProperty("doors")
         cutscenes = profileManager.getProperty("cutscenes")
+        portals = profileManager.getProperty("portals")
         isTooltipEnabled = profileManager.getProperty("isTooltipEnabled")
         isComparingEnabled = profileManager.getProperty("isComparingEnabled")
     }

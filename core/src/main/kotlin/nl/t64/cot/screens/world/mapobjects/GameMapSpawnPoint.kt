@@ -19,4 +19,8 @@ class GameMapSpawnPoint(rectObject: RectangleMapObject) : GameMapObject(rectObje
                 fromMapLocation.equals(portal.toMapLocation, true)
     }
 
+    fun isPortal(): Boolean {
+        return fromMapName == "portal"
+    }
+
 }

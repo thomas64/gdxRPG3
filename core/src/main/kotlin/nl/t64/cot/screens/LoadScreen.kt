@@ -68,22 +68,12 @@ class LoadScreen : Screen {
     }
 
     private fun createParchment(): Image {
-        return if (hasSmallParchment()) {
+        return if (screenTypeToLoad.hasSmallParchment()) {
             Utils.createSmallParchment()
+        } else if (screenTypeToLoad == ScreenType.WARP) {
+            Utils.createMediumParchment()
         } else {
             Utils.createLargeParchment()
-        }
-    }
-
-    private fun hasSmallParchment(): Boolean {
-        return when (screenTypeToLoad) {
-            ScreenType.FIND,
-            ScreenType.REWARD,
-            ScreenType.RECEIVE,
-            ScreenType.TRADE,
-            ScreenType.SPOILS,
-            ScreenType.SPOILS_CUTSCENE -> true
-            else -> false
         }
     }
 

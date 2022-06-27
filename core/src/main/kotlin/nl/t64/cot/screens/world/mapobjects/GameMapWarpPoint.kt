@@ -13,8 +13,8 @@ import nl.t64.cot.subjects.ActionObserver
 class GameMapWarpPoint(rectObject: RectangleMapObject, fromMapName: String) : GameMapRelocator(
     rectObject.rectangle,
     fromMapName,
-    rectObject.name,
-    createToMapLocation(rectObject),
+    rectObject.toMapName,
+    rectObject.toMapLocation,
     Color.WHITE
 ), ActionObserver {
 

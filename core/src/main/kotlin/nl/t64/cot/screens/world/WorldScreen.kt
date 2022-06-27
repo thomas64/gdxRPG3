@@ -26,6 +26,7 @@ import nl.t64.cot.screens.battle.BattleScreen
 import nl.t64.cot.screens.inventory.tooltip.MessageTooltip
 import nl.t64.cot.screens.loot.FindScreen
 import nl.t64.cot.screens.storage.StorageScreen
+import nl.t64.cot.screens.warp.WarpScreen
 import nl.t64.cot.screens.world.conversation.ConversationDialog
 import nl.t64.cot.screens.world.conversation.ConversationObserver
 import nl.t64.cot.screens.world.debug.DebugBox
@@ -155,6 +156,11 @@ class WorldScreen : Screen,
     override fun onNotifyShowStorageScreen() {
         player.resetInput()
         StorageScreen.load()
+    }
+
+    override fun onNotifyShowWarpScreen(currentMapName: String) {
+        player.resetInput()
+        WarpScreen.load(currentMapName)
     }
 
     override fun onNotifyShowMessageDialog(message: String) {

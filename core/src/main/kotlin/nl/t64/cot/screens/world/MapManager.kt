@@ -131,6 +131,13 @@ class MapManager : ProfileObserver {
         )
     }
 
+    fun changeMapWithWarpPortal(warpToMapName: String) {
+        loadMapWithBgmBgs(warpToMapName)
+        currentMap.setPlayerSpawnLocationForWarpPortal()
+        brokerManager.mapObservers.notifyMapChanged(currentMap)
+        brokerManager.mapObservers.notifyShakeCamera()
+    }
+
     private fun changeMapWithCameraShake(warpPoint: GameMapRelocator, direction: Direction) {
         changeMap(warpPoint, direction)
         brokerManager.mapObservers.notifyShakeCamera()

@@ -12,8 +12,8 @@ import nl.t64.cot.subjects.CollisionObserver
 class GameMapPortal(rectObject: RectangleMapObject, fromMapName: String) : GameMapRelocator(
     rectObject.rectangle,
     fromMapName,
-    rectObject.name,
-    createToMapLocation(rectObject),
+    rectObject.toMapName,
+    rectObject.toMapLocation,
     Color.BLACK
 ), CollisionObserver {
 

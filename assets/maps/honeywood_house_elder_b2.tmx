@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.8" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="14" height="20" tilewidth="24" tileheight="24" infinite="0" nextlayerid="25" nextobjectid="28">
+ <properties>
+  <property name="bgm" value="bgm_cellar"/>
+  <property name="lightmap_player" value="light_player"/>
+  <property name="step_sound" value="stone"/>
+ </properties>
+ <tileset firstgid="1" name="hero_s_hometown_chief_s_house_b2" tilewidth="24" tileheight="24" tilecount="171" columns="19">
+  <image source="tilesets/hero_s_hometown_chief_s_house_b2.png" width="456" height="216"/>
+ </tileset>
+ <tileset firstgid="172" source="tilesets/fsm_object02.tsx"/>
+ <tileset firstgid="940" source="tilesets/fsm_flame02.tsx"/>
+ <tileset firstgid="1708" source="tilesets/fsm_inside01_e.tsx"/>
+ <layer id="14" name="under0_none" width="14" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALaAAAEYAAB
+  </data>
+ </layer>
+ <layer id="15" name="under1_ground" width="14" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzV01kKwjAQxvH0xQW3Y7gguLd4DbcqehJ3j1LF5Zj+H1oYx2iDbw78GJow/UggnjHG+1EVNdQdekPMjbHB2qGvxNwIW2Qc+lLlFVEQfYesZV3nlXAVfY+cZV3nTXBGhBAH5NHCDeV4X+dNcYGPAEec0MYdi3g/LW+OPjp4pOTN0EUv/r/+/pQXqvPI3MGXvECcp6JyfMc8fY+RY56+R1te07xXkqdraF7fhK4kT5d+S671b3NP1qE2Tw==
+  </data>
+ </layer>
+ <layer id="16" name="under2_objects" width="14" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBiZQIKRgUGSkXR9BkA9hmTo8wDq8SRDXwJQTyIZ+kbBKBgMAAC2swHt
+  </data>
+ </layer>
+ <layer id="17" name="under3_none" width="14" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALaAAAEYAAB
+  </data>
+ </layer>
+ <layer id="18" name="under4_none" width="14" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALaAAAEYAAB
+  </data>
+ </layer>
+ <layer id="19" name="under5_none" width="14" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALaAAAEYAAB
+  </data>
+ </layer>
+ <layer id="20" name="over6_objects" width="14" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUoANdILaA0npI4lFI4hZY9DEi4SAk8Wg0OXz6dJDMtyRBHz48UPoAcnkDWQ==
+  </data>
+ </layer>
+ <layer id="21" name="over7_none" width="14" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALaAAAEYAAB
+  </data>
+ </layer>
+ <layer id="22" name="over8_none" width="14" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALaAAAEYAAB
+  </data>
+ </layer>
+ <objectgroup color="#0055ff" id="23" name="sound" visible="0">
+  <object id="25" name="wood" x="48" y="288" width="72" height="72"/>
+ </objectgroup>
+ <objectgroup color="#aa0000" id="7" name="collision">
+  <object id="3" x="288" y="0" width="48" height="480"/>
+  <object id="4" x="0" y="0" width="48" height="480"/>
+  <object id="5" x="48" y="0" width="240" height="144"/>
+  <object id="6" x="48" y="360" width="96" height="120"/>
+  <object id="7" x="192" y="360" width="96" height="120"/>
+  <object id="8" x="144" y="432" width="48" height="48"/>
+  <object id="9" x="144" y="144" width="48" height="48"/>
+ </objectgroup>
+ <objectgroup color="#55aaff" id="11" name="spawn">
+  <object id="1" name="honeywood_house_elder_b1" x="144" y="384" width="48" height="24"/>
+  <object id="27" name="portal" x="144" y="192" width="48" height="24">
+   <properties>
+    <property name="direction" value="south"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup color="#ffff7f" id="12" name="portal">
+  <object id="2" name="honeywood_house_elder_b1" x="144" y="408" width="48" height="24"/>
+ </objectgroup>
+ <objectgroup color="#ffaa7f" id="13" name="warp">
+  <object id="26" x="144" y="144" width="48" height="48"/>
+ </objectgroup>
+ <objectgroup color="#ffffff" id="24" name="lights">
+  <object id="15" x="162" y="138" width="12" height="12"/>
+ </objectgroup>
+</map>

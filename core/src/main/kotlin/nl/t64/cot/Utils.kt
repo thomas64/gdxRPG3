@@ -41,6 +41,8 @@ private const val CHEST_PATH = "sprites/objects/chest.png"
 private const val SPRITE_PARCHMENT = "sprites/parchment.png"
 private const val SMALL_PARCHMENT_WIDTH = 400f
 private const val SMALL_PARCHMENT_HEIGHT = 280f
+private const val MEDIUM_PARCHMENT_WIDTH = 400f
+private const val MEDIUM_PARCHMENT_HEIGHT = 600f
 private const val LIGHTMAP_PATH = "sprites/lightmaps/%s.png"
 
 private val TRANSPARENT = Color(0f, 0f, 0f, 0.5f)
@@ -223,6 +225,16 @@ object Utils {
     fun createLargeParchment(): Image {
         return Image(resourceManager.getTextureAsset(SPRITE_PARCHMENT)).apply {
             setSize(Gdx.graphics.width.toFloat(), Gdx.graphics.height.toFloat())
+        }
+    }
+
+    fun createMediumParchment(): Image {
+        return Image(resourceManager.getTextureAsset(SPRITE_PARCHMENT)).apply {
+            setSize(MEDIUM_PARCHMENT_WIDTH, MEDIUM_PARCHMENT_HEIGHT)
+            setPosition(
+                Gdx.graphics.width / 2f - MEDIUM_PARCHMENT_WIDTH / 2f,
+                Gdx.graphics.height / 2f - MEDIUM_PARCHMENT_HEIGHT / 2f
+            )
         }
     }
 
