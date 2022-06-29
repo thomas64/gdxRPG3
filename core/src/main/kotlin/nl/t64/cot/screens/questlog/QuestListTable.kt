@@ -18,7 +18,7 @@ import nl.t64.cot.constants.Constant
 private const val TEXT_FONT = "fonts/spectral_extra_bold_20.ttf"
 private const val TEXT_SIZE = 20
 private const val WIDTH = -102f
-private const val HEIGHT = -152f
+private const val HEIGHT = -252f
 private const val PAD_LEFT = 20f
 
 internal class QuestListTable {

@@ -7,10 +7,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.Window
 import nl.t64.cot.Utils
+import nl.t64.cot.Utils.gameData
+import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.quest.QuestGraph
+import nl.t64.cot.components.quest.QuestState
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.ParchmentScreen
 import nl.t64.cot.screens.inventory.messagedialog.MessageDialog
@@ -20,7 +23,7 @@ private const val TITLE_QUESTS = "   Quests"
 private const val TITLE_SUMMARY = "   Summary"
 private const val TITLE_TASKS = "   Tasks"
 private const val QUESTS_WINDOW_POSITION_X = 63f
-private const val QUESTS_WINDOW_POSITION_Y = 50f
+private const val QUESTS_WINDOW_POSITION_Y = 150f
 private const val SUMMARY_WINDOW_POSITION_X = 18f
 private const val SUMMARY_WINDOW_POSITION_Y = 834f
 private const val TASKS_WINDOW_POSITION_X = 18f
@@ -32,6 +35,7 @@ class QuestLogScreen : ParchmentScreen() {
 
     private val questListTable: QuestListTable = QuestListTable()
     private val questListWindow: Window = Utils.createDefaultWindow(TITLE_QUESTS, questListTable.container)
+    private val clockTable: ClockTable = ClockTable()
     private val summaryTable: SummaryTable = SummaryTable()
     private val summaryWindow: Window = Utils.createDefaultWindow(TITLE_SUMMARY, summaryTable.container)
     private val taskListTable: TaskListTable = TaskListTable()
@@ -55,6 +59,7 @@ class QuestLogScreen : ParchmentScreen() {
         stage.keyboardFocus = questListTable.questList
         stage.scrollFocus = questListTable.scrollPane
         handleQuestList()
+        clockTable.fill()
     }
 
     override fun render(dt: Float) {
@@ -63,13 +68,15 @@ class QuestLogScreen : ParchmentScreen() {
 
     private fun fillStage() {
         stage.addActor(questListWindow)
+        clockTable.addTo(stage)
         stage.addActor(summaryWindow)
         stage.addActor(taskListWindow)
         stage.addActor(buttonLabel)
         stage.addListener(QuestLogScreenListener(questListTable.questList,
                                                  { closeScreen() },
                                                  { showLegend() },
-                                                 { populateQuestSpecifics(it) }))
+                                                 { populateQuestSpecifics(it) },
+                                                 { cheatAllQuestsFinished() }))
     }
 
     private fun handleQuestList() {
@@ -113,6 +120,13 @@ class QuestLogScreen : ParchmentScreen() {
         taskListWindow.setPosition(quarterOfScreenX + TASKS_WINDOW_POSITION_X, TASKS_WINDOW_POSITION_Y)
         val buttonLabelX = (LABEL_PADDING_LEFT + questListWindow.width) - (buttonLabel.width / 2f)
         buttonLabel.setPosition(buttonLabelX, LABEL_PADDING_BOTTOM)
+    }
+
+    private fun cheatAllQuestsFinished() {
+        if (preferenceManager.isInDebugMode) {
+            playSe(AudioEvent.SE_MENU_ERROR)
+            gameData.quests.getAllKnownQuestsForVisual().forEach { it.currentState = QuestState.FINISHED }
+        }
     }
 
 }

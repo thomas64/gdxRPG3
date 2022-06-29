@@ -19,7 +19,8 @@ internal class QuestLogScreenListener(
     private val questList: List<QuestGraph>,
     private val closeScreenFunction: () -> Unit,
     private val showLegendFunction: () -> Unit,
-    private val populateQuestSpecifics: (QuestGraph) -> Unit
+    private val populateQuestSpecificsFunction: (QuestGraph) -> Unit,
+    private val cheatAllQuestsFinishedFunction: () -> Unit
 ) : InputListener() {
 
     override fun keyDown(event: InputEvent, keycode: Int): Boolean {
@@ -33,6 +34,8 @@ internal class QuestLogScreenListener(
             Input.Keys.UP, Input.Keys.DOWN, Input.Keys.HOME, Input.Keys.END -> isSelected()
             Constant.KEYCODE_L1, Input.Keys.LEFT -> setSelectedUp()
             Constant.KEYCODE_R1, Input.Keys.RIGHT -> setSelectedDown()
+
+            Input.Keys.NUM_0 -> cheatAllQuestsFinishedFunction.invoke()
         }
         return true
     }
@@ -57,7 +60,7 @@ internal class QuestLogScreenListener(
 
     private fun populateQuestSpecifics(quest: QuestGraph): Boolean {
         playSe(AudioEvent.SE_MENU_CURSOR)
-        populateQuestSpecifics.invoke(quest)
+        populateQuestSpecificsFunction.invoke(quest)
         return true
     }
 
