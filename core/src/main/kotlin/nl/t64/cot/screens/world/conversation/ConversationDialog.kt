@@ -241,6 +241,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             playSe(AudioEvent.SE_RESTORE)
         }
         delayInputListeners()
+        gameData.clock.takeHour()
         gameData.party.recoverFullHp()
         brokerManager.mapObservers.notifyFadeOut({ continueConversation(nextId) }, duration = 1f)
     }

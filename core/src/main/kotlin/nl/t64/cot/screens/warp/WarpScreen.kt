@@ -49,6 +49,8 @@ class WarpScreen : ParchmentScreen() {
     }
 
     private fun warp() {
+        if (portalListTable.portalList.selectedIndex == -1) return
+
         val transition = TransitionImage(color = Color.WHITE)
         val parchment = prepareBackgroundForFade()
 

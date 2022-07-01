@@ -33,6 +33,24 @@ class Clock {
         }
     }
 
+    fun takeQuarterHour() {
+        if (countdown > HALF_HOUR) {
+            countdown -= (HALF_HOUR / 2f)
+        }
+    }
+
+    fun takeHalfHour() {
+        if (countdown > (HALF_HOUR * 2f)) {
+            countdown -= HALF_HOUR
+        }
+    }
+
+    fun takeHour() {
+        if (countdown > (HALF_HOUR * 4f)) {
+            countdown -= (HALF_HOUR * 2f)
+        }
+    }
+
     fun isWarning(): Boolean {
         return countdown <= HALF_HOUR
     }

@@ -130,6 +130,7 @@ class BattleScreen : Screen {
     }
 
     private fun battleWonExitScreen() {
+        gameData.clock.takeHalfHour()
         exitScreen { battleObserver.notifyBattleWon(battleId, enemies.getSpoils()) }
     }
 
@@ -149,6 +150,7 @@ class BattleScreen : Screen {
     }
 
     private fun battleFledExitScreen() {
+        gameData.clock.takeQuarterHour()
         exitScreen { battleObserver.notifyBattleFled() }
     }
 
