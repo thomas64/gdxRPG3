@@ -67,6 +67,7 @@ class WorldScreen : Screen,
     private val debugBox = DebugBox(player)
     private val buttonsBox = ButtonBox()
 
+    private lateinit var scheduledEntities: List<Entity>
     private lateinit var npcEntities: List<Entity>
     private lateinit var currentNpcEntity: Entity
     private lateinit var lootList: List<Entity>
@@ -190,6 +191,15 @@ class WorldScreen : Screen,
     override fun onNotifyNpcsUpdate(newNpcEntities: List<Entity>) {
         npcEntities = newNpcEntities
     }
+
+    fun addTimedEntityWhoEnteredTheMap() {
+
+    }
+
+    fun removeTimedEntityWhoLeftTheMap() {
+
+    }
+
     //endregion
 
     //region LootObserver //////////////////////////////////////////////////////////////////////////////////////////////
@@ -278,6 +288,21 @@ class WorldScreen : Screen,
         }
     }
 
+    private fun updateEntities(dt: Float) {
+        if (!isInTransition) {
+            clockBox.update(dt)
+            player.update(dt)
+            // do global check for timed updates with currentMap and timeOfDay and scheduledNpcList.
+            // that class will add and remove entities to worldScreen.
+            // that class will also call the input of the necessary entities.
+        }
+        doorList.forEach { it.update(dt) }
+        lootList.forEach { it.update(dt) }
+        val playerGridPosition = player.getPositionInGrid()
+        npcEntities.forEach { it.update(dt) }
+        npcEntities.forEach { it.send(FindPathEvent(playerGridPosition)) }
+    }
+
     private fun renderMiniMap() {
         updateCameraPosition()
         mapRenderer.renderMapWithoutEntities()
@@ -309,18 +334,6 @@ class WorldScreen : Screen,
             mapManager.fadeAudio()
         }
         stage.draw()
-    }
-
-    private fun updateEntities(dt: Float) {
-        if (!isInTransition) {
-            clockBox.update(dt)
-            player.update(dt)
-        }
-        doorList.forEach { it.update(dt) }
-        lootList.forEach { it.update(dt) }
-        val playerGridPosition = player.getPositionInGrid()
-        npcEntities.forEach { it.update(dt) }
-        npcEntities.forEach { it.send(FindPathEvent(playerGridPosition)) }
     }
 
     private fun updateCameraPosition() {
