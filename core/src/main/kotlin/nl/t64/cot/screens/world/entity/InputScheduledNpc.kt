@@ -7,7 +7,7 @@ class InputScheduledNpc : InputComponent() {
 
 
     override fun receive(event: Event) {
-        // get events from time scenarios
+        // get events from scheduled scenarios
     }
 
     override fun update(entity: Entity, dt: Float) {

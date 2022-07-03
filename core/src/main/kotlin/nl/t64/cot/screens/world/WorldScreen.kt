@@ -67,7 +67,9 @@ class WorldScreen : Screen,
     private val debugBox = DebugBox(player)
     private val buttonsBox = ButtonBox()
 
-    private lateinit var scheduledEntities: List<Entity>
+    private val worldSchedule = WorldSchedule()
+
+    private val scheduledEntities: List<Entity> = mutableListOf()
     private lateinit var npcEntities: List<Entity>
     private lateinit var currentNpcEntity: Entity
     private lateinit var lootList: List<Entity>
@@ -192,11 +194,11 @@ class WorldScreen : Screen,
         npcEntities = newNpcEntities
     }
 
-    fun addTimedEntityWhoEnteredTheMap() {
+    fun addScheduledEntityWhoEnteredTheMap() {
 
     }
 
-    fun removeTimedEntityWhoLeftTheMap() {
+    fun removeScheduledEntityWhoLeftTheMap() {
 
     }
 
@@ -292,9 +294,10 @@ class WorldScreen : Screen,
         if (!isInTransition) {
             clockBox.update(dt)
             player.update(dt)
-            // do global check for timed updates with currentMap and timeOfDay and scheduledNpcList.
+            // do global check for scheduled updates with currentMap and timeOfDay and scheduledNpcList.
             // that class will add and remove entities to worldScreen.
             // that class will also call the input of the necessary entities.
+            worldSchedule.update(scheduledEntities, dt)
         }
         doorList.forEach { it.update(dt) }
         lootList.forEach { it.update(dt) }
