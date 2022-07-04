@@ -8,7 +8,7 @@
     "phrases": {
       "1": {"text": ["Oh no, what's this?"]},
       "2": {"text": ["It's one of Grace's ribbons!", "So she has been here."]},
-      "3": {"text": ["But where is she?"]},
+      "3": {"text": ["But where is she now?"]},
       "4": {"text": ["Grace!!"]},
       "5": {"text": ["Where are you?!"]},
       "6": {"text": ["Are you there?!"], "choices": [{"command": "EXIT"}]}
@@ -85,12 +85,12 @@
       "34": {"face": "fairy1", "text": ["In the cave you came from we've hidden a magic scroll, and you may use it against any orcs you might encounter on your quest."]},
       "35": {
         "face": "mozes", "choices": [
-          {"text": "What do you mean? Why does Ardor has Grace?", "nextId": "40"},
+          {"text": "What do you mean? Why does Ardor have Grace?", "nextId": "40"},
           {"text": "What does the scroll do? How do I use it?", "nextId": "50"},
           {"text": "How can I get it, if it is hidden?", "command": "ACCEPT_QUEST", "nextId": "60"}
         ]
       },
-      "40": {"face": "fairy1", "text": ["I'm not sure about that at the moment.", "Maybe she was at the wrong place at the wrong time. I sincerely hope so."], "choices": [{"nextId": "35"}]},
+      "40": {"face": "fairy1", "text": ["I'm not sure about that at the moment.", "Maybe she was in the wrong place at the wrong time. I sincerely hope so."], "choices": [{"nextId": "35"}]},
       "50": {"face": "fairy1", "text": ["You'll see when you get there.", "Don't worry, I wouldn't let you use it if I thought it wouldn't be safe."], "choices": [{"nextId": "35"}]},
       "60": {"face": "fairy1", "text": ["When you go back inside the cave, go all the way south, then east and search the north wall. There is a hidden door in the light."]},
       "61": {"face": "fairy1", "text": ["But before you go, please talk to the other fairies.", "They'll also offer you much needed help."]},
@@ -130,9 +130,9 @@
   },
   "fairy_crystal"      : {
     "phrases": {
-      "1": {"text": ["Our endearing Mozes, do you know about these so called warp portals?"]},
+      "1": {"text": ["Our endearing Mozes, do you know about these so-called warp portals?"]},
       "2": {"text": ["Warp portals, like this one here, are scattered throughout Adan."]},
-      "3": {"text": ["If one touches one, one can travel instantaneous to other places."]},
+      "3": {"text": ["If you touch one, you can travel instantaneous to other places."]},
       "4": {"text": ["This is powerful and dangerous at the same time.", "But they are only usable by the gentle of heart."]},
       "5": {"text": ["Don't be shy Mozes, go ahead and try touching it.", "We all know you are a gentle of heart."], "choices": [{"command": "EXIT"}]}
     }
@@ -146,7 +146,7 @@
           {"text": "No thanks. (Leave conversation)", "command": "EXIT"}
         ]
       },
-      "2": {"text": ["It seems that you are not very familiair with spell casting yet.", "I will teach you my 2 spells at rank 1, for free."]},
+      "2": {"text": ["It seems that you are not very familiar with spell casting yet.", "I will teach you my 2 spells at rank 1, for free."]},
       "3": {"text": ["Ready? Here you go!"]},
       "4": {"text": [". . ."]},
       "5": {"face": "mozes", "text": [". . . ."]},
@@ -177,13 +177,13 @@
   },
   "notice_dense_fog"   : {
     "phrases": {
-      "1": {"text": ["What a dense fog all of the sudden."]},
+      "1": {"text": ["What a dense fog all of a sudden."]},
       "2": {"text": ["How strange..."], "choices": [{"command": "EXIT"}]}
     }
   },
   "back_were_i_started": {
     "phrases": {
-      "1": {"text": ["Finally, I'm back were I started!"]},
+      "1": {"text": ["Finally, I'm back where I started!"]},
       "2": {"text": ["I got that 'another chance'."]},
       "3": {"text": ["Let's go find Grace again! I hope I'm not too late."], "choices": [{"command": "EXIT"}]}
     }

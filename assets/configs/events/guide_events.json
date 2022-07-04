@@ -1,12 +1,12 @@
 {
-  "guide_event_action"        : {
+  "guide_event_action"               : {
     "type": "messagebox",
     "text": [
       "Press %action% for an action.",
       "To talk with a person or to open a chest or door."
     ]
   },
-  "guide_event_inventory"     : {
+  "guide_event_inventory"            : {
     "type"     : "messagebox",
     "condition": ["_n_3_==_item_healing_potion"],
     "text"     : [
@@ -14,14 +14,14 @@
       "along with your equipment, stats, skills and spells."
     ]
   },
-  "guide_event_quest"         : {
+  "guide_event_quest"                : {
     "type": "messagebox",
     "text": [
       "Press %logbook% to see your logbook.",
       "Here you can see everything quest related."
     ]
   },
-  "guide_event_enemy"         : {
+  "guide_event_enemy"                : {
     "type": "messagebox",
     "text": [
       "Coming near an enemy will start a battle.",
@@ -29,24 +29,24 @@
       "which you can use to improve your character."
     ]
   },
-  "guide_event_slow"          : {
+  "guide_event_slow"                 : {
     "type": "messagebox",
     "text": [
       "Keep %slow% pressed to move stealthily.",
-      "Enemies will detect you less easy.",
+      "Enemies will detect you less easily.",
       "This way you can avoid battles.",
       "But remember, battles are the main source of XP."
     ]
   },
-  "guide_event_minimap"       : {
+  "guide_event_minimap"              : {
     "type": "messagebox",
     "text": [
       "Press %minimap% in large areas to see an overview of that area.",
       "This way it's hard to get lost, like in dark caves.",
-      "Small areas don't have the option to see it's overview."
+      "(Small areas don't have the option to see it's overview.)"
     ]
   },
-  "guide_event_conversation"  : {
+  "guide_event_conversation"         : {
     "type": "messagebox",
     "text": [
       "When in conversation with npc's, you get to choose how you want to respond.",
@@ -57,7 +57,7 @@
       "Please do try to converse with these orcs."
     ]
   },
-  "guide_event_equipment"     : {
+  "guide_event_equipment"            : {
     "type"     : "messagebox",
     "condition": ["_n_1_==_item_basic_light_helmet"],
     "text"     : [
@@ -66,7 +66,7 @@
       "You can also switch to different weapons, if you have them in your inventory."
     ]
   },
-  "guide_event_saving"        : {
+  "guide_event_saving"               : {
     "type"     : "messagebox",
     "condition": ["_c_!=_u_q_quest_mother_fairy"],
     "text"     : [
@@ -75,16 +75,16 @@
       "In this case the most upper right fairy can help you out with that."
     ]
   },
-  "guide_event_fast"          : {
+  "guide_event_fast"                 : {
     "type"     : "messagebox",
     "condition": ["been_in_fairy_town"],
     "text"     : [
       "Keep %fast% pressed to run.",
       "You'll be faster, but enemies will detect you much sooner.",
-      "(As opposed to stealth movement %slow% where enemies wil detect you less easy.)"
+      "(As opposed to stealth movement %slow% where enemies wil detect you less easily.)"
     ]
   },
-  "guide_event_quest_reminder": {
+  "guide_event_quest_reminder"       : {
     "type"     : "messagebox",
     "condition": ["been_in_fairy_town"],
     "text"     : [
@@ -92,7 +92,7 @@
       "Here you can see everything quest related."
     ]
   },
-  "guide_event_storage"       : {
+  "guide_event_storage"              : {
     "type": "messagebox",
     "text": [
       "The closet behind you can be used for storage.",
@@ -100,12 +100,20 @@
       "They will be kept there and they will be safe."
     ]
   },
-  "guide_event_party_member"  : {
+  "guide_event_party_member"         : {
     "type"     : "messagebox",
     "condition": ["_c_==_f_q_quest_honeywood_elder"],
     "text"     : [
       "Luana has joined your party.",
       "Press %inventory% to see her equipment, stats and skills."
+    ]
+  },
+  "guide_event_conversation_reminder": {
+    "type": "messagebox",
+    "text": [
+      "People often have different things to say when you meet different conditions.",
+      "So don't think you already know what people will say, because they've said something earlier.",
+      "Remember this well!"
     ]
   }
 }

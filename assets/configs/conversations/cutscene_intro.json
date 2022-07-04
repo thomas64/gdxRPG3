@@ -13,10 +13,10 @@
   },
   "mozes_puts_grace_to_bed"  : {
     "phrases": {
-      "1" : {"face": "mozes", "text": ["I'm sorry Grace, but after mother and father died, you know it's not safe here in the village anymore after dark. Orcs sometimes come in the village and I don't want to lose you too."]},
+      "1" : {"face": "mozes", "text": ["I'm sorry Grace, but after mother and father died, you know it's not safe here in the village anymore after dark. Orcs sometimes come in the village, and I don't want to lose you too."]},
       "2" : {"face": "girl01", "text": ["Boohoo! I miss mommy and daddy!"]},
       "3" : {"face": "mozes", "text": ["Me too Grace, me too."]},
-      "4" : {"face": "mozes", "text": ["Anyway, not only is it going to be dark, it's also past your bedtime, so in your bed you belong."]},
+      "4" : {"face": "mozes", "text": ["Anyway, not only is it getting dark, it's after bedtime too, so you should be in your bed."]},
       "5" : {"face": "girl01", "text": ["But I really wanna play outside!", "And I'm not afraid of the dark."]},
       "6" : {"face": "mozes", "text": ["Tomorrow you may play outside again, when it's safe."]},
       "7" : {"face": "girl01", "text": ["But ..."]},
@@ -58,7 +58,7 @@
       "2": {"text": [" .......... "]},
       "3": {"text": ["Umph! I can't get it out of the way.", "Now I can't return."]},
       "4": {"text": ["Well, there's nothing I can do about that now."]},
-      "5": {"text": ["The people of the village will remove it soon probably,", "at least I hope so."]},
+      "5": {"text": ["The people of the village will probably remove it soon."]},
       "6": {"text": ["I have to find Grace first."], "choices": [{"command": "EXIT"}]}
     }
   }

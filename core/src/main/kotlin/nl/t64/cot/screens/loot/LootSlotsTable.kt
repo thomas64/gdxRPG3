@@ -56,6 +56,9 @@ class LootSlotsTable(
             closeScreen()
         } else {
             taker.take(selector.getCurrentSlot())
+            if (inventory.isEmpty()) {
+                closeScreen()
+            }
         }
     }
 

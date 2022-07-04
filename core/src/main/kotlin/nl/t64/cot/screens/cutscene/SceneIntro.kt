@@ -190,7 +190,7 @@ class SceneIntro : CutsceneScreen() {
                 playBgm(AudioEvent.BGM_CELLAR)
             },
             Actions.addAction(Actions.sequence(
-                Actions.delay(5f),
+                Actions.delay(4f),
                 Actions.run { grace.direction = Direction.EAST },
                 Actions.delay(4f),
                 Actions.run { grace.entityState = EntityState.WALKING },

@@ -45,7 +45,7 @@
       "4" : {
         "face": "mozes", "choices": [
           {"condition": ["i_tc_1_q_this", "i_tc_11_q_this"], "text": "I think not. I brought a horse and some ropes.", "command": "GIVE_QUEST_ITEM", "nextId": "60"},
-          {"condition": ["i_r_==_f_q_this"], "text": "Could I by chance help with a horse and 2 ropes?", "command": "ACCEPT_QUEST", "nextId": "40"},
+          {"condition": ["i_r_==_f_q_this"], "text": "Could I by chance help you with a horse and 2 ropes?", "command": "ACCEPT_QUEST", "nextId": "40"},
           {"text": "Curious, when did the tree fall down?", "nextId": "10"},
           {"text": "Oh no! That's bad, I really need to be in Honeywood Forest.", "nextId": "20"},
           {"text": "Why don't you remove the tree immediately?", "nextId": "20"},
@@ -57,7 +57,7 @@
       "11": {"face": "mozes", "text": ["Say, did a tree also fall down here on the same road yesterday morning?"]},
       "12": {"face": "man02", "text": ["Ha ha, are you mad? Every day trees falling on the road?", "Luckily, that doesn't happen."]},
       "13": {"face": "man02", "text": ["But it'll take a while for us to remove it and clear the road for everyone."], "choices": [{"nextId": "4"}]},
-      "20": {"face": "man02", "text": ["I'm sorry Mozes, there is nothing I can do about it right now.", "You'll have to wait a while. Unless you bring me a horse and some ropes, ha ha!"]},
+      "20": {"face": "man02", "text": ["I'm sorry Mozes, there is nothing I can do about it right now.", "You'll have to wait awhile. Unless you bring me a horse and some ropes, ha ha!"]},
       "21": {
         "face": "mozes", "choices": [
           {"text": "Alright, I'll see what I can do.", "command": "ACCEPT_QUEST", "nextId": "35"},
@@ -68,7 +68,7 @@
       "31": {"face": "man02", "text": ["Hey Mozes, are you back? The tree is still blocking the road."], "choices": [{"nextId": "4"}]},
       "35": {"face": "man02", "text": ["I was kidding about the horse Mozes, ha ha!", "But sure, if you really bring me a strong horse and 2 ropes, I will clear the road for you immediately."]},
       "36": {"face": "man02", "text": ["You could ask the village elder about this matter.", "Maybe he can help you out."], "choices": [{"command": "EXIT", "nextId": "50"}]},
-      "40": {"face": "man02", "text": ["Uhh, that's exactly what you could help.", "If you really bring me a strong horse and 2 ropes, I will clear the road for you immediately."], "choices": [{"command": "EXIT", "nextId": "50"}]},
+      "40": {"face": "man02", "text": ["Uhh, that's exactly how you could help.", "If you really bring me a strong horse and 2 ropes, I will clear the road for you immediately."], "choices": [{"command": "EXIT", "nextId": "50"}]},
       "50": {
         "face": "man02", "text": ["The tree is still blocking the road Mozes."], "choices": [
           {"condition": ["i_tc_1_q_this", "i_tc_11_q_this"], "text": "Not for long! I got you a horse and the ropes.", "command": "GIVE_QUEST_ITEM", "nextId": "60"},
@@ -76,7 +76,7 @@
         ]
       },
       "60": {"face": "man02", "text": ["Fantastic, let's start dragging! Do you want to help me out?", "I think we'll be done in a couple of minutes."]},
-      "61": {"face": "mozes", "text": ["Gladly! The sooner the better."], "choices": [{"command": "RELOAD_NPCS", "nextId": "70"}]},
+      "61": {"face": "mozes", "text": ["Gladly! The sooner, the better."], "choices": [{"command": "RELOAD_NPCS", "nextId": "70"}]},
       "70": {"face": "man02", "text": ["Thanks for your help Mozes. I could not have done it so soon without your help."], "choices": [{"command": "EXIT", "nextId": "70"}]}
     }
   },
@@ -133,7 +133,7 @@
       "11": {"face": "luana", "text": ["What's wrong with you!?"]},
       "12": {"face": "luana", "text": ["We've been friends since childhood, we always went on adventures together, and now you think I would leave you hanging?"]},
       "13": {"face": "luana", "text": ["Who will be there to protect you? You need protection...", "From me! You do know that right?"]},
-      "14": {"face": "luana", "text": ["Okay, here's the deal. You are taking me with you and MAYBE I'll forgive you for doubting my adventurous spirit."]},
+      "14": {"face": "luana", "text": ["Okay, here's the deal. You are taking me with you, and MAYBE I'll forgive you for doubting my adventurous spirit."]},
       "15": {"face": "mozes", "text": ["Erm... Okay?"], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "20"}]},
       "20": {"face": "luana", "text": ["Alright! Now were talking!", "You are so not gonna regret this."]},
       "21": {"face": "luana", "text": ["Let's go!"]},
@@ -374,7 +374,7 @@
           {"condition": ["i_tc_7_q_quest_get_horse"], "nextId": "1410"}
         ]
       },
-      "1401": {"face": "mozes", "text": ["I didn't gave it yet."]},
+      "1401": {"face": "mozes", "text": ["I haven't given it yet."]},
       "1402": {"face": "oldwoman11", "text": ["See that you do. That poor horse."], "choices": [{"command": "EXIT"}]},
       "1410": {"face": "mozes", "text": ["Yes thank you, it worked like a charm."]},
       "1411": {"face": "oldwoman11", "text": ["And how are you, my dear?"], "choices": [{"nextId": "2"}]}
@@ -385,7 +385,7 @@
       "1"   : {"face": "oldman11", "text": ["Hello Mozes, how can I help you today?"]},
       "2"   : {
         "face": "mozes", "choices": [
-          {"condition": ["i_rc_==_a_q_quest_god_of_power", "i_rc_!=_a_q_this"], "text": "I need to go to Lastdenn, but I'm not allowed to leave the village.", "nextId": "50"},
+          {"condition": ["i_rc_==_a_q_quest_god_of_power", "i_rc_===_u_q_this"], "text": "I need to go to Lastdenn, but I'm not allowed to leave the village.", "nextId": "50"},
           {"condition": ["i_rc_>=_a_q_quest_helping_horse", "i_c_<=_a_q_quest_get_horse"], "text": "There is a large tree blocking the road to Honeywood Forest.", "nextId": "10"},
           {"condition": ["i_rc_>=_a_q_quest_get_horse", "i_tn_7_q_quest_get_horse"], "text": "Angie's horse is sick. Can you help her out?", "nextId": "40"},
           {"condition": ["i_rc_>=_a_q_quest_get_horse", "i_tn_8_q_quest_get_horse"], "text": "I'm looking for horseshoes.", "nextId": "20"},
@@ -450,7 +450,7 @@
       "102" : {
         "face": "man07", "text": ["That's what I call interest. That slacker hasn't payed up in such a long time."], "choices": [
           {"condition": ["_n_4_>=_item_gold"], "text": "[Gold 4] That seems fair.", "nextId": "110"},
-          {"condition": ["_n_4_>=_item_gold"], "text": "[Gold 4] Okay, but that doesn't seems fair at all.", "nextId": "111"},
+          {"condition": ["_n_4_>=_item_gold"], "text": "[Gold 4] Okay, but that doesn't seem quite fair at all.", "nextId": "111"},
           {"condition": ["_n_3_>=_item_gold", "diplomat1"], "text": "[Gold 3, Diplomat 1] But I only got three gold pieces from Jaron to pay you.", "nextId": "120"},
           {"condition": ["i_n_3_==_item_gold"], "text": "[Gold 3] I'm sorry, but three is all I have with me.", "nextId": "120"},
           {"text": "*grumble* I'll be back. (Leave conversation)", "command": "EXIT", "nextId": "200"}
@@ -460,7 +460,7 @@
       "111" : {"face": "man07", "text": ["I'm sorry, business is business."], "choices": [{"nextId": "115"}]},
       "115" : {"face": "mozes", "text": ["Okay then, here you are. Four gold pieces then."], "choices": [{"command": "DELIVER_QUEST_ITEM_ALTERNATE", "nextId": "130"}]},
       "120" : {"face": "man07", "text": ["Alright alright, I'll settle with three for now. It's better than nothing.", "I will see to it that I get that fourth one later."]},
-      "121" : {"face": "mozes", "text": ["Here your are. Three gold pieces then."], "choices": [{"command": "DELIVER_QUEST_ITEM", "nextId": "130"}]},
+      "121" : {"face": "mozes", "text": ["Here you are. Three gold pieces then."], "choices": [{"command": "DELIVER_QUEST_ITEM", "nextId": "130"}]},
       "130" : {"face": "man07", "text": ["Thank you very much on behalf of Black Smith Inc."]},
       "131" : {"face": "man07", "text": ["(Jaron, you lazy bum.)"], "choices": [{"command": "EXIT"}]},
       "200" : {"face": "mozes", "text": ["About that four gold bill for Jaron..."], "choices": [{"nextId": "102"}]},
@@ -487,7 +487,7 @@
         ]
       },
       "10"  : {"text": ["Thanks. Alright, first of all I have to pay an outstanding bill from the blacksmith. Would you bring him these three gold pieces?"]},
-      "11"  : {"text": ["Second, mrs. Johanna came here last week to pay me a visit and somehow she lost her late husband's ring here."]},
+      "11"  : {"text": ["Second, mrs. Johanna came here last week to pay me a visit, and somehow she lost her late husband's ring here."]},
       "12"  : {"text": ["That's what old people do I guess, lose stuff."]},
       "13"  : {"text": ["We searched for it, but we couldn't find it. But today I accidentally stumbled upon it! So, would you give her this ring back?"]},
       "14"  : {"text": ["And third, I need my little brother Kaidan here. He is playing somewhere outside. Would you go find him and tell him to come home?"]},

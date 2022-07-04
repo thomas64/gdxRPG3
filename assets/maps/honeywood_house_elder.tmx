@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.6" orientation="orthogonal" renderorder="right-down" width="26" height="42" tilewidth="24" tileheight="24" infinite="0" nextlayerid="26" nextobjectid="72">
+<map version="1.8" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="26" height="42" tilewidth="24" tileheight="24" infinite="0" nextlayerid="27" nextobjectid="74">
  <properties>
   <property name="bgm" value="bgm_house"/>
   <property name="bgs" value="bgs_fireplace"/>
@@ -127,5 +127,8 @@
   <object id="3" name="honeywood" x="144" y="936" width="48" height="24"/>
   <object id="39" name="honeywood_house_elder_2f" x="432" y="624" width="48" height="24"/>
   <object id="43" name="honeywood_house_elder_b1" x="528" y="744" width="48" height="24"/>
+ </objectgroup>
+ <objectgroup color="#ff55ff" id="26" name="event">
+  <object id="73" name="guide_event_conversation_reminder" type="discover" x="144" y="384" width="144" height="96"/>
  </objectgroup>
 </map>

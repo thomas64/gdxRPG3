@@ -23,15 +23,16 @@
     }
   },
   "quest_god_of_power"         : {
-    "title"   : "The God of Power",
-    "entityId": "ylarus",
-    "summary" : "For some reason Adan goes up in flames when Grace become sacrificed by the wizard Ardor. Ylarus, the God of Time doesn't know why, so he sends you on a quest to finds answers.",
-    "tasks"   : {
+    "title"     : "The God of Power",
+    "entityId"  : "ylarus",
+    "summary"   : "For some reason Adan goes up in flames when Grace become sacrificed by the wizard Ardor. Ylarus, the God of Time doesn't know why, so he sends you on a quest to finds answers.",
+    "linkedWith": ["quest_honeywood_elder"],
+    "tasks"     : {
       "1": {
         "taskPhrase": "Leave Honeywood Village through the south past the guards.",
         "type"      : "DISCOVER"
       },
-      "2": {
+      "3": {
         "taskPhrase": "Travel to Lastdenn to find answers.",
         "type"      : "DISCOVER"
       }
@@ -205,11 +206,13 @@
     }
   },
   "quest_honeywood_elder"      : {
-    "summary" : "Get Luana to join your party.",
-    "isHidden": true,
-    "tasks"   : {
-      "1": {
-        "taskPhrase"    : "Ask Luana to join you.",
+    "title"     : "The God of Power",
+    "entityId"  : "oldman11",
+    "summary"   : "Honeywood elder",
+    "isSubQuest": true,
+    "tasks"     : {
+      "2": {
+        "taskPhrase"    : "      Ask Luana to join you on your travels. She is near the statue.",
         "type"          : "DELIVER_MESSAGE",
         "conversationId": "luana_join"
       }
