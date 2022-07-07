@@ -69,7 +69,7 @@ class WorldScreen : Screen,
 
     private val worldSchedule = WorldSchedule()
 
-    private val scheduledEntities: List<Entity> = mutableListOf()
+    private val visibleScheduledEntities: MutableList<Entity> = mutableListOf()
     private lateinit var npcEntities: List<Entity>
     private lateinit var currentNpcEntity: Entity
     private lateinit var lootList: List<Entity>
@@ -194,14 +194,17 @@ class WorldScreen : Screen,
         npcEntities = newNpcEntities
     }
 
-    fun addScheduledEntityWhoEnteredTheMap() {
-
+    override fun onNotifyAddScheduledEntity(entity: Entity) {
+        if (entity !in visibleScheduledEntities) {
+            visibleScheduledEntities.add(entity)
+        }
     }
 
-    fun removeScheduledEntityWhoLeftTheMap() {
-
+    override fun onNotifyRemoveScheduledEntity(entity: Entity) {
+        if (entity in visibleScheduledEntities) {
+            visibleScheduledEntities.remove(entity)
+        }
     }
-
     //endregion
 
     //region LootObserver //////////////////////////////////////////////////////////////////////////////////////////////
@@ -294,16 +297,14 @@ class WorldScreen : Screen,
         if (!isInTransition) {
             clockBox.update(dt)
             player.update(dt)
-            // do global check for scheduled updates with currentMap and timeOfDay and scheduledNpcList.
-            // that class will add and remove entities to worldScreen.
-            // that class will also call the input of the necessary entities.
-            worldSchedule.update(scheduledEntities, dt)
+            worldSchedule.update()
         }
         doorList.forEach { it.update(dt) }
         lootList.forEach { it.update(dt) }
         val playerGridPosition = player.getPositionInGrid()
         npcEntities.forEach { it.update(dt) }
         npcEntities.forEach { it.send(FindPathEvent(playerGridPosition)) }
+        visibleScheduledEntities.forEach { it.update(dt) }
     }
 
     private fun renderMiniMap() {
@@ -352,6 +353,7 @@ class WorldScreen : Screen,
 
         val allEntities: MutableList<Entity> = ArrayList()
         allEntities.addAll(npcEntities)
+        allEntities.addAll(visibleScheduledEntities)
         allEntities.add(player)
         allEntities.sortByDescending { it.position.y }
         allEntities.forEach { it.render(batch) }

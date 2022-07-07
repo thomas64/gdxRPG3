@@ -1,6 +1,7 @@
 package nl.t64.cot.components.time
 
 import com.badlogic.gdx.math.MathUtils
+import java.time.LocalTime
 
 
 private const val START_OF_DAY = 27000f // 7:30
@@ -68,12 +69,21 @@ class Clock {
     }
 
     fun getTimeOfDayFormatted(): String {
-        val timeOfDay = START_OF_DAY + (TWELVE_HOURS - countdown)
+        val timeOfDay = getTimeOfDayInSeconds()
         return String.format("%02d:%02d", getHours(timeOfDay), getMinutes(timeOfDay))
+    }
+
+    fun getTimeOfDay(): LocalTime {
+        val timeOfDay = getTimeOfDayInSeconds().toLong()
+        return LocalTime.MIN.plusSeconds(timeOfDay)
     }
 
     private fun stop() {
         hasStarted = false
+    }
+
+    private fun getTimeOfDayInSeconds(): Float {
+        return START_OF_DAY + (TWELVE_HOURS - countdown)
     }
 
     private fun getMinutes(seconds: Float): Int {

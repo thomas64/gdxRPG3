@@ -7,5 +7,6 @@ interface EntityObserver {
 
     fun onNotifyPartyUpdate()
     fun onNotifyNpcsUpdate(newNpcEntities: List<Entity>)
-
+    fun onNotifyAddScheduledEntity(entity: Entity)
+    fun onNotifyRemoveScheduledEntity(entity: Entity)
 }

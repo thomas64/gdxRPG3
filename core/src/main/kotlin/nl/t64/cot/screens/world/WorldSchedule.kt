@@ -1,16 +1,15 @@
 package nl.t64.cot.screens.world
 
-import nl.t64.cot.screens.world.entity.Entity
+import nl.t64.cot.screens.world.schedule.Pietje1
+import nl.t64.cot.screens.world.schedule.Schedule
 
 
 class WorldSchedule {
 
-    private lateinit var scheduledEntities: List<Entity>
+    private var allSchedules: List<Schedule> = listOf(Pietje1())
 
-    fun update(scheduledEntities: List<Entity>, dt: Float) {
-        this.scheduledEntities = scheduledEntities
-
-
+    fun update() {
+        allSchedules.forEach { it.update() }
     }
 
 }
