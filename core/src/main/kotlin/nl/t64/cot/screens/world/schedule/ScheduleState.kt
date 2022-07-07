@@ -11,7 +11,7 @@ import kotlin.math.abs
 
 
 class ScheduleState(
-    private val map: String,
+    private val mapTitle: String,
     val direction: Direction,
     val state: EntityState,
     startTimeHours: Int,
@@ -29,8 +29,8 @@ class ScheduleState(
     private val endPosition: Vector2 = Vector2(endPositionX.toFloat(), endPositionY.toFloat())
 
     fun isCurrentMapInState(): Boolean {
-        val currentMap = mapManager.currentMap.mapTitle
-        return currentMap == map
+        val currentMap: String = mapManager.currentMap.mapTitle
+        return currentMap == mapTitle
     }
 
     fun isCurrentTimeInState(): Boolean {
