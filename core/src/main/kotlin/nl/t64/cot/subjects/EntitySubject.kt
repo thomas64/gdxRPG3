@@ -35,4 +35,8 @@ class EntitySubject {
         observers.forEach { it.onNotifyRemoveScheduledEntity(entity) }
     }
 
+    fun notifyUseDoor(doorId: String) {
+        observers.forEach { it.onNotifyUseDoor(doorId) }
+    }
+
 }

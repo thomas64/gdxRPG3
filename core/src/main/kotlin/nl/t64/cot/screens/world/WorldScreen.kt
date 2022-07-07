@@ -36,6 +36,7 @@ import nl.t64.cot.screens.world.entity.Entity
 import nl.t64.cot.screens.world.entity.GraphicsPlayer
 import nl.t64.cot.screens.world.entity.InputPlayer
 import nl.t64.cot.screens.world.entity.PhysicsPlayer
+import nl.t64.cot.screens.world.entity.events.ActionEvent
 import nl.t64.cot.screens.world.entity.events.FindPathEvent
 import nl.t64.cot.screens.world.entity.events.LoadEntityEvent
 import nl.t64.cot.screens.world.schedule.WorldSchedule
@@ -206,6 +207,10 @@ class WorldScreen : Screen,
             visibleScheduledEntities.remove(entity)
         }
     }
+
+    override fun onNotifyUseDoor(doorId: String) {
+        doorList.single { it.id == doorId }.send(ActionEvent())
+    }
     //endregion
 
     //region LootObserver //////////////////////////////////////////////////////////////////////////////////////////////
@@ -348,19 +353,12 @@ class WorldScreen : Screen,
 
     private fun renderEntities(batch: Batch) {
         lootList.forEach { it.render(batch) }
-        doorList
-            .filter { it.position.y >= player.position.y }
-            .forEach { it.render(batch) }
-
-        val allEntities: MutableList<Entity> = ArrayList()
-        allEntities.addAll(npcEntities)
-        allEntities.addAll(visibleScheduledEntities)
-        allEntities.add(player)
-        allEntities.sortByDescending { it.position.y }
-        allEntities.forEach { it.render(batch) }
-
-        doorList
-            .filter { it.position.y < player.position.y }
+        listOf(doorList,
+               npcEntities,
+               visibleScheduledEntities,
+               listOf(player))
+            .flatten()
+            .sortedByDescending { it.position.y }
             .forEach { it.render(batch) }
     }
 

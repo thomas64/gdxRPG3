@@ -7,10 +7,7 @@ import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.door.Door
 import nl.t64.cot.constants.Constant
-import nl.t64.cot.screens.world.entity.events.Event
-import nl.t64.cot.screens.world.entity.events.LoadEntityEvent
-import nl.t64.cot.screens.world.entity.events.OnActionEvent
-import nl.t64.cot.screens.world.entity.events.StateEvent
+import nl.t64.cot.screens.world.entity.events.*
 
 
 class PhysicsDoor(private val door: Door) : PhysicsComponent() {
@@ -30,6 +27,9 @@ class PhysicsDoor(private val door: Door) : PhysicsComponent() {
             ) {
                 isSelected = true
             }
+        }
+        if (event is ActionEvent) {
+            isSelected = true
         }
     }
 
