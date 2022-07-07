@@ -12,7 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ScreenUtils
-import nl.t64.cot.Utils
 import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.mapManager
@@ -25,6 +24,7 @@ import nl.t64.cot.audio.stopSe
 import nl.t64.cot.components.cutscene.CutsceneId
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
+import nl.t64.cot.toDrawable
 
 
 private const val TITLE_LABEL = "Select profile"
@@ -202,8 +202,8 @@ abstract class MenuLoad : MenuScreen() {
         listStyle.font = menuFont
         listStyle.fontColorSelected = selectColor
         listStyle.fontColorUnselected = fontColor
-        listStyle.background = Utils.createDrawable(Color.CLEAR)
-        listStyle.selection = Utils.createDrawable(Color.CLEAR)
+        listStyle.background = Color.CLEAR.toDrawable()
+        listStyle.selection = Color.CLEAR.toDrawable()
 
         // actors
         val titleLabel = Label(TITLE_LABEL, titleStyle)

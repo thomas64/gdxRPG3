@@ -8,6 +8,7 @@ import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.screens.ScreenUI
+import nl.t64.cot.toDrawable
 
 
 private const val SPRITE_BORDER_TOP_GRAY = "sprites/border_top_gray.png"
@@ -34,7 +35,7 @@ object InventoryUtils {
 
     fun setWindowDeselected(container: Table) {
         val parent = container.parent as Window
-        parent.titleTable.background = Utils.createDrawable(Color.CLEAR)
+        parent.titleTable.background = Color.CLEAR.toDrawable()
     }
 
     fun setWindowSelected(container: Table) {

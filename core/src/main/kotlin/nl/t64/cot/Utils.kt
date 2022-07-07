@@ -207,19 +207,7 @@ object Utils {
     }
 
     fun createTransparency(): Drawable {
-        return createDrawable(TRANSPARENT)
-    }
-
-    fun createDrawable(color: Color): Drawable {
-        return createImage(color).drawable
-    }
-
-    fun createImage(color: Color): Image {
-        val pixmap = Pixmap(1, 1, Pixmap.Format.RGBA8888)
-        pixmap.setColor(color)
-        pixmap.fill()
-        return Image(Texture(pixmap))
-            .also { pixmap.dispose() }
+        return TRANSPARENT.toDrawable()
     }
 
     fun createLargeParchment(): Image {
@@ -248,4 +236,16 @@ object Utils {
         }
     }
 
+}
+
+fun Color.toDrawable(): Drawable {
+    return toImage().drawable
+}
+
+fun Color.toImage(): Image {
+    val pixmap = Pixmap(1, 1, Pixmap.Format.RGBA8888)
+    pixmap.setColor(this)
+    pixmap.fill()
+    return Image(Texture(pixmap))
+        .also { pixmap.dispose() }
 }

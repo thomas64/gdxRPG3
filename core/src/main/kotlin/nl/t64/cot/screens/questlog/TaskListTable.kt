@@ -14,6 +14,7 @@ import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.components.quest.QuestGraph
 import nl.t64.cot.components.quest.QuestState
 import nl.t64.cot.components.quest.QuestTask
+import nl.t64.cot.toDrawable
 
 
 private const val TEXT_FONT = "fonts/spectral_extra_bold_20.ttf"
@@ -46,8 +47,8 @@ internal class TaskListTable {
             font = taskListFont
             fontColorSelected = Color.BLACK
             fontColorUnselected = Color.BLACK
-            background = Utils.createDrawable(Color.CLEAR)
-            selection = Utils.createDrawable(Color.CLEAR)
+            background = Color.CLEAR.toDrawable()
+            selection = Color.CLEAR.toDrawable()
         })
     }
 

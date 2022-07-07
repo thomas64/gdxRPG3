@@ -3,7 +3,7 @@ package nl.t64.cot.sfx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.Touchable
 import com.badlogic.gdx.scenes.scene2d.ui.Image
-import nl.t64.cot.Utils
+import nl.t64.cot.toDrawable
 
 
 private const val TEN_TIMES_FULL_HD = 10f
@@ -16,7 +16,7 @@ class TransitionImage(
     init {
         super.toFront()
         super.setFillParent(true)
-        super.setDrawable(Utils.createDrawable(color))
+        super.setDrawable(color.toDrawable())
         super.clearListeners()
         super.setTouchable(Touchable.disabled)
         super.scaleBy(TEN_TIMES_FULL_HD)

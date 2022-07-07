@@ -36,6 +36,7 @@ import nl.t64.cot.screens.loot.RewardScreen
 import nl.t64.cot.screens.loot.TradeScreen
 import nl.t64.cot.screens.school.SchoolScreen
 import nl.t64.cot.screens.shop.ShopScreen
+import nl.t64.cot.toDrawable
 
 
 private const val FONT = "fonts/spectral_regular_24.ttf"
@@ -447,7 +448,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
 
     private fun setStyleBasedOnContent(choices: GdxArray<ConversationChoice>) {
         val drawable = if (choices[0].isDefault()) {
-            Utils.createDrawable(Color.CLEAR)
+            Color.CLEAR.toDrawable()
         } else {
             Utils.createFullBorder()
         }.apply {

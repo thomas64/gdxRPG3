@@ -15,6 +15,7 @@ import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.audio.stopAllSe
 import nl.t64.cot.constants.Constant
+import nl.t64.cot.toDrawable
 
 
 private const val FONT = "fonts/spectral_regular_24.ttf"
@@ -82,7 +83,7 @@ class DialogQuestion(
 
     private fun setAllTextButtonsToBlack() {
         dialog.buttonTable.children.forEach { (it as TextButton).style.fontColor = Color.BLACK }
-        dialog.buttonTable.children.forEach { (it as TextButton).label.style.background = Utils.createDrawable(Color.CLEAR) }
+        dialog.buttonTable.children.forEach { (it as TextButton).label.style.background = Color.CLEAR.toDrawable() }
     }
 
     private fun setCurrentTextButtonToRed() {

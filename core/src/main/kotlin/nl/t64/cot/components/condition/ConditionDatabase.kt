@@ -49,17 +49,17 @@ object ConditionDatabase {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private val doesKnowAboutGrace
-        get() = isOneOfBothStatesEqualOrHigher("quest_orc_guards", QuestState.ACCEPTED)
-                || isOneOfBothStatesEqualOrHigher("quest_mother_fairy", QuestState.ACCEPTED)
+        get() = "quest_orc_guards" hasOneOfBothStatesEqualOrHigherThan QuestState.ACCEPTED
+                || "quest_mother_fairy" hasOneOfBothStatesEqualOrHigherThan QuestState.ACCEPTED
     private val hasBeenInFairyTown get() = hasEventPlayed("find_great_tree")
     private val hasDefeatedOrcGuards get() = isBattleWon("quest_orc_guards")
     private val hasStartingSpells get() = hasAnySpell("mozes")
     private val hasNotYetTalkedToLennorFirstCycle
-        get() = isQuestResetStateEqual("quest_helping_horse", QuestState.UNKNOWN)
-                && isCurrentPhraseId("quest_helping_horse", "1")
+        get() = "quest_helping_horse" hasResetState QuestState.UNKNOWN
+                && "quest_helping_horse" hasCurrentPhraseId "1"
     private val notHappyWithJaron
         get() = areTargetAndAlternateTheSame("quest_get_tow_rope", "13") // "_13_"
-                || isCurrentPhraseId("quest_get_horseshoes", "200")
+                || "quest_get_horseshoes" hasCurrentPhraseId "200"
 
     private val isAloneInParty get() = hasAmountOfPartyMembers(1)
 
@@ -74,12 +74,6 @@ object ConditionDatabase {
     private fun hasAverageLevelOf(requestedLevel: Int): Boolean =
         gameData.party.getAverageLevel() >= requestedLevel
 
-    private fun isQuestResetStateEqual(questId: String, questState: QuestState): Boolean =
-        gameData.quests.getQuestById(questId).resetState == questState
-
-    private fun isOneOfBothStatesEqualOrHigher(questId: String, questState: QuestState): Boolean =
-        gameData.quests.getQuestById(questId).isOneOfBothStatesEqualOrHigherThan(questState)
-
     private fun areTargetAndAlternateTheSame(questId: String, questTask: String): Boolean {
         val questTask = gameData.quests.getQuestById(questId).tasks[questTask]!!
         return questTask.target == questTask.targetAlternate
@@ -91,10 +85,16 @@ object ConditionDatabase {
     private fun isBattleWon(battleId: String): Boolean =
         gameData.battles.isBattleWon(battleId)
 
-    private fun isCurrentPhraseId(conversationId: String, currentPhraseId: String): Boolean =
-        gameData.conversations.getConversationById(conversationId).currentPhraseId == currentPhraseId
-
     private fun hasAmountOfPartyMembers(amount: Int): Boolean =
         gameData.party.size == amount
 
 }
+
+private infix fun String.hasOneOfBothStatesEqualOrHigherThan(questState: QuestState): Boolean =
+    gameData.quests.getQuestById(this).isOneOfBothStatesEqualOrHigherThan(questState)
+
+private infix fun String.hasResetState(questState: QuestState): Boolean =
+    gameData.quests.getQuestById(this).resetState == questState
+
+private infix fun String.hasCurrentPhraseId(currentPhraseId: String): Boolean =
+    gameData.conversations.getConversationById(this).currentPhraseId == currentPhraseId

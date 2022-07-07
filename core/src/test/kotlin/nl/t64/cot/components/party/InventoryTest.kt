@@ -173,7 +173,8 @@ internal class InventoryTest : GameTest() {
         inventory.forceSetItemAt(1, gold1)
         inventory.forceSetItemAt(2, gold2)
         inventory.forceSetItemAt(3, gold3)
-        inventory.forceSetItemAt(4, gold4)
+        inventory.forceSetItemAt(4, null)
+        inventory.forceSetItemAt(5, gold4)
         assertThat(inventory.getTotalOfItem(GOLD)).isEqualTo(121)
 
         inventory.autoRemoveItem(GOLD, 46)

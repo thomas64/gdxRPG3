@@ -14,6 +14,7 @@ import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.PartyContainer
 import nl.t64.cot.constants.Constant
+import nl.t64.cot.toImage
 
 
 private const val FONT_PATH = "fonts/spectral_extra_bold_20.ttf"
@@ -88,7 +89,7 @@ class HeroesTable {
 
     private fun addPossibleGrayBackgroundTo(stack: Stack, hero: HeroItem) {
         if (hero.hasSameIdAs(InventoryUtils.getSelectedHero())) {
-            stack.add(Utils.createImage(Constant.GRAY))
+            stack.add(Constant.GRAY.toImage())
         }
     }
 
@@ -127,7 +128,7 @@ class HeroesTable {
     private fun createFill(hero: HeroItem): Image {
         val hpStats = hero.getAllHpStats()
         val color = Utils.getHpColor(hpStats)
-        return Utils.createImage(color).apply {
+        return color.toImage().apply {
             setScaling(Scaling.stretchY)
             align = Align.left
         }.also { it.drawable.minWidth = (STATS_COLUMN_WIDTH / hero.getMaximumHp()) * hero.getCurrentHp() }

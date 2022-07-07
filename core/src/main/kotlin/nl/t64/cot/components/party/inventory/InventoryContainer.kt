@@ -55,16 +55,16 @@ class InventoryContainer(numberOfSlots: Int = 0) {
     fun autoRemoveItem(itemId: String, orgAmount: Int) {
         check(hasEnoughOfItem(itemId, orgAmount)) { "Cannot remove this resource from Inventory." }
 
-        var amount = orgAmount
-        for ((key, value) in findAllSlotsWithAmountOfItem(itemId)) {
-            if (amount == 0) {
+        var countAmount = orgAmount
+        for ((index, foundAmount) in findAllIndexesWithAmountOfItem(itemId)) {
+            if (countAmount == 0) {
                 break
-            } else if (amount >= value) {
-                amount -= value
-                clearItemAt(key)
+            } else if (countAmount >= foundAmount) {
+                countAmount -= foundAmount
+                clearItemAt(index)
             } else {
-                decrementAmountAt(key, amount)
-                amount = 0
+                decrementAmountAt(index, countAmount)
+                countAmount = 0
             }
         }
     }
@@ -170,14 +170,12 @@ class InventoryContainer(numberOfSlots: Int = 0) {
         return inventory.filterNotNull().firstOrNull { it.hasSameIdAs(itemId) }
     }
 
-    private fun findAllSlotsWithAmountOfItem(itemId: String): Map<Int, Int> {
-        val resourceMap: MutableMap<Int, Int> = HashMap()
-        (0 until getSize()).forEach { possibleAddToAmountToResourceMap(it, resourceMap, itemId) }
-        return resourceMap
-    }
-
-    private fun possibleAddToAmountToResourceMap(index: Int, resourceMap: MutableMap<Int, Int>, itemId: String) {
-        inventory[index]?.takeIf { it.id == itemId }?.let { resourceMap[index] = it.amount }
+    private fun findAllIndexesWithAmountOfItem(itemId: String): Map<Int, Int> {
+        return inventory
+            .mapIndexed { index, item -> Triple(index, item?.id, item?.amount) }
+            .filter { (_, id, _) -> id == itemId }
+            .filter { (_, _, amount) -> amount != null }
+            .associate { (index, _, amount) -> Pair(index, amount) } as Map<Int, Int>
     }
 
     private fun isSlotFilled(index: Int): Boolean {
