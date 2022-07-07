@@ -48,7 +48,7 @@ class ScheduleState(
 
     private fun getPercentage(currentTime: LocalTime): Long {
         return Duration.between(startTime, currentTime)
-            .multipliedBy(100)
+            .multipliedBy(100L)
             .dividedBy(Duration.between(startTime, endTime))
     }
 
