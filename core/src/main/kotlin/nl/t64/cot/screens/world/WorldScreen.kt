@@ -69,7 +69,7 @@ class WorldScreen : Screen,
     private val debugBox = DebugBox(player)
     private val buttonsBox = ButtonBox()
 
-    private val worldSchedule = WorldSchedule()
+    private val worldSchedule = WorldSchedule() // todo, moet deze wel hier ingeladen worden?
 
     private val visibleScheduledEntities: MutableList<Entity> = mutableListOf()
     private lateinit var npcEntities: List<Entity>

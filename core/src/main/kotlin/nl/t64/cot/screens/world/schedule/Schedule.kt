@@ -18,7 +18,10 @@ abstract class Schedule {
     }
 
     private fun ScheduleState.handle() {
-        entity.send(LoadEntityEvent(state, direction, getCurrentPosition(), "default"))
+        entity.send(LoadEntityEvent(state,
+                                    direction,
+                                    getCurrentPosition(),
+                                    "default")) // todo, ander naam event. niet deze misbruiken
         brokerManager.entityObservers.notifyAddScheduledEntity(entity)
     }
 

@@ -28,7 +28,7 @@ class PhysicsDoor(private val door: Door) : PhysicsComponent() {
                 isSelected = true
             }
         }
-        if (event is ActionEvent) {
+        if (event is ActionEvent) { // todo, ander event. zoiets als npcOpenDoorEvent oid. wellicht ook geen sound bij het openen.
             isSelected = true
         }
     }

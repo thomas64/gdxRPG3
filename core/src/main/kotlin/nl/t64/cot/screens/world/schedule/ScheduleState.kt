@@ -52,7 +52,7 @@ class ScheduleState(
             .dividedBy(Duration.between(startTime, endTime))
     }
 
-    private fun getPositionX(percentage: Long): Float {
+    private fun getPositionX(percentage: Long): Float { // todo, iets aan het schokkerige doen, int naar float is de oorzaak?
         return if (endPosition.x > startPosition.x) {
             startPosition.x + ((abs(endPosition.x - startPosition.x) / 100f) * percentage)
         } else {
