@@ -38,6 +38,7 @@ import nl.t64.cot.screens.world.entity.InputPlayer
 import nl.t64.cot.screens.world.entity.PhysicsPlayer
 import nl.t64.cot.screens.world.entity.events.FindPathEvent
 import nl.t64.cot.screens.world.entity.events.LoadEntityEvent
+import nl.t64.cot.screens.world.schedule.WorldSchedule
 import nl.t64.cot.sfx.TransitionImage
 import nl.t64.cot.sfx.TransitionPurpose
 import nl.t64.cot.subjects.*

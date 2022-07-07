@@ -1,7 +1,4 @@
-package nl.t64.cot.screens.world
-
-import nl.t64.cot.screens.world.schedule.Pietje1
-import nl.t64.cot.screens.world.schedule.Schedule
+package nl.t64.cot.screens.world.schedule
 
 
 class WorldSchedule {
