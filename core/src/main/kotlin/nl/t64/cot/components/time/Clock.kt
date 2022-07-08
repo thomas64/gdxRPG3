@@ -6,6 +6,8 @@ import java.time.LocalTime
 
 private const val START_OF_DAY = 27000f // 7:30
 private const val TWELVE_HOURS = 43200f // 12 * 60 * 60
+private const val END_OF_TIME = START_OF_DAY + TWELVE_HOURS
+
 private const val HALF_HOUR = 1800f     // 1 minute in realtime
 private const val RATE_OF_TIME = 30f    // 60: 1 hour -> 1 minute, 30: 1 hour -> 2 minutes, 1: 1 hour -> 60 minutes
 
