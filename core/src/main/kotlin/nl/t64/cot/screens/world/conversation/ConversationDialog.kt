@@ -226,7 +226,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     private fun saveGame(nextId: String) {
         playSe(AudioEvent.SE_SAVE_GAME)
         endConversation(nextId)
-        profileManager.saveProfile()
+        Thread { profileManager.saveProfile() }.start()
     }
 
     private fun healLife(nextId: String) {

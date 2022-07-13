@@ -4,7 +4,6 @@
     "group"        : "WEAPON",
     "sort"         : 999,
     "skill"        : "SWORD",
-    "price"        : 1,
     "min_dexterity": 10,
     "base_hit"     : 90,
     "damage"       : 8

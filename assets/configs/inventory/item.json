@@ -3,42 +3,36 @@
     "name"       : "Crystal of Time",
     "group"      : "ITEM",
     "sort"       : "1",
-    "price"      : 1,
     "description": ["A crystal from Ylarus, God of Time,", "to reset time 12 hours."]
   },
   "key_honeywood_basement" : {
     "name"       : "Basement key",
     "group"      : "ITEM",
     "sort"       : 70010,
-    "price"      : 1,
     "description": ["Key given to you by the elder himself."]
   },
   "scroll_of_orc_obedience": {
     "name"       : "Scroll of Orc Obedience",
     "group"      : "ITEM",
     "sort"       : 70015,
-    "price"      : 25,
     "description": ["Makes an orc follow your command unconditionally.", "Only works when fairies are near."]
   },
   "horse_medicine"         : {
     "name"       : "Horse Medicine",
     "group"      : "ITEM",
     "sort"       : 70020,
-    "price"      : 1,
     "description": ["A medicine made by Elenora for Enopa."]
   },
   "horseshoe"              : {
     "name"       : "Horseshoe",
     "group"      : "ITEM",
     "sort"       : 70025,
-    "price"      : 1,
     "description": ["Just a regular horseshoe."]
   },
   "tow_rope"               : {
     "name"       : "Tow Rope",
     "group"      : "ITEM",
     "sort"       : 70030,
-    "price"      : 1,
     "description": ["A strong rope which can be used by a horse."]
   }
 }

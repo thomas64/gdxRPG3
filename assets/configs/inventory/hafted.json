@@ -4,7 +4,6 @@
     "group"       : "WEAPON",
     "sort"        : 1099,
     "skill"       : "HAFTED",
-    "price"       : 1,
     "min_strength": 10,
     "base_hit"    : 80,
     "damage"      : 10

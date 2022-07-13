@@ -215,6 +215,7 @@ data class InventoryItem(
     }
 
     fun getSellValuePiece(totalMerchant: Int): Int {
+        if (group == InventoryGroup.RESOURCE || group == InventoryGroup.ITEM) return 0
         val value = floor(price / 3f).toInt()
         return (value + ((value / 300f) * totalMerchant)).roundToInt()
     }

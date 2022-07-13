@@ -3,7 +3,6 @@
     "name"    : "Grace's Ribbon",
     "group"   : "ACCESSORY",
     "sort"    : 61000,
-    "price"   : 1,
     "diplomat": 1,
     "stealth" : -1
   },

@@ -5,7 +5,6 @@
     "sort"         : 1399,
     "skill"        : "MISSILE",
     "is_two_handed": true,
-    "price"        : 1,
     "min_dexterity": 10,
     "base_hit"     : 80,
     "damage"       : 2

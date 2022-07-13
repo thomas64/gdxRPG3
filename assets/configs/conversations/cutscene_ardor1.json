@@ -11,7 +11,7 @@
       "8" : {"face": "ardor", "text": ["The Royal Sacrifice is ready!"]},
       "9" : {"face": "girl01", "text": ["Let me go!"]},
       "10": {"face": "ardor", "text": ["Guards, bring forth the princess."]},
-      "11": {"face": "mozes", "text": ["(Princess? Who is he talking about?)"], "choices": [{"command": "EXIT"}]}
+      "11": {"face": "mozes", "text": ["(Princess? What is he talking about?)"], "choices": [{"command": "EXIT"}]}
     }
   },
   "grace_is_no_princess"           : {

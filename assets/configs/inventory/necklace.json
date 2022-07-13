@@ -31,7 +31,6 @@
     "name"          : "Amulet of Orc",
     "group"         : "NECKLACE",
     "sort"          : 61000,
-    "price"         : 1,
     "transformation": 1,
     "description"   : [
       "Manipulates the minds of orcs to perceive",

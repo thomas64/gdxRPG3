@@ -66,9 +66,9 @@
       },
       "30": {"face": "man02", "text": ["No problemo! Me neither. I'll see you around."], "choices": [{"command": "EXIT", "nextId": "31"}]},
       "31": {"face": "man02", "text": ["Hey Mozes, are you back? The tree is still blocking the road."], "choices": [{"nextId": "4"}]},
-      "35": {"face": "man02", "text": ["I was kidding about the horse Mozes, ha ha!", "But sure, if you really bring me a strong horse and 2 ropes, I will clear the road for you immediately."]},
+      "35": {"face": "man02", "text": ["I was kidding about the horse Mozes, ha ha!", "But sure, if you really bring me a strong horse and 2 ropes, I can clear the road for you immediately."]},
       "36": {"face": "man02", "text": ["You could ask the village elder about this matter.", "Maybe he can help you out."], "choices": [{"command": "EXIT", "nextId": "50"}]},
-      "40": {"face": "man02", "text": ["Uhh, that's exactly how you could help.", "If you really bring me a strong horse and 2 ropes, I will clear the road for you immediately."], "choices": [{"command": "EXIT", "nextId": "50"}]},
+      "40": {"face": "man02", "text": ["Uhh, that's exactly how you could help.", "If you really bring me a strong horse and 2 ropes, I can clear the road for you immediately."], "choices": [{"command": "EXIT", "nextId": "50"}]},
       "50": {
         "face": "man02", "text": ["The tree is still blocking the road Mozes."], "choices": [
           {"condition": ["i_tc_1_q_this", "i_tc_11_q_this"], "text": "Not for long! I got you a horse and the ropes.", "command": "GIVE_QUEST_ITEM", "nextId": "60"},

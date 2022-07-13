@@ -4,7 +4,6 @@
     "group"       : "SHIELD",
     "sort"        : 50099,
     "skill"       : "SHIELD",
-    "price"       : 1,
     "min_strength": 10,
     "protection"  : 1,
     "defense"     : 2,

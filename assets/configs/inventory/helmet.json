@@ -123,7 +123,6 @@
     "name"      : "Mask of Ardor",
     "group"     : "HELMET",
     "sort"      : 61000,
-    "price"     : 1,
     "protection": 0,
     "speed"     : 0,
     "stealth"   : 0,
