@@ -9,10 +9,12 @@ import nl.t64.cot.screens.world.entity.EntityState
 
 class BlockSubject {
 
-    private val observers: MutableList<BlockObserver> = ArrayList()
+    private val observers: MutableCollection<BlockObserver> = mutableListOf()
 
     fun addObserver(observer: BlockObserver) {
-        observers.add(observer)
+        if (observer !in observers) {
+            observers.add(observer)
+        }
     }
 
     fun removeObserver(observer: BlockObserver) {

@@ -7,10 +7,12 @@ import nl.t64.cot.screens.world.entity.Direction
 
 class ActionSubject {
 
-    private val observers: MutableList<ActionObserver> = ArrayList()
+    private val observers: MutableCollection<ActionObserver> = mutableListOf()
 
     fun addObserver(observer: ActionObserver) {
-        observers.add(observer)
+        if (observer !in observers) {
+            observers.add(observer)
+        }
     }
 
     fun removeObserver(observer: ActionObserver) {

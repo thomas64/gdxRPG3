@@ -1,12 +1,18 @@
 package nl.t64.cot.components.time
 
 import com.badlogic.gdx.math.MathUtils
+import java.time.LocalTime
 
 
-private const val START_OF_DAY = 27000f // 7:30
-private const val TWELVE_HOURS = 43200f // 12 * 60 * 60
-private const val HALF_HOUR = 1800f     // 1 minute in realtime
-private const val RATE_OF_TIME = 30f    // 60: 1 hour -> 1 minute, 30: 1 hour -> 2 minutes, 1: 1 hour -> 60 minutes
+private const val START_OF_DAY = 27000f         // 7:30
+private const val TWELVE_HOURS = 43200f * 2f    // 12 * 60 * 60 (* 2)
+private const val HALF_HOUR = 3600f             // 1 minute in realtime
+private const val RATE_OF_TIME = 60f            // 60: 1 hour -> 1 minute, 30: 1 hour -> 2 minutes, etc.
+
+// this is nasty. RATE_OF_TIME must be same as fps because of the scheduled npc's.
+// if it is at 30f, what I would like, they do everything double. which is very unnecessary.
+// it also leads to problems with opening a door for example, because it also closes immediately then.
+// so RATE_OF_TIME is set to 60f and because of that, the countdown is times 2.
 
 class Clock {
 
@@ -56,20 +62,26 @@ class Clock {
     }
 
     fun isFinished(): Boolean {
-        return countdown <= -5f
+        return countdown <= -10f
     }
 
     fun getCountdownFormatted(): String {
         return if (countdown > 0f) {
-            String.format("%02d:%02d", getHours(countdown), getMinutes(countdown))
+            val retimedCountdown = countdown / 2f
+            String.format("%02d:%02d", getHours(retimedCountdown), getMinutes(retimedCountdown))
         } else {
             "00:00"
         }
     }
 
     fun getTimeOfDayFormatted(): String {
-        val timeOfDay = START_OF_DAY + (TWELVE_HOURS - countdown)
-        return String.format("%02d:%02d", getHours(timeOfDay), getMinutes(timeOfDay))
+        val timeOfDayInSeconds = START_OF_DAY + ((TWELVE_HOURS - countdown) / 2f)
+        return String.format("%02d:%02d", getHours(timeOfDayInSeconds), getMinutes(timeOfDayInSeconds))
+    }
+
+    fun getTimeOfDay(): LocalTime {
+        val timeOfDayInSeconds = START_OF_DAY + (TWELVE_HOURS - countdown)
+        return LocalTime.MIN.plusSeconds(timeOfDayInSeconds.toLong())
     }
 
     private fun stop() {

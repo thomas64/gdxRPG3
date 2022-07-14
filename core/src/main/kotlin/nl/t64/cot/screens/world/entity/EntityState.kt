@@ -14,6 +14,7 @@ enum class EntityState {
     ALIGNING,
     INVISIBLE,
     OPENED,
+    CLOSING,
     RUNNING;    // only for cutscenes
 
 

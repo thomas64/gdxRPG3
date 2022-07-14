@@ -38,6 +38,8 @@ import nl.t64.cot.screens.world.entity.InputPlayer
 import nl.t64.cot.screens.world.entity.PhysicsPlayer
 import nl.t64.cot.screens.world.entity.events.FindPathEvent
 import nl.t64.cot.screens.world.entity.events.LoadEntityEvent
+import nl.t64.cot.screens.world.entity.events.NpcActionEvent
+import nl.t64.cot.screens.world.schedule.WorldSchedule
 import nl.t64.cot.sfx.TransitionImage
 import nl.t64.cot.sfx.TransitionPurpose
 import nl.t64.cot.subjects.*
@@ -67,6 +69,9 @@ class WorldScreen : Screen,
     private val debugBox = DebugBox(player)
     private val buttonsBox = ButtonBox()
 
+    private val worldSchedule = WorldSchedule()
+
+    private val visibleScheduledEntities: MutableList<Entity> = mutableListOf()
     private lateinit var npcEntities: List<Entity>
     private lateinit var currentNpcEntity: Entity
     private lateinit var lootList: List<Entity>
@@ -190,6 +195,20 @@ class WorldScreen : Screen,
     override fun onNotifyNpcsUpdate(newNpcEntities: List<Entity>) {
         npcEntities = newNpcEntities
     }
+
+    override fun onNotifyAddScheduledEntity(entity: Entity) {
+        if (entity !in visibleScheduledEntities) {
+            visibleScheduledEntities.add(entity)
+        }
+    }
+
+    override fun onNotifyRemoveScheduledEntity(entity: Entity) {
+        visibleScheduledEntities.remove(entity)
+    }
+
+    override fun onNotifyUseDoor(doorId: String) {
+        doorList.single { it.id == doorId }.send(NpcActionEvent())
+    }
     //endregion
 
     //region LootObserver //////////////////////////////////////////////////////////////////////////////////////////////
@@ -278,6 +297,20 @@ class WorldScreen : Screen,
         }
     }
 
+    private fun updateEntities(dt: Float) {
+        if (!isInTransition) {
+            clockBox.update(dt)
+            player.update(dt)
+            worldSchedule.update()
+        }
+        doorList.forEach { it.update(dt) }
+        lootList.forEach { it.update(dt) }
+        val playerGridPosition = player.getPositionInGrid()
+        npcEntities.forEach { it.update(dt) }
+        npcEntities.forEach { it.send(FindPathEvent(playerGridPosition)) }
+        visibleScheduledEntities.forEach { it.update(dt) }
+    }
+
     private fun renderMiniMap() {
         updateCameraPosition()
         mapRenderer.renderMapWithoutEntities()
@@ -296,7 +329,7 @@ class WorldScreen : Screen,
         updateCameraPosition()
         mapRenderer.renderAll(player.position) { renderEntities(it) }
         gridRenderer.possibleRender()
-        debugRenderer.possibleRenderObjects(doorList, lootList, npcEntities)
+        debugRenderer.possibleRenderObjects(doorList, lootList, npcEntities, visibleScheduledEntities)
         debugBox.possibleUpdate(dt)
         buttonsBox.update(dt)
         partyWindow.update(dt)
@@ -311,18 +344,6 @@ class WorldScreen : Screen,
         stage.draw()
     }
 
-    private fun updateEntities(dt: Float) {
-        if (!isInTransition) {
-            clockBox.update(dt)
-            player.update(dt)
-        }
-        doorList.forEach { it.update(dt) }
-        lootList.forEach { it.update(dt) }
-        val playerGridPosition = player.getPositionInGrid()
-        npcEntities.forEach { it.update(dt) }
-        npcEntities.forEach { it.send(FindPathEvent(playerGridPosition)) }
-    }
-
     private fun updateCameraPosition() {
         camera.setPosition(player.position)
         mapRenderer.updateCamera()
@@ -330,18 +351,12 @@ class WorldScreen : Screen,
 
     private fun renderEntities(batch: Batch) {
         lootList.forEach { it.render(batch) }
-        doorList
-            .filter { it.position.y >= player.position.y }
-            .forEach { it.render(batch) }
-
-        val allEntities: MutableList<Entity> = ArrayList()
-        allEntities.addAll(npcEntities)
-        allEntities.add(player)
-        allEntities.sortByDescending { it.position.y }
-        allEntities.forEach { it.render(batch) }
-
-        doorList
-            .filter { it.position.y < player.position.y }
+        listOf(doorList,
+               npcEntities,
+               visibleScheduledEntities,
+               listOf(player))
+            .flatten()
+            .sortedByDescending { it.position.y }
             .forEach { it.render(batch) }
     }
 

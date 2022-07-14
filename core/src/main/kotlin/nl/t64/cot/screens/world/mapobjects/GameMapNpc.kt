@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2
 import ktx.tiled.property
 import ktx.tiled.propertyOrNull
 import ktx.tiled.type
+import nl.t64.cot.components.condition.ConditionDatabase
 import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.screens.world.entity.EntityState
 
@@ -18,6 +19,10 @@ open class GameMapNpc(rectObject: RectangleMapObject) : GameMapObject(rectObject
     val conditionIds: List<String> = createConditions(rectObject)
     val position: Vector2 get() = Vector2(rectangle.x, rectangle.y)
     val isEnemy: Boolean = createIsEnemy(rectObject)
+
+    open fun isMeetingConditions(): Boolean {
+        return ConditionDatabase.isMeetingConditions(conditionIds, conversation)
+    }
 
     private fun createState(rectObject: RectangleMapObject): EntityState {
         val entityState = rectObject.type

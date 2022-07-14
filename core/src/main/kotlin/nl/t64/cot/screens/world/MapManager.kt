@@ -74,7 +74,7 @@ class MapManager : ProfileObserver {
     fun getUpperConditionTextures(): List<GameMapConditionTexture> = currentMap.upperTextures
 
     fun findPath(startPoint: Vector2, endPoint: Vector2, state: EntityState): DefaultGraphPath<TiledNode> {
-        return currentMap.getTiledGraph(state).findPath(startPoint, endPoint)
+        return currentMap.getTiledGraph(state)?.findPath(startPoint, endPoint) ?: DefaultGraphPath()
     }
 
     fun updateFogOfWar(playerPosition: Vector2, dt: Float) {

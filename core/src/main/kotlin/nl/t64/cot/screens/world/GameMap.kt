@@ -103,12 +103,16 @@ class GameMap(val mapTitle: String) {
     private val warpPortals: List<GameMapWarpPortal> = loader.loadLayer(WARP_LAYER) { GameMapWarpPortal(it, mapTitle) }
 
     fun setTiledGraphs() {
-        tiledGraphs[EntityState.WALKING] = TiledGraph(width, height, EntityState.WALKING)
-        tiledGraphs[EntityState.FLYING] = TiledGraph(width, height, EntityState.FLYING)
+        if (enemies.any { it.isMeetingConditions() }) {
+            Thread {
+                tiledGraphs[EntityState.WALKING] = TiledGraph(width, height, EntityState.WALKING)
+                tiledGraphs[EntityState.FLYING] = TiledGraph(width, height, EntityState.FLYING)
+            }.start()
+        }
     }
 
-    fun getTiledGraph(state: EntityState): TiledGraph {
-        return tiledGraphs[state] ?: tiledGraphs[EntityState.WALKING]!!
+    fun getTiledGraph(state: EntityState): TiledGraph? {
+        return tiledGraphs[state] ?: tiledGraphs[EntityState.WALKING]
     }
 
     fun getUnderground(point: Vector2): String {

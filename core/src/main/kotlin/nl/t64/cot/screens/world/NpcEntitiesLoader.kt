@@ -3,7 +3,6 @@ package nl.t64.cot.screens.world
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.components.battle.EnemyContainer
-import nl.t64.cot.components.condition.ConditionDatabase
 import nl.t64.cot.screens.world.entity.*
 import nl.t64.cot.screens.world.entity.events.LoadEntityEvent
 import nl.t64.cot.screens.world.mapobjects.GameMapEnemy
@@ -24,7 +23,7 @@ internal class NpcEntitiesLoader(private val currentMap: GameMap) {
 
     private fun loadNpcs() {
         currentMap.npcs
-            .filter { ConditionDatabase.isMeetingConditions(it.conditionIds, it.conversation) }
+            .filter { it.isMeetingConditions() }
             .filterNot { it.isEnemy && gameData.battles.isBattleWon(it.conversation) }
             .forEach { loadNpcEntity(it) }
     }
@@ -35,7 +34,7 @@ internal class NpcEntitiesLoader(private val currentMap: GameMap) {
 
     private fun loadEnemies() {
         currentMap.enemies
-            .filter { ConditionDatabase.isMeetingConditions(it.conditionIds, it.battleId) }
+            .filter { it.isMeetingConditions() }
             .filterNot { gameData.battles.isBattleWon(it.battleId) }
             .forEach { loadEnemy(it) }
     }

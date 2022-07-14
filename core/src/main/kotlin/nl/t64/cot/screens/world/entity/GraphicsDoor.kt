@@ -28,10 +28,12 @@ class GraphicsDoor(private val door: Door) : GraphicsComponent() {
         }
         if (event is StateEvent) {
             state = event.state
+            frameTime = 0f
         }
     }
 
     override fun update(dt: Float) {
+        setPlayMode()
         setFrame(dt)
     }
 
@@ -44,10 +46,18 @@ class GraphicsDoor(private val door: Door) : GraphicsComponent() {
         // empty
     }
 
+    private fun setPlayMode() {
+        openAnimation.playMode = when (state) {
+            EntityState.CLOSING -> Animation.PlayMode.REVERSED
+            else -> Animation.PlayMode.NORMAL
+        }
+    }
+
     override fun setFrame(dt: Float) {
         frameTime = when {
             frameTime >= 1f -> 1f
             state == EntityState.OPENED -> frameTime + dt
+            state == EntityState.CLOSING -> frameTime + dt
             else -> 0f
         }
         currentFrame = openAnimation.getKeyFrame(frameTime)
