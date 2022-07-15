@@ -164,23 +164,18 @@ class GameMap(val mapTitle: String) {
 
         shapeRenderer.color = Color.YELLOW
 
-        listOf(blockers, lowBlockers, conditionBlockers)
-            .flatten()
+        (blockers + lowBlockers + conditionBlockers)
             .map { it.rectangle }
             .forEach { shapeRenderer.rect(it.x, it.y, it.width, it.height) }
 
         shapeRenderer.color = Color.BLUE
 
-        listOf(
-            portals, spawnPoints, npcs, heroes, enemies, eventDiscovers, eventCheckers, cutsceneDiscovers,
-            questDiscovers, questCheckers, notes, sparkles
-        )
-            .flatten()
+        (portals + spawnPoints + npcs + heroes + enemies + eventDiscovers + eventCheckers + cutsceneDiscovers
+                + questDiscovers + questCheckers + notes + sparkles)
             .map { it.rectangle }
             .forEach { shapeRenderer.rect(it.x, it.y, it.width, it.height) }
 
-        listOf(chests, doors)
-            .flatten()
+        (chests + doors)
             .map { it.rectangle }
             .forEach { shapeRenderer.rect(it.x, it.y, it.width, it.height) }
     }

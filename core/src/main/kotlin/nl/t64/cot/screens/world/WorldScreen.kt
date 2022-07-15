@@ -65,7 +65,7 @@ class WorldScreen : Screen,
 
     private val player = Entity(Constant.PLAYER_ID, InputPlayer(multiplexer), PhysicsPlayer(), GraphicsPlayer())
     private val gridRenderer = GridRenderer(camera)
-    private val debugRenderer = DebugRenderer(camera, player)
+    private val debugRenderer = DebugRenderer(camera)
     private val debugBox = DebugBox(player)
     private val buttonsBox = ButtonBox()
 
@@ -329,7 +329,7 @@ class WorldScreen : Screen,
         updateCameraPosition()
         mapRenderer.renderAll(player.position) { renderEntities(it) }
         gridRenderer.possibleRender()
-        debugRenderer.possibleRenderObjects(doorList, lootList, npcEntities, visibleScheduledEntities)
+        debugRenderer.possibleRenderObjects(doorList + lootList + npcEntities + visibleScheduledEntities + player)
         debugBox.possibleUpdate(dt)
         buttonsBox.update(dt)
         partyWindow.update(dt)
@@ -351,11 +351,7 @@ class WorldScreen : Screen,
 
     private fun renderEntities(batch: Batch) {
         lootList.forEach { it.render(batch) }
-        listOf(doorList,
-               npcEntities,
-               visibleScheduledEntities,
-               listOf(player))
-            .flatten()
+        (doorList + npcEntities + visibleScheduledEntities + player)
             .sortedByDescending { it.position.y }
             .forEach { it.render(batch) }
     }
