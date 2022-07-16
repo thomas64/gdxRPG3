@@ -3,6 +3,7 @@ package nl.t64.cot.screens.world.schedule
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.mapManager
+import nl.t64.cot.components.time.GameTime
 import nl.t64.cot.screens.world.entity.Direction.*
 import nl.t64.cot.screens.world.entity.Entity
 import nl.t64.cot.screens.world.entity.EntityState.IDLE
@@ -10,7 +11,6 @@ import nl.t64.cot.screens.world.entity.EntityState.WALKING
 import nl.t64.cot.screens.world.entity.GraphicsScheduledNpc
 import nl.t64.cot.screens.world.entity.InputEmpty
 import nl.t64.cot.screens.world.entity.PhysicsScheduledNpc
-import java.time.LocalTime
 
 
 class Fabius : EntitySchedule() {
@@ -37,7 +37,7 @@ class Fabius : EntitySchedule() {
             // @formatter:off
             ScheduleItem("honeywood",      EAST,   WALKING,    7, 41,    7, 42,    550, 350,    700, 350,  "default"),
             ScheduleItem("honeywood",      WEST,   WALKING,    7, 42,    7, 43,    700, 350,    600, 350,  "default"),
-            ScheduleItem("honeywood",      NORTH,  WALKING,    7, 43,    7, 50,    600, 350,    624, 484,  "default"),
+            ScheduleItem("honeywood",      NORTH,  WALKING,    7, 43,    7, 50,    600, 350,    624, 484),
             // @formatter:on
         )
     }
@@ -54,7 +54,7 @@ class Fabius : EntitySchedule() {
     override fun handleSideEffects() {
         val timeOfDay = gameData.clock.getTimeOfDay()
         if (mapManager.currentMap.mapTitle == "honeywood") {
-            if (timeOfDay == LocalTime.of(7, 49)) {
+            if (timeOfDay == GameTime.of(7, 49)) {
                 brokerManager.entityObservers.notifyUseDoor("door_simple_left1")
             }
         }

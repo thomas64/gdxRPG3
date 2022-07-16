@@ -1,6 +1,7 @@
 package nl.t64.cot.components.time
 
 import com.badlogic.gdx.math.MathUtils
+import java.time.Duration
 import java.time.LocalTime
 
 
@@ -9,10 +10,13 @@ private const val TWELVE_HOURS = 43200f * 2f    // 12 * 60 * 60 (* 2)
 private const val HALF_HOUR = 3600f             // 1 minute in realtime
 private const val RATE_OF_TIME = 60f            // 60: 1 hour -> 1 minute, 30: 1 hour -> 2 minutes, etc.
 
-// this is nasty. RATE_OF_TIME must be same as fps because of the scheduled npc's.
-// if it is at 30f, what I would like, they do everything double. which is very unnecessary.
-// it also leads to problems with opening a door for example, because it also closes immediately then.
-// so RATE_OF_TIME is set to 60f and because of that, the countdown is times 2.
+object GameTime {
+    fun of(hours: Int, minutes: Int): LocalTime {
+        val startOfDay: LocalTime = LocalTime.MIN.plusSeconds(START_OF_DAY.toLong())
+        val deltaInSeconds: Long = Duration.between(startOfDay, LocalTime.of(hours, minutes)).toSeconds()
+        return startOfDay.plusSeconds(deltaInSeconds * 2L)
+    }
+}
 
 class Clock {
 

@@ -1,7 +1,6 @@
 package nl.t64.cot.screens.world.entity
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
-import com.badlogic.gdx.utils.Timer
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.audio.playSe
@@ -15,6 +14,7 @@ class PhysicsDoor(private val door: Door) : PhysicsComponent() {
     private val stringBuilder: StringBuilder = StringBuilder()
     private var isSelected: Boolean = false
     private var isSelectedByNpc: Boolean = false
+    private var closingDoorTime: Float = -1f
 
     override fun receive(event: Event) {
         if (event is LoadEntityEvent) {
@@ -35,13 +35,15 @@ class PhysicsDoor(private val door: Door) : PhysicsComponent() {
     }
 
     override fun update(entity: Entity, dt: Float) {
+        this.entity = entity
+        handleAutoClosingDoor(dt)
         if (isSelected) {
             isSelected = false
-            tryToOpenDoor(entity)
+            tryToOpenDoor()
         }
         if (isSelectedByNpc) {
             isSelectedByNpc = false
-            openDoorByNpc(entity)
+            openDoorByNpc()
         }
     }
 
@@ -49,14 +51,14 @@ class PhysicsDoor(private val door: Door) : PhysicsComponent() {
         boundingBox.set(currentPosition.x, currentPosition.y, door.width, Constant.HALF_TILE_SIZE)
     }
 
-    private fun tryToOpenDoor(entity: Entity) {
+    private fun tryToOpenDoor() {
         stringBuilder.setLength(0)
         if (isFailingOnLock()) return
 
         if (door.isClosed) {
-            openDoor(entity)
+            openDoor()
         } else {
-            closeDoor(entity)
+            closeDoor()
         }
     }
 
@@ -79,38 +81,44 @@ class PhysicsDoor(private val door: Door) : PhysicsComponent() {
         }
     }
 
-    private fun openDoor(entity: Entity) {
+    private fun openDoor() {
         playSe(door.audio)
         door.open()
         entity.send(StateEvent(EntityState.OPENED))
         brokerManager.blockObservers.removeObserver(entity)
     }
 
-    private fun closeDoor(entity: Entity) {
+    private fun closeDoor() {
         playSe(door.audio)
         door.close()
         entity.send(StateEvent(EntityState.CLOSING))
         brokerManager.blockObservers.addObserver(entity)
     }
 
-    private fun openDoorByNpc(entity: Entity) {
+    private fun openDoorByNpc() {
+        closingDoorTime = 2f
+        brokerManager.blockObservers.addObserver(entity)
+        brokerManager.actionObservers.removeObserver(entity)
         if (door.isClosed) {
-            brokerManager.actionObservers.removeObserver(entity)
             door.open()
             entity.send(StateEvent(EntityState.OPENED))
         }
-        closeDoorAfterDelay(entity)
     }
 
-    private fun closeDoorAfterDelay(entity: Entity) {
-        Timer.schedule(object : Timer.Task() {
-            override fun run() {
-                door.close()
-                entity.send(StateEvent(EntityState.CLOSING))
-                brokerManager.blockObservers.addObserver(entity)
-                brokerManager.actionObservers.addObserver(entity)
+    private fun handleAutoClosingDoor(dt: Float) {
+        if (closingDoorTime >= 0f) {
+            closingDoorTime -= dt
+            if (closingDoorTime < 0f) {
+                closingDoorTime = -1f
+                autoCloseDoor()
             }
-        }, 1f)
+        }
+    }
+
+    private fun autoCloseDoor() {
+        door.close()
+        entity.send(StateEvent(EntityState.CLOSING))
+        brokerManager.actionObservers.addObserver(entity)
     }
 
     override fun debug(shapeRenderer: ShapeRenderer) {

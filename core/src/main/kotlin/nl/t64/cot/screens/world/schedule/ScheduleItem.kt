@@ -3,6 +3,7 @@ package nl.t64.cot.screens.world.schedule
 import com.badlogic.gdx.math.Vector2
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.mapManager
+import nl.t64.cot.components.time.GameTime
 import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.screens.world.entity.EntityState
 import java.time.Duration
@@ -22,10 +23,10 @@ class ScheduleItem(
     startPositionY: Int,
     endPositionX: Int,
     endPositionY: Int,
-    val conversationId: String,
+    val conversationId: String = "",
 ) {
-    private val startTime: LocalTime = LocalTime.of(startTimeHours, startTimeMinutes)
-    private val endTime: LocalTime = LocalTime.of(endTimeHours, endTimeMinutes)
+    private val startTime: LocalTime = GameTime.of(startTimeHours, startTimeMinutes)
+    private val endTime: LocalTime = GameTime.of(endTimeHours, endTimeMinutes)
     private val startPosition: Vector2 = Vector2(startPositionX.toFloat(), startPositionY.toFloat())
     private val endPosition: Vector2 = Vector2(endPositionX.toFloat(), endPositionY.toFloat())
 

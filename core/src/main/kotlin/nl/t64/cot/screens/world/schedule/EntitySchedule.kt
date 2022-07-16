@@ -22,7 +22,19 @@ abstract class EntitySchedule {
     private fun ScheduleItem.handle() {
         entity.send(UpdateScheduledEntityEvent(state, direction, getCurrentPosition(), conversationId))
         brokerManager.entityObservers.notifyAddScheduledEntity(entity)
-        brokerManager.actionObservers.addObserver(entity)
+        handleTalking()
+        handleBlocking()
+    }
+
+    private fun ScheduleItem.handleTalking() {
+        if (conversationId.isBlank()) {
+            brokerManager.actionObservers.removeObserver(entity)
+        } else {
+            brokerManager.actionObservers.addObserver(entity)
+        }
+    }
+
+    private fun ScheduleItem.handleBlocking() {
         if (state == EntityState.IDLE) {
             brokerManager.blockObservers.addObserver(entity)
         } else {
