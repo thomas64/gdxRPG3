@@ -74,8 +74,8 @@ object ConditionDatabase {
     private fun hasAverageLevelOf(requestedLevel: Int): Boolean =
         gameData.party.getAverageLevel() >= requestedLevel
 
-    private fun areTargetAndAlternateTheSame(questId: String, questTask: String): Boolean {
-        val questTask = gameData.quests.getQuestById(questId).tasks[questTask]!!
+    private fun areTargetAndAlternateTheSame(questId: String, questTaskId: String): Boolean {
+        val questTask = gameData.quests.getQuestById(questId).tasks[questTaskId]!!
         return questTask.target == questTask.targetAlternate
     }
 
