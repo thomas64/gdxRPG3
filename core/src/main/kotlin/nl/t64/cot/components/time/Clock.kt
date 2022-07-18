@@ -5,14 +5,14 @@ import java.time.Duration
 import java.time.LocalTime
 
 
-private const val START_OF_DAY = 27000f         // 7:30
+private const val START_OF_DAY = 27000L         // 7:30
 private const val TWELVE_HOURS = 43200f * 2f    // 12 * 60 * 60 (* 2)
 private const val HALF_HOUR = 3600f             // 1 minute in realtime
 private const val RATE_OF_TIME = 60f            // 60: 1 hour -> 1 minute, 30: 1 hour -> 2 minutes, etc.
 
 object GameTime {
     fun of(hours: Int, minutes: Int): LocalTime {
-        val startOfDay: LocalTime = LocalTime.MIN.plusSeconds(START_OF_DAY.toLong())
+        val startOfDay: LocalTime = LocalTime.MIN.plusSeconds(START_OF_DAY)
         val deltaInSeconds: Long = Duration.between(startOfDay, LocalTime.of(hours, minutes)).toSeconds()
         return startOfDay.plusSeconds(deltaInSeconds * 2L)
     }
@@ -22,6 +22,7 @@ class Clock {
 
     private var countdown: Float = 0f
     private var hasStarted: Boolean = false
+    private val passedSeconds: Float get() = TWELVE_HOURS - countdown
 
     fun start() {
         hasStarted = true
@@ -66,38 +67,33 @@ class Clock {
     }
 
     fun isFinished(): Boolean {
-        return countdown <= -10f
-    }
-
-    fun getCountdownFormatted(): String {
-        return if (countdown > 0f) {
-            val retimedCountdown = countdown / 2f
-            String.format("%02d:%02d", getHours(retimedCountdown), getMinutes(retimedCountdown))
-        } else {
-            "00:00"
-        }
-    }
-
-    fun getTimeOfDayFormatted(): String {
-        val timeOfDayInSeconds = START_OF_DAY + ((TWELVE_HOURS - countdown) / 2f)
-        return String.format("%02d:%02d", getHours(timeOfDayInSeconds), getMinutes(timeOfDayInSeconds))
-    }
-
-    fun getTimeOfDay(): LocalTime {
-        val timeOfDayInSeconds = START_OF_DAY + (TWELVE_HOURS - countdown)
-        return LocalTime.MIN.plusSeconds(timeOfDayInSeconds.toLong())
+        return countdown <= -60f
     }
 
     private fun stop() {
         hasStarted = false
     }
 
-    private fun getMinutes(seconds: Float): Int {
-        return MathUtils.floor(seconds / 60f % 60f)
+    fun getPercentageOfDay(): Float {
+        return 1f - (passedSeconds / TWELVE_HOURS)
     }
 
-    private fun getHours(seconds: Float): Int {
-        return MathUtils.floor(seconds / 3600f % 24f)
+    fun getTimeOfDay(): LocalTime {
+        val passedSecondsFromStartOfDay = START_OF_DAY + passedSeconds.toLong()
+        return LocalTime.MIN.plusSeconds(passedSecondsFromStartOfDay)
     }
 
+    fun getTimeOfDayFormatted(): String {
+        val seconds = START_OF_DAY + (passedSeconds / 2f)
+        return String.format("%02d:%02d", seconds.toHours(), seconds.toMinutes())
+    }
+
+}
+
+private fun Float.toHours(): Int {
+    return MathUtils.floor(this / 3600f % 24f)
+}
+
+private fun Float.toMinutes(): Int{
+    return MathUtils.floor(this / 60f % 60f)
 }

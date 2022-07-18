@@ -45,7 +45,6 @@ private const val MEDIUM_PARCHMENT_WIDTH = 400f
 private const val MEDIUM_PARCHMENT_HEIGHT = 600f
 private const val LIGHTMAP_PATH = "sprites/lightmaps/%s.png"
 
-private val TRANSPARENT = Color(0f, 0f, 0f, 0.5f)
 
 object Utils {
 
@@ -207,7 +206,7 @@ object Utils {
     }
 
     fun createTransparency(): Drawable {
-        return TRANSPARENT.toDrawable()
+        return Constant.TRANSPARENT.toDrawable()
     }
 
     fun createLargeParchment(): Image {
