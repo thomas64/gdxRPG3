@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="96" height="78" tilewidth="24" tileheight="24" infinite="0" nextlayerid="56" nextobjectid="405">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="96" height="78" tilewidth="24" tileheight="24" infinite="0" nextlayerid="57" nextobjectid="412">
  <properties>
   <property name="bgm" value="bgm_town"/>
   <property name="lightmap_camera" value="sunlight"/>
@@ -469,5 +469,12 @@
   <object id="366" name="event_honeywood_soldiers" type="discover" x="1068" y="1794" width="24" height="6"/>
   <object id="393" name="everything_is_back_again" type="discover" x="504" y="528" width="96" height="48"/>
   <object id="394" name="guide_event_party_member" type="discover" x="1008" y="960" width="336" height="336"/>
+ </objectgroup>
+ <objectgroup color="#aaff00" id="56" name="scheduled" visible="0">
+  <object id="405" name="fabius1" x="456" y="1392" width="48" height="24"/>
+  <object id="407" name="fabius2" x="576" y="1512" width="48" height="24"/>
+  <object id="408" name="fabius3" x="744" y="1440" width="48" height="24"/>
+  <object id="410" name="fabius4" x="648" y="1488" width="48" height="24"/>
+  <object id="411" name="fabius5" x="624" y="1368" width="48" height="24"/>
  </objectgroup>
 </map>

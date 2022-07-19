@@ -13,22 +13,16 @@ import kotlin.math.abs
 
 class ScheduleItem(
     private val mapTitle: String,
+    startTime: String,
+    endTime: String,
     val direction: Direction,
     val state: EntityState,
-    startTimeHours: Int,
-    startTimeMinutes: Int,
-    endTimeHours: Int,
-    endTimeMinutes: Int,
-    startPositionX: Int,
-    startPositionY: Int,
-    endPositionX: Int,
-    endPositionY: Int,
+    private val startPositionId: String,
+    private val endPositionId: String,
     val conversationId: String = "",
 ) {
-    private val startTime: LocalTime = GameTime.of(startTimeHours, startTimeMinutes)
-    private val endTime: LocalTime = GameTime.of(endTimeHours, endTimeMinutes)
-    private val startPosition: Vector2 = Vector2(startPositionX.toFloat(), startPositionY.toFloat())
-    private val endPosition: Vector2 = Vector2(endPositionX.toFloat(), endPositionY.toFloat())
+    private val startTime: LocalTime = startTime.toLocalTime()
+    private val endTime: LocalTime = endTime.toLocalTime()
 
     fun isCurrentMapInState(): Boolean {
         val currentMap: String = mapManager.currentMap.mapTitle
@@ -42,8 +36,10 @@ class ScheduleItem(
 
     fun getCurrentPosition(): Vector2 {
         val percentage: Float = getTimePercentageOfCurrentTimeBetweenStartAndEndTime()
-        val x: Float = getPositionX(percentage)
-        val y: Float = getPositionY(percentage)
+        val startPosition: Vector2 = startPositionId.toPosition()
+        val endPosition: Vector2 = endPositionId.toPosition()
+        val x: Float = percentage.toPosition(startPosition.x, endPosition.x)
+        val y: Float = percentage.toPosition(startPosition.y, endPosition.y)
         return Vector2(x, y)
     }
 
@@ -54,19 +50,22 @@ class ScheduleItem(
         return currentSeconds * 100f / targetSeconds
     }
 
-    private fun getPositionX(percentage: Float): Float {
-        return if (endPosition.x > startPosition.x) {
-            startPosition.x + ((abs(endPosition.x - startPosition.x) / 100f) * percentage)
+    private fun Float.toPosition(startPos: Float, endPos: Float): Float {
+        return if (endPos > startPos) {
+            startPos + ((abs(endPos - startPos) / 100f) * this)
         } else {
-            startPosition.x - ((abs(endPosition.x - startPosition.x) / 100f) * percentage)
+            startPos - ((abs(endPos - startPos) / 100f) * this)
         }
     }
 
-    private fun getPositionY(percentage: Float): Float {
-        return if (endPosition.y > startPosition.y) {
-            startPosition.y + ((abs(endPosition.y - startPosition.y) / 100f) * percentage)
-        } else {
-            startPosition.y - ((abs(endPosition.y - startPosition.y) / 100f) * percentage)
+    private fun String.toPosition(): Vector2 {
+        val scheduledPositionOfRectangleOnMap = mapManager.currentMap.schedules.single { it.name == this }.rectangle
+        return Vector2(scheduledPositionOfRectangleOnMap.x, scheduledPositionOfRectangleOnMap.y)
+    }
+
+    private fun String.toLocalTime(): LocalTime {
+        return removePrefix("0").split(":").let {
+            GameTime.of(it[0].toInt(), it[1].toInt())
         }
     }
 

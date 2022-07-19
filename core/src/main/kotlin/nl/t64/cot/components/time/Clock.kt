@@ -88,12 +88,12 @@ class Clock {
         return String.format("%02d:%02d", seconds.toHours(), seconds.toMinutes())
     }
 
-}
+    private fun Float.toHours(): Int {
+        return MathUtils.floor(this / 3600f % 24f)
+    }
 
-private fun Float.toHours(): Int {
-    return MathUtils.floor(this / 3600f % 24f)
-}
+    private fun Float.toMinutes(): Int{
+        return MathUtils.floor(this / 60f % 60f)
+    }
 
-private fun Float.toMinutes(): Int{
-    return MathUtils.floor(this / 60f % 60f)
 }

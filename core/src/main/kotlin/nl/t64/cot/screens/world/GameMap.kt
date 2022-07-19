@@ -19,6 +19,7 @@ import java.util.*
 
 
 private const val SOUND_LAYER = "sound"
+private const val SCHEDULED_LAYER = "scheduled"
 private const val EVENT_LAYER = "event"
 private const val CUTSCENE_LAYER = "cutscene"
 private const val QUEST_LAYER = "quest"
@@ -73,6 +74,7 @@ class GameMap(val mapTitle: String) {
     lateinit var playerSpawnDirection: Direction
     private val tiledGraphs: EnumMap<EntityState, TiledGraph> = EnumMap(EntityState::class.java)
 
+    val schedules: List<RectangleMapObject> = loader.loadLayer(SCHEDULED_LAYER)
     val npcs: List<GameMapNpc> = loader.loadLayer(NPC_LAYER) { GameMapNpc(it) }
     val heroes: List<GameMapHero> = loader.loadLayer(HERO_LAYER, { gameData.heroes.contains(it.name) }, { GameMapHero(it) })
     val enemies: List<GameMapEnemy> = loader.loadLayer(ENEMY_LAYER) { GameMapEnemy(it) }

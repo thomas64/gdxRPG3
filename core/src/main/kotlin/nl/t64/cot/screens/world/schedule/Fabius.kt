@@ -26,8 +26,8 @@ class Fabius : EntitySchedule() {
     private fun stareAroundBelowInn(): List<ScheduleItem> {
         return listOf(
             // @formatter:off
-            ScheduleItem("honeywood",      SOUTH,  IDLE,       7, 30,    7, 40,    550, 350,    550, 350,  "default"),
-            ScheduleItem("honeywood",      EAST,   IDLE,       7, 40,    7, 41,    550, 350,    550, 350,  "default"),
+            ScheduleItem("honeywood", "07:30", "07:40", NORTH, IDLE, "fabius1", "fabius1", "default"),
+            ScheduleItem("honeywood", "07:40", "07:41", SOUTH, IDLE, "fabius1", "fabius1", "default"),
             // @formatter:on
         )
     }
@@ -35,9 +35,10 @@ class Fabius : EntitySchedule() {
     private fun walkToInnWithDetour(): List<ScheduleItem> {
         return listOf(
             // @formatter:off
-            ScheduleItem("honeywood",      EAST,   WALKING,    7, 41,    7, 42,    550, 350,    700, 350,  "default"),
-            ScheduleItem("honeywood",      WEST,   WALKING,    7, 42,    7, 43,    700, 350,    600, 350,  "default"),
-            ScheduleItem("honeywood",      NORTH,  WALKING,    7, 43,    7, 50,    600, 350,    624, 484),
+            ScheduleItem("honeywood", "07:41", "07:42", SOUTH, WALKING, "fabius1", "fabius2", "default"),
+            ScheduleItem("honeywood", "07:42", "07:43", EAST,  WALKING, "fabius2", "fabius3", "default"),
+            ScheduleItem("honeywood", "07:43", "07:44", WEST,  WALKING, "fabius3", "fabius4", "default"),
+            ScheduleItem("honeywood", "07:44", "07:50", NORTH, WALKING, "fabius4", "fabius5"),
             // @formatter:on
         )
     }
@@ -45,8 +46,8 @@ class Fabius : EntitySchedule() {
     private fun walkUpToCounterAndWait(): List<ScheduleItem> {
         return listOf(
             // @formatter:off
-            ScheduleItem("honeywood_inn",  NORTH,  WALKING,    7, 50,    7, 53,    620,  40,    620, 250,  "default"),
-            ScheduleItem("honeywood_inn",  NORTH,  IDLE,       7, 53,    8,  0,    620, 250,    620, 250,  "default"),
+            ScheduleItem("honeywood_inn", "07:50", "07:53", NORTH, WALKING, "fabius6", "fabius7", "default"),
+            ScheduleItem("honeywood_inn", "07:53", "08:00", NORTH, IDLE,    "fabius7", "fabius7", "default"),
             // @formatter:on
         )
     }
