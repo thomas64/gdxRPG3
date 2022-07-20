@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.List.ListStyle
 import com.badlogic.gdx.scenes.scene2d.utils.BaseDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable
 import com.badlogic.gdx.utils.Align
+import com.badlogic.gdx.utils.Timer
 import ktx.assets.disposeSafely
 import ktx.collections.GdxArray
 import nl.t64.cot.Utils
@@ -242,8 +243,12 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             playSe(AudioEvent.SE_RESTORE)
         }
         delayInputListeners()
-        gameData.clock.takeHour()
-        gameData.party.recoverFullHp()
+        Timer.schedule(object : Timer.Task() {
+            override fun run() {
+                gameData.clock.takeHour()
+                gameData.party.recoverFullHp()
+            }
+        }, 0.5f)
         brokerManager.mapObservers.notifyFadeOut({ continueConversation(nextId) }, duration = 1f)
     }
 

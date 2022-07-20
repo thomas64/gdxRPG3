@@ -2,6 +2,7 @@ package nl.t64.cot.screens.warp
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
+import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.List
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane
 import com.badlogic.gdx.scenes.scene2d.ui.Table
@@ -25,10 +26,25 @@ internal class PortalListTable {
     val portalList: List<Portal> = createList()
     val scrollPane: ScrollPane = fillScrollPane()
     val container: Table = fillContainer()
+    private val noPortalsLabel: Label = createNoPortalsLabel()
 
     fun populatePortalList(currentMapName: String) {
         val activatedPortals = gameData.portals.getAllActivatedPortalsExcept(currentMapName)
-        portalList.setItems(GdxArray(activatedPortals))
+        if (activatedPortals.isEmpty()) {
+            container.addActor(noPortalsLabel)
+        } else {
+            container.removeActor(noPortalsLabel)
+            portalList.setItems(GdxArray(activatedPortals))
+        }
+    }
+
+    private fun createNoPortalsLabel(): Label {
+        val labelStyle = Label.LabelStyle(portalListFont, Color.BLACK)
+        return Label("No other portals activated.", labelStyle)
+            .apply {
+                y = container.height / 1.5f
+                x = (container.width / 2f) - (width / 2f)
+            }
     }
 
     private fun createList(): List<Portal> {

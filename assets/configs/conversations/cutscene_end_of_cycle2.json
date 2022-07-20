@@ -38,9 +38,10 @@
     "phrases": {
       "1": {"text": ["Ylarus, the God of Time..."]},
       "2": {"text": [". . ."]},
-      "3": {"text": ["And I've only got 12 hours before the end of the world..."]},
-      "4": {"text": [". . ."]},
-      "5": {"text": ["Alright, on to Lastdenn then, I guess."], "choices": [{"command": "EXIT"}]}
+      "3": {"text": ["And I've only got 12 hours before the end of the world.", "So that is tonight at half past seven."]},
+      "4": {"text": ["I must use this crystal I got from Ylarus before that moment, because there will be no devine intervention anymore."]},
+      "5": {"text": [". . ."]},
+      "6": {"text": ["Alright, on to Lastdenn then, I guess."], "choices": [{"command": "EXIT"}]}
     }
   }
 }

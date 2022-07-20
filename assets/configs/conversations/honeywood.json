@@ -418,7 +418,8 @@
       "57"  : {"face": "oldman11", "text": ["With what you just told I think you will be out and busy for a while."]},
       "58"  : {"face": "oldman11", "text": ["Secondly, you need a travel companion."]},
       "59"  : {"face": "oldman11", "text": ["Luana is outside here near the statue, moping around. She is dying to leave the village, so with some proper explaining, perhaps she wants to join you."]},
-      "60"  : {"face": "oldman11", "text": ["Mozes, good luck on your travels."], "choices": [{"command": "RECEIVE_ITEMS"}]},
+      "60"  : {"face": "oldman11", "text": ["Together you're allowed to leave this village by the guards on your way to Lastdenn."]},
+      "61"  : {"face": "oldman11", "text": ["Mozes, good luck on your travels."], "choices": [{"command": "RECEIVE_ITEMS"}]},
       "1199": {"face": "oldman11", "text": ["Don't forget the key of the basement."], "choices": [{"command": "RECEIVE_ITEMS"}]},
       "1200": {"face": "oldman11", "text": ["Hello Mozes, how can I help you today?"], "choices": [{"nextId": "2"}]}
     }

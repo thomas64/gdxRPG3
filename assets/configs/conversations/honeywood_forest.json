@@ -52,7 +52,7 @@
         "face": "mozes", "choices": [
           {"text": "How do you all seem to know me?", "nextId": "10"},
           {"text": "What do you mean with dark times?", "nextId": "20"},
-          {"condition": ["i_c_<=_k_q_this"], "text": "I'm looking for my little sister Grace.", "nextId": "30"},
+          {"text": "I'm looking for my little sister Grace.", "nextId": "30"},
           {"text": "I really need to be on my way. (Leave conversation)", "command": "EXIT", "nextId": "70"}
         ]
       },
@@ -87,7 +87,8 @@
         "face": "mozes", "choices": [
           {"text": "What do you mean? Why does Ardor have Grace?", "nextId": "40"},
           {"text": "What does the scroll do? How do I use it?", "nextId": "50"},
-          {"text": "How can I get it, if it is hidden?", "command": "ACCEPT_QUEST", "nextId": "60"}
+          {"text": "How can I get it, if it is hidden?", "command": "ACCEPT_QUEST", "nextId": "60"},
+          {"text": "(Back)", "nextId": "3"}
         ]
       },
       "40": {"face": "fairy1", "text": ["I'm not sure about that at the moment.", "Maybe she was in the wrong place at the wrong time. I sincerely hope so."], "choices": [{"nextId": "35"}]},
@@ -133,8 +134,9 @@
       "1": {"text": ["Our endearing Mozes, do you know about these so-called warp portals?"]},
       "2": {"text": ["Warp portals, like this one here, are scattered throughout Adan."]},
       "3": {"text": ["If you touch one, you can travel instantaneous to other places."]},
-      "4": {"text": ["This is powerful and dangerous at the same time.", "But they are only usable by the gentle of heart."]},
-      "5": {"text": ["Don't be shy Mozes, go ahead and try touching it.", "We all know you are a gentle of heart."], "choices": [{"command": "EXIT"}]}
+      "4": {"text": ["To unlock a new travel location, you must first activate the portal."]},
+      "5": {"text": ["This traveling is powerful and dangerous at the same time.", "But they are only usable by the gentle of heart."]},
+      "6": {"text": ["Don't be shy Mozes, go ahead and try touching it.", "We all know you are a gentle of heart."], "choices": [{"command": "EXIT"}]}
     }
   },
   "fairy_school"       : {

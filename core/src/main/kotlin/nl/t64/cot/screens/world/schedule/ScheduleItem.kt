@@ -13,16 +13,16 @@ import kotlin.math.abs
 
 class ScheduleItem(
     private val mapTitle: String,
-    startTime: String,
-    endTime: String,
+    _startTime: String,
+    _endTime: String,
     val direction: Direction,
     val state: EntityState,
     private val startPositionId: String,
     private val endPositionId: String,
     val conversationId: String = "",
 ) {
-    private val startTime: LocalTime = startTime.toLocalTime()
-    private val endTime: LocalTime = endTime.toLocalTime()
+    private val startTime: LocalTime = _startTime.toLocalTime()
+    private val endTime: LocalTime = _endTime.toLocalTime()
 
     fun isCurrentMapInState(): Boolean {
         val currentMap: String = mapManager.currentMap.mapTitle
