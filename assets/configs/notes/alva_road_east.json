@@ -1,0 +1,19 @@
+{
+  "note_honeywood_signpost": {
+    "phrases": {
+      "1": {
+        "text"      : [
+          "North: Honeywood",
+          "East: Lastdenn",
+          "South: Farshell",
+          "West: Cragmere"
+        ], "choices": [{"command": "EXIT"}]
+      }
+    }
+  },
+  "note_honeywood_ferry"   : {
+    "phrases": {
+      "1": {"text": ["Cragmere Ferry: Daily at 14:00"], "choices": [{"command": "EXIT"}]}
+    }
+  }
+}
