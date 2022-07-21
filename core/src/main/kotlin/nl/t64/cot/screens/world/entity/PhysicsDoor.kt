@@ -36,10 +36,11 @@ class PhysicsDoor(private val door: Door) : PhysicsComponent() {
 
     override fun update(entity: Entity, dt: Float) {
         this.entity = entity
-        handleAutoClosingDoor(dt)
+        possibleLockOrUnlockBySchedule()
+        possibleAutoClose(dt)
         if (isSelected) {
             isSelected = false
-            tryToOpenDoor()
+            useDoor()
         }
         if (isSelectedByNpc) {
             isSelectedByNpc = false
@@ -51,74 +52,95 @@ class PhysicsDoor(private val door: Door) : PhysicsComponent() {
         boundingBox.set(currentPosition.x, currentPosition.y, door.width, Constant.HALF_TILE_SIZE)
     }
 
-    private fun tryToOpenDoor() {
+    private fun useDoor() {
         stringBuilder.setLength(0)
         if (isFailingOnLock()) return
 
         if (door.isClosed) {
-            openDoor()
+            openWhenClosedAndRemoveBlocker(true)
         } else {
-            closeDoor()
+            closeWhenOpenAndAddBlocker(true)
         }
     }
 
     private fun isFailingOnLock(): Boolean {
-        return door.isLocked && isUnableToUnlockWithKey(door.keyId)
+        return door.isLocked && !isAbleToUnlockWithKey(door.keyId)
     }
 
-    private fun isUnableToUnlockWithKey(keyId: String?): Boolean {
+    private fun isAbleToUnlockWithKey(keyId: String?): Boolean {
         val inventory = gameData.inventory
-        return if (inventory.hasEnoughOfItem(keyId, 1)) {
-            inventory.autoRemoveItem(keyId!!, 1)
-            door.unlock()
+        return if (keyId == null) {
+            stringBuilder.append("Open from ${door.openStartTime} to ${door.openEndTime}.")
+            brokerManager.componentObservers.notifyShowMessageDialog(stringBuilder.toString())
             false
+        } else if (inventory.hasEnoughOfItem(keyId, 1)) {
+            inventory.autoRemoveItem(keyId, 1)
+            door.unlock()
+            true
         } else {
             stringBuilder.append("This door is locked.")
             stringBuilder.append(System.lineSeparator())
             stringBuilder.append("You need a key to open the door.")
             brokerManager.componentObservers.notifyShowMessageDialog(stringBuilder.toString())
-            true
+            false
         }
     }
 
-    private fun openDoor() {
-        playSe(door.audio)
-        door.open()
-        entity.send(StateEvent(EntityState.OPENED))
-        brokerManager.blockObservers.removeObserver(entity)
-    }
-
-    private fun closeDoor() {
-        playSe(door.audio)
-        door.close()
-        entity.send(StateEvent(EntityState.CLOSING))
-        brokerManager.blockObservers.addObserver(entity)
-    }
-
-    private fun openDoorByNpc() {
-        closingDoorTime = 2f
-        brokerManager.blockObservers.addObserver(entity)
-        brokerManager.actionObservers.removeObserver(entity)
-        if (door.isClosed) {
-            door.open()
-            entity.send(StateEvent(EntityState.OPENED))
-        }
-    }
-
-    private fun handleAutoClosingDoor(dt: Float) {
-        if (closingDoorTime >= 0f) {
-            closingDoorTime -= dt
-            if (closingDoorTime < 0f) {
-                closingDoorTime = -1f
-                autoCloseDoor()
+    private fun possibleLockOrUnlockBySchedule() {
+        door.openStartTime?.let { openStartTime ->
+            door.openEndTime?.let { openEndTime ->
+                lockOrUnlockBySchedule(openStartTime, openEndTime)
             }
         }
     }
 
-    private fun autoCloseDoor() {
-        door.close()
-        entity.send(StateEvent(EntityState.CLOSING))
+    private fun lockOrUnlockBySchedule(openStartTime: String, openEndTime: String) {
+        if (gameData.clock.isCurrentTimeInBetween(openStartTime, openEndTime)) {
+            door.unlock()
+        } else {
+            door.lock()
+            closeWhenOpenAndAddBlocker(false)
+        }
+    }
+
+    private fun openDoorByNpc() {
+        closingDoorTime = 2f
+        openWhenClosedAndRemoveBlocker(false)
+        brokerManager.blockObservers.addObserver(entity)
+        brokerManager.actionObservers.removeObserver(entity)
+    }
+
+    private fun possibleAutoClose(dt: Float) {
+        if (closingDoorTime >= 0f) {
+            closingDoorTime -= dt
+            if (closingDoorTime < 0f) {
+                autoClose()
+            }
+        }
+    }
+
+    private fun autoClose() {
+        closingDoorTime = -1f
+        closeWhenOpenAndAddBlocker(false)
         brokerManager.actionObservers.addObserver(entity)
+    }
+
+    private fun openWhenClosedAndRemoveBlocker(withSound: Boolean) {
+        if (door.isClosed) {
+            if (withSound) playSe(door.audio)
+            door.open()
+            entity.send(StateEvent(EntityState.OPENED))
+            brokerManager.blockObservers.removeObserver(entity)
+        }
+    }
+
+    private fun closeWhenOpenAndAddBlocker(withSound: Boolean) {
+        if (door.isOpen) {
+            if (withSound) playSe(door.audio)
+            door.close()
+            entity.send(StateEvent(EntityState.CLOSING))
+            brokerManager.blockObservers.addObserver(entity)
+        }
     }
 
     override fun debug(shapeRenderer: ShapeRenderer) {

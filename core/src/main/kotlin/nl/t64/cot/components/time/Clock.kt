@@ -1,14 +1,20 @@
 package nl.t64.cot.components.time
 
-import com.badlogic.gdx.math.MathUtils
 import java.time.Duration
 import java.time.LocalTime
+import kotlin.math.floor
 
 
 private const val START_OF_DAY = 27000L         // 7:30
 private const val TWELVE_HOURS = 43200f * 2f    // 12 * 60 * 60 (* 2)
 private const val HALF_HOUR = 3600f             // 1 minute in realtime
 private const val RATE_OF_TIME = 60f            // 60: 1 hour -> 1 minute, 30: 1 hour -> 2 minutes, etc.
+
+fun String.toLocalTime(): LocalTime {
+    return removePrefix("0").split(":").let {
+        GameTime.of(it[0].toInt(), it[1].toInt())
+    }
+}
 
 object GameTime {
     fun of(hours: Int, minutes: Int): LocalTime {
@@ -74,6 +80,17 @@ class Clock {
         hasStarted = false
     }
 
+    fun isCurrentTimeInBetween(start: String, end: String): Boolean {
+        val startTime: LocalTime = start.toLocalTime()
+        val endTime: LocalTime = end.toLocalTime()
+        return isCurrentTimeInBetween(startTime, endTime)
+    }
+
+    fun isCurrentTimeInBetween(startTime: LocalTime, endTime: LocalTime): Boolean {
+        val currentTime: LocalTime = getTimeOfDay()
+        return (currentTime == startTime || currentTime.isAfter(startTime)) && currentTime.isBefore(endTime)
+    }
+
     fun getPercentageOfDay(): Float {
         return 1f - (passedSeconds / TWELVE_HOURS)
     }
@@ -89,11 +106,11 @@ class Clock {
     }
 
     private fun Float.toHours(): Int {
-        return MathUtils.floor(this / 3600f % 24f)
+        return floor(this / 3600f % 24f).toInt()
     }
 
-    private fun Float.toMinutes(): Int{
-        return MathUtils.floor(this / 60f % 60f)
+    private fun Float.toMinutes(): Int {
+        return floor(this / 60f % 60f).toInt()
     }
 
 }
