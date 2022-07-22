@@ -17,6 +17,7 @@ import nl.t64.cot.components.party.spells.SpellItem
 import nl.t64.cot.components.party.stats.StatItem
 import nl.t64.cot.components.party.stats.StatItemId
 import nl.t64.cot.components.quest.QuestGraph
+import nl.t64.cot.components.schedule.MapSchedule
 
 
 object ConfigDataLoader {
@@ -47,6 +48,11 @@ object ConfigDataLoader {
         return loadConfigData<ConversationGraph>("conversations")
             .mapValues { it.value.copy(id = it.key) }
             .onEach { it.value.initId() }
+    }
+
+    fun createSchedules(): Map<String, MapSchedule> {
+        return loadConfigData<MapSchedule>("schedules/maps")
+            .mapValues { it.value.copy(fromMapName = it.key) }
     }
 
     fun createItems(): Map<String, InventoryItem> {

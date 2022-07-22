@@ -1,12 +1,16 @@
 package nl.t64.cot.screens.world.schedule
 
+import nl.t64.cot.Utils.mapManager
+import nl.t64.cot.components.schedule.MapScheduleDatabase
+
 
 class WorldSchedule {
 
-    private var allSchedules: List<EntitySchedule> = listOf(Fabius())
+    private var entitySchedules: List<EntitySchedule> = listOf(Fabius())
 
     fun update() {
-        allSchedules.forEach { it.update() }
+        entitySchedules.forEach { it.update() }
+        MapScheduleDatabase.getScheduleByMapName(mapManager.currentMap.mapTitle)?.update()
     }
 
 }

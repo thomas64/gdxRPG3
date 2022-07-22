@@ -125,9 +125,7 @@ class GameMap(val mapTitle: String) {
     }
 
     fun setPlayerSpawnLocationForNewLoad(mapTitle: String) {
-        val dummyObject = RectangleMapObject()
-        dummyObject.name = mapTitle
-        val spawnForNewLoadPortal = GameMapPortal(dummyObject, mapTitle)
+        val spawnForNewLoadPortal = GameMapRelocator.createPortalForNewLoad(mapTitle)
         setPlayerSpawnLocation(spawnForNewLoadPortal)
     }
 

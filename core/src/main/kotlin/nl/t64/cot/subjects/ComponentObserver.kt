@@ -14,7 +14,7 @@ interface ComponentObserver {
     fun onNotifyShowFindScreen(loot: Loot, event: AudioEvent)
     fun onNotifyShowStorageScreen()
     fun onNotifyShowWarpScreen(currentMapName: String)
-    fun onNotifyShowMessageDialog(message: String)
+    fun onNotifyShowMessageDialog(message: String, actionAfterHide: () -> Unit)
     fun onNotifyShowBattleScreen(battleId: String, enemyEntity: Entity)
 
 }

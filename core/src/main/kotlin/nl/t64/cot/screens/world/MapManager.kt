@@ -116,7 +116,7 @@ class MapManager : ProfileObserver {
         brokerManager.mapObservers.notifyFadeOut(actionAfterFade, Color.GRAY, 1f)
     }
 
-    fun checkWarpPoint(warpPoint: GameMapWarpPoint, playerDirection: Direction) {
+    fun checkWarpPoint(warpPoint: GameMapRelocator, playerDirection: Direction) {
         playSe(AudioEvent.SE_WARP)
         nextMapTitle = warpPoint.toMapName
         brokerManager.mapObservers.notifyFadeOut(
@@ -124,7 +124,13 @@ class MapManager : ProfileObserver {
         )
     }
 
-    fun collisionPortal(portal: GameMapPortal, playerDirection: Direction) {
+    fun schedulePortal(portal: GameMapRelocator, playerDirection: Direction) {
+        brokerManager.mapObservers.notifyFadeOut(
+            { changeMap(portal, playerDirection) }, duration = 1f
+        )
+    }
+
+    fun collisionPortal(portal: GameMapRelocator, playerDirection: Direction) {
         nextMapTitle = portal.toMapName
         brokerManager.mapObservers.notifyFadeOut(
             { changeMap(portal, playerDirection) }, portal.fadeColor

@@ -168,10 +168,13 @@ class WorldScreen : Screen,
         WarpScreen.load(currentMapName)
     }
 
-    override fun onNotifyShowMessageDialog(message: String) {
+    override fun onNotifyShowMessageDialog(message: String, actionAfterHide: () -> Unit) {
         player.resetInput()
         gameState = GameState.DIALOG
-        messageDialog.setActionAfterHide { gameState = GameState.RUNNING }
+        messageDialog.setActionAfterHide {
+            gameState = GameState.RUNNING
+            actionAfterHide.invoke()
+        }
         messageDialog.show(message, AudioEvent.SE_CONVERSATION_NEXT)
     }
 

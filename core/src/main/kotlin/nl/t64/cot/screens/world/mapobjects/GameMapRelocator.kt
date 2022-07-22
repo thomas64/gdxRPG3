@@ -20,6 +20,16 @@ abstract class GameMapRelocator(
     companion object {
         val RectangleMapObject.toMapName: String get() = name
         val RectangleMapObject.toMapLocation: String get() = type ?: ""
+
+        fun createAutoPortal(fromMapName: String, toMapName: String): GameMapRelocator {
+            val mapObject = RectangleMapObject().apply { name = toMapName }
+            return GameMapPortal(mapObject, fromMapName)
+        }
+
+        fun createPortalForNewLoad(mapTitle: String): GameMapRelocator {
+            val dummyObject = RectangleMapObject()
+            return GameMapPortal(dummyObject, mapTitle)
+        }
     }
 
 }

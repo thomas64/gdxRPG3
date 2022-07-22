@@ -49,8 +49,8 @@ class ComponentSubject {
         observers.forEach { it.onNotifyShowWarpScreen(currentMapName) }
     }
 
-    fun notifyShowMessageDialog(message: String) {
-        observers.forEach { it.onNotifyShowMessageDialog(message) }
+    fun notifyShowMessageDialog(message: String, actionAfterHide: () -> Unit = {}) {
+        observers.forEach { it.onNotifyShowMessageDialog(message, actionAfterHide) }
     }
 
     fun notifyShowBattleScreen(battleId: String, enemyEntity: Entity) {
