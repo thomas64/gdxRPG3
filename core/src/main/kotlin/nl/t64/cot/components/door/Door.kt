@@ -8,7 +8,8 @@ class Door(
     val spriteId: String = "",
     val keyId: String? = null,
     val openStartTime: String? = null,
-    val openEndTime: String? = null
+    val openEndTime: String? = null,
+    val message: String? = null
 ) {
 
     val audio: AudioEvent = type.audioEvent

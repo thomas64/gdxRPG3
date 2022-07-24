@@ -55,7 +55,7 @@ class GameMap(val mapTitle: String) {
     val tiledMap: TiledMap = resourceManager.getTiledMapAsset(mapTitle)
     private val loader = GameMapLayerLoader(tiledMap)
 
-    val bgm: AudioEvent = tiledMap.bgm
+    val bgm: AudioEvent get() = tiledMap.bgm
     val bgs: List<AudioEvent> = tiledMap.bgs
     val pixelWidth: Float = tiledMap.totalWidth().toFloat()
     val pixelHeight: Float = tiledMap.totalHeight().toFloat()
@@ -184,8 +184,13 @@ class GameMap(val mapTitle: String) {
 
 val TiledMap.bgm: AudioEvent
     get() {
-        val audioEvent: String = property(BGM_PROPERTY, DEFAULT_BG)
-        return AudioEvent.valueOf(audioEvent.uppercase())
+        return propertyOrNull<String>(BGM_PROPERTY)?.let {
+            if (gameData.clock.isWarning()) {
+                AudioEvent.BGM_END_NEAR
+            } else {
+                AudioEvent.valueOf(it.uppercase())
+            }
+        } ?: AudioEvent.NONE
     }
 
 val TiledMap.bgs: List<AudioEvent>

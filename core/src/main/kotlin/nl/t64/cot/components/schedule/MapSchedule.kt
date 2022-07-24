@@ -12,12 +12,13 @@ data class MapSchedule(
     private val toMapName: String = "",
     private val direction: Direction = Direction.NONE,
     private val openStartTime: String = "",
-    private val openEndTime: String = ""
+    private val openEndTime: String = "",
+    private val message: String = ""
 ) {
 
     fun update() {
         if (!gameData.clock.isCurrentTimeInBetween(openStartTime, openEndTime)) {
-            brokerManager.componentObservers.notifyShowMessageDialog("It's $openEndTime, closing time.") {
+            brokerManager.componentObservers.notifyShowMessageDialog(message) {
                 val autoPortal = GameMapRelocator.createAutoPortal(fromMapName, toMapName)
                 mapManager.schedulePortal(autoPortal, direction)
             }

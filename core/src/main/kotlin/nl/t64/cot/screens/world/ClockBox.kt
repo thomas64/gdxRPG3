@@ -7,12 +7,13 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.utils.Align
+import nl.t64.cot.Utils
+import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.audio.AudioEvent
-import nl.t64.cot.audio.playBgs
-import nl.t64.cot.audio.stopBgs
+import nl.t64.cot.audio.playBgm
 import nl.t64.cot.constants.Constant
 
 
@@ -41,15 +42,15 @@ internal class ClockBox {
     }
 
     fun update(dt: Float) {
-        if (gameData.clock.hasStarted()) {
+        if (gameData.clock.isRunning()) {
             gameData.clock.update(dt)
             handleWarning()
-            handleEnding()
+            handleEnding(dt)
         }
     }
 
     fun render(dt: Float) {
-        if (gameData.clock.hasStarted()) {
+        if (gameData.clock.isRunning()) {
             analogClock.update()
             fillCircle()
             borderCircle()
@@ -62,16 +63,25 @@ internal class ClockBox {
 
     private fun handleWarning() {
         if (gameData.clock.isWarning()) {
-            playBgs(AudioEvent.BGS_END)
-        } else {
-            stopBgs(AudioEvent.BGS_END)
+            if (audioManager.isThereAnyBgmPlaying() && !audioManager.isBgmPlaying(AudioEvent.BGM_END_NEAR)) {
+                audioManager.certainBgmFade()
+            } else if (!audioManager.isThereAnyBgmPlaying()) {
+                playBgm(AudioEvent.BGM_END_NEAR)
+            }
         }
     }
 
-    private fun handleEnding() {
+    private fun handleEnding(dt: Float) {
         if (gameData.clock.isFinished()) {
-            stopBgs(AudioEvent.BGS_END)
-            brokerManager.mapObservers.notifyStartCutscene("scene_death", 1f)
+            Utils.runWithDelay(Constant.FADE_DURATION) {
+                brokerManager.mapObservers.notifyStartCutscene("scene_death", 1f)
+            }
+            Thread {
+                while (audioManager.isBgmPlaying(AudioEvent.BGM_END_NEAR)) {
+                    Thread.sleep((dt * 1000f).toLong())
+                    audioManager.certainFadeBgmBgs()
+                }
+            }.start()
         }
     }
 

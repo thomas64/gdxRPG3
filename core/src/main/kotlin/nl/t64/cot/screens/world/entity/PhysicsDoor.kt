@@ -70,7 +70,7 @@ class PhysicsDoor(private val door: Door) : PhysicsComponent() {
     private fun isAbleToUnlockWithKey(keyId: String?): Boolean {
         val inventory = gameData.inventory
         return if (keyId == null) {
-            stringBuilder.append("Open from ${door.openStartTime} to ${door.openEndTime}.")
+            stringBuilder.append(door.message!!)
             brokerManager.componentObservers.notifyShowMessageDialog(stringBuilder.toString())
             false
         } else if (inventory.hasEnoughOfItem(keyId, 1)) {

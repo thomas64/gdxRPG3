@@ -20,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.ScreenUtils
+import com.badlogic.gdx.utils.Timer
 import nl.t64.cot.audio.AudioManager
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.ScreenManager
@@ -233,6 +234,14 @@ object Utils {
                 Gdx.graphics.height / 2f - SMALL_PARCHMENT_HEIGHT / 2f
             )
         }
+    }
+
+    fun runWithDelay(delayInSeconds: Float, action: () -> Unit) {
+        Timer.schedule(object : Timer.Task() {
+            override fun run() {
+                action.invoke()
+            }
+        }, delayInSeconds)
     }
 
 }

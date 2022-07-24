@@ -87,7 +87,7 @@ class GameData : ProfileObserver {
     }
 
     override fun onNotifyLoadProfile(profileManager: ProfileManager) {
-        clock = profileManager.getProperty("clock")
+        clock = profileManager.getProperty<Clock>("clock").apply { possibleAddSomeExtraLoadingTime() }
         heroes = profileManager.getProperty("heroes")
         party = profileManager.getProperty("party")
         inventory = profileManager.getProperty("inventory")

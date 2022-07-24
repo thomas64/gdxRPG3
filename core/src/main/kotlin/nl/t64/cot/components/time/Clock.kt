@@ -7,7 +7,9 @@ import kotlin.math.floor
 
 private const val START_OF_DAY = 27000L         // 7:30
 private const val TWELVE_HOURS = 43200f * 2f    // 12 * 60 * 60 (* 2)
+private const val HOUR = 7200f                  // 2 minute in realtime
 private const val HALF_HOUR = 3600f             // 1 minute in realtime
+private const val QUARTER = 1800f
 private const val RATE_OF_TIME = 60f            // 60: 1 hour -> 1 minute, 30: 1 hour -> 2 minutes, etc.
 
 fun String.toLocalTime(): LocalTime {
@@ -35,7 +37,7 @@ class Clock {
         countdown = TWELVE_HOURS
     }
 
-    fun hasStarted(): Boolean {
+    fun isRunning(): Boolean {
         return hasStarted
     }
 
@@ -52,28 +54,34 @@ class Clock {
 
     fun takeQuarterHour() {
         if (countdown > HALF_HOUR) {
-            countdown -= (HALF_HOUR / 2f)
+            countdown -= QUARTER
         }
     }
 
     fun takeHalfHour() {
-        if (countdown > (HALF_HOUR * 2f)) {
+        if (countdown > HOUR) {
             countdown -= HALF_HOUR
         }
     }
 
     fun takeHour() {
-        if (countdown > (HALF_HOUR * 4f)) {
-            countdown -= (HALF_HOUR * 2f)
+        if (countdown > (HOUR * 1.5f)) {
+            countdown -= HOUR
         }
     }
 
     fun isWarning(): Boolean {
-        return countdown <= HALF_HOUR
+        return countdown <= HOUR
     }
 
     fun isFinished(): Boolean {
         return countdown <= -60f
+    }
+
+    fun possibleAddSomeExtraLoadingTime() {
+        if (countdown < QUARTER) {
+            countdown = QUARTER
+        }
     }
 
     private fun stop() {

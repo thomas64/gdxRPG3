@@ -51,8 +51,6 @@ fun stopBgs(audioEvent: AudioEvent) {
     audioManager.handle(AudioCommand.BGS_STOP, audioEvent)
 }
 
-private const val BGM_VOLUME = 0.1f
-
 class AudioManager {
 
     private val queuedBgm: EnumMap<AudioEvent, Music> = EnumMap(AudioEvent::class.java)
@@ -60,10 +58,22 @@ class AudioManager {
     private val queuedMe: EnumMap<AudioEvent, Sound> = EnumMap(AudioEvent::class.java)
     private val queuedSe: EnumMap<AudioEvent, Sound> = EnumMap(AudioEvent::class.java)
 
+    fun isThereAnyBgmPlaying(): Boolean {
+        return queuedBgm.values.count { it.isPlaying } > 0
+    }
+
+    fun isBgmPlaying(audioEvent: AudioEvent): Boolean {
+        return queuedBgm[audioEvent]?.isPlaying ?: false
+    }
+
     fun possibleBgmFade(currentBgm: AudioEvent, newBgm: AudioEvent) {
         if (currentBgm != newBgm) {
-            queuedBgm.values.forEach { fade(it, BGM_VOLUME) }
+            certainBgmFade()
         }
+    }
+
+    fun certainBgmFade() {
+        queuedBgm.forEach { fade(it.value, it.key.volume) }
     }
 
     fun possibleBgsFade(currentBgs: List<AudioEvent>, newBgs: List<AudioEvent>) {
@@ -74,8 +84,7 @@ class AudioManager {
     }
 
     fun certainFadeBgmBgs() {
-        queuedBgm.values.forEach { fade(it, BGM_VOLUME) }
-        queuedBgs.forEach { fade(it.value, it.key.volume) }
+        (queuedBgm + queuedBgs).forEach { fade(it.value, it.key.volume) }
     }
 
     fun possibleBgmSwitch(prevBgm: AudioEvent, nextBgm: AudioEvent) {
@@ -160,7 +169,7 @@ class AudioManager {
             if (preferenceManager.isMusicOn) {
                 bgm.isLooping = isLooping
                 bgm.play()
-                bgm.volume = BGM_VOLUME
+                bgm.volume = event.volume
             } else {
                 bgm.stop()
             }

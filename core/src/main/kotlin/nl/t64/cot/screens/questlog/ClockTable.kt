@@ -31,7 +31,7 @@ internal class ClockTable {
     }
 
     fun fill() {
-        if (gameData.clock.hasStarted()) {
+        if (gameData.clock.isRunning()) {
             container.clear()
             val style = Label.LabelStyle(font, Color.BLACK)
             val time = gameData.clock.getTimeOfDayFormatted()
