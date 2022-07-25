@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.8" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="50" height="46" tilewidth="24" tileheight="24" infinite="0" nextlayerid="21" nextobjectid="5">
+ <tileset firstgid="1" name="lastdenn_house_mayor" tilewidth="24" tileheight="24" tilecount="1891" columns="61">
+  <image source="tilesets/lastdenn_house_mayor.png" width="1464" height="744"/>
+ </tileset>
+ <layer id="2" name="under0_none" width="50" height="46">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIAXAyPwAAE=
+  </data>
+ </layer>
+ <layer id="1" name="under1_ground" width="50" height="46">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <layer id="3" name="under2_none" width="50" height="46">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIAXAyPwAAE=
+  </data>
+ </layer>
+ <layer id="4" name="under3_none" width="50" height="46">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIAXAyPwAAE=
+  </data>
+ </layer>
+ <layer id="5" name="under4_none" width="50" height="46">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIAXAyPwAAE=
+  </data>
+ </layer>
+ <layer id="6" name="under5_none" width="50" height="46">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIAXAyPwAAE=
+  </data>
+ </layer>
+ <layer id="7" name="over6_none" width="50" height="46">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIAXAyPwAAE=
+  </data>
+ </layer>
+ <layer id="8" name="over7_none" width="50" height="46">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIAXAyPwAAE=
+  </data>
+ </layer>
+ <layer id="9" name="over8_none" width="50" height="46">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIAXAyPwAAE=
+  </data>
+ </layer>
+ <objectgroup color="#0055ff" id="11" name="sound"/>
+ <objectgroup color="#aa0000" id="12" name="collision"/>
+ <objectgroup color="#5500ff" id="13" name="rest"/>
+ <objectgroup color="#55ff7f" id="14" name="npc"/>
+ <objectgroup color="#55aaff" id="15" name="spawn">
+  <object id="1" name="lastdenn" x="528" y="1008" width="48" height="24"/>
+  <object id="4" name="lastdenn_house_mayor_2f" x="408" y="144" width="48" height="24"/>
+ </objectgroup>
+ <objectgroup color="#ffff7f" id="16" name="portal">
+  <object id="2" name="lastdenn" x="528" y="1032" width="48" height="24"/>
+  <object id="3" name="lastdenn_house_mayor_2f" x="456" y="120" width="24" height="48"/>
+ </objectgroup>
+ <objectgroup color="#ff00ff" id="18" name="quest"/>
+ <objectgroup color="#ff55ff" id="19" name="event"/>
+ <objectgroup color="#aaff00" id="20" name="scheduled"/>
+</map>

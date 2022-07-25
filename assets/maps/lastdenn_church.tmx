@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.8" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="46" height="43" tilewidth="24" tileheight="24" infinite="0" nextlayerid="21" nextobjectid="3">
+ <tileset firstgid="1" name="lastdenn_church" tilewidth="24" tileheight="24" tilecount="1316" columns="47">
+  <image source="tilesets/lastdenn_church.png" width="1128" height="672"/>
+ </tileset>
+ <tileset firstgid="1317" source="tilesets/fsm_inside01_a2.tsx"/>
+ <tileset firstgid="2085" source="tilesets/fsm_inside01_c.tsx"/>
+ <tileset firstgid="3109" source="tilesets/fsm_inside01_e.tsx"/>
+ <tileset firstgid="4133" source="tilesets/fsm_inside01_b.tsx"/>
+ <layer id="2" name="under0_none" width="46" height="43">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAA4McAHugAAQ==
+  </data>
+ </layer>
+ <layer id="1" name="under1_ground" width="46" height="43">
+  <data encoding="base64" compression="zlib">
+   eJztl2dwVFUUx+++tyGUREfFhGJ31LF3BZVgSAJqCA7NUP2ifrCOBexdP6mEQRECaCBWWiCog0jRsTccOtilKDN2x9BEUX9n3l7vzSu7GxN3d0Y+/Obcc/fcc8/839n77osppWJ7+YcaGJ8DdbSEJhjCYDEsimW/nnToBdtgKM4SWAqlOVBXMoocpUqw2+ESJqphGfTBL8uB+qJ4HHrDDtgJw5h8FV6DmTlQn+haDGN8ttQxOu8iboXlz1LBeLGZfA6i6wmuUse6ze0k1+g8HB6y/NkqGC82k8/hKXiPwbux5naTpfMIxg+7xp+jgvFi6zOs99sM3oHXoUfM8zfDb/y2kjpHMn7ENf5cFYwXP1t6vwE9Lb1389sq6hzFeJxrfK23HZ9Nvd+Etyy9d1PrauoczbiG8e/K87Xednw29N5OTb9CE2xzPf9bqRPWUOelBI5n/Ify/AYVjBc/03pXx5UaCBdCBf4OaqjE7oG11NnUjrraGb8fcRdY8Z8xd30883oPY89BcBH0xd9J3f2xf8I6anolHvQXW/GdsTfEM6/3cPYcDJXQD78TP8ThSjiKOj9xPP8vfluf8JdY8Qdib8yC3iPYcwhspJ5NjtH7KgKOtvSWBRssvXV8EeObsqD3SPYcCvMYf+cava+GY6jrMuxE5mPYjy29dXwx4zGt1DvqvhF1nxC9R7HnaJjP+HvX6H0NCa+Fy+EKcMCNGb11/A8wNqF3S/e39Qu7b4g9Do733Sck/knGdW6wv3Vfh1m7v39k7ZeOyafzd2FurBPt289H9DuRuVnx4P2hjjXTnebvN4mfSvxXTrC/dV+HWbu/9yTW63w6f1fmbnai/Xqf3ieRZzZ5V0A+fnvooMx77X1YaOk9zfXOb92vu2Ar+RfGPat11r7Yi5WJl/P7c0tvvU835m5xon2/3ieTaw65V8IqWA0dmR8Iy1n3AYEvu0afJ1zv/Nb9upmYLVClPKt11r7YAcrEy/n9haW3fn92Z+5WJ9r3630Kc3PJ1SAawhroxPwgGAwfErgoSX+nq3dUf28h9h78g+A2mKqCflFeUO9TydMDKmA+uddCAfOFyptfTuBHMe+7Rb5r/P2drt7+/tb5+sB1cDDcDtVwr+XvR83FeUG9TyNPAfN9sY3suS5ubAfmy5nv5XrfLfJdM7kN+lvW63yi99eQz1738dshjrF3wP7MdwnR+3TWFjI/DmpgPTkXxD3bMc97DqK73KPlnl3bBv0t63U+0bsMtjK+H3uoY+ydcAA1dA3R+wxy7cN8A8yDDeR8AV6El+JGb7lHyz17Shv0d52VT+v9DTxA/GGOsSXQmZq6heh9Jjn2tfSulPMYqmCAa/SWe7Tcs9uqv3W+VHrfBd1D9D4roWcJ9IbzoVTyQZlr9Pb3p/9+kup9GbVezotket/teOeLX++zE3r2hHPgXMueZ+nt70///STV+zJq/XTl6V0OD8Lhlj0CjoRaFa13eQrbSOwUqz9bcz+ps/KJ3tPkfSbvhhBbp5LrXZHC6vdbIws3YvvL9xe2AL8QPiV3XohtB0vjJv4n0djKJ3rXpmFtvSfAo/BYGnZi4vksYOEyaqiSb0b8n6lhRpL+z4+In/kv9m/JHd1G9HkanpEzQs43+EW0S9L/7WPh8fWtqKOliN6T4Fl4rhX2eZX578vJKr1+TGZnqMzqnaof9fkg///GJHGt7df/4nmE/f9zHft55JKee/n/8TdktUnp
+  </data>
+ </layer>
+ <layer id="3" name="under2_objects" width="46" height="43">
+  <data encoding="base64" compression="zlib">
+   eJztzqERwCAABLCXGMagm7T7OxinlbUojiOZIAkAALC7XpNRVy8AgL9WkqusXsy7v/Oz4RsAgLO8sYYCwA==
+  </data>
+ </layer>
+ <layer id="4" name="under3_lights" width="46" height="43">
+  <data encoding="base64" compression="zlib">
+   eJztzkERgDAMALBKmFvmBJwwJ0MOtcA+o3eJgkQAAPBnR4vobffiuzPPV8H3nedR8D3z/BR8AwAAAMCKF7IGBb0=
+  </data>
+ </layer>
+ <layer id="5" name="under4_none" width="46" height="43">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAA4McAHugAAQ==
+  </data>
+ </layer>
+ <layer id="6" name="under5_none" width="46" height="43">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAA4McAHugAAQ==
+  </data>
+ </layer>
+ <layer id="7" name="over6_none" width="46" height="43">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAA4McAHugAAQ==
+  </data>
+ </layer>
+ <layer id="8" name="over7_none" width="46" height="43">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAA4McAHugAAQ==
+  </data>
+ </layer>
+ <layer id="9" name="over8_none" width="46" height="43">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAA4McAHugAAQ==
+  </data>
+ </layer>
+ <objectgroup color="#0055ff" id="11" name="sound"/>
+ <objectgroup color="#aa0000" id="12" name="collision"/>
+ <objectgroup color="#5500ff" id="13" name="rest"/>
+ <objectgroup color="#55ff7f" id="14" name="npc"/>
+ <objectgroup color="#55aaff" id="15" name="spawn">
+  <object id="1" name="lastdenn" x="528" y="936" width="48" height="24"/>
+ </objectgroup>
+ <objectgroup color="#ffff7f" id="16" name="portal">
+  <object id="2" name="lastdenn" x="528" y="960" width="48" height="24"/>
+ </objectgroup>
+ <objectgroup color="#ff00ff" id="18" name="quest"/>
+ <objectgroup color="#ff55ff" id="19" name="event"/>
+ <objectgroup color="#aaff00" id="20" name="scheduled"/>
+</map>

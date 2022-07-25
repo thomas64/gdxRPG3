@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="160" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="17" nextobjectid="262">
+<map version="1.8" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="160" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="17" nextobjectid="266">
  <properties>
   <property name="bgm" value="bgm_forest"/>
   <property name="lightmap_camera" value="sunlight"/>
@@ -351,8 +351,10 @@
  </objectgroup>
  <objectgroup color="#55aaff" id="10" name="spawn">
   <object id="2" name="honeywood" x="552" y="24" width="48" height="24"/>
+  <object id="262" name="lastdenn" x="3264" y="24" width="48" height="24"/>
  </objectgroup>
  <objectgroup color="#ffff7f" id="11" name="portal">
   <object id="1" name="honeywood" x="264" y="-24" width="624" height="24"/>
+  <object id="265" name="lastdenn" x="3192" y="-24" width="192" height="24"/>
  </objectgroup>
 </map>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.8" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="38" height="24" tilewidth="24" tileheight="24" infinite="0" nextlayerid="21" nextobjectid="5">
+ <tileset firstgid="1" name="lastdenn_weapon_shop_2f" tilewidth="24" tileheight="24" tilecount="875" columns="35">
+  <image source="tilesets/lastdenn_weapon_shop_2f.png" width="840" height="600"/>
+ </tileset>
+ <tileset firstgid="876" source="tilesets/fsm_inside01_a2.tsx"/>
+ <layer id="2" name="under0_none" width="38" height="24">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5Ux/hAlUBAADANw5AAAE=
+  </data>
+ </layer>
+ <layer id="1" name="under1_ground" width="38" height="24">
+  <data encoding="base64" compression="zlib">
+   eJzNlWeMTUEUx+fep7cPSgiWhOiiRO+9d0uIbnUhSvRdBB8kOovFB0Qvq6wWvbO+SPReP2hhtWiJ+hvvTe68ufeu64NE8n7vf86cOTN3zrtvjiWEsP5TtvP1Db566FEr/fi/yFPPlcxXM1uIpjAKu7/t+Mes6HhQ9cubA5dgHLESsBm7AloYjYnkqed6hT8ARuCMhjjNP2CF49eYNx8+4M/AnwmztHmmfxx2QC38MzAEuxjMxb4M47FLwhbsimglqBzZT6/XGGnYblXnvo67AD5if4LP8EXLM/0T6DrM2thnYSh+cZiHfQUmYJeCrdjbYDske9SrYEiIFthZ0Hj8l9gdtXPfwF8Ii2AxLIFE4eSZ/kly1qN1WOscDMMfDvOxr8JE7NJQBspCOSjvUa/czM0DWVk3AX3FeJpwzn0TbsFtuAN3YSkUCoXzdL8leoq8DWhdYuchFS7AAvlOwCTik2EKxEMCTLXc9dqEpuBkY92p+NNguu2ce7cVjisaQn7mFoa8zLvHnGWRNVqhp9FuaD1iSyAxogvhOtyAm3ALbsMdeTbbXa/N6BbIzj45ICfkCjnn3gjnLIdGUIB4DORjvfvEl0fmdEZjobv83YkttoOrWa802Cqia6Kf26xXY2gCRXiuovCAOUke+YlGvf6kZr1eM/YG3trhNVVdzsBZK7pWkofkrRBu1ee0lu8c6x3GPmQF0yNGvVQ93mG/t6PP7cUj8lYKt5r1kuf/m3vfvO/N90fRg/Eq/E6PPXSVR059Gdfq5Xfvf2esbsi7T3jVy6Qn8ark9w+5NSmDe34D5jeM1K2NcPpFc7hoOf3gB/zUfL2/BKlXL8Y78Qx8xGz8OIxq8AR/tU+OJCuxtlq9WrBvS49+MhBGWtH9Ra+Xur9Mest7n+egNCIjDMCuDk+x1/jk/L4HibUTTr/YKd839hkr99V0EAzWfL/7S523bSi8vqpXZ8iEPRCtEaBe2Ym11/rFLvm+sW9GsDUNQQbN/9P91Y6924ecesVCZuxBaM0A9cpBrINw94s9sFfTFGPc7/4yz91H/r+gC8/SFQZDLXjG2Np06pVTnke4+0VvcvdpquYrP+j/sS/xfvDcQ1+kU69c8vf36Bd92H+/pinGeND/o4nZDxTnIdUYU32yC3T1Wd/rvgtSLxO/fqD2CbKG332n+oN6roNW8P71r1Xvj/8jvwAJmNi/
+  </data>
+ </layer>
+ <layer id="3" name="under2_none" width="38" height="24">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5Ux/hAlUBAADANw5AAAE=
+  </data>
+ </layer>
+ <layer id="4" name="under3_none" width="38" height="24">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5Ux/hAlUBAADANw5AAAE=
+  </data>
+ </layer>
+ <layer id="5" name="under4_none" width="38" height="24">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5Ux/hAlUBAADANw5AAAE=
+  </data>
+ </layer>
+ <layer id="6" name="under5_none" width="38" height="24">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5Ux/hAlUBAADANw5AAAE=
+  </data>
+ </layer>
+ <layer id="7" name="over6_none" width="38" height="24">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5Ux/hAlUBAADANw5AAAE=
+  </data>
+ </layer>
+ <layer id="8" name="over7_none" width="38" height="24">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5Ux/hAlUBAADANw5AAAE=
+  </data>
+ </layer>
+ <layer id="9" name="over8_none" width="38" height="24">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5Ux/hAlUBAADANw5AAAE=
+  </data>
+ </layer>
+ <objectgroup color="#0055ff" id="11" name="sound"/>
+ <objectgroup color="#aa0000" id="12" name="collision"/>
+ <objectgroup color="#5500ff" id="13" name="rest"/>
+ <objectgroup color="#55ff7f" id="14" name="npc"/>
+ <objectgroup color="#55aaff" id="15" name="spawn">
+  <object id="2" name="lastdenn_weapon_shop" type="1" x="384" y="216" width="48" height="24"/>
+  <object id="4" name="lastdenn_weapon_shop" type="2" x="72" y="168" width="48" height="24"/>
+ </objectgroup>
+ <objectgroup color="#ffff7f" id="16" name="portal">
+  <object id="1" name="lastdenn_weapon_shop" type="1" x="384" y="240" width="48" height="24"/>
+  <object id="3" name="lastdenn_weapon_shop" type="2" x="144" y="168" width="24" height="48"/>
+ </objectgroup>
+ <objectgroup color="#ff00ff" id="18" name="quest"/>
+ <objectgroup color="#ff55ff" id="19" name="event"/>
+ <objectgroup color="#aaff00" id="20" name="scheduled"/>
+</map>
