@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="18" height="22" tilewidth="24" tileheight="24" infinite="0" nextlayerid="21" nextobjectid="5">
+<map version="1.8" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="18" height="22" tilewidth="24" tileheight="24" infinite="0" nextlayerid="21" nextobjectid="18">
+ <properties>
+  <property name="step_sound" value="stone"/>
+ </properties>
  <tileset firstgid="1" name="lastdenn_cell" tilewidth="24" tileheight="24" tilecount="204" columns="17">
   <image source="tilesets/lastdenn_cell.png" width="408" height="288"/>
  </tileset>
@@ -10,7 +13,7 @@
  </layer>
  <layer id="1" name="under1_ground" width="18" height="22">
   <data encoding="base64" compression="zlib">
-   eJzd0FtOwlAQxvGKtojiOhCo6/CCorgMCFd9dQ2geEG8bUJFDGpUFua/SSeZnLThVH3i4ZfJzDSdL8d1HMf9JwtIYfEXdUn9Zx1b2EQdXdWb1dxvqP/kcIMTNNDDNoZqLr3sZe4beW5xhyZOsYNHNZde9jI38/RxjxbOUMKTmksve5mbear4RBsd7OIZ5+FcetkH84eIPDUcYT+sE4xwgS/soaz2QV2NyJNHAZmwvuEFl/hWc11XLPK8Y4wrTI0cSfJ84BUDXKv5AY4T5ImrFRxa5NH3zPdI8j763qx8Nu/z1zw2OeLyeEgja9Rldb8YsQ/qmvpPnJy671t8H8dLeHce/QAYClKL
+   eJzd1FlOAkEQxvFRGRIknAMleg5lkcVjYEBRXz0DoCwuIJdwQcIShIP5n2QqqXRonQGe7OSXSldNur/0w7iO47hbsoNd7K1RI+qcA5ziBBXU1d6s5vxYnZPEC+5QRQNpPKu+7GUu/SMjTw99XKKJDN5UX/Yyl76Z5wGvuMI9snhXfdnLXPpmnjLmqOEaOXyg5fdlL3OvP1iR5wI3KPh1jE+08Y0z5NXcq/EVeQ6RQsyvEwzRwUL1dd0PkGeKL3SxNHKEyTPDCI94Uv0ibkPksdUSzgPk0feZ7xHmffR9f+UL8j6b5gmSw5Yn6tiX3G9bCXWO+8t3cr9tmf+yddd/P+cH23VQSg==
   </data>
  </layer>
  <layer id="3" name="under2_none" width="18" height="22">
@@ -33,9 +36,9 @@
    eJxjYBgFo2AUjIJRMAoIAwAGMAAB
   </data>
  </layer>
- <layer id="7" name="over6_none" width="18" height="22">
+ <layer id="7" name="over6_objects" width="18" height="22">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMAoIAwAGMAAB
+   eJxjYBgFo2AUjIKBBexAzINGcyDJa2OR58FiDisWrI4kr4NDDTHmsCHZy0uBOcTgwWoOAEK2AkI=
   </data>
  </layer>
  <layer id="8" name="over7_none" width="18" height="22">
@@ -48,8 +51,22 @@
    eJxjYBgFo2AUjIJRMAoIAwAGMAAB
   </data>
  </layer>
- <objectgroup color="#0055ff" id="11" name="sound"/>
- <objectgroup color="#aa0000" id="12" name="collision"/>
+ <objectgroup color="#0055ff" id="11" name="sound">
+  <object id="17" name="wood" x="168" y="216" width="72" height="36"/>
+ </objectgroup>
+ <objectgroup color="#aa0000" id="12" name="collision">
+  <object id="5" x="240" y="408" width="192" height="120"/>
+  <object id="6" x="0" y="408" width="192" height="120"/>
+  <object id="7" x="192" y="480" width="48" height="48"/>
+  <object id="8" x="0" y="0" width="432" height="144"/>
+  <object id="9" x="384" y="144" width="48" height="264"/>
+  <object id="10" x="0" y="144" width="48" height="264"/>
+  <object id="11" x="96" y="144" width="48" height="24"/>
+  <object id="12" x="288" y="144" width="48" height="24"/>
+  <object id="13" x="144" y="252" width="96" height="12"/>
+  <object id="14" x="144" y="186" width="96" height="30"/>
+  <object id="15" x="144" y="216" width="24" height="36"/>
+ </objectgroup>
  <objectgroup color="#5500ff" id="13" name="rest"/>
  <objectgroup color="#55ff7f" id="14" name="npc"/>
  <objectgroup color="#55aaff" id="15" name="spawn">
@@ -58,7 +75,7 @@
  </objectgroup>
  <objectgroup color="#ffff7f" id="16" name="portal">
   <object id="2" name="lastdenn" x="192" y="456" width="48" height="24"/>
-  <object id="3" name="lastdenn_cell_b1" x="168" y="216" width="24" height="48"/>
+  <object id="3" name="lastdenn_cell_b1" x="168" y="216" width="24" height="36"/>
  </objectgroup>
  <objectgroup color="#ff00ff" id="18" name="quest"/>
  <objectgroup color="#ff55ff" id="19" name="event"/>

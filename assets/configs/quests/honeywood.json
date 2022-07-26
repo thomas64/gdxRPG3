@@ -2,7 +2,7 @@
   "quest_royal_sacrifice"      : {
     "title"   : "Royal sacrifice?",
     "entityId": "ardor",
-    "summary" : "Grace will become sacrificed by the wizard Ardor to gain ultimate power from Ulrog, the God of Power. Something seems to go wrong and everything gets engulfed in flames, including Ardor and you.",
+    "summary" : "You witnessed Grace becoming sacrificed by the wizard Ardor, to gain ultimate power from Ulrog, the God of Power. Something seemed to go wrong and everything got engulfed in flames, including Ardor and you. You heard a voice: 'You have been given another chance'. And after that you woke up in your bed like nothing ever happened.",
     "tasks"   : {
       "1": {
         "taskPhrase": "Receive the Crystal of Time to reset time to 12 hours before the disaster.",
@@ -25,7 +25,7 @@
   "quest_god_of_power"         : {
     "title"     : "The God of Power",
     "entityId"  : "ylarus",
-    "summary"   : "For some reason Adan goes up in flames when Grace become sacrificed by the wizard Ardor. Ylarus, the God of Time doesn't know why, so he sends you on a quest to finds answers.",
+    "summary"   : "For some reason Adan goes up in flames everytime Grace become sacrificed by the wizard Ardor. Ylarus, the God of Time doesn't know why, so he sends you on a quest to finds answers.",
     "linkedWith": ["quest_honeywood_elder"],
     "tasks"     : {
       "1": {
@@ -41,7 +41,7 @@
   "quest_helping_horse"        : {
     "title"     : "A helping horse",
     "entityId"  : "man02",
-    "summary"   : "A fallen tree has blocked the road to Honeywood Forest. Lennor needs your help to get a strong horse and some tow ropes if you want to speed up the process of clearing the road.",
+    "summary"   : "The same tree on the path to Honeywood Forest has fallen again, but is now blocking the road in FRONT of you. Lennor needs your help to get a strong horse and some tow ropes if you want to speed up the process of clearing the road.",
     "linkedWith": ["quest_get_horse", "quest_get_tow_rope", "quest_get_medicine", "quest_get_horseshoes"],
     "tasks"     : {
       "1" : {

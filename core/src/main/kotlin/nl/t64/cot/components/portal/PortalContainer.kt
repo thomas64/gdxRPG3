@@ -5,7 +5,8 @@ class PortalContainer {
 
     private val portals: MutableMap<String, Boolean> = mutableMapOf(
         Portal.HONEYWOOD_GREAT_TREE.name to false,
-        Portal.HONEYWOOD_HOUSE_ELDER_B2.name to false
+        Portal.HONEYWOOD_HOUSE_ELDER_B2.name to false,
+        Portal.LASTDENN.name to false
     )
 
     fun getAllActivatedPortalsExcept(currentMapName: String): Array<Portal> = portals

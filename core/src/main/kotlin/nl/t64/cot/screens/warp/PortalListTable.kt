@@ -26,14 +26,15 @@ internal class PortalListTable {
     val portalList: List<Portal> = createList()
     val scrollPane: ScrollPane = fillScrollPane()
     val container: Table = fillContainer()
-    private val noPortalsLabel: Label = createNoPortalsLabel()
+    private lateinit var noPortalsLabel: Label
 
     fun populatePortalList(currentMapName: String) {
         val activatedPortals = gameData.portals.getAllActivatedPortalsExcept(currentMapName)
         if (activatedPortals.isEmpty()) {
+            if (!::noPortalsLabel.isInitialized) noPortalsLabel = createNoPortalsLabel()
             container.addActor(noPortalsLabel)
         } else {
-            container.removeActor(noPortalsLabel)
+            if (::noPortalsLabel.isInitialized) container.removeActor(noPortalsLabel)
             portalList.setItems(GdxArray(activatedPortals))
         }
     }
