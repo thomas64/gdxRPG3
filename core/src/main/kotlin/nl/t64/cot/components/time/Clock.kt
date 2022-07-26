@@ -71,7 +71,7 @@ class Clock {
     }
 
     fun isWarning(): Boolean {
-        return countdown <= HOUR
+        return hasStarted && countdown <= HOUR
     }
 
     fun isFinished(): Boolean {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="96" height="78" tilewidth="24" tileheight="24" infinite="0" nextlayerid="57" nextobjectid="412">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="96" height="78" tilewidth="24" tileheight="24" infinite="0" nextlayerid="57" nextobjectid="414">
  <properties>
   <property name="bgm" value="bgm_town"/>
   <property name="lightmap_camera" value="sunlight"/>
@@ -135,7 +135,7 @@
   <object id="319" name="stone" x="1008" y="912" width="144" height="96"/>
   <object id="320" name="stone" x="1008" y="1440" width="144" height="144"/>
   <object id="321" name="sand" x="480" y="1392" width="144" height="48"/>
-  <object id="322" name="stone" x="624" y="1392" width="48" height="48"/>
+  <object id="322" name="stone" x="624" y="1344" width="48" height="96"/>
   <object id="323" name="stone" x="912" y="1152" width="336" height="144"/>
   <object id="324" name="stone" x="960" y="1104" width="240" height="48"/>
   <object id="325" name="stone" x="1008" y="1056" width="144" height="48"/>
