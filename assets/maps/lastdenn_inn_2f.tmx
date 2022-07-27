@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.8" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="24" tileheight="24" infinite="0" nextlayerid="21" nextobjectid="3">
+ <properties>
+  <property name="bgm" value="bgm_inn"/>
+  <property name="step_sound" value="wood"/>
+ </properties>
  <tileset firstgid="1" name="lastdenn_inn_2f" tilewidth="24" tileheight="24" tilecount="666" columns="37">
   <image source="tilesets/lastdenn_inn_2f.png" width="888" height="432"/>
  </tileset>

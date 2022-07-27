@@ -3,6 +3,10 @@
   "simple_right"          : {"source": "small_door1", "col": 1, "row": 1},
   "simple_left"           : {"source": "small_door1", "col": 4, "row": 1},
   "forged_left"           : {"source": "small_door2", "col": 4, "row": 1},
+  "wooden_left"           : {"source": "small_door3", "col": 4, "row": 1},
+  "wooden_ring_shade_left": {"source": "small_door4", "col": 4, "row": 2},
+  "luxurious_left"        : {"source": "small_door5", "col": 4, "row": 1},
+  "luxurious_shade_left"  : {"source": "small_door5", "col": 4, "row": 2},
   "large_round"           : {"source": "large_door3", "col": 1, "row": 1},
   "large_wooden_cave_gate": {"source": "cave_large_door1", "col": 1, "row": 1},
   "small_hidden_cave_door": {"source": "cave_small_door1", "col": 1, "row": 1}

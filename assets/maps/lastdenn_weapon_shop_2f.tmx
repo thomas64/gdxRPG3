@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.8" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="38" height="24" tilewidth="24" tileheight="24" infinite="0" nextlayerid="21" nextobjectid="5">
+ <properties>
+  <property name="bgm" value="bgm_house"/>
+  <property name="step_sound" value="wood"/>
+ </properties>
  <tileset firstgid="1" name="lastdenn_weapon_shop_2f" tilewidth="24" tileheight="24" tilecount="875" columns="35">
   <image source="tilesets/lastdenn_weapon_shop_2f.png" width="840" height="600"/>
  </tileset>
