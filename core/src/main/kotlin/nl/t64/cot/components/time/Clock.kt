@@ -1,7 +1,7 @@
 package nl.t64.cot.components.time
 
 import java.time.Duration
-import java.time.LocalTime
+import java.time.LocalDateTime
 import kotlin.math.floor
 
 
@@ -12,25 +12,13 @@ private const val HALF_HOUR = 3600f             // 1 minute in realtime
 private const val QUARTER = 1800f
 private const val RATE_OF_TIME = 60f            // 60: 1 hour -> 1 minute, 30: 1 hour -> 2 minutes, etc.
 
-fun String.toLocalTime(): LocalTime {
-    return removePrefix("0").split(":").let {
-        GameTime.of(it[0].toInt(), it[1].toInt())
-    }
-}
-
-object GameTime {
-    fun of(hours: Int, minutes: Int): LocalTime {
-        val startOfDay: LocalTime = LocalTime.MIN.plusSeconds(START_OF_DAY)
-        val deltaInSeconds: Long = Duration.between(startOfDay, LocalTime.of(hours, minutes)).toSeconds()
-        return startOfDay.plusSeconds(deltaInSeconds * 2L)
-    }
-}
-
 class Clock {
 
     private var countdown: Float = 0f
     private var hasStarted: Boolean = false
+    private val startOfDay: LocalDateTime = LocalDateTime.MIN.plusSeconds(START_OF_DAY)
     private val passedSeconds: Float get() = TWELVE_HOURS - countdown
+    private val currentTime: LocalDateTime get() = startOfDay.plusSeconds(passedSeconds.toLong())
 
     fun start() {
         hasStarted = true
@@ -88,24 +76,20 @@ class Clock {
         hasStarted = false
     }
 
-    fun isCurrentTimeInBetween(start: String, end: String): Boolean {
-        val startTime: LocalTime = start.toLocalTime()
-        val endTime: LocalTime = end.toLocalTime()
-        return isCurrentTimeInBetween(startTime, endTime)
+    fun getPercentageOfCurrentTimeBetween(startTime: String, endTime: String): Float {
+        return getPercentageOfCurrentTimeBetween(startTime.toGameTime(), endTime.toGameTime())
     }
 
-    fun isCurrentTimeInBetween(startTime: LocalTime, endTime: LocalTime): Boolean {
-        val currentTime: LocalTime = getTimeOfDay()
-        return (currentTime == startTime || currentTime.isAfter(startTime)) && currentTime.isBefore(endTime)
+    fun isCurrentTimeInBetween(startTime: String, endTime: String): Boolean {
+        return isCurrentTimeInBetween(startTime.toGameTime(), endTime.toGameTime())
+    }
+
+    fun isCurrentTime(time: String): Boolean {
+        return isCurrentTime(time.toGameTime())
     }
 
     fun getPercentageOfDay(): Float {
         return 1f - (passedSeconds / TWELVE_HOURS)
-    }
-
-    fun getTimeOfDay(): LocalTime {
-        val passedSecondsFromStartOfDay = START_OF_DAY + passedSeconds.toLong()
-        return LocalTime.MIN.plusSeconds(passedSecondsFromStartOfDay)
     }
 
     fun getTimeOfDayFormatted(): String {
@@ -119,6 +103,36 @@ class Clock {
 
     private fun Float.toMinutes(): Int {
         return floor(this / 60f % 60f).toInt()
+    }
+
+    private fun getPercentageOfCurrentTimeBetween(startTime: LocalDateTime, endTime: LocalDateTime): Float {
+        val currentSeconds: Long = Duration.between(startTime, currentTime).toSeconds()
+        val targetSeconds: Long = Duration.between(startTime, endTime).toSeconds()
+        return currentSeconds * 100f / targetSeconds
+    }
+
+    private fun isCurrentTimeInBetween(startTime: LocalDateTime, endTime: LocalDateTime): Boolean {
+        return currentTime.isNowOrAfter(startTime) && currentTime.isBefore(endTime)
+    }
+
+    private fun isCurrentTime(time: LocalDateTime): Boolean {
+        return currentTime.isEqual(time)
+    }
+
+    private fun LocalDateTime.isNowOrAfter(time: LocalDateTime): Boolean {
+        return isEqual(time) || isAfter(time)
+    }
+
+    private fun String.toGameTime(): LocalDateTime {
+        return removePrefix("0").split(":").let {
+            toGameTime(it[0].toLong(), it[1].toLong())
+        }
+    }
+
+    private fun toGameTime(hours: Long, minutes: Long): LocalDateTime {
+        val givenTime: LocalDateTime = LocalDateTime.MIN.plusHours(hours).plusMinutes(minutes)
+        val deltaInSeconds: Long = Duration.between(startOfDay, givenTime).toSeconds()
+        return startOfDay.plusSeconds(deltaInSeconds * 2L)
     }
 
 }

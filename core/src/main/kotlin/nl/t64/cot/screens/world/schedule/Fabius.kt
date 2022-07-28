@@ -3,7 +3,6 @@ package nl.t64.cot.screens.world.schedule
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.mapManager
-import nl.t64.cot.components.time.GameTime
 import nl.t64.cot.screens.world.entity.Direction.*
 import nl.t64.cot.screens.world.entity.Entity
 import nl.t64.cot.screens.world.entity.EntityState.IDLE
@@ -53,9 +52,8 @@ class Fabius : EntitySchedule() {
     }
 
     override fun handleSideEffects() {
-        val timeOfDay = gameData.clock.getTimeOfDay()
         if (mapManager.currentMap.mapTitle == "honeywood") {
-            if (timeOfDay == GameTime.of(7, 49)) {
+            if (gameData.clock.isCurrentTime("07:49")) {
                 brokerManager.entityObservers.notifyUseDoor("door_simple_left1")
             }
         }
