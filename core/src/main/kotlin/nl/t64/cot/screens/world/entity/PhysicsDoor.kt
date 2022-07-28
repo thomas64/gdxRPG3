@@ -9,12 +9,15 @@ import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.world.entity.events.*
 
 
+private const val NPC_DOOR_OPEN_TIME = 3f
+private const val DEFAULT_CLOSE_TIME = -1f
+
 class PhysicsDoor(private val door: Door) : PhysicsComponent() {
 
     private val stringBuilder: StringBuilder = StringBuilder()
     private var isSelected: Boolean = false
     private var isSelectedByNpc: Boolean = false
-    private var closingDoorTime: Float = -1f
+    private var closingDoorTime: Float = DEFAULT_CLOSE_TIME
 
     override fun receive(event: Event) {
         if (event is LoadEntityEvent) {
@@ -104,7 +107,7 @@ class PhysicsDoor(private val door: Door) : PhysicsComponent() {
     }
 
     private fun openDoorByNpc() {
-        closingDoorTime = 2f
+        closingDoorTime = NPC_DOOR_OPEN_TIME
         openWhenClosedAndRemoveBlocker(false)
         brokerManager.blockObservers.addObserver(entity)
         brokerManager.actionObservers.removeObserver(entity)
@@ -120,7 +123,7 @@ class PhysicsDoor(private val door: Door) : PhysicsComponent() {
     }
 
     private fun autoClose() {
-        closingDoorTime = -1f
+        closingDoorTime = DEFAULT_CLOSE_TIME
         closeWhenOpenAndAddBlocker(false)
         brokerManager.actionObservers.addObserver(entity)
     }

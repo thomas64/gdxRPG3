@@ -1,0 +1,4 @@
+{
+  "lastdenn_item_shop"  : {"toMapName": "lastdenn", "direction": "SOUTH", "closingTime": "17:00", "message": "I'm sorry, it's 17:00, we're closing."},
+  "lastdenn_weapon_shop": {"toMapName": "lastdenn", "direction": "SOUTH", "closingTime": "17:05", "message": "It's past 17:00, the shop is closed."}
+}

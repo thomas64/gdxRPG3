@@ -33,6 +33,14 @@ class Clock {
         countdown = TWELVE_HOURS
     }
 
+    fun quarterDown() {
+        countdown -= QUARTER
+    }
+
+    fun quarterUp() {
+        countdown += QUARTER
+    }
+
     fun update(dt: Float) {
         countdown -= (dt * RATE_OF_TIME)
         if (isFinished()) {
@@ -67,12 +75,12 @@ class Clock {
     }
 
     fun possibleAddSomeExtraLoadingTime() {
-        if (countdown < QUARTER) {
+        if (hasStarted && countdown < QUARTER) {
             countdown = QUARTER
         }
     }
 
-    private fun stop() {
+    fun stop() {
         hasStarted = false
     }
 
@@ -84,8 +92,12 @@ class Clock {
         return isCurrentTimeInBetween(startTime.toGameTime(), endTime.toGameTime())
     }
 
-    fun isCurrentTime(time: String): Boolean {
-        return isCurrentTime(time.toGameTime())
+    fun isCurrentTimeAfter(time: String): Boolean {
+        return currentTime.isNowOrAfter(time.toGameTime());
+    }
+
+    fun isCurrentTimeAt(time: String): Boolean {
+        return currentTime.isEqual(time.toGameTime())
     }
 
     fun getPercentageOfDay(): Float {
@@ -113,10 +125,6 @@ class Clock {
 
     private fun isCurrentTimeInBetween(startTime: LocalDateTime, endTime: LocalDateTime): Boolean {
         return currentTime.isNowOrAfter(startTime) && currentTime.isBefore(endTime)
-    }
-
-    private fun isCurrentTime(time: LocalDateTime): Boolean {
-        return currentTime.isEqual(time)
     }
 
     private fun LocalDateTime.isNowOrAfter(time: LocalDateTime): Boolean {

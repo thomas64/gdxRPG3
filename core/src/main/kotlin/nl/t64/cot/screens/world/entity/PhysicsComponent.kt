@@ -42,7 +42,7 @@ abstract class PhysicsComponent : Component {
     open fun setBoundingBox() {
         val width = Constant.TILE_SIZE * boundingBoxWidthPercentage
         val height = Constant.TILE_SIZE * boundingBoxHeightPercentage
-        val widthReduction = 1.00f - boundingBoxWidthPercentage
+        val widthReduction = 1f - boundingBoxWidthPercentage
         val x = currentPosition.x + (Constant.TILE_SIZE * (widthReduction / 2))
         val y = currentPosition.y
         boundingBox.set(x, y, width, height)

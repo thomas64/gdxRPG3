@@ -53,7 +53,7 @@ class Fabius : EntitySchedule() {
 
     override fun handleSideEffects() {
         if (mapManager.currentMap.mapTitle == "honeywood") {
-            if (gameData.clock.isCurrentTime("07:49")) {
+            if (gameData.clock.isCurrentTimeAt("07:49")) {
                 brokerManager.entityObservers.notifyUseDoor("door_simple_left1")
             }
         }

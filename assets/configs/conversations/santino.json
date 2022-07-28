@@ -1,0 +1,37 @@
+{
+  "santino_prepare"            : {
+    "phrases": {
+      "1": {"text": ["Blessings upon you my child."]},
+      "2": {"text": ["Welcome to this temple. I am Father Santino."]},
+      "3": {"text": ["I'm busy preparing this morning's service.", "At 10:00 the service will start. Feel free to join us."]},
+      "4": {"text": ["If you got questions about anything, please come see me after the service at 11:00. For one hour, after every service, I am open for answering questions to the congregation."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "santino_service_start"      : {
+    "phrases": {
+      "1": {"text": ["The service is about to begin. Please join us if you'd like."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "santino_first_service"      : {
+    "phrases": {
+      "1": {"text": ["[Preaching and praying.]"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "santino_first_question_hour": {
+    "phrases": {
+      "1": {"text": ["[Question about Ulrog?! Come see me tonight at 18:00.]"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "santino_busy_errand"        : {
+    "phrases": {
+      "1": {"text": ["I'm on my way to the mayor. If you need to see me, come to me at 16:00 after the afternoon service.", "I'll be answering questions to the congregation again."]},
+      "2": {"text": ["The afternoon service itself starts at 15:00. Feel free to join us."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "santino_being_murdered"     : {
+    "phrases": {
+      "1": {"face": "santino", "text": ["What are you doing?!"]},
+      "2": {"face": "santino", "text": ["Noooo!"], "choices": [{"command": "EXIT"}]}
+    }
+  }
+}

@@ -7,3 +7,4 @@ honeywood.json
 cutscene_end_of_cycle2.json
 cutscene_ardor2.json
 heroes.json
+santino.json
