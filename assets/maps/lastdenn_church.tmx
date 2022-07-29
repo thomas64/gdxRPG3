@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="46" height="43" tilewidth="24" tileheight="24" infinite="0" nextlayerid="21" nextobjectid="14">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="46" height="43" tilewidth="24" tileheight="24" infinite="0" nextlayerid="21" nextobjectid="17">
  <tileset firstgid="1" name="lastdenn_church" tilewidth="24" tileheight="24" tilecount="1316" columns="47">
   <image source="tilesets/lastdenn_church.png" width="1128" height="672"/>
  </tileset>
@@ -55,9 +55,21 @@
  <objectgroup color="#0055ff" id="11" name="sound"/>
  <objectgroup color="#aa0000" id="12" name="collision"/>
  <objectgroup color="#5500ff" id="13" name="rest"/>
- <objectgroup color="#55ff7f" id="14" name="npc"/>
+ <objectgroup color="#55ff7f" id="14" name="npc">
+  <object id="15" name="sister01" x="480" y="816" width="48" height="24">
+   <properties>
+    <property name="conversation" value="save_lastdenn"/>
+    <property name="direction" value="south"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup color="#55aaff" id="15" name="spawn">
   <object id="1" name="lastdenn" x="528" y="936" width="48" height="24"/>
+  <object id="16" name="lastdenn_church" x="528" y="696" width="48" height="24">
+   <properties>
+    <property name="direction" value="north"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup color="#ffff7f" id="16" name="portal">
   <object id="2" name="lastdenn" x="528" y="960" width="48" height="24"/>

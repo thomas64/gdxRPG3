@@ -1,0 +1,14 @@
+{
+  "save_lastdenn": {
+    "phrases": {
+      "1": {"text": ["Welcome to Lastdenn's Temple. I'm sister Margarita.", "Do you want me to pray for you, so can feel save on your journey?"]},
+      "2": {
+        "face": "mozes", "text": ["Didn't you mean safe?"], "choices": [
+          {"text": "But yes, please do. (Save game)", "nextId": "3"},
+          {"text": "No thanks, I don't believe in your false God. (Leave conversation)", "command": "EXIT"}
+        ]
+      },
+      "3": {"face": "sister01", "text": ["Mighty Evdos, bless this traveler into savety."], "choices": [{"command": "SAVE_GAME"}]}
+    }
+  }
+}
