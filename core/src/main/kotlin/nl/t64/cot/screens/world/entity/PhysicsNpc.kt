@@ -2,7 +2,7 @@ package nl.t64.cot.screens.world.entity
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
-import nl.t64.cot.Utils.brokerManager
+import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.world.entity.events.*
 
@@ -57,7 +57,7 @@ class PhysicsNpc : PhysicsComponent() {
         entity.send(PositionEvent(currentPosition))
         if (isSelected) {
             isSelected = false
-            brokerManager.componentObservers.notifyShowConversationDialog(conversationId, entity)
+            screenManager.getWorldScreen().showConversationDialogFromNpc(conversationId, entity)
         }
     }
 

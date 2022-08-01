@@ -1,8 +1,8 @@
 package nl.t64.cot.screens.world.schedule
 
-import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.mapManager
+import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.screens.world.entity.Direction.*
 import nl.t64.cot.screens.world.entity.Entity
 import nl.t64.cot.screens.world.entity.EntityState.IDLE
@@ -63,7 +63,7 @@ class Santino : EntitySchedule() {
     override fun handleSideEffects() {
         if (mapManager.currentMap.mapTitle == "lastdenn") {
             if (gameData.clock.isCurrentTimeAt("12:19")) {
-                brokerManager.entityObservers.notifyUseDoor("door_large_round")
+                screenManager.getWorldScreen().useDoor("door_large_round")
             }
         }
     }

@@ -4,6 +4,7 @@ import com.badlogic.gdx.ai.pfa.DefaultGraphPath
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import nl.t64.cot.Utils.brokerManager
+import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.world.entity.events.*
 import nl.t64.cot.screens.world.pathfinding.PathfindingObstacleChecker
@@ -76,15 +77,15 @@ class PhysicsEnemy : PhysicsComponent() {
         }
         entity.send(PositionEvent(currentPosition))
         if (isNearbyPlayer()) {
-            brokerManager.componentObservers.notifyShowBattleScreen(battleId, entity)
+            screenManager.getWorldScreen().showBattleScreen(battleId, entity)
         }
         if (isBumped) {
             isBumped = false
-            brokerManager.componentObservers.notifyShowBattleScreen(battleId, entity)
+            screenManager.getWorldScreen().showBattleScreen(battleId, entity)
         }
         if (isSelected) {
             isSelected = false
-            brokerManager.componentObservers.notifyShowBattleScreen(battleId, entity)
+            screenManager.getWorldScreen().showBattleScreen(battleId, entity)
         }
     }
 

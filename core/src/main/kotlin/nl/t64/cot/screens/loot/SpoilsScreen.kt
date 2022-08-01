@@ -1,6 +1,5 @@
 package nl.t64.cot.screens.loot
 
-import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
@@ -21,7 +20,7 @@ open class SpoilsScreen : LootScreen() {
     }
 
     override fun resolveLootAndCloseScreen(notUsedHere: Boolean) {
-        brokerManager.lootObservers.notifySpoilsUpdated()
+        screenManager.getWorldScreen().updateLoot()
         closeScreen(audioEvent = AudioEvent.SE_CONVERSATION_NEXT)
     }
 

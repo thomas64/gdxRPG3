@@ -9,9 +9,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.utils.Align
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.audioManager
-import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.resourceManager
+import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.constants.Constant
 
 
@@ -68,7 +68,7 @@ internal class ClockBox {
     private fun handleEnding(dt: Float) {
         if (gameData.clock.isFinished()) {
             Utils.runWithDelay(Constant.FADE_DURATION) {
-                brokerManager.mapObservers.notifyStartCutscene("scene_death", 1f)
+                screenManager.getWorldScreen().startCutscene("scene_death", 1f)
             }
             audioManager.fadeAllInSeparateThreadForClockEnding(dt)
         }

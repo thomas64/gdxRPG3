@@ -11,12 +11,6 @@ class BrokerManager {
     val detectionObservers = DetectionSubject()
     val collisionObservers = CollisionSubject()
 
-    val componentObservers = ComponentSubject()
-    val lootObservers = LootSubject()
-    val mapObservers = MapSubject()
-    val entityObservers = EntitySubject()
-    val messageObservers = MessageSubject()
-
     val profileObservers = ProfileSubject()
 
 }

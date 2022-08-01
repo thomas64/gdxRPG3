@@ -42,12 +42,9 @@ import nl.t64.cot.screens.world.entity.events.NpcActionEvent
 import nl.t64.cot.screens.world.schedule.WorldSchedule
 import nl.t64.cot.sfx.TransitionImage
 import nl.t64.cot.sfx.TransitionPurpose
-import nl.t64.cot.subjects.*
 
 
-class WorldScreen : Screen,
-    MapObserver, ComponentObserver, EntityObserver, LootObserver, ConversationObserver, MessageObserver,
-    BattleObserver {
+class WorldScreen : Screen, ConversationObserver, BattleObserver {
 
     private var previousGameState: GameState = GameState.OFF
     private var gameState: GameState = GameState.OFF
@@ -77,21 +74,24 @@ class WorldScreen : Screen,
     private lateinit var lootList: List<Entity>
     private lateinit var doorList: List<Entity>
 
-    init {
-        brokerManager.messageObservers.addObserver(this)
-        brokerManager.componentObservers.addObserver(this)
-        brokerManager.mapObservers.addObserver(this)
-        brokerManager.entityObservers.addObserver(this)
-        brokerManager.lootObservers.addObserver(this)
+    //region public methods ////////////////////////////////////////////////////////////////////////////////////////////
+
+    fun fadeOut(
+        actionAfterFade: () -> Unit,
+        transitionColor: Color = Color.BLACK,
+        duration: Float = 0f,
+        transitionPurpose: TransitionPurpose = TransitionPurpose.MAP_CHANGE
+    ) {
+        val transition = TransitionImage(transitionPurpose, transitionColor)
+        stage.addActor(transition)
+        transition.addAction(Actions.sequence(Actions.alpha(0f),
+                                              Actions.fadeIn(Constant.FADE_DURATION),
+                                              Actions.delay(duration),
+                                              Actions.run(actionAfterFade),
+                                              Actions.removeActor()))
     }
 
-    //region MapObserver ///////////////////////////////////////////////////////////////////////////////////////////////
-
-    override fun onNotifyFadeOut(actionAfterFade: () -> Unit, transitionColor: Color, duration: Float) {
-        fadeOut(actionAfterFade, transitionColor, duration)
-    }
-
-    override fun onNotifyMapChanged(currentMap: GameMap) {
+    fun changeMap(currentMap: GameMap) {
         mapRenderer.map = currentMap.tiledMap
         camera.setNewMapSize(currentMap.pixelWidth, currentMap.pixelHeight)
         player.send(LoadEntityEvent(currentMap.playerSpawnDirection, currentMap.playerSpawnLocation))
@@ -102,19 +102,16 @@ class WorldScreen : Screen,
         mapManager.setNextMapTitleNull()
     }
 
-    override fun onNotifyShakeCamera() {
+    fun shakeCamera() {
         camera.startShaking()
     }
 
-    override fun onNotifyStartCutscene(cutsceneId: String, fadeDuration: Float) {
+    fun startCutscene(cutsceneId: String, fadeDuration: Float = 0f) {
         doBeforeLoadScreen()
         fadeOut({ screenManager.setScreen(ScreenType.valueOf(cutsceneId.uppercase())) }, Color.BLACK, fadeDuration)
     }
-    //endregion
 
-    //region ComponentObserver /////////////////////////////////////////////////////////////////////////////////////////
-
-    override fun onNotifyShowConversationDialogFromNpc(conversationId: String, npcEntity: Entity) {
+    fun showConversationDialogFromNpc(conversationId: String, npcEntity: Entity) {
         currentNpcEntity = npcEntity
         player.resetInput()
         gameState = GameState.DIALOG
@@ -122,7 +119,7 @@ class WorldScreen : Screen,
         conversationDialog.show()
     }
 
-    override fun onNotifyShowConversationDialogFromEvent(conversationId: String, entityId: String) {
+    fun showConversationDialogFromEvent(conversationId: String, entityId: String) {
         if (entityId != Constant.PLAYER_ID) {
             currentNpcEntity = getEntityBasedOnEventData(conversationId, entityId)
         }
@@ -139,36 +136,36 @@ class WorldScreen : Screen,
             .first()
     }
 
-    override fun onNotifyShowNoteDialog(noteId: String) {
+    fun showNoteDialog(noteId: String) {
         player.resetInput()
         gameState = GameState.DIALOG
         conversationDialog.loadNote(noteId)
         conversationDialog.show()
     }
 
-    override fun onNotifyShowFindScreenWithMessageDialog(loot: Loot, event: AudioEvent, message: String) {
+    fun showFindScreenWithMessageDialog(loot: Loot, event: AudioEvent, message: String) {
         doBeforeLoadScreen()
         gameState = GameState.DIALOG
         messageDialog.setActionAfterHide { FindScreen.load(loot, event) }
         messageDialog.show(message, AudioEvent.SE_CONVERSATION_NEXT)
     }
 
-    override fun onNotifyShowFindScreen(loot: Loot, event: AudioEvent) {
+    fun showFindScreen(loot: Loot, event: AudioEvent) {
         doBeforeLoadScreen()
         FindScreen.load(loot, event)
     }
 
-    override fun onNotifyShowStorageScreen() {
+    fun showStorageScreen() {
         player.resetInput()
         StorageScreen.load()
     }
 
-    override fun onNotifyShowWarpScreen(currentMapName: String) {
+    fun showWarpScreen(currentMapName: String) {
         player.resetInput()
         WarpScreen.load(currentMapName)
     }
 
-    override fun onNotifyShowMessageDialog(message: String, actionAfterHide: () -> Unit) {
+    fun showMessageDialog(message: String, actionAfterHide: () -> Unit = {}) {
         player.resetInput()
         gameState = GameState.DIALOG
         messageDialog.setActionAfterHide {
@@ -178,7 +175,7 @@ class WorldScreen : Screen,
         messageDialog.show(message, AudioEvent.SE_CONVERSATION_NEXT)
     }
 
-    override fun onNotifyShowBattleScreen(battleId: String, enemyEntity: Entity) {
+    fun showBattleScreen(battleId: String, enemyEntity: Entity) {
         if (player.moveSpeed != Constant.MOVE_SPEED_4 && !isInMapTransition) {
             setInputProcessors(null)
             currentNpcEntity = enemyEntity
@@ -187,43 +184,37 @@ class WorldScreen : Screen,
             fadeOut({ BattleScreen.load(battleId, this) }, Color.BLACK)
         }
     }
-    //endregion
 
-    //region EntityObserver ////////////////////////////////////////////////////////////////////////////////////////////
-
-    override fun onNotifyPartyUpdate() {
+    fun updateParty() {
         // atm no party update necessary.
     }
 
-    override fun onNotifyNpcsUpdate(newNpcEntities: List<Entity>) {
+    fun updateNpcs(newNpcEntities: List<Entity>) {
         npcEntities = newNpcEntities
     }
 
-    override fun onNotifyAddScheduledEntity(entity: Entity) {
+    fun addScheduledEntity(entity: Entity) {
         if (entity !in visibleScheduledEntities) {
             visibleScheduledEntities.add(entity)
         }
     }
 
-    override fun onNotifyRemoveScheduledEntity(entity: Entity) {
+    fun removeScheduledEntity(entity: Entity) {
         visibleScheduledEntities.remove(entity)
     }
 
-    override fun onNotifyUseDoor(doorId: String) {
+    fun useDoor(doorId: String) {
         doorList.single { it.id == doorId }.send(NpcActionEvent())
     }
-    //endregion
 
-    //region LootObserver //////////////////////////////////////////////////////////////////////////////////////////////
-
-    override fun onNotifySpoilsUpdated() {
-        onNotifyLootTaken()
-    }
-
-    override fun onNotifyLootTaken() {
+    fun updateLoot() {
         lootList.forEach { brokerManager.actionObservers.removeObserver(it) }
         lootList.forEach { brokerManager.blockObservers.removeObserver(it) }
         lootList = LootLoader(mapManager.currentMap).createLoot()
+    }
+
+    fun showMessageTooltip(message: String) {
+        messageTooltip.show(message, stage)
     }
     //endregion
 
@@ -251,13 +242,6 @@ class WorldScreen : Screen,
     private fun reloadNpcs() {
         brokerManager.blockObservers.removeAllNpcObservers()
         npcEntities = NpcEntitiesLoader(mapManager.currentMap).createNpcs()
-    }
-    //endregion
-
-    //region MessageObserver ///////////////////////////////////////////////////////////////////////////////////////////
-
-    override fun onNotifyShowMessageTooltip(message: String) {
-        messageTooltip.show(message, stage)
     }
     //endregion
 
@@ -359,21 +343,6 @@ class WorldScreen : Screen,
         (doorList + npcEntities + visibleScheduledEntities + player)
             .sortedByDescending { it.position.y }
             .forEach { it.render(batch) }
-    }
-
-    private fun fadeOut(
-        actionAfterFade: () -> Unit,
-        transitionColor: Color,
-        duration: Float = 0f,
-        transitionPurpose: TransitionPurpose = TransitionPurpose.MAP_CHANGE
-    ) {
-        val transition = TransitionImage(transitionPurpose, transitionColor)
-        stage.addActor(transition)
-        transition.addAction(Actions.sequence(Actions.alpha(0f),
-                                              Actions.fadeIn(Constant.FADE_DURATION),
-                                              Actions.delay(duration),
-                                              Actions.run(actionAfterFade),
-                                              Actions.removeActor()))
     }
 
     private fun doBeforeLoadScreen() {

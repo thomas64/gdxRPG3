@@ -2,7 +2,7 @@ package nl.t64.cot.screens.world.entity
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
-import nl.t64.cot.Utils.brokerManager
+import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.screens.world.entity.events.Event
 import nl.t64.cot.screens.world.entity.events.OnActionEvent
 import nl.t64.cot.screens.world.entity.events.UpdateScheduledEntityEvent
@@ -36,7 +36,7 @@ class PhysicsScheduledNpc : PhysicsComponent() {
     override fun update(entity: Entity, dt: Float) {
         if (isSelected) {
             isSelected = false
-            brokerManager.componentObservers.notifyShowConversationDialog(conversationId, entity)
+            screenManager.getWorldScreen().showConversationDialogFromNpc(conversationId, entity)
         }
     }
 

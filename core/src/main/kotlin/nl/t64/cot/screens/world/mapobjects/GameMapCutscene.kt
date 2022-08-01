@@ -4,6 +4,7 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject
 import com.badlogic.gdx.math.Rectangle
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
+import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.components.condition.ConditionDatabase
 import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.subjects.CollisionObserver
@@ -30,7 +31,7 @@ class GameMapCutscene(rectObject: RectangleMapObject) : GameMapObject(rectObject
         if (!cutscenes.isPlayed(cutsceneId) || (cutscenes.isRepeatable(cutsceneId) && !hasStartedTemp)) {
             cutscenes.setPlayed(cutsceneId)
             hasStartedTemp = true
-            brokerManager.mapObservers.notifyStartCutscene(cutsceneId)
+            screenManager.getWorldScreen().startCutscene(cutsceneId)
         }
     }
 

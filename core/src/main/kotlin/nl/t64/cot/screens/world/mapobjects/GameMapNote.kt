@@ -4,6 +4,7 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
 import nl.t64.cot.Utils.brokerManager
+import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.subjects.ActionObserver
 
@@ -18,7 +19,7 @@ class GameMapNote(rectObject: RectangleMapObject) : GameMapObject(rectObject.rec
 
     override fun onNotifyActionPressed(checkRect: Rectangle, playerDirection: Direction, playerPosition: Vector2) {
         if (checkRect.overlaps(rectangle)) {
-            brokerManager.componentObservers.notifyShowNoteDialog(noteId)
+            screenManager.getWorldScreen().showNoteDialog(noteId)
         }
     }
 

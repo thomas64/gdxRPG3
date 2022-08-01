@@ -1,7 +1,7 @@
 package nl.t64.cot.components.event
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import nl.t64.cot.Utils.brokerManager
+import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.components.condition.ConditionDatabase
 
 
@@ -36,10 +36,12 @@ class Event(
     }
 
     private fun start() {
-        when (type) {
-            "conversation" -> brokerManager.componentObservers.notifyShowConversationDialog(conversationId!!, entityId!!)
-            "messagebox" -> brokerManager.componentObservers.notifyShowMessageDialog(TextReplacer.replace(text))
-            else -> throw IllegalArgumentException("Event does not recognize type: '$type'.")
+        with(screenManager.getWorldScreen()) {
+            when (type) {
+                "conversation" -> showConversationDialogFromEvent(conversationId!!, entityId!!)
+                "messagebox" -> showMessageDialog(TextReplacer.replace(text))
+                else -> throw IllegalArgumentException("Event does not recognize type: '$type'.")
+            }
         }
     }
 

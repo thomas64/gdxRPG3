@@ -1,8 +1,8 @@
 package nl.t64.cot.screens.world.entity
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
-import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
+import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.components.party.HeroItem
@@ -78,7 +78,7 @@ class PhysicsChest(private val chest: Loot) : PhysicsComponent() {
             .append("There's a dangerous trap on this treasure chest.")
             .append(System.lineSeparator())
             .append("You need a level ${chest.trapLevel} Mechanic to disarm the trap.")
-        brokerManager.componentObservers.notifyShowMessageDialog(stringBuilder.toString())
+        screenManager.getWorldScreen().showMessageDialog(stringBuilder.toString())
     }
 
     private fun doHandleTrapWith(bestMechanic: HeroItem) {
@@ -119,7 +119,7 @@ class PhysicsChest(private val chest: Loot) : PhysicsComponent() {
                 .append(System.lineSeparator())
         }
         stringBuilder.append("You need a level ${chest.lockLevel} Thief to pick the lock.")
-        brokerManager.componentObservers.notifyShowMessageDialog(stringBuilder.toString())
+        screenManager.getWorldScreen().showMessageDialog(stringBuilder.toString())
     }
 
     private fun doHandleLockWith(bestThief: HeroItem) {
@@ -141,9 +141,9 @@ class PhysicsChest(private val chest: Loot) : PhysicsComponent() {
     private fun showFindDialog() {
         val message = finishStringBuilder()
         if (message.isBlank()) {
-            brokerManager.componentObservers.notifyShowFindScreen(chest, AudioEvent.SE_CHEST)
+            screenManager.getWorldScreen().showFindScreen(chest, AudioEvent.SE_CHEST)
         } else {
-            brokerManager.componentObservers.notifyShowFindScreenWithMessageDialog(chest, AudioEvent.SE_CHEST, message)
+            screenManager.getWorldScreen().showFindScreenWithMessageDialog(chest, AudioEvent.SE_CHEST, message)
         }
     }
 

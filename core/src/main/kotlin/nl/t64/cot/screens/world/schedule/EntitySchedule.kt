@@ -1,6 +1,7 @@
 package nl.t64.cot.screens.world.schedule
 
 import nl.t64.cot.Utils.brokerManager
+import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.screens.world.entity.Entity
 import nl.t64.cot.screens.world.entity.EntityState
 import nl.t64.cot.screens.world.entity.events.UpdateScheduledEntityEvent
@@ -21,7 +22,7 @@ abstract class EntitySchedule {
 
     private fun ScheduleItem.handle() {
         entity.send(UpdateScheduledEntityEvent(state, direction, getCurrentPosition(), conversationId))
-        brokerManager.entityObservers.notifyAddScheduledEntity(entity)
+        screenManager.getWorldScreen().addScheduledEntity(entity)
         handleTalking()
         handleBlocking()
     }
@@ -45,7 +46,7 @@ abstract class EntitySchedule {
     private fun remove() {
         brokerManager.blockObservers.removeObserver(entity)
         brokerManager.actionObservers.removeObserver(entity)
-        brokerManager.entityObservers.notifyRemoveScheduledEntity(entity)
+        screenManager.getWorldScreen().removeScheduledEntity(entity)
     }
 
     abstract fun getScheduleOfEntity(): List<ScheduleItem>

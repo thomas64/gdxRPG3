@@ -1,7 +1,7 @@
 package nl.t64.cot.components.party
 
-import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
+import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.audio.stopAllSe
@@ -42,7 +42,7 @@ object SpellsRewarder {
         // todo, it only shows which spells and not how much ranks.
         spellItems.forEach { builder.appendLine("+ ${it.name}") }
         builder.deleteAt(builder.lastIndex)
-        brokerManager.messageObservers.notifyShowMessageTooltip(builder.toString())
+        screenManager.getWorldScreen().showMessageTooltip(builder.toString())
     }
 
 }

@@ -17,10 +17,10 @@ import com.badlogic.gdx.utils.Align
 import ktx.assets.disposeSafely
 import ktx.collections.GdxArray
 import nl.t64.cot.Utils
-import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.profileManager
 import nl.t64.cot.Utils.resourceManager
+import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.conversation.ConversationChoice
@@ -246,7 +246,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             gameData.clock.takeHour()
             gameData.party.recoverFullHp()
         }
-        brokerManager.mapObservers.notifyFadeOut({ continueConversation(nextId) }, duration = 1f)
+        screenManager.getWorldScreen().fadeOut({ continueConversation(nextId) }, duration = 1f)
     }
 
     private fun pay(price: Int) {

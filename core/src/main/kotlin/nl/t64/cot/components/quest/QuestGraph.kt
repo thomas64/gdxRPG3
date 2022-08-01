@@ -1,7 +1,7 @@
 package nl.t64.cot.components.quest
 
-import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
+import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.audio.stopAllSe
@@ -281,7 +281,7 @@ data class QuestGraph(
 
     private fun showMessageTooltipQuestNew() {
         if (!isHidden && resetState == QuestState.UNKNOWN) {
-            brokerManager.messageObservers.notifyShowMessageTooltip("New quest:" + System.lineSeparator() + title)
+            screenManager.getWorldScreen().showMessageTooltip("New quest:" + System.lineSeparator() + title)
         }
     }
 
@@ -290,7 +290,7 @@ data class QuestGraph(
             && (currentState == QuestState.ACCEPTED || resetState == QuestState.ACCEPTED)
             && (!isReadyToBeFinished() || (isSubQuest && isReadyToBeFinished()))
         ) {
-            brokerManager.messageObservers.notifyShowMessageTooltip("Quest updated:" + System.lineSeparator() + title)
+            screenManager.getWorldScreen().showMessageTooltip("Quest updated:" + System.lineSeparator() + title)
         }
     }
 
@@ -298,12 +298,12 @@ data class QuestGraph(
         if (!isHidden && !isSubQuest) {
             stopAllSe()
             playSe(AudioEvent.SE_REWARD)
-            brokerManager.messageObservers.notifyShowMessageTooltip("Quest completed:" + System.lineSeparator() + title)
+            screenManager.getWorldScreen().showMessageTooltip("Quest completed:" + System.lineSeparator() + title)
         }
     }
 
     private fun showMessageTooltipQuestFailed() {
-        brokerManager.messageObservers.notifyShowMessageTooltip("Quest failed:" + System.lineSeparator() + title)
+        screenManager.getWorldScreen().showMessageTooltip("Quest failed:" + System.lineSeparator() + title)
     }
 
 }

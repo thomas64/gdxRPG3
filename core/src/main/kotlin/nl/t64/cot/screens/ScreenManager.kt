@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.reflect.ReflectionException
 import nl.t64.cot.CrystalOfTime
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.menu.MenuScreen
+import nl.t64.cot.screens.world.WorldScreen
 import java.util.*
 
 
@@ -20,6 +21,10 @@ class ScreenManager {
         val loadScreen = getScreen(ScreenType.LOAD_SCREEN) as LoadScreen
         loadScreen.screenTypeToLoad = screenTypeToLoad
         setScreen(ScreenType.LOAD_SCREEN)
+    }
+
+    fun getWorldScreen(): WorldScreen {
+        return getScreen(ScreenType.WORLD) as WorldScreen
     }
 
     fun getMenuScreen(screenType: ScreenType): MenuScreen {

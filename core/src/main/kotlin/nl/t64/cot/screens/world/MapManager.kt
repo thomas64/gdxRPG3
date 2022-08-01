@@ -12,6 +12,7 @@ import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.profileManager
 import nl.t64.cot.Utils.resourceManager
+import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.*
 import nl.t64.cot.components.cutscene.CutsceneId
 import nl.t64.cot.constants.Constant
@@ -34,7 +35,7 @@ class MapManager : ProfileObserver {
         loadMap(Constant.STARTING_MAP)
         currentMap.setPlayerSpawnLocationForNewLoad(Constant.STARTING_MAP)
         onNotifySaveProfile(profileManager)
-        brokerManager.mapObservers.notifyMapChanged(currentMap)
+        screenManager.getWorldScreen().changeMap(currentMap)
     }
 
     override fun onNotifySaveProfile(profileManager: ProfileManager) {
@@ -51,7 +52,7 @@ class MapManager : ProfileObserver {
             loadMap(mapTitle)
         }
         currentMap.setPlayerSpawnLocationForNewLoad(mapTitle)
-        brokerManager.mapObservers.notifyMapChanged(currentMap)
+        screenManager.getWorldScreen().changeMap(currentMap)
     }
 
     fun loadMapAfterFleeing(mapTitle: String) {
@@ -61,7 +62,7 @@ class MapManager : ProfileObserver {
     fun loadMapAfterCutscene(mapTitle: String, spawnId: String) {
         loadMapWithBgmBgs(mapTitle)
         currentMap.setPlayerSpawnLocationForNewLoad(spawnId)
-        brokerManager.mapObservers.notifyMapChanged(currentMap)
+        screenManager.getWorldScreen().changeMap(currentMap)
     }
 
     fun getTiledMap(): TiledMap = currentMap.tiledMap
@@ -111,28 +112,28 @@ class MapManager : ProfileObserver {
             loadMap(mapTitle)
             currentMap.setPlayerSpawnLocationForNewLoad(mapTitle)
             profileManager.saveProfile()
-            brokerManager.mapObservers.notifyMapChanged(currentMap)
+            screenManager.getWorldScreen().changeMap(currentMap)
         }
-        brokerManager.mapObservers.notifyFadeOut(actionAfterFade, Color.GRAY, 1f)
+        screenManager.getWorldScreen().fadeOut(actionAfterFade, Color.GRAY, 1f)
     }
 
     fun checkWarpPoint(warpPoint: GameMapRelocator, playerDirection: Direction) {
         playSe(AudioEvent.SE_WARP)
         nextMapTitle = warpPoint.toMapName
-        brokerManager.mapObservers.notifyFadeOut(
+        screenManager.getWorldScreen().fadeOut(
             { changeMapWithCameraShake(warpPoint, playerDirection) }, warpPoint.fadeColor
         )
     }
 
     fun schedulePortal(portal: GameMapRelocator, playerDirection: Direction) {
-        brokerManager.mapObservers.notifyFadeOut(
+        screenManager.getWorldScreen().fadeOut(
             { changeMap(portal, playerDirection) }, duration = 1f
         )
     }
 
     fun collisionPortal(portal: GameMapRelocator, playerDirection: Direction) {
         nextMapTitle = portal.toMapName
-        brokerManager.mapObservers.notifyFadeOut(
+        screenManager.getWorldScreen().fadeOut(
             { changeMap(portal, playerDirection) }, portal.fadeColor
         )
     }
@@ -140,20 +141,20 @@ class MapManager : ProfileObserver {
     fun changeMapWithWarpPortal(warpToMapName: String) {
         loadMapWithBgmBgs(warpToMapName)
         currentMap.setPlayerSpawnLocationForWarpPortal()
-        brokerManager.mapObservers.notifyMapChanged(currentMap)
-        brokerManager.mapObservers.notifyShakeCamera()
+        screenManager.getWorldScreen().changeMap(currentMap)
+        screenManager.getWorldScreen().shakeCamera()
     }
 
     private fun changeMapWithCameraShake(warpPoint: GameMapRelocator, direction: Direction) {
         changeMap(warpPoint, direction)
-        brokerManager.mapObservers.notifyShakeCamera()
+        screenManager.getWorldScreen().shakeCamera()
     }
 
     private fun changeMap(portal: GameMapRelocator, direction: Direction) {
         portal.enterDirection = direction
         loadMapWithBgmBgs(portal.toMapName)
         currentMap.setPlayerSpawnLocation(portal)
-        brokerManager.mapObservers.notifyMapChanged(currentMap)
+        screenManager.getWorldScreen().changeMap(currentMap)
     }
 
     fun setTiledGraph() {

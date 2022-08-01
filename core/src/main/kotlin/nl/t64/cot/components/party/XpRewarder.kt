@@ -1,7 +1,7 @@
 package nl.t64.cot.components.party
 
-import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
+import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.audio.stopAllSe
@@ -36,12 +36,12 @@ object XpRewarder {
 
     private fun showMessageTooltipXpOnly(xp: Int) {
         playSe(AudioEvent.SE_REWARD)
-        brokerManager.messageObservers.notifyShowMessageTooltip("+ $xp XP")
+        screenManager.getWorldScreen().showMessageTooltip("+ $xp XP")
     }
 
     private fun showMessageTooltipXpAndLevelUp(xp: Int, levelUpMessage: String) {
         playSe(AudioEvent.SE_LEVELUP)
-        brokerManager.messageObservers.notifyShowMessageTooltip("+ $xp XP" + System.lineSeparator() + levelUpMessage)
+        screenManager.getWorldScreen().showMessageTooltip("+ $xp XP" + System.lineSeparator() + levelUpMessage)
     }
 
 }

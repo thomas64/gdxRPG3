@@ -8,6 +8,7 @@ import ktx.collections.GdxMap
 import ktx.collections.set
 import ktx.json.fromJson
 import nl.t64.cot.Utils.brokerManager
+import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.constants.Constant
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -52,7 +53,7 @@ class ProfileManager {
     fun saveProfile() {
         brokerManager.profileObservers.notifySaveProfile(this)
         writeProfileToDisk(null)
-        brokerManager.messageObservers.notifyShowMessageTooltip("Game saved.")
+        screenManager.getWorldScreen().showMessageTooltip("Game saved.")
     }
 
     fun loadProfile(profileIndex: Int) {

@@ -1,8 +1,8 @@
 package nl.t64.cot.screens.world.entity
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
-import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
+import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.components.party.skills.SkillItemId
@@ -30,7 +30,7 @@ class PhysicsSparkle(private val sparkle: Loot) : PhysicsComponent() {
         if (isSelected) {
             isSelected = false
             sparkle.handleRanger(gameData.party.getSumOfSkill(SkillItemId.RANGER))
-            brokerManager.componentObservers.notifyShowFindScreen(sparkle, AudioEvent.SE_SPARKLE)
+            screenManager.getWorldScreen().showFindScreen(sparkle, AudioEvent.SE_SPARKLE)
         }
     }
 

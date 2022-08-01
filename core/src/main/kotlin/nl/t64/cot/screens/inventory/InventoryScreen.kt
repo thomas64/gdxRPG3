@@ -1,7 +1,6 @@
 package nl.t64.cot.screens.inventory
 
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
-import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.Utils.screenManager
@@ -38,7 +37,7 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
         val heroToDismiss = selectedHero.id
         selectPreviousHero()
         gameData.party.removeHero(heroToDismiss)
-        brokerManager.entityObservers.notifyPartyUpdate()
+        screenManager.getWorldScreen().updateParty()
     }
 
     override fun getScreenUI(): ScreenUI {
