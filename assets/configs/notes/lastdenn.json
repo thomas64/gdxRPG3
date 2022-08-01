@@ -1,0 +1,30 @@
+{
+  "note_lastdenn_temple": {
+    "phrases": {
+      "1": {"text": ["Lastdenn Temple"]},
+      "2": {"text": ["Services daily at 10:00 and 15:00.", "Question hour daily at 11:00 and 16:00."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "note_lastdenn_inn"   : {
+    "phrases": {
+      "1": {"text": ["Lastdenn Inn"]},
+      "2": {"text": ["Rooms affordable but not cheap!"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "note_lastdenn_bar"   : {
+    "phrases": {
+      "1": {"text": ["Lastdenn Bar"]},
+      "2": {"text": ["Friendship and happiness for sale!"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "note_lastdenn_cell"  : {
+    "phrases": {
+      "1": {"text": ["Lastdenn Jail"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "note_holy_water"     : {
+    "phrases": {
+      "1": {"text": ["Is this holy water? Better not fall in."], "choices": [{"command": "EXIT"}]}
+    }
+  }
+}

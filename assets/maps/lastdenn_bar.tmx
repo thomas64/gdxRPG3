@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.8" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="34" height="36" tilewidth="24" tileheight="24" infinite="0" nextlayerid="21" nextobjectid="4">
  <properties>
-  <property name="bgm" value="bgm_inn"/>
+  <property name="bgm" value="bgm_bar"/>
   <property name="step_sound" value="stone"/>
  </properties>
  <tileset firstgid="1" name="lastdenn_bar" tilewidth="24" tileheight="24" tilecount="720" columns="30">

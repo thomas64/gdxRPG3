@@ -103,7 +103,7 @@
   <object id="65" name="note_food" x="336" y="144" width="48" height="48"/>
   <object id="68" name="note_closet" x="96" y="360" width="48" height="48"/>
   <object id="70" name="note_closet" x="48" y="168" width="24" height="72"/>
-  <object id="71" name="note_kitchen" x="96" y="120" width="96" height="48"/>
+  <object id="71" name="note_kitchen" x="96" y="120" width="96" height="30"/>
  </objectgroup>
  <objectgroup color="#55ff7f" id="23" name="npc">
   <object id="67" name="oldwoman11" type="w" x="144" y="168" width="48" height="24">

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="76" height="116" tilewidth="24" tileheight="24" infinite="0" nextlayerid="22" nextobjectid="177">
+<map version="1.8" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="76" height="116" tilewidth="24" tileheight="24" infinite="0" nextlayerid="22" nextobjectid="189">
  <properties>
+  <property name="bgm" value="bgm_lastdenn"/>
   <property name="lightmap_camera" value="sunlight"/>
  </properties>
  <tileset firstgid="1" name="lastdenn" tilewidth="24" tileheight="24" tilecount="9699" columns="159">
@@ -15,6 +16,7 @@
  <tileset firstgid="14820" source="tilesets/fsm_smoke01.tsx"/>
  <tileset firstgid="15108" source="tilesets/fsm_town01_a1.tsx"/>
  <tileset firstgid="15876" source="tilesets/fsm_town01_b.tsx"/>
+ <tileset firstgid="16900" source="tilesets/fsm_inside01_b.tsx"/>
  <layer id="2" name="under0_none" width="76" height="116">
   <data encoding="base64" compression="zlib">
    eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAvgyJwAAB
@@ -27,10 +29,10 @@
  </layer>
  <layer id="3" name="under2_objects" width="76" height="116">
   <data encoding="base64" compression="zlib">
-   eJzt0MsJwlAQQNFpJ0I2WaUqP6B7bcAYiKCF2Y+vA5fD+M6p4HIjAIB/cR4iLkN2RR1be/X066f9HHGYsyvquLdXS0e/jlPEacquqOPRXq1+AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA3PrvsgnquY8RtzK6o49Vevf0CAAAAOvYFwBcMQA==
+   eJzt0M0NAVEUgNHbzkhmM6tZT0F+EvY0MEhI2NAJVejHq4Dlc805FXz5IgCAf7FuIjZN7Yo8TuXV2a+v5n3Eoq9dkcdYXu0n9GvZRay62hV5HMqro18AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPyw2xBxH2pX5PEor55+AQAfvGa1C/LZthG7tnZFHpfy6uoXAAAAMGFv7VUQAg==
   </data>
  </layer>
- <layer id="4" name="under3_smoke" width="76" height="116">
+ <layer id="4" name="under3_objects" width="76" height="116">
   <data encoding="base64" compression="zlib">
    eJzt0LkNgDAQRNGNOQqy+6+FowOOxCtRAKFBek/6+WgiAIC/W0rEmm3ZXnqv+b4jPzqzK7v99WqoEWM2ZXPtvQYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHg1w2wpj
   </data>
@@ -47,7 +49,7 @@
  </layer>
  <layer id="7" name="over6_objects" width="76" height="116">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer id="8" name="over7_objects" width="76" height="116">
@@ -113,8 +115,8 @@
   <object id="49" x="912" y="2448" width="96" height="48"/>
   <object id="50" x="1152" y="2352" width="48" height="144"/>
   <object id="51" x="1320" y="2424" width="96" height="72"/>
-  <object id="52" x="912" y="1800" width="192" height="408"/>
-  <object id="57" x="1248" y="1800" width="192" height="408"/>
+  <object id="52" x="930" y="1800" width="174" height="360"/>
+  <object id="57" x="1248" y="1800" width="174" height="360"/>
   <object id="60" x="1392" y="2304" width="96" height="48"/>
   <object id="61" x="720" y="2352" width="48" height="48"/>
   <object id="62" x="1440" y="1680" width="96" height="48"/>
@@ -147,10 +149,10 @@
   <object id="89" x="384" y="816" width="48" height="96"/>
   <object id="90" x="1152" y="864" width="48" height="48"/>
   <object id="91" x="1104" y="1056" width="96" height="48"/>
-  <object id="92" x="1488" y="1152" width="144" height="48"/>
-  <object id="93" x="1344" y="1200" width="192" height="48"/>
-  <object id="94" x="912" y="1248" width="480" height="48"/>
-  <object id="95" x="192" y="1248" width="576" height="48"/>
+  <object id="92" x="1488" y="1152" width="144" height="24"/>
+  <object id="93" x="1344" y="1200" width="168" height="24"/>
+  <object id="94" x="912" y="1248" width="456" height="24"/>
+  <object id="95" x="192" y="1248" width="576" height="24"/>
   <object id="96" x="432" y="1200" width="192" height="48"/>
   <object id="97" x="768" y="864" width="384" height="144"/>
   <object id="98" x="816" y="1008" width="288" height="48"/>
@@ -190,6 +192,11 @@
   <object id="154" x="1104" y="1800" width="144" height="336"/>
   <object id="155" x="1224" y="2136" width="24" height="24"/>
   <object id="156" x="1104" y="2136" width="24" height="24"/>
+  <object id="177" x="1488" y="1176" width="24" height="24"/>
+  <object id="178" x="1344" y="1224" width="24" height="24"/>
+  <object id="186" x="1224" y="2184" width="48" height="48"/>
+  <object id="187" x="930" y="2160" width="156" height="48"/>
+  <object id="188" x="1266" y="2160" width="156" height="48"/>
  </objectgroup>
  <objectgroup color="#5500ff" id="13" name="rest">
   <object id="164" name="door_luxurious_left" x="576" y="2184" width="48" height="72"/>
@@ -200,6 +207,13 @@
   <object id="169" name="door_forged_left" x="1440" y="1008" width="48" height="96"/>
   <object id="170" name="door_wooden_ring_shade_left" x="1248" y="480" width="48" height="96"/>
   <object id="171" name="door_wooden_left" x="528" y="1392" width="48" height="96"/>
+  <object id="179" name="note_resource_shop" x="576" y="1776" width="48" height="48"/>
+  <object id="180" name="note_equipment_shop" x="960" y="1632" width="48" height="48"/>
+  <object id="181" name="note_lastdenn_inn" x="528" y="2256" width="48" height="48"/>
+  <object id="182" name="note_lastdenn_bar" x="576" y="1104" width="48" height="48"/>
+  <object id="183" name="note_lastdenn_cell" x="1344" y="1104" width="48" height="48"/>
+  <object id="184" name="note_lastdenn_temple" x="1224" y="2184" width="48" height="48"/>
+  <object id="185" name="note_well" x="1320" y="2424" width="96" height="72"/>
  </objectgroup>
  <objectgroup color="#55ff7f" id="14" name="npc"/>
  <objectgroup color="#55aaff" id="15" name="spawn">

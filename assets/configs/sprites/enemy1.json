@@ -5,5 +5,6 @@
   "orc_1"       : {"source": "orcs", "col": 1, "row": 1},
   "orc_sergeant": {"source": "orcs", "col": 4, "row": 2},
   "orc_general" : {"source": "orcs", "col": 2, "row": 2},
-  "ardor"       : {"source": "warlocks", "col": 1, "row": 2}
+  "ardor"       : {"source": "warlocks", "col": 1, "row": 2},
+  "ghost1"      : {"source": "ghosts", "col": 1, "row": 1}
 }

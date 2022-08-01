@@ -31,7 +31,7 @@
   },
   "note_food"          : {
     "phrases": {
-      "1": {"text": ["It's food. Did you wash your hands first?"], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["It's food. Did you wash your hands before touching it?"], "choices": [{"command": "EXIT"}]}
     }
   },
   "note_bookcase"      : {
@@ -57,6 +57,16 @@
   "note_kitchen"       : {
     "phrases": {
       "1": {"text": ["Do you want to prepare a meal or something?"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "note_holy_symbol"   : {
+    "phrases": {
+      "1": {"text": ["It looks like a holy symbol."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "note_holy_bible"    : {
+    "phrases": {
+      "1": {"text": ["That's probably not meant for heathen eyes."], "choices": [{"command": "EXIT"}]}
     }
   }
 }

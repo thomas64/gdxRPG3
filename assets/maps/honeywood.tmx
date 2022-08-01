@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.8" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="96" height="78" tilewidth="24" tileheight="24" infinite="0" nextlayerid="57" nextobjectid="414">
  <properties>
-  <property name="bgm" value="bgm_town"/>
+  <property name="bgm" value="bgm_honeywood"/>
   <property name="lightmap_camera" value="sunlight"/>
  </properties>
  <tileset firstgid="1" name="honeywood" tilewidth="24" tileheight="24" tilecount="8294" columns="143">

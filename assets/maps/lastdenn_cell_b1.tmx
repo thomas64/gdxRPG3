@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.8" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="36" height="24" tilewidth="24" tileheight="24" infinite="0" nextlayerid="22" nextobjectid="56">
  <properties>
+  <property name="bgm" value="bgm_cell"/>
   <property name="lightmap_player" value="light_player"/>
   <property name="step_sound" value="stone"/>
  </properties>
