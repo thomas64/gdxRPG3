@@ -6,7 +6,10 @@ import nl.t64.cot.components.schedule.MapScheduleDatabase
 
 class WorldSchedule {
 
-    private var entitySchedules: List<EntitySchedule> = listOf(Santino())
+    private var entitySchedules: List<EntitySchedule> = listOf(Garrin(),
+                                                               Ghost(),
+                                                               Paton(),
+                                                               Santino())
 
     fun update() {
         entitySchedules.forEach { it.update() }

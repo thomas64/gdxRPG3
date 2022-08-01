@@ -56,9 +56,14 @@ abstract class PhysicsComponent : Component {
 
     fun relocate(dt: Float) {
         when (state) {
-            EntityState.WALKING, EntityState.FLYING, EntityState.PLAYING -> move(dt)
+            EntityState.WALKING,
+            EntityState.FLYING,
+            EntityState.PLAYING -> move(dt)
             EntityState.ALIGNING -> alignToGrid()
-            EntityState.IDLE, EntityState.IMMOBILE, EntityState.INVISIBLE, EntityState.IDLE_ANIMATING -> {}
+            EntityState.IDLE,
+            EntityState.IMMOBILE,
+            EntityState.INVISIBLE,
+            EntityState.IDLE_ANIMATING -> Unit
             else -> throw IllegalArgumentException("EntityState '$state' not usable.")
         }
     }
@@ -97,15 +102,22 @@ abstract class PhysicsComponent : Component {
 
     fun checkObstacles() {
         when (state) {
-            EntityState.WALKING, EntityState.FLYING, EntityState.PLAYING -> {
-                val moveBack1 = checkWanderBox()
-                val moveBack2 = checkBlockers()
-                if (moveBack1 || moveBack2) {
-                    entity.send(CollisionEvent())
-                }
-            }
-            EntityState.IDLE, EntityState.IMMOBILE, EntityState.INVISIBLE, EntityState.IDLE_ANIMATING -> {}
+            EntityState.WALKING,
+            EntityState.FLYING,
+            EntityState.PLAYING -> possibleSendCollisionEvent()
+            EntityState.IDLE,
+            EntityState.IMMOBILE,
+            EntityState.INVISIBLE,
+            EntityState.IDLE_ANIMATING -> Unit
             else -> throw IllegalStateException("EntityState '$state' not usable.")
+        }
+    }
+
+    private fun possibleSendCollisionEvent() {
+        val moveBack1 = checkWanderBox()
+        val moveBack2 = checkBlockers()
+        if (moveBack1 || moveBack2) {
+            entity.send(CollisionEvent())
         }
     }
 

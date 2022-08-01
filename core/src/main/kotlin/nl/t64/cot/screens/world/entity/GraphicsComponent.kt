@@ -12,12 +12,12 @@ import nl.t64.cot.constants.Constant
 
 abstract class GraphicsComponent : Component {
 
-    var frameTime = 0f
-    var frameDuration = 0f
-    lateinit var currentFrame: TextureRegion
-    lateinit var state: EntityState
-    lateinit var position: Vector2
-    lateinit var direction: Direction
+    protected var frameTime = 0f
+    protected var frameDuration = 0f
+    protected lateinit var currentFrame: TextureRegion
+    protected lateinit var state: EntityState
+    protected lateinit var position: Vector2
+    protected lateinit var direction: Direction
     private lateinit var walkNorthAnimation: Animation<TextureRegion>
     private lateinit var walkSouthAnimation: Animation<TextureRegion>
     private lateinit var walkWestAnimation: Animation<TextureRegion>
@@ -44,6 +44,8 @@ abstract class GraphicsComponent : Component {
             EntityState.WALKING,
             EntityState.FLYING,
             EntityState.PLAYING,
+            EntityState.RUNNING,
+            EntityState.CRAWLING,
             EntityState.IDLE_ANIMATING -> {
                 frameTime = (frameTime + dt) % 12 // dividable by 0.15, 0.25 and 0.5, these are player speed frames.
                 if (frameDuration == Constant.NO_FRAMES) { // no player animation when high speed moving.
@@ -69,12 +71,7 @@ abstract class GraphicsComponent : Component {
     }
 
     fun setNewFrameDuration(moveSpeed: Float) {
-        when (moveSpeed) {
-            Constant.MOVE_SPEED_1 -> frameDuration = Constant.NORMAL_FRAMES
-            Constant.MOVE_SPEED_2 -> frameDuration = Constant.NORMAL_FRAMES
-            Constant.MOVE_SPEED_3 -> frameDuration = Constant.FAST_FRAMES
-            Constant.MOVE_SPEED_4 -> frameDuration = Constant.NO_FRAMES
-        }
+        frameDuration = getFrameDuration(moveSpeed)
         walkNorthAnimation.frameDuration = frameDuration
         walkSouthAnimation.frameDuration = frameDuration
         walkWestAnimation.frameDuration = frameDuration
@@ -93,6 +90,16 @@ abstract class GraphicsComponent : Component {
         walkWestAnimation = Animation(frameDuration, walkWestFrames, Animation.PlayMode.LOOP)
         walkEastAnimation = Animation(frameDuration, walkEastFrames, Animation.PlayMode.LOOP)
         walkNorthAnimation = Animation(frameDuration, walkNorthFrames, Animation.PlayMode.LOOP)
+    }
+
+    open fun getFrameDuration(moveSpeed: Float): Float {
+        return when (moveSpeed) {
+            Constant.MOVE_SPEED_1 -> Constant.NORMAL_FRAMES
+            Constant.MOVE_SPEED_2 -> Constant.NORMAL_FRAMES
+            Constant.MOVE_SPEED_3 -> Constant.FAST_FRAMES
+            Constant.MOVE_SPEED_4 -> Constant.NO_FRAMES
+            else -> frameDuration
+        }
     }
 
     open fun getAnimation(): Animation<TextureRegion> {

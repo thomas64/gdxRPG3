@@ -49,8 +49,8 @@ class WorldScreen : Screen,
     MapObserver, ComponentObserver, EntityObserver, LootObserver, ConversationObserver, MessageObserver,
     BattleObserver {
 
-    private lateinit var previousGameState: GameState
-    private lateinit var gameState: GameState
+    private var previousGameState: GameState = GameState.OFF
+    private var gameState: GameState = GameState.OFF
 
     private val stage = Stage()
     private val camera = Camera()
@@ -281,23 +281,25 @@ class WorldScreen : Screen,
     //endregion
 
     override fun show() {
+        if (gameState != GameState.DIALOG) mapManager.continueAudio()
         gameState = GameState.RUNNING
         setInputProcessors(multiplexer)
-        mapManager.continueAudio()
     }
 
     override fun render(dt: Float) {
         when (gameState) {
-            GameState.PAUSED -> { // do nothing here
-            }
+            GameState.OFF,
+            GameState.PAUSED -> Unit
             GameState.MINIMAP -> renderMiniMap()
-            GameState.RUNNING -> {
-                updateEntities(dt)
-                renderAll(dt)
-            }
-            GameState.DIALOG -> renderAll(dt)
+            GameState.RUNNING -> updateAndRender(dt)
+            GameState.DIALOG,
             GameState.BATTLE -> renderAll(dt)
         }
+    }
+
+    private fun updateAndRender(dt: Float) {
+        updateEntities(dt)
+        renderAll(dt)
     }
 
     private fun updateEntities(dt: Float) {

@@ -58,22 +58,48 @@ class AudioManager {
     private val queuedMe: EnumMap<AudioEvent, Sound> = EnumMap(AudioEvent::class.java)
     private val queuedSe: EnumMap<AudioEvent, Sound> = EnumMap(AudioEvent::class.java)
 
-    fun isThereAnyBgmPlaying(): Boolean {
-        return queuedBgm.values.count { it.isPlaying } > 0
+    fun fadeBgmForClockWarning() {
+        if (isThereAnyBgmPlaying() && !isBgmPlaying(AudioEvent.BGM_END_NEAR)) {
+            certainBgmFade()
+        } else if (!isThereAnyBgmPlaying()) {
+            handle(AudioCommand.BGM_PLAY_LOOP, AudioEvent.BGM_END_NEAR)
+        }
     }
 
-    fun isBgmPlaying(audioEvent: AudioEvent): Boolean {
-        return queuedBgm[audioEvent]?.isPlaying ?: false
+    fun fadeAllInSeparateThreadForClockEnding(dt: Float) {
+        Thread {
+            while (audioManager.isBgmPlaying(AudioEvent.BGM_END_NEAR)) {
+                Thread.sleep((dt * 1000f).toLong())
+                audioManager.certainFadeBgmBgs()
+            }
+        }.start()
+    }
+
+    fun fadeBgmAndPlayBgm(toFade: AudioEvent, toPlay: AudioEvent) {
+        if (isBgmPlaying(toFade)) {
+            certainBgmFade()
+        } else if (!isThereAnyBgmPlaying()) {
+            handle(AudioCommand.BGM_PLAY_LOOP, toPlay)
+        }
+    }
+
+    fun stopBgmAndPlayBgm(toStop: AudioEvent, toPlay: AudioEvent) {
+        if (isBgmPlaying(toStop)) {
+            handle(AudioCommand.BGM_STOP_ALL)
+            handle(AudioCommand.BGM_PLAY_LOOP, toPlay)
+        }
+    }
+
+    fun possibleBgmFade(bgm: AudioEvent) {
+        if (isBgmPlaying(bgm)) {
+            certainBgmFade()
+        }
     }
 
     fun possibleBgmFade(currentBgm: AudioEvent, newBgm: AudioEvent) {
         if (currentBgm != newBgm) {
             certainBgmFade()
         }
-    }
-
-    fun certainBgmFade() {
-        queuedBgm.forEach { fade(it.value, it.key.volume) }
     }
 
     fun possibleBgsFade(currentBgs: List<AudioEvent>, newBgs: List<AudioEvent>) {
@@ -157,6 +183,31 @@ class AudioManager {
         queuedSe.values.forEach { it.dispose() }
     }
 
+    private fun isBgmPlaying(audioEvent: AudioEvent): Boolean {
+        return queuedBgm[audioEvent]?.isPlaying ?: false
+    }
+
+    private fun isThereAnyBgmPlaying(): Boolean {
+        return queuedBgm.values.count { it.isPlaying } > 0
+    }
+
+    private fun certainBgmFade() {
+        queuedBgm.forEach { fade(it.value, it.key.volume) }
+    }
+
+    private fun fade(bgmBgs: Music, defaultVolume: Float) {
+        if (bgmBgs.isPlaying) {
+            var volume = bgmBgs.volume
+            if (volume > 0f) {
+                volume -= defaultVolume / Constant.FADE_DURATION * Gdx.graphics.deltaTime
+                bgmBgs.volume = max(volume, 0f)
+            } else {
+                bgmBgs.volume = defaultVolume
+                bgmBgs.pause()
+            }
+        }
+    }
+
     private fun playBgm(event: AudioEvent, isLooping: Boolean) {
         if (event.filePath.isNotEmpty()) {
             val bgm: Music
@@ -227,19 +278,6 @@ class AudioManager {
             se.setLooping(seId, isLooping)
         } else {
             se.stop()
-        }
-    }
-
-    private fun fade(bgmBgs: Music, defaultVolume: Float) {
-        if (bgmBgs.isPlaying) {
-            var volume = bgmBgs.volume
-            if (volume > 0f) {
-                volume -= defaultVolume / Constant.FADE_DURATION * Gdx.graphics.deltaTime
-                bgmBgs.volume = max(volume, 0f)
-            } else {
-                bgmBgs.volume = defaultVolume
-                bgmBgs.pause()
-            }
         }
     }
 

@@ -19,6 +19,20 @@ class GraphicsScheduledNpc(spriteId: String) : GraphicsComponent() {
             state = event.state
             position = event.position
             direction = event.direction
+            setNewFrameDuration()
+        }
+    }
+
+    private fun setNewFrameDuration() {
+        setNewFrameDuration(0f)     // with overridden way of getting the new frame duration.
+    }
+
+    override fun getFrameDuration(moveSpeed: Float): Float {
+        return when (state) {
+            EntityState.CRAWLING -> Constant.SLOW_FRAMES
+            EntityState.WALKING -> Constant.NORMAL_FRAMES
+            EntityState.RUNNING -> Constant.FAST_FRAMES
+            else -> frameDuration
         }
     }
 

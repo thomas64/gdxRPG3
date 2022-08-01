@@ -12,8 +12,6 @@ import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.resourceManager
-import nl.t64.cot.audio.AudioEvent
-import nl.t64.cot.audio.playBgm
 import nl.t64.cot.constants.Constant
 
 
@@ -63,11 +61,7 @@ internal class ClockBox {
 
     private fun handleWarning() {
         if (gameData.clock.isWarning()) {
-            if (audioManager.isThereAnyBgmPlaying() && !audioManager.isBgmPlaying(AudioEvent.BGM_END_NEAR)) {
-                audioManager.certainBgmFade()
-            } else if (!audioManager.isThereAnyBgmPlaying()) {
-                playBgm(AudioEvent.BGM_END_NEAR)
-            }
+            audioManager.fadeBgmForClockWarning()
         }
     }
 
@@ -76,12 +70,7 @@ internal class ClockBox {
             Utils.runWithDelay(Constant.FADE_DURATION) {
                 brokerManager.mapObservers.notifyStartCutscene("scene_death", 1f)
             }
-            Thread {
-                while (audioManager.isBgmPlaying(AudioEvent.BGM_END_NEAR)) {
-                    Thread.sleep((dt * 1000f).toLong())
-                    audioManager.certainFadeBgmBgs()
-                }
-            }.start()
+            audioManager.fadeAllInSeparateThreadForClockEnding(dt)
         }
     }
 
