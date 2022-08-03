@@ -25,6 +25,7 @@ import nl.t64.cot.components.cutscene.CutsceneId
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.toDrawable
+import kotlin.concurrent.thread
 
 
 private const val TITLE_LABEL = "Select profile"
@@ -101,7 +102,7 @@ abstract class MenuLoad : MenuScreen() {
         super.selectedMenuIndex = 0
         setCurrentTextButtonToSelected()
 
-        Thread { loadProfiles() }.start()
+        thread { loadProfiles() }
     }
 
     override fun render(dt: Float) {

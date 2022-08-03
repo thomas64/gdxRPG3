@@ -37,6 +37,7 @@ import nl.t64.cot.screens.loot.TradeScreen
 import nl.t64.cot.screens.school.SchoolScreen
 import nl.t64.cot.screens.shop.ShopScreen
 import nl.t64.cot.toDrawable
+import kotlin.concurrent.thread
 
 
 private const val FONT = "fonts/spectral_regular_24.ttf"
@@ -226,7 +227,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     private fun saveGame(nextId: String) {
         playSe(AudioEvent.SE_SAVE_GAME)
         endConversation(nextId)
-        Thread { profileManager.saveProfile() }.start()
+        thread { profileManager.saveProfile() }
     }
 
     private fun healLife(nextId: String) {

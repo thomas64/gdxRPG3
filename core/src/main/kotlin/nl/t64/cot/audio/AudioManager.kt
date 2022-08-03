@@ -8,6 +8,7 @@ import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.constants.Constant
 import java.util.*
+import kotlin.concurrent.thread
 import kotlin.math.max
 
 
@@ -67,12 +68,12 @@ class AudioManager {
     }
 
     fun fadeAllInSeparateThreadForClockEnding(dt: Float) {
-        Thread {
-            while (audioManager.isBgmPlaying(AudioEvent.BGM_END_NEAR)) {
+        thread {
+            while (isBgmPlaying(AudioEvent.BGM_END_NEAR)) {
                 Thread.sleep((dt * 1000f).toLong())
-                audioManager.certainFadeBgmBgs()
+                certainFadeBgmBgs()
             }
-        }.start()
+        }
     }
 
     fun fadeBgmAndPlayBgm(toFade: AudioEvent, toPlay: AudioEvent) {

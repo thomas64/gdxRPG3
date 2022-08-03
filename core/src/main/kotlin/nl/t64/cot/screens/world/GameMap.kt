@@ -16,6 +16,7 @@ import nl.t64.cot.screens.world.entity.EntityState
 import nl.t64.cot.screens.world.mapobjects.*
 import nl.t64.cot.screens.world.pathfinding.TiledGraph
 import java.util.*
+import kotlin.concurrent.thread
 
 
 private const val SOUND_LAYER = "sound"
@@ -106,10 +107,10 @@ class GameMap(val mapTitle: String) {
 
     fun setTiledGraphs() {
         if (enemies.any { it.isMeetingConditions() }) {
-            Thread {
+            thread {
                 tiledGraphs[EntityState.WALKING] = TiledGraph(width, height, EntityState.WALKING)
                 tiledGraphs[EntityState.FLYING] = TiledGraph(width, height, EntityState.FLYING)
-            }.start()
+            }
         }
     }
 
