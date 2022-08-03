@@ -7,11 +7,13 @@ class CutsceneContainer {
         CutsceneId.SCENE_INTRO to false,
         CutsceneId.SCENE_ARDOR_1 to false,
         CutsceneId.SCENE_ARDOR_2 to false,
-        CutsceneId.SCENE_END_OF_CYCLE_2 to false
+        CutsceneId.SCENE_END_OF_CYCLE_2 to false,
+        CutsceneId.SCENE_SANTINO_MURDERED to true // todo
     )
 
     fun isRepeatable(cutsceneId: String): Boolean {
         return cutsceneId in listOf(CutsceneId.SCENE_ARDOR_2)
+//                                    CutsceneId.SCENE_SANTINO_MURDERED) // todo
     }
 
     fun isPlayed(cutsceneId: String): Boolean {

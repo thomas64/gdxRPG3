@@ -193,6 +193,15 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
         npcEntities = newNpcEntities
     }
 
+    fun reloadNpcsWithFade() {
+        fadeOut({ reloadNpcs() }, Color.BLACK, 1.5f, TransitionPurpose.JUST_FADE)
+    }
+
+    private fun reloadNpcs() {
+        brokerManager.blockObservers.removeAllNpcObservers()
+        npcEntities = NpcEntitiesLoader(mapManager.currentMap).createNpcs()
+    }
+
     fun addScheduledEntity(entity: Entity) {
         if (entity !in visibleScheduledEntities) {
             visibleScheduledEntities.add(entity)
@@ -236,12 +245,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     }
 
     override fun onNotifyReloadNpcs() {
-        fadeOut({ reloadNpcs() }, Color.BLACK, 1.5f, TransitionPurpose.JUST_FADE)
-    }
-
-    private fun reloadNpcs() {
-        brokerManager.blockObservers.removeAllNpcObservers()
-        npcEntities = NpcEntitiesLoader(mapManager.currentMap).createNpcs()
+        reloadNpcsWithFade()
     }
     //endregion
 

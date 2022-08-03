@@ -84,6 +84,11 @@ class Clock {
         hasStarted = false
     }
 
+    fun setTimeOfDay(time: String) {
+        val newTimeInSeconds: Long = Duration.between(startOfDay, time.toGameTime()).toSeconds()
+        countdown = TWELVE_HOURS - newTimeInSeconds
+    }
+
     fun getPercentageOfCurrentTimeBetween(startTime: String, endTime: String): Float {
         return getPercentageOfCurrentTimeBetween(startTime.toGameTime(), endTime.toGameTime())
     }

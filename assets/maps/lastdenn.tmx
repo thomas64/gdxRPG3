@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="76" height="116" tilewidth="24" tileheight="24" infinite="0" nextlayerid="22" nextobjectid="189">
+<map version="1.8" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="76" height="116" tilewidth="24" tileheight="24" infinite="0" nextlayerid="23" nextobjectid="201">
  <properties>
   <property name="bgm" value="bgm_lastdenn"/>
   <property name="lightmap_camera" value="sunlight"/>
@@ -87,7 +87,7 @@
   <object id="160" name="stone" x="336" y="144" width="240" height="168"/>
   <object id="161" name="stone" x="336" y="456" width="240" height="144"/>
  </objectgroup>
- <objectgroup color="#aa0000" id="12" name="collision" visible="0">
+ <objectgroup color="#aa0000" id="12" name="collision">
   <object id="24" x="288" y="2016" width="288" height="240"/>
   <object id="25" x="624" y="2016" width="96" height="240"/>
   <object id="26" x="576" y="2016" width="48" height="216"/>
@@ -231,6 +231,11 @@
     <property name="direction" value="west"/>
    </properties>
   </object>
+  <object id="200" name="scene_santino_murdered" x="720" y="1464" width="48" height="24">
+   <properties>
+    <property name="direction" value="east"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup color="#ffff7f" id="16" name="portal">
   <object id="2" name="alva_road_east" x="744" y="2688" width="192" height="24"/>
@@ -247,11 +252,21 @@
  <objectgroup color="#ffaa7f" id="21" name="warp">
   <object id="162" x="1056" y="2400" width="48" height="48"/>
  </objectgroup>
+ <objectgroup color="#ff00ff" id="22" name="cutscene">
+  <object id="199" name="scene_santino_murdered" type="discover" x="672" y="1416" width="288" height="144"/>
+ </objectgroup>
  <objectgroup color="#ff55ff" id="19" name="event"/>
  <objectgroup color="#aaff00" id="20" name="scheduled">
   <object id="172" name="santino11" x="1152" y="2136" width="48" height="24"/>
   <object id="173" name="santino12" x="1152" y="2232" width="48" height="24"/>
   <object id="174" name="santino13" x="816" y="2232" width="48" height="24"/>
   <object id="176" name="santino14" x="816" y="1488" width="48" height="24"/>
+  <object id="189" name="garrin6" x="528" y="1464" width="48" height="24"/>
+  <object id="190" name="garrin7" x="528" y="1488" width="48" height="24"/>
+  <object id="191" name="garrin8" x="768" y="1488" width="48" height="24"/>
+  <object id="192" name="garrin9" x="768" y="1224" width="48" height="24"/>
+  <object id="194" name="garrin10" x="528" y="1152" width="48" height="24"/>
+  <object id="195" name="garrin11" x="864" y="1224" width="48" height="24"/>
+  <object id="196" name="garrin12" x="864" y="1488" width="48" height="24"/>
  </objectgroup>
 </map>

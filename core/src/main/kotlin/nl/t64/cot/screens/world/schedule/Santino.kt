@@ -19,7 +19,8 @@ class Santino : EntitySchedule() {
     override fun getScheduleOfEntity(): List<ScheduleItem> {
         return morningRoutine() +
                 toTheMayorChurch() +
-                toTheMayorOutside()
+                toTheMayorOutside() +
+                beingMurdered()
     }
 
     private fun morningRoutine() = listOf(
@@ -56,11 +57,24 @@ class Santino : EntitySchedule() {
         ScheduleItem("lastdenn", "12:20", "12:25", SOUTH, WALKING, "santino11", "santino12", "santino_busy_errand"),
         ScheduleItem("lastdenn", "12:25", "12:35", WEST,  WALKING, "santino12", "santino13", "santino_busy_errand"),
         ScheduleItem("lastdenn", "12:35", "13:00", NORTH, WALKING, "santino13", "santino14", "santino_busy_errand"),
-        ScheduleItem("lastdenn", "13:00", "14:00", WEST,  IDLE,    "santino14", "santino14", "santino_being_murdered"),
+        // @formatter:on
+    )
+
+    private fun beingMurdered() = listOf(
+        // @formatter:off
+        ScheduleItem("lastdenn", "13:00", "14:00", EAST,  IDLE,    "santino14", "santino14", "garrin_vs_santino_1"),
         // @formatter:on
     )
 
     override fun handleSideEffects() {
+        if (mapManager.currentMap.mapTitle == "lastdenn_church") {
+            if (gameData.clock.isCurrentTimeAt("10:00")) {
+                screenManager.getWorldScreen().reloadNpcsWithFade()
+            }
+            if (gameData.clock.isCurrentTimeAt("11:00")) {
+                screenManager.getWorldScreen().reloadNpcsWithFade()
+            }
+        }
         if (mapManager.currentMap.mapTitle == "lastdenn") {
             if (gameData.clock.isCurrentTimeAt("12:19")) {
                 screenManager.getWorldScreen().useDoor("door_large_round")
