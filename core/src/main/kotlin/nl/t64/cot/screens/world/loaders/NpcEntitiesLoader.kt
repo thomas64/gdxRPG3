@@ -1,10 +1,11 @@
-package nl.t64.cot.screens.world
+package nl.t64.cot.screens.world.loaders
 
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.components.battle.EnemyContainer
 import nl.t64.cot.screens.world.entity.*
 import nl.t64.cot.screens.world.entity.events.LoadEntityEvent
+import nl.t64.cot.screens.world.map.GameMap
 import nl.t64.cot.screens.world.mapobjects.GameMapEnemy
 import nl.t64.cot.screens.world.mapobjects.GameMapHero
 import nl.t64.cot.screens.world.mapobjects.GameMapNpc

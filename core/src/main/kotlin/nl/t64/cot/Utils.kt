@@ -24,7 +24,7 @@ import com.badlogic.gdx.utils.Timer
 import nl.t64.cot.audio.AudioManager
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.ScreenManager
-import nl.t64.cot.screens.world.MapManager
+import nl.t64.cot.screens.world.map.MapManager
 
 
 private const val TITLE_PADDING = 50f

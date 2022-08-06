@@ -1,4 +1,4 @@
-package nl.t64.cot.screens.world
+package nl.t64.cot.screens.world.loaders
 
 import com.badlogic.gdx.maps.objects.RectangleMapObject
 import com.badlogic.gdx.math.Vector2
@@ -9,6 +9,7 @@ import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.components.loot.Spoil
 import nl.t64.cot.screens.world.entity.*
 import nl.t64.cot.screens.world.entity.events.LoadEntityEvent
+import nl.t64.cot.screens.world.map.GameMap
 import nl.t64.cot.screens.world.mapobjects.GameMapSparkle
 
 

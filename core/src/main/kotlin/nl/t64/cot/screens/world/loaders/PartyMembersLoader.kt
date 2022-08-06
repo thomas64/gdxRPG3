@@ -1,4 +1,4 @@
-package nl.t64.cot.screens.world
+package nl.t64.cot.screens.world.loaders
 
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData

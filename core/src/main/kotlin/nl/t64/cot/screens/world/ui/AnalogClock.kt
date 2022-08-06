@@ -1,4 +1,4 @@
-package nl.t64.cot.screens.world
+package nl.t64.cot.screens.world.ui
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Pixmap
@@ -9,7 +9,6 @@ import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
-import nl.t64.cot.Utils.gameData
 import nl.t64.cot.constants.Constant
 import kotlin.math.abs
 import kotlin.math.max
@@ -33,16 +32,15 @@ class AnalogClock : Table() {
         super.setColor(Constant.LIGHT_RED)
     }
 
-    fun update() {
+    fun update(percentageOfCircle: Float) {
         display.clear()
-        display.addActor(createTimer())
+        val clock = createTimer(percentageOfCircle)
+        display.addActor(clock)
     }
 
-    private fun createTimer(): Image {
-        val remainingPercentage = gameData.clock.getPercentageOfDay()
-
+    private fun createTimer(percentageOfCircle: Float): Image {
         val radius: Float = (width / 2f).coerceAtMost(height / 2f)
-        val angle = calculateAngle(remainingPercentage)
+        val angle = calculateAngle(percentageOfCircle)
         val segments = calculateSegments(angle)
         val pixmap = Pixmap(width.toInt(), height.toInt(), Pixmap.Format.RGBA8888)
         val theta: Float = 2f * MathUtils.PI * (angle / 360f) / segments

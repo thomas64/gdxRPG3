@@ -39,7 +39,14 @@ import nl.t64.cot.screens.world.entity.PhysicsPlayer
 import nl.t64.cot.screens.world.entity.events.FindPathEvent
 import nl.t64.cot.screens.world.entity.events.LoadEntityEvent
 import nl.t64.cot.screens.world.entity.events.NpcActionEvent
+import nl.t64.cot.screens.world.loaders.DoorLoader
+import nl.t64.cot.screens.world.loaders.LootLoader
+import nl.t64.cot.screens.world.loaders.NpcEntitiesLoader
+import nl.t64.cot.screens.world.map.GameMap
 import nl.t64.cot.screens.world.schedule.WorldSchedule
+import nl.t64.cot.screens.world.ui.ButtonBox
+import nl.t64.cot.screens.world.ui.ClockBox
+import nl.t64.cot.screens.world.ui.PartyWindow
 import nl.t64.cot.sfx.TransitionImage
 import nl.t64.cot.sfx.TransitionPurpose
 

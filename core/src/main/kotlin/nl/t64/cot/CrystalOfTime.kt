@@ -8,7 +8,7 @@ import nl.t64.cot.audio.AudioManager
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.ScreenManager
-import nl.t64.cot.screens.world.MapManager
+import nl.t64.cot.screens.world.map.MapManager
 
 
 open class CrystalOfTime : Game() {

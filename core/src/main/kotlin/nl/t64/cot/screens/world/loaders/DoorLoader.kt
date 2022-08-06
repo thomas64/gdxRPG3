@@ -1,4 +1,4 @@
-package nl.t64.cot.screens.world
+package nl.t64.cot.screens.world.loaders
 
 import com.badlogic.gdx.maps.objects.RectangleMapObject
 import com.badlogic.gdx.math.Vector2
@@ -6,6 +6,7 @@ import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.screens.world.entity.*
 import nl.t64.cot.screens.world.entity.events.LoadEntityEvent
+import nl.t64.cot.screens.world.map.GameMap
 
 
 class DoorLoader(private val currentMap: GameMap) {

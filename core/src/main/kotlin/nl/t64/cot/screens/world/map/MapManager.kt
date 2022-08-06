@@ -1,4 +1,4 @@
-package nl.t64.cot.screens.world
+package nl.t64.cot.screens.world.map
 
 import com.badlogic.gdx.ai.pfa.DefaultGraphPath
 import com.badlogic.gdx.graphics.Color

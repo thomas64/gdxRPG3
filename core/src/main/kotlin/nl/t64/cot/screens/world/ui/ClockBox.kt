@@ -1,4 +1,4 @@
-package nl.t64.cot.screens.world
+package nl.t64.cot.screens.world.ui
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
@@ -48,14 +48,16 @@ internal class ClockBox {
     }
 
     fun render(dt: Float) {
-        if (gameData.clock.isRunning()) {
-            analogClock.update()
-            fillCircle()
-            borderCircle()
-            label.color = if (gameData.clock.isWarning()) Color.BLACK else Color.WHITE
-            label.setText(gameData.clock.getTimeOfDayFormatted())
-            stage.act(dt)
-            stage.draw()
+        with(gameData.clock) {
+            if (isRunning()) {
+                analogClock.update(getPercentageOfDay())
+                fillCircle()
+                borderCircle()
+                label.color = if (isWarning()) Color.BLACK else Color.WHITE
+                label.setText(getTimeOfDayFormatted())
+                stage.act(dt)
+                stage.draw()
+            }
         }
     }
 
