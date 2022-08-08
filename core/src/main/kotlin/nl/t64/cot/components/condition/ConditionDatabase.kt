@@ -25,7 +25,8 @@ object ConditionDatabase {
         "i_starting_spells"      to { hasStartingSpells },
         "!talked_to_lennor"      to { hasNotYetTalkedToLennorFirstCycle },
         "i_not_happy_with_jaron" to { notHappyWithJaron },
-        "alone_in_party"         to { isAloneInParty }
+        "alone_in_party"         to { isAloneInParty },
+        "between_13_and_14"      to { gameData.clock.isCurrentTimeInBetween("13:00", "14:00")}
         // @formatter:on
     )
 

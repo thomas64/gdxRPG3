@@ -30,7 +30,7 @@ class Garrin : EntitySchedule() {
             ScheduleItem("lastdenn_house_garrin", "09:24", "09:26", WEST,  RUNNING, "ghost7",   "ghost3",   "ghost_scaring"),
             ScheduleItem("lastdenn_house_garrin", "09:26", "09:28", SOUTH, RUNNING, "ghost3",   "paton2",   "ghost_scaring"),
             ScheduleItem("lastdenn_house_garrin", "09:28", "10:02", NORTH, IDLE,    "paton2",   "paton2",   "ghost_scaring"),
-            ScheduleItem("lastdenn_house_garrin", "10:02", "10:15", NORTH, IDLE,    "paton2",   "paton2",   "garrin_leave_us"),
+            ScheduleItem("lastdenn_house_garrin", "10:02", "11:34", NORTH, IDLE,    "paton2",   "paton2",   "garrin_leave_us"),
             // todo, eerder gaan lopen
             ScheduleItem("lastdenn_house_garrin", "11:34", "11:41", NORTH, WALKING, "paton2",   "ghost3",   "garrin_what_to_do"),
             ScheduleItem("lastdenn_house_garrin", "11:41", "11:45", EAST,  WALKING, "ghost3",   "paton3",   "garrin_what_to_do"),
@@ -46,7 +46,11 @@ class Garrin : EntitySchedule() {
             ScheduleItem("lastdenn",              "12:34", "12:49", EAST,  WALKING, "garrin10", "garrin11", "garrin_what_to_do"),
             ScheduleItem("lastdenn",              "12:49", "13:00", SOUTH, WALKING, "garrin11", "garrin12", "garrin_what_to_do"),
 
-            ScheduleItem("lastdenn",              "13:00", "14:00", WEST,  IDLE,    "garrin12", "garrin12", "garrin_vs_santino_1"),
+            ScheduleItem("lastdenn",              "13:00", "14:00", WEST,  IDLE,    "garrin12", "garrin12"),
+
+            ScheduleItem("lastdenn",              "14:00", "14:18", NORTH, WALKING, "garrin13", "garrin14"),
+            ScheduleItem("lastdenn",              "14:18", "14:57", EAST,  WALKING, "garrin14", "garrin15"),
+            ScheduleItem("lastdenn",              "14:57", "15:00", NORTH, WALKING, "garrin15", "garrin16"),
             // @formatter:on
         )
     }
@@ -55,6 +59,9 @@ class Garrin : EntitySchedule() {
         if (mapManager.currentMap.mapTitle == "lastdenn") {
             if (gameData.clock.isCurrentTimeAt("11:53")) {
                 screenManager.getWorldScreen().useDoor("door_wooden_left")
+            }
+            if (gameData.clock.isCurrentTimeAt("14:59")) {
+                screenManager.getWorldScreen().useDoor("door_forged_left")
             }
         }
     }

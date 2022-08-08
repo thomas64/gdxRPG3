@@ -144,6 +144,7 @@ object Utils {
     }
 
     fun getFaceImage(spriteId: String, isFlipped: Boolean = true): Image {
+        if (spriteId.isEmpty()) return Image()
         val faceConfig = resourceManager.getSpriteConfig(spriteId)
             ?: resourceManager.getSpriteConfig(spriteId.substringBeforeLast("_"))!!
         val path = String.format(FACE_PATH, faceConfig.source)

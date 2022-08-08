@@ -62,7 +62,7 @@ class Santino : EntitySchedule() {
 
     private fun beingMurdered() = listOf(
         // @formatter:off
-        ScheduleItem("lastdenn", "13:00", "14:00", EAST,  IDLE,    "santino14", "santino14", "garrin_vs_santino_1"),
+        ScheduleItem("lastdenn", "13:00", "14:00", EAST,  IDLE,    "santino14", "santino14"),
         // @formatter:on
     )
 

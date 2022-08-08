@@ -8,7 +8,7 @@ class CutsceneContainer {
         CutsceneId.SCENE_ARDOR_1 to false,
         CutsceneId.SCENE_ARDOR_2 to false,
         CutsceneId.SCENE_END_OF_CYCLE_2 to false,
-        CutsceneId.SCENE_SANTINO_MURDERED to true // todo
+        CutsceneId.SCENE_SANTINO_MURDERED to false
     )
 
     fun isRepeatable(cutsceneId: String): Boolean {
