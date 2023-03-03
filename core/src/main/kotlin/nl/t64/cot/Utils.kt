@@ -21,6 +21,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.ScreenUtils
 import com.badlogic.gdx.utils.Timer
+import ktx.assets.dispose
 import nl.t64.cot.audio.AudioManager
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.ScreenManager
@@ -59,6 +60,8 @@ object Utils {
     val audioManager: AudioManager get() = crystalOfTime.audioManager
     val mapManager: MapManager get() = crystalOfTime.mapManager
     val brokerManager: BrokerManager get() = crystalOfTime.brokerManager
+
+    private val screenShots: MutableSet<Texture> = mutableSetOf()
 
     fun setGamepadInputProcessor(inputProcessor: InputProcessor?) {
         crystalOfTime.gamepadMapping.setInputProcessor(inputProcessor)
@@ -200,11 +203,17 @@ object Utils {
     }
 
     fun createScreenshot(withBlur: Boolean): Image {
-        val screenshot = Image(ScreenUtils.getFrameBufferTexture())
+        val region = ScreenUtils.getFrameBufferTexture()
+        screenShots.add(region.texture)
+        val screenshot = Image(region)
         if (withBlur) {
             screenshot.color = Color.DARK_GRAY
         }
         return screenshot
+    }
+
+    fun disposeScreenshots() {
+        screenShots.disposeAndClear()
     }
 
     fun createTransparency(): Drawable {
@@ -247,14 +256,19 @@ object Utils {
 
 }
 
-fun Color.toDrawable(): Drawable {
-    return toImage().drawable
+fun MutableSet<Texture>.disposeAndClear() {
+    dispose()
+    clear()
 }
 
-fun Color.toImage(): Image {
+fun Color.toDrawable(): Drawable {
+    return Image(toTexture()).drawable
+}
+
+fun Color.toTexture(): Texture {
     val pixmap = Pixmap(1, 1, Pixmap.Format.RGBA8888)
     pixmap.setColor(this)
     pixmap.fill()
-    return Image(Texture(pixmap))
+    return Texture(pixmap)
         .also { pixmap.dispose() }
 }

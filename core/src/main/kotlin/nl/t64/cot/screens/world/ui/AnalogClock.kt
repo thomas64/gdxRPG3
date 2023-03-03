@@ -4,12 +4,11 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Pixmap
 import com.badlogic.gdx.graphics.Pixmap.Blending
 import com.badlogic.gdx.graphics.Texture
-import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Table
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import nl.t64.cot.constants.Constant
+import nl.t64.cot.disposeAndClear
 import kotlin.math.abs
 import kotlin.math.max
 
@@ -23,6 +22,7 @@ private const val ALPHA = 0.8f
 class AnalogClock : Table() {
 
     private val display: Table = Table()
+    private val texturesToDispose: MutableSet<Texture> = mutableSetOf()
 
     init {
         display.setPosition(0f, 0f)
@@ -33,6 +33,7 @@ class AnalogClock : Table() {
     }
 
     fun update(percentageOfCircle: Float) {
+        texturesToDispose.disposeAndClear()
         display.clear()
         val clock = createTimer(percentageOfCircle)
         display.addActor(clock)
@@ -69,9 +70,8 @@ class AnalogClock : Table() {
         }
         pixmap.blending = Blending.None
         val texture = Texture(pixmap)
-        val region = TextureRegion(texture)
-        val drawable = TextureRegionDrawable(region)
-        return Image(drawable).apply {
+        texturesToDispose.add(texture)
+        return Image(texture).apply {
             setColor(1f, 1f, 1f, ALPHA)
         }.also { pixmap.dispose() }
     }

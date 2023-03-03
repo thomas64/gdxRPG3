@@ -1,6 +1,7 @@
 package nl.t64.cot.screens.inventory
 
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
@@ -14,7 +15,8 @@ import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.PartyContainer
 import nl.t64.cot.constants.Constant
-import nl.t64.cot.toImage
+import nl.t64.cot.disposeAndClear
+import nl.t64.cot.toTexture
 
 
 private const val FONT_PATH = "fonts/spectral_extra_bold_20.ttf"
@@ -35,6 +37,7 @@ class HeroesTable {
     val heroes = Table().apply {
         background = Utils.createTopBorder()
     }
+    private val texturesToDispose: MutableSet<Texture> = mutableSetOf()
 
     init {
         val font = resourceManager.getTrueTypeAsset(FONT_PATH, FONT_SIZE)
@@ -44,6 +47,7 @@ class HeroesTable {
     }
 
     fun update() {
+        texturesToDispose.disposeAndClear()
         heroes.clear()
         party.getAllHeroes().forEach {
             createFace(it)
@@ -132,6 +136,10 @@ class HeroesTable {
             setScaling(Scaling.stretchY)
             align = Align.left
         }.also { it.drawable.minWidth = (STATS_COLUMN_WIDTH / hero.getMaximumHp()) * hero.getCurrentHp() }
+    }
+
+    private fun Color.toImage(): Image {
+        return Image(toTexture().also { texturesToDispose.add(it) })
     }
 
 }

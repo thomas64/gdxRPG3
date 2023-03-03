@@ -279,6 +279,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
         if (gameState != GameState.DIALOG) mapManager.continueAudio()
         gameState = GameState.RUNNING
         setInputProcessors(multiplexer)
+        Utils.disposeScreenshots()
     }
 
     override fun render(dt: Float) {
