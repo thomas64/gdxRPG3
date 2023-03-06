@@ -64,7 +64,7 @@ class PreferenceManager {
     private fun setFullscreenMode() {
         val displayMode = Gdx.graphics.displayModes
             .filter { hasGivenResolution(it) }
-            .maxByOrNull { getRefreshRate(it) }
+            .maxByOrNull { it.refreshRate }
             ?: throw NoSuchElementException()
         Gdx.graphics.setFullscreenMode(displayMode)
     }
@@ -72,10 +72,6 @@ class PreferenceManager {
     private fun hasGivenResolution(mode: Graphics.DisplayMode): Boolean {
         return (mode.width == Constant.SCREEN_WIDTH
                 && mode.height == Constant.SCREEN_HEIGHT)
-    }
-
-    private fun getRefreshRate(mode: Graphics.DisplayMode): Int {
-        return mode.refreshRate
     }
 
 }

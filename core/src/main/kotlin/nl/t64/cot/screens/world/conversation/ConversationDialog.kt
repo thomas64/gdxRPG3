@@ -29,6 +29,7 @@ import nl.t64.cot.components.conversation.ConversationGraph
 import nl.t64.cot.components.conversation.NoteDatabase.getNoteById
 import nl.t64.cot.components.party.SpellsRewarder
 import nl.t64.cot.components.party.XpRewarder
+import nl.t64.cot.components.quest.QuestGraph
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.academy.AcademyScreen
 import nl.t64.cot.screens.loot.ReceiveScreen
@@ -296,7 +297,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun tradeQuestItems() {
-        val receive = ConversationSpoilLoader.getLoot(conversationId) { possibleSetTradeItemsTaskComplete() }
+        val receive = ConversationSpoilLoader.getLoot(conversationId, QuestGraph::possibleSetTradeItemsTaskComplete)
         endConversationAndLoad { TradeScreen.load(receive, graph) }
     }
 
@@ -317,7 +318,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
 
     private fun sayQuestThing(nextId: String) {
         val quest = gameData.quests.getQuestById(conversationId)
-        val receive = ConversationSpoilLoader.getLoot(conversationId) { setSayTheRightThingTaskCompleteAndReceivePossibleTarget() }
+        val receive = ConversationSpoilLoader.getLoot(conversationId, QuestGraph::setSayTheRightThingTaskCompleteAndReceivePossibleTarget)
         if (receive.isTaken()) {
             endConversation(nextId)
         } else {
@@ -327,7 +328,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
 
     private fun receiveQuestItemToDeliver() {
         val quest = gameData.quests.getQuestById(conversationId)
-        val receive = ConversationSpoilLoader.getLoot(conversationId) { receiveItemsToDeliver() }
+        val receive = ConversationSpoilLoader.getLoot(conversationId, QuestGraph::receiveItemsToDeliver)
         endConversationAndLoad { ReceiveScreen.load(receive, quest, graph) }
     }
 

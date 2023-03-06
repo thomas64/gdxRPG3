@@ -11,7 +11,7 @@ import nl.t64.cot.screens.ScreenManager
 import nl.t64.cot.screens.world.map.MapManager
 
 
-open class CrystalOfTime : Game() {
+class CrystalOfTime : Game() {
 
     private var runtime: Float = 0f
 

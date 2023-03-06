@@ -15,7 +15,7 @@ fun main() {
         Lwjgl3ApplicationConfiguration().apply {
             setTitle(Constant.TITLE)
             useVsync(true)
-            setWindowIcon("sprites/icon.png", "libgdx128.png", "libgdx64.png", "libgdx32.png", "libgdx16.png")
+            setWindowIcon("sprites/icon.png", *(arrayOf(128, 64, 32, 16).map { "libgdx$it.png" }.toTypedArray()))
             setResizable(false)
             setIdleFPS(60)
             setForegroundFPS(60)

@@ -36,24 +36,15 @@ enum class InventoryMinimal(override val title: String) : SuperEnum {
     abstract fun createMessageIfHeroHasNotEnoughFor(item: InventoryItem, hero: HeroItem): String?
 
     fun createSkillMessage(item: InventoryItem, hero: HeroItem): String? {
-        return item.skill?.let {
-            when {
-                hero.getSkillById(it).rank <= 0 -> """
-                    ${hero.name} needs the ${it.title} skill
-                    to equip that ${item.name}.""".trimIndent()
-                else -> null
-            }
-        }
+        return item.skill
+            ?.takeIf { hero.getSkillById(it).rank <= 0 }
+            ?.let { "${hero.name} needs the ${it.title} skill\nto equip that ${item.name}." }
     }
 
     fun createMinimalMessage(item: InventoryItem, statItemId: StatItemId, hero: HeroItem): String? {
-        val minimalAttribute: Int = item.getMinimalAttributeOfStatItemId(statItemId)
-        return when {
-            hero.getCalculatedTotalStatOf(statItemId) < minimalAttribute -> """
-                ${hero.name} needs $minimalAttribute ${statItemId.title}
-                to equip that ${item.name}.""".trimIndent()
-            else -> null
-        }
+        return item.getMinimalAttributeOfStatItemId(statItemId)
+            .takeIf { hero.getCalculatedTotalStatOf(statItemId) < it }
+            ?.let { "${hero.name} needs $it ${statItemId.title}\nto equip that ${item.name}." }
     }
 
 }

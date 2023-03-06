@@ -54,8 +54,7 @@ abstract class ItemSlot(
     }
 
     fun isSelected(): Boolean {
-        val name: String? = super.getChildren().peek().name
-        return name != null && name == "selector"
+        return super.getChildren().peek().name == "selector"
     }
 
     fun getPossibleInventoryImage(): InventoryImage? =
