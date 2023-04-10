@@ -22,13 +22,15 @@ class Camera : OrthographicCamera() {
         reset()
     }
 
-    fun zoom(): Boolean {
-        return if (mapWidth / zoom > Gdx.graphics.width && mapHeight / zoom > Gdx.graphics.height) {
-            val zoomNumberWidth = mapWidth / Gdx.graphics.width
-            val zoomNumberHeight = mapHeight / Gdx.graphics.height
-            zoom = max(zoomNumberWidth, zoomNumberHeight)
-            true
-        } else false
+    fun isZoomPossible(): Boolean {
+        return mapWidth / zoom > Gdx.graphics.width
+                && mapHeight / zoom > Gdx.graphics.height
+    }
+
+    fun zoom() {
+        val zoomNumberWidth: Float = mapWidth / Gdx.graphics.width
+        val zoomNumberHeight: Float = mapHeight / Gdx.graphics.height
+        zoom = max(zoomNumberWidth, zoomNumberHeight)
     }
 
     fun reset() {
@@ -70,10 +72,8 @@ class Camera : OrthographicCamera() {
     private fun getPositionOnMapEdges(playerPosition: Vector2): Vector2 {
         val halfCameraWidth = zoomedCameraWidth / 2 - getHorizontalSpaceBetweenCameraAndMapEdge()
         val halfCameraHeight = zoomedCameraHeight / 2 - getVerticalSpaceBetweenCameraAndMapEdge()
-        return Vector2(
-            MathUtils.clamp(playerPosition.x, halfCameraWidth, mapWidth - halfCameraWidth),
-            MathUtils.clamp(playerPosition.y, halfCameraHeight, mapHeight - halfCameraHeight)
-        )
+        return Vector2(MathUtils.clamp(playerPosition.x, halfCameraWidth, mapWidth - halfCameraWidth),
+                       MathUtils.clamp(playerPosition.y, halfCameraHeight, mapHeight - halfCameraHeight))
     }
 
     fun getHorizontalSpaceBetweenCameraAndMapEdge(): Float {

@@ -1,5 +1,6 @@
 package nl.t64.cot.screens.world.map
 
+import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Circle
@@ -18,7 +19,8 @@ internal class FogOfWar {
     private val container: MutableMap<String, Set<FogPoint>> = HashMap()
 
     fun putIfAbsent(currentMap: GameMap) {
-        container.putIfAbsent(currentMap.mapTitle, fillFogOfWar(currentMap))
+        val fogPoints: Set<FogPoint> = createFogPointSetFrom(currentMap)
+        container.putIfAbsent(currentMap.mapTitle, fogPoints)
     }
 
     fun update(playerPosition: Vector2, currentMap: GameMap, dt: Float) {
@@ -44,10 +46,11 @@ internal class FogOfWar {
             .forEach { shapeRenderer.rect(it.x, it.y, Constant.HALF_TILE_SIZE, Constant.HALF_TILE_SIZE) }
     }
 
-    private fun fillFogOfWar(gameMap: GameMap): Set<FogPoint> {
+    private fun createFogPointSetFrom(gameMap: GameMap): Set<FogPoint> {
         val leftOfScreen: Int
         val screenWidth: Int
-        if (gameMap.width < gameMap.height) {
+        if ((gameMap.width < gameMap.height)
+                || (gameMap.width > gameMap.height && Gdx.graphics.width > gameMap.width)) {
             screenWidth = ((gameMap.height / 9f) * 16f).toInt()     // 16:9
             leftOfScreen = (0f - ((screenWidth - gameMap.width) / 2f) - (gameMap.width / 2f)).toInt()
         } else {

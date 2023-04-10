@@ -363,7 +363,8 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     }
 
     private fun openMiniMap() {
-        if (camera.zoom()) {
+        if (camera.isZoomPossible()) {
+            camera.zoom()
             playSe(AudioEvent.SE_MINIMAP)
             gameState = GameState.MINIMAP
             multiplexer.removeProcessor(0)
