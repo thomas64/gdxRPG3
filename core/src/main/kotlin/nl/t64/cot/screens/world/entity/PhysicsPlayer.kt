@@ -3,9 +3,11 @@ package nl.t64.cot.screens.world.entity
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Rectangle
+import com.badlogic.gdx.math.Vector2
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.world.entity.events.*
+import nl.t64.cot.screens.world.map.isOutsideMap
 
 
 class PhysicsPlayer : PhysicsComponent() {
@@ -64,7 +66,10 @@ class PhysicsPlayer : PhysicsComponent() {
 
     private fun collisionBlockers(dt: Float) {
         val blockers = brokerManager.blockObservers.getCurrentBlockersFor(boundingBox, state)
-        if (blockers.isNotEmpty()) handleBlockers(blockers, dt)
+        if (blockers.isNotEmpty()) {
+            handleBlockers(blockers, dt)
+            handlePossibleOutsideMap()
+        }
     }
 
     private fun handleBlockers(blockers: List<Rectangle>, dt: Float) {
@@ -77,6 +82,20 @@ class PhysicsPlayer : PhysicsComponent() {
         }
         while (doesBoundingBoxOverlapsBlockers()) {
             moveBack()
+        }
+    }
+
+    private fun handlePossibleOutsideMap() {
+        val justALittleBitMore = 4f
+        val xAdjustedCurrentPos = Vector2(currentPosition.x + justALittleBitMore, currentPosition.y)
+        if (xAdjustedCurrentPos.isOutsideMap()) {
+            when (direction) {
+                Direction.NORTH -> currentPosition.y = oldPosition.y + Constant.HALF_TILE_SIZE
+                Direction.SOUTH -> currentPosition.y = oldPosition.y - Constant.HALF_TILE_SIZE
+                Direction.WEST -> currentPosition.x = oldPosition.x - Constant.TILE_SIZE
+                Direction.EAST -> currentPosition.x = oldPosition.x + Constant.TILE_SIZE
+                Direction.NONE -> throw IllegalArgumentException("Direction 'NONE' is not usable.")
+            }
         }
     }
 
