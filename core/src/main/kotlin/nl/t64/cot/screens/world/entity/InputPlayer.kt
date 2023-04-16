@@ -213,10 +213,10 @@ class InputPlayer(multiplexer: InputMultiplexer) : InputComponent(), InputProces
     private fun setPossibleTurnDelay() {
         if (turnDelay <= 0f
             && turnGrace > TURN_DELAY_GRACE_PERIOD
-            && (pressUpButDirectionisNotYetNorth()
-                    || pressDownButDirectionIsNotYetSouth()
-                    || pressLeftButDirectionIsNotYetWest()
-                    || pressRightButDirectionIsNotYetEast())
+            && (isPressUpButDirectionIsNotYetNorth()
+                    || isPressDownButDirectionIsNotYetSouth()
+                    || isPressLeftButDirectionIsNotYetWest()
+                    || isPressRightButDirectionIsNotYetEast())
         ) {
             turnDelay = TURN_DELAY_TIME
         }
@@ -224,10 +224,10 @@ class InputPlayer(multiplexer: InputMultiplexer) : InputComponent(), InputProces
 
     private fun setPlayerDirection() {
         when {
-            pressUp && timeUpIsLess() -> direction = Direction.NORTH
-            pressDown && timeDownIsLess() -> direction = Direction.SOUTH
-            pressLeft && timeLeftIsLess() -> direction = Direction.WEST
-            pressRight && timeRightIsLess() -> direction = Direction.EAST
+            pressUp && isTimeUpLess() -> direction = Direction.NORTH
+            pressDown && isTimeDownLess() -> direction = Direction.SOUTH
+            pressLeft && isTimeLeftLess() -> direction = Direction.WEST
+            pressRight && isTimeRightLess() -> direction = Direction.EAST
 
             pressUp -> direction = Direction.NORTH
             pressDown -> direction = Direction.SOUTH
@@ -253,36 +253,36 @@ class InputPlayer(multiplexer: InputMultiplexer) : InputComponent(), InputProces
         return pressUp || pressDown || pressLeft || pressRight
     }
 
-    private fun pressUpButDirectionisNotYetNorth(): Boolean {
+    private fun isPressUpButDirectionIsNotYetNorth(): Boolean {
         return pressUp && direction != Direction.NORTH
     }
 
-    private fun pressDownButDirectionIsNotYetSouth(): Boolean {
+    private fun isPressDownButDirectionIsNotYetSouth(): Boolean {
         return pressDown && direction != Direction.SOUTH
     }
 
-    private fun pressLeftButDirectionIsNotYetWest(): Boolean {
+    private fun isPressLeftButDirectionIsNotYetWest(): Boolean {
         return pressLeft && direction != Direction.WEST
     }
 
-    private fun pressRightButDirectionIsNotYetEast(): Boolean {
+    private fun isPressRightButDirectionIsNotYetEast(): Boolean {
         return pressRight && direction != Direction.EAST
     }
 
-    private fun timeRightIsLess(): Boolean {
-        return timeRight <= timeUp || timeRight <= timeDown || timeRight <= timeLeft
+    private fun isTimeRightLess(): Boolean {
+        return listOf(timeUp, timeDown, timeLeft).any { timeRight <= it }
     }
 
-    private fun timeLeftIsLess(): Boolean {
-        return timeLeft <= timeUp || timeLeft <= timeDown || timeLeft <= timeRight
+    private fun isTimeLeftLess(): Boolean {
+        return listOf(timeUp, timeDown, timeRight).any { timeLeft <= it }
     }
 
-    private fun timeDownIsLess(): Boolean {
-        return timeDown <= timeUp || timeDown <= timeLeft || timeDown <= timeRight
+    private fun isTimeDownLess(): Boolean {
+        return listOf(timeUp, timeLeft, timeRight).any { timeDown <= it }
     }
 
-    private fun timeUpIsLess(): Boolean {
-        return timeUp <= timeDown || timeUp <= timeLeft || timeUp <= timeRight
+    private fun isTimeUpLess(): Boolean {
+        return listOf(timeDown, timeLeft, timeRight).any { timeUp <= it }
     }
 
 }

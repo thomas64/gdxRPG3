@@ -9,7 +9,7 @@ import nl.t64.cot.screens.world.entity.Direction
 class GameMapSpawnPoint(rectObject: RectangleMapObject) : GameMapObject(rectObject.rectangle) {
 
     private val fromMapName: String = rectObject.name
-    private val fromMapLocation: String = rectObject.type ?: ""
+    private val fromMapLocation: String = rectObject.type.orEmpty()
     val x: Float = rectObject.rectangle.x
     val y: Float = rectObject.rectangle.y
     val direction: Direction = Direction.valueOf(rectObject.property("direction", "NONE").uppercase())
