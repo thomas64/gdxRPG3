@@ -2,34 +2,31 @@
 eclipse.project.name = appName + '-core'
 
 dependencies {
-	api "com.badlogicgames.gdx:gdx:$gdxVersion"
-	api "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-	api "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
-	api "com.badlogicgames.gdx:gdx-ai:$aiVersion"
-	api "com.badlogicgames.gdx-controllers:gdx-controllers-core:$gdxControllersVersion"
-	api "de.golfgl.gdxcontrollerutils:gdx-controllerutils-mapping:$controllerMappingVersion"
-	api "com.github.tommyettinger:regexodus:$regExodusVersion"
-	api "com.github.tommyettinger:libgdx-utils:$utilsVersion"
-	api "com.github.tommyettinger:colorful:$colorfulVersion"
-	api "io.github.libktx:ktx-tiled:$ktxVersion"
-	api "io.github.libktx:ktx-assets:$ktxVersion"
-	api "io.github.libktx:ktx-collections:$ktxVersion"
-	api "io.github.libktx:ktx-freetype:$ktxVersion"
-	api "io.github.libktx:ktx-preferences:$ktxVersion"
-	api "io.github.libktx:ktx-json:$ktxVersion"
-	api "com.rafaskoberg.gdx:typing-label:$typingLabelVersion"
-	api "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
-	api "com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion"
+  api "com.badlogicgames.gdx:gdx:$gdxVersion"
+  api "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+  api "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+  api "com.badlogicgames.gdx:gdx-ai:$aiVersion"
+  api "com.badlogicgames.gdx-controllers:gdx-controllers-core:$gdxControllersVersion"
+  api "de.golfgl.gdxcontrollerutils:gdx-controllerutils-mapping:$controllerMappingVersion"
+  api "io.github.libktx:ktx-tiled:$ktxVersion"
+  api "io.github.libktx:ktx-assets:$ktxVersion"
+  api "io.github.libktx:ktx-collections:$ktxVersion"
+  api "io.github.libktx:ktx-freetype:$ktxVersion"
+  api "io.github.libktx:ktx-preferences:$ktxVersion"
+  api "io.github.libktx:ktx-json:$ktxVersion"
+  api "com.rafaskoberg.gdx:typing-label:$typingLabelVersion"
+  api "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+  api "com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion"
 
-	testApi "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
-	testApi "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
-	testApi "org.assertj:assertj-core:$assertjVersion"
-	testApi "org.mockito:mockito-core:$mockitoVersion"
-	testApi "org.mockito.kotlin:mockito-kotlin:$kockitoVersion"
-	testApi "org.junit.jupiter:junit-jupiter:$junitVersion"
+  testApi "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+  testApi "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
+  testApi "org.assertj:assertj-core:$assertjVersion"
+  testApi "org.mockito:mockito-core:$mockitoVersion"
+  testApi "org.mockito.kotlin:mockito-kotlin:$kockitoVersion"
+  testApi "org.junit.jupiter:junit-jupiter:$junitVersion"
 }
 
 test {
-    useJUnitPlatform()
-	workingDir("..\\assets")
+  useJUnitPlatform()
+  workingDir("..\\assets")
 }

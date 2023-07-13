@@ -150,19 +150,20 @@ abstract class MenuSettings : MenuScreen() {
         val backButton = TextButton(MENU_ITEM_BACK, TextButtonStyle(buttonStyle))
 
         // table
-        val newTable = Table()
-        newTable.setFillParent(true)
-        newTable.defaults().center()
-        newTable.add(fullscreenButton).row()
-        newTable.add(musicButton).row()
-        newTable.add(soundButton).row()
-        newTable.add(debugModeButton).row()
-        newTable.add(controlsButton).row()
-        newTable.add(backButton)
-        newTable.x = MENU_X
         val logo = stage.actors.peek()
-        newTable.top().padTop((logo.height * logo.scaleY) + LOGO_PAD + PAD_TOP)
-        return newTable
+        val padTop = (logo.height * logo.scaleY) + LOGO_PAD + PAD_TOP
+        return Table().apply {
+            setFillParent(true)
+            defaults().center()
+            add(fullscreenButton).row()
+            add(musicButton).row()
+            add(soundButton).row()
+            add(debugModeButton).row()
+            add(controlsButton).row()
+            add(backButton)
+            x = MENU_X
+            top().padTop(padTop)
+        }
     }
 
     private fun getMenuItemFullScreen(): String =

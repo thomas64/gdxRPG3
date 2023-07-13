@@ -9,7 +9,13 @@ import nl.t64.cot.CrystalOfTime
 import nl.t64.cot.constants.Constant
 
 
+/** Launches the desktop (LWJGL3) application. */
 fun main() {
+
+    // This handles macOS support and helps on Windows.
+    if (StartupHelper.startNewJvmIfRequired())
+        return
+
     Lwjgl3Application(
         CrystalOfTime(),
         Lwjgl3ApplicationConfiguration().apply {
@@ -23,4 +29,5 @@ fun main() {
             setPreferencesConfig("T64.nl/", Files.FileType.External)
         }
     )
+
 }
