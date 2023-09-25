@@ -71,6 +71,7 @@ class MapManager : ProfileObserver {
     fun getLightmapMap(): GameMapLightmapMap = currentMap.lightmapMap
     fun getGameMapLights(): List<GameMapLight> = currentMap.lights
     fun getLightmapPlayer(): Sprite? = currentMap.lightmapPlayer
+    fun getParticleEffects(): List<GameMapParticle> = currentMap.torches
     fun getLowerConditionTextures(): List<GameMapConditionTexture> = currentMap.lowerTextures
     fun getUpperConditionTextures(): List<GameMapConditionTexture> = currentMap.upperTextures
 

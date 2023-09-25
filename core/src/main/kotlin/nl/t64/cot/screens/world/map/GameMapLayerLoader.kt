@@ -9,76 +9,51 @@ import ktx.tiled.type
 
 internal class GameMapLayerLoader(private val tiledMap: TiledMap) {
 
-    fun <T> loadLayer(layerName: String
-    ): List<T> {
-        return loadLayer(layerName,
-                         { it as T })
+    private val noFilter: (RectangleMapObject) -> Boolean = { true }
+    private val noMapping: (RectangleMapObject) -> RectangleMapObject = { it }
+
+    fun wholeLayer(layerName: String): List<RectangleMapObject> {
+        return getMapLayer(layerName)?.let { getMapObjectsFrom(it, noFilter, noMapping) } ?: emptyList()
     }
 
-    fun <T> loadLayer(layerName: String,
-                      mapper: (RectangleMapObject) -> T
-    ): List<T> {
-        return loadLayer(layerName,
-                         { true },
-                         mapper)
+    fun <T> wholeLayer(layerName: String, mapper: (RectangleMapObject) -> T): List<T> {
+        return getMapLayer(layerName)?.let { getMapObjectsFrom(it, noFilter, mapper) } ?: emptyList()
     }
 
-    fun <T> startsWith(layerName: String,
-                       match: String
-    ): List<T> {
-        return loadLayer(layerName,
-                         { it.name.startsWith(match) },
-                         { it as T })
+    fun nameStartsWith(layerName: String, match: String): List<RectangleMapObject> {
+        val filter: (RectangleMapObject) -> Boolean = { it.name.startsWith(match) }
+        return getMapLayer(layerName)?.let { getMapObjectsFrom(it, filter, noMapping) } ?: emptyList()
     }
 
-    fun <T> startsWith(layerName: String,
-                       match: String,
-                       mapper: (RectangleMapObject) -> T
-    ): List<T> {
-        return loadLayer(layerName,
-                         { it.name.startsWith(match) },
-                         mapper)
+    fun <T> nameStartsWith(layerName: String, match: String, mapper: (RectangleMapObject) -> T): List<T> {
+        val filter: (RectangleMapObject) -> Boolean = { it.name.startsWith(match) }
+        return getMapLayer(layerName)?.let { getMapObjectsFrom(it, filter, mapper) } ?: emptyList()
     }
 
-    fun <T> equalsIgnoreCase(layerName: String,
-                             match: String,
-                             mapper: (RectangleMapObject) -> T
-    ): List<T> {
-        return loadLayer(layerName,
-                         { it.type.equals(match, true) },
-                         mapper)
+    fun <T> nameEqualsIgnoreCase(layerName: String, match: String, mapper: (RectangleMapObject) -> T): List<T> {
+        val filter: (RectangleMapObject) -> Boolean = { it.name.equals(match, true) }
+        return getMapLayer(layerName)?.let { getMapObjectsFrom(it, filter, mapper) } ?: emptyList()
     }
 
-    fun <T> loadLayer(layerName: String,
-                      filter: (RectangleMapObject) -> Boolean,
-                      mapper: (RectangleMapObject) -> T
-    ): List<T> {
-        return getMapLayer(layerName)?.let { createRectObjectsList(it, filter, mapper) } ?: emptyList()
+    fun <T> typeEqualsIgnoreCase(layerName: String, match: String, mapper: (RectangleMapObject) -> T): List<T> {
+        val filter: (RectangleMapObject) -> Boolean = { it.type.equals(match, true) }
+        return getMapLayer(layerName)?.let { getMapObjectsFrom(it, filter, mapper) } ?: emptyList()
     }
 
-    fun <T> loadTextureLayer(
-        layerName: String,
-        mapper: (TextureMapObject) -> T
-    ): List<T> {
-        return getMapLayer(layerName)?.let { createTextureObjectsList(it, mapper) } ?: emptyList()
+    fun <T> partOfLayer(layerName: String, filter: (RectangleMapObject) -> Boolean, mapper: (RectangleMapObject) -> T): List<T> {
+        return getMapLayer(layerName)?.let { getMapObjectsFrom(it, filter, mapper) } ?: emptyList()
     }
 
-    private fun <T> createRectObjectsList(mapLayer: MapLayer,
-                                          filter: (RectangleMapObject) -> Boolean,
-                                          mapper: (RectangleMapObject) -> T
-    ): List<T> {
-        return mapLayer.objects
-            .map { it as RectangleMapObject }
-            .filter(filter)
-            .map(mapper)
+    fun <T> wholeTextureLayer(layerName: String, mapper: (TextureMapObject) -> T): List<T> {
+        return getMapLayer(layerName)?.let { getTextureObjectsFrom(it, mapper) } ?: emptyList()
     }
 
-    private fun <T> createTextureObjectsList(mapLayer: MapLayer,
-                                             mapper: (TextureMapObject) -> T
-    ): List<T> {
-        return mapLayer.objects
-            .map { it as TextureMapObject }
-            .map(mapper)
+    private fun <T> getMapObjectsFrom(mapLayer: MapLayer, filter: (RectangleMapObject) -> Boolean, mapper: (RectangleMapObject) -> T): List<T> {
+        return mapLayer.objects.map { it as RectangleMapObject }.filter(filter).map(mapper)
+    }
+
+    private fun <T> getTextureObjectsFrom(mapLayer: MapLayer, mapper: (TextureMapObject) -> T): List<T> {
+        return mapLayer.objects.map { it as TextureMapObject }.map(mapper)
     }
 
     private fun getMapLayer(layerName: String): MapLayer? {

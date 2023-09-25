@@ -24,7 +24,7 @@ import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.battle.BattleObserver
 import nl.t64.cot.screens.world.Camera
-import nl.t64.cot.screens.world.TextureMapObjectRenderer
+import nl.t64.cot.screens.world.WorldRenderer
 import nl.t64.cot.screens.world.conversation.ConversationDialog
 import nl.t64.cot.screens.world.conversation.ConversationObserver
 import nl.t64.cot.sfx.TransitionAction
@@ -40,7 +40,7 @@ const val FAST_STEP = 0.25f
 abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
 
     val camera = Camera()
-    val mapRenderer = TextureMapObjectRenderer(camera)
+    private val worldRenderer = WorldRenderer(camera)
     val actorsStage = Stage(camera.viewport)
     val transitionStage = Stage(camera.viewport)
     val transition: Actor = TransitionImage()
@@ -99,9 +99,9 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
             camera.setPosition(followingActor.x, followingActor.y)
         }
 
-        mapRenderer.updateCamera()
+        worldRenderer.updateCamera()
         actorsStage.act(dt)
-        mapRenderer.renderAll(Vector2(followingActor.x, followingActor.y)) { actorsStage.draw() }
+        worldRenderer.renderAll(Vector2(followingActor.x, followingActor.y)) { actorsStage.draw() }
 
         conversationDialog.update(dt)
 
@@ -132,7 +132,7 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
     }
 
     override fun dispose() {
-        mapRenderer.dispose()
+        worldRenderer.dispose()
         conversationDialog.dispose()
         actorsStage.dispose()
         transitionStage.dispose()
@@ -232,7 +232,7 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
     private fun setNewMap() {
         val currentMap = mapManager.currentMap
         camera.setNewMapSize(currentMap.pixelWidth, currentMap.pixelHeight)
-        mapRenderer.map = mapManager.getTiledMap()
+        worldRenderer.map = mapManager.getTiledMap()
     }
 
     fun showConversationDialog(conversationId: String, entityId: String, faceColor: Color? = null) {

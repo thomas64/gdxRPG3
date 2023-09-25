@@ -10,6 +10,7 @@ import com.badlogic.gdx.audio.Music
 import com.badlogic.gdx.audio.Sound
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.BitmapFont
+import com.badlogic.gdx.graphics.g2d.ParticleEffect
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader
@@ -41,6 +42,8 @@ private const val ATLAS_FILES2 = "sprites/inventory/"
 private const val FILE_LIST_ATLAS_FILES2 = ATLAS_FILES2 + FILE_LIST
 private const val ATLAS_FILES3 = "sprites/spells/"
 private const val FILE_LIST_ATLAS_FILES3 = ATLAS_FILES3 + FILE_LIST
+private const val PARTICLES_PATH = "effects/"
+private const val PARTICLES_SUFFIX = ".p"
 
 class ResourceManager {
 
@@ -83,6 +86,13 @@ class ResourceManager {
 
     fun getMusicAsset(musicFilenamePath: String): Music {
         return getAsset(musicFilenamePath)
+    }
+
+    fun getParticleAsset(particleFilename: String): ParticleEffect {
+        return ParticleEffect().apply {
+            val path = PARTICLES_PATH + particleFilename + PARTICLES_SUFFIX
+            load(Gdx.files.internal(path), Gdx.files.internal(PARTICLES_PATH))
+        }
     }
 
     private inline fun <reified T : Any> getAsset(path: String, parameters: AssetLoaderParameters<T>? = null): T {
@@ -130,12 +140,14 @@ class ResourceManager {
 
     fun getAcademyInventory(academyId: String): GdxMap<String, Int> {
         val fullFileNamePath = ACADEMY_CONFIGS + academyId + CONFIG_SUFFIX
-        return json.fromJson(OrderedMap::class.java, Int::class.java, Gdx.files.internal(fullFileNamePath)) as OrderedMap<String, Int>
+        return json.fromJson(OrderedMap::class.java, Int::class.java,
+                             Gdx.files.internal(fullFileNamePath)) as OrderedMap<String, Int>
     }
 
     fun getSchoolInventory(schoolId: String): GdxMap<String, Int> {
         val fullFileNamePath = SCHOOL_CONFIGS + schoolId + CONFIG_SUFFIX
-        return json.fromJson(OrderedMap::class.java, Int::class.java, Gdx.files.internal(fullFileNamePath)) as OrderedMap<String, Int>
+        return json.fromJson(OrderedMap::class.java, Int::class.java,
+                             Gdx.files.internal(fullFileNamePath)) as OrderedMap<String, Int>
     }
 
 }

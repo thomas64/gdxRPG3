@@ -11,7 +11,7 @@ import nl.t64.cot.Utils
 
 private const val LIGHTMAP_ID = "light_object"
 
-class GameMapLight(rectObject: RectangleMapObject) {
+class GameMapLight(rectObject: RectangleMapObject) : GameMapObject(rectObject.rectangle) {
 
     private val texture: Texture = Utils.createLightmap(LIGHTMAP_ID)
     private val color: Color = rectObject.name?.toColor() ?: Color.WHITE
@@ -27,10 +27,6 @@ class GameMapLight(rectObject: RectangleMapObject) {
 
     private fun String.toColor(): Color {
         return ClassReflection.getField(Color::class.java, uppercase()).get(Color::class.java) as Color
-    }
-
-    private fun RectangleMapObject.getCenter(): Vector2 {
-        return rectangle.getCenter(Vector2(rectangle.x, rectangle.y))
     }
 
 }

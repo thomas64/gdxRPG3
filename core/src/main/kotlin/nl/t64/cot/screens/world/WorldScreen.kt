@@ -58,7 +58,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
 
     private val stage = Stage()
     private val camera = Camera()
-    private val mapRenderer = TextureMapObjectRenderer(camera)
+    private val worldRenderer = WorldRenderer(camera)
     private val multiplexer = InputMultiplexer().apply { addProcessor(createListener()) }
     private val shapeRenderer = ShapeRenderer()
     private val clockBox = ClockBox()
@@ -99,7 +99,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     }
 
     fun changeMap(currentMap: GameMap) {
-        mapRenderer.map = currentMap.tiledMap
+        worldRenderer.map = currentMap.tiledMap
         camera.setNewMapSize(currentMap.pixelWidth, currentMap.pixelHeight)
         player.send(LoadEntityEvent(currentMap.playerSpawnDirection, currentMap.playerSpawnLocation))
         npcEntities = NpcEntitiesLoader(currentMap).createNpcs()
@@ -310,16 +310,17 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
         npcEntities.forEach { it.update(dt) }
         npcEntities.forEach { it.send(FindPathEvent(playerGridPosition)) }
         visibleScheduledEntities.forEach { it.update(dt) }
+        mapManager.getParticleEffects().forEach { it.update(dt) }
     }
 
     private fun renderMiniMap() {
         updateCameraPosition()
-        mapRenderer.renderMapWithoutEntities()
+        worldRenderer.renderMapWithoutEntities()
         // todo, eventually remove shaperenderer and use sprite icons for minimap.
         shapeRenderer.projectionMatrix = camera.combined
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled)
-        player.renderOnMiniMap(mapRenderer.batch, shapeRenderer)
-        npcEntities.forEach { it.renderOnMiniMap(mapRenderer.batch, shapeRenderer) }
+        player.renderOnMiniMap(worldRenderer.batch, shapeRenderer)
+        npcEntities.forEach { it.renderOnMiniMap(worldRenderer.batch, shapeRenderer) }
         mapManager.drawFogOfWar(shapeRenderer)
         shapeRenderer.end()
     }
@@ -328,7 +329,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
         mapManager.updateFogOfWar(player.position, dt)
         mapManager.updateConditionLayers()
         updateCameraPosition()
-        mapRenderer.renderAll(player.position) { renderEntities(it) }
+        worldRenderer.renderAll(player.position) { renderEntities(it) }
         gridRenderer.possibleRender()
         debugRenderer.possibleRenderObjects(doorList + lootList + npcEntities + visibleScheduledEntities + player)
         debugBox.possibleUpdate(dt)
@@ -347,7 +348,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
 
     private fun updateCameraPosition() {
         camera.setPosition(player.position)
-        mapRenderer.updateCamera()
+        worldRenderer.updateCamera()
     }
 
     private fun renderEntities(batch: Batch) {
@@ -427,7 +428,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     override fun dispose() {
         clockBox.dispose()
         player.dispose()
-        mapRenderer.dispose()
+        worldRenderer.dispose()
         shapeRenderer.dispose()
         partyWindow.dispose()
         conversationDialog.dispose()

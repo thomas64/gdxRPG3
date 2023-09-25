@@ -17,7 +17,7 @@ import nl.t64.cot.constants.Constant
 private val UNDER_LAYERS = intArrayOf(0, 1, 2, 3, 4, 5)
 private val OVER_LAYERS = intArrayOf(6, 7, 8)
 
-class TextureMapObjectRenderer(private val camera: Camera) : OrthogonalTiledMapRenderer(null) {
+class WorldRenderer(private val camera: Camera) : OrthogonalTiledMapRenderer(null) {
 
     private val frameBuffer = FrameBuffer(Pixmap.Format.RGBA8888, Gdx.graphics.width, Gdx.graphics.height, false)
 
@@ -78,12 +78,9 @@ class TextureMapObjectRenderer(private val camera: Camera) : OrthogonalTiledMapR
         renderPossibleBackground()
         batch.projectionMatrix = camera.combined
         render(UNDER_LAYERS)
-        batch.begin()
-        mapManager.getLowerConditionTextures().forEach { it.render(batch) }
-        renderEntities.invoke(batch)
-        mapManager.getUpperConditionTextures().forEach { it.render(batch) }
-        batch.end()
+        renderDynamicMapEntities(renderEntities)
         render(OVER_LAYERS)
+        renderParticles()
         renderLightmap()
     }
 
@@ -94,6 +91,20 @@ class TextureMapObjectRenderer(private val camera: Camera) : OrthogonalTiledMapR
             it.render(batch, camera)
             batch.end()
         }
+    }
+
+    private fun renderDynamicMapEntities(renderEntities: (Batch) -> Unit) {
+        batch.begin()
+        mapManager.getLowerConditionTextures().forEach { it.render(batch) }
+        renderEntities.invoke(batch)
+        mapManager.getUpperConditionTextures().forEach { it.render(batch) }
+        batch.end()
+    }
+
+    private fun renderParticles() {
+        batch.begin()
+        mapManager.getParticleEffects().forEach { it.render(batch) }
+        batch.end()
     }
 
     private fun renderLightmap() {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="66" height="124" tilewidth="24" tileheight="24" infinite="0" nextlayerid="21" nextobjectid="235">
+<map version="1.8" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="66" height="124" tilewidth="24" tileheight="24" infinite="0" nextlayerid="22" nextobjectid="264">
  <properties>
   <property name="bgm" value="bgm_cave"/>
   <property name="lightmap_player" value="light_player"/>
@@ -49,7 +49,7 @@
  </layer>
  <layer id="8" name="over7_objects" width="66" height="124">
   <data encoding="base64" compression="zlib">
-   eJzt2UsKwjAUBdCA30E7caO6C92n32UYeIOCWLBVFF/PGaWQQUnuS0hSCgDAZ203pew2v/6L39vXMTgYh8HkJ8jPMHIT5AZgHPtIsI8AAAAAAAB819h3qmzvW2PfqbxvAVllW+fHss4DvM+eEuwpw8hNkBsAACAzZ7/g7AffY90J1h0AYGquTSm3pvs+1vap6e+f1aotZd1237Panrf9/bM71wxcJpiDR4uageWEcwAAkI178OAenH+mjkPWOja/Iev8wjPqPqh7AAAAeN0dBbYnQw==
+   eJzt2UsKwjAUBdCA30E7cuW6C92W32UYeIOCWLBVFF/PGaWQQUnuS0hSCgDAZ203pew2v/6L39vXMTgYh8HkJ8jPMHIT5AZgHPtIsI8AAAAAAAB819h3qmzvW2PfqbxvAVllW+fHss4DvM+eEuwpw8hNkBsAACAzZ7/g7AffY90J1h0AYGquTSm3pvs+1vap6e+f1aotZd1237Panrf9/bM71wxcJpiDR4uageWEcwAAkI178OAenH+mjkPWOja/Iev8wjPqPqh7AAAAeN0dMlYvdw==
   </data>
  </layer>
  <layer id="9" name="over8_none" width="66" height="124">
@@ -259,5 +259,22 @@
   <object id="204" x="1344" y="2352" width="48" height="48"/>
   <object id="229" x="528" y="2496" width="48" height="48"/>
   <object id="230" x="816" y="2448" width="48" height="48"/>
+ </objectgroup>
+ <objectgroup id="21" name="particles">
+  <object id="249" name="torch" x="300" y="2604" width="24" height="24"/>
+  <object id="250" name="torch" x="540" y="2508" width="24" height="24"/>
+  <object id="251" name="torch" x="828" y="2460" width="24" height="24"/>
+  <object id="252" name="torch" x="1356" y="2364" width="24" height="24"/>
+  <object id="253" name="torch" x="828" y="1836" width="24" height="24"/>
+  <object id="254" name="torch" x="300" y="1740" width="24" height="24"/>
+  <object id="255" name="torch" x="756" y="1356" width="24" height="24"/>
+  <object id="256" name="torch" x="540" y="1212" width="24" height="24"/>
+  <object id="257" name="torch" x="636" y="1068" width="24" height="24"/>
+  <object id="258" name="torch" x="972" y="1068" width="24" height="24"/>
+  <object id="259" name="torch" x="876" y="444" width="24" height="24"/>
+  <object id="260" name="torch" x="732" y="300" width="24" height="24"/>
+  <object id="261" name="torch" x="492" y="252" width="24" height="24"/>
+  <object id="262" name="torch" x="204" y="204" width="24" height="24"/>
+  <object id="263" name="torch" x="996" y="1404" width="24" height="24"/>
  </objectgroup>
 </map>
