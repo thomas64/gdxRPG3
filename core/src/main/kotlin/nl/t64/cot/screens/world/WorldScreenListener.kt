@@ -5,6 +5,7 @@ import com.badlogic.gdx.InputAdapter
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.constants.Constant
+import nl.t64.cot.screens.help.HelpScreen
 import nl.t64.cot.screens.inventory.InventoryScreen
 import nl.t64.cot.screens.menu.MenuPause
 import nl.t64.cot.screens.questlog.QuestLogScreen
@@ -43,6 +44,7 @@ internal class WorldScreenListener(
                 Constant.KEYCODE_START, Input.Keys.ESCAPE -> MenuPause.load()
                 Constant.KEYCODE_TOP, Input.Keys.I -> InventoryScreen.load()
                 Constant.KEYCODE_LEFT, Input.Keys.L -> QuestLogScreen.load()
+                Input.Keys.H -> HelpScreen.load()
                 Constant.KEYCODE_R3, Input.Keys.P -> showHidePartyWindowFunction.invoke()
                 Input.Keys.F10 -> setShowGrid.invoke()
                 Input.Keys.F11 -> setShowObjects.invoke()

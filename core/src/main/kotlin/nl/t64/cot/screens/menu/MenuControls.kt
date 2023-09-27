@@ -110,6 +110,8 @@ abstract class MenuControls : MenuScreen() {
             Label("M", textStyle),
             Label("Party", textStyle),
             Label("P", textStyle),
+            Label("Hints", textStyle),
+            Label("H", textStyle),
             Label("Pause", textStyle),
             Label("Esc", textStyle)
         )
@@ -133,6 +135,8 @@ abstract class MenuControls : MenuScreen() {
             Label("Select", textStyle),
             Label("Party", textStyle),
             Label("R3", textStyle),
+            Label("Hints", textStyle),
+            Label("H", textStyle),
             Label("Pause", textStyle),
             Label("Start", textStyle)
         )

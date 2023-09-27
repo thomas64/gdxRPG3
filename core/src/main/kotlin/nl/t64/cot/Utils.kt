@@ -33,6 +33,7 @@ private const val TITLE_FONT = "fonts/spectral_extra_bold_28.ttf"
 private const val TITLE_SIZE = 28
 private const val SPRITE_BORDER = "sprites/border.png"
 private const val SPRITE_BORDER_TOP = "sprites/border_top.png"
+private const val SPRITE_BORDER_BOTTOM = "sprites/border_bottom.png"
 private const val SPRITE_BORDER_RIGHT = "sprites/border_right.png"
 private const val SPRITE_TOOLTIP = "sprites/tooltip.png"
 private const val SPRITE_TOOLTIP_RIGHT = "sprites/tooltip_right.png"
@@ -71,13 +72,13 @@ object Utils {
         return Controllers.getCurrent()?.isConnected ?: false
     }
 
-    fun createDefaultWindow(title: String, table: Table): Window {
+    fun createDefaultWindow(title: String, table: Table, titleAlignment: Int = Align.left): Window {
         val font = resourceManager.getTrueTypeAsset(TITLE_FONT, TITLE_SIZE)
         val windowStyle = WindowStyle(font, Color.BLACK, createFullBorder())
         return Window(title, windowStyle).apply {
             add(table)
             padTop(TITLE_PADDING)
-            titleLabel.setAlignment(Align.left)
+            titleLabel.setAlignment(titleAlignment)
             isMovable = false
             pack()
         }
@@ -104,6 +105,12 @@ object Utils {
     fun createTopBorder(sprite: String = SPRITE_BORDER_TOP): Drawable {
         val texture = resourceManager.getTextureAsset(sprite)
         val ninepatch = NinePatch(texture, 0, 0, 1, 0)
+        return NinePatchDrawable(ninepatch)
+    }
+
+    fun createBottomBorder(): Drawable {
+        val texture = resourceManager.getTextureAsset(SPRITE_BORDER_BOTTOM)
+        val ninepatch = NinePatch(texture, 0, 0, 0, 1)
         return NinePatchDrawable(ninepatch)
     }
 

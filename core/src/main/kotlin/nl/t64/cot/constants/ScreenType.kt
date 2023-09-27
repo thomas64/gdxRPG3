@@ -5,6 +5,7 @@ import nl.t64.cot.screens.LoadScreen
 import nl.t64.cot.screens.academy.AcademyScreen
 import nl.t64.cot.screens.battle.BattleScreen
 import nl.t64.cot.screens.cutscene.*
+import nl.t64.cot.screens.help.HelpScreen
 import nl.t64.cot.screens.inventory.InventoryScreen
 import nl.t64.cot.screens.loot.*
 import nl.t64.cot.screens.menu.*
@@ -34,6 +35,7 @@ enum class ScreenType(val screenClass: Class<out Screen>) {
     WARP(WarpScreen::class.java),
     INVENTORY(InventoryScreen::class.java),
     QUEST_LOG(QuestLogScreen::class.java),
+    HELP(HelpScreen::class.java),
     STORAGE(StorageScreen::class.java),
     SHOP(ShopScreen::class.java),
     ACADEMY(AcademyScreen::class.java),

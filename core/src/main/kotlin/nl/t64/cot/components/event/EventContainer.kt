@@ -12,6 +12,14 @@ class EventContainer {
                  text = listOf("This event is not handled correctly.",
                                "Your save file is of an older version than the game."))
 
+    fun getAllPlayedGuideEvents(): List<String> {
+        return events
+            .filterKeys { it.startsWith("guide_event_") }
+            .filterKeys { hasEventPlayed(it) }
+            .map { TextReplacer.replace(it.value.text) }
+            .reversed()
+    }
+
     fun hasEventPlayed(eventId: String): Boolean = events[eventId]!!.hasPlayed
 
 }
