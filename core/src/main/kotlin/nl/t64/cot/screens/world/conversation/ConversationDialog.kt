@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.List.ListStyle
 import com.badlogic.gdx.scenes.scene2d.utils.BaseDrawable
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable
 import com.badlogic.gdx.utils.Align
+import com.rafaskoberg.gdx.typinglabel.TypingLabel
 import ktx.assets.disposeSafely
 import ktx.collections.GdxArray
 import nl.t64.cot.Utils
@@ -59,7 +60,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
 
     private val stage: Stage = Stage()
     private val font: BitmapFont = createFont()
-    private val label: Label = createLabel()
+    private val label: TypingLabel = createLabel()
     private val answers: List<ConversationChoice> = List(createAnswersStyle())
     private val scrollPane: ScrollPane = createScrollPane()
     private val dialog: Dialog = createDialog()
@@ -148,6 +149,10 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun selectAnswer() {
+        if (!label.hasEnded()) {
+            label.skipToTheEnd()
+            return
+        }
         val selectedAnswer = answers.selected
         if (!selectedAnswer.isMeetingCondition()) {
             playSe(AudioEvent.SE_MENU_ERROR)
@@ -404,6 +409,8 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun hideWithFade() {
+        val amountOfLines = label.text.lines().count()
+        label.setText("" + System.lineSeparator().repeat(amountOfLines - 1))
         scrollPane.clearListeners()
         dialog.hide()
     }
@@ -431,7 +438,11 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
 
     private fun populatePhrase() {
         val text = graph.getCurrentPhrase().joinToString(System.lineSeparator())
-        label.setText(text)
+        if (text.isNotBlank()) {
+            label.restart("{COLOR=BLACK}$text")
+        } else {
+            label.setText("")
+        }
     }
 
     private fun populateChoices() {
@@ -491,8 +502,8 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             .apply { data.setLineHeight(LINE_HEIGHT) }
     }
 
-    private fun createLabel(): Label {
-        return Label("No Conversation", LabelStyle(font, Color.BLACK))
+    private fun createLabel(): TypingLabel {
+        return TypingLabel("No Conversation", LabelStyle(font, Color.BLACK))
             .apply { wrap = true }
     }
 
