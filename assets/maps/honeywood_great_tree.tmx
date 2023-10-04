@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="48" height="50" tilewidth="24" tileheight="24" infinite="0" nextlayerid="19" nextobjectid="114">
+<map version="1.8" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="48" height="50" tilewidth="24" tileheight="24" infinite="0" nextlayerid="19" nextobjectid="114">
  <properties>
   <property name="bgm" value="bgm_great_tree"/>
   <property name="bgs" value="bgs_birds"/>
@@ -44,7 +44,7 @@
  </layer>
  <layer id="8" name="over6_trees" width="48" height="50">
   <data encoding="base64" compression="zlib">
-   eJztl0lOxDAQRYsOEsOuAQEHAa7CeAG4AOOS4QwMAo4BrBlWjBvGKzBuoAEBD0XZWLLUbcWxLdWTvpKV/arKURIRRVGUnL12kR6y3SZy1CmynIkcch2qifyQ/g6R6VpoSzv7uPeSHfyP8V7J8jqGcf4lA/jPROx/gHsf2cVfukVWs7yOkX9n7gfxb3SFtrRj9n8N55OE+1+QSv+VtBmvi0zUQ1u4M4/7QgX+o+wxlnCfZnGfS9hfURRFUcpE3+txcEoNZwnX8Yj7Uwn+56xxQS7Jlcd+XLP2DbkldyXu88xaL+SVvHn0f2ftD9Ignx738T0H39jmUPz3TZKpBOoz51D89y2SpRb8i3NfNeYc1rnfIJtkqwWf4tyH4p69Hxz2D9V3ky8cvh08QvfdpNk5xNJ3k2bnEFvfTVyfh1hwfR5iw5xDrOfehjmH2M+9jbK/J6vG9/ekoihKKP4AkOFhLw==
+   eJztl0lOxDAQRYsOEtC7BgQcBPoqjBeACzAuGW4BfYyGNcOKccN4BcYNNCDgocgbS5G6rTi2pXrSV7KyX1U5SiKiKIqS0+4XGSa7fSJHgyKbmcgh18mayA8ZGxBZrIW2LGYf9xGyh/8x3ltZXscUzr9kHP+liP0PcB8lLfylLrKd5XU0/525n8C/MxTashi7/zs4nyTcf0Mq/VfSZrYhMtcIbeHOKu5rFfhPs8dMwn1axn0lYX9FURRFKRN9r8fBKTWcJVzHI+5PJfifs8YFuSRXHvtxzdo35JbclbjPM2u9kFfy5tH/nbU/SId8etzH9xx843sOVWHPwfy3zpOFHuoz575q7DmY/9Z1stGDjzn3obhn7weH/UP13eYLh28Hj9B9t+l2DrH03abbOcTWdxvX5yEWXJ+H2LDnEOu5L8KeQ+znvoiyvyerxvf3pKIoSij+AFChXoE=
   </data>
  </layer>
  <layer id="9" name="over7_trees" width="48" height="50">
@@ -75,7 +75,7 @@
   <object id="63" name="sand" x="672" y="528" width="24" height="24"/>
   <object id="64" name="sand" x="576" y="456" width="48" height="24"/>
  </objectgroup>
- <objectgroup color="#aa0000" id="11" name="collision">
+ <objectgroup color="#aa0000" id="11" name="collision" visible="0">
   <object id="1" x="960" y="0" width="192" height="1200"/>
   <object id="2" x="0" y="0" width="192" height="1200"/>
   <object id="3" x="192" y="0" width="48" height="480"/>

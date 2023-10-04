@@ -17,7 +17,7 @@ enum class CalcAttributeId(override val title: String) : SuperEnum {
     BASE_HIT("Base Hit") {
         override fun getDescription(): String {
             return """
-                Defines the change-to-hit an enemy with physical weapons in combat.
+                Defines the chance-to-hit an enemy with physical weapons in combat.
                 $title is that of the weapon itself clean with no modifiers.
                 Total Hit is modified with the skill of the weapon you are currently holding.""".trimIndent()
         }
@@ -29,7 +29,7 @@ enum class CalcAttributeId(override val title: String) : SuperEnum {
                 Defines the amount of damage-to-inflict to an enemy with physical weapons in combat.
                 Damage is the counterpart of Protection.
                 An enemy's protection decreases the damage you inflict.
-                Weapon Damage is that of the weapon itself clean with no modifiers. 
+                Weapon Damage is that of the weapon itself clean with no modifiers.
                 Total Damage is modified with Strength for hand-to-hand combat,
                 or Dexterity for ranged combat.""".trimIndent()
         }

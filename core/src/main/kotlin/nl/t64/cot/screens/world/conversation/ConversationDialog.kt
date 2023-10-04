@@ -52,7 +52,11 @@ private const val SCROLL_PANE_TOP_PAD = 10f
 private const val DIALOG_WIDTH = 1200f
 private const val DIALOG_HEIGHT = 300f
 private const val PAD = 25f
-private const val ALL_PADS = PAD * 4f + Constant.FACE_SIZE + PAD + PAD * 3f
+private const val LEFT_PAD = PAD * 4f
+private const val RIGHT_PAD = PAD * 3f
+private const val ALL_PADS = LEFT_PAD + Constant.FACE_SIZE + PAD + RIGHT_PAD
+private const val NAME_LABEL_PAD_LEFT = -Constant.FACE_SIZE + 3f
+private const val NAME_LABEL_PAD_BOTTOM = -18f
 
 class ConversationDialog(conversationObserver: ConversationObserver) {
 
@@ -68,6 +72,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     private lateinit var conversationId: String
     private lateinit var faceId: String
     private lateinit var faceImage: Image
+    private lateinit var nameLabel: Label
     private lateinit var rowWithScrollPane: Cell<ScrollPane>
     private lateinit var graph: ConversationGraph
 
@@ -118,11 +123,10 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         label.setAlignment(Align.left)
         val mainTable = Table()
         mainTable.left()
-        faceImage = Utils.getFaceImage(faceId)
-        mainTable.add<Actor>(faceImage).width(Constant.FACE_SIZE).padLeft(PAD * 4f)
+        mainTable.add(createFaceTable())
 
         val textTable = Table()
-        textTable.pad(PAD, PAD, PAD, PAD * 3f)
+        textTable.pad(PAD, PAD, PAD, RIGHT_PAD)
         textTable.add<Actor>(label).width(DIALOG_WIDTH - ALL_PADS).row()
         textTable.add().height(SCROLL_PANE_TOP_PAD).row()
         textTable.add<Actor>(scrollPane).left().padLeft(PAD)
@@ -131,6 +135,15 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         mainTable.add(textTable)
         dialog.contentTable.clear()
         dialog.contentTable.add(mainTable)
+    }
+
+    private fun createFaceTable(): Table {
+        faceImage = Utils.getFaceImage(faceId)
+        nameLabel = Label(graph.npcName, LabelStyle(BitmapFont(), Color.BLACK))
+        return Table().apply {
+            add<Actor>(faceImage).width(Constant.FACE_SIZE).padLeft(LEFT_PAD)
+            add<Actor>(nameLabel).bottom().left().padLeft(NAME_LABEL_PAD_LEFT).padBottom(NAME_LABEL_PAD_BOTTOM)
+        }
     }
 
     private fun fillDialogForNote() {
@@ -423,16 +436,30 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     private fun populateConversationDialog(phraseId: String) {
         graph.currentPhraseId = phraseId
         populateFace()
+        populateName()
         populatePhrase()
         populateChoices()
     }
 
     private fun populateFace() {
-        if (graph.getCurrentFace().isNotBlank()) {
+        val phraseFace = graph.getCurrentFace()
+        if (phraseFace.isNotBlank()) {
             val mainTable = dialog.contentTable.getChild(0) as Table
-            val faceCell = mainTable.getCell(faceImage)
-            faceImage = Utils.getFaceImage(graph.getCurrentFace())
+            val faceTable = mainTable.getChild(0) as Table
+            val faceCell = faceTable.getCell(faceImage)
+            faceImage = Utils.getFaceImage(phraseFace)
             faceCell.setActor<Actor>(faceImage)
+        }
+    }
+
+    private fun populateName() {
+        val phraseName = graph.getCurrentName()
+        if (phraseName.isNotBlank()) {
+            val mainTable = dialog.contentTable.getChild(0) as Table
+            val faceTable = mainTable.getChild(0) as Table
+            val nameCell = faceTable.getCell(nameLabel)
+            nameLabel = Label(phraseName, LabelStyle(BitmapFont(), Color.BLACK))
+            nameCell.setActor<Actor>(nameLabel)
         }
     }
 

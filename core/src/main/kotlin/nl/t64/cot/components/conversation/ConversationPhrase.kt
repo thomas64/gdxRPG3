@@ -5,6 +5,7 @@ import nl.t64.cot.constants.Constant
 
 class ConversationPhrase(
     val face: String = "",
+    val name: String = "",
     val text: List<String> = listOf(""),
     val choices: List<ConversationChoice> = emptyList()
 ) {

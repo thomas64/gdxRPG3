@@ -40,10 +40,14 @@ class GameData : ProfileObserver {
     fun resetCycle() {
         clock.reset()
         battles = BattleContainer()
+        val phraseIdToKeep = conversations.getConversationById("fairy_welcome").currentPhraseId
         conversations = ConversationContainer()
         loot = LootContainer()
         spoils = SpoilsContainer()
         quests.reset()
+
+        events.getEventById("found_grace_ribbon").hasPlayed = true
+        conversations.getConversationById("fairy_welcome").currentPhraseId = phraseIdToKeep
     }
 
     override fun onNotifyCreateProfile(profileManager: ProfileManager) {

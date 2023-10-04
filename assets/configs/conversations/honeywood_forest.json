@@ -45,6 +45,7 @@
     }
   },
   "quest_mother_fairy" : {
+    "name": "Mother Fairy",
     "phrases": {
       "1" : {"text": ["Dear young Mozes, I'm so glad you finally entered our peaceful domain.", "Unfortunately it has to be in these dark times."]},
       "2" : {"face": "mozes", "text": ["Why, thank you."]},
@@ -106,6 +107,7 @@
     }
   },
   "fairy_save"         : {
+    "name": "Fairy Saver",
     "phrases": {
       "1": {"text": ["Dear young Mozes, shall we pray to the Goddess Tree so that your life will be in Her safe hands?"]},
       "2": {
@@ -118,6 +120,7 @@
     }
   },
   "fairy_heal_price-0" : {
+    "name": "Fairy Healer",
     "phrases": {
       "1": {"text": ["Wonderful dear Mozes, please lie down here on this bed of healing flowers so that your weary bones may find some rest."]},
       "2": {
@@ -140,6 +143,7 @@
     }
   },
   "fairy_school"       : {
+    "name": "Fairy School",
     "phrases": {
       "1": {
         "text": ["Young Mozes, would you like to learn a spell?"], "choices": [
@@ -158,6 +162,7 @@
     }
   },
   "fairy_academy"      : {
+    "name": "Fairy Academy",
     "phrases": {
       "1": {
         "text": ["Young Mozes, would you like to train a skill?"], "choices": [
@@ -168,6 +173,7 @@
     }
   },
   "fairy_shop"         : {
+    "name": "Fairy Shop",
     "phrases": {
       "1": {
         "text": ["Young Mozes, would you like to see my wares?"], "choices": [

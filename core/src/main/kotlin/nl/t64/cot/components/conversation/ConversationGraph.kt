@@ -1,10 +1,14 @@
 package nl.t64.cot.components.conversation
 
+import com.fasterxml.jackson.annotation.JsonProperty
+
 
 private const val DEFAULT_STARTING_PHRASE_ID = "1"
 
 data class ConversationGraph(
     private val id: String = "",
+    @JsonProperty("name")
+    val npcName: String = "",
     val phrases: Map<String, ConversationPhrase> = emptyMap()
 ) {
     var currentPhraseId: String = DEFAULT_STARTING_PHRASE_ID
@@ -15,6 +19,10 @@ data class ConversationGraph(
 
     fun getCurrentFace(): String {
         return phrases[currentPhraseId]!!.face
+    }
+
+    fun getCurrentName(): String {
+        return phrases[currentPhraseId]!!.name
     }
 
     fun getCurrentPhrase(): List<String> {
