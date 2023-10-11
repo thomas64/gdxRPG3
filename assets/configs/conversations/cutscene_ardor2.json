@@ -8,10 +8,10 @@
   },
   "ardor_turns_around"    : {
     "phrases": {
-      "1": {"face": "ardor", "text": ["You're back? I don't even know who you are."]},
+      "1": {"face": "ardor", "text": ["What do you mean, you're back? I don't even know who you are."]},
       "2": {"face": "mozes", "text": ["I'm here for my sister! Now let her go!"]},
       "3": {"face": "ardor", "text": ["Sister? Hmmmm..."]},
-      "4": {"face": "ardor", "text": [". . ."]},
+      "4": {"face": "ardor", "text": ["{SPEED=0.2} . . . . ."]},
       "5": {"face": "ardor", "text": ["Guards! Kill him!"], "choices": [{"command": "EXIT"}]}
     }
   }

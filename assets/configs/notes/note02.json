@@ -7,7 +7,7 @@
   },
   "note_well" : {
     "phrases": {
-      "1": {"text": ["What a deep water well.", "Better not fall in."], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["What a deep water well. Better not fall in."], "choices": [{"command": "EXIT"}]}
     }
   },
   "note_statue_hero_s_hometown_hero_s_chamber": {

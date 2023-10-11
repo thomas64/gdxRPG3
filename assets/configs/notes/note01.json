@@ -11,17 +11,17 @@
   },
   "note_bed01"         : {
     "phrases": {
-      "1": {"text": ["It's someone else's bed.", "What could possibly be your idea?"], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["This is clearly someone else's bed. What are you even considering?"], "choices": [{"command": "EXIT"}]}
     }
   },
   "note_bed02"         : {
     "phrases": {
-      "1": {"text": ["If you need to rest, talk to the innkeeper."], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["If you require rest, talk to the innkeeper."], "choices": [{"command": "EXIT"}]}
     }
   },
   "note_bed03"         : {
     "phrases": {
-      "1": {"text": ["It looks fairly comfortable, but now is not the time."], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["It appears quite comfortable, but now is not the time."], "choices": [{"command": "EXIT"}]}
     }
   },
   "note_apples"        : {
@@ -41,7 +41,7 @@
   },
   "note_closet"        : {
     "phrases": {
-      "1": {"text": ["How would you like it when random people went opening your closet?"], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["How would you like it if random people opened your closet?"], "choices": [{"command": "EXIT"}]}
     }
   },
   "note_shelves"       : {
@@ -51,12 +51,12 @@
   },
   "note_fireplace"     : {
     "phrases": {
-      "1": {"text": ["The fire is warm and gentile."], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["The fire feels warm and inviting."], "choices": [{"command": "EXIT"}]}
     }
   },
   "note_kitchen"       : {
     "phrases": {
-      "1": {"text": ["Do you want to prepare a meal or something?"], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["Are you planning to prepare a meal or something?"], "choices": [{"command": "EXIT"}]}
     }
   },
   "note_holy_symbol"   : {

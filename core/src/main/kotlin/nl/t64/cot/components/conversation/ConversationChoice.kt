@@ -24,7 +24,7 @@ class ConversationChoice(
     }
 
     override fun toString(): String {
-        return if (isDefault()) text else "$DEFAULT_ANSWER_TEXT $text"
+        return text
     }
 
     fun isVisible(): Boolean {

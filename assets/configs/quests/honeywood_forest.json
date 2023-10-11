@@ -10,21 +10,21 @@
         "type"         : "FIND_ITEM",
         "target"       : {"grace_ribbon": 1},
         "isOptional"   : true,
-        "linkedWith": ["2"]
+        "linkedWith"   : ["2"]
       },
       "2": {
         "taskPhrase"   : "Search for where Grace went",
         "updatedPhrase": "Find a hidden cave",
         "type"         : "DISCOVER",
         "isHidden"     : true,
-        "linkedWith": ["3"]
+        "linkedWith"   : ["3"]
       },
       "3": {
         "taskPhrase"   : "Find out if Grace is in the cave",
         "updatedPhrase": "Exit the cave past the guards",
         "type"         : "DISCOVER",
         "isHidden"     : true,
-        "linkedWith": ["4"]
+        "linkedWith"   : ["4"]
       },
       "4": {
         "taskPhrase"   : "Rescue Grace from Ardor",
@@ -33,7 +33,7 @@
         "isHidden"     : true
       },
       "5": {
-        "taskPhrase": "Something went wrong and everything burned, including Ardor",
+        "taskPhrase": "Something went very wrong and everything burned, including Ardor",
         "type"      : "DISCOVER",
         "isHidden"  : true
       }
@@ -42,7 +42,7 @@
   "quest_orc_guards"      : {
     "title"   : "The guards of Ardor",
     "entityId": "orc_sergeant",
-    "summary" : "Grace is said to be where Ardor is. But two intimidating orc guards won't let you get to Ardor.",
+    "summary" : "Two imposing orc guards are stationed at the cave exit leading to Ardor's domain. They refuse to permit your passage.",
     "tasks"   : {
       "1": {
         "taskPhrase": "Find a magic scroll for manipulating orcs?",
@@ -82,7 +82,7 @@
   "quest_mother_fairy"    : {
     "title"   : "It's fairy secret",
     "entityId": "fairy1",
-    "summary" : "The mother of fairies said: When you go back inside the cave, go all the way south, then east and search the north wall. There is a hidden door in the light.",
+    "summary" : "The Mother of Fairies said: When you return inside the cave, head all the way south, then east, and search the north wall. There's a hidden door in the light.",
     "tasks"   : {
       "1": {
         "taskPhrase": "Search near the described area",

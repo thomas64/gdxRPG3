@@ -63,7 +63,7 @@ object ConditionConverter {
         return when {
             conditionId.contains("_r_") -> listOf(questGraph.resetState)
             conditionId.contains("_c_") -> listOf(questGraph.currentState)
-            conditionId.contains("_rc") -> listOf(questGraph.resetState, questGraph.currentState)
+            conditionId.contains("_rc_") -> listOf(questGraph.resetState, questGraph.currentState)
             else -> throw IllegalArgumentException("No defined state found.")
         }
     }

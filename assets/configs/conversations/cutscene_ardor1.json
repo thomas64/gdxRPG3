@@ -1,14 +1,14 @@
 {
   "mozes_finds_grace"              : {
     "phrases": {
-      "1" : {"face": "mozes", "text": ["(There is Grace! I found her!)"]},
+      "1" : {"face": "mozes", "text": ["(There's Grace! I've found her!)"]},
       "2" : {"face": "mozes", "text": [". . ."]},
-      "3" : {"face": "mozes", "text": ["(Who is that guy? He is no orc.)"]},
-      "4" : {"face": "mozes", "text": ["(What is happening here?)"]},
+      "3" : {"face": "mozes", "text": ["(Who is that guy? He's no orc.)"]},
+      "4" : {"face": "mozes", "text": ["(What's happening here?)"]},
       "5" : {"face": "mozes", "text": ["(Why are they holding her?)"]},
       "6" : {"face": "mozes", "text": [". . ."]},
-      "7" : {"face": "ardor", "text": ["Oh great Lord Ulrog, God of Power, it is time!"]},
-      "8" : {"face": "ardor", "text": ["The Royal Sacrifice is ready!"]},
+      "7" : {"face": "ardor", "text": ["Oh great Lord Ulrog, God of Power, the time has come!"]},
+      "8" : {"face": "ardor", "text": ["The Royal Sacrifice is prepared!"]},
       "9" : {"face": "girl01", "text": ["Let me go!"]},
       "10": {"face": "ardor", "text": ["Guards, bring forth the princess."]},
       "11": {"face": "mozes", "text": ["(Princess? What is he talking about?)"], "choices": [{"command": "EXIT"}]}
@@ -22,12 +22,12 @@
   },
   "ardor_starts_to_pray"           : {
     "phrases": {
-      "1": {"face": "ardor", "text": ["Mighty and powerful Ulrog!"]},
-      "2": {"face": "ardor", "text": ["Please hear my prayer!"]},
-      "3": {"face": "ardor", "text": ["Everything is prepared!"]},
-      "4": {"face": "ardor", "text": ["My quest for ultimate power is finally fulfilled!"]},
-      "5": {"face": "ardor", "text": ["With the blood of this princess, I will rule all of Ardor!"]},
-      "6": {"face": "ardor", "text": ["Now slay her and take her life!"]},
+      "1": {"text": ["Mighty and powerful Ulrog!"]},
+      "2": {"text": ["Hear my prayer!"]},
+      "3": {"text": ["Everything is prepared!"]},
+      "4": {"text": ["My quest for ultimate power is finally fulfilled!"]},
+      "5": {"text": ["With the blood of this princess, I shall rule over all of Ardor!"]},
+      "6": {"text": ["Now, slay her and take her life!"]},
       "7": {"face": "mozes", "text": ["No!!"], "choices": [{"command": "EXIT"}]}
     }
   },
@@ -41,7 +41,7 @@
   "ardor_commands_to_kill_mozes"   : {
     "phrases": {
       "1": {"face": "ardor", "text": ["Sister? Hmmmm..."]},
-      "2": {"face": "ardor", "text": [". . ."]},
+      "2": {"face": "ardor", "text": ["{SPEED=0.2} . . . . ."]},
       "3": {"face": "ardor", "text": ["Guards! Kill him!"]},
       "4": {"face": "mozes", "text": ["? ?"], "choices": [{"command": "EXIT"}]}
     }
@@ -49,35 +49,34 @@
   "mozes_last_words"               : {
     "phrases": {
       "1": {"face": "mozes", "text": ["Ugh..."]},
-      "2": {"face": "mozes", "text": ["G... G..."]},
-      "3": {"face": "mozes", "text": ["Grace..."]},
-      "4": {"face": "mozes", "text": ["Leave her alone..."]},
-      "5": {"face": "ardor", "text": ["The insolence."]},
-      "6": {"face": "ardor", "text": ["Now watch her die!"], "choices": [{"command": "EXIT"}]}
+      "2": {"face": "mozes", "text": ["{SPEED=0.2}G... G... {SPEED=1.0}Grace..."]},
+      "3": {"face": "mozes", "text": ["Leave her alone..."]},
+      "4": {"face": "ardor", "text": ["The insolence."]},
+      "5": {"face": "ardor", "text": ["Now watch her die!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "mozes_wins_battle_from_generals": {
     "phrases": {
       "1": {"text": ["What a nuisance."]},
-      "2": {"text": ["I'll handle you myself then."], "choices": [{"command": "EXIT"}]}
+      "2": {"text": ["I'll deal with you myself."], "choices": [{"command": "EXIT"}]}
     }
   },
   "ardor_continues_to_pray"        : {
     "phrases": {
       "1": {"text": ["Mighty and powerful Ulrog!"]},
-      "2": {"text": ["Please hear my prayer!"]},
+      "2": {"text": ["Hear my prayer!"]},
       "3": {"text": ["Everything is prepared!"]},
       "4": {"text": ["My quest for ultimate power is finally fulfilled!"]},
-      "5": {"text": ["With the blood of this princess, I will rule all of Ardor!"]},
-      "6": {"text": ["Now slay her and take her life!"]},
+      "5": {"text": ["With the blood of this princess, I shall rule over all of Ardor!"]},
+      "6": {"text": ["Now, slay her and take her life!"]},
       "7": {"face": "girl01", "text": ["Aaaaaah!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "grace_dies"                     : {
     "phrases": {
       "1": {"face": "mozes", "text": ["Nooooooo!!"]},
-      "2": {"face": "ardor", "text": ["Finally! Ultimate power is mine!"]},
-      "3": {"face": "ardor", "text": [". . ."]},
+      "2": {"face": "ardor", "text": ["At last! Ultimate power is mine!"]},
+      "3": {"face": "ardor", "text": ["{SPEED=0.2} . . . . ."]},
       "4": {"face": "ardor", "text": ["Wait, something's wrong!"], "choices": [{"command": "EXIT"}]}
     }
   },
@@ -94,10 +93,10 @@
   },
   "mozes_lies_dead"                : {
     "phrases": {
-      "1": {"text": [". . ."], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["{SPEED=0.2} . . . . ."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "mozes_wakes_up": {
+  "mozes_wakes_up"                 : {
     "phrases": {
       "1": {"text": ["What the..."]},
       "2": {"text": ["What just happened?"], "choices": [{"command": "EXIT"}]}
@@ -106,9 +105,9 @@
   "what_happened"                  : {
     "phrases": {
       "1": {"text": ["Did I just die?"]},
-      "2": {"text": ["Who was that voice?"]},
+      "2": {"text": ["Whose voice was that?"]},
       "3": {"text": ["\"You have been given another chance...\" ??"]},
-      "4": {"text": ["What does that mean?"], "choices": [{"command": "EXIT"}]}
+      "4": {"text": ["What does that even mean?"], "choices": [{"command": "EXIT"}]}
     }
   }
 }

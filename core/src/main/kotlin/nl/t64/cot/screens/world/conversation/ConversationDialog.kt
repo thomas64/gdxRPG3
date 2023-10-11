@@ -390,10 +390,6 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
 
     private fun continueConversation(nextId: String) {
         playSe(AudioEvent.SE_CONVERSATION_NEXT)
-        continueConversationWithoutSound(nextId)
-    }
-
-    private fun continueConversationWithoutSound(nextId: String) {
         populateConversationDialog(nextId)
     }
 
@@ -422,8 +418,8 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun hideWithFade() {
-        val amountOfLines = label.text.lines().count()
-        label.setText("" + System.lineSeparator().repeat(amountOfLines - 1))
+        label.setText("")
+        answers.clearItems()
         scrollPane.clearListeners()
         dialog.hide()
     }

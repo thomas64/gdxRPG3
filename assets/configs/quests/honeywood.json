@@ -2,7 +2,7 @@
   "quest_royal_sacrifice"      : {
     "title"   : "Royal sacrifice?",
     "entityId": "ardor",
-    "summary" : "You witnessed Grace becoming sacrificed by the wizard Ardor, to gain ultimate power from Ulrog, the God of Power. Something seemed to go wrong and everything got engulfed in flames, including Ardor and you. You heard a voice: 'You have been given another chance'. And after that you woke up in your bed like nothing ever happened.",
+    "summary" : "You witnessed Grace being sacrificed by the wizard Ardor in an attempt to gain ultimate power from Ulrog, the God of Power. However, something seemed to go wrong, and everything was consumed by flames, including Ardor and yourself. Bathed in light, you heard a voice saying, 'You have been given another chance.' Afterward, you woke up in your bed as if nothing had happened.",
     "tasks"   : {
       "1": {
         "taskPhrase": "Receive the Crystal of Time to reset time to 12 hours before the disaster.",
@@ -25,7 +25,7 @@
   "quest_god_of_power"         : {
     "title"     : "The God of Power",
     "entityId"  : "ylarus",
-    "summary"   : "For some reason Adan goes up in flames everytime Grace become sacrificed by the wizard Ardor. Ylarus, the God of Time doesn't know why, so he sends you on a quest to finds answers.",
+    "summary"   : "Adan inexplicably bursts into flames every time Grace is sacrificed by the wizard Ardor. Ylarus, the God of Time, is puzzled by this phenomenon and sends you on a quest to uncover the answers.",
     "linkedWith": ["quest_honeywood_elder"],
     "tasks"     : {
       "1": {
@@ -41,7 +41,7 @@
   "quest_helping_horse"        : {
     "title"     : "A helping horse",
     "entityId"  : "man02",
-    "summary"   : "The same tree on the path to Honeywood Forest has fallen again, but is now blocking the road in FRONT of you. Lennor needs your help to get a strong horse and some tow ropes if you want to speed up the process of clearing the road.",
+    "summary"   : "The same tree on the path to Honeywood Forest has fallen once more, but this time it blocks the road ahead instead of behind of you. Lennor seeks your assistance in acquiring a strong horse and some tow ropes to speed up the road-clearing process.",
     "linkedWith": ["quest_get_horse", "quest_get_tow_rope", "quest_get_medicine", "quest_get_horseshoes"],
     "tasks"     : {
       "1" : {
@@ -94,7 +94,7 @@
         "isOptional": true
       },
       "15": {
-        "taskPhrase"    : "            Deliver Theodore's lost ring to mrs. Johanna.",
+        "taskPhrase"    : "            Deliver Theodore's lost ring to Mrs. Johanna.",
         "type"          : "DELIVER_ITEM",
         "target"        : {"basic_silver_ring": 1},
         "conversationId": "mrs_johanna"
@@ -193,7 +193,7 @@
   "quest_honeywood_inn_price-1": {
     "title"   : "Pest removal",
     "entityId": "woman02",
-    "summary" : "The innkeeper of Honeywood has a problem with some unwanted visitors upstairs. Her guests don't want to stay at her inn as long as these bats are roaming free. She would very much appreciate it if you could get rid of them.",
+    "summary" : "The innkeeper of Honeywood is facing an issue with some unwelcome visitors upstairs. Her guests are reluctant to stay at the inn while these bats are roaming free. She would greatly appreciate your assistance in removing them.",
     "tasks"   : {
       "1": {
         "taskPhrase": "Remove all the bats upstairs.",

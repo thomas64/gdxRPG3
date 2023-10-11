@@ -16,8 +16,6 @@ object ConditionDatabase {
 
         "level10"                to { hasAverageLevelOf(               10) },
 
-        "i_!know_about_grace"    to { !doesKnowAboutGrace },
-        "i_know_about_grace"     to { doesKnowAboutGrace },
         "!been_in_fairy_town"    to { !hasBeenInFairyTown },
         "been_in_fairy_town"     to { hasBeenInFairyTown },
         "defeated_orc_guards"    to { hasDefeatedOrcGuards },
@@ -49,9 +47,6 @@ object ConditionDatabase {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private val doesKnowAboutGrace
-        get() = "quest_orc_guards" hasOneOfBothStatesEqualOrHigherThan QuestState.ACCEPTED
-                || "quest_mother_fairy" hasOneOfBothStatesEqualOrHigherThan QuestState.ACCEPTED
     private val hasBeenInFairyTown get() = hasEventPlayed("find_great_tree")
     private val hasDefeatedOrcGuards get() = isBattleWon("quest_orc_guards")
     private val hasStartingSpells get() = hasAnySpell("mozes")
@@ -89,13 +84,15 @@ object ConditionDatabase {
     private fun hasAmountOfPartyMembers(amount: Int): Boolean =
         gameData.party.size == amount
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private infix fun String.hasOneOfBothStatesEqualOrHigherThan(questState: QuestState): Boolean =
+        gameData.quests.getQuestById(this).isOneOfBothStatesEqualOrHigherThan(questState)
+
+    private infix fun String.hasResetState(questState: QuestState): Boolean =
+        gameData.quests.getQuestById(this).resetState == questState
+
+    private infix fun String.hasCurrentPhraseId(currentPhraseId: String): Boolean =
+        gameData.conversations.getConversationById(this).currentPhraseId == currentPhraseId
+
 }
-
-private infix fun String.hasOneOfBothStatesEqualOrHigherThan(questState: QuestState): Boolean =
-    gameData.quests.getQuestById(this).isOneOfBothStatesEqualOrHigherThan(questState)
-
-private infix fun String.hasResetState(questState: QuestState): Boolean =
-    gameData.quests.getQuestById(this).resetState == questState
-
-private infix fun String.hasCurrentPhraseId(currentPhraseId: String): Boolean =
-    gameData.conversations.getConversationById(this).currentPhraseId == currentPhraseId

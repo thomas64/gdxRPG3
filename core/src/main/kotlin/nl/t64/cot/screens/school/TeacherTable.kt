@@ -12,13 +12,13 @@ private const val TABLE_WIDTH = 390f
 private const val TABLE_HEIGHT = 501f
 private const val PADDING = 20f
 private val TEXT = """
-    Please be welcome to my school.
-    
-    On the left you see which spells I can teach you. On the right are the spells you already know.
-    
-    The numbers on the left represent to which rank I can teach you. The numbers on the right represent your current ranks.
-    
-    To learn a spell will cost you XP and gold.""".trimIndent()
+    Welcome to my school!
+
+    On the left, you'll find the spells I can teach you, and on the right, the spells you've already acquired.
+
+    The numbers on the left indicate the ranks at which I can instruct you, while those on the right represent your current proficiency levels.
+
+    Learning a spell requires both XP and gold.""".trimIndent()
 
 internal class TeacherTable(npcId: String) : BaseTable(PersonalityTooltip()) {
 

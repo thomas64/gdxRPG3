@@ -2,102 +2,99 @@
   "guide_event_action"               : {
     "type": "messagebox",
     "text": [
-      "Press %action% for an action.",
-      "To talk with a person or to open a chest or door."
+      "Press the %action% to interact.",
+      "Use it to interact with characters, chests, or doors."
     ]
   },
   "guide_event_inventory"            : {
     "type"     : "messagebox",
     "condition": ["_n_3_==_item_healing_potion"],
     "text"     : [
-      "Press %inventory% to see your inventory,",
-      "along with your equipment, stats, skills and spells."
+      "Press the %inventory% to access your inventory,",
+      "where you can view your equipment, stats, skills, and spells."
     ]
   },
   "guide_event_quest"                : {
     "type": "messagebox",
     "text": [
-      "Press %logbook% to see your logbook.",
-      "Here you can see everything quest related."
+      "Press the %logbook% to access your logbook.",
+      "Here, you can find all quest-related information."
     ]
   },
   "guide_event_enemy"                : {
     "type": "messagebox",
     "text": [
-      "Coming near an enemy will start a battle.",
-      "By winning battles, you'll earn XP,",
-      "which you can use to improve your character."
+      "Approaching an enemy triggers a battle.",
+      "Victory in battles rewards you with XP,",
+      "which can be used to improve your character."
     ]
   },
   "guide_event_slow"                 : {
     "type": "messagebox",
     "text": [
-      "Keep %slow% pressed to move stealthily.",
-      "Enemies will detect you less easily.",
-      "This way you can avoid battles.",
-      "But remember, battles are the main source of XP."
+      "Keep the %slow% pressed to move stealthily.",
+      "Enemies will have a harder time detecting you,",
+      "enabling you to avoid battles if necessary."
     ]
   },
   "guide_event_minimap"              : {
     "type": "messagebox",
     "text": [
-      "Press %minimap% in large areas to see an overview of that area.",
-      "This way it's hard to get lost, like in dark caves.",
-      "(Small areas don't have the option to see it's overview.)"
+      "Press the %minimap% in large areas to view an overview of that area.",
+      "This helps prevent getting lost, especially in dark caves.",
+      "(Note: Small areas do not offer this overview option.)"
     ]
   },
   "guide_event_conversation"         : {
     "type": "messagebox",
     "text": [
-      "When in conversation with npc's, you get to choose how you want to respond.",
-      "Some responses are blocked by specific conditions.",
-      "These conditions are shown in front of the response.",
-      "And some other responses are hidden until you meet that specific condition.",
+      "During conversations with other characters,",
+      "you have the opportunity to choose your responses.",
       "",
-      "Please do try to converse with these orcs."
+      "Certain responses are restricted by specific conditions.",
+      "These conditions are indicated by [...] before the response."
     ]
   },
   "guide_event_equipment"            : {
     "type"     : "messagebox",
     "condition": ["_n_1_==_item_basic_light_helmet"],
     "text"     : [
-      "Press %inventory% to see your inventory.",
-      "Here you can equip items that will give you more protection in battles like this item.",
-      "You can also switch to different weapons, if you have them in your inventory."
+      "Press the %inventory% to access your inventory.",
+      "Here, you can equip various items such as armor and weapons."
     ]
   },
   "guide_event_saving"               : {
     "type"     : "messagebox",
     "condition": ["_c_!=_u_q_quest_mother_fairy"],
     "text"     : [
-      "This game has *NO* autosave feature.",
+      "This game does NOT autosave regularly.",
       "So make sure to save your game when necessary.",
-      "In this case the most upper right fairy can help you out with that."
+      "In this case, the fairy in the upper right corner can assist you with that."
     ]
   },
   "guide_event_fast"                 : {
     "type"     : "messagebox",
     "condition": ["been_in_fairy_town"],
     "text"     : [
-      "Keep %fast% pressed to run.",
-      "You'll be faster, but enemies will detect you much sooner.",
-      "(As opposed to stealth movement %slow% where enemies wil detect you less easily.)"
+      "Keep the %fast% pressed to run.",
+      "You'll move faster, but enemies will detect you more easily."
     ]
   },
   "guide_event_quest_reminder"       : {
     "type"     : "messagebox",
     "condition": ["been_in_fairy_town"],
     "text"     : [
-      "Remember, press %logbook% to see your logbook.",
-      "Here you can see everything quest related."
+      "Remember to press the %minimap% to view the area overview,",
+      "and the %logbook% to access your logbook.",
+      "Here, you can find all quest-related information."
     ]
   },
   "guide_event_storage"              : {
     "type": "messagebox",
     "text": [
       "The closet behind you can be used for storage.",
-      "When your inventory becomes full, put your items in your closet.",
-      "They will be kept there and they will be safe."
+      "When your inventory becomes full, store items in your closet.",
+      "They will be safe and kept there until you need them."
     ]
   },
   "guide_event_party_member"         : {
@@ -105,15 +102,14 @@
     "condition": ["_c_==_f_q_quest_honeywood_elder"],
     "text"     : [
       "Luana has joined your party.",
-      "Press %inventory% to see her equipment, stats and skills."
+      "Press the %inventory% to view her equipment, stats and skills."
     ]
   },
   "guide_event_conversation_reminder": {
     "type": "messagebox",
     "text": [
-      "People often have different things to say when you meet different conditions.",
-      "So don't think you already know what people will say, because they've said something earlier.",
-      "Remember this well!"
+      "People may share different information at different times.",
+      "Keep this in mind!"
     ]
   }
 }

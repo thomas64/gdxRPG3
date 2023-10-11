@@ -12,13 +12,13 @@ private const val TABLE_WIDTH = 390f
 private const val TABLE_HEIGHT = 501f
 private const val PADDING = 20f
 private val TEXT = """
-    Please be welcome to my academy.
-    
-    On the left you see in which skills I can train you. On the right are the skills you already know.
-    
-    The numbers on the left represent to which rank I can train you. The numbers on the right represent your current ranks.
-    
-    To train a skill will cost you XP and gold.""".trimIndent()
+    Welcome to my academy!
+
+    On the left, you'll find the skills I can train you in, and on the right, the skills you've already acquired.
+
+    The numbers on the left indicate the ranks at which I can instruct you, while those on the right represent your current proficiency levels.
+
+    Training a skill requires both XP and gold.""".trimIndent()
 
 internal class TrainerTable(npcId: String) : BaseTable(PersonalityTooltip()) {
 

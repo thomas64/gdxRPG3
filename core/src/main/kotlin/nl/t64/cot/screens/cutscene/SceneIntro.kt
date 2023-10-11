@@ -401,7 +401,7 @@ class SceneIntro : CutsceneScreen() {
     }
 
     override fun exitScreen() {
-        endCutsceneAndOpenMap("honeywood_forest_path", "scene_intro")
+        endCutsceneAndOpenMap(Constant.STARTING_MAP, "scene_intro")
     }
 
 }

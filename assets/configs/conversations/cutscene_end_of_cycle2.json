@@ -3,9 +3,9 @@
     "phrases": {
       "1": {"text": ["Oh no! That sound!"]},
       "2": {"text": ["I'm too late again!"]},
-      "3": {"text": ["I'm sorry Grace!"]},
-      "4": {"text": ["I'm sorry I'm too late..."]},
-      "5": {"text": ["again..."]},
+      "3": {"text": ["I'm so sorry, Grace!"]},
+      "4": {"text": ["I'm sorry I didn't make it in time..."]},
+      "5": {"text": ["...again..."]},
       "6": {"text": [". . ."], "choices": [{"command": "EXIT"}]}
     }
   },
@@ -13,19 +13,17 @@
     "phrases": {
       "1" : {"text": ["Human boy, listen to me very carefully!"]},
       "2" : {"text": ["I am Ylarus, God of Time."]},
-      "3" : {"text": ["Adan is destroyed again."]},
-      "4" : {"text": ["Everytime the wizard sacrifices the human girl you call Grace, Adan starts burning, ending all life. Including the wizard his own and yours."]},
-      "5" : {"text": ["Human boy, you must stop the wizard!"]},
-      "6" : {"text": ["For Adan obviously, but also because of the connection you have with the human girl."]},
-      "7" : {"text": ["For that alone I have seen you will go the extra mile."]},
-      "8" : {"text": ["I have brought you back in time before, but my powers are weakening."]},
-      "9" : {"text": ["As of now I cannot do this much more."]},
-      "10": {"text": ["That is why I put a part of my power in this crystal."]},
-      "11": {"text": ["With this crystal you can reset time to 12 hours before the disaster."]},
-      "12": {"text": ["Human boy, it is now yours to use."]},
-      "13": {"text": ["As of the disaster itself, I do not have knowledge of the cause."]},
-      "14": {"text": ["You must travel to the city of Lastdenn, for there you may find an answer to this cause."]},
-      "15": {"text": ["The power of time is in your hands!"], "choices": [{"command": "EXIT"}]}
+      "3" : {"text": ["Adan has been destroyed once again."]},
+      "4" : {"text": ["Every time the wizard sacrifices the human girl you call Grace, Adan starts burning, ending all life, including you and the wizard himself."]},
+      "5" : {"text": ["Human boy, you must stop this wizard!"]},
+      "6" : {"text": ["I chose you, because of the connection you have with the human girl."]},
+      "7" : {"text": ["I have brought you back in time before, but my powers are weakening."]},
+      "8" : {"text": ["As of now, I cannot do this again."]},
+      "9": {"text": ["That is why I have placed a part of my power in this crystal."]},
+      "10": {"text": ["With this crystal, you can turn back time to 12 hours before the disaster."]},
+      "11": {"text": ["As for the disaster itself, I do not have knowledge of the cause."]},
+      "12": {"text": ["You must travel to the city of Lastdenn, for there you may find an answer to this cause."]},
+      "13": {"text": ["The power of time is in your hands. Use the crystal now!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "mozes_wakes_up_again"   : {
@@ -38,10 +36,10 @@
     "phrases": {
       "1": {"text": ["Ylarus, the God of Time..."]},
       "2": {"text": [". . ."]},
-      "3": {"text": ["And I've only got 12 hours before the end of the world.", "So that is tonight at half past seven."]},
-      "4": {"text": ["I must use this crystal I got from Ylarus before that moment, because there will be no devine intervention anymore."]},
+      "3": {"text": ["And I've only got 12 hours before the end of the world, which means tonight at half past seven."]},
+      "4": {"text": ["I must use this crystal I received from Ylarus before that moment arrives, as it seems there will be no divine intervention anymore."]},
       "5": {"text": [". . ."]},
-      "6": {"text": ["Alright, on to Lastdenn then, I guess."], "choices": [{"command": "EXIT"}]}
+      "6": {"text": ["Alright, I suppose it's off to Lastdenn then."], "choices": [{"command": "EXIT"}]}
     }
   }
 }
