@@ -13,8 +13,9 @@ import nl.t64.cot.constants.Constant
 fun main() {
 
     // This handles macOS support and helps on Windows.
-    if (StartupHelper.startNewJvmIfRequired())
+    if (StartupHelper.startNewJvmIfRequired()) {
         return
+    }
 
     Lwjgl3Application(
         CrystalOfTime(),

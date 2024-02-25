@@ -8,8 +8,13 @@ buildscript {
     if (JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_14)) {
       classpath "org.beryx:badass-runtime-plugin:1.13.0"
     }
+    if (enableGraalNative == 'true') {
+      classpath "org.graalvm.buildtools.native:org.graalvm.buildtools.native.gradle.plugin:0.9.28"
+    }
   }
 }
+apply plugin: 'org.jetbrains.kotlin.jvm'
+
 if (JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_14)) {
   apply plugin: 'org.beryx.runtime'
 } else {
@@ -18,8 +23,10 @@ if (JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_14)) {
 
 sourceSets.main.resources.srcDirs += [rootProject.file('assets').path]
 mainClassName = 'nl.t64.cot.lwjgl3.Lwjgl3Launcher'
+application.setMainClass(mainClassName)
 eclipse.project.name = appName + '-lwjgl3'
-sourceCompatibility = 11
+java.sourceCompatibility = 11
+java.targetCompatibility = 11
 
 dependencies {
   implementation "com.badlogicgames.gdx-controllers:gdx-controllers-desktop:$gdxControllersVersion"
@@ -29,6 +36,7 @@ dependencies {
   implementation project(':core')
 }
 
+def jarName = "${appName}-${version}.jar"
 def os = System.properties['os.name'].toLowerCase()
 
 run {
@@ -36,16 +44,15 @@ run {
   setIgnoreExitValue(true)
 
   if (os.contains('mac')) {
-    // Required to run LWJGL3 Java apps on macOS
     jvmArgs += "-XstartOnFirstThread"
   }
 }
 
 jar {
   // sets the name of the .jar file this produces to the name of the game or app.
-  archiveBaseName.set(appName)
+  archiveFileName.set(jarName)
   // using 'lib' instead of the default 'libs' appears to be needed by jpackageimage.
-  destinationDirectory = file("$project.buildDir/lib")
+  destinationDirectory = file("${project.layout.buildDirectory.asFile.get().absolutePath}/lib")
   // the duplicatesStrategy matters starting in Gradle 7.0; this setting works.
   duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
   dependsOn configurations.runtimeClasspath
@@ -71,24 +78,31 @@ if (JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_14)) {
     // you could very easily need more modules than this one.
     // use the lwjgl3:suggestModules task to see which modules may be needed.
     modules.set(['jdk.unsupported'])
-    distDir.set(file(buildDir))
+    distDir.set(file(project.layout.buildDirectory))
     jpackage {
       imageName = appName
       // you can set this to false if you want to build an installer, or keep it as true to build just an app.
       skipInstaller = true
       // this may need to be set to a different path if your JAVA_HOME points to a low JDK version.
       jpackageHome = javaHome.getOrElse("")
-      mainJar = jar.archiveFileName.get()
+      mainJar = jarName
       if (os.contains('win')) {
         imageOptions = ["--icon", "icons/logo.ico"]
       } else if (os.contains('nix') || os.contains('nux') || os.contains('bsd')) {
         imageOptions = ["--icon", "icons/logo.png"]
       } else if (os.contains('mac')) {
-        imageOptions = ["--icon", "icons/logo.icns", "--java-options", "\"-XstartOnFirstThread\""]
+        // If you are making a jpackage image on macOS, the below line should work thanks to StartupHelper.
+        imageOptions = ["--icon", "icons/logo.icns"]
+        // If the above line doesn't produce a runnable executable, you can try using the below line instead of the above one.
+        // imageOptions = ["--icon", "icons/logo.icns", "--java-options", "\"-XstartOnFirstThread\""]
       }
     }
   }
 }
 
 // Equivalent to the jar task; here for compatibility with gdx-setup.
-tasks.register('dist') { dependsOn['jar'] }
+tasks.register('dist') { dependsOn 'jar' }
+
+if (enableGraalNative == 'true') {
+  apply from: file("nativeimage.gradle")
+}
