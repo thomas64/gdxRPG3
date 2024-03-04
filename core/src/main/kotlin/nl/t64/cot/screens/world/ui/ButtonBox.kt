@@ -14,7 +14,7 @@ import nl.t64.cot.Utils
 private const val TABLE_POSITION = 30f
 private const val TABLE_WIDTH = 90f
 private const val SECOND_COLUMN_WIDTH = 50f
-private const val GAMEPAD_EXTRA_MARGIN = 20f
+private const val GAMEPAD_EXTRA_MARGIN = 30f
 private const val PAD_LEFT = 25f
 private const val PAD = 15f
 
@@ -43,9 +43,9 @@ internal class ButtonBox {
             table.add("Map")
             table.add("[ Select ]").row()
             table.add("Party")
-            table.add("[ R3 ]").row()
+            table.add("[ R-Stick ]").row()
             table.add("Hints")
-            table.add("[ H ]")
+            table.add("[ L-Stick ]")
             extraMargin = GAMEPAD_EXTRA_MARGIN
         } else {
             table.add("Action")

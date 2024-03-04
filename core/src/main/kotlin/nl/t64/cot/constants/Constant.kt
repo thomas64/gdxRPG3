@@ -64,7 +64,5 @@ object Constant {
     const val KEYCODE_BOTTOM = 1007
     const val KEYCODE_L3 = 1008
     const val KEYCODE_R3 = 1009
-    const val KEYCODE_R3_L = 1010
-    const val KEYCODE_R3_R = 1011
 
 }

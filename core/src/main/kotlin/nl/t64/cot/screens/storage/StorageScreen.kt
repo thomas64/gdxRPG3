@@ -14,6 +14,7 @@ import nl.t64.cot.screens.inventory.InventoryUtils
 class StorageScreen : ParchmentScreen() {
 
     private lateinit var storageUI: StorageUI
+    private lateinit var listener: StorageScreenListener
 
     companion object {
         fun load() {
@@ -28,6 +29,7 @@ class StorageScreen : ParchmentScreen() {
 
     override fun show() {
         setInputProcessors(stage)
+        createAndSetListener()
         addInputListenerWithSmallDelay()
         storageUI = StorageUI(stage)
         StorageButtonLabels(stage).create()
@@ -38,21 +40,29 @@ class StorageScreen : ParchmentScreen() {
         storageUI.update()
     }
 
+    override fun removeTriggersListener() {
+        listener.removeTriggers()
+    }
+
     private fun addInputListenerWithSmallDelay() {
         stage.addAction(Actions.sequence(Actions.delay(.1f),
-                                         Actions.addListener(StorageScreenListener({ closeScreen() },
-                                                                                   { takeOne() },
-                                                                                   { takeHalf() },
-                                                                                   { takeFull() },
-                                                                                   { equip() },
-                                                                                   { selectPreviousHero() },
-                                                                                   { selectNextHero() },
-                                                                                   { selectPreviousTable() },
-                                                                                   { selectNextTable() },
-                                                                                   { sortStorage() },
-                                                                                   { toggleTooltip() },
-                                                                                   { toggleCompare() }),
-                                                             false)))
+                                         Actions.addListener(listener, false)))
+    }
+
+    private fun createAndSetListener() {
+        listener = StorageScreenListener(stage,
+                                         { closeScreen() },
+                                         { takeOne() },
+                                         { takeHalf() },
+                                         { takeFull() },
+                                         { equip() },
+                                         { selectPreviousHero() },
+                                         { selectNextHero() },
+                                         { selectPreviousTable() },
+                                         { selectNextTable() },
+                                         { sortStorage() },
+                                         { toggleTooltip() },
+                                         { toggleCompare() })
     }
 
     private fun takeOne() {

@@ -19,6 +19,7 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
 
     private val conversationDialog: ConversationDialog = ConversationDialog(this)
     private lateinit var inventoryUI: InventoryUI
+    private lateinit var listener: InventoryScreenListener
 
     companion object {
         fun load() {
@@ -46,6 +47,7 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
 
     override fun show() {
         setInputProcessors(stage)
+        createAndSetListener()
         addInputListenerWithSmallDelay()
         inventoryUI = InventoryUI(stage)
         ButtonLabels(stage).create()
@@ -62,26 +64,34 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
         conversationDialog.dispose()
     }
 
+    override fun removeTriggersListener() {
+        listener.removeTriggers()
+    }
+
     private fun addInputListenerWithSmallDelay() {
         stage.addAction(Actions.sequence(Actions.delay(.1f),
-                                         Actions.addListener(InventoryScreenListener({ closeScreen() },
-                                                                                     { doAction() },
-                                                                                     { selectPreviousHero() },
-                                                                                     { selectNextHero() },
-                                                                                     { selectPreviousTable() },
-                                                                                     { selectNextTable() },
-                                                                                     { tryToDismissHero() },
-                                                                                     { sortInventory() },
-                                                                                     { toggleTooltip() },
-                                                                                     { toggleCompare() },
-                                                                                     { cheatAddGold() },
-                                                                                     { cheatRemoveGold() }),
-                                                             false)))
+                                         Actions.addListener(listener, false)))
     }
 
     fun closeScreenAnd(actionAfter: () -> Unit) {
         closeScreen()
         actionAfter.invoke()
+    }
+
+    private fun createAndSetListener() {
+        listener = InventoryScreenListener(stage,
+                                           { closeScreen() },
+                                           { doAction() },
+                                           { selectPreviousHero() },
+                                           { selectNextHero() },
+                                           { selectPreviousTable() },
+                                           { selectNextTable() },
+                                           { tryToDismissHero() },
+                                           { sortInventory() },
+                                           { toggleTooltip() },
+                                           { toggleCompare() },
+                                           { cheatAddGold() },
+                                           { cheatRemoveGold() })
     }
 
     private fun doAction() {

@@ -1,13 +1,18 @@
 package nl.t64.cot.screens.inventory
 
 import com.badlogic.gdx.Input
+import com.badlogic.gdx.controllers.Controllers
 import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.InputListener
+import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog
+import nl.t64.cot.AnalogTriggerAdapter
+import nl.t64.cot.Utils
 import nl.t64.cot.constants.Constant
 
 
 internal class InventoryScreenListener(
+    stage: Stage,
     private val closeScreenFunction: () -> Unit,
     private val actionFunction: () -> Unit,
     private val previousHeroFunction: () -> Unit,
@@ -22,6 +27,14 @@ internal class InventoryScreenListener(
     private val cheatRemoveGoldFunction: () -> Unit
 ) : InputListener() {
 
+    private val triggerAdapter = AnalogTriggerAdapter(stage, previousTableFunction, nextTableFunction)
+
+    init {
+        Utils.runWithDelay(Constant.FADE_DURATION) {
+            Controllers.addListener(triggerAdapter)
+        }
+    }
+
     override fun keyDown(event: InputEvent, keycode: Int): Boolean {
         if (event.stage.actors.items.any { it is Dialog }) return true
 
@@ -30,8 +43,8 @@ internal class InventoryScreenListener(
             Constant.KEYCODE_BOTTOM, Input.Keys.A, Input.Keys.ENTER -> actionFunction.invoke()
             Constant.KEYCODE_L1, Input.Keys.Q -> previousHeroFunction.invoke()
             Constant.KEYCODE_R1, Input.Keys.W -> nextHeroFunction.invoke()
-            Constant.KEYCODE_R3_L, Input.Keys.Z -> previousTableFunction.invoke()
-            Constant.KEYCODE_R3_R, Input.Keys.X -> nextTableFunction.invoke()
+            Input.Keys.Z -> previousTableFunction.invoke()
+            Input.Keys.X -> nextTableFunction.invoke()
             Constant.KEYCODE_TOP, Input.Keys.D -> dismissHeroFunction.invoke()
             Constant.KEYCODE_START, Input.Keys.SPACE -> sortInventoryFunction.invoke()
             Constant.KEYCODE_SELECT, Input.Keys.T -> toggleTooltipFunction.invoke()
@@ -40,6 +53,10 @@ internal class InventoryScreenListener(
             Input.Keys.NUM_9 -> cheatRemoveGoldFunction.invoke()
         }
         return true
+    }
+
+    fun removeTriggers() {
+        Controllers.removeListener(triggerAdapter)
     }
 
 }

@@ -13,6 +13,7 @@ class AcademyScreen : ParchmentScreen() {
     private lateinit var academyUI: AcademyUI
     private lateinit var npcId: String
     private lateinit var academyId: String
+    private lateinit var listener: AcademyScreenListener
 
     companion object {
         fun load(npcId: String, academyId: String) {
@@ -26,13 +27,8 @@ class AcademyScreen : ParchmentScreen() {
 
     override fun show() {
         setInputProcessors(stage)
-        stage.addListener(AcademyScreenListener({ closeScreen() },
-                                                { upgradeSkill() },
-                                                { selectPreviousHero() },
-                                                { selectNextHero() },
-                                                { selectPreviousTable() },
-                                                { selectNextTable() },
-                                                { toggleTooltip() }))
+        createAndSetListener()
+        stage.addListener(listener)
 
         academyUI = AcademyUI(stage, npcId, academyId)
         AcademyButtonLabels(stage).create()
@@ -41,6 +37,21 @@ class AcademyScreen : ParchmentScreen() {
     override fun render(dt: Float) {
         renderStage(dt)
         academyUI.update()
+    }
+
+    override fun removeTriggersListener() {
+        listener.removeTriggers()
+    }
+
+    private fun createAndSetListener() {
+        listener = AcademyScreenListener(stage,
+                                         { closeScreen() },
+                                         { upgradeSkill() },
+                                         { selectPreviousHero() },
+                                         { selectNextHero() },
+                                         { selectPreviousTable() },
+                                         { selectNextTable() },
+                                         { toggleTooltip() })
     }
 
     private fun upgradeSkill() {

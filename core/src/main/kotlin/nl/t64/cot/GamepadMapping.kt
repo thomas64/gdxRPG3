@@ -17,6 +17,7 @@ private const val D_PAD_LEFT = 4
 private const val D_PAD_RIGHT = 5
 private const val RIGHT_AXIS_VERTICAL = 6
 private const val RIGHT_AXIS_HORIZONTAL = 7
+
 private const val STICK_LEFT = 8
 private const val STICK_RIGHT = 9
 private const val SHOULDER_LEFT = 10
@@ -27,16 +28,14 @@ private const val TOP_BUTTON = 14
 private const val LEFT_BUTTON = 15
 private const val RIGHT_BUTTON = 16
 private const val BOTTOM_BUTTON = 17
-private const val TRIGGER_LEFT = 18
-private const val TRIGGER_RIGHT = 19
 
 class GamepadMapping {
 
     private val gamepadMapping: GamepadMappingPrivate = GamepadMappingPrivate()
     val controllerToInputAdapter: ControllerToInputAdapter = gamepadMapping.createControllerToInputAdapter()
 
-    fun setInputProcessor(input: InputProcessor?) {
-        controllerToInputAdapter.inputProcessor = input
+    fun setInputProcessor(inputProcessor: InputProcessor?) {
+        controllerToInputAdapter.inputProcessor = inputProcessor
     }
 
 }
@@ -57,12 +56,11 @@ private class GamepadMappingPrivate : ControllerMappings() {
         addConfiguredInput(ConfiguredInput(ConfiguredInput.Type.button, D_PAD_RIGHT))
         addConfiguredInput(ConfiguredInput(ConfiguredInput.Type.axisDigital, RIGHT_AXIS_VERTICAL))
         addConfiguredInput(ConfiguredInput(ConfiguredInput.Type.axisDigital, RIGHT_AXIS_HORIZONTAL))
+
         addConfiguredInput(ConfiguredInput(ConfiguredInput.Type.button, STICK_LEFT))
         addConfiguredInput(ConfiguredInput(ConfiguredInput.Type.button, STICK_RIGHT))
         addConfiguredInput(ConfiguredInput(ConfiguredInput.Type.button, SHOULDER_LEFT))
         addConfiguredInput(ConfiguredInput(ConfiguredInput.Type.button, SHOULDER_RIGHT))
-        addConfiguredInput(ConfiguredInput(ConfiguredInput.Type.button, TRIGGER_LEFT))
-        addConfiguredInput(ConfiguredInput(ConfiguredInput.Type.button, TRIGGER_RIGHT))
         addConfiguredInput(ConfiguredInput(ConfiguredInput.Type.button, START_BUTTON))
         addConfiguredInput(ConfiguredInput(ConfiguredInput.Type.button, SELECT_BUTTON))
         addConfiguredInput(ConfiguredInput(ConfiguredInput.Type.button, TOP_BUTTON))
@@ -79,13 +77,11 @@ private class GamepadMappingPrivate : ControllerMappings() {
             addButtonMapping(D_PAD_DOWN, Input.Keys.DOWN)
             addButtonMapping(D_PAD_LEFT, Input.Keys.LEFT)
             addButtonMapping(D_PAD_RIGHT, Input.Keys.RIGHT)
-            addAxisMapping(RIGHT_AXIS_HORIZONTAL, Constant.KEYCODE_R3_L, Constant.KEYCODE_R3_R)
+
             addButtonMapping(STICK_LEFT, Constant.KEYCODE_L3)
             addButtonMapping(STICK_RIGHT, Constant.KEYCODE_R3)
             addButtonMapping(SHOULDER_LEFT, Constant.KEYCODE_L1)
             addButtonMapping(SHOULDER_RIGHT, Constant.KEYCODE_R1)
-            addButtonMapping(TRIGGER_LEFT, Constant.KEYCODE_L1)
-            addButtonMapping(TRIGGER_RIGHT, Constant.KEYCODE_R1)
             addButtonMapping(START_BUTTON, Constant.KEYCODE_START)
             addButtonMapping(SELECT_BUTTON, Constant.KEYCODE_SELECT)
             addButtonMapping(TOP_BUTTON, Constant.KEYCODE_TOP)
@@ -104,12 +100,11 @@ private class GamepadMappingPrivate : ControllerMappings() {
         defaultMapping.putMapping(MappedInput(D_PAD_RIGHT, ControllerButton(controller.mapping.buttonDpadRight)))
         defaultMapping.putMapping(MappedInput(RIGHT_AXIS_VERTICAL, ControllerAxis(controller.mapping.axisRightY)))
         defaultMapping.putMapping(MappedInput(RIGHT_AXIS_HORIZONTAL, ControllerAxis(controller.mapping.axisRightX)))
+
         defaultMapping.putMapping(MappedInput(STICK_LEFT, ControllerButton(controller.mapping.buttonLeftStick)))
         defaultMapping.putMapping(MappedInput(STICK_RIGHT, ControllerButton(controller.mapping.buttonRightStick)))
         defaultMapping.putMapping(MappedInput(SHOULDER_LEFT, ControllerButton(controller.mapping.buttonL1)))
         defaultMapping.putMapping(MappedInput(SHOULDER_RIGHT, ControllerButton(controller.mapping.buttonR1)))
-        defaultMapping.putMapping(MappedInput(TRIGGER_LEFT, ControllerButton(controller.mapping.buttonL2)))
-        defaultMapping.putMapping(MappedInput(TRIGGER_RIGHT, ControllerButton(controller.mapping.buttonR2)))
         defaultMapping.putMapping(MappedInput(START_BUTTON, ControllerButton(controller.mapping.buttonStart)))
         defaultMapping.putMapping(MappedInput(SELECT_BUTTON, ControllerButton(controller.mapping.buttonBack)))
         defaultMapping.putMapping(MappedInput(TOP_BUTTON, ControllerButton(controller.mapping.buttonY)))

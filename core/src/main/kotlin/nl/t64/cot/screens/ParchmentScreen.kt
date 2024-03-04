@@ -55,11 +55,16 @@ abstract class ParchmentScreen : Screen {
         setInputProcessors(null)
         playSe(audioEvent)
         fadeParchment(fadeToScreen)
+        removeTriggersListener()
     }
 
     protected fun setInputProcessors(inputProcessor: InputProcessor?) {
         Gdx.input.inputProcessor = inputProcessor
         Utils.setGamepadInputProcessor(inputProcessor)
+    }
+
+    protected open fun removeTriggersListener() {
+        // empty
     }
 
     private fun fadeParchment(fadeToScreen: ScreenType) {

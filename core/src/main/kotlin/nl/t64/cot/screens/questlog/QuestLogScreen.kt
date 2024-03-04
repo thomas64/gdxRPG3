@@ -90,7 +90,7 @@ class QuestLogScreen : ParchmentScreen() {
     private fun showLegend() {
         val message = """
             These symbols mean:
-            
+
             v   -   Quest finished or task complete
             o   -   Quest finished but reward unclaimed
             x   -   Quest or task failed
@@ -107,7 +107,7 @@ class QuestLogScreen : ParchmentScreen() {
 
     private fun createText(): String {
         return if (Utils.isGamepadConnected()) {
-            "[L1] Page-up      [R1] Page-down      [Select] Legend      [B] Back"
+            "[LB] Page-up      [RB] Page-down      [Select] Legend      [B] Back"
         } else {
             "[Left] Page-up      [Right] Page-down      [H] Legend      [L] Back"
         }

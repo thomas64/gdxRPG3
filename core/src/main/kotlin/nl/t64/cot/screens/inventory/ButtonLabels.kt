@@ -41,7 +41,7 @@ open class ButtonLabels(private val stage: Stage) {
 
     private fun createTopLeftText(): String {
         return if (Utils.isGamepadConnected()) {
-            "[L1]"
+            "[LB]"
         } else {
             "[Q]"
         }
@@ -49,7 +49,7 @@ open class ButtonLabels(private val stage: Stage) {
 
     private fun createTopRightText(): String {
         return if (Utils.isGamepadConnected()) {
-            "[R1]"
+            "[RB]"
         } else {
             "[W]"
         }
@@ -57,7 +57,7 @@ open class ButtonLabels(private val stage: Stage) {
 
     private fun createMiddleLeftText(): String {
         return if (Utils.isGamepadConnected()) {
-            "[R3]"
+            "[LT]"
         } else {
             "[Z]"
         }
@@ -65,7 +65,7 @@ open class ButtonLabels(private val stage: Stage) {
 
     private fun createMiddleRightText(): String {
         return if (Utils.isGamepadConnected()) {
-            "[R3]"
+            "[RT]"
         } else {
             "[X]"
         }
@@ -81,7 +81,7 @@ open class ButtonLabels(private val stage: Stage) {
 
     open fun createBottomRightText(): String? {
         return if (Utils.isGamepadConnected()) {
-            "[Select] Toggle tooltip      [L3] Toggle compare      [B] Back"
+            "[Select] Toggle tooltip      [L-Stick] Toggle compare      [B] Back"
         } else {
             "[T] Toggle tooltip      [C] Toggle compare      [ I ] Back"
         }

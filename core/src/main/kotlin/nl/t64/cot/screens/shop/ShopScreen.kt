@@ -15,6 +15,7 @@ class ShopScreen : ParchmentScreen() {
     private lateinit var shopUI: ShopUI
     private lateinit var npcId: String
     private lateinit var shopId: String
+    private lateinit var listener: ShopScreenListener
 
     companion object {
         fun load(npcId: String, shopId: String) {
@@ -32,6 +33,7 @@ class ShopScreen : ParchmentScreen() {
 
     override fun show() {
         setInputProcessors(stage)
+        createAndSetListener()
         addInputListenerWithSmallDelay()
         shopUI = ShopUI(stage, npcId, shopId)
         ShopButtonLabels(stage).create()
@@ -42,20 +44,28 @@ class ShopScreen : ParchmentScreen() {
         shopUI.update()
     }
 
+    override fun removeTriggersListener() {
+        listener.removeTriggers()
+    }
+
     private fun addInputListenerWithSmallDelay() {
         stage.addAction(Actions.sequence(Actions.delay(.1f),
-                                         Actions.addListener(ShopScreenListener({ closeScreen() },
-                                                                                { takeOne() },
-                                                                                { takeHalf() },
-                                                                                { takeFull() },
-                                                                                { equip() },
-                                                                                { selectPreviousHero() },
-                                                                                { selectNextHero() },
-                                                                                { selectPreviousTable() },
-                                                                                { selectNextTable() },
-                                                                                { toggleTooltip() },
-                                                                                { toggleCompare() }),
-                                                             false)))
+                                         Actions.addListener(listener, false)))
+    }
+
+    private fun createAndSetListener() {
+        listener = ShopScreenListener(stage,
+                                      { closeScreen() },
+                                      { takeOne() },
+                                      { takeHalf() },
+                                      { takeFull() },
+                                      { equip() },
+                                      { selectPreviousHero() },
+                                      { selectNextHero() },
+                                      { selectPreviousTable() },
+                                      { selectNextTable() },
+                                      { toggleTooltip() },
+                                      { toggleCompare() })
     }
 
     private fun takeOne() {

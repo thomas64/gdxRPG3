@@ -121,11 +121,11 @@ abstract class MenuControls : MenuScreen() {
     private fun createGamepadLabels(textStyle: LabelStyle): List<Label> {
         return listOf(
             Label("Movement", textStyle),
-            Label("L3", textStyle),
+            Label("L-Stick", textStyle),
             Label("Run", textStyle),
-            Label("R1", textStyle),
+            Label("RB", textStyle),
             Label("Crouch", textStyle),
-            Label("L1", textStyle),
+            Label("LB", textStyle),
             Label("Action", textStyle),
             Label("A", textStyle),
             Label("Inventory", textStyle),
@@ -135,9 +135,9 @@ abstract class MenuControls : MenuScreen() {
             Label("Map", textStyle),
             Label("Select", textStyle),
             Label("Party", textStyle),
-            Label("R3", textStyle),
+            Label("R-Stick", textStyle),
             Label("Hints", textStyle),
-            Label("H", textStyle),
+            Label("L-Stick", textStyle),
             Label("Pause", textStyle),
             Label("Start", textStyle)
         )

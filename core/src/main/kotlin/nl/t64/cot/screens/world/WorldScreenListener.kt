@@ -32,19 +32,17 @@ internal class WorldScreenListener(
             }
 
             when (keycode) {
-                Constant.KEYCODE_START,
-                Constant.KEYCODE_TOP,
-                Constant.KEYCODE_LEFT,
-                Input.Keys.ESCAPE,
-                Input.Keys.I,
-                Input.Keys.L -> doBeforeLoadScreen.invoke()
+                Constant.KEYCODE_START, Input.Keys.ESCAPE,
+                Constant.KEYCODE_TOP, Input.Keys.I,
+                Constant.KEYCODE_LEFT, Input.Keys.L,
+                Constant.KEYCODE_L3, Input.Keys.H -> doBeforeLoadScreen.invoke()
             }
 
             when (keycode) {
                 Constant.KEYCODE_START, Input.Keys.ESCAPE -> MenuPause.load()
                 Constant.KEYCODE_TOP, Input.Keys.I -> InventoryScreen.load()
                 Constant.KEYCODE_LEFT, Input.Keys.L -> QuestLogScreen.load()
-                Input.Keys.H -> HelpScreen.load()
+                Constant.KEYCODE_L3, Input.Keys.H -> HelpScreen.load()
                 Constant.KEYCODE_R3, Input.Keys.P -> showHidePartyWindowFunction.invoke()
                 Input.Keys.F10 -> setShowGrid.invoke()
                 Input.Keys.F11 -> setShowObjects.invoke()
