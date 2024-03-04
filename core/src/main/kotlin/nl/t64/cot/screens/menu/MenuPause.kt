@@ -2,6 +2,7 @@ package nl.t64.cot.screens.menu
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.Texture
+import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle
@@ -111,7 +112,7 @@ class MenuPause : MenuScreen() {
         newTable.add(loadGameButton).row()
         newTable.add(settingsButton).row()
         newTable.add(mainMenuButton)
-        val logo = stage.actors.peek()
+        val logo: Image = stage.root.findActor(TITLE_LOGO_NAME)
         newTable
             .top().padTop((logo.height * logo.scaleY) + LOGO_PAD + PAD_TOP)
             .right().padRight(((logo.width * logo.scaleX) / 2f) - (newTable.prefWidth / 2f) + LOGO_PAD)

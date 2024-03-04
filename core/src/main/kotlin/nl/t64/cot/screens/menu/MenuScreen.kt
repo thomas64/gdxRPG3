@@ -23,6 +23,7 @@ const val LOGO_PAD = 20f
 const val PAD_TOP = 40f
 const val TITLE_LOGO_W = "sprites/accot_w.png"
 const val TITLE_LOGO_B = "sprites/accot_b.png"
+const val TITLE_LOGO_NAME = "titleLogo"
 
 private const val LOGO_SCALE = 0.5f
 private const val MENU_FONT = "fonts/barlow_regular_45.ttf"
@@ -48,11 +49,12 @@ abstract class MenuScreen : Screen {
     fun setBackground(background: Image) {
         this.background = background
         stage.addActor(background)
-        val image = Image(titleLogo)
-        image.setScale(LOGO_SCALE)
-        image.setPosition(Gdx.graphics.width - image.width * image.scaleX - LOGO_PAD,
-                          Gdx.graphics.height - image.height * image.scaleY - LOGO_PAD)
-        stage.addActor(image)
+        val titleLogo = Image(titleLogo)
+        titleLogo.name = TITLE_LOGO_NAME
+        titleLogo.setScale(LOGO_SCALE)
+        titleLogo.setPosition(Gdx.graphics.width - titleLogo.width * titleLogo.scaleX - LOGO_PAD,
+                              Gdx.graphics.height - titleLogo.height * titleLogo.scaleY - LOGO_PAD)
+        stage.addActor(titleLogo)
     }
 
     fun updateMenuIndex(newIndex: Int) {

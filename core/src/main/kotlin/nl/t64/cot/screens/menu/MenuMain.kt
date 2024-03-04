@@ -87,7 +87,7 @@ class MenuMain : MenuScreen() {
         newTable.add(settingsButton).row()
         newTable.add(creditsButton).row()
         newTable.add(exitButton)
-        val logo = stage.actors.peek()
+        val logo: Image = stage.root.findActor(TITLE_LOGO_NAME)
         newTable
             .top().padTop((logo.height * logo.scaleY) + LOGO_PAD + PAD_TOP)
             .right().padRight(((logo.width * logo.scaleX) / 2f) - (newTable.prefWidth / 2f) + LOGO_PAD)

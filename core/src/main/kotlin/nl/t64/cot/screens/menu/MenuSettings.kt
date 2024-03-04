@@ -2,6 +2,7 @@ package nl.t64.cot.screens.menu
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.Texture
+import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle
@@ -150,7 +151,7 @@ abstract class MenuSettings : MenuScreen() {
         val backButton = TextButton(MENU_ITEM_BACK, TextButtonStyle(buttonStyle))
 
         // table
-        val logo = stage.actors.peek()
+        val logo: Image = stage.root.findActor(TITLE_LOGO_NAME)
         val padTop = (logo.height * logo.scaleY) + LOGO_PAD + PAD_TOP
         return Table().apply {
             setFillParent(true)

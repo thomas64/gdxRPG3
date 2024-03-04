@@ -2,6 +2,7 @@ package nl.t64.cot.screens.menu
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.Texture
+import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.Table
@@ -60,7 +61,7 @@ abstract class MenuControls : MenuScreen() {
         table.columnDefaults(0).width(COLUMN_0_WIDTH)
         table.columnDefaults(1).width(COLUMN_1_WIDTH)
         labels.indices.forEach { addToTable(it, labels) }
-        val logo = stage.actors.peek()
+        val logo: Image = stage.root.findActor(TITLE_LOGO_NAME)
         table
             .top().padTop((logo.height * logo.scaleY) + LOGO_PAD + PAD_TOP)
             .right().padRight(((logo.width * logo.scaleX) / 2f) - (table.prefWidth / 2f) + LOGO_PAD)

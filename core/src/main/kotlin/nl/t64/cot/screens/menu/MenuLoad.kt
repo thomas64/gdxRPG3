@@ -224,7 +224,7 @@ abstract class MenuLoad : MenuScreen() {
         topTable.add(titleLabel).center().spaceBottom(TITLE_SPACE_BOTTOM).row()
         topTable.add(group).center()
         topTable.x = MENU_X
-        val logo = stage.actors.peek()
+        val logo: Image = stage.root.findActor(TITLE_LOGO_NAME)
         topTable.top().padTop((logo.height * logo.scaleY) + LOGO_PAD + PAD_TOP)
 
         // bottom table

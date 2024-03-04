@@ -3,12 +3,9 @@ package nl.t64.cot.screens.menu
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
-import com.badlogic.gdx.scenes.scene2d.ui.Label
+import com.badlogic.gdx.scenes.scene2d.ui.*
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
-import com.badlogic.gdx.scenes.scene2d.ui.Table
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle
-import com.badlogic.gdx.scenes.scene2d.ui.TextField
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.ScreenUtils
@@ -154,7 +151,7 @@ class MenuNew : MenuScreen() {
 
         newTable.add(upperTable).spaceBottom(SPACE_BOTTOM).row()
         newTable.add(lowerTable)
-        val logo = stage.actors.peek()
+        val logo: Image = stage.root.findActor(TITLE_LOGO_NAME)
         newTable
             .top().padTop((logo.height * logo.scaleY) + LOGO_PAD + PAD_TOP)
             .right().padRight(((logo.width * logo.scaleX) / 2f) - (newTable.prefWidth / 2f) + (LOGO_PAD / 2f))
