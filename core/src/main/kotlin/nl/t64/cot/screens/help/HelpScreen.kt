@@ -104,11 +104,11 @@ class HelpScreen : ParchmentScreen() {
     }
 
     private fun scrollUp() {
-        scrollPane.scrollY = -SCROLL_SPEED
+        scrollPane.scrollY -= SCROLL_SPEED
     }
 
     private fun scrollDown() {
-        scrollPane.scrollY = SCROLL_SPEED
+        scrollPane.scrollY += SCROLL_SPEED
     }
 
 }
