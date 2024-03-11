@@ -14,10 +14,10 @@ enum class Direction {
     companion object {
         fun getRandom(): Direction {
             val randomNumber = MathUtils.random(getAllDirectionsWithoutNONE())
-            return values()[randomNumber]
+            return entries[randomNumber]
         }
 
-        private fun getAllDirectionsWithoutNONE(): Int = values().size - 2
+        private fun getAllDirectionsWithoutNONE(): Int = entries.size - 2
     }
 
 }

@@ -73,6 +73,6 @@ enum class CalcAttributeId(override val title: String) : SuperEnum {
 fun String.toCalcAttributeId(): CalcAttributeId {
     return when {
         this.lowercase().contains("hit") -> CalcAttributeId.BASE_HIT
-        else -> CalcAttributeId.values().first { this.lowercase().contains(it.title.lowercase()) }
+        else -> CalcAttributeId.entries.first { this.lowercase().contains(it.title.lowercase()) }
     }
 }

@@ -156,7 +156,7 @@ data class InventoryItem(
     fun getMinimalsOtherItemHasAndYouDont(otherItem: InventoryItem): Set<InventoryMinimal> {
         return when {
             hasOnlyOneMinimal() && otherItem.hasOnlyOneMinimal() -> emptySet()
-            else -> InventoryMinimal.values()
+            else -> InventoryMinimal.entries
                 .filter { getAttributeOfMinimal(it) is Int }
                 .filter { getAttributeOfMinimal(it) as Int == 0 }
                 .filter { otherItem.getAttributeOfMinimal(it) as Int > 0 }
@@ -165,28 +165,28 @@ data class InventoryItem(
     }
 
     private fun hasOnlyOneMinimal(): Boolean {
-        return InventoryMinimal.values()
+        return InventoryMinimal.entries
             .filter { getAttributeOfMinimal(it) is Int }
             .filter { getAttributeOfMinimal(it) as Int > 0 }
             .count() == 1
     }
 
     fun getCalcsOtherItemHasAndYouDont(otherItem: InventoryItem): Set<CalcAttributeId> {
-        return CalcAttributeId.values()
+        return CalcAttributeId.entries
             .filter { getAttributeOfCalcAttributeId(it) == 0 }
             .filter { otherItem.getAttributeOfCalcAttributeId(it) > 0 }
             .toSet()
     }
 
     fun getStatsOtherItemHasAndYouDont(otherItem: InventoryItem): Set<StatItemId> {
-        return StatItemId.values()
+        return StatItemId.entries
             .filter { getAttributeOfStatItemId(it) == 0 }
             .filter { otherItem.getAttributeOfStatItemId(it) > 0 }
             .toSet()
     }
 
     fun getSkillsOtherItemHasAndYouDont(otherItem: InventoryItem): Set<SkillItemId> {
-        return SkillItemId.values()
+        return SkillItemId.entries
             .filter { getAttributeOfSkillItemId(it) == 0 }
             .filter { otherItem.getAttributeOfSkillItemId(it) > 0 }
             .toSet()

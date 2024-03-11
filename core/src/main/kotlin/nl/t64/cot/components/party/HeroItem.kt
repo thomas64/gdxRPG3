@@ -169,7 +169,7 @@ data class HeroItem(
     }
 
     fun createMessageIfNotAbleToDequip(enhancerItem: InventoryItem): String? {
-        return StatItemId.values()
+        return StatItemId.entries
             .filter { enhancerItem.getAttributeOfStatItemId(it) > 0 }
             .flatMap { createMessageIfNotAbleToDequip(enhancerItem, it) }
             .firstOrNull()
@@ -208,7 +208,7 @@ data class HeroItem(
     }
 
     fun createMessageIfHeroHasNotEnoughFor(inventoryItem: InventoryItem): String? {
-        return InventoryMinimal.values()
+        return InventoryMinimal.entries
             .mapNotNull { it.createMessageIfHeroHasNotEnoughFor(inventoryItem, this) }
             .firstOrNull()
     }

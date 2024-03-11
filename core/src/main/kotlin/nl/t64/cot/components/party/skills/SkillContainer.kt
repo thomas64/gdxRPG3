@@ -19,7 +19,7 @@ class SkillContainer() {
     }
 
     fun getAllAboveZero(): List<SkillItem> {
-        return SkillItemId.values()
+        return SkillItemId.entries
             .mapNotNull { skills[it] }
             .filter { hasPositiveQuantity(it) }
     }

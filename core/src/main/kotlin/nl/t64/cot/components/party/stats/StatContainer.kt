@@ -67,7 +67,7 @@ class StatContainer() {
     }
 
     fun getAll(): List<StatItem> {
-        return StatItemId.values().map { stats[it] }
+        return StatItemId.entries.map { stats[it] }
     }
 
     fun takeDamage(damage: Int) {
@@ -111,7 +111,7 @@ class StatContainer() {
 }
 
 private class StatItemMap<K : Enum<K>, V> {
-    private val map: MutableMap<String, V> = HashMap(StatItemId.values().size)
+    private val map: MutableMap<String, V> = HashMap(StatItemId.entries.size)
     operator fun get(key: Enum<K>): V = map[key.name]!!
     operator fun set(key: Enum<K>, value: V) {
         map[key.name] = value

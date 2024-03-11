@@ -88,7 +88,7 @@ class DescriptionCreator(
     }
 
     private fun addMinimals() {
-        InventoryMinimal.values().forEach {
+        InventoryMinimal.entries.forEach {
             if (it in minimalsYouDontHave) {
                 descriptionLines.add(createEmptyLine())
             } else {
@@ -98,21 +98,21 @@ class DescriptionCreator(
     }
 
     private fun addCalcs() {
-        CalcAttributeId.values().forEach {
+        CalcAttributeId.entries.forEach {
             val value = if (it in calcsYouDontHave) "0" else inventoryItem.getAttributeOfCalcAttributeId(it)
             descriptionLines.add(createLine(it, value))
         }
     }
 
     private fun addStats() {
-        StatItemId.values().forEach {
+        StatItemId.entries.forEach {
             val value = if (it in statsYouDontHave) "0" else inventoryItem.getAttributeOfStatItemId(it)
             descriptionLines.add(createLine(it, value))
         }
     }
 
     private fun addSkills() {
-        SkillItemId.values().forEach {
+        SkillItemId.entries.forEach {
             val value = if (it in skillsYouDontHave) "0" else inventoryItem.getAttributeOfSkillItemId(it)
             descriptionLines.add(createLine(it, value))
         }

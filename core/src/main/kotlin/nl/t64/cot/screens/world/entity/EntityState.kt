@@ -22,10 +22,10 @@ enum class EntityState {
     companion object {
         fun getRandomIdleOrWalking(): EntityState {
             val randomNumber = MathUtils.random(getOnlyIdleAndWalking())
-            return values()[randomNumber]
+            return entries[randomNumber]
         }
 
-        private fun getOnlyIdleAndWalking(): Int = values().size - (values().size - 1)
+        private fun getOnlyIdleAndWalking(): Int = entries.size - (entries.size - 1)
     }
 
 }
