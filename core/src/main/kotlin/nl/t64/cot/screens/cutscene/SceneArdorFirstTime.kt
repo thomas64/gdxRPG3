@@ -17,7 +17,7 @@ import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.screens.world.entity.EntityState
 
 
-class SceneArdor1 : CutsceneScreen() {
+class SceneArdorFirstTime : CutsceneScreen() {
 
     private lateinit var mozes: CutsceneActor
     private lateinit var grace: CutsceneActor
@@ -222,13 +222,14 @@ class SceneArdor1 : CutsceneScreen() {
     }
 
     override fun onNotifyBattleWon(battleId: String, spoils: Loot) {
-        screenManager.setScreen(ScreenType.SCENE_ARDOR_1_WIN)
-        SpoilsCutsceneScreen.load(spoils, ScreenType.SCENE_ARDOR_1_WIN)
+        screenManager.setScreen(ScreenType.SCENE_ARDOR_FIRST_TIME_AFTER_WIN_FROM_GENERALS)
+        SpoilsCutsceneScreen.load(spoils, ScreenType.SCENE_ARDOR_FIRST_TIME_AFTER_WIN_FROM_GENERALS)
     }
 
     override fun onNotifyBattleLost() {
-        (screenManager.getScreen(ScreenType.SCENE_ARDOR_1_LOSE) as SceneArdor1Lose).apply { areGeneralsAlive = true }
-        screenManager.setScreen(ScreenType.SCENE_ARDOR_1_LOSE)
+        (screenManager.getScreen(ScreenType.SCENE_ARDOR_FIRST_TIME_AFTER_LOSS_FROM_BATTLE) as SceneArdorFirstTimeAfterLossFromBattle)
+            .apply { areGeneralsAlive = true }
+        screenManager.setScreen(ScreenType.SCENE_ARDOR_FIRST_TIME_AFTER_LOSS_FROM_BATTLE)
     }
 
 }

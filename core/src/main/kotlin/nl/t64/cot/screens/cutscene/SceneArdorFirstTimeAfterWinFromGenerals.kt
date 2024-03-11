@@ -9,7 +9,7 @@ import nl.t64.cot.screens.battle.BattleScreen
 import nl.t64.cot.screens.world.entity.Direction
 
 
-class SceneArdor2Win : CutsceneScreen() {
+class SceneArdorFirstTimeAfterWinFromGenerals : CutsceneScreen() {
 
     private lateinit var mozes: CutsceneActor
     private lateinit var grace: CutsceneActor
@@ -34,7 +34,7 @@ class SceneArdor2Win : CutsceneScreen() {
                 ardor.setPosition(456f, 240f)
                 ardor.direction = Direction.SOUTH
                 ardor.isVisible = true
-                grace.setPosition(540f, 394f)
+                grace.setPosition(456f, 315f)
                 grace.direction = Direction.SOUTH
                 grace.isVisible = true
                 mozes.setPosition(456f, 186f)
@@ -62,7 +62,9 @@ class SceneArdor2Win : CutsceneScreen() {
     }
 
     override fun onNotifyBattleLost() {
-        screenManager.setScreen(ScreenType.SCENE_DEATH)
+        (screenManager.getScreen(ScreenType.SCENE_ARDOR_FIRST_TIME_AFTER_LOSS_FROM_BATTLE) as SceneArdorFirstTimeAfterLossFromBattle)
+            .apply { areGeneralsAlive = false }
+        screenManager.setScreen(ScreenType.SCENE_ARDOR_FIRST_TIME_AFTER_LOSS_FROM_BATTLE)
     }
 
 }

@@ -120,12 +120,12 @@
   <object id="44" name="honeywood_forest_ardor_1" x="432" y="1680" width="144" height="24"/>
  </objectgroup>
  <objectgroup color="#ff00ff" id="16" name="cutscene">
-  <object id="62" name="scene_ardor_2" type="discover" x="528" y="-24" width="168" height="24">
+  <object id="62" name="scene_ardor_end" type="discover" x="528" y="-24" width="168" height="24">
    <properties>
     <property name="condition" value="_rc_==_a_q_quest_royal_sacrifice"/>
    </properties>
   </object>
-  <object id="63" name="scene_ardor_1" type="discover" x="504" y="-24" width="168" height="24">
+  <object id="63" name="scene_ardor_first_time" type="discover" x="504" y="-24" width="168" height="24">
    <properties>
     <property name="condition" value="_r_==_u_q_quest_royal_sacrifice"/>
    </properties>

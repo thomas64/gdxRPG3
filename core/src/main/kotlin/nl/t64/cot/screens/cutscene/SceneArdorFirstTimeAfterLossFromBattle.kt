@@ -19,7 +19,7 @@ import nl.t64.cot.sfx.TransitionType
 import kotlin.random.Random
 
 
-class SceneArdor1Lose : CutsceneScreen() {
+class SceneArdorFirstTimeAfterLossFromBattle : CutsceneScreen() {
 
     var areGeneralsAlive: Boolean = true
 

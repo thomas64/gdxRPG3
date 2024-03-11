@@ -11,7 +11,7 @@ import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.screens.world.entity.EntityState
 
 
-class SceneArdor2 : CutsceneScreen() {
+class SceneArdorEnd : CutsceneScreen() {
 
     private lateinit var mozes: CutsceneActor
     private lateinit var grace: CutsceneActor
@@ -123,8 +123,8 @@ class SceneArdor2 : CutsceneScreen() {
     }
 
     override fun onNotifyBattleWon(battleId: String, spoils: Loot) {
-        screenManager.setScreen(ScreenType.SCENE_ARDOR_2_WIN)
-        SpoilsCutsceneScreen.load(spoils, ScreenType.SCENE_ARDOR_2_WIN)
+        screenManager.setScreen(ScreenType.SCENE_ARDOR_END_AFTER_WIN_FROM_GENERALS)
+        SpoilsCutsceneScreen.load(spoils, ScreenType.SCENE_ARDOR_END_AFTER_WIN_FROM_GENERALS)
     }
 
     override fun onNotifyBattleLost() {
