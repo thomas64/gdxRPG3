@@ -17,6 +17,12 @@ class Loot(
     var xp: Int = 0
 ) {
 
+    companion object {
+        fun createSingleItem(itemId: String): Loot {
+            return Loot(mutableMapOf(itemId to 1))
+        }
+    }
+
     fun isTaken(): Boolean =
         content.isEmpty()
 

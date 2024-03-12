@@ -4,10 +4,11 @@ import com.badlogic.gdx.scenes.scene2d.Action
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import nl.t64.cot.Utils
-import nl.t64.cot.Utils.scenario
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playBgs
-import nl.t64.cot.audio.playSe
+import nl.t64.cot.components.loot.Loot
+import nl.t64.cot.constants.ScreenType
+import nl.t64.cot.screens.loot.ReceiveCutsceneScreen
 import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.screens.world.entity.EntityState
 import kotlin.random.Random
@@ -33,9 +34,7 @@ class SceneEndOfCycle2 : CutsceneScreen() {
 
         actions = listOf(mozesWalksUp(),
                          fireKillsAll(),
-                         mozesWakesUpAgain(),
-                         toLastdennThen(),
-                         startThirdCycle())
+                         receiveCrystal())
     }
 
     private fun mozesWalksUp(): Action {
@@ -108,56 +107,18 @@ class SceneEndOfCycle2 : CutsceneScreen() {
         )
     }
 
-    private fun mozesWakesUpAgain(): Action {
+    private fun receiveCrystal(): Action {
         return Actions.sequence(
             Actions.delay(2f),
             Actions.addAction(Actions.fadeOut(3f), ylarus),
             Actions.delay(5f),
-
-            actionFadeOut(),
-
-            Actions.run {
-                mozesDead.isVisible = false
-                setMapWithBgsOnly("honeywood_house_mozes")
-                setCameraPosition(0f, 720f)
-                mozes.isVisible = true
-                mozes.setPosition(192f, 534f)
-                mozes.entityState = EntityState.IDLE
-                mozes.direction = Direction.SOUTH
-            },
-            Actions.delay(1f),
-            Actions.run { playSe(AudioEvent.SE_SAVE_GAME) },
-
-            actionFadeIn(),
-
-            Actions.delay(1f),
-            Actions.run { showConversationDialog("mozes_wakes_up_again", "mozes") }
-        )
-    }
-
-    private fun toLastdennThen(): Action {
-        return Actions.sequence(
-            Actions.delay(2f),
-            Actions.run { mozes.direction = Direction.EAST },
-            Actions.run { mozes.entityState = EntityState.WALKING },
-            Actions.moveBy(48f, 0f, 2f),
-            Actions.run { mozes.entityState = EntityState.IDLE },
-            Actions.delay(0.5f),
-            Actions.run { mozes.direction = Direction.SOUTH },
-            Actions.delay(2f),
-            Actions.run { showConversationDialog("to_lastdenn_then", "mozes") }
-        )
-    }
-
-    private fun startThirdCycle(): Action {
-        return Actions.sequence(
-            Actions.delay(0.5f),
             Actions.run { exitScreen() }
         )
     }
 
     override fun exitScreen() {
-        endCutsceneAndOpenMapAnd("honeywood_house_mozes") { scenario.startThirdCycle() }
+        val crystal = Loot.createSingleItem("crystal_of_time")
+        endCutsceneAnd { ReceiveCutsceneScreen.load(crystal, ScreenType.SCENE_USE_CRYSTAL_OF_TIME) }
     }
 
 }

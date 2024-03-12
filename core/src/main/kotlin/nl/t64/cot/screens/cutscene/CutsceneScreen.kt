@@ -173,14 +173,26 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
         }
     }
 
+    fun endCutsceneWithoutFadeAnd(actionAfter: () -> Unit) {
+        endCutscene()
+        actorsStage.addAction(Actions.sequence(
+            Actions.delay(0.1f),
+            Actions.run { actionAfter.invoke() }
+        ))
+    }
+
     fun endCutsceneAnd(actionAfter: () -> Unit) {
-        isEnding = true
-        Gdx.input.inputProcessor = null
-        Utils.setGamepadInputProcessor(null)
+        endCutscene()
         actorsStage.addAction(Actions.sequence(
             if (title.isVisible) fadeFromTitle() else fadeFromMap(),
             Actions.run { actionAfter.invoke() }
         ))
+    }
+
+    private fun endCutscene() {
+        isEnding = true
+        Gdx.input.inputProcessor = null
+        Utils.setGamepadInputProcessor(null)
     }
 
     private fun openMap(mapTitle: String, spawnId: String) {

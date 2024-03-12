@@ -43,6 +43,7 @@ enum class ScreenType(val screenClass: Class<out Screen>) {
     FIND(FindScreen::class.java),
     REWARD(RewardScreen::class.java),
     RECEIVE(ReceiveScreen::class.java),
+    RECEIVE_CUTSCENE(ReceiveCutsceneScreen::class.java),
     TRADE(TradeScreen::class.java),
     SPOILS(SpoilsScreen::class.java),
     SPOILS_CUTSCENE(SpoilsCutsceneScreen::class.java),
@@ -53,13 +54,15 @@ enum class ScreenType(val screenClass: Class<out Screen>) {
     SCENE_ARDOR_FIRST_TIME_AFTER_WIN_FROM_GENERALS(SceneArdorFirstTimeAfterWinFromGenerals::class.java),
     SCENE_ARDOR_FIRST_TIME_AFTER_LOSS_FROM_BATTLE(SceneArdorFirstTimeAfterLossFromBattle::class.java),
     SCENE_END_OF_CYCLE_2(SceneEndOfCycle2::class.java),
+    SCENE_USE_CRYSTAL_OF_TIME(SceneUseCrystalOfTime::class.java),
+    SCENE_START_OF_CYCLE_3(SceneStartOfCycle3::class.java),
     SCENE_SANTINO_MURDERED(SceneSantinoMurdered::class.java),
     SCENE_ARDOR_END(SceneArdorEnd::class.java),
     SCENE_ARDOR_END_AFTER_WIN_FROM_GENERALS(SceneArdorEndAfterWinFromGenerals::class.java),
     SCENE_GAME_ENDING(SceneGameEnding::class.java);
 
     fun hasSmallParchment(): Boolean {
-        return this in listOf(FIND, REWARD, RECEIVE, TRADE, SPOILS, SPOILS_CUTSCENE)
+        return this in listOf(FIND, REWARD, RECEIVE, RECEIVE_CUTSCENE, TRADE, SPOILS, SPOILS_CUTSCENE)
     }
 
 }

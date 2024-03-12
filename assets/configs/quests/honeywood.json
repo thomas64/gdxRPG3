@@ -25,7 +25,7 @@
   "quest_god_of_power"         : {
     "title"     : "The God of Power",
     "entityId"  : "ylarus",
-    "summary"   : "Adan inexplicably bursts into flames every time Grace is sacrificed by the wizard Ardor. Ylarus, the God of Time, is puzzled by this phenomenon and sends you on a quest to uncover the answers.",
+    "summary"   : "Adan inexplicably bursts into flames every time Grace is sacrificed by the wizard Ardor. Ylarus, the God of Time, his power is fading. He sends you to the priest of Lastdenn for answers.",
     "linkedWith": ["quest_honeywood_elder"],
     "tasks"     : {
       "1": {

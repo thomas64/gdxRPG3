@@ -27,7 +27,6 @@ class Scenario {
         reviveMozes()
         gameData.clock.start()
         gameData.resetCycle()
-        addCrystalToInventory()
         addQuestLastdennToLogbook()
         profileManager.saveProfile()
     }
@@ -76,11 +75,6 @@ class Scenario {
     private fun addQuestArdorToLogbook() {
         val questArdor = gameData.quests.getQuestById("quest_royal_sacrifice")
         questArdor.accept()
-    }
-
-    private fun addCrystalToInventory() {
-        val crystal = InventoryDatabase.createInventoryItem("crystal_of_time")
-        gameData.inventory.autoSetItem(crystal)
     }
 
     private fun addQuestLastdennToLogbook() {

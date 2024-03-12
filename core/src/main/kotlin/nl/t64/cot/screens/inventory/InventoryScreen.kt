@@ -13,6 +13,7 @@ import nl.t64.cot.screens.ScreenUI
 import nl.t64.cot.screens.inventory.messagedialog.MessageDialog
 import nl.t64.cot.screens.world.conversation.ConversationDialog
 import nl.t64.cot.screens.world.conversation.ConversationObserver
+import kotlin.concurrent.thread
 
 
 class InventoryScreen : ParchmentScreen(), ConversationObserver {
@@ -20,11 +21,33 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
     private val conversationDialog: ConversationDialog = ConversationDialog(this)
     private lateinit var inventoryUI: InventoryUI
     private lateinit var listener: InventoryScreenListener
+    private var isListenerAdded: Boolean = false
 
     companion object {
         fun load() {
             playSe(AudioEvent.SE_SCROLL)
             screenManager.openParchmentLoadScreen(ScreenType.INVENTORY)
+        }
+
+        fun loadForCutsceneTryCrystal() {
+            playSe(AudioEvent.SE_SCROLL)
+            screenManager.openParchmentLoadScreen(ScreenType.INVENTORY)
+            val inventoryScreen = (screenManager.getScreen(ScreenType.INVENTORY) as InventoryScreen)
+
+            thread {
+                while (true) {
+                    if (inventoryScreen.isListenerAdded) {
+                        inventoryScreen.stage.removeListener(inventoryScreen.listener)
+                        Thread.sleep(500L)
+                        val dialog = MessageDialog("Select and use the Crystal of Time to revert time by 12 hours.")
+                        dialog.show(inventoryScreen.stage, AudioEvent.SE_CONVERSATION_NEXT)
+                        inventoryScreen.createAndSetListener(closeScreenFunction = { playSe(AudioEvent.SE_MENU_ERROR) })
+                        inventoryScreen.stage.addListener(inventoryScreen.listener)
+                        break
+                    }
+                    Thread.sleep(10L)
+                }
+            }
         }
     }
 
@@ -59,6 +82,13 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
         conversationDialog.update(dt)
     }
 
+    override fun hide() {
+        super.hide()
+        isListenerAdded = false
+        setInputProcessors(null)
+        removeTriggersListener()
+    }
+
     override fun dispose() {
         super.dispose()
         conversationDialog.dispose()
@@ -69,8 +99,9 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
     }
 
     private fun addInputListenerWithSmallDelay() {
-        stage.addAction(Actions.sequence(Actions.delay(.1f),
-                                         Actions.addListener(listener, false)))
+        stage.addAction(Actions.sequence(Actions.delay(0.1f),
+                                         Actions.addListener(listener, false),
+                                         Actions.run { isListenerAdded = true }))
     }
 
     fun closeScreenAnd(actionAfter: () -> Unit) {
@@ -78,9 +109,9 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
         actionAfter.invoke()
     }
 
-    private fun createAndSetListener() {
+    private fun createAndSetListener(closeScreenFunction: () -> Unit = { closeScreen() }) {
         listener = InventoryScreenListener(stage,
-                                           { closeScreen() },
+                                           closeScreenFunction,
                                            { doAction() },
                                            { selectPreviousHero() },
                                            { selectNextHero() },
@@ -121,9 +152,7 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
     private fun tryToDismissHero() {
         val currentHero = InventoryUtils.getSelectedHero()
         if (gameData.party.isPlayer(currentHero.id)) {
-            val errorMessage = "You cannot dismiss the party leader."
-            val messageDialog = MessageDialog(errorMessage)
-            messageDialog.show(stage, AudioEvent.SE_MENU_ERROR)
+            MessageDialog("You cannot dismiss the party leader.").show(stage, AudioEvent.SE_MENU_ERROR)
         } else if (currentHero.isAlive) {
             conversationDialog.loadConversation("dismiss_${currentHero.id}", currentHero.id)
             conversationDialog.show()
