@@ -93,7 +93,7 @@ class QuestTask(
     }
 
     private fun removeTargetFromInventory() {
-        gameData.inventory.autoRemoveItem(target)
+        gameData.inventory.autoRemoveItems(target)
     }
 
     private fun getTargetEntry(): Map.Entry<String, Int> {

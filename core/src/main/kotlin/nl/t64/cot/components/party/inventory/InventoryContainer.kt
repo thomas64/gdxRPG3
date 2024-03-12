@@ -7,12 +7,12 @@ private const val SORTING_SPLIT = 70000 // atm, item.json starts with this numbe
 
 class InventoryContainer(numberOfSlots: Int = 0) {
 
-    private val inventory: MutableList<InventoryItem?> = arrayOfNulls<InventoryItem>(numberOfSlots).toMutableList()
+    private val inventory: MutableList<InventoryItem?> = MutableList(numberOfSlots) { null }
 
     fun getAllContent(): MutableMap<String, Int> {
         return inventory
             .filterNotNull()
-            .associate { it.id to it.amount }   // .map(Pair(it.id, it.amount)).toMap()
+            .associate { it.id to it.amount }   // .map { Pair(it.id, it.amount) }.toMap()
             .toMutableMap()
     }
 
@@ -25,14 +25,16 @@ class InventoryContainer(numberOfSlots: Int = 0) {
     }
 
     fun incrementAmountAt(index: Int, amount: Int) {
-        inventory[index]?.increaseAmountWith(amount)
-            ?: throw IllegalArgumentException("There is no item to increment amount.")
+        inventory[index]
+            ?.increaseAmountWith(amount)
+            ?: error("There is no item to increment amount.")
         gameData.quests.updateFindItem()
     }
 
     fun decrementAmountAt(index: Int, amount: Int) {
-        inventory[index]?.decreaseAmountWith(amount)
-            ?: throw IllegalArgumentException("There is no item to decrement amount.")
+        inventory[index]
+            ?.decreaseAmountWith(amount)
+            ?: error("There is no item to decrement amount.")
         gameData.quests.updateFindItem()
     }
 
@@ -48,14 +50,14 @@ class InventoryContainer(numberOfSlots: Int = 0) {
         }
     }
 
-    fun autoRemoveItem(items: Map<String, Int>) {
-        items.forEach { autoRemoveItem(it.key, it.value) }
+    fun autoRemoveItems(items: Map<String, Int>) {
+        items.forEach { (itemId, amount) -> autoRemoveItem(itemId, amount) }
     }
 
-    fun autoRemoveItem(itemId: String, orgAmount: Int) {
-        check(hasEnoughOfItem(itemId, orgAmount)) { "Cannot remove this resource from Inventory." }
+    fun autoRemoveItem(itemId: String, amount: Int) {
+        check(hasEnoughOfItem(itemId, amount)) { "Cannot remove this resource from Inventory." }
 
-        var countAmount = orgAmount
+        var countAmount = amount
         for ((index, foundAmount) in findAllIndexesWithAmountOfItem(itemId)) {
             if (countAmount == 0) {
                 break
@@ -88,17 +90,13 @@ class InventoryContainer(numberOfSlots: Int = 0) {
 
     fun sort() {
         InventoryStacksMerger(this).searchAll()
-        val sortedList = inventory.sortedWith(compareBy({ getSort(it) }, { getInventoryGroup(it) }))
-        inventory.clear()
-        inventory.addAll(sortedList)
+        val comparator: Comparator<InventoryItem?> = compareBy({ it.getSort() }, { it.getInventoryGroup() })
+        inventory.sortWith(comparator)
     }
 
     fun contains(items: Map<String, Int>): Boolean {
-        return if (items.isEmpty()) {
-            false
-        } else {
-            items.all { hasEnoughOfItem(it.key, it.value) }
-        }
+        return items.isEmpty()
+            || items.all { (itemId, amount) -> hasEnoughOfItem(itemId, amount) }
     }
 
     fun hasExactlyAmountOfItem(itemId: String, amount: Int): Boolean {
@@ -115,11 +113,12 @@ class InventoryContainer(numberOfSlots: Int = 0) {
 
     fun hasRoomForResource(itemId: String): Boolean {
         return (findFirstSlotIndexWithItem(itemId) != null
-                || findFirstEmptySlotIndex() != null)
+            || findFirstEmptySlotIndex() != null)
     }
 
     fun findFirstSlotIndexWithItem(itemId: String): Int? {
-        return (0 until getSize()).firstOrNull { containsItemAt(it, itemId) }
+        return (0 until getSize())
+            .firstOrNull { it.contains(itemId) }
     }
 
     fun findFirstFilledSlotIndex(): Int? {
@@ -127,11 +126,13 @@ class InventoryContainer(numberOfSlots: Int = 0) {
     }
 
     fun findNextFilledSlotIndexFrom(index: Int): Int? {
-        return (index until getSize()).firstOrNull { isSlotFilled(it) }
+        return (index until getSize())
+            .firstOrNull { it.isFilled() }
     }
 
     fun findFirstEmptySlotIndex(): Int? {
-        return (0 until getSize()).firstOrNull { isSlotEmpty(it) }
+        return (0 until getSize())
+            .firstOrNull { it.isEmpty() }
     }
 
     fun getLastIndex(): Int {
@@ -139,7 +140,9 @@ class InventoryContainer(numberOfSlots: Int = 0) {
     }
 
     fun contains(itemId: String): Boolean {
-        return inventory.filterNotNull().any { it.hasSameIdAs(itemId) }
+        return inventory
+            .filterNotNull()
+            .any { it.hasSameIdAs(itemId) }
     }
 
     fun getTotalOfItem(itemId: String?): Int {
@@ -154,12 +157,15 @@ class InventoryContainer(numberOfSlots: Int = 0) {
     }
 
     private fun addResource(newItem: InventoryItem) {
-        getItem(newItem.id)?.increaseAmountWith(newItem) ?: addItemAtEmptySlot(newItem)
+        getItem(newItem.id)
+            ?.increaseAmountWith(newItem)
+            ?: addItemAtEmptySlot(newItem)
     }
 
     private fun addItemAtEmptySlot(newItem: InventoryItem) {
-        findFirstEmptySlotIndex()?.let { slotIsEmptySoSetItemAt(it, newItem) }
-            ?: throw IllegalStateException("Inventory is full.")
+        findFirstEmptySlotIndex()
+            ?.let { slotIsEmptySoSetItemAt(it, newItem) }
+            ?: error("Inventory is full.")
     }
 
     private fun slotIsEmptySoSetItemAt(index: Int, newItem: InventoryItem) {
@@ -167,7 +173,9 @@ class InventoryContainer(numberOfSlots: Int = 0) {
     }
 
     private fun getItem(itemId: String): InventoryItem? {
-        return inventory.filterNotNull().firstOrNull { it.hasSameIdAs(itemId) }
+        return inventory
+            .filterNotNull()
+            .firstOrNull { it.hasSameIdAs(itemId) }
     }
 
     private fun findAllIndexesWithAmountOfItem(itemId: String): Map<Int, Int> {
@@ -175,27 +183,27 @@ class InventoryContainer(numberOfSlots: Int = 0) {
             .mapIndexed { index, item -> Triple(index, item?.id, item?.amount) }
             .filter { (_, id, _) -> id == itemId }
             .filter { (_, _, amount) -> amount != null }
-            .associate { (index, _, amount) -> Pair(index, amount) } as Map<Int, Int>
+            .associate { (index, _, amount) -> index to amount!! }
     }
 
-    private fun isSlotFilled(index: Int): Boolean {
-        return !isSlotEmpty(index)
+    private fun Int.isFilled(): Boolean {
+        return inventory[this] != null
     }
 
-    private fun isSlotEmpty(index: Int): Boolean {
-        return inventory[index] == null
+    private fun Int.isEmpty(): Boolean {
+        return inventory[this] == null
     }
 
-    private fun containsItemAt(index: Int, itemId: String): Boolean {
-        return inventory[index]?.hasSameIdAs(itemId) ?: false
+    private fun Int.contains(itemId: String): Boolean {
+        return inventory[this]?.hasSameIdAs(itemId) ?: false
     }
 
-    private fun getInventoryGroup(inventoryItem: InventoryItem?): InventoryGroup {
-        return inventoryItem?.group ?: InventoryGroup.EMPTY
+    private fun InventoryItem?.getInventoryGroup(): InventoryGroup {
+        return this?.group ?: InventoryGroup.EMPTY
     }
 
-    private fun getSort(inventoryItem: InventoryItem?): Int {
-        return inventoryItem?.sort ?: SORTING_SPLIT
+    private fun InventoryItem?.getSort(): Int {
+        return this?.sort ?: SORTING_SPLIT
     }
 
 }
