@@ -52,7 +52,9 @@ class InventoryImage(val inventoryItem: InventoryItem) : Image() {
 
     fun getDualDescription(otherItem: InventoryImage, totalMerchant: Int): List<InventoryDescription> {
         val descriptionCreator = DescriptionCreator(inventoryItem, totalMerchant)
-        return descriptionCreator.createItemDescriptionComparingToItem(otherItem.inventoryItem)
+        val selectedHeroId = InventoryUtils.getSelectedHero().id
+        val heroItem = gameData.party.getCertainHero(selectedHeroId)
+        return descriptionCreator.createItemDescriptionComparingToItemAndHero(otherItem.inventoryItem, heroItem)
     }
 
 }

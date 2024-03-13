@@ -12,9 +12,9 @@ import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.components.party.CalcAttributeId
 import nl.t64.cot.components.party.SuperEnum
+import nl.t64.cot.components.party.inventory.AttributeState
 import nl.t64.cot.components.party.inventory.InventoryDescription
 import nl.t64.cot.components.party.inventory.InventoryGroup
-import nl.t64.cot.components.party.inventory.ThreeState
 import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.inventory.InventoryUtils
@@ -75,7 +75,6 @@ open class ItemSlotTooltip : BaseTooltip() {
             val hoveredItem = hoveredImage.inventoryItem
             val inventoryGroup = hoveredItem.group
             val selectedHero = InventoryUtils.getSelectedHero()
-            val errorMessage = selectedHero.createMessageIfHeroHasNotEnoughFor(hoveredItem)
             val equippedItem = selectedHero.getInventoryItem(inventoryGroup)
 
             if (itemSlot.isOnHero()) {
@@ -85,8 +84,7 @@ open class ItemSlotTooltip : BaseTooltip() {
                 || inventoryGroup == InventoryGroup.ITEM
             ) {
                 createResourceTooltip(hoveredImage)
-            } else if (errorMessage == null
-                && equippedItem != null
+            } else if (equippedItem != null
                 && gameData.isComparingEnabled
             ) {
                 createDualTooltip(hoveredImage, InventoryImage(equippedItem))
@@ -210,8 +208,9 @@ open class ItemSlotTooltip : BaseTooltip() {
         return if (isBuyOrSellValue(attribute)) {
             createLabelStyle(Color.GOLD)
         } else when (attribute.compare) {
-            ThreeState.SAME, ThreeState.MORE -> createLabelStyle(Color.WHITE)
-            ThreeState.LESS -> createLabelStyle(Color.RED)
+            AttributeState.SAME -> createLabelStyle(Color.WHITE)
+            AttributeState.CANNOT_USE -> createLabelStyle(Color.RED)
+            else -> throw IllegalArgumentException("Comparing to hero cannot be LESS or MORE.")
         }
     }
 
@@ -219,9 +218,10 @@ open class ItemSlotTooltip : BaseTooltip() {
         return if (isBuyOrSellValue(attribute)) {
             createLabelStyle(Color.GOLD)
         } else when (attribute.compare) {
-            ThreeState.SAME -> createLabelStyle(Color.WHITE)
-            ThreeState.LESS -> createLabelStyle(ORANGE)
-            ThreeState.MORE -> createLabelStyle(Color.LIME)
+            AttributeState.CANNOT_USE -> createLabelStyle(Color.RED)
+            AttributeState.SAME -> createLabelStyle(Color.WHITE)
+            AttributeState.LESS -> createLabelStyle(ORANGE)
+            AttributeState.MORE -> createLabelStyle(Color.LIME)
         }
     }
 

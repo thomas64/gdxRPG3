@@ -10,12 +10,12 @@ class InventoryDescription {
 
     val key: Any        // Any can be SuperEnum or String.
     val value: Any      // Any can be Integer or String.
-    val compare: ThreeState
+    val compare: AttributeState
 
     constructor(key: Any, value: Any) {
         this.key = key
         this.value = value
-        this.compare = ThreeState.SAME
+        this.compare = AttributeState.SAME
     }
 
     constructor(key: Any, value: Any, item: InventoryItem, hero: HeroItem) {
@@ -24,61 +24,65 @@ class InventoryDescription {
         this.compare = isEnough(item, hero)
     }
 
-    constructor(key: Any, value: Any, item1: InventoryItem, item2: InventoryItem) {
+    constructor(key: Any, value: Any, item1: InventoryItem, item2: InventoryItem, hero: HeroItem) {
         this.key = key
         this.value = value
-        this.compare = compare(item1, item2)
+        this.compare = compare(item1, item2, hero)
     }
 
-    private fun isEnough(item: InventoryItem, hero: HeroItem): ThreeState {
+    private fun isEnough(item: InventoryItem, hero: HeroItem): AttributeState {
         return when {
-            value == 0 -> ThreeState.SAME
-            key is InventoryMinimal && key.createMessageIfHeroHasNotEnoughFor(item, hero) != null -> ThreeState.LESS
-            else -> ThreeState.SAME
+            isHeroNotEnoughForItem(item, hero) -> AttributeState.CANNOT_USE
+            else -> AttributeState.SAME
         }
     }
 
-    private fun compare(item1: InventoryItem, item2: InventoryItem): ThreeState {
-        return when (value) {
-            is Int -> compareInt(item1, item2)
-            "0" -> ThreeState.LESS
-            else -> ThreeState.SAME
+    private fun compare(item1: InventoryItem, item2: InventoryItem, hero: HeroItem): AttributeState {
+        return when {
+            isHeroNotEnoughForItem(item1, hero) -> AttributeState.CANNOT_USE
+            value is Int -> compareInt(item1, item2)
+            value == "0" -> AttributeState.LESS
+            else -> AttributeState.SAME
         }
     }
 
-    private fun compareInt(item1: InventoryItem, item2: InventoryItem): ThreeState {
+    private fun isHeroNotEnoughForItem(item: InventoryItem, hero: HeroItem): Boolean {
+        return key is InventoryMinimal && key.createMessageIfHeroHasNotEnoughFor(item, hero) != null
+    }
+
+    private fun compareInt(item1: InventoryItem, item2: InventoryItem): AttributeState {
         return when (key) {
             is StatItemId -> compareStats(item1, item2)
             is SkillItemId -> compareSkills(item1, item2)
             is CalcAttributeId -> compareCalcs(item1, item2)
-            else -> ThreeState.SAME
+            else -> AttributeState.SAME
         }
     }
 
-    private fun compareStats(item1: InventoryItem, item2: InventoryItem): ThreeState {
+    private fun compareStats(item1: InventoryItem, item2: InventoryItem): AttributeState {
         key as StatItemId
         return when {
-            item1.getAttributeOfStatItemId(key) < item2.getAttributeOfStatItemId(key) -> ThreeState.LESS
-            item1.getAttributeOfStatItemId(key) > item2.getAttributeOfStatItemId(key) -> ThreeState.MORE
-            else -> ThreeState.SAME
+            item1.getAttributeOfStatItemId(key) < item2.getAttributeOfStatItemId(key) -> AttributeState.LESS
+            item1.getAttributeOfStatItemId(key) > item2.getAttributeOfStatItemId(key) -> AttributeState.MORE
+            else -> AttributeState.SAME
         }
     }
 
-    private fun compareSkills(item1: InventoryItem, item2: InventoryItem): ThreeState {
+    private fun compareSkills(item1: InventoryItem, item2: InventoryItem): AttributeState {
         key as SkillItemId
         return when {
-            item1.getAttributeOfSkillItemId(key) < item2.getAttributeOfSkillItemId(key) -> ThreeState.LESS
-            item1.getAttributeOfSkillItemId(key) > item2.getAttributeOfSkillItemId(key) -> ThreeState.MORE
-            else -> ThreeState.SAME
+            item1.getAttributeOfSkillItemId(key) < item2.getAttributeOfSkillItemId(key) -> AttributeState.LESS
+            item1.getAttributeOfSkillItemId(key) > item2.getAttributeOfSkillItemId(key) -> AttributeState.MORE
+            else -> AttributeState.SAME
         }
     }
 
-    private fun compareCalcs(item1: InventoryItem, item2: InventoryItem): ThreeState {
+    private fun compareCalcs(item1: InventoryItem, item2: InventoryItem): AttributeState {
         key as CalcAttributeId
         return when {
-            item1.getAttributeOfCalcAttributeId(key) < item2.getAttributeOfCalcAttributeId(key) -> ThreeState.LESS
-            item1.getAttributeOfCalcAttributeId(key) > item2.getAttributeOfCalcAttributeId(key) -> ThreeState.MORE
-            else -> ThreeState.SAME
+            item1.getAttributeOfCalcAttributeId(key) < item2.getAttributeOfCalcAttributeId(key) -> AttributeState.LESS
+            item1.getAttributeOfCalcAttributeId(key) > item2.getAttributeOfCalcAttributeId(key) -> AttributeState.MORE
+            else -> AttributeState.SAME
         }
     }
 

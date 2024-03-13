@@ -30,8 +30,9 @@ class DescriptionCreator(
         return createDescriptionList()
     }
 
-    fun createItemDescriptionComparingToItem(otherItem: InventoryItem): List<InventoryDescription> {
-        createLine = { key: Any, value: Any -> InventoryDescription(key, value, inventoryItem, otherItem) }
+    fun createItemDescriptionComparingToItemAndHero(otherItem: InventoryItem,
+                                                    hero: HeroItem): List<InventoryDescription> {
+        createLine = { key: Any, value: Any -> InventoryDescription(key, value, inventoryItem, otherItem, hero) }
         minimalsYouDontHave = inventoryItem.getMinimalsOtherItemHasAndYouDont(otherItem)
         calcsYouDontHave = inventoryItem.getCalcsOtherItemHasAndYouDont(otherItem)
         statsYouDontHave = inventoryItem.getStatsOtherItemHasAndYouDont(otherItem)

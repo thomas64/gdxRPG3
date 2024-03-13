@@ -40,6 +40,8 @@ internal class ClockTable {
             val quarterOfScreenWidth = Gdx.graphics.width * .25f
             container.add(label).padLeft(PAD_LEFT).width(quarterOfScreenWidth + WIDTH).height(HEIGHT)
             container.pack()
+        } else {
+            container.clear()
         }
     }
 

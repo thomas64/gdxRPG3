@@ -1,8 +1,9 @@
 package nl.t64.cot.components.party.inventory
 
 
-enum class ThreeState {
+enum class AttributeState {
     MORE,
     LESS,
-    SAME
+    SAME,
+    CANNOT_USE
 }

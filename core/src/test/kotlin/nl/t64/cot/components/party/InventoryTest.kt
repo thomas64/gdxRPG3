@@ -436,27 +436,27 @@ internal class InventoryTest : GameTest() {
         whenever(heroMock.getStatById(StatItemId.STRENGTH)).thenReturn(strengthStat)
         val description = DescriptionCreator(weapon, 0).createItemDescriptionComparingToHero(heroMock)
         assertThat(description[4].key).isEqualTo(InventoryMinimal.SKILL)
-        assertThat(description[4].compare).isEqualTo(ThreeState.SAME)
+        assertThat(description[4].compare).isEqualTo(AttributeState.SAME)
         assertThat(description[5].key).isEqualTo(InventoryMinimal.MIN_STRENGTH)
-        assertThat(description[5].compare).isEqualTo(ThreeState.LESS)
+        assertThat(description[5].compare).isEqualTo(AttributeState.LESS)
     }
 
     @Test
     fun whenWeaponIsComparedToOtherWeapon_ShouldReturnSpecificThreeStates() {
         val mace = InventoryDatabase.createInventoryItem(BASIC_MACE)
         val sword = InventoryDatabase.createInventoryItem("basic_shortsword")
-        val description = DescriptionCreator(mace, 0).createItemDescriptionComparingToItem(sword)
+        val description = DescriptionCreator(mace, 0).createItemDescriptionComparingToItemAndHero(sword)
         assertThat(description[6].key).isEqualTo(CalcAttributeId.BASE_HIT)
-        assertThat(description[6].compare).isEqualTo(ThreeState.MORE)
+        assertThat(description[6].compare).isEqualTo(AttributeState.MORE)
         assertThat(description[7].key).isEqualTo(CalcAttributeId.DAMAGE)
-        assertThat(description[7].compare).isEqualTo(ThreeState.MORE)
+        assertThat(description[7].compare).isEqualTo(AttributeState.MORE)
     }
 
     @Test
     fun whenWeaponIsComparedToOtherTypeWeapon_ShouldReturnEmptyMinimalLines() {
         val horn = InventoryDatabase.createInventoryItem("legendary_horn_of_kynon")
         val spellbook = InventoryDatabase.createInventoryItem("legendary_spellbook")
-        val description = DescriptionCreator(horn, 0).createItemDescriptionComparingToItem(spellbook)
+        val description = DescriptionCreator(horn, 0).createItemDescriptionComparingToItemAndHero(spellbook)
         assertThat(description[0].key).isEqualTo(InventoryGroup.ACCESSORY)
         assertThat(description[1].key).isEqualTo("Price")
         assertThat(description[2].key).isEqualTo("Sell value")
@@ -470,16 +470,16 @@ internal class InventoryTest : GameTest() {
     fun whenShieldIsComparedToOtherShield_ShouldReturnSpecificThreeStates() {
         val light = InventoryDatabase.createInventoryItem("basic_light_shield")
         val medium = InventoryDatabase.createInventoryItem("basic_medium_shield")
-        val description1 = DescriptionCreator(light, 0).createItemDescriptionComparingToItem(medium)
+        val description1 = DescriptionCreator(light, 0).createItemDescriptionComparingToItemAndHero(medium)
         assertThat(description1[7].key).isEqualTo(StatItemId.SPEED)
-        assertThat(description1[7].compare).isEqualTo(ThreeState.MORE)
+        assertThat(description1[7].compare).isEqualTo(AttributeState.MORE)
         assertThat(description1[8].key).isEqualTo(SkillItemId.STEALTH)
-        assertThat(description1[8].compare).isEqualTo(ThreeState.MORE)
-        val description2 = DescriptionCreator(medium, 0).createItemDescriptionComparingToItem(light)
+        assertThat(description1[8].compare).isEqualTo(AttributeState.MORE)
+        val description2 = DescriptionCreator(medium, 0).createItemDescriptionComparingToItemAndHero(light)
         assertThat(description2[7].key).isEqualTo(StatItemId.SPEED)
-        assertThat(description2[7].compare).isEqualTo(ThreeState.LESS)
+        assertThat(description2[7].compare).isEqualTo(AttributeState.LESS)
         assertThat(description2[8].key).isEqualTo(SkillItemId.STEALTH)
-        assertThat(description2[8].compare).isEqualTo(ThreeState.LESS)
+        assertThat(description2[8].compare).isEqualTo(AttributeState.LESS)
     }
 
 }

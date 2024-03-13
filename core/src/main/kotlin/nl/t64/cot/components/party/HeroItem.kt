@@ -207,7 +207,7 @@ data class HeroItem(
             ?.let { twoHandedWeapon -> shieldItem.createMessageFailToEquipTwoHanded(twoHandedWeapon) }
     }
 
-    fun createMessageIfHeroHasNotEnoughFor(inventoryItem: InventoryItem): String? {
+    private fun createMessageIfHeroHasNotEnoughFor(inventoryItem: InventoryItem): String? {
         return InventoryMinimal.entries
             .mapNotNull { it.createMessageIfHeroHasNotEnoughFor(inventoryItem, this) }
             .firstOrNull()

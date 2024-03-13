@@ -57,6 +57,12 @@ class MenuLoadMain : MenuLoad() {
     override val loadButtonName: String = MENU_ITEM_START
     override fun possibleNewGame() = newGame()
     override fun possibleLoadGame() = fadeBeforeOpenWorldScreen()
+
+    override fun hide() {
+        val menuLoadPause = screenManager.getMenuScreen(ScreenType.MENU_LOAD_PAUSE) as MenuLoadPause
+        menuLoadPause.selectedListIndex = selectedListIndex
+        super.hide()
+    }
 }
 
 class MenuLoadPause : MenuLoad() {
@@ -67,6 +73,12 @@ class MenuLoadPause : MenuLoad() {
     override val loadButtonName: String = MENU_ITEM_LOAD
     override fun possibleNewGame() = errorSound()
     override fun possibleLoadGame() = DialogQuestion({ fadeBeforeOpenWorldScreen() }, LOAD_MESSAGE).show(stage)
+
+    override fun hide() {
+        val menuLoadMain = screenManager.getMenuScreen(ScreenType.MENU_LOAD_MAIN) as MenuLoadMain
+        menuLoadMain.selectedListIndex = selectedListIndex
+        super.hide()
+    }
 }
 
 abstract class MenuLoad : MenuScreen() {
@@ -80,7 +92,7 @@ abstract class MenuLoad : MenuScreen() {
     private lateinit var listenerKeyVertical: ListenerKeyVertical
     private lateinit var listenerKeyHorizontal: ListenerKeyHorizontal
 
-    private var selectedListIndex = 0
+    var selectedListIndex = 0
 
     private var isBgmFading = false
     private var isLoaded = false
