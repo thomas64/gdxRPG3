@@ -105,7 +105,7 @@
         "conversationId": "kaidan_come_home"
       },
       "17": {
-        "taskPhrase": "            Report back to Jaron",
+        "taskPhrase": "            Report back to Jaron.",
         "type"      : "RETURN",
         "linkedWith": ["12"]
       }
@@ -114,7 +114,7 @@
   "quest_get_horse"            : {
     "title"     : "A helping horse",
     "entityId"  : "woman03",
-    "summary"   : "Get Horse",
+    "summary"   : "Get horse",
     "isSubQuest": true,
     "linkedWith": ["quest_helping_horse"],
     "tasks"     : {
@@ -132,7 +132,7 @@
         "linkedWith": ["7"]
       },
       "7" : {
-        "taskPhrase": "      Cure horse Enopa",
+        "taskPhrase": "      Cure horse Enopa.",
         "type"      : "FREE",
         "isHidden"  : true
       },

@@ -1,6 +1,9 @@
 package nl.t64.cot.components.quest
 
 import nl.t64.cot.Utils.gameData
+import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playSe
+import nl.t64.cot.audio.stopAllSe
 
 
 class QuestTask(
@@ -14,6 +17,7 @@ class QuestTask(
     val isOptional: Boolean = false,
     var isHidden: Boolean = false,
     var isRepeatable: Boolean = false,
+    var hasRewardSound: Boolean = false,
     val linkedWith: List<String> = emptyList()
 ) {
     var isReset: Boolean = false
@@ -74,7 +78,7 @@ class QuestTask(
 
     fun hasTargetInInventoryOrEquipment(): Boolean {
         return gameData.inventory.contains(target)
-                || gameData.party.hasItemInEquipment(getTargetEntry().key, getTargetEntry().value)
+            || gameData.party.hasItemInEquipment(getTargetEntry().key, getTargetEntry().value)
     }
 
     fun hasTargetInInventory(): Boolean {
@@ -89,6 +93,10 @@ class QuestTask(
         if (!isRepeatable) {
             updatedPhrase?.let { taskPhrase = it }
             isComplete = true
+            if (hasRewardSound) {
+                stopAllSe()
+                playSe(AudioEvent.SE_REWARD)
+            }
         }
     }
 

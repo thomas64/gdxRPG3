@@ -1,81 +1,85 @@
 {
   "quest_grace_is_missing": {
-    "title"   : "Grace is missing",
-    "entityId": "girl01",
-    "summary" : "Grace wasn't in her bed when you woke up. She probably went to Honeywood Forest in the north. But since there are orcs roaming in the forest, it's dangerous at night.",
-    "tasks"   : {
-      "1": {
-        "taskPhrase"   : "Search for a clue about where Grace went",
-        "updatedPhrase": "Find one of Grace's ribbons",
+    "title"     : "Grace is missing",
+    "entityId"  : "girl01",
+    "summary"   : "Grace wasn't in her bed when you woke up. She probably went to Honeywood Forest in the north. But since there are orcs roaming in the forest, it's dangerous at night.",
+    "linkedWith": ["quest_orc_guards"],
+    "tasks"     : {
+      "1" : {
+        "taskPhrase"   : "Search for a clue about where Grace went.",
+        "updatedPhrase": "Find one of Grace's ribbons.",
         "type"         : "FIND_ITEM",
         "target"       : {"grace_ribbon": 1},
         "isOptional"   : true,
         "linkedWith"   : ["2"]
       },
-      "2": {
-        "taskPhrase"   : "Search for where Grace went",
-        "updatedPhrase": "Find a hidden cave",
+      "2" : {
+        "taskPhrase"   : "Search for where Grace went.",
+        "updatedPhrase": "Find a hidden cave.",
         "type"         : "DISCOVER",
         "isHidden"     : true,
         "linkedWith"   : ["3"]
       },
-      "3": {
-        "taskPhrase"   : "Find out if Grace is in the cave",
-        "updatedPhrase": "Exit the cave past the guards",
+      "3" : {
+        "taskPhrase"   : "Search for where Grace went.",
+        "updatedPhrase": "Exit the cave past the guards.",
         "type"         : "DISCOVER",
         "isHidden"     : true,
-        "linkedWith"   : ["4"]
+        "linkedWith"   : ["9"]
       },
-      "4": {
-        "taskPhrase"   : "Rescue Grace from Ardor",
-        "updatedPhrase": "Found Grace being murdered by Ardor",
+      "9" : {
+        "taskPhrase"   : "Search for where Grace is being held captive.",
+        "updatedPhrase": "Find Grace being murdered by Ardor.",
         "type"         : "DISCOVER",
         "isHidden"     : true
       },
-      "5": {
-        "taskPhrase": "Something went very wrong and everything burned, including Ardor",
+      "10": {
+        "taskPhrase": "Something went very wrong and everything burned, including Ardor.",
         "type"      : "DISCOVER",
         "isHidden"  : true
       }
     }
   },
   "quest_orc_guards"      : {
-    "title"   : "The guards of Ardor",
-    "entityId": "orc_sergeant",
-    "summary" : "Two imposing orc guards are stationed at the cave exit leading to Ardor's domain. They refuse to permit your passage.",
-    "tasks"   : {
-      "1": {
-        "taskPhrase": "Find a magic scroll for manipulating orcs?",
+    "title"     : "Grace is missing",
+    "entityId"  : "orc_sergeant",
+    "summary"   : "Orc guards",
+    "isSubQuest": true,
+    "tasks"     : {
+      "4": {
+        "taskPhrase": "      Find a way to get past the two imposing orc guards stationed at the cave exit leading to Ardor's domain.",
+        "type"      : "FREE"
+      },
+      "5": {
+        "taskPhrase": "            Find a magic scroll for manipulating orcs.",
         "type"      : "FIND_ITEM",
         "target"    : {"scroll_of_orc_obedience": 1},
         "isOptional": true,
         "isHidden"  : true
       },
-      "2": {
-        "taskPhrase": "Use the scroll on the guards",
-        "type"      : "GIVE_ITEM",
-        "target"    : {"scroll_of_orc_obedience": 1},
-        "isOptional": true,
-        "isHidden"  : true,
-        "linkedWith": ["5"]
+      "6": {
+        "taskPhrase"    : "            Use the scroll on the guards.",
+        "type"          : "GIVE_ITEM",
+        "target"        : {"scroll_of_orc_obedience": 1},
+        "isOptional"    : true,
+        "isHidden"      : true,
+        "hasRewardSound": true,
+        "linkedWith"    : ["4"]
       },
-      "3": {
-        "taskPhrase": "Convince the guards to really fear Ardor",
-        "type"      : "SAY_THE_RIGHT_THING",
-        "isOptional": true,
-        "isHidden"  : true,
-        "linkedWith": ["5"]
+      "7": {
+        "taskPhrase"    : "            Convince the guards to really fear Ardor.",
+        "type"          : "SAY_THE_RIGHT_THING",
+        "isOptional"    : true,
+        "isHidden"      : true,
+        "hasRewardSound": true,
+        "linkedWith"    : ["4"]
       },
-      "4": {
-        "taskPhrase": "Kill the guards",
+      "8": {
+        "taskPhrase": "            Kill the guards.",
         "type"      : "KILL",
         "isOptional": true,
         "isHidden"  : true,
-        "linkedWith": ["5"]
-      },
-      "5": {
-        "taskPhrase": "Find a way to get past the guards",
-        "type"      : "FREE"
+        "linkedWith": ["4"]
       }
     }
   },
@@ -85,19 +89,19 @@
     "summary" : "The Mother of Fairies said: When you return inside the cave, head all the way south, then east, and search the north wall. There's a hidden door in the light.",
     "tasks"   : {
       "1": {
-        "taskPhrase": "Search near the described area",
+        "taskPhrase": "Search near the described area.",
         "type"      : "CHECK",
         "linkedWith": ["2"]
       },
       "2": {
-        "taskPhrase": "Find the secret door",
+        "taskPhrase": "Find the secret door.",
         "type"      : "FREE",
         "isHidden"  : true,
         "linkedWith": ["3"]
       },
       "3": {
-        "taskPhrase"   : "Look for the magic scroll",
-        "updatedPhrase": "Find a magic scroll for manipulating orcs?",
+        "taskPhrase"   : "Look for the magic scroll.",
+        "updatedPhrase": "Find a magic scroll for manipulating orcs.",
         "type"         : "FIND_ITEM",
         "target"       : {"scroll_of_orc_obedience": 1},
         "isHidden"     : true
