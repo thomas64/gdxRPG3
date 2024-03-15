@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ScreenUtils
+import nl.t64.cot.INVALID_PROFILE_VIEW
 import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.mapManager
@@ -115,6 +116,7 @@ abstract class MenuLoad : MenuScreen() {
         setCurrentTextButtonToSelected()
 
         thread { loadProfiles() }
+        applyAllListeners()
     }
 
     override fun render(dt: Float) {
@@ -131,14 +133,6 @@ abstract class MenuLoad : MenuScreen() {
         stage.draw()
     }
 
-    private fun loadProfiles() {
-        profiles = profileManager.getVisualProfileArray()
-        listItems.setItems(profiles)
-        listItems.selectedIndex = selectedListIndex
-        applyAllListeners()
-        isLoaded = true
-    }
-
     private fun selectMenuItem() {
         when (selectedMenuIndex) {
             0 -> processLoadButton()
@@ -149,7 +143,9 @@ abstract class MenuLoad : MenuScreen() {
     }
 
     private fun processLoadButton() {
-        if (profileManager.doesProfileExist(selectedListIndex)) {
+        if (!isLoaded || profiles[selectedListIndex].contains(INVALID_PROFILE_VIEW)) {
+            errorSound()
+        } else if (profileManager.doesProfileExist(selectedListIndex)) {
             possibleLoadGame()
         } else {
             possibleNewGame()
@@ -161,7 +157,7 @@ abstract class MenuLoad : MenuScreen() {
     abstract fun possibleNewGame()
 
     private fun processDeleteButton() {
-        if (profileManager.doesProfileExist(selectedListIndex)) {
+        if (isLoaded && profileManager.doesProfileExist(selectedListIndex)) {
             DialogQuestion({ deleteSaveFile() }, DELETE_MESSAGE).show(stage)
         } else {
             errorSound()
@@ -200,9 +196,17 @@ abstract class MenuLoad : MenuScreen() {
 
     private fun deleteSaveFile() {
         profileManager.removeProfile(selectedListIndex)
+        isLoaded = false
+        profiles = profileManager.getVisualLoadingArray()
+        listItems.setItems(profiles)
+        thread { loadProfiles() }
+    }
+
+    private fun loadProfiles() {
         profiles = profileManager.getVisualProfileArray()
         listItems.setItems(profiles)
         listItems.selectedIndex = selectedListIndex
+        isLoaded = true
     }
 
     private fun createTables() {

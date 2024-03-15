@@ -3,6 +3,7 @@ package nl.t64.cot
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Preferences
 import com.badlogic.gdx.utils.Json
+import com.badlogic.gdx.utils.SerializationException
 import ktx.collections.GdxArray
 import ktx.collections.GdxMap
 import ktx.collections.set
@@ -21,6 +22,7 @@ private const val PROFILE_ID = "id"
 private const val PROFILE_SAVE_DATE = "saveDate"
 private const val DATE_PATTERN = "yyyy-MM-dd HH:mm"
 private const val DEFAULT_EMPTY_PROFILE_VIEW = " [...]"
+const val INVALID_PROFILE_VIEW = " [Invalid]"
 
 class ProfileManager {
 
@@ -92,7 +94,12 @@ class ProfileManager {
     private fun getVisualOf(profileIndex: Int): String {
         val saveFile = getSaveFileBy(profileIndex)
         return if (saveFile.contains(SAVE_STATE_KEY)) {
-            "${saveFile.getString(PROFILE_ID)} [${saveFile.getString(PROFILE_SAVE_DATE)}]"
+            try {
+                getSaveStateProperties(saveFile)
+                "${saveFile.getString(PROFILE_ID)} [${saveFile.getString(PROFILE_SAVE_DATE)}]"
+            } catch (e: SerializationException) {
+                "${profileIndex + 1} $INVALID_PROFILE_VIEW"
+            }
         } else {
             "${profileIndex + 1} $DEFAULT_EMPTY_PROFILE_VIEW"
         }
