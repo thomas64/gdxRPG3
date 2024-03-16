@@ -59,7 +59,7 @@
       },
       "6": {
         "taskPhrase"    : "            Use the scroll on the guards.",
-        "type"          : "GIVE_ITEM",
+        "type"          : "PROVIDE_ITEM",
         "target"        : {"scroll_of_orc_obedience": 1},
         "isOptional"    : true,
         "isHidden"      : true,

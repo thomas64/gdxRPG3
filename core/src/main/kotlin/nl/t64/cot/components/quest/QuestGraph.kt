@@ -109,10 +109,10 @@ data class QuestGraph(
             .forEach { setTaskComplete(it.key) }
     }
 
-    fun possibleSetGiveItemTaskComplete() {
+    fun possibleSetProvideItemTaskComplete() {
         accept()
         tasks.toSortedMap(compareBy<String> { it.length }.thenBy { it })
-            .filterValues { it.type == QuestTaskType.GIVE_ITEM }
+            .filterValues { it.type == QuestTaskType.PROVIDE_ITEM }
             .filterValues { !it.isComplete }
             .filterValues { it.hasTargetInInventory() }
             .entries
@@ -144,9 +144,9 @@ data class QuestGraph(
 
     }
 
-    fun receiveItemsToDeliver(): Loot {
+    fun receiveItemsForQuest(): Loot {
         return tasks.values
-            .filter { it.type == QuestTaskType.DELIVER_ITEM }
+            .filter { it.type in listOf(QuestTaskType.DELIVER_ITEM, QuestTaskType.CHECK_WITH_ITEM) }
             .map { it.target }
             .flatMap { it.toList() }
             .toMap()
@@ -250,8 +250,8 @@ data class QuestGraph(
 
     private fun isReadyToBeFinished(): Boolean {
         return isOneOfBothStatesEqualOrHigherThan(QuestState.ACCEPTED)
-                && currentState != QuestState.FINISHED
-                && areAllQuestTasksComplete()
+            && currentState != QuestState.FINISHED
+            && areAllQuestTasksComplete()
     }
 
     fun finish(showTooltip: Boolean) {

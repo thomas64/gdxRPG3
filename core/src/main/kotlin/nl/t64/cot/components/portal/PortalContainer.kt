@@ -9,11 +9,17 @@ class PortalContainer {
         Portal.LASTDENN.name to false
     )
 
-    fun getAllActivatedPortalsExcept(currentMapName: String): Array<Portal> = portals
-        .filterKeys { it != currentMapName }
-        .filterValues { it }
-        .map { Portal.valueOf(it.key) }
-        .toTypedArray()
+    fun getAllIds(): Array<String> {
+        return portals.keys.toTypedArray()
+    }
+
+    fun getAllActivatedPortalsExcept(currentMapName: String): Array<Portal> {
+        return portals
+            .filterKeys { it != currentMapName }
+            .filterValues { it }
+            .map { Portal.valueOf(it.key) }
+            .toTypedArray()
+    }
 
     fun isActivated(portalId: String): Boolean {
         return portals[portalId]!!

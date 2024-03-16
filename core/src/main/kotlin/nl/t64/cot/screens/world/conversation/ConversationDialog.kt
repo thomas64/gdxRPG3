@@ -184,7 +184,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             ConversationCommand.HEAL_LIFE -> healLife(nextId)
             ConversationCommand.RECEIVE_XP -> receiveXp(nextId)
             ConversationCommand.RECEIVE_SPELLS -> receiveSpells(nextId)
-            ConversationCommand.RECEIVE_ITEMS -> receiveItems()
+            ConversationCommand.RECEIVE_ITEM -> receiveItem()
             ConversationCommand.START_BATTLE -> startBattle(nextId)
             ConversationCommand.RELOAD_NPCS -> reloadNpcs(nextId)
 
@@ -193,9 +193,9 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             ConversationCommand.TRADE_QUEST_ITEMS -> tradeQuestItems()
             ConversationCommand.SHOW_QUEST_ITEM -> showQuestItem(nextId)
             ConversationCommand.WEAR_QUEST_ITEM -> wearQuestItem(nextId)
-            ConversationCommand.GIVE_QUEST_ITEM -> giveQuestItem(nextId)
+            ConversationCommand.PROVIDE_QUEST_ITEM -> provideQuestItem(nextId)
             ConversationCommand.SAY_QUEST_THING -> sayQuestThing(nextId)
-            ConversationCommand.RECEIVE_QUEST_ITEM_TO_DELIVER -> receiveQuestItemToDeliver()
+            ConversationCommand.RECEIVE_ITEM_FOR_QUEST -> receiveItemForQuest()
             ConversationCommand.DELIVER_QUEST_ITEM -> deliverQuestItem(nextId)
             ConversationCommand.DELIVER_QUEST_ITEM_ALTERNATE -> deliverQuestItemAlternate(nextId)
             ConversationCommand.DELIVER_QUEST_MESSAGE -> deliverQuestMessage(nextId)
@@ -288,10 +288,9 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         continueConversation(nextId)
     }
 
-    private fun receiveItems() {
-        val quest = gameData.quests.getQuestById(conversationId)
+    private fun receiveItem() {
         val receive = gameData.loot.getLoot(conversationId)
-        endConversationAndLoad { ReceiveScreen.load(receive, quest, graph) }
+        endConversationAndLoad { ReceiveScreen.load(receive, null, graph) }
     }
 
     private fun startBattle(nextId: String) {
@@ -321,7 +320,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
 
     private fun showQuestItem(nextId: String) {
         gameData.quests.getQuestById(conversationId).possibleSetShowItemTaskComplete()
-        endConversation(nextId)
+        continueConversation(nextId)
     }
 
     private fun wearQuestItem(nextId: String) {
@@ -329,24 +328,24 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         endConversation(nextId)
     }
 
-    private fun giveQuestItem(nextId: String) {
-        gameData.quests.getQuestById(conversationId).possibleSetGiveItemTaskComplete()
+    private fun provideQuestItem(nextId: String) {
+        gameData.quests.getQuestById(conversationId).possibleSetProvideItemTaskComplete()
         continueConversation(nextId)
     }
 
     private fun sayQuestThing(nextId: String) {
         val quest = gameData.quests.getQuestById(conversationId)
-        val receive = ConversationSpoilLoader.getLoot(conversationId, QuestGraph::setSayTheRightThingTaskCompleteAndReceivePossibleTarget)
-        if (receive.isTaken()) {
+        val possibleReceive = ConversationSpoilLoader.getLoot(conversationId, QuestGraph::setSayTheRightThingTaskCompleteAndReceivePossibleTarget)
+        if (possibleReceive.isTaken()) {
             endConversation(nextId)
         } else {
-            endConversationAndLoad { ReceiveScreen.load(receive, quest, graph) }
+            endConversationAndLoad { ReceiveScreen.load(possibleReceive, quest, graph) }
         }
     }
 
-    private fun receiveQuestItemToDeliver() {
+    private fun receiveItemForQuest() {
         val quest = gameData.quests.getQuestById(conversationId)
-        val receive = ConversationSpoilLoader.getLoot(conversationId, QuestGraph::receiveItemsToDeliver)
+        val receive = ConversationSpoilLoader.getLoot(conversationId, QuestGraph::receiveItemsForQuest)
         endConversationAndLoad { ReceiveScreen.load(receive, quest, graph) }
     }
 

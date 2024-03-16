@@ -13,7 +13,7 @@
   },
   "dont_go_south"      : {
     "phrases": {
-      "1": {"text": ["No, I shouldn't go back. I have to find Grace first.", "There must be {COLOR=NAVY}something near {COLOR=BLACK}where I found the ribbon."], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["No, I shouldn't go back. I have to find Grace first.", "There must be {COLOR=BLUE}something near {COLOR=BLACK}where I found the ribbon."], "choices": [{"command": "EXIT"}]}
     }
   },
   "fairy_welcome"      : {
@@ -151,13 +151,23 @@
   "fairy_shop"         : {
     "name"   : "Fairy Shop",
     "phrases": {
-      "1": {"text": ["Young Mozes, would you like to browse my wares?"]},
-      "2": {
+      "1"   : {"text": ["Young Mozes, would you like to browse my wares?"]},
+      "2"   : {
         "choices": [
+          {
+            "condition": ["i_rc_>=_a_q_quest_honeywood_elder", "i_n_1_>=_item_letter_to_fairy_shop", "i_n_5_>=_item_gold", "i_n_5_>=_item_gemstone"],
+            "text"     : "[Letter, Gold 5, Gemstone 5] *Deliver the message from the village elder.*", "command": "DELIVER_QUEST_ITEM", "nextId": "10"
+          },
           {"text": "*Visit the shop.*", "command": "LOAD_SHOP"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
-      }
+      },
+      "10"  : {"text": ["Let's see... {WAIT=0.5}Ah yes, a letter from our lovely Grahan..."]},
+      "11"  : {"text": ["{SPEED=0.2} . . . . ."]},
+      "12"  : {"text": ["Well of course, glad to be of assistance. Here you go."]},
+      "13"  : {"text": ["Good luck on your travels, Mozes!"], "choices": [{"command": "RECEIVE_ITEM"}]},
+      "1199": {"text": ["Don't forget to take the elder's request."], "choices": [{"command": "RECEIVE_ITEM"}]},
+      "1200": {"text": ["Young Mozes, would you like to browse my wares?"], "choices": [{"nextId": "2"}]}
     }
   },
   "notice_dense_fog"   : {

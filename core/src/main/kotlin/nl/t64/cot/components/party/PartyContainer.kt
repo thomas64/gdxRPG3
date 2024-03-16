@@ -83,7 +83,11 @@ class PartyContainer {
     }
 
     fun hasItemInEquipment(inventoryItemId: String, amount: Int): Boolean {
-        return getAllHeroes().count { it.hasInventoryItem(inventoryItemId) } >= amount
+        return getAmountOfItemInEquipment(inventoryItemId) >= amount
+    }
+
+    fun getAmountOfItemInEquipment(inventoryItemId: String): Int {
+        return getAllHeroes().count { it.hasInventoryItem(inventoryItemId) }
     }
 
     fun contains(heroId: String): Boolean {

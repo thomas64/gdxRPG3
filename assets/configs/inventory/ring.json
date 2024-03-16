@@ -26,6 +26,13 @@
     "min_intelligence": 25,
     "wizard"          : 2
   },
+  "epic_fairy_ring"     : {
+    "name"      : "Fairy Ring",
+    "group"     : "RING",
+    "sort"      : 61000,
+    "price"     : 50,
+    "protection": 1
+  },
   "epic_ethereal_ring"  : {
     "name"      : "Ethereal Ring",
     "group"     : "RING",

@@ -54,6 +54,7 @@ class QuestTask(
             QuestTaskType.FREE,
             QuestTaskType.DISCOVER,
             QuestTaskType.CHECK,
+            QuestTaskType.CHECK_WITH_ITEM,
             QuestTaskType.FIND_ITEM,
             QuestTaskType.SHOW_ITEM,
             QuestTaskType.WEAR_ITEM,
@@ -63,7 +64,7 @@ class QuestTask(
             QuestTaskType.RETURN -> completeTask()
             QuestTaskType.DELIVER_ITEM,
             QuestTaskType.TRADE_ITEMS,
-            QuestTaskType.GIVE_ITEM -> {
+            QuestTaskType.PROVIDE_ITEM -> {
                 removeTargetFromInventory()
                 completeTask()
             }

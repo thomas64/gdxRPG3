@@ -5,7 +5,9 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.Window
 import nl.t64.cot.Utils
+import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.mapManager
+import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
@@ -38,6 +40,7 @@ class WarpScreen : ParchmentScreen() {
         setInputProcessors(stage)
         stage.addActor(portalListWindow)
         stage.addListener(WarpScreenListener({ warp() },
+                                             { cheatActivateAllPortals() },
                                              { closeScreen() }))
         stage.keyboardFocus = portalListTable.portalList
         stage.scrollFocus = portalListTable.scrollPane
@@ -76,6 +79,15 @@ class WarpScreen : ParchmentScreen() {
             Actions.removeActor(),
             Actions.run { stage.clear() }
         ))
+    }
+
+    private fun cheatActivateAllPortals() {
+        if (preferenceManager.isInDebugMode) {
+            playSe(AudioEvent.SE_MENU_ERROR)
+            val portals = gameData.portals
+            portals.getAllIds().forEach { portals.activate(it) }
+            portalListTable.populatePortalList(currentMapName)
+        }
     }
 
 }

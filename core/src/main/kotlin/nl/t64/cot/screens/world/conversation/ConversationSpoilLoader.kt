@@ -17,7 +17,7 @@ class ConversationSpoilLoader private constructor(
         }
     }
 
-    fun getSpoil(): Spoil {
+    private fun getSpoil(): Spoil {
         return if (gameData.spoils.containsActiveSpoil(conversationId)) {
             getActiveSpoil()
         } else {
@@ -30,10 +30,9 @@ class ConversationSpoilLoader private constructor(
     }
 
     private fun createNewSpoil(): Spoil {
-        val quest = gameData.quests.getQuestById(conversationId)
-        return Spoil(loot = getLoot.invoke(quest)).also {
-            gameData.spoils.addSpoil(conversationId, it)
-        }
+        val quest: QuestGraph = gameData.quests.getQuestById(conversationId)
+        return Spoil(loot = getLoot.invoke(quest))
+            .also { gameData.spoils.addSpoil(conversationId, it) }
     }
 
 }

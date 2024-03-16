@@ -12,11 +12,11 @@ import nl.t64.cot.constants.ScreenType
 
 class ReceiveScreen : LootScreen() {
 
-    private lateinit var quest: QuestGraph
+    private var quest: QuestGraph? = null
     private lateinit var conversation: ConversationGraph
 
     companion object {
-        fun load(receive: Loot, quest: QuestGraph, conversation: ConversationGraph) {
+        fun load(receive: Loot, quest: QuestGraph?, conversation: ConversationGraph) {
             playSe(AudioEvent.SE_SPARKLE)
             val receiveScreen = screenManager.getScreen(ScreenType.RECEIVE) as ReceiveScreen
             receiveScreen.loot = receive
@@ -29,10 +29,10 @@ class ReceiveScreen : LootScreen() {
 
     override fun resolveLootAndCloseScreen(isAllTheLootCleared: Boolean) {
         if (isAllTheLootCleared) {
-            quest.accept()
+            quest?.accept()
             conversation.currentPhraseId = Constant.PHRASE_ID_LOOT_TAKEN
         } else {
-            quest.know()
+            quest?.know()
             conversation.currentPhraseId = Constant.PHRASE_ID_LOOT_LEFTOVER
         }
         closeScreen(audioEvent = AudioEvent.SE_CONVERSATION_NEXT)

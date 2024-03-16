@@ -8,7 +8,7 @@
   },
   "guide_event_inventory"            : {
     "type"     : "messagebox",
-    "condition": ["_n_3_==_item_healing_potion"],
+    "condition": ["_n_3_>=_item_healing_potion"],
     "text"     : [
       "Press the %inventory% to access your inventory,",
       "where you can view your equipment, stats, skills, and spells."
@@ -57,7 +57,7 @@
   },
   "guide_event_equipment"            : {
     "type"     : "messagebox",
-    "condition": ["_n_1_==_item_basic_light_helmet"],
+    "condition": ["_n_1_>=_item_basic_light_helmet"],
     "text"     : [
       "Press the %inventory% to access your inventory.",
       "Here, you can equip various items such as armor and weapons."

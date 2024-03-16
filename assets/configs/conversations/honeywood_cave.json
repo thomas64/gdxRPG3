@@ -16,7 +16,7 @@
           {"text": "*Request passage.*", "nextId": "9"},
           {"text": "*Demand passage.*", "nextId": "10"},
           {"condition": ["barbarian4"], "text": "[Barbarian 4] *Threaten them for passage!*", "nextId": "30"},
-          {"condition": ["i_n_1_>=_item_scroll_of_orc_obedience"], "text": "[Scroll of Orc Obedience] *Command passage!*", "command": "GIVE_QUEST_ITEM", "nextId": "60"},
+          {"condition": ["i_n_1_>=_item_scroll_of_orc_obedience"], "text": "[Scroll of Orc Obedience] *Command passage!*", "command": "PROVIDE_QUEST_ITEM", "nextId": "60"},
           {"condition": ["level10"], "text": "[Level 10] *Attack them for passage!*", "nextId": "40"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
@@ -27,8 +27,8 @@
       "10": {"text": ["Why? You leave now, or die!"], "choices": [{"nextId": "3"}]},
       "20": {"face": "orc_sergeant", "text": ["That is mask of Ardor, he does need that. Why do you have mask?"]},
       "21": {"face": "mozes", "text": ["An orcish fellow needed to deliver it, but he couldn't make it. That's where I come in."]},
-      "22": {"face": "orc_sergeant", "text": [". . ."]},
-      "23": {"face": "orc_sergeant", "text": ["You go through."], "choices": [{"command": "SHOW_QUEST_ITEM", "nextId": "50"}]},
+      "22": {"face": "orc_sergeant", "text": [". . ."], "choices": [{"command": "SHOW_QUEST_ITEM", "nextId": "23"}]},
+      "23": {"face": "orc_sergeant", "text": ["You go through."], "choices": [{"command": "EXIT", "nextId": "50"}]},
       "30": {"face": "orc_sergeant", "text": ["No! You leave, or die!"]},
       "31": {"face": "mozes", "text": ["You won't let me through? Ardor will not be pleased when he hears of this!"]},
       "32": {"face": "orc_sergeant", "text": ["Grrrr..."]},

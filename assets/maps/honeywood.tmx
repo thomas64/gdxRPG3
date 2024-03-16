@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="96" height="78" tilewidth="24" tileheight="24" infinite="0" nextlayerid="57" nextobjectid="414">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="96" height="78" tilewidth="24" tileheight="24" infinite="0" nextlayerid="57" nextobjectid="415">
  <properties>
   <property name="bgm" value="bgm_honeywood"/>
   <property name="lightmap_camera" value="sunlight"/>
@@ -149,7 +149,7 @@
   <object id="333" name="sand" x="288" y="456" width="48" height="24"/>
   <object id="335" name="sand" x="336" y="336" width="48" height="24"/>
  </objectgroup>
- <objectgroup color="#aa0000" id="8" name="collision" visible="0">
+ <objectgroup color="#aa0000" id="8" name="collision">
   <object id="2" x="768" y="0" width="1152" height="240"/>
   <object id="3" x="0" y="0" width="768" height="144"/>
   <object id="4" x="720" y="192" width="48" height="48"/>
@@ -469,5 +469,6 @@
   <object id="366" name="event_honeywood_soldiers" type="discover" x="1068" y="1794" width="24" height="6"/>
   <object id="393" name="everything_is_back_again" type="discover" x="504" y="528" width="96" height="48"/>
   <object id="394" name="guide_event_party_member" type="discover" x="1008" y="960" width="336" height="336"/>
+  <object id="414" name="dont_have_time_for_this" type="discover" x="1896" y="240" width="144" height="24"/>
  </objectgroup>
 </map>

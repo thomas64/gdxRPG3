@@ -1,6 +1,6 @@
 
 armor2.png
-size: 434, 372
+size: 434, 434
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
@@ -67,233 +67,240 @@ epic_ethereal_ring
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_gauntlets_of_might
+epic_fairy_ring
   rotate: false
   xy: 124, 62
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_hands_of_healing
+epic_gauntlets_of_might
   rotate: false
   xy: 186, 62
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_harp_of_igone
+epic_hands_of_healing
   rotate: false
   xy: 248, 62
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_hat_of_insight
+epic_harp_of_igone
   rotate: false
   xy: 310, 62
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_hat_of_wisdom
+epic_hat_of_insight
   rotate: false
   xy: 372, 62
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_helm_of_charisma
+epic_hat_of_wisdom
   rotate: false
   xy: 0, 124
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_helm_of_knowledge
+epic_helm_of_charisma
   rotate: false
   xy: 62, 124
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_helm_of_tempests
+epic_helm_of_knowledge
   rotate: false
   xy: 124, 124
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_heros_gauntlets
+epic_helm_of_tempests
   rotate: false
   xy: 186, 124
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_laboratory_gloves
+epic_heros_gauntlets
   rotate: false
   xy: 248, 124
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_light_belt
+epic_laboratory_gloves
   rotate: false
   xy: 310, 124
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_light_cloak
+epic_light_belt
   rotate: false
   xy: 372, 124
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_mage_amulet
+epic_light_cloak
   rotate: false
   xy: 0, 186
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_medkit
+epic_mage_amulet
   rotate: false
   xy: 62, 186
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_namers_ring
+epic_medkit
   rotate: false
   xy: 124, 186
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_power_bracelet
+epic_namers_ring
   rotate: false
   xy: 186, 186
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_ring_of_healing
+epic_power_bracelet
   rotate: false
   xy: 248, 186
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_shield_amulet
+epic_ring_of_healing
   rotate: false
   xy: 310, 186
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_silence_boots
+epic_shield_amulet
   rotate: false
   xy: 372, 186
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_smiths_hammer
+epic_silence_boots
   rotate: false
   xy: 0, 248
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_sticky_gloves
+epic_smiths_hammer
   rotate: false
   xy: 62, 248
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_thiefs_rope
+epic_sticky_gloves
   rotate: false
   xy: 124, 248
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_tinkers_gloves
+epic_thiefs_rope
   rotate: false
   xy: 186, 248
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_utility_belt
+epic_tinkers_gloves
   rotate: false
   xy: 248, 248
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_witch_ring
+epic_utility_belt
   rotate: false
   xy: 310, 248
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_wizard_hat
+epic_witch_ring
   rotate: false
   xy: 372, 248
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_wizard_wand
+epic_wizard_hat
   rotate: false
   xy: 0, 310
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_woodsman_belt
+epic_wizard_wand
   rotate: false
   xy: 62, 310
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_woodsmans_boots
+epic_woodsman_belt
   rotate: false
   xy: 124, 310
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-legendary_boots_of_speed
+epic_woodsmans_boots
   rotate: false
   xy: 186, 310
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-legendary_horn_of_kynon
+legendary_boots_of_speed
   rotate: false
   xy: 248, 310
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-legendary_light_cloak
+legendary_horn_of_kynon
   rotate: false
   xy: 310, 310
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-legendary_spellbook
+legendary_light_cloak
   rotate: false
   xy: 372, 310
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+legendary_spellbook
+  rotate: false
+  xy: 0, 372
   size: 62, 62
   orig: 62, 62
   offset: 0, 0

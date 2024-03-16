@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.6" orientation="orthogonal" renderorder="right-down" width="20" height="14" tilewidth="24" tileheight="24" infinite="0" nextlayerid="24" nextobjectid="23">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="20" height="14" tilewidth="24" tileheight="24" infinite="0" nextlayerid="25" nextobjectid="24">
  <properties>
   <property name="bgm" value="bgm_cellar"/>
   <property name="lightmap_player" value="light_player"/>
@@ -80,5 +80,14 @@
  <objectgroup color="#ffff7f" id="12" name="portal">
   <object id="10" name="honeywood_house_elder" x="48" y="48" width="48" height="24"/>
   <object id="21" name="honeywood_house_elder_b2" x="336" y="120" width="48" height="24"/>
+ </objectgroup>
+ <objectgroup color="#ffff00" id="24" name="quest">
+  <object id="23" name="quest_honeywood_elder" type="check" x="336" y="120" width="48" height="24">
+   <properties>
+    <property name="comment" value="the condition below is not for unlocking the door, but only for completing the task."/>
+    <property name="condition" value="_n_1_&gt;=_item_key_honeywood_basement"/>
+    <property name="task" value="3"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

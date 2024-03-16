@@ -10,6 +10,12 @@
     "conversationId": "everything_is_back_again",
     "entityId"      : "mozes"
   },
+  "dont_have_time_for_this": {
+    "type"          : "conversation",
+    "condition"     : ["_c_>=_k_q_quest_helping_horse"],
+    "conversationId": "dont_have_time_for_this",
+    "entityId"      : "mozes"
+  },
   "a_tree_has_fallen"         : {
     "type"          : "conversation",
     "condition"     : ["!talked_to_lennor"],

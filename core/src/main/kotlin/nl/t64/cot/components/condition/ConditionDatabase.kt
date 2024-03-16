@@ -2,6 +2,7 @@ package nl.t64.cot.components.condition
 
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.components.party.skills.SkillItemId
+import nl.t64.cot.components.portal.Portal
 import nl.t64.cot.components.quest.QuestState
 
 
@@ -9,22 +10,24 @@ object ConditionDatabase {
 
     private val conditions: Map<String, () -> Boolean> = mapOf(
         // @formatter:off
-        "diplomat1"              to { hasEnoughOfSkill(SkillItemId.DIPLOMAT,  1) },
-        "barbarian1"             to { hasEnoughOfSkill(SkillItemId.BARBARIAN, 1) },
-        "barbarian4"             to { hasEnoughOfSkill(SkillItemId.BARBARIAN, 4) },
-        "i_druid1"               to { hasEnoughOfSkill(SkillItemId.DRUID,     1) },
+        "diplomat1"                 to { hasEnoughOfSkill(SkillItemId.DIPLOMAT,  1) },
+        "barbarian1"                to { hasEnoughOfSkill(SkillItemId.BARBARIAN, 1) },
+        "barbarian4"                to { hasEnoughOfSkill(SkillItemId.BARBARIAN, 4) },
+        "i_druid1"                  to { hasEnoughOfSkill(SkillItemId.DRUID,     1) },
 
-        "level10"                to { hasAverageLevelOf(               10) },
+        "level10"                   to { hasAverageLevelOf(               10) },
 
-        "!been_in_fairy_town"    to { !hasBeenInFairyTown },
-        "been_in_fairy_town"     to { hasBeenInFairyTown },
-        "defeated_orc_guards"    to { hasDefeatedOrcGuards },
-        "i_!starting_spells"     to { !hasStartingSpells },
-        "i_starting_spells"      to { hasStartingSpells },
-        "!talked_to_lennor"      to { hasNotYetTalkedToLennorFirstCycle },
-        "i_not_happy_with_jaron" to { notHappyWithJaron },
-        "alone_in_party"         to { isAloneInParty },
-        "between_13_and_14"      to { gameData.clock.isCurrentTimeInBetween("13:00", "14:00")}
+        "!been_in_fairy_town"       to { !hasBeenInFairyTown },
+        "been_in_fairy_town"        to { hasBeenInFairyTown },
+        "defeated_orc_guards"       to { hasDefeatedOrcGuards },
+        "i_!starting_spells"        to { !hasStartingSpells },
+        "i_starting_spells"         to { hasStartingSpells },
+        "!talked_to_lennor"         to { hasNotYetTalkedToLennorFirstCycle },
+        "i_not_happy_with_jaron"    to { notHappyWithJaron },
+        "alone_in_party"            to { isAloneInParty },
+        "between_13_and_14"         to { gameData.clock.isCurrentTimeInBetween("13:00", "14:00") },
+        "is_fairy_portal_active"    to { gameData.portals.isActivated(Portal.HONEYWOOD_GREAT_TREE.name) },
+        "i_!is_fairy_portal_active" to { isPortalFairyInactiveAndPortalHoneywoodActive }
         // @formatter:on
     )
 
@@ -52,12 +55,14 @@ object ConditionDatabase {
     private val hasStartingSpells get() = hasAnySpell("mozes")
     private val hasNotYetTalkedToLennorFirstCycle
         get() = "quest_helping_horse" hasResetState QuestState.UNKNOWN
-                && "quest_helping_horse" hasCurrentPhraseId "1"
+            && "quest_helping_horse" hasCurrentPhraseId "1"
     private val notHappyWithJaron
         get() = areTargetAndAlternateTheSame("quest_get_tow_rope", "13") // "_13_"
-                || "quest_get_horseshoes" hasCurrentPhraseId "200"
-
+            || "quest_get_horseshoes" hasCurrentPhraseId "200"
     private val isAloneInParty get() = hasAmountOfPartyMembers(1)
+    private val isPortalFairyInactiveAndPortalHoneywoodActive
+        get() = !gameData.portals.isActivated(Portal.HONEYWOOD_GREAT_TREE.name)
+            && gameData.portals.isActivated(Portal.HONEYWOOD_HOUSE_ELDER_B2.name)
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

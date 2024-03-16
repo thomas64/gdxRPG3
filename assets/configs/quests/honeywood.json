@@ -28,11 +28,11 @@
     "summary"   : "Adan inexplicably bursts into flames every time Grace is sacrificed by the wizard Ardor. Ylarus, the God of Time, his power is fading. He sends you to the priest of Lastdenn for answers.",
     "linkedWith": ["quest_honeywood_elder"],
     "tasks"     : {
-      "1": {
+      "1" : {
         "taskPhrase": "Leave Honeywood Village through the south past the guards.",
         "type"      : "DISCOVER"
       },
-      "3": {
+      "10": {
         "taskPhrase": "Travel to Lastdenn to find answers.",
         "type"      : "DISCOVER"
       }
@@ -57,7 +57,7 @@
       },
       "18": {
         "taskPhrase": "Deliver the ropes to Lennor.",
-        "type"      : "GIVE_ITEM",
+        "type"      : "PROVIDE_ITEM",
         "target"    : {"tow_rope": 2},
         "isHidden"  : true,
         "linkedWith": ["19"]
@@ -126,7 +126,7 @@
       },
       "6" : {
         "taskPhrase": "      Deliver the medicine to Angie.",
-        "type"      : "GIVE_ITEM",
+        "type"      : "PROVIDE_ITEM",
         "target"    : {"horse_medicine": 1},
         "isHidden"  : true,
         "linkedWith": ["7"]
@@ -144,7 +144,7 @@
       },
       "10": {
         "taskPhrase": "      Deliver 4 horseshoes to Angie.",
-        "type"      : "GIVE_ITEM",
+        "type"      : "PROVIDE_ITEM",
         "target"    : {"horseshoe": 4},
         "isHidden"  : true,
         "linkedWith": ["1"]
@@ -169,7 +169,7 @@
       },
       "5": {
         "taskPhrase": "            Deliver the ingredients to Elenora.",
-        "type"      : "GIVE_ITEM",
+        "type"      : "PROVIDE_ITEM",
         "target"    : {"herb": 6, "blue_jelly": 1}
       }
     }
@@ -212,9 +212,34 @@
     "isSubQuest": true,
     "tasks"     : {
       "2": {
-        "taskPhrase"    : "      Ask Luana to join you on your travels. She is near the statue.",
+        "taskPhrase": "      Get permission from the elder to leave the village.",
+        "type"      : "FREE"
+      },
+      "3": {
+        "taskPhrase": "            Unlock the door in the elder's basement.",
+        "type"      : "CHECK_WITH_ITEM",
+        "target"    : {"key_honeywood_basement": 1}
+      },
+      "4": {
+        "taskPhrase": "            Activate and pass through the portal.",
+        "type"      : "CHECK"
+      },
+      "5": {
+        "taskPhrase"    : "            Deliver the letter, gold, and gemstones to the Fairy Shop.",
+        "type"          : "DELIVER_ITEM",
+        "target"        : {"letter_to_fairy_shop": 1, "gold": 5, "gemstone": 5},
+        "conversationId": "fairy_shop"
+      },
+      "6": {
+        "taskPhrase": "            Return to the elder with the package from the Fairy Shop.",
+        "type"      : "SHOW_ITEM",
+        "target"    : {"epic_fairy_ring": 1}
+      },
+      "9": {
+        "taskPhrase"    : "            Ask Luana to accompany you on your travels. She is near the statue.",
         "type"          : "DELIVER_MESSAGE",
-        "conversationId": "luana_join"
+        "conversationId": "luana_join",
+        "linkedWith"    : ["2"]
       }
     }
   }

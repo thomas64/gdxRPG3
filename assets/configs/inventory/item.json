@@ -9,7 +9,7 @@
     "name"       : "Basement key",
     "group"      : "ITEM",
     "sort"       : 70010,
-    "description": ["Key given to you by the elder himself."]
+    "description": ["Key to the elder's basement, given to you by the elder himself."]
   },
   "scroll_of_orc_obedience": {
     "name"       : "Scroll of Orc Obedience",
@@ -34,5 +34,11 @@
     "group"      : "ITEM",
     "sort"       : 70030,
     "description": ["A strong rope which can be used by a horse."]
+  },
+  "letter_to_fairy_shop"   : {
+    "name"       : "Letter to the Fairy Shop",
+    "group"      : "ITEM",
+    "sort"       : 70035,
+    "description": ["A letter from the village elder to the Fairy Shop.", "What does it say?"]
   }
 }

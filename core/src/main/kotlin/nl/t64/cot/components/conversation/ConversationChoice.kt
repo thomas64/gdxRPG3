@@ -7,7 +7,6 @@ import nl.t64.cot.components.condition.ConditionDatabase
 private const val DEFAULT_ANSWER_TEXT = "->"
 private const val DEFAULT_NEXT_ID = "1"
 private val DEFAULT_CONVERSATION_COMMAND = ConversationCommand.NONE
-private val DEFAULT_CONDITION: List<String> = emptyList()
 private const val INVISIBLE_PREFIX = "i_"
 
 class ConversationChoice(
@@ -15,7 +14,7 @@ class ConversationChoice(
     val nextId: String = DEFAULT_NEXT_ID,
     val command: ConversationCommand = DEFAULT_CONVERSATION_COMMAND,
     @JsonProperty("condition")
-    val conditionIds: List<String> = DEFAULT_CONDITION
+    val conditionIds: List<String> = emptyList()
 ) {
     private lateinit var conversationId: String
 

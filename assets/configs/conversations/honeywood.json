@@ -2,7 +2,7 @@
   "everything_is_normal_again" : {
     "phrases": {
       "1": {"text": ["Everything is back to normal?", "Adan didn't end up in flames?", "Is Grace still alive then?"]},
-      "2": {"text": ["Then I have to find her again quick!"], "choices": [{"command": "EXIT"}]}
+      "2": {"text": ["Then I have to find her again quickly!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "everything_is_back_again"   : {
@@ -10,6 +10,12 @@
       "1": {"text": ["This is so weird..."]},
       "2": {"text": ["Everything is back to the way it was..."]},
       "3": {"text": ["As if nothing ever happened..."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "dont_have_time_for_this"    : {
+    "phrases": {
+      "1": {"text": ["Aw man! I can't afford to deal with this right now!"]},
+      "2": {"text": ["I really need to get to Grace as quickly as possible!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "mrs_johanna"                : {
@@ -41,7 +47,7 @@
       "4" : {"text": ["Hey Mozes, are you back? The tree is still blocking the road."], "choices": [{"nextId": "5"}]},
       "5" : {
         "choices": [
-          {"condition": ["i_tc_1_q_this", "i_tc_11_q_this"], "text": "[2 Ropes, 1 Horse] *Tada! Present what he wanted to ask for.*", "command": "GIVE_QUEST_ITEM", "nextId": "60"},
+          {"condition": ["i_tc_1_q_this", "i_tc_11_q_this"], "text": "[2 Ropes, 1 Horse] *Tada! Present what he wanted to ask for.*", "command": "PROVIDE_QUEST_ITEM", "nextId": "60"},
           {"condition": ["i_r_==_f_q_this"], "text": "*Ask if you, by any chance, could help with a horse and 2 ropes.*", "command": "ACCEPT_QUEST", "nextId": "40"},
           {"text": "*Ask when the tree fell down.*", "nextId": "10"},
           {"text": "*Express that you really need to reach Honeywood Forest.*", "nextId": "20"},
@@ -55,18 +61,18 @@
       "20": {"text": ["I'm sorry, Mozes, but there's nothing I can do about it right now. You'll have to wait a while, unless you happen to have a horse and some ropes with you, ha ha!"]},
       "21": {
         "choices": [
-          {"text": "*Ignore his joke and respond very seriously to his request.*", "command": "ACCEPT_QUEST", "nextId": "35"},
+          {"text": "*Ignore the joke and acknowledge his proposal.*", "command": "ACCEPT_QUEST", "nextId": "35"},
           {"text": "*Shake your head. You have no time to wait.*", "command": "KNOW_QUEST", "nextId": "30"}
         ]
       },
       "30": {"text": ["It's unfortunate, I know. But you could help me out, of course, to speed up the process."], "choices": [{"command": "EXIT", "nextId": "4"}]},
       "35": {"text": ["I was kidding about the horse, Mozes, ha ha! But sure, if you're serious about it, if you really bring me a strong horse and 2 ropes, I can clear the road for you immediately."]},
       "36": {"text": ["You could ask the village elder about this matter. He's wise, he will probably have some suggestions."], "choices": [{"command": "EXIT", "nextId": "50"}]},
-      "40": {"text": ["Uhh, that's {COLOR=NAVY}exactly{COLOR=BLACK} how you could help. If you really bring me a strong horse and 2 ropes, I can clear the road for you immediately."], "choices": [{"command": "EXIT", "nextId": "50"}]},
+      "40": {"text": ["Uhh, that's {COLOR=BLUE}exactly{COLOR=BLACK} how you could help. If you really bring me a strong horse and 2 ropes, I can clear the road for you immediately."], "choices": [{"command": "EXIT", "nextId": "50"}]},
       "50": {"text": ["The tree is still blocking the road, Mozes."]},
       "51": {
         "choices": [
-          {"condition": ["_tc_1_q_this", "_tc_11_q_this"], "text": "[2 Ropes, 1 Horse] *Present the requested horse and items.*", "command": "GIVE_QUEST_ITEM", "nextId": "60"},
+          {"condition": ["_tc_1_q_this", "_tc_11_q_this"], "text": "[2 Ropes, 1 Horse] *Present the requested horse and items.*", "command": "PROVIDE_QUEST_ITEM", "nextId": "60"},
           {"text": "*Take your leave.*", "command": "EXIT", "nextId": "50"}
         ]
       },
@@ -147,9 +153,9 @@
       "6" : {"text": ["{SPEED=0.2} . . . . ."]},
       "7" : {"text": ["No way! You're asking me to come along, traveling through time, risking my life to stop an evil wizard and rescue Grace?!"]},
       "8" : {"text": ["Hell yeah! You're going on this HUGE adventure with all the big stuff, slaying monsters, taking loot, and and and..."]},
-      "9" : {"text": ["And why wouldn't I go with you? What's wrong with you!?"]},
+      "9" : {"text": ["Why wouldn't I go with you? What's wrong with you!?"]},
       "10": {"text": ["We've been friends since childhood; we've always gone on adventures together. Do you really think I'd leave you hanging?"]},
-      "11": {"text": ["Who will be there to protect you? You need protection...", "From me! You do know that right?"]},
+      "11": {"text": ["Who will be there to protect you? You need protection... {WAIT=0.5}From me! You do know that right?"]},
       "12": {"text": ["Alright, here's the deal: You're taking me with you, and MAYBE I'll forgive you for doubting my adventurous spirit."]},
       "13": {"text": ["Now we're talking! You are so not gonna regret this."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "14"}]},
       "14": {"text": ["Let's go!"], "choices": [{"command": "HERO_JOIN"}]}
@@ -299,7 +305,7 @@
       "11": {"text": ["And even if she recovers, she'll need horseshoes before she can go anywhere. I don't have any right now, so it's not possible."]},
       "12": {
         "choices": [
-          {"condition": ["i_n_1_>=_item_horse_medicine"], "text": "[Horse Medicine] *Deliver the medicine from Elenora.*", "command": "GIVE_QUEST_ITEM", "nextId": "50"},
+          {"condition": ["i_n_1_>=_item_horse_medicine"], "text": "[Horse Medicine] *Deliver the medicine from Elenora.*", "command": "PROVIDE_QUEST_ITEM", "nextId": "50"},
           {"condition": ["i_r_!=_f_q_this"], "text": "*Ask if there isn't anything you can do to help Enopa.*", "command": "ACCEPT_QUEST", "nextId": "20"},
           {"condition": ["i_r_==_f_q_this"], "text": "*Propose to get a medicine from Elenora and some horseshoes.", "command": "ACCEPT_QUEST", "nextId": "30"},
           {"text": "*Wish Angie and Enopa the best. Take your leave.*", "command": "EXIT"}
@@ -311,15 +317,18 @@
       "35": {"text": ["Once Enopa is fully recovered and has been shoed, I'll lend her to Lennor and you."]},
       "36": {
         "choices": [
-          {"condition": ["i_n_1_>=_item_horse_medicine"], "text": "[Horse Medicine] *Deliver the medicine from Elenora.*", "command": "GIVE_QUEST_ITEM", "nextId": "51"},
-          {"text": "*Tell her you'll do your best. Take your leave.*", "command": "EXIT", "nextId": "40"}
+          {"condition": ["i_n_1_>=_item_horse_medicine"], "text": "[Horse Medicine] *Deliver the medicine from Elenora.*", "command": "PROVIDE_QUEST_ITEM", "nextId": "51"},
+          {"text": "*Tell her you'll do your best. Take your leave.*", "command": "EXIT", "nextId": "40"},
+          {"text": "*Too much trouble. You'll go for another (better) horse. Take your leave.*", "command": "EXIT", "nextId": "41"}
         ]
       },
-      "40": {"text": ["Hi Mozes, do you have anything for Enopa?"]},
-      "41": {
+      "40": {"text": ["Hi Mozes, do you have anything for Enopa?"], "choices": [{"nextId": "45"}]},
+      "41": {"text": ["Hi Mozes, did you change your mind?"], "choices": [{"nextId": "45"}]},
+      "45": {
         "choices": [
-          {"condition": ["_n_1_>=_item_horse_medicine"], "text": "[Horse Medicine] *Deliver the medicine from Elenora.*", "command": "GIVE_QUEST_ITEM", "nextId": "52"},
-          {"text": "*Inform her that you're working on it. Take your leave.*", "command": "EXIT", "nextId": "40"}
+          {"condition": ["_n_1_>=_item_horse_medicine"], "text": "[Horse Medicine] *Deliver the medicine from Elenora.*", "command": "PROVIDE_QUEST_ITEM", "nextId": "52"},
+          {"text": "*Inform her that you're working on it. Take your leave.*", "command": "EXIT", "nextId": "40"},
+          {"text": "*You went looking for that other horse. Take your leave.*", "command": "EXIT", "nextId": "41"}
         ]
       },
       "50": {"text": ["How did you knew? Thank you very much! I'll administer it to her right away."], "choices": [{"nextId": "53"}]},
@@ -330,7 +339,7 @@
       "60": {"text": ["Were you able to gather 4 horseshoes for Enopa?"]},
       "61": {
         "choices": [
-          {"condition": ["_n_4_>=_item_horseshoe"], "text": "[4 Horseshoes] *Hand over the horseshoes.*", "command": "GIVE_QUEST_ITEM", "nextId": "70"},
+          {"condition": ["_n_4_>=_item_horseshoe"], "text": "[4 Horseshoes] *Hand over the horseshoes.*", "command": "PROVIDE_QUEST_ITEM", "nextId": "70"},
           {"text": "*Tell her you'll return when you have them. Take your leave.*", "command": "EXIT", "nextId": "60"}
         ]
       },
@@ -374,7 +383,7 @@
       "5"   : {"text": ["Fortunately, I spotted one nearby, right here in the village. May I ask you to get the herbs and jelly for me?"]},
       "6"   : {
         "choices": [
-          {"condition": ["i_n_6_>=_item_herb", "i_n_1_>=_item_blue_jelly"], "text": "[6 Herbs, 1 Blue Jelly] *Present the required ingredients.*", "command": "GIVE_QUEST_ITEM", "nextId": "30"},
+          {"condition": ["i_n_6_>=_item_herb", "i_n_1_>=_item_blue_jelly"], "text": "[6 Herbs, 1 Blue Jelly] *Present the required ingredients.*", "command": "PROVIDE_QUEST_ITEM", "nextId": "30"},
           {"text": "*Agree to gather the required ingredients.*", "command": "ACCEPT_QUEST", "nextId": "10"},
           {"text": "*Express your disgust of touching monster jelly. Take your leave.*", "command": "EXIT"}
         ]
@@ -383,7 +392,7 @@
       "20"  : {"text": ["Mozes my dear, have you managed to collect the ingredients yet?"]},
       "21"  : {
         "choices": [
-          {"condition": ["_n_6_>=_item_herb", "_n_1_>=_item_blue_jelly"], "text": "[6 Herbs, 1 Blue Jelly] *Deliver the gathered ingredients.*", "command": "GIVE_QUEST_ITEM", "nextId": "30"},
+          {"condition": ["_n_6_>=_item_herb", "_n_1_>=_item_blue_jelly"], "text": "[6 Herbs, 1 Blue Jelly] *Deliver the gathered ingredients.*", "command": "PROVIDE_QUEST_ITEM", "nextId": "30"},
           {"text": "*Inform her that you're working on it. Take your leave.*", "command": "EXIT", "nextId": "20"}
         ]
       },
@@ -397,39 +406,45 @@
   "quest_honeywood_elder"      : {
     "name"   : "Village elder Grahan",
     "phrases": {
-      "1"   : {"text": ["Hello Mozes, how can I help you today?"]},
+      "1"   : {"text": ["Greetings, Mozes. How may I be of service today?"]},
       "2"   : {
         "choices": [
           {"condition": ["i_rc_==_a_q_quest_god_of_power", "i_rc_===_u_q_this"], "text": "*Explain everything and your need to leave the village.*", "nextId": "50"},
-          {"condition": ["i_rc_>=_a_q_quest_helping_horse", "i_c_<=_a_q_quest_get_horse"], "text": "*Explain your need for a horse due to the blocked path to Honeywood Forest.*", "nextId": "10"},
-          {"condition": ["i_rc_>=_a_q_quest_get_horse", "i_tn_7_q_quest_get_horse"], "text": "*Explain Angie's horse is unwell and inquire if he can assist.*", "nextId": "40"},
-          {"condition": ["i_rc_>=_a_q_quest_get_horse", "i_tn_8_q_quest_get_horse"], "text": "*Explain your search for horseshoes for Angie.*", "nextId": "20"},
-          {"condition": ["i_rc_>=_a_q_quest_helping_horse", "i_tn_11_q_quest_helping_horse"], "text": "*Explain your requirement for tow ropes to remove the fallen tree.*", "nextId": "30"},
-          {"text": "*Say you need nothing at the moment. Take your leave.*", "nextId": "3"}
+          {"condition": ["i_c_==_a_q_this", "i_!is_fairy_portal_active"], "text": "*Complain about the warp crystal not working.*", "nextId": "70"},
+          {"condition": ["i_c_==_a_q_this", "i_ta_5_q_this", "i_n_1_>=_item_epic_fairy_ring"], "text": "[Fairy Ring] *Present the package you received from the Fairy Shop.*", "command": "SHOW_QUEST_ITEM", "nextId": "80"},
+          {"condition": ["i_c_>=_a_q_quest_helping_horse", "i_c_<=_a_q_quest_get_horse"], "text": "*Explain your need for a horse due to the blocked path to Honeywood Forest.*", "nextId": "10"},
+          {"condition": ["i_c_>=_a_q_quest_get_horse", "i_tn_7_q_quest_get_horse"], "text": "*Mention Angie's horse is unwell and ask if he can provide assistance.*", "nextId": "40"},
+          {"condition": ["i_c_>=_a_q_quest_get_horse", "i_tn_8_q_quest_get_horse"], "text": "*Explain your quest to find horseshoes for Angie.*", "nextId": "20"},
+          {"condition": ["i_c_>=_a_q_quest_helping_horse", "i_tn_11_q_quest_helping_horse"], "text": "*Explain your requirement for tow ropes to clear the fallen tree.*", "nextId": "30"},
+          {"text": "*State that you don't require anything at the moment. Take your leave.*", "nextId": "3"}
         ]
       },
       "3"   : {"text": ["Come see me again when you've got other questions."], "choices": [{"command": "EXIT"}]},
       "10"  : {"text": ["Hmmm..."]},
-      "11"  : {"text": ["You know, Angie has a horse, and you're most likely to find her behind the inn. She often tends to her horse there."], "choices": [{"nextId": "2"}]},
+      "11"  : {"text": ["As you may know, Angie has a horse, and you're most likely to find her behind the inn. She often tends to her horse there."], "choices": [{"nextId": "2"}]},
       "20"  : {"text": ["Hmmm..."]},
-      "21"  : {"text": ["I believe there's one in my basement. It's rather dark in there, but you're welcome to check if you can find it."]},
-      "22"  : {"text": ["I'm sure there are more around town, but if you can't find enough of them, our blacksmith, north of here, can probably help you out."], "choices": [{"nextId": "2"}]},
+      "21"  : {"text": ["I believe there's one in my basement. It's quite dark down there, but you're welcome to see if you can find it."]},
+      "22"  : {"text": ["I reckon there might be more scattered around town. However, if you find yourself short, our local blacksmith, north of here, should be able to assist you."], "choices": [{"nextId": "2"}]},
       "30"  : {"text": ["Hmmm..."]},
-      "31"  : {"text": ["I've got one upstairs, you may use it if you can find it."]},
-      "32"  : {"text": ["If I recall correctly, Jaron, to the west of here, used to have a tow rope as well. It might be worth looking into."], "choices": [{"nextId": "2"}]},
+      "31"  : {"text": ["I've got one upstairs; you may use it if you can find it."]},
+      "32"  : {"text": ["If I recall correctly, Jaron, who lives west of here, used to have a tow rope as well. It might be worth looking into."], "choices": [{"nextId": "2"}]},
       "40"  : {"text": ["Hmmm..."]},
       "41"  : {"text": ["You should definitely ask my wife."], "choices": [{"nextId": "2"}]},
       "50"  : {"text": ["Hmmm..."]},
-      "51"  : {"text": ["Wow, that is quite an extraordinary tale. It's challenging to believe. Grace sacrificed? Ylarus, God of Time? However, why would you, Mozes, be inventing such a story about Grace?"]},
-      "52"  : {"text": ["Your options are twofold."]},
-      "53"  : {"text": ["First of all, I'll give you the key to the basement. In the basement is a warp crystal, similar to the one with the Fairies. I'll allow you to use this one at your will. You will need it on your travels."]},
-      "54"  : {"text": ["Considering what you've told, it seems you'll be quite busy for a while."]},
-      "55"  : {"text": ["Secondly, you'll need a travel companion. Because indeed, it's dangerous to go alone. Nobody is allowed to leave to village alone."]},
-      "56"  : {"text": ["Luana is outside here, near the statue, looking somewhat downcast. She's eager to leave the village, so with some proper explaining, perhaps she'll agree to accompany you on your journey."]},
-      "57"  : {"text": ["Together you're allowed to leave this village by the guards on your way to Lastdenn."]},
-      "58"  : {"text": ["Mozes, I wish you the best of luck on your journey."], "choices": [{"command": "RECEIVE_ITEMS"}]},
-      "1199": {"text": ["Don't forget to take the basement key."], "choices": [{"command": "RECEIVE_ITEMS"}]},
-      "1200": {"text": ["Hello Mozes, how can I help you today?"], "choices": [{"nextId": "2"}]}
+      "51"  : {"text": ["Wow, that's quite an extraordinary tale. It's also hard to believe. The end of the world? Grace sacrificed? Ylarus, God of Time? However, why would you, Mozes, fabricate such a story about Grace?"]},
+      "52"  : {"text": ["Mozes, I'd like to assist you in any way I can."]},
+      "53"  : {"text": ["First of all, I'll give you the key to the basement. Behind the door is a warp crystal, similar to the one over by the Fairies."]},
+      "54"  : {"text": ["Use this portal to deliver this letter and these items to the Fairy Shop. Afterward, return to me and show me the package you received."]},
+      "55"  : {"text": ["Secondly, you'll need a travel companion. Because indeed, it's dangerous to go alone. No one is allowed to leave the village unaccompanied."]},
+      "56"  : {"text": ["Luana is outside here, near the statue, moping around. She's eager to leave the village, so with some proper explaining, she might agree to join you on your journey."]},
+      "57"  : {"text": ["Together, you are permitted to leave this village by the guards on your way to Lastdenn."]},
+      "58"  : {"text": ["Mozes, I wish you the best of luck on your journey."], "choices": [{"command": "RECEIVE_ITEM_FOR_QUEST"}]},
+      "70"  : {"text": ["That's unfortunate. Didn't you activate the warp crystal at the Fairies? It's necessary for it to let you warp. Remember to activate warp crystals wherever you go."]},
+      "71"  : {"text": ["But for now, it's not really a problem. Keep everything I gave you, and perhaps you can visit the Fairy Shop at a later time."], "choices": [{"nextId": "90"}]},
+      "80"  : {"text": ["Mozes, that's wonderful, thank you. It's yours to keep. I hope it can be of assistance to you."], "choices": [{"nextId": "90"}]},
+      "90"  : {"text": ["Mozes, I wish you the best of luck on your journey."], "choices": [{"command": "EXIT"}]},
+      "1199": {"text": ["Mozes, it seems you've forgotten something."], "choices": [{"command": "RECEIVE_ITEM_FOR_QUEST"}]},
+      "1200": {"text": ["Greetings, Mozes. How may I be of service today?"], "choices": [{"nextId": "2"}]}
     }
   },
   "quest_get_horseshoes"       : {
@@ -499,7 +514,7 @@
       "12"  : {"text": ["That's what old people do, I guess; lose stuff."]},
       "13"  : {"text": ["We searched for it, but we couldn't find it. But today I accidentally stumbled upon it! So, would you give her this ring back?"]},
       "14"  : {"text": ["And third, my little brother Kaidan is playing somewhere outside. Could you go find him and tell him to come home?"]},
-      "15"  : {"text": ["That's it. Once you've helped me out with these tasks, you may borrow the rope."], "choices": [{"command": "RECEIVE_QUEST_ITEM_TO_DELIVER"}]},
+      "15"  : {"text": ["That's it. Once you've helped me out with these tasks, you may borrow the rope."], "choices": [{"command": "RECEIVE_ITEM_FOR_QUEST"}]},
       "100" : {"text": ["Oh, did he now?"]},
       "101" : {
         "choices": [
@@ -510,7 +525,7 @@
       },
       "110" : {"text": ["I don't have any more gold at the moment. So maybe you could pay that 1 gold and see the rope as my thanks."], "choices": [{"nextId": "101"}]},
       "120" : {"text": ["Erm... Ah yes yes, of course. Okay, alright then... Here you are."], "choices": [{"command": "SAY_QUEST_THING", "nextId": "1200"}]},
-      "1199": {"text": ["You forgot something."], "choices": [{"command": "RECEIVE_QUEST_ITEM_TO_DELIVER"}]},
+      "1199": {"text": ["You forgot something."], "choices": [{"command": "RECEIVE_ITEM_FOR_QUEST"}]},
       "1200": {"text": ["There you are. How's it going? Have you made any progress?"]},
       "1201": {
         "choices": [

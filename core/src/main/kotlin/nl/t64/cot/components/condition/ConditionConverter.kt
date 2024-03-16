@@ -18,9 +18,9 @@ object ConditionConverter {
     }
 
     fun isMeetingItemCondition(conditionId: String): Boolean {
-        val amount: Int = getTaskIdOrAmount("_n_", conditionId)
+        val requestedAmount: Int = getTaskIdOrAmount("_n_", conditionId)
         val inventoryItemId: String = conditionId.substringAfter("_item_")
-        return doesInventoryContain(conditionId, inventoryItemId, amount)
+        return doesInventoryAndEquipmentContain(conditionId, inventoryItemId, requestedAmount)
     }
 
     private fun getQuestGraph(conditionId: String, questId: String?): QuestGraph {
@@ -45,7 +45,7 @@ object ConditionConverter {
         var nextTaskId: Int = taskId + 1
         while (!questGraph.tasks.containsKey(nextTaskId.toString())) nextTaskId += 1
         return questGraph.isTaskComplete(taskId.toString())
-                && !questGraph.isTaskComplete(nextTaskId.toString())
+            && !questGraph.isTaskComplete(nextTaskId.toString())
     }
 
     private fun isTaskComplete(prefix: String, conditionId: String, questGraph: QuestGraph): Boolean {
@@ -89,10 +89,13 @@ object ConditionConverter {
         }
     }
 
-    private fun doesInventoryContain(conditionId: String, inventoryItemId: String, amount: Int): Boolean {
+    private fun doesInventoryAndEquipmentContain(conditionId: String,
+                                                 inventoryItemId: String,
+                                                 requestedAmount: Int): Boolean {
+        val combinedAmount: Int = gameData.inventory.getTotalOfItem(inventoryItemId) + gameData.party.getAmountOfItemInEquipment(inventoryItemId)
         return when {
-            conditionId.contains("_==_") -> gameData.inventory.hasExactlyAmountOfItem(inventoryItemId, amount)
-            conditionId.contains("_>=_") -> gameData.inventory.hasEnoughOfItem(inventoryItemId, amount)
+            conditionId.contains("_==_") -> combinedAmount == requestedAmount
+            conditionId.contains("_>=_") -> combinedAmount >= requestedAmount
             else -> throw IllegalArgumentException("No defined operator found.")
         }
     }
