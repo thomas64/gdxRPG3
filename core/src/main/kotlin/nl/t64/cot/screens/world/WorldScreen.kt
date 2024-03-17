@@ -95,6 +95,8 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
                                               Actions.fadeIn(Constant.FADE_DURATION),
                                               Actions.delay(duration),
                                               Actions.run(actionAfterFade),
+                                              Actions.run { transition.purpose = TransitionPurpose.JUST_FADE },
+                                              Actions.fadeOut(Constant.FADE_DURATION),
                                               Actions.removeActor()))
     }
 
@@ -183,13 +185,12 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     }
 
     fun showBattleScreen(battleId: String, enemyEntity: Entity) {
-        if (player.moveSpeed != Constant.MOVE_SPEED_4 && !isInMapTransition) {
-            setInputProcessors(null)
-            currentNpcEntity = enemyEntity
-            gameState = GameState.BATTLE
-            doBeforeLoadScreen()
-            fadeOut({ BattleScreen.load(battleId, this) }, Color.BLACK)
-        }
+        if (player.moveSpeed == Constant.MOVE_SPEED_4 || isInMapTransition) return
+        setInputProcessors(null)
+        currentNpcEntity = enemyEntity
+        gameState = GameState.BATTLE
+        doBeforeLoadScreen()
+        fadeOut({ BattleScreen.load(battleId, this) }, Color.BLACK)
     }
 
     fun updateParty() {
@@ -403,9 +404,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     private val isJustInTransition: Boolean
         get() = isInTransition && (stage.actors.peek() as TransitionImage).purpose == TransitionPurpose.JUST_FADE
     private val isInTransition: Boolean
-        get() = stage.actors.notEmpty()
-                && gameState != GameState.DIALOG
-                && stage.actors.peek() is TransitionImage
+        get() = stage.actors.notEmpty() && gameState != GameState.DIALOG && stage.actors.peek() is TransitionImage
 
     override fun resize(width: Int, height: Int) {
         // empty

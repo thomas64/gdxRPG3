@@ -9,7 +9,7 @@ import nl.t64.cot.toDrawable
 private const val TEN_TIMES_FULL_HD = 10f
 
 class TransitionImage(
-    val purpose: TransitionPurpose = TransitionPurpose.JUST_FADE,
+    var purpose: TransitionPurpose = TransitionPurpose.JUST_FADE,
     color: Color = Color.BLACK
 ) : Image() {
 
