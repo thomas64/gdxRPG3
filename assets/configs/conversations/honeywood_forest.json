@@ -1,10 +1,12 @@
 {
   "fallen_tree"        : {
+    "name"   : "Mozes",
     "phrases": {
       "1": {"text": ["The tree is blocking my path. I can't remove it like this."], "choices": [{"command": "EXIT"}]}
     }
   },
   "found_grace_ribbon" : {
+    "name"   : "Mozes",
     "phrases": {
       "1": {"text": ["Oh no, what's this?"]},
       "2": {"text": ["It's one of Grace's ribbons!", "So she has been here. {WAIT=0.5}But where is she now?"]},
@@ -12,11 +14,13 @@
     }
   },
   "dont_go_south"      : {
+    "name"   : "Mozes",
     "phrases": {
       "1": {"text": ["No, I shouldn't go back. I have to find Grace first.", "There must be {COLOR=BLUE}something near {COLOR=BLACK}where I found the ribbon."], "choices": [{"command": "EXIT"}]}
     }
   },
   "fairy_welcome"      : {
+    "name"   : "Fairy",
     "phrases": {
       "1": {"text": ["Ah, young Mozes. You may enter here."], "choices": [{"command": "RECEIVE_XP", "nextId": "2"}]},
       "2": {"text": ["Are you surprised that we know who you are?"]},
@@ -25,12 +29,14 @@
     }
   },
   "find_great_tree"    : {
+    "name"   : "Mozes",
     "phrases": {
       "1": {"text": ["What is this place?"]},
       "2": {"text": ["It's... {WAIT=0.5}it's... {WAIT=0.5}so... {WAIT=1}magical!", "And friendly."], "choices": [{"command": "EXIT"}]}
     }
   },
   "fairy_general"      : {
+    "name"   : "Fairy",
     "phrases": {
       "1": {"text": ["Young lovely Mozes, it's wonderful to finally have you in our midst."], "choices": [{"command": "EXIT"}]}
     }
@@ -42,7 +48,7 @@
       "2" : {
         "choices": [
           {"text": "*Ask about how they all seem to know you.*", "nextId": "10"},
-          {"text": "*Inquire about the dark times she mentioned.*", "nextId": "20"},
+          {"text": "*Inquire about the dark times she mentioned.*", "nextId": "20", "setJumpToAltEnabled": false},
           {"text": "*Ask if she has any information about Grace's whereabouts.*", "nextId": "30"},
           {"text": "*Take your leave.*", "command": "EXIT", "nextId": "70"}
         ]
@@ -53,22 +59,25 @@
         "choices": [
           {"text": "*Fearlessly offer your help against Ardor.*", "nextId": "23"},
           {"text": "*Express your hope that they are capable of handling him on their own.*", "nextId": "24"},
-          {"text": "*Roll your eyes at the cliche evil wizard story and casually ask about Grace.*", "nextId": "27"}
+          {"text": "*Roll your eyes at the cliche evil wizard story and casually ask about Grace.*", "nextId": "25"}
         ]
       },
-      "23": {"text": ["You're truly wonderful for offering, but facing Ardor is an exceedingly daunting task. Given the limited time, there's little you could achieve. He's far beyond your capabilities. Our hope rests on our combined efforts, including the Council of the Three Wizards and the Elven Queen, to deal with Ardor."], "choices": [{"nextId": "25"}]},
-      "24": {"text": ["No need to concern yourself with that. Even if you were to confront Ardor, he's far beyond your capabilities. Given the limited time, there's little you could achieve. Our hope rests on our combined efforts, including the Council of the Three Wizards and the Elven Queen, to deal with Ardor."]},
-      "25": {"text": ["Ardor appears almost invulnerable to all forms of attack. We're still trying to uncover the source of his power. Please stay away from him!"], "choices": [{"nextId": "2"}]},
-      "27": {"text": ["Well, that's the problem. It appears that Ardor has taken Grace captive, and our efforts to help her have proven unsuccessful.", "And beware, you can't face him either! Given the limited time, there's little you could achieve. He's far beyond your capabilities. Our hope rests on our combined efforts, including the Council of the Three Wizards and the Elven Queen, to deal with Ardor."]},
-      "28": {"text": ["Ardor appears almost invulnerable to all forms of attack. We're still trying to uncover the source of his power. Please stay away from him!"], "choices": [{"nextId": "31"}]},
-      "30": {"text": ["Ah, yes of course. Unfortunately, it appears that Ardor has taken Grace captive, and our efforts to help her have proven unsuccessful."]},
-      "31": {"text": ["However, do not despair, there might still be a possibility for you. Your courage is admirable, but bravery alone may not suffice. That's why we wish to aid you in your quest to find Grace."]},
-      "32": {"text": ["Within the cave you came from, we've hidden a magic scroll that will be of great assistance against the orcs in Honeywood Forest."], "choices": [{"nextId": "35"}]},
+      "23": {"text": ["You're truly wonderful for offering, but no! You must really stay away from him."], "choices": [{"nextId": "26"}]},
+      "24": {"text": ["No need to concern yourself with that. Your only concern should be that you really must stay away from him."], "choices": [{"nextId": "26"}]},
+      "25": {"text": ["No, this is serious! You must really stay away from him."], "choices": [{"nextId": "26"}]},
+      "26": {"text": ["You cannot confront Ardor! Even if you were to confront Ardor, he's far beyond your capabilities. Given the limited time we still have, there's little you could achieve in becoming stronger."]},
+      "27": {"text": ["Ardor {COLOR=BLUE}appears almost invulnerable {COLOR=BLACK}to all forms of attack. We're still trying to uncover the source of his power."]},
+      "28": {"text": ["The only hope we have is that all the Forces of Good, like the Elves, the Wizard Council, and us, combine their powers. Together we can launch a massive attack and deal with Ardor."]},
+      "29": {"text": ["I cannot express myself enough: Please stay away from him!"], "choices": [{"nextId": "2", "altNextId": "35"}]},
+      "30": {"text": ["Hmm, yes of course. {WAIT=0.5}Terrible news, it appears that Ardor has taken Grace captive, and our efforts to help her have proven unsuccessful. I am truly for this, Mozes."]},
+      "31": {"text": ["However, do not despair, there might still be a possibility for you. While your courage is admirable, bravery alone will not suffice. That's why we wish to aid you in your quest to find Grace."]},
+      "32": {"text": ["Within the cave you came from, we've hidden a magic scroll that will be of great assistance against any orcs here in Honeywood Forest."], "choices": [{"nextId": "35"}]},
       "35": {
         "choices": [
-          {"text": "*Inquire further about Ardor and Grace.*", "nextId": "40"},
+          {"text": "*Inquire further about this Ardor.*", "nextId": "20", "setJumpToAltEnabled": true},
+          {"text": "*Inquire further about Grace.*", "nextId": "40"},
           {"text": "*Ask for details about using a magic scroll.*", "nextId": "50"},
-          {"text": "*Mention that when things are hidden, they can be challenging to find.*", "command": "ACCEPT_QUEST", "nextId": "60"}
+          {"text": "*Mention that when things are hidden, they often are challenging to find.*", "command": "ACCEPT_QUEST", "nextId": "60"}
         ]
       },
       "40": {"text": ["I'm sorry, I don't know much about her captivity. I feel terrible. Perhaps she was in the wrong place at the wrong time. I sincerely hope so."], "choices": [{"nextId": "35"}]},
@@ -107,6 +116,7 @@
     }
   },
   "fairy_crystal"      : {
+    "name"   : "Fairy",
     "phrases": {
       "1": {"text": ["Our endearing Mozes, do you know about these so-called warp crystals?"]},
       "2": {"text": ["Warp crystals, like the one right here, are scattered throughout Adan. When touched, they allow instantaneous travel to other places.", "To unlock a new travel location, you must first activate the portal. This form of travel is both powerful and dangerous, so only individuals approved by us Fairies can use them. And we've decided that you, Mozes, are permitted."]},
@@ -171,11 +181,13 @@
     }
   },
   "notice_dense_fog"   : {
+    "name"   : "Mozes",
     "phrases": {
       "1": {"text": ["What a dense fog all of a sudden.", "How peculiar..."], "choices": [{"command": "EXIT"}]}
     }
   },
   "back_were_i_started": {
+    "name"   : "Mozes",
     "phrases": {
       "1": {"text": ["I'm finally back where I started!"]},
       "2": {"text": ["I've been given that 'another chance'."]},

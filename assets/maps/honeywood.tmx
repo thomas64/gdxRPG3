@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="96" height="78" tilewidth="24" tileheight="24" infinite="0" nextlayerid="57" nextobjectid="415">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="96" height="78" tilewidth="24" tileheight="24" infinite="0" nextlayerid="57" nextobjectid="425">
  <properties>
   <property name="bgm" value="bgm_honeywood"/>
   <property name="lightmap_camera" value="sunlight"/>
@@ -461,6 +461,21 @@
     <property name="task" value="1"/>
    </properties>
   </object>
+  <object id="420" name="quest_helping_horse" type="blocker" x="552" y="864" width="288" height="24">
+   <properties>
+    <property name="condition" value="_rc_===_u_q_this"/>
+   </properties>
+  </object>
+  <object id="422" name="quest_helping_horse" type="blocker" x="1896" y="1104" width="96" height="24">
+   <properties>
+    <property name="condition" value="_rc_===_u_q_this"/>
+   </properties>
+  </object>
+  <object id="424" name="quest_helping_horse" type="blocker" x="324" y="864" width="24" height="216">
+   <properties>
+    <property name="condition" value="_rc_===_u_q_this"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup color="#ff00ff" id="53" name="cutscene"/>
  <objectgroup color="#ff55ff" id="54" name="event">
@@ -470,5 +485,8 @@
   <object id="393" name="everything_is_back_again" type="discover" x="504" y="528" width="96" height="48"/>
   <object id="394" name="guide_event_party_member" type="discover" x="1008" y="960" width="336" height="336"/>
   <object id="414" name="dont_have_time_for_this" type="discover" x="1896" y="240" width="144" height="24"/>
+  <object id="418" name="horse_quest_not_yet_accepted2" type="discover" x="576" y="858" width="240" height="6"/>
+  <object id="421" name="horse_quest_not_yet_accepted1" type="discover" x="1908" y="1098" width="72" height="6"/>
+  <object id="423" name="horse_quest_not_yet_accepted3" type="discover" x="318" y="864" width="6" height="192"/>
  </objectgroup>
 </map>

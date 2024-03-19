@@ -1,35 +1,56 @@
 {
-  "everything_is_normal_again": {
+  "everything_is_normal_again"   : {
     "type"          : "conversation",
     "conversationId": "everything_is_normal_again",
     "entityId"      : "mozes"
   },
-  "everything_is_back_again"  : {
+  "everything_is_back_again"     : {
     "type"          : "conversation",
     "condition"     : ["_rc_==_a_q_quest_god_of_power"],
     "conversationId": "everything_is_back_again",
     "entityId"      : "mozes"
   },
-  "dont_have_time_for_this": {
+  "horse_quest_not_yet_accepted1": {
     "type"          : "conversation",
-    "condition"     : ["_c_>=_k_q_quest_helping_horse"],
+    "condition"     : ["_rc_===_u_q_quest_helping_horse"],
+    "conversationId": "should_really_be_going_to_grace",
+    "entityId"      : "mozes",
+    "doesRepeat"    : true
+  },
+  "horse_quest_not_yet_accepted2": {
+    "type"          : "conversation",
+    "condition"     : ["_rc_===_u_q_quest_helping_horse"],
+    "conversationId": "should_really_be_going_to_grace",
+    "entityId"      : "mozes",
+    "doesRepeat"    : true
+  },
+  "horse_quest_not_yet_accepted3": {
+    "type"          : "conversation",
+    "condition"     : ["_rc_===_u_q_quest_helping_horse"],
+    "conversationId": "should_really_be_going_to_grace",
+    "entityId"      : "mozes",
+    "doesRepeat"    : true
+  },
+  "dont_have_time_for_this"      : {
+    "type"          : "conversation",
+    "condition"     : ["_r_==_u_q_quest_helping_horse", "_c_==_a_q_quest_helping_horse"],
     "conversationId": "dont_have_time_for_this",
     "entityId"      : "mozes"
   },
-  "a_tree_has_fallen"         : {
+  "a_tree_has_fallen"            : {
     "type"          : "conversation",
     "condition"     : ["!talked_to_lennor"],
     "conversationId": "quest_helping_horse",
     "entityId"      : "man02"
   },
-  "dont_go_up_there"          : {
+  "dont_go_up_there"             : {
     "type"          : "conversation",
     "condition"     : ["_c_<=_k_q_quest_honeywood_inn_price-1"],
     "conversationId": "dont_go_up_there",
     "entityId"      : "woman02",
     "doesRepeat"    : true
   },
-  "event_honeywood_soldiers"  : {
+  "event_honeywood_soldiers"     : {
     "type"          : "conversation",
     "condition"     : ["alone_in_party"],
     "conversationId": "honeywood_soldiers",

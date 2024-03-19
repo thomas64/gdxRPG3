@@ -12,6 +12,7 @@ data class ConversationGraph(
     val phrases: Map<String, ConversationPhrase> = emptyMap()
 ) {
     var currentPhraseId: String = DEFAULT_STARTING_PHRASE_ID
+    private var isJumpToAltEnabled: Boolean = false
 
     fun initId() {
         phrases.forEach { it.value.initId(id) }
@@ -30,7 +31,23 @@ data class ConversationGraph(
     }
 
     fun getAssociatedChoices(): Array<ConversationChoice> {
-        return phrases[currentPhraseId]!!.getChoices(currentPhraseId).toTypedArray()
+        return phrases[currentPhraseId]!!
+            .getChoices(currentPhraseId)
+            .map { possibleConvert(it) }
+            .toTypedArray()
+    }
+
+    private fun possibleConvert(choice: ConversationChoice): ConversationChoice {
+        return when {
+            choice.setJumpToAltEnabled == true -> { isJumpToAltEnabled = true; choice }
+            choice.setJumpToAltEnabled == false -> { isJumpToAltEnabled = false; choice }
+            choice.containsAlternativeNextId() -> choice.copyWithAltNextId()
+            else -> choice
+        }
+    }
+
+    private fun ConversationChoice.containsAlternativeNextId(): Boolean {
+        return isJumpToAltEnabled && this.altNextId != null
     }
 
 }

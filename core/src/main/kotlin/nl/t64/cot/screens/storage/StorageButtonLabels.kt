@@ -9,9 +9,9 @@ internal class StorageButtonLabels(stage: Stage) : ButtonLabels(stage) {
 
     override fun createBottomLeftText(): String {
         return if (Utils.isGamepadConnected()) {
-            "Take:     [A] One      [X] Half      [Y] Full     |     [R-Stick] Sort inventory"
+            "Take:     [A] One      [X] Half      [Y] Full     |     [R-Stick] Sort container"
         } else {
-            "Take:     [A] One      [S] Half      [D] Full     |     [Space] Sort inventory"
+            "Take:     [A] One      [S] Half      [D] Full     |     [Space] Sort container"
         }
     }
 

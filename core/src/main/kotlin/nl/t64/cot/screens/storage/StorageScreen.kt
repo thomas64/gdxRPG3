@@ -9,6 +9,7 @@ import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.ParchmentScreen
 import nl.t64.cot.screens.ScreenUI
 import nl.t64.cot.screens.inventory.InventoryUtils
+import nl.t64.cot.screens.inventory.inventoryslot.InventorySlotsTable
 
 
 class StorageScreen : ParchmentScreen() {
@@ -102,9 +103,21 @@ class StorageScreen : ParchmentScreen() {
     }
 
     private fun sortStorage() {
-        playSe(AudioEvent.SE_MENU_CONFIRM)
-        gameData.storage.sort()
-        storageUI.reloadInventory()
+        when (val selectedTable = storageUI.getSelectedTable()) {
+            is StorageSlotsTable -> {
+                playSe(AudioEvent.SE_MENU_CONFIRM)
+                gameData.storage.sort()
+                storageUI.reloadInventory()
+            }
+            is InventorySlotsTable -> {
+                playSe(AudioEvent.SE_MENU_CONFIRM)
+                gameData.inventory.sort()
+                selectedTable.clearAndFill()
+            }
+            else -> {
+                playSe(AudioEvent.SE_MENU_ERROR)
+            }
+        }
     }
 
     private fun toggleTooltip() {

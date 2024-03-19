@@ -51,8 +51,8 @@
       "During conversations with other characters,",
       "you have the opportunity to choose your responses.",
       "",
-      "Certain responses are restricted by specific conditions.",
-      "These conditions are indicated by [...] before the response."
+      "But certain responses are restricted by specific conditions.",
+      "These conditions are stated between brackets [] before the response."
     ]
   },
   "guide_event_equipment"            : {

@@ -1,24 +1,33 @@
 {
-  "everything_is_normal_again" : {
+  "everything_is_normal_again"     : {
+    "name"   : "Mozes",
     "phrases": {
       "1": {"text": ["Everything is back to normal?", "Adan didn't end up in flames?", "Is Grace still alive then?"]},
-      "2": {"text": ["Then I have to find her again quickly!"], "choices": [{"command": "EXIT"}]}
+      "2": {"text": ["Then I must quickly return to the forest!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "everything_is_back_again"   : {
+  "should_really_be_going_to_grace": {
+    "name"   : "Mozes",
+    "phrases": {
+      "1": {"text": ["There's no time to waste! Grace might still be alive."]},
+      "2": {"text": ["I must hurry back to the forest!"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "dont_have_time_for_this"        : {
+    "name"   : "Mozes",
+    "phrases": {
+      "1": {"text": ["Aw man! Let's clear this tree quickly. I really need to reach Grace as soon as possible!"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "everything_is_back_again"       : {
+    "name"   : "Mozes",
     "phrases": {
       "1": {"text": ["This is so weird..."]},
       "2": {"text": ["Everything is back to the way it was..."]},
-      "3": {"text": ["As if nothing ever happened..."], "choices": [{"command": "EXIT"}]}
+      "3": {"text": ["As if nothing happened at all..."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "dont_have_time_for_this"    : {
-    "phrases": {
-      "1": {"text": ["Aw man! I can't afford to deal with this right now!"]},
-      "2": {"text": ["I really need to get to Grace as quickly as possible!"], "choices": [{"command": "EXIT"}]}
-    }
-  },
-  "mrs_johanna"                : {
+  "mrs_johanna"                    : {
     "name"   : "Mrs. Johanna",
     "phrases": {
       "1" : {"text": ["Mozes, my dear, how are you? What a beautiful day, isn't it?"]},
@@ -38,41 +47,32 @@
       "23": {"face": "oldwoman01", "name": "Mrs. Johanna", "text": ["Nah! Of course not. I've got so much to live for. See ya!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "quest_helping_horse"        : {
+  "quest_helping_horse"            : {
     "name"   : "Lennor",
     "phrases": {
-      "1" : {"text": ["Hey Mozes, you can't go further north from here. There is a large tree blocking the road."], "choices": [{"nextId": "3"}]},
-      "2" : {"text": ["Hey Mozes, you can't go further north from here. There is a large tree blocking the road."], "choices": [{"nextId": "3"}]},
-      "3" : {"text": ["Luckily, no one was hurt when it fell. But it'll take a while to remove it and clear the road for everyone."], "choices": [{"nextId": "5"}]},
-      "4" : {"text": ["Hey Mozes, are you back? The tree is still blocking the road."], "choices": [{"nextId": "5"}]},
+      "1" : {"text": ["Hey Mozes, you can't go further north from here. Just {COLOR=FIREBRICK}minutes ago{COLOR=BLACK}, a large tree fell down and is now blocking the road."]},
+      "2" : {"text": ["I heard a loud bang, so I came straight this way to see what happened. Luckily, no one was hurt when it fell. But it'll take a while for me to remove it and clear the road for everyone."]},
+      "3" : {"text": ["I could use some help though. A tree this large? I think I need a horse and some ropes to succeed."], "choices": [{"command": "ACCEPT_QUEST", "nextId": "5"}]},
       "5" : {
         "choices": [
           {"condition": ["i_tc_1_q_this", "i_tc_11_q_this"], "text": "[2 Ropes, 1 Horse] *Tada! Present what he wanted to ask for.*", "command": "PROVIDE_QUEST_ITEM", "nextId": "60"},
-          {"condition": ["i_r_==_f_q_this"], "text": "*Ask if you, by any chance, could help with a horse and 2 ropes.*", "command": "ACCEPT_QUEST", "nextId": "40"},
           {"text": "*Ask when the tree fell down.*", "nextId": "10"},
           {"text": "*Express that you really need to reach Honeywood Forest.*", "nextId": "20"},
-          {"text": "*Ask why he hasn't removed the tree already.*", "nextId": "20"},
-          {"condition": ["i_c_!=_k_q_this"], "text": "*Take your leave.*", "command": "EXIT", "nextId": "2"},
-          {"condition": ["i_c_==_k_q_this"], "text": "*Take your leave.*", "command": "EXIT", "nextId": "4"}
+          {"text": "*Ask why he hasn't removed the tree already.*", "nextId": "30"},
+          {"text": "*Acknowledge his request for a horse and some ropes.*", "nextId": "40"},
+          {"text": "*Take your leave.*", "command": "EXIT", "nextId": "50"}
         ]
       },
-      "10": {"text": ["Only {COLOR=FIREBRICK}just a moment ago{COLOR=BLACK}! I heard a loud bang, so I came straight this way to see what happened."]},
+      "10": {"text": ["Only {COLOR=FIREBRICK}just minutes ago{COLOR=BLACK}! I heard a loud bang, so I came straight this way to see what happened."]},
       "11": {"text": ["Luckily, this doesn't happen very often, because it'll take a while to remove it and clear the road for everyone."], "choices": [{"nextId": "5"}]},
-      "20": {"text": ["I'm sorry, Mozes, but there's nothing I can do about it right now. You'll have to wait a while, unless you happen to have a horse and some ropes with you, ha ha!"]},
-      "21": {
-        "choices": [
-          {"text": "*Ignore the joke and acknowledge his proposal.*", "command": "ACCEPT_QUEST", "nextId": "35"},
-          {"text": "*Shake your head. You have no time to wait.*", "command": "KNOW_QUEST", "nextId": "30"}
-        ]
-      },
-      "30": {"text": ["It's unfortunate, I know. But you could help me out, of course, to speed up the process."], "choices": [{"command": "EXIT", "nextId": "4"}]},
-      "35": {"text": ["I was kidding about the horse, Mozes, ha ha! But sure, if you're serious about it, if you really bring me a strong horse and 2 ropes, I can clear the road for you immediately."]},
-      "36": {"text": ["You could ask the village elder about this matter. He's wise, he will probably have some suggestions."], "choices": [{"command": "EXIT", "nextId": "50"}]},
-      "40": {"text": ["Uhh, that's {COLOR=BLUE}exactly{COLOR=BLACK} how you could help. If you really bring me a strong horse and 2 ropes, I can clear the road for you immediately."], "choices": [{"command": "EXIT", "nextId": "50"}]},
+      "20": {"text": ["I'm sorry, Mozes, but there's nothing I can do about it right now. You'll have to wait a while, or you could help me out to speed up the process."], "choices": [{"nextId": "5"}]},
+      "30": {"text": ["I tried! It's one heavy tree, Mozes! I really can't do it without a horse. Which I don't have. Hmmm, maybe I will get one tomorrow..."], "choices": [{"nextId": "5"}]},
+      "40": {"text": ["That would help a lot! If you bring me a strong horse and 2 ropes, I can clear the road for you immediately."]},
+      "41": {"text": ["You could ask the village elder about this matter. He's wise, he will probably have some suggestions."], "choices": [{"command": "EXIT", "nextId": "50"}]},
       "50": {"text": ["The tree is still blocking the road, Mozes."]},
       "51": {
         "choices": [
-          {"condition": ["_tc_1_q_this", "_tc_11_q_this"], "text": "[2 Ropes, 1 Horse] *Present the requested horse and items.*", "command": "PROVIDE_QUEST_ITEM", "nextId": "60"},
+          {"condition": ["_tc_1_q_this", "_tc_11_q_this"], "text": "[2 Ropes, 1 Horse] *Present the requested horse and ropes.*", "command": "PROVIDE_QUEST_ITEM", "nextId": "60"},
           {"text": "*Take your leave.*", "command": "EXIT", "nextId": "50"}
         ]
       },
@@ -80,19 +80,19 @@
       "70": {"text": ["Thanks for your help, Mozes. I could not have removed the tree so soon without you."], "choices": [{"command": "EXIT", "nextId": "70"}]}
     }
   },
-  "playing_catch_1"            : {
+  "playing_catch_1"                : {
     "name"   : "Lynette",
     "phrases": {
       "1": {"text": ["We're playing catch, teehee! Can Grace come and join us?"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "playing_catch_2"            : {
+  "playing_catch_2"                : {
     "name"   : "Tobin",
     "phrases": {
       "1": {"text": ["We're playing catch, teehee! Can Grace come and join us?"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "kaidan_come_home"           : {
+  "kaidan_come_home"               : {
     "name"   : "Kaidan",
     "phrases": {
       "1": {
@@ -115,25 +115,25 @@
       "8": {"face": "mozes", "name": "Mozes", "text": [". . ."], "choices": [{"command": "RELOAD_NPCS"}]}
     }
   },
-  "kaidan_is_home"             : {
+  "kaidan_is_home"                 : {
     "name"   : "Kaidan",
     "phrases": {
       "1": {"text": ["Aw man! This is boring! I wanna play outside."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "life_is_boring_1"           : {
+  "life_is_boring_1"               : {
     "name"   : "Lynette",
     "phrases": {
       "1": {"text": ["Boohoo! You took Kaidan away from us! You're mean!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "life_is_boring_2"           : {
+  "life_is_boring_2"               : {
     "name"   : "Tobin",
     "phrases": {
       "1": {"text": ["Boohoo! You took Kaidan away from us! You're mean!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "luana_join"                 : {
+  "luana_join"                     : {
     "name"   : "Luana",
     "phrases": {
       "1" : {"text": ["Hi Mozes! You really should check out this priest fella.", "He is so funny! Ha ha!"]},
@@ -161,7 +161,7 @@
       "14": {"text": ["Let's go!"], "choices": [{"command": "HERO_JOIN"}]}
     }
   },
-  "priest_honeywood"           : {
+  "priest_honeywood"               : {
     "name"   : "Priest",
     "phrases": {
       "1": {"text": ["I'm a traveling priest from the city.", "Young man, do you want to be saved?"]},
@@ -174,7 +174,7 @@
       "3": {"text": ["Your soul is now destined for God."], "choices": [{"command": "SAVE_GAME"}]}
     }
   },
-  "resourceshop_honeywood"     : {
+  "resourceshop_honeywood"         : {
     "name"   : "Resource Shop",
     "phrases": {
       "1": {"text": ["Hi Mozes, would you like to browse my wares?"]},
@@ -186,7 +186,7 @@
       }
     }
   },
-  "equipshop_honeywood"        : {
+  "equipshop_honeywood"            : {
     "name"   : "Equipment Shop",
     "phrases": {
       "1": {"text": ["Hello Mozes, what can I do for you today?"]},
@@ -198,7 +198,7 @@
       }
     }
   },
-  "honeywood_academy1"         : {
+  "honeywood_academy1"             : {
     "name"   : "Honeywood Academy",
     "phrases": {
       "1": {"text": ["Good day, young sir, would you like to receive skill training?"]},
@@ -210,7 +210,7 @@
       }
     }
   },
-  "honeywood_academy2"         : {
+  "honeywood_academy2"             : {
     "name"   : "Honeywood Academy",
     "phrases": {
       "1": {"text": ["Hey Mozes, don't say a word. You want to receive skill training."]},
@@ -222,7 +222,7 @@
       }
     }
   },
-  "quest_honeywood_inn_price-1": {
+  "quest_honeywood_inn_price-1"    : {
     "name"   : "Innkeeper",
     "phrases": {
       "1"   : {
@@ -261,41 +261,45 @@
       "1400": {"text": ["Welcome back, my fearless friend! Thanks again for your help. Would you like to rest here and be completely revitalized for just 1 gold piece?"], "choices": [{"nextId": "2"}]}
     }
   },
-  "dont_go_up_there"           : {
+  "dont_go_up_there"               : {
     "name"   : "Innkeeper",
     "phrases": {
       "1": {"text": ["Please, do not go upstairs!"]},
-      "2": {"text": ["It's not, uh... safe."], "choices": [{"command": "EXIT"}]}
+      "2": {"text": ["It's not, uh... very safe."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "get_out_of_kitchen"         : {
+  "get_out_of_kitchen"             : {
+    "name"   : "Cook",
     "phrases": {
       "1": {"text": ["What are you doing here? Please get out of the kitchen."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "pleasant_honeywood"         : {
+  "pleasant_honeywood"             : {
+    "name"   : "Traveler",
     "phrases": {
       "1": {"text": ["Honeywood is such a delightful little village. I enjoy staying here from time to time."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "honeywood_inn_cat"          : {
+  "honeywood_inn_cat"              : {
+    "name"   : "Millie",
     "phrases": {
-      "1"   : {
-        "text": ["Meow."], "choices": [
-          {"condition": ["i_druid1"], "nextId": "2"}
+      "1": {"text": ["Meow."]},
+      "2": {
+        "choices": [
+          {"condition": ["druid1"], "text": "[Druid 1] *Listen to Millie.*", "nextId": "3"},
+          {"text": "*Pet Millie on the head and take your leave.*", "command": "EXIT"}
         ]
       },
-      "2000": {"face": "mozes", "text": ["(Druid skill rank 1 needed.)"], "choices": [{"command": "EXIT"}]},
-      "2"   : {"text": ["I'm here only for the mice; there's no way I'll deal with bats."], "choices": [{"command": "EXIT"}]}
+      "3": {"text": ["I'm here only for the mice; there's no way I'll deal with bats."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "quest_get_horse"            : {
+  "quest_get_horse"                : {
     "name"   : "Angie",
     "phrases": {
       "1" : {"text": ["Hi Mozes. Won't you say hi to Enopa? She's not feeling well."]},
       "2" : {
         "choices": [
-          {"condition": ["i_tn_7_q_quest_get_horse"], "text": "*Express your concern about Enopa's condition.*", "nextId": "3"},
+          {"condition": ["i_tn_7_q_this"], "text": "*Express your concern about Enopa's condition.*", "nextId": "3"},
           {"condition": ["i_rc_>=_a_q_quest_helping_horse"], "text": "*Inquire about borrowing Enopa to help Lennor with the fallen tree.*", "nextId": "10"},
           {"text": "*Greet Enopa and take your leave.*", "command": "EXIT"}
         ]
@@ -349,25 +353,27 @@
       "80": {"text": ["How is my Enopa doing? Has she been of any help to Lennor and you?"], "choices": [{"command": "EXIT", "nextId": "80"}]}
     }
   },
-  "honeywood_horse"            : {
+  "honeywood_horse"                : {
     "name"   : "Enopa",
     "phrases": {
-      "1"   : {
-        "text": ["Neigh."], "choices": [
-          {"condition": ["i_druid1", "_tn_7_q_quest_get_horse"], "nextId": "2"},
-          {"condition": ["i_druid1", "_tc_7_q_quest_get_horse", "_c_!=_f_q_quest_get_horse"], "nextId": "3"},
-          {"condition": ["i_druid1", "_c_==_f_q_quest_get_horse", "_c_!=_f_q_quest_helping_horse"], "nextId": "4"},
-          {"condition": ["i_druid1", "_c_==_f_q_quest_helping_horse"], "nextId": "5"}
+      "1": {"text": ["Neigh."]},
+      "2": {
+        "choices": [
+          {"condition": ["i_druid1", "_tn_7_q_quest_get_horse"], "text": "[Druid 1] *Listen to Enopa.*", "nextId": "3"},
+          {"condition": ["i_druid1", "_tc_7_q_quest_get_horse", "_c_!=_f_q_quest_get_horse"], "text": "[Druid 1] *Listen to Enopa.*", "nextId": "4"},
+          {"condition": ["i_druid1", "_c_==_f_q_quest_get_horse", "_c_!=_f_q_quest_helping_horse"], "text": "[Druid 1] *Listen to Enopa.*", "nextId": "5"},
+          {"condition": ["i_druid1", "_c_==_f_q_quest_helping_horse"], "text": "[Druid 1] *Listen to Enopa.*", "nextId": "6"},
+          {"condition": ["ii_druid1"], "text": "[Druid 1] *Listen to Enopa.*", "nextId": "9999"},
+          {"text": "*Nod to Enopa and take your leave.*", "command": "EXIT"}
         ]
       },
-      "2000": {"face": "mozes", "text": ["(Druid skill rank 1 needed.)"], "choices": [{"command": "EXIT"}]},
-      "2"   : {"text": ["I'm not feeling well... Perhaps those tempting mushrooms weren't a good idea."], "choices": [{"command": "EXIT"}]},
-      "3"   : {"text": ["I feel fantastic again! Thanks for your help."], "choices": [{"command": "EXIT"}]},
-      "4"   : {"text": ["I'll have that tree fixed in no time!"], "choices": [{"command": "EXIT"}]},
-      "5"   : {"text": ["Did I do well?"], "choices": [{"command": "EXIT"}]}
+      "3": {"text": ["I'm not feeling well... Perhaps those tempting mushrooms weren't a good idea."], "choices": [{"command": "EXIT"}]},
+      "4": {"text": ["I feel fantastic again! Thanks for your help."], "choices": [{"command": "EXIT"}]},
+      "5": {"text": ["I'll have that tree fixed in no time!"], "choices": [{"command": "EXIT"}]},
+      "6": {"text": ["Did I do well?"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "quest_get_medicine"         : {
+  "quest_get_medicine"             : {
     "name"   : "Elenora",
     "phrases": {
       "1"   : {"text": ["Mozes dear, how are you today?"]},
@@ -403,7 +409,7 @@
       "1400": {"text": ["Mozes dear, did the medicine cure the horse?"], "choices": [{"nextId": "2"}]}
     }
   },
-  "quest_honeywood_elder"      : {
+  "quest_honeywood_elder"          : {
     "name"   : "Village elder Grahan",
     "phrases": {
       "1"   : {"text": ["Greetings, Mozes. How may I be of service today?"]},
@@ -447,7 +453,7 @@
       "1200": {"text": ["Greetings, Mozes. How may I be of service today?"], "choices": [{"nextId": "2"}]}
     }
   },
-  "quest_get_horseshoes"       : {
+  "quest_get_horseshoes"           : {
     "name"   : "Black Smith",
     "phrases": {
       "1"   : {"text": ["Good day to you neighbor! I'm Black Smith, the blacksmith. It never gets old to say that, ha ha! Can I help you?"]},
@@ -490,7 +496,7 @@
       "1200": {"text": ["Hello neighbor, you're back."], "choices": [{"nextId": "2"}]}
     }
   },
-  "quest_get_tow_rope"         : {
+  "quest_get_tow_rope"             : {
     "name"   : "Jaron",
     "phrases": {
       "1"   : {"text": ["Hi Mozes, to what do I owe the pleasure of you entering our home?"]},
@@ -523,7 +529,7 @@
           {"text": "(Back)", "nextId": "1201"}
         ]
       },
-      "110" : {"text": ["I don't have any more gold at the moment. So maybe you could pay that 1 gold and see the rope as my thanks."], "choices": [{"nextId": "101"}]},
+      "110" : {"text": ["I don't have any more gold at the moment. So maybe you could pay that 1 gold yourself and see the rope as my thanks."], "choices": [{"nextId": "101"}]},
       "120" : {"text": ["Erm... Ah yes yes, of course. Okay, alright then... Here you are."], "choices": [{"command": "SAY_QUEST_THING", "nextId": "1200"}]},
       "1199": {"text": ["You forgot something."], "choices": [{"command": "RECEIVE_ITEM_FOR_QUEST"}]},
       "1200": {"text": ["There you are. How's it going? Have you made any progress?"]},
@@ -539,7 +545,8 @@
       "1400": {"text": ["Are you finished with the rope? If so, I would like it back."], "choices": [{"command": "EXIT", "nextId": "1400"}]}
     }
   },
-  "honeywood_soldiers"         : {
+  "honeywood_soldiers"             : {
+    "name"   : "Soldier",
     "phrases": {
       "1"   : {"text": ["Sir, as per the village elder's orders, we are not permitted to allow anyone to leave the village alone."]},
       "2"   : {

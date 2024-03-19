@@ -13,7 +13,9 @@ object ConditionDatabase {
         "diplomat1"                 to { hasEnoughOfSkill(SkillItemId.DIPLOMAT,  1) },
         "barbarian1"                to { hasEnoughOfSkill(SkillItemId.BARBARIAN, 1) },
         "barbarian4"                to { hasEnoughOfSkill(SkillItemId.BARBARIAN, 4) },
+        "druid1"                    to { hasEnoughOfSkill(SkillItemId.DRUID,     1) },
         "i_druid1"                  to { hasEnoughOfSkill(SkillItemId.DRUID,     1) },
+        "ii_druid1"                 to { hasEnoughOfSkill(SkillItemId.DRUID,     1) },
 
         "level10"                   to { hasAverageLevelOf(               10) },
 

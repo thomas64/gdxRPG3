@@ -1,5 +1,6 @@
 {
   "mozes_finds_grace"              : {
+    "name"   : "Mozes",
     "phrases": {
       "1" : {"face": "mozes", "text": ["(There's Grace! I've found her!)"]},
       "2" : {"face": "mozes", "text": [". . ."]},
@@ -7,102 +8,111 @@
       "4" : {"face": "mozes", "text": ["(What's happening here?)"]},
       "5" : {"face": "mozes", "text": ["(Why are they holding her?)"]},
       "6" : {"face": "mozes", "text": [". . ."]},
-      "7" : {"face": "ardor", "text": ["Oh great Lord Ulrog, God of Power, the time has come!"]},
-      "8" : {"face": "ardor", "text": ["The Royal Sacrifice is prepared!"]},
-      "9" : {"face": "girl01", "text": ["Let me go!"]},
-      "10": {"face": "ardor", "text": ["Guards, bring forth the princess."]},
-      "11": {"face": "mozes", "text": ["(Princess? What is he talking about?)"], "choices": [{"command": "EXIT"}]}
+      "7" : {"face": "ardor", "name": "? ? ?", "text": ["Oh great Lord Ulrog, God of Power, the time has come!"]},
+      "8" : {"face": "ardor", "name": "? ? ?", "text": ["The Royal Sacrifice is prepared!"]},
+      "9" : {"face": "girl01", "name": "Grace", "text": ["Let me go!"]},
+      "10": {"face": "ardor", "name": "? ? ?", "text": ["Guards, bring forth the princess."]},
+      "11": {"face": "mozes", "name": "Mozes", "text": ["(Princess? What is he talking about?)"], "choices": [{"command": "EXIT"}]}
     }
   },
   "grace_is_no_princess"           : {
+    "name"   : "Mozes",
     "phrases": {
       "1": {"text": ["(Huh?)"]},
       "2": {"text": ["(Grace is no princess...?)"], "choices": [{"command": "EXIT"}]}
     }
   },
   "ardor_starts_to_pray"           : {
+    "name"   : "? ? ?",
     "phrases": {
       "1": {"text": ["Mighty and powerful Ulrog!"]},
       "2": {"text": ["Hear my prayer!"]},
       "3": {"text": ["Everything is prepared!"]},
       "4": {"text": ["My quest for ultimate power is finally fulfilled!"]},
-      "5": {"text": ["With the blood of this princess, I shall rule over all of Ardor!"]},
+      "5": {"text": ["With the blood of this princess, I shall rule over all of Adan!"]},
       "6": {"text": ["Now, slay her and take her life!"]},
-      "7": {"face": "mozes", "text": ["No!!"], "choices": [{"command": "EXIT"}]}
+      "7": {"face": "mozes", "name": "Mozes", "text": ["No!!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "mozes_steps_in"                 : {
     "phrases": {
-      "1": {"face": "girl01", "text": ["Mozes!"]},
-      "2": {"face": "mozes", "text": ["You will not harm my sister!!"]},
-      "3": {"face": "mozes", "text": ["Face me!!"], "choices": [{"command": "EXIT"}]}
+      "1": {"face": "girl01", "name": "Grace", "text": ["Mozes!"]},
+      "2": {"face": "mozes", "name": "Mozes", "text": ["You will not harm my sister!!"]},
+      "3": {"face": "mozes", "name": "Mozes", "text": ["Face me!!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "ardor_commands_to_kill_mozes"   : {
     "phrases": {
-      "1": {"face": "ardor", "text": ["Sister? Hmmmm..."]},
-      "2": {"face": "ardor", "text": ["{SPEED=0.2} . . . . ."]},
-      "3": {"face": "ardor", "text": ["Guards! Kill him!"]},
-      "4": {"face": "mozes", "text": ["? ?"], "choices": [{"command": "EXIT"}]}
+      "1": {"face": "ardor", "name": "Ardor", "text": ["Sister? Hmmmm..."]},
+      "2": {"face": "ardor", "name": "Ardor", "text": ["{SPEED=0.2} . . . . ."]},
+      "3": {"face": "ardor", "name": "Ardor", "text": ["Guards! Kill him!"]},
+      "4": {"face": "mozes", "name": "Mozes", "text": ["? ?"], "choices": [{"command": "EXIT"}]}
     }
   },
   "mozes_last_words"               : {
     "phrases": {
-      "1": {"face": "mozes", "text": ["Ugh..."]},
-      "2": {"face": "mozes", "text": ["{SPEED=0.2}G... G... {SPEED=1.0}Grace..."]},
-      "3": {"face": "mozes", "text": ["Leave her alone..."]},
-      "4": {"face": "ardor", "text": ["The insolence."]},
-      "5": {"face": "ardor", "text": ["Now watch her die!"], "choices": [{"command": "EXIT"}]}
+      "1": {"face": "mozes", "name": "Mozes", "text": ["Ugh..."]},
+      "2": {"face": "mozes", "name": "Mozes", "text": ["{SPEED=0.2}G... G... {SPEED=1.0}Grace..."]},
+      "3": {"face": "mozes", "name": "Mozes", "text": ["Leave her alone..."]},
+      "4": {"face": "ardor", "name": "Ardor", "text": ["The insolence."]},
+      "5": {"face": "ardor", "name": "Ardor", "text": ["Now watch her die!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "mozes_wins_battle_from_generals": {
+    "name"   : "Ardor",
     "phrases": {
       "1": {"text": ["What a nuisance."]},
       "2": {"text": ["I'll deal with you myself."], "choices": [{"command": "EXIT"}]}
     }
   },
   "ardor_continues_to_pray"        : {
+    "name"   : "Ardor",
     "phrases": {
       "1": {"text": ["Mighty and powerful Ulrog!"]},
       "2": {"text": ["Hear my prayer!"]},
       "3": {"text": ["Everything is prepared!"]},
       "4": {"text": ["My quest for ultimate power is finally fulfilled!"]},
-      "5": {"text": ["With the blood of this princess, I shall rule over all of Ardor!"]},
+      "5": {"text": ["With the blood of this princess, I shall rule over all of Adan!"]},
       "6": {"text": ["Now, slay her and take her life!"]},
-      "7": {"face": "girl01", "text": ["Aaaaaah!"], "choices": [{"command": "EXIT"}]}
+      "7": {"face": "girl01", "name": "Grace", "text": ["Aaaaaah!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "grace_dies"                     : {
     "phrases": {
-      "1": {"face": "mozes", "text": ["Nooooooo!!"]},
-      "2": {"face": "ardor", "text": ["At last! Ultimate power is mine!"]},
-      "3": {"face": "ardor", "text": ["{SPEED=0.2} . . . . ."]},
-      "4": {"face": "ardor", "text": ["Wait, something's wrong!"], "choices": [{"command": "EXIT"}]}
+      "1": {"face": "mozes", "name": "Mozes", "text": ["Nooooooo!!"]},
+      "2": {"face": "ardor", "name": "Ardor", "text": ["At last! Ultimate power is mine!"]},
+      "3": {"face": "ardor", "name": "Ardor", "text": ["{SPEED=0.2} . . . . ."]},
+      "4": {"face": "ardor", "name": "Ardor", "text": ["Wait, something's wrong!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "what_went_wrong"                : {
+    "name"   : "Ardor",
     "phrases": {
       "1": {"text": ["No! What went wrong?!"]},
       "2": {"text": ["Aaaaaaahh!!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "another_chance"                 : {
+    "name"   : "? ? ?",
     "phrases": {
       "1": {"text": ["You have been given another chance..."], "choices": [{"command": "EXIT"}]}
     }
   },
   "mozes_lies_dead"                : {
+    "name"   : "Mozes",
     "phrases": {
       "1": {"text": ["{SPEED=0.2} . . . . ."], "choices": [{"command": "EXIT"}]}
     }
   },
   "mozes_wakes_up"                 : {
+    "name"   : "Mozes",
     "phrases": {
       "1": {"text": ["What the..."]},
       "2": {"text": ["What just happened?"], "choices": [{"command": "EXIT"}]}
     }
   },
   "what_happened"                  : {
+    "name"   : "Mozes",
     "phrases": {
       "1": {"text": ["Did I just die?"]},
       "2": {"text": ["Whose voice was that?"]},

@@ -1,10 +1,11 @@
 {
   "save_lastdenn": {
+    "name"   : "Sister Margarita",
     "phrases": {
       "1": {"text": ["Welcome to Lastdenn's Temple. I'm sister Margarita.", "Do you want me to pray for you, so you can feel save on your journey?"]},
       "2": {
         "choices": [
-          {"text": "*Ask if she didn't ment safe, but accept.* (Save game)", "nextId": "3"},
+          {"text": "*Ask if she didn't ment safe, but accept anyway.* (Save game)", "nextId": "3"},
           {"text": "*Mention you don't believe in her false god. Take your leave.*", "command": "EXIT"}
         ]
       },
