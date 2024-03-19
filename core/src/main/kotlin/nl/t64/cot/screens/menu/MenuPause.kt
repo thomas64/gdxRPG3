@@ -2,6 +2,7 @@ package nl.t64.cot.screens.menu
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.Texture
+import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
@@ -54,6 +55,7 @@ class MenuPause : MenuScreen() {
     }
 
     override fun setupScreen() {
+        stage.addAction(Actions.alpha(1f))
         table = createTable()
         applyListeners()
         stage.addActor(table)
@@ -88,8 +90,10 @@ class MenuPause : MenuScreen() {
     }
 
     private fun openMenuMain() {
-        mapManager.disposeOldMaps()
-        screenManager.setScreen(ScreenType.MENU_MAIN)
+        stage.addAction(Actions.sequence(Actions.run { mapManager.disposeOldMaps() },
+                                         Actions.fadeOut(Constant.FADE_DURATION),
+                                         Actions.delay(0.5f),
+                                         Actions.run { screenManager.setScreen(ScreenType.MENU_MAIN) }))
     }
 
     private fun createTable(): Table {

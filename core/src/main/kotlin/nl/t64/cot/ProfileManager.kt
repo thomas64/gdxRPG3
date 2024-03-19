@@ -15,8 +15,8 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 
-private const val SAVE_FILES = "save1.dat,save2.dat,save3.dat,save4.dat,save5.dat,save6.dat,save7.dat"
-private const val LOADING = ",,Loading...,,,,"
+private const val SAVE_FILES = "save1.dat,save2.dat,save3.dat,save4.dat,save5.dat"
+private const val LOADING = ",,Loading...,,"
 private const val SAVE_STATE_KEY = "saveState"
 private const val PROFILE_ID = "id"
 private const val PROFILE_SAVE_DATE = "saveDate"

@@ -42,7 +42,8 @@ private val DELETE_MESSAGE = """
     Are you sure?""".trimIndent()
 
 private const val MENU_X = 604f
-private const val TITLE_SPACE_BOTTOM = 10f
+private const val TITLE_SPACE_BOTTOM = 45f
+private const val BUTTON_SPACE_TOP = 10f
 private const val BUTTON_SPACE_RIGHT = 20f
 
 private const val NUMBER_OF_ITEMS = 3
@@ -249,8 +250,7 @@ abstract class MenuLoad : MenuScreen() {
         table.add(loadButton).spaceRight(BUTTON_SPACE_RIGHT)
         table.add(deleteButton).spaceRight(BUTTON_SPACE_RIGHT)
         table.add(backButton)
-        table
-            .top().padTop(TITLE_SPACE_BOTTOM + topTable.prefHeight)
+        table.top().padTop(TITLE_SPACE_BOTTOM + topTable.prefHeight + BUTTON_SPACE_TOP)
             .right().padRight(((logo.width * logo.scaleX) / 2f) - (table.prefWidth / 2f) + LOGO_PAD)
     }
 
