@@ -90,8 +90,9 @@
     ]
   },
   "guide_event_storage"              : {
-    "type": "messagebox",
-    "text": [
+    "type"     : "messagebox",
+    "condition": ["_c_==_a_q_quest_royal_sacrifice"],
+    "text"     : [
       "The closet behind you can be used for storage.",
       "When your inventory becomes full, store items in your closet.",
       "They will be safe and kept there until you need them."

@@ -15,7 +15,7 @@ import java.util.*
 class ScreenManager {
 
     private val screenCache: EnumMap<ScreenType, Screen> = EnumMap(ScreenType::class.java)
-    private val currentScreen: Screen get() = (Gdx.app.applicationListener as CrystalOfTime).screen
+    val currentScreen: Screen get() = (Gdx.app.applicationListener as CrystalOfTime).screen
 
     fun openParchmentLoadScreen(screenTypeToLoad: ScreenType) {
         val loadScreen = getScreen(ScreenType.LOAD_SCREEN) as LoadScreen

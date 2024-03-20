@@ -37,7 +37,7 @@ object Constant {
 
     const val PLAYER_ID = "mozes"
     const val TRANSFORMATION_ORC = "orc_1"
-    const val STARTING_MAP = "honeywood_forest_path"
+    const val STARTING_MAP = "honeywood_house_mozes"
 
     const val DESCRIPTION_KEY_BUY = "Price"
     const val DESCRIPTION_KEY_BUY_PIECE = "Price per piece"

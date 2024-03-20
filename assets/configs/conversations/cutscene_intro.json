@@ -31,21 +31,10 @@
       "1": {"text": ["Good morning, Grace. Did you sleep well?"]},
       "2": {"text": ["Grace?"]},
       "3": {"text": ["Grace, where are you?"]},
-      "4": {"text": ["Is she gone? She knows better than to leave without telling me."]},
+      "4": {"text": ["Is she gone? She should know better than to leave without telling me."]},
       "5": {"text": ["I hope she didn't run off again. It's still dangerous outside the village."]},
-      "6": {"text": ["Oh no! I need to make sure."]},
-      "7": {"text": ["I'll get my weapons, just in case."], "choices": [{"command": "EXIT"}]}
-    }
-  },
-  "mozes_talks_to_johanna"   : {
-    "phrases": {
-      "1": {"face": "mozes", "name": "Mozes", "text": ["Mrs. Johanna! Have you seen Grace?"]},
-      "2": {"face": "oldwoman01", "name": "Mrs. Johanna", "text": ["I'm sorry, dear. I haven't seen Grace this morning. Is everything alright?"]},
-      "3": {"face": "mozes", "name": "Mozes", "text": ["I don't know where she is. She wasn't in her bed this morning."]},
-      "4": {"face": "oldwoman01", "name": "Mrs. Johanna", "text": ["Perhaps she went north? She likes to go there."]},
-      "5": {"face": "mozes", "name": "Mozes", "text": ["I'm afraid she did. There are orcs in the forest."]},
-      "6": {"face": "oldwoman01", "name": "Mrs. Johanna", "text": ["I'll ask around in the village to see if anyone else saw her."]},
-      "7": {"face": "mozes", "name": "Mozes", "text": ["Please do. I'll head north."], "choices": [{"command": "EXIT"}]}
+      "6": {"text": ["Oh no! I need to make sure. She likes to go to Honeywood Forest in the north."]},
+      "7": {"text": ["There could be orcs there. I'll get my weapons, just in case."], "choices": [{"command": "EXIT"}]}
     }
   },
   "tree_has_fallen_1"        : {

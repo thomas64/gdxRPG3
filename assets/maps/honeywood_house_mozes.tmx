@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.6" orientation="orthogonal" renderorder="right-down" width="18" height="30" tilewidth="24" tileheight="24" infinite="0" nextlayerid="22" nextobjectid="35">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="18" height="30" tilewidth="24" tileheight="24" infinite="0" nextlayerid="23" nextobjectid="36">
  <properties>
   <property name="bgm" value="bgm_house"/>
   <property name="step_sound" value="wood"/>
@@ -70,7 +70,11 @@
   <object id="13" x="48" y="456" width="48" height="120"/>
  </objectgroup>
  <objectgroup color="#5500ff" id="14" name="rest">
-  <object id="29" name="storage" x="240" y="144" width="48" height="24"/>
+  <object id="29" name="storage" x="240" y="144" width="48" height="24">
+   <properties>
+    <property name="condition" value="_rc_&gt;=_a_q_quest_royal_sacrifice"/>
+   </properties>
+  </object>
   <object id="31" name="note_bed03" x="48" y="144" width="48" height="96"/>
   <object id="32" name="note_bed03" x="144" y="144" width="96" height="96"/>
   <object id="33" name="note_bookcase" x="336" y="120" width="48" height="48"/>
@@ -88,6 +92,11 @@
  <objectgroup color="#55aaff" id="11" name="spawn">
   <object id="15" name="honeywood" x="192" y="624" width="48" height="24"/>
   <object id="30" name="honeywood_house_mozes" x="240" y="168" width="48" height="24">
+   <properties>
+    <property name="direction" value="south"/>
+   </properties>
+  </object>
+  <object id="35" name="scene_intro" x="240" y="168" width="48" height="24">
    <properties>
     <property name="direction" value="south"/>
    </properties>

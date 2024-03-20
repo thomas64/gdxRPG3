@@ -1,25 +1,32 @@
 {
-  "everything_is_normal_again"     : {
+  "everything_is_normal_again"          : {
     "name"   : "Mozes",
     "phrases": {
       "1": {"text": ["Everything is back to normal?", "Adan didn't end up in flames?", "Is Grace still alive then?"]},
       "2": {"text": ["Then I must quickly return to the forest!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "should_really_be_going_to_grace": {
+  "should_really_be_going_to_grace"     : {
     "name"   : "Mozes",
     "phrases": {
       "1": {"text": ["There's no time to waste! Grace might still be alive."]},
       "2": {"text": ["I must hurry back to the forest!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "dont_have_time_for_this"        : {
+  "should_really_be_going_to_the_forest": {
+    "name"   : "Mozes",
+    "phrases": {
+      "1": {"text": ["I'm afraid Grace went to Honeywood Forest in the north."]},
+      "2": {"text": ["Because of the orcs, I think that's where I should start my search."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "dont_have_time_for_this"             : {
     "name"   : "Mozes",
     "phrases": {
       "1": {"text": ["Aw man! Let's clear this tree quickly. I really need to reach Grace as soon as possible!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "everything_is_back_again"       : {
+  "everything_is_back_again"            : {
     "name"   : "Mozes",
     "phrases": {
       "1": {"text": ["This is so weird..."]},
@@ -27,7 +34,19 @@
       "3": {"text": ["As if nothing happened at all..."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "mrs_johanna"                    : {
+  "mrs_johanna_1"                       : {
+    "name"   : "Mrs. Johanna",
+    "phrases": {
+      "1": {"face": "mozes", "name": "Mozes", "text": ["Mrs. Johanna! Have you seen Grace?"]},
+      "2": {"face": "oldwoman01", "name": "Mrs. Johanna", "text": ["I'm sorry, dear. I haven't seen Grace this morning. Is everything alright?"]},
+      "3": {"face": "mozes", "name": "Mozes", "text": ["I don't know where she is. She wasn't in her bed this morning."]},
+      "4": {"face": "oldwoman01", "name": "Mrs. Johanna", "text": ["Perhaps she went north? She likes to go there."]},
+      "5": {"face": "mozes", "name": "Mozes", "text": ["I'm afraid she did. There are orcs in the forest."]},
+      "6": {"face": "oldwoman01", "name": "Mrs. Johanna", "text": ["I'll ask around in the village to see if anyone else saw her."]},
+      "7": {"face": "mozes", "name": "Mozes", "text": ["Please do. I'll head north."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "mrs_johanna_2"                       : {
     "name"   : "Mrs. Johanna",
     "phrases": {
       "1" : {"text": ["Mozes, my dear, how are you? What a beautiful day, isn't it?"]},
@@ -47,7 +66,7 @@
       "23": {"face": "oldwoman01", "name": "Mrs. Johanna", "text": ["Nah! Of course not. I've got so much to live for. See ya!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "quest_helping_horse"            : {
+  "quest_helping_horse"                 : {
     "name"   : "Lennor",
     "phrases": {
       "1" : {"text": ["Hey Mozes, you can't go further north from here. Just {COLOR=FIREBRICK}minutes ago{COLOR=BLACK}, a large tree fell down and is now blocking the road."]},
@@ -80,19 +99,19 @@
       "70": {"text": ["Thanks for your help, Mozes. I could not have removed the tree so soon without you."], "choices": [{"command": "EXIT", "nextId": "70"}]}
     }
   },
-  "playing_catch_1"                : {
+  "playing_catch_1"                     : {
     "name"   : "Lynette",
     "phrases": {
       "1": {"text": ["We're playing catch, teehee! Can Grace come and join us?"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "playing_catch_2"                : {
+  "playing_catch_2"                     : {
     "name"   : "Tobin",
     "phrases": {
       "1": {"text": ["We're playing catch, teehee! Can Grace come and join us?"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "kaidan_come_home"               : {
+  "kaidan_come_home"                    : {
     "name"   : "Kaidan",
     "phrases": {
       "1": {
@@ -115,25 +134,25 @@
       "8": {"face": "mozes", "name": "Mozes", "text": [". . ."], "choices": [{"command": "RELOAD_NPCS"}]}
     }
   },
-  "kaidan_is_home"                 : {
+  "kaidan_is_home"                      : {
     "name"   : "Kaidan",
     "phrases": {
       "1": {"text": ["Aw man! This is boring! I wanna play outside."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "life_is_boring_1"               : {
+  "life_is_boring_1"                    : {
     "name"   : "Lynette",
     "phrases": {
       "1": {"text": ["Boohoo! You took Kaidan away from us! You're mean!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "life_is_boring_2"               : {
+  "life_is_boring_2"                    : {
     "name"   : "Tobin",
     "phrases": {
       "1": {"text": ["Boohoo! You took Kaidan away from us! You're mean!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "luana_join"                     : {
+  "luana_join"                          : {
     "name"   : "Luana",
     "phrases": {
       "1" : {"text": ["Hi Mozes! You really should check out this priest fella.", "He is so funny! Ha ha!"]},
@@ -161,7 +180,7 @@
       "14": {"text": ["Let's go!"], "choices": [{"command": "HERO_JOIN"}]}
     }
   },
-  "priest_honeywood"               : {
+  "priest_honeywood"                    : {
     "name"   : "Priest",
     "phrases": {
       "1": {"text": ["I'm a traveling priest from the city.", "Young man, do you want to be saved?"]},
@@ -174,7 +193,7 @@
       "3": {"text": ["Your soul is now destined for God."], "choices": [{"command": "SAVE_GAME"}]}
     }
   },
-  "resourceshop_honeywood"         : {
+  "resourceshop_honeywood"              : {
     "name"   : "Resource Shop",
     "phrases": {
       "1": {"text": ["Hi Mozes, would you like to browse my wares?"]},
@@ -186,7 +205,7 @@
       }
     }
   },
-  "equipshop_honeywood"            : {
+  "equipshop_honeywood"                 : {
     "name"   : "Equipment Shop",
     "phrases": {
       "1": {"text": ["Hello Mozes, what can I do for you today?"]},
@@ -198,7 +217,7 @@
       }
     }
   },
-  "honeywood_academy1"             : {
+  "honeywood_academy1"                  : {
     "name"   : "Honeywood Academy",
     "phrases": {
       "1": {"text": ["Good day, young sir, would you like to receive skill training?"]},
@@ -210,7 +229,7 @@
       }
     }
   },
-  "honeywood_academy2"             : {
+  "honeywood_academy2"                  : {
     "name"   : "Honeywood Academy",
     "phrases": {
       "1": {"text": ["Hey Mozes, don't say a word. You want to receive skill training."]},
@@ -222,7 +241,7 @@
       }
     }
   },
-  "quest_honeywood_inn_price-1"    : {
+  "quest_honeywood_inn_price-1"         : {
     "name"   : "Innkeeper",
     "phrases": {
       "1"   : {
@@ -261,26 +280,26 @@
       "1400": {"text": ["Welcome back, my fearless friend! Thanks again for your help. Would you like to rest here and be completely revitalized for just 1 gold piece?"], "choices": [{"nextId": "2"}]}
     }
   },
-  "dont_go_up_there"               : {
+  "dont_go_up_there"                    : {
     "name"   : "Innkeeper",
     "phrases": {
       "1": {"text": ["Please, do not go upstairs!"]},
       "2": {"text": ["It's not, uh... very safe."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "get_out_of_kitchen"             : {
+  "get_out_of_kitchen"                  : {
     "name"   : "Cook",
     "phrases": {
       "1": {"text": ["What are you doing here? Please get out of the kitchen."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "pleasant_honeywood"             : {
+  "pleasant_honeywood"                  : {
     "name"   : "Traveler",
     "phrases": {
       "1": {"text": ["Honeywood is such a delightful little village. I enjoy staying here from time to time."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "honeywood_inn_cat"              : {
+  "honeywood_inn_cat"                   : {
     "name"   : "Millie",
     "phrases": {
       "1": {"text": ["Meow."]},
@@ -293,7 +312,7 @@
       "3": {"text": ["I'm here only for the mice; there's no way I'll deal with bats."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "quest_get_horse"                : {
+  "quest_get_horse"                     : {
     "name"   : "Angie",
     "phrases": {
       "1" : {"text": ["Hi Mozes. Won't you say hi to Enopa? She's not feeling well."]},
@@ -353,7 +372,7 @@
       "80": {"text": ["How is my Enopa doing? Has she been of any help to Lennor and you?"], "choices": [{"command": "EXIT", "nextId": "80"}]}
     }
   },
-  "honeywood_horse"                : {
+  "honeywood_horse"                     : {
     "name"   : "Enopa",
     "phrases": {
       "1": {"text": ["Neigh."]},
@@ -373,7 +392,7 @@
       "6": {"text": ["Did I do well?"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "quest_get_medicine"             : {
+  "quest_get_medicine"                  : {
     "name"   : "Elenora",
     "phrases": {
       "1"   : {"text": ["Mozes dear, how are you today?"]},
@@ -409,7 +428,7 @@
       "1400": {"text": ["Mozes dear, did the medicine cure the horse?"], "choices": [{"nextId": "2"}]}
     }
   },
-  "quest_honeywood_elder"          : {
+  "quest_honeywood_elder"               : {
     "name"   : "Village elder Grahan",
     "phrases": {
       "1"   : {"text": ["Greetings, Mozes. How may I be of service today?"]},
@@ -453,7 +472,7 @@
       "1200": {"text": ["Greetings, Mozes. How may I be of service today?"], "choices": [{"nextId": "2"}]}
     }
   },
-  "quest_get_horseshoes"           : {
+  "quest_get_horseshoes"                : {
     "name"   : "Black Smith",
     "phrases": {
       "1"   : {"text": ["Good day to you neighbor! I'm Black Smith, the blacksmith. It never gets old to say that, ha ha! Can I help you?"]},
@@ -461,6 +480,7 @@
         "choices": [
           {"condition": ["i_c_==_a_q_quest_get_tow_rope", "i_tn_13_q_quest_get_tow_rope"], "text": "*Inform you're here to pay Jaron's outstanding bill.*", "nextId": "100"},
           {"condition": ["i_rc_>=_a_q_quest_get_horse", "i_tn_8_q_quest_get_horse"], "text": "*Inquire about his horseshoe offerings.*", "nextId": "3"},
+          {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "text": "*Ask Black if he's seen Grace this morning.*", "nextId": "30"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
@@ -475,6 +495,7 @@
       "20"  : {"text": ["One moment, I'll craft one for you."]},
       "21"  : {"text": ["{SPEED=0.2} . . . . . . . . ."]},
       "22"  : {"text": ["Here you go, a brand new horseshoe!"], "choices": [{"command": "TRADE_QUEST_ITEMS"}]},
+      "30"  : {"text": ["No, I'm sorry, I just got out of bed. She's probably playing somewhere outside."], "choices": [{"nextId": "2"}]},
       "100" : {"text": ["Ah, it's about time! For Jaron's outstanding bill, it will be four gold pieces then."]},
       "101" : {"text": ["I know, the bill was originally only three, but that's what I call interest. That slacker hasn't paid up in such a long time."]},
       "102" : {
@@ -496,7 +517,7 @@
       "1200": {"text": ["Hello neighbor, you're back."], "choices": [{"nextId": "2"}]}
     }
   },
-  "quest_get_tow_rope"             : {
+  "quest_get_tow_rope"                  : {
     "name"   : "Jaron",
     "phrases": {
       "1"   : {"text": ["Hi Mozes, to what do I owe the pleasure of you entering our home?"]},
@@ -545,7 +566,7 @@
       "1400": {"text": ["Are you finished with the rope? If so, I would like it back."], "choices": [{"command": "EXIT", "nextId": "1400"}]}
     }
   },
-  "honeywood_soldiers"             : {
+  "honeywood_soldiers"                  : {
     "name"   : "Soldier",
     "phrases": {
       "1"   : {"text": ["Sir, as per the village elder's orders, we are not permitted to allow anyone to leave the village alone."]},

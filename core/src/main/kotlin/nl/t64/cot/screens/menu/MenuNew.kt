@@ -15,6 +15,7 @@ import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.profileManager
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.Utils.screenManager
+import nl.t64.cot.audio.stopAllBgm
 import nl.t64.cot.components.cutscene.CutsceneId
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
@@ -98,6 +99,7 @@ class MenuNew : MenuScreen() {
                                          Actions.run { isBgmFading = true },
                                          Actions.fadeOut(Constant.FADE_DURATION),
                                          Actions.run { isBgmFading = false },
+                                         Actions.run { stopAllBgm() },
                                          Actions.run { createNewGame() }))
     }
 

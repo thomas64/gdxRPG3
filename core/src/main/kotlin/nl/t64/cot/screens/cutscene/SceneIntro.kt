@@ -33,9 +33,6 @@ class SceneIntro : CutsceneScreen() {
         actions = listOf(callGraceToBed(),
                          walkIntoTheHouse(),
                          graceSneaksOutside(),
-                         startToSearch(),
-                         searchNorth(),
-                         moveToFallenTree(),
                          startGame())
     }
 
@@ -239,168 +236,26 @@ class SceneIntro : CutsceneScreen() {
         )
     }
 
-    private fun startToSearch(): Action {
-        return Actions.sequence(
-            Actions.run { isBgmFading = false },
-            Actions.run { playBgm(AudioEvent.BGM_TENSION) },
-            Actions.addAction(Actions.sequence(
-                Actions.run { mozes.direction = Direction.NORTH },
-                Actions.delay(0.5f),
-                Actions.run { playSe(AudioEvent.SE_CHEST) },
-                Actions.delay(2f),
-                Actions.parallel(
-                    Actions.sequence(
-                        Actions.run { mozes.direction = Direction.SOUTH },
-                        Actions.run { mozes.entityState = EntityState.RUNNING },
-                        Actions.moveBy(0f, -72f, 0.5f),
-                        Actions.moveBy(-48f, -400f, 2f),
-                        Actions.run { playSe(AudioEvent.SE_SMALL_DOOR) },
-                        Actions.moveBy(0f, -20f, 0.1f)
-                    ),
-                    actionWalkSound(mozes, 2.6f, FAST_STEP)
-                )
-            ), mozes),
-            Actions.delay(5.5f),
-
-            actionFadeOutWithoutBgmFading(),
-
-            Actions.delay(1f),
-            Actions.run {
-                setMapWithBgsOnly("honeywood")
-                door1.isVisible = true
-                oldWoman.isVisible = true
-                oldWoman.setPosition(1800f, 1340f)
-                oldWoman.direction = Direction.EAST
-                mozes.setPosition(528f, 1320f)
-                mozes.entityState = EntityState.IDLE
-            },
-
-            actionFadeIn(),
-
-            Actions.addAction(Actions.sequence(
-                Actions.run { mozes.direction = Direction.WEST },
-                Actions.delay(0.3f),
-                Actions.run { mozes.direction = Direction.EAST },
-                Actions.delay(0.3f),
-                Actions.run { mozes.direction = Direction.WEST },
-                Actions.delay(0.3f),
-                Actions.run { mozes.direction = Direction.SOUTH },
-                Actions.delay(0.3f),
-                Actions.run { mozes.direction = Direction.EAST },
-                Actions.delay(0.3f),
-                Actions.run { mozes.direction = Direction.WEST },
-                Actions.delay(0.3f),
-                Actions.run { mozes.entityState = EntityState.RUNNING },
-                actionMoveBy(mozes, -96f, 0f, 0.5f, FAST_STEP),
-                Actions.run { mozes.entityState = EntityState.IDLE },
-                Actions.run { mozes.direction = Direction.NORTH },
-                Actions.delay(1f),
-                Actions.run { mozes.direction = Direction.SOUTH },
-                Actions.delay(0.3f),
-                Actions.run { mozes.direction = Direction.WEST },
-                Actions.delay(0.3f),
-                Actions.run { mozes.direction = Direction.EAST },
-                Actions.delay(0.3f),
-                Actions.run { mozes.direction = Direction.NORTH },
-                Actions.delay(0.3f),
-                Actions.run { mozes.entityState = EntityState.RUNNING },
-                actionMoveBy(mozes, 0f, 288f, 1f, FAST_STEP),
-                Actions.run { mozes.entityState = EntityState.IDLE },
-                Actions.run { mozes.direction = Direction.EAST },
-                Actions.delay(1f),
-                Actions.run { mozes.direction = Direction.WEST },
-                Actions.delay(0.3f),
-                Actions.run { mozes.direction = Direction.EAST },
-                Actions.delay(0.3f),
-                Actions.run { mozes.entityState = EntityState.RUNNING },
-                Actions.parallel(
-                    Actions.sequence(
-                        Actions.moveBy(360f, 0f, 1.3f),
-                        Actions.moveBy(400f, -192f, 1.5f),
-                        Actions.moveBy(500f, 0f, 2f)
-                    ),
-                    actionWalkSound(mozes, 4.8f, FAST_STEP)
-                ),
-                Actions.run { mozes.entityState = EntityState.IDLE },
-                Actions.run { showConversationDialog("mozes_talks_to_johanna", "mozes") },
-                Actions.delay(1f),
-                Actions.run { oldWoman.direction = Direction.WEST }
-            ), mozes)
-        )
-    }
-
-    private fun searchNorth(): Action {
-        return Actions.sequence(
-            Actions.addAction(Actions.sequence(
-                Actions.run { oldWoman.direction = Direction.NORTH },
-                Actions.delay(2f),
-                Actions.run { oldWoman.direction = Direction.SOUTH },
-                Actions.run { oldWoman.entityState = EntityState.WALKING },
-                Actions.moveBy(0f, -100f, 10f),
-                Actions.visible(false)
-            ), oldWoman),
-            Actions.addAction(Actions.parallel(
-                Actions.sequence(
-                    Actions.run { mozes.entityState = EntityState.RUNNING },
-                    Actions.moveBy(230f, 200f, 1.3f),
-                    Actions.run { mozes.direction = Direction.NORTH },
-                    Actions.moveBy(0f, 300f, 1.3f)
-                ),
-                actionWalkSound(mozes, 2.6f, FAST_STEP)
-            ), mozes),
-            Actions.delay(3.5f),
-
-            actionFadeOutWithoutBgmFading(),
-
-            Actions.run {
-                setMapWithBgsOnly("honeywood_forest_path")
-                mozes.setPosition(480f, -48f)
-            },
-            Actions.delay(1f),
-
-            actionFadeIn(),
-
-            Actions.addAction(Actions.sequence(
-                actionMoveBy(mozes, 0f, 500f, 2f, FAST_STEP),
-                Actions.run { mozes.entityState = EntityState.IDLE },
-                Actions.delay(1f),
-                Actions.run { mozes.direction = Direction.SOUTH },
-                Actions.delay(1f),
-                Actions.run { showConversationDialog("tree_has_fallen_1", "mozes") }
-            ), mozes),
-            Actions.addAction(Actions.sequence(
-                Actions.delay(1.3f),
-                Actions.run { isBgmFading = true },
-                Actions.run { playSe(AudioEvent.SE_BANG) },
-                Actions.delay(0.5f),
-                Actions.run { camera.startShaking() },
-                Actions.run { mapManager.updateConditionLayers() },
-                Actions.run { isBgmFading = false }
-            ))
-        )
-    }
-
-    private fun moveToFallenTree(): Action {
-        return Actions.sequence(
-            Actions.addAction(Actions.sequence(
-                Actions.delay(1f),
-                Actions.run { mozes.entityState = EntityState.WALKING },
-                actionMoveTo(mozes, 480f, 60f, 5f, NORMAL_STEP),
-                Actions.run { mozes.entityState = EntityState.IDLE },
-                Actions.delay(1f),
-                Actions.run { showConversationDialog("tree_has_fallen_2", "mozes") }
-            ), mozes)
-        )
-    }
-
     private fun startGame(): Action {
         return Actions.sequence(
+            Actions.run { mozes.direction = Direction.NORTH },
             Actions.delay(0.5f),
+            Actions.run { playSe(AudioEvent.SE_CHEST) },
+            Actions.delay(2f),
+            Actions.run { mozes.direction = Direction.SOUTH },
+            Actions.delay(1f),
             Actions.run { exitScreen() }
         )
     }
 
     override fun exitScreen() {
+
+        // ------ these 2 lines are by far not a solution, but a workaround.
+        mapManager.loadMap(Constant.STARTING_MAP) // loading the same map as the map in which the game starts. it needs to be the same map for some reason for BGM_TENSION to be able to play solo after the cutscene, or else BGM_HOUSE will play simultaneously.
+        grace.clearActions()    // so that her walking sound stops. so that they won't change from grass into wood because of the change of map where the default is wood.
+        // actorsStage.clear()  // this actually isn't such a bad line. it clears the stage when exiting. maybe some day I will use it.
+        // ------
+
         endCutsceneAndOpenMap(Constant.STARTING_MAP, "scene_intro")
     }
 

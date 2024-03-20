@@ -13,6 +13,7 @@ import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.constants.Constant
+import nl.t64.cot.constants.ScreenType
 
 
 private const val FONT = "fonts/calibri_light_28.ttf"
@@ -70,7 +71,7 @@ internal class ClockBox {
     private fun handleEnding(dt: Float) {
         if (gameData.clock.isFinished()) {
             Utils.runWithDelay(Constant.FADE_DURATION) {
-                screenManager.getWorldScreen().startCutscene("scene_death", 1f)
+                screenManager.getWorldScreen().startCutscene(ScreenType.SCENE_DEATH, 1f)
             }
             audioManager.fadeAllInSeparateThreadForClockEnding(dt)
         }

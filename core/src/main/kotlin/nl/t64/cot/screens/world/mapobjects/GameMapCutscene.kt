@@ -2,10 +2,12 @@ package nl.t64.cot.screens.world.mapobjects
 
 import com.badlogic.gdx.maps.objects.RectangleMapObject
 import com.badlogic.gdx.math.Rectangle
+import ktx.tiled.propertyOrNull
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.components.condition.ConditionDatabase
+import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.subjects.CollisionObserver
 
@@ -14,6 +16,7 @@ class GameMapCutscene(rectObject: RectangleMapObject) : GameMapObject(rectObject
 
     private val cutsceneId: String = rectObject.name
     private val conditionIds: List<String> = createConditions(rectObject)
+    private val mustContinueBgm: Boolean = rectObject.propertyOrNull<Boolean>("mustContinueBgm") ?: false
     private var hasStartedTemp: Boolean = false
 
     init {
@@ -31,7 +34,12 @@ class GameMapCutscene(rectObject: RectangleMapObject) : GameMapObject(rectObject
         if (!cutscenes.isPlayed(cutsceneId) || (cutscenes.isRepeatable(cutsceneId) && !hasStartedTemp)) {
             cutscenes.setPlayed(cutsceneId)
             hasStartedTemp = true
-            screenManager.getWorldScreen().startCutscene(cutsceneId)
+            val cutsceneType = ScreenType.valueOf(cutsceneId.uppercase())
+            if (mustContinueBgm){
+                screenManager.getWorldScreen().startCutsceneWithoutBgmFading(cutsceneType)
+            } else {
+                screenManager.getWorldScreen().startCutscene(cutsceneType)
+            }
         }
     }
 

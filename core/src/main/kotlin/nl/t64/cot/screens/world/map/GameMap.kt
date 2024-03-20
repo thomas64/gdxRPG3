@@ -10,7 +10,10 @@ import ktx.tiled.*
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.resourceManager
+import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.components.cutscene.CutsceneId
+import nl.t64.cot.screens.cutscene.SceneIntro
 import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.screens.world.entity.EntityState
 import nl.t64.cot.screens.world.mapobjects.*
@@ -156,7 +159,7 @@ class GameMap(val mapTitle: String) {
 
     fun isOutsideMap(point: Vector2): Boolean {
         return point.x < 0 || point.x >= pixelWidth
-                || point.y < 0 || point.y >= pixelHeight
+            || point.y < 0 || point.y >= pixelHeight
     }
 
     fun dispose() {
@@ -191,6 +194,9 @@ val TiledMap.bgm: AudioEvent
         return propertyOrNull<String>(BGM_PROPERTY)?.let {
             if (gameData.clock.isWarning()) {
                 AudioEvent.BGM_END_NEAR
+            } else if (!gameData.cutscenes.isPlayed(CutsceneId.SCENE_TREE_FALLS)
+                    && screenManager.currentScreen !is SceneIntro) {
+                AudioEvent.BGM_TENSION
             } else {
                 AudioEvent.valueOf(it.uppercase())
             }

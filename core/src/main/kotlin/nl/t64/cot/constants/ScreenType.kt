@@ -50,6 +50,7 @@ enum class ScreenType(val screenClass: Class<out Screen>) {
 
     SCENE_INTRO(SceneIntro::class.java),
     SCENE_DEATH(SceneDeath::class.java),
+    SCENE_TREE_FALLS(SceneTreeFalls::class.java),
     SCENE_ARDOR_FIRST_TIME(SceneArdorFirstTime::class.java),
     SCENE_ARDOR_FIRST_TIME_AFTER_WIN_FROM_GENERALS(SceneArdorFirstTimeAfterWinFromGenerals::class.java),
     SCENE_ARDOR_FIRST_TIME_AFTER_LOSS_FROM_BATTLE(SceneArdorFirstTimeAfterLossFromBattle::class.java),

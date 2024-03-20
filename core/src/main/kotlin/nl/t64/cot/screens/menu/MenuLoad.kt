@@ -21,6 +21,7 @@ import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
+import nl.t64.cot.audio.stopAllBgm
 import nl.t64.cot.audio.stopSe
 import nl.t64.cot.components.cutscene.CutsceneId
 import nl.t64.cot.constants.Constant
@@ -180,6 +181,7 @@ abstract class MenuLoad : MenuScreen() {
         stage.addAction(Actions.sequence(Actions.run { isBgmFading = true },
                                          Actions.fadeOut(Constant.FADE_DURATION),
                                          Actions.run { isBgmFading = false },
+                                         Actions.run { stopAllBgm() },
                                          Actions.run { openWorldScreen() }))
     }
 

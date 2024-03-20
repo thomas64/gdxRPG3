@@ -16,6 +16,7 @@ import nl.t64.cot.Utils.profileManager
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
+import nl.t64.cot.audio.stopAllBgm
 import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.GameState
@@ -113,9 +114,16 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
         camera.startShaking()
     }
 
-    fun startCutscene(cutsceneId: String, fadeDuration: Float = 0f) {
+    fun startCutscene(screenType: ScreenType, fadeDuration: Float = 0f) {
         doBeforeLoadScreen()
-        fadeOut({ screenManager.setScreen(ScreenType.valueOf(cutsceneId.uppercase())) }, Color.BLACK, fadeDuration)
+        val actionAfterFade = { screenManager.setScreen(screenType); stopAllBgm() }
+        fadeOut(actionAfterFade, Color.BLACK, fadeDuration, TransitionPurpose.MAP_CHANGE)
+    }
+
+    fun startCutsceneWithoutBgmFading(screenType: ScreenType, fadeDuration: Float = 0f) {
+        doBeforeLoadScreen()
+        val actionAfterFade = { screenManager.setScreen(screenType) }
+        fadeOut(actionAfterFade, Color.BLACK, fadeDuration, TransitionPurpose.JUST_FADE)
     }
 
     fun showConversationDialogFromNpc(conversationId: String, npcEntity: Entity) {
