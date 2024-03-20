@@ -7,7 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.Window
 import nl.t64.cot.Utils
-import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioEvent
@@ -125,7 +124,7 @@ class QuestLogScreen : ParchmentScreen() {
     private fun cheatAllQuestsFinished() {
         if (preferenceManager.isInDebugMode) {
             playSe(AudioEvent.SE_MENU_ERROR)
-            gameData.quests.getAllKnownQuestsForVisual().forEach { it.currentState = QuestState.FINISHED }
+            questListTable.questList.selected.currentState = QuestState.FINISHED
         }
     }
 

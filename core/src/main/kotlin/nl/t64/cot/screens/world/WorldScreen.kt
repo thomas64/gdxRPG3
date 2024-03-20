@@ -95,8 +95,6 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
                                               Actions.fadeIn(Constant.FADE_DURATION),
                                               Actions.delay(duration),
                                               Actions.run(actionAfterFade),
-                                              Actions.run { transition.purpose = TransitionPurpose.JUST_FADE },
-                                              Actions.fadeOut(Constant.FADE_DURATION),
                                               Actions.removeActor()))
     }
 

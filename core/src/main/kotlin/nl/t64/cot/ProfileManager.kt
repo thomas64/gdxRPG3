@@ -9,6 +9,7 @@ import ktx.collections.GdxMap
 import ktx.collections.set
 import ktx.json.fromJson
 import nl.t64.cot.Utils.brokerManager
+import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.constants.Constant
 import java.time.LocalDateTime
@@ -95,7 +96,9 @@ class ProfileManager {
         val saveFile = getSaveFileBy(profileIndex)
         return if (saveFile.contains(SAVE_STATE_KEY)) {
             try {
-                getSaveStateProperties(saveFile)
+                if (!preferenceManager.isInDebugMode) {
+                    getSaveStateProperties(saveFile)
+                }
                 "${saveFile.getString(PROFILE_ID)} [${saveFile.getString(PROFILE_SAVE_DATE)}]"
             } catch (e: SerializationException) {
                 "${profileIndex + 1} $INVALID_PROFILE_VIEW"
