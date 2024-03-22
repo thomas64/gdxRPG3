@@ -3,7 +3,6 @@ package nl.t64.cot.screens.storage
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.screens.inventory.CounterpartSlotsTable
-import nl.t64.cot.screens.inventory.WindowSelector
 import nl.t64.cot.screens.inventory.inventoryslot.InventorySlot
 import nl.t64.cot.screens.inventory.itemslot.InventoryImage
 import nl.t64.cot.screens.inventory.tooltip.ItemSlotTooltip
@@ -14,7 +13,7 @@ private const val SLOT_SIZE = 64f
 
 class StorageSlotsTable(
     tooltip: ItemSlotTooltip
-) : WindowSelector, CounterpartSlotsTable(
+) : CounterpartSlotsTable(
     gameData.storage,
     tooltip,
     SLOTS_IN_ROW

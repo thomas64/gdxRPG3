@@ -22,6 +22,10 @@ import nl.t64.cot.components.schedule.MapSchedule
 
 object ConfigDataLoader {
 
+    fun getShopIds(): List<String> {
+        return getListWithFilenames("shops")
+    }
+
     fun createBattles(): Map<String, Battle> {
         return loadConfigData<Battle>("battles")
     }

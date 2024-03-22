@@ -8,10 +8,12 @@ import nl.t64.cot.components.cutscene.CutsceneContainer
 import nl.t64.cot.components.door.DoorContainer
 import nl.t64.cot.components.event.EventContainer
 import nl.t64.cot.components.loot.LootContainer
+import nl.t64.cot.components.loot.ShopContainer
 import nl.t64.cot.components.loot.SpoilsContainer
 import nl.t64.cot.components.party.HeroContainer
 import nl.t64.cot.components.party.PartyContainer
 import nl.t64.cot.components.party.inventory.InventoryContainer
+import nl.t64.cot.components.party.inventory.PlayerInventoryContainer
 import nl.t64.cot.components.portal.PortalContainer
 import nl.t64.cot.components.quest.QuestContainer
 import nl.t64.cot.components.time.Clock
@@ -23,8 +25,9 @@ class GameData : ProfileObserver {
     lateinit var clock: Clock
     lateinit var heroes: HeroContainer
     lateinit var party: PartyContainer
-    lateinit var inventory: InventoryContainer
+    lateinit var inventory: PlayerInventoryContainer
     lateinit var storage: InventoryContainer
+    lateinit var shops: ShopContainer
     lateinit var battles: BattleContainer
     lateinit var conversations: ConversationContainer
     lateinit var quests: QuestContainer
@@ -39,6 +42,7 @@ class GameData : ProfileObserver {
 
     fun resetCycle() {
         clock.reset()
+        shops = ShopContainer()
         battles = BattleContainer()
         val phraseIdToKeep = conversations.getConversationById("fairy_welcome").currentPhraseId
         conversations = ConversationContainer()
@@ -46,7 +50,6 @@ class GameData : ProfileObserver {
         spoils = SpoilsContainer()
         quests.reset()
 
-        events.getEventById("found_grace_ribbon").hasPlayed = true
         conversations.getConversationById("fairy_welcome").currentPhraseId = phraseIdToKeep
     }
 
@@ -54,8 +57,9 @@ class GameData : ProfileObserver {
         clock = Clock()
         heroes = HeroContainer()
         party = PartyContainer()
-        inventory = InventoryContainer(66)
+        inventory = PlayerInventoryContainer(66)
         storage = InventoryContainer(176)
+        shops = ShopContainer()
         battles = BattleContainer()
         conversations = ConversationContainer()
         quests = QuestContainer()
@@ -77,6 +81,7 @@ class GameData : ProfileObserver {
         profileManager.setProperty("party", party)
         profileManager.setProperty("inventory", inventory)
         profileManager.setProperty("storage", storage)
+        profileManager.setProperty("shops", shops)
         profileManager.setProperty("battles", battles)
         profileManager.setProperty("conversations", conversations.createPhraseIdContainer())
         profileManager.setProperty("quests", quests)
@@ -96,6 +101,7 @@ class GameData : ProfileObserver {
         party = profileManager.getProperty("party")
         inventory = profileManager.getProperty("inventory")
         storage = profileManager.getProperty("storage")
+        shops = profileManager.getProperty("shops")
         battles = profileManager.getProperty("battles")
         conversations = ConversationContainer().apply {
             val container: PhraseIdContainer = profileManager.getProperty("conversations")

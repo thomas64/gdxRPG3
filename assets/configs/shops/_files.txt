@@ -1,0 +1,3 @@
+fairy_shop
+equipshop_honeywood
+resourceshop_honeywood

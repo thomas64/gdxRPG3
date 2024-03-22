@@ -1,11 +1,9 @@
 package nl.t64.cot.components.party.inventory
 
-import nl.t64.cot.Utils.gameData
-
 
 private const val SORTING_SPLIT = 70000 // atm, item.json starts with this number.
 
-class InventoryContainer(numberOfSlots: Int = 0) {
+open class InventoryContainer(numberOfSlots: Int = 0) {
 
     private val inventory: MutableList<InventoryItem?> = MutableList(numberOfSlots) { null }
 
@@ -24,18 +22,16 @@ class InventoryContainer(numberOfSlots: Int = 0) {
         return inventory[index]?.amount ?: 0
     }
 
-    fun incrementAmountAt(index: Int, amount: Int) {
+    open fun incrementAmountAt(index: Int, amount: Int) {
         inventory[index]
             ?.increaseAmountWith(amount)
             ?: error("There is no item to increment amount.")
-        gameData.quests.updateFindItem()
     }
 
-    fun decrementAmountAt(index: Int, amount: Int) {
+    open fun decrementAmountAt(index: Int, amount: Int) {
         inventory[index]
             ?.decreaseAmountWith(amount)
             ?: error("There is no item to decrement amount.")
-        gameData.quests.updateFindItem()
     }
 
     fun getItemAt(index: Int): InventoryItem? {
@@ -75,9 +71,8 @@ class InventoryContainer(numberOfSlots: Int = 0) {
         forceSetItemAt(index, null)
     }
 
-    fun forceSetItemAt(index: Int, newItem: InventoryItem?) {
+    open fun forceSetItemAt(index: Int, newItem: InventoryItem?) {
         inventory[index] = newItem
-        gameData.quests.updateFindItem()
     }
 
     fun getSize(): Int {
