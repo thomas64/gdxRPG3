@@ -52,7 +52,7 @@
       "you have the opportunity to choose your responses.",
       "",
       "But certain responses are restricted by specific conditions.",
-      "These conditions are stated between brackets [] before the response."
+      "These conditions are stated between brackets %brackets% in front of the response."
     ]
   },
   "guide_event_equipment"            : {
