@@ -73,12 +73,12 @@ class Scenario {
     }
 
     private fun addQuestArdorToLogbook() {
-        val questArdor = gameData.quests.getQuestById("quest_royal_sacrifice")
-        questArdor.accept()
+        gameData.quests.getQuestById("quest_royal_sacrifice").accept()
+        gameData.quests.getQuestById("quest_sub_royal_sacrifice").accept()
     }
 
     private fun addQuestLastdennToLogbook() {
-        val questYlarus = gameData.quests.getQuestById("quest_god_of_power")
+        val questYlarus = gameData.quests.getQuestById("quest_priest_of_lastdenn")
         questYlarus.accept()
     }
 

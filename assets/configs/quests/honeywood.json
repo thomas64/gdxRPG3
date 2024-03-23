@@ -1,29 +1,51 @@
 {
   "quest_royal_sacrifice"      : {
-    "title"   : "Royal sacrifice?",
-    "entityId": "ardor",
-    "summary" : "You witnessed Grace being sacrificed by the wizard Ardor in an attempt to gain ultimate power from Ulrog, the God of Power. However, something seemed to go wrong, and everything was consumed by flames, including Ardor and yourself. Bathed in light, you heard a voice saying, 'You have been given another chance.' Afterward, you woke up in your bed as if nothing had happened.",
-    "tasks"   : {
-      "1": {
+    "title"     : "Royal sacrifice?",
+    "entityId"  : "ardor",
+    "summary"   : "You witnessed Grace being sacrificed by the wizard Ardor in an attempt to gain ultimate power from Ulrog, the God of Power. However, something seemed to go wrong, and everything was consumed by flames, including Ardor and yourself.",
+    "linkedWith": ["quest_sub_royal_sacrifice"],
+    "tasks"     : {
+      "4": {
         "taskPhrase": "Receive the Crystal of Time to reset time to 12 hours before the disaster.",
         "type"      : "FIND_ITEM",
         "target"    : {"crystal_of_time": 1},
         "isHidden"  : true,
-        "linkedWith": ["3"]
+        "linkedWith": ["6"]
       },
-      "2": {
+      "5": {
         "taskPhrase": "Rescue Grace from Ardor.",
         "type"      : "DISCOVER"
       },
-      "3": {
+      "6": {
         "taskPhrase": "Stop Ardor from destroying Adan.",
         "type"      : "DISCOVER",
         "isHidden"  : true
       }
     }
   },
-  "quest_god_of_power"         : {
-    "title"     : "The God of Power",
+  "quest_sub_royal_sacrifice"  : {
+    "title"     : "Royal sacrifice?",
+    "entityId"  : "ardor",
+    "summary"   : "Sub royal sacrifice",
+    "isSubQuest": true,
+    "isHidden"  : true,
+    "tasks"     : {
+      "1": {
+        "taskPhrase": "Die by the flames of the disaster?",
+        "type"      : "COMPLETE"
+      },
+      "2": {
+        "taskPhrase": "Bathed in light, hear a voice saying, 'You have been given another chance.'?",
+        "type"      : "COMPLETE"
+      },
+      "3": {
+        "taskPhrase": "Wake up in bed as if nothing happened?",
+        "type"      : "COMPLETE"
+      }
+    }
+  },
+  "quest_priest_of_lastdenn"   : {
+    "title"     : "The Priest of Lastdenn",
     "entityId"  : "ylarus",
     "summary"   : "Adan inexplicably bursts into flames every time Grace is sacrificed by the wizard Ardor. Ylarus, the God of Time, his power is fading. He sends you to the priest of Lastdenn for answers.",
     "linkedWith": ["quest_honeywood_elder"],
@@ -206,7 +228,7 @@
     }
   },
   "quest_honeywood_elder"      : {
-    "title"     : "The God of Power",
+    "title"     : "The Priest of Lastdenn",
     "entityId"  : "oldman11",
     "summary"   : "Honeywood elder",
     "isSubQuest": true,

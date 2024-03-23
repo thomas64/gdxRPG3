@@ -20,6 +20,7 @@ class QuestTask(
     var hasRewardSound: Boolean = false,
     val linkedWith: List<String> = emptyList()
 ) {
+    private val originalTarget = target
     var isReset: Boolean = false
     var isComplete: Boolean = false
     var isFailed: Boolean = false
@@ -36,6 +37,7 @@ class QuestTask(
     }
 
     fun possibleReset() {
+        target.putAll(originalTarget)
         if (isComplete) {
             isReset = true
             isComplete = false
@@ -51,6 +53,7 @@ class QuestTask(
 
     fun setComplete() {
         when (type) {
+            QuestTaskType.COMPLETE,
             QuestTaskType.FREE,
             QuestTaskType.DISCOVER,
             QuestTaskType.CHECK,

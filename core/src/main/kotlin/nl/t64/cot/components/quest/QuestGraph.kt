@@ -69,6 +69,7 @@ data class QuestGraph(
 
     fun accept() {
         if (currentState.isEqualOrLowerThan(QuestState.KNOWN)) {
+            setCompleteTasksComplete()
             setAcceptedAndPossiblyShowMessage()
         }
         possibleFinish(true)
@@ -85,6 +86,11 @@ data class QuestGraph(
 
     fun unclaim() {
         currentState = QuestState.UNCLAIMED
+    }
+
+    private fun setCompleteTasksComplete() {
+        tasks.filterValues { it.type == QuestTaskType.COMPLETE }
+            .forEach { setTaskComplete(it.key) }
     }
 
     fun possibleSetFindItemTaskComplete() {

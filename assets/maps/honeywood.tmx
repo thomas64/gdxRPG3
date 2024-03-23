@@ -468,7 +468,7 @@
     <property name="condition" value="alone_in_party"/>
    </properties>
   </object>
-  <object id="395" name="quest_god_of_power" type="discover" x="1008" y="1800" width="144" height="48">
+  <object id="395" name="quest_priest_of_lastdenn" type="discover" x="1008" y="1800" width="144" height="48">
    <properties>
     <property name="task" value="1"/>
    </properties>

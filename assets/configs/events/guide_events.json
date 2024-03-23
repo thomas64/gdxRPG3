@@ -100,7 +100,7 @@
   },
   "guide_event_party_member"         : {
     "type"     : "messagebox",
-    "condition": ["_c_==_f_q_quest_honeywood_elder"],
+    "condition": ["_tc_9_q_quest_honeywood_elder"],
     "text"     : [
       "Luana has joined your party.",
       "Press the %inventory% to view her equipment, stats and skills."

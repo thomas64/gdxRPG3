@@ -28,7 +28,7 @@
   },
   "everything_is_back_again"      : {
     "type"          : "conversation",
-    "condition"     : ["_rc_==_a_q_quest_god_of_power"],
+    "condition"     : ["_rc_==_a_q_quest_priest_of_lastdenn"],
     "conversationId": "everything_is_back_again",
     "entityId"      : "mozes"
   },

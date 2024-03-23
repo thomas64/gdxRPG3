@@ -434,7 +434,7 @@
       "1"   : {"text": ["Greetings, Mozes. How may I be of service today?"]},
       "2"   : {
         "choices": [
-          {"condition": ["i_rc_==_a_q_quest_god_of_power", "i_rc_===_u_q_this"], "text": "*Explain everything and your need to leave the village.*", "nextId": "50"},
+          {"condition": ["i_rc_==_a_q_quest_priest_of_lastdenn", "i_rc_===_u_q_this"], "text": "*Explain everything that's happened and your need to leave the village.*", "nextId": "50"},
           {"condition": ["i_c_==_a_q_this", "i_!is_fairy_portal_active"], "text": "*Complain about the warp crystal not working.*", "nextId": "70"},
           {"condition": ["i_c_==_a_q_this", "i_ta_5_q_this", "i_n_1_>=_item_epic_fairy_ring"], "text": "[Fairy Ring] *Present the package you received from the Fairy Shop.*", "command": "SHOW_QUEST_ITEM", "nextId": "80"},
           {"condition": ["i_c_>=_a_q_quest_helping_horse", "i_c_<=_a_q_quest_get_horse"], "text": "*Explain your need for a horse due to the blocked path to Honeywood Forest.*", "nextId": "10"},
@@ -461,7 +461,7 @@
       "53"  : {"text": ["First of all, I'll give you the key to the basement. Behind the door is a warp crystal, similar to the one over by the Fairies."]},
       "54"  : {"text": ["Use this portal to deliver this letter and these items to the Fairy Shop. Afterward, return to me and show me the package you received."]},
       "55"  : {"text": ["Secondly, you'll need a travel companion. Because indeed, it's dangerous to go alone. No one is allowed to leave the village unaccompanied."]},
-      "56"  : {"text": ["Luana is outside here, near the statue, moping around. She's eager to leave the village, so with some proper explaining, she might agree to join you on your journey."]},
+      "56"  : {"text": ["Luana is outside, near the statue, moping around. She's expressed her desire to leave the village more times than I can remember. Given your friendship, some proper explaining might just turn her into a willing companion for your journey."]},
       "57"  : {"text": ["Together, you are permitted to leave this village by the guards on your way to Lastdenn."]},
       "58"  : {"text": ["Mozes, I wish you the best of luck on your journey."], "choices": [{"command": "RECEIVE_ITEM_FOR_QUEST"}]},
       "70"  : {"text": ["That's unfortunate. Didn't you activate the warp crystal at the Fairies? It's necessary for it to let you warp. Remember to activate warp crystals wherever you go."]},

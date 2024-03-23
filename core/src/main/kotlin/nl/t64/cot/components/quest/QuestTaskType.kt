@@ -16,6 +16,7 @@ enum class QuestTaskType {
 
     RETURN,
 
+    COMPLETE,
     FREE,
     NONE,
 
