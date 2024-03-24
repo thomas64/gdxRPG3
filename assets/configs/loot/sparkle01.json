@@ -16,7 +16,7 @@
   "sparkle_honeywood_2": {"condition": ["_rc_>=_a_q_quest_royal_sacrifice"], "content": {"herb": 1}},
   "sparkle_honeywood_3": {"condition": ["_rc_>=_a_q_quest_royal_sacrifice"], "content": {"herb": 1}},
   "sparkle_honeywood_4": {"content": {"herb": 1}},
-  "sparkle_honeywood_5": {"content": {"herb": 1}},
+  "sparkle_honeywood_5": {"content": {"herb": 2}},
   "sparkle_honeywood_6": {"content": {"herb": 1}},
   "sparkle_honeywood_7": {"content": {"herb": 1}},
   "sparkle0017"        : {"condition": ["_rc_>=_k_q_quest_get_horse"], "content": {"horseshoe": 1}},
