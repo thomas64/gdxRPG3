@@ -1,5 +1,6 @@
 package nl.t64.cot.screens.menu
 
+import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
@@ -8,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle
 import com.badlogic.gdx.utils.ScreenUtils
+import nl.t64.cot.Utils
 import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.createScreenshot
 import nl.t64.cot.Utils.mapManager
@@ -90,6 +92,8 @@ class MenuPause : MenuScreen() {
     }
 
     private fun openMenuMain() {
+        Gdx.input.inputProcessor = null
+        Utils.setGamepadInputProcessor(null)
         stage.addAction(Actions.sequence(Actions.run { mapManager.disposeOldMaps() },
                                          Actions.fadeOut(Constant.FADE_DURATION),
                                          Actions.delay(0.5f),

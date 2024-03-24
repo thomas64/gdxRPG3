@@ -38,9 +38,20 @@ class QuestTask(
 
     fun possibleReset() {
         target.putAll(originalTarget)
-        if (isComplete) {
+        if (isComplete && isResettable()) {
             isReset = true
             isComplete = false
+        }
+    }
+
+    private fun isResettable(): Boolean {
+        return when (type) {
+            QuestTaskType.COMPLETE,
+            QuestTaskType.DISCOVER,
+            QuestTaskType.CHECK,
+            QuestTaskType.CHECK_WITH_ITEM -> false
+            QuestTaskType.FIND_ITEM -> !hasTargetInInventoryOrEquipment()
+            else -> true
         }
     }
 

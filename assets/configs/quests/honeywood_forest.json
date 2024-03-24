@@ -34,7 +34,7 @@
         "isHidden"     : true
       },
       "10": {
-        "taskPhrase": "Something went very wrong and everything burned, including Ardor.",
+        "taskPhrase": "Witness something went very wrong and everything burned, including Ardor himself.",
         "type"      : "DISCOVER",
         "isHidden"  : true
       }

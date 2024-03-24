@@ -97,7 +97,7 @@
     "isSubQuest": true,
     "tasks"     : {
       "12": {
-        "taskPhrase": "      Jaron has a tow rope, but needs it at the moment. Do some deliveries for him and he will borrow it to you.",
+        "taskPhrase": "      Do some deliveries for Jaron and he will borrow a tow rope to you, because he needs it at the moment.",
         "type"      : "FREE"
       },
       "13": {
@@ -141,7 +141,7 @@
     "linkedWith": ["quest_helping_horse"],
     "tasks"     : {
       "2" : {
-        "taskPhrase": "      Horse Enopa is sick. Maybe Elenora, the elder's wife, can help with some medicine.",
+        "taskPhrase": "      See if Elenora, the elder's wife, can help with some medicine, because horse Enopa is sick.",
         "type"      : "FIND_ITEM",
         "target"    : {"horse_medicine": 1},
         "linkedWith": ["6"]
@@ -159,7 +159,7 @@
         "isHidden"  : true
       },
       "8" : {
-        "taskPhrase": "      Angie won't let Enopa go without horseshoes. She says there must be some around. Go find or make 4 of them.",
+        "taskPhrase": "      Go find or get 4 horseshoes. Angie says there must be some around and she won't let Enopa go without them.",
         "type"      : "FIND_ITEM",
         "target"    : {"horseshoe": 4},
         "linkedWith": ["10"]
@@ -180,12 +180,12 @@
     "isSubQuest": true,
     "tasks"     : {
       "3": {
-        "taskPhrase": "            Elenora needs some ingredients for the medicine. Get 6 herbs for her.",
+        "taskPhrase": "            Get 6 herbs for Elenora. She needs some ingredients for the medicine.",
         "type"      : "FIND_ITEM",
         "target"    : {"herb": 6}
       },
       "4": {
-        "taskPhrase": "            For the medicine also 1 blue jelly is needed, which can be extracted from a Blue Slime. Luckily Elenora spotted one in town.",
+        "taskPhrase": "            Get 1 blue jelly for the medicine, which can be extracted from a Blue Slime. Luckily Elenora spotted one in town.",
         "type"      : "FIND_ITEM",
         "target"    : {"blue_jelly": 1}
       },

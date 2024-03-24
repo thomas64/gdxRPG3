@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ScreenUtils
 import nl.t64.cot.INVALID_PROFILE_VIEW
+import nl.t64.cot.Utils
 import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.mapManager
@@ -178,6 +179,7 @@ abstract class MenuLoad : MenuScreen() {
 
     fun fadeBeforeOpenWorldScreen() {
         Gdx.input.inputProcessor = null
+        Utils.setGamepadInputProcessor(null)
         stage.addAction(Actions.sequence(Actions.run { isBgmFading = true },
                                          Actions.fadeOut(Constant.FADE_DURATION),
                                          Actions.run { isBgmFading = false },

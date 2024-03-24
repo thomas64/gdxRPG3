@@ -199,8 +199,8 @@
  </objectgroup>
  <objectgroup color="#ff55ff" id="23" name="event">
   <object id="70" name="guide_event_inventory" type="discover" x="432" y="1344" width="144" height="24"/>
-  <object id="71" name="guide_event_enemy" type="discover" x="432" y="1032" width="48" height="24"/>
+  <object id="71" name="guide_event_enemy" type="discover" x="432" y="1008" width="48" height="24"/>
   <object id="80" name="fallen_tree" type="check" x="480" y="1608" width="48" height="36"/>
-  <object id="86" name="back_were_i_started" type="discover" x="432" y="1392" width="144" height="24"/>
+  <object id="86" name="back_were_i_started" type="discover" x="384" y="1152" width="192" height="24"/>
  </objectgroup>
 </map>
