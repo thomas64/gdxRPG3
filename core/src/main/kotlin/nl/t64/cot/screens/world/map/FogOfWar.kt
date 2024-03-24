@@ -19,7 +19,7 @@ internal class FogOfWar {
     private val container: MutableMap<String, Set<FogPoint>> = HashMap()
 
     fun putIfAbsent(currentMap: GameMap) {
-        val fogPoints: Set<FogPoint> = createFogPointSetFrom(currentMap)
+        val fogPoints: Set<FogPoint> = createFogPointSetFor(currentMap)
         container.putIfAbsent(currentMap.mapTitle, fogPoints)
     }
 
@@ -46,18 +46,26 @@ internal class FogOfWar {
             .forEach { shapeRenderer.rect(it.x, it.y, Constant.HALF_TILE_SIZE, Constant.HALF_TILE_SIZE) }
     }
 
-    private fun createFogPointSetFrom(gameMap: GameMap): Set<FogPoint> {
-        val leftOfScreen: Int
+    private fun createFogPointSetFor(gameMap: GameMap): Set<FogPoint> {
+        val screenAspectRatio: Float = Gdx.graphics.width.toFloat() / Gdx.graphics.height.toFloat()
+        val isMapWiderThanAspectratio: Boolean = isMapWiderThanAspectratio(gameMap, screenAspectRatio)
+
         val screenWidth: Int
-        if ((gameMap.width < gameMap.height)
-                || (gameMap.width > gameMap.height && Gdx.graphics.width > gameMap.width)) {
-            screenWidth = ((gameMap.height / 9f) * 16f).toInt()     // 16:9
-            leftOfScreen = (0f - ((screenWidth - gameMap.width) / 2f) - (gameMap.width / 2f)).toInt()
-        } else {
+        val leftOfScreen: Int
+
+        if (gameMap.width == gameMap.height || isMapWiderThanAspectratio) {
             screenWidth = gameMap.width
             leftOfScreen = 0
+        } else {
+            screenWidth = (gameMap.height * screenAspectRatio).toInt()
+            leftOfScreen = ((gameMap.width - screenWidth) / 2f).toInt()
         }
         return createFogPoints(leftOfScreen, screenWidth, gameMap.height)
+    }
+
+    private fun isMapWiderThanAspectratio(gameMap: GameMap, aspectratio: Float): Boolean {
+        val mapAspectRatio = gameMap.width.toFloat() / gameMap.height.toFloat()
+        return gameMap.width > gameMap.height && mapAspectRatio > aspectratio
     }
 
     private fun createFogPoints(leftOfScreen: Int, screenWidth: Int, gameMapHeight: Int): Set<FogPoint> {
