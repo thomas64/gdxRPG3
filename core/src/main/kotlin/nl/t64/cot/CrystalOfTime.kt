@@ -8,6 +8,7 @@ import nl.t64.cot.audio.AudioManager
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.ScreenManager
+import nl.t64.cot.screens.world.map.FogOfWarManager
 import nl.t64.cot.screens.world.map.MapManager
 
 
@@ -22,6 +23,7 @@ class CrystalOfTime : Game() {
     val scenario: Scenario = Scenario()
     val screenManager: ScreenManager = ScreenManager()
     val audioManager: AudioManager = AudioManager()
+    val fogOfWarManager: FogOfWarManager = FogOfWarManager()
     val mapManager: MapManager = MapManager()
     val brokerManager: BrokerManager = BrokerManager()
     val gamepadMapping: GamepadMapping = GamepadMapping()
@@ -33,6 +35,7 @@ class CrystalOfTime : Game() {
         }
 
         brokerManager.profileObservers.addObserver(gameData)
+        brokerManager.profileObservers.addObserver(fogOfWarManager)
         brokerManager.profileObservers.addObserver(mapManager)
 
         Controllers.addListener(gamepadMapping.controllerToInputAdapter)

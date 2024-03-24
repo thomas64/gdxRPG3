@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.brokerManager
+import nl.t64.cot.Utils.fogOfWarManager
 import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.Utils.profileManager
 import nl.t64.cot.Utils.screenManager
@@ -108,6 +109,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
         doorList = DoorLoader(currentMap).createDoors()
         currentMap.setTiledGraphs()
         mapManager.setNextMapTitleNull()
+        fogOfWarManager.setNewMap(currentMap, camera)
     }
 
     fun shakeCamera() {
@@ -328,12 +330,12 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled)
         player.renderOnMiniMap(worldRenderer.batch, shapeRenderer)
         npcEntities.forEach { it.renderOnMiniMap(worldRenderer.batch, shapeRenderer) }
-        mapManager.drawFogOfWar(shapeRenderer)
+        fogOfWarManager.draw(shapeRenderer)
         shapeRenderer.end()
     }
 
     private fun renderAll(dt: Float) {
-        mapManager.updateFogOfWar(player.position, dt)
+        fogOfWarManager.update(player.position, dt)
         mapManager.updateConditionLayers()
         updateCameraPosition()
         worldRenderer.renderAll(player.position) { renderEntities(it) }

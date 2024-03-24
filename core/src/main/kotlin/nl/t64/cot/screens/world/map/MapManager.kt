@@ -2,7 +2,6 @@ package nl.t64.cot.screens.world.map
 
 import com.badlogic.gdx.ai.pfa.DefaultGraphPath
 import com.badlogic.gdx.graphics.g2d.Sprite
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.maps.tiled.TiledMap
 import com.badlogic.gdx.math.Vector2
 import nl.t64.cot.ProfileManager
@@ -26,10 +25,8 @@ class MapManager : ProfileObserver {
     lateinit var currentMap: GameMap
     private var isMapLoaded: Boolean = false
     private var nextMapTitle: String? = null
-    private lateinit var fogOfWar: FogOfWar
 
     override fun onNotifyCreateProfile(profileManager: ProfileManager) {
-        fogOfWar = FogOfWar()
         loadMap(Constant.STARTING_MAP)
         currentMap.setPlayerSpawnLocationForNewLoad(Constant.STARTING_MAP)
         onNotifySaveProfile(profileManager)
@@ -38,12 +35,10 @@ class MapManager : ProfileObserver {
 
     override fun onNotifySaveProfile(profileManager: ProfileManager) {
         profileManager.setProperty("mapTitle", currentMap.mapTitle)
-        profileManager.setProperty("fogOfWar", fogOfWar)
     }
 
     override fun onNotifyLoadProfile(profileManager: ProfileManager) {
         val mapTitle = profileManager.getProperty<String>("mapTitle")
-        fogOfWar = profileManager.getProperty("fogOfWar")
         if (gameData.cutscenes.isPlayed(CutsceneId.SCENE_INTRO)) {
             loadMapWithBgmBgs(mapTitle)
         } else {
@@ -75,14 +70,6 @@ class MapManager : ProfileObserver {
 
     fun findPath(startPoint: Vector2, endPoint: Vector2, state: EntityState): DefaultGraphPath<TiledNode> {
         return currentMap.getTiledGraph(state)?.findPath(startPoint, endPoint) ?: DefaultGraphPath()
-    }
-
-    fun updateFogOfWar(playerPosition: Vector2, dt: Float) {
-        fogOfWar.update(playerPosition, currentMap, dt)
-    }
-
-    fun drawFogOfWar(shapeRenderer: ShapeRenderer) {
-        fogOfWar.draw(shapeRenderer, currentMap.mapTitle)
     }
 
     fun updateConditionLayers() {
@@ -187,7 +174,6 @@ class MapManager : ProfileObserver {
         disposeOldMaps()
         currentMap = GameMap(mapTitle)
         isMapLoaded = true
-        fogOfWar.putIfAbsent(currentMap)
     }
 
     fun disposeOldMaps() {

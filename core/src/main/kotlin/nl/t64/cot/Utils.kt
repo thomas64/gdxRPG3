@@ -25,6 +25,7 @@ import ktx.assets.dispose
 import nl.t64.cot.audio.AudioManager
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.ScreenManager
+import nl.t64.cot.screens.world.map.FogOfWarManager
 import nl.t64.cot.screens.world.map.MapManager
 
 
@@ -59,6 +60,7 @@ object Utils {
     val scenario: Scenario get() = crystalOfTime.scenario
     val screenManager: ScreenManager get() = crystalOfTime.screenManager
     val audioManager: AudioManager get() = crystalOfTime.audioManager
+    val fogOfWarManager: FogOfWarManager get() = crystalOfTime.fogOfWarManager
     val mapManager: MapManager get() = crystalOfTime.mapManager
     val brokerManager: BrokerManager get() = crystalOfTime.brokerManager
 

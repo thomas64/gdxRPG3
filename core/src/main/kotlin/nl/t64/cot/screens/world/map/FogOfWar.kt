@@ -33,17 +33,17 @@ internal class FogOfWar {
 
     private fun update(playerPosition: Vector2, currentMap: GameMap) {
         val sightRadius = Circle(playerPosition, FOG_OF_WAR_RADIUS)
-        container[currentMap.mapTitle]!!
-            .filter { sightRadius.contains(it) }
-            .filter { !it.isOutsideMap(currentMap) }
-            .forEach { it.isExplored = true }
+        container[currentMap.mapTitle]
+            ?.filter { sightRadius.contains(it) }
+            ?.filter { !it.isOutsideMap(currentMap) }
+            ?.forEach { it.isExplored = true }
     }
 
     fun draw(shapeRenderer: ShapeRenderer, mapTitle: String) {
         shapeRenderer.color = Color.BLACK
-        container[mapTitle]!!
-            .filter { !it.isExplored }
-            .forEach { shapeRenderer.rect(it.x, it.y, Constant.HALF_TILE_SIZE, Constant.HALF_TILE_SIZE) }
+        container[mapTitle]
+            ?.filter { !it.isExplored }
+            ?.forEach { shapeRenderer.rect(it.x, it.y, Constant.HALF_TILE_SIZE, Constant.HALF_TILE_SIZE) }
     }
 
     private fun createFogPointSetFor(gameMap: GameMap): Set<FogPoint> {
