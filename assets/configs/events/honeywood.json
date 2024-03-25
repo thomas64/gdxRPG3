@@ -3,17 +3,9 @@
     "type"          : "conversation",
     "condition"     : ["_rc_===_u_q_quest_royal_sacrifice"],
     "conversationId": "should_really_be_going_to_the_forest",
-    "entityId"      : "mozes",
-    "doesRepeat"    : true
+    "entityId"      : "mozes"
   },
   "go_to_the_forest_2"            : {
-    "type"          : "conversation",
-    "condition"     : ["_rc_===_u_q_quest_royal_sacrifice"],
-    "conversationId": "should_really_be_going_to_the_forest",
-    "entityId"      : "mozes",
-    "doesRepeat"    : true
-  },
-  "go_to_the_forest_3"            : {
     "type"          : "conversation",
     "condition"     : ["_rc_===_u_q_quest_royal_sacrifice"],
     "conversationId": "should_really_be_going_to_the_forest",
@@ -36,17 +28,9 @@
     "type"          : "conversation",
     "condition"     : ["_c_==_a_q_quest_royal_sacrifice", "_rc_===_u_q_quest_helping_horse"],
     "conversationId": "should_really_be_going_to_grace",
-    "entityId"      : "mozes",
-    "doesRepeat"    : true
+    "entityId"      : "mozes"
   },
   "horse_quest_not_yet_accepted_2": {
-    "type"          : "conversation",
-    "condition"     : ["_c_==_a_q_quest_royal_sacrifice", "_rc_===_u_q_quest_helping_horse"],
-    "conversationId": "should_really_be_going_to_grace",
-    "entityId"      : "mozes",
-    "doesRepeat"    : true
-  },
-  "horse_quest_not_yet_accepted_3": {
     "type"          : "conversation",
     "condition"     : ["_c_==_a_q_quest_royal_sacrifice", "_rc_===_u_q_quest_helping_horse"],
     "conversationId": "should_really_be_going_to_grace",

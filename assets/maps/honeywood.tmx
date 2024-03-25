@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="96" height="78" tilewidth="24" tileheight="24" infinite="0" nextlayerid="57" nextobjectid="440">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="96" height="78" tilewidth="24" tileheight="24" infinite="0" nextlayerid="57" nextobjectid="449">
  <properties>
   <property name="bgm" value="bgm_honeywood"/>
   <property name="lightmap_camera" value="sunlight"/>
@@ -296,6 +296,7 @@
  <objectgroup color="#aa55ff" id="13" name="hero">
   <object id="371" name="luana" type="w" x="1152" y="1128" width="48" height="24">
    <properties>
+    <property name="condition" value="_rc_&gt;=_a_q_quest_royal_sacrifice"/>
     <property name="conversation" value="luana_join"/>
    </properties>
   </object>
@@ -312,23 +313,27 @@
  <objectgroup color="#55ff7f" id="42" name="npc">
   <object id="158" name="woman01" x="1488" y="1176" width="48" height="24">
    <properties>
+    <property name="condition" value="_rc_&gt;=_a_q_quest_royal_sacrifice"/>
     <property name="conversation" value="resourceshop_honeywood"/>
     <property name="direction" value="south"/>
    </properties>
   </object>
   <object id="161" name="woman01" type="inv" x="1488" y="1224" width="48" height="12">
    <properties>
+    <property name="condition" value="_rc_&gt;=_a_q_quest_royal_sacrifice"/>
     <property name="conversation" value="resourceshop_honeywood"/>
    </properties>
   </object>
   <object id="159" name="man01" x="1632" y="1176" width="48" height="24">
    <properties>
+    <property name="condition" value="_rc_&gt;=_a_q_quest_royal_sacrifice"/>
     <property name="conversation" value="equipshop_honeywood"/>
     <property name="direction" value="south"/>
    </properties>
   </object>
   <object id="160" name="man01" type="inv" x="1632" y="1224" width="48" height="12">
    <properties>
+    <property name="condition" value="_rc_&gt;=_a_q_quest_royal_sacrifice"/>
     <property name="conversation" value="equipshop_honeywood"/>
    </properties>
   </object>
@@ -355,25 +360,26 @@
   </object>
   <object id="352" name="priest01" x="1056" y="1248" width="48" height="24">
    <properties>
+    <property name="condition" value="_rc_&gt;=_a_q_quest_royal_sacrifice"/>
     <property name="conversation" value="priest_honeywood"/>
     <property name="direction" value="south"/>
    </properties>
   </object>
-  <object id="355" name="girl03" type="p" x="840" y="1488" width="48" height="24">
+  <object id="355" name="girl03" type="p" x="828" y="1476" width="48" height="24">
    <properties>
-    <property name="condition" value="_tn_16_q_quest_get_tow_rope"/>
+    <property name="condition" value="_tn_16_q_quest_get_tow_rope,_rc_&gt;=_a_q_quest_royal_sacrifice"/>
     <property name="conversation" value="playing_catch_1"/>
    </properties>
   </object>
-  <object id="356" name="boy02" type="p" x="888" y="1488" width="48" height="24">
+  <object id="356" name="boy02" type="p" x="900" y="1476" width="48" height="24">
    <properties>
-    <property name="condition" value="_tn_16_q_quest_get_tow_rope"/>
+    <property name="condition" value="_tn_16_q_quest_get_tow_rope,_rc_&gt;=_a_q_quest_royal_sacrifice"/>
     <property name="conversation" value="playing_catch_2"/>
    </properties>
   </object>
-  <object id="357" name="boy01" type="p" x="864" y="1512" width="48" height="24">
+  <object id="357" name="boy01" type="p" x="864" y="1524" width="48" height="24">
    <properties>
-    <property name="condition" value="_tn_16_q_quest_get_tow_rope"/>
+    <property name="condition" value="_tn_16_q_quest_get_tow_rope,_rc_&gt;=_a_q_quest_royal_sacrifice"/>
     <property name="conversation" value="kaidan_come_home"/>
    </properties>
   </object>
@@ -391,6 +397,7 @@
   </object>
   <object id="368" name="woman03" x="192" y="1320" width="48" height="24">
    <properties>
+    <property name="condition" value="_rc_&gt;=_a_q_quest_royal_sacrifice"/>
     <property name="conversation" value="quest_get_horse"/>
     <property name="direction" value="east"/>
    </properties>
@@ -411,12 +418,14 @@
   </object>
   <object id="381" name="man11" x="1488" y="1416" width="48" height="24">
    <properties>
+    <property name="condition" value="_rc_&gt;=_a_q_quest_royal_sacrifice"/>
     <property name="conversation" value="honeywood_academy1"/>
     <property name="direction" value="east"/>
    </properties>
   </object>
   <object id="382" name="man15" x="1632" y="1440" width="48" height="24">
    <properties>
+    <property name="condition" value="_rc_&gt;=_a_q_quest_royal_sacrifice"/>
     <property name="conversation" value="honeywood_academy2"/>
     <property name="direction" value="north"/>
    </properties>
@@ -432,6 +441,13 @@
    <properties>
     <property name="condition" value="_tc_16_q_quest_get_tow_rope"/>
     <property name="conversation" value="life_is_boring_1"/>
+    <property name="direction" value="north"/>
+   </properties>
+  </object>
+  <object id="443" name="man07" x="816" y="504" width="48" height="24">
+   <properties>
+    <property name="condition" value="_rc_===_u_q_quest_royal_sacrifice"/>
+    <property name="conversation" value="quest_get_horseshoes"/>
     <property name="direction" value="north"/>
    </properties>
   </object>
@@ -473,21 +489,6 @@
     <property name="task" value="1"/>
    </properties>
   </object>
-  <object id="420" name="quest_helping_horse" type="blocker" x="552" y="864" width="288" height="24">
-   <properties>
-    <property name="condition" value="_rc_===_u_q_this"/>
-   </properties>
-  </object>
-  <object id="422" name="quest_helping_horse" type="blocker" x="1896" y="1104" width="96" height="24">
-   <properties>
-    <property name="condition" value="_rc_===_u_q_this"/>
-   </properties>
-  </object>
-  <object id="424" name="quest_helping_horse" type="blocker" x="324" y="864" width="24" height="216">
-   <properties>
-    <property name="condition" value="_rc_===_u_q_this"/>
-   </properties>
-  </object>
  </objectgroup>
  <objectgroup color="#ff00ff" id="53" name="cutscene">
   <object id="439" name="scene_tree_falls" type="discover" x="1896" y="-18" width="96" height="24">
@@ -504,12 +505,20 @@
   <object id="394" name="guide_event_party_member" type="discover" x="1008" y="960" width="336" height="336"/>
   <object id="414" name="dont_have_time_for_this" type="discover" x="1896" y="240" width="144" height="24"/>
   <object id="421" name="horse_quest_not_yet_accepted_1" type="discover" x="1908" y="1098" width="72" height="6"/>
-  <object id="418" name="horse_quest_not_yet_accepted_2" type="discover" x="576" y="858" width="240" height="6"/>
-  <object id="423" name="horse_quest_not_yet_accepted_3" type="discover" x="318" y="864" width="6" height="192"/>
-  <object id="432" name="go_to_the_forest_1" type="discover" x="1908" y="1098" width="72" height="6"/>
-  <object id="433" name="go_to_the_forest_2" type="discover" x="576" y="858" width="240" height="6"/>
-  <object id="434" name="go_to_the_forest_3" type="discover" x="318" y="864" width="6" height="192"/>
+  <object id="418" name="horse_quest_not_yet_accepted_1" type="discover" x="576" y="858" width="240" height="6"/>
+  <object id="423" name="horse_quest_not_yet_accepted_1" type="discover" x="318" y="864" width="6" height="192"/>
+  <object id="432" name="go_to_the_forest_1" type="discover" x="1908" y="1092" width="72" height="6"/>
+  <object id="433" name="go_to_the_forest_1" type="discover" x="576" y="852" width="240" height="6"/>
+  <object id="434" name="go_to_the_forest_1" type="discover" x="312" y="864" width="6" height="192"/>
   <object id="437" name="guide_event_action" type="discover" x="1512" y="384" width="24" height="96"/>
-  <object id="438" name="guide_event_action" type="discover" x="720" y="528" width="48" height="6"/>
+  <object id="438" name="guide_event_action" type="discover" x="792" y="480" width="96" height="72"/>
+  <object id="448" name="horse_quest_not_yet_accepted_2" type="check" x="1056" y="840" width="48" height="24"/>
+  <object id="440" name="go_to_the_forest_2" type="check" x="1056" y="840" width="48" height="24"/>
+  <object id="447" name="horse_quest_not_yet_accepted_2" type="check" x="624" y="1368" width="48" height="24"/>
+  <object id="441" name="go_to_the_forest_2" type="check" x="624" y="1368" width="48" height="24"/>
+  <object id="442" name="horse_quest_not_yet_accepted_2" type="check" x="480" y="840" width="48" height="24"/>
+  <object id="446" name="go_to_the_forest_2" type="check" x="480" y="840" width="48" height="24"/>
+  <object id="444" name="horse_quest_not_yet_accepted_2" type="check" x="720" y="504" width="48" height="24"/>
+  <object id="445" name="go_to_the_forest_2" type="check" x="720" y="504" width="48" height="24"/>
  </objectgroup>
 </map>

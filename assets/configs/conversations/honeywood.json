@@ -38,11 +38,11 @@
     "name"   : "Mrs. Johanna",
     "phrases": {
       "1": {"face": "mozes", "name": "Mozes", "text": ["Mrs. Johanna! Have you seen Grace?"]},
-      "2": {"face": "oldwoman01", "name": "Mrs. Johanna", "text": ["I'm sorry, dear. I haven't seen Grace this morning. Is everything alright?"]},
+      "2": {"face": "oldwoman01", "name": "Mrs. Johanna", "text": ["I'm sorry, dear. It's still early; I haven't seen Grace this morning. Is everything alright?"]},
       "3": {"face": "mozes", "name": "Mozes", "text": ["I don't know where she is. She wasn't in her bed this morning."]},
       "4": {"face": "oldwoman01", "name": "Mrs. Johanna", "text": ["Perhaps she went north? She likes to go there."]},
       "5": {"face": "mozes", "name": "Mozes", "text": ["I'm afraid she did. There are orcs in the forest."]},
-      "6": {"face": "oldwoman01", "name": "Mrs. Johanna", "text": ["I'll ask around in the village to see if anyone else saw her."]},
+      "6": {"face": "oldwoman01", "name": "Mrs. Johanna", "text": ["I'll ask around in the village to see if anyone, already awake, saw her."]},
       "7": {"face": "mozes", "name": "Mozes", "text": ["Please do. I'll head north."], "choices": [{"command": "EXIT"}]}
     }
   },
@@ -481,7 +481,7 @@
         "choices": [
           {"condition": ["i_c_==_a_q_quest_get_tow_rope", "i_tn_13_q_quest_get_tow_rope"], "text": "*Inform you're here to pay Jaron's outstanding bill.*", "nextId": "100"},
           {"condition": ["i_rc_>=_a_q_quest_get_horse", "i_tn_8_q_quest_get_horse"], "text": "*Inquire about his horseshoe offerings.*", "nextId": "3"},
-          {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "text": "*Ask Black if he's seen Grace this morning.*", "nextId": "30"},
+          {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "text": "*No time for jokes. Ask Black if he's seen Grace this morning.*", "nextId": "30"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
@@ -496,7 +496,8 @@
       "20"  : {"text": ["One moment, I'll craft one for you."]},
       "21"  : {"text": ["{SPEED=0.2} . . . . . . . . ."]},
       "22"  : {"text": ["Here you go, a brand new horseshoe!"], "choices": [{"command": "TRADE_QUEST_ITEMS"}]},
-      "30"  : {"text": ["No, I'm sorry, I just got out of bed. She's probably playing somewhere outside."], "choices": [{"nextId": "2"}]},
+      "30"  : {"text": ["No, I'm sorry, I just woke up. She might be out playing somewhere?"]},
+      "31"  : {"text": ["*Yawn* It's quite early. Everyone's still sleeping. Are you sure she's not in her bed, nestled under the blankets?"], "choices": [{"nextId": "2"}]},
       "100" : {"text": ["Ah, it's about time! For Jaron's outstanding bill, it will be four gold pieces then."]},
       "101" : {"text": ["I know, the bill was originally only three, but that's what I call interest. That slacker hasn't paid up in such a long time."]},
       "102" : {

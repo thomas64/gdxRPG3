@@ -5,6 +5,7 @@ import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.playSe
+import nl.t64.cot.components.condition.ConditionDatabase
 import nl.t64.cot.components.door.Door
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.world.entity.events.*
@@ -58,6 +59,7 @@ class PhysicsDoor(private val door: Door) : PhysicsComponent() {
 
     private fun useDoor() {
         stringBuilder.setLength(0)
+        if (isFailingOnCondition()) return
         if (isFailingOnLock()) return
 
         if (door.isClosed) {
@@ -65,6 +67,10 @@ class PhysicsDoor(private val door: Door) : PhysicsComponent() {
         } else {
             closeWhenOpenAndAddBlocker(true)
         }
+    }
+
+    private fun isFailingOnCondition(): Boolean {
+        return !ConditionDatabase.isMeetingConditions(door.conditionIds)
     }
 
     private fun isFailingOnLock(): Boolean {

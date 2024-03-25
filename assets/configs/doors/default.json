@@ -1,12 +1,12 @@
 {
   "door_simple_left"           : {"type": "SMALL", "spriteId": "simple_left"},
-  "door_simple_left1"          : {"type": "SMALL", "spriteId": "simple_left"},
-  "door_simple_left2"          : {"type": "SMALL", "spriteId": "simple_left"},
+  "door_simple_left1"          : {"type": "SMALL", "spriteId": "simple_left", "condition": ["_rc_>=_a_q_quest_helping_horse"]},
+  "door_simple_left2"          : {"type": "SMALL", "spriteId": "simple_left", "condition": ["_rc_>=_a_q_quest_helping_horse"]},
   "door_simple_left3"          : {"type": "SMALL", "spriteId": "simple_left"},
-  "door_simple_left4"          : {"type": "SMALL", "spriteId": "simple_left"},
+  "door_simple_left4"          : {"type": "SMALL", "spriteId": "simple_left", "condition": ["_rc_>=_a_q_quest_helping_horse"]},
   "door_luxurious_left"        : {"type": "SMALL", "spriteId": "luxurious_left"},
   "door_wooden_left"           : {"type": "SMALL", "spriteId": "wooden_left"},
   "door_wooden_ring_shade_left": {"type": "SMALL", "spriteId": "wooden_ring_shade_left"},
-  "door_forged_left"           : {"type": "SMALL", "spriteId": "forged_left"},
+  "door_forged_left"           : {"type": "SMALL", "spriteId": "forged_left", "condition": ["_rc_>=_a_q_quest_helping_horse"]},
   "door_large_round"           : {"type": "LARGE", "spriteId": "large_round"}
 }
