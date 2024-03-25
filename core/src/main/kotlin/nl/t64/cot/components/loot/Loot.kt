@@ -14,13 +14,32 @@ class Loot(
     val conditionIds: List<String> = emptyList(),
     var trapLevel: Int = 0,
     var lockLevel: Int = 0,
-    var xp: Int = 0
+    var xp: Int = 0,
+    val doesReset: Boolean = false,
 ) {
 
     companion object {
         fun createSingleItem(itemId: String): Loot {
             return Loot(mutableMapOf(itemId to 1))
         }
+    }
+
+    fun resetChest(originalLoot: Loot) {
+        trapLevel = originalLoot.trapLevel
+        lockLevel = originalLoot.lockLevel
+        content = when {
+            doesReset -> originalLoot.content
+            else -> mutableMapOf("gold" to 1)
+        }
+    }
+
+    fun resetSparkle(originalLoot: Loot) {
+        content = originalLoot.content
+    }
+
+    fun resetQuest(originalLoot: Loot) {
+        content = originalLoot.content
+        xp = originalLoot.xp
     }
 
     fun isTaken(): Boolean =

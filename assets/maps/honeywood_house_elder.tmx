@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="26" height="42" tilewidth="24" tileheight="24" infinite="0" nextlayerid="27" nextobjectid="74">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="26" height="42" tilewidth="24" tileheight="24" infinite="0" nextlayerid="27" nextobjectid="74">
  <properties>
   <property name="bgm" value="bgm_house"/>
   <property name="bgs" value="bgs_fireplace"/>
@@ -64,7 +64,7 @@
   <object id="53" name="stone" x="48" y="144" width="336" height="144"/>
   <object id="54" name="carpet" x="96" y="480" width="240" height="192"/>
  </objectgroup>
- <objectgroup color="#aa0000" id="11" name="collision" visible="0">
+ <objectgroup color="#aa0000" id="11" name="collision">
   <object id="4" x="192" y="888" width="432" height="120"/>
   <object id="5" x="0" y="888" width="144" height="120"/>
   <object id="6" x="576" y="0" width="48" height="888"/>
@@ -102,7 +102,7 @@
   <object id="64" name="note_food" x="240" y="144" width="48" height="48"/>
   <object id="65" name="note_food" x="336" y="144" width="48" height="48"/>
   <object id="68" name="note_closet" x="96" y="360" width="48" height="48"/>
-  <object id="70" name="note_closet" x="48" y="168" width="24" height="72"/>
+  <object id="70" name="note_closet" x="48" y="168" width="36" height="60"/>
   <object id="71" name="note_kitchen" x="96" y="120" width="96" height="30"/>
  </objectgroup>
  <objectgroup color="#55ff7f" id="23" name="npc">

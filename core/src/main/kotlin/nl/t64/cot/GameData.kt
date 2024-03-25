@@ -46,7 +46,7 @@ class GameData : ProfileObserver {
         battles = BattleContainer()
         val phraseIdToKeep = conversations.getConversationById("fairy_welcome").currentPhraseId
         conversations = ConversationContainer()
-        loot = LootContainer()
+        loot.reset()
         spoils = SpoilsContainer()
         quests.reset()
 

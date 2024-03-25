@@ -118,16 +118,10 @@
  </objectgroup>
  <objectgroup color="#ffaa7f" id="14" name="save"/>
  <objectgroup color="#ff00ff" id="19" name="cutscene"/>
- <objectgroup color="#ffff00" id="22" name="quest">
-  <object id="84" name="quest_grace_is_missing" type="blocker" x="456" y="588" width="96" height="12">
-   <properties>
-    <property name="condition" value="_r_==_u_q_this, _ta_1_q_this"/>
-   </properties>
-  </object>
- </objectgroup>
+ <objectgroup color="#ffff00" id="22" name="quest"/>
  <objectgroup color="#ff55ff" id="20" name="event">
   <object id="82" name="found_grace_ribbon" type="discover" x="288" y="96" width="144" height="120"/>
-  <object id="83" name="cave_not_yet_found" type="discover" x="456" y="582" width="96" height="6"/>
+  <object id="83" name="cave_not_yet_found" type="discover" x="456" y="594" width="54" height="6"/>
   <object id="89" name="guide_event_quest" type="discover" x="264" y="312" width="528" height="24"/>
  </objectgroup>
 </map>

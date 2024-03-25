@@ -16,8 +16,7 @@
     "type"          : "conversation",
     "condition"     : ["_r_==_u_q_quest_grace_is_missing", "_ta_1_q_quest_grace_is_missing"],
     "conversationId": "dont_go_south",
-    "entityId"      : "mozes",
-    "doesRepeat"    : true
+    "entityId"      : "mozes"
   },
   "found_honeywood_cave": {
     "type"          : "conversation",
