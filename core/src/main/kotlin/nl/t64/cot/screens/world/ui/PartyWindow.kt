@@ -12,34 +12,32 @@ import ktx.assets.disposeSafely
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.resourceManager
+import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.PartyContainer
 import nl.t64.cot.constants.Constant
 
 
 private const val FONT_PATH = "fonts/spectral_extra_bold_20.ttf"
 private const val FONT_BIG_PATH = "fonts/spectral_extra_bold_28.ttf"
+
 private val TRANSPARENT_BLACK = Color(0f, 0f, 0f, 0.8f)
 private val TRANSPARENT_WHITE = Color(1f, 1f, 1f, 0.3f)
 private val TRANSPARENT_FACES = Color(1f, 1f, 1f, 0.7f)
-private val TRANSPARENT_DEATH = Color(0x3f3f3fc0)
+private val TRANSPARENT_DEATH = Color(0.25f, 0.25f, 0.25f, 0.75f)
 
 private const val FONT_BIG_SIZE = 28
 private const val FONT_SIZE = 20
 
 private const val LINE_HEIGHT = 22f
 private const val PADDING = 10f
-private const val PADDING_SMALL = 5f
-private const val PADDING_NAME = 7f
-private const val PADDING_LEVEL = 12f
-private const val PADDING_LINE = PADDING + PADDING_SMALL
-private const val FACE_Y = 90f
-private const val TABLE_WIDTH = Constant.FACE_SIZE * PartyContainer.MAXIMUM + PADDING * (PartyContainer.MAXIMUM - 1f)
-private const val TABLE_HEIGHT = FACE_Y + Constant.FACE_SIZE
-private const val HIGH_Y = 0f
-private const val LOW_Y = -TABLE_HEIGHT
+private const val LABEL_LEFT_MARGIN = 7f
+private const val TABLE_WIDTH = PADDING + Constant.FACE_SIZE + Constant.FACE_SIZE
+private const val TABLE_HEIGHT = (Constant.FACE_SIZE * PartyContainer.MAXIMUM) + (PADDING * (PartyContainer.MAXIMUM - 1f))
+private const val HIGH_X = 0f
+private const val LOW_X = -TABLE_WIDTH
 
 private const val BAR_X = 50f
-private const val BAR_Y = -4f
+private const val BAR_Y = -7f
 private const val BAR_WIDTH = 85f
 private const val BAR_HEIGHT = 12f
 
@@ -47,19 +45,19 @@ private const val VELOCITY = 800f
 
 internal class PartyWindow {
 
-    private lateinit var party: PartyContainer
+    private val party: PartyContainer get() = gameData.party
 
     private val font = resourceManager.getTrueTypeAsset(FONT_PATH, FONT_SIZE)
     private val fontBig = resourceManager.getTrueTypeAsset(FONT_BIG_PATH, FONT_BIG_SIZE)
     private val shapeRenderer = ShapeRenderer()
 
-    private var yPos = LOW_Y
-    private var isMovingUp = false
-    private var isMovingDown = false
+    private var xPos = LOW_X
+    private var isMovingIn = false
+    private var isMovingOut = false
 
     private val table = Table().apply {
         setSize(TABLE_WIDTH, TABLE_HEIGHT)
-        setPosition((Gdx.graphics.width - TABLE_WIDTH) / 2f, 0f)
+        setPosition(0f, (Gdx.graphics.height - TABLE_HEIGHT) / 2f)
         isVisible = false
     }
     private val stage = Stage().apply {
@@ -74,42 +72,38 @@ internal class PartyWindow {
     }
 
     fun showHide() {
-        if (!isMovingDown && !isMovingUp) {
+        if (!isMovingOut && !isMovingIn) {
             setVisibility()
         }
     }
 
     private fun setVisibility() {
         if (table.isVisible) {
-            isMovingDown = true
+            isMovingOut = true
         } else {
             table.isVisible = true
-            isMovingUp = true
+            isMovingIn = true
         }
     }
 
     fun update(dt: Float) {
-        handleMovingUp(dt)
-        handleMovingDown(dt)
+        handleMovingIn(dt)
+        handleMovingOut(dt)
         handleRendering(dt)
     }
 
-    private fun handleMovingUp(dt: Float) {
-        if (isMovingUp) {
-            yPos += VELOCITY * dt
-            if (yPos >= HIGH_Y) {
-                yPos = HIGH_Y
-                isMovingUp = false
-            }
+    private fun handleMovingIn(dt: Float) {
+        if (isMovingIn) {
+            xPos = (xPos + VELOCITY * dt).coerceAtMost(HIGH_X)
+            isMovingIn = xPos != HIGH_X
         }
     }
 
-    private fun handleMovingDown(dt: Float) {
-        if (isMovingDown) {
-            yPos -= VELOCITY * dt
-            if (yPos <= LOW_Y) {
-                yPos = LOW_Y
-                isMovingDown = false
+    private fun handleMovingOut(dt: Float) {
+        if (isMovingOut) {
+            xPos = (xPos - VELOCITY * dt).coerceAtLeast(LOW_X)
+            isMovingOut = xPos != LOW_X
+            if (!isMovingOut) {
                 table.isVisible = false
             }
         }
@@ -124,157 +118,125 @@ internal class PartyWindow {
     }
 
     private fun renderTable() {
-        party = gameData.party // todo, hij hoeft de party niet bij elke fps op te halen.
         table.clear()
-        renderBackgrounds()
-        renderSquares()
-        (0 until party.size).forEach {
-            renderHorizontalLine(it)
-            renderFace(it)
-            renderName(it)
-            renderLevelLabel(it)
-            renderHpLabel(it)
-            renderHpBar(it)
-            renderXpLabel(it)
-            renderXpBar(it)
+        party.forEachWithInvertedIndex { invertedIndex, hero ->
+            renderFaces(invertedIndex, hero)
+            renderBackgrounds(invertedIndex)
+            renderVerticalLine(invertedIndex)
+            renderName(invertedIndex, hero.name)
+            renderLabel(invertedIndex, "Level: ${hero.getLevel()}", 0f)
+            renderLabel(invertedIndex, "HP: ", 1f)
+            renderLabel(invertedIndex, "XP: ", 2f)
+            renderHpBar(invertedIndex, hero)
+            renderXpBar(invertedIndex, hero)
         }
+        renderSquares()
     }
 
-    private fun renderBackgrounds() {
+    private fun renderFaces(invertedIndex: Int, hero: HeroItem) {
+        val image = Utils.getFaceImage(hero.id)
+        image.color = if (hero.isAlive) TRANSPARENT_FACES else TRANSPARENT_DEATH
+        image.setPosition(xPos + PADDING, invertedIndex * (Constant.FACE_SIZE + PADDING))
+        table.addActor(image)
+    }
+
+    private fun renderBackgrounds(invertedIndex: Int) {
         Gdx.gl.glEnable(GL20.GL_BLEND)
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA)
+
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled)
         shapeRenderer.color = TRANSPARENT_WHITE
-        (0 until party.size).forEach {
-            shapeRenderer.rect(
-                table.x + it * Constant.FACE_SIZE + it * PADDING,
-                yPos + PADDING,
-                Constant.FACE_SIZE,
-                FACE_Y - PADDING
-            )
-        }
+        val x = xPos + PADDING + Constant.FACE_SIZE
+        val y = table.y + invertedIndex * (Constant.FACE_SIZE + PADDING)
+        shapeRenderer.rect(x, y, Constant.FACE_SIZE, Constant.FACE_SIZE)
         shapeRenderer.end()
+
         Gdx.gl.glDisable(GL20.GL_BLEND)
+    }
+
+    private fun renderVerticalLine(invertedIndex: Int) {
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line)
+        shapeRenderer.color = TRANSPARENT_BLACK
+        shapeRenderer.line(
+            xPos + PADDING + Constant.FACE_SIZE,
+            table.y + invertedIndex * (Constant.FACE_SIZE + PADDING),
+            xPos + PADDING + Constant.FACE_SIZE,
+            table.y + invertedIndex * (Constant.FACE_SIZE + PADDING) + Constant.FACE_SIZE
+        )
+        shapeRenderer.end()
+    }
+
+    private fun renderName(invertedIndex: Int, heroName: String) {
+        val labelStyle = LabelStyle(fontBig, TRANSPARENT_BLACK)
+        val heroLabel = Label(heroName, labelStyle)
+        heroLabel.setPosition(
+            xPos + PADDING + Constant.FACE_SIZE + LABEL_LEFT_MARGIN,
+            table.y + invertedIndex * (Constant.FACE_SIZE + PADDING) + LINE_HEIGHT
+        )
+        table.addActor(heroLabel)
+    }
+
+    private fun renderLabel(invertedIndex: Int, text: String, offset: Float) {
+        val labelStyle = LabelStyle(font, TRANSPARENT_BLACK)
+        val label = Label(text, labelStyle)
+        label.setPosition(
+            xPos + PADDING + Constant.FACE_SIZE + LABEL_LEFT_MARGIN,
+            table.y + invertedIndex * (Constant.FACE_SIZE + PADDING) - offset * LINE_HEIGHT
+        )
+        table.addActor(label)
+    }
+
+    private fun renderHpBar(invertedIndex: Int, hero: HeroItem) {
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled)
+        val hpStats = hero.getAllHpStats()
+        val color = Utils.getHpColor(hpStats)
+        shapeRenderer.color = color
+        drawBar(invertedIndex, 1f, hero.hpBarWidth)
+        shapeRenderer.end()
+        drawBarOutline(invertedIndex, 1f)
+    }
+
+    private fun renderXpBar(invertedIndex: Int, hero: HeroItem) {
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled)
+        shapeRenderer.color = Color.MAROON
+        drawBar(invertedIndex, 2f, hero.xpBarWidth)
+        shapeRenderer.end()
+        drawBarOutline(invertedIndex, 2f)
     }
 
     private fun renderSquares() {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line)
         shapeRenderer.color = TRANSPARENT_BLACK
-        (0 until PartyContainer.MAXIMUM).forEach {
-            shapeRenderer.rect(
-                table.x + it * Constant.FACE_SIZE + it * PADDING,
-                yPos + PADDING,
-                Constant.FACE_SIZE,
-                TABLE_HEIGHT - PADDING
-            )
+        party.forEachIndexToMaximum { index ->
+            val x = xPos + PADDING
+            val y = table.y + index * (Constant.FACE_SIZE + PADDING)
+            val width = TABLE_WIDTH - PADDING
+            shapeRenderer.rect(x, y, width, Constant.FACE_SIZE)
         }
         shapeRenderer.end()
     }
 
-    private fun renderHorizontalLine(i: Int) {
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line)
-        shapeRenderer.color = TRANSPARENT_BLACK
-        shapeRenderer.line(
-            table.x + i * Constant.FACE_SIZE + i * PADDING,
-            yPos + FACE_Y,
-            table.x + i * Constant.FACE_SIZE + i * PADDING + Constant.FACE_SIZE,
-            yPos + FACE_Y
-        )
-        shapeRenderer.end()
+    private val HeroItem.hpBarWidth: Float get() {
+        return BAR_WIDTH / getMaximumHp() * getCurrentHp()
     }
 
-    private fun renderFace(i: Int) {
-        val hero = party.getHero(i)
-        val image = Utils.getFaceImage(hero.id)
-        image.color = TRANSPARENT_FACES
-        if (!hero.isAlive) image.color = TRANSPARENT_DEATH
-        image.setPosition(i * Constant.FACE_SIZE + i * PADDING, yPos + FACE_Y)
-        table.addActor(image)
-    }
-
-    private fun renderName(i: Int) {
-        val labelStyle = LabelStyle(fontBig, TRANSPARENT_BLACK)
-        val heroName = party.getHero(i).name
-        val heroLabel = Label(heroName, labelStyle)
-        heroLabel.setPosition(
-            i * Constant.FACE_SIZE + i * PADDING + PADDING_SMALL,
-            yPos + FACE_Y - PADDING_NAME
-        )
-        table.addActor(heroLabel)
-    }
-
-    private fun renderLevelLabel(i: Int) {
-        val labelStyle = LabelStyle(font, TRANSPARENT_BLACK)
-        val heroLevel = party.getHero(i).getLevel()
-        val levelLabel = Label("Level: $heroLevel", labelStyle)
-        levelLabel.setPosition(
-            i * Constant.FACE_SIZE + i * PADDING + PADDING_SMALL,
-            yPos + FACE_Y - 1f * LINE_HEIGHT - PADDING_LEVEL
-        )
-        table.addActor(levelLabel)
-    }
-
-    private fun renderHpLabel(i: Int) {
-        val labelStyle = LabelStyle(font, TRANSPARENT_BLACK)
-        val hpLabel = Label("HP: ", labelStyle)
-        hpLabel.setPosition(
-            i * Constant.FACE_SIZE + i * PADDING + PADDING_SMALL,
-            yPos + FACE_Y - 2f * LINE_HEIGHT - PADDING_LINE
-        )
-        table.addActor(hpLabel)
-    }
-
-    private fun renderHpBar(i: Int) {
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled)
-        val hero = party.getHero(i)
-        val hpStats = hero.getAllHpStats()
-        val color = Utils.getHpColor(hpStats)
-        shapeRenderer.color = color
-        val barWidth = BAR_WIDTH / hero.getMaximumHp() * hero.getCurrentHp()
-        renderBar(i, 2f, barWidth)
-        shapeRenderer.end()
-        renderBarOutline(i, 2f)
-    }
-
-    private fun renderXpLabel(i: Int) {
-        val labelStyle = LabelStyle(font, TRANSPARENT_BLACK)
-        val xpLabel = Label("XP: ", labelStyle)
-        xpLabel.setPosition(
-            i * Constant.FACE_SIZE + i * PADDING + PADDING_SMALL,
-            yPos + FACE_Y - 3f * LINE_HEIGHT - PADDING_LINE
-        )
-        table.addActor(xpLabel)
-    }
-
-    private fun renderXpBar(i: Int) {
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled)
-        shapeRenderer.color = Color.MAROON
-        renderBar(i, 3f, calculateXpBarWidth(i))
-        shapeRenderer.end()
-        renderBarOutline(i, 3f)
-    }
-
-    private fun calculateXpBarWidth(i: Int): Float {
-        val hero = party.getHero(i)
-        val maxXp = hero.xpDeltaBetweenLevels
-        val currentXp = maxXp - hero.xpNeededForNextLevel
+    private val HeroItem.xpBarWidth: Float get() {
+        val maxXp = xpDeltaBetweenLevels
+        val currentXp = maxXp - xpNeededForNextLevel
         return BAR_WIDTH / maxXp * currentXp
     }
 
-    private fun renderBarOutline(i: Int, linePosition: Float) {
+    private fun drawBarOutline(invertedIndex: Int, linePosition: Float) {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line)
         shapeRenderer.color = TRANSPARENT_BLACK
-        renderBar(i, linePosition, BAR_WIDTH)
+        drawBar(invertedIndex, linePosition, BAR_WIDTH)
         shapeRenderer.end()
     }
 
-    private fun renderBar(partyNumber: Int, linePosition: Float, barWidth: Float) {
-        shapeRenderer.rect(
-            table.x + partyNumber * Constant.FACE_SIZE + partyNumber * PADDING + BAR_X,
-            yPos + FACE_Y - linePosition * LINE_HEIGHT + BAR_Y,
-            barWidth,
-            BAR_HEIGHT
-        )
+    private fun drawBar(invertedIndex: Int, linePosition: Float, barWidth: Float) {
+        val x = xPos + PADDING + Constant.FACE_SIZE + BAR_X
+        val y = table.y + Constant.FACE_SIZE + invertedIndex * (Constant.FACE_SIZE + PADDING) - (linePosition + 2f) * LINE_HEIGHT + BAR_Y
+        shapeRenderer.rect(x, y, barWidth, BAR_HEIGHT)
     }
 
 }

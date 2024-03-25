@@ -17,6 +17,17 @@ class PartyContainer {
     val isFull: Boolean get() = size >= MAXIMUM
     val size: Int get() = party.size
 
+    fun forEachWithInvertedIndex(action: (index: Int, hero: HeroItem) -> Unit) {
+        party.entries.forEachIndexed { index, entry ->
+            val invertedIndex = MAXIMUM - 1 - index
+            action(invertedIndex, entry.value)
+        }
+    }
+
+    fun forEachIndexToMaximum(action: (index: Int) -> Unit) {
+        (0 until MAXIMUM).forEach { action(it) }
+    }
+
     fun gainXp(amount: Int, levelUpMessage: StringBuilder) {
         getAllHeroesAlive().forEach { it.gainXp(amount, levelUpMessage) }
     }

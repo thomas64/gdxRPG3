@@ -10,13 +10,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.disposeAndClear
 import kotlin.math.abs
+import kotlin.math.cbrt
 import kotlin.math.max
 
 
 private const val START_ANGLE = 90f
 private const val SIZE = 150f
 private const val PAD_RIGHT = 175f
-private const val PAD_BOTTOM = 25f
+private const val PAD_TOP = 25f
 private const val ALPHA = 0.8f
 
 class AnalogClock : Table() {
@@ -28,7 +29,7 @@ class AnalogClock : Table() {
         display.setPosition(0f, 0f)
         super.addActor(display)
         super.setSize(SIZE, SIZE)
-        super.setPosition(Gdx.graphics.width - PAD_RIGHT, PAD_BOTTOM)
+        super.setPosition(Gdx.graphics.width - PAD_RIGHT, Gdx.graphics.height - SIZE - PAD_TOP)
         super.setColor(Constant.LIGHT_RED)
     }
 
@@ -71,9 +72,9 @@ class AnalogClock : Table() {
         pixmap.blending = Blending.None
         val texture = Texture(pixmap)
         texturesToDispose.add(texture)
-        return Image(texture).apply {
-            setColor(1f, 1f, 1f, ALPHA)
-        }.also { pixmap.dispose() }
+        return Image(texture)
+            .apply { setColor(1f, 1f, 1f, ALPHA) }
+            .also { pixmap.dispose() }
     }
 
     private fun calculateAngle(remainingPercentage: Float): Float {
@@ -81,7 +82,7 @@ class AnalogClock : Table() {
     }
 
     private fun calculateSegments(angle: Float): Int {
-        return max(1, (6f * Math.cbrt(abs(angle).toDouble()) * (abs(angle) / 360f)).toInt())
+        return max(1, (6f * cbrt(abs(angle).toDouble()) * (abs(angle) / 360f)).toInt())
     }
 
 }

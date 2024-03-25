@@ -1,5 +1,6 @@
 package nl.t64.cot.screens.world.ui
 
+import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
@@ -67,7 +68,7 @@ internal class ButtonBox {
         table.columnDefaults(1).width(SECOND_COLUMN_WIDTH + extraMargin)
 
         table.pack()
-        table.setPosition(TABLE_POSITION, TABLE_POSITION)
+        table.setPosition(Gdx.graphics.width - table.width - TABLE_POSITION, TABLE_POSITION)
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line)
         shapeRenderer.color = Color.WHITE

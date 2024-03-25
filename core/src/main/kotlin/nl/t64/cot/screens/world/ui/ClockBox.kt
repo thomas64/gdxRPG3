@@ -23,7 +23,7 @@ private const val LABEL_HEIGHT = 75f
 private const val RADIUS = 77f
 private const val CIRCLE_PAD = 100f
 private const val LABEL_PAD_RIGHT = 25f
-private const val LABEL_PAD_BOTTOM = 66f
+private const val LABEL_PAD_TOP = 60f
 
 internal class ClockBox {
 
@@ -82,7 +82,7 @@ internal class ClockBox {
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA)
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled)
         shapeRenderer.color = Constant.TRANSPARENT
-        shapeRenderer.circle(Gdx.graphics.width - CIRCLE_PAD, CIRCLE_PAD, RADIUS)
+        shapeRenderer.circle(Gdx.graphics.width - CIRCLE_PAD, Gdx.graphics.height - CIRCLE_PAD, RADIUS)
         shapeRenderer.end()
         Gdx.gl.glDisable(GL20.GL_BLEND)
     }
@@ -90,7 +90,7 @@ internal class ClockBox {
     private fun borderCircle() {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line)
         shapeRenderer.color = Color.WHITE
-        shapeRenderer.circle(Gdx.graphics.width - CIRCLE_PAD, CIRCLE_PAD, RADIUS)
+        shapeRenderer.circle(Gdx.graphics.width - CIRCLE_PAD, Gdx.graphics.height - CIRCLE_PAD, RADIUS)
         shapeRenderer.end()
     }
 
@@ -101,7 +101,7 @@ internal class ClockBox {
             width = LABEL_WIDTH
             height = LABEL_HEIGHT
             x = Gdx.graphics.width - width - LABEL_PAD_RIGHT
-            y = LABEL_PAD_BOTTOM
+            y = Gdx.graphics.height - height - LABEL_PAD_TOP
         }
     }
 
