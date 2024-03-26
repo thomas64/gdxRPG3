@@ -64,7 +64,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     private val multiplexer = InputMultiplexer().apply { addProcessor(createListener()) }
     private val shapeRenderer = ShapeRenderer()
     private val clockBox = ClockBox()
-    private val partyWindow = PartyWindow()
+    private val partyWindow = PartyWindow().apply { showHide() }
     private val conversationDialog = ConversationDialog(this)
     private val messageDialog = MessageDialog(multiplexer)
     private val messageTooltip = MessageTooltip()
