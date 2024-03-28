@@ -64,8 +64,8 @@ abstract class GraphicsComponent : Component {
         currentFrame = when (direction) {
             Direction.NORTH -> walkNorthAnimation.getKeyFrame(frameTime1)
             Direction.SOUTH -> walkSouthAnimation.getKeyFrame(frameTime1)
-            Direction.WEST -> walkWestAnimation.getKeyFrame(frameTime1)
-            Direction.EAST -> walkEastAnimation.getKeyFrame(frameTime1)
+            Direction.WEST, Direction.NORTH_WEST, Direction.SOUTH_WEST -> walkWestAnimation.getKeyFrame(frameTime1)
+            Direction.EAST, Direction.NORTH_EAST, Direction.SOUTH_EAST -> walkEastAnimation.getKeyFrame(frameTime1)
             Direction.NONE -> throw IllegalArgumentException("Direction 'NONE' is not usable.")
         }
     }
@@ -111,8 +111,8 @@ abstract class GraphicsComponent : Component {
         return when (direction) {
             Direction.NORTH -> walkNorthAnimation
             Direction.SOUTH -> walkSouthAnimation
-            Direction.WEST -> walkWestAnimation
-            Direction.EAST -> walkEastAnimation
+            Direction.WEST, Direction.NORTH_WEST, Direction.SOUTH_WEST -> walkWestAnimation
+            Direction.EAST, Direction.NORTH_EAST, Direction.SOUTH_EAST -> walkEastAnimation
             Direction.NONE -> throw IllegalArgumentException("No animation for direction NONE.")
         }
     }

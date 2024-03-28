@@ -23,6 +23,10 @@ class PathfindingObstacleChecker(
             Direction.NORTH -> getDirectionWhenBlockersAreNorth()
             Direction.WEST -> getDirectionWhenBlockersAreWest()
             Direction.EAST -> getDirectionWhenBlockersAreEast()
+            Direction.NORTH_WEST -> throw IllegalArgumentException("Direction 'NORTH_WEST' is not usable.")
+            Direction.NORTH_EAST -> throw IllegalArgumentException("Direction 'NORTH_EAST' is not usable.")
+            Direction.SOUTH_WEST -> throw IllegalArgumentException("Direction 'SOUTH_WEST' is not usable.")
+            Direction.SOUTH_EAST -> throw IllegalArgumentException("Direction 'SOUTH_EAST' is not usable.")
             Direction.NONE -> throw IllegalArgumentException("Direction 'NONE' is not usable.")
         }
     }

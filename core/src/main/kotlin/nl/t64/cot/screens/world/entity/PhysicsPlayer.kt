@@ -8,6 +8,7 @@ import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.world.entity.events.*
 import nl.t64.cot.screens.world.map.isOutsideMap
+import kotlin.math.abs
 
 
 class PhysicsPlayer : PhysicsComponent() {
@@ -40,6 +41,7 @@ class PhysicsPlayer : PhysicsComponent() {
     }
 
     override fun update(entity: Entity, dt: Float) {
+        this.entity = entity
         checkActionPressed()
         relocate(dt)
         collisionObstacles(dt)
@@ -73,16 +75,86 @@ class PhysicsPlayer : PhysicsComponent() {
     }
 
     private fun handleBlockers(blockers: List<Rectangle>, dt: Float) {
-        if (blockers.size == 1) {
-            moveSide(blockers[0], dt)
+        if (direction in listOf(Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST)) {
+            if (blockers.size == 1) {
+                moveSide(blockers.first(), dt)
+            }
+            setRoundPosition()
+            if (hasHitAnotherBlockWhileSideStepping()) {
+                return
+            }
+        }
+        repeat(10000) {
+            if (doesBoundingBoxOverlapsBlockers()) {
+                moveBack(blockers)
+                alterDirectionWhenWallGliding()
+            } else return
+        }
+    }
+
+    private enum class OverlapSide { NONE, TOP, BOTTOM, LEFT, RIGHT }
+
+    private fun moveBack(blockers: List<Rectangle>) {
+        blockers.forEach { blocker ->
+            val overlapSide = getOverlapSide(blocker)
+            when {
+                direction == Direction.NORTH -> currentPosition.y -= 1f
+                direction == Direction.SOUTH -> currentPosition.y += 1f
+                direction == Direction.WEST -> currentPosition.x += 1f
+                direction == Direction.EAST -> currentPosition.x -= 1f
+                direction.isNorth() && overlapSide == OverlapSide.BOTTOM -> currentPosition.y -= 1f
+                direction.isSouth() && overlapSide == OverlapSide.TOP -> currentPosition.y += 1f
+                direction.isWest() && overlapSide == OverlapSide.LEFT -> currentPosition.x += 1f
+                direction.isEast() && overlapSide == OverlapSide.RIGHT -> currentPosition.x -= 1f
+                else -> handleEdgeCases(overlapSide)
+            }
         }
         setRoundPosition()
-        if (hasHitAnotherBlockWhileSideStepping()) {
-            return
+    }
+
+    private fun alterDirectionWhenWallGliding() {
+        if (currentPosition.x == oldPosition.x) {
+            when (direction) {
+                Direction.NORTH_WEST, Direction.NORTH_EAST -> entity.send(DirectionEvent(Direction.NORTH))
+                Direction.SOUTH_WEST, Direction.SOUTH_EAST -> entity.send(DirectionEvent(Direction.SOUTH))
+                else -> {}
+            }
         }
-        while (doesBoundingBoxOverlapsBlockers()) {
-            moveBack()
+    }
+
+    private fun handleEdgeCases(overlapSide: OverlapSide) {
+        when (overlapSide) {
+            OverlapSide.RIGHT -> currentPosition.x -= 1f
+            OverlapSide.LEFT -> currentPosition.x += 1f
+            OverlapSide.BOTTOM -> currentPosition.y += 1f
+            OverlapSide.TOP -> currentPosition.y -= 1f
+            OverlapSide.NONE -> {}
         }
+    }
+
+    private fun getOverlapSide(blocker: Rectangle): OverlapSide {
+        val playerCenterX: Float = boundingBox.x + boundingBox.width / 2f
+        val playerCenterY: Float = boundingBox.y + boundingBox.height / 2f
+        val blockerCenterX: Float = blocker.x + blocker.width / 2f
+        val blockerCenterY: Float = blocker.y + blocker.height / 2f
+
+        val dx: Float = playerCenterX - blockerCenterX
+        val dy: Float = playerCenterY - blockerCenterY
+
+        val combinedHalfWidths: Float = boundingBox.width / 2f + blocker.width / 2f
+        val combinedHalfHeights: Float = boundingBox.height / 2f + blocker.height / 2f
+
+        val overlapX: Float = combinedHalfWidths - abs(dx)
+        val overlapY: Float = combinedHalfHeights - abs(dy)
+
+        if (overlapX > 0f && overlapY > 0f) {
+            return if (overlapX >= overlapY) {
+                if (dy > 0f) OverlapSide.TOP else OverlapSide.BOTTOM
+            } else {
+                if (dx > 0f) OverlapSide.LEFT else OverlapSide.RIGHT
+            }
+        }
+        return OverlapSide.NONE
     }
 
     private fun handlePossibleOutsideMap() {
@@ -94,6 +166,26 @@ class PhysicsPlayer : PhysicsComponent() {
                 Direction.SOUTH -> currentPosition.y = oldPosition.y - Constant.HALF_TILE_SIZE
                 Direction.WEST -> currentPosition.x = oldPosition.x - Constant.TILE_SIZE
                 Direction.EAST -> currentPosition.x = oldPosition.x + Constant.TILE_SIZE
+                Direction.NORTH_WEST -> {
+                    currentPosition.y = oldPosition.y + Constant.HALF_TILE_SIZE
+                    currentPosition.x = oldPosition.x - Constant.TILE_SIZE
+                }
+
+                Direction.SOUTH_WEST -> {
+                    currentPosition.y = oldPosition.y - Constant.HALF_TILE_SIZE
+                    currentPosition.x = oldPosition.x - Constant.TILE_SIZE
+                }
+
+                Direction.NORTH_EAST -> {
+                    currentPosition.y = oldPosition.y + Constant.HALF_TILE_SIZE
+                    currentPosition.x = oldPosition.x + Constant.TILE_SIZE
+                }
+
+                Direction.SOUTH_EAST -> {
+                    currentPosition.y = oldPosition.y - Constant.HALF_TILE_SIZE
+                    currentPosition.x = oldPosition.x + Constant.TILE_SIZE
+                }
+
                 Direction.NONE -> throw IllegalArgumentException("Direction 'NONE' is not usable.")
             }
         }
@@ -168,8 +260,8 @@ class PhysicsPlayer : PhysicsComponent() {
         return when (direction) {
             Direction.NORTH -> getNorth()
             Direction.SOUTH -> getSouth()
-            Direction.WEST -> getWest()
-            Direction.EAST -> getEast()
+            Direction.WEST, Direction.NORTH_WEST, Direction.SOUTH_WEST -> getWest()
+            Direction.EAST, Direction.NORTH_EAST, Direction.SOUTH_EAST -> getEast()
             Direction.NONE -> throw IllegalArgumentException("Direction 'NONE' is not usable.")
         }
     }

@@ -62,31 +62,35 @@ class GraphicsPlayer : GraphicsComponent() {
 
     override fun renderOnMiniMap(entity: Entity, batch: Batch, shapeRenderer: ShapeRenderer) {
         shapeRenderer.color = Color.BLUE
+
+        val halfTile: Float = Constant.HALF_TILE_SIZE
+        val fullTile: Float = Constant.TILE_SIZE
+
         when (direction) {
-            Direction.NORTH -> shapeRenderer.triangle(position.x,
-                                                      position.y,
-                                                      position.x + Constant.HALF_TILE_SIZE,
-                                                      position.y + Constant.TILE_SIZE,
-                                                      position.x + Constant.TILE_SIZE,
-                                                      position.y)
-            Direction.SOUTH -> shapeRenderer.triangle(position.x,
-                                                      position.y + Constant.TILE_SIZE,
-                                                      position.x + Constant.TILE_SIZE,
-                                                      position.y + Constant.TILE_SIZE,
-                                                      position.x + Constant.HALF_TILE_SIZE,
-                                                      position.y)
-            Direction.WEST -> shapeRenderer.triangle(position.x,
-                                                     position.y + Constant.HALF_TILE_SIZE,
-                                                     position.x + Constant.TILE_SIZE,
-                                                     position.y + Constant.TILE_SIZE,
-                                                     position.x + Constant.TILE_SIZE,
-                                                     position.y)
-            Direction.EAST -> shapeRenderer.triangle(position.x,
-                                                     position.y,
-                                                     position.x,
-                                                     position.y + Constant.TILE_SIZE,
-                                                     position.x + Constant.TILE_SIZE,
-                                                     position.y + Constant.HALF_TILE_SIZE)
+            Direction.NORTH -> shapeRenderer.triangle(
+                position.x, position.y,
+                position.x + halfTile, position.y + fullTile,
+                position.x + fullTile, position.y)
+
+            Direction.SOUTH -> shapeRenderer.triangle(
+                position.x, position.y + fullTile,
+                position.x + fullTile, position.y + fullTile,
+                position.x + halfTile, position.y)
+
+            Direction.WEST,
+            Direction.NORTH_WEST,
+            Direction.SOUTH_WEST -> shapeRenderer.triangle(
+                position.x, position.y + halfTile,
+                position.x + fullTile, position.y + fullTile,
+                position.x + fullTile, position.y)
+
+            Direction.EAST,
+            Direction.NORTH_EAST,
+            Direction.SOUTH_EAST -> shapeRenderer.triangle(
+                position.x, position.y,
+                position.x, position.y + fullTile,
+                position.x + fullTile, position.y + halfTile)
+
             Direction.NONE -> throw IllegalArgumentException("Direction 'NONE' is not usable.")
         }
     }
@@ -115,11 +119,16 @@ class GraphicsPlayer : GraphicsComponent() {
         return if (lastFeetPosition == feetPosition) {
             feetPosition
         } else {
+            val quarterMoveSpeed: Float = moveSpeed / 4f
             when (direction) {
-                Direction.NORTH -> Vector2(feetPosition.x, feetPosition.y + (moveSpeed / 4f))
-                Direction.SOUTH -> Vector2(feetPosition.x, feetPosition.y - (moveSpeed / 4f))
-                Direction.WEST -> Vector2(feetPosition.x - (moveSpeed / 4f), feetPosition.y)
-                Direction.EAST -> Vector2(feetPosition.x + (moveSpeed / 4f), feetPosition.y)
+                Direction.NORTH -> Vector2(feetPosition.x, feetPosition.y + quarterMoveSpeed)
+                Direction.SOUTH -> Vector2(feetPosition.x, feetPosition.y - quarterMoveSpeed)
+                Direction.WEST -> Vector2(feetPosition.x - quarterMoveSpeed, feetPosition.y)
+                Direction.EAST -> Vector2(feetPosition.x + quarterMoveSpeed, feetPosition.y)
+                Direction.NORTH_WEST -> Vector2(feetPosition.x - quarterMoveSpeed, feetPosition.y + quarterMoveSpeed)
+                Direction.NORTH_EAST -> Vector2(feetPosition.x + quarterMoveSpeed, feetPosition.y + quarterMoveSpeed)
+                Direction.SOUTH_WEST -> Vector2(feetPosition.x - quarterMoveSpeed, feetPosition.y - quarterMoveSpeed)
+                Direction.SOUTH_EAST -> Vector2(feetPosition.x + quarterMoveSpeed, feetPosition.y - quarterMoveSpeed)
                 Direction.NONE -> throw IllegalArgumentException("Direction 'NONE' is not usable.")
             }
         }

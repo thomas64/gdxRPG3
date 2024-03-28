@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.world.entity.events.CollisionEvent
+import nl.t64.cot.screens.world.map.isOutsideMap
 import kotlin.math.roundToInt
 
 
@@ -69,24 +70,63 @@ abstract class PhysicsComponent : Component {
     }
 
     fun move(dt: Float) {
-        oldPosition.set(currentPosition.x.roundToInt().toFloat(), currentPosition.y.roundToInt().toFloat())
+        possibleSetOldPosition()
 
         when (direction) {
             Direction.NORTH -> currentPosition.y += velocity * dt
             Direction.SOUTH -> currentPosition.y -= velocity * dt
             Direction.WEST -> currentPosition.x -= velocity * dt
             Direction.EAST -> currentPosition.x += velocity * dt
+            Direction.NORTH_WEST -> {
+                currentPosition.y += velocity * dt
+                currentPosition.x -= velocity * dt
+            }
+            Direction.NORTH_EAST -> {
+                currentPosition.y += velocity * dt
+                currentPosition.x += velocity * dt
+            }
+            Direction.SOUTH_WEST -> {
+                currentPosition.y -= velocity * dt
+                currentPosition.x -= velocity * dt
+            }
+            Direction.SOUTH_EAST -> {
+                currentPosition.y -= velocity * dt
+                currentPosition.x += velocity * dt
+            }
             Direction.NONE -> throw IllegalArgumentException("Direction 'NONE' is not usable.")
         }
         setRoundPosition()
     }
 
-    fun moveBack() {
+    private fun possibleSetOldPosition() {
+        setRoundPosition()
+        if (!currentPosition.isOutsideMap() && !doesBoundingBoxOverlapsBlockers()) {
+            oldPosition.set(currentPosition.x.roundToInt().toFloat(), currentPosition.y.roundToInt().toFloat())
+        }
+    }
+
+    private fun moveBack() {
         when (direction) {
             Direction.NORTH -> currentPosition.y -= 1f
             Direction.SOUTH -> currentPosition.y += 1f
             Direction.WEST -> currentPosition.x += 1f
             Direction.EAST -> currentPosition.x -= 1f
+            Direction.NORTH_WEST -> {
+                currentPosition.y -= 1f
+                currentPosition.x += 1f
+            }
+            Direction.NORTH_EAST -> {
+                currentPosition.y -= 1f
+                currentPosition.x -= 1f
+            }
+            Direction.SOUTH_WEST -> {
+                currentPosition.y += 1f
+                currentPosition.x += 1f
+            }
+            Direction.SOUTH_EAST -> {
+                currentPosition.y += 1f
+                currentPosition.x -= 1f
+            }
             Direction.NONE -> throw IllegalArgumentException("Direction 'NONE' is not usable.")
         }
         setRoundPosition()

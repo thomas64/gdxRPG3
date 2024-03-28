@@ -24,10 +24,6 @@ class InputPlayer(multiplexer: InputMultiplexer) : InputComponent(), InputProces
 
     private var pressAlign = false
 
-    private var timeUp = 0
-    private var timeDown = 0
-    private var timeLeft = 0
-    private var timeRight = 0
     private var turnDelay = 0f
     private var turnGrace = 0f
 
@@ -137,10 +133,6 @@ class InputPlayer(multiplexer: InputMultiplexer) : InputComponent(), InputProces
 
         pressAlign = false
 
-        timeUp = 0
-        timeDown = 0
-        timeLeft = 0
-        timeRight = 0
         turnDelay = 0f
         turnGrace = 0f
 
@@ -151,10 +143,9 @@ class InputPlayer(multiplexer: InputMultiplexer) : InputComponent(), InputProces
 
     private fun processMoveInput(dt: Float) {
         processPlayerSpeedInput()
-        countKeyDownTime()
         ifNoMoveKeys_SetGracePeriod(dt)
         ifNoMoveKeys_SetPlayerIdle()
-        setPossibleTurnDelay()
+        ifStandingStill_SetTurnDelay()
         setPlayerDirection()
         ifMoveKeys_SetPlayerWalking(dt)
     }
@@ -179,25 +170,6 @@ class InputPlayer(multiplexer: InputMultiplexer) : InputComponent(), InputProces
         player.send(SpeedEvent(moveSpeed))
     }
 
-    private fun countKeyDownTime() {
-        when {
-            pressUp -> timeUp += 1
-            else -> timeUp = 0
-        }
-        when {
-            pressDown -> timeDown += 1
-            else -> timeDown = 0
-        }
-        when {
-            pressLeft -> timeLeft += 1
-            else -> timeLeft = 0
-        }
-        when {
-            pressRight -> timeRight += 1
-            else -> timeRight = 0
-        }
-    }
-
     private fun ifNoMoveKeys_SetGracePeriod(dt: Float) {
         if (!areMoveKeysPressed()
             && turnGrace < TURN_GRACE_MAX_VALUE
@@ -213,13 +185,13 @@ class InputPlayer(multiplexer: InputMultiplexer) : InputComponent(), InputProces
         }
     }
 
-    private fun setPossibleTurnDelay() {
+    private fun ifStandingStill_SetTurnDelay() {
         if (turnDelay <= 0f
             && turnGrace > TURN_DELAY_GRACE_PERIOD
             && (isPressUpButDirectionIsNotYetNorth()
-                    || isPressDownButDirectionIsNotYetSouth()
-                    || isPressLeftButDirectionIsNotYetWest()
-                    || isPressRightButDirectionIsNotYetEast())
+                || isPressDownButDirectionIsNotYetSouth()
+                || isPressLeftButDirectionIsNotYetWest()
+                || isPressRightButDirectionIsNotYetEast())
         ) {
             turnDelay = TURN_DELAY_TIME
         }
@@ -227,10 +199,10 @@ class InputPlayer(multiplexer: InputMultiplexer) : InputComponent(), InputProces
 
     private fun setPlayerDirection() {
         when {
-            pressUp && isTimeUpLess() -> direction = Direction.NORTH
-            pressDown && isTimeDownLess() -> direction = Direction.SOUTH
-            pressLeft && isTimeLeftLess() -> direction = Direction.WEST
-            pressRight && isTimeRightLess() -> direction = Direction.EAST
+            pressLeft && pressUp -> direction = Direction.NORTH_WEST
+            pressRight && pressUp -> direction = Direction.NORTH_EAST
+            pressLeft && pressDown -> direction = Direction.SOUTH_WEST
+            pressRight && pressDown -> direction = Direction.SOUTH_EAST
 
             pressUp -> direction = Direction.NORTH
             pressDown -> direction = Direction.SOUTH
@@ -253,39 +225,30 @@ class InputPlayer(multiplexer: InputMultiplexer) : InputComponent(), InputProces
     }
 
     private fun areMoveKeysPressed(): Boolean {
-        return pressUp || pressDown || pressLeft || pressRight
+        val pressedCount = listOf(pressUp, pressDown, pressLeft, pressRight).count { it }
+        if (pressedCount == 0 || pressedCount == 3 || pressedCount == 4) {
+            return false
+        }
+        if ((pressLeft && pressRight) || (pressUp && pressDown)) {
+            return false
+        }
+        return true
     }
 
     private fun isPressUpButDirectionIsNotYetNorth(): Boolean {
-        return pressUp && direction != Direction.NORTH
+        return pressUp && !direction.isNorth()
     }
 
     private fun isPressDownButDirectionIsNotYetSouth(): Boolean {
-        return pressDown && direction != Direction.SOUTH
+        return pressDown && !direction.isSouth()
     }
 
     private fun isPressLeftButDirectionIsNotYetWest(): Boolean {
-        return pressLeft && direction != Direction.WEST
+        return pressLeft && !direction.isWest()
     }
 
     private fun isPressRightButDirectionIsNotYetEast(): Boolean {
-        return pressRight && direction != Direction.EAST
-    }
-
-    private fun isTimeRightLess(): Boolean {
-        return listOf(timeUp, timeDown, timeLeft).any { timeRight <= it }
-    }
-
-    private fun isTimeLeftLess(): Boolean {
-        return listOf(timeUp, timeDown, timeRight).any { timeLeft <= it }
-    }
-
-    private fun isTimeDownLess(): Boolean {
-        return listOf(timeUp, timeLeft, timeRight).any { timeDown <= it }
-    }
-
-    private fun isTimeUpLess(): Boolean {
-        return listOf(timeDown, timeLeft, timeRight).any { timeUp <= it }
+        return pressRight && !direction.isEast()
     }
 
 }
