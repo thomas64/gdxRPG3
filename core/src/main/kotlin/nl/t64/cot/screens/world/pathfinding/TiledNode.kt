@@ -6,7 +6,7 @@ import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.screens.world.entity.EntityState
 
 
-private const val MAX_CONNECTIONS = 4
+private const val MAX_CONNECTIONS = 8
 
 class TiledNode(val x: Int, val y: Int) {
 

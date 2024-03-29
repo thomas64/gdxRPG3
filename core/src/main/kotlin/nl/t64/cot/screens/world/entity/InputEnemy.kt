@@ -107,6 +107,10 @@ class InputEnemy : InputComponent() {
 
     private fun getFollowDirection(nodePosition: Vector2, currentGridPosition: Vector2): Direction {
         return when {
+            nodePosition.y > currentGridPosition.y && nodePosition.x < currentGridPosition.x -> Direction.NORTH_WEST
+            nodePosition.y > currentGridPosition.y && nodePosition.x > currentGridPosition.x -> Direction.NORTH_EAST
+            nodePosition.y < currentGridPosition.y && nodePosition.x < currentGridPosition.x -> Direction.SOUTH_WEST
+            nodePosition.y < currentGridPosition.y && nodePosition.x > currentGridPosition.x -> Direction.SOUTH_EAST
             nodePosition.y > currentGridPosition.y -> Direction.NORTH
             nodePosition.y < currentGridPosition.y -> Direction.SOUTH
             nodePosition.x < currentGridPosition.x -> Direction.WEST

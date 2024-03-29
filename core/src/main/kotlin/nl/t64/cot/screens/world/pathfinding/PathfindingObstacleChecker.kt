@@ -23,10 +23,10 @@ class PathfindingObstacleChecker(
             Direction.NORTH -> getDirectionWhenBlockersAreNorth()
             Direction.WEST -> getDirectionWhenBlockersAreWest()
             Direction.EAST -> getDirectionWhenBlockersAreEast()
-            Direction.NORTH_WEST -> throw IllegalArgumentException("Direction 'NORTH_WEST' is not usable.")
-            Direction.NORTH_EAST -> throw IllegalArgumentException("Direction 'NORTH_EAST' is not usable.")
-            Direction.SOUTH_WEST -> throw IllegalArgumentException("Direction 'SOUTH_WEST' is not usable.")
-            Direction.SOUTH_EAST -> throw IllegalArgumentException("Direction 'SOUTH_EAST' is not usable.")
+            Direction.NORTH_WEST -> getDirectionWhenBlockersAreNorthWest()
+            Direction.NORTH_EAST -> getDirectionWhenBlockersAreNorthEast()
+            Direction.SOUTH_WEST -> getDirectionWhenBlockersAreSouthWest()
+            Direction.SOUTH_EAST -> getDirectionWhenBlockersAreSouthEast()
             Direction.NONE -> throw IllegalArgumentException("Direction 'NONE' is not usable.")
         }
     }
@@ -60,6 +60,38 @@ class PathfindingObstacleChecker(
             blockers.isBlockerBlockingGridPoint(x + 1, y + 1, state) -> Direction.SOUTH
             blockers.isBlockerBlockingGridPoint(x + 1, y - 1, state) -> Direction.NORTH
             else -> Direction.EAST
+        }
+    }
+
+    private fun getDirectionWhenBlockersAreNorthWest(): Direction {
+        return when {
+            blockers.isBlockerBlockingGridPoint(x + 1, y + 1, state) -> Direction.WEST
+            blockers.isBlockerBlockingGridPoint(x - 1, y - 1, state) -> Direction.NORTH
+            else -> Direction.NORTH_WEST
+        }
+    }
+
+    private fun getDirectionWhenBlockersAreNorthEast(): Direction {
+        return when {
+            blockers.isBlockerBlockingGridPoint(x - 1, y + 1, state) -> Direction.EAST
+            blockers.isBlockerBlockingGridPoint(x + 1, y - 1, state) -> Direction.NORTH
+            else -> Direction.NORTH_EAST
+        }
+    }
+
+    private fun getDirectionWhenBlockersAreSouthWest(): Direction {
+        return when {
+            blockers.isBlockerBlockingGridPoint(x + 1, y - 1, state) -> Direction.WEST
+            blockers.isBlockerBlockingGridPoint(x - 1, y + 1, state) -> Direction.SOUTH
+            else -> Direction.SOUTH_WEST
+        }
+    }
+
+    private fun getDirectionWhenBlockersAreSouthEast(): Direction {
+        return when {
+            blockers.isBlockerBlockingGridPoint(x - 1, y - 1, state) -> Direction.EAST
+            blockers.isBlockerBlockingGridPoint(x + 1, y + 1, state) -> Direction.SOUTH
+            else -> Direction.SOUTH_EAST
         }
     }
 
