@@ -19,6 +19,8 @@ enum class Direction {
     fun isSouth() = this in listOf(SOUTH, SOUTH_WEST, SOUTH_EAST)
     fun isWest() = this in listOf(WEST, NORTH_WEST, SOUTH_WEST)
     fun isEast() = this in listOf(EAST, NORTH_EAST, SOUTH_EAST)
+    fun isOrthogonal() = this in listOf(NORTH, SOUTH, WEST, EAST)
+    fun isDiagonal() = this in listOf(NORTH_WEST, NORTH_EAST, SOUTH_WEST, SOUTH_EAST)
 
     companion object {
         fun getRandom(): Direction {

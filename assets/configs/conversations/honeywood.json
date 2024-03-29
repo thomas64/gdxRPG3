@@ -186,8 +186,8 @@
       "1": {"text": ["I'm a traveling priest from the city.", "Young man, do you want to be saved?"]},
       "2": {
         "choices": [
-          {"text": "*Question what there is you need to be saved from, but accept.* (Save game)", "nextId": "3"},
-          {"text": "*Say you're feeling content with your current state. Take your leave.*", "command": "EXIT"}
+          {"text": "*What is it you need to be saved from?* (Save game)", "nextId": "3"},
+          {"text": "*Not necessary, you're doing pretty well. Take your leave.*", "command": "EXIT"}
         ]
       },
       "3": {"text": ["Your soul is now destined for God."], "choices": [{"command": "SAVE_GAME"}]}

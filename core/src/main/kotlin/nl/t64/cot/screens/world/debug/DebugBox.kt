@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Align
-import nl.t64.cot.CrystalOfTime
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.preferenceManager
@@ -114,6 +113,9 @@ internal class DebugBox(
         table.row()
         table.add("state:")
         table.add(player.state.toString())
+        table.row()
+        table.add("moveSpeed:")
+        table.add(player.moveSpeed.toString())
         table.row()
         table.add("").row()
 

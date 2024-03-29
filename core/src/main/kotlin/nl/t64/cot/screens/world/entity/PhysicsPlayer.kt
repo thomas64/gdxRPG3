@@ -3,11 +3,9 @@ package nl.t64.cot.screens.world.entity
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Rectangle
-import com.badlogic.gdx.math.Vector2
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.world.entity.events.*
-import nl.t64.cot.screens.world.map.isOutsideMap
 import kotlin.math.abs
 
 
@@ -67,82 +65,72 @@ class PhysicsPlayer : PhysicsComponent() {
     }
 
     private fun collisionBlockers(dt: Float) {
-        val blockers = brokerManager.blockObservers.getCurrentBlockersFor(boundingBox, state)
-        if (blockers.isNotEmpty()) {
-            handleBlockers(blockers, dt)
-            handlePossibleOutsideMap()
-        }
-    }
-
-    private fun handleBlockers(blockers: List<Rectangle>, dt: Float) {
-        if (direction in listOf(Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST)) {
-            if (blockers.size == 1) {
-                moveSide(blockers.first(), dt)
+        brokerManager.blockObservers.getCurrentBlockersFor(boundingBox, state)
+            .forEach {blocker ->
+                moveSide(blocker, dt)
+                moveBack(blocker.getOverlapSide())
             }
-            setRoundPosition()
-            if (hasHitAnotherBlockWhileSideStepping()) {
-                return
-            }
-        }
-        repeat(10000) {
-            if (doesBoundingBoxOverlapsBlockers()) {
-                moveBack(blockers)
-                alterDirectionWhenWallGliding()
-            } else return
-        }
     }
 
     private enum class OverlapSide { NONE, TOP, BOTTOM, LEFT, RIGHT }
 
-    private fun moveBack(blockers: List<Rectangle>) {
-        blockers.forEach { blocker ->
-            val overlapSide = getOverlapSide(blocker)
-            when {
-                direction == Direction.NORTH -> currentPosition.y -= 1f
-                direction == Direction.SOUTH -> currentPosition.y += 1f
-                direction == Direction.WEST -> currentPosition.x += 1f
-                direction == Direction.EAST -> currentPosition.x -= 1f
-                direction.isNorth() && overlapSide == OverlapSide.BOTTOM -> currentPosition.y -= 1f
-                direction.isSouth() && overlapSide == OverlapSide.TOP -> currentPosition.y += 1f
-                direction.isWest() && overlapSide == OverlapSide.LEFT -> currentPosition.x += 1f
-                direction.isEast() && overlapSide == OverlapSide.RIGHT -> currentPosition.x -= 1f
-                else -> handleEdgeCases(overlapSide)
+    private fun moveBack(overlapSide: OverlapSide) {
+        when {
+            direction == Direction.NORTH -> currentPosition.y = oldPosition.y
+            direction == Direction.SOUTH -> currentPosition.y = oldPosition.y
+            direction == Direction.WEST -> currentPosition.x = oldPosition.x
+            direction == Direction.EAST -> currentPosition.x = oldPosition.x
+
+            direction == Direction.NORTH_WEST && overlapSide == OverlapSide.BOTTOM -> {
+                currentPosition.y = oldPosition.y
+            }
+            direction == Direction.NORTH_WEST && overlapSide == OverlapSide.RIGHT -> {
+                currentPosition.x = oldPosition.x
+                alterDirectionForWallGliding(Direction.NORTH)
+            }
+
+            direction == Direction.NORTH_EAST && overlapSide == OverlapSide.BOTTOM -> {
+                currentPosition.y = oldPosition.y
+            }
+            direction == Direction.NORTH_EAST && overlapSide == OverlapSide.LEFT -> {
+                currentPosition.x = oldPosition.x
+                alterDirectionForWallGliding(Direction.NORTH)
+            }
+
+            direction == Direction.SOUTH_WEST && overlapSide == OverlapSide.TOP -> {
+                currentPosition.y = oldPosition.y
+            }
+            direction == Direction.SOUTH_WEST && overlapSide == OverlapSide.RIGHT -> {
+                currentPosition.x = oldPosition.x
+                alterDirectionForWallGliding(Direction.SOUTH)
+            }
+
+            direction == Direction.SOUTH_EAST && overlapSide == OverlapSide.TOP -> {
+                currentPosition.y = oldPosition.y
+            }
+            direction == Direction.SOUTH_EAST && overlapSide == OverlapSide.LEFT -> {
+                currentPosition.x = oldPosition.x
+                alterDirectionForWallGliding(Direction.SOUTH)
             }
         }
-        setRoundPosition()
     }
 
-    private fun alterDirectionWhenWallGliding() {
-        if (currentPosition.x == oldPosition.x) {
-            when (direction) {
-                Direction.NORTH_WEST, Direction.NORTH_EAST -> entity.send(DirectionEvent(Direction.NORTH))
-                Direction.SOUTH_WEST, Direction.SOUTH_EAST -> entity.send(DirectionEvent(Direction.SOUTH))
-                else -> {}
-            }
-        }
+    private fun alterDirectionForWallGliding(newDirection: Direction) {
+        direction = newDirection
+        entity.send(DirectionEvent(newDirection))
     }
 
-    private fun handleEdgeCases(overlapSide: OverlapSide) {
-        when (overlapSide) {
-            OverlapSide.RIGHT -> currentPosition.x -= 1f
-            OverlapSide.LEFT -> currentPosition.x += 1f
-            OverlapSide.BOTTOM -> currentPosition.y += 1f
-            OverlapSide.TOP -> currentPosition.y -= 1f
-            OverlapSide.NONE -> {}
-        }
-    }
-
-    private fun getOverlapSide(blocker: Rectangle): OverlapSide {
+    private fun Rectangle.getOverlapSide(): OverlapSide {
         val playerCenterX: Float = boundingBox.x + boundingBox.width / 2f
         val playerCenterY: Float = boundingBox.y + boundingBox.height / 2f
-        val blockerCenterX: Float = blocker.x + blocker.width / 2f
-        val blockerCenterY: Float = blocker.y + blocker.height / 2f
+        val blockerCenterX: Float = this.x + this.width / 2f
+        val blockerCenterY: Float = this.y + this.height / 2f
 
         val dx: Float = playerCenterX - blockerCenterX
         val dy: Float = playerCenterY - blockerCenterY
 
-        val combinedHalfWidths: Float = boundingBox.width / 2f + blocker.width / 2f
-        val combinedHalfHeights: Float = boundingBox.height / 2f + blocker.height / 2f
+        val combinedHalfWidths: Float = boundingBox.width / 2f + this.width / 2f
+        val combinedHalfHeights: Float = boundingBox.height / 2f + this.height / 2f
 
         val overlapX: Float = combinedHalfWidths - abs(dx)
         val overlapY: Float = combinedHalfHeights - abs(dy)
@@ -151,54 +139,10 @@ class PhysicsPlayer : PhysicsComponent() {
             return if (overlapX >= overlapY) {
                 if (dy > 0f) OverlapSide.TOP else OverlapSide.BOTTOM
             } else {
-                if (dx > 0f) OverlapSide.LEFT else OverlapSide.RIGHT
+                if (dx > 0f) OverlapSide.RIGHT else OverlapSide.LEFT
             }
         }
         return OverlapSide.NONE
-    }
-
-    private fun handlePossibleOutsideMap() {
-        val justALittleBitMore = 4f
-        val xAdjustedCurrentPos = Vector2(currentPosition.x + justALittleBitMore, currentPosition.y)
-        if (xAdjustedCurrentPos.isOutsideMap()) {
-            when (direction) {
-                Direction.NORTH -> currentPosition.y = oldPosition.y + Constant.HALF_TILE_SIZE
-                Direction.SOUTH -> currentPosition.y = oldPosition.y - Constant.HALF_TILE_SIZE
-                Direction.WEST -> currentPosition.x = oldPosition.x - Constant.TILE_SIZE
-                Direction.EAST -> currentPosition.x = oldPosition.x + Constant.TILE_SIZE
-                Direction.NORTH_WEST -> {
-                    currentPosition.y = oldPosition.y + Constant.HALF_TILE_SIZE
-                    currentPosition.x = oldPosition.x - Constant.TILE_SIZE
-                }
-
-                Direction.SOUTH_WEST -> {
-                    currentPosition.y = oldPosition.y - Constant.HALF_TILE_SIZE
-                    currentPosition.x = oldPosition.x - Constant.TILE_SIZE
-                }
-
-                Direction.NORTH_EAST -> {
-                    currentPosition.y = oldPosition.y + Constant.HALF_TILE_SIZE
-                    currentPosition.x = oldPosition.x + Constant.TILE_SIZE
-                }
-
-                Direction.SOUTH_EAST -> {
-                    currentPosition.y = oldPosition.y - Constant.HALF_TILE_SIZE
-                    currentPosition.x = oldPosition.x + Constant.TILE_SIZE
-                }
-
-                Direction.NONE -> throw IllegalArgumentException("Direction 'NONE' is not usable.")
-            }
-        }
-    }
-
-    private fun hasHitAnotherBlockWhileSideStepping(): Boolean {
-        val blockers = brokerManager.blockObservers.getCurrentBlockersFor(boundingBox, state)
-        if (blockers.size > 1) {
-            currentPosition.set(oldPosition)
-            setBoundingBox()
-            return true
-        }
-        return false
     }
 
     private fun moveSide(blocker: Rectangle, dt: Float) {
@@ -212,7 +156,7 @@ class PhysicsPlayer : PhysicsComponent() {
     }
 
     private fun playerIsEastOf(blocker: Rectangle, dt: Float) {
-        if (boundingBox.x + (boundingBox.width / 2) > blocker.x + blocker.width) {
+        if (boundingBox.x + (boundingBox.width / 2f) > blocker.x + blocker.width) {
             currentPosition.x += velocity * dt
             if (boundingBox.x > blocker.x + blocker.width) {
                 currentPosition.x = blocker.x + blocker.width
@@ -221,7 +165,7 @@ class PhysicsPlayer : PhysicsComponent() {
     }
 
     private fun playerIsWestOf(blocker: Rectangle, dt: Float) {
-        if (boundingBox.x + (boundingBox.width / 2) < blocker.x) {
+        if (boundingBox.x + (boundingBox.width / 2f) < blocker.x) {
             currentPosition.x -= velocity * dt
             if (boundingBox.x + boundingBox.width < blocker.x) {
                 currentPosition.x = blocker.x - boundingBox.width
@@ -230,7 +174,7 @@ class PhysicsPlayer : PhysicsComponent() {
     }
 
     private fun playerIsSouthOf(blocker: Rectangle, dt: Float) {
-        if (boundingBox.y + (boundingBox.height / 2) < blocker.y) {
+        if (boundingBox.y + (boundingBox.height / 2f) < blocker.y) {
             currentPosition.y -= velocity * dt
             if (boundingBox.y + boundingBox.height < blocker.y) {
                 currentPosition.y = blocker.y - boundingBox.height
@@ -239,7 +183,7 @@ class PhysicsPlayer : PhysicsComponent() {
     }
 
     private fun playerIsNorthOf(blocker: Rectangle, dt: Float) {
-        if (boundingBox.y + (boundingBox.height / 2) > blocker.y + blocker.height) {
+        if (boundingBox.y + (boundingBox.height / 2f) > blocker.y + blocker.height) {
             currentPosition.y += velocity * dt
             if (boundingBox.y > blocker.y + blocker.height) {
                 currentPosition.y = blocker.y + blocker.height

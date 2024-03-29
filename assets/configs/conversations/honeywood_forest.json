@@ -77,7 +77,7 @@
           {"text": "*Inquire further about this Ardor.*", "nextId": "20", "setJumpToAltEnabled": true},
           {"text": "*Inquire further about Grace.*", "nextId": "40"},
           {"text": "*Ask for details about using a magic scroll.*", "nextId": "50"},
-          {"text": "*Mention that when things are hidden, they often are challenging to find.*", "command": "ACCEPT_QUEST", "nextId": "60"}
+          {"text": "*Mention that hidden things are often difficult to find.*", "command": "ACCEPT_QUEST", "nextId": "60"}
         ]
       },
       "40": {"text": ["I'm sorry, I don't know much about her captivity. I feel terrible. Perhaps she was in the wrong place at the wrong time. I sincerely hope so."], "choices": [{"nextId": "35"}]},
@@ -95,7 +95,7 @@
       "1": {"text": ["Dear young Mozes, shall we pray to the Goddess Tree so that your life will be in Her save hands?"]},
       "2": {
         "choices": [
-          {"text": "*Wonder how praying to a tree would make you safe, but accept.* (Save game)", "nextId": "3"},
+          {"text": "*How would praying to a tree would make you safe?* (Save game)", "nextId": "3"},
           {"text": "*Politely let her know that won't be necessary. Take your leave.*", "command": "EXIT"}
         ]
       },
@@ -108,7 +108,7 @@
       "1": {"text": ["Wonderful dear Mozes, please lie down here on this bed of healing flowers so that your weary bones may find some rest."]},
       "2": {
         "choices": [
-          {"text": "*Wonder if healing flowers are a thing, but accept.* (Restore health)", "command": "HEAL_LIFE", "nextId": "3"},
+          {"text": "*Healing flowers? Is that a thing? This may be interesting.* (Restore health)", "command": "HEAL_LIFE", "nextId": "3"},
           {"text": "*Kindly let her know that you'll pass this time. Take your leave.*", "command": "EXIT"}
         ]
       },
