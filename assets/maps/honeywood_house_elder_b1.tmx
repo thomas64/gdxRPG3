@@ -79,7 +79,7 @@
  </objectgroup>
  <objectgroup color="#ffff7f" id="12" name="portal">
   <object id="10" name="honeywood_house_elder" x="48" y="48" width="48" height="24"/>
-  <object id="21" name="honeywood_house_elder_b2" x="336" y="120" width="48" height="24"/>
+  <object id="21" name="honeywood_house_elder_b2" x="336" y="114" width="48" height="24"/>
  </objectgroup>
  <objectgroup color="#ffff00" id="24" name="quest">
   <object id="23" name="quest_honeywood_elder" type="check" x="336" y="120" width="48" height="24">
