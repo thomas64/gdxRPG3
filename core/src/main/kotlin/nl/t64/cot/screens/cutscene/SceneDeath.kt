@@ -30,7 +30,7 @@ class SceneDeath : CutsceneScreen() {
         return Actions.sequence(
             Actions.run {
                 setMapWithBgsOnly("death_scene")
-                setCameraPosition(0f, 0f)
+                setFixedCameraPosition(0f, 0f)
                 title.setText("Is this the end of Adan...?")
                 title.setPosition(camera.position.x - (title.width / 2f), camera.position.y)
                 mozes.setPosition(580f, 300f)

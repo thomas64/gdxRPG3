@@ -56,7 +56,7 @@ class SceneSantinoMurdered : CutsceneScreen() {
             Actions.run {
                 setMapWithBgsOnly("lastdenn")
                 playBgm(AudioEvent.BGM_MURDER)
-                setCameraPosition(768f, 1296f)
+                setFixedCameraPosition(768f, 1296f)
                 santinoDead.isVisible = false
                 santinoDead.setPosition(576f, 1248f)
                 santino.isVisible = true

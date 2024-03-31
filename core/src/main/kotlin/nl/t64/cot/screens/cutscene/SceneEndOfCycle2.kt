@@ -41,7 +41,7 @@ class SceneEndOfCycle2 : CutsceneScreen() {
         return Actions.sequence(
             Actions.run {
                 setMapWithNoSound("honeywood_forest_cave")
-                setCameraPosition(0f, 0f)
+                setFixedCameraPosition(0f, 0f)
                 mozes.setPosition(456f, -96f)
                 mozes.direction = Direction.NORTH
                 flames.forEachIndexed { i, it ->
@@ -91,7 +91,7 @@ class SceneEndOfCycle2 : CutsceneScreen() {
                 mozesDead.isVisible = true
                 ylarus.setPosition(456f, 360f)
                 setMapWithBgmBgs("ylarus_place")
-                setCameraPosition(0f, 0f)
+                setFixedCameraPosition(0f, 0f)
             },
 
             actionFadeIn(),

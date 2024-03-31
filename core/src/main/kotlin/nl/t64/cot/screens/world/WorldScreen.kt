@@ -102,8 +102,9 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
 
     fun changeMap(currentMap: GameMap) {
         worldRenderer.map = currentMap.tiledMap
-        camera.setNewMapSize(currentMap.pixelWidth, currentMap.pixelHeight)
         player.send(LoadEntityEvent(currentMap.playerSpawnDirection, currentMap.playerSpawnLocation))
+        camera.setNewMapSize(currentMap.pixelWidth, currentMap.pixelHeight)
+        camera.setInitPosition(player.position)
         npcEntities = NpcEntitiesLoader(currentMap).createNpcs()
         lootList = LootLoader(currentMap).createLoot()
         doorList = DoorLoader(currentMap).createDoors()

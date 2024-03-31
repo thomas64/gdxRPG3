@@ -255,8 +255,8 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
         isCameraFixed = false
     }
 
-    fun setCameraPosition(x: Float, y: Float) {
-        camera.setPosition(x, y)
+    fun setFixedCameraPosition(x: Float, y: Float) {
+        camera.setInitPosition(x, y)
         isCameraFixed = true
     }
 

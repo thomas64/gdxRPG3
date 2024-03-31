@@ -15,7 +15,7 @@ class SceneUseCrystalOfTime : CutsceneScreen() {
         return Actions.sequence(
             Actions.run {
                 setMapWithBgsOnly("ylarus_place")
-                setCameraPosition(0f, 0f)
+                setFixedCameraPosition(0f, 0f)
             },
             Actions.run { exitScreen() }
         )

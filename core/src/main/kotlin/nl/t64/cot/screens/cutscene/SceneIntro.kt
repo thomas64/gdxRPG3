@@ -40,7 +40,7 @@ class SceneIntro : CutsceneScreen() {
         return Actions.sequence(
             Actions.run {
                 setMapWithBgmBgs("honeywood")
-                setCameraPosition(0f, 1380f)
+                setFixedCameraPosition(0f, 1380f)
                 title.setText("""
                     The land of Adan
 
@@ -150,7 +150,7 @@ class SceneIntro : CutsceneScreen() {
             Actions.delay(1f),
             Actions.run {
                 setMapWithBgmBgs("honeywood_house_mozes")
-                setCameraPosition(0f, 720f)
+                setFixedCameraPosition(0f, 720f)
                 door1.isVisible = false
                 mozes.setPosition(96f, 528f)
                 mozes.entityState = EntityState.IDLE
@@ -218,7 +218,6 @@ class SceneIntro : CutsceneScreen() {
             Actions.run {
                 playBgm(AudioEvent.BGM_HOUSE)
                 mozes.setPosition(192f, 534f)
-                followActor(mozes)
             },
 
             actionFadeIn(),

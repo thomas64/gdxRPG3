@@ -51,7 +51,7 @@ class SceneArdorFirstTime : CutsceneScreen() {
         return Actions.sequence(
             Actions.run {
                 setMapWithBgsOnly("honeywood_forest_ardor_3")
-                setCameraPosition(0f, 0f)
+                setFixedCameraPosition(0f, 0f)
                 ardor.setPosition(456f, 240f)
                 ardor.direction = Direction.NORTH
                 ardor.isVisible = true

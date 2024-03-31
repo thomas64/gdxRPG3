@@ -77,7 +77,7 @@ class SceneArdorFirstTimeAfterLossFromBattle : CutsceneScreen() {
         return Actions.sequence(
             Actions.run {
                 setMapWithBgsOnly("honeywood_forest_ardor_3")
-                setCameraPosition(0f, 0f)
+                setFixedCameraPosition(0f, 0f)
                 mozes.isVisible = false
                 ardor.setPosition(456f, 240f)
                 ardor.direction = Direction.SOUTH
@@ -229,7 +229,7 @@ class SceneArdorFirstTimeAfterLossFromBattle : CutsceneScreen() {
                 magic.isVisible = false
                 ardor.isVisible = false
                 setMapWithBgmBgs("ylarus_place")
-                setCameraPosition(0f, 0f)
+                setFixedCameraPosition(0f, 0f)
             },
 
             actionFadeIn(),
@@ -255,7 +255,7 @@ class SceneArdorFirstTimeAfterLossFromBattle : CutsceneScreen() {
             Actions.run {
                 mozesDead.isVisible = false
                 setMapWithBgsOnly("honeywood_house_mozes")
-                setCameraPosition(0f, 720f)
+                setFixedCameraPosition(0f, 720f)
                 mozes.isVisible = true
                 mozes.setPosition(192f, 534f)
                 mozes.entityState = EntityState.IDLE
