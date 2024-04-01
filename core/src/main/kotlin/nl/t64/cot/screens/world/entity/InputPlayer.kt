@@ -29,6 +29,7 @@ class InputPlayer(multiplexer: InputMultiplexer) : InputComponent(), InputProces
 
     private var pressCtrl = false
     private var pressShift = false
+    private var pressAlt = false
     private var pressAction = false
 
     init {
@@ -55,17 +56,25 @@ class InputPlayer(multiplexer: InputMultiplexer) : InputComponent(), InputProces
             || keycode == Constant.KEYCODE_L1
         ) {
             pressCtrl = !pressCtrl
+            pressShift = false
         }
         if (keycode == Input.Keys.SHIFT_LEFT
             || keycode == Input.Keys.SHIFT_RIGHT
             || keycode == Constant.KEYCODE_R1
         ) {
             pressShift = !pressShift
+            pressCtrl = false
         }
         return keyPressed(keycode, false)
     }
 
     private fun keyPressed(keycode: Int, isPressed: Boolean): Boolean {
+        if (keycode == Input.Keys.ALT_LEFT
+            || keycode == Input.Keys.ALT_RIGHT
+        ) {
+            pressAlt = isPressed
+        }
+
         if (keycode == Input.Keys.A
             || keycode == Constant.KEYCODE_BOTTOM
         ) {
@@ -163,7 +172,7 @@ class InputPlayer(multiplexer: InputMultiplexer) : InputComponent(), InputProces
     private fun processPlayerSpeedInput() {
         var moveSpeed = Constant.MOVE_SPEED_2
         when {
-            pressCtrl && pressShift && preferenceManager.isInDebugMode -> moveSpeed = Constant.MOVE_SPEED_4
+            pressAlt && preferenceManager.isInDebugMode -> moveSpeed = Constant.MOVE_SPEED_4
             pressShift -> moveSpeed = Constant.MOVE_SPEED_3
             pressCtrl -> moveSpeed = Constant.MOVE_SPEED_1
         }
