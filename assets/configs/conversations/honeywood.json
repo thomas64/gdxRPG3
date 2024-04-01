@@ -34,26 +34,15 @@
       "3": {"text": ["As if nothing happened at all..."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "mrs_johanna_1"                       : {
-    "name"   : "Mrs. Johanna",
-    "phrases": {
-      "1": {"face": "mozes", "name": "Mozes", "text": ["Mrs. Johanna! Have you seen Grace?"]},
-      "2": {"face": "oldwoman01", "name": "Mrs. Johanna", "text": ["I'm sorry, dear. It's still early; I haven't seen Grace this morning. Is everything alright?"]},
-      "3": {"face": "mozes", "name": "Mozes", "text": ["I don't know where she is. She wasn't in her bed this morning."]},
-      "4": {"face": "oldwoman01", "name": "Mrs. Johanna", "text": ["Perhaps she went north? She likes to go there."]},
-      "5": {"face": "mozes", "name": "Mozes", "text": ["I'm afraid she did. There are orcs in the forest."]},
-      "6": {"face": "oldwoman01", "name": "Mrs. Johanna", "text": ["I'll ask around in the village to see if anyone, already awake, saw her."]},
-      "7": {"face": "mozes", "name": "Mozes", "text": ["Please do. I'll head north."], "choices": [{"command": "EXIT"}]}
-    }
-  },
-  "mrs_johanna_2"                       : {
+  "mrs_johanna"                         : {
     "name"   : "Mrs. Johanna",
     "phrases": {
       "1" : {"text": ["Mozes, my dear, how are you? What a beautiful day, isn't it?"]},
       "2" : {
         "choices": [
+          {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "text": "*Ask Mrs. Johanna if she's seen Grace this morning.*", "nextId": "30"},
           {"condition": ["i_c_==_a_q_quest_get_tow_rope", "_tn_15_q_quest_get_tow_rope", "_n_1_>=_item_basic_silver_ring"], "text": "[Silver Ring] *Deliver the news that Jaron has found her lost ring.*", "nextId": "20"},
-          {"text": "*Listen to an old woman's rambling.*", "nextId": "10"},
+          {"condition": ["i_rc_>=_a_q_quest_royal_sacrifice"], "text": "*Listen to an old woman's rambling.*", "nextId": "10"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
@@ -63,7 +52,33 @@
       "20": {"text": ["Mozes, that's wonderful news! Thank you."]},
       "21": {"text": ["Now I can die in peace."]},
       "22": {"face": "mozes", "name": "Mozes", "text": ["Really?"], "choices": [{"command": "DELIVER_QUEST_ITEM", "nextId": "23"}]},
-      "23": {"face": "oldwoman01", "name": "Mrs. Johanna", "text": ["Nah! Of course not. I've got so much to live for. See ya!"], "choices": [{"command": "EXIT"}]}
+      "23": {"face": "oldwoman01", "name": "Mrs. Johanna", "text": ["Nah! Of course not. I've got so much to live for. See ya!"], "choices": [{"command": "EXIT"}]},
+      "30": {"face": "oldwoman01", "name": "Mrs. Johanna", "text": ["I'm sorry, dear. I haven't seen Grace this morning. Is everything alright?"]},
+      "31": {"face": "mozes", "name": "Mozes", "text": ["I don't know where she is. She wasn't in her bed this morning."]},
+      "32": {"face": "oldwoman01", "name": "Mrs. Johanna", "text": ["Perhaps she went north? She likes to go there."]},
+      "33": {"face": "mozes", "name": "Mozes", "text": ["I'm afraid she did. There are orcs in the forest."]},
+      "34": {"face": "oldwoman01", "name": "Mrs. Johanna", "text": ["I'll ask around in the village to see if anyone else saw her."]},
+      "35": {"face": "mozes", "name": "Mozes", "text": ["Please do. I'll head north."], "choices": [{"command": "EXIT", "nextId": "40"}]},
+      "40": {"text": ["Have you found her yet? Quickly dear, go to Honeywood Forest."], "choices": [{"command": "EXIT", "nextId": "40"}]}
+    }
+  },
+  "lennor"                              : {
+    "name"   : "Lennor",
+    "phrases": {
+      "1": {"text": ["Good morning, Mozes. You seem troubled. What's going on?"]},
+      "2": {
+        "choices": [
+          {"text": "*Ask Lennor if he's seen Grace this morning.*", "nextId": "3"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "3": {"face": "man02", "name": "Lennor", "text": ["Grace? No, I haven't seen her. Why? What happened?"]},
+      "4": {"face": "mozes", "name": "Mozes", "text": ["She's missing. I woke up this morning and she wasn't in her bed."]},
+      "5": {"face": "man02", "name": "Lennor", "text": ["That's concerning. Are you sure she's not just playing somewhere in the village?"]},
+      "6": {"face": "mozes", "name": "Mozes", "text": ["I'm not certain, but I fear she might have gone to Honeywood Forest, and there are orcs."]},
+      "7": {"face": "man02", "name": "Lennor", "text": ["Is there anything I can do to help?"]},
+      "8": {"face": "mozes", "name": "Mozes", "text": ["I appreciate the offer, Lennor, but I think I'll manage. Please keep an eye out for Grace."], "choices": [{"command": "EXIT", "nextId": "10"}]},
+      "10": {"face": "man02", "name": "Lennor", "text": ["Weren't you heading to Honeywood Forest? Did you find her?"], "choices": [{"command": "EXIT", "nextId": "10"}]}
     }
   },
   "quest_helping_horse"                 : {
@@ -102,36 +117,68 @@
   "playing_catch_1"                     : {
     "name"   : "Lynette",
     "phrases": {
-      "1": {"text": ["We're playing catch, teehee! Can Grace come and join us?"], "choices": [{"command": "EXIT"}]}
+      "1": {
+        "text": ["We're playing catch, teehee! Can Grace come and join us?"], "choices": [
+          {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "nextId": "2"},
+          {"condition": ["i_rc_>=_a_q_quest_royal_sacrifice"], "command": "EXIT"}
+        ]
+      },
+      "2": {
+        "choices": [
+          {"text": "*Ask Lynette if she's seen Grace this morning.*", "nextId": "3"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "3": {"text": ["No, but if I do, I'll ask her to join us, teehee!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "playing_catch_2"                     : {
     "name"   : "Tobin",
     "phrases": {
-      "1": {"text": ["We're playing catch, teehee! Can Grace come and join us?"], "choices": [{"command": "EXIT"}]}
+      "1": {
+        "text": ["We're playing catch, teehee! Can Grace come and join us?"], "choices": [
+          {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "nextId": "2"},
+          {"condition": ["i_rc_>=_a_q_quest_royal_sacrifice"], "command": "EXIT"}
+        ]
+      },
+      "2": {
+        "choices": [
+          {"text": "*Ask Tobin if he's seen Grace this morning.*", "nextId": "3"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "3": {"text": ["No, but if I do, I'll ask her to join us, teehee!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "kaidan_come_home"                    : {
     "name"   : "Kaidan",
     "phrases": {
-      "1": {
+      "1" : {
         "text": ["We're playing catch, teehee! Can Grace come and join us?"], "choices": [
+          {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "nextId": "10"},
           {"condition": ["i_c_==_a_q_quest_get_tow_rope"], "nextId": "2"},
-          {"condition": ["i_c_==_u_q_quest_get_tow_rope"], "command": "EXIT"}
+          {"condition": ["i_c_==_u_q_quest_get_tow_rope", "i_rc_>=_a_q_quest_royal_sacrifice"], "command": "EXIT"}
         ]
       },
-      "2": {
+      "2" : {
         "choices": [
           {"text": "*Let him know that Jaron has asked for him to return home.*", "nextId": "3"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
-      "3": {"face": "boy01", "text": ["Awww man! Right now?"]},
-      "4": {"face": "mozes", "name": "Mozes", "text": ["I'm afraid so."]},
-      "5": {"face": "boy01", "name": "Kaidan", "text": ["It's not fair! I wanna play! You're dumb!"]},
-      "6": {"face": "mozes", "name": "Mozes", "text": ["Don't shoot the messenger."]},
-      "7": {"face": "boy01", "name": "Kaidan", "text": ["You're right, I'll go home and shoot Jaron."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "8"}]},
-      "8": {"face": "mozes", "name": "Mozes", "text": [". . ."], "choices": [{"command": "RELOAD_NPCS"}]}
+      "3" : {"face": "boy01", "text": ["Awww man! Right now?"]},
+      "4" : {"face": "mozes", "name": "Mozes", "text": ["I'm afraid so."]},
+      "5" : {"face": "boy01", "name": "Kaidan", "text": ["It's not fair! I wanna play! You're dumb!"]},
+      "6" : {"face": "mozes", "name": "Mozes", "text": ["Don't shoot the messenger."]},
+      "7" : {"face": "boy01", "name": "Kaidan", "text": ["You're right, I'll go home and shoot Jaron."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "8"}]},
+      "8" : {"face": "mozes", "name": "Mozes", "text": [". . ."], "choices": [{"command": "RELOAD_NPCS"}]},
+      "10": {
+        "choices": [
+          {"text": "*Ask Kaidan if he's seen Grace this morning.*", "nextId": "11"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "11": {"text": ["No, but if I do, I'll ask her to join us, teehee!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "kaidan_is_home"                      : {
@@ -157,27 +204,42 @@
     "phrases": {
       "1" : {"text": ["Hi Mozes! You really should check out this priest fella.", "He is so funny! Ha ha!"]},
       "2" : {
-        "text": ["It's unfortunate we're not allowed to leave the village by ourselves because of the rising monsters threat, but I'm glad this fella came in. He can now brighten my dull and secluded life a bit."], "choices": [
+        "text": ["It's a shame we're not allowed to leave the village by ourselves due to the rising monster threat, but I'm glad this fella came in. He can now brighten my dull and secluded life a bit."], "choices": [
+          {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "nextId": "20"},
           {"condition": ["i_rc_==_a_q_quest_honeywood_elder"], "nextId": "3"},
-          {"condition": ["i_rc_!=_a_q_quest_honeywood_elder"], "command": "EXIT"}
+          {"condition": ["i_rc_!=_a_q_quest_honeywood_elder", "i_rc_>=_a_q_quest_royal_sacrifice"], "command": "EXIT"}
         ]
       },
-      "3" : {"text": ["What's the matter? You look like you need to get something off your chest."]},
+      "3" : {"text": ["What's bothering you? You seem troubled."]},
       "4" : {
         "choices": [
-          {"text": "*Explain everything what's happened and ask her to join you.*", "nextId": "6"},
+          {"text": "*Explain everything that's happened and ask her to join you.*", "nextId": "6"},
           {"text": "*Say it's nothing. Take your leave.*", "command": "EXIT"}
         ]
       },
       "6" : {"text": ["{SPEED=0.2} . . . . ."]},
-      "7" : {"text": ["No way! You're asking me to come along, traveling through time, risking my life to stop an evil wizard and rescue Grace?!"]},
+      "7" : {"text": ["Wait! You want me to come with you, travel through time, risk my life to stop an evil wizard, and rescue Grace?!"]},
       "8" : {"text": ["Hell yeah! You're going on this HUGE adventure with all the big stuff, slaying monsters, taking loot, and and and..."]},
-      "9" : {"text": ["Why wouldn't I go with you? What's wrong with you!?"]},
-      "10": {"text": ["We've been friends since childhood; we've always gone on adventures together. Do you really think I'd leave you hanging?"]},
-      "11": {"text": ["Who will be there to protect you? You need protection... {WAIT=0.5}From me! You do know that right?"]},
-      "12": {"text": ["Alright, here's the deal: You're taking me with you, and MAYBE I'll forgive you for doubting my adventurous spirit."]},
+      "9" : {"text": ["Why wouldn't I want to go with you? What's wrong with you!?"]},
+      "10": {"text": ["We've been friends since childhood, always adventuring together. Do you really think I'd leave you hanging?"]},
+      "11": {"text": ["Who will be there to protect you? You need protection... {WAIT=0.5}From me! You know that, right?"]},
+      "12": {"text": ["Alright, here's the deal: You're taking me with you, and maybe, just maybe, I'll forgive you for doubting my adventurous spirit."]},
       "13": {"text": ["Now we're talking! You are so not gonna regret this."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "14"}]},
-      "14": {"text": ["Let's go!"], "choices": [{"command": "HERO_JOIN"}]}
+      "14": {"text": ["Let's go!"], "choices": [{"command": "HERO_JOIN"}]},
+      "20": {
+        "choices": [
+          {"text": "*Ask Luana if she's seen Grace this morning.*", "nextId": "21"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "21": {"face": "luana", "name": "Luana", "text": ["No, I haven't seen Grace this morning, Mozes. Is everything okay?"]},
+      "22": {"face": "mozes", "name": "Mozes", "text": ["I don't know where she is. She wasn't in her bed this morning."]},
+      "23": {"face": "luana", "name": "Luana", "text": ["Maybe she went to Honeywood Forest? She likes to go there."]},
+      "24": {"face": "mozes", "name": "Mozes", "text": ["I'm afraid she might have. There are orcs in the forest."]},
+      "25": {"face": "luana", "name": "Luana", "text": ["I'll accompany you on your search!"]},
+      "26": {"face": "mozes", "name": "Mozes", "text": ["Luana, would you mind looking for her here in the village instead?"]},
+      "27": {"face": "luana", "name": "Luana", "text": ["Of course, I will. Good luck finding her."], "choices": [{"command": "EXIT", "nextId": "30"}]},
+      "30": {"text": ["Have you found her yet? Hurry up! Go to Honeywood Forest."], "choices": [{"command": "EXIT", "nextId": "30"}]}
     }
   },
   "priest_honeywood"                    : {
@@ -318,12 +380,14 @@
       "1" : {"text": ["Hi Mozes. Won't you say hi to Enopa? She's not feeling well."]},
       "2" : {
         "choices": [
+          {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "text": "*Ask Angie if she's seen Grace this morning.*", "nextId": "5"},
           {"condition": ["i_tn_7_q_this"], "text": "*Express your concern about Enopa's condition.*", "nextId": "3"},
           {"condition": ["i_rc_>=_a_q_quest_helping_horse"], "text": "*Inquire about borrowing Enopa to help Lennor with the fallen tree.*", "nextId": "10"},
           {"text": "*Greet Enopa and take your leave.*", "command": "EXIT"}
         ]
       },
       "3" : {"text": ["Thank you. Maybe she ate something wrong, but I think just a couple of days' rest will help her recover."], "choices": [{"nextId": "2"}]},
+      "5" : {"text": ["I haven't seen Grace or much of anything else, I'm afraid. My whole morning has been consumed with tending to Enopa. I’ve had eyes for nothing else."], "choices": [{"nextId": "2"}]},
       "10": {"text": ["She can't! Enopa needs to recover first before she can be of any use."]},
       "11": {"text": ["And even if she recovers, she'll need horseshoes before she can go anywhere. I don't have any right now, so it's not possible."]},
       "12": {
