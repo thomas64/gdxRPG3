@@ -9,8 +9,11 @@
   "everything_is_normal_again"          : {
     "name"   : "Mozes",
     "phrases": {
-      "1": {"text": ["Everything is back to normal?", "Adan didn't end up in flames?", "Is Grace still alive then?"]},
-      "2": {"text": ["Then I must quickly return to the forest!"], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["Everything is back to normal?"]},
+      "2": {"text": ["Adan didn't end up in flames?"]},
+      "3": {"text": ["Is Grace still alive then?"]},
+      "4": {"text": ["I need to see her! I need to know! Maybe I can still save her!"]},
+      "5": {"text": ["I must hurry back to the forest!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "should_really_be_going_to_grace"     : {
@@ -574,8 +577,8 @@
       "22"  : {"text": ["Here you go, a brand new horseshoe!"], "choices": [{"command": "TRADE_QUEST_ITEMS"}]},
       "30"  : {"text": ["No, I'm sorry, I just woke up. She might be out playing somewhere?"]},
       "31"  : {"text": ["*Yawn* It's quite early. Everyone's still sleeping. Are you sure she's not in her bed, nestled under the blankets?"], "choices": [{"nextId": "2"}]},
-      "100" : {"text": ["Ah, it's about time! For Jaron's outstanding bill, it will be four gold pieces then."]},
-      "101" : {"text": ["I know, the bill was originally only three, but that's what I call interest. That slacker hasn't paid up in such a long time."]},
+      "100" : {"text": ["Ah, it's about time! For Jaron's outstanding bill, it will be {COLOR=FIREBRICK}four{COLOR=BLACK} gold pieces then."]},
+      "101" : {"text": ["I know, the bill was originally only {COLOR=FIREBRICK}three{COLOR=BLACK}, but that's what I call interest. That slacker hasn't paid up in such a long time."]},
       "102" : {
         "choices": [
           {"condition": ["_n_4_>=_item_gold"], "text": "[Gold 4] *Agree with him and pay.*", "nextId": "110"},
@@ -614,7 +617,7 @@
           {"text": "*You're too busy to do someone else's chores. Take your leave.*", "command": "EXIT"}
         ]
       },
-      "10"  : {"text": ["Thanks. Alright, first of all, I have to pay an outstanding bill to the blacksmith. Would you deliver these three gold pieces to him?"]},
+      "10"  : {"text": ["Thanks. Alright, first of all, I have to pay an outstanding bill to the blacksmith. Would you deliver these {COLOR=FIREBRICK}three{COLOR=BLACK} gold pieces to him?"]},
       "11"  : {"text": ["Second, Mrs. Johanna came here last week to pay me a visit, and somehow she lost her late husband's ring here."]},
       "12"  : {"text": ["That's what old people do, I guess; lose stuff."]},
       "13"  : {"text": ["We searched for it, but we couldn't find it. But today I accidentally stumbled upon it! So, would you give her this ring back?"]},
@@ -628,7 +631,7 @@
           {"text": "(Back)", "nextId": "1201"}
         ]
       },
-      "110" : {"text": ["I don't have any more gold at the moment. So maybe you could pay that 1 gold yourself and see the rope as my thanks."], "choices": [{"nextId": "101"}]},
+      "110" : {"text": ["I don't have any more gold at the moment. So maybe you could pay that 1 gold yourself and see the rope as my thanks?"], "choices": [{"nextId": "101"}]},
       "120" : {"text": ["Erm... Ah yes yes, of course. Okay, alright then... Here you are."], "choices": [{"command": "SAY_QUEST_THING", "nextId": "1200"}]},
       "1199": {"text": ["You forgot something."], "choices": [{"command": "RECEIVE_ITEM_FOR_QUEST"}]},
       "1200": {"text": ["There you are. How's it going? Have you made any progress?"]},

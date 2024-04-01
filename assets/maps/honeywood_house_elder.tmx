@@ -92,8 +92,7 @@
   <object id="35" x="432" y="720" height="48"/>
   <object id="36" x="480" y="720" height="48"/>
   <object id="44" x="144" y="960" width="48" height="48"/>
-  <object id="45" x="528" y="768" width="48" height="48"/>
-  <object id="46" x="528" y="744" height="24"/>
+  <object id="46" x="528" y="744" height="72"/>
  </objectgroup>
  <objectgroup color="#5500ff" id="25" name="rest">
   <object id="61" name="note_bookcase" x="432" y="360" width="48" height="48"/>
@@ -126,7 +125,7 @@
  <objectgroup color="#ffff7f" id="13" name="portal">
   <object id="3" name="honeywood" x="144" y="936" width="48" height="24"/>
   <object id="39" name="honeywood_house_elder_2f" x="432" y="624" width="48" height="24"/>
-  <object id="43" name="honeywood_house_elder_b1" x="528" y="744" width="48" height="24"/>
+  <object id="43" name="honeywood_house_elder_b1" x="534" y="744" width="42" height="24"/>
  </objectgroup>
  <objectgroup color="#ff55ff" id="26" name="event">
   <object id="73" name="guide_event_conversation_reminder" type="discover" x="144" y="384" width="144" height="96"/>

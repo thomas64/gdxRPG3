@@ -119,7 +119,7 @@
         "taskPhrase"    : "            Deliver Theodore's lost ring to Mrs. Johanna.",
         "type"          : "DELIVER_ITEM",
         "target"        : {"basic_silver_ring": 1},
-        "conversationId": "mrs_johanna_2"
+        "conversationId": "mrs_johanna"
       },
       "16": {
         "taskPhrase"    : "            Tell Kaidan to come home to Jaron.",

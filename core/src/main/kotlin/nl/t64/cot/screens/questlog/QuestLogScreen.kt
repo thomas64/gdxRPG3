@@ -90,10 +90,10 @@ class QuestLogScreen : ParchmentScreen() {
         val message = """
             These symbols mean:
 
-            v   -   Quest finished or task complete
-            o   -   Quest finished, but reward unclaimed
-            r   -   Quest finished or task complete, but reset
-            x   -   Quest or task failed""".trimIndent()
+            v   -   Quest finished or task complete.
+            o   -   Quest finished, but reward unclaimed.
+            r   -   Quest finished or task complete, but was reset.
+            x   -   Quest or task failed.""".trimIndent()
         val messageDialog = MessageDialog(message)
         messageDialog.setLeftAlignment()
         messageDialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT)

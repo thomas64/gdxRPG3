@@ -141,13 +141,12 @@
   <object id="134" x="192" y="240" width="48" height="48"/>
   <object id="136" x="384" y="2112" width="48" height="48"/>
   <object id="137" x="480" y="2112" width="48" height="48"/>
-  <object id="207" x="1344" y="2352" width="48" height="48"/>
   <object id="219" x="744" y="1344" width="48" height="96"/>
   <object id="220" x="984" y="1392" width="48" height="96"/>
   <object id="227" x="912" y="360" width="48" height="216"/>
   <object id="231" x="528" y="2544" width="48" height="48"/>
   <object id="232" x="1104" y="2400" width="48" height="48"/>
-  <object id="234" x="1344" y="2400" width="48" height="48"/>
+  <object id="234" x="1344" y="2352" width="48" height="96"/>
  </objectgroup>
  <objectgroup color="#5500ff" id="13" name="rest">
   <object id="100" name="chest0011" x="1008" y="384" width="48" height="48"/>
@@ -223,7 +222,7 @@
     <property name="condition" value="_c_!=_f_q_this"/>
    </properties>
   </object>
-  <object id="208" name="quest_mother_fairy" type="check" x="1296" y="2376" width="48" height="24">
+  <object id="208" name="quest_mother_fairy" type="check" x="1296" y="2382" width="48" height="12">
    <properties>
     <property name="task" value="1"/>
    </properties>

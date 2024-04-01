@@ -16,8 +16,8 @@ import kotlin.math.max
 
 private const val START_ANGLE = 90f
 private const val SIZE = 150f
-private const val PAD_RIGHT = 175f
-private const val PAD_TOP = 25f
+private const val PAD_RIGHT = 181f
+private const val PAD_BOTTOM = 207f
 private const val ALPHA = 0.8f
 
 class AnalogClock : Table() {
@@ -29,7 +29,7 @@ class AnalogClock : Table() {
         display.setPosition(0f, 0f)
         super.addActor(display)
         super.setSize(SIZE, SIZE)
-        super.setPosition(Gdx.graphics.width - PAD_RIGHT, Gdx.graphics.height - SIZE - PAD_TOP)
+        super.setPosition(Gdx.graphics.width - PAD_RIGHT, PAD_BOTTOM)
         super.setColor(Constant.LIGHT_RED)
     }
 

@@ -53,7 +53,7 @@ object ConditionDatabase {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private val hasBeenInFairyTown get() = hasEventPlayed("find_great_tree")
+    private val hasBeenInFairyTown get() = hasEventPlayed("enter_great_tree")
     private val hasDefeatedOrcGuards get() = isBattleWon("quest_orc_guards")
     private val hasStartingSpells get() = hasAnySpell("mozes")
     private val hasNotYetTalkedToLennorFirstCycle

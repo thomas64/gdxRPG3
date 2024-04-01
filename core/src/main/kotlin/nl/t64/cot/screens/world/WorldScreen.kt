@@ -376,6 +376,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     private fun openMiniMap() {
         if (camera.isZoomPossible()) {
             camera.zoom()
+            camera.setInitPosition(player.position)
             playSe(AudioEvent.SE_MINIMAP)
             gameState = GameState.MINIMAP
             multiplexer.removeProcessor(0)
@@ -391,6 +392,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
         multiplexer.removeProcessor(0)
         multiplexer.addProcessor(0, createListener())
         camera.reset()
+        camera.setInitPosition(player.position)
     }
 
     private fun createListener(): WorldScreenListener {
