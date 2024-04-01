@@ -86,10 +86,10 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     //region public methods ////////////////////////////////////////////////////////////////////////////////////////////
 
     fun fadeOut(
-        actionAfterFade: () -> Unit,
         transitionColor: Color = Color.BLACK,
         duration: Float = 0f,
-        transitionPurpose: TransitionPurpose = TransitionPurpose.MAP_CHANGE
+        transitionPurpose: TransitionPurpose = TransitionPurpose.MAP_CHANGE,
+        actionAfterFade: () -> Unit
     ) {
         val transition = TransitionImage(transitionPurpose, transitionColor)
         stage.addActor(transition)
@@ -120,13 +120,13 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     fun startCutscene(screenType: ScreenType, fadeDuration: Float = 0f) {
         doBeforeLoadScreen()
         val actionAfterFade = { screenManager.setScreen(screenType); stopAllBgm() }
-        fadeOut(actionAfterFade, Color.BLACK, fadeDuration, TransitionPurpose.MAP_CHANGE)
+        fadeOut(Color.BLACK, fadeDuration, TransitionPurpose.MAP_CHANGE, actionAfterFade)
     }
 
     fun startCutsceneWithoutBgmFading(screenType: ScreenType, fadeDuration: Float = 0f) {
         doBeforeLoadScreen()
         val actionAfterFade = { screenManager.setScreen(screenType) }
-        fadeOut(actionAfterFade, Color.BLACK, fadeDuration, TransitionPurpose.JUST_FADE)
+        fadeOut(Color.BLACK, fadeDuration, TransitionPurpose.JUST_FADE, actionAfterFade)
     }
 
     fun showConversationDialogFromNpc(conversationId: String, npcEntity: Entity) {
@@ -199,7 +199,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
         currentNpcEntity = enemyEntity
         gameState = GameState.BATTLE
         doBeforeLoadScreen()
-        fadeOut({ BattleScreen.load(battleId, this) }, Color.BLACK)
+        fadeOut { BattleScreen.load(battleId, this) }
     }
 
     fun updateParty() {
@@ -211,7 +211,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     }
 
     fun reloadNpcsWithFade() {
-        fadeOut({ reloadNpcs() }, Color.BLACK, 1.5f, TransitionPurpose.JUST_FADE)
+        fadeOut(Color.BLACK, 1.5f, TransitionPurpose.JUST_FADE) { reloadNpcs() }
     }
 
     private fun reloadNpcs() {
@@ -258,7 +258,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
 
     override fun onNotifyShowBattleScreen(battleId: String) {
         gameState = GameState.BATTLE
-        fadeOut({ BattleScreen.load(battleId, this) }, Color.BLACK)
+        fadeOut { BattleScreen.load(battleId, this) }
     }
 
     override fun onNotifyReloadNpcs() {

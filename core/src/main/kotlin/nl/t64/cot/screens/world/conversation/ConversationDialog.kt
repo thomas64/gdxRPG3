@@ -38,6 +38,7 @@ import nl.t64.cot.screens.loot.RewardScreen
 import nl.t64.cot.screens.loot.TradeScreen
 import nl.t64.cot.screens.school.SchoolScreen
 import nl.t64.cot.screens.shop.ShopScreen
+import nl.t64.cot.sfx.TransitionPurpose
 import nl.t64.cot.toDrawable
 import kotlin.concurrent.thread
 
@@ -274,7 +275,9 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             }
             gameData.party.recoverFullHp()
         }
-        screenManager.getWorldScreen().fadeOut({ continueConversation(nextId) }, duration = 1f)
+        screenManager.getWorldScreen().fadeOut(Color.BLACK, 1f, TransitionPurpose.MAP_CHANGE) {
+            continueConversation(nextId)
+        }
     }
 
     private fun pay(price: Int) {

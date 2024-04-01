@@ -70,7 +70,7 @@ class CrystalHandler private constructor() {
             profileManager.saveProfile()
             screenManager.getWorldScreen().changeMap(mapManager.currentMap)
         }
-        screenManager.getWorldScreen().fadeOut(actionAfterFade, Color.GRAY, 1f)
+        screenManager.getWorldScreen().fadeOut(Color.GRAY, 1f, TransitionPurpose.MAP_CHANGE, actionAfterFade)
     }
 
 }

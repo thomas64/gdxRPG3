@@ -1,6 +1,7 @@
 package nl.t64.cot.screens.world.map
 
 import com.badlogic.gdx.ai.pfa.DefaultGraphPath
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.maps.tiled.TiledMap
 import com.badlogic.gdx.math.Vector2
@@ -17,6 +18,7 @@ import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.screens.world.entity.EntityState
 import nl.t64.cot.screens.world.mapobjects.*
 import nl.t64.cot.screens.world.pathfinding.TiledNode
+import nl.t64.cot.sfx.TransitionPurpose
 import nl.t64.cot.subjects.ProfileObserver
 
 
@@ -93,22 +95,22 @@ class MapManager : ProfileObserver {
     fun checkWarpPoint(warpPoint: GameMapRelocator, playerDirection: Direction) {
         playSe(AudioEvent.SE_WARP)
         nextMapTitle = warpPoint.toMapName
-        screenManager.getWorldScreen().fadeOut(
-            { changeMapWithCameraShake(warpPoint, playerDirection) }, warpPoint.fadeColor
-        )
+        screenManager.getWorldScreen().fadeOut(warpPoint.fadeColor, 0f, TransitionPurpose.MAP_CHANGE) {
+            changeMapWithCameraShake(warpPoint, playerDirection)
+        }
     }
 
     fun schedulePortal(portal: GameMapRelocator, playerDirection: Direction) {
-        screenManager.getWorldScreen().fadeOut(
-            { changeMap(portal, playerDirection) }, duration = 1f
-        )
+        screenManager.getWorldScreen().fadeOut(Color.BLACK, 1f, TransitionPurpose.MAP_CHANGE) {
+            changeMap(portal, playerDirection)
+        }
     }
 
     fun collisionPortal(portal: GameMapRelocator, playerDirection: Direction) {
         nextMapTitle = portal.toMapName
-        screenManager.getWorldScreen().fadeOut(
-            { changeMap(portal, playerDirection) }, portal.fadeColor
-        )
+        screenManager.getWorldScreen().fadeOut(portal.fadeColor, 0f, TransitionPurpose.MAP_CHANGE) {
+            changeMap(portal, playerDirection)
+        }
     }
 
     fun changeMapWithWarpPortal(warpToMapName: String) {
