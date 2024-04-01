@@ -93,6 +93,10 @@ class Clock {
         return getPercentageOfCurrentTimeBetween(startTime.toGameTime(), endTime.toGameTime())
     }
 
+    fun isCurrentTimeBefore(time: String): Boolean {
+        return currentTime.isBefore(time.toGameTime())
+    }
+
     fun isCurrentTimeInBetween(startTime: String, endTime: String): Boolean {
         return isCurrentTimeInBetween(startTime.toGameTime(), endTime.toGameTime())
     }

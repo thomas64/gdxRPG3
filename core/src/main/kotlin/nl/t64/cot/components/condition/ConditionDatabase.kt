@@ -27,7 +27,6 @@ object ConditionDatabase {
         "!talked_to_lennor"         to { hasNotYetTalkedToLennorFirstCycle },
         "i_not_happy_with_jaron"    to { notHappyWithJaron },
         "alone_in_party"            to { isAloneInParty },
-        "between_13_and_14"         to { gameData.clock.isCurrentTimeInBetween("13:00", "14:00") },
         "is_fairy_portal_active"    to { gameData.portals.isActivated(Portal.HONEYWOOD_GREAT_TREE.name) },
         "i_!is_fairy_portal_active" to { isPortalFairyInactiveAndPortalHoneywoodActive }
         // @formatter:on
@@ -45,6 +44,8 @@ object ConditionDatabase {
             ConditionConverter.isMeetingQuestCondition(conditionId, questId)
         } else if (conditionId.contains("_item_") && conditionId.contains("_n_")) {
             ConditionConverter.isMeetingItemCondition(conditionId)
+        } else if (conditionId.contains("_time_")) {
+            ConditionConverter.isMeetingTimeCondition(conditionId)
         } else {
             conditions[conditionId]!!.invoke()
         }

@@ -65,19 +65,19 @@
   "lennor"                              : {
     "name"   : "Lennor",
     "phrases": {
-      "1": {"text": ["Good morning, Mozes. You seem troubled. What's going on?"]},
-      "2": {
+      "1" : {"text": ["Good morning, Mozes. You seem troubled. What's going on?"]},
+      "2" : {
         "choices": [
           {"text": "*Ask Lennor if he's seen Grace this morning.*", "nextId": "3"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
-      "3": {"face": "man02", "name": "Lennor", "text": ["Grace? No, I haven't seen her. Why? What happened?"]},
-      "4": {"face": "mozes", "name": "Mozes", "text": ["She's missing. I woke up this morning and she wasn't in her bed."]},
-      "5": {"face": "man02", "name": "Lennor", "text": ["That's concerning. Are you sure she's not just playing somewhere in the village?"]},
-      "6": {"face": "mozes", "name": "Mozes", "text": ["I'm not certain, but I fear she might have gone to Honeywood Forest, and there are orcs."]},
-      "7": {"face": "man02", "name": "Lennor", "text": ["Is there anything I can do to help?"]},
-      "8": {"face": "mozes", "name": "Mozes", "text": ["I appreciate the offer, Lennor, but I think I'll manage. Please keep an eye out for Grace."], "choices": [{"command": "EXIT", "nextId": "10"}]},
+      "3" : {"face": "man02", "name": "Lennor", "text": ["Grace? No, I haven't seen her. Why? What happened?"]},
+      "4" : {"face": "mozes", "name": "Mozes", "text": ["She's missing. I woke up this morning and she wasn't in her bed."]},
+      "5" : {"face": "man02", "name": "Lennor", "text": ["That's concerning. Are you sure she's not just playing somewhere in the village?"]},
+      "6" : {"face": "mozes", "name": "Mozes", "text": ["I'm not certain, but I fear she might have gone to Honeywood Forest, and there are orcs."]},
+      "7" : {"face": "man02", "name": "Lennor", "text": ["Is there anything I can do to help?"]},
+      "8" : {"face": "mozes", "name": "Mozes", "text": ["I appreciate the offer, Lennor, but I think I'll manage. Please keep an eye out for Grace."], "choices": [{"command": "EXIT", "nextId": "10"}]},
       "10": {"face": "man02", "name": "Lennor", "text": ["Weren't you heading to Honeywood Forest? Did you find her?"], "choices": [{"command": "EXIT", "nextId": "10"}]}
     }
   },
@@ -307,20 +307,32 @@
     "name"   : "Innkeeper",
     "phrases": {
       "1"   : {
-        "text": ["Hey Mozes, would you like to rest here and be completely revitalized for just 1 gold piece?"]
+        "text": ["Hey there Mozes! Would you like to rest here and be completely revitalized for just 1 gold piece?"]
       },
       "2"   : {
         "choices": [
-          {"condition": ["i_c_==_u_q_this"], "text": "*Express your concern about the innkeeper's troubled demeanor.*", "nextId": "10"},
-          {"condition": ["i_r_>=_k_q_this", "i_c_==_u_q_this"], "text": "*Offer to help with the bat situation she will mention.*", "command": "ACCEPT_QUEST", "nextId": "15"},
+          {"condition": ["i_rc_===_u_q_this"], "text": "*Express your concern about the innkeeper's troubled demeanor.*", "nextId": "10"},
           {"condition": ["i_c_==_k_q_this"], "text": "*Offer to help with the bat situation.*", "command": "ACCEPT_QUEST", "nextId": "20"},
           {"condition": ["i_c_==_a_q_this", "i_tn_1_q_this"], "text": "*Inquire further about the location of the bats.*", "nextId": "40"},
           {"condition": ["i_ta_1_q_this"], "text": "*Inform her that the bats have been dealt with.*", "nextId": "50"},
-          {"text": "*Accept the offer for some rest.* (Restore health)", "command": "HEAL_LIFE", "nextId": "3"},
+          {"condition": ["i_n_1_<_item_crystal_of_time"], "text": "*Accept the offer for some rest.* (Restore health)", "command": "HEAL_LIFE_01", "nextId": "3"},
+          {"condition": ["i_n_1_==_item_crystal_of_time"], "text": "*Accept the offer for some rest.* (Restore health)", "nextId": "4"},
+          {"condition": ["i_r_>=_k_q_this", "i_c_==_u_q_this"], "text": "*Express your concern about the innkeeper's troubled demeanor.*", "nextId": "10"},
+          {"condition": ["i_r_>=_k_q_this", "i_c_==_u_q_this"], "text": "*Offer to help with the bat situation she will mention.*", "command": "ACCEPT_QUEST", "nextId": "15"},
           {"text": "*Decline the offer for now. Take your leave.*", "command": "EXIT"}
         ]
       },
       "3"   : {"text": ["Your health has been fully restored. Please come back anytime you feel weary."], "choices": [{"command": "EXIT"}]},
+      "4"   : {"text": ["How long would you like to rest?"]},
+      "5"   : {
+        "choices": [
+          {"text": "* Just rest for 1 hour.*", "command": "HEAL_LIFE_01", "nextId": "3"},
+          {"condition": ["i_time_before_09:00"], "text": "* Until 09:00. *", "command": "HEAL_LIFE_09", "nextId": "3"},
+          {"condition": ["i_time_before_12:00"], "text": "* Until 12:00. *", "command": "HEAL_LIFE_12", "nextId": "3"},
+          {"condition": ["i_time_before_15:00"], "text": "* Until 15:00. *", "command": "HEAL_LIFE_15", "nextId": "3"},
+          {"condition": ["i_time_before_18:00"], "text": "* Until 18:00. *", "command": "HEAL_LIFE_18", "nextId": "3"}
+        ]
+      },
       "10"  : {"text": ["Trouble? In this establishment? Ridiculous! Nothing could be further from the truth. Why, you won't find a better resting place for miles around. Now... whoever's been spreading that silly gossip about upstairs is... well..."]},
       "11"  : {"text": ["... obviously just a no good tongue wagger, eager to mislead people. I've got nothing to hide here! It's nothing. A trifle. You have no need to be afraid or to find another inn. Those bats never did any harm. At least not very much."]},
       "12"  : {

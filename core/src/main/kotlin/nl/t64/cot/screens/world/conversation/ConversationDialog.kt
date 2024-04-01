@@ -181,7 +181,11 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             ConversationCommand.LOAD_ACADEMY -> loadAcademy(nextId)
             ConversationCommand.LOAD_SCHOOL -> loadSchool(nextId)
             ConversationCommand.SAVE_GAME -> saveGame(nextId)
-            ConversationCommand.HEAL_LIFE -> healLife(nextId)
+            ConversationCommand.HEAL_LIFE_01 -> healLife(nextId, "1 hour")
+            ConversationCommand.HEAL_LIFE_09 -> healLife(nextId, "09:00")
+            ConversationCommand.HEAL_LIFE_12 -> healLife(nextId, "12:00")
+            ConversationCommand.HEAL_LIFE_15 -> healLife(nextId, "15:00")
+            ConversationCommand.HEAL_LIFE_18 -> healLife(nextId, "18:00")
             ConversationCommand.RECEIVE_XP -> receiveXp(nextId)
             ConversationCommand.RECEIVE_SPELLS -> receiveSpells(nextId)
             ConversationCommand.RECEIVE_ITEM -> receiveItem()
@@ -249,7 +253,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         thread { profileManager.saveProfile() }
     }
 
-    private fun healLife(nextId: String) {
+    private fun healLife(nextId: String, time: String) {
         val price = conversationId.substringAfterLast("-").toInt()
         if (price > 0) {
             if (gameData.inventory.hasEnoughOfItem("gold", price)) {
@@ -263,7 +267,11 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         }
         delayInputListeners()
         Utils.runWithDelay(Constant.FADE_DURATION) {
-            gameData.clock.takeHour()
+            if (time == "1 hour") {
+                gameData.clock.takeHour()
+            } else {
+                gameData.clock.setTimeOfDay(time)
+            }
             gameData.party.recoverFullHp()
         }
         screenManager.getWorldScreen().fadeOut({ continueConversation(nextId) }, duration = 1f)

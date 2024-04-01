@@ -23,6 +23,20 @@ object ConditionConverter {
         return doesInventoryAndEquipmentContain(conditionId, inventoryItemId, requestedAmount)
     }
 
+    fun isMeetingTimeCondition(conditionId: String): Boolean {
+        return when {
+            conditionId.contains("_between_") -> {
+                val (startTime, endTime) = getTwoTimeUnits("_between_", conditionId)
+                gameData.clock.isCurrentTimeInBetween(startTime, endTime)
+            }
+            conditionId.contains("_before_") -> {
+                val time = getOneTimeUnit("_before_", conditionId)
+                gameData.clock.isCurrentTimeBefore(time)
+            }
+            else -> throw IllegalArgumentException("No defined state found.")
+        }
+    }
+
     private fun getQuestGraph(conditionId: String, questId: String?): QuestGraph {
         return when {
             conditionId.contains("_q_this") -> gameData.quests.getQuestById(questId!!)
@@ -54,9 +68,25 @@ object ConditionConverter {
     }
 
     private fun getTaskIdOrAmount(prefix: String, conditionId: String): Int {
+        val (startIndex, endIndex) = getStartAndEndIndex(prefix, conditionId)
+        return conditionId.substring(startIndex, endIndex).toInt()
+    }
+
+    private fun getOneTimeUnit(prefix: String, conditionId: String): String {
+        return conditionId.substringAfter(prefix)
+    }
+
+    private fun getTwoTimeUnits(prefix: String, conditionId: String): Pair<String, String> {
+        val (startIndex, endIndex) = getStartAndEndIndex(prefix, conditionId)
+        val startTime: String = conditionId.substring(startIndex, endIndex)
+        val endTime: String = conditionId.substringAfter("_and_")
+        return startTime to endTime
+    }
+
+    private fun getStartAndEndIndex(prefix: String, conditionId: String): Pair<Int, Int> {
         val startIndex: Int = conditionId.indexOf(prefix) + prefix.length
         val endIndex: Int = conditionId.substring(startIndex).indexOf("_") + startIndex
-        return conditionId.substring(startIndex, endIndex).toInt()
+        return startIndex to endIndex
     }
 
     private fun getQuestState(conditionId: String, questGraph: QuestGraph): List<QuestState> {
@@ -96,6 +126,7 @@ object ConditionConverter {
         return when {
             conditionId.contains("_==_") -> combinedAmount == requestedAmount
             conditionId.contains("_>=_") -> combinedAmount >= requestedAmount
+            conditionId.contains("_<_") -> combinedAmount < requestedAmount
             else -> throw IllegalArgumentException("No defined operator found.")
         }
     }

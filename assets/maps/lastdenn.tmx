@@ -255,7 +255,7 @@
  <objectgroup color="#ff00ff" id="22" name="cutscene">
   <object id="199" name="scene_santino_murdered" type="discover" x="672" y="1416" width="288" height="144">
    <properties>
-    <property name="condition" value="between_13_and_14"/>
+    <property name="condition" value="_time_between_13:00_and_14:00"/>
    </properties>
   </object>
  </objectgroup>
