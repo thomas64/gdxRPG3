@@ -117,11 +117,11 @@
       "4": {"text": ["How long would you like to lie down?"]},
       "5": {
         "choices": [
-          {"text": "* Just for 1 hour.*", "command": "HEAL_LIFE_01", "nextId": "3"},
-          {"condition": ["i_time_before_09:00"], "text": "* Until 09:00. *", "command": "HEAL_LIFE_09", "nextId": "3"},
-          {"condition": ["i_time_before_12:00"], "text": "* Until 12:00. *", "command": "HEAL_LIFE_12", "nextId": "3"},
-          {"condition": ["i_time_before_15:00"], "text": "* Until 15:00. *", "command": "HEAL_LIFE_15", "nextId": "3"},
-          {"condition": ["i_time_before_18:00"], "text": "* Until 18:00. *", "command": "HEAL_LIFE_18", "nextId": "3"}
+          {"text": "* Just a short rest. *", "command": "HEAL_LIFE_01", "nextId": "3"},
+          {"condition": ["i_time_before_08:00"], "text": "* Until 09:00. *", "command": "HEAL_LIFE_09", "nextId": "3"},
+          {"condition": ["i_time_before_11:00"], "text": "* Until 12:00. *", "command": "HEAL_LIFE_12", "nextId": "3"},
+          {"condition": ["i_time_before_14:00"], "text": "* Until 15:00. *", "command": "HEAL_LIFE_15", "nextId": "3"},
+          {"condition": ["i_time_before_17:00"], "text": "* Until 18:00. *", "command": "HEAL_LIFE_18", "nextId": "3"}
         ]
       }
     }

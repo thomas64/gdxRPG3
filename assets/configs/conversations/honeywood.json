@@ -329,11 +329,11 @@
       "4"   : {"text": ["How long would you like to rest?"]},
       "5"   : {
         "choices": [
-          {"text": "* Just rest for 1 hour.*", "command": "HEAL_LIFE_01", "nextId": "3"},
-          {"condition": ["i_time_before_09:00"], "text": "* Until 09:00. *", "command": "HEAL_LIFE_09", "nextId": "3"},
-          {"condition": ["i_time_before_12:00"], "text": "* Until 12:00. *", "command": "HEAL_LIFE_12", "nextId": "3"},
-          {"condition": ["i_time_before_15:00"], "text": "* Until 15:00. *", "command": "HEAL_LIFE_15", "nextId": "3"},
-          {"condition": ["i_time_before_18:00"], "text": "* Until 18:00. *", "command": "HEAL_LIFE_18", "nextId": "3"}
+          {"text": "* Just a short rest. *", "command": "HEAL_LIFE_01", "nextId": "3"},
+          {"condition": ["i_time_before_08:00"], "text": "* Until 09:00. *", "command": "HEAL_LIFE_09", "nextId": "3"},
+          {"condition": ["i_time_before_11:00"], "text": "* Until 12:00. *", "command": "HEAL_LIFE_12", "nextId": "3"},
+          {"condition": ["i_time_before_14:00"], "text": "* Until 15:00. *", "command": "HEAL_LIFE_15", "nextId": "3"},
+          {"condition": ["i_time_before_17:00"], "text": "* Until 18:00. *", "command": "HEAL_LIFE_18", "nextId": "3"}
         ]
       },
       "10"  : {"text": ["Trouble? In this establishment? Ridiculous! Nothing could be further from the truth. Why, you won't find a better resting place for miles around. Now... whoever's been spreading that silly gossip about upstairs is... well..."]},
@@ -577,15 +577,15 @@
       "22"  : {"text": ["Here you go, a brand new horseshoe!"], "choices": [{"command": "TRADE_QUEST_ITEMS"}]},
       "30"  : {"text": ["No, I'm sorry, I just woke up. She might be out playing somewhere?"]},
       "31"  : {"text": ["*Yawn* It's quite early. Everyone's still sleeping. Are you sure she's not in her bed, nestled under the blankets?"], "choices": [{"nextId": "2"}]},
-      "100" : {"text": ["Ah, it's about time! For Jaron's outstanding bill, it will be {COLOR=FIREBRICK}four{COLOR=BLACK} gold pieces then."]},
-      "101" : {"text": ["I know, the bill was originally only {COLOR=FIREBRICK}three{COLOR=BLACK}, but that's what I call interest. That slacker hasn't paid up in such a long time."]},
+      "100" : {"text": ["Ah, it's about time! For Jaron's outstanding bill, it will be {COLOR=BLUE}four{COLOR=BLACK} gold pieces then."]},
+      "101" : {"text": ["I know, the bill was originally only {COLOR=BLUE}three{COLOR=BLACK}, but that's what I call interest. That slacker hasn't paid up in such a long time."]},
       "102" : {
         "choices": [
           {"condition": ["_n_4_>=_item_gold"], "text": "[Gold 4] *Agree with him and pay.*", "nextId": "110"},
           {"condition": ["_n_4_>=_item_gold"], "text": "[Gold 4] *Pay up, but disagree with him.*", "nextId": "111"},
           {"condition": ["_n_3_>=_item_gold", "diplomat1"], "text": "[Gold 3, Diplomat 1] *Explain Jaron only gave you three gold pieces.*", "nextId": "120"},
           {"condition": ["i_n_3_==_item_gold"], "text": "[Gold 3] *State that you don't any more gold with you.*", "nextId": "120"},
-          {"text": "*Grumble. Take your leave.*", "command": "EXIT", "nextId": "200"}
+          {"text": "*Grumble. Don't pay. Jaron must pay for this. Take your leave.*", "command": "EXIT", "nextId": "200"}
         ]
       },
       "110" : {"text": ["That's what I thought, of course you agree."], "choices": [{"command": "DELIVER_QUEST_ITEM_ALTERNATE", "nextId": "130"}]},
@@ -617,12 +617,13 @@
           {"text": "*You're too busy to do someone else's chores. Take your leave.*", "command": "EXIT"}
         ]
       },
-      "10"  : {"text": ["Thanks. Alright, first of all, I have to pay an outstanding bill to the blacksmith. Would you deliver these {COLOR=FIREBRICK}three{COLOR=BLACK} gold pieces to him?"]},
+      "10"  : {"text": ["Thanks. Alright, first of all, I have to pay an outstanding bill to the blacksmith. Would you deliver these {COLOR=BLUE}three{COLOR=BLACK} gold pieces to him?"]},
       "11"  : {"text": ["Second, Mrs. Johanna came here last week to pay me a visit, and somehow she lost her late husband's ring here."]},
       "12"  : {"text": ["That's what old people do, I guess; lose stuff."]},
       "13"  : {"text": ["We searched for it, but we couldn't find it. But today I accidentally stumbled upon it! So, would you give her this ring back?"]},
       "14"  : {"text": ["And third, my little brother Kaidan is playing somewhere outside. Could you go find him and tell him to come home?"]},
       "15"  : {"text": ["That's it. Once you've helped me out with these tasks, you may borrow the rope."], "choices": [{"command": "RECEIVE_ITEM_FOR_QUEST"}]},
+      "99"  : {"text": ["Oh, is it really?"], "choices": [{"nextId": "101"}]},
       "100" : {"text": ["Oh, did he now?"]},
       "101" : {
         "choices": [
@@ -637,7 +638,8 @@
       "1200": {"text": ["There you are. How's it going? Have you made any progress?"]},
       "1201": {
         "choices": [
-          {"condition": ["i_not_happy_with_jaron", "i_tn_14_q_this"], "text": "*State the blacksmith asked for 1 gold piece extra.*", "nextId": "100"},
+          {"condition": ["i_r_==_f_q_this", "i_tn_14_q_this", "!black_asked_four"], "text": "*State the bill is now 4 gold pieces instead of 3.*", "nextId": "99"},
+          {"condition": ["black_asked_four", "i_tn_14_q_this"], "text": "*State the blacksmith asked for 1 gold piece extra.*", "nextId": "100"},
           {"condition": ["_tc_13_q_this", "_tc_15_q_this", "_tc_16_q_this"], "text": "*Acknowledge that everything's been taken care of.*", "nextId": "1202"},
           {"text": "*You still have some tasks to attend to. Take your leave.*", "command": "EXIT", "nextId": "1200"}
         ]

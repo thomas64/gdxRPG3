@@ -114,7 +114,7 @@
  </objectgroup>
  <objectgroup color="#ffff7f" id="13" name="portal">
   <object id="19" name="honeywood_forest_path" x="432" y="624" width="96" height="24"/>
-  <object id="78" name="honeywood_cave_1" x="312" y="72" width="48" height="24"/>
+  <object id="78" name="honeywood_cave_1" x="312" y="72" width="12" height="24"/>
  </objectgroup>
  <objectgroup color="#ffaa7f" id="14" name="save"/>
  <objectgroup color="#ff00ff" id="19" name="cutscene"/>

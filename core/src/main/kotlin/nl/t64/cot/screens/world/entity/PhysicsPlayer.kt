@@ -65,11 +65,11 @@ class PhysicsPlayer : PhysicsComponent() {
     }
 
     private fun collisionBlockers(dt: Float) {
-        brokerManager.blockObservers.getCurrentBlockersFor(boundingBox, state)
-            .forEach {blocker ->
-                moveSide(blocker, dt)
-                moveBack(blocker.getOverlapSide())
-            }
+        val blockers = brokerManager.blockObservers.getCurrentBlockersFor(boundingBox, state)
+        if (blockers.size == 1) {
+            blockers.forEach { moveSide(it, dt) }
+        }
+        blockers.forEach { moveBack(it.getOverlapSide()) }
     }
 
     private enum class OverlapSide { NONE, TOP, BOTTOM, LEFT, RIGHT }

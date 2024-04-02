@@ -205,10 +205,9 @@
   <object id="55" x="1584" y="624" width="336" height="240"/>
   <object id="56" x="1584" y="576" width="96" height="48"/>
   <object id="57" x="1344" y="864" width="528" height="48"/>
-  <object id="58" x="1392" y="912" width="480" height="48"/>
+  <object id="58" x="1392" y="912" width="576" height="48"/>
   <object id="59" x="1440" y="1056" width="468" height="48"/>
   <object id="60" x="1536" y="960" width="336" height="48"/>
-  <object id="61" x="1872" y="912" width="96" height="48"/>
   <object id="62" x="1440" y="1104" width="288" height="144"/>
   <object id="63" x="1728" y="1104" width="144" height="48"/>
   <object id="64" x="1728" y="1152" width="48" height="48"/>

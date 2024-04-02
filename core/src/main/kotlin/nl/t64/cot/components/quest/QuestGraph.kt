@@ -176,8 +176,8 @@ data class QuestGraph(
                 .filterValues { it.conversationId == conversationId }
                 .filterValues { !it.isComplete }
                 .filterValues { it.targetAlternate.isNotEmpty() }
-                .onEach { it.value.updateTargetToAlternate() }
-                .filterValues { it.hasTargetInInventory() }
+                .filterValues { it.hasTargetAlternateInInventory() }
+                .onEach { it.value.isTargetAlternateUsed = true }
                 .forEach { setTaskComplete(it.key) }
         }
     }

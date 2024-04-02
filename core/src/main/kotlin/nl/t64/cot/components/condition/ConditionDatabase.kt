@@ -25,7 +25,8 @@ object ConditionDatabase {
         "i_!starting_spells"        to { !hasStartingSpells },
         "i_starting_spells"         to { hasStartingSpells },
         "!talked_to_lennor"         to { hasNotYetTalkedToLennorFirstCycle },
-        "i_not_happy_with_jaron"    to { notHappyWithJaron },
+        "!black_asked_four"         to { !blackAskedFour },
+        "black_asked_four"          to { blackAskedFour },
         "alone_in_party"            to { isAloneInParty },
         "is_fairy_portal_active"    to { gameData.portals.isActivated(Portal.HONEYWOOD_GREAT_TREE.name) },
         "i_!is_fairy_portal_active" to { isPortalFairyInactiveAndPortalHoneywoodActive }
@@ -59,8 +60,8 @@ object ConditionDatabase {
     private val hasNotYetTalkedToLennorFirstCycle
         get() = "quest_helping_horse" hasResetState QuestState.UNKNOWN
             && "quest_helping_horse" hasCurrentPhraseId "1"
-    private val notHappyWithJaron
-        get() = areTargetAndAlternateTheSame("quest_get_tow_rope", "13") // "_13_"
+    private val blackAskedFour
+        get() = isTargetAlternateUsed("quest_get_tow_rope", "13") // "_13_"
             || "quest_get_horseshoes" hasCurrentPhraseId "200"
     private val isAloneInParty get() = hasAmountOfPartyMembers(1)
     private val isPortalFairyInactiveAndPortalHoneywoodActive
@@ -78,10 +79,8 @@ object ConditionDatabase {
     private fun hasAverageLevelOf(requestedLevel: Int): Boolean =
         gameData.party.getAverageLevel() >= requestedLevel
 
-    private fun areTargetAndAlternateTheSame(questId: String, questTaskId: String): Boolean {
-        val questTask = gameData.quests.getQuestById(questId).tasks[questTaskId]!!
-        return questTask.target == questTask.targetAlternate
-    }
+    private fun isTargetAlternateUsed(questId: String, questTaskId: String): Boolean =
+        gameData.quests.getQuestById(questId).tasks[questTaskId]!!.isTargetAlternateUsed
 
     private fun hasEventPlayed(eventId: String): Boolean =
         gameData.events.hasEventPlayed(eventId)

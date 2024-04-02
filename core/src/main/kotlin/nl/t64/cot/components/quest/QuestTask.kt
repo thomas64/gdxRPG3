@@ -20,11 +20,11 @@ class QuestTask(
     var hasRewardSound: Boolean = false,
     val linkedWith: List<String> = emptyList()
 ) {
-    private val originalTarget = target
     var isReset: Boolean = false
     var isComplete: Boolean = false
     var isFailed: Boolean = false
     var isQuestFinished: Boolean = false
+    var isTargetAlternateUsed: Boolean = false
 
     override fun toString(): String {
         return when {
@@ -37,10 +37,10 @@ class QuestTask(
     }
 
     fun possibleReset() {
-        target.putAll(originalTarget)
         if (isComplete && isResettable()) {
             isReset = true
             isComplete = false
+            isTargetAlternateUsed = false
         }
     }
 
@@ -79,16 +79,11 @@ class QuestTask(
             QuestTaskType.DELIVER_ITEM,
             QuestTaskType.TRADE_ITEMS,
             QuestTaskType.PROVIDE_ITEM -> {
-                removeTargetFromInventory()
+                removeTargetOrTargetAlternateFromInventory()
                 completeTask()
             }
             else -> throw IllegalArgumentException("Only some types are completable this way for now.")
         }
-    }
-
-    fun updateTargetToAlternate() {
-        target.clear()
-        target.putAll(targetAlternate)
     }
 
     fun hasTargetInInventoryOrEquipment(): Boolean {
@@ -98,6 +93,10 @@ class QuestTask(
 
     fun hasTargetInInventory(): Boolean {
         return gameData.inventory.contains(target)
+    }
+
+    fun hasTargetAlternateInInventory(): Boolean {
+        return gameData.inventory.contains(targetAlternate)
     }
 
     fun hasTargetInPlayerEquipment(): Boolean {
@@ -115,8 +114,12 @@ class QuestTask(
         }
     }
 
-    private fun removeTargetFromInventory() {
-        gameData.inventory.autoRemoveItems(target)
+    private fun removeTargetOrTargetAlternateFromInventory() {
+        if (isTargetAlternateUsed) {
+            gameData.inventory.autoRemoveItems(targetAlternate)
+        } else {
+            gameData.inventory.autoRemoveItems(target)
+        }
     }
 
     private fun getTargetEntry(): Map.Entry<String, Int> {
