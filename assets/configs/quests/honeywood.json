@@ -97,7 +97,7 @@
     "isSubQuest": true,
     "tasks"     : {
       "12": {
-        "taskPhrase": "      Do some deliveries for Jaron and he will borrow a tow rope to you, because he needs it at the moment.",
+        "taskPhrase": "      Do some chores for Jaron and he will borrow a tow rope to you, because he needs it at the moment.",
         "type"      : "FREE"
       },
       "13": {

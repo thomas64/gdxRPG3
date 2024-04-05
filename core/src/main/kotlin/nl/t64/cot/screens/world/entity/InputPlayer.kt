@@ -47,10 +47,6 @@ class InputPlayer(multiplexer: InputMultiplexer) : InputComponent(), InputProces
     }
 
     override fun keyDown(keycode: Int): Boolean {
-        return keyPressed(keycode, true)
-    }
-
-    override fun keyUp(keycode: Int): Boolean {
         if (keycode == Input.Keys.CONTROL_LEFT
             || keycode == Input.Keys.CONTROL_RIGHT
             || keycode == Constant.KEYCODE_L1
@@ -65,6 +61,10 @@ class InputPlayer(multiplexer: InputMultiplexer) : InputComponent(), InputProces
             pressShift = !pressShift
             pressCtrl = false
         }
+        return keyPressed(keycode, true)
+    }
+
+    override fun keyUp(keycode: Int): Boolean {
         return keyPressed(keycode, false)
     }
 

@@ -238,11 +238,9 @@ class AudioManager {
                 queuedBgs[event] = bgs
             }
             if (preferenceManager.isSoundOn) {
-                if (!bgs.isPlaying) {
-                    bgs.isLooping = isLooping
-                    bgs.play()
-                    bgs.volume = event.volume
-                }
+                bgs.isLooping = isLooping
+                bgs.play()
+                bgs.volume = event.volume
             } else {
                 bgs.stop()
             }
@@ -258,7 +256,7 @@ class AudioManager {
             queuedMe[event] = me
         }
         if (preferenceManager.isMusicOn) {
-            val meId = me.play()
+            val meId = me.play(event.volume)
             me.setLooping(meId, isLooping)
         } else {
             me.stop()
@@ -274,8 +272,7 @@ class AudioManager {
             queuedSe[event] = se
         }
         if (preferenceManager.isSoundOn) {
-            val seId = se.play()
-            se.setVolume(seId, event.volume)
+            val seId = se.play(event.volume)
             se.setLooping(seId, isLooping)
         } else {
             se.stop()

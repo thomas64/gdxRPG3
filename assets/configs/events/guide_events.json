@@ -32,7 +32,7 @@
   "guide_event_slow"                 : {
     "type": "messagebox",
     "text": [
-      "Press the %slow% to move stealthily.",
+      "Toggle the %slow% to move stealthily.",
       "Enemies will have a harder time detecting you,",
       "enabling you to avoid battles if necessary."
     ]
@@ -76,7 +76,7 @@
     "type"     : "messagebox",
     "condition": ["been_in_fairy_town"],
     "text"     : [
-      "Press the %fast% to run.",
+      "Toggle the %fast% to run.",
       "You'll move faster, but enemies will detect you more easily."
     ]
   },
