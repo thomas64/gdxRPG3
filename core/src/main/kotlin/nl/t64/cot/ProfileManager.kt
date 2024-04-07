@@ -25,7 +25,7 @@ private const val PROFILE_SAVE_DATE_KEY = "saveDate"
 private const val PROFILE_SAVE_STATE_KEY = "saveState"
 private const val PROFILE_FOG_OF_WAR_KEY = "fogOfWar"
 private const val DATE_PATTERN = "yyyy-MM-dd HH:mm"
-private const val DEFAULT_EMPTY_PROFILE_VIEW = " [...]"
+const val DEFAULT_EMPTY_PROFILE_VIEW = " [...]"
 const val INVALID_PROFILE_VIEW = " [Invalid]"
 
 class ProfileManager {

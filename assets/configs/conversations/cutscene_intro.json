@@ -3,12 +3,12 @@
     "phrases": {
       "1": {"face": "mozes", "text": ["Grace!"]},
       "2": {"face": "mozes", "text": ["Come inside the house; it's time for bed."]},
-      "3": {"face": "girl01", "name": "Grace", "text": ["But Mozes, I'm not sleepy yet. I don't wanna!"]},
-      "4": {"face": "mozes", "name": "Mozes", "text": ["I understand, but it's getting dark soon. You need to come inside."]},
+      "3": {"face": "girl01", "name": "Grace", "text": ["But Mozes, I don't wanna! I'm not sleepy yet."]},
+      "4": {"face": "mozes", "name": "Mozes", "text": ["Yeah, I know, but it's getting dark soon. You need to come inside."]},
       "5": {"face": "girl01", "name": "Grace", "text": ["Aw, man! Mommy and daddy always let me stay outside after dark!"]},
       "6": {"face": "mozes", "name": "Mozes", "text": ["Heh, that's not entirely true. But come now, you must listen to me."]},
       "7": {"face": "girl01", "name": "Grace", "text": [". . ."]},
-      "8": {"face": "girl01", "name": "Grace", "text": ["Alright..."], "choices": [{"command": "EXIT"}]}
+      "8": {"face": "girl01", "name": "Grace", "text": ["Okay..."], "choices": [{"command": "EXIT"}]}
     }
   },
   "mozes_puts_grace_to_bed"  : {

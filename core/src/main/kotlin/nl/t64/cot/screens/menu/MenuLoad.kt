@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ScreenUtils
 import nl.t64.cot.INVALID_PROFILE_VIEW
+import nl.t64.cot.DEFAULT_EMPTY_PROFILE_VIEW
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.gameData
@@ -210,8 +211,13 @@ abstract class MenuLoad : MenuScreen() {
     private fun loadProfiles() {
         profiles = profileManager.getVisualProfileArray()
         listItems.setItems(profiles)
+        if (areAllProfilesEmpty()) selectedListIndex = 0
         listItems.selectedIndex = selectedListIndex
         isLoaded = true
+    }
+
+    private fun areAllProfilesEmpty(): Boolean {
+        return profiles.all { it.contains(DEFAULT_EMPTY_PROFILE_VIEW) }
     }
 
     private fun createTables() {

@@ -21,7 +21,7 @@ import nl.t64.cot.screens.ParchmentScreen
 
 private const val TEXT_FONT = "fonts/spectral_regular_24.ttf"
 private const val TEXT_SIZE = 24
-private const val TITLE = "Hints"
+private const val TITLE = "Tutorial messages"
 private const val SCROLL_SPEED = 100f
 private const val HINT_LINE_SPACE = 50f
 private const val WINDOW_POS_X = 100f

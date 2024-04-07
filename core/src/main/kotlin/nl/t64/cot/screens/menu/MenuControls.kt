@@ -14,8 +14,8 @@ import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 
 
-private const val COLUMN_0_WIDTH = 240f
-private const val COLUMN_1_WIDTH = 120f
+private const val COLUMN_0_WIDTH = 280f
+private const val COLUMN_1_WIDTH = 140f
 
 class MenuControlsMain : MenuControls() {
     override val titleLogo: Texture = resourceManager.getTextureAsset(TITLE_LOGO_B)
@@ -54,7 +54,7 @@ abstract class MenuControls : MenuScreen() {
     private fun createTables() {
         val textStyle = LabelStyle(menuFont, fontColor)
         val labels = createInputLabels(textStyle)
-        labels.forEach { it.setAlignment(Align.center) }
+        labels.forEach { it.setAlignment(Align.left) }
 
         table = Table()
         table.setFillParent(true)
@@ -111,7 +111,7 @@ abstract class MenuControls : MenuScreen() {
             Label("M", textStyle),
             Label("Party", textStyle),
             Label("P", textStyle),
-            Label("Hints", textStyle),
+            Label("Manual", textStyle),
             Label("H", textStyle),
             Label("Pause", textStyle),
             Label("Esc", textStyle)
@@ -136,7 +136,7 @@ abstract class MenuControls : MenuScreen() {
             Label("Select", textStyle),
             Label("Party", textStyle),
             Label("R-Stick", textStyle),
-            Label("Hints", textStyle),
+            Label("Manual", textStyle),
             Label("L-Stick", textStyle),
             Label("Pause", textStyle),
             Label("Start", textStyle)

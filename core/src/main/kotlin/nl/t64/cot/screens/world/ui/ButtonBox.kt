@@ -45,7 +45,7 @@ internal class ButtonBox {
             table.add("[ Select ]").row()
             table.add("Party")
             table.add("[ R-Stick ]").row()
-            table.add("Hints")
+            table.add("Manual")
             table.add("[ L-Stick ]")
             extraMargin = GAMEPAD_EXTRA_MARGIN
         } else {
@@ -59,7 +59,7 @@ internal class ButtonBox {
             table.add("[ M ]").row()
             table.add("Party")
             table.add("[ P ]").row()
-            table.add("Hints")
+            table.add("Manual")
             table.add("[ H ]")
             extraMargin = 0f
         }

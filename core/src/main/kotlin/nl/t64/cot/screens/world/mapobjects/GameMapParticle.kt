@@ -1,5 +1,6 @@
 package nl.t64.cot.screens.world.mapobjects
 
+import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.ParticleEffect
 import com.badlogic.gdx.maps.objects.RectangleMapObject
@@ -9,6 +10,7 @@ import nl.t64.cot.Utils.resourceManager
 
 private const val TORCH_SCALE = 0.3f
 private const val TORCH_Y_OFFSET = -9f
+private const val PRE_WARM_TIMES = 60
 
 class GameMapParticle(rectObject: RectangleMapObject) : GameMapObject(rectObject.rectangle) {
 
@@ -34,6 +36,7 @@ class GameMapParticle(rectObject: RectangleMapObject) : GameMapObject(rectObject
                 "torch" -> {
                     scaleEffect(TORCH_SCALE)
                     setPosition(center.x, center.y + TORCH_Y_OFFSET)
+                    repeat(PRE_WARM_TIMES) { update(Gdx.graphics.deltaTime) }
                 }
                 else -> throw IllegalArgumentException("RectObject.name: $name is not defined.")
             }

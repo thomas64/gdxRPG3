@@ -172,7 +172,7 @@
   "fairy_shop"         : {
     "name"   : "Fairy Shop",
     "phrases": {
-      "1"   : {"text": ["Young Mozes, would you like to browse my wares?"]},
+      "1"   : {"text": ["Young Mozes, can I help you with anything?"]},
       "2"   : {
         "choices": [
           {
@@ -188,7 +188,7 @@
       "12"  : {"text": ["Well of course, glad to be of assistance. Here you go."]},
       "13"  : {"text": ["Good luck on your travels, Mozes!"], "choices": [{"command": "RECEIVE_ITEM"}]},
       "1199": {"text": ["Don't forget to take the elder's request."], "choices": [{"command": "RECEIVE_ITEM"}]},
-      "1200": {"text": ["Young Mozes, would you like to browse my wares?"], "choices": [{"nextId": "2"}]}
+      "1200": {"text": ["Young Mozes, can I help you with anything?"], "choices": [{"nextId": "2"}]}
     }
   },
   "notice_dense_fog"   : {

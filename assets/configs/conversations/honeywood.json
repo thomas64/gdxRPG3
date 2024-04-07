@@ -261,7 +261,7 @@
   "resourceshop_honeywood"              : {
     "name"   : "Resource Shop",
     "phrases": {
-      "1": {"text": ["Hi Mozes, would you like to browse my wares?"]},
+      "1": {"text": ["Hi Mozes, can I help you with anything?"]},
       "2": {
         "choices": [
           {"text": "*Visit the shop.*", "command": "LOAD_SHOP"},
@@ -351,7 +351,7 @@
       "30"  : {"text": ["I'm truly sorry for this minor inconvenience. Please do return to us again on your next stay."], "choices": [{"command": "EXIT"}]},
       "40"  : {"text": ["Couldn't you shout any louder? Those 'visitors' are up the stairs near the fireplace."], "choices": [{"command": "EXIT"}]},
       "50"  : {"text": ["Splendid! That's wonderful. I bet those bats must have been trained by an evil imp to harass my customers! Thank you!"]},
-      "51"  : {"text": ["There was a reward, you know... five gold pieces. With these, you can have five stays for free, sort of. Isn't that great?"], "choices": [{"command": "REWARD_QUEST"}]},
+      "51"  : {"text": ["There was a reward, you know... five gold pieces. With these, you can stay five times for free, sort of. Isn't that great?"], "choices": [{"command": "REWARD_QUEST"}]},
       "1000": {"text": ["I'm sorry, Mozes, you don't have enough gold."], "choices": [{"command": "EXIT"}]},
       "1399": {"text": ["Such a brave yet modest hero! You didn't even take your reward."], "choices": [{"command": "REWARD_QUEST"}]},
       "1400": {"text": ["Welcome back, my fearless friend! Thanks again for your help. Would you like to rest here and be completely revitalized for just 1 gold piece?"], "choices": [{"nextId": "2"}]}
