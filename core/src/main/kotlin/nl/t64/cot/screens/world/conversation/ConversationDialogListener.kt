@@ -28,20 +28,25 @@ internal class ConversationDialogListener(
     }
 
     private fun inputUp() {
-        if (answers.items.size > 1 && answers.selectedIndex > 0) {
+        if (answers.items.size > 2 && answers.selectedIndex == 0) {
             playSe(AudioEvent.SE_CONVERSATION_CURSOR)
-            answers.selectedIndex = answers.selectedIndex - 1
-        }
-        if (answers.selectedIndex == -1) {
+            answers.selectedIndex = answers.items.size - 1
+        } else if (answers.items.size > 1 && answers.selectedIndex > 0) {
+            playSe(AudioEvent.SE_CONVERSATION_CURSOR)
+            answers.selectedIndex -= 1
+        } else if (answers.selectedIndex == -1) {
             playSe(AudioEvent.SE_CONVERSATION_CURSOR)
             answers.selectedIndex = answers.items.size - 1
         }
     }
 
     private fun inputDown() {
-        if (answers.items.size > 1 && answers.selectedIndex < answers.items.size - 1) {
+        if (answers.items.size > 2 && answers.selectedIndex == answers.items.size - 1) {
             playSe(AudioEvent.SE_CONVERSATION_CURSOR)
-            answers.selectedIndex = answers.selectedIndex + 1
+            answers.selectedIndex = 0
+        } else if (answers.items.size > 1 && answers.selectedIndex < answers.items.size - 1) {
+            playSe(AudioEvent.SE_CONVERSATION_CURSOR)
+            answers.selectedIndex += 1
         }
     }
 

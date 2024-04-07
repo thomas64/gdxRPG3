@@ -39,7 +39,7 @@ class SceneStartOfCycle3 : CutsceneScreen() {
                 setMapWithBgsOnly("honeywood_house_mozes")
                 setFixedCameraPosition(0f, 720f)
                 mozes.isVisible = true
-                mozes.setPosition(192f, 534f)
+                mozes.setPosition(456f, 534f)
                 mozes.entityState = EntityState.IDLE
                 mozes.direction = Direction.SOUTH
             },

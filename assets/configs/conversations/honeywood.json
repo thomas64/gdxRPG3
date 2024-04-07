@@ -581,11 +581,11 @@
       "101" : {"text": ["I know, the bill was originally only {COLOR=BLUE}three{COLOR=BLACK}, but that's what I call interest. That slacker hasn't paid up in such a long time."]},
       "102" : {
         "choices": [
+          {"text": "*Grumble. Don't pay. Jaron must pay for this. Take your leave.*", "command": "EXIT", "nextId": "200"},
           {"condition": ["_n_4_>=_item_gold"], "text": "[Gold 4] *Agree with him and pay.*", "nextId": "110"},
           {"condition": ["_n_4_>=_item_gold"], "text": "[Gold 4] *Pay up, but disagree with him.*", "nextId": "111"},
           {"condition": ["_n_3_>=_item_gold", "diplomat1"], "text": "[Gold 3, Diplomat 1] *Explain Jaron only gave you three gold pieces.*", "nextId": "120"},
-          {"condition": ["i_n_3_==_item_gold"], "text": "[Gold 3] *State that you don't any more gold with you.*", "nextId": "120"},
-          {"text": "*Grumble. Don't pay. Jaron must pay for this. Take your leave.*", "command": "EXIT", "nextId": "200"}
+          {"condition": ["i_n_3_==_item_gold"], "text": "[Gold 3] *State that you don't any more gold with you.*", "nextId": "120"}
         ]
       },
       "110" : {"text": ["That's what I thought, of course you agree."], "choices": [{"command": "DELIVER_QUEST_ITEM_ALTERNATE", "nextId": "130"}]},

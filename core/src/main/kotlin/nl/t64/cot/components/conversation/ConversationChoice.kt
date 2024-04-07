@@ -20,6 +20,7 @@ data class ConversationChoice(
     val conditionIds: List<String> = emptyList()
 ) {
     private lateinit var conversationId: String
+    var hasBeenSelectedEarlier: Boolean = false
 
     fun initId(id: String) {
         conversationId = id

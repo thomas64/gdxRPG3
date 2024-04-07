@@ -9,10 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.*
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
-import com.badlogic.gdx.scenes.scene2d.ui.List
-import com.badlogic.gdx.scenes.scene2d.ui.List.ListStyle
-import com.badlogic.gdx.scenes.scene2d.utils.BaseDrawable
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable
 import com.badlogic.gdx.utils.Align
 import com.rafaskoberg.gdx.typinglabel.TypingLabel
 import ktx.assets.disposeSafely
@@ -39,7 +35,6 @@ import nl.t64.cot.screens.loot.TradeScreen
 import nl.t64.cot.screens.school.SchoolScreen
 import nl.t64.cot.screens.shop.ShopScreen
 import nl.t64.cot.sfx.TransitionPurpose
-import nl.t64.cot.toDrawable
 import kotlin.concurrent.thread
 
 
@@ -48,7 +43,6 @@ private const val FONT_SIZE = 24
 private const val LINE_HEIGHT = 26f
 
 private const val SCROLL_PANE_LINE_HEIGHT = 32f
-private const val SCROLL_PANE_LINE_PAD = -4f
 private const val SCROLL_PANE_TOP_PAD = 10f
 private const val DIALOG_WIDTH = 1200f
 private const val DIALOG_HEIGHT = 300f
@@ -66,7 +60,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     private val stage: Stage = Stage()
     private val font: BitmapFont = createFont()
     private val label: TypingLabel = createLabel()
-    private val answers: List<ConversationChoice> = List(createAnswersStyle())
+    private val answers: ConversationAnswers = ConversationAnswers(font)
     private val scrollPane: ScrollPane = createScrollPane()
     private val dialog: Dialog = createDialog()
 
@@ -167,13 +161,14 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             label.skipToTheEnd()
             return
         }
-        val selectedAnswer = answers.selected
-        if (!selectedAnswer.isMeetingCondition()) {
+        val selectedChoice = answers.selected
+        if (!selectedChoice.isMeetingCondition()) {
             playSe(AudioEvent.SE_MENU_ERROR)
             return
         }
-        val nextId = selectedAnswer.nextId
-        when (val conversationCommand = selectedAnswer.command) {
+        selectedChoice.hasBeenSelectedEarlier = true
+        val nextId = selectedChoice.nextId
+        when (val conversationCommand = selectedChoice.command) {
             ConversationCommand.NONE -> continueConversation(nextId)
             ConversationCommand.EXIT -> endConversation(nextId)
             ConversationCommand.HERO_JOIN -> tryToAddHeroToParty(nextId)
@@ -430,11 +425,13 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     private fun hideWithFade() {
         label.setText("")
         answers.clearItems()
+        graph.resetChoiceHistory()
         scrollPane.clearListeners()
         dialog.hide()
     }
 
     private fun hide() {
+        graph.resetChoiceHistory()
         scrollPane.clearListeners()
         dialog.hide(null)
     }
@@ -480,30 +477,8 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
 
     private fun populateChoices() {
         val choices = GdxArray(graph.getAssociatedChoices())
-        answers.setItems(choices)
-        setDefaultSelectedChoice(choices)
-        setStyleBasedOnContent(choices)
+        answers.populateChoices(choices)
         repositionScrollPaneBasedOnContent(choices)
-    }
-
-    private fun setDefaultSelectedChoice(choices: GdxArray<ConversationChoice>) {
-        if (choices.size == 1) {
-            answers.selectedIndex = 0
-        } else {
-            answers.selectedIndex = -1
-        }
-    }
-
-    private fun setStyleBasedOnContent(choices: GdxArray<ConversationChoice>) {
-        val drawable = if (choices[0].isDefault()) {
-            Color.CLEAR.toDrawable()
-        } else {
-            Utils.createFullBorder()
-        }.apply {
-            topHeight = SCROLL_PANE_LINE_PAD
-            bottomHeight = SCROLL_PANE_LINE_PAD
-        }
-        answers.style = createAnswersStyle(drawable)
     }
 
     private fun repositionScrollPaneBasedOnContent(choices: GdxArray<ConversationChoice>) {
@@ -538,13 +513,6 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     private fun createLabel(): TypingLabel {
         return TypingLabel("No Conversation", LabelStyle(font, Color.BLACK))
             .apply { wrap = true }
-    }
-
-    private fun createAnswersStyle(drawable: Drawable = BaseDrawable()): ListStyle {
-        return ListStyle(font, Constant.DARK_RED, Color.BLACK, drawable).apply {
-            selection.leftWidth = PAD
-            selection.rightWidth = PAD
-        }
     }
 
     private fun createScrollPane(): ScrollPane {

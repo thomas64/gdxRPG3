@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="18" height="30" tilewidth="24" tileheight="24" infinite="0" nextlayerid="23" nextobjectid="36">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="24" tileheight="24" infinite="0" nextlayerid="23" nextobjectid="36">
  <properties>
   <property name="bgm" value="bgm_house"/>
   <property name="step_sound" value="wood"/>
@@ -8,79 +8,79 @@
   <image source="tilesets/honeywood_house_mozes.png" width="600" height="408"/>
  </tileset>
  <tileset firstgid="426" source="tilesets/fsm_inside01_c.tsx"/>
- <layer id="2" name="under0_none" width="18" height="30">
+ <layer id="2" name="under0_none" width="40" height="30">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwSigLQAACHAAAQ==
+   eJztwTEBAAAAwqD1T20ND6AAAAAA4NcAEsAAAQ==
   </data>
  </layer>
- <layer id="1" name="under1_ground" width="18" height="30">
+ <layer id="1" name="under1_ground" width="40" height="30">
   <data encoding="base64" compression="zlib">
-   eJzdk1dOAzEQhu2EDqGcgybRAqGEcg/e6L0+wj2oIqFK3ITeHuhwEz4LWWs5s9kIeMLSp39GXtn/zni0Ukr/ERuwCVs/0G3nnHOIEXTBOPEIjMKYoP7+p3POGcQJUjBB3IJOw4yjY7Dm7Nv8w/NTRNANk8StOsit7sGOsz8O6zrXTzFBD0wRt+kgt5qBXWd/wpwp+Ckh6DX/Qdyug9xqFvad/Q5ICn7smoFZlbvmoEoH+zb3/ZQRpKEf7p3crgc4EdT3U05wh17DDdyq79yqvd9X30+Flu+z/gr1U6nl+6y/QvzsCnWNqss8JLx+hc1XJo+PBbRaqI87R71QD1mhbo+QhEWoEd5PTH3PUQXaBw2wL9TtCe2EJRhWuX7iMEtSiaahEQ4EP8/QBcshfopMLczdptfQBIeCnxc0BStQK9Sn2PSAJIEOQDMcCX16hW5YhTrBTwkskFSjgzAEx0K/3tB3Fajvp9T0QIe/l7D37fspMz0Q3knU+/b9XJge6Oh5ipqvS7hS0fP02/kKW6fOOTrPd/besKVVYedErf9+zhcKoaxf
+   eJztlddOQkEQhncREUFRn8OW2LGX9/BOAXtBL/U9bETsiW9ibxd2fRM/QjbnhHMWEi8GY9jkyz+TvWDysTBaKaX/EVuwDTu/yF2B+S4hQBGHJPUUTEPCJwvvvwXmu4Aqin5IUXeQczDvygRsuO5N/yXkL0gxADPUndrpTe7Dnus+CZtazl81xSDMUndppzeZhYzrPpWbVdBfiGIo931Sd2unN3kAh677HugV9GfOPCwo71mEOu3cm17KX5hiBEbh0dWb8wRnPinlr5bigbyFO7hX+d6k8VWYUv4i2t+P8Vluf1Ht78f4LKe/jLIfm7clqNcy/mz7N1vE2zIZE3x/7j07BM1woLzv8hl6YQUahPzl3l9A5fdshByGFjhU3nf5QvbBKkwqOX9VsEATJUegFY58/L1CHNLC/oKwmHNFjkIbHPv4eyP7YQ0aBd9fNSzR1JNj0A4nyvu7fYcBWIcmQX8hWKaJkeMwAafK+7v9ID+Vk1L+amBF2//vbPtEyl8YVrX9/862T6T8XUFal9635dq/13CjSu/bv7p/bedcYD5d5PONJ9uRmK3YfKVOZb7KfIX8AMdTrvM=
   </data>
  </layer>
- <layer id="3" name="under2_objects" width="18" height="30">
+ <layer id="3" name="under2_objects" width="40" height="30">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUDBawipGBYTUj5eacAppxmgrmjIJRMApGAbUAANkXAu8=
+   eJztzlERABAQBcB3/ZvQhFIU8M2Y3QSbAAA/aZX0ur04G/s2H/4BAPCeBfg2Au8=
   </data>
  </layer>
- <layer id="4" name="under3_none" width="18" height="30">
+ <layer id="4" name="under3_none" width="40" height="30">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwSigLQAACHAAAQ==
+   eJztwTEBAAAAwqD1T20ND6AAAAAA4NcAEsAAAQ==
   </data>
  </layer>
- <layer id="5" name="under4_none" width="18" height="30">
+ <layer id="5" name="under4_none" width="40" height="30">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwSigLQAACHAAAQ==
+   eJztwTEBAAAAwqD1T20ND6AAAAAA4NcAEsAAAQ==
   </data>
  </layer>
- <layer id="6" name="under5_none" width="18" height="30">
+ <layer id="6" name="under5_none" width="40" height="30">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwSigLQAACHAAAQ==
+   eJztwTEBAAAAwqD1T20ND6AAAAAA4NcAEsAAAQ==
   </data>
  </layer>
- <layer id="7" name="over6_objects" width="18" height="30">
+ <layer id="7" name="over6_objects" width="40" height="30">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFIxmwMzIw2DFi8tHFyQUcQDPsqWDOUAcLgHg1Gr1w4JwzCkbBsAILGPDnr1VY5FdjMYcRCz6NJP8AhxpizJmPZO8aCswhBg9WcwAkHRE3
+   eJzt1bENgCAQRuGfSqfSUcVW3MQlHEU6DKKxgou+L7kYPIsXGyQAsKNz0uCu5/y9NX1sGw334Rt8nJA953Y5AAD8gtfz/bsU9qFenlxhttN+v/mmZd+k9J9Wg31vhr76fQdisRE3
   </data>
  </layer>
- <layer id="8" name="over7_none" width="18" height="30">
+ <layer id="8" name="over7_none" width="40" height="30">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwSigLQAACHAAAQ==
+   eJztwTEBAAAAwqD1T20ND6AAAAAA4NcAEsAAAQ==
   </data>
  </layer>
- <layer id="9" name="over8_none" width="18" height="30">
+ <layer id="9" name="over8_none" width="40" height="30">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwSigLQAACHAAAQ==
+   eJztwTEBAAAAwqD1T20ND6AAAAAA4NcAEsAAAQ==
   </data>
  </layer>
  <objectgroup color="#0055ff" id="16" name="sound"/>
- <objectgroup color="#aa0000" id="10" name="collision" visible="0">
-  <object id="1" x="0" y="0" width="432" height="144"/>
-  <object id="2" x="0" y="144" width="48" height="576"/>
-  <object id="3" x="384" y="144" width="48" height="576"/>
-  <object id="4" x="48" y="600" width="144" height="120"/>
-  <object id="5" x="240" y="600" width="144" height="120"/>
-  <object id="6" x="192" y="672" width="48" height="48"/>
-  <object id="7" x="48" y="144" width="48" height="96"/>
-  <object id="8" x="144" y="144" width="96" height="103"/>
-  <object id="9" x="240" y="144" width="48" height="24"/>
-  <object id="10" x="336" y="144" width="48" height="24"/>
-  <object id="11" x="288" y="294" width="96" height="180"/>
-  <object id="12" x="48" y="312" width="144" height="144"/>
-  <object id="13" x="48" y="456" width="48" height="120"/>
+ <objectgroup color="#aa0000" id="10" name="collision">
+  <object id="1" x="264" y="0" width="432" height="144"/>
+  <object id="2" x="264" y="144" width="48" height="576"/>
+  <object id="3" x="648" y="144" width="48" height="576"/>
+  <object id="4" x="312" y="600" width="144" height="120"/>
+  <object id="5" x="504" y="600" width="144" height="120"/>
+  <object id="6" x="456" y="672" width="48" height="48"/>
+  <object id="7" x="312" y="144" width="48" height="96"/>
+  <object id="8" x="408" y="144" width="96" height="103"/>
+  <object id="9" x="504" y="144" width="48" height="24"/>
+  <object id="10" x="600" y="144" width="48" height="24"/>
+  <object id="11" x="552" y="294" width="96" height="180"/>
+  <object id="12" x="312" y="312" width="144" height="144"/>
+  <object id="13" x="312" y="456" width="48" height="120"/>
  </objectgroup>
  <objectgroup color="#5500ff" id="14" name="rest">
-  <object id="29" name="storage" x="240" y="144" width="48" height="24">
+  <object id="29" name="storage" x="504" y="144" width="48" height="24">
    <properties>
     <property name="condition" value="_rc_&gt;=_a_q_quest_royal_sacrifice"/>
    </properties>
   </object>
-  <object id="31" name="note_bed03" x="48" y="144" width="48" height="96"/>
-  <object id="32" name="note_bed03" x="144" y="144" width="96" height="96"/>
-  <object id="33" name="note_bookcase" x="336" y="120" width="48" height="48"/>
+  <object id="31" name="note_bed03" x="312" y="144" width="48" height="96"/>
+  <object id="32" name="note_bed03" x="408" y="144" width="96" height="96"/>
+  <object id="33" name="note_bookcase" x="600" y="120" width="48" height="48"/>
  </objectgroup>
  <objectgroup color="#aa55ff" id="21" name="hero">
-  <object id="34" name="luana" x="288" y="306" width="48" height="24">
+  <object id="34" name="luana" x="552" y="306" width="48" height="24">
    <properties>
     <property name="conversation" value="luana_rejoin"/>
     <property name="direction" value="south"/>
@@ -90,22 +90,22 @@
  </objectgroup>
  <objectgroup color="#55ff7f" id="15" name="npc"/>
  <objectgroup color="#55aaff" id="11" name="spawn">
-  <object id="15" name="honeywood" x="192" y="624" width="48" height="24"/>
-  <object id="30" name="honeywood_house_mozes" x="240" y="168" width="48" height="24">
+  <object id="15" name="honeywood" x="456" y="624" width="48" height="24"/>
+  <object id="30" name="honeywood_house_mozes" x="504" y="168" width="48" height="24">
    <properties>
     <property name="direction" value="south"/>
    </properties>
   </object>
-  <object id="35" name="scene_intro" x="240" y="168" width="48" height="24">
+  <object id="35" name="scene_intro" x="504" y="168" width="48" height="24">
    <properties>
     <property name="direction" value="south"/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup color="#ffff7f" id="13" name="portal">
-  <object id="16" name="honeywood" x="192" y="648" width="48" height="24"/>
+  <object id="16" name="honeywood" x="456" y="648" width="48" height="24"/>
  </objectgroup>
  <objectgroup color="#ff55ff" id="20" name="event">
-  <object id="28" name="guide_event_storage" type="discover" x="240" y="216" width="144" height="24"/>
+  <object id="28" name="guide_event_storage" type="discover" x="504" y="216" width="144" height="24"/>
  </objectgroup>
 </map>

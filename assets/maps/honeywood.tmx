@@ -283,7 +283,7 @@
   <object id="339" name="door_simple_left2" x="720" y="432" width="48" height="96"/>
   <object id="336" name="door_simple_left1" x="624" y="1296" width="48" height="96"/>
   <object id="340" name="door_forged_left" x="1056" y="768" width="48" height="96"/>
-  <object id="390" name="note_black_smith" x="768" y="456" width="48" height="72"/>
+  <object id="390" name="note_black_smith" x="768" y="456" width="48" height="66"/>
   <object id="428" name="sparkle_honeywood_7" x="1344" y="912" width="48" height="48"/>
   <object id="431" name="sparkle_honeywood_6" x="192" y="1392" width="48" height="48"/>
   <object id="427" name="sparkle_honeywood_5" x="1344" y="1584" width="48" height="48"/>

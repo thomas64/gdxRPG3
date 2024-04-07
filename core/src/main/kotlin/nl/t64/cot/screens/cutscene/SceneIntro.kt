@@ -152,10 +152,10 @@ class SceneIntro : CutsceneScreen() {
                 setMapWithBgmBgs("honeywood_house_mozes")
                 setFixedCameraPosition(0f, 720f)
                 door1.isVisible = false
-                mozes.setPosition(96f, 528f)
+                mozes.setPosition(360f, 528f)
                 mozes.entityState = EntityState.IDLE
                 mozes.direction = Direction.WEST
-                grace.setPosition(48f, 534f)
+                grace.setPosition(312f, 534f)
                 grace.entityState = EntityState.IDLE
                 grace.direction = Direction.EAST
             },
@@ -176,7 +176,7 @@ class SceneIntro : CutsceneScreen() {
             actionFadeOut(),
 
             Actions.run {
-                mozes.setPosition(192f, 524f)
+                mozes.setPosition(456f, 524f)
                 mozes.direction = Direction.SOUTH
                 grace.direction = Direction.SOUTH
             },
@@ -217,7 +217,7 @@ class SceneIntro : CutsceneScreen() {
             Actions.delay(1f),
             Actions.run {
                 playBgm(AudioEvent.BGM_HOUSE)
-                mozes.setPosition(192f, 534f)
+                mozes.setPosition(456f, 534f)
             },
 
             actionFadeIn(),

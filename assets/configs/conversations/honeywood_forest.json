@@ -200,7 +200,7 @@
   "back_were_i_started": {
     "name"   : "Mozes",
     "phrases": {
-      "1": {"text": ["That was an extraordinary amount of effort just to tow some stupid tree."]},
+      "1": {"text": ["That was a ridiculously amount of effort just to tow some stupid tree."]},
       "2": {"text": ["But I'm finally back where I started!"]},
       "3": {"text": ["I've been given that 'another chance', that voice said."]},
       "4": {"text": ["Now, let's go find Grace again! I hope I'm not too late."], "choices": [{"command": "EXIT"}]}

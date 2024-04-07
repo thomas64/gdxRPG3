@@ -37,6 +37,10 @@ data class ConversationGraph(
             .toTypedArray()
     }
 
+    fun resetChoiceHistory() {
+        phrases.values.forEach { it.resetChoiceHistory() }
+    }
+
     private fun possibleConvert(choice: ConversationChoice): ConversationChoice {
         return when {
             choice.setJumpToAltEnabled == true -> { isJumpToAltEnabled = true; choice }

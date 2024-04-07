@@ -257,7 +257,7 @@ class SceneArdorFirstTimeAfterLossFromBattle : CutsceneScreen() {
                 setMapWithBgsOnly("honeywood_house_mozes")
                 setFixedCameraPosition(0f, 720f)
                 mozes.isVisible = true
-                mozes.setPosition(192f, 534f)
+                mozes.setPosition(456f, 534f)
                 mozes.entityState = EntityState.IDLE
                 mozes.direction = Direction.SOUTH
             },
@@ -278,7 +278,7 @@ class SceneArdorFirstTimeAfterLossFromBattle : CutsceneScreen() {
             Actions.run { mozes.entityState = EntityState.WALKING },
             Actions.moveBy(48f, 0f, 2f),
             Actions.run { mozes.entityState = EntityState.IDLE },
-            Actions.run { mozes.direction = Direction.WEST },
+            Actions.run { mozes.direction = Direction.SOUTH },
             Actions.run { showConversationDialog("what_happened", "mozes") }
         )
     }

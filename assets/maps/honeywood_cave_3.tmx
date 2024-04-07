@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="34" height="48" tilewidth="24" tileheight="24" infinite="0" nextlayerid="19" nextobjectid="37">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="34" height="48" tilewidth="24" tileheight="24" infinite="0" nextlayerid="20" nextobjectid="40">
  <properties>
   <property name="bgm" value="bgm_cave"/>
   <property name="lightmap_player" value="light_player"/>
@@ -48,7 +48,7 @@
  </layer>
  <layer id="8" name="over7_objects" width="34" height="48">
   <data encoding="base64" compression="zlib">
-   eJzt07ERABAABMFPtUgX9D9DKmcIdiu45BIA4Be1JK28rkj6ahgfdMBJ/oKdJwAA4K4JAIkFOw==
+   eJzt07ERABAABMGP1UwX9EsqZwh2K7jkEgDgF7UkrbyuSPpqGB90wEn+gp0nAADgrgmPrgbf
   </data>
  </layer>
  <layer id="9" name="over8_none" width="34" height="48">
@@ -102,5 +102,10 @@
   <object id="31" x="360" y="624" width="48" height="48"/>
   <object id="32" x="528" y="480" width="48" height="48"/>
   <object id="33" x="240" y="336" width="48" height="48"/>
+ </objectgroup>
+ <objectgroup id="19" name="particles">
+  <object id="37" name="torch" x="252" y="348" width="24" height="24"/>
+  <object id="38" name="torch" x="540" y="492" width="24" height="24"/>
+  <object id="39" name="torch" x="372" y="636" width="24" height="24"/>
  </objectgroup>
 </map>
