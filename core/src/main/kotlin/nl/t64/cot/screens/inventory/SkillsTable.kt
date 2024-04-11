@@ -3,72 +3,103 @@ package nl.t64.cot.screens.inventory
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane
 import nl.t64.cot.Utils
 import nl.t64.cot.components.party.skills.SkillItem
 import nl.t64.cot.screens.inventory.tooltip.PersonalityTooltip
 
 
 private const val FIRST_COLUMN_WIDTH = 48f
-private const val SECOND_COLUMN_WIDTH = 205f
+private const val SECOND_COLUMN_WIDTH = 136f
 private const val THIRD_COLUMN_WIDTH = 40f
 private const val FOURTH_COLUMN_WIDTH = 35f
-private const val CONTAINER_HEIGHT = 313f
+private const val CONTAINER_HEIGHT = 704f
 private const val ROW_HEIGHT = 48f
 private const val SECOND_COLUMN_PAD_LEFT = 15f
+private const val TABLE_PAD_TOP = -3f
+private const val SUBTITLE_PAD_TOP = 10f
 
-internal class SkillsTable(
-    skillFilter: (SkillItem) -> Boolean,
-    tooltip: PersonalityTooltip,
-    private val containerHeight: Float = CONTAINER_HEIGHT
-) : BaseTable(tooltip) {
+internal class SkillsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
 
-    private val scrollPane: ScrollPane
-    private val filteredSkills: () -> List<SkillItem> = { selectedHero.getAllSkillsAboveZero().filter(skillFilter) }
+    private var deltaIndex = 0
 
     init {
         table.columnDefaults(0).width(FIRST_COLUMN_WIDTH)
         table.columnDefaults(1).width(SECOND_COLUMN_WIDTH)
         table.columnDefaults(2).width(THIRD_COLUMN_WIDTH)
         table.columnDefaults(3).width(FOURTH_COLUMN_WIDTH)
-        table.top()
         table.defaults().height(ROW_HEIGHT)
-        scrollPane = ScrollPane(table)
-        container.add(scrollPane).height(containerHeight)
+        table.padTop(TABLE_PAD_TOP)
+
+        container.add(scrollPane).height(CONTAINER_HEIGHT)
         container.background = Utils.createTopBorder()
-        container.addListener(ListenerKeyVertical { updateIndex(it, filteredSkills().size) })
+        container.addListener(ListenerKeyVertical { updateIndex(it, selectedHero.getAllSkillsAboveZero().size) })
     }
 
     override fun selectAnotherSlotWhenIndexBecameOutOfBounds() {
-        if (selectedIndex >= filteredSkills().size) {
-            selectedIndex = filteredSkills().size - 1
-        } else if (selectedIndex == -1) {
-            selectedIndex = 0
+        if (selectedIndex >= selectedHero.getAllSkillsAboveZero().size) {
+            selectedIndex = selectedHero.getAllSkillsAboveZero().size - 1
         }
+    }
+
+    override fun updateIndex(deltaIndex: Int, size: Int) {
+        this.deltaIndex = deltaIndex
+        super.updateIndex(deltaIndex, size)
     }
 
     override fun fillRows() {
-        val skillItemList = filteredSkills()
-        skillItemList.indices.forEach { fillRow(skillItemList[it], it) }
-        if (skillItemList.isEmpty()) {
-            table.add(""); table.add("").padLeft(SECOND_COLUMN_PAD_LEFT); table.add(""); table.add("").row()
+        val allSkills = selectedHero.getAllSkillsAboveZero()
+        val communicationSkills = allSkills.filter { it.id.isCommunicationSkill() }
+        val civilSkills = allSkills.filter { it.id.isCivilSkill() }
+        val combatSkills = allSkills.filter { it.id.isCombatSkill() }
+        val weaponSkills = allSkills.filter { it.id.isWeaponSkill() }
+
+        if (communicationSkills.isNotEmpty()) {
+            table.add("Communication Skills:").padTop(SUBTITLE_PAD_TOP).row()
+            communicationSkills.forEach { fillRow(it) }
+        }
+        if (civilSkills.isNotEmpty()) {
+            table.add("Civil Skills:").padTop(SUBTITLE_PAD_TOP).row()
+            civilSkills.forEach { fillRow(it) }
+        }
+        if (combatSkills.isNotEmpty()) {
+            table.add("Combat Skills:").padTop(SUBTITLE_PAD_TOP).row()
+            combatSkills.forEach { fillRow(it) }
+        }
+        if (weaponSkills.isNotEmpty()) {
+            table.add("Weapon Skills:").padTop(SUBTITLE_PAD_TOP).row()
+            weaponSkills.forEach { fillRow(it) }
+        }
+
+        allSkills.forEachIndexed { index, skillItem ->
+            table.findActor<Label>(skillItem.id.name)
+                ?.let { super.possibleSetSelected(index, it, skillItem) }
+        }
+        if (deltaIndex != 0) {
+            scrollScrollPane()
+            deltaIndex = 0
         }
     }
 
-    private fun fillRow(skillItem: SkillItem, index: Int) {
+    private fun fillRow(skillItem: SkillItem) {
         table.add(createImageOf(skillItem.id.name))
-        val skillName = Label(skillItem.name, LabelStyle(font, Color.BLACK))
+        val skillName = Label(skillItem.name, LabelStyle(font, Color.BLACK)).apply { name = skillItem.id.name }
         table.add(skillName).padLeft(SECOND_COLUMN_PAD_LEFT)
         table.add(skillItem.rank.toString())
         val totalExtra = selectedHero.getExtraSkillForVisualOf(skillItem)
         addExtraToTable(totalExtra)
-        scrollScrollPane()
-        super.possibleSetSelected(index, skillName, skillItem)
     }
 
     private fun scrollScrollPane() {
-        val selectedY = containerHeight - (ROW_HEIGHT * selectedIndex)
-        scrollPane.scrollTo(0f, selectedY, 0f, 0f)
+        if (!table.hasKeyboardFocus()) return
+        val y = getSelected().y
+        val rowScroll = if (y < table.height / 2f) {
+            -1f * ROW_HEIGHT
+        } else {
+            5f * ROW_HEIGHT
+        }
+        val scrollDifference = table.height - scrollPane.height
+        val scrollY = scrollPane.height - ((y + rowScroll) - scrollDifference)
+        scrollPane.scrollTo(0f, scrollY, 0f, 0f)
     }
 
 }

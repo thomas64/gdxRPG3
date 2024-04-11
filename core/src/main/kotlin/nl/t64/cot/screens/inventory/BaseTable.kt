@@ -2,12 +2,11 @@ package nl.t64.cot.screens.inventory
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.Stage
-import com.badlogic.gdx.scenes.scene2d.ui.Image
-import com.badlogic.gdx.scenes.scene2d.ui.Label
+import com.badlogic.gdx.scenes.scene2d.ui.*
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
-import com.badlogic.gdx.scenes.scene2d.ui.Skin
-import com.badlogic.gdx.scenes.scene2d.ui.Table
+import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Scaling
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.audio.AudioEvent
@@ -26,16 +25,18 @@ private const val PADDING_RIGHT = 10f
 
 abstract class BaseTable(private val tooltip: PersonalityTooltip) : WindowSelector {
 
+    protected val font: BitmapFont = resourceManager.getTrueTypeAsset(TEXT_FONT, TEXT_SIZE)
     val container: Table = Table()
-    val font: BitmapFont = resourceManager.getTrueTypeAsset(TEXT_FONT, TEXT_SIZE)
     val table: Table = Table(createSkin()).apply {
         defaults().height(LINE_HEIGHT)
+        align(Align.topLeft)
         pad(PADDING).padRight(PADDING_RIGHT)
     }
+    protected val scrollPane: ScrollPane = ScrollPane(table)
 
-    lateinit var selectedHero: HeroItem
-    var selectedIndex = 0
-    private var hasJustUpdated = true
+    protected lateinit var selectedHero: HeroItem
+    protected var selectedIndex = 0
+    protected var hasJustUpdated = true
 
     override fun setKeyboardFocus(stage: Stage) {
         selectedHero = InventoryUtils.getSelectedHero()
@@ -49,7 +50,7 @@ abstract class BaseTable(private val tooltip: PersonalityTooltip) : WindowSelect
     }
 
     override fun selectCurrentSlot() {
-        setHasJustUpdate(true)
+        hasJustUpdated = true
         selectAnotherSlotWhenIndexBecameOutOfBounds()
     }
 
@@ -57,12 +58,13 @@ abstract class BaseTable(private val tooltip: PersonalityTooltip) : WindowSelect
         throw IllegalStateException("Implement this method in child if necessary.")
 
     override fun hideTooltip() {
-        setHasJustUpdate(false)
+        hasJustUpdated = false
         tooltip.hide()
     }
 
     override fun toggleTooltip() {
         if (table.hasContent()) {
+            tooltip.setPosition(getTooltipPosition())
             tooltip.toggle(null)
         }
     }
@@ -71,14 +73,14 @@ abstract class BaseTable(private val tooltip: PersonalityTooltip) : WindowSelect
         // do nothing. tooltips in tables based on BaseTable don't need to toggle compare.
     }
 
-    fun updateIndex(deltaIndex: Int, size: Int) {
+    open fun updateIndex(deltaIndex: Int, size: Int) {
         selectedIndex += deltaIndex
         if (selectedIndex < 0) {
             selectedIndex = size - 1
         } else if (selectedIndex >= size) {
             selectedIndex = 0
         }
-        setHasJustUpdate(true)
+        hasJustUpdated = true
         playSe(AudioEvent.SE_MENU_CURSOR)
     }
 
@@ -120,16 +122,27 @@ abstract class BaseTable(private val tooltip: PersonalityTooltip) : WindowSelect
         refreshTooltipOnlyOnce(personalityItem)
     }
 
+    fun getSelected(): Vector2 {
+        if (!table.hasKeyboardFocus()) return Vector2.Zero
+        return table.cells.asSequence()
+            .filter { it.actor is Label }
+            .filter { (it.actor as Label).style.fontColor == Constant.LIGHT_RED }
+            .map { Vector2(it.actorX, it.actorY) }
+            .first()
+    }
+
     private fun refreshTooltipOnlyOnce(personalityItem: PersonalityItem) {
         if (hasJustUpdated) {
-            setHasJustUpdate(false)
-            refreshTooltip(personalityItem)
+            hasJustUpdated = false
+            tooltip.refresh(personalityItem) { getTooltipPosition() }
         }
     }
 
-    private fun refreshTooltip(personalityItem: PersonalityItem) {
-        tooltip.setPosition(table)
-        tooltip.refresh(personalityItem)
+    open fun getTooltipPosition(): Vector2 {
+        val scrollDifference = table.height - scrollPane.height
+        val x = table.localToScreenCoordinates(getSelected()).x
+        val y = getSelected().y + (scrollPane.scrollY - scrollDifference)
+        return Vector2(x, y)
     }
 
     private fun createSkin(): Skin {
@@ -138,14 +151,10 @@ abstract class BaseTable(private val tooltip: PersonalityTooltip) : WindowSelect
         }
     }
 
-    fun setHasJustUpdate(setValue: Boolean) {
-        hasJustUpdated = setValue
-    }
-
     private fun Table.hasContent(): Boolean {
         val firstLineFirstNumber = children[2] as Label
         return children.size > 4
-                || firstLineFirstNumber.text.isNotEmpty()
+            || firstLineFirstNumber.text.isNotEmpty()
     }
 
 }

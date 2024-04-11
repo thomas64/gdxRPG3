@@ -6,8 +6,6 @@ import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
-import com.badlogic.gdx.scenes.scene2d.ui.Table
-import com.badlogic.gdx.scenes.scene2d.ui.Window
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.components.party.PersonalityItem
 import nl.t64.cot.components.party.skills.SkillItemId
@@ -16,8 +14,8 @@ import nl.t64.cot.screens.inventory.itemslot.ItemSlot
 
 
 private const val DELAY = 0.5f
-private const val OFFSET_X = 250f
-private const val OFFSET_Y = 0f
+private const val OFFSET_X = 105f
+private const val OFFSET_Y = 95f
 
 open class PersonalityTooltip : BaseTooltip() {
 
@@ -27,27 +25,19 @@ open class PersonalityTooltip : BaseTooltip() {
         window.isVisible = !isEnabled
     }
 
-    fun setPosition(table: Table) {
-        val titleTable: Table =
-            if (table.parent.parent is Window) {
-                // table -> container -> window -> titletable (like stats and calcs)
-                (table.parent.parent as Window).titleTable
-            } else {
-                // table -> scrollpane -> container -> window -> titletable (like skills and spells)
-                (table.parent.parent.parent as Window).titleTable
-            }
-        val localPosition = titleTable.localToStageCoordinates(Vector2(OFFSET_X, OFFSET_Y))
-        window.setPosition(localPosition.x, localPosition.y)
-    }
-
-    fun refresh(personalityItem: PersonalityItem) {
+    fun refresh(personalityItem: PersonalityItem, getUpdatedPosition: () -> Vector2) {
         hide()
         updateDescription(personalityItem)
         window.toFront()
         if (gameData.isTooltipEnabled) {
             window.addAction(Actions.sequence(Actions.delay(DELAY),
+                                              Actions.run { setPosition(getUpdatedPosition.invoke()) },
                                               Actions.show()))
         }
+    }
+
+    fun setPosition(newPosition: Vector2) {
+        window.setPosition(newPosition.x + OFFSET_X, newPosition.y + OFFSET_Y)
     }
 
     private fun updateDescription(personalityItem: PersonalityItem) {

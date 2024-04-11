@@ -6,12 +6,12 @@ import nl.t64.cot.components.party.SuperEnum
 enum class StatItemId : SuperEnum {
 
     INTELLIGENCE,
-    WILLPOWER,
-    STRENGTH,
     DEXTERITY,
+    STRENGTH,
+    SPEED,
+    WILLPOWER,
     CONSTITUTION,
-    STAMINA,
-    SPEED;
+    STAMINA;
 
     override val title: String = name.lowercase().replaceFirstChar { it.uppercase() }
 

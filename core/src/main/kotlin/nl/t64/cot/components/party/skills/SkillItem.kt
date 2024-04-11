@@ -21,18 +21,6 @@ data class SkillItem(
         return copy(rank = rank)
     }
 
-    fun isWeaponSkill(): Boolean {
-        return id.isWeaponSkill()
-    }
-
-    fun isCombatSkill(): Boolean {
-        return id.isCombatSkill()
-    }
-
-    fun isCivilSkill(): Boolean {
-        return id.isCivilSkill()
-    }
-
     override fun getTotalDescription(): String {
         return (description.joinToString(System.lineSeparator()) + System.lineSeparator()
                 + System.lineSeparator()

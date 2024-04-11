@@ -14,14 +14,12 @@ private const val HEROES_WINDOW_POSITION_X = 63f
 private const val HEROES_WINDOW_POSITION_Y = 834f
 private const val TRAINER_WINDOW_POSITION_X = 63f
 private const val TRAINER_WINDOW_POSITION_Y = 50f
-private const val ACADEMY_WINDOW_POSITION_X = 561f
+private const val ACADEMY_WINDOW_POSITION_X = 630f
 private const val ACADEMY_WINDOW_POSITION_Y = 50f
 private const val SKILLS_WINDOW_POSITION_X = 985f
 private const val SKILLS_WINDOW_POSITION_Y = 50f
 private const val CALCS_WINDOW_POSITION_X = 1616f
 private const val CALCS_WINDOW_POSITION_Y = 662f
-
-private const val SKILLS_CONTAINER_HEIGHT = 704f
 
 private const val TITLE_HEROES = "   Heroes"
 private const val TITLE_TRAINER = "   Trainer"
@@ -40,7 +38,7 @@ internal class AcademyUI(
     private val calcsTable: CalcsTable = CalcsTable(personalityTooltip),
     private val calcsWindow: Window = Utils.createDefaultWindow(TITLE_CALCS, calcsTable.container),
 
-    private val skillsTable: SkillsTable = SkillsTable({ true }, personalityTooltip, SKILLS_CONTAINER_HEIGHT),
+    private val skillsTable: SkillsTable = SkillsTable(personalityTooltip),
     private val skillsWindow: Window = Utils.createDefaultWindow(TITLE_SKILLS, skillsTable.container),
 
     private val academyTable: AcademyTable = AcademyTable(academyId, academyTooltip),

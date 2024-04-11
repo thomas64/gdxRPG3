@@ -5,32 +5,38 @@ import nl.t64.cot.components.party.SuperEnum
 
 enum class SkillItemId : SuperEnum {
 
-    ALCHEMIST,
+    // Communication Skills
     BARBARIAN,
     DIPLOMAT,
-    DRUID,
     JESTER,
+    DRUID,
     LOREMASTER,
+
+    // Civil Skills
+    ALCHEMIST,
     MECHANIC,
-    MERCHANT,
     RANGER,
+    MERCHANT,
     SCHOLAR,
 
+    // Combat Skills
+    STEALTH,
     GAMBLER,
     HEALER,
-    STEALTH,
-    THIEF,
     TROUBADOUR,
+    THIEF,
     WARRIOR,
     WIZARD,
 
-    HAFTED,
-    MISSILE,
-    POLE,
-    SHIELD,
+    // Weapon Skills
     SWORD,
+    HAFTED,
+    POLE,
+    MISSILE,
     THROWN,
+    SHIELD,
 
+    // Enemy Skills
     BITE;
 
     override val title: String = name.lowercase().replaceFirstChar { it.uppercase() }
@@ -45,28 +51,33 @@ enum class SkillItemId : SuperEnum {
 
     fun isWeaponSkill(): Boolean {
         return when (this) {
-            HAFTED, MISSILE, POLE, SHIELD, SWORD, THROWN -> true
-            GAMBLER, HEALER, STEALTH, THIEF, TROUBADOUR, WARRIOR, WIZARD -> false
-            ALCHEMIST, BARBARIAN, DIPLOMAT, DRUID, JESTER, LOREMASTER, MECHANIC, MERCHANT, RANGER, SCHOLAR -> false
+            SWORD, HAFTED, POLE, MISSILE, THROWN, SHIELD -> true
             BITE -> throw IllegalArgumentException("Only possible to ask a player skill.")
+            else -> false
         }
     }
 
     fun isCombatSkill(): Boolean {
         return when (this) {
-            HAFTED, MISSILE, POLE, SHIELD, SWORD, THROWN -> false
-            GAMBLER, HEALER, STEALTH, THIEF, TROUBADOUR, WARRIOR, WIZARD -> true
-            ALCHEMIST, BARBARIAN, DIPLOMAT, DRUID, JESTER, LOREMASTER, MECHANIC, MERCHANT, RANGER, SCHOLAR -> false
+            STEALTH, GAMBLER, HEALER, TROUBADOUR, THIEF, WARRIOR, WIZARD -> true
             BITE -> throw IllegalArgumentException("Only possible to ask a player skill.")
+            else -> false
         }
     }
 
     fun isCivilSkill(): Boolean {
         return when (this) {
-            HAFTED, MISSILE, POLE, SHIELD, SWORD, THROWN -> false
-            GAMBLER, HEALER, STEALTH, THIEF, TROUBADOUR, WARRIOR, WIZARD -> false
-            ALCHEMIST, BARBARIAN, DIPLOMAT, DRUID, JESTER, LOREMASTER, MECHANIC, MERCHANT, RANGER, SCHOLAR -> true
+            ALCHEMIST, MECHANIC, RANGER, MERCHANT, SCHOLAR -> true
             BITE -> throw IllegalArgumentException("Only possible to ask a player skill.")
+            else -> false
+        }
+    }
+
+    fun isCommunicationSkill(): Boolean {
+        return when (this) {
+            BARBARIAN, DIPLOMAT, JESTER, DRUID, LOREMASTER -> true
+            BITE -> throw IllegalArgumentException("Only possible to ask a player skill.")
+            else -> false
         }
     }
 
