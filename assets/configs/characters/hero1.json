@@ -1,5 +1,5 @@
 {
-  "mozes": {
+  "mozes"   : {
     "name"     : "Mozes",
     "school"   : "UNKNOWN",
     "stats"    : {
@@ -13,20 +13,12 @@
       "speed"       : 10
     },
     "skills"   : {
-      "stealth"   : 1,
-      "troubadour": 1,
-      "warrior"   : 1,
-      "wizard"    : 1,
-      "hafted"    : 1,
-      "missile"   : 2,
-      "shield"    : 2,
-      "sword"     : 2
+      "sword": 1
     },
     "spells"   : {
     },
     "inventory": {
       "weapon": "basic_mozes_sword",
-      "shield": "basic_mozes_shield",
       "chest" : "basic_light_chest",
       "pants" : "basic_light_pants",
       "boots" : "basic_light_boots"

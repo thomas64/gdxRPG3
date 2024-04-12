@@ -5,7 +5,7 @@
       "1": {"text": ["Welcome to Lastdenn's Temple. I'm sister Margarita.", "Do you want me to pray for you, so you can feel save on your journey?"]},
       "2": {
         "choices": [
-          {"text": "*Doesn't she mean safe?* (Save game)", "nextId": "3"},
+          {"text": "*Doesn't she mean safe?* [BLUE](Save game)", "nextId": "3"},
           {"text": "*You don't believe in her false god. Take your leave.*", "command": "EXIT"}
         ]
       },

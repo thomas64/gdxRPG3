@@ -20,8 +20,7 @@ private const val FIRST_COLUMN_WIDTH = 190f
 private const val SECOND_COLUMN_WIDTH = 40f
 private const val THIRD_COLUMN_WIDTH = 35f
 private const val CONTAINER_HEIGHT = 704f
-private const val FIRST_INDEX_OF_CALCS = 16
-private const val COLUMN_ROW_DELTA = 13
+private const val FIRST_INDEX_OF_CALCS = 18
 private const val THREE_COLUMNS = 3
 private const val TOOLTIP_X = 130f
 private const val TOOLTIP_Y = -18f
@@ -47,12 +46,12 @@ internal class StatsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
     override fun updateIndex(deltaIndex: Int, size: Int) {
         selectedIndex += deltaIndex
         if (selectedIndex < 0) {
-            selectedIndex = size
+            selectedIndex = size - 1
         } else if (selectedIndex == StatItemId.entries.count()) {
             selectedIndex = FIRST_INDEX_OF_CALCS
         } else if (selectedIndex == FIRST_INDEX_OF_CALCS - 1) {
             selectedIndex = StatItemId.entries.count() - 1
-        } else if (selectedIndex > size) {
+        } else if (selectedIndex >= size) {
             selectedIndex = 0
         }
         hasJustUpdated = true
@@ -76,51 +75,51 @@ internal class StatsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
     }
 
     private fun fillExperience() {
-        table.add("").row()
+        fillEmptyRow()
         fillRow("XP to Invest", selectedHero.xpToInvest)
         fillRow("Total XP", selectedHero.totalXp)
-        fillRow("Next Level", selectedHero.xpNeededForNextLevel)
-        table.add("").row()
+//        fillRow("Next Level", selectedHero.xpNeededForNextLevel)
+        fillEmptyRow()
+        fillEmptyRow()
+        fillEmptyRow()
     }
 
     private fun fillCalcs() {
-        table.add("--------------------------------").row()
-        table.add("Derived Attributes:").row()
-        table.add("").row()
+        fillRow("--------------------------------")
+        fillEmptyRow()
+        fillEmptyRow()
+        fillRow("Derived Attributes:")
+        fillEmptyRow()
 
         table.add(Label(CalcAttributeId.ACTION_POINTS.title, createLabelStyle()))
         table.add(selectedHero.getCalculatedActionPoints().toString())
         table.add("").row()
 
-        table.add(Label("Weapon " + CalcAttributeId.BASE_HIT.title, createLabelStyle()))
-        table.add(selectedHero.getCalcValueOf(InventoryGroup.WEAPON, CalcAttributeId.BASE_HIT).toString() + "%")
+        table.add(Label("Chance to hit (%)", createLabelStyle()))
+        val baseHit: Int = selectedHero.getCalcValueOf(InventoryGroup.WEAPON, CalcAttributeId.BASE_HIT)
+        table.add(baseHit.toString())
+        val bonusHit: Int = selectedHero.getCalculatedTotalHit() - baseHit
+        addExtraToTable(bonusHit)
+
+        table.add(Label(CalcAttributeId.DAMAGE.title, createLabelStyle()))
+        val baseDamage: Int = selectedHero.getCalcValueOf(InventoryGroup.WEAPON, CalcAttributeId.DAMAGE)
+        table.add(baseDamage.toString())
+        val bonusDamage: Int = selectedHero.getCalculatedTotalDamage() - baseDamage
+        addExtraToTable(bonusDamage)
+
+//        table.add(Label("Shield " + CalcAttributeId.DEFENSE.title, createLabelStyle()))
+//        table.add(selectedHero.getCalcValueOf(InventoryGroup.SHIELD, CalcAttributeId.DEFENSE).toString() + "%")
+//        table.add("").row()
+
+        table.add(Label(CalcAttributeId.DEFENSE.title + " (%)", createLabelStyle()))
+        table.add(selectedHero.getCalculatedTotalDefense().toString())
         table.add("").row()
 
-        table.add(Label("Total Hit", createLabelStyle()))
-        table.add(selectedHero.getCalculatedTotalHit().toString() + "%")
-        table.add("").row()
+//        table.add(Label("Shield " + CalcAttributeId.PROTECTION.title, createLabelStyle()))
+//        table.add(selectedHero.getCalcValueOf(InventoryGroup.SHIELD, CalcAttributeId.PROTECTION).toString())
+//        table.add("").row()
 
-        table.add(Label("Weapon " + CalcAttributeId.DAMAGE.title, createLabelStyle()))
-        table.add(selectedHero.getCalcValueOf(InventoryGroup.WEAPON, CalcAttributeId.DAMAGE).toString())
-        table.add("").row()
-
-        table.add(Label("Total " + CalcAttributeId.DAMAGE.title, createLabelStyle()))
-        table.add(selectedHero.getCalculatedTotalDamage().toString())
-        table.add("").row()
-
-        table.add(Label("Shield " + CalcAttributeId.DEFENSE.title, createLabelStyle()))
-        table.add(selectedHero.getCalcValueOf(InventoryGroup.SHIELD, CalcAttributeId.DEFENSE).toString() + "%")
-        table.add("").row()
-
-        table.add(Label("Total " + CalcAttributeId.DEFENSE.title, createLabelStyle()))
-        table.add(selectedHero.getCalculatedTotalDefense().toString() + "%")
-        table.add("").row()
-
-        table.add(Label("Shield " + CalcAttributeId.PROTECTION.title, createLabelStyle()))
-        table.add(selectedHero.getCalcValueOf(InventoryGroup.SHIELD, CalcAttributeId.PROTECTION).toString())
-        table.add("").row()
-
-        table.add(Label("Total " + CalcAttributeId.PROTECTION.title, createLabelStyle()))
+        table.add(Label(CalcAttributeId.PROTECTION.title, createLabelStyle()))
         table.add(selectedHero.getSumOfEquipmentOfCalc(CalcAttributeId.PROTECTION).toString())
         addExtraToTable(selectedHero.getPossibleExtraProtection())
 
@@ -140,6 +139,18 @@ internal class StatsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
         super.possibleSetSelected(index, statTitle, statItem)
     }
 
+    private fun fillEmptyRow() {
+        table.add("")
+        table.add("")
+        table.add("").row()
+    }
+
+    private fun fillRow(key: String) {
+        table.add(key)
+        table.add("")
+        table.add("").row()
+    }
+
     private fun fillRow(key: String, value: Int) {
         table.add(key)
         table.add(value.toString())
@@ -148,7 +159,7 @@ internal class StatsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
 
     private fun possibleSetSelected() {
         if (table.hasKeyboardFocus() && isCalcsSelected()) {
-            val calcTitle = table.getChild(selectedIndex * THREE_COLUMNS - COLUMN_ROW_DELTA) as Label
+            val calcTitle = table.getChild(selectedIndex * THREE_COLUMNS) as Label
             super.setSelected(calcTitle, getPersonalityItemForDescriptionOnly(calcTitle))
         }
     }

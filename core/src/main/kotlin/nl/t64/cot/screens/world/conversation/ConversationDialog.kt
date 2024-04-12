@@ -506,8 +506,10 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun createFont(): BitmapFont {
-        return resourceManager.getTrueTypeAsset(FONT, FONT_SIZE)
-            .apply { data.setLineHeight(LINE_HEIGHT) }
+        return resourceManager.getTrueTypeAsset(FONT, FONT_SIZE).apply {
+            data.setLineHeight(LINE_HEIGHT)
+            data.markupEnabled = true
+        }
     }
 
     private fun createLabel(): TypingLabel {

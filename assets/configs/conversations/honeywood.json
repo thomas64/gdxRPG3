@@ -251,7 +251,7 @@
       "1": {"text": ["I'm a traveling priest from the city.", "Young man, do you want to be saved?"]},
       "2": {
         "choices": [
-          {"text": "*What is it you need to be saved from?* (Save game)", "nextId": "3"},
+          {"text": "*What is it you need to be saved from?* [BLUE](Save game)", "nextId": "3"},
           {"text": "*Not necessary, you're doing pretty well. Take your leave.*", "command": "EXIT"}
         ]
       },
@@ -318,8 +318,8 @@
           {"condition": ["i_c_==_k_q_this"], "text": "*Offer to help with the bat situation.*", "command": "ACCEPT_QUEST", "nextId": "20"},
           {"condition": ["i_c_==_a_q_this", "i_tn_1_q_this"], "text": "*Inquire further about the location of the bats.*", "nextId": "40"},
           {"condition": ["i_ta_1_q_this"], "text": "*Inform her that the bats have been dealt with.*", "nextId": "50"},
-          {"condition": ["i_n_1_<_item_crystal_of_time"], "text": "*Accept the offer for some rest.* (Restore health)", "command": "HEAL_LIFE_01", "nextId": "3"},
-          {"condition": ["i_n_1_==_item_crystal_of_time"], "text": "*Accept the offer for some rest.* (Restore health)", "nextId": "4"},
+          {"condition": ["i_n_1_<_item_crystal_of_time"], "text": "*Accept the offer for some rest.* [BLUE](Restore health)", "command": "HEAL_LIFE_01", "nextId": "3"},
+          {"condition": ["i_n_1_==_item_crystal_of_time"], "text": "*Accept the offer for some rest.* [BLUE](Restore health)", "nextId": "4"},
           {"condition": ["i_r_>=_k_q_this", "i_c_==_u_q_this"], "text": "*Express your concern about the innkeeper's troubled demeanor.*", "nextId": "10"},
           {"condition": ["i_r_>=_k_q_this", "i_c_==_u_q_this"], "text": "*Offer to help with the bat situation she will mention.*", "command": "ACCEPT_QUEST", "nextId": "15"},
           {"text": "*Decline the offer for now. Take your leave.*", "command": "EXIT"}
