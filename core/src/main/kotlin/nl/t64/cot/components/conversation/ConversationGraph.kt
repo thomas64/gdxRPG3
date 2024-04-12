@@ -14,6 +14,11 @@ data class ConversationGraph(
     var currentPhraseId: String = DEFAULT_STARTING_PHRASE_ID
     private var isJumpToAltEnabled: Boolean = false
 
+    fun reset() {
+        currentPhraseId = DEFAULT_STARTING_PHRASE_ID
+        isJumpToAltEnabled = false
+    }
+
     fun initId() {
         phrases.forEach { it.value.initId(id) }
     }

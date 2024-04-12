@@ -26,7 +26,7 @@ class InventorySlotUser private constructor(itemSlot: ItemSlot) {
             "crystal_of_time" -> CrystalHandler.doAction()
             "healing_potion" -> possibleHandleDrink(::potionCondition, ::doHealing)
             "curing_potion" -> possibleHandleDrink(::potionCondition, ::doCuring)
-            "stamina_potion" -> possibleHandleDrink(::staminaCondition, ::doStamina)
+            "stamina_potion" -> possibleHandleDrink(::energyCondition, ::doEnergy)
             "restore_potion" -> possibleHandleDrink(::potionCondition, ::doRestore)
         }
     }
@@ -42,9 +42,9 @@ class InventorySlotUser private constructor(itemSlot: ItemSlot) {
     }
 
     private fun drinkPotion(drinkAction: () -> Unit): Int {
-        val oldHp = selectedHero.getCurrentHp()
+        val oldHp = selectedHero.currentHp
         drinkAction.invoke()
-        val newHp = selectedHero.getCurrentHp()
+        val newHp = selectedHero.currentHp
         return newHp - oldHp
     }
 
@@ -59,25 +59,25 @@ class InventorySlotUser private constructor(itemSlot: ItemSlot) {
     }
 
     private fun potionCondition(): Boolean {
-        return selectedHero.isAlive && selectedHero.getCurrentHp() < selectedHero.getMaximumHp()
+        return selectedHero.isAlive && selectedHero.currentHp < selectedHero.maximumHp
     }
 
-    private fun staminaCondition(): Boolean {
-        return selectedHero.isAlive && selectedHero.getCurrentStamina() < selectedHero.getMaximumStamina()
+    private fun energyCondition(): Boolean {
+        return selectedHero.isAlive && selectedHero.currentMp < selectedHero.maximumMp
     }
 
     private fun doHealing() {
-        val healPoints = (selectedHero.getMaximumHp() / 5f).roundToInt()
+        val healPoints = (selectedHero.maximumHp / 5f).roundToInt()
         selectedHero.recoverPartHp(healPoints)
     }
 
     private fun doCuring() {
-        val healPoints = (selectedHero.getMaximumHp() / 3f).roundToInt()
+        val healPoints = (selectedHero.maximumHp / 3f).roundToInt()
         selectedHero.recoverPartHp(healPoints)
     }
 
-    private fun doStamina() {
-        selectedHero.recoverFullStamina()
+    private fun doEnergy() {
+        selectedHero.recoverFullMp()
     }
 
     private fun doRestore() {

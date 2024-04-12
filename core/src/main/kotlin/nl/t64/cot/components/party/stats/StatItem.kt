@@ -1,7 +1,6 @@
 package nl.t64.cot.components.party.stats
 
 import nl.t64.cot.components.party.PersonalityItem
-import kotlin.math.abs
 import kotlin.math.roundToInt
 
 
@@ -9,7 +8,6 @@ data class StatItem(
     val id: StatItemId = StatItemId.INTELLIGENCE,   // Value will be replaced when constructed.
     val name: String = "",
     var rank: Int = 0,
-    var variable: Int = 0,
     private val maximum: Int = 0,                   // Constant value for maximum rank possible.
     private val upgrade: Float = 0f,                // Constant value for upgrading formula.
     private val description: List<String> = emptyList()
@@ -18,7 +16,7 @@ data class StatItem(
     var bonus: Int = 0
 
     fun createCopy(rank: Int): StatItem {
-        return copy(rank = rank, variable = rank)
+        return copy(rank = rank)
     }
 
     override fun getTotalDescription(): String {
@@ -35,49 +33,20 @@ data class StatItem(
     fun getXpCostForNextRank(): Int {
         if (rank >= maximum) return 0
         val nextRank = rank + 1
-        return (upgrade * (nextRank * nextRank)).roundToInt()
+        return nextRank.getXpCost()
     }
 
     fun doUpgrade() {
         rank += 1
-        variable += 1
     }
 
-    // todo, speciale bonus toepassen inventoryItem: epic_ring_of_healing, die 1 con geeft om je leven 1malig te redden.
-    fun takeDamage(damage: Int): Int? {
-        variable -= damage
-        if (variable < 0) {
-            val remainingDamage = abs(variable)
-            variable = 0
-            return remainingDamage
-        }
-        return null
+    fun getTotalXpCostFromRankSixToCurrent(): Int {
+        // 7 is the first rank that will cost any xp. no character has lower than 6.
+        return (7..rank).sumOf { it.getXpCost() }
     }
 
-    fun restorePart(healPoints: Int): Int? {
-        variable += healPoints
-        if (variable > rank) {
-            val remainingHealPoints = variable - rank
-            variable = rank
-            return remainingHealPoints
-        }
-        return null
-    }
-
-    fun restore() {
-        variable = rank
-    }
-
-    fun getInflictDamagePenalty(): Int {
-        return if (variable <= 0) 5 else 1
-    }
-
-    fun getDefensePenalty(): Int {
-        return if (variable <= 0) 50 else 0
-    }
-
-    fun getChanceToHitPenalty(): Int {
-        return if (variable <= 0) 25 else 0
+    private fun Int.getXpCost(): Int {
+        return (upgrade * (this * this)).roundToInt()
     }
 
 }

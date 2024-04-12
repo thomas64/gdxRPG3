@@ -4,10 +4,9 @@ import nl.t64.cot.Utils.gameData
 import nl.t64.cot.components.loot.Loot
 
 
-private const val LEVEL_DIFFERENCE_FOR_WANTING_BATTLE = 5
-
-class EnemyContainer(battleId: String) {
-
+class EnemyContainer(
+    private val battleId: String
+) {
     private val enemies: List<EnemyItem> = createEnemies(battleId)
 
     fun getAll(): List<EnemyItem> {
@@ -25,9 +24,7 @@ class EnemyContainer(battleId: String) {
     }
 
     fun doEnemiesWantToBattle(): Boolean {
-        val averageEnemies = enemies.map { it.getLevel() }.average()
-        val averageHeroes = gameData.party.getAverageLevel()
-        return averageEnemies > averageHeroes - LEVEL_DIFFERENCE_FOR_WANTING_BATTLE
+        return !gameData.battles.wonBattles.contains(battleId)
     }
 
     private fun createEnemies(battleId: String): List<EnemyItem> {

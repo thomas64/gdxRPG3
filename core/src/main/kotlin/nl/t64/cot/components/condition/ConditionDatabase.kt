@@ -13,11 +13,10 @@ object ConditionDatabase {
         "diplomat1"                 to { hasEnoughOfSkill(SkillItemId.DIPLOMAT,  1) },
         "barbarian1"                to { hasEnoughOfSkill(SkillItemId.BARBARIAN, 1) },
         "barbarian4"                to { hasEnoughOfSkill(SkillItemId.BARBARIAN, 4) },
+        "warrior4"                  to { hasEnoughOfSkill(SkillItemId.WARRIOR,   4) },
         "druid1"                    to { hasEnoughOfSkill(SkillItemId.DRUID,     1) },
         "i_druid1"                  to { hasEnoughOfSkill(SkillItemId.DRUID,     1) },
         "ii_druid1"                 to { hasEnoughOfSkill(SkillItemId.DRUID,     1) },
-
-        "level10"                   to { hasAverageLevelOf(               10) },
 
         "!been_in_fairy_town"       to { !hasBeenInFairyTown },
         "been_in_fairy_town"        to { hasBeenInFairyTown },
@@ -76,8 +75,8 @@ object ConditionDatabase {
     private fun hasAnySpell(heroId: String): Boolean =
         gameData.party.getCertainHero(heroId).getAllSpells().isNotEmpty()
 
-    private fun hasAverageLevelOf(requestedLevel: Int): Boolean =
-        gameData.party.getAverageLevel() >= requestedLevel
+    private fun hasAverageXpOf(requestedXp: Int): Boolean =
+        gameData.party.getAverageXp() >= requestedXp
 
     private fun isTargetAlternateUsed(questId: String, questTaskId: String): Boolean =
         gameData.quests.getQuestById(questId).tasks[questTaskId]!!.isTargetAlternateUsed

@@ -18,19 +18,48 @@ import nl.t64.cot.constants.Constant
 import kotlin.math.roundToInt
 
 
-data class HeroItem(
+class HeroItem(
     val id: String = "",
     val name: String = "",
     val school: SchoolType = SchoolType.NONE,
     private val stats: StatContainer = StatContainer(),
     private val skills: SkillContainer = SkillContainer(),
     private val spells: SpellContainer = SpellContainer(),
-    private val inventory: EquipContainer = EquipContainer()
+    private val inventory: EquipContainer = EquipContainer(),
+    var isAlive: Boolean = true,
+    var hasBeenRecruited: Boolean = false,
+    private var isForVeryFirstSetup: Boolean = false
 ) {
-
-    var isAlive = true
-    var hasBeenRecruited = false
     val isPlayer: Boolean get() = id == Constant.PLAYER_ID
+    var totalXp: Int = 0
+    var xpToInvest: Int = 0
+    val maximumHp: Int get() = stats.maximumHp
+    var currentHp: Int = 0
+    val maximumMp: Int get() = stats.maximumMp
+    var currentMp: Int = 0
+
+    init {
+        if (isForVeryFirstSetup) {
+            isForVeryFirstSetup = false
+            totalXp = stats.getTotalXpCost() + skills.getTotalXpCost()
+            currentHp = maximumHp
+            currentMp = maximumMp
+        }
+    }
+
+    fun createCopy(
+        id: String,
+        name: String = this.name,
+        school: SchoolType = this.school,
+        stats: StatContainer = this.stats,
+        skills: SkillContainer = this.skills,
+        spells: SpellContainer = this.spells,
+        inventory: EquipContainer = this.inventory,
+        isAlive: Boolean = this.isAlive,
+        hasBeenRecruited: Boolean = this.hasBeenRecruited
+    ): HeroItem {
+        return HeroItem(id, name, school, stats, skills, spells, inventory, isAlive, hasBeenRecruited, isForVeryFirstSetup = true)
+    }
 
     fun hasSameIdAs(candidateHero: HeroItem): Boolean {
         return id == candidateHero.id
@@ -38,9 +67,10 @@ data class HeroItem(
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    // todo, speciale bonus toepassen inventoryItem: epic_ring_of_healing, die 1 hp geeft om je leven 1malig te redden.
     fun takeDamage(damage: Int) {
-        stats.takeDamage(damage)
-        if (getCurrentHp() <= 0) {
+        currentHp = (currentHp - damage).coerceAtLeast(0)
+        if (currentHp <= 0) {
             isAlive = false
         }
     }
@@ -51,32 +81,37 @@ data class HeroItem(
     }
 
     fun recoverFullHp() {
-        stats.recoverFullHp()
+        currentHp = maximumHp
     }
 
     fun recoverPartHp(healPoints: Int) {
-        stats.recoverPartHp(healPoints)
+        currentHp = (currentHp + healPoints).coerceAtMost(maximumHp)
     }
 
-    fun recoverFullStamina() {
-        stats.recoverFullStamina()
+    fun recoverFullMp() {
+        currentMp = maximumMp
     }
 
-    fun gainXp(amount: Int, levelUpMessage: StringBuilder) {
-        stats.gainXp(amount) { gainLevel(levelUpMessage, it) }
+    fun recoverPartMp(recoverPoints: Int) {
+        currentMp = (currentMp + recoverPoints).coerceAtMost(maximumMp)
+    }
+
+    fun gainXp(amount: Int) {
+        xpToInvest += amount
+        totalXp += amount
     }
 
     fun hasEnoughXpFor(xpCost: Int): Boolean {
-        return stats.hasEnoughXpFor(xpCost)
+        return xpToInvest >= xpCost
     }
 
     fun doUpgrade(statItem: StatItem, xpCost: Int) {
-        stats.takeXpToInvest(xpCost)
+        xpToInvest -= xpCost
         statItem.doUpgrade()
     }
 
     fun doUpgrade(skillItem: SkillItem, xpCost: Int, goldCost: Int) {
-        stats.takeXpToInvest(xpCost)
+        xpToInvest -= xpCost
         gameData.inventory.autoRemoveItem("gold", goldCost)
         skillItem.doUpgrade()
         if (skillItem.rank == 1) {
@@ -85,24 +120,13 @@ data class HeroItem(
     }
 
     fun doUpgrade(spellItem: SpellItem, xpCost: Int, goldCost: Int) {
-        stats.takeXpToInvest(xpCost)
+        xpToInvest -= xpCost
         gameData.inventory.autoRemoveItem("gold", goldCost)
         spellItem.doUpgrade()
         if (spellItem.rank == 1) {
             spells.add(spellItem)
         }
     }
-
-    val xpNeededForNextLevel: Int get() = stats.getXpNeededForNextLevel()
-    val xpDeltaBetweenLevels: Int get() = stats.getXpDeltaBetweenLevels()
-    val totalXp: Int get() = stats.totalXp
-    val xpToInvest: Int get() = stats.xpToInvest
-    fun getLevel(): Int = stats.levelRank
-    fun getAllHpStats(): Map<String, Int> = stats.getAllHpStats()
-    fun getMaximumHp(): Int = stats.getMaximumHp()
-    fun getCurrentHp(): Int = stats.getCurrentHp()
-    fun getMaximumStamina(): Int = stats.getMaximumStamina()
-    fun getCurrentStamina(): Int = stats.getCurrentStamina()
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -220,14 +244,8 @@ data class HeroItem(
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     fun getExtraStatForVisualOf(statItem: StatItem): Int {
-        return when (statItem.id) {
-            StatItemId.CONSTITUTION,
-            StatItemId.STAMINA -> statItem.variable - statItem.rank
-            else -> {
-                val extra = inventory.getSumOfStat(statItem.id) + statItem.bonus
-                if (extra < 0 && extra < -statItem.rank) -statItem.rank else extra
-            }
-        }
+        val extra = inventory.getSumOfStat(statItem.id) + statItem.bonus
+        return if (extra < 0 && extra < -statItem.rank) -statItem.rank else extra
     }
 
     fun getExtraSkillForVisualOf(skillItem: SkillItem): Int {
@@ -288,9 +306,9 @@ data class HeroItem(
 
     fun getCalculatedTotalHit(): Int {
         // todo, is nu alleen nog maar voor wapens, niet voor potions. en ook niet voor ranged in de battle zelf.
-        return inventory.getSkillOfCurrentWeapon()?.let {
-            getCalculatedTotalHit(it)
-        } ?: 0
+        return inventory.getSkillOfCurrentWeapon()
+            ?.let { getCalculatedTotalHit(it) }
+            ?: 0
     }
 
     fun getCalculatedTotalDamage(): Int {
@@ -310,7 +328,7 @@ data class HeroItem(
             else -> {
                 val shieldDefense = getSumOfEquipmentOfCalc(CalcAttributeId.DEFENSE)
                 val wielderSkill = getCalculatedTotalSkillOf(SkillItemId.SHIELD)
-                val staminaPenalty = stats.getDefenseStaminaPenalty()
+                val staminaPenalty = getPossibleDefensePenalty()
                 val formula = shieldDefense + ((shieldDefense / 100f) * (10f * wielderSkill)) - staminaPenalty
                 // + getLevel() todo, this one shouldn't be shown in calculation but should be calculated in battle.
                 formula.roundToInt()
@@ -321,7 +339,7 @@ data class HeroItem(
     private fun getCalculatedTotalHit(weaponSkill: SkillItemId): Int {
         val weaponHit = getSumOfEquipmentOfCalc(CalcAttributeId.BASE_HIT)
         val wielderSkill = getCalculatedTotalSkillOf(weaponSkill)
-        val staminaPenalty = stats.getChanceToHitStaminaPenalty()
+        val staminaPenalty = getPossibleChanceToHitPenalty()
         val formula = weaponHit + ((weaponHit / 100f) * (10f * wielderSkill)) - staminaPenalty
         return (formula
                 // + troubadour
@@ -337,7 +355,7 @@ data class HeroItem(
 
     private fun getCalculatedTotalDamageClose(minimalType: StatItemId): Int {
         val totalDamageOfAllEquipment = getSumOfEquipmentOfCalc(CalcAttributeId.DAMAGE)
-        val staminaPenalty = stats.getInflictDamageStaminaPenalty()
+        val staminaPenalty = getPossibleInflictDamagePenalty()
         val statOfWielder = getCalculatedTotalStatOf(minimalType) / staminaPenalty
         val formula = totalDamageOfAllEquipment + ((totalDamageOfAllEquipment / 100f) * (5f * statOfWielder))
         return (formula
@@ -349,7 +367,7 @@ data class HeroItem(
 
     private fun getCalculatedTotalDamageRange(): Int {
         val weaponDamage = getSumOfEquipmentOfCalc(CalcAttributeId.DAMAGE)
-        val staminaPenalty = stats.getInflictDamageStaminaPenalty()
+        val staminaPenalty = getPossibleInflictDamagePenalty()
         val wielderDexterity = getCalculatedTotalStatOf(StatItemId.DEXTERITY) / staminaPenalty
         val formula = weaponDamage + ((weaponDamage / 100f) * (5f * wielderDexterity))
         return (formula
@@ -360,13 +378,8 @@ data class HeroItem(
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private fun gainLevel(levelUpMessage: StringBuilder, amountOfLevels: Int) {
-        recoverFullHp()
-        if (amountOfLevels == 1) {
-            levelUpMessage.append("$name gained a level!").append(System.lineSeparator())
-        } else {
-            levelUpMessage.append("$name gained $amountOfLevels levels!").append(System.lineSeparator())
-        }
-    }
+    private fun getPossibleInflictDamagePenalty(): Int = if (currentMp <= 0) 5 else 1
+    private fun getPossibleDefensePenalty(): Int = if (currentMp <= 0) 50 else 0
+    private fun getPossibleChanceToHitPenalty(): Int = if (currentMp <= 0) 25 else 0
 
 }

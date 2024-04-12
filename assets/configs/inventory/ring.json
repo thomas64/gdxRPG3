@@ -45,7 +45,6 @@
     "group"       : "RING",
     "sort"        : 61000,
     "price"       : 50,
-    "constitution": 1,
     "cheat_death" : true,
     "description" : ["Once per battle, survive", "against an otherwise killing blow."]
   }

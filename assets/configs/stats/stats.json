@@ -10,12 +10,13 @@
       "Also, each 6 ranks in Intelligence increases AP by 1."
     ]
   },
-  "willpower"   : {
+  "dexterity"   : {
     "maximum"    : 30,
-    "upgrade"    : 0.18,
+    "upgrade"    : 0.12,
     "description": [
-      "Increases defenses against enemy offensive magic spells.",
-      "Each rank in Willpower increases magic protection by 3."
+      "Increases damage-to-inflict with dexterity based weapons in combat.",
+      "Each rank in Dexterity increases Damage by 5%.",
+      "Also, each 6 ranks in Dexterity increases AP by 1."
     ]
   },
   "strength"    : {
@@ -27,40 +28,37 @@
       "Also, each 6 ranks in Strength increases AP by 1."
     ]
   },
-  "dexterity"   : {
-    "maximum"    : 30,
-    "upgrade"    : 0.12,
-    "description": [
-      "Increases damage-to-inflict with dexterity based weapons in combat.",
-      "Each rank in Dexterity increases Damage by 5%.",
-      "Also, each 6 ranks in Dexterity increases AP by 1."
-    ]
-  },
-  "constitution": {
-    "maximum"    : 40,
-    "upgrade"    : 0.12,
-    "description": [
-      "Represents the real physical damage your character can take",
-      "before dying. Each rank in Constitution increases 1 HP."
-    ]
-  },
-  "stamina"     : {
-    "maximum"    : 90,
-    "upgrade"    : 0.04,
-    "description": [
-      "Represents energy for magic spells and other special attacks.",
-      "Doing such an action decreases your character's Stamina.",
-      "Stamina will also decrease when taking damage from attacks.",
-      "When Stamina hits 0, your character will experience combat penalties.",
-      "Each rank in Stamina increases 1 HP, which is also energy."
-    ]
-  },
   "speed"       : {
     "maximum"    : 30,
-    "upgrade"    : 0.12,
+    "upgrade"    : 0.18,
     "description": [
       "Increases combat initiative. More Speed means a faster turn rate.",
       "Also, each 3 ranks in Speed increases AP by 1."
+    ]
+  },
+  "willpower"   : {
+    "maximum"    : 30,
+    "upgrade"    : 0.18,
+    "description": [
+      "Increases defenses against enemy offensive magic spells.",
+      "Each rank in Willpower increases magic protection by 3."
+    ]
+  },
+  "constitution": {
+    "maximum"    : 60,
+    "upgrade"    : 0.06,
+    "description": [
+      "Represents the real physical damage your character can take",
+      "before dying. Each rank in Constitution increases HP by 10%."
+    ]
+  },
+  "stamina"     : {
+    "maximum"    : 60,
+    "upgrade"    : 0.04,
+    "description": [
+      "Represents energy for magic spells and other special attacks.",
+      "Each rank in Stamina increases MP by 10%.",
+      "ToDo, maybe: When MP hits 0, your character will experience combat penalties."
     ]
   }
 }

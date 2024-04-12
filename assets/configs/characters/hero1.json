@@ -3,17 +3,17 @@
     "name"     : "Mozes",
     "school"   : "UNKNOWN",
     "stats"    : {
-      "level"       : 1,
       "intelligence": 10,
-      "willpower"   : 10,
-      "strength"    : 10,
       "dexterity"   : 10,
-      "constitution": 15,
-      "stamina"     : 30,
-      "speed"       : 10
+      "strength"    : 10,
+      "speed"       : 10,
+      "willpower"   : 10,
+      "constitution": 10,
+      "stamina"     : 10
     },
     "skills"   : {
-      "sword": 1
+      "warrior": 1,
+      "sword"  : 1
     },
     "spells"   : {
     },
@@ -28,19 +28,18 @@
     "name"     : "Luana",
     "school"   : "ELEMENTAL",
     "stats"    : {
-      "level"       : 2,
       "intelligence": 10,
-      "willpower"   : 10,
-      "strength"    : 8,
       "dexterity"   : 16,
-      "constitution": 10,
-      "stamina"     : 20,
-      "speed"       : 15
+      "strength"    : 8,
+      "speed"       : 15,
+      "willpower"   : 10,
+      "constitution": 6,
+      "stamina"     : 8
     },
     "skills"   : {
       "mechanic": 1,
-      "stealth" : 3,
-      "thief"   : 3,
+      "stealth" : 2,
+      "thief"   : 1,
       "hafted"  : -1,
       "missile" : -1,
       "shield"  : -1,
@@ -60,7 +59,6 @@
     "name"     : "Reignald",
     "school"   : "NONE",
     "stats"    : {
-      "level"       : 8,
       "intelligence": 10,
       "willpower"   : 8,
       "strength"    : 20,
@@ -95,7 +93,6 @@
     "name"     : "Ryiah",
     "school"   : "NAMING",
     "stats"    : {
-      "level"       : 3,
       "intelligence": 22,
       "willpower"   : 16,
       "strength"    : 10,
@@ -130,7 +127,6 @@
     "name"     : "Valter",
     "school"   : "ELEMENTAL",
     "stats"    : {
-      "level"       : 2,
       "intelligence": 22,
       "willpower"   : 18,
       "strength"    : 10,
@@ -165,7 +161,6 @@
     "name"     : "Galen",
     "school"   : "NONE",
     "stats"    : {
-      "level"       : 4,
       "intelligence": 15,
       "willpower"   : 15,
       "strength"    : 25,
@@ -200,7 +195,6 @@
     "name"     : "Jaspar",
     "school"   : "NONE",
     "stats"    : {
-      "level"       : 12,
       "intelligence": 6,
       "willpower"   : 11,
       "strength"    : 30,
@@ -239,7 +233,6 @@
     "name"     : "Kiara",
     "school"   : "ELEMENTAL",
     "stats"    : {
-      "level"       : 12,
       "intelligence": 15,
       "willpower"   : 10,
       "strength"    : 15,
@@ -277,7 +270,6 @@
     "name"     : "Luthais",
     "school"   : "ELEMENTAL",
     "stats"    : {
-      "level"       : 20,
       "intelligence": 30,
       "willpower"   : 30,
       "strength"    : 8,
@@ -318,7 +310,6 @@
     "name"     : "Elias",
     "school"   : "NAMING",
     "stats"    : {
-      "level"       : 18,
       "intelligence": 30,
       "willpower"   : 30,
       "strength"    : 20,
@@ -355,7 +346,6 @@
     "name"     : "Onarr",
     "school"   : "NONE",
     "stats"    : {
-      "level"       : 18,
       "intelligence": 30,
       "willpower"   : 25,
       "strength"    : 25,
@@ -393,7 +383,6 @@
     "name"     : "Duilio",
     "school"   : "ELEMENTAL",
     "stats"    : {
-      "level"       : 22,
       "intelligence": 25,
       "willpower"   : 25,
       "strength"    : 25,
@@ -442,7 +431,6 @@
     "name"     : "Iellwen",
     "school"   : "STAR",
     "stats"    : {
-      "level"       : 20,
       "intelligence": 35,
       "willpower"   : 25,
       "strength"    : 20,
@@ -482,7 +470,6 @@
     "name"     : "Faeron",
     "school"   : "NAMING",
     "stats"    : {
-      "level"       : 25,
       "intelligence": 30,
       "willpower"   : 30,
       "strength"    : 15,

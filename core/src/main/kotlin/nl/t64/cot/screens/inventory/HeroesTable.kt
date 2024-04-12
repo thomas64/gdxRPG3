@@ -25,25 +25,25 @@ private const val FONT_BIG_SIZE = 28
 private const val FONT_SIZE = 20
 private const val STATS_COLUMN_WIDTH = 134f
 private const val STATS_COLUMN_PAD = 10f
-private const val BAR_ROW_HEIGHT = 32f
+private const val EMPTY_ROW_HEIGHT = 6f
+private const val NAME_ROW_HEIGHT = 38f
+private const val TEXT_ROW_HEIGHT = 18f
+private const val BAR_ROW_HEIGHT = 26f
 private const val BAR_HEIGHT = 18f
-private const val BAR_PAD_TOP = 7f
 
 class HeroesTable {
 
     private val nameStyle: LabelStyle
-    private val levelStyle: LabelStyle
+    private val textStyle: LabelStyle
     private val party: PartyContainer = gameData.party
-    val heroes = Table().apply {
-        background = Utils.createTopBorder()
-    }
+    val heroes = Table().apply { background = Utils.createTopBorder() }
     private val texturesToDispose: MutableSet<Texture> = mutableSetOf()
 
     init {
         val font = resourceManager.getTrueTypeAsset(FONT_PATH, FONT_SIZE)
         val fontBig = resourceManager.getTrueTypeAsset(FONT_BIG_PATH, FONT_BIG_SIZE)
         nameStyle = LabelStyle(fontBig, Color.BLACK)
-        levelStyle = LabelStyle(font, Color.BLACK)
+        textStyle = LabelStyle(font, Color.BLACK)
     }
 
     fun update() {
@@ -71,9 +71,13 @@ class HeroesTable {
     private fun createStats(hero: HeroItem) {
         val statsTable = createStatsTable(hero)
         addNameLabelTo(statsTable, hero)
-        addLevelLabelTo(statsTable, hero)
+        addEmptyLine(statsTable)
         addHpLabelTo(statsTable, hero)
         addHpBarTo(statsTable, hero)
+        addEmptyLine(statsTable)
+        addMpLabelTo(statsTable, hero)
+        addMpBarTo(statsTable, hero)
+        addEmptyLine(statsTable)
 
         val stack = Stack()
         addPossibleGrayBackgroundTo(stack, hero)
@@ -97,45 +101,76 @@ class HeroesTable {
         }
     }
 
+    private fun addEmptyLine(statsTable: Table) {
+        statsTable.row().height(EMPTY_ROW_HEIGHT)
+        statsTable.add(Label("", nameStyle))
+        statsTable.add(Label("", nameStyle))
+        statsTable.add(Label("", nameStyle)).row()
+    }
+
     private fun addNameLabelTo(statsTable: Table, hero: HeroItem) {
+        statsTable.row().height(NAME_ROW_HEIGHT)
         statsTable.add(Label("", nameStyle))
         statsTable.add(Label(hero.name, nameStyle))
         statsTable.add(Label("", nameStyle)).row()
     }
 
-    private fun addLevelLabelTo(statsTable: Table, hero: HeroItem) {
-        statsTable.add(Label("", levelStyle))
-        statsTable.add(Label("Level:   " + hero.getLevel(), levelStyle))
-        statsTable.add(Label("", levelStyle)).row()
-    }
-
     private fun addHpLabelTo(statsTable: Table, hero: HeroItem) {
-        statsTable.add(Label("", levelStyle))
-        statsTable.add(Label("HP:  " + hero.getCurrentHp() + "/ " + hero.getMaximumHp(), levelStyle))
-        statsTable.add(Label("", levelStyle))
+        statsTable.row().height(TEXT_ROW_HEIGHT)
+        statsTable.add(Label("", textStyle))
+        statsTable.add(Label("HP:  " + hero.currentHp + "/ " + hero.maximumHp, textStyle))
+        statsTable.add(Label("", textStyle)).row()
     }
 
     private fun addHpBarTo(statsTable: Table, hero: HeroItem) {
         statsTable.row().height(BAR_ROW_HEIGHT)
-        statsTable.add(Label("", levelStyle))
-        statsTable.add(createHpBar(hero)).height(BAR_HEIGHT).padTop(BAR_PAD_TOP)
-        statsTable.add(Label("", levelStyle))
+        statsTable.add(Label("", textStyle))
+        statsTable.add(createHpBar(hero)).height(BAR_HEIGHT).left().center()
+        statsTable.add(Label("", textStyle)).row()
+    }
+
+    private fun addMpLabelTo(statsTable: Table, hero: HeroItem) {
+        statsTable.row().height(TEXT_ROW_HEIGHT)
+        statsTable.add(Label("", textStyle))
+        statsTable.add(Label("MP:  " + hero.currentMp + "/ " + hero.maximumMp, textStyle))
+        statsTable.add(Label("", textStyle)).row()
+    }
+
+    private fun addMpBarTo(statsTable: Table, hero: HeroItem) {
+        statsTable.row().height(BAR_ROW_HEIGHT)
+        statsTable.add(Label("", textStyle))
+        statsTable.add(createMpBar(hero)).height(BAR_HEIGHT).left().center()
+        statsTable.add(Label("", textStyle)).row()
     }
 
     private fun createHpBar(hero: HeroItem): Stack {
         return Stack().apply {
-            add(createFill(hero))
+            add(createHpFill(hero))
             add(Image(Utils.createFullBorder()))
         }
     }
 
-    private fun createFill(hero: HeroItem): Image {
-        val hpStats = hero.getAllHpStats()
-        val color = Utils.getHpColor(hpStats)
-        return color.toImage().apply {
+    private fun createMpBar(hero: HeroItem): Stack {
+        return Stack().apply {
+            add(createMpFill(hero))
+            add(Image(Utils.createFullBorder()))
+        }
+    }
+
+    private fun createHpFill(hero: HeroItem): Image {
+        return Color.FIREBRICK.toImage().apply {
             setScaling(Scaling.stretchY)
             align = Align.left
-        }.also { it.drawable.minWidth = (STATS_COLUMN_WIDTH / hero.getMaximumHp()) * hero.getCurrentHp() }
+            drawable.minWidth = (STATS_COLUMN_WIDTH / hero.maximumHp) * hero.currentHp
+        }
+    }
+
+    private fun createMpFill(hero: HeroItem): Image {
+        return Color.FOREST.toImage().apply {
+            setScaling(Scaling.stretchY)
+            align = Align.left
+            drawable.minWidth = (STATS_COLUMN_WIDTH / hero.maximumMp) * hero.currentMp
+        }
     }
 
     private fun Color.toImage(): Image {

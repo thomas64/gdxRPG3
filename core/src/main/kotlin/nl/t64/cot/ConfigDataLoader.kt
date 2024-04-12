@@ -85,7 +85,7 @@ object ConfigDataLoader {
     fun createHeroes(): MutableMap<String, HeroItem> {
         val json = readString("characters", "hero1.json")
         return readValue<HeroItem>(json)
-            .mapValues { it.value.copy(id = it.key) }
+            .mapValues { it.value.createCopy(id = it.key) }
             .toMutableMap()
     }
 

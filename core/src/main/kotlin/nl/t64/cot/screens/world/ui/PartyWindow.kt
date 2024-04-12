@@ -22,6 +22,8 @@ private const val FONT_BIG_PATH = "fonts/spectral_extra_bold_28.ttf"
 
 private val TRANSPARENT_BLACK = Color(0f, 0f, 0f, 0.8f)
 private val TRANSPARENT_WHITE = Color(1f, 1f, 1f, 0.3f)
+private val TRANSPARENT_FIREBRICK = Color(Color.FIREBRICK.r, Color.FIREBRICK.g, Color.FIREBRICK.b, 0.5f)
+private val TRANSPARENT_FOREST = Color(Color.FOREST.r, Color.FOREST.g, Color.FOREST.b, 0.5f)
 private val TRANSPARENT_FACES = Color(1f, 1f, 1f, 0.7f)
 private val TRANSPARENT_DEATH = Color(0.25f, 0.25f, 0.25f, 0.75f)
 
@@ -121,16 +123,45 @@ internal class PartyWindow {
         table.clear()
         party.forEachWithInvertedIndex { invertedIndex, hero ->
             renderFaces(invertedIndex, hero)
-            renderBackgrounds(invertedIndex)
-            renderVerticalLine(invertedIndex)
-            renderName(invertedIndex, hero.name)
-            renderLabel(invertedIndex, "Level: ${hero.getLevel()}", 0f)
-            renderLabel(invertedIndex, "HP: ", 1f)
-            renderLabel(invertedIndex, "XP: ", 2f)
-            renderHpBar(invertedIndex, hero)
-            renderXpBar(invertedIndex, hero)
+            renderFilled(invertedIndex, hero)
+            renderLabels(invertedIndex, hero)
+            renderLines(invertedIndex)
         }
         renderSquares()
+    }
+
+    private fun renderFilled(invertedIndex: Int, hero: HeroItem) {
+        Gdx.gl.glEnable(GL20.GL_BLEND)
+        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA)
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled)
+
+        renderBackground(invertedIndex)
+        shapeRenderer.color = TRANSPARENT_FIREBRICK
+        drawBar(invertedIndex, 2f, hero.hpBarWidth)
+        shapeRenderer.color = TRANSPARENT_FOREST
+        drawBar(invertedIndex, 3f, hero.mpBarWidth)
+
+        shapeRenderer.end()
+        Gdx.gl.glDisable(GL20.GL_BLEND)
+    }
+
+    private fun renderLabels(invertedIndex: Int, hero: HeroItem) {
+        renderName(invertedIndex, hero.name)
+        renderLabel(invertedIndex, "XP: ${hero.totalXp}", 0f)
+        renderLabel(invertedIndex, "XP: ${hero.xpToInvest}", 1f)
+        renderLabel(invertedIndex, "HP: ", 2f)
+        renderLabel(invertedIndex, "MP: ", 3f)
+    }
+
+    private fun renderLines(invertedIndex: Int) {
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line)
+        shapeRenderer.color = TRANSPARENT_BLACK
+
+        renderVerticalLine(invertedIndex)
+        drawBarOutline(invertedIndex, 2f)
+        drawBarOutline(invertedIndex, 3f)
+
+        shapeRenderer.end()
     }
 
     private fun renderFaces(invertedIndex: Int, hero: HeroItem) {
@@ -140,30 +171,20 @@ internal class PartyWindow {
         table.addActor(image)
     }
 
-    private fun renderBackgrounds(invertedIndex: Int) {
-        Gdx.gl.glEnable(GL20.GL_BLEND)
-        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA)
-
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled)
+    private fun renderBackground(invertedIndex: Int) {
         shapeRenderer.color = TRANSPARENT_WHITE
         val x = xPos + PADDING + Constant.FACE_SIZE
         val y = table.y + invertedIndex * (Constant.FACE_SIZE + PADDING)
         shapeRenderer.rect(x, y, Constant.FACE_SIZE, Constant.FACE_SIZE)
-        shapeRenderer.end()
-
-        Gdx.gl.glDisable(GL20.GL_BLEND)
     }
 
     private fun renderVerticalLine(invertedIndex: Int) {
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line)
-        shapeRenderer.color = TRANSPARENT_BLACK
         shapeRenderer.line(
             xPos + PADDING + Constant.FACE_SIZE,
             table.y + invertedIndex * (Constant.FACE_SIZE + PADDING),
             xPos + PADDING + Constant.FACE_SIZE,
             table.y + invertedIndex * (Constant.FACE_SIZE + PADDING) + Constant.FACE_SIZE
         )
-        shapeRenderer.end()
     }
 
     private fun renderName(invertedIndex: Int, heroName: String) {
@@ -186,24 +207,6 @@ internal class PartyWindow {
         table.addActor(label)
     }
 
-    private fun renderHpBar(invertedIndex: Int, hero: HeroItem) {
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled)
-        val hpStats = hero.getAllHpStats()
-        val color = Utils.getHpColor(hpStats)
-        shapeRenderer.color = color
-        drawBar(invertedIndex, 1f, hero.hpBarWidth)
-        shapeRenderer.end()
-        drawBarOutline(invertedIndex, 1f)
-    }
-
-    private fun renderXpBar(invertedIndex: Int, hero: HeroItem) {
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled)
-        shapeRenderer.color = Color.MAROON
-        drawBar(invertedIndex, 2f, hero.xpBarWidth)
-        shapeRenderer.end()
-        drawBarOutline(invertedIndex, 2f)
-    }
-
     private fun renderSquares() {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line)
         shapeRenderer.color = TRANSPARENT_BLACK
@@ -216,21 +219,11 @@ internal class PartyWindow {
         shapeRenderer.end()
     }
 
-    private val HeroItem.hpBarWidth: Float get() {
-        return BAR_WIDTH / getMaximumHp() * getCurrentHp()
-    }
-
-    private val HeroItem.xpBarWidth: Float get() {
-        val maxXp = xpDeltaBetweenLevels
-        val currentXp = maxXp - xpNeededForNextLevel
-        return BAR_WIDTH / maxXp * currentXp
-    }
+    private val HeroItem.hpBarWidth: Float get() = BAR_WIDTH / maximumHp * currentHp
+    private val HeroItem.mpBarWidth: Float get() = BAR_WIDTH / maximumMp * currentMp
 
     private fun drawBarOutline(invertedIndex: Int, linePosition: Float) {
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line)
-        shapeRenderer.color = TRANSPARENT_BLACK
         drawBar(invertedIndex, linePosition, BAR_WIDTH)
-        shapeRenderer.end()
     }
 
     private fun drawBar(invertedIndex: Int, linePosition: Float, barWidth: Float) {

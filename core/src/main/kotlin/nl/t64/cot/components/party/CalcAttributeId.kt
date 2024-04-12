@@ -18,7 +18,7 @@ enum class CalcAttributeId(override val title: String) : SuperEnum {
         override fun getDescription(): String {
             return """
                 Defines the chance-to-hit an enemy with physical weapons in combat.
-                Chance-to-hit is modified with the skill of the weapon you are currently holding.""".trimIndent()
+                Chance-to-hit is modified with the skill of the weapon type you are currently holding.""".trimIndent()
         }
     },
 

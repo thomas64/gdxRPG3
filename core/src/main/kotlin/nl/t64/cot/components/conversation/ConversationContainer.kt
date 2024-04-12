@@ -21,4 +21,10 @@ class ConversationContainer {
         conversations.forEach { it.value.currentPhraseId = phraseIdContainer.getPhraseId(it.key) }
     }
 
+    fun reset() {
+        conversations
+            .filterNot { it.key == "fairy_welcome" }
+            .forEach { it.value.reset() }
+    }
+
 }

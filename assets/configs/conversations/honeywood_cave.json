@@ -19,7 +19,7 @@
           {"text": "*Demand passage.*", "nextId": "10"},
           {"condition": ["barbarian4"], "text": "[Barbarian 4] *Threaten them for passage!*", "nextId": "30"},
           {"condition": ["i_n_1_>=_item_scroll_of_orc_obedience"], "text": "[Scroll of Orc Obedience] *Command passage!*", "command": "PROVIDE_QUEST_ITEM", "nextId": "60"},
-          {"condition": ["level10"], "text": "[Level 10] *Attack them for passage!*", "nextId": "40"},
+          {"condition": ["warrior4"], "text": "[Warrior 4] *Attack them for passage!*", "nextId": "40"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },

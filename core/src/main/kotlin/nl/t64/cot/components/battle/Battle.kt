@@ -5,4 +5,10 @@ class Battle(
     val battlers: List<Battler> = emptyList(),
     val isEscapable: Boolean = true,
     var hasWon: Boolean = false
-)
+) {
+
+    fun reset() {
+        hasWon = false
+    }
+
+}

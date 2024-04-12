@@ -29,7 +29,7 @@ class PartyContainer {
     }
 
     fun gainXp(amount: Int, levelUpMessage: StringBuilder) {
-        getAllHeroesAlive().forEach { it.gainXp(amount, levelUpMessage) }
+        getAllHeroesAlive().forEach { it.gainXp(amount) }
     }
 
     fun recoverFullHp() {
@@ -77,8 +77,8 @@ class PartyContainer {
         return getIndex(hero) == 0
     }
 
-    fun getAverageLevel(): Double {
-        return getAllHeroesAlive().map { it.getLevel() }.average()
+    fun getAverageXp(): Double {
+        return getAllHeroesAlive().map { it.totalXp }.average()
     }
 
     fun getSumOfSkill(skillItemId: SkillItemId): Int {

@@ -28,6 +28,10 @@ class SkillContainer() {
         skills[skillItem.id] = skillItem
     }
 
+    fun getTotalXpCost(): Int {
+        return getAllAboveZero().sumOf { it.getTotalXpCostFromRankZeroToCurrent() }
+    }
+
     private fun hasPositiveQuantity(skillItem: SkillItem): Boolean {
         return skillItem.rank > 0
     }

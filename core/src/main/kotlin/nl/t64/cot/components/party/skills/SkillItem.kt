@@ -67,7 +67,7 @@ data class SkillItem(
             rank == -1 -> -1
             rank >= MAXIMUM -> 0
             rank >= trainerSkill.rank -> -2
-            else -> (getUpgradeFormula() - ((getUpgradeFormula() / 100f) * totalScholar)).roundToInt()
+            else -> (getXpCostForNextRank() - ((getXpCostForNextRank() / 100f) * totalScholar)).roundToInt()
         }
     }
 
@@ -81,9 +81,17 @@ data class SkillItem(
         }
     }
 
-    private fun getUpgradeFormula(): Float {
+    fun getTotalXpCostFromRankZeroToCurrent(): Int {
+        return (1..rank).sumOf { it.getXpCost().roundToInt() }
+    }
+
+    private fun getXpCostForNextRank(): Float {
         val nextRank = rank + 1
-        return upgrade * (nextRank * nextRank)
+        return nextRank.getXpCost()
+    }
+
+    private fun Int.getXpCost(): Float {
+        return (upgrade * (this * this))
     }
 
 }

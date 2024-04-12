@@ -78,7 +78,6 @@ internal class StatsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
         fillEmptyRow()
         fillRow("XP to Invest", selectedHero.xpToInvest)
         fillRow("Total XP", selectedHero.totalXp)
-//        fillRow("Next Level", selectedHero.xpNeededForNextLevel)
         fillEmptyRow()
         fillEmptyRow()
         fillEmptyRow()
@@ -101,23 +100,15 @@ internal class StatsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
         val bonusHit: Int = selectedHero.getCalculatedTotalHit() - baseHit
         addExtraToTable(bonusHit)
 
+        table.add(Label(CalcAttributeId.DEFENSE.title + " (%)", createLabelStyle()))
+        table.add(selectedHero.getCalculatedTotalDefense().toString())
+        table.add("").row()
+
         table.add(Label(CalcAttributeId.DAMAGE.title, createLabelStyle()))
         val baseDamage: Int = selectedHero.getCalcValueOf(InventoryGroup.WEAPON, CalcAttributeId.DAMAGE)
         table.add(baseDamage.toString())
         val bonusDamage: Int = selectedHero.getCalculatedTotalDamage() - baseDamage
         addExtraToTable(bonusDamage)
-
-//        table.add(Label("Shield " + CalcAttributeId.DEFENSE.title, createLabelStyle()))
-//        table.add(selectedHero.getCalcValueOf(InventoryGroup.SHIELD, CalcAttributeId.DEFENSE).toString() + "%")
-//        table.add("").row()
-
-        table.add(Label(CalcAttributeId.DEFENSE.title + " (%)", createLabelStyle()))
-        table.add(selectedHero.getCalculatedTotalDefense().toString())
-        table.add("").row()
-
-//        table.add(Label("Shield " + CalcAttributeId.PROTECTION.title, createLabelStyle()))
-//        table.add(selectedHero.getCalcValueOf(InventoryGroup.SHIELD, CalcAttributeId.PROTECTION).toString())
-//        table.add("").row()
 
         table.add(Label(CalcAttributeId.PROTECTION.title, createLabelStyle()))
         table.add(selectedHero.getSumOfEquipmentOfCalc(CalcAttributeId.PROTECTION).toString())

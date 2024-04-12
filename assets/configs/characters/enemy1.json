@@ -5,7 +5,6 @@
     "xp"       : 2,
     "drops"    : {"green_jelly": 25},
     "stats"    : {
-      "level"       : 1,
       "intelligence": 1,
       "willpower"   : 1,
       "strength"    : 8,
@@ -30,7 +29,6 @@
     "xp"       : 3,
     "drops"    : {"blue_jelly": 100},
     "stats"    : {
-      "level"       : 2,
       "intelligence": 1,
       "willpower"   : 1,
       "strength"    : 10,
@@ -55,7 +53,6 @@
     "xp"       : 3,
     "drops"    : {"blue_jelly": 25},
     "stats"    : {
-      "level"       : 2,
       "intelligence": 1,
       "willpower"   : 1,
       "strength"    : 10,
@@ -80,7 +77,6 @@
     "xp"       : 1,
     "drops"    : {"leather": 25},
     "stats"    : {
-      "level"       : 1,
       "intelligence": 1,
       "willpower"   : 1,
       "strength"    : 5,
@@ -105,7 +101,6 @@
     "xp"       : 3,
     "drops"    : {"basic_dagger": 20, "healing_potion": 5, "gold": 50},
     "stats"    : {
-      "level"       : 1,
       "intelligence": 6,
       "willpower"   : 1,
       "strength"    : 10,
@@ -130,7 +125,6 @@
     "xp"       : 27,
     "drops"    : {"specialist_longsword": 20, "specialist_medium_shield": 20, "healing_potion": 5, "gold": 75},
     "stats"    : {
-      "level"       : 10,
       "intelligence": 15,
       "willpower"   : 12,
       "strength"    : 17,
@@ -160,7 +154,6 @@
     "xp"       : 90,
     "drops"    : {"masterwork_maul": 50, "masterwork_heavy_shield": 50, "stamina_potion": 90, "gold": 90},
     "stats"    : {
-      "level"       : 40,
       "intelligence": 50,
       "willpower"   : 30,
       "strength"    : 50,
@@ -199,7 +192,6 @@
     "xp"       : 100,
     "drops"    : {"gold": 90},
     "stats"    : {
-      "level"       : 40,
       "intelligence": 60,
       "willpower"   : 30,
       "strength"    : 1,
