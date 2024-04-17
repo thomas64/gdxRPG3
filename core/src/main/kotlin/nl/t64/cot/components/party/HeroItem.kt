@@ -71,6 +71,7 @@ class HeroItem(
     fun takeDamage(damage: Int) {
         currentHp = (currentHp - damage).coerceAtLeast(0)
         if (currentHp <= 0) {
+            currentMp = 0
             isAlive = false
         }
     }

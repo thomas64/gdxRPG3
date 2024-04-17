@@ -3,6 +3,8 @@ package nl.t64.cot.components.party.skills
 import com.fasterxml.jackson.annotation.JsonCreator
 
 
+private const val TOTAL_XP_NECESSARY_FOR_MOZES_STARTING_SKILLS = 14
+
 class SkillContainer() {
 
     private val skills: SkillItemMap<SkillItemId, SkillItem> = SkillItemMap()
@@ -29,7 +31,8 @@ class SkillContainer() {
     }
 
     fun getTotalXpCost(): Int {
-        return getAllAboveZero().sumOf { it.getTotalXpCostFromRankZeroToCurrent() }
+        return getAllAboveZero()
+            .sumOf { it.getTotalXpCostFromRankZeroToCurrent() } - TOTAL_XP_NECESSARY_FOR_MOZES_STARTING_SKILLS
     }
 
     private fun hasPositiveQuantity(skillItem: SkillItem): Boolean {

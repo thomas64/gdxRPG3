@@ -252,7 +252,8 @@ open class ItemSlotTooltip : BaseTooltip() {
     }
 
     private fun createLabelStyle(color: Color): LabelStyle {
-        return LabelStyle(BitmapFont(), color)
+        val font = BitmapFont().apply { data.markupEnabled = true }
+        return LabelStyle(font, color)
     }
 
     private fun isBuyOrSellValue(attribute: InventoryDescription): Boolean {

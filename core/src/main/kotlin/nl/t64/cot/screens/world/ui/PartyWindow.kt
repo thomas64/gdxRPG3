@@ -38,9 +38,9 @@ private const val TABLE_HEIGHT = (Constant.FACE_SIZE * PartyContainer.MAXIMUM) +
 private const val HIGH_X = 0f
 private const val LOW_X = -TABLE_WIDTH
 
-private const val BAR_X = 50f
+private const val BAR_X = 55f
 private const val BAR_Y = -7f
-private const val BAR_WIDTH = 85f
+private const val BAR_WIDTH = 80f
 private const val BAR_HEIGHT = 12f
 
 private const val VELOCITY = 800f
@@ -147,8 +147,8 @@ internal class PartyWindow {
 
     private fun renderLabels(invertedIndex: Int, hero: HeroItem) {
         renderName(invertedIndex, hero.name)
-        renderLabel(invertedIndex, "XP: ${hero.totalXp}", 0f)
-        renderLabel(invertedIndex, "XP: ${hero.xpToInvest}", 1f)
+        renderLabel(invertedIndex, "TXP: ${hero.totalXp}", 0f)
+        renderLabel(invertedIndex, "XPI:  ${hero.xpToInvest}", 1f)
         renderLabel(invertedIndex, "HP: ", 2f)
         renderLabel(invertedIndex, "MP: ", 3f)
     }
@@ -192,7 +192,7 @@ internal class PartyWindow {
         val heroLabel = Label(heroName, labelStyle)
         heroLabel.setPosition(
             xPos + PADDING + Constant.FACE_SIZE + LABEL_LEFT_MARGIN,
-            table.y + invertedIndex * (Constant.FACE_SIZE + PADDING) + LINE_HEIGHT
+            table.y - (PADDING / 2f) + invertedIndex * (Constant.FACE_SIZE + PADDING) + LINE_HEIGHT
         )
         table.addActor(heroLabel)
     }
@@ -202,7 +202,7 @@ internal class PartyWindow {
         val label = Label(text, labelStyle)
         label.setPosition(
             xPos + PADDING + Constant.FACE_SIZE + LABEL_LEFT_MARGIN,
-            table.y + invertedIndex * (Constant.FACE_SIZE + PADDING) - offset * LINE_HEIGHT
+            table.y - PADDING + invertedIndex * (Constant.FACE_SIZE + PADDING) - offset * LINE_HEIGHT
         )
         table.addActor(label)
     }
@@ -228,7 +228,7 @@ internal class PartyWindow {
 
     private fun drawBar(invertedIndex: Int, linePosition: Float, barWidth: Float) {
         val x = xPos + PADDING + Constant.FACE_SIZE + BAR_X
-        val y = table.y + Constant.FACE_SIZE + invertedIndex * (Constant.FACE_SIZE + PADDING) - (linePosition + 2f) * LINE_HEIGHT + BAR_Y
+        val y = table.y - PADDING + Constant.FACE_SIZE + invertedIndex * (Constant.FACE_SIZE + PADDING) - (linePosition + 2f) * LINE_HEIGHT + BAR_Y
         shapeRenderer.rect(x, y, barWidth, BAR_HEIGHT)
     }
 

@@ -5,9 +5,10 @@
     "sort"       : 80005,
     "price"      : 4,
     "description": [
-      "Restores a fifth of the drinker's lost Constitution and Stamina.",
-      "Creating a Healing Potion requires 3 Herbs",
-      "and an Alchemist rank of at least 1."
+      "Restores 20 HP of the drinker's lost health.",
+      "[LIGHT_GRAY]",
+      "(Creating a Healing Potion requires 3 Herbs",
+      "and an Alchemist rank of at least 1.)"
     ]
   },
   "curing_potion"      : {
@@ -17,31 +18,59 @@
     "price"      : 8,
     "description": [
       "A more powerful version of the Healing Potion,",
-      "restores a third of the drinker's lost Constitution and Stamina.",
-      "Creating a Curing Potion requires 3 Herbs, 2 Spices",
-      "and an Alchemist rank of at least 3."
-    ]
-  },
-  "stamina_potion"     : {
-    "name"       : "Stamina Potion",
-    "group"      : "POTION",
-    "sort"       : 80015,
-    "price"      : 11,
-    "description": [
-      "Restores all Stamina to the drinker.",
-      "Creating a Stamina Potion requires 4 Herbs, 2 Spices",
-      "and an Alchemist rank of at least 5."
+      "restores 80 HP of the drinker's lost health.",
+      "[LIGHT_GRAY]",
+      "(Creating a Curing Potion requires 3 Herbs, 2 Spices",
+      "and an Alchemist rank of at least 3.)"
     ]
   },
   "restore_potion"     : {
     "name"       : "Restore Potion",
     "group"      : "POTION",
-    "sort"       : 80020,
+    "sort"       : 80015,
     "price"      : 15,
     "description": [
       "Restores full health to the drinker.",
-      "Creating a Restore Potion requires 5 Herbs, 3 Spices",
-      "and an Alchemist rank of at least 7."
+      "[LIGHT_GRAY]",
+      "(Creating a Restore Potion requires 5 Herbs, 3 Spices",
+      "and an Alchemist rank of at least 7.)"
+    ]
+  },
+  "energy_potion": {
+    "name"       : "Energy Potion",
+    "group"      : "POTION",
+    "sort"       : 80018,
+    "price"      : 4,
+    "description": [
+      "Restores 20 MP of the drinker's lost energy.",
+      "[LIGHT_GRAY]",
+      "(Creating an Energy Potion requires 3 Spices",
+      "and an Alchemist rank of at least 1.)"
+    ]
+  },
+  "endurance_potion": {
+    "name"       : "Endurance Potion",
+    "group"      : "POTION",
+    "sort"       : 80019,
+    "price"      : 8,
+    "description": [
+      "A more powerful version of the Energy Potion,",
+      "Restores 80 MP of the drinker's lost energy.",
+      "[LIGHT_GRAY]",
+      "(Creating an Endurance Potion requires 3 Spices, 2 Herbs",
+      "and an Alchemist rank of at least 3.)"
+    ]
+  },
+  "stamina_potion"     : {
+    "name"       : "Stamina Potion",
+    "group"      : "POTION",
+    "sort"       : 80020,
+    "price"      : 16,
+    "description": [
+      "Restores all energy to the drinker.",
+      "[LIGHT_GRAY]",
+      "(Creating a Stamina Potion requires 5 Spices, 3 Herbs",
+      "and an Alchemist rank of at least 7.)"
     ]
   },
   "fire_flask"         : {
@@ -51,8 +80,9 @@
     "price"      : 4,
     "description": [
       "A sticky, incendiary liquid that bursts into flame on contact with air.",
-      "Creating a Fire Flask requires 1 Spice, 2 Gemstones",
-      "and an Alchemist rank of at least 1."
+      "[LIGHT_GRAY]",
+      "(Creating a Fire Flask requires 1 Spice, 2 Gemstones",
+      "and an Alchemist rank of at least 1.)"
     ]
   },
   "inferno_flask"      : {
@@ -63,8 +93,9 @@
     "description": [
       "A more powerful version of the Fire Flask.",
       "A sticky, incendiary liquid that bursts into flame on contact with air.",
-      "Creating an Inferno Flask requires 3 Spices, 3 Gemstones",
-      "and an Alchemist rank of at least 3."
+      "[LIGHT_GRAY]",
+      "(Creating an Inferno Flask requires 3 Spices, 3 Gemstones",
+      "and an Alchemist rank of at least 3.)"
     ]
   },
   "acid_flask"         : {
@@ -74,8 +105,9 @@
     "price"      : 10,
     "description": [
       "This vicious fluid eats into the flesh of any creature it touches, doing continuous damage.",
-      "Creating an Acid Flask requires 2 Spices, 3 Gemstones",
-      "and an Alchemist rank of at least 5."
+      "[LIGHT_GRAY]",
+      "(Creating an Acid Flask requires 2 Spices, 3 Gemstones",
+      "and an Alchemist rank of at least 5.)"
     ]
   },
   "sleep_flask"        : {
@@ -86,8 +118,9 @@
     "description": [
       "A liquid that vaporizes when exposed to air,",
       "forming a gas that drains the mobility of those who breathe it.",
-      "Creating a Sleep Gas Flask requires 3 Herbs, 3 Gemstones",
-      "and an Alchemist rank of at least 7."
+      "[LIGHT_GRAY]",
+      "(Creating a Sleep Gas Flask requires 3 Herbs, 3 Gemstones",
+      "and an Alchemist rank of at least 7.)"
     ]
   },
   "antidote_potion"    : {
@@ -97,8 +130,9 @@
     "price"      : 5,
     "description": [
       "Halts the effects of poison, but does not restore damage already inflicted by poison.",
-      "Creating an Antidote Potion requires 1 Herb, 2 Spices",
-      "and an Alchemist rank of at least 2."
+      "[LIGHT_GRAY]",
+      "(Creating an Antidote Potion requires 1 Herb, 2 Spices",
+      "and an Alchemist rank of at least 2.)"
     ]
   },
   "protection_potion"  : {
@@ -108,8 +142,9 @@
     "price"      : 8,
     "description": [
       "Temporarily increases the Protection of the drinker by 5 points during 1 battle.",
-      "Creating a Protection Potion requires 2 Herbs, 3 Spices, 1 Gemstone",
-      "and an Alchemist rank of at least 2."
+      "[LIGHT_GRAY]",
+      "(Creating a Protection Potion requires 2 Herbs, 3 Spices, 1 Gemstone",
+      "and an Alchemist rank of at least 2.)"
     ]
   },
   "intelligence_potion": {
@@ -119,8 +154,9 @@
     "price"      : 12,
     "description": [
       "Temporarily increases the Intelligence of the drinker by 5 points during 1 battle.",
-      "Creating a Intelligence Potion requires 2 Herbs, 1 Spice, 3 Gemstones",
-      "and an Alchemist rank of at least 6."
+      "[LIGHT_GRAY]",
+      "(Creating a Intelligence Potion requires 2 Herbs, 1 Spice, 3 Gemstones",
+      "and an Alchemist rank of at least 6.)"
     ]
   },
   "willpower_potion"   : {
@@ -130,8 +166,9 @@
     "price"      : 12,
     "description": [
       "Temporarily increases the Willpower of the drinker by 5 points during 1 battle.",
-      "Creating a Willpower Potion requires 3 Herbs, 2 Spices, 1 Gemstone",
-      "and an Alchemist rank of at least 6."
+      "[LIGHT_GRAY]",
+      "(Creating a Willpower Potion requires 3 Herbs, 2 Spices, 1 Gemstone",
+      "and an Alchemist rank of at least 6.)"
     ]
   },
   "dexterity_potion"   : {
@@ -141,8 +178,9 @@
     "price"      : 12,
     "description": [
       "Temporarily increases the Dexterity of the drinker by 5 points during 1 battle.",
-      "Creating a Dexterity Potion requires 1 Herb, 3 Spices, 2 Gemstones",
-      "and an Alchemist rank of at least 6."
+      "[LIGHT_GRAY]",
+      "(Creating a Dexterity Potion requires 1 Herb, 3 Spices, 2 Gemstones",
+      "and an Alchemist rank of at least 6.)"
     ]
   },
   "speed_potion"       : {
@@ -152,8 +190,9 @@
     "price"      : 12,
     "description": [
       "Temporarily increases the Speed of the drinker by 5 points during 1 battle.",
-      "Creating a Speed Potion requires 3 Herbs, 1 Spice, 2 Gemstones",
-      "and an Alchemist rank of at least 6."
+      "[LIGHT_GRAY]",
+      "(Creating a Speed Potion requires 3 Herbs, 1 Spice, 2 Gemstones",
+      "and an Alchemist rank of at least 6.)"
     ]
   },
   "strength_potion"    : {
@@ -163,8 +202,9 @@
     "price"      : 12,
     "description": [
       "Temporarily increases the Strength of the drinker by 5 points during 1 battle.",
-      "Creating a Strength Potion requires 1 Herb, 2 Spices, 3 Gemstones",
-      "and an Alchemist rank of at least 6."
+      "[LIGHT_GRAY]",
+      "(Creating a Strength Potion requires 1 Herb, 2 Spices, 3 Gemstones",
+      "and an Alchemist rank of at least 6.)"
     ]
   },
   "stealth_potion"     : {
@@ -174,8 +214,9 @@
     "price"      : 10,
     "description": [
       "Temporarily increases the Stealth rank of the drinker by 3 points during 1 battle.",
-      "Creating a Stealth Potion requires 2 Herbs, 2 Spices, 2 Gemstones",
-      "and an Alchemist rank of at least 4."
+      "[LIGHT_GRAY]",
+      "(Creating a Stealth Potion requires 2 Herbs, 2 Spices, 2 Gemstones",
+      "and an Alchemist rank of at least 4.)"
     ]
   }
 }

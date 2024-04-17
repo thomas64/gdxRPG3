@@ -1,8 +1,8 @@
 
 potion.png
-size: 248,248
+size: 372, 186
 format: RGBA8888
-filter: Nearest,Nearest
+filter: Nearest, Nearest
 repeat: none
 acid_flask
   rotate: false
@@ -11,107 +11,121 @@ acid_flask
   orig: 62, 62
   offset: 0, 0
   index: -1
-speed_potion
+antidote_potion
   rotate: false
   xy: 62, 0
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-antidote_potion
+curing_potion
   rotate: false
   xy: 124, 0
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-curing_potion
+dexterity_potion
   rotate: false
   xy: 186, 0
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-dexterity_potion
+endurance_potion
   rotate: false
-  xy: 0, 62
+  xy: 248, 0
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+energy_potion
+  rotate: false
+  xy: 310, 0
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
 fire_flask
   rotate: false
-  xy: 62, 62
+  xy: 0, 62
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
 healing_potion
   rotate: false
-  xy: 124, 62
+  xy: 62, 62
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
 inferno_flask
   rotate: false
-  xy: 186, 62
+  xy: 124, 62
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
 intelligence_potion
   rotate: false
-  xy: 0, 124
+  xy: 186, 62
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
 protection_potion
   rotate: false
-  xy: 62, 124
+  xy: 248, 62
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
 restore_potion
   rotate: false
-  xy: 124, 124
+  xy: 310, 62
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
 sleep_flask
   rotate: false
-  xy: 186, 124
+  xy: 0, 124
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+speed_potion
+  rotate: false
+  xy: 62, 124
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
 stamina_potion
   rotate: false
-  xy: 0, 186
+  xy: 124, 124
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
 stealth_potion
   rotate: false
-  xy: 62, 186
+  xy: 186, 124
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
 strength_potion
   rotate: false
-  xy: 124, 186
+  xy: 248, 124
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
 willpower_potion
   rotate: false
-  xy: 186, 186
+  xy: 310, 124
   size: 62, 62
   orig: 62, 62
   offset: 0, 0

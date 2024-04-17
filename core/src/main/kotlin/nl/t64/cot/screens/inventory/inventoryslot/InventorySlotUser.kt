@@ -6,7 +6,6 @@ import nl.t64.cot.components.party.inventory.InventoryItem
 import nl.t64.cot.screens.inventory.InventoryUtils
 import nl.t64.cot.screens.inventory.itemslot.ItemSlot
 import nl.t64.cot.screens.inventory.messagedialog.MessageDialog
-import kotlin.math.roundToInt
 
 
 class InventorySlotUser private constructor(itemSlot: ItemSlot) {
@@ -24,10 +23,12 @@ class InventorySlotUser private constructor(itemSlot: ItemSlot) {
     private fun selectActionBasedOnItemId() {
         when (inventoryItem.id) {
             "crystal_of_time" -> CrystalHandler.doAction()
-            "healing_potion" -> possibleHandleDrink(::potionCondition, ::doHealing)
-            "curing_potion" -> possibleHandleDrink(::potionCondition, ::doCuring)
-            "stamina_potion" -> possibleHandleDrink(::energyCondition, ::doEnergy)
-            "restore_potion" -> possibleHandleDrink(::potionCondition, ::doRestore)
+            "healing_potion" -> possibleHandleDrink(::hpCondition, ::doHealing)
+            "curing_potion" -> possibleHandleDrink(::hpCondition, ::doCuring)
+            "restore_potion" -> possibleHandleDrink(::hpCondition, ::doRestore)
+            "energy_potion" -> possibleHandleDrink(::mpCondition, ::doEnergy)
+            "endurance_potion" -> possibleHandleDrink(::mpCondition, ::doEndurance)
+            "stamina_potion" -> possibleHandleDrink(::mpCondition, ::doStamina)
         }
     }
 
@@ -58,30 +59,36 @@ class InventorySlotUser private constructor(itemSlot: ItemSlot) {
             .show(currentSlot.stage, AudioEvent.SE_MENU_ERROR)
     }
 
-    private fun potionCondition(): Boolean {
+    private fun hpCondition(): Boolean {
         return selectedHero.isAlive && selectedHero.currentHp < selectedHero.maximumHp
     }
 
-    private fun energyCondition(): Boolean {
+    private fun mpCondition(): Boolean {
         return selectedHero.isAlive && selectedHero.currentMp < selectedHero.maximumMp
     }
 
     private fun doHealing() {
-        val healPoints = (selectedHero.maximumHp / 5f).roundToInt()
-        selectedHero.recoverPartHp(healPoints)
+        selectedHero.recoverPartHp(20)
     }
 
     private fun doCuring() {
-        val healPoints = (selectedHero.maximumHp / 3f).roundToInt()
-        selectedHero.recoverPartHp(healPoints)
-    }
-
-    private fun doEnergy() {
-        selectedHero.recoverFullMp()
+        selectedHero.recoverPartHp(80)
     }
 
     private fun doRestore() {
         selectedHero.recoverFullHp()
+    }
+
+    private fun doEnergy() {
+        selectedHero.recoverPartMp(20)
+    }
+
+    private fun doEndurance() {
+        selectedHero.recoverPartMp(80)
+    }
+
+    private fun doStamina() {
+        selectedHero.recoverFullMp()
     }
 
 }
