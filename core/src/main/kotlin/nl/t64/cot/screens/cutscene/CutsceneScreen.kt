@@ -97,6 +97,7 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
         }
 
         worldRenderer.updateCamera()
+        mapManager.getParticleEffects().forEach { it.update(dt) }
         actorsStage.act(dt)
         worldRenderer.renderAll(Vector2(followingActor.x, followingActor.y)) { actorsStage.draw() }
 
