@@ -268,7 +268,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             } else {
                 gameData.clock.setTimeOfDay(time)
             }
-            gameData.party.recoverFullHp()
+            gameData.party.fullRecover()
         }
         screenManager.getWorldScreen().fadeOut(Color.BLACK, 1f, TransitionPurpose.MAP_CHANGE) {
             continueConversation(nextId)

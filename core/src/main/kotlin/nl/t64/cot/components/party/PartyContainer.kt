@@ -28,12 +28,15 @@ class PartyContainer {
         (0 until MAXIMUM).forEach { action(it) }
     }
 
-    fun gainXp(amount: Int, levelUpMessage: StringBuilder) {
+    fun gainXp(amount: Int) {
         getAllHeroesAlive().forEach { it.gainXp(amount) }
     }
 
-    fun recoverFullHp() {
-        getAllHeroesAlive().forEach { it.recoverFullHp() }
+    fun fullRecover() {
+        getAllHeroesAlive().forEach {
+            it.recoverFullHp()
+            it.recoverFullMp()
+        }
     }
 
     fun getPreviousHero(hero: HeroItem): HeroItem {

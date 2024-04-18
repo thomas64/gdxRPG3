@@ -18,30 +18,15 @@ object XpRewarder {
     }
 
     private fun receiveXp(reward: Loot) {
-        val levelUpMessage = StringBuilder()
-        gameData.party.gainXp(reward.xp, levelUpMessage)
-        val finalMessage = levelUpMessage.toString().trim()
-        showMessageTooltipRewardXp(reward.xp, finalMessage)
+        gameData.party.gainXp(reward.xp)
+        showMessageTooltipRewardXp(reward.xp)
         reward.clearXp()
     }
 
-    private fun showMessageTooltipRewardXp(xp: Int, levelUpMessage: String) {
+    private fun showMessageTooltipRewardXp(xp: Int) {
         stopAllSe()
-        if (levelUpMessage.isEmpty()) {
-            showMessageTooltipXpOnly(xp)
-        } else {
-            showMessageTooltipXpAndLevelUp(xp, levelUpMessage)
-        }
-    }
-
-    private fun showMessageTooltipXpOnly(xp: Int) {
         playSe(AudioEvent.SE_REWARD)
         screenManager.getWorldScreen().showMessageTooltip("+ $xp XP")
-    }
-
-    private fun showMessageTooltipXpAndLevelUp(xp: Int, levelUpMessage: String) {
-        playSe(AudioEvent.SE_LEVELUP)
-        screenManager.getWorldScreen().showMessageTooltip("+ $xp XP" + System.lineSeparator() + levelUpMessage)
     }
 
 }

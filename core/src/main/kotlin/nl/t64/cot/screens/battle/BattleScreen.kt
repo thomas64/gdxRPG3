@@ -103,30 +103,19 @@ class BattleScreen : Screen {
     private fun winBattle() {
         gameData.battles.setBattleWon(battleId)
 
-        val levelUpMessage = StringBuilder()
         val totalXpWon = enemies.getTotalXp()
-        gameData.party.gainXp(totalXpWon, levelUpMessage)
-        val finalLevelUpMessage = levelUpMessage.toString().trim().ifEmpty { null }
-        val winMessage = createWinMessage(totalXpWon, finalLevelUpMessage)
+        gameData.party.gainXp(totalXpWon)
+        val winMessage = createWinMessage(totalXpWon)
 
         val messageDialog = MessageDialog(winMessage)
         messageDialog.setActionAfterHide { battleWonExitScreen() }
-        messageDialog.show(stage, getAudio(finalLevelUpMessage))
+        messageDialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT)
     }
 
-    private fun createWinMessage(totalXpWon: Int, finalLevelUpMessage: String?): String {
-        val xpMessage = """
+    private fun createWinMessage(totalXpWon: Int): String {
+        return """
             The enemy is defeated!
             Party gained $totalXpWon XP.""".trimIndent()
-        return finalLevelUpMessage
-            ?.let { xpMessage + System.lineSeparator() + System.lineSeparator() + it }
-            ?: xpMessage
-    }
-
-    private fun getAudio(levelUpMessage: String?): AudioEvent {
-        return levelUpMessage
-            ?.let { AudioEvent.SE_LEVELUP }
-            ?: AudioEvent.SE_CONVERSATION_NEXT
     }
 
     private fun battleWonExitScreen() {
@@ -141,9 +130,9 @@ class BattleScreen : Screen {
         }
 
         val message = """
-            Fleeing will return you to the location of 
+            Fleeing will return you to the location of
             your last save with all progress intact.
-            
+
             Do you want to flee?""".trimIndent()
         DialogQuestion({ battleFledExitScreen() }, message)
             .show(stage, AudioEvent.SE_CONVERSATION_NEXT, 0)
@@ -173,7 +162,7 @@ class BattleScreen : Screen {
     private fun gameOver() {
         val message = """
             Mozes took a fatal blow.
-            
+
             Game Over.""".trimIndent()
         val messageDialog = MessageDialog(message)
         messageDialog.setActionAfterHide { gameOverExitScreen() }

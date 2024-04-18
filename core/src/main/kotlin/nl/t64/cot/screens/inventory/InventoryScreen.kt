@@ -187,7 +187,7 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
                 && inventory.hasRoomForResource("gemstone")
             ) {
                 playSe(AudioEvent.SE_MENU_ERROR)
-                gameData.party.gainXp(100, StringBuilder())
+                gameData.party.gainXp(100)
                 inventory.autoSetItem(InventoryDatabase.createInventoryItem("gold", 100))
                 inventory.autoSetItem(InventoryDatabase.createInventoryItem("herb", 100))
                 inventory.autoSetItem(InventoryDatabase.createInventoryItem("spice", 100))

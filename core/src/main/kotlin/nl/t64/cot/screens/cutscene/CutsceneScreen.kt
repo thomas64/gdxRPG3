@@ -38,6 +38,7 @@ const val FAST_STEP = 0.25f
 
 abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
 
+    private val listener = CutSceneListener { exitScreen() }
     val camera = Camera()
     private val worldRenderer = WorldRenderer(camera)
     val actorsStage = Stage(camera.viewport)
@@ -80,8 +81,8 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
         actorsStage.clear()
         Gdx.input.inputProcessor = actorsStage
         Utils.setGamepadInputProcessor(actorsStage)
-        actorsStage.addAction(Actions.sequence(Actions.delay(1f),
-                                               Actions.addListener(CutSceneListener { exitScreen() }, false)))
+        actorsStage.addAction(Actions.sequence(Actions.delay(Constant.FADE_DURATION),
+                                               Actions.addListener(listener, false)))
 
         prepare()
         actorsStage.addAction(actions[actionId])
@@ -96,6 +97,7 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
             camera.setPosition(followingActor.x, followingActor.y)
         }
 
+        listener.update(dt)
         worldRenderer.updateCamera()
         mapManager.getParticleEffects().forEach { it.update(dt) }
         actorsStage.act(dt)

@@ -27,8 +27,9 @@ private const val LINE_HEIGHT = 26f
 private const val DIALOG_INIT_HEIGHT = 100L
 private const val DIALOG_PAD = 60f
 
-class MessageDialog(private val multiplexer: InputMultiplexer) {
-
+class MessageDialog(
+    private val multiplexer: InputMultiplexer
+) {
     private val stage = Stage()
     private val font: BitmapFont = resourceManager.getTrueTypeAsset(FONT, FONT_SIZE).apply {
         data.setLineHeight(LINE_HEIGHT)
@@ -56,8 +57,10 @@ class MessageDialog(private val multiplexer: InputMultiplexer) {
         fillDialog(message)
         playSe(audioEvent)
         dialog.show(stage)
-        Gdx.input.inputProcessor = stage
-        Utils.setGamepadInputProcessor(stage)
+        Utils.runWithDelay(Constant.FADE_DURATION) {
+            Gdx.input.inputProcessor = stage
+            Utils.setGamepadInputProcessor(stage)
+        }
     }
 
     fun update(dt: Float) {

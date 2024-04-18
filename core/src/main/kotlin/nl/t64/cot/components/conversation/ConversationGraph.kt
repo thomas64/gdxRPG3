@@ -13,10 +13,12 @@ data class ConversationGraph(
 ) {
     var currentPhraseId: String = DEFAULT_STARTING_PHRASE_ID
     private var isJumpToAltEnabled: Boolean = false
+    var isPartHeard: Boolean = false
 
     fun reset() {
         currentPhraseId = DEFAULT_STARTING_PHRASE_ID
         isJumpToAltEnabled = false
+        isPartHeard = false
     }
 
     fun initId() {
@@ -38,7 +40,8 @@ data class ConversationGraph(
     fun getAssociatedChoices(): Array<ConversationChoice> {
         return phrases[currentPhraseId]!!
             .getChoices(currentPhraseId)
-            .map { possibleConvert(it) }
+            .map { it.possibleConvert() }
+            .map { it.possibleSetHeard() }
             .toTypedArray()
     }
 
@@ -46,17 +49,23 @@ data class ConversationGraph(
         phrases.values.forEach { it.resetChoiceHistory() }
     }
 
-    private fun possibleConvert(choice: ConversationChoice): ConversationChoice {
-        return when {
-            choice.setJumpToAltEnabled == true -> { isJumpToAltEnabled = true; choice }
-            choice.setJumpToAltEnabled == false -> { isJumpToAltEnabled = false; choice }
-            choice.containsAlternativeNextId() -> choice.copyWithAltNextId()
-            else -> choice
+    private fun ConversationChoice.possibleConvert(): ConversationChoice {
+        if (this.containsAlternativeNextId()) {
+            return this.getCopyOfChoiceWithAltNextId()
         }
+        this.setJumpToAltEnabled?.let { isJumpToAltEnabled = it }
+        return this
     }
 
     private fun ConversationChoice.containsAlternativeNextId(): Boolean {
         return isJumpToAltEnabled && this.altNextId != null
+    }
+
+    private fun ConversationChoice.possibleSetHeard(): ConversationChoice {
+        if (this.setHeard == true) {
+            isPartHeard = true
+        }
+        return this
     }
 
 }

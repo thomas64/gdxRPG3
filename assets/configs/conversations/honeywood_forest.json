@@ -54,7 +54,13 @@
         ]
       },
       "10": {"text": ["We all watch over the people of Honeywood and strive to protect you whenever we can. So Mozes, we've known you since your birth.", "Unfortunately, our power and protection have their limits."], "choices": [{"nextId": "2"}]},
-      "20": {"text": ["A new evil force has emerged in Adan, known as Ardor. His power is rapidly growing, and he harbors ambitions of conquering Adan. He is currently operating in secrecy, so you might not have heard of him. However, if he isn't stopped soon, it will have dire consequences for us and all the people of Adan."]},
+      "20": {
+        "text"   : ["A new evil force has emerged in Adan, known as Ardor. His power is rapidly growing, and he harbors ambitions of conquering Adan. He is currently operating in secrecy, so you might not have heard of him. However, if he isn't stopped soon, it will have dire consequences for us and all the people of Adan."],
+        "choices": [
+          {"condition": ["i_!heard"], "nextId": "21"},
+          {"condition": ["i_heard"], "nextId": "26"}
+        ]
+      },
       "21": {
         "choices": [
           {"text": "*Fearlessly offer your help against Ardor.*", "nextId": "23"},
@@ -68,7 +74,7 @@
       "26": {"text": ["You cannot confront Ardor! Even if you were to confront Ardor, he's far beyond your capabilities. Given the limited time we still have, there's little you could achieve in becoming stronger."]},
       "27": {"text": ["Ardor {COLOR=BLUE}appears almost invulnerable {COLOR=BLACK}to all forms of attack. We're still trying to uncover the source of his power."]},
       "28": {"text": ["The only hope we have is that all the Forces of Good, like the Elves, the Wizard Council, and us, combine their powers. Together we can launch a massive attack and deal with Ardor."]},
-      "29": {"text": ["I cannot express myself enough: Please stay away from him!"], "choices": [{"nextId": "2", "altNextId": "35"}]},
+      "29": {"text": ["I cannot express myself enough: Please stay away from him!"], "choices": [{"setHeard": true, "nextId": "2", "altNextId": "35"}]},
       "30": {"text": ["Hmm, yes of course. {WAIT=0.5}Terrible news, it appears that Ardor has taken Grace captive, and our efforts to help her have proven unsuccessful. I am truly sorry for this, Mozes."]},
       "31": {"text": ["However, do not despair, there might still be a possibility for you. While your courage is admirable, bravery alone will not suffice. That's why we wish to aid you in your quest to find Grace."]},
       "32": {"text": ["Within the cave you came from, we've hidden a magic scroll that will be of great assistance against any orcs here in Honeywood Forest."], "choices": [{"nextId": "35"}]},

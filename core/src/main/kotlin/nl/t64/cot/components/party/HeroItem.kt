@@ -79,6 +79,7 @@ class HeroItem(
     fun revive() {
         isAlive = true
         recoverFullHp()
+        recoverFullMp()
     }
 
     fun recoverFullHp() {

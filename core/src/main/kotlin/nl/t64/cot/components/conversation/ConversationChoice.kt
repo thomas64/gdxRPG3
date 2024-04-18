@@ -15,6 +15,7 @@ data class ConversationChoice(
     val nextId: String = DEFAULT_NEXT_ID,
     val altNextId: String? = null,
     val setJumpToAltEnabled: Boolean? = null,
+    val setHeard: Boolean? = null,
     val command: ConversationCommand = DEFAULT_CONVERSATION_COMMAND,
     @JsonProperty("condition")
     val conditionIds: List<String> = emptyList()
@@ -42,7 +43,7 @@ data class ConversationChoice(
         return text == DEFAULT_ANSWER_TEXT
     }
 
-    fun copyWithAltNextId(): ConversationChoice {
+    fun getCopyOfChoiceWithAltNextId(): ConversationChoice {
         val copy = copy(nextId = altNextId!!)
         copy.initId(conversationId)
         return copy

@@ -85,7 +85,7 @@
  <objectgroup color="#ffff00" id="25" name="quest">
   <object id="28" name="quest_honeywood_elder" type="check" x="144" y="144" width="48" height="48">
    <properties>
-    <property name="condition" value="is_fairy_portal_active"/>
+    <property name="condition" value="fairy_portal_active"/>
     <property name="task" value="4"/>
    </properties>
   </object>

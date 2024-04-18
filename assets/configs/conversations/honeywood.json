@@ -87,7 +87,7 @@
   "quest_helping_horse"                 : {
     "name"   : "Lennor",
     "phrases": {
-      "1" : {"text": ["Hey Mozes, you can't go further north from here. Just {COLOR=FIREBRICK}minutes ago{COLOR=BLACK}, a large tree fell down and is now blocking the road."]},
+      "1" : {"text": ["Hey Mozes, you can't go further north from here. Just {COLOR=BLUE}minutes ago{COLOR=BLACK}, a large tree fell down and is now blocking the road."]},
       "2" : {"text": ["I heard a loud bang, so I came straight this way to see what happened. Luckily, no one was hurt when it fell. But it'll take a while for me to remove it and clear the road for everyone."]},
       "3" : {"text": ["I could use some help though. A tree this large? I think I need a horse and some ropes to succeed."], "choices": [{"command": "ACCEPT_QUEST", "nextId": "5"}]},
       "5" : {
@@ -100,7 +100,7 @@
           {"text": "*Take your leave.*", "command": "EXIT", "nextId": "50"}
         ]
       },
-      "10": {"text": ["Only {COLOR=FIREBRICK}just minutes ago{COLOR=BLACK}! I heard a loud bang, so I came straight this way to see what happened."]},
+      "10": {"text": ["Only {COLOR=BLUE}just minutes ago{COLOR=BLACK}! I heard a loud bang, so I came straight this way to see what happened."]},
       "11": {"text": ["Luckily, this doesn't happen very often, because it'll take a while to remove it and clear the road for everyone."], "choices": [{"nextId": "5"}]},
       "20": {"text": ["I'm sorry, Mozes, but there's nothing I can do about it right now. You'll have to wait a while, or you could help me out to speed up the process."], "choices": [{"nextId": "5"}]},
       "30": {"text": ["I tried! It's one heavy tree, Mozes! I really can't do it without a horse. Which I don't have. Hmmm, maybe I will get one tomorrow..."], "choices": [{"nextId": "5"}]},
@@ -309,9 +309,7 @@
   "quest_honeywood_inn_price-1"         : {
     "name"   : "Innkeeper",
     "phrases": {
-      "1"   : {
-        "text": ["Hey there Mozes! Would you like to rest here and be completely revitalized for just 1 gold piece?"]
-      },
+      "1"   : {"text": ["Hey there Mozes! Would you like to rest here and be completely revitalized for just 1 gold piece?"]},
       "2"   : {
         "choices": [
           {"condition": ["i_rc_===_u_q_this"], "text": "*Express your concern about the innkeeper's troubled demeanor.*", "nextId": "10"},
@@ -347,11 +345,12 @@
       "15"  : {"text": ["How would you know about this? Whoever's been spreading that silly gossip about upstairs is... well... right."], "choices": [{"nextId": "21"}]},
       "20"  : {"text": ["Would you? They've frightened away half of my customers!"]},
       "21"  : {"text": ["I'm not brave enough to scare them away myself; they'd scare me instead."]},
-      "22"  : {"text": ["If you'd help, I'll make it worth your while. I'm not one to overlook a kindness, Mozes."], "choices": [{"command": "EXIT"}]},
+      "22"  : {"text": ["If you'd help, I'll make it worth your while. I'm not one to overlook a kindness, Mozes."], "choices": [{"command": "EXIT", "nextId": "60"}]},
       "30"  : {"text": ["I'm truly sorry for this minor inconvenience. Please do return to us again on your next stay."], "choices": [{"command": "EXIT"}]},
-      "40"  : {"text": ["Couldn't you shout any louder? Those 'visitors' are up the stairs near the fireplace."], "choices": [{"command": "EXIT"}]},
+      "40"  : {"text": ["Couldn't you shout any louder? Those 'visitors' are up the stairs near the fireplace."], "choices": [{"command": "EXIT", "nextId": "60"}]},
       "50"  : {"text": ["Splendid! That's wonderful. I bet those bats must have been trained by an evil imp to harass my customers! Thank you!"]},
       "51"  : {"text": ["There was a reward, you know... five gold pieces. With these, you can stay five times for free, sort of. Isn't that great?"], "choices": [{"command": "REWARD_QUEST"}]},
+      "60"  : {"text": ["Hey there Mozes! Did you already do something about those 'visitors', or would you like to rest here and be completely revitalized for just 1 gold piece?"], "choices": [{"nextId": "2"}]},
       "1000": {"text": ["I'm sorry, Mozes, you don't have enough gold."], "choices": [{"command": "EXIT"}]},
       "1399": {"text": ["Such a brave yet modest hero! You didn't even take your reward."], "choices": [{"command": "REWARD_QUEST"}]},
       "1400": {"text": ["Welcome back, my fearless friend! Thanks again for your help. Would you like to rest here and be completely revitalized for just 1 gold piece?"], "choices": [{"nextId": "2"}]}
@@ -515,7 +514,7 @@
       "2"   : {
         "choices": [
           {"condition": ["i_rc_==_a_q_quest_priest_of_lastdenn", "i_rc_===_u_q_this"], "text": "*Explain everything that's happened and your need to leave the village.*", "nextId": "50"},
-          {"condition": ["i_c_==_a_q_this", "i_!is_fairy_portal_active"], "text": "*Complain about the warp crystal not working.*", "nextId": "70"},
+          {"condition": ["i_c_==_a_q_this", "i_!fairy_portal_active"], "text": "*Complain about the warp crystal not working.*", "nextId": "70"},
           {"condition": ["i_c_==_a_q_this", "i_ta_5_q_this", "i_n_1_>=_item_epic_fairy_ring"], "text": "[Fairy Ring] *Present the package you received from the Fairy Shop.*", "command": "SHOW_QUEST_ITEM", "nextId": "80"},
           {"condition": ["i_c_>=_a_q_quest_helping_horse", "i_c_<=_a_q_quest_get_horse"], "text": "*Explain your need for a horse due to the blocked path to Honeywood Forest.*", "nextId": "10"},
           {"condition": ["i_c_>=_a_q_quest_get_horse", "i_tn_7_q_quest_get_horse"], "text": "*Mention Angie's horse is unwell and ask if he can provide assistance.*", "nextId": "40"},
@@ -526,12 +525,12 @@
       },
       "3"   : {"text": ["Come see me again when you've got other questions."], "choices": [{"command": "EXIT"}]},
       "10"  : {"text": ["Hmmm..."]},
-      "11"  : {"text": ["As you may know, Angie has a horse, and you're most likely to find her behind the inn. She often tends to her horse there."], "choices": [{"nextId": "2"}]},
+      "11"  : {"text": ["As you may know, Angie has a horse, and you're most likely to find her {COLOR=BLUE}behind the inn{COLOR=BLACK}. She often tends to her horse there."], "choices": [{"nextId": "2"}]},
       "20"  : {"text": ["Hmmm..."]},
-      "21"  : {"text": ["I believe there's one in my basement. It's quite dark down there, but you're welcome to see if you can find it."]},
-      "22"  : {"text": ["I reckon there might be more scattered around town. However, if you find yourself short, our local blacksmith, north of here, should be able to assist you."], "choices": [{"nextId": "2"}]},
+      "21"  : {"text": ["I believe there's one in {COLOR=BLUE}my basement{COLOR=BLACK}. It's quite dark down there, but you're welcome to see if you can find it."]},
+      "22"  : {"text": ["I reckon there might be more {COLOR=BLUE}scattered around town{COLOR=BLACK}. However, if you find yourself short, our local blacksmith, north of here, should be able to assist you."], "choices": [{"nextId": "2"}]},
       "30"  : {"text": ["Hmmm..."]},
-      "31"  : {"text": ["I've got one upstairs; you may use it if you can find it."]},
+      "31"  : {"text": ["I've got one {COLOR=BLUE}upstairs{COLOR=BLACK}; you may use it if you can find it."]},
       "32"  : {"text": ["If I recall correctly, Jaron, who lives west of here, used to have a tow rope as well. It might be worth looking into."], "choices": [{"nextId": "2"}]},
       "40"  : {"text": ["Hmmm..."]},
       "41"  : {"text": ["You should definitely ask my wife."], "choices": [{"nextId": "2"}]},

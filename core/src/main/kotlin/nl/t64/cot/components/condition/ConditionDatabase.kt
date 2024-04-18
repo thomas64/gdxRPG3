@@ -27,8 +27,8 @@ object ConditionDatabase {
         "!black_asked_four"         to { !blackAskedFour },
         "black_asked_four"          to { blackAskedFour },
         "alone_in_party"            to { isAloneInParty },
-        "is_fairy_portal_active"    to { gameData.portals.isActivated(Portal.HONEYWOOD_GREAT_TREE.name) },
-        "i_!is_fairy_portal_active" to { isPortalFairyInactiveAndPortalHoneywoodActive }
+        "fairy_portal_active"       to { gameData.portals.isActivated(Portal.HONEYWOOD_GREAT_TREE.name) },
+        "i_!fairy_portal_active"    to { isPortalFairyInactiveAndPortalHoneywoodActive }
         // @formatter:on
     )
 
@@ -46,6 +46,8 @@ object ConditionDatabase {
             ConditionConverter.isMeetingItemCondition(conditionId)
         } else if (conditionId.contains("_time_")) {
             ConditionConverter.isMeetingTimeCondition(conditionId)
+        } else if (conditionId.contains("heard")) {
+            ConditionConverter.isMeetingConversationCondition(conditionId, questId!!)
         } else {
             conditions[conditionId]!!.invoke()
         }

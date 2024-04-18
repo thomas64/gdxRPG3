@@ -25,7 +25,7 @@ private const val HEROES_WINDOW_POSITION_Y = 834f
 
 private const val TITLE_GLOBAL = "   Inventory"
 private const val TITLE_PERSONAL = "   Equipment"
-private const val TITLE_SPELLS = "   Abilities"
+private const val TITLE_SPELLS = "   Spells/ Abilities"
 private const val TITLE_SKILLS = "   Skills"
 private const val TITLE_STATS = "   Attributes"
 private const val TITLE_HEROES = "   Heroes"

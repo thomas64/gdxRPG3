@@ -12,7 +12,7 @@ import nl.t64.cot.Utils
 
 
 private const val TABLE_POSITION = 30f
-private const val TABLE_WIDTH = 90f
+private const val TABLE_WIDTH = 122f
 private const val PAD_LEFT = 25f
 private const val PAD = 15f
 
@@ -31,9 +31,9 @@ internal class SkipBox {
         table.clear()
 
         if (Utils.isGamepadConnected()) {
-            table.add("Skip  [ Start ]")
+            table.add("Skip: Hold [ Start ]")
         } else {
-            table.add("Skip  [ Esc ]")
+            table.add("Skip: Hold [ Esc ]")
         }
 
         table.pack()
