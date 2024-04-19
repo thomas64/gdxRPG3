@@ -38,17 +38,16 @@ internal class ShopSlotTaker(
         this.candidateItem = candidateItem
         InventoryUtils.getScreenUI()
             .getInventorySlotsTable()
-            .getPossibleSameStackableItemSlotWith(candidateItem.inventoryItem)?.let {
-                exchangeWithInventorySlot(it)
-            } ?: exchangeWithPossibleEmptyInventorySlot()
+            .getPossibleSameStackableItemSlotWith(candidateItem.inventoryItem)
+            ?.let { exchangeWithInventorySlot(it) }
+            ?: exchangeWithPossibleEmptyInventorySlot()
     }
 
     private fun exchangeWithPossibleEmptyInventorySlot() {
         InventoryUtils.getScreenUI()
             .getInventorySlotsTable()
-            .getPossibleEmptySlot()?.let {
-                exchangeWithInventorySlot(it)
-            }
+            .getPossibleEmptySlot()
+            ?.let { exchangeWithInventorySlot(it) }
     }
 
     private fun exchangeWithInventorySlot(targetSlot: ItemSlot) {

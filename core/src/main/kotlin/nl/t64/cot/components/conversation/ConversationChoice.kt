@@ -31,6 +31,10 @@ data class ConversationChoice(
         return text
     }
 
+    fun resetHistory() {
+        hasBeenSelectedEarlier = false
+    }
+
     fun isVisible(): Boolean {
         return isNotMeetingConditionWithDoubleII() || isMeetingConditionOrHasNoSingleI()
     }

@@ -26,10 +26,6 @@ class ConversationPhrase(
         }
     }
 
-    fun resetChoiceHistory() {
-        choices.forEach { it.hasBeenSelectedEarlier = false }
-    }
-
     private fun createArrowChoiceThatPointsToNextPhraseId(currentPhraseId: String): List<ConversationChoice> {
         val nextId = (currentPhraseId.toInt() + 1).toString()
         val choice = ConversationChoice(nextId = nextId).apply { initId(conversationId) }

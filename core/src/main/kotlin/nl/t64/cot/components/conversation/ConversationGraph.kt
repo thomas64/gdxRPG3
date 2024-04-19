@@ -40,21 +40,22 @@ data class ConversationGraph(
     fun getAssociatedChoices(): Array<ConversationChoice> {
         return phrases[currentPhraseId]!!
             .getChoices(currentPhraseId)
-            .map { it.possibleConvert() }
+            .map { it.possibleSetJump() }
             .map { it.possibleSetHeard() }
             .toTypedArray()
     }
 
     fun resetChoiceHistory() {
-        phrases.values.forEach { it.resetChoiceHistory() }
+        phrases.values
+            .flatMap { it.choices }
+            .forEach { it.resetHistory() }
     }
 
-    private fun ConversationChoice.possibleConvert(): ConversationChoice {
+    private fun ConversationChoice.possibleSetJump(): ConversationChoice {
         if (this.containsAlternativeNextId()) {
             return this.getCopyOfChoiceWithAltNextId()
         }
-        this.setJumpToAltEnabled?.let { isJumpToAltEnabled = it }
-        return this
+        return this.apply { this.setJumpToAltEnabled?.let { isJumpToAltEnabled = it } }
     }
 
     private fun ConversationChoice.containsAlternativeNextId(): Boolean {
@@ -62,10 +63,7 @@ data class ConversationGraph(
     }
 
     private fun ConversationChoice.possibleSetHeard(): ConversationChoice {
-        if (this.setHeard == true) {
-            isPartHeard = true
-        }
-        return this
+        return this.apply { this.setHeard?.let { isPartHeard = it } }
     }
 
 }
