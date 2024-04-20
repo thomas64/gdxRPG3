@@ -660,5 +660,12 @@
       "3"   : {"text": ["What's up with that anyway?"], "choices": [{"command": "EXIT"}]},
       "2000": {"text": ["But it appears you are in good company. Move along."], "choices": [{"command": "EXIT"}]}
     }
+  },
+  "dont_forget_to_save"                 : {
+    "name"   : "Soldier",
+    "phrases": {
+      "1": {"text": ["Sir! Every time you leave the village, make sure to speak with the priest by the statue first, if you didn't already."]},
+      "2": {"text": ["It can be dangerous outside the village, so it's wise to be {COLOR=BLUE}save{COLOR=BLACK}."], "choices": [{"command": "EXIT"}]}
+    }
   }
 }

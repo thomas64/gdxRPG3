@@ -1,6 +1,7 @@
 package nl.t64.cot.components.party
 
 import nl.t64.cot.ConfigDataLoader
+import nl.t64.cot.constants.Constant
 
 
 class HeroContainer {
@@ -22,6 +23,12 @@ class HeroContainer {
 
     fun contains(heroId: String): Boolean {
         return heroes.containsKey(heroId)
+    }
+
+    fun hasAnyoneBeenRecruited(): Boolean {
+        return heroes
+            .filterKeys { it != Constant.PLAYER_ID }
+            .values.any { it.hasBeenRecruited }
     }
 
 }

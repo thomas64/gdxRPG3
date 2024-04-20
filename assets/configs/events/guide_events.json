@@ -80,6 +80,14 @@
       "You'll move faster, but enemies will detect you more easily."
     ]
   },
+  "guide_event_manual"                 : {
+    "type"     : "messagebox",
+    "condition": ["been_in_fairy_town"],
+    "text"     : [
+      "If you missed any of these messages or want to review them,",
+      "press the %manual% to see the history of these messages."
+    ]
+  },
   "guide_event_quest_reminder"       : {
     "type"     : "messagebox",
     "condition": ["been_in_fairy_town"],

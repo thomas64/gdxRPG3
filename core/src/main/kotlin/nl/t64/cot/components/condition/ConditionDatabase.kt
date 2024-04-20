@@ -64,7 +64,9 @@ object ConditionDatabase {
     private val blackAskedFour
         get() = isTargetAlternateUsed("quest_get_tow_rope", "13") // "_13_"
             || "quest_get_horseshoes" hasCurrentPhraseId "200"
-    private val isAloneInParty get() = hasAmountOfPartyMembers(1)
+    private val isAloneInParty
+        get() = hasAmountOfPartyMembers(1)
+            && !gameData.heroes.hasAnyoneBeenRecruited()
     private val isPortalFairyInactiveAndPortalHoneywoodActive
         get() = !gameData.portals.isActivated(Portal.HONEYWOOD_GREAT_TREE.name)
             && gameData.portals.isActivated(Portal.HONEYWOOD_HOUSE_ELDER_B2.name)

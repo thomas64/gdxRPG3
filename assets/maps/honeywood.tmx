@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="96" height="78" tilewidth="24" tileheight="24" infinite="0" nextlayerid="57" nextobjectid="452">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="96" height="78" tilewidth="24" tileheight="24" infinite="0" nextlayerid="57" nextobjectid="456">
  <properties>
   <property name="bgm" value="bgm_honeywood"/>
   <property name="lightmap_camera" value="sunlight"/>
@@ -433,6 +433,11 @@
     <property name="direction" value="west"/>
    </properties>
   </object>
+  <object id="455" name="soldier01" type="inv" x="960" y="1902" width="6" height="6">
+   <properties>
+    <property name="conversation" value="dont_forget_to_save"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup color="#55aaff" id="11" name="spawn">
   <object id="113" name="honeywood_forest_path" x="1920" y="24" width="48" height="24"/>
@@ -461,7 +466,7 @@
  <objectgroup id="50" name="lower_texture"/>
  <objectgroup id="51" name="upper_texture"/>
  <objectgroup color="#ffff00" id="44" name="quest">
-  <object id="367" type="blocker" x="1062" y="1800" width="36">
+  <object id="367" type="blocker" x="1056" y="1800" width="48" height="6">
    <properties>
     <property name="condition" value="alone_in_party"/>
    </properties>
@@ -504,5 +509,6 @@
   <object id="446" name="go_to_the_forest_2" type="check" x="480" y="840" width="48" height="24"/>
   <object id="444" name="horse_quest_not_yet_accepted_2" type="check" x="720" y="504" width="48" height="24"/>
   <object id="445" name="go_to_the_forest_2" type="check" x="720" y="504" width="48" height="24"/>
+  <object id="454" name="event_dont_forget_to_save" type="discover" x="768" y="1848" width="576" height="6"/>
  </objectgroup>
 </map>

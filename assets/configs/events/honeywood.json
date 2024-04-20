@@ -62,5 +62,10 @@
     "conversationId": "honeywood_soldiers",
     "entityId"      : "soldier01",
     "doesRepeat"    : true
+  },
+  "event_dont_forget_to_save"     : {
+    "type"          : "conversation",
+    "conversationId": "dont_forget_to_save",
+    "entityId"      : "soldier01"
   }
 }
