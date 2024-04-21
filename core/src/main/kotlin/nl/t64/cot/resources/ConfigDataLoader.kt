@@ -1,4 +1,4 @@
-package nl.t64.cot
+package nl.t64.cot.resources
 
 import com.badlogic.gdx.Gdx
 import com.fasterxml.jackson.core.type.TypeReference

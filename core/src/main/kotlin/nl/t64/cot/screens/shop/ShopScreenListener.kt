@@ -6,9 +6,9 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.InputListener
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog
-import nl.t64.cot.AnalogTriggerAdapter
 import nl.t64.cot.Utils
 import nl.t64.cot.constants.Constant
+import nl.t64.cot.input.AnalogTriggerAdapter
 
 
 internal class ShopScreenListener(

@@ -1,4 +1,4 @@
-package nl.t64.cot
+package nl.t64.cot.resources
 
 
 class SpriteConfig(

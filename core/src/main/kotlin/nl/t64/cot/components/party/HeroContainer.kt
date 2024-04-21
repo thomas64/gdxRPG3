@@ -1,7 +1,7 @@
 package nl.t64.cot.components.party
 
-import nl.t64.cot.ConfigDataLoader
 import nl.t64.cot.constants.Constant
+import nl.t64.cot.resources.ConfigDataLoader
 
 
 class HeroContainer {

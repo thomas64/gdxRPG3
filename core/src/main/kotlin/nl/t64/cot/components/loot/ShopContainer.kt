@@ -1,9 +1,9 @@
 package nl.t64.cot.components.loot
 
-import nl.t64.cot.ConfigDataLoader
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.components.party.inventory.InventoryContainer
 import nl.t64.cot.components.party.inventory.InventoryDatabase
+import nl.t64.cot.resources.ConfigDataLoader
 
 
 private const val NUMBER_OF_SLOTS = 99

@@ -1,6 +1,6 @@
 package nl.t64.cot.components.quest
 
-import nl.t64.cot.ConfigDataLoader
+import nl.t64.cot.resources.ConfigDataLoader
 
 
 class QuestContainer {

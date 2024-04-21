@@ -1,6 +1,6 @@
 package nl.t64.cot.components.loot
 
-import nl.t64.cot.ConfigDataLoader
+import nl.t64.cot.resources.ConfigDataLoader
 
 
 class LootContainer {

@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.maps.tiled.TiledMap
 import com.badlogic.gdx.math.Vector2
-import nl.t64.cot.ProfileManager
 import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
@@ -14,6 +13,7 @@ import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.*
 import nl.t64.cot.components.cutscene.CutsceneId
 import nl.t64.cot.constants.Constant
+import nl.t64.cot.gamestate.ProfileManager
 import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.screens.world.entity.EntityState
 import nl.t64.cot.screens.world.mapobjects.*

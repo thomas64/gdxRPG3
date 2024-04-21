@@ -1,4 +1,4 @@
-package nl.t64.cot
+package nl.t64.cot.gamestate
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Graphics

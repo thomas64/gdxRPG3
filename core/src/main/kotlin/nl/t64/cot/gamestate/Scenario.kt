@@ -1,4 +1,4 @@
-package nl.t64.cot
+package nl.t64.cot.gamestate
 
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.profileManager

@@ -1,4 +1,4 @@
-package nl.t64.cot
+package nl.t64.cot.input
 
 import com.badlogic.gdx.Input
 import com.badlogic.gdx.InputProcessor

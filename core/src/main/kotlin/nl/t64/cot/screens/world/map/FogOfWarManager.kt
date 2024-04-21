@@ -2,7 +2,7 @@ package nl.t64.cot.screens.world.map
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Vector2
-import nl.t64.cot.ProfileManager
+import nl.t64.cot.gamestate.ProfileManager
 import nl.t64.cot.screens.world.Camera
 import nl.t64.cot.subjects.ProfileObserver
 

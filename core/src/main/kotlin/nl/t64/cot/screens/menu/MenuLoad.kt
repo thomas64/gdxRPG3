@@ -12,8 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ScreenUtils
-import nl.t64.cot.INVALID_PROFILE_VIEW
-import nl.t64.cot.DEFAULT_EMPTY_PROFILE_VIEW
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.gameData
@@ -28,6 +26,8 @@ import nl.t64.cot.audio.stopSe
 import nl.t64.cot.components.cutscene.CutsceneId
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
+import nl.t64.cot.gamestate.DEFAULT_EMPTY_PROFILE_VIEW
+import nl.t64.cot.gamestate.INVALID_PROFILE_VIEW
 import nl.t64.cot.toDrawable
 import kotlin.concurrent.thread
 

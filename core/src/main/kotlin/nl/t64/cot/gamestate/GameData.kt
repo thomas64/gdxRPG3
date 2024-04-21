@@ -1,4 +1,4 @@
-package nl.t64.cot
+package nl.t64.cot.gamestate
 
 import nl.t64.cot.Utils.scenario
 import nl.t64.cot.components.battle.BattleContainer
