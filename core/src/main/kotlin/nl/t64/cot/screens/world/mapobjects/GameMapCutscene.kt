@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Rectangle
 import ktx.tiled.propertyOrNull
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
-import nl.t64.cot.Utils.screenManager
+import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.components.condition.ConditionDatabase
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.world.entity.Direction
@@ -36,9 +36,9 @@ class GameMapCutscene(rectObject: RectangleMapObject) : GameMapObject(rectObject
             hasStartedTemp = true
             val cutsceneType = ScreenType.valueOf(cutsceneId.uppercase())
             if (mustContinueBgm){
-                screenManager.getWorldScreen().startCutsceneWithoutBgmFading(cutsceneType)
+                worldScreen.startCutsceneWithoutBgmFading(cutsceneType)
             } else {
-                screenManager.getWorldScreen().startCutscene(cutsceneType)
+                worldScreen.startCutscene(cutsceneType)
             }
         }
     }

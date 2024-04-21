@@ -11,7 +11,7 @@ import nl.t64.cot.Utils
 import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.resourceManager
-import nl.t64.cot.Utils.screenManager
+import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 
@@ -72,7 +72,7 @@ internal class ClockBox {
     private fun handleEnding(dt: Float) {
         if (gameData.clock.isFinished()) {
             Utils.runWithDelay(Constant.FADE_DURATION) {
-                screenManager.getWorldScreen().startCutscene(ScreenType.SCENE_DEATH, 1f)
+                worldScreen.startCutscene(ScreenType.SCENE_DEATH, 1f)
             }
             audioManager.fadeAllInSeparateThreadForClockEnding(dt)
         }

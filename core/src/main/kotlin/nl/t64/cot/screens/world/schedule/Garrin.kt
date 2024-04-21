@@ -2,7 +2,7 @@ package nl.t64.cot.screens.world.schedule
 
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.mapManager
-import nl.t64.cot.Utils.screenManager
+import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.screens.world.entity.Direction.*
 import nl.t64.cot.screens.world.entity.Entity
 import nl.t64.cot.screens.world.entity.EntityState.*
@@ -58,10 +58,10 @@ class Garrin : EntitySchedule() {
     override fun handleSideEffects() {
         if (mapManager.currentMap.mapTitle == "lastdenn") {
             if (gameData.clock.isCurrentTimeAt("11:53")) {
-                screenManager.getWorldScreen().useDoor("door_wooden_left")
+                worldScreen.useDoor("door_wooden_left")
             }
             if (gameData.clock.isCurrentTimeAt("14:59")) {
-                screenManager.getWorldScreen().useDoor("door_forged_left")
+                worldScreen.useDoor("door_forged_left")
             }
         }
     }

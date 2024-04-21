@@ -2,7 +2,7 @@ package nl.t64.cot.screens.world.schedule
 
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.mapManager
-import nl.t64.cot.Utils.screenManager
+import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.screens.world.entity.Direction.*
 import nl.t64.cot.screens.world.entity.Entity
 import nl.t64.cot.screens.world.entity.EntityState.IDLE
@@ -69,15 +69,15 @@ class Santino : EntitySchedule() {
     override fun handleSideEffects() {
         if (mapManager.currentMap.mapTitle == "lastdenn_church") {
             if (gameData.clock.isCurrentTimeAt("10:00")) {
-                screenManager.getWorldScreen().reloadNpcsWithFade()
+                worldScreen.reloadNpcsWithFade()
             }
             if (gameData.clock.isCurrentTimeAt("11:00")) {
-                screenManager.getWorldScreen().reloadNpcsWithFade()
+                worldScreen.reloadNpcsWithFade()
             }
         }
         if (mapManager.currentMap.mapTitle == "lastdenn") {
             if (gameData.clock.isCurrentTimeAt("12:19")) {
-                screenManager.getWorldScreen().useDoor("door_large_round")
+                worldScreen.useDoor("door_large_round")
             }
         }
     }

@@ -10,7 +10,7 @@ import ktx.collections.set
 import ktx.json.fromJson
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.preferenceManager
-import nl.t64.cot.Utils.screenManager
+import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.world.map.FogOfWar
 import java.time.LocalDateTime
@@ -57,7 +57,7 @@ class ProfileManager {
     fun saveProfile() {
         brokerManager.profileObservers.notifySaveProfile(this)
         writeProfileToDisk(null)
-        screenManager.getWorldScreen().showMessageTooltip("Game saved.")
+        worldScreen.showMessageTooltip("Game saved.")
     }
 
     fun loadProfile(profileIndex: Int) {

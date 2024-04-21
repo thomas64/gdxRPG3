@@ -2,6 +2,7 @@ package nl.t64.cot.screens.world.schedule
 
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.screenManager
+import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.screens.world.entity.Entity
 import nl.t64.cot.screens.world.entity.EntityState
 import nl.t64.cot.screens.world.entity.events.UpdateScheduledEntityEvent
@@ -22,7 +23,7 @@ abstract class EntitySchedule {
 
     private fun ScheduleItem.handle() {
         entity.send(UpdateScheduledEntityEvent(state, direction, getCurrentPosition(), conversationId))
-        screenManager.getWorldScreen().addScheduledEntity(entity)
+        worldScreen.addScheduledEntity(entity)
         handleTalking()
         handleBlocking()
     }

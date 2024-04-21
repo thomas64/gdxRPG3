@@ -8,6 +8,7 @@ import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.Utils.profileManager
 import nl.t64.cot.Utils.screenManager
+import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.constants.Constant
@@ -68,9 +69,9 @@ class CrystalHandler private constructor() {
             mapManager.loadMap(mapTitle)
             mapManager.currentMap.setPlayerSpawnLocationForNewLoad(mapTitle)
             profileManager.saveProfile()
-            screenManager.getWorldScreen().changeMap(mapManager.currentMap)
+            worldScreen.changeMap(mapManager.currentMap)
         }
-        screenManager.getWorldScreen().fadeOut(Color.GRAY, 1f, TransitionPurpose.MAP_CHANGE, actionAfterFade)
+        worldScreen.fadeOut(Color.GRAY, 1f, TransitionPurpose.MAP_CHANGE, actionAfterFade)
     }
 
 }

@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Vector2
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.mapManager
-import nl.t64.cot.Utils.screenManager
+import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.components.loot.Spoil
 import nl.t64.cot.screens.loot.SpoilsScreen
@@ -41,8 +41,8 @@ class BattleResolver private constructor(
 
     private fun updateEntities() {
         val newNpcEntities = refreshNpcEntitiesListAfterBattle()
-        screenManager.getWorldScreen().updateNpcs(newNpcEntities)
-        screenManager.getWorldScreen().updateParty()
+        worldScreen.updateNpcs(newNpcEntities)
+        worldScreen.updateParty()
     }
 
     private fun loadPossibleSpoils() {

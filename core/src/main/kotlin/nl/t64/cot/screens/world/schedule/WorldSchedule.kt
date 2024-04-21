@@ -1,7 +1,11 @@
 package nl.t64.cot.screens.world.schedule
 
+import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.mapManager
+import nl.t64.cot.Utils.worldScreen
+import nl.t64.cot.components.schedule.MapSchedule
 import nl.t64.cot.components.schedule.MapScheduleDatabase
+import nl.t64.cot.screens.world.mapobjects.GameMapRelocator
 
 
 class WorldSchedule {
@@ -14,6 +18,15 @@ class WorldSchedule {
     fun update() {
         entitySchedules.forEach { it.update() }
         MapScheduleDatabase.getScheduleByMapName(mapManager.currentMap.mapTitle)?.update()
+    }
+
+    fun MapSchedule.update() {
+        if (gameData.clock.isCurrentTimeAfter(closingTime)) {
+            worldScreen.showMessageDialog(message) {
+                val autoPortal = GameMapRelocator.createAutoPortal(fromMapName, toMapName)
+                mapManager.schedulePortal(autoPortal, direction)
+            }
+        }
     }
 
 }

@@ -17,7 +17,7 @@ import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.profileManager
 import nl.t64.cot.Utils.resourceManager
-import nl.t64.cot.Utils.screenManager
+import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.conversation.ConversationChoice
@@ -270,7 +270,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             }
             gameData.party.fullRecover()
         }
-        screenManager.getWorldScreen().fadeOut(Color.BLACK, 1f, TransitionPurpose.MAP_CHANGE) {
+        worldScreen.fadeOut(Color.BLACK, 1f, TransitionPurpose.MAP_CHANGE) {
             continueConversation(nextId)
         }
     }

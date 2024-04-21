@@ -1,6 +1,7 @@
 package nl.t64.cot.screens.loot
 
 import nl.t64.cot.Utils.screenManager
+import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.loot.Loot
@@ -21,7 +22,7 @@ class FindScreen : LootScreen() {
 
     override fun resolveLootAndCloseScreen(isAllTheLootCleared: Boolean) {
         if (isAllTheLootCleared) {
-            screenManager.getWorldScreen().updateLoot()
+            worldScreen.updateLoot()
         }
         closeScreen(audioEvent = AudioEvent.SE_CONVERSATION_NEXT)
     }

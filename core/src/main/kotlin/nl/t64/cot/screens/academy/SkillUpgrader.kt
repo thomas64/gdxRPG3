@@ -57,7 +57,8 @@ class SkillUpgrader private constructor(
     }
 
     private fun upgradeSkill() {
-        selectedHero.doUpgrade(skillToUpgrade, xpCost, goldCost)
+        gameData.inventory.autoRemoveItem("gold", goldCost)
+        selectedHero.doUpgrade(skillToUpgrade, xpCost)
         setHasJustUpdatedToTrue.invoke()
         showConfirmMessage()
     }

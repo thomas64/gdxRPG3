@@ -3,7 +3,7 @@ package nl.t64.cot.screens.world.entity
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
-import nl.t64.cot.Utils.screenManager
+import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.condition.ConditionDatabase
 import nl.t64.cot.components.door.Door
@@ -81,7 +81,7 @@ class PhysicsDoor(private val door: Door) : PhysicsComponent() {
         val inventory = gameData.inventory
         return if (keyId == null) {
             stringBuilder.append(door.message!!)
-            screenManager.getWorldScreen().showMessageDialog(stringBuilder.toString())
+            worldScreen.showMessageDialog(stringBuilder.toString())
             false
         } else if (inventory.hasEnoughOfItem(keyId, 1)) {
             inventory.autoRemoveItem(keyId, 1)
@@ -91,7 +91,7 @@ class PhysicsDoor(private val door: Door) : PhysicsComponent() {
             stringBuilder.append("This door is locked.")
             stringBuilder.append(System.lineSeparator())
             stringBuilder.append("You need a key to open the door.")
-            screenManager.getWorldScreen().showMessageDialog(stringBuilder.toString())
+            worldScreen.showMessageDialog(stringBuilder.toString())
             false
         }
     }

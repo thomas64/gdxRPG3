@@ -30,6 +30,7 @@ import nl.t64.cot.gamestate.ProfileManager
 import nl.t64.cot.gamestate.Scenario
 import nl.t64.cot.resources.ResourceManager
 import nl.t64.cot.screens.ScreenManager
+import nl.t64.cot.screens.world.WorldScreen
 import nl.t64.cot.screens.world.map.FogOfWarManager
 import nl.t64.cot.screens.world.map.MapManager
 
@@ -68,6 +69,8 @@ object Utils {
     val fogOfWarManager: FogOfWarManager get() = crystalOfTime.fogOfWarManager
     val mapManager: MapManager get() = crystalOfTime.mapManager
     val brokerManager: BrokerManager get() = crystalOfTime.brokerManager
+
+    val worldScreen: WorldScreen get() = screenManager.getWorldScreen()
 
     private val screenShots: MutableSet<Texture> = mutableSetOf()
 

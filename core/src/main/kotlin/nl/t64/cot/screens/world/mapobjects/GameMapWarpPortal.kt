@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
-import nl.t64.cot.Utils.screenManager
+import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.screens.world.entity.Direction
@@ -30,9 +30,9 @@ class GameMapWarpPortal(rectObject: RectangleMapObject, fromMapName: String) : G
 
     private fun activateOrUse() {
         if (gameData.portals.isActivated(fromMapName)) {
-            screenManager.getWorldScreen().showWarpScreen(fromMapName)
+            worldScreen.showWarpScreen(fromMapName)
         } else {
-            screenManager.getWorldScreen().showMessageTooltip("Portal activated.")
+            worldScreen.showMessageTooltip("Portal activated.")
             playSe(AudioEvent.SE_ACTIVATE)
             gameData.portals.activate(fromMapName)
         }

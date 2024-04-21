@@ -1,7 +1,7 @@
 package nl.t64.cot.components.quest
 
 import nl.t64.cot.Utils.gameData
-import nl.t64.cot.Utils.screenManager
+import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.audio.stopAllSe
@@ -287,7 +287,7 @@ data class QuestGraph(
 
     private fun showMessageTooltipQuestNew() {
         if (!isHidden && resetState == QuestState.UNKNOWN) {
-            screenManager.getWorldScreen().showMessageTooltip("New quest:" + System.lineSeparator() + title)
+            worldScreen.showMessageTooltip("New quest:" + System.lineSeparator() + title)
         }
     }
 
@@ -296,7 +296,7 @@ data class QuestGraph(
             && (currentState == QuestState.ACCEPTED || resetState == QuestState.ACCEPTED)
             && (!isReadyToBeFinished() || (isSubQuest && isReadyToBeFinished()))
         ) {
-            screenManager.getWorldScreen().showMessageTooltip("Quest updated:" + System.lineSeparator() + title)
+            worldScreen.showMessageTooltip("Quest updated:" + System.lineSeparator() + title)
         }
     }
 
@@ -304,12 +304,12 @@ data class QuestGraph(
         if (!isHidden && !isSubQuest) {
             stopAllSe()
             playSe(AudioEvent.SE_REWARD)
-            screenManager.getWorldScreen().showMessageTooltip("Quest completed:" + System.lineSeparator() + title)
+            worldScreen.showMessageTooltip("Quest completed:" + System.lineSeparator() + title)
         }
     }
 
     private fun showMessageTooltipQuestFailed() {
-        screenManager.getWorldScreen().showMessageTooltip("Quest failed:" + System.lineSeparator() + title)
+        worldScreen.showMessageTooltip("Quest failed:" + System.lineSeparator() + title)
     }
 
 }

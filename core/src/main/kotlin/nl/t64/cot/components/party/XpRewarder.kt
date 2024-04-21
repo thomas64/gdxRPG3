@@ -1,7 +1,7 @@
 package nl.t64.cot.components.party
 
 import nl.t64.cot.Utils.gameData
-import nl.t64.cot.Utils.screenManager
+import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.audio.stopAllSe
@@ -26,7 +26,7 @@ object XpRewarder {
     private fun showMessageTooltipRewardXp(xp: Int) {
         stopAllSe()
         playSe(AudioEvent.SE_REWARD)
-        screenManager.getWorldScreen().showMessageTooltip("+ $xp XP")
+        worldScreen.showMessageTooltip("+ $xp XP")
     }
 
 }

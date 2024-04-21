@@ -4,6 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.Utils.screenManager
+import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.party.inventory.InventoryDatabase
@@ -61,7 +62,7 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
         val heroToDismiss = selectedHero.id
         selectPreviousHero()
         gameData.party.removeHero(heroToDismiss)
-        screenManager.getWorldScreen().updateParty()
+        worldScreen.updateParty()
     }
 
     override fun getScreenUI(): ScreenUI {

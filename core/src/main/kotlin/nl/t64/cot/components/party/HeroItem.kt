@@ -1,6 +1,5 @@
 package nl.t64.cot.components.party
 
-import nl.t64.cot.Utils.gameData
 import nl.t64.cot.components.party.inventory.EquipContainer
 import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.components.party.inventory.InventoryItem
@@ -112,18 +111,16 @@ class HeroItem(
         statItem.doUpgrade()
     }
 
-    fun doUpgrade(skillItem: SkillItem, xpCost: Int, goldCost: Int) {
+    fun doUpgrade(skillItem: SkillItem, xpCost: Int) {
         xpToInvest -= xpCost
-        gameData.inventory.autoRemoveItem("gold", goldCost)
         skillItem.doUpgrade()
         if (skillItem.rank == 1) {
             skills.add(skillItem)
         }
     }
 
-    fun doUpgrade(spellItem: SpellItem, xpCost: Int, goldCost: Int) {
+    fun doUpgrade(spellItem: SpellItem, xpCost: Int) {
         xpToInvest -= xpCost
-        gameData.inventory.autoRemoveItem("gold", goldCost)
         spellItem.doUpgrade()
         if (spellItem.rank == 1) {
             spells.add(spellItem)

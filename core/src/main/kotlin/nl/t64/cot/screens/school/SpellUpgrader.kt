@@ -70,7 +70,8 @@ class SpellUpgrader private constructor(
     }
 
     private fun upgradeSpell() {
-        selectedHero.doUpgrade(spellToUpgrade, xpCost, goldCost)
+        gameData.inventory.autoRemoveItem("gold", goldCost)
+        selectedHero.doUpgrade(spellToUpgrade, xpCost)
         setHasJustUpdatedToTrue.invoke()
         showConfirmMessage()
     }

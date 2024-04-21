@@ -1,7 +1,7 @@
 package nl.t64.cot.components.party
 
 import nl.t64.cot.Utils.gameData
-import nl.t64.cot.Utils.screenManager
+import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.audio.stopAllSe
@@ -31,7 +31,7 @@ object SpellsRewarder {
     private fun learnSpell(hero: HeroItem, spellToLearn: SpellItem) {
         val knownSpell = hero.getSpellById(spellToLearn.id)
         while (knownSpell.rank < spellToLearn.rank) {
-            hero.doUpgrade(knownSpell, 0, 0)
+            hero.doUpgrade(knownSpell, 0)
         }
     }
 
@@ -42,7 +42,7 @@ object SpellsRewarder {
         // todo, it only shows which spells and not how much ranks.
         spellItems.forEach { builder.appendLine("+ ${it.name}") }
         builder.deleteAt(builder.lastIndex)
-        screenManager.getWorldScreen().showMessageTooltip(builder.toString())
+        worldScreen.showMessageTooltip(builder.toString())
     }
 
 }
