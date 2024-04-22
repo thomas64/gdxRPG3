@@ -31,6 +31,7 @@ class MessageDialog(private val message: String) {
 
     @Null
     private var actionAfterHide: (() -> Unit)? = null
+    private var playClosingSound: Boolean = true
 
     init {
         applyListeners()
@@ -38,6 +39,10 @@ class MessageDialog(private val message: String) {
 
     fun setActionAfterHide(actionAfterHide: () -> Unit) {
         this.actionAfterHide = actionAfterHide
+    }
+
+    fun disableClosingSound() {
+        playClosingSound = false
     }
 
     fun show(stage: Stage, event: AudioEvent) {
@@ -66,7 +71,9 @@ class MessageDialog(private val message: String) {
     }
 
     private fun hide() {
-        playSe(AudioEvent.SE_CONVERSATION_NEXT)
+        if (playClosingSound) {
+            playSe(AudioEvent.SE_CONVERSATION_NEXT)
+        }
         actionAfterHide?.let { hideWithAction(it) } ?: dialog.hide()
     }
 

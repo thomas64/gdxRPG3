@@ -269,9 +269,11 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     //region BattleObserver ////////////////////////////////////////////////////////////////////////////////////////////
 
     override fun onNotifyBattleWon(battleId: String, spoils: Loot) {
+        gameState = GameState.BATTLE
         screenManager.setScreen(ScreenType.WORLD)
         BattleResolver.resolveWin(battleId, spoils, player.position, currentNpcEntity, npcEntities)
         doBeforeLoadScreen()
+        if (gameState == GameState.RUNNING) mapManager.continueAudio()
     }
 
     override fun onNotifyBattleLost() {
@@ -286,7 +288,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     //endregion
 
     override fun show() {
-        if (gameState != GameState.DIALOG) mapManager.continueAudio()
+        if (gameState !in listOf(GameState.DIALOG, GameState.BATTLE)) mapManager.continueAudio()
         gameState = GameState.RUNNING
         setInputProcessors(multiplexer)
         Utils.disposeScreenshots()

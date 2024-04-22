@@ -6,12 +6,12 @@
     "drops"    : {"green_jelly": 25},
     "stats"    : {
       "intelligence": 1,
-      "willpower"   : 1,
-      "strength"    : 8,
       "dexterity"   : 1,
-      "constitution": 10,
-      "stamina"     : 20,
-      "speed"       : 5
+      "strength"    : 5,
+      "speed"       : 5,
+      "willpower"   : 1,
+      "constitution": 3,
+      "stamina"     : 1
     },
     "skills"   : {
       "bite": 1
@@ -19,8 +19,7 @@
     "spells"   : {
     },
     "inventory": {
-      "weapon": "slime_slam",
-      "chest" : "armor_3"
+      "weapon": "slime_slam"
     }
   },
   "blue_slime_medicine": {
@@ -30,12 +29,12 @@
     "drops"    : {"blue_jelly": 100},
     "stats"    : {
       "intelligence": 1,
-      "willpower"   : 1,
-      "strength"    : 10,
       "dexterity"   : 1,
-      "constitution": 13,
-      "stamina"     : 25,
-      "speed"       : 5
+      "strength"    : 10,
+      "speed"       : 5,
+      "willpower"   : 1,
+      "constitution": 7,
+      "stamina"     : 1
     },
     "skills"   : {
       "bite": 2
@@ -54,12 +53,12 @@
     "drops"    : {"blue_jelly": 25},
     "stats"    : {
       "intelligence": 1,
-      "willpower"   : 1,
-      "strength"    : 10,
       "dexterity"   : 1,
-      "constitution": 13,
-      "stamina"     : 25,
-      "speed"       : 5
+      "strength"    : 10,
+      "speed"       : 5,
+      "willpower"   : 1,
+      "constitution": 7,
+      "stamina"     : 1
     },
     "skills"   : {
       "bite": 2
@@ -78,12 +77,12 @@
     "drops"    : {"leather": 25},
     "stats"    : {
       "intelligence": 1,
-      "willpower"   : 1,
-      "strength"    : 5,
       "dexterity"   : 1,
-      "constitution": 5,
-      "stamina"     : 10,
-      "speed"       : 15
+      "strength"    : 5,
+      "speed"       : 20,
+      "willpower"   : 1,
+      "constitution": 0,
+      "stamina"     : 1
     },
     "skills"   : {
       "bite": 1
@@ -91,8 +90,7 @@
     "spells"   : {
     },
     "inventory": {
-      "weapon": "bat_bite",
-      "chest" : "armor_2"
+      "weapon": "bat_bite"
     }
   },
   "orc_1"       : {
@@ -125,13 +123,13 @@
     "xp"       : 27,
     "drops"    : {"specialist_longsword": 20, "specialist_medium_shield": 20, "healing_potion": 5, "gold": 75},
     "stats"    : {
-      "intelligence": 15,
-      "willpower"   : 12,
+      "intelligence": 1,
+      "dexterity"   : 1,
       "strength"    : 17,
-      "dexterity"   : 13,
+      "speed"       : 16,
+      "willpower"   : 12,
       "constitution": 25,
-      "stamina"     : 50,
-      "speed"       : 16
+      "stamina"     : 1
     },
     "skills"   : {
       "warrior": 8,
@@ -155,12 +153,12 @@
     "drops"    : {"masterwork_maul": 50, "masterwork_heavy_shield": 50, "stamina_potion": 90, "gold": 90},
     "stats"    : {
       "intelligence": 50,
-      "willpower"   : 30,
-      "strength"    : 50,
       "dexterity"   : 50,
-      "constitution": 50,
-      "stamina"     : 100,
-      "speed"       : 30
+      "strength"    : 50,
+      "speed"       : 30,
+      "willpower"   : 30,
+      "constitution": 60,
+      "stamina"     : 60
     },
     "skills"   : {
       "warrior": 10,
@@ -193,12 +191,12 @@
     "drops"    : {"gold": 90},
     "stats"    : {
       "intelligence": 60,
-      "willpower"   : 30,
-      "strength"    : 1,
       "dexterity"   : 1,
-      "constitution": 60,
-      "stamina"     : 120,
-      "speed"       : 30
+      "strength"    : 1,
+      "speed"       : 30,
+      "willpower"   : 30,
+      "constitution": 80,
+      "stamina"     : 80
     },
     "skills"   : {
       "thief"  : 10,

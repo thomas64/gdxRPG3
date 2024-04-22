@@ -10,17 +10,40 @@ import kotlin.math.roundToInt
 import kotlin.random.Random
 
 
-data class EnemyItem(
-    val id: String = "",
-    val name: String = "",
-    private val school: SchoolType = SchoolType.NONE,
-    private val stats: StatContainer = StatContainer(),
-    private val skills: SkillContainer = SkillContainer(),
-    private val spells: SpellContainer = SpellContainer(),
-    private val inventory: EquipContainer = EquipContainer(),
+class EnemyItem(
+    id: String = "",
+    name: String = "",
+    school: SchoolType = SchoolType.NONE,
+    stats: StatContainer = StatContainer(),
+    skills: SkillContainer = SkillContainer(),
+    spells: SpellContainer = SpellContainer(),
+    inventory: EquipContainer = EquipContainer(),
+    isAlive: Boolean = true,
     val xp: Int = 0,
-    val drops: Map<String, Int> = emptyMap()
+    private val drops: Map<String, Int> = emptyMap()
+) : Character(
+    id, name, school, stats, skills, spells, inventory, isAlive
 ) {
+
+    init {
+        currentHp = maximumHp
+        currentMp = maximumMp
+    }
+
+    fun createCopy(
+        id: String = this.id,
+        name: String = this.name,
+        school: SchoolType = this.school,
+        stats: StatContainer = this.stats,
+        skills: SkillContainer = this.skills,
+        spells: SpellContainer = this.spells,
+        inventory: EquipContainer = this.inventory,
+        isAlive: Boolean = this.isAlive,
+        xp: Int = this.xp,
+        drops: Map<String, Int> = this.drops
+    ): EnemyItem {
+        return EnemyItem(id, name, school, stats, skills, spells, inventory, isAlive, xp, drops)
+    }
 
     fun addDropsTo(spoils: MutableMap<String, Int>) {
         drops.forEach { it.addPossibleDropTo(spoils) }

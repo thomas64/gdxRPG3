@@ -21,6 +21,12 @@ enum class AudioEvent(val filePath: String, val volume: Float = 1f) {
     BGM_MURDER("audio/bgm/go_out.mp3", 0.1f),
     BGM_ARDOR("audio/bgm/approach.ogg", 0.1f),
 
+    BGM_BATTLE_1("audio/bgm/battle.ogg", 0.1f),
+    BGM_BATTLE_2("audio/bgm/combat.ogg", 0.1f),
+    BGM_BATTLE_3("audio/bgm/confront.ogg", 0.1f),
+    BGM_WIN_BATTLE("audio/bgm/the_earth.ogg", 0.1f),
+    BGM_LOSE_BATTLE("audio/bgm/conclusion.ogg", 0.1f),
+
     BGM_MYSTERIOUS_TUNNEL("audio/bgm/cave.ogg", 0.1f),
 
     BGM_END_NEAR("audio/bgm/final_hours.ogg", 0.05f),
@@ -117,6 +123,12 @@ enum class AudioEvent(val filePath: String, val volume: Float = 1f) {
     SE_STEP_WOOD5("audio/se/footsteps/oot_step_wood5.wav"),
 
     NONE("");
+
+    companion object {
+        fun getRandomBattleMusic(): AudioEvent {
+            return AudioEvent.entries.filter { it.name.startsWith("BGM_BATTLE_") }.random()
+        }
+    }
 
 }
 

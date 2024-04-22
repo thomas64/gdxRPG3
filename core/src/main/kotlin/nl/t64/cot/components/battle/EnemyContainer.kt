@@ -9,6 +9,14 @@ class EnemyContainer(
 ) {
     private val enemies: List<EnemyItem> = createEnemies(battleId)
 
+    fun getEnemy(index: Int): EnemyItem {
+        return enemies[index]
+    }
+
+    fun getEnemy(name: String): EnemyItem {
+        return enemies.first { it.name == name }
+    }
+
     fun getAll(): List<EnemyItem> {
         return enemies
     }

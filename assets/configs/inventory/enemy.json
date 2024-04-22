@@ -1,15 +1,19 @@
 {
   "slime_slam": {
-    "group"   : "WEAPON",
-    "skill"   : "BITE",
-    "base_hit": 90,
-    "damage"  : 8
+    "name"        : "Body Slam",
+    "group"       : "WEAPON",
+    "skill"       : "BITE",
+    "min_strength": 1,
+    "base_hit"    : 65,
+    "damage"      : 9
   },
   "bat_bite"  : {
-    "group"   : "WEAPON",
-    "skill"   : "BITE",
-    "base_hit": 90,
-    "damage"  : 9
+    "name"        : "Bite",
+    "group"       : "WEAPON",
+    "skill"       : "BITE",
+    "min_strength": 1,
+    "base_hit"    : 80,
+    "damage"      : 6
   },
   "armor_2"   : {
     "group"     : "CHEST",

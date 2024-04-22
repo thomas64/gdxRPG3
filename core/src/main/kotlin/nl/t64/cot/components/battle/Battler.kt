@@ -7,7 +7,13 @@ class Battler(
 ) {
 
     fun createEnemyList(): List<EnemyItem> {
-        return List(amount) { EnemyDatabase.createEnemy(id) }
+        return List(amount) { index ->
+            if (amount > 1) {
+                EnemyDatabase.createEnemy(id, index)
+            } else {
+                EnemyDatabase.createEnemy(id)
+            }
+        }
     }
 
 }

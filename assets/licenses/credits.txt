@@ -41,12 +41,14 @@ www.jwbjerk.com/art
 
 Music Copyright Notice
 
-"Approach"    "Journey"         "Store"
-    "Brave"      "Quiet town"      "Town"
-        "Cave"           "Search"        "Volcano"
-          "Den"         "Seashore"     "Wake up"
-           "Find"          "Shadow"      "Wayfarer"
-      "Go out"        "Spelunk"        "Woods"
+"Approach"       "Find"           "Store"
+"Battle"         "Go out"         "The earth"
+"Brave"          "Journey"        "Town"
+"Cave"           "Quiet town"     "Volcano"
+"Combat"         "Search"         "Wake up"
+"Conclusion"     "Seashore"       "Wayfarer"
+"Confront"       "Shadow"         "Woods"
+"Den"            "Spelunk"
 by Yusaku Kishigami
 www.presence-of-music.com
 

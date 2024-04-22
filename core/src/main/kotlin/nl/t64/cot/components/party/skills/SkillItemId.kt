@@ -45,6 +45,7 @@ enum class SkillItemId : SuperEnum {
         return when (this) {
             SWORD, HAFTED, POLE -> true
             MISSILE, THROWN -> false
+            BITE -> true
             else -> throw IllegalArgumentException("Only possible to ask a Weapon Skill.")
         }
     }
