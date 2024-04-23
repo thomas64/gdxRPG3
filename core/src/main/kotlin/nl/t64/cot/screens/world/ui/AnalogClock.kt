@@ -1,13 +1,13 @@
 package nl.t64.cot.screens.world.ui
 
 import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.Pixmap
 import com.badlogic.gdx.graphics.Pixmap.Blending
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Table
-import nl.t64.cot.constants.Constant
 import nl.t64.cot.disposeAndClear
 import kotlin.math.abs
 import kotlin.math.cbrt
@@ -30,12 +30,15 @@ class AnalogClock : Table() {
         super.addActor(display)
         super.setSize(SIZE, SIZE)
         super.setPosition(Gdx.graphics.width - PAD_RIGHT, PAD_BOTTOM)
-        super.setColor(Constant.LIGHT_RED)
     }
 
     fun update(percentageOfCircle: Float) {
         texturesToDispose.disposeAndClear()
         display.clear()
+
+        val clockColor = getColorBasedOnTime(percentageOfCircle)
+        super.setColor(clockColor)
+
         val clock = createTimer(percentageOfCircle)
         display.addActor(clock)
     }
@@ -75,6 +78,37 @@ class AnalogClock : Table() {
         return Image(texture)
             .apply { setColor(1f, 1f, 1f, ALPHA) }
             .also { pixmap.dispose() }
+    }
+
+    private fun getColorBasedOnTime(percentageOfCircle: Float): Color {
+        val clampedPercentage = MathUtils.clamp(percentageOfCircle, 0f, 1f)
+        return when {
+            clampedPercentage <= 0.125 -> {
+                Color.RED
+            }
+
+            clampedPercentage <= 0.375 -> {
+                val startColor = Color.RED.cpy()
+                val endColor = Color.ORANGE
+                startColor.lerp(endColor, (clampedPercentage - 0.125f) / 0.25f)
+            }
+
+            clampedPercentage <= 0.625 -> {
+                val startColor = Color.ORANGE.cpy()
+                val endColor = Color.GOLD
+                startColor.lerp(endColor, (clampedPercentage - 0.375f) / 0.25f)
+            }
+
+            clampedPercentage <= 0.875 -> {
+                val startColor = Color.GOLD.cpy()
+                val endColor = Color.LIME
+                startColor.lerp(endColor, (clampedPercentage - 0.625f) / 0.25f)
+            }
+
+            else -> {
+                Color.LIME
+            }
+        }
     }
 
     private fun calculateAngle(remainingPercentage: Float): Float {

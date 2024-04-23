@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.scenes.scene2d.Stage
+import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.utils.Align
 import nl.t64.cot.Utils
@@ -55,7 +56,6 @@ internal class ClockBox {
                 analogClock.update(getPercentageOfDay())
                 fillCircle()
                 borderCircle()
-                label.color = if (isWarning()) Color.BLACK else Color.WHITE
                 label.setText(getTimeOfDayFormatted())
                 stage.act(dt)
                 stage.draw()
@@ -66,6 +66,10 @@ internal class ClockBox {
     private fun handleWarning() {
         if (gameData.clock.isWarning()) {
             audioManager.fadeBgmForClockWarning()
+            blinkClockLabel()
+        } else {
+            label.clearActions()
+            label.color = Color.WHITE
         }
     }
 
@@ -75,6 +79,16 @@ internal class ClockBox {
                 worldScreen.startCutscene(ScreenType.SCENE_DEATH, 1f)
             }
             audioManager.fadeAllInSeparateThreadForClockEnding(dt)
+        }
+    }
+
+    private fun blinkClockLabel() {
+        if (!label.hasActions()) {
+            val blinkAction = Actions.sequence(
+                Actions.color(Color.BLACK, 0.5f),
+                Actions.color(Color.WHITE, 0.5f)
+            )
+            label.addAction(Actions.forever(blinkAction))
         }
     }
 
