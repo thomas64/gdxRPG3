@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 buildscript {
   repositories {
     mavenCentral()
@@ -10,7 +12,6 @@ buildscript {
   }
   dependencies {
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-
   }
 }
 
@@ -52,9 +53,7 @@ configure(subprojects) {
     }
   }
 
-  kotlin {
-    jvmToolchain(11)
-  }
+  compileKotlin.compilerOptions.jvmTarget.set(JvmTarget.JVM_11)
 }
 
 subprojects {

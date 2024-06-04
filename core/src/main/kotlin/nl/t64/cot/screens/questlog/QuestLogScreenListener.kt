@@ -24,9 +24,8 @@ internal class QuestLogScreenListener(
 ) : InputListener() {
 
     override fun keyDown(event: InputEvent, keycode: Int): Boolean {
-        if (event.stage.actors.items.any { it is Dialog }) {
-            return true
-        }
+        if (event.stage.actors.items.any { it is Dialog }) return true
+
         when (keycode) {
             Constant.KEYCODE_RIGHT, Input.Keys.L, Input.Keys.ESCAPE -> closeScreenFunction.invoke()
             Constant.KEYCODE_SELECT, Input.Keys.H -> showLegendFunction.invoke()
