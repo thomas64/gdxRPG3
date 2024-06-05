@@ -3,12 +3,10 @@ package nl.t64.cot.screens.battle
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
-import com.badlogic.gdx.scenes.scene2d.ui.Cell
-import com.badlogic.gdx.scenes.scene2d.ui.Label
+import com.badlogic.gdx.scenes.scene2d.ui.*
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.List.ListStyle
-import com.badlogic.gdx.scenes.scene2d.ui.Skin
-import com.badlogic.gdx.scenes.scene2d.ui.Table
+import com.badlogic.gdx.utils.Scaling
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.components.battle.EnemyItem
@@ -17,6 +15,7 @@ import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.stats.StatItemId
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.toDrawable
+import kotlin.collections.List
 import com.badlogic.gdx.scenes.scene2d.ui.List as GdxList
 
 
@@ -96,30 +95,43 @@ object BattleScreenBuilder {
 
     fun createTurnTable(participants: List<Participant>): Table {
         return Table(createSkin()).apply {
+            defaults().height(50f)
             columnDefaults(0).width(100f)
-            columnDefaults(1).width(200f)
-            columnDefaults(2).width(100f)
+            columnDefaults(1).width(54f)
+            columnDefaults(2).width(200f)
+            columnDefaults(3).width(100f)
             top().left()
-            setPosition(500f, Gdx.graphics.height - 250f)
+            setPosition(450f, Gdx.graphics.height - 180f)
 
             add("").padBottom(5f)
             add("Turn order").padBottom(5f)
+            add("").padBottom(5f)
             add("Speed").padBottom(5f).row()
 
             add("Now:").padBottom(5f)
+            add(createImageOf(participants[0])).padBottom(5f)
             add(Label(participants[0].character.name, createLabelStyle(Color.GOLD))).padBottom(5f)
             addSpeedCell(participants[0], Color.GOLD).padBottom(5f).row()
 
             add("Next:")
-            add(participants.getOrNull(1)?.character?.name ?: "")
+            add(createImageOf(participants[1]))
+            add(participants[1].character.name)
             addSpeedCell(participants[1]).row()
 
             participants.drop(2).forEach {
                 add("")
+                add(createImageOf(it))
                 add(it.character.name)
                 addSpeedCell(it).row()
             }
         }
+    }
+
+    private fun createImageOf(participant: Participant): Container<Image> {
+        return Container(
+            Image(Utils.getCharImage(participant.character.id)[0][1])
+                .apply { setScaling(Scaling.none) }
+        ).left()
     }
 
     private fun Table.addSpeedCell(participant: Participant, color: Color = Color.WHITE): Cell<Label> {
@@ -221,7 +233,7 @@ object BattleScreenBuilder {
         return Table(createSkin()).apply {
             columnDefaults(0).width(300f)
             top().left()
-            setPosition(1050f, Gdx.graphics.height - 250f)
+            setPosition(1050f, Gdx.graphics.height - 180f)
         }
     }
 
