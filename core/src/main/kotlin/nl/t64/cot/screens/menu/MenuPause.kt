@@ -16,6 +16,7 @@ import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.pauseAllBg
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
@@ -74,6 +75,7 @@ class MenuPause : MenuScreen() {
     }
 
     private fun selectMenuItem() {
+        pauseAllBg()
         when (selectedMenuIndex) {
             0 -> processContinueButton()
             1 -> processButton(ScreenType.MENU_LOAD_PAUSE)

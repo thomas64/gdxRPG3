@@ -31,6 +31,11 @@ fun stopAllBgm() {
     audioManager.handle(AudioCommand.BGM_STOP_ALL)
 }
 
+fun pauseAllBg() {
+    audioManager.handle((AudioCommand.BGM_PAUSE_ALL))
+    audioManager.handle((AudioCommand.BGS_PAUSE_ALL))
+}
+
 fun playBgs(audioEvents: List<AudioEvent>) {
     audioEvents.forEach { playBgs(it) }
 }
