@@ -11,6 +11,7 @@ private const val HOUR = 7200f                  // 2 minute in realtime
 private const val HALF_HOUR = 3600f             // 1 minute in realtime
 private const val QUARTER = 1800f
 private const val RATE_OF_TIME = 60f            // 60: 1 hour -> 1 minute, 30: 1 hour -> 2 minutes, etc.
+private const val RATE_OF_TIME_SLOW = 30f
 
 class Clock {
 
@@ -33,18 +34,28 @@ class Clock {
         countdown = TWELVE_HOURS
     }
 
-    fun quarterDown() {
-        countdown -= QUARTER
-    }
-
-    fun quarterUp() {
+    fun quarterBack() {
         countdown += QUARTER
     }
 
+    fun quarterForward() {
+        countdown -= QUARTER
+    }
+
     fun update(dt: Float) {
-        countdown -= (dt * RATE_OF_TIME)
+        updateCountdown(dt)
         if (isFinished()) {
             stop()
+        }
+    }
+
+    private fun updateCountdown(dt: Float) {
+        if (isCurrentTimeAt("07:29")) return
+
+        if (isCurrentTimeBefore("07:30")) {
+            countdown -= (dt * RATE_OF_TIME_SLOW)
+        } else {
+            countdown -= (dt * RATE_OF_TIME)
         }
     }
 

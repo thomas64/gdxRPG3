@@ -44,44 +44,28 @@
   "quest_mother_fairy" : {
     "name"   : "Mother Fairy",
     "phrases": {
-      "1" : {"text": ["Dear young Mozes, I'm so glad you've finally entered our peaceful domain, though it has to be during these dark times."]},
+      "1" : {"text": ["Dear young Mozes, I'm so glad you've finally entered our peaceful domain. You need not fear any orcs here."]},
       "2" : {
         "choices": [
-          {"text": "*Ask about how they all seem to know you.*", "nextId": "10"},
-          {"text": "*Inquire about the dark times she mentioned.*", "nextId": "20", "setJumpToAltEnabled": false},
+          {"text": "*Ask how they all seem to know you.*", "nextId": "10"},
           {"text": "*Ask if she has any information about Grace's whereabouts.*", "nextId": "30"},
           {"text": "*Take your leave.*", "command": "EXIT", "nextId": "70"}
         ]
       },
-      "10": {"text": ["We all watch over the people of Honeywood and strive to protect you whenever we can. So Mozes, we've known you since your birth.", "Unfortunately, our power and protection have their limits."], "choices": [{"nextId": "2"}]},
-      "20": {
-        "text"   : ["A new evil force has emerged in Adan, known as Ardor. His power is rapidly growing, and he harbors ambitions of conquering Adan. He is currently operating in secrecy, so you might not have heard of him. However, if he isn't stopped soon, it will have dire consequences for us and all the people of Adan."],
-        "choices": [
-          {"condition": ["i_!heard"], "nextId": "21"},
-          {"condition": ["i_heard"], "nextId": "26"}
-        ]
-      },
-      "21": {
-        "choices": [
-          {"text": "*Fearlessly offer your help against Ardor.*", "nextId": "23"},
-          {"text": "*Express your hope that they are capable of handling him on their own.*", "nextId": "24"},
-          {"text": "*Roll your eyes at the cliche evil wizard story and casually ask about Grace.*", "nextId": "25"}
-        ]
-      },
-      "23": {"text": ["You're truly wonderful for offering, but no! You must really stay away from him."], "choices": [{"nextId": "26"}]},
-      "24": {"text": ["No need to concern yourself with that. Your only concern should be that you really must stay away from him."], "choices": [{"nextId": "26"}]},
-      "25": {"text": ["No, this is serious! You must really stay away from him."], "choices": [{"nextId": "26"}]},
-      "26": {"text": ["You cannot confront Ardor! Even if you were to confront Ardor, he's far beyond your capabilities. Given the limited time we still have, there's little you could achieve in becoming stronger."]},
-      "27": {"text": ["Ardor {COLOR=BLUE}appears almost invulnerable {COLOR=BLACK}to all forms of attack. We're still trying to uncover the source of his power."]},
-      "28": {"text": ["The only hope we have is that all the Forces of Good, like the Elves, the Wizard Council, and us, combine their powers. Together we can launch a massive attack and deal with Ardor."]},
-      "29": {"text": ["I cannot express myself enough: Please stay away from him!"], "choices": [{"setHeard": true, "nextId": "2", "altNextId": "35"}]},
-      "30": {"text": ["Hmm, yes of course. {WAIT=0.5}Terrible news, it appears that Ardor has taken Grace captive, and our efforts to help her have proven unsuccessful. I am truly sorry for this, Mozes."]},
-      "31": {"text": ["However, do not despair, there might still be a possibility for you. While your courage is admirable, bravery alone will not suffice. That's why we wish to aid you in your quest to find Grace."]},
+      "10": {"text": ["We all watch over the people of Honeywood and strive to protect you whenever we can. So, Mozes, we've known you since your birth.", "Unfortunately, our power and protection have their limits."], "choices": [{"nextId": "2"}]},
+      "20": {"text": ["As I mentioned, he is very powerful and dangerous. We don't know much about him, but we do know his power is growing."]},
+      "21": {"text": ["You cannot confront Ardor! Even if you were to face him, he's far beyond your capabilities."]},
+      "22": {"text": ["Ardor {COLOR=BLUE}appears almost invulnerable {COLOR=BLACK}to all forms of attack. We're still trying to uncover the source of his power."]},
+      "23": {"text": ["You'll have to rely on us to deal with Ardor. In time, we will find a way to defeat him."]},
+      "24": {"text": ["I cannot stress this enough: Please stay away from him!"], "choices": [{"nextId": "35"}]},
+      "30": {"text": ["Ah, yes, little Grace... {WAIT=0.5}Terrible news, it appears that a wizard named Ardor has taken Grace captive. He is very powerful, and we Fairies aren't able to approach him yet. I am truly sorry for this, Mozes."]},
+      "31": {"text": ["However, do not despair. There might still be a possibility for you. While your courage is admirable, bravery alone will not suffice. That's why we wish to aid you in your quest to find Grace."]},
       "32": {"text": ["Within the cave you came from, we've hidden a magic scroll that will be of great assistance against any orcs here in Honeywood Forest."], "choices": [{"nextId": "35"}]},
       "35": {
         "choices": [
-          {"text": "*Inquire further about this Ardor.*", "nextId": "20", "setJumpToAltEnabled": true},
+          {"text": "*Inquire further about this Ardor.*", "nextId": "20"},
           {"text": "*Inquire further about Grace.*", "nextId": "40"},
+          {"text": "*What did she say about a hidden magic scroll?*", "nextId": "32"},
           {"text": "*Ask for details about using a magic scroll.*", "nextId": "50"},
           {"text": "*Mention that hidden things are often difficult to find.*", "command": "ACCEPT_QUEST", "nextId": "60"}
         ]

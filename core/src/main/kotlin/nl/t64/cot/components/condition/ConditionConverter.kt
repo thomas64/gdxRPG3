@@ -37,15 +37,6 @@ object ConditionConverter {
         }
     }
 
-    fun isMeetingConversationCondition(conditionId: String, conversationId: String): Boolean {
-        val conversationGraph = gameData.conversations.getConversationById(conversationId)
-        return if (conditionId.contains("!")) {
-            !conversationGraph.isPartHeard
-        } else {
-            conversationGraph.isPartHeard
-        }
-    }
-
     private fun getQuestGraph(conditionId: String, questId: String?): QuestGraph {
         return when {
             conditionId.contains("_q_this") -> gameData.quests.getQuestById(questId!!)

@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener
 import nl.t64.cot.constants.Constant
 
 
-private const val REQUIRED_PRESS_DURATION = 1.5f
+private const val REQUIRED_PRESS_DURATION = 1f
 
 internal class CutSceneListener(
     private val closeCutscene: () -> Unit

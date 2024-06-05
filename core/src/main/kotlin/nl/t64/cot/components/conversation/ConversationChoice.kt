@@ -10,12 +10,9 @@ private val DEFAULT_CONVERSATION_COMMAND = ConversationCommand.NONE
 private const val INVISIBLE_PREFIX = "i_"
 private const val INVERSE_INVISIBLE_PREFIX = "ii_"
 
-data class ConversationChoice(
+class ConversationChoice(
     val text: String = DEFAULT_ANSWER_TEXT,
     val nextId: String = DEFAULT_NEXT_ID,
-    val altNextId: String? = null,
-    val setJumpToAltEnabled: Boolean? = null,
-    val setHeard: Boolean? = null,
     val command: ConversationCommand = DEFAULT_CONVERSATION_COMMAND,
     @JsonProperty("condition")
     val conditionIds: List<String> = emptyList()
@@ -45,12 +42,6 @@ data class ConversationChoice(
 
     fun isDefault(): Boolean {
         return text == DEFAULT_ANSWER_TEXT
-    }
-
-    fun getCopyOfChoiceWithAltNextId(): ConversationChoice {
-        val copy = copy(nextId = altNextId!!)
-        copy.initId(conversationId)
-        return copy
     }
 
     private fun isNotMeetingConditionWithDoubleII(): Boolean {

@@ -47,8 +47,8 @@ internal class WorldScreenListener(
                 Input.Keys.F10 -> setShowGrid.invoke()
                 Input.Keys.F11 -> setShowObjects.invoke()
                 Input.Keys.F12 -> setShowDebug.invoke()
-                Input.Keys.NUM_9 -> if (preferenceManager.isInDebugMode) gameData.clock.quarterUp()
-                Input.Keys.NUM_0 -> if (preferenceManager.isInDebugMode) gameData.clock.quarterDown()
+                Input.Keys.NUM_9 -> if (preferenceManager.isInDebugMode) gameData.clock.quarterBack()
+                Input.Keys.NUM_0 -> if (preferenceManager.isInDebugMode) gameData.clock.quarterForward()
                 Input.Keys.EQUALS -> if (preferenceManager.isInDebugMode) gameData.clock.start()
                 Input.Keys.MINUS -> if (preferenceManager.isInDebugMode) gameData.clock.stop()
             }

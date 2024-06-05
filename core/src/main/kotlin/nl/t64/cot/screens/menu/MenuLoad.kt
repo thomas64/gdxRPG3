@@ -205,6 +205,7 @@ abstract class MenuLoad : MenuScreen() {
         isLoaded = false
         profiles = profileManager.getVisualLoadingArray()
         listItems.setItems(profiles)
+        updateMenuIndex(0)
         thread { loadProfiles() }
     }
 

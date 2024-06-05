@@ -36,6 +36,8 @@ class AnalogClock : Table() {
         texturesToDispose.disposeAndClear()
         display.clear()
 
+        if (percentageOfCircle > 1f) return
+
         val clockColor = getColorBasedOnTime(percentageOfCircle)
         super.setColor(clockColor)
 

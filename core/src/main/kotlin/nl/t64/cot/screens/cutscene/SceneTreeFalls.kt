@@ -3,6 +3,7 @@ package nl.t64.cot.screens.cutscene
 import com.badlogic.gdx.scenes.scene2d.Action
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import nl.t64.cot.Utils
+import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.profileManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
@@ -77,7 +78,10 @@ class SceneTreeFalls : CutsceneScreen() {
     }
 
     override fun exitScreen() {
-        endCutsceneAndOpenMapAnd("honeywood_forest_path", "scene_tree_falls") { profileManager.saveProfile() }
+        endCutsceneAndOpenMapAnd("honeywood_forest_path", "scene_tree_falls") {
+            gameData.clock.setTimeOfDay("07:30")
+            profileManager.saveProfile()
+        }
     }
 
 }

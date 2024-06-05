@@ -12,13 +12,9 @@ data class ConversationGraph(
     val phrases: Map<String, ConversationPhrase> = emptyMap()
 ) {
     var currentPhraseId: String = DEFAULT_STARTING_PHRASE_ID
-    private var isJumpToAltEnabled: Boolean = false
-    var isPartHeard: Boolean = false
 
     fun reset() {
         currentPhraseId = DEFAULT_STARTING_PHRASE_ID
-        isJumpToAltEnabled = false
-        isPartHeard = false
     }
 
     fun initId() {
@@ -38,32 +34,13 @@ data class ConversationGraph(
     }
 
     fun getAssociatedChoices(): Array<ConversationChoice> {
-        return phrases[currentPhraseId]!!
-            .getChoices(currentPhraseId)
-            .map { it.possibleSetJump() }
-            .map { it.possibleSetHeard() }
-            .toTypedArray()
+        return phrases[currentPhraseId]!!.getChoices(currentPhraseId).toTypedArray()
     }
 
     fun resetChoiceHistory() {
         phrases.values
             .flatMap { it.choices }
             .forEach { it.resetHistory() }
-    }
-
-    private fun ConversationChoice.possibleSetJump(): ConversationChoice {
-        if (this.containsAlternativeNextId()) {
-            return this.getCopyOfChoiceWithAltNextId()
-        }
-        return this.apply { this.setJumpToAltEnabled?.let { isJumpToAltEnabled = it } }
-    }
-
-    private fun ConversationChoice.containsAlternativeNextId(): Boolean {
-        return isJumpToAltEnabled && this.altNextId != null
-    }
-
-    private fun ConversationChoice.possibleSetHeard(): ConversationChoice {
-        return this.apply { this.setHeard?.let { isPartHeard = it } }
     }
 
 }

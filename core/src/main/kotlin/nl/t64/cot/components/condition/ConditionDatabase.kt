@@ -46,8 +46,6 @@ object ConditionDatabase {
             ConditionConverter.isMeetingItemCondition(conditionId)
         } else if (conditionId.contains("_time_")) {
             ConditionConverter.isMeetingTimeCondition(conditionId)
-        } else if (conditionId.contains("heard")) {
-            ConditionConverter.isMeetingConversationCondition(conditionId, questId!!)
         } else {
             conditions[conditionId]!!.invoke()
         }

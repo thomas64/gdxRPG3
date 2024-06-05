@@ -13,6 +13,8 @@ class Scenario {
         addItemsToInventory()
         addItemsToStorage()
         addQuestGraceToLogbook()
+        gameData.clock.start()
+        gameData.clock.setTimeOfDay("07:00")
     }
 
     fun startSecondCycle() {
