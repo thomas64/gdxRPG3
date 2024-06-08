@@ -22,6 +22,7 @@ import nl.t64.cot.components.battle.EnemyItem
 import nl.t64.cot.components.battle.Participant
 import nl.t64.cot.components.battle.TurnManager
 import nl.t64.cot.components.party.HeroItem
+import nl.t64.cot.components.party.inventory.BattlePotionItem
 import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
@@ -42,14 +43,18 @@ class BattleScreen : Screen {
 
     private var selectedAttack: String? = null
     private var selectedEnemy: String? = null
+    private var selectedPotion: BattlePotionItem? = null
 
     private val shapeRenderer = ShapeRenderer()
     private var heroTable: Table = Table()
     private var enemyTable: Table = Table()
     private var turnTable: Table = Table()
+
     private var buttonTableAction: Table = Table()
     private var buttonTableAttack: Table = Table()
     private var buttonTableTarget: Table = Table()
+    private var buttonTablePotion: Table = Table()
+    private val allButtonTables get() = listOf(buttonTableAction, buttonTableAttack, buttonTableTarget, buttonTablePotion)
 
     private var isBgmFading: Boolean = false
     private var isLoaded: Boolean = false
@@ -57,9 +62,14 @@ class BattleScreen : Screen {
     private var hasWon: Boolean = false
     private var hasLost: Boolean = false
 
-    private val listenerAction = BattleScreenSelectActionListener({ winBattle() }, { selectAttack() }, { showRestDialog() }, { showFleeDialog() })
+    private val listenerAction = BattleScreenSelectActionListener({ winBattle() },
+                                                                  { selectAttack() },
+                                                                  { selectPotion() },
+                                                                  { showRestDialog() },
+                                                                  { showFleeDialog() })
     private val listenerAttack = BattleScreenSelectAttackListener({ attackIsSelected(it) }, { returnToAction() })
     private val listenerTarget = BattleScreenSelectTargetListener({ targetIsSelected(it) }, { returnToAttack() })
+    private val listenerPotion = BattleScreenSelectPotionListener({ potionIsSelected(it) }, { returnToAction() })
 
     companion object {
         fun load(battleId: String, battleObserver: BattleObserver) {
@@ -222,10 +232,22 @@ class BattleScreen : Screen {
         showConfirmAttackDialog()
     }
 
+    private fun selectPotion() {
+        buttonTableAction.remove()
+        setupPotionTable()
+    }
+
+    private fun potionIsSelected(potion: BattlePotionItem) {
+        selectedPotion = potion
+        showConfirmPotionDialog()
+    }
+
     private fun returnToAction() {
         selectedAttack = null
         selectedEnemy = null
+        selectedPotion = null
         buttonTableAttack.remove()
+        buttonTablePotion.remove()
         setupActionTable()
     }
 
@@ -237,12 +259,6 @@ class BattleScreen : Screen {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    private fun isNoButtonTableVisible(): Boolean {
-        return stage.actors.items.none {
-            it in listOf(buttonTableAction, buttonTableAttack, buttonTableTarget)
-        }
-    }
 
     private fun setupActionTable() {
         buttonTableAction = BattleScreenBuilder.createButtonTableAction()
@@ -265,6 +281,14 @@ class BattleScreen : Screen {
         stage.keyboardFocus = buttonTableTarget.children.last()
     }
 
+    private fun setupPotionTable() {
+        val battlePotions = gameData.inventory.getAllSelfPotionsForBattle()
+        buttonTablePotion = BattleScreenBuilder.createButtonTablePotion(battlePotions)
+        stage.addActor(buttonTablePotion)
+        buttonTablePotion.addListener(listenerPotion)
+        stage.keyboardFocus = buttonTablePotion.children.last()
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun showConfirmAttackDialog() {
@@ -272,7 +296,7 @@ class BattleScreen : Screen {
             Do you want to $selectedAttack $selectedEnemy ?
 
             Chance to hit:  ${getHit()}%   |   Damage:  ${getDamage()}""".trimIndent()
-        val dialog = DialogQuestion({ attackEnemy() }, message)
+        val dialog = DialogQuestion({ attackConfirmed() }, message)
         dialog.show(stage, 0)
     }
 
@@ -287,7 +311,7 @@ class BattleScreen : Screen {
         return (attack - protection).coerceAtLeast(1).coerceAtMost(target.currentHp)
     }
 
-    private fun attackEnemy() {
+    private fun attackConfirmed() {
         val target: EnemyItem = enemies.getEnemy(selectedEnemy!!)
         val messages: ArrayDeque<String> = currentParticipant.attack(selectedAttack!!, target)
         selectedAttack = null
@@ -301,9 +325,37 @@ class BattleScreen : Screen {
         }
     }
 
+    private fun showConfirmPotionDialog() {
+        val message = """
+            ${selectedPotion!!.description}
+
+            Do you want to drink a ${selectedPotion!!.name} ?""".trimIndent()
+        val dialog = DialogQuestion({ potionConfirmed() }, message)
+        dialog.show(stage, 0)
+    }
+
+    private fun potionConfirmed() {
+        buttonTablePotion.remove()
+        val message: String = currentParticipant.drinkPotion(selectedPotion!!)
+        val messageDialog = MessageDialog(message)
+        messageDialog.setActionAfterHide {
+            turnManager.setNextTurn()
+            isDelayingTurn = false
+        }
+        selectedPotion = null
+        buttonTablePotion.remove()
+        isDelayingTurn = true
+        Utils.runWithDelay(0.5f) {
+            messageDialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT)
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     private fun takeTurnHero() {
         if (isDelayingTurn) return
-        if (isNoButtonTableVisible()) {
+        val isNoButtonTableVisible = stage.actors.items.none { it in allButtonTables }
+        if (isNoButtonTableVisible) {
             setupActionTable()
         }
     }

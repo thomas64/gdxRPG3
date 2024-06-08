@@ -12,6 +12,7 @@ import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.components.battle.EnemyItem
 import nl.t64.cot.components.battle.Participant
 import nl.t64.cot.components.party.HeroItem
+import nl.t64.cot.components.party.inventory.BattlePotionItem
 import nl.t64.cot.components.party.stats.StatItemId
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.toDrawable
@@ -146,20 +147,25 @@ object BattleScreenBuilder {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     fun createButtonTableAction(): Table {
-        return createStyledEmptyList().fillWithActions().toActionTable()
+        return createStyledEmptyList<String>().fillWithActions().toActionTable()
     }
 
     fun createButtonTableAttack(currentParticipant: Participant): Table {
-        return createStyledEmptyList().fillWithAttacksFor(currentParticipant).toAttackTable()
+        return createStyledEmptyList<String>().fillWithAttacksFor(currentParticipant).toAttackTable()
     }
 
     fun createButtonTableTarget(enemies: List<EnemyItem>): Table {
-        return createStyledEmptyList().fillWithTargets(enemies).toTargetTable()
+        return createStyledEmptyList<String>().fillWithTargets(enemies).toTargetTable()
+    }
+
+    fun createButtonTablePotion(potions: List<BattlePotionItem>): Table {
+        return createStyledEmptyList<BattlePotionItem>().fillWithPotions(potions).toPotionTable()
     }
 
     private fun GdxList<String>.fillWithActions(): GdxList<String> {
         this.setItems(
             "Attack",
+            "Potion",
             "Rest",
             "Flee"
         )
@@ -181,6 +187,13 @@ object BattleScreenBuilder {
             .filter { it.isAlive }
             .forEach { items.add(it.name) }
         items.add("Back")
+        this.selectedIndex = -1
+        return this
+    }
+
+    private fun GdxList<BattlePotionItem>.fillWithPotions(potions: List<BattlePotionItem>): GdxList<BattlePotionItem> {
+        this.setItems(*potions.toTypedArray())
+        items.add(BattlePotionItem("Back"))
         this.selectedIndex = -1
         return this
     }
@@ -211,10 +224,18 @@ object BattleScreenBuilder {
         }
     }
 
+    private fun GdxList<BattlePotionItem>.toPotionTable(): Table {
+        val listWithPotions = this
+        return createSelectionTable().apply {
+            add("Select Potion:").row()
+            add(listWithPotions)
+        }
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private fun createStyledEmptyList(bottomHeight: Float = 0f): GdxList<String> {
-        return GdxList<String>(ListStyle().apply {
+    private fun <T> createStyledEmptyList(bottomHeight: Float = 0f): GdxList<T> {
+        return GdxList<T>(ListStyle().apply {
             font = resourceManager.getTrueTypeAsset(TEXT_FONT, FONT_SIZE)
             fontColorSelected = Color.GOLD
             fontColorUnselected = Color.WHITE

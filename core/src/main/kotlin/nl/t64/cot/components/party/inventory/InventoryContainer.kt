@@ -10,8 +10,15 @@ open class InventoryContainer(numberOfSlots: Int = 0) {
     fun getAllContent(): MutableMap<String, Int> {
         return inventory
             .filterNotNull()
-            .associate { it.id to it.amount }   // .map { Pair(it.id, it.amount) }.toMap()
+            .associate { it.id to it.amount }
             .toMutableMap()
+    }
+
+    fun getAllSelfPotionsForBattle(): List<BattlePotionItem> {
+        return getAllFilledSlots()
+            .filter { it.group == InventoryGroup.POTION }
+            .filter { it.name.contains(" Potion") }
+            .map { BattlePotionItem(it) }
     }
 
     fun getAllFilledSlots(): List<InventoryItem> {

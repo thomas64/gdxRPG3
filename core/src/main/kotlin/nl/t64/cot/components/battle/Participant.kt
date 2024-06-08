@@ -1,7 +1,9 @@
 package nl.t64.cot.components.battle
 
+import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.components.party.HeroItem
+import nl.t64.cot.components.party.inventory.BattlePotionItem
 import nl.t64.cot.components.party.stats.StatItemId
 import kotlin.random.Random
 
@@ -36,6 +38,19 @@ class Participant(
         return messages
     }
 
+    fun drinkPotion(potion: BattlePotionItem): String {
+        gameData.inventory.autoRemoveItem(potion.id, 1)
+        val oldHp = character.currentHp
+        character.drink(potion)
+        val newHp = character.currentHp
+        val recoveredHp = newHp - oldHp // todo, dit gaat natuurlijk nog fout met niet-healing potions.
+        if (recoveredHp <= 0) {
+            return "${potion.name} had no effect."
+        } else {
+            return "${character.name} used a ${potion.name} and recovered $recoveredHp HP."
+        }
+    }
+
     fun rest(): String {
         if (character.currentHp == character.maximumHp) {
             return "${character.name} skipped a turn."
@@ -58,4 +73,15 @@ class Participant(
         turnCounter -= 200f
     }
 
+    private fun Character.drink(potion: BattlePotionItem) {
+        when (potion.id) {
+            "healing_potion" -> this.recoverPartHp(20)
+            "curing_potion" -> this.recoverPartHp(80)
+            "restore_potion" -> this.recoverFullHp()
+            "energy_potion" -> this.recoverPartMp(20)
+            "endurance_potion" -> this.recoverPartMp(80)
+            "stamina_potion" -> this.recoverFullMp()
+            else -> throw NotImplementedError("ToDo")
+        }
+    }
 }

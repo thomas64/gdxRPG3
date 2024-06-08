@@ -20,25 +20,20 @@ class BattleScreenSelectTargetListener(
             Input.Keys.UP -> playSe(AudioEvent.SE_MENU_CURSOR)
             Input.Keys.DOWN -> playSe(AudioEvent.SE_MENU_CURSOR)
             Input.Keys.ENTER -> event.handleEnter()
-            Input.Keys.ESCAPE -> handleEscape()
+            Input.Keys.ESCAPE -> handleEscape(back)
         }
         return true
     }
 
     private fun InputEvent.handleEnter() {
-        val selected = getSelected() ?: return
+        val selected: String = getSelected() ?: return
         when (selected) {
-            "Back" -> handleEscape()
+            "Back" -> handleEscape(back)
             else -> {
                 playSe(AudioEvent.SE_MENU_CONFIRM)
                 enemy.invoke(selected)
             }
         }
-    }
-
-    private fun handleEscape() {
-        playSe(AudioEvent.SE_MENU_BACK)
-        back.invoke()
     }
 
 }

@@ -41,6 +41,22 @@ abstract class Character(
         }
     }
 
+    fun recoverFullHp() {
+        currentHp = maximumHp
+    }
+
+    fun recoverPartHp(healPoints: Int) {
+        currentHp = (currentHp + healPoints).coerceAtMost(maximumHp)
+    }
+
+    fun recoverFullMp() {
+        currentMp = maximumMp
+    }
+
+    fun recoverPartMp(recoverPoints: Int) {
+        currentMp = (currentMp + recoverPoints).coerceAtMost(maximumMp)
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     fun getInventoryItem(inventoryGroup: InventoryGroup): InventoryItem? {

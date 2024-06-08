@@ -36,7 +36,7 @@
       "and an Alchemist rank of at least 7.)"
     ]
   },
-  "energy_potion": {
+  "energy_potion"      : {
     "name"       : "Energy Potion",
     "group"      : "POTION",
     "sort"       : 80018,
@@ -48,7 +48,7 @@
       "and an Alchemist rank of at least 1.)"
     ]
   },
-  "endurance_potion": {
+  "endurance_potion"   : {
     "name"       : "Endurance Potion",
     "group"      : "POTION",
     "sort"       : 80019,

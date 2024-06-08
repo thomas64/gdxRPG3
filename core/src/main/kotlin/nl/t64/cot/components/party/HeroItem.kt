@@ -71,22 +71,6 @@ class HeroItem(
         recoverFullMp()
     }
 
-    fun recoverFullHp() {
-        currentHp = maximumHp
-    }
-
-    fun recoverPartHp(healPoints: Int) {
-        currentHp = (currentHp + healPoints).coerceAtMost(maximumHp)
-    }
-
-    fun recoverFullMp() {
-        currentMp = maximumMp
-    }
-
-    fun recoverPartMp(recoverPoints: Int) {
-        currentMp = (currentMp + recoverPoints).coerceAtMost(maximumMp)
-    }
-
     fun gainXp(amount: Int) {
         xpToInvest += amount
         totalXp += amount

@@ -6,10 +6,11 @@ import com.badlogic.gdx.scenes.scene2d.InputListener
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
+import nl.t64.cot.components.party.inventory.BattlePotionItem
 
 
-class BattleScreenSelectAttackListener(
-    private val attack: (String) -> Unit,
+class BattleScreenSelectPotionListener(
+    private val potion: (BattlePotionItem) -> Unit,
     private val back: () -> Unit
 ) : InputListener() {
 
@@ -26,12 +27,13 @@ class BattleScreenSelectAttackListener(
     }
 
     private fun InputEvent.handleEnter() {
-        when (getSelected<String>()) {
-            "Strike" -> {
+        val selected: BattlePotionItem = getSelected() ?: return
+        when {
+            selected.name == "Back" -> handleEscape(back)
+            else -> {
                 playSe(AudioEvent.SE_MENU_CONFIRM)
-                attack.invoke("Strike")
+                potion.invoke(selected)
             }
-            "Back" -> handleEscape(back)
         }
     }
 

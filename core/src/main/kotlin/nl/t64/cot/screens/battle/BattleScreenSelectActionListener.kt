@@ -11,6 +11,7 @@ import nl.t64.cot.audio.playSe
 class BattleScreenSelectActionListener(
     private val winBattle: () -> Unit,
     private val selectAttack: () -> Unit,
+    private val selectPotion: () -> Unit,
     private val rest: () -> Unit,
     private val fleeBattle: () -> Unit
 ) : InputListener() {
@@ -30,14 +31,18 @@ class BattleScreenSelectActionListener(
 
     private fun InputEvent.dontLoseFocusAfterEsc() {
         playSe(AudioEvent.SE_MENU_ERROR)
-        this.stage.keyboardFocus = getButtonTable()
+        this.stage.keyboardFocus = getButtonTable<String>()
     }
 
     private fun InputEvent.handleEnter() {
-        when (getSelected()) {
+        when (getSelected<String>()) {
             "Attack" -> {
                 playSe(AudioEvent.SE_MENU_CONFIRM)
                 selectAttack.invoke()
+            }
+            "Potion" -> {
+                playSe(AudioEvent.SE_MENU_CONFIRM)
+                selectPotion.invoke()
             }
             "Rest" -> {
                 playSe(AudioEvent.SE_MENU_CONFIRM)
