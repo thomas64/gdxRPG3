@@ -10,7 +10,9 @@ import nl.t64.cot.screens.world.mapobjects.GameMapRelocator
 
 class WorldSchedule {
 
-    private var entitySchedules: List<EntitySchedule> = listOf(Garrin(),
+    private var entitySchedules: List<EntitySchedule> = listOf(HoneywoodResourceShop(),
+                                                               HoneywoodEquipShop(),
+                                                               Garrin(),
                                                                Ghost(),
                                                                Paton(),
                                                                Santino())
@@ -20,7 +22,7 @@ class WorldSchedule {
         MapScheduleDatabase.getScheduleByMapName(mapManager.currentMap.mapTitle)?.update()
     }
 
-    fun MapSchedule.update() {
+    private fun MapSchedule.update() {
         if (gameData.clock.isCurrentTimeAfter(closingTime)) {
             worldScreen.showMessageDialog(message) {
                 val autoPortal = GameMapRelocator.createAutoPortal(fromMapName, toMapName)

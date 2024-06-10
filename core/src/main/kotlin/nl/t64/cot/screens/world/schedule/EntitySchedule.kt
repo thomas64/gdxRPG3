@@ -1,7 +1,6 @@
 package nl.t64.cot.screens.world.schedule
 
 import nl.t64.cot.Utils.brokerManager
-import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.screens.world.entity.Entity
 import nl.t64.cot.screens.world.entity.EntityState
@@ -10,10 +9,11 @@ import nl.t64.cot.screens.world.entity.events.UpdateScheduledEntityEvent
 
 abstract class EntitySchedule {
 
-    abstract val entity: Entity
+    protected abstract val entity: Entity
+    protected abstract val scheduleParts: List<SchedulePart>
 
     fun update() {
-        getScheduleOfEntity()
+        scheduleParts
             .filter { it.isCurrentMapInState() }
             .singleOrNull { it.isCurrentTimeInState() }
             ?.handle()
@@ -21,14 +21,14 @@ abstract class EntitySchedule {
         handleSideEffects()
     }
 
-    private fun ScheduleItem.handle() {
+    private fun SchedulePart.handle() {
         entity.send(UpdateScheduledEntityEvent(state, direction, getCurrentPosition(), conversationId))
         worldScreen.addScheduledEntity(entity)
         handleTalking()
         handleBlocking()
     }
 
-    private fun ScheduleItem.handleTalking() {
+    private fun SchedulePart.handleTalking() {
         if (conversationId.isBlank()) {
             brokerManager.actionObservers.removeObserver(entity)
         } else {
@@ -36,7 +36,7 @@ abstract class EntitySchedule {
         }
     }
 
-    private fun ScheduleItem.handleBlocking() {
+    private fun SchedulePart.handleBlocking() {
         if (state == EntityState.IDLE) {
             brokerManager.blockObservers.addObserver(entity)
         } else {
@@ -47,10 +47,9 @@ abstract class EntitySchedule {
     private fun remove() {
         brokerManager.blockObservers.removeObserver(entity)
         brokerManager.actionObservers.removeObserver(entity)
-        screenManager.getWorldScreen().removeScheduledEntity(entity)
+        worldScreen.removeScheduledEntity(entity)
     }
 
-    abstract fun getScheduleOfEntity(): List<ScheduleItem>
-    abstract fun handleSideEffects()
+    protected abstract fun handleSideEffects()
 
 }

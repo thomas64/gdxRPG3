@@ -8,7 +8,7 @@ import nl.t64.cot.screens.world.entity.EntityState
 import kotlin.math.abs
 
 
-class ScheduleItem(
+class SchedulePart(
     private val mapTitle: String,
     private val startTime: String,
     private val endTime: String,
