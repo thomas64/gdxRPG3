@@ -12,6 +12,8 @@ class WorldSchedule {
 
     private var entitySchedules: List<EntitySchedule> = listOf(HoneywoodResourceShop(),
                                                                HoneywoodEquipShop(),
+                                                               HoneywoodAcademy1(),
+                                                               HoneywoodAcademy2(),
                                                                Garrin(),
                                                                Ghost(),
                                                                Paton(),

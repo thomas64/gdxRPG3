@@ -9,7 +9,9 @@ class BumpSubject {
     private val observers: MutableList<BumpObserver> = ArrayList()
 
     fun addObserver(observer: BumpObserver) {
-        observers.add(observer)
+        if (observer !in observers) {
+            observers.add(observer)
+        }
     }
 
     fun removeObserver(observer: BumpObserver) {

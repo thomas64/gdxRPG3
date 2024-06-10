@@ -39,12 +39,15 @@ abstract class EntitySchedule {
     private fun SchedulePart.handleBlocking() {
         if (state == EntityState.IDLE) {
             brokerManager.blockObservers.addObserver(entity)
+            brokerManager.bumpObservers.addObserver(entity)
         } else {
             brokerManager.blockObservers.removeObserver(entity)
+            brokerManager.bumpObservers.removeObserver(entity)
         }
     }
 
     private fun remove() {
+        brokerManager.bumpObservers.removeObserver(entity)
         brokerManager.blockObservers.removeObserver(entity)
         brokerManager.actionObservers.removeObserver(entity)
         worldScreen.removeScheduledEntity(entity)

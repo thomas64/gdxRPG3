@@ -92,7 +92,12 @@ class Entity(
 
     fun isNpc(): Boolean = physicsComponent is PhysicsNpc
 
-    fun getConversationId(): String =
-        (physicsComponent as PhysicsNpc).conversationId
+    fun getConversationId(): String {
+        return when (physicsComponent) {
+            is PhysicsNpc -> physicsComponent.conversationId
+            is PhysicsScheduledNpc -> physicsComponent.conversationId
+            else -> throw IllegalStateException("Unsupported physics component type.")
+        }
+    }
 
 }

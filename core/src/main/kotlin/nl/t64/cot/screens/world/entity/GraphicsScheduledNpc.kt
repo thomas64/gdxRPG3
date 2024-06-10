@@ -3,6 +3,7 @@ package nl.t64.cot.screens.world.entity
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import nl.t64.cot.constants.Constant
+import nl.t64.cot.screens.world.entity.events.DirectionEvent
 import nl.t64.cot.screens.world.entity.events.Event
 import nl.t64.cot.screens.world.entity.events.UpdateScheduledEntityEvent
 
@@ -20,6 +21,9 @@ class GraphicsScheduledNpc(spriteId: String) : GraphicsComponent() {
             position = event.position
             direction = event.direction
             setNewFrameDuration()
+        }
+        if (event is DirectionEvent) {
+            direction = event.direction
         }
     }
 
@@ -45,7 +49,7 @@ class GraphicsScheduledNpc(spriteId: String) : GraphicsComponent() {
     }
 
     override fun renderOnMiniMap(entity: Entity, batch: Batch, shapeRenderer: ShapeRenderer) {
-        // empty
+        renderOnMiniMap(entity.getConversationId(), state, position, batch, shapeRenderer)
     }
 
 }

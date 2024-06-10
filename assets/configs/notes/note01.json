@@ -1,70 +1,60 @@
 {
-  "note_resource_shop" : {
-    "phrases": {
-      "1": {"text": ["Resource Shop"], "choices": [{"command": "EXIT"}]}
-    }
-  },
-  "note_equipment_shop": {
-    "phrases": {
-      "1": {"text": ["Equipment Shop"], "choices": [{"command": "EXIT"}]}
-    }
-  },
-  "note_bed01"         : {
+  "note_bed01"      : {
     "phrases": {
       "1": {"text": ["This is clearly someone else's bed. What are you even considering?"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "note_bed02"         : {
+  "note_bed02"      : {
     "phrases": {
       "1": {"text": ["If you require rest, talk to the innkeeper."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "note_bed03"         : {
+  "note_bed03"      : {
     "phrases": {
       "1": {"text": ["It appears quite comfortable, but now is not the time."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "note_apples"        : {
+  "note_apples"     : {
     "phrases": {
       "1": {"text": ["How do you like them apples?"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "note_food"          : {
+  "note_food"       : {
     "phrases": {
       "1": {"text": ["It's food. Did you wash your hands before touching it?"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "note_bookcase"      : {
+  "note_bookcase"   : {
     "phrases": {
       "1": {"text": ["So many books, so little time."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "note_closet"        : {
+  "note_closet"     : {
     "phrases": {
       "1": {"text": ["How would you like it if random people opened your closet?"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "note_shelves"       : {
+  "note_shelves"    : {
     "phrases": {
       "1": {"text": ["Looks organized. Better not touch it."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "note_fireplace"     : {
+  "note_fireplace"  : {
     "phrases": {
       "1": {"text": ["The fire feels warm and inviting."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "note_kitchen"       : {
+  "note_kitchen"    : {
     "phrases": {
       "1": {"text": ["Are you planning to prepare a meal or something?"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "note_holy_symbol"   : {
+  "note_holy_symbol": {
     "phrases": {
       "1": {"text": ["It looks like a holy symbol."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "note_holy_bible"    : {
+  "note_holy_bible" : {
     "phrases": {
       "1": {"text": ["That's probably not meant for heathen eyes."], "choices": [{"command": "EXIT"}]}
     }

@@ -333,6 +333,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled)
         player.renderOnMiniMap(worldRenderer.batch, shapeRenderer)
         npcEntities.forEach { it.renderOnMiniMap(worldRenderer.batch, shapeRenderer) }
+        visibleScheduledEntities.forEach { it.renderOnMiniMap(worldRenderer.batch, shapeRenderer) }
         fogOfWarManager.draw(shapeRenderer)
         shapeRenderer.end()
     }

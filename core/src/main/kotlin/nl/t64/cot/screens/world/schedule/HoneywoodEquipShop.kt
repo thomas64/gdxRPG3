@@ -17,9 +17,9 @@ class HoneywoodEquipShop : EntitySchedule() {
 
     override val scheduleParts: List<SchedulePart> = listOf(
         // @formatter:off
-        SchedulePart("honeywood", "09:00", "09:01", SOUTH, CRAWLING, "equipment1", "equipment2"),
-        SchedulePart("honeywood", "09:01", "17:01", SOUTH, IDLE,     "equipment2", "equipment2"),
-        SchedulePart("honeywood", "17:01", "17:02", NORTH, CRAWLING, "equipment2", "equipment1"),
+        SchedulePart("honeywood", "09:00", "09:01", SOUTH, WALKING, "equipment1", "equipment2"),
+        SchedulePart("honeywood", "09:01", "17:01", SOUTH, IDLE,    "equipment2", "equipment2", "equipshop_honeywood"),
+        SchedulePart("honeywood", "17:01", "17:02", NORTH, WALKING, "equipment2", "equipment1"),
         // @formatter:on
     )
 
@@ -31,10 +31,10 @@ class HoneywoodEquipShop : EntitySchedule() {
                 invisibleTalking.send(event)
                 worldScreen.addScheduledEntity(invisibleTalking)
                 brokerManager.actionObservers.addObserver(invisibleTalking)
-            } else {
-                brokerManager.actionObservers.removeObserver(invisibleTalking)
-                worldScreen.removeScheduledEntity(invisibleTalking)
             }
+        } else {
+            brokerManager.actionObservers.removeObserver(invisibleTalking)
+            worldScreen.removeScheduledEntity(invisibleTalking)
         }
     }
 

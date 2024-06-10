@@ -1,0 +1,17 @@
+{
+  "note_resource_shop" : {
+    "type"      : "messagebox",
+    "text"      : ["Resource Shop.", "Open from 09:00 to 17:00."],
+    "doesRepeat": true
+  },
+  "note_equipment_shop": {
+    "type"      : "messagebox",
+    "text"      : ["Equipment Shop.", "Open from 09:00 to 17:00."],
+    "doesRepeat": true
+  },
+  "note_honeywood_academy": {
+    "type"      : "messagebox",
+    "text"      : ["Honeywood Skill Training.", "From 09:00 to 17:00."],
+    "doesRepeat": true
+  }
+}

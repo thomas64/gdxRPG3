@@ -282,8 +282,14 @@
       }
     }
   },
+  "honeywood_academy1_there"            : {
+    "name"   : "Skill Trainer",
+    "phrases": {
+      "1": {"text": ["Good morning, if you want to receive skill training, follow me."], "choices": [{"command": "EXIT"}]}
+    }
+  },
   "honeywood_academy1"                  : {
-    "name"   : "Honeywood Academy",
+    "name"   : "Skill Trainer",
     "phrases": {
       "1": {"text": ["Good day, young sir, would you like to receive skill training?"]},
       "2": {
@@ -294,8 +300,20 @@
       }
     }
   },
+  "honeywood_academy1_back"             : {
+    "name"   : "Skill Trainer",
+    "phrases": {
+      "1": {"text": ["Good evening, if you want to receive skill training, come back here tomorrow."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "honeywood_academy2_there"            : {
+    "name"   : "Skill Trainer",
+    "phrases": {
+      "1": {"text": ["Hey Mozes, I think you want to receive skill training. Just follow me."], "choices": [{"command": "EXIT"}]}
+    }
+  },
   "honeywood_academy2"                  : {
-    "name"   : "Honeywood Academy",
+    "name"   : "Skill Trainer",
     "phrases": {
       "1": {"text": ["Hey Mozes, don't say a word. You want to receive skill training."]},
       "2": {
@@ -304,6 +322,12 @@
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       }
+    }
+  },
+  "honeywood_academy2_back"             : {
+    "name"   : "Skill Trainer",
+    "phrases": {
+      "1": {"text": ["Hey Mozes, I know you want to receive skill training, but you'll have to come back tomorrow."], "choices": [{"command": "EXIT"}]}
     }
   },
   "quest_honeywood_inn_price-1"         : {
