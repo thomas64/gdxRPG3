@@ -108,16 +108,20 @@
     "name"   : "Mozes",
     "phrases": {
       "1": {"text": ["What the..."]},
-      "2": {"text": ["What just happened?"], "choices": [{"command": "EXIT"}]}
+      "2": {"text": ["What just happened?"]},
+      "3": {"text": ["Was it all a dream?"], "choices": [{"command": "EXIT"}]}
     }
   },
   "what_happened"                  : {
     "name"   : "Mozes",
     "phrases": {
-      "1": {"text": ["Did I just die?"]},
-      "2": {"text": ["Whose voice was that?"]},
-      "3": {"text": ["\"You have been given another chance...\" ??"]},
-      "4": {"text": ["What does that even mean?"], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["Was Grace really sacrificed?"]},
+      "2": {"text": ["Did I witness the end of the world?"]},
+      "3": {"text": ["Did I just die?"]},
+      "4": {"text": ["Then why am I here now, back in my home?"]},
+      "5": {"text": ["Whose voice was that?"]},
+      "6": {"text": ["\"You have been given another chance...\" ??"]},
+      "7": {"text": ["What does that even mean?"], "choices": [{"command": "EXIT"}]}
     }
   }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="48" height="50" tilewidth="24" tileheight="24" infinite="0" nextlayerid="19" nextobjectid="114">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="48" height="50" tilewidth="24" tileheight="24" infinite="0" nextlayerid="19" nextobjectid="115">
  <properties>
   <property name="bgm" value="bgm_great_tree"/>
   <property name="bgs" value="bgs_birds"/>
@@ -75,7 +75,7 @@
   <object id="63" name="sand" x="672" y="528" width="24" height="24"/>
   <object id="64" name="sand" x="576" y="456" width="48" height="24"/>
  </objectgroup>
- <objectgroup color="#aa0000" id="11" name="collision" visible="0">
+ <objectgroup color="#aa0000" id="11" name="collision">
   <object id="1" x="960" y="0" width="192" height="1200"/>
   <object id="2" x="0" y="0" width="192" height="1200"/>
   <object id="3" x="192" y="0" width="48" height="480"/>
@@ -202,5 +202,6 @@
   <object id="105" name="guide_event_saving" type="discover" x="480" y="384" width="24" height="144"/>
   <object id="106" name="guide_event_saving" type="discover" x="504" y="504" width="192" height="24"/>
   <object id="107" name="guide_event_saving" type="discover" x="696" y="384" width="24" height="144"/>
+  <object id="114" name="guide_event_xp" type="discover" x="528" y="858" width="240" height="6"/>
  </objectgroup>
 </map>

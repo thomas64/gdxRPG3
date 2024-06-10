@@ -29,6 +29,7 @@ import nl.t64.cot.gamestate.PreferenceManager
 import nl.t64.cot.gamestate.ProfileManager
 import nl.t64.cot.gamestate.Scenario
 import nl.t64.cot.resources.ResourceManager
+import nl.t64.cot.resources.SpriteConfig
 import nl.t64.cot.screens.ScreenManager
 import nl.t64.cot.screens.world.WorldScreen
 import nl.t64.cot.screens.world.map.FogOfWarManager
@@ -154,7 +155,7 @@ object Utils {
     }
 
     fun getCharImage(spriteId: String): Array<Array<TextureRegion>> {
-        val charConfig = resourceManager.getSpriteConfig(spriteId)!!
+        val charConfig = getSpriteConfigFrom(spriteId)
         val path = String.format(CHAR_PATH, charConfig.source)
         val row = charConfig.row - 1
         val col = charConfig.col - 1
@@ -165,8 +166,7 @@ object Utils {
 
     fun getFaceImage(spriteId: String, isFlipped: Boolean = true): Image {
         if (spriteId.isEmpty()) return Image()
-        val faceConfig = resourceManager.getSpriteConfig(spriteId)
-            ?: resourceManager.getSpriteConfig(spriteId.substringBeforeLast("_"))!!
+        val faceConfig = getSpriteConfigFrom(spriteId)
         val path = String.format(FACE_PATH, faceConfig.source)
         val row = faceConfig.row - 1
         val col = faceConfig.col - 1
@@ -174,6 +174,11 @@ object Utils {
         val characterFace = splitOfEight[row][col]
         if (isFlipped) characterFace.flip(true, false)
         return Image(characterFace)
+    }
+
+    private fun getSpriteConfigFrom(spriteId: String): SpriteConfig {
+        return resourceManager.getSpriteConfig(spriteId)
+            ?: resourceManager.getSpriteConfig(spriteId.substringBeforeLast("_"))!!
     }
 
     fun getDoorImage(spriteId: String, width: Int, isShadow: Boolean): Array<Array<TextureRegion>> {

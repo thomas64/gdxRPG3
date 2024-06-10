@@ -2,6 +2,7 @@ package nl.t64.cot.components.battle
 
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.components.loot.Loot
+import kotlin.math.roundToInt
 
 
 class EnemyContainer(
@@ -24,7 +25,7 @@ class EnemyContainer(
     fun getTotalXp(): Int {
         val baseXp: Int = enemies.sumOf { it.xp }
         val bonusMultiplier: Float = 1f + ((enemies.size - 1f) * 0.2f)
-        return (baseXp * bonusMultiplier).toInt()
+        return (baseXp * bonusMultiplier).roundToInt()
     }
 
     fun getSpoils(): Loot {

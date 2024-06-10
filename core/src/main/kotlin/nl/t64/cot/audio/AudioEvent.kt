@@ -24,7 +24,7 @@ enum class AudioEvent(val filePath: String, val volume: Float = 1f) {
     BGM_BATTLE_1("audio/bgm/battle.ogg", 0.1f),
     BGM_BATTLE_2("audio/bgm/combat.ogg", 0.1f),
     BGM_BATTLE_3("audio/bgm/confront.ogg", 0.1f),
-    BGM_WIN_BATTLE("audio/bgm/the_earth.ogg", 0.1f),
+    BGM_WIN_BATTLE("audio/bgm/the_earth.ogg", 0.2f),
     BGM_LOSE_BATTLE("audio/bgm/conclusion.ogg", 0.1f),
 
     BGM_MYSTERIOUS_TUNNEL("audio/bgm/cave.ogg", 0.1f),

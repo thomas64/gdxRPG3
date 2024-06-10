@@ -11,14 +11,7 @@
     "condition": ["_n_3_>=_item_healing_potion"],
     "text"     : [
       "Press the %inventory% to access your inventory,",
-      "where you can view your equipment, stats, skills, and spells."
-    ]
-  },
-  "guide_event_quest"                : {
-    "type": "messagebox",
-    "text": [
-      "Press the %logbook% to access your logbook.",
-      "Here, you can find all quest-related information."
+      "where you can view your equipment, attributes, skills, and more."
     ]
   },
   "guide_event_enemy"                : {
@@ -29,12 +22,11 @@
       "which can be used to improve your character."
     ]
   },
-  "guide_event_slow"                 : {
+  "guide_event_quest"                : {
     "type": "messagebox",
     "text": [
-      "Toggle the %slow% to move stealthily.",
-      "Enemies will have a harder time detecting you,",
-      "enabling you to avoid battles if necessary."
+      "Press the %logbook% to access your logbook.",
+      "Here, you can find all quest-related information."
     ]
   },
   "guide_event_minimap"              : {
@@ -43,6 +35,14 @@
       "Press the %minimap% in large areas to view an overview of that area.",
       "This helps prevent getting lost, especially in dark caves.",
       "(Note: Small areas do not offer this overview option.)"
+    ]
+  },
+  "guide_event_equipment"            : {
+    "type"     : "messagebox",
+    "condition": ["_n_1_>=_item_basic_light_helmet"],
+    "text"     : [
+      "Press the %inventory% to access your inventory.",
+      "Here, you can equip various items such as armor and weapons."
     ]
   },
   "guide_event_conversation"         : {
@@ -55,12 +55,21 @@
       "These conditions are stated between brackets %brackets% in front of the response."
     ]
   },
-  "guide_event_equipment"            : {
-    "type"     : "messagebox",
-    "condition": ["_n_1_>=_item_basic_light_helmet"],
-    "text"     : [
-      "Press the %inventory% to access your inventory.",
-      "Here, you can equip various items such as armor and weapons."
+  "guide_event_slow"                 : {
+    "type": "messagebox",
+    "text": [
+      "Toggle the %slow% to move stealthily.",
+      "Enemies will have a harder time detecting you,",
+      "enabling you to avoid battles if necessary."
+    ]
+  },
+  "guide_event_xp"                   : {
+    "type": "messagebox",
+    "text": [
+      "You've gained quite some XP by now.",
+      "Access your attributes by pressing the %inventory%.",
+      "Here you can utilize your XP to improve them.",
+      "Choose an attribute and press the %action% to level it up."
     ]
   },
   "guide_event_saving"               : {
@@ -80,7 +89,7 @@
       "You'll move faster, but enemies will detect you more easily."
     ]
   },
-  "guide_event_manual"                 : {
+  "guide_event_manual"               : {
     "type"     : "messagebox",
     "condition": ["been_in_fairy_town"],
     "text"     : [
@@ -92,9 +101,10 @@
     "type"     : "messagebox",
     "condition": ["been_in_fairy_town"],
     "text"     : [
-      "Remember to press the %minimap% to view the area overview,",
-      "and the %logbook% to access your logbook.",
-      "Here, you can find all quest-related information."
+      "Remember to press the %logbook% to access your logbook.",
+      "Here, you can find all quest-related information,",
+      "like finding secret doors.",
+      "Also remember to press the %minimap% to view the area overview."
     ]
   },
   "guide_event_storage"              : {
@@ -103,7 +113,16 @@
     "text"     : [
       "The closet behind you can be used for storage.",
       "When your inventory becomes full, store items in your closet.",
-      "They will be safe and kept there until you need them."
+      "They will be safe and kept there until you need them.",
+      "Perhaps there's already something in there for you."
+    ]
+  },
+  "guide_event_conversation_reminder": {
+    "type": "messagebox",
+    "text": [
+      "People may share different information at different times.",
+      "Keep this in mind!",
+      "The village elder is a good example of this behavior."
     ]
   },
   "guide_event_party_member"         : {
@@ -111,14 +130,7 @@
     "condition": ["_tc_9_q_quest_honeywood_elder"],
     "text"     : [
       "Luana has joined your party.",
-      "Press the %inventory% to view her equipment, stats and skills."
-    ]
-  },
-  "guide_event_conversation_reminder": {
-    "type": "messagebox",
-    "text": [
-      "People may share different information at different times.",
-      "Keep this in mind!"
+      "Press the %inventory% to view her equipment, attributes and skills."
     ]
   }
 }

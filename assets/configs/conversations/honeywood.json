@@ -9,24 +9,24 @@
   "everything_is_normal_again"          : {
     "name"   : "Mozes",
     "phrases": {
-      "1": {"text": ["Everything is back to normal?"]},
+      "1": {"text": ["Everything seems normal?"]},
       "2": {"text": ["Adan didn't end up in flames?"]},
-      "3": {"text": ["Is Grace still alive then?"]},
+      "3": {"text": ["Is Grace also still alive then?"]},
       "4": {"text": ["I need to see her! I need to know! Maybe I can still save her!"]},
-      "5": {"text": ["I must hurry back to the forest!"], "choices": [{"command": "EXIT"}]}
+      "5": {"text": ["I must hurry back to the forest! I need to make sure!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "should_really_be_going_to_grace"     : {
     "name"   : "Mozes",
     "phrases": {
       "1": {"text": ["There's no time to waste! Grace might still be alive."]},
-      "2": {"text": ["I must hurry back to the forest!"], "choices": [{"command": "EXIT"}]}
+      "2": {"text": ["I must hurry back to the forest! I need to make sure!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "dont_have_time_for_this"             : {
     "name"   : "Mozes",
     "phrases": {
-      "1": {"text": ["Aw man! Let's clear this tree quickly. I really need to reach Grace as soon as possible!"], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["Aw man! Let's get the stuff to clear this tree quickly. I don't have that much time,", "I really need to reach Grace as soon as possible!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "everything_is_back_again"            : {
@@ -87,7 +87,7 @@
   "quest_helping_horse"                 : {
     "name"   : "Lennor",
     "phrases": {
-      "1" : {"text": ["Hey Mozes, you can't go further north from here. Just {COLOR=BLUE}minutes ago{COLOR=BLACK}, a large tree fell down and is now blocking the road."]},
+      "1" : {"text": ["Hey Mozes, you can't go further north from here. Around {COLOR=BLUE}07:30{COLOR=BLACK}, a large tree fell down and is now blocking the road."]},
       "2" : {"text": ["I heard a loud bang, so I came straight this way to see what happened. Luckily, no one was hurt when it fell. But it'll take a while for me to remove it and clear the road for everyone."]},
       "3" : {"text": ["I could use some help though. A tree this large? I think I need a horse and some ropes to succeed."], "choices": [{"command": "ACCEPT_QUEST", "nextId": "5"}]},
       "5" : {
@@ -100,7 +100,7 @@
           {"text": "*Take your leave.*", "command": "EXIT", "nextId": "50"}
         ]
       },
-      "10": {"text": ["Only {COLOR=BLUE}just minutes ago{COLOR=BLACK}! I heard a loud bang, so I came straight this way to see what happened."]},
+      "10": {"text": ["Around {COLOR=BLUE}07:30{COLOR=BLACK}! I was near and I heard a loud bang, so I came straight this way to see what happened."]},
       "11": {"text": ["Luckily, this doesn't happen very often, because it'll take a while to remove it and clear the road for everyone."], "choices": [{"nextId": "5"}]},
       "20": {"text": ["I'm sorry, Mozes, but there's nothing I can do about it right now. You'll have to wait a while, or you could help me out to speed up the process."], "choices": [{"nextId": "5"}]},
       "30": {"text": ["I tried! It's one heavy tree, Mozes! I really can't do it without a horse. Which I don't have. Hmmm, maybe I will get one tomorrow..."], "choices": [{"nextId": "5"}]},

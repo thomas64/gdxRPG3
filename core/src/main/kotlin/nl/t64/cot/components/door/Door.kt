@@ -18,7 +18,7 @@ class Door(
     val audio: AudioEvent = type.audioEvent
     val width: Float = type.width
     val height: Float = type.height
-    var isLocked: Boolean = keyId != null
+    var isLocked: Boolean = if (keyId == null) false else true
     var isClosed: Boolean = true
     val isOpen: Boolean get() = !isClosed
 
