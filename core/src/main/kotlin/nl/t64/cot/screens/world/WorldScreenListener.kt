@@ -1,5 +1,6 @@
 package nl.t64.cot.screens.world
 
+import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
 import com.badlogic.gdx.InputAdapter
 import nl.t64.cot.Utils.gameData
@@ -38,6 +39,21 @@ internal class WorldScreenListener(
                 Constant.KEYCODE_L3, Input.Keys.H -> doBeforeLoadScreen.invoke()
             }
 
+            if (preferenceManager.isInDebugMode) {
+                if (Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)
+                    || (Gdx.input.isKeyPressed(Input.Keys.SHIFT_RIGHT))
+                ) {
+                    if (Gdx.input.isKeyPressed(Input.Keys.NUM_9)) {
+                        gameData.clock.halfHourBack()
+                        return false
+                    }
+                    if (Gdx.input.isKeyPressed(Input.Keys.NUM_0)) {
+                        gameData.clock.halfHourForward()
+                        return false
+                    }
+                }
+            }
+
             when (keycode) {
                 Constant.KEYCODE_START, Input.Keys.ESCAPE -> MenuPause.load()
                 Constant.KEYCODE_TOP, Input.Keys.I -> InventoryScreen.load()
@@ -47,8 +63,8 @@ internal class WorldScreenListener(
                 Input.Keys.F10 -> setShowGrid.invoke()
                 Input.Keys.F11 -> setShowObjects.invoke()
                 Input.Keys.F12 -> setShowDebug.invoke()
-                Input.Keys.NUM_9 -> if (preferenceManager.isInDebugMode) gameData.clock.quarterBack()
-                Input.Keys.NUM_0 -> if (preferenceManager.isInDebugMode) gameData.clock.quarterForward()
+                Input.Keys.NUM_9 -> if (preferenceManager.isInDebugMode) gameData.clock.fiveMinutesBack()
+                Input.Keys.NUM_0 -> if (preferenceManager.isInDebugMode) gameData.clock.fiveMinutesForward()
                 Input.Keys.EQUALS -> if (preferenceManager.isInDebugMode) gameData.clock.start()
                 Input.Keys.MINUS -> if (preferenceManager.isInDebugMode) gameData.clock.stop()
             }

@@ -16,19 +16,6 @@
       "5": {"text": ["I must hurry back to the forest! I need to make sure!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "should_really_be_going_to_grace"     : {
-    "name"   : "Mozes",
-    "phrases": {
-      "1": {"text": ["There's no time to waste! Grace might still be alive."]},
-      "2": {"text": ["I must hurry back to the forest! I need to make sure!"], "choices": [{"command": "EXIT"}]}
-    }
-  },
-  "dont_have_time_for_this"             : {
-    "name"   : "Mozes",
-    "phrases": {
-      "1": {"text": ["Aw man! Let's get the stuff to clear this tree quickly. I don't have that much time,", "I really need to reach Grace as soon as possible!"], "choices": [{"command": "EXIT"}]}
-    }
-  },
   "everything_is_back_again"            : {
     "name"   : "Mozes",
     "phrases": {
@@ -425,7 +412,7 @@
         ]
       },
       "3" : {"text": ["Thank you. Maybe she ate something wrong, but I think just a couple of days' rest will help her recover."], "choices": [{"nextId": "2"}]},
-      "5" : {"text": ["I haven't seen Grace or much of anything else, I'm afraid. My whole morning has been consumed with tending to Enopa. I’ve had eyes for nothing else."], "choices": [{"nextId": "2"}]},
+      "5" : {"text": ["I haven't seen Grace or much of anything else, I'm afraid. My whole morning has been consumed with tending to Enopa. I've had eyes for nothing else."], "choices": [{"nextId": "2"}]},
       "10": {"text": ["She can't! Enopa needs to recover first before she can be of any use."]},
       "11": {"text": ["And even if she recovers, she'll need horseshoes before she can go anywhere. I don't have any right now, so it's not possible."]},
       "12": {

@@ -36,22 +36,5 @@
       "6": {"text": ["Oh no! I need to make sure! She likes to go to Honeywood Forest in the north."]},
       "7": {"text": ["There could be orcs there! I'll get my sword, just in case."], "choices": [{"command": "EXIT"}]}
     }
-  },
-  "tree_has_fallen_1"        : {
-    "name"   : "Mozes",
-    "phrases": {
-      "1": {"text": ["What was that loud noise?"], "choices": [{"command": "EXIT"}]}
-    }
-  },
-  "tree_has_fallen_2"        : {
-    "name"   : "Mozes",
-    "phrases": {
-      "1": {"text": ["Dang! That's just great."]},
-      "2": {"text": [" .......... "]},
-      "3": {"text": ["Umph! I can't move it out of the way. Now I can't return."]},
-      "4": {"text": ["Alright, first things first. I need to find Grace before dark."]},
-      "5": {"text": ["It's 07:30 now, that gives me about 12 hours to find her."]},
-      "6": {"text": ["I don't think that's gonna be a problem."], "choices": [{"command": "EXIT"}]}
-    }
   }
 }

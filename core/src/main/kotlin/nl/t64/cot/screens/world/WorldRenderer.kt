@@ -14,7 +14,8 @@ import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.constants.Constant
 
 
-private val UNDER_LAYERS = intArrayOf(0, 1, 2, 3, 4, 5)
+private val BOTTOM_LAYERS = intArrayOf(0, 1, 2, 3)
+private val UNDER_LAYERS = intArrayOf(4, 5)
 private val OVER_LAYERS = intArrayOf(6, 7, 8)
 
 class WorldRenderer(private val camera: Camera) : OrthogonalTiledMapRenderer(null) {
@@ -77,6 +78,8 @@ class WorldRenderer(private val camera: Camera) : OrthogonalTiledMapRenderer(nul
 
         renderPossibleBackground()
         batch.projectionMatrix = camera.combined
+        render(BOTTOM_LAYERS)
+        renderLowerTextures()
         render(UNDER_LAYERS)
         renderDynamicMapEntities(renderEntities)
         render(OVER_LAYERS)
@@ -93,9 +96,14 @@ class WorldRenderer(private val camera: Camera) : OrthogonalTiledMapRenderer(nul
         }
     }
 
-    private fun renderDynamicMapEntities(renderEntities: (Batch) -> Unit) {
+    private fun renderLowerTextures() {
         batch.begin()
         mapManager.getLowerConditionTextures().forEach { it.render(batch) }
+        batch.end()
+    }
+
+    private fun renderDynamicMapEntities(renderEntities: (Batch) -> Unit) {
+        batch.begin()
         renderEntities.invoke(batch)
         mapManager.getUpperConditionTextures().forEach { it.render(batch) }
         batch.end()

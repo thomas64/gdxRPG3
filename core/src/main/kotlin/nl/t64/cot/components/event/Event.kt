@@ -1,7 +1,10 @@
 package nl.t64.cot.components.event
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import nl.t64.cot.Utils.audioManager
+import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.Utils.worldScreen
+import nl.t64.cot.audio.playBgm
 import nl.t64.cot.components.condition.ConditionDatabase
 
 
@@ -39,6 +42,8 @@ class Event(
         when (type) {
             "conversation" -> worldScreen.showConversationDialogFromEvent(conversationId!!, entityId!!)
             "messagebox" -> worldScreen.showMessageDialog(TextReplacer.replace(text))
+            "stop_bgm" -> audioManager.fadeBgmInThread()
+            "start_bgm" -> playBgm(mapManager.currentMap.bgm)
             else -> throw IllegalArgumentException("Event does not recognize type: '$type'.")
         }
     }

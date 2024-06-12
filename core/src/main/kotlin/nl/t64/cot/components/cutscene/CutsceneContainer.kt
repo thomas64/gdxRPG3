@@ -5,7 +5,6 @@ class CutsceneContainer {
 
     private val cutscenes: MutableMap<String, Boolean> = mutableMapOf(
         CutsceneId.SCENE_INTRO to false,
-        CutsceneId.SCENE_TREE_FALLS to false,
         CutsceneId.SCENE_ARDOR_FIRST_TIME to false,
         CutsceneId.SCENE_END_OF_CYCLE_2 to false,
         CutsceneId.SCENE_SANTINO_MURDERED to false,

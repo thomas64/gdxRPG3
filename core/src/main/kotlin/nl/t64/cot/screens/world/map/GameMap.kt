@@ -12,7 +12,6 @@ import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioEvent
-import nl.t64.cot.components.cutscene.CutsceneId
 import nl.t64.cot.screens.cutscene.SceneIntro
 import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.screens.world.entity.EntityState
@@ -178,7 +177,7 @@ class GameMap(val mapTitle: String) {
         shapeRenderer.color = Color.BLUE
 
         (portals + spawnPoints + npcs + heroes + enemies + eventDiscovers + eventCheckers + cutsceneDiscovers
-                + questDiscovers + questCheckers + notes + sparkles)
+            + questDiscovers + questCheckers + notes + sparkles)
             .map { it.rectangle }
             .forEach { shapeRenderer.rect(it.x, it.y, it.width, it.height) }
 
@@ -194,8 +193,10 @@ val TiledMap.bgm: AudioEvent
         return propertyOrNull<String>(BGM_PROPERTY)?.let {
             if (gameData.clock.isWarning()) {
                 AudioEvent.BGM_END_NEAR
-            } else if (!gameData.cutscenes.isPlayed(CutsceneId.SCENE_TREE_FALLS)
-                    && screenManager.currentScreen !is SceneIntro) {
+            } else if (
+                !gameData.events.hasEventPlayed("stop_intro_bgm")
+                && screenManager.currentScreen !is SceneIntro
+            ) {
                 AudioEvent.BGM_TENSION
             } else {
                 AudioEvent.valueOf(it.uppercase())

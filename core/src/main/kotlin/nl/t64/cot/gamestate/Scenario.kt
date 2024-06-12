@@ -14,7 +14,6 @@ class Scenario {
         addItemsToStorage()
         addQuestGraceToLogbook()
         gameData.clock.start()
-        gameData.clock.setTimeOfDay("07:00")
     }
 
     fun startSecondCycle() {
@@ -27,7 +26,6 @@ class Scenario {
 
     fun startThirdCycle() {
         reviveMozes()
-        gameData.clock.start()
         gameData.resetCycle()
         addQuestLastdennToLogbook()
         profileManager.saveProfile()

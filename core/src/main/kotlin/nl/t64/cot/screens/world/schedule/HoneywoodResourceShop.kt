@@ -24,18 +24,26 @@ class HoneywoodResourceShop : EntitySchedule() {
     )
 
     override fun handleSideEffects() {
-        if (mapManager.currentMap.mapTitle == "honeywood") {
-            if (gameData.clock.isCurrentTimeInBetween("09:00", "17:00")) {
-                val part = SchedulePart("honeywood", "09:00", "17:00", NONE, INVISIBLE, "resource3", "resource3", "resourceshop_honeywood")
-                val event = UpdateScheduledEntityEvent(part.state, part.direction, part.getCurrentPosition(), part.conversationId)
-                invisibleTalking.send(event)
-                worldScreen.addScheduledEntity(invisibleTalking)
-                brokerManager.actionObservers.addObserver(invisibleTalking)
-            }
+        if (mapManager.currentMap.mapTitle == "honeywood"
+            && gameData.clock.isCurrentTimeInBetween("09:00", "17:00")
+        ) {
+            setupInvisibleTalking()
         } else {
-            brokerManager.actionObservers.removeObserver(invisibleTalking)
-            worldScreen.removeScheduledEntity(invisibleTalking)
+            removeInvisibleTalking()
         }
+    }
+
+    private fun setupInvisibleTalking() {
+        val part = SchedulePart("honeywood", "09:00", "17:00", NONE, INVISIBLE, "resource3", "resource3", "resourceshop_honeywood")
+        val event = UpdateScheduledEntityEvent(part.state, part.direction, part.getCurrentPosition(), part.conversationId)
+        invisibleTalking.send(event)
+        worldScreen.addScheduledEntity(invisibleTalking)
+        brokerManager.actionObservers.addObserver(invisibleTalking)
+    }
+
+    private fun removeInvisibleTalking() {
+        brokerManager.actionObservers.removeObserver(invisibleTalking)
+        worldScreen.removeScheduledEntity(invisibleTalking)
     }
 
 }

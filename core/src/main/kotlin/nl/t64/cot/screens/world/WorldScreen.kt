@@ -130,6 +130,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     }
 
     fun showConversationDialogFromNpc(conversationId: String, npcEntity: Entity) {
+        if (gameState == GameState.DIALOG) return
         currentNpcEntity = npcEntity
         player.resetInput()
         gameState = GameState.DIALOG
@@ -155,6 +156,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     }
 
     fun showNoteDialog(noteId: String) {
+        if (gameState == GameState.DIALOG) return
         player.resetInput()
         gameState = GameState.DIALOG
         conversationDialog.loadNote(noteId)

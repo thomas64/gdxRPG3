@@ -73,6 +73,18 @@ class AudioManager {
         (queuedBgm + queuedBgs).forEach { fade(it.value, it.key.volume) }
     }
 
+    fun fadeBgmInThread() {
+        thread {
+            while (true) {
+                certainBgmFade()
+                if (queuedBgm.values.none { it.isPlaying }) {
+                    break
+                }
+                Thread.sleep(5L)
+            }
+        }
+    }
+
     fun possibleBgmSwitch(prevBgm: AudioEvent, nextBgm: AudioEvent) {
         if (prevBgm != nextBgm) {
             certainBgmSwitch(nextBgm)

@@ -1,72 +1,70 @@
 {
-  "fallen_tree"         : {
-    "type"          : "conversation",
-    "condition"     : ["_c_!=_f_q_quest_helping_horse"],
-    "conversationId": "fallen_tree",
-    "entityId"      : "mozes",
-    "doesRepeat"    : true
+  "stop_intro_bgm"        : {
+    "type": "stop_bgm"
   },
-  "found_grace_ribbon"  : {
+  "start_bgm"             : {
+    "type": "start_bgm"
+  },
+  "find_grace_before_dark": {
+    "type"          : "conversation",
+    "conversationId": "find_grace_before_dark",
+    "entityId"      : "mozes"
+  },
+  "found_grace_ribbon"    : {
     "type"          : "conversation",
     "condition"     : ["_n_1_>=_item_grace_ribbon", "_rc_===_u_q_quest_royal_sacrifice"],
     "conversationId": "found_grace_ribbon",
     "entityId"      : "mozes"
   },
-  "cave_not_yet_found"  : {
+  "cave_not_yet_found"    : {
     "type"          : "conversation",
     "condition"     : ["_r_==_u_q_quest_grace_is_missing", "_ta_1_q_quest_grace_is_missing"],
     "conversationId": "dont_go_south",
     "entityId"      : "mozes"
   },
-  "found_honeywood_cave": {
+  "found_honeywood_cave"  : {
     "type"          : "conversation",
     "conversationId": "found_honeywood_cave",
     "entityId"      : "mozes"
   },
-  "talking_orc_guards"  : {
+  "talking_orc_guards"    : {
     "type"          : "conversation",
     "condition"     : ["_c_!=_f_q_this"],
     "conversationId": "quest_orc_guards",
     "entityId"      : "orc_sergeant",
     "doesRepeat"    : true
   },
-  "find_dead_orcs"      : {
+  "find_dead_orcs"        : {
     "type"          : "conversation",
     "conversationId": "find_dead_orcs",
     "entityId"      : "mozes"
   },
-  "check_dead_orc"      : {
+  "check_dead_orc"        : {
     "type"          : "conversation",
     "condition"     : ["!been_in_fairy_town"],
     "conversationId": "find_dead_orcs",
     "entityId"      : "mozes",
     "doesRepeat"    : true
   },
-  "enter_great_tree"    : {
+  "enter_great_tree"      : {
     "type"          : "conversation",
     "conversationId": "fairy_welcome",
     "entityId"      : "fairy3"
   },
-  "find_great_tree"     : {
+  "find_great_tree"       : {
     "type"          : "conversation",
     "conversationId": "find_great_tree",
     "entityId"      : "mozes"
   },
-  "defeated_orc_guards" : {
+  "defeated_orc_guards"   : {
     "type"          : "conversation",
     "condition"     : ["defeated_orc_guards"],
     "conversationId": "defeated_orc_guards",
     "entityId"      : "mozes"
   },
-  "notice_dense_fog"    : {
+  "notice_dense_fog"      : {
     "type"          : "conversation",
     "conversationId": "notice_dense_fog",
-    "entityId"      : "mozes"
-  },
-  "back_were_i_started" : {
-    "type"          : "conversation",
-    "condition"     : ["_c_==_f_q_quest_helping_horse"],
-    "conversationId": "back_were_i_started",
     "entityId"      : "mozes"
   }
 }
