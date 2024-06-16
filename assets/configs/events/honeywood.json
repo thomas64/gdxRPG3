@@ -18,17 +18,18 @@
     "conversationId": "everything_is_normal_again",
     "entityId"      : "mozes"
   },
+  "event_lennor_is_finished"  : {
+    "type"          : "conversation",
+    "condition"     : ["_time_at_13:00", "_c_!=_f_q_quest_helping_horse"],
+    "conversationId": "lennor_is_finished",
+    "entityId"      : "man02",
+    "doesRepeat"    : true
+  },
   "everything_is_back_again"  : {
     "type"          : "conversation",
     "condition"     : ["_rc_==_a_q_quest_priest_of_lastdenn"],
     "conversationId": "everything_is_back_again",
     "entityId"      : "mozes"
-  },
-  "a_tree_has_fallen"         : {
-    "type"          : "conversation",
-    "condition"     : ["!talked_to_lennor", "_c_==_a_q_quest_royal_sacrifice"],
-    "conversationId": "quest_helping_horse",
-    "entityId"      : "man02"
   },
   "dont_go_up_there"          : {
     "type"          : "conversation",

@@ -25,6 +25,10 @@ object ConditionConverter {
 
     fun isMeetingTimeCondition(conditionId: String): Boolean {
         return when {
+            conditionId.contains("_at_") -> {
+                val time = getOneTimeUnit("_at_", conditionId)
+                gameData.clock.isCurrentTimeAt(time)
+            }
             conditionId.contains("_between_") -> {
                 val (startTime, endTime) = getTwoTimeUnits("_between_", conditionId)
                 gameData.clock.isCurrentTimeInBetween(startTime, endTime)

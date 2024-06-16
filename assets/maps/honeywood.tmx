@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="96" height="78" tilewidth="24" tileheight="24" infinite="0" nextlayerid="59" nextobjectid="495">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="96" height="78" tilewidth="24" tileheight="24" infinite="0" nextlayerid="59" nextobjectid="504">
  <properties>
   <property name="bgm" value="bgm_honeywood"/>
   <property name="lightmap_camera" value="sunlight"/>
@@ -150,7 +150,7 @@
   <object id="333" name="sand" x="288" y="456" width="48" height="24"/>
   <object id="493" name="sand" x="2280" y="384" width="24" height="48"/>
  </objectgroup>
- <objectgroup color="#aa0000" id="8" name="collision" visible="0">
+ <objectgroup color="#aa0000" id="8" name="collision">
   <object id="2" x="768" y="0" width="1152" height="240"/>
   <object id="3" x="0" y="0" width="768" height="144"/>
   <object id="4" x="720" y="192" width="48" height="48"/>
@@ -395,13 +395,6 @@
     <property name="direction" value="north"/>
    </properties>
   </object>
-  <object id="451" name="man02" x="2166" y="396" width="48" height="24">
-   <properties>
-    <property name="condition" value="_rc_===_u_q_quest_royal_sacrifice"/>
-    <property name="conversation" value="lennor"/>
-    <property name="direction" value="east"/>
-   </properties>
-  </object>
   <object id="455" name="soldier01" type="inv" x="960" y="1902" width="6" height="6">
    <properties>
     <property name="conversation" value="dont_forget_to_save"/>
@@ -419,6 +412,11 @@
     <property name="condition" value="_c_==_f_q_this"/>
     <property name="conversation" value="quest_helping_horse"/>
     <property name="direction" value="east"/>
+   </properties>
+  </object>
+  <object id="497" name="man02" type="inv" x="2208" y="552" width="24" height="24">
+   <properties>
+    <property name="conversation" value="lennor_is_finished"/>
    </properties>
   </object>
  </objectgroup>
@@ -446,45 +444,45 @@
   <object id="403" name="alva_road_east" x="744" y="1872" width="624" height="24"/>
  </objectgroup>
  <objectgroup color="#ffaa7f" id="14" name="save"/>
- <objectgroup id="50" name="lower_texture">
+ <objectgroup id="50" name="lower_texture" visible="0">
   <object id="477" name="quest_helping_horse" gid="16525" x="2208" y="378" width="24" height="24">
    <properties>
-    <property name="condition" value="_c_!=_f_q_this"/>
+    <property name="condition" value="_c_!=_f_q_this, _time_before_13:01"/>
    </properties>
   </object>
   <object id="478" name="quest_helping_horse" gid="16557" x="2208" y="402" width="24" height="24">
    <properties>
-    <property name="condition" value="_c_!=_f_q_this"/>
+    <property name="condition" value="_c_!=_f_q_this, _time_before_13:01"/>
    </properties>
   </object>
   <object id="479" name="quest_helping_horse" gid="16589" x="2208" y="426" width="24" height="24">
    <properties>
-    <property name="condition" value="_c_!=_f_q_this"/>
+    <property name="condition" value="_c_!=_f_q_this, _time_before_13:01"/>
    </properties>
   </object>
   <object id="480" name="quest_helping_horse" gid="16621" x="2208" y="450" width="24" height="24">
    <properties>
-    <property name="condition" value="_c_!=_f_q_this"/>
+    <property name="condition" value="_c_!=_f_q_this, _time_before_13:01"/>
    </properties>
   </object>
   <object id="481" name="quest_helping_horse" gid="16622" x="2232" y="450" width="24" height="24">
    <properties>
-    <property name="condition" value="_c_!=_f_q_this"/>
+    <property name="condition" value="_c_!=_f_q_this, _time_before_13:01"/>
    </properties>
   </object>
   <object id="482" name="quest_helping_horse" gid="16590" x="2232" y="426" width="24" height="24">
    <properties>
-    <property name="condition" value="_c_!=_f_q_this"/>
+    <property name="condition" value="_c_!=_f_q_this, _time_before_13:01"/>
    </properties>
   </object>
   <object id="483" name="quest_helping_horse" gid="16558" x="2232" y="402" width="24" height="24">
    <properties>
-    <property name="condition" value="_c_!=_f_q_this"/>
+    <property name="condition" value="_c_!=_f_q_this, _time_before_13:01"/>
    </properties>
   </object>
   <object id="484" name="quest_helping_horse" gid="16526" x="2232" y="378" width="24" height="24">
    <properties>
-    <property name="condition" value="_c_!=_f_q_this"/>
+    <property name="condition" value="_c_!=_f_q_this, _time_before_13:01"/>
    </properties>
   </object>
  </objectgroup>
@@ -502,7 +500,7 @@
   </object>
   <object id="488" name="quest_helping_horse" type="blocker" x="2208" y="384" width="48" height="48">
    <properties>
-    <property name="condition" value="_c_!=_f_q_this"/>
+    <property name="condition" value="_c_!=_f_q_this, _time_before_13:01"/>
    </properties>
   </object>
  </objectgroup>
@@ -515,10 +513,9 @@
   <object id="432" name="go_to_the_forest_1" type="discover" x="1908" y="1092" width="72" height="12"/>
   <object id="433" name="go_to_the_forest_1" type="discover" x="576" y="852" width="240" height="12"/>
   <object id="434" name="go_to_the_forest_1" type="discover" x="324" y="864" width="12" height="48"/>
-  <object id="449" name="guide_event_action" type="discover" x="984" y="912" width="24" height="96"/>
-  <object id="437" name="guide_event_action" type="discover" x="1512" y="384" width="24" height="96"/>
-  <object id="438" name="guide_event_action" type="discover" x="720" y="1152" width="168" height="24"/>
-  <object id="450" name="guide_event_action" type="discover" x="192" y="1200" width="96" height="24"/>
+  <object id="449" name="guide_event_action" type="discover" x="480" y="528" width="24" height="96"/>
+  <object id="437" name="guide_event_action" type="discover" x="672" y="528" width="24" height="120"/>
+  <object id="450" name="guide_event_action" type="discover" x="480" y="624" width="192" height="24"/>
   <object id="440" name="go_to_the_forest_2" type="check" x="1056" y="840" width="48" height="24"/>
   <object id="441" name="go_to_the_forest_2" type="check" x="624" y="1368" width="48" height="24"/>
   <object id="446" name="go_to_the_forest_2" type="check" x="480" y="840" width="48" height="24"/>
@@ -527,6 +524,7 @@
   <object id="165" name="note_resource_shop" type="check" x="1440" y="1248" width="48" height="48"/>
   <object id="166" name="note_equipment_shop" type="check" x="1584" y="1248" width="48" height="48"/>
   <object id="472" name="note_honeywood_academy" type="check" x="1632" y="1344" width="48" height="48"/>
+  <object id="496" name="event_lennor_is_finished" type="discover" x="1464" y="0" width="840" height="792" visible="0"/>
  </objectgroup>
  <objectgroup color="#aaff00" id="57" name="scheduled">
   <object id="456" name="resource1" x="1488" y="1128" width="48" height="24"/>
@@ -542,5 +540,11 @@
   <object id="469" name="academy_e1" x="1536" y="1392" width="48" height="24"/>
   <object id="470" name="academy_f1" x="1488" y="1416" width="48" height="24"/>
   <object id="471" name="academy_e2" x="1632" y="1440" width="48" height="24"/>
+  <object id="500" name="lennor1" x="816" y="1080" width="48" height="24"/>
+  <object id="501" name="lennor2" x="648" y="648" width="48" height="24"/>
+  <object id="502" name="lennor3" x="936" y="444" width="48" height="24"/>
+  <object id="503" name="lennor4" x="1872" y="444" width="48" height="24"/>
+  <object id="498" name="lennor5" x="2166" y="396" width="48" height="24"/>
+  <object id="499" name="lennor6" x="2016" y="456" width="48" height="24"/>
  </objectgroup>
 </map>

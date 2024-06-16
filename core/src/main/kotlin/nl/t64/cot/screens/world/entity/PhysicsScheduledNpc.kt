@@ -32,7 +32,9 @@ class PhysicsScheduledNpc : PhysicsComponent() {
         }
         if (event is OnActionEvent) {
             if (event.checkRect.overlaps(boundingBox)) {
-                direction = currentPosition.turnToPlayer(event.playerPosition, direction)
+                if (state != EntityState.IMMOBILE) {
+                    direction = currentPosition.turnToPlayer(event.playerPosition, direction)
+                }
                 isSelected = true
             }
         }

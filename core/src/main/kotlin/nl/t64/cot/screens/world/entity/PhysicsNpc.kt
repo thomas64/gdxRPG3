@@ -46,7 +46,7 @@ class PhysicsNpc : PhysicsComponent() {
         currentPosition = loadEvent.position
         direction = loadEvent.direction!!
         conversationId = loadEvent.conversationOrBattleId!!
-        setWanderBox()
+        if (state != EntityState.INVISIBLE) setWanderBox()
         setBoundingBox()
     }
 
@@ -65,6 +65,7 @@ class PhysicsNpc : PhysicsComponent() {
         shapeRenderer.color = Color.PURPLE
         if (state != EntityState.IMMOBILE
             && state != EntityState.IDLE_ANIMATING
+            && state != EntityState.INVISIBLE
         ) {
             shapeRenderer.rect(wanderBox.x, wanderBox.y, wanderBox.width, wanderBox.height)
         }

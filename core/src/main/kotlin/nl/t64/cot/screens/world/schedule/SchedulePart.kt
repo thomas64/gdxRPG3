@@ -3,6 +3,7 @@ package nl.t64.cot.screens.world.schedule
 import com.badlogic.gdx.math.Vector2
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.mapManager
+import nl.t64.cot.components.condition.ConditionDatabase
 import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.screens.world.entity.EntityState
 import kotlin.math.abs
@@ -17,7 +18,12 @@ class SchedulePart(
     private val startPositionId: String,
     private val endPositionId: String,
     val conversationId: String = "",
+    private val conditionIds: List<String> = emptyList()
 ) {
+
+    fun isMeetingConditions(): Boolean {
+        return ConditionDatabase.isMeetingConditions(conditionIds)
+    }
 
     fun isCurrentMapInState(): Boolean {
         val currentMap: String = mapManager.currentMap.mapTitle

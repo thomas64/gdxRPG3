@@ -43,7 +43,7 @@
       "4" : {"text": ["It appears Ylarus won't be divine intervening any further, leaving me to rely on this crystal before time runs out."]},
       "5" : {"text": ["With this newfound ability to revert time, am I now Adan's only hope to prevent it's destruction?"]},
       "6" : {"text": [". . ."]},
-      "7" : {"text": ["*SIGH* This is a lot to take in."]},
+      "7" : {"text": ["*Sigh* This is a lot to take in."]},
       "8" : {"text": [". . ."]},
       "9" : {"text": ["Grace needs me, but I cannot be there just yet. Hold on, Grace! I will come back for you!"]},
       "10": {"text": ["Now, following Ylarus's guidance, my first step is to look for the priest of Lastdenn..."], "choices": [{"command": "EXIT"}]}

@@ -35,7 +35,7 @@ object ConditionDatabase {
     fun isMeetingConditions(conditionIds: List<String?>, questId: String? = null): Boolean {
         return when {
             conditionIds.isEmpty() -> true
-            else -> conditionIds.map { isMeetingCondition(it!!, questId) }.all { it }
+            else -> conditionIds.all { isMeetingCondition(it!!, questId) }
         }
     }
 

@@ -15,6 +15,7 @@ abstract class EntitySchedule {
     fun update() {
         scheduleParts
             .filter { it.isCurrentMapInState() }
+            .filter { it.isMeetingConditions() }
             .singleOrNull { it.isCurrentTimeInState() }
             ?.handle()
             ?: remove()
@@ -26,6 +27,7 @@ abstract class EntitySchedule {
         worldScreen.addScheduledEntity(entity)
         handleTalking()
         handleBlocking()
+        handleBumping()
     }
 
     private fun SchedulePart.handleTalking() {
@@ -37,11 +39,17 @@ abstract class EntitySchedule {
     }
 
     private fun SchedulePart.handleBlocking() {
-        if (state == EntityState.IDLE) {
+        if (state in listOf(EntityState.IDLE, EntityState.IMMOBILE)) {
             brokerManager.blockObservers.addObserver(entity)
-            brokerManager.bumpObservers.addObserver(entity)
         } else {
             brokerManager.blockObservers.removeObserver(entity)
+        }
+    }
+
+    private fun SchedulePart.handleBumping() {
+        if (state == EntityState.IDLE) {
+            brokerManager.bumpObservers.addObserver(entity)
+        } else {
             brokerManager.bumpObservers.removeObserver(entity)
         }
     }

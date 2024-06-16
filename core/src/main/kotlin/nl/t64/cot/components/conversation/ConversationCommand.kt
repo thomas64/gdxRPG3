@@ -19,6 +19,7 @@ enum class ConversationCommand {
     RECEIVE_ITEM,
     START_BATTLE,
     RELOAD_NPCS,
+    FADE_TO_BLACK_13,
 
     KNOW_QUEST,
     ACCEPT_QUEST,

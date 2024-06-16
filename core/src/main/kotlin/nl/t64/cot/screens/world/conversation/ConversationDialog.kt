@@ -187,6 +187,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             ConversationCommand.RECEIVE_ITEM -> receiveItem()
             ConversationCommand.START_BATTLE -> startBattle(nextId)
             ConversationCommand.RELOAD_NPCS -> reloadNpcs(nextId)
+            ConversationCommand.FADE_TO_BLACK_13 -> fadeToBlack(nextId, "13:01")
 
             ConversationCommand.KNOW_QUEST -> knowQuest(nextId)
             ConversationCommand.ACCEPT_QUEST -> acceptQuest(nextId)
@@ -307,6 +308,13 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     private fun reloadNpcs(nextId: String) {
         endConversation(nextId)
         conversationObserver.notifyReloadNpcs()
+    }
+
+    private fun fadeToBlack(nextId: String, time: String) {
+        endConversation(nextId)
+        worldScreen.fadeOut(Color.BLACK, 2f, TransitionPurpose.JUST_FADE) {
+            gameData.clock.setTimeOfDay(time)
+        }
     }
 
     private fun knowQuest(nextId: String) {
