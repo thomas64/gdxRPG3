@@ -11,6 +11,7 @@ import nl.t64.cot.screens.world.mapobjects.GameMapRelocator
 class WorldSchedule {
 
     private var entitySchedules: List<EntitySchedule> = listOf(Lennor(),
+                                                               BlackSmith(),
                                                                HoneywoodResourceShop(),
                                                                HoneywoodEquipShop(),
                                                                HoneywoodAcademy1(),

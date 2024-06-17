@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="96" height="78" tilewidth="24" tileheight="24" infinite="0" nextlayerid="59" nextobjectid="504">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="96" height="78" tilewidth="24" tileheight="24" infinite="0" nextlayerid="59" nextobjectid="513">
  <properties>
   <property name="bgm" value="bgm_honeywood"/>
   <property name="lightmap_camera" value="sunlight"/>
@@ -283,10 +283,10 @@
   <object id="163" name="note_stump" x="1824" y="384" width="48" height="48"/>
   <object id="337" name="door_simple_left4" x="480" y="768" width="48" height="96"/>
   <object id="338" name="door_simple_left3" x="528" y="432" width="48" height="96"/>
-  <object id="339" name="door_simple_left2" x="720" y="432" width="48" height="96"/>
+  <object id="339" name="door_honeywood_smith" x="720" y="432" width="42" height="96"/>
   <object id="336" name="door_simple_left1" x="624" y="1296" width="48" height="96"/>
   <object id="340" name="door_forged_left" x="1056" y="768" width="48" height="96"/>
-  <object id="390" name="note_black_smith" x="768" y="456" width="48" height="66"/>
+  <object id="390" name="note_honeywood_smith" x="774" y="456" width="42" height="66"/>
   <object id="428" name="sparkle_honeywood_7" x="1344" y="912" width="48" height="48"/>
   <object id="431" name="sparkle_honeywood_6" x="192" y="1392" width="48" height="48"/>
   <object id="427" name="sparkle_honeywood_5" x="1344" y="1584" width="48" height="48"/>
@@ -519,7 +519,6 @@
   <object id="440" name="go_to_the_forest_2" type="check" x="1056" y="840" width="48" height="24"/>
   <object id="441" name="go_to_the_forest_2" type="check" x="624" y="1368" width="48" height="24"/>
   <object id="446" name="go_to_the_forest_2" type="check" x="480" y="840" width="48" height="24"/>
-  <object id="445" name="go_to_the_forest_2" type="check" x="720" y="504" width="48" height="24"/>
   <object id="454" name="event_dont_forget_to_save" type="discover" x="768" y="1848" width="576" height="12"/>
   <object id="165" name="note_resource_shop" type="check" x="1440" y="1248" width="48" height="48"/>
   <object id="166" name="note_equipment_shop" type="check" x="1584" y="1248" width="48" height="48"/>
@@ -540,11 +539,18 @@
   <object id="469" name="academy_e1" x="1536" y="1392" width="48" height="24"/>
   <object id="470" name="academy_f1" x="1488" y="1416" width="48" height="24"/>
   <object id="471" name="academy_e2" x="1632" y="1440" width="48" height="24"/>
-  <object id="500" name="lennor1" x="816" y="1080" width="48" height="24"/>
-  <object id="501" name="lennor2" x="648" y="648" width="48" height="24"/>
+  <object id="500" name="lennor1" x="816" y="1128" width="48" height="24"/>
+  <object id="501" name="lennor2" x="696" y="666" width="48" height="24"/>
   <object id="502" name="lennor3" x="936" y="444" width="48" height="24"/>
-  <object id="503" name="lennor4" x="1872" y="444" width="48" height="24"/>
+  <object id="503" name="lennor4" x="1806" y="444" width="48" height="24"/>
   <object id="498" name="lennor5" x="2166" y="396" width="48" height="24"/>
   <object id="499" name="lennor6" x="2016" y="456" width="48" height="24"/>
+  <object id="505" name="smith1" x="720" y="504" width="48" height="24"/>
+  <object id="506" name="smith2" x="720" y="528" width="48" height="24"/>
+  <object id="507" name="smith3" x="696" y="636" width="48" height="24"/>
+  <object id="508" name="smith4" x="768" y="972" width="48" height="24"/>
+  <object id="509" name="smith5" x="960" y="972" width="48" height="24"/>
+  <object id="510" name="smith6" x="1056" y="924" width="48" height="24"/>
+  <object id="511" name="smith7" x="1056" y="840" width="48" height="24"/>
  </objectgroup>
 </map>

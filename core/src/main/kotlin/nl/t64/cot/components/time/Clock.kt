@@ -115,7 +115,9 @@ class Clock {
     }
 
     fun isCurrentTimeAt(time: String): Boolean {
-        return currentTime.isEqual(time.toGameTime())
+        val startTime = time.toGameTime()
+        val endTime = time.toGameTime().plusMinutes(1L)
+        return isCurrentTimeInBetween(startTime, endTime)
     }
 
     fun getPercentageOfDay(): Float {

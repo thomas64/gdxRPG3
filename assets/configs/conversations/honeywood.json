@@ -52,10 +52,39 @@
       "40": {"text": ["Have you found her yet? Quickly dear, go to Honeywood Forest."], "choices": [{"command": "EXIT", "nextId": "40"}]}
     }
   },
+  "lennor_on_the_way"                   : {
+    "name"   : "Lennor",
+    "phrases": {
+      "1" : {"text": ["Hey Mozes, I'm on my way to Honeywood Farm. A large tree has fallen on the road this morning. I've been asked to remove it."]},
+      "2" : {
+        "choices": [
+          {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "text": "*Ask Lennor if he's seen Grace this morning.*", "nextId": "3"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "3" : {"face": "man02", "name": "Lennor", "text": ["Grace? No, I haven't seen her. Why? What happened?"]},
+      "4" : {"face": "mozes", "name": "Mozes", "text": ["She's missing. I woke up this morning and she wasn't in her bed."]},
+      "5" : {"face": "man02", "name": "Lennor", "text": ["That's concerning. Are you sure she's not just playing somewhere in the village?"]},
+      "6" : {"face": "mozes", "name": "Mozes", "text": ["I'm not certain, but I fear she might have gone to Honeywood Forest, and there are orcs."]},
+      "7" : {"face": "man02", "name": "Lennor", "text": ["Is there anything I can do to help?"]},
+      "8" : {"face": "mozes", "name": "Mozes", "text": ["I appreciate the offer, Lennor, but I think I'll manage. Please keep an eye out for Grace."], "choices": [{"command": "EXIT", "nextId": "10"}]},
+      "10": {"face": "man02", "name": "Lennor", "text": ["Weren't you heading to Honeywood Forest? Did you find her?"], "choices": [{"command": "EXIT", "nextId": "10"}]}
+    }
+  },
+  "lennor_and_johanna_meet"             : {
+    "phrases": {
+      "1": {"face": "man02", "name": "Lennor", "text": ["Hey Mrs. Johanna! How are you today?"]},
+      "2": {"face": "oldwoman01", "name": "Mrs. Johanna", "text": ["Lennor, my dear, it's a beautiful morning, isn't it?"]},
+      "3": {"face": "oldwoman01", "name": "Mrs. Johanna", "text": ["Have you seen the road to Honeywood Farm?"]},
+      "4": {"face": "man02", "name": "Lennor", "text": ["Yes, I'm actually on my way there now. A large tree has fallen on the road this morning and I've been asked to remove it."]},
+      "5": {"face": "oldwoman01", "name": "Mrs. Johanna", "text": ["Oh, I see. I hope you'll be able to clear it soon."]},
+      "6": {"face": "man02", "name": "Lennor", "text": ["I hope so too. I'll do my best."], "choices": [{"command": "EXIT"}]}
+    }
+  },
   "quest_helping_horse"                 : {
     "name"   : "Lennor",
     "phrases": {
-      "1" : {"text": ["Hey Mozes, you can't go to Honeywood Farm at the moment. A large tree fell on the road this morning. I'm busy removing it, but I think it'll take me until 13:00."]},
+      "1" : {"text": ["Hey Mozes, you can't go to Honeywood Farm at the moment. A large tree has fallen on the road this morning. I'm busy removing it, but I think it'll take me until 13:00."]},
       "2" : {
         "choices": [
           {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "text": "*Ask Lennor if he's seen Grace this morning.*", "nextId": "3"},
@@ -557,6 +586,27 @@
       "90"  : {"text": ["Mozes, I wish you the best of luck on your journey."], "choices": [{"command": "EXIT"}]},
       "1199": {"text": ["Mozes, it seems you've forgotten something."], "choices": [{"command": "RECEIVE_ITEM_FOR_QUEST"}]},
       "1200": {"text": ["Greetings, Mozes. How may I be of service today?"], "choices": [{"nextId": "2"}]}
+    }
+  },
+  "black_smith_on_the_way"              : {
+    "name"   : "Black Smith",
+    "phrases": {
+      "1": {"text": ["Howdy, neighbor! I'm on my way to the village elder. He needs some repairs done. If you need me, I'll be back by 11:00."]},
+      "2": {
+        "choices": [
+          {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "text": "*Ask Black if he's seen Grace this morning.*", "nextId": "3"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "3": {"text": ["No, I'm sorry, I just got outside. She might be out playing somewhere?"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "black_and_lennor_meet"               : {
+    "phrases": {
+      "1": {"face": "man07", "name": "Black Smith", "text": ["Howdy Lennor! What's the rush this early in the morning?"]},
+      "2": {"face": "man02", "name": "Lennor", "text": ["Hey Black, a tree has fallen on the road to Honeywood Farm. I've been asked to remove it."]},
+      "3": {"face": "man07", "name": "Black Smith", "text": ["Alright, I won't keep you then. I'm off to do some repair work for the village elder."]},
+      "4": {"face": "man02", "name": "Lennor", "text": ["Thanks, goodbye."], "choices": [{"command": "EXIT"}]}
     }
   },
   "quest_get_horseshoes"                : {

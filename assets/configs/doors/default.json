@@ -1,7 +1,7 @@
 {
   "door_simple_left"           : {"type": "SMALL", "spriteId": "simple_left"},
   "door_simple_left1"          : {"type": "SMALL", "spriteId": "simple_left", "condition": ["_rc_>=_a_q_quest_helping_horse"]},
-  "door_simple_left2"          : {"type": "SMALL", "spriteId": "simple_left", "condition": ["_rc_>=_a_q_quest_helping_horse"]},
+  "door_simple_left2"          : {"type": "SMALL", "spriteId": "simple_left"},
   "door_simple_left3"          : {"type": "SMALL", "spriteId": "simple_left"},
   "door_simple_left4"          : {"type": "SMALL", "spriteId": "simple_left", "condition": ["_rc_>=_a_q_quest_helping_horse"]},
   "door_luxurious_left"        : {"type": "SMALL", "spriteId": "luxurious_left"},

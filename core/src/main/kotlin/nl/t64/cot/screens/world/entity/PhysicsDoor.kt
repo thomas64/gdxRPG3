@@ -19,6 +19,7 @@ class PhysicsDoor(private val door: Door) : PhysicsComponent() {
     private val stringBuilder: StringBuilder = StringBuilder()
     private var isSelected: Boolean = false
     private var isSelectedByNpc: Boolean = false
+    private var isOpenedByNpc: Boolean = false
     private var closingDoorTime: Float = DEFAULT_CLOSE_TIME
 
     override fun receive(event: Event) {
@@ -109,11 +110,13 @@ class PhysicsDoor(private val door: Door) : PhysicsComponent() {
             door.unlock()
         } else {
             door.lock()
+            if (isOpenedByNpc) return
             closeWhenOpenAndAddBlocker(false)
         }
     }
 
     private fun openDoorByNpc() {
+        isOpenedByNpc = true
         closingDoorTime = NPC_DOOR_OPEN_TIME
         openWhenClosedAndRemoveBlocker(false)
         brokerManager.blockObservers.addObserver(entity)
@@ -150,6 +153,7 @@ class PhysicsDoor(private val door: Door) : PhysicsComponent() {
             door.close()
             entity.send(StateEvent(EntityState.CLOSING))
             brokerManager.blockObservers.addObserver(entity)
+            isOpenedByNpc = false
         }
     }
 
