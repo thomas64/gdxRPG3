@@ -12,6 +12,7 @@ import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.screens.cutscene.CutsceneScreen
 import nl.t64.cot.screens.cutscene.SceneIntro
 import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.screens.world.entity.EntityState
@@ -191,7 +192,10 @@ class GameMap(val mapTitle: String) {
 val TiledMap.bgm: AudioEvent
     get() {
         return propertyOrNull<String>(BGM_PROPERTY)?.let {
-            if (gameData.clock.isWarning()) {
+            if (
+                gameData.clock.isWarning()
+                && screenManager.currentScreen !is CutsceneScreen
+            ) {
                 AudioEvent.BGM_END_NEAR
             } else if (
                 !gameData.events.hasEventPlayed("stop_intro_bgm")

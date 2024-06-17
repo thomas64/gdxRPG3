@@ -353,8 +353,7 @@
           {"condition": ["i_c_==_k_q_this"], "text": "*Offer to help with the bat situation.*", "command": "ACCEPT_QUEST", "nextId": "20"},
           {"condition": ["i_c_==_a_q_this", "i_tn_1_q_this"], "text": "*Inquire further about the location of the bats.*", "nextId": "40"},
           {"condition": ["i_ta_1_q_this"], "text": "*Inform her that the bats have been dealt with.*", "nextId": "50"},
-          {"condition": ["i_n_1_<_item_crystal_of_time"], "text": "*Accept the offer for some rest.* [BLUE](Restore health)", "command": "HEAL_LIFE_01", "nextId": "3"},
-          {"condition": ["i_n_1_==_item_crystal_of_time"], "text": "*Accept the offer for some rest.* [BLUE](Restore health)", "nextId": "4"},
+          {"text": "*Accept the offer for some rest.* [BLUE](Restore health)", "nextId": "4"},
           {"condition": ["i_r_>=_k_q_this", "i_c_==_u_q_this"], "text": "*Express your concern about the innkeeper's troubled demeanor.*", "nextId": "10"},
           {"condition": ["i_r_>=_k_q_this", "i_c_==_u_q_this"], "text": "*Offer to help with the bat situation she will mention.*", "command": "ACCEPT_QUEST", "nextId": "15"},
           {"text": "*Decline the offer for now. Take your leave.*", "command": "EXIT"}
@@ -364,7 +363,7 @@
       "4"   : {"text": ["How long would you like to rest?"]},
       "5"   : {
         "choices": [
-          {"text": "* Just a short rest. *", "command": "HEAL_LIFE_01", "nextId": "3"},
+          {"text": "* Just a 1 hour rest. *", "command": "HEAL_LIFE_01", "nextId": "3"},
           {"condition": ["i_time_before_08:00"], "text": "* Until 09:00. *", "command": "HEAL_LIFE_09", "nextId": "3"},
           {"condition": ["i_time_before_11:00"], "text": "* Until 12:00. *", "command": "HEAL_LIFE_12", "nextId": "3"},
           {"condition": ["i_time_before_14:00"], "text": "* Until 15:00. *", "command": "HEAL_LIFE_15", "nextId": "3"},

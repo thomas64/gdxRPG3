@@ -63,6 +63,7 @@ class DialogQuestion(
     }
 
     private fun selectDialogItem() {
+        dialog.clearListeners()
         when (selectedIndex) {
             0 -> processYesButton()
             1 -> processNoButton()

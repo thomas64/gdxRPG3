@@ -99,8 +99,7 @@
       "1": {"text": ["Wonderful dear Mozes, please lie down here on this bed of healing flowers so that your weary bones may find some rest."]},
       "2": {
         "choices": [
-          {"condition": ["i_n_1_<_item_crystal_of_time"], "text": "*Healing flowers? Is that a thing? This may be interesting.* [BLUE](Restore health)", "command": "HEAL_LIFE_01", "nextId": "3"},
-          {"condition": ["i_n_1_==_item_crystal_of_time"], "text": "*Healing flowers? Is that a thing? This may be interesting.* [BLUE](Restore health)", "nextId": "4"},
+          {"text": "*Healing flowers? Is that a thing? This may be interesting.* [BLUE](Restore health)", "nextId": "4"},
           {"text": "*Kindly let her know that you'll pass this time. Take your leave.*", "command": "EXIT"}
         ]
       },
@@ -108,7 +107,7 @@
       "4": {"text": ["How long would you like to lie down?"]},
       "5": {
         "choices": [
-          {"text": "* Just a short rest. *", "command": "HEAL_LIFE_01", "nextId": "3"},
+          {"text": "* Just a 1 hour rest. *", "command": "HEAL_LIFE_01", "nextId": "3"},
           {"condition": ["i_time_before_08:00"], "text": "* Until 09:00. *", "command": "HEAL_LIFE_09", "nextId": "3"},
           {"condition": ["i_time_before_11:00"], "text": "* Until 12:00. *", "command": "HEAL_LIFE_12", "nextId": "3"},
           {"condition": ["i_time_before_14:00"], "text": "* Until 15:00. *", "command": "HEAL_LIFE_15", "nextId": "3"},

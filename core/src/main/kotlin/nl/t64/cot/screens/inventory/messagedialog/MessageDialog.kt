@@ -71,6 +71,7 @@ class MessageDialog(private val message: String) {
     }
 
     private fun hide() {
+        dialog.clearListeners()
         if (playClosingSound) {
             playSe(AudioEvent.SE_CONVERSATION_NEXT)
         }

@@ -103,7 +103,7 @@
   <object id="71" x="312" y="0" width="48" height="72"/>
  </objectgroup>
  <objectgroup color="#5500ff" id="16" name="rest">
-  <object id="76" name="sparkle0003" type="short" x="336" y="120" width="48" height="48"/>
+  <object id="76" name="sparkle0003" type="short" x="318" y="102" width="48" height="48"/>
   <object id="85" name="note_grace_to_parents" x="456" y="192" width="48" height="48"/>
  </objectgroup>
  <objectgroup color="#ff007f" id="21" name="enemy"/>
@@ -120,7 +120,7 @@
  <objectgroup color="#ff00ff" id="19" name="cutscene"/>
  <objectgroup color="#ffff00" id="22" name="quest"/>
  <objectgroup color="#ff55ff" id="20" name="event">
-  <object id="82" name="found_grace_ribbon" type="discover" x="288" y="96" width="144" height="120"/>
+  <object id="82" name="found_grace_ribbon" type="discover" x="264" y="96" width="144" height="96"/>
   <object id="83" name="cave_not_yet_found" type="discover" x="456" y="594" width="54" height="6"/>
   <object id="89" name="guide_event_quest" type="discover" x="264" y="312" width="528" height="24"/>
  </objectgroup>

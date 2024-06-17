@@ -11,8 +11,10 @@ import com.badlogic.gdx.utils.Align
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.gameData
+import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.Utils.worldScreen
+import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 
@@ -68,6 +70,7 @@ internal class ClockBox {
             audioManager.fadeBgmForClockWarning()
             blinkClockLabel()
         } else {
+            audioManager.stopBgmAndPlayBgm(AudioEvent.BGM_END_NEAR, mapManager.currentMap.bgm)
             label.clearActions()
             label.color = Color.WHITE
         }
@@ -105,7 +108,7 @@ internal class ClockBox {
     private fun borderCircle() {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line)
         shapeRenderer.color = Color.WHITE
-        shapeRenderer.circle(Gdx.graphics.width - CIRCLE_PAD_RIGHT,  CIRCLE_PAD_BOTTOM, RADIUS)
+        shapeRenderer.circle(Gdx.graphics.width - CIRCLE_PAD_RIGHT, CIRCLE_PAD_BOTTOM, RADIUS)
         shapeRenderer.end()
     }
 
