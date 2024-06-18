@@ -24,6 +24,7 @@ private const val PAD_LEFT = 20f
 internal class QuestListTable {
 
     private val questListFont: BitmapFont = resourceManager.getTrueTypeAsset(TEXT_FONT, TEXT_SIZE)
+        .apply { data.markupEnabled = true }
     val questList: List<QuestGraph> = createList()
     val scrollPane: ScrollPane = fillScrollPane()
     val container: Table = fillContainer()

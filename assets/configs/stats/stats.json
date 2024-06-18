@@ -57,8 +57,8 @@
     "upgrade"    : 0.04,
     "description": [
       "Represents energy for magic spells and other special attacks.",
-      "Each rank in Stamina increases MP by 10%.",
-      "ToDo, maybe: When MP hits 0, your character will experience combat penalties."
+      "Each rank in Stamina increases SP by 10%.",
+      "ToDo, maybe: When SP hits 0, your character will experience combat penalties."
     ]
   }
 }

@@ -42,7 +42,7 @@
     "sort"       : 80018,
     "price"      : 4,
     "description": [
-      "Restores 20 MP of the drinker's lost energy.",
+      "Restores 20 SP of the drinker's lost energy.",
       "[LIGHT_GRAY]",
       "(Creating an Energy Potion requires 3 Spices",
       "and an Alchemist rank of at least 1.)"
@@ -55,7 +55,7 @@
     "price"      : 8,
     "description": [
       "A more powerful version of the Energy Potion,",
-      "Restores 80 MP of the drinker's lost energy.",
+      "Restores 80 SP of the drinker's lost energy.",
       "[LIGHT_GRAY]",
       "(Creating an Endurance Potion requires 3 Spices, 2 Herbs",
       "and an Alchemist rank of at least 3.)"

@@ -22,8 +22,7 @@ private const val FONT_BIG_PATH = "fonts/spectral_extra_bold_28.ttf"
 
 private val TRANSPARENT_BLACK = Color(0f, 0f, 0f, 0.8f)
 private val TRANSPARENT_WHITE = Color(1f, 1f, 1f, 0.3f)
-private val TRANSPARENT_FIREBRICK = Color(Color.FIREBRICK.r, Color.FIREBRICK.g, Color.FIREBRICK.b, 0.5f)
-private val TRANSPARENT_FOREST = Color(Color.FOREST.r, Color.FOREST.g, Color.FOREST.b, 0.5f)
+private val TRANSPARENT_ROYAL = Color(Color.ROYAL.r, Color.ROYAL.g, Color.ROYAL.b, 0.5f)
 private val TRANSPARENT_FACES = Color(1f, 1f, 1f, 0.7f)
 private val TRANSPARENT_DEATH = Color(0.25f, 0.25f, 0.25f, 0.75f)
 
@@ -136,10 +135,10 @@ internal class PartyWindow {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled)
 
         renderBackground(invertedIndex)
-        shapeRenderer.color = TRANSPARENT_FIREBRICK
+        shapeRenderer.color = Utils.getHpColor(hero.currentHp, hero.maximumHp, 0.5f)
         drawBar(invertedIndex, 2f, hero.hpBarWidth)
-        shapeRenderer.color = TRANSPARENT_FOREST
-        drawBar(invertedIndex, 3f, hero.mpBarWidth)
+        shapeRenderer.color = TRANSPARENT_ROYAL
+        drawBar(invertedIndex, 3f, hero.spBarWidth)
 
         shapeRenderer.end()
         Gdx.gl.glDisable(GL20.GL_BLEND)
@@ -150,7 +149,7 @@ internal class PartyWindow {
         renderLabel(invertedIndex, "TXP: ${hero.totalXp}", 0f)
         renderLabel(invertedIndex, "XPI:  ${hero.xpToInvest}", 1f)
         renderLabel(invertedIndex, "HP: ", 2f)
-        renderLabel(invertedIndex, "MP: ", 3f)
+        renderLabel(invertedIndex, "SP: ", 3f)
     }
 
     private fun renderLines(invertedIndex: Int) {
@@ -220,7 +219,7 @@ internal class PartyWindow {
     }
 
     private val HeroItem.hpBarWidth: Float get() = BAR_WIDTH / maximumHp * currentHp
-    private val HeroItem.mpBarWidth: Float get() = BAR_WIDTH / maximumMp * currentMp
+    private val HeroItem.spBarWidth: Float get() = BAR_WIDTH / maximumSp * currentSp
 
     private fun drawBarOutline(invertedIndex: Int, linePosition: Float) {
         drawBar(invertedIndex, linePosition, BAR_WIDTH)

@@ -41,7 +41,7 @@ class HeroItem(
             isForVeryFirstSetup = false
             totalXp = stats.getTotalXpCost() + skills.getTotalXpCost()
             currentHp = maximumHp
-            currentMp = maximumMp
+            currentSp = maximumSp
         }
     }
 
@@ -68,7 +68,7 @@ class HeroItem(
     fun revive() {
         isAlive = true
         recoverFullHp()
-        recoverFullMp()
+        recoverFullSp()
     }
 
     fun gainXp(amount: Int) {
@@ -257,6 +257,6 @@ class HeroItem(
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private fun getPossibleDefensePenalty(): Int = if (currentMp <= 0) 50 else 0
+    private fun getPossibleDefensePenalty(): Int = if (currentSp <= 0) 50 else 0
 
 }

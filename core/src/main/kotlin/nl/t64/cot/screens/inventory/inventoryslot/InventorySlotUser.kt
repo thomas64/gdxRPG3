@@ -26,9 +26,9 @@ class InventorySlotUser private constructor(itemSlot: ItemSlot) {
             "healing_potion" -> possibleHandleDrink(::hpCondition, ::doHealing)
             "curing_potion" -> possibleHandleDrink(::hpCondition, ::doCuring)
             "restore_potion" -> possibleHandleDrink(::hpCondition, ::doRestore)
-            "energy_potion" -> possibleHandleDrink(::mpCondition, ::doEnergy)
-            "endurance_potion" -> possibleHandleDrink(::mpCondition, ::doEndurance)
-            "stamina_potion" -> possibleHandleDrink(::mpCondition, ::doStamina)
+            "energy_potion" -> possibleHandleDrink(::spCondition, ::doEnergy)
+            "endurance_potion" -> possibleHandleDrink(::spCondition, ::doEndurance)
+            "stamina_potion" -> possibleHandleDrink(::spCondition, ::doStamina)
         }
     }
 
@@ -63,8 +63,8 @@ class InventorySlotUser private constructor(itemSlot: ItemSlot) {
         return selectedHero.isAlive && selectedHero.currentHp < selectedHero.maximumHp
     }
 
-    private fun mpCondition(): Boolean {
-        return selectedHero.isAlive && selectedHero.currentMp < selectedHero.maximumMp
+    private fun spCondition(): Boolean {
+        return selectedHero.isAlive && selectedHero.currentSp < selectedHero.maximumSp
     }
 
     private fun doHealing() {
@@ -80,15 +80,15 @@ class InventorySlotUser private constructor(itemSlot: ItemSlot) {
     }
 
     private fun doEnergy() {
-        selectedHero.recoverPartMp(20)
+        selectedHero.recoverPartSp(20)
     }
 
     private fun doEndurance() {
-        selectedHero.recoverPartMp(80)
+        selectedHero.recoverPartSp(80)
     }
 
     private fun doStamina() {
-        selectedHero.recoverFullMp()
+        selectedHero.recoverFullSp()
     }
 
 }

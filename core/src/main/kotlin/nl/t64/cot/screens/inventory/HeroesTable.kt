@@ -75,8 +75,8 @@ class HeroesTable {
         addHpLabelTo(statsTable, hero)
         addHpBarTo(statsTable, hero)
         addEmptyLine(statsTable)
-        addMpLabelTo(statsTable, hero)
-        addMpBarTo(statsTable, hero)
+        addSpLabelTo(statsTable, hero)
+        addSpBarTo(statsTable, hero)
         addEmptyLine(statsTable)
 
         val stack = Stack()
@@ -129,17 +129,17 @@ class HeroesTable {
         statsTable.add(Label("", textStyle)).row()
     }
 
-    private fun addMpLabelTo(statsTable: Table, hero: HeroItem) {
+    private fun addSpLabelTo(statsTable: Table, hero: HeroItem) {
         statsTable.row().height(TEXT_ROW_HEIGHT)
         statsTable.add(Label("", textStyle))
-        statsTable.add(Label("MP:  " + hero.currentMp + "/ " + hero.maximumMp, textStyle))
+        statsTable.add(Label("SP:  " + hero.currentSp + "/ " + hero.maximumSp, textStyle))
         statsTable.add(Label("", textStyle)).row()
     }
 
-    private fun addMpBarTo(statsTable: Table, hero: HeroItem) {
+    private fun addSpBarTo(statsTable: Table, hero: HeroItem) {
         statsTable.row().height(BAR_ROW_HEIGHT)
         statsTable.add(Label("", textStyle))
-        statsTable.add(createMpBar(hero)).height(BAR_HEIGHT).left().center()
+        statsTable.add(createSpBar(hero)).height(BAR_HEIGHT).left().center()
         statsTable.add(Label("", textStyle)).row()
     }
 
@@ -150,26 +150,26 @@ class HeroesTable {
         }
     }
 
-    private fun createMpBar(hero: HeroItem): Stack {
+    private fun createSpBar(hero: HeroItem): Stack {
         return Stack().apply {
-            add(createMpFill(hero))
+            add(createSpFill(hero))
             add(Image(Utils.createFullBorder()))
         }
     }
 
     private fun createHpFill(hero: HeroItem): Image {
-        return Color.FIREBRICK.toImage().apply {
+        return Utils.getHpColor(hero.currentHp, hero.maximumHp).toImage().apply {
             setScaling(Scaling.stretchY)
             align = Align.left
             drawable.minWidth = (STATS_COLUMN_WIDTH / hero.maximumHp) * hero.currentHp
         }
     }
 
-    private fun createMpFill(hero: HeroItem): Image {
-        return Color.FOREST.toImage().apply {
+    private fun createSpFill(hero: HeroItem): Image {
+        return Color.ROYAL.toImage().apply {
             setScaling(Scaling.stretchY)
             align = Align.left
-            drawable.minWidth = (STATS_COLUMN_WIDTH / hero.maximumMp) * hero.currentMp
+            drawable.minWidth = (STATS_COLUMN_WIDTH / hero.maximumSp) * hero.currentSp
         }
     }
 

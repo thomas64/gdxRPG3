@@ -27,8 +27,8 @@ abstract class Character(
 ) {
     val maximumHp: Int get() = stats.maximumHp
     var currentHp: Int = 0
-    val maximumMp: Int get() = stats.maximumMp
-    var currentMp: Int = 0
+    val maximumSp: Int get() = stats.maximumSp
+    var currentSp: Int = 0
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -36,7 +36,7 @@ abstract class Character(
     fun takeDamage(damage: Int) {
         currentHp = (currentHp - damage).coerceAtLeast(0)
         if (currentHp <= 0) {
-            currentMp = 0
+            currentSp = 0
             isAlive = false
         }
     }
@@ -49,12 +49,12 @@ abstract class Character(
         currentHp = (currentHp + healPoints).coerceAtMost(maximumHp)
     }
 
-    fun recoverFullMp() {
-        currentMp = maximumMp
+    fun recoverFullSp() {
+        currentSp = maximumSp
     }
 
-    fun recoverPartMp(recoverPoints: Int) {
-        currentMp = (currentMp + recoverPoints).coerceAtMost(maximumMp)
+    fun recoverPartSp(recoverPoints: Int) {
+        currentSp = (currentSp + recoverPoints).coerceAtMost(maximumSp)
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -160,7 +160,7 @@ abstract class Character(
         return inventory.getBonusProtectionWhenArmorSetIsComplete()
     }
 
-    private fun getPossibleInflictDamagePenalty(): Int = if (currentMp <= 0) 5 else 1
-    private fun getPossibleChanceToHitPenalty(): Int = if (currentMp <= 0) 25 else 0
+    private fun getPossibleInflictDamagePenalty(): Int = if (currentSp <= 0) 5 else 1
+    private fun getPossibleChanceToHitPenalty(): Int = if (currentSp <= 0) 25 else 0
 
 }

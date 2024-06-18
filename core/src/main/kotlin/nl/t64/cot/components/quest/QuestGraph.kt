@@ -26,9 +26,9 @@ data class QuestGraph(
     override fun toString(): String {
         return when {
             isFailed -> "x    $title"
-            currentState == QuestState.FINISHED -> "v    $title"
+            currentState == QuestState.FINISHED -> "[GRAY]v    $title"
             currentState == QuestState.UNCLAIMED -> "o    $title"
-            resetState == QuestState.FINISHED -> "r    $title"
+            resetState == QuestState.FINISHED -> "[GRAY]r    $title"
             else -> "      $title"
         }
     }

@@ -35,7 +35,7 @@ class PartyContainer {
     fun fullRecover() {
         getAllHeroesAlive().forEach {
             it.recoverFullHp()
-            it.recoverFullMp()
+            it.recoverFullSp()
         }
     }
 

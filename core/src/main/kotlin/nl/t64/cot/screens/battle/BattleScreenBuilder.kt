@@ -62,7 +62,7 @@ object BattleScreenBuilder {
             defaults().left()
             add(hero.name).row()
             add("HP:  ${hero.currentHp}/ ${hero.maximumHp}").row()
-            add("MP:  ${hero.currentMp}/ ${hero.maximumMp}")
+            add("SP:  ${hero.currentSp}/ ${hero.maximumSp}")
         }).top().left().padLeft(20f).row()
     }
 

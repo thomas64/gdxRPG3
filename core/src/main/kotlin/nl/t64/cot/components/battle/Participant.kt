@@ -62,7 +62,7 @@ class Participant(
 
     fun updateTurnCounter() {
         turnCounter += 10f + character.getCalculatedTotalStatOf(StatItemId.SPEED) //* 0.5f
-        // if character  mp == 0 -> speed / 3f?
+        // if character  sp == 0 -> speed / 3f?
     }
 
     fun isTurnCounterAtMax(): Boolean {
@@ -78,9 +78,9 @@ class Participant(
             "healing_potion" -> this.recoverPartHp(20)
             "curing_potion" -> this.recoverPartHp(80)
             "restore_potion" -> this.recoverFullHp()
-            "energy_potion" -> this.recoverPartMp(20)
-            "endurance_potion" -> this.recoverPartMp(80)
-            "stamina_potion" -> this.recoverFullMp()
+            "energy_potion" -> this.recoverPartSp(20)
+            "endurance_potion" -> this.recoverPartSp(80)
+            "stamina_potion" -> this.recoverFullSp()
             else -> throw NotImplementedError("ToDo")
         }
     }

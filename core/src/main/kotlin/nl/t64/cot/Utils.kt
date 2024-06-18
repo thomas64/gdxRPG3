@@ -207,21 +207,24 @@ object Utils {
         return TextureRegion.split(completeTexture, width, height)
     }
 
-    fun getHpColor(hpStats: Map<String, Int>): Color {
-        var color = Color.ROYAL
-        if (hpStats["lvlVari"]!! < hpStats["lvlRank"]!!) {
-            color = Color.LIME
+    fun getHpColor(currentHp: Int, maximumHp: Int, alpha: Float = 1f): Color {
+        val percentage = currentHp.toFloat() / maximumHp.toFloat()
+        return when {
+            percentage > 0.875f -> interpolateColor(Color.FOREST, Color.FOREST, (percentage - 0.875f) * 8f, alpha)
+            percentage > 0.625f -> interpolateColor(Color.OLIVE, Color.FOREST, (percentage - 0.625f) * 4f, alpha)
+            percentage > 0.500f -> interpolateColor(Color.GOLD, Color.OLIVE, (percentage - 0.500f) * 8f, alpha)
+            percentage > 0.375f -> interpolateColor(Color.ORANGE, Color.GOLD, (percentage - 0.375f) * 8f, alpha)
+            percentage > 0.250f -> interpolateColor(Color.RED, Color.ORANGE, (percentage - 0.250f) * 8f, alpha)
+            percentage > 0.125f -> interpolateColor(Color.FIREBRICK, Color.RED, (percentage - 0.125f) * 8f, alpha)
+            else -> interpolateColor(Color.FIREBRICK, Color.FIREBRICK, percentage * 8f, alpha)
         }
-        if (hpStats["staVari"]!! < hpStats["staRank"]!!) {
-            color = Color.GOLD
-        }
-        if (hpStats["conVari"]!! < hpStats["conRank"]!!) {
-            color = Color.FIREBRICK
-            if (hpStats["staVari"]!! > 0) {
-                color = Color.ORANGE
-            }
-        }
-        return color
+    }
+
+    private fun interpolateColor(color1: Color, color2: Color, percentage: Float, alpha: Float): Color {
+        val r = color1.r + percentage * (color2.r - color1.r)
+        val g = color1.g + percentage * (color2.g - color1.g)
+        val b = color1.b + percentage * (color2.b - color1.b)
+        return Color(r, g, b, alpha)
     }
 
     fun createScreenshot(withBlur: Boolean): Image {

@@ -27,7 +27,7 @@ class EnemyItem(
 
     init {
         currentHp = maximumHp
-        currentMp = maximumMp
+        currentSp = maximumSp
     }
 
     fun createCopy(

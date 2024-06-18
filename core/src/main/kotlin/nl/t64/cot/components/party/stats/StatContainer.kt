@@ -9,7 +9,7 @@ class StatContainer() {
 
     private val stats: StatItemMap<StatItemId, StatItem> = StatItemMap()
     val maximumHp: Int get() = 20 + (20f * (getById(StatItemId.CONSTITUTION).rank * 10f / 100f)).toInt()
-    val maximumMp: Int get() = 20 + (20f * (getById(StatItemId.STAMINA).rank * 10f / 100f)).toInt()
+    val maximumSp: Int get() = 20 + (20f * (getById(StatItemId.STAMINA).rank * 10f / 100f)).toInt()
 
     @JsonCreator
     constructor(startingStats: Map<String, Int>) : this() {
