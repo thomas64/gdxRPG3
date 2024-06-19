@@ -83,6 +83,10 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         stage.keyboardFocus = scrollPane
     }
 
+    fun tryToClose() {
+        if (isVisible()) hide()
+    }
+
     fun update(dt: Float) {
         stage.act(dt)
         stage.draw()

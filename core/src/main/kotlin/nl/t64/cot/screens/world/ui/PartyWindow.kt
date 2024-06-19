@@ -22,7 +22,6 @@ private const val FONT_BIG_PATH = "fonts/spectral_extra_bold_28.ttf"
 
 private val TRANSPARENT_BLACK = Color(0f, 0f, 0f, 0.8f)
 private val TRANSPARENT_WHITE = Color(1f, 1f, 1f, 0.3f)
-private val TRANSPARENT_ROYAL = Color(Color.ROYAL.r, Color.ROYAL.g, Color.ROYAL.b, 0.5f)
 private val TRANSPARENT_FACES = Color(1f, 1f, 1f, 0.7f)
 private val TRANSPARENT_DEATH = Color(0.25f, 0.25f, 0.25f, 0.75f)
 
@@ -135,9 +134,9 @@ internal class PartyWindow {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled)
 
         renderBackground(invertedIndex)
-        shapeRenderer.color = Utils.getHpColor(hero.currentHp, hero.maximumHp, 0.5f)
+        shapeRenderer.color = Utils.getHpColor(hero.currentHp, hero.maximumHp).apply { a = 0.5f }
         drawBar(invertedIndex, 2f, hero.hpBarWidth)
-        shapeRenderer.color = TRANSPARENT_ROYAL
+        shapeRenderer.color = Color.ROYAL.apply { a = 0.5f}
         drawBar(invertedIndex, 3f, hero.spBarWidth)
 
         shapeRenderer.end()

@@ -39,6 +39,7 @@ class GameData : ProfileObserver {
     lateinit var portals: PortalContainer
     var isTooltipEnabled = false
     var isComparingEnabled = false
+    var numberOfCycles = 0
 
     fun resetCycle() {
         clock.reset()
@@ -48,6 +49,7 @@ class GameData : ProfileObserver {
         loot.reset()
         spoils = SpoilsContainer()
         quests.reset()
+        numberOfCycles++
     }
 
     override fun onNotifyCreateProfile(profileManager: ProfileManager) {
@@ -90,6 +92,7 @@ class GameData : ProfileObserver {
         profileManager.setProperty("portals", portals)
         profileManager.setProperty("isTooltipEnabled", isTooltipEnabled)
         profileManager.setProperty("isComparingEnabled", isComparingEnabled)
+        profileManager.setProperty("numberOfCycles", numberOfCycles)
     }
 
     override fun onNotifyLoadProfile(profileManager: ProfileManager) {
@@ -113,6 +116,7 @@ class GameData : ProfileObserver {
         portals = profileManager.getProperty("portals")
         isTooltipEnabled = profileManager.getProperty("isTooltipEnabled")
         isComparingEnabled = profileManager.getProperty("isComparingEnabled")
+        numberOfCycles = profileManager.getProperty("numberOfCycles")
     }
 
 }

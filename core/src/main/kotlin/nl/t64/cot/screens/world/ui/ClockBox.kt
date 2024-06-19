@@ -8,15 +8,11 @@ import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.utils.Align
-import nl.t64.cot.Utils
 import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.gameData
-import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.Utils.worldScreen
-import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.constants.Constant
-import nl.t64.cot.constants.ScreenType
 
 
 private const val FONT = "fonts/calibri_light_28.ttf"
@@ -45,43 +41,34 @@ internal class ClockBox {
     }
 
     fun update(dt: Float) {
+        handleAudioAndClockLabel()
         if (gameData.clock.isRunning()) {
             gameData.clock.update(dt)
-            handleWarning()
-            handleEnding(dt)
+            if (gameData.clock.isFinished()) {
+                worldScreen.fadeWithFlames()
+            }
         }
     }
 
     fun render(dt: Float) {
-        with(gameData.clock) {
-            if (isRunning()) {
-                analogClock.update(getPercentageOfDay())
-                fillCircle()
-                borderCircle()
-                label.setText(getTimeOfDayFormatted())
-                stage.act(dt)
-                stage.draw()
-            }
-        }
+        analogClock.update(gameData.clock.getPercentageOfDay())
+        fillCircle()
+        borderCircle()
+        label.setText(gameData.clock.getTimeOfDayFormatted())
+        stage.act(dt)
+        stage.draw()
     }
 
-    private fun handleWarning() {
+    private fun handleAudioAndClockLabel() {
         if (gameData.clock.isWarning()) {
-            audioManager.fadeBgmForClockWarning()
+            audioManager.fadeMapBgmAndPlayWarningBgm()
             blinkClockLabel()
+        } else if (gameData.clock.isFinished()) {
+            audioManager.fadeBgmBgsWhenWarningBgm()
         } else {
-            audioManager.stopBgmAndPlayBgm(AudioEvent.BGM_END_NEAR, mapManager.currentMap.bgm)
+            audioManager.tryToEndWarningBgmAndPlayMapBgm()
             label.clearActions()
             label.color = Color.WHITE
-        }
-    }
-
-    private fun handleEnding(dt: Float) {
-        if (gameData.clock.isFinished()) {
-            Utils.runWithDelay(Constant.FADE_DURATION) {
-                worldScreen.startCutscene(ScreenType.SCENE_DEATH, 1f)
-            }
-            audioManager.fadeAllInSeparateThreadForClockEnding(dt)
         }
     }
 

@@ -10,6 +10,7 @@ enum class AudioCommand {
 
     BGS_PLAY_ONCE,
     BGS_PLAY_LOOP,
+    BGS_FADE_IN,
     BGS_STOP,
     BGS_STOP_ALL,
     BGS_PAUSE,

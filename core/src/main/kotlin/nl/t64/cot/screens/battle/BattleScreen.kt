@@ -474,15 +474,28 @@ class BattleScreen : Screen {
             Actions.run { stopAllBgm() },
             Actions.run { playBgm(AudioEvent.BGM_LOSE_BATTLE, false) },
             Actions.run {
-                val message = """
-                    Mozes took a fatal blow.
-
-                    Game Over.""".trimIndent()
-                val messageDialog = MessageDialog(message)
+                val messageDialog = MessageDialog(createDeathMessage())
                 messageDialog.setActionAfterHide { gameOverExitScreen() }
                 messageDialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT)
             }
         ))
+    }
+
+    private fun createDeathMessage(): String {
+        if (
+            gameData.numberOfCycles == 1
+            && enemies.getAll().all { it.id == "orc_general" || it.id == "ardor" }
+        ) {
+            return """
+                Mozes is knocked down.
+
+                The fight is over.""".trimIndent()
+        } else {
+            return """
+                Mozes took a fatal blow.
+
+                Game Over.""".trimIndent()
+        }
     }
 
     private fun gameOverExitScreen() {

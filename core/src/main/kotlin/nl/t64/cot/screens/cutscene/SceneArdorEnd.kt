@@ -128,7 +128,7 @@ class SceneArdorEnd : CutsceneScreen() {
     }
 
     override fun onNotifyBattleLost() {
-        screenManager.setScreen(ScreenType.SCENE_DEATH)
+        screenManager.setScreen(ScreenType.MENU_MAIN)
     }
 
 }

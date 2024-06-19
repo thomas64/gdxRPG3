@@ -34,10 +34,8 @@ import nl.t64.cot.screens.world.conversation.ConversationObserver
 import nl.t64.cot.screens.world.debug.DebugBox
 import nl.t64.cot.screens.world.debug.DebugRenderer
 import nl.t64.cot.screens.world.debug.GridRenderer
-import nl.t64.cot.screens.world.entity.Entity
-import nl.t64.cot.screens.world.entity.GraphicsPlayer
-import nl.t64.cot.screens.world.entity.InputPlayer
-import nl.t64.cot.screens.world.entity.PhysicsPlayer
+import nl.t64.cot.screens.world.entity.*
+import nl.t64.cot.screens.world.entity.events.DirectionEvent
 import nl.t64.cot.screens.world.entity.events.FindPathEvent
 import nl.t64.cot.screens.world.entity.events.LoadEntityEvent
 import nl.t64.cot.screens.world.entity.events.NpcActionEvent
@@ -86,6 +84,19 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     private lateinit var doorList: List<Entity>
 
     //region public methods ////////////////////////////////////////////////////////////////////////////////////////////
+
+    fun fadeWithFlames() {
+        player.resetInput()
+        setInputProcessors(null)
+        player.send(DirectionEvent(Direction.NORTH))
+
+        val endOfTime = EndOfTime(stage, camera)
+        endOfTime.fadeWithFlamesAnd {
+            conversationDialog.tryToClose()
+            stage.clear()
+            gameState = GameState.OFF
+        }
+    }
 
     fun fadeOut(
         transitionColor: Color = Color.BLACK,
@@ -281,7 +292,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     }
 
     override fun onNotifyBattleLost() {
-        screenManager.setScreen(ScreenType.SCENE_DEATH)
+        screenManager.setScreen(ScreenType.MENU_MAIN)
     }
 
     override fun onNotifyBattleFled() {

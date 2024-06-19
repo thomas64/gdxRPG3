@@ -227,9 +227,9 @@ class SceneArdorFirstTime : CutsceneScreen() {
     }
 
     override fun onNotifyBattleLost() {
-        (screenManager.getScreen(ScreenType.SCENE_ARDOR_FIRST_TIME_AFTER_LOSS_FROM_BATTLE) as SceneArdorFirstTimeAfterLossFromBattle)
+        (screenManager.getScreen(ScreenType.SCENE_END_OF_CYCLE_1) as SceneEndOfCycle1)
             .apply { areGeneralsAlive = true }
-        screenManager.setScreen(ScreenType.SCENE_ARDOR_FIRST_TIME_AFTER_LOSS_FROM_BATTLE)
+        screenManager.setScreen(ScreenType.SCENE_END_OF_CYCLE_1)
     }
 
 }
