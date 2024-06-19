@@ -346,7 +346,7 @@ class BattleScreen : Screen {
         buttonTablePotion.remove()
         isDelayingTurn = true
         Utils.runWithDelay(0.5f) {
-            messageDialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT)
+            messageDialog.show(stage, AudioEvent.SE_POTION)
         }
     }
 

@@ -51,7 +51,7 @@ class InventorySlotUser private constructor(itemSlot: ItemSlot) {
 
     private fun showSuccessMessage(recoveredHp: Int) {
         MessageDialog("${selectedHero.name} used a ${inventoryItem.name} and recovered $recoveredHp HP.")
-            .show(currentSlot.stage, AudioEvent.SE_CONVERSATION_NEXT)
+            .show(currentSlot.stage, AudioEvent.SE_POTION)
     }
 
     private fun showFailMessage() {
