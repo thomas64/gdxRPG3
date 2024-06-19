@@ -1,0 +1,39 @@
+{
+  "barbarian" : {
+    "upgrade"    : 4,
+    "description": [
+      "- 'Barbarian' allows for additional conversation",
+      "  responses, mostly used for intimidating people,",
+      "  with possibly more favorable outcomes."
+    ]
+  },
+  "diplomat"  : {
+    "upgrade"    : 4,
+    "description": [
+      "- 'Diplomat' allows for additional conversation",
+      "  responses, mostly used for persuading people,",
+      "  with possibly more favorable outcomes."
+    ]
+  },
+  "jester"    : {
+    "upgrade"    : 4,
+    "description": [
+      "- 'Jester' allows for additional conversation responses,",
+      "  mostly used for joking and lying to people,",
+      "  with possibly more favorable outcomes."
+    ]
+  },
+  "druid"     : {
+    "upgrade"    : 4,
+    "description": [
+      "- 'Druid' allows the possibility of talking to animals."
+    ]
+  },
+  "loremaster": {
+    "upgrade"    : 4,
+    "description": [
+      "- 'Loremaster' allows the possibility of deciphering",
+      "  books, scrolls and other old writings."
+    ]
+  }
+}

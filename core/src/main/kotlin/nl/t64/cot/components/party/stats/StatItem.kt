@@ -27,7 +27,7 @@ data class StatItem(
 
     private fun getNeededXpForNextRank(): String {
         val xpNeeded = getXpCostForNextRank().toString().takeIf { it != "0" } ?: "Max"
-        return "'XP to Invest' needed for next rank: $xpNeeded"
+        return "- [GOLD]'XP to Invest' needed for next rank: $xpNeeded"
     }
 
     fun getXpCostForNextRank(): Int {

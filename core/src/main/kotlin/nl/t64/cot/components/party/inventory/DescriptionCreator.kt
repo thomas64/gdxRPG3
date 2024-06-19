@@ -66,7 +66,9 @@ class DescriptionCreator(
 
     private fun addPrices() {
         when {
+            inventoryItem.id == "gold" -> return
             inventoryItem.amount == 1 -> createLinesWithSinglePrice()
+            inventoryItem.getSellValueTotal(partySumOfMerchantSkill) == 0 -> createLinesWithSinglePriceForSellOnly()
             inventoryItem.amount > 1 -> createLinesWithMultiPrices()
             else -> throw IllegalStateException("Amount cannot be below 1.")
         }
@@ -76,6 +78,14 @@ class DescriptionCreator(
         listOf(
             createLine(Constant.DESCRIPTION_KEY_BUY, inventoryItem.getBuyPriceTotal(partySumOfMerchantSkill)),
             createLine(Constant.DESCRIPTION_KEY_SELL, inventoryItem.getSellValueTotal(partySumOfMerchantSkill))
+        ).forEach { descriptionLines.add(it) }
+    }
+
+    private fun createLinesWithSinglePriceForSellOnly() {
+        listOf(
+            createLine(Constant.DESCRIPTION_KEY_BUY_PIECE, inventoryItem.getBuyPricePiece(partySumOfMerchantSkill)),
+            createLine(Constant.DESCRIPTION_KEY_BUY_TOTAL, inventoryItem.getBuyPriceTotal(partySumOfMerchantSkill)),
+            createLine(Constant.DESCRIPTION_KEY_SELL, inventoryItem.getSellValuePiece(partySumOfMerchantSkill)),
         ).forEach { descriptionLines.add(it) }
     }
 

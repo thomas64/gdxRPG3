@@ -24,7 +24,7 @@ data class SkillItem(
     override fun getTotalDescription(): String {
         return (description.joinToString(System.lineSeparator()) + System.lineSeparator()
                 + System.lineSeparator()
-                + "A trainer is needed to upgrade a skill.")
+                + "- A trainer is needed to upgrade a skill.")
     }
 
     fun getTrainerDescription(trainerSkill: SkillItem, totalScholar: Int): String {

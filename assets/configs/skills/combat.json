@@ -1,60 +1,53 @@
 {
+  "stealth"   : {
+    "upgrade"    : 6,
+    "description": [
+      "- 'Stealth' increases the chance to successfully flee combat.",
+      "",
+      "- 'Stealth' decreases the attention this character draws from enemies in combat."
+    ]
+  },
   "gambler"   : {
     "upgrade"    : 6,
     "description": [
-      "Randomly increases/ decreases chance-to-hit with all attacks in combat.",
-      "Each rank in Gambler increases/ decreases Total Hit by 5%.",
+      "- 'Gambler' randomly increases or decreases your chance to hit with all attacks in combat.",
+      "  Each rank in 'Gambler' increases or decreases 'Chance to hit' by 5%.",
       "",
-      "Randomly increases/ decreases damage-to-inflict with all attacks in combat.",
-      "Each rank in Gambler increases/ decreases Damage by 5%."
+      "- 'Gambler' randomly increases or decreases the damage you inflict with all attacks in combat.",
+      "  Each rank in 'Gambler' increases or decreases 'Damage' by 5%."
     ]
   },
   "healer"    : {
     "upgrade"    : 8,
     "description": [
-      "Allows for healing other party members in combat.",
-      "Also possible to use herbs to double the healing effect."
-    ]
-  },
-  "stealth"   : {
-    "upgrade"    : 6,
-    "description": [
-      "Increases the chance to successfully flee combat.",
-      "Decreases the attention your character draws from enemies in combat."
-    ]
-  },
-  "thief"     : {
-    "upgrade"    : 8,
-    "description": [
-      "Allows the possibility to pick locks on treasure chests.",
-      "Increases chance-to-hit with weapons FROM BEHIND in hand-to-hand combat.",
-      "Increases damage-to-inflict with weapons FROM BEHIND in hand-to-hand combat."
+      "- 'Healer' allows for healing other party members in combat.",
+      "  It's also possible to use herbs to double the healing effect."
     ]
   },
   "troubadour": {
     "upgrade"    : 8,
     "description": [
-      "Allows the possibility to play and sing inspirationally in combat,",
-      "increasing your party's chance-to-hit",
-      "and decreasing the enemy's chance-to-hit."
+      "- 'Troubadour' allows the possibility to",
+      "  play and sing inspirationally in combat,",
+      "  increasing your party's 'Chance to hit'",
+      "  and decreasing the enemy's 'Chance to hit'."
+    ]
+  },
+  "thief"     : {
+    "upgrade"    : 8,
+    "description": [
+      "- 'Thief' allows the possibility to use 'Thief' abilities in combat.",
+      "",
+      "- 'Thief' allows the possibility to pick locks on treasure chests."
     ]
   },
   "warrior"   : {
     "upgrade"    : 8,
     "description": [
-      "Allows the possibility of scoring critical hits with weapons in combat.",
-      "Each rank in Warrior increases the probability of this by 4%."
-    ]
-  },
-  "wizard"    : {
-    "upgrade"    : 12,
-    "description": [
-      "Allows the possibility to learn and cast magical spells in combat.",
-      "Each rank in Wizard increases the chance to successfully cast a spell by 10%.",
-      "Each rank in Wizard increases the spell range by 1 step.",
+      "- 'Warrior' allows the possibility to use 'Warrior' abilities in combat.",
       "",
-      "Allows the possibility of scoring critical hits with magic in combat.",
-      "Each rank in Wizard increases the probability of this by 1%."
+      "- 'Warrior' allows the possibility of scoring critical hits with weapons in combat.",
+      "  Each rank in 'Warrior' increases the probability of this by 4%."
     ]
   }
 }

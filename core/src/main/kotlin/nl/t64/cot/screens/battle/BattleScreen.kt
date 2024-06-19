@@ -389,7 +389,7 @@ class BattleScreen : Screen {
     }
 
     private fun winBattle() {
-        if (isDelayingTurn) return
+        if (isDelayingTurn || hasWon) return
         hasWon = true
 
         stage.addAction(Actions.sequence(

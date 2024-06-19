@@ -2,49 +2,55 @@
   "hafted" : {
     "upgrade"    : 6,
     "description": [
-      "Allows the possibility of equipping hafted weapons.",
-      "Increases chance-to-hit with hafted weapons in combat.",
-      "Each rank in Hafted increases Total Hit by 10%."
+      "- 'Hafted' allows the possibility of equipping hafted weapons.",
+      "",
+      "- 'Hafted' increases your chance to hit with hafted weapons in combat.",
+      "  Each rank in 'Hafted' increases 'Chance to hit' by 10%."
     ]
   },
   "missile": {
     "upgrade"    : 6,
     "description": [
-      "Allows the possibility of equipping missile weapons.",
-      "Increases chance-to-hit with missile weapons in combat.",
-      "Each rank in Missile increases Total Hit by 10%."
+      "- 'Missile' allows the possibility of equipping missile weapons.",
+      "",
+      "- 'Missile' increases your chance to hit with missile weapons in combat.",
+      "  Each rank in 'Missile' increases 'Chance to hit' by 10%."
     ]
   },
   "pole"   : {
     "upgrade"    : 6,
     "description": [
-      "Allows the possibility of equipping pole weapons.",
-      "Increases chance-to-hit with pole weapons in combat.",
-      "Each rank in Pole increases Total Hit by 10%."
+      "- 'Pole' allows the possibility of equipping pole weapons.",
+      "",
+      "- 'Pole' increases your chance to hit with pole weapons in combat.",
+      "  Each rank in 'Pole' increases 'Chance to hit' by 10%."
     ]
   },
   "shield" : {
     "upgrade"    : 6,
     "description": [
-      "Allows the possibility of equipping shields.",
-      "In combat, a shield may block the enemy's attack with physical weapons.",
-      "Each rank in Shield increases Defense by 10%."
+      "- 'Shield' allows the possibility of equipping shields.",
+      "",
+      "- In combat, a shield may block the enemy's attack with physical weapons.",
+      "  Each rank in 'Shield' increases 'Defense' by 10%."
     ]
   },
   "sword"  : {
     "upgrade"    : 6,
     "description": [
-      "Allows the possibility of equipping swords and daggers.",
-      "Increases chance-to-hit with swords and daggers in combat.",
-      "Each rank in Sword increases Total Hit by 10%."
+      "- 'Sword' allows the possibility of equipping swords and daggers.",
+      "",
+      "- 'Sword' increases your chance to hit with swords and daggers in combat.",
+      "  Each rank in 'Sword' increases 'Chance to hit' by 10%."
     ]
   },
   "thrown" : {
     "upgrade"    : 6,
     "description": [
-      "Allows the possibility of equipping thrown weapons.",
-      "Increases chance-to-hit with thrown weapons in combat.",
-      "Each rank in Thrown increases Total Hit by 10%."
+      "- 'Thrown' allows the possibility of equipping thrown weapons.",
+      "",
+      "- 'Thrown' increases your chance to hit with thrown weapons in combat.",
+      "  Each rank in 'Thrown' increases 'Chance to hit' by 10%."
     ]
   }
 }

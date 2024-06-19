@@ -1,4 +1,6 @@
+communication.json
 civil.json
 combat.json
-enemy.json
+magic.json
 weapon.json
+enemy.json

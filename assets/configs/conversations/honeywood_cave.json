@@ -3,7 +3,7 @@
     "name"   : "Mozes",
     "phrases": {
       "1": {"text": ["Woah! It's a hidden cave!"]},
-      "2": {"text": ["Grace?! {WAIT=0.5}Where are you?! {WAIT=0.5}Are you in here?!"], "choices": [{"command": "EXIT"}]}
+      "2": {"text": ["Grace?! {WAIT=0.5}Where are you?! {WAIT=0.5}Are you in here?!"], "choices": [{"command": "SAVE_GAME"}]}
     }
   },
   "quest_orc_guards"    : {
@@ -18,8 +18,8 @@
           {"text": "*Request passage.*", "nextId": "9"},
           {"text": "*Demand passage.*", "nextId": "10"},
           {"condition": ["barbarian4"], "text": "[Barbarian 4] *Threaten them for passage!*", "nextId": "30"},
-          {"condition": ["i_n_1_>=_item_scroll_of_orc_obedience"], "text": "[Scroll of Orc Obedience] *Command passage!*", "command": "PROVIDE_QUEST_ITEM", "nextId": "60"},
           {"condition": ["warrior4"], "text": "[Warrior 4] *Attack them for passage!*", "nextId": "40"},
+          {"condition": ["i_n_1_>=_item_scroll_of_orc_obedience"], "text": "[Scroll of Orc Obedience] *Command passage!*", "command": "PROVIDE_QUEST_ITEM", "nextId": "60"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },

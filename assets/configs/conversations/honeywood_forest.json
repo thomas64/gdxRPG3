@@ -184,7 +184,7 @@
   "notice_dense_fog"      : {
     "name"   : "Mozes",
     "phrases": {
-      "1": {"text": ["What a dense fog all of a sudden.", "How peculiar..."], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["What a dense fog all of a sudden.", "How peculiar..."], "choices": [{"command": "SAVE_GAME"}]}
     }
   }
 }

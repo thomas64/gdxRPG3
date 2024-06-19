@@ -51,6 +51,7 @@ internal class SkillsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
         val communicationSkills = allSkills.filter { it.id.isCommunicationSkill() }
         val civilSkills = allSkills.filter { it.id.isCivilSkill() }
         val combatSkills = allSkills.filter { it.id.isCombatSkill() }
+        val magicSkills = allSkills.filter { it.id.isMagicSkill() }
         val weaponSkills = allSkills.filter { it.id.isWeaponSkill() }
 
         if (communicationSkills.isNotEmpty()) {
@@ -64,6 +65,10 @@ internal class SkillsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
         if (combatSkills.isNotEmpty()) {
             table.add("Combat Skills:").padTop(SUBTITLE_PAD_TOP).row()
             combatSkills.forEach { fillRow(it) }
+        }
+        if (magicSkills.isNotEmpty()) {
+            table.add("Magic Skills:").padTop(SUBTITLE_PAD_TOP).row()
+            magicSkills.forEach { fillRow(it) }
         }
         if (weaponSkills.isNotEmpty()) {
             table.add("Weapon Skills:").padTop(SUBTITLE_PAD_TOP).row()

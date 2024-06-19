@@ -17,7 +17,7 @@ import kotlin.math.max
 private const val START_ANGLE = 90f
 private const val SIZE = 150f
 private const val PAD_RIGHT = 181f
-private const val PAD_BOTTOM = 207f
+private const val PAD_BOTTOM = 287f
 private const val ALPHA = 0.8f
 
 class AnalogClock : Table() {

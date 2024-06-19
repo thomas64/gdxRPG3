@@ -25,9 +25,9 @@ private const val LABEL_WIDTH = 150f
 private const val LABEL_HEIGHT = 75f
 private const val RADIUS = 77f
 private const val CIRCLE_PAD_RIGHT = 106f
-private const val CIRCLE_PAD_BOTTOM = 282f
+private const val CIRCLE_PAD_BOTTOM = 362f
 private const val LABEL_PAD_RIGHT = 31f
-private const val LABEL_PAD_BOTTOM = 247f
+private const val LABEL_PAD_BOTTOM = 327f
 
 internal class ClockBox {
 

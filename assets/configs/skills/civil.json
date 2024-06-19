@@ -1,78 +1,43 @@
 {
-  "alchemist" : {
+  "alchemist": {
     "upgrade"    : 8,
     "description": [
-      "Allows for manufacturing various magical",
-      "potions out of various resources."
+      "- 'Alchemist' allows for manufacturing various",
+      "  magical potions out of various resources."
     ]
   },
-  "barbarian" : {
-    "upgrade"    : 4,
-    "description": [
-      "Allows for additional conversation responses",
-      "mostly with intimidating people,",
-      "with possibly more favorable outcomes."
-    ]
-  },
-  "diplomat"  : {
-    "upgrade"    : 4,
-    "description": [
-      "Allows for additional conversation responses",
-      "mostly with persuading people,",
-      "with possibly more favorable outcomes."
-    ]
-  },
-  "druid"     : {
-    "upgrade"    : 4,
-    "description": [
-      "Allows the possibility of talking to animals."
-    ]
-  },
-  "jester"    : {
-    "upgrade"    : 4,
-    "description": [
-      "Allows for additional conversation responses",
-      "mostly with joking and lying to people,",
-      "with possibly more favorable outcomes."
-    ]
-  },
-  "loremaster": {
-    "upgrade"    : 4,
-    "description": [
-      "Allows the possibility of deciphering",
-      "books, scrolls and other old writings."
-    ]
-  },
-  "mechanic"  : {
+  "mechanic" : {
     "upgrade"    : 8,
     "description": [
-      "Allows the possibility to disarm traps on treasure chests.",
-      "Allows for manufacturing various weapons and armor out of",
-      "various resources."
+      "- 'Mechanic' allows the possibility to disarm",
+      "  traps on treasure chests.",
+      "",
+      "- 'Mechanic' allows for manufacturing various",
+      "  weapons and armor out of various resources."
     ]
   },
-  "merchant"  : {
+  "ranger"   : {
     "upgrade"    : 6,
     "description": [
-      "Lowers the price of items in shops when buying.",
-      "Raises the value of your items when selling.",
-      "For every rank of Merchant, 1% of the value in your favor.",
-      "Rank is stacked cumulative for all party members."
+      "- 'Ranger' increases the amount of resources you'll find in the world.",
+      "  For every rank of 'Ranger', 2% more resources.",
+      "  'Ranger' ranks are stacked cumulative for all party members."
     ]
   },
-  "ranger"    : {
+  "merchant" : {
     "upgrade"    : 6,
     "description": [
-      "Increases the amount of resources you'll find in the world.",
-      "For every rank of Ranger, 2% more resources.",
-      "Rank is stacked cumulative for all party members."
+      "- 'Merchant' lowers the price of items in shops when buying,",
+      "  and raises the value of your items when selling.",
+      "  For every rank of 'Merchant', 1% of the value in your favor.",
+      "  'Merchant' ranks are stacked cumulative for all party members."
     ]
   },
-  "scholar"   : {
+  "scholar"  : {
     "upgrade"    : 6,
     "description": [
-      "Lowers the XP needed for training Skills and learning Spells.",
-      "For every 1 rank of Scholar, 1% less XP."
+      "- 'Scholar' lowers the XP needed for training Skills.",
+      "  For every 1 rank of 'Scholar', 1% less XP."
     ]
   }
 }

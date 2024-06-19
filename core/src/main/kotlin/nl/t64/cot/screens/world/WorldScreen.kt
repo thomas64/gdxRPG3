@@ -48,6 +48,7 @@ import nl.t64.cot.screens.world.map.GameMap
 import nl.t64.cot.screens.world.schedule.WorldSchedule
 import nl.t64.cot.screens.world.ui.ButtonBox
 import nl.t64.cot.screens.world.ui.ClockBox
+import nl.t64.cot.screens.world.ui.MovementBox
 import nl.t64.cot.screens.world.ui.PartyWindow
 import nl.t64.cot.sfx.TransitionImage
 import nl.t64.cot.sfx.TransitionPurpose
@@ -74,6 +75,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     private val debugRenderer = DebugRenderer(camera)
     private val debugBox = DebugBox(player)
     private val buttonsBox = ButtonBox()
+    private val movementBox = MovementBox()
 
     private val worldSchedule = WorldSchedule()
 
@@ -349,6 +351,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
         debugRenderer.possibleRenderObjects(doorList + lootList + npcEntities + visibleScheduledEntities + player)
         debugBox.possibleUpdate(dt)
         buttonsBox.update(dt)
+        movementBox.update(player.moveSpeed, dt)
         partyWindow.update(dt)
         clockBox.render(dt)
         conversationDialog.update(dt)
@@ -452,6 +455,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
         gridRenderer.dispose()
         debugBox.dispose()
         buttonsBox.dispose()
+        movementBox.dispose()
         stage.dispose()
     }
 

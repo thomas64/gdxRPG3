@@ -6,47 +6,62 @@ enum class CalcAttributeId(override val title: String) : SuperEnum {
     ACTION_POINTS("Action Points") {
         override fun getDescription(): String {
             return """
-                Defines how many actions this character is able to do each turn in combat.
-                Each 6 ranks in Intelligence increases AP by 1.
-                Each 6 ranks in Strength increases AP by 1.
-                Each 6 ranks in Dexterity increases AP by 1.
-                Each 3 ranks in Speed increases AP by 1.""".trimIndent()
+                - '$title' (AP) define how many actions this
+                  character is able to do each turn in combat.
+
+                - Each 6 ranks in 'Intelligence', 'Dexterity'
+                  and 'Strength' together increases AP by 1.
+
+                - Each 3 ranks in 'Speed' increases AP by 1.""".trimIndent()
         }
     },
 
     BASE_HIT("Base Hit") {
         override fun getDescription(): String {
             return """
-                Defines the chance-to-hit an enemy with physical weapons in combat.
-                Chance-to-hit is modified with the skill of the weapon type you are currently holding.""".trimIndent()
+                - 'Chance to hit' defines your chance to hit
+                  an enemy with physical weapons in combat.
+
+                - 'Chance to hit' is derived from the weapon
+                  you are currently holding and the rank of
+                  your skill of that weapon's skill type.""".trimIndent()
         }
     },
 
     DAMAGE("Damage") {
         override fun getDescription(): String {
             return """
-                Defines the amount of damage-to-inflict to an enemy with physical weapons in combat.
-                $title is the counterpart of Protection.
-                An enemy's protection decreases the damage you inflict.
-                $title is modified with Strength for hand-to-hand combat,
-                or Dexterity for ranged combat.""".trimIndent()
+                - '$title' defines the amount of damage you inflict
+                  to an enemy with physical weapons in combat.
+
+                - '$title' is the counterpart of 'Protection'.
+
+                - An enemy's 'Protection' decreases the '$title' you inflict.
+
+                - '$title' is derived from the weapon you are currently holding
+                  and the rank of your 'Strength' for hand-to-hand combat,
+                  or the rank of your 'Dexterity' for ranged combat.""".trimIndent()
         }
     },
 
     PROTECTION("Protection") {
         override fun getDescription(): String {
             return """
-                Decreases the enemy's damage-to-inflict with physical weapons in combat.
-                $title is the counterpart of Damage.
-                A complete armor set from the same type results into bonus $title.""".trimIndent()
+                - '$title' decreases the enemy's damage it inflicts
+                  to you with physical weapons in combat.
+
+                - '$title' is the counterpart of 'Damage'.
+
+                - A complete armor set from the same
+                  type results into bonus '$title'.""".trimIndent()
         }
     },
 
     DEFENSE("Defense") {
         override fun getDescription(): String {
             return """
-                Defines the possibility to block an enemy's
-                attack with physical weapons in combat.""".trimIndent()
+                '$title' defines your possibility to block an
+                enemy's attack with physical weapons in combat.""".trimIndent()
         }
     },
 
@@ -54,7 +69,7 @@ enum class CalcAttributeId(override val title: String) : SuperEnum {
         override fun getDescription(): String {
             return """
                 When casting magic spells,
-                $title is used instead of Stamina.""".trimIndent()
+                '$title' is used instead of 'SP'.""".trimIndent()
         }
     },
 

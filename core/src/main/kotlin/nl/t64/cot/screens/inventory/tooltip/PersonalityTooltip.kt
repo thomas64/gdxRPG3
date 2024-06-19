@@ -45,7 +45,8 @@ open class PersonalityTooltip : BaseTooltip() {
 
         val totalScholar = InventoryUtils.getSelectedHero().getCalculatedTotalSkillOf(SkillItemId.SCHOLAR)
         val description = getDescription(personalityItem, totalScholar)
-        val labelStyle = LabelStyle(BitmapFont(), Color.WHITE)
+        val labelFont = BitmapFont().apply { data.markupEnabled = true }
+        val labelStyle = LabelStyle(labelFont, Color.WHITE)
         val label = Label(description, labelStyle)
         window.add(label)
 

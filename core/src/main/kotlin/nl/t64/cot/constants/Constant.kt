@@ -41,10 +41,10 @@ object Constant {
 
     const val DESCRIPTION_KEY_BUY = "Price"
     const val DESCRIPTION_KEY_BUY_PIECE = "Price per piece"
-    const val DESCRIPTION_KEY_BUY_TOTAL = "Total price"
+    const val DESCRIPTION_KEY_BUY_TOTAL = "Price for all"
     const val DESCRIPTION_KEY_SELL = "Sell value"
     const val DESCRIPTION_KEY_SELL_PIECE = "Sell value per piece"
-    const val DESCRIPTION_KEY_SELL_TOTAL = "Total sell value"
+    const val DESCRIPTION_KEY_SELL_TOTAL = "Sell value for all"
 
     const val PHRASE_ID_INN_NEGATIVE = "1000"
     const val PHRASE_ID_LOOT_LEFTOVER = "1199"

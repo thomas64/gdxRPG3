@@ -5,9 +5,9 @@
   "chest0004": {"content": {"gold": 100}, "trapLevel": 2, "lockLevel": 0},
   "chest0005": {"content": {"gold": 1000}, "trapLevel": 6, "lockLevel": 10},
   "chest0006": {"content": {"spice": 9999, "herb": 9999, "gemstone": 9999}, "lockLevel": 10},
-  "chest0007": {"content": {"basic_light_helmet": 1, "gold": 4}},
+  "chest0007": {"content": {"basic_light_helmet": 1, "healing_potion": 1, "gold": 4}},
   "chest0008": {"content": {"scroll_of_orc_obedience": 1}, "doesReset": true},
   "chest0009": {"content": {"basic_light_belt": 1, "gold": 6}},
-  "chest0010": {"content": {"healing_potion": 2, "gold": 3, "basic_silver_necklace": 1}},
-  "chest0011": {"content": {"basic_light_gloves": 1, "gold": 8, "healing_potion": 2}}
+  "chest0010": {"content": {"healing_potion": 3, "gold": 3, "basic_silver_necklace": 1}},
+  "chest0011": {"content": {"basic_light_gloves": 1, "gold": 8, "healing_potion": 3}}
 }

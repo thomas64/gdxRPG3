@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="72" height="48" tilewidth="24" tileheight="24" infinite="0" nextlayerid="19" nextobjectid="125">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="72" height="48" tilewidth="24" tileheight="24" infinite="0" nextlayerid="19" nextobjectid="127">
  <properties>
   <property name="bgm" value="bgm_ardor"/>
   <property name="lightmap_map" value="fog"/>
@@ -170,6 +170,11 @@
  <objectgroup color="#55aaff" id="12" name="spawn">
   <object id="2" name="honeywood_cave_2" x="1344" y="528" width="48" height="24"/>
   <object id="123" name="honeywood_forest_ardor_2" x="288" y="24" width="48" height="24"/>
+  <object id="126" name="honeywood_forest_ardor_1" x="1344" y="552" width="48" height="24">
+   <properties>
+    <property name="direction" value="south"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup color="#ffff7f" id="11" name="portal">
   <object id="1" name="honeywood_cave_2" x="1332" y="504" width="72" height="24"/>
