@@ -19,7 +19,6 @@ private const val POS_Y = 50f
 private const val PAD_LEFT = -20f
 private const val WIDTH = -102f - PAD_LEFT
 private const val HEIGHT = 70f
-private const val TIME_PREFIX = "Time:   "
 
 internal class ClockTable {
 
@@ -31,18 +30,24 @@ internal class ClockTable {
     }
 
     fun fill() {
-        if (gameData.clock.isRunning()) {
-            container.clear()
-            val style = Label.LabelStyle(font, Color.BLACK)
-            val time = gameData.clock.getTimeOfDayFormatted()
-            val label = Label("$TIME_PREFIX$time", style).apply { setAlignment(Align.center) }
-            container.background = Utils.createFullBorder()
-            val quarterOfScreenWidth = Gdx.graphics.width * .25f
-            container.add(label).padLeft(PAD_LEFT).width(quarterOfScreenWidth + WIDTH).height(HEIGHT)
-            container.pack()
+        val quarterOfScreenWidth = Gdx.graphics.width * .25f
+        val label = createLabel()
+        container.clear()
+        container.background = Utils.createFullBorder()
+        container.add(label).padLeft(PAD_LEFT).width(quarterOfScreenWidth + WIDTH).height(HEIGHT)
+        container.pack()
+    }
+
+    private fun createLabel(): Label {
+        val style = Label.LabelStyle(font, Color.BLACK)
+        val currentCycle = gameData.numberOfCycles
+        val time = gameData.clock.getTimeOfDayFormatted()
+
+        return if (currentCycle == 1) {
+            Label("Time:   $time", style)
         } else {
-            container.clear()
-        }
+            Label("Cycle:  $currentCycle    /    Time:  $time", style)
+        }.apply { setAlignment(Align.center) }
     }
 
 }

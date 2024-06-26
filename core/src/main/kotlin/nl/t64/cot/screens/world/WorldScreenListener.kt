@@ -23,52 +23,50 @@ internal class WorldScreenListener(
 ) : InputAdapter() {
 
     override fun keyDown(keycode: Int): Boolean {
-        if (!isInTransition.invoke()) {
-            when (keycode) {
-                Constant.KEYCODE_SELECT,
-                Input.Keys.M -> {
-                    openMiniMap.invoke()
+        if (isInTransition.invoke()) return false
+
+        if (preferenceManager.isInDebugMode) {
+            if (Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)
+                || (Gdx.input.isKeyPressed(Input.Keys.SHIFT_RIGHT))
+            ) {
+                if (Gdx.input.isKeyPressed(Input.Keys.NUM_9)) {
+                    gameData.clock.halfHourBack()
+                    return false
+                }
+                if (Gdx.input.isKeyPressed(Input.Keys.NUM_0)) {
+                    gameData.clock.halfHourForward()
                     return false
                 }
             }
-
             when (keycode) {
-                Constant.KEYCODE_START, Input.Keys.ESCAPE,
-                Constant.KEYCODE_TOP, Input.Keys.I,
-                Constant.KEYCODE_LEFT, Input.Keys.L,
-                Constant.KEYCODE_L3, Input.Keys.H -> doBeforeLoadScreen.invoke()
-            }
-
-            if (preferenceManager.isInDebugMode) {
-                if (Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)
-                    || (Gdx.input.isKeyPressed(Input.Keys.SHIFT_RIGHT))
-                ) {
-                    if (Gdx.input.isKeyPressed(Input.Keys.NUM_9)) {
-                        gameData.clock.halfHourBack()
-                        return false
-                    }
-                    if (Gdx.input.isKeyPressed(Input.Keys.NUM_0)) {
-                        gameData.clock.halfHourForward()
-                        return false
-                    }
-                }
-            }
-
-            when (keycode) {
-                Constant.KEYCODE_START, Input.Keys.ESCAPE -> MenuPause.load()
-                Constant.KEYCODE_TOP, Input.Keys.I -> InventoryScreen.load()
-                Constant.KEYCODE_LEFT, Input.Keys.L -> QuestLogScreen.load()
-                Constant.KEYCODE_L3, Input.Keys.H -> HelpScreen.load()
-                Constant.KEYCODE_R3, Input.Keys.P -> showHidePartyWindowFunction.invoke()
                 Input.Keys.F10 -> setShowGrid.invoke()
                 Input.Keys.F11 -> setShowObjects.invoke()
                 Input.Keys.F12 -> setShowDebug.invoke()
-                Input.Keys.NUM_9 -> if (preferenceManager.isInDebugMode) gameData.clock.fiveMinutesBack()
-                Input.Keys.NUM_0 -> if (preferenceManager.isInDebugMode) gameData.clock.fiveMinutesForward()
-                Input.Keys.EQUALS -> if (preferenceManager.isInDebugMode) gameData.clock.start()
-                Input.Keys.MINUS -> if (preferenceManager.isInDebugMode) gameData.clock.stop()
+                Input.Keys.NUM_9 -> gameData.clock.fiveMinutesBack()
+                Input.Keys.NUM_0 -> gameData.clock.fiveMinutesForward()
+                Input.Keys.EQUALS -> gameData.clock.start()
+                Input.Keys.MINUS -> gameData.clock.stop()
             }
         }
+
+        when (keycode) {
+            Constant.KEYCODE_START, Input.Keys.ESCAPE,
+            Constant.KEYCODE_TOP, Input.Keys.I,
+            Constant.KEYCODE_LEFT, Input.Keys.L,
+            Constant.KEYCODE_L3, Input.Keys.H -> doBeforeLoadScreen.invoke()
+        }
+
+        when (keycode) {
+            Constant.KEYCODE_SELECT, Input.Keys.M -> openMiniMap.invoke()
+            Constant.KEYCODE_R3, Input.Keys.P -> showHidePartyWindowFunction.invoke()
+
+            Constant.KEYCODE_START, Input.Keys.ESCAPE -> MenuPause.load()
+            Constant.KEYCODE_TOP, Input.Keys.I -> InventoryScreen.load()
+            Constant.KEYCODE_LEFT, Input.Keys.L -> QuestLogScreen.load()
+            Constant.KEYCODE_L3, Input.Keys.H -> HelpScreen.load()
+
+        }
+
         return false
     }
 

@@ -98,13 +98,7 @@
       "1": {"text": ["You have been given another chance..."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "mozes_lies_dead"                : {
-    "name"   : "Mozes",
-    "phrases": {
-      "1": {"text": ["{SPEED=0.2} . . . . ."], "choices": [{"command": "EXIT"}]}
-    }
-  },
-  "mozes_wakes_up"                 : {
+  "mozes_wakes_up_cycle_2"    : {
     "name"   : "Mozes",
     "phrases": {
       "1": {"text": ["What the..."]},
@@ -112,7 +106,7 @@
       "3": {"text": ["Was it all a dream?"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "what_happened"                  : {
+  "out_of_bed_cycle_2"     : {
     "name"   : "Mozes",
     "phrases": {
       "1": {"text": ["Was Grace really sacrificed?"]},

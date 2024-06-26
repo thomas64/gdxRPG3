@@ -6,22 +6,16 @@
       "2": {"text": ["Because of the orcs, I think that's where I should start my search."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "everything_is_normal_again"          : {
+  "outside_home_cycle_2"                : {
     "name"   : "Mozes",
     "phrases": {
-      "1": {"text": ["Everything seems normal?"]},
-      "2": {"text": ["Adan didn't end up in flames?"]},
-      "3": {"text": ["Is Grace also still alive then?"]},
-      "4": {"text": ["I need to see her! I need to know! Maybe I can still save her!"]},
-      "5": {"text": ["I must hurry back to the forest! I need to make sure!"], "choices": [{"command": "EXIT"}]}
-    }
-  },
-  "everything_is_back_again"            : {
-    "name"   : "Mozes",
-    "phrases": {
-      "1": {"text": ["This is so weird..."]},
-      "2": {"text": ["Everything is back to the way it was..."]},
-      "3": {"text": ["As if nothing happened at all..."], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["Everything seems normal? Adan didn't end up in flames?"]},
+      "2": {"text": ["Is Grace also still alive then?"]},
+      "3": {"text": ["Then I have to go back! I must save her!"]},
+      "4": {"text": ["But Ardor is so powerful... I've no idea what to do against him..."]},
+      "5": {"text": ["Did it really happened at all?"]},
+      "6": {"text": ["Maybe I should ask the elder for help."]},
+      "7": {"text": ["Would he believe me?"], "choices": [{"command": "EXIT"}]}
     }
   },
   "mrs_johanna"                         : {
@@ -236,7 +230,7 @@
       "6" : {"text": ["{SPEED=0.2} . . . . ."]},
       "7" : {"text": ["Wait! You want me to come with you, travel through time, risk my life to stop an evil wizard, and rescue Grace?!"]},
       "8" : {"text": ["Hell yeah! You're going on this HUGE adventure with all the big stuff, slaying monsters, taking loot, and and and..."]},
-      "9" : {"text": ["Why wouldn't I want to go with you? What's wrong with you!?"]},
+      "9" : {"text": ["Why wouldn't I want to go with you? What's wrong with you?!"]},
       "10": {"text": ["We've been friends since childhood, always adventuring together. Do you really think I'd leave you hanging?"]},
       "11": {"text": ["Who will be there to protect you? You need protection... {WAIT=0.5}From me! You know that, right?"]},
       "12": {"text": ["Alright, here's the deal: You're taking me with you, and maybe, just maybe, I'll forgive you for doubting my adventurous spirit."]},

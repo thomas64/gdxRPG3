@@ -33,7 +33,8 @@ class Participant(
                 messages.add("${target.name} is defeated.")
             }
         } else {
-            messages.add("${character.name}'s attack failed.")
+            messages.add("${character.name}'s attack failed."
+                             + if (preferenceManager.isInDebugMode) " (${totalHit}% hit)" else "")
         }
         return messages
     }

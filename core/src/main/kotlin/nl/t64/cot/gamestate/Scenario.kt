@@ -22,12 +22,14 @@ class Scenario {
         setQuestGraceComplete()
         gameData.resetCycle()
         addQuestArdorToLogbook()
+        gameData.clock.start()
         profileManager.saveProfile()
     }
 
     fun startThirdCycle() {
         reviveMozes()
         gameData.resetCycle()
+        gameData.clock.start()
         profileManager.saveProfile()
     }
 
@@ -35,6 +37,7 @@ class Scenario {
         reviveMozes()
         gameData.resetCycle()
 //        addQuestLastdennToLogbook()
+        gameData.clock.start()
         profileManager.saveProfile()
     }
 

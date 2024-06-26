@@ -57,7 +57,7 @@ class CrystalHandler private constructor() {
                                               Actions.delay(0.5f),
                                               Actions.fadeIn(Constant.FADE_DURATION),
                                               Actions.delay(1.5f),
-                                              Actions.run { screenManager.setScreen(ScreenType.SCENE_START_OF_CYCLE_3) },
+                                              Actions.run { screenManager.setScreen(ScreenType.SCENE_START_OF_CYCLE_4) },
                                               Actions.removeActor()))
     }
 

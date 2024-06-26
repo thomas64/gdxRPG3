@@ -2,6 +2,7 @@ package nl.t64.cot.screens.cutscene
 
 import com.badlogic.gdx.scenes.scene2d.Action
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
+import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.constants.ScreenType
@@ -128,7 +129,11 @@ class SceneArdorEnd : CutsceneScreen() {
     }
 
     override fun onNotifyBattleLost() {
-        screenManager.setScreen(ScreenType.MENU_MAIN)
+        when (gameData.numberOfCycles) {
+            2 -> screenManager.setScreen(ScreenType.SCENE_END_OF_CYCLE_2)
+            3 -> screenManager.setScreen(ScreenType.SCENE_END_OF_CYCLE_3)
+            else -> screenManager.setScreen(ScreenType.MENU_MAIN)
+        }
     }
 
 }

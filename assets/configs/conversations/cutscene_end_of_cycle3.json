@@ -1,0 +1,42 @@
+{
+  "receive_crystal_of_time": {
+    "phrases": {
+      "1" : {"name": "? ? ?", "text": ["Human boy, I do not have much time left, so listen to me very carefully!"]},
+      "2" : {"name": "Ylarus", "text": ["I am Ylarus, God of Time."]},
+      "3" : {"text": ["Adan has been destroyed once again."]},
+      "4" : {"text": ["Each time the wizard sacrifices the human girl you call Grace, Adan ignites, annihilating all life, with yourself and the wizard included."]},
+      "5" : {"text": ["Human boy, the destruction of Adan and with that his own demise is not his intend! However, it is imperative that you prevent its recurrence!"]},
+      "6" : {"text": ["I have chosen you for this task because of the bond you share with the human girl."]},
+      "7" : {"text": [". . ."]},
+      "8" : {"text": ["I have rewound time for you before, but my powers are weakening."]},
+      "9" : {"text": ["Now, I no longer possess the strength for another reversal."]},
+      "10": {"text": ["Thus, I have embedded a portion of my essence within this crystal."]},
+      "11": {"text": ["This crystal enables you to {COLOR=BLUE}rewind time by 12 hours before this disaster strikes, as often as needed."]},
+      "12": {"text": [". . ."]},
+      "13": {"text": ["{SPEED=0.5}My time has come to an end... Take the crystal now! And use it!"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "mozes_wakes_up_cycle_4" : {
+    "name"   : "Mozes",
+    "phrases": {
+      "1": {"text": ["What the..."]},
+      "2": {"text": ["This is heavy."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "out_of_bed_cycle_4"     : {
+    "name"   : "Mozes",
+    "phrases": {
+      "1" : {"text": ["Ylarus, the God of Time..."]},
+      "2" : {"text": [". . ."]},
+      "3" : {"text": ["From what I understand, in approximately 12 hours, meaning around 19:30 tonight, Grace will get killed, and Adan will burn."]},
+      "4" : {"text": ["It appears Ylarus won't be divine intervening any further, so I have to use this crystal to reset time somewhere before 19:30!"]},
+      "5" : {"text": ["If I don't, Grace will die, Adan will be destroyed, I die."]},
+      "6" : {"text": ["Is this really all on my shoulders now?"]},
+      "7" : {"text": [". . ."]},
+      "8" : {"text": ["*Sigh* This is a lot to take in."]},
+      "9" : {"text": [". . ."]},
+      "10": {"text": ["Okay! Grace needs me, but I cannot be there just yet. Hold on, Grace! I will come back for you!"]},
+      "11": {"text": ["When the time is right..."], "choices": [{"command": "EXIT"}]}
+    }
+  }
+}

@@ -14,7 +14,7 @@ import nl.t64.cot.sfx.TransitionImage
 import nl.t64.cot.sfx.TransitionType
 
 
-class SceneStartOfCycle3 : CutsceneScreen() {
+class SceneStartOfCycle4 : CutsceneScreen() {
 
     private lateinit var mozes: CutsceneActor
     private lateinit var grayScreen: Actor
@@ -51,7 +51,7 @@ class SceneStartOfCycle3 : CutsceneScreen() {
             Actions.delay(0.5f),
             Actions.run { playSe(AudioEvent.SE_SAVE_GAME) },
             Actions.delay(1.5f),
-            Actions.run { showConversationDialog("mozes_wakes_up_again", "mozes") }
+            Actions.run { showConversationDialog("mozes_wakes_up_cycle_4", "mozes") }
         )
     }
 
@@ -65,7 +65,7 @@ class SceneStartOfCycle3 : CutsceneScreen() {
             Actions.delay(0.5f),
             Actions.run { mozes.direction = Direction.SOUTH },
             Actions.delay(2f),
-            Actions.run { showConversationDialog("to_lastdenn_then", "mozes") }
+            Actions.run { showConversationDialog("out_of_bed_cycle_4", "mozes") }
         )
     }
 
@@ -77,7 +77,7 @@ class SceneStartOfCycle3 : CutsceneScreen() {
     }
 
     override fun exitScreen() {
-        endCutsceneAndOpenMapAnd("honeywood_house_mozes") { scenario.startThirdCycle() }
+        endCutsceneAndOpenMapAnd("honeywood_house_mozes") { scenario.startFourthCycle() }
     }
 
 }

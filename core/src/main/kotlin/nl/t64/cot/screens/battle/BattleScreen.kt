@@ -482,16 +482,22 @@ class BattleScreen : Screen {
     }
 
     private fun createDeathMessage(): String {
-        if (
-            gameData.numberOfCycles == 1
-            && enemies.getAll().all { it.id == "orc_general" || it.id == "ardor" }
-        ) {
-            return """
+        val currentCycle = gameData.numberOfCycles
+        val isFacingArdorOrOrcGenerals = enemies.getAll().all { it.id in listOf("orc_general", "ardor") }
+
+        return when {
+
+            currentCycle == 1 && isFacingArdorOrOrcGenerals -> """
                 Mozes is knocked down.
 
                 The fight is over.""".trimIndent()
-        } else {
-            return """
+
+            currentCycle in 2..3 && isFacingArdorOrOrcGenerals -> """
+                Mozes took a fatal blow.
+
+                The fight is over.""".trimIndent()
+
+            else -> """
                 Mozes took a fatal blow.
 
                 Game Over.""".trimIndent()

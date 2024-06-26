@@ -1,52 +1,25 @@
 {
-  "to_late_again"          : {
-    "name"   : "Mozes",
+  "final_chance"          : {
+    "name"   : "? ? ?",
     "phrases": {
-      "1": {"text": ["Oh no! That sound!"]},
-      "2": {"text": ["I'm too late again!"]},
-      "3": {"text": ["I'm so sorry, Grace!"]},
-      "4": {"text": ["I'm sorry I didn't make it in time..."]},
-      "5": {"text": ["Again{SPEED=0.1}..."], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["This is your final chance..."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "receive_crystal_of_time": {
-    "phrases": {
-      "1" : {"name": "? ? ?", "text": ["Human boy, I do not have much time left, so listen to me very carefully!"]},
-      "2" : {"name": "Ylarus", "text": ["I am Ylarus, God of Time."]},
-      "3" : {"text": ["Adan has been destroyed once again."]},
-      "4" : {"text": ["Each time the wizard sacrifices the human girl you call Grace, Adan ignites, annihilating all life, with yourself and the wizard included."]},
-      "5" : {"text": ["Human boy, this catastrophe is not his intend! However, it is imperative that you prevent its recurrence!"]},
-      "6" : {"text": ["I have chosen you for this task because of the bond you share with the human girl."]},
-      "7" : {"text": ["As the fluttering forest dwellers already warned you about: Engaging the wizard directly is futile. His power is immense, ensuring your defeat, as in your past encounter."]},
-      "8" : {"text": ["Your task is to find answers about this catastrophe. Seek out the {COLOR=BLUE}priest of Lastdenn{COLOR=BLACK}."]},
-      "9" : {"text": [". . ."]},
-      "10": {"text": ["I have rewound time for you before, but my powers are weakening."]},
-      "11": {"text": ["Now, I no longer possess the strength for another reversal."]},
-      "12": {"text": ["Thus, I have embedded a portion of my essence within this crystal."]},
-      "13": {"text": ["This crystal enables you to {COLOR=BLUE}rewind time by 12 hours before this disaster strikes, as often as needed."]},
-      "14": {"text": ["{SPEED=0.5}My time has come to an end... Take the crystal now! And use it!"], "choices": [{"command": "EXIT"}]}
-    }
-  },
-  "mozes_wakes_up_again"   : {
+  "mozes_wakes_up_cycle_3": {
     "name"   : "Mozes",
     "phrases": {
       "1": {"text": ["What the..."]},
-      "2": {"text": ["This is heavy."], "choices": [{"command": "EXIT"}]}
+      "2": {"text": ["Again?!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "to_lastdenn_then"       : {
+  "out_of_bed_cycle_3"    : {
     "name"   : "Mozes",
     "phrases": {
-      "1" : {"text": ["Ylarus, the God of Time..."]},
-      "2" : {"text": [". . ."]},
-      "3" : {"text": ["From what I understand, in approximately 12 hours, meaning around 19:30 tonight, Grace will get killed, and Adan will burn."]},
-      "4" : {"text": ["It appears Ylarus won't be divine intervening any further, leaving me to rely on this crystal before time runs out."]},
-      "5" : {"text": ["With this newfound ability to revert time, am I now Adan's only hope to prevent it's destruction?"]},
-      "6" : {"text": [". . ."]},
-      "7" : {"text": ["*Sigh* This is a lot to take in."]},
-      "8" : {"text": [". . ."]},
-      "9" : {"text": ["Grace needs me, but I cannot be there just yet. Hold on, Grace! I will come back for you!"]},
-      "10": {"text": ["Now, following Ylarus's guidance, my first step is to look for the priest of Lastdenn..."], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["It was the same voice as before..."]},
+      "2": {"text": ["\"This is your final chance...\" ??"]},
+      "3": {"text": ["Then what?! And final chance for what anyway?"]},
+      "4": {"text": ["Final chance to rescue Grace?", "Final chance to defeat Ardor?", "Final chance to prevent Adan's destruction?"]},
+      "5": {"text": ["How would I know! And how the hell am I supposed to do that?"], "choices": [{"command": "EXIT"}]}
     }
   }
 }

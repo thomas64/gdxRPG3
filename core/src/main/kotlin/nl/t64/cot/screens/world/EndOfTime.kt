@@ -41,31 +41,35 @@ class EndOfTime(
         val flames: List<CutsceneActor> = createFlames()
         flames.forEach { stage.addActor(it) }
 
-        if (gameData.numberOfCycles !in listOf(2)) {
-            stage.addAction(
-                Actions.sequence(
-                    createDefaultActions(flames, background),
-                    Actions.delay(7f),
-                    titleAction(title),
-                    Actions.delay(8f),
-                    Actions.run {
-                        screenManager.setScreen(ScreenType.MENU_MAIN)
-                        actionAfter.invoke()
-                    }
-                )
-            )
-        } else if (gameData.numberOfCycles == 2) {
-            stage.addAction(
-                Actions.sequence(
-                    createDefaultActions(flames, background),
-                    Actions.delay(7f),
-                    Actions.run {
-                        screenManager.setScreen(ScreenType.SCENE_END_OF_CYCLE_2)
-                        actionAfter.invoke()
-                    }
-                )
-            )
+        when (gameData.numberOfCycles) {
+            2 -> playScene(flames, background, ScreenType.SCENE_END_OF_CYCLE_2, actionAfter)
+            3 -> playScene(flames, background, ScreenType.SCENE_END_OF_CYCLE_3, actionAfter)
+            else -> playEnd(flames, background, title, actionAfter)
         }
+    }
+
+    private fun playScene(flames: List<CutsceneActor>, background: Image, scene: ScreenType, actionAfter: () -> Unit) {
+        stage.addAction(Actions.sequence(
+            createDefaultActions(flames, background),
+            Actions.run { audioManager.fadeBgsInThread() },
+            Actions.delay(2f),
+            Actions.run {
+                screenManager.setScreen(scene)
+                actionAfter.invoke()
+            }
+        ))
+    }
+
+    private fun playEnd(flames: List<CutsceneActor>, background: Image, title: Label, actionAfter: () -> Unit) {
+        stage.addAction(Actions.sequence(
+            createDefaultActions(flames, background),
+            titleAction(title),
+            Actions.delay(8f),
+            Actions.run {
+                screenManager.setScreen(ScreenType.MENU_MAIN)
+                actionAfter.invoke()
+            }
+        ))
     }
 
     private fun createDefaultActions(flames: List<CutsceneActor>, background: Image): Action {
@@ -75,7 +79,8 @@ class EndOfTime(
             Actions.delay(3f),
             flamesAction(flames),
             Actions.delay(5f),
-            Actions.run { background.addAction(Actions.alpha(1f)) }
+            Actions.run { background.addAction(Actions.alpha(1f)) },
+            Actions.delay(7f)
         )
     }
 
@@ -83,7 +88,7 @@ class EndOfTime(
         val blackTexture = Color.BLACK.toTexture()
         return Image(blackTexture).apply {
             color.a = 0f
-            setSize(Gdx.graphics.width.toFloat(), Gdx.graphics.height.toFloat())
+            setSize(Gdx.graphics.width.toFloat() * 100f, Gdx.graphics.height.toFloat() * 100f)
         }.also { blackTexture.dispose() }
     }
 

@@ -90,11 +90,10 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
         setInputProcessors(null)
         player.send(DirectionEvent(Direction.NORTH))
 
-        val endOfTime = EndOfTime(stage, camera)
-        endOfTime.fadeWithFlamesAnd {
+        EndOfTime(stage, camera).fadeWithFlamesAnd {
             conversationDialog.tryToClose()
-            stage.clear()
             gameState = GameState.OFF
+            Utils.runWithDelay(1f) { stage.clear() }
         }
     }
 

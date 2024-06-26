@@ -66,9 +66,8 @@ class SceneEndOfCycle1 : CutsceneScreen() {
                          graceDies(),
                          if (areGeneralsAlive) everythingWentWrong() else everythingWentWrongWithoutGuards(),
                          fireKillsAll(),
-                         mozesLiesDead(),
                          mozesWakesUpAgain(),
-                         graceIsMissingAgain(),
+                         stepOutOfBed(),
                          startSecondCycle()
         )
     }
@@ -239,16 +238,9 @@ class SceneEndOfCycle1 : CutsceneScreen() {
         )
     }
 
-    private fun mozesLiesDead(): Action {
-        return Actions.sequence(
-            Actions.delay(2f),
-            Actions.run { showConversationDialog("mozes_lies_dead", "mozes") }
-        )
-    }
-
     private fun mozesWakesUpAgain(): Action {
         return Actions.sequence(
-            Actions.delay(2f),
+            Actions.delay(4f),
 
             actionFadeOut(),
 
@@ -267,11 +259,11 @@ class SceneEndOfCycle1 : CutsceneScreen() {
             actionFadeIn(),
 
             Actions.delay(1f),
-            Actions.run { showConversationDialog("mozes_wakes_up", "mozes") }
+            Actions.run { showConversationDialog("mozes_wakes_up_cycle_2", "mozes") }
         )
     }
 
-    private fun graceIsMissingAgain(): Action {
+    private fun stepOutOfBed(): Action {
         return Actions.sequence(
             Actions.delay(2f),
             Actions.run { mozes.direction = Direction.EAST },
@@ -279,7 +271,7 @@ class SceneEndOfCycle1 : CutsceneScreen() {
             Actions.moveBy(48f, 0f, 2f),
             Actions.run { mozes.entityState = EntityState.IDLE },
             Actions.run { mozes.direction = Direction.SOUTH },
-            Actions.run { showConversationDialog("what_happened", "mozes") }
+            Actions.run { showConversationDialog("out_of_bed_cycle_2", "mozes") }
         )
     }
 

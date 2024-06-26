@@ -2,10 +2,11 @@ default.json
 cutscene_intro.json
 honeywood_forest.json
 honeywood_cave.json
-cutscene_ardor1.json
+cutscene_end_of_cycle1.json
 honeywood.json
 cutscene_end_of_cycle2.json
-cutscene_ardor2.json
+cutscene_end_of_cycle3.json
+cutscene_ardor_end.json
 heroes.json
 lastdenn.json
 santino.json
