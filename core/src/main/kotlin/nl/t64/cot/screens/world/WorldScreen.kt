@@ -354,7 +354,9 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
 
     private fun renderAll(dt: Float) {
         fogOfWarManager.update(player.position, dt)
-        mapManager.updateConditionLayers()
+        if (gameState != GameState.DIALOG && !isInTransition) {
+            mapManager.updateConditionLayers()
+        }
         updateCameraPosition()
         worldRenderer.renderAll(player.position) { renderEntities(it) }
         gridRenderer.possibleRender()

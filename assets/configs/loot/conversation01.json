@@ -1,5 +1,6 @@
 {
-  "fairy_welcome": {"xp": 15},
-  "fairy_school" : {"content": {"air_shield": 1, "strength": 1}},
-  "fairy_shop"   : {"content": {"epic_fairy_ring": 1}}
+  "fairy_welcome"      : {"xp": 15},
+  "fairy_school"       : {"content": {"air_shield": 1, "strength": 1}},
+  "quest_helping_horse": {"content": {"horseshoe": 4}},
+  "fairy_shop"         : {"content": {"epic_fairy_ring": 1}}
 }

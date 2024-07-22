@@ -10,7 +10,7 @@ import nl.t64.cot.screens.world.entity.PhysicsScheduledNpc
 
 class Lennor : EntitySchedule() {
 
-    override val entity = Entity("man02", InputEmpty(), PhysicsScheduledNpc(), GraphicsScheduledNpc("man02"))
+    override val entity = Entity("man13", InputEmpty(), PhysicsScheduledNpc(), GraphicsScheduledNpc("man13"))
 
     override val scheduleParts: List<SchedulePart> = listOf(
         // @formatter:off

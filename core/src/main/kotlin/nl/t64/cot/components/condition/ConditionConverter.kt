@@ -37,6 +37,10 @@ object ConditionConverter {
                 val time = getOneTimeUnit("_before_", conditionId)
                 gameData.clock.isCurrentTimeBefore(time)
             }
+            conditionId.contains("_after_") -> {
+                val time = getOneTimeUnit("_after_", conditionId)
+                gameData.clock.isCurrentTimeAfter(time)
+            }
             else -> throw IllegalArgumentException("No defined state found.")
         }
     }

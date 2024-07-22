@@ -53,33 +53,35 @@
       "2" : {
         "choices": [
           {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "text": "*Ask Lennor if he's seen Grace this morning.*", "nextId": "3"},
+          {"text": "*Inquire about the fallen tree.*", "nextId": "20"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
-      "3" : {"face": "man02", "name": "Lennor", "text": ["Grace? No, I haven't seen her. Why? What happened?"]},
+      "3" : {"face": "man13", "name": "Lennor", "text": ["Grace? No, I haven't seen her. Why? What happened?"]},
       "4" : {"face": "mozes", "name": "Mozes", "text": ["She's missing. I woke up this morning and she wasn't in her bed."]},
-      "5" : {"face": "man02", "name": "Lennor", "text": ["That's concerning. Are you sure she's not just playing somewhere in the village?"]},
+      "5" : {"face": "man13", "name": "Lennor", "text": ["That's concerning. Are you sure she's not just playing somewhere in the village?"]},
       "6" : {"face": "mozes", "name": "Mozes", "text": ["I'm not certain, but I fear she might have gone to Honeywood Forest, and there are orcs."]},
-      "7" : {"face": "man02", "name": "Lennor", "text": ["Is there anything I can do to help?"]},
+      "7" : {"face": "man13", "name": "Lennor", "text": ["Is there anything I can do to help?"]},
       "8" : {"face": "mozes", "name": "Mozes", "text": ["I appreciate the offer, Lennor, but I think I'll manage. Please keep an eye out for Grace."], "choices": [{"command": "EXIT", "nextId": "10"}]},
-      "10": {"face": "man02", "name": "Lennor", "text": ["Weren't you heading to Honeywood Forest? Did you find her?"], "choices": [{"command": "EXIT", "nextId": "10"}]}
+      "10": {"face": "man13", "name": "Lennor", "text": ["Weren't you heading to Honeywood Forest? Did you find her?"], "choices": [{"command": "EXIT", "nextId": "10"}]},
+      "20": {"text": ["I don't know yet. I haven't been there. I need to see for myself first."], "choices": [{"command": "EXIT"}]}
     }
   },
   "lennor_and_johanna_meet"             : {
     "phrases": {
-      "1": {"face": "man02", "name": "Lennor", "text": ["Hey Mrs. Johanna! How are you today?"]},
+      "1": {"face": "man13", "name": "Lennor", "text": ["Hey Mrs. Johanna! How are you today?"]},
       "2": {"face": "oldwoman01", "name": "Mrs. Johanna", "text": ["Lennor, my dear, it's a beautiful morning, isn't it?"]},
       "3": {"face": "oldwoman01", "name": "Mrs. Johanna", "text": ["Have you seen the road to Honeywood Farm?"]},
-      "4": {"face": "man02", "name": "Lennor", "text": ["Yes, I'm actually on my way there now. A large tree has fallen on the road this morning and I've been asked to remove it."]},
+      "4": {"face": "man13", "name": "Lennor", "text": ["Yes, I'm actually on my way there now. A large tree has fallen on the road this morning and I've been asked to remove it."]},
       "5": {"face": "oldwoman01", "name": "Mrs. Johanna", "text": ["Oh, I see. I hope you'll be able to clear it soon."]},
-      "6": {"face": "man02", "name": "Lennor", "text": ["I hope so too. I'll do my best."], "choices": [{"command": "EXIT"}]}
+      "6": {"face": "man13", "name": "Lennor", "text": ["I hope so too. I'll do my best."], "choices": [{"command": "EXIT"}]}
     }
   },
   "quest_helping_horse"                 : {
     "name"   : "Lennor",
     "phrases": {
-      "1" : {"text": ["Hey Mozes, you can't go to Honeywood Farm at the moment. A large tree has fallen on the road this morning. I'm busy removing it, but I think it'll take me until 13:00."]},
-      "2" : {
+      "1"   : {"text": ["Hey Mozes, you can't go to Honeywood Farm at the moment. A large tree has fallen on the road this morning. I'm busy removing it, but I think it'll take me until 13:00."]},
+      "2"   : {
         "choices": [
           {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "text": "*Ask Lennor if he's seen Grace this morning.*", "nextId": "3"},
           {"condition": ["i_tc_1_q_this", "i_tc_11_q_this"], "text": "[2 Ropes, 1 Horse] *Tada! Present what he would ask for.*", "command": "SHOW_QUEST_ITEM", "nextId": "80"},
@@ -87,35 +89,44 @@
           {"text": "*Inform how long it'll take him to clear the road.*", "nextId": "30"},
           {"condition": ["i_rc_>=_a_q_quest_royal_sacrifice"], "text": "*Express your need to reach Honeywood Farm.*", "nextId": "40"},
           {"condition": ["i_rc_>=_a_q_quest_royal_sacrifice"], "text": "*Press him. Urge him on. Bother him persistently.*", "nextId": "50"},
-          {"condition": ["i_rc_>=_a_q_quest_royal_sacrifice"], "text": "*Offer your assistance.*", "nextId": "60"},
+          {"condition": ["i_time_before_12:00", "i_rc_>=_a_q_quest_royal_sacrifice"], "text": "*Offer your assistance.*", "nextId": "60"},
+          {"condition": ["i_time_after_12:00", "i_rc_>=_a_q_quest_royal_sacrifice"], "text": "*Offer your assistance.*", "nextId": "65"},
           {"text": "*You'll be back at 13:00. Take your leave.*", "command": "EXIT"}
         ]
       },
-      "3" : {"face": "man02", "name": "Lennor", "text": ["Grace? No, I haven't seen her. Why? What happened?"]},
-      "4" : {"face": "mozes", "name": "Mozes", "text": ["She's missing. I woke up this morning and she wasn't in her bed."]},
-      "5" : {"face": "man02", "name": "Lennor", "text": ["That's concerning. Are you sure she's not just playing somewhere in the village?"]},
-      "6" : {"face": "mozes", "name": "Mozes", "text": ["I'm not certain, but I fear she might have gone to Honeywood Forest, and there are orcs."]},
-      "7" : {"face": "man02", "name": "Lennor", "text": ["Is there anything I can do to help?"]},
-      "8" : {"face": "mozes", "name": "Mozes", "text": ["I appreciate the offer, Lennor, but I think I'll manage. Please keep an eye out for Grace."], "choices": [{"command": "EXIT", "nextId": "10"}]},
-      "10": {"face": "man02", "name": "Lennor", "text": ["Weren't you heading to Honeywood Forest? Did you find her?"], "choices": [{"command": "EXIT", "nextId": "10"}]},
-      "20": {"text": ["This morning I heard that a tree had fallen on this road, so I came straight this way to see what happened. Luckily, no one was hurt when it fell."], "choices": [{"nextId": "2"}]},
-      "30": {"text": ["A tree this large? I'll probably be busy with it until about 13:00. Afterward, the road is clear and you'll be able to enter Honeywood Farm."], "choices": [{"nextId": "2"}]},
-      "40": {"text": ["I'm sorry, Mozes, I'm working as fast as I can. You'll have to wait until 13:00, or you could assist me to speed up the process."], "choices": [{"nextId": "2"}]},
-      "50": {"text": ["Aw come on! Really? I'm trying! It's one heavy tree, Mozes! I literally can't do it before 13:00 without any assistance!"], "choices": [{"nextId": "2"}]},
-      "60": {"text": ["A month or so ago, I was thinking of buying a horse for myself. I even got some necessary items for it already. But then I thought, 'Why would I need a horse?' Haha, but today I could really use a horse!"]},
-      "61": {"text": ["So, if you could somehow get me a horse, only for today, and also 2 tow ropes, I could clear the road for you immediately."], "choices": [{"command": "ACCEPT_QUEST", "nextId": "62"}]},
-      "62": {"text": ["You could ask the village elder about this matter. He's wise, he will probably have some suggestions."], "choices": [{"command": "EXIT", "nextId": "70"}]},
-      "70": {"text": ["Hey Mozes, you can't go to Honeywood Farm at the moment. A large tree fell on the road this morning. I'm busy removing it, but I think it'll take me until 13:00."]},
-      "71": {"text": ["Did you manage to get me the requested assistance?"]},
-      "72": {
+      "3"   : {"face": "man13", "name": "Lennor", "text": ["Grace? No, I haven't seen her. Why? What happened?"]},
+      "4"   : {"face": "mozes", "name": "Mozes", "text": ["She's missing. I woke up this morning and she wasn't in her bed."]},
+      "5"   : {"face": "man13", "name": "Lennor", "text": ["That's concerning. Are you sure she's not just playing somewhere in the village?"]},
+      "6"   : {"face": "mozes", "name": "Mozes", "text": ["I'm not certain, but I fear she might have gone to Honeywood Forest, and there are orcs."]},
+      "7"   : {"face": "man13", "name": "Lennor", "text": ["Is there anything I can do to help?"]},
+      "8"   : {"face": "mozes", "name": "Mozes", "text": ["I appreciate the offer, Lennor, but I think I'll manage. Please keep an eye out for Grace."], "choices": [{"command": "EXIT", "nextId": "10"}]},
+      "10"  : {"face": "man13", "name": "Lennor", "text": ["Weren't you heading to Honeywood Forest? Did you find her?"], "choices": [{"command": "EXIT", "nextId": "10"}]},
+      "20"  : {"text": ["This morning I heard that a tree had fallen on this road, so I came straight this way to see what happened. Luckily, no one was hurt when it fell."], "choices": [{"nextId": "2"}]},
+      "30"  : {"text": ["A tree this large? I'll probably be busy with it until about 13:00. Afterward, the road is clear and you'll be able to enter Honeywood Farm."], "choices": [{"nextId": "2"}]},
+      "40"  : {"text": ["I'm sorry, Mozes, I'm working as fast as I can. You'll have to wait until 13:00, or you could assist me to speed up the process."], "choices": [{"nextId": "2"}]},
+      "50"  : {"text": ["Aw come on! Really? I'm trying! It's one heavy tree, Mozes! I literally can't do it before 13:00 without any assistance!"], "choices": [{"nextId": "2"}]},
+      "60"  : {"text": ["A month or so ago, I was thinking of buying a horse for myself. I even got some necessary items for it already. But then I thought, 'Why would I need a horse?' Haha, but today I could really use a horse!"]},
+      "61"  : {"text": ["So, if you somehow could lend me a horse, just for this morning, along with 2 tow ropes, I could clear the road for you immediately."], "choices": [{"command": "ACCEPT_QUEST", "nextId": "62"}]},
+      "62"  : {"text": ["You could ask the village elder about this matter. He's wise, he will probably have some suggestions."], "choices": [{"command": "EXIT", "nextId": "70"}]},
+      "65"  : {"text": ["That won't be necessary anymore. I'm almost done with the tree. I'll be finished by 13:00. But thanks for the offer."], "choices": [{"nextId": "2"}]},
+      "70"  : {"text": ["Hey Mozes, you can't go to Honeywood Farm at the moment. A large tree fell on the road this morning. I'm busy removing it, but I think it'll take me until 13:00."]},
+      "71"  : {"text": ["Did you manage to get me the requested assistance?"]},
+      "72"  : {
         "choices": [
-          {"condition": ["_tc_1_q_this", "_tc_11_q_this"], "text": "[2 Ropes, 1 Horse] *Present the requested horse and ropes.*", "command": "SHOW_QUEST_ITEM", "nextId": "81"},
+          {"condition": ["_tc_1_q_this", "_tc_11_q_this"], "text": "[2 Ropes, 1 Horse] *Present the requested horse and ropes.*", "command": "SHOW_QUEST_ITEM", "nextId": "90"},
           {"text": "*Not yet. Take your leave.*", "command": "EXIT", "nextId": "70"}
         ]
       },
-      "80": {"text": ["Wow Mozes! How did you... That's so thoughtful of you! Now I can finish this job right away! Let's start dragging!"], "choices": [{"command": "RELOAD_NPCS", "nextId": "90"}]},
-      "81": {"text": ["Fantastic, just what I asked you for. Now I can finish this job right away! Let's start dragging!"], "choices": [{"command": "RELOAD_NPCS", "nextId": "90"}]},
-      "90": {"text": ["Thanks for your help, Mozes. I could not have removed the tree so soon without you. [Horseshoes for you.]"], "choices": [{"command": "EXIT", "nextId": "90"}]}
+      "80"  : {"text": ["Wow Mozes! How did you... That's so thoughtful of you! Now I can finish this job right away! Let's start dragging!"]},
+      "81"  : {"text": ["This will only take a moment..."], "choices": [{"command": "RELOAD_NPCS", "nextId": "100"}]},
+      "100" : {"text": ["Thanks for your help, Mozes. I could not have removed the tree so soon without you."]},
+      "101" : {"text": ["Say, did I told I was thinking of buying a horse a month or so ago? I even got some necessary items for it already. Well, since I didn't bought the horse, I don't need these anymore. You can have them."], "choices": [{"command": "RECEIVE_ITEM"}]},
+      "90"  : {"text": ["Fantastic, just what I asked you for. Now I can finish this job right away! Let's start dragging!"]},
+      "91"  : {"text": ["This will only take a moment..."], "choices": [{"command": "RELOAD_NPCS", "nextId": "110"}]},
+      "110" : {"text": ["Thanks for your help, Mozes. I could not have removed the tree so soon without you."]},
+      "111" : {"text": ["Say, I told you I was thinking of buying a horse, right? And that I even got some necessary items for it already? Well, since I didn't bought the horse, I don't need these anymore. You can have them."], "choices": [{"command": "RECEIVE_ITEM"}]},
+      "1199": {"text": ["I don't need these anymore. You can have them."], "choices": [{"command": "RECEIVE_ITEM"}]},
+      "1200": {"text": ["Thanks for your help, Mozes. I could not have removed the tree so soon without you."], "choices": [{"command": "EXIT", "nextId": "1200"}]}
     }
   },
   "lennor_is_finished"                  : {
@@ -532,7 +543,7 @@
       },
       "30"  : {"text": ["Perfect! Just a moment, my dear, while I brew this medicine for you."]},
       "31"  : {"text": ["{SPEED=0.2} . . . . . . . . ."]},
-      "32"  : {"text": ["Here it is. Good luck with it."], "choices": [{"command": "REWARD_QUEST"}]},
+      "32"  : {"text": ["Here it is. It seems it was enough for two doses. Good luck with it."], "choices": [{"command": "REWARD_QUEST"}]},
       "1399": {"text": ["Mozes dear, you seem to have forgotten something."], "choices": [{"command": "REWARD_QUEST"}]},
       "1400": {"text": ["Mozes dear, did the medicine cure the horse?"], "choices": [{"nextId": "2"}]}
     }
@@ -588,18 +599,20 @@
       "2": {
         "choices": [
           {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "text": "*Ask Black if he's seen Grace this morning.*", "nextId": "3"},
+          {"condition": ["i_rc_>=_a_q_quest_royal_sacrifice"], "text": "*Take interest in his work.*", "nextId": "4"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
-      "3": {"text": ["No, I'm sorry, I just got outside. She might be out playing somewhere?"], "choices": [{"command": "EXIT"}]}
+      "3": {"text": ["No, I'm sorry, I just got outside. She might be out playing somewhere?"], "choices": [{"command": "EXIT"}]},
+      "4": {"text": ["The repairs aren't complex, just time-consuming. But I'm happy to lend my skills for their benefit."], "choices": [{"command": "EXIT"}]}
     }
   },
   "black_and_lennor_meet"               : {
     "phrases": {
       "1": {"face": "man07", "name": "Black Smith", "text": ["Howdy Lennor! What's the rush this early in the morning?"]},
-      "2": {"face": "man02", "name": "Lennor", "text": ["Hey Black, a tree has fallen on the road to Honeywood Farm. I've been asked to remove it."]},
+      "2": {"face": "man13", "name": "Lennor", "text": ["Hey Black, a tree has fallen on the road to Honeywood Farm. I've been asked to remove it."]},
       "3": {"face": "man07", "name": "Black Smith", "text": ["Alright, I won't keep you then. I'm off to do some repair work for the village elder."]},
-      "4": {"face": "man02", "name": "Lennor", "text": ["Thanks, goodbye."], "choices": [{"command": "EXIT"}]}
+      "4": {"face": "man13", "name": "Lennor", "text": ["Thanks, goodbye."], "choices": [{"command": "EXIT"}]}
     }
   },
   "quest_get_horseshoes"                : {

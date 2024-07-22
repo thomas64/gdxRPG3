@@ -275,9 +275,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             }
             gameData.party.fullRecover()
         }
-        worldScreen.fadeOut(Color.BLACK, 1f, TransitionPurpose.MAP_CHANGE) {
-            continueConversation(nextId)
-        }
+        worldScreen.fadeOut(Color.BLACK, 1f, TransitionPurpose.JUST_FADE) { continueConversation(nextId) }
     }
 
     private fun pay(price: Int) {
@@ -310,8 +308,10 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun reloadNpcs(nextId: String) {
-        endConversation(nextId)
+        // in dialog state, scheduled npc's won't update. that's why we first reload them with a fade to black.
+        // and then, when the conversation ends, they disappear, because they are updated, but then it's already black.
         conversationObserver.notifyReloadNpcs()
+        endConversation(nextId)
     }
 
     private fun fadeToBlack(nextId: String, time: String) {

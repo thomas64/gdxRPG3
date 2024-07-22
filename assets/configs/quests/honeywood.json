@@ -62,7 +62,7 @@
   },
   "quest_helping_horse"        : {
     "title"     : "A helping horse",
-    "entityId"  : "man02",
+    "entityId"  : "man13",
     "summary"   : "The same tree on the path to Honeywood Forest has fallen once more, but this time it blocks the road ahead instead of behind of you. Lennor seeks your assistance in acquiring a strong horse and some tow ropes to speed up the road-clearing process.",
     "linkedWith": ["quest_get_horse", "quest_get_tow_rope", "quest_get_medicine", "quest_get_horseshoes"],
     "tasks"     : {
@@ -79,7 +79,7 @@
       },
       "18": {
         "taskPhrase": "Deliver the ropes to Lennor.",
-        "type"      : "PROVIDE_ITEM",
+        "type"      : "SHOW_ITEM",
         "target"    : {"tow_rope": 2},
         "isHidden"  : true,
         "linkedWith": ["19"]

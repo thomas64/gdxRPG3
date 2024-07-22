@@ -34,7 +34,7 @@ class BlackSmith : EntitySchedule() {
                 worldScreen.useDoor("door_honeywood_smith")
             }
             if (gameData.clock.isCurrentTimeAt("07:56")) {
-                worldScreen.useDoor("door_forged_left")
+                worldScreen.useDoor("door_honeywood_elder")
             }
         }
     }

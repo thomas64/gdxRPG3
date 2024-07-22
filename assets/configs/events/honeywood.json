@@ -22,7 +22,7 @@
     "type"          : "conversation",
     "condition"     : ["_time_at_13:00", "_c_!=_f_q_quest_helping_horse"],
     "conversationId": "lennor_is_finished",
-    "entityId"      : "man02",
+    "entityId"      : "man13",
     "doesRepeat"    : true
   },
   "dont_go_up_there"          : {
