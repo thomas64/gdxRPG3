@@ -532,7 +532,7 @@
   <object id="469" name="academy_e1" x="1536" y="1392" width="48" height="24"/>
   <object id="470" name="academy_f1" x="1488" y="1416" width="48" height="24"/>
   <object id="471" name="academy_e2" x="1632" y="1440" width="48" height="24"/>
-  <object id="500" name="lennor1" x="816" y="1128" width="48" height="24"/>
+  <object id="500" name="lennor1" x="816" y="1560" width="48" height="24"/>
   <object id="501" name="lennor2" x="696" y="666" width="48" height="24"/>
   <object id="502" name="lennor3" x="936" y="444" width="48" height="24"/>
   <object id="503" name="lennor4" x="1806" y="444" width="48" height="24"/>
