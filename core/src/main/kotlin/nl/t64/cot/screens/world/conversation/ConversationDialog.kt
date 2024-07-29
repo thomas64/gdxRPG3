@@ -17,7 +17,6 @@ import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.profileManager
 import nl.t64.cot.Utils.resourceManager
-import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.conversation.ConversationChoice
@@ -190,8 +189,8 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             ConversationCommand.RECEIVE_SPELLS -> receiveSpells(nextId)
             ConversationCommand.RECEIVE_ITEM -> receiveItem()
             ConversationCommand.START_BATTLE -> startBattle(nextId)
-            ConversationCommand.RELOAD_NPCS -> reloadNpcs(nextId)
-            ConversationCommand.FADE_TO_BLACK_13 -> fadeToBlack(nextId, "13:01")
+            ConversationCommand.RELOAD_NPCS -> fadeAndReloadNpcs(nextId)
+            ConversationCommand.FADE_TO_BLACK_13 -> fadeAndSetTime("13:01", nextId)
 
             ConversationCommand.KNOW_QUEST -> knowQuest(nextId)
             ConversationCommand.ACCEPT_QUEST -> acceptQuest(nextId)
@@ -275,7 +274,8 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             }
             gameData.party.fullRecover()
         }
-        worldScreen.fadeOut(Color.BLACK, 1f, TransitionPurpose.JUST_FADE) { continueConversation(nextId) }
+        conversationObserver.notifyFade(duration = 1f,
+                                        actionAfterFade = { continueConversation(nextId) })
     }
 
     private fun pay(price: Int) {
@@ -307,18 +307,18 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         conversationObserver.notifyShowBattleScreen(conversationId)
     }
 
-    private fun reloadNpcs(nextId: String) {
+    private fun fadeAndReloadNpcs(nextId: String) {
         // in dialog state, scheduled npc's won't update. that's why we first reload them with a fade to black.
         // and then, when the conversation ends, they disappear, because they are updated, but then it's already black.
-        conversationObserver.notifyReloadNpcs()
+        conversationObserver.notifyJustFadeAndReloadNpcs()
         endConversation(nextId)
     }
 
-    private fun fadeToBlack(nextId: String, time: String) {
+    private fun fadeAndSetTime(time: String, nextId: String) {
         endConversation(nextId)
-        worldScreen.fadeOut(Color.BLACK, 2f, TransitionPurpose.JUST_FADE) {
-            gameData.clock.setTimeOfDay(time)
-        }
+        conversationObserver.notifyFade(duration = 2f,
+                                        transitionPurpose = TransitionPurpose.UPDATE,
+                                        actionDuringFade = { gameData.clock.setTimeOfDay(time) })
     }
 
     private fun knowQuest(nextId: String) {

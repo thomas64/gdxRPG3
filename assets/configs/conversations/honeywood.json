@@ -135,6 +135,12 @@
       "1": {"text": ["*Phew* It is finally done. The tree is gone."], "choices": [{"command": "FADE_TO_BLACK_13"}]}
     }
   },
+  "the_road_is_open"                    : {
+    "name"   : "Lennor",
+    "phrases": {
+      "1": {"text": ["It took me a while, but the road to Honeywood Farm is finally clear."], "choices": [{"command": "EXIT"}]}
+    }
+  },
   "playing_catch_1"                     : {
     "name"   : "Lynette",
     "phrases": {

@@ -1,7 +1,6 @@
 package nl.t64.cot.screens.world.map
 
 import com.badlogic.gdx.ai.pfa.DefaultGraphPath
-import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.maps.tiled.TiledMap
 import com.badlogic.gdx.math.Vector2
@@ -95,22 +94,22 @@ class MapManager : ProfileObserver {
     fun checkWarpPoint(warpPoint: GameMapRelocator, playerDirection: Direction) {
         playSe(AudioEvent.SE_WARP)
         nextMapTitle = warpPoint.toMapName
-        worldScreen.fadeOut(warpPoint.fadeColor, 0f, TransitionPurpose.MAP_CHANGE) {
-            changeMapWithCameraShake(warpPoint, playerDirection)
-        }
+        worldScreen.fadeOut(transitionColor = warpPoint.fadeColor,
+                            transitionPurpose = TransitionPurpose.MAP_CHANGE,
+                            actionAfterFade = { changeMapWithCameraShake(warpPoint, playerDirection) })
     }
 
     fun schedulePortal(portal: GameMapRelocator, playerDirection: Direction) {
-        worldScreen.fadeOut(Color.BLACK, 1f, TransitionPurpose.MAP_CHANGE) {
-            changeMap(portal, playerDirection)
-        }
+        worldScreen.fadeOut(duration = 1f,
+                            transitionPurpose = TransitionPurpose.MAP_CHANGE,
+                            actionAfterFade = { changeMap(portal, playerDirection) })
     }
 
     fun collisionPortal(portal: GameMapRelocator, playerDirection: Direction) {
         nextMapTitle = portal.toMapName
-        worldScreen.fadeOut(portal.fadeColor, 0f, TransitionPurpose.MAP_CHANGE) {
-            changeMap(portal, playerDirection)
-        }
+        worldScreen.fadeOut(transitionColor = portal.fadeColor,
+                            transitionPurpose = TransitionPurpose.MAP_CHANGE,
+                            actionAfterFade = { changeMap(portal, playerDirection) })
     }
 
     fun changeMapWithWarpPortal(warpToMapName: String) {

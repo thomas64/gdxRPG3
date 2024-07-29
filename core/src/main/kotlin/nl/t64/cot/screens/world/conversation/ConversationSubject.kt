@@ -1,5 +1,8 @@
 package nl.t64.cot.screens.world.conversation
 
+import com.badlogic.gdx.graphics.Color
+import nl.t64.cot.sfx.TransitionPurpose
+
 
 class ConversationSubject(private val observer: ConversationObserver) {
 
@@ -19,8 +22,21 @@ class ConversationSubject(private val observer: ConversationObserver) {
         observer.onNotifyShowBattleScreen(battleId)
     }
 
-    fun notifyReloadNpcs() {
-        observer.onNotifyReloadNpcs()
+    fun notifyJustFadeAndReloadNpcs() {
+        observer.onNotifyJustFadeAndReloadNpcs()
+    }
+
+    fun notifyFade(transitionColor: Color = Color.BLACK,
+                   duration: Float = 0f,
+                   transitionPurpose: TransitionPurpose = TransitionPurpose.JUST_FADE,
+                   actionDuringFade: () -> Unit = {},
+                   actionAfterFade: () -> Unit = {}
+    ) {
+        observer.onNotifyFade(transitionColor = transitionColor,
+                              duration = duration,
+                              transitionPurpose = transitionPurpose,
+                              actionDuringFade = actionDuringFade,
+                              actionAfterFade = actionAfterFade)
     }
 
 }

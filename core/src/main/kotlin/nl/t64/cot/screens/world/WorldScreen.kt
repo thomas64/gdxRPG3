@@ -100,13 +100,15 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     fun fadeOut(
         transitionColor: Color = Color.BLACK,
         duration: Float = 0f,
-        transitionPurpose: TransitionPurpose = TransitionPurpose.MAP_CHANGE,
-        actionAfterFade: () -> Unit
+        transitionPurpose: TransitionPurpose = TransitionPurpose.JUST_FADE,
+        actionDuringFade: () -> Unit = {},
+        actionAfterFade: () -> Unit = {}
     ) {
         val transition = TransitionImage(transitionPurpose, transitionColor)
         stage.addActor(transition)
         transition.addAction(Actions.sequence(Actions.alpha(0f),
                                               Actions.fadeIn(Constant.FADE_DURATION),
+                                              Actions.run(actionDuringFade),
                                               Actions.delay(duration),
                                               Actions.run(actionAfterFade),
                                               Actions.removeActor()))
@@ -132,13 +134,16 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     fun startCutscene(screenType: ScreenType, fadeDuration: Float = 0f) {
         doBeforeLoadScreen()
         val actionAfterFade = { screenManager.setScreen(screenType); stopAllBgm() }
-        fadeOut(Color.BLACK, fadeDuration, TransitionPurpose.MAP_CHANGE, actionAfterFade)
+        fadeOut(duration = fadeDuration,
+                transitionPurpose = TransitionPurpose.MAP_CHANGE,
+                actionAfterFade = actionAfterFade)
     }
 
     fun startCutsceneWithoutBgmFading(screenType: ScreenType, fadeDuration: Float = 0f) {
         doBeforeLoadScreen()
         val actionAfterFade = { screenManager.setScreen(screenType) }
-        fadeOut(Color.BLACK, fadeDuration, TransitionPurpose.JUST_FADE, actionAfterFade)
+        fadeOut(duration = fadeDuration,
+                actionAfterFade = actionAfterFade)
     }
 
     fun showConversationDialogFromNpc(conversationId: String, npcEntity: Entity) {
@@ -213,7 +218,8 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
         currentNpcEntity = enemyEntity
         gameState = GameState.BATTLE
         doBeforeLoadScreen()
-        fadeOut { BattleScreen.load(battleId, this) }
+        fadeOut(transitionPurpose = TransitionPurpose.MAP_CHANGE,
+                actionAfterFade = { BattleScreen.load(battleId, this) })
     }
 
     fun updateParty() {
@@ -224,8 +230,9 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
         npcEntities = newNpcEntities
     }
 
-    fun reloadNpcsWithFade() {
-        fadeOut(Color.BLACK, 1.5f, TransitionPurpose.JUST_FADE) { reloadNpcs() }
+    fun justFadeAndReloadNpcs() {
+        fadeOut(duration = 1.5f,
+                actionAfterFade = { reloadNpcs() })
     }
 
     private fun reloadNpcs() {
@@ -272,12 +279,26 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
 
     override fun onNotifyShowBattleScreen(battleId: String) {
         gameState = GameState.BATTLE
-        fadeOut { BattleScreen.load(battleId, this) }
+        fadeOut(transitionPurpose = TransitionPurpose.MAP_CHANGE,
+                actionAfterFade = { BattleScreen.load(battleId, this) })
     }
 
-    override fun onNotifyReloadNpcs() {
-        reloadNpcsWithFade()
+    override fun onNotifyJustFadeAndReloadNpcs() {
+        justFadeAndReloadNpcs()
     }
+
+    override fun onNotifyFade(transitionColor: Color,
+                              duration: Float,
+                              transitionPurpose: TransitionPurpose,
+                              actionDuringFade: () -> Unit,
+                              actionAfterFade: () -> Unit) {
+        fadeOut(transitionColor = transitionColor,
+                duration = duration,
+                transitionPurpose = transitionPurpose,
+                actionDuringFade = actionDuringFade,
+                actionAfterFade = actionAfterFade)
+    }
+
     //endregion
 
     //region BattleObserver ////////////////////////////////////////////////////////////////////////////////////////////
@@ -313,22 +334,18 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
             GameState.OFF,
             GameState.PAUSED -> Unit
             GameState.MINIMAP -> renderMiniMap()
-            GameState.RUNNING -> updateAndRender(dt)
             GameState.DIALOG,
             GameState.BATTLE -> renderAll(dt)
+            GameState.RUNNING -> { update(dt); renderAll(dt) }
         }
     }
 
-    private fun updateAndRender(dt: Float) {
-        updateEntities(dt)
-        renderAll(dt)
-    }
-
-    private fun updateEntities(dt: Float) {
-        if (!isInTransition) {
+    private fun update(dt: Float) {
+        if (!isInTransition || isInUpdateTransition) {
             clockBox.update(dt)
             player.update(dt)
             worldSchedule.update()
+            mapManager.updateConditionLayers()
         }
         doorList.forEach { it.update(dt) }
         lootList.forEach { it.update(dt) }
@@ -337,6 +354,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
         npcEntities.forEach { it.send(FindPathEvent(playerGridPosition)) }
         visibleScheduledEntities.forEach { it.update(dt) }
         mapManager.getParticleEffects().forEach { it.update(dt) }
+        fogOfWarManager.update(player.position, dt)
     }
 
     private fun renderMiniMap() {
@@ -353,10 +371,6 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     }
 
     private fun renderAll(dt: Float) {
-        fogOfWarManager.update(player.position, dt)
-        if (gameState != GameState.DIALOG && !isInTransition) {
-            mapManager.updateConditionLayers()
-        }
         updateCameraPosition()
         worldRenderer.renderAll(player.position) { renderEntities(it) }
         gridRenderer.possibleRender()
@@ -432,6 +446,8 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
 
     private val isInMapTransition: Boolean
         get() = isInTransition && (stage.actors.peek() as TransitionImage).purpose == TransitionPurpose.MAP_CHANGE
+    private val isInUpdateTransition: Boolean
+        get() = isInTransition && (stage.actors.peek() as TransitionImage).purpose == TransitionPurpose.UPDATE
     private val isJustInTransition: Boolean
         get() = isInTransition && (stage.actors.peek() as TransitionImage).purpose == TransitionPurpose.JUST_FADE
     private val isInTransition: Boolean

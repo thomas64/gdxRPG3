@@ -68,10 +68,10 @@ class Santino : EntitySchedule() {
     override fun handleSideEffects() {
         if (mapManager.currentMap.mapTitle == "lastdenn_church") {
             if (gameData.clock.isCurrentTimeAt("10:00")) {
-                worldScreen.reloadNpcsWithFade()
+                worldScreen.justFadeAndReloadNpcs()
             }
             if (gameData.clock.isCurrentTimeAt("11:00")) {
-                worldScreen.reloadNpcsWithFade()
+                worldScreen.justFadeAndReloadNpcs()
             }
         }
         if (mapManager.currentMap.mapTitle == "lastdenn") {

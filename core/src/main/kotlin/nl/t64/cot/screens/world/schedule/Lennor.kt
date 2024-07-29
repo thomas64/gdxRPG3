@@ -20,11 +20,9 @@ class Lennor : EntitySchedule() {
         SchedulePart("honeywood", "07:49", "07:54", EAST,  RUNNING,  "lennor3", "lennor4", "lennor_on_the_way"),
         SchedulePart("honeywood", "07:54", "08:04", SOUTH, IMMOBILE, "lennor4", "lennor4", "lennor_and_johanna_meet"),
         SchedulePart("honeywood", "08:04", "08:07", EAST,  WALKING,  "lennor4", "lennor5", "lennor_on_the_way"),
-        SchedulePart("honeywood", "08:07", "12:45", EAST,  IDLE,     "lennor5", "lennor5", "quest_helping_horse", listOf("_c_!=_f_q_quest_helping_horse")),
-        SchedulePart("honeywood", "12:45", "13:00", EAST,  IDLE,     "lennor5", "lennor5", "lennor_is_finished",  listOf("_c_!=_f_q_quest_helping_horse")),
-        SchedulePart("honeywood", "13:00", "13:02", EAST,  IDLE,     "lennor5", "lennor5", "",                    listOf("_c_!=_f_q_quest_helping_horse")),
-        SchedulePart("honeywood", "13:02", "13:04", WEST,  WALKING,  "lennor5", "lennor6", "",                    listOf("_c_!=_f_q_quest_helping_horse")),
-        SchedulePart("honeywood", "13:04", "19:30", WEST,  IDLE,     "lennor6", "lennor6", "",                    listOf("_c_!=_f_q_quest_helping_horse")),
+        SchedulePart("honeywood", "08:07", "12:55", EAST,  IDLE,     "lennor5", "lennor5", "quest_helping_horse", listOf("_c_!=_f_q_quest_helping_horse")),
+        SchedulePart("honeywood", "12:55", "13:01", EAST,  IMMOBILE, "lennor5", "lennor5", "lennor_is_finished",  listOf("_c_!=_f_q_quest_helping_horse")),
+        SchedulePart("honeywood", "13:01", "19:30", NORTH, IDLE,     "lennor6", "lennor6", "the_road_is_open",    listOf("_c_!=_f_q_quest_helping_horse")),
         // @formatter:on
     )
 
