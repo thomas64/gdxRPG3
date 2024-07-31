@@ -36,7 +36,6 @@ class Scenario {
     fun startFourthCycle() {
         reviveMozes()
         gameData.resetCycle()
-//        addQuestLastdennToLogbook()
         gameData.clock.start()
         profileManager.saveProfile()
     }
@@ -81,11 +80,6 @@ class Scenario {
     private fun addQuestArdorToLogbook() {
         gameData.quests.getQuestById("quest_royal_sacrifice").accept()
         gameData.quests.getQuestById("quest_sub_royal_sacrifice").accept()
-    }
-
-    private fun addQuestLastdennToLogbook() {
-        val questYlarus = gameData.quests.getQuestById("quest_priest_of_lastdenn")
-        questYlarus.accept()
     }
 
 }

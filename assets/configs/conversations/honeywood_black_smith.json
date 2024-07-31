@@ -1,0 +1,115 @@
+{
+  "black_smith_on_the_way"     : {
+    "name"   : "Black Smith",
+    "phrases": {
+      "1": {"text": ["Howdy, neighbor! I'm on my way to the village elder. He needs some repairs done. If you need me, I'll be back by 11:00."]},
+      "2": {
+        "choices": [
+          {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "text": "*Ask Black if he's seen Grace this morning.*", "nextId": "3"},
+          {"condition": ["i_rc_>=_a_q_quest_royal_sacrifice"], "text": "*Take interest in his work.*", "nextId": "4"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "3": {"text": ["No, I'm sorry, I just got outside. She might be out playing somewhere?"], "choices": [{"command": "EXIT"}]},
+      "4": {"text": ["The repairs aren't complex, just time-consuming. But I'm happy to lend my skills for their benefit."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "black_and_lennor_meet"      : {
+    "phrases": {
+      "1": {"face": "man07", "name": "Black Smith", "text": ["Howdy Lennor! What's the rush this early in the morning?"]},
+      "2": {"face": "man13", "name": "Lennor", "text": ["Hey Black, a tree has fallen on the road to Honeywood Farm. I've been asked to remove it."]},
+      "3": {"face": "man07", "name": "Black Smith", "text": ["Alright, I won't keep you then. I'm off to do some repair work for the village elder."]},
+      "4": {"face": "man13", "name": "Lennor", "text": ["Thanks, goodbye."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "black_and_grahan_meet"      : {
+    "phrases": {
+      "1": {"face": "man07", "name": "Black Smith", "text": ["Good morning, sir. I'm here to do the repairs you requested."]},
+      "2": {"face": "oldman11", "name": "Village elder Grahan", "text": ["Ah, Black Smith, thank you for coming. The problem is with our stove in the kitchen. Please ask my wife for the details."]},
+      "3": {"face": "man07", "name": "Black Smith", "text": ["I'll go see her right away."]},
+      "4": {"face": "oldman11", "name": "Village elder Grahan", "text": ["Thank you, Black."]},
+      "5": {"face": "man07", "name": "Black Smith", "text": ["No problem at all, sir."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "black_smith_on_the_job"     : {
+    "name"   : "Black Smith",
+    "phrases": {
+      "1": {"text": ["Howdy, neighbor! I'm on a job for the village elder right now. If you need me, I'm available again after 11:00."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "black_and_elenora_meet"     : {
+    "phrases": {
+      "1": {"face": "man07", "name": "Black Smith", "text": ["Good morning, ma'am. Your husband told me there's a problem with the stove."]},
+      "2": {"face": "oldwoman11", "name": "Elenora", "text": ["Yes, it's not working properly. I think the chimney is blocked. Could you take a look at it?"]},
+      "3": {"face": "man07", "name": "Black Smith", "text": ["Certainly, it shouldn't be a problem. I'll get to it right away."]},
+      "4": {"face": "oldwoman11", "name": "Elenora", "text": ["That would be wonderful. Thank you."]},
+      "5": {"face": "man07", "name": "Black Smith", "text": ["No problem at all, ma'am."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "black_smith_is_done"        : {
+    "phrases": {
+      "1": {"face": "man07", "name": "Black Smith", "text": ["Ma'am, the stove is working again. The chimney was indeed blocked."]},
+      "2": {"face": "oldwoman11", "name": "Elenora", "text": ["Thank you, Black. Now I can prepare breakfast for Grahan again. He's been waiting for his morning porridge."]},
+      "3": {"face": "man07", "name": "Black Smith", "text": ["You're very welcome, ma'am. If you need me again, just let me know."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "black_smith_is_leaving"     : {
+    "phrases": {
+      "1": {"face": "man07", "name": "Black Smith", "text": ["Sir, the repairs are done. The problem was with the chimney, but it's fixed now."]},
+      "2": {"face": "oldman11", "name": "Village elder Grahan", "text": ["That's great to hear! I was worried I'd have to eat cold porridge for breakfast."]},
+      "3": {"face": "man07", "name": "Black Smith", "text": ["I'm glad I could help, sir. Enjoy your breakfast. If you need me again, just let me know."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "black_smith_on_the_way_back": {
+    "name"   : "Black Smith",
+    "phrases": {
+      "1": {"text": ["Howdy, neighbor! I'm done with the repairs for the village elder and on my way back home. If you need me, come see me there."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "quest_get_horseshoes"       : {
+    "name"   : "Black Smith",
+    "phrases": {
+      "1"   : {"text": ["Howdy, neighbor! I'm Black Smith, the blacksmith. It never gets old to say that, ha ha! Can I help you?"]},
+      "2"   : {
+        "choices": [
+          {"condition": ["i_c_==_a_q_quest_get_tow_rope", "i_tn_13_q_quest_get_tow_rope"], "text": "*Inform you're here to pay Jaron's outstanding bill.*", "nextId": "100"},
+          {"condition": ["i_rc_>=_a_q_quest_get_horse", "i_tn_8_q_quest_get_horse"], "text": "*Inquire about his horseshoe offerings.*", "nextId": "3"},
+          {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "text": "*No time for jokes. Ask Black if he's seen Grace this morning.*", "nextId": "30"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "3"   : {"text": ["Of course! For the price of 1 gold and 2 metal, I can craft 1 horseshoe for you."]},
+      "4"   : {
+        "choices": [
+          {"condition": ["_n_1_>=_item_gold", "_n_2_>=_item_metal"], "text": "[Gold 1, Metal 2] *Request 1 horseshoe.*", "nextId": "20"},
+          {"text": "*Deny for now; maybe you can obtain them elsewhere.*", "command": "ACCEPT_QUEST", "nextId": "10"}
+        ]
+      },
+      "10"  : {"text": ["No problem at all. Feel free to come see me whenever you need some metallurgy work."], "choices": [{"command": "EXIT"}]},
+      "20"  : {"text": ["One moment, I'll craft one for you."]},
+      "21"  : {"text": ["{SPEED=0.2} . . . . . . . . ."]},
+      "22"  : {"text": ["Here you go, a brand new horseshoe!"], "choices": [{"command": "TRADE_QUEST_ITEMS"}]},
+      "30"  : {"text": ["No, I'm sorry, I just woke up. She might be out playing somewhere?"]},
+      "31"  : {"text": ["*Yawn* It's quite early. Everyone's still sleeping. Are you sure she's not in her bed, nestled under the blankets?"], "choices": [{"nextId": "2"}]},
+      "100" : {"text": ["Ah, it's about time! For Jaron's outstanding bill, it will be {COLOR=BLUE}four{COLOR=BLACK} gold pieces then."]},
+      "101" : {"text": ["I know, the bill was originally only {COLOR=BLUE}three{COLOR=BLACK}, but that's what I call interest. That slacker hasn't paid up in such a long time."]},
+      "102" : {
+        "choices": [
+          {"text": "*Grumble. Don't pay. Jaron must pay for this. Take your leave.*", "command": "EXIT", "nextId": "200"},
+          {"condition": ["_n_4_>=_item_gold"], "text": "[Gold 4] *Agree with him and pay.*", "nextId": "110"},
+          {"condition": ["_n_4_>=_item_gold"], "text": "[Gold 4] *Pay up, but disagree with him.*", "nextId": "111"},
+          {"condition": ["_n_3_>=_item_gold", "diplomat1"], "text": "[Gold 3, Diplomat 1] *Explain Jaron only gave you three gold pieces.*", "nextId": "120"},
+          {"condition": ["i_n_3_==_item_gold"], "text": "[Gold 3] *State that you don't any more gold with you.*", "nextId": "120"}
+        ]
+      },
+      "110" : {"text": ["That's what I thought, of course you agree."], "choices": [{"command": "DELIVER_QUEST_ITEM_ALTERNATE", "nextId": "130"}]},
+      "111" : {"text": ["I'm sorry, business is business."], "choices": [{"command": "DELIVER_QUEST_ITEM_ALTERNATE", "nextId": "130"}]},
+      "120" : {"text": ["Alright alright, I'll settle for three for now. It's better than nothing. I will see to it that I get that fourth one later."], "choices": [{"command": "DELIVER_QUEST_ITEM", "nextId": "130"}]},
+      "130" : {"text": ["Thank you very much on behalf of Black Smith Inc. We appreciate your business."]},
+      "131" : {"text": ["(Jaron, you lazy bum.)"], "choices": [{"command": "EXIT"}]},
+      "200" : {"text": ["Welcome back, neighbor! You're here for that four gold bill from Jaron?"], "choices": [{"nextId": "102"}]},
+      "1199": {"text": ["You forgot to take your horseshoe."], "choices": [{"command": "TRADE_QUEST_ITEMS"}]},
+      "1200": {"text": ["Hello neighbor, you're back."], "choices": [{"nextId": "2"}]}
+    }
+  }
+}
