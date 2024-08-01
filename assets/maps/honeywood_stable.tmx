@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.11" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="24" tileheight="24" infinite="0" nextlayerid="14" nextobjectid="56">
+ <properties>
+  <property name="bgm" value="bgm_house"/>
+  <property name="step_sound" value="sand"/>
+ </properties>
+ <tileset firstgid="1" name="honeywood_stable" tilewidth="24" tileheight="24" tilecount="630" columns="30">
+  <image source="tilesets/honeywood_stable.png" width="720" height="504"/>
+ </tileset>
+ <tileset firstgid="631" source="tilesets/fsm_town01_d.tsx"/>
+ <tileset firstgid="1655" source="tilesets/fsm_inside01_c.tsx"/>
+ <tileset firstgid="2679" source="tilesets/fsm_inside01_b.tsx"/>
+ <tileset firstgid="3703" source="tilesets/fsm_inside01_e.tsx"/>
+ <tileset firstgid="4727" source="tilesets/fsm_inside01_d.tsx"/>
+ <layer id="2" name="under0" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwQEBAAAAgJD+r+4ICgAAAAAAAAAYH0AAAQ==
+  </data>
+ </layer>
+ <layer id="1" name="under1" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztl1lPFTEYhttB2b3xxr9gxBsRRNwBAeMal9+giQYEd6Oya9xNXH6HGvcN17gAGv+FNxpFDYr70xyaUw90Ws6c0SFhkue8bb+vs/SdOW2lEEJOMkmMDMJH+DQB9HPIc8znpxmaJoDekfbnqOLnIXrR0PcwKxjdvh2eCnte3PG7Ic+h/HiEXjL0A5QFo9tb4Jmw58Udd/nRjraJtA7SNpv+Lyi/lWltheciXc/Mizvu8uMYWkB+x4jW0lZDeSWsgj7qr2EHXIVrcB2Gid1EK6AyJN6HrhfZ99dxlx9H0XzuvxMtRGeqZ6FcB6uhn5wB2AlXoJH4DfSbOgdaDw0h8X50g8i+v477+tGFFgXpcViOroG1sM4YTx3PVFt8AN0Yob9Wlx/HR3zoRnuEMQ5oAzTCCmM8dTxTbfF6zr0pQn+tLj9OoHO41hDlwyKlY9V3oTUheXHHXX6cRMvJL0OPwBc5dn03WhuSF3fc5ccptJX8Cqg0vg9dbwlS8T201Rl5X6nPNepxx11+nFbfIHl7Kc8L0u+jrtt0WL27IXm5jrv8OKO+wcD+P3ELbsM+Q6tC8nOt+vouP85b/h/M/5uF6t7Vc0O10sCen2ttClLXdfnRK/3GRc0DL+GVepYgfl+0D81B6rouP86iWz3GV/uyX6ZVzQtx+1At/Pw4h5YL/3GK63Cdf1rE7yNTD8jx79dcVBnnDxv3XHwfWg/CPcq9cF/47ddcDHmOey79OASbeXe3wAPht1/zQR/Z9FV+XECLgNsSefB9pG7zo03+vU/02a/FjflevoEplH/AT2H3o12m9mfv4DI8pv2JiO5HFEw/ZkCJhx8d0Ald0A09UJggP6YLPz8CyFPewVTIhwKZHD+KPf3Q83oS/VDj/wtKPfzQ8/oiWAxLoCgBfuj547dINfrOI9qXpZSLE+CH7/rKtv5ZRrkkAX5Uw7Zg/PuLpPmxQGa3jk2SH+a6xnb4rHNLZXbron/pV5R1aFKIug5NEvr43/cxSbL5A5u/Vc0=
+  </data>
+ </layer>
+ <layer id="3" name="under2" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt0bENgDAQA8BXyl86bAIrZoOkpEoFepDuWhe25AgAqNMz4si6/Cnn6rg2PW/nAADA/4xWvYA7f3yLPwCAKhMOTgxy
+  </data>
+ </layer>
+ <layer id="4" name="under3" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt0aENADAMBLFH2Z+l4xZ1hSbAnuCkSwAAAACA37qSU9MVPH7s0l4AAEMuGroDFA==
+  </data>
+ </layer>
+ <layer id="5" name="under4" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwQEBAAAAgJD+r+4ICgAAAAAAAAAYH0AAAQ==
+  </data>
+ </layer>
+ <layer id="6" name="under5" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwQEBAAAAgJD+r+4ICgAAAAAAAAAYH0AAAQ==
+  </data>
+ </layer>
+ <layer id="7" name="over6" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1sENgkAQBdBP9ARmPSjbCGpneLAN7UQ70Q60A0zg6D94hTXgOhH+S37IshMyw2kAERGReK45cGNyD3hv3U1/FWd4MlvOsPvjOcTGagmsmaMDTi58Dr2PdR9SsHbDnFl7ce3nktl31MW+F7FwT4FHat3FcLMMmGfWXUhfhwRYMDW+92w++L781lj+e/KOiEgb7Vci4zd0D60Nep4y7aEyJS8lI0vs
+  </data>
+ </layer>
+ <layer id="8" name="over7" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwQEBAAAAgJD+r+4ICgAAAAAAAAAYH0AAAQ==
+  </data>
+ </layer>
+ <layer id="9" name="over8" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwQEBAAAAgJD+r+4ICgAAAAAAAAAYH0AAAQ==
+  </data>
+ </layer>
+ <objectgroup color="#aa0000" id="12" name="collision">
+  <object id="5" x="0" y="0" width="96" height="960"/>
+  <object id="6" x="1104" y="0" width="96" height="960"/>
+  <object id="7" x="96" y="0" width="1008" height="192"/>
+  <object id="8" x="240" y="372" width="192" height="12"/>
+  <object id="9" x="480" y="372" width="144" height="12"/>
+  <object id="10" x="672" y="372" width="144" height="12"/>
+  <object id="11" x="864" y="372" width="144" height="12"/>
+  <object id="12" x="1056" y="372" width="48" height="12"/>
+  <object id="13" x="96" y="336" width="96" height="48"/>
+  <object id="15" x="96" y="384" width="36" height="18"/>
+  <object id="16" x="384" y="504" width="528" height="168"/>
+  <object id="17" x="960" y="504" width="144" height="168"/>
+  <object id="18" x="912" y="576" width="48" height="96"/>
+  <object id="19" x="486" y="672" width="618" height="288"/>
+  <object id="20" x="96" y="840" width="192" height="120"/>
+  <object id="21" x="336" y="840" width="150" height="120"/>
+  <object id="22" x="288" y="912" width="48" height="48"/>
+  <object id="23" x="432" y="672" width="54" height="42"/>
+  <object id="24" x="144" y="576" width="48" height="156"/>
+  <object id="25" x="192" y="582" width="48" height="132"/>
+  <object id="26" x="96" y="582" width="48" height="132"/>
+  <object id="29" x="240" y="336" width="864" height="36"/>
+  <object id="34" x="336" y="192" width="48" height="144"/>
+  <object id="35" x="528" y="192" width="48" height="144"/>
+  <object id="36" x="720" y="192" width="48" height="144"/>
+  <object id="37" x="912" y="192" width="48" height="144"/>
+  <object id="38" x="1056" y="192" width="48" height="48"/>
+  <object id="39" x="960" y="192" width="48" height="48"/>
+  <object id="40" x="864" y="192" width="48" height="48"/>
+  <object id="41" x="768" y="192" width="48" height="48"/>
+  <object id="42" x="672" y="192" width="48" height="48"/>
+  <object id="43" x="576" y="192" width="48" height="48"/>
+  <object id="44" x="480" y="192" width="48" height="48"/>
+  <object id="45" x="384" y="192" width="48" height="48"/>
+  <object id="46" x="96" y="192" width="96" height="96"/>
+  <object id="47" x="240" y="240" width="96" height="48"/>
+ </objectgroup>
+ <objectgroup color="#55ff7f" id="13" name="npc">
+  <object id="30" name="horse1" type="w" x="432" y="240" width="48" height="24"/>
+  <object id="31" name="horse1" type="w" x="624" y="240" width="48" height="24"/>
+  <object id="32" name="horse1" type="w" x="816" y="240" width="48" height="24"/>
+  <object id="33" name="horse1" type="w" x="1008" y="240" width="48" height="24"/>
+  <object id="52" name="horse1" type="inv" x="432" y="336" width="48" height="24">
+   <properties>
+    <property name="conversation" value="stable_horse_1"/>
+   </properties>
+  </object>
+  <object id="53" name="horse1" type="inv" x="624" y="336" width="48" height="24">
+   <properties>
+    <property name="conversation" value="stable_horse_2"/>
+   </properties>
+  </object>
+  <object id="54" name="horse1" type="inv" x="816" y="336" width="48" height="24">
+   <properties>
+    <property name="conversation" value="stable_horse_3"/>
+   </properties>
+  </object>
+  <object id="55" name="horse1" type="inv" x="1008" y="336" width="48" height="24">
+   <properties>
+    <property name="conversation" value="stable_horse_4"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup color="#55aaff" id="10" name="spawn">
+  <object id="2" name="honeywood_farm" type="front" x="288" y="864" width="48" height="24"/>
+  <object id="3" name="honeywood_farm" type="back" x="912" y="528" width="48" height="24"/>
+ </objectgroup>
+ <objectgroup color="#ffff7f" id="11" name="portal">
+  <object id="1" name="honeywood_farm" type="front" x="288" y="888" width="48" height="24"/>
+  <object id="4" name="honeywood_farm" type="back" x="912" y="552" width="48" height="24"/>
+ </objectgroup>
+</map>

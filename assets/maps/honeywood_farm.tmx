@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.11" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="66" height="50" tilewidth="24" tileheight="24" infinite="0" nextlayerid="16" nextobjectid="68">
+ <properties>
+  <property name="bgm" value="bgm_honeywood"/>
+  <property name="lightmap_camera" value="sunlight"/>
+ </properties>
+ <tileset firstgid="1" name="honeywood_farm" tilewidth="24" tileheight="24" tilecount="3312" columns="72">
+  <image source="tilesets/honeywood_farm.png" width="1728" height="1104"/>
+ </tileset>
+ <tileset firstgid="3313" source="tilesets/fsm_town01_a1.tsx"/>
+ <tileset firstgid="4081" source="tilesets/fsm_town01_b.tsx"/>
+ <tileset firstgid="5105" source="tilesets/fsm_town01_c.tsx"/>
+ <tileset firstgid="6129" source="tilesets/fsm_town01_d.tsx"/>
+ <layer id="2" name="under0_none" width="66" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5U1/hAFUBAAAAAAAAAAAAAAAArwEzkAAB
+  </data>
+ </layer>
+ <layer id="1" name="under1_ground" width="66" height="50">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <layer id="3" name="under2" width="66" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt0rEJxDAAQ1Ev4OVym9ztDwkIg4sQ0l2h9xrVgj8GAAAAAAD/9JljHDPb7Hf9/85ss72H5i72Hpq70EPoIe56aOzirofGLvQQeoinHpq6eOqhqQs9hB7iTQ8NXbzpoaELPYQeQg+hh2jvYGnvYNFD6CH0EHqI9g6W9g4WPcQJAH9kPA==
+  </data>
+ </layer>
+ <layer id="4" name="under3" width="66" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt170JAkEQhuHR+G45TlNFLUFNFbQFfzJB7UOwEy3CUuxEU39mOTY5uMDECeZ9YNl09uNjYUQAAAAAAAAAeLUpRbal9RQAAAC/e2Ui78x6Cnu7XGSfW09h76QZnMlBeppB33EOD3370/H7k04Q6QbrKexNNINbTi9iH8pAL2IfxqG6p45zoA8V+lCJPbjr/7jSe+04h3oPvO4Z9X/B656R+jDTt8/1fDKfe0b6F2IPBnoueq4Oc0ia9s1WIdIu/j+PlaZ9c6gZjBzl0GShGSzJQQ6awZEc4MwXnJgbzQ==
+  </data>
+ </layer>
+ <layer id="5" name="under4" width="66" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt0DERACAQxMBz8SrACfiXAxLovmBXQSYJAAAAAPCrUcms7op+6z7YPgAAAAAAAADw6ADlfAFT
+  </data>
+ </layer>
+ <layer id="6" name="under5" width="66" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5U1/hAFUBAAAAAAAAAAAAAAAArwEzkAAB
+  </data>
+ </layer>
+ <layer id="7" name="over6" width="66" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt0EEVgCAURcHXg1DYRJpAE43or+CKBTMJ7rkJAAAAAAAAAAAAf/SWXG13xX53PRg+ZNaD5UOeevD6AADAIT52bQTV
+  </data>
+ </layer>
+ <layer id="8" name="over7" width="66" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5U1/hAFUBAAAAAAAAAAAAAAAArwEzkAAB
+  </data>
+ </layer>
+ <layer id="9" name="over8" width="66" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5U1/hAFUBAAAAAAAAAAAAAAAArwEzkAAB
+  </data>
+ </layer>
+ <objectgroup color="#0055ff" id="14" name="sound" visible="0">
+  <object id="44" name="sand" x="384" y="960" width="144" height="240"/>
+  <object id="45" name="sand" x="576" y="528" width="144" height="96"/>
+  <object id="46" name="sand" x="432" y="624" width="96" height="24"/>
+  <object id="47" name="sand" x="408" y="648" width="120" height="24"/>
+  <object id="50" name="sand" x="384" y="672" width="144" height="72"/>
+  <object id="51" name="sand" x="528" y="624" width="96" height="96"/>
+  <object id="52" name="sand" x="624" y="624" width="24" height="72"/>
+  <object id="53" name="sand" x="648" y="624" width="24" height="48"/>
+  <object id="54" name="sand" x="672" y="624" width="24" height="24"/>
+  <object id="55" name="sand" x="1296" y="600" width="48" height="48"/>
+  <object id="57" name="sand" x="792" y="720" width="96" height="24"/>
+  <object id="58" name="sand" x="792" y="744" width="120" height="24"/>
+  <object id="59" name="sand" x="816" y="768" width="120" height="24"/>
+  <object id="60" name="sand" x="840" y="792" width="120" height="24"/>
+  <object id="61" name="sand" x="864" y="816" width="120" height="24"/>
+  <object id="62" name="sand" x="888" y="840" width="96" height="24"/>
+ </objectgroup>
+ <objectgroup color="#aa0000" id="13" name="collision">
+  <object id="23" x="0" y="0" width="372" height="1200"/>
+  <object id="24" x="1404" y="0" width="180" height="1200"/>
+  <object id="25" x="672" y="864" width="732" height="336"/>
+  <object id="26" x="540" y="960" width="132" height="240"/>
+  <object id="27" x="528" y="0" width="876" height="336"/>
+  <object id="28" x="372" y="0" width="156" height="192"/>
+  <object id="30" x="372" y="192" width="84" height="192"/>
+  <object id="31" x="372" y="384" width="36" height="96"/>
+  <object id="33" x="522" y="756" width="234" height="108"/>
+  <object id="34" x="732" y="528" width="24" height="192"/>
+  <object id="36" x="522" y="864" width="12" height="72"/>
+  <object id="37" x="528" y="336" width="72" height="192"/>
+  <object id="38" x="696" y="336" width="72" height="192"/>
+  <object id="39" x="600" y="336" width="96" height="168"/>
+  <object id="40" x="768" y="336" width="144" height="144"/>
+  <object id="41" x="912" y="336" width="30" height="96"/>
+  <object id="42" x="1032" y="336" width="72" height="96"/>
+  <object id="43" x="942" y="336" width="90" height="72"/>
+  <object id="66" x="372" y="756" width="18" height="180"/>
+  <object id="67" x="534" y="720" width="222" height="36"/>
+ </objectgroup>
+ <objectgroup color="#5500ff" id="15" name="rest">
+  <object id="64" name="door_large_square1" x="576" y="432" width="144" height="96"/>
+  <object id="65" name="door_large_square2" x="912" y="336" width="144" height="96"/>
+ </objectgroup>
+ <objectgroup color="#55aaff" id="10" name="spawn">
+  <object id="3" name="honeywood_stable" type="front" x="624" y="528" width="48" height="24"/>
+  <object id="7" name="honeywood_stable" type="back" x="960" y="432" width="48" height="24"/>
+  <object id="1" name="honeywood_farm_path" x="432" y="1176" width="48" height="24"/>
+ </objectgroup>
+ <objectgroup color="#ffff7f" id="12" name="portal">
+  <object id="2" name="honeywood_farm_path" x="360" y="1200" width="192" height="24"/>
+  <object id="4" name="honeywood_stable" type="front" x="600" y="498" width="96" height="24"/>
+  <object id="6" name="honeywood_stable" type="back" x="936" y="402" width="96" height="24"/>
+ </objectgroup>
+</map>

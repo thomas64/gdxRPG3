@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.11" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="40" height="24" tilewidth="24" tileheight="24" infinite="0" nextlayerid="15" nextobjectid="41">
+ <properties>
+  <property name="bgm" value="bgm_honeywood"/>
+  <property name="lightmap_camera" value="sunlight"/>
+ </properties>
+ <tileset firstgid="1" name="honeywood_farm_path" tilewidth="24" tileheight="24" tilecount="1410" columns="47">
+  <image source="tilesets/honeywood_farm_path.png" width="1128" height="720"/>
+ </tileset>
+ <tileset firstgid="1411" source="tilesets/fsm_town01_a2.tsx"/>
+ <tileset firstgid="2179" source="tilesets/fsm_town01_a1.tsx"/>
+ <tileset firstgid="2947" source="tilesets/fsm_town01_b.tsx"/>
+ <tileset firstgid="3971" source="tilesets/fsm_town01_e.tsx"/>
+ <tileset firstgid="4995" source="tilesets/fsm_forest01_b.tsx"/>
+ <layer id="4" name="under0_none" width="40" height="24">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20PBxQAAAD8Gw8AAAE=
+  </data>
+ </layer>
+ <layer id="1" name="under1_ground" width="40" height="24">
+  <data encoding="base64" compression="zlib">
+   eJzFl2dwVUUUx/fde/OeQSEJYKHYIERBFJVAEqSIAQQsKKC0BGQECySIOAYIVRIgEaQXuw4GdWyIDNjARpcEAghShrEi8A3soKC/nX07d9/Lfbn3Gx9+c87uPWf35P+2pSRJiFKwk4VwIKkWG4Z9lhDVsBva2kLcExLiXugLA2j/KoR4ETbZrr3Ocb/PxJ8KDu1RUBKdP5F9DSqgOXOnQ4tabAbsp65vYQ9kMl87aA/9mGsg9jdq+gr7h2HrGt9nUds0mA43Ou78iexa8hoRNzIixIiIaxvTN5rxNvI9mVqOwChLxR/A7jXaWcSdpI5TIrF+/YkbhH+WnHPwFH0zHH/9riRmBePMpKbSiGub0F/AeJsYtw7jTYYr6Hud2IP4h2C0pfKziVshtXAS63cf4wzGDoE8yIeSAPpdJWNETf2aOq4+NmNNwZ8Kbwi3v8BS+VdDM2gO6bDRdvV7G26j7/5Q7LobyvfSAPotIr/CQ7/LHVevcupoBAulFlEdpW7H4DiccJTOm6EFfgZcAw/SfoecXPwBodh1N4z6frH99VtM/hIP/ZbSt0zE6mXqqHU3dd4ClfhVcC39I2h/h/0efoCDUIe+C2Ev/jcB9NPrLF6/QvrGwJvCW0etu9ZZ6rmVebfBdmhJuxXUY4wU+BH/EMyDi/heF/YFWH/VUX3i9ZN6PMa4Y+2a6+5jW+k+TMZYSufl8Cw8B8/D70Lt25HEjMP/Cf8wzIdiWTf9+wPop/dhvH56n3qtu0+o71NYDxvgP/qyiFmLvw5eEO6+1fr9TMxRWACTYDJMCXj+FXjoF69Xvei6kzp1hG7QHT7jm2CcEBRZSjd97sn1J/VLxU+D+rDQUbrreyTI+Vfood8YQ6+ezJdCe5qldMqGHOgBnzPnFwnuDbn+HqKWh+ERaED/IvqedNx7xE8/rUe8fnpdyX3aC5tKe7rlrq8OQulVhP3SjtXNvDdOE3MGHo2ee4vpK4ID0f3sp99qcjp5nH9jGXMn+bugN9/T5J1kxa6veL3kebcZ/078CcS29jj3lsB4mBDdz376yX3U2aO+xy213zLw06E+7RnG+sol9xb4E/8t457YQn134feF62kPZPwyrMAWY5bityVvYnQf++mXQl4X8lZSQ0XEteOo5QlL1SZjG+CXWEqXl+T+oK8j/IWfl+TeE1up7278fnAD7UHy3oUQWPKMh0ziC7CFIX/9UokpD/M7pPG3QllYtfW60uusIZRCV6mT3LvkdoK/8fOx78qaqWcbOX3w+0Mbx71nzXdfO+LbQ1YtummbRvx45j1BTR9S30dwPKzaUie9ni6WexxmwWzoQW5nOM23odj3ZM3Mv12+WUXNe1bv1yTmC0MEsmvRzTz/5PutO79jt4hrJ1LDy8zzCrwKlxjvvR1wO7ld4Iy8R7CrsO/D17Zab3uwNzlqvR3Dn+2o/nJ4Gi5gjJwA+un3W/z5Umype1nrdalxHlYydk9yb4V/qOkB7Hr6VuPvICed2KNwM7HLYLmxDofAHNrJoWDvZ3m+5Xi8DyYZepVhLzPeLVX09SK3K/xLTcOxG+j7AL+SsXLlbyr/PyE204ldh3nEzTXeMUHefx089DPfy/rd0hiaQFPoTe4dcJbv5+Q9x1xrsFWMtRN2QTXstmPXYT5xzxjvGD/9/Oo/39av/vNt/wd2OeV5
+  </data>
+ </layer>
+ <layer id="5" name="under2" width="40" height="24">
+  <data encoding="base64" compression="zlib">
+   eJzr5mFg6AFiQuAwHwPDET7C6kgFX1gZGL6y4qZXA922hgj3PQa67QkN3CfCxsAgyoabhgFXdgYGF3YETS9gAnSDKRBvxRF+gwUIEwi/gQKXgWF0BYinDtLw+4zklsEYfqB4xZd/Bxp8xhFugyX8QOkOXxkz0OAznrj9MgjiVxhP3I6GH2EwGn6UAWrk35XCtHMfofYVqaAV6NY2KrqX2PYVsWAp0G3LqOg+WPsKFw0DsHbEVSC+Rsd0iW4vLncg56NvdHQfur243IGcj6bR0X3I5Z8YGyYfBgaq3DFGSmtmbJh8fHkbnf6GIz0QopH1CkPDZTKQPwVLekPn48vb6DRyeBOql5BpZL2bgXZugaYzbOkNnQ8AAb6fig==
+  </data>
+ </layer>
+ <layer id="6" name="under3" width="40" height="24">
+  <data encoding="base64" compression="zlib">
+   eJzt1sdOAlEUgOGbKFggsECwu7G7tdeN5UUsL6Rg9yUodjeKL0Cxu7G8AAx2479gws0QZjAhM5h4ki9AIJk/B5jcqEuIc1g1Fw4hLrGODWxiC9vYwRNtzxb2vdDwin0c4BBHOMaJI/e5hE2IJGKI28zrq3cK0YArWq5xg1vc4V7qU2gKwI+0iX3DtI3gjZZ3fOATX/iW+rx2IersuUezp5HGJjSjBa1oc+beV7J7U0zenzqjtIxhHBOYxJTUZ/X+jMbq/RnN//6Km2X+syvwI1Dg/xuxsC9IUwhhRKS+sLS/jIV9MZriSCAp9Xmk/fks/P2laEpDQUbqS5XJ/jzc8+rghU+6/5XL/vppGsAghqS+IDsL2XKPf3WiJT4vrvIbW3Pof+aU6525irt2qc+Lu7TtGfQ9cL1HlzVnVfX8rDcVbiEqYYPdbU6XOur5WW/aaepAJ7pM7lPPz3ozTdMMZjFncp96ftabeZoWsIilbJ+2WfvdV/G8GjWodee/1t5njfakve8ZdWubtd99N8970Is+d/7r316v0PwAXudtYw==
+  </data>
+ </layer>
+ <layer id="7" name="under4" width="40" height="24">
+  <data encoding="base64" compression="zlib">
+   eJzt1jdOA1EUheErAW7G8hTEnrABMNATNkLYDW7IYNiB3ZBjA3gD5NgA3oAJLvklfKULM0hIyM8PyUf6upF8Cp+rJ+J/jlIixzhBIVXrNtE80ukJzyh62K8hFGlEExJhrdtE00mnLnSjx3G/6UBkBrOYwzwWgq/fDNFpGCMYddxvjS7r2MAmtrD9rd8YncYxgcnwcyuuckqXM5zjApe4CqLf6TZ0K65SossLXvGGd5Rj+uk2dCuu0pwUaUEr2tCOjmT0O92GbsVVeunShzT6MYDBmH66Dd2Kb9Ft6Fbq+b+xN9vH2JvtS6bYbKayW3uzfUmObvlKP3uzfYy92T7G3myb+jv6b3H1jl7kf7+EZWSxgtVfbCHuHV2Nzjt02cUe9nGAQ9Pvp/sc946uxtv/mt+9wS3ucI8H08Xe5w/eylQi
+  </data>
+ </layer>
+ <layer id="8" name="under5" width="40" height="24">
+  <data encoding="base64" compression="zlib">
+   eJztljtOAlEYRv8EtLmTS6EIPeIOFHrBjQhsBjoQ3IN2PHseGwAfvegGFKHk9GRuLgn5gTAnOd2d5GQm8+WKREREHDtjKzKx+64I55u2nwPu2xdPRqSJLXw24eeGvLuR1f/OXZp62MeBo++LprnV/85vNL3jB346+mIJkTie4XlCr29B0z8uceXoy9B0jVm8UexLBiJXmMJ0EH7unqYCFvFBse+WpjvMYd7R90hTCctYUeyLOA3q/LsN47/X2rRp6Rj/vdZmSsvM+O+1Nr+0/Bn/vdbmgu27DDb3ets7QZVnao4d3TXb3gleaHtV7FsD4Uw5zA==
+  </data>
+ </layer>
+ <layer id="9" name="over6" width="40" height="24">
+  <data encoding="base64" compression="zlib">
+   eJzt0jsKgDAQBNDtA3t5vYnewL/XiP9TOGChhWKQYFLMg23CkJ1iRYiIiOKTGJHUhG7xLEO3POJ+dK9RkRbTYXo932O5txmdFsyK2S79fN9bhb9rfc8VyJTqnvdlVLfdFu+DHvnpx36hdxPRdzuMCB1r
+  </data>
+ </layer>
+ <layer id="10" name="over7_none" width="40" height="24">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20PBxQAAAD8Gw8AAAE=
+  </data>
+ </layer>
+ <layer id="11" name="over8_none" width="40" height="24">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20PBxQAAAD8Gw8AAAE=
+  </data>
+ </layer>
+ <objectgroup color="#0055ff" id="13" name="sound" visible="0">
+  <object id="15" name="sand" x="480" y="0" width="144" height="120"/>
+  <object id="16" name="sand" x="528" y="144" width="48" height="192"/>
+  <object id="17" name="sand" x="504" y="120" width="96" height="24"/>
+  <object id="18" name="sand" x="0" y="384" width="264" height="48"/>
+  <object id="19" name="sand" x="264" y="336" width="192" height="48"/>
+  <object id="20" name="sand" x="336" y="288" width="192" height="48"/>
+  <object id="21" name="sand" x="432" y="240" width="96" height="48"/>
+  <object id="22" name="sand" x="480" y="216" width="48" height="24"/>
+  <object id="23" name="sand" x="504" y="192" width="24" height="24"/>
+  <object id="24" name="sand" x="312" y="288" width="24" height="48"/>
+  <object id="25" name="sand" x="288" y="312" width="24" height="24"/>
+  <object id="26" name="sand" x="456" y="336" width="24" height="24"/>
+ </objectgroup>
+ <objectgroup color="#aa0000" id="12" name="collision">
+  <object id="6" x="0" y="0" width="216" height="384"/>
+  <object id="7" x="216" y="0" width="168" height="288"/>
+  <object id="8" x="384" y="0" width="96" height="240"/>
+  <object id="9" x="216" y="288" width="24" height="72"/>
+  <object id="10" x="624" y="0" width="336" height="576"/>
+  <object id="11" x="0" y="432" width="624" height="144"/>
+  <object id="12" x="336" y="384" width="288" height="48"/>
+  <object id="13" x="576" y="288" width="48" height="96"/>
+  <object id="14" x="528" y="336" width="48" height="48"/>
+ </objectgroup>
+ <objectgroup color="#55aaff" id="2" name="spawn">
+  <object id="1" name="honeywood" x="0" y="408" width="48" height="24"/>
+  <object id="27" name="honeywood_farm" x="528" y="24" width="48" height="24"/>
+ </objectgroup>
+ <objectgroup color="#ffff7f" id="3" name="portal">
+  <object id="2" name="honeywood" x="-24" y="360" width="24" height="96"/>
+  <object id="3" name="honeywood_farm" x="456" y="-24" width="192" height="24"/>
+ </objectgroup>
+</map>

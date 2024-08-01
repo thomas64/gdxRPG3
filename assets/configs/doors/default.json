@@ -5,5 +5,7 @@
   "door_wooden_left"           : {"type": "SMALL", "spriteId": "wooden_left"},
   "door_wooden_ring_shade_left": {"type": "SMALL", "spriteId": "wooden_ring_shade_left"},
   "door_forged_left"           : {"type": "SMALL", "spriteId": "forged_left"},
+  "door_large_square1"         : {"type": "LARGE", "spriteId": "large_square"},
+  "door_large_square2"         : {"type": "LARGE", "spriteId": "large_square"},
   "door_large_round"           : {"type": "LARGE", "spriteId": "large_round"}
 }
