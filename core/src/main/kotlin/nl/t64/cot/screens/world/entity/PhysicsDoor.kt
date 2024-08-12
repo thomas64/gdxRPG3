@@ -29,7 +29,7 @@ class PhysicsDoor(private val door: Door) : PhysicsComponent() {
         }
         if (event is OnActionEvent) {
             if ((event.playerDirection == Direction.NORTH
-                        || event.playerDirection == Direction.SOUTH)
+                    || event.playerDirection == Direction.SOUTH)
                 && event.checkRect.overlaps(boundingBox)
             ) {
                 isSelected = true
@@ -65,6 +65,7 @@ class PhysicsDoor(private val door: Door) : PhysicsComponent() {
 
         if (door.isClosed) {
             openWhenClosedAndRemoveBlocker(true)
+            removeKeyFromInventoryIfDoorWasAlreadyUnlockedInThePast()
         } else {
             closeWhenOpenAndAddBlocker(true)
         }
@@ -75,25 +76,31 @@ class PhysicsDoor(private val door: Door) : PhysicsComponent() {
     }
 
     private fun isFailingOnLock(): Boolean {
-        return door.isLocked && !isAbleToUnlockWithKey(door.keyId)
+        return door.isLocked && !isAbleToUnlockWithKey()
     }
 
-    private fun isAbleToUnlockWithKey(keyId: String?): Boolean {
+    private fun isAbleToUnlockWithKey(): Boolean {
         val inventory = gameData.inventory
-        return if (keyId == null) {
+        if (door.keyId == null) {
             stringBuilder.append(door.message!!)
             worldScreen.showMessageDialog(stringBuilder.toString())
-            false
-        } else if (inventory.hasEnoughOfItem(keyId, 1)) {
-            inventory.autoRemoveItem(keyId, 1)
+            return false
+        } else if (inventory.hasEnoughOfItem(door.keyId, 1)) {
+            inventory.autoRemoveItem(door.keyId, 1)
             door.unlock()
-            true
+            return true
         } else {
             stringBuilder.append("This door is locked.")
             stringBuilder.append(System.lineSeparator())
             stringBuilder.append("You need a key to open the door.")
             worldScreen.showMessageDialog(stringBuilder.toString())
-            false
+            return false
+        }
+    }
+
+    private fun removeKeyFromInventoryIfDoorWasAlreadyUnlockedInThePast() {
+        if (door.wasLockedOnce() && gameData.inventory.hasEnoughOfItem(door.keyId, 1)) {
+            gameData.inventory.autoRemoveItem(door.keyId!!, 1)
         }
     }
 

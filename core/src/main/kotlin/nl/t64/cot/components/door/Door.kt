@@ -22,6 +22,10 @@ class Door(
     var isClosed: Boolean = true
     val isOpen: Boolean get() = !isClosed
 
+    fun wasLockedOnce(): Boolean {
+        return !isLocked && keyId != null
+    }
+
     fun unlock() {
         isLocked = false
     }
