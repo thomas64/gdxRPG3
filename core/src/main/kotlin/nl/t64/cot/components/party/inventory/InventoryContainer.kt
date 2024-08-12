@@ -48,6 +48,9 @@ open class InventoryContainer(numberOfSlots: Int = 0) {
     fun autoSetItem(newItem: InventoryItem) {
         if (newItem.isStackable) {
             addResource(newItem)
+        } else if (newItem.isUnique) {
+            findFirstSlotIndexWithItem(newItem.id)
+                ?: addItemAtEmptySlot(newItem)
         } else {
             addItemAtEmptySlot(newItem)
         }

@@ -9,6 +9,7 @@
     "name"       : "Basement key",
     "group"      : "ITEM",
     "sort"       : 70010,
+    "is_unique"  : true,
     "description": ["Key to the elder's basement, given to you by the elder himself."]
   },
   "scroll_of_orc_obedience": {
@@ -39,6 +40,7 @@
     "name"       : "Letter to the Fairy Shop",
     "group"      : "ITEM",
     "sort"       : 70035,
+    "is_unique"  : true,
     "description": ["A letter from the village elder to the Fairy Shop.", "What does it say?"]
   }
 }

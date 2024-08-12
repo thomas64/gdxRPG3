@@ -15,6 +15,8 @@ data class InventoryItem(
     val sort: Int = 0,
     val description: List<String> = emptyList(),
     val group: InventoryGroup = InventoryGroup.EMPTY,
+    @JsonProperty("is_unique")
+    val isUnique: Boolean = false,
     @JsonProperty("is_two_handed")
     val isTwoHanded: Boolean = false,
     val skill: SkillItemId? = null,
