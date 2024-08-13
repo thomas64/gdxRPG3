@@ -26,6 +26,9 @@ internal class SummaryTable {
     fun populateSummary(quest: QuestGraph) {
         summary.setText(quest.summary)
         container.cells.peek().setActor<Image>(Utils.getFaceImage(quest.entityId, isFlipped = false))
+        if (quest.entityId.endsWith("_black")) {
+            container.cells.peek().actor.color = Color.BLACK
+        }
     }
 
     fun isEmpty(): Boolean {
@@ -35,9 +38,7 @@ internal class SummaryTable {
     private fun createLabel(): Label {
         val font = resourceManager.getTrueTypeAsset(TEXT_FONT, TEXT_SIZE)
         val labelStyle = LabelStyle(font, Color.BLACK)
-        return Label("", labelStyle).apply {
-            wrap = true
-        }
+        return Label("", labelStyle).apply { wrap = true }
     }
 
     private fun createContainer(): Table {

@@ -22,6 +22,7 @@ class Scenario {
         setQuestGraceComplete()
         gameData.resetCycle()
         addQuestArdorToLogbook()
+        addQuestVoiceToLogbook()
         gameData.clock.start()
         profileManager.saveProfile()
     }
@@ -36,6 +37,8 @@ class Scenario {
     fun startFourthCycle() {
         reviveMozes()
         gameData.resetCycle()
+        hideQuestVoiceFromLogbook()
+        addQuestYlarusToLogbook()
         gameData.clock.start()
         profileManager.saveProfile()
     }
@@ -80,6 +83,18 @@ class Scenario {
     private fun addQuestArdorToLogbook() {
         gameData.quests.getQuestById("quest_royal_sacrifice").accept()
         gameData.quests.getQuestById("quest_sub_royal_sacrifice").accept()
+    }
+
+    private fun addQuestVoiceToLogbook() {
+        gameData.quests.getQuestById("quest_to_lastdenn_then").accept()
+    }
+
+    private fun hideQuestVoiceFromLogbook() {
+        gameData.quests.getQuestById("quest_to_lastdenn_then").isHidden = true
+    }
+
+    private fun addQuestYlarusToLogbook() {
+        gameData.quests.getQuestById("quest_to_lastdenn_then2").accept()
     }
 
 }

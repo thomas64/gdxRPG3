@@ -15,7 +15,7 @@ data class QuestGraph(
     val entityId: String = "",
     val summary: String = "",
     val isSubQuest: Boolean = false,
-    val isHidden: Boolean = false,
+    var isHidden: Boolean = false,
     val linkedWith: List<String> = emptyList(),
     val tasks: Map<String, QuestTask> = emptyMap()
 ) {
@@ -47,10 +47,15 @@ data class QuestGraph(
     private fun getTasksOfAcceptedSubQuests(): Map<String, QuestTask> {
         return linkedWith
             .map { gameData.quests.getQuestById(it) }
-            .filter { it.currentState.isEqualOrHigherThan(QuestState.ACCEPTED) }
+            .filter { isAcceptedOrNotFinishedInThePast(it) }
             .map { it.tasks }
             .flatMap { it.toList() }
             .toMap()
+    }
+
+    private fun isAcceptedOrNotFinishedInThePast(subQuest: QuestGraph): Boolean {
+        return subQuest.currentState.isEqualOrHigherThan(QuestState.ACCEPTED)
+            || (subQuest.resetState.isEqualOrHigherThan(QuestState.ACCEPTED) && subQuest.resetState != QuestState.FINISHED)
     }
 
     fun reset() {

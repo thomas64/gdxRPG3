@@ -8,7 +8,7 @@ import nl.t64.cot.audio.stopAllSe
 
 class QuestTask(
     var taskPhrase: String = "",
-    val updatedPhrase: String? = null,
+    private val updatedPhrase: String? = null,
     val type: QuestTaskType = QuestTaskType.NONE,
     val target: MutableMap<String, Int> = mutableMapOf(),
     val targetAlternate: Map<String, Int> = emptyMap(),
@@ -16,8 +16,9 @@ class QuestTask(
     val conversationId: String = "",
     val isOptional: Boolean = false,
     var isHidden: Boolean = false,
-    var isRepeatable: Boolean = false,
-    var hasRewardSound: Boolean = false,
+    private val isResettable: Boolean = true,
+    private var isRepeatable: Boolean = false,
+    private var hasRewardSound: Boolean = false,
     val linkedWith: List<String> = emptyList()
 ) {
     var isReset: Boolean = false
@@ -45,6 +46,8 @@ class QuestTask(
     }
 
     private fun isResettable(): Boolean {
+        if (!isResettable) return false
+
         return when (type) {
             QuestTaskType.COMPLETE,
             QuestTaskType.DISCOVER,

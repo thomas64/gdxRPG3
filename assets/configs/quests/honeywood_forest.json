@@ -94,10 +94,11 @@
         "linkedWith": ["2"]
       },
       "2": {
-        "taskPhrase": "Find the secret door.",
-        "type"      : "FREE",
-        "isHidden"  : true,
-        "linkedWith": ["3"]
+        "taskPhrase"  : "Find the secret door.",
+        "type"        : "FREE",
+        "isHidden"    : true,
+        "isResettable": false,
+        "linkedWith"  : ["3"]
       },
       "3": {
         "taskPhrase"   : "Look for the magic scroll.",

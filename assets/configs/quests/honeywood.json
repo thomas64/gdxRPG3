@@ -44,10 +44,10 @@
       }
     }
   },
-  "quest_priest_of_lastdenn"   : {
-    "title"     : "The Priest of Lastdenn",
-    "entityId"  : "ylarus",
-    "summary"   : "Adan inexplicably bursts into flames every time Grace is sacrificed by the wizard Ardor. Ylarus, the God of Time, his power is fading. He sends you to the priest of Lastdenn for answers.",
+  "quest_to_lastdenn_then"     : {
+    "title"     : "To Lastdenn then",
+    "entityId"  : "voice_black",
+    "summary"   : "Bathed in light, you heard a voice saying, 'You have been given another chance' and 'You must go to the city of Lastdenn'. Whose voice was that? And should you do as the voice said? And why Lastdenn? And why you?",
     "linkedWith": ["quest_honeywood_elder"],
     "tasks"     : {
       "1" : {
@@ -56,6 +56,26 @@
       },
       "10": {
         "taskPhrase": "Travel to Lastdenn to find answers.",
+        "type"      : "DISCOVER"
+      }
+    }
+  },
+  "quest_to_lastdenn_then2"    : {
+    "title"     : "To Lastdenn then",
+    "entityId"  : "ylarus",
+    "summary"   : "Adan inexplicably bursts into flames every time Grace is sacrificed by the wizard Ardor. Ylarus, the God of Time, his power is fading. He gave you the Crystal of Time and he sends you to the priest of Lastdenn for answers.",
+    "linkedWith": ["quest_honeywood_elder"],
+    "tasks"     : {
+      "1" : {
+        "taskPhrase": "Leave Honeywood Village through the south past the guards.",
+        "type"      : "DISCOVER"
+      },
+      "10": {
+        "taskPhrase": "Travel to Lastdenn to find answers.",
+        "type"      : "DISCOVER"
+      },
+      "11": {
+        "taskPhrase": "Find the priest of Lastdenn.",
         "type"      : "DISCOVER"
       }
     }
@@ -261,6 +281,7 @@
         "taskPhrase"    : "            Ask Luana to accompany you on your travels. She is near the statue.",
         "type"          : "DELIVER_MESSAGE",
         "conversationId": "luana_join",
+        "isResettable"  : false,
         "linkedWith"    : ["2"]
       }
     }
