@@ -165,10 +165,7 @@
       "1"   : {"text": ["Young Mozes, can I help you with anything?"]},
       "2"   : {
         "choices": [
-          {
-            "condition": ["i_rc_>=_a_q_quest_honeywood_elder", "i_n_1_>=_item_letter_to_fairy_shop", "i_n_5_>=_item_gold", "i_n_5_>=_item_gemstone"],
-            "text"     : "[Letter, Gold 5, Gemstone 5] *Deliver the message from the village elder.*", "command": "DELIVER_QUEST_ITEM", "nextId": "10"
-          },
+          {"condition": ["i_n_1_>=_item_letter_to_fairy_shop"], "text": "[Village elder's letter] *Deliver the message from the village elder.*", "command": "DELIVER_QUEST_ITEM", "nextId": "10"},
           {"text": "*Visit the shop.*", "command": "LOAD_SHOP"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]

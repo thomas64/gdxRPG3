@@ -12,10 +12,9 @@
       "1": {"text": ["Everything seems normal? Adan didn't end up in flames?"]},
       "2": {"text": ["Is Grace also still alive then?"]},
       "3": {"text": ["Then I have to go back! I must save her!"]},
-      "4": {"text": ["But Ardor is so powerful... I've no idea what to do against him..."]},
+      "4": {"text": ["But Ardor was so powerful... I've no idea what to do against him..."]},
       "5": {"text": ["Did it really happened at all?"]},
-      "6": {"text": ["Maybe I should ask the elder for help."]},
-      "7": {"text": ["Would he believe me?"], "choices": [{"command": "EXIT"}]}
+      "6": {"text": ["Should I go to Lastdenn? Or should I go back to the forest?"], "choices": [{"command": "EXIT"}]}
     }
   },
   "mrs_johanna"                         : {
@@ -131,46 +130,29 @@
       "1": {"text": ["Boohoo! You took Kaidan away from us! You're mean!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "luana_join"                          : {
-    "name"   : "Luana",
+  "bored_and_secluded"                  : {
+    "name"   : "Malina",
     "phrases": {
       "1" : {"text": ["Hi Mozes! You really should check out this priest fella.", "He is so funny! Ha ha!"]},
       "2" : {
         "text": ["It's a shame we're not allowed to leave the village by ourselves due to the rising monster threat, but I'm glad this fella came in. He can now brighten my dull and secluded life a bit."], "choices": [
           {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "nextId": "20"},
-          {"condition": ["i_rc_==_a_q_quest_honeywood_elder"], "nextId": "3"},
-          {"condition": ["i_rc_!=_a_q_quest_honeywood_elder", "i_rc_>=_a_q_quest_royal_sacrifice"], "command": "EXIT"}
+          {"condition": ["i_rc_>=_a_q_quest_royal_sacrifice"], "command": "EXIT"}
         ]
       },
-      "3" : {"text": ["What's bothering you? You seem troubled."]},
-      "4" : {
-        "choices": [
-          {"text": "*Explain everything that's happened and ask her to join you.*", "nextId": "6"},
-          {"text": "*Say it's nothing. Take your leave.*", "command": "EXIT"}
-        ]
-      },
-      "6" : {"text": ["{SPEED=0.2} . . . . ."]},
-      "7" : {"text": ["Wait! You want me to come with you, travel through time, risk my life to stop an evil wizard, and rescue Grace?!"]},
-      "8" : {"text": ["Hell yeah! You're going on this HUGE adventure with all the big stuff, slaying monsters, taking loot, and and and..."]},
-      "9" : {"text": ["Why wouldn't I want to go with you? What's wrong with you?!"]},
-      "10": {"text": ["We've been friends since childhood, always adventuring together. Do you really think I'd leave you hanging?"]},
-      "11": {"text": ["Who will be there to protect you? You need protection... {WAIT=0.5}From me! You know that, right?"]},
-      "12": {"text": ["Alright, here's the deal: You're taking me with you, and maybe, just maybe, I'll forgive you for doubting my adventurous spirit."]},
-      "13": {"text": ["Now we're talking! You are so not gonna regret this."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "14"}]},
-      "14": {"text": ["Let's go!"], "choices": [{"command": "HERO_JOIN"}]},
       "20": {
         "choices": [
-          {"text": "*Ask Luana if she's seen Grace this morning.*", "nextId": "21"},
+          {"text": "*Ask Malina if she's seen Grace this morning.*", "nextId": "21"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
-      "21": {"face": "luana", "name": "Luana", "text": ["No, I haven't seen Grace this morning, Mozes. Is everything okay?"]},
+      "21": {"face": "youngwoman01", "name": "Malina", "text": ["No, I haven't seen Grace this morning, Mozes. Is everything okay?"]},
       "22": {"face": "mozes", "name": "Mozes", "text": ["I don't know where she is. She wasn't in her bed this morning."]},
-      "23": {"face": "luana", "name": "Luana", "text": ["Maybe she went to Honeywood Forest? She likes to go there."]},
+      "23": {"face": "youngwoman01", "name": "Malina", "text": ["Maybe she went to Honeywood Forest? She likes to go there."]},
       "24": {"face": "mozes", "name": "Mozes", "text": ["I'm afraid she might have. There are orcs in the forest."]},
-      "25": {"face": "luana", "name": "Luana", "text": ["I'll accompany you on your search!"]},
-      "26": {"face": "mozes", "name": "Mozes", "text": ["Luana, would you mind looking for her here in the village instead?"]},
-      "27": {"face": "luana", "name": "Luana", "text": ["Of course, I will. Good luck finding her."], "choices": [{"command": "EXIT", "nextId": "30"}]},
+      "25": {"face": "youngwoman01", "name": "Malina", "text": ["I'll accompany you on your search!"]},
+      "26": {"face": "mozes", "name": "Mozes", "text": ["Malina, would you mind looking for her here in the village instead?"]},
+      "27": {"face": "youngwoman01", "name": "Malina", "text": ["Of course, I will. Good luck finding her."], "choices": [{"command": "EXIT", "nextId": "30"}]},
       "30": {"text": ["Have you found her yet? Hurry up! Go to Honeywood Forest."], "choices": [{"command": "EXIT", "nextId": "30"}]}
     }
   },
@@ -465,9 +447,10 @@
       "1"   : {"text": ["Greetings, Mozes. How may I be of service today?"]},
       "2"   : {
         "choices": [
-          {"condition": ["i_rc_==_a_q_quest_priest_of_lastdenn", "i_rc_===_u_q_this"], "text": "*Explain everything that's happened and your need to leave the village.*", "nextId": "50"},
+          {"condition": ["i_r_<=_k_q_this", "i_c_==_u_q_this"], "text": "*Explain everything that's happened and your need to leave the village.*", "nextId": "50"},
+          {"condition": ["i_r_==_a_q_this", "i_c_==_u_q_this"], "text": "*Explain again everything that's happened.*", "nextId": "60"},
           {"condition": ["i_c_==_a_q_this", "i_!fairy_portal_active"], "text": "*Complain about the warp crystal not working.*", "nextId": "70"},
-          {"condition": ["i_c_==_a_q_this", "i_ta_5_q_this", "i_n_1_>=_item_epic_fairy_ring"], "text": "[Fairy Ring] *Present the package you received from the Fairy Shop.*", "command": "SHOW_QUEST_ITEM", "nextId": "80"},
+          {"condition": ["i_c_==_a_q_this", "i_n_1_>=_item_fine_fairy_ring"], "text": "[Fairy Ring] *Present the package you received from the Fairy Shop.*", "command": "SHOW_QUEST_ITEM", "nextId": "80"},
           {"condition": ["i_c_>=_a_q_quest_helping_horse", "i_c_<=_a_q_quest_get_horse"], "text": "*Explain your need for a horse due to the blocked path to Honeywood Farm.*", "nextId": "10"},
           {"condition": ["i_c_>=_a_q_quest_get_horse", "i_tn_7_q_quest_get_horse"], "text": "*Mention Angie's horse is unwell and ask if he can provide assistance.*", "nextId": "40"},
           {"condition": ["i_c_>=_a_q_quest_get_horse", "i_tn_8_q_quest_get_horse"], "text": "*Explain your quest to find horseshoes for Angie.*", "nextId": "20"},
@@ -487,20 +470,35 @@
       "40"  : {"text": ["Hmmm..."]},
       "41"  : {"text": ["You should definitely ask my wife."], "choices": [{"nextId": "2"}]},
       "50"  : {"text": ["Hmmm..."]},
-      "51"  : {"text": ["Wow, that's quite an extraordinary tale. It's also hard to believe. The end of the world? Grace sacrificed? Ylarus, God of Time? However, why would you, Mozes, fabricate such a story about Grace?"]},
+      "51"  : {"text": ["Wow, that's quite an extraordinary tale. It's also hard to believe.", "The end of the world?", "Grace sacrificed by an evil wizard named Ardor?", "A voice telling you to go to the city of Lastdenn?", "However, why would you, Mozes, fabricate such a story about Grace?"]},
       "52"  : {"text": ["Mozes, I'd like to assist you in any way I can."]},
-      "53"  : {"text": ["First of all, I'll give you the key to the basement. Behind the door is a warp crystal, similar to the one over by the Fairies."]},
-      "54"  : {"text": ["Use this portal to deliver this letter and these items to the Fairy Shop. Afterward, return to me and show me the package you received."]},
-      "55"  : {"text": ["Secondly, you'll need a travel companion. Because indeed, it's dangerous to go alone. No one is allowed to leave the village unaccompanied."]},
-      "56"  : {"text": ["Luana is outside, near the statue, moping around. She's expressed her desire to leave the village more times than I can remember. Given your friendship, some proper explaining might just turn her into a willing companion for your journey."]},
+      "53"  : {"text": ["First of all, here's a key to the basement. Behind the door is a warp crystal, similar to the one over by the Fairies."]},
+      "54"  : {"text": ["Use the portal in the basement to deliver this letter to the Fairy Shop. Afterward, return to me and show me the package you received."]},
+      "55"  : {"text": ["But most important, you'll need a travel companion. Because indeed, it's dangerous to go alone. No one is allowed to leave the village unaccompanied."]},
+      "56"  : {"text": ["{COLOR=BLUE}Luana{COLOR=BLACK} went to Honeywood Farm this morning. She's expressed her desire to leave the village more times than I can remember. You should go find her at the farm and ask her to accompany you on your journey."]},
       "57"  : {"text": ["Together, you are permitted to leave this village by the guards on your way to Lastdenn."]},
       "58"  : {"text": ["Mozes, I wish you the best of luck on your journey."], "choices": [{"command": "RECEIVE_ITEM_FOR_QUEST"}]},
-      "70"  : {"text": ["That's unfortunate. Didn't you activate the warp crystal at the Fairies? It's necessary for it to let you warp. Remember to activate warp crystals wherever you go."]},
-      "71"  : {"text": ["But for now, it's not really a problem. Keep everything I gave you, and perhaps you can visit the Fairy Shop at a later time."], "choices": [{"nextId": "90"}]},
+      "60"  : {"text": ["Hmmm..."]},
+      "61"  : {"text": ["Wow, that's quite an extraordinary tale.", "And this is also not the first time you've told me this?!"]},
+      "62"  : {"text": ["Mozes, I'd still like to assist you in any way I can."]},
+      "63"  : {"text": ["So I already gave you a key to the basement? Well, behind the door is a warp crystal, similar to the one over by the Fairies."], "choices": [{"command": "ACCEPT_QUEST", "nextId": "64"}]},
+      "64"  : {
+        "text": ["Use the portal in the basement to deliver my letter to the Fairy Shop, if you didn't already."], "choices": [
+          {"condition": ["alone_in_party"], "nextId": "65"}
+        ]
+      },
+      "65"  : {"text": ["But most important, you'll need a travel companion. Because indeed, it's dangerous to go alone. No one is allowed to leave the village unaccompanied."]},
+      "66"  : {"text": ["{COLOR=BLUE}Luana{COLOR=BLACK} went to Honeywood Farm this morning. She's expressed her desire to leave the village more times than I can remember. Did you already asked Luana to accompany you on your journey?"]},
+      "67"  : {"text": ["Together, you are permitted to leave this village by the guards on your way to Lastdenn."]},
+      "68"  : {"text": ["Mozes, I've probably told you a dozen times already, but I really wish you the best of luck on your journey."], "choices": [{"command": "EXIT"}]},
+      "70"  : {"text": ["Hmmm..."]},
+      "71"  : {"text": ["That's unfortunate. Didn't you activate the warp crystal at the Fairies? It's necessary for it to let you warp there. Remember to activate warp crystals wherever you go."]},
+      "72"  : {"text": ["But for now, it's not really a problem. Keep the letter I gave you, and perhaps you can visit the Fairy Shop at a later time."], "choices": [{"nextId": "90"}]},
       "80"  : {"text": ["Mozes, that's wonderful, thank you. It's yours to keep. I hope it can be of assistance to you."], "choices": [{"nextId": "90"}]},
       "90"  : {"text": ["Mozes, I wish you the best of luck on your journey."], "choices": [{"command": "EXIT"}]},
       "1199": {"text": ["Mozes, it seems you've forgotten something."], "choices": [{"command": "RECEIVE_ITEM_FOR_QUEST"}]},
-      "1200": {"text": ["Greetings, Mozes. How may I be of service today?"], "choices": [{"nextId": "2"}]}
+      "1200": {"text": ["Greetings, Mozes. How may I be of service today?"], "choices": [{"nextId": "2"}]},
+      "2000": {"text": ["Mozes, I've probably told you a dozen times already, but I really wish you the best of luck on your journey."], "choices": [{"command": "EXIT"}]}
     }
   },
   "quest_get_tow_rope"                  : {
@@ -557,7 +555,7 @@
   "honeywood_soldiers"                  : {
     "name"   : "Soldier",
     "phrases": {
-      "1"   : {"text": ["Sir, as per the village elder's orders, we are not permitted to allow anyone to leave the village alone."]},
+      "1"   : {"text": ["Sir, as per the {COLOR=BLUE}village elder's{COLOR=BLACK} orders, we are not permitted to allow anyone to leave the village {COLOR=BLUE}alone{COLOR=BLACK}."]},
       "2"   : {
         "text": ["It's dangerous to go alone, particularly with the recent increase in monster activity."], "choices": [
           {"condition": ["alone_in_party"], "nextId": "3"}

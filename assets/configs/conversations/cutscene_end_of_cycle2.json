@@ -2,7 +2,9 @@
   "final_chance"          : {
     "name"   : "? ? ?",
     "phrases": {
-      "1": {"text": ["This is your final chance..."], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["This is your final chance..."]},
+      "2": {"text": ["The priest..."]},
+      "3": {"text": ["Go see the priest of Lastdenn..."], "choices": [{"command": "EXIT"}]}
     }
   },
   "mozes_wakes_up_cycle_3": {
@@ -18,7 +20,7 @@
       "1": {"text": ["It was the same voice as before..."]},
       "2": {"text": ["\"This is your final chance...\" ??"]},
       "3": {"text": ["Then what?! And final chance for what anyway?"]},
-      "4": {"text": ["Final chance to rescue Grace?", "Final chance to defeat Ardor?", "Final chance to prevent Adan's destruction?"]},
+      "4": {"text": ["Final chance to go to Lastdenn?", "Final chance to rescue Grace?", "Final chance to defeat Ardor?", "Final chance to prevent Adan's destruction?"]},
       "5": {"text": ["How would I know! And how the hell am I supposed to do that?"], "choices": [{"command": "EXIT"}]}
     }
   }

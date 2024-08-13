@@ -31,7 +31,7 @@
     "isHidden"  : true,
     "tasks"     : {
       "1": {
-        "taskPhrase": "Die by the flames of the disaster?",
+        "taskPhrase": "Die by the flames of a disaster?",
         "type"      : "COMPLETE"
       },
       "2": {
@@ -83,7 +83,7 @@
   "quest_helping_horse"        : {
     "title"     : "A helping horse",
     "entityId"  : "man13",
-    "summary"   : "The same tree on the path to Honeywood Forest has fallen once more, but this time it blocks the road ahead instead of behind of you. Lennor seeks your assistance in acquiring a strong horse and some tow ropes to speed up the road-clearing process.",
+    "summary"   : "A tree has fallen on the path to Honeywood Farm, blocking the road. Lennor seeks your assistance in acquiring a strong horse and some tow ropes to speed up the road-clearing process.",
     "linkedWith": ["quest_get_horse", "quest_get_tow_rope", "quest_get_medicine", "quest_get_horseshoes"],
     "tasks"     : {
       "1" : {
@@ -248,7 +248,7 @@
     }
   },
   "quest_honeywood_elder"      : {
-    "title"     : "The Priest of Lastdenn",
+    "title"     : "To Lastdenn then",
     "entityId"  : "oldman11",
     "summary"   : "Honeywood elder",
     "isSubQuest": true,
@@ -267,18 +267,18 @@
         "type"      : "CHECK"
       },
       "5": {
-        "taskPhrase"    : "            Deliver the letter, gold, and gemstones to the Fairy Shop.",
+        "taskPhrase"    : "            Deliver the letter to the Fairy Shop.",
         "type"          : "DELIVER_ITEM",
-        "target"        : {"letter_to_fairy_shop": 1, "gold": 5, "gemstone": 5},
+        "target"        : {"letter_to_fairy_shop": 1},
         "conversationId": "fairy_shop"
       },
       "6": {
         "taskPhrase": "            Return to the elder with the package from the Fairy Shop.",
         "type"      : "SHOW_ITEM",
-        "target"    : {"epic_fairy_ring": 1}
+        "target"    : {"fine_fairy_ring": 1}
       },
       "9": {
-        "taskPhrase"    : "            Ask Luana to accompany you on your travels. She is near the statue.",
+        "taskPhrase"    : "            Ask Luana to accompany you on your travels. She is at Honeywood Farm.",
         "type"          : "DELIVER_MESSAGE",
         "conversationId": "luana_join",
         "isResettable"  : false,

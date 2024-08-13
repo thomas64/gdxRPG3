@@ -94,13 +94,41 @@
       "1": {"text": ["It took me a while, but the road to Honeywood Farm is finally clear."], "choices": [{"command": "EXIT"}]}
     }
   },
+  "luana_join"             : {
+    "name"   : "Luana",
+    "phrases": {
+      "1" : {"text": ["Hi Mozes! You really should check out this priest fella.", "He is so funny! Ha ha!"]},
+      "2" : {
+        "text": ["It's a shame we're not allowed to leave the village by ourselves due to the rising monster threat, but I'm glad this fella came in. He can now brighten my dull and secluded life a bit."], "choices": [
+          {"condition": ["i_rc_==_a_q_quest_honeywood_elder"], "nextId": "3"},
+          {"condition": ["i_rc_===_u_q_quest_honeywood_elder"], "command": "EXIT"}
+        ]
+      },
+      "3" : {"text": ["What's bothering you? You seem troubled."]},
+      "4" : {
+        "choices": [
+          {"text": "*Explain everything that's happened and ask her to join you.*", "nextId": "6"},
+          {"text": "*Say it's nothing. Take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "6" : {"text": ["{SPEED=0.2} . . . . ."]},
+      "7" : {"text": ["Wait! You want me to come with you, travel through time, risk my life to stop an evil wizard, and rescue Grace?!"]},
+      "8" : {"text": ["Hell yeah! You're going on this HUGE adventure with all the big stuff, slaying monsters, taking loot, and and and..."]},
+      "9" : {"text": ["Why wouldn't I want to go with you? What's wrong with you?!"]},
+      "10": {"text": ["We've been friends since childhood, always adventuring together. Do you really think I'd leave you hanging?"]},
+      "11": {"text": ["Who will be there to protect you? You need protection... {WAIT=0.5}From me! You know that, right?"]},
+      "12": {"text": ["Alright, here's the deal: You're taking me with you, and maybe, just maybe, I'll forgive you for doubting my adventurous spirit."]},
+      "13": {"text": ["Now we're talking! You are so not gonna regret this."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "14"}]},
+      "14": {"text": ["Let's go!"], "choices": [{"command": "HERO_JOIN"}]}
+    }
+  },
   "stable_horse_1"         : {
     "name"   : "Horse",
     "phrases": {
       "1": {"text": ["Neigh."]},
       "2": {
         "choices": [
-          {"condition": ["i_druid1"], "text": "[Druid 1] *Listen to the horse.*", "nextId": "3"},
+          {"condition": ["druid1"], "text": "[Druid 1] *Listen to the horse.*", "nextId": "3"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
@@ -113,7 +141,7 @@
       "1": {"text": ["Neigh."]},
       "2": {
         "choices": [
-          {"condition": ["i_druid1"], "text": "[Druid 1] *Listen to the horse.*", "nextId": "3"},
+          {"condition": ["druid1"], "text": "[Druid 1] *Listen to the horse.*", "nextId": "3"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
@@ -126,7 +154,7 @@
       "1": {"text": ["Neigh."]},
       "2": {
         "choices": [
-          {"condition": ["i_druid1"], "text": "[Druid 1] *Listen to the horse.*", "nextId": "3"},
+          {"condition": ["druid1"], "text": "[Druid 1] *Listen to the horse.*", "nextId": "3"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
@@ -139,7 +167,7 @@
       "1": {"text": ["Neigh."]},
       "2": {
         "choices": [
-          {"condition": ["i_druid1"], "text": "[Druid 1] *Listen to the horse.*", "nextId": "3"},
+          {"condition": ["druid1"], "text": "[Druid 1] *Listen to the horse.*", "nextId": "3"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },

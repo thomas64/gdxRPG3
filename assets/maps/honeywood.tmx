@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="96" height="78" tilewidth="24" tileheight="24" infinite="0" nextlayerid="59" nextobjectid="520">
+<map version="1.11" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="96" height="78" tilewidth="24" tileheight="24" infinite="0" nextlayerid="59" nextobjectid="522">
  <properties>
   <property name="bgm" value="bgm_honeywood"/>
   <property name="lightmap_camera" value="sunlight"/>
@@ -295,13 +295,7 @@
   <object id="378" name="sparkle_honeywood_2" x="276" y="1032" width="48" height="48"/>
   <object id="430" name="sparkle_honeywood_1" x="708" y="144" width="48" height="48"/>
  </objectgroup>
- <objectgroup color="#aa55ff" id="13" name="hero">
-  <object id="371" name="luana" type="w" x="1152" y="1128" width="48" height="24">
-   <properties>
-    <property name="conversation" value="luana_join"/>
-   </properties>
-  </object>
- </objectgroup>
+ <objectgroup color="#aa55ff" id="13" name="hero"/>
  <objectgroup color="#ff007f" id="55" name="enemy">
   <object id="375" name="blue_slime" x="408" y="156" width="48" height="24">
    <properties>
@@ -412,6 +406,11 @@
     <property name="conversation" value="lennor_is_finished"/>
    </properties>
   </object>
+  <object id="520" name="youngwoman01" type="w" x="1152" y="1128" width="48" height="24">
+   <properties>
+    <property name="conversation" value="bored_and_secluded"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup color="#55aaff" id="11" name="spawn">
   <object id="519" name="honeywood_farm_path" x="2256" y="408" width="48" height="24"/>
@@ -508,7 +507,6 @@
  <objectgroup color="#ff55ff" id="54" name="event">
   <object id="360" name="event_outside_home_cycle_2" type="discover" x="522" y="534" width="60" height="24"/>
   <object id="366" name="event_honeywood_soldiers" type="discover" x="1068" y="1794" width="24" height="6"/>
-  <object id="394" name="guide_event_party_member" type="discover" x="1008" y="960" width="336" height="336"/>
   <object id="432" name="go_to_the_forest_1" type="discover" x="1908" y="1092" width="72" height="12"/>
   <object id="433" name="go_to_the_forest_1" type="discover" x="576" y="852" width="240" height="12"/>
   <object id="434" name="go_to_the_forest_1" type="discover" x="324" y="864" width="12" height="48"/>

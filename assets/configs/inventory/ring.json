@@ -26,7 +26,7 @@
     "min_intelligence": 25,
     "wizard"          : 2
   },
-  "epic_fairy_ring"     : {
+  "fine_fairy_ring"     : {
     "name"      : "Fairy Ring",
     "group"     : "RING",
     "sort"      : 61000,
@@ -41,11 +41,11 @@
     "protection": 5
   },
   "epic_ring_of_healing": {
-    "name"        : "Ring of Healing",
-    "group"       : "RING",
-    "sort"        : 61000,
-    "price"       : 50,
-    "cheat_death" : true,
-    "description" : ["Once per battle, survive", "against an otherwise killing blow."]
+    "name"       : "Ring of Healing",
+    "group"      : "RING",
+    "sort"       : 61000,
+    "price"      : 50,
+    "cheat_death": true,
+    "description": ["Once per battle, survive", "against an otherwise killing blow."]
   }
 }

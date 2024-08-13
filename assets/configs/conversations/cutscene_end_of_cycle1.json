@@ -95,10 +95,12 @@
   "another_chance"                 : {
     "name"   : "? ? ?",
     "phrases": {
-      "1": {"text": ["You have been given another chance..."], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["You have been given another chance..."]},
+      "2": {"text": ["Lastdenn..."]},
+      "3": {"text": ["You must go to the city of Lastdenn..."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "mozes_wakes_up_cycle_2"    : {
+  "mozes_wakes_up_cycle_2"         : {
     "name"   : "Mozes",
     "phrases": {
       "1": {"text": ["What the..."]},
@@ -106,7 +108,7 @@
       "3": {"text": ["Was it all a dream?"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "out_of_bed_cycle_2"     : {
+  "out_of_bed_cycle_2"             : {
     "name"   : "Mozes",
     "phrases": {
       "1": {"text": ["Was Grace really sacrificed?"]},
@@ -115,7 +117,9 @@
       "4": {"text": ["Then why am I here now, back in my home?"]},
       "5": {"text": ["Whose voice was that?"]},
       "6": {"text": ["\"You have been given another chance...\" ??"]},
-      "7": {"text": ["What does that even mean?"], "choices": [{"command": "EXIT"}]}
+      "7": {"text": ["What does that even mean?"]},
+      "8": {"text": ["\"You must go to the city of Lastdenn...\" ??"]},
+      "9": {"text": ["Should I do as the voice said? And why Lastdenn? And why me?"], "choices": [{"command": "EXIT"}]}
     }
   }
 }
