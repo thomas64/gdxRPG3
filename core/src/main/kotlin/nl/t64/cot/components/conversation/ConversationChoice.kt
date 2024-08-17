@@ -45,12 +45,13 @@ class ConversationChoice(
     }
 
     private fun isNotMeetingConditionWithDoubleII(): Boolean {
-        return conditionIds.any { it.startsWith(INVERSE_INVISIBLE_PREFIX) } && !isMeetingCondition()
+        return conditionIds.any { it.startsWith(INVERSE_INVISIBLE_PREFIX) }
+            && !isMeetingCondition()
     }
 
     private fun isMeetingConditionOrHasNoSingleI(): Boolean {
-        return conditionIds.none { it.startsWith(INVERSE_INVISIBLE_PREFIX) } &&
-            (isMeetingCondition() || conditionIds.none { it.startsWith(INVISIBLE_PREFIX) })
+        return conditionIds.none { it.startsWith(INVERSE_INVISIBLE_PREFIX) }
+            && (isMeetingCondition() || conditionIds.none { it.startsWith(INVISIBLE_PREFIX) })
     }
 
 }

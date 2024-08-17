@@ -38,13 +38,13 @@
         "choices": [
           {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "text": "*Ask Lennor if he's seen Grace this morning.*", "nextId": "3"},
           {"condition": ["i_tc_1_q_this", "i_tc_11_q_this"], "text": "[2 Ropes, 1 Horse] *Tada! Present what he would ask for.*", "command": "SHOW_QUEST_ITEM", "nextId": "80"},
-          {"text": "*Find out if he knows what happened to the tree.*", "nextId": "20"},
-          {"text": "*Inform how long it'll take him to clear the road.*", "nextId": "30"},
+          {"condition": ["i_rc_>=_a_q_quest_royal_sacrifice"], "text": "*Find out if he knows what happened to the tree.*", "nextId": "20"},
+          {"condition": ["i_rc_>=_a_q_quest_royal_sacrifice"], "text": "*Inform how long it'll take him to clear the road.*", "nextId": "30"},
           {"condition": ["i_rc_>=_a_q_quest_royal_sacrifice"], "text": "*Express your need to reach Honeywood Farm.*", "nextId": "40"},
           {"condition": ["i_rc_>=_a_q_quest_royal_sacrifice"], "text": "*Press him. Urge him on. Bother him persistently.*", "nextId": "50"},
           {"condition": ["i_time_before_12:00", "i_rc_>=_a_q_quest_royal_sacrifice"], "text": "*Offer your assistance.*", "nextId": "60"},
           {"condition": ["i_time_after_12:00", "i_rc_>=_a_q_quest_royal_sacrifice"], "text": "*Offer your assistance.*", "nextId": "65"},
-          {"text": "*You'll be back at 13:00. Take your leave.*", "command": "EXIT"}
+          {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
       "3"   : {"face": "man13", "name": "Lennor", "text": ["Grace? No, I haven't seen her. Why? What happened?"]},
@@ -54,7 +54,7 @@
       "7"   : {"face": "man13", "name": "Lennor", "text": ["Is there anything I can do to help?"]},
       "8"   : {"face": "mozes", "name": "Mozes", "text": ["I appreciate the offer, Lennor, but I think I'll manage. Please keep an eye out for Grace."], "choices": [{"command": "EXIT", "nextId": "10"}]},
       "10"  : {"face": "man13", "name": "Lennor", "text": ["Weren't you heading to Honeywood Forest? Did you find her?"], "choices": [{"command": "EXIT", "nextId": "10"}]},
-      "20"  : {"text": ["This morning I heard that a tree had fallen on this road, so I came straight this way to see what happened. Luckily, no one was hurt when it fell."], "choices": [{"nextId": "2"}]},
+      "20"  : {"text": ["This morning I heard that a tree had fallen on this road. I was asked to remove it, so I came straight this way to see what happened. Luckily, no one was hurt when it fell."], "choices": [{"nextId": "2"}]},
       "30"  : {"text": ["A tree this large? I'll probably be busy with it until about 13:00. Afterward, the road is clear and you'll be able to enter Honeywood Farm."], "choices": [{"nextId": "2"}]},
       "40"  : {"text": ["I'm sorry, Mozes, I'm working as fast as I can. You'll have to wait until 13:00, or you could assist me to speed up the process."], "choices": [{"nextId": "2"}]},
       "50"  : {"text": ["Aw come on! Really? I'm trying! It's one heavy tree, Mozes! I literally can't do it before 13:00 without any assistance!"], "choices": [{"nextId": "2"}]},
@@ -73,7 +73,7 @@
       "80"  : {"text": ["Wow Mozes! How did you... That's so thoughtful of you! Now I can finish this job right away! Let's start dragging!"]},
       "81"  : {"text": ["This will only take a moment..."], "choices": [{"command": "RELOAD_NPCS", "nextId": "100"}]},
       "100" : {"text": ["Thanks for your help, Mozes. I could not have removed the tree so soon without you."]},
-      "101" : {"text": ["Say, did I told I was thinking of buying a horse a month or so ago? I even got some necessary items for it already. Well, since I didn't bought the horse, I don't need these anymore. You can have them."], "choices": [{"command": "RECEIVE_ITEM"}]},
+      "101" : {"text": ["Say, have I told you I was thinking of buying a horse a month or so ago? I even got some necessary items for it already. Well, since I didn't bought the horse, I don't need these anymore. You can have them."], "choices": [{"command": "RECEIVE_ITEM"}]},
       "90"  : {"text": ["Fantastic, just what I asked you for. Now I can finish this job right away! Let's start dragging!"]},
       "91"  : {"text": ["This will only take a moment..."], "choices": [{"command": "RELOAD_NPCS", "nextId": "110"}]},
       "110" : {"text": ["Thanks for your help, Mozes. I could not have removed the tree so soon without you."]},
@@ -91,15 +91,32 @@
   "the_road_is_open"       : {
     "name"   : "Lennor",
     "phrases": {
-      "1": {"text": ["It took me a while, but the road to Honeywood Farm is finally clear."], "choices": [{"command": "EXIT"}]}
+      "1"   : {
+        "text": ["It took me a while, but the road to Honeywood Farm is finally clear."], "choices": [
+          {"condition": ["i_tc_1_q_quest_helping_horse"], "nextId": "2"},
+          {"condition": ["i_tn_1_q_quest_helping_horse"], "command": "EXIT"}
+        ]
+      },
+      "2"   : {
+        "choices": [
+          {"text": "*[A horse] Present the requested horse...*", "nextId": "3"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "3"   : {"text": ["Oh, Mozes, you actually did get me a horse!"]},
+      "4"   : {"text": ["But you're too late, I've already finished the job."]},
+      "5"   : {"text": ["Thanks for the effort, though. I appreciate it."]},
+      "6"   : {"text": ["Say, have I told you I was thinking of buying a horse a month or so ago? I even got some necessary items for it already. Well, since I didn't bought the horse, I don't need these anymore. You can have them."], "choices": [{"command": "RECEIVE_ITEM"}]},
+      "1199": {"text": ["I don't need these anymore. You can have them."], "choices": [{"command": "RECEIVE_ITEM"}]},
+      "1200": {"text": ["It took me a while, but the road to Honeywood Farm is finally clear."], "choices": [{"command": "EXIT", "nextId": "1200"}]}
     }
   },
   "luana_join"             : {
     "name"   : "Luana",
     "phrases": {
-      "1" : {"text": ["Hi Mozes! You really should check out this priest fella.", "He is so funny! Ha ha!"]},
+      "1" : {"text": ["Hi Mozes! Missing conversation 1."]},
       "2" : {
-        "text": ["It's a shame we're not allowed to leave the village by ourselves due to the rising monster threat, but I'm glad this fella came in. He can now brighten my dull and secluded life a bit."], "choices": [
+        "text": ["Missing conversation 2."], "choices": [
           {"condition": ["i_rc_==_a_q_quest_honeywood_elder"], "nextId": "3"},
           {"condition": ["i_rc_===_u_q_quest_honeywood_elder"], "command": "EXIT"}
         ]

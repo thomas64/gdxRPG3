@@ -2,7 +2,7 @@
   "quest_grace_is_missing": {
     "title"     : "Grace is missing",
     "entityId"  : "girl01",
-    "summary"   : "Grace wasn't in her bed when you woke up. She probably went to Honeywood Forest in the north. But since there are orcs roaming in the forest, it's dangerous at night.",
+    "summary"   : "Grace wasn't in her bed when you woke up. She probably went to Honeywood Forest in the north. But since there are orcs roaming in the forest, it's dangerous at night. You must find her before 19:30, when it gets dark.",
     "linkedWith": ["quest_orc_guards"],
     "tasks"     : {
       "1" : {

@@ -16,6 +16,7 @@
     "name"       : "Scroll of Orc Obedience",
     "group"      : "ITEM",
     "sort"       : 70015,
+    "is_unique"  : true,
     "description": ["Makes an orc follow your command unconditionally.", "This specific scroll only works in Honeywood Forest."]
   },
   "horse_medicine"         : {

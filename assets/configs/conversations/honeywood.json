@@ -9,12 +9,16 @@
   "outside_home_cycle_2"                : {
     "name"   : "Mozes",
     "phrases": {
-      "1": {"text": ["Everything seems normal? Adan didn't end up in flames?"]},
-      "2": {"text": ["Is Grace also still alive then?"]},
-      "3": {"text": ["Then I have to go back! I must save her!"]},
-      "4": {"text": ["But Ardor was so powerful... I've no idea what to do against him..."]},
-      "5": {"text": ["Did it really happened at all?"]},
-      "6": {"text": ["Should I go to Lastdenn? Or should I go back to the forest?"], "choices": [{"command": "EXIT"}]}
+      "1" : {"text": ["Everything seems normal? Adan didn't end up in flames? Everything has..."]},
+      "2" : {"text": ["...started over..."]},
+      "3" : {"text": ["How can that be?"]},
+      "4" : {"text": ["\"You have been given another chance...\""]},
+      "5" : {"text": ["That's it! That voice has started everything over!"]},
+      "6" : {"text": ["Is Grace also still alive then?"]},
+      "7" : {"text": ["Then I have to go back! I must save her!"]},
+      "8" : {"text": ["But Ardor was so powerful... I've no idea what to do against him..."]},
+      "9" : {"text": ["The voice also said: \"You must go to the city of Lastdenn...\""]},
+      "10": {"text": ["Should I go to Lastdenn? Or should I go back to the forest?"], "choices": [{"command": "EXIT"}]}
     }
   },
   "mrs_johanna"                         : {
@@ -366,7 +370,7 @@
           {"text": "*You went looking for that other horse. Take your leave.*", "command": "EXIT", "nextId": "41"}
         ]
       },
-      "50": {"text": ["How did you knew? Thank you very much! I'll administer it to her right away."], "choices": [{"nextId": "53"}]},
+      "50": {"text": ["How did you knew? Thank you very much! I'll administer it to her right away."], "choices": [{"nextId": "90"}]},
       "51": {"text": ["Wow, really? That's awesome! I'll administer it to her right away."], "choices": [{"nextId": "53"}]},
       "52": {"text": ["Great! I'll administer it to her right away."], "choices": [{"nextId": "53"}]},
       "53": {"text": ["{SPEED=0.2} . . . . ."]},
@@ -382,7 +386,11 @@
       "70": {"text": ["Thank you so much! You've been a tremendous help, Mozes!"]},
       "71": {"text": ["I'll shoe her right away with these. After that, I'll make sure Enopa gets to Lennor."]},
       "72": {"text": ["Thanks once again. It turned out to be a great day after all."], "choices": [{"command": "RELOAD_NPCS", "nextId": "80"}]},
-      "80": {"text": ["How is my Enopa doing? Has she been of any help to Lennor and you?"], "choices": [{"command": "EXIT", "nextId": "80"}]}
+      "80": {"text": ["How is my Enopa doing? Has she been of any help to Lennor and you?"], "choices": [{"command": "EXIT", "nextId": "80"}]},
+      "90": {"text": ["{SPEED=0.2} . . . . ."]},
+      "91": {"text": ["I think she even likes the taste of it! Thank you so much for your help."]},
+      "92": {"text": ["Now, once she's been shoed, I'll lend her to Lennor and you."]},
+      "93": {"text": ["Regarding the horseshoes, I'll need you to get 4 of them. They might be lying around in the village, or you could ask the village elder. He's quite knowledgeable and might even know where to find horseshoes."], "choices": [{"nextId": "61"}]}
     }
   },
   "honeywood_horse"                     : {
@@ -393,8 +401,9 @@
         "choices": [
           {"condition": ["i_druid1", "_tn_7_q_quest_get_horse"], "text": "[Druid 1] *Listen to Enopa.*", "nextId": "3"},
           {"condition": ["i_druid1", "_tc_7_q_quest_get_horse", "_c_!=_f_q_quest_get_horse"], "text": "[Druid 1] *Listen to Enopa.*", "nextId": "4"},
-          {"condition": ["i_druid1", "_c_==_f_q_quest_get_horse", "_c_!=_f_q_quest_helping_horse"], "text": "[Druid 1] *Listen to Enopa.*", "nextId": "5"},
-          {"condition": ["i_druid1", "_c_==_f_q_quest_helping_horse"], "text": "[Druid 1] *Listen to Enopa.*", "nextId": "6"},
+          {"condition": ["i_druid1", "_c_==_f_q_quest_get_horse", "_c_!=_f_q_quest_helping_horse", "time_before_13:00"], "text": "[Druid 1] *Listen to Enopa.*", "nextId": "5"},
+          {"condition": ["i_druid1", "_c_==_f_q_quest_get_horse", "_c_!=_f_q_quest_helping_horse", "time_after_13:00"], "text": "[Druid 1] *Listen to Enopa.*", "nextId": "6"},
+          {"condition": ["i_druid1", "_c_==_f_q_quest_helping_horse"], "text": "[Druid 1] *Listen to Enopa.*", "nextId": "7"},
           {"condition": ["ii_druid1"], "text": "[Druid 1] *Listen to Enopa.*", "nextId": "9999"},
           {"text": "*Nod to Enopa and take your leave.*", "command": "EXIT"}
         ]
@@ -402,7 +411,8 @@
       "3": {"text": ["I'm not feeling well... Perhaps those tempting mushrooms weren't a good idea."], "choices": [{"command": "EXIT"}]},
       "4": {"text": ["I feel fantastic again! Thanks for your help."], "choices": [{"command": "EXIT"}]},
       "5": {"text": ["I'll have that tree fixed in no time!"], "choices": [{"command": "EXIT"}]},
-      "6": {"text": ["Did I do well?"], "choices": [{"command": "EXIT"}]}
+      "6": {"text": ["No tree? What is my purpose in life? Do I even have one?"], "choices": [{"command": "EXIT"}]},
+      "7": {"text": ["Did I do well?"], "choices": [{"command": "EXIT"}]}
     }
   },
   "quest_get_medicine"                  : {
@@ -436,7 +446,7 @@
       },
       "30"  : {"text": ["Perfect! Just a moment, my dear, while I brew this medicine for you."]},
       "31"  : {"text": ["{SPEED=0.2} . . . . . . . . ."]},
-      "32"  : {"text": ["Here it is. It seems it was enough for two doses. Good luck with it."], "choices": [{"command": "REWARD_QUEST"}]},
+      "32"  : {"text": ["Here it is. It seems it was enough for three doses. Good luck with it."], "choices": [{"command": "REWARD_QUEST"}]},
       "1399": {"text": ["Mozes dear, you seem to have forgotten something."], "choices": [{"command": "REWARD_QUEST"}]},
       "1400": {"text": ["Mozes dear, did the medicine cure the horse?"], "choices": [{"nextId": "2"}]}
     }
@@ -470,14 +480,15 @@
       "40"  : {"text": ["Hmmm..."]},
       "41"  : {"text": ["You should definitely ask my wife."], "choices": [{"nextId": "2"}]},
       "50"  : {"text": ["Hmmm..."]},
-      "51"  : {"text": ["Wow, that's quite an extraordinary tale. It's also hard to believe.", "The end of the world?", "Grace sacrificed by an evil wizard named Ardor?", "A voice telling you to go to the city of Lastdenn?", "However, why would you, Mozes, fabricate such a story about Grace?"]},
-      "52"  : {"text": ["Mozes, I'd like to assist you in any way I can."]},
-      "53"  : {"text": ["First of all, here's a key to the basement. Behind the door is a warp crystal, similar to the one over by the Fairies."]},
-      "54"  : {"text": ["Use the portal in the basement to deliver this letter to the Fairy Shop. Afterward, return to me and show me the package you received."]},
-      "55"  : {"text": ["But most important, you'll need a travel companion. Because indeed, it's dangerous to go alone. No one is allowed to leave the village unaccompanied."]},
-      "56"  : {"text": ["{COLOR=BLUE}Luana{COLOR=BLACK} went to Honeywood Farm this morning. She's expressed her desire to leave the village more times than I can remember. You should go find her at the farm and ask her to accompany you on your journey."]},
-      "57"  : {"text": ["Together, you are permitted to leave this village by the guards on your way to Lastdenn."]},
-      "58"  : {"text": ["Mozes, I wish you the best of luck on your journey."], "choices": [{"command": "RECEIVE_ITEM_FOR_QUEST"}]},
+      "51"  : {"text": ["Wow, that's quite an extraordinary tale. It's also hard to believe.", "The end of the world?", "Grace sacrificed by an evil wizard named Ardor?", "A voice telling you to go to the city of Lastdenn?"]},
+      "52"  : {"text": ["However, why would you, Mozes, fabricate such a story about Grace?"]},
+      "53"  : {"text": ["Mozes, I'd like to assist you in any way I can."]},
+      "54"  : {"text": ["First of all, here's a key to the basement. Behind the door is a warp crystal, similar to the one over by the Fairies."]},
+      "55"  : {"text": ["Use the portal in the basement to deliver this letter to the Fairy Shop. Afterward, return to me and show me the package you received."]},
+      "56"  : {"text": ["But most important, you'll need a travel companion. Because indeed, it's dangerous to go alone. No one is allowed to leave the village unaccompanied."]},
+      "57"  : {"text": ["{COLOR=BLUE}Luana{COLOR=BLACK} went to Honeywood Farm this morning. She's expressed her desire to leave the village more times than I can remember. You should go find her at the farm and ask her to accompany you on your journey."]},
+      "58"  : {"text": ["Together, you are permitted to leave this village by the guards on your way to Lastdenn."]},
+      "59"  : {"text": ["Mozes, I wish you the best of luck on your journey."], "choices": [{"command": "RECEIVE_ITEM_FOR_QUEST"}]},
       "60"  : {"text": ["Hmmm..."]},
       "61"  : {"text": ["Wow, that's quite an extraordinary tale.", "And this is also not the first time you've told me this?!"]},
       "62"  : {"text": ["Mozes, I'd still like to assist you in any way I can."]},

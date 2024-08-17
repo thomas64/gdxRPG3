@@ -140,7 +140,7 @@ object BattleScreenBuilder {
             return add(Label(participant.character.getCalculatedTotalStatOf(StatItemId.SPEED).toString(),
                              createLabelStyle(color)))
         } else {
-            return add("")
+            return add("?")
         }
     }
 

@@ -60,7 +60,8 @@
     "text": [
       "Toggle the %slow% to move stealthily.",
       "Enemies will have a harder time detecting you,",
-      "enabling you to avoid battles if necessary."
+      "enabling you to avoid battles if necessary.",
+      "The bottom right corner shows whether you're crouching."
     ]
   },
   "guide_event_xp"                   : {
@@ -114,7 +115,7 @@
       "The closet behind you can be used for storage.",
       "When your inventory becomes full, store items in your closet.",
       "They will be safe and kept there until you need them.",
-      "Perhaps there's already something in there for you."
+      "Perhaps some of your belongings are already stored there?"
     ]
   },
   "guide_event_conversation_reminder": {

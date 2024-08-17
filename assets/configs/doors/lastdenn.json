@@ -1,5 +1,5 @@
 {
-  "door_lastdenn_item_shop"  : {"type": "SMALL", "spriteId": "luxurious_left", "openStartTime": "09:00", "openEndTime": "17:00", "message": "Open from 09:00 to 17:00."},
-  "door_lastdenn_weapon_shop": {"type": "SMALL", "spriteId": "luxurious_left", "openStartTime": "09:00", "openEndTime": "17:00", "message": "Open from 09:00 to 17:00."},
-  "door_lastdenn_bar": {"type": "SMALL", "spriteId": "luxurious_shade_left", "openStartTime": "17:00", "openEndTime": "20:00", "message": "Open from 17:00 to 01:00."}
+  "door_lastdenn_item_shop"  : {"type": "SMALL", "spriteId": "luxurious_left", "openStartTime": "09:00", "openEndTime": "17:00", "message": "Resource Shop.\nOpen from 09:00 to 17:00."},
+  "door_lastdenn_weapon_shop": {"type": "SMALL", "spriteId": "luxurious_left", "openStartTime": "09:00", "openEndTime": "17:00", "message": "Equipment Shop.\nOpen from 09:00 to 17:00."},
+  "door_lastdenn_bar"        : {"type": "SMALL", "spriteId": "luxurious_shade_left", "openStartTime": "17:00", "openEndTime": "20:00", "message": "Lastdenn Bar.\nOpen from 17:00 to 01:00."}
 }

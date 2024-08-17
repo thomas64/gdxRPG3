@@ -19,7 +19,8 @@
       "1": {"face": "man07", "name": "Black Smith", "text": ["Howdy Lennor! What's the rush this early in the morning?"]},
       "2": {"face": "man13", "name": "Lennor", "text": ["Hey Black, a tree has fallen on the road to Honeywood Farm. I've been asked to remove it."]},
       "3": {"face": "man07", "name": "Black Smith", "text": ["Alright, I won't keep you then. I'm off to do some repair work for the village elder."]},
-      "4": {"face": "man13", "name": "Lennor", "text": ["Thanks, goodbye."], "choices": [{"command": "EXIT"}]}
+      "4": {"face": "man13", "name": "Lennor", "text": ["Good luck with that, Black. I'll see you later."]},
+      "5": {"face": "man07", "name": "Black Smith", "text": ["Thanks, Lennor. See you later."], "choices": [{"command": "EXIT"}]}
     }
   },
   "black_and_grahan_meet"      : {
