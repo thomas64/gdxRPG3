@@ -170,12 +170,10 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
     }
 
     private fun toggleTooltip() {
-        playSe(AudioEvent.SE_MENU_CONFIRM)
         inventoryUI.toggleTooltip()
     }
 
     private fun toggleCompare() {
-        playSe(AudioEvent.SE_MENU_CONFIRM)
         inventoryUI.toggleCompare()
     }
 

@@ -79,7 +79,6 @@ class AcademyScreen : ParchmentScreen() {
     }
 
     private fun toggleTooltip() {
-        playSe(AudioEvent.SE_MENU_CONFIRM)
         academyUI.toggleTooltip()
     }
 

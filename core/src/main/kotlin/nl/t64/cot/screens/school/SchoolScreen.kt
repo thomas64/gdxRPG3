@@ -81,7 +81,6 @@ class SchoolScreen : ParchmentScreen() {
     }
 
     private fun toggleTooltip() {
-        playSe(AudioEvent.SE_MENU_CONFIRM)
         schoolUI.toggleTooltip()
     }
 

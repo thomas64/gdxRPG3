@@ -105,12 +105,10 @@ class ShopScreen : ParchmentScreen() {
     }
 
     private fun toggleTooltip() {
-        playSe(AudioEvent.SE_MENU_CONFIRM)
         shopUI.toggleTooltip()
     }
 
     private fun toggleCompare() {
-        playSe(AudioEvent.SE_MENU_CONFIRM)
         shopUI.toggleCompare()
     }
 

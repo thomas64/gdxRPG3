@@ -10,6 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Align
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
+import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.party.CalcAttributeId
 import nl.t64.cot.components.party.SuperEnum
 import nl.t64.cot.components.party.inventory.AttributeState
@@ -40,14 +42,26 @@ open class ItemSlotTooltip : BaseTooltip() {
             gameData.isTooltipEnabled = !isEnabled
             setupTooltip(itemSlot)
             window.isVisible = !isEnabled
+            playSe(AudioEvent.SE_MENU_CONFIRM)
+        } else {
+            playSe(AudioEvent.SE_MENU_ERROR)
         }
     }
 
     override fun toggleCompare(itemSlot: ItemSlot?) {
         if (itemSlot?.hasItem() == true && !window.hasActions()) {
-            val isEnabled = gameData.isComparingEnabled
-            gameData.isComparingEnabled = !isEnabled
-            updateDescription(itemSlot)
+            val hoveredItem = itemSlot.getCertainInventoryImage().inventoryItem
+            val equippedItem = InventoryUtils.getSelectedHero().getInventoryItem(hoveredItem.group)
+            if (equippedItem != null) {
+                val isEnabled = gameData.isComparingEnabled
+                gameData.isComparingEnabled = !isEnabled
+                updateDescription(itemSlot)
+                playSe(AudioEvent.SE_MENU_CONFIRM)
+                return
+            }
+        }
+        if (!window.hasActions()) {
+            playSe(AudioEvent.SE_MENU_ERROR)
         }
     }
 

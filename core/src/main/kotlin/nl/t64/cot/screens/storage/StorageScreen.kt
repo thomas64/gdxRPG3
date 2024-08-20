@@ -121,12 +121,10 @@ class StorageScreen : ParchmentScreen() {
     }
 
     private fun toggleTooltip() {
-        playSe(AudioEvent.SE_MENU_CONFIRM)
         storageUI.toggleTooltip()
     }
 
     private fun toggleCompare() {
-        playSe(AudioEvent.SE_MENU_CONFIRM)
         storageUI.toggleCompare()
     }
 

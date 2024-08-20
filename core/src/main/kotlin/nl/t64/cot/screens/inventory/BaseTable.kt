@@ -66,6 +66,9 @@ abstract class BaseTable(private val tooltip: PersonalityTooltip) : WindowSelect
         if (table.hasContent()) {
             tooltip.setPosition(getTooltipPosition())
             tooltip.toggle(null)
+            playSe(AudioEvent.SE_MENU_CONFIRM)
+        } else {
+            playSe(AudioEvent.SE_MENU_ERROR)
         }
     }
 
