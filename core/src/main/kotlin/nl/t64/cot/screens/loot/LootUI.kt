@@ -15,35 +15,39 @@ import nl.t64.cot.screens.inventory.tooltip.LootSlotTooltip
 private const val WINDOW_PADDING_BOTTOM = 10f
 private const val LABEL_PADDING_TOP = 15f
 
-internal class LootUI(resolveLootAndCloseScreen: (Boolean) -> Unit, loot: Loot, title: String) {
+class LootUI(resolveLootAndCloseScreen: (Boolean) -> Unit, loot: Loot, title: String) {
 
     private val tooltip = LootSlotTooltip()
-    private val lootSlotsContainer = LootSlotsTable(resolveLootAndCloseScreen, loot, tooltip).apply {
-        lootSlots.background = Utils.createTopBorder()
-    }
-    private val lootWindow: Window = Utils.createDefaultWindow(title, lootSlotsContainer.lootSlots).apply {
-        setPosition((Gdx.graphics.width / 2f) - (width / 2f),
-                    (Gdx.graphics.height / 2f) - (height / 2f) + WINDOW_PADDING_BOTTOM)
-    }
-    private val buttonLabel = Label(createText(), LabelStyle(BitmapFont(), Color.BLACK)).apply {
-        setPosition((Gdx.graphics.width / 2f) - (width / 2f),
-                    (Gdx.graphics.height / 2f) - (lootWindow.height / 2f) - LABEL_PADDING_TOP)
-    }
+    private val lootSlotsContainer = LootSlotsTable(resolveLootAndCloseScreen, loot, tooltip)
+    private val lootWindow: Window = Utils.createDefaultWindow(title, lootSlotsContainer)
+        .apply { setWindowPosition() }
+    private val buttonLabel = Label(createText(), LabelStyle(BitmapFont(), Color.BLACK))
+        .apply { setLabelPosition() }
 
     fun show(stage: Stage) {
         stage.addActor(lootWindow)
         tooltip.addToStage(stage)
         stage.addActor(buttonLabel)
-
-        stage.keyboardFocus = lootSlotsContainer.lootSlots
+        lootSlotsContainer.setFocus(stage)
     }
 
     private fun createText(): String {
+        val takeOrBack = if (lootSlotsContainer.isContentEmpty()) "Back" else "Take"
         return if (Utils.isGamepadConnected()) {
-            "[A] Take/ Back      [Select] Tooltip      [B] Back"
+            "[A] $takeOrBack      [Select] Tooltip      [B] Back"
         } else {
-            "[A] Take/ Back      [T] Tooltip      [Esc] Back"
+            "[A] $takeOrBack      [T] Tooltip      [Esc] Back"
         }
+    }
+
+    private fun Window.setWindowPosition() {
+        setPosition((Gdx.graphics.width / 2f) - (width / 2f),
+                    (Gdx.graphics.height / 2f) - (height / 2f) + WINDOW_PADDING_BOTTOM)
+    }
+
+    private fun Label.setLabelPosition() {
+        setPosition((Gdx.graphics.width / 2f) - (width / 2f),
+                    (Gdx.graphics.height / 2f) - (lootWindow.height / 2f) - LABEL_PADDING_TOP)
     }
 
 }

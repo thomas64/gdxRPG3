@@ -1,7 +1,9 @@
 package nl.t64.cot.screens.loot
 
+import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.Table
+import nl.t64.cot.Utils
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.loot.Loot
@@ -24,10 +26,9 @@ class LootSlotsTable(
     private val resolveLootAndCloseScreen: (Boolean) -> Unit,
     private val loot: Loot,
     private val tooltip: LootSlotTooltip
-) {
-
+) : Table() {
     private val inventory = InventoryContainer(NUMBER_OF_SLOTS)
-    val lootSlots = Table()
+    private val lootSlots get() = this
     private val selector = ItemSlotSelector(inventory, lootSlots, SLOTS_IN_ROW)
     private val taker = LootSlotTaker(selector)
 
@@ -37,6 +38,15 @@ class LootSlotsTable(
         lootSlots.addAction(Actions.sequence(Actions.delay(INPUT_DELAY),
                                              Actions.run { selectFirstSlot() },
                                              Actions.addListener(createListener(), false)))
+        lootSlots.background = Utils.createTopBorder()
+    }
+
+    fun isContentEmpty(): Boolean {
+        return inventory.isEmpty()
+    }
+
+    fun setFocus(stage: Stage) {
+        stage.keyboardFocus = this
     }
 
     private fun selectFirstSlot() {
