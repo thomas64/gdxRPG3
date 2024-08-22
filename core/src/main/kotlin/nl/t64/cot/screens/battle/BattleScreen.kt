@@ -17,10 +17,7 @@ import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playBgm
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.audio.stopAllBgm
-import nl.t64.cot.components.battle.EnemyContainer
-import nl.t64.cot.components.battle.EnemyItem
-import nl.t64.cot.components.battle.Participant
-import nl.t64.cot.components.battle.TurnManager
+import nl.t64.cot.components.battle.*
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.inventory.BattlePotionItem
 import nl.t64.cot.components.party.inventory.InventoryGroup
@@ -65,7 +62,7 @@ class BattleScreen : Screen {
     private val listenerAction = BattleScreenSelectActionListener({ winBattle() },
                                                                   { selectAttack() },
                                                                   { selectPotion() },
-                                                                  { showRestDialog() },
+                                                                  { showConfirmRestDialog() },
                                                                   { showFleeDialog() })
     private val listenerAttack = BattleScreenSelectAttackListener({ attackIsSelected(it) }, { returnToAction() })
     private val listenerTarget = BattleScreenSelectTargetListener({ targetIsSelected(it) }, { returnToAttack() })
@@ -292,28 +289,14 @@ class BattleScreen : Screen {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun showConfirmAttackDialog() {
-        val message = """
-            Do you want to $selectedAttack $selectedEnemy ?
-
-            Chance to hit:  ${getHit()}%   |   Damage:  ${getDamage()}""".trimIndent()
-        val dialog = DialogQuestion({ attackConfirmed() }, message)
+        val attackAction = AttackAction(currentParticipant.character, enemies.getEnemy(selectedEnemy!!), selectedAttack!!)
+        val message = attackAction.createConfirmationMessage()
+        val dialog = DialogQuestion({ attackConfirmed(attackAction) }, message)
         dialog.show(stage, 0)
     }
 
-    private fun getHit(): Int {
-        return currentParticipant.character.getCalculatedTotalHit().coerceAtMost(100)
-    }
-
-    private fun getDamage(): Int {
-        val target = enemies.getEnemy(selectedEnemy!!)
-        val attack: Int = currentParticipant.character.getCalculatedTotalDamage()
-        val protection: Int = target.getCalculatedTotalProtection()
-        return (attack - protection).coerceAtLeast(1).coerceAtMost(target.currentHp)
-    }
-
-    private fun attackConfirmed() {
-        val target: EnemyItem = enemies.getEnemy(selectedEnemy!!)
-        val messages: ArrayDeque<String> = currentParticipant.attack(selectedAttack!!, target)
+    private fun attackConfirmed(attackAction: AttackAction) {
+        val messages: ArrayDeque<String> = attackAction.handle()
         selectedAttack = null
         selectedEnemy = null
         buttonTableTarget.remove()
@@ -326,17 +309,15 @@ class BattleScreen : Screen {
     }
 
     private fun showConfirmPotionDialog() {
-        val message = """
-            ${selectedPotion!!.description}
-
-            Do you want to drink a ${selectedPotion!!.name} ?""".trimIndent()
-        val dialog = DialogQuestion({ potionConfirmed() }, message)
+        val potionAction = PotionAction(currentParticipant.character, selectedPotion!!)
+        val message = potionAction.createConfirmationMessage()
+        val dialog = DialogQuestion({ potionConfirmed(potionAction) }, message)
         dialog.show(stage, 0)
     }
 
-    private fun potionConfirmed() {
+    private fun potionConfirmed(potionAction: PotionAction) {
         buttonTablePotion.remove()
-        val message: String = currentParticipant.drinkPotion(selectedPotion!!)
+        val message: String = potionAction.handle()
         val messageDialog = MessageDialog(message)
         messageDialog.setActionAfterHide {
             turnManager.setNextTurn()
@@ -347,6 +328,27 @@ class BattleScreen : Screen {
         isDelayingTurn = true
         Utils.runWithDelay(0.5f) {
             messageDialog.show(stage, AudioEvent.SE_POTION)
+        }
+    }
+
+    private fun showConfirmRestDialog() {
+        val restAction = RestAction(currentParticipant.character)
+        val message = restAction.createConfirmationMessage()
+        val dialog = DialogQuestion({ restConfirmed(restAction) }, message)
+        dialog.show(stage, 0)
+    }
+
+    private fun restConfirmed(restAction: RestAction) {
+        buttonTableAction.remove()
+        val message: String = restAction.handle()
+        val messageDialog = MessageDialog(message)
+        messageDialog.setActionAfterHide {
+            turnManager.setNextTurn()
+            isDelayingTurn = false
+        }
+        isDelayingTurn = true
+        Utils.runWithDelay(0.5f) {
+            messageDialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT)
         }
     }
 
@@ -368,7 +370,8 @@ class BattleScreen : Screen {
             // todo, weaponName is niet de bedoeling, dit moet een 'spell' worden. body slam, bite, etc.
             // de names van die weapons moeten dus ook niet in enemy.json staan.
             val weaponName: String = currentParticipant.character.getInventoryItem(InventoryGroup.WEAPON)!!.name
-            val messages: ArrayDeque<String> = currentParticipant.attack(weaponName, target) // <- hier dus
+            val attackAction = AttackAction(currentParticipant.character, target, weaponName) // ← hier dus
+            val messages: ArrayDeque<String> = attackAction.handle()
             turnManager.setNextTurn()
             showMessages(messages)
             isDelayingTurn = false
@@ -417,30 +420,6 @@ class BattleScreen : Screen {
     private fun battleWonExitScreen() {
         gameData.clock.takeHalfHour()
         exitScreen { battleObserver.notifyBattleWon(battleId, enemies.getSpoils()) }
-    }
-
-    private fun showRestDialog() {
-        val message = """
-            Resting will make the current character
-            skip this turn and recover 1 HP.
-
-            Do you want to rest for this turn?""".trimIndent()
-        val dialog = DialogQuestion({ restConfirmed() }, message)
-        dialog.show(stage, 0)
-    }
-
-    private fun restConfirmed() {
-        buttonTableAction.remove()
-        val message: String = currentParticipant.rest()
-        val messageDialog = MessageDialog(message)
-        messageDialog.setActionAfterHide {
-            turnManager.setNextTurn()
-            isDelayingTurn = false
-        }
-        isDelayingTurn = true
-        Utils.runWithDelay(0.5f) {
-            messageDialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT)
-        }
     }
 
     private fun showFleeDialog() {
