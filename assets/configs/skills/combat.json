@@ -47,7 +47,8 @@
       "- 'Warrior' allows the possibility to use 'Warrior' abilities in combat.",
       "",
       "- 'Warrior' allows the possibility of scoring critical hits with weapons in combat.",
-      "  Each rank in 'Warrior' increases the probability of this by 4%."
+      "  Each rank in 'Warrior' increases the probability of this by 4%.",
+      "  A critical hit inflicts damage equal to 150% of the normal damage."
     ]
   }
 }

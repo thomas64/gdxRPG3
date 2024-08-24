@@ -5,7 +5,12 @@
       "- 'Hafted' allows the possibility of equipping hafted weapons.",
       "",
       "- 'Hafted' increases your chance to hit with hafted weapons in combat.",
-      "  Each rank in 'Hafted' increases 'Chance to hit' by 10%."
+      "  Each rank in 'Hafted' increases 'Chance to hit' by 10%.",
+      "",
+      "- Hafted weapons have an advantage against enemies with pole weapons,",
+      "  and a disadvantage against enemies with swords.",
+      "  When having advantage, 'Chance to hit' is increased by 10%,",
+      "  and 'Damage' is increased by 50%. And vice versa."
     ]
   },
   "missile": {
@@ -23,7 +28,12 @@
       "- 'Pole' allows the possibility of equipping pole weapons.",
       "",
       "- 'Pole' increases your chance to hit with pole weapons in combat.",
-      "  Each rank in 'Pole' increases 'Chance to hit' by 10%."
+      "  Each rank in 'Pole' increases 'Chance to hit' by 10%.",
+      "",
+      "- Pole weapons have an advantage against enemies with swords,",
+      "  and a disadvantage against enemies with hafted weapons.",
+      "  When having advantage, 'Chance to hit' is increased by 10%,",
+      "  and 'Damage' is increased by 50%. And vice versa."
     ]
   },
   "shield" : {
@@ -41,7 +51,12 @@
       "- 'Sword' allows the possibility of equipping swords and daggers.",
       "",
       "- 'Sword' increases your chance to hit with swords and daggers in combat.",
-      "  Each rank in 'Sword' increases 'Chance to hit' by 10%."
+      "  Each rank in 'Sword' increases 'Chance to hit' by 10%.",
+      "",
+      "- Swords have an advantage against enemies with hafted weapons,",
+      "  and a disadvantage against enemies with pole weapons.",
+      "  When having advantage, 'Chance to hit' is increased by 10%,",
+      "  and 'Damage' is increased by 50%. And vice versa."
     ]
   },
   "thrown" : {

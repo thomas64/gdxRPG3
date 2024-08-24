@@ -39,7 +39,7 @@ class ConversationAnswers(
     override fun drawItem(
         batch: Batch, font: BitmapFont, index: Int, item: ConversationChoice, x: Float, y: Float, width: Float
     ): GlyphLayout {
-        if (index == getSelectedIndex()) {
+        if (index == selectedIndex) {
             font.color = style.fontColorSelected
         } else if (!item.isMeetingCondition()) {
             font.color = Color.GRAY
