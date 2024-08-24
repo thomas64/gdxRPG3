@@ -76,6 +76,11 @@ class Entity(
 
     fun resetInput() {
         inputComponent.reset()
+        inputComponent.resetStance()
+    }
+
+    fun resetInputWithoutStance() {
+        inputComponent.reset()
     }
 
     fun getAnimation(): Animation<TextureRegion> =

@@ -132,7 +132,8 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     }
 
     fun startCutscene(screenType: ScreenType, fadeDuration: Float = 0f) {
-        doBeforeLoadScreen()
+        player.resetInput()
+        render(0f)
         val actionAfterFade = { screenManager.setScreen(screenType); stopAllBgm() }
         fadeOut(duration = fadeDuration,
                 transitionPurpose = TransitionPurpose.MAP_CHANGE,
@@ -140,7 +141,8 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     }
 
     fun startCutsceneWithoutBgmFading(screenType: ScreenType, fadeDuration: Float = 0f) {
-        doBeforeLoadScreen()
+        player.resetInput()
+        render(0f)
         val actionAfterFade = { screenManager.setScreen(screenType) }
         fadeOut(duration = fadeDuration,
                 actionAfterFade = actionAfterFade)
@@ -174,21 +176,23 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
 
     fun showNoteDialog(noteId: String) {
         if (gameState == GameState.DIALOG) return
-        player.resetInput()
+        player.resetInputWithoutStance()
         gameState = GameState.DIALOG
         conversationDialog.loadNote(noteId)
         conversationDialog.show()
     }
 
     fun showFindScreenWithMessageDialog(loot: Loot, event: AudioEvent, message: String) {
-        doBeforeLoadScreen()
+        player.resetInputWithoutStance()
+        render(0f)
         gameState = GameState.DIALOG
         messageDialog.setActionAfterHide { FindScreen.load(loot, event) }
         messageDialog.show(message, AudioEvent.SE_CONVERSATION_NEXT)
     }
 
     fun showFindScreen(loot: Loot, event: AudioEvent) {
-        doBeforeLoadScreen()
+        player.resetInputWithoutStance()
+        render(0f)
         FindScreen.load(loot, event)
     }
 
@@ -203,7 +207,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     }
 
     fun showMessageDialog(message: String, actionAfterHide: () -> Unit = {}) {
-        player.resetInput()
+        player.resetInputWithoutStance()
         gameState = GameState.DIALOG
         messageDialog.setActionAfterHide {
             gameState = GameState.RUNNING
@@ -217,7 +221,8 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
         setInputProcessors(null)
         currentNpcEntity = enemyEntity
         gameState = GameState.BATTLE
-        doBeforeLoadScreen()
+        player.resetInput()
+        render(0f)
         fadeOut(transitionPurpose = TransitionPurpose.MAP_CHANGE,
                 actionAfterFade = { BattleScreen.load(battleId, this) })
     }
@@ -269,7 +274,8 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
 
     override fun onNotifyExitConversation() {
         show()
-        doBeforeLoadScreen()
+        player.resetInput()
+        render(0f)
     }
 
     override fun onNotifyHeroJoined() {
@@ -307,7 +313,8 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
         gameState = GameState.BATTLE
         screenManager.setScreen(ScreenType.WORLD)
         BattleResolver.resolveWin(battleId, spoils, player.position, currentNpcEntity, npcEntities)
-        doBeforeLoadScreen()
+        player.resetInput()
+        render(0f)
         if (gameState == GameState.RUNNING) mapManager.continueAudio()
     }
 
@@ -402,11 +409,6 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
             .forEach { it.render(batch) }
     }
 
-    private fun doBeforeLoadScreen() {
-        player.resetInput()
-        render(0f)
-    }
-
     private fun openMiniMap() {
         if (camera.isZoomPossible()) {
             camera.zoom()
@@ -431,7 +433,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
 
     private fun createListener(): WorldScreenListener {
         return WorldScreenListener({ isInTransition },
-                                   { doBeforeLoadScreen() },
+                                   { player.resetInput(); render(0f) },
                                    { partyWindow.showHide() },
                                    { openMiniMap() },
                                    { gridRenderer.setShowGrid() },

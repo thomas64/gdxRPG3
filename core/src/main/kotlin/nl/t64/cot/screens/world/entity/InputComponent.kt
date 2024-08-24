@@ -15,4 +15,8 @@ abstract class InputComponent : Component {
         // empty
     }
 
+    open fun resetStance() {
+        // empty
+    }
+
 }

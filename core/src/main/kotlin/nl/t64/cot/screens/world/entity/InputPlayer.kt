@@ -145,9 +145,12 @@ class InputPlayer(multiplexer: InputMultiplexer) : InputComponent(), InputProces
         turnDelay = 0f
         turnGrace = 0f
 
+        pressAction = false
+    }
+
+    override fun resetStance() {
         pressCtrl = false
         pressShift = false
-        pressAction = false
     }
 
     private fun processMoveInput(dt: Float) {
