@@ -7,7 +7,7 @@
   },
   "go_to_the_forest_2"        : {
     "type"          : "conversation",
-    "condition"     : ["_rc_===_u_q_quest_royal_sacrifice"],
+    "condition"     : ["_rc_===_u_q_quest_royal_sacrifice", "is_specific_time"],
     "conversationId": "should_really_be_going_to_the_forest",
     "entityId"      : "mozes",
     "doesRepeat"    : true

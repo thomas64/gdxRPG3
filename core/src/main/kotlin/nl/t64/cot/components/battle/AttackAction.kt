@@ -17,9 +17,11 @@ class AttackAction(
     private val cappedHitPercentage: Int = hitPercentage.coerceAtMost(100)
     private val isHit: Boolean = hitPercentage > Random.nextInt(0, 100)
     private val damage: Int = calculateDamage()
+    private val cappedDamage: Int = damage.coerceAtMost(target.currentHp)
     private val criticalHitPercentage: Int = attacker.getCalculatedTotalSkillOf(SkillItemId.WARRIOR) * 4
     private val isCriticalHit: Boolean = criticalHitPercentage > Random.nextInt(0, 100)
     private val criticalDamage: Int = (damage * 1.5f).toInt()
+    private val cappedCriticalDamage: Int = criticalDamage.coerceAtMost(target.currentHp)
 
 
     fun createConfirmationMessage(): String {
@@ -79,7 +81,7 @@ class AttackAction(
     private fun calculateDamage(): Int {
         val attack: Int = attacker.getCalculatedTotalDamage()
         val protection: Int = target.getCalculatedTotalProtection()
-        return (attack - protection).coerceAtLeast(1).coerceAtMost(target.currentHp)
+        return (attack - protection).coerceAtLeast(1)
     }
 
     private fun createDebugMessage(): String {

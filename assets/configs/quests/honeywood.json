@@ -83,7 +83,7 @@
   "quest_helping_horse"        : {
     "title"     : "A helping horse",
     "entityId"  : "man13",
-    "summary"   : "A tree has fallen on the path to Honeywood Farm, blocking the road. Lennor seeks your assistance in acquiring a strong horse and some tow ropes to speed up the road-clearing process.",
+    "summary"   : "A tree has fallen on the path to Honeywood Farm, blocking the road. Lennor is busy removing the tree. He seeks your assistance in acquiring a strong horse and some tow ropes to speed up the road-clearing process. Otherwise, he will be done by 13:00.",
     "linkedWith": ["quest_get_horse", "quest_get_tow_rope", "quest_get_medicine", "quest_get_horseshoes"],
     "tasks"     : {
       "1" : {
@@ -105,7 +105,7 @@
         "linkedWith": ["19"]
       },
       "19": {
-        "taskPhrase": "Let the tree be dragged out of the way.",
+        "taskPhrase": "Let the tree be dragged out of the way before 13:00.",
         "type"      : "FREE"
       }
     }
@@ -278,7 +278,7 @@
         "target"    : {"fine_fairy_ring": 1}
       },
       "9": {
-        "taskPhrase"    : "            Ask Luana to accompany you on your travels. She is at Honeywood Farm.",
+        "taskPhrase"    : "            Ask Luana to accompany you on your travels. She is at Honeywood Farm in the northeast of the village.",
         "type"          : "DELIVER_MESSAGE",
         "conversationId": "luana_join",
         "isResettable"  : false,

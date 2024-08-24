@@ -422,7 +422,7 @@
       "2"   : {
         "choices": [
           {"condition": ["i_c_!=_f_q_this", "i_rc_>=_a_q_quest_get_horse", "_tn_7_q_quest_get_horse"], "text": "*Ask for help with Angie's ailing horse.*", "nextId": "3"},
-          {"text": "*Inquire about the potion brewing skill.* (Visit the academy)", "command": "LOAD_ACADEMY"},
+          {"text": "*Inquire about her potion brewing skill.* (Visit the academy)", "command": "LOAD_ACADEMY"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
@@ -486,7 +486,7 @@
       "54"  : {"text": ["First of all, here's a key to the basement. Behind the door is a warp crystal, similar to the one over by the Fairies."]},
       "55"  : {"text": ["Use the portal in the basement to deliver this letter to the Fairy Shop. Afterward, return to me and show me the package you received."]},
       "56"  : {"text": ["But most important, you'll need a travel companion. Because indeed, it's dangerous to go alone. No one is allowed to leave the village unaccompanied."]},
-      "57"  : {"text": ["{COLOR=BLUE}Luana{COLOR=BLACK} went to Honeywood Farm this morning. She's expressed her desire to leave the village more times than I can remember. You should go find her at the farm and ask her to accompany you on your journey."]},
+      "57"  : {"text": ["{COLOR=BLUE}Luana{COLOR=BLACK} went to Honeywood Farm this morning. She's expressed her desire to leave the village more times than I can remember. You should go find her at the farm northeast of here, and ask her to accompany you on your journey."]},
       "58"  : {"text": ["Together, you are permitted to leave this village by the guards on your way to Lastdenn."]},
       "59"  : {"text": ["Mozes, I wish you the best of luck on your journey."], "choices": [{"command": "RECEIVE_ITEM_FOR_QUEST"}]},
       "60"  : {"text": ["Hmmm..."]},

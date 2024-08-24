@@ -28,7 +28,8 @@ object ConditionDatabase {
         "black_asked_four"          to { blackAskedFour },
         "alone_in_party"            to { isAloneInParty },
         "fairy_portal_active"       to { gameData.portals.isActivated(Portal.HONEYWOOD_GREAT_TREE.name) },
-        "i_!fairy_portal_active"    to { isPortalFairyInactiveAndPortalHoneywoodActive }
+        "i_!fairy_portal_active"    to { isPortalFairyInactiveAndPortalHoneywoodActive },
+        "is_specific_time"          to { isBlackCurrentlyNotOpeningHisDoor },
         // @formatter:on
     )
 
@@ -68,6 +69,9 @@ object ConditionDatabase {
     private val isPortalFairyInactiveAndPortalHoneywoodActive
         get() = !gameData.portals.isActivated(Portal.HONEYWOOD_GREAT_TREE.name)
             && gameData.portals.isActivated(Portal.HONEYWOOD_HOUSE_ELDER_B2.name)
+    private val isBlackCurrentlyNotOpeningHisDoor
+        get() = gameData.clock.isCurrentTimeBefore("07:33")
+            || gameData.clock.isCurrentTimeAfter("07:36")
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
