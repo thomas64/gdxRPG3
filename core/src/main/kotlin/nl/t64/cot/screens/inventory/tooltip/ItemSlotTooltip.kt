@@ -132,7 +132,7 @@ open class ItemSlotTooltip : BaseTooltip() {
         val totalMerchant = gameData.party.getSumOfSkill(SkillItemId.MERCHANT)
         val descriptionList = inventoryImage.getSingleDescription(totalMerchant).toMutableList()
         removeLeftUnnecessaryAttributes(descriptionList)
-        descriptionList.forEach { addToTable(hoveredTable, it, createSingleLabelStyle(it)) }
+        descriptionList.forEach { hoveredTable.addDescriptionLine(it, createSingleLabelStyle(it)) }
         return hoveredTable
     }
 
@@ -154,7 +154,7 @@ open class ItemSlotTooltip : BaseTooltip() {
         val totalMerchant = gameData.party.getSumOfSkill(SkillItemId.MERCHANT)
         val descriptionList = hoveredImage.getDualDescription(equippedImage, totalMerchant).toMutableList()
         removeLeftUnnecessaryAttributes(descriptionList)
-        descriptionList.forEach { addToTable(hoveredTable, it, createLeftLabelStyle(it)) }
+        descriptionList.forEach { hoveredTable.addDescriptionLine(it, createLeftLabelStyle(it)) }
         if (equippedImage.inventoryItem.description.isNotEmpty() && hoveredImage.inventoryItem.description.isEmpty()) {
             hoveredTable.add(createLabel(EMPTY_ROW, Color.WHITE)).row()
         }
@@ -169,9 +169,9 @@ open class ItemSlotTooltip : BaseTooltip() {
         }
 
         val totalMerchant = gameData.party.getSumOfSkill(SkillItemId.MERCHANT)
-        val descriptionList = equippedImage.getDualDescription(hoveredImage, totalMerchant).toMutableList()
-        removeRightUnnecessaryAttributes(descriptionList)
-        descriptionList.forEach { addToTable(equippedTable, it, createRightLabelStyle(it)) }
+        val descriptionLines = equippedImage.getDualDescription(hoveredImage, totalMerchant).toMutableList()
+        removeRightUnnecessaryAttributes(descriptionLines)
+        descriptionLines.forEach { equippedTable.addDescriptionLine(it, createRightLabelStyle(it)) }
         if (equippedImage.inventoryItem.description.isEmpty() && hoveredImage.inventoryItem.description.isNotEmpty()) {
             equippedTable.add(createLabel(EMPTY_ROW, Color.WHITE)).row()
         }
@@ -187,9 +187,9 @@ open class ItemSlotTooltip : BaseTooltip() {
         }
     }
 
-    fun addToTable(hoveredTable: Table, attribute: InventoryDescription, labelStyle: LabelStyle?) {
-        hoveredTable.add(Label(getKey(attribute), labelStyle)).spaceRight(COLUMN_SPACING)
-        hoveredTable.add(Label(getValue(attribute), labelStyle)).row()
+    fun Table.addDescriptionLine(line: InventoryDescription, labelStyle: LabelStyle?) {
+        this.add(Label(getKey(line), labelStyle)).spaceRight(COLUMN_SPACING)
+        this.add(Label(getValue(line), labelStyle)).row()
     }
 
     open fun removeLeftUnnecessaryAttributes(descriptionList: MutableList<InventoryDescription>) {
@@ -253,11 +253,11 @@ open class ItemSlotTooltip : BaseTooltip() {
         }
     }
 
-    private fun getValue(attribute: InventoryDescription): String {
+    private fun getValue(descriptionLine: InventoryDescription): String {
         return when {
-            attribute.value is SkillItemId -> attribute.value.title
-            attribute.key == CalcAttributeId.BASE_HIT -> String.format("%s%%", attribute.value)
-            else -> attribute.value.toString()
+            descriptionLine.value is SkillItemId -> descriptionLine.value.title
+            descriptionLine.key == CalcAttributeId.BASE_HIT -> "${descriptionLine.value}%"
+            else -> descriptionLine.value.toString()
         }
     }
 

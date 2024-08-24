@@ -11,114 +11,135 @@ basic_dagger
   orig: 62, 62
   offset: 0, 0
   index: -1
-basic_greatsword
+basic_fairy_sword
   rotate: false
   xy: 62, 0
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-basic_longsword
+basic_greatsword
   rotate: false
   xy: 124, 0
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-basic_mozes_sword
+basic_longsword
   rotate: false
   xy: 186, 0
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-basic_shortsword
+basic_mozes_sword
   rotate: false
   xy: 0, 62
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-fine_dagger
+basic_orc_dagger
   rotate: false
   xy: 62, 62
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-fine_greatsword
+basic_orc_sword
   rotate: false
   xy: 124, 62
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-fine_longsword
+basic_shortsword
   rotate: false
   xy: 186, 62
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-fine_shortsword
+fine_dagger
   rotate: false
   xy: 0, 124
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-masterwork_dagger
+fine_greatsword
   rotate: false
   xy: 62, 124
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-masterwork_greatsword
+fine_longsword
   rotate: false
   xy: 124, 124
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-masterwork_longsword
+fine_shortsword
   rotate: false
   xy: 186, 124
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-masterwork_shortsword
+masterwork_dagger
   rotate: false
   xy: 0, 186
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-specialist_dagger
+masterwork_greatsword
   rotate: false
   xy: 62, 186
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-specialist_greatsword
+masterwork_longsword
   rotate: false
   xy: 124, 186
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-specialist_longsword
+masterwork_shortsword
   rotate: false
   xy: 186, 186
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-specialist_shortsword
+specialist_dagger
   rotate: false
   xy: 0, 248
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+specialist_greatsword
+  rotate: false
+  xy: 62, 248
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+specialist_longsword
+  rotate: false
+  xy: 124, 248
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+specialist_shortsword
+  rotate: false
+  xy: 186, 248
   size: 62, 62
   orig: 62, 62
   offset: 0, 0

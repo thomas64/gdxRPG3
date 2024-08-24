@@ -2,11 +2,46 @@
   "basic_mozes_sword"    : {
     "name"        : "Mozes' Sword",
     "group"       : "WEAPON",
-    "sort"        : 999,
+    "sort"        : 996,
     "skill"       : "SWORD",
+    "price"       : 5,
+    "durability"  : 40,
     "min_strength": 10,
     "base_hit"    : 85,
     "damage"      : 8
+  },
+  "basic_orc_sword"      : {
+    "name"        : "Orc Sword",
+    "group"       : "WEAPON",
+    "sort"        : 997,
+    "skill"       : "SWORD",
+    "price"       : 5,
+    "durability"  : 30,
+    "min_strength": 11,
+    "base_hit"    : 80,
+    "damage"      : 10
+  },
+  "basic_orc_dagger"     : {
+    "name"         : "Orc Dagger",
+    "group"        : "WEAPON",
+    "sort"         : 998,
+    "skill"        : "SWORD",
+    "price"        : 5,
+    "durability"   : 30,
+    "min_dexterity": 11,
+    "base_hit"     : 80,
+    "damage"       : 10
+  },
+  "basic_fairy_sword"    : {
+    "name"            : "Fairy Sword",
+    "group"           : "WEAPON",
+    "sort"            : 999,
+    "skill"           : "SWORD",
+    "price"           : 5,
+    "durability"      : 30,
+    "min_intelligence": 11,
+    "base_hit"        : 80,
+    "damage"          : 10
   },
   "basic_dagger"         : {
     "name"         : "Basic Dagger",
@@ -14,6 +49,7 @@
     "sort"         : 1000,
     "skill"        : "SWORD",
     "price"        : 10,
+    "durability"   : 30,
     "min_dexterity": 10,
     "base_hit"     : 75,
     "damage"       : 12
@@ -24,6 +60,7 @@
     "sort"         : 2000,
     "skill"        : "SWORD",
     "price"        : 20,
+    "durability"   : 25,
     "min_dexterity": 13,
     "base_hit"     : 75,
     "damage"       : 14
@@ -34,6 +71,7 @@
     "sort"         : 3000,
     "skill"        : "SWORD",
     "price"        : 30,
+    "durability"   : 20,
     "min_dexterity": 16,
     "base_hit"     : 75,
     "damage"       : 16
@@ -44,6 +82,7 @@
     "sort"         : 4000,
     "skill"        : "SWORD",
     "price"        : 40,
+    "durability"   : 15,
     "min_dexterity": 19,
     "base_hit"     : 75,
     "damage"       : 18
@@ -54,6 +93,7 @@
     "sort"        : 1020,
     "skill"       : "SWORD",
     "price"       : 30,
+    "durability"  : 30,
     "min_strength": 12,
     "base_hit"    : 60,
     "damage"      : 18
@@ -64,6 +104,7 @@
     "sort"        : 2020,
     "skill"       : "SWORD",
     "price"       : 40,
+    "durability"  : 25,
     "min_strength": 13,
     "base_hit"    : 60,
     "damage"      : 20
@@ -74,6 +115,7 @@
     "sort"        : 3020,
     "skill"       : "SWORD",
     "price"       : 50,
+    "durability"  : 20,
     "min_strength": 14,
     "base_hit"    : 60,
     "damage"      : 22
@@ -84,6 +126,7 @@
     "sort"        : 4020,
     "skill"       : "SWORD",
     "price"       : 60,
+    "durability"  : 15,
     "min_strength": 15,
     "base_hit"    : 60,
     "damage"      : 24
@@ -94,6 +137,7 @@
     "sort"        : 1040,
     "skill"       : "SWORD",
     "price"       : 50,
+    "durability"  : 30,
     "min_strength": 17,
     "base_hit"    : 45,
     "damage"      : 24
@@ -104,6 +148,7 @@
     "sort"        : 2040,
     "skill"       : "SWORD",
     "price"       : 60,
+    "durability"  : 25,
     "min_strength": 18,
     "base_hit"    : 45,
     "damage"      : 26
@@ -114,6 +159,7 @@
     "sort"        : 3040,
     "skill"       : "SWORD",
     "price"       : 70,
+    "durability"  : 20,
     "min_strength": 19,
     "base_hit"    : 45,
     "damage"      : 28
@@ -124,6 +170,7 @@
     "sort"        : 4040,
     "skill"       : "SWORD",
     "price"       : 80,
+    "durability"  : 15,
     "min_strength": 20,
     "base_hit"    : 45,
     "damage"      : 30
@@ -134,6 +181,7 @@
     "sort"        : 1060,
     "skill"       : "SWORD",
     "price"       : 70,
+    "durability"  : 30,
     "min_strength": 22,
     "base_hit"    : 30,
     "damage"      : 30
@@ -144,6 +192,7 @@
     "sort"        : 2060,
     "skill"       : "SWORD",
     "price"       : 80,
+    "durability"  : 25,
     "min_strength": 23,
     "base_hit"    : 30,
     "damage"      : 32
@@ -154,6 +203,7 @@
     "sort"        : 3060,
     "skill"       : "SWORD",
     "price"       : 90,
+    "durability"  : 20,
     "min_strength": 24,
     "base_hit"    : 30,
     "damage"      : 34
@@ -164,6 +214,7 @@
     "sort"        : 4060,
     "skill"       : "SWORD",
     "price"       : 100,
+    "durability"  : 15,
     "min_strength": 25,
     "base_hit"    : 30,
     "damage"      : 36

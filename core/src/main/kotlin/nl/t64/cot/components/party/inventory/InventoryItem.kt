@@ -21,6 +21,8 @@ data class InventoryItem(
     val isTwoHanded: Boolean = false,
     val skill: SkillItemId? = null,
     private val price: Int = 0,
+    var durability: Int = 0,
+    val maxDurability: Int = durability,
     @JsonProperty("min_intelligence")
     private val minIntelligence: Int = 0,
     @JsonProperty("min_willpower")
@@ -152,6 +154,7 @@ data class InventoryItem(
             CalcAttributeId.DEFENSE -> defense
             CalcAttributeId.SPELL_BATTERY -> spellBattery
             CalcAttributeId.TRANSFORMATION -> transformation
+            CalcAttributeId.DURABILITY -> durability
         }
     }
 

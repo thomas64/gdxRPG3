@@ -4,6 +4,8 @@
   "sparkle0003"        : {"content": {"grace_ribbon": 1}},
   "sparkle0004"        : {"content": {"gold": 1}},
   "sparkle0005"        : {"content": {"herb": 1}},
+  "sparkle_orc_sword"  : {"content": {"basic_orc_sword": 1}},
+  "sparkle_orc_dagger" : {"content": {"basic_orc_dagger": 1}},
   "sparkle0006"        : {"content": {"gemstone": 1}},
   "sparkle0007"        : {"content": {"gemstone": 1}},
   "sparkle0008"        : {"content": {"gemstone": 1}},

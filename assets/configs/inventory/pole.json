@@ -5,6 +5,7 @@
     "sort"            : 1200,
     "skill"           : "POLE",
     "price"           : 5,
+    "durability"      : 30,
     "min_intelligence": 15,
     "base_hit"        : 85,
     "damage"          : 4
@@ -15,6 +16,7 @@
     "sort"            : 2200,
     "skill"           : "POLE",
     "price"           : 10,
+    "durability"      : 25,
     "min_intelligence": 18,
     "base_hit"        : 85,
     "damage"          : 7
@@ -25,6 +27,7 @@
     "sort"            : 3200,
     "skill"           : "POLE",
     "price"           : 15,
+    "durability"      : 20,
     "min_intelligence": 21,
     "base_hit"        : 85,
     "damage"          : 10
@@ -35,6 +38,7 @@
     "sort"            : 4200,
     "skill"           : "POLE",
     "price"           : 20,
+    "durability"      : 15,
     "min_intelligence": 24,
     "base_hit"        : 85,
     "damage"          : 13
@@ -45,6 +49,7 @@
     "sort"            : 5200,
     "skill"           : "POLE",
     "price"           : 25,
+    "durability"      : 10,
     "min_intelligence": 27,
     "base_hit"        : 85,
     "damage"          : 16
@@ -55,9 +60,10 @@
     "sort"            : 6200,
     "skill"           : "POLE",
     "price"           : 30,
+    "durability"      : 10,
     "min_intelligence": 30,
     "base_hit"        : 85,
-    "damage": 19
+    "damage"          : 19
   },
   "basic_spear"     : {
     "name"        : "Basic Spear",
@@ -65,6 +71,7 @@
     "sort"        : 1220,
     "skill"       : "POLE",
     "price"       : 15,
+    "durability"  : 30,
     "min_strength": 11,
     "base_hit"    : 70,
     "damage"      : 10
@@ -75,6 +82,7 @@
     "sort"        : 2220,
     "skill"       : "POLE",
     "price"       : 20,
+    "durability"  : 25,
     "min_strength": 12,
     "base_hit"    : 70,
     "damage"      : 12
@@ -85,6 +93,7 @@
     "sort"        : 3220,
     "skill"       : "POLE",
     "price"       : 25,
+    "durability"  : 20,
     "min_strength": 13,
     "base_hit"    : 70,
     "damage"      : 14
@@ -95,6 +104,7 @@
     "sort"        : 4220,
     "skill"       : "POLE",
     "price"       : 30,
+    "durability"  : 15,
     "min_strength": 14,
     "base_hit"    : 70,
     "damage"      : 16
@@ -105,6 +115,7 @@
     "sort"        : 1240,
     "skill"       : "POLE",
     "price"       : 25,
+    "durability"  : 30,
     "min_strength": 14,
     "base_hit"    : 55,
     "damage"      : 16
@@ -115,6 +126,7 @@
     "sort"        : 2240,
     "skill"       : "POLE",
     "price"       : 30,
+    "durability"  : 25,
     "min_strength": 15,
     "base_hit"    : 55,
     "damage"      : 18
@@ -125,6 +137,7 @@
     "sort"        : 3240,
     "skill"       : "POLE",
     "price"       : 35,
+    "durability"  : 20,
     "min_strength": 16,
     "base_hit"    : 55,
     "damage"      : 20
@@ -135,6 +148,7 @@
     "sort"        : 4240,
     "skill"       : "POLE",
     "price"       : 40,
+    "durability"  : 15,
     "min_strength": 17,
     "base_hit"    : 55,
     "damage"      : 22
@@ -145,6 +159,7 @@
     "sort"        : 1260,
     "skill"       : "POLE",
     "price"       : 35,
+    "durability"  : 30,
     "min_strength": 17,
     "base_hit"    : 40,
     "damage"      : 22
@@ -155,6 +170,7 @@
     "sort"        : 2260,
     "skill"       : "POLE",
     "price"       : 40,
+    "durability"  : 25,
     "min_strength": 18,
     "base_hit"    : 40,
     "damage"      : 24
@@ -165,6 +181,7 @@
     "sort"        : 3260,
     "skill"       : "POLE",
     "price"       : 45,
+    "durability"  : 20,
     "min_strength": 19,
     "base_hit"    : 40,
     "damage"      : 26
@@ -175,6 +192,7 @@
     "sort"        : 4260,
     "skill"       : "POLE",
     "price"       : 50,
+    "durability"  : 15,
     "min_strength": 20,
     "base_hit"    : 40,
     "damage"      : 28

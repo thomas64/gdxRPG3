@@ -147,33 +147,36 @@ class DescriptionCreator(
         return descriptionLines.filter { mustBeAdded(it) }
     }
 
-    private fun mustBeAdded(description: InventoryDescription): Boolean {
-        if (description.key in listOf(Constant.DESCRIPTION_KEY_BUY_TOTAL,
-                                      Constant.DESCRIPTION_KEY_SELL_TOTAL,
-                                      Constant.DESCRIPTION_KEY_BUY_PIECE,
-                                      Constant.DESCRIPTION_KEY_SELL_PIECE,
-                                      Constant.DESCRIPTION_KEY_BUY,
-                                      Constant.DESCRIPTION_KEY_SELL)
+    private fun mustBeAdded(descriptionLine: InventoryDescription): Boolean {
+        if (descriptionLine.key in listOf(Constant.DESCRIPTION_KEY_BUY_TOTAL,
+                                          Constant.DESCRIPTION_KEY_SELL_TOTAL,
+                                          Constant.DESCRIPTION_KEY_BUY_PIECE,
+                                          Constant.DESCRIPTION_KEY_SELL_PIECE,
+                                          Constant.DESCRIPTION_KEY_BUY,
+                                          Constant.DESCRIPTION_KEY_SELL)
         ) {
             return true
         }
-        if (description.key is InventoryGroup) {
+        if (descriptionLine.key is InventoryGroup) {
             return true
         }
-        if (description.value is SkillItemId) {
+        if (descriptionLine.value is SkillItemId) {
             return true
         }
-        if (description.key == CalcAttributeId.TRANSFORMATION) {
+        if (descriptionLine.key == CalcAttributeId.DURABILITY && inventoryItem.group != InventoryGroup.WEAPON) {
             return false
         }
-        if (description.key in listOf(CalcAttributeId.PROTECTION,
-                                      StatItemId.SPEED,
-                                      SkillItemId.STEALTH)
+        if (descriptionLine.key == CalcAttributeId.TRANSFORMATION) {
+            return false
+        }
+        if (descriptionLine.key in listOf(CalcAttributeId.PROTECTION,
+                                          StatItemId.SPEED,
+                                          SkillItemId.STEALTH)
             && inventoryItem.group.hasImpactOnPrtSpdStl()
         ) {
             return true
         }
-        if (description.value == 0) {
+        if (descriptionLine.value == 0) {
             return false
         }
         return true

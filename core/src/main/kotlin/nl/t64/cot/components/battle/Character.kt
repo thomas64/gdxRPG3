@@ -63,6 +63,10 @@ abstract class Character(
         return inventory.getInventoryItem(inventoryGroup)
     }
 
+    fun clearInventoryItemFor(inventoryGroup: InventoryGroup) {
+        inventory.clearInventoryItem(inventoryGroup)
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     fun getCalculatedTotalStatOf(statItemId: StatItemId): Int {

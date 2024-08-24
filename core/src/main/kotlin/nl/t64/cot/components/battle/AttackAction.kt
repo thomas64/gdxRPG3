@@ -1,6 +1,9 @@
 package nl.t64.cot.components.battle
 
 import nl.t64.cot.Utils.preferenceManager
+import nl.t64.cot.components.party.HeroItem
+import nl.t64.cot.components.party.inventory.InventoryGroup
+import nl.t64.cot.components.party.inventory.InventoryItem
 import nl.t64.cot.components.party.skills.SkillItemId
 import kotlin.random.Random
 
@@ -20,14 +23,17 @@ class AttackAction(
 
 
     fun createConfirmationMessage(): String {
+        val weapon: InventoryItem = attacker.getInventoryItem(InventoryGroup.WEAPON)!!
         if (criticalHitPercentage <= 0) {
             return """
-                Do you want to $selectedAttack ${target.name} ?
+                Do you want to $selectedAttack ${target.name}
+                with ${weapon.name} (${weapon.durability}) ?
 
                 Chance to hit:  $cappedHitPercentage%   |   Damage:  $damage""".trimIndent()
         } else {
             return """
-                Do you want to $selectedAttack ${target.name} ?
+                Do you want to $selectedAttack ${target.name}
+                with ${weapon.name} (${weapon.durability}) ?
 
                 Chance to hit (Damage):  $cappedHitPercentage%  ($damage)
                 Critical hit (Damage):      $criticalHitPercentage%  ($criticalDamage)""".trimIndent()
@@ -47,6 +53,8 @@ class AttackAction(
     }
 
     private fun handleSuccess(messages: ArrayDeque<String>) {
+        val weapon: InventoryItem = attacker.getInventoryItem(InventoryGroup.WEAPON)!!
+        weapon.durability--
         val damageDone = if (isCriticalHit) criticalDamage else damage
         target.takeDamage(damageDone)
         val damageTypeMessage = if (isCriticalHit) "A critical hit! " else ""
@@ -54,6 +62,11 @@ class AttackAction(
 
         // "(It's super effective!)"
         // "(It's not very effective...)"
+
+        if (attacker is HeroItem && weapon.durability <= 0) {
+            messages.add("${weapon.name} broke!")
+            attacker.clearInventoryItemFor(InventoryGroup.WEAPON)
+        }
         if (!target.isAlive) {
             messages.add("${target.name} is defeated.")
         }

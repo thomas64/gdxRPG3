@@ -143,10 +143,6 @@ class HeroItem(
         inventory.clearAll()
     }
 
-    fun clearInventoryItemFor(inventoryGroup: InventoryGroup) {
-        inventory.clearInventoryItem(inventoryGroup)
-    }
-
     fun forceSetInventoryItemFor(inventoryGroup: InventoryGroup, inventoryItem: InventoryItem) {
         inventory.forceSetInventoryItem(inventoryGroup, inventoryItem)
     }

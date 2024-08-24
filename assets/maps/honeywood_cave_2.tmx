@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="66" height="124" tilewidth="24" tileheight="24" infinite="0" nextlayerid="22" nextobjectid="271">
+<map version="1.11" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="66" height="124" tilewidth="24" tileheight="24" infinite="0" nextlayerid="22" nextobjectid="272">
  <properties>
   <property name="bgm" value="bgm_cave"/>
   <property name="lightmap_player" value="light_player"/>
@@ -155,6 +155,7 @@
   <object id="105" name="sparkle0008" x="240" y="336" width="48" height="48"/>
   <object id="107" name="sparkle0009" x="528" y="1422" width="48" height="48"/>
   <object id="205" name="door_small_honeywood_cave" x="1296" y="2304" width="48" height="96"/>
+  <object id="271" name="sparkle_orc_sword" type="short" x="696" y="1896" width="48" height="48"/>
  </objectgroup>
  <objectgroup color="#ff007f" id="15" name="enemy">
   <object id="147" name="blue_bat" type="f" x="888" y="2568" width="48" height="24">

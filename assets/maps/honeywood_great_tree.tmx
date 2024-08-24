@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="48" height="50" tilewidth="24" tileheight="24" infinite="0" nextlayerid="19" nextobjectid="115">
+<map version="1.11" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="48" height="50" tilewidth="24" tileheight="24" infinite="0" nextlayerid="19" nextobjectid="116">
  <properties>
   <property name="bgm" value="bgm_great_tree"/>
   <property name="bgs" value="bgs_birds"/>
@@ -121,6 +121,7 @@
  </objectgroup>
  <objectgroup color="#5500ff" id="17" name="rest">
   <object id="104" name="chest0009" x="192" y="624" width="48" height="48"/>
+  <object id="115" name="chest_fairy_sword" x="480" y="864" width="48" height="48"/>
  </objectgroup>
  <objectgroup color="#55ff7f" id="15" name="npc">
   <object id="80" name="fairy3" type="ia" x="600" y="864" width="48" height="24">

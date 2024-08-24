@@ -5,6 +5,7 @@
     "sort"         : 1300,
     "skill"        : "THROWN",
     "price"        : 25,
+    "durability"   : 30,
     "min_dexterity": 11,
     "base_hit"     : 70,
     "damage"       : 8
@@ -15,6 +16,7 @@
     "sort"         : 2300,
     "skill"        : "THROWN",
     "price"        : 35,
+    "durability"   : 25,
     "min_dexterity": 12,
     "base_hit"     : 70,
     "damage"       : 10
@@ -25,6 +27,7 @@
     "sort"         : 3300,
     "skill"        : "THROWN",
     "price"        : 45,
+    "durability"   : 20,
     "min_dexterity": 13,
     "base_hit"     : 70,
     "damage"       : 12
@@ -35,6 +38,7 @@
     "sort"         : 4300,
     "skill"        : "THROWN",
     "price"        : 55,
+    "durability"   : 15,
     "min_dexterity": 14,
     "base_hit"     : 70,
     "damage"       : 14
@@ -45,6 +49,7 @@
     "sort"         : 1320,
     "skill"        : "THROWN",
     "price"        : 50,
+    "durability"   : 30,
     "min_dexterity": 15,
     "base_hit"     : 55,
     "damage"       : 14
@@ -55,6 +60,7 @@
     "sort"         : 2320,
     "skill"        : "THROWN",
     "price"        : 60,
+    "durability"   : 25,
     "min_dexterity": 16,
     "base_hit"     : 55,
     "damage"       : 16
@@ -65,6 +71,7 @@
     "sort"         : 3320,
     "skill"        : "THROWN",
     "price"        : 70,
+    "durability"   : 20,
     "min_dexterity": 17,
     "base_hit"     : 55,
     "damage"       : 18
@@ -75,6 +82,7 @@
     "sort"         : 4320,
     "skill"        : "THROWN",
     "price"        : 80,
+    "durability"   : 15,
     "min_dexterity": 18,
     "base_hit"     : 55,
     "damage"       : 20
@@ -85,6 +93,7 @@
     "sort"         : 1340,
     "skill"        : "THROWN",
     "price"        : 75,
+    "durability"   : 30,
     "min_dexterity": 19,
     "base_hit"     : 40,
     "damage"       : 20
@@ -95,6 +104,7 @@
     "sort"         : 2340,
     "skill"        : "THROWN",
     "price"        : 85,
+    "durability"   : 25,
     "min_dexterity": 20,
     "base_hit"     : 40,
     "damage"       : 22
@@ -105,6 +115,7 @@
     "sort"         : 3340,
     "skill"        : "THROWN",
     "price"        : 95,
+    "durability"   : 20,
     "min_dexterity": 21,
     "base_hit"     : 40,
     "damage"       : 24
@@ -115,6 +126,7 @@
     "sort"         : 4340,
     "skill"        : "THROWN",
     "price"        : 105,
+    "durability"   : 15,
     "min_dexterity": 22,
     "base_hit"     : 40,
     "damage"       : 26
@@ -125,6 +137,7 @@
     "sort"         : 1360,
     "skill"        : "THROWN",
     "price"        : 100,
+    "durability"   : 30,
     "min_dexterity": 23,
     "base_hit"     : 25,
     "damage"       : 26
@@ -135,6 +148,7 @@
     "sort"         : 2360,
     "skill"        : "THROWN",
     "price"        : 110,
+    "durability"   : 25,
     "min_dexterity": 24,
     "base_hit"     : 25,
     "damage"       : 28
@@ -145,6 +159,7 @@
     "sort"         : 3360,
     "skill"        : "THROWN",
     "price"        : 120,
+    "durability"   : 20,
     "min_dexterity": 25,
     "base_hit"     : 25,
     "damage"       : 30
@@ -155,6 +170,7 @@
     "sort"         : 4360,
     "skill"        : "THROWN",
     "price"        : 130,
+    "durability"   : 15,
     "min_dexterity": 26,
     "base_hit"     : 25,
     "damage"       : 32

@@ -34,9 +34,9 @@ class LootSlotTooltip : ItemSlotTooltip() {
         hoveredTable.defaults().align(Align.left)
 
         val totalMerchant = gameData.party.getSumOfSkill(SkillItemId.MERCHANT)
-        val descriptionList = inventoryImage.getComparelessDescription(totalMerchant).toMutableList()
-        removeLeftUnnecessaryAttributes(descriptionList)
-        descriptionList.forEach { addToTable(hoveredTable, it, createSingleLabelStyle(it)) }
+        val descriptionLines = inventoryImage.getComparelessDescription(totalMerchant).toMutableList()
+        removeLeftUnnecessaryAttributes(descriptionLines)
+        descriptionLines.forEach { hoveredTable.addDescriptionLine(it, createSingleLabelStyle(it)) }
         addPossibleDescription(inventoryImage, hoveredTable)
         window.add(hoveredTable)
     }
