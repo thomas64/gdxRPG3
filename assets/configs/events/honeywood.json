@@ -18,6 +18,12 @@
     "conversationId": "outside_home_cycle_2",
     "entityId"      : "mozes"
   },
+  "event_ridiculous"          : {
+    "type"          : "conversation",
+    "condition"     : ["i_tc_1_q_quest_helping_horse", "i_tc_11_q_quest_helping_horse"],
+    "conversationId": "honeywood_ridiculous",
+    "entityId"      : "mozes"
+  },
   "event_lennor_is_finished"  : {
     "type"          : "conversation",
     "condition"     : ["_time_at_13:00", "_c_!=_f_q_quest_helping_horse"],

@@ -21,6 +21,12 @@
       "10": {"text": ["Should I go to Lastdenn? Or should I go back to the forest?"], "choices": [{"command": "EXIT"}]}
     }
   },
+  "honeywood_ridiculous"                : {
+    "name"   : "Mozes",
+    "phrases": {
+      "1": {"text": ["That was a ridiculously amount of effort just to tow some stupid tree."], "choices": [{"command": "EXIT"}]}
+    }
+  },
   "mrs_johanna"                         : {
     "name"   : "Mrs. Johanna",
     "phrases": {
@@ -329,8 +335,8 @@
   "quest_get_horse"                     : {
     "name"   : "Angie",
     "phrases": {
-      "1" : {"text": ["Hi Mozes. Won't you say hi to Enopa? She's not feeling well."]},
-      "2" : {
+      "1"   : {"text": ["Hi Mozes. Won't you say hi to Enopa? She's not feeling well."]},
+      "2"   : {
         "choices": [
           {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "text": "*Ask Angie if she's seen Grace this morning.*", "nextId": "5"},
           {"condition": ["i_tn_7_q_this"], "text": "*Express your concern about Enopa's condition.*", "nextId": "3"},
@@ -338,11 +344,11 @@
           {"text": "*Greet Enopa and take your leave.*", "command": "EXIT"}
         ]
       },
-      "3" : {"text": ["Thank you. Maybe she ate something wrong, but I think just a couple of days' rest will help her recover."], "choices": [{"nextId": "2"}]},
-      "5" : {"text": ["I haven't seen Grace or much of anything else, I'm afraid. My whole morning has been consumed with tending to Enopa. I've had eyes for nothing else."], "choices": [{"nextId": "2"}]},
-      "10": {"text": ["She can't! Enopa needs to recover first before she can be of any use."]},
-      "11": {"text": ["And even if she recovers, she'll need horseshoes before she can go anywhere. I don't have any right now, so it's not possible."]},
-      "12": {
+      "3"   : {"text": ["Thank you. Maybe she ate something wrong, but I think just a couple of days' rest will help her recover."], "choices": [{"nextId": "2"}]},
+      "5"   : {"text": ["I haven't seen Grace or much of anything else, I'm afraid. My whole morning has been consumed with tending to Enopa. I've had eyes for nothing else."], "choices": [{"nextId": "2"}]},
+      "10"  : {"text": ["She can't! Enopa needs to recover first before she can be of any use."]},
+      "11"  : {"text": ["And even if she recovers, she'll need horseshoes before she can go anywhere. I don't have any right now, so it's not possible."]},
+      "12"  : {
         "choices": [
           {"condition": ["i_n_1_>=_item_horse_medicine"], "text": "[Horse Medicine] *Deliver the medicine from Elenora.*", "command": "PROVIDE_QUEST_ITEM", "nextId": "50"},
           {"condition": ["i_r_!=_f_q_this"], "text": "*Ask if there isn't anything you can do to help Enopa.*", "command": "ACCEPT_QUEST", "nextId": "20"},
@@ -350,47 +356,53 @@
           {"text": "*Wish Angie and Enopa the best. Take your leave.*", "command": "EXIT"}
         ]
       },
-      "20": {"text": ["Let me think...", "Yes, there might be something you can do. Go talk to the village elder's wife, Elenora. She might have some medicine or knows where to find it."]},
-      "21": {"text": ["Regarding the horseshoes, I'll need you to get 4 of them. They might be lying around in the village, or you could ask the village elder. He's quite knowledgeable and might even know where to find horseshoes."], "choices": [{"nextId": "35"}]},
-      "30": {"text": ["Really? That would be a big help. Thank you!"], "choices": [{"nextId": "35"}]},
-      "35": {"text": ["Once Enopa is fully recovered and has been shoed, I'll lend her to Lennor and you."]},
-      "36": {
+      "20"  : {"text": ["Let me think...", "Yes, there might be something you can do. Go talk to the village elder's wife, Elenora. She might have some medicine or knows where to find it."]},
+      "21"  : {"text": ["Regarding the horseshoes, I'll need you to get 4 of them. They might be lying around in the village, or you could ask the village elder. He's quite knowledgeable and might even know where to find horseshoes."], "choices": [{"nextId": "35"}]},
+      "30"  : {"text": ["Really? That would be a big help. Thank you!"], "choices": [{"nextId": "35"}]},
+      "35"  : {"text": ["Once Enopa is fully recovered and has been shoed, I'll lend her to Lennor and you."]},
+      "36"  : {
         "choices": [
           {"condition": ["i_n_1_>=_item_horse_medicine"], "text": "[Horse Medicine] *Deliver the medicine from Elenora.*", "command": "PROVIDE_QUEST_ITEM", "nextId": "51"},
           {"text": "*Tell her you'll do your best. Take your leave.*", "command": "EXIT", "nextId": "40"},
           {"text": "*Too much trouble. You'll go for another (better) horse. Take your leave.*", "command": "EXIT", "nextId": "41"}
         ]
       },
-      "40": {"text": ["Hi Mozes, do you have anything for Enopa?"], "choices": [{"nextId": "45"}]},
-      "41": {"text": ["Hi Mozes, did you change your mind?"], "choices": [{"nextId": "45"}]},
-      "45": {
+      "40"  : {"text": ["Hi Mozes, do you have anything for Enopa?"], "choices": [{"nextId": "45"}]},
+      "41"  : {"text": ["Hi Mozes, did you change your mind?"], "choices": [{"nextId": "45"}]},
+      "45"  : {
         "choices": [
           {"condition": ["_n_1_>=_item_horse_medicine"], "text": "[Horse Medicine] *Deliver the medicine from Elenora.*", "command": "PROVIDE_QUEST_ITEM", "nextId": "52"},
           {"text": "*Inform her that you're working on it. Take your leave.*", "command": "EXIT", "nextId": "40"},
           {"text": "*You went looking for that other horse. Take your leave.*", "command": "EXIT", "nextId": "41"}
         ]
       },
-      "50": {"text": ["How did you knew? Thank you very much! I'll administer it to her right away."], "choices": [{"nextId": "90"}]},
-      "51": {"text": ["Wow, really? That's awesome! I'll administer it to her right away."], "choices": [{"nextId": "53"}]},
-      "52": {"text": ["Great! I'll administer it to her right away."], "choices": [{"nextId": "53"}]},
-      "53": {"text": ["{SPEED=0.2} . . . . ."]},
-      "54": {"text": ["I think she even likes the taste of it! Thank you so much for your help."]},
-      "55": {"text": ["Now, once she's been shoed, I'll lend her to Lennor and you."], "choices": [{"nextId": "60"}]},
-      "60": {"text": ["Were you able to gather 4 horseshoes for Enopa?"]},
-      "61": {
+      "50"  : {"text": ["How did you knew? Thank you very much! I'll administer it to her right away."], "choices": [{"nextId": "90"}]},
+      "51"  : {"text": ["Wow, really? That's awesome! I'll administer it to her right away."], "choices": [{"nextId": "53"}]},
+      "52"  : {"text": ["Great! I'll administer it to her right away."], "choices": [{"nextId": "53"}]},
+      "53"  : {"text": ["{SPEED=0.2} . . . . ."]},
+      "54"  : {"text": ["I think she even likes the taste of it! Thank you so much for your help."]},
+      "55"  : {"text": ["Now, once she's been shoed, I'll lend her to Lennor and you."], "choices": [{"nextId": "60"}]},
+      "60"  : {"text": ["Were you able to gather 4 horseshoes for Enopa?"]},
+      "61"  : {
         "choices": [
           {"condition": ["_n_4_>=_item_horseshoe"], "text": "[4 Horseshoes] *Hand over the horseshoes.*", "command": "PROVIDE_QUEST_ITEM", "nextId": "70"},
           {"text": "*Tell her you'll return when you have them. Take your leave.*", "command": "EXIT", "nextId": "60"}
         ]
       },
-      "70": {"text": ["Thank you so much! You've been a tremendous help, Mozes!"]},
-      "71": {"text": ["I'll shoe her right away with these. After that, I'll make sure Enopa gets to Lennor."]},
-      "72": {"text": ["Thanks once again. It turned out to be a great day after all."], "choices": [{"command": "RELOAD_NPCS", "nextId": "80"}]},
-      "80": {"text": ["How is my Enopa doing? Has she been of any help to Lennor and you?"], "choices": [{"command": "EXIT", "nextId": "80"}]},
-      "90": {"text": ["{SPEED=0.2} . . . . ."]},
-      "91": {"text": ["I think she even likes the taste of it! Thank you so much for your help."]},
-      "92": {"text": ["Now, once she's been shoed, I'll lend her to Lennor and you."]},
-      "93": {"text": ["Regarding the horseshoes, I'll need you to get 4 of them. They might be lying around in the village, or you could ask the village elder. He's quite knowledgeable and might even know where to find horseshoes."], "choices": [{"nextId": "61"}]}
+      "70"  : {"text": ["Thank you so much! You've been a tremendous help, Mozes!"]},
+      "71"  : {"text": ["I'll shoe her right away with these. After that, I'll make sure Enopa gets to Lennor."]},
+      "72"  : {"text": ["Thanks once again. It turned out to be a great day after all."], "choices": [{"command": "RELOAD_NPCS", "nextId": "80"}]},
+      "80"  : {
+        "text": ["How is my Enopa doing? Has she been of any help to Lennor and you?"], "choices": [
+          {"condition": ["_conv_the_road_is_open_==_1"], "command": "EXIT", "nextId": "80"}
+        ]
+      },
+      "2000": {"face": "mozes", "text": ["{SPEED=0.2} . . . . ."]},
+      "2001": {"text": ["Uh... Well... I guess so?"], "choices": [{"command": "EXIT", "nextId": "80"}]},
+      "90"  : {"text": ["{SPEED=0.2} . . . . ."]},
+      "91"  : {"text": ["I think she even likes the taste of it! Thank you so much for your help."]},
+      "92"  : {"text": ["Now, once she's been shoed, I'll lend her to Lennor and you."]},
+      "93"  : {"text": ["Regarding the horseshoes, I'll need you to get 4 of them. They might be lying around in the village, or you could ask the village elder. He's quite knowledgeable and might even know where to find horseshoes."], "choices": [{"nextId": "61"}]}
     }
   },
   "honeywood_horse"                     : {

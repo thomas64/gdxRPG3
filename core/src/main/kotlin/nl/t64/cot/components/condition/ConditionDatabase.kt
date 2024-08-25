@@ -23,7 +23,6 @@ object ConditionDatabase {
         "defeated_orc_guards"       to { hasDefeatedOrcGuards },
         "i_!starting_spells"        to { !hasStartingSpells },
         "i_starting_spells"         to { hasStartingSpells },
-        "!talked_to_lennor"         to { hasNotYetTalkedToLennorFirstCycle },
         "!black_asked_four"         to { !blackAskedFour },
         "black_asked_four"          to { blackAskedFour },
         "alone_in_party"            to { isAloneInParty },
@@ -47,6 +46,8 @@ object ConditionDatabase {
             ConditionConverter.isMeetingItemCondition(conditionId)
         } else if (conditionId.contains("_time_")) {
             ConditionConverter.isMeetingTimeCondition(conditionId)
+        } else if (conditionId.contains("_conv_")) {
+            ConditionConverter.isMeetingConversationCondition(conditionId)
         } else {
             conditions[conditionId]!!.invoke()
         }
@@ -57,12 +58,9 @@ object ConditionDatabase {
     private val hasBeenInFairyTown get() = hasEventPlayed("enter_great_tree")
     private val hasDefeatedOrcGuards get() = isBattleWon("quest_orc_guards")
     private val hasStartingSpells get() = hasAnySpell("mozes")
-    private val hasNotYetTalkedToLennorFirstCycle
-        get() = "quest_helping_horse" hasResetState QuestState.UNKNOWN
-            && "quest_helping_horse" hasCurrentPhraseId "1"
     private val blackAskedFour
         get() = isTargetAlternateUsed("quest_get_tow_rope", "13") // "_13_"
-            || "quest_get_horseshoes" hasCurrentPhraseId "200"
+            || isMeetingCondition("_conv_quest_get_horseshoes_==_200", null)
     private val isAloneInParty
         get() = hasAmountOfPartyMembers(1)
             && !gameData.heroes.hasAnyoneBeenRecruited()
@@ -103,8 +101,5 @@ object ConditionDatabase {
 
     private infix fun String.hasResetState(questState: QuestState): Boolean =
         gameData.quests.getQuestById(this).resetState == questState
-
-    private infix fun String.hasCurrentPhraseId(currentPhraseId: String): Boolean =
-        gameData.conversations.getConversationById(this).currentPhraseId == currentPhraseId
 
 }

@@ -45,6 +45,21 @@ object ConditionConverter {
         }
     }
 
+    fun isMeetingConversationCondition(conditionId: String): Boolean {
+        val conversationId: String = getConversationId(conditionId)
+        val currentPhraseId: String = gameData.conversations.getConversationById(conversationId).currentPhraseId
+        val conditionPhraseId: String = conditionId.substringAfterLast("_")
+        return when {
+            conditionId.contains("_!=_") -> currentPhraseId != conditionPhraseId
+            conditionId.contains("_==_") -> currentPhraseId == conditionPhraseId
+            conditionId.contains("_<_") -> currentPhraseId < conditionPhraseId
+            conditionId.contains("_<=_") -> currentPhraseId <= conditionPhraseId
+            conditionId.contains("_>=_") -> currentPhraseId >= conditionPhraseId
+            conditionId.contains("_>_") -> currentPhraseId > conditionPhraseId
+            else -> throw IllegalArgumentException("No defined state found.")
+        }
+    }
+
     private fun getQuestGraph(conditionId: String, questId: String?): QuestGraph {
         return when {
             conditionId.contains("_q_this") -> gameData.quests.getQuestById(questId!!)
@@ -97,6 +112,20 @@ object ConditionConverter {
         return startIndex to endIndex
     }
 
+    private fun getConversationId(conditionId: String): String {
+        val startIndex: Int = conditionId.indexOf("_conv_") + "_conv_".length
+        val endIndex: Int = listOf(conditionId.indexOf("_!=_"),
+                                   conditionId.indexOf("_==_"),
+                                   conditionId.indexOf("_<_"),
+                                   conditionId.indexOf("_<=_"),
+                                   conditionId.indexOf("_>=_"),
+                                   conditionId.indexOf("_>_"))
+            .filter { it > startIndex }
+            .minOrNull()
+            ?: error("No defined operator found.")
+        return conditionId.substring(startIndex, endIndex)
+    }
+
     private fun getQuestState(conditionId: String, questGraph: QuestGraph): List<QuestState> {
         return when {
             conditionId.contains("_r_") -> listOf(questGraph.resetState)
@@ -118,7 +147,8 @@ object ConditionConverter {
 
     private fun isQuestInState(conditionId: String, questState: List<QuestState>, conditionState: QuestState): Boolean {
         return when {
-            conditionId.contains("_!=_") -> questState.all { it != conditionState }
+            conditionId.contains("_!=_") -> questState.any { it != conditionState }
+            conditionId.contains("_!==_") -> questState.all { it != conditionState }
             conditionId.contains("_==_") -> questState.any { it == conditionState }
             conditionId.contains("_===_") -> questState.all { it == conditionState }
             conditionId.contains("_<=_") -> questState.any { it.isEqualOrLowerThan(conditionState) }
