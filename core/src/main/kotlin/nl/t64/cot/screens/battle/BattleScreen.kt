@@ -128,6 +128,7 @@ class BattleScreen : Screen {
             return
         }
 
+        BattleScreenBuilder.disposeAndClearTextures()
         updateHeroTable()
         updateEnemyTable()
 

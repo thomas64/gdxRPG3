@@ -164,7 +164,7 @@ class MenuNew : MenuScreen() {
         val textFieldStyle = TextFieldStyle().apply {
             font = menuFont
             fontColor = Color.BLACK
-            background = Utils.createFullBorder()
+            background = Utils.createFullBorderBlack()
         }
         return TextField("", textFieldStyle).apply {
             isDisabled = true

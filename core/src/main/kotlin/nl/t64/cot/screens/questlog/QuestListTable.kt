@@ -39,7 +39,7 @@ internal class QuestListTable {
             font = questListFont
             fontColorSelected = Constant.DARK_RED
             fontColorUnselected = Color.BLACK
-            selection = Utils.createFullBorder()
+            selection = Utils.createFullBorderBlack()
             selection.leftWidth = PAD_LEFT
         })
     }

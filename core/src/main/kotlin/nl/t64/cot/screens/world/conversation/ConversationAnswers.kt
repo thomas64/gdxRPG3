@@ -63,7 +63,7 @@ class ConversationAnswers(
         val drawable = if (choices[0].isDefault()) {
             Color.CLEAR.toDrawable()
         } else {
-            Utils.createFullBorder()
+            Utils.createFullBorderBlack()
         }.apply {
             topHeight = SCROLL_PANE_LINE_PAD
             bottomHeight = SCROLL_PANE_LINE_PAD

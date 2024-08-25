@@ -39,7 +39,8 @@ import nl.t64.cot.screens.world.map.MapManager
 private const val TITLE_PADDING = 50f
 private const val TITLE_FONT = "fonts/spectral_extra_bold_28.ttf"
 private const val TITLE_SIZE = 28
-private const val SPRITE_BORDER = "sprites/border.png"
+private const val SPRITE_BORDER_BLACK = "sprites/border_black.png"
+private const val SPRITE_BORDER_WHITE = "sprites/border_white.png"
 private const val SPRITE_BORDER_TOP = "sprites/border_top.png"
 private const val SPRITE_BORDER_BOTTOM = "sprites/border_bottom.png"
 private const val SPRITE_BORDER_RIGHT = "sprites/border_right.png"
@@ -85,7 +86,7 @@ object Utils {
 
     fun createDefaultWindow(title: String, table: Table, titleAlignment: Int = Align.left): Window {
         val font = resourceManager.getTrueTypeAsset(TITLE_FONT, TITLE_SIZE)
-        val windowStyle = WindowStyle(font, Color.BLACK, createFullBorder())
+        val windowStyle = WindowStyle(font, Color.BLACK, createFullBorderBlack())
         return Window(title, windowStyle).apply {
             add(table)
             padTop(TITLE_PADDING)
@@ -107,8 +108,14 @@ object Utils {
         }
     }
 
-    fun createFullBorder(): Drawable {
-        val texture = resourceManager.getTextureAsset(SPRITE_BORDER)
+    fun createFullBorderBlack(): Drawable {
+        val texture = resourceManager.getTextureAsset(SPRITE_BORDER_BLACK)
+        val ninepatch = NinePatch(texture, 1, 1, 1, 1)
+        return NinePatchDrawable(ninepatch)
+    }
+
+    fun createFullBorderWhite(): Drawable {
+        val texture = resourceManager.getTextureAsset(SPRITE_BORDER_WHITE)
         val ninepatch = NinePatch(texture, 1, 1, 1, 1)
         return NinePatchDrawable(ninepatch)
     }

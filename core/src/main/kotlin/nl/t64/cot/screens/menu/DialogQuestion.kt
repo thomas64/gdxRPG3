@@ -89,7 +89,7 @@ class DialogQuestion(
 
     private fun setCurrentTextButtonToRed() {
         (dialog.buttonTable.getChild(selectedIndex) as TextButton).style.fontColor = Constant.DARK_RED
-        (dialog.buttonTable.getChild(selectedIndex) as TextButton).label.style.background = Utils.createFullBorder()
+        (dialog.buttonTable.getChild(selectedIndex) as TextButton).label.style.background = Utils.createFullBorderBlack()
     }
 
     private fun createDialog(): Dialog {

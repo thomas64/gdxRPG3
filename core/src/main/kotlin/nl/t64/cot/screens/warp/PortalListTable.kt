@@ -53,7 +53,7 @@ internal class PortalListTable {
             font = portalListFont
             fontColorSelected = Constant.DARK_RED
             fontColorUnselected = Color.BLACK
-            selection = Utils.createFullBorder()
+            selection = Utils.createFullBorderBlack()
             selection.leftWidth = PAD_LEFT
         })
     }

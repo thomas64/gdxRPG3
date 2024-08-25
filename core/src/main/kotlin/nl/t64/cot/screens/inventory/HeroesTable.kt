@@ -146,14 +146,14 @@ class HeroesTable {
     private fun createHpBar(hero: HeroItem): Stack {
         return Stack().apply {
             add(createHpFill(hero))
-            add(Image(Utils.createFullBorder()))
+            add(Image(Utils.createFullBorderBlack()))
         }
     }
 
     private fun createSpBar(hero: HeroItem): Stack {
         return Stack().apply {
             add(createSpFill(hero))
-            add(Image(Utils.createFullBorder()))
+            add(Image(Utils.createFullBorderBlack()))
         }
     }
 

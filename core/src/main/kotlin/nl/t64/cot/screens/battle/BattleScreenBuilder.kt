@@ -2,20 +2,25 @@ package nl.t64.cot.screens.battle
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.scenes.scene2d.ui.*
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.List.ListStyle
+import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Scaling
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.resourceManager
+import nl.t64.cot.components.battle.Character
 import nl.t64.cot.components.battle.EnemyItem
 import nl.t64.cot.components.battle.Participant
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.inventory.BattlePotionItem
 import nl.t64.cot.components.party.stats.StatItemId
 import nl.t64.cot.constants.Constant
+import nl.t64.cot.disposeAndClear
 import nl.t64.cot.toDrawable
+import nl.t64.cot.toTexture
 import kotlin.collections.List
 import com.badlogic.gdx.scenes.scene2d.ui.List as GdxList
 
@@ -23,8 +28,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.List as GdxList
 private const val TEXT_FONT = "fonts/spectral_regular_24.ttf"
 private const val FONT_SIZE = 24
 private const val TITLE_TEXT = "Battle...!"
+private const val BAR_WIDTH = 100f
+private const val BAR_HEIGHT = 18f
 
 object BattleScreenBuilder {
+
+    private val texturesToDispose: MutableSet<Texture> = mutableSetOf()
 
     fun createBattleTitle(): Label {
         return Label(TITLE_TEXT, createLabelStyle(Color.WHITE)).apply {
@@ -40,6 +49,10 @@ object BattleScreenBuilder {
             add("This battle screen is a temporary placeholder for the real turn based").row()
             add("strategic battle gameplay that will replace this screen in the future.")
         }
+    }
+
+    fun disposeAndClearTextures() {
+        texturesToDispose.disposeAndClear()
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -60,9 +73,11 @@ object BattleScreenBuilder {
         add(Table(createSkin()).apply {
             left()
             defaults().left()
-            add(hero.name).row()
-            add("HP:  ${hero.currentHp}/ ${hero.maximumHp}").row()
-            add("SP:  ${hero.currentSp}/ ${hero.maximumSp}")
+            add(hero.name).colspan(2).row()
+            add("HP:").width(50f)
+            add(createHpBar(hero)).width(BAR_WIDTH).height(BAR_HEIGHT).row()
+            add("SP:").width(50f)
+            add(createSpBar(hero)).width(BAR_WIDTH).height(BAR_HEIGHT).row()
         }).top().left().padLeft(20f).row()
     }
 
@@ -80,12 +95,12 @@ object BattleScreenBuilder {
     }
 
     private fun Table.addEnemy(enemy: EnemyItem) {
-        val hpPercentage = ((enemy.currentHp.toFloat() / enemy.maximumHp.toFloat()) * 100f).toInt()
         add(Table(createSkin()).apply {
             left()
             defaults().left()
-            add(enemy.name).row()
-            add("HP:  $hpPercentage%")
+            add(enemy.name).colspan(2).row()
+            add("HP:").width(50f)
+            add(createHpBar(enemy)).width(BAR_WIDTH).height(BAR_HEIGHT)
         }).top().left()
         val faceImage = Utils.getFaceImage(enemy.id, isFlipped = false)
             .apply { if (!enemy.isAlive) color = Color.DARK_GRAY }
@@ -230,6 +245,54 @@ object BattleScreenBuilder {
             add("Select Potion:").row()
             add(listWithPotions)
         }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private fun createHpBar(character: Character): Stack {
+        return Stack().apply {
+            add(createHpFill(character))
+            if (character is HeroItem) add(createHpLabel(character))
+            add(Image(Utils.createFullBorderWhite()))
+        }
+    }
+
+    private fun createHpFill(character: Character): Image {
+        return Utils.getHpColor(character.currentHp, character.maximumHp).toImage().apply {
+            setScaling(Scaling.stretchY)
+            align = Align.left
+            drawable.minWidth = (BAR_WIDTH / character.maximumHp) * character.currentHp
+        }
+    }
+
+    private fun createHpLabel(character: Character): Label {
+        return Label("${character.currentHp} ", LabelStyle(BitmapFont(), Color.WHITE))
+            .apply { setAlignment(Align.right) }
+    }
+
+    private fun createSpBar(hero: HeroItem): Stack {
+        return Stack().apply {
+            add(createSpFill(hero))
+            add(createSpLabel(hero))
+            add(Image(Utils.createFullBorderWhite()))
+        }
+    }
+
+    private fun createSpFill(hero: HeroItem): Image {
+        return Color.ROYAL.toImage().apply {
+            setScaling(Scaling.stretchY)
+            align = Align.left
+            drawable.minWidth = (BAR_WIDTH / hero.maximumSp) * hero.currentSp
+        }
+    }
+
+    private fun createSpLabel(hero: HeroItem): Label {
+        return Label("${hero.currentSp} ", LabelStyle(BitmapFont(), Color.WHITE))
+            .apply { setAlignment(Align.right) }
+    }
+
+    private fun Color.toImage(): Image {
+        return Image(toTexture().also { texturesToDispose.add(it) })
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
