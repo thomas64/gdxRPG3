@@ -13,7 +13,7 @@ class QuestTask(
     val target: MutableMap<String, Int> = mutableMapOf(),
     val targetAlternate: Map<String, Int> = emptyMap(),
     val receive: Map<String, Int> = emptyMap(),
-    val conversationId: String = "",
+    val conversationIds: List<String> = emptyList(),
     val isOptional: Boolean = false,
     var isHidden: Boolean = false,
     private val isResettable: Boolean = true,

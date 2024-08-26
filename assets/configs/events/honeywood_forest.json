@@ -12,7 +12,7 @@
   },
   "found_grace_ribbon"    : {
     "type"          : "conversation",
-    "condition"     : ["_n_1_>=_item_grace_ribbon", "_rc_===_u_q_quest_royal_sacrifice"],
+    "condition"     : ["_n_1_>=_item_basic_grace_ribbon", "_rc_===_u_q_quest_royal_sacrifice"],
     "conversationId": "found_grace_ribbon",
     "entityId"      : "mozes"
   },

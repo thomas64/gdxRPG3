@@ -32,7 +32,7 @@ class Santino : EntitySchedule() {
         SchedulePart("lastdenn_church", "09:55", "10:00", SOUTH, IDLE,    "santino5", "santino5", "santino_service_start"),
         SchedulePart("lastdenn_church", "10:00", "11:00", SOUTH, IDLE,    "santino5", "santino5", "santino_first_service"),
         SchedulePart("lastdenn_church", "11:00", "11:02", WEST,  WALKING, "santino5", "santino4"),
-        SchedulePart("lastdenn_church", "11:02", "12:00", SOUTH, IDLE,    "santino4", "santino4", "santino_first_question_hour"),
+        SchedulePart("lastdenn_church", "11:02", "12:00", SOUTH, IDLE,    "santino4", "santino4", "santino_first_counseling"),
         // @formatter:on
     )
 

@@ -168,7 +168,7 @@ data class QuestGraph(
     fun possibleSetDeliverItemTaskComplete(conversationId: String) {
         if (currentState.isEqualOrLowerThan(QuestState.ACCEPTED)) {
             tasks.filterValues { it.type == QuestTaskType.DELIVER_ITEM }
-                .filterValues { it.conversationId == conversationId }
+                .filterValues { conversationId in it.conversationIds }
                 .filterValues { !it.isComplete }
                 .filterValues { it.hasTargetInInventory() }
                 .forEach { setTaskComplete(it.key) }
@@ -178,7 +178,7 @@ data class QuestGraph(
     fun possibleSetDeliverItemAlternateTaskComplete(conversationId: String) {
         if (currentState.isEqualOrLowerThan(QuestState.ACCEPTED)) {
             tasks.filterValues { it.type == QuestTaskType.DELIVER_ITEM }
-                .filterValues { it.conversationId == conversationId }
+                .filterValues { conversationId in it.conversationIds }
                 .filterValues { !it.isComplete }
                 .filterValues { it.targetAlternate.isNotEmpty() }
                 .filterValues { it.hasTargetAlternateInInventory() }
@@ -190,7 +190,7 @@ data class QuestGraph(
     fun possibleSetDeliverMessageTaskComplete(conversationId: String) {
         if (currentState.isEqualOrLowerThan(QuestState.ACCEPTED)) {
             tasks.filterValues { it.type == QuestTaskType.DELIVER_MESSAGE }
-                .filterValues { it.conversationId == conversationId }
+                .filterValues { conversationId in it.conversationIds }
                 .forEach { setTaskComplete(it.key) }
         }
     }

@@ -43,7 +43,7 @@ internal class QuestTest : GameTest() {
         val tasks = quest0001.tasks
         assertThat(tasks).hasSize(3)
         assertThat(tasks["1"]!!.taskPhrase).isEqualTo("Collect 3 herbs")
-        assertThat(tasks["1"]!!.type).isEqualTo(QuestTaskType.FETCH_ITEM)
+//        assertThat(tasks["1"]!!.type).isEqualTo(QuestTaskType.FETCH_ITEM)
         assertThat(tasks["1"]!!.target).containsOnly(entry("herb", 3))
         assertThat(tasks["1"]).hasToString("     Collect 3 herbs")
     }

@@ -1,5 +1,5 @@
 {
-  "grace_ribbon"           : {
+  "basic_grace_ribbon"           : {
     "name"    : "Grace's Ribbon",
     "group"   : "ACCESSORY",
     "sort"    : 61000,

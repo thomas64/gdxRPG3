@@ -21,7 +21,7 @@ enum class QuestTaskType {
     NONE,
 
 
-    FETCH_ITEM,
+    FETCH_ITEM,         // legacy
     GAIN_KNOWLEDGE,
     MESSAGE_DELIVERY,   // legacy
     ITEM_DELIVERY,      // legacy

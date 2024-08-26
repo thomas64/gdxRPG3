@@ -342,6 +342,7 @@ class BattleScreen : Screen {
     private fun restConfirmed(restAction: RestAction) {
         buttonTableAction.remove()
         val message: String = restAction.handle()
+        val audio: AudioEvent = if (message.contains("skipped")) AudioEvent.SE_CONVERSATION_NEXT else AudioEvent.SE_POTION
         val messageDialog = MessageDialog(message)
         messageDialog.setActionAfterHide {
             turnManager.setNextTurn()
@@ -349,7 +350,7 @@ class BattleScreen : Screen {
         }
         isDelayingTurn = true
         Utils.runWithDelay(0.5f) {
-            messageDialog.show(stage, AudioEvent.SE_POTION)
+            messageDialog.show(stage, audio)
         }
     }
 

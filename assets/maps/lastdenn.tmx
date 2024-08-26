@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="76" height="116" tilewidth="24" tileheight="24" infinite="0" nextlayerid="23" nextobjectid="205">
+<map version="1.11" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="76" height="116" tilewidth="24" tileheight="24" infinite="0" nextlayerid="23" nextobjectid="207">
  <properties>
   <property name="bgm" value="bgm_lastdenn"/>
   <property name="lightmap_camera" value="sunlight"/>
@@ -246,7 +246,18 @@
   <object id="22" name="lastdenn_bar" x="528" y="1074" width="48" height="24"/>
   <object id="23" name="lastdenn_house_mayor" x="1248" y="546" width="48" height="24"/>
  </objectgroup>
- <objectgroup color="#ff00ff" id="18" name="quest"/>
+ <objectgroup color="#ffff00" id="18" name="quest">
+  <object id="205" name="quest_to_lastdenn_then2" type="discover" x="768" y="2592" width="144" height="12">
+   <properties>
+    <property name="task" value="10"/>
+   </properties>
+  </object>
+  <object id="206" name="quest_to_lastdenn_then" type="discover" x="768" y="2604" width="144" height="12">
+   <properties>
+    <property name="task" value="10"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup color="#ffaa7f" id="21" name="warp">
   <object id="162" x="1056" y="2400" width="48" height="48"/>
  </objectgroup>

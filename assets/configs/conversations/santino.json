@@ -1,54 +1,54 @@
 {
-  "garrin_waiting"             : {
+  "garrin_waiting"            : {
     "phrases": {
       "1": {"text": ["What are you doing in our home?"]},
       "2": {"text": ["You must leave now. It's almost coming..."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "garrin_it_is_time"          : {
+  "garrin_it_is_time"         : {
     "phrases": {
       "1": {"text": ["What are you doing in our home?"]},
       "2": {"text": ["It's 9:00! Get out now! It's coming!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "paton_hiding"               : {
+  "paton_hiding"              : {
     "phrases": {
       "1": {"text": ["My dad told me to stay in hiding when it is coming."]},
       "2": {"text": ["But I'm scared!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "paton_silent"               : {
+  "paton_silent"              : {
     "phrases": {
       "1": {"text": [". . ."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "ghost_booing"               : {
+  "ghost_booing"              : {
     "phrases": {
       "1": {"text": ["huuuuuuuuuuuuuuuuuu"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "ghost_entering"             : {
+  "ghost_entering"            : {
     "phrases": {
       "1": {"face": "ghost1", "text": ["huuuuuuuuuuuuuuuuuu"]},
       "2": {"face": "boy17", "text": ["Aaaaaah!!"]},
       "3": {"face": "man12", "text": ["No! Paton! Come here, quick!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "paton_hiding_behind_garrin" : {
+  "paton_hiding_behind_garrin": {
     "phrases": {
       "1": {"face": "ghost1", "text": ["huuuuuuuuuuuuuuuuuu"]},
       "2": {"face": "boy17", "text": ["Aaaaaah!!"]},
       "3": {"face": "man12", "text": ["Paton, stay behind me!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "ghost_scaring"              : {
+  "ghost_scaring"             : {
     "phrases": {
       "1": {"face": "ghost1", "text": ["huuuuuuuuuuuuuuuuuu"]},
       "2": {"face": "boy17", "text": ["Aaaaaah!!"]},
       "3": {"face": "man12", "text": [". . ."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "garrin_leave_us"            : {
+  "garrin_leave_us"           : {
     "phrases": {
       "1": {"face": "man12", "text": ["Please leave..."]},
       "2": {"face": "man12", "text": ["There's nothing you can do..."]},
@@ -56,7 +56,7 @@
       "4": {"face": "man12", "text": ["It's alright Paton, I will protect you... Somehow..."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "garrin_what_to_do"          : {
+  "garrin_what_to_do"         : {
     "phrases": {
       "1": {"text": ["What to do... What to do..."]},
       "2": {"text": ["I have to protect Paton..."]},
@@ -65,74 +65,79 @@
       "5": {"text": ["Don't bother me!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "santino_prepare"            : {
+  "santino_prepare"           : {
     "phrases": {
       "1": {"text": ["Blessings upon you my child."]},
-      "2": {"text": ["Welcome to this temple. I am Father Santino."]},
+      "2": {"text": ["Welcome to this temple. I am Father Santino."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "3"}]},
       "3": {"text": ["I'm busy preparing this morning's service.", "Feel free to join us at 10:00."]},
-      "4": {"text": ["But if you're here to ask me about say... anything, please come see me after the service. Afterwards, I always take the time for questions from the congregation."], "choices": [{"command": "EXIT"}]}
+      "4": {"text": ["But if you're here for counseling, please come see me after the service."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "santino_service_start"      : {
+  "santino_service_start"     : {
     "phrases": {
-      "1": {"text": ["The service is about to start. Please join us if you'd like."], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["Blessings upon you my child."]},
+      "2": {"text": ["Welcome to this temple. I am Father Santino."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "3"}]},
+      "3": {"text": ["The service is about to start. Please join us if you'd like."]},
+      "4": {"text": ["But if you're here for counseling, please come see me after the service."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "santino_first_service"      : {
+  "santino_first_service"     : {
     "phrases": {
-      "1": {"text": ["[Preaching and praying.]"], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["[Preaching and praying.]"], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "2"}]},
+      "2": {"text": ["[More preaching and praying.]"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "santino_first_question_hour": {
+  "santino_first_counseling"  : {
     "phrases": {
-      "1": {"text": ["[Question about Ulrog?! Come see me tonight at 18:00.]"], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["[Question about Ulrog?!]"], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "2"}]},
+      "2": {"text": ["[Come see me tonight at 18:00. ACCEPT_NEW_QUEST oid]"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "santino_busy_errand"        : {
+  "santino_busy_errand"       : {
     "phrases": {
-      "1": {"text": ["I'm on my way to the mayor. If you need to see me, come to me at 16:00 after the afternoon service.", "I'll be answering questions to the congregation again."]},
-      "2": {"text": ["The afternoon service itself starts at 15:00. Feel free to join us."], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["I'm on my way to the mayor. If you need my counseling, come see me at 16:00 after the afternoon service."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "2"}]},
+      "2": {"text": ["The afternoon service itself starts at 15:00. Come join us if you'd like."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "garrin_vs_santino_1"        : {
+  "garrin_vs_santino_1"       : {
     "phrases": {
       "1": {"face": "man12", "text": ["It came again!"]},
       "2": {"face": "santino", "text": ["You're drunk."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "garrin_vs_santino_2"        : {
+  "garrin_vs_santino_2"       : {
     "phrases": {
       "1": {"face": "man12", "text": ["I tell you! It came again!"]},
       "2": {"face": "santino", "text": ["What do you mean?"]},
       "3": {"face": "man12", "text": ["This morning! At 9:00! Even before your service started!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "garrin_vs_santino_3"        : {
+  "garrin_vs_santino_3"       : {
     "phrases": {
       "1": {"face": "santino", "text": ["Are you certain that you saw it again?"]},
       "2": {"face": "man12", "text": ["Yes of course!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "garrin_vs_santino_4"        : {
+  "garrin_vs_santino_4"       : {
     "phrases": {
       "1": {"face": "man12", "text": ["Paton is really scared."]},
       "2": {"face": "santino", "text": ["I'm truly sorry to hear that."]},
       "3": {"face": "man12", "text": ["I didn't know what to do!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "garrin_vs_santino_5"        : {
+  "garrin_vs_santino_5"       : {
     "phrases": {
       "1": {"face": "man12", "text": ["I'm desperate!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "garrin_vs_santino_6"        : {
+  "garrin_vs_santino_6"       : {
     "phrases": {
       "1": {"face": "man12", "text": ["All I needed was some ho..."]},
       "2": {"face": "santino", "text": ["Stop pushing me!"]},
       "3": {"face": "santino", "text": ["Aaaah!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "garrin_vs_santino_dead"     : {
+  "garrin_vs_santino_dead"    : {
     "phrases": {
       "1": {"face": "santino", "text": [". . ."]},
       "2": {"face": "man12", "text": ["Oh no!"]},
@@ -141,7 +146,7 @@
       "5": {"face": "man12", "text": ["What have I done?"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "guards_see_garrin"          : {
+  "guards_see_garrin"         : {
     "phrases": {
       "1": {"face": "soldier01", "text": ["Halt!"]},
       "2": {"face": "soldier01", "text": ["I saw that!"]},

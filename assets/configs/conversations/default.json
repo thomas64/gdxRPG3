@@ -1,7 +1,14 @@
 {
-  "default": {
+  "default"    : {
     "phrases": {
       "1": {"text": ["Hello."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "almost_1930": {
+    "phrases": {
+      "1": {"text": ["Uh-oh, it's almost 19:30!"]},
+      "2": {"text": ["I should use the Crystal of Time to rewind time before it's too late."]},
+      "3": {"text": ["Or else, Grace will die, Adan will be destroyed, and I'll die too."], "choices": [{"command": "EXIT"}]}
     }
   }
 }

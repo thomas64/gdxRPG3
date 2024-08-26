@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="22" height="22" tilewidth="24" tileheight="24" infinite="0" nextlayerid="17" nextobjectid="37">
+<map version="1.11" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="22" height="22" tilewidth="24" tileheight="24" infinite="0" nextlayerid="17" nextobjectid="37">
  <properties>
   <property name="bgm" value="bgm_inn"/>
   <property name="step_sound" value="wood"/>
@@ -86,7 +86,7 @@
   <object id="36" name="note_bookcase" x="48" y="120" width="42" height="48"/>
  </objectgroup>
  <objectgroup color="#ff007f" id="15" name="enemy">
-  <object id="25" name="blue_bat" type="f" x="144" y="408" width="48" height="24">
+  <object id="25" name="blue_bat" type="f" x="48" y="456" width="48" height="24">
    <properties>
     <property name="battleId" value="quest_honeywood_inn_price-1"/>
    </properties>

@@ -9,7 +9,7 @@
         "taskPhrase"   : "Search for a clue about where Grace went.",
         "updatedPhrase": "Find one of Grace's ribbons.",
         "type"         : "FIND_ITEM",
-        "target"       : {"grace_ribbon": 1},
+        "target"       : {"basic_grace_ribbon": 1},
         "isOptional"   : true,
         "linkedWith"   : ["2"]
       },

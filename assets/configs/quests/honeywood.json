@@ -75,8 +75,10 @@
         "type"      : "DISCOVER"
       },
       "11": {
-        "taskPhrase": "Find the priest of Lastdenn.",
-        "type"      : "DISCOVER"
+        "taskPhrase"     : "Find the priest of Lastdenn.",
+        "type"           : "DELIVER_MESSAGE",
+        "conversationIds": ["santino_prepare", "santino_service_start", "santino_first_service", "santino_first_counseling", "santino_busy_errand"],
+        "isResettable"   : false
       }
     }
   },
@@ -126,7 +128,7 @@
         "type"           : "DELIVER_ITEM",
         "target"         : {"gold": 3},
         "targetAlternate": {"gold": 4},
-        "conversationId" : "quest_get_horseshoes"
+        "conversationIds": ["quest_get_horseshoes"]
       },
       "14": {
         "taskPhrase": "                  [Optional] Get 1 extra gold piece from Jaron for the blacksmith.",
@@ -136,15 +138,15 @@
         "isOptional": true
       },
       "15": {
-        "taskPhrase"    : "            Deliver Theodore's lost ring to Mrs. Johanna.",
-        "type"          : "DELIVER_ITEM",
-        "target"        : {"basic_silver_ring": 1},
-        "conversationId": "mrs_johanna"
+        "taskPhrase"     : "            Deliver Theodore's lost ring to Mrs. Johanna.",
+        "type"           : "DELIVER_ITEM",
+        "target"         : {"basic_silver_ring": 1},
+        "conversationIds": ["mrs_johanna"]
       },
       "16": {
-        "taskPhrase"    : "            Tell Kaidan to come home to Jaron.",
-        "type"          : "DELIVER_MESSAGE",
-        "conversationId": "kaidan_come_home"
+        "taskPhrase"     : "            Tell Kaidan to come home to Jaron.",
+        "type"           : "DELIVER_MESSAGE",
+        "conversationIds": ["kaidan_come_home"]
       },
       "17": {
         "taskPhrase": "            Report back to Jaron.",
@@ -267,10 +269,10 @@
         "type"      : "CHECK"
       },
       "5": {
-        "taskPhrase"    : "            Deliver the letter to the Fairy Shop.",
-        "type"          : "DELIVER_ITEM",
-        "target"        : {"letter_to_fairy_shop": 1},
-        "conversationId": "fairy_shop"
+        "taskPhrase"     : "            Deliver the letter to the Fairy Shop.",
+        "type"           : "DELIVER_ITEM",
+        "target"         : {"letter_to_fairy_shop": 1},
+        "conversationIds": ["fairy_shop"]
       },
       "6": {
         "taskPhrase": "            Return to the elder with the package from the Fairy Shop.",
@@ -278,11 +280,11 @@
         "target"    : {"fine_fairy_ring": 1}
       },
       "9": {
-        "taskPhrase"    : "            Ask Luana to accompany you on your travels. She is at Honeywood Farm in the northeast of the village.",
-        "type"          : "DELIVER_MESSAGE",
-        "conversationId": "luana_join",
-        "isResettable"  : false,
-        "linkedWith"    : ["2"]
+        "taskPhrase"     : "            Ask Luana to accompany you on your travels. She is at Honeywood Farm in the northeast of the village.",
+        "type"           : "DELIVER_MESSAGE",
+        "conversationIds": ["luana_join"],
+        "isResettable"   : false,
+        "linkedWith"     : ["2"]
       }
     }
   }

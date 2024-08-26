@@ -2,7 +2,7 @@
   "note_lastdenn_temple": {
     "phrases": {
       "1": {"text": ["Lastdenn Temple"]},
-      "2": {"text": ["Services daily at 10:00 and 15:00.", "Question hour daily at 11:00 and 16:00."], "choices": [{"command": "EXIT"}]}
+      "2": {"text": ["Services daily at 10:00 and 15:00.", "Counseling daily at 11:00 and 16:00."], "choices": [{"command": "EXIT"}]}
     }
   },
   "note_lastdenn_inn"   : {
