@@ -1,19 +1,16 @@
 package nl.t64.cot.screens.world.schedule
 
-import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.mapManager
-import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.screens.world.entity.*
 import nl.t64.cot.screens.world.entity.Direction.*
 import nl.t64.cot.screens.world.entity.EntityState.*
-import nl.t64.cot.screens.world.entity.events.UpdateScheduledEntityEvent
 
 
 class HoneywoodEquipShop : EntitySchedule() {
 
     override val entity = Entity("man01", InputEmpty(), PhysicsScheduledNpc(), GraphicsScheduledNpc("man01"))
-    private val invisibleTalking = Entity("man01", InputEmpty(), PhysicsScheduledNpc(), GraphicsEmpty())
+    override val invisibleTalking = Entity("man01", InputEmpty(), PhysicsScheduledNpc(), GraphicsEmpty())
 
     override val scheduleParts: List<SchedulePart> = listOf(
         // @formatter:off
@@ -27,23 +24,11 @@ class HoneywoodEquipShop : EntitySchedule() {
         if (mapManager.currentMap.mapTitle == "honeywood"
             && gameData.clock.isCurrentTimeInBetween("09:01", "17:01")
         ) {
-            setupInvisibleTalking()
+            val part = SchedulePart("honeywood", "09:01", "17:01", NONE, INVISIBLE, "equipment3", "equipment3", "equipshop_honeywood")
+            setupInvisibleTalking(part)
         } else {
             removeInvisibleTalking()
         }
-    }
-
-    private fun setupInvisibleTalking() {
-        val part = SchedulePart("honeywood", "09:01", "17:01", NONE, INVISIBLE, "equipment3", "equipment3", "equipshop_honeywood")
-        val event = UpdateScheduledEntityEvent(part.state, part.direction, part.getCurrentPosition(), part.conversationId)
-        invisibleTalking.send(event)
-        worldScreen.addScheduledEntity(invisibleTalking)
-        brokerManager.actionObservers.addObserver(invisibleTalking)
-    }
-
-    private fun removeInvisibleTalking() {
-        brokerManager.actionObservers.removeObserver(invisibleTalking)
-        worldScreen.removeScheduledEntity(invisibleTalking)
     }
 
 }

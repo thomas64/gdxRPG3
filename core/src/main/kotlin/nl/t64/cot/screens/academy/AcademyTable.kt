@@ -4,10 +4,14 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import nl.t64.cot.Utils
+import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.resourceManager
+import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.skills.SkillDatabase
 import nl.t64.cot.components.party.skills.SkillItem
+import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.screens.inventory.BaseTable
+import nl.t64.cot.screens.inventory.InventoryUtils
 import nl.t64.cot.screens.inventory.ListenerKeyVertical
 
 
@@ -51,19 +55,36 @@ internal class AcademyTable(academyId: String, tooltip: AcademyTooltip) : BaseTa
         skillsToTrain.forEachIndexed { index, skillItem -> fillRow(skillItem, index) }
     }
 
-    private fun fillRow(skillItem: SkillItem, index: Int) {
-        table.add(createImageOf(skillItem.id.name))
-        val skillName = Label(skillItem.name, LabelStyle(font, Color.BLACK))
+    private fun fillRow(trainerSkill: SkillItem, index: Int) {
+        val (imageColor, labelColor) = createColorsFrom(trainerSkill)
+        table.add(createImageOf(trainerSkill.id.name).apply { color = imageColor })
+        val skillName = Label(trainerSkill.name, LabelStyle(font, labelColor))
         table.add(skillName).padLeft(SECOND_COLUMN_PAD_LEFT)
-        table.add(skillItem.rank.toString())
+        val skillRank = Label(trainerSkill.rank.toString(), LabelStyle(font, labelColor))
+        table.add(skillRank)
         table.add("").row()
         scrollScrollPane()
-        super.possibleSetSelected(index, skillName, skillItem)
+        super.possibleSetSelected(index, skillName, trainerSkill)
     }
 
     private fun scrollScrollPane() {
         val selectedY = CONTAINER_HEIGHT - (ROW_HEIGHT * selectedIndex)
         scrollPane.scrollTo(0f, selectedY, 0f, 0f)
+    }
+
+    private fun createColorsFrom(trainerSkill: SkillItem): Pair<Color, Color> {
+        val selectedHero: HeroItem = InventoryUtils.getSelectedHero()
+        val heroSkill: SkillItem = selectedHero.getSkillById(trainerSkill.id)
+        val heroScholarSkill: Int = selectedHero.getCalculatedTotalSkillOf(SkillItemId.SCHOLAR)
+        val xpCost: Int = heroSkill.getXpCostForNextRank(trainerSkill, heroScholarSkill)
+        val goldCost: Int = heroSkill.getGoldCostForNextRank(trainerSkill)
+
+        if (xpCost > 0 && selectedHero.hasEnoughXpFor(xpCost) &&
+            goldCost > 0 && gameData.inventory.hasEnoughOfItem("gold", goldCost)) {
+            return Color.WHITE to Color.BLACK
+        } else {
+            return Color.BLACK to Color.LIGHT_GRAY
+        }
     }
 
 }

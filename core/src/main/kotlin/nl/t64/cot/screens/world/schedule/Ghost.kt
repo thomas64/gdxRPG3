@@ -4,17 +4,15 @@ import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.screens.world.entity.*
 import nl.t64.cot.screens.world.entity.Direction.*
-import nl.t64.cot.screens.world.entity.Entity
 import nl.t64.cot.screens.world.entity.EntityState.CRAWLING
-import nl.t64.cot.screens.world.entity.GraphicsScheduledNpc
-import nl.t64.cot.screens.world.entity.InputEmpty
-import nl.t64.cot.screens.world.entity.PhysicsScheduledNpc
 
 
 class Ghost : EntitySchedule() {
 
     override val entity = Entity("ghost1", InputEmpty(), PhysicsScheduledNpc(), GraphicsScheduledNpc("ghost1"))
+    override val invisibleTalking = Entity("", InputEmpty(), PhysicsScheduledNpc(), GraphicsEmpty())
 
     override val scheduleParts: List<SchedulePart> = listOf(
         // @formatter:off

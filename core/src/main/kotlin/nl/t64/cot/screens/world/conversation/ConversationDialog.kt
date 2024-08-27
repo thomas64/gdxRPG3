@@ -137,6 +137,9 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
 
     private fun createFaceTable(): Table {
         faceImage = Utils.getFaceImage(faceId)
+        if (conversationId.startsWith("bury_")) {
+            faceImage.color = Color.DARK_GRAY
+        }
         nameLabel = Label(graph.npcName, LabelStyle(BitmapFont(), Color.BLACK))
         return Table().apply {
             add<Actor>(faceImage).width(Constant.FACE_SIZE).padLeft(LEFT_PAD)
@@ -482,6 +485,9 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         val text = graph.getCurrentPhrase().joinToString(System.lineSeparator())
         if (text.isNotBlank()) {
             label.restart("{COLOR=BLACK}$text")
+            if (conversationId.startsWith("bury_")) {
+                label.skipToTheEnd()
+            }
         } else {
             label.setText("")
         }

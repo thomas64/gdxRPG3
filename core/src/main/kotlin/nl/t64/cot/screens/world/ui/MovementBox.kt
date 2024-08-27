@@ -59,10 +59,10 @@ internal class MovementBox {
     }
 
     private fun createTable(): Table {
-        val debugSkin = Skin()
-        debugSkin.add("default", style)
+        val tableSkin = Skin()
+        tableSkin.add("default", style)
 
-        return Table(debugSkin).apply {
+        return Table(tableSkin).apply {
             defaults().width(TABLE_WIDTH)
             padTop(PAD).padBottom(PAD)
             background = Utils.createTransparency()

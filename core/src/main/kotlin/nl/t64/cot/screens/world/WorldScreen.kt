@@ -383,7 +383,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
         gridRenderer.possibleRender()
         debugRenderer.possibleRenderObjects(doorList + lootList + npcEntities + visibleScheduledEntities + player)
         debugBox.possibleUpdate(dt)
-        buttonsBox.update(dt)
+        buttonsBox.update(camera.isZoomPossible(), dt)
         movementBox.update(player.moveSpeed, dt)
         partyWindow.update(dt)
         clockBox.render(dt)

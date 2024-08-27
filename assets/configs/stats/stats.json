@@ -9,7 +9,7 @@
       "- 'Intelligence' increases the damage you inflict with offensive magic spells in combat.",
       "  Each rank in 'Intelligence' increases 'Spell Damage' by 5%.",
       "",
-      "- Each 6 ranks in 'Intelligence' increases AP by 1."
+      "- Each 10 ranks in 'Intelligence' increases AP by 1."
     ]
   },
   "dexterity"   : {
@@ -19,7 +19,7 @@
       "- 'Dexterity' increases the damage you inflict with dexterity based weapons in combat.",
       "  Each rank in 'Dexterity' increases 'Damage' by 5%.",
       "",
-      "- Each 6 ranks in 'Dexterity' increases AP by 1."
+      "- Each 10 ranks in 'Dexterity' increases AP by 1."
     ]
   },
   "strength"    : {
@@ -29,7 +29,7 @@
       "- 'Strength' increases the damage you inflict with strength based weapons in combat.",
       "  Each rank in 'Strength' increases 'Damage' by 5%.",
       "",
-      "- Each 6 ranks in 'Strength' increases AP by 1."
+      "- Each 10 ranks in 'Strength' increases AP by 1."
     ]
   },
   "speed"       : {
@@ -39,7 +39,7 @@
       "- 'Speed' increases your combat initiative.",
       "  More 'Speed' means a faster turn rate.",
       "",
-      "- Each 3 ranks in 'Speed' increases AP by 1."
+      "- Each 6 ranks in 'Speed' increases AP by 1."
     ]
   },
   "willpower"   : {

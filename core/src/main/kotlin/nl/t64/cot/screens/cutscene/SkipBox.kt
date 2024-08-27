@@ -49,10 +49,10 @@ internal class SkipBox {
     }
 
     private fun createTable(): Table {
-        val debugSkin = Skin()
-        debugSkin.add("default", LabelStyle(BitmapFont(), Color.WHITE))
+        val tableSkin = Skin()
+        tableSkin.add("default", LabelStyle(BitmapFont(), Color.WHITE))
 
-        return Table(debugSkin).apply {
+        return Table(tableSkin).apply {
             defaults().width(TABLE_WIDTH).align(Align.left)
             pad(PAD, PAD_LEFT, PAD, PAD)
             background = Utils.createTransparency()

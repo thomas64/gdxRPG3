@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.scenes.scene2d.Stage
+import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.scenes.scene2d.ui.Table
@@ -30,38 +31,38 @@ internal class ButtonBox {
         shapeRenderer.dispose()
     }
 
-    fun update(dt: Float) {
+    fun update(isMinimapPossible: Boolean, dt: Float) {
         table.clear()
 
         val extraMargin: Float
-        if (Utils.isGamepadConnected()) {
-            table.add("Action")
-            table.add("[ A ]").row()
-            table.add("Inventory")
-            table.add("[ Y ]").row()
-            table.add("Quest log")
-            table.add("[ X ]").row()
-            table.add("Map")
-            table.add("[ Select ]").row()
-            table.add("Party")
-            table.add("[ R-Stick ]").row()
-            table.add("Manual")
-            table.add("[ L-Stick ]")
-            extraMargin = GAMEPAD_EXTRA_MARGIN
+        val actions = if (Utils.isGamepadConnected()) {
+            listOf(
+                "Action" to "[ A ]",
+                "Inventory" to "[ Y ]",
+                "Quest log" to "[ X ]",
+                "Map" to "[ Select ]",
+                "Party" to "[ R-Stick ]",
+                "Manual" to "[ L-Stick ]"
+            ).also { extraMargin = GAMEPAD_EXTRA_MARGIN }
         } else {
-            table.add("Action")
-            table.add("[ A ]").row()
-            table.add("Inventory")
-            table.add("[ I ]").row()
-            table.add("Quest log")
-            table.add("[ L ]").row()
-            table.add("Map")
-            table.add("[ M ]").row()
-            table.add("Party")
-            table.add("[ P ]").row()
-            table.add("Manual")
-            table.add("[ H ]")
-            extraMargin = 0f
+            listOf(
+                "Action" to "[ A ]",
+                "Inventory" to "[ I ]",
+                "Quest log" to "[ L ]",
+                "Map" to "[ M ]",
+                "Party" to "[ P ]",
+                "Manual" to "[ H ]"
+            ).also { extraMargin = 0f }
+        }
+
+        actions.forEach { (action, button) ->
+            val labelStyle = if (action == "Map" && !isMinimapPossible) {
+                LabelStyle(BitmapFont(), Color.GRAY)
+            } else {
+                LabelStyle(BitmapFont(), Color.WHITE)
+            }
+            table.add(Label(action, labelStyle))
+            table.add(Label(button, labelStyle)).row()
         }
 
         table.width = TABLE_WIDTH + extraMargin
@@ -80,10 +81,10 @@ internal class ButtonBox {
     }
 
     private fun createTable(): Table {
-        val debugSkin = Skin()
-        debugSkin.add("default", LabelStyle(BitmapFont(), Color.WHITE))
+        val tableSkin = Skin()
+        tableSkin.add("default", LabelStyle(BitmapFont(), Color.WHITE))
 
-        return Table(debugSkin).apply {
+        return Table(tableSkin).apply {
             defaults().width(TABLE_WIDTH).align(Align.left)
             columnDefaults(1).width(SECOND_COLUMN_WIDTH)
             padLeft(PAD_LEFT).padTop(PAD).padBottom(PAD)

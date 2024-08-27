@@ -55,10 +55,10 @@ class Scenario {
     }
 
     private fun addItemsToStorage() {
-        val gloves = InventoryDatabase.createInventoryItem("basic_light_shoulders")
+        val shoulders = InventoryDatabase.createInventoryItem("basic_light_shoulders")
         val gold = InventoryDatabase.createInventoryItem("gold", 4)
         val potion = InventoryDatabase.createInventoryItem("curing_potion")
-        gameData.storage.autoSetItem(gloves)
+        gameData.storage.autoSetItem(shoulders)
         gameData.storage.autoSetItem(gold)
         gameData.storage.autoSetItem(potion)
     }

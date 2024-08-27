@@ -3,18 +3,15 @@ package nl.t64.cot.screens.world.schedule
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.Utils.worldScreen
+import nl.t64.cot.screens.world.entity.*
 import nl.t64.cot.screens.world.entity.Direction.*
-import nl.t64.cot.screens.world.entity.Entity
-import nl.t64.cot.screens.world.entity.EntityState.IDLE
-import nl.t64.cot.screens.world.entity.EntityState.WALKING
-import nl.t64.cot.screens.world.entity.GraphicsScheduledNpc
-import nl.t64.cot.screens.world.entity.InputEmpty
-import nl.t64.cot.screens.world.entity.PhysicsScheduledNpc
+import nl.t64.cot.screens.world.entity.EntityState.*
 
 
 class Santino : EntitySchedule() {
 
     override val entity = Entity("santino", InputEmpty(), PhysicsScheduledNpc(), GraphicsScheduledNpc("santino"))
+    override val invisibleTalking = Entity("santino", InputEmpty(), PhysicsScheduledNpc(), GraphicsEmpty())
 
     override val scheduleParts: List<SchedulePart> =
         morningRoutine() +
@@ -24,15 +21,15 @@ class Santino : EntitySchedule() {
 
     private fun morningRoutine() = listOf(
         // @formatter:off
-        SchedulePart("lastdenn_church", "07:30", "09:00", EAST,  IDLE,    "santino1", "santino1", "santino_prepare"),
-        SchedulePart("lastdenn_church", "09:00", "09:01", SOUTH, WALKING, "santino1", "santino2", "santino_service_start"),
-        SchedulePart("lastdenn_church", "09:01", "09:20", EAST,  WALKING, "santino2", "santino3", "santino_service_start"),
-        SchedulePart("lastdenn_church", "09:20", "09:45", NORTH, WALKING, "santino3", "santino4", "santino_service_start"),
-        SchedulePart("lastdenn_church", "09:45", "09:55", EAST,  WALKING, "santino4", "santino5", "santino_service_start"),
-        SchedulePart("lastdenn_church", "09:55", "10:00", SOUTH, IDLE,    "santino5", "santino5", "santino_service_start"),
-        SchedulePart("lastdenn_church", "10:00", "11:00", SOUTH, IDLE,    "santino5", "santino5", "santino_first_service"),
-        SchedulePart("lastdenn_church", "11:00", "11:02", WEST,  WALKING, "santino5", "santino4"),
-        SchedulePart("lastdenn_church", "11:02", "12:00", SOUTH, IDLE,    "santino4", "santino4", "santino_first_counseling"),
+        SchedulePart("lastdenn_church", "07:30", "09:00", EAST,  IDLE,     "santino1", "santino1", "santino_prepare"),
+        SchedulePart("lastdenn_church", "09:00", "09:01", SOUTH, WALKING,  "santino1", "santino2", "santino_service_start"),
+        SchedulePart("lastdenn_church", "09:01", "09:20", EAST,  WALKING,  "santino2", "santino3", "santino_service_start"),
+        SchedulePart("lastdenn_church", "09:20", "09:45", NORTH, WALKING,  "santino3", "santino4", "santino_service_start"),
+        SchedulePart("lastdenn_church", "09:45", "09:55", EAST,  WALKING,  "santino4", "santino5", "santino_service_start"),
+        SchedulePart("lastdenn_church", "09:55", "10:00", SOUTH, IDLE,     "santino5", "santino5", "santino_service_start"),
+        SchedulePart("lastdenn_church", "10:00", "11:00", SOUTH, IMMOBILE, "santino5", "santino5", "santino_first_service"),
+        SchedulePart("lastdenn_church", "11:00", "11:02", WEST,  WALKING,  "santino5", "santino4"),
+        SchedulePart("lastdenn_church", "11:02", "12:00", SOUTH, IDLE,     "santino4", "santino4", "santino_first_counseling"),
         // @formatter:on
     )
 
@@ -67,11 +64,19 @@ class Santino : EntitySchedule() {
 
     override fun handleSideEffects() {
         if (mapManager.currentMap.mapTitle == "lastdenn_church") {
-            if (gameData.clock.isCurrentTimeAt("10:00")) {
+            if (gameData.clock.isCurrentTimeAt("09:59")) {
                 worldScreen.justFadeAndReloadNpcs()
+                gameData.clock.setTimeOfDay("10:00")
             }
-            if (gameData.clock.isCurrentTimeAt("11:00")) {
+            if (gameData.clock.isCurrentTimeInBetween("10:00", "11:00")) {
+                val part = SchedulePart("lastdenn_church", "10:00", "11:00", NONE, INVISIBLE, "santino5a", "santino5a", "santino_first_service")
+                setupInvisibleTalking(part)
+            } else {
+                removeInvisibleTalking()
+            }
+            if (gameData.clock.isCurrentTimeAt("10:59")) {
                 worldScreen.justFadeAndReloadNpcs()
+                gameData.clock.setTimeOfDay("11:00")
             }
         }
         if (mapManager.currentMap.mapTitle == "lastdenn") {

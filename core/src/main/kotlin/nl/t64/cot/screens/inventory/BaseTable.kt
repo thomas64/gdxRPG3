@@ -155,6 +155,7 @@ abstract class BaseTable(private val tooltip: PersonalityTooltip) : WindowSelect
     }
 
     private fun Table.hasContent(): Boolean {
+        // todo, deze voorwaarde klopt niet meer, maar werkt nog wel. dit stamt af van school bovenaan spells table.
         val firstLineFirstNumber = children[2] as Label
         return children.size > 4
             || firstLineFirstNumber.text.isNotEmpty()

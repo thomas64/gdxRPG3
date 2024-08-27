@@ -10,6 +10,7 @@ import nl.t64.cot.screens.world.entity.events.UpdateScheduledEntityEvent
 abstract class EntitySchedule {
 
     protected abstract val entity: Entity
+    protected abstract val invisibleTalking: Entity
     protected abstract val scheduleParts: List<SchedulePart>
 
     fun update() {
@@ -62,5 +63,17 @@ abstract class EntitySchedule {
     }
 
     protected abstract fun handleSideEffects()
+
+    protected fun setupInvisibleTalking(part: SchedulePart) {
+        val event = UpdateScheduledEntityEvent(part.state, part.direction, part.getCurrentPosition(), part.conversationId)
+        invisibleTalking.send(event)
+        worldScreen.addScheduledEntity(invisibleTalking)
+        brokerManager.actionObservers.addObserver(invisibleTalking)
+    }
+
+    protected fun removeInvisibleTalking() {
+        brokerManager.actionObservers.removeObserver(invisibleTalking)
+        worldScreen.removeScheduledEntity(invisibleTalking)
+    }
 
 }
