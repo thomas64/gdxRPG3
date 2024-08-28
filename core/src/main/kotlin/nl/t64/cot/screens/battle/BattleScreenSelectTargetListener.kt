@@ -9,9 +9,10 @@ import nl.t64.cot.audio.playSe
 
 
 class BattleScreenSelectTargetListener(
-    private val enemy: (String) -> Unit,
+    private val enemy: (String, String) -> Unit,
     private val back: () -> Unit
 ) : InputListener() {
+    private lateinit var selectedAttack: String
 
     override fun keyDown(event: InputEvent, keycode: Int): Boolean {
         if (event.stage.actors.items.any { it is Dialog }) return true
@@ -25,13 +26,17 @@ class BattleScreenSelectTargetListener(
         return true
     }
 
+    fun setSelectedAttack(attack: String) {
+        selectedAttack = attack
+    }
+
     private fun InputEvent.handleEnter() {
-        val selected: String = getSelected() ?: return
-        when (selected) {
+        val selectedTarget: String = getSelected() ?: return
+        when (selectedTarget) {
             "Back" -> handleEscape(back)
             else -> {
                 playSe(AudioEvent.SE_MENU_CONFIRM)
-                enemy.invoke(selected)
+                enemy.invoke(selectedAttack, selectedTarget)
             }
         }
     }

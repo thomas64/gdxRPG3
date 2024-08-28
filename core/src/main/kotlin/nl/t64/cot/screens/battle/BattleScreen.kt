@@ -38,20 +38,24 @@ class BattleScreen : Screen {
     private lateinit var turnManager: TurnManager
     private lateinit var currentParticipant: Participant
 
-    private var selectedAttack: String? = null
-    private var selectedEnemy: String? = null
-    private var selectedPotion: BattlePotionItem? = null
-
     private val shapeRenderer = ShapeRenderer()
     private var heroTable: Table = Table()
     private var enemyTable: Table = Table()
     private var turnTable: Table = Table()
+    private var battleFieldTable: Table = Table()
+    private val battleField: BattleField = BattleField()
 
     private var buttonTableAction: Table = Table()
+    private var buttonTableMove: Table = Table()
     private var buttonTableAttack: Table = Table()
     private var buttonTableTarget: Table = Table()
     private var buttonTablePotion: Table = Table()
-    private val allButtonTables get() = listOf(buttonTableAction, buttonTableAttack, buttonTableTarget, buttonTablePotion)
+    private val allButtonTables
+        get() = listOf(buttonTableAction,
+                       buttonTableMove,
+                       buttonTableAttack,
+                       buttonTableTarget,
+                       buttonTablePotion)
 
     private var isBgmFading: Boolean = false
     private var isLoaded: Boolean = false
@@ -60,19 +64,22 @@ class BattleScreen : Screen {
     private var hasLost: Boolean = false
 
     private val listenerAction = BattleScreenSelectActionListener({ winBattle() },
+                                                                  { selectMove() },
                                                                   { selectAttack() },
                                                                   { selectPotion() },
                                                                   { showConfirmRestDialog() },
                                                                   { showFleeDialog() })
+    private val listenerMove = BattleScreenSelectMoveListener({ moveIsSelected(it) }, { returnToAction() })
     private val listenerAttack = BattleScreenSelectAttackListener({ attackIsSelected(it) }, { returnToAction() })
-    private val listenerTarget = BattleScreenSelectTargetListener({ targetIsSelected(it) }, { returnToAttack() })
-    private val listenerPotion = BattleScreenSelectPotionListener({ potionIsSelected(it) }, { returnToAction() })
+    private val listenerTarget = BattleScreenSelectTargetListener(::showConfirmAttackDialog, { returnToAttack() })
+    private val listenerPotion = BattleScreenSelectPotionListener({ showConfirmPotionDialog(it) }, { returnToAction() })
 
     companion object {
         fun load(battleId: String, battleObserver: BattleObserver) {
             val screen = screenManager.getScreen(ScreenType.BATTLE) as BattleScreen
             screen.battleObserver = BattleSubject(battleObserver)
             screen.battleId = battleId
+            screen.battleField.clear()
             screenManager.setScreen(ScreenType.BATTLE)
         }
     }
@@ -80,6 +87,8 @@ class BattleScreen : Screen {
     override fun show() {
         enemies = EnemyContainer(battleId)
         turnManager = TurnManager(gameData.party.getAllHeroesAlive(), enemies.getAll())
+        battleField.positionHeroes(gameData.party.getAllHeroesAlive())
+        battleField.positionEnemies(enemies.getAll())
 
         playBgm(AudioEvent.getRandomBattleMusic())
         isLoaded = false
@@ -131,6 +140,7 @@ class BattleScreen : Screen {
         BattleScreenBuilder.disposeAndClearTextures()
         updateHeroTable()
         updateEnemyTable()
+        updateBattleField()
 
         if (enemies.getAll().none { it.isAlive }) {
             winBattle()
@@ -206,6 +216,12 @@ class BattleScreen : Screen {
         stage.addActor(enemyTable)
     }
 
+    private fun updateBattleField() {
+        battleFieldTable.remove()
+        battleFieldTable = BattleScreenBuilder.createBattleFieldTable(battleField)
+        stage.addActor(battleFieldTable)
+    }
+
     private fun updateTurnTable() {
         turnTable.remove()
         turnTable = BattleScreenBuilder.createTurnTable(turnManager.participants)
@@ -214,20 +230,28 @@ class BattleScreen : Screen {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    private fun selectMove() {
+        buttonTableAction.remove()
+        setupMoveTable()
+    }
+
+    private fun moveIsSelected(newSpace: Int) {
+        if (battleField.heroSpaces[newSpace] == null) {
+            playSe(AudioEvent.SE_MENU_CONFIRM)
+            showConfirmMoveDialog(newSpace)
+        } else {
+            playSe(AudioEvent.SE_MENU_ERROR)
+        }
+    }
+
     private fun selectAttack() {
         buttonTableAction.remove()
         setupAttackTable()
     }
 
     private fun attackIsSelected(attack: String) {
-        selectedAttack = attack
         buttonTableAttack.remove()
-        setupTargetTable()
-    }
-
-    private fun targetIsSelected(target: String) {
-        selectedEnemy = target
-        showConfirmAttackDialog()
+        setupTargetTable(attack)
     }
 
     private fun selectPotion() {
@@ -235,23 +259,14 @@ class BattleScreen : Screen {
         setupPotionTable()
     }
 
-    private fun potionIsSelected(potion: BattlePotionItem) {
-        selectedPotion = potion
-        showConfirmPotionDialog()
-    }
-
     private fun returnToAction() {
-        selectedAttack = null
-        selectedEnemy = null
-        selectedPotion = null
+        buttonTableMove.remove()
         buttonTableAttack.remove()
         buttonTablePotion.remove()
         setupActionTable()
     }
 
     private fun returnToAttack() {
-        selectedAttack = null
-        selectedEnemy = null
         buttonTableTarget.remove()
         setupAttackTable()
     }
@@ -265,6 +280,14 @@ class BattleScreen : Screen {
         stage.keyboardFocus = buttonTableAction.children.last()
     }
 
+    private fun setupMoveTable() {
+        buttonTableMove = BattleScreenBuilder.createButtonTableMove(battleField)
+        stage.addActor(buttonTableMove)
+        buttonTableMove.addListener(listenerMove)
+        val secondToLast = buttonTableMove.children.size - 2
+        stage.keyboardFocus = buttonTableMove.children[secondToLast]
+    }
+
     private fun setupAttackTable() {
         buttonTableAttack = BattleScreenBuilder.createButtonTableAttack(currentParticipant)
         stage.addActor(buttonTableAttack)
@@ -272,9 +295,10 @@ class BattleScreen : Screen {
         stage.keyboardFocus = buttonTableAttack.children.last()
     }
 
-    private fun setupTargetTable() {
+    private fun setupTargetTable(selectedAttack: String) {
         buttonTableTarget = BattleScreenBuilder.createButtonTableTarget(enemies.getAll())
         stage.addActor(buttonTableTarget)
+        listenerTarget.setSelectedAttack(selectedAttack)
         buttonTableTarget.addListener(listenerTarget)
         stage.keyboardFocus = buttonTableTarget.children.last()
     }
@@ -289,8 +313,21 @@ class BattleScreen : Screen {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private fun showConfirmAttackDialog() {
-        val attackAction = AttackAction(currentParticipant.character, enemies.getEnemy(selectedEnemy!!), selectedAttack!!)
+    private fun showConfirmMoveDialog(selectedSpace: Int) {
+        val moveAction = MoveAction(battleField, currentParticipant.character, selectedSpace)
+        val message = moveAction.createConfirmationMessage()
+        val dialog = DialogQuestion({ moveConfirmed(moveAction) }, message)
+        dialog.show(stage, 0)
+    }
+
+    private fun moveConfirmed(moveAction: MoveAction) {
+        moveAction.handle()
+        returnToAction()
+        selectAttack()
+    }
+
+    private fun showConfirmAttackDialog(selectedAttack: String, selectedTarget: String) {
+        val attackAction = AttackAction(currentParticipant.character, enemies.getEnemy(selectedTarget), selectedAttack)
         val message = attackAction.createConfirmationMessage()
         val dialog = DialogQuestion({ attackConfirmed(attackAction) }, message)
         dialog.show(stage, 0)
@@ -298,8 +335,6 @@ class BattleScreen : Screen {
 
     private fun attackConfirmed(attackAction: AttackAction) {
         val messages: ArrayDeque<String> = attackAction.handle()
-        selectedAttack = null
-        selectedEnemy = null
         buttonTableTarget.remove()
         isDelayingTurn = true
         Utils.runWithDelay(0.5f) {
@@ -309,8 +344,8 @@ class BattleScreen : Screen {
         }
     }
 
-    private fun showConfirmPotionDialog() {
-        val potionAction = PotionAction(currentParticipant.character, selectedPotion!!)
+    private fun showConfirmPotionDialog(selectedPotion: BattlePotionItem) {
+        val potionAction = PotionAction(currentParticipant.character, selectedPotion)
         val message = potionAction.createConfirmationMessage()
         val dialog = DialogQuestion({ potionConfirmed(potionAction) }, message)
         dialog.show(stage, 0)
@@ -324,7 +359,6 @@ class BattleScreen : Screen {
             turnManager.setNextTurn()
             isDelayingTurn = false
         }
-        selectedPotion = null
         buttonTablePotion.remove()
         isDelayingTurn = true
         Utils.runWithDelay(0.5f) {
