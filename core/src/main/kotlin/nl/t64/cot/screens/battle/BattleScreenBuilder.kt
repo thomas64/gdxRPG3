@@ -149,7 +149,9 @@ object BattleScreenBuilder {
         return Table(skin).apply {
             defaults().width(60f).height(30f).center()
             battleField.enemySpaces.forEach {
-                if (it is EnemyItem && enemyCountMap[it.id]!! > 1) {
+                if (it != null && !it.isAlive) {
+                    add()
+                } else if (it != null && enemyCountMap[it.id]!! > 1) {
                     add(Container(Label(it.name.last().toString(), labelStyle)))
                 } else {
                     add()
@@ -158,16 +160,19 @@ object BattleScreenBuilder {
         }
     }
 
-    private fun createCharacterTable(spaces: List<Character?>, skin: Skin): Table {
+    private fun createCharacterTable(spaces: MutableList<Character?>, skin: Skin): Table {
         return Table(skin).apply {
             defaults().width(60f).height(60f).center()
-            spaces.forEach {
-                if (it == null) {
+            spaces.forEachIndexed { index, space ->
+                if (space == null) {
+                    add(Image(Utils.createFullBorderWhite()))
+                } else if (!space.isAlive) {
+                    spaces[index] = null
                     add(Image(Utils.createFullBorderWhite()))
                 } else {
                     add(Stack().apply {
                         add(Image(Utils.createFullBorderWhite()))
-                        add(Container(createImageOf(it)))
+                        add(Container(createImageOf(space)))
                     })
                 }
             }
@@ -261,6 +266,7 @@ object BattleScreenBuilder {
 
     private fun GdxList<String>.fillWithActions(): GdxList<String> {
         this.setItems(
+            "Calculate",
             "Move",
             "Attack",
             "Potion",

@@ -24,21 +24,41 @@ class AttackAction(
     private val cappedCriticalDamage: Int = criticalDamage.coerceAtMost(target.currentHp)
 
 
+    fun createCalculateMessage(): String {
+        val weapon: InventoryItem = attacker.getInventoryItem(InventoryGroup.WEAPON)!!
+        if (criticalHitPercentage <= 0) {
+            return """
+                3 AP
+                $selectedAttack ${target.name} with ${weapon.name} (${weapon.durability} uses)
+
+                Chance to hit:  $cappedHitPercentage%   |   Damage:  $damage""".trimIndent()
+        } else {
+            return """
+                3 AP
+                $selectedAttack ${target.name} with ${weapon.name} (${weapon.durability} uses)
+
+                Chance to hit:  $cappedHitPercentage%   |   Normal damage:  $damage
+                ----------------------------------------------------
+                Critical hit:  $criticalHitPercentage%   |   Critical damage:  $criticalDamage""".trimIndent()
+        }
+    }
+
     fun createConfirmationMessage(): String {
         val weapon: InventoryItem = attacker.getInventoryItem(InventoryGroup.WEAPON)!!
         if (criticalHitPercentage <= 0) {
             return """
                 Do you want to $selectedAttack ${target.name}
-                with ${weapon.name} (${weapon.durability}) ?
+                with ${weapon.name} (${weapon.durability} uses) for 3 AP ?
 
                 Chance to hit:  $cappedHitPercentage%   |   Damage:  $damage""".trimIndent()
         } else {
             return """
                 Do you want to $selectedAttack ${target.name}
-                with ${weapon.name} (${weapon.durability}) ?
+                with ${weapon.name} (${weapon.durability} uses) for 3 AP ?
 
-                Chance to hit (Damage):  $cappedHitPercentage%  ($damage)
-                Critical hit (Damage):      $criticalHitPercentage%  ($criticalDamage)""".trimIndent()
+                Chance to hit:  $cappedHitPercentage%   |   Normal damage:  $damage
+                ----------------------------------------------------
+                Critical hit:  $criticalHitPercentage%   |   Critical damage:  $criticalDamage""".trimIndent()
         }
     }
 

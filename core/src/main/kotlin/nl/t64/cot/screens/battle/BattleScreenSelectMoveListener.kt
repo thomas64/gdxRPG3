@@ -89,7 +89,7 @@ class BattleScreenSelectMoveListener(
         val leftColumn = moveTable.children[secondToLast] as List<String>
         val rightColumn = moveTable.children.last() as List<String>
 
-        val selected = if (leftColumn.hasKeyboardFocus()) leftColumn.selected else rightColumn.selected
+        val selected = (if (leftColumn.hasKeyboardFocus()) leftColumn.selected else rightColumn.selected) ?: return
         when (selected) {
             "Back" -> handleEscape(back)
             else -> move.invoke(selected.toInt() - 1)

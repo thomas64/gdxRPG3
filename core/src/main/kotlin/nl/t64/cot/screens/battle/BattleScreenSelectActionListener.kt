@@ -10,6 +10,7 @@ import nl.t64.cot.audio.playSe
 
 class BattleScreenSelectActionListener(
     private val winBattle: () -> Unit,
+    private val selectCalculate: () -> Unit,
     private val selectMove: () -> Unit,
     private val selectAttack: () -> Unit,
     private val selectPotion: () -> Unit,
@@ -37,6 +38,10 @@ class BattleScreenSelectActionListener(
 
     private fun InputEvent.handleEnter() {
         when (getSelected<String>()) {
+            "Calculate" -> {
+                playSe(AudioEvent.SE_MENU_CONFIRM)
+                selectCalculate.invoke()
+            }
             "Move" -> {
                 playSe(AudioEvent.SE_MENU_CONFIRM)
                 selectMove.invoke()

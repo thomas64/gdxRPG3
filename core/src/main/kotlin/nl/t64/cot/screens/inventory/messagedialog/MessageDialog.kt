@@ -45,8 +45,8 @@ class MessageDialog(private val message: String) {
         playClosingSound = false
     }
 
-    fun show(stage: Stage, event: AudioEvent) {
-        playSe(event)
+    fun show(stage: Stage, event: AudioEvent? = null) {
+        event?.let { playSe(it) }
         dialog.show(stage)
     }
 

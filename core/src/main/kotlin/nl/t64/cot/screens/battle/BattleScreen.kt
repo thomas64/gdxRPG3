@@ -64,13 +64,16 @@ class BattleScreen : Screen {
     private var hasLost: Boolean = false
 
     private val listenerAction = BattleScreenSelectActionListener({ winBattle() },
+                                                                  { selectCalculateAttack() },
                                                                   { selectMove() },
                                                                   { selectAttack() },
                                                                   { selectPotion() },
                                                                   { showConfirmRestDialog() },
                                                                   { showFleeDialog() })
     private val listenerMove = BattleScreenSelectMoveListener({ moveIsSelected(it) }, { returnToAction() })
+    private val listenerCalculateAttack = BattleScreenSelectAttackListener({ calculateAttackIsSelected(it) }, { returnToAction() })
     private val listenerAttack = BattleScreenSelectAttackListener({ attackIsSelected(it) }, { returnToAction() })
+    private val listenerCalculateTarget = BattleScreenSelectTargetListener(::showConfirmCalculateDialog, { returnToCalculateAttack() })
     private val listenerTarget = BattleScreenSelectTargetListener(::showConfirmAttackDialog, { returnToAttack() })
     private val listenerPotion = BattleScreenSelectPotionListener({ showConfirmPotionDialog(it) }, { returnToAction() })
 
@@ -244,6 +247,16 @@ class BattleScreen : Screen {
         }
     }
 
+    private fun selectCalculateAttack() {
+        buttonTableAction.remove()
+        setupCalculateAttackTable()
+    }
+
+    private fun calculateAttackIsSelected(attack: String) {
+        buttonTableAttack.remove()
+        setupCalculateTargetTable(attack)
+    }
+
     private fun selectAttack() {
         buttonTableAction.remove()
         setupAttackTable()
@@ -264,6 +277,11 @@ class BattleScreen : Screen {
         buttonTableAttack.remove()
         buttonTablePotion.remove()
         setupActionTable()
+    }
+
+    private fun returnToCalculateAttack() {
+        buttonTableTarget.remove()
+        setupCalculateAttackTable()
     }
 
     private fun returnToAttack() {
@@ -288,11 +306,26 @@ class BattleScreen : Screen {
         stage.keyboardFocus = buttonTableMove.children[secondToLast]
     }
 
+    private fun setupCalculateAttackTable() {
+        buttonTableAttack = BattleScreenBuilder.createButtonTableAttack(currentParticipant)
+        stage.addActor(buttonTableAttack)
+        buttonTableAttack.addListener(listenerCalculateAttack)
+        stage.keyboardFocus = buttonTableAttack.children.last()
+    }
+
     private fun setupAttackTable() {
         buttonTableAttack = BattleScreenBuilder.createButtonTableAttack(currentParticipant)
         stage.addActor(buttonTableAttack)
         buttonTableAttack.addListener(listenerAttack)
         stage.keyboardFocus = buttonTableAttack.children.last()
+    }
+
+    private fun setupCalculateTargetTable(selectedAttack: String) {
+        buttonTableTarget = BattleScreenBuilder.createButtonTableTarget(enemies.getAll())
+        stage.addActor(buttonTableTarget)
+        listenerCalculateTarget.setSelectedAttack(selectedAttack)
+        buttonTableTarget.addListener(listenerCalculateTarget)
+        stage.keyboardFocus = buttonTableTarget.children.last()
     }
 
     private fun setupTargetTable(selectedAttack: String) {
@@ -324,6 +357,13 @@ class BattleScreen : Screen {
         moveAction.handle()
         returnToAction()
         selectAttack()
+    }
+
+    private fun showConfirmCalculateDialog(selectedAttack: String, selectedTarget: String) {
+        val attackAction = AttackAction(currentParticipant.character, enemies.getEnemy(selectedTarget), selectedAttack)
+        val message = attackAction.createCalculateMessage()
+        val dialog = MessageDialog(message)
+        dialog.show(stage)
     }
 
     private fun showConfirmAttackDialog(selectedAttack: String, selectedTarget: String) {
