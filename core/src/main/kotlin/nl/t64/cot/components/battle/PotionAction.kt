@@ -5,9 +5,11 @@ import nl.t64.cot.components.party.inventory.BattlePotionItem
 
 
 class PotionAction(
-    private val character: Character,
+    currentParticipant: Participant,
     private val selectedPotion: BattlePotionItem
 ) {
+    private val character: Character = currentParticipant.character
+
 
     fun createConfirmationMessage(): String {
         return """

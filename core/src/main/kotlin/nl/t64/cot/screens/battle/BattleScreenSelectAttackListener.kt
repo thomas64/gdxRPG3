@@ -26,12 +26,14 @@ class BattleScreenSelectAttackListener(
     }
 
     private fun InputEvent.handleEnter() {
-        when (getSelected<String>()) {
-            "Strike" -> {
-                playSe(AudioEvent.SE_MENU_CONFIRM)
-                attack.invoke("Strike")
+        getSelected<String>()?.let {
+            when {
+                "Strike" in it -> {
+                    playSe(AudioEvent.SE_MENU_CONFIRM)
+                    attack("Strike")
+                }
+                "Back" in it -> handleEscape(back)
             }
-            "Back" -> handleEscape(back)
         }
     }
 

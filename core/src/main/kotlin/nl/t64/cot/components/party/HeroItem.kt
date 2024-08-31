@@ -227,12 +227,12 @@ class HeroItem(
     }
 
     fun getCalculatedActionPoints(): Int {
-        return ((getCalculatedTotalStatOf(StatItemId.SPEED) / 6f)
-                + ((getCalculatedTotalStatOf(StatItemId.INTELLIGENCE)
+        return ((getCalculatedTotalStatOf(StatItemId.INTELLIGENCE)
+                + getCalculatedTotalStatOf(StatItemId.DEXTERITY)
                 + getCalculatedTotalStatOf(StatItemId.STRENGTH)
-                + getCalculatedTotalStatOf(StatItemId.DEXTERITY)) / 10f)
-                // een step is 1 AP, een attack is 5 AP?
-                // loskomen van een close attack is x AP, wapen wisselen is x AP.
+                + getCalculatedTotalStatOf(StatItemId.SPEED)) / 10f
+                // een step is 1 AP, een attack is 3 AP?
+                // loskomen van een close attack is 2-3? AP, wapen wisselen is 3 AP?
                 ).roundToInt()
             .takeIf { it > 0f } ?: 1
     }

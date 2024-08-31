@@ -18,9 +18,7 @@ import nl.t64.cot.audio.playBgm
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.audio.stopAllBgm
 import nl.t64.cot.components.battle.*
-import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.inventory.BattlePotionItem
-import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.inventory.messagedialog.MessageDialog
@@ -68,7 +66,9 @@ class BattleScreen : Screen {
                                                                   { selectMove() },
                                                                   { selectAttack() },
                                                                   { selectPotion() },
+                                                                  {}, // todo
                                                                   { showConfirmRestDialog() },
+                                                                  { showConfirmEndTurnDialog() },
                                                                   { showFleeDialog() })
     private val listenerMove = BattleScreenSelectMoveListener({ moveIsSelected(it) }, { returnToAction() })
     private val listenerCalculateAttack = BattleScreenSelectAttackListener({ calculateAttackIsSelected(it) }, { returnToAction() })
@@ -90,8 +90,8 @@ class BattleScreen : Screen {
     override fun show() {
         enemies = EnemyContainer(battleId)
         turnManager = TurnManager(gameData.party.getAllHeroesAlive(), enemies.getAll())
-        battleField.positionHeroes(gameData.party.getAllHeroesAlive())
-        battleField.positionEnemies(enemies.getAll())
+        battleField.setPositionsHeroes(gameData.party.getAllHeroesAlive())
+        battleField.setPositionsEnemies(enemies.getAll())
 
         playBgm(AudioEvent.getRandomBattleMusic())
         isLoaded = false
@@ -299,11 +299,16 @@ class BattleScreen : Screen {
     }
 
     private fun setupMoveTable() {
-        buttonTableMove = BattleScreenBuilder.createButtonTableMove(battleField)
+        val currentIndex: Int = battleField.getIndexOf(currentParticipant.character)
+        buttonTableMove = BattleScreenBuilder.createButtonTableMove(currentIndex)
         stage.addActor(buttonTableMove)
         buttonTableMove.addListener(listenerMove)
-        val secondToLast = buttonTableMove.children.size - 2
-        stage.keyboardFocus = buttonTableMove.children[secondToLast]
+        if (currentIndex in 0..9) {
+            val secondToLast = buttonTableMove.children.size - 2
+            stage.keyboardFocus = buttonTableMove.children[secondToLast]
+        } else {
+            stage.keyboardFocus = buttonTableMove.children.last()
+        }
     }
 
     private fun setupCalculateAttackTable() {
@@ -329,7 +334,8 @@ class BattleScreen : Screen {
     }
 
     private fun setupTargetTable(selectedAttack: String) {
-        buttonTableTarget = BattleScreenBuilder.createButtonTableTarget(enemies.getAll())
+        val targetableEnemies: List<Character> = battleField.getTargetableEnemiesFor(currentParticipant)
+        buttonTableTarget = BattleScreenBuilder.createButtonTableTarget(targetableEnemies)
         stage.addActor(buttonTableTarget)
         listenerTarget.setSelectedAttack(selectedAttack)
         buttonTableTarget.addListener(listenerTarget)
@@ -347,7 +353,7 @@ class BattleScreen : Screen {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun showConfirmMoveDialog(selectedSpace: Int) {
-        val moveAction = MoveAction(battleField, currentParticipant.character, selectedSpace)
+        val moveAction = MoveAction(battleField, currentParticipant, selectedSpace)
         val message = moveAction.createConfirmationMessage()
         val dialog = DialogQuestion({ moveConfirmed(moveAction) }, message)
         dialog.show(stage, 0)
@@ -356,18 +362,17 @@ class BattleScreen : Screen {
     private fun moveConfirmed(moveAction: MoveAction) {
         moveAction.handle()
         returnToAction()
-        selectAttack()
     }
 
     private fun showConfirmCalculateDialog(selectedAttack: String, selectedTarget: String) {
-        val attackAction = AttackAction(currentParticipant.character, enemies.getEnemy(selectedTarget), selectedAttack)
+        val attackAction = AttackAction(currentParticipant, enemies.getEnemy(selectedTarget), selectedAttack)
         val message = attackAction.createCalculateMessage()
         val dialog = MessageDialog(message)
         dialog.show(stage)
     }
 
     private fun showConfirmAttackDialog(selectedAttack: String, selectedTarget: String) {
-        val attackAction = AttackAction(currentParticipant.character, enemies.getEnemy(selectedTarget), selectedAttack)
+        val attackAction = AttackAction(currentParticipant, enemies.getEnemy(selectedTarget), selectedAttack)
         val message = attackAction.createConfirmationMessage()
         val dialog = DialogQuestion({ attackConfirmed(attackAction) }, message)
         dialog.show(stage, 0)
@@ -385,7 +390,7 @@ class BattleScreen : Screen {
     }
 
     private fun showConfirmPotionDialog(selectedPotion: BattlePotionItem) {
-        val potionAction = PotionAction(currentParticipant.character, selectedPotion)
+        val potionAction = PotionAction(currentParticipant, selectedPotion)
         val message = potionAction.createConfirmationMessage()
         val dialog = DialogQuestion({ potionConfirmed(potionAction) }, message)
         dialog.show(stage, 0)
@@ -399,7 +404,6 @@ class BattleScreen : Screen {
             turnManager.setNextTurn()
             isDelayingTurn = false
         }
-        buttonTablePotion.remove()
         isDelayingTurn = true
         Utils.runWithDelay(0.5f) {
             messageDialog.show(stage, AudioEvent.SE_POTION)
@@ -407,7 +411,7 @@ class BattleScreen : Screen {
     }
 
     private fun showConfirmRestDialog() {
-        val restAction = RestAction(currentParticipant.character)
+        val restAction = RestAction(currentParticipant)
         val message = restAction.createConfirmationMessage()
         val dialog = DialogQuestion({ restConfirmed(restAction) }, message)
         dialog.show(stage, 0)
@@ -428,6 +432,25 @@ class BattleScreen : Screen {
         }
     }
 
+    private fun showConfirmEndTurnDialog() {
+        val dialog = DialogQuestion({ endTurnConfirmed() }, "End your turn?")
+        dialog.show(stage, 0)
+    }
+
+    private fun endTurnConfirmed() {
+        buttonTableAction.remove()
+        val message = "${currentParticipant.character.name} ended their turn."
+        val messageDialog = MessageDialog(message)
+        messageDialog.setActionAfterHide {
+            turnManager.setNextTurn()
+            isDelayingTurn = false
+        }
+        isDelayingTurn = true
+        Utils.runWithDelay(0.5f) {
+            messageDialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT)
+        }
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun takeTurnHero() {
@@ -442,11 +465,7 @@ class BattleScreen : Screen {
         if (isDelayingTurn) return
         isDelayingTurn = true
         Utils.runWithDelay(1f) {
-            val target: HeroItem = gameData.party.getAllHeroesAlive().random()
-            // todo, weaponName is niet de bedoeling, dit moet een 'spell' worden. body slam, bite, etc.
-            // de names van die weapons moeten dus ook niet in enemy.json staan.
-            val weaponName: String = currentParticipant.character.getInventoryItem(InventoryGroup.WEAPON)!!.name
-            val attackAction = AttackAction(currentParticipant.character, target, weaponName) // ← hier dus
+            val attackAction = AttackAction.createForEnemy(currentParticipant)
             val messages: ArrayDeque<String> = attackAction.handle()
             turnManager.setNextTurn()
             showMessages(messages)
@@ -505,8 +524,8 @@ class BattleScreen : Screen {
         }
 
         val message = """
-            Fleeing will return you to the location of
-            your last save with all progress intact.
+            When successful, fleeing will return you to the the location of
+            your last save with all progress intact. Otherwise, the turn ends.
 
             Do you want to flee?""".trimIndent()
         val dialog = DialogQuestion({ battleFledExitScreen() }, message)

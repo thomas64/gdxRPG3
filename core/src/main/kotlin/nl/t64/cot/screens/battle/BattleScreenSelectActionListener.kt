@@ -14,7 +14,9 @@ class BattleScreenSelectActionListener(
     private val selectMove: () -> Unit,
     private val selectAttack: () -> Unit,
     private val selectPotion: () -> Unit,
+    private val selectWeapon: () -> Unit,
     private val rest: () -> Unit,
+    private val endTurn: () -> Unit,
     private val fleeBattle: () -> Unit
 ) : InputListener() {
 
@@ -37,30 +39,17 @@ class BattleScreenSelectActionListener(
     }
 
     private fun InputEvent.handleEnter() {
-        when (getSelected<String>()) {
-            "Calculate" -> {
-                playSe(AudioEvent.SE_MENU_CONFIRM)
-                selectCalculate.invoke()
-            }
-            "Move" -> {
-                playSe(AudioEvent.SE_MENU_CONFIRM)
-                selectMove.invoke()
-            }
-            "Attack" -> {
-                playSe(AudioEvent.SE_MENU_CONFIRM)
-                selectAttack.invoke()
-            }
-            "Potion" -> {
-                playSe(AudioEvent.SE_MENU_CONFIRM)
-                selectPotion.invoke()
-            }
-            "Rest" -> {
-                playSe(AudioEvent.SE_MENU_CONFIRM)
-                rest.invoke()
-            }
-            "Flee" -> {
-                playSe(AudioEvent.SE_MENU_CONFIRM)
-                fleeBattle.invoke()
+        getSelected<String>()?.let { selected ->
+            playSe(AudioEvent.SE_MENU_CONFIRM)
+            when {
+                "Calculate" in selected -> selectCalculate()
+                "Move" in selected -> selectMove()
+                "Attack" in selected -> selectAttack()
+                "Potion" in selected -> selectPotion()
+                "Switch" in selected -> selectWeapon()
+                "Rest" in selected -> rest()
+                "End" in selected -> endTurn()
+                "Flee" in selected -> fleeBattle()
             }
         }
     }

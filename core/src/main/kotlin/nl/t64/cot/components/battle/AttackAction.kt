@@ -1,5 +1,6 @@
 package nl.t64.cot.components.battle
 
+import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.inventory.InventoryGroup
@@ -9,10 +10,12 @@ import kotlin.random.Random
 
 
 class AttackAction(
-    private val attacker: Character,
+    currentParticipant: Participant,
     private val target: Character,
-    private val selectedAttack: String
+    private val selectedAttack: String,
 ) {
+    private val attacker: Character = currentParticipant.character
+
     private val hitPercentage: Int = attacker.getCalculatedTotalHit()
     private val cappedHitPercentage: Int = hitPercentage.coerceAtMost(100)
     private val isHit: Boolean = hitPercentage > Random.nextInt(0, 100)
@@ -22,6 +25,17 @@ class AttackAction(
     private val isCriticalHit: Boolean = criticalHitPercentage > Random.nextInt(0, 100)
     private val criticalDamage: Int = (damage * 1.5f).toInt()
     private val cappedCriticalDamage: Int = criticalDamage.coerceAtMost(target.currentHp)
+
+    companion object {
+        fun createForEnemy(currentParticipant: Participant): AttackAction {
+            // todo, random target is niet de bedoeling. deze moet 'ai' uitgekozen worden.
+            val target: HeroItem = gameData.party.getAllHeroesAlive().random()
+            // todo, weaponName is niet de bedoeling, dit moet een 'spell' worden. body slam, bite, etc.
+            // de names van die weapons moeten dus ook niet in enemy.json staan.
+            val weaponName: String = currentParticipant.character.getInventoryItem(InventoryGroup.WEAPON)!!.name
+            return AttackAction(currentParticipant, target, weaponName) // ← hier dus
+        }
+    }
 
 
     fun createCalculateMessage(): String {
@@ -47,14 +61,14 @@ class AttackAction(
         val weapon: InventoryItem = attacker.getInventoryItem(InventoryGroup.WEAPON)!!
         if (criticalHitPercentage <= 0) {
             return """
-                Do you want to $selectedAttack ${target.name}
-                with ${weapon.name} (${weapon.durability} uses) for 3 AP ?
+                Do you want to $selectedAttack ${target.name} with
+                ${weapon.name} (${weapon.durability} uses) for 3 AP ?
 
                 Chance to hit:  $cappedHitPercentage%   |   Damage:  $damage""".trimIndent()
         } else {
             return """
-                Do you want to $selectedAttack ${target.name}
-                with ${weapon.name} (${weapon.durability} uses) for 3 AP ?
+                Do you want to $selectedAttack ${target.name} with
+                ${weapon.name} (${weapon.durability} uses) for 3 AP ?
 
                 Chance to hit:  $cappedHitPercentage%   |   Normal damage:  $damage
                 ----------------------------------------------------

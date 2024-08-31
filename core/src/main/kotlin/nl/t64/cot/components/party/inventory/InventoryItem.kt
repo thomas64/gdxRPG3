@@ -205,6 +205,17 @@ data class InventoryItem(
         return id.equals(candidateId, true)
     }
 
+    fun getWeaponRange(): Int {
+        return when (skill) {
+            SkillItemId.SWORD,
+            SkillItemId.HAFTED,
+            SkillItemId.POLE -> 0
+            SkillItemId.THROWN -> 1
+            SkillItemId.MISSILE -> 2
+            else -> throw IllegalArgumentException("Only possible to ask a Weapon Skill.")
+        }
+    }
+
     fun getBuyPriceTotal(totalMerchant: Int): Int {
         return getBuyPricePiece(totalMerchant) * amount
     }

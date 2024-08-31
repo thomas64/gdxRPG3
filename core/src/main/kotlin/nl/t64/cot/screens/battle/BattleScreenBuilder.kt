@@ -17,6 +17,7 @@ import nl.t64.cot.components.battle.EnemyItem
 import nl.t64.cot.components.battle.Participant
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.inventory.BattlePotionItem
+import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.components.party.stats.StatItemId
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.disposeAndClear
@@ -74,7 +75,7 @@ object BattleScreenBuilder {
         add(Table(createSkin()).apply {
             left()
             defaults().left()
-            add(hero.name).colspan(2).row()
+            add("${hero.name}  (${hero.getCalculatedActionPoints()} AP)").colspan(2).row()
             add("HP:").width(50f)
             add(createHpBar(hero)).width(BAR_WIDTH).height(BAR_HEIGHT).row()
             add("SP:").width(50f)
@@ -246,9 +247,14 @@ object BattleScreenBuilder {
         return createStyledEmptyList<String>().fillWithActions().toActionTable()
     }
 
-    fun createButtonTableMove(battleField: BattleField): Table {
-        val column1: GdxList<String> = createStyledEmptyList<String>().fillWithSpaces1()
-        val column2: GdxList<String> = createStyledEmptyList<String>().fillWithSpaces2()
+    fun createButtonTableMove(currentIndex: Int): Table {
+        val (column1, column2) = if (currentIndex in 0..9) {
+            createStyledEmptyList<String>().fillWithSpaces1(currentIndex) to
+                createStyledEmptyList<String>().fillWithSpaces2(-1)
+        } else {
+            createStyledEmptyList<String>().fillWithSpaces1(-1) to
+                createStyledEmptyList<String>().fillWithSpaces2(currentIndex - 10)
+        }
         return createMoveTable(column1, column2)
     }
 
@@ -256,7 +262,7 @@ object BattleScreenBuilder {
         return createStyledEmptyList<String>().fillWithAttacksFor(currentParticipant).toAttackTable()
     }
 
-    fun createButtonTableTarget(enemies: List<EnemyItem>): Table {
+    fun createButtonTableTarget(enemies: List<Character>): Table {
         return createStyledEmptyList<String>().fillWithTargets(enemies).toTargetTable()
     }
 
@@ -266,39 +272,44 @@ object BattleScreenBuilder {
 
     private fun GdxList<String>.fillWithActions(): GdxList<String> {
         this.setItems(
-            "Calculate",
-            "Move",
-            "Attack",
-            "Potion",
-            "Rest",
-            "Flee"
+            "Calculate hit and damage",
+            "Move (1+ AP)",
+            "Attack (? AP)",
+            "Potion (3 AP)",
+            "Switch weapon (3 AP)",
+            "Rest (2 AP)",
+            "End turn",
+            "Flee battle"
         )
         this.selectedIndex = -1
         return this
     }
 
-    private fun GdxList<String>.fillWithSpaces1(): GdxList<String> {
+    private fun GdxList<String>.fillWithSpaces1(index: Int): GdxList<String> {
         this.setItems("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Back")
-        this.selectedIndex = -1
+        this.selectedIndex = index
         return this
     }
 
-    private fun GdxList<String>.fillWithSpaces2(): GdxList<String> {
+    private fun GdxList<String>.fillWithSpaces2(index: Int): GdxList<String> {
         this.setItems("11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "")
-        this.selectedIndex = -1
+        this.selectedIndex = index
         return this
     }
 
     private fun GdxList<String>.fillWithAttacksFor(current: Participant): GdxList<String> {
-        this.setItems(
-            "Strike",
-            "Back"
-        )
+        val range: Int? = current.character.getInventoryItem(InventoryGroup.WEAPON)?.getWeaponRange()
+
+        val attacks: List<String> =
+            range?.let { listOf("Strike (Range: ${it + 1}) (3 AP)", "Back") }
+                 ?: listOf("No weapon equipped", "Back")
+
+        this.setItems(*attacks.toTypedArray())
         this.selectedIndex = -1
         return this
     }
 
-    private fun GdxList<String>.fillWithTargets(enemies: List<EnemyItem>): GdxList<String> {
+    private fun GdxList<String>.fillWithTargets(enemies: List<Character>): GdxList<String> {
         enemies
             .filter { it.isAlive }
             .forEach { items.add(it.name) }

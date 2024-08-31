@@ -3,9 +3,11 @@ package nl.t64.cot.components.battle
 
 class MoveAction(
     private val battleField: BattleField,
-    private val character: Character,
+    currentParticipant: Participant,
     private val newSpace: Int
 ) {
+    private val character: Character = currentParticipant.character
+
 
     fun createConfirmationMessage(): String {
         return """
