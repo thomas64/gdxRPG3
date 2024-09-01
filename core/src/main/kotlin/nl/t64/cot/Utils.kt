@@ -288,13 +288,18 @@ object Utils {
 
 }
 
+fun MutableMap<Color, Texture>.disposeAndClear() {
+    this.values.forEach { it.dispose() }
+    this.clear()
+}
+
 fun MutableSet<Texture>.disposeAndClear() {
-    dispose()
-    clear()
+    this.dispose()
+    this.clear()
 }
 
 fun Color.toDrawable(): Drawable {
-    return Image(toTexture()).drawable
+    return Image(this.toTexture()).drawable
 }
 
 fun Color.toTexture(): Texture {

@@ -33,9 +33,10 @@ private const val TITLE_TEXT = "Battle...!"
 private const val BAR_WIDTH = 100f
 private const val BAR_HEIGHT = 18f
 
-object BattleScreenBuilder {
+class BattleScreenBuilder {
 
-    private val texturesToDispose: MutableSet<Texture> = mutableSetOf()
+    private val colorTextureCache: MutableMap<Color, Texture> = mutableMapOf()
+    private val barFontStyle = LabelStyle(BitmapFont(), Color.WHITE)
 
     fun createBattleTitle(): Label {
         return Label(TITLE_TEXT, createLabelStyle(Color.WHITE)).apply {
@@ -53,8 +54,8 @@ object BattleScreenBuilder {
         }
     }
 
-    fun disposeAndClearTextures() {
-        texturesToDispose.disposeAndClear()
+    fun dispose() {
+        colorTextureCache.disposeAndClear()
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -386,8 +387,7 @@ object BattleScreenBuilder {
     }
 
     private fun createHpLabel(character: Character): Label {
-        return Label("${character.currentHp} ", LabelStyle(BitmapFont(), Color.WHITE))
-            .apply { setAlignment(Align.right) }
+        return Label("${character.currentHp} ", barFontStyle).apply { setAlignment(Align.right) }
     }
 
     private fun createSpBar(hero: HeroItem): Stack {
@@ -407,12 +407,12 @@ object BattleScreenBuilder {
     }
 
     private fun createSpLabel(hero: HeroItem): Label {
-        return Label("${hero.currentSp} ", LabelStyle(BitmapFont(), Color.WHITE))
-            .apply { setAlignment(Align.right) }
+        return Label("${hero.currentSp} ", barFontStyle).apply { setAlignment(Align.right) }
     }
 
     private fun Color.toImage(): Image {
-        return Image(toTexture().also { texturesToDispose.add(it) })
+        val texture = colorTextureCache.getOrPut(this) { this.toTexture() }
+        return Image(texture)
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

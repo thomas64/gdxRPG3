@@ -36,6 +36,7 @@ class BattleScreen : Screen {
     private lateinit var turnManager: TurnManager
     private lateinit var currentParticipant: Participant
 
+    private val builder = BattleScreenBuilder()
     private val shapeRenderer = ShapeRenderer()
     private var heroTable: Table = Table()
     private var enemyTable: Table = Table()
@@ -101,7 +102,7 @@ class BattleScreen : Screen {
         val camera = Camera()
         stage = Stage(camera.viewport)
 
-        val battleTitle = BattleScreenBuilder.createBattleTitle()
+        val battleTitle = builder.createBattleTitle()
         stage.addActor(battleTitle)
 
         stage.addAction(Actions.sequence(
@@ -116,7 +117,7 @@ class BattleScreen : Screen {
             Actions.delay(2.1f),
             Actions.run {
                 camera.zoom = 1f
-                stage.addActor(BattleScreenBuilder.createIntroTable())
+                stage.addActor(builder.createIntroTable())
                 Gdx.input.inputProcessor = stage
                 Utils.setGamepadInputProcessor(stage)
                 isLoaded = true
@@ -140,7 +141,6 @@ class BattleScreen : Screen {
             return
         }
 
-        BattleScreenBuilder.disposeAndClearTextures()
         updateHeroTable()
         updateEnemyTable()
         updateBattleField()
@@ -184,6 +184,7 @@ class BattleScreen : Screen {
     }
 
     override fun dispose() {
+        builder.dispose()
         stage.dispose()
         shapeRenderer.dispose()
     }
@@ -209,25 +210,25 @@ class BattleScreen : Screen {
 
     private fun updateHeroTable() {
         heroTable.remove()
-        heroTable = BattleScreenBuilder.createHeroTable(gameData.party.getAllHeroes())
+        heroTable = builder.createHeroTable(gameData.party.getAllHeroes())
         stage.addActor(heroTable)
     }
 
     private fun updateEnemyTable() {
         enemyTable.remove()
-        enemyTable = BattleScreenBuilder.createEnemyTable(enemies.getAll())
+        enemyTable = builder.createEnemyTable(enemies.getAll())
         stage.addActor(enemyTable)
     }
 
     private fun updateBattleField() {
         battleFieldTable.remove()
-        battleFieldTable = BattleScreenBuilder.createBattleFieldTable(battleField)
+        battleFieldTable = builder.createBattleFieldTable(battleField)
         stage.addActor(battleFieldTable)
     }
 
     private fun updateTurnTable() {
         turnTable.remove()
-        turnTable = BattleScreenBuilder.createTurnTable(turnManager.participants)
+        turnTable = builder.createTurnTable(turnManager.participants)
         stage.addActor(turnTable)
     }
 
@@ -292,7 +293,7 @@ class BattleScreen : Screen {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun setupActionTable() {
-        buttonTableAction = BattleScreenBuilder.createButtonTableAction()
+        buttonTableAction = builder.createButtonTableAction()
         stage.addActor(buttonTableAction)
         buttonTableAction.addListener(listenerAction)
         stage.keyboardFocus = buttonTableAction.children.last()
@@ -300,7 +301,7 @@ class BattleScreen : Screen {
 
     private fun setupMoveTable() {
         val currentIndex: Int = battleField.getIndexOf(currentParticipant.character)
-        buttonTableMove = BattleScreenBuilder.createButtonTableMove(currentIndex)
+        buttonTableMove = builder.createButtonTableMove(currentIndex)
         stage.addActor(buttonTableMove)
         buttonTableMove.addListener(listenerMove)
         if (currentIndex in 0..9) {
@@ -312,21 +313,21 @@ class BattleScreen : Screen {
     }
 
     private fun setupCalculateAttackTable() {
-        buttonTableAttack = BattleScreenBuilder.createButtonTableAttack(currentParticipant)
+        buttonTableAttack = builder.createButtonTableAttack(currentParticipant)
         stage.addActor(buttonTableAttack)
         buttonTableAttack.addListener(listenerCalculateAttack)
         stage.keyboardFocus = buttonTableAttack.children.last()
     }
 
     private fun setupAttackTable() {
-        buttonTableAttack = BattleScreenBuilder.createButtonTableAttack(currentParticipant)
+        buttonTableAttack = builder.createButtonTableAttack(currentParticipant)
         stage.addActor(buttonTableAttack)
         buttonTableAttack.addListener(listenerAttack)
         stage.keyboardFocus = buttonTableAttack.children.last()
     }
 
     private fun setupCalculateTargetTable(selectedAttack: String) {
-        buttonTableTarget = BattleScreenBuilder.createButtonTableTarget(enemies.getAll())
+        buttonTableTarget = builder.createButtonTableTarget(enemies.getAll())
         stage.addActor(buttonTableTarget)
         listenerCalculateTarget.setSelectedAttack(selectedAttack)
         buttonTableTarget.addListener(listenerCalculateTarget)
@@ -335,7 +336,7 @@ class BattleScreen : Screen {
 
     private fun setupTargetTable(selectedAttack: String) {
         val targetableEnemies: List<Character> = battleField.getTargetableEnemiesFor(currentParticipant)
-        buttonTableTarget = BattleScreenBuilder.createButtonTableTarget(targetableEnemies)
+        buttonTableTarget = builder.createButtonTableTarget(targetableEnemies)
         stage.addActor(buttonTableTarget)
         listenerTarget.setSelectedAttack(selectedAttack)
         buttonTableTarget.addListener(listenerTarget)
@@ -344,7 +345,7 @@ class BattleScreen : Screen {
 
     private fun setupPotionTable() {
         val battlePotions = gameData.inventory.getAllSelfPotionsForBattle()
-        buttonTablePotion = BattleScreenBuilder.createButtonTablePotion(battlePotions)
+        buttonTablePotion = builder.createButtonTablePotion(battlePotions)
         stage.addActor(buttonTablePotion)
         buttonTablePotion.addListener(listenerPotion)
         stage.keyboardFocus = buttonTablePotion.children.last()
