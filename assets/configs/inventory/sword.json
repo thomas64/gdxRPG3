@@ -18,8 +18,8 @@
     "price"       : 5,
     "durability"  : 30,
     "min_strength": 11,
-    "base_hit"    : 80,
-    "damage"      : 10
+    "base_hit"    : 75,
+    "damage"      : 11
   },
   "basic_orc_dagger"     : {
     "name"         : "Orc Dagger",
@@ -40,8 +40,8 @@
     "price"           : 5,
     "durability"      : 30,
     "min_intelligence": 11,
-    "base_hit"        : 80,
-    "damage"          : 10
+    "base_hit"        : 85,
+    "damage"          : 9
   },
   "basic_dagger"         : {
     "name"         : "Basic Dagger",

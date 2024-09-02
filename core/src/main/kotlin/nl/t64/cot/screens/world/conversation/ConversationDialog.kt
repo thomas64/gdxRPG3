@@ -106,7 +106,8 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     fun loadNote(noteId: String) {
-        graph = getNoteById(noteId)
+        conversationId = noteId
+        graph = getNoteById(conversationId)
         fillDialogForNote()
         playSe(AudioEvent.SE_CONVERSATION_START)
         populateConversationDialog(graph.currentPhraseId)

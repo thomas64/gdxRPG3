@@ -49,7 +49,8 @@
     "condition": ["_n_1_>=_item_basic_light_helmet"],
     "text"     : [
       "Press the %inventory% to access your inventory.",
-      "Here, you can equip various items such as armor and weapons."
+      "Here, you can equip various items such as armor and weapons.",
+      "These items will help you in battles and other situations."
     ]
   },
   "guide_event_conversation"         : {
@@ -74,7 +75,14 @@
   "guide_event_xp"                   : {
     "type": "messagebox",
     "text": [
-      "You've gained quite some XP by now.",
+      "You've gained quite some XP by now!",
+      "",
+      "Perhaps you also found some items on your journey already.",
+      "These items require a minimum level of Intelligence, Dexterity or Strength.",
+      "You can see the minimum requirements in the description of that item.",
+      "If you meet the requirements, you can equip the item.",
+      "",
+      "To meet such requirements, you must level up your attributes:",
       "Access your attributes by pressing the %inventory%.",
       "Here you can utilize your XP to improve them.",
       "Choose an attribute and press the %action% to level it up."

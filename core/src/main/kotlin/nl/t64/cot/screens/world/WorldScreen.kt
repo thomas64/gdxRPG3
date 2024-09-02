@@ -183,10 +183,12 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     }
 
     fun showFindScreenWithMessageDialog(loot: Loot, event: AudioEvent, message: String) {
-        player.resetInputWithoutStance()
-        render(0f)
         gameState = GameState.DIALOG
-        messageDialog.setActionAfterHide { FindScreen.load(loot, event) }
+        messageDialog.setActionAfterHide {
+            player.resetInputWithoutStance()
+            render(0f)
+            FindScreen.load(loot, event)
+        }
         messageDialog.show(message, AudioEvent.SE_CONVERSATION_NEXT)
     }
 
@@ -207,9 +209,9 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     }
 
     fun showMessageDialog(message: String, actionAfterHide: () -> Unit = {}) {
-        player.resetInputWithoutStance()
         gameState = GameState.DIALOG
         messageDialog.setActionAfterHide {
+            player.resetInputWithoutStance()
             gameState = GameState.RUNNING
             actionAfterHide.invoke()
         }
