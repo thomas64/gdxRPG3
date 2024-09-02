@@ -90,6 +90,17 @@ abstract class Character(
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    fun getCalculatedActionPoints(): Int {
+        return ((getCalculatedTotalStatOf(StatItemId.INTELLIGENCE)
+            + getCalculatedTotalStatOf(StatItemId.DEXTERITY)
+            + getCalculatedTotalStatOf(StatItemId.STRENGTH)
+            + getCalculatedTotalStatOf(StatItemId.SPEED)) / 10f
+            // een step is 1 AP, een attack is 3 AP?
+            // loskomen van een close attack is 2-3? AP, wapen wisselen is 3 AP?
+            ).roundToInt()
+            .takeIf { it > 0f } ?: 1
+    }
+
     fun getCalculatedTotalHit(): Int {
         // todo, is nu alleen nog maar voor wapens, niet voor potions. en ook niet voor ranged in de battle zelf.
         return inventory.getSkillOfCurrentWeapon()

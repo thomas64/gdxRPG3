@@ -26,6 +26,7 @@ class TurnManager(
         sortParticipants()
         participants.remove(newFirst)
         participants.add(0, newFirst)
+        newFirst.refreshActionPoints()
     }
 
     private fun increaseAllTurnCounters() {

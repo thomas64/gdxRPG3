@@ -1,49 +1,79 @@
 package nl.t64.cot.components.battle
 
+import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.party.inventory.InventoryGroup
 
 
-class BattleField {
+class BattleField(participants: List<Participant>) {
 
-    val heroSpaces: MutableList<Character?> = MutableList(20) { null }
-    val enemySpaces: MutableList<Character?> = MutableList(20) { null }
+    val heroSpaces: MutableList<Participant?> = MutableList(20) { null }
+    val enemySpaces: MutableList<Participant?> = MutableList(20) { null }
+    var startingSpace: Int = -1
 
-
-    fun clear() {
-        heroSpaces.fill(null)
-        enemySpaces.fill(null)
+    init {
+        val heroIndices: List<Int> = (0 until 8).shuffled()
+        val enemyIndices: List<Int> = (12 until 20).shuffled()
+        participants.forEachIndexed { index, participant ->
+            if (participant.isHero) {
+                heroSpaces[heroIndices[index]] = participant
+            } else {
+                enemySpaces[enemyIndices[index]] = participant
+            }
+        }
     }
 
-    fun setPositionsHeroes(heroes: List<Character>) {
-        val indices: List<Int> = (0 until 8).shuffled()
-        heroes.forEachIndexed { index, hero -> heroSpaces[indices[index]] = hero }
+    fun resetStartingSpace() {
+        startingSpace = -1
     }
 
-    fun setPositionsEnemies(enemies: List<Character>) {
-        val indices: List<Int> = (12 until 20).shuffled()
-        enemies.forEachIndexed { index, enemy -> enemySpaces[indices[index]] = enemy }
+    fun setStartingSpace(currentParticipant: Participant) {
+        startingSpace = getCurrentSpace(currentParticipant)
     }
 
-    fun getIndexOf(character: Character): Int {
-        return heroSpaces.indexOf(character)
+    fun moveParticipantRight(currentParticipant: Participant) {
+        val currentIndex = getCurrentSpace(currentParticipant)
+        val upperBound = minOf(startingSpace + 1 + currentParticipant.currentAP, 20)
+        (currentIndex + 1 until upperBound)
+            .firstOrNull { heroSpaces[it] == null }
+            ?.let {
+                moveParticipant(currentParticipant, it)
+                playSe(AudioEvent.SE_MENU_CURSOR)
+            } ?: playSe(AudioEvent.SE_MENU_ERROR)
+    }
+
+    fun moveParticipantLeft(currentParticipant: Participant) {
+        val currentIndex = getCurrentSpace(currentParticipant)
+        val lowerBound = maxOf(startingSpace - currentParticipant.currentAP, 0)
+        (currentIndex - 1 downTo lowerBound)
+            .firstOrNull { heroSpaces[it] == null }
+            ?.let {
+                moveParticipant(currentParticipant, it)
+                playSe(AudioEvent.SE_MENU_CURSOR)
+            } ?: playSe(AudioEvent.SE_MENU_ERROR)
+    }
+
+    fun getCurrentSpace(participant: Participant): Int {
+        return heroSpaces.indexOf(participant)
             .takeUnless { it == -1 }
-            ?: enemySpaces.indexOf(character)
+            ?: enemySpaces.indexOf(participant)
     }
 
-    fun moveCharacter(character: Character, newSpace: Int) {
-        heroSpaces[heroSpaces.indexOf(character)] = null
-        heroSpaces[newSpace] = character
+    fun moveParticipant(participant: Participant, newSpace: Int) {
+        if (newSpace == -1) return
+        heroSpaces[heroSpaces.indexOf(participant)] = null
+        heroSpaces[newSpace] = participant
     }
 
-    fun getTargetableEnemiesFor(currentParticipant: Participant): List<Character> {
+    fun getTargetableEnemiesFor(currentParticipant: Participant): List<Participant> {
         return enemySpaces
             .filterNotNull()
             .filter { it.isInRangeOf(currentParticipant) }
     }
 
-    private fun Character.isInRangeOf(currentParticipant: Participant): Boolean {
+    private fun Participant.isInRangeOf(currentParticipant: Participant): Boolean {
         val enemySpace: Int = enemySpaces.indexOf(this)
-        val heroSpace: Int = heroSpaces.indexOf(currentParticipant.character)
+        val heroSpace: Int = heroSpaces.indexOf(currentParticipant)
         val weaponRange: Int = currentParticipant.getWeaponRange()
         return enemySpace == heroSpace + weaponRange || enemySpace == heroSpace - weaponRange - 1
     }
@@ -52,6 +82,5 @@ class BattleField {
         val outOfRange = 21
         return this.character.getInventoryItem(InventoryGroup.WEAPON)?.getWeaponRange() ?: outOfRange
     }
-
 
 }

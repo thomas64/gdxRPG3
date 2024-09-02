@@ -11,7 +11,6 @@ import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Scaling
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.resourceManager
-import nl.t64.cot.components.battle.BattleField
 import nl.t64.cot.components.battle.Character
 import nl.t64.cot.components.battle.EnemyItem
 import nl.t64.cot.components.battle.Participant
@@ -45,38 +44,31 @@ class BattleScreenBuilder {
         }
     }
 
-    fun createIntroTable(): Table {
-        return Table(createSkin()).apply {
-            top()
-            setPosition(Gdx.graphics.width / 2f, Gdx.graphics.height - 50f)
-            add("This battle screen is a temporary placeholder for the real turn based").row()
-            add("strategic battle gameplay that will replace this screen in the future.")
-        }
-    }
-
     fun dispose() {
         colorTextureCache.disposeAndClear()
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    fun createHeroTable(heroes: List<HeroItem>): Table {
+    fun createHeroTable(heroes: List<HeroItem>, participants: List<Participant>): Table {
         return Table(createSkin()).apply {
             defaults().height(Constant.FACE_SIZE)
             columnDefaults(0).width(Constant.FACE_SIZE)
             columnDefaults(1).width(150f)
             top().left()
             setPosition(20f, Gdx.graphics.height - 20f)
-            heroes.forEach { addHero(it) }
+            heroes.forEach { addHero(it, participants) }
         }
     }
 
-    private fun Table.addHero(hero: HeroItem) {
+    private fun Table.addHero(hero: HeroItem, participants: List<Participant>) {
+        val actionPoints: Int = participants.firstOrNull { it.character == hero }?.currentAP ?: 0
+
         add(Utils.getFaceImage(hero.id).apply { if (!hero.isAlive) color = Color.DARK_GRAY })
         add(Table(createSkin()).apply {
             left()
             defaults().left()
-            add("${hero.name}  (${hero.getCalculatedActionPoints()} AP)").colspan(2).row()
+            add("${hero.name}  ($actionPoints AP)").colspan(2).row()
             add("HP:").width(50f)
             add(createHpBar(hero)).width(BAR_WIDTH).height(BAR_HEIGHT).row()
             add("SP:").width(50f)
@@ -112,86 +104,6 @@ class BattleScreenBuilder {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    fun createBattleFieldTable(battleField: BattleField): Table {
-        val tableSkin = createSkin()
-        val labelStyle = createLabelStyle(Color.WHITE)
-        val enemyCountMap = createEnemyCountMap(battleField)
-        val enemyNumberTable = createEnemyNumberTable(battleField, enemyCountMap, tableSkin, labelStyle)
-        val enemyTable = createCharacterTable(battleField.enemySpaces, tableSkin)
-        val heroTable = createCharacterTable(battleField.heroSpaces, tableSkin)
-        val numberTable = createNumberTable(battleField, tableSkin, labelStyle)
-
-        return Table(tableSkin).apply {
-            bottom().left()
-            setPosition(360f, 5f)
-            add(enemyNumberTable).padLeft(60f)
-            row()
-            add(enemyTable).padLeft(60f)
-            row()
-            add(heroTable)
-            row()
-            add(numberTable)
-        }
-    }
-
-    private fun createEnemyCountMap(battleField: BattleField): MutableMap<String, Int> {
-        return mutableMapOf<String, Int>().apply {
-            battleField.enemySpaces.filterNotNull().forEach {
-                this[it.id] = getOrDefault(it.id, 0) + 1
-            }
-        }
-    }
-
-    private fun createEnemyNumberTable(
-        battleField: BattleField,
-        enemyCountMap: MutableMap<String, Int>,
-        skin: Skin,
-        labelStyle: LabelStyle
-    ): Table {
-        return Table(skin).apply {
-            defaults().width(60f).height(30f).center()
-            battleField.enemySpaces.forEach {
-                if (it != null && !it.isAlive) {
-                    add()
-                } else if (it != null && enemyCountMap[it.id]!! > 1) {
-                    add(Container(Label(it.name.last().toString(), labelStyle)))
-                } else {
-                    add()
-                }
-            }
-        }
-    }
-
-    private fun createCharacterTable(spaces: MutableList<Character?>, skin: Skin): Table {
-        return Table(skin).apply {
-            defaults().width(60f).height(60f).center()
-            spaces.forEachIndexed { index, space ->
-                if (space == null) {
-                    add(Image(Utils.createFullBorderWhite()))
-                } else if (!space.isAlive) {
-                    spaces[index] = null
-                    add(Image(Utils.createFullBorderWhite()))
-                } else {
-                    add(Stack().apply {
-                        add(Image(Utils.createFullBorderWhite()))
-                        add(Container(createImageOf(space)))
-                    })
-                }
-            }
-        }
-    }
-
-    private fun createNumberTable(battleField: BattleField, skin: Skin, labelStyle: LabelStyle): Table {
-        return Table(skin).apply {
-            defaults().width(60f).height(30f).center()
-            battleField.heroSpaces.indices.forEach {
-                add(Container(Label((it + 1).toString(), labelStyle)))
-            }
-        }
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     fun createTurnTable(participants: List<Participant>): Table {
         return Table(createSkin()).apply {
             defaults().height(50f)
@@ -200,7 +112,7 @@ class BattleScreenBuilder {
             columnDefaults(2).width(200f)
             columnDefaults(3).width(100f)
             top().left()
-            setPosition(450f, Gdx.graphics.height - 180f)
+            setPosition(450f, Gdx.graphics.height - 20f)
 
             add("").padBottom(5f)
             add("Turn order").padBottom(5f)
@@ -208,27 +120,27 @@ class BattleScreenBuilder {
             add("Speed").padBottom(5f).row()
 
             add("Now:").padBottom(5f)
-            add(createImageOf(participants[0].character)).padBottom(5f)
+            add(createImageOf(participants[0])).padBottom(5f)
             add(Label(participants[0].character.name, createLabelStyle(Color.GOLD))).padBottom(5f)
             addSpeedCell(participants[0], Color.GOLD).padBottom(5f).row()
 
             add("Next:")
-            add(createImageOf(participants[1].character))
+            add(createImageOf(participants[1]))
             add(participants[1].character.name)
             addSpeedCell(participants[1]).row()
 
             participants.drop(2).forEach {
                 add("")
-                add(createImageOf(it.character))
+                add(createImageOf(it))
                 add(it.character.name)
                 addSpeedCell(it).row()
             }
         }
     }
 
-    private fun createImageOf(character: Character): Container<Image> {
+    private fun createImageOf(participant: Participant): Container<Image> {
         return Container(
-            Image(Utils.getCharImage(character.id)[0][1])
+            Image(Utils.getCharImage(participant.character.id)[0][1])
                 .apply { setScaling(Scaling.none) }
         ).left()
     }
@@ -248,22 +160,11 @@ class BattleScreenBuilder {
         return createStyledEmptyList<String>().fillWithActions().toActionTable()
     }
 
-    fun createButtonTableMove(currentIndex: Int): Table {
-        val (column1, column2) = if (currentIndex in 0..9) {
-            createStyledEmptyList<String>().fillWithSpaces1(currentIndex) to
-                createStyledEmptyList<String>().fillWithSpaces2(-1)
-        } else {
-            createStyledEmptyList<String>().fillWithSpaces1(-1) to
-                createStyledEmptyList<String>().fillWithSpaces2(currentIndex - 10)
-        }
-        return createMoveTable(column1, column2)
-    }
-
     fun createButtonTableAttack(currentParticipant: Participant): Table {
         return createStyledEmptyList<String>().fillWithAttacksFor(currentParticipant).toAttackTable()
     }
 
-    fun createButtonTableTarget(enemies: List<Character>): Table {
+    fun createButtonTableTarget(enemies: List<Participant>): Table {
         return createStyledEmptyList<String>().fillWithTargets(enemies).toTargetTable()
     }
 
@@ -286,18 +187,6 @@ class BattleScreenBuilder {
         return this
     }
 
-    private fun GdxList<String>.fillWithSpaces1(index: Int): GdxList<String> {
-        this.setItems("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Back")
-        this.selectedIndex = index
-        return this
-    }
-
-    private fun GdxList<String>.fillWithSpaces2(index: Int): GdxList<String> {
-        this.setItems("11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "")
-        this.selectedIndex = index
-        return this
-    }
-
     private fun GdxList<String>.fillWithAttacksFor(current: Participant): GdxList<String> {
         val range: Int? = current.character.getInventoryItem(InventoryGroup.WEAPON)?.getWeaponRange()
 
@@ -310,10 +199,10 @@ class BattleScreenBuilder {
         return this
     }
 
-    private fun GdxList<String>.fillWithTargets(enemies: List<Character>): GdxList<String> {
+    private fun GdxList<String>.fillWithTargets(enemies: List<Participant>): GdxList<String> {
         enemies
-            .filter { it.isAlive }
-            .forEach { items.add(it.name) }
+            .filter { it.character.isAlive }
+            .forEach { items.add(it.character.name) }
         items.add("Back")
         this.selectedIndex = 0
         return this
@@ -331,23 +220,15 @@ class BattleScreenBuilder {
     private fun GdxList<String>.toActionTable(): Table {
         val listWithActions = this
         return createSelectionTable().apply {
-            add("Select Action:").row()
+            add("Select Action:").padBottom(10f).row()
             add(listWithActions)
-        }
-    }
-
-    private fun createMoveTable(column1: GdxList<String>, column2: GdxList<String>): Table {
-        return createDualSelectionTable().apply {
-            add("Move to:").width(140f).colspan(2).row()
-            add(column1)
-            add(column2)
         }
     }
 
     private fun GdxList<String>.toAttackTable(): Table {
         val listWithAttacks = this
         return createSelectionTable().apply {
-            add("Select Attack:").row()
+            add("Select Attack:").padBottom(10f).row()
             add(listWithAttacks)
         }
     }
@@ -355,7 +236,7 @@ class BattleScreenBuilder {
     private fun GdxList<String>.toTargetTable(): Table {
         val listWithTargets = this
         return createSelectionTable().apply {
-            add("Select Target:").row()
+            add("Select Target:").padBottom(10f).row()
             add(listWithTargets)
         }
     }
@@ -363,7 +244,7 @@ class BattleScreenBuilder {
     private fun GdxList<BattlePotionItem>.toPotionTable(): Table {
         val listWithPotions = this
         return createSelectionTable().apply {
-            add("Select Potion:").row()
+            add("Select Potion:").padBottom(10f).row()
             add(listWithPotions)
         }
     }
@@ -437,16 +318,7 @@ class BattleScreenBuilder {
         return Table(createSkin()).apply {
             columnDefaults(0).width(300f)
             top().left()
-            setPosition(1050f, Gdx.graphics.height - 180f)
-        }
-    }
-
-    private fun createDualSelectionTable(): Table {
-        return Table(createSkin()).apply {
-            columnDefaults(0).width(70f)
-            columnDefaults(1).width(70f)
-            top().left()
-            setPosition(1050f, Gdx.graphics.height - 180f)
+            setPosition(1050f, Gdx.graphics.height - 20f)
         }
     }
 
