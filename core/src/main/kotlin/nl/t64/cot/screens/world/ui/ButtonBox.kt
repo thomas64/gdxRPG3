@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
-import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Align
 import nl.t64.cot.Utils
@@ -25,6 +24,8 @@ internal class ButtonBox {
     private val table: Table = createTable()
     private val stage: Stage = Stage().apply { addActor(table) }
     private val shapeRenderer: ShapeRenderer = ShapeRenderer()
+    private val whiteFontStyle = LabelStyle(BitmapFont(), Color.WHITE)
+    private val grayFontStyle = LabelStyle(BitmapFont(), Color.GRAY)
 
     fun dispose() {
         stage.dispose()
@@ -56,11 +57,7 @@ internal class ButtonBox {
         }
 
         actions.forEach { (action, button) ->
-            val labelStyle = if (action == "Map" && !isMinimapPossible) {
-                LabelStyle(BitmapFont(), Color.GRAY)
-            } else {
-                LabelStyle(BitmapFont(), Color.WHITE)
-            }
+            val labelStyle = getLabelStyle(action, isMinimapPossible)
             table.add(Label(action, labelStyle))
             table.add(Label(button, labelStyle)).row()
         }
@@ -80,11 +77,12 @@ internal class ButtonBox {
         stage.draw()
     }
 
-    private fun createTable(): Table {
-        val tableSkin = Skin()
-        tableSkin.add("default", LabelStyle(BitmapFont(), Color.WHITE))
+    private fun getLabelStyle(action: String, isMinimapPossible: Boolean): LabelStyle {
+        return if (action == "Map" && !isMinimapPossible) grayFontStyle else whiteFontStyle
+    }
 
-        return Table(tableSkin).apply {
+    private fun createTable(): Table {
+        return Table().apply {
             defaults().width(TABLE_WIDTH).align(Align.left)
             columnDefaults(1).width(SECOND_COLUMN_WIDTH)
             padLeft(PAD_LEFT).padTop(PAD).padBottom(PAD)
