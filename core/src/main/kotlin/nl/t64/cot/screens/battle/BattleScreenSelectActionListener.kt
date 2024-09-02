@@ -6,16 +6,17 @@ import com.badlogic.gdx.scenes.scene2d.InputListener
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
+import nl.t64.cot.constants.Constant
 
 
 class BattleScreenSelectActionListener(
     private val winBattle: () -> Unit,
-    private val selectCalculate: () -> Unit,
-    private val selectMove: () -> Unit,
     private val selectAttack: () -> Unit,
+    private val selectMove: () -> Unit,
     private val selectPotion: () -> Unit,
     private val selectWeapon: () -> Unit,
     private val rest: () -> Unit,
+    private val selectPreview: () -> Unit,
     private val endTurn: () -> Unit,
     private val fleeBattle: () -> Unit
 ) : InputListener() {
@@ -26,8 +27,8 @@ class BattleScreenSelectActionListener(
         when (keycode) {
             Input.Keys.UP -> playSe(AudioEvent.SE_MENU_CURSOR)
             Input.Keys.DOWN -> playSe(AudioEvent.SE_MENU_CURSOR)
-            Input.Keys.ESCAPE -> event.dontLoseFocusAfterEsc()
-            Input.Keys.ENTER -> event.handleEnter()
+            Constant.KEYCODE_RIGHT, Input.Keys.ESCAPE -> event.dontLoseFocusAfterEsc()
+            Constant.KEYCODE_BOTTOM ,Input.Keys.ENTER, Input.Keys.A  -> event.handleEnter()
             Input.Keys.W -> handleWin()
         }
         return true
@@ -42,12 +43,12 @@ class BattleScreenSelectActionListener(
         getSelected<String>()?.let { selected ->
             playSe(AudioEvent.SE_MENU_CONFIRM)
             when {
-                "Calculate" in selected -> selectCalculate()
-                "Move" in selected -> selectMove()
                 "Attack" in selected -> selectAttack()
+                "Move" in selected -> selectMove()
                 "Potion" in selected -> selectPotion()
                 "Switch" in selected -> selectWeapon()
                 "Rest" in selected -> rest()
+                "Preview" in selected -> selectPreview()
                 "End" in selected -> endTurn()
                 "Flee" in selected -> fleeBattle()
             }

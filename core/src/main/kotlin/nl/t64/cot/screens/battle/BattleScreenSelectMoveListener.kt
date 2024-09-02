@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.List
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
+import nl.t64.cot.constants.Constant
 
 
 class BattleScreenSelectMoveListener(
@@ -23,8 +24,8 @@ class BattleScreenSelectMoveListener(
             Input.Keys.DOWN -> event.handleDown()
             Input.Keys.LEFT -> event.handleLeft()
             Input.Keys.RIGHT -> event.handleRight()
-            Input.Keys.ENTER -> event.handleEnter()
-            Input.Keys.ESCAPE -> handleEscape(back)
+            Constant.KEYCODE_BOTTOM ,Input.Keys.ENTER, Input.Keys.A  -> event.handleEnter()
+            Constant.KEYCODE_RIGHT, Input.Keys.ESCAPE -> handleEscape(back)
         }
         return true
     }

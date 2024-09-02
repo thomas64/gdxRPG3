@@ -63,12 +63,12 @@ class BattleScreen : Screen {
     private var hasLost: Boolean = false
 
     private val listenerAction = BattleScreenSelectActionListener({ winBattle() },
-                                                                  { selectCalculateAttack() },
-                                                                  { selectMove() },
                                                                   { selectAttack() },
+                                                                  { selectMove() },
                                                                   { selectPotion() },
                                                                   {}, // todo
                                                                   { showConfirmRestDialog() },
+                                                                  { selectPreviewAttack() },
                                                                   { showConfirmEndTurnDialog() },
                                                                   { showFleeDialog() })
     private val listenerMove = BattleScreenSelectMoveListener({ moveIsSelected(it) }, { returnToAction() })
@@ -248,7 +248,7 @@ class BattleScreen : Screen {
         }
     }
 
-    private fun selectCalculateAttack() {
+    private fun selectPreviewAttack() {
         buttonTableAction.remove()
         setupCalculateAttackTable()
     }

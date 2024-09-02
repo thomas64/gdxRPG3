@@ -273,16 +273,16 @@ class BattleScreenBuilder {
 
     private fun GdxList<String>.fillWithActions(): GdxList<String> {
         this.setItems(
-            "Calculate hit and damage",
-            "Move (1+ AP)",
             "Attack (? AP)",
+            "Move (1+ AP)",
             "Potion (3 AP)",
             "Switch weapon (3 AP)",
             "Rest (2 AP)",
+            "Preview hit and damage",
             "End turn",
             "Flee battle"
         )
-        this.selectedIndex = -1
+        this.selectedIndex = 0
         return this
     }
 
@@ -306,7 +306,7 @@ class BattleScreenBuilder {
                  ?: listOf("No weapon equipped", "Back")
 
         this.setItems(*attacks.toTypedArray())
-        this.selectedIndex = -1
+        this.selectedIndex = 0
         return this
     }
 
@@ -315,14 +315,14 @@ class BattleScreenBuilder {
             .filter { it.isAlive }
             .forEach { items.add(it.name) }
         items.add("Back")
-        this.selectedIndex = -1
+        this.selectedIndex = 0
         return this
     }
 
     private fun GdxList<BattlePotionItem>.fillWithPotions(potions: List<BattlePotionItem>): GdxList<BattlePotionItem> {
         this.setItems(*potions.toTypedArray())
         items.add(BattlePotionItem("Back"))
-        this.selectedIndex = -1
+        this.selectedIndex = 0
         return this
     }
 
