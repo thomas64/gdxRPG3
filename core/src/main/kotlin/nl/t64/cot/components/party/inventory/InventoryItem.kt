@@ -205,13 +205,13 @@ data class InventoryItem(
         return id.equals(candidateId, true)
     }
 
-    fun getWeaponRange(): Int {
+    fun getWeaponRange(): List<Int> {
         return when (skill) {
             SkillItemId.SWORD,
             SkillItemId.HAFTED,
-            SkillItemId.POLE -> 0
-            SkillItemId.THROWN -> 1
-            SkillItemId.MISSILE -> 2
+            SkillItemId.POLE -> listOf(1)
+            SkillItemId.THROWN -> listOf(2, 3)
+            SkillItemId.MISSILE -> listOf(4, 5, 6)
             else -> throw IllegalArgumentException("Only possible to ask a Weapon Skill.")
         }
     }

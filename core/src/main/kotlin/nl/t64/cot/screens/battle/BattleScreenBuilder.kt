@@ -190,11 +190,11 @@ class BattleScreenBuilder {
     }
 
     private fun GdxList<String>.fillWithAttacksFor(current: Participant): GdxList<String> {
-        val range: Int? = current.character.getInventoryItem(InventoryGroup.WEAPON)?.getWeaponRange()
-
-        val attacks: List<String> =
-            range?.let { listOf("Strike (Range: ${it + 1}) (3 AP)", "Back") }
-                 ?: listOf("No weapon equipped", "Back")
+        val ranges: List<Int>? = current.character.getInventoryItem(InventoryGroup.WEAPON)?.getWeaponRange()
+        val rangeText = ranges?.joinToString(prefix = "Range: ", separator = " - ") ?: "No weapon equipped"
+        val attacks: List<String> = ranges
+            ?.let { listOf("Strike ($rangeText) (3 AP)", "Back") }
+            ?: listOf("No weapon equipped", "Back")
 
         this.setItems(*attacks.toTypedArray())
         this.selectedIndex = 0

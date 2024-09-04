@@ -297,7 +297,7 @@ class BattleScreen : Screen {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun setupActionTable() {
-        battleField.moveParticipant(currentParticipant, battleField.startingSpace)
+        battleField.cancelMovement(currentParticipant)
         battleField.resetStartingSpace()
         buttonTableAction = screenBuilder.createButtonTableAction()
         stage.addActor(buttonTableAction)

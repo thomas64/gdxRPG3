@@ -8,10 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.utils.Scaling
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.resourceManager
-import nl.t64.cot.components.battle.BATTLE_FIELD_SIZE
 import nl.t64.cot.components.battle.BattleField
 import nl.t64.cot.components.battle.Participant
-import nl.t64.cot.components.party.inventory.InventoryGroup
 
 
 private const val TEXT_FONT = "fonts/spectral_regular_24.ttf"
@@ -77,15 +75,7 @@ class BattleFieldTableBuilder {
     }
 
     private fun createTargetFieldTable(battleField: BattleField, currentParticipant: Participant, skin: Skin): Table {
-        val heroSpace: Int = battleField.getCurrentSpace(currentParticipant)
-        val ranges: List<Int> = currentParticipant
-            .character
-            .getInventoryItem(InventoryGroup.WEAPON)
-            ?.getWeaponRange()
-            ?.let { range ->
-                listOfNotNull((heroSpace - 1 - range).takeIf { it >= 0 },
-                              (heroSpace + range).takeIf { it < BATTLE_FIELD_SIZE })
-            } ?: emptyList()
+        val ranges: List<Int> = battleField.getRangeOf(currentParticipant)
 
         return Table(skin).apply {
             defaults().width(60f).height(60f).center()
