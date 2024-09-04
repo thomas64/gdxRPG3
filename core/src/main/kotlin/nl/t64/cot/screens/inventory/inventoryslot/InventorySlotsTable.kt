@@ -1,6 +1,7 @@
 package nl.t64.cot.screens.inventory.inventoryslot
 
 import com.badlogic.gdx.scenes.scene2d.Stage
+import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import nl.t64.cot.Utils
@@ -20,8 +21,9 @@ private const val SLOT_SIZE = 64f
 private const val SLOTS_IN_ROW = 6
 private const val CONTAINER_HEIGHT = 704f
 
-class InventorySlotsTable(private val tooltip: ItemSlotTooltip) : WindowSelector {
-
+class InventorySlotsTable(
+    private val tooltip: ItemSlotTooltip
+) : WindowSelector {
     private val inventory: InventoryContainer = gameData.inventory
     private val inventorySlotTable = Table()
     val container = Table().apply {
@@ -34,7 +36,10 @@ class InventorySlotsTable(private val tooltip: ItemSlotTooltip) : WindowSelector
     init {
         fillInventorySlots()
         selector.setNewCurrentByIndex(0)
-        inventorySlotTable.addListener(InventorySlotsTableListener({ selector.selectNewSlot(it) }, SLOTS_IN_ROW))
+
+        val listener = InventorySlotsTableListener({ selector.selectNewSlot(it) }, SLOTS_IN_ROW)
+        inventorySlotTable.addAction(Actions.sequence(Actions.delay(0.1f),
+                                                      Actions.addListener(listener, false)))
     }
 
     override fun setKeyboardFocus(stage: Stage) {
@@ -116,26 +121,24 @@ class InventorySlotsTable(private val tooltip: ItemSlotTooltip) : WindowSelector
     }
 
     private fun getPossibleSameItemSlotWith(candidateItem: InventoryItem): ItemSlot? {
-        return inventory.findFirstSlotIndexWithItem(candidateItem.id)?.let { index ->
-            inventorySlotTable.getChild(index) as ItemSlot
-        }
+        return inventory.findFirstSlotIndexWithItem(candidateItem.id)
+            ?.let { inventorySlotTable.getChild(it) as ItemSlot }
     }
 
     fun getPossibleEmptySlot(): ItemSlot? {
-        return inventory.findFirstEmptySlotIndex()?.let {
-            inventorySlotTable.getChild(it) as ItemSlot
-        }
+        return inventory.findFirstEmptySlotIndex()
+            ?.let { inventorySlotTable.getChild(it) as ItemSlot }
     }
 
     private fun fillInventorySlots() {
-        (0 until inventory.getSize()).forEach { createInventorySlot(it) }
+        (0 until inventory.getSize())
+            .forEach { createInventorySlot(it) }
     }
 
     private fun createInventorySlot(index: Int) {
         val inventorySlot = InventorySlot(index, InventoryGroup.EVERYTHING, tooltip, inventory)
-        inventory.getItemAt(index)?.let {
-            inventorySlot.addToStack(InventoryImage(it))
-        }
+        inventory.getItemAt(index)
+            ?.let { inventorySlot.addToStack(InventoryImage(it)) }
         inventorySlotTable.add(inventorySlot).size(SLOT_SIZE, SLOT_SIZE)
         if ((index + 1) % SLOTS_IN_ROW == 0) {
             inventorySlotTable.row()
