@@ -37,6 +37,8 @@ class BattleScreenBuilder {
     private val colorTextureCache: MutableMap<Color, Texture> = mutableMapOf()
     private val barFontStyle = LabelStyle(BitmapFont(), Color.WHITE)
 
+    var buttonTableActionIndex = 0
+
     fun createBattleTitle(): Label {
         return Label(TITLE_TEXT, createLabelStyle(Color.WHITE)).apply {
             setPosition((Gdx.graphics.width / 2f) - (width / 2f), (Gdx.graphics.height / 2f) - (height / 2f))
@@ -183,7 +185,7 @@ class BattleScreenBuilder {
             "End turn",
             "Flee battle"
         )
-        this.selectedIndex = 0
+        this.selectedIndex = buttonTableActionIndex
         return this
     }
 

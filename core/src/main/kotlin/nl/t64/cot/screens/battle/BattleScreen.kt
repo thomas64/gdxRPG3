@@ -24,6 +24,7 @@ import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.inventory.messagedialog.MessageDialog
 import nl.t64.cot.screens.menu.DialogQuestion
 import nl.t64.cot.screens.world.Camera
+import com.badlogic.gdx.scenes.scene2d.ui.List as GdxList
 
 
 class BattleScreen : Screen {
@@ -234,6 +235,7 @@ class BattleScreen : Screen {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun selectMove() {
+        screenBuilder.buttonTableActionIndex = (buttonTableAction.children.last() as GdxList<String>).selectedIndex
         buttonTableAction.remove()
         setupMoveTable()
     }
@@ -247,6 +249,7 @@ class BattleScreen : Screen {
     }
 
     private fun selectPreviewAttack() {
+        screenBuilder.buttonTableActionIndex = (buttonTableAction.children.last() as GdxList<String>).selectedIndex
         buttonTableAction.remove()
         setupCalculateAttackTable()
     }
@@ -257,6 +260,7 @@ class BattleScreen : Screen {
     }
 
     private fun selectAttack() {
+        screenBuilder.buttonTableActionIndex = (buttonTableAction.children.last() as GdxList<String>).selectedIndex
         buttonTableAction.remove()
         setupAttackTable()
     }
@@ -267,6 +271,7 @@ class BattleScreen : Screen {
     }
 
     private fun selectPotion() {
+        screenBuilder.buttonTableActionIndex = (buttonTableAction.children.last() as GdxList<String>).selectedIndex
         buttonTableAction.remove()
         setupPotionTable()
     }
@@ -322,7 +327,8 @@ class BattleScreen : Screen {
     }
 
     private fun setupCalculateTargetTable(selectedAttack: String) {
-        buttonTableTarget = screenBuilder.createButtonTableTarget(turnManager.participants)
+        val onlyEnemies = turnManager.participants.filter { !it.isHero }
+        buttonTableTarget = screenBuilder.createButtonTableTarget(onlyEnemies)
         stage.addActor(buttonTableTarget)
         listenerCalculateTarget.setSelectedAttack(selectedAttack)
         buttonTableTarget.addListener(listenerCalculateTarget)
@@ -419,6 +425,7 @@ class BattleScreen : Screen {
     }
 
     private fun restConfirmed(restAction: RestAction) {
+        screenBuilder.buttonTableActionIndex = 0
         buttonTableAction.remove()
         val message: String = restAction.handle()
         val audio: AudioEvent = if (message.contains("skipped")) AudioEvent.SE_CONVERSATION_NEXT else AudioEvent.SE_POTION
@@ -439,6 +446,7 @@ class BattleScreen : Screen {
     }
 
     private fun endTurnConfirmed() {
+        screenBuilder.buttonTableActionIndex = 0
         buttonTableAction.remove()
         val message = "${currentParticipant.character.name} ended their turn."
         val messageDialog = MessageDialog(message)
@@ -534,6 +542,7 @@ class BattleScreen : Screen {
     }
 
     private fun battleFledExitScreen() {
+        screenBuilder.buttonTableActionIndex = 0
         gameData.clock.takeQuarterHour()
         exitScreen { battleObserver.notifyBattleFled() }
     }
