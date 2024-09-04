@@ -5,10 +5,12 @@ import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.party.inventory.InventoryGroup
 
 
+const val BATTLE_FIELD_SIZE = 20
+
 class BattleField(participants: List<Participant>) {
 
-    val heroSpaces: MutableList<Participant?> = MutableList(20) { null }
-    val enemySpaces: MutableList<Participant?> = MutableList(20) { null }
+    val heroSpaces: MutableList<Participant?> = MutableList(BATTLE_FIELD_SIZE) { null }
+    val enemySpaces: MutableList<Participant?> = MutableList(BATTLE_FIELD_SIZE) { null }
     var startingSpace: Int = -1
 
     init {
@@ -29,6 +31,11 @@ class BattleField(participants: List<Participant>) {
 
     fun setStartingSpace(currentParticipant: Participant) {
         startingSpace = getCurrentSpace(currentParticipant)
+    }
+
+    fun removeDeadParticipants() {
+        heroSpaces.removeDeadParticipants()
+        enemySpaces.removeDeadParticipants()
     }
 
     fun moveParticipantRight(currentParticipant: Participant) {
@@ -81,6 +88,14 @@ class BattleField(participants: List<Participant>) {
     private fun Participant.getWeaponRange(): Int {
         val outOfRange = 21
         return this.character.getInventoryItem(InventoryGroup.WEAPON)?.getWeaponRange() ?: outOfRange
+    }
+
+    private fun MutableList<Participant?>.removeDeadParticipants() {
+        this.forEachIndexed { index, participant ->
+            if (participant?.character?.isAlive == false) {
+                this[index] = null
+            }
+        }
     }
 
 }

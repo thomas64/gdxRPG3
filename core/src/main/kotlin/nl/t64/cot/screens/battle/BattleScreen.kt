@@ -222,6 +222,7 @@ class BattleScreen : Screen {
 
     private fun updateBattleField() {
         battleFieldTable.remove()
+        battleField.removeDeadParticipants()
         battleFieldTable = battleFieldBuilder.createBattleFieldTable(battleField, currentParticipant)
         stage.addActor(battleFieldTable)
     }

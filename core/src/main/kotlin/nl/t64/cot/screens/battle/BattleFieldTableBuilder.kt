@@ -8,8 +8,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.utils.Scaling
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.resourceManager
+import nl.t64.cot.components.battle.BATTLE_FIELD_SIZE
 import nl.t64.cot.components.battle.BattleField
 import nl.t64.cot.components.battle.Participant
+import nl.t64.cot.components.party.inventory.InventoryGroup
 
 
 private const val TEXT_FONT = "fonts/spectral_regular_24.ttf"
@@ -18,12 +20,15 @@ private const val FONT_SIZE = 24
 class BattleFieldTableBuilder {
 
     fun createBattleFieldTable(battleField: BattleField, currentParticipant: Participant): Table {
-        val tableSkin = createSkin()
-        val labelStyle = createLabelStyle()
-        val enemyCountMap = createEnemyCountMap(battleField)
-        val enemyNumberTable = createEnemyNumberTable(battleField, enemyCountMap, tableSkin, labelStyle)
-        val enemyTable = createParticipantTable(battleField.enemySpaces, tableSkin)
-        val heroTable = if (currentParticipant.isHero) {
+        val tableSkin: Skin = createSkin()
+
+        val enemyNumberTable: Table = createEnemyNumberTable(battleField, tableSkin)
+        val enemyTable: Table = if (currentParticipant.isHero) {
+            createTargetFieldTable(battleField, currentParticipant, tableSkin)
+        } else {
+            createParticipantTable(battleField.enemySpaces, tableSkin)
+        }
+        val heroTable: Table = if (currentParticipant.isHero) {
             createHeroFieldTable(battleField, currentParticipant, tableSkin)
         } else {
             createParticipantTable(battleField.heroSpaces, tableSkin)
@@ -31,38 +36,28 @@ class BattleFieldTableBuilder {
 
         return Table(tableSkin).apply {
             bottom().left()
-            setPosition(360f, 20f)
+            setPosition(350f, 20f)
             add(enemyNumberTable).padLeft(60f)
             row()
             add(enemyTable).padLeft(60f)
             row()
-            add(heroTable)
+            add(heroTable).padTop(4f)
         }
     }
 
-    private fun createEnemyCountMap(battleField: BattleField): MutableMap<String, Int> {
-        return mutableMapOf<String, Int>().apply {
-            battleField.enemySpaces.filterNotNull().forEach {
-                this[it.character.id] = getOrDefault(it.character.id, 0) + 1
-            }
-        }
-    }
-
-    private fun createEnemyNumberTable(
-        battleField: BattleField,
-        enemyCountMap: MutableMap<String, Int>,
-        skin: Skin,
-        labelStyle: LabelStyle
-    ): Table {
+    private fun createEnemyNumberTable(battleField: BattleField, skin: Skin): Table {
+        val enemyCountMap: MutableMap<String, Int> = createEnemyCountMap(battleField)
+        val labelStyle: LabelStyle = createLabelStyle()
         return Table(skin).apply {
             defaults().width(60f).height(30f).center()
             battleField.enemySpaces.forEach {
+
                 if (it != null && !it.character.isAlive) {
-                    add()
+                    add().padRight(1f)
                 } else if (it != null && enemyCountMap[it.character.id]!! > 1) {
-                    add(Container(Label(it.character.name.last().toString(), labelStyle)))
+                    add(Container(Label(it.character.name.last().toString(), labelStyle))).padRight(1f)
                 } else {
-                    add()
+                    add().padRight(1f)
                 }
             }
         }
@@ -72,16 +67,35 @@ class BattleFieldTableBuilder {
         return Table(skin).apply {
             defaults().width(60f).height(60f).center()
             spaces.forEachIndexed { index, participantAtSpace ->
-                if (participantAtSpace == null) {
-                    add(Image(Utils.createFullBorderWhite()))
-                } else if (!participantAtSpace.character.isAlive) {
-                    spaces[index] = null
-                    add(Image(Utils.createFullBorderWhite()))
-                } else {
-                    add(Stack().apply {
-                        add(Image(Utils.createFullBorderWhite()))
-                        add(Container(createImageOf(participantAtSpace)))
-                    })
+
+                when (participantAtSpace) {
+                    null -> addWhiteCell()
+                    else -> addWhiteParticipantCell(participantAtSpace)
+                }
+            }
+        }
+    }
+
+    private fun createTargetFieldTable(battleField: BattleField, currentParticipant: Participant, skin: Skin): Table {
+        val heroSpace: Int = battleField.getCurrentSpace(currentParticipant)
+        val ranges: List<Int> = currentParticipant
+            .character
+            .getInventoryItem(InventoryGroup.WEAPON)
+            ?.getWeaponRange()
+            ?.let { range ->
+                listOfNotNull((heroSpace - 1 - range).takeIf { it >= 0 },
+                              (heroSpace + range).takeIf { it < BATTLE_FIELD_SIZE })
+            } ?: emptyList()
+
+        return Table(skin).apply {
+            defaults().width(60f).height(60f).center()
+            battleField.enemySpaces.forEachIndexed { index, enemyAtSpace ->
+
+                when {
+                    enemyAtSpace == null && index in ranges -> addRedCell()
+                    enemyAtSpace == null -> addWhiteCell()
+                    index in ranges -> addRedParticipantCell(enemyAtSpace)
+                    else -> addWhiteParticipantCell(enemyAtSpace)
                 }
             }
         }
@@ -95,80 +109,89 @@ class BattleFieldTableBuilder {
         return Table(skin).apply {
             defaults().width(60f).height(60f).center()
             battleField.heroSpaces.forEachIndexed { index, heroAtSpace ->
-                addFieldCell(index, heroAtSpace, startingSpace, currentSpace, actionPoints, battleField)
+                addHeroFieldCell(index, heroAtSpace, currentParticipant, startingSpace, currentSpace, actionPoints)
             }
         }
     }
 
-    private fun Table.addFieldCell(
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private fun createEnemyCountMap(battleField: BattleField): MutableMap<String, Int> {
+        return mutableMapOf<String, Int>().apply {
+            battleField.enemySpaces.filterNotNull().forEach {
+                this[it.character.id] = getOrDefault(it.character.id, 0) + 1
+            }
+        }
+    }
+
+    private fun Table.addHeroFieldCell(
         index: Int,
         heroAtSpace: Participant?,
+        currentParticipant: Participant,
         startingSpace: Int,
         currentSpace: Int,
         actionPoints: Int,
-        battleField: BattleField
     ) {
         val isInRange = index in startingSpace - actionPoints..startingSpace + actionPoints
         val isStartingSpace = index == startingSpace
         val isCurrentSpace = index == currentSpace
-        val isHeroDead = heroAtSpace?.character?.isAlive == false
-        if (isHeroDead) battleField.heroSpaces[index] = null
 
         when {
-            startingSpace == -1 && heroAtSpace != null -> addWhiteHeroCell(heroAtSpace)
+            startingSpace == -1 && heroAtSpace == currentParticipant -> addGoldParticipantCell(heroAtSpace)
+            startingSpace == -1 && heroAtSpace != null -> addWhiteParticipantCell(heroAtSpace)
             startingSpace == -1 && heroAtSpace == null -> addWhiteCell()
 
             isStartingSpace && !isCurrentSpace -> addGoldCell()
             isInRange && heroAtSpace == null -> addGreenCell()
-            isStartingSpace && isCurrentSpace -> addGoldHeroCell(heroAtSpace!!)
-            !isStartingSpace && isCurrentSpace -> addGreenHeroCell(heroAtSpace!!)
-            heroAtSpace != null -> addRedHeroCell(heroAtSpace)
+            isStartingSpace && isCurrentSpace -> addGoldParticipantCell(heroAtSpace!!)
+            !isStartingSpace && isCurrentSpace -> addGreenParticipantCell(heroAtSpace!!)
+            heroAtSpace != null -> addRedParticipantCell(heroAtSpace)
             else -> addRedCell()
         }
     }
 
-    private fun Table.addWhiteHeroCell(hero: Participant) {
+    private fun Table.addWhiteParticipantCell(participant: Participant) {
         add(Stack().apply {
             add(Image(Utils.createFullBorderWhite()))
-            add(Container(createImageOf(hero)))
-        })
+            add(Container(createImageOf(participant)))
+        }).padRight(1f)
     }
 
-    private fun Table.addGoldHeroCell(hero: Participant) {
+    private fun Table.addGoldParticipantCell(participant: Participant) {
         add(Stack().apply {
             add(Image(Utils.createFullBorderWhite()).apply { color = Color.GOLD })
-            add(Container(createImageOf(hero)))
-        })
+            add(Container(createImageOf(participant)))
+        }).padRight(1f)
     }
 
-    private fun Table.addGreenHeroCell(hero: Participant) {
+    private fun Table.addGreenParticipantCell(participant: Participant) {
         add(Stack().apply {
             add(Image(Utils.createFullBorderWhite()).apply { color = Color.GREEN })
-            add(Container(createImageOf(hero)))
-        })
+            add(Container(createImageOf(participant)))
+        }).padRight(1f)
     }
 
-    private fun Table.addRedHeroCell(hero: Participant) {
+    private fun Table.addRedParticipantCell(participant: Participant) {
         add(Stack().apply {
             add(Image(Utils.createFullBorderWhite()).apply { color = Color.RED })
-            add(Container(createImageOf(hero)))
-        })
+            add(Container(createImageOf(participant)))
+        }).padRight(1f)
     }
 
     private fun Table.addWhiteCell() {
-        add(Image(Utils.createFullBorderWhite()))
+        add(Image(Utils.createFullBorderWhite())).padRight(1f)
     }
 
     private fun Table.addGoldCell() {
-        add(Image(Utils.createFullBorderWhite()).apply { color = Color.GOLD })
+        add(Image(Utils.createFullBorderWhite()).apply { color = Color.GOLD }).padRight(1f)
     }
 
     private fun Table.addGreenCell() {
-        add(Image(Utils.createFullBorderWhite()).apply { color = Color.GREEN })
+        add(Image(Utils.createFullBorderWhite()).apply { color = Color.GREEN }).padRight(1f)
     }
 
     private fun Table.addRedCell() {
-        add(Image(Utils.createFullBorderWhite()).apply { color = Color.RED })
+        add(Image(Utils.createFullBorderWhite()).apply { color = Color.RED }).padRight(1f)
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
