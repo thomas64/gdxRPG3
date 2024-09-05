@@ -46,6 +46,7 @@ class DescriptionCreator(
         addHandiness()
         addPrices()
         addMinimals()
+        addRange()
         addCalcs()
         addStats()
         addSkills()
@@ -106,6 +107,21 @@ class DescriptionCreator(
                 descriptionLines.add(createLine(it, inventoryItem.getAttributeOfMinimal(it)))
             }
         }
+    }
+
+    private fun addRange() {
+        if (inventoryItem.group != InventoryGroup.WEAPON) return
+
+        val myRange: List<Int> = inventoryItem.getWeaponRange()
+        val otherRange: List<Int> = otherItem?.getWeaponRange().orEmpty()
+        when {
+            !myRange.isFarRanged() && otherRange.isFarRanged() -> descriptionLines.add(createEmptyLine())
+            myRange.isFarRanged() -> descriptionLines.add(createLine("Range", "${myRange.first()}-${myRange.last()}"))
+        }
+    }
+
+    private fun List<Int>.isFarRanged(): Boolean {
+        return this.isNotEmpty() && this != listOf(1)
     }
 
     private fun addCalcs() {

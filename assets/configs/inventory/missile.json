@@ -7,6 +7,7 @@
     "is_two_handed": true,
     "durability"   : 15,
     "min_dexterity": 10,
+    "range"        : [4, 5, 6],
     "base_hit"     : 80,
     "damage"       : 2
   },
@@ -19,6 +20,7 @@
     "price"        : 20,
     "durability"   : 30,
     "min_dexterity": 15,
+    "range"        : [4, 5, 6],
     "base_hit"     : 65,
     "damage"       : 4
   },
@@ -31,6 +33,7 @@
     "price"        : 30,
     "durability"   : 25,
     "min_dexterity": 16,
+    "range"        : [4, 5, 6],
     "base_hit"     : 65,
     "damage"       : 6
   },
@@ -43,6 +46,7 @@
     "price"        : 40,
     "durability"   : 20,
     "min_dexterity": 17,
+    "range"        : [4, 5, 6],
     "base_hit"     : 65,
     "damage"       : 8
   },
@@ -55,6 +59,7 @@
     "price"        : 50,
     "durability"   : 15,
     "min_dexterity": 18,
+    "range"        : [4, 5, 6],
     "base_hit"     : 65,
     "damage"       : 10
   },
@@ -67,6 +72,7 @@
     "price"        : 40,
     "durability"   : 30,
     "min_dexterity": 19,
+    "range"        : [4, 5, 6],
     "base_hit"     : 50,
     "damage"       : 10
   },
@@ -79,6 +85,7 @@
     "price"        : 50,
     "durability"   : 25,
     "min_dexterity": 20,
+    "range"        : [4, 5, 6],
     "base_hit"     : 50,
     "damage"       : 12
   },
@@ -91,6 +98,7 @@
     "price"        : 60,
     "durability"   : 20,
     "min_dexterity": 21,
+    "range"        : [4, 5, 6],
     "base_hit"     : 50,
     "damage"       : 14
   },
@@ -103,6 +111,7 @@
     "price"        : 70,
     "durability"   : 15,
     "min_dexterity": 22,
+    "range"        : [4, 5, 6],
     "base_hit"     : 50,
     "damage"       : 16
   },
@@ -115,6 +124,7 @@
     "price"        : 60,
     "durability"   : 30,
     "min_dexterity": 23,
+    "range"        : [4, 5, 6],
     "base_hit"     : 35,
     "damage"       : 16
   },
@@ -127,6 +137,7 @@
     "price"        : 70,
     "durability"   : 25,
     "min_dexterity": 24,
+    "range"        : [4, 5, 6],
     "base_hit"     : 35,
     "damage"       : 18
   },
@@ -139,6 +150,7 @@
     "price"        : 80,
     "durability"   : 20,
     "min_dexterity": 25,
+    "range"        : [4, 5, 6],
     "base_hit"     : 35,
     "damage"       : 20
   },
@@ -151,6 +163,7 @@
     "price"        : 90,
     "durability"   : 15,
     "min_dexterity": 26,
+    "range"        : [4, 5, 6],
     "base_hit"     : 35,
     "damage"       : 22
   },
@@ -163,6 +176,7 @@
     "price"        : 80,
     "durability"   : 30,
     "min_dexterity": 27,
+    "range"        : [4, 5, 6],
     "base_hit"     : 20,
     "damage"       : 22
   },
@@ -175,6 +189,7 @@
     "price"        : 90,
     "durability"   : 25,
     "min_dexterity": 28,
+    "range"        : [4, 5, 6],
     "base_hit"     : 20,
     "damage"       : 24
   },
@@ -187,6 +202,7 @@
     "price"        : 100,
     "durability"   : 20,
     "min_dexterity": 29,
+    "range"        : [4, 5, 6],
     "base_hit"     : 20,
     "damage"       : 26
   },
@@ -199,6 +215,7 @@
     "price"        : 110,
     "durability"   : 15,
     "min_dexterity": 30,
+    "range"        : [4, 5, 6],
     "base_hit"     : 20,
     "damage"       : 28
   }

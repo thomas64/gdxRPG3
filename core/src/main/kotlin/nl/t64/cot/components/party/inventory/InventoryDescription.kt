@@ -41,7 +41,7 @@ class InventoryDescription {
         return when {
             isHeroNotEnoughForItem(item1, hero) -> AttributeState.CANNOT_USE
             value is Int -> compareInt(item1, item2)
-            value == "0" -> AttributeState.LESS
+            value == "0" -> compareInt(item1, item2)
             else -> AttributeState.SAME
         }
     }

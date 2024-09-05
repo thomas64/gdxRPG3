@@ -31,6 +31,7 @@ data class InventoryItem(
     private val minStrength: Int = 0,
     @JsonProperty("min_dexterity")
     private val minDexterity: Int = 0,
+    private val range: List<Int> = emptyList(),
     @JsonProperty("base_hit")
     private val baseHit: Int = 0,
     private val damage: Int = 0,
@@ -193,7 +194,7 @@ data class InventoryItem(
     fun getSkillsOtherItemHasAndYouDont(otherItem: InventoryItem): Set<SkillItemId> {
         return SkillItemId.entries
             .filter { getAttributeOfSkillItemId(it) == 0 }
-            .filter { otherItem.getAttributeOfSkillItemId(it) > 0 }
+            .filter { otherItem.getAttributeOfSkillItemId(it) != 0 }
             .toSet()
     }
 
@@ -210,8 +211,8 @@ data class InventoryItem(
             SkillItemId.SWORD,
             SkillItemId.HAFTED,
             SkillItemId.POLE -> listOf(1)
-            SkillItemId.THROWN -> listOf(2, 3)
-            SkillItemId.MISSILE -> listOf(4, 5, 6)
+            SkillItemId.THROWN,
+            SkillItemId.MISSILE -> range
             else -> throw IllegalArgumentException("Only possible to ask a Weapon Skill.")
         }
     }

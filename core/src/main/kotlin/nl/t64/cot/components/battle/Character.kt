@@ -110,8 +110,8 @@ abstract class Character(
 
     fun getCalculatedTotalDamage(): Int {
         // todo, is nu alleen nog maar voor wapens, niet voor potions.
-        val currentWeaponSkill = inventory.getSkillOfCurrentWeapon()
-        val currentWeaponMinimal = inventory.getStatItemIdOfMinimalOfCurrentWeapon()
+        val currentWeaponSkill: SkillItemId? = inventory.getSkillOfCurrentWeapon()
+        val currentWeaponMinimal: StatItemId? = inventory.getStatItemIdOfMinimalOfCurrentWeapon()
         return when {
             currentWeaponSkill == null -> 0
             currentWeaponSkill.isHandToHandWeaponSkill() -> getCalculatedTotalDamageClose(currentWeaponMinimal!!)
