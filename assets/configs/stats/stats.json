@@ -63,9 +63,7 @@
     "upgrade"    : 0.04,
     "description": [
       "- 'Stamina' represents energy for magic spells and other special attacks.",
-      "  Each rank in 'Stamina' increases 'SP' by 10%.",
-      "",
-      "- ToDo, maybe: When SP hits 0, this character will experience combat penalties."
+      "  Each rank in 'Stamina' increases 'SP' by 10%."
     ]
   }
 }

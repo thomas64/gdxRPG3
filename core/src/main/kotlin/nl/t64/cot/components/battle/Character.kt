@@ -124,43 +124,28 @@ abstract class Character(
     }
 
     private fun getCalculatedTotalHit(weaponSkill: SkillItemId): Int {
-        val weaponHit = getSumOfEquipmentOfCalc(CalcAttributeId.BASE_HIT)
-        val wielderSkill = getCalculatedTotalSkillOf(weaponSkill)
-        val staminaPenalty = getPossibleChanceToHitPenalty()
-        val formula = weaponHit + ((weaponHit / 100f) * (10f * wielderSkill)) - staminaPenalty
-        return (formula
-            // + troubadour
-            // + back attack + thief bonus
-            // - movement penalty voor ranged
-            // - weight penalty voor ranged
-            // - distance penalty voor ranged
-            // - obstacle penalty voor ranged
-            // + gambler todo, overal
-            // + getLevel() todo, this one shouldn't be shown in calculation but should be calculated in battle.
-            ).roundToInt()
+        val weaponHit: Int = getSumOfEquipmentOfCalc(CalcAttributeId.BASE_HIT)
+        val weaponSkillAmount: Int = getCalculatedTotalSkillOf(weaponSkill)
+        val attackerHit: Float = (weaponHit / 100f) * (10f * weaponSkillAmount)
+        // + troubadour ?
+        // + backAttack Thief bonus hit ?
+        // + gambler todo, overal
+        return (weaponHit + attackerHit).roundToInt()
     }
 
     private fun getCalculatedTotalDamageClose(minimalType: StatItemId): Int {
-        val totalDamageOfAllEquipment = getSumOfEquipmentOfCalc(CalcAttributeId.DAMAGE)
-        val staminaPenalty = getPossibleInflictDamagePenalty()
-        val statOfWielder = getCalculatedTotalStatOf(minimalType) / staminaPenalty
-        val formula = totalDamageOfAllEquipment + ((totalDamageOfAllEquipment / 100f) * (5f * statOfWielder))
-        return (formula
-            // + back thief
-            // + getLevel() todo, this one shouldn't be shown in calculation but should be calculated in battle.
-            // + crit warrior
-            ).roundToInt()
+        val totalDamageOfAllEquipment: Int = getSumOfEquipmentOfCalc(CalcAttributeId.DAMAGE)
+        val intelligenceOrStrengthAmount: Int = getCalculatedTotalStatOf(minimalType)
+        val attackerDamage: Float = (totalDamageOfAllEquipment / 100f) * (5f * intelligenceOrStrengthAmount)
+        // + backAttack Thief bonus damage ?
+        return (totalDamageOfAllEquipment + attackerDamage).roundToInt()
     }
 
     private fun getCalculatedTotalDamageRange(): Int {
-        val weaponDamage = getSumOfEquipmentOfCalc(CalcAttributeId.DAMAGE)
-        val staminaPenalty = getPossibleInflictDamagePenalty()
-        val wielderDexterity = getCalculatedTotalStatOf(StatItemId.DEXTERITY) / staminaPenalty
-        val formula = weaponDamage + ((weaponDamage / 100f) * (5f * wielderDexterity))
-        return (formula
-            // + getLevel() todo, this one shouldn't be shown in calculation but should be calculated in battle.
-            // + crit warrior
-            ).roundToInt()
+        val weaponDamage: Int = getSumOfEquipmentOfCalc(CalcAttributeId.DAMAGE)
+        val dexterityAmount: Int = getCalculatedTotalStatOf(StatItemId.DEXTERITY)
+        val attackerDamage: Float = (weaponDamage / 100f) * (5f * dexterityAmount)
+        return (weaponDamage + attackerDamage).roundToInt()
     }
 
     fun getSumOfEquipmentOfCalc(calcAttributeId: CalcAttributeId): Int {
@@ -174,8 +159,5 @@ abstract class Character(
         // of hierboven
         return inventory.getBonusProtectionWhenArmorSetIsComplete()
     }
-
-    private fun getPossibleInflictDamagePenalty(): Int = if (currentSp <= 0) 5 else 1
-    private fun getPossibleChanceToHitPenalty(): Int = if (currentSp <= 0) 25 else 0
 
 }

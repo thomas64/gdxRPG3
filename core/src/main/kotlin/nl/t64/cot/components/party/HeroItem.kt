@@ -173,7 +173,7 @@ class HeroItem(
     private fun isMinimalToHigh(statItemId: StatItemId, dependantItem: InventoryItem, enhancerItem: InventoryItem
     ): Boolean {
         return dependantItem.getMinimalAttributeOfStatItemId(statItemId) >
-                getCalculatedTotalStatOf(statItemId) - enhancerItem.getAttributeOfStatItemId(statItemId)
+            getCalculatedTotalStatOf(statItemId) - enhancerItem.getAttributeOfStatItemId(statItemId)
     }
 
     private fun createMessageIfWeaponAndShieldAreNotCompatible(inventoryItem: InventoryItem): String? {
@@ -230,18 +230,12 @@ class HeroItem(
         return when {
             inventory.getInventoryItem(InventoryGroup.SHIELD) == null -> 0
             else -> {
-                val shieldDefense = getSumOfEquipmentOfCalc(CalcAttributeId.DEFENSE)
-                val wielderSkill = getCalculatedTotalSkillOf(SkillItemId.SHIELD)
-                val staminaPenalty = getPossibleDefensePenalty()
-                val formula = shieldDefense + ((shieldDefense / 100f) * (10f * wielderSkill)) - staminaPenalty
-                // + getLevel() todo, this one shouldn't be shown in calculation but should be calculated in battle.
-                formula.roundToInt()
+                val shieldDefense: Int = getSumOfEquipmentOfCalc(CalcAttributeId.DEFENSE)
+                val shieldSkillAmount: Int = getCalculatedTotalSkillOf(SkillItemId.SHIELD)
+                val defenderDefense: Float = (shieldDefense / 100f) * (10f * shieldSkillAmount)
+                return (shieldDefense + defenderDefense).roundToInt()
             }
         }
     }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    private fun getPossibleDefensePenalty(): Int = if (currentSp <= 0) 50 else 0
 
 }
