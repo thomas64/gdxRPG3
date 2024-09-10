@@ -64,21 +64,21 @@ class BattleScreen : Screen {
     private var hasWon: Boolean = false
     private var hasLost: Boolean = false
 
-    private val listenerAction = BattleScreenSelectActionListener({ winBattle() },
-                                                                  { selectAttack() },
-                                                                  { selectMove() },
-                                                                  { selectPotion() },
-                                                                  {}, // todo
-                                                                  { showConfirmRestDialog() },
-                                                                  { selectPreviewAttack() },
-                                                                  { showConfirmEndTurnDialog() },
-                                                                  { showFleeDialog() })
-    private val listenerMove = BattleScreenSelectMoveListener({ moveLeft() }, { moveRight() }, { showConfirmMoveDialog() }, { returnToAction() })
-    private val listenerCalculateAttack = BattleScreenSelectAttackListener({ calculateAttackIsSelected(it) }, { returnToAction() })
-    private val listenerAttack = BattleScreenSelectAttackListener({ attackIsSelected(it) }, { returnToAction() })
-    private val listenerCalculateTarget = BattleScreenSelectTargetListener(::showConfirmCalculateDialog, { returnToCalculateAttack() })
-    private val listenerTarget = BattleScreenSelectTargetListener(::showConfirmAttackDialog, { returnToAttack() })
-    private val listenerPotion = BattleScreenSelectPotionListener({ showConfirmPotionDialog(it) }, { returnToAction() })
+    private val listenerAction = SelectActionListener({ winBattle() },
+                                                      { selectAttack() },
+                                                      { selectMove() },
+                                                      { selectPotion() },
+                                                      {}, // todo
+                                                      { showConfirmRestDialog() },
+                                                      { selectPreviewAttack() },
+                                                      { showConfirmEndTurnDialog() },
+                                                      { showFleeDialog() })
+    private val listenerMove = SelectMoveListener({ moveLeft() }, { moveRight() }, { showConfirmMoveDialog() }, { returnToAction() })
+    private val listenerCalculateAttack = SelectAttackListener({ calculateAttackIsSelected(it) }, { returnToAction() })
+    private val listenerAttack = SelectAttackListener({ attackIsSelected(it) }, { returnToAction() })
+    private val listenerCalculateTarget = SelectTargetListener(::showConfirmCalculateDialog, { returnToCalculateAttack() })
+    private val listenerTarget = SelectTargetListener(::showConfirmAttackDialog, { returnToAttack() })
+    private val listenerPotion = SelectPotionListener({ showConfirmPotionDialog(it) }, { returnToAction() })
 
     companion object {
         fun load(battleId: String, battleObserver: BattleObserver) {
@@ -236,7 +236,7 @@ class BattleScreen : Screen {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun selectMove() {
-        screenBuilder.buttonTableActionIndex = (buttonTableAction.children.last() as GdxList<String>).selectedIndex
+        screenBuilder.buttonTableActionIndex = (buttonTableAction.children.last() as GdxList<*>).selectedIndex
         buttonTableAction.remove()
         setupMoveTable()
     }
@@ -250,7 +250,7 @@ class BattleScreen : Screen {
     }
 
     private fun selectPreviewAttack() {
-        screenBuilder.buttonTableActionIndex = (buttonTableAction.children.last() as GdxList<String>).selectedIndex
+        screenBuilder.buttonTableActionIndex = (buttonTableAction.children.last() as GdxList<*>).selectedIndex
         buttonTableAction.remove()
         setupCalculateAttackTable()
     }
@@ -261,7 +261,7 @@ class BattleScreen : Screen {
     }
 
     private fun selectAttack() {
-        screenBuilder.buttonTableActionIndex = (buttonTableAction.children.last() as GdxList<String>).selectedIndex
+        screenBuilder.buttonTableActionIndex = (buttonTableAction.children.last() as GdxList<*>).selectedIndex
         buttonTableAction.remove()
         setupAttackTable()
     }
@@ -272,7 +272,7 @@ class BattleScreen : Screen {
     }
 
     private fun selectPotion() {
-        screenBuilder.buttonTableActionIndex = (buttonTableAction.children.last() as GdxList<String>).selectedIndex
+        screenBuilder.buttonTableActionIndex = (buttonTableAction.children.last() as GdxList<*>).selectedIndex
         buttonTableAction.remove()
         setupPotionTable()
     }

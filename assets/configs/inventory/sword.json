@@ -1,222 +1,134 @@
 {
-  "basic_mozes_sword"    : {
+  "basic_mozes_sword": {
     "name"        : "Mozes' Sword",
     "group"       : "WEAPON",
-    "sort"        : 996,
+    "sort"        : 1007,
     "skill"       : "SWORD",
-    "price"       : 5,
+    "price"       : 3,
     "durability"  : 40,
     "min_strength": 10,
-    "base_hit"    : 85,
-    "damage"      : 8
+    "base_hit"    : 90,
+    "damage"      : 6
   },
-  "basic_orc_sword"      : {
-    "name"        : "Orc Sword",
-    "group"       : "WEAPON",
-    "sort"        : 997,
-    "skill"       : "SWORD",
-    "price"       : 5,
-    "durability"  : 30,
-    "min_strength": 11,
-    "base_hit"    : 75,
-    "damage"      : 11
-  },
-  "basic_orc_dagger"     : {
-    "name"         : "Orc Dagger",
-    "group"        : "WEAPON",
-    "sort"         : 998,
-    "skill"        : "SWORD",
-    "price"        : 5,
-    "durability"   : 30,
-    "min_dexterity": 11,
-    "base_hit"     : 80,
-    "damage"       : 10
-  },
-  "basic_fairy_sword"    : {
+  "basic_fairy_sword": {
     "name"            : "Fairy Sword",
     "group"           : "WEAPON",
-    "sort"            : 999,
+    "sort"            : 1008,
     "skill"           : "SWORD",
-    "price"           : 5,
+    "price"           : 3,
     "durability"      : 30,
     "min_intelligence": 11,
     "base_hit"        : 85,
-    "damage"          : 9
+    "damage"          : 7
   },
-  "basic_dagger"         : {
+  "basic_orc_dagger" : {
+    "name"         : "Orc Dagger",
+    "group"        : "WEAPON",
+    "sort"         : 999,
+    "skill"        : "SWORD",
+    "price"        : 3,
+    "durability"   : 30,
+    "min_dexterity": 11,
+    "base_hit"     : 80,
+    "damage"       : 8
+  },
+  "basic_orc_sword"  : {
+    "name"        : "Orc Sword",
+    "group"       : "WEAPON",
+    "sort"        : 1009,
+    "skill"       : "SWORD",
+    "price"       : 3,
+    "durability"  : 30,
+    "min_strength": 11,
+    "base_hit"    : 75,
+    "damage"      : 9
+  },
+  "basic_dagger"     : {
     "name"         : "Basic Dagger",
     "group"        : "WEAPON",
     "sort"         : 1000,
     "skill"        : "SWORD",
-    "price"        : 10,
+    "price"        : 5,
     "durability"   : 30,
-    "min_dexterity": 10,
-    "base_hit"     : 75,
-    "damage"       : 12
+    "min_dexterity": 8,
+    "base_hit"     : 90,
+    "damage"       : 7
   },
-  "fine_dagger"          : {
+  "fine_dagger"      : {
     "name"         : "Fine Dagger",
     "group"        : "WEAPON",
     "sort"         : 2000,
     "skill"        : "SWORD",
-    "price"        : 20,
+    "price"        : 15,
     "durability"   : 25,
-    "min_dexterity": 13,
-    "base_hit"     : 75,
-    "damage"       : 14
+    "min_dexterity": 12,
+    "base_hit"     : 80,
+    "damage"       : 12
   },
-  "specialist_dagger"    : {
+  "specialist_dagger": {
     "name"         : "Specialist Dagger",
     "group"        : "WEAPON",
     "sort"         : 3000,
     "skill"        : "SWORD",
-    "price"        : 30,
+    "price"        : 25,
     "durability"   : 20,
     "min_dexterity": 16,
-    "base_hit"     : 75,
-    "damage"       : 16
+    "base_hit"     : 70,
+    "damage"       : 17
   },
-  "masterwork_dagger"    : {
+  "masterwork_dagger": {
     "name"         : "Masterwork Dagger",
     "group"        : "WEAPON",
     "sort"         : 4000,
     "skill"        : "SWORD",
-    "price"        : 40,
+    "price"        : 35,
     "durability"   : 15,
-    "min_dexterity": 19,
-    "base_hit"     : 75,
-    "damage"       : 18
+    "min_dexterity": 20,
+    "base_hit"     : 60,
+    "damage"       : 22
   },
-  "basic_shortsword"     : {
-    "name"        : "Basic Shortsword",
+  "basic_sword"      : {
+    "name"        : "Basic Sword",
     "group"       : "WEAPON",
-    "sort"        : 1020,
+    "sort"        : 1010,
+    "skill"       : "SWORD",
+    "price"       : 10,
+    "durability"  : 30,
+    "min_strength": 10,
+    "base_hit"    : 80,
+    "damage"      : 10
+  },
+  "fine_sword"       : {
+    "name"        : "Fine Sword",
+    "group"       : "WEAPON",
+    "sort"        : 2010,
     "skill"       : "SWORD",
     "price"       : 30,
-    "durability"  : 30,
-    "min_strength": 12,
-    "base_hit"    : 60,
-    "damage"      : 18
-  },
-  "fine_shortsword"      : {
-    "name"        : "Fine Shortsword",
-    "group"       : "WEAPON",
-    "sort"        : 2020,
-    "skill"       : "SWORD",
-    "price"       : 40,
     "durability"  : 25,
-    "min_strength": 13,
+    "min_strength": 15,
+    "base_hit"    : 70,
+    "damage"      : 15
+  },
+  "specialist_sword" : {
+    "name"        : "Specialist Sword",
+    "group"       : "WEAPON",
+    "sort"        : 3010,
+    "skill"       : "SWORD",
+    "price"       : 50,
+    "durability"  : 20,
+    "min_strength": 20,
     "base_hit"    : 60,
     "damage"      : 20
   },
-  "specialist_shortsword": {
-    "name"        : "Specialist Shortsword",
+  "masterwork_sword" : {
+    "name"        : "Masterwork Sword",
     "group"       : "WEAPON",
-    "sort"        : 3020,
-    "skill"       : "SWORD",
-    "price"       : 50,
-    "durability"  : 20,
-    "min_strength": 14,
-    "base_hit"    : 60,
-    "damage"      : 22
-  },
-  "masterwork_shortsword": {
-    "name"        : "Masterwork Shortsword",
-    "group"       : "WEAPON",
-    "sort"        : 4020,
-    "skill"       : "SWORD",
-    "price"       : 60,
-    "durability"  : 15,
-    "min_strength": 15,
-    "base_hit"    : 60,
-    "damage"      : 24
-  },
-  "basic_longsword"      : {
-    "name"        : "Basic Longsword",
-    "group"       : "WEAPON",
-    "sort"        : 1040,
-    "skill"       : "SWORD",
-    "price"       : 50,
-    "durability"  : 30,
-    "min_strength": 17,
-    "base_hit"    : 45,
-    "damage"      : 24
-  },
-  "fine_longsword"       : {
-    "name"        : "Fine Longsword",
-    "group"       : "WEAPON",
-    "sort"        : 2040,
-    "skill"       : "SWORD",
-    "price"       : 60,
-    "durability"  : 25,
-    "min_strength": 18,
-    "base_hit"    : 45,
-    "damage"      : 26
-  },
-  "specialist_longsword" : {
-    "name"        : "Specialist Longsword",
-    "group"       : "WEAPON",
-    "sort"        : 3040,
+    "sort"        : 4010,
     "skill"       : "SWORD",
     "price"       : 70,
-    "durability"  : 20,
-    "min_strength": 19,
-    "base_hit"    : 45,
-    "damage"      : 28
-  },
-  "masterwork_longsword" : {
-    "name"        : "Masterwork Longsword",
-    "group"       : "WEAPON",
-    "sort"        : 4040,
-    "skill"       : "SWORD",
-    "price"       : 80,
-    "durability"  : 15,
-    "min_strength": 20,
-    "base_hit"    : 45,
-    "damage"      : 30
-  },
-  "basic_greatsword"     : {
-    "name"        : "Basic Greatsword",
-    "group"       : "WEAPON",
-    "sort"        : 1060,
-    "skill"       : "SWORD",
-    "price"       : 70,
-    "durability"  : 30,
-    "min_strength": 22,
-    "base_hit"    : 30,
-    "damage"      : 30
-  },
-  "fine_greatsword"      : {
-    "name"        : "Fine Greatsword",
-    "group"       : "WEAPON",
-    "sort"        : 2060,
-    "skill"       : "SWORD",
-    "price"       : 80,
-    "durability"  : 25,
-    "min_strength": 23,
-    "base_hit"    : 30,
-    "damage"      : 32
-  },
-  "specialist_greatsword": {
-    "name"        : "Specialist Greatsword",
-    "group"       : "WEAPON",
-    "sort"        : 3060,
-    "skill"       : "SWORD",
-    "price"       : 90,
-    "durability"  : 20,
-    "min_strength": 24,
-    "base_hit"    : 30,
-    "damage"      : 34
-  },
-  "masterwork_greatsword": {
-    "name"        : "Masterwork Greatsword",
-    "group"       : "WEAPON",
-    "sort"        : 4060,
-    "skill"       : "SWORD",
-    "price"       : 100,
     "durability"  : 15,
     "min_strength": 25,
-    "base_hit"    : 30,
-    "damage"      : 36
+    "base_hit"    : 50,
+    "damage"      : 25
   }
 }

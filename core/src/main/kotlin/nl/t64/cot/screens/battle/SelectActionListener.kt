@@ -9,7 +9,7 @@ import nl.t64.cot.audio.playSe
 import nl.t64.cot.constants.Constant
 
 
-class BattleScreenSelectActionListener(
+class SelectActionListener(
     private val winBattle: () -> Unit,
     private val selectAttack: () -> Unit,
     private val selectMove: () -> Unit,

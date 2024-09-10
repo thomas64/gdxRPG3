@@ -9,11 +9,10 @@ import nl.t64.cot.audio.playSe
 import nl.t64.cot.constants.Constant
 
 
-class BattleScreenSelectTargetListener(
-    private val enemy: (String, String) -> Unit,
+class SelectAttackListener(
+    private val attack: (String) -> Unit,
     private val back: () -> Unit
 ) : InputListener() {
-    private lateinit var selectedAttack: String
 
     override fun keyDown(event: InputEvent, keycode: Int): Boolean {
         if (event.stage.actors.items.any { it is Dialog }) return true
@@ -21,23 +20,20 @@ class BattleScreenSelectTargetListener(
         when (keycode) {
             Input.Keys.UP -> playSe(AudioEvent.SE_MENU_CURSOR)
             Input.Keys.DOWN -> playSe(AudioEvent.SE_MENU_CURSOR)
-            Constant.KEYCODE_BOTTOM ,Input.Keys.ENTER, Input.Keys.A  -> event.handleEnter()
+            Constant.KEYCODE_BOTTOM ,Input.Keys.ENTER, Input.Keys.A -> event.handleEnter()
             Constant.KEYCODE_RIGHT, Input.Keys.ESCAPE -> handleEscape(back)
         }
         return true
     }
 
-    fun setSelectedAttack(attack: String) {
-        selectedAttack = attack
-    }
-
     private fun InputEvent.handleEnter() {
-        val selectedTarget: String = getSelected() ?: return
-        when (selectedTarget) {
-            "Back" -> handleEscape(back)
-            else -> {
-                playSe(AudioEvent.SE_MENU_CONFIRM)
-                enemy.invoke(selectedAttack, selectedTarget)
+        getSelected<String>()?.let {
+            when {
+                "Strike" in it -> {
+                    playSe(AudioEvent.SE_MENU_CONFIRM)
+                    attack("Strike")
+                }
+                "Back" in it -> handleEscape(back)
             }
         }
     }

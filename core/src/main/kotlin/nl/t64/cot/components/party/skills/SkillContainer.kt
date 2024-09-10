@@ -3,7 +3,7 @@ package nl.t64.cot.components.party.skills
 import com.fasterxml.jackson.annotation.JsonCreator
 
 
-private const val TOTAL_XP_NECESSARY_FOR_MOZES_STARTING_SKILLS = 14
+private const val TOTAL_XP_NECESSARY_FOR_MOZES_STARTING_SKILLS = 26
 
 class SkillContainer() {
 

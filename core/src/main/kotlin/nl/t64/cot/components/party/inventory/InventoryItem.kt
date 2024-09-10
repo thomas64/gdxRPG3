@@ -210,9 +210,9 @@ data class InventoryItem(
         return when (skill) {
             SkillItemId.SWORD,
             SkillItemId.HAFTED,
-            SkillItemId.POLE -> listOf(1)
+            SkillItemId.POLE,
             SkillItemId.THROWN,
-            SkillItemId.MISSILE -> range
+            SkillItemId.MISSILE -> range.ifEmpty { listOf(1) }
             else -> throw IllegalArgumentException("Only possible to ask a Weapon Skill.")
         }
     }

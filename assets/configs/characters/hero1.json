@@ -12,8 +12,10 @@
       "stamina"     : 10
     },
     "skills"   : {
+      "stealth": 1,
       "warrior": 1,
-      "sword"  : 1
+      "sword"  : 1,
+      "missile": 1
     },
     "spells"   : {
     },
@@ -49,7 +51,7 @@
     "spells"   : {
     },
     "inventory": {
-      "weapon": "basic_dart",
+      "weapon": "basic_knife",
       "chest" : "basic_light_chest",
       "pants" : "basic_light_pants",
       "boots" : "basic_light_boots"
@@ -82,7 +84,7 @@
     "spells"   : {
     },
     "inventory": {
-      "weapon": "fine_shortsword",
+      "weapon": "basic_sword",
       "shield": "fine_light_shield",
       "chest" : "fine_medium_chest",
       "pants" : "fine_medium_pants",
@@ -151,7 +153,7 @@
       "dragon_flames": 2
     },
     "inventory": {
-      "weapon": "basic_dart",
+      "weapon": "basic_sword",
       "chest" : "basic_light_chest",
       "pants" : "basic_light_pants",
       "boots" : "basic_light_boots"
@@ -222,7 +224,7 @@
     "spells"   : {
     },
     "inventory": {
-      "weapon": "basic_lance",
+      "weapon": "basic_sword",
       "shield": "basic_heavy_shield",
       "chest" : "basic_heavy_chest",
       "pants" : "basic_heavy_pants",
@@ -336,7 +338,7 @@
       "teleportation": 7
     },
     "inventory": {
-      "weapon": "fine_longsword",
+      "weapon": "basic_sword",
       "chest" : "fine_medium_chest",
       "pants" : "fine_medium_pants",
       "boots" : "fine_medium_boots"
@@ -372,7 +374,7 @@
     "spells"   : {
     },
     "inventory": {
-      "weapon": "fine_morningstar",
+      "weapon": "basic_sword",
       "shield": "fine_medium_shield",
       "chest" : "fine_heavy_chest",
       "pants" : "fine_heavy_pants",
@@ -420,7 +422,7 @@
       "mirror"      : 9
     },
     "inventory": {
-      "weapon": "specialist_shortsword",
+      "weapon": "basic_sword",
       "shield": "specialist_light_shield",
       "chest" : "specialist_medium_chest",
       "pants" : "specialist_medium_pants",
@@ -460,7 +462,7 @@
       "solar_wrath"     : 8
     },
     "inventory": {
-      "weapon": "specialist_shortsword",
+      "weapon": "basic_sword",
       "chest" : "specialist_medium_chest",
       "pants" : "specialist_medium_pants",
       "boots" : "specialist_medium_boots"
@@ -500,7 +502,7 @@
     "spells"   : {
     },
     "inventory": {
-      "weapon": "epic_mace",
+      "weapon": "basic_sword",
       "chest" : "masterwork_light_chest",
       "pants" : "masterwork_light_pants",
       "boots" : "masterwork_light_boots"

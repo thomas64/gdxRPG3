@@ -141,7 +141,7 @@
     "spells"   : {
     },
     "inventory": {
-      "weapon": "specialist_longsword",
+      "weapon": "specialist_sword",
       "shield": "specialist_medium_shield",
       "chest" : "armor_50"
     }
@@ -179,7 +179,7 @@
       "wall_of_bones" : 10
     },
     "inventory": {
-      "weapon": "masterwork_maul",
+      "weapon": "masterwork_axe",
       "shield": "masterwork_heavy_shield",
       "chest" : "armor_100"
     }

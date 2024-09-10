@@ -126,7 +126,7 @@ abstract class Character(
     private fun getCalculatedTotalHit(weaponSkill: SkillItemId): Int {
         val weaponHit: Int = getSumOfEquipmentOfCalc(CalcAttributeId.BASE_HIT)
         val weaponSkillAmount: Int = getCalculatedTotalSkillOf(weaponSkill)
-        val attackerHit: Float = (weaponHit / 100f) * (10f * weaponSkillAmount)
+        val attackerHit: Float = (weaponHit / 100f) * (5f * weaponSkillAmount)
         // + troubadour ?
         // + backAttack Thief bonus hit ?
         // + gambler todo, overal

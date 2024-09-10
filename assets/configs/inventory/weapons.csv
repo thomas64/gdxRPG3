@@ -1,0 +1,45 @@
+key,                name,               group,      sort,   skill,   price, durability, min_intelligence,   min_dexterity,  min_strength,   base_hit,   damage,
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+basic_mozes_sword,  Mozes' Sword,       WEAPON,     1007,   SWORD,   3,     40,         0,                  0,              10,             90,         6,
+basic_fairy_sword,  Fairy Sword,        WEAPON,     1008,   SWORD,   3,     30,         11,                 0,              0,              85,         7,
+basic_orc_dagger,   Orc Dagger,         WEAPON,     999,    SWORD,   3,     30,         0,                  11,             0,              80,         8
+basic_orc_sword,    Orc Sword,          WEAPON,     1009,   SWORD,   3,     30,         0,                  0,              11,             75,         9,
+
+basic_dagger,       Basic Dagger,       WEAPON,     1000,   SWORD,   5,     30,         0,                  8,              0,              90,         7,
+fine_dagger,        Fine Dagger,        WEAPON,     2000,   SWORD,   15,    25,         0,                  12,             0,              80,         12,
+specialist_dagger,	Specialist Dagger,	WEAPON,     3000,	SWORD,	 25,    20,         0,                  16,		        0,              70,       	17,
+masterwork_dagger,	Masterwork Dagger,	WEAPON,     4000,	SWORD,	 35,    15,	        0,                  20,		        0,              60,       	22,
+
+basic_sword,	    Basic Sword,	    WEAPON,	    1010,	SWORD,	 10,	30,			0,                  0,              10,	            80,	        10,
+fine_sword,	        Fine Sword,	        WEAPON,	    2010,	SWORD,	 30,    25,			0,                  0,              15,	            70,	        15,
+specialist_sword,	Specialist Sword,	WEAPON,	    3010,	SWORD,	 50,    20,			0,                  0,              20,	            60,	        20,
+masterwork_sword,	Masterwork Sword,	WEAPON,	    4010,	SWORD,	 70,    15,			0,                  0,              25,	            50,	        25,
+
+basic_axe,	        Basic Axe,	        WEAPON,	    1100,	HAFTED,	 15,	30,			0,                  0,              12,             65,         15,
+fine_axe,	        Fine Axe,	        WEAPON,	    2100,	HAFTED,	 40,    25,			0,                  0,              18,             55,         20,
+specialist_axe,	    Specialist Axe,	    WEAPON,	    3100,	HAFTED,	 65,    20,			0,                  0,              24,             45,         25,
+masterwork_axe,	    Masterwork Axe,	    WEAPON,	    4100,	HAFTED,  90,    15,			0,                  0,              30,             35,         30,
+epic_axe,           Epic Axe,           WEAPON,     5100,   HAFTED,  115,   10,         0,                  0,              30,             35,         35,
+
+basic_staff,	    Basic Staff,        WEAPON,     1200,   POLE,    10,    30,         15,                 0,              0,              90,         4,
+fine_staff,	        Fine Staff,	        WEAPON,     2200,	POLE,    35,    25,         18,                 0,              0,              85,         8,
+specialist_staff,	Specialist Staff,	WEAPON,     3200,	POLE,    60,    20,         21,                 0,              0,              80,         12,
+masterwork_staff,	Masterwork Staff,	WEAPON,     4200,	POLE,    85,    15,         24,                 0,              0,              75,         16,
+epic_staff,	        Epic Staff,	        WEAPON,     5200,	POLE,    110,   10,         27,                 0,              0,              70,         20,
+legendary_staff,	Legendary Staff,	WEAPON,     6200,	POLE,    135,   5,          30,                 0,              0,              60,         24,
+
+basic_spear,	    Basic Spear,	    WEAPON,	    1210,	POLE,	 5,	    30,			0,                  0,              10,             95,     	5,
+fine_spear,	        Fine Spear,	        WEAPON,	    2210,	POLE,	 20,    25,			0,                  0,              14,             85,       	10,
+specialist_spear,	Specialist Spear,	WEAPON,	    3210,	POLE,	 35,    20,			0,                  0,              18,             75,       	15,
+masterwork_spear,	Masterwork Spear,	WEAPON,	    4210,	POLE,	 50,    15,			0,                  0,              22,             65,       	20,
+
+basic_knife,        Basic Knife,        WEAPON,     1300,   THROWN,  5,     30,         0,                  12,             0,              70,         6,
+fine_knife,         Fine Knife,         WEAPON,     2300,   THROWN,  15,    25,         0,                  16,             0,              65,         10,
+specialist_knife,	Specialist Knife,	WEAPON,     3300,	THROWN,	 25,    20,         0,                  20,		        0,              60,       	14,
+masterwork_knife,	Masterwork Knife,	WEAPON,     4300,	THROWN,	 35,    15,         0,                  24,		        0,              55,       	18,
+
+basic_mozes_bow,    Mozes' Bow,         WEAPON,     1399,   MISSILE, 3,     15,         0,                  10,             0,              80,         2,
+basic_bow,          Basic Bow,          WEAPON,     1400,   MISSILE, 20,    30,         0,                  12,             0,              65,         4,
+fine_bow,           Fine Bow,           WEAPON,     2400,   MISSILE, 40,    25,         0,                  18,             0,              55,         10,
+specialist_bow,	    Specialist Bow,	    WEAPON,     3400,	MISSILE, 60,    20,         0,                  24,		        0,              45,        	16,
+masterwork_bow,	    Masterwork Bow,	    WEAPON,     4400,	MISSILE, 80,    15,	        0,                  30,		        0,              35,        	22,

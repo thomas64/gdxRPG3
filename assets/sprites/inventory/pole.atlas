@@ -1,131 +1,75 @@
 
 pole.png
-size: 248,310
+size: 248, 186
 format: RGBA8888
-filter: Nearest,Nearest
+filter: Nearest, Nearest
 repeat: none
-basic_lance
+basic_spear
   rotate: false
   xy: 0, 0
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-basic_pike
+basic_staff
   rotate: false
   xy: 62, 0
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-basic_spear
+epic_staff
   rotate: false
   xy: 124, 0
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-basic_staff
+legendary_staff
   rotate: false
   xy: 186, 0
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_staff
+masterwork_spear
   rotate: false
   xy: 0, 62
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-legendary_staff
+masterwork_staff
   rotate: false
   xy: 62, 62
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-masterwork_lance
+ordinary_spear
   rotate: false
   xy: 124, 62
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-masterwork_pike
+ordinary_staff
   rotate: false
   xy: 186, 62
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-masterwork_spear
+specialist_spear
   rotate: false
   xy: 0, 124
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-masterwork_staff
-  rotate: false
-  xy: 62, 124
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
-fine_lance
-  rotate: false
-  xy: 124, 124
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
-fine_pike
-  rotate: false
-  xy: 186, 124
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
-fine_spear
-  rotate: false
-  xy: 0, 186
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
-fine_staff
-  rotate: false
-  xy: 62, 186
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
-specialist_lance
-  rotate: false
-  xy: 124, 186
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
-specialist_pike
-  rotate: false
-  xy: 186, 186
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
-specialist_spear
-  rotate: false
-  xy: 0, 248
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
 specialist_staff
   rotate: false
-  xy: 62, 248
+  xy: 62, 124
   size: 62, 62
   orig: 62, 62
   offset: 0, 0

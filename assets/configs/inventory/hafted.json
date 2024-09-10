@@ -1,210 +1,57 @@
 {
-  "basic_mozes_mace"      : {
-    "name"        : "Mozes' Mace",
-    "group"       : "WEAPON",
-    "sort"        : 1099,
-    "skill"       : "HAFTED",
-    "durability"  : 15,
-    "min_strength": 10,
-    "base_hit"    : 80,
-    "damage"      : 10
-  },
-  "basic_mace"            : {
-    "name"        : "Basic Mace",
+  "basic_axe"     : {
+    "name"        : "Basic Axe",
     "group"       : "WEAPON",
     "sort"        : 1100,
     "skill"       : "HAFTED",
     "price"       : 15,
     "durability"  : 30,
-    "min_strength": 15,
+    "min_strength": 12,
     "base_hit"    : 65,
-    "damage"      : 20
+    "damage"      : 15
   },
-  "fine_mace"             : {
-    "name"        : "Fine Mace",
+  "fine_axe"      : {
+    "name"        : "Fine Axe",
     "group"       : "WEAPON",
     "sort"        : 2100,
     "skill"       : "HAFTED",
-    "price"       : 30,
+    "price"       : 40,
     "durability"  : 25,
-    "min_strength": 16,
-    "base_hit"    : 65,
-    "damage"      : 22
+    "min_strength": 18,
+    "base_hit"    : 55,
+    "damage"      : 20
   },
-  "specialist_mace"       : {
-    "name"        : "Specialist Mace",
+  "specialist_axe": {
+    "name"        : "Specialist Axe",
     "group"       : "WEAPON",
     "sort"        : 3100,
     "skill"       : "HAFTED",
-    "price"       : 45,
+    "price"       : 65,
     "durability"  : 20,
-    "min_strength": 17,
-    "base_hit"    : 65,
-    "damage"      : 24
+    "min_strength": 24,
+    "base_hit"    : 45,
+    "damage"      : 25
   },
-  "masterwork_mace"       : {
-    "name"        : "Masterwork Mace",
+  "masterwork_axe": {
+    "name"        : "Masterwork Axe",
     "group"       : "WEAPON",
     "sort"        : 4100,
     "skill"       : "HAFTED",
-    "price"       : 60,
+    "price"       : 90,
     "durability"  : 15,
-    "min_strength": 18,
-    "base_hit"    : 65,
-    "damage"      : 26
+    "min_strength": 30,
+    "base_hit"    : 35,
+    "damage"      : 30
   },
-  "epic_mace"             : {
-    "name"        : "Epic Mace",
+  "epic_axe"      : {
+    "name"        : "Epic Axe",
     "group"       : "WEAPON",
     "sort"        : 5100,
     "skill"       : "HAFTED",
-    "price"       : 75,
+    "price"       : 115,
     "durability"  : 10,
-    "min_strength": 15,
-    "base_hit"    : 65,
-    "damage"      : 28
-  },
-  "basic_axe"             : {
-    "name"        : "Basic Axe",
-    "group"       : "WEAPON",
-    "sort"        : 1120,
-    "skill"       : "HAFTED",
-    "price"       : 45,
-    "durability"  : 30,
-    "min_strength": 19,
-    "base_hit"    : 50,
-    "damage"      : 26
-  },
-  "fine_axe"              : {
-    "name"        : "Fine Axe",
-    "group"       : "WEAPON",
-    "sort"        : 2120,
-    "skill"       : "HAFTED",
-    "price"       : 60,
-    "durability"  : 25,
-    "min_strength": 20,
-    "base_hit"    : 50,
-    "damage"      : 28
-  },
-  "specialist_axe"        : {
-    "name"        : "Specialist Axe",
-    "group"       : "WEAPON",
-    "sort"        : 3120,
-    "skill"       : "HAFTED",
-    "price"       : 75,
-    "durability"  : 20,
-    "min_strength": 21,
-    "base_hit"    : 50,
-    "damage"      : 30
-  },
-  "masterwork_axe"        : {
-    "name"        : "Masterwork Axe",
-    "group"       : "WEAPON",
-    "sort"        : 4120,
-    "skill"       : "HAFTED",
-    "price"       : 90,
-    "durability"  : 15,
-    "min_strength": 22,
-    "base_hit"    : 50,
-    "damage"      : 32
-  },
-  "epic_axe"              : {
-    "name"        : "Epic Axe",
-    "group"       : "WEAPON",
-    "sort"        : 5120,
-    "skill"       : "HAFTED",
-    "price"       : 105,
-    "durability"  : 10,
-    "min_strength": 19,
-    "base_hit"    : 50,
-    "damage"      : 34
-  },
-  "basic_morningstar"     : {
-    "name"        : "Basic Morningstar",
-    "group"       : "WEAPON",
-    "sort"        : 1140,
-    "skill"       : "HAFTED",
-    "price"       : 75,
-    "durability"  : 30,
-    "min_strength": 23,
-    "base_hit"    : 35,
-    "damage"      : 32
-  },
-  "fine_morningstar"      : {
-    "name"        : "Fine Morningstar",
-    "group"       : "WEAPON",
-    "sort"        : 2140,
-    "skill"       : "HAFTED",
-    "price"       : 90,
-    "durability"  : 25,
-    "min_strength": 24,
-    "base_hit"    : 35,
-    "damage"      : 34
-  },
-  "specialist_morningstar": {
-    "name"        : "Specialist Morningstar",
-    "group"       : "WEAPON",
-    "sort"        : 3140,
-    "skill"       : "HAFTED",
-    "price"       : 105,
-    "durability"  : 20,
-    "min_strength": 25,
-    "base_hit"    : 35,
-    "damage"      : 36
-  },
-  "masterwork_morningstar": {
-    "name"        : "Masterwork Morningstar",
-    "group"       : "WEAPON",
-    "sort"        : 4140,
-    "skill"       : "HAFTED",
-    "price"       : 120,
-    "durability"  : 15,
-    "min_strength": 26,
-    "base_hit"    : 35,
-    "damage"      : 38
-  },
-  "basic_maul"            : {
-    "name"        : "Basic Maul",
-    "group"       : "WEAPON",
-    "sort"        : 1160,
-    "skill"       : "HAFTED",
-    "price"       : 105,
-    "durability"  : 30,
-    "min_strength": 27,
-    "base_hit"    : 20,
-    "damage"      : 38
-  },
-  "fine_maul"             : {
-    "name"        : "Fine Maul",
-    "group"       : "WEAPON",
-    "sort"        : 2160,
-    "skill"       : "HAFTED",
-    "price"       : 120,
-    "durability"  : 25,
-    "min_strength": 28,
-    "base_hit"    : 20,
-    "damage"      : 40
-  },
-  "specialist_maul"       : {
-    "name"        : "Specialist Maul",
-    "group"       : "WEAPON",
-    "sort"        : 3160,
-    "skill"       : "HAFTED",
-    "price"       : 135,
-    "durability"  : 20,
-    "min_strength": 29,
-    "base_hit"    : 20,
-    "damage"      : 42
-  },
-  "masterwork_maul"       : {
-    "name"        : "Masterwork Maul",
-    "group"       : "WEAPON",
-    "sort"        : 4160,
-    "skill"       : "HAFTED",
-    "price"       : 150,
-    "durability"  : 15,
     "min_strength": 30,
-    "base_hit"    : 20,
-    "damage"      : 44
+    "base_hit"    : 35,
+    "damage"      : 35
   }
 }

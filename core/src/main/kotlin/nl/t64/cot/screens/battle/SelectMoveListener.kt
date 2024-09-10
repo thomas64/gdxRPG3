@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Dialog
 import nl.t64.cot.constants.Constant
 
 
-class BattleScreenSelectMoveListener(
+class SelectMoveListener(
     private val moveLeft: () -> Unit,
     private val moveRight: () -> Unit,
     private val confirm: () -> Unit,

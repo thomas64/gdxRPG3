@@ -34,7 +34,7 @@
       "4": {"text": ["Is she gone? She should know better than to leave without telling me."]},
       "5": {"text": ["I hope she didn't run off again! It's still dangerous outside the village!"]},
       "6": {"text": ["Oh no! I need to make sure! She likes to go to Honeywood Forest in the north."]},
-      "7": {"text": ["There could be orcs there! I'll get my sword, just in case."], "choices": [{"command": "EXIT"}]}
+      "7": {"text": ["There could be orcs there! I'll get my sword and bow, just in case."], "choices": [{"command": "EXIT"}]}
     }
   }
 }

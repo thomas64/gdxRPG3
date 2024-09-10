@@ -4,10 +4,10 @@
     "group"           : "WEAPON",
     "sort"            : 1200,
     "skill"           : "POLE",
-    "price"           : 5,
+    "price"           : 10,
     "durability"      : 30,
     "min_intelligence": 15,
-    "base_hit"        : 85,
+    "base_hit"        : 90,
     "damage"          : 4
   },
   "fine_staff"      : {
@@ -15,186 +15,102 @@
     "group"           : "WEAPON",
     "sort"            : 2200,
     "skill"           : "POLE",
-    "price"           : 10,
+    "price"           : 35,
     "durability"      : 25,
     "min_intelligence": 18,
     "base_hit"        : 85,
-    "damage"          : 7
+    "damage"          : 8
   },
   "specialist_staff": {
     "name"            : "Specialist Staff",
     "group"           : "WEAPON",
     "sort"            : 3200,
     "skill"           : "POLE",
-    "price"           : 15,
+    "price"           : 60,
     "durability"      : 20,
     "min_intelligence": 21,
-    "base_hit"        : 85,
-    "damage"          : 10
+    "base_hit"        : 80,
+    "damage"          : 12
   },
   "masterwork_staff": {
     "name"            : "Masterwork Staff",
     "group"           : "WEAPON",
     "sort"            : 4200,
     "skill"           : "POLE",
-    "price"           : 20,
+    "price"           : 85,
     "durability"      : 15,
     "min_intelligence": 24,
-    "base_hit"        : 85,
-    "damage"          : 13
+    "base_hit"        : 75,
+    "damage"          : 16
   },
   "epic_staff"      : {
     "name"            : "Epic Staff",
     "group"           : "WEAPON",
     "sort"            : 5200,
     "skill"           : "POLE",
-    "price"           : 25,
+    "price"           : 110,
     "durability"      : 10,
     "min_intelligence": 27,
-    "base_hit"        : 85,
-    "damage"          : 16
+    "base_hit"        : 70,
+    "damage"          : 20
   },
   "legendary_staff" : {
     "name"            : "Legendary Staff",
     "group"           : "WEAPON",
     "sort"            : 6200,
     "skill"           : "POLE",
-    "price"           : 30,
-    "durability"      : 10,
+    "price"           : 135,
+    "durability"      : 5,
     "min_intelligence": 30,
-    "base_hit"        : 85,
-    "damage"          : 19
+    "base_hit"        : 60,
+    "damage"          : 24
   },
   "basic_spear"     : {
     "name"        : "Basic Spear",
     "group"       : "WEAPON",
-    "sort"        : 1220,
+    "sort"        : 1210,
     "skill"       : "POLE",
-    "price"       : 15,
+    "price"       : 5,
     "durability"  : 30,
-    "min_strength": 11,
-    "base_hit"    : 70,
-    "damage"      : 10
+    "min_strength": 10,
+    "range"       : [1, 2],
+    "base_hit"    : 95,
+    "damage"      : 5
   },
   "fine_spear"      : {
     "name"        : "Fine Spear",
     "group"       : "WEAPON",
-    "sort"        : 2220,
+    "sort"        : 2210,
     "skill"       : "POLE",
     "price"       : 20,
     "durability"  : 25,
-    "min_strength": 12,
-    "base_hit"    : 70,
-    "damage"      : 12
+    "min_strength": 14,
+    "range"       : [1, 2],
+    "base_hit"    : 85,
+    "damage"      : 10
   },
   "specialist_spear": {
     "name"        : "Specialist Spear",
     "group"       : "WEAPON",
-    "sort"        : 3220,
+    "sort"        : 3210,
     "skill"       : "POLE",
-    "price"       : 25,
+    "price"       : 35,
     "durability"  : 20,
-    "min_strength": 13,
-    "base_hit"    : 70,
-    "damage"      : 14
+    "min_strength": 18,
+    "range"       : [1, 2],
+    "base_hit"    : 75,
+    "damage"      : 15
   },
   "masterwork_spear": {
     "name"        : "Masterwork Spear",
     "group"       : "WEAPON",
-    "sort"        : 4220,
-    "skill"       : "POLE",
-    "price"       : 30,
-    "durability"  : 15,
-    "min_strength": 14,
-    "base_hit"    : 70,
-    "damage"      : 16
-  },
-  "basic_pike"      : {
-    "name"        : "Basic Pike",
-    "group"       : "WEAPON",
-    "sort"        : 1240,
-    "skill"       : "POLE",
-    "price"       : 25,
-    "durability"  : 30,
-    "min_strength": 14,
-    "base_hit"    : 55,
-    "damage"      : 16
-  },
-  "fine_pike"       : {
-    "name"        : "Fine Pike",
-    "group"       : "WEAPON",
-    "sort"        : 2240,
-    "skill"       : "POLE",
-    "price"       : 30,
-    "durability"  : 25,
-    "min_strength": 15,
-    "base_hit"    : 55,
-    "damage"      : 18
-  },
-  "specialist_pike" : {
-    "name"        : "Specialist Pike",
-    "group"       : "WEAPON",
-    "sort"        : 3240,
-    "skill"       : "POLE",
-    "price"       : 35,
-    "durability"  : 20,
-    "min_strength": 16,
-    "base_hit"    : 55,
-    "damage"      : 20
-  },
-  "masterwork_pike" : {
-    "name"        : "Masterwork Pike",
-    "group"       : "WEAPON",
-    "sort"        : 4240,
-    "skill"       : "POLE",
-    "price"       : 40,
-    "durability"  : 15,
-    "min_strength": 17,
-    "base_hit"    : 55,
-    "damage"      : 22
-  },
-  "basic_lance"     : {
-    "name"        : "Basic Lance",
-    "group"       : "WEAPON",
-    "sort"        : 1260,
-    "skill"       : "POLE",
-    "price"       : 35,
-    "durability"  : 30,
-    "min_strength": 17,
-    "base_hit"    : 40,
-    "damage"      : 22
-  },
-  "fine_lance"      : {
-    "name"        : "Fine Lance",
-    "group"       : "WEAPON",
-    "sort"        : 2260,
-    "skill"       : "POLE",
-    "price"       : 40,
-    "durability"  : 25,
-    "min_strength": 18,
-    "base_hit"    : 40,
-    "damage"      : 24
-  },
-  "specialist_lance": {
-    "name"        : "Specialist Lance",
-    "group"       : "WEAPON",
-    "sort"        : 3260,
-    "skill"       : "POLE",
-    "price"       : 45,
-    "durability"  : 20,
-    "min_strength": 19,
-    "base_hit"    : 40,
-    "damage"      : 26
-  },
-  "masterwork_lance": {
-    "name"        : "Masterwork Lance",
-    "group"       : "WEAPON",
-    "sort"        : 4260,
+    "sort"        : 4210,
     "skill"       : "POLE",
     "price"       : 50,
     "durability"  : 15,
-    "min_strength": 20,
-    "base_hit"    : 40,
-    "damage"      : 28
+    "min_strength": 22,
+    "range"       : [1, 2],
+    "base_hit"    : 65,
+    "damage"      : 20
   }
 }
