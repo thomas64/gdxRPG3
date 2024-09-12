@@ -1,5 +1,5 @@
 {
-  "green_slime" : {
+  "green_slime"        : {
     "name"     : "Green Slime",
     "school"   : "NONE",
     "xp"       : 2,
@@ -46,7 +46,7 @@
       "chest" : "armor_4"
     }
   },
-  "blue_slime": {
+  "blue_slime"         : {
     "name"     : "Blue Slime",
     "school"   : "NONE",
     "xp"       : 3,
@@ -70,9 +70,10 @@
       "chest" : "armor_4"
     }
   },
-  "blue_bat"    : {
+  "blue_bat"           : {
     "name"     : "Blue Bat",
     "school"   : "NONE",
+    "hp"       : 16,
     "xp"       : 1,
     "drops"    : {"leather": 25},
     "stats"    : {
@@ -93,7 +94,7 @@
       "weapon": "bat_bite"
     }
   },
-  "orc_1"       : {
+  "orc_1"              : {
     "name"     : "Orc",
     "school"   : "NONE",
     "xp"       : 3,
@@ -117,7 +118,7 @@
       "chest" : "armor_2"
     }
   },
-  "orc_sergeant": {
+  "orc_sergeant"       : {
     "name"     : "Orc Sergeant",
     "school"   : "NONE",
     "xp"       : 27,
@@ -146,7 +147,7 @@
       "chest" : "armor_50"
     }
   },
-  "orc_general" : {
+  "orc_general"        : {
     "name"     : "Orc General",
     "school"   : "NECROMANCY",
     "xp"       : 90,
@@ -184,7 +185,7 @@
       "chest" : "armor_100"
     }
   },
-  "ardor"       : {
+  "ardor"              : {
     "name"     : "Ardor",
     "school"   : "UNKNOWN",
     "xp"       : 100,

@@ -173,7 +173,7 @@
     <property name="battleId" value="battle0005"/>
    </properties>
   </object>
-  <object id="151" name="blue_bat" type="f" x="600" y="432" width="48" height="24">
+  <object id="151" name="blue_bat" type="f" x="552" y="402" width="48" height="24">
    <properties>
     <property name="battleId" value="battle0006"/>
    </properties>

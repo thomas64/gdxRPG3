@@ -5,6 +5,7 @@ import nl.t64.cot.components.party.skills.SkillContainer
 import nl.t64.cot.components.party.spells.SchoolType
 import nl.t64.cot.components.party.spells.SpellContainer
 import nl.t64.cot.components.party.stats.StatContainer
+import nl.t64.cot.components.party.stats.StatItemId
 import kotlin.math.max
 import kotlin.math.roundToInt
 import kotlin.random.Random
@@ -14,6 +15,7 @@ class EnemyItem(
     id: String = "",
     name: String = "",
     school: SchoolType = SchoolType.NONE,
+    private val hp: Int = 0,
     stats: StatContainer = StatContainer(),
     skills: SkillContainer = SkillContainer(),
     spells: SpellContainer = SpellContainer(),
@@ -24,6 +26,7 @@ class EnemyItem(
 ) : Character(
     id, name, school, stats, skills, spells, inventory, isAlive
 ) {
+    override val maximumHp: Int get() = if (stats.getById(StatItemId.CONSTITUTION).rank == 0) hp else stats.maximumHp
 
     init {
         currentHp = maximumHp
@@ -34,6 +37,7 @@ class EnemyItem(
         id: String = this.id,
         name: String = this.name,
         school: SchoolType = this.school,
+        hp: Int = this.hp,
         stats: StatContainer = this.stats,
         skills: SkillContainer = this.skills,
         spells: SpellContainer = this.spells,
@@ -42,7 +46,7 @@ class EnemyItem(
         xp: Int = this.xp,
         drops: Map<String, Int> = this.drops
     ): EnemyItem {
-        return EnemyItem(id, name, school, stats, skills, spells, inventory, isAlive, xp, drops)
+        return EnemyItem(id, name, school, hp, stats, skills, spells, inventory, isAlive, xp, drops)
     }
 
     fun addDropsTo(spoils: MutableMap<String, Int>) {
