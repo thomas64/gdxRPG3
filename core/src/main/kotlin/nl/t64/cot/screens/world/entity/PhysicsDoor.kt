@@ -88,6 +88,8 @@ class PhysicsDoor(private val door: Door) : PhysicsComponent() {
         } else if (inventory.hasEnoughOfItem(door.keyId, 1)) {
             inventory.autoRemoveItem(door.keyId, 1)
             door.unlock()
+            stringBuilder.append("You used the key to unlock the door.")
+            worldScreen.showMessageDialog(stringBuilder.toString())
             return true
         } else {
             stringBuilder.append("This door is locked.")

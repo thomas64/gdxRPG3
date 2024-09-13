@@ -272,7 +272,8 @@
         "taskPhrase"     : "            Deliver the letter to the Fairy Shop.",
         "type"           : "DELIVER_ITEM",
         "target"         : {"letter_to_fairy_shop": 1},
-        "conversationIds": ["fairy_shop"]
+        "conversationIds": ["fairy_shop"],
+        "isResettable"   : false
       },
       "6": {
         "taskPhrase": "            Return to the elder with the package from the Fairy Shop.",

@@ -487,12 +487,12 @@
     <property name="condition" value="alone_in_party"/>
    </properties>
   </object>
-  <object id="395" name="quest_to_lastdenn_then2" type="discover" x="1008" y="1800" width="102" height="48">
+  <object id="395" name="quest_to_lastdenn_then2" type="discover" x="1008" y="1806" width="102" height="42">
    <properties>
     <property name="task" value="1"/>
    </properties>
   </object>
-  <object id="521" name="quest_to_lastdenn_then" type="discover" x="1050" y="1800" width="102" height="48">
+  <object id="521" name="quest_to_lastdenn_then" type="discover" x="1050" y="1806" width="102" height="42">
    <properties>
     <property name="task" value="1"/>
    </properties>

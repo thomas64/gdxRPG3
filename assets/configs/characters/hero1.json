@@ -20,7 +20,7 @@
     "spells"   : {
     },
     "inventory": {
-      "weapon": "basic_mozes_sword",
+      "weapon": "basic_mozes_bow",
       "chest" : "basic_light_chest",
       "pants" : "basic_light_pants",
       "boots" : "basic_light_boots"

@@ -111,7 +111,8 @@
           {"condition": ["i_time_before_08:00"], "text": "* Until 09:00. *", "command": "HEAL_LIFE_09", "nextId": "3"},
           {"condition": ["i_time_before_11:00"], "text": "* Until 12:00. *", "command": "HEAL_LIFE_12", "nextId": "3"},
           {"condition": ["i_time_before_14:00"], "text": "* Until 15:00. *", "command": "HEAL_LIFE_15", "nextId": "3"},
-          {"condition": ["i_time_before_17:00"], "text": "* Until 18:00. *", "command": "HEAL_LIFE_18", "nextId": "3"}
+          {"condition": ["i_time_before_17:00"], "text": "* Until 18:00. *", "command": "HEAL_LIFE_18", "nextId": "3"},
+          {"text": "(Back)", "nextId": "2"}
         ]
       }
     }
@@ -120,8 +121,11 @@
     "name"   : "Fairy",
     "phrases": {
       "1": {"text": ["Our endearing Mozes, do you know about these so-called warp crystals?"]},
-      "2": {"text": ["Warp crystals, like the one right here, are scattered throughout Adan. When touched, they allow instantaneous travel to other places.", "To unlock a new travel location, you must first activate the portal. This form of travel is both powerful and dangerous, so only individuals approved by us Fairies can use them. And we've decided that you, Mozes, are permitted."]},
-      "3": {"text": ["Let us assist you in this manner on your quest to find Grace.", "Don't hesitate, Mozes, go ahead and touch it."], "choices": [{"command": "EXIT"}]}
+      "2": {"text": ["Warp crystals, like the one right here, are scattered throughout Adan. When touched, they allow instantaneous travel to other places."]},
+      "3": {"text": ["To unlock a new travel location, you must first activate the portal by touch."]},
+      "4": {"text": ["When activated, this form of travel is both powerful and dangerous, so only individuals approved by us Fairies can use them. And we've decided that you, Mozes, are permitted."]},
+      "5": {"text": ["Let us assist you in this manner on your quest to find Grace."]},
+      "6": {"text": ["Don't hesitate, Mozes, go ahead and touch it."], "choices": [{"command": "EXIT"}]}
     }
   },
   "fairy_school"          : {

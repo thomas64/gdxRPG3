@@ -14,7 +14,7 @@ enum class CalcAttributeId(override val title: String) : SuperEnum {
         }
     },
 
-    BASE_HIT("Base Hit") {
+    BASE_HIT("Hit Chance") {
         override fun getDescription(): String {
             return """
                 - 'Chance to hit' defines your chance to hit

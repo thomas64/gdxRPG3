@@ -4,7 +4,7 @@
     "upgrade"    : 0.12,
     "description": [
       "- 'Intelligence' increases the damage you inflict with intelligence based weapons in combat.",
-      "  Each rank in 'Intelligence' increases 'Damage' by 5%.",
+      "  Each rank in 'Intelligence' increases the 'Damage' of those weapons by 5%.",
       "",
       "- 'Intelligence' increases the damage you inflict with offensive magic spells in combat.",
       "  Each rank in 'Intelligence' increases 'Spell Damage' by 5%.",
@@ -17,7 +17,7 @@
     "upgrade"    : 0.12,
     "description": [
       "- 'Dexterity' increases the damage you inflict with dexterity based weapons in combat.",
-      "  Each rank in 'Dexterity' increases 'Damage' by 5%.",
+      "  Each rank in 'Dexterity' increases the 'Damage' of those weapons by 5%.",
       "",
       "- Each 10 ranks in 'Dexterity' increases AP by 1."
     ]
@@ -27,7 +27,7 @@
     "upgrade"    : 0.12,
     "description": [
       "- 'Strength' increases the damage you inflict with strength based weapons in combat.",
-      "  Each rank in 'Strength' increases 'Damage' by 5%.",
+      "  Each rank in 'Strength' increases the 'Damage' of those weapons by 5%.",
       "",
       "- Each 10 ranks in 'Strength' increases AP by 1."
     ]

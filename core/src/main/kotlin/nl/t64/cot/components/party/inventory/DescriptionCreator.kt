@@ -115,7 +115,7 @@ class DescriptionCreator(
         val myRange: List<Int> = inventoryItem.getWeaponRange()
         val otherRange: List<Int> = otherItem?.getWeaponRange().orEmpty()
         when {
-            !myRange.isFarRanged() && otherRange.isFarRanged() -> descriptionLines.add(createEmptyLine())
+            !myRange.isFarRanged() && otherRange.isFarRanged() -> descriptionLines.add(createLine("Range", "1"))
             myRange.isFarRanged() -> descriptionLines.add(createLine("Range", "${myRange.first()}-${myRange.last()}"))
         }
     }

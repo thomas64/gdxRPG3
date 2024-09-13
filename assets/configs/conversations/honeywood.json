@@ -24,7 +24,7 @@
   "honeywood_ridiculous"                : {
     "name"   : "Mozes",
     "phrases": {
-      "1": {"text": ["That was a ridiculously amount of effort just to tow some stupid tree."], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["That was a ridiculously amount of effort just to let some stupid tree get towed."], "choices": [{"command": "EXIT"}]}
     }
   },
   "mrs_johanna"                         : {
@@ -41,7 +41,7 @@
       },
       "10": {"text": ["I often come here to reminisce about this once-enormous tree and my late husband, Theodore. We had such nice summers together under this tree.", "I miss him..."]},
       "11": {"text": ["Life is over before you know it, don't you think?"]},
-      "12": {"choices": [{"text": "*Acknowledge that she is unaware of the extent of its accuracy.*", "command": "EXIT"}]},
+      "12": {"face": "mozes", "text": ["You sure got that right."], "choices": [{"command": "EXIT"}]},
       "20": {"text": ["Mozes, that's wonderful news! Thank you."]},
       "21": {"text": ["Now I can die in peace."]},
       "22": {"face": "mozes", "name": "Mozes", "text": ["Really?"], "choices": [{"command": "DELIVER_QUEST_ITEM", "nextId": "23"}]},
@@ -275,7 +275,8 @@
           {"condition": ["i_time_before_08:00"], "text": "* Until 09:00. *", "command": "HEAL_LIFE_09", "nextId": "3"},
           {"condition": ["i_time_before_11:00"], "text": "* Until 12:00. *", "command": "HEAL_LIFE_12", "nextId": "3"},
           {"condition": ["i_time_before_14:00"], "text": "* Until 15:00. *", "command": "HEAL_LIFE_15", "nextId": "3"},
-          {"condition": ["i_time_before_17:00"], "text": "* Until 18:00. *", "command": "HEAL_LIFE_18", "nextId": "3"}
+          {"condition": ["i_time_before_17:00"], "text": "* Until 18:00. *", "command": "HEAL_LIFE_18", "nextId": "3"},
+          {"text": "(Back)", "nextId": "2"}
         ]
       },
       "10"  : {"text": ["Trouble? In this establishment? Ridiculous! Nothing could be further from the truth. Why, you won't find a better resting place for miles around. Now... whoever's been spreading that silly gossip about upstairs is... well..."]},
@@ -445,7 +446,7 @@
         "choices": [
           {"condition": ["i_n_6_>=_item_herb", "i_n_1_>=_item_blue_jelly"], "text": "[6 Herbs, 1 Blue Jelly] *Present the required ingredients.*", "command": "PROVIDE_QUEST_ITEM", "nextId": "30"},
           {"text": "*Agree to gather the required ingredients.*", "command": "ACCEPT_QUEST", "nextId": "10"},
-          {"text": "*Express your disgust of touching monster jelly. Take your leave.*", "command": "EXIT"}
+          {"text": "*Ew! Jelly? No thank you. Take your leave.*", "command": "EXIT"}
         ]
       },
       "10"  : {"text": ["I'll prepare the medicine as soon as you bring me the ingredients."], "choices": [{"command": "EXIT", "nextId": "20"}]},
@@ -484,8 +485,15 @@
       "10"  : {"text": ["Hmmm..."]},
       "11"  : {"text": ["As you may know, Angie has a horse, and you're most likely to find her {COLOR=BLUE}behind the inn{COLOR=BLACK}. She often tends to her horse there."], "choices": [{"nextId": "2"}]},
       "20"  : {"text": ["Hmmm..."]},
-      "21"  : {"text": ["I believe there's one in {COLOR=BLUE}my basement{COLOR=BLACK}. It's quite dark down there, but you're welcome to see if you can find it."]},
-      "22"  : {"text": ["I reckon there might be more {COLOR=BLUE}scattered around town{COLOR=BLACK}. However, if you find yourself short, our local blacksmith, north of here, should be able to assist you."], "choices": [{"nextId": "2"}]},
+      "21"  : {
+        "text": ["I believe there's one in {COLOR=BLUE}my basement{COLOR=BLACK}. It's quite dark down there, but you're welcome to see if you can find it."], "choices": [
+          {"condition": ["i_time_between_08:07_and_10:34"], "nextId": "22"},
+          {"condition": ["i_time_after_10:34"], "nextId": "23"},
+          {"condition": ["i_time_before_08:07"], "nextId": "23"}
+        ]
+      },
+      "22"  : {"text": ["I reckon there might be more {COLOR=BLUE}scattered around town{COLOR=BLACK}. However, if you find yourself short, our local blacksmith, who lives north of here but is here right now to help my wife, should be able to assist you."], "choices": [{"nextId": "2"}]},
+      "23"  : {"text": ["I reckon there might be more {COLOR=BLUE}scattered around town{COLOR=BLACK}. However, if you find yourself short, our local blacksmith, north of here, should be able to assist you."], "choices": [{"nextId": "2"}]},
       "30"  : {"text": ["Hmmm..."]},
       "31"  : {"text": ["I've got one {COLOR=BLUE}upstairs{COLOR=BLACK}; you may use it if you can find it."]},
       "32"  : {"text": ["If I recall correctly, Jaron, who lives west of here, used to have a tow rope as well. It might be worth looking into."], "choices": [{"nextId": "2"}]},
@@ -497,7 +505,7 @@
       "53"  : {"text": ["Mozes, I'd like to assist you in any way I can."]},
       "54"  : {"text": ["First of all, here's a key to the basement. Behind the door is a warp crystal, similar to the one over by the Fairies."]},
       "55"  : {"text": ["Use the portal in the basement to deliver this letter to the Fairy Shop. Afterward, return to me and show me the package you received."]},
-      "56"  : {"text": ["But most important, you'll need a travel companion. Because indeed, it's dangerous to go alone. No one is allowed to leave the village unaccompanied."]},
+      "56"  : {"text": ["And secondly, if you need to go to Lastdenn, you'll need a travel companion. Because indeed, it's dangerous to go alone. No one is allowed to leave the village unaccompanied."]},
       "57"  : {"text": ["{COLOR=BLUE}Luana{COLOR=BLACK} went to Honeywood Farm this morning. She's expressed her desire to leave the village more times than I can remember. You should go find her at the farm northeast of here, and ask her to accompany you on your journey."]},
       "58"  : {"text": ["Together, you are permitted to leave this village by the guards on your way to Lastdenn."]},
       "59"  : {"text": ["Mozes, I wish you the best of luck on your journey."], "choices": [{"command": "RECEIVE_ITEM_FOR_QUEST"}]},
@@ -510,7 +518,7 @@
           {"condition": ["alone_in_party"], "nextId": "65"}
         ]
       },
-      "65"  : {"text": ["But most important, you'll need a travel companion. Because indeed, it's dangerous to go alone. No one is allowed to leave the village unaccompanied."]},
+      "65"  : {"text": ["And secondly, if you need to go to Lastdenn, you'll need a travel companion. Because indeed, it's dangerous to go alone. No one is allowed to leave the village unaccompanied."]},
       "66"  : {"text": ["{COLOR=BLUE}Luana{COLOR=BLACK} went to Honeywood Farm this morning. She's expressed her desire to leave the village more times than I can remember. Did you already asked Luana to accompany you on your journey?"]},
       "67"  : {"text": ["Together, you are permitted to leave this village by the guards on your way to Lastdenn."]},
       "68"  : {"text": ["Mozes, I've probably told you a dozen times already, but I really wish you the best of luck on your journey."], "choices": [{"command": "EXIT"}]},
