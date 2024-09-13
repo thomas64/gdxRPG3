@@ -16,7 +16,9 @@ import nl.t64.cot.components.battle.EnemyItem
 import nl.t64.cot.components.battle.Participant
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.inventory.BattlePotionItem
+import nl.t64.cot.components.party.inventory.BattleWeaponItem
 import nl.t64.cot.components.party.inventory.InventoryGroup
+import nl.t64.cot.components.party.inventory.InventoryItem
 import nl.t64.cot.components.party.stats.StatItemId
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.disposeAndClear
@@ -174,6 +176,10 @@ class BattleScreenBuilder {
         return createStyledEmptyList<BattlePotionItem>().fillWithPotions(potions).toPotionTable()
     }
 
+    fun createButtonTableWeapon(weapons: List<BattleWeaponItem>, currentWeapon: InventoryItem?): Table {
+        return createStyledEmptyList<BattleWeaponItem>().fillWithWeapons(weapons).toWeaponTable(currentWeapon)
+    }
+
     private fun GdxList<String>.fillWithActions(): GdxList<String> {
         this.setItems(
             "Attack (? AP)",
@@ -216,6 +222,13 @@ class BattleScreenBuilder {
         return this
     }
 
+    private fun GdxList<BattleWeaponItem>.fillWithWeapons(weapons: List<BattleWeaponItem>): GdxList<BattleWeaponItem> {
+        this.setItems(*weapons.toTypedArray())
+        items.add(BattleWeaponItem("Back"))
+        this.selectedIndex = 0
+        return this
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun GdxList<String>.toActionTable(): Table {
@@ -245,8 +258,17 @@ class BattleScreenBuilder {
     private fun GdxList<BattlePotionItem>.toPotionTable(): Table {
         val listWithPotions = this
         return createSelectionTable().apply {
-            add("Select Potion:").padBottom(10f).row()
+            add("Select Potion (Amount):").padBottom(10f).row()
             add(listWithPotions)
+        }
+    }
+
+    private fun GdxList<BattleWeaponItem>.toWeaponTable(currentWeapon: InventoryItem?): Table {
+        val listWithWeapons = this
+        return createSelectionTable().apply {
+            add("Select Weapon (Uses):").padBottom(10f).row()
+            currentWeapon?.let { add("Current: ${it.name} (${it.durability} uses)").row() }
+            add(listWithWeapons)
         }
     }
 

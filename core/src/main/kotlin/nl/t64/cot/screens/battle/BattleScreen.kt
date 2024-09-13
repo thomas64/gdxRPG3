@@ -19,11 +19,15 @@ import nl.t64.cot.audio.playSe
 import nl.t64.cot.audio.stopAllBgm
 import nl.t64.cot.components.battle.*
 import nl.t64.cot.components.party.inventory.BattlePotionItem
+import nl.t64.cot.components.party.inventory.BattleWeaponItem
+import nl.t64.cot.components.party.inventory.InventoryGroup
+import nl.t64.cot.components.party.inventory.InventoryItem
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.inventory.messagedialog.MessageDialog
 import nl.t64.cot.screens.menu.DialogQuestion
 import nl.t64.cot.screens.world.Camera
+import kotlin.collections.List
 import com.badlogic.gdx.scenes.scene2d.ui.List as GdxList
 
 
@@ -51,12 +55,14 @@ class BattleScreen : Screen {
     private var buttonTableAttack: Table = Table()
     private var buttonTableTarget: Table = Table()
     private var buttonTablePotion: Table = Table()
+    private var buttonTableWeapon: Table = Table()
     private val allButtonTables
         get() = listOf(buttonTableAction,
                        buttonTableMove,
                        buttonTableAttack,
                        buttonTableTarget,
-                       buttonTablePotion)
+                       buttonTablePotion,
+                       buttonTableWeapon)
 
     private var isBgmFading: Boolean = false
     private var isLoaded: Boolean = false
@@ -68,17 +74,18 @@ class BattleScreen : Screen {
                                                       { selectAttack() },
                                                       { selectMove() },
                                                       { selectPotion() },
-                                                      {}, // todo
+                                                      { selectWeapon() },
                                                       { showConfirmRestDialog() },
                                                       { selectPreviewAttack() },
                                                       { showConfirmEndTurnDialog() },
                                                       { showFleeDialog() })
     private val listenerMove = SelectMoveListener({ moveLeft() }, { moveRight() }, { showConfirmMoveDialog() }, { returnToAction() })
-    private val listenerCalculateAttack = SelectAttackListener({ calculateAttackIsSelected(it) }, { returnToAction() })
+    private val listenerPreviewAttack = SelectAttackListener({ previewAttackIsSelected(it) }, { returnToAction() })
     private val listenerAttack = SelectAttackListener({ attackIsSelected(it) }, { returnToAction() })
-    private val listenerCalculateTarget = SelectTargetListener(::showConfirmCalculateDialog, { returnToCalculateAttack() })
+    private val listenerPreviewTarget = SelectTargetListener(::showPreviewDialog, { returnToPreviewAttack() })
     private val listenerTarget = SelectTargetListener(::showConfirmAttackDialog, { returnToAttack() })
     private val listenerPotion = SelectPotionListener({ showConfirmPotionDialog(it) }, { returnToAction() })
+    private val listenerWeapon = SelectWeaponListener({ showConfirmWeaponDialog(it) }, { returnToAction() })
 
     companion object {
         fun load(battleId: String, battleObserver: BattleObserver) {
@@ -252,12 +259,12 @@ class BattleScreen : Screen {
     private fun selectPreviewAttack() {
         screenBuilder.buttonTableActionIndex = (buttonTableAction.children.last() as GdxList<*>).selectedIndex
         buttonTableAction.remove()
-        setupCalculateAttackTable()
+        setupPreviewAttackTable()
     }
 
-    private fun calculateAttackIsSelected(attack: String) {
+    private fun previewAttackIsSelected(attack: String) {
         buttonTableAttack.remove()
-        setupCalculateTargetTable(attack)
+        setupPreviewTargetTable(attack)
     }
 
     private fun selectAttack() {
@@ -277,16 +284,23 @@ class BattleScreen : Screen {
         setupPotionTable()
     }
 
+    private fun selectWeapon() {
+        screenBuilder.buttonTableActionIndex = (buttonTableAction.children.last() as GdxList<*>).selectedIndex
+        buttonTableAction.remove()
+        setupWeaponTable()
+    }
+
     private fun returnToAction() {
         buttonTableMove.remove()
         buttonTableAttack.remove()
         buttonTablePotion.remove()
+        buttonTableWeapon.remove()
         setupActionTable()
     }
 
-    private fun returnToCalculateAttack() {
+    private fun returnToPreviewAttack() {
         buttonTableTarget.remove()
-        setupCalculateAttackTable()
+        setupPreviewAttackTable()
     }
 
     private fun returnToAttack() {
@@ -313,10 +327,10 @@ class BattleScreen : Screen {
         stage.keyboardFocus = buttonTableMove.children.last()
     }
 
-    private fun setupCalculateAttackTable() {
+    private fun setupPreviewAttackTable() {
         buttonTableAttack = screenBuilder.createButtonTableAttack(currentParticipant)
         stage.addActor(buttonTableAttack)
-        buttonTableAttack.addListener(listenerCalculateAttack)
+        buttonTableAttack.addListener(listenerPreviewAttack)
         stage.keyboardFocus = buttonTableAttack.children.last()
     }
 
@@ -327,12 +341,12 @@ class BattleScreen : Screen {
         stage.keyboardFocus = buttonTableAttack.children.last()
     }
 
-    private fun setupCalculateTargetTable(selectedAttack: String) {
+    private fun setupPreviewTargetTable(selectedAttack: String) {
         val onlyEnemies = turnManager.participants.filter { !it.isHero }
         buttonTableTarget = screenBuilder.createButtonTableTarget(onlyEnemies)
         stage.addActor(buttonTableTarget)
-        listenerCalculateTarget.setSelectedAttack(selectedAttack)
-        buttonTableTarget.addListener(listenerCalculateTarget)
+        listenerPreviewTarget.setSelectedAttack(selectedAttack)
+        buttonTableTarget.addListener(listenerPreviewTarget)
         stage.keyboardFocus = buttonTableTarget.children.last()
     }
 
@@ -346,11 +360,23 @@ class BattleScreen : Screen {
     }
 
     private fun setupPotionTable() {
-        val battlePotions = gameData.inventory.getAllSelfPotionsForBattle()
+        val battlePotions: List<BattlePotionItem> = gameData.inventory.getAllOf(InventoryGroup.POTION)
+            .filter { it.name.contains(" Potion") }
+            .map { BattlePotionItem(it) }
         buttonTablePotion = screenBuilder.createButtonTablePotion(battlePotions)
         stage.addActor(buttonTablePotion)
         buttonTablePotion.addListener(listenerPotion)
         stage.keyboardFocus = buttonTablePotion.children.last()
+    }
+
+    private fun setupWeaponTable() {
+        val battleWeapons: List<BattleWeaponItem> = gameData.inventory.getAllOf(InventoryGroup.WEAPON)
+            .map { BattleWeaponItem(it) }
+        val currentWeapon: InventoryItem? = currentParticipant.character.getInventoryItem(InventoryGroup.WEAPON)
+        buttonTableWeapon = screenBuilder.createButtonTableWeapon(battleWeapons, currentWeapon)
+        stage.addActor(buttonTableWeapon)
+        buttonTableWeapon.addListener(listenerWeapon)
+        stage.keyboardFocus = buttonTableWeapon.children.last()
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -372,9 +398,9 @@ class BattleScreen : Screen {
         returnToAction()
     }
 
-    private fun showConfirmCalculateDialog(selectedAttack: String, selectedTarget: String) {
+    private fun showPreviewDialog(selectedAttack: String, selectedTarget: String) {
         val attackAction = AttackAction(currentParticipant, enemies.getEnemy(selectedTarget), selectedAttack)
-        val message = attackAction.createCalculateMessage()
+        val message = attackAction.createPreviewMessage()
         val dialog = MessageDialog(message)
         dialog.show(stage)
     }
@@ -415,6 +441,31 @@ class BattleScreen : Screen {
         isDelayingTurn = true
         Utils.runWithDelay(0.5f) {
             messageDialog.show(stage, AudioEvent.SE_POTION)
+        }
+    }
+
+    private fun showConfirmWeaponDialog(selectedWeapon: BattleWeaponItem) {
+        val weaponAction = WeaponAction(currentParticipant, selectedWeapon)
+        weaponAction.isUnableToEquip()?.let { message ->
+            MessageDialog(message).show(stage, AudioEvent.SE_MENU_ERROR)
+            return
+        }
+        val message: String = weaponAction.createConfirmationMessage()
+        val dialog = DialogQuestion({ weaponConfirmed(weaponAction) }, message)
+        dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0)
+    }
+
+    private fun weaponConfirmed(weaponAction: WeaponAction) {
+        buttonTableWeapon.remove()
+        val message: String = weaponAction.handle()
+        val messageDialog = MessageDialog(message)
+        messageDialog.setActionAfterHide {
+            turnManager.setNextTurn()
+            isDelayingTurn = false
+        }
+        isDelayingTurn = true
+        Utils.runWithDelay(0.5f) {
+            messageDialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT)
         }
     }
 

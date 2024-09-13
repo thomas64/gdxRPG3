@@ -14,11 +14,9 @@ open class InventoryContainer(numberOfSlots: Int = 0) {
             .toMutableMap()
     }
 
-    fun getAllSelfPotionsForBattle(): List<BattlePotionItem> {
+    fun getAllOf(group: InventoryGroup): List<InventoryItem> {
         return getAllFilledSlots()
-            .filter { it.group == InventoryGroup.POTION }
-            .filter { it.name.contains(" Potion") }
-            .map { BattlePotionItem(it) }
+            .filter { it.group == group }
     }
 
     fun getAllFilledSlots(): List<InventoryItem> {
@@ -75,6 +73,10 @@ open class InventoryContainer(numberOfSlots: Int = 0) {
                 countAmount = 0
             }
         }
+    }
+
+    fun forceRemoveItem(item: InventoryItem) {
+        clearItemAt(inventory.indexOf(item))
     }
 
     fun clearItemAt(index: Int) {
