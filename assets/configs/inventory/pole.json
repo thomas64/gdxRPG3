@@ -7,8 +7,8 @@
     "price"           : 10,
     "durability"      : 30,
     "min_intelligence": 15,
-    "base_hit"        : 90,
-    "damage"          : 4
+    "base_hit"        : 95,
+    "damage"          : 5
   },
   "fine_staff"      : {
     "name"            : "Fine Staff",
@@ -19,7 +19,7 @@
     "durability"      : 25,
     "min_intelligence": 18,
     "base_hit"        : 85,
-    "damage"          : 8
+    "damage"          : 10
   },
   "specialist_staff": {
     "name"            : "Specialist Staff",
@@ -29,8 +29,8 @@
     "price"           : 60,
     "durability"      : 20,
     "min_intelligence": 21,
-    "base_hit"        : 80,
-    "damage"          : 12
+    "base_hit"        : 75,
+    "damage"          : 15
   },
   "masterwork_staff": {
     "name"            : "Masterwork Staff",
@@ -40,8 +40,8 @@
     "price"           : 85,
     "durability"      : 15,
     "min_intelligence": 24,
-    "base_hit"        : 75,
-    "damage"          : 16
+    "base_hit"        : 65,
+    "damage"          : 20
   },
   "epic_staff"      : {
     "name"            : "Epic Staff",
@@ -51,8 +51,8 @@
     "price"           : 110,
     "durability"      : 10,
     "min_intelligence": 27,
-    "base_hit"        : 70,
-    "damage"          : 20
+    "base_hit"        : 55,
+    "damage"          : 25
   },
   "legendary_staff" : {
     "name"            : "Legendary Staff",
@@ -62,8 +62,8 @@
     "price"           : 135,
     "durability"      : 5,
     "min_intelligence": 30,
-    "base_hit"        : 60,
-    "damage"          : 24
+    "base_hit"        : 45,
+    "damage"          : 30
   },
   "basic_spear"     : {
     "name"        : "Basic Spear",

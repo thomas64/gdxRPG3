@@ -52,7 +52,7 @@
     "durability"   : 30,
     "min_dexterity": 8,
     "base_hit"     : 90,
-    "damage"       : 7
+    "damage"       : 5
   },
   "fine_dagger"      : {
     "name"         : "Fine Dagger",
@@ -63,7 +63,7 @@
     "durability"   : 25,
     "min_dexterity": 12,
     "base_hit"     : 80,
-    "damage"       : 12
+    "damage"       : 10
   },
   "specialist_dagger": {
     "name"         : "Specialist Dagger",
@@ -74,7 +74,7 @@
     "durability"   : 20,
     "min_dexterity": 16,
     "base_hit"     : 70,
-    "damage"       : 17
+    "damage"       : 15
   },
   "masterwork_dagger": {
     "name"         : "Masterwork Dagger",
@@ -85,7 +85,7 @@
     "durability"   : 15,
     "min_dexterity": 20,
     "base_hit"     : 60,
-    "damage"       : 22
+    "damage"       : 20
   },
   "basic_sword"      : {
     "name"        : "Basic Sword",

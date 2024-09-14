@@ -51,7 +51,7 @@
     "price"       : 115,
     "durability"  : 10,
     "min_strength": 30,
-    "base_hit"    : 35,
+    "base_hit"    : 25,
     "damage"      : 35
   }
 }

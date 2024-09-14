@@ -9,7 +9,7 @@
     "min_dexterity": 12,
     "range"        : [3, 4, 5],
     "base_hit"     : 70,
-    "damage"       : 6
+    "damage"       : 5
   },
   "fine_knife"      : {
     "name"         : "Fine Knife",
@@ -33,7 +33,7 @@
     "min_dexterity": 20,
     "range"        : [3, 4, 5],
     "base_hit"     : 60,
-    "damage"       : 14
+    "damage"       : 15
   },
   "masterwork_knife": {
     "name"         : "Masterwork Knife",
@@ -45,6 +45,6 @@
     "min_dexterity": 24,
     "range"        : [3, 4, 5],
     "base_hit"     : 55,
-    "damage"       : 18
+    "damage"       : 20
   }
 }
