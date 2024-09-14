@@ -50,6 +50,27 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
                 }
             }
         }
+
+        fun loadForBattle() {
+            playSe(AudioEvent.SE_SCROLL)
+            screenManager.openParchmentLoadScreen(ScreenType.INVENTORY)
+            val inventoryScreen = (screenManager.getScreen(ScreenType.INVENTORY) as InventoryScreen)
+
+            thread {
+                while (true) {
+                    if (inventoryScreen.isListenerAdded) {
+                        inventoryScreen.stage.removeListener(inventoryScreen.listener)
+                        inventoryScreen.createAndSetListener(closeScreenFunction = { inventoryScreen.closeScreen(ScreenType.BATTLE) },
+                                                             doActionFunction = {},
+                                                             tryToDismissHeroFunction = {})
+                        inventoryScreen.stage.addListener(inventoryScreen.listener)
+                        break
+                    }
+                    Thread.sleep(10L)
+                }
+            }
+        }
+
     }
 
     override fun onNotifyExitConversation() {
@@ -110,15 +131,17 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
         actionAfter.invoke()
     }
 
-    private fun createAndSetListener(closeScreenFunction: () -> Unit = { closeScreen() }) {
+    private fun createAndSetListener(closeScreenFunction: () -> Unit = { closeScreen() },
+                                     doActionFunction: () -> Unit = { doAction() },
+                                     tryToDismissHeroFunction: () -> Unit = { tryToDismissHero() }) {
         listener = InventoryScreenListener(stage,
                                            closeScreenFunction,
-                                           { doAction() },
+                                           doActionFunction,
                                            { selectPreviousHero() },
                                            { selectNextHero() },
                                            { selectPreviousTable() },
                                            { selectNextTable() },
-                                           { tryToDismissHero() },
+                                           tryToDismissHeroFunction,
                                            { sortInventory() },
                                            { toggleTooltip() },
                                            { toggleCompare() },

@@ -188,6 +188,7 @@ class BattleScreenBuilder {
             "Switch weapon (3 AP)",
             "Rest (2 AP)",
             "Preview hit and damage",
+            "Inventory",
             "End turn",
             "Flee battle"
         )

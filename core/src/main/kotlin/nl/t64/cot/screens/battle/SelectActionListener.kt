@@ -17,6 +17,7 @@ class SelectActionListener(
     private val selectWeapon: () -> Unit,
     private val rest: () -> Unit,
     private val selectPreview: () -> Unit,
+    private val inventoryScreen: () -> Unit,
     private val endTurn: () -> Unit,
     private val fleeBattle: () -> Unit
 ) : InputListener() {
@@ -28,7 +29,7 @@ class SelectActionListener(
             Input.Keys.UP -> playSe(AudioEvent.SE_MENU_CURSOR)
             Input.Keys.DOWN -> playSe(AudioEvent.SE_MENU_CURSOR)
             Constant.KEYCODE_RIGHT, Input.Keys.ESCAPE -> event.dontLoseFocusAfterEsc()
-            Constant.KEYCODE_BOTTOM ,Input.Keys.ENTER, Input.Keys.A  -> event.handleEnter()
+            Constant.KEYCODE_BOTTOM, Input.Keys.ENTER, Input.Keys.A -> event.handleEnter()
             Input.Keys.W -> handleWin()
         }
         return true
@@ -49,6 +50,7 @@ class SelectActionListener(
                 "Switch" in selected -> selectWeapon()
                 "Rest" in selected -> rest()
                 "Preview" in selected -> selectPreview()
+                "Inventory" in selected -> inventoryScreen()
                 "End" in selected -> endTurn()
                 "Flee" in selected -> fleeBattle()
             }

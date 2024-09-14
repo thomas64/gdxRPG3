@@ -24,6 +24,7 @@ import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.components.party.inventory.InventoryItem
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
+import nl.t64.cot.screens.inventory.InventoryScreen
 import nl.t64.cot.screens.inventory.messagedialog.MessageDialog
 import nl.t64.cot.screens.menu.DialogQuestion
 import nl.t64.cot.screens.world.Camera
@@ -69,6 +70,7 @@ class BattleScreen : Screen {
     private var isDelayingTurn: Boolean = false
     private var hasWon: Boolean = false
     private var hasLost: Boolean = false
+    private var shouldKeepState: Boolean = false
 
     private val listenerAction = SelectActionListener({ winBattle() },
                                                       { selectAttack() },
@@ -77,6 +79,7 @@ class BattleScreen : Screen {
                                                       { selectWeapon() },
                                                       { showConfirmRestDialog() },
                                                       { selectPreviewAttack() },
+                                                      { showInventoryScreen() },
                                                       { showConfirmEndTurnDialog() },
                                                       { showFleeDialog() })
     private val listenerMove = SelectMoveListener({ moveLeft() }, { moveRight() }, { showConfirmMoveDialog() }, { returnToAction() })
@@ -97,6 +100,13 @@ class BattleScreen : Screen {
     }
 
     override fun show() {
+        if (shouldKeepState) {
+            Gdx.input.inputProcessor = stage
+            Utils.setGamepadInputProcessor(stage)
+            shouldKeepState = false
+            return
+        }
+
         enemies = EnemyContainer(battleId)
         turnManager = TurnManager(gameData.party.getAllHeroesAlive(), enemies.getAll())
         battleField = BattleField(turnManager.participants)
@@ -187,6 +197,9 @@ class BattleScreen : Screen {
     }
 
     override fun hide() {
+        Gdx.input.inputProcessor = null
+        Utils.setGamepadInputProcessor(null)
+        if (shouldKeepState) return
         stage.clear()
     }
 
@@ -532,6 +545,11 @@ class BattleScreen : Screen {
             showMessages(messages)
             isDelayingTurn = false
         }
+    }
+
+    private fun showInventoryScreen() {
+        shouldKeepState = true
+        InventoryScreen.loadForBattle()
     }
 
     private fun showMessages(messages: ArrayDeque<String>) {
