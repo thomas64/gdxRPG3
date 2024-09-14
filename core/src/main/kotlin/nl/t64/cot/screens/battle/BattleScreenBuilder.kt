@@ -268,7 +268,7 @@ class BattleScreenBuilder {
         val listWithWeapons = this
         return createSelectionTable().apply {
             add("Select Weapon (Uses):").padBottom(10f).row()
-            currentWeapon?.let { add("Current: ${it.name} (${it.durability} uses)").row() }
+            currentWeapon?.let { add("Current: ${it.name} (${it.durability})").row() }
             add(listWithWeapons)
         }
     }
