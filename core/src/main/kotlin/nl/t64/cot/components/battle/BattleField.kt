@@ -3,6 +3,7 @@ package nl.t64.cot.components.battle
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.party.inventory.InventoryGroup
+import kotlin.math.abs
 
 
 private const val BATTLE_FIELD_SIZE = 20
@@ -43,9 +44,15 @@ class BattleField(participants: List<Participant>) {
         enemySpaces.removeDeadParticipants()
     }
 
+    fun createEnemyCountMap(): Map<String, Int> {
+        return enemySpaces.filterNotNull()
+            .groupingBy { it.character.id }
+            .eachCount()
+    }
+
     fun moveParticipantRight(currentParticipant: Participant) {
-        val currentIndex = getCurrentSpace(currentParticipant)
-        val upperBound = minOf(startingSpace + 1 + currentParticipant.currentAP, 20)
+        val currentIndex: Int = getCurrentSpace(currentParticipant)
+        val upperBound: Int = minOf(startingSpace + 1 + currentParticipant.currentAP, 20)
         (currentIndex + 1 until upperBound)
             .firstOrNull { heroSpaces[it] == null }
             ?.let {
@@ -55,8 +62,8 @@ class BattleField(participants: List<Participant>) {
     }
 
     fun moveParticipantLeft(currentParticipant: Participant) {
-        val currentIndex = getCurrentSpace(currentParticipant)
-        val lowerBound = maxOf(startingSpace - currentParticipant.currentAP, 0)
+        val currentIndex: Int = getCurrentSpace(currentParticipant)
+        val lowerBound: Int = maxOf(startingSpace - currentParticipant.currentAP, 0)
         (currentIndex - 1 downTo lowerBound)
             .firstOrNull { heroSpaces[it] == null }
             ?.let {
@@ -72,18 +79,31 @@ class BattleField(participants: List<Participant>) {
     }
 
     fun getTargetableEnemiesFor(currentParticipant: Participant): List<Participant> {
-        return enemySpaces
-            .filterNotNull()
+        return enemySpaces.filterNotNull()
             .filter { it.isInRangeOf(currentParticipant) }
     }
 
-    fun getRangeOf(currentParticipant: Participant): List<Int> {
-        val heroSpace: Int = heroSpaces.indexOf(currentParticipant)
+    fun getNearestHeroIndexFrom(attackPoints: List<Int>): Int {
+        return heroSpaces.filterNotNull()
+            .map { getCurrentSpace(it) }
+            .minBy { heroSpace -> attackPoints.minOf { attackPoint -> abs(attackPoint - heroSpace) } }
+    }
+
+    fun getRangeOfHero(currentHero: Participant): List<Int> {
+        return getRange(currentHero, 0, -1)
+    }
+
+    fun getRangeOfEnemy(currentEnemy: Participant): List<Int> {
+        return getRange(currentEnemy, 1, 0)
+    }
+
+    private fun getRange(currentParticipant: Participant, offsetLeft: Int, offSetRight: Int): List<Int> {
+        val currentSpace: Int = getCurrentSpace(currentParticipant)
         return currentParticipant.character.getInventoryItem(InventoryGroup.WEAPON)
             ?.getWeaponRange()
-            ?.map { listOf(heroSpace - it, heroSpace + it - 1) }
+            ?.map { listOf(currentSpace - it + offsetLeft, currentSpace + it + offSetRight) }
             ?.flatten()
-            ?.filter { it in 0 until BATTLE_FIELD_SIZE }
+            ?.filter { it in 0..BATTLE_FIELD_SIZE }
             ?.distinct()
             ?: emptyList()
     }
@@ -95,7 +115,7 @@ class BattleField(participants: List<Participant>) {
 
     private fun Participant.isInRangeOf(currentParticipant: Participant): Boolean {
         val enemySpace: Int = enemySpaces.indexOf(this)
-        val range: List<Int> = getRangeOf(currentParticipant)
+        val range: List<Int> = getRangeOfHero(currentParticipant)
         return enemySpace in range
     }
 

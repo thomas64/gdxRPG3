@@ -189,8 +189,8 @@ class BattleScreenBuilder {
             "Rest (2 AP)",
             "Preview hit and damage",
             "Inventory",
-            "End turn",
-            "Flee battle"
+            "Flee battle",
+            "End turn"
         )
         this.selectedIndex = buttonTableActionIndex
         return this

@@ -44,7 +44,7 @@ class BattleFieldTableBuilder {
     }
 
     private fun createEnemyNumberTable(battleField: BattleField, skin: Skin): Table {
-        val enemyCountMap: MutableMap<String, Int> = createEnemyCountMap(battleField)
+        val enemyCountMap: Map<String, Int> = battleField.createEnemyCountMap()
         val labelStyle: LabelStyle = createLabelStyle()
         return Table(skin).apply {
             defaults().width(60f).height(30f).center()
@@ -64,18 +64,17 @@ class BattleFieldTableBuilder {
     private fun createParticipantTable(spaces: MutableList<Participant?>, skin: Skin): Table {
         return Table(skin).apply {
             defaults().width(60f).height(60f).center()
-            spaces.forEachIndexed { index, participantAtSpace ->
-
-                when (participantAtSpace) {
+            spaces.forEach {
+                when (it) {
                     null -> addWhiteCell()
-                    else -> addWhiteParticipantCell(participantAtSpace)
+                    else -> addWhiteParticipantCell(it)
                 }
             }
         }
     }
 
     private fun createTargetFieldTable(battleField: BattleField, currentParticipant: Participant, skin: Skin): Table {
-        val ranges: List<Int> = battleField.getRangeOf(currentParticipant)
+        val ranges: List<Int> = battleField.getRangeOfHero(currentParticipant)
 
         return Table(skin).apply {
             defaults().width(60f).height(60f).center()
@@ -105,14 +104,6 @@ class BattleFieldTableBuilder {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    private fun createEnemyCountMap(battleField: BattleField): MutableMap<String, Int> {
-        return mutableMapOf<String, Int>().apply {
-            battleField.enemySpaces.filterNotNull().forEach {
-                this[it.character.id] = getOrDefault(it.character.id, 0) + 1
-            }
-        }
-    }
 
     private fun Table.addHeroFieldCell(
         index: Int,

@@ -446,6 +446,7 @@ class BattleScreen : Screen {
     private fun potionConfirmed(potionAction: PotionAction) {
         buttonTablePotion.remove()
         val message: String = potionAction.handle()
+        val audio: AudioEvent = if (message.contains("no effect")) AudioEvent.SE_CONVERSATION_NEXT else AudioEvent.SE_POTION
         val messageDialog = MessageDialog(message)
         messageDialog.setActionAfterHide {
             turnManager.setNextTurn()
@@ -453,7 +454,7 @@ class BattleScreen : Screen {
         }
         isDelayingTurn = true
         Utils.runWithDelay(0.5f) {
-            messageDialog.show(stage, AudioEvent.SE_POTION)
+            messageDialog.show(stage, audio)
         }
     }
 
@@ -539,8 +540,8 @@ class BattleScreen : Screen {
         if (isDelayingTurn) return
         isDelayingTurn = true
         Utils.runWithDelay(1f) {
-            val attackAction = AttackAction.createForEnemy(currentParticipant)
-            val messages: ArrayDeque<String> = attackAction.handle()
+            val enemyAction = EnemyAction(battleField, currentParticipant)
+            val messages: ArrayDeque<String> = enemyAction.handle()
             turnManager.setNextTurn()
             showMessages(messages)
             isDelayingTurn = false

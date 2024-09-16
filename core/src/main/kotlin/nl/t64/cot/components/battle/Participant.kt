@@ -16,7 +16,6 @@ class Participant(
 
     fun updateTurnCounter() {
         turnCounter += 10f + character.getCalculatedTotalStatOf(StatItemId.SPEED) //* 0.5f
-        // if character  sp == 0 -> speed / 3f?
     }
 
     fun isTurnCounterAtMax(): Boolean {

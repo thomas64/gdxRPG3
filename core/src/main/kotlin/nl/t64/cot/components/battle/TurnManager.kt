@@ -18,15 +18,18 @@ class TurnManager(
     }
 
     fun setNextTurn() {
-        currentParticipant.resetTurnCounter()
         removeKilledParticipants()
-        sortParticipants()
-        val newFirst = currentParticipant
+        if (participants.size == 1) return
+        val nextInLine = participants[1]
+        currentParticipant.resetTurnCounter()
         increaseAllTurnCounters()
         sortParticipants()
-        participants.remove(newFirst)
-        participants.add(0, newFirst)
-        newFirst.refreshActionPoints()
+        nextInLine.moveToTop()
+        nextInLine.refreshActionPoints()
+    }
+
+    private fun removeKilledParticipants() {
+        participants.removeIf { !it.character.isAlive }
     }
 
     private fun increaseAllTurnCounters() {
@@ -41,8 +44,9 @@ class TurnManager(
         participants.sortWith(comparator)
     }
 
-    private fun removeKilledParticipants() {
-        participants.removeIf { !it.character.isAlive }
+    private fun Participant.moveToTop() {
+        participants.remove(this)
+        participants.add(0, this)
     }
 
     private fun createParticipants(): MutableList<Participant> {
