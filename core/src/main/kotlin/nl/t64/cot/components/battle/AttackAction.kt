@@ -1,6 +1,5 @@
 package nl.t64.cot.components.battle
 
-import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.inventory.InventoryGroup
@@ -27,13 +26,11 @@ class AttackAction(
     private val cappedCriticalDamage: Int = criticalDamage.coerceAtMost(target.currentHp)
 
     companion object {
-        fun createForEnemy(currentParticipant: Participant): AttackAction {
-            // todo, random target is niet de bedoeling. deze moet 'ai' uitgekozen worden.
-            val target: HeroItem = gameData.party.getAllHeroesAlive().random()
+        fun createForEnemy(currentEnemy: Participant, targetHero: Participant): AttackAction {
             // todo, weaponName is niet de bedoeling, dit moet een 'spell' worden. body slam, bite, etc.
             // de names van die weapons moeten dus ook niet in enemy.json staan.
-            val weaponName: String = currentParticipant.character.getInventoryItem(InventoryGroup.WEAPON)!!.name
-            return AttackAction(currentParticipant, target, weaponName) // ← hier dus
+            val weaponName: String = currentEnemy.character.getInventoryItem(InventoryGroup.WEAPON)!!.name
+            return AttackAction(currentEnemy, targetHero.character, weaponName) // ← hier dus
         }
     }
 

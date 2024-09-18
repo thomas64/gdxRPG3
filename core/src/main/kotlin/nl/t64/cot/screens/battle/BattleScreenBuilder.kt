@@ -129,15 +129,17 @@ class BattleScreenBuilder {
             addSpeedCell(participants[0], Color.GOLD).padBottom(5f).row()
 
             add("Next:")
-            add(createImageOf(participants[1]))
-            add(participants[1].character.name)
-            addSpeedCell(participants[1]).row()
+            if (participants.size > 1) {
+                add(createImageOf(participants[1]))
+                add(participants[1].character.name)
+                addSpeedCell(participants[1]).row()
 
-            participants.drop(2).forEach {
-                add("")
-                add(createImageOf(it))
-                add(it.character.name)
-                addSpeedCell(it).row()
+                participants.drop(2).forEach {
+                    add("")
+                    add(createImageOf(it))
+                    add(it.character.name)
+                    addSpeedCell(it).row()
+                }
             }
         }
     }

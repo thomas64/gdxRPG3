@@ -29,6 +29,7 @@ import nl.t64.cot.screens.inventory.messagedialog.MessageDialog
 import nl.t64.cot.screens.menu.DialogQuestion
 import nl.t64.cot.screens.world.Camera
 import kotlin.collections.List
+import kotlin.concurrent.thread
 import com.badlogic.gdx.scenes.scene2d.ui.List as GdxList
 
 
@@ -68,6 +69,7 @@ class BattleScreen : Screen {
     private var isBgmFading: Boolean = false
     private var isLoaded: Boolean = false
     private var isDelayingTurn: Boolean = false
+    private var isEnemyActing: Boolean = false
     private var hasWon: Boolean = false
     private var hasLost: Boolean = false
     private var shouldKeepState: Boolean = false
@@ -161,6 +163,9 @@ class BattleScreen : Screen {
 
         updateHeroTable()
         updateEnemyTable()
+        updateTurnTable()
+        currentParticipant = turnManager.currentParticipant
+        updateBattleField()
 
         if (enemies.getAll().none { it.isAlive }) {
             winBattle()
@@ -171,11 +176,6 @@ class BattleScreen : Screen {
             gameOver()
             return
         }
-
-        updateTurnTable()
-        currentParticipant = turnManager.currentParticipant
-
-        updateBattleField()
 
         if (currentParticipant.isHero) {
             takeTurnHero()
@@ -264,11 +264,11 @@ class BattleScreen : Screen {
     }
 
     private fun moveLeft() {
-        battleField.moveParticipantLeft(currentParticipant)
+        battleField.moveHeroLeft(currentParticipant)
     }
 
     private fun moveRight() {
-        battleField.moveParticipantRight(currentParticipant)
+        battleField.moveHeroRight(currentParticipant)
     }
 
     private fun selectPreviewAttack() {
@@ -398,14 +398,11 @@ class BattleScreen : Screen {
 
     private fun showConfirmMoveDialog() {
         val moveAction = MoveAction(battleField, currentParticipant)
-        if (moveAction.difference == 0) {
-            playSe(AudioEvent.SE_MENU_BACK)
-            returnToAction()
-        } else {
-            val message = moveAction.createConfirmationMessage()
-            val dialog = DialogQuestion({ moveConfirmed(moveAction) }, message)
-            dialog.show(stage, 0)
-        }
+        if (moveAction.didCharacterRemainOnTheSameSpace()) return returnToAction()
+
+        val message = moveAction.createConfirmationMessage()
+        val dialog = DialogQuestion({ moveConfirmed(moveAction) }, message)
+        dialog.show(stage, 0)
     }
 
     private fun moveConfirmed(moveAction: MoveAction) {
@@ -539,15 +536,28 @@ class BattleScreen : Screen {
     }
 
     private fun takeTurnEnemy() {
-        if (isDelayingTurn) return
-        isDelayingTurn = true
-        Utils.runWithDelay(1f) {
-            val enemyAction = EnemyAction(battleField, currentParticipant)
-            val messages: ArrayDeque<String> = enemyAction.handle()
-            turnManager.setNextTurn()
-            showMessages(messages)
-            isDelayingTurn = false
+        if (isEnemyActing) return
+        isEnemyActing = true
+        thread {
+            runCatching {
+                enemyAction()
+            }.also {
+                isEnemyActing = false
+                isDelayingTurn = false
+            }
         }
+    }
+
+    private fun enemyAction() {
+        Thread.sleep(1000L)
+        val heroTarget: Participant? = battleField.moveEnemyAndPossibleHeroTargetInRange(currentParticipant)
+        isDelayingTurn = true
+        val messages: ArrayDeque<String> = heroTarget
+            ?.let { AttackAction.createForEnemy(currentParticipant, it).handle() }
+            ?: ArrayDeque(listOf("${currentParticipant.character.name} ended their turn."))
+        showMessages(messages)
+        Thread.sleep(1000L)
+        turnManager.setNextTurn()
     }
 
     private fun showInventoryScreen() {

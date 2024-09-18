@@ -12,12 +12,21 @@ class MoveAction(
     private val character: Character = currentParticipant.character
     private val currentSpace: Int = battleField.getCurrentSpace(currentParticipant)
     private val startingSpace: Int = battleField.startingSpace
-    val difference: Int = abs(currentSpace - startingSpace)
+    private val difference: Int = abs(currentSpace - startingSpace)
 
     fun createConfirmationMessage(): String {
         playSe(AudioEvent.SE_MENU_CONFIRM)
         return """
             Do you want to move here for $difference AP?""".trimIndent()
+    }
+
+    fun didCharacterRemainOnTheSameSpace(): Boolean {
+        if (difference == 0) {
+            playSe(AudioEvent.SE_MENU_BACK)
+            return true
+        } else {
+            return false
+        }
     }
 
     fun handle() {
