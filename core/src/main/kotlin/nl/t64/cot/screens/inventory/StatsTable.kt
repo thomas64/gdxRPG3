@@ -16,9 +16,10 @@ import nl.t64.cot.components.party.toCalcAttributeId
 import nl.t64.cot.screens.inventory.tooltip.PersonalityTooltip
 
 
-private const val FIRST_COLUMN_WIDTH = 190f
-private const val SECOND_COLUMN_WIDTH = 40f
-private const val THIRD_COLUMN_WIDTH = 35f
+private const val FIRST_COLUMN_WIDTH = 175f
+private const val SECOND_COLUMN_WIDTH = 15f
+private const val THIRD_COLUMN_WIDTH = 40f
+private const val FOURTH_COLUMN_WIDTH = 35f
 private const val CONTAINER_HEIGHT = 704f
 private const val FIRST_INDEX_OF_CALCS = 18
 private const val THREE_COLUMNS = 3
@@ -31,6 +32,7 @@ internal class StatsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
         table.columnDefaults(0).width(FIRST_COLUMN_WIDTH)
         table.columnDefaults(1).width(SECOND_COLUMN_WIDTH)
         table.columnDefaults(2).width(THIRD_COLUMN_WIDTH)
+        table.columnDefaults(3).width(FOURTH_COLUMN_WIDTH)
 
         container.add(table).height(CONTAINER_HEIGHT)
         container.background = Utils.createTopBorder()
@@ -91,30 +93,36 @@ internal class StatsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
         fillEmptyRow()
 
         table.add(Label(CalcAttributeId.ACTION_POINTS.title, createLabelStyle()))
+        table.add("")
         table.add(selectedHero.getCalculatedActionPoints().toString())
         table.add("").row()
 
         table.add(Label("Chance to hit (%)", createLabelStyle()))
+        table.add("")
         val baseHit: Int = selectedHero.getCalcValueOf(InventoryGroup.WEAPON, CalcAttributeId.BASE_HIT)
         table.add(baseHit.toString())
         val bonusHit: Int = selectedHero.getCalculatedTotalHit() - baseHit
         addExtraToTable(bonusHit)
 
         table.add(Label(CalcAttributeId.DEFENSE.title + " (%)", createLabelStyle()))
+        table.add("")
         table.add(selectedHero.getCalculatedTotalDefense().toString())
         table.add("").row()
 
         table.add(Label(CalcAttributeId.DAMAGE.title, createLabelStyle()))
+        table.add("")
         val baseDamage: Int = selectedHero.getCalcValueOf(InventoryGroup.WEAPON, CalcAttributeId.DAMAGE)
         table.add(baseDamage.toString())
         val bonusDamage: Int = selectedHero.getCalculatedTotalDamage() - baseDamage
         addExtraToTable(bonusDamage)
 
         table.add(Label(CalcAttributeId.PROTECTION.title, createLabelStyle()))
+        table.add("")
         table.add(selectedHero.getSumOfEquipmentOfCalc(CalcAttributeId.PROTECTION).toString())
         addExtraToTable(selectedHero.getPossibleExtraProtection())
 
         table.add(Label(CalcAttributeId.SPELL_BATTERY.title, createLabelStyle()))
+        table.add("")
         table.add(selectedHero.getSumOfEquipmentOfCalc(CalcAttributeId.SPELL_BATTERY).toString())
         table.add("").row()
 
@@ -124,6 +132,8 @@ internal class StatsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
     private fun fillRow(statItem: StatItem, index: Int) {
         val statTitle = Label(statItem.name, createLabelStyle())
         table.add(statTitle)
+        val upgrade = Label("^", LabelStyle(font, Color.PURPLE))
+        if (selectedHero.xpToInvest >= statItem.getXpCostForNextRank()) table.add(upgrade) else table.add("")
         table.add(statItem.rank.toString())
         val totalExtra = selectedHero.getExtraStatForVisualOf(statItem)
         addExtraToTable(totalExtra)
@@ -133,17 +143,20 @@ internal class StatsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
     private fun fillEmptyRow() {
         table.add("")
         table.add("")
+        table.add("")
         table.add("").row()
     }
 
     private fun fillRow(key: String) {
         table.add(key)
         table.add("")
+        table.add("")
         table.add("").row()
     }
 
     private fun fillRow(key: String, value: Int) {
         table.add(key)
+        table.add("")
         table.add(value.toString())
         table.add("").row()
     }

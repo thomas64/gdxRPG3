@@ -217,7 +217,6 @@ class SceneArdorFirstTime : CutsceneScreen() {
     }
 
     override fun exitScreen() {
-        stopSe(AudioEvent.SE_MAGIC)
         endCutsceneAnd { BattleScreen.load("ardor_orc_generals", this) }
     }
 

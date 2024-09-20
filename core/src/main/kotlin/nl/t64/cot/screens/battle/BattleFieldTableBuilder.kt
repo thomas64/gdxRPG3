@@ -126,8 +126,8 @@ class BattleFieldTableBuilder {
             isInRange && heroAtSpace == null -> addGreenCell()
             isStartingSpace && isCurrentSpace -> addGoldParticipantCell(heroAtSpace!!)
             !isStartingSpace && isCurrentSpace -> addGreenParticipantCell(heroAtSpace!!)
-            heroAtSpace != null -> addRedParticipantCell(heroAtSpace)
-            else -> addRedCell()
+            heroAtSpace != null -> addWhiteParticipantCell(heroAtSpace)
+            else -> addWhiteCell()
         }
     }
 
@@ -140,14 +140,14 @@ class BattleFieldTableBuilder {
 
     private fun Table.addGoldParticipantCell(participant: Participant) {
         add(Stack().apply {
-            add(Image(Utils.createFullBorderWhite()).apply { color = Color.GOLD })
+            add(Image(Utils.createFullBorderWhite()).apply { color = Color.ORANGE })
             add(Container(createImageOf(participant)))
         }).padRight(1f)
     }
 
     private fun Table.addGreenParticipantCell(participant: Participant) {
         add(Stack().apply {
-            add(Image(Utils.createFullBorderWhite()).apply { color = Color.GREEN })
+            add(Image(Utils.createFullBorderWhite()).apply { color = Color.CHARTREUSE })
             add(Container(createImageOf(participant)))
         }).padRight(1f)
     }
@@ -164,11 +164,11 @@ class BattleFieldTableBuilder {
     }
 
     private fun Table.addGoldCell() {
-        add(Image(Utils.createFullBorderWhite()).apply { color = Color.GOLD }).padRight(1f)
+        add(Image(Utils.createFullBorderWhite()).apply { color = Color.ORANGE }).padRight(1f)
     }
 
     private fun Table.addGreenCell() {
-        add(Image(Utils.createFullBorderWhite()).apply { color = Color.GREEN }).padRight(1f)
+        add(Image(Utils.createFullBorderWhite()).apply { color = Color.CHARTREUSE }).padRight(1f)
     }
 
     private fun Table.addRedCell() {

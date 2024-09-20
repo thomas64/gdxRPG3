@@ -137,7 +137,9 @@ class BattleScreen : Screen {
                 Gdx.input.inputProcessor = stage
                 Utils.setGamepadInputProcessor(stage)
                 isLoaded = true
-            },
+                render(0f)
+                gameData.events.getEventById("guide_event_battle").possibleStart(stage)
+            }
         ))
     }
 

@@ -203,6 +203,6 @@
   <object id="105" name="guide_event_saving" type="discover" x="480" y="384" width="24" height="144"/>
   <object id="106" name="guide_event_saving" type="discover" x="504" y="504" width="192" height="24"/>
   <object id="107" name="guide_event_saving" type="discover" x="696" y="384" width="24" height="144"/>
-  <object id="114" name="guide_event_xp" type="discover" x="528" y="858" width="240" height="6"/>
+  <object id="114" name="guide_event_xp" type="discover" x="240" y="648" width="624" height="24"/>
  </objectgroup>
 </map>

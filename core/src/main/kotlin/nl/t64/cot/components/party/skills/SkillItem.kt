@@ -85,7 +85,7 @@ data class SkillItem(
         return (1..rank).sumOf { it.getXpCost().roundToInt() }
     }
 
-    private fun getXpCostForNextRank(): Float {
+    fun getXpCostForNextRank(): Float {
         val nextRank = rank + 1
         return nextRank.getXpCost()
     }

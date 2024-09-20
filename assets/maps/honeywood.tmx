@@ -507,9 +507,6 @@
  <objectgroup color="#ff55ff" id="54" name="event">
   <object id="360" name="event_outside_home_cycle_2" type="discover" x="522" y="534" width="60" height="24"/>
   <object id="366" name="event_honeywood_soldiers" type="discover" x="1068" y="1794" width="24" height="6"/>
-  <object id="432" name="go_to_the_forest_1" type="discover" x="1908" y="1092" width="72" height="12"/>
-  <object id="433" name="go_to_the_forest_1" type="discover" x="576" y="852" width="240" height="12"/>
-  <object id="434" name="go_to_the_forest_1" type="discover" x="324" y="864" width="12" height="48"/>
   <object id="449" name="guide_event_action" type="discover" x="480" y="528" width="24" height="96"/>
   <object id="437" name="guide_event_action" type="discover" x="672" y="528" width="24" height="120"/>
   <object id="450" name="guide_event_action" type="discover" x="480" y="624" width="192" height="24"/>

@@ -22,6 +22,17 @@
       "which can be used to improve your character."
     ]
   },
+  "guide_event_battle"               : {
+    "type": "messagebox",
+    "text": [
+      "The battlefield consists of the two rows you can see below.",
+      "The lower row is where you and your party members move.",
+      "The upper row is where the enemies move.",
+      "The red spaces on the upper row indicate your attack range.",
+      "Each turn, you get a certain amount of Action Points (AP).",
+      "With these AP, you can move, attack, or do other actions."
+    ]
+  },
   "guide_event_quest"                : {
     "type": "messagebox",
     "text": [
@@ -85,7 +96,8 @@
       "To meet such requirements, you must level up your attributes:",
       "Access your attributes by pressing the %inventory%.",
       "Here you can utilize your XP to improve them.",
-      "Choose an attribute and press the %action% to level it up."
+      "Choose an attribute and press the %action% to level it up.",
+      "A purple arrow indicates that you have enough XP to level up that attribute."
     ]
   },
   "guide_event_saving"               : {

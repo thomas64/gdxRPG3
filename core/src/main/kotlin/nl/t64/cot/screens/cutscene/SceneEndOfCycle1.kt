@@ -283,7 +283,6 @@ class SceneEndOfCycle1 : CutsceneScreen() {
     }
 
     override fun exitScreen() {
-        stopSe(AudioEvent.SE_MAGIC)
         endCutsceneAndOpenMapAnd("honeywood_house_mozes") { scenario.startSecondCycle() }
     }
 

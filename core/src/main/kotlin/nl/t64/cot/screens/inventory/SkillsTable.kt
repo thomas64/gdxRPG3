@@ -9,9 +9,10 @@ import nl.t64.cot.screens.inventory.tooltip.PersonalityTooltip
 
 
 private const val FIRST_COLUMN_WIDTH = 48f
-private const val SECOND_COLUMN_WIDTH = 136f
-private const val THIRD_COLUMN_WIDTH = 40f
-private const val FOURTH_COLUMN_WIDTH = 35f
+private const val SECOND_COLUMN_WIDTH = 121f
+private const val THIRD_COLUMN_WIDTH = 15f
+private const val FOURTH_COLUMN_WIDTH = 40f
+private const val FIFTH_COLUMN_WIDTH = 35f
 private const val CONTAINER_HEIGHT = 704f
 private const val ROW_HEIGHT = 48f
 private const val SECOND_COLUMN_PAD_LEFT = 15f
@@ -27,6 +28,7 @@ internal class SkillsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
         table.columnDefaults(1).width(SECOND_COLUMN_WIDTH)
         table.columnDefaults(2).width(THIRD_COLUMN_WIDTH)
         table.columnDefaults(3).width(FOURTH_COLUMN_WIDTH)
+        table.columnDefaults(4).width(FIFTH_COLUMN_WIDTH)
         table.defaults().height(ROW_HEIGHT)
         table.padTop(TABLE_PAD_TOP)
 
@@ -89,6 +91,8 @@ internal class SkillsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
         table.add(createImageOf(skillItem.id.name))
         val skillName = Label(skillItem.name, LabelStyle(font, Color.BLACK)).apply { name = skillItem.id.name }
         table.add(skillName).padLeft(SECOND_COLUMN_PAD_LEFT)
+        val upgrade = Label("^", LabelStyle(font, Color.PURPLE))
+        if (selectedHero.xpToInvest >= skillItem.getXpCostForNextRank()) table.add(upgrade) else table.add("")
         table.add(skillItem.rank.toString())
         val totalExtra = selectedHero.getExtraSkillForVisualOf(skillItem)
         addExtraToTable(totalExtra)
