@@ -100,15 +100,6 @@
       "A purple arrow indicates that you have enough XP to level up that attribute."
     ]
   },
-  "guide_event_saving"               : {
-    "type"     : "messagebox",
-    "condition": ["_c_!=_u_q_quest_mother_fairy"],
-    "text"     : [
-      "This game does NOT autosave regularly.",
-      "So make sure to save your game when necessary.",
-      "In this case, the fairy in the upper right corner can assist you with that."
-    ]
-  },
   "guide_event_fast"                 : {
     "type"     : "messagebox",
     "condition": ["been_in_fairy_town"],

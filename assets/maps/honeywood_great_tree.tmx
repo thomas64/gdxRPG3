@@ -200,9 +200,6 @@
  <objectgroup color="#ff55ff" id="16" name="event">
   <object id="81" name="find_great_tree" type="discover" x="336" y="768" width="480" height="24"/>
   <object id="102" name="enter_great_tree" type="discover" x="480" y="912" width="192" height="6"/>
-  <object id="105" name="guide_event_saving" type="discover" x="480" y="384" width="24" height="144"/>
-  <object id="106" name="guide_event_saving" type="discover" x="504" y="504" width="192" height="24"/>
-  <object id="107" name="guide_event_saving" type="discover" x="696" y="384" width="24" height="144"/>
-  <object id="114" name="guide_event_xp" type="discover" x="240" y="648" width="624" height="24"/>
+  <object id="114" name="guide_event_xp" type="discover" x="192" y="480" width="768" height="24"/>
  </objectgroup>
 </map>

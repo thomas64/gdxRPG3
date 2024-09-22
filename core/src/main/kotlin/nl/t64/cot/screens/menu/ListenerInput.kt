@@ -39,7 +39,7 @@ internal class ListenerInput {
     }
 
     fun inputPrev() {
-        if (numberOfItems == 0) return
+        if (numberOfItems < 2) return
 
         if (selectedIndex <= 0) {
             playSe(AudioEvent.SE_MENU_ERROR)
@@ -52,7 +52,7 @@ internal class ListenerInput {
     }
 
     fun inputNext() {
-        if (numberOfItems == 0) return
+        if (numberOfItems < 2) return
 
         if (selectedIndex >= numberOfItems - 1) {
             playSe(AudioEvent.SE_MENU_ERROR)

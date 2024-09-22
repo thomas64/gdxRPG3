@@ -183,6 +183,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             ConversationCommand.LOAD_SHOP -> loadShop(nextId)
             ConversationCommand.LOAD_ACADEMY -> loadAcademy(nextId)
             ConversationCommand.LOAD_SCHOOL -> loadSchool(nextId)
+            ConversationCommand.AUTO_SAVE -> autoSave(nextId)
             ConversationCommand.SAVE_GAME -> saveGame(nextId)
             ConversationCommand.HEAL_LIFE_01 -> healLife(nextId, "1 hour")
             ConversationCommand.HEAL_LIFE_09 -> healLife(nextId, "09:00")
@@ -249,6 +250,11 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     private fun loadSchool(nextId: String) {
         endConversationBeforeLoadScreen(nextId)
         SchoolScreen.load(faceId, conversationId)
+    }
+
+    private fun autoSave(nextId: String) {
+        endConversation(nextId)
+        thread { profileManager.autoSave() }
     }
 
     private fun saveGame(nextId: String) {

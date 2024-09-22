@@ -8,6 +8,7 @@ enum class ConversationCommand {
     LOAD_SHOP,
     LOAD_ACADEMY,
     LOAD_SCHOOL,
+    AUTO_SAVE,
     SAVE_GAME,
     HEAL_LIFE_01,
     HEAL_LIFE_09,

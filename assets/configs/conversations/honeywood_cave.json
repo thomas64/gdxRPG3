@@ -3,7 +3,7 @@
     "name"   : "Mozes",
     "phrases": {
       "1": {"text": ["Woah! It's a hidden cave!"]},
-      "2": {"text": ["Grace?! {WAIT=0.5}Where are you?! {WAIT=0.5}Are you in here?!"], "choices": [{"command": "SAVE_GAME"}]}
+      "2": {"text": ["Grace?! {WAIT=0.5}Where are you?! {WAIT=0.5}Are you in here?!"], "choices": [{"command": "AUTO_SAVE"}]}
     }
   },
   "quest_orc_guards"    : {
@@ -44,7 +44,7 @@
   "find_dead_orcs"      : {
     "name"   : "Mozes",
     "phrases": {
-      "1": {"text": ["All those dead orcs... {WAIT=0.5}What happened here?", "What kind of terrible force lurks beyond that ominous gate?"], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["All those dead orcs... {WAIT=0.5}What happened here?", "What kind of terrible force lurks beyond that ominous gate?"], "choices": [{"command": "AUTO_SAVE"}]}
     }
   },
   "defeated_orc_guards" : {

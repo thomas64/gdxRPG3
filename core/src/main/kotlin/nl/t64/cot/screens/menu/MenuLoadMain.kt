@@ -26,6 +26,7 @@ import nl.t64.cot.audio.stopSe
 import nl.t64.cot.components.cutscene.CutsceneId
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
+import nl.t64.cot.gamestate.AUTOSAVE_INDEX
 import nl.t64.cot.gamestate.DEFAULT_EMPTY_PROFILE_VIEW
 import nl.t64.cot.gamestate.INVALID_PROFILE_VIEW
 import nl.t64.cot.toDrawable
@@ -34,13 +35,14 @@ import kotlin.concurrent.thread
 
 private const val TITLE_LABEL = "Select profile"
 private const val MENU_ITEM_START = "Start"
-private const val MENU_ITEM_LOAD = "Load"
 private const val MENU_ITEM_DELETE = "Delete"
 private const val MENU_ITEM_BACK = "Back"
-private val LOAD_MESSAGE = """
-    All progress after the last save will be lost.
-    Are you sure you want to load this profile?""".trimIndent()
+
 private val DELETE_MESSAGE = """
+    This save file will be removed. Any
+    autosave file will ALSO be removed.
+    Are you sure?""".trimIndent()
+private val DELETE_MESSAGE_AUTOSAVE = """
     This save file will be removed.
     Are you sure?""".trimIndent()
 
@@ -53,40 +55,12 @@ private const val NUMBER_OF_ITEMS = 3
 private const val DELETE_INDEX = 1
 private const val EXIT_INDEX = 2
 
+class MenuLoadMain : MenuScreen() {
 
-class MenuLoadMain : MenuLoad() {
     override val titleLogo: Texture = resourceManager.getTextureAsset(TITLE_LOGO_B)
     override val fontColor: Color = Color.BLACK
     override val selectColor: Color = Constant.LIGHT_RED
     override val backScreen: ScreenType = ScreenType.MENU_MAIN
-    override val loadButtonName: String = MENU_ITEM_START
-    override fun possibleNewGame() = newGame()
-    override fun possibleLoadGame() = fadeBeforeOpenWorldScreen()
-
-    override fun hide() {
-        val menuLoadPause = screenManager.getMenuScreen(ScreenType.MENU_LOAD_PAUSE) as MenuLoadPause
-        menuLoadPause.selectedListIndex = selectedListIndex
-        super.hide()
-    }
-}
-
-class MenuLoadPause : MenuLoad() {
-    override val titleLogo: Texture = resourceManager.getTextureAsset(TITLE_LOGO_W)
-    override val fontColor: Color = Color.WHITE
-    override val selectColor: Color = Constant.DARK_RED
-    override val backScreen: ScreenType = ScreenType.MENU_PAUSE
-    override val loadButtonName: String = MENU_ITEM_LOAD
-    override fun possibleNewGame() = errorSound()
-    override fun possibleLoadGame() = DialogQuestion({ fadeBeforeOpenWorldScreen() }, LOAD_MESSAGE).show(stage)
-
-    override fun hide() {
-        val menuLoadMain = screenManager.getMenuScreen(ScreenType.MENU_LOAD_MAIN) as MenuLoadMain
-        menuLoadMain.selectedListIndex = selectedListIndex
-        super.hide()
-    }
-}
-
-abstract class MenuLoad : MenuScreen() {
 
     private lateinit var profiles: Array<String>
 
@@ -97,12 +71,9 @@ abstract class MenuLoad : MenuScreen() {
     private lateinit var listenerKeyVertical: ListenerKeyVertical
     private lateinit var listenerKeyHorizontal: ListenerKeyHorizontal
 
-    var selectedListIndex = 0
-
+    private var selectedListIndex = 0
     private var isBgmFading = false
     private var isLoaded = false
-
-    abstract val loadButtonName: String
 
     override fun setupScreen() {
         isLoaded = false
@@ -150,35 +121,34 @@ abstract class MenuLoad : MenuScreen() {
         if (!isLoaded || profiles[selectedListIndex].contains(INVALID_PROFILE_VIEW)) {
             errorSound()
         } else if (profileManager.doesProfileExist(selectedListIndex)) {
-            possibleLoadGame()
+            fadeBeforeOpenWorldScreen()
+        } else if (selectedListIndex == AUTOSAVE_INDEX) {
+            errorSound()
         } else {
-            possibleNewGame()
+            newGame()
         }
     }
 
-    abstract fun possibleLoadGame()
-
-    abstract fun possibleNewGame()
-
     private fun processDeleteButton() {
         if (isLoaded && profileManager.doesProfileExist(selectedListIndex)) {
-            DialogQuestion({ deleteSaveFile() }, DELETE_MESSAGE).show(stage)
+            val deleteMessage = if (selectedListIndex == AUTOSAVE_INDEX) DELETE_MESSAGE_AUTOSAVE else DELETE_MESSAGE
+            DialogQuestion({ deleteSaveFile() }, deleteMessage).show(stage)
         } else {
             errorSound()
         }
     }
 
-    fun newGame() {
-        profileManager.selectedIndex = selectedListIndex
+    private fun newGame() {
+        profileManager.selectNewProfile(selectedListIndex)
         processButton(ScreenType.MENU_NEW)
     }
 
-    fun errorSound() {
+    private fun errorSound() {
         stopSe(AudioEvent.SE_MENU_CONFIRM)
         playSe(AudioEvent.SE_MENU_ERROR)
     }
 
-    fun fadeBeforeOpenWorldScreen() {
+    private fun fadeBeforeOpenWorldScreen() {
         Gdx.input.inputProcessor = null
         Utils.setGamepadInputProcessor(null)
         stage.addAction(Actions.sequence(Actions.run { isBgmFading = true },
@@ -191,7 +161,7 @@ abstract class MenuLoad : MenuScreen() {
     private fun openWorldScreen() {
         mapManager.disposeOldMaps()
         screenManager.getScreen(ScreenType.WORLD) // just load the constructor.
-        profileManager.loadProfile(selectedListIndex)
+        profileManager.loadProfileFromMain(selectedListIndex)
         if (gameData.cutscenes.isPlayed(CutsceneId.SCENE_INTRO)) {
             screenManager.setScreen(ScreenType.WORLD)
         } else {
@@ -201,6 +171,7 @@ abstract class MenuLoad : MenuScreen() {
     }
 
     private fun deleteSaveFile() {
+        profileManager.removeProfile(AUTOSAVE_INDEX)
         profileManager.removeProfile(selectedListIndex)
         isLoaded = false
         profiles = profileManager.getVisualLoadingArray()
@@ -236,7 +207,7 @@ abstract class MenuLoad : MenuScreen() {
 
         // actors
         val titleLabel = Label(TITLE_LABEL, titleStyle)
-        val loadButton = TextButton(loadButtonName, TextButtonStyle(buttonStyle))
+        val loadButton = TextButton(MENU_ITEM_START, TextButtonStyle(buttonStyle))
         val deleteButton = TextButton(MENU_ITEM_DELETE, TextButtonStyle(buttonStyle))
         val backButton = TextButton(MENU_ITEM_BACK, TextButtonStyle(buttonStyle))
 

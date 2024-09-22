@@ -3,7 +3,7 @@
     "name"   : "Mozes",
     "phrases": {
       "1": {"text": ["Alright, Honeywood Forest."]},
-      "2": {"text": ["I need to find Grace before it gets dark, which will be around 19:30. After that time, the forest can become pretty dangerous."], "choices": [{"command": "EXIT"}]}
+      "2": {"text": ["I need to find Grace before it gets dark, which will be around 19:30. After that time, the forest can become pretty dangerous."], "choices": [{"command": "AUTO_SAVE"}]}
     }
   },
   "found_grace_ribbon"    : {
@@ -185,7 +185,7 @@
   "notice_dense_fog"      : {
     "name"   : "Mozes",
     "phrases": {
-      "1": {"text": ["What a dense fog all of a sudden.", "How peculiar..."], "choices": [{"command": "SAVE_GAME"}]}
+      "1": {"text": ["What a dense fog all of a sudden.", "How peculiar..."], "choices": [{"command": "AUTO_SAVE"}]}
     }
   }
 }
