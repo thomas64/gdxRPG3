@@ -401,7 +401,7 @@
     <property name="direction" value="east"/>
    </properties>
   </object>
-  <object id="497" name="man13" type="inv" x="2208" y="552" width="24" height="24">
+  <object id="497" name="man13" type="inv" x="2208" y="552" width="6" height="6">
    <properties>
     <property name="conversation" value="lennor_is_finished"/>
    </properties>

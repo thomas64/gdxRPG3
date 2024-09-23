@@ -20,13 +20,18 @@
       "1": {"text": ["No, I shouldn't go back. I have to find Grace first.", "There must be {COLOR=BLUE}something near {COLOR=BLACK}where I found the ribbon."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "fairy_welcome"         : {
+  "fairy_welcome1"        : {
     "name"   : "Fairy",
     "phrases": {
       "1": {"text": ["Ah, young Mozes. You may enter here."]},
       "2": {"text": ["Are you surprised that we know who you are?"]},
-      "3": {"text": ["Please go see our Mother Fairy near the Great Tree."], "choices": [{"command": "EXIT", "nextId": "4"}]},
-      "4": {"text": ["Young Mozes, please be welcome."], "choices": [{"command": "EXIT", "nextId": "4"}]}
+      "3": {"text": ["Please go see our Mother Fairy near the Great Tree."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "fairy_welcome2"        : {
+    "name"   : "Fairy",
+    "phrases": {
+      "1": {"text": ["Young Mozes, please be welcome."], "choices": [{"command": "EXIT"}]}
     }
   },
   "find_great_tree"       : {

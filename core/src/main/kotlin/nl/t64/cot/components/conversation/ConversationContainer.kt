@@ -23,7 +23,7 @@ class ConversationContainer {
 
     fun reset() {
         conversations
-            .filterNot { it.key == "fairy_welcome" }
+            //.filterNot { it.key == "fairy_welcome" } // Example of not resetting a conversation.
             .forEach { it.value.reset() }
     }
 
