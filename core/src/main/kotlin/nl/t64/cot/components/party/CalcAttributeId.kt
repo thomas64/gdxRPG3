@@ -38,7 +38,8 @@ enum class CalcAttributeId(override val title: String) : SuperEnum {
 
                 - '$title' is derived from the weapon you are currently holding
                   and the rank of your 'Strength' for hand-to-hand combat,
-                  or the rank of your 'Dexterity' for ranged combat.""".trimIndent()
+                  or the rank of your 'Dexterity' for ranged combat.
+                  Or even your 'Intelligence' for some weapons.""".trimIndent()
         }
     },
 

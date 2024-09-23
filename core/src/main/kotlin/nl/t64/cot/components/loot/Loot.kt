@@ -44,6 +44,10 @@ class Loot(
         xp = originalLoot.xp
     }
 
+    fun resetConversation(originalLoot: Loot) {
+        content = originalLoot.content
+    }
+
     fun isTaken(): Boolean =
         content.isEmpty()
 

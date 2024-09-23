@@ -1,7 +1,7 @@
 {
   "druid"     : 3,
-  "healer"    : 4,
-  "stealth"   : 2,
+  "healer"    : 3,
+  "stealth"   : 3,
   "troubadour": 3,
-  "wizard"    : 4
+  "wizard"    : 3
 }

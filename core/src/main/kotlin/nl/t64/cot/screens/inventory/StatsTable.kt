@@ -22,7 +22,7 @@ private const val THIRD_COLUMN_WIDTH = 40f
 private const val FOURTH_COLUMN_WIDTH = 35f
 private const val CONTAINER_HEIGHT = 704f
 private const val FIRST_INDEX_OF_CALCS = 18
-private const val THREE_COLUMNS = 3
+private const val FOUR_COLUMNS = 4
 private const val TOOLTIP_X = 130f
 private const val TOOLTIP_Y = -18f
 
@@ -78,7 +78,7 @@ internal class StatsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
 
     private fun fillExperience() {
         fillEmptyRow()
-        fillRow("XP to Invest", selectedHero.xpToInvest)
+        fillRow("XP Points", selectedHero.xpPoints)
         fillRow("Total XP", selectedHero.totalXp)
         fillEmptyRow()
         fillEmptyRow()
@@ -133,7 +133,7 @@ internal class StatsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
         val statTitle = Label(statItem.name, createLabelStyle())
         table.add(statTitle)
         val upgrade = Label("^", LabelStyle(font, Color.PURPLE))
-        if (selectedHero.xpToInvest >= statItem.getXpCostForNextRank()) table.add(upgrade) else table.add("")
+        if (selectedHero.xpPoints >= statItem.getXpCostForNextRank()) table.add(upgrade) else table.add("")
         table.add(statItem.rank.toString())
         val totalExtra = selectedHero.getExtraStatForVisualOf(statItem)
         addExtraToTable(totalExtra)
@@ -163,7 +163,7 @@ internal class StatsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
 
     private fun possibleSetSelected() {
         if (table.hasKeyboardFocus() && isCalcsSelected()) {
-            val calcTitle = table.getChild(selectedIndex * THREE_COLUMNS) as Label
+            val calcTitle = table.getChild(selectedIndex * FOUR_COLUMNS) as Label
             super.setSelected(calcTitle, getPersonalityItemForDescriptionOnly(calcTitle))
         }
     }

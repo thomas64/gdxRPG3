@@ -284,7 +284,7 @@
       "12"  : {
         "choices": [
           {"text": "*Volunteer to get rid of those bats.*", "command": "ACCEPT_QUEST", "nextId": "20"},
-          {"text": "*Express your reluctance about bats and decide not to stay.*", "command": "KNOW_QUEST", "nextId": "30"}
+          {"text": "*Bats! You won't be staying after all.*", "command": "KNOW_QUEST", "nextId": "30"}
         ]
       },
       "15"  : {"text": ["How would you know about this? Whoever's been spreading that silly gossip about upstairs is... well... right."], "choices": [{"nextId": "21"}]},

@@ -18,6 +18,7 @@ import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.playSe
+import nl.t64.cot.audio.stopAllBgm
 import nl.t64.cot.audio.stopAllSe
 import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.constants.Constant
@@ -131,6 +132,7 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
     override fun hide() {
         actorsStage.clear()
         stopAllSe()
+        stopAllBgm()
     }
 
     override fun dispose() {

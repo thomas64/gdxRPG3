@@ -135,9 +135,9 @@ internal class PartyWindow {
 
         renderBackground(invertedIndex)
         shapeRenderer.color = Utils.getHpColor(hero.currentHp, hero.maximumHp).apply { a = 0.5f }
-        drawBar(invertedIndex, 2f, hero.hpBarWidth)
+        drawBar(invertedIndex, 0f, hero.hpBarWidth)
         shapeRenderer.color = Color.ROYAL.apply { a = 0.5f}
-        drawBar(invertedIndex, 3f, hero.spBarWidth)
+        drawBar(invertedIndex, 1f, hero.spBarWidth)
 
         shapeRenderer.end()
         Gdx.gl.glDisable(GL20.GL_BLEND)
@@ -145,10 +145,10 @@ internal class PartyWindow {
 
     private fun renderLabels(invertedIndex: Int, hero: HeroItem) {
         renderName(invertedIndex, hero.name)
-        renderLabel(invertedIndex, "TXP: ${hero.totalXp}", 0f)
-        renderLabel(invertedIndex, "XPI:  ${hero.xpToInvest}", 1f)
-        renderLabel(invertedIndex, "HP: ", 2f)
-        renderLabel(invertedIndex, "SP: ", 3f)
+        renderLabel(invertedIndex, "HP: ", 0f)
+        renderLabel(invertedIndex, "SP: ", 1f)
+        renderLabel(invertedIndex, "XPP: ${hero.xpPoints}", 2f)
+        renderLabel(invertedIndex, "TXP: ${hero.totalXp}", 3f)
     }
 
     private fun renderLines(invertedIndex: Int) {
@@ -156,8 +156,8 @@ internal class PartyWindow {
         shapeRenderer.color = TRANSPARENT_BLACK
 
         renderVerticalLine(invertedIndex)
-        drawBarOutline(invertedIndex, 2f)
-        drawBarOutline(invertedIndex, 3f)
+        drawBarOutline(invertedIndex, 0f)
+        drawBarOutline(invertedIndex, 1f)
 
         shapeRenderer.end()
     }

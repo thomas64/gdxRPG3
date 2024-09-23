@@ -66,7 +66,8 @@
       "71"  : {"text": ["Did you manage to get me the requested assistance?"]},
       "72"  : {
         "choices": [
-          {"condition": ["_tc_1_q_this", "_tc_11_q_this"], "text": "[2 Ropes, 1 Horse] *Present the requested horse and ropes.*", "command": "SHOW_QUEST_ITEM", "nextId": "90"},
+          {"condition": ["i_time_before_12:00", "_tc_1_q_this", "_tc_11_q_this"], "text": "[2 Ropes, 1 Horse] *Present the requested horse and ropes.*", "command": "SHOW_QUEST_ITEM", "nextId": "90"},
+          {"condition": ["i_time_after_12:00", "_tc_1_q_this", "_tc_11_q_this"], "text": "[2 Ropes, 1 Horse] *Present the requested horse and ropes.*", "command": "SHOW_QUEST_ITEM", "nextId": "95"},
           {"text": "*Not yet. Take your leave.*", "command": "EXIT", "nextId": "70"}
         ]
       },
@@ -76,6 +77,8 @@
       "101" : {"text": ["Say, have I told you I was thinking of buying a horse a month or so ago? I even got some necessary items for it already. Well, since I didn't bought the horse, I don't need these anymore. You can have them."], "choices": [{"command": "RECEIVE_ITEM"}]},
       "90"  : {"text": ["Fantastic, just what I asked you for. Now I can finish this job right away! Let's start dragging!"]},
       "91"  : {"text": ["This will only take a moment..."], "choices": [{"command": "RELOAD_NPCS", "nextId": "110"}]},
+      "95"  : {"text": ["Thanks, it's just what I asked for. I don't want to sound ungrateful, but I'm almost done with the tree, so it doesn't really matter much. But thanks for the effort."]},
+      "96"  : {"text": ["This will only take a moment..."], "choices": [{"command": "RELOAD_NPCS", "nextId": "111"}]},
       "110" : {"text": ["Thanks for your help, Mozes. I could not have removed the tree so soon without you."]},
       "111" : {"text": ["Say, I told you I was thinking of buying a horse, right? And that I even got some necessary items for it already? Well, since I didn't bought the horse, I don't need these anymore. You can have them."], "choices": [{"command": "RECEIVE_ITEM"}]},
       "1199": {"text": ["I don't need these anymore. You can have them."], "choices": [{"command": "RECEIVE_ITEM"}]},

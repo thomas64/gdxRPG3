@@ -34,7 +34,7 @@ class HeroItem(
 ) {
     val isPlayer: Boolean get() = id == Constant.PLAYER_ID
     var totalXp: Int = 0
-    var xpToInvest: Int = 0
+    var xpPoints: Int = 0
 
     init {
         if (isForVeryFirstSetup) {
@@ -72,21 +72,21 @@ class HeroItem(
     }
 
     fun gainXp(amount: Int) {
-        xpToInvest += amount
+        xpPoints += amount
         totalXp += amount
     }
 
     fun hasEnoughXpFor(xpCost: Int): Boolean {
-        return xpToInvest >= xpCost
+        return xpPoints >= xpCost
     }
 
     fun doUpgrade(statItem: StatItem, xpCost: Int) {
-        xpToInvest -= xpCost
+        xpPoints -= xpCost
         statItem.doUpgrade()
     }
 
     fun doUpgrade(skillItem: SkillItem, xpCost: Int) {
-        xpToInvest -= xpCost
+        xpPoints -= xpCost
         skillItem.doUpgrade()
         if (skillItem.rank == 1) {
             skills.add(skillItem)
@@ -94,7 +94,7 @@ class HeroItem(
     }
 
     fun doUpgrade(spellItem: SpellItem, xpCost: Int) {
-        xpToInvest -= xpCost
+        xpPoints -= xpCost
         spellItem.doUpgrade()
         if (spellItem.rank == 1) {
             spells.add(spellItem)

@@ -57,7 +57,7 @@ class MessageDialog(
         fillDialog(message)
         playSe(audioEvent)
         dialog.show(stage)
-        Utils.runWithDelay(Constant.FADE_DURATION) {
+        Utils.runWithDelay(1.5f) {
             Gdx.input.inputProcessor = stage
             Utils.setGamepadInputProcessor(stage)
         }

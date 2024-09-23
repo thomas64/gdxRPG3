@@ -70,7 +70,7 @@ class Clock {
     }
 
     fun takeHour() {
-        if (countdown > (HOUR * 1.5f)) {
+        if (countdown > (HOUR * 1.2f)) {
             countdown -= HOUR
         }
     }

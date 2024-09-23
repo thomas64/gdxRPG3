@@ -29,7 +29,7 @@ class StatUpgrader private constructor(
     private fun upgrade() {
         when {
             xpCost == 0 -> showError("You cannot train $statName any further.")
-            !hasEnoughXp -> showError("You need $xpCost 'XP to Invest' to train $statName.")
+            !hasEnoughXp -> showError("You need $xpCost XP Points to train $statName.")
             else -> showConfirmDialog()
         }
     }
@@ -40,7 +40,7 @@ class StatUpgrader private constructor(
 
     private fun showConfirmDialog() {
         DialogQuestion({ upgradeStat() }, """
-                Are you sure you wish to train 
+                Are you sure you wish to train
                 $statName for $xpCost XP?""".trimIndent())
             .show(stage, AudioEvent.SE_CONVERSATION_NEXT, 0)
     }

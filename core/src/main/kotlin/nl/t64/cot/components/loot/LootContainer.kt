@@ -19,7 +19,13 @@ class LootContainer {
             .forEach { it.value.possibleResetSparkle(originalLoot[it.key]!!) }
 
         loot.filter { it.key.startsWith("quest") }
-            .forEach { it.value.resetQuest(originalLoot[it.key]!!)  }
+            .forEach { it.value.resetQuest(originalLoot[it.key]!!) }
+
+        loot.filterNot { it.key.startsWith("chest") }
+            .filterNot { it.key.startsWith("sparkle") }
+            .filterNot { it.key.startsWith("quest") }
+            .filter { it.key == "the_road_is_open" }
+            .forEach { it.value.resetConversation(originalLoot[it.key]!!) }
     }
 
     fun getLoot(lootId: String): Loot {
