@@ -15,7 +15,7 @@ class Loot(
     var trapLevel: Int = 0,
     var lockLevel: Int = 0,
     var xp: Int = 0,
-    val doesReset: Boolean = false,
+    private val doesReset: Boolean = false,
 ) {
 
     companion object {
@@ -33,8 +33,10 @@ class Loot(
         }
     }
 
-    fun resetSparkle(originalLoot: Loot) {
-        content = originalLoot.content
+    fun possibleResetSparkle(originalLoot: Loot) {
+        if (doesReset) {
+            content = originalLoot.content
+        }
     }
 
     fun resetQuest(originalLoot: Loot) {

@@ -209,11 +209,13 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     }
 
     fun showMessageDialog(message: String, actionAfterHide: () -> Unit = {}) {
+        multiplexer.removeProcessor(0)
         gameState = GameState.DIALOG
         messageDialog.setActionAfterHide {
             player.resetInputWithoutStance()
             gameState = GameState.RUNNING
             actionAfterHide.invoke()
+            multiplexer.addProcessor(0, createListener())
         }
         messageDialog.show(message, AudioEvent.SE_CONVERSATION_NEXT)
     }

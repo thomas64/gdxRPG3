@@ -18,11 +18,12 @@ object ConditionDatabase {
         "i_druid1"                  to { hasEnoughOfSkill(SkillItemId.DRUID,     1) },
         "ii_druid1"                 to { hasEnoughOfSkill(SkillItemId.DRUID,     1) },
 
-        "!been_in_fairy_town"       to { !hasBeenInFairyTown },
-        "been_in_fairy_town"        to { hasBeenInFairyTown },
-        "defeated_orc_guards"       to { hasDefeatedOrcGuards },
-        "i_!starting_spells"        to { !hasStartingSpells },
-        "i_starting_spells"         to { hasStartingSpells },
+        "xp_>=_15"                  to { isXpGreaterThan(15) },
+        "!been_in_fairy_town"       to { !hasEventPlayed("enter_great_tree") },
+        "been_in_fairy_town"        to { hasEventPlayed("enter_great_tree") },
+        "defeated_orc_guards"       to { isBattleWon("quest_orc_guards") },
+        "i_!starting_spells"        to { !hasAnySpell("mozes") },
+        "i_starting_spells"         to { hasAnySpell("mozes") },
         "!black_asked_four"         to { !blackAskedFour },
         "black_asked_four"          to { blackAskedFour },
         "alone_in_party"            to { isAloneInParty },
@@ -55,9 +56,6 @@ object ConditionDatabase {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private val hasBeenInFairyTown get() = hasEventPlayed("enter_great_tree")
-    private val hasDefeatedOrcGuards get() = isBattleWon("quest_orc_guards")
-    private val hasStartingSpells get() = hasAnySpell("mozes")
     private val blackAskedFour
         get() = isTargetAlternateUsed("quest_get_tow_rope", "13") // "_13_"
             || isMeetingCondition("_conv_quest_get_horseshoes_==_200", null)
@@ -75,6 +73,9 @@ object ConditionDatabase {
             || gameData.clock.isCurrentTimeAfter("07:36")
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private fun isXpGreaterThan(requestedXp: Int): Boolean =
+        gameData.party.getCertainHero("mozes").hasEnoughXpFor(requestedXp)
 
     private fun hasEnoughOfSkill(skillItemId: SkillItemId, rank: Int): Boolean =
         gameData.party.hasEnoughOfSkill(skillItemId, rank)

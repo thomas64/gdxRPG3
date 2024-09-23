@@ -16,8 +16,7 @@ class LootContainer {
 
         loot.filter { it.key.startsWith("sparkle") }
             .filter { it.value.isTaken() }
-            .filter { it.value.doesReset }
-            .forEach { it.value.resetSparkle(originalLoot[it.key]!!) }
+            .forEach { it.value.possibleResetSparkle(originalLoot[it.key]!!) }
 
         loot.filter { it.key.startsWith("quest") }
             .forEach { it.value.resetQuest(originalLoot[it.key]!!)  }

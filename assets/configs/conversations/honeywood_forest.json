@@ -23,7 +23,7 @@
   "fairy_welcome"         : {
     "name"   : "Fairy",
     "phrases": {
-      "1": {"text": ["Ah, young Mozes. You may enter here."], "choices": [{"command": "RECEIVE_XP", "nextId": "2"}]},
+      "1": {"text": ["Ah, young Mozes. You may enter here."]},
       "2": {"text": ["Are you surprised that we know who you are?"]},
       "3": {"text": ["Please go see our Mother Fairy near the Great Tree."], "choices": [{"command": "EXIT", "nextId": "4"}]},
       "4": {"text": ["Young Mozes, please be welcome."], "choices": [{"command": "EXIT", "nextId": "4"}]}
@@ -45,24 +45,29 @@
   "quest_mother_fairy"    : {
     "name"   : "Mother Fairy",
     "phrases": {
-      "1" : {"text": ["Dear young Mozes, I'm so glad you've finally entered our peaceful domain. You need not fear any orcs here."]},
-      "2" : {
+      "1"   : {
+        "text": ["Dear young Mozes, I'm so glad you've finally entered our peaceful domain. You need not fear any orcs here."], "choices": [
+          {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "command": "RECEIVE_XP", "nextId": "2"},
+          {"condition": ["i_rc_>=_a_q_quest_royal_sacrifice"], "nextId": "2"}
+        ]
+      },
+      "2"   : {
         "choices": [
           {"text": "*Ask how they all seem to know you.*", "nextId": "10"},
           {"text": "*Ask if she has any information about Grace's whereabouts.*", "nextId": "30"},
           {"text": "*Take your leave.*", "command": "EXIT", "nextId": "70"}
         ]
       },
-      "10": {"text": ["We all watch over the people of Honeywood and strive to protect you whenever we can. So, Mozes, we've known you since your birth.", "Unfortunately, our power and protection have their limits."], "choices": [{"nextId": "2"}]},
-      "20": {"text": ["As I mentioned, he is very powerful and dangerous. We don't know much about him, but we do know his power is growing."]},
-      "21": {"text": ["You cannot confront Ardor! Even if you were to face him, he's far beyond your capabilities."]},
-      "22": {"text": ["Ardor {COLOR=BLUE}appears almost invulnerable {COLOR=BLACK}to all forms of attack. We're still trying to uncover the source of his power."]},
-      "23": {"text": ["You'll have to rely on us to deal with Ardor. In time, we will find a way to defeat him."]},
-      "24": {"text": ["I cannot stress this enough: Please stay away from him!"], "choices": [{"nextId": "35"}]},
-      "30": {"text": ["Ah, yes, little Grace... {WAIT=0.5}Terrible news, it appears that a wizard named Ardor has taken Grace captive. He is very powerful, and we Fairies aren't able to approach him yet. I am truly sorry for this, Mozes."]},
-      "31": {"text": ["However, do not despair. There might still be a possibility for you. While your courage is admirable, bravery alone will not suffice. That's why we wish to aid you in your quest to find Grace."]},
-      "32": {"text": ["Within the cave you came from, we've hidden a magic scroll that will be of great assistance against any orcs here in Honeywood Forest."], "choices": [{"nextId": "35"}]},
-      "35": {
+      "10"  : {"text": ["We all watch over the people of Honeywood and strive to protect you whenever we can. So, Mozes, we've known you since your birth.", "Unfortunately, our power and protection have their limits."], "choices": [{"nextId": "2"}]},
+      "20"  : {"text": ["As I mentioned, he is very powerful and dangerous. We don't know much about him, but we do know his power is growing."]},
+      "21"  : {"text": ["You cannot confront Ardor! Even if you were to face him, he's far beyond your capabilities."]},
+      "22"  : {"text": ["Ardor {COLOR=BLUE}appears almost invulnerable {COLOR=BLACK}to all forms of attack. We're still trying to uncover the source of his power."]},
+      "23"  : {"text": ["You'll have to rely on us to deal with Ardor. In time, we will find a way to defeat him."]},
+      "24"  : {"text": ["I cannot stress this enough: Please stay away from him!"], "choices": [{"nextId": "35"}]},
+      "30"  : {"text": ["Ah, yes, little Grace... {WAIT=0.5}Terrible news, it appears that a wizard named Ardor has taken Grace captive. He is very powerful, and we Fairies aren't able to approach him yet. I am truly sorry for this, Mozes."]},
+      "31"  : {"text": ["However, do not despair. There might still be a possibility for you. While your courage is admirable, bravery alone will not suffice. That's why we wish to aid you in your quest to find Grace."]},
+      "32"  : {"text": ["Within the cave you came from, we've hidden a magic scroll that will be of great assistance against any orcs here in Honeywood Forest."], "choices": [{"nextId": "35"}]},
+      "35"  : {
         "choices": [
           {"text": "*Inquire further about this Ardor.*", "nextId": "20"},
           {"text": "*Inquire further about Grace.*", "nextId": "40"},
@@ -71,13 +76,20 @@
           {"text": "*Mention that hidden things are often difficult to find.*", "command": "ACCEPT_QUEST", "nextId": "60"}
         ]
       },
-      "40": {"text": ["I'm sorry, I don't know much about her captivity. I feel terrible. Perhaps she was in the wrong place at the wrong time. I sincerely hope so."], "choices": [{"nextId": "35"}]},
-      "50": {"text": ["Don't worry, using this kind of scroll isn't too difficult.", "You'll see, just 'use' the scroll when interacting with an orc."], "choices": [{"nextId": "35"}]},
-      "60": {"text": ["When you return inside the cave, head all the way south, then east, and search the north wall. There's a hidden door in the light."]},
-      "61": {"text": ["Before you go, please talk to the other Fairies. They can offer you valuable assistance."]},
-      "62": {"text": ["Farewell, our beloved Mozes. Grace is blessed to have a brother like you. May the Goddess Tree smile upon you and your quest."]},
-      "63": {"text": ["And watch out for Ardor! He is not to be trifled with!"], "choices": [{"command": "EXIT", "nextId": "70"}]},
-      "70": {"text": ["Dear young Mozes, you've returned."], "choices": [{"nextId": "2"}]}
+      "40"  : {"text": ["I'm sorry, I don't know much about her captivity. I feel terrible. Perhaps she was in the wrong place at the wrong time. I sincerely hope so."], "choices": [{"nextId": "35"}]},
+      "50"  : {"text": ["Don't worry, using this kind of scroll isn't too difficult.", "You'll see, just 'use' the scroll when interacting with an orc."], "choices": [{"nextId": "35"}]},
+      "60"  : {"text": ["When you return inside the cave, head all the way south, then east, and search the north wall. There's a hidden door in the light."]},
+      "61"  : {"text": ["Before you go, please talk to the other Fairies. They can offer you valuable assistance."]},
+      "62"  : {"text": ["Farewell, our beloved Mozes. Grace is blessed to have a brother like you. May the Goddess Tree smile upon you and your quest."]},
+      "63"  : {
+        "text": ["And watch out for Ardor! He is not to be trifled with!"], "choices": [
+          {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "command": "RECEIVE_ITEM"},
+          {"condition": ["i_rc_>=_a_q_quest_royal_sacrifice"], "command": "EXIT", "nextId": "70"}
+        ]
+      },
+      "70"  : {"text": ["Dear young Mozes, you've returned."], "choices": [{"nextId": "2"}]},
+      "1199": {"text": ["Watch out for Ardor! He is not to be trifled with!"], "choices": [{"command": "RECEIVE_ITEM"}]},
+      "1200": {"text": ["Dear young Mozes, you've returned."], "choices": [{"nextId": "2"}]}
     }
   },
   "fairy_save"            : {

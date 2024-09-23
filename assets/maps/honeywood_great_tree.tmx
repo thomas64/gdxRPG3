@@ -121,7 +121,6 @@
  </objectgroup>
  <objectgroup color="#5500ff" id="17" name="rest">
   <object id="104" name="chest0009" x="192" y="624" width="48" height="48"/>
-  <object id="115" name="chest_fairy_sword" x="480" y="864" width="48" height="48"/>
  </objectgroup>
  <objectgroup color="#55ff7f" id="15" name="npc">
   <object id="80" name="fairy3" type="ia" x="600" y="864" width="48" height="24">

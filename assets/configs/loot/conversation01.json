@@ -1,5 +1,5 @@
 {
-  "fairy_welcome"      : {"xp": 15},
+  "quest_mother_fairy" : {"xp": 15, "content": {"basic_fairy_sword": 1}},
   "fairy_school"       : {"content": {"air_shield": 1, "strength": 1}},
   "quest_helping_horse": {"content": {"horseshoe": 4}},
   "the_road_is_open"   : {"content": {"horseshoe": 4}},

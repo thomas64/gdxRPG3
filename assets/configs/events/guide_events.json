@@ -85,6 +85,7 @@
   },
   "guide_event_xp"                   : {
     "type": "messagebox",
+    "condition": ["xp_>=_15"],
     "text": [
       "You've gained quite some XP by now!",
       "",
