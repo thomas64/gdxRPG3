@@ -23,6 +23,8 @@ internal class ConversationDialogListener(
             Input.Keys.ENTER,
             Input.Keys.SPACE,
             Input.Keys.A -> inputConfirm()
+            Constant.KEYCODE_RIGHT,
+            Input.Keys.ESCAPE -> inputCancel()
         }
         return true
     }
@@ -53,6 +55,14 @@ internal class ConversationDialogListener(
     private fun inputConfirm() {
         if (answers.selectedIndex != -1) {
             selectAnswer.invoke()
+        }
+    }
+
+    private fun inputCancel() {
+        answers.selectedIndex = answers.items.indexOfFirst {
+            it.text.contains("(Back)")
+                || it.text.contains("Take your leave", true)
+                || it.text.contains("->")
         }
     }
 
