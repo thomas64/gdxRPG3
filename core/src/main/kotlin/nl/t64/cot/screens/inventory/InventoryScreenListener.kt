@@ -14,6 +14,7 @@ import nl.t64.cot.input.AnalogTriggerAdapter
 internal class InventoryScreenListener(
     stage: Stage,
     private val closeScreenFunction: () -> Unit,
+    private val questLogScreenFunction: () -> Unit,
     private val actionFunction: () -> Unit,
     private val previousHeroFunction: () -> Unit,
     private val nextHeroFunction: () -> Unit,
@@ -40,6 +41,7 @@ internal class InventoryScreenListener(
 
         when (keycode) {
             Constant.KEYCODE_RIGHT, Input.Keys.I, Input.Keys.ESCAPE -> closeScreenFunction.invoke()
+            Constant.KEYCODE_LEFT, Input.Keys.L -> questLogScreenFunction.invoke()
             Constant.KEYCODE_BOTTOM, Input.Keys.A -> actionFunction.invoke()
             Constant.KEYCODE_L1, Input.Keys.Q -> previousHeroFunction.invoke()
             Constant.KEYCODE_R1, Input.Keys.W -> nextHeroFunction.invoke()

@@ -1,6 +1,7 @@
 package nl.t64.cot.screens.inventory
 
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
+import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.Utils.screenManager
@@ -8,10 +9,12 @@ import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.party.inventory.InventoryDatabase
+import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.ParchmentScreen
 import nl.t64.cot.screens.ScreenUI
 import nl.t64.cot.screens.inventory.messagedialog.MessageDialog
+import nl.t64.cot.screens.questlog.QuestLogScreen
 import nl.t64.cot.screens.world.conversation.ConversationDialog
 import nl.t64.cot.screens.world.conversation.ConversationObserver
 import kotlin.concurrent.thread
@@ -136,6 +139,7 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
                                      tryToDismissHeroFunction: () -> Unit = { tryToDismissHero() }) {
         listener = InventoryScreenListener(stage,
                                            closeScreenFunction,
+                                           { openQuestLogScreen() },
                                            doActionFunction,
                                            { selectPreviousHero() },
                                            { selectNextHero() },
@@ -147,6 +151,11 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
                                            { toggleCompare() },
                                            { cheatAddGold() },
                                            { cheatRemoveGold() })
+    }
+
+    private fun openQuestLogScreen() {
+        closeScreen()
+        Utils.runWithDelay(Constant.FADE_DURATION + 0.1f) { QuestLogScreen.load() }
     }
 
     private fun doAction() {

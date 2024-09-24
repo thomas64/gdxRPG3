@@ -18,6 +18,7 @@ private const val TEN = 10
 internal class QuestLogScreenListener(
     private val questList: List<QuestGraph>,
     private val closeScreenFunction: () -> Unit,
+    private val inventoryScreenFunction: () -> Unit,
     private val showLegendFunction: () -> Unit,
     private val populateQuestSpecificsFunction: (QuestGraph) -> Unit,
     private val cheatAllQuestsFinishedFunction: () -> Unit
@@ -28,6 +29,7 @@ internal class QuestLogScreenListener(
 
         when (keycode) {
             Constant.KEYCODE_RIGHT, Input.Keys.L, Input.Keys.ESCAPE -> closeScreenFunction.invoke()
+            Constant.KEYCODE_TOP, Input.Keys.I -> inventoryScreenFunction.invoke()
             Constant.KEYCODE_SELECT, Input.Keys.H -> showLegendFunction.invoke()
 
             Input.Keys.UP, Input.Keys.DOWN, Input.Keys.HOME, Input.Keys.END -> isSelected()

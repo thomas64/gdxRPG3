@@ -13,8 +13,10 @@ import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.quest.QuestGraph
 import nl.t64.cot.components.quest.QuestState
+import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.ParchmentScreen
+import nl.t64.cot.screens.inventory.InventoryScreen
 import nl.t64.cot.screens.inventory.messagedialog.MessageDialog
 
 
@@ -73,6 +75,7 @@ class QuestLogScreen : ParchmentScreen() {
         stage.addActor(buttonLabel)
         stage.addListener(QuestLogScreenListener(questListTable.questList,
                                                  { closeScreen() },
+                                                 { openInventoryScreen() },
                                                  { showLegend() },
                                                  { populateQuestSpecifics(it) },
                                                  { cheatAllQuestsFinished() }))
@@ -85,6 +88,11 @@ class QuestLogScreen : ParchmentScreen() {
         val selectedIndex = questList.selectedIndex
         val selectedQuest = questList.items[selectedIndex]
         populateQuestSpecifics(selectedQuest)
+    }
+
+    private fun openInventoryScreen() {
+        closeScreen()
+        Utils.runWithDelay(Constant.FADE_DURATION + 0.1f) { InventoryScreen.load() }
     }
 
     private fun showLegend() {

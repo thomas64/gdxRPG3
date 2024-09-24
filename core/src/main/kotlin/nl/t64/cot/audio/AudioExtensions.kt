@@ -4,6 +4,7 @@ import nl.t64.cot.Utils.audioManager
 
 
 fun playSe(audioEvent: AudioEvent, isLooping: Boolean = false) {
+    if (audioEvent == AudioEvent.NONE) return
     if (isLooping) {
         audioManager.handle(AudioCommand.SE_PLAY_LOOP, audioEvent)
     } else {
