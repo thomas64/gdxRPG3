@@ -1,0 +1,4 @@
+slimes.json
+bats.json
+orcs.json
+enemy1.json

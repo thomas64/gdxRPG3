@@ -1,0 +1,93 @@
+{
+  "orc_1"       : {
+    "name"     : "Orc",
+    "school"   : "NONE",
+    "xp"       : 3,
+    "drops"    : {"basic_dagger": 20, "healing_potion": 5, "gold": 50},
+    "stats"    : {
+      "intelligence": 6,
+      "willpower"   : 1,
+      "strength"    : 10,
+      "dexterity"   : 10,
+      "constitution": 14,
+      "stamina"     : 28,
+      "speed"       : 10
+    },
+    "skills"   : {
+      "sword": 1
+    },
+    "spells"   : {
+    },
+    "inventory": {
+      "weapon": "basic_dagger",
+      "chest" : "armor_2"
+    }
+  },
+  "orc_sergeant": {
+    "name"     : "Orc Sergeant",
+    "school"   : "NONE",
+    "xp"       : 27,
+    "drops"    : {"specialist_longsword": 20, "specialist_medium_shield": 20, "healing_potion": 5, "gold": 75},
+    "stats"    : {
+      "intelligence": 1,
+      "dexterity"   : 1,
+      "strength"    : 17,
+      "speed"       : 16,
+      "willpower"   : 12,
+      "constitution": 25,
+      "stamina"     : 1
+    },
+    "skills"   : {
+      "warrior": 8,
+      "hafted" : 6,
+      "shield" : 8,
+      "sword"  : 6,
+      "thrown" : 7
+    },
+    "spells"   : {
+    },
+    "inventory": {
+      "weapon": "specialist_sword",
+      "shield": "specialist_medium_shield",
+      "chest" : "armor_50"
+    }
+  },
+  "orc_general" : {
+    "name"     : "Orc General",
+    "school"   : "NECROMANCY",
+    "xp"       : 90,
+    "drops"    : {"masterwork_maul": 50, "masterwork_heavy_shield": 50, "stamina_potion": 90, "gold": 90},
+    "stats"    : {
+      "intelligence": 50,
+      "dexterity"   : 50,
+      "strength"    : 50,
+      "speed"       : 30,
+      "willpower"   : 30,
+      "constitution": 60,
+      "stamina"     : 60
+    },
+    "skills"   : {
+      "warrior": 10,
+      "wizard" : 10,
+      "hafted" : 10,
+      "missile": 10,
+      "sword"  : 10,
+      "shield" : 10
+    },
+    "spells"   : {
+      "mirror"        : 10,
+      "vs_naming"     : 10,
+      "acid_bolt"     : 10,
+      "crushing_death": 10,
+      "haste"         : 10,
+      "spirit_shield" : 10,
+      "tap_stamina"   : 10,
+      "wall_of_bones" : 10
+    },
+    "inventory": {
+      "weapon": "masterwork_axe",
+      "shield": "masterwork_heavy_shield",
+      "chest" : "armor_100"
+    }
+  }
+}

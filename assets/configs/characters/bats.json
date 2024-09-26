@@ -1,0 +1,26 @@
+{
+  "blue_bat": {
+    "name"     : "Blue Bat",
+    "school"   : "NONE",
+    "hp"       : 16,
+    "xp"       : 1,
+    "drops"    : {"leather": 25},
+    "stats"    : {
+      "intelligence": 1,
+      "dexterity"   : 1,
+      "strength"    : 5,
+      "speed"       : 20,
+      "willpower"   : 1,
+      "constitution": 0,
+      "stamina"     : 1
+    },
+    "skills"   : {
+      "bite": 1
+    },
+    "spells"   : {
+    },
+    "inventory": {
+      "weapon": "bat_bite"
+    }
+  }
+}

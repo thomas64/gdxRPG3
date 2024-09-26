@@ -1,0 +1,73 @@
+{
+  "green_slime"        : {
+    "name"     : "Green Slime",
+    "school"   : "NONE",
+    "xp"       : 2,
+    "drops"    : {"green_jelly": 25},
+    "stats"    : {
+      "intelligence": 1,
+      "dexterity"   : 1,
+      "strength"    : 5,
+      "speed"       : 5,
+      "willpower"   : 1,
+      "constitution": 3,
+      "stamina"     : 1
+    },
+    "skills"   : {
+      "bite": 1
+    },
+    "spells"   : {
+    },
+    "inventory": {
+      "weapon": "slime_slam"
+    }
+  },
+  "blue_slime_medicine": {
+    "name"     : "Blue Slime",
+    "school"   : "NONE",
+    "xp"       : 3,
+    "drops"    : {"blue_jelly": 100},
+    "stats"    : {
+      "intelligence": 1,
+      "dexterity"   : 1,
+      "strength"    : 10,
+      "speed"       : 5,
+      "willpower"   : 1,
+      "constitution": 7,
+      "stamina"     : 1
+    },
+    "skills"   : {
+      "bite": 2
+    },
+    "spells"   : {
+    },
+    "inventory": {
+      "weapon": "slime_slam",
+      "chest" : "armor_4"
+    }
+  },
+  "blue_slime"         : {
+    "name"     : "Blue Slime",
+    "school"   : "NONE",
+    "xp"       : 3,
+    "drops"    : {"blue_jelly": 25},
+    "stats"    : {
+      "intelligence": 1,
+      "dexterity"   : 1,
+      "strength"    : 10,
+      "speed"       : 5,
+      "willpower"   : 1,
+      "constitution": 7,
+      "stamina"     : 1
+    },
+    "skills"   : {
+      "bite": 2
+    },
+    "spells"   : {
+    },
+    "inventory": {
+      "weapon": "slime_slam",
+      "chest" : "armor_4"
+    }
+  }
+}

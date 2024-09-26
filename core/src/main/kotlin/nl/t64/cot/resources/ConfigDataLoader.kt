@@ -90,8 +90,7 @@ object ConfigDataLoader {
     }
 
     fun createEnemies(): Map<String, EnemyItem> {
-        val json = readString("characters", "enemy1.json")
-        return readValue<EnemyItem>(json)
+        return loadConfigData<EnemyItem>("characters")
             .mapValues { it.value.createCopy(id = it.key) }
     }
 
