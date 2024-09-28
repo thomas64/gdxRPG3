@@ -11,6 +11,7 @@ import nl.t64.cot.constants.Constant
 
 class SelectActionListener(
     private val winBattle: () -> Unit,
+    private val pauseMenu: () -> Unit,
     private val selectAttack: () -> Unit,
     private val selectMove: () -> Unit,
     private val selectPotion: () -> Unit,
@@ -23,20 +24,28 @@ class SelectActionListener(
 ) : InputListener() {
 
     override fun keyDown(event: InputEvent, keycode: Int): Boolean {
-        if (event.stage.actors.items.any { it is Dialog }) return true
+        if (event.stage.actors.items.any { it is Dialog }) {
+            event.dontLoseFocusAfterEsc()
+            return true
+        }
 
         when (keycode) {
+            Constant.KEYCODE_START, Input.Keys.ESCAPE -> event.handlePause()
             Input.Keys.UP -> playSe(AudioEvent.SE_MENU_CURSOR)
             Input.Keys.DOWN -> playSe(AudioEvent.SE_MENU_CURSOR)
-            Constant.KEYCODE_RIGHT, Input.Keys.ESCAPE -> event.dontLoseFocusAfterEsc()
+            Constant.KEYCODE_RIGHT -> event.dontLoseFocusAfterEsc()
             Constant.KEYCODE_BOTTOM, Input.Keys.ENTER, Input.Keys.A -> event.handleEnter()
             Input.Keys.W -> handleWin()
         }
         return true
     }
 
+    private fun InputEvent.handlePause() {
+        this.dontLoseFocusAfterEsc()
+        pauseMenu.invoke()
+    }
+
     private fun InputEvent.dontLoseFocusAfterEsc() {
-        playSe(AudioEvent.SE_MENU_ERROR)
         this.stage.keyboardFocus = getButtonTable<String>()
     }
 

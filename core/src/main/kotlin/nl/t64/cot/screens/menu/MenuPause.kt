@@ -40,14 +40,25 @@ class MenuPause : MenuScreen() {
     override val fontColor: Color = Color.WHITE
     override val selectColor: Color = Constant.DARK_RED
     override val backScreen: ScreenType = ScreenType.MENU_PAUSE
+    private lateinit var fromScreen: ScreenType
 
     private lateinit var listenerKeyVertical: ListenerKeyVertical
 
     companion object {
         fun load() {
             playSe(AudioEvent.SE_MENU_CONFIRM)
-            val menuPause = screenManager.getMenuScreen(ScreenType.MENU_PAUSE)
+            val menuPause = screenManager.getMenuScreen(ScreenType.MENU_PAUSE) as MenuPause
             menuPause.setBackground(createScreenshot(true))
+            menuPause.fromScreen = ScreenType.WORLD
+            screenManager.setScreen(ScreenType.MENU_PAUSE)
+            menuPause.updateMenuIndex(EXIT_INDEX)
+        }
+
+        fun loadForBattle() {
+            playSe(AudioEvent.SE_MENU_CONFIRM)
+            val menuPause = screenManager.getMenuScreen(ScreenType.MENU_PAUSE) as MenuPause
+            menuPause.setBackground(createScreenshot(true))
+            menuPause.fromScreen = ScreenType.BATTLE
             screenManager.setScreen(ScreenType.MENU_PAUSE)
             menuPause.updateMenuIndex(EXIT_INDEX)
         }
@@ -86,7 +97,11 @@ class MenuPause : MenuScreen() {
     }
 
     private fun processContinueButton() {
-        screenManager.setScreen(ScreenType.WORLD)
+        if (fromScreen == ScreenType.WORLD) {
+            screenManager.setScreen(ScreenType.WORLD)
+        } else if (fromScreen == ScreenType.BATTLE) {
+            screenManager.setScreen(ScreenType.BATTLE)
+        }
     }
 
     private fun processMainMenuButton() {

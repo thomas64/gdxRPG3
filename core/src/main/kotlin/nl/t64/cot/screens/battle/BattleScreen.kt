@@ -27,6 +27,7 @@ import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.inventory.InventoryScreen
 import nl.t64.cot.screens.inventory.messagedialog.MessageDialog
 import nl.t64.cot.screens.menu.DialogQuestion
+import nl.t64.cot.screens.menu.MenuPause
 import nl.t64.cot.screens.world.Camera
 import kotlin.collections.List
 import kotlin.concurrent.thread
@@ -38,6 +39,7 @@ class BattleScreen : Screen {
     private lateinit var battleObserver: BattleSubject
     private lateinit var battleId: String
     private lateinit var stage: Stage
+    private lateinit var currentBgm: AudioEvent
 
     private lateinit var enemies: EnemyContainer
     private lateinit var turnManager: TurnManager
@@ -75,6 +77,7 @@ class BattleScreen : Screen {
     private var shouldKeepState: Boolean = false
 
     private val listenerAction = SelectActionListener({ winBattle() },
+                                                      { openPauseMenu() },
                                                       { selectAttack() },
                                                       { selectMove() },
                                                       { selectPotion() },
@@ -97,11 +100,14 @@ class BattleScreen : Screen {
             val screen = screenManager.getScreen(ScreenType.BATTLE) as BattleScreen
             screen.battleObserver = BattleSubject(battleObserver)
             screen.battleId = battleId
+            screen.currentBgm = AudioEvent.getRandomBattleMusic()
+            screen.shouldKeepState = false
             screenManager.setScreen(ScreenType.BATTLE)
         }
     }
 
     override fun show() {
+        playBgm(currentBgm)
         if (shouldKeepState) {
             Gdx.input.inputProcessor = stage
             Utils.setGamepadInputProcessor(stage)
@@ -113,7 +119,6 @@ class BattleScreen : Screen {
         turnManager = TurnManager(gameData.party.getAllHeroesAlive(), enemies.getAll())
         battleField = BattleField(turnManager.participants)
 
-        playBgm(AudioEvent.getRandomBattleMusic())
         isLoaded = false
         hasWon = false
         hasLost = false
@@ -558,6 +563,11 @@ class BattleScreen : Screen {
         showMessages(messages)
         Thread.sleep(1000L)
         turnManager.setNextTurn()
+    }
+
+    private fun openPauseMenu() {
+        shouldKeepState = true
+        MenuPause.loadForBattle()
     }
 
     private fun showInventoryScreen() {
