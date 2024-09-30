@@ -21,6 +21,8 @@ private const val LINE_HEIGHT = 26f
 private const val DIALOG_INIT_HEIGHT = 100L
 private const val DIALOG_PAD = 60f
 
+private const val INPUT_DELAY = 0.5f
+
 class MessageDialog(private val message: String) {
 
     private val dialogHeight: Float = (message.lines().count() * FONT_SIZE + DIALOG_INIT_HEIGHT).toFloat()
@@ -67,7 +69,9 @@ class MessageDialog(private val message: String) {
     }
 
     private fun applyListeners() {
-        dialog.addListener(MessageDialogListener { hide() })
+        Utils.runWithDelay(INPUT_DELAY) {
+            dialog.addListener(MessageDialogListener { hide() })
+        }
     }
 
     private fun hide() {

@@ -39,21 +39,21 @@ class DialogQuestion(
     private val message: String
 ) {
     private val dialogHeight: Float = ((message.lines().count() * FONT_SIZE) + DIALOG_INIT_HEIGHT).toFloat()
-    private val font: BitmapFont = resourceManager.getTrueTypeAsset(FONT, FONT_SIZE).apply {
-        data.setLineHeight(LINE_HEIGHT)
-    }
+    private val font: BitmapFont = resourceManager.getTrueTypeAsset(FONT, FONT_SIZE)
+        .apply { data.setLineHeight(LINE_HEIGHT) }
     private val dialog: Dialog = createDialog()
     private var selectedIndex = 0
 
-    fun show(stage: Stage, event: AudioEvent, startIndex: Int = EXIT_INDEX) {
+    fun show(stage: Stage, event: AudioEvent, startIndex: Int = EXIT_INDEX, confirmDelay: Float = 0f) {
         playSe(event)
-        show(stage, startIndex)
+        show(stage, startIndex, confirmDelay)
     }
 
-    fun show(stage: Stage, startIndex: Int = EXIT_INDEX) {
+    fun show(stage: Stage, startIndex: Int = EXIT_INDEX, confirmDelay: Float = 0f) {
         dialog.show(stage)
         updateIndex(startIndex)
         applyListeners(startIndex)
+        Utils.runWithDelay(confirmDelay) { applyConfirmListener() }
     }
 
     private fun updateIndex(newIndex: Int) {
@@ -117,11 +117,14 @@ class DialogQuestion(
     private fun applyListeners(startIndex: Int) {
         val listenerKeyHorizontal = ListenerKeyHorizontal({ updateIndex(it) }, NUMBER_OF_ITEMS)
         listenerKeyHorizontal.updateSelectedIndex(startIndex)
-        val listenerKeyConfirm = ListenerKeyConfirmDialog { selectDialogItem() }
         val listenerKeyCancel = ListenerKeyCancel({ updateIndex(it) }, { selectDialogItem() }, EXIT_INDEX)
         dialog.addListener(listenerKeyHorizontal)
-        dialog.addListener(listenerKeyConfirm)
         dialog.addListener(listenerKeyCancel)
+    }
+
+    private fun applyConfirmListener() {
+        val listenerKeyConfirm = ListenerKeyConfirmDialog { selectDialogItem() }
+        dialog.addListener(listenerKeyConfirm)
     }
 
 }

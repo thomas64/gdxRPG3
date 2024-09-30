@@ -407,7 +407,7 @@ class BattleScreen : Screen {
 
         val message = moveAction.createConfirmationMessage()
         val dialog = DialogQuestion({ moveConfirmed(moveAction) }, message)
-        dialog.show(stage, 0)
+        dialog.show(stage, 0, 0.5f)
     }
 
     private fun moveConfirmed(moveAction: MoveAction) {
@@ -426,7 +426,7 @@ class BattleScreen : Screen {
         val attackAction = AttackAction(currentParticipant, enemies.getEnemy(selectedTarget), selectedAttack)
         val message = attackAction.createConfirmationMessage()
         val dialog = DialogQuestion({ attackConfirmed(attackAction) }, message)
-        dialog.show(stage, 0)
+        dialog.show(stage, 0, 1f)
     }
 
     private fun attackConfirmed(attackAction: AttackAction) {
@@ -444,7 +444,7 @@ class BattleScreen : Screen {
         val potionAction = PotionAction(currentParticipant, selectedPotion)
         val message = potionAction.createConfirmationMessage()
         val dialog = DialogQuestion({ potionConfirmed(potionAction) }, message)
-        dialog.show(stage, 0)
+        dialog.show(stage, 0, 0.5f)
     }
 
     private fun potionConfirmed(potionAction: PotionAction) {
@@ -470,7 +470,7 @@ class BattleScreen : Screen {
         }
         val message: String = weaponAction.createConfirmationMessage()
         val dialog = DialogQuestion({ weaponConfirmed(weaponAction) }, message)
-        dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0)
+        dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0, 0.5f)
     }
 
     private fun weaponConfirmed(weaponAction: WeaponAction) {

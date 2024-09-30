@@ -27,6 +27,8 @@ private const val LINE_HEIGHT = 26f
 private const val DIALOG_INIT_HEIGHT = 100L
 private const val DIALOG_PAD = 60f
 
+private const val INPUT_DELAY = 1f
+
 class MessageDialog(
     private val multiplexer: InputMultiplexer
 ) {
@@ -57,7 +59,7 @@ class MessageDialog(
         fillDialog(message)
         playSe(audioEvent)
         dialog.show(stage)
-        Utils.runWithDelay(1.5f) {
+        Utils.runWithDelay(INPUT_DELAY) {
             Gdx.input.inputProcessor = stage
             Utils.setGamepadInputProcessor(stage)
         }
