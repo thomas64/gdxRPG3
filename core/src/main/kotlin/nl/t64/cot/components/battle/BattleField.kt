@@ -15,15 +15,14 @@ class BattleField(participants: List<Participant>) {
     var startingSpace: Int = -1
 
     init {
+        val heroParticipants = participants.filter { it.isHero }
+        val enemyParticipants = participants.filter { !it.isHero }
+
         val heroIndices: List<Int> = (0 until 8).shuffled()
         val enemyIndices: List<Int> = (12 until 20).shuffled()
-        participants.forEachIndexed { index, participant ->
-            if (participant.isHero) {
-                heroSpaces[heroIndices[index]] = participant
-            } else {
-                enemySpaces[enemyIndices[index]] = participant
-            }
-        }
+
+        heroParticipants.forEachIndexed { index, participant -> heroSpaces[heroIndices[index]] = participant }
+        enemyParticipants.forEachIndexed { index, participant -> enemySpaces[enemyIndices[index]] = participant }
     }
 
     fun resetStartingSpace() {

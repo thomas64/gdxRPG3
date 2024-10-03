@@ -9,6 +9,7 @@ class BattleContainer {
     val wonBattles: MutableSet<String> = mutableSetOf()
 
     fun getBattlers(battleId: String): List<Battler> = battles[battleId]!!.battlers
+    fun getBackground(battleId: String): String = battles[battleId]!!.background
     fun isBattleEscapable(battleId: String): Boolean = battles[battleId]!!.isEscapable
     fun isBattleWon(battleId: String): Boolean = battles[battleId]?.hasWon ?: false
 

@@ -144,6 +144,7 @@ class BattleScreen : Screen {
                 Gdx.input.inputProcessor = stage
                 Utils.setGamepadInputProcessor(stage)
                 isLoaded = true
+                stage.addActor(Utils.createBattleBack(battleId))
                 render(0f)
                 gameData.events.getEventById("guide_event_battle").possibleStart(stage)
             }
@@ -155,7 +156,6 @@ class BattleScreen : Screen {
 
         stage.act(dt)
         handleAudioFading()
-        handleLineDrawing()
         stage.draw()
 
         if (!isLoaded || isBgmFading || isDelayingTurn || hasWon || hasLost) {
@@ -221,15 +221,6 @@ class BattleScreen : Screen {
     private fun handleAudioFading() {
         if (isBgmFading) {
             audioManager.certainFadeBgmBgs()
-        }
-    }
-
-    private fun handleLineDrawing() {
-        if (isLoaded) {
-            shapeRenderer.begin(ShapeRenderer.ShapeType.Line)
-            shapeRenderer.color = Color.WHITE
-            shapeRenderer.line(Gdx.graphics.width / 2f, 250f, Gdx.graphics.width / 2f, Gdx.graphics.height - 40f)
-            shapeRenderer.end()
         }
     }
 
@@ -341,7 +332,7 @@ class BattleScreen : Screen {
 
     private fun setupMoveTable() {
         battleField.setStartingSpace(currentParticipant)
-        buttonTableMove = battleFieldBuilder.createButtonTableMove()
+        buttonTableMove = screenBuilder.createButtonTableMove()
         stage.addActor(buttonTableMove)
         buttonTableMove.addListener(listenerMove)
         stage.keyboardFocus = buttonTableMove.children.last()

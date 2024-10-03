@@ -38,6 +38,7 @@ class BattleScreenBuilder {
 
     private val colorTextureCache: MutableMap<Color, Texture> = mutableMapOf()
     private val barFontStyle = LabelStyle(BitmapFont(), Color.WHITE)
+    private val transparent = Utils.createTransparency()
 
     var buttonTableActionIndex = 0
 
@@ -58,7 +59,6 @@ class BattleScreenBuilder {
         return Table(createSkin()).apply {
             defaults().height(Constant.FACE_SIZE)
             columnDefaults(0).width(Constant.FACE_SIZE)
-            columnDefaults(1).width(150f)
             top().left()
             setPosition(20f, Gdx.graphics.height - 20f)
             heroes.forEach { addHero(it, participants) }
@@ -66,18 +66,21 @@ class BattleScreenBuilder {
     }
 
     private fun Table.addHero(hero: HeroItem, participants: List<Participant>) {
-        val actionPoints: Int = participants.firstOrNull { it.character == hero }?.currentAP ?: 0
+        val currentAp: Int = participants.firstOrNull { it.character == hero }?.currentAP ?: 0
+        val maximumAP: Int = hero.getCalculatedActionPoints()
 
         add(Utils.getFaceImage(hero.id).apply { if (!hero.isAlive) color = Color.DARK_GRAY })
         add(Table(createSkin()).apply {
-            left()
-            defaults().left()
-            add("${hero.name}  ($actionPoints AP)").colspan(2).row()
-            add("HP:").width(50f)
-            add(createHpBar(hero)).width(BAR_WIDTH).height(BAR_HEIGHT).row()
-            add("SP:").width(50f)
-            add(createSpBar(hero)).width(BAR_WIDTH).height(BAR_HEIGHT).row()
-        }).top().left().padLeft(20f).row()
+            defaults().left().height(30f)
+            add(hero.name).width(150f).colspan(2).padLeft(10f).padRight(10f).row()
+            add("HP:").width(50f).padLeft(10f)
+            add(createHpBar(hero)).width(BAR_WIDTH).height(BAR_HEIGHT).padRight(10f).row()
+            add("SP:").width(50f).padLeft(10f)
+            add(createSpBar(hero)).width(BAR_WIDTH).height(BAR_HEIGHT).padRight(10f).row()
+            add("AP:").width(50f).padLeft(10f)
+            add("$currentAp/ $maximumAP").width(BAR_WIDTH).height(BAR_HEIGHT).padRight(10f).row()
+            background = transparent
+        }).row()
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -85,7 +88,6 @@ class BattleScreenBuilder {
     fun createEnemyTable(enemies: List<EnemyItem>): Table {
         return Table(createSkin()).apply {
             defaults().height(Constant.FACE_SIZE)
-            columnDefaults(0).width(150f)
             columnDefaults(1).width(Constant.FACE_SIZE)
             top().left()
             setPosition(Gdx.graphics.width - Constant.FACE_SIZE - 150f - 40f, Gdx.graphics.height - 20f)
@@ -95,15 +97,15 @@ class BattleScreenBuilder {
 
     private fun Table.addEnemy(enemy: EnemyItem) {
         add(Table(createSkin()).apply {
-            left()
             defaults().left()
-            add(enemy.name).colspan(2).row()
-            add("HP:").width(50f)
-            add(createHpBar(enemy)).width(BAR_WIDTH).height(BAR_HEIGHT)
-        }).top().left()
+            add(enemy.name).width(150f).colspan(2).padLeft(10f).padRight(10f).row()
+            add("HP:").width(50f).padLeft(10f)
+            add(createHpBar(enemy)).width(BAR_WIDTH).height(BAR_HEIGHT).padRight(10f).row()
+            background = transparent
+        })
         val faceImage = Utils.getFaceImage(enemy.id, isFlipped = false)
             .apply { if (!enemy.isAlive) color = Color.DARK_GRAY }
-        add(faceImage).padLeft(20f).row()
+        add(faceImage).row()
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -111,36 +113,40 @@ class BattleScreenBuilder {
     fun createTurnTable(participants: List<Participant>): Table {
         return Table(createSkin()).apply {
             defaults().height(50f)
-            columnDefaults(0).width(100f)
+            columnDefaults(0).width(80f).padLeft(10f)
             columnDefaults(1).width(54f)
             columnDefaults(2).width(200f)
-            columnDefaults(3).width(100f)
-            top().left()
-            setPosition(450f, Gdx.graphics.height - 20f)
+            columnDefaults(3).width(70f)
 
             add("").padBottom(5f)
             add("Turn order").padBottom(5f)
             add("").padBottom(5f)
             add("Speed").padBottom(5f).row()
 
-            add("Now:").padBottom(5f)
+            add(Label("Now:", createLabelStyle(Color.GOLD))).padBottom(5f)
             add(createImageOf(participants[0])).padBottom(5f)
             add(Label(participants[0].character.name, createLabelStyle(Color.GOLD))).padBottom(5f)
             addSpeedCell(participants[0], Color.GOLD).padBottom(5f).row()
+            possibleAddPadBottom(participants[0], participants)
 
             add("Next:")
             if (participants.size > 1) {
                 add(createImageOf(participants[1]))
                 add(participants[1].character.name)
                 addSpeedCell(participants[1]).row()
+                possibleAddPadBottom(participants[1], participants)
 
                 participants.drop(2).forEach {
                     add("")
                     add(createImageOf(it))
                     add(it.character.name)
                     addSpeedCell(it).row()
+                    possibleAddPadBottom(it, participants)
                 }
             }
+            background = transparent
+            pack()
+            setPosition(450f, Gdx.graphics.height - height - 20f)
         }
     }
 
@@ -160,6 +166,12 @@ class BattleScreenBuilder {
         }
     }
 
+    private fun Table.possibleAddPadBottom(participant: Participant, participants: List<Participant>) {
+        if (participant == participants.last()) {
+            padBottom(10f)
+        }
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     fun createButtonTableAction(): Table {
@@ -168,6 +180,15 @@ class BattleScreenBuilder {
 
     fun createButtonTableAttack(currentParticipant: Participant): Table {
         return createStyledEmptyList<String>().fillWithAttacksFor(currentParticipant).toAttackTable()
+    }
+
+    fun createButtonTableMove(): Table {
+        return createSelectionTable().apply {
+            add("Move left or right and confirm.")
+            background = transparent
+            pack()
+            y = Gdx.graphics.height - height - 20f
+        }
     }
 
     fun createButtonTableTarget(enemies: List<Participant>): Table {
@@ -238,7 +259,7 @@ class BattleScreenBuilder {
         val listWithActions = this
         return createSelectionTable().apply {
             add("Select Action:").padBottom(10f).row()
-            add(listWithActions)
+            finish(listWithActions)
         }
     }
 
@@ -246,7 +267,7 @@ class BattleScreenBuilder {
         val listWithAttacks = this
         return createSelectionTable().apply {
             add("Select Attack:").padBottom(10f).row()
-            add(listWithAttacks)
+            finish(listWithAttacks)
         }
     }
 
@@ -254,7 +275,7 @@ class BattleScreenBuilder {
         val listWithTargets = this
         return createSelectionTable().apply {
             add("Select Target:").padBottom(10f).row()
-            add(listWithTargets)
+            finish(listWithTargets)
         }
     }
 
@@ -262,7 +283,7 @@ class BattleScreenBuilder {
         val listWithPotions = this
         return createSelectionTable().apply {
             add("Select Potion (Amount):").padBottom(10f).row()
-            add(listWithPotions)
+            finish(listWithPotions)
         }
     }
 
@@ -271,7 +292,7 @@ class BattleScreenBuilder {
         return createSelectionTable().apply {
             add("Select Weapon (Uses):").padBottom(10f).row()
             currentWeapon?.let { add("Current: ${it.name} (${it.durability})").row() }
-            add(listWithWeapons)
+            finish(listWithWeapons)
         }
     }
 
@@ -342,10 +363,18 @@ class BattleScreenBuilder {
 
     private fun createSelectionTable(): Table {
         return Table(createSkin()).apply {
-            columnDefaults(0).width(300f)
-            top().left()
-            setPosition(1050f, Gdx.graphics.height - 20f)
+            defaults().top().left()
+            padLeft(10f)
+            padRight(10f)
+            x = 1050f
         }
+    }
+
+    private fun <T> Table.finish(listWithActions: GdxList<T>) {
+        add(listWithActions)
+        background = transparent
+        pack()
+        y = Gdx.graphics.height - height - 20f
     }
 
     private fun createSkin(): Skin {
