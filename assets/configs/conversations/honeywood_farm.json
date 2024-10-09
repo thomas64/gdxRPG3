@@ -33,7 +33,7 @@
   "quest_helping_horse"    : {
     "name"   : "Lennor",
     "phrases": {
-      "1"   : {"text": ["Hey Mozes, you can't go to Honeywood Farm at the moment. A large tree has fallen on the road this morning. I'm busy removing it, but I think it'll take me until 13:00."]},
+      "1"   : {"text": ["Hey Mozes, you can't go to Honeywood Farm at the moment. A large tree has fallen on the road this morning. I'm busy removing it, but I think it'll take me until 17:00."]},
       "2"   : {
         "choices": [
           {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "text": "*Ask Lennor if he's seen Grace this morning.*", "nextId": "3"},
@@ -42,8 +42,8 @@
           {"condition": ["i_rc_>=_a_q_quest_royal_sacrifice"], "text": "*Inform how long it'll take him to clear the road.*", "nextId": "30"},
           {"condition": ["i_rc_>=_a_q_quest_royal_sacrifice"], "text": "*Express your need to reach Honeywood Farm.*", "nextId": "40"},
           {"condition": ["i_rc_>=_a_q_quest_royal_sacrifice"], "text": "*Press him. Urge him on. Bother him persistently.*", "nextId": "50"},
-          {"condition": ["i_time_before_12:00", "i_rc_>=_a_q_quest_royal_sacrifice"], "text": "*Offer your assistance.*", "nextId": "60"},
-          {"condition": ["i_time_after_12:00", "i_rc_>=_a_q_quest_royal_sacrifice"], "text": "*Offer your assistance.*", "nextId": "65"},
+          {"condition": ["i_time_before_16:00", "i_rc_>=_a_q_quest_royal_sacrifice"], "text": "*Offer your assistance.*", "nextId": "60"},
+          {"condition": ["i_time_after_16:00", "i_rc_>=_a_q_quest_royal_sacrifice"], "text": "*Offer your assistance.*", "nextId": "65"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
@@ -55,19 +55,19 @@
       "8"   : {"face": "mozes", "name": "Mozes", "text": ["I appreciate the offer, Lennor, but I think I'll manage. Please keep an eye out for Grace."], "choices": [{"command": "EXIT", "nextId": "10"}]},
       "10"  : {"face": "man13", "name": "Lennor", "text": ["Weren't you heading to Honeywood Forest? Did you find her?"], "choices": [{"command": "EXIT", "nextId": "10"}]},
       "20"  : {"text": ["This morning I heard that a tree had fallen on this road. I was asked to remove it, so I came straight this way to see what happened. Luckily, no one was hurt when it fell."], "choices": [{"nextId": "2"}]},
-      "30"  : {"text": ["A tree this large? I'll probably be busy with it until about 13:00. Afterward, the road is clear and you'll be able to enter Honeywood Farm."], "choices": [{"nextId": "2"}]},
-      "40"  : {"text": ["I'm sorry, Mozes, I'm working as fast as I can. You'll have to wait until 13:00, or you could assist me to speed up the process."], "choices": [{"nextId": "2"}]},
-      "50"  : {"text": ["Aw come on! Really? I'm trying! It's one heavy tree, Mozes! I literally can't do it before 13:00 without any assistance!"], "choices": [{"nextId": "2"}]},
+      "30"  : {"text": ["A tree this large? I'll probably be busy with it until about 17:00. Afterward, the road is clear and you'll be able to enter Honeywood Farm."], "choices": [{"nextId": "2"}]},
+      "40"  : {"text": ["I'm sorry, Mozes, I'm working as fast as I can. You'll have to wait until 17:00, or you could assist me to speed up the process."], "choices": [{"nextId": "2"}]},
+      "50"  : {"text": ["Aw come on! Really? I'm trying! It's one heavy tree, Mozes! I literally can't do it before 17:00 without any assistance!"], "choices": [{"nextId": "2"}]},
       "60"  : {"text": ["A month or so ago, I was thinking of buying a horse for myself. I even got some necessary items for it already. But then I thought, 'Why would I need a horse?' Haha, but today I could really use a horse!"]},
-      "61"  : {"text": ["So, if you somehow could lend me a horse, just for this morning, along with 2 tow ropes, I could clear the road for you immediately."], "choices": [{"command": "ACCEPT_QUEST", "nextId": "62"}]},
+      "61"  : {"text": ["So, if you somehow could lend me a horse, just for today, along with 2 tow ropes, I could clear the road for you immediately."], "choices": [{"command": "ACCEPT_QUEST", "nextId": "62"}]},
       "62"  : {"text": ["You could ask the village elder about this matter. He's wise, he will probably have some suggestions."], "choices": [{"command": "EXIT", "nextId": "70"}]},
-      "65"  : {"text": ["That won't be necessary anymore. I'm almost done with the tree. I'll be finished by 13:00. But thanks for the offer."], "choices": [{"nextId": "2"}]},
-      "70"  : {"text": ["Hey Mozes, you can't go to Honeywood Farm at the moment. A large tree fell on the road this morning. I'm busy removing it, but I think it'll take me until 13:00."]},
+      "65"  : {"text": ["That won't be necessary anymore. I'm almost done with the tree. I'll be finished by 17:00. But thanks for the offer."], "choices": [{"nextId": "2"}]},
+      "70"  : {"text": ["Hey Mozes, you can't go to Honeywood Farm at the moment. A large tree fell on the road this morning. I'm busy removing it, but I think it'll take me until 17:00."]},
       "71"  : {"text": ["Did you manage to get me the requested assistance?"]},
       "72"  : {
         "choices": [
-          {"condition": ["i_time_before_12:00", "_tc_1_q_this", "_tc_11_q_this"], "text": "[2 Ropes, 1 Horse] *Present the requested horse and ropes.*", "command": "SHOW_QUEST_ITEM", "nextId": "90"},
-          {"condition": ["i_time_after_12:00", "_tc_1_q_this", "_tc_11_q_this"], "text": "[2 Ropes, 1 Horse] *Present the requested horse and ropes.*", "command": "SHOW_QUEST_ITEM", "nextId": "95"},
+          {"condition": ["i_time_before_16:00", "_tc_1_q_this", "_tc_11_q_this"], "text": "[2 Ropes, 1 Horse] *Present the requested horse and ropes.*", "command": "SHOW_QUEST_ITEM", "nextId": "90"},
+          {"condition": ["i_time_after_16:00", "_tc_1_q_this", "_tc_11_q_this"], "text": "[2 Ropes, 1 Horse] *Present the requested horse and ropes.*", "command": "SHOW_QUEST_ITEM", "nextId": "95"},
           {"text": "*Not yet. Take your leave.*", "command": "EXIT", "nextId": "70"}
         ]
       },
@@ -88,7 +88,13 @@
   "lennor_is_finished"     : {
     "name"   : "Lennor",
     "phrases": {
-      "1": {"text": ["*Phew* It is finally done. The tree is gone."], "choices": [{"command": "FADE_TO_BLACK_13"}]}
+      "1": {"text": ["*Phew* It is finally done. The tree is gone."], "choices": [{"command": "FADE_TO_BLACK_17"}]}
+    }
+  },
+  "wait_up_horseshoes"     : {
+    "name"   : "Lennor",
+    "phrases": {
+      "1": {"text": ["Hey Mozes, wait up! I've got something for you."], "choices": [{"command": "EXIT"}]}
     }
   },
   "the_road_is_open"       : {

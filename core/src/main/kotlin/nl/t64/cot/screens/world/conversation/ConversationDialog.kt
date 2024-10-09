@@ -195,7 +195,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             ConversationCommand.RECEIVE_ITEM -> receiveItem()
             ConversationCommand.START_BATTLE -> startBattle(nextId)
             ConversationCommand.RELOAD_NPCS -> fadeAndReloadNpcs(nextId)
-            ConversationCommand.FADE_TO_BLACK_13 -> fadeAndSetTime("13:01", nextId)
+            ConversationCommand.FADE_TO_BLACK_17 -> fadeAndSetTime("17:01", nextId)
 
             ConversationCommand.KNOW_QUEST -> knowQuest(nextId)
             ConversationCommand.ACCEPT_QUEST -> acceptQuest(nextId)

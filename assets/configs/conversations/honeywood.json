@@ -341,7 +341,7 @@
         "choices": [
           {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "text": "*Ask Angie if she's seen Grace this morning.*", "nextId": "5"},
           {"condition": ["i_tn_7_q_this"], "text": "*Express your concern about Enopa's condition.*", "nextId": "3"},
-          {"condition": ["i_rc_>=_a_q_quest_helping_horse"], "text": "*Inquire about borrowing Enopa to help Lennor with the fallen tree.*", "nextId": "10"},
+          {"condition": ["i_rc_>=_a_q_quest_helping_horse", "i_time_before_17:00"], "text": "*Inquire about borrowing Enopa to help Lennor with the fallen tree.*", "nextId": "10"},
           {"text": "*Greet Enopa and take your leave.*", "command": "EXIT"}
         ]
       },
@@ -351,7 +351,7 @@
       "11"  : {"text": ["And even if she recovers, she'll need horseshoes before she can go anywhere. I don't have any right now, so it's not possible."]},
       "12"  : {
         "choices": [
-          {"condition": ["i_n_1_>=_item_horse_medicine"], "text": "[Horse Medicine] *Deliver the medicine from Elenora.*", "command": "PROVIDE_QUEST_ITEM", "nextId": "50"},
+          {"condition": ["i_n_1_>=_item_horse_medicine"], "text": "[Horse Medicine] *Deliver the medicine from Elenora.*", "command": "PROVIDE_QUEST_ITEM", "nextId": "90"},
           {"condition": ["i_r_!=_f_q_this"], "text": "*Ask if there isn't anything you can do to help Enopa.*", "command": "ACCEPT_QUEST", "nextId": "20"},
           {"condition": ["i_r_==_f_q_this"], "text": "*Propose to get a medicine from Elenora and some horseshoes.", "command": "ACCEPT_QUEST", "nextId": "30"},
           {"text": "*Wish Angie and Enopa the best. Take your leave.*", "command": "EXIT"}
@@ -377,7 +377,6 @@
           {"text": "*You went looking for that other horse. Take your leave.*", "command": "EXIT", "nextId": "41"}
         ]
       },
-      "50"  : {"text": ["How did you knew? Thank you very much! I'll administer it to her right away."], "choices": [{"nextId": "90"}]},
       "51"  : {"text": ["Wow, really? That's awesome! I'll administer it to her right away."], "choices": [{"nextId": "53"}]},
       "52"  : {"text": ["Great! I'll administer it to her right away."], "choices": [{"nextId": "53"}]},
       "53"  : {"text": ["{SPEED=0.2} . . . . ."]},
@@ -386,24 +385,30 @@
       "60"  : {"text": ["Were you able to gather 4 horseshoes for Enopa?"]},
       "61"  : {
         "choices": [
-          {"condition": ["_n_4_>=_item_horseshoe"], "text": "[4 Horseshoes] *Hand over the horseshoes.*", "command": "PROVIDE_QUEST_ITEM", "nextId": "70"},
+          {"condition": ["_n_4_>=_item_horseshoe", "i_time_before_17:00"], "text": "[4 Horseshoes] *Hand over the horseshoes.*", "command": "PROVIDE_QUEST_ITEM", "nextId": "70"},
+          {"condition": ["_n_4_>=_item_horseshoe", "i_time_after_17:00"], "text": "[4 Horseshoes] *Hand over the horseshoes.*", "nextId": "75"},
           {"text": "*Tell her you'll return when you have them. Take your leave.*", "command": "EXIT", "nextId": "60"}
         ]
       },
       "70"  : {"text": ["Thank you so much! You've been a tremendous help, Mozes!"]},
       "71"  : {"text": ["I'll shoe her right away with these. After that, I'll make sure Enopa gets to Lennor."]},
       "72"  : {"text": ["Thanks once again. It turned out to be a great day after all."], "choices": [{"command": "RELOAD_NPCS", "nextId": "80"}]},
+      "75"  : {"text": ["Thank you so much! You've been a tremendous help, Mozes!"]},
+      "76"  : {"text": ["But it's getting pretty late already. Lennor should probably be done by now. I think it's best that you keep the horseshoes, and Enopa can get some little more rest."]},
+      "77"  : {"text": ["Thanks once again. It turned out to be a great day after all."], "choices": [{"command": "EXIT", "nextId": "85"}]},
       "80"  : {
         "text": ["How is my Enopa doing? Has she been of any help to Lennor and you?"], "choices": [
           {"condition": ["_conv_the_road_is_open_==_1"], "command": "EXIT", "nextId": "80"}
         ]
       },
+      "85"  : {"text": ["Hi Mozes, thank you for making my Enopa feel better."], "choices": [{"command": "EXIT", "nextId": "85"}]},
       "2000": {"face": "mozes", "text": ["{SPEED=0.2} . . . . ."]},
       "2001": {"text": ["Uh... Well... I guess so?"], "choices": [{"command": "EXIT", "nextId": "80"}]},
-      "90"  : {"text": ["{SPEED=0.2} . . . . ."]},
-      "91"  : {"text": ["I think she even likes the taste of it! Thank you so much for your help."]},
-      "92"  : {"text": ["Now, once she's been shoed, I'll lend her to Lennor and you."]},
-      "93"  : {"text": ["Regarding the horseshoes, I'll need you to get 4 of them. They might be lying around in the village, or you could ask the village elder. He's quite knowledgeable and might even know where to find horseshoes."], "choices": [{"nextId": "61"}]}
+      "90"  : {"text": ["How did you know? Thank you very much! I'll administer it to her right away."]},
+      "91"  : {"text": ["{SPEED=0.2} . . . . ."]},
+      "92"  : {"text": ["I think she even likes the taste of it! Thank you so much for your help."]},
+      "93"  : {"text": ["Now, once she's been shoed, I'll lend her to Lennor and you."]},
+      "94"  : {"text": ["Regarding the horseshoes, I'll need you to get 4 of them. They might be lying around in the village, or you could ask the village elder. He's quite knowledgeable and might even know where to find horseshoes."], "choices": [{"nextId": "61"}]}
     }
   },
   "honeywood_horse"                     : {
@@ -414,8 +419,8 @@
         "choices": [
           {"condition": ["i_druid1", "_tn_7_q_quest_get_horse"], "text": "[Druid 1] *Listen to Enopa.*", "nextId": "3"},
           {"condition": ["i_druid1", "_tc_7_q_quest_get_horse", "_c_!=_f_q_quest_get_horse"], "text": "[Druid 1] *Listen to Enopa.*", "nextId": "4"},
-          {"condition": ["i_druid1", "_c_==_f_q_quest_get_horse", "_c_!=_f_q_quest_helping_horse", "time_before_13:00"], "text": "[Druid 1] *Listen to Enopa.*", "nextId": "5"},
-          {"condition": ["i_druid1", "_c_==_f_q_quest_get_horse", "_c_!=_f_q_quest_helping_horse", "time_after_13:00"], "text": "[Druid 1] *Listen to Enopa.*", "nextId": "6"},
+          {"condition": ["i_druid1", "_c_==_f_q_quest_get_horse", "_c_!=_f_q_quest_helping_horse", "time_before_17:00"], "text": "[Druid 1] *Listen to Enopa.*", "nextId": "5"},
+          {"condition": ["i_druid1", "_c_==_f_q_quest_get_horse", "_c_!=_f_q_quest_helping_horse", "time_after_17:00"], "text": "[Druid 1] *Listen to Enopa.*", "nextId": "6"},
           {"condition": ["i_druid1", "_c_==_f_q_quest_helping_horse"], "text": "[Druid 1] *Listen to Enopa.*", "nextId": "7"},
           {"condition": ["ii_druid1"], "text": "[Druid 1] *Listen to Enopa.*", "nextId": "9999"},
           {"text": "*Nod to Enopa and take your leave.*", "command": "EXIT"}

@@ -14,16 +14,22 @@
   },
   "event_ridiculous"          : {
     "type"          : "conversation",
-    "condition"     : ["_tc_1_q_quest_helping_horse", "_tc_11_q_quest_helping_horse", "_time_before_12:55"],
+    "condition"     : ["_tc_1_q_quest_helping_horse", "_tc_11_q_quest_helping_horse", "_time_before_16:55"],
     "conversationId": "honeywood_ridiculous",
     "entityId"      : "mozes"
   },
   "event_lennor_is_finished"  : {
     "type"          : "conversation",
-    "condition"     : ["_time_at_13:00", "_c_!=_f_q_quest_helping_horse"],
+    "condition"     : ["_time_at_17:00", "_c_!=_f_q_quest_helping_horse"],
     "conversationId": "lennor_is_finished",
     "entityId"      : "man13",
     "doesRepeat"    : true
+  },
+  "event_wait_up_horseshoes"  : {
+    "type"          : "conversation",
+    "condition"     : ["_c_==_f_q_quest_helping_horse", "_n_4_<_item_horseshoe"],
+    "conversationId": "wait_up_horseshoes",
+    "entityId"      : "man13"
   },
   "dont_go_up_there"          : {
     "type"          : "conversation",

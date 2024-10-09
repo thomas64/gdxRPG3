@@ -53,7 +53,7 @@
       "1"   : {
         "text": ["Dear young Mozes, I'm so glad you've finally entered our peaceful domain. You need not fear any orcs here."], "choices": [
           {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "command": "RECEIVE_XP", "nextId": "2"},
-          {"condition": ["i_rc_>=_a_q_quest_royal_sacrifice"], "nextId": "2"}
+          {"condition": ["i_rc_>=_a_q_quest_royal_sacrifice"], "nextId": "3"}
         ]
       },
       "2"   : {
@@ -61,6 +61,12 @@
           {"text": "*Ask how they all seem to know you.*", "nextId": "10"},
           {"text": "*Ask if she has any information about Grace's whereabouts.*", "nextId": "30"},
           {"text": "*Take your leave.*", "command": "EXIT", "nextId": "70"}
+        ]
+      },
+      "3"   : {
+        "choices": [
+          {"text": "*Explain everything that's happened.*", "nextId": "100"},
+          {"text": "*Take your leave.*", "command": "EXIT", "nextId": "150"}
         ]
       },
       "10"  : {"text": ["We all watch over the people of Honeywood and strive to protect you whenever we can. So, Mozes, we've known you since your birth.", "Unfortunately, our power and protection have their limits."], "choices": [{"nextId": "2"}]},
@@ -74,7 +80,7 @@
       "32"  : {"text": ["Within the cave you came from, we've hidden a magic scroll that will be of great assistance against any orcs here in Honeywood Forest."], "choices": [{"nextId": "35"}]},
       "35"  : {
         "choices": [
-          {"text": "*Inquire further about this Ardor.*", "nextId": "20"},
+          {"text": "*Does she have any important information about this Ardor?*", "nextId": "20"},
           {"text": "*Inquire further about Grace.*", "nextId": "40"},
           {"text": "*What did she say about a hidden magic scroll?*", "nextId": "32"},
           {"text": "*Ask for details about using a magic scroll.*", "nextId": "50"},
@@ -93,6 +99,18 @@
         ]
       },
       "70"  : {"text": ["Dear young Mozes, you've returned."], "choices": [{"nextId": "2"}]},
+      "100" : {"text": ["Oh, Mozes, I'm so sorry to hear about Grace. I can't imagine how you must feel."]},
+      "101" : {"text": ["I wish we could help you more, but I'm afraid we're still powerless against Ardor."]},
+      "102" : {"text": ["Please, Mozes, don't give up hope. I'll try to help you with any information, if I didn't told you already."]},
+      "103" : {"text": ["Ardor is very powerful and dangerous. We don't know much about him, but we do know his power is growing."]},
+      "104" : {"text": ["You cannot confront Ardor! If you do, you'll most definitely die like you did before."]},
+      "105" : {"text": ["Ardor {COLOR=BLUE}appears almost invulnerable {COLOR=BLACK}to all forms of attack."]},
+      "106" : {"text": ["We're still trying to uncover the source of his power, but perhaps you already know more than we do."]},
+      "107" : {"text": ["I would have said that you'll have to rely on us to deal with Ardor. That, in time, we will find a way to defeat him..."]},
+      "108" : {"text": ["But if what you say is true, I don't know anymore. Please, Mozes, be careful."]},
+      "109" : {"text": ["Within the cave south of here, we've hidden a magic scroll that may be of some assistance against any orcs here in Honeywood Forest."], "choices": [{"command": "ACCEPT_QUEST", "nextId": "110"}]},
+      "110" : {"text": ["I cannot stress this enough: Watch out for Ardor! He is not to be trifled with!"], "choices": [{"command": "EXIT", "nextId": "150"}]},
+      "150" : {"text": ["Dear young Mozes, you've returned."], "choices": [{"nextId": "3"}]},
       "1199": {"text": ["Watch out for Ardor! He is not to be trifled with!"], "choices": [{"command": "RECEIVE_ITEM"}]},
       "1200": {"text": ["Dear young Mozes, you've returned."], "choices": [{"nextId": "2"}]}
     }

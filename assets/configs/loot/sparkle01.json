@@ -1,6 +1,6 @@
 {
   "sparkle0001"        : {"content": {"gemstone": 1}},
-  "sparkle0002"        : {"content": {"key_mysterious_tunnel": 1}},
+  "sparkle0002"        : {"content": {"key_mysterious_tunnel": 1}, "doesReset": true},
   "sparkle0003"        : {"content": {"basic_grace_ribbon": 1}},
   "sparkle0004"        : {"content": {"gold": 1}},
   "sparkle0005"        : {"content": {"herb": 1}},
@@ -21,9 +21,9 @@
   "sparkle_honeywood_5": {"content": {"herb": 2}},
   "sparkle_honeywood_6": {"content": {"herb": 1}},
   "sparkle_honeywood_7": {"content": {"herb": 1}},
-  "sparkle0017"        : {"condition": ["_rc_>=_k_q_quest_get_horse"], "content": {"horseshoe": 1}, "doesReset": true},
-  "sparkle0018"        : {"condition": ["_rc_>=_k_q_quest_get_horse"], "content": {"horseshoe": 1}, "doesReset": true},
-  "sparkle0019"        : {"condition": ["_rc_>=_k_q_quest_get_horse"], "content": {"horseshoe": 1}, "doesReset": true},
-  "sparkle0020"        : {"condition": ["_rc_>=_k_q_quest_get_horse"], "content": {"horseshoe": 1}, "doesReset": true},
-  "sparkle0021"        : {"condition": ["_rc_>=_k_q_quest_helping_horse"], "content": {"tow_rope": 1}, "doesReset": true}
+  "sparkle0017"        : {"condition": ["_rc_>=_k_q_quest_get_horse"], "content": {"horseshoe": 1}},
+  "sparkle0018"        : {"condition": ["_rc_>=_k_q_quest_get_horse"], "content": {"horseshoe": 1}},
+  "sparkle0019"        : {"condition": ["_rc_>=_k_q_quest_get_horse"], "content": {"horseshoe": 1}},
+  "sparkle0020"        : {"condition": ["_rc_>=_k_q_quest_get_horse"], "content": {"horseshoe": 1}},
+  "sparkle0021"        : {"condition": ["_rc_>=_k_q_quest_helping_horse"], "content": {"tow_rope": 1}}
 }
