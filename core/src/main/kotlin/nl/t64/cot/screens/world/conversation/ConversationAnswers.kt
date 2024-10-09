@@ -21,6 +21,8 @@ class ConversationAnswers(
     private val font: BitmapFont
 ) : List<ConversationChoice>(createAnswersStyle(font)) {
 
+    private val selectedIndexHistory: MutableMap<GdxArray<ConversationChoice>, Int> = mutableMapOf()
+
     companion object {
         private fun createAnswersStyle(font: BitmapFont, drawable: Drawable = BaseDrawable()): ListStyle {
             return ListStyle(font, Constant.DARK_RED, Color.BLACK, drawable).apply {
@@ -31,31 +33,41 @@ class ConversationAnswers(
     }
 
     fun populateChoices(choices: GdxArray<ConversationChoice>) {
+        if (!selectedIndexHistory.containsKey(choices)) {
+            selectedIndexHistory[choices] = -1
+        }
         super.setItems(choices)
-        setDefaultSelectedChoice(choices)
+        tryToSetLastChosenSelectedIndex(choices)
         setStyleBasedOnContent(choices)
+    }
+
+    fun storeSelectedIndex() {
+        selectedIndexHistory[items] = selectedIndex
+    }
+
+    fun clearSelectedIndexHistory() {
+        selectedIndexHistory.clear()
     }
 
     override fun drawItem(
         batch: Batch, font: BitmapFont, index: Int, item: ConversationChoice, x: Float, y: Float, width: Float
     ): GlyphLayout {
-        if (index == selectedIndex) {
-            font.color = style.fontColorSelected
-        } else if (!item.isMeetingCondition()) {
-            font.color = Color.GRAY
-        } else if (item.hasBeenSelectedEarlier) {
-            font.color = Color.TEAL
-        } else {
-            font.color = style.fontColorUnselected
+        font.color = when {
+            index == selectedIndex
+                && item.isMeetingCondition()
+                && !item.hasBeenSelectedEarlier -> style.fontColorSelected
+            !item.isMeetingCondition() -> Color.GRAY
+            item.hasBeenSelectedEarlier -> Color.TEAL
+            else -> style.fontColorUnselected
         }
         return super.drawItem(batch, font, index, item, x, y, width)
     }
 
-    private fun setDefaultSelectedChoice(choices: GdxArray<ConversationChoice>) {
+    private fun tryToSetLastChosenSelectedIndex(choices: GdxArray<ConversationChoice>) {
         if (choices.size == 1) {
             selectedIndex = 0
         } else {
-            selectedIndex = -1
+            selectedIndex = selectedIndexHistory[choices]!!
         }
     }
 

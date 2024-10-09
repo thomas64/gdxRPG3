@@ -173,6 +173,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             playSe(AudioEvent.SE_MENU_ERROR)
             return
         }
+        answers.storeSelectedIndex()
         selectedChoice.hasBeenSelectedEarlier = true
         val nextId = selectedChoice.nextId
         when (val conversationCommand = selectedChoice.command) {
@@ -447,13 +448,15 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     private fun hideWithFade() {
         label.setText("")
         answers.clearItems()
-        graph.resetChoiceHistory()
+        answers.clearSelectedIndexHistory()
+        graph.clearChosenAnswersHistory()
         scrollPane.clearListeners()
         dialog.hide()
     }
 
     private fun hide() {
-        graph.resetChoiceHistory()
+        answers.clearSelectedIndexHistory()
+        graph.clearChosenAnswersHistory()
         scrollPane.clearListeners()
         dialog.hide(null)
     }

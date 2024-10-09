@@ -37,7 +37,7 @@ data class ConversationGraph(
         return phrases[currentPhraseId]!!.getChoices(currentPhraseId).toTypedArray()
     }
 
-    fun resetChoiceHistory() {
+    fun clearChosenAnswersHistory() {
         phrases.values
             .flatMap { it.choices }
             .forEach { it.resetHistory() }
