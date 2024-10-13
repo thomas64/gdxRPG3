@@ -40,9 +40,9 @@ data class StatItem(
         rank += 1
     }
 
-    fun getTotalXpCostFromRankSixToCurrent(): Int {
-        // 7 is the first rank that will cost any xp. no character has lower than 6.
-        return (7..rank).sumOf { it.getXpCost() }
+    fun getTotalXpCostFromRankOneToCurrent(): Int {
+        // 2 is the first rank that will cost any xp.
+        return (2..rank).sumOf { it.getXpCost() }
     }
 
     private fun Int.getXpCost(): Int {

@@ -92,7 +92,8 @@ internal class SkillsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
         val skillName = Label(skillItem.name, LabelStyle(font, Color.BLACK)).apply { name = skillItem.id.name }
         table.add(skillName).padLeft(SECOND_COLUMN_PAD_LEFT)
         val upgrade = Label("^", LabelStyle(font, Color.PURPLE))
-        if (selectedHero.xpPoints >= skillItem.getXpCostForNextRank()) table.add(upgrade) else table.add("")
+        val xpCost: Float = skillItem.getXpCostForNextRank()
+        if (xpCost > 0f && selectedHero.xpPoints >= xpCost) table.add(upgrade) else table.add("")
         table.add(skillItem.rank.toString())
         val totalExtra = selectedHero.getExtraSkillForVisualOf(skillItem)
         addExtraToTable(totalExtra)

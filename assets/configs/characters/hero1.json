@@ -32,10 +32,10 @@
     "stats"    : {
       "intelligence": 10,
       "dexterity"   : 16,
-      "strength"    : 8,
+      "strength"    : 6,
       "speed"       : 15,
       "willpower"   : 10,
-      "constitution": 6,
+      "constitution": 2,
       "stamina"     : 8
     },
     "skills"   : {
