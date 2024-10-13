@@ -55,7 +55,7 @@
     "upgrade"    : 0.06,
     "description": [
       "- 'Constitution' represents the real physical damage this character can",
-      "  take before dying. Each rank in 'Constitution' increases 'HP' by 10%."
+      "  take before dying. Each rank in 'Constitution' increases 'HP' by 2 points."
     ]
   },
   "stamina"     : {
@@ -63,7 +63,7 @@
     "upgrade"    : 0.04,
     "description": [
       "- 'Stamina' represents energy for magic spells and other special attacks.",
-      "  Each rank in 'Stamina' increases 'SP' by 10%."
+      "  Each rank in 'Stamina' increases 'SP' by 2 points."
     ]
   }
 }

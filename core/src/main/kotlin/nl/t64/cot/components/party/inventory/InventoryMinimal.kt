@@ -17,9 +17,9 @@ enum class InventoryMinimal(override val title: String) : SuperEnum {
             return createMinimalMessage(item, StatItemId.INTELLIGENCE, hero)
         }
     },
-    MIN_WILLPOWER("Min. Willpower") {
+    MIN_DEXTERITY("Min. Dexterity") {
         override fun createMessageIfHeroHasNotEnoughFor(item: InventoryItem, hero: HeroItem): String? {
-            return createMinimalMessage(item, StatItemId.WILLPOWER, hero)
+            return createMinimalMessage(item, StatItemId.DEXTERITY, hero)
         }
     },
     MIN_STRENGTH("Min. Strength") {
@@ -27,9 +27,14 @@ enum class InventoryMinimal(override val title: String) : SuperEnum {
             return createMinimalMessage(item, StatItemId.STRENGTH, hero)
         }
     },
-    MIN_DEXTERITY("Min. Dexterity") {
+    MIN_WILLPOWER("Min. Willpower") {
         override fun createMessageIfHeroHasNotEnoughFor(item: InventoryItem, hero: HeroItem): String? {
-            return createMinimalMessage(item, StatItemId.DEXTERITY, hero)
+            return createMinimalMessage(item, StatItemId.WILLPOWER, hero)
+        }
+    },
+    MIN_CONSTITUTION("Min. Constitution") {
+        override fun createMessageIfHeroHasNotEnoughFor(item: InventoryItem, hero: HeroItem): String? {
+            return createMinimalMessage(item, StatItemId.CONSTITUTION, hero)
         }
     };
 

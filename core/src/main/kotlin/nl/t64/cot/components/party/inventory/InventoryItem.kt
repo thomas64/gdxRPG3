@@ -25,12 +25,14 @@ data class InventoryItem(
     val maxDurability: Int = durability,
     @JsonProperty("min_intelligence")
     private val minIntelligence: Int = 0,
-    @JsonProperty("min_willpower")
-    private val minWillpower: Int = 0,
-    @JsonProperty("min_strength")
-    private val minStrength: Int = 0,
     @JsonProperty("min_dexterity")
     private val minDexterity: Int = 0,
+    @JsonProperty("min_strength")
+    private val minStrength: Int = 0,
+    @JsonProperty("min_willpower")
+    private val minWillpower: Int = 0,
+    @JsonProperty("min_constitution")
+    private val minConstitution: Int = 0,
     private val range: List<Int> = emptyList(),
     @JsonProperty("base_hit")
     private val baseHit: Int = 0,
@@ -76,19 +78,20 @@ data class InventoryItem(
         return when (minimal) {
             InventoryMinimal.SKILL -> skill ?: 0
             InventoryMinimal.MIN_INTELLIGENCE -> minIntelligence
-            InventoryMinimal.MIN_WILLPOWER -> minWillpower
             InventoryMinimal.MIN_DEXTERITY -> minDexterity
             InventoryMinimal.MIN_STRENGTH -> minStrength
+            InventoryMinimal.MIN_WILLPOWER -> minWillpower
+            InventoryMinimal.MIN_CONSTITUTION -> minConstitution
         }
     }
 
     fun getMinimalAttributeOfStatItemId(statItemId: StatItemId): Int {
         return when (statItemId) {
             StatItemId.INTELLIGENCE -> minIntelligence
-            StatItemId.WILLPOWER -> minWillpower
-            StatItemId.STRENGTH -> minStrength
             StatItemId.DEXTERITY -> minDexterity
-            StatItemId.CONSTITUTION,
+            StatItemId.STRENGTH -> minStrength
+            StatItemId.WILLPOWER -> minWillpower
+            StatItemId.CONSTITUTION -> minConstitution
             StatItemId.STAMINA,
             StatItemId.SPEED -> 0
         }
@@ -99,8 +102,8 @@ data class InventoryItem(
         check(weaponMinimals.count { it > 0 } == 1) { "Only one minimal possible for a weapon." }
         return when {
             minIntelligence != 0 -> StatItemId.INTELLIGENCE
-            minStrength != 0 -> StatItemId.STRENGTH
             minDexterity != 0 -> StatItemId.DEXTERITY
+            minStrength != 0 -> StatItemId.STRENGTH
             else -> throw IllegalStateException("Not all minimals can be 0 for a weapon.")
         }
     }
@@ -108,12 +111,12 @@ data class InventoryItem(
     fun getAttributeOfStatItemId(statItemId: StatItemId): Int {
         return when (statItemId) {
             StatItemId.INTELLIGENCE -> intelligence
-            StatItemId.WILLPOWER -> willpower
-            StatItemId.STRENGTH -> strength
             StatItemId.DEXTERITY -> dexterity
+            StatItemId.STRENGTH -> strength
+            StatItemId.SPEED -> speed
+            StatItemId.WILLPOWER -> willpower
             StatItemId.CONSTITUTION -> constitution
             StatItemId.STAMINA -> 0
-            StatItemId.SPEED -> speed
         }
     }
 
