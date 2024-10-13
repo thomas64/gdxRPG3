@@ -1,5 +1,5 @@
 {
-  "blue_bat": {
+  "blue_bat"  : {
     "name"     : "Blue Bat",
     "school"   : "NONE",
     "hp"       : 16,
@@ -21,6 +21,30 @@
     },
     "inventory": {
       "weapon": "bat_bite"
+    }
+  },
+  "purple_bat": {
+    "name"     : "Purple Bat",
+    "school"   : "NONE",
+    "xp"       : 3,
+    "drops"    : {"leather": 25},
+    "stats"    : {
+      "intelligence": 1,
+      "dexterity"   : 1,
+      "strength"    : 22,
+      "speed"       : 20,
+      "willpower"   : 1,
+      "constitution": 4,
+      "stamina"     : 1
+    },
+    "skills"   : {
+      "bite": 2
+    },
+    "spells"   : {
+    },
+    "inventory": {
+      "weapon": "bat_bite",
+      "chest" : "armor_4"
     }
   }
 }
