@@ -25,12 +25,6 @@
     "entityId"      : "man13",
     "doesRepeat"    : true
   },
-  "event_wait_up_horseshoes"  : {
-    "type"          : "conversation",
-    "condition"     : ["_c_==_f_q_quest_helping_horse", "_n_4_<_item_horseshoe"],
-    "conversationId": "wait_up_horseshoes",
-    "entityId"      : "man13"
-  },
   "dont_go_up_there"          : {
     "type"          : "conversation",
     "condition"     : ["_c_<=_k_q_quest_honeywood_inn_price-1"],

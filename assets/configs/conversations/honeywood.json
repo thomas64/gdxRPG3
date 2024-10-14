@@ -385,23 +385,18 @@
       "60"  : {"text": ["Were you able to gather 4 horseshoes for Enopa?"]},
       "61"  : {
         "choices": [
-          {"condition": ["_n_4_>=_item_horseshoe", "i_time_before_17:00"], "text": "[4 Horseshoes] *Hand over the horseshoes.*", "command": "PROVIDE_QUEST_ITEM", "nextId": "70"},
-          {"condition": ["_n_4_>=_item_horseshoe", "i_time_after_17:00"], "text": "[4 Horseshoes] *Hand over the horseshoes.*", "nextId": "75"},
+          {"condition": ["_n_4_>=_item_horseshoe"], "text": "[4 Horseshoes] *Hand over the horseshoes.*", "command": "PROVIDE_QUEST_ITEM", "nextId": "70"},
           {"text": "*Tell her you'll return when you have them. Take your leave.*", "command": "EXIT", "nextId": "60"}
         ]
       },
       "70"  : {"text": ["Thank you so much! You've been a tremendous help, Mozes!"]},
       "71"  : {"text": ["I'll shoe her right away with these. After that, I'll make sure Enopa gets to Lennor."]},
       "72"  : {"text": ["Thanks once again. It turned out to be a great day after all."], "choices": [{"command": "RELOAD_NPCS", "nextId": "80"}]},
-      "75"  : {"text": ["Thank you so much! You've been a tremendous help, Mozes!"]},
-      "76"  : {"text": ["But it's getting pretty late already. Lennor should probably be done by now. I think it's best that you keep the horseshoes, and Enopa can get some little more rest."]},
-      "77"  : {"text": ["Thanks once again. It turned out to be a great day after all."], "choices": [{"command": "EXIT", "nextId": "85"}]},
       "80"  : {
         "text": ["How is my Enopa doing? Has she been of any help to Lennor and you?"], "choices": [
           {"condition": ["_conv_the_road_is_open_==_1"], "command": "EXIT", "nextId": "80"}
         ]
       },
-      "85"  : {"text": ["Hi Mozes, thank you for making my Enopa feel better."], "choices": [{"command": "EXIT", "nextId": "85"}]},
       "2000": {"face": "mozes", "text": ["{SPEED=0.2} . . . . ."]},
       "2001": {"text": ["Uh... Well... I guess so?"], "choices": [{"command": "EXIT", "nextId": "80"}]},
       "90"  : {"text": ["How did you know? Thank you very much! I'll administer it to her right away."]},
