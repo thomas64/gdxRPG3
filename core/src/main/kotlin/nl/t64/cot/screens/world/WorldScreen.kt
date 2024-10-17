@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.fogOfWarManager
+import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.Utils.profileManager
 import nl.t64.cot.Utils.screenManager
@@ -19,6 +20,7 @@ import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.audio.stopAllBgm
 import nl.t64.cot.components.loot.Loot
+import nl.t64.cot.components.loot.Spoil
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.GameState
 import nl.t64.cot.constants.ScreenType
@@ -50,6 +52,7 @@ import nl.t64.cot.screens.world.ui.MovementBox
 import nl.t64.cot.screens.world.ui.PartyWindow
 import nl.t64.cot.sfx.TransitionImage
 import nl.t64.cot.sfx.TransitionPurpose
+import java.util.*
 
 
 class WorldScreen : Screen, ConversationObserver, BattleObserver {
@@ -261,6 +264,12 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
 
     fun useDoor(doorId: String) {
         doorList.single { it.id == doorId }.send(NpcActionEvent())
+    }
+
+    fun dropItems(drops: Loot) {
+        val spoil = Spoil(mapManager.currentMap.mapTitle, player.position.x, player.position.y, drops)
+        gameData.spoils.addSpoil(UUID.randomUUID().toString(), spoil)
+        updateLoot()
     }
 
     fun updateLoot() {

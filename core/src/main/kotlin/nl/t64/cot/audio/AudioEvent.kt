@@ -59,6 +59,7 @@ enum class AudioEvent(val filePath: String, val volume: Float = 1f) {
     SE_SAVE_GAME("audio/se/virix_save.wav", 0.3f),
 
     SE_CHEST("audio/se/kenney_door_open2.ogg", 0.1f),
+    SE_DROP("audio/se/kenney_cloth2.ogg"),
     SE_EQUIP("audio/se/kenney_cloth3.ogg"),
     SE_TAKE("audio/se/kenney_handle_small_leather2.ogg"),
     SE_COINS_BUY("audio/se/kenney_handle_coins.ogg", 0.5f),

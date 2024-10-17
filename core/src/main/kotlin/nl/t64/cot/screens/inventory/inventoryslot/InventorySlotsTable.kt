@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
+import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.components.party.inventory.InventoryContainer
 import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.components.party.inventory.InventoryItem
@@ -89,6 +90,17 @@ class InventorySlotsTable(
         } else {
             taker.equip(currentSlot)
         }
+    }
+
+    override fun getItemsToDrop(): Loot? {
+        val currentSlot: ItemSlot = selector.getCurrentSlot()
+        return currentSlot.getPossibleInventoryImage()
+            ?.inventoryItem
+            ?.takeIf { it.isDroppable }
+            ?.let {
+                currentSlot.clearStack()
+                Loot(mutableMapOf(it.id to it.amount))
+            }
     }
 
     fun addResource(inventoryItem: InventoryItem) {

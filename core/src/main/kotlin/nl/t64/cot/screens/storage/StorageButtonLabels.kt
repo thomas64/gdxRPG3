@@ -9,7 +9,7 @@ internal class StorageButtonLabels(stage: Stage) : ButtonLabels(stage) {
 
     override fun createBottomLeftText(): String {
         return if (Utils.isGamepadConnected()) {
-            "Take:     [A] One      [X] Half      [Y] Full     |     [R-Stick] Sort container"
+            "Take:     [A] One      [X] Half      [Y] Full     |     [Start] Sort container"
         } else {
             "Take:     [A] One      [S] Half      [D] Full     |     [Space] Sort container"
         }
@@ -17,7 +17,7 @@ internal class StorageButtonLabels(stage: Stage) : ButtonLabels(stage) {
 
     override fun createBottomRightText(): String {
         return if (Utils.isGamepadConnected()) {
-            "[Select] Toggle tooltip      [L-Stick] Toggle compare      [B] Back                                                                        [Start] De/Equip"
+            "[L-Stick] Toggle tooltip      [R-Stick] Toggle compare      [B] Back                                                                        [Select] De/Equip"
         } else {
             "[T] Toggle tooltip      [C] Toggle compare      [Esc] Back                                                                        [E] De/Equip"
         }

@@ -42,13 +42,13 @@ internal class ShopScreenListener(
             Constant.KEYCODE_BOTTOM, Input.Keys.A -> takeOneFunction.invoke()
             Constant.KEYCODE_LEFT, Input.Keys.S -> takeHalfFunction.invoke()
             Constant.KEYCODE_TOP, Input.Keys.D -> takeFullFunction.invoke()
-            Constant.KEYCODE_START, Input.Keys.E -> equipFunction.invoke()
+            Constant.KEYCODE_SELECT, Input.Keys.E -> equipFunction.invoke()
             Constant.KEYCODE_L1, Input.Keys.Q -> previousHeroFunction.invoke()
             Constant.KEYCODE_R1, Input.Keys.W -> nextHeroFunction.invoke()
             Input.Keys.Z -> previousTableFunction.invoke()
             Input.Keys.X -> nextTableFunction.invoke()
-            Constant.KEYCODE_SELECT, Input.Keys.T -> toggleTooltipFunction.invoke()
-            Constant.KEYCODE_L3, Input.Keys.C -> toggleCompareFunction.invoke()
+            Constant.KEYCODE_L3, Input.Keys.T -> toggleTooltipFunction.invoke()
+            Constant.KEYCODE_R3, Input.Keys.C -> toggleCompareFunction.invoke()
         }
         return true
     }

@@ -20,6 +20,7 @@ internal class InventoryScreenListener(
     private val nextHeroFunction: () -> Unit,
     private val previousTableFunction: () -> Unit,
     private val nextTableFunction: () -> Unit,
+    private val dropItemFunction: () -> Unit,
     private val dismissHeroFunction: () -> Unit,
     private val sortInventoryFunction: () -> Unit,
     private val toggleTooltipFunction: () -> Unit,
@@ -47,10 +48,11 @@ internal class InventoryScreenListener(
             Constant.KEYCODE_R1, Input.Keys.W -> nextHeroFunction.invoke()
             Input.Keys.Z -> previousTableFunction.invoke()
             Input.Keys.X -> nextTableFunction.invoke()
-            Constant.KEYCODE_TOP, Input.Keys.D -> dismissHeroFunction.invoke()
+            Constant.KEYCODE_TOP, Input.Keys.D -> dropItemFunction.invoke()
+            Constant.KEYCODE_SELECT, Input.Keys.F -> dismissHeroFunction.invoke()
             Constant.KEYCODE_START, Input.Keys.SPACE -> sortInventoryFunction.invoke()
-            Constant.KEYCODE_SELECT, Input.Keys.T -> toggleTooltipFunction.invoke()
-            Constant.KEYCODE_L3, Input.Keys.C -> toggleCompareFunction.invoke()
+            Constant.KEYCODE_L3, Input.Keys.T -> toggleTooltipFunction.invoke()
+            Constant.KEYCODE_R3, Input.Keys.C -> toggleCompareFunction.invoke()
             Input.Keys.NUM_0 -> cheatAddGoldFunction.invoke()
             Input.Keys.NUM_9 -> cheatRemoveGoldFunction.invoke()
         }

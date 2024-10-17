@@ -17,7 +17,7 @@ internal class ShopButtonLabels(stage: Stage) : ButtonLabels(stage) {
 
     override fun createBottomRightText(): String {
         return if (Utils.isGamepadConnected()) {
-            "[Select] Toggle tooltip      [L-Stick] Toggle compare      [B] Back                                                                        [Start] De/Equip"
+            "[L-Stick] Toggle tooltip      [R-Stick] Toggle compare      [B] Back                                                                        [Select] De/Equip"
         } else {
             "[T] Toggle tooltip      [C] Toggle compare      [Esc] Back                                                                        [E] De/Equip"
         }

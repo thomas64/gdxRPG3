@@ -40,7 +40,7 @@ class AcademyScreenListener(
             Constant.KEYCODE_R1, Input.Keys.W -> nextHeroFunction.invoke()
             Input.Keys.Z -> previousTableFunction.invoke()
             Input.Keys.X -> nextTableFunction.invoke()
-            Constant.KEYCODE_SELECT, Input.Keys.T -> toggleTooltipFunction.invoke()
+            Constant.KEYCODE_L3, Input.Keys.T -> toggleTooltipFunction.invoke()
         }
         return true
     }

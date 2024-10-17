@@ -26,10 +26,11 @@
     "description": ["A medicine made by Elenora for Enopa."]
   },
   "horseshoe"              : {
-    "name"       : "Horseshoe",
-    "group"      : "ITEM",
-    "sort"       : 70025,
-    "description": ["Just a regular horseshoe."]
+    "name"        : "Horseshoe",
+    "group"       : "ITEM",
+    "sort"        : 70025,
+    "description" : ["Just a regular horseshoe."],
+    "is_droppable": true
   },
   "tow_rope"               : {
     "name"       : "Tow Rope",

@@ -17,7 +17,7 @@ internal class AcademyButtonLabels(stage: Stage) : ButtonLabels(stage) {
 
     override fun createBottomRightText(): String {
         return if (Utils.isGamepadConnected()) {
-            "               [Select] Toggle tooltip      [B] Back"
+            "               [L-Stick] Toggle tooltip      [B] Back"
         } else {
             "               [T] Toggle tooltip      [Esc] Back"
         }

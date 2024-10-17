@@ -3,6 +3,7 @@ package nl.t64.cot.screens.inventory
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Window
 import nl.t64.cot.Utils.createDefaultWindow
+import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.screens.ScreenUI
 import nl.t64.cot.screens.inventory.equipslot.EquipSlotsTables
 import nl.t64.cot.screens.inventory.inventoryslot.InventorySlotsTable
@@ -86,6 +87,10 @@ internal class InventoryUI(
 
     fun doAction() {
         getSelectedTable().doAction()
+    }
+
+    fun getItemsToDrop(): Loot? {
+        return getSelectedTable().getItemsToDrop()
     }
 
     fun reloadInventory() {

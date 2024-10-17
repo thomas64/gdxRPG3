@@ -65,6 +65,7 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
                         inventoryScreen.stage.removeListener(inventoryScreen.listener)
                         inventoryScreen.createAndSetListener(closeScreenFunction = { inventoryScreen.closeScreen(ScreenType.BATTLE) },
                                                              doActionFunction = {},
+                                                             tryToDropItemFunction = {},
                                                              tryToDismissHeroFunction = {})
                         inventoryScreen.stage.addListener(inventoryScreen.listener)
                         break
@@ -136,6 +137,7 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
 
     private fun createAndSetListener(closeScreenFunction: () -> Unit = { closeScreen() },
                                      doActionFunction: () -> Unit = { doAction() },
+                                     tryToDropItemFunction: () -> Unit = { tryToDropItem() },
                                      tryToDismissHeroFunction: () -> Unit = { tryToDismissHero() }) {
         listener = InventoryScreenListener(stage,
                                            closeScreenFunction,
@@ -145,6 +147,7 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
                                            { selectNextHero() },
                                            { selectPreviousTable() },
                                            { selectNextTable() },
+                                           tryToDropItemFunction,
                                            tryToDismissHeroFunction,
                                            { sortInventory() },
                                            { toggleTooltip() },
@@ -180,6 +183,14 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
     private fun selectNextTable() {
         playSe(AudioEvent.SE_MENU_CURSOR)
         inventoryUI.selectNextTable()
+    }
+
+    private fun tryToDropItem() {
+        inventoryUI.getItemsToDrop()
+            ?.let {
+                playSe(AudioEvent.SE_DROP)
+                worldScreen.dropItems(it)
+            }?: playSe(AudioEvent.SE_MENU_ERROR)
     }
 
     private fun tryToDismissHero() {
