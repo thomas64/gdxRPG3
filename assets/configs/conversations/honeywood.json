@@ -470,14 +470,14 @@
       "1"   : {"text": ["Greetings, Mozes. How may I be of service today?"]},
       "2"   : {
         "choices": [
-          {"condition": ["i_r_<=_k_q_this", "i_c_==_u_q_this"], "text": "*Explain everything that's happened and your need to leave the village.*", "nextId": "50"},
+          {"condition": ["i_r_<=_k_q_this", "i_c_==_u_q_this"], "text": "*Explain everything that's happened and your need to go to Lastdenn.*", "nextId": "50"},
           {"condition": ["i_r_==_a_q_this", "i_c_==_u_q_this"], "text": "*Explain again everything that's happened.*", "nextId": "60"},
           {"condition": ["i_c_==_a_q_this", "i_!fairy_portal_active"], "text": "*Complain about the warp crystal not working.*", "nextId": "70"},
           {"condition": ["i_c_==_a_q_this", "i_n_1_>=_item_fine_fairy_ring"], "text": "[Fairy Ring] *Present the package you received from the Fairy Shop.*", "command": "SHOW_QUEST_ITEM", "nextId": "80"},
-          {"condition": ["i_c_>=_a_q_quest_helping_horse", "i_c_<=_a_q_quest_get_horse"], "text": "*Explain your need for a horse due to the blocked path to Honeywood Farm.*", "nextId": "10"},
+          {"condition": ["i_c_>=_a_q_quest_helping_horse", "i_c_<=_a_q_quest_get_horse", "i_time_before_17:00"], "text": "*Explain your need for a horse due to the blocked path to Honeywood Farm.*", "nextId": "10"},
           {"condition": ["i_c_>=_a_q_quest_get_horse", "i_tn_7_q_quest_get_horse"], "text": "*Mention Angie's horse is unwell and ask if he can provide assistance.*", "nextId": "40"},
           {"condition": ["i_c_>=_a_q_quest_get_horse", "i_tn_8_q_quest_get_horse"], "text": "*Explain your quest to find horseshoes for Angie.*", "nextId": "20"},
-          {"condition": ["i_c_>=_a_q_quest_helping_horse", "i_tn_11_q_quest_helping_horse"], "text": "*Explain your requirement for tow ropes to clear the fallen tree.*", "nextId": "30"},
+          {"condition": ["i_c_>=_a_q_quest_helping_horse", "i_tn_11_q_quest_helping_horse", "i_time_before_17:00"], "text": "*Explain your requirement for tow ropes to clear the fallen tree.*", "nextId": "30"},
           {"text": "*State that you don't require anything at the moment. Take your leave.*", "nextId": "3"}
         ]
       },

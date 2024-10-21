@@ -65,7 +65,8 @@
       },
       "3"   : {
         "choices": [
-          {"text": "*Explain everything that's happened.*", "nextId": "100"},
+          {"condition": ["i_n_1_<_item_crystal_of_time"], "text": "*Explain everything that's happened.*", "nextId": "90"},
+          {"condition": ["i_n_1_>=_item_crystal_of_time"], "text": "*Explain everything that's happened.*", "nextId": "100"},
           {"text": "*Take your leave.*", "command": "EXIT", "nextId": "150"}
         ]
       },
@@ -99,6 +100,13 @@
         ]
       },
       "70"  : {"text": ["Dear young Mozes, you've returned."], "choices": [{"nextId": "2"}]},
+      "90"  : {"text": ["Oh, Mozes, I'm so sorry to hear about Grace. I can't imagine how you must feel."]},
+      "91"  : {"text": ["I wish we could help you more, but I'm afraid we're still powerless against Ardor."]},
+      "92"  : {"text": ["Ardor is very powerful and dangerous. We don't know much about him, but we do know his power is growing."]},
+      "93"  : {"text": ["You cannot confront Ardor! If you do, you'll most definitely die like you did before."]},
+      "94"  : {"text": ["Ardor {COLOR=BLUE}appears almost invulnerable {COLOR=BLACK}to all forms of attack. We're still trying to uncover the source of his power."]},
+      "95"  : {"text": ["I think you should listen to that voice you heard. It may be the key to defeating Ardor."]},
+      "96"  : {"text": ["Lastdenn is quite a distance from here, but you should go there and find out what's there for you."], "choices": [{"nextId": "109"}]},
       "100" : {"text": ["Oh, Mozes, I'm so sorry to hear about Grace. I can't imagine how you must feel."]},
       "101" : {"text": ["I wish we could help you more, but I'm afraid we're still powerless against Ardor."]},
       "102" : {"text": ["Please, Mozes, don't give up hope. I'll try to help you with any information, if I didn't told you already."]},
