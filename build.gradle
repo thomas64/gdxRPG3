@@ -31,33 +31,37 @@ allprojects {
 configure(subprojects) {
   apply plugin: 'java-library'
   apply plugin: 'kotlin'
-  sourceCompatibility = 11
-  compileJava {
-    options.incremental = true
-  }
+  sourceCompatibility = 21
+
   // From https://lyze.dev/2021/04/29/libGDX-Internal-Assets-List/
   // The article can be helpful when using assets.txt in your project.
-  compileJava.doLast {
+  tasks.register('generateAssetList') {
+    inputs.dir("${project.rootDir}/assets/")
     // projectFolder/assets
-    def assetsFolder = new File("${project.rootDir}/assets/")
+    File assetsFolder = new File("${project.rootDir}/assets/")
     // projectFolder/assets/assets.txt
-    def assetsFile = new File(assetsFolder, "assets.txt")
+    File assetsFile = new File(assetsFolder, "assets.txt")
     // delete that file in case we've already created it
     assetsFile.delete()
 
     // iterate through all files inside that folder
     // convert it to a relative path
     // and append it to the file assets.txt
-    fileTree(assetsFolder).collect { assetsFolder.relativePath(it) }.each {
-      assetsFile.append(it + "\n")
-    }
+    fileTree(assetsFolder)
+      .collect { assetsFolder.relativePath(it) }
+      .sort()
+      .each { assetsFile.append(it + "\n") }
   }
+  processResources.dependsOn 'generateAssetList'
 
-  compileKotlin.compilerOptions.jvmTarget.set(JvmTarget.JVM_11)
+  compileJava { options.incremental = true }
+  compileKotlin.compilerOptions.jvmTarget.set(JvmTarget.JVM_21)
+  compileTestKotlin.compilerOptions.jvmTarget.set(JvmTarget.JVM_21)
+
 }
 
 subprojects {
-  version = '0.0.1'
+  version = '$projectVersion'
   ext.appName = 'CrystalOfTime'
   repositories {
     mavenCentral()

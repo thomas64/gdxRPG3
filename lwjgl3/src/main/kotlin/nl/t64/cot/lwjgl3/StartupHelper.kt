@@ -106,6 +106,7 @@ class StartupHelper private constructor() {
             val separator = System.getProperty("file.separator")
             // The following line is used assuming you target Java 8, the minimum for LWJGL3.
             val javaExecPath = System.getProperty("java.home") + separator + "bin" + separator + "java"
+
             // If targeting Java 9 or higher, you could use the following instead of the above line:
             //String javaExecPath = ProcessHandle.current().info().command().orElseThrow();
             if (!File(javaExecPath).exists()) {
@@ -114,6 +115,7 @@ class StartupHelper private constructor() {
                 )
                 return false
             }
+
             jvmArgs.add(javaExecPath)
             jvmArgs.add("-XstartOnFirstThread")
             jvmArgs.add("-D$JVM_RESTARTED_ARG=true")
@@ -131,6 +133,7 @@ class StartupHelper private constructor() {
                 }
             }
             jvmArgs.add(mainClass)
+
             try {
                 if (!redirectOutput) {
                     val processBuilder = ProcessBuilder(jvmArgs)
@@ -142,15 +145,18 @@ class StartupHelper private constructor() {
                         InputStreamReader(process.inputStream)
                     )
                     var line: String?
+
                     while (processOutput.readLine().also { line = it } != null) {
                         println(line)
                     }
+
                     process.waitFor()
                 }
             } catch (e: Exception) {
                 System.err.println("There was a problem restarting the JVM")
                 e.printStackTrace()
             }
+
             return true
         }
 

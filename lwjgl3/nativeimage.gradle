@@ -1,10 +1,6 @@
 project(":lwjgl3") {
   apply plugin: "org.graalvm.buildtools.native"
 
-  dependencies {
-    implementation "io.github.berstanio:gdx-svmhelper-backend-lwjgl3:$graalHelperVersion"
-    implementation "io.github.berstanio:gdx-svmhelper-extension-freetype:$graalHelperVersion"
-  }
   graalvmNative {
     binaries {
       main {
@@ -14,6 +10,7 @@ project(":lwjgl3") {
         buildArgs.add("-march=compatibility")
         jvmArgs.addAll("-Dfile.encoding=UTF8")
         sharedLibrary = false
+        resources.autodetect()
       }
     }
   }
@@ -50,11 +47,5 @@ project(":lwjgl3") {
   "bundles":[]
 }"""
     )
-  }
-}
-
-project(":core") {
-  dependencies {
-    implementation "io.github.berstanio:gdx-svmhelper-annotations:$graalHelperVersion"
   }
 }

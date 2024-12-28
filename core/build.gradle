@@ -24,6 +24,10 @@ dependencies {
   testApi "org.mockito:mockito-core:$mockitoVersion"
   testApi "org.mockito.kotlin:mockito-kotlin:$kockitoVersion"
   testApi "org.junit.jupiter:junit-jupiter:$junitVersion"
+
+  if (enableGraalNative == 'true') {
+    implementation "io.github.berstanio:gdx-svmhelper-annotations:$graalHelperVersion"
+  }
 }
 
 test {
