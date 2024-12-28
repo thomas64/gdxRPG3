@@ -8,7 +8,7 @@ sets the first screen.
 ## Platforms
 
 - `core`: Main module with the application logic shared by all platforms.
-- `lwjgl3`: Primary desktop platform using LWJGL3.
+- `lwjgl3`: Primary desktop platform using LWJGL3; was called 'desktop' in older docs.
 
 ## Gradle
 
@@ -26,7 +26,7 @@ Useful Gradle tasks and flags:
 - `clean`: removes `build` folders, which store compiled classes and built archives.
 - `eclipse`: generates Eclipse project data.
 - `idea`: generates IntelliJ project data.
-- `lwjgl3:jar`: builds application's runnable jar, which can be found at `lwjgl3/build/lib`.
+- `lwjgl3:jar`: builds application's runnable jar, which can be found at `lwjgl3/build/libs`.
 - `lwjgl3:run`: starts the application.
 - `test`: runs unit tests (if any).
 
