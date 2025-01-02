@@ -87,7 +87,6 @@ class HeroesTable {
 
     private fun createStatsTable(hero: HeroItem): Table {
         return Table().apply {
-            defaults().align(Align.left).top()
             columnDefaults(0).width(STATS_COLUMN_PAD)
             columnDefaults(1).width(STATS_COLUMN_WIDTH)
             columnDefaults(2).width(STATS_COLUMN_PAD)

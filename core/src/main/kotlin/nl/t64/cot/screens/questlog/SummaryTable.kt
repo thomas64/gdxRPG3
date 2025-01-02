@@ -6,7 +6,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.Table
-import com.badlogic.gdx.utils.Align
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.components.quest.QuestGraph
@@ -43,7 +42,7 @@ internal class SummaryTable {
 
     private fun createContainer(): Table {
         return Table().apply {
-            defaults().align(Align.topLeft)
+            defaults().top()
             val threeQuartersOfScreenWidth = Gdx.graphics.width * .75f
             columnDefaults(0).width(threeQuartersOfScreenWidth + WIDTH - Constant.FACE_SIZE - PAD).pad(PAD)
             columnDefaults(1).size(Constant.FACE_SIZE)

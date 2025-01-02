@@ -1,7 +1,6 @@
 package nl.t64.cot.screens.inventory.tooltip
 
 import com.badlogic.gdx.scenes.scene2d.ui.Table
-import com.badlogic.gdx.utils.Align
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.components.party.skills.SkillItemId
@@ -31,7 +30,7 @@ class LootSlotTooltip : ItemSlotTooltip() {
 
     override fun createSingleTooltip(inventoryImage: InventoryImage) {
         val hoveredTable = Table()
-        hoveredTable.defaults().align(Align.left)
+        hoveredTable.defaults().left()
 
         val totalMerchant = gameData.party.getSumOfSkill(SkillItemId.MERCHANT)
         val descriptionLines = inventoryImage.getComparelessDescription(totalMerchant).toMutableList()

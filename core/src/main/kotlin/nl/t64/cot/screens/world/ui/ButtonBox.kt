@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.Table
-import com.badlogic.gdx.utils.Align
 import nl.t64.cot.Utils
 
 
@@ -83,7 +82,7 @@ internal class ButtonBox {
 
     private fun createTable(): Table {
         return Table().apply {
-            defaults().width(TABLE_WIDTH).align(Align.left)
+            defaults().width(TABLE_WIDTH)
             columnDefaults(1).width(SECOND_COLUMN_WIDTH)
             padLeft(PAD_LEFT).padTop(PAD).padBottom(PAD)
             background = Utils.createTransparency()

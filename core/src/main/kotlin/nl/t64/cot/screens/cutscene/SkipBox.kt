@@ -7,7 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.scenes.scene2d.ui.Table
-import com.badlogic.gdx.utils.Align
 import nl.t64.cot.Utils
 
 
@@ -53,7 +52,7 @@ internal class SkipBox {
         tableSkin.add("default", LabelStyle(BitmapFont(), Color.WHITE))
 
         return Table(tableSkin).apply {
-            defaults().width(TABLE_WIDTH).align(Align.left)
+            defaults().width(TABLE_WIDTH)
             pad(PAD, PAD_LEFT, PAD, PAD)
             background = Utils.createTransparency()
         }

@@ -7,7 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.Table
-import com.badlogic.gdx.utils.Align
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.audio.AudioEvent
@@ -127,7 +126,7 @@ open class ItemSlotTooltip : BaseTooltip() {
 
     private fun createDefaultTooltip(inventoryImage: InventoryImage): Table {
         val hoveredTable = Table()
-        hoveredTable.defaults().align(Align.left)
+        hoveredTable.defaults().left()
 
         val totalMerchant = gameData.party.getSumOfSkill(SkillItemId.MERCHANT)
         val descriptionList = inventoryImage.getSingleDescription(totalMerchant).toMutableList()
@@ -148,7 +147,7 @@ open class ItemSlotTooltip : BaseTooltip() {
         val hoveredTable = Table(window.skin).apply {
             background = Utils.createTooltipRightBorder()
             padRight(HALF_SPACING)
-            defaults().align(Align.left)
+            defaults().left()
             add(createLabel(LEFT_TITLE, Color.WHITE)).row()
         }
         val totalMerchant = gameData.party.getSumOfSkill(SkillItemId.MERCHANT)
@@ -164,7 +163,7 @@ open class ItemSlotTooltip : BaseTooltip() {
 
     private fun createRightTooltip(equippedImage: InventoryImage, hoveredImage: InventoryImage): Table {
         val equippedTable = Table().apply {
-            defaults().align(Align.left)
+            defaults().left()
             add(createLabel(RIGHT_TITLE, Color.LIGHT_GRAY)).row()
         }
 
