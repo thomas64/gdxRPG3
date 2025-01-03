@@ -41,7 +41,7 @@
       },
       "10": {"text": ["I often come here to reminisce about this once-enormous tree and my late husband, Theodore. We had such nice summers together under this tree.", "I miss him..."]},
       "11": {"text": ["Life is over before you know it, don't you think?"]},
-      "12": {"face": "mozes", "text": ["You sure got that right."], "choices": [{"command": "EXIT"}]},
+      "12": {"face": "mozes", "name": "Mozes", "text": ["You sure got that right."], "choices": [{"command": "EXIT"}]},
       "20": {"text": ["Mozes, that's wonderful news! Thank you."]},
       "21": {"text": ["Now I can die in peace."]},
       "22": {"face": "mozes", "name": "Mozes", "text": ["Really?"], "choices": [{"command": "DELIVER_QUEST_ITEM", "nextId": "23"}]},
@@ -397,7 +397,7 @@
           {"condition": ["_conv_the_road_is_open_==_1"], "command": "EXIT", "nextId": "80"}
         ]
       },
-      "2000": {"face": "mozes", "text": ["{SPEED=0.2} . . . . ."]},
+      "2000": {"face": "mozes", "name": "Mozes", "text": ["{SPEED=0.2} . . . . ."]},
       "2001": {"text": ["Uh... Well... I guess so?"], "choices": [{"command": "EXIT", "nextId": "80"}]},
       "90"  : {"text": ["How did you know? Thank you very much! I'll administer it to her right away."]},
       "91"  : {"text": ["{SPEED=0.2} . . . . ."]},

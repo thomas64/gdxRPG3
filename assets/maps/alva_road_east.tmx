@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="160" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="17" nextobjectid="266">
+<map version="1.11" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="160" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="17" nextobjectid="267">
  <properties>
   <property name="bgm" value="bgm_forest"/>
   <property name="lightmap_camera" value="sunlight"/>
@@ -44,7 +44,7 @@
  </layer>
  <layer id="7" name="over6_trees" width="160" height="70">
   <data encoding="base64" compression="zlib">
-   eJzt3EluE0EUxvHH4MA+K8KQcwC2N14kKzgEkGQHEtwBLgAICNwDAtyDcQNJuAJDIj4JRYBF0e3uqq7p/5M+xZGHWFb36/KrqpgBAIAmj9bMHitPlG3lqfJsLfa7Qi2e61h7oewoL5VXyusIx9/Nqdmtqb/n39btOz1eD+30rV9v9Ni3yjvlvfJB+Uj9Q0t969dXPfab8l35oRwohxx/aKlv/TqzbrainFXOKeeVC+vh3i/K0rd+XdSxdkm5rIyViTLl+ENL1C/ERP0CgDLsjs32lH3lyzj2u4FLqfMWo4nZknJKOT3p/jr3p2YPlIf0oINIZd4CdWLeAjExb4GY6PshJvp+AFCGUvtJyAP9JMRUez/p2sTsurKpbPXou3dV+/WHflJctV9/QvWTUj+vj+pebLVff0L1k2o/r9uq7fpzZdXs6qr7fl91K9fzeuhxYG3zGdvLOqaW3ff7qlu1ndddhZ7PODYzOz77/ftIt5dm7sfH5qtupXpedx33HT3vhrLxx8+metn0vF3WWv7FV91inrKdUQLfgVKSat3qar7+tDVfrxZ9/KJ/D79QtwAAwKLYx4eYfO3jA2pAnUZM1GkAQEhd19V80tjoM+OjYFJZBxla13U1J/TZnKzg80FYua4HRBlYD4iYfK+rmV/XEmv/mi+h98ukvh8nNNbV/F/o/TKl7cfZ1HfSrQG/l7Zdx5drHQw9Pi5t/H1Xx949+iLehB4fM/7+N9f+iL7riHMbF4Zed17aunb4FXp8zPgbKWFeCTHVPq809LxjLuPArmrv7yGu0vp7pcrte/E8V50rrb+HNLnqHP29POVWB111jv4ehuCqc7X190rbZ9s0/9L0c6g66qvOueadcsE+2zhqq3NYTGp1M/c6B6B8fcef/P9BAAAAAACAsv0EXRn4bg==
+   eJzt3EluE0EUxvHH4MA+K6bkHIDtjRfJCg7BkOxAgjvAlllA4B6M92AIG0jgCozik1AEWBTd7q7qmv4/6VMS2U4sq/q5/KoqZgAAoMn9NbMHykNlS3mkPF6L/axQiycaa0+VZ8pz5YXyMsL4uzQ1uzz19/gr+v5qj9+HdvrWr1e672vljfJW2VbeZVz/bmjM3VRuKbcZf8H1rV+fdd8vylflm/Jd+ZHx+MOw+tavI+tmR5VjynHlhLKyHu75oix969dJjbVTymllrEyUKeMPLVG/EBP1CwDKsDM221U+Kp/GsZ8NXEpdtxhNzJaUQ8rhSfffc2dqdle5Rw8wiFTWLVCn0tYtkBfWLRATfT/ERN8PAMpQaj8JeaCfhJhq7yedm5idVzaUzR59965qf/+hnxRX7e8/ofpJqV/Xe3Uvttrff0L1k2q/rtuq7f3nzKrZ2VX37b7qVq7X9dDzwNrWM7aWNaaW3bf7qlu1XdddhV7P2Dcz2z/7/fNI3y/N3PePzVfdSvW67jrv23vcBeXiH1+b6mXT43bYa/kXX3WLdcp2Rgl8BkpJqnWrq/n609Z8vVr0/ov+PfxC3QIAAIviHB9i8nWOD6gBdRoxUacBACF13VfzXnOjD8yPgkllH2RoXffVHNBrc7CC1wdh5bofEGVgPyBi8r2vZn5fS6zza76EPi+T+nmc0NhX83+hz8uUdh5nQ59JNwf8XNp2H1+udTD0/Li0+fc1jb3r9EW8CT0/Zv79b67zEX33Eec2Lwy977y0fe3wK/T8mPk3UsK6EmKqfV1p6HXHXOaBXdXe30NcpfX3SpXb5+J5rjpXWn8PaXLVOfp7ecqtDrrqHP09DMFV52rr75V2zrZp/aXp61B11Fedc6075YJztnHUVuewmNTqZu51DkD5+s4/+f+DAAAAAAAAZfsJK3H7sA==
   </data>
  </layer>
  <layer id="8" name="over7_none" width="160" height="70">
@@ -176,7 +176,7 @@
   <object id="173" x="3360" y="144" height="24"/>
   <object id="241" x="2928" y="504" width="24" height="48"/>
  </objectgroup>
- <objectgroup color="#aa0000" id="12" name="collision" visible="0">
+ <objectgroup color="#aa0000" id="12" name="collision">
   <object id="3" x="0" y="0" width="288" height="624"/>
   <object id="4" x="0" y="672" width="288" height="96"/>
   <object id="5" x="0" y="624" width="240" height="48"/>
@@ -259,13 +259,14 @@
   <object id="140" x="288" y="192" width="192" height="48"/>
   <object id="141" x="336" y="144" width="144" height="48"/>
   <object id="142" x="336" y="120" width="48" height="24"/>
-  <object id="143" x="720" y="120" width="144" height="24"/>
+  <object id="143" x="720" y="120" width="48" height="24"/>
   <object id="243" x="672" y="1152" width="48" height="48"/>
   <object id="252" x="2592" y="1152" width="48" height="48"/>
  </objectgroup>
  <objectgroup color="#5500ff" id="15" name="rest">
   <object id="242" name="note_honeywood_signpost" x="768" y="960" width="48" height="48"/>
   <object id="244" name="note_honeywood_ferry" x="672" y="1152" width="48" height="48"/>
+  <object id="266" name="chest0013" x="816" y="72" width="48" height="48"/>
  </objectgroup>
  <objectgroup color="#ff007f" id="16" name="enemy">
   <object id="245" name="blue_slime" type="w" x="456" y="504" width="48" height="24">

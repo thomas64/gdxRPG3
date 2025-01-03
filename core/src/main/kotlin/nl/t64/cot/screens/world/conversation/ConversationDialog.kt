@@ -22,7 +22,7 @@ import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.conversation.ConversationChoice
 import nl.t64.cot.components.conversation.ConversationCommand
 import nl.t64.cot.components.conversation.ConversationGraph
-import nl.t64.cot.components.conversation.NoteDatabase.getNoteById
+import nl.t64.cot.components.conversation.NoteDatabase
 import nl.t64.cot.components.party.SpellsRewarder
 import nl.t64.cot.components.party.XpRewarder
 import nl.t64.cot.components.quest.QuestGraph
@@ -58,6 +58,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
 
     private val stage: Stage = Stage()
     private val font: BitmapFont = createFont()
+    private val smallFont: BitmapFont = BitmapFont()
     private val label: TypingLabel = createLabel()
     private val answers: ConversationAnswers = ConversationAnswers(font)
     private val scrollPane: ScrollPane = createScrollPane()
@@ -73,6 +74,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     fun dispose() {
         stage.dispose()
         font.disposeSafely()
+        smallFont.disposeSafely()
     }
 
     fun show() {
@@ -101,16 +103,16 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         graph = gameData.conversations.getConversationById(conversationId)
         fillDialogForConversation()
         playSe(AudioEvent.SE_CONVERSATION_START)
-        populateConversationDialog(graph.currentPhraseId)
+        populateDialog(graph.currentPhraseId)
         applyListeners()
     }
 
     fun loadNote(noteId: String) {
         conversationId = noteId
-        graph = getNoteById(conversationId)
+        graph = NoteDatabase.getNoteById(conversationId)
         fillDialogForNote()
         playSe(AudioEvent.SE_CONVERSATION_START)
-        populateConversationDialog(graph.currentPhraseId)
+        populateDialog(graph.currentPhraseId)
         applyListeners()
     }
 
@@ -141,7 +143,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         if (conversationId.startsWith("bury_")) {
             faceImage.color = Color.DARK_GRAY
         }
-        nameLabel = Label(graph.npcName, LabelStyle(BitmapFont(), Color.BLACK))
+        nameLabel = Label(graph.npcName, LabelStyle(smallFont, Color.BLACK))
         return Table().apply {
             add<Actor>(faceImage).width(Constant.FACE_SIZE).padLeft(LEFT_PAD)
             add<Actor>(nameLabel).bottom().left().padLeft(NAME_LABEL_PAD_LEFT).padBottom(NAME_LABEL_PAD_BOTTOM)
@@ -418,7 +420,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
 
     private fun continueConversation(nextId: String) {
         playSe(AudioEvent.SE_CONVERSATION_NEXT)
-        populateConversationDialog(nextId)
+        populateDialog(nextId)
     }
 
     private fun endConversation(nextId: String) {
@@ -461,7 +463,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         dialog.hide(null)
     }
 
-    private fun populateConversationDialog(phraseId: String) {
+    private fun populateDialog(phraseId: String) {
         graph.currentPhraseId = phraseId
         populateFace()
         populateName()
@@ -486,7 +488,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             val mainTable = dialog.contentTable.getChild(0) as Table
             val faceTable = mainTable.getChild(0) as Table
             val nameCell = faceTable.getCell(nameLabel)
-            nameLabel = Label(phraseName, LabelStyle(BitmapFont(), Color.BLACK))
+            nameLabel = Label(phraseName, LabelStyle(smallFont, Color.BLACK))
             nameCell.setActor<Actor>(nameLabel)
         }
     }

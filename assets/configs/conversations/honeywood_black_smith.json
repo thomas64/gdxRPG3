@@ -2,7 +2,7 @@
   "black_smith_on_the_way"     : {
     "name"   : "Black Smith",
     "phrases": {
-      "1": {"text": ["Howdy, neighbor! I'm on my way to the village elder. He needs some repairs done. If you need me, I'll be back by 11:00."]},
+      "1": {"text": ["Howdy, neighbor! I'm heading to the village elder to do some repairs. If you need me, I'll be back by 11:00."]},
       "2": {
         "choices": [
           {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "text": "*Ask Black if he's seen Grace this morning.*", "nextId": "3"},

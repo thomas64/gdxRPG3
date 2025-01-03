@@ -6,5 +6,6 @@
   "chest0009": {"content": {"basic_light_belt": 1, "gold": 6}},
   "chest0010": {"content": {"healing_potion": 3, "gold": 3, "basic_light_bracers": 1}},
   "chest0011": {"content": {"basic_light_gloves": 1, "gold": 8, "healing_potion": 3}},
-  "chest0012": {"content": {"horseshoe": 4}, "doesReset": true}
+  "chest0012": {"content": {"horseshoe": 4}, "doesReset": true},
+  "chest0013": {"content": {"basic_silver_necklace": 1}}
 }
