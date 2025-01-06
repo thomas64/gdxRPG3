@@ -34,11 +34,13 @@
       "2" : {
         "choices": [
           {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "text": "*Ask Mrs. Johanna if she's seen Grace this morning.*", "nextId": "30"},
-          {"condition": ["i_c_==_a_q_quest_get_tow_rope", "_tn_15_q_quest_get_tow_rope", "_n_1_>=_item_basic_silver_ring"], "text": "[Silver Ring] *Deliver the news that Jaron has found her lost ring.*", "nextId": "20"},
+          {"condition": ["i_c_==_a_q_quest_get_tow_rope", "_tn_15_q_quest_get_tow_rope", "_n_1_>=_item_eqp_basic_silver_ring"], "text": "[Silver Ring] *Deliver the news that Jaron has found her lost ring.*", "nextId": "5"},
+          {"condition": ["i_c_==_a_q_quest_get_tow_rope", "_tn_15_q_quest_get_tow_rope", "_n_0_==_item_eqp_basic_silver_ring", "_n_1_>=_item_inv_basic_silver_ring"], "text": "[Silver Ring] *Deliver the news that Jaron has found her lost ring.*", "nextId": "20"},
           {"condition": ["i_rc_>=_a_q_quest_royal_sacrifice"], "text": "*Listen to an old woman's rambling.*", "nextId": "10"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
+      "5" : {"face": "mozes", "name": "Mozes", "text": ["I should probably take it off first."], "choices": [{"command": "EXIT"}]},
       "10": {"text": ["I often come here to reminisce about this once-enormous tree and my late husband, Theodore. We had such nice summers together under this tree.", "I miss him..."]},
       "11": {"text": ["Life is over before you know it, don't you think?"]},
       "12": {"face": "mozes", "name": "Mozes", "text": ["You sure got that right."], "choices": [{"command": "EXIT"}]},

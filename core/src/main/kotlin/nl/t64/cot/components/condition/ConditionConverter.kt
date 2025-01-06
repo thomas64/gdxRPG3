@@ -17,6 +17,18 @@ object ConditionConverter {
         return isQuestInState(conditionId, questState, conditionState)
     }
 
+    fun isMeetingItemInventoryCondition(conditionId: String): Boolean {
+        val requestedAmount: Int = getTaskIdOrAmount("_n_", conditionId)
+        val inventoryItemId: String = conditionId.substringAfter("_item_inv_")
+        return doesInventoryContain(conditionId, inventoryItemId, requestedAmount)
+    }
+
+    fun isMeetingItemEquipmentCondition(conditionId: String): Boolean {
+        val requestedAmount: Int = getTaskIdOrAmount("_n_", conditionId)
+        val inventoryItemId: String = conditionId.substringAfter("_item_eqp_")
+        return doesEquipmentContain(conditionId, inventoryItemId, requestedAmount)
+    }
+
     fun isMeetingItemCondition(conditionId: String): Boolean {
         val requestedAmount: Int = getTaskIdOrAmount("_n_", conditionId)
         val inventoryItemId: String = conditionId.substringAfter("_item_")
@@ -153,6 +165,30 @@ object ConditionConverter {
             conditionId.contains("_===_") -> questState.all { it == conditionState }
             conditionId.contains("_<=_") -> questState.any { it.isEqualOrLowerThan(conditionState) }
             conditionId.contains("_>=_") -> questState.any { it.isEqualOrHigherThan(conditionState) }
+            else -> throw IllegalArgumentException("No defined operator found.")
+        }
+    }
+
+    private fun doesInventoryContain(conditionId: String,
+                                     inventoryItemId: String,
+                                     requestedAmount: Int): Boolean {
+        val realAmount: Int = gameData.inventory.getTotalOfItem(inventoryItemId)
+        return when {
+            conditionId.contains("_==_") -> realAmount == requestedAmount
+            conditionId.contains("_>=_") -> realAmount >= requestedAmount
+            conditionId.contains("_<_") -> realAmount < requestedAmount
+            else -> throw IllegalArgumentException("No defined operator found.")
+        }
+    }
+
+    private fun doesEquipmentContain(conditionId: String,
+                                     inventoryItemId: String,
+                                     requestedAmount: Int): Boolean {
+        val realAmount: Int = gameData.party.getAmountOfItemInEquipment(inventoryItemId)
+        return when {
+            conditionId.contains("_==_") -> realAmount == requestedAmount
+            conditionId.contains("_>=_") -> realAmount >= requestedAmount
+            conditionId.contains("_<_") -> realAmount < requestedAmount
             else -> throw IllegalArgumentException("No defined operator found.")
         }
     }

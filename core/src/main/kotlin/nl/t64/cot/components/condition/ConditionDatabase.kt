@@ -43,6 +43,10 @@ object ConditionDatabase {
     private fun isMeetingCondition(conditionId: String, questId: String?): Boolean {
         return if (conditionId.contains("_q_")) {
             ConditionConverter.isMeetingQuestCondition(conditionId, questId)
+        } else if (conditionId.contains("_item_inv_") && conditionId.contains("_n_")) {
+            ConditionConverter.isMeetingItemInventoryCondition(conditionId)
+        } else if (conditionId.contains("_item_eqp_") && conditionId.contains("_n_")) {
+            ConditionConverter.isMeetingItemEquipmentCondition(conditionId)
         } else if (conditionId.contains("_item_") && conditionId.contains("_n_")) {
             ConditionConverter.isMeetingItemCondition(conditionId)
         } else if (conditionId.contains("_time_")) {
