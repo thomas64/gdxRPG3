@@ -106,6 +106,12 @@
       "6": {"text": ["It took me a while, but the road to Honeywood Farm is finally clear."], "choices": [{"command": "EXIT", "nextId": "6"}]}
     }
   },
+  "to_honeywood_farm"      : {
+    "name"   : "Mozes",
+    "phrases": {
+      "1": {"text": ["Finally! On to Honeywood Farm!"], "choices": [{"command": "AUTO_SAVE"}]}
+    }
+  },
   "luana_join"             : {
     "name"   : "Luana",
     "phrases": {

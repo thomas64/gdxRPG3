@@ -77,7 +77,7 @@
   "guide_event_slow"                 : {
     "type": "messagebox",
     "text": [
-      "Toggle the %slow% to move stealthily.",
+      "With the %slow% you can toggle to move stealthily.",
       "Enemies will have a harder time detecting you,",
       "enabling you to avoid battles if necessary.",
       "The bottom right corner shows whether you're crouching."
@@ -89,14 +89,14 @@
     "text": [
       "You've gained quite some XP by now!",
       "",
-      "Perhaps you also found some items on your journey already.",
-      "These items require a minimum level of Intelligence, Dexterity or Strength.",
-      "You can see the minimum requirements in the description of that item.",
-      "If you meet the requirements, you can equip the item.",
+      "Perhaps you also found some weapons on your journey already.",
+      "These weapons require a minimum level of Intelligence, Dexterity or Strength.",
+      "You can see the minimum requirements in the description of that weapon.",
+      "If you meet the requirements, you can equip the weapon.",
       "",
       "To meet such requirements, you must level up your attributes:",
       "Access your attributes by pressing the %inventory%.",
-      "Here you can utilize your XP to improve them.",
+      "Here you can utilize your XP to improve these attributes.",
       "Choose an attribute and press the %action% to level it up.",
       "A purple arrow indicates that you have enough XP to level up that attribute."
     ]
@@ -105,7 +105,7 @@
     "type"     : "messagebox",
     "condition": ["been_in_fairy_town"],
     "text"     : [
-      "Toggle the %fast% to run.",
+      "With the %fast% you can toggle to run.",
       "You'll move faster, but enemies will detect you more easily."
     ]
   },

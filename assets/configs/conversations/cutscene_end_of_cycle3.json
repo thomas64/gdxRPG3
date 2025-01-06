@@ -13,7 +13,8 @@
       "10": {"text": ["Thus, I have embedded a portion of my essence within this crystal."]},
       "11": {"text": ["This crystal enables you to {COLOR=BLUE}rewind time by 12 hours before this disaster strikes, as often as needed."]},
       "12": {"text": [". . ."]},
-      "13": {"text": ["{SPEED=0.5}My time has come to an end... Take the crystal now! And use it!"], "choices": [{"command": "EXIT"}]}
+      "13": {"text": ["{SPEED=0.25}My time has come to an end... Take the crystal now! And use it!"]},
+      "14": {"text": ["{SPEED=0.1}Don't forget the priest of Lastdenn..."], "choices": [{"command": "EXIT"}]}
     }
   },
   "mozes_wakes_up_cycle_4" : {
@@ -36,7 +37,8 @@
       "8" : {"text": ["*Sigh* This is a lot to take in."]},
       "9" : {"text": [". . ."]},
       "10": {"text": ["Okay! Grace needs me, but I cannot be there just yet. Hold on, Grace! I will come back for you!"]},
-      "11": {"text": ["When the time is right..."], "choices": [{"command": "EXIT"}]}
+      "11": {"text": ["When the time is right..."]},
+      "12": {"text": ["But first, Lastdenn!"], "choices": [{"command": "EXIT"}]}
     }
   }
 }

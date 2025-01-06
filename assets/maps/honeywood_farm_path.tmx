@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="40" height="24" tilewidth="24" tileheight="24" infinite="0" nextlayerid="15" nextobjectid="41">
+<map version="1.11" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="40" height="24" tilewidth="24" tileheight="24" infinite="0" nextlayerid="16" nextobjectid="43">
  <properties>
   <property name="bgm" value="bgm_honeywood"/>
   <property name="lightmap_camera" value="sunlight"/>
@@ -85,9 +85,17 @@
  <objectgroup color="#55aaff" id="2" name="spawn">
   <object id="1" name="honeywood" x="0" y="408" width="48" height="24"/>
   <object id="27" name="honeywood_farm" x="528" y="24" width="48" height="24"/>
+  <object id="42" name="honeywood_farm_path" x="48" y="384" width="24" height="48">
+   <properties>
+    <property name="direction" value="east"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup color="#ffff7f" id="3" name="portal">
   <object id="2" name="honeywood" x="-24" y="360" width="24" height="96"/>
   <object id="3" name="honeywood_farm" x="456" y="-24" width="192" height="24"/>
+ </objectgroup>
+ <objectgroup color="#ff55ff" id="15" name="event">
+  <object id="41" name="event_to_honeywood_farm" type="discover" x="72" y="384" width="24" height="48"/>
  </objectgroup>
 </map>

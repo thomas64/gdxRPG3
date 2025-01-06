@@ -25,6 +25,11 @@
     "entityId"      : "man13",
     "doesRepeat"    : true
   },
+  "event_to_honeywood_farm"   : {
+    "type"          : "conversation",
+    "conversationId": "to_honeywood_farm",
+    "entityId"      : "mozes"
+  },
   "dont_go_up_there"          : {
     "type"          : "conversation",
     "condition"     : ["_c_<=_k_q_quest_honeywood_inn_price-1"],

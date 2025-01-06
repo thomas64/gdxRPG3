@@ -24,7 +24,7 @@
   "honeywood_ridiculous"                : {
     "name"   : "Mozes",
     "phrases": {
-      "1": {"text": ["That was a ridiculously amount of effort just to let some stupid tree get towed."], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["That was a ridiculously amount of effort just to prepare for towing a stupid tree."], "choices": [{"command": "EXIT"}]}
     }
   },
   "mrs_johanna"                         : {
@@ -57,7 +57,7 @@
       "40": {"text": ["Have you found her yet? Quickly dear, go to Honeywood Forest."], "choices": [{"command": "EXIT", "nextId": "40"}]}
     }
   },
-  "playing_catch_1"                     : {
+  "lynette_playing_catch"               : {
     "name"   : "Lynette",
     "phrases": {
       "1": {
@@ -75,7 +75,7 @@
       "3": {"text": ["No, but if I do, I'll ask her to join us, teehee!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "playing_catch_2"                     : {
+  "tobin_playing_catch"                 : {
     "name"   : "Tobin",
     "phrases": {
       "1": {
@@ -90,7 +90,7 @@
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
-      "3": {"text": ["No, but if I do, I'll ask her to join us, teehee!"], "choices": [{"command": "EXIT"}]}
+      "3": {"text": ["No, where is she then? Four is better than three, teehee!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "kaidan_come_home"                    : {
@@ -121,7 +121,7 @@
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
-      "11": {"text": ["No, but if I do, I'll ask her to join us, teehee!"], "choices": [{"command": "EXIT"}]}
+      "11": {"text": ["No, but I saw her yesterday, teehee!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "kaidan_is_home"                      : {
@@ -130,16 +130,16 @@
       "1": {"text": ["Aw man! This is boring! I wanna play outside."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "life_is_boring_1"                    : {
+  "lynette_life_is_boring"              : {
     "name"   : "Lynette",
     "phrases": {
       "1": {"text": ["Boohoo! You took Kaidan away from us! You're mean!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "life_is_boring_2"                    : {
+  "tobin_life_is_boring"                : {
     "name"   : "Tobin",
     "phrases": {
-      "1": {"text": ["Boohoo! You took Kaidan away from us! You're mean!"], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["Boohoo! Now we're only with two! You big fat meanie!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "bored_and_secluded"                  : {
@@ -292,7 +292,7 @@
       "15"  : {"text": ["How would you know about this? Whoever's been spreading that silly gossip about upstairs is... well... right."], "choices": [{"nextId": "21"}]},
       "20"  : {"text": ["Would you? They've frightened away half of my customers!"]},
       "21"  : {"text": ["I'm not brave enough to scare them away myself; they'd scare me instead."]},
-      "22"  : {"text": ["If you'd help, I'll make it worth your while. I'm not one to overlook a kindness, Mozes."], "choices": [{"command": "EXIT", "nextId": "60"}]},
+      "22"  : {"text": ["If you'd help, I'll make it worth your while. I'm not one to overlook a kindness, Mozes."], "choices": [{"command": "AUTO_SAVE", "nextId": "60"}]},
       "30"  : {"text": ["I'm truly sorry for this minor inconvenience. Please do return to us again on your next stay."], "choices": [{"command": "EXIT"}]},
       "40"  : {"text": ["Couldn't you shout any louder? Those 'visitors' are up the stairs near the fireplace."], "choices": [{"command": "EXIT", "nextId": "60"}]},
       "50"  : {"text": ["Splendid! That's wonderful. I bet those bats must have been trained by an evil imp to harass my customers! Thank you!"]},
@@ -451,7 +451,7 @@
           {"text": "*Ew! Jelly? No thank you. Take your leave.*", "command": "EXIT"}
         ]
       },
-      "10"  : {"text": ["I'll prepare the medicine as soon as you bring me the ingredients."], "choices": [{"command": "EXIT", "nextId": "20"}]},
+      "10"  : {"text": ["I'll prepare the medicine as soon as you bring me the ingredients."], "choices": [{"command": "AUTO_SAVE", "nextId": "20"}]},
       "20"  : {"text": ["Mozes my dear, have you managed to collect the ingredients yet?"]},
       "21"  : {
         "choices": [
