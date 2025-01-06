@@ -9,10 +9,10 @@ import nl.t64.cot.Utils
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.world.entity.events.Event
 import nl.t64.cot.screens.world.entity.events.LoadEntityEvent
+import kotlin.random.Random
 
 
 private const val SPARKLE_PATH = "sprites/objects/sparkle.png"
-private const val ANIMATION_LENGTH = 35
 
 class GraphicsSparkle(animationType: AnimationType) : GraphicsComponent() {
 
@@ -52,25 +52,33 @@ class GraphicsSparkle(animationType: AnimationType) : GraphicsComponent() {
     private fun createLongAnimation(): Animation<TextureRegion> {
         val textures = Utils.getSplitTexture(SPARKLE_PATH, Constant.TILE_SIZE.toInt())
 
-        val frames = Array<TextureRegion>(ANIMATION_LENGTH)
-        repeat(30) { frames.add(textures[4][0]) }
-        frames.add(textures[3][2])
-        frames.add(textures[3][1])
-        frames.add(textures[0][1])
-        frames.add(textures[3][1])
-        frames.add(textures[3][2])
-        return Animation(Constant.FAST_FRAMES, frames, Animation.PlayMode.LOOP)
+        val thirtyEmptyFrames: MutableList<TextureRegion> = MutableList(30) { textures[4][0] }
+        val framesOfOneSparkle: List<TextureRegion> = listOf(textures[3][2],
+                                                             textures[3][1],
+                                                             textures[0][1],
+                                                             textures[3][1],
+                                                             textures[3][2])
+        val firstFiveEmptyFrames = 5
+        val randomIndexToPutSparkle: Int = Random(System.currentTimeMillis()).nextInt(firstFiveEmptyFrames,
+                                                                                      thirtyEmptyFrames.size + 1)
+        thirtyEmptyFrames.addAll(randomIndexToPutSparkle, framesOfOneSparkle)
+        val allTheFramesIncludingOneRandomPlacedSparkle: Array<TextureRegion> = Array(thirtyEmptyFrames.toTypedArray())
+
+        return Animation(Constant.FAST_FRAMES, allTheFramesIncludingOneRandomPlacedSparkle, Animation.PlayMode.LOOP)
     }
 
     private fun createShortAnimation(): Animation<TextureRegion> {
         val textures = Utils.getSplitTexture(SPARKLE_PATH, Constant.TILE_SIZE.toInt())
-        val frames = Array(arrayOf(textures[4][0], textures[4][0], textures[4][0], textures[4][0], textures[4][0],
-                                   textures[3][2],
-                                   textures[3][1],
-                                   textures[0][1],
-                                   textures[3][1],
-                                   textures[3][2]))
-        return Animation(Constant.FAST_FRAMES, frames, Animation.PlayMode.LOOP)
+
+        val fiveEmptyFrames: MutableList<TextureRegion> = MutableList(5) { textures[4][0] }
+        val framesOfOneSparkle: List<TextureRegion> = listOf(textures[3][2],
+                                                             textures[3][1],
+                                                             textures[0][1],
+                                                             textures[3][1],
+                                                             textures[3][2])
+        fiveEmptyFrames.addAll(framesOfOneSparkle)
+        val fiveEmptyFramesFollowedByFiveSparkleFrames: Array<TextureRegion> = Array(fiveEmptyFrames.toTypedArray())
+        return Animation(Constant.FAST_FRAMES, fiveEmptyFramesFollowedByFiveSparkleFrames, Animation.PlayMode.LOOP)
     }
 
     private fun createNoAnimation(): Animation<TextureRegion> {
