@@ -42,8 +42,8 @@ class EndOfTime(
         flames.forEach { stage.addActor(it) }
 
         when (gameData.numberOfCycles) {
-            2 -> playScene(flames, background, ScreenType.SCENE_END_OF_CYCLE_2, actionAfter)
-            3 -> playScene(flames, background, ScreenType.SCENE_END_OF_CYCLE_3, actionAfter)
+            2 -> playScene(flames, background, ScreenType.SCENE_CYCLE_2_IN_HEAVEN, actionAfter)
+            3 -> playScene(flames, background, ScreenType.SCENE_CYCLE_3_IN_HEAVEN, actionAfter)
             else -> playEnd(flames, background, title, actionAfter)
         }
     }

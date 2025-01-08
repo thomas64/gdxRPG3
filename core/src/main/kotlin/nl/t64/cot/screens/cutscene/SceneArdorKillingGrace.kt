@@ -6,11 +6,12 @@ import com.badlogic.gdx.scenes.scene2d.Actor
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import nl.t64.cot.Utils
-import nl.t64.cot.Utils.scenario
+import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playBgs
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.audio.stopSe
+import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.screens.world.entity.EntityState
 import nl.t64.cot.sfx.TransitionAction
@@ -19,9 +20,10 @@ import nl.t64.cot.sfx.TransitionType
 import kotlin.random.Random
 
 
-class SceneEndOfCycle1 : CutsceneScreen() {
+class SceneArdorKillingGrace : CutsceneScreen() {
 
     var areGeneralsAlive: Boolean = true
+    var nextScreen: ScreenType? = null
 
     private lateinit var mozes: CutsceneActor
     private lateinit var mozesDead: Image
@@ -65,10 +67,7 @@ class SceneEndOfCycle1 : CutsceneScreen() {
                          ardorContinuesToPray(),
                          graceDies(),
                          if (areGeneralsAlive) everythingWentWrong() else everythingWentWrongWithoutGuards(),
-                         fireKillsAll(),
-                         mozesWakesUpAgain(),
-                         stepOutOfBed(),
-                         startSecondCycle()
+                         fireKillsAll()
         )
     }
 
@@ -144,6 +143,7 @@ class SceneEndOfCycle1 : CutsceneScreen() {
                 Actions.visible(true),
                 Actions.delay(0.5f),
                 Actions.run { playSe(AudioEvent.SE_MAGIC_BANG) },
+                Actions.run { stopSe(AudioEvent.SE_MAGIC) },
                 Actions.parallel(
                     Actions.repeat(6, Actions.sequence(
                         Actions.addAction(TransitionAction(TransitionType.FADE_OUT, 0.05f), bloodFlash),
@@ -164,7 +164,6 @@ class SceneEndOfCycle1 : CutsceneScreen() {
 
     private fun everythingWentWrong(): Action {
         return Actions.sequence(
-            Actions.run { stopSe(AudioEvent.SE_MAGIC) },
             Actions.run { playBgs(AudioEvent.BGS_QUAKE) },
             Actions.addAction(Actions.sequence(
                 Actions.delay(4.5f),
@@ -191,7 +190,6 @@ class SceneEndOfCycle1 : CutsceneScreen() {
 
     private fun everythingWentWrongWithoutGuards(): Action {
         return Actions.sequence(
-            Actions.run { stopSe(AudioEvent.SE_MAGIC) },
             Actions.run { playBgs(AudioEvent.BGS_QUAKE) },
             Actions.addAction(Actions.sequence(
                 Actions.delay(4.5f),
@@ -222,68 +220,13 @@ class SceneEndOfCycle1 : CutsceneScreen() {
             actionFadeOut(),
 
             Actions.delay(1f),
-            Actions.run {
-                mozesDead.setPosition(456f, 246f)
-                graceDead.isVisible = false
-                magic.isVisible = false
-                ardor.isVisible = false
-                setMapWithBgmBgs("ylarus_place")
-                setFixedCameraPosition(0f, 0f)
-            },
-
-            actionFadeIn(),
-
-            Actions.delay(4f),
-            Actions.run { showConversationDialog("another_chance", "ylarus", Color.BLACK) }
-        )
-    }
-
-    private fun mozesWakesUpAgain(): Action {
-        return Actions.sequence(
-            Actions.delay(4f),
-
-            actionFadeOut(),
-
-            Actions.run {
-                mozesDead.isVisible = false
-                setMapWithBgsOnly("honeywood_house_mozes")
-                setFixedCameraPosition(0f, 720f)
-                mozes.isVisible = true
-                mozes.setPosition(456f, 534f)
-                mozes.entityState = EntityState.IDLE
-                mozes.direction = Direction.SOUTH
-            },
-            Actions.delay(1f),
-            Actions.run { playSe(AudioEvent.SE_SAVE_GAME) },
-
-            actionFadeIn(),
-
-            Actions.delay(1f),
-            Actions.run { showConversationDialog("mozes_wakes_up_cycle_2", "mozes") }
-        )
-    }
-
-    private fun stepOutOfBed(): Action {
-        return Actions.sequence(
-            Actions.delay(2f),
-            Actions.run { mozes.direction = Direction.EAST },
-            Actions.run { mozes.entityState = EntityState.WALKING },
-            Actions.moveBy(48f, 0f, 2f),
-            Actions.run { mozes.entityState = EntityState.IDLE },
-            Actions.run { mozes.direction = Direction.SOUTH },
-            Actions.run { showConversationDialog("out_of_bed_cycle_2", "mozes") }
-        )
-    }
-
-    private fun startSecondCycle(): Action {
-        return Actions.sequence(
-            Actions.delay(0.5f),
             Actions.run { exitScreen() }
         )
     }
 
     override fun exitScreen() {
-        endCutsceneAndOpenMapAnd("honeywood_house_mozes") { scenario.startSecondCycle() }
+        endCutsceneAnd { screenManager.setScreen(nextScreen!!) }
+        nextScreen = null
     }
 
 }

@@ -24,6 +24,7 @@ class ConversationContainer {
     fun reset() {
         conversations
             //.filterNot { it.key == "fairy_welcome" } // Example of not resetting a conversation.
+            // edit: do not use it this way, use a property boolean in a graph to determine if it should be reset or not.
             .forEach { it.value.reset() }
     }
 

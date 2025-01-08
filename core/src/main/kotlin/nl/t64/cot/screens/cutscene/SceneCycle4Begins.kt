@@ -14,7 +14,7 @@ import nl.t64.cot.sfx.TransitionImage
 import nl.t64.cot.sfx.TransitionType
 
 
-class SceneStartOfCycle4 : CutsceneScreen() {
+class SceneCycle4Begins : CutsceneScreen() {
 
     private lateinit var mozes: CutsceneActor
     private lateinit var grayScreen: Actor

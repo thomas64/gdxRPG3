@@ -51,14 +51,15 @@ enum class ScreenType(val screenClass: Class<out Screen>) {
     SCENE_INTRO(SceneIntro::class.java),
     SCENE_ARDOR_FIRST_TIME(SceneArdorFirstTime::class.java),
     SCENE_ARDOR_FIRST_TIME_AFTER_WIN_FROM_GENERALS(SceneArdorFirstTimeAfterWinFromGenerals::class.java),
-    SCENE_END_OF_CYCLE_1(SceneEndOfCycle1::class.java),
-    SCENE_END_OF_CYCLE_2(SceneEndOfCycle2::class.java),
-    SCENE_END_OF_CYCLE_3(SceneEndOfCycle3::class.java),
+    SCENE_ARDOR_KILLING_GRACE(SceneArdorKillingGrace::class.java),
+    SCENE_CYCLE_1_IN_HEAVEN(SceneCycle1InHeaven::class.java),
+    SCENE_CYCLE_2_IN_HEAVEN(SceneCycle2InHeaven::class.java),
+    SCENE_CYCLE_3_IN_HEAVEN(SceneCycle3InHeaven::class.java),
     SCENE_USE_CRYSTAL_OF_TIME(SceneUseCrystalOfTime::class.java),
-    SCENE_START_OF_CYCLE_4(SceneStartOfCycle4::class.java),
+    SCENE_CYCLE_4_BEGINS(SceneCycle4Begins::class.java),
     SCENE_SANTINO_MURDERED(SceneSantinoMurdered::class.java),
-    SCENE_ARDOR_END(SceneArdorEnd::class.java),
-    SCENE_ARDOR_END_AFTER_WIN_FROM_GENERALS(SceneArdorEndAfterWinFromGenerals::class.java),
+    SCENE_ARDOR_LATER_TIME(SceneArdorLaterTime::class.java),
+    SCENE_ARDOR_LATER_TIME_AFTER_WIN_FROM_GENERALS(SceneArdorLaterTimeAfterWinFromGenerals::class.java),
     SCENE_GAME_ENDING(SceneGameEnding::class.java);
 
     fun hasSmallParchment(): Boolean {

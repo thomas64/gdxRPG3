@@ -9,7 +9,7 @@ import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.loot.ReceiveCutsceneScreen
 
 
-class SceneEndOfCycle3 : CutsceneScreen() {
+class SceneCycle3InHeaven : CutsceneScreen() {
 
     private lateinit var mozes: CutsceneActor
     private lateinit var mozesDead: Image

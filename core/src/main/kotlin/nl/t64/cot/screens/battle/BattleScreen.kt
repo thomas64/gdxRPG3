@@ -655,13 +655,8 @@ class BattleScreen : Screen {
 
         return when {
 
-            currentCycle == 1 && isFacingArdorOrOrcGenerals -> """
+            currentCycle in 1 .. 3 && isFacingArdorOrOrcGenerals -> """
                 Mozes is knocked down.
-
-                The fight is over.""".trimIndent()
-
-            currentCycle in 2..3 && isFacingArdorOrOrcGenerals -> """
-                Mozes took a fatal blow.
 
                 The fight is over.""".trimIndent()
 

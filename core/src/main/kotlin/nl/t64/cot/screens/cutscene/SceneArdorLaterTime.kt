@@ -12,7 +12,7 @@ import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.screens.world.entity.EntityState
 
 
-class SceneArdorEnd : CutsceneScreen() {
+class SceneArdorLaterTime : CutsceneScreen() {
 
     private lateinit var mozes: CutsceneActor
     private lateinit var grace: CutsceneActor
@@ -124,14 +124,26 @@ class SceneArdorEnd : CutsceneScreen() {
     }
 
     override fun onNotifyBattleWon(battleId: String, spoils: Loot) {
-        screenManager.setScreen(ScreenType.SCENE_ARDOR_END_AFTER_WIN_FROM_GENERALS)
-        SpoilsCutsceneScreen.load(spoils, ScreenType.SCENE_ARDOR_END_AFTER_WIN_FROM_GENERALS)
+        screenManager.setScreen(ScreenType.SCENE_ARDOR_LATER_TIME_AFTER_WIN_FROM_GENERALS)
+        SpoilsCutsceneScreen.load(spoils, ScreenType.SCENE_ARDOR_LATER_TIME_AFTER_WIN_FROM_GENERALS)
     }
 
     override fun onNotifyBattleLost() {
         when (gameData.numberOfCycles) {
-            2 -> screenManager.setScreen(ScreenType.SCENE_END_OF_CYCLE_2)
-            3 -> screenManager.setScreen(ScreenType.SCENE_END_OF_CYCLE_3)
+            2 -> {
+                (screenManager.getScreen(ScreenType.SCENE_ARDOR_KILLING_GRACE) as SceneArdorKillingGrace).apply {
+                    areGeneralsAlive = true
+                    nextScreen = ScreenType.SCENE_CYCLE_2_IN_HEAVEN
+                }
+                screenManager.setScreen(ScreenType.SCENE_ARDOR_KILLING_GRACE)
+            }
+            3 -> {
+                (screenManager.getScreen(ScreenType.SCENE_ARDOR_KILLING_GRACE) as SceneArdorKillingGrace).apply {
+                    areGeneralsAlive = true
+                    nextScreen = ScreenType.SCENE_CYCLE_3_IN_HEAVEN
+                }
+                screenManager.setScreen(ScreenType.SCENE_ARDOR_KILLING_GRACE)
+            }
             else -> screenManager.setScreen(ScreenType.MENU_MAIN)
         }
     }

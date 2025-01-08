@@ -12,7 +12,7 @@ import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.screens.world.entity.EntityState
 
 
-class SceneEndOfCycle2 : CutsceneScreen() {
+class SceneCycle1InHeaven : CutsceneScreen() {
 
     private lateinit var mozes: CutsceneActor
     private lateinit var mozesDead: Image
@@ -27,7 +27,7 @@ class SceneEndOfCycle2 : CutsceneScreen() {
         actions = listOf(goneToHeaven(),
                          mozesWakesUpAgain(),
                          stepOutOfBed(),
-                         startThirdCycle())
+                         startSecondCycle())
     }
 
     private fun goneToHeaven(): Action {
@@ -43,7 +43,7 @@ class SceneEndOfCycle2 : CutsceneScreen() {
             actionFadeIn(),
 
             Actions.delay(4f),
-            Actions.run { showConversationDialog("final_chance", "ylarus", Color.BLACK) }
+            Actions.run { showConversationDialog("another_chance", "ylarus", Color.BLACK) }
         )
     }
 
@@ -68,7 +68,7 @@ class SceneEndOfCycle2 : CutsceneScreen() {
             actionFadeIn(),
 
             Actions.delay(1f),
-            Actions.run { showConversationDialog("mozes_wakes_up_cycle_3", "mozes") }
+            Actions.run { showConversationDialog("mozes_wakes_up_cycle_2", "mozes") }
         )
     }
 
@@ -80,11 +80,11 @@ class SceneEndOfCycle2 : CutsceneScreen() {
             Actions.moveBy(48f, 0f, 2f),
             Actions.run { mozes.entityState = EntityState.IDLE },
             Actions.run { mozes.direction = Direction.SOUTH },
-            Actions.run { showConversationDialog("out_of_bed_cycle_3", "mozes") }
+            Actions.run { showConversationDialog("out_of_bed_cycle_2", "mozes") }
         )
     }
 
-    private fun startThirdCycle(): Action {
+    private fun startSecondCycle(): Action {
         return Actions.sequence(
             Actions.delay(0.5f),
             Actions.run { exitScreen() }
@@ -92,7 +92,7 @@ class SceneEndOfCycle2 : CutsceneScreen() {
     }
 
     override fun exitScreen() {
-        endCutsceneAndOpenMapAnd("honeywood_house_mozes") { scenario.startThirdCycle() }
+        endCutsceneAndOpenMapAnd("honeywood_house_mozes") { scenario.startSecondCycle() }
     }
 
 }
