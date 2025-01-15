@@ -21,17 +21,18 @@ internal class InventorySlotTaker(private val selector: ItemSlotSelector) {
     }
 
     private fun tryPutInventorySlotToEquipSlot() {
-        sourceSlot.getPossibleInventoryImage()?.let {
-            tryPutInventorySlotToEquipSlot(it)
-        }
+        sourceSlot
+            .getPossibleInventoryImage()
+            ?.let { tryPutInventorySlotToEquipSlot(it) }
     }
 
     private fun tryPutInventorySlotToEquipSlot(candidateItem: InventoryImage) {
         this.candidateItem = candidateItem
-        InventoryUtils.getScreenUI().getEquipSlotsTables().getCurrentEquipSlots()
-            .getPossibleSlotOfGroup(candidateItem.inventoryGroup)?.let {
-                exchangeWithEquipSlotOfSameInventoryGroup(it)
-            }
+        InventoryUtils.getScreenUI()
+            .getEquipSlotsTables()
+            .getCurrentEquipSlots()
+            .getPossibleSlotOfGroup(candidateItem.inventoryGroup)
+            ?.let { exchangeWithEquipSlotOfSameInventoryGroup(it) }
     }
 
     private fun exchangeWithEquipSlotOfSameInventoryGroup(targetSlot: ItemSlot) {
@@ -60,23 +61,26 @@ internal class InventorySlotTaker(private val selector: ItemSlotSelector) {
 
     private fun tryPutInventorySlotToCounterpartSlot(sourceSlot: ItemSlot) {
         this.sourceSlot = sourceSlot
-        sourceSlot.getPossibleInventoryImage()?.let {
-            tryPutInventorySlotToCounterpartSlot(it)
-        }
+        sourceSlot
+            .getPossibleInventoryImage()
+            ?.takeUnless { it.inventoryItem.id == "crystal_of_time" }
+            ?.let { tryPutInventorySlotToCounterpartSlot(it) }
     }
 
     private fun tryPutInventorySlotToCounterpartSlot(candidateItem: InventoryImage) {
         this.candidateItem = candidateItem
-        InventoryUtils.getScreenUI().getCounterpartSlotsTable()
-            .getPossibleSameStackableItemSlotWith(candidateItem.inventoryItem)?.let {
-                exchangeWithCounterpartSlot(it)
-            } ?: exchangeWithPossibleEmptyCounterpartSlot()
+        InventoryUtils.getScreenUI()
+            .getCounterpartSlotsTable()
+            .getPossibleSameStackableItemSlotWith(candidateItem.inventoryItem)
+            ?.let { exchangeWithCounterpartSlot(it) }
+            ?: exchangeWithPossibleEmptyCounterpartSlot()
     }
 
     private fun exchangeWithPossibleEmptyCounterpartSlot() {
-        InventoryUtils.getScreenUI().getCounterpartSlotsTable().getPossibleEmptySlot()?.let {
-            exchangeWithCounterpartSlot(it)
-        }
+        InventoryUtils.getScreenUI()
+            .getCounterpartSlotsTable()
+            .getPossibleEmptySlot()
+            ?.let { exchangeWithCounterpartSlot(it) }
     }
 
     private fun exchangeWithCounterpartSlot(targetSlot: ItemSlot) {

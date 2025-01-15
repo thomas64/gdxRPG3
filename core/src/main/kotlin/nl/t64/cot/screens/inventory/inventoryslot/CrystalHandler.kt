@@ -31,11 +31,13 @@ class CrystalHandler private constructor() {
     }
 
     private fun possibleHandle() {
-        DialogQuestion({ certainHandle() }, """
+        if (screenManager.getCurrentParchmentScreen() is InventoryScreen) {
+            DialogQuestion({ certainHandle() }, """
                 Do you want to save your progress,
                 reset time and everything that happened,
                 and return to your home?""".trimIndent())
-            .show(stage, AudioEvent.SE_CONVERSATION_NEXT, 0)
+                .show(stage, AudioEvent.SE_CONVERSATION_NEXT, 0)
+        }
     }
 
     private fun certainHandle() {
