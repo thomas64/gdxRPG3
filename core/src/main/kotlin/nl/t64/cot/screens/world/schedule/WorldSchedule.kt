@@ -6,7 +6,7 @@ import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.components.schedule.MapSchedule
 import nl.t64.cot.components.schedule.MapScheduleDatabase
 import nl.t64.cot.constants.Constant
-import nl.t64.cot.screens.world.mapobjects.GameMapRelocator
+import nl.t64.cot.screens.world.mapobjects.GameMapPortal
 
 
 class WorldSchedule {
@@ -31,7 +31,7 @@ class WorldSchedule {
     private fun MapSchedule.update() {
         if (gameData.clock.isCurrentTimeAfter(closingTime)) {
             worldScreen.showMessageDialog(message) {
-                val autoPortal = GameMapRelocator.createAutoPortal(fromMapName, toMapName)
+                val autoPortal = GameMapPortal(fromMapName, toMapName)
                 mapManager.schedulePortal(autoPortal, direction)
             }
         }

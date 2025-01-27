@@ -2,7 +2,6 @@ package nl.t64.cot.screens.world.loaders
 
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
-import nl.t64.cot.components.battle.EnemyContainer
 import nl.t64.cot.screens.world.entity.*
 import nl.t64.cot.screens.world.entity.events.LoadEntityEvent
 import nl.t64.cot.screens.world.map.GameMap
@@ -64,7 +63,7 @@ internal class NpcEntitiesLoader(private val currentMap: GameMap) {
         if (gameMapEnemy.state == EntityState.IMMOBILE) {
             brokerManager.actionObservers.addObserver(enemyEntity)
         } else {
-            if (EnemyContainer(gameMapEnemy.battleId).doEnemiesWantToBattle()) {
+            if (gameData.battles.doEnemiesWantToBattle(gameMapEnemy.battleId)) {
                 brokerManager.detectionObservers.addObserver(enemyEntity)
             }
             brokerManager.bumpObservers.addObserver(enemyEntity)

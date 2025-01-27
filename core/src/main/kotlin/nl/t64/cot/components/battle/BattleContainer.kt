@@ -6,12 +6,13 @@ import nl.t64.cot.resources.ConfigDataLoader
 class BattleContainer {
 
     private val battles: Map<String, Battle> = ConfigDataLoader.createBattles()
-    val wonBattles: MutableSet<String> = mutableSetOf()
+    private val wonBattles: MutableSet<String> = mutableSetOf()
 
     fun getBattlers(battleId: String): List<Battler> = battles[battleId]!!.battlers
     fun getBackground(battleId: String): String = battles[battleId]!!.background
     fun isBattleEscapable(battleId: String): Boolean = battles[battleId]!!.isEscapable
     fun isBattleWon(battleId: String): Boolean = battles[battleId]?.hasWon ?: false
+    fun doEnemiesWantToBattle(battleId: String): Boolean = battleId !in wonBattles
 
     fun setBattleWon(battleId: String) {
         battles[battleId]!!.hasWon = true

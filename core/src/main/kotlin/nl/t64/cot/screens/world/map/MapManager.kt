@@ -9,7 +9,10 @@ import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.Utils.worldScreen
-import nl.t64.cot.audio.*
+import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playBgm
+import nl.t64.cot.audio.playBgs
+import nl.t64.cot.audio.toAudioEvent
 import nl.t64.cot.components.cutscene.CutsceneId
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.gamestate.ProfileManager
@@ -91,21 +94,13 @@ class MapManager : ProfileObserver {
         nextMapTitle = null
     }
 
-    fun checkWarpPoint(warpPoint: GameMapRelocator, playerDirection: Direction) {
-        playSe(AudioEvent.SE_WARP)
-        nextMapTitle = warpPoint.toMapName
-        worldScreen.fadeOut(transitionColor = warpPoint.fadeColor,
-                            transitionPurpose = TransitionPurpose.MAP_CHANGE,
-                            actionAfterFade = { changeMapWithCameraShake(warpPoint, playerDirection) })
-    }
-
-    fun schedulePortal(portal: GameMapRelocator, playerDirection: Direction) {
+    fun schedulePortal(portal: GameMapPortal, playerDirection: Direction) {
         worldScreen.fadeOut(duration = 1f,
                             transitionPurpose = TransitionPurpose.MAP_CHANGE,
                             actionAfterFade = { changeMap(portal, playerDirection) })
     }
 
-    fun collisionPortal(portal: GameMapRelocator, playerDirection: Direction) {
+    fun collisionPortal(portal: GameMapPortal, playerDirection: Direction) {
         nextMapTitle = portal.toMapName
         worldScreen.fadeOut(transitionColor = portal.fadeColor,
                             transitionPurpose = TransitionPurpose.MAP_CHANGE,
@@ -119,12 +114,7 @@ class MapManager : ProfileObserver {
         worldScreen.shakeCamera()
     }
 
-    private fun changeMapWithCameraShake(warpPoint: GameMapRelocator, direction: Direction) {
-        changeMap(warpPoint, direction)
-        worldScreen.shakeCamera()
-    }
-
-    private fun changeMap(portal: GameMapRelocator, direction: Direction) {
+    private fun changeMap(portal: GameMapPortal, direction: Direction) {
         portal.enterDirection = direction
         loadMapWithBgmBgs(portal.toMapName)
         currentMap.setPlayerSpawnLocation(portal)

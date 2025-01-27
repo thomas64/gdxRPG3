@@ -34,10 +34,6 @@ class EnemyContainer(
         return Loot(spoils)
     }
 
-    fun doEnemiesWantToBattle(): Boolean {
-        return !gameData.battles.wonBattles.contains(battleId)
-    }
-
     private fun createEnemies(battleId: String): List<EnemyItem> {
         return gameData.battles.getBattlers(battleId)
             .map { it.createEnemyList() }

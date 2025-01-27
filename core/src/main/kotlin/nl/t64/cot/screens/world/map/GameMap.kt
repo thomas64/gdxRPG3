@@ -104,10 +104,7 @@ class GameMap(val mapTitle: String) {
     private val notes: List<GameMapNote> = loader.nameStartsWith(REST_LAYER, "note") { GameMapNote(it) }
     private val savePoints: List<GameMapSavePoint> = loader.wholeLayer(SAVE_LAYER) { GameMapSavePoint(it) }
     private val spawnPoints: List<GameMapSpawnPoint> = loader.wholeLayer(SPAWN_LAYER) { GameMapSpawnPoint(it) }
-    private val portals: List<GameMapRelocator> = loader.wholeLayer(PORTAL_LAYER) { GameMapPortal(it, mapTitle) }
-
-    // warpPoints have been replaced by warpPortals. if needed again, they need to be added another way on the tmx map.
-//    private val warpPoints: List<GameMapRelocator> = loader.loadLayer(WARP_LAYER) { GameMapWarpPoint(it, mapTitle) }
+    private val portals: List<GameMapPortal> = loader.wholeLayer(PORTAL_LAYER) { GameMapPortal(it, mapTitle) }
     private val warpPortals: List<GameMapWarpPortal> = loader.wholeLayer(WARP_LAYER) { GameMapWarpPortal(it, mapTitle) }
 
     fun setTiledGraphs() {
@@ -131,30 +128,26 @@ class GameMap(val mapTitle: String) {
     }
 
     fun setPlayerSpawnLocationForNewLoad(mapTitle: String) {
-        val spawnForNewLoadPortal = GameMapRelocator.createPortalForNewLoad(mapTitle)
+        val spawnForNewLoadPortal = GameMapPortal(mapTitle)
         setPlayerSpawnLocation(spawnForNewLoadPortal)
     }
 
     fun setPlayerSpawnLocationForWarpPortal() {
-        spawnPoints.single { it.isPortal() }.let {
-            playerSpawnLocation = Vector2(it.x, it.y)
-            playerSpawnDirection = it.direction
-        }
+        spawnPoints
+            .single { it.isPortal() }
+            .let {
+                playerSpawnLocation = Vector2(it.x, it.y)
+                playerSpawnDirection = it.direction!!
+            }
     }
 
-    fun setPlayerSpawnLocation(portal: GameMapRelocator) {
-        spawnPoints.first { it.isInConnectionWith(portal) }.let {
-            playerSpawnLocation = Vector2(it.x, it.y)
-            setPlayerSpawnDirection(portal, it)
-        }
-    }
-
-    private fun setPlayerSpawnDirection(portal: GameMapRelocator, spawnPoint: GameMapSpawnPoint) {
-        playerSpawnDirection = if (spawnPoint.direction == Direction.NONE) {
-            portal.enterDirection
-        } else {
-            spawnPoint.direction
-        }
+    fun setPlayerSpawnLocation(portal: GameMapPortal) {
+        spawnPoints
+            .first { it.isInConnectionWith(portal) }
+            .let {
+                playerSpawnLocation = Vector2(it.x, it.y)
+                playerSpawnDirection = it.direction ?: portal.enterDirection
+            }
     }
 
     fun isOutsideMap(point: Vector2): Boolean {
