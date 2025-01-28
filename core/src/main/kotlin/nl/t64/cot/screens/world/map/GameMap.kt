@@ -127,21 +127,30 @@ class GameMap(val mapTitle: String) {
             .firstOrNull() ?: defaultStepSound
     }
 
-    fun setPlayerSpawnLocationForNewLoad(mapTitle: String) {
-        val spawnForNewLoadPortal = GameMapPortal(mapTitle)
-        setPlayerSpawnLocation(spawnForNewLoadPortal)
-    }
-
-    fun setPlayerSpawnLocationForWarpPortal() {
+    fun setPlayerSpawnLocationWithId(id: String) {
         spawnPoints
-            .single { it.isPortal() }
+            .single { it.hasId(id) }
             .let {
                 playerSpawnLocation = Vector2(it.x, it.y)
                 playerSpawnDirection = it.direction!!
             }
     }
 
-    fun setPlayerSpawnLocation(portal: GameMapPortal) {
+    fun setPlayerSpawnLocationForAutoSaveAfterBattle(playerLocation: Vector2) {
+        playerSpawnLocation = playerLocation
+        playerSpawnDirection = Direction.SOUTH
+    }
+
+    fun setPlayerSpawnLocationForWarpPortal() {
+        spawnPoints
+            .single { it.isWarpPortalSpawnPoint() }
+            .let {
+                playerSpawnLocation = Vector2(it.x, it.y)
+                playerSpawnDirection = it.direction!!
+            }
+    }
+
+    fun setPlayerSpawnLocationForRegularPortal(portal: GameMapPortal) {
         spawnPoints
             .first { it.isInConnectionWith(portal) }
             .let {

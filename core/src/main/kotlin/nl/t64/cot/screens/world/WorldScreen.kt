@@ -53,6 +53,7 @@ import nl.t64.cot.screens.world.ui.PartyWindow
 import nl.t64.cot.sfx.TransitionImage
 import nl.t64.cot.sfx.TransitionPurpose
 import java.util.*
+import kotlin.concurrent.thread
 
 
 class WorldScreen : Screen, ConversationObserver, BattleObserver {
@@ -326,6 +327,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
         gameState = GameState.BATTLE
         screenManager.setScreen(ScreenType.WORLD)
         BattleResolver.resolveWin(battleId, spoils, player.position, currentNpcEntity, npcEntities)
+        thread { profileManager.autoSaveAfterBattle(player.position) }
         player.resetInput()
         render(0f)
         if (gameState == GameState.RUNNING) mapManager.continueAudio()

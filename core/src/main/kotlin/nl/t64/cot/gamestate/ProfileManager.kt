@@ -2,6 +2,7 @@ package nl.t64.cot.gamestate
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Preferences
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.Json
 import com.badlogic.gdx.utils.SerializationException
 import ktx.collections.GdxArray
@@ -62,6 +63,12 @@ class ProfileManager {
         saveState[key] = any
     }
 
+    fun autoSaveAfterBattle(playerPosition: Vector2) {
+        brokerManager.profileObservers.notifySaveProfileAfterBattle(this, playerPosition)
+        writeProfileToDisk(AUTOSAVE_INDEX)
+        worldScreen.showMessageTooltip("Game saved.")
+    }
+
     fun autoSave() {
         brokerManager.profileObservers.notifySaveProfile(this)
         writeProfileToDisk(AUTOSAVE_INDEX)
@@ -116,7 +123,7 @@ class ProfileManager {
     fun getVisualProfileArrayForLoadedProfile(): GdxArray<String> {
         return GdxArray(getSaveFileNames().indices
                             .map { index -> index to getSaveFilesContentBy(index) }
-                            // 0 is the default default value, which can actually be a valid value. So -9 is a never valid value.
+                            // 0 is the default value, which can actually be a valid value. So -9 is a never valid value.
                             .filter { (_, saveFileContent) -> saveFileContent.first.getInteger(PROFILE_INDEX_KEY, -9) == currentIndex }
                             .map { (index, saveFileContent) -> getVisualOf(index, saveFileContent.first) }
                             .toTypedArray())

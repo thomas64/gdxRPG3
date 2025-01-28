@@ -67,9 +67,8 @@ class CrystalHandler private constructor() {
         playSe(AudioEvent.SE_RESET)
         val actionAfterFade = {
             gameData.resetCycle()
-            val mapTitle = "honeywood_house_mozes"
-            mapManager.loadMap(mapTitle)
-            mapManager.currentMap.setPlayerSpawnLocationForNewLoad(mapTitle)
+            mapManager.loadMap(Constant.STARTING_MAP)
+            mapManager.currentMap.setPlayerSpawnLocationWithId(Constant.STARTING_MAP)
             profileManager.saveProfile()
             worldScreen.changeMap(mapManager.currentMap)
         }

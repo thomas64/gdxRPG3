@@ -32,9 +32,14 @@ class MapManager : ProfileObserver {
 
     override fun onNotifyCreateProfile(profileManager: ProfileManager) {
         loadMap(Constant.STARTING_MAP)
-        currentMap.setPlayerSpawnLocationForNewLoad(Constant.STARTING_MAP)
+        currentMap.setPlayerSpawnLocationWithId(Constant.STARTING_MAP)
         onNotifySaveProfile(profileManager)
         worldScreen.changeMap(currentMap)
+    }
+
+    override fun onNotifySaveProfileAfterBattle(profileManager: ProfileManager, playerPosition: Vector2) {
+        onNotifySaveProfile(profileManager)
+        profileManager.setProperty("playerLocationAfterBattle", playerPosition)
     }
 
     override fun onNotifySaveProfile(profileManager: ProfileManager) {
@@ -48,8 +53,14 @@ class MapManager : ProfileObserver {
         } else {
             loadMap(mapTitle)
         }
-        currentMap.setPlayerSpawnLocationForNewLoad(mapTitle)
+        setPlayerSpawnLocation(profileManager, mapTitle)
         worldScreen.changeMap(currentMap)
+    }
+
+    private fun setPlayerSpawnLocation(profileManager: ProfileManager, mapTitle: String) {
+        profileManager.getProperty<Vector2?>("playerLocationAfterBattle")
+            ?.let { currentMap.setPlayerSpawnLocationForAutoSaveAfterBattle(it) }
+            ?: currentMap.setPlayerSpawnLocationWithId(mapTitle)
     }
 
     fun loadMapAfterFleeing(mapTitle: String) {
@@ -58,7 +69,7 @@ class MapManager : ProfileObserver {
 
     fun loadMapAfterCutscene(mapTitle: String, spawnId: String) {
         loadMapWithBgmBgs(mapTitle)
-        currentMap.setPlayerSpawnLocationForNewLoad(spawnId)
+        currentMap.setPlayerSpawnLocationWithId(spawnId)
         worldScreen.changeMap(currentMap)
     }
 
@@ -117,7 +128,7 @@ class MapManager : ProfileObserver {
     private fun changeMap(portal: GameMapPortal, direction: Direction) {
         portal.enterDirection = direction
         loadMapWithBgmBgs(portal.toMapName)
-        currentMap.setPlayerSpawnLocation(portal)
+        currentMap.setPlayerSpawnLocationForRegularPortal(portal)
         worldScreen.changeMap(currentMap)
     }
 

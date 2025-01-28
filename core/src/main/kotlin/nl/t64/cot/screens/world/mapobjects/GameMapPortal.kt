@@ -18,29 +18,18 @@ class GameMapPortal : GameMapObject, CollisionObserver {
     val fadeColor: Color = Color.BLACK
     lateinit var enterDirection: Direction
 
-    constructor(fromMapName: String, toMapName: String) : this(
-        rectObject = RectangleMapObject().apply { name = toMapName },
-        fromMapName = fromMapName,
-        shouldAddObserver = false
-    )
+    constructor(fromMapName: String, toMapName: String) : super(Rectangle()) {
+        this.fromMapName = fromMapName
+        this.toMapName = toMapName
+        this.toMapLocation = ""
+    }
 
-    constructor(mapTitle: String) : this(
-        rectObject = RectangleMapObject(),
-        fromMapName = mapTitle,
-        shouldAddObserver = false
-    )
-
-    constructor(rectObject: RectangleMapObject,
-                fromMapName: String,
-                shouldAddObserver: Boolean = true) : super(rectObject.rectangle) {
-
+    constructor(rectObject: RectangleMapObject, fromMapName: String) : super(rectObject.rectangle) {
         this.fromMapName = fromMapName
         this.toMapName = rectObject.name
         this.toMapLocation = rectObject.type.orEmpty()
 
-        if (shouldAddObserver) {
-            brokerManager.collisionObservers.addObserver(this)
-        }
+        brokerManager.collisionObservers.addObserver(this)
     }
 
     override fun onNotifyCollision(playerBoundingBox: Rectangle, playerDirection: Direction) {

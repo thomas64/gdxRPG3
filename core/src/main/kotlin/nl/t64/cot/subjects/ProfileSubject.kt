@@ -1,5 +1,6 @@
 package nl.t64.cot.subjects
 
+import com.badlogic.gdx.math.Vector2
 import nl.t64.cot.gamestate.ProfileManager
 
 
@@ -17,6 +18,10 @@ class ProfileSubject {
 
     fun notifyCreateProfile(profileManager: ProfileManager) {
         observers.forEach { it.onNotifyCreateProfile(profileManager) }
+    }
+
+    fun notifySaveProfileAfterBattle(profileManager: ProfileManager, playerPosition: Vector2) {
+        observers.forEach { it.onNotifySaveProfileAfterBattle(profileManager, playerPosition) }
     }
 
     fun notifySaveProfile(profileManager: ProfileManager) {

@@ -19,7 +19,11 @@ class GameMapSpawnPoint(rectObject: RectangleMapObject) : GameMapObject(rectObje
                 fromMapLocation.equals(portal.toMapLocation, true)
     }
 
-    fun isPortal(): Boolean {
+    fun hasId(id: String): Boolean {
+        return fromMapName == id
+    }
+
+    fun isWarpPortalSpawnPoint(): Boolean {
         return fromMapName == "portal"
     }
 
