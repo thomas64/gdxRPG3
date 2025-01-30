@@ -2,7 +2,6 @@ package nl.t64.cot.components.battle
 
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
-import nl.t64.cot.components.party.inventory.InventoryGroup
 import kotlin.math.abs
 
 
@@ -30,7 +29,7 @@ class BattleField(participants: List<Participant>) {
     }
 
     fun setStartingSpace(currentParticipant: Participant) {
-        startingSpace = getCurrentSpace(currentParticipant)
+        startingSpace = currentParticipant.getCurrentSpaceIndex()
     }
 
     fun cancelMovement(currentHero: Participant) {
@@ -50,59 +49,38 @@ class BattleField(participants: List<Participant>) {
     }
 
     fun moveHeroRight(currentHero: Participant) {
-        val currentIndex: Int = getCurrentSpace(currentHero)
-        val upperBound: Int = minOf(startingSpace + 1 + currentHero.currentAP, 20)
-        (currentIndex + 1 until upperBound)
-            .firstOrNull { heroSpaces[it] == null }
-            ?.let {
-                currentHero.moveHeroToSpace(it)
-                playSe(AudioEvent.SE_MENU_CURSOR)
-            } ?: playSe(AudioEvent.SE_MENU_ERROR)
+        val currentIndex: Int = currentHero.getCurrentSpaceIndex()
+        val upperBound: Int = minOf(startingSpace + 1 + currentHero.currentAP, BATTLE_FIELD_SIZE)
+        val allSpacesFromHere: IntProgression = currentIndex + 1 until upperBound
+        currentHero.moveHero(allSpacesFromHere)
     }
 
     fun moveHeroLeft(currentHero: Participant) {
-        val currentIndex: Int = getCurrentSpace(currentHero)
+        val currentIndex: Int = currentHero.getCurrentSpaceIndex()
         val lowerBound: Int = maxOf(startingSpace - currentHero.currentAP, 0)
-        (currentIndex - 1 downTo lowerBound)
-            .firstOrNull { heroSpaces[it] == null }
-            ?.let {
-                currentHero.moveHeroToSpace(it)
-                playSe(AudioEvent.SE_MENU_CURSOR)
-            } ?: playSe(AudioEvent.SE_MENU_ERROR)
+        val allSpacesFromHere: IntProgression = currentIndex - 1 downTo lowerBound
+        currentHero.moveHero(allSpacesFromHere)
     }
 
-    fun moveEnemyAndPossibleHeroTargetInRange(currentEnemy: Participant): Participant? {
-        val currentEnemyAttackPoints: List<Int> = currentEnemy.getRangeOfEnemy()
-        val nearestHeroSpace: Int = getNearestHeroIndexFrom(currentEnemyAttackPoints)
-        if (nearestHeroSpace in currentEnemyAttackPoints) {
-            return heroSpaces[nearestHeroSpace]
+    fun possibleGetHeroTargetAndMoveEnemy(currentEnemy: Participant): Participant? {
+        val currentEnemyRangeIndices: List<Int> = currentEnemy.getRangeOfEnemy()
+        val nearestHeroIndices: List<Int> = getOccupiedHeroIndicesSortedByNearest(currentEnemyRangeIndices)
+
+        // if hero is already in range, don't move enemy.
+        val nearestHeroIndex: Int = nearestHeroIndices.first()
+        if (nearestHeroIndex in currentEnemyRangeIndices) {
+            return heroSpaces[nearestHeroIndex]
         }
 
-        val currentEnemySpace: Int = getCurrentSpace(currentEnemy)
-        val ranges: List<Int> = currentEnemy.character.getInventoryItem(InventoryGroup.WEAPON)?.getWeaponRange().orEmpty()
-        val nearestSpaceToAttack: Int = enemySpaces.indices
-            .filter { enemySpaces[it] == null }
-            .filter { ranges.any { range -> it - range + 1 == nearestHeroSpace || it + range == nearestHeroSpace } }
-            .minByOrNull { abs(it - currentEnemySpace) }
-            ?: return null // todo: get second closest hero
+        // if hero is not in range, move enemy to nearest space where hero is in range.
+        currentEnemy.getNearestSpaceToMoveToForAnAttack(nearestHeroIndices)
+            ?.let { currentEnemy.moveEnemyToIndex(it) }
+            // or don't move enemy if no such space is available.
+            ?: return null
 
-        val direction: Int = if (currentEnemySpace > nearestSpaceToAttack) -1 else 1
-        var newSpace: Int = currentEnemySpace + direction
-        while (newSpace in 0 until BATTLE_FIELD_SIZE) {
-            if (enemySpaces[newSpace] == null) {
-                currentEnemy.moveEnemyToSpace(newSpace)
-                newSpace += direction
-                Thread.sleep(500L)
-                val updatedAttackPoints: List<Int> = currentEnemy.getRangeOfEnemy()
-                if (nearestHeroSpace in updatedAttackPoints) {
-                    break
-                }
-            } else {
-                newSpace += direction
-            }
-        }
-
-        return heroSpaces[nearestHeroSpace]
+        // return hero that is now in range.
+        val indexOfTargetedHero: Int = nearestHeroIndices.first { it in currentEnemy.getRangeOfEnemy() }
+        return heroSpaces[indexOfTargetedHero]
     }
 
     fun getCurrentSpace(participant: Participant): Int {
@@ -125,20 +103,63 @@ class BattleField(participants: List<Participant>) {
     }
 
     private fun Participant.getRange(offsetLeft: Int, offSetRight: Int): List<Int> {
-        val currentSpace: Int = getCurrentSpace(this)
-        return this.character.getInventoryItem(InventoryGroup.WEAPON)
-            ?.getWeaponRange()
-            ?.map { listOf(currentSpace - it + offsetLeft, currentSpace + it + offSetRight) }
-            ?.flatten()
-            ?.filter { it in 0..BATTLE_FIELD_SIZE }
-            ?.distinct()
-            .orEmpty()
+        val currentSpace: Int = this.getCurrentSpaceIndex()
+        return this.getWeaponRanges()
+            .map { listOf(currentSpace - it + offsetLeft, currentSpace + it + offSetRight) }
+            .flatten()
+            .filter { it in 0..BATTLE_FIELD_SIZE }
+            .distinct()
     }
 
-    private fun getNearestHeroIndexFrom(attackPoints: List<Int>): Int {
+    private fun getOccupiedHeroIndicesSortedByNearest(enemyRangeIndices: List<Int>): List<Int> {
         return heroSpaces.filterNotNull()
-            .map { getCurrentSpace(it) }
-            .minBy { heroSpace -> attackPoints.minOf { attackPoint -> abs(attackPoint - heroSpace) } }
+            .map { hero -> hero.getCurrentSpaceIndex() }
+            .sortedBy { heroIndex -> enemyRangeIndices.minOf { rangeIndex -> abs(rangeIndex - heroIndex) } }
+    }
+
+    private fun Participant.getNearestSpaceToMoveToForAnAttack(heroIndices: List<Int>): Int? {
+        val currentEnemyIndex: Int = this.getCurrentSpaceIndex()
+        val enemyWeaponRanges: List<Int> = this.getWeaponRanges()
+        return enemySpaces.indices
+            .filter { enemySpaces[it] == null }
+            .filter { heroIndices.isAnyHeroInWeaponRange(it, enemyWeaponRanges) }
+            .minByOrNull { abs(it - currentEnemyIndex) }
+    }
+
+    private fun List<Int>.isAnyHeroInWeaponRange(enemyIndex: Int, enemyWeaponRanges: List<Int>): Boolean {
+        val heroIndices: List<Int> = this
+        return enemyWeaponRanges.any { range ->
+            heroIndices.any { heroIndex ->
+                enemyIndex - range + 1 == heroIndex || enemyIndex + range == heroIndex
+            }
+        }
+    }
+
+    private fun Participant.moveHero(allSpacesInTheChosenDirection: IntProgression) {
+        allSpacesInTheChosenDirection
+            .firstOrNull { heroSpaces[it] == null }
+            ?.let {
+                this.moveHeroToSpace(it)
+                playSe(AudioEvent.SE_MENU_CURSOR)
+            } ?: playSe(AudioEvent.SE_MENU_ERROR)
+    }
+
+    private fun Participant.moveEnemyToIndex(destinationSpace: Int) {
+        this.getAllSpacesUntil(destinationSpace)
+            .filter { enemySpaces[it] == null }
+            .forEach {
+                this.moveEnemyToSpace(it)
+                Thread.sleep(500L)
+            }
+    }
+
+    private fun Participant.getAllSpacesUntil(destinationSpace: Int): IntProgression {
+        val currentIndex: Int = this.getCurrentSpaceIndex()
+        return if (destinationSpace < currentIndex) {
+            currentIndex - 1 downTo maxOf(destinationSpace, 0)
+        } else {
+            currentIndex + 1 until minOf(destinationSpace, BATTLE_FIELD_SIZE)
+        }
     }
 
     private fun Participant.moveHeroToSpace(newSpace: Int) {
@@ -149,6 +170,10 @@ class BattleField(participants: List<Participant>) {
     private fun Participant.moveEnemyToSpace(newSpace: Int) {
         enemySpaces[enemySpaces.indexOf(this)] = null
         enemySpaces[newSpace] = this
+    }
+
+    private fun Participant.getCurrentSpaceIndex(): Int {
+        return getCurrentSpace(this)
     }
 
     private fun Participant.isInRangeOfHero(currentHero: Participant): Boolean {

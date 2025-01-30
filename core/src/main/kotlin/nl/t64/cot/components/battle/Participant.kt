@@ -1,6 +1,7 @@
 package nl.t64.cot.components.battle
 
 import nl.t64.cot.components.party.HeroItem
+import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.components.party.stats.StatItemId
 
 
@@ -28,6 +29,10 @@ class Participant(
 
     fun refreshActionPoints() {
         currentAP = maximumAP
+    }
+
+    fun getWeaponRanges(): List<Int> {
+        return character.getInventoryItem(InventoryGroup.WEAPON)?.getWeaponRange().orEmpty()
     }
 
 }
