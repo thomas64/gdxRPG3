@@ -13,6 +13,7 @@ class SpoilsCutsceneScreen : LootScreen() {
 
     companion object {
         fun load(spoils: Loot, currentCutsceneScreen: ScreenType) {
+            if (spoils.isEmpty()) return
             playSe(AudioEvent.SE_SPARKLE)
             val spoilsScreen = screenManager.getScreen(ScreenType.SPOILS_CUTSCENE) as SpoilsCutsceneScreen
             spoilsScreen.currentCutsceneScreen = currentCutsceneScreen

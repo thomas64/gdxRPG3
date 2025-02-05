@@ -149,7 +149,17 @@ class AudioManager {
             AudioCommand.SE_PLAY_ONCE -> playSe(event, false)
             AudioCommand.SE_PLAY_LOOP -> playSe(event, true)
             AudioCommand.SE_STOP -> queuedSe[event]?.stop()
-            else -> throw IllegalArgumentException("Call 'ALL' AudioCommands without second argument.")
+            else -> throw IllegalArgumentException("Call non-'ALL' AudioCommands with second argument AudioEvent.")
+        }
+    }
+
+    fun handle(command: AudioCommand, events: List<AudioEvent>) {
+        when (command) {
+            AudioCommand.SE_STOP_ALL_EXCEPT ->
+                queuedSe
+                    .filterNot { (key, _) -> key in events }
+                    .forEach { (_, value) -> value.stop() }
+            else -> throw IllegalArgumentException("Call 'ALL_EXCEPT' AudioCommands with second argument List<AudioEvent>.")
         }
     }
 
@@ -162,7 +172,7 @@ class AudioManager {
             AudioCommand.BGS_PAUSE_ALL -> queuedBgs.values.forEach { it.pause() }
 
             AudioCommand.SE_STOP_ALL -> queuedSe.values.forEach { it.stop() }
-            else -> throw IllegalArgumentException("Call non-'ALL' AudioCommands with second argument.")
+            else -> throw IllegalArgumentException("Call 'ALL' AudioCommands without second argument.")
         }
     }
 

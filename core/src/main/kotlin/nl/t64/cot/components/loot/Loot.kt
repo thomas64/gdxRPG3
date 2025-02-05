@@ -48,8 +48,13 @@ class Loot(
         content = originalLoot.content
     }
 
-    fun isTaken(): Boolean =
-        content.isEmpty()
+    fun isEmpty(): Boolean {
+        return content.isEmpty()
+    }
+
+    fun isTaken(): Boolean {
+        return content.isEmpty()
+    }
 
     fun clearContent() {
         content = mutableMapOf()
@@ -59,8 +64,9 @@ class Loot(
         content = newContent
     }
 
-    fun isTrapped(): Boolean =
-        trapLevel > 0
+    fun isTrapped(): Boolean {
+        return trapLevel > 0
+    }
 
     fun canDisarmTrap(mechanicLevel: Int): Boolean {
         return mechanicLevel >= trapLevel
@@ -70,8 +76,9 @@ class Loot(
         trapLevel = 0
     }
 
-    fun isLocked(): Boolean =
-        lockLevel > 0
+    fun isLocked(): Boolean {
+        return lockLevel > 0
+    }
 
     fun canPickLock(thiefLevel: Int): Boolean {
         return thiefLevel >= lockLevel
@@ -85,8 +92,9 @@ class Loot(
         xp = 0
     }
 
-    fun isXpGained(): Boolean =
-        xp == 0
+    fun isXpGained(): Boolean {
+        return xp == 0
+    }
 
     fun handleRanger(totalRanger: Int) {
         content

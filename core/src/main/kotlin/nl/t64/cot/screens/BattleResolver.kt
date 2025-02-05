@@ -46,9 +46,8 @@ class BattleResolver private constructor(
     }
 
     private fun loadPossibleSpoils() {
-        if (!spoils.isTaken()) {
-            loadSpoilsDialog()
-        }
+        if (spoils.isEmpty()) return
+        loadSpoilsDialog()
     }
 
     private fun loadSpoilsDialog() {

@@ -20,6 +20,10 @@ fun stopAllSe() {
     audioManager.handle(AudioCommand.SE_STOP_ALL)
 }
 
+fun stopAllSeExcept(vararg audioEvents: AudioEvent) {
+    audioManager.handle(AudioCommand.SE_STOP_ALL_EXCEPT, listOf(*audioEvents))
+}
+
 fun playBgm(audioEvent: AudioEvent, isLooping: Boolean = true) {
     if (isLooping) {
         audioManager.handle(AudioCommand.BGM_PLAY_LOOP, audioEvent)
