@@ -158,7 +158,7 @@ class BattleField(participants: List<Participant>) {
         return if (destinationSpace < currentIndex) {
             currentIndex - 1 downTo maxOf(destinationSpace, 0)
         } else {
-            currentIndex + 1 until minOf(destinationSpace, BATTLE_FIELD_SIZE)
+            currentIndex + 1..minOf(destinationSpace, BATTLE_FIELD_SIZE)
         }
     }
 
