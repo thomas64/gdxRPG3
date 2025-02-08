@@ -19,13 +19,13 @@ class LootContainer {
             .forEach { it.value.possibleResetSparkle(originalLoot[it.key]!!) }
 
         loot.filter { it.key.startsWith("quest") }
-            .filterNot { it.key == "quest_mother_fairy" }
+            .filterNot { it.key == "quest_mother_fairy" }   // I think this is not needed anymore.
             .forEach { it.value.resetQuest(originalLoot[it.key]!!) }
 
         loot.filterNot { it.key.startsWith("chest") }
             .filterNot { it.key.startsWith("sparkle") }
             .filterNot { it.key.startsWith("quest") }
-            .filter { it.key == "the_road_is_open" }
+            .filter { it.key == "the_road_is_open" }        // I think this is not needed anymore.
             .forEach { it.value.resetConversation(originalLoot[it.key]!!) }
     }
 

@@ -44,6 +44,7 @@ class MapManager : ProfileObserver {
 
     override fun onNotifySaveProfile(profileManager: ProfileManager) {
         profileManager.setProperty("mapTitle", currentMap.mapTitle)
+        profileManager.setProperty("playerLocationAfterBattle", null)
     }
 
     override fun onNotifyLoadProfile(profileManager: ProfileManager) {

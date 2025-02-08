@@ -34,7 +34,7 @@ const val INVALID_PROFILE_VIEW = " [Invalid]"
 class ProfileManager {
 
     private val json = Json()
-    private var saveState = GdxMap<String, Any>()
+    private var saveState = GdxMap<String, Any?>()
     private var currentProfileId: String = ""
     private var currentIndex = -1
 
@@ -59,7 +59,7 @@ class ProfileManager {
         return saveState[key] as T
     }
 
-    fun setProperty(key: String, any: Any) {
+    fun setProperty(key: String, any: Any?) {
         saveState[key] = any
     }
 
@@ -209,9 +209,9 @@ class ProfileManager {
     private fun createSaveStateFrom(
         saveFileContent: Preferences,
         fogOfWarFileContent: Preferences?
-    ): GdxMap<String, Any> {
+    ): GdxMap<String, Any?> {
         val saveStateJsonString = saveFileContent.getString(PROFILE_SAVE_STATE_KEY)
-        val loadedSaveState: GdxMap<String, Any> = json.fromJson(saveStateJsonString)
+        val loadedSaveState: GdxMap<String, Any?> = json.fromJson(saveStateJsonString)
         fogOfWarFileContent
             ?.getString(PROFILE_FOG_OF_WAR_KEY)
             ?.let { loadedSaveState["fogOfWar"] = json.fromJson<FogOfWar>(it) }
