@@ -4,7 +4,7 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject
 import com.badlogic.gdx.math.Vector2
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
-import nl.t64.cot.components.condition.ConditionDatabase
+import nl.t64.cot.components.condition.areAllTrue
 import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.components.loot.Spoil
 import nl.t64.cot.screens.world.entity.*
@@ -33,7 +33,7 @@ class LootLoader(private val currentMap: GameMap) {
     private fun loadSparkles() {
         currentMap.sparkles.forEach {
             val sparkle = gameData.loot.getLoot(it.name)
-            if (!sparkle.isTaken() && ConditionDatabase.isMeetingConditions(sparkle.conditionIds)) {
+            if (!sparkle.isTaken() && sparkle.conditions.areAllTrue()) {
                 loadSparkle(it, sparkle)
             }
         }
@@ -47,7 +47,10 @@ class LootLoader(private val currentMap: GameMap) {
     }
 
     private fun loadSpoil(spoil: Map.Entry<String, Spoil>) {
-        val entity = Entity(spoil.key, InputEmpty(), PhysicsSparkle(spoil.value.loot), GraphicsSparkle(AnimationType.SHORT))
+        val entity = Entity(spoil.key,
+                            InputEmpty(),
+                            PhysicsSparkle(spoil.value.loot),
+                            GraphicsSparkle(AnimationType.SHORT))
         lootList.add(entity)
         brokerManager.actionObservers.addObserver(entity)
         val position = Vector2(spoil.value.x, spoil.value.y)
@@ -55,7 +58,10 @@ class LootLoader(private val currentMap: GameMap) {
     }
 
     private fun loadSparkle(gameMapSparkle: GameMapSparkle, sparkle: Loot) {
-        val entity = Entity(gameMapSparkle.name, InputEmpty(), PhysicsSparkle(sparkle), GraphicsSparkle(gameMapSparkle.animationType))
+        val entity = Entity(gameMapSparkle.name,
+                            InputEmpty(),
+                            PhysicsSparkle(sparkle),
+                            GraphicsSparkle(gameMapSparkle.animationType))
         lootList.add(entity)
         brokerManager.actionObservers.addObserver(entity)
         val position = Vector2(gameMapSparkle.rectangle.x, gameMapSparkle.rectangle.y)

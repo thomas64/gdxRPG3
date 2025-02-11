@@ -15,7 +15,7 @@ class ConversationChoice(
     val nextId: String = DEFAULT_NEXT_ID,
     val command: ConversationCommand = DEFAULT_CONVERSATION_COMMAND,
     @JsonProperty("condition")
-    val conditionIds: List<String> = emptyList()
+    val conditions: List<String> = emptyList()
 ) {
     private lateinit var conversationId: String
     var hasBeenSelectedEarlier: Boolean = false
@@ -37,7 +37,7 @@ class ConversationChoice(
     }
 
     fun isMeetingCondition(): Boolean {
-        return ConditionDatabase.isMeetingConditions(conditionIds, conversationId)
+        return ConditionDatabase.isMeetingConditions(conditions, conversationId)
     }
 
     fun isDefault(): Boolean {
@@ -45,13 +45,13 @@ class ConversationChoice(
     }
 
     private fun isNotMeetingConditionWithDoubleII(): Boolean {
-        return conditionIds.any { it.startsWith(INVERSE_INVISIBLE_PREFIX) }
+        return conditions.any { it.startsWith(INVERSE_INVISIBLE_PREFIX) }
             && !isMeetingCondition()
     }
 
     private fun isMeetingConditionOrHasNoSingleI(): Boolean {
-        return conditionIds.none { it.startsWith(INVERSE_INVISIBLE_PREFIX) }
-            && (isMeetingCondition() || conditionIds.none { it.startsWith(INVISIBLE_PREFIX) })
+        return conditions.none { it.startsWith(INVERSE_INVISIBLE_PREFIX) }
+            && (isMeetingCondition() || conditions.none { it.startsWith(INVISIBLE_PREFIX) })
     }
 
 }

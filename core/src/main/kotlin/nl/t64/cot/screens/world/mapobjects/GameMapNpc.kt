@@ -16,12 +16,12 @@ open class GameMapNpc(rectObject: RectangleMapObject) : GameMapObject(rectObject
     val state: EntityState = createState(rectObject)
     val direction: Direction = createDirection(rectObject)
     val conversation: String = createConversation(rectObject)
-    val conditionIds: List<String> = createConditions(rectObject)
+    val conditions: List<String> = createConditions(rectObject)
     val position: Vector2 get() = Vector2(rectangle.x, rectangle.y)
     val isEnemy: Boolean = createIsEnemy(rectObject)
 
     open fun isMeetingConditions(): Boolean {
-        return ConditionDatabase.isMeetingConditions(conditionIds, conversation)
+        return ConditionDatabase.isMeetingConditions(conditions, conversation)
     }
 
     private fun createState(rectObject: RectangleMapObject): EntityState {

@@ -8,8 +8,8 @@ class Door(
     val type: DoorType = DoorType.SMALL,    // this will become replaced by the correct json value.
     val spriteId: String = "",
     val keyId: String? = null,
-    @JsonProperty(value = "condition")
-    val conditionIds: List<String> = emptyList(),
+    @JsonProperty("condition")
+    val conditions: List<String> = emptyList(),
     val openStartTime: String? = null,
     val openEndTime: String? = null,
     val message: String? = null

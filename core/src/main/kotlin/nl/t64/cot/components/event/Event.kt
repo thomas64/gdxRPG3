@@ -13,8 +13,8 @@ import nl.t64.cot.screens.inventory.messagedialog.MessageDialog
 
 class Event(
     private val type: String = "",
-    @JsonProperty(value = "condition")
-    val conditionIds: List<String> = emptyList(),
+    @JsonProperty("condition")
+    val conditions: List<String> = emptyList(),
     val conversationId: String? = null,
     val entityId: String? = null,
     val text: List<String> = emptyList(),
@@ -38,7 +38,7 @@ class Event(
     }
 
     private fun isMeetingCondition(): Boolean {
-        return ConditionDatabase.isMeetingConditions(conditionIds, conversationId)
+        return ConditionDatabase.isMeetingConditions(conditions, conversationId)
     }
 
     private fun start(stage: Stage?) {

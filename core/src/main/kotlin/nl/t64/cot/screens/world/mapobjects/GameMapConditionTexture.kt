@@ -12,11 +12,11 @@ class GameMapConditionTexture(
     private val texture: TextureMapObject
 ) {
     private val quest: QuestGraph? = texture.name?.let { gameData.quests.getQuestById(it) }
-    private val conditionIds: List<String> = createConditions()
+    private val conditions: List<String> = createConditions()
     private var isVisible: Boolean = false
 
     fun update() {
-        isVisible = ConditionDatabase.isMeetingConditions(conditionIds, quest?.id)
+        isVisible = ConditionDatabase.isMeetingConditions(conditions, quest?.id)
     }
 
     fun render(batch: Batch) {

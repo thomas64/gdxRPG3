@@ -6,6 +6,10 @@ import nl.t64.cot.components.portal.Portal
 import nl.t64.cot.components.quest.QuestState
 
 
+fun List<String>.areAllTrue(): Boolean {
+    return ConditionDatabase.isMeetingConditions(this)
+}
+
 object ConditionDatabase {
 
     private val conditions: Map<String, () -> Boolean> = mapOf(

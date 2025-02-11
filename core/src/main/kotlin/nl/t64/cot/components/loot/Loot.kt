@@ -10,8 +10,8 @@ private const val BONUS_PREFIX = "bonus_"
 
 class Loot(
     var content: MutableMap<String, Int> = mutableMapOf(),
-    @JsonProperty(value = "condition")
-    val conditionIds: List<String> = emptyList(),
+    @JsonProperty("condition")
+    val conditions: List<String> = emptyList(),
     var trapLevel: Int = 0,
     var lockLevel: Int = 0,
     var xp: Int = 0,

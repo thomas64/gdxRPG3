@@ -15,7 +15,7 @@ import nl.t64.cot.subjects.BlockObserver
 class GameMapConditionBlocker(rectObject: RectangleMapObject) : GameMapObject(rectObject.rectangle), BlockObserver {
 
     private val quest: QuestGraph? = rectObject.name?.let { gameData.quests.getQuestById(it) }
-    private val conditionIds: List<String> = createCertainConditions(rectObject)
+    private val conditions: List<String> = createCertainConditions(rectObject)
     private var isActive: Boolean = false
 
     override fun getBlockerFor(boundingBox: Rectangle, state: EntityState): Rectangle? {
@@ -27,7 +27,7 @@ class GameMapConditionBlocker(rectObject: RectangleMapObject) : GameMapObject(re
     }
 
     fun update() {
-        val isMeetingConditions = ConditionDatabase.isMeetingConditions(conditionIds, quest?.id)
+        val isMeetingConditions = ConditionDatabase.isMeetingConditions(conditions, quest?.id)
         checkBlocker(isMeetingConditions)
     }
 
