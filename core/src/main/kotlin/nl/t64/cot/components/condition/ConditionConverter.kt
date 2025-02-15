@@ -72,6 +72,11 @@ object ConditionConverter {
         }
     }
 
+    fun isMeetingHeroCondition(conditionId: String): Boolean {
+        val heroId: String = conditionId.substringAfter("_hero_")
+        return gameData.party.contains(heroId)
+    }
+
     private fun getQuestGraph(conditionId: String, questId: String?): QuestGraph {
         return when {
             conditionId.contains("_q_this") -> gameData.quests.getQuestById(questId!!)
