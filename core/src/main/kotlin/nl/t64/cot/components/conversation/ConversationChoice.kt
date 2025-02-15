@@ -2,6 +2,7 @@ package nl.t64.cot.components.conversation
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import nl.t64.cot.components.condition.ConditionDatabase
+import nl.t64.cot.constants.Constant
 
 
 private const val DEFAULT_ANSWER_TEXT = "->"
@@ -15,7 +16,8 @@ class ConversationChoice(
     val nextId: String = DEFAULT_NEXT_ID,
     val command: ConversationCommand = DEFAULT_CONVERSATION_COMMAND,
     @JsonProperty("condition")
-    val conditions: List<String> = emptyList()
+    val conditions: List<String> = emptyList(),
+    private val orElseId: String = ""
 ) {
     private lateinit var conversationId: String
     var hasBeenSelectedEarlier: Boolean = false
@@ -42,6 +44,10 @@ class ConversationChoice(
 
     fun isDefault(): Boolean {
         return text == DEFAULT_ANSWER_TEXT
+    }
+
+    fun getAlternativeNextId(): String {
+        return orElseId.ifEmpty { Constant.PHRASE_ID_NO_CONDITIONS }
     }
 
     private fun isNotMeetingConditionWithDoubleII(): Boolean {

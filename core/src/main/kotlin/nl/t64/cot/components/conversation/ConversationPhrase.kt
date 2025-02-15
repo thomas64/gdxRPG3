@@ -1,7 +1,5 @@
 package nl.t64.cot.components.conversation
 
-import nl.t64.cot.constants.Constant
-
 
 class ConversationPhrase(
     val face: String = "",
@@ -19,8 +17,8 @@ class ConversationPhrase(
     fun getChoices(currentPhraseId: String): List<ConversationChoice> {
         return if (choices.isEmpty()) {
             createArrowChoiceThatPointsToNextPhraseId(currentPhraseId)
-        } else if (choices.none { it.isMeetingCondition() }) {
-            createArrowChoiceThatPointsToNoConditionsPhraseId()
+        } else if (choices.size == 1 && !choices[0].isMeetingCondition()) {
+            createArrowChoiceThatPointsToAlternativeNextIdFrom(choices[0])
         } else {
             getVisibleChoices()
         }
@@ -32,11 +30,14 @@ class ConversationPhrase(
         return listOf(choice)
     }
 
-    private fun createArrowChoiceThatPointsToNoConditionsPhraseId(): List<ConversationChoice> {
-        val choice = ConversationChoice(nextId = Constant.PHRASE_ID_NO_CONDITIONS).apply { initId(conversationId) }
-        return listOf(choice)
+    private fun createArrowChoiceThatPointsToAlternativeNextIdFrom(originalChoice: ConversationChoice): List<ConversationChoice> {
+        val nextId: String = originalChoice.getAlternativeNextId()
+        val newChoice = ConversationChoice(nextId = nextId).apply { initId(conversationId) }
+        return listOf(newChoice)
     }
 
-    private fun getVisibleChoices(): List<ConversationChoice> = choices.filter { it.isVisible() }
+    private fun getVisibleChoices(): List<ConversationChoice> {
+        return choices.filter { it.isVisible() }
+    }
 
 }
