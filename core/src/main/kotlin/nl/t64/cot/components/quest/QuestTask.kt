@@ -38,6 +38,7 @@ class QuestTask(
     }
 
     fun possibleReset() {
+        isFailed = false
         if (isComplete && isResettable()) {
             isReset = true
             isComplete = false

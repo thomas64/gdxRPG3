@@ -8,10 +8,10 @@ class QuestContainer {
     private val quests: Map<String, QuestGraph> = ConfigDataLoader.createQuests()
 
     fun getAllKnownQuestsForVisual(): Array<QuestGraph> = quests.values
-        .filter { !it.isHidden }
-        .filter { !it.isSubQuest }
+        .filterNot { it.isHidden }
+        .filterNot { it.isSubQuest }
         .filter { it.isOneOfBothStatesEqualOrHigherThan(QuestState.KNOWN) }
-        .sortedWith(compareBy({ it.isFailed }, { it.resetState }, { it.currentState }, { it.id }))
+        .sortedWith(compareBy({ it.resetState }, { it.isFailed }, { it.currentState }, { it.id }))
         .toTypedArray()
 
     fun reset() {
@@ -34,7 +34,18 @@ class QuestContainer {
         quests.values.forEach { it.possibleSetDeliverMessageTaskComplete(conversationId) }
     }
 
-    fun contains(questId: String): Boolean = quests.containsKey(questId)
-    fun getQuestById(questId: String): QuestGraph = quests[questId]!!
+    fun contains(questId: String): Boolean {
+        return quests.containsKey(questId)
+    }
+
+    fun getQuestById(questId: String): QuestGraph {
+        return quests[questId]!!
+    }
+
+    fun getParentsOf(questId: String): List<QuestGraph> {
+        return quests.values
+            .filterNot { it.isSubQuest }
+            .filter { it.linkedWith.contains(questId) }
+    }
 
 }

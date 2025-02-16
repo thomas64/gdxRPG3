@@ -25,7 +25,7 @@ data class QuestGraph(
 
     override fun toString(): String {
         return when {
-            isFailed -> "x    $title"
+            isFailed -> "[FIREBRICK]x    $title"
             currentState == QuestState.FINISHED -> "[GRAY]v    $title"
             currentState == QuestState.UNCLAIMED -> "o    $title"
             resetState == QuestState.FINISHED -> "[GRAY]r    $title"
@@ -33,8 +33,9 @@ data class QuestGraph(
         }
     }
 
-    fun isOneOfBothStatesEqualOrHigherThan(questState: QuestState): Boolean =
-        resetState.isEqualOrHigherThan(questState) || currentState.isEqualOrHigherThan(questState)
+    fun isOneOfBothStatesEqualOrHigherThan(questState: QuestState): Boolean {
+        return resetState.isEqualOrHigherThan(questState) || currentState.isEqualOrHigherThan(questState)
+    }
 
     fun getAllQuestTasksForVisual(): Array<QuestTask> {
         return (tasks + getTasksOfAcceptedSubQuests())
@@ -62,6 +63,7 @@ data class QuestGraph(
         if (resetState.isLowerThan(currentState)) {
             resetState = currentState
         }
+        isFailed = false
         currentState = QuestState.UNKNOWN
         tasks.values.forEach { it.possibleReset() }
     }
@@ -213,6 +215,18 @@ data class QuestGraph(
         }
     }
 
+    fun setTaskFailed(taskId: String) {
+        val questTask = tasks[taskId]!!
+        questTask.isFailed = true
+        if (isOneOfBothStatesEqualOrHigherThan(QuestState.ACCEPTED)) {
+            showMessageTooltipQuestFailed()
+            isFailed = true
+            if (isSubQuest) {
+                gameData.quests.getParentsOf(id).forEach { it.isFailed = true }
+            }
+        }
+    }
+
     private fun unhideTaskWithLinkedTask(questTask: QuestTask) {
         questTask.isHidden = false
         handleLinkedTasksOf(questTask)
@@ -314,7 +328,11 @@ data class QuestGraph(
     }
 
     private fun showMessageTooltipQuestFailed() {
-        worldScreen.showMessageTooltip("Quest failed:" + System.lineSeparator() + title)
+        if (!isFailed && isOneOfBothStatesEqualOrHigherThan(QuestState.KNOWN)) {
+            stopAllSe()
+            playSe(AudioEvent.SE_QUEST_FAIL)
+            worldScreen.showMessageTooltip("Quest failed:" + System.lineSeparator() + title)
+        }
     }
 
 }

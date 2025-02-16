@@ -59,8 +59,7 @@ class GraphicsSparkle(animationType: AnimationType) : GraphicsComponent() {
                                                              textures[3][1],
                                                              textures[3][2])
         val firstFiveEmptyFrames = 5
-        val randomIndexToPutSparkle: Int = Random(hashCode()).nextInt(firstFiveEmptyFrames,
-                                                                                      thirtyEmptyFrames.size + 1)
+        val randomIndexToPutSparkle: Int = Random(hashCode()).nextInt(firstFiveEmptyFrames, thirtyEmptyFrames.size + 1)
         thirtyEmptyFrames.addAll(randomIndexToPutSparkle, framesOfOneSparkle)
         val allTheFramesIncludingOneRandomPlacedSparkle: Array<TextureRegion> = Array(thirtyEmptyFrames.toTypedArray())
 
