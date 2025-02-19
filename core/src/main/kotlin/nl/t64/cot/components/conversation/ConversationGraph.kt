@@ -1,6 +1,7 @@
 package nl.t64.cot.components.conversation
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import nl.t64.cot.components.condition.areAllTrue
 
 
 private const val DEFAULT_STARTING_PHRASE_ID = "1"
@@ -9,7 +10,10 @@ data class ConversationGraph(
     private val id: String = "",
     @JsonProperty("name")
     val npcName: String = "",
-    val phrases: Map<String, ConversationPhrase> = emptyMap()
+    val phrases: Map<String, ConversationPhrase> = emptyMap(),
+    @JsonProperty("condition")
+    private val conditions: List<String>?,
+    private val startAt: String?
 ) {
     var currentPhraseId: String = DEFAULT_STARTING_PHRASE_ID
 
@@ -19,6 +23,12 @@ data class ConversationGraph(
 
     fun initId() {
         phrases.forEach { it.value.initId(id) }
+    }
+
+    fun possibleSetAlternateStartingPhraseId() {
+        if (currentPhraseId == DEFAULT_STARTING_PHRASE_ID) {
+            currentPhraseId = conditions?.takeIf { it.areAllTrue() }?.let { startAt } ?: DEFAULT_STARTING_PHRASE_ID
+        }
     }
 
     fun getCurrentFace(): String {

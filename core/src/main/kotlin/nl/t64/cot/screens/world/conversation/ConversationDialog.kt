@@ -101,6 +101,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         conversationId = newConversationId
         faceId = entityId
         graph = gameData.conversations.getConversationById(conversationId)
+        graph.possibleSetAlternateStartingPhraseId()
         fillDialogForConversation()
         playSe(AudioEvent.SE_CONVERSATION_START)
         populateDialog(graph.currentPhraseId)
