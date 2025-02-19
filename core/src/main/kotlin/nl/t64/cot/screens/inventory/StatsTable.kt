@@ -133,12 +133,17 @@ internal class StatsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
         val statTitle = Label(statItem.name, createLabelStyle())
         table.add(statTitle)
         val upgrade = Label("^", LabelStyle(font, Color.PURPLE))
-        val xpCost: Int = statItem.getXpCostForNextRank()
-        if (xpCost > 0 && selectedHero.xpPoints >= xpCost) table.add(upgrade) else table.add("")
+        if (statItem.canBeUpgraded()) table.add(upgrade) else table.add("")
         table.add(statItem.rank.toString())
         val totalExtra = selectedHero.getExtraStatForVisualOf(statItem)
         addExtraToTable(totalExtra)
         super.possibleSetSelected(index, statTitle, statItem)
+    }
+
+    private fun StatItem.canBeUpgraded(): Boolean {
+        if (selectedHero.isDead) return false
+        val xpCost: Int = this.getXpCostForNextRank()
+        return xpCost > 0 && selectedHero.xpPoints >= xpCost
     }
 
     private fun fillEmptyRow() {
@@ -177,8 +182,12 @@ internal class StatsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
         }
     }
 
-    private fun createLabelStyle() = LabelStyle(font, Color.BLACK)
+    private fun createLabelStyle(): LabelStyle {
+        return LabelStyle(font, Color.BLACK)
+    }
 
-    private fun isCalcsSelected(): Boolean = selectedIndex >= FIRST_INDEX_OF_CALCS
+    private fun isCalcsSelected(): Boolean {
+        return selectedIndex >= FIRST_INDEX_OF_CALCS
+    }
 
 }

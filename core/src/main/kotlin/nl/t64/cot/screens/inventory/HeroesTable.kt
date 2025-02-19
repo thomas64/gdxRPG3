@@ -64,7 +64,7 @@ class HeroesTable {
 
     private fun addFaceImageTo(stack: Stack, hero: HeroItem) {
         val faceImage = Utils.getFaceImage(hero.id)
-        if (!hero.isAlive) faceImage.color = Color.DARK_GRAY
+        if (hero.isDead) faceImage.color = Color.DARK_GRAY
         stack.add(faceImage)
     }
 

@@ -29,7 +29,7 @@ class TurnManager(
     }
 
     private fun removeKilledParticipants() {
-        participants.removeIf { !it.character.isAlive }
+        participants.removeIf { it.character.isDead }
     }
 
     private fun increaseAllTurnCounters() {

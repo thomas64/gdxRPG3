@@ -28,6 +28,7 @@ class StatUpgrader private constructor(
 
     private fun upgrade() {
         when {
+            selectedHero.isDead -> showError("${selectedHero.name} is deceased.")
             xpCost == 0 -> showError("You cannot train $statName any further.")
             !hasEnoughXp -> showError("You need $xpCost XP Points to train $statName.")
             else -> showConfirmDialog()

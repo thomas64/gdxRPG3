@@ -25,6 +25,7 @@ abstract class Character(
     protected val inventory: EquipContainer = EquipContainer(),
     var isAlive: Boolean = true
 ) {
+    val isDead: Boolean get() = !isAlive
     open val maximumHp: Int get() = stats.maximumHp
     var currentHp: Int = 0
     val maximumSp: Int get() = stats.maximumSp

@@ -202,7 +202,7 @@ class HeroItem(
     }
 
     private fun createMessageIfHeroIsDead(): String? {
-        return if (!isAlive) "$name is deceased." else null
+        return if (isDead) "$name is deceased." else null
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

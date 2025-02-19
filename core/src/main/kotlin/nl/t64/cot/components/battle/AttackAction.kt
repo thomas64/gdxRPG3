@@ -100,7 +100,7 @@ class AttackAction(
             messages.add("${weapon.name} broke!")
             attacker.clearInventoryItemFor(InventoryGroup.WEAPON)
         }
-        if (!target.isAlive) {
+        if (target.isDead) {
             messages.add("${target.name} is defeated.")
         }
     }

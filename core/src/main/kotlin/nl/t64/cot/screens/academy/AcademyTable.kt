@@ -73,18 +73,23 @@ internal class AcademyTable(academyId: String, tooltip: AcademyTooltip) : BaseTa
     }
 
     private fun createColorsFrom(trainerSkill: SkillItem): Pair<Color, Color> {
+        if (canBeUpgradedBy(trainerSkill)) {
+            return Color.WHITE to Color.BLACK
+        } else {
+            return Color.BLACK to Color.LIGHT_GRAY
+        }
+    }
+
+    private fun canBeUpgradedBy(trainerSkill: SkillItem): Boolean {
         val selectedHero: HeroItem = InventoryUtils.getSelectedHero()
         val heroSkill: SkillItem = selectedHero.getSkillById(trainerSkill.id)
         val heroScholarSkill: Int = selectedHero.getCalculatedTotalSkillOf(SkillItemId.SCHOLAR)
         val xpCost: Int = heroSkill.getXpCostForNextRank(trainerSkill, heroScholarSkill)
         val goldCost: Int = heroSkill.getGoldCostForNextRank(trainerSkill)
 
-        if (xpCost > 0 && selectedHero.hasEnoughXpFor(xpCost) &&
-            goldCost > 0 && gameData.inventory.hasEnoughOfItem("gold", goldCost)) {
-            return Color.WHITE to Color.BLACK
-        } else {
-            return Color.BLACK to Color.LIGHT_GRAY
-        }
+        return selectedHero.isAlive
+            && xpCost > 0 && selectedHero.hasEnoughXpFor(xpCost)
+            && goldCost > 0 && gameData.inventory.hasEnoughOfItem("gold", goldCost)
     }
 
 }

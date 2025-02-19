@@ -177,7 +177,7 @@ class BattleScreen : Screen {
             return
         }
 
-        if (!gameData.party.getPlayer().isAlive) {
+        if (gameData.party.getPlayer().isDead) {
             gameOver()
             return
         }

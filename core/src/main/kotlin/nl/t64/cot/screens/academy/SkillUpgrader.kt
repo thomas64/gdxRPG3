@@ -36,6 +36,7 @@ class SkillUpgrader private constructor(
 
     private fun upgrade() {
         when {
+            selectedHero.isDead -> showError("${selectedHero.name} is deceased.")
             xpCost == -2 -> showError("I cannot train you in $skillName any further.")
             xpCost == -1 -> showError("You cannot train $skillName.")
             xpCost == 0 -> showError("You cannot train $skillName any further.")

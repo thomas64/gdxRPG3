@@ -69,7 +69,7 @@ class BattleScreenBuilder {
         val currentAp: Int = participants.firstOrNull { it.character == hero }?.currentAP ?: 0
         val maximumAP: Int = hero.getCalculatedActionPoints()
 
-        add(Utils.getFaceImage(hero.id).apply { if (!hero.isAlive) color = Color.DARK_GRAY })
+        add(Utils.getFaceImage(hero.id).apply { if (hero.isDead) color = Color.DARK_GRAY })
         add(Table(createSkin()).apply {
             defaults().left().height(30f)
             add(hero.name).width(150f).colspan(2).padLeft(10f).padRight(10f).row()
@@ -104,7 +104,7 @@ class BattleScreenBuilder {
             background = transparent
         })
         val faceImage = Utils.getFaceImage(enemy.id, isFlipped = false)
-            .apply { if (!enemy.isAlive) color = Color.DARK_GRAY }
+            .apply { if (enemy.isDead) color = Color.DARK_GRAY }
         add(faceImage).row()
     }
 
