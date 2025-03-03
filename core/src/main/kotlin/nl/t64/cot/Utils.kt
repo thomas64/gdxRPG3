@@ -180,7 +180,12 @@ object Utils {
         val splitOfEight = getSplitTexture(path, Constant.FACE_SIZE.toInt())
         val characterFace = splitOfEight[row][col]
         if (isFlipped) characterFace.flip(true, false)
-        return Image(characterFace)
+        val image = Image(characterFace)
+        when {
+            spriteId.endsWith("_black") -> image.color = Color.BLACK
+            spriteId.endsWith("_transp") -> image.color = Color(1f, 1f, 1f, 0.25f)
+        }
+        return image
     }
 
     private fun getSpriteConfigFrom(spriteId: String): SpriteConfig {

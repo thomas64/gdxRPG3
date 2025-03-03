@@ -25,9 +25,6 @@ internal class SummaryTable {
     fun populateSummary(quest: QuestGraph) {
         summary.setText(quest.summary)
         container.cells.peek().setActor<Image>(Utils.getFaceImage(quest.entityId, isFlipped = false))
-        if (quest.entityId.endsWith("_black")) {
-            container.cells.peek().actor.color = Color.BLACK
-        }
     }
 
     fun isEmpty(): Boolean {
