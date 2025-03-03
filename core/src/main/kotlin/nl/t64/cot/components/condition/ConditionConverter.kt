@@ -17,6 +17,10 @@ object ConditionConverter {
         return isQuestInState(conditionId, questState, conditionState)
     }
 
+    fun isQuestFailed(conditionId: String, questId: String?): Boolean {
+        return getQuestGraph(conditionId, questId).isFailed
+    }
+
     fun isMeetingItemInventoryCondition(conditionId: String): Boolean {
         val requestedAmount: Int = getTaskIdOrAmount("_n_", conditionId)
         val inventoryItemId: String = conditionId.substringAfter("_item_inv_")
@@ -80,7 +84,9 @@ object ConditionConverter {
     private fun getQuestGraph(conditionId: String, questId: String?): QuestGraph {
         return when {
             conditionId.contains("_q_this") -> gameData.quests.getQuestById(questId!!)
+            conditionId.contains("_qf_this") -> gameData.quests.getQuestById(questId!!)
             conditionId.contains("_q_") -> gameData.quests.getQuestById(conditionId.substringAfter("_q_"))
+            conditionId.contains("_qf_") -> gameData.quests.getQuestById(conditionId.substringAfter("_qf_"))
             else -> throw IllegalArgumentException("No defined quest found.")
         }
     }
