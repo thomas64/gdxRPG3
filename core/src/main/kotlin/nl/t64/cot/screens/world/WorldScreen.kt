@@ -138,7 +138,11 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     fun startCutscene(screenType: ScreenType, fadeDuration: Float = 0f) {
         player.resetInput()
         render(0f)
-        val actionAfterFade = { screenManager.setScreen(screenType); stopAllBgm() }
+        val actionAfterFade = {
+            player.resetInput()
+            screenManager.setScreen(screenType)
+            stopAllBgm()
+        }
         fadeOut(duration = fadeDuration,
                 transitionPurpose = TransitionPurpose.MAP_CHANGE,
                 actionAfterFade = actionAfterFade)

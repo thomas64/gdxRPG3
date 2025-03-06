@@ -107,7 +107,7 @@
         "linkedWith": ["19"]
       },
       "19": {
-        "taskPhrase": "Let the tree be dragged out of the way before 17:00.",
+        "taskPhrase": "Let the tree be dragged out of the way before Lennor is finished by himself at 17:00.",
         "type"      : "FREE"
       }
     }

@@ -46,6 +46,7 @@ class Loot(
 
     fun resetConversation(originalLoot: Loot) {
         content = originalLoot.content
+        xp = originalLoot.xp
     }
 
     fun isEmpty(): Boolean {

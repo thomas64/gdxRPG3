@@ -225,8 +225,10 @@ class SceneArdorKillingGrace : CutsceneScreen() {
     }
 
     override fun exitScreen() {
-        endCutsceneAnd { screenManager.setScreen(nextScreen!!) }
-        nextScreen = null
+        endCutsceneAnd {
+            screenManager.setScreen(nextScreen!!)
+            nextScreen = null
+        }
     }
 
 }

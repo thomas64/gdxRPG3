@@ -25,7 +25,7 @@ class LootContainer {
         loot.filterNot { it.key.startsWith("chest") }
             .filterNot { it.key.startsWith("sparkle") }
             .filterNot { it.key.startsWith("quest") }
-            .filter { it.key == "the_road_is_open" }        // I think this is not needed anymore.
+            // .filter { it.key == "the_road_is_open" }        // I think this is not needed anymore.
             .forEach { it.value.resetConversation(originalLoot[it.key]!!) }
     }
 

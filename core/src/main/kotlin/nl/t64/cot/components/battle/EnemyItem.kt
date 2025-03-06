@@ -64,7 +64,11 @@ class EnemyItem(
     }
 
     private fun Map.Entry<String, Int>.getDropAmount(): Int {
-        return if (key == "gold") Random.nextInt(1, getMaxGoldLoot()) else 1
+        return if (key == "gold") createRandomAmount() else 1
+    }
+
+    private fun createRandomAmount(): Int {
+        return Random.nextInt(1, getMaxGoldLoot())
     }
 
     private fun getMaxGoldLoot(): Int {

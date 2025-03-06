@@ -182,9 +182,8 @@ class SceneSantinoMurdered : CutsceneScreen() {
 
 
     override fun exitScreen() {
-        endCutsceneAndOpenMapAnd("lastdenn", "scene_santino_murdered") {
-            gameData.clock.setTimeOfDay("14:00")
-        }
+        gameData.clock.setTimeOfDay("14:00")
+        endCutsceneAndOpenMap("lastdenn", "scene_santino_murdered")
     }
 
 }

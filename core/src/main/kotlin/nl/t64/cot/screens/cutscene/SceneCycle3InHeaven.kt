@@ -4,6 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.Action
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import nl.t64.cot.Utils
+import nl.t64.cot.Utils.gameData
 import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.loot.ReceiveCutsceneScreen
@@ -62,6 +63,8 @@ class SceneCycle3InHeaven : CutsceneScreen() {
     }
 
     override fun exitScreen() {
+        val mozes = gameData.party.getPlayer()
+        mozes.revive()
         val crystal = Loot.createSingleItem("crystal_of_time")
         endCutsceneAnd { ReceiveCutsceneScreen.load(crystal, ScreenType.SCENE_USE_CRYSTAL_OF_TIME) }
     }

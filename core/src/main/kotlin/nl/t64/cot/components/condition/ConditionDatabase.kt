@@ -31,6 +31,7 @@ object ConditionDatabase {
         "!black_asked_four"         to { !blackAskedFour },
         "black_asked_four"          to { blackAskedFour },
         "alone_in_party"            to { isAloneInParty },
+        "!alone_in_party"           to { !isAloneInParty },
         "fairy_portal_active"       to { areBothPortalsActive },
         "i_!fairy_portal_active"    to { isPortalFairyInactiveAndPortalHoneywoodActive },
         "is_specific_time"          to { isBlackCurrentlyNotOpeningHisDoor },
