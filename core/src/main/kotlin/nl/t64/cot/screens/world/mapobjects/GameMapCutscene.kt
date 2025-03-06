@@ -17,7 +17,6 @@ class GameMapCutscene(rectObject: RectangleMapObject) : GameMapObject(rectObject
     private val cutsceneId: String = rectObject.name
     private val conditions: List<String> = createConditions(rectObject)
     private val mustContinueBgm: Boolean = rectObject.propertyOrNull<Boolean>("mustContinueBgm") ?: false
-    private var hasStartedTemp: Boolean = false
 
     init {
         brokerManager.collisionObservers.addObserver(this)
@@ -31,9 +30,8 @@ class GameMapCutscene(rectObject: RectangleMapObject) : GameMapObject(rectObject
 
     private fun possibleStartCutscene() {
         val cutscenes = gameData.cutscenes
-        if (!cutscenes.isPlayed(cutsceneId) || (cutscenes.isRepeatable(cutsceneId) && !hasStartedTemp)) {
+        if (!cutscenes.isPlayed(cutsceneId)) {
             cutscenes.setPlayed(cutsceneId)
-            hasStartedTemp = true
             val cutsceneType = ScreenType.valueOf(cutsceneId.uppercase())
             if (mustContinueBgm) {
                 worldScreen.startCutsceneWithoutBgmFading(cutsceneType)

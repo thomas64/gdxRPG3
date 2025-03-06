@@ -1,5 +1,5 @@
 {
-  "lennor_on_the_way"      : {
+  "lennor_on_the_way"              : {
     "name"   : "Lennor",
     "phrases": {
       "1" : {"text": ["Hey Mozes, I'm on my way to Honeywood Farm. A large tree has fallen on the road this morning. I've been asked to remove it."]},
@@ -20,7 +20,7 @@
       "20": {"text": ["I don't know yet. I haven't been there. I need to see for myself first."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "lennor_and_johanna_meet": {
+  "lennor_and_johanna_meet"        : {
     "phrases": {
       "1": {"face": "man13", "name": "Lennor", "text": ["Hey Mrs. Johanna! How are you today?"]},
       "2": {"face": "oldwoman01", "name": "Mrs. Johanna", "text": ["Lennor, my dear, it's a beautiful morning, isn't it?"]},
@@ -30,7 +30,7 @@
       "6": {"face": "man13", "name": "Lennor", "text": ["I hope so too. I'll do my best."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "quest_helping_horse"    : {
+  "quest_helping_horse"            : {
     "name"   : "Lennor",
     "phrases": {
       "1"  : {"text": ["Hey Mozes, you can't go to Honeywood Farm at the moment. A large tree has fallen on the road this morning. I'm busy removing it, but I think it'll take me until 17:00."]},
@@ -78,13 +78,13 @@
       "101": {"text": ["Thanks for your help, Mozes. I could not have removed the tree so soon without you."], "choices": [{"command": "EXIT", "nextId": "101"}]}
     }
   },
-  "lennor_is_finished"     : {
+  "lennor_is_finished"             : {
     "name"   : "Lennor",
     "phrases": {
       "1": {"text": ["*Phew* It is finally done. The tree is gone."], "choices": [{"command": "FADE_TO_BLACK_17"}]}
     }
   },
-  "the_road_is_open"       : {
+  "the_road_is_open"               : {
     "name"   : "Lennor",
     "phrases": {
       "1": {
@@ -105,29 +105,81 @@
       "6": {"text": ["It took me a while, but the road to Honeywood Farm is finally clear."], "choices": [{"command": "EXIT", "nextId": "6"}]}
     }
   },
-  "to_honeywood_farm"      : {
+  "to_honeywood_farm"              : {
     "name"   : "Mozes",
     "phrases": {
       "1": {"text": ["Finally! On to Honeywood Farm!"], "choices": [{"command": "AUTO_SAVE"}]}
     }
   },
-  "luana_join"             : {
+  "mr_isembert_before_10"          : {
+    "name"   : "Mr. Isembert",
+    "phrases": {
+      "1": {"text": ["Did you know that Honeywood Farm is the oldest farm in the village? It's been in our family for generations."]},
+      "2": {"text": ["It's also the only farm, so it's not like we have any competition."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "mr_isembert_after_11_after_loss": {
+    "name"     : "Mr. Isembert",
+    "condition": ["_hero_luana"], "startAt": "5",
+    "phrases"  : {
+      "1": {"text": ["It's terrible! They killed Luana and took her body! Evdos knows why!"]},
+      "2": {"text": ["They also took my horses! My horses! My livelihood! I don't know what to do!"], "choices": [{"nextId": "6"}]},
+      "5": {"text": ["It's terrible! They took my horses! My horses! My livelihood! I don't know what to do!"]},
+      "6": {"text": ["This is the end of the oldest farm in the village..."]},
+      "7": {"text": ["It's been in our family for generations..."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "mr_isembert_after_11_after_win" : {
+    "name"   : "Mr. Isembert",
+    "phrases": {
+      "1"   : {"text": ["Thank you, Mozes! You saved my farm!"], "choices": [{"command": "RECEIVE_XP", "nextId": "2"}]},
+      "2"   : {
+        "text": ["You saved my horses! My livelihood! I don't know what to say!"], "choices": [
+          {"condition": ["_hero_luana"], "nextId": "3", "orElseId": "4"}
+        ]
+      },
+      "3"   : {"face": "luana", "name": "luana", "text": ["(I helped out too, you know...)"]},
+      "4"   : {"face": "oldman02", "name": "Mr. Isembert", "text": ["You're a hero! You saved the oldest farm in the village!"]},
+      "5"   : {"text": ["It will remain in our family for generations!"], "choices": [{"command": "RECEIVE_ITEM"}]},
+      "1199": {"text": ["Thank you, Mozes! You saved my farm!"], "choices": [{"nextId": "2"}]},
+      "1200": {"text": ["I shall name all my horses after you!"], "choices": [{"command": "EXIT", "nextId": "1200"}]}
+    }
+  },
+  "miriel_before_10"               : {
+    "name"   : "Miriel",
+    "phrases": {
+      "1": {"text": ["My father is getting old. I will inherit the farm one day. I need to get myself a husband soon. I can't run this farm alone."]},
+      "2": {"text": ["Oops! Did I say that out loud?"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "miriel_after_11_after_loss"     : {
+    "name"   : "Miriel",
+    "phrases": {
+      "1": {"text": ["I'm so scared! What if they come back? What if they take me too?"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "miriel_after_11_after_win"      : {
+    "name"   : "Miriel",
+    "phrases": {
+      "1": {"text": ["Thank you so much! You saved my father's farm!"]},
+      "2": {"text": ["Mozes, have you ever thought about life on a farm?"]},
+      "3": {"text": ["Wouldn't you be happy here...?"]},
+      "4": {"text": ["With me...?"]},
+      "5": {"text": ["As my husband?"]},
+      "6": {"face": "mozes", "name": "Mozes", "text": [". . ."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "honeywood_farm_back_door"       : {
+    "name"   : "Miriel",
+    "phrases": {
+      "1": {"text": ["Please don't go through the back door by yourself without permission. It's private property."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "quest_luana_before_10"          : {
     "name"   : "Luana",
     "phrases": {
-      "1" : {
-        "text": ["Hi Mozes! Missing conversation 1."], "choices": [
-          {"condition": ["i_time_after_10:30"], "nextId": "20"},
-          {"condition": ["i_time_before_10:30"], "nextId": "2"}
-        ]
-      },
+      "1" : {"text": ["Hi Mozes! What's bothering you? You seem troubled."]},
       "2" : {
-        "text": ["Missing conversation 2."], "choices": [
-          {"condition": ["i_rc_==_a_q_quest_honeywood_elder"], "nextId": "3"},
-          {"condition": ["i_rc_===_u_q_quest_honeywood_elder"], "command": "EXIT"}
-        ]
-      },
-      "3" : {"text": ["What's bothering you? You seem troubled."]},
-      "4" : {
         "choices": [
           {"text": "*Explain everything that's happened and ask her to join you.*", "nextId": "6"},
           {"text": "*Say it's nothing. Take your leave.*", "command": "EXIT"}
@@ -140,61 +192,142 @@
       "10": {"text": ["We've been friends since childhood, always adventuring together. Do you really think I'd leave you hanging?"]},
       "11": {"text": ["Who will be there to protect you? You need protection... {WAIT=0.5}From me! You know that, right?"]},
       "12": {"text": ["Alright, here's the deal: You're taking me with you, and maybe, just maybe, I'll forgive you for doubting my adventurous spirit."]},
-      "13": {"text": ["Now we're talking! You are so not gonna regret this."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "14"}]},
-      "14": {"text": ["Let's go!"], "choices": [{"command": "HERO_JOIN"}]},
-      "20": {"text": ["It's too late now, Mozes. If only you were here earlier. You must arrive here before 10:30 to get me to join you."], "choices": [{"command": "EXIT"}]}
+      "13": {"face": "mozes", "name": "Mozes", "text": ["Sure..."]},
+      "14": {"face": "luana", "name": "Luana", "text": ["Now we're talking! You are so not gonna regret this."]},
+      "15": {"text": ["But first, I need to finish my chores here for Mr. Isembert. I promised to help him out today."], "choices": [{"command": "ACCEPT_QUEST", "nextId": "16"}]},
+      "16": {"text": ["I'll be done by 10:00. Come back then, and not one minute later!"], "choices": [{"command": "AUTO_SAVE", "nextId": "20"}]},
+      "20": {"text": ["Mozes, what did I tell you?! I won't be done with my chores until 10:00. Come back then, and not one minute later!"], "choices": [{"command": "EXIT", "nextId": "20"}]}
     }
   },
-  "stable_horse_1"         : {
+  "luana_joins_party"              : {
+    "name"     : "Luana",
+    "condition": ["_c_!=_a_q_quest_luana_before_10"], "startAt": "10",
+    "phrases"  : {
+      "1" : {"text": ["Mozes, you're late!"]},
+      "2" : {"text": ["But I'm ready to go."]},
+      "3" : {"text": ["Let's do this! It's time for adventure!"], "choices": [{"command": "EXIT"}]},
+      "10": {"text": ["Hi Mozes! What's bothering you? You seem troubled."]},
+      "11": {
+        "choices": [
+          {"text": "*Explain everything that's happened and ask her to join you.*", "nextId": "21"},
+          {"text": "*Say it's nothing. Take your leave.*", "nextId": "20"}
+        ]
+      },
+      "20": {"text": ["No, no, no, wait! You can't just leave me hanging like that! I don't believe you. I know you far too well. Tell me what's going on."], "choices": [{"nextId": "11"}]},
+      "21": {"text": ["{SPEED=0.2} . . . . ."]},
+      "22": {"text": ["Wait! You want me to come with you, travel through time, risk my life to stop an evil wizard, and rescue Grace?!"]},
+      "23": {"text": ["Hell yeah! You're going on this HUGE adventure with all the big stuff, slaying monsters, taking loot, and and and..."]},
+      "24": {"text": ["Why wouldn't I want to go with you? What's wrong with you?!"]},
+      "25": {"text": ["We've been friends since childhood, always adventuring together. Do you really think I'd leave you hanging?"]},
+      "26": {"text": ["Who will be there to protect you? You need protection... {WAIT=0.5}From me! You know that, right?"]},
+      "27": {"text": ["Alright, here's the deal: You're taking me with you, and maybe, just maybe, I'll forgive you for doubting my adventurous spirit."]},
+      "28": {"face": "mozes", "name": "Mozes", "text": ["Sure..."]},
+      "29": {"face": "luana", "name": "Luana", "text": ["Now we're talking! You are so not gonna regret this."]},
+      "30": {"text": ["I'm done here with my chores for Mr. Isembert. Let's do this! It's time for adventure!"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "farm_orc_calls_others"          : {
+    "name"   : "Orc Raider",
+    "phrases": {
+      "1": {"text": ["Come here, maggots! Get those horses!"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "farm_orcs_are_leaving"          : {
+    "name"   : "Orc Raider",
+    "phrases": {
+      "1": {"text": ["Alright maggots! We got what we came for. Let's go!"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "farm_battle_after_win"          : {
+    "name"   : "Luana",
+    "phrases": {
+      "1": {"text": ["We did it! High five!"]},
+      "2": {"text": ["Yeah! We saved the farm from those raiders! That was awesome! I feel like a superhero!"]},
+      "3": {"text": ["Mozes! What are you waiting for? Let's go already! Adventure awaits!"]},
+      "4": {"face": "mozes", "name": "mozes", "text": ["Luana, are you sure you're not a little bit too enthusiastic about this world-ending endeavor?"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "farm_battle_after_win_alt"      : {
+    "name"   : "Mozes",
+    "phrases": {
+      "1": {"text": ["Talk about deja vu..."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "failed_to_save_luana"           : {
+    "name"   : "Mozes",
+    "phrases": {
+      "1": {"text": ["This is all terrible... Luana is also gone..."]},
+      "2": {"text": ["There isn't much for me to accomplish here anymore..."]},
+      "3": {"text": ["I'll go back to that son of a bitch Ardor and take Grace back!"]},
+      "4": {"face": "fairy_transp", "name": "Mother Fairy", "text": ["'You cannot confront Ardor! Even if you were to face him, he's far beyond your capabilities.'"]},
+      "5": {"face": "fairy_transp", "name": "Mother Fairy", "text": ["'Watch out for Ardor! He is not to be trifled with!'"]},
+      "6": {"face": "mozes", "name": "Mozes", "text": ["Screw that! Grace needs my help!"], "choices": [{"command": "AUTO_SAVE"}]}
+    }
+  },
+  "stable_horse_1"                 : {
     "name"   : "Horse",
     "phrases": {
       "1": {"text": ["Neigh."]},
       "2": {
         "choices": [
-          {"condition": ["druid1"], "text": "[Druid 1] *Listen to the horse.*", "nextId": "3"},
+          {"condition": ["i_druid1", "_time_before_10:01"], "text": "[Druid 1] *Listen to the horse.*", "nextId": "3"},
+          {"condition": ["i_druid1", "_tc_9_q_quest_luana_before_10", "_time_after_11:00"], "text": "[Druid 1] *Listen to the horse.*", "nextId": "7"},
+          {"condition": ["ii_druid1"], "text": "[Druid 1] *Listen to the horse.*", "nextId": "9999"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
-      "3": {"text": ["I don't like flies. They're always buzzing around me."], "choices": [{"command": "EXIT"}]}
+      "3": {"text": ["I don't like flies. They're always buzzing around me."], "choices": [{"command": "EXIT"}]},
+      "7": {"text": ["Since that orc came, there are even more flies around me. I don't like it."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "stable_horse_2"         : {
+  "stable_horse_2"                 : {
     "name"   : "Horse",
     "phrases": {
       "1": {"text": ["Neigh."]},
       "2": {
         "choices": [
-          {"condition": ["druid1"], "text": "[Druid 1] *Listen to the horse.*", "nextId": "3"},
+          {"condition": ["i_druid1", "_time_before_10:01"], "text": "[Druid 1] *Listen to the horse.*", "nextId": "3"},
+          {"condition": ["i_druid1", "_tc_9_q_quest_luana_before_10", "_time_after_11:00"], "text": "[Druid 1] *Listen to the horse.*", "nextId": "7"},
+          {"condition": ["ii_druid1"], "text": "[Druid 1] *Listen to the horse.*", "nextId": "9999"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
-      "3": {"text": ["I want to go outside. I'm tired of being locked up in here."], "choices": [{"command": "EXIT"}]}
+      "3": {"text": ["I don't like the food here. It's always the same. I want something different."], "choices": [{"command": "EXIT"}]},
+      "7": {"text": ["Did that orc wanted to give something different to eat?"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "stable_horse_3"         : {
+  "stable_horse_3"                 : {
     "name"   : "Horse",
     "phrases": {
       "1": {"text": ["Neigh."]},
       "2": {
         "choices": [
-          {"condition": ["druid1"], "text": "[Druid 1] *Listen to the horse.*", "nextId": "3"},
+          {"condition": ["i_druid1", "_time_before_10:01"], "text": "[Druid 1] *Listen to the horse.*", "nextId": "3"},
+          {"condition": ["i_druid1", "_tc_9_q_quest_luana_before_10", "_time_after_11:00"], "text": "[Druid 1] *Listen to the horse.*", "nextId": "7"},
+          {"condition": ["ii_druid1"], "text": "[Druid 1] *Listen to the horse.*", "nextId": "9999"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
-      "3": {"text": ["My owner is a bit of a bore. I wish he'd take me out more often."], "choices": [{"command": "EXIT"}]}
+      "3": {"text": ["My owner is a bit of a bore. I wish he'd take me out more often."], "choices": [{"command": "EXIT"}]},
+      "7": {"text": ["I think I saw an orc trying to take me out. Did my owner asked him to do that?"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "stable_horse_4"         : {
+  "stable_horse_4"                 : {
     "name"   : "Horse",
     "phrases": {
       "1": {"text": ["Neigh."]},
       "2": {
         "choices": [
-          {"condition": ["druid1"], "text": "[Druid 1] *Listen to the horse.*", "nextId": "3"},
+          {"condition": ["i_druid1", "_time_before_10:01"], "text": "[Druid 1] *Listen to the horse.*", "nextId": "3"},
+          {"condition": ["i_druid1", "_tn_9_q_quest_luana_before_10", "_time_after_11:00"], "text": "[Druid 1] *Listen to the horse.*", "nextId": "5"},
+          {"condition": ["i_druid1", "_tc_9_q_quest_luana_before_10", "_time_after_11:00"], "text": "[Druid 1] *Listen to the horse.*", "nextId": "7"},
+          {"condition": ["ii_druid1"], "text": "[Druid 1] *Listen to the horse.*", "nextId": "9999"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
-      "3": {"text": ["I don't like the food here. It's always the same. I want something different."], "choices": [{"command": "EXIT"}]}
+      "3": {"text": ["I want to go outside. I'm tired of being locked up in here."], "choices": [{"command": "EXIT"}]},
+      "5": {"text": ["Why were all the other horses taken out by those nice orcs, and not me?"], "choices": [{"command": "EXIT"}]},
+      "7": {"text": ["Why didn't the orcs take us out? I want to go outside. I'm tired of being locked up in here."], "choices": [{"command": "EXIT"}]}
     }
   }
 }

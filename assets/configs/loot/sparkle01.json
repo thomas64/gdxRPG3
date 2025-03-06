@@ -25,5 +25,10 @@
   "sparkle0018"        : {"condition": ["_rc_>=_k_q_quest_get_horse"], "content": {"horseshoe": 1}},
   "sparkle0019"        : {"condition": ["_rc_>=_k_q_quest_get_horse"], "content": {"horseshoe": 1}},
   "sparkle0020"        : {"condition": ["_rc_>=_k_q_quest_get_horse"], "content": {"horseshoe": 1}},
-  "sparkle0021"        : {"condition": ["_rc_>=_k_q_quest_helping_horse"], "content": {"tow_rope": 1}}
+  "sparkle0021"        : {"condition": ["_rc_>=_k_q_quest_helping_horse"], "content": {"tow_rope": 1}},
+  "sparkle_farm_1"     : {"content": {"fine_light_belt": 1}},
+  "sparkle_farm_2"     : {"content": {"herb": 2}},
+  "sparkle_farm_3"     : {"content": {"spice": 1}},
+  "sparkle_farm_4"     : {"content": {"stone": 1}},
+  "sparkle_farm_5"     : {"content": {"wood": 2}}
 }

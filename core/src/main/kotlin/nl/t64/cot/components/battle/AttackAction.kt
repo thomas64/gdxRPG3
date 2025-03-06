@@ -17,7 +17,7 @@ class AttackAction(
 
     private val hitPercentage: Int = attacker.getCalculatedTotalHit()
     private val cappedHitPercentage: Int = hitPercentage.coerceAtMost(100)
-    private val isHit: Boolean = hitPercentage > Random.nextInt(0, 100)
+    private var isHit: Boolean = hitPercentage > Random.nextInt(0, 100)
     private val damage: Int = calculateDamage()
     private val cappedDamage: Int = damage.coerceAtMost(target.currentHp)
     private val criticalHitPercentage: Int = attacker.getCalculatedTotalSkillOf(SkillItemId.WARRIOR) * 4
@@ -26,11 +26,22 @@ class AttackAction(
     private val cappedCriticalDamage: Int = criticalDamage.coerceAtMost(target.currentHp)
 
     companion object {
-        fun createForEnemy(currentEnemy: Participant, targetHero: Participant): AttackAction {
+        fun createForEnemy(currentEnemy: Participant, targetHero: Participant, battleId: String): AttackAction {
             // todo, weaponName is niet de bedoeling, dit moet een 'spell' worden. body slam, bite, etc.
             // de names van die weapons moeten dus ook niet in enemy.json staan.
             val weaponName: String = currentEnemy.character.getInventoryItem(InventoryGroup.WEAPON)!!.name
             return AttackAction(currentEnemy, targetHero.character, weaponName) // ← hier dus
+                .specialCasesWorkaround(battleId, targetHero)
+
+        }
+
+        private fun AttackAction.specialCasesWorkaround(battleId: String, targetHero: Participant): AttackAction {
+            if (battleId == "farm_battle" && targetHero.character.id == "luana") {
+                if (this.isHit && this.damage >= targetHero.character.currentHp) {
+                    this.isHit = false
+                }
+            }
+            return this
         }
     }
 

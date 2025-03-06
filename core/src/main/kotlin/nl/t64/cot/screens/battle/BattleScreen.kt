@@ -549,7 +549,7 @@ class BattleScreen : Screen {
         val heroTarget: Participant? = battleField.possibleGetHeroTargetAndMoveEnemy(currentParticipant)
         isDelayingTurn = true
         val messages: ArrayDeque<String> = heroTarget
-            ?.let { AttackAction.createForEnemy(currentParticipant, it).handle() }
+            ?.let { AttackAction.createForEnemy(currentParticipant, it, battleId).handle() }
             ?: ArrayDeque(listOf("${currentParticipant.character.name} ended their turn."))
         showMessages(messages)
         Thread.sleep(1000L)

@@ -1,11 +1,13 @@
 package nl.t64.cot.components.quest
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.audio.stopAllSe
 
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 class QuestTask(
     var taskPhrase: String = "",
     private val updatedPhrase: String? = null,

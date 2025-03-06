@@ -49,6 +49,7 @@ class GameData : ProfileObserver {
         loot.reset()
         spoils = SpoilsContainer()
         quests.reset()
+        cutscenes.reset()
         numberOfCycles++
     }
 

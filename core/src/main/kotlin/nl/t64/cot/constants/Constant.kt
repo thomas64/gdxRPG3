@@ -36,7 +36,7 @@ object Constant {
     val GRAY = Color(0.63f, 0.63f, 0.63f, 1f) // -0x5f5f5f01, 0xa0a0a0ff
 
     const val PLAYER_ID = "mozes"
-    const val TRANSFORMATION_ORC = "orc_1"
+    const val TRANSFORMATION_ORC = "orc_scout"
     const val STARTING_MAP = "honeywood_house_mozes"
 
     const val DESCRIPTION_KEY_BUY = "Price"

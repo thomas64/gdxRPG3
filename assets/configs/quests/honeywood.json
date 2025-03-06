@@ -48,7 +48,7 @@
     "title"     : "To Lastdenn then",
     "entityId"  : "voice_black",
     "summary"   : "Bathed in light, you heard a voice saying, 'You have been given another chance' and 'You must go to the city of Lastdenn'. Whose voice was that? And should you do as the voice said? And why Lastdenn? And why you?",
-    "linkedWith": ["quest_honeywood_elder"],
+    "linkedWith": ["quest_honeywood_elder", "quest_luana_before_10"],
     "tasks"     : {
       "1" : {
         "taskPhrase": "Leave Honeywood Village through the south past the guards.",
@@ -64,7 +64,7 @@
     "title"     : "To Lastdenn then",
     "entityId"  : "ylarus",
     "summary"   : "Adan inexplicably bursts into flames every time Grace is sacrificed by the wizard Ardor. Ylarus, the God of Time, his power is fading. He gave you the Crystal of Time and he sends you to the priest of Lastdenn for answers.",
-    "linkedWith": ["quest_honeywood_elder"],
+    "linkedWith": ["quest_honeywood_elder", "quest_luana_before_10"],
     "tasks"     : {
       "1" : {
         "taskPhrase": "Leave Honeywood Village through the south past the guards.",
@@ -254,10 +254,12 @@
     "entityId"  : "oldman11",
     "summary"   : "Honeywood elder",
     "isSubQuest": true,
+    "linkedWith": ["quest_luana_before_10"],
     "tasks"     : {
       "2": {
-        "taskPhrase": "      Get permission from the elder to leave the village.",
-        "type"      : "FREE"
+        "taskPhrase"  : "      Get permission from the elder to leave the village.",
+        "type"        : "FREE",
+        "isResettable": false
       },
       "3": {
         "taskPhrase": "            Unlock the door in the elder's basement.",
@@ -280,12 +282,31 @@
         "type"      : "SHOW_ITEM",
         "target"    : {"fine_fairy_ring": 1}
       },
+      "7": {
+        "comment"     : "WARNING: One link to 7 from SceneHoneywoodFarmAttackAfterWin and one from honeywood_stable.tmx",
+        "taskPhrase"  : "            Ask Luana to accompany you on your travels. She is at Honeywood Farm in the northeast of the village.",
+        "type"        : "FREE",
+        "isResettable": false,
+        "linkedWith"  : ["2", "8"]
+      }
+    }
+  },
+  "quest_luana_before_10"      : {
+    "title"     : "To Lastdenn then",
+    "entityId"  : "luana",
+    "summary"   : "Luana before 10:00",
+    "isSubQuest": true,
+    "tasks"     : {
+      "8": {
+        "taskPhrase"  : "                  Return to Luana by 10:00. She will be done with her chores at Honeywood Farm.",
+        "type"        : "FREE",
+        "linkedWith"  : ["9"]
+      },
       "9": {
-        "taskPhrase"     : "            Ask Luana to accompany you on your travels. She is at Honeywood Farm in the northeast of the village.",
-        "type"           : "DELIVER_MESSAGE",
-        "conversationIds": ["luana_join"],
-        "isResettable"   : false,
-        "linkedWith"     : ["2"]
+        "comment"   : "WARNING: Five links to 9 from honeywood_stable.tmx",
+        "taskPhrase": "                  Defeat the Orc raiding party which attacks Honeywood Farm between 10:00 and 11:00.",
+        "type"      : "FREE",
+        "isHidden"  : true
       }
     }
   }

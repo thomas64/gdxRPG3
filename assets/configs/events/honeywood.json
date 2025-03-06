@@ -1,50 +1,63 @@
 {
-  "go_to_the_forest_2"        : {
+  "go_to_the_forest_2"            : {
     "type"          : "conversation",
     "condition"     : ["_rc_===_u_q_quest_royal_sacrifice", "is_specific_time"],
     "conversationId": "should_really_be_going_to_the_forest",
     "entityId"      : "mozes",
     "doesRepeat"    : true
   },
-  "event_outside_home_cycle_2": {
+  "event_outside_home_cycle_2"    : {
     "type"          : "conversation",
     "condition"     : ["_c_==_a_q_quest_royal_sacrifice"],
     "conversationId": "outside_home_cycle_2",
     "entityId"      : "mozes"
   },
-  "event_ridiculous"          : {
+  "event_ridiculous"              : {
     "type"          : "conversation",
     "condition"     : ["_tc_1_q_quest_helping_horse", "_tc_11_q_quest_helping_horse", "_time_before_16:55"],
     "conversationId": "honeywood_ridiculous",
     "entityId"      : "mozes"
   },
-  "event_lennor_is_finished"  : {
+  "event_lennor_is_finished"      : {
     "type"          : "conversation",
     "condition"     : ["_time_at_17:00", "_c_!=_f_q_quest_helping_horse"],
     "conversationId": "lennor_is_finished",
     "entityId"      : "man13",
     "doesRepeat"    : true
   },
-  "event_to_honeywood_farm"   : {
+  "event_to_honeywood_farm"       : {
     "type"          : "conversation",
     "conversationId": "to_honeywood_farm",
     "entityId"      : "mozes"
   },
-  "dont_go_up_there"          : {
+  "event_failed_to_save_luana"    : {
+    "type"          : "conversation",
+    "condition"     : ["_qf_quest_honeywood_elder"],
+    "conversationId": "failed_to_save_luana",
+    "entityId"      : "mozes"
+  },
+  "event_honeywood_farm_back_door": {
+    "type"          : "conversation",
+    "condition"     : ["_time_before_10:30"],
+    "conversationId": "honeywood_farm_back_door",
+    "entityId"      : "woman05",
+    "doesRepeat"    : true
+  },
+  "dont_go_up_there"              : {
     "type"          : "conversation",
     "condition"     : ["_c_<=_k_q_quest_honeywood_inn_price-1"],
     "conversationId": "dont_go_up_there",
     "entityId"      : "woman02",
     "doesRepeat"    : true
   },
-  "event_honeywood_soldiers"  : {
+  "event_honeywood_soldiers"      : {
     "type"          : "conversation",
     "condition"     : ["alone_in_party"],
     "conversationId": "honeywood_soldiers",
     "entityId"      : "soldier01",
     "doesRepeat"    : true
   },
-  "event_dont_forget_to_save" : {
+  "event_dont_forget_to_save"     : {
     "type"          : "conversation",
     "conversationId": "dont_forget_to_save",
     "entityId"      : "soldier01"

@@ -10,6 +10,10 @@ fun List<String>.areAllTrue(): Boolean {
     return ConditionDatabase.isMeetingConditions(this)
 }
 
+fun String.isTrue(): Boolean {
+    return ConditionDatabase.isMeetingConditions(listOf(this))
+}
+
 object ConditionDatabase {
 
     private val conditions: Map<String, () -> Boolean> = mapOf(

@@ -1,26 +1,40 @@
 {
-  "orc_1"       : {
-    "name"     : "Orc",
+  "orc_scout"   : {
+    "name"     : "Orc Scout",
     "school"   : "NONE",
-    "xp"       : 3,
-    "drops"    : {"basic_dagger": 20, "healing_potion": 5, "gold": 50},
+    "xp"       : 11,
+    "drops"    : {
+      "basic_orc_dagger"     : 15,
+      "basic_light_belt"     : 2,
+      "basic_light_boots"    : 2,
+      "basic_light_bracers"  : 2,
+      "basic_light_chest"    : 2,
+      "basic_light_cloak"    : 2,
+      "basic_light_gloves"   : 2,
+      "basic_light_helmet"   : 2,
+      "basic_light_pants"    : 2,
+      "basic_light_shoulders": 2,
+      "healing_potion"       : 5,
+      "gold"                 : 60
+    },
     "stats"    : {
-      "intelligence": 6,
+      "intelligence": 1,
+      "dexterity"   : 11,
+      "strength"    : 1,
+      "speed"       : 11,
       "willpower"   : 1,
-      "strength"    : 10,
-      "dexterity"   : 10,
-      "constitution": 14,
-      "stamina"     : 28,
-      "speed"       : 10
+      "constitution": 11,
+      "stamina"     : 1
     },
     "skills"   : {
-      "sword": 1
+      "sword"  : 2,
+      "warrior": 2
     },
     "spells"   : {
     },
     "inventory": {
-      "weapon": "basic_dagger",
-      "chest" : "armor_2"
+      "weapon": "basic_orc_dagger",
+      "chest" : "armor_4"
     }
   },
   "orc_sergeant": {
@@ -56,7 +70,7 @@
     "name"     : "Orc General",
     "school"   : "NECROMANCY",
     "xp"       : 90,
-    "drops"    : {"masterwork_maul": 50, "masterwork_heavy_shield": 50, "stamina_potion": 90, "gold": 90},
+    "drops"    : {"masterwork_axe": 50, "masterwork_heavy_shield": 50, "stamina_potion": 90, "gold": 90},
     "stats"    : {
       "intelligence": 50,
       "dexterity"   : 50,
