@@ -3,6 +3,8 @@ package nl.t64.cot.screens.cutscene
 import com.badlogic.gdx.scenes.scene2d.Action
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import nl.t64.cot.Utils.screenManager
+import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playBgm
 import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.battle.BattleScreen
@@ -48,6 +50,7 @@ class SceneHoneywoodFarmAttack3Alt : CutsceneScreen() {
         return Actions.sequence(
             Actions.run {
                 setMapWithNoSound("honeywood_stable")
+                playBgm(AudioEvent.BGM_ARDOR)
                 setFixedCameraPosition(570f, 504f)
                 horse1.isVisible = true
                 horse1.setPosition(432f, 672f)

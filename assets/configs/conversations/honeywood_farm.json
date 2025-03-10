@@ -233,9 +233,9 @@
     }
   },
   "farm_orcs_are_leaving"          : {
-    "name"   : "Orc Raider",
     "phrases": {
-      "1": {"text": ["Alright maggots! We got what we came for. Let's go!"], "choices": [{"command": "EXIT"}]}
+      "1": {"face": "woman05", "name": "Miriel", "text": ["Father, stay behind the corner, please be quiet..."]},
+      "2": {"face": "orc_scout", "name": "Orc Raider", "text": ["Alright maggots! We got what we came for. Let's go!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "farm_battle_after_win"          : {

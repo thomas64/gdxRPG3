@@ -85,9 +85,7 @@ class SceneHoneywoodFarmAttackAfterWin : CutsceneScreen() {
         gameData.quests.getQuestById("quest_luana_before_10").setTaskComplete("9") // "_9_"
         gameData.clock.setTimeOfDay("11:00")
 
-        // todo, endcutscene without music fade. but even if it's not fading, loading worldscreen always restarts bgm.
-        // at this moment, I don't know how to fix that.
-        endCutsceneAndOpenMap("honeywood_stable", "scene_honeywood_farm_attack")
+        endCutsceneAndOpenMapWithoutBgmFading("honeywood_stable", "scene_honeywood_farm_attack")
     }
 
 }

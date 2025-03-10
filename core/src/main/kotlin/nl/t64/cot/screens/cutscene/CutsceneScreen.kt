@@ -58,6 +58,7 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
     private var isCameraFixed: Boolean = true
     private val skipBox = SkipBox()
     private var isEnding: Boolean = false
+    private var shouldBgmEndAfterCutscene: Boolean = true
 
 
     private fun createTitle(): Label {
@@ -133,7 +134,11 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
     override fun hide() {
         actorsStage.clear()
         stopAllSeExcept(AudioEvent.SE_SPARKLE)
-        stopAllBgm()
+        if (shouldBgmEndAfterCutscene) {
+            stopAllBgm()
+        } else {
+            shouldBgmEndAfterCutscene = true
+        }
     }
 
     override fun dispose() {
@@ -167,8 +172,17 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
 
     abstract fun exitScreen()
 
+    fun endCutsceneAndOpenMapWithoutBgmFading(mapTitle: String, spawnId: String) {
+        shouldBgmEndAfterCutscene = false
+        endCutsceneAnd {
+            openMap(mapTitle, spawnId)
+        }
+    }
+
     fun endCutsceneAndOpenMap(mapTitle: String, spawnId: String) {
-        endCutsceneAndOpenMapAnd(mapTitle, spawnId) {}
+        endCutsceneAnd {
+            openMap(mapTitle, spawnId)
+        }
     }
 
     fun endCutsceneAndOpenMapAnd(mapTitle: String, spawnId: String = mapTitle, actionAfter: () -> Unit) {
@@ -277,7 +291,7 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
 
     fun actionFadeOut(): Action {
         return Actions.sequence(
-            Actions.run { isBgmFading = true },
+            Actions.run { if (shouldBgmEndAfterCutscene) isBgmFading = true },
             Actions.addAction(TransitionAction(TransitionType.FADE_OUT), transition),
             Actions.delay(Constant.FADE_DURATION),
             Actions.run { isBgmFading = false }

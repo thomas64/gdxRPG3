@@ -3,6 +3,8 @@ package nl.t64.cot.screens.cutscene
 import com.badlogic.gdx.scenes.scene2d.Action
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import nl.t64.cot.Utils.screenManager
+import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playBgm
 import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.battle.BattleScreen
@@ -75,6 +77,7 @@ class SceneHoneywoodFarmAttack1Alt : CutsceneScreen() {
                 miriel.setPosition(192f, 290f)
                 miriel.direction = Direction.WEST
             },
+            Actions.delay(2f),
             actionFadeIn(),
             Actions.delay(1f),
             Actions.run {
@@ -122,6 +125,10 @@ class SceneHoneywoodFarmAttack1Alt : CutsceneScreen() {
     private fun orcsWalkIn(): Action {
         return Actions.sequence(
             Actions.delay(0.5f),
+            Actions.run {
+                isBgmFading = false
+                playBgm(AudioEvent.BGM_ARDOR)
+            },
             Actions.addAction(Actions.sequence(
                 Actions.moveBy(0f, 120f, 1.5f),
                 Actions.run { orc2.direction = Direction.WEST },

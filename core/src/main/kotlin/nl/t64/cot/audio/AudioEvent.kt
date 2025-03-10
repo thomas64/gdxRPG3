@@ -20,6 +20,7 @@ enum class AudioEvent(val filePath: String, val volume: Float = 1f) {
     BGM_GHOST("audio/bgm/shadow.ogg", 0.1f),
     BGM_MURDER("audio/bgm/go_out.mp3", 0.1f),
     BGM_ARDOR("audio/bgm/approach.ogg", 0.1f),
+    BGM_PLUNDER("audio/bgm/plunder.mp3", 0.2f),
 
     BGM_BATTLE_1("audio/bgm/battle.ogg", 0.1f),
     BGM_BATTLE_2("audio/bgm/combat.ogg", 0.1f),

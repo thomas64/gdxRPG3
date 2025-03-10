@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector2
 import ktx.tiled.*
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
+import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioEvent
@@ -55,12 +56,14 @@ private const val LIGHTMAP_MAP_PROPERTY = "lightmap_map"
 private const val LIGHTMAP_PLAYER_PROPERTY = "lightmap_player"
 private const val DEFAULT_LIGHTMAP = "default"
 
-class GameMap(val mapTitle: String) {
+class GameMap(
+    val mapTitle: String
+) {
 
     val tiledMap: TiledMap = resourceManager.getTiledMapAsset(mapTitle)
     private val loader = GameMapLayerLoader(tiledMap)
 
-    val bgm: AudioEvent get() = tiledMap.bgm
+    val bgm: AudioEvent get() = spawnPoints.firstOrNull { it.rectangle.contains(playerSpawnLocation) }?.bgm ?: tiledMap.bgm
     val bgs: List<AudioEvent> = tiledMap.bgs
     val pixelWidth: Float = tiledMap.totalWidth().toFloat()
     val pixelHeight: Float = tiledMap.totalHeight().toFloat()
@@ -75,8 +78,8 @@ class GameMap(val mapTitle: String) {
         ?.let { Sprite(Utils.createLightmap(it)) }
     private val defaultStepSound: String = tiledMap.property(STEP_SOUND_PROPERTY, DEFAULT_STEP_SOUND)
 
-    lateinit var playerSpawnLocation: Vector2
-    lateinit var playerSpawnDirection: Direction
+    var playerSpawnLocation: Vector2 = Vector2()
+    var playerSpawnDirection: Direction = Direction.NONE
     private val tiledGraphs: EnumMap<EntityState, TiledGraph> = EnumMap(EntityState::class.java)
 
     val schedules: List<RectangleMapObject> = loader.wholeLayer(SCHEDULED_LAYER)
@@ -204,6 +207,13 @@ val TiledMap.bgm: AudioEvent
                 && screenManager.currentScreen !is SceneIntro
             ) {
                 AudioEvent.BGM_TENSION
+            } else if ( // this else if is crap on so many levels. this is not expandable at all.
+                mapManager.currentMap.mapTitle == "honeywood_stable"
+                && mapManager.nextMapTitle == "honeywood_stable" // this is only for so that fade out works after exiting stable
+                && gameData.clock.isCurrentTimeAfter("11:00")
+                && !gameData.quests.getQuestById("quest_luana_before_10").isTaskComplete("9") // "_9_"
+            ) {
+                AudioEvent.BGM_PLUNDER
             } else {
                 AudioEvent.valueOf(it.uppercase())
             }

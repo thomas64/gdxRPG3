@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.11.1" orientation="orthogonal" renderorder="right-down" width="66" height="50" tilewidth="24" tileheight="24" infinite="0" nextlayerid="19" nextobjectid="82">
+<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="66" height="50" tilewidth="24" tileheight="24" infinite="0" nextlayerid="19" nextobjectid="85">
  <properties>
   <property name="bgm" value="bgm_honeywood"/>
   <property name="lightmap_camera" value="sunlight"/>
@@ -124,11 +124,29 @@
  </objectgroup>
  <objectgroup color="#ffff7f" id="12" name="portal">
   <object id="2" name="honeywood_farm_path" x="360" y="1200" width="192" height="24"/>
-  <object id="4" name="honeywood_stable" type="front" x="600" y="498" width="96" height="24"/>
+  <object id="4" name="honeywood_stable" type="front" x="600" y="495" width="96" height="24"/>
   <object id="6" name="honeywood_stable" type="back" x="936" y="402" width="96" height="24"/>
  </objectgroup>
  <objectgroup color="#ff55ff" id="17" name="event">
   <object id="80" name="event_failed_to_save_luana" type="discover" x="372" y="1008" width="168" height="24"/>
  </objectgroup>
- <objectgroup color="#ff00ff" id="18" name="cutscene"/>
+ <objectgroup color="#ff00ff" id="18" name="cutscene">
+  <object id="82" name="scene_honeywood_farm_too_late" type="discover" x="600" y="510" width="96" height="12">
+   <properties>
+    <property name="condition" value="_time_between_10:30_and_11:00"/>
+   </properties>
+  </object>
+  <object id="83" name="scene_honeywood_farm_attack_1" type="discover" x="600" y="507" width="96" height="15">
+   <properties>
+    <property name="condition" value="_time_between_10:00_and_10:30, alone_in_party"/>
+    <property name="mustContinueBgm" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="84" name="scene_honeywood_farm_attack_1_alt" type="discover" x="600" y="504" width="96" height="18">
+   <properties>
+    <property name="condition" value="_time_between_10:00_and_10:30, !alone_in_party"/>
+    <property name="mustContinueBgm" type="bool" value="false"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

@@ -28,7 +28,7 @@ class MapManager : ProfileObserver {
 
     lateinit var currentMap: GameMap
     private var isMapLoaded: Boolean = false
-    private var nextMapTitle: String? = null
+    var nextMapTitle: String? = null
 
     override fun onNotifyCreateProfile(profileManager: ProfileManager) {
         loadMap(Constant.STARTING_MAP)

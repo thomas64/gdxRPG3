@@ -265,11 +265,6 @@
   <object id="68" name="guide_event_party_member" type="discover" x="192" y="432" width="96" height="72"/>
  </objectgroup>
  <objectgroup color="#ff00ff" id="15" name="cutscene">
-  <object id="61" name="scene_honeywood_farm_too_late" type="discover" x="72" y="120" width="1056" height="792" visible="0">
-   <properties>
-    <property name="condition" value="_time_between_10:30_and_11:00"/>
-   </properties>
-  </object>
   <object id="84" name="scene_honeywood_farm_attack_1_alt" type="discover" x="72" y="144" width="1056" height="768" visible="0">
    <properties>
     <property name="condition" value="_time_between_10:00_and_10:30, !alone_in_party"/>
