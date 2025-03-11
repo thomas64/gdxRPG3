@@ -172,43 +172,51 @@
     }
   },
   "fairy_school"          : {
-    "name"   : "Fairy School",
-    "phrases": {
-      "1": {
-        "text"   : ["Young Mozes, would you like to learn a spell?"],
-        "choices": [
-          {"condition": ["i_!starting_spells"], "nextId": "3"},
-          {"condition": ["i_starting_spells"], "nextId": "2"}
+    "name"     : "Fairy School",
+    "condition": ["_rc_===_u_q_quest_mother_fairy"], "startAt": "20",
+    "phrases"  : {
+      "1" : {
+        "text": ["Young Mozes, would you like to learn a spell?"], "choices": [
+          {"condition": ["starting_spells"], "nextId": "2", "orElseId": "10"}
         ]
       },
-      "2": {
+      "2" : {
         "choices": [
           {"text": "*Visit the school.*", "command": "LOAD_SCHOOL"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
-      "3": {"text": ["It seems that you're not very familiar with spell casting yet.", "I will teach you my two spells at rank 1, free of charge."]},
-      "4": {"text": ["Ready? Here we go!"]},
-      "5": {"text": ["{SPEED=0.2} . . . . . . . . ."], "choices": [{"command": "RECEIVE_SPELLS", "nextId": "6"}]},
-      "6": {"text": ["You can view all the spells you've learned in your Inventory Screen, and the best part is that you can now use these spells in battle!"]},
-      "7": {"text": ["Feel free to come see me again if you'd like to learn more spells."], "choices": [{"command": "EXIT"}]}
+      "3" : {"text": ["It seems that you're not very familiar with spell casting yet.", "I will teach you my two spells at rank 1, free of charge."]},
+      "4" : {"text": ["Ready? Here we go!"]},
+      "5" : {"text": ["{SPEED=0.2} . . . . . . . . ."], "choices": [{"command": "RECEIVE_SPELLS", "nextId": "6"}]},
+      "6" : {"text": ["You can view all the spells you've learned in your Inventory Screen, and the best part is that you can now use these spells in battle!"]},
+      "7" : {"text": ["Feel free to come see me again if you'd like to learn more spells."], "choices": [{"command": "EXIT"}]},
+      "10": {"text": ["It seems that you're not very familiar with spell casting yet.", "Please come back to me when the developer has implemented a magic system."], "choices": [{"command": "EXIT"}]},
+      "20": {"text": ["Ah, dear Mozes, we're so glad you came to visit us."]},
+      "21": {"text": ["First, please go see our Mother Fairy near the Great Tree."]},
+      "22": {"text": ["And please do return to me after you've spoken with her."], "choices": [{"command": "EXIT"}]}
     }
   },
   "fairy_academy"         : {
-    "name"   : "Fairy Academy",
-    "phrases": {
-      "1": {"text": ["Young Mozes, would you like to receive skill training?"]},
-      "2": {
+    "name"     : "Fairy Academy",
+    "condition": ["_rc_===_u_q_quest_mother_fairy"], "startAt": "20",
+    "phrases"  : {
+      "1" : {"text": ["Young Mozes, would you like to receive skill training?"]},
+      "2" : {
         "choices": [
           {"text": "*Visit the academy.*", "command": "LOAD_ACADEMY"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
-      }
+      },
+      "20": {"text": ["Ah, dear Mozes, we're so glad you came to visit us."]},
+      "21": {"text": ["First, please go see our Mother Fairy near the Great Tree."]},
+      "22": {"text": ["And please do return to me after you've spoken with her."], "choices": [{"command": "EXIT"}]}
     }
   },
   "fairy_shop"            : {
-    "name"   : "Fairy Shop",
-    "phrases": {
+    "name"     : "Fairy Shop",
+    "condition": ["_rc_===_u_q_quest_mother_fairy"], "startAt": "20",
+    "phrases"  : {
       "1"   : {"text": ["Young Mozes, can I help you with anything?"]},
       "2"   : {
         "choices": [
@@ -221,6 +229,9 @@
       "11"  : {"text": ["{SPEED=0.2} . . . . ."]},
       "12"  : {"text": ["Well of course, glad to be of assistance. Here you go."]},
       "13"  : {"text": ["Good luck on your travels, Mozes!"], "choices": [{"command": "RECEIVE_ITEM"}]},
+      "20"  : {"text": ["Ah, dear Mozes, we're so glad you came to visit us."]},
+      "21"  : {"text": ["First, please go see our Mother Fairy near the Great Tree."]},
+      "22"  : {"text": ["And please do return to me after you've spoken with her."], "choices": [{"command": "EXIT"}]},
       "1199": {"text": ["Don't forget to take the elder's request."], "choices": [{"command": "RECEIVE_ITEM"}]},
       "1200": {"text": ["Young Mozes, can I help you with anything?"], "choices": [{"nextId": "2"}]}
     }
