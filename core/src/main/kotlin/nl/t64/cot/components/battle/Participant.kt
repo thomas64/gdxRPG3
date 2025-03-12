@@ -9,22 +9,22 @@ class Participant(
     val character: Character
 ) {
     val isHero: Boolean get() = character is HeroItem
-    var turnCounter: Float = 0f
+    var turnCounter: Int = 0
 
     val maximumAP: Int = character.getCalculatedActionPoints()
     var currentAP: Int = maximumAP
 
 
     fun updateTurnCounter() {
-        turnCounter += 10f + character.getCalculatedTotalStatOf(StatItemId.SPEED) //* 0.5f
+        turnCounter += 10 + character.getCalculatedTotalStatOf(StatItemId.SPEED)
     }
 
     fun isTurnCounterAtMax(): Boolean {
-        return turnCounter >= 200f
+        return turnCounter >= 200
     }
 
     fun resetTurnCounter() {
-        turnCounter -= 200f
+        turnCounter -= 200
     }
 
     fun refreshActionPoints() {

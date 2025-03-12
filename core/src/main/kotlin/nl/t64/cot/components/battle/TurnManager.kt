@@ -34,8 +34,8 @@ class TurnManager(
 
     private fun increaseAllTurnCounters() {
         while (true) {
-            participants.forEach { it.updateTurnCounter() }
             if (participants.any { it.isTurnCounterAtMax() }) break
+            participants.forEach { it.updateTurnCounter() }
         }
     }
 
