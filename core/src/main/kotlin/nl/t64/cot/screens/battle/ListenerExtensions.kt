@@ -7,6 +7,10 @@ import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 
 
+fun InputEvent.dontLoseFocusAfterEsc() {
+    this.stage.keyboardFocus = getButtonTable<String>()
+}
+
 fun <T> InputEvent.getSelected(): T? {
     return getButtonTable<T>().selected
 }

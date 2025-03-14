@@ -45,7 +45,6 @@ class AttackAction(
         }
     }
 
-
     fun createPreviewMessage(): String {
         val weapon: InventoryItem = attacker.getInventoryItem(InventoryGroup.WEAPON)!!
         if (criticalHitPercentage <= 0) {

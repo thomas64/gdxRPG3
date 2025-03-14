@@ -45,10 +45,6 @@ class SelectActionListener(
         pauseMenu.invoke()
     }
 
-    private fun InputEvent.dontLoseFocusAfterEsc() {
-        this.stage.keyboardFocus = getButtonTable<String>()
-    }
-
     private fun InputEvent.handleEnter() {
         getSelected<String>()?.let { selected ->
             playSe(AudioEvent.SE_MENU_CONFIRM)
