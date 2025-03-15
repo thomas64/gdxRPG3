@@ -28,6 +28,7 @@ private const val DIALOG_NO = "No"
 private const val DIALOG_INIT_HEIGHT = 150L
 private const val DIALOG_PAD_TOP = 20f
 private const val DIALOG_PAD_BOTTOM = 40f
+private const val DIALOG_PAD_LEFT = 100f
 private const val BUTTON_SPACE_RIGHT = 100f
 private const val BUTTON_WIDTH = 130f
 
@@ -54,6 +55,12 @@ class DialogQuestion(
         updateIndex(startIndex)
         applyListeners(startIndex)
         Utils.runWithDelay(confirmDelay) { applyConfirmListener() }
+    }
+
+    fun setLeftAlignment() {
+        (dialog.contentTable.getChild(0) as Label).setAlignment(Align.left)
+        dialog.contentTable.padLeft(DIALOG_PAD_LEFT)
+        dialog.background.minWidth = 0f
     }
 
     private fun updateIndex(newIndex: Int) {

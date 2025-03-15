@@ -23,12 +23,12 @@ private const val DIALOG_PAD = 60f
 
 private const val INPUT_DELAY = 0.5f
 
-class MessageDialog(private val message: String) {
-
+class MessageDialog(
+    private val message: String
+) {
     private val dialogHeight: Float = (message.lines().count() * FONT_SIZE + DIALOG_INIT_HEIGHT).toFloat()
-    private val font: BitmapFont = resourceManager.getTrueTypeAsset(FONT, FONT_SIZE).apply {
-        data.setLineHeight(LINE_HEIGHT)
-    }
+    private val font: BitmapFont = resourceManager.getTrueTypeAsset(FONT, FONT_SIZE)
+        .apply { data.setLineHeight(LINE_HEIGHT) }
     private val dialog: Dialog = createDialog()
 
     @Null
@@ -56,13 +56,16 @@ class MessageDialog(private val message: String) {
         (dialog.contentTable.getChild(0) as Label).setAlignment(Align.left)
     }
 
+    fun setWidthToMinimum() {
+        dialog.background.minWidth = 0f // now it will be as wide as the padding left and right
+    }
+
     private fun createDialog(): Dialog {
         val label = Label(message, LabelStyle(font, Color.BLACK))
         label.setAlignment(Align.center)
         return Utils.createParchmentDialog(font).apply {
             padLeft(DIALOG_PAD)
             padRight(DIALOG_PAD)
-            contentTable.defaults().width(label.prefWidth)
             background.minHeight = dialogHeight
             text(label)
         }
