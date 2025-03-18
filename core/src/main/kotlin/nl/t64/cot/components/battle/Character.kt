@@ -1,6 +1,8 @@
 package nl.t64.cot.components.battle
 
 import nl.t64.cot.components.party.CalcAttributeId
+import nl.t64.cot.components.party.abilities.AbilityContainer
+import nl.t64.cot.components.party.abilities.AbilityItem
 import nl.t64.cot.components.party.inventory.EquipContainer
 import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.components.party.inventory.InventoryItem
@@ -21,6 +23,7 @@ abstract class Character(
     val school: SchoolType = SchoolType.NONE,
     protected val stats: StatContainer = StatContainer(),
     protected val skills: SkillContainer = SkillContainer(),
+    protected val abilities: AbilityContainer = AbilityContainer(),
     protected val spells: SpellContainer = SpellContainer(),
     protected val inventory: EquipContainer = EquipContainer(),
     var isAlive: Boolean = true
@@ -70,6 +73,10 @@ abstract class Character(
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    fun getAllAbilities(): List<AbilityItem> {
+        return abilities.getAll()
+    }
+
     fun getCalculatedTotalStatOf(statItemId: StatItemId): Int {
         val statItem = stats.getById(statItemId)
         return getRealTotalStatOf(statItem).takeIf { it > 0 } ?: 1
@@ -91,22 +98,19 @@ abstract class Character(
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    fun getCalculatedActionPoints(): Int {
+    open fun getCalculatedActionPoints(): Int {
         return ((getCalculatedTotalStatOf(StatItemId.INTELLIGENCE)
             + getCalculatedTotalStatOf(StatItemId.DEXTERITY)
             + getCalculatedTotalStatOf(StatItemId.STRENGTH)
             + getCalculatedTotalStatOf(StatItemId.SPEED)) / 10f
-            // een step is 1 AP, een attack is 3 AP?
-            // loskomen van een close attack is 2-3? AP, wapen wisselen is 3 AP?
+            // loskomen van een close attack is 2-3? AP?
             ).roundToInt()
             .takeIf { it > 0f } ?: 1
     }
 
     fun getCalculatedTotalHit(): Int {
         // todo, is nu alleen nog maar voor wapens, niet voor potions. en ook niet voor ranged in de battle zelf.
-        return inventory.getSkillOfCurrentWeapon()
-            ?.let { getCalculatedTotalHit(it) }
-            ?: 0
+        return inventory.getSkillOfCurrentWeapon()?.toCalculatedTotalHit() ?: 0
     }
 
     fun getCalculatedTotalDamage(): Int {
@@ -124,7 +128,8 @@ abstract class Character(
         return getSumOfEquipmentOfCalc(CalcAttributeId.PROTECTION) + getPossibleExtraProtection()
     }
 
-    private fun getCalculatedTotalHit(weaponSkill: SkillItemId): Int {
+    private fun SkillItemId.toCalculatedTotalHit(): Int {
+        val weaponSkill: SkillItemId = this
         val weaponHit: Int = getSumOfEquipmentOfCalc(CalcAttributeId.BASE_HIT)
         val weaponSkillAmount: Int = getCalculatedTotalSkillOf(weaponSkill)
         val attackerHit: Float = (weaponHit / 100f) * (5f * weaponSkillAmount)

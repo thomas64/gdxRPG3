@@ -2,6 +2,7 @@
   "orc_scout"   : {
     "name"     : "Orc Scout",
     "school"   : "NONE",
+    "ap"       : 4,
     "xp"       : 11,
     "drops"    : {
       "basic_orc_dagger"     : 15,
@@ -26,6 +27,9 @@
       "constitution": 11,
       "stamina"     : 1
     },
+    "abilities": [
+      "strike"
+    ],
     "skills"   : {
       "sword"  : 2,
       "warrior": 2
@@ -40,6 +44,7 @@
   "orc_sergeant": {
     "name"     : "Orc Sergeant",
     "school"   : "NONE",
+    "ap"       : 6,
     "xp"       : 27,
     "drops"    : {"specialist_longsword": 20, "specialist_medium_shield": 20, "healing_potion": 5, "gold": 75},
     "stats"    : {
@@ -51,6 +56,9 @@
       "constitution": 25,
       "stamina"     : 1
     },
+    "abilities": [
+      "strike"
+    ],
     "skills"   : {
       "warrior": 8,
       "hafted" : 6,
@@ -72,14 +80,17 @@
     "xp"       : 90,
     "drops"    : {"masterwork_axe": 50, "masterwork_heavy_shield": 50, "stamina_potion": 90, "gold": 90},
     "stats"    : {
-      "intelligence": 50,
-      "dexterity"   : 50,
-      "strength"    : 50,
+      "intelligence": 30,
+      "dexterity"   : 1,
+      "strength"    : 30,
       "speed"       : 30,
       "willpower"   : 30,
       "constitution": 60,
       "stamina"     : 60
     },
+    "abilities": [
+      "strike"
+    ],
     "skills"   : {
       "warrior": 10,
       "wizard" : 10,

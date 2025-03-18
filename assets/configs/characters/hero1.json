@@ -17,6 +17,9 @@
       "sword"  : 1,
       "missile": 1
     },
+    "abilities": [
+      "strike"
+    ],
     "spells"   : {
     },
     "inventory": {
@@ -48,6 +51,9 @@
       "sword"   : 1,
       "thrown"  : 2
     },
+    "abilities": [
+      "strike"
+    ],
     "spells"   : {
     },
     "inventory": {
@@ -81,6 +87,9 @@
       "sword"    : 4,
       "thrown"   : 2
     },
+    "abilities": [
+      "strike"
+    ],
     "spells"   : {
     },
     "inventory": {
@@ -112,6 +121,9 @@
       "sword"     : 3,
       "thrown"    : -1
     },
+    "abilities": [
+      "strike"
+    ],
     "spells"   : {
       "vs_necromancy": 1,
       "endurance"    : 4,
@@ -149,6 +161,9 @@
       "sword"     : 1,
       "thrown"    : 1
     },
+    "abilities": [
+      "strike"
+    ],
     "spells"   : {
       "dragon_flames": 2
     },
@@ -183,6 +198,9 @@
       "sword"    : -1,
       "thrown"   : -1
     },
+    "abilities": [
+      "strike"
+    ],
     "spells"   : {
     },
     "inventory": {
@@ -221,6 +239,9 @@
       "sword"     : 6,
       "thrown"    : -1
     },
+    "abilities": [
+      "strike"
+    ],
     "spells"   : {
     },
     "inventory": {
@@ -256,6 +277,9 @@
       "sword"   : 7,
       "thrown"  : -1
     },
+    "abilities": [
+      "strike"
+    ],
     "spells"   : {
       "vs_elemental" : 2,
       "remove_poison": 3,
@@ -294,6 +318,9 @@
       "shield"    : -1,
       "thrown"    : 8
     },
+    "abilities": [
+      "strike"
+    ],
     "spells"   : {
       "vs_star"          : 8,
       "vs_necromancy"    : 10,
@@ -331,6 +358,9 @@
       "sword"   : 7,
       "thrown"  : -1
     },
+    "abilities": [
+      "strike"
+    ],
     "spells"   : {
       "vs_star"      : 7,
       "banishing"    : 7,
@@ -371,6 +401,9 @@
       "sword"     : 5,
       "thrown"    : 8
     },
+    "abilities": [
+      "strike"
+    ],
     "spells"   : {
     },
     "inventory": {
@@ -414,6 +447,9 @@
       "sword"     : 10,
       "thrown"    : 10
     },
+    "abilities": [
+      "strike"
+    ],
     "spells"   : {
       "fireball"    : 6,
       "air_shield"  : 9,
@@ -454,6 +490,9 @@
       "sword"  : 10,
       "thrown" : -1
     },
+    "abilities": [
+      "strike"
+    ],
     "spells"   : {
       "web_of_starlight": 8,
       "dispel_star"     : 8,
@@ -499,6 +538,9 @@
       "sword"     : 10,
       "thrown"    : -1
     },
+    "abilities": [
+      "strike"
+    ],
     "spells"   : {
     },
     "inventory": {

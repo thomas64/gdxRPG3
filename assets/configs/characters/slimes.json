@@ -2,6 +2,7 @@
   "green_slime"        : {
     "name"     : "Green Slime",
     "school"   : "NONE",
+    "ap"       : 3,
     "xp"       : 2,
     "drops"    : {"green_jelly": 25},
     "stats"    : {
@@ -16,6 +17,9 @@
     "skills"   : {
       "bite": 1
     },
+    "abilities": [
+      "body_slam"
+    ],
     "spells"   : {
     },
     "inventory": {
@@ -25,6 +29,7 @@
   "blue_slime_medicine": {
     "name"     : "Blue Slime",
     "school"   : "NONE",
+    "ap"       : 3,
     "xp"       : 4,
     "drops"    : {"blue_jelly": 100},
     "stats"    : {
@@ -39,6 +44,9 @@
     "skills"   : {
       "bite": 2
     },
+    "abilities": [
+      "body_slam"
+    ],
     "spells"   : {
     },
     "inventory": {
@@ -49,6 +57,7 @@
   "blue_slime"         : {
     "name"     : "Blue Slime",
     "school"   : "NONE",
+    "ap"       : 3,
     "xp"       : 4,
     "drops"    : {"blue_jelly": 25},
     "stats"    : {
@@ -63,6 +72,9 @@
     "skills"   : {
       "bite": 2
     },
+    "abilities": [
+      "body_slam"
+    ],
     "spells"   : {
     },
     "inventory": {

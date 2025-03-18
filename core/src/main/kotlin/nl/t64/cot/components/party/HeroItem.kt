@@ -1,6 +1,7 @@
 package nl.t64.cot.components.party
 
 import nl.t64.cot.components.battle.Character
+import nl.t64.cot.components.party.abilities.AbilityContainer
 import nl.t64.cot.components.party.inventory.EquipContainer
 import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.components.party.inventory.InventoryItem
@@ -24,13 +25,14 @@ class HeroItem(
     school: SchoolType = SchoolType.NONE,
     stats: StatContainer = StatContainer(),
     skills: SkillContainer = SkillContainer(),
+    abilities: AbilityContainer = AbilityContainer(),
     spells: SpellContainer = SpellContainer(),
     inventory: EquipContainer = EquipContainer(),
     isAlive: Boolean = true,
     var hasBeenRecruited: Boolean = false,
     private var isForVeryFirstSetup: Boolean = false
 ) : Character(
-    id, name, school, stats, skills, spells, inventory, isAlive
+    id, name, school, stats, skills, abilities, spells, inventory, isAlive
 ) {
     val isPlayer: Boolean get() = id == Constant.PLAYER_ID
     var totalXp: Int = 0
@@ -51,12 +53,13 @@ class HeroItem(
         school: SchoolType = this.school,
         stats: StatContainer = this.stats,
         skills: SkillContainer = this.skills,
+        abilities: AbilityContainer = this.abilities,
         spells: SpellContainer = this.spells,
         inventory: EquipContainer = this.inventory,
         isAlive: Boolean = this.isAlive,
         hasBeenRecruited: Boolean = this.hasBeenRecruited
     ): HeroItem {
-        return HeroItem(id, name, school, stats, skills, spells, inventory, isAlive, hasBeenRecruited, isForVeryFirstSetup = true)
+        return HeroItem(id, name, school, stats, skills, abilities, spells, inventory, isAlive, hasBeenRecruited, isForVeryFirstSetup = true)
     }
 
     fun hasSameIdAs(candidateHero: HeroItem): Boolean {

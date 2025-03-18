@@ -1,0 +1,16 @@
+{
+  "strike": {
+    "ap"         : 3,
+    "description": [
+      ""
+    ]
+  },
+  "bite"  : {
+    "ap"         : 4,
+    "description": [""]
+  },
+  "body_slam"  : {
+    "ap"         : 2,
+    "description": [""]
+  }
+}

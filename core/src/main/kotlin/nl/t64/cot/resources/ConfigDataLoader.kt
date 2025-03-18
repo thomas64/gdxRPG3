@@ -10,6 +10,8 @@ import nl.t64.cot.components.door.Door
 import nl.t64.cot.components.event.Event
 import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.components.party.HeroItem
+import nl.t64.cot.components.party.abilities.AbilityItem
+import nl.t64.cot.components.party.abilities.AbilityItemId
 import nl.t64.cot.components.party.inventory.InventoryItem
 import nl.t64.cot.components.party.skills.SkillItem
 import nl.t64.cot.components.party.skills.SkillItemId
@@ -100,6 +102,17 @@ object ConfigDataLoader {
             .mapValues {
                 it.value.copy(id = StatItemId.valueOf(it.key.uppercase()),
                               name = it.key.replaceFirstChar(Char::uppercase))
+            }
+    }
+
+    fun createAbilities(): Map<String, AbilityItem> {
+        val json = readString("abilities", "abilities.json")
+        return readValue<AbilityItem>(json)
+            .mapValues {
+                it.value.copy(id = AbilityItemId.valueOf(it.key.uppercase()),
+                              name = it.key.split('_').joinToString(" ") { part ->
+                                  part.replaceFirstChar(Char::uppercase)
+                              })
             }
     }
 

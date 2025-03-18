@@ -3,6 +3,7 @@
     "name"     : "Blue Bat",
     "school"   : "NONE",
     "hp"       : 16,
+    "ap"       : 5,
     "xp"       : 1,
     "drops"    : {"leather": 25},
     "stats"    : {
@@ -17,6 +18,9 @@
     "skills"   : {
       "bite": 1
     },
+    "abilities": [
+      "bite"
+    ],
     "spells"   : {
     },
     "inventory": {
@@ -26,6 +30,7 @@
   "purple_bat": {
     "name"     : "Purple Bat",
     "school"   : "NONE",
+    "ap"       : 5,
     "xp"       : 3,
     "drops"    : {"leather": 25},
     "stats"    : {
@@ -40,6 +45,9 @@
     "skills"   : {
       "bite": 2
     },
+    "abilities": [
+      "bite"
+    ],
     "spells"   : {
     },
     "inventory": {

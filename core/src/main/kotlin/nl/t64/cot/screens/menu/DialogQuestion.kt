@@ -115,7 +115,7 @@ class DialogQuestion(
             padBottom(DIALOG_PAD_BOTTOM)
             contentTable.defaults().width(label.prefWidth + BUTTON_SPACE_RIGHT)
             background.minHeight = dialogHeight
-            text(label)
+            contentTable.add(label)
             buttonTable.add(yesButton).width(BUTTON_WIDTH)
             buttonTable.add(noButton).width(BUTTON_WIDTH)
         }

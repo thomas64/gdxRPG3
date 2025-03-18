@@ -19,6 +19,9 @@
       "wizard" : 10,
       "pole"   : 10
     },
+    "abilities": [
+      "strike"
+    ],
     "spells"   : {
       "mirror"         : 10,
       "vs_naming"      : 10,
