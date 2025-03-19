@@ -35,9 +35,9 @@ private const val BUTTON_WIDTH = 130f
 private const val NUMBER_OF_ITEMS = 2
 private const val EXIT_INDEX = 1
 
-class DialogQuestion(
-    private val yesFunction: () -> Unit,
-    private val message: String
+class QuestionDialog(
+    private val message: String,
+    private val yesFunction: () -> Unit
 ) {
     private val dialogHeight: Float = ((message.lines().count() * FONT_SIZE) + DIALOG_INIT_HEIGHT).toFloat()
     private val font: BitmapFont = resourceManager.getTrueTypeAsset(FONT, FONT_SIZE)

@@ -6,7 +6,7 @@ import nl.t64.cot.audio.stopAllSe
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.stats.StatItem
 import nl.t64.cot.screens.inventory.messagedialog.MessageDialog
-import nl.t64.cot.screens.menu.DialogQuestion
+import nl.t64.cot.screens.menu.QuestionDialog
 
 
 class StatUpgrader private constructor(
@@ -40,10 +40,11 @@ class StatUpgrader private constructor(
     }
 
     private fun showConfirmDialog() {
-        DialogQuestion({ upgradeStat() }, """
-                Are you sure you wish to train
-                $statName for $xpCost XP?""".trimIndent())
-            .show(stage, AudioEvent.SE_CONVERSATION_NEXT, 0)
+        val question = """
+            Are you sure you wish to train
+            $statName for $xpCost XP?""".trimIndent()
+        val dialog = QuestionDialog(question) { upgradeStat() }
+        dialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT, 0)
     }
 
     private fun upgradeStat() {

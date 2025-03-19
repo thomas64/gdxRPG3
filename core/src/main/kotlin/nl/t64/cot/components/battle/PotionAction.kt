@@ -11,24 +11,17 @@ class PotionAction(
     private val selectedPotion: BattlePotionItem
 ) {
     private val character: Character = currentParticipant.character
+    private val message = """
+        ${selectedPotion.description}
 
-    fun isCostingTooMuchAp(): String? {
-        return when {
-            currentParticipant.currentAP < POTION_AP -> {
-                """
-                    ${selectedPotion.description}
+        """
 
-                    Not enough AP!""".trimIndent()
-            }
-            else -> null
+    fun isAble(): Pair<Boolean, String> {
+        return if (currentParticipant.currentAP < POTION_AP) {
+            Pair(false, (message + "Not enough AP!").trimIndent())
+        } else {
+            Pair(true, (message + "Do you want to drink a ${selectedPotion.name} ($POTION_AP AP) ?").trimIndent())
         }
-    }
-
-    fun createConfirmationMessage(): String {
-        return """
-            ${selectedPotion.description}
-
-            Do you want to drink a ${selectedPotion.name} ($POTION_AP AP) ?""".trimIndent()
     }
 
     fun handle(): String {

@@ -27,8 +27,8 @@ import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.inventory.InventoryScreen
 import nl.t64.cot.screens.inventory.messagedialog.MessageDialog
-import nl.t64.cot.screens.menu.DialogQuestion
 import nl.t64.cot.screens.menu.MenuPause
+import nl.t64.cot.screens.menu.QuestionDialog
 import nl.t64.cot.screens.world.Camera
 import kotlin.collections.List
 import kotlin.concurrent.thread
@@ -398,7 +398,7 @@ class BattleScreen : Screen {
         if (moveAction.didCharacterRemainOnTheSameSpace()) return returnToAction()
 
         val message = moveAction.createConfirmationMessage()
-        val dialog = DialogQuestion({ moveConfirmed(moveAction) }, message)
+        val dialog = QuestionDialog(message) { moveConfirmed(moveAction) }
         dialog.show(stage, 0, 0.5f)
     }
 
@@ -426,7 +426,7 @@ class BattleScreen : Screen {
             return
         }
         val message = attackAction.createConfirmationMessage()
-        val dialog = DialogQuestion({ attackConfirmed(attackAction) }, message)
+        val dialog = QuestionDialog(message) { attackConfirmed(attackAction) }
         dialog.setLeftAlignment()
         dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0, 1f)
     }
@@ -443,13 +443,14 @@ class BattleScreen : Screen {
 
     private fun showConfirmPotionDialog(selectedPotion: BattlePotionItem) {
         val potionAction = PotionAction(currentParticipant, selectedPotion)
-        potionAction.isCostingTooMuchAp()?.let { message ->
-            MessageDialog(message).show(stage, AudioEvent.SE_MENU_ERROR)
-            return
+        val (isAble, message) = potionAction.isAble()
+        if (!isAble) {
+            val dialog = MessageDialog(message)
+            dialog.show(stage, AudioEvent.SE_MENU_ERROR)
+        } else {
+            val dialog = QuestionDialog(message) { potionConfirmed(potionAction) }
+            dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0, 0.5f)
         }
-        val message = potionAction.createConfirmationMessage()
-        val dialog = DialogQuestion({ potionConfirmed(potionAction) }, message)
-        dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0, 0.5f)
     }
 
     private fun potionConfirmed(potionAction: PotionAction) {
@@ -473,7 +474,7 @@ class BattleScreen : Screen {
             return
         }
         val message = weaponAction.createConfirmationMessage()
-        val dialog = DialogQuestion({ weaponConfirmed(weaponAction) }, message)
+        val dialog = QuestionDialog(message) { weaponConfirmed(weaponAction) }
         dialog.setLeftAlignment()
         dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0, 0.5f)
     }
@@ -493,13 +494,14 @@ class BattleScreen : Screen {
 
     private fun showFleeDialog() {
         val fleeAction = FleeAction(currentParticipant, battleId)
-        fleeAction.isUnableToFlee()?.let { message ->
-            MessageDialog(message).show(stage, AudioEvent.SE_MENU_ERROR)
-            return
+        val (isAble, message) = fleeAction.isAble()
+        if (!isAble) {
+            val dialog = MessageDialog(message)
+            dialog.show(stage, AudioEvent.SE_MENU_ERROR)
+        } else {
+            val dialog = QuestionDialog(message) { fleeConfirmed(fleeAction) }
+            dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0)
         }
-        val message = fleeAction.createConfirmationMessage()
-        val dialog = DialogQuestion({ fleeConfirmed(fleeAction) }, message)
-        dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0, 0.5f)
     }
 
     private fun fleeConfirmed(fleeAction: FleeAction) {
@@ -523,13 +525,14 @@ class BattleScreen : Screen {
 
     private fun showConfirmRestDialog() {
         val restAction = RestAction(currentParticipant)
-        restAction.isCostingTooMuchAp()?.let { message ->
-            MessageDialog(message).show(stage, AudioEvent.SE_MENU_ERROR)
-            return
+        val (isAble, message) = restAction.isAble()
+        if (!isAble) {
+            val dialog = MessageDialog(message)
+            dialog.show(stage, AudioEvent.SE_MENU_ERROR)
+        } else {
+            val dialog = QuestionDialog(message) { restConfirmed(restAction) }
+            dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0)
         }
-        val message = restAction.createConfirmationMessage()
-        val dialog = DialogQuestion({ restConfirmed(restAction) }, message)
-        dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0)
     }
 
     private fun restConfirmed(restAction: RestAction) {

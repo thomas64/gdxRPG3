@@ -131,8 +131,8 @@ class MenuLoadMain : MenuScreen() {
 
     private fun processDeleteButton() {
         if (isLoaded && profileManager.doesProfileExist(selectedListIndex)) {
-            val deleteMessage = if (selectedListIndex == AUTOSAVE_INDEX) DELETE_MESSAGE_AUTOSAVE else DELETE_MESSAGE
-            DialogQuestion({ deleteSaveFile() }, deleteMessage).show(stage)
+            val question = if (selectedListIndex == AUTOSAVE_INDEX) DELETE_MESSAGE_AUTOSAVE else DELETE_MESSAGE
+            QuestionDialog(question) { deleteSaveFile() }.show(stage)
         } else {
             errorSound()
         }

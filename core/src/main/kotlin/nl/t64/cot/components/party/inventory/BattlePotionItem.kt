@@ -21,7 +21,7 @@ class BattlePotionItem(
     private fun createDescription(): String {
         return inventoryItem.description
             .takeWhile { !it.startsWith("[") }
-            .joinToString("\n")
+            .joinToString(System.lineSeparator())
     }
 
 }

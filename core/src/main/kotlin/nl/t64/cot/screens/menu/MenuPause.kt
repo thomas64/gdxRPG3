@@ -105,7 +105,7 @@ class MenuPause : MenuScreen() {
     }
 
     private fun processMainMenuButton() {
-        DialogQuestion({ openMenuMain() }, DIALOG_MESSAGE).show(stage)
+        QuestionDialog(DIALOG_MESSAGE) { openMenuMain() }.show(stage)
     }
 
     private fun openMenuMain() {

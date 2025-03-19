@@ -11,36 +11,25 @@ class FleeAction(
     private val battleId: String
 ) {
     private val character: Character = currentParticipant.character
-    private val message =
-        "When successful, fleeing will return you to the the location of" +
-            System.lineSeparator() +
-            "your last save with all progress intact. Otherwise, the turn ends." +
-            System.lineSeparator()
+    private val message = """
+        When successful, fleeing will return you to the the location of
+        your last save with all progress intact. Otherwise, the turn ends.
 
-    fun isUnableToFlee(): String? {
+        """
+
+    fun isAble(): Pair<Boolean, String> {
         if (!gameData.battles.isBattleEscapable(battleId)) {
-            return message + """
-
-                You can't flee from this battle.""".trimIndent()
+            return Pair(false, (message + "You can't flee from this battle.").trimIndent())
         }
-
         if (currentParticipant.currentAP < currentParticipant.maximumAP) {
-            return message + """
-
-                Not enough AP!""".trimIndent()
+            return Pair(false, (message + "Not enough AP!").trimIndent())
         }
-        return null
-    }
-
-    fun createConfirmationMessage(): String {
-        return message + """
-
-            Do you want to flee (${currentParticipant.maximumAP} AP) ?""".trimIndent()
+        return Pair(true, (message + "Do you want to flee (${currentParticipant.maximumAP} AP) ?").trimIndent())
     }
 
     fun handle(): Pair<Boolean, String> {
         currentParticipant.currentAP = 0
-        if (preferenceManager.isInDebugMode){
+        if (preferenceManager.isInDebugMode) {
             return Pair(true, "The party successfully debug fled the battle.")
         }
         val chanceToFlee: Int = 10 + (character.getCalculatedTotalSkillOf(SkillItemId.STEALTH) * 6)

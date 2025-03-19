@@ -10,7 +10,7 @@ import nl.t64.cot.components.party.spells.SchoolType
 import nl.t64.cot.components.party.spells.SpellItem
 import nl.t64.cot.screens.inventory.InventoryUtils
 import nl.t64.cot.screens.inventory.messagedialog.MessageDialog
-import nl.t64.cot.screens.menu.DialogQuestion
+import nl.t64.cot.screens.menu.QuestionDialog
 
 
 class SpellUpgrader private constructor(
@@ -35,8 +35,8 @@ class SpellUpgrader private constructor(
     private val hasWizardSkill: Boolean = wizardSkill >= 1
     private val isCompatibleWithSpellSchool: Boolean =
         spellToUpgrade.school == selectedHero.school
-                || spellToUpgrade.school == SchoolType.NEUTRAL
-                || selectedHero.school == SchoolType.UNKNOWN
+            || spellToUpgrade.school == SchoolType.NEUTRAL
+            || selectedHero.school == SchoolType.UNKNOWN
     private val hasEnoughWizardSkill: Boolean = wizardSkill >= spellToUpgrade.minWizard
     private val xpCost: Int = spellToUpgrade.getXpCostForNextRank(teacherSpell, wizardSkill, totalScholar)
     private val hasEnoughXp: Boolean = selectedHero.hasEnoughXpFor(xpCost)
@@ -63,10 +63,11 @@ class SpellUpgrader private constructor(
     }
 
     private fun showConfirmDialog() {
-        DialogQuestion({ upgradeSpell() }, """
-                Are you sure you wish to learn
-                $spellName for $xpCost XP and $goldCost gold?""".trimIndent())
-            .show(stage, AudioEvent.SE_CONVERSATION_NEXT, 0)
+        val question = """
+            Are you sure you wish to learn
+            $spellName for $xpCost XP and $goldCost gold?""".trimIndent()
+        val dialog = QuestionDialog(question) { upgradeSpell() }
+        dialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT, 0)
     }
 
     private fun upgradeSpell() {

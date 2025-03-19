@@ -9,7 +9,7 @@ import nl.t64.cot.components.party.skills.SkillItem
 import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.screens.inventory.InventoryUtils
 import nl.t64.cot.screens.inventory.messagedialog.MessageDialog
-import nl.t64.cot.screens.menu.DialogQuestion
+import nl.t64.cot.screens.menu.QuestionDialog
 
 
 class SkillUpgrader private constructor(
@@ -51,10 +51,11 @@ class SkillUpgrader private constructor(
     }
 
     private fun showConfirmDialog() {
-        DialogQuestion({ upgradeSkill() }, """
-                Are you sure you wish to train
-                $skillName for $xpCost XP and $goldCost gold?""".trimIndent())
-            .show(stage, AudioEvent.SE_CONVERSATION_NEXT, 0)
+        val question = """
+            Are you sure you wish to train
+            $skillName for $xpCost XP and $goldCost gold?""".trimIndent()
+        val dialog = QuestionDialog(question) { upgradeSkill() }
+        dialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT, 0)
     }
 
     private fun upgradeSkill() {

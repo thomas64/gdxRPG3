@@ -10,26 +10,18 @@ class RestAction(
 ) {
     private val character: Character = currentParticipant.character
     private val hero: HeroItem = character as HeroItem
+    private val message = """
+        Resting will make the current character
+        end this turn and recover 1 HP.
 
-    fun isCostingTooMuchAp(): String? {
-        return when {
-            currentParticipant.currentAP < REST_AP -> {
-                """
-                    Resting will make the current character
-                    end this turn and recover 1 HP.
+        """
 
-                    Not enough AP!""".trimIndent()
-            }
-            else -> null
+    fun isAble(): Pair<Boolean, String> {
+        return if (currentParticipant.currentAP < REST_AP) {
+            Pair(false, (message + "Not enough AP!").trimIndent())
+        } else {
+            Pair(true, (message + "Do you want to rest ($REST_AP AP) ?").trimIndent())
         }
-    }
-
-    fun createConfirmationMessage(): String {
-        return """
-            Resting will make the current character
-            end this turn and recover 1 HP.
-
-            Do you want to rest ($REST_AP AP) ?""".trimIndent()
     }
 
     fun handle(): String {

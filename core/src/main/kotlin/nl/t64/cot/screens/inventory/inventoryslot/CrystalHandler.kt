@@ -15,7 +15,7 @@ import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.inventory.InventoryScreen
 import nl.t64.cot.screens.inventory.InventoryUtils
-import nl.t64.cot.screens.menu.DialogQuestion
+import nl.t64.cot.screens.menu.QuestionDialog
 import nl.t64.cot.sfx.TransitionImage
 import nl.t64.cot.sfx.TransitionPurpose
 
@@ -32,11 +32,12 @@ class CrystalHandler private constructor() {
 
     private fun possibleHandle() {
         if (screenManager.getCurrentParchmentScreen() is InventoryScreen) {
-            DialogQuestion({ certainHandle() }, """
+            val question = """
                 Do you want to save your progress,
                 reset time and everything that happened,
-                and return to your home?""".trimIndent())
-                .show(stage, AudioEvent.SE_CONVERSATION_NEXT, 0)
+                and return to your home?""".trimIndent()
+            val dialog = QuestionDialog(question) { certainHandle() }
+            dialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT, 0)
         }
     }
 

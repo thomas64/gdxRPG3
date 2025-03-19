@@ -110,7 +110,7 @@ class MenuLoadPause : MenuScreen() {
         if (!isLoaded || profiles[selectedListIndex].contains(INVALID_PROFILE_VIEW)) {
             errorSound()
         } else {
-            DialogQuestion({ fadeBeforeOpenWorldScreen() }, LOAD_MESSAGE).show(stage)
+            QuestionDialog(LOAD_MESSAGE) { fadeBeforeOpenWorldScreen() }.show(stage)
         }
     }
 
