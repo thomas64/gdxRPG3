@@ -6,11 +6,12 @@ import com.badlogic.gdx.scenes.scene2d.InputListener
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
+import nl.t64.cot.components.party.abilities.BattleAbilityItem
 import nl.t64.cot.constants.Constant
 
 
 class SelectAttackListener(
-    private val attack: (String) -> Unit,
+    private val attack: (BattleAbilityItem) -> Unit,
     private val back: () -> Unit
 ) : InputListener() {
 
@@ -20,20 +21,19 @@ class SelectAttackListener(
         when (keycode) {
             Input.Keys.UP -> playSe(AudioEvent.SE_MENU_CURSOR)
             Input.Keys.DOWN -> playSe(AudioEvent.SE_MENU_CURSOR)
-            Constant.KEYCODE_BOTTOM ,Input.Keys.ENTER, Input.Keys.A -> event.handleEnter()
+            Constant.KEYCODE_BOTTOM, Input.Keys.ENTER, Input.Keys.A -> event.handleEnter()
             Constant.KEYCODE_RIGHT, Input.Keys.ESCAPE -> handleEscape(back)
         }
         return true
     }
 
     private fun InputEvent.handleEnter() {
-        getSelected<String>()?.let {
-            when {
-                "Strike" in it -> {
-                    playSe(AudioEvent.SE_MENU_CONFIRM)
-                    attack("Strike")
-                }
-                "Back" in it -> handleEscape(back)
+        val selected: BattleAbilityItem = getSelected() ?: return
+        when {
+            selected.name == "Back" -> handleEscape(back)
+            else -> {
+                playSe(AudioEvent.SE_MENU_CONFIRM)
+                attack.invoke(selected)
             }
         }
     }

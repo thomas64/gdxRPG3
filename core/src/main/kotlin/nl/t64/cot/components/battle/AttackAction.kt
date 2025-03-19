@@ -2,6 +2,7 @@ package nl.t64.cot.components.battle
 
 import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.components.party.HeroItem
+import nl.t64.cot.components.party.abilities.BattleAbilityItem
 import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.components.party.inventory.InventoryItem
 import nl.t64.cot.components.party.skills.SkillItemId
@@ -9,9 +10,9 @@ import kotlin.random.Random
 
 
 class AttackAction(
-    currentParticipant: Participant,
+    private val currentParticipant: Participant,
     private val target: Character,
-    private val selectedAttack: String,
+    private val selectedAttack: BattleAbilityItem,
 ) {
     private val attacker: Character = currentParticipant.character
 
@@ -27,12 +28,10 @@ class AttackAction(
 
     companion object {
         fun createForEnemy(currentEnemy: Participant, targetHero: Participant, battleId: String): AttackAction {
-            // todo, weaponName is niet de bedoeling, dit moet een 'spell' worden. body slam, bite, etc.
-            // de names van die weapons moeten dus ook niet in enemy.json staan.
-            val weaponName: String = currentEnemy.character.getInventoryItem(InventoryGroup.WEAPON)!!.name
-            return AttackAction(currentEnemy, targetHero.character, weaponName) // ← hier dus
+            // todo, when enemies get more than 1 ability in the future, the .first() part needs to be adjusted.
+            val ability: BattleAbilityItem = currentEnemy.getBattleAbilities().first()
+            return AttackAction(currentEnemy, targetHero.character, ability)
                 .specialCasesWorkaround(battleId, targetHero)
-
         }
 
         private fun AttackAction.specialCasesWorkaround(battleId: String, targetHero: Participant): AttackAction {
@@ -45,63 +44,77 @@ class AttackAction(
         }
     }
 
-    fun createPreviewMessage(): String {
-        val weapon: InventoryItem = attacker.getInventoryItem(InventoryGroup.WEAPON)!!
-        if (criticalHitPercentage <= 0) {
-            return """
-                3 AP
-                $selectedAttack ${target.name} with ${weapon.name} (${weapon.durability} uses)
-
-                Chance to hit:  $cappedHitPercentage%   |   Damage:  $damage""".trimIndent()
-        } else {
-            return """
-                3 AP
-                $selectedAttack ${target.name} with ${weapon.name} (${weapon.durability} uses)
-
-                Chance to hit:  $cappedHitPercentage%   |   Normal damage:  $damage
-                ----------------------------------------------------
-                Critical hit:  $criticalHitPercentage%   |   Critical damage:  $criticalDamage""".trimIndent()
+    fun isCostingTooMuchAp(): String? {
+        return when {
+            selectedAttack.ap > currentParticipant.currentAP -> {
+                createPreviewMessage() +
+                    System.lineSeparator() +
+                    "_________________" +
+                    System.lineSeparator() +
+                    System.lineSeparator() +
+                    "    Not enough AP!"
+            }
+            else -> null
         }
     }
 
     fun createConfirmationMessage(): String {
-        val weapon: InventoryItem = attacker.getInventoryItem(InventoryGroup.WEAPON)!!
-        if (criticalHitPercentage <= 0) {
-            return """
-                Do you want to $selectedAttack ${target.name} with
-                ${weapon.name} (${weapon.durability} uses) for 3 AP ?
+        return createPreviewMessage() +
+            System.lineSeparator() +
+            "_________________" + """
 
-                Chance to hit:  $cappedHitPercentage%   |   Damage:  $damage""".trimIndent()
-        } else {
-            return """
-                Do you want to $selectedAttack ${target.name} with
-                ${weapon.name} (${weapon.durability} uses) for 3 AP ?
+            Attack?"""
+    }
 
-                Chance to hit:  $cappedHitPercentage%   |   Normal damage:  $damage
-                ----------------------------------------------------
-                Critical hit:  $criticalHitPercentage%   |   Critical damage:  $criticalDamage""".trimIndent()
-        }
+    fun createPreviewMessage(): String {
+        return selectedAttack.currentWeapon?.let {
+            """
+                ${selectedAttack.name} (${selectedAttack.ap} AP)
+
+                Target: ${target.name}
+                Weapon: ${it.name}
+                Durability: ${it.durability}
+                ${it.getRangeText()}
+
+                Chance to hit: $cappedHitPercentage%
+                Damage: $damage
+                Critical chance: $criticalHitPercentage%
+                Critical damage: $criticalDamage
+            """.trimIndent()
+        } ?: """
+            ${selectedAttack.name} (${selectedAttack.ap} AP)
+
+            Target: ${target.name}
+
+            No weapon equipped!
+        """.trimIndent()
     }
 
     fun handle(): ArrayDeque<String> {
+        if (currentParticipant.currentAP < selectedAttack.ap) {
+            return ArrayDeque(listOf("${attacker.name} ended their turn."))
+        }
+
+        currentParticipant.currentAP -= selectedAttack.ap
         val messages = ArrayDeque<String>()
-        messages.add("${attacker.name} used $selectedAttack on ${target.name}.")
+        messages.add("${attacker.name} used ${selectedAttack.name} on ${target.name}.")
 
         if (isHit) {
             handleSuccess(messages)
         } else {
             handleFailure(messages)
         }
+        createDebugMessage()
         return messages
     }
 
     private fun handleSuccess(messages: ArrayDeque<String>) {
-        val weapon: InventoryItem = attacker.getInventoryItem(InventoryGroup.WEAPON)!!
+        val weapon: InventoryItem = selectedAttack.currentWeapon!!
         weapon.durability--
         val damageDone = if (isCriticalHit) criticalDamage else damage
         target.takeDamage(damageDone)
         val damageTypeMessage = if (isCriticalHit) "A critical hit! " else ""
-        messages.add("$damageTypeMessage${selectedAttack} successfully did $damageDone damage.${createDebugMessage()}")
+        messages.add("$damageTypeMessage${selectedAttack.name} successfully did $damageDone damage.")
 
         // "(It's super effective!)"
         // "(It's not very effective...)"
@@ -116,7 +129,7 @@ class AttackAction(
     }
 
     private fun handleFailure(messages: ArrayDeque<String>) {
-        messages.add("${attacker.name}'s attack failed.${createDebugMessage()}")
+        messages.add("${attacker.name}'s attack failed.")
     }
 
     private fun calculateDamage(): Int {
@@ -125,11 +138,9 @@ class AttackAction(
         return (attack - protection).coerceAtLeast(1)
     }
 
-    private fun createDebugMessage(): String {
+    private fun createDebugMessage() {
         if (preferenceManager.isInDebugMode) {
-            return " (${hitPercentage}% hit, ${criticalHitPercentage}% critHit)"
-        } else {
-            return ""
+            println("${attacker.name}: ${hitPercentage}% hit, ${criticalHitPercentage}% critHit.")
         }
     }
 

@@ -15,9 +15,9 @@ import nl.t64.cot.components.battle.Character
 import nl.t64.cot.components.battle.EnemyItem
 import nl.t64.cot.components.battle.Participant
 import nl.t64.cot.components.party.HeroItem
+import nl.t64.cot.components.party.abilities.BattleAbilityItem
 import nl.t64.cot.components.party.inventory.BattlePotionItem
 import nl.t64.cot.components.party.inventory.BattleWeaponItem
-import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.components.party.inventory.InventoryItem
 import nl.t64.cot.components.party.stats.StatItemId
 import nl.t64.cot.constants.Constant
@@ -179,7 +179,8 @@ class BattleScreenBuilder {
     }
 
     fun createButtonTableAttack(currentParticipant: Participant): Table {
-        return createStyledEmptyList<String>().fillWithAttacksFor(currentParticipant).toAttackTable()
+        val abilities: List<BattleAbilityItem> = currentParticipant.getBattleAbilities()
+        return createStyledEmptyList<BattleAbilityItem>().fillWithAttacks(abilities).toAttackTable()
     }
 
     fun createButtonTableMove(): Table {
@@ -209,23 +210,19 @@ class BattleScreenBuilder {
             "Move (1+ AP)",
             "Potion (3 AP)",
             "Switch weapon (3 AP)",
-            "Rest (2 AP)",
             "Preview hit and damage",
             "Inventory",
             "Flee battle",
+            "Rest (2 AP)",
             "End turn"
         )
         this.selectedIndex = buttonTableActionIndex
         return this
     }
 
-    private fun GdxList<String>.fillWithAttacksFor(current: Participant): GdxList<String> {
-        val weaponRange: List<Int>? = current.character.getInventoryItem(InventoryGroup.WEAPON)?.getWeaponRange()
-        val rangeText: String? = weaponRange?.let { if (it.size == 1) "Range: 1" else "Range: ${it.first()} - ${it.last()}" }
-        val attackText: String = rangeText?.let { "Strike ($it) (3 AP)" } ?: "No weapon equipped"
-        val attacks: List<String> = listOf(attackText, "Back")
-
-        this.setItems(*attacks.toTypedArray())
+    private fun GdxList<BattleAbilityItem>.fillWithAttacks(abilities: List<BattleAbilityItem>): GdxList<BattleAbilityItem> {
+        this.setItems(*abilities.toTypedArray())
+        items.add(BattleAbilityItem("Back"))
         this.selectedIndex = 0
         return this
     }
@@ -263,7 +260,7 @@ class BattleScreenBuilder {
         }
     }
 
-    private fun GdxList<String>.toAttackTable(): Table {
+    private fun GdxList<BattleAbilityItem>.toAttackTable(): Table {
         val listWithAttacks = this
         return createSelectionTable().apply {
             add("Select Attack:").padBottom(10f).row()

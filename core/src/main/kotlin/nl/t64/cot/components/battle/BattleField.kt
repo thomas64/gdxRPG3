@@ -1,5 +1,6 @@
 package nl.t64.cot.components.battle
 
+import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import kotlin.math.abs
@@ -72,14 +73,19 @@ class BattleField(participants: List<Participant>) {
             return heroSpaces[nearestHeroIndex]
         }
 
-        // if hero is not in range, move enemy to nearest space where hero is in range.
+        // if hero is not in range, move enemy to nearest space where hero is in range that it's AP will allow.
         currentEnemy.getNearestSpaceToMoveToForAnAttack(nearestHeroIndices)
+            ?.also { currentEnemy.takeApForMovingTo(it) }
             ?.let { currentEnemy.moveEnemyToIndex(it) }
-            // or don't move enemy if no such space is available.
+        //  or don't move enemy if no such space is available.
             ?: return null
 
-        // return hero that is now in range.
-        val indexOfTargetedHero: Int = nearestHeroIndices.first { it in currentEnemy.getRangeOfEnemy() }
+        // take the index of the hero that is now in range.
+        val indexOfTargetedHero: Int = nearestHeroIndices
+            .firstOrNull { it in currentEnemy.getRangeOfEnemy() }
+        //  or not when the AP was not enough to reach the hero.
+            ?: return null
+
         return heroSpaces[indexOfTargetedHero]
     }
 
@@ -120,18 +126,40 @@ class BattleField(participants: List<Participant>) {
     private fun Participant.getNearestSpaceToMoveToForAnAttack(heroIndices: List<Int>): Int? {
         val currentEnemyIndex: Int = this.getCurrentSpaceIndex()
         val enemyWeaponRanges: List<Int> = this.getWeaponRanges()
-        return enemySpaces.indices
+
+        val targetSpaceToMoveTo: Int? = enemySpaces.indices
             .filter { enemySpaces[it] == null }
-            .filter { heroIndices.isAnyHeroInWeaponRange(it, enemyWeaponRanges) }
+            .filter { heroIndices.isAnyHeroInWeaponRangeFrom(it, enemyWeaponRanges) }
             .minByOrNull { abs(it - currentEnemyIndex) }
+
+        return targetSpaceToMoveTo?.takeIf { abs(it - currentEnemyIndex) <= this.currentAP }
+            ?: targetSpaceToMoveTo?.let { this.findFarthestReachableSpaceTo(it) }
     }
 
-    private fun List<Int>.isAnyHeroInWeaponRange(enemyIndex: Int, enemyWeaponRanges: List<Int>): Boolean {
+    private fun List<Int>.isAnyHeroInWeaponRangeFrom(enemyIndex: Int, enemyWeaponRanges: List<Int>): Boolean {
         val heroIndices: List<Int> = this
         return enemyWeaponRanges.any { range ->
             heroIndices.any { heroIndex ->
                 enemyIndex - range + 1 == heroIndex || enemyIndex + range == heroIndex
             }
+        }
+    }
+
+    private fun Participant.findFarthestReachableSpaceTo(targetIndex: Int): Int? {
+        val currentEnemyIndex: Int = this.getCurrentSpaceIndex()
+        val direction: Int = if (targetIndex > currentEnemyIndex) 1 else -1
+        return (1..currentAP)
+            .map { currentEnemyIndex + it * direction }
+            .lastOrNull { enemySpaces[it] == null }
+    }
+
+    private fun Participant.takeApForMovingTo(targetIndex: Int) {
+        if (preferenceManager.isInDebugMode) {
+            println("${this.character.name} AP: ${this.currentAP}")
+        }
+        this.currentAP -= abs(targetIndex - this.getCurrentSpaceIndex())
+        if (preferenceManager.isInDebugMode) {
+            println("${this.character.name} AP: ${this.currentAP}")
         }
     }
 

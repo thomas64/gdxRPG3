@@ -12,12 +12,14 @@ import com.badlogic.gdx.utils.ScreenUtils
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.gameData
+import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playBgm
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.audio.stopAllBgm
 import nl.t64.cot.components.battle.*
+import nl.t64.cot.components.party.abilities.BattleAbilityItem
 import nl.t64.cot.components.party.inventory.BattlePotionItem
 import nl.t64.cot.components.party.inventory.BattleWeaponItem
 import nl.t64.cot.components.party.inventory.InventoryGroup
@@ -85,7 +87,7 @@ class BattleScreen : Screen {
                                                       { showConfirmRestDialog() },
                                                       { selectPreviewAttack() },
                                                       { showInventoryScreen() },
-                                                      { showConfirmEndTurnDialog() },
+                                                      { endTurn() },
                                                       { showFleeDialog() })
     private val listenerMove = SelectMoveListener({ moveLeft() }, { moveRight() }, { showConfirmMoveDialog() }, { returnToAction() })
     private val listenerPreviewAttack = SelectAttackListener({ previewAttackIsSelected(it) }, { returnToAction() })
@@ -273,7 +275,7 @@ class BattleScreen : Screen {
         setupPreviewAttackTable()
     }
 
-    private fun previewAttackIsSelected(attack: String) {
+    private fun previewAttackIsSelected(attack: BattleAbilityItem) {
         buttonTableAttack.remove()
         setupPreviewTargetTable(attack)
     }
@@ -284,7 +286,7 @@ class BattleScreen : Screen {
         setupAttackTable()
     }
 
-    private fun attackIsSelected(attack: String) {
+    private fun attackIsSelected(attack: BattleAbilityItem) {
         buttonTableAttack.remove()
         setupTargetTable(attack)
     }
@@ -352,7 +354,7 @@ class BattleScreen : Screen {
         stage.keyboardFocus = buttonTableAttack.children.last()
     }
 
-    private fun setupPreviewTargetTable(selectedAttack: String) {
+    private fun setupPreviewTargetTable(selectedAttack: BattleAbilityItem) {
         val onlyEnemies = turnManager.participants.filter { !it.isHero }
         buttonTableTarget = screenBuilder.createButtonTableTarget(onlyEnemies)
         stage.addActor(buttonTableTarget)
@@ -361,7 +363,7 @@ class BattleScreen : Screen {
         stage.keyboardFocus = buttonTableTarget.children.last()
     }
 
-    private fun setupTargetTable(selectedAttack: String) {
+    private fun setupTargetTable(selectedAttack: BattleAbilityItem) {
         val targetableEnemies: List<Participant> = battleField.getTargetableEnemiesFor(currentParticipant)
         buttonTableTarget = screenBuilder.createButtonTableTarget(targetableEnemies)
         stage.addActor(buttonTableTarget)
@@ -406,18 +408,28 @@ class BattleScreen : Screen {
         returnToAction()
     }
 
-    private fun showPreviewDialog(selectedAttack: String, selectedTarget: String) {
+    private fun showPreviewDialog(selectedAttack: BattleAbilityItem, selectedTarget: String) {
         val attackAction = AttackAction(currentParticipant, enemies.getEnemy(selectedTarget), selectedAttack)
         val message = attackAction.createPreviewMessage()
         val dialog = MessageDialog(message)
-        dialog.show(stage)
+        dialog.setLeftAlignment()
+        dialog.setWidthToMinimum()
+        dialog.show(stage, AudioEvent.SE_MENU_CONFIRM)
     }
 
-    private fun showConfirmAttackDialog(selectedAttack: String, selectedTarget: String) {
+    private fun showConfirmAttackDialog(selectedAttack: BattleAbilityItem, selectedTarget: String) {
         val attackAction = AttackAction(currentParticipant, enemies.getEnemy(selectedTarget), selectedAttack)
+        attackAction.isCostingTooMuchAp()?.let { message ->
+            val dialog = MessageDialog(message)
+            dialog.setLeftAlignment()
+            dialog.setWidthToMinimum()
+            dialog.show(stage, AudioEvent.SE_MENU_ERROR)
+            return
+        }
         val message = attackAction.createConfirmationMessage()
         val dialog = DialogQuestion({ attackConfirmed(attackAction) }, message)
-        dialog.show(stage, 0, 1f)
+        dialog.setLeftAlignment()
+        dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0, 1f)
     }
 
     private fun attackConfirmed(attackAction: AttackAction) {
@@ -426,16 +438,19 @@ class BattleScreen : Screen {
         isDelayingTurn = true
         Utils.runWithDelay(0.5f) {
             showMessages(messages)
-            turnManager.setNextTurn()
-            isDelayingTurn = false
+            turnManager.removeKilledParticipants()
         }
     }
 
     private fun showConfirmPotionDialog(selectedPotion: BattlePotionItem) {
         val potionAction = PotionAction(currentParticipant, selectedPotion)
+        potionAction.isCostingTooMuchAp()?.let { message ->
+            MessageDialog(message).show(stage, AudioEvent.SE_MENU_ERROR)
+            return
+        }
         val message = potionAction.createConfirmationMessage()
         val dialog = DialogQuestion({ potionConfirmed(potionAction) }, message)
-        dialog.show(stage, 0, 0.5f)
+        dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0, 0.5f)
     }
 
     private fun potionConfirmed(potionAction: PotionAction) {
@@ -444,7 +459,6 @@ class BattleScreen : Screen {
         val audio: AudioEvent = if (message.contains("no effect")) AudioEvent.SE_CONVERSATION_NEXT else AudioEvent.SE_POTION
         val messageDialog = MessageDialog(message)
         messageDialog.setActionAfterHide {
-            turnManager.setNextTurn()
             isDelayingTurn = false
         }
         isDelayingTurn = true
@@ -459,8 +473,9 @@ class BattleScreen : Screen {
             MessageDialog(message).show(stage, AudioEvent.SE_MENU_ERROR)
             return
         }
-        val message: String = weaponAction.createConfirmationMessage()
+        val message = weaponAction.createConfirmationMessage()
         val dialog = DialogQuestion({ weaponConfirmed(weaponAction) }, message)
+        dialog.setLeftAlignment()
         dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0, 0.5f)
     }
 
@@ -469,7 +484,6 @@ class BattleScreen : Screen {
         val message: String = weaponAction.handle()
         val messageDialog = MessageDialog(message)
         messageDialog.setActionAfterHide {
-            turnManager.setNextTurn()
             isDelayingTurn = false
         }
         isDelayingTurn = true
@@ -480,16 +494,20 @@ class BattleScreen : Screen {
 
     private fun showConfirmRestDialog() {
         val restAction = RestAction(currentParticipant)
+        restAction.isCostingTooMuchAp()?.let { message ->
+            MessageDialog(message).show(stage, AudioEvent.SE_MENU_ERROR)
+            return
+        }
         val message = restAction.createConfirmationMessage()
         val dialog = DialogQuestion({ restConfirmed(restAction) }, message)
-        dialog.show(stage, 0)
+        dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0)
     }
 
     private fun restConfirmed(restAction: RestAction) {
         screenBuilder.buttonTableActionIndex = 0
         buttonTableAction.remove()
         val message: String = restAction.handle()
-        val audio: AudioEvent = if (message.contains("skipped")) AudioEvent.SE_CONVERSATION_NEXT else AudioEvent.SE_POTION
+        val audio: AudioEvent = if (message.contains("ended")) AudioEvent.SE_CONVERSATION_NEXT else AudioEvent.SE_POTION
         val messageDialog = MessageDialog(message)
         messageDialog.setActionAfterHide {
             turnManager.setNextTurn()
@@ -501,12 +519,7 @@ class BattleScreen : Screen {
         }
     }
 
-    private fun showConfirmEndTurnDialog() {
-        val dialog = DialogQuestion({ endTurnConfirmed() }, "End your turn?")
-        dialog.show(stage, 0)
-    }
-
-    private fun endTurnConfirmed() {
+    private fun endTurn() {
         screenBuilder.buttonTableActionIndex = 0
         buttonTableAction.remove()
         val message = "${currentParticipant.character.name} ended their turn."
@@ -537,9 +550,10 @@ class BattleScreen : Screen {
         thread {
             runCatching {
                 enemyAction()
+            }.onFailure {
+                if (preferenceManager.isInDebugMode) it.printStackTrace()
             }.also {
                 isEnemyActing = false
-                isDelayingTurn = false
             }
         }
     }
@@ -551,9 +565,14 @@ class BattleScreen : Screen {
         val messages: ArrayDeque<String> = heroTarget
             ?.let { AttackAction.createForEnemy(currentParticipant, it, battleId).handle() }
             ?: ArrayDeque(listOf("${currentParticipant.character.name} ended their turn."))
-        showMessages(messages)
-        Thread.sleep(1000L)
-        turnManager.setNextTurn()
+        if (messages.none { it.contains("ended their turn") }) {
+            showMessages(messages)
+            turnManager.removeKilledParticipants()
+        } else {
+            showMessages(messages)
+            Thread.sleep(1000L)
+            turnManager.setNextTurn()
+        }
     }
 
     private fun openPauseMenu() {
@@ -567,7 +586,10 @@ class BattleScreen : Screen {
     }
 
     private fun showMessages(messages: ArrayDeque<String>) {
-        if (messages.isEmpty()) return
+        if (messages.isEmpty()) {
+            isDelayingTurn = false
+            return
+        }
 
         val messageDialog = MessageDialog(messages.removeFirst())
         if (messages.isNotEmpty()) {
@@ -655,7 +677,7 @@ class BattleScreen : Screen {
 
         return when {
 
-            currentCycle in 1 .. 3 && isFacingArdorOrOrcGenerals -> """
+            currentCycle in 1..3 && isFacingArdorOrOrcGenerals -> """
                 Mozes is knocked down.
 
                 The fight is over.""".trimIndent()

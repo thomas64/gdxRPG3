@@ -30,7 +30,7 @@ class MoveAction(
     }
 
     fun handle() {
-        // todo:       currentParticipant.currentAP -= amountOfSteps
+        currentParticipant.currentAP -= difference
         battleField.setStartingSpace(currentParticipant)
     }
 

@@ -28,7 +28,7 @@ class TurnManager(
         nextInLine.refreshActionPoints()
     }
 
-    private fun removeKilledParticipants() {
+    fun removeKilledParticipants() {
         participants.removeIf { it.character.isDead }
     }
 

@@ -1,6 +1,5 @@
 {
   "slime_slam": {
-    "name"        : "Body Slam",
     "group"       : "WEAPON",
     "skill"       : "BITE",
     "min_strength": 1,
@@ -8,7 +7,6 @@
     "damage"      : 9
   },
   "bat_bite"  : {
-    "name"        : "Bite",
     "group"       : "WEAPON",
     "skill"       : "BITE",
     "min_strength": 1,

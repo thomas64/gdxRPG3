@@ -268,4 +268,13 @@ data class InventoryItem(
             First unequip the ${otherItem.name}.""".trimIndent()
     }
 
+    fun getRangeText(): String {
+        val weaponRange: List<Int> = getWeaponRange()
+        return if (weaponRange.size == 1) {
+            "Range: 1"
+        } else {
+            "Range: ${weaponRange.first()} - ${weaponRange.last()}"
+        }
+    }
+
 }

@@ -1,7 +1,9 @@
 package nl.t64.cot.components.battle
 
 import nl.t64.cot.components.party.HeroItem
+import nl.t64.cot.components.party.abilities.BattleAbilityItem
 import nl.t64.cot.components.party.inventory.InventoryGroup
+import nl.t64.cot.components.party.inventory.InventoryItem
 import nl.t64.cot.components.party.stats.StatItemId
 
 
@@ -32,7 +34,16 @@ class Participant(
     }
 
     fun getWeaponRanges(): List<Int> {
-        return character.getInventoryItem(InventoryGroup.WEAPON)?.getWeaponRange().orEmpty()
+        return getCurrentWeapon()?.getWeaponRange().orEmpty()
+    }
+
+    fun getBattleAbilities(): List<BattleAbilityItem> {
+        val currentWeapon: InventoryItem? = getCurrentWeapon()
+        return character.getAllAbilities().map { BattleAbilityItem(it, currentWeapon) }
+    }
+
+    private fun getCurrentWeapon(): InventoryItem? {
+        return character.getInventoryItem(InventoryGroup.WEAPON)
     }
 
 }

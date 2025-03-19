@@ -4,21 +4,35 @@ import nl.t64.cot.Utils.gameData
 import nl.t64.cot.components.party.inventory.BattlePotionItem
 
 
+private const val POTION_AP: Int = 3
+
 class PotionAction(
-    currentParticipant: Participant,
+    private val currentParticipant: Participant,
     private val selectedPotion: BattlePotionItem
 ) {
     private val character: Character = currentParticipant.character
 
+    fun isCostingTooMuchAp(): String? {
+        return when {
+            currentParticipant.currentAP < POTION_AP -> {
+                """
+                    ${selectedPotion.description}
+
+                    Not enough AP!""".trimIndent()
+            }
+            else -> null
+        }
+    }
 
     fun createConfirmationMessage(): String {
         return """
             ${selectedPotion.description}
 
-            Do you want to drink a ${selectedPotion.name} ?""".trimIndent()
+            Do you want to drink a ${selectedPotion.name} ($POTION_AP AP) ?""".trimIndent()
     }
 
     fun handle(): String {
+        currentParticipant.currentAP -= POTION_AP
         gameData.inventory.autoRemoveItem(selectedPotion.id, 1)
         val oldHp = character.currentHp
         character.drink(selectedPotion)

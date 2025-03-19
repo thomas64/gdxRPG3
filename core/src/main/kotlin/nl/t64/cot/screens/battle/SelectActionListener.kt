@@ -47,17 +47,26 @@ class SelectActionListener(
 
     private fun InputEvent.handleEnter() {
         getSelected<String>()?.let { selected ->
-            playSe(AudioEvent.SE_MENU_CONFIRM)
+            if ("Attack" in selected
+                || "Move" in selected
+                || "Potion" in selected
+                || "Switch" in selected
+                || "Preview" in selected
+                || "Flee" in selected
+                || "End" in selected
+            ) {
+                playSe(AudioEvent.SE_MENU_CONFIRM)
+            }
             when {
                 "Attack" in selected -> selectAttack()
                 "Move" in selected -> selectMove()
                 "Potion" in selected -> selectPotion()
                 "Switch" in selected -> selectWeapon()
-                "Rest" in selected -> rest()
                 "Preview" in selected -> selectPreview()
                 "Inventory" in selected -> inventoryScreen()
-                "End" in selected -> endTurn()
                 "Flee" in selected -> fleeBattle()
+                "Rest" in selected -> rest()
+                "End" in selected -> endTurn()
             }
         }
     }

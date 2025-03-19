@@ -16,7 +16,10 @@ class SelectPotionListener(
 ) : InputListener() {
 
     override fun keyDown(event: InputEvent, keycode: Int): Boolean {
-        if (event.stage.actors.items.any { it is Dialog }) return true
+        if (event.stage.actors.items.any { it is Dialog }) {
+            event.dontLoseFocusAfterEsc()
+            return true
+        }
 
         when (keycode) {
             Input.Keys.UP -> playSe(AudioEvent.SE_MENU_CURSOR)
@@ -31,10 +34,7 @@ class SelectPotionListener(
         val selected: BattlePotionItem = getSelected() ?: return
         when {
             selected.name == "Back" -> handleEscape(back)
-            else -> {
-                playSe(AudioEvent.SE_MENU_CONFIRM)
-                potion.invoke(selected)
-            }
+            else -> potion.invoke(selected)
         }
     }
 

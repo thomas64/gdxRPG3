@@ -3,21 +3,36 @@ package nl.t64.cot.components.battle
 import nl.t64.cot.components.party.HeroItem
 
 
+private const val REST_AP: Int = 2
+
 class RestAction(
-    currentParticipant: Participant
+    private val currentParticipant: Participant
 ) {
     private val character: Character = currentParticipant.character
 
+    fun isCostingTooMuchAp(): String? {
+        return when {
+            currentParticipant.currentAP < REST_AP -> {
+                """
+                    Resting will make the current character
+                    end this turn and recover 1 HP.
+
+                    Not enough AP!""".trimIndent()
+            }
+            else -> null
+        }
+    }
 
     fun createConfirmationMessage(): String {
         return """
             Resting will make the current character
             end this turn and recover 1 HP.
 
-            Do you want to rest for 2 AP?""".trimIndent()
+            Do you want to rest (2 AP) ?""".trimIndent()
     }
 
     fun handle(): String {
+        currentParticipant.currentAP -= REST_AP
         if (character.currentHp == character.maximumHp) {
             return "${character.name} ended their turn."
         } else {

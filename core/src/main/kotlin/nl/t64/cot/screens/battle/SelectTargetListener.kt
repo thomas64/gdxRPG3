@@ -6,14 +6,15 @@ import com.badlogic.gdx.scenes.scene2d.InputListener
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
+import nl.t64.cot.components.party.abilities.BattleAbilityItem
 import nl.t64.cot.constants.Constant
 
 
 class SelectTargetListener(
-    private val enemy: (String, String) -> Unit,
+    private val enemy: (BattleAbilityItem, String) -> Unit,
     private val back: () -> Unit
 ) : InputListener() {
-    private lateinit var selectedAttack: String
+    private lateinit var selectedAttack: BattleAbilityItem
 
     override fun keyDown(event: InputEvent, keycode: Int): Boolean {
         if (event.stage.actors.items.any { it is Dialog }) {
@@ -30,7 +31,7 @@ class SelectTargetListener(
         return true
     }
 
-    fun setSelectedAttack(attack: String) {
+    fun setSelectedAttack(attack: BattleAbilityItem) {
         selectedAttack = attack
     }
 
@@ -38,10 +39,7 @@ class SelectTargetListener(
         val selectedTarget: String = getSelected() ?: return
         when (selectedTarget) {
             "Back" -> handleEscape(back)
-            else -> {
-                playSe(AudioEvent.SE_MENU_CONFIRM)
-                enemy.invoke(selectedAttack, selectedTarget)
-            }
+            else -> enemy.invoke(selectedAttack, selectedTarget)
         }
     }
 
