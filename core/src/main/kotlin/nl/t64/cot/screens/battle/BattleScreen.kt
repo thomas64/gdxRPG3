@@ -16,7 +16,6 @@ import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playBgm
-import nl.t64.cot.audio.playSe
 import nl.t64.cot.audio.stopAllBgm
 import nl.t64.cot.components.battle.*
 import nl.t64.cot.components.party.abilities.BattleAbilityItem
@@ -326,7 +325,7 @@ class BattleScreen : Screen {
     private fun setupActionTable() {
         battleField.cancelMovement(currentParticipant)
         battleField.resetStartingSpace()
-        buttonTableAction = screenBuilder.createButtonTableAction()
+        buttonTableAction = screenBuilder.createButtonTableAction(currentParticipant)
         stage.addActor(buttonTableAction)
         buttonTableAction.addListener(listenerAction)
         stage.keyboardFocus = buttonTableAction.children.last()
@@ -492,6 +491,36 @@ class BattleScreen : Screen {
         }
     }
 
+    private fun showFleeDialog() {
+        val fleeAction = FleeAction(currentParticipant, battleId)
+        fleeAction.isUnableToFlee()?.let { message ->
+            MessageDialog(message).show(stage, AudioEvent.SE_MENU_ERROR)
+            return
+        }
+        val message = fleeAction.createConfirmationMessage()
+        val dialog = DialogQuestion({ fleeConfirmed(fleeAction) }, message)
+        dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0, 0.5f)
+    }
+
+    private fun fleeConfirmed(fleeAction: FleeAction) {
+        screenBuilder.buttonTableActionIndex = 0
+        buttonTableAction.remove()
+        val (isSuccess, message) = fleeAction.handle()
+        val messageDialog = MessageDialog(message)
+        messageDialog.setActionAfterHide {
+            if (isSuccess) {
+                battleFledExitScreen()
+            } else {
+                turnManager.setNextTurn()
+            }
+            isDelayingTurn = false
+        }
+        isDelayingTurn = true
+        Utils.runWithDelay(0.5f) {
+            messageDialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT)
+        }
+    }
+
     private fun showConfirmRestDialog() {
         val restAction = RestAction(currentParticipant)
         restAction.isCostingTooMuchAp()?.let { message ->
@@ -630,21 +659,6 @@ class BattleScreen : Screen {
     private fun battleWonExitScreen() {
         gameData.clock.takeHalfHour()
         exitScreen { battleObserver.notifyBattleWon(battleId, enemies.getSpoils()) }
-    }
-
-    private fun showFleeDialog() {
-        if (!gameData.battles.isBattleEscapable(battleId)) {
-            playSe(AudioEvent.SE_MENU_ERROR)
-            return
-        }
-
-        val message = """
-            When successful, fleeing will return you to the the location of
-            your last save with all progress intact. Otherwise, the turn ends.
-
-            Do you want to flee?""".trimIndent()
-        val dialog = DialogQuestion({ battleFledExitScreen() }, message)
-        dialog.show(stage, 0)
     }
 
     private fun battleFledExitScreen() {

@@ -174,8 +174,8 @@ class BattleScreenBuilder {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    fun createButtonTableAction(): Table {
-        return createStyledEmptyList<String>().fillWithActions().toActionTable()
+    fun createButtonTableAction(currentParticipant: Participant): Table {
+        return createStyledEmptyList<String>().fillWithActions(currentParticipant).toActionTable()
     }
 
     fun createButtonTableAttack(currentParticipant: Participant): Table {
@@ -204,7 +204,7 @@ class BattleScreenBuilder {
         return createStyledEmptyList<BattleWeaponItem>().fillWithWeapons(weapons).toWeaponTable(currentWeapon)
     }
 
-    private fun GdxList<String>.fillWithActions(): GdxList<String> {
+    private fun GdxList<String>.fillWithActions(currentParticipant: Participant): GdxList<String> {
         this.setItems(
             "Attack (? AP)",
             "Move (1+ AP)",
@@ -212,7 +212,7 @@ class BattleScreenBuilder {
             "Switch weapon (3 AP)",
             "Preview hit and damage",
             "Inventory",
-            "Flee battle",
+            "Flee battle (${currentParticipant.maximumAP} AP)",
             "Rest (2 AP)",
             "End turn"
         )

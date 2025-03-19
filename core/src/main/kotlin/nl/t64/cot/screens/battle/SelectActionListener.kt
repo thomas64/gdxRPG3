@@ -52,7 +52,6 @@ class SelectActionListener(
                 || "Potion" in selected
                 || "Switch" in selected
                 || "Preview" in selected
-                || "Flee" in selected
                 || "End" in selected
             ) {
                 playSe(AudioEvent.SE_MENU_CONFIRM)

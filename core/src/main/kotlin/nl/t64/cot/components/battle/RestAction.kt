@@ -9,6 +9,7 @@ class RestAction(
     private val currentParticipant: Participant
 ) {
     private val character: Character = currentParticipant.character
+    private val hero: HeroItem = character as HeroItem
 
     fun isCostingTooMuchAp(): String? {
         return when {
@@ -28,7 +29,7 @@ class RestAction(
             Resting will make the current character
             end this turn and recover 1 HP.
 
-            Do you want to rest (2 AP) ?""".trimIndent()
+            Do you want to rest ($REST_AP AP) ?""".trimIndent()
     }
 
     fun handle(): String {
@@ -36,7 +37,7 @@ class RestAction(
         if (character.currentHp == character.maximumHp) {
             return "${character.name} ended their turn."
         } else {
-            (character as HeroItem).recoverPartHp(1)
+            hero.recoverPartHp(1)
             return "${character.name} rested for a turn and recovered 1 HP."
         }
     }
