@@ -128,6 +128,18 @@ abstract class Character(
         return getSumOfEquipmentOfCalc(CalcAttributeId.PROTECTION) + getPossibleExtraProtection()
     }
 
+    fun getCalculatedTotalDefense(): Int {
+        return when {
+            inventory.getInventoryItem(InventoryGroup.SHIELD) == null -> 0
+            else -> {
+                val shieldDefense: Int = getSumOfEquipmentOfCalc(CalcAttributeId.DEFENSE)
+                val shieldSkillAmount: Int = getCalculatedTotalSkillOf(SkillItemId.SHIELD)
+                val defenderDefense: Float = (shieldDefense / 100f) * (10f * shieldSkillAmount)
+                return (shieldDefense + defenderDefense).roundToInt()
+            }
+        }
+    }
+
     private fun SkillItemId.toCalculatedTotalHit(): Int {
         val weaponSkill: SkillItemId = this
         val weaponHit: Int = getSumOfEquipmentOfCalc(CalcAttributeId.BASE_HIT)

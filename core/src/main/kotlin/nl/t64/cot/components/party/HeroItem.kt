@@ -16,7 +16,6 @@ import nl.t64.cot.components.party.stats.StatContainer
 import nl.t64.cot.components.party.stats.StatItem
 import nl.t64.cot.components.party.stats.StatItemId
 import nl.t64.cot.constants.Constant
-import kotlin.math.roundToInt
 
 
 class HeroItem(
@@ -226,18 +225,6 @@ class HeroItem(
         return when (getSumOfEquipmentOfCalc(CalcAttributeId.TRANSFORMATION)) {
             1 -> Constant.TRANSFORMATION_ORC
             else -> Constant.PLAYER_ID
-        }
-    }
-
-    fun getCalculatedTotalDefense(): Int {
-        return when {
-            inventory.getInventoryItem(InventoryGroup.SHIELD) == null -> 0
-            else -> {
-                val shieldDefense: Int = getSumOfEquipmentOfCalc(CalcAttributeId.DEFENSE)
-                val shieldSkillAmount: Int = getCalculatedTotalSkillOf(SkillItemId.SHIELD)
-                val defenderDefense: Float = (shieldDefense / 100f) * (10f * shieldSkillAmount)
-                return (shieldDefense + defenderDefense).roundToInt()
-            }
         }
     }
 

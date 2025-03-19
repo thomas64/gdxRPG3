@@ -19,6 +19,7 @@ class AttackAction(
     private val hitPercentage: Int = attacker.getCalculatedTotalHit()
     private val cappedHitPercentage: Int = hitPercentage.coerceAtMost(100)
     private var isHit: Boolean = hitPercentage > Random.nextInt(0, 100)
+    private val isBlock: Boolean = target.getCalculatedTotalDefense() > Random.nextInt(0, 100)
     private val damage: Int = calculateDamage()
     private val cappedDamage: Int = damage.coerceAtMost(target.currentHp)
     private val criticalHitPercentage: Int = attacker.getCalculatedTotalSkillOf(SkillItemId.WARRIOR) * 4
@@ -111,10 +112,14 @@ class AttackAction(
     private fun handleSuccess(messages: ArrayDeque<String>) {
         val weapon: InventoryItem = selectedAttack.currentWeapon!!
         weapon.durability--
-        val damageDone = if (isCriticalHit) criticalDamage else damage
-        target.takeDamage(damageDone)
-        val damageTypeMessage = if (isCriticalHit) "A critical hit! " else ""
-        messages.add("$damageTypeMessage${selectedAttack.name} successfully did $damageDone damage.")
+        if (isBlock) {
+            messages.add("${target.name} blocked the attack.")
+        } else {
+            val damageDone = if (isCriticalHit) criticalDamage else damage
+            target.takeDamage(damageDone)
+            val damageTypeMessage = if (isCriticalHit) "A critical hit! " else ""
+            messages.add("$damageTypeMessage${selectedAttack.name} successfully did $damageDone damage.")
+        }
 
         // "(It's super effective!)"
         // "(It's not very effective...)"
