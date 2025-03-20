@@ -547,7 +547,7 @@ class BattleScreen : Screen {
         }
         isDelayingTurn = true
         Utils.runWithDelay(0.5f) {
-            messageDialog.show(stage, audio)
+            messageDialog.show(stage, audio, 0.25f)
         }
     }
 
@@ -623,14 +623,27 @@ class BattleScreen : Screen {
             return
         }
 
-        val messageDialog = MessageDialog(messages.removeFirst())
+        val message: String = messages.removeFirst()
+        val messageDialog = MessageDialog(message)
         if (messages.isNotEmpty()) {
             messageDialog.disableClosingSound()
         }
         messageDialog.setActionAfterHide {
             showMessages(messages)
         }
-        messageDialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT)
+        messageDialog.show(stage, getAudioEventBasedOn(message))
+    }
+
+    private fun getAudioEventBasedOn(message: String): AudioEvent {
+        return when {
+            message.contains("blocked the attack.") -> AudioEvent.SE_BLOCK
+            message.contains("attack failed.") -> AudioEvent.SE_DODGE
+            message.contains("A critical hit!") -> AudioEvent.SE_CRIT_HIT
+            message.contains("successfully did")
+                && message.contains("damage.") -> AudioEvent.SE_DAMAGE
+            message.contains("is defeated.") -> AudioEvent.SE_VANISH
+            else -> AudioEvent.SE_CONVERSATION_NEXT
+        }
     }
 
     private fun winBattle() {

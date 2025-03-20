@@ -35,10 +35,6 @@ class MessageDialog(
     private var actionAfterHide: (() -> Unit)? = null
     private var playClosingSound: Boolean = true
 
-    init {
-        applyListeners()
-    }
-
     fun setActionAfterHide(actionAfterHide: () -> Unit) {
         this.actionAfterHide = actionAfterHide
     }
@@ -47,9 +43,10 @@ class MessageDialog(
         playClosingSound = false
     }
 
-    fun show(stage: Stage, event: AudioEvent? = null) {
+    fun show(stage: Stage, event: AudioEvent? = null, confirmDelay: Float = 0f) {
         event?.let { playSe(it) }
         dialog.show(stage)
+        Utils.runWithDelay(confirmDelay) { applyListeners() }
     }
 
     fun setLeftAlignment() {

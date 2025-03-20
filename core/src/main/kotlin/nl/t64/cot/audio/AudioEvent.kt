@@ -53,6 +53,7 @@ enum class AudioEvent(val filePath: String, val volume: Float = 1f) {
     SE_CONVERSATION_END("audio/se/botw_sys_talk_end.wav", 0.6f),
     SE_CONVERSATION_CURSOR("audio/se/botw_sys_cursormove_sub.wav", 0.2f),
     SE_MINIMAP("audio/se/botw_sys_spur_revival.wav"),
+    SE_CRIT_HIT("audio/se/botw_enemyhit_critical.wav"),
 
     SE_REWARD("audio/se/virix_reward.wav", 0.4f),
     SE_QUEST_FAIL("audio/se/virix_quest_fail.wav", 0.5f),
@@ -70,6 +71,7 @@ enum class AudioEvent(val filePath: String, val volume: Float = 1f) {
     SE_BANG("audio/se/whooshes_impacts2_whooshes_032.ogg", 0.4f),
     SE_MAGIC("audio/se/just_transitions_creepy_008.ogg", 0.5f),
     SE_RESET("audio/se/just_transitions_creepy_031.ogg", 0.5f),
+    SE_VANISH("audio/se/tiny_transiotions2_goose_hissing_01_edit.ogg"),
     SE_LEVELUP("audio/se/copyc4t_levelup.ogg", 0.1f),
     SE_POTION("audio/se/p0ss_heal.ogg", 0.1f),
 
@@ -77,6 +79,8 @@ enum class AudioEvent(val filePath: String, val volume: Float = 1f) {
     SE_FIGHT_ON("audio/se/unknown_fight_on.ogg", 0.2f),
     SE_RESTORE("audio/se/unknown_healing.ogg", 0.2f),
     SE_UPGRADE("audio/se/unknown_upgrade.ogg", 0.5f),
+    SE_BLOCK("audio/se/unknown_block.wav", 0.4f),
+    SE_DODGE("audio/se/unknown_dodge.wav", 0.4f),
 
     SE_MAGIC_BANG("audio/se/mv_collapse2.ogg", 0.2f),
     SE_SCROLL("audio/se/mv_book2.ogg", 0.2f),
@@ -86,6 +90,7 @@ enum class AudioEvent(val filePath: String, val volume: Float = 1f) {
     SE_LARGE_DOOR("audio/se/mv_open5.ogg", 0.2f),
     SE_WOODEN_GATE("audio/se/mv_earth4.ogg", 0.2f),
     SE_ACTIVATE("audio/se/mv_dlc_up10_a.ogg", 0.2f),
+    SE_DAMAGE("audio/se/mv_dlc_blow10_a.ogg", 0.1f),
 
     SE_STEP_CARPET1("audio/se/footsteps/oot_step_carpet1.wav", 0.9f),
     SE_STEP_CARPET2("audio/se/footsteps/oot_step_carpet2.wav", 0.9f),
