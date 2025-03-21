@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor
 import com.badlogic.gdx.scenes.scene2d.Group
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.Table
+import kotlin.random.Random
 
 
 class ShakeEffect(
@@ -15,7 +16,7 @@ class ShakeEffect(
     fun start() {
         val target: Actor? = findActorIn(battleFieldTable)
         target?.addAction(Actions.sequence(
-            Actions.delay(0.4f),
+            Actions.delay(0.2f),
             ShakeAction()
         ))
     }
@@ -48,8 +49,8 @@ private class ShakeAction(
         if (elapsedTime < duration) {
             val shakeAmount: Float = intensity * (1 - elapsedTime / duration)
             actor.setPosition(
-                originalX + (Math.random().toFloat() - 0.5f) * shakeAmount,
-                originalY + (Math.random().toFloat() - 0.5f) * shakeAmount
+                originalX + (Random.nextFloat() - 0.5f) * shakeAmount,
+                originalY + (Random.nextFloat() - 0.5f) * shakeAmount
             )
             return false
         }

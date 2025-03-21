@@ -1,6 +1,6 @@
 package nl.t64.cot.screens.world.entity
 
-import com.badlogic.gdx.math.MathUtils
+import kotlin.random.Random
 
 
 enum class Direction {
@@ -24,11 +24,10 @@ enum class Direction {
 
     companion object {
         fun getRandom(): Direction {
-            val randomNumber = MathUtils.random(getAllDirectionsWithoutNONE())
+            val allDirectionsWithoutNONE = entries.size - 1
+            val randomNumber = Random.nextInt(allDirectionsWithoutNONE)
             return entries[randomNumber]
         }
-
-        private fun getAllDirectionsWithoutNONE(): Int = entries.size - 2
     }
 
 }

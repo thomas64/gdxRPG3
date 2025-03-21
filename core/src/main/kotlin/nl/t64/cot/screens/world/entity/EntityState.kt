@@ -1,6 +1,6 @@
 package nl.t64.cot.screens.world.entity
 
-import com.badlogic.gdx.math.MathUtils
+import kotlin.random.Random
 
 
 enum class EntityState {
@@ -21,11 +21,10 @@ enum class EntityState {
 
     companion object {
         fun getRandomIdleOrWalking(): EntityState {
-            val randomNumber = MathUtils.random(getOnlyIdleAndWalking())
+            val onlyIdleAndWalking = 2
+            val randomNumber = Random.nextInt(onlyIdleAndWalking)
             return entries[randomNumber]
         }
-
-        private fun getOnlyIdleAndWalking(): Int = entries.size - (entries.size - 1)
     }
 
 }
