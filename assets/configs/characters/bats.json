@@ -1,6 +1,7 @@
 {
   "blue_bat"  : {
     "name"     : "Blue Bat",
+    "gender"   : "its",
     "school"   : "NONE",
     "hp"       : 16,
     "ap"       : 5,
@@ -29,6 +30,7 @@
   },
   "purple_bat": {
     "name"     : "Purple Bat",
+    "gender"   : "its",
     "school"   : "NONE",
     "ap"       : 5,
     "xp"       : 3,

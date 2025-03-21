@@ -27,7 +27,7 @@ class RestAction(
     fun handle(): String {
         currentParticipant.currentAP -= REST_AP
         if (character.currentHp == character.maximumHp) {
-            return "${character.name} ended their turn."
+            return "${character.name} ended ${character.gender} turn."
         } else {
             hero.recoverPartHp(1)
             return "${character.name} rested for a turn and recovered 1 HP."

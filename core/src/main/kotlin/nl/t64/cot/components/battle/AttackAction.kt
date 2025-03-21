@@ -93,7 +93,7 @@ class AttackAction(
 
     fun handle(): ArrayDeque<String> {
         if (currentParticipant.currentAP < selectedAttack.ap) {
-            return ArrayDeque(listOf("${attacker.name} ended their turn."))
+            return ArrayDeque(listOf("${attacker.name} ended ${attacker.gender} turn."))
         }
 
         currentParticipant.currentAP -= selectedAttack.ap
@@ -115,10 +115,10 @@ class AttackAction(
         if (isBlock) {
             messages.add("${target.name} blocked the attack.")
         } else {
-            val damageDone = if (isCriticalHit) criticalDamage else damage
+            val damageDone: Int = if (isCriticalHit) criticalDamage else damage
             target.takeDamage(damageDone)
-            val damageTypeMessage = if (isCriticalHit) "A critical hit! " else ""
-            messages.add("$damageTypeMessage${selectedAttack.name} successfully did $damageDone damage.")
+            val critMessage: String = if (isCriticalHit) "A critical hit! " else ""
+            messages.add("$critMessage${selectedAttack.name} successfully did $damageDone damage.")
         }
 
         // "(It's super effective!)"

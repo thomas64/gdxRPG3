@@ -15,6 +15,7 @@ import kotlin.random.Random
 class EnemyItem(
     id: String = "",
     name: String = "",
+    gender: String = "",
     school: SchoolType = SchoolType.NONE,
     private val hp: Int = 0,
     private val ap: Int = 0,
@@ -27,7 +28,7 @@ class EnemyItem(
     val xp: Int = 0,
     private val drops: Map<String, Int> = emptyMap()
 ) : Character(
-    id, name, school, stats, skills, abilities, spells, inventory, isAlive
+    id, name, gender, school, stats, skills, abilities, spells, inventory, isAlive
 ) {
     override val maximumHp: Int get() = if (stats.getById(StatItemId.CONSTITUTION).rank == 0) hp else stats.maximumHp
 
@@ -39,6 +40,7 @@ class EnemyItem(
     fun createCopy(
         id: String = this.id,
         name: String = this.name,
+        gender: String = this.gender,
         school: SchoolType = this.school,
         hp: Int = this.hp,
         ap: Int = this.ap,
@@ -51,7 +53,7 @@ class EnemyItem(
         xp: Int = this.xp,
         drops: Map<String, Int> = this.drops
     ): EnemyItem {
-        return EnemyItem(id, name, school, hp, ap, stats, skills, abilities, spells, inventory, isAlive, xp, drops)
+        return EnemyItem(id, name, gender, school, hp, ap, stats, skills, abilities, spells, inventory, isAlive, xp, drops)
     }
 
     override fun getCalculatedActionPoints(): Int {

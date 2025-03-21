@@ -20,6 +20,7 @@ import kotlin.math.roundToInt
 abstract class Character(
     val id: String = "",
     val name: String = "",
+    val gender: String = "",
     val school: SchoolType = SchoolType.NONE,
     protected val stats: StatContainer = StatContainer(),
     protected val skills: SkillContainer = SkillContainer(),

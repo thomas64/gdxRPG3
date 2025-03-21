@@ -1,6 +1,7 @@
 {
   "green_slime"        : {
     "name"     : "Green Slime",
+    "gender"   : "its",
     "school"   : "NONE",
     "ap"       : 3,
     "xp"       : 2,
@@ -28,6 +29,7 @@
   },
   "blue_slime_medicine": {
     "name"     : "Blue Slime",
+    "gender"   : "its",
     "school"   : "NONE",
     "ap"       : 3,
     "xp"       : 4,
@@ -56,6 +58,7 @@
   },
   "blue_slime"         : {
     "name"     : "Blue Slime",
+    "gender"   : "its",
     "school"   : "NONE",
     "ap"       : 3,
     "xp"       : 4,

@@ -21,6 +21,7 @@ import nl.t64.cot.constants.Constant
 class HeroItem(
     id: String = "",
     name: String = "",
+    gender: String = "",
     school: SchoolType = SchoolType.NONE,
     stats: StatContainer = StatContainer(),
     skills: SkillContainer = SkillContainer(),
@@ -31,7 +32,7 @@ class HeroItem(
     var hasBeenRecruited: Boolean = false,
     private var isForVeryFirstSetup: Boolean = false
 ) : Character(
-    id, name, school, stats, skills, abilities, spells, inventory, isAlive
+    id, name, gender, school, stats, skills, abilities, spells, inventory, isAlive
 ) {
     val isPlayer: Boolean get() = id == Constant.PLAYER_ID
     var totalXp: Int = 0
@@ -49,6 +50,7 @@ class HeroItem(
     fun createCopy(
         id: String,
         name: String = this.name,
+        gender: String = this.gender,
         school: SchoolType = this.school,
         stats: StatContainer = this.stats,
         skills: SkillContainer = this.skills,
@@ -58,7 +60,7 @@ class HeroItem(
         isAlive: Boolean = this.isAlive,
         hasBeenRecruited: Boolean = this.hasBeenRecruited
     ): HeroItem {
-        return HeroItem(id, name, school, stats, skills, abilities, spells, inventory, isAlive, hasBeenRecruited, isForVeryFirstSetup = true)
+        return HeroItem(id, name, gender, school, stats, skills, abilities, spells, inventory, isAlive, hasBeenRecruited, isForVeryFirstSetup = true)
     }
 
     fun hasSameIdAs(candidateHero: HeroItem): Boolean {

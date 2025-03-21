@@ -1,6 +1,7 @@
 {
   "orc_scout"   : {
     "name"     : "Orc Scout",
+    "gender"   : "its",
     "school"   : "NONE",
     "ap"       : 4,
     "xp"       : 11,
@@ -43,6 +44,7 @@
   },
   "orc_sergeant": {
     "name"     : "Orc Sergeant",
+    "gender"   : "its",
     "school"   : "NONE",
     "ap"       : 6,
     "xp"       : 27,
@@ -76,6 +78,7 @@
   },
   "orc_general" : {
     "name"     : "Orc General",
+    "gender"   : "its",
     "school"   : "NECROMANCY",
     "xp"       : 90,
     "drops"    : {"masterwork_axe": 50, "masterwork_heavy_shield": 50, "stamina_potion": 90, "gold": 90},

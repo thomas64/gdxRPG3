@@ -1,6 +1,7 @@
 {
   "ardor": {
     "name"     : "Ardor",
+    "gender"   : "his",
     "school"   : "UNKNOWN",
     "xp"       : 100,
     "drops"    : {"gold": 90},

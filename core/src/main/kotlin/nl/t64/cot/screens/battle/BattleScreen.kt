@@ -556,7 +556,7 @@ class BattleScreen : Screen {
     private fun endTurn() {
         screenBuilder.buttonTableActionIndex = 0
         buttonTableAction.remove()
-        val message = "${currentParticipant.character.name} ended their turn."
+        val message = "${currentParticipant.character.name} ended ${currentParticipant.character.gender} turn."
         val messageDialog = MessageDialog(message)
         messageDialog.setActionAfterHide {
             turnManager.setNextTurn()
@@ -599,8 +599,8 @@ class BattleScreen : Screen {
         val messages: ArrayDeque<String> = heroTarget
             ?.let { AttackAction.createForEnemy(currentParticipant, it, battleId).handle() }
             ?.also { currentTarget = heroTarget.character }
-            ?: ArrayDeque(listOf("${currentParticipant.character.name} ended their turn."))
-        if (messages.none { it.contains("ended their turn") }) {
+            ?: ArrayDeque(listOf("${currentParticipant.character.name} ended ${currentParticipant.character.gender} turn."))
+        if (messages.none { it.contains("ended") && it.contains("turn") }) {
             showMessages(messages)
             turnManager.removeKilledParticipants()
         } else {

@@ -1,6 +1,7 @@
 {
   "mozes"   : {
     "name"     : "Mozes",
+    "gender"   : "his",
     "school"   : "UNKNOWN",
     "stats"    : {
       "intelligence": 10,
@@ -31,6 +32,7 @@
   },
   "luana"   : {
     "name"     : "Luana",
+    "gender"   : "her",
     "school"   : "ELEMENTAL",
     "stats"    : {
       "intelligence": 10,
@@ -65,6 +67,7 @@
   },
   "reignald": {
     "name"     : "Reignald",
+    "gender"   : "his",
     "school"   : "NONE",
     "stats"    : {
       "intelligence": 10,
@@ -102,6 +105,7 @@
   },
   "ryiah"   : {
     "name"     : "Ryiah",
+    "gender"   : "her",
     "school"   : "NAMING",
     "stats"    : {
       "intelligence": 22,
@@ -139,6 +143,7 @@
   },
   "valter"  : {
     "name"     : "Valter",
+    "gender"   : "his",
     "school"   : "ELEMENTAL",
     "stats"    : {
       "intelligence": 22,
@@ -176,6 +181,7 @@
   },
   "galen"   : {
     "name"     : "Galen",
+    "gender"   : "his",
     "school"   : "NONE",
     "stats"    : {
       "intelligence": 15,
@@ -213,6 +219,7 @@
   },
   "jaspar"  : {
     "name"     : "Jaspar",
+    "gender"   : "his",
     "school"   : "NONE",
     "stats"    : {
       "intelligence": 6,
@@ -254,6 +261,7 @@
   },
   "kiara"   : {
     "name"     : "Kiara",
+    "gender"   : "her",
     "school"   : "ELEMENTAL",
     "stats"    : {
       "intelligence": 15,
@@ -294,6 +302,7 @@
   },
   "luthais" : {
     "name"     : "Luthais",
+    "gender"   : "his",
     "school"   : "ELEMENTAL",
     "stats"    : {
       "intelligence": 30,
@@ -337,6 +346,7 @@
   },
   "elias"   : {
     "name"     : "Elias",
+    "gender"   : "his",
     "school"   : "NAMING",
     "stats"    : {
       "intelligence": 30,
@@ -376,6 +386,7 @@
   },
   "onarr"   : {
     "name"     : "Onarr",
+    "gender"   : "his",
     "school"   : "NONE",
     "stats"    : {
       "intelligence": 30,
@@ -416,6 +427,7 @@
   },
   "duilio"  : {
     "name"     : "Duilio",
+    "gender"   : "his",
     "school"   : "ELEMENTAL",
     "stats"    : {
       "intelligence": 25,
@@ -467,6 +479,7 @@
   },
   "iellwen" : {
     "name"     : "Iellwen",
+    "gender"   : "her",
     "school"   : "STAR",
     "stats"    : {
       "intelligence": 35,
@@ -509,6 +522,7 @@
   },
   "faeron"  : {
     "name"     : "Faeron",
+    "gender"   : "his",
     "school"   : "NAMING",
     "stats"    : {
       "intelligence": 30,
