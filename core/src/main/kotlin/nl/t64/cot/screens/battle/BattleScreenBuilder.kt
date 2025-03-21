@@ -205,19 +205,32 @@ class BattleScreenBuilder {
     }
 
     private fun GdxList<String>.fillWithActions(currentParticipant: Participant): GdxList<String> {
-        this.setItems(
-            "Attack (? AP)",
-            "Move (1+ AP)",
-            "Potion (3 AP)",
-            "Switch weapon (3 AP)",
-            "Preview hit and damage",
-            "Inventory",
-            "Flee battle (${currentParticipant.maximumAP} AP)",
-            "Rest (2 AP)",
-            "End turn"
+        val maxAp: Int = currentParticipant.maximumAP
+        val actions: List<Pair<String, Int>> = listOf(
+            "Attack (3-3 AP)" to 3,
+            "Move (1-$maxAp AP)" to 1,
+            "Potion (3 AP)" to 3,
+            "Switch weapon (3 AP)" to 3,
+            "Preview hit and damage" to 0,
+            "Inventory" to 0,
+            "Flee battle ($maxAp AP)" to maxAp,
+            "Rest (2 AP)" to 2,
+            "End turn" to 0
         )
+        val actionStrings: List<String> = actions.map { (action, ap) ->
+            "${currentParticipant.getColorBasedOn(ap)}$action"
+        }
+        this.setItems(*actionStrings.toTypedArray())
+
+        if (currentParticipant.currentAP <= 2) {
+            buttonTableActionIndex = 8
+        }
         this.selectedIndex = buttonTableActionIndex
         return this
+    }
+
+    private fun Participant.getColorBasedOn(requestedAp: Int): String {
+        return if (this.currentAP < requestedAp) "[GRAY]" else ""
     }
 
     private fun GdxList<BattleAbilityItem>.fillWithAttacks(abilities: List<BattleAbilityItem>): GdxList<BattleAbilityItem> {
@@ -344,7 +357,7 @@ class BattleScreenBuilder {
 
     private fun <T> createStyledEmptyList(bottomHeight: Float = 0f): GdxList<T> {
         return GdxList<T>(ListStyle().apply {
-            font = resourceManager.getTrueTypeAsset(TEXT_FONT, FONT_SIZE)
+            font = resourceManager.getTrueTypeAsset(TEXT_FONT, FONT_SIZE).apply { data.markupEnabled = true }
             fontColorSelected = Color.GOLD
             fontColorUnselected = Color.WHITE
             background = Color.CLEAR.toDrawable()

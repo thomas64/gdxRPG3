@@ -3,6 +3,7 @@
     "upgrade"    : 6,
     "description": [
       "- 'Stealth' increases the chance to successfully flee combat.",
+      "  Each rank in 'Stealth' increases the probability of this by 6%.",
       "",
       "- 'Stealth' decreases the attention this character draws from enemies in combat."
     ]

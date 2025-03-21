@@ -11,9 +11,13 @@ class FleeAction(
     private val battleId: String
 ) {
     private val character: Character = currentParticipant.character
+    private val chanceToFlee: Int = 10 + (character.getCalculatedTotalSkillOf(SkillItemId.STEALTH) * 6)
     private val message = """
         When successful, fleeing will return you to the the location of
         your last save with all progress intact. Otherwise, the turn ends.
+
+        Your chance to flee is $chanceToFlee%. The higher your Stealth
+        skill, the higher the chance to flee successfully.
 
         """
 
@@ -32,7 +36,6 @@ class FleeAction(
         if (preferenceManager.isInDebugMode) {
             return Pair(true, "The party successfully debug fled the battle.")
         }
-        val chanceToFlee: Int = 10 + (character.getCalculatedTotalSkillOf(SkillItemId.STEALTH) * 6)
         return if (chanceToFlee >= Random.nextInt(0, 100)) {
             Pair(true, "The party successfully fled the battle.")
         } else {
