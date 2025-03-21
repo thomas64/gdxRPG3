@@ -163,7 +163,10 @@ class BattleFieldTableBuilder {
     private fun createImageOf(participant: Participant): Container<Image> {
         return Container(
             Image(Utils.getCharImage(participant.character.id)[0][1])
-                .apply { setScaling(Scaling.none) }
+                .apply {
+                    setScaling(Scaling.none)
+                    name = participant.character.name
+                }
         ).left()
     }
 

@@ -46,6 +46,7 @@ class BattleScreen : Screen {
     private lateinit var turnManager: TurnManager
     private lateinit var battleField: BattleField
     private lateinit var currentParticipant: Participant
+    private lateinit var currentTarget: Character
 
     private val screenBuilder = BattleScreenBuilder()
     private val battleFieldBuilder = BattleFieldTableBuilder()
@@ -417,7 +418,8 @@ class BattleScreen : Screen {
     }
 
     private fun showConfirmAttackDialog(selectedAttack: BattleAbilityItem, selectedTarget: String) {
-        val attackAction = AttackAction(currentParticipant, enemies.getEnemy(selectedTarget), selectedAttack)
+        currentTarget = enemies.getEnemy(selectedTarget)
+        val attackAction = AttackAction(currentParticipant, currentTarget, selectedAttack)
         attackAction.isCostingTooMuchAp()?.let { message ->
             val dialog = MessageDialog(message)
             dialog.setLeftAlignment()
@@ -596,6 +598,7 @@ class BattleScreen : Screen {
         isDelayingTurn = true
         val messages: ArrayDeque<String> = heroTarget
             ?.let { AttackAction.createForEnemy(currentParticipant, it, battleId).handle() }
+            ?.also { currentTarget = heroTarget.character }
             ?: ArrayDeque(listOf("${currentParticipant.character.name} ended their turn."))
         if (messages.none { it.contains("ended their turn") }) {
             showMessages(messages)
@@ -632,6 +635,9 @@ class BattleScreen : Screen {
             showMessages(messages)
         }
         messageDialog.show(stage, getAudioEventBasedOn(message))
+        if (message.contains("successfully did") && message.contains("damage.")) {
+            ShakeEffect(battleFieldTable, currentTarget.name).start()
+        }
     }
 
     private fun getAudioEventBasedOn(message: String): AudioEvent {
@@ -645,6 +651,8 @@ class BattleScreen : Screen {
             else -> AudioEvent.SE_CONVERSATION_NEXT
         }
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun winBattle() {
         if (isDelayingTurn || hasWon) return
