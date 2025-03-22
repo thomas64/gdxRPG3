@@ -7,6 +7,7 @@ import kotlin.math.abs
 
 
 private const val BATTLE_FIELD_SIZE = 20
+private const val PENALTY_AP: Int = 3
 
 class BattleField(participants: List<Participant>) {
 
@@ -51,34 +52,47 @@ class BattleField(participants: List<Participant>) {
 
     fun moveHeroRight(currentHero: Participant) {
         val currentIndex: Int = currentHero.getCurrentSpaceIndex()
-        val upperBound: Int = minOf(startingSpace + 1 + currentHero.currentAP, BATTLE_FIELD_SIZE)
+        val actionPoints: Int = getModifiedApForHero(currentHero)
+        val upperBound: Int = minOf(startingSpace + 1 + actionPoints, BATTLE_FIELD_SIZE)
         val allSpacesFromHere: IntProgression = currentIndex + 1 until upperBound
         currentHero.moveHero(allSpacesFromHere)
     }
 
     fun moveHeroLeft(currentHero: Participant) {
         val currentIndex: Int = currentHero.getCurrentSpaceIndex()
-        val lowerBound: Int = maxOf(startingSpace - currentHero.currentAP, 0)
+        val actionPoints: Int = getModifiedApForHero(currentHero)
+        val lowerBound: Int = maxOf(startingSpace - actionPoints, 0)
         val allSpacesFromHere: IntProgression = currentIndex - 1 downTo lowerBound
         currentHero.moveHero(allSpacesFromHere)
     }
 
+    fun getModifiedApForHero(participant: Participant): Int {
+        return participant.currentAP - getPenaltyApForHero()
+    }
+
+    private fun getModifiedApForEnemy(participant: Participant, destinationSpace: Int?): Int {
+        return participant.currentAP - getPenaltyApForEnemy(destinationSpace)
+    }
+
+    fun getPenaltyApForHero(): Int {
+        return if (isHeroStartingSpaceNextToEnemy()) PENALTY_AP else 0
+    }
+
+    private fun getPenaltyApForEnemy(destinationSpace: Int?): Int {
+        if (destinationSpace == startingSpace) return 0
+        return if (isEnemyStartingSpaceNextToHero()) PENALTY_AP else 0
+    }
+
     fun possibleGetHeroTargetAndMoveEnemy(currentEnemy: Participant): Participant? {
+        setStartingSpace(currentEnemy)
         val currentEnemyRangeIndices: List<Int> = currentEnemy.getRangeOfEnemy()
         val nearestHeroIndices: List<Int> = getOccupiedHeroIndicesSortedByNearest(currentEnemyRangeIndices)
 
-        // if hero is already in range, don't move enemy.
-        val nearestHeroIndex: Int = nearestHeroIndices.first()
-        if (nearestHeroIndex in currentEnemyRangeIndices) {
-            return heroSpaces[nearestHeroIndex]
-        }
-
-        // if hero is not in range, move enemy to nearest space where hero is in range that it's AP will allow.
-        currentEnemy.getNearestSpaceToMoveToForAnAttack(nearestHeroIndices)
-            ?.also { currentEnemy.takeApForMovingTo(it) }
-            ?.let { currentEnemy.moveEnemyToIndex(it) }
-        //  or don't move enemy if no such space is available.
-            ?: return null
+        // move enemy to nearest space where hero is in range that it's AP will allow.
+        currentEnemy.getNearestSpaceToMoveToForAnAttack(nearestHeroIndices)?.let {
+            currentEnemy.takeApForMovingTo(it)
+            currentEnemy.moveEnemyToIndex(it)
+        } ?: return null // or don't move enemy if no such space is available.
 
         // take the index of the hero that is now in range.
         val indexOfTargetedHero: Int = nearestHeroIndices
@@ -127,13 +141,15 @@ class BattleField(participants: List<Participant>) {
         val currentEnemyIndex: Int = this.getCurrentSpaceIndex()
         val enemyWeaponRanges: List<Int> = this.getWeaponRanges()
 
-        val targetSpaceToMoveTo: Int? = enemySpaces.indices
-            .filter { enemySpaces[it] == null }
+        val destinationSpace: Int? = enemySpaces.indices
+            .filter { it == currentEnemyIndex || enemySpaces[it] == null }
             .filter { heroIndices.isAnyHeroInWeaponRangeFrom(it, enemyWeaponRanges) }
             .minByOrNull { abs(it - currentEnemyIndex) }
 
-        return targetSpaceToMoveTo?.takeIf { abs(it - currentEnemyIndex) <= this.currentAP }
-            ?: targetSpaceToMoveTo?.let { this.findFarthestReachableSpaceTo(it) }
+        val actionPoints: Int = getModifiedApForEnemy(this, destinationSpace)
+
+        return destinationSpace?.takeIf { abs(it - currentEnemyIndex) <= actionPoints }
+            ?: destinationSpace?.let { this.findFarthestReachableSpaceTo(it) }
     }
 
     private fun List<Int>.isAnyHeroInWeaponRangeFrom(enemyIndex: Int, enemyWeaponRanges: List<Int>): Boolean {
@@ -145,19 +161,23 @@ class BattleField(participants: List<Participant>) {
         }
     }
 
-    private fun Participant.findFarthestReachableSpaceTo(targetIndex: Int): Int? {
+    private fun Participant.findFarthestReachableSpaceTo(destinationSpace: Int): Int? {
         val currentEnemyIndex: Int = this.getCurrentSpaceIndex()
-        val direction: Int = if (targetIndex > currentEnemyIndex) 1 else -1
-        return (1..currentAP)
+        val direction: Int = if (destinationSpace > currentEnemyIndex) 1 else -1
+        val actionPoints: Int = getModifiedApForEnemy(this, destinationSpace)
+        return (1..actionPoints)
             .map { currentEnemyIndex + it * direction }
             .lastOrNull { enemySpaces[it] == null }
     }
 
-    private fun Participant.takeApForMovingTo(targetIndex: Int) {
+    private fun Participant.takeApForMovingTo(destinationSpace: Int) {
         if (preferenceManager.isInDebugMode) {
             println("${this.character.name} AP: ${this.currentAP}")
         }
-        this.currentAP -= abs(targetIndex - this.getCurrentSpaceIndex())
+
+        val difference: Int = abs(destinationSpace - this.getCurrentSpaceIndex()) + getPenaltyApForEnemy(destinationSpace)
+        this.currentAP -= difference
+
         if (preferenceManager.isInDebugMode) {
             println("${this.character.name} AP: ${this.currentAP}")
         }
@@ -202,6 +222,18 @@ class BattleField(participants: List<Participant>) {
 
     private fun Participant.getCurrentSpaceIndex(): Int {
         return getCurrentSpace(this)
+    }
+
+    private fun isHeroStartingSpaceNextToEnemy(): Boolean {
+        if (startingSpace == -1) return false
+        return (startingSpace > 0 && enemySpaces[startingSpace - 1] != null)
+            || enemySpaces[startingSpace] != null
+    }
+
+    private fun isEnemyStartingSpaceNextToHero(): Boolean {
+        if (startingSpace == -1) return false
+        return heroSpaces[startingSpace] != null
+            || (startingSpace < BATTLE_FIELD_SIZE - 1 && heroSpaces[startingSpace + 1] != null)
     }
 
     private fun Participant.isInRangeOfHero(currentHero: Participant): Boolean {

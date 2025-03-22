@@ -74,9 +74,9 @@ class BattleFieldTableBuilder {
     }
 
     private fun createHeroFieldTable(currentParticipant: Participant): Table {
-        val startingSpace = battleField.startingSpace
-        val currentSpace = battleField.getCurrentSpace(currentParticipant)
-        val actionPoints = currentParticipant.currentAP
+        val startingSpace: Int = battleField.startingSpace
+        val currentSpace: Int = battleField.getCurrentSpace(currentParticipant)
+        val actionPoints: Int = battleField.getModifiedApForHero(currentParticipant)
 
         return Table().apply {
             defaults().width(60f).height(60f).center()

@@ -103,9 +103,8 @@ abstract class Character(
         return ((getCalculatedTotalStatOf(StatItemId.INTELLIGENCE)
             + getCalculatedTotalStatOf(StatItemId.DEXTERITY)
             + getCalculatedTotalStatOf(StatItemId.STRENGTH)
-            + getCalculatedTotalStatOf(StatItemId.SPEED)) / 10f
-            // loskomen van een close attack is 2-3? AP?
-            ).roundToInt()
+            + getCalculatedTotalStatOf(StatItemId.SPEED)) / 10f)
+            .roundToInt()
             .takeIf { it > 0f } ?: 1
     }
 

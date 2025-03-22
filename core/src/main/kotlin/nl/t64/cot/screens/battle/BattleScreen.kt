@@ -595,6 +595,7 @@ class BattleScreen : Screen {
     private fun enemyAction() {
         Thread.sleep(1000L)
         val heroTarget: Participant? = battleField.possibleGetHeroTargetAndMoveEnemy(currentParticipant)
+        battleField.resetStartingSpace()
         isDelayingTurn = true
         val messages: ArrayDeque<String> = heroTarget
             ?.let { AttackAction.createForEnemy(currentParticipant, it, battleId).handle() }

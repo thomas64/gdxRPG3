@@ -12,7 +12,8 @@ class MoveAction(
     private val character: Character = currentParticipant.character
     private val currentSpace: Int = battleField.getCurrentSpace(currentParticipant)
     private val startingSpace: Int = battleField.startingSpace
-    private val difference: Int = abs(currentSpace - startingSpace)
+    private val penaltyAP: Int = battleField.getPenaltyApForHero()
+    private val difference: Int = abs(currentSpace - startingSpace) + penaltyAP
 
     fun createConfirmationMessage(): String {
         playSe(AudioEvent.SE_MENU_CONFIRM)
@@ -21,7 +22,7 @@ class MoveAction(
     }
 
     fun didCharacterRemainOnTheSameSpace(): Boolean {
-        if (difference == 0) {
+        if (difference - penaltyAP == 0) {
             playSe(AudioEvent.SE_MENU_BACK)
             return true
         } else {
