@@ -83,26 +83,6 @@ class BattleField(participants: List<Participant>) {
         return if (isEnemyStartingSpaceNextToHero()) PENALTY_AP else 0
     }
 
-    fun possibleGetHeroTargetAndMoveEnemy(currentEnemy: Participant): Participant? {
-        setStartingSpace(currentEnemy)
-        val currentEnemyRangeIndices: List<Int> = currentEnemy.getRangeOfEnemy()
-        val nearestHeroIndices: List<Int> = getOccupiedHeroIndicesSortedByNearest(currentEnemyRangeIndices)
-
-        // move enemy to nearest space where hero is in range that it's AP will allow.
-        currentEnemy.getNearestSpaceToMoveToForAnAttack(nearestHeroIndices)?.let {
-            currentEnemy.takeApForMovingTo(it)
-            currentEnemy.moveEnemyToIndex(it)
-        } ?: return null // or don't move enemy if no such space is available.
-
-        // take the index of the hero that is now in range.
-        val indexOfTargetedHero: Int = nearestHeroIndices
-            .firstOrNull { it in currentEnemy.getRangeOfEnemy() }
-        //  or not when the AP was not enough to reach the hero.
-            ?: return null
-
-        return heroSpaces[indexOfTargetedHero]
-    }
-
     fun getCurrentSpace(participant: Participant): Int {
         return heroSpaces.indexOf(participant)
             .takeUnless { it == -1 }
@@ -131,34 +111,75 @@ class BattleField(participants: List<Participant>) {
             .distinct()
     }
 
-    private fun getOccupiedHeroIndicesSortedByNearest(enemyRangeIndices: List<Int>): List<Int> {
-        return heroSpaces.filterNotNull()
-            .map { hero -> hero.getCurrentSpaceIndex() }
-            .sortedBy { heroIndex -> enemyRangeIndices.minOf { rangeIndex -> abs(rangeIndex - heroIndex) } }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    fun possibleGetHeroTargetAndMoveEnemy(currentEnemy: Participant): Participant? {
+        setStartingSpace(currentEnemy)
+        val heroIndicesByPrio: List<Int> = getOccupiedHeroIndicesSortedByPriority()
+        if (preferenceManager.isInDebugMode) {
+            println("heroIndicesByPrio: $heroIndicesByPrio")
+        }
+
+        // if hero is already in range, don't move enemy.
+        val currentEnemyRangeIndices: List<Int> = currentEnemy.getRangeOfEnemy()
+        val highestPrioHero: Int = heroIndicesByPrio.first()
+        if (highestPrioHero in currentEnemyRangeIndices) {
+            return heroSpaces[highestPrioHero]
+        }
+
+        // move enemy to where its range is closest to its highest prio hero which it can get with its AP.
+        currentEnemy.getMostPrioSpaceToMoveToForAnAttack(heroIndicesByPrio)?.let {
+            currentEnemy.takeApForMovingTo(it)
+            currentEnemy.moveEnemyToIndex(it)
+        } ?: return null // or don't move enemy if no such space is available.
+
+        return heroIndicesByPrio
+            .firstOrNull { it in currentEnemy.getRangeOfEnemy() } // take the first hero that is now in range.
+            ?.let { heroSpaces[it] }                    // or null when the AP was not enough to reach the hero.
     }
 
-    private fun Participant.getNearestSpaceToMoveToForAnAttack(heroIndices: List<Int>): Int? {
+    private fun getOccupiedHeroIndicesSortedByPriority(): List<Int> {
+        return heroSpaces.filterNotNull()
+            .sortedBy { hero -> hero.getPriority() }
+            .map { hero -> hero.getCurrentSpaceIndex() }
+    }
+
+    private fun Participant.getMostPrioSpaceToMoveToForAnAttack(heroIndicesByPrio: List<Int>): Int? {
+        return this.getAllEnemySpacesFromWhereToAttackByPrio(heroIndicesByPrio)
+            .onEach { if (this.isDestinationInRangeOfAP(it)) return it }
+            .firstOrNull()
+            ?.let { this.findFarthestReachableSpaceTo(it) }
+    }
+
+    private fun Participant.getAllEnemySpacesFromWhereToAttackByPrio(heroIndicesByPrio: List<Int>): List<Int> {
         val currentEnemyIndex: Int = this.getCurrentSpaceIndex()
         val enemyWeaponRanges: List<Int> = this.getWeaponRanges()
 
-        val destinationSpace: Int? = enemySpaces.indices
+        return enemySpaces.indices
             .filter { it == currentEnemyIndex || enemySpaces[it] == null }
-            .filter { heroIndices.isAnyHeroInWeaponRangeFrom(it, enemyWeaponRanges) }
-            .minByOrNull { abs(it - currentEnemyIndex) }
-
-        val actionPoints: Int = getModifiedApForEnemy(this, destinationSpace)
-
-        return destinationSpace?.takeIf { abs(it - currentEnemyIndex) <= actionPoints }
-            ?: destinationSpace?.let { this.findFarthestReachableSpaceTo(it) }
+            .flatMap { it.getHeroIndicesInRange(heroIndicesByPrio, enemyWeaponRanges) }
+            .groupBy({ it.first }, { it.second })
+            .toSortedMap()
+            .map { (_, destinationSpaces) -> destinationSpaces.minBy { abs(it - currentEnemyIndex) } }
     }
 
-    private fun List<Int>.isAnyHeroInWeaponRangeFrom(enemyIndex: Int, enemyWeaponRanges: List<Int>): Boolean {
-        val heroIndices: List<Int> = this
-        return enemyWeaponRanges.any { range ->
-            heroIndices.any { heroIndex ->
-                enemyIndex - range + 1 == heroIndex || enemyIndex + range == heroIndex
-            }
-        }
+    private fun Int.getHeroIndicesInRange(heroIndicesByPrio: List<Int>,
+                                          enemyWeaponRanges: List<Int>): List<Pair<Int, Int>> {
+        val enemyIndex: Int = this
+        return heroIndicesByPrio
+            .filter { heroIndex -> heroIndex.isHeroInWeaponRangeFrom(enemyIndex, enemyWeaponRanges) }
+            .map { heroIndicesByPrio.indexOf(it) to enemyIndex }
+    }
+
+    private fun Int.isHeroInWeaponRangeFrom(enemyIndex: Int, enemyWeaponRanges: List<Int>): Boolean {
+        val heroIndex: Int = this
+        return enemyWeaponRanges.any { range -> heroIndex == enemyIndex - range + 1 || heroIndex == enemyIndex + range }
+    }
+
+    private fun Participant.isDestinationInRangeOfAP(destinationSpace: Int): Boolean {
+        val actionPoints: Int = getModifiedApForEnemy(this, destinationSpace)
+        val currentEnemyIndex: Int = this.getCurrentSpaceIndex()
+        return abs(destinationSpace - currentEnemyIndex) <= actionPoints
     }
 
     private fun Participant.findFarthestReachableSpaceTo(destinationSpace: Int): Int? {
@@ -182,6 +203,8 @@ class BattleField(participants: List<Participant>) {
             println("${this.character.name} AP: ${this.currentAP}")
         }
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun Participant.moveHero(allSpacesInTheChosenDirection: IntProgression) {
         allSpacesInTheChosenDirection

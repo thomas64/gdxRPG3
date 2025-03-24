@@ -1,9 +1,11 @@
 package nl.t64.cot.components.battle
 
+import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.abilities.BattleAbilityItem
 import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.components.party.inventory.InventoryItem
+import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.components.party.stats.StatItemId
 
 
@@ -31,6 +33,18 @@ class Participant(
 
     fun refreshActionPoints() {
         currentAP = maximumAP
+    }
+
+    fun getPriority(): Float {
+        // todo, weaker character types? weapon types, wpn triangle, or missile and throw?
+
+        val stealthScore: Int = character.getCalculatedTotalSkillOf(SkillItemId.STEALTH)
+        val protectionScore: Float = character.getCalculatedTotalProtection() / 5f
+        if (preferenceManager.isInDebugMode) {
+            println("${character.name} stealthScore: $stealthScore, " +
+                        "protectionScore: $protectionScore = total: ${stealthScore + protectionScore}")
+        }
+        return stealthScore + protectionScore
     }
 
     fun getWeaponRanges(): List<Int> {
