@@ -593,7 +593,9 @@ class BattleScreen : Screen {
     }
 
     private fun enemyAction() {
-        Thread.sleep(1000L)
+        if (currentParticipant.currentAP == currentParticipant.maximumAP) {
+            Thread.sleep(1000L)
+        }
         val heroTarget: Participant? = battleField.possibleGetHeroTargetAndMoveEnemy(currentParticipant)
         battleField.resetStartingSpace()
         isDelayingTurn = true

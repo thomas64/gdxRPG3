@@ -18,6 +18,7 @@ import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.abilities.BattleAbilityItem
 import nl.t64.cot.components.party.inventory.BattlePotionItem
 import nl.t64.cot.components.party.inventory.BattleWeaponItem
+import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.components.party.inventory.InventoryItem
 import nl.t64.cot.components.party.stats.StatItemId
 import nl.t64.cot.constants.Constant
@@ -57,7 +58,7 @@ class BattleScreenBuilder {
 
     fun createHeroTable(heroes: List<HeroItem>, participants: List<Participant>): Table {
         return Table(createSkin()).apply {
-            defaults().height(Constant.FACE_SIZE)
+            defaults().height(Constant.FACE_SIZE).spaceBottom(4f)
             columnDefaults(0).width(Constant.FACE_SIZE)
             top().left()
             setPosition(20f, Gdx.graphics.height - 20f)
@@ -69,8 +70,7 @@ class BattleScreenBuilder {
         val currentAp: Int = participants.firstOrNull { it.character == hero }?.currentAP ?: 0
         val maximumAP: Int = hero.getCalculatedActionPoints()
 
-        add(Utils.getFaceImage(hero.id).apply { if (hero.isDead) color = Color.DARK_GRAY })
-        add(Table(createSkin()).apply {
+        val heroTable = Table(createSkin()).apply {
             defaults().left().height(30f)
             add(hero.name).width(150f).colspan(2).padLeft(10f).padRight(10f).row()
             add("HP:").width(50f).padLeft(10f)
@@ -80,14 +80,38 @@ class BattleScreenBuilder {
             add("AP:").width(50f).padLeft(10f)
             add("$currentAp/ $maximumAP").width(BAR_WIDTH).height(BAR_HEIGHT).padRight(10f).row()
             background = transparent
-        }).row()
+        }
+
+        val statsStack = Stack()
+        statsStack.add(heroTable)
+
+        hero.getInventoryItem(InventoryGroup.WEAPON)?.skill?.name?.let {
+            val textureRegion = resourceManager.getAtlasTexture(it.lowercase())
+            val image = Image(textureRegion).apply { setScaling(Scaling.fit) }
+            val container = Container(image).top().right().size(35f).pad(5f)
+            val table = Table(createSkin()).apply { add(container).width(170f).height(Constant.FACE_SIZE) }
+            statsStack.add(table)
+        }
+
+        hero.getInventoryItem(InventoryGroup.SHIELD)?.skill?.name?.let {
+            val textureRegion = resourceManager.getAtlasTexture(it.lowercase())
+            val image = Image(textureRegion).apply { setScaling(Scaling.fit) }
+            val container = Container(image).bottom().right().size(35f).pad(5f)
+            val table = Table(createSkin()).apply { add(container).width(170f).height(Constant.FACE_SIZE) }
+            statsStack.add(table)
+        }
+
+        statsStack.add(Image(Utils.createFullBorderWhite()))
+
+        add(Utils.getFaceImage(hero.id).apply { if (hero.isDead) color = Color.DARK_GRAY })
+        add(statsStack).row()
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     fun createEnemyTable(enemies: List<EnemyItem>): Table {
         return Table(createSkin()).apply {
-            defaults().height(Constant.FACE_SIZE)
+            defaults().height(Constant.FACE_SIZE).spaceBottom(4f)
             columnDefaults(1).width(Constant.FACE_SIZE)
             top().left()
             setPosition(Gdx.graphics.width - Constant.FACE_SIZE - 150f - 40f, Gdx.graphics.height - 20f)
@@ -96,13 +120,36 @@ class BattleScreenBuilder {
     }
 
     private fun Table.addEnemy(enemy: EnemyItem) {
-        add(Table(createSkin()).apply {
+        val enemyTable = Table(createSkin()).apply {
             defaults().left()
-            add(enemy.name).width(150f).colspan(2).padLeft(10f).padRight(10f).row()
-            add("HP:").width(50f).padLeft(10f)
+            add(enemy.name).width(150f).height(28f).colspan(2).padLeft(10f).padRight(10f).row()
+            add("HP:").width(50f).height(28f).padLeft(10f)
             add(createHpBar(enemy)).width(BAR_WIDTH).height(BAR_HEIGHT).padRight(10f).row()
             background = transparent
-        })
+        }
+
+        val statsStack = Stack()
+        statsStack.add(enemyTable)
+
+        enemy.getInventoryItem(InventoryGroup.WEAPON)?.skill?.name?.let {
+            val textureRegion = resourceManager.getAtlasTexture(it.lowercase())
+            val image = Image(textureRegion).apply { setScaling(Scaling.fit) }
+            val container = Container(image).top().left().size(35f).pad(5f)
+            val table = Table(createSkin()).apply { add(container).width(170f).height(Constant.FACE_SIZE) }
+            statsStack.add(table)
+        }
+
+        enemy.getInventoryItem(InventoryGroup.SHIELD)?.skill?.name?.let {
+            val textureRegion = resourceManager.getAtlasTexture(it.lowercase())
+            val image = Image(textureRegion).apply { setScaling(Scaling.fit) }
+            val container = Container(image).bottom().left().size(35f).pad(5f)
+            val table = Table(createSkin()).apply { add(container).width(170f).height(Constant.FACE_SIZE) }
+            statsStack.add(table)
+        }
+
+        statsStack.add(Image(Utils.createFullBorderWhite()))
+
+        add(statsStack)
         val faceImage = Utils.getFaceImage(enemy.id, isFlipped = false)
             .apply { if (enemy.isDead) color = Color.DARK_GRAY }
         add(faceImage).row()
