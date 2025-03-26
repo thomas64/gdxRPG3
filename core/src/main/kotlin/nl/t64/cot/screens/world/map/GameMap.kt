@@ -209,7 +209,10 @@ val TiledMap.bgm: AudioEvent
                 AudioEvent.BGM_TENSION
             } else if ( // this else if is crap on so many levels. this is not expandable at all.
                 mapManager.currentMap.mapTitle == "honeywood_stable"
-                && mapManager.nextMapTitle == "honeywood_stable" // this is only for so that fade out works after exiting stable
+                // this is only for so that fade out works after exiting stable.
+                && (mapManager.nextMapTitle == "honeywood_stable"
+                    // and this one is for so that after Esc, I and L, no 2 bgm's are playing.
+                    || mapManager.nextMapTitle == null)
                 && gameData.clock.isCurrentTimeAfter("11:00")
                 && !gameData.quests.getQuestById("quest_luana_before_10").isTaskComplete("9") // "_9_"
             ) {

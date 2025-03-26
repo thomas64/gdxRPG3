@@ -256,7 +256,7 @@
   "failed_to_save_luana"           : {
     "name"   : "Mozes",
     "phrases": {
-      "1": {"text": ["This is all terrible... Luana is also gone..."]},
+      "1": {"text": ["This is all terrible... Now Luana is also gone, same as Grace..."]},
       "2": {"text": ["There isn't much for me to accomplish here anymore..."]},
       "3": {"text": ["I'll go back to that son of a bitch Ardor and take Grace back!"]},
       "4": {"face": "fairy_transp", "name": "Mother Fairy", "text": ["'You cannot confront Ardor! Even if you were to face him, he's far beyond your capabilities.'"]},

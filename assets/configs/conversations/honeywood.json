@@ -416,8 +416,8 @@
         "choices": [
           {"condition": ["i_druid1", "_tn_7_q_quest_get_horse"], "text": "[Druid 1] *Listen to Enopa.*", "nextId": "3"},
           {"condition": ["i_druid1", "_tc_7_q_quest_get_horse", "_c_!=_f_q_quest_get_horse"], "text": "[Druid 1] *Listen to Enopa.*", "nextId": "4"},
-          {"condition": ["i_druid1", "_c_==_f_q_quest_get_horse", "_c_!=_f_q_quest_helping_horse", "time_before_17:00"], "text": "[Druid 1] *Listen to Enopa.*", "nextId": "5"},
-          {"condition": ["i_druid1", "_c_==_f_q_quest_get_horse", "_c_!=_f_q_quest_helping_horse", "time_after_17:00"], "text": "[Druid 1] *Listen to Enopa.*", "nextId": "6"},
+          {"condition": ["i_druid1", "_c_==_f_q_quest_get_horse", "_c_!=_f_q_quest_helping_horse", "_time_before_17:00"], "text": "[Druid 1] *Listen to Enopa.*", "nextId": "5"},
+          {"condition": ["i_druid1", "_c_==_f_q_quest_get_horse", "_c_!=_f_q_quest_helping_horse", "_time_after_17:00"], "text": "[Druid 1] *Listen to Enopa.*", "nextId": "6"},
           {"condition": ["i_druid1", "_c_==_f_q_quest_helping_horse"], "text": "[Druid 1] *Listen to Enopa.*", "nextId": "7"},
           {"condition": ["ii_druid1"], "text": "[Druid 1] *Listen to Enopa.*", "nextId": "9999"},
           {"text": "*Nod to Enopa and take your leave.*", "command": "EXIT"}

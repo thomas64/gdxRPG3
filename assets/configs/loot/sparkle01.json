@@ -30,5 +30,6 @@
   "sparkle_farm_2"     : {"content": {"herb": 2}},
   "sparkle_farm_3"     : {"content": {"spice": 1}},
   "sparkle_farm_4"     : {"content": {"stone": 1}},
-  "sparkle_farm_5"     : {"content": {"wood": 2}}
+  "sparkle_farm_5"     : {"content": {"wood": 2}},
+  "sparkle_farm_6"     : {"content": {"herb": 1}}
 }

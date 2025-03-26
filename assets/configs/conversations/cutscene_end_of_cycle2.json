@@ -21,7 +21,7 @@
       "2": {"text": ["\"This is your final chance...\" ??"]},
       "3": {"text": ["Then what?! And final chance for what anyway?"]},
       "4": {"text": ["Final chance to go to Lastdenn?", "Final chance to rescue Grace?", "Final chance to defeat Ardor?", "Final chance to prevent Adan's destruction?"]},
-      "5": {"text": ["How would I know! And how the hell am I supposed to do that?"], "choices": [{"command": "EXIT"}]}
+      "5": {"text": ["How would I know! And how the hell am I supposed to do any of that?"], "choices": [{"command": "EXIT"}]}
     }
   }
 }

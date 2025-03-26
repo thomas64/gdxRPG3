@@ -1,17 +1,35 @@
 {
-  "slime_slam": {
+  "attack_65_10": {
     "group"       : "WEAPON",
     "skill"       : "BITE",
     "min_strength": 1,
     "base_hit"    : 65,
-    "damage"      : 9
+    "damage"      : 10
   },
-  "bat_bite"  : {
+  "attack_65_20": {
+    "group"       : "WEAPON",
+    "skill"       : "BITE",
+    "min_strength": 1,
+    "base_hit"    : 65,
+    "damage"      : 20
+  },
+  "attack_80_8"  : {
     "group"       : "WEAPON",
     "skill"       : "BITE",
     "min_strength": 1,
     "base_hit"    : 80,
-    "damage"      : 6
+    "damage"      : 8
+  },
+  "attack_80_16"  : {
+    "group"       : "WEAPON",
+    "skill"       : "BITE",
+    "min_strength": 1,
+    "base_hit"    : 80,
+    "damage"      : 16
+  },
+  "armor_1"   : {
+    "group"     : "CHEST",
+    "protection": 1
   },
   "armor_2"   : {
     "group"     : "CHEST",

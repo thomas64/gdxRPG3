@@ -36,6 +36,24 @@ class SceneArdorKillingGrace : CutsceneScreen() {
     private lateinit var bloodFlash: Actor
     private lateinit var flames: List<CutsceneActor>
 
+    private lateinit var fairy1: CutsceneActor
+    private lateinit var fairy2: CutsceneActor
+    private lateinit var fairy3: CutsceneActor
+    private lateinit var fairy4: CutsceneActor
+    private lateinit var fairy5: CutsceneActor
+    private lateinit var fairy6: CutsceneActor
+    private lateinit var fairy7: CutsceneActor
+    private lateinit var fairy8: CutsceneActor
+
+    private lateinit var johanna: CutsceneActor
+    private lateinit var lennor: CutsceneActor
+
+    private lateinit var priest: CutsceneActor
+    private lateinit var malina: CutsceneActor
+    private lateinit var lynette: CutsceneActor
+    private lateinit var kaidan: CutsceneActor
+    private lateinit var tobin: CutsceneActor
+
     override fun prepare() {
         mozes = CutsceneActor.createCharacter("mozes")
         mozesDead = Utils.createImage("sprites/characters/damage1.png", 0, 0, 48, 48)
@@ -50,6 +68,24 @@ class SceneArdorKillingGrace : CutsceneScreen() {
         bloodFlash = TransitionImage(color = Color.RED)
         flames = List(800) { CutsceneActor.createFlame() }
 
+        fairy1 = CutsceneActor.createCharacter("fairy1")
+        fairy2 = CutsceneActor.createCharacter("fairy2")
+        fairy3 = CutsceneActor.createCharacter("fairy3")
+        fairy4 = CutsceneActor.createCharacter("fairy4")
+        fairy5 = CutsceneActor.createCharacter("fairy5")
+        fairy6 = CutsceneActor.createCharacter("fairy6")
+        fairy7 = CutsceneActor.createCharacter("fairy7")
+        fairy8 = CutsceneActor.createCharacter("fairy8")
+
+        johanna = CutsceneActor.createCharacter("oldwoman01")
+        lennor = CutsceneActor.createCharacter("man13")
+
+        priest = CutsceneActor.createCharacter("priest01")
+        malina = CutsceneActor.createCharacter("youngwoman01")
+        lynette = CutsceneActor.createCharacter("girl03")
+        kaidan = CutsceneActor.createCharacter("boy01")
+        tobin = CutsceneActor.createCharacter("boy02")
+
         actorsStage.addActor(mozes)
         actorsStage.addActor(magic)
         actorsStage.addActor(grace)
@@ -62,6 +98,24 @@ class SceneArdorKillingGrace : CutsceneScreen() {
         }
         transitionStage.addActor(bloodFlash)
         flames.forEach { transitionStage.addActor(it) }
+
+        actorsStage.addActor(fairy1)
+        actorsStage.addActor(fairy2)
+        actorsStage.addActor(fairy3)
+        actorsStage.addActor(fairy4)
+        actorsStage.addActor(fairy5)
+        actorsStage.addActor(fairy6)
+        actorsStage.addActor(fairy7)
+        actorsStage.addActor(fairy8)
+
+        actorsStage.addActor(johanna)
+        actorsStage.addActor(lennor)
+
+        actorsStage.addActor(priest)
+        actorsStage.addActor(malina)
+        actorsStage.addActor(lynette)
+        actorsStage.addActor(kaidan)
+        actorsStage.addActor(tobin)
 
         actions = listOf(mozesIsDefeated(),
                          ardorContinuesToPray(),
@@ -217,6 +271,172 @@ class SceneArdorKillingGrace : CutsceneScreen() {
 
             actionFadeOutWithoutBgmFading(),
             Actions.delay(3f),
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            Actions.run {
+                setMapWithNoSound("honeywood_great_tree")
+                setFixedCameraPosition(600f, 768f)
+                flames.forEachIndexed { i, it ->
+                    it.setPosition(i % 12 * 100f - 100f,
+                                   Random.nextInt(1568, 2768).toFloat())
+                }
+                magic.isVisible = false
+                graceDead.isVisible = false
+                mozesDead.isVisible = false
+                ardor.isVisible = false
+
+                fairy1.setPosition(576f, 792f)
+                fairy1.direction = Direction.SOUTH
+                fairy1.entityState = EntityState.WALKING
+                fairy1.isVisible = true
+
+                fairy2.setPosition(528f, 576f)
+                fairy2.direction = Direction.NORTH
+                fairy2.entityState = EntityState.WALKING
+                fairy2.isVisible = true
+
+                fairy3.setPosition(408f, 864f)
+                fairy3.direction = Direction.SOUTH
+                fairy3.entityState = EntityState.WALKING
+                fairy3.isVisible = true
+
+                fairy4.setPosition(816f, 816f)
+                fairy4.direction = Direction.SOUTH
+                fairy4.entityState = EntityState.WALKING
+                fairy4.isVisible = true
+
+                fairy5.setPosition(336f, 480f)
+                fairy5.direction = Direction.NORTH
+                fairy5.entityState = EntityState.WALKING
+                fairy5.isVisible = true
+
+                fairy6.setPosition(882f, 672f)
+                fairy6.direction = Direction.WEST
+                fairy6.entityState = EntityState.WALKING
+                fairy6.isVisible = true
+
+                fairy7.setPosition(768f, 456f)
+                fairy7.direction = Direction.WEST
+                fairy7.entityState = EntityState.WALKING
+                fairy7.isVisible = true
+
+                fairy8.setPosition(408f, 432f)
+                fairy8.direction = Direction.NORTH
+                fairy8.entityState = EntityState.WALKING
+                fairy8.isVisible = true
+            },
+            Actions.delay(1f),
+            actionFadeIn(),
+
+            Actions.delay(1f),
+            Actions.run {
+                flames.forEach {
+                    it.addAction(Actions.sequence(
+                        Actions.moveBy(0f, -2600f, 10f)
+                    ))
+                }
+            },
+            Actions.delay(6f),
+            actionFadeOutWithoutBgmFading(),
+            Actions.delay(3f),
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            Actions.run {
+                setMapWithNoSound("honeywood")
+                setFixedCameraPosition(1824f, 1488f)
+                flames.forEachIndexed { i, it ->
+                    it.setPosition(1300f + (i % 12 * 100f - 100f),
+                                   Random.nextInt(2288, 3488).toFloat())
+                }
+                fairy1.isVisible = false
+                fairy2.isVisible = false
+                fairy3.isVisible = false
+                fairy4.isVisible = false
+                fairy5.isVisible = false
+                fairy6.isVisible = false
+                fairy7.isVisible = false
+                fairy8.isVisible = false
+
+                johanna.setPosition(1800f, 1344f)
+                johanna.direction = Direction.NORTH
+                johanna.entityState = EntityState.IDLE
+                johanna.isVisible = true
+
+                lennor.setPosition(2016f, 1392f)
+                lennor.direction = Direction.WEST
+                lennor.entityState = EntityState.IDLE
+                lennor.isVisible = true
+            },
+            Actions.delay(1f),
+            actionFadeIn(),
+
+            Actions.delay(1f),
+            Actions.run {
+                flames.forEach {
+                    it.addAction(Actions.sequence(
+                        Actions.moveBy(0f, -2600f, 10f)
+                    ))
+                }
+            },
+            Actions.delay(6f),
+            actionFadeOutWithoutBgmFading(),
+            Actions.delay(3f),
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            Actions.run {
+                setFixedCameraPosition(1008f, 624f)
+                flames.forEachIndexed { i, it ->
+                    it.setPosition(500f + (i % 12 * 100f - 100f),
+                                   Random.nextInt(1424, 2624).toFloat())
+                }
+                johanna.isVisible = false
+                lennor.isVisible = false
+
+                priest.setPosition(1056f, 600f)
+                priest.direction = Direction.SOUTH
+                priest.entityState = EntityState.IDLE
+                priest.isVisible = true
+
+                malina.setPosition(1152f, 720f)
+                malina.direction = Direction.NORTH
+                malina.entityState = EntityState.IDLE
+                malina.isVisible = true
+
+                lynette.setPosition(828f, 396f)
+                lynette.direction = Direction.EAST
+                lynette.entityState = EntityState.IDLE
+                lynette.isVisible = true
+
+                kaidan.setPosition(864f, 348f)
+                kaidan.direction = Direction.NORTH
+                kaidan.entityState = EntityState.IDLE
+                kaidan.isVisible = true
+
+                tobin.setPosition(900f, 396f)
+                tobin.direction = Direction.WEST
+                tobin.entityState = EntityState.IDLE
+                tobin.isVisible = true
+            },
+            Actions.delay(1f),
+            actionFadeIn(),
+
+            Actions.delay(1f),
+            Actions.run {
+                flames.forEach {
+                    it.addAction(Actions.sequence(
+                        Actions.moveBy(0f, -2600f, 10f)
+                    ))
+                }
+            },
+            Actions.delay(6f),
+            actionFadeOutWithoutBgmFading(),
+            Actions.delay(3f),
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
             actionFadeOut(),
 
             Actions.delay(1f),

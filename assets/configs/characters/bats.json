@@ -5,12 +5,12 @@
     "school"   : "NONE",
     "hp"       : 16,
     "ap"       : 5,
-    "xp"       : 1,
+    "xp"       : 2,
     "drops"    : {"leather": 25},
     "stats"    : {
       "intelligence": 1,
       "dexterity"   : 1,
-      "strength"    : 5,
+      "strength"    : 1,
       "speed"       : 20,
       "willpower"   : 1,
       "constitution": 0,
@@ -25,27 +25,28 @@
     "spells"   : {
     },
     "inventory": {
-      "weapon": "bat_bite"
+      "weapon": "attack_80_8"
     }
   },
   "purple_bat": {
     "name"     : "Purple Bat",
     "gender"   : "its",
     "school"   : "NONE",
+    "hp"       : 22,
     "ap"       : 5,
-    "xp"       : 3,
+    "xp"       : 6,
     "drops"    : {"leather": 25},
     "stats"    : {
       "intelligence": 1,
       "dexterity"   : 1,
-      "strength"    : 22,
+      "strength"    : 1,
       "speed"       : 20,
       "willpower"   : 1,
-      "constitution": 4,
+      "constitution": 0,
       "stamina"     : 1
     },
     "skills"   : {
-      "bite": 2
+      "bite": 1
     },
     "abilities": [
       "bite"
@@ -53,8 +54,7 @@
     "spells"   : {
     },
     "inventory": {
-      "weapon": "bat_bite",
-      "chest" : "armor_4"
+      "weapon": "attack_80_16"
     }
   }
 }

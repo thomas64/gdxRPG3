@@ -183,7 +183,7 @@ object Utils {
         val image = Image(characterFace)
         when {
             spriteId.endsWith("_black") -> image.color = Color.BLACK
-            spriteId.endsWith("_transp") -> image.color = Color(1f, 1f, 1f, 0.25f)
+            spriteId.endsWith("_transp") -> image.color = Color(1f, 1f, 1f, 0.15f)
         }
         return image
     }

@@ -4,15 +4,15 @@
     "gender"   : "its",
     "school"   : "NONE",
     "ap"       : 3,
-    "xp"       : 2,
+    "xp"       : 3,
     "drops"    : {"green_jelly": 25},
     "stats"    : {
       "intelligence": 1,
       "dexterity"   : 1,
-      "strength"    : 5,
+      "strength"    : 1,
       "speed"       : 5,
       "willpower"   : 1,
-      "constitution": 3,
+      "constitution": 1,
       "stamina"     : 1
     },
     "skills"   : {
@@ -24,7 +24,8 @@
     "spells"   : {
     },
     "inventory": {
-      "weapon": "slime_slam"
+      "weapon": "attack_65_10",
+      "chest" : "armor_1"
     }
   },
   "blue_slime_medicine": {
@@ -32,19 +33,19 @@
     "gender"   : "its",
     "school"   : "NONE",
     "ap"       : 3,
-    "xp"       : 4,
+    "xp"       : 7,
     "drops"    : {"blue_jelly": 100},
     "stats"    : {
       "intelligence": 1,
       "dexterity"   : 1,
-      "strength"    : 18,
+      "strength"    : 1,
       "speed"       : 5,
       "willpower"   : 1,
       "constitution": 9,
       "stamina"     : 1
     },
     "skills"   : {
-      "bite": 2
+      "bite": 1
     },
     "abilities": [
       "body_slam"
@@ -52,7 +53,7 @@
     "spells"   : {
     },
     "inventory": {
-      "weapon": "slime_slam",
+      "weapon": "attack_65_20",
       "chest" : "armor_6"
     }
   },
@@ -61,19 +62,19 @@
     "gender"   : "its",
     "school"   : "NONE",
     "ap"       : 3,
-    "xp"       : 4,
+    "xp"       : 7,
     "drops"    : {"blue_jelly": 25},
     "stats"    : {
       "intelligence": 1,
       "dexterity"   : 1,
-      "strength"    : 18,
+      "strength"    : 1,
       "speed"       : 5,
       "willpower"   : 1,
       "constitution": 9,
       "stamina"     : 1
     },
     "skills"   : {
-      "bite": 2
+      "bite": 1
     },
     "abilities": [
       "body_slam"
@@ -81,7 +82,7 @@
     "spells"   : {
     },
     "inventory": {
-      "weapon": "slime_slam",
+      "weapon": "attack_65_20",
       "chest" : "armor_6"
     }
   }
