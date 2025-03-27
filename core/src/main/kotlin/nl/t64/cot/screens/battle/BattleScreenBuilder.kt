@@ -221,6 +221,10 @@ class BattleScreenBuilder {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    fun createButtonTablePreBattle(): Table {
+        return createStyledEmptyList<String>().fillWithPreBattleActions().toPreBattleTable()
+    }
+
     fun createButtonTableAction(currentParticipant: Participant): Table {
         return createStyledEmptyList<String>().fillWithActions(currentParticipant).toActionTable()
     }
@@ -280,6 +284,13 @@ class BattleScreenBuilder {
         return if (this.currentAP < requestedAp) "[GRAY]" else ""
     }
 
+    private fun GdxList<String>.fillWithPreBattleActions(): GdxList<String> {
+        items.add("Select equipment")
+        items.add("Start battle")
+        this.selectedIndex = 0
+        return this
+    }
+
     private fun GdxList<BattleAbilityItem>.fillWithAttacks(abilities: List<BattleAbilityItem>): GdxList<BattleAbilityItem> {
         this.setItems(*abilities.toTypedArray())
         items.add(BattleAbilityItem("Back"))
@@ -311,6 +322,14 @@ class BattleScreenBuilder {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private fun GdxList<String>.toPreBattleTable(): Table {
+        val listWithActions = this
+        return createSelectionTable().apply {
+            add("Prepare for battle:").padBottom(10f).row()
+            finish(listWithActions)
+        }
+    }
 
     private fun GdxList<String>.toActionTable(): Table {
         val listWithActions = this

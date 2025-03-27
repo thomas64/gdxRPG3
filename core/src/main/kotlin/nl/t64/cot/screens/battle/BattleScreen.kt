@@ -56,6 +56,7 @@ class BattleScreen : Screen {
     private var turnTable: Table = Table()
     private var battleFieldTable: Table = Table()
 
+    private var buttonTablePreBattle: Table = Table()
     private var buttonTableAction: Table = Table()
     private var buttonTableMove: Table = Table()
     private var buttonTableAttack: Table = Table()
@@ -63,7 +64,8 @@ class BattleScreen : Screen {
     private var buttonTablePotion: Table = Table()
     private var buttonTableWeapon: Table = Table()
     private val allButtonTables
-        get() = listOf(buttonTableAction,
+        get() = listOf(buttonTablePreBattle,
+                       buttonTableAction,
                        buttonTableMove,
                        buttonTableAttack,
                        buttonTableTarget,
@@ -78,6 +80,10 @@ class BattleScreen : Screen {
     private var hasLost: Boolean = false
     private var shouldKeepState: Boolean = false
 
+    private val listenerPreBattle = SelectPreBattleListener({ winBattle() },
+                                                            { openPauseMenu() },
+                                                            { showInventoryScreenPreBattle() },
+                                                            { startBattle() })
     private val listenerAction = SelectActionListener({ winBattle() },
                                                       { openPauseMenu() },
                                                       { selectAttack() },
@@ -89,7 +95,10 @@ class BattleScreen : Screen {
                                                       { showInventoryScreen() },
                                                       { endTurn() },
                                                       { showFleeDialog() })
-    private val listenerMove = SelectMoveListener({ moveLeft() }, { moveRight() }, { showConfirmMoveDialog() }, { returnToAction() })
+    private val listenerMove = SelectMoveListener({ moveLeft() },
+                                                  { moveRight() },
+                                                  { showConfirmMoveDialog() },
+                                                  { returnToAction() })
     private val listenerPreviewAttack = SelectAttackListener({ previewAttackIsSelected(it) }, { returnToAction() })
     private val listenerAttack = SelectAttackListener({ attackIsSelected(it) }, { returnToAction() })
     private val listenerPreviewTarget = SelectTargetListener(::showPreviewDialog, { returnToPreviewAttack() })
@@ -145,8 +154,8 @@ class BattleScreen : Screen {
                 camera.zoom = 1f
                 Gdx.input.inputProcessor = stage
                 Utils.setGamepadInputProcessor(stage)
-                isLoaded = true
                 stage.addActor(Utils.createBattleBack(battleId))
+                setupPreBattleTable()
                 render(0f)
                 gameData.events.getEventById("guide_event_battle").possibleStart(stage)
             }
@@ -160,7 +169,7 @@ class BattleScreen : Screen {
         handleAudioFading()
         stage.draw()
 
-        if (!isLoaded || isBgmFading || isDelayingTurn || hasWon || hasLost) {
+        if (isBgmFading || isDelayingTurn || hasWon || hasLost) {
             return
         }
 
@@ -173,6 +182,10 @@ class BattleScreen : Screen {
         updateTurnTable()
         currentParticipant = turnManager.currentParticipant
         updateBattleField()
+
+        if (!isLoaded) {
+            return
+        }
 
         if (enemies.getAll().none { it.isAlive }) {
             winBattle()
@@ -255,6 +268,11 @@ class BattleScreen : Screen {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    private fun startBattle() {
+        buttonTablePreBattle.remove()
+        isLoaded = true
+    }
+
     private fun selectMove() {
         screenBuilder.buttonTableActionIndex = (buttonTableAction.children.last() as GdxList<*>).selectedIndex
         buttonTableAction.remove()
@@ -322,6 +340,13 @@ class BattleScreen : Screen {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private fun setupPreBattleTable() {
+        buttonTablePreBattle = screenBuilder.createButtonTablePreBattle()
+        stage.addActor(buttonTablePreBattle)
+        buttonTablePreBattle.addListener(listenerPreBattle)
+        stage.keyboardFocus = buttonTablePreBattle.children.last()
+    }
 
     private fun setupActionTable() {
         battleField.cancelMovement(currentParticipant)
@@ -616,6 +641,11 @@ class BattleScreen : Screen {
     private fun openPauseMenu() {
         shouldKeepState = true
         MenuPause.loadForBattle()
+    }
+
+    private fun showInventoryScreenPreBattle() {
+        shouldKeepState = true
+        InventoryScreen.loadForPreBattle()
     }
 
     private fun showInventoryScreen() {
