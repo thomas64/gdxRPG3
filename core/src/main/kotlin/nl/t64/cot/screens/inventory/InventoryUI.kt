@@ -85,6 +85,10 @@ internal class InventoryUI(
         getSelectedTable().selectCurrentSlot()
     }
 
+    fun doPreBattleAction() {
+        getSelectedTable().doPreBattleAction()
+    }
+
     fun doAction() {
         getSelectedTable().doAction()
     }

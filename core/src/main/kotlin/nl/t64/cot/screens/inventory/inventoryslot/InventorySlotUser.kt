@@ -11,6 +11,10 @@ import nl.t64.cot.screens.inventory.messagedialog.MessageDialog
 class InventorySlotUser private constructor(itemSlot: ItemSlot) {
 
     companion object {
+        fun doPreBattleAction(itemSlot: ItemSlot) {
+            InventorySlotUser(itemSlot).selectPreBattleActionBasedOnItemId()
+        }
+
         fun doAction(itemSlot: ItemSlot) {
             InventorySlotUser(itemSlot).selectActionBasedOnItemId()
         }
@@ -19,6 +23,17 @@ class InventorySlotUser private constructor(itemSlot: ItemSlot) {
     private val currentSlot: ItemSlot = itemSlot
     private val inventoryItem: InventoryItem = itemSlot.getCertainInventoryImage().inventoryItem
     private val selectedHero: HeroItem = InventoryUtils.getSelectedHero()
+
+    private fun selectPreBattleActionBasedOnItemId() {
+        when (inventoryItem.id) {
+            "healing_potion" -> possibleHandleDrink(::hpCondition, ::doHealing)
+            "curing_potion" -> possibleHandleDrink(::hpCondition, ::doCuring)
+            "restore_potion" -> possibleHandleDrink(::hpCondition, ::doRestore)
+            "energy_potion" -> possibleHandleDrink(::spCondition, ::doEnergy)
+            "endurance_potion" -> possibleHandleDrink(::spCondition, ::doEndurance)
+            "stamina_potion" -> possibleHandleDrink(::spCondition, ::doStamina)
+        }
+    }
 
     private fun selectActionBasedOnItemId() {
         when (inventoryItem.id) {

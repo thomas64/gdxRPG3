@@ -45,7 +45,32 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
                         Thread.sleep(500L)
                         val dialog = MessageDialog("Select and use the Crystal of Time to revert time by 12 hours.")
                         dialog.show(inventoryScreen.stage, AudioEvent.SE_CONVERSATION_NEXT)
-                        inventoryScreen.createAndSetListener(closeScreenFunction = { playSe(AudioEvent.SE_MENU_ERROR) })
+                        inventoryScreen.createAndSetListener(openQuestLogFunction = { playSe(AudioEvent.SE_MENU_ERROR) },
+                                                             closeScreenFunction = { playSe(AudioEvent.SE_MENU_ERROR) },
+                                                             tryToDropItemFunction = {},
+                                                             tryToDismissHeroFunction = {})
+                        inventoryScreen.stage.addListener(inventoryScreen.listener)
+                        break
+                    }
+                    Thread.sleep(10L)
+                }
+            }
+        }
+
+        fun loadForPreBattle() {
+            playSe(AudioEvent.SE_SCROLL)
+            screenManager.openParchmentLoadScreen(ScreenType.INVENTORY)
+            val inventoryScreen = (screenManager.getScreen(ScreenType.INVENTORY) as InventoryScreen)
+
+            thread {
+                while (true) {
+                    if (inventoryScreen.isListenerAdded) {
+                        inventoryScreen.stage.removeListener(inventoryScreen.listener)
+                        inventoryScreen.createAndSetListener(openQuestLogFunction = { playSe(AudioEvent.SE_MENU_ERROR) },
+                                                             closeScreenFunction = { inventoryScreen.closeScreen(ScreenType.BATTLE) },
+                                                             doActionFunction = { inventoryScreen.doPreBattleAction() },
+                                                             tryToDropItemFunction = {},
+                                                             tryToDismissHeroFunction = {})
                         inventoryScreen.stage.addListener(inventoryScreen.listener)
                         break
                     }
@@ -63,7 +88,8 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
                 while (true) {
                     if (inventoryScreen.isListenerAdded) {
                         inventoryScreen.stage.removeListener(inventoryScreen.listener)
-                        inventoryScreen.createAndSetListener(closeScreenFunction = { inventoryScreen.closeScreen(ScreenType.BATTLE) },
+                        inventoryScreen.createAndSetListener(openQuestLogFunction = { playSe(AudioEvent.SE_MENU_ERROR) },
+                                                             closeScreenFunction = { inventoryScreen.closeScreen(ScreenType.BATTLE) },
                                                              doActionFunction = {},
                                                              tryToDropItemFunction = {},
                                                              tryToDismissHeroFunction = {})
@@ -135,13 +161,14 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
         actionAfter.invoke()
     }
 
-    private fun createAndSetListener(closeScreenFunction: () -> Unit = { closeScreen() },
+    private fun createAndSetListener(openQuestLogFunction: () -> Unit = { openQuestLogScreen() },
+                                     closeScreenFunction: () -> Unit = { closeScreen() },
                                      doActionFunction: () -> Unit = { doAction() },
                                      tryToDropItemFunction: () -> Unit = { tryToDropItem() },
                                      tryToDismissHeroFunction: () -> Unit = { tryToDismissHero() }) {
         listener = InventoryScreenListener(stage,
                                            closeScreenFunction,
-                                           { openQuestLogScreen() },
+                                           openQuestLogFunction,
                                            doActionFunction,
                                            { selectPreviousHero() },
                                            { selectNextHero() },
@@ -159,6 +186,10 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
     private fun openQuestLogScreen() {
         closeScreen()
         Utils.runWithDelay(Constant.FADE_DURATION + 0.1f) { QuestLogScreen.load() }
+    }
+
+    private fun doPreBattleAction() {
+        inventoryUI.doPreBattleAction()
     }
 
     private fun doAction() {
@@ -190,7 +221,7 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
             ?.let {
                 playSe(AudioEvent.SE_DROP)
                 worldScreen.dropItems(it)
-            }?: playSe(AudioEvent.SE_MENU_ERROR)
+            } ?: playSe(AudioEvent.SE_MENU_ERROR)
     }
 
     private fun tryToDismissHero() {

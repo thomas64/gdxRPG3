@@ -14,6 +14,7 @@ interface WindowSelector {
     fun takeOne() {}
     fun takeHalf() {}
     fun takeFull() {}
+    fun doPreBattleAction() { doAction() }
     fun doAction() {}
     fun getItemsToDrop(): Loot? { return null }
 }

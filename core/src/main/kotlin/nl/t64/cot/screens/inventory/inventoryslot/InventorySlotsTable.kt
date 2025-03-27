@@ -81,11 +81,20 @@ class InventorySlotsTable(
         taker.sellFull(selector.getCurrentSlot())
     }
 
+    override fun doPreBattleAction() {
+        val currentSlot: ItemSlot = selector.getCurrentSlot()
+        val group: InventoryGroup? = currentSlot.getPossibleInventoryImage()?.inventoryGroup
+        if (group == InventoryGroup.POTION || group == InventoryGroup.ITEM) {
+            InventorySlotUser.doPreBattleAction(currentSlot)
+        } else {
+            taker.equip(currentSlot)
+        }
+    }
+
     override fun doAction() {
         val currentSlot: ItemSlot = selector.getCurrentSlot()
         val group: InventoryGroup? = currentSlot.getPossibleInventoryImage()?.inventoryGroup
         if (group == InventoryGroup.POTION || group == InventoryGroup.ITEM) {
-            // todo, in battle not allowed to drink this way.
             InventorySlotUser.doAction(currentSlot)
         } else {
             taker.equip(currentSlot)
