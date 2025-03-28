@@ -50,6 +50,18 @@ class BattleField(participants: List<Participant>) {
             .eachCount()
     }
 
+    fun repositionHeroRight(currentHero: Participant) {
+        val currentIndex: Int = currentHero.getCurrentSpaceIndex()
+        val allSpacesFromHere: IntProgression = currentIndex + 1 until 8
+        currentHero.moveHero(allSpacesFromHere)
+    }
+
+    fun repositionHeroLeft(currentHero: Participant) {
+        val currentIndex: Int = currentHero.getCurrentSpaceIndex()
+        val allSpacesFromHere: IntProgression = currentIndex - 1 downTo 0
+        currentHero.moveHero(allSpacesFromHere)
+    }
+
     fun moveHeroRight(currentHero: Participant) {
         val currentIndex: Int = currentHero.getCurrentSpaceIndex()
         val actionPoints: Int = getModifiedApForHero(currentHero)

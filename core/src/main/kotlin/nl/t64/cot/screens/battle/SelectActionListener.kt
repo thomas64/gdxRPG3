@@ -3,7 +3,6 @@ package nl.t64.cot.screens.battle
 import com.badlogic.gdx.Input
 import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.InputListener
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog
 import com.badlogic.gdx.scenes.scene2d.ui.List
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
@@ -26,25 +25,20 @@ class SelectActionListener(
 ) : InputListener() {
 
     override fun keyDown(event: InputEvent, keycode: Int): Boolean {
-        if (event.stage.actors.items.any { it is Dialog }) {
+        if (event.isDialogOpen()) {
             event.dontLoseFocusAfterEsc()
             return true
         }
 
         when (keycode) {
-            Constant.KEYCODE_START, Input.Keys.ESCAPE -> event.handlePause()
+            Constant.KEYCODE_START, Input.Keys.ESCAPE -> event.handlePause(pauseMenu)
             Input.Keys.UP -> event.selectPreviousNonGrayOption()
             Input.Keys.DOWN -> event.selectNextNonGrayOption()
             Constant.KEYCODE_RIGHT -> event.dontLoseFocusAfterEsc()
             Constant.KEYCODE_BOTTOM, Input.Keys.ENTER, Input.Keys.A -> event.handleEnter()
-            Input.Keys.W -> handleWin()
+            Input.Keys.W -> handleWin(winBattle)
         }
         return true
-    }
-
-    private fun InputEvent.handlePause() {
-        this.dontLoseFocusAfterEsc()
-        pauseMenu.invoke()
     }
 
     private fun InputEvent.selectPreviousNonGrayOption() {
@@ -91,22 +85,17 @@ class SelectActionListener(
                 playSe(AudioEvent.SE_MENU_CONFIRM)
             }
             when {
-                "Attack" in selected -> selectAttack()
-                "Move" in selected -> selectMove()
-                "Potion" in selected -> selectPotion()
-                "Switch" in selected -> selectWeapon()
-                "Preview" in selected -> selectPreview()
-                "Inventory" in selected -> inventoryScreen()
-                "Flee" in selected -> fleeBattle()
-                "Rest" in selected -> rest()
-                "End" in selected -> endTurn()
+                "Attack" in selected -> selectAttack.invoke()
+                "Move" in selected -> selectMove.invoke()
+                "Potion" in selected -> selectPotion.invoke()
+                "Switch" in selected -> selectWeapon.invoke()
+                "Preview" in selected -> selectPreview.invoke()
+                "Inventory" in selected -> inventoryScreen.invoke()
+                "Flee" in selected -> fleeBattle.invoke()
+                "Rest" in selected -> rest.invoke()
+                "End" in selected -> endTurn.invoke()
             }
         }
-    }
-
-    private fun handleWin() {
-        playSe(AudioEvent.SE_MENU_ERROR)
-        winBattle.invoke()
     }
 
 }

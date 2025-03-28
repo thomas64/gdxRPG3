@@ -42,6 +42,7 @@ class BattleScreenBuilder {
     private val transparent = Utils.createTransparency()
 
     var buttonTableActionIndex = 0
+    var buttonTableRepositionIndex = 0
 
     fun createBattleTitle(): Label {
         return Label(TITLE_TEXT, createLabelStyle(Color.WHITE)).apply {
@@ -225,6 +226,10 @@ class BattleScreenBuilder {
         return createStyledEmptyList<String>().fillWithPreBattleActions().toPreBattleTable()
     }
 
+    fun createButtonTableHero(heroes: List<Participant>): Table {
+        return createStyledEmptyList<String>().fillWithHeroes(heroes).toHeroTable()
+    }
+
     fun createButtonTableAction(currentParticipant: Participant): Table {
         return createStyledEmptyList<String>().fillWithActions(currentParticipant).toActionTable()
     }
@@ -255,6 +260,25 @@ class BattleScreenBuilder {
         return createStyledEmptyList<BattleWeaponItem>().fillWithWeapons(weapons).toWeaponTable(currentWeapon)
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private fun GdxList<String>.fillWithPreBattleActions(): GdxList<String> {
+        items.add("Reposition party")
+        items.add("Select equipment")
+        items.add("Start battle")
+        this.selectedIndex = 0
+        return this
+    }
+
+    private fun GdxList<String>.fillWithHeroes(heroes: List<Participant>): GdxList<String> {
+        heroes
+            .filter { it.character.isAlive }
+            .forEach { items.add(it.character.name) }
+        items.add("Back")
+        this.selectedIndex = buttonTableRepositionIndex
+        return this
+    }
+
     private fun GdxList<String>.fillWithActions(currentParticipant: Participant): GdxList<String> {
         val maxAp: Int = currentParticipant.maximumAP
         val actions: List<Pair<String, Int>> = listOf(
@@ -282,13 +306,6 @@ class BattleScreenBuilder {
 
     private fun Participant.getColorBasedOn(requestedAp: Int): String {
         return if (this.currentAP < requestedAp) "[GRAY]" else ""
-    }
-
-    private fun GdxList<String>.fillWithPreBattleActions(): GdxList<String> {
-        items.add("Select equipment")
-        items.add("Start battle")
-        this.selectedIndex = 0
-        return this
     }
 
     private fun GdxList<BattleAbilityItem>.fillWithAttacks(abilities: List<BattleAbilityItem>): GdxList<BattleAbilityItem> {
@@ -326,8 +343,16 @@ class BattleScreenBuilder {
     private fun GdxList<String>.toPreBattleTable(): Table {
         val listWithActions = this
         return createSelectionTable().apply {
-            add("Prepare for battle:").padBottom(10f).row()
+            add("Prepare for Battle:").padBottom(10f).row()
             finish(listWithActions)
+        }
+    }
+
+    private fun GdxList<String>.toHeroTable(): Table {
+        val listWithHeroes = this
+        return createSelectionTable().apply {
+            add("Select Hero:").padBottom(10f).row()
+            finish(listWithHeroes)
         }
     }
 

@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener
 import nl.t64.cot.constants.Constant
 
 
-class SelectMoveListener(
+class SelectRepositionListener(
     private val moveLeft: () -> Unit,
     private val moveRight: () -> Unit,
     private val confirm: () -> Unit,
@@ -19,7 +19,7 @@ class SelectMoveListener(
         when (keycode) {
             Input.Keys.LEFT -> moveLeft.invoke()
             Input.Keys.RIGHT -> moveRight.invoke()
-            Constant.KEYCODE_BOTTOM, Input.Keys.ENTER, Input.Keys.A -> confirm.invoke()
+            Constant.KEYCODE_BOTTOM, Input.Keys.ENTER, Input.Keys.A -> handleEnter(confirm)
             Constant.KEYCODE_RIGHT, Input.Keys.ESCAPE -> handleEscape(back)
         }
         return true

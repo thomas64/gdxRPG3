@@ -5,20 +5,16 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.InputListener
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
-import nl.t64.cot.components.party.inventory.BattleWeaponItem
 import nl.t64.cot.constants.Constant
 
 
-class SelectWeaponListener(
-    private val weapon: (BattleWeaponItem) -> Unit,
+class SelectHeroListener(
+    private val hero: (String) -> Unit,
     private val back: () -> Unit
 ) : InputListener() {
 
     override fun keyDown(event: InputEvent, keycode: Int): Boolean {
-        if (event.isDialogOpen()) {
-            event.dontLoseFocusAfterEsc()
-            return true
-        }
+        if (event.isDialogOpen()) return true
 
         when (keycode) {
             Input.Keys.UP -> playSe(AudioEvent.SE_MENU_CURSOR)
@@ -30,10 +26,13 @@ class SelectWeaponListener(
     }
 
     private fun InputEvent.handleEnter() {
-        val selected: BattleWeaponItem = getSelected() ?: return
-        when {
-            selected.name == "Back" -> handleEscape(back)
-            else -> weapon.invoke(selected)
+        val selectedHero: String = getSelected() ?: return
+        when (selectedHero) {
+            "Back" -> handleEscape(back)
+            else -> {
+                playSe(AudioEvent.SE_MENU_CONFIRM)
+                hero.invoke(selectedHero)
+            }
         }
     }
 

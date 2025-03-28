@@ -57,6 +57,8 @@ class BattleScreen : Screen {
     private var battleFieldTable: Table = Table()
 
     private var buttonTablePreBattle: Table = Table()
+    private var buttonTableHero: Table = Table()
+    private var buttonTableReposition: Table = Table()
     private var buttonTableAction: Table = Table()
     private var buttonTableMove: Table = Table()
     private var buttonTableAttack: Table = Table()
@@ -65,6 +67,8 @@ class BattleScreen : Screen {
     private var buttonTableWeapon: Table = Table()
     private val allButtonTables
         get() = listOf(buttonTablePreBattle,
+                       buttonTableHero,
+                       buttonTableReposition,
                        buttonTableAction,
                        buttonTableMove,
                        buttonTableAttack,
@@ -82,8 +86,15 @@ class BattleScreen : Screen {
 
     private val listenerPreBattle = SelectPreBattleListener({ winBattle() },
                                                             { openPauseMenu() },
+                                                            { selectHero() },
                                                             { showInventoryScreenPreBattle() },
                                                             { startBattle() })
+    private val listenerHero = SelectHeroListener({ heroIsSelected(it) }, { returnToPreBattle() })
+    private val listenerReposition = SelectRepositionListener({ repositionLeft() },
+                                                              { repositionRight() },
+                                                              { returnToHero() },
+                                                              { returnToHero() })
+
     private val listenerAction = SelectActionListener({ winBattle() },
                                                       { openPauseMenu() },
                                                       { selectAttack() },
@@ -128,6 +139,7 @@ class BattleScreen : Screen {
 
         enemies = EnemyContainer(battleId)
         turnManager = TurnManager(gameData.party.getAllHeroesAlive(), enemies.getAll())
+        currentParticipant = turnManager.participants.first { it.character.id == Constant.PLAYER_ID }
         battleField = BattleField(turnManager.participants)
 
         isLoaded = false
@@ -180,12 +192,13 @@ class BattleScreen : Screen {
         updateHeroTable()
         updateEnemyTable()
         updateTurnTable()
-        currentParticipant = turnManager.currentParticipant
-        updateBattleField()
 
         if (!isLoaded) {
+            updateBattleField()
             return
         }
+        currentParticipant = turnManager.currentParticipant
+        updateBattleField()
 
         if (enemies.getAll().none { it.isAlive }) {
             winBattle()
@@ -273,6 +286,26 @@ class BattleScreen : Screen {
         isLoaded = true
     }
 
+    private fun selectHero() {
+        buttonTablePreBattle.remove()
+        setupHeroTable()
+    }
+
+    private fun heroIsSelected(selectedHero: String) {
+        currentParticipant = turnManager.participants.first { it.character.name == selectedHero }
+        screenBuilder.buttonTableRepositionIndex = (buttonTableHero.children.last() as GdxList<*>).selectedIndex
+        buttonTableHero.remove()
+        setupRepositionTable()
+    }
+
+    private fun repositionLeft() {
+        battleField.repositionHeroLeft(currentParticipant)
+    }
+
+    private fun repositionRight() {
+        battleField.repositionHeroRight(currentParticipant)
+    }
+
     private fun selectMove() {
         screenBuilder.buttonTableActionIndex = (buttonTableAction.children.last() as GdxList<*>).selectedIndex
         buttonTableAction.remove()
@@ -321,6 +354,16 @@ class BattleScreen : Screen {
         setupWeaponTable()
     }
 
+    private fun returnToPreBattle() {
+        buttonTableHero.remove()
+        setupPreBattleTable()
+    }
+
+    private fun returnToHero() {
+        buttonTableReposition.remove()
+        setupHeroTable()
+    }
+
     private fun returnToAction() {
         buttonTableMove.remove()
         buttonTableAttack.remove()
@@ -346,6 +389,21 @@ class BattleScreen : Screen {
         stage.addActor(buttonTablePreBattle)
         buttonTablePreBattle.addListener(listenerPreBattle)
         stage.keyboardFocus = buttonTablePreBattle.children.last()
+    }
+
+    private fun setupHeroTable() {
+        val onlyHeroes = turnManager.participants.filter { it.isHero }
+        buttonTableHero = screenBuilder.createButtonTableHero(onlyHeroes)
+        stage.addActor(buttonTableHero)
+        buttonTableHero.addListener(listenerHero)
+        stage.keyboardFocus = buttonTableHero.children.last()
+    }
+
+    private fun setupRepositionTable() {
+        buttonTableReposition = screenBuilder.createButtonTableMove()
+        stage.addActor(buttonTableReposition)
+        buttonTableReposition.addListener(listenerReposition)
+        stage.keyboardFocus = buttonTableReposition.children.last()
     }
 
     private fun setupActionTable() {
