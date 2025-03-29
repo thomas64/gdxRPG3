@@ -78,6 +78,7 @@ class BattleScreen : Screen {
 
     private var isBgmFading: Boolean = false
     private var isLoaded: Boolean = false
+    private var isPreBattle: Boolean = false
     private var isDelayingTurn: Boolean = false
     private var isEnemyActing: Boolean = false
     private var hasWon: Boolean = false
@@ -143,6 +144,7 @@ class BattleScreen : Screen {
         battleField = BattleField(turnManager.participants)
 
         isLoaded = false
+        isPreBattle = false
         hasWon = false
         hasLost = false
 
@@ -167,7 +169,9 @@ class BattleScreen : Screen {
                 Gdx.input.inputProcessor = stage
                 Utils.setGamepadInputProcessor(stage)
                 stage.addActor(Utils.createBattleBack(battleId))
+                isLoaded = true
                 setupPreBattleTable()
+                isPreBattle = true
                 render(0f)
                 gameData.events.getEventById("guide_event_battle").possibleStart(stage)
             }
@@ -181,7 +185,7 @@ class BattleScreen : Screen {
         handleAudioFading()
         stage.draw()
 
-        if (isBgmFading || isDelayingTurn || hasWon || hasLost) {
+        if (!isLoaded || isBgmFading || isDelayingTurn || hasWon || hasLost) {
             return
         }
 
@@ -193,7 +197,7 @@ class BattleScreen : Screen {
         updateEnemyTable()
         updateTurnTable()
 
-        if (!isLoaded) {
+        if (isPreBattle) {
             updateBattleField()
             return
         }
@@ -283,7 +287,7 @@ class BattleScreen : Screen {
 
     private fun startBattle() {
         buttonTablePreBattle.remove()
-        isLoaded = true
+        isPreBattle = false
     }
 
     private fun selectHero() {
@@ -540,15 +544,14 @@ class BattleScreen : Screen {
 
     private fun potionConfirmed(potionAction: PotionAction) {
         buttonTablePotion.remove()
-        val message: String = potionAction.handle()
-        val audio: AudioEvent = if (message.contains("no effect")) AudioEvent.SE_CONVERSATION_NEXT else AudioEvent.SE_POTION
+        val (message, audioEvent) = potionAction.handle()
         val messageDialog = MessageDialog(message)
         messageDialog.setActionAfterHide {
             isDelayingTurn = false
         }
         isDelayingTurn = true
         Utils.runWithDelay(0.5f) {
-            messageDialog.show(stage, audio)
+            messageDialog.show(stage, audioEvent)
         }
     }
 
@@ -623,8 +626,7 @@ class BattleScreen : Screen {
     private fun restConfirmed(restAction: RestAction) {
         screenBuilder.buttonTableActionIndex = 0
         buttonTableAction.remove()
-        val message: String = restAction.handle()
-        val audio: AudioEvent = if (message.contains("ended")) AudioEvent.SE_CONVERSATION_NEXT else AudioEvent.SE_POTION
+        val (message, audioEvent) = restAction.handle()
         val messageDialog = MessageDialog(message)
         messageDialog.setActionAfterHide {
             turnManager.setNextTurn()
@@ -632,14 +634,14 @@ class BattleScreen : Screen {
         }
         isDelayingTurn = true
         Utils.runWithDelay(0.5f) {
-            messageDialog.show(stage, audio, 0.25f)
+            messageDialog.show(stage, audioEvent, 0.25f)
         }
     }
 
     private fun endTurn() {
         screenBuilder.buttonTableActionIndex = 0
         buttonTableAction.remove()
-        val message = "${currentParticipant.character.name} ended ${currentParticipant.character.gender} turn."
+        val message = EndTurnAction(currentParticipant).handle()
         val messageDialog = MessageDialog(message)
         messageDialog.setActionAfterHide {
             turnManager.setNextTurn()

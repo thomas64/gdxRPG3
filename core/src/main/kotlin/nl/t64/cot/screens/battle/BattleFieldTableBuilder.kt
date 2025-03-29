@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.scenes.scene2d.ui.*
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable
 import com.badlogic.gdx.utils.Scaling
 import nl.t64.cot.Utils
 import nl.t64.cot.components.battle.BattleField
@@ -13,7 +14,9 @@ import nl.t64.cot.components.battle.Participant
 class BattleFieldTableBuilder {
 
     private val smallStyle = LabelStyle(BitmapFont(), Color.WHITE)
-    private val transparent = Utils.createTransparency()
+    private val transparent: Drawable = Utils.createTransparency()
+    private val border: Drawable = Utils.createFullBorderWhite()
+    private val combined: Drawable = Utils.createCombinedDrawable(transparent, border)
     private lateinit var battleField: BattleField
 
     fun createBattleFieldTable(battleField: BattleField, currentParticipant: Participant): Table {
@@ -39,7 +42,7 @@ class BattleFieldTableBuilder {
             padRight(10f)
             padBottom(10f)
             padTop(10f)
-            background = transparent
+            background = combined
             pack()
         }
     }

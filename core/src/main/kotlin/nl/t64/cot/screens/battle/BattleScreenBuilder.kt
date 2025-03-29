@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.scenes.scene2d.ui.*
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.List.ListStyle
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Scaling
 import nl.t64.cot.Utils
@@ -39,7 +40,9 @@ class BattleScreenBuilder {
 
     private val colorTextureCache: MutableMap<Color, Texture> = mutableMapOf()
     private val barFontStyle = LabelStyle(BitmapFont(), Color.WHITE)
-    private val transparent = Utils.createTransparency()
+    private val transparent: Drawable = Utils.createTransparency()
+    private val border: Drawable = Utils.createFullBorderWhite()
+    private val combined: Drawable = Utils.createCombinedDrawable(transparent, border)
 
     var buttonTableActionIndex = 0
     var buttonTableRepositionIndex = 0
@@ -192,7 +195,7 @@ class BattleScreenBuilder {
                     possibleAddPadBottom(it, participants)
                 }
             }
-            background = transparent
+            background = combined
             pack()
             setPosition(450f, Gdx.graphics.height - height - 20f)
         }
@@ -242,7 +245,7 @@ class BattleScreenBuilder {
     fun createButtonTableMove(): Table {
         return createSelectionTable().apply {
             add("Move left or right and confirm.")
-            background = transparent
+            background = combined
             pack()
             y = Gdx.graphics.height - height - 20f
         }
@@ -281,15 +284,16 @@ class BattleScreenBuilder {
 
     private fun GdxList<String>.fillWithActions(currentParticipant: Participant): GdxList<String> {
         val maxAp: Int = currentParticipant.maximumAP
+        val curAp: Int = currentParticipant.currentAP
         val actions: List<Pair<String, Int>> = listOf(
-            "Attack (3-3 AP)" to 3,
-            "Move (1-$maxAp AP)" to 1,
+            "Attack (1-4 AP)" to 1,
+            "Move (1-$curAp AP)" to 1,
             "Potion (3 AP)" to 3,
             "Switch weapon (3 AP)" to 3,
             "Preview hit and damage" to 0,
             "Inventory" to 0,
             "Flee battle ($maxAp AP)" to maxAp,
-            "Rest (2 AP)" to 2,
+            "Rest (1 AP)" to 1,
             "End turn" to 0
         )
         val actionStrings: List<String> = actions.map { (action, ap) ->
@@ -473,7 +477,7 @@ class BattleScreenBuilder {
 
     private fun <T> Table.finish(listWithActions: GdxList<T>) {
         add(listWithActions)
-        background = transparent
+        background = combined
         pack()
         y = Gdx.graphics.height - height - 20f
     }

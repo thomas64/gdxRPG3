@@ -103,9 +103,8 @@ abstract class Character(
         return ((getCalculatedTotalStatOf(StatItemId.INTELLIGENCE)
             + getCalculatedTotalStatOf(StatItemId.DEXTERITY)
             + getCalculatedTotalStatOf(StatItemId.STRENGTH)
-            + getCalculatedTotalStatOf(StatItemId.SPEED)) / 10f)
-            .roundToInt()
-            .takeIf { it > 0f } ?: 1
+            + getCalculatedTotalStatOf(StatItemId.SPEED)) / 20f)
+            .roundToInt() + 2
     }
 
     fun getCalculatedTotalHit(): Int {

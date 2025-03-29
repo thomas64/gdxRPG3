@@ -9,7 +9,7 @@ enum class CalcAttributeId(override val title: String) : SuperEnum {
                 - '$title' (AP) define how many actions this
                   character is able to do each turn in combat.
 
-                - Each 10 ranks in 'Intelligence', 'Dexterity',
+                - Each 20 ranks in 'Intelligence', 'Dexterity',
                   'Strength' and 'Speed' together increases AP by 1.""".trimIndent()
         }
     },

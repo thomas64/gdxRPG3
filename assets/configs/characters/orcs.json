@@ -4,9 +4,9 @@
     "gender"   : "its",
     "school"   : "NONE",
     "ap"       : 4,
-    "xp"       : 11,
+    "xp"       : 12,
     "drops"    : {
-      "basic_orc_dagger"     : 15,
+      "basic_axe"            : 15,
       "basic_light_belt"     : 2,
       "basic_light_boots"    : 2,
       "basic_light_bracers"  : 2,
@@ -21,24 +21,24 @@
     },
     "stats"    : {
       "intelligence": 1,
-      "dexterity"   : 11,
+      "dexterity"   : 12,
       "strength"    : 1,
-      "speed"       : 11,
-      "willpower"   : 1,
-      "constitution": 11,
+      "speed"       : 12,
+      "willpower"   : 12,
+      "constitution": 12,
       "stamina"     : 1
     },
     "abilities": [
       "strike"
     ],
     "skills"   : {
-      "sword"  : 2,
+      "hafted" : 2,
       "warrior": 2
     },
     "spells"   : {
     },
     "inventory": {
-      "weapon": "basic_orc_dagger",
+      "weapon": "basic_axe",
       "chest" : "armor_4"
     }
   },
@@ -47,15 +47,29 @@
     "gender"   : "its",
     "school"   : "NONE",
     "ap"       : 6,
-    "xp"       : 27,
-    "drops"    : {"specialist_longsword": 20, "specialist_medium_shield": 20, "healing_potion": 5, "gold": 75},
+    "xp"       : 18,
+    "drops"    : {
+      "specialist_axe"             : 15,
+      "specialist_medium_shield"   : 15,
+      "specialist_medium_belt"     : 2,
+      "specialist_medium_boots"    : 2,
+      "specialist_medium_bracers"  : 2,
+      "specialist_medium_chest"    : 2,
+      "specialist_medium_cloak"    : 2,
+      "specialist_medium_gloves"   : 2,
+      "specialist_medium_helmet"   : 2,
+      "specialist_medium_pants"    : 2,
+      "specialist_medium_shoulders": 2,
+      "healing_potion"             : 5,
+      "gold"                       : 75
+    },
     "stats"    : {
       "intelligence": 1,
       "dexterity"   : 1,
-      "strength"    : 17,
-      "speed"       : 16,
-      "willpower"   : 12,
-      "constitution": 25,
+      "strength"    : 18,
+      "speed"       : 18,
+      "willpower"   : 18,
+      "constitution": 18,
       "stamina"     : 1
     },
     "abilities": [
@@ -63,15 +77,13 @@
     ],
     "skills"   : {
       "warrior": 8,
-      "hafted" : 6,
-      "shield" : 8,
-      "sword"  : 6,
-      "thrown" : 7
+      "hafted" : 10,
+      "shield" : 8
     },
     "spells"   : {
     },
     "inventory": {
-      "weapon": "specialist_sword",
+      "weapon": "specialist_axe",
       "shield": "specialist_medium_shield",
       "chest" : "armor_50"
     }

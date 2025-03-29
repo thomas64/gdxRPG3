@@ -1,6 +1,7 @@
 package nl.t64.cot.components.battle
 
 import nl.t64.cot.Utils.gameData
+import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.components.party.inventory.BattlePotionItem
 
 
@@ -24,7 +25,7 @@ class PotionAction(
         }
     }
 
-    fun handle(): String {
+    fun handle(): Pair<String, AudioEvent> {
         currentParticipant.currentAP -= POTION_AP
         gameData.inventory.autoRemoveItem(selectedPotion.id, 1)
         val oldHp = character.currentHp
@@ -32,9 +33,9 @@ class PotionAction(
         val newHp = character.currentHp
         val recoveredHp = newHp - oldHp // todo, dit gaat natuurlijk nog fout met niet-healing potions.
         if (recoveredHp <= 0) {
-            return "${selectedPotion.name} had no effect."
+            return "${selectedPotion.name} had no effect." to AudioEvent.SE_CONVERSATION_NEXT
         } else {
-            return "${character.name} used a ${selectedPotion.name} and recovered $recoveredHp HP."
+            return "${character.name} used a ${selectedPotion.name} and recovered $recoveredHp HP." to AudioEvent.SE_POTION
         }
     }
 

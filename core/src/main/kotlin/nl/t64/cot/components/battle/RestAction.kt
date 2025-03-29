@@ -1,18 +1,21 @@
 package nl.t64.cot.components.battle
 
+import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.components.party.HeroItem
+import kotlin.math.roundToInt
 
 
-private const val REST_AP: Int = 2
+private const val REST_AP: Int = 1
 
 class RestAction(
     private val currentParticipant: Participant
 ) {
     private val character: Character = currentParticipant.character
     private val hero: HeroItem = character as HeroItem
+    private val amount: Int = (hero.maximumHp / 20f).roundToInt()
     private val message = """
         Resting will make the current character
-        end this turn and recover 1 HP.
+        end this turn and recover $amount HP.
 
         """
 
@@ -24,13 +27,37 @@ class RestAction(
         }
     }
 
-    fun handle(): String {
+    fun handle(): Pair<String, AudioEvent> {
         currentParticipant.currentAP -= REST_AP
         if (character.currentHp == character.maximumHp) {
-            return "${character.name} ended ${character.gender} turn."
+            return createEndTurnMessage()
         } else {
-            hero.recoverPartHp(1)
-            return "${character.name} rested for a turn and recovered 1 HP."
+            hero.recoverPartHp(amount)
+            return createRestMessage()
+        }
+    }
+
+    private fun createEndTurnMessage(): Pair<String, AudioEvent> {
+        if (currentParticipant.currentAP >= 1) {
+            return """
+                ${character.name} ended ${character.gender} turn,
+                taking along ${currentParticipant.currentAP.coerceAtMost(2)} AP to the next turn.
+            """.trimIndent() to AudioEvent.SE_CONVERSATION_NEXT
+        } else {
+            return "${character.name} ended ${character.gender} turn." to AudioEvent.SE_CONVERSATION_NEXT
+        }
+    }
+
+    private fun createRestMessage(): Pair<String, AudioEvent> {
+
+        if (currentParticipant.currentAP >= 1) {
+            return """
+                ${character.name} rested for a turn,
+                taking along ${currentParticipant.currentAP.coerceAtMost(2)} AP to the next turn
+                and recovered $amount HP.
+            """.trimIndent() to AudioEvent.SE_POTION
+        } else {
+            return "${character.name} rested for a turn and recovered $amount HP." to AudioEvent.SE_POTION
         }
     }
 

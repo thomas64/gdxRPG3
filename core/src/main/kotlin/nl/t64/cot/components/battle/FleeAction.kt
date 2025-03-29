@@ -32,7 +32,7 @@ class FleeAction(
     }
 
     fun handle(): Pair<Boolean, String> {
-        currentParticipant.currentAP = 0
+        currentParticipant.currentAP -= currentParticipant.maximumAP
         if (preferenceManager.isInDebugMode) {
             return Pair(true, "The party successfully debug fled the battle.")
         }

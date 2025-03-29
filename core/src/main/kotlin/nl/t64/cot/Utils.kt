@@ -6,10 +6,7 @@ import com.badlogic.gdx.controllers.Controllers
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.Pixmap
 import com.badlogic.gdx.graphics.Texture
-import com.badlogic.gdx.graphics.g2d.BitmapFont
-import com.badlogic.gdx.graphics.g2d.NinePatch
-import com.badlogic.gdx.graphics.g2d.Sprite
-import com.badlogic.gdx.graphics.g2d.TextureRegion
+import com.badlogic.gdx.graphics.g2d.*
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Table
@@ -142,6 +139,53 @@ object Utils {
         val texture = resourceManager.getTextureAsset(SPRITE_TOOLTIP_RIGHT)
         val ninepatch = NinePatch(texture, 0, 1, 0, 0)
         return NinePatchDrawable(ninepatch)
+    }
+
+    fun createCombinedDrawable(background: Drawable, border: Drawable): Drawable {
+        return object : Drawable {
+
+            override fun draw(batch: Batch, x: Float, y: Float, width: Float, height: Float) {
+                background.draw(batch, x, y, width, height)
+                border.draw(batch, x, y, width, height)
+            }
+
+            override fun getMinWidth(): Float = background.minWidth.coerceAtLeast(border.minWidth)
+            override fun getMinHeight(): Float = background.minHeight.coerceAtLeast(border.minHeight)
+            override fun getLeftWidth(): Float = background.leftWidth
+            override fun getRightWidth(): Float = background.rightWidth
+            override fun getTopHeight(): Float = background.topHeight
+            override fun getBottomHeight(): Float = background.bottomHeight
+
+            override fun setMinWidth(minWidth: Float) {
+                background.minWidth = minWidth
+                border.minWidth = minWidth
+            }
+
+            override fun setMinHeight(minHeight: Float) {
+                background.minHeight = minHeight
+                border.minHeight = minHeight
+            }
+
+            override fun setLeftWidth(leftWidth: Float) {
+                background.leftWidth = leftWidth
+                border.leftWidth = leftWidth
+            }
+
+            override fun setRightWidth(rightWidth: Float) {
+                background.rightWidth = rightWidth
+                border.rightWidth = rightWidth
+            }
+
+            override fun setTopHeight(topHeight: Float) {
+                background.topHeight = topHeight
+                border.topHeight = topHeight
+            }
+
+            override fun setBottomHeight(bottomHeight: Float) {
+                background.bottomHeight = bottomHeight
+                border.bottomHeight = bottomHeight
+            }
+        }
     }
 
     fun createTooltipWindowStyle(): WindowStyle {

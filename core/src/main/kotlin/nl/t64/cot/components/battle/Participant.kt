@@ -18,6 +18,7 @@ class Participant(
     val maximumAP: Int = character.getCalculatedActionPoints()
     var currentAP: Int = maximumAP
 
+    private var amountOfTurns: Int = 0
 
     fun updateTurnCounter() {
         turnCounter += 10 + character.getCalculatedTotalStatOf(StatItemId.SPEED)
@@ -29,10 +30,12 @@ class Participant(
 
     fun resetTurnCounter() {
         turnCounter -= 200
+        amountOfTurns++
     }
 
     fun refreshActionPoints() {
-        currentAP = maximumAP
+        if (amountOfTurns == 0) return
+        currentAP = maximumAP + currentAP.coerceAtMost(2)
     }
 
     fun getPriority(): Float {

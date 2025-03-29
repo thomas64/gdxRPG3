@@ -6,6 +6,7 @@ import nl.t64.cot.components.party.abilities.BattleAbilityItem
 import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.components.party.inventory.InventoryItem
 import nl.t64.cot.components.party.skills.SkillItemId
+import kotlin.math.roundToInt
 import kotlin.random.Random
 
 
@@ -24,7 +25,7 @@ class AttackAction(
     private val cappedDamage: Int = damage.coerceAtMost(target.currentHp)
     private val criticalHitPercentage: Int = attacker.getCalculatedTotalSkillOf(SkillItemId.WARRIOR) * 4
     private val isCriticalHit: Boolean = criticalHitPercentage > Random.nextInt(0, 100)
-    private val criticalDamage: Int = (damage * 1.5f).toInt()
+    private val criticalDamage: Int = (damage * 1.51f).roundToInt()
     private val cappedCriticalDamage: Int = criticalDamage.coerceAtMost(target.currentHp)
 
     companion object {
@@ -117,8 +118,12 @@ class AttackAction(
         } else {
             val damageDone: Int = if (isCriticalHit) criticalDamage else damage
             target.takeDamage(damageDone)
-            val critMessage: String = if (isCriticalHit) "A critical hit! " else ""
+            val critMessage: String = if (isCriticalHit) "A critical hit!  " else ""
             messages.add("$critMessage${selectedAttack.name} successfully did $damageDone damage.")
+
+            if (damage <= 1) {
+                messages.add("${target.name} ${target.gender} protection is too strong!")
+            }
         }
 
         // "(It's super effective!)"

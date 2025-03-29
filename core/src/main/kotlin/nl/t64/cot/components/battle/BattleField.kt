@@ -7,7 +7,7 @@ import kotlin.math.abs
 
 
 private const val BATTLE_FIELD_SIZE = 20
-private const val PENALTY_AP: Int = 3
+private const val PENALTY_AP: Int = 2
 
 class BattleField(participants: List<Participant>) {
 
