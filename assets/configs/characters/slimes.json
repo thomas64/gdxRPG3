@@ -19,7 +19,7 @@
       "bite": 1
     },
     "abilities": [
-      "body_slam"
+      "body_slam_1", "body_slam_2", "body_slam_3"
     ],
     "spells"   : {
     },
@@ -48,7 +48,7 @@
       "bite": 1
     },
     "abilities": [
-      "body_slam"
+      "body_slam_1", "body_slam_2", "body_slam_3"
     ],
     "spells"   : {
     },
@@ -77,7 +77,7 @@
       "bite": 1
     },
     "abilities": [
-      "body_slam"
+      "body_slam_1", "body_slam_2", "body_slam_3"
     ],
     "spells"   : {
     },

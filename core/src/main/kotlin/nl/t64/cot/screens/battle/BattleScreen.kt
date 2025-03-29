@@ -331,6 +331,7 @@ class BattleScreen : Screen {
     }
 
     private fun previewAttackIsSelected(attack: BattleAbilityItem) {
+        screenBuilder.buttonTableAttackIndex = (buttonTableAttack.children.last() as GdxList<*>).selectedIndex
         buttonTableAttack.remove()
         setupPreviewTargetTable(attack)
     }
@@ -342,6 +343,7 @@ class BattleScreen : Screen {
     }
 
     private fun attackIsSelected(attack: BattleAbilityItem) {
+        screenBuilder.buttonTableAttackIndex = (buttonTableAttack.children.last() as GdxList<*>).selectedIndex
         buttonTableAttack.remove()
         setupTargetTable(attack)
     }

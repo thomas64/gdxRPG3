@@ -4,7 +4,7 @@ import nl.t64.cot.components.party.PersonalityItem
 
 
 data class AbilityItem(
-    val id: AbilityItemId = AbilityItemId.STRIKE,   // Value will be replaced when constructed.
+    val id: AbilityItemId = AbilityItemId.STRIKE_1,   // Value will be replaced when constructed.
     val name: String = "",
     val ap: Int = 0,
     private val description: List<String> = emptyList()

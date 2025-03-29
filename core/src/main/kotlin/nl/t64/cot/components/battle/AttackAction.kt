@@ -30,8 +30,12 @@ class AttackAction(
 
     companion object {
         fun createForEnemy(currentEnemy: Participant, targetHero: Participant, battleId: String): AttackAction {
-            // todo, when enemies get more than 1 ability in the future, the .first() part needs to be adjusted.
-            val ability: BattleAbilityItem = currentEnemy.getBattleAbilities().first()
+
+            val ability: BattleAbilityItem = currentEnemy.getBattleAbilities()
+                .filter { it.ap <= currentEnemy.currentAP }
+                .maxByOrNull { it.ap }
+                ?: currentEnemy.getBattleAbilities().first()
+
             return AttackAction(currentEnemy, targetHero.character, ability)
                 .specialCasesWorkaround(battleId, targetHero)
         }
@@ -121,7 +125,7 @@ class AttackAction(
             val critMessage: String = if (isCriticalHit) "A critical hit!  " else ""
             messages.add("$critMessage${selectedAttack.name} successfully did $damageDone damage.")
 
-            if (damage <= 1) {
+            if (currentParticipant.isHero && damage <= 1) {
                 messages.add("${target.name} ${target.gender} protection is too strong!")
             }
         }
@@ -143,14 +147,14 @@ class AttackAction(
     }
 
     private fun calculateDamage(): Int {
-        val attack: Int = attacker.getCalculatedTotalDamage()
+        val attack: Int = (attacker.getCalculatedTotalDamage() * selectedAttack.id.multiplier).toInt()
         val protection: Int = target.getCalculatedTotalProtection()
         return (attack - protection).coerceAtLeast(1)
     }
 
     private fun createDebugMessage() {
         if (preferenceManager.isInDebugMode) {
-            println("${attacker.name}: ${hitPercentage}% hit, ${criticalHitPercentage}% critHit.")
+            println("${attacker.name}: ${hitPercentage}% hit, ${criticalHitPercentage}% critHit, ${selectedAttack.ap} AP.")
         }
     }
 

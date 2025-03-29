@@ -29,7 +29,7 @@
       "stamina"     : 1
     },
     "abilities": [
-      "strike"
+      "strike_1", "strike_2", "strike_3", "strike_4"
     ],
     "skills"   : {
       "hafted" : 2,
@@ -73,7 +73,7 @@
       "stamina"     : 1
     },
     "abilities": [
-      "strike"
+      "strike_1", "strike_2", "strike_3", "strike_4"
     ],
     "skills"   : {
       "warrior": 8,
@@ -104,7 +104,7 @@
       "stamina"     : 60
     },
     "abilities": [
-      "strike"
+      "strike_1", "strike_2", "strike_3", "strike_4"
     ],
     "skills"   : {
       "warrior": 10,

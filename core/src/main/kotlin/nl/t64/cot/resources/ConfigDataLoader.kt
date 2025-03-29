@@ -109,10 +109,7 @@ object ConfigDataLoader {
         val json = readString("abilities", "abilities.json")
         return readValue<AbilityItem>(json)
             .mapValues {
-                it.value.copy(id = AbilityItemId.valueOf(it.key.uppercase()),
-                              name = it.key.split('_').joinToString(" ") { part ->
-                                  part.replaceFirstChar(Char::uppercase)
-                              })
+                it.value.copy(id = AbilityItemId.valueOf(it.key.uppercase()))
             }
     }
 

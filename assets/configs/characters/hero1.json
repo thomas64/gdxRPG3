@@ -19,7 +19,7 @@
       "missile": 1
     },
     "abilities": [
-      "strike"
+      "strike_1", "strike_2", "strike_3", "strike_4"
     ],
     "spells"   : {
     },
@@ -54,7 +54,7 @@
       "thrown"  : 2
     },
     "abilities": [
-      "strike"
+      "strike_1", "strike_2", "strike_3", "strike_4"
     ],
     "spells"   : {
     },
@@ -91,7 +91,7 @@
       "thrown"   : 2
     },
     "abilities": [
-      "strike"
+      "strike_1", "strike_2", "strike_3", "strike_4"
     ],
     "spells"   : {
     },
@@ -126,7 +126,7 @@
       "thrown"    : -1
     },
     "abilities": [
-      "strike"
+      "strike_1", "strike_2", "strike_3", "strike_4"
     ],
     "spells"   : {
       "vs_necromancy": 1,
@@ -167,7 +167,7 @@
       "thrown"    : 1
     },
     "abilities": [
-      "strike"
+      "strike_1", "strike_2", "strike_3", "strike_4"
     ],
     "spells"   : {
       "dragon_flames": 2
@@ -205,7 +205,7 @@
       "thrown"   : -1
     },
     "abilities": [
-      "strike"
+      "strike_1", "strike_2", "strike_3", "strike_4"
     ],
     "spells"   : {
     },
@@ -247,7 +247,7 @@
       "thrown"    : -1
     },
     "abilities": [
-      "strike"
+      "strike_1", "strike_2", "strike_3", "strike_4"
     ],
     "spells"   : {
     },
@@ -286,7 +286,7 @@
       "thrown"  : -1
     },
     "abilities": [
-      "strike"
+      "strike_1", "strike_2", "strike_3", "strike_4"
     ],
     "spells"   : {
       "vs_elemental" : 2,
@@ -328,7 +328,7 @@
       "thrown"    : 8
     },
     "abilities": [
-      "strike"
+      "strike_1", "strike_2", "strike_3", "strike_4"
     ],
     "spells"   : {
       "vs_star"          : 8,
@@ -369,7 +369,7 @@
       "thrown"  : -1
     },
     "abilities": [
-      "strike"
+      "strike_1", "strike_2", "strike_3", "strike_4"
     ],
     "spells"   : {
       "vs_star"      : 7,
@@ -413,7 +413,7 @@
       "thrown"    : 8
     },
     "abilities": [
-      "strike"
+      "strike_1", "strike_2", "strike_3", "strike_4"
     ],
     "spells"   : {
     },
@@ -460,7 +460,7 @@
       "thrown"    : 10
     },
     "abilities": [
-      "strike"
+      "strike_1", "strike_2", "strike_3", "strike_4"
     ],
     "spells"   : {
       "fireball"    : 6,
@@ -504,7 +504,7 @@
       "thrown" : -1
     },
     "abilities": [
-      "strike"
+      "strike_1", "strike_2", "strike_3", "strike_4"
     ],
     "spells"   : {
       "web_of_starlight": 8,
@@ -553,7 +553,7 @@
       "thrown"    : -1
     },
     "abilities": [
-      "strike"
+      "strike_1", "strike_2", "strike_3", "strike_4"
     ],
     "spells"   : {
     },

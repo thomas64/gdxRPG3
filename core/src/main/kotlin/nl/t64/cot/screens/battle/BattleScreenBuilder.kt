@@ -44,8 +44,9 @@ class BattleScreenBuilder {
     private val border: Drawable = Utils.createFullBorderWhite()
     private val combined: Drawable = Utils.createCombinedDrawable(transparent, border)
 
-    var buttonTableActionIndex = 0
     var buttonTableRepositionIndex = 0
+    var buttonTableActionIndex = 0
+    var buttonTableAttackIndex = 0
 
     fun createBattleTitle(): Label {
         return Label(TITLE_TEXT, createLabelStyle(Color.WHITE)).apply {
@@ -315,7 +316,7 @@ class BattleScreenBuilder {
     private fun GdxList<BattleAbilityItem>.fillWithAttacks(abilities: List<BattleAbilityItem>): GdxList<BattleAbilityItem> {
         this.setItems(*abilities.toTypedArray())
         items.add(BattleAbilityItem("Back"))
-        this.selectedIndex = 0
+        this.selectedIndex = buttonTableAttackIndex
         return this
     }
 

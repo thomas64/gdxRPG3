@@ -20,7 +20,7 @@
       "bite": 1
     },
     "abilities": [
-      "bite"
+      "bite_1", "bite_2", "bite_3", "bite_4", "bite_5"
     ],
     "spells"   : {
     },
@@ -49,7 +49,7 @@
       "bite": 1
     },
     "abilities": [
-      "bite"
+      "bite_1", "bite_2", "bite_3", "bite_4", "bite_5"
     ],
     "spells"   : {
     },
