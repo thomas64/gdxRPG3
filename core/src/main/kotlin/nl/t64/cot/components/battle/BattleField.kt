@@ -161,6 +161,7 @@ class BattleField(participants: List<Participant>) {
             .onEach { if (this.isDestinationInRangeOfAP(it)) return it }
             .firstOrNull()
             ?.let { this.findFarthestReachableSpaceTo(it) }
+            ?: this.getNextBestNearestEmptySpace(heroIndicesByPrio)
     }
 
     private fun Participant.getAllEnemySpacesFromWhereToAttackByPrio(heroIndicesByPrio: List<Int>): List<Int> {
@@ -201,6 +202,19 @@ class BattleField(participants: List<Participant>) {
         return (1..actionPoints)
             .map { currentEnemyIndex + it * direction }
             .lastOrNull { enemySpaces[it] == null }
+    }
+
+    private fun Participant.getNextBestNearestEmptySpace(heroIndicesByPrio: List<Int>): Int? {
+        val currentEnemyIndex: Int = this.getCurrentSpaceIndex()
+        return heroIndicesByPrio
+            .flatMap { listOf(it - 1, it) }
+            .map { destinationSpace ->
+                enemySpaces.indices
+                    .filter { it == currentEnemyIndex || enemySpaces[it] == null }
+                    .minBy { abs(it - destinationSpace) }
+            }
+            .minBy { abs(it - currentEnemyIndex) }
+            .takeIf { it != currentEnemyIndex }
     }
 
     private fun Participant.takeApForMovingTo(destinationSpace: Int) {
