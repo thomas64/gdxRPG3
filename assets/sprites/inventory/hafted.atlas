@@ -11,30 +11,37 @@ basic_axe
   orig: 62, 62
   offset: 0, 0
   index: -1
-epic_axe
+basic_mozes_axe
   rotate: false
   xy: 62, 0
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-fine_axe
+epic_axe
   rotate: false
   xy: 124, 0
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-masterwork_axe
+fine_axe
   rotate: false
   xy: 186, 0
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-specialist_axe
+masterwork_axe
   rotate: false
   xy: 0, 62
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+specialist_axe
+  rotate: false
+  xy: 62, 62
   size: 62, 62
   orig: 62, 62
   offset: 0, 0

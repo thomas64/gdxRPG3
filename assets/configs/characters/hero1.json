@@ -15,6 +15,7 @@
     "skills"   : {
       "stealth": 1,
       "warrior": 1,
+      "hafted" : 1,
       "sword"  : 1,
       "missile": 1
     },

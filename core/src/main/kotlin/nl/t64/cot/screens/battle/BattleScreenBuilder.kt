@@ -136,7 +136,12 @@ class BattleScreenBuilder {
         val statsStack = Stack()
         statsStack.add(enemyTable)
 
-        enemy.getInventoryItem(InventoryGroup.WEAPON)?.skill?.name?.let {
+        // todo, dit is een enorme tijdelijke regel, op deze manier aan de verwijderde bite skill komen, is niet heel flexibel.
+        if (enemy.id.endsWith("_bat") || enemy.id.endsWith("_slime")) {
+            "bite"
+        } else {
+            enemy.getInventoryItem(InventoryGroup.WEAPON)?.skill?.name
+        }?.let {
             val textureRegion = resourceManager.getAtlasTexture(it.lowercase())
             val image = Image(textureRegion).apply { setScaling(Scaling.fit) }
             val container = Container(image).top().left().size(35f).pad(5f)

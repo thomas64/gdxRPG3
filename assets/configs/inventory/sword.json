@@ -5,7 +5,7 @@
     "sort"        : 1006,
     "skill"       : "SWORD",
     "price"       : 3,
-    "durability"  : 40,
+    "durability"  : 25,
     "min_strength": 10,
     "base_hit"    : 90,
     "damage"      : 6

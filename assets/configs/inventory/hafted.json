@@ -1,5 +1,16 @@
 {
-  "basic_axe"     : {
+  "basic_mozes_axe": {
+    "name"        : "Mozes' Axe",
+    "group"       : "WEAPON",
+    "sort"        : 1005,
+    "skill"       : "HAFTED",
+    "price"       : 3,
+    "durability"  : 25,
+    "min_strength": 10,
+    "base_hit"    : 75,
+    "damage"      : 8
+  },
+  "basic_axe"      : {
     "name"        : "Basic Axe",
     "group"       : "WEAPON",
     "sort"        : 1100,
@@ -10,7 +21,7 @@
     "base_hit"    : 65,
     "damage"      : 15
   },
-  "fine_axe"      : {
+  "fine_axe"       : {
     "name"        : "Fine Axe",
     "group"       : "WEAPON",
     "sort"        : 2100,
@@ -21,7 +32,7 @@
     "base_hit"    : 55,
     "damage"      : 20
   },
-  "specialist_axe": {
+  "specialist_axe" : {
     "name"        : "Specialist Axe",
     "group"       : "WEAPON",
     "sort"        : 3100,
@@ -32,7 +43,7 @@
     "base_hit"    : 45,
     "damage"      : 25
   },
-  "masterwork_axe": {
+  "masterwork_axe" : {
     "name"        : "Masterwork Axe",
     "group"       : "WEAPON",
     "sort"        : 4100,
@@ -43,7 +54,7 @@
     "base_hit"    : 35,
     "damage"      : 30
   },
-  "epic_axe"      : {
+  "epic_axe"       : {
     "name"        : "Epic Axe",
     "group"       : "WEAPON",
     "sort"        : 5100,

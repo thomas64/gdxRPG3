@@ -1,61 +1,61 @@
 {
   "attack_65_10": {
     "group"       : "WEAPON",
-    "skill"       : "BITE",
+    "skill"       : "POLE",
     "min_strength": 1,
     "base_hit"    : 65,
     "damage"      : 10
   },
   "attack_65_20": {
     "group"       : "WEAPON",
-    "skill"       : "BITE",
+    "skill"       : "POLE",
     "min_strength": 1,
     "base_hit"    : 65,
     "damage"      : 20
   },
-  "attack_80_8"  : {
+  "attack_80_8" : {
     "group"       : "WEAPON",
-    "skill"       : "BITE",
+    "skill"       : "HAFTED",
     "min_strength": 1,
     "base_hit"    : 80,
     "damage"      : 8
   },
-  "attack_80_16"  : {
+  "attack_80_16": {
     "group"       : "WEAPON",
-    "skill"       : "BITE",
+    "skill"       : "HAFTED",
     "min_strength": 1,
     "base_hit"    : 80,
     "damage"      : 16
   },
-  "armor_1"   : {
+  "armor_1"     : {
     "group"     : "CHEST",
     "protection": 1
   },
-  "armor_2"   : {
+  "armor_2"     : {
     "group"     : "CHEST",
     "protection": 2
   },
-  "armor_3"   : {
+  "armor_3"     : {
     "group"     : "CHEST",
     "protection": 3
   },
-  "armor_4"   : {
+  "armor_4"     : {
     "group"     : "CHEST",
     "protection": 4
   },
-  "armor_6"   : {
+  "armor_6"     : {
     "group"     : "CHEST",
     "protection": 6
   },
-  "armor_50"  : {
+  "armor_50"    : {
     "group"     : "CHEST",
     "protection": 50
   },
-  "armor_100" : {
+  "armor_100"   : {
     "group"     : "CHEST",
     "protection": 100
   },
-  "armor_400" : {
+  "armor_400"   : {
     "group"     : "CHEST",
     "protection": 400
   }

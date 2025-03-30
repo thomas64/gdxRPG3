@@ -17,13 +17,13 @@ class AttackAction(
 ) {
     private val attacker: Character = currentParticipant.character
 
-    private val hitPercentage: Int = attacker.getCalculatedTotalHit()
+    private val hitPercentage: Int = calculateHitPercentage()
     private val cappedHitPercentage: Int = hitPercentage.coerceAtMost(100)
     private var isHit: Boolean = hitPercentage > Random.nextInt(0, 100)
     private val isBlock: Boolean = target.getCalculatedTotalDefense() > Random.nextInt(0, 100)
     private val damage: Int = calculateDamage()
     private val cappedDamage: Int = damage.coerceAtMost(target.currentHp)
-    private val criticalHitPercentage: Int = attacker.getCalculatedTotalSkillOf(SkillItemId.WARRIOR) * 4
+    private val criticalHitPercentage: Int = calculateCriticalHitPercentage()
     private val isCriticalHit: Boolean = criticalHitPercentage > Random.nextInt(0, 100)
     private val criticalDamage: Int = (damage * 1.51f).roundToInt()
     private val cappedCriticalDamage: Int = criticalDamage.coerceAtMost(target.currentHp)
@@ -81,7 +81,7 @@ class AttackAction(
                 Weapon: ${it.name}
                 Durability: ${it.durability}
                 ${it.getRangeText()}
-
+                ${createPossibleEffectiveMessage()}
                 Chance to hit: $cappedHitPercentage%
                 Damage: $damage
                 Critical chance: $criticalHitPercentage%
@@ -94,6 +94,18 @@ class AttackAction(
 
             No weapon equipped!
         """.trimIndent()
+    }
+
+    private fun createPossibleEffectiveMessage(): String {
+        return when {
+            isWeaponTrianglePositive() -> """
+                Super effective!
+                """
+            isWeaponTriangleNegative() -> """
+                Not very effective...
+                """
+            else -> ""
+        }
     }
 
     fun handle(): ArrayDeque<String> {
@@ -125,13 +137,16 @@ class AttackAction(
             val critMessage: String = if (isCriticalHit) "A critical hit!  " else ""
             messages.add("$critMessage${selectedAttack.name} successfully did $damageDone damage.")
 
+            if (isWeaponTrianglePositive()) {
+                messages.add("It's super effective!")
+            } else if (isWeaponTriangleNegative()) {
+                messages.add("It's not very effective...")
+            }
+
             if (currentParticipant.isHero && damage <= 1) {
                 messages.add("${target.name} ${target.gender} protection is too strong!")
             }
         }
-
-        // "(It's super effective!)"
-        // "(It's not very effective...)"
 
         if (attacker is HeroItem && weapon.durability <= 0) {
             messages.add("${weapon.name} broke!")
@@ -144,6 +159,47 @@ class AttackAction(
 
     private fun handleFailure(messages: ArrayDeque<String>) {
         messages.add("${attacker.name}'s attack failed.")
+    }
+
+    private fun calculateHitPercentage(): Int {
+        val attackerHitPercentage: Int = attacker.getCalculatedTotalHit()
+
+        val weaponTriangle = when {
+            isWeaponTrianglePositive() -> 10
+            isWeaponTriangleNegative() -> -10
+            else -> 0
+        }
+
+        return (attackerHitPercentage + weaponTriangle).coerceAtLeast(0)
+    }
+
+    private fun calculateCriticalHitPercentage(): Int {
+        val attackerCriticalHitPercentage: Int = attacker.getCalculatedTotalSkillOf(SkillItemId.WARRIOR) * 4
+
+        val weaponTriangle = when {
+            isWeaponTrianglePositive() -> 20
+            isWeaponTriangleNegative() -> -20
+            else -> 0
+        }
+        return (attackerCriticalHitPercentage + weaponTriangle).coerceAtLeast(0)
+    }
+
+    private fun isWeaponTrianglePositive(): Boolean {
+        val attackSkill: SkillItemId = selectedAttack.currentWeapon!!.skill!!
+        val targetSkill: SkillItemId = target.getInventoryItem(InventoryGroup.WEAPON)?.skill ?: return false
+
+        return (attackSkill == SkillItemId.SWORD && targetSkill == SkillItemId.HAFTED) ||
+            (attackSkill == SkillItemId.HAFTED && targetSkill == SkillItemId.POLE) ||
+            (attackSkill == SkillItemId.POLE && targetSkill == SkillItemId.SWORD)
+    }
+
+    private fun isWeaponTriangleNegative(): Boolean {
+        val attackSkill: SkillItemId = selectedAttack.currentWeapon!!.skill!!
+        val targetSkill: SkillItemId = target.getInventoryItem(InventoryGroup.WEAPON)?.skill ?: return false
+
+        return (attackSkill == SkillItemId.SWORD && targetSkill == SkillItemId.POLE) ||
+            (attackSkill == SkillItemId.HAFTED && targetSkill == SkillItemId.SWORD) ||
+            (attackSkill == SkillItemId.POLE && targetSkill == SkillItemId.HAFTED)
     }
 
     private fun calculateDamage(): Int {

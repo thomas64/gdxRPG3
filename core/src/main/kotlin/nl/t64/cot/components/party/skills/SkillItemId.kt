@@ -36,10 +36,7 @@ enum class SkillItemId : SuperEnum {
     POLE,
     MISSILE,
     THROWN,
-    SHIELD,
-
-    // Enemy Skills
-    BITE;
+    SHIELD;
 
     override val title: String = name.lowercase().replaceFirstChar { it.uppercase() }
 
@@ -47,7 +44,6 @@ enum class SkillItemId : SuperEnum {
         return when (this) {
             SWORD, HAFTED, POLE -> true
             MISSILE, THROWN -> false
-            BITE -> true
             else -> throw IllegalArgumentException("Only possible to ask a Weapon Skill.")
         }
     }
@@ -55,7 +51,6 @@ enum class SkillItemId : SuperEnum {
     fun isWeaponSkill(): Boolean {
         return when (this) {
             SWORD, HAFTED, POLE, MISSILE, THROWN, SHIELD -> true
-            BITE -> throw IllegalArgumentException("Only possible to ask a player skill.")
             else -> false
         }
     }
@@ -63,7 +58,6 @@ enum class SkillItemId : SuperEnum {
     fun isMagicSkill(): Boolean {
         return when (this) {
             WIZARD -> true
-            BITE -> throw IllegalArgumentException("Only possible to ask a player skill.")
             else -> false
         }
     }
@@ -71,7 +65,6 @@ enum class SkillItemId : SuperEnum {
     fun isCombatSkill(): Boolean {
         return when (this) {
             STEALTH, GAMBLER, HEALER, TROUBADOUR, THIEF, WARRIOR -> true
-            BITE -> throw IllegalArgumentException("Only possible to ask a player skill.")
             else -> false
         }
     }
@@ -79,7 +72,6 @@ enum class SkillItemId : SuperEnum {
     fun isCivilSkill(): Boolean {
         return when (this) {
             ALCHEMIST, MECHANIC, RANGER, MERCHANT, SCHOLAR -> true
-            BITE -> throw IllegalArgumentException("Only possible to ask a player skill.")
             else -> false
         }
     }
@@ -87,7 +79,6 @@ enum class SkillItemId : SuperEnum {
     fun isCommunicationSkill(): Boolean {
         return when (this) {
             BARBARIAN, DIPLOMAT, JESTER, DRUID, LOREMASTER -> true
-            BITE -> throw IllegalArgumentException("Only possible to ask a player skill.")
             else -> false
         }
     }

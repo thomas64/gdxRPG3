@@ -147,7 +147,6 @@ data class InventoryItem(
             SkillItemId.SHIELD,
             SkillItemId.SWORD,
             SkillItemId.THROWN -> 0
-            SkillItemId.BITE -> 0
         }
     }
 
@@ -217,8 +216,7 @@ data class InventoryItem(
             SkillItemId.HAFTED,
             SkillItemId.POLE,
             SkillItemId.THROWN,
-            SkillItemId.MISSILE,
-            SkillItemId.BITE -> range.ifEmpty { listOf(1) }
+            SkillItemId.MISSILE -> range.ifEmpty { listOf(1) }
             else -> throw IllegalArgumentException("Only possible to ask a Weapon Skill.")
         }
     }

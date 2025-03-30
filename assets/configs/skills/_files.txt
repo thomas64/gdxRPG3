@@ -3,4 +3,3 @@ civil.json
 combat.json
 magic.json
 weapon.json
-enemy.json

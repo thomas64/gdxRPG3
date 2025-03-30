@@ -1,7 +1,8 @@
 key,                name,               group,      sort,   skill,   price, durability, min_intelligence,   min_dexterity,  min_strength,   base_hit,   damage,
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
-basic_mozes_bow,    Mozes' Bow,         WEAPON,     1005,   MISSILE, 3,     15,         0,                  10,             0,              80,         4,
-basic_mozes_sword,  Mozes' Sword,       WEAPON,     1006,   SWORD,   3,     40,         0,                  0,              10,             90,         6,
+basic_mozes_bow,    Mozes' Bow,         WEAPON,     1004,   MISSILE, 3,     15,         0,                  10,             0,              80,         4,
+basic_mozes_axe,    Mozes' Axe,         WEAPON,     1005,   HAFTED,  3,     25,         0,                  0,              10,             75,         8,
+basic_mozes_sword,  Mozes' Sword,       WEAPON,     1006,   SWORD,   3,     25,         0,                  0,              10,             90,         6,
 basic_fairy_sword,  Fairy Sword,        WEAPON,     1007,   SWORD,   3,     30,         11,                 0,              0,              85,         7,
 basic_orc_dagger,   Orc Dagger,         WEAPON,     1008,   SWORD,   3,     30,         0,                  11,             0,              80,         8,
 basic_orc_sword,    Orc Sword,          WEAPON,     1009,   SWORD,   3,     30,         0,                  0,              11,             75,         9,

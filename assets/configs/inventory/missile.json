@@ -2,7 +2,7 @@
   "basic_mozes_bow": {
     "name"         : "Mozes' Bow",
     "group"        : "WEAPON",
-    "sort"         : 1005,
+    "sort"         : 1004,
     "skill"        : "MISSILE",
     "is_two_handed": true,
     "price"        : 3,

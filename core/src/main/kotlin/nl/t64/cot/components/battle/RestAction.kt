@@ -12,7 +12,7 @@ class RestAction(
 ) {
     private val character: Character = currentParticipant.character
     private val hero: HeroItem = character as HeroItem
-    private val amount: Int = (hero.maximumHp / 20f).roundToInt()
+    private val amount: Int = createAmount()
     private val message = """
         Resting will make the current character
         end this turn and recover $amount HP.
@@ -59,6 +59,10 @@ class RestAction(
         } else {
             return "${character.name} rested for a turn and recovered $amount HP." to AudioEvent.SE_POTION
         }
+    }
+
+    private fun createAmount(): Int {
+        return (hero.maximumHp / 20f).roundToInt().coerceAtMost(hero.maximumHp - hero.currentHp)
     }
 
 }

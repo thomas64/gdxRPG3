@@ -8,7 +8,7 @@ private val TRAINING_COSTS = listOf(20, 8, 12, 16, 20, 24, 28, 32, 36, 40)
 private const val MAXIMUM = 10
 
 data class SkillItem(
-    val id: SkillItemId = SkillItemId.BITE,                 // Value will be replaced when constructed.
+    val id: SkillItemId = SkillItemId.POLE,                 // Value will be replaced when constructed.
     val name: String = "",
     var rank: Int = 0,
     private val upgrade: Float = 0f,                        // Constant value for upgrading formula.
