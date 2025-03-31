@@ -2,7 +2,7 @@
   "basic_mozes_bow": {
     "name"         : "Mozes' Bow",
     "group"        : "WEAPON",
-    "sort"         : 1004,
+    "sort"         : 1398,
     "skill"        : "MISSILE",
     "is_two_handed": true,
     "price"        : 3,
@@ -11,6 +11,19 @@
     "range"        : [6, 7, 8, 9],
     "base_hit"     : 80,
     "damage"       : 4
+  },
+  "basic_elven_bow": {
+    "name"            : "Elven Bow",
+    "group"           : "WEAPON",
+    "sort"            : 1399,
+    "skill"           : "MISSILE",
+    "is_two_handed"   : true,
+    "price"           : 3,
+    "durability"      : 10,
+    "min_intelligence": 11,
+    "range"           : [6, 7, 8, 9],
+    "base_hit"        : 75,
+    "damage"          : 6
   },
   "basic_bow"      : {
     "name"         : "Basic Bow",

@@ -11,79 +11,65 @@ basic_dagger
   orig: 62, 62
   offset: 0, 0
   index: -1
-basic_fairy_sword
+basic_mozes_sword
   rotate: false
   xy: 62, 0
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-basic_mozes_sword
+basic_orc_dagger
   rotate: false
   xy: 124, 0
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-basic_orc_dagger
+basic_sword
   rotate: false
   xy: 186, 0
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-basic_orc_sword
+fine_dagger
   rotate: false
   xy: 0, 62
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-basic_sword
+fine_sword
   rotate: false
   xy: 62, 62
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-fine_dagger
+masterwork_dagger
   rotate: false
   xy: 124, 62
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-fine_sword
+masterwork_sword
   rotate: false
   xy: 186, 62
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-masterwork_dagger
+specialist_dagger
   rotate: false
   xy: 0, 124
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-masterwork_sword
-  rotate: false
-  xy: 62, 124
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
-specialist_dagger
-  rotate: false
-  xy: 124, 124
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
 specialist_sword
   rotate: false
-  xy: 186, 124
+  xy: 62, 124
   size: 62, 62
   orig: 62, 62
   offset: 0, 0

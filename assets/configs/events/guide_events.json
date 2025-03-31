@@ -6,6 +6,14 @@
       "Use it to interact with characters, chests, or doors."
     ]
   },
+  "guide_event_clock"                : {
+    "type": "messagebox",
+    "text": [
+      "The clock to the right shows the current time.",
+      "When the clock reaches 19:30, the day ends.",
+      "The time flashes red when it's almost night."
+    ]
+  },
   "guide_event_inventory"            : {
     "type"     : "messagebox",
     "condition": ["_n_3_>=_item_healing_potion"],
@@ -26,11 +34,13 @@
     "type": "messagebox",
     "text": [
       "The battlefield consists of the two rows you can see below.",
-      "The lower row is where you and your party members move.",
-      "The upper row is where the enemies move.",
+      "One row for you and your party members, the other for the enemies.",
       "The red spaces on the upper row indicate your attack range.",
+      "",
       "Each turn, you get a certain amount of Action Points (AP).",
-      "With these AP, you can move, attack, or do other actions."
+      "With these AP, you can move, attack, or do other actions.",
+      "",
+      "Each enemy has an advantage and a disadvantage to certain weapon types."
     ]
   },
   "guide_event_quest"                : {
@@ -106,7 +116,8 @@
     "condition": ["been_in_fairy_town"],
     "text"     : [
       "With the %fast% you can toggle to run.",
-      "You'll move faster, but enemies will detect you more easily."
+      "You'll move faster, but enemies will detect you more easily.",
+      "The bottom right corner shows whether you're running."
     ]
   },
   "guide_event_quest_reminder"       : {

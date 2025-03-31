@@ -39,9 +39,16 @@ masterwork_axe
   orig: 62, 62
   offset: 0, 0
   index: -1
-specialist_axe
+orc_axe
   rotate: false
   xy: 62, 62
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+specialist_axe
+  rotate: false
+  xy: 124, 62
   size: 62, 62
   orig: 62, 62
   offset: 0, 0

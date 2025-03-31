@@ -2,13 +2,24 @@
   "basic_mozes_axe": {
     "name"        : "Mozes' Axe",
     "group"       : "WEAPON",
-    "sort"        : 1005,
+    "sort"        : 1098,
     "skill"       : "HAFTED",
     "price"       : 3,
     "durability"  : 25,
     "min_strength": 10,
     "base_hit"    : 75,
     "damage"      : 8
+  },
+  "basic_orc_axe"  : {
+    "name"        : "Orc Axe",
+    "group"       : "WEAPON",
+    "sort"        : 1099,
+    "skill"       : "HAFTED",
+    "price"       : 3,
+    "durability"  : 20,
+    "min_strength": 11,
+    "base_hit"    : 70,
+    "damage"      : 10
   },
   "basic_axe"      : {
     "name"        : "Basic Axe",

@@ -2,7 +2,7 @@
   "basic_mozes_sword": {
     "name"        : "Mozes' Sword",
     "group"       : "WEAPON",
-    "sort"        : 1006,
+    "sort"        : 1009,
     "skill"       : "SWORD",
     "price"       : 3,
     "durability"  : 25,
@@ -10,43 +10,21 @@
     "base_hit"    : 90,
     "damage"      : 6
   },
-  "basic_fairy_sword": {
-    "name"            : "Fairy Sword",
-    "group"           : "WEAPON",
-    "sort"            : 1007,
-    "skill"           : "SWORD",
-    "price"           : 3,
-    "durability"      : 30,
-    "min_intelligence": 11,
-    "base_hit"        : 85,
-    "damage"          : 7
-  },
   "basic_orc_dagger" : {
     "name"         : "Orc Dagger",
     "group"        : "WEAPON",
-    "sort"         : 1008,
+    "sort"         : 1000,
     "skill"        : "SWORD",
     "price"        : 3,
-    "durability"   : 30,
+    "durability"   : 20,
     "min_dexterity": 11,
-    "base_hit"     : 80,
+    "base_hit"     : 85,
     "damage"       : 8
-  },
-  "basic_orc_sword"  : {
-    "name"        : "Orc Sword",
-    "group"       : "WEAPON",
-    "sort"        : 1009,
-    "skill"       : "SWORD",
-    "price"       : 3,
-    "durability"  : 30,
-    "min_strength": 11,
-    "base_hit"    : 75,
-    "damage"      : 9
   },
   "basic_dagger"     : {
     "name"         : "Basic Dagger",
     "group"        : "WEAPON",
-    "sort"         : 1000,
+    "sort"         : 1001,
     "skill"        : "SWORD",
     "price"        : 5,
     "durability"   : 30,

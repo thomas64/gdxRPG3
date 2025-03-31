@@ -9,8 +9,8 @@
       "",
       "- Hafted weapons have an advantage against enemies with pole weapons,",
       "  and a disadvantage against enemies with swords.",
-      "  When having advantage, 'Chance to hit' is increased by 10%,",
-      "  and 'Critical hit' is increased by 20%. And vice versa."
+      "  When having advantage, 'Chance to hit' is increased by 10%, and",
+      "  'Critical hit' is increased by 20%. And vice versa when disadvantage."
     ]
   },
   "missile": {
@@ -32,8 +32,8 @@
       "",
       "- Pole weapons have an advantage against enemies with swords,",
       "  and a disadvantage against enemies with hafted weapons.",
-      "  When having advantage, 'Chance to hit' is increased by 10%,",
-      "  and 'Critical hit' is increased by 20%. And vice versa."
+      "  When having advantage, 'Chance to hit' is increased by 10%, and",
+      "  'Critical hit' is increased by 20%. And vice versa with disadvantage."
     ]
   },
   "shield" : {
@@ -55,8 +55,8 @@
       "",
       "- Swords have an advantage against enemies with hafted weapons,",
       "  and a disadvantage against enemies with pole weapons.",
-      "  When having advantage, 'Chance to hit' is increased by 10%,",
-      "  and 'Critical hit' is increased by 20%. And vice versa."
+      "  When having advantage, 'Chance to hit' is increased by 10%, and",
+      "  'Critical hit' is increased by 20%. And vice versa with disadvantage."
     ]
   },
   "thrown" : {

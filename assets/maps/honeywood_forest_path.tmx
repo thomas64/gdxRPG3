@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="44" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="26" nextobjectid="93">
+<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="44" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="26" nextobjectid="94">
  <properties>
   <property name="bgm" value="bgm_forest"/>
   <property name="bgs" value="bgs_birds, bgs_creek"/>
@@ -129,5 +129,6 @@
   <object id="88" name="find_grace_before_dark" type="discover" x="480" y="1668" width="48" height="12"/>
   <object id="90" name="start_bgm" type="discover" x="480" y="1650" width="48" height="6"/>
   <object id="91" name="stop_intro_bgm" type="discover" x="480" y="1674" width="48" height="6"/>
+  <object id="93" name="guide_event_clock" type="discover" x="480" y="1632" width="48" height="24"/>
  </objectgroup>
 </map>

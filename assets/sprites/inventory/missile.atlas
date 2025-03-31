@@ -11,30 +11,37 @@ basic_bow
   orig: 62, 62
   offset: 0, 0
   index: -1
-basic_mozes_bow
+basic_elven_bow
   rotate: false
   xy: 62, 0
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-fine_bow
+basic_mozes_bow
   rotate: false
   xy: 124, 0
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-masterwork_bow
+fine_bow
   rotate: false
   xy: 186, 0
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
   index: -1
-specialist_bow
+masterwork_bow
   rotate: false
   xy: 0, 62
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+specialist_bow
+  rotate: false
+  xy: 62, 62
   size: 62, 62
   orig: 62, 62
   offset: 0, 0
