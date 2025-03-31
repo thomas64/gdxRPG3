@@ -69,11 +69,13 @@ class AcademyScreen : ParchmentScreen() {
     }
 
     private fun selectPreviousTable() {
+        return
         playSe(AudioEvent.SE_MENU_CURSOR)
         academyUI.selectPreviousTable()
     }
 
     private fun selectNextTable() {
+        return
         playSe(AudioEvent.SE_MENU_CURSOR)
         academyUI.selectNextTable()
     }

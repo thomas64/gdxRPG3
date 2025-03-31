@@ -54,6 +54,8 @@ class Scenario {
         gameData.inventory.autoSetItem(axe)
         val sword = InventoryDatabase.createInventoryItem("basic_mozes_sword")
         gameData.inventory.autoSetItem(sword)
+        val shield = InventoryDatabase.createInventoryItem("basic_mozes_shield")
+        gameData.inventory.autoSetItem(shield)
         val gold = InventoryDatabase.createInventoryItem("gold")
         gameData.inventory.autoSetItem(gold)
     }

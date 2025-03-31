@@ -29,7 +29,7 @@ class WarpScreen : ParchmentScreen() {
 
     companion object {
         fun load(currentMapName: String) {
-            playSe(AudioEvent.SE_SCROLL)
+            playSe(AudioEvent.SE_ACTIVATE)
             val warpScreen = screenManager.getScreen(ScreenType.WARP) as WarpScreen
             warpScreen.currentMapName = currentMapName
             screenManager.openParchmentLoadScreen(ScreenType.WARP)

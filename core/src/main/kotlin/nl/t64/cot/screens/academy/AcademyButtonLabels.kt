@@ -9,9 +9,9 @@ internal class AcademyButtonLabels(stage: Stage) : ButtonLabels(stage) {
 
     override fun createBottomLeftText(): String {
         return if (Utils.isGamepadConnected()) {
-            "                                                       [A] Upgrade"
+            "                                                       [A] Train / Upgrade"
         } else {
-            "                                                       [A] Upgrade"
+            "                                                       [A] Train / Upgrade"
         }
     }
 

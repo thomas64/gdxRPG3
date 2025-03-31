@@ -12,10 +12,10 @@ class RestAction(
 ) {
     private val character: Character = currentParticipant.character
     private val hero: HeroItem = character as HeroItem
-    private val amount: Int = createAmount()
+    private val amount: Int = calculateAmount()
     private val message = """
         Resting will make the current character
-        end this turn and recover $amount HP.
+        end this turn and recover ${calculateAmountForText()} HP.
 
         """
 
@@ -61,8 +61,12 @@ class RestAction(
         }
     }
 
-    private fun createAmount(): Int {
+    private fun calculateAmount(): Int {
         return (hero.maximumHp / 20f).roundToInt().coerceAtMost(hero.maximumHp - hero.currentHp)
+    }
+
+    private fun calculateAmountForText(): Int {
+        return (hero.maximumHp / 20f).roundToInt()
     }
 
 }

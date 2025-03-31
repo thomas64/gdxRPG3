@@ -17,7 +17,8 @@
       "warrior": 1,
       "hafted" : 1,
       "sword"  : 1,
-      "missile": 1
+      "missile": 1,
+      "shield" : 1
     },
     "abilities": [
       "strike_1", "strike_2", "strike_3", "strike_4"

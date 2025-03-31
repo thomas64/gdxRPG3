@@ -211,10 +211,19 @@ class BattleField(participants: List<Participant>) {
             .map { destinationSpace ->
                 enemySpaces.indices
                     .filter { it == currentEnemyIndex || enemySpaces[it] == null }
+                    .filter { it.isInRangeOfApOf(this) }
                     .minBy { abs(it - destinationSpace) }
             }
             .minBy { abs(it - currentEnemyIndex) }
             .takeIf { it != currentEnemyIndex }
+    }
+
+    private fun Int.isInRangeOfApOf(currentEnemy: Participant): Boolean {
+        val specificSpace: Int = this
+        val currentEnemyIndex: Int = currentEnemy.getCurrentSpaceIndex()
+
+        return specificSpace in (currentEnemyIndex downTo currentEnemyIndex - currentEnemy.currentAP)
+            || specificSpace in (currentEnemyIndex until currentEnemyIndex + currentEnemy.currentAP)
     }
 
     private fun Participant.takeApForMovingTo(destinationSpace: Int) {
