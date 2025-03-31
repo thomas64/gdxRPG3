@@ -50,16 +50,27 @@ class Participant(
         currentAP = maximumAP + currentAP.coerceAtMost(2)
     }
 
-    fun getPriority(): Float {
-        // todo, weaker character types? weapon types, wpn triangle, or missile and throw?
+    fun getPriorityFor(currentEnemy: Participant): Float {
+        // todo, weaker character types? weapon types, or missile and throw?
 
+        val attackSkill: SkillItemId = currentEnemy.getCurrentWeapon()!!.skill!!
+        val targetSkill: SkillItemId? = getCurrentWeapon()?.skill
+
+        val attackerHasAdvantageScore: Float = if (attackSkill.hasAdvantageOver(targetSkill)) -2.5f else 0f
+        val attackerHasDisadvantageScore: Float = if (attackSkill.hasDisadvantageFrom(targetSkill)) 2.5f else 0f
         val stealthScore: Int = character.getCalculatedTotalSkillOf(SkillItemId.STEALTH)
         val protectionScore: Float = character.getCalculatedTotalProtection() / 5f
+
         if (preferenceManager.isInDebugMode) {
-            println("${character.name} stealthScore: $stealthScore, " +
-                        "protectionScore: $protectionScore = total: ${stealthScore + protectionScore}")
+            println("A low score means a high priority in the queue!")
+            println("${character.name} " +
+                        "attackerHasAdvantageScore: $attackerHasAdvantageScore, " +
+                        "attackerHasDisadvantageScore: $attackerHasDisadvantageScore, " +
+                        "stealthScore: $stealthScore, " +
+                        "protectionScore: $protectionScore = " +
+                        "total: ${stealthScore + protectionScore + attackerHasAdvantageScore + attackerHasDisadvantageScore}")
         }
-        return stealthScore + protectionScore
+        return stealthScore + protectionScore + attackerHasAdvantageScore + attackerHasDisadvantageScore
     }
 
     fun getWeaponRanges(): List<Int> {

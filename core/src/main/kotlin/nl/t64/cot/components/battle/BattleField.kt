@@ -127,7 +127,7 @@ class BattleField(participants: List<Participant>) {
 
     fun possibleGetHeroTargetAndMoveEnemy(currentEnemy: Participant): Participant? {
         setStartingSpace(currentEnemy)
-        val heroIndicesByPrio: List<Int> = getOccupiedHeroIndicesSortedByPriority()
+        val heroIndicesByPrio: List<Int> = getOccupiedHeroIndicesSortedByPriorityFor(currentEnemy)
         if (preferenceManager.isInDebugMode) {
             println("heroIndicesByPrio: $heroIndicesByPrio")
         }
@@ -150,9 +150,9 @@ class BattleField(participants: List<Participant>) {
             ?.let { heroSpaces[it] }                    // or null when the AP was not enough to reach the hero.
     }
 
-    private fun getOccupiedHeroIndicesSortedByPriority(): List<Int> {
+    private fun getOccupiedHeroIndicesSortedByPriorityFor(currentEnemy: Participant): List<Int> {
         return heroSpaces.filterNotNull()
-            .sortedBy { hero -> hero.getPriority() }
+            .sortedBy { hero -> hero.getPriorityFor(currentEnemy) }
             .map { hero -> hero.getCurrentSpaceIndex() }
     }
 

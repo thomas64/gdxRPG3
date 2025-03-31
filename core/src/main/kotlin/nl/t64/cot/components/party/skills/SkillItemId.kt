@@ -83,4 +83,24 @@ enum class SkillItemId : SuperEnum {
         }
     }
 
+    fun hasAdvantageOver(other: SkillItemId?): Boolean {
+        return when {
+            other == null -> true
+            this == SWORD -> other == HAFTED
+            this == HAFTED -> other == POLE
+            this == POLE -> other == SWORD
+            else -> false
+        }
+    }
+
+    fun hasDisadvantageFrom(other: SkillItemId?): Boolean {
+        return when {
+            other == null -> false
+            this == SWORD -> other == POLE
+            this == HAFTED -> other == SWORD
+            this == POLE -> other == HAFTED
+            else -> false
+        }
+    }
+
 }
