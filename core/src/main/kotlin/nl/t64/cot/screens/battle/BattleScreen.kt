@@ -102,11 +102,12 @@ class BattleScreen : Screen {
                                                       { selectMove() },
                                                       { selectPotion() },
                                                       { selectWeapon() },
-                                                      { showConfirmRestDialog() },
                                                       { selectPreviewAttack() },
                                                       { showInventoryScreen() },
-                                                      { endTurn() },
-                                                      { showFleeDialog() })
+                                                      { showFleeDialog() },
+                                                      { showDelayTurnDialog() },
+                                                      { showConfirmRestDialog() },
+                                                      { endTurn() })
     private val listenerMove = SelectMoveListener({ moveLeft() },
                                                   { moveRight() },
                                                   { showConfirmMoveDialog() },
@@ -608,6 +609,32 @@ class BattleScreen : Screen {
             isDelayingTurn = false
         }
         isDelayingTurn = true
+        Utils.runWithDelay(0.5f) {
+            messageDialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT)
+        }
+    }
+
+    private fun showDelayTurnDialog() {
+        val delayTurnAction = DelayTurnAction(turnManager, currentParticipant)
+        val (isAble, message) = delayTurnAction.isAble()
+        if (!isAble) {
+            val dialog = MessageDialog(message)
+            dialog.show(stage, AudioEvent.SE_MENU_ERROR)
+        } else {
+            val dialog = QuestionDialog(message) { delayTurnConfirmed(delayTurnAction) }
+            dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0)
+        }
+    }
+
+    private fun delayTurnConfirmed(delayTurnAction: DelayTurnAction) {
+        screenBuilder.buttonTableActionIndex = 0
+        buttonTableAction.remove()
+        isDelayingTurn = true
+        val message = delayTurnAction.handle()
+        val messageDialog = MessageDialog(message)
+        messageDialog.setActionAfterHide {
+            isDelayingTurn = false
+        }
         Utils.runWithDelay(0.5f) {
             messageDialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT)
         }

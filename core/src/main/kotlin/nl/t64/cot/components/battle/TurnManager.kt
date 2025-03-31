@@ -32,6 +32,12 @@ class TurnManager(
         participants.removeIf { it.character.isDead }
     }
 
+    fun delayTurn() {
+        currentParticipant.delayTurn()
+        participants.swap(0, 1)
+        currentParticipant.refreshActionPoints()
+    }
+
     private fun increaseAllTurnCounters() {
         while (true) {
             if (participants.any { it.isTurnCounterAtMax() }) break
@@ -55,6 +61,12 @@ class TurnManager(
         return (heroParticipants + enemyParticipants)
             .sortedByDescending { it.character.getCalculatedTotalStatOf(StatItemId.SPEED) }
             .toMutableList()
+    }
+
+    private fun MutableList<Participant>.swap(index1: Int, index2: Int) {
+        val temp = this[index1]
+        this[index1] = this[index2]
+        this[index2] = temp
     }
 
 }

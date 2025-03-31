@@ -299,6 +299,7 @@ class BattleScreenBuilder {
             "Preview hit and damage" to 0,
             "Inventory" to 0,
             "Flee battle ($maxAp AP)" to maxAp,
+            "Delay turn (1 AP)" to 1,
             "Rest (1 AP)" to 1,
             "End turn" to 0
         )
@@ -307,8 +308,8 @@ class BattleScreenBuilder {
         }
         this.setItems(*actionStrings.toTypedArray())
 
-        if (currentParticipant.currentAP <= 2) {
-            buttonTableActionIndex = 8
+        if (currentParticipant.currentAP <= 1) {
+            buttonTableActionIndex = 9
         }
         this.selectedIndex = buttonTableActionIndex
         return this

@@ -17,11 +17,12 @@ class SelectActionListener(
     private val selectMove: () -> Unit,
     private val selectPotion: () -> Unit,
     private val selectWeapon: () -> Unit,
-    private val rest: () -> Unit,
     private val selectPreview: () -> Unit,
     private val inventoryScreen: () -> Unit,
-    private val endTurn: () -> Unit,
-    private val fleeBattle: () -> Unit
+    private val fleeBattle: () -> Unit,
+    private val delayTurn: () -> Unit,
+    private val rest: () -> Unit,
+    private val endTurn: () -> Unit
 ) : InputListener() {
 
     override fun keyDown(event: InputEvent, keycode: Int): Boolean {
@@ -92,6 +93,7 @@ class SelectActionListener(
                 "Preview" in selected -> selectPreview.invoke()
                 "Inventory" in selected -> inventoryScreen.invoke()
                 "Flee" in selected -> fleeBattle.invoke()
+                "Delay" in selected -> delayTurn.invoke()
                 "Rest" in selected -> rest.invoke()
                 "End" in selected -> endTurn.invoke()
             }

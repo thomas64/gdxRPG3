@@ -18,6 +18,7 @@ class Participant(
     val maximumAP: Int = character.getCalculatedActionPoints()
     var currentAP: Int = maximumAP
 
+    private var isDelayingTurn: Boolean = false
     private var amountOfTurns: Int = 0
 
     fun updateTurnCounter() {
@@ -33,8 +34,19 @@ class Participant(
         amountOfTurns++
     }
 
+    fun delayTurn() {
+        isDelayingTurn = true
+    }
+
     fun refreshActionPoints() {
-        if (amountOfTurns == 0) return
+        if (amountOfTurns == 0) {
+            return
+        }
+        if (isDelayingTurn) {
+            isDelayingTurn = false
+            return
+        }
+
         currentAP = maximumAP + currentAP.coerceAtMost(2)
     }
 
