@@ -40,7 +40,8 @@
       "Each turn, you get a certain amount of Action Points (AP).",
       "With these AP, you can move, attack, or do other actions.",
       "",
-      "Each enemy has an advantage and a disadvantage to certain weapon types."
+      "Each enemy has an advantage and a disadvantage to certain weapon types.",
+      "Try to use the right weapon type against the enemy's disadvantage."
     ]
   },
   "guide_event_quest"                : {
@@ -97,12 +98,12 @@
     "type"     : "messagebox",
     "condition": ["xp_>=_15"],
     "text"     : [
-      "You've gained quite some XP by now!",
+      "You've acquired enough XP to level up one of your attributes!",
       "",
-      "Perhaps you also gained some weapons on your journey already.",
+      "Perhaps you also acquired some other weapons on your journey already.",
       "Weapons require a minimum level of Intelligence, Dexterity or Strength.",
-      "You can see the minimum requirements in the description of that weapon.",
-      "If you meet the requirements, you can equip the weapon.",
+      "You can see the minimum attribute requirement in the description of",
+      "that weapon. If you meet the requirements, you can equip the weapon.",
       "",
       "To meet such requirements, you must level up your attributes:",
       "Access your attributes by pressing the %inventory%.",

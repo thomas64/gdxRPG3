@@ -90,7 +90,7 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
                         inventoryScreen.stage.removeListener(inventoryScreen.listener)
                         inventoryScreen.createAndSetListener(openQuestLogFunction = { playSe(AudioEvent.SE_MENU_ERROR) },
                                                              closeScreenFunction = { inventoryScreen.closeScreen(ScreenType.BATTLE) },
-                                                             doActionFunction = {},
+                                                             doActionFunction = { inventoryScreen.doBattleAction() },
                                                              tryToDropItemFunction = {},
                                                              tryToDismissHeroFunction = {})
                         inventoryScreen.stage.addListener(inventoryScreen.listener)
@@ -190,6 +190,10 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
 
     private fun doPreBattleAction() {
         inventoryUI.doPreBattleAction()
+    }
+
+    private fun doBattleAction() {
+        MessageDialog("This action is not allowed here during battle.").show(stage, AudioEvent.SE_MENU_ERROR)
     }
 
     private fun doAction() {

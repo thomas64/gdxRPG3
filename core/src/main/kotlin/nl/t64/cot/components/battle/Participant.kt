@@ -39,11 +39,12 @@ class Participant(
     }
 
     fun refreshActionPoints() {
-        if (amountOfTurns == 0) {
-            return
-        }
         if (isDelayingTurn) {
             isDelayingTurn = false
+            return
+        }
+
+        if (amountOfTurns == 0) {
             return
         }
 
