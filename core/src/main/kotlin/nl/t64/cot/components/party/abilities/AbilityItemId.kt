@@ -19,7 +19,9 @@ enum class AbilityItemId(
 
     BODY_SLAM_1((1f / 2f) * 0.9f),
     BODY_SLAM_2((2f / 2f) * 1.0f),
-    BODY_SLAM_3((3f / 2f) * 1.1f);
+    BODY_SLAM_3((3f / 2f) * 1.1f),
+
+    STAGGER(1f);
 
     override val title: String = name.lowercase().replaceFirstChar { it.uppercase() }
 

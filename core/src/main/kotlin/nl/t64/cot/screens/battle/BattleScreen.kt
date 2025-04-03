@@ -510,17 +510,24 @@ class BattleScreen : Screen {
     private fun showConfirmAttackDialog(selectedAttack: BattleAbilityItem, selectedTarget: String) {
         currentTarget = enemies.getEnemy(selectedTarget)
         val attackAction = AttackAction(currentParticipant, currentTarget, selectedAttack)
-        attackAction.isCostingTooMuchAp()?.let { message ->
-            val dialog = MessageDialog(message)
-            dialog.setLeftAlignment()
-            dialog.setWidthToMinimum()
-            dialog.show(stage, AudioEvent.SE_MENU_ERROR)
+        attackAction.isCostingTooMuchAp()?.let { apMessage ->
+            showSmallLeftAlignMessageDialog(apMessage)
+            return
+        } ?: attackAction.isCostingTooMuchSp()?.let { spMessage ->
+            showSmallLeftAlignMessageDialog(spMessage)
             return
         }
         val message = attackAction.createConfirmationMessage()
         val dialog = QuestionDialog(message) { attackConfirmed(attackAction) }
         dialog.setLeftAlignment()
         dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0, 1f)
+    }
+
+    private fun showSmallLeftAlignMessageDialog(message: String) {
+        val dialog = MessageDialog(message)
+        dialog.setLeftAlignment()
+        dialog.setWidthToMinimum()
+        dialog.show(stage, AudioEvent.SE_MENU_ERROR)
     }
 
     private fun attackConfirmed(attackAction: AttackAction) {

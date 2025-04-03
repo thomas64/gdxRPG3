@@ -2,7 +2,7 @@ package nl.t64.cot.components.battle
 
 import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.components.party.HeroItem
-import nl.t64.cot.components.party.abilities.BattleAbilityItem
+import nl.t64.cot.components.party.abilities.*
 import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.components.party.inventory.InventoryItem
 import nl.t64.cot.components.party.skills.SkillItemId
@@ -23,6 +23,10 @@ class Participant(
 
     fun updateTurnCounter() {
         turnCounter += 10 + character.getCalculatedTotalStatOf(StatItemId.SPEED)
+    }
+
+    fun setNegativeTurnCounter() {
+        turnCounter = 0 - (10 + character.getCalculatedTotalStatOf(StatItemId.SPEED))
     }
 
     fun isTurnCounterAtMax(): Boolean {
@@ -57,8 +61,8 @@ class Participant(
         val attackSkill: SkillItemId = currentEnemy.getCurrentWeapon()!!.skill!!
         val targetSkill: SkillItemId? = getCurrentWeapon()?.skill
 
-        val attackerHasAdvantageScore: Float = if (attackSkill.hasAdvantageOver(targetSkill)) -2.5f else 0f
-        val attackerHasDisadvantageScore: Float = if (attackSkill.hasDisadvantageFrom(targetSkill)) 2.5f else 0f
+        val attackerHasAdvantageScore: Float = if (attackSkill.hasAdvantageOver(targetSkill)) -5f else 0f
+        val attackerHasDisadvantageScore: Float = if (attackSkill.hasDisadvantageFrom(targetSkill)) 5f else 0f
         val stealthScore: Int = character.getCalculatedTotalSkillOf(SkillItemId.STEALTH)
         val protectionScore: Float = character.getCalculatedTotalProtection() / 5f
 
@@ -79,8 +83,25 @@ class Participant(
     }
 
     fun getBattleAbilities(): List<BattleAbilityItem> {
-        val currentWeapon: InventoryItem? = getCurrentWeapon()
-        return character.getAllAbilities().map { BattleAbilityItem(it, currentWeapon) }
+        return character.getAllAbilities().map { createBattleAbilityItemFrom(it) }
+    }
+
+    private fun createBattleAbilityItemFrom(abilityItem: AbilityItem): BattleAbilityItem {
+        return when (abilityItem.id) {
+            AbilityItemId.BITE_1,
+            AbilityItemId.BITE_2,
+            AbilityItemId.BITE_3,
+            AbilityItemId.BITE_4,
+            AbilityItemId.BITE_5,
+            AbilityItemId.BODY_SLAM_1,
+            AbilityItemId.BODY_SLAM_2,
+            AbilityItemId.BODY_SLAM_3 -> Strike(abilityItem, character)
+            AbilityItemId.STRIKE_1,
+            AbilityItemId.STRIKE_2,
+            AbilityItemId.STRIKE_3,
+            AbilityItemId.STRIKE_4 -> Strike(abilityItem, character)
+            AbilityItemId.STAGGER -> Stagger(abilityItem, character)
+        }
     }
 
     private fun getCurrentWeapon(): InventoryItem? {

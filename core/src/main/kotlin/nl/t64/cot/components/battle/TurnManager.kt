@@ -38,6 +38,19 @@ class TurnManager(
         currentParticipant.refreshActionPoints()
     }
 
+    fun stagger(character: Character) {
+        val target: Participant = participants.first { it.character == character }
+        target.currentAP = 0
+        if (participants.size == 2) {
+            target.delayTurn()
+        } else if (target == participants.last()) {
+            target.setNegativeTurnCounter()
+        } else {
+            target.turnCounter = 0
+            target.moveToBottom()
+        }
+    }
+
     private fun increaseAllTurnCounters() {
         while (true) {
             if (participants.any { it.isTurnCounterAtMax() }) break
@@ -53,6 +66,11 @@ class TurnManager(
     private fun Participant.moveToTop() {
         participants.remove(this)
         participants.add(0, this)
+    }
+
+    private fun Participant.moveToBottom() {
+        participants.remove(this)
+        participants.add(this)
     }
 
     private fun createParticipants(): MutableList<Participant> {

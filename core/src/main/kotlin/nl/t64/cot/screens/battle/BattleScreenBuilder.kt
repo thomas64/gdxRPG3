@@ -321,7 +321,10 @@ class BattleScreenBuilder {
 
     private fun GdxList<BattleAbilityItem>.fillWithAttacks(abilities: List<BattleAbilityItem>): GdxList<BattleAbilityItem> {
         this.setItems(*abilities.toTypedArray())
-        items.add(BattleAbilityItem("Back"))
+        items.add(object : BattleAbilityItem("Back") {
+            override fun createPreviewMessage(): String = ""
+            override fun handleSuccess(messages: ArrayDeque<String>) {}
+        })
         this.selectedIndex = buttonTableAttackIndex
         return this
     }

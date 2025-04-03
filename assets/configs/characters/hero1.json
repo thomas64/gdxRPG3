@@ -21,7 +21,8 @@
       "shield" : 1
     },
     "abilities": [
-      "strike_1", "strike_2", "strike_3", "strike_4"
+      "strike_1", "strike_2", "strike_3", "strike_4",
+      "stagger"
     ],
     "spells"   : {
     },
@@ -93,7 +94,8 @@
       "thrown"   : 2
     },
     "abilities": [
-      "strike_1", "strike_2", "strike_3", "strike_4"
+      "strike_1", "strike_2", "strike_3", "strike_4",
+      "stagger"
     ],
     "spells"   : {
     },
@@ -207,7 +209,8 @@
       "thrown"   : -1
     },
     "abilities": [
-      "strike_1", "strike_2", "strike_3", "strike_4"
+      "strike_1", "strike_2", "strike_3", "strike_4",
+      "stagger"
     ],
     "spells"   : {
     },
@@ -249,7 +252,8 @@
       "thrown"    : -1
     },
     "abilities": [
-      "strike_1", "strike_2", "strike_3", "strike_4"
+      "strike_1", "strike_2", "strike_3", "strike_4",
+      "stagger"
     ],
     "spells"   : {
     },
@@ -371,7 +375,8 @@
       "thrown"  : -1
     },
     "abilities": [
-      "strike_1", "strike_2", "strike_3", "strike_4"
+      "strike_1", "strike_2", "strike_3", "strike_4",
+      "stagger"
     ],
     "spells"   : {
       "vs_star"      : 7,
@@ -415,7 +420,8 @@
       "thrown"    : 8
     },
     "abilities": [
-      "strike_1", "strike_2", "strike_3", "strike_4"
+      "strike_1", "strike_2", "strike_3", "strike_4",
+      "stagger"
     ],
     "spells"   : {
     },
@@ -462,7 +468,8 @@
       "thrown"    : 10
     },
     "abilities": [
-      "strike_1", "strike_2", "strike_3", "strike_4"
+      "strike_1", "strike_2", "strike_3", "strike_4",
+      "stagger"
     ],
     "spells"   : {
       "fireball"    : 6,
@@ -506,7 +513,8 @@
       "thrown" : -1
     },
     "abilities": [
-      "strike_1", "strike_2", "strike_3", "strike_4"
+      "strike_1", "strike_2", "strike_3", "strike_4",
+      "stagger"
     ],
     "spells"   : {
       "web_of_starlight": 8,
@@ -555,7 +563,8 @@
       "thrown"    : -1
     },
     "abilities": [
-      "strike_1", "strike_2", "strike_3", "strike_4"
+      "strike_1", "strike_2", "strike_3", "strike_4",
+      "stagger"
     ],
     "spells"   : {
     },

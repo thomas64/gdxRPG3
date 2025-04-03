@@ -19,7 +19,7 @@
       "pole": 1
     },
     "abilities": [
-      "body_slam_1", "body_slam_2", "body_slam_3"
+      "body_slam_2"
     ],
     "spells"   : {
     },
@@ -48,7 +48,7 @@
       "pole": 1
     },
     "abilities": [
-      "body_slam_1", "body_slam_2", "body_slam_3"
+      "body_slam_2"
     ],
     "spells"   : {
     },
@@ -77,7 +77,7 @@
       "pole": 1
     },
     "abilities": [
-      "body_slam_1", "body_slam_2", "body_slam_3"
+      "body_slam_2"
     ],
     "spells"   : {
     },
