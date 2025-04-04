@@ -7,6 +7,7 @@ import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playBgm
+import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.condition.ConditionDatabase
 import nl.t64.cot.screens.inventory.messagedialog.MessageDialog
 
@@ -48,6 +49,7 @@ class Event(
             type == "messagebox" -> worldScreen.showMessageDialog(TextReplacer.replace(text))
             type == "stop_bgm" -> audioManager.fadeBgmInThread()
             type == "start_bgm" -> playBgm(mapManager.currentMap.bgm)
+            type == "play_se" -> playSe(AudioEvent.SE_REWARD)
             else -> throw IllegalArgumentException("Event does not recognize type: '$type'.")
         }
     }

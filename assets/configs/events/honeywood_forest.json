@@ -5,6 +5,12 @@
   "start_bgm"             : {
     "type": "start_bgm"
   },
+  "play_se_hidden_door"   : {
+    "type": "play_se"
+  },
+  "play_se_hidden_cave"   : {
+    "type": "play_se"
+  },
   "find_grace_before_dark": {
     "type"          : "conversation",
     "conversationId": "find_grace_before_dark",
