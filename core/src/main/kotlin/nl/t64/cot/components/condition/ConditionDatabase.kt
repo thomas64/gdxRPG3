@@ -6,8 +6,8 @@ import nl.t64.cot.components.portal.Portal
 import nl.t64.cot.components.quest.QuestState
 
 
-fun List<String>.areAllTrue(): Boolean {
-    return ConditionDatabase.isMeetingConditions(this)
+fun List<String>.areAllTrue(questId: String? = null): Boolean {
+    return ConditionDatabase.isMeetingConditions(this, questId)
 }
 
 fun String.isTrue(): Boolean {

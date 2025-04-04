@@ -40,7 +40,7 @@
     "stats"    : {
       "intelligence": 10,
       "dexterity"   : 16,
-      "strength"    : 6,
+      "strength"    : 4,
       "speed"       : 15,
       "willpower"   : 10,
       "constitution": 2,
@@ -48,13 +48,13 @@
     },
     "skills"   : {
       "mechanic": 1,
-      "stealth" : 2,
+      "stealth" : 3,
       "thief"   : 1,
       "hafted"  : -1,
       "missile" : -1,
       "shield"  : -1,
       "sword"   : 1,
-      "thrown"  : 2
+      "thrown"  : 3
     },
     "abilities": [
       "strike_1", "strike_2", "strike_3", "strike_4"

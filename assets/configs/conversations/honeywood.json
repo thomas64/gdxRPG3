@@ -255,6 +255,7 @@
   },
   "quest_honeywood_inn_price-1"         : {
     "name"   : "Innkeeper",
+    "condition": ["_c_==_a_q_this", "_tn_1_q_this"], "startAt": "60",
     "phrases": {
       "1"   : {"text": ["Hey there Mozes! Would you like to rest here and be completely revitalized for just 1 gold piece?"]},
       "2"   : {
@@ -292,9 +293,9 @@
       "15"  : {"text": ["How would you know about this? Whoever's been spreading that silly gossip about upstairs is... well... right."], "choices": [{"nextId": "21"}]},
       "20"  : {"text": ["Would you? They've frightened away half of my customers!"]},
       "21"  : {"text": ["I'm not brave enough to scare them away myself; they'd scare me instead."]},
-      "22"  : {"text": ["If you'd help, I'll make it worth your while. I'm not one to overlook a kindness, Mozes."], "choices": [{"command": "AUTO_SAVE", "nextId": "60"}]},
+      "22"  : {"text": ["If you'd help, I'll make it worth your while. I'm not one to overlook a kindness, Mozes."], "choices": [{"command": "AUTO_SAVE"}]},
       "30"  : {"text": ["I'm truly sorry for this minor inconvenience. Please do return to us again on your next stay."], "choices": [{"command": "EXIT"}]},
-      "40"  : {"text": ["Couldn't you shout any louder? Those 'visitors' are up the stairs near the fireplace."], "choices": [{"command": "EXIT", "nextId": "60"}]},
+      "40"  : {"text": ["Couldn't you shout any louder? Those 'visitors' are up the stairs near the fireplace."], "choices": [{"nextId": "2"}]},
       "50"  : {"text": ["Splendid! That's wonderful. I bet those bats must have been trained by an evil imp to harass my customers! Thank you!"]},
       "51"  : {"text": ["There was a reward, you know... five gold pieces. With these, you can stay five times for free, sort of. Isn't that great?"], "choices": [{"command": "REWARD_QUEST"}]},
       "60"  : {"text": ["Hey there Mozes! Did you already do something about those 'visitors', or would you like to rest here and be completely revitalized for just 1 gold piece?"], "choices": [{"nextId": "2"}]},

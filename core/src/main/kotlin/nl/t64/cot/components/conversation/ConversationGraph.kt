@@ -27,7 +27,7 @@ data class ConversationGraph(
 
     fun possibleSetAlternateStartingPhraseId() {
         if (currentPhraseId == DEFAULT_STARTING_PHRASE_ID) {
-            currentPhraseId = conditions?.takeIf { it.areAllTrue() }?.let { startAt } ?: DEFAULT_STARTING_PHRASE_ID
+            currentPhraseId = conditions?.takeIf { it.areAllTrue(id) }?.let { startAt } ?: DEFAULT_STARTING_PHRASE_ID
         }
     }
 
