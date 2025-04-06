@@ -9,8 +9,11 @@
       "",
       "- Hafted weapons have an advantage against enemies with pole weapons,",
       "  and a disadvantage against enemies with swords.",
-      "  When having advantage, 'Chance to hit' is increased by 10%, and",
-      "  'Critical hit' is increased by 20%. And vice versa when disadvantage."
+      "  Hafted weapons also have an advantage or a disadvantage against",
+      "  certain weaponless enemies.",
+      "  When having advantage, 'Chance to hit' is increased by +10%, and",
+      "  'Critical hit' is increased by +20%.",
+      "  And vice versa when at a disadvantage."
     ]
   },
   "missile": {
@@ -32,8 +35,11 @@
       "",
       "- Pole weapons have an advantage against enemies with swords,",
       "  and a disadvantage against enemies with hafted weapons.",
-      "  When having advantage, 'Chance to hit' is increased by 10%, and",
-      "  'Critical hit' is increased by 20%. And vice versa with disadvantage."
+      "  Pole weapons also have an advantage or a disadvantage against",
+      "  certain weaponless enemies.",
+      "  When having advantage, 'Chance to hit' is increased by +10%, and",
+      "  'Critical hit' is increased by +20%.",
+      "  And vice versa when at a disadvantage."
     ]
   },
   "shield" : {
@@ -51,12 +57,15 @@
       "- 'Sword' allows the possibility of equipping swords and daggers.",
       "",
       "- 'Sword' increases your chance to hit with swords and daggers in combat.",
-      "  Each rank in 'Sword' increases 'Chance to hit' by 5%.",
+      "  Each rank in 'Sword' increases 'Chance to hit' by 5 percent.",
       "",
       "- Swords have an advantage against enemies with hafted weapons,",
       "  and a disadvantage against enemies with pole weapons.",
-      "  When having advantage, 'Chance to hit' is increased by 10%, and",
-      "  'Critical hit' is increased by 20%. And vice versa with disadvantage."
+      "  Swords also have an advantage or a disadvantage against",
+      "  certain weaponless enemies.",
+      "  When having advantage, 'Chance to hit' is increased by +10%, and",
+      "  'Critical hit' is increased by +20%.",
+      "  And vice versa when at a disadvantage."
     ]
   },
   "thrown" : {

@@ -208,7 +208,7 @@ internal class PartyWindow {
     private fun renderSquares() {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line)
         shapeRenderer.color = TRANSPARENT_BLACK
-        party.forEachIndexToMaximum { index ->
+        party.forEachWithInvertedIndex { index, _ ->
             val x = xPos + PADDING
             val y = table.y + index * (Constant.FACE_SIZE + PADDING)
             val width = TABLE_WIDTH - PADDING

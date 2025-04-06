@@ -80,7 +80,7 @@ class SceneIntro : CutsceneScreen() {
                         Actions.moveBy(-48f, 0f, 0.5f),
                         Actions.run { grace.direction = Direction.SOUTH }
                     )),
-                    actionWalkSound(grace, 12f, FAST_STEP)
+                    actionWalkSound(grace, 11.5f, FAST_STEP)
                 ),
                 Actions.run { grace.entityState = EntityState.IDLE },
                 Actions.run { grace.direction = Direction.EAST }
@@ -118,7 +118,10 @@ class SceneIntro : CutsceneScreen() {
             Actions.delay(1f),
             Actions.addAction(Actions.sequence(
                 Actions.run { grace.entityState = EntityState.WALKING },
-                actionMoveBy(grace, 100f, 0f, 5f, NORMAL_STEP),
+                Actions.parallel(
+                    Actions.moveBy(100f, 0f, 5f),
+                    actionWalkSound(grace, 4.9f, NORMAL_STEP)
+                ),
                 Actions.run { grace.entityState = EntityState.IDLE },
                 Actions.delay(0.5f),
                 Actions.run { grace.direction = Direction.WEST },

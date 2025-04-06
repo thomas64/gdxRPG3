@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="50" tilewidth="24" tileheight="24" infinite="0" nextlayerid="19" nextobjectid="119">
+<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="50" tilewidth="24" tileheight="24" infinite="0" nextlayerid="20" nextobjectid="120">
  <properties>
   <property name="bgm" value="bgm_great_tree"/>
   <property name="bgs" value="bgs_birds"/>
@@ -200,6 +200,14 @@
  </objectgroup>
  <objectgroup color="#ffaa7f" id="18" name="warp">
   <object id="109" x="336" y="240" width="48" height="48"/>
+ </objectgroup>
+ <objectgroup color="#ffff00" id="19" name="quest">
+  <object id="119" name="quest_honeywood_elder" type="discover" x="336" y="294" width="48" height="18">
+   <properties>
+    <property name="condition" value="fairy_portal_active"/>
+    <property name="task" value="4"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup color="#ff55ff" id="16" name="event">
   <object id="81" name="find_great_tree" type="discover" x="336" y="768" width="480" height="24"/>

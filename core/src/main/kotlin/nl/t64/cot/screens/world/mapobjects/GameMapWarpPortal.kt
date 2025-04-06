@@ -31,6 +31,10 @@ class GameMapWarpPortal(rectObject: RectangleMapObject, fromMapName: String) : G
     private fun activateOrUse() {
         if (gameData.portals.isActivated(fromMapName)) {
             worldScreen.showWarpScreen(fromMapName)
+        } else if (gameData.portals.areNoneActivated()) {
+            worldScreen.showMessageTooltip("Portal activated.")
+            playSe(AudioEvent.SE_ACTIVATE)
+            gameData.portals.activate(fromMapName)
         } else {
             worldScreen.showMessageTooltip("Portal activated.")
             gameData.portals.activate(fromMapName)

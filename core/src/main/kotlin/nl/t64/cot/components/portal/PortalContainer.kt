@@ -21,6 +21,10 @@ class PortalContainer {
             .toTypedArray()
     }
 
+    fun areNoneActivated(): Boolean {
+        return portals.values.none { it }
+    }
+
     fun isActivated(portalId: String): Boolean {
         return portals[portalId]!!
     }

@@ -55,7 +55,7 @@ enum class AudioEvent(val filePath: String, val volume: Float = 1f) {
     SE_MINIMAP("audio/se/botw_sys_spur_revival.wav"),
     SE_CRIT_HIT("audio/se/botw_enemyhit_critical.wav"),
 
-    SE_REWARD("audio/se/virix_reward.wav", 0.4f),
+    SE_REWARD("audio/se/virix_reward.wav", 0.3f),
     SE_QUEST_FAIL("audio/se/virix_quest_fail.wav", 0.5f),
     SE_JOIN("audio/se/virix_join.wav", 0.6f),
     SE_SAVE_GAME("audio/se/virix_save.wav", 0.3f),
