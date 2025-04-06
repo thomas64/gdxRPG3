@@ -1,12 +1,11 @@
 package nl.t64.cot.components.party.abilities
 
-import nl.t64.cot.components.battle.Character
-import nl.t64.cot.components.party.HeroItem
+import nl.t64.cot.components.battle.Participant
 import kotlin.random.Random
 
 class Strike(
     abilityItem: AbilityItem,
-    attacker: Character
+    attacker: Participant
 ) : BattleAbilityItem(
     abilityItem,
     attacker
@@ -14,6 +13,14 @@ class Strike(
 
     override fun toString(): String {
         return "$name ($ap AP)"
+    }
+
+    override fun possibleCreateCopyWithGrayName(): BattleAbilityItem {
+        if (attacker.currentAP < ap) {
+            val copyAbility: AbilityItem = abilityItem.copy(name = "[GRAY]${abilityItem.name}")
+            return Strike(copyAbility, attacker)
+        }
+        return this
     }
 
     override fun createPreviewMessage(): String {
@@ -53,7 +60,7 @@ class Strike(
 
         possibleAddEffectiveMessage(messages)
 
-        if (attacker is HeroItem && damage <= 1) {
+        if (attacker.isHero && damage <= 1) {
             messages.add("${target.name} ${target.gender} protection is too strong!")
         }
     }

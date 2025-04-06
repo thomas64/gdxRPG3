@@ -95,12 +95,12 @@ class Participant(
             AbilityItemId.BITE_5,
             AbilityItemId.BODY_SLAM_1,
             AbilityItemId.BODY_SLAM_2,
-            AbilityItemId.BODY_SLAM_3 -> Strike(abilityItem, character)
+            AbilityItemId.BODY_SLAM_3 -> Strike(abilityItem, this)
             AbilityItemId.STRIKE_1,
             AbilityItemId.STRIKE_2,
             AbilityItemId.STRIKE_3,
-            AbilityItemId.STRIKE_4 -> Strike(abilityItem, character)
-            AbilityItemId.STAGGER -> Stagger(abilityItem, character)
+            AbilityItemId.STRIKE_4 -> Strike(abilityItem, this)
+            AbilityItemId.STAGGER -> Stagger(abilityItem, this)
         }
     }
 

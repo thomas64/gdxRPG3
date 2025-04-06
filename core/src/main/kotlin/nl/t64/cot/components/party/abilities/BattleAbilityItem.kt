@@ -1,7 +1,7 @@
 package nl.t64.cot.components.party.abilities
 
 import nl.t64.cot.components.battle.Character
-import nl.t64.cot.components.party.HeroItem
+import nl.t64.cot.components.battle.Participant
 import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.components.party.inventory.InventoryItem
 import nl.t64.cot.components.party.skills.SkillItemId
@@ -11,23 +11,22 @@ import kotlin.random.Random
 
 abstract class BattleAbilityItem(
     val abilityItem: AbilityItem,
-    val attacker: Character
+    val attacker: Participant
 ) {
     val id: AbilityItemId = abilityItem.id
     val name: String = abilityItem.name
     val ap: Int = abilityItem.ap
     val sp: Int = abilityItem.sp
 
-    val currentWeapon: InventoryItem? get() = attacker.getInventoryItem(InventoryGroup.WEAPON)
+    val currentWeapon: InventoryItem? get() = attacker.character.getInventoryItem(InventoryGroup.WEAPON)
 
     lateinit var target: Character
-
-    constructor(name: String) : this(AbilityItem(name = name), HeroItem())
 
     override fun toString(): String {
         return name
     }
 
+    abstract fun possibleCreateCopyWithGrayName(): BattleAbilityItem
     abstract fun createPreviewMessage(): String
     abstract fun handleSuccess(messages: ArrayDeque<String>)
 
@@ -40,7 +39,7 @@ abstract class BattleAbilityItem(
     }
 
     fun calculateHitPercentage(): Int {
-        val attackerHitPercentage: Int = attacker.getCalculatedTotalHit()
+        val attackerHitPercentage: Int = attacker.character.getCalculatedTotalHit()
 
         val weaponTriangle = when {
             hasWeaponTriangleAdvantage() -> 10
@@ -52,7 +51,7 @@ abstract class BattleAbilityItem(
     }
 
     fun calculateCriticalHitPercentage(): Int {
-        val attackerCriticalHitPercentage: Int = attacker.getCalculatedTotalSkillOf(SkillItemId.WARRIOR) * 4
+        val attackerCriticalHitPercentage: Int = attacker.character.getCalculatedTotalSkillOf(SkillItemId.WARRIOR) * 4
 
         val weaponTriangle = when {
             hasWeaponTriangleAdvantage() -> 20
@@ -67,7 +66,7 @@ abstract class BattleAbilityItem(
     }
 
     fun calculateDamage(): Int {
-        val attack: Int = (attacker.getCalculatedTotalDamage() * id.multiplier).toInt()
+        val attack: Int = (attacker.character.getCalculatedTotalDamage() * id.multiplier).toInt()
         val protection: Int = target.getCalculatedTotalProtection()
         return (attack - protection).coerceAtLeast(1)
     }

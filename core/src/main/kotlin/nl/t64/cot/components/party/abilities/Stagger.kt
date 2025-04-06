@@ -1,7 +1,7 @@
 package nl.t64.cot.components.party.abilities
 
 import nl.t64.cot.Utils.screenManager
-import nl.t64.cot.components.battle.Character
+import nl.t64.cot.components.battle.Participant
 import nl.t64.cot.components.battle.TurnManager
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.battle.BattleScreen
@@ -11,7 +11,7 @@ import kotlin.random.Random
 
 class Stagger(
     abilityItem: AbilityItem,
-    attacker: Character
+    attacker: Participant
 ) : BattleAbilityItem(
     abilityItem,
     attacker
@@ -19,6 +19,14 @@ class Stagger(
 
     override fun toString(): String {
         return "$name (${abilityItem.ap} AP, ${abilityItem.sp} SP)"
+    }
+
+    override fun possibleCreateCopyWithGrayName(): BattleAbilityItem {
+        if (attacker.currentAP < ap || attacker.character.currentSp < sp) {
+            val copyAbility: AbilityItem = abilityItem.copy(name = "[GRAY]${abilityItem.name}")
+            return Stagger(copyAbility, attacker)
+        }
+        return this
     }
 
     override fun createPreviewMessage(): String {

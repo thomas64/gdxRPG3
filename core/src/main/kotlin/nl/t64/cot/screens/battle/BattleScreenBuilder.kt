@@ -16,6 +16,7 @@ import nl.t64.cot.components.battle.Character
 import nl.t64.cot.components.battle.EnemyItem
 import nl.t64.cot.components.battle.Participant
 import nl.t64.cot.components.party.HeroItem
+import nl.t64.cot.components.party.abilities.AbilityItem
 import nl.t64.cot.components.party.abilities.BattleAbilityItem
 import nl.t64.cot.components.party.inventory.BattlePotionItem
 import nl.t64.cot.components.party.inventory.BattleWeaponItem
@@ -243,9 +244,12 @@ class BattleScreenBuilder {
         return createStyledEmptyList<String>().fillWithActions(currentParticipant).toActionTable()
     }
 
+    fun createButtonTablePreviewAttack(currentParticipant: Participant): Table {
+        return createStyledEmptyList<BattleAbilityItem>().fillWithPreviewAttacks(currentParticipant).toAttackTable()
+    }
+
     fun createButtonTableAttack(currentParticipant: Participant): Table {
-        val abilities: List<BattleAbilityItem> = currentParticipant.getBattleAbilities()
-        return createStyledEmptyList<BattleAbilityItem>().fillWithAttacks(abilities).toAttackTable()
+        return createStyledEmptyList<BattleAbilityItem>().fillWithAttacks(currentParticipant).toAttackTable()
     }
 
     fun createButtonTableMove(): Table {
@@ -308,7 +312,9 @@ class BattleScreenBuilder {
         }
         this.setItems(*actionStrings.toTypedArray())
 
-        if (currentParticipant.currentAP <= 1) {
+        if (currentParticipant.currentAP <= 1
+            || this.items[buttonTableActionIndex].startsWith("[GRAY]")
+        ) {
             buttonTableActionIndex = 9
         }
         this.selectedIndex = buttonTableActionIndex
@@ -319,14 +325,32 @@ class BattleScreenBuilder {
         return if (this.currentAP < requestedAp) "[GRAY]" else ""
     }
 
-    private fun GdxList<BattleAbilityItem>.fillWithAttacks(abilities: List<BattleAbilityItem>): GdxList<BattleAbilityItem> {
+    private fun GdxList<BattleAbilityItem>.fillWithPreviewAttacks(currentParticipant: Participant): GdxList<BattleAbilityItem> {
+        val abilities: List<BattleAbilityItem> = currentParticipant.getBattleAbilities()
         this.setItems(*abilities.toTypedArray())
-        items.add(object : BattleAbilityItem("Back") {
-            override fun createPreviewMessage(): String = ""
-            override fun handleSuccess(messages: ArrayDeque<String>) {}
-        })
+        items.add(createBackButton(currentParticipant))
         this.selectedIndex = buttonTableAttackIndex
         return this
+    }
+
+    private fun GdxList<BattleAbilityItem>.fillWithAttacks(currentParticipant: Participant): GdxList<BattleAbilityItem> {
+        val abilities: List<BattleAbilityItem> = currentParticipant.getBattleAbilities()
+            .map { it.possibleCreateCopyWithGrayName() }
+        this.setItems(*abilities.toTypedArray())
+        items.add(createBackButton(currentParticipant))
+        if (this.items[buttonTableAttackIndex].toString().startsWith("[GRAY]")) {
+            buttonTableAttackIndex = 0
+        }
+        this.selectedIndex = buttonTableAttackIndex
+        return this
+    }
+
+    private fun createBackButton(currentParticipant: Participant): BattleAbilityItem {
+        return object : BattleAbilityItem(AbilityItem(name = "Back"), currentParticipant) {
+            override fun possibleCreateCopyWithGrayName(): BattleAbilityItem = this
+            override fun createPreviewMessage(): String = ""
+            override fun handleSuccess(messages: ArrayDeque<String>) {}
+        }
     }
 
     private fun GdxList<String>.fillWithTargets(enemies: List<Participant>): GdxList<String> {

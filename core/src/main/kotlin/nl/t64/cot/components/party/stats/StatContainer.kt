@@ -34,6 +34,7 @@ class StatContainer() {
 
 private class StatItemMap<K : Enum<K>, V> {
     private val map: MutableMap<String, V> = HashMap(StatItemId.entries.size)
+    fun contains(key: Enum<K>): Boolean = map.containsKey(key.name)
     operator fun get(key: Enum<K>): V = map[key.name]!!
     operator fun set(key: Enum<K>, value: V) {
         map[key.name] = value

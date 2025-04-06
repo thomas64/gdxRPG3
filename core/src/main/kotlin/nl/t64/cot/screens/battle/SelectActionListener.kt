@@ -3,11 +3,9 @@ package nl.t64.cot.screens.battle
 import com.badlogic.gdx.Input
 import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.InputListener
-import com.badlogic.gdx.scenes.scene2d.ui.List
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.constants.Constant
-import com.badlogic.gdx.scenes.scene2d.ui.List as GdxList
 
 
 class SelectActionListener(
@@ -33,45 +31,13 @@ class SelectActionListener(
 
         when (keycode) {
             Constant.KEYCODE_START, Input.Keys.ESCAPE -> event.handlePause(pauseMenu)
-            Input.Keys.UP -> event.selectPreviousNonGrayOption()
-            Input.Keys.DOWN -> event.selectNextNonGrayOption()
+            Input.Keys.UP -> event.selectPreviousNonGrayOption<String>()
+            Input.Keys.DOWN -> event.selectNextNonGrayOption<String>()
             Constant.KEYCODE_RIGHT -> event.dontLoseFocusAfterEsc()
             Constant.KEYCODE_BOTTOM, Input.Keys.ENTER, Input.Keys.A -> event.handleEnter()
             Input.Keys.W -> handleWin(winBattle)
         }
         return true
-    }
-
-    private fun InputEvent.selectPreviousNonGrayOption() {
-        var selected: String? = this.getSelected<String>()
-        while (selected != null && selected.startsWith("[GRAY]")) {
-            selected = getPreviousOption(this)
-        }
-        playSe(AudioEvent.SE_MENU_CURSOR)
-    }
-
-    private fun InputEvent.selectNextNonGrayOption() {
-        var selected: String? = this.getSelected<String>()
-        while (selected != null && selected.startsWith("[GRAY]")) {
-            selected = getNextOption(this)
-        }
-        playSe(AudioEvent.SE_MENU_CURSOR)
-    }
-
-    private fun getPreviousOption(event: InputEvent): String? {
-        val list: List<String> = event.target as? GdxList<String> ?: return null
-        val currentIndex: Int = list.selectedIndex
-        val previousIndex: Int = if (currentIndex > 0) currentIndex - 1 else list.items.size - 1
-        list.selectedIndex = previousIndex
-        return list.selected
-    }
-
-    private fun getNextOption(event: InputEvent): String? {
-        val list: List<String> = event.target as? GdxList<String> ?: return null
-        val currentIndex: Int = list.selectedIndex
-        val nextIndex: Int = if (currentIndex < list.items.size - 1) currentIndex + 1 else 0
-        list.selectedIndex = nextIndex
-        return list.selected
     }
 
     private fun InputEvent.handleEnter() {

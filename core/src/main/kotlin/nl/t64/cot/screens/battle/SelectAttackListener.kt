@@ -18,8 +18,8 @@ class SelectAttackListener(
         if (event.isDialogOpen()) return true
 
         when (keycode) {
-            Input.Keys.UP -> playSe(AudioEvent.SE_MENU_CURSOR)
-            Input.Keys.DOWN -> playSe(AudioEvent.SE_MENU_CURSOR)
+            Input.Keys.UP -> event.selectPreviousNonGrayOption<BattleAbilityItem>()
+            Input.Keys.DOWN -> event.selectNextNonGrayOption<BattleAbilityItem>()
             Constant.KEYCODE_BOTTOM, Input.Keys.ENTER, Input.Keys.A -> event.handleEnter()
             Constant.KEYCODE_RIGHT, Input.Keys.ESCAPE -> handleEscape(back)
         }

@@ -431,7 +431,7 @@ class BattleScreen : Screen {
     }
 
     private fun setupPreviewAttackTable() {
-        buttonTableAttack = screenBuilder.createButtonTableAttack(currentParticipant)
+        buttonTableAttack = screenBuilder.createButtonTablePreviewAttack(currentParticipant)
         stage.addActor(buttonTableAttack)
         buttonTableAttack.addListener(listenerPreviewAttack)
         stage.keyboardFocus = buttonTableAttack.children.last()
