@@ -16,6 +16,8 @@ data class QuestGraph(
     val summary: String = "",
     val isSubQuest: Boolean = false,
     var isHidden: Boolean = false,
+    val isHidingMessagesAfterFinishing: Boolean = false,
+    val isResettable: Boolean = true,
     val linkedWith: List<String> = emptyList(),
     val tasks: Map<String, QuestTask> = emptyMap()
 ) {
@@ -28,6 +30,7 @@ data class QuestGraph(
             isFailed -> "[FIREBRICK]x    $title"
             currentState == QuestState.FINISHED -> "[GRAY]v    $title"
             currentState == QuestState.UNCLAIMED -> "o    $title"
+            resetState == QuestState.FINISHED && !isResettable -> "[GRAY]v    $title"
             resetState == QuestState.FINISHED -> "[GRAY]r    $title"
             else -> "      $title"
         }
@@ -305,12 +308,14 @@ data class QuestGraph(
     }
 
     private fun showMessageTooltipQuestNew() {
+        if (isHidingMessagesAfterFinishing && isOneOfBothStatesEqualOrHigherThan(QuestState.FINISHED)) return
         if (!isHidden && resetState == QuestState.UNKNOWN) {
             worldScreen.showMessageTooltip("New quest:" + System.lineSeparator() + title)
         }
     }
 
     private fun showMessageTooltipQuestUpdated() {
+        if (isHidingMessagesAfterFinishing && isOneOfBothStatesEqualOrHigherThan(QuestState.FINISHED)) return
         if (!isHidden
             && (currentState == QuestState.ACCEPTED || resetState == QuestState.ACCEPTED)
             && (!isReadyToBeFinished() || (isSubQuest && isReadyToBeFinished()))
@@ -320,6 +325,7 @@ data class QuestGraph(
     }
 
     private fun showMessageTooltipQuestCompleted() {
+        if (isHidingMessagesAfterFinishing && isOneOfBothStatesEqualOrHigherThan(QuestState.FINISHED)) return
         if (!isHidden && !isSubQuest) {
             stopAllSe()
             playSe(AudioEvent.SE_REWARD)
@@ -328,6 +334,7 @@ data class QuestGraph(
     }
 
     private fun showMessageTooltipQuestFailed() {
+        if (isHidingMessagesAfterFinishing && isOneOfBothStatesEqualOrHigherThan(QuestState.FINISHED)) return
         if (!isFailed && isOneOfBothStatesEqualOrHigherThan(QuestState.KNOWN)) {
             stopAllSe()
             playSe(AudioEvent.SE_QUEST_FAIL)

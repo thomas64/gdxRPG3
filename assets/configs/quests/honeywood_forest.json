@@ -1,10 +1,12 @@
 {
   "quest_grace_is_missing": {
-    "title"     : "Grace is missing",
-    "entityId"  : "girl01",
-    "summary"   : "Grace wasn't in her bed when you woke up. She probably went to Honeywood Forest in the north. But since there are orcs roaming in the forest, it's dangerous at night. You must find her before 19:30. That's when it gets dark.",
-    "linkedWith": ["quest_orc_guards"],
-    "tasks"     : {
+    "title"                         : "Grace is missing",
+    "entityId"                      : "girl01",
+    "summary"                       : "Grace wasn't in her bed when you woke up. She probably went to Honeywood Forest in the north. But since there are orcs roaming in the forest, it's dangerous at night. You must find her before 19:30. That's when it gets dark.",
+    "linkedWith"                    : ["quest_orc_guards"],
+    "isHidingMessagesAfterFinishing": true,
+    "isResettable"                  : false,
+    "tasks"                         : {
       "1" : {
         "taskPhrase"   : "Search for a clue about where Grace went.",
         "updatedPhrase": "Find one of Grace's ribbons.",
@@ -41,11 +43,13 @@
     }
   },
   "quest_orc_guards"      : {
-    "title"     : "Grace is missing",
-    "entityId"  : "orc_sergeant",
-    "summary"   : "Orc guards",
-    "isSubQuest": true,
-    "tasks"     : {
+    "title"                         : "Grace is missing",
+    "entityId"                      : "orc_sergeant",
+    "summary"                       : "Orc guards",
+    "isSubQuest"                    : true,
+    "isHidingMessagesAfterFinishing": true,
+    "isResettable"                  : false,
+    "tasks"                         : {
       "4": {
         "taskPhrase": "      Find a way to get past the two imposing orc guards stationed at the cave exit leading to Ardor's domain.",
         "type"      : "FREE"
