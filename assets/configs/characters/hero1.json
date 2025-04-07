@@ -64,6 +64,7 @@
     "inventory": {
       "weapon": "basic_knife",
       "chest" : "basic_light_chest",
+      "cloak" : "basic_light_cloak",
       "pants" : "basic_light_pants",
       "boots" : "basic_light_boots"
     }

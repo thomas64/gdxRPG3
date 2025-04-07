@@ -107,7 +107,7 @@
   <object id="64" name="door_large_square1" x="576" y="432" width="144" height="96"/>
   <object id="65" name="door_large_square2" x="912" y="336" width="144" height="96"/>
   <object id="70" name="chest0014" x="768" y="744" width="48" height="48"/>
-  <object id="73" name="sparkle_farm_1" x="768" y="444" width="48" height="24"/>
+  <object id="73" name="sparkle_farm_1" x="768" y="442" width="48" height="24"/>
   <object id="74" name="sparkle_farm_2" x="1344" y="336" width="48" height="48"/>
   <object id="77" name="sparkle_farm_3" x="504" y="228" width="48" height="48"/>
   <object id="78" name="sparkle_farm_4" x="624" y="936" width="48" height="48"/>

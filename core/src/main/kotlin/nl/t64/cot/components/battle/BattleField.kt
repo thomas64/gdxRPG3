@@ -152,7 +152,7 @@ class BattleField(participants: List<Participant>) {
 
     private fun getOccupiedHeroIndicesSortedByPriorityFor(currentEnemy: Participant): List<Int> {
         return heroSpaces.filterNotNull()
-            .sortedBy { hero -> hero.getPriorityFor(currentEnemy) }
+            .sortedBy { hero -> hero.getPriorityFor(currentEnemy, currentEnemy.isEnemyNextToHero(hero)) }
             .map { hero -> hero.getCurrentSpaceIndex() }
     }
 
@@ -276,6 +276,12 @@ class BattleField(participants: List<Participant>) {
     private fun Participant.moveEnemyToSpace(newSpace: Int) {
         enemySpaces[enemySpaces.indexOf(this)] = null
         enemySpaces[newSpace] = this
+    }
+
+    private fun Participant.isEnemyNextToHero(hero: Participant): Boolean {
+        val enemyIndex: Int = this.getCurrentSpaceIndex()
+        val heroIndex: Int = hero.getCurrentSpaceIndex()
+        return enemyIndex == heroIndex || enemyIndex == heroIndex - 1
     }
 
     private fun Participant.getCurrentSpaceIndex(): Int {

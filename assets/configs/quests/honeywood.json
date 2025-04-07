@@ -284,7 +284,7 @@
       },
       "7": {
         "comment"     : "WARNING: One link to 7 from SceneHoneywoodFarmAttackAfterWin and one from honeywood_stable.tmx",
-        "taskPhrase"  : "            Ask Luana to accompany you on your travels. She is at Honeywood Farm in the northeast of the village.",
+        "taskPhrase"  : "            Get Luana to accompany you on your travels. She is at Honeywood Farm in the northeast of the village.",
         "type"        : "FREE",
         "isResettable": false,
         "linkedWith"  : ["2", "8"]

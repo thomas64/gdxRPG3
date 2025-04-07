@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="24" tileheight="24" infinite="0" nextlayerid="23" nextobjectid="36">
+<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="24" tileheight="24" infinite="0" nextlayerid="23" nextobjectid="42">
  <properties>
   <property name="bgm" value="bgm_house"/>
   <property name="step_sound" value="wood"/>
@@ -8,6 +8,9 @@
   <image source="tilesets/honeywood_house_mozes.png" width="600" height="408"/>
  </tileset>
  <tileset firstgid="426" source="tilesets/fsm_inside01_c.tsx"/>
+ <tileset firstgid="1450" source="tilesets/fsm_inside01_a1.tsx"/>
+ <tileset firstgid="2218" source="tilesets/fsm_inside01_a2.tsx"/>
+ <tileset firstgid="2986" source="tilesets/fsm_inside01_d.tsx"/>
  <layer id="2" name="under0_none" width="40" height="30">
   <data encoding="base64" compression="zlib">
    eJztwTEBAAAAwqD1T20ND6AAAAAA4NcAEsAAAQ==
@@ -15,12 +18,12 @@
  </layer>
  <layer id="1" name="under1_ground" width="40" height="30">
   <data encoding="base64" compression="zlib">
-   eJztlddOQkEQhncREUFRn8OW2LGX9/BOAXtBL/U9bETsiW9ibxd2fRM/QjbnhHMWEi8GY9jkyz+TvWDysTBaKaX/EVuwDTu/yF2B+S4hQBGHJPUUTEPCJwvvvwXmu4Aqin5IUXeQczDvygRsuO5N/yXkL0gxADPUndrpTe7Dnus+CZtazl81xSDMUndppzeZhYzrPpWbVdBfiGIo931Sd2unN3kAh677HugV9GfOPCwo71mEOu3cm17KX5hiBEbh0dWb8wRnPinlr5bigbyFO7hX+d6k8VWYUv4i2t+P8Vluf1Ht78f4LKe/jLIfm7clqNcy/mz7N1vE2zIZE3x/7j07BM1woLzv8hl6YQUahPzl3l9A5fdshByGFjhU3nf5QvbBKkwqOX9VsEATJUegFY58/L1CHNLC/oKwmHNFjkIbHPv4eyP7YQ0aBd9fNSzR1JNj0A4nyvu7fYcBWIcmQX8hWKaJkeMwAafK+7v9ID+Vk1L+amBF2//vbPtEyl8YVrX9/862T6T8XUFal9635dq/13CjSu/bv7p/bedcYD5d5PONJ9uRmK3YfKVOZb7KfIX8AMdTrvM=
+   eJztlddKQ0EQhmeNJXZ9DhvYTSxRwcfwzt7rpV76DrZg7OCb2NuN3TfxC7KcQ87ZBLyYiLjw8c+wFxm+bDJGRMwfYhO2YPsHuaMw3wUUUHTBOPUIjMJYSGbefyrMdw4RihhMUDeT0zDjyzFY893b/kPJXyFFHCapW4zX29yDXd/9OKwbPX9FFN0wRd1qvN5mCpK++4n0rIr+iil60t8ndZvxepv7cOC7b4cORX/2zMCsBM8cVBjv3vZa/qIUfZCAB19vzyOchqSWv1KKe/IGbuFOvnub1ldmavkrM+F+rM98+ys34X6sz3z6S4r7uLzNQ6XR8efav6ks3hbIKsX359+zPVAH+xJ8l0NlIhuwSF2t5C/9/grke8/y0dIL9XAgwXf5RHbCEgyLnr8IzNKUk33QAIch/p6hC5aV/RXCXNoVmYBGOArx90LGYAVqFN9fEczTVJL90ATHEvzdvkIcVqFW0V8xLNBUkQMwCCcS/N2+ke/ipZa/Elg07v871z7R8heFJeP+v3PtEy1/l7Bscu/bfO3fK7iW3Pv2t+5f1zlTmM9k+XzryXU0Zss2X67zP9//fJl8AQCsrsQ=
   </data>
  </layer>
  <layer id="3" name="under2_objects" width="40" height="30">
   <data encoding="base64" compression="zlib">
-   eJztzlERABAQBcB3/ZvQhFIU8M2Y3QSbAAA/aZX0ur04G/s2H/4BAPCeBfg2Au8=
+   eJztzjERACAMBMFPHf8moAMXwRQYoCUZ5lbBSgAA4CfNpG7Zi7s4t1X4V91waXr2AgAA4K0NTuYEag==
   </data>
  </layer>
  <layer id="4" name="under3_none" width="40" height="30">
@@ -78,6 +81,11 @@
   <object id="31" name="note_bed03" x="312" y="144" width="48" height="96"/>
   <object id="32" name="note_bed03" x="408" y="144" width="96" height="96"/>
   <object id="33" name="note_bookcase" x="600" y="120" width="48" height="48"/>
+  <object id="37" name="note_coffee" x="552" y="360" width="48" height="30"/>
+  <object id="38" name="note_bag" x="312" y="504" width="48" height="24"/>
+  <object id="39" name="note_bucket" x="312" y="552" width="48" height="24"/>
+  <object id="40" name="note_kitchen" x="360" y="408" width="96" height="48"/>
+  <object id="41" name="note_green" x="312" y="456" width="36" height="24"/>
  </objectgroup>
  <objectgroup color="#aa55ff" id="21" name="hero">
   <object id="34" name="luana" x="552" y="306" width="48" height="24">

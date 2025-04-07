@@ -49,6 +49,26 @@
       "1": {"text": ["Are you planning to prepare a meal or something?"], "choices": [{"command": "EXIT"}]}
     }
   },
+  "note_coffee"      : {
+    "phrases": {
+      "1": {"text": ["You'd like some caffeine, don't you?"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "note_green"      : {
+    "phrases": {
+      "1": {"text": ["You painted it green; Grace's favorite color."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "note_bag"        : {
+    "phrases": {
+      "1": {"text": ["It's a bag. What do you want to do with it?"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "note_bucket"     : {
+    "phrases": {
+      "1": {"text": ["It looks dirty. What did you put in it?"], "choices": [{"command": "EXIT"}]}
+    }
+  },
   "note_holy_symbol": {
     "phrases": {
       "1": {"text": ["It looks like a holy symbol."], "choices": [{"command": "EXIT"}]}

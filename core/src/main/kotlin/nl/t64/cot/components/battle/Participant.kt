@@ -55,27 +55,29 @@ class Participant(
         currentAP = maximumAP + currentAP.coerceAtMost(2)
     }
 
-    fun getPriorityFor(currentEnemy: Participant): Float {
+    fun getPriorityFor(currentEnemy: Participant, isEnemyNextToHero: Boolean): Float {
         // todo, weaker character types? weapon types, or missile and throw?
 
         val attackSkill: SkillItemId = currentEnemy.getCurrentWeapon()!!.skill!!
         val targetSkill: SkillItemId? = getCurrentWeapon()?.skill
 
-        val attackerHasAdvantageScore: Float = if (attackSkill.hasAdvantageOver(targetSkill)) -5f else 0f
-        val attackerHasDisadvantageScore: Float = if (attackSkill.hasDisadvantageFrom(targetSkill)) 5f else 0f
+        val nextToTargetScore: Int = if (isEnemyNextToHero) -2 else 0
+        val attackerHasAdvantageScore: Int = if (attackSkill.hasAdvantageOver(targetSkill)) -4 else 0
+        val attackerHasDisadvantageScore: Int = if (attackSkill.hasDisadvantageFrom(targetSkill)) 4 else 0
         val stealthScore: Int = character.getCalculatedTotalSkillOf(SkillItemId.STEALTH)
         val protectionScore: Float = character.getCalculatedTotalProtection() / 5f
 
         if (preferenceManager.isInDebugMode) {
             println("A low score means a high priority in the queue!")
             println("${character.name} " +
+                        "nextToTargetScore: $nextToTargetScore, " +
                         "attackerHasAdvantageScore: $attackerHasAdvantageScore, " +
                         "attackerHasDisadvantageScore: $attackerHasDisadvantageScore, " +
                         "stealthScore: $stealthScore, " +
                         "protectionScore: $protectionScore = " +
-                        "total: ${stealthScore + protectionScore + attackerHasAdvantageScore + attackerHasDisadvantageScore}")
+                        "total: ${stealthScore + protectionScore + attackerHasAdvantageScore + attackerHasDisadvantageScore + nextToTargetScore}")
         }
-        return stealthScore + protectionScore + attackerHasAdvantageScore + attackerHasDisadvantageScore
+        return stealthScore + protectionScore + attackerHasAdvantageScore + attackerHasDisadvantageScore + nextToTargetScore
     }
 
     fun getWeaponRanges(): List<Int> {

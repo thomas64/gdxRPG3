@@ -261,7 +261,7 @@
       "3": {"text": ["I'll go back to that son of a bitch Ardor and take Grace back!"]},
       "4": {"face": "fairy_transp", "name": "Mother Fairy", "text": ["'You cannot confront Ardor! Even if you were to face him, he's far beyond your capabilities.'"]},
       "5": {"face": "fairy_transp", "name": "Mother Fairy", "text": ["'Watch out for Ardor! He is not to be trifled with!'"]},
-      "6": {"face": "mozes", "name": "Mozes", "text": ["Screw that! Grace needs my help!"], "choices": [{"command": "AUTO_SAVE"}]}
+      "6": {"face": "mozes", "name": "Mozes", "text": ["Screw that! Grace needs my help now!"], "choices": [{"command": "AUTO_SAVE"}]}
     }
   },
   "stable_horse_1"                 : {
