@@ -473,10 +473,12 @@ class BattleScreen : Screen {
     }
 
     private fun setupWeaponTable() {
-        val battleWeapons: List<BattleWeaponItem> = gameData.inventory.getAllOf(InventoryGroup.WEAPON)
-            .map { BattleWeaponItem(it) }
+        val battleEquipment: List<BattleWeaponItem> =
+            (gameData.inventory.getAllOf(InventoryGroup.WEAPON) + gameData.inventory.getAllOf(InventoryGroup.SHIELD))
+                .map { BattleWeaponItem(it) }
         val currentWeapon: InventoryItem? = currentParticipant.character.getInventoryItem(InventoryGroup.WEAPON)
-        buttonTableWeapon = screenBuilder.createButtonTableWeapon(battleWeapons, currentWeapon)
+        val currentShield: InventoryItem? = currentParticipant.character.getInventoryItem(InventoryGroup.SHIELD)
+        buttonTableWeapon = screenBuilder.createButtonTableWeapon(battleEquipment, currentWeapon, currentShield)
         stage.addActor(buttonTableWeapon)
         buttonTableWeapon.addListener(listenerWeapon)
         stage.keyboardFocus = buttonTableWeapon.children.last()

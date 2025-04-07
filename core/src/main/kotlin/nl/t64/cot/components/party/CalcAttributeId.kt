@@ -14,6 +14,12 @@ enum class CalcAttributeId(override val title: String) : SuperEnum {
         }
     },
 
+    DURABILITY("Durability") {
+        override fun getDescription(): String {
+            return "No description"
+        }
+    },
+
     BASE_HIT("Hit Chance") {
         override fun getDescription(): String {
             return """
@@ -73,12 +79,6 @@ enum class CalcAttributeId(override val title: String) : SuperEnum {
     },
 
     TRANSFORMATION("Transformation") {
-        override fun getDescription(): String {
-            return "No description"
-        }
-    },
-
-    DURABILITY("Durability") {
         override fun getDescription(): String {
             return "No description"
         }

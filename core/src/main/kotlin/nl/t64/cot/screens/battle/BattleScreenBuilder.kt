@@ -269,8 +269,11 @@ class BattleScreenBuilder {
         return createStyledEmptyList<BattlePotionItem>().fillWithPotions(potions).toPotionTable()
     }
 
-    fun createButtonTableWeapon(weapons: List<BattleWeaponItem>, currentWeapon: InventoryItem?): Table {
-        return createStyledEmptyList<BattleWeaponItem>().fillWithWeapons(weapons).toWeaponTable(currentWeapon)
+    fun createButtonTableWeapon(equipment: List<BattleWeaponItem>,
+                                currentWeapon: InventoryItem?,
+                                currentShield: InventoryItem?): Table {
+        return createStyledEmptyList<BattleWeaponItem>().fillWithWeapons(equipment).toWeaponTable(currentWeapon,
+                                                                                                  currentShield)
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -299,7 +302,7 @@ class BattleScreenBuilder {
             "Attack (1-4 AP)" to 1,
             "Move (1-$curAp AP)" to 1,
             "Potion (3 AP)" to 3,
-            "Switch weapon (3 AP)" to 3,
+            "Switch equipment (3 AP)" to 3,
             "Preview hit and damage" to 0,
             "Inventory" to 0,
             "Flee battle ($maxAp AP)" to maxAp,
@@ -371,7 +374,9 @@ class BattleScreenBuilder {
 
     private fun GdxList<BattleWeaponItem>.fillWithWeapons(weapons: List<BattleWeaponItem>): GdxList<BattleWeaponItem> {
         this.setItems(*weapons.toTypedArray())
-        items.add(BattleWeaponItem("Back"))
+        items.insert(0, BattleWeaponItem(InventoryItem(name = "Unequip Weapon", group = InventoryGroup.WEAPON, durability = -1)))
+        items.insert(1, BattleWeaponItem(InventoryItem(name = "Unequip Shield", group = InventoryGroup.SHIELD, durability = -1)))
+        items.add(BattleWeaponItem(InventoryItem(name = "Back")))
         this.selectedIndex = 0
         return this
     }
@@ -426,12 +431,14 @@ class BattleScreenBuilder {
         }
     }
 
-    private fun GdxList<BattleWeaponItem>.toWeaponTable(currentWeapon: InventoryItem?): Table {
-        val listWithWeapons = this
+    private fun GdxList<BattleWeaponItem>.toWeaponTable(currentWeapon: InventoryItem?,
+                                                        currentShield: InventoryItem?): Table {
+        val listWithEquipment = this
         return createSelectionTable().apply {
-            add("Select Weapon (Uses):").padBottom(10f).row()
-            currentWeapon?.let { add("Current: ${it.name} (${it.durability})").row() }
-            finish(listWithWeapons)
+            add("Select Weapon or Shield (Uses):").padBottom(10f).row()
+            currentWeapon?.let { add("Current Weapon: ${it.name} (${it.durability})").row() }
+            currentShield?.let { add("Current Shield: ${it.name} (${it.durability})").row() }
+            finish(listWithEquipment)
         }
     }
 

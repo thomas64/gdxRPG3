@@ -6,11 +6,12 @@ class BattleWeaponItem(
 ) {
     private val durability: Int = inventoryItem.durability
     val name: String = inventoryItem.name
-
-    constructor(name: String) : this(InventoryItem(name = name))
+    val group: InventoryGroup = inventoryItem.group
 
     override fun toString(): String {
         return when (name) {
+            "Unequip Weapon",
+            "Unequip Shield",
             "Back" -> name
             else -> "$name ($durability)"
         }

@@ -179,7 +179,9 @@ class DescriptionCreator(
         if (descriptionLine.value is SkillItemId) {
             return true
         }
-        if (descriptionLine.key == CalcAttributeId.DURABILITY && inventoryItem.group != InventoryGroup.WEAPON) {
+        if (descriptionLine.key == CalcAttributeId.DURABILITY
+            && inventoryItem.group !in listOf(InventoryGroup.WEAPON, InventoryGroup.SHIELD)
+        ) {
             return false
         }
         if (descriptionLine.key == CalcAttributeId.TRANSFORMATION) {

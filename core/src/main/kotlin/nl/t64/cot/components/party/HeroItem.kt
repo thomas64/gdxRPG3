@@ -155,6 +155,7 @@ class HeroItem(
 
     fun createMessageIfNotAbleToEquip(inventoryItem: InventoryItem): String? {
         return createMessageIfHeroIsDead()
+            ?: createMessageIfNothingToDequip(inventoryItem)
             ?: createMessageIfHeroHasNotEnoughFor(inventoryItem)
             ?: createMessageIfWeaponAndShieldAreNotCompatible(inventoryItem)
             ?: createMessageIfNotAbleToDequip(getInventoryItem(inventoryItem.group)
@@ -182,6 +183,7 @@ class HeroItem(
 
     private fun createMessageIfWeaponAndShieldAreNotCompatible(inventoryItem: InventoryItem): String? {
         return when {
+            inventoryItem.durability == -1 -> null
             inventoryItem.isTwoHanded -> createMessageIfShieldIsEquipped(inventoryItem)
             inventoryItem.isShield -> createMessageIfEquippedWeaponIsTwoHanded(inventoryItem)
             else -> null
@@ -203,6 +205,15 @@ class HeroItem(
         return InventoryMinimal.entries
             .mapNotNull { it.createMessageIfHeroHasNotEnoughFor(inventoryItem, this) }
             .firstOrNull()
+    }
+
+    private fun createMessageIfNothingToDequip(inventoryItem: InventoryItem): String? {
+        if (inventory.getInventoryItem(inventoryItem.group) == null
+            && inventoryItem.durability == -1) {
+            return "Nothing to unequip."
+        } else {
+            return null
+        }
     }
 
     private fun createMessageIfHeroIsDead(): String? {

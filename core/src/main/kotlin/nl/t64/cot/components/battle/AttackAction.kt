@@ -109,20 +109,14 @@ class AttackAction(
     }
 
     private fun handleSuccess(messages: ArrayDeque<String>) {
-        val weapon: InventoryItem = selectedAttack.currentWeapon!!
-        weapon.durability--
-
         val isBlock: Boolean = target.getCalculatedTotalDefense() > Random.nextInt(0, 100)
         if (isBlock) {
-            messages.add("${target.name} blocked the attack.")
+            handleBlock(messages)
         } else {
             selectedAttack.handleSuccess(messages)
         }
 
-        if (currentParticipant.isHero && weapon.durability <= 0) {
-            messages.add("${weapon.name} broke!")
-            attacker.clearInventoryItemFor(InventoryGroup.WEAPON)
-        }
+        handleDurability(messages)
 
         if (target.isDead) {
             messages.add("${target.name} is defeated.")
@@ -131,6 +125,25 @@ class AttackAction(
 
     private fun handleFailure(messages: ArrayDeque<String>) {
         messages.add("${attacker.name}'s attack failed.")
+    }
+
+    private fun handleBlock(messages: ArrayDeque<String>) {
+        messages.add("${target.name} blocked the attack.")
+        val shield: InventoryItem = target.getInventoryItem(InventoryGroup.SHIELD)!!
+        shield.durability--
+        if (shield.durability <= 0) {
+            messages.add("${shield.name} broke!")
+            target.clearInventoryItemFor(InventoryGroup.SHIELD)
+        }
+    }
+
+    private fun handleDurability(messages: ArrayDeque<String>) {
+        val weapon: InventoryItem = selectedAttack.currentWeapon!!
+        weapon.durability--
+        if (currentParticipant.isHero && weapon.durability <= 0) {
+            messages.add("${weapon.name} broke!")
+            attacker.clearInventoryItemFor(InventoryGroup.WEAPON)
+        }
     }
 
     private fun createDebugMessage() {

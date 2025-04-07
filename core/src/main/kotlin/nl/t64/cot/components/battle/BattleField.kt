@@ -132,7 +132,7 @@ class BattleField(participants: List<Participant>) {
             println("heroIndicesByPrio: $heroIndicesByPrio")
         }
 
-        // if hero is already in range, don't move enemy.
+        // if highest prio is already in range, don't move enemy.
         val currentEnemyRangeIndices: List<Int> = currentEnemy.getRangeOfEnemy()
         val highestPrioHero: Int = heroIndicesByPrio.first()
         if (highestPrioHero in currentEnemyRangeIndices) {
