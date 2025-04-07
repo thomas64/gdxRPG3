@@ -11,5 +11,5 @@
   "body_slam_1": {"name": "Body Slam", "ap": 1},
   "body_slam_2": {"name": "Body Slam", "ap": 2},
   "body_slam_3": {"name": "Body Slam", "ap": 3},
-  "stagger"    : {"name": "Stagger", "ap": 5, "sp": 5, "description": ["ToDO"]}
+  "stagger"    : {"name": "Stagger", "ap": 5, "sp": 6, "description": ["ToDO"]}
 }
