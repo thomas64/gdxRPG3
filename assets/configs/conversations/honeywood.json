@@ -21,6 +21,13 @@
       "10": {"text": ["Should I go to Lastdenn? Or should I go back to the forest?"], "choices": [{"command": "EXIT"}]}
     }
   },
+  "outside_home_cycle_3"                : {
+    "name"   : "Mozes",
+    "phrases": {
+      "1": {"text": ["It's early morning again."]},
+      "2": {"text": ["This time, I might be able to make it to the farm in time to save Luana from her death."], "choices": [{"command": "EXIT"}]}
+    }
+  },
   "honeywood_ridiculous"                : {
     "name"   : "Mozes",
     "phrases": {
@@ -474,10 +481,11 @@
       "1"   : {"text": ["Greetings, Mozes. How may I be of service today?"]},
       "2"   : {
         "choices": [
+          {"condition": ["i_c_==_x_q_this", "alone_in_party"], "text": "*Let him know about what happened with Luana at the farm.*", "nextId": "100"},
           {"condition": ["i_r_<=_k_q_this", "i_c_==_u_q_this"], "text": "*Explain everything that's happened and your need to go to Lastdenn.*", "nextId": "50"},
           {"condition": ["i_r_==_a_q_this", "i_c_==_u_q_this"], "text": "*Explain again everything that's happened.*", "nextId": "60"},
           {"condition": ["i_c_==_a_q_this", "i_!fairy_portal_active"], "text": "*Complain about the warp crystal not working.*", "nextId": "70"},
-          {"condition": ["i_c_==_a_q_this", "i_n_1_>=_item_fine_fairy_ring"], "text": "[Fairy Ring] *Present the package you received from the Fairy Shop.*", "command": "SHOW_QUEST_ITEM", "nextId": "80"},
+          {"condition": ["i_c_!=_x_q_this", "i_c_==_a_q_this", "i_n_1_>=_item_fine_fairy_ring"], "text": "[Fairy Ring] *Present the package you received from the Fairy Shop.*", "command": "SHOW_QUEST_ITEM", "nextId": "80"},
           {"condition": ["i_c_>=_a_q_quest_helping_horse", "i_c_<=_a_q_quest_get_horse", "i_time_before_17:00"], "text": "*Explain your need for a horse due to the blocked path to Honeywood Farm.*", "nextId": "10"},
           {"condition": ["i_c_>=_a_q_quest_get_horse", "i_tn_7_q_quest_get_horse"], "text": "*Mention Angie's horse is unwell and ask if he can provide assistance.*", "nextId": "40"},
           {"condition": ["i_c_>=_a_q_quest_get_horse", "i_tn_8_q_quest_get_horse"], "text": "*Explain your quest to find horseshoes for Angie.*", "nextId": "20"},
@@ -531,6 +539,9 @@
       "72"  : {"text": ["But for now, it's not really a problem. Keep the letter I gave you, and perhaps you can visit the Fairy Shop at a later time."], "choices": [{"nextId": "90"}]},
       "80"  : {"text": ["Mozes, that's wonderful, thank you. It's yours to keep. I hope it can be of assistance to you."], "choices": [{"nextId": "90"}]},
       "90"  : {"text": ["Mozes, I wish you the best of luck on your journey."], "choices": [{"command": "EXIT"}]},
+      "100" : {"text": ["Oh no! That's terrible! If only we had {COLOR=BLUE}known sooner{COLOR=BLACK}, I would have sent someone to help her."]},
+      "101" : {"text": ["But now it's too late. I don't know what to do anymore."]},
+      "102" : {"text": ["Perhaps the Fairies still have hope in these dark times..."], "choices": [{"command": "EXIT"}]},
       "1199": {"text": ["Mozes, it seems you've forgotten something."], "choices": [{"command": "RECEIVE_ITEM_FOR_QUEST"}]},
       "1200": {"text": ["Greetings, Mozes. How may I be of service today?"], "choices": [{"nextId": "2"}]},
       "2000": {"text": ["Mozes, I've probably told you a dozen times already, but I really wish you the best of luck on your journey."], "choices": [{"command": "EXIT"}]}

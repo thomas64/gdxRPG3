@@ -122,9 +122,9 @@
     "name"     : "Mr. Isembert",
     "condition": ["_hero_luana"], "startAt": "5",
     "phrases"  : {
-      "1": {"text": ["It's terrible! They killed Luana and took her body! Evdos knows why!"]},
+      "1": {"text": ["It's terrible! This morning! They killed Luana and took her body! Evdos knows why!"]},
       "2": {"text": ["They also took my horses! My horses! My livelihood! I don't know what to do!"], "choices": [{"nextId": "6"}]},
-      "5": {"text": ["It's terrible! They took my horses! My horses! My livelihood! I don't know what to do!"]},
+      "5": {"text": ["It's terrible! This morning! They took my horses! My horses! My livelihood! I don't know what to do!"]},
       "6": {"text": ["This is the end of the oldest farm in the village..."]},
       "7": {"text": ["It's been in our family for generations..."], "choices": [{"command": "EXIT"}]}
     }
@@ -257,11 +257,12 @@
     "name"   : "Mozes",
     "phrases": {
       "1": {"text": ["This is all terrible... Now Luana is also gone, same as Grace..."]},
-      "2": {"text": ["There isn't much for me to accomplish here anymore..."]},
-      "3": {"text": ["I'll go back to that son of a bitch Ardor and take Grace back!"]},
-      "4": {"face": "fairy_transp", "name": "Mother Fairy", "text": ["'You cannot confront Ardor! Even if you were to face him, he's far beyond your capabilities.'"]},
-      "5": {"face": "fairy_transp", "name": "Mother Fairy", "text": ["'Watch out for Ardor! He is not to be trifled with!'"]},
-      "6": {"face": "mozes", "name": "Mozes", "text": ["Screw that! Grace needs my help now!"], "choices": [{"command": "AUTO_SAVE"}]}
+      "2": {"text": ["If only I could have been here {COLOR=BLUE}sooner{COLOR=BLACK}..."]},
+      "3": {"text": ["There isn't much for me to accomplish here now anymore..."]},
+      "4": {"text": ["I'll go back to that son of a bitch Ardor and take Grace back!"]},
+      "5": {"face": "fairy_transp", "name": "Mother Fairy", "text": ["\"You cannot confront Ardor! Even if you were to face him, he's far beyond your capabilities.\""]},
+      "6": {"face": "fairy_transp", "name": "Mother Fairy", "text": ["\"Watch out for Ardor! He is not to be trifled with!\""]},
+      "7": {"face": "mozes", "name": "Mozes", "text": ["Screw that! Grace needs my help now!"], "choices": [{"command": "AUTO_SAVE"}]}
     }
   },
   "stable_horse_1"                 : {

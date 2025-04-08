@@ -12,6 +12,12 @@
     "conversationId": "outside_home_cycle_2",
     "entityId"      : "mozes"
   },
+  "event_outside_home_cycle_3"    : {
+    "type"          : "conversation",
+    "condition"     : ["alone_in_party", "_r_==_x_q_quest_honeywood_elder"],
+    "conversationId": "outside_home_cycle_3",
+    "entityId"      : "mozes"
+  },
   "event_ridiculous"              : {
     "type"          : "conversation",
     "condition"     : ["_tc_1_q_quest_helping_horse", "_tc_11_q_quest_helping_horse", "_time_before_16:55"],
@@ -32,7 +38,7 @@
   },
   "event_failed_to_save_luana"    : {
     "type"          : "conversation",
-    "condition"     : ["_qf_quest_honeywood_elder"],
+    "condition"     : ["_c_==_x_q_quest_honeywood_elder"],
     "conversationId": "failed_to_save_luana",
     "entityId"      : "mozes"
   },

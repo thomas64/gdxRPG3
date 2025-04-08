@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.11.1" orientation="orthogonal" renderorder="right-down" width="96" height="78" tilewidth="24" tileheight="24" infinite="0" nextlayerid="59" nextobjectid="527">
+<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="96" height="78" tilewidth="24" tileheight="24" infinite="0" nextlayerid="59" nextobjectid="528">
  <properties>
   <property name="bgm" value="bgm_honeywood"/>
   <property name="lightmap_camera" value="sunlight"/>
@@ -505,6 +505,7 @@
  </objectgroup>
  <objectgroup color="#ff00ff" id="53" name="cutscene"/>
  <objectgroup color="#ff55ff" id="54" name="event">
+  <object id="527" name="event_outside_home_cycle_3" type="discover" x="522" y="534" width="60" height="24"/>
   <object id="360" name="event_outside_home_cycle_2" type="discover" x="522" y="534" width="60" height="24"/>
   <object id="366" name="event_honeywood_soldiers" type="discover" x="1068" y="1794" width="24" height="6"/>
   <object id="449" name="guide_event_action" type="discover" x="480" y="528" width="24" height="96"/>

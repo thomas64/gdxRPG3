@@ -24,6 +24,7 @@ data class QuestGraph(
     var currentState: QuestState = QuestState.UNKNOWN
     var resetState: QuestState = QuestState.UNKNOWN
     var isFailed: Boolean = false
+    var wasFailed: Boolean = false
 
     override fun toString(): String {
         return when {
@@ -66,6 +67,7 @@ data class QuestGraph(
         if (resetState.isLowerThan(currentState)) {
             resetState = currentState
         }
+        wasFailed = isFailed
         isFailed = false
         currentState = QuestState.UNKNOWN
         tasks.values.forEach { it.possibleReset() }

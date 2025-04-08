@@ -65,6 +65,7 @@
       },
       "3"   : {
         "choices": [
+          {"condition": ["i_c_==_x_q_quest_honeywood_elder", "alone_in_party"], "text": "*Let her know about what happened with Luana at the farm.*", "nextId": "200"},
           {"condition": ["i_n_1_<_item_crystal_of_time"], "text": "*Explain everything that's happened.*", "nextId": "90"},
           {"condition": ["i_n_1_>=_item_crystal_of_time"], "text": "*Explain everything that's happened.*", "nextId": "100"},
           {"text": "*Take your leave.*", "command": "EXIT", "nextId": "150"}
@@ -119,6 +120,12 @@
       "109" : {"text": ["If you need have of it again, within the cave south of here, we've hidden a magic scroll that may be of some assistance against any orcs here in Honeywood Forest."], "choices": [{"command": "ACCEPT_QUEST", "nextId": "110"}]},
       "110" : {"text": ["I cannot stress this enough: Watch out for Ardor! He is not to be trifled with!"], "choices": [{"command": "EXIT", "nextId": "150"}]},
       "150" : {"text": ["Dear young Mozes, you've returned."], "choices": [{"nextId": "3"}]},
+      "200" : {"text": ["That's terrible! Ardor and his orcs must pay for this!"]},
+      "201" : {"text": ["But you cannot confront Ardor! If you do, you'll most definitely die like you did before."]},
+      "202" : {"text": ["Ardor {COLOR=BLUE}appears almost invulnerable {COLOR=BLACK}to all forms of attack. We're still trying to uncover the source of his power."]},
+      "203" : {"text": ["You'll have to rely on us to deal with Ardor. In time, we will find a way to defeat him."]},
+      "204" : {"text": ["I cannot stress this enough: Please stay away from him!"]},
+      "205" : {"face": "mozes", "name": "Mozes", "text": ["(No. Let's see about that. Grace needs my help. Right now!)"], "choices": [{"command": "EXIT", "nextId": "150"}]},
       "1199": {"text": ["Watch out for Ardor! He is not to be trifled with!"], "choices": [{"command": "RECEIVE_ITEM"}]},
       "1200": {"text": ["Dear young Mozes, you've returned."], "choices": [{"nextId": "2"}]}
     }
