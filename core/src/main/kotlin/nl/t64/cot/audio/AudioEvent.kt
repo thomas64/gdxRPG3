@@ -74,6 +74,7 @@ enum class AudioEvent(val filePath: String, val volume: Float = 1f) {
     SE_VANISH("audio/se/tiny_transiotions2_goose_hissing_01_edit.ogg"),
     SE_LEVELUP("audio/se/copyc4t_levelup.ogg", 0.1f),
     SE_POTION("audio/se/p0ss_heal.ogg", 0.1f),
+    SE_WEAPON_BREAK("audio/se/fe_weapon_break.ogg", 0.3f),
 
     SE_DEATH_SCREAM("audio/se/unknown_death_7_ian.ogg"),
     SE_FIGHT_ON("audio/se/unknown_fight_on.ogg", 0.2f),

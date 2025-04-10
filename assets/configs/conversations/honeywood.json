@@ -24,8 +24,10 @@
   "outside_home_cycle_3"                : {
     "name"   : "Mozes",
     "phrases": {
-      "1": {"text": ["It's early morning again."]},
-      "2": {"text": ["This time, I might be able to make it to the farm in time to save Luana from her death."], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["It's early morning again!"]},
+      "2": {"text": ["Everything has started over again..."]},
+      "3": {"text": [". . ."]},
+      "4": {"text": ["This time, I might be able to make it to the farm in time to save Luana from her death."], "choices": [{"command": "EXIT"}]}
     }
   },
   "honeywood_ridiculous"                : {

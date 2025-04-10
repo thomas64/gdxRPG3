@@ -42,7 +42,7 @@ class TurnManager(
         val target: Participant = participants.first { it.character == character }
         target.currentAP = 0
         if (participants.size == 2) {
-            target.delayTurn()
+            target.stagger()
         } else if (target == participants.last()) {
             target.setNegativeTurnCounter()
         } else {

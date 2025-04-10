@@ -19,6 +19,7 @@ class Participant(
     var currentAP: Int = maximumAP
 
     private var isDelayingTurn: Boolean = false
+    private var isStaggered: Boolean = false
     private var amountOfTurns: Int = 0
 
     fun updateTurnCounter() {
@@ -42,8 +43,12 @@ class Participant(
         isDelayingTurn = true
     }
 
+    fun stagger() {
+        isStaggered = true
+    }
+
     fun refreshActionPoints() {
-        if (isDelayingTurn) {
+        if (isDelayingTurn || isStaggered) {
             isDelayingTurn = false
             return
         }
@@ -86,6 +91,14 @@ class Participant(
 
     fun getBattleAbilities(): List<BattleAbilityItem> {
         return character.getAllAbilities().map { createBattleAbilityItemFrom(it) }
+    }
+
+    fun getEndingTurnMessage(): ArrayDeque<String> {
+        if (isStaggered) {
+            isStaggered = false
+            return ArrayDeque(listOf("${character.name} is staggered."))
+        }
+        return ArrayDeque(listOf("${character.name} ended ${character.gender} turn."))
     }
 
     private fun createBattleAbilityItemFrom(abilityItem: AbilityItem): BattleAbilityItem {

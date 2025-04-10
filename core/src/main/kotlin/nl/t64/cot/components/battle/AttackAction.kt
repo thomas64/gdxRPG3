@@ -88,9 +88,9 @@ class AttackAction(
         return selectedAttack.createPreviewMessage()
     }
 
-    fun handle(): ArrayDeque<String> {
+    fun handle(): ArrayDeque<String>? {
         if (currentParticipant.currentAP < selectedAttack.ap) {
-            return ArrayDeque(listOf("${attacker.name} ended ${attacker.gender} turn."))
+            return null
         }
 
         currentParticipant.currentAP -= selectedAttack.ap
@@ -99,12 +99,12 @@ class AttackAction(
         val messages = ArrayDeque<String>()
         messages.add("${attacker.name} used ${selectedAttack.name} on ${target.name}.")
 
+        createDebugMessage()
         if (selectedAttack.isHit()) {
             handleSuccess(messages)
         } else {
             handleFailure(messages)
         }
-        createDebugMessage()
         return messages
     }
 

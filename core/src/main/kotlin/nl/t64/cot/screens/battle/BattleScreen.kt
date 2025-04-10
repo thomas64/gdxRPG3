@@ -533,7 +533,7 @@ class BattleScreen : Screen {
     }
 
     private fun attackConfirmed(attackAction: AttackAction) {
-        val messages: ArrayDeque<String> = attackAction.handle()
+        val messages: ArrayDeque<String> = attackAction.handle()!!
         buttonTableTarget.remove()
         isDelayingTurn = true
         Utils.runWithDelay(0.5f) {
@@ -725,14 +725,17 @@ class BattleScreen : Screen {
         val messages: ArrayDeque<String> = heroTarget
             ?.let { AttackAction.createForEnemy(currentParticipant, it, battleId).handle() }
             ?.also { currentTarget = heroTarget.character }
-            ?: ArrayDeque(listOf("${currentParticipant.character.name} ended ${currentParticipant.character.gender} turn."))
-        if (messages.none { it.contains("ended") && it.contains("turn") }) {
-            showMessages(messages)
-            turnManager.removeKilledParticipants()
-        } else {
+            ?: currentParticipant.getEndingTurnMessage()
+        val isTurnEnded = messages.any {
+            (it.contains("ended") && it.contains("turn")) || (it.contains("is staggered"))
+        }
+        if (isTurnEnded) {
             showMessages(messages)
             Thread.sleep(1000L)
             turnManager.setNextTurn()
+        } else {
+            showMessages(messages)
+            turnManager.removeKilledParticipants()
         }
     }
 
@@ -773,6 +776,7 @@ class BattleScreen : Screen {
 
     private fun getAudioEventBasedOn(message: String): AudioEvent {
         return when {
+            message.contains("broke!") -> AudioEvent.SE_WEAPON_BREAK // todo, not when enemy shield breaks.
             message.contains("blocked the attack.") -> AudioEvent.SE_BLOCK
             message.contains("attack failed.") -> AudioEvent.SE_DODGE
             message.contains("A critical hit!") -> AudioEvent.SE_CRIT_HIT
