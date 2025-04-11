@@ -46,7 +46,7 @@ class BattleScreen : Screen {
     private lateinit var turnManager: TurnManager
     private lateinit var battleField: BattleField
     private lateinit var currentParticipant: Participant
-    private lateinit var currentTarget: Character
+    private lateinit var currentTarget: Participant
 
     private val screenBuilder = BattleScreenBuilder()
     private val battleFieldBuilder = BattleFieldTableBuilder()
@@ -501,7 +501,8 @@ class BattleScreen : Screen {
     }
 
     private fun showPreviewDialog(selectedAttack: BattleAbilityItem, selectedTarget: String) {
-        val attackAction = AttackAction(currentParticipant, enemies.getEnemy(selectedTarget), selectedAttack)
+        val target: Participant = turnManager.getParticipant(enemies.getEnemy(selectedTarget))
+        val attackAction = AttackAction(currentParticipant, target, selectedAttack)
         val message = attackAction.createPreviewMessage()
         val dialog = MessageDialog(message)
         dialog.setLeftAlignment()
@@ -510,13 +511,13 @@ class BattleScreen : Screen {
     }
 
     private fun showConfirmAttackDialog(selectedAttack: BattleAbilityItem, selectedTarget: String) {
-        currentTarget = enemies.getEnemy(selectedTarget)
+        currentTarget = turnManager.getParticipant(enemies.getEnemy(selectedTarget))
         val attackAction = AttackAction(currentParticipant, currentTarget, selectedAttack)
-        attackAction.isCostingTooMuchAp()?.let { apMessage ->
-            showSmallLeftAlignMessageDialog(apMessage)
+        attackAction.isCostingTooMuchApSp()?.let { notEnoughApSp ->
+            showSmallLeftAlignMessageDialog(notEnoughApSp)
             return
-        } ?: attackAction.isCostingTooMuchSp()?.let { spMessage ->
-            showSmallLeftAlignMessageDialog(spMessage)
+        } ?: attackAction.isOutOfRange()?.let { outOfRange ->
+            showSmallLeftAlignMessageDialog(outOfRange)
             return
         }
         val message = attackAction.createConfirmationMessage()
@@ -724,7 +725,7 @@ class BattleScreen : Screen {
         isDelayingTurn = true
         val messages: ArrayDeque<String> = heroTarget
             ?.let { AttackAction.createForEnemy(currentParticipant, it, battleId).handle() }
-            ?.also { currentTarget = heroTarget.character }
+            ?.also { currentTarget = heroTarget }
             ?: currentParticipant.getEndingTurnMessage()
         val isTurnEnded = messages.any {
             (it.contains("ended") && it.contains("turn")) || (it.contains("is staggered"))
@@ -770,7 +771,7 @@ class BattleScreen : Screen {
         }
         messageDialog.show(stage, getAudioEventBasedOn(message))
         if (message.contains("successfully did") && message.contains("damage.")) {
-            ShakeEffect(battleFieldTable, currentTarget.name).start()
+            ShakeEffect(battleFieldTable, currentTarget.character.name).start()
         }
     }
 
@@ -780,8 +781,7 @@ class BattleScreen : Screen {
             message.contains("blocked the attack.") -> AudioEvent.SE_BLOCK
             message.contains("attack failed.") -> AudioEvent.SE_DODGE
             message.contains("A critical hit!") -> AudioEvent.SE_CRIT_HIT
-            message.contains("successfully did")
-                && message.contains("damage.") -> AudioEvent.SE_DAMAGE
+            message.contains("did") && message.contains("damage.") -> AudioEvent.SE_DAMAGE
             message.contains("is defeated.") -> AudioEvent.SE_VANISH
             else -> AudioEvent.SE_CONVERSATION_NEXT
         }

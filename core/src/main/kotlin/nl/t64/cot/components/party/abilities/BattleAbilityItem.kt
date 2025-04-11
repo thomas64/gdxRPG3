@@ -1,6 +1,5 @@
 package nl.t64.cot.components.party.abilities
 
-import nl.t64.cot.components.battle.Character
 import nl.t64.cot.components.battle.Participant
 import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.components.party.inventory.InventoryItem
@@ -20,7 +19,7 @@ abstract class BattleAbilityItem(
 
     val currentWeapon: InventoryItem? get() = attacker.character.getInventoryItem(InventoryGroup.WEAPON)
 
-    lateinit var target: Character
+    lateinit var target: Participant
 
     override fun toString(): String {
         return name
@@ -32,6 +31,15 @@ abstract class BattleAbilityItem(
 
     open fun isHit(): Boolean {
         return calculateHitPercentage() > Random.nextInt(0, 100)
+    }
+
+    fun hasEnoughApSp(): Boolean {
+        return attacker.currentAP >= ap
+            && attacker.character.currentSp >= sp
+    }
+
+    fun isInRangeForWeapon(): Boolean {
+        return abilityItem.isWeaponAllowed(currentWeapon)
     }
 
     fun calculateHitPercentageCapped(): Int {
@@ -67,39 +75,52 @@ abstract class BattleAbilityItem(
 
     fun calculateDamage(): Int {
         val attack: Int = (attacker.character.getCalculatedTotalDamage() * id.multiplier).toInt()
-        val protection: Int = target.getCalculatedTotalProtection()
+        val protection: Int = target.character.getCalculatedTotalProtection()
         return (attack - protection).coerceAtLeast(1)
+    }
+
+    protected fun possibleCreateGrayName(): AbilityItem {
+        if (hasEnoughApSp()) {
+            return abilityItem
+        }
+        return abilityItem.copy(name = "[GRAY]$name")
     }
 
     protected fun possibleCreateEffectiveMessage(): String {
         return when {
             hasWeaponTriangleAdvantage() -> """
-                Super effective!
+                [BLUE]Super effective![BLACK]
                 """
             hasWeaponTriangleDisadvantage() -> """
-                Not very effective...
+                [FIREBRICK]Not very effective...[BLACK]
                 """
             else -> ""
         }
     }
 
-    protected fun possibleAddEffectiveMessage(messages: ArrayDeque<String>) {
-        if (hasWeaponTriangleAdvantage()) {
-            messages.add("It's super effective!")
-        } else if (hasWeaponTriangleDisadvantage()) {
-            messages.add("It's not very effective...")
+    protected fun possibleAddEffectiveMessage(): String {
+        val weaponName = currentWeapon!!.name.takeIf { it.isNotBlank() } ?: name
+
+        return when {
+            hasWeaponTriangleAdvantage() -> """
+                $weaponName is super effective!
+                """
+            hasWeaponTriangleDisadvantage() -> """
+                $weaponName is not very effective...
+                """
+            else -> ""
         }
     }
 
     private fun hasWeaponTriangleAdvantage(): Boolean {
         val attackSkill: SkillItemId = currentWeapon!!.skill!!
-        val targetSkill: SkillItemId? = target.getInventoryItem(InventoryGroup.WEAPON)?.skill
+        val targetSkill: SkillItemId? = target.character.getInventoryItem(InventoryGroup.WEAPON)?.skill
         return attackSkill.hasAdvantageOver(targetSkill)
     }
 
     private fun hasWeaponTriangleDisadvantage(): Boolean {
         val attackSkill: SkillItemId = currentWeapon!!.skill!!
-        val targetSkill: SkillItemId? = target.getInventoryItem(InventoryGroup.WEAPON)?.skill
+        val targetSkill: SkillItemId? = target.character.getInventoryItem(InventoryGroup.WEAPON)?.skill
         return attackSkill.hasDisadvantageFrom(targetSkill)
     }
 

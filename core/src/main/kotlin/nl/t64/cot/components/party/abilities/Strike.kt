@@ -12,15 +12,14 @@ class Strike(
 ) {
 
     override fun toString(): String {
+        if (sp > 0) {
+            return "$name ($ap AP, $sp SP)"
+        }
         return "$name ($ap AP)"
     }
 
     override fun possibleCreateCopyWithGrayName(): BattleAbilityItem {
-        if (attacker.currentAP < ap) {
-            val copyAbility: AbilityItem = abilityItem.copy(name = "[GRAY]${abilityItem.name}")
-            return Strike(copyAbility, attacker)
-        }
-        return this
+        return Strike(possibleCreateGrayName(), attacker)
     }
 
     override fun createPreviewMessage(): String {
@@ -28,9 +27,9 @@ class Strike(
             """
                 $this
 
-                Target: ${target.name}
+                Target: ${target.character.name}
                 Weapon: ${it.name}
-                Durability: ${it.durability}
+                ${it.getDurabilityText()}
                 ${it.getRangeText()}
                 ${possibleCreateEffectiveMessage()}
                 Chance to hit: ${calculateHitPercentageCapped()}%
@@ -41,7 +40,7 @@ class Strike(
         } ?: """
             $this
 
-            Target: ${target.name}
+            Target: ${target.character.name}
 
             No weapon equipped!
         """.trimIndent()
@@ -53,15 +52,16 @@ class Strike(
         val criticalDamage: Int = calculateCriticalDamage()
         val damageDone: Int = if (isCriticalHit) criticalDamage else damage
 
-        target.takeDamage(damageDone)
+        target.character.takeDamage(damageDone)
 
         val critMessage: String = if (isCriticalHit) "A critical hit!  " else ""
-        messages.add("$critMessage$name successfully did $damageDone damage.")
-
-        possibleAddEffectiveMessage(messages)
+        messages.add("""
+            ${possibleAddEffectiveMessage()}
+            $critMessage$name did $damageDone damage.
+            """.trimIndent().trimMargin())
 
         if (attacker.isHero && damage <= 1) {
-            messages.add("${target.name} ${target.gender} protection is too strong!")
+            messages.add("${target.character.name} ${target.character.gender} protection is too strong!")
         }
     }
 

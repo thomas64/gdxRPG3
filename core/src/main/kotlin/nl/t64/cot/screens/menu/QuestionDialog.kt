@@ -40,8 +40,7 @@ class QuestionDialog(
     private val yesFunction: () -> Unit
 ) {
     private val dialogHeight: Float = ((message.lines().count() * FONT_SIZE) + DIALOG_INIT_HEIGHT).toFloat()
-    private val font: BitmapFont = resourceManager.getTrueTypeAsset(FONT, FONT_SIZE)
-        .apply { data.setLineHeight(LINE_HEIGHT) }
+    private val font: BitmapFont = createFont()
     private val dialog: Dialog = createDialog()
     private var selectedIndex = 0
 
@@ -100,7 +99,7 @@ class QuestionDialog(
     }
 
     private fun createDialog(): Dialog {
-        val label = Label(message, LabelStyle(font, Color.BLACK))
+        val label = Label("[BLACK]$message", LabelStyle(font, null))
         label.setAlignment(Align.center)
 
         val buttonStyle = TextButtonStyle()
@@ -132,6 +131,13 @@ class QuestionDialog(
     private fun applyConfirmListener() {
         val listenerKeyConfirm = ListenerKeyConfirmDialog { selectDialogItem() }
         dialog.addListener(listenerKeyConfirm)
+    }
+
+    private fun createFont(): BitmapFont {
+        return resourceManager.getTrueTypeAsset(FONT, FONT_SIZE).apply {
+            data.setLineHeight(LINE_HEIGHT)
+            data.markupEnabled = true
+        }
     }
 
 }

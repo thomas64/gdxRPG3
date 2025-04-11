@@ -1,15 +1,9 @@
 {
-  "strike_1"   : {"name": "Strike", "ap": 1, "description": ["ToDO"]},
-  "strike_2"   : {"name": "Strike", "ap": 2},
+  "strike_2"   : {"name": "Weak Strike", "ap": 2, "description": ["ToDO"]},
   "strike_3"   : {"name": "Strike", "ap": 3},
-  "strike_4"   : {"name": "Strike", "ap": 4},
-  "bite_1"     : {"name": "Bite", "ap": 1},
-  "bite_2"     : {"name": "Bite", "ap": 2},
+  "strike_4"   : {"name": "Strong Strike", "ap": 4, "sp": 2},
   "bite_3"     : {"name": "Bite", "ap": 3},
   "bite_4"     : {"name": "Bite", "ap": 4},
-  "bite_5"     : {"name": "Bite", "ap": 5},
-  "body_slam_1": {"name": "Body Slam", "ap": 1},
   "body_slam_2": {"name": "Body Slam", "ap": 2},
-  "body_slam_3": {"name": "Body Slam", "ap": 3},
-  "stagger"    : {"name": "Stagger", "ap": 5, "sp": 6, "description": ["ToDO"]}
+  "stagger"    : {"name": "Stagger", "ap": 6, "sp": 8, "is_hand_to_hand_only": true, "description": ["ToDO"]}
 }

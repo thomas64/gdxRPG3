@@ -299,7 +299,7 @@ class BattleScreenBuilder {
         val maxAp: Int = currentParticipant.maximumAP
         val curAp: Int = currentParticipant.currentAP
         val actions: List<Pair<String, Int>> = listOf(
-            "Attack (1-4 AP)" to 1,
+            "Attack (2-6 AP)" to 2,
             "Move (1-$curAp AP)" to 1,
             "Potion (3 AP)" to 3,
             "Switch equipment (3 AP)" to 3,
@@ -342,7 +342,7 @@ class BattleScreenBuilder {
         this.setItems(*abilities.toTypedArray())
         items.add(createBackButton(currentParticipant))
         if (this.items[buttonTableAttackIndex].toString().startsWith("[GRAY]")) {
-            buttonTableAttackIndex = 0
+            buttonTableAttackIndex = this.items.size - 1
         }
         this.selectedIndex = buttonTableAttackIndex
         return this

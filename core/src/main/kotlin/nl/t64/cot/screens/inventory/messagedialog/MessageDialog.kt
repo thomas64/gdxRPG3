@@ -1,6 +1,5 @@
 package nl.t64.cot.screens.inventory.messagedialog
 
-import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog
@@ -27,8 +26,7 @@ class MessageDialog(
     private val message: String
 ) {
     private val dialogHeight: Float = (message.lines().count() * FONT_SIZE + DIALOG_INIT_HEIGHT).toFloat()
-    private val font: BitmapFont = resourceManager.getTrueTypeAsset(FONT, FONT_SIZE)
-        .apply { data.setLineHeight(LINE_HEIGHT) }
+    private val font: BitmapFont = createFont()
     private val dialog: Dialog = createDialog()
 
     @Null
@@ -58,7 +56,7 @@ class MessageDialog(
     }
 
     private fun createDialog(): Dialog {
-        val label = Label(message, LabelStyle(font, Color.BLACK))
+        val label = Label("[BLACK]$message", LabelStyle(font, null))
         label.setAlignment(Align.center)
         return Utils.createParchmentDialog(font).apply {
             padLeft(DIALOG_PAD)
@@ -86,6 +84,13 @@ class MessageDialog(
         dialog.hide()
         action.invoke()
         actionAfterHide = null
+    }
+
+    private fun createFont(): BitmapFont {
+        return resourceManager.getTrueTypeAsset(FONT, FONT_SIZE).apply {
+            data.setLineHeight(LINE_HEIGHT)
+            data.markupEnabled = true
+        }
     }
 
 }

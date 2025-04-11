@@ -21,7 +21,7 @@
       "shield" : 1
     },
     "abilities": [
-      "strike_1", "strike_2", "strike_3", "strike_4",
+      "strike_2", "strike_3", "strike_4",
       "stagger"
     ],
     "spells"   : {
@@ -57,7 +57,7 @@
       "thrown"  : 3
     },
     "abilities": [
-      "strike_1", "strike_2", "strike_3", "strike_4"
+      "strike_2", "strike_3", "strike_4"
     ],
     "spells"   : {
     },
@@ -95,7 +95,7 @@
       "thrown"   : 2
     },
     "abilities": [
-      "strike_1", "strike_2", "strike_3", "strike_4",
+      "strike_2", "strike_3", "strike_4",
       "stagger"
     ],
     "spells"   : {
@@ -131,7 +131,7 @@
       "thrown"    : -1
     },
     "abilities": [
-      "strike_1", "strike_2", "strike_3", "strike_4"
+      "strike_2", "strike_3", "strike_4"
     ],
     "spells"   : {
       "vs_necromancy": 1,
@@ -172,7 +172,7 @@
       "thrown"    : 1
     },
     "abilities": [
-      "strike_1", "strike_2", "strike_3", "strike_4"
+      "strike_2", "strike_3", "strike_4"
     ],
     "spells"   : {
       "dragon_flames": 2
@@ -210,7 +210,7 @@
       "thrown"   : -1
     },
     "abilities": [
-      "strike_1", "strike_2", "strike_3", "strike_4",
+      "strike_2", "strike_3", "strike_4",
       "stagger"
     ],
     "spells"   : {
@@ -253,7 +253,7 @@
       "thrown"    : -1
     },
     "abilities": [
-      "strike_1", "strike_2", "strike_3", "strike_4",
+      "strike_2", "strike_3", "strike_4",
       "stagger"
     ],
     "spells"   : {
@@ -293,7 +293,7 @@
       "thrown"  : -1
     },
     "abilities": [
-      "strike_1", "strike_2", "strike_3", "strike_4"
+      "strike_2", "strike_3", "strike_4"
     ],
     "spells"   : {
       "vs_elemental" : 2,
@@ -335,7 +335,7 @@
       "thrown"    : 8
     },
     "abilities": [
-      "strike_1", "strike_2", "strike_3", "strike_4"
+      "strike_2", "strike_3", "strike_4"
     ],
     "spells"   : {
       "vs_star"          : 8,
@@ -376,7 +376,7 @@
       "thrown"  : -1
     },
     "abilities": [
-      "strike_1", "strike_2", "strike_3", "strike_4",
+      "strike_2", "strike_3", "strike_4",
       "stagger"
     ],
     "spells"   : {
@@ -421,7 +421,7 @@
       "thrown"    : 8
     },
     "abilities": [
-      "strike_1", "strike_2", "strike_3", "strike_4",
+      "strike_2", "strike_3", "strike_4",
       "stagger"
     ],
     "spells"   : {
@@ -469,7 +469,7 @@
       "thrown"    : 10
     },
     "abilities": [
-      "strike_1", "strike_2", "strike_3", "strike_4",
+      "strike_2", "strike_3", "strike_4",
       "stagger"
     ],
     "spells"   : {
@@ -514,7 +514,7 @@
       "thrown" : -1
     },
     "abilities": [
-      "strike_1", "strike_2", "strike_3", "strike_4",
+      "strike_2", "strike_3", "strike_4",
       "stagger"
     ],
     "spells"   : {
@@ -564,7 +564,7 @@
       "thrown"    : -1
     },
     "abilities": [
-      "strike_1", "strike_2", "strike_3", "strike_4",
+      "strike_2", "strike_3", "strike_4",
       "stagger"
     ],
     "spells"   : {

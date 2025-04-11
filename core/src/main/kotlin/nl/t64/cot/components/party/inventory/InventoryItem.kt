@@ -275,4 +275,12 @@ data class InventoryItem(
         }
     }
 
+    fun getDurabilityText(): String {
+        return if (durability > 5) {
+            "Durability: $durability"
+        } else {
+            "Durability: [FIREBRICK]$durability[BLACK]"
+        }
+    }
+
 }

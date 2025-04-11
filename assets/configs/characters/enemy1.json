@@ -21,7 +21,7 @@
       "pole"   : 10
     },
     "abilities": [
-      "strike_1", "strike_2", "strike_3", "strike_4"
+      "strike_2", "strike_3", "strike_4"
     ],
     "spells"   : {
       "mirror"         : 10,

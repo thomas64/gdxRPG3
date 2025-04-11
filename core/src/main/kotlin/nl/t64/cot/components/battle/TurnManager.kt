@@ -38,8 +38,8 @@ class TurnManager(
         currentParticipant.refreshActionPoints()
     }
 
-    fun stagger(character: Character) {
-        val target: Participant = participants.first { it.character == character }
+    fun stagger(target: Participant) {
+        target.staggerChance /= 2f
         target.currentAP = 0
         if (participants.size == 2) {
             target.stagger()
@@ -49,6 +49,10 @@ class TurnManager(
             target.turnCounter = 0
             target.moveToBottom()
         }
+    }
+
+    fun getParticipant(character: Character): Participant {
+        return participants.first { it.character == character }
     }
 
     private fun increaseAllTurnCounters() {

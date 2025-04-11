@@ -17,6 +17,7 @@ class Participant(
 
     val maximumAP: Int = character.getCalculatedActionPoints()
     var currentAP: Int = maximumAP
+    var staggerChance: Float = 65f
 
     private var isDelayingTurn: Boolean = false
     private var isStaggered: Boolean = false
@@ -103,15 +104,9 @@ class Participant(
 
     private fun createBattleAbilityItemFrom(abilityItem: AbilityItem): BattleAbilityItem {
         return when (abilityItem.id) {
-            AbilityItemId.BITE_1,
-            AbilityItemId.BITE_2,
             AbilityItemId.BITE_3,
             AbilityItemId.BITE_4,
-            AbilityItemId.BITE_5,
-            AbilityItemId.BODY_SLAM_1,
-            AbilityItemId.BODY_SLAM_2,
-            AbilityItemId.BODY_SLAM_3 -> Strike(abilityItem, this)
-            AbilityItemId.STRIKE_1,
+            AbilityItemId.BODY_SLAM_2 -> Strike(abilityItem, this)
             AbilityItemId.STRIKE_2,
             AbilityItemId.STRIKE_3,
             AbilityItemId.STRIKE_4 -> Strike(abilityItem, this)

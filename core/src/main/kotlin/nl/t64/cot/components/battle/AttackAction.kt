@@ -9,10 +9,11 @@ import kotlin.random.Random
 
 class AttackAction(
     private val currentParticipant: Participant,
-    private val target: Character,
+    private val currentTarget: Participant,
     private val selectedAttack: BattleAbilityItem,
 ) {
     private val attacker: Character = currentParticipant.character
+    private val target: Character = currentTarget.character
 
     companion object {
         fun createForEnemy(currentEnemy: Participant, targetHero: Participant, battleId: String): AttackAction {
@@ -22,14 +23,14 @@ class AttackAction(
                     .filter { it.ap <= currentEnemy.currentAP }
                     .maxByOrNull { it.ap }
                     ?: currentEnemy.getBattleAbilities().first()
-                ).apply { target = targetHero.character }
+                ).apply { target = targetHero }
 
             if (battleId == "farm_battle" && targetHero.character.id == "luana"
                 && ability.calculateDamage() >= targetHero.character.currentHp
             ) {
-                return AttackAction(currentEnemy, targetHero.character, ability.toAlwaysIsHitFalse())
+                return AttackAction(currentEnemy, targetHero, ability.toAlwaysIsHitFalse())
             } else {
-                return AttackAction(currentEnemy, targetHero.character, ability)
+                return AttackAction(currentEnemy, targetHero, ability)
             }
         }
 
@@ -45,32 +46,32 @@ class AttackAction(
     }
 
     init {
-        selectedAttack.target = target
+        selectedAttack.target = currentTarget
     }
 
-    fun isCostingTooMuchAp(): String? {
+    fun isCostingTooMuchApSp(): String? {
         return when {
-            selectedAttack.ap > currentParticipant.currentAP -> {
+            !selectedAttack.hasEnoughApSp() -> {
                 createPreviewMessage() +
                     System.lineSeparator() +
                     "_________________" +
                     System.lineSeparator() +
                     System.lineSeparator() +
-                    "    Not enough AP!"
+                    "[FIREBRICK]Not enough AP/SP!"
             }
             else -> null
         }
     }
 
-    fun isCostingTooMuchSp(): String? {
+    fun isOutOfRange(): String? {
         return when {
-            selectedAttack.sp > attacker.currentSp -> {
+            !selectedAttack.isInRangeForWeapon() -> {
                 createPreviewMessage() +
                     System.lineSeparator() +
                     "_________________" +
                     System.lineSeparator() +
                     System.lineSeparator() +
-                    "    Not enough SP!"
+                    "      [FIREBRICK]Out of range!"
             }
             else -> null
         }

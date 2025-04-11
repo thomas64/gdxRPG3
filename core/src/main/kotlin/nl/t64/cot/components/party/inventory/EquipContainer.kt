@@ -88,7 +88,7 @@ class EquipContainer() {
     }
 
     fun getSkillOfCurrentWeapon(): SkillItemId? {
-        return getInventoryItem(InventoryGroup.WEAPON)?.getAttributeOfMinimal(InventoryMinimal.SKILL) as SkillItemId?
+        return getInventoryItem(InventoryGroup.WEAPON)?.skill
     }
 
     fun getStatItemIdOfMinimalOfCurrentWeapon(): StatItemId? {
