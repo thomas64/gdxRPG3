@@ -613,8 +613,6 @@ class BattleScreen : Screen {
         messageDialog.setActionAfterHide {
             if (isSuccess) {
                 battleFledExitScreen()
-            } else {
-                turnManager.setNextTurn()
             }
             isDelayingTurn = false
         }

@@ -18,6 +18,7 @@ class Participant(
     val maximumAP: Int = character.getCalculatedActionPoints()
     var currentAP: Int = maximumAP
     var staggerChance: Float = 65f
+    var fleeChance: Int = 10
 
     private var isDelayingTurn: Boolean = false
     private var isStaggered: Boolean = false
