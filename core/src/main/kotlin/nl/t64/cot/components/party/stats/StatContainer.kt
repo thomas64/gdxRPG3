@@ -3,7 +3,7 @@ package nl.t64.cot.components.party.stats
 import com.fasterxml.jackson.annotation.JsonCreator
 
 
-private const val TOTAL_XP_NECESSARY_FOR_MOZES_STARTING_ATTRIBUTES = 319
+private const val TOTAL_XP_NECESSARY_FOR_MOZES_STARTING_ATTRIBUTES = 334
 
 class StatContainer() {
 

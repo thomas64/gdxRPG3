@@ -768,7 +768,7 @@ class BattleScreen : Screen {
             showMessages(messages)
         }
         messageDialog.show(stage, getAudioEventBasedOn(message))
-        if (message.contains("successfully did") && message.contains("damage.")) {
+        if (message.contains("did") && message.contains("damage.")) {
             ShakeEffect(battleFieldTable, currentTarget.character.name).start()
         }
     }

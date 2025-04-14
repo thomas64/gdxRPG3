@@ -112,6 +112,7 @@ class Participant(
             AbilityItemId.STRIKE_3,
             AbilityItemId.STRIKE_4 -> Strike(abilityItem, this)
             AbilityItemId.STAGGER -> Stagger(abilityItem, this)
+            AbilityItemId.DOUBLE_THROW -> DoubleThrow(abilityItem, this)
         }
     }
 

@@ -12,12 +12,12 @@ abstract class BattleAbilityItem(
     val abilityItem: AbilityItem,
     val attacker: Participant
 ) {
-    val id: AbilityItemId = abilityItem.id
+    private val id: AbilityItemId = abilityItem.id
     val name: String = abilityItem.name
     val ap: Int = abilityItem.ap
     val sp: Int = abilityItem.sp
 
-    val currentWeapon: InventoryItem? get() = attacker.character.getInventoryItem(InventoryGroup.WEAPON)
+    protected val currentWeapon: InventoryItem? get() = attacker.character.getInventoryItem(InventoryGroup.WEAPON)
 
     lateinit var target: Participant
 
@@ -29,8 +29,57 @@ abstract class BattleAbilityItem(
     abstract fun createPreviewMessage(): String
     abstract fun handleSuccess(messages: ArrayDeque<String>)
 
-    open fun isHit(): Boolean {
+    open fun handle(messages: ArrayDeque<String>) {
+        if (isHit()) {
+            handleHit(messages)
+        } else {
+            handleFailure(messages)
+        }
+    }
+
+    protected open fun isHit(): Boolean {
         return calculateHitPercentage() > Random.nextInt(0, 100)
+    }
+
+    private fun handleHit(messages: ArrayDeque<String>) {
+        if (isBlock()) {
+            handleBlock(messages)
+        } else {
+            handleSuccess(messages)
+        }
+
+        handleDurability(messages)
+
+        if (target.character.isDead) {
+            messages.add("${target.character.name} is defeated.")
+        }
+    }
+
+    private fun isBlock(): Boolean {
+        return target.character.getCalculatedTotalDefense() > Random.nextInt(0, 100)
+    }
+
+    private fun handleFailure(messages: ArrayDeque<String>) {
+        messages.add("${attacker.character.name}'s attack failed.")
+    }
+
+    private fun handleBlock(messages: ArrayDeque<String>) {
+        messages.add("${target.character.name} blocked the attack.")
+        val shield: InventoryItem = target.character.getInventoryItem(InventoryGroup.SHIELD)!!
+        shield.durability--
+        if (shield.durability <= 0) {
+            messages.add("${shield.name} broke!")
+            target.character.clearInventoryItemFor(InventoryGroup.SHIELD)
+        }
+    }
+
+    private fun handleDurability(messages: ArrayDeque<String>) {
+        val weapon = currentWeapon!!
+        weapon.durability--
+        if (attacker.isHero && weapon.durability <= 0) {
+            messages.add("${weapon.name} broke!")
+            attacker.character.clearInventoryItemFor(InventoryGroup.WEAPON)
+        }
     }
 
     fun hasEnoughApSp(): Boolean {
@@ -42,11 +91,11 @@ abstract class BattleAbilityItem(
         return abilityItem.isWeaponAllowed(currentWeapon)
     }
 
-    fun calculateHitPercentageCapped(): Int {
+    protected fun calculateHitPercentageCapped(): Int {
         return calculateHitPercentage().coerceAtMost(100)
     }
 
-    fun calculateHitPercentage(): Int {
+    open fun calculateHitPercentage(): Int {
         val attackerHitPercentage: Int = attacker.character.getCalculatedTotalHit()
 
         val weaponTriangle = when {
@@ -69,7 +118,7 @@ abstract class BattleAbilityItem(
         return (attackerCriticalHitPercentage + weaponTriangle).coerceAtLeast(0)
     }
 
-    fun calculateCriticalDamage(): Int {
+    protected fun calculateCriticalDamage(): Int {
         return (calculateDamage() * 1.51f).roundToInt()
     }
 

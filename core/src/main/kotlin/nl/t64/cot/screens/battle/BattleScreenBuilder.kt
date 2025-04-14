@@ -301,10 +301,9 @@ class BattleScreenBuilder {
 
     private fun GdxList<String>.fillWithActions(currentParticipant: Participant): GdxList<String> {
         val maxAp: Int = currentParticipant.maximumAP
-        val curAp: Int = currentParticipant.currentAP
         val actions: List<Pair<String, Int>> = listOf(
-            "Attack (2-6 AP)" to 2,
-            "Move (1-$curAp AP)" to 1,
+            "Attack (X AP)" to 2,
+            "Move (X AP)" to 1,
             "Potion (3 AP)" to 3,
             "Switch equipment (3 AP)" to 3,
             "Preview hit and damage" to 0,

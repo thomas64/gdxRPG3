@@ -3,7 +3,7 @@ package nl.t64.cot.components.party.abilities
 import nl.t64.cot.components.battle.Participant
 import kotlin.random.Random
 
-class Strike(
+open class Strike(
     abilityItem: AbilityItem,
     attacker: Participant
 ) : BattleAbilityItem(
