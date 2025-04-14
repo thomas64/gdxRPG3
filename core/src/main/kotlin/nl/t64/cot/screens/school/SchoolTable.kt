@@ -52,7 +52,7 @@ class SchoolTable(schoolId: String, tooltip: SchoolTooltip) : BaseTable(tooltip)
     }
 
     private fun fillRow(spellItem: SpellItem, index: Int) {
-        table.add(createImageOf(spellItem.id))
+        table.add(createImageOf(spellItem.id.name))
         val spellName = Label(spellItem.name, LabelStyle(font, Color.BLACK))
         table.add(spellName).padLeft(SECOND_COLUMN_PAD_LEFT)
         table.add(spellItem.rank.toString())

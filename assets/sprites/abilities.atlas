@@ -1,0 +1,41 @@
+
+abilities.png
+size: 240, 48
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+bite
+  rotate: false
+  xy: 0, 0
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+body_slam
+  rotate: false
+  xy: 48, 0
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+double_throw
+  rotate: false
+  xy: 96, 0
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+stagger
+  rotate: false
+  xy: 144, 0
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+strike
+  rotate: false
+  xy: 192, 0
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1

@@ -9,7 +9,9 @@ import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.party.CalcAttributeId
 import nl.t64.cot.components.party.PersonalityItem
+import nl.t64.cot.components.party.SuperEnum
 import nl.t64.cot.components.party.inventory.InventoryGroup
+import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.components.party.stats.StatItem
 import nl.t64.cot.components.party.stats.StatItemId
 import nl.t64.cot.components.party.toCalcAttributeId
@@ -175,7 +177,10 @@ internal class StatsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
     }
 
     private fun getPersonalityItemForDescriptionOnly(calcTitle: Label): PersonalityItem {
-        return object : PersonalityItem {
+        return object : PersonalityItem() {
+            override val id: SuperEnum = SkillItemId.NONE
+            override val name: String = ""
+            override val description: List<String> = emptyList()
             override fun getTotalDescription(): String {
                 return calcTitle.text.toString().toCalcAttributeId().getDescription()
             }

@@ -12,6 +12,7 @@ import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.components.party.spells.SchoolType
 import nl.t64.cot.components.party.spells.SpellContainer
 import nl.t64.cot.components.party.spells.SpellItem
+import nl.t64.cot.components.party.spells.SpellItemId
 import nl.t64.cot.components.party.stats.StatContainer
 import nl.t64.cot.components.party.stats.StatItem
 import nl.t64.cot.components.party.stats.StatItemId
@@ -115,7 +116,7 @@ class HeroItem(
         return skills.getById(skillItemId)
     }
 
-    fun getSpellById(spellId: String): SpellItem {
+    fun getSpellById(spellId: SpellItemId): SpellItem {
         return spells.getById(spellId)
     }
 

@@ -138,11 +138,15 @@ class BattleScreenBuilder {
         statsStack.add(enemyTable)
 
         // todo, dit is een enorme tijdelijke regel, op deze manier aan de verwijderde bite skill komen, is niet heel flexibel.
-        if (enemy.id.endsWith("_bat") || enemy.id.endsWith("_slime")) {
-            "bite"
-        } else {
-            enemy.getInventoryItem(InventoryGroup.WEAPON)?.skill?.name
-        }?.let {
+        // idee om het op te lossen: attackName: String toevoegen aan EnemyItem, en alleen onderstaande in de json invullen.
+        // neem attackName als deze gevuld is met bite of body_slam oid, en als deze leeg is pak het wapen.
+        val skillName: String? = when {
+            enemy.id.endsWith("_bat") -> "bite"
+            enemy.id.endsWith("_slime") || enemy.id.endsWith("_slime_medicine") -> "body_slam"
+            else -> enemy.getInventoryItem(InventoryGroup.WEAPON)?.skill?.name
+        }
+
+        skillName?.let {
             val textureRegion = resourceManager.getAtlasTexture(it.lowercase())
             val image = Image(textureRegion).apply { setScaling(Scaling.fit) }
             val container = Container(image).top().left().size(35f).pad(5f)

@@ -8,7 +8,7 @@ object SpellDatabase {
     private val spellItems: Map<String, SpellItem> = ConfigDataLoader.createSpells()
 
     fun createSpellItem(spellId: String, rank: Int): SpellItem {
-        val spellItem = spellItems[spellId]!!
+        val spellItem = spellItems[spellId.lowercase()]!!
         return spellItem.createCopy(rank)
     }
 

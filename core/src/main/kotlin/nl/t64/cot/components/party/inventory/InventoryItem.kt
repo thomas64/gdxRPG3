@@ -124,6 +124,7 @@ data class InventoryItem(
 
     fun getAttributeOfSkillItemId(skillItemId: SkillItemId): Int {
         return when (skillItemId) {
+            SkillItemId.NONE -> 0
             SkillItemId.ALCHEMIST -> alchemist
             SkillItemId.BARBARIAN -> 0
             SkillItemId.DIPLOMAT -> diplomat

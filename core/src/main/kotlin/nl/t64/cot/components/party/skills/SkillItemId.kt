@@ -5,6 +5,8 @@ import nl.t64.cot.components.party.SuperEnum
 
 enum class SkillItemId : SuperEnum {
 
+    NONE,
+
     // Communication Skills
     BARBARIAN,
     DIPLOMAT,

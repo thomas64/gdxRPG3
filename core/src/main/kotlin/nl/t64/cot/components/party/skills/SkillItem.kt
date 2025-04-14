@@ -8,12 +8,12 @@ private val TRAINING_COSTS = listOf(20, 8, 12, 16, 20, 24, 28, 32, 36, 40)
 private const val MAXIMUM = 10
 
 data class SkillItem(
-    val id: SkillItemId = SkillItemId.POLE,                 // Value will be replaced when constructed.
-    val name: String = "",
+    override val id: SkillItemId = SkillItemId.NONE,
+    override val name: String = "",
+    override val description: List<String> = emptyList(),
     var rank: Int = 0,
     private val upgrade: Float = 0f,                        // Constant value for upgrading formula.
-    private val description: List<String> = emptyList()
-) : PersonalityItem {
+) : PersonalityItem() {
 
     var bonus: Int = 0
 
@@ -23,15 +23,15 @@ data class SkillItem(
 
     override fun getTotalDescription(): String {
         return (description.joinToString(System.lineSeparator()) + System.lineSeparator()
-                + System.lineSeparator()
-                + "- A trainer is needed to upgrade a skill.")
+            + System.lineSeparator()
+            + "- A trainer is needed to upgrade a skill.")
     }
 
     fun getTrainerDescription(trainerSkill: SkillItem, totalScholar: Int): String {
         return (description.joinToString(System.lineSeparator()) + System.lineSeparator()
-                + System.lineSeparator()
-                + getNeededXpForNextRank(trainerSkill, totalScholar) + System.lineSeparator()
-                + getNeededGoldForNextRank(trainerSkill))
+            + System.lineSeparator()
+            + getNeededXpForNextRank(trainerSkill, totalScholar) + System.lineSeparator()
+            + getNeededGoldForNextRank(trainerSkill))
     }
 
     fun doUpgrade() {

@@ -1,4 +1,5 @@
 buttons.atlas
+abilities.atlas
 schools.atlas
 skills.atlas
 tiers.atlas

@@ -57,7 +57,8 @@
       "thrown"  : 3
     },
     "abilities": [
-      "strike_2", "strike_3", "strike_4"
+      "strike_2", "strike_3", "strike_4",
+      "double_throw"
     ],
     "spells"   : {
     },

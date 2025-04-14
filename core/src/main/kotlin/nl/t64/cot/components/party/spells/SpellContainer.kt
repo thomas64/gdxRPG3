@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonCreator
 
 class SpellContainer() {
 
-    private val spells: MutableMap<String, SpellItem> = HashMap()
+    private val spells: SpellItemMap<SpellItemId, SpellItem> = SpellItemMap()
 
     @JsonCreator
     constructor(startingSpells: Map<String, Int>) : this() {
@@ -14,16 +14,24 @@ class SpellContainer() {
             .forEach { this.spells[it.id] = it }
     }
 
-    fun getById(spellId: String): SpellItem {
-        return spells[spellId] ?: SpellDatabase.createSpellItem(spellId, 0)
+    fun getById(spellId: SpellItemId): SpellItem {
+        return spells[spellId] ?: SpellDatabase.createSpellItem(spellId.name, 0)
     }
 
     fun getAll(): List<SpellItem> {
-        return spells.values.sortedBy { it.sort }
+        return SpellItemId.entries.mapNotNull { spells[it] }.sortedBy { it.sort }
     }
 
     fun add(spellItem: SpellItem) {
         spells[spellItem.id] = spellItem
     }
 
+}
+
+private class SpellItemMap<K : Enum<K>, V> {
+    private val map: MutableMap<String, V> = HashMap()
+    operator fun get(key: Enum<K>): V? = map[key.name]
+    operator fun set(key: Enum<K>, value: V) {
+        map[key.name] = value
+    }
 }

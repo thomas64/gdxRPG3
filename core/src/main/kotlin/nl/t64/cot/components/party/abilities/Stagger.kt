@@ -45,7 +45,7 @@ class Stagger(
 
                 Chance to stagger: ${calculateStaggerPercentage()}%
 
-                When successful, stagger
+                When successful, Stagger
                 moves the target to the
                 bottom of the turn order.
             """.trimIndent()

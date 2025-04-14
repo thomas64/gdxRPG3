@@ -16,6 +16,7 @@ import nl.t64.cot.components.party.inventory.InventoryItem
 import nl.t64.cot.components.party.skills.SkillItem
 import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.components.party.spells.SpellItem
+import nl.t64.cot.components.party.spells.SpellItemId
 import nl.t64.cot.components.party.stats.StatItem
 import nl.t64.cot.components.party.stats.StatItemId
 import nl.t64.cot.components.quest.QuestGraph
@@ -73,7 +74,7 @@ object ConfigDataLoader {
 
     fun createSpells(): Map<String, SpellItem> {
         return loadConfigData<SpellItem>("spells")
-            .mapValues { it.value.copy(id = it.key) }
+            .mapValues { it.value.copy(id = SpellItemId.valueOf(it.key.uppercase())) }
     }
 
     fun createSkills(): Map<String, SkillItem> {
@@ -109,7 +110,8 @@ object ConfigDataLoader {
         val json = readString("abilities", "abilities.json")
         return readValue<AbilityItem>(json)
             .mapValues {
-                it.value.copy(id = AbilityItemId.valueOf(it.key.uppercase()))
+                it.value.copy(id = AbilityItemId.valueOf(it.key.uppercase()),
+                              imageId = it.key.uppercase().replace(Regex("""_\d+$"""), ""))
             }
     }
 

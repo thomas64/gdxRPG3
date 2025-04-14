@@ -5,13 +5,13 @@ import kotlin.math.roundToInt
 
 
 data class StatItem(
-    val id: StatItemId = StatItemId.INTELLIGENCE,   // Value will be replaced when constructed.
-    val name: String = "",
+    override val id: StatItemId = StatItemId.INTELLIGENCE,   // Value will be replaced when constructed.
+    override val name: String = "",
+    override val description: List<String> = emptyList(),
     var rank: Int = 0,
     private val maximum: Int = 0,                   // Constant value for maximum rank possible.
     private val upgrade: Float = 0f,                // Constant value for upgrading formula.
-    private val description: List<String> = emptyList()
-) : PersonalityItem {
+) : PersonalityItem() {
 
     var bonus: Int = 0
 

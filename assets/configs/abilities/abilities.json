@@ -1,9 +1,59 @@
 {
-  "strike_2"   : {"name": "Weak Strike", "ap": 2, "description": ["ToDO"]},
-  "strike_3"   : {"name": "Strike", "ap": 3},
-  "strike_4"   : {"name": "Strong Strike", "ap": 4, "sp": 2},
-  "bite_3"     : {"name": "Bite", "ap": 3},
-  "bite_4"     : {"name": "Bite", "ap": 4},
-  "body_slam_2": {"name": "Body Slam", "ap": 2},
-  "stagger"    : {"name": "Stagger", "ap": 6, "sp": 8, "is_hand_to_hand_only": true, "description": ["ToDO"]}
+  "strike_2"    : {
+    "name"       : "Weak Strike",
+    "ap"         : 2,
+    "description": []
+  },
+  "strike_3"    : {
+    "name"       : "Strike",
+    "ap"         : 3,
+    "description": [
+      "A basic physical attack with a weapon,",
+      "that deals damage to a single target."
+    ]
+  },
+  "strike_4"    : {
+    "name"       : "Strong Strike",
+    "ap"         : 4,
+    "sp"         : 2,
+    "description": []
+  },
+  "bite_3"      : {
+    "name"       : "Bite",
+    "ap"         : 3,
+    "description": []
+  },
+  "bite_4"      : {
+    "name"       : "Bite",
+    "ap"         : 4,
+    "description": []
+  },
+  "body_slam_2" : {
+    "name"       : "Body Slam",
+    "ap"         : 2,
+    "description": []
+  },
+  "stagger"     : {
+    "name"         : "Stagger",
+    "ap"           : 6,
+    "sp"           : 8,
+    "skill"        : "WARRIOR",
+    "weapon_skills": ["HAFTED", "POLE", "SWORD"],
+    "description"  : [
+      "A hand-to-hand attack with a weapon, that deals damage to a single target.",
+      "When successful, Stagger moves the target to the bottom of the turn order.",
+      "Each successful Stagger reduces the chance of the next Stagger by half."
+    ]
+  },
+  "double_throw": {
+    "name"         : "Double Throw",
+    "ap"           : 4,
+    "sp"           : 2,
+    "skill"        : "THIEF",
+    "weapon_skills": ["THROWN"],
+    "description"  : [
+      "A ranged attack with a thrown weapon, that deals damage to a single target.",
+      "Double Throw attacks twice, but both attacks have a lower chance to hit."
+    ]
+  }
 }

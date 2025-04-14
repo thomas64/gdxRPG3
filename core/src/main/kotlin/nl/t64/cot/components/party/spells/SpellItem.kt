@@ -9,8 +9,9 @@ private val LEARNING_COSTS = listOf(20, 8, 12, 16, 20, 24, 28, 32, 36, 40)
 private const val MAXIMUM = 10
 
 data class SpellItem(
-    val id: String = "",
-    val name: String = "",
+    override val id: SpellItemId = SpellItemId.NONE,
+    override val name: String = "",
+    override val description: List<String> = emptyList(),
     val school: SchoolType = SchoolType.UNKNOWN,
     val sort: Int = 0,
     var rank: Int = 0,
@@ -22,8 +23,7 @@ data class SpellItem(
     @JsonProperty("number_of_targets") private val numberOfTargets: NumberOfTargets = NumberOfTargets.ONE,
     private val target: Target = Target.EVERYONE,
     private val damage: Int = 0,
-    private val description: List<String> = emptyList()
-) : PersonalityItem {
+) : PersonalityItem() {
 
     private var bonus: Int = 0
 

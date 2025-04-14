@@ -21,6 +21,7 @@ private const val SUBTITLE_PAD_TOP = 10f
 
 internal class SkillsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
 
+    private val allSkills: List<SkillItem> get() = selectedHero.getAllSkillsAboveZero()
     private var deltaIndex = 0
 
     init {
@@ -34,12 +35,12 @@ internal class SkillsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
 
         container.add(scrollPane).height(CONTAINER_HEIGHT)
         container.background = Utils.createTopBorder()
-        container.addListener(ListenerKeyVertical { updateIndex(it, selectedHero.getAllSkillsAboveZero().size) })
+        container.addListener(ListenerKeyVertical { updateIndex(it, allSkills.size) })
     }
 
     override fun selectAnotherSlotWhenIndexBecameOutOfBounds() {
-        if (selectedIndex >= selectedHero.getAllSkillsAboveZero().size) {
-            selectedIndex = selectedHero.getAllSkillsAboveZero().size - 1
+        if (selectedIndex >= allSkills.size) {
+            selectedIndex = allSkills.size - 1
         }
     }
 
@@ -49,7 +50,6 @@ internal class SkillsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
     }
 
     override fun fillRows() {
-        val allSkills = selectedHero.getAllSkillsAboveZero()
         val communicationSkills = allSkills.filter { it.id.isCommunicationSkill() }
         val civilSkills = allSkills.filter { it.id.isCivilSkill() }
         val combatSkills = allSkills.filter { it.id.isCombatSkill() }

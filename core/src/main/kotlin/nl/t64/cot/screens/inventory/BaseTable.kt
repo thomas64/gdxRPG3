@@ -63,13 +63,9 @@ abstract class BaseTable(private val tooltip: PersonalityTooltip) : WindowSelect
     }
 
     override fun toggleTooltip() {
-        if (table.hasContent()) {
-            tooltip.setPosition(getTooltipPosition())
-            tooltip.toggle(null)
-            playSe(AudioEvent.SE_MENU_CONFIRM)
-        } else {
-            playSe(AudioEvent.SE_MENU_ERROR)
-        }
+        tooltip.setPosition(getTooltipPosition())
+        tooltip.toggle(null)
+        playSe(AudioEvent.SE_MENU_CONFIRM)
     }
 
     override fun toggleCompare() {
@@ -152,13 +148,6 @@ abstract class BaseTable(private val tooltip: PersonalityTooltip) : WindowSelect
         return Skin().apply {
             add("default", LabelStyle(font, Color.BLACK))
         }
-    }
-
-    private fun Table.hasContent(): Boolean {
-        // todo, deze voorwaarde klopt niet meer, maar werkt nog wel. dit stamt af van school bovenaan spells table.
-        val firstLineFirstNumber = children[2] as Label
-        return children.size > 4
-            || firstLineFirstNumber.text.isNotEmpty()
     }
 
 }

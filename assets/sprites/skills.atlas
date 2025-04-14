@@ -18,156 +18,149 @@ barbarian
   orig: 48, 48
   offset: 0, 0
   index: -1
-bite
+diplomat
   rotate: false
   xy: 96, 0
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-diplomat
+druid
   rotate: false
   xy: 144, 0
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-druid
+gambler
   rotate: false
   xy: 192, 0
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-gambler
+hafted
   rotate: false
   xy: 0, 48
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-hafted
+healer
   rotate: false
   xy: 48, 48
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-healer
+jester
   rotate: false
   xy: 96, 48
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-jester
+loremaster
   rotate: false
   xy: 144, 48
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-loremaster
+mechanic
   rotate: false
   xy: 192, 48
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-mechanic
+merchant
   rotate: false
   xy: 0, 96
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-merchant
+missile
   rotate: false
   xy: 48, 96
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-missile
+pole
   rotate: false
   xy: 96, 96
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-pole
+ranger
   rotate: false
   xy: 144, 96
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-ranger
+scholar
   rotate: false
   xy: 192, 96
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-scholar
+shield
   rotate: false
   xy: 0, 144
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-shield
+stealth
   rotate: false
   xy: 48, 144
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-stealth
+sword
   rotate: false
   xy: 96, 144
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-sword
+thief
   rotate: false
   xy: 144, 144
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-thief
+thrown
   rotate: false
   xy: 192, 144
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-thrown
+troubadour
   rotate: false
   xy: 0, 192
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-troubadour
+warrior
   rotate: false
   xy: 48, 192
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-warrior
-  rotate: false
-  xy: 96, 192
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: -1
 wizard
   rotate: false
-  xy: 144, 192
+  xy: 96, 192
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
