@@ -66,11 +66,11 @@ data class InventoryItem(
     @JsonProperty("quick_switch")
     private val quickSwitch: Boolean = false,
     @JsonProperty("spell_boost")
-    private val spellBoost: Boolean = false
+    private val spellBoost: Boolean = false,
+    var isSoldToShop: Boolean = false
 ) {
-
-    val isStackable: Boolean get() = group.isStackable()
-    val isShield: Boolean get() = group == InventoryGroup.SHIELD
+    val isStackable: Boolean = group.isStackable()
+    val isShield: Boolean = group == InventoryGroup.SHIELD
 
     fun createCopy(amount: Int): InventoryItem {
         return copy(amount = amount)
@@ -227,9 +227,8 @@ data class InventoryItem(
     }
 
     fun getBuyPricePiece(totalMerchant: Int): Int {
-        return (price - ((price / 100f) * totalMerchant)).roundToInt().run {
-            takeUnless { this == 0 } ?: 1
-        }
+        if (isSoldToShop) return getSellValuePiece(totalMerchant)
+        return (price - ((price / 100f) * totalMerchant)).roundToInt().coerceAtLeast(1)
     }
 
     fun getSellValueTotal(totalMerchant: Int): Int {

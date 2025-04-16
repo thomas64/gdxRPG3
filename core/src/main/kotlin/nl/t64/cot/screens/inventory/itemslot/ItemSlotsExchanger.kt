@@ -55,6 +55,7 @@ class ItemSlotsExchanger {
         if (gameData.inventory.hasEnoughOfItem("gold", totalPrice)) {
             handlePossibleExchange()
             if (isSuccessfullyExchanged) {
+                draggedItem.inventoryItem.isSoldToShop = false
                 InventoryUtils.getScreenUI().getInventorySlotsTable().removeResource("gold", totalPrice)
             }
         } else {
@@ -77,6 +78,7 @@ class ItemSlotsExchanger {
         if (gameData.inventory.hasRoomForResource("gold")) {
             handlePossibleExchange()
             if (isSuccessfullyExchanged) {
+                draggedItem.inventoryItem.isSoldToShop = true
                 val gold = InventoryDatabase.createInventoryItem("gold", totalValue)
                 InventoryUtils.getScreenUI().getInventorySlotsTable().addResource(gold)
             }
@@ -89,9 +91,9 @@ class ItemSlotsExchanger {
     }
 
     private fun handlePossibleExchange() {
-        targetSlot.getPossibleInventoryImage()?.let {
-            putItemInFilledSlot(it)
-        } ?: putItemInEmptySlot()
+        targetSlot.getPossibleInventoryImage()
+            ?.let { putItemInFilledSlot(it) }
+            ?: putItemInEmptySlot()
     }
 
     private fun putItemInFilledSlot(itemAtTarget: InventoryImage) {
@@ -138,27 +140,31 @@ class ItemSlotsExchanger {
         }
     }
 
-    private fun isShopPurchase(): Boolean =
-        sourceSlot.filterGroup == InventoryGroup.SHOP_ITEM
-                && targetSlot.filterGroup != InventoryGroup.SHOP_ITEM
+    private fun isShopPurchase(): Boolean {
+        return (sourceSlot.filterGroup == InventoryGroup.SHOP_ITEM
+            && targetSlot.filterGroup != InventoryGroup.SHOP_ITEM)
+    }
 
-    private fun isShopBarter(): Boolean =
-        sourceSlot.filterGroup != InventoryGroup.SHOP_ITEM
-                && targetSlot.filterGroup == InventoryGroup.SHOP_ITEM
+    private fun isShopBarter(): Boolean {
+        return (sourceSlot.filterGroup != InventoryGroup.SHOP_ITEM
+            && targetSlot.filterGroup == InventoryGroup.SHOP_ITEM)
+    }
 
     private fun doTargetAndSourceAcceptEachOther(): Boolean {
         return !(sourceSlot.filterGroup == InventoryGroup.SHOP_ITEM
-                || targetSlot.filterGroup == InventoryGroup.SHOP_ITEM)
-                && targetSlot.doesAcceptItem(draggedItem)
-                && sourceSlot.doesAcceptItem(targetSlot.getCertainInventoryImage())
+            || targetSlot.filterGroup == InventoryGroup.SHOP_ITEM)
+            && targetSlot.doesAcceptItem(draggedItem)
+            && sourceSlot.doesAcceptItem(targetSlot.getCertainInventoryImage())
     }
 
-    private fun isEquipingOrDequiping(): Boolean =
-        (!sourceSlot.isOnHero() && targetSlot.isOnHero())
-                || (sourceSlot.isOnHero() && !targetSlot.isOnHero())
+    private fun isEquipingOrDequiping(): Boolean {
+        return ((!sourceSlot.isOnHero() && targetSlot.isOnHero())
+            || (sourceSlot.isOnHero() && !targetSlot.isOnHero()))
+    }
 
-    private fun isSameSlotOrBoxOrStorage(): Boolean =
-        targetSlot == sourceSlot
-                || targetSlot.filterGroup == sourceSlot.filterGroup
+    private fun isSameSlotOrBoxOrStorage(): Boolean {
+        return (targetSlot == sourceSlot
+            || targetSlot.filterGroup == sourceSlot.filterGroup)
+    }
 
 }
