@@ -169,8 +169,14 @@
       "6": {"face": "mozes", "name": "Mozes", "text": [". . ."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "honeywood_farm_back_door"       : {
+  "honeywood_farm_back_door_before": {
     "name"   : "Miriel",
+    "phrases": {
+      "1": {"text": ["Please don't go through the back door by yourself without permission. It's private property."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "honeywood_farm_back_door_after" : {
+    "name"   : "Mr. Isembert",
     "phrases": {
       "1": {"text": ["Please don't go through the back door by yourself without permission. It's private property."], "choices": [{"command": "EXIT"}]}
     }

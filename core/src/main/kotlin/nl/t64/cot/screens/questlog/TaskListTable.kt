@@ -26,6 +26,7 @@ private const val PAD_LEFT = 20f
 internal class TaskListTable {
 
     private val taskListFont: BitmapFont = resourceManager.getTrueTypeAsset(TEXT_FONT, TEXT_SIZE)
+        .apply { data.markupEnabled = true }
     private val taskList: List<QuestTask> = createList()
     private val scrollPane: ScrollPane = fillScrollPane()
     val container: Table = fillContainer()

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="24" tileheight="24" infinite="0" nextlayerid="18" nextobjectid="90">
+<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="24" tileheight="24" infinite="0" nextlayerid="18" nextobjectid="93">
  <properties>
   <property name="bgm" value="bgm_house"/>
   <property name="step_sound" value="sand"/>
@@ -187,7 +187,12 @@
   </object>
   <object id="66" name="woman05" type="inv" x="816" y="552" width="6" height="6">
    <properties>
-    <property name="conversation" value="honeywood_farm_back_door"/>
+    <property name="conversation" value="honeywood_farm_back_door_before"/>
+   </properties>
+  </object>
+  <object id="92" name="oldman02" type="inv" x="840" y="552" width="6" height="6">
+   <properties>
+    <property name="conversation" value="honeywood_farm_back_door_after"/>
    </properties>
   </object>
   <object id="72" name="woman05" x="288" y="216" width="48" height="24">
@@ -211,7 +216,7 @@
     <property name="direction" value="east"/>
    </properties>
   </object>
-  <object id="70" name="oldman02" x="432" y="372" width="48" height="24">
+  <object id="70" name="oldman02" x="624" y="372" width="48" height="24">
    <properties>
     <property name="condition" value="_tn_9_q_quest_luana_before_10, _time_after_11:00"/>
     <property name="conversation" value="mr_isembert_after_11_after_loss"/>
@@ -252,10 +257,15 @@
  <objectgroup color="#ffff00" id="16" name="quest">
   <object id="63" type="blocker" x="912" y="522" width="48" height="6">
    <properties>
+    <property name="condition" value="_time_after_11:00, alone_in_party"/>
+   </properties>
+  </object>
+  <object id="90" type="blocker" x="912" y="522" width="48" height="6">
+   <properties>
     <property name="condition" value="_time_before_10:30"/>
    </properties>
   </object>
-  <object id="74" name="quest_honeywood_elder" type="check" x="432" y="360" width="48" height="36">
+  <object id="74" name="quest_honeywood_elder" type="check" x="624" y="360" width="48" height="36">
    <properties>
     <property name="condition" value="_tn_9_q_quest_luana_before_10, _time_after_11:00, alone_in_party"/>
     <property name="fail" value="7"/>
@@ -263,7 +273,8 @@
   </object>
  </objectgroup>
  <objectgroup color="#ff55ff" id="17" name="event">
-  <object id="65" name="event_honeywood_farm_back_door" type="discover" x="912" y="516" width="48" height="6"/>
+  <object id="65" name="event_honeywood_farm_back_door_after" type="discover" x="912" y="516" width="48" height="6"/>
+  <object id="91" name="event_honeywood_farm_back_door_before" type="discover" x="912" y="516" width="48" height="6"/>
   <object id="68" name="guide_event_party_member" type="discover" x="192" y="432" width="96" height="72"/>
  </objectgroup>
  <objectgroup color="#ff00ff" id="15" name="cutscene">
