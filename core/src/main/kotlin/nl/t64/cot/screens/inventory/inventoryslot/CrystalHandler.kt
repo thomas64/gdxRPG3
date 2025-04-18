@@ -13,9 +13,9 @@ import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
+import nl.t64.cot.screens.dialog.QuestionDialog
 import nl.t64.cot.screens.inventory.InventoryScreen
 import nl.t64.cot.screens.inventory.InventoryUtils
-import nl.t64.cot.screens.menu.QuestionDialog
 import nl.t64.cot.sfx.TransitionImage
 import nl.t64.cot.sfx.TransitionPurpose
 

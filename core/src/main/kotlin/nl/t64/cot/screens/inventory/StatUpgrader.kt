@@ -5,8 +5,8 @@ import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.stopAllSe
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.stats.StatItem
+import nl.t64.cot.screens.dialog.QuestionDialog
 import nl.t64.cot.screens.inventory.messagedialog.MessageDialog
-import nl.t64.cot.screens.menu.QuestionDialog
 
 
 class StatUpgrader private constructor(

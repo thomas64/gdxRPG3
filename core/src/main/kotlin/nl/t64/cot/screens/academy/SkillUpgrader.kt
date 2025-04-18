@@ -7,9 +7,9 @@ import nl.t64.cot.audio.stopAllSe
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.skills.SkillItem
 import nl.t64.cot.components.party.skills.SkillItemId
+import nl.t64.cot.screens.dialog.QuestionDialog
 import nl.t64.cot.screens.inventory.InventoryUtils
 import nl.t64.cot.screens.inventory.messagedialog.MessageDialog
-import nl.t64.cot.screens.menu.QuestionDialog
 
 
 class SkillUpgrader private constructor(

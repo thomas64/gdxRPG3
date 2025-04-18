@@ -1,47 +1,40 @@
-package nl.t64.cot.screens.menu
+package nl.t64.cot.screens.dialog
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog
-import com.badlogic.gdx.scenes.scene2d.ui.Label
-import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
+import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle
-import com.badlogic.gdx.utils.Align
 import nl.t64.cot.Utils
-import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.audio.stopAllSe
 import nl.t64.cot.constants.Constant
+import nl.t64.cot.screens.menu.ListenerKeyCancel
+import nl.t64.cot.screens.menu.ListenerKeyHorizontal
 import nl.t64.cot.toDrawable
 
-
-private const val FONT = "fonts/spectral_regular_24.ttf"
-private const val FONT_SIZE = 24
-private const val LINE_HEIGHT = 26f
 
 private const val DIALOG_YES = "Yes"
 private const val DIALOG_NO = "No"
 
-private const val DIALOG_INIT_HEIGHT = 150L
 private const val DIALOG_PAD_TOP = 20f
 private const val DIALOG_PAD_BOTTOM = 40f
-private const val DIALOG_PAD_LEFT = 100f
 private const val BUTTON_SPACE_RIGHT = 100f
 private const val BUTTON_WIDTH = 130f
 
 private const val NUMBER_OF_ITEMS = 2
 private const val EXIT_INDEX = 1
 
-class QuestionDialog(
-    private val message: String,
+abstract class BaseQuestionDialog(
+    private val dialogHeight: Float,
+    private val content: Table,
     private val yesFunction: () -> Unit
 ) {
-    private val dialogHeight: Float = ((message.lines().count() * FONT_SIZE) + DIALOG_INIT_HEIGHT).toFloat()
-    private val font: BitmapFont = createFont()
-    private val dialog: Dialog = createDialog()
+    private val font: BitmapFont = FontSpectralRegular24Provider.font
+    protected val dialog: Dialog = createDialog()
     private var selectedIndex = 0
 
     fun show(stage: Stage, event: AudioEvent, startIndex: Int = EXIT_INDEX, confirmDelay: Float = 0f) {
@@ -54,12 +47,6 @@ class QuestionDialog(
         updateIndex(startIndex)
         applyListeners(startIndex)
         Utils.runWithDelay(confirmDelay) { applyConfirmListener() }
-    }
-
-    fun setLeftAlignment() {
-        (dialog.contentTable.getChild(0) as Label).setAlignment(Align.left)
-        dialog.contentTable.padLeft(DIALOG_PAD_LEFT)
-        dialog.background.minWidth = 0f
     }
 
     private fun updateIndex(newIndex: Int) {
@@ -89,35 +76,17 @@ class QuestionDialog(
     }
 
     private fun setAllTextButtonsToBlack() {
-        dialog.buttonTable.children.forEach { (it as TextButton).style.fontColor = Color.BLACK }
-        dialog.buttonTable.children.forEach { (it as TextButton).label.style.background = Color.CLEAR.toDrawable() }
+        dialog.buttonTable.children.forEach {
+            it as TextButton
+            it.style.fontColor = Color.BLACK
+            it.label.style.background = Color.CLEAR.toDrawable()
+        }
     }
 
     private fun setCurrentTextButtonToRed() {
-        (dialog.buttonTable.getChild(selectedIndex) as TextButton).style.fontColor = Constant.DARK_RED
-        (dialog.buttonTable.getChild(selectedIndex) as TextButton).label.style.background = Utils.createFullBorderBlack()
-    }
-
-    private fun createDialog(): Dialog {
-        val label = Label("[BLACK]$message", LabelStyle(font, null))
-        label.setAlignment(Align.center)
-
-        val buttonStyle = TextButtonStyle()
-        buttonStyle.font = font
-        buttonStyle.fontColor = Color.BLACK
-
-        val yesButton = TextButton(DIALOG_YES, TextButtonStyle(buttonStyle))
-        val noButton = TextButton(DIALOG_NO, TextButtonStyle(buttonStyle))
-
-        return Utils.createParchmentDialog(font).apply {
-            padTop(DIALOG_PAD_TOP)
-            padBottom(DIALOG_PAD_BOTTOM)
-            contentTable.defaults().width(label.prefWidth + BUTTON_SPACE_RIGHT)
-            background.minHeight = dialogHeight
-            contentTable.add(label)
-            buttonTable.add(yesButton).width(BUTTON_WIDTH)
-            buttonTable.add(noButton).width(BUTTON_WIDTH)
-        }
+        val content = dialog.buttonTable.getChild(selectedIndex) as TextButton
+        content.style.fontColor = Constant.DARK_RED
+        content.label.style.background = Utils.createFullBorderBlack()
     }
 
     private fun applyListeners(startIndex: Int) {
@@ -129,15 +98,31 @@ class QuestionDialog(
     }
 
     private fun applyConfirmListener() {
-        val listenerKeyConfirm = ListenerKeyConfirmDialog { selectDialogItem() }
+        val listenerKeyConfirm = ListenerKeyConfirm { selectDialogItem() }
         dialog.addListener(listenerKeyConfirm)
     }
 
-    private fun createFont(): BitmapFont {
-        return resourceManager.getTrueTypeAsset(FONT, FONT_SIZE).apply {
-            data.setLineHeight(LINE_HEIGHT)
-            data.markupEnabled = true
+    private fun createDialog(): Dialog {
+        val buttons = createButtons()
+        return Utils.createParchmentDialog(font).apply {
+            padTop(DIALOG_PAD_TOP)
+            padBottom(DIALOG_PAD_BOTTOM)
+            contentTable.defaults().width(content.prefWidth + BUTTON_SPACE_RIGHT)
+            background.minHeight = dialogHeight
+            contentTable.add(content)
+            buttonTable.add(buttons.first).width(BUTTON_WIDTH)
+            buttonTable.add(buttons.second).width(BUTTON_WIDTH)
         }
+    }
+
+    private fun createButtons(): Pair<TextButton, TextButton> {
+        val buttonStyle = TextButtonStyle()
+        buttonStyle.font = font
+        buttonStyle.fontColor = Color.BLACK
+
+        val yesButton = TextButton(DIALOG_YES, TextButtonStyle(buttonStyle))
+        val noButton = TextButton(DIALOG_NO, TextButtonStyle(buttonStyle))
+        return Pair(yesButton, noButton)
     }
 
 }

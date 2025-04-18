@@ -26,6 +26,7 @@ import nl.t64.cot.components.cutscene.CutsceneId
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.gamestate.INVALID_PROFILE_VIEW
+import nl.t64.cot.screens.dialog.QuestionDialog
 import nl.t64.cot.toDrawable
 import kotlin.concurrent.thread
 

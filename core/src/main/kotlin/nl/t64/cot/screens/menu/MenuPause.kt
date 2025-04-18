@@ -20,6 +20,7 @@ import nl.t64.cot.audio.pauseAllBg
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
+import nl.t64.cot.screens.dialog.QuestionDialog
 
 
 private const val MENU_ITEM_CONTINUE = "Continue"
