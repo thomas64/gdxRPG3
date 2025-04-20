@@ -53,7 +53,7 @@ internal class WorldScreenListener(
             Constant.KEYCODE_START, Input.Keys.ESCAPE,
             Constant.KEYCODE_TOP, Input.Keys.I,
             Constant.KEYCODE_LEFT, Input.Keys.L,
-            Constant.KEYCODE_L3, Input.Keys.H -> doBeforeLoadScreen.invoke()
+            Constant.KEYCODE_L3, Input.Keys.T -> doBeforeLoadScreen.invoke()
         }
 
         when (keycode) {
@@ -63,7 +63,7 @@ internal class WorldScreenListener(
             Constant.KEYCODE_START, Input.Keys.ESCAPE -> MenuPause.load()
             Constant.KEYCODE_TOP, Input.Keys.I -> InventoryScreen.load()
             Constant.KEYCODE_LEFT, Input.Keys.L -> QuestLogScreen.load()
-            Constant.KEYCODE_L3, Input.Keys.H -> HelpScreen.load()
+            Constant.KEYCODE_L3, Input.Keys.T -> HelpScreen.load()
 
         }
 

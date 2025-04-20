@@ -6,7 +6,7 @@
   "battle0006"                 : {"battlers": [{"id": "blue_bat", "amount": 2}], "background": "cave"},
   "battle0007"                 : {"battlers": [{"id": "blue_bat", "amount": 2}], "background": "cave"},
   "battle0008"                 : {"battlers": [{"id": "blue_bat", "amount": 3}], "background": "cave"},
-  "quest_orc_guards"           : {"battlers": [{"id": "orc_sergeant", "amount": 2}], "background": "cave", "isEscapable": false},
+  "quest_orc_guards"           : {"battlers": [{"id": "orc_sergeant", "amount": 2}], "background": "cave"},
   "battle0009"                 : {"battlers": [{"id": "green_slime", "amount": 1}], "background": "forest_ardor"},
   "battle0010"                 : {"battlers": [{"id": "green_slime", "amount": 2}], "background": "forest_ardor"},
   "battle0011"                 : {"battlers": [{"id": "green_slime", "amount": 2}, {"id": "blue_bat", "amount": 1}], "background": "forest_ardor"},

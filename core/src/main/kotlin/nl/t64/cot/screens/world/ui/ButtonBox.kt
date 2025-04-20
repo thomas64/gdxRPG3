@@ -42,7 +42,7 @@ internal class ButtonBox {
                 "Quest log" to "[ X ]",
                 "Map" to "[ Select ]",
                 "Party" to "[ R-Stick ]",
-                "Manual" to "[ L-Stick ]"
+                "Tutorial" to "[ L-Stick ]"
             ).also { extraMargin = GAMEPAD_EXTRA_MARGIN }
         } else {
             listOf(
@@ -51,7 +51,7 @@ internal class ButtonBox {
                 "Quest log" to "[ L ]",
                 "Map" to "[ M ]",
                 "Party" to "[ P ]",
-                "Manual" to "[ H ]"
+                "Tutorial" to "[ T ]"
             ).also { extraMargin = 0f }
         }
 

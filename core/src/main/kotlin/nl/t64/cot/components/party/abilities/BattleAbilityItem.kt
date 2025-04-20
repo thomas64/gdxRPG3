@@ -100,7 +100,7 @@ abstract class BattleAbilityItem(
 
         val weaponTriangle = when {
             hasWeaponTriangleAdvantage() -> 10
-            hasWeaponTriangleDisadvantage() -> -10
+            hasWeaponTriangleDisadvantage() -> -5
             else -> 0
         }
 
@@ -119,13 +119,15 @@ abstract class BattleAbilityItem(
     }
 
     protected fun calculateCriticalDamage(): Int {
-        return (calculateDamage() * 1.51f).roundToInt()
+        return (calculateDamage() * 1.75f).roundToInt()
     }
 
     fun calculateDamage(): Int {
         val attack: Int = (attacker.character.getCalculatedTotalDamage() * id.multiplier).toInt()
         val protection: Int = target.character.getCalculatedTotalProtection()
-        return (attack - protection).coerceAtLeast(1)
+        val damage: Int = (attack - protection)
+        val weaponTriangle: Float = if (hasWeaponTriangleDisadvantage()) 2f else 1f
+        return (damage / weaponTriangle).toInt().coerceAtLeast(1)
     }
 
     protected fun possibleCreateGrayName(): AbilityItem {

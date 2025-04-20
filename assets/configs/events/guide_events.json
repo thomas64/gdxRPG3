@@ -11,7 +11,7 @@
     "text": [
       "The clock to the right shows the current time.",
       "When the clock reaches 19:30, the day ends.",
-      "The time flashes red when it's almost night."
+      "The time flashes [FIREBRICK]red[BLACK] when it's almost night."
     ]
   },
   "guide_event_inventory"            : {
@@ -40,8 +40,8 @@
       "Each turn, you get a certain amount of Action Points (AP).",
       "With these AP, you can move, attack, or do other actions.",
       "",
-      "Each enemy has an advantage and a disadvantage to certain weapon types.",
-      "Try to use the right weapon type against the enemy's disadvantage."
+      "Each enemy has an [BLUE]advantage[BLACK] and a [FIREBRICK]disadvantage[BLACK] to certain weapon types.",
+      "Try to use the [BLUE]right weapon type[BLACK] against the enemy's [FIREBRICK]disadvantage[BLACK]."
     ]
   },
   "guide_event_quest"                : {
@@ -109,7 +109,7 @@
       "Access your attributes by pressing the %inventory%.",
       "Here you can utilize your XP to improve these attributes.",
       "Choose an attribute and press the %action% to level it up.",
-      "A purple arrow indicates that you have enough XP to level up that attribute."
+      "A [PURPLE]purple arrow[BLACK] indicates that you have enough XP to level up that attribute."
     ]
   },
   "guide_event_fast"                 : {

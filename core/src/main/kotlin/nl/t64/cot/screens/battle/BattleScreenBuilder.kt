@@ -244,8 +244,8 @@ class BattleScreenBuilder {
         return createStyledEmptyList<String>().fillWithHeroes(heroes).toHeroTable()
     }
 
-    fun createButtonTableAction(currentParticipant: Participant): Table {
-        return createStyledEmptyList<String>().fillWithActions(currentParticipant).toActionTable()
+    fun createButtonTableAction(currentParticipant: Participant, areEnemiesInRange: Boolean): Table {
+        return createStyledEmptyList<String>().fillWithActions(currentParticipant, areEnemiesInRange).toActionTable()
     }
 
     fun createButtonTablePreviewAttack(currentParticipant: Participant): Table {
@@ -299,10 +299,12 @@ class BattleScreenBuilder {
         return this
     }
 
-    private fun GdxList<String>.fillWithActions(currentParticipant: Participant): GdxList<String> {
+    private fun GdxList<String>.fillWithActions(currentParticipant: Participant,
+                                                areEnemiesInRange: Boolean): GdxList<String> {
+        val attackAp: Int = if (areEnemiesInRange) 2 else 99
         val maxAp: Int = currentParticipant.maximumAP
         val actions: List<Pair<String, Int>> = listOf(
-            "Attack (X AP)" to 2,
+            "Attack (X AP, X SP)" to attackAp,
             "Move (X AP)" to 1,
             "Potion (3 AP)" to 3,
             "Switch equipment (3 AP)" to 3,
@@ -318,6 +320,9 @@ class BattleScreenBuilder {
         }
         this.setItems(*actionStrings.toTypedArray())
 
+        if (!areEnemiesInRange) {
+            buttonTableActionIndex = 1
+        }
         if (currentParticipant.currentAP <= 1
             || this.items[buttonTableActionIndex].startsWith("[GRAY]")
         ) {

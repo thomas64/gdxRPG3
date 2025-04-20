@@ -77,7 +77,7 @@
     ],
     "skills"   : {
       "warrior": 8,
-      "hafted" : 10,
+      "hafted" : 14,
       "shield" : 8
     },
     "spells"   : {
@@ -109,7 +109,7 @@
     "skills"   : {
       "warrior": 10,
       "wizard" : 10,
-      "hafted" : 10,
+      "hafted" : 25,
       "missile": 10,
       "sword"  : 10,
       "shield" : 10

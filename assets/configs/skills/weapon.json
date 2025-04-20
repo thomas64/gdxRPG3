@@ -13,7 +13,8 @@
       "  certain weaponless enemies.",
       "  When having advantage, 'Chance to hit' is increased by +10%, and",
       "  'Critical hit' is increased by +20%.",
-      "  And vice versa when at a disadvantage."
+      "  When having disadvantage, 'Chance to hit' is decreased by -5%,",
+      "  'Critical hit' is decreased by -20% and 'Damage' is halved."
     ]
   },
   "missile": {
@@ -39,7 +40,8 @@
       "  certain weaponless enemies.",
       "  When having advantage, 'Chance to hit' is increased by +10%, and",
       "  'Critical hit' is increased by +20%.",
-      "  And vice versa when at a disadvantage."
+      "  When having disadvantage, 'Chance to hit' is decreased by -5%,",
+      "  'Critical hit' is decreased by -20% and 'Damage' is halved."
     ]
   },
   "shield" : {
@@ -65,7 +67,8 @@
       "  certain weaponless enemies.",
       "  When having advantage, 'Chance to hit' is increased by +10%, and",
       "  'Critical hit' is increased by +20%.",
-      "  And vice versa when at a disadvantage."
+      "  When having disadvantage, 'Chance to hit' is decreased by -5%,",
+      "  'Critical hit' is decreased by -20% and 'Damage' is halved."
     ]
   },
   "thrown" : {

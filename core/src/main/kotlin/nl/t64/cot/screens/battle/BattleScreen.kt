@@ -416,7 +416,8 @@ class BattleScreen : Screen {
     private fun setupActionTable() {
         battleField.cancelMovement(currentParticipant)
         battleField.resetStartingSpace()
-        buttonTableAction = screenBuilder.createButtonTableAction(currentParticipant)
+        val areEnemiesInRange: Boolean = battleField.getTargetableEnemiesFor(currentParticipant).isNotEmpty()
+        buttonTableAction = screenBuilder.createButtonTableAction(currentParticipant, areEnemiesInRange)
         stage.addActor(buttonTableAction)
         buttonTableAction.addListener(listenerAction)
         stage.keyboardFocus = buttonTableAction.children.last()

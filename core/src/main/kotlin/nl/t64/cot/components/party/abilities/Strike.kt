@@ -62,10 +62,6 @@ open class Strike(
 
             $critMessage$name did $damageDone damage.
             """.trimIndent())
-
-        if (attacker.isHero && damage <= 1) {
-            messages.add("${target.character.name} ${target.character.gender} protection is too strong!")
-        }
     }
 
 }
