@@ -25,11 +25,13 @@ class DoubleThrow(
             """
                 $this
 
-                Target: ${target.character.name}
                 Weapon: ${it.name}
                 ${it.getDurabilityText()}
-                ${it.getRangeText()}
+
+                Target: ${target.character.name}
+                Skill: ${it.skill?.title}
                 ${possibleCreateEffectiveMessage()}
+
                 Chance to hit: ${calculateHitPercentageCapped()}%
                 Damage: ${calculateDamage()} (x2)
                 Critical chance: ${calculateCriticalHitPercentage()}%

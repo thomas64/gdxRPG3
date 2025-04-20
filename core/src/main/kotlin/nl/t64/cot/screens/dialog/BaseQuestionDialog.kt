@@ -24,6 +24,7 @@ private const val DIALOG_PAD_TOP = 20f
 private const val DIALOG_PAD_BOTTOM = 40f
 private const val BUTTON_SPACE_RIGHT = 100f
 private const val BUTTON_WIDTH = 130f
+private const val BUTTONS_PAD_TOP = 15f
 
 private const val NUMBER_OF_ITEMS = 2
 private const val EXIT_INDEX = 1
@@ -112,6 +113,7 @@ abstract class BaseQuestionDialog(
             contentTable.add(content)
             buttonTable.add(buttons.first).width(BUTTON_WIDTH)
             buttonTable.add(buttons.second).width(BUTTON_WIDTH)
+            buttonTable.padTop(BUTTONS_PAD_TOP)
         }
     }
 

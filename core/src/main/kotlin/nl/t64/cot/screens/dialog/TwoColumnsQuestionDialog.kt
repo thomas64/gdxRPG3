@@ -35,9 +35,11 @@ private fun Triple<String, String, String>.toDialogTable(): Table {
     label3.setAlignment(Align.center)
 
     return Table().apply {
-        add(label1)
-        add(label2).row()
-        add(label3).colspan(2)
+        padTop(20f)
+        padLeft(15f)
+        add(label1).top()
+        add(label2).top().row()
+        add(label3).colspan(2).padTop(-10f)
     }
 }
 

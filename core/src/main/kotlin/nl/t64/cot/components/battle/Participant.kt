@@ -103,6 +103,10 @@ class Participant(
         return ArrayDeque(listOf("${character.name} ended ${character.gender} turn."))
     }
 
+    fun getCurrentWeapon(): InventoryItem? {
+        return character.getInventoryItem(InventoryGroup.WEAPON)
+    }
+
     private fun createBattleAbilityItemFrom(abilityItem: AbilityItem): BattleAbilityItem {
         return when (abilityItem.id) {
             AbilityItemId.BITE_3,
@@ -114,10 +118,6 @@ class Participant(
             AbilityItemId.STAGGER -> Stagger(abilityItem, this)
             AbilityItemId.DOUBLE_THROW -> DoubleThrow(abilityItem, this)
         }
-    }
-
-    private fun getCurrentWeapon(): InventoryItem? {
-        return character.getInventoryItem(InventoryGroup.WEAPON)
     }
 
 }

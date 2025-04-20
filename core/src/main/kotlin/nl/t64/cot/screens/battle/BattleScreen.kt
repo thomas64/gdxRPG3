@@ -26,11 +26,11 @@ import nl.t64.cot.components.party.inventory.InventoryItem
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.dialog.QuestionDialog
+import nl.t64.cot.screens.dialog.TwoColumnsQuestionDialog
 import nl.t64.cot.screens.inventory.InventoryScreen
 import nl.t64.cot.screens.inventory.messagedialog.MessageDialog
 import nl.t64.cot.screens.menu.MenuPause
 import nl.t64.cot.screens.world.Camera
-import kotlin.collections.List
 import kotlin.concurrent.thread
 import com.badlogic.gdx.scenes.scene2d.ui.List as GdxList
 
@@ -569,14 +569,19 @@ class BattleScreen : Screen {
     }
 
     private fun showConfirmWeaponDialog(selectedWeapon: BattleWeaponItem) {
-        val weaponAction = WeaponAction(currentParticipant, selectedWeapon)
+        val onlyEnemies = turnManager.participants.filter { !it.isHero }
+        val weaponAction = WeaponAction(currentParticipant, selectedWeapon, onlyEnemies)
         weaponAction.isUnableToEquip()?.let { message ->
             MessageDialog(message).show(stage, AudioEvent.SE_MENU_ERROR)
             return
         }
         val message = weaponAction.createConfirmationMessage()
-        val dialog = QuestionDialog(message) { weaponConfirmed(weaponAction) }
-        dialog.setLeftAlignment()
+        val dialog = if (message.second.isBlank() && message.third.isBlank()) {
+            QuestionDialog(message.first) { weaponConfirmed(weaponAction) }
+                .apply { setLeftAlignment() }
+        } else {
+            TwoColumnsQuestionDialog(message) { weaponConfirmed(weaponAction) }
+        }
         dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0, 0.5f)
     }
 

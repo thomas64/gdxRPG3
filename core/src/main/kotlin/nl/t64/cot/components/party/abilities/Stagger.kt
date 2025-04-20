@@ -33,11 +33,13 @@ class Stagger(
                 $this
                 Hand-to-hand only!
 
-                Target: ${target.character.name}
                 Weapon: ${it.name}
                 ${it.getDurabilityText()}
-                ${it.getRangeText()}
+
+                Target: ${target.character.name}
+                Skill: ${it.skill?.title}
                 ${possibleCreateEffectiveMessage()}
+
                 Chance to hit: ${calculateHitPercentageCapped()}%
                 Damage: ${calculateDamage()}
                 Critical chance: ${calculateCriticalHitPercentage()}%
@@ -70,9 +72,10 @@ class Stagger(
         val critMessage: String = if (isCriticalHit) "A critical hit!  " else ""
         messages.add("""
             ${possibleAddEffectiveMessage()}
+
             $critMessage$name did $damageDone damage.
             $staggerMessage
-            """.trimIndent().trimMargin())
+            """.trimIndent())
     }
 
     private fun handleStagger(): String {

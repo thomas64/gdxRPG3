@@ -27,11 +27,13 @@ open class Strike(
             """
                 $this
 
-                Target: ${target.character.name}
                 Weapon: ${it.name}
                 ${it.getDurabilityText()}
-                ${it.getRangeText()}
+
+                Target: ${target.character.name}
+                Skill: ${it.skill?.title}
                 ${possibleCreateEffectiveMessage()}
+
                 Chance to hit: ${calculateHitPercentageCapped()}%
                 Damage: ${calculateDamage()}
                 Critical chance: ${calculateCriticalHitPercentage()}%
@@ -57,8 +59,9 @@ open class Strike(
         val critMessage: String = if (isCriticalHit) "A critical hit!  " else ""
         messages.add("""
             ${possibleAddEffectiveMessage()}
+
             $critMessage$name did $damageDone damage.
-            """.trimIndent().trimMargin())
+            """.trimIndent())
 
         if (attacker.isHero && damage <= 1) {
             messages.add("${target.character.name} ${target.character.gender} protection is too strong!")
