@@ -16,8 +16,8 @@ import nl.t64.cot.components.quest.QuestState
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.ParchmentScreen
+import nl.t64.cot.screens.dialog.MessageDialog
 import nl.t64.cot.screens.inventory.InventoryScreen
-import nl.t64.cot.screens.inventory.messagedialog.MessageDialog
 
 
 private const val TITLE_QUESTS = "   Quests"

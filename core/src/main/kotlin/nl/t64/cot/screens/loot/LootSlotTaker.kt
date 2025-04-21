@@ -4,9 +4,9 @@ import nl.t64.cot.Utils.gameData
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.party.inventory.InventoryItem
+import nl.t64.cot.screens.dialog.MessageDialog
 import nl.t64.cot.screens.inventory.itemslot.ItemSlot
 import nl.t64.cot.screens.inventory.itemslot.ItemSlotSelector
-import nl.t64.cot.screens.inventory.messagedialog.MessageDialog
 
 
 internal class LootSlotTaker(

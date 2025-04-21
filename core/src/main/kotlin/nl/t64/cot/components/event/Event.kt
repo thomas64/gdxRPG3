@@ -9,7 +9,7 @@ import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playBgm
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.condition.ConditionDatabase
-import nl.t64.cot.screens.inventory.messagedialog.MessageDialog
+import nl.t64.cot.screens.dialog.MessageDialog
 
 
 class Event(

@@ -1,4 +1,4 @@
-package nl.t64.cot.screens.inventory.messagedialog
+package nl.t64.cot.screens.dialog
 
 import com.badlogic.gdx.Input
 import com.badlogic.gdx.scenes.scene2d.InputEvent

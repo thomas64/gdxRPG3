@@ -25,10 +25,10 @@ import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.components.party.inventory.InventoryItem
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
+import nl.t64.cot.screens.dialog.MessageDialog
 import nl.t64.cot.screens.dialog.QuestionDialog
 import nl.t64.cot.screens.dialog.TwoColumnsQuestionDialog
 import nl.t64.cot.screens.inventory.InventoryScreen
-import nl.t64.cot.screens.inventory.messagedialog.MessageDialog
 import nl.t64.cot.screens.menu.MenuPause
 import nl.t64.cot.screens.world.Camera
 import kotlin.concurrent.thread

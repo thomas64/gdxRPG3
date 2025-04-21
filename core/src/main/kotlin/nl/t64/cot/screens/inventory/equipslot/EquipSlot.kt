@@ -7,9 +7,9 @@ import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.inventory.InventoryGroup
+import nl.t64.cot.screens.dialog.MessageDialog
 import nl.t64.cot.screens.inventory.itemslot.InventoryImage
 import nl.t64.cot.screens.inventory.itemslot.ItemSlot
-import nl.t64.cot.screens.inventory.messagedialog.MessageDialog
 import nl.t64.cot.screens.inventory.tooltip.ItemSlotTooltip
 
 

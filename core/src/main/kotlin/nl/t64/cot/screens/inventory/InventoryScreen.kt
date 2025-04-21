@@ -13,7 +13,7 @@ import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.ParchmentScreen
 import nl.t64.cot.screens.ScreenUI
-import nl.t64.cot.screens.inventory.messagedialog.MessageDialog
+import nl.t64.cot.screens.dialog.MessageDialog
 import nl.t64.cot.screens.questlog.QuestLogScreen
 import nl.t64.cot.screens.world.conversation.ConversationDialog
 import nl.t64.cot.screens.world.conversation.ConversationObserver

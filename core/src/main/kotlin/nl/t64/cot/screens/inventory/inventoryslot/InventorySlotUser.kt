@@ -3,9 +3,9 @@ package nl.t64.cot.screens.inventory.inventoryslot
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.inventory.InventoryItem
+import nl.t64.cot.screens.dialog.MessageDialog
 import nl.t64.cot.screens.inventory.InventoryUtils
 import nl.t64.cot.screens.inventory.itemslot.ItemSlot
-import nl.t64.cot.screens.inventory.messagedialog.MessageDialog
 
 
 class InventorySlotUser private constructor(itemSlot: ItemSlot) {

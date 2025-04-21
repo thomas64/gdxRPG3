@@ -6,8 +6,8 @@ import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.party.inventory.InventoryDatabase
 import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.components.party.skills.SkillItemId
+import nl.t64.cot.screens.dialog.MessageDialog
 import nl.t64.cot.screens.inventory.InventoryUtils
-import nl.t64.cot.screens.inventory.messagedialog.MessageDialog
 
 
 class ItemSlotsExchanger {
