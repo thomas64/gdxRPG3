@@ -20,6 +20,12 @@ class EventContainer {
             .reversed()
     }
 
-    fun hasEventPlayed(eventId: String): Boolean = events[eventId]!!.hasPlayed
+    fun hasEventPlayed(event: Event): Boolean {
+        return event.hasPlayed
+    }
+
+    fun hasEventPlayed(eventId: String): Boolean {
+        return events[eventId]!!.hasPlayed
+    }
 
 }

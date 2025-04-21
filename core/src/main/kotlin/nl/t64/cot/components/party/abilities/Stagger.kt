@@ -39,7 +39,6 @@ class Stagger(
                 Target: ${target.character.name}
                 Skill: ${it.skill?.title}
                 ${possibleCreateEffectiveMessage()}
-
                 Chance to hit: ${calculateHitPercentageCapped()}%
                 Damage: ${calculateDamage()}
                 Critical chance: ${calculateCriticalHitPercentage()}%
@@ -72,10 +71,10 @@ class Stagger(
         val critMessage: String = if (isCriticalHit) "A critical hit!  " else ""
         messages.add("""
             ${possibleAddEffectiveMessage()}
-
             $critMessage$name did $damageDone damage.
+
             $staggerMessage
-            """.trimIndent())
+            """.trimIndent().trimMargin())
     }
 
     private fun handleStagger(): String {
@@ -85,13 +84,9 @@ class Stagger(
             turnManager.stagger(target)
         }
         return if (isStaggered) {
-            """
-                ${target.character.name} was successfully staggered!
-            """
+            "${target.character.name} was successfully staggered!"
         } else {
-            """
-                But failed to stagger ${target.character.name}...
-            """
+            "But failed to stagger ${target.character.name}..."
         }
     }
 

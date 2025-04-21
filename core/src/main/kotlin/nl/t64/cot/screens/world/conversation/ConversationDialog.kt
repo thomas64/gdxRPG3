@@ -23,6 +23,7 @@ import nl.t64.cot.components.conversation.ConversationChoice
 import nl.t64.cot.components.conversation.ConversationCommand
 import nl.t64.cot.components.conversation.ConversationGraph
 import nl.t64.cot.components.conversation.NoteDatabase
+import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.components.party.SpellsRewarder
 import nl.t64.cot.components.party.XpRewarder
 import nl.t64.cot.components.quest.QuestGraph
@@ -312,8 +313,12 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun receiveItem() {
-        val receive = gameData.loot.getLoot(conversationId)
-        endConversationAndLoad { ReceiveScreen.load(receive, null, graph) }
+        val receive: Loot = gameData.loot.getLoot(conversationId)
+        if (receive.isTaken()) {
+            endConversation(Constant.PHRASE_ID_LOOT_TAKEN)
+        } else {
+            endConversationAndLoad { ReceiveScreen.load(receive, null, graph) }
+        }
     }
 
     private fun startBattle(nextId: String) {

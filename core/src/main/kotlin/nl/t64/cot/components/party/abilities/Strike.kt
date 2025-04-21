@@ -33,7 +33,6 @@ open class Strike(
                 Target: ${target.character.name}
                 Skill: ${it.skill?.title}
                 ${possibleCreateEffectiveMessage()}
-
                 Chance to hit: ${calculateHitPercentageCapped()}%
                 Damage: ${calculateDamage()}
                 Critical chance: ${calculateCriticalHitPercentage()}%
@@ -59,9 +58,8 @@ open class Strike(
         val critMessage: String = if (isCriticalHit) "A critical hit!  " else ""
         messages.add("""
             ${possibleAddEffectiveMessage()}
-
             $critMessage$name did $damageDone damage.
-            """.trimIndent())
+            """.trimIndent().trimMargin())
     }
 
 }

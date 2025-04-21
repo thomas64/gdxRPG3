@@ -30,7 +30,7 @@
       "which can be used to improve your character."
     ]
   },
-  "guide_event_battle"               : {
+  "guide_event_battle_1"             : {
     "type": "messagebox",
     "text": [
       "The battlefield consists of the two rows you can see below.",
@@ -42,6 +42,34 @@
       "",
       "Each enemy has an [BLUE]advantage[BLACK] and a [FIREBRICK]disadvantage[BLACK] to certain weapon types.",
       "Try to use the [BLUE]right weapon type[BLACK] against the enemy's [FIREBRICK]disadvantage[BLACK]."
+    ]
+  },
+  "guide_event_battle_2"             : {
+    "type": "messagebox",
+    "text": [
+      "At the start of each turn, if a character begins",
+      "next to an enemy, they become locked in battle.",
+      "",
+      "This significantly increases the AP cost to move",
+      "away from that enemy and escape the battle lock.",
+      "",
+      "Increasing your Stealth skill will make it easier",
+      "to break free from battle lock."
+    ]
+  },
+  "guide_event_battle_3"             : {
+    "type": "messagebox",
+    "text": [
+      "At the top of the screen, you can see the Turn order.",
+      "The character highlighted in yellow will act first.",
+      "",
+      "The turn order is based on the Speed attribute.",
+      "Higher Speed means acting earlier in the round.",
+      "",
+      "The Speed of your party members is displayed.",
+      "The enemy's Speed is unknown and shown as a",
+      "question mark. However, you can estimate it by",
+      "comparing the turn order with your party's Speed."
     ]
   },
   "guide_event_quest"                : {

@@ -139,17 +139,26 @@ abstract class BattleAbilityItem(
 
     protected fun possibleCreateEffectiveMessage(): String {
         return when {
-            hasWeaponTriangleAdvantage() -> "[BLUE]Super effective![BLACK]"
-            hasWeaponTriangleDisadvantage() -> "[FIREBRICK]Not very effective...[BLACK]"
+            hasWeaponTriangleAdvantage() -> """
+                [BLUE]Super effective![BLACK]
+                """
+            hasWeaponTriangleDisadvantage() -> """
+                [FIREBRICK]Not very effective...[BLACK]
+                """
             else -> ""
         }
     }
 
     protected fun possibleAddEffectiveMessage(): String {
         val weaponName = currentWeapon!!.name.takeIf { it.isNotBlank() } ?: name
+
         return when {
-            hasWeaponTriangleAdvantage() -> "$weaponName is super effective!"
-            hasWeaponTriangleDisadvantage() -> "$weaponName is not very effective..."
+            hasWeaponTriangleAdvantage() -> """
+                $weaponName is super effective!
+                """
+            hasWeaponTriangleDisadvantage() -> """
+                $weaponName is not very effective...
+                """
             else -> ""
         }
     }

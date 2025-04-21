@@ -2,7 +2,6 @@ package nl.t64.cot.screens.world
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.InputMultiplexer
-import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
@@ -13,16 +12,14 @@ import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Null
 import ktx.assets.disposeSafely
 import nl.t64.cot.Utils
-import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.constants.Constant
-import nl.t64.cot.screens.inventory.messagedialog.MessageDialogListener
+import nl.t64.cot.screens.dialog.FontSpectralRegular24Provider
+import nl.t64.cot.screens.dialog.MessageDialogListener
 
 
-private const val FONT = "fonts/spectral_regular_24.ttf"
 private const val FONT_SIZE = 24
-private const val LINE_HEIGHT = 26f
 
 private const val DIALOG_INIT_HEIGHT = 100L
 private const val DIALOG_PAD = 60f
@@ -33,9 +30,7 @@ class MessageDialog(
     private val multiplexer: InputMultiplexer
 ) {
     private val stage = Stage()
-    private val font: BitmapFont = resourceManager.getTrueTypeAsset(FONT, FONT_SIZE).apply {
-        data.setLineHeight(LINE_HEIGHT)
-    }
+    private val font: BitmapFont = FontSpectralRegular24Provider.font
     private lateinit var label: Label
     private val dialog: Dialog = createDialog()
 
@@ -71,7 +66,7 @@ class MessageDialog(
     }
 
     private fun createDialog(): Dialog {
-        label = Label("no message", LabelStyle(font, Color.BLACK))
+        label = Label("[BLACK]no message", LabelStyle(font, null))
         label.setAlignment(Align.center)
         return Utils.createParchmentDialog(font).apply {
             padLeft(DIALOG_PAD)
@@ -81,7 +76,7 @@ class MessageDialog(
 
     private fun fillDialog(message: String) {
         val dialogHeight = ((message.lines().count() * FONT_SIZE) + DIALOG_INIT_HEIGHT).toFloat()
-        label.setText(message)
+        label.setText("[BLACK]$message")
         dialog.contentTable.clear()
         dialog.contentTable.defaults().width(label.prefWidth)
         dialog.background.minHeight = dialogHeight

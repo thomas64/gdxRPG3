@@ -174,7 +174,15 @@ class BattleScreen : Screen {
                 setupPreBattleTable()
                 isPreBattle = true
                 render(0f)
-                gameData.events.getEventById("guide_event_battle").possibleStart(stage)
+
+                val event1 = gameData.events.getEventById("guide_event_battle_1")
+                val event2 = gameData.events.getEventById("guide_event_battle_2")
+                val event3 = gameData.events.getEventById("guide_event_battle_3")
+                when {
+                    !gameData.events.hasEventPlayed(event1) -> event1.possibleStart(stage)
+                    !gameData.events.hasEventPlayed(event2) -> event2.possibleStart(stage)
+                    !gameData.events.hasEventPlayed(event3) -> event3.possibleStart(stage)
+                }
             }
         ))
     }

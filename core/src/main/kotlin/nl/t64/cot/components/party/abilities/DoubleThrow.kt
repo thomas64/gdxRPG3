@@ -31,7 +31,6 @@ class DoubleThrow(
                 Target: ${target.character.name}
                 Skill: ${it.skill?.title}
                 ${possibleCreateEffectiveMessage()}
-
                 Chance to hit: ${calculateHitPercentageCapped()}%
                 Damage: ${calculateDamage()} (x2)
                 Critical chance: ${calculateCriticalHitPercentage()}%
