@@ -9,6 +9,8 @@ import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.components.party.stats.StatItemId
 
 
+private const val PENALTY_AP: Int = 4
+
 class Participant(
     val character: Character
 ) {
@@ -18,7 +20,7 @@ class Participant(
     val maximumAP: Int = character.getCalculatedActionPoints()
     var currentAP: Int = maximumAP
     var staggerChance: Float = 65f
-    var fleeChance: Int = 10
+    var fleeChance: Int = 70
 
     private var isDelayingTurn: Boolean = false
     private var isStaggered: Boolean = false
@@ -85,6 +87,10 @@ class Participant(
                         "total: ${stealthScore + protectionScore + attackerHasAdvantageScore + attackerHasDisadvantageScore + nextToTargetScore}")
         }
         return stealthScore + protectionScore + attackerHasAdvantageScore + attackerHasDisadvantageScore + nextToTargetScore
+    }
+
+    fun getPenaltyAp(): Int {
+        return (PENALTY_AP - (character.getCalculatedTotalSkillOf(SkillItemId.STEALTH) / 3f)).toInt().coerceAtLeast(0)
     }
 
     fun getWeaponRanges(): List<Int> {

@@ -3,9 +3,13 @@
     "upgrade"    : 6,
     "description": [
       "- 'Stealth' increases the chance to successfully flee combat.",
-      "  Each rank in 'Stealth' increases the probability of this by 6%.",
+      "  Each rank in 'Stealth' increases the probability of this by 2%.",
       "",
-      "- 'Stealth' decreases the attention this character draws from enemies in combat."
+      "- 'Stealth' decreases the attention this character draws,",
+      "  in relation to other party members, from enemies in combat.",
+      "",
+      "- 'Stealth' decreases the amount of Action Points it takes to",
+      "  free this character from when they are locked in battle."
     ]
   },
   "gambler"   : {
@@ -28,10 +32,8 @@
   "troubadour": {
     "upgrade"    : 8,
     "description": [
-      "- 'Troubadour' allows the possibility to",
-      "  play and sing inspirationally in combat,",
-      "  increasing your party's 'Chance to hit'",
-      "  and decreasing the enemy's 'Chance to hit'."
+      "- 'Troubadour' allows the possibility to play and sing inspirationally in combat,",
+      "  increasing your party's 'Chance to hit' and decreasing the enemy's 'Chance to hit'."
     ]
   },
   "thief"     : {

@@ -37,7 +37,7 @@
     "upgrade"    : 0.18,
     "description": [
       "- 'Speed' increases your combat initiative.",
-      "  More 'Speed' means a faster turn rate.",
+      "  More 'Speed' means a faster turn rate in combat.",
       "",
       "- Each 20 ranks in 'Speed' increases AP by 1."
     ]
@@ -46,7 +46,7 @@
     "maximum"    : 30,
     "upgrade"    : 0.18,
     "description": [
-      "- 'Willpower' increases your defenses against enemy offensive magic spells.",
+      "- 'Willpower' increases your defenses against enemy offensive magic spells in combat.",
       "  Each rank in 'Willpower' increases 'Magic Protection' by 3."
     ]
   },
@@ -54,15 +54,17 @@
     "maximum"    : 60,
     "upgrade"    : 0.08,
     "description": [
-      "- 'Constitution' represents the real physical damage this character can",
-      "  take before dying. Each rank in 'Constitution' increases 'HP' by 4 points."
+      "- 'Constitution' represents the real physical damage this",
+      "  character can take in combat before dying.",
+      "  Each rank in 'Constitution' increases 'HP' by 4 points."
     ]
   },
   "stamina"     : {
     "maximum"    : 60,
     "upgrade"    : 0.06,
     "description": [
-      "- 'Stamina' represents energy for magic spells and other special attacks.",
+      "- 'Stamina' represents energy for magic spells and other",
+      "  special attacks in combat.",
       "  Each rank in 'Stamina' increases 'SP' by 2 points."
     ]
   }

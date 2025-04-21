@@ -7,7 +7,6 @@ import kotlin.math.abs
 
 
 private const val BATTLE_FIELD_SIZE = 20
-private const val PENALTY_AP: Int = 2
 
 class BattleField(participants: List<Participant>) {
 
@@ -79,20 +78,20 @@ class BattleField(participants: List<Participant>) {
     }
 
     fun getModifiedApForHero(participant: Participant): Int {
-        return participant.currentAP - getPenaltyApForHero()
+        return participant.currentAP - getPenaltyApForHero(participant)
     }
 
-    private fun getModifiedApForEnemy(participant: Participant, destinationSpace: Int?): Int {
-        return participant.currentAP - getPenaltyApForEnemy(destinationSpace)
+    private fun getModifiedApForEnemy(participant: Participant, destinationSpace: Int): Int {
+        return participant.currentAP - getPenaltyApForEnemy(participant, destinationSpace)
     }
 
-    fun getPenaltyApForHero(): Int {
-        return if (isHeroStartingSpaceNextToEnemy()) PENALTY_AP else 0
+    fun getPenaltyApForHero(participant: Participant): Int {
+        return if (isHeroStartingSpaceNextToEnemy()) participant.getPenaltyAp() else 0
     }
 
-    private fun getPenaltyApForEnemy(destinationSpace: Int?): Int {
+    private fun getPenaltyApForEnemy(participant: Participant, destinationSpace: Int): Int {
         if (destinationSpace == startingSpace) return 0
-        return if (isEnemyStartingSpaceNextToHero()) PENALTY_AP else 0
+        return if (isEnemyStartingSpaceNextToHero()) participant.getPenaltyAp() else 0
     }
 
     fun getCurrentSpace(participant: Participant): Int {
@@ -231,7 +230,7 @@ class BattleField(participants: List<Participant>) {
             println("${this.character.name} AP: ${this.currentAP}")
         }
 
-        val difference: Int = abs(destinationSpace - this.getCurrentSpaceIndex()) + getPenaltyApForEnemy(destinationSpace)
+        val difference: Int = abs(destinationSpace - this.getCurrentSpaceIndex()) + getPenaltyApForEnemy(this, destinationSpace)
         this.currentAP -= difference
 
         if (preferenceManager.isInDebugMode) {

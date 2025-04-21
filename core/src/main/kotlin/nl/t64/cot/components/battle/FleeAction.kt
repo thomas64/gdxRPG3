@@ -41,15 +41,15 @@ class FleeAction(
         return if (getChanceToFlee() >= Random.nextInt(0, 100)) {
             Pair(true, "The party successfully fled the battle.")
         } else {
-            currentParticipant.fleeChance += 10
+            currentParticipant.fleeChance += 5
             Pair(false, "The party failed to flee the battle.")
         }
     }
 
     private fun getChanceToFlee(): Int {
         return (currentParticipant.fleeChance
-            + (character.getCalculatedTotalSkillOf(SkillItemId.STEALTH) * 6)
-            ).coerceAtMost(90)
+            + (character.getCalculatedTotalSkillOf(SkillItemId.STEALTH) * 2)
+            ).coerceAtMost(95)
     }
 
 }
