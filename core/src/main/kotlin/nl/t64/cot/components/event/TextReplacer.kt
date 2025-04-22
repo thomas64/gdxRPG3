@@ -23,7 +23,7 @@ object TextReplacer {
             "%minimap%" -> str.replace(substr, if (hasGamePad) "[Select] button" else "[M] key")
             "%logbook%" -> str.replace(substr, if (hasGamePad) "[X] button" else "[L] key")
             "%brackets%" -> str.replace(substr, "[ ]")
-            "%manual%" -> str.replace(substr, if (hasGamePad) "[L] stick" else "[H] key")
+            "%manual%" -> str.replace(substr, if (hasGamePad) "[L] stick" else "[T] key")
             else -> throw IllegalArgumentException("Unexpected value: '$substr'")
         }
     }

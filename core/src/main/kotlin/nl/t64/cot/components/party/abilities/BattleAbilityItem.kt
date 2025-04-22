@@ -111,8 +111,8 @@ abstract class BattleAbilityItem(
         val attackerCriticalHitPercentage: Int = attacker.character.getCalculatedTotalSkillOf(SkillItemId.WARRIOR) * 4
 
         val weaponTriangle = when {
-            hasWeaponTriangleAdvantage() -> 20
-            hasWeaponTriangleDisadvantage() -> -20
+            hasWeaponTriangleAdvantage() -> 30
+            hasWeaponTriangleDisadvantage() -> -30
             else -> 0
         }
         return (attackerCriticalHitPercentage + weaponTriangle).coerceAtLeast(0)
@@ -153,12 +153,14 @@ abstract class BattleAbilityItem(
         val weaponName = currentWeapon!!.name.takeIf { it.isNotBlank() } ?: name
 
         return when {
-            hasWeaponTriangleAdvantage() -> """
-                $weaponName is super effective!
-                """
-            hasWeaponTriangleDisadvantage() -> """
-                $weaponName is not very effective...
-                """
+            hasWeaponTriangleAdvantage() -> {
+                """$weaponName is super effective!
+                   |"""
+            }
+            hasWeaponTriangleDisadvantage() -> {
+                """$weaponName is not very effective...
+                   |"""
+            }
             else -> ""
         }
     }

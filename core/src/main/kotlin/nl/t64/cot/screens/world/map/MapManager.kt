@@ -38,17 +38,19 @@ class MapManager : ProfileObserver {
     }
 
     override fun onNotifySaveProfileAfterBattle(profileManager: ProfileManager, playerPosition: Vector2) {
-        onNotifySaveProfile(profileManager)
+        profileManager.setProperty("mapTitleAfterBattle", currentMap.mapTitle)
         profileManager.setProperty("playerLocationAfterBattle", playerPosition)
     }
 
     override fun onNotifySaveProfile(profileManager: ProfileManager) {
         profileManager.setProperty("mapTitle", currentMap.mapTitle)
+        profileManager.setProperty("mapTitleAfterBattle", null)
         profileManager.setProperty("playerLocationAfterBattle", null)
     }
 
     override fun onNotifyLoadProfile(profileManager: ProfileManager) {
-        val mapTitle = profileManager.getProperty<String>("mapTitle")
+        val mapTitle = profileManager.getProperty<String?>("mapTitleAfterBattle")
+            ?: profileManager.getProperty<String>("mapTitle")
         if (gameData.cutscenes.isPlayed(CutsceneId.SCENE_INTRO)) {
             loadMapWithBgmBgs(mapTitle)
         } else {

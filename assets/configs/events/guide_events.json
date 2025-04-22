@@ -64,12 +64,12 @@
       "The character highlighted in yellow will act first.",
       "",
       "The turn order is based on the Speed attribute.",
-      "Higher Speed means acting earlier in the round.",
+      "Higher speed means acting earlier in the round.",
       "",
-      "The Speed of your party members is displayed.",
-      "The enemy's Speed is unknown and shown as a",
+      "The speed of your party members is displayed.",
+      "The enemy's speed is unknown and shown as a",
       "question mark. However, you can estimate it by",
-      "comparing the turn order with your party's Speed."
+      "comparing the turn order with your party's speed."
     ]
   },
   "guide_event_quest"                : {

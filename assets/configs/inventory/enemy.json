@@ -1,31 +1,31 @@
 {
-  "attack_65_10": {
+  "attack_65_13": {
     "group"       : "WEAPON",
     "skill"       : "POLE",
     "min_strength": 1,
     "base_hit"    : 65,
+    "damage"      : 13
+  },
+  "attack_65_26": {
+    "group"       : "WEAPON",
+    "skill"       : "POLE",
+    "min_strength": 1,
+    "base_hit"    : 65,
+    "damage"      : 26
+  },
+  "attack_80_10" : {
+    "group"       : "WEAPON",
+    "skill"       : "HAFTED",
+    "min_strength": 1,
+    "base_hit"    : 80,
     "damage"      : 10
   },
-  "attack_65_20": {
+  "attack_80_20": {
     "group"       : "WEAPON",
-    "skill"       : "POLE",
+    "skill"       : "HAFTED",
     "min_strength": 1,
-    "base_hit"    : 65,
+    "base_hit"    : 80,
     "damage"      : 20
-  },
-  "attack_80_8" : {
-    "group"       : "WEAPON",
-    "skill"       : "HAFTED",
-    "min_strength": 1,
-    "base_hit"    : 80,
-    "damage"      : 8
-  },
-  "attack_80_16": {
-    "group"       : "WEAPON",
-    "skill"       : "HAFTED",
-    "min_strength": 1,
-    "base_hit"    : 80,
-    "damage"      : 16
   },
   "armor_1"     : {
     "group"     : "CHEST",
