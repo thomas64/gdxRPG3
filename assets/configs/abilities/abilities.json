@@ -38,7 +38,7 @@
     "ap"           : 6,
     "sp"           : 8,
     "skill"        : "WARRIOR",
-    "weapon_skills": ["HAFTED", "POLE", "SWORD"],
+    "weapon_skills": ["SWORD", "AXE", "SPEAR", "DAGGER", "STAFF"],
     "description"  : [
       "A hand-to-hand attack with a weapon, that deals damage to a single target.",
       "When successful, Stagger moves the target to the bottom of the turn order.",
@@ -50,9 +50,9 @@
     "ap"           : 4,
     "sp"           : 2,
     "skill"        : "THIEF",
-    "weapon_skills": ["THROWN"],
+    "weapon_skills": ["THROW"],
     "description"  : [
-      "A ranged attack with a thrown weapon, that deals damage to a single target.",
+      "A ranged attack with a throw weapon, that deals damage to a single target.",
       "Double Throw attacks twice, but both attacks have a lower chance to hit."
     ]
   }

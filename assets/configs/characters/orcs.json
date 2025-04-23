@@ -32,7 +32,7 @@
       "strike_2", "strike_3", "strike_4"
     ],
     "skills"   : {
-      "hafted" : 2,
+      "axe"    : 2,
       "warrior": 2
     },
     "spells"   : {
@@ -77,7 +77,7 @@
     ],
     "skills"   : {
       "warrior": 8,
-      "hafted" : 14,
+      "axe"    : 14,
       "shield" : 8
     },
     "spells"   : {
@@ -109,8 +109,8 @@
     "skills"   : {
       "warrior": 10,
       "wizard" : 10,
-      "hafted" : 25,
-      "missile": 10,
+      "axe"    : 25,
+      "bow"    : 10,
       "sword"  : 10,
       "shield" : 10
     },

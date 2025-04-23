@@ -15,9 +15,9 @@
     "skills"   : {
       "stealth": 1,
       "warrior": 1,
-      "hafted" : 1,
       "sword"  : 1,
-      "missile": 1,
+      "axe"    : 1,
+      "bow"    : 1,
       "shield" : 1
     },
     "abilities": [
@@ -50,11 +50,11 @@
       "mechanic": 1,
       "stealth" : 3,
       "thief"   : 1,
-      "hafted"  : -1,
-      "missile" : -1,
-      "shield"  : -1,
-      "sword"   : 1,
-      "thrown"  : 3
+      "axe"     : -1,
+      "dagger"  : 3,
+      "throw"   : 3,
+      "bow"     : -1,
+      "shield"  : -1
     },
     "abilities": [
       "strike_2", "strike_3", "strike_4",
@@ -90,10 +90,12 @@
       "thief"    : -1,
       "warrior"  : 4,
       "wizard"   : -1,
-      "missile"  : -1,
-      "shield"   : 2,
       "sword"    : 4,
-      "thrown"   : 2
+      "dagger"   : -1,
+      "staff"    : -1,
+      "throw"    : 2,
+      "bow"      : -1,
+      "shield"   : 2
     },
     "abilities": [
       "strike_2", "strike_3", "strike_4",
@@ -126,10 +128,10 @@
       "loremaster": 1,
       "merchant"  : 1,
       "wizard"    : 4,
-      "missile"   : -1,
-      "pole"      : 3,
-      "sword"     : 3,
-      "thrown"    : -1
+      "staff"     : 3,
+      "dagger"    : 3,
+      "throw"     : -1,
+      "bow"       : -1
     },
     "abilities": [
       "strike_2", "strike_3", "strike_4"
@@ -166,11 +168,11 @@
       "loremaster": 2,
       "mechanic"  : 2,
       "wizard"    : 2,
-      "hafted"    : -1,
-      "missile"   : -1,
-      "shield"    : -1,
-      "sword"     : 1,
-      "thrown"    : 1
+      "axe"       : -1,
+      "dagger"    : 1,
+      "throw"     : 1,
+      "bow"       : -1,
+      "shield"    : -1
     },
     "abilities": [
       "strike_2", "strike_3", "strike_4"
@@ -204,11 +206,12 @@
       "stealth"  : 3,
       "warrior"  : 5,
       "wizard"   : -1,
-      "hafted"   : 5,
-      "missile"  : 3,
-      "shield"   : 3,
       "sword"    : -1,
-      "thrown"   : -1
+      "axe"      : 5,
+      "staff"    : -1,
+      "throw"    : -1,
+      "bow"      : 3,
+      "shield"   : 3
     },
     "abilities": [
       "strike_2", "strike_3", "strike_4",
@@ -247,11 +250,13 @@
       "troubadour": -1,
       "warrior"   : 6,
       "wizard"    : -1,
-      "missile"   : -1,
-      "pole"      : 6,
-      "shield"    : 4,
       "sword"     : 6,
-      "thrown"    : -1
+      "spear"     : 6,
+      "dagger"    : -1,
+      "staff"     : -1,
+      "throw"     : -1,
+      "bow"       : -1,
+      "shield"    : 4
     },
     "abilities": [
       "strike_2", "strike_3", "strike_4",
@@ -286,12 +291,12 @@
       "stealth" : 5,
       "thief"   : 8,
       "wizard"  : 4,
-      "hafted"  : -1,
-      "missile" : 7,
-      "pole"    : 2,
-      "shield"  : -1,
-      "sword"   : 7,
-      "thrown"  : -1
+      "axe"     : -1,
+      "spear"   : 2,
+      "dagger"  : 7,
+      "throw"   : -1,
+      "bow"     : 7,
+      "shield"  : -1
     },
     "abilities": [
       "strike_2", "strike_3", "strike_4"
@@ -330,10 +335,10 @@
       "scholar"   : 7,
       "stealth"   : 5,
       "wizard"    : 10,
-      "missile"   : -1,
-      "pole"      : 8,
-      "shield"    : -1,
-      "thrown"    : 8
+      "staff"     : 8,
+      "throw"     : 8,
+      "bow"       : -1,
+      "shield"    : -1
     },
     "abilities": [
       "strike_2", "strike_3", "strike_4"
@@ -369,12 +374,12 @@
       "diplomat": 8,
       "warrior" : 7,
       "wizard"  : 7,
-      "hafted"  : 5,
-      "missile" : -1,
-      "pole"    : 5,
-      "shield"  : -1,
+      "axe"     : 5,
+      "spear"   : 5,
       "sword"   : 7,
-      "thrown"  : -1
+      "throw"   : -1,
+      "bow"     : -1,
+      "shield"  : -1
     },
     "abilities": [
       "strike_2", "strike_3", "strike_4",
@@ -414,12 +419,13 @@
       "troubadour": 7,
       "warrior"   : 9,
       "wizard"    : -1,
-      "hafted"    : 8,
-      "missile"   : -1,
-      "pole"      : 8,
-      "shield"    : 9,
       "sword"     : 5,
-      "thrown"    : 8
+      "axe"       : 8,
+      "spear"     : 8,
+      "staff"     : -1,
+      "throw"     : 8,
+      "bow"       : -1,
+      "shield"    : 9
     },
     "abilities": [
       "strike_2", "strike_3", "strike_4",
@@ -462,12 +468,14 @@
       "troubadour": 10,
       "warrior"   : 10,
       "wizard"    : 10,
-      "hafted"    : 10,
-      "missile"   : -1,
-      "pole"      : 10,
-      "shield"    : 10,
       "sword"     : 10,
-      "thrown"    : 10
+      "axe"       : 10,
+      "spear"     : 10,
+      "dagger"    : 10,
+      "staff"     : 10,
+      "throw"     : 10,
+      "bow"       : -1,
+      "shield"    : 10
     },
     "abilities": [
       "strike_2", "strike_3", "strike_4",
@@ -508,11 +516,11 @@
       "stealth": 6,
       "warrior": 10,
       "wizard" : 8,
-      "hafted" : 5,
-      "missile": 7,
-      "shield" : -1,
       "sword"  : 10,
-      "thrown" : -1
+      "axe"    : 5,
+      "throw"  : -1,
+      "bow"    : 7,
+      "shield" : -1
     },
     "abilities": [
       "strike_2", "strike_3", "strike_4",
@@ -558,11 +566,11 @@
       "troubadour": 10,
       "warrior"   : 10,
       "wizard"    : -1,
-      "hafted"    : 10,
-      "missile"   : -1,
-      "pole"      : -1,
-      "sword"     : 10,
-      "thrown"    : -1
+      "dagger"    : 10,
+      "axe"       : 10,
+      "staff"     : -1,
+      "throw"     : -1,
+      "bow"       : -1
     },
     "abilities": [
       "strike_2", "strike_3", "strike_4",

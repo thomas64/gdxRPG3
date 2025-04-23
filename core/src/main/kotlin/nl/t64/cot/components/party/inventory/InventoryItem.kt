@@ -142,12 +142,15 @@ data class InventoryItem(
             SkillItemId.TROUBADOUR -> troubadour
             SkillItemId.WARRIOR -> warrior
             SkillItemId.WIZARD -> wizard
-            SkillItemId.HAFTED,
-            SkillItemId.MISSILE,
-            SkillItemId.POLE,
-            SkillItemId.SHIELD,
+
             SkillItemId.SWORD,
-            SkillItemId.THROWN -> 0
+            SkillItemId.AXE,
+            SkillItemId.SPEAR,
+            SkillItemId.DAGGER,
+            SkillItemId.STAFF,
+            SkillItemId.THROW,
+            SkillItemId.BOW,
+            SkillItemId.SHIELD -> 0
         }
     }
 
@@ -214,10 +217,12 @@ data class InventoryItem(
     fun getWeaponRange(): List<Int> {
         return when (skill) {
             SkillItemId.SWORD,
-            SkillItemId.HAFTED,
-            SkillItemId.POLE,
-            SkillItemId.THROWN,
-            SkillItemId.MISSILE -> range.ifEmpty { listOf(1) }
+            SkillItemId.AXE,
+            SkillItemId.SPEAR,
+            SkillItemId.DAGGER,
+            SkillItemId.STAFF,
+            SkillItemId.THROW,
+            SkillItemId.BOW -> range.ifEmpty { listOf(1) }
             else -> throw IllegalArgumentException("Only possible to ask a Weapon Skill.")
         }
     }

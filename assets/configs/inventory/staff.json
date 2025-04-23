@@ -1,0 +1,68 @@
+{
+  "basic_staff"     : {
+    "name"            : "Basic Staff",
+    "group"           : "WEAPON",
+    "sort"            : 1400,
+    "skill"           : "STAFF",
+    "price"           : 10,
+    "durability"      : 30,
+    "min_intelligence": 15,
+    "base_hit"        : 95,
+    "damage"          : 5
+  },
+  "fine_staff"      : {
+    "name"            : "Fine Staff",
+    "group"           : "WEAPON",
+    "sort"            : 2400,
+    "skill"           : "STAFF",
+    "price"           : 35,
+    "durability"      : 25,
+    "min_intelligence": 18,
+    "base_hit"        : 85,
+    "damage"          : 10
+  },
+  "specialist_staff": {
+    "name"            : "Specialist Staff",
+    "group"           : "WEAPON",
+    "sort"            : 3400,
+    "skill"           : "STAFF",
+    "price"           : 60,
+    "durability"      : 20,
+    "min_intelligence": 21,
+    "base_hit"        : 75,
+    "damage"          : 15
+  },
+  "masterwork_staff": {
+    "name"            : "Masterwork Staff",
+    "group"           : "WEAPON",
+    "sort"            : 4400,
+    "skill"           : "STAFF",
+    "price"           : 85,
+    "durability"      : 15,
+    "min_intelligence": 24,
+    "base_hit"        : 65,
+    "damage"          : 20
+  },
+  "epic_staff"      : {
+    "name"            : "Epic Staff",
+    "group"           : "WEAPON",
+    "sort"            : 5400,
+    "skill"           : "STAFF",
+    "price"           : 110,
+    "durability"      : 10,
+    "min_intelligence": 27,
+    "base_hit"        : 55,
+    "damage"          : 25
+  },
+  "legendary_staff" : {
+    "name"            : "Legendary Staff",
+    "group"           : "WEAPON",
+    "sort"            : 6400,
+    "skill"           : "STAFF",
+    "price"           : 135,
+    "durability"      : 5,
+    "min_intelligence": 30,
+    "base_hit"        : 45,
+    "damage"          : 30
+  }
+}

@@ -65,7 +65,7 @@ class Participant(
     }
 
     fun getPriorityFor(currentEnemy: Participant, isEnemyNextToHero: Boolean): Float {
-        // todo, weaker character types? weapon types, or missile and throw?
+        // todo, weaker character types? weapon types, or bow and throw?
 
         val attackSkill: SkillItemId = currentEnemy.getCurrentWeapon()!!.skill!!
         val targetSkill: SkillItemId? = getCurrentWeapon()?.skill

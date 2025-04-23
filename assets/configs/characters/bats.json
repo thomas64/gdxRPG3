@@ -16,7 +16,7 @@
       "stamina"     : 1
     },
     "skills"   : {
-      "hafted": 1
+      "axe": 1
     },
     "abilities": [
       "bite_3", "bite_4"
@@ -44,7 +44,7 @@
       "stamina"     : 1
     },
     "skills"   : {
-      "hafted": 1
+      "axe": 1
     },
     "abilities": [
       "bite_3", "bite_4"

@@ -1,0 +1,15 @@
+staff.png
+size:248,124
+repeat:none
+basic_staff
+bounds:0,0,62,62
+epic_staff
+bounds:62,0,62,62
+legendary_staff
+bounds:124,0,62,62
+masterwork_staff
+bounds:186,0,62,62
+ordinary_staff
+bounds:0,62,62,62
+specialist_staff
+bounds:62,62,62,62

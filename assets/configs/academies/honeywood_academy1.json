@@ -1,9 +1,11 @@
 {
-  "warrior"  : 3,
-  "shield"   : 3,
-  "hafted"   : 3,
-  "pole"     : 3,
-  "sword"    : 3,
-  "missile"  : 3,
-  "thrown"   : 3
+  "warrior": 3,
+  "shield" : 3,
+  "sword"  : 3,
+  "axe"    : 3,
+  "spear"  : 3,
+  "dagger" : 3,
+  "staff"  : 3,
+  "throw"  : 3,
+  "bow"    : 3
 }

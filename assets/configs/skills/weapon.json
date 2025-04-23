@@ -1,50 +1,47 @@
 {
-  "hafted" : {
+  "axe"   : {
     "upgrade"    : 6,
     "description": [
-      "- 'Hafted' allows the possibility of equipping hafted weapons.",
+      "- 'Axe' allows the possibility of equipping axes.",
       "",
-      "- 'Hafted' increases your chance to hit with hafted weapons in combat.",
-      "  Each rank in 'Hafted' increases 'Chance to hit' by 5%.",
+      "- 'Axe' increases your chance to hit with axes in combat.",
+      "  Each rank in 'Axe' increases 'Chance to hit' by 5%.",
       "",
-      "- Hafted weapons have an advantage against enemies with pole weapons,",
+      "- Axes have an advantage against enemies with spears,",
       "  and a disadvantage against enemies with swords.",
-      "  Hafted weapons also have an advantage or a disadvantage against",
-      "  certain weaponless enemies.",
-      "  When having advantage, 'Chance to hit' is increased by +10%, and",
-      "  'Critical hit' is increased by +20%.",
-      "  When having disadvantage, 'Chance to hit' is decreased by -5%,",
-      "  'Critical hit' is decreased by -20% and 'Damage' is halved."
+      "  Axes also have an advantage or a disadvantage against",
+      "  certain weaponless enemies."
     ]
   },
-  "missile": {
+  "bow"   : {
     "upgrade"    : 6,
     "description": [
-      "- 'Missile' allows the possibility of equipping missile weapons.",
+      "- 'Bow' allows the possibility of equipping bows.",
       "",
-      "- 'Missile' increases your chance to hit with missile weapons in combat.",
-      "  Each rank in 'Missile' increases 'Chance to hit' by 5%."
+      "- 'Bow' increases your chance to hit with bows in combat.",
+      "  Each rank in 'Bow' increases 'Chance to hit' by 5%.",
+      "",
+      "- Bows have an advantage against enemies with daggers,",
+      "  and a disadvantage against enemies with throwing weapons.",
+      "  Bows also have an advantage or a disadvantage against",
+      "  certain weaponless enemies."
     ]
   },
-  "pole"   : {
+  "spear" : {
     "upgrade"    : 6,
     "description": [
-      "- 'Pole' allows the possibility of equipping pole weapons.",
+      "- 'Spear' allows the possibility of equipping spears.",
       "",
-      "- 'Pole' increases your chance to hit with pole weapons in combat.",
-      "  Each rank in 'Pole' increases 'Chance to hit' by 5%.",
+      "- 'Spear' increases your chance to hit with spears in combat.",
+      "  Each rank in 'Spear' increases 'Chance to hit' by 5%.",
       "",
-      "- Pole weapons have an advantage against enemies with swords,",
-      "  and a disadvantage against enemies with hafted weapons.",
-      "  Pole weapons also have an advantage or a disadvantage against",
-      "  certain weaponless enemies.",
-      "  When having advantage, 'Chance to hit' is increased by +10%, and",
-      "  'Critical hit' is increased by +20%.",
-      "  When having disadvantage, 'Chance to hit' is decreased by -5%,",
-      "  'Critical hit' is decreased by -20% and 'Damage' is halved."
+      "- Spears have an advantage against enemies with swords,",
+      "  and a disadvantage against enemies with axes.",
+      "  Spears also have an advantage or a disadvantage against",
+      "  certain weaponless enemies."
     ]
   },
-  "shield" : {
+  "shield": {
     "upgrade"    : 6,
     "description": [
       "- 'Shield' allows the possibility of equipping shields.",
@@ -53,31 +50,60 @@
       "  Each rank in 'Shield' increases 'Defense' by 10%."
     ]
   },
-  "sword"  : {
+  "sword" : {
     "upgrade"    : 6,
     "description": [
-      "- 'Sword' allows the possibility of equipping swords and daggers.",
+      "- 'Sword' allows the possibility of equipping swords.",
       "",
-      "- 'Sword' increases your chance to hit with swords and daggers in combat.",
+      "- 'Sword' increases your chance to hit with swords in combat.",
       "  Each rank in 'Sword' increases 'Chance to hit' by 5%.",
       "",
-      "- Swords have an advantage against enemies with hafted weapons,",
-      "  and a disadvantage against enemies with pole weapons.",
+      "- Swords have an advantage against enemies with axes,",
+      "  and a disadvantage against enemies with spears.",
       "  Swords also have an advantage or a disadvantage against",
-      "  certain weaponless enemies.",
-      "  When having advantage, 'Chance to hit' is increased by +10%, and",
-      "  'Critical hit' is increased by +20%.",
-      "  When having disadvantage, 'Chance to hit' is decreased by -5%,",
-      "  'Critical hit' is decreased by -20% and 'Damage' is halved."
+      "  certain weaponless enemies."
     ]
   },
-  "thrown" : {
+  "throw" : {
     "upgrade"    : 6,
     "description": [
-      "- 'Thrown' allows the possibility of equipping thrown weapons.",
+      "- 'Throw' allows the possibility of equipping throwing weapons.",
       "",
-      "- 'Thrown' increases your chance to hit with thrown weapons in combat.",
-      "  Each rank in 'Thrown' increases 'Chance to hit' by 5%."
+      "- 'Throw' increases your chance to hit with throwing weapons in combat.",
+      "  Each rank in 'Throw' increases 'Chance to hit' by 5%.",
+      "",
+      "- Throwing weapons have an advantage against enemies with bows,",
+      "  and a disadvantage against enemies with staffs.",
+      "  Throwing weapons also have an advantage or a disadvantage against",
+      "  certain weaponless enemies."
+    ]
+  },
+  "staff" : {
+    "upgrade"    : 6,
+    "description": [
+      "- 'Staff' allows the possibility of equipping staffs.",
+      "",
+      "- 'Staff' increases your chance to hit with staffs in combat.",
+      "  Each rank in 'Staff' increases 'Chance to hit' by 5%.",
+      "",
+      "- Staffs have an advantage against enemies with throwing weapons,",
+      "  and a disadvantage against enemies with daggers.",
+      "  Staffs also have an advantage or a disadvantage against",
+      "  certain weaponless enemies."
+    ]
+  },
+  "dagger": {
+    "upgrade"    : 6,
+    "description": [
+      "- 'Dagger' allows the possibility of equipping daggers.",
+      "",
+      "- 'Dagger' increases your chance to hit with daggers in combat.",
+      "  Each rank in 'Dagger' increases 'Chance to hit' by 5%.",
+      "",
+      "- Daggers have an advantage against enemies with staffs,",
+      "  and a disadvantage against enemies with bows.",
+      "  Daggers also have an advantage or a disadvantage against",
+      "  certain weaponless enemies."
     ]
   }
 }

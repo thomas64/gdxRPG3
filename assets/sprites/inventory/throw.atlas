@@ -1,0 +1,11 @@
+throw.png
+size:248,62
+repeat:none
+basic_knife
+bounds:0,0,62,62
+fine_knife
+bounds:62,0,62,62
+masterwork_knife
+bounds:124,0,62,62
+specialist_knife
+bounds:186,0,62,62

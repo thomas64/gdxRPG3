@@ -16,7 +16,7 @@
       "stamina"     : 1
     },
     "skills"   : {
-      "pole": 1
+      "spear": 1
     },
     "abilities": [
       "body_slam_2"
@@ -45,7 +45,7 @@
       "stamina"     : 1
     },
     "skills"   : {
-      "pole": 1
+      "spear": 1
     },
     "abilities": [
       "body_slam_2"
@@ -74,7 +74,7 @@
       "stamina"     : 1
     },
     "skills"   : {
-      "pole": 1
+      "spear": 1
     },
     "abilities": [
       "body_slam_2"
