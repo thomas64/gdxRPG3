@@ -143,7 +143,7 @@
       "weakness"     : 4
     },
     "inventory": {
-      "weapon": "basic_staff",
+      "weapon": "basic_staff_wind",
       "chest" : "basic_light_chest",
       "pants" : "basic_light_pants",
       "boots" : "basic_light_boots"
@@ -351,7 +351,7 @@
       "dispel_necromancy": 10
     },
     "inventory": {
-      "weapon": "epic_staff",
+      "weapon": "epic_staff_fire",
       "chest" : "specialist_light_chest",
       "pants" : "specialist_light_pants",
       "boots" : "specialist_light_boots"

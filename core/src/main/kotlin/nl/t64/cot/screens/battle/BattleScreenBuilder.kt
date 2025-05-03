@@ -27,7 +27,6 @@ import nl.t64.cot.constants.Constant
 import nl.t64.cot.disposeAndClear
 import nl.t64.cot.toDrawable
 import nl.t64.cot.toTexture
-import kotlin.collections.List
 import com.badlogic.gdx.scenes.scene2d.ui.List as GdxList
 
 
@@ -91,16 +90,16 @@ class BattleScreenBuilder {
         val statsStack = Stack()
         statsStack.add(heroTable)
 
-        hero.getInventoryItem(InventoryGroup.WEAPON)?.skill?.name?.let {
-            val textureRegion = resourceManager.getAtlasTexture(it.lowercase())
+        hero.getInventoryItem(InventoryGroup.WEAPON)?.let {
+            val textureRegion = resourceManager.getAtlasTexture(it.id)
             val image = Image(textureRegion).apply { setScaling(Scaling.fit) }
             val container = Container(image).top().right().size(35f).pad(5f)
             val table = Table(createSkin()).apply { add(container).width(170f).height(Constant.FACE_SIZE) }
             statsStack.add(table)
         }
 
-        hero.getInventoryItem(InventoryGroup.SHIELD)?.skill?.name?.let {
-            val textureRegion = resourceManager.getAtlasTexture(it.lowercase())
+        hero.getInventoryItem(InventoryGroup.SHIELD)?.let {
+            val textureRegion = resourceManager.getAtlasTexture(it.id)
             val image = Image(textureRegion).apply { setScaling(Scaling.fit) }
             val container = Container(image).bottom().right().size(35f).pad(5f)
             val table = Table(createSkin()).apply { add(container).width(170f).height(Constant.FACE_SIZE) }
@@ -143,19 +142,19 @@ class BattleScreenBuilder {
         val skillName: String? = when {
             enemy.id.endsWith("_bat") -> "bite"
             enemy.id.endsWith("_slime") || enemy.id.endsWith("_slime_medicine") -> "body_slam"
-            else -> enemy.getInventoryItem(InventoryGroup.WEAPON)?.skill?.name
+            else -> enemy.getInventoryItem(InventoryGroup.WEAPON)?.id
         }
 
         skillName?.let {
-            val textureRegion = resourceManager.getAtlasTexture(it.lowercase())
+            val textureRegion = resourceManager.getAtlasTexture(it)
             val image = Image(textureRegion).apply { setScaling(Scaling.fit) }
             val container = Container(image).top().left().size(35f).pad(5f)
             val table = Table(createSkin()).apply { add(container).width(170f).height(Constant.FACE_SIZE) }
             statsStack.add(table)
         }
 
-        enemy.getInventoryItem(InventoryGroup.SHIELD)?.skill?.name?.let {
-            val textureRegion = resourceManager.getAtlasTexture(it.lowercase())
+        enemy.getInventoryItem(InventoryGroup.SHIELD)?.let {
+            val textureRegion = resourceManager.getAtlasTexture(it.id)
             val image = Image(textureRegion).apply { setScaling(Scaling.fit) }
             val container = Container(image).bottom().left().size(35f).pad(5f)
             val table = Table(createSkin()).apply { add(container).width(170f).height(Constant.FACE_SIZE) }

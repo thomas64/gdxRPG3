@@ -80,8 +80,8 @@ internal class EquipSlot(
     }
 
     private fun doesHeroAcceptItem(draggedItem: InventoryImage): Boolean {
-        val message = heroItem.createMessageIfNotAbleToEquip(draggedItem.inventoryItem)
-        return message == null || showDialogHeroDoesNotAccept(message)
+        val message: String? = heroItem.createMessageIfNotAbleToEquip(draggedItem.inventoryItem)
+        return message?.let { showDialogHeroDoesNotAccept(it) } ?: true
     }
 
     private fun showDialogHeroDoesNotAccept(message: String): Boolean {

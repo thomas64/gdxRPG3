@@ -147,9 +147,12 @@ data class InventoryItem(
             SkillItemId.AXE,
             SkillItemId.SPEAR,
             SkillItemId.DAGGER,
-            SkillItemId.STAFF,
             SkillItemId.THROW,
             SkillItemId.BOW,
+            SkillItemId.STAFF,
+            SkillItemId.STAFF_FIRE,
+            SkillItemId.STAFF_WIND,
+            SkillItemId.STAFF_THUNDER,
             SkillItemId.SHIELD -> 0
         }
     }
@@ -182,7 +185,7 @@ data class InventoryItem(
         return InventoryMinimal.entries
             .filter { getAttributeOfMinimal(it) is Int }
             .filter { getAttributeOfMinimal(it) as Int > 0 }
-            .count() == 1
+            .size == 1
     }
 
     fun getCalcsOtherItemHasAndYouDont(otherItem: InventoryItem): Set<CalcAttributeId> {
@@ -220,9 +223,11 @@ data class InventoryItem(
             SkillItemId.AXE,
             SkillItemId.SPEAR,
             SkillItemId.DAGGER,
-            SkillItemId.STAFF,
             SkillItemId.THROW,
-            SkillItemId.BOW -> range.ifEmpty { listOf(1) }
+            SkillItemId.BOW,
+            SkillItemId.STAFF_FIRE,
+            SkillItemId.STAFF_WIND,
+            SkillItemId.STAFF_THUNDER -> range.ifEmpty { listOf(1) }
             else -> throw IllegalArgumentException("Only possible to ask a Weapon Skill.")
         }
     }

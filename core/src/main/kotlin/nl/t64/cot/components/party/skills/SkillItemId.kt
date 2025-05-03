@@ -28,40 +28,49 @@ enum class SkillItemId : SuperEnum {
     TROUBADOUR,
     THIEF,
     WARRIOR,
-
-    // Magic Skills
-    WIZARD, // todo, toevoegen alle ideeën van magic skills uit excel.
+    WIZARD,
 
     // Weapon Skills
     SWORD,
     AXE,
     SPEAR,
     DAGGER,
-    STAFF,
     THROW,
     BOW,
+    STAFF,
+    STAFF_FIRE,
+    STAFF_WIND,
+    STAFF_THUNDER,
     SHIELD;
 
-    override val title: String = name.lowercase().replaceFirstChar { it.uppercase() }
+    override val title: String = name.substringBefore("_").lowercase().replaceFirstChar { it.uppercase() }
+
+    companion object {
+        private val advantages: Map<SkillItemId, SkillItemId> = mapOf(
+            SWORD to AXE,
+            AXE to SPEAR,
+            SPEAR to SWORD,
+            DAGGER to THROW,
+            THROW to BOW,
+            BOW to DAGGER,
+            STAFF_FIRE to STAFF_WIND,
+            STAFF_WIND to STAFF_THUNDER,
+            STAFF_THUNDER to STAFF_FIRE
+        )
+    }
+
 
     fun isHandToHandWeaponSkill(): Boolean {
         return when (this) {
-            SWORD, AXE, SPEAR, DAGGER, STAFF -> true
-            THROW, BOW -> false
+            SWORD, AXE, SPEAR, DAGGER -> true
+            THROW, BOW, STAFF_FIRE, STAFF_WIND, STAFF_THUNDER -> false
             else -> throw IllegalArgumentException("Only possible to ask a Weapon Skill.")
         }
     }
 
     fun isWeaponSkill(): Boolean {
         return when (this) {
-            SWORD, AXE, SPEAR, DAGGER, STAFF, THROW, BOW, SHIELD -> true
-            else -> false
-        }
-    }
-
-    fun isMagicSkill(): Boolean {
-        return when (this) {
-            WIZARD -> true
+            SWORD, AXE, SPEAR, DAGGER, THROW, BOW, STAFF, SHIELD -> true
             else -> false
         }
     }
@@ -88,37 +97,15 @@ enum class SkillItemId : SuperEnum {
     }
 
     fun hasAdvantageOver(other: SkillItemId?): Boolean {
-        return when {
-            other == null -> true
-
-            this == SWORD -> other == AXE
-            this == AXE -> other == SPEAR
-            this == SPEAR -> other == SWORD
-
-            this == DAGGER -> other == STAFF
-            this == STAFF -> other == THROW
-            this == THROW -> other == BOW
-            this == BOW -> other == DAGGER
-
-            else -> false
-        }
+        if (other == null) return true
+        if (this == STAFF) throw IllegalStateException("STAFF itself can't have advantage.")
+        return advantages[this] == other
     }
 
     fun hasDisadvantageFrom(other: SkillItemId?): Boolean {
-        return when {
-            other == null -> false
-
-            this == SWORD -> other == SPEAR
-            this == AXE -> other == SWORD
-            this == SPEAR -> other == AXE
-
-            this == DAGGER -> other == BOW
-            this == STAFF -> other == DAGGER
-            this == THROW -> other == STAFF
-            this == BOW -> other == THROW
-
-            else -> false
-        }
+        if (other == null) return false
+        if (this == STAFF) throw IllegalStateException("STAFF itself can't have disadvantage.")
+        return advantages[other] == this
     }
 
 }

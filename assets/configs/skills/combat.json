@@ -53,5 +53,13 @@
       "  Each rank in 'Warrior' increases the probability of this by 4%.",
       "  A critical hit inflicts damage equal to 175% of the normal damage."
     ]
+  },
+  "wizard"    : {
+    "upgrade"    : 12,
+    "description": [
+      "- 'Wizard' allows the possibility to learn and cast magical spells in combat.",
+      "",
+      "ToDo"
+    ]
   }
 }

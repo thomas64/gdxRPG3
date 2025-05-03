@@ -525,8 +525,8 @@ class BattleScreen : Screen {
         attackAction.isCostingTooMuchApSp()?.let { notEnoughApSp ->
             showSmallLeftAlignMessageDialog(notEnoughApSp)
             return
-        } ?: attackAction.isOutOfRange()?.let { outOfRange ->
-            showSmallLeftAlignMessageDialog(outOfRange)
+        } ?: attackAction.isUnableWithCurrentWeapon()?.let { unable ->
+            showSmallLeftAlignMessageDialog(unable)
             return
         }
         val message = attackAction.createConfirmationMessage()

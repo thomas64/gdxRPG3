@@ -1,9 +1,8 @@
 [
-  "basic_dagger",
   "basic_sword",
-  "basic_staff",
-  "basic_spear",
   "basic_axe",
+  "basic_spear",
+  "basic_dagger",
   "basic_knife",
   "basic_bow",
   "basic_light_shield",

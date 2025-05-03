@@ -13,7 +13,9 @@ item.json
 necklace.json
 pants.json
 spear.json
-staff.json
+staff_fire.json
+staff_wind.json
+staff_thunder.json
 potion.json
 resource.json
 ring.json

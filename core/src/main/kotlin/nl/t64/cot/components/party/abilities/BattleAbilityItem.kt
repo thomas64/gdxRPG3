@@ -87,7 +87,7 @@ abstract class BattleAbilityItem(
             && attacker.character.currentSp >= sp
     }
 
-    fun isInRangeForWeapon(): Boolean {
+    fun isWeaponAllowed(): Boolean {
         return abilityItem.isWeaponAllowed(currentWeapon)
     }
 
@@ -131,7 +131,7 @@ abstract class BattleAbilityItem(
     }
 
     protected fun possibleCreateGrayName(): AbilityItem {
-        if (hasEnoughApSp()) {
+        if (isWeaponAllowed() && hasEnoughApSp()) {
             return abilityItem
         }
         return abilityItem.copy(name = "[GRAY]$name")
@@ -150,7 +150,7 @@ abstract class BattleAbilityItem(
     }
 
     protected fun possibleAddEffectiveMessage(): String {
-        val weaponName = currentWeapon!!.name.takeIf { it.isNotBlank() } ?: name
+        val weaponName = currentWeapon!!.name.takeUnless { it.isBlank() } ?: name
 
         return when {
             hasWeaponTriangleAdvantage() -> {

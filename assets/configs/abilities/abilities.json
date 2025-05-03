@@ -1,22 +1,25 @@
 {
   "strike_2"    : {
-    "name"       : "Weak Strike",
-    "ap"         : 2,
-    "description": []
+    "name"         : "Weak Strike",
+    "ap"           : 2,
+    "weapon_skills": ["SWORD", "AXE", "SPEAR", "DAGGER", "THROW", "BOW"],
+    "description"  : []
   },
   "strike_3"    : {
-    "name"       : "Strike",
-    "ap"         : 3,
-    "description": [
+    "name"         : "Strike",
+    "ap"           : 3,
+    "weapon_skills": ["SWORD", "AXE", "SPEAR", "DAGGER", "THROW", "BOW"],
+    "description"  : [
       "A basic physical attack with a weapon,",
       "that deals damage to a single target."
     ]
   },
   "strike_4"    : {
-    "name"       : "Strong Strike",
-    "ap"         : 4,
-    "sp"         : 2,
-    "description": []
+    "name"         : "Strong Strike",
+    "ap"           : 4,
+    "sp"           : 2,
+    "weapon_skills": ["SWORD", "AXE", "SPEAR", "DAGGER", "THROW", "BOW"],
+    "description"  : []
   },
   "bite_3"      : {
     "name"       : "Bite",
@@ -38,7 +41,7 @@
     "ap"           : 6,
     "sp"           : 8,
     "skill"        : "WARRIOR",
-    "weapon_skills": ["SWORD", "AXE", "SPEAR", "DAGGER", "STAFF"],
+    "weapon_skills": ["SWORD", "AXE", "SPEAR", "DAGGER"],
     "description"  : [
       "A hand-to-hand attack with a weapon, that deals damage to a single target.",
       "When successful, Stagger moves the target to the bottom of the turn order.",

@@ -3,9 +3,9 @@ size:248,62
 repeat:none
 basic_spear
 bounds:0,0,62,62
-masterwork_spear
+fine_spear
 bounds:62,0,62,62
-ordinary_spear
+masterwork_spear
 bounds:124,0,62,62
 specialist_spear
 bounds:186,0,62,62

@@ -1,0 +1,68 @@
+{
+  "basic_staff_thunder"     : {
+    "name"            : "Basic Thunder Staff",
+    "group"           : "WEAPON",
+    "sort"            : 1800,
+    "skill"           : "STAFF_THUNDER",
+    "price"           : 10,
+    "durability"      : 30,
+    "min_intelligence": 15,
+    "base_hit"        : 95,
+    "damage"          : 5
+  },
+  "fine_staff_thunder"      : {
+    "name"            : "Fine Thunder Staff",
+    "group"           : "WEAPON",
+    "sort"            : 2800,
+    "skill"           : "STAFF_THUNDER",
+    "price"           : 35,
+    "durability"      : 25,
+    "min_intelligence": 18,
+    "base_hit"        : 85,
+    "damage"          : 10
+  },
+  "specialist_staff_thunder": {
+    "name"            : "Specialist Thunder Staff",
+    "group"           : "WEAPON",
+    "sort"            : 3800,
+    "skill"           : "STAFF_THUNDER",
+    "price"           : 60,
+    "durability"      : 20,
+    "min_intelligence": 21,
+    "base_hit"        : 75,
+    "damage"          : 15
+  },
+  "masterwork_staff_thunder": {
+    "name"            : "Masterwork Thunder Staff",
+    "group"           : "WEAPON",
+    "sort"            : 4800,
+    "skill"           : "STAFF_THUNDER",
+    "price"           : 85,
+    "durability"      : 15,
+    "min_intelligence": 24,
+    "base_hit"        : 65,
+    "damage"          : 20
+  },
+  "epic_staff_thunder"      : {
+    "name"            : "Epic Thunder Staff",
+    "group"           : "WEAPON",
+    "sort"            : 5800,
+    "skill"           : "STAFF_THUNDER",
+    "price"           : 110,
+    "durability"      : 10,
+    "min_intelligence": 27,
+    "base_hit"        : 55,
+    "damage"          : 25
+  },
+  "legendary_staff_thunder" : {
+    "name"            : "Legendary Thunder Staff",
+    "group"           : "WEAPON",
+    "sort"            : 6800,
+    "skill"           : "STAFF_THUNDER",
+    "price"           : 135,
+    "durability"      : 5,
+    "min_intelligence": 30,
+    "base_hit"        : 45,
+    "damage"          : 30
+  }
+}

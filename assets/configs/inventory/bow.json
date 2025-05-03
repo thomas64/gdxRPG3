@@ -2,7 +2,7 @@
   "basic_mozes_bow": {
     "name"         : "Mozes' Bow",
     "group"        : "WEAPON",
-    "sort"         : 1598,
+    "sort"         : 1498,
     "skill"        : "BOW",
     "is_two_handed": true,
     "price"        : 30,
@@ -15,7 +15,7 @@
   "basic_elven_bow": {
     "name"            : "Elven Bow",
     "group"           : "WEAPON",
-    "sort"            : 1599,
+    "sort"            : 1499,
     "skill"           : "BOW",
     "is_two_handed"   : true,
     "price"           : 30,
@@ -28,7 +28,7 @@
   "basic_bow"      : {
     "name"         : "Basic Bow",
     "group"        : "WEAPON",
-    "sort"         : 1600,
+    "sort"         : 1500,
     "skill"        : "BOW",
     "is_two_handed": true,
     "price"        : 20,
@@ -41,7 +41,7 @@
   "fine_bow"       : {
     "name"         : "Fine Bow",
     "group"        : "WEAPON",
-    "sort"         : 2600,
+    "sort"         : 2500,
     "skill"        : "BOW",
     "is_two_handed": true,
     "price"        : 40,
@@ -54,7 +54,7 @@
   "specialist_bow" : {
     "name"         : "Specialist Bow",
     "group"        : "WEAPON",
-    "sort"         : 3600,
+    "sort"         : 3500,
     "skill"        : "BOW",
     "is_two_handed": true,
     "price"        : 60,
@@ -67,7 +67,7 @@
   "masterwork_bow" : {
     "name"         : "Masterwork Bow",
     "group"        : "WEAPON",
-    "sort"         : 4600,
+    "sort"         : 4500,
     "skill"        : "BOW",
     "is_two_handed": true,
     "price"        : 80,

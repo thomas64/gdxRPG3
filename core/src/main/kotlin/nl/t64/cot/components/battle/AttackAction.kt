@@ -14,12 +14,12 @@ class AttackAction(
 
     companion object {
         fun createForEnemy(currentEnemy: Participant, targetHero: Participant, battleId: String): AttackAction {
-
+            val allAbilities: List<BattleAbilityItem> = currentEnemy.getBattleAbilities()
             val ability: BattleAbilityItem = (
-                currentEnemy.getBattleAbilities()
+                allAbilities
                     .filter { it.ap <= currentEnemy.currentAP }
                     .maxByOrNull { it.ap }
-                    ?: currentEnemy.getBattleAbilities().first()
+                    ?: allAbilities.first()
                 ).apply { target = targetHero }
 
             if (battleId == "farm_battle" && targetHero.character.id == "luana"
@@ -60,15 +60,15 @@ class AttackAction(
         }
     }
 
-    fun isOutOfRange(): String? {
+    fun isUnableWithCurrentWeapon(): String? {
         return when {
-            !selectedAttack.isInRangeForWeapon() -> {
+            !selectedAttack.isWeaponAllowed() -> {
                 createPreviewMessage() +
                     System.lineSeparator() +
                     "_________________" +
                     System.lineSeparator() +
                     System.lineSeparator() +
-                    "      [FIREBRICK]Out of range!"
+                    "[FIREBRICK]Unable with current weapon!"
             }
             else -> null
         }

@@ -2,7 +2,7 @@
   "basic_knife"     : {
     "name"         : "Basic Knife",
     "group"        : "WEAPON",
-    "sort"         : 1500,
+    "sort"         : 1400,
     "skill"        : "THROW",
     "price"        : 5,
     "durability"   : 30,
@@ -14,7 +14,7 @@
   "fine_knife"      : {
     "name"         : "Fine Knife",
     "group"        : "WEAPON",
-    "sort"         : 2500,
+    "sort"         : 2400,
     "skill"        : "THROW",
     "price"        : 15,
     "durability"   : 25,
@@ -26,7 +26,7 @@
   "specialist_knife": {
     "name"         : "Specialist Knife",
     "group"        : "WEAPON",
-    "sort"         : 3500,
+    "sort"         : 3400,
     "skill"        : "THROW",
     "price"        : 25,
     "durability"   : 20,
@@ -38,7 +38,7 @@
   "masterwork_knife": {
     "name"         : "Masterwork Knife",
     "group"        : "WEAPON",
-    "sort"         : 4500,
+    "sort"         : 4400,
     "skill"        : "THROW",
     "price"        : 35,
     "durability"   : 15,

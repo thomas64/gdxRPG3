@@ -1,4 +1,18 @@
 {
+  "sword" : {
+    "upgrade"    : 6,
+    "description": [
+      "- 'Sword' allows the possibility of equipping swords.",
+      "",
+      "- 'Sword' increases your chance to hit with swords in combat.",
+      "  Each rank in 'Sword' increases 'Chance to hit' by 5%.",
+      "",
+      "- Swords have an advantage against enemies with axes,",
+      "  and a disadvantage against enemies with spears.",
+      "  Swords also have an advantage or a disadvantage against",
+      "  certain weaponless enemies."
+    ]
+  },
   "axe"   : {
     "upgrade"    : 6,
     "description": [
@@ -10,20 +24,6 @@
       "- Axes have an advantage against enemies with spears,",
       "  and a disadvantage against enemies with swords.",
       "  Axes also have an advantage or a disadvantage against",
-      "  certain weaponless enemies."
-    ]
-  },
-  "bow"   : {
-    "upgrade"    : 6,
-    "description": [
-      "- 'Bow' allows the possibility of equipping bows.",
-      "",
-      "- 'Bow' increases your chance to hit with bows in combat.",
-      "  Each rank in 'Bow' increases 'Chance to hit' by 5%.",
-      "",
-      "- Bows have an advantage against enemies with daggers,",
-      "  and a disadvantage against enemies with throwing weapons.",
-      "  Bows also have an advantage or a disadvantage against",
       "  certain weaponless enemies."
     ]
   },
@@ -41,26 +41,17 @@
       "  certain weaponless enemies."
     ]
   },
-  "shield": {
+  "dagger": {
     "upgrade"    : 6,
     "description": [
-      "- 'Shield' allows the possibility of equipping shields.",
+      "- 'Dagger' allows the possibility of equipping daggers.",
       "",
-      "- In combat, a shield may block the enemy's attack with physical weapons.",
-      "  Each rank in 'Shield' increases 'Defense' by 10%."
-    ]
-  },
-  "sword" : {
-    "upgrade"    : 6,
-    "description": [
-      "- 'Sword' allows the possibility of equipping swords.",
+      "- 'Dagger' increases your chance to hit with daggers in combat.",
+      "  Each rank in 'Dagger' increases 'Chance to hit' by 5%.",
       "",
-      "- 'Sword' increases your chance to hit with swords in combat.",
-      "  Each rank in 'Sword' increases 'Chance to hit' by 5%.",
-      "",
-      "- Swords have an advantage against enemies with axes,",
-      "  and a disadvantage against enemies with spears.",
-      "  Swords also have an advantage or a disadvantage against",
+      "- Daggers have an advantage against enemies with throwing weapons,",
+      "  and a disadvantage against enemies with bows.",
+      "  Daggers also have an advantage or a disadvantage against",
       "  certain weaponless enemies."
     ]
   },
@@ -73,8 +64,22 @@
       "  Each rank in 'Throw' increases 'Chance to hit' by 5%.",
       "",
       "- Throwing weapons have an advantage against enemies with bows,",
-      "  and a disadvantage against enemies with staffs.",
+      "  and a disadvantage against enemies with daggers.",
       "  Throwing weapons also have an advantage or a disadvantage against",
+      "  certain weaponless enemies."
+    ]
+  },
+  "bow"   : {
+    "upgrade"    : 6,
+    "description": [
+      "- 'Bow' allows the possibility of equipping bows.",
+      "",
+      "- 'Bow' increases your chance to hit with bows in combat.",
+      "  Each rank in 'Bow' increases 'Chance to hit' by 5%.",
+      "",
+      "- Bows have an advantage against enemies with daggers,",
+      "  and a disadvantage against enemies with throwing weapons.",
+      "  Bows also have an advantage or a disadvantage against",
       "  certain weaponless enemies."
     ]
   },
@@ -86,24 +91,21 @@
       "- 'Staff' increases your chance to hit with staffs in combat.",
       "  Each rank in 'Staff' increases 'Chance to hit' by 5%.",
       "",
-      "- Staffs have an advantage against enemies with throwing weapons,",
-      "  and a disadvantage against enemies with daggers.",
-      "  Staffs also have an advantage or a disadvantage against",
-      "  certain weaponless enemies."
+      "- Fire has an advantage against enemies with wind,",
+      "  and a disadvantage against enemies with thunder.",
+      "  Wind has an advantage against enemies with thunder,",
+      "  and a disadvantage against enemies with fire.",
+      "  Thunder has an advantage against enemies with fire,",
+      "  and a disadvantage against enemies with wind."
     ]
   },
-  "dagger": {
+  "shield": {
     "upgrade"    : 6,
     "description": [
-      "- 'Dagger' allows the possibility of equipping daggers.",
+      "- 'Shield' allows the possibility of equipping shields.",
       "",
-      "- 'Dagger' increases your chance to hit with daggers in combat.",
-      "  Each rank in 'Dagger' increases 'Chance to hit' by 5%.",
-      "",
-      "- Daggers have an advantage against enemies with staffs,",
-      "  and a disadvantage against enemies with bows.",
-      "  Daggers also have an advantage or a disadvantage against",
-      "  certain weaponless enemies."
+      "- In combat, a shield may block the enemy's attack with physical weapons.",
+      "  Each rank in 'Shield' increases 'Defense' by 10%."
     ]
   }
 }

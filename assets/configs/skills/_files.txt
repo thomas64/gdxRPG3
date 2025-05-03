@@ -1,5 +1,4 @@
 communication.json
 civil.json
 combat.json
-magic.json
 weapon.json

@@ -36,7 +36,7 @@
       "teleportation"  : 10
     },
     "inventory": {
-      "weapon": "legendary_staff",
+      "weapon": "legendary_staff_fire",
       "chest" : "armor_400"
     }
   }

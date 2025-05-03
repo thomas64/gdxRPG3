@@ -17,7 +17,9 @@ class SkillContainer() {
     }
 
     fun getById(skillItemId: SkillItemId): SkillItem {
-        return skills[skillItemId] ?: SkillDatabase.createSkillItem(skillItemId.name, 0)
+        val staffIds: Set<SkillItemId> = setOf(SkillItemId.STAFF_FIRE, SkillItemId.STAFF_WIND, SkillItemId.STAFF_THUNDER)
+        val key: SkillItemId = if (skillItemId in staffIds) SkillItemId.STAFF else skillItemId
+        return skills[key] ?: SkillDatabase.createSkillItem(key.name, 0)
     }
 
     fun getAllAboveZero(): List<SkillItem> {
