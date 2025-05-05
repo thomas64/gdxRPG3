@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Screen
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
+import com.badlogic.gdx.scenes.scene2d.InputListener
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog
@@ -188,14 +189,12 @@ class BattleScreen : Screen {
                 isPreBattle = true
                 render(0f)
 
-                val event1 = gameData.events.getEventById("guide_event_battle_1")
-                val event2 = gameData.events.getEventById("guide_event_battle_2")
-                val event3 = gameData.events.getEventById("guide_event_battle_3")
-                when {
-                    !gameData.events.hasEventPlayed(event1) -> event1.possibleStart(stage)
-                    !gameData.events.hasEventPlayed(event2) -> event2.possibleStart(stage)
-                    !gameData.events.hasEventPlayed(event3) -> event3.possibleStart(stage)
-                }
+                listOf("guide_event_battle_1",
+                       "guide_event_battle_2",
+                       "guide_event_battle_3")
+                    .map { gameData.events.getEventById(it) }
+                    .firstOrNull { !gameData.events.hasEventPlayed(it) }
+                    ?.possibleStart(stage)
             }
         ))
     }
@@ -226,20 +225,11 @@ class BattleScreen : Screen {
         currentParticipant = turnManager.currentParticipant
         updateBattleField()
 
-        if (enemies.getAll().none { it.isAlive }) {
-            winBattle()
-            return
-        }
-
-        if (gameData.party.getPlayer().isDead) {
-            gameOver()
-            return
-        }
-
-        if (currentParticipant.isHero) {
-            takeTurnHero()
-        } else {
-            takeTurnEnemy()
+        when {
+            enemies.getAll().none { it.isAlive } -> winBattle()
+            gameData.party.getPlayer().isDead -> gameOver()
+            currentParticipant.isHero -> takeTurnHero()
+            else -> takeTurnEnemy()
         }
     }
 
@@ -445,48 +435,33 @@ class BattleScreen : Screen {
 
     private fun setupPreBattleTable() {
         buttonTablePreBattle = screenBuilder.createButtonTablePreBattle()
-        stage.addActor(buttonTablePreBattle)
-        buttonTablePreBattle.addListener(listenerPreBattle)
-        stage.keyboardFocus = buttonTablePreBattle.children.last()
+        prepare(buttonTablePreBattle, listenerPreBattle)
     }
 
     private fun setupHeroTableForReposition() {
-        val onlyHeroes = turnManager.participants.filter { it.isHero }
-        buttonTableHero = screenBuilder.createButtonTableHero(onlyHeroes)
-        stage.addActor(buttonTableHero)
-        buttonTableHero.addListener(listenerHeroReposition)
-        stage.keyboardFocus = buttonTableHero.children.last()
+        buttonTableHero = screenBuilder.createButtonTableHero(turnManager.getOnlyHeroes())
+        prepare(buttonTableHero, listenerHeroReposition)
     }
 
     private fun setupRepositionTable() {
         buttonTableReposition = screenBuilder.createButtonTableMove()
-        stage.addActor(buttonTableReposition)
-        buttonTableReposition.addListener(listenerReposition)
-        stage.keyboardFocus = buttonTableReposition.children.last()
+        prepare(buttonTableReposition, listenerReposition)
     }
 
     private fun setupHeroTableForPrePreview() {
-        val onlyHeroes = turnManager.participants.filter { it.isHero }
-        buttonTableHero = screenBuilder.createButtonTableHero(onlyHeroes)
-        stage.addActor(buttonTableHero)
-        buttonTableHero.addListener(listenerHeroPrePreview)
-        stage.keyboardFocus = buttonTableHero.children.last()
+        buttonTableHero = screenBuilder.createButtonTableHero(turnManager.getOnlyHeroes())
+        prepare(buttonTableHero, listenerHeroPrePreview)
     }
 
     private fun setupPrePreviewAttackTable() {
         buttonTableAttack = screenBuilder.createButtonTablePreviewAttack(currentParticipant)
-        stage.addActor(buttonTableAttack)
-        buttonTableAttack.addListener(listenerPrePreviewAttack)
-        stage.keyboardFocus = buttonTableAttack.children.last()
+        prepare(buttonTableAttack, listenerPrePreviewAttack)
     }
 
     private fun setupPrePreviewTargetTable(selectedAttack: BattleAbilityItem) {
-        val onlyEnemies = turnManager.participants.filter { !it.isHero }
-        buttonTableTarget = screenBuilder.createButtonTableTarget(onlyEnemies)
-        stage.addActor(buttonTableTarget)
+        buttonTableTarget = screenBuilder.createButtonTableTarget(turnManager.getOnlyEnemies())
         listenerPrePreviewTarget.setSelectedAttack(selectedAttack)
-        buttonTableTarget.addListener(listenerPrePreviewTarget)
-        stage.keyboardFocus = buttonTableTarget.children.last()
+        prepare(buttonTableTarget, listenerPrePreviewTarget)
     }
 
     private fun setupActionTable() {
@@ -494,49 +469,36 @@ class BattleScreen : Screen {
         battleField.resetStartingSpace()
         val areEnemiesInRange: Boolean = battleField.getTargetableEnemiesFor(currentParticipant).isNotEmpty()
         buttonTableAction = screenBuilder.createButtonTableAction(currentParticipant, areEnemiesInRange)
-        stage.addActor(buttonTableAction)
-        buttonTableAction.addListener(listenerAction)
-        stage.keyboardFocus = buttonTableAction.children.last()
+        prepare(buttonTableAction, listenerAction)
     }
 
     private fun setupMoveTable() {
         battleField.setStartingSpace(currentParticipant)
         buttonTableMove = screenBuilder.createButtonTableMove()
-        stage.addActor(buttonTableMove)
-        buttonTableMove.addListener(listenerMove)
-        stage.keyboardFocus = buttonTableMove.children.last()
+        prepare(buttonTableMove, listenerMove)
     }
 
     private fun setupPreviewAttackTable() {
         buttonTableAttack = screenBuilder.createButtonTablePreviewAttack(currentParticipant)
-        stage.addActor(buttonTableAttack)
-        buttonTableAttack.addListener(listenerPreviewAttack)
-        stage.keyboardFocus = buttonTableAttack.children.last()
+        prepare(buttonTableAttack, listenerPreviewAttack)
     }
 
     private fun setupAttackTable() {
         buttonTableAttack = screenBuilder.createButtonTableAttack(currentParticipant)
-        stage.addActor(buttonTableAttack)
-        buttonTableAttack.addListener(listenerAttack)
-        stage.keyboardFocus = buttonTableAttack.children.last()
+        prepare(buttonTableAttack, listenerAttack)
     }
 
     private fun setupPreviewTargetTable(selectedAttack: BattleAbilityItem) {
-        val onlyEnemies = turnManager.participants.filter { !it.isHero }
-        buttonTableTarget = screenBuilder.createButtonTableTarget(onlyEnemies)
-        stage.addActor(buttonTableTarget)
+        buttonTableTarget = screenBuilder.createButtonTableTarget(turnManager.getOnlyEnemies())
         listenerPreviewTarget.setSelectedAttack(selectedAttack)
-        buttonTableTarget.addListener(listenerPreviewTarget)
-        stage.keyboardFocus = buttonTableTarget.children.last()
+        prepare(buttonTableTarget, listenerPreviewTarget)
     }
 
     private fun setupTargetTable(selectedAttack: BattleAbilityItem) {
         val targetableEnemies: List<Participant> = battleField.getTargetableEnemiesFor(currentParticipant)
         buttonTableTarget = screenBuilder.createButtonTableTarget(targetableEnemies)
-        stage.addActor(buttonTableTarget)
         listenerTarget.setSelectedAttack(selectedAttack)
-        buttonTableTarget.addListener(listenerTarget)
-        stage.keyboardFocus = buttonTableTarget.children.last()
+        prepare(buttonTableTarget, listenerTarget)
     }
 
     private fun setupPotionTable() {
@@ -544,9 +506,7 @@ class BattleScreen : Screen {
             .filter { it.name.contains(" Potion") }
             .map { BattlePotionItem(it) }
         buttonTablePotion = screenBuilder.createButtonTablePotion(battlePotions)
-        stage.addActor(buttonTablePotion)
-        buttonTablePotion.addListener(listenerPotion)
-        stage.keyboardFocus = buttonTablePotion.children.last()
+        prepare(buttonTablePotion, listenerPotion)
     }
 
     private fun setupWeaponTable() {
@@ -556,9 +516,13 @@ class BattleScreen : Screen {
         val currentWeapon: InventoryItem? = currentParticipant.character.getInventoryItem(InventoryGroup.WEAPON)
         val currentShield: InventoryItem? = currentParticipant.character.getInventoryItem(InventoryGroup.SHIELD)
         buttonTableWeapon = screenBuilder.createButtonTableWeapon(battleEquipment, currentWeapon, currentShield)
-        stage.addActor(buttonTableWeapon)
-        buttonTableWeapon.addListener(listenerWeapon)
-        stage.keyboardFocus = buttonTableWeapon.children.last()
+        prepare(buttonTableWeapon, listenerWeapon)
+    }
+
+    private fun prepare(table: Table, listener: InputListener) {
+        stage.addActor(table)
+        table.addListener(listener)
+        stage.keyboardFocus = table.children.last()
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -646,8 +610,7 @@ class BattleScreen : Screen {
     }
 
     private fun showConfirmWeaponDialog(selectedWeapon: BattleWeaponItem) {
-        val onlyEnemies = turnManager.participants.filter { !it.isHero }
-        val weaponAction = WeaponAction(currentParticipant, selectedWeapon, onlyEnemies)
+        val weaponAction = WeaponAction(currentParticipant, selectedWeapon, turnManager.getOnlyEnemies())
         weaponAction.isUnableToEquip()?.let { message ->
             MessageDialog(message).show(stage, AudioEvent.SE_MENU_ERROR)
             return

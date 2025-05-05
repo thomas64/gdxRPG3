@@ -17,6 +17,14 @@ class TurnManager(
         sortParticipants()
     }
 
+    fun getOnlyHeroes(): List<Participant> {
+        return participants.filter { it.isHero }
+    }
+
+    fun getOnlyEnemies(): List<Participant> {
+        return participants.filterNot { it.isHero }
+    }
+
     fun setNextTurn() {
         removeKilledParticipants()
         if (participants.size == 1) return
