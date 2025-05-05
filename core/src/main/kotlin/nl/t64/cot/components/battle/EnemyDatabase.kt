@@ -12,9 +12,14 @@ object EnemyDatabase {
         return enemyItem.createCopy()
     }
 
-    fun createEnemy(enemyId: String, index: Int): EnemyItem {
+    fun createEnemyWithIndexAfterName(enemyId: String, index: Int): EnemyItem {
         val enemyItem = enemies[enemyId]!!
         return enemyItem.createCopy(name = "${enemyItem.name} ${index + 1}")
+    }
+
+    fun createEnemyWithIndexAfterNameAndPrefixId(enemyId: String, prefixOfEnemyId: String, index: Int): EnemyItem {
+        val enemyItem = enemies[enemyId]!!
+        return enemyItem.createCopy(id = prefixOfEnemyId, name = "${enemyItem.name} ${index + 1}")
     }
 
 }

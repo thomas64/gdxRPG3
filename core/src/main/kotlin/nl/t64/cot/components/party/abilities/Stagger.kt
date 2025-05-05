@@ -61,9 +61,7 @@ class Stagger(
 
     override fun handleSuccess(messages: ArrayDeque<String>) {
         val isCriticalHit: Boolean = calculateCriticalHitPercentage() > Random.nextInt(0, 100)
-        val damage: Int = calculateDamage()
-        val criticalDamage: Int = calculateCriticalDamage()
-        val damageDone: Int = if (isCriticalHit) criticalDamage else damage
+        val damageDone: Int = if (isCriticalHit) calculateCriticalDamage() else calculateDamage()
 
         target.character.takeDamage(damageDone)
         val staggerMessage: String = handleStagger()

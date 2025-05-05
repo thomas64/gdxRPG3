@@ -3,8 +3,5 @@
   "spice",
   "gemstone",
   "healing_potion",
-  "energy_potion",
-  "basic_staff_fire",
-  "basic_staff_wind",
-  "basic_staff_thunder"
+  "energy_potion"
 ]

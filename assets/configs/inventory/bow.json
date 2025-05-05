@@ -23,7 +23,7 @@
     "min_intelligence": 11,
     "range"           : [6, 7, 8, 9],
     "base_hit"        : 75,
-    "damage"          : 6
+    "damage"          : 5
   },
   "basic_bow"      : {
     "name"         : "Basic Bow",

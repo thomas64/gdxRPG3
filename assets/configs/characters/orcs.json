@@ -1,5 +1,5 @@
 {
-  "orc_scout"   : {
+  "orc_scout"         : {
     "name"     : "Orc Scout",
     "gender"   : "its",
     "school"   : "NONE",
@@ -42,7 +42,7 @@
       "chest" : "armor_4"
     }
   },
-  "orc_sergeant": {
+  "orc_sergeant_axe"  : {
     "name"     : "Orc Sergeant",
     "gender"   : "its",
     "school"   : "NONE",
@@ -77,7 +77,7 @@
     ],
     "skills"   : {
       "warrior": 8,
-      "axe"    : 14,
+      "axe"    : 8,
       "shield" : 8
     },
     "spells"   : {
@@ -88,7 +88,53 @@
       "chest" : "armor_50"
     }
   },
-  "orc_general" : {
+  "orc_sergeant_spear": {
+    "name"     : "Orc Sergeant",
+    "gender"   : "its",
+    "school"   : "NONE",
+    "ap"       : 6,
+    "xp"       : 18,
+    "drops"    : {
+      "specialist_spear"           : 15,
+      "specialist_medium_shield"   : 15,
+      "specialist_medium_belt"     : 2,
+      "specialist_medium_boots"    : 2,
+      "specialist_medium_bracers"  : 2,
+      "specialist_medium_chest"    : 2,
+      "specialist_medium_cloak"    : 2,
+      "specialist_medium_gloves"   : 2,
+      "specialist_medium_helmet"   : 2,
+      "specialist_medium_pants"    : 2,
+      "specialist_medium_shoulders": 2,
+      "healing_potion"             : 5,
+      "gold"                       : 75
+    },
+    "stats"    : {
+      "intelligence": 1,
+      "dexterity"   : 1,
+      "strength"    : 18,
+      "speed"       : 18,
+      "willpower"   : 18,
+      "constitution": 18,
+      "stamina"     : 1
+    },
+    "abilities": [
+      "strike_2", "strike_3", "strike_4"
+    ],
+    "skills"   : {
+      "warrior": 8,
+      "spear"  : 8,
+      "shield" : 8
+    },
+    "spells"   : {
+    },
+    "inventory": {
+      "weapon": "specialist_spear",
+      "shield": "specialist_medium_shield",
+      "chest" : "armor_50"
+    }
+  },
+  "orc_general_axe"   : {
     "name"     : "Orc General",
     "gender"   : "its",
     "school"   : "NECROMANCY",
@@ -109,7 +155,7 @@
     "skills"   : {
       "warrior": 10,
       "wizard" : 10,
-      "axe"    : 25,
+      "axe"    : 10,
       "bow"    : 10,
       "sword"  : 10,
       "shield" : 10
@@ -126,6 +172,48 @@
     },
     "inventory": {
       "weapon": "masterwork_axe",
+      "shield": "masterwork_heavy_shield",
+      "chest" : "armor_100"
+    }
+  },
+  "orc_general_spear" : {
+    "name"     : "Orc General",
+    "gender"   : "its",
+    "school"   : "NECROMANCY",
+    "xp"       : 90,
+    "drops"    : {"masterwork_spear": 50, "masterwork_heavy_shield": 50, "stamina_potion": 90, "gold": 90},
+    "stats"    : {
+      "intelligence": 30,
+      "dexterity"   : 1,
+      "strength"    : 30,
+      "speed"       : 30,
+      "willpower"   : 30,
+      "constitution": 60,
+      "stamina"     : 60
+    },
+    "abilities": [
+      "strike_2", "strike_3", "strike_4"
+    ],
+    "skills"   : {
+      "warrior": 10,
+      "wizard" : 10,
+      "spear"  : 10,
+      "bow"    : 10,
+      "sword"  : 10,
+      "shield" : 10
+    },
+    "spells"   : {
+      "mirror"        : 10,
+      "vs_naming"     : 10,
+      "acid_bolt"     : 10,
+      "crushing_death": 10,
+      "haste"         : 10,
+      "spirit_shield" : 10,
+      "tap_stamina"   : 10,
+      "wall_of_bones" : 10
+    },
+    "inventory": {
+      "weapon": "masterwork_spear",
       "shield": "masterwork_heavy_shield",
       "chest" : "armor_100"
     }

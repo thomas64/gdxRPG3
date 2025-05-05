@@ -35,9 +35,34 @@ class EnemyContainer(
     }
 
     private fun createEnemies(battleId: String): List<EnemyItem> {
-        return gameData.battles.getBattlers(battleId)
-            .map { it.createEnemyList() }
-            .flatten()
+        val (battlersWithPostfix, battlers) = gameData.battles.getBattlers(battleId)
+            .partition { battler -> battler.id.count { it == '_' } == 2 }
+        return battlers.toEnemies() + battlersWithPostfix.toEnemiesWithSameIdAndNameWithIndex()
+    }
+
+    private fun List<Battler>.toEnemies(): List<EnemyItem> {
+        return this.flatMap {
+            List(it.amount) { index ->
+                if (it.amount > 1) {
+                    EnemyDatabase.createEnemyWithIndexAfterName(it.id, index)
+                } else {
+                    EnemyDatabase.createEnemy(it.id)
+                }
+            }
+        }
+    }
+
+    private fun List<Battler>.toEnemiesWithSameIdAndNameWithIndex(): List<EnemyItem> {
+        var globalSpecialIndex = 0
+        return this
+            .groupBy { it.id.substringBeforeLast('_') }
+            .flatMap { (prefix, battlersWithSamePrefix) ->
+                battlersWithSamePrefix.flatMap { battler ->
+                    List(battler.amount) {
+                        EnemyDatabase.createEnemyWithIndexAfterNameAndPrefixId(battler.id, prefix, globalSpecialIndex++)
+                    }
+                }
+            }
     }
 
 }

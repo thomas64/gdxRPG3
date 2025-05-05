@@ -10,6 +10,28 @@
     "base_hit"    : 90,
     "damage"      : 6
   },
+  "basic_fairy_sword": {
+    "name"         : "Fairy Sword",
+    "group"        : "WEAPON",
+    "sort"         : 1001,
+    "skill"        : "SWORD",
+    "price"        : 30,
+    "durability"   : 20,
+    "min_dexterity": 11,
+    "base_hit"     : 85,
+    "damage"       : 7
+  },
+  "basic_orc_sword"  : {
+    "name"        : "Orc Sword",
+    "group"       : "WEAPON",
+    "sort"        : 1002,
+    "skill"       : "SWORD",
+    "price"       : 30,
+    "durability"  : 20,
+    "min_strength": 11,
+    "base_hit"    : 80,
+    "damage"      : 8
+  },
   "basic_sword"      : {
     "name"        : "Basic Sword",
     "group"       : "WEAPON",

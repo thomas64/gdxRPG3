@@ -100,7 +100,7 @@ abstract class BattleAbilityItem(
 
         val weaponTriangle = when {
             hasWeaponTriangleAdvantage() -> 10
-            hasWeaponTriangleDisadvantage() -> -5
+            hasWeaponTriangleDisadvantage() -> -10
             else -> 0
         }
 
@@ -126,7 +126,7 @@ abstract class BattleAbilityItem(
         val attack: Int = (attacker.character.getCalculatedTotalDamage() * id.multiplier).toInt()
         val protection: Int = target.character.getCalculatedTotalProtection()
         val damage: Int = (attack - protection)
-        val weaponTriangle: Float = if (hasWeaponTriangleDisadvantage()) 2f else 1f
+        val weaponTriangle: Float = if (hasWeaponTriangleDisadvantage()) 1.5f else 1f
         return (damage / weaponTriangle).toInt().coerceAtLeast(1)
     }
 
