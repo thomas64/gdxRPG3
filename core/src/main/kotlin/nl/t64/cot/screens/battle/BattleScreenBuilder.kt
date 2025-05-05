@@ -44,9 +44,9 @@ class BattleScreenBuilder {
     private val border: Drawable = Utils.createFullBorderWhite()
     private val combined: Drawable = Utils.createCombinedDrawable(transparent, border)
 
-    var buttonTableRepositionIndex = 0
-    var buttonTableActionIndex = 0
-    var buttonTableAttackIndex = 0
+    var buttonTableSelectHeroIndex = 0
+    var buttonTableMainMenuIndex = 0
+    var buttonTableSelectAttackIndex = 0
 
     fun createBattleTitle(): Label {
         return Label(TITLE_TEXT, createLabelStyle(Color.WHITE)).apply {
@@ -284,8 +284,9 @@ class BattleScreenBuilder {
     private fun GdxList<String>.fillWithPreBattleActions(): GdxList<String> {
         items.add("Reposition party")
         items.add("Select equipment")
+        items.add("Preview hit and damage")
         items.add("Start battle")
-        this.selectedIndex = 0
+        this.selectedIndex = buttonTableMainMenuIndex
         return this
     }
 
@@ -294,7 +295,7 @@ class BattleScreenBuilder {
             .filter { it.character.isAlive }
             .forEach { items.add(it.character.name) }
         items.add("Back")
-        this.selectedIndex = buttonTableRepositionIndex
+        this.selectedIndex = buttonTableSelectHeroIndex
         return this
     }
 
@@ -320,14 +321,14 @@ class BattleScreenBuilder {
         this.setItems(*actionStrings.toTypedArray())
 
         if (!areEnemiesInRange) {
-            buttonTableActionIndex = 1
+            buttonTableMainMenuIndex = 1
         }
         if (currentParticipant.currentAP <= 1
-            || this.items[buttonTableActionIndex].startsWith("[GRAY]")
+            || this.items[buttonTableMainMenuIndex].startsWith("[GRAY]")
         ) {
-            buttonTableActionIndex = 9
+            buttonTableMainMenuIndex = 9
         }
-        this.selectedIndex = buttonTableActionIndex
+        this.selectedIndex = buttonTableMainMenuIndex
         return this
     }
 
@@ -339,7 +340,7 @@ class BattleScreenBuilder {
         val abilities: List<BattleAbilityItem> = currentParticipant.getBattleAbilities()
         this.setItems(*abilities.toTypedArray())
         items.add(createBackButton(currentParticipant))
-        this.selectedIndex = buttonTableAttackIndex
+        this.selectedIndex = buttonTableSelectAttackIndex
         return this
     }
 
@@ -348,10 +349,10 @@ class BattleScreenBuilder {
             .map { it.possibleCreateCopyWithGrayName() }
         this.setItems(*abilities.toTypedArray())
         items.add(createBackButton(currentParticipant))
-        if (this.items[buttonTableAttackIndex].toString().startsWith("[GRAY]")) {
-            buttonTableAttackIndex = this.items.size - 1
+        if (this.items[buttonTableSelectAttackIndex].toString().startsWith("[GRAY]")) {
+            buttonTableSelectAttackIndex = this.items.size - 1
         }
-        this.selectedIndex = buttonTableAttackIndex
+        this.selectedIndex = buttonTableSelectAttackIndex
         return this
     }
 

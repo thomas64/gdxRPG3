@@ -12,6 +12,7 @@ class SelectPreBattleListener(
     private val pauseMenu: () -> Unit,
     private val reposition: () -> Unit,
     private val inventoryScreen: () -> Unit,
+    private val selectPreview: () -> Unit,
     private val startBattle: () -> Unit
 ) : InputListener() {
 
@@ -40,6 +41,10 @@ class SelectPreBattleListener(
                     reposition.invoke()
                 }
                 "Select" in selected -> inventoryScreen.invoke()
+                "Preview" in selected -> {
+                    playSe(AudioEvent.SE_MENU_CONFIRM)
+                    selectPreview.invoke()
+                }
                 "Start" in selected -> {
                     playSe(AudioEvent.SE_MENU_CONFIRM)
                     startBattle.invoke()

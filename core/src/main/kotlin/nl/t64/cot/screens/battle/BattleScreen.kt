@@ -87,14 +87,26 @@ class BattleScreen : Screen {
 
     private val listenerPreBattle = SelectPreBattleListener({ winBattle() },
                                                             { openPauseMenu() },
-                                                            { selectHero() },
+                                                            { selectReposition() },
                                                             { showInventoryScreenPreBattle() },
+                                                            { selectPrePreviewAttack() },
                                                             { startBattle() })
-    private val listenerHero = SelectHeroListener({ heroIsSelected(it) }, { returnToPreBattle() })
+
+    private val listenerHeroReposition = SelectHeroListener({ heroIsSelectedForReposition(it) },
+                                                            { returnToPreBattle() })
+
     private val listenerReposition = SelectRepositionListener({ repositionLeft() },
                                                               { repositionRight() },
-                                                              { returnToHero() },
-                                                              { returnToHero() })
+                                                              { returnToHeroForReposition() },
+                                                              { returnToHeroForReposition() })
+
+    private val listenerHeroPrePreview = SelectHeroListener({ heroIsSelectedForPrePreview(it) },
+                                                            { returnToPreBattle() })
+    private val listenerPrePreviewAttack = SelectAttackListener({ attackInPrePreviewIsSelected(it) },
+                                                                { returnToHeroForPrePreview() })
+    private val listenerPrePreviewTarget = SelectTargetListener(::showPreviewDialog,
+                                                                { returnToPrePreviewAttack() })
+
 
     private val listenerAction = SelectActionListener({ winBattle() },
                                                       { openPauseMenu() },
@@ -108,11 +120,12 @@ class BattleScreen : Screen {
                                                       { showDelayTurnDialog() },
                                                       { showConfirmRestDialog() },
                                                       { endTurn() })
+
     private val listenerMove = SelectMoveListener({ moveLeft() },
                                                   { moveRight() },
                                                   { showConfirmMoveDialog() },
                                                   { returnToAction() })
-    private val listenerPreviewAttack = SelectAttackListener({ previewAttackIsSelected(it) }, { returnToAction() })
+    private val listenerPreviewAttack = SelectAttackListener({ attackInPreviewIsSelected(it) }, { returnToAction() })
     private val listenerAttack = SelectAttackListener({ attackIsSelected(it) }, { returnToAction() })
     private val listenerPreviewTarget = SelectTargetListener(::showPreviewDialog, { returnToPreviewAttack() })
     private val listenerTarget = SelectTargetListener(::showConfirmAttackDialog, { returnToAttack() })
@@ -295,18 +308,26 @@ class BattleScreen : Screen {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun startBattle() {
+        screenBuilder.buttonTableMainMenuIndex = 0
         buttonTablePreBattle.remove()
         isPreBattle = false
     }
 
-    private fun selectHero() {
+    private fun selectReposition() {
+        screenBuilder.buttonTableMainMenuIndex = (buttonTablePreBattle.children.last() as GdxList<*>).selectedIndex
         buttonTablePreBattle.remove()
-        setupHeroTable()
+        setupHeroTableForReposition()
     }
 
-    private fun heroIsSelected(selectedHero: String) {
+    private fun selectPrePreviewAttack() {
+        screenBuilder.buttonTableMainMenuIndex = (buttonTablePreBattle.children.last() as GdxList<*>).selectedIndex
+        buttonTablePreBattle.remove()
+        setupHeroTableForPrePreview()
+    }
+
+    private fun heroIsSelectedForReposition(selectedHero: String) {
         currentParticipant = turnManager.participants.first { it.character.name == selectedHero }
-        screenBuilder.buttonTableRepositionIndex = (buttonTableHero.children.last() as GdxList<*>).selectedIndex
+        screenBuilder.buttonTableSelectHeroIndex = (buttonTableHero.children.last() as GdxList<*>).selectedIndex
         buttonTableHero.remove()
         setupRepositionTable()
     }
@@ -319,8 +340,21 @@ class BattleScreen : Screen {
         battleField.repositionHeroRight(currentParticipant)
     }
 
+    private fun heroIsSelectedForPrePreview(selectedHero: String) {
+        currentParticipant = turnManager.participants.first { it.character.name == selectedHero }
+        screenBuilder.buttonTableSelectHeroIndex = (buttonTableHero.children.last() as GdxList<*>).selectedIndex
+        buttonTableHero.remove()
+        setupPrePreviewAttackTable()
+    }
+
+    private fun attackInPrePreviewIsSelected(attack: BattleAbilityItem) {
+        screenBuilder.buttonTableSelectAttackIndex = (buttonTableAttack.children.last() as GdxList<*>).selectedIndex
+        buttonTableAttack.remove()
+        setupPrePreviewTargetTable(attack)
+    }
+
     private fun selectMove() {
-        screenBuilder.buttonTableActionIndex = (buttonTableAction.children.last() as GdxList<*>).selectedIndex
+        screenBuilder.buttonTableMainMenuIndex = (buttonTableAction.children.last() as GdxList<*>).selectedIndex
         buttonTableAction.remove()
         setupMoveTable()
     }
@@ -334,37 +368,37 @@ class BattleScreen : Screen {
     }
 
     private fun selectPreviewAttack() {
-        screenBuilder.buttonTableActionIndex = (buttonTableAction.children.last() as GdxList<*>).selectedIndex
+        screenBuilder.buttonTableMainMenuIndex = (buttonTableAction.children.last() as GdxList<*>).selectedIndex
         buttonTableAction.remove()
         setupPreviewAttackTable()
     }
 
-    private fun previewAttackIsSelected(attack: BattleAbilityItem) {
-        screenBuilder.buttonTableAttackIndex = (buttonTableAttack.children.last() as GdxList<*>).selectedIndex
+    private fun attackInPreviewIsSelected(attack: BattleAbilityItem) {
+        screenBuilder.buttonTableSelectAttackIndex = (buttonTableAttack.children.last() as GdxList<*>).selectedIndex
         buttonTableAttack.remove()
         setupPreviewTargetTable(attack)
     }
 
     private fun selectAttack() {
-        screenBuilder.buttonTableActionIndex = (buttonTableAction.children.last() as GdxList<*>).selectedIndex
+        screenBuilder.buttonTableMainMenuIndex = (buttonTableAction.children.last() as GdxList<*>).selectedIndex
         buttonTableAction.remove()
         setupAttackTable()
     }
 
     private fun attackIsSelected(attack: BattleAbilityItem) {
-        screenBuilder.buttonTableAttackIndex = (buttonTableAttack.children.last() as GdxList<*>).selectedIndex
+        screenBuilder.buttonTableSelectAttackIndex = (buttonTableAttack.children.last() as GdxList<*>).selectedIndex
         buttonTableAttack.remove()
         setupTargetTable(attack)
     }
 
     private fun selectPotion() {
-        screenBuilder.buttonTableActionIndex = (buttonTableAction.children.last() as GdxList<*>).selectedIndex
+        screenBuilder.buttonTableMainMenuIndex = (buttonTableAction.children.last() as GdxList<*>).selectedIndex
         buttonTableAction.remove()
         setupPotionTable()
     }
 
     private fun selectWeapon() {
-        screenBuilder.buttonTableActionIndex = (buttonTableAction.children.last() as GdxList<*>).selectedIndex
+        screenBuilder.buttonTableMainMenuIndex = (buttonTableAction.children.last() as GdxList<*>).selectedIndex
         buttonTableAction.remove()
         setupWeaponTable()
     }
@@ -374,9 +408,19 @@ class BattleScreen : Screen {
         setupPreBattleTable()
     }
 
-    private fun returnToHero() {
+    private fun returnToHeroForReposition() {
         buttonTableReposition.remove()
-        setupHeroTable()
+        setupHeroTableForReposition()
+    }
+
+    private fun returnToHeroForPrePreview() {
+        buttonTableAttack.remove()
+        setupHeroTableForPrePreview()
+    }
+
+    private fun returnToPrePreviewAttack() {
+        buttonTableTarget.remove()
+        setupPrePreviewAttackTable()
     }
 
     private fun returnToAction() {
@@ -406,11 +450,11 @@ class BattleScreen : Screen {
         stage.keyboardFocus = buttonTablePreBattle.children.last()
     }
 
-    private fun setupHeroTable() {
+    private fun setupHeroTableForReposition() {
         val onlyHeroes = turnManager.participants.filter { it.isHero }
         buttonTableHero = screenBuilder.createButtonTableHero(onlyHeroes)
         stage.addActor(buttonTableHero)
-        buttonTableHero.addListener(listenerHero)
+        buttonTableHero.addListener(listenerHeroReposition)
         stage.keyboardFocus = buttonTableHero.children.last()
     }
 
@@ -419,6 +463,30 @@ class BattleScreen : Screen {
         stage.addActor(buttonTableReposition)
         buttonTableReposition.addListener(listenerReposition)
         stage.keyboardFocus = buttonTableReposition.children.last()
+    }
+
+    private fun setupHeroTableForPrePreview() {
+        val onlyHeroes = turnManager.participants.filter { it.isHero }
+        buttonTableHero = screenBuilder.createButtonTableHero(onlyHeroes)
+        stage.addActor(buttonTableHero)
+        buttonTableHero.addListener(listenerHeroPrePreview)
+        stage.keyboardFocus = buttonTableHero.children.last()
+    }
+
+    private fun setupPrePreviewAttackTable() {
+        buttonTableAttack = screenBuilder.createButtonTablePreviewAttack(currentParticipant)
+        stage.addActor(buttonTableAttack)
+        buttonTableAttack.addListener(listenerPrePreviewAttack)
+        stage.keyboardFocus = buttonTableAttack.children.last()
+    }
+
+    private fun setupPrePreviewTargetTable(selectedAttack: BattleAbilityItem) {
+        val onlyEnemies = turnManager.participants.filter { !it.isHero }
+        buttonTableTarget = screenBuilder.createButtonTableTarget(onlyEnemies)
+        stage.addActor(buttonTableTarget)
+        listenerPrePreviewTarget.setSelectedAttack(selectedAttack)
+        buttonTableTarget.addListener(listenerPrePreviewTarget)
+        stage.keyboardFocus = buttonTableTarget.children.last()
     }
 
     private fun setupActionTable() {
@@ -620,7 +688,7 @@ class BattleScreen : Screen {
     }
 
     private fun fleeConfirmed(fleeAction: FleeAction) {
-        screenBuilder.buttonTableActionIndex = 0
+        screenBuilder.buttonTableMainMenuIndex = 0
         buttonTableAction.remove()
         val (isSuccess, message) = fleeAction.handle()
         val messageDialog = MessageDialog(message)
@@ -649,7 +717,7 @@ class BattleScreen : Screen {
     }
 
     private fun delayTurnConfirmed(delayTurnAction: DelayTurnAction) {
-        screenBuilder.buttonTableActionIndex = 0
+        screenBuilder.buttonTableMainMenuIndex = 0
         buttonTableAction.remove()
         isDelayingTurn = true
         val message = delayTurnAction.handle()
@@ -675,7 +743,7 @@ class BattleScreen : Screen {
     }
 
     private fun restConfirmed(restAction: RestAction) {
-        screenBuilder.buttonTableActionIndex = 0
+        screenBuilder.buttonTableMainMenuIndex = 0
         buttonTableAction.remove()
         val (message, audioEvent) = restAction.handle()
         val messageDialog = MessageDialog(message)
@@ -690,7 +758,7 @@ class BattleScreen : Screen {
     }
 
     private fun endTurn() {
-        screenBuilder.buttonTableActionIndex = 0
+        screenBuilder.buttonTableMainMenuIndex = 0
         buttonTableAction.remove()
         val message = EndTurnAction(currentParticipant).handle()
         val messageDialog = MessageDialog(message)
@@ -833,7 +901,7 @@ class BattleScreen : Screen {
     }
 
     private fun battleFledExitScreen() {
-        screenBuilder.buttonTableActionIndex = 0
+        screenBuilder.buttonTableMainMenuIndex = 0
         gameData.clock.takeQuarterHour()
         exitScreen { battleObserver.notifyBattleFled() }
     }
