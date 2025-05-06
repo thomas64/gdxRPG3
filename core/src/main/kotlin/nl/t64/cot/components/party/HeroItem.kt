@@ -184,7 +184,7 @@ class HeroItem(
 
     private fun createMessageIfWeaponAndShieldAreNotCompatible(inventoryItem: InventoryItem): String? {
         return when {
-            inventoryItem.durability == -1 -> null
+            inventoryItem.name.contains("Unequip") -> null
             inventoryItem.isTwoHanded -> createMessageIfShieldIsEquipped(inventoryItem)
             inventoryItem.isShield -> createMessageIfEquippedWeaponIsTwoHanded(inventoryItem)
             else -> null
@@ -210,7 +210,7 @@ class HeroItem(
 
     private fun createMessageIfNothingToDequip(inventoryItem: InventoryItem): String? {
         if (inventory.getInventoryItem(inventoryItem.group) == null
-            && inventoryItem.durability == -1) {
+            && inventoryItem.name.contains("Unequip")) {
             return "Nothing to unequip."
         } else {
             return null

@@ -27,8 +27,6 @@ import nl.t64.cot.components.party.inventory.InventoryItem
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.dialog.MessageDialog
-import nl.t64.cot.screens.dialog.QuestionDialog
-import nl.t64.cot.screens.dialog.TwoColumnsQuestionDialog
 import nl.t64.cot.screens.inventory.InventoryScreen
 import nl.t64.cot.screens.menu.MenuPause
 import nl.t64.cot.screens.world.Camera
@@ -48,6 +46,8 @@ class BattleScreen : Screen {
     private lateinit var battleField: BattleField
     private lateinit var currentParticipant: Participant
     private lateinit var currentTarget: Participant
+
+    private lateinit var dialogManager: BattleDialogManager
 
     private val screenBuilder = BattleScreenBuilder()
     private val battleFieldBuilder = BattleFieldTableBuilder()
@@ -165,6 +165,8 @@ class BattleScreen : Screen {
 
         val camera = Camera()
         stage = Stage(camera.viewport)
+
+        dialogManager = BattleDialogManager(stage, { currentParticipant })
 
         val battleTitle = screenBuilder.createBattleTitle()
         stage.addActor(battleTitle)
@@ -528,71 +530,59 @@ class BattleScreen : Screen {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun showConfirmMoveDialog() {
-        val moveAction = MoveAction(battleField, currentParticipant)
-        if (moveAction.didCharacterRemainOnTheSameSpace()) return returnToAction()
-
-        val message = moveAction.createConfirmationMessage()
-        val dialog = QuestionDialog(message) { moveConfirmed(moveAction) }
-        dialog.show(stage, 0, 0.5f)
-    }
-
-    private fun moveConfirmed(moveAction: MoveAction) {
-        moveAction.handle()
-        returnToAction()
+        dialogManager.showConfirmMoveDialog(battleField = battleField,
+                                            onConfirmed = { it.handle(); returnToAction() },
+                                            onCancelled = { returnToAction() })
     }
 
     private fun showPreviewDialog(selectedAttack: BattleAbilityItem, selectedTarget: String) {
         val target: Participant = turnManager.getParticipant(enemies.getEnemy(selectedTarget))
-        val attackAction = AttackAction(currentParticipant, target, selectedAttack)
-        val message = attackAction.createPreviewMessage()
-        val dialog = MessageDialog(message)
-        dialog.setLeftAlignment()
-        dialog.setWidthToMinimum()
-        dialog.show(stage, AudioEvent.SE_MENU_CONFIRM)
+        dialogManager.showPreviewDialog(selectedAttack = selectedAttack,
+                                        selectedTarget = target)
     }
 
     private fun showConfirmAttackDialog(selectedAttack: BattleAbilityItem, selectedTarget: String) {
-        currentTarget = turnManager.getParticipant(enemies.getEnemy(selectedTarget))
-        val attackAction = AttackAction(currentParticipant, currentTarget, selectedAttack)
-        attackAction.isCostingTooMuchApSp()?.let { notEnoughApSp ->
-            showSmallLeftAlignMessageDialog(notEnoughApSp)
-            return
-        } ?: attackAction.isUnableWithCurrentWeapon()?.let { unable ->
-            showSmallLeftAlignMessageDialog(unable)
-            return
-        }
-        val message = attackAction.createConfirmationMessage()
-        val dialog = QuestionDialog(message) { attackConfirmed(attackAction) }
-        dialog.setLeftAlignment()
-        dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0, 1f)
+        val target: Participant = turnManager.getParticipant(enemies.getEnemy(selectedTarget))
+        dialogManager.showConfirmAttackDialog(selectedAttack = selectedAttack,
+                                              selectedTarget = target,
+                                              onConfirmed = { attackConfirmed(it, target) })
     }
 
-    private fun showSmallLeftAlignMessageDialog(message: String) {
-        val dialog = MessageDialog(message)
-        dialog.setLeftAlignment()
-        dialog.setWidthToMinimum()
-        dialog.show(stage, AudioEvent.SE_MENU_ERROR)
+    private fun showConfirmPotionDialog(selectedPotion: BattlePotionItem) {
+        dialogManager.showConfirmPotionDialog(selectedPotion = selectedPotion,
+                                              onConfirmed = { potionConfirmed(it) })
     }
 
-    private fun attackConfirmed(attackAction: AttackAction) {
+    private fun showConfirmWeaponDialog(selectedWeapon: BattleWeaponItem) {
+        dialogManager.showConfirmWeaponDialog(selectedWeapon = selectedWeapon,
+                                              enemies = turnManager.getOnlyEnemies(),
+                                              onConfirmed = { weaponConfirmed(it) })
+    }
+
+    private fun showFleeDialog() {
+        dialogManager.showFleeDialog(battleId = battleId,
+                                     onConfirmed = { fleeConfirmed(it) })
+    }
+
+    private fun showDelayTurnDialog() {
+        dialogManager.showDelayTurnDialog(turnManager = turnManager,
+                                          onConfirmed = { delayTurnConfirmed(it) })
+    }
+
+    private fun showConfirmRestDialog() {
+        dialogManager.showConfirmRestDialog(onConfirmed = { restConfirmed(it) })
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private fun attackConfirmed(attackAction: AttackAction, target: Participant) {
+        currentTarget = target
         val messages: ArrayDeque<String> = attackAction.handle()!!
         buttonTableTarget.remove()
         isDelayingTurn = true
         Utils.runWithDelay(0.5f) {
             showMessages(messages)
             turnManager.removeKilledParticipants()
-        }
-    }
-
-    private fun showConfirmPotionDialog(selectedPotion: BattlePotionItem) {
-        val potionAction = PotionAction(currentParticipant, selectedPotion)
-        val (isAble, message) = potionAction.isAble()
-        if (!isAble) {
-            val dialog = MessageDialog(message)
-            dialog.show(stage, AudioEvent.SE_MENU_ERROR)
-        } else {
-            val dialog = QuestionDialog(message) { potionConfirmed(potionAction) }
-            dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0, 0.5f)
         }
     }
 
@@ -609,22 +599,6 @@ class BattleScreen : Screen {
         }
     }
 
-    private fun showConfirmWeaponDialog(selectedWeapon: BattleWeaponItem) {
-        val weaponAction = WeaponAction(currentParticipant, selectedWeapon, turnManager.getOnlyEnemies())
-        weaponAction.isUnableToEquip()?.let { message ->
-            MessageDialog(message).show(stage, AudioEvent.SE_MENU_ERROR)
-            return
-        }
-        val message = weaponAction.createConfirmationMessage()
-        val dialog = if (message.second.isBlank() && message.third.isBlank()) {
-            QuestionDialog(message.first) { weaponConfirmed(weaponAction) }
-                .apply { setLeftAlignment() }
-        } else {
-            TwoColumnsQuestionDialog(message) { weaponConfirmed(weaponAction) }
-        }
-        dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0, 0.5f)
-    }
-
     private fun weaponConfirmed(weaponAction: WeaponAction) {
         buttonTableWeapon.remove()
         val message: String = weaponAction.handle()
@@ -635,18 +609,6 @@ class BattleScreen : Screen {
         isDelayingTurn = true
         Utils.runWithDelay(0.5f) {
             messageDialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT)
-        }
-    }
-
-    private fun showFleeDialog() {
-        val fleeAction = FleeAction(currentParticipant, battleId)
-        val (isAble, message) = fleeAction.isAble()
-        if (!isAble) {
-            val dialog = MessageDialog(message)
-            dialog.show(stage, AudioEvent.SE_MENU_ERROR)
-        } else {
-            val dialog = QuestionDialog(message) { fleeConfirmed(fleeAction) }
-            dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0)
         }
     }
 
@@ -667,18 +629,6 @@ class BattleScreen : Screen {
         }
     }
 
-    private fun showDelayTurnDialog() {
-        val delayTurnAction = DelayTurnAction(turnManager, currentParticipant)
-        val (isAble, message) = delayTurnAction.isAble()
-        if (!isAble) {
-            val dialog = MessageDialog(message)
-            dialog.show(stage, AudioEvent.SE_MENU_ERROR)
-        } else {
-            val dialog = QuestionDialog(message) { delayTurnConfirmed(delayTurnAction) }
-            dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0)
-        }
-    }
-
     private fun delayTurnConfirmed(delayTurnAction: DelayTurnAction) {
         screenBuilder.buttonTableMainMenuIndex = 0
         buttonTableAction.remove()
@@ -690,18 +640,6 @@ class BattleScreen : Screen {
         }
         Utils.runWithDelay(0.5f) {
             messageDialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT)
-        }
-    }
-
-    private fun showConfirmRestDialog() {
-        val restAction = RestAction(currentParticipant)
-        val (isAble, message) = restAction.isAble()
-        if (!isAble) {
-            val dialog = MessageDialog(message)
-            dialog.show(stage, AudioEvent.SE_MENU_ERROR)
-        } else {
-            val dialog = QuestionDialog(message) { restConfirmed(restAction) }
-            dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0)
         }
     }
 

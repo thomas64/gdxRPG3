@@ -382,8 +382,8 @@ class BattleScreenBuilder {
 
     private fun GdxList<BattleWeaponItem>.fillWithWeapons(weapons: List<BattleWeaponItem>): GdxList<BattleWeaponItem> {
         this.setItems(*weapons.toTypedArray())
-        items.insert(0, BattleWeaponItem(InventoryItem(name = "Unequip Weapon", group = InventoryGroup.WEAPON, durability = -1)))
-        items.insert(1, BattleWeaponItem(InventoryItem(name = "Unequip Shield", group = InventoryGroup.SHIELD, durability = -1)))
+        items.insert(0, BattleWeaponItem(InventoryItem(name = "Unequip Weapon", group = InventoryGroup.WEAPON)))
+        items.insert(1, BattleWeaponItem(InventoryItem(name = "Unequip Shield", group = InventoryGroup.SHIELD)))
         items.add(BattleWeaponItem(InventoryItem(name = "Back")))
         this.selectedIndex = 0
         return this

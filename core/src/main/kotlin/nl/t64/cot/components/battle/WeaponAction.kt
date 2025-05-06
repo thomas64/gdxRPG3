@@ -45,7 +45,7 @@ class WeaponAction(
         val currentWeapon: InventoryItem? = hero.getInventoryItem(InventoryGroup.WEAPON)
         val newWeapon: InventoryItem = selectedEquipment.inventoryItem
 
-        if (newWeapon.durability == -1) {
+        if (newWeapon.name.contains("Unequip")) {
             return currentWeapon!!.unequipWeapon()
         }
         return currentWeapon
@@ -57,7 +57,7 @@ class WeaponAction(
         val currentShield: InventoryItem? = hero.getInventoryItem(InventoryGroup.SHIELD)
         val newShield: InventoryItem = selectedEquipment.inventoryItem
 
-        if (newShield.durability == -1) {
+        if (newShield.name.contains("Unequip")) {
             return currentShield!!.unequipShield()
         }
 
@@ -71,7 +71,7 @@ class WeaponAction(
         val currentWeapon: InventoryItem? = hero.getInventoryItem(InventoryGroup.WEAPON)
         val newWeapon: InventoryItem = selectedEquipment.inventoryItem
 
-        if (newWeapon.durability == -1) {
+        if (newWeapon.name.contains("Unequip")) {
             hero.clearInventoryItemFor(InventoryGroup.WEAPON)
             currentWeapon?.let { gameData.inventory.autoSetItem(it) }
             return "${character.name} unequipped the ${currentWeapon?.name}."
@@ -88,7 +88,7 @@ class WeaponAction(
         val currentShield: InventoryItem? = hero.getInventoryItem(InventoryGroup.SHIELD)
         val newShield: InventoryItem = selectedEquipment.inventoryItem
 
-        if (newShield.durability == -1) {
+        if (newShield.name.contains("Unequip")) {
             hero.clearInventoryItemFor(InventoryGroup.SHIELD)
             currentShield?.let { gameData.inventory.autoSetItem(it) }
             return "${character.name} unequipped the ${currentShield?.name}."
