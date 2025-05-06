@@ -320,7 +320,7 @@ class BattleScreenBuilder {
         }
         this.setItems(*actionStrings.toTypedArray())
 
-        if (!areEnemiesInRange) {
+        if (!areEnemiesInRange && buttonTableMainMenuIndex == 0) {
             buttonTableMainMenuIndex = 1
         }
         if (currentParticipant.currentAP <= 1
