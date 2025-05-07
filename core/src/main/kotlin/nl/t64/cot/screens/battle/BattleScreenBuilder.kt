@@ -61,18 +61,18 @@ class BattleScreenBuilder {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    fun createHeroTable(heroes: List<HeroItem>, participants: List<Participant>): Table {
+    fun createHeroTable(heroes: List<HeroItem>, getCurrentAp: (Character) -> Int): Table {
         return Table(createSkin()).apply {
             defaults().height(Constant.FACE_SIZE).spaceBottom(4f)
             columnDefaults(0).width(Constant.FACE_SIZE)
             top().left()
             setPosition(20f, Gdx.graphics.height - 20f)
-            heroes.forEach { addHero(it, participants) }
+            heroes.forEach { addHero(it, getCurrentAp) }
         }
     }
 
-    private fun Table.addHero(hero: HeroItem, participants: List<Participant>) {
-        val currentAp: Int = participants.firstOrNull { it.character == hero }?.currentAP ?: 0
+    private fun Table.addHero(hero: HeroItem, getCurrentAp: (Character) -> Int) {
+        val currentAp: Int = getCurrentAp.invoke(hero)
         val maximumAP: Int = hero.getCalculatedActionPoints()
 
         val heroTable = Table(createSkin()).apply {

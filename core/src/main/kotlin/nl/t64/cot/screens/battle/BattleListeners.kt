@@ -23,10 +23,10 @@ class BattleListeners(
 
     heroIsSelectedForReposition: (String) -> Unit,
     selectReposition: () -> Unit,
+    selectMove: () -> Unit,
+
     repositionLeft: () -> Unit,
     repositionRight: () -> Unit,
-
-    selectMove: () -> Unit,
     moveLeft: () -> Unit,
     moveRight: () -> Unit,
 

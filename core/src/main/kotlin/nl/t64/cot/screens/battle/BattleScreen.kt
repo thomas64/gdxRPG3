@@ -43,19 +43,15 @@ class BattleScreen : Screen {
 
     private lateinit var enemies: EnemyContainer
     private lateinit var turnManager: TurnManager
-    private lateinit var battleField: BattleField
     private lateinit var currentParticipant: Participant
     private lateinit var currentTarget: Participant
 
+    private lateinit var battleField: BattleField
     private lateinit var dialogManager: BattleDialogManager
+    private lateinit var tableManager: BattleTableManager
 
     private val screenBuilder = BattleScreenBuilder()
-    private val battleFieldBuilder = BattleFieldTableBuilder()
     private val shapeRenderer = ShapeRenderer()
-    private var heroTable: Table = Table()
-    private var enemyTable: Table = Table()
-    private var turnTable: Table = Table()
-    private var battleFieldTable: Table = Table()
 
     private var buttonTablePreBattle: Table = Table()
     private var buttonTableHero: Table = Table()
@@ -90,7 +86,8 @@ class BattleScreen : Screen {
         ::winBattle, ::openPauseMenu, ::startBattle, ::endTurn,
         ::selectPrePreviewAttack, ::selectPreviewAttack, ::selectAttack, ::selectPotion, ::selectWeapon,
         ::heroIsSelectedForPrePreview, ::attackInPrePreviewIsSelected, ::attackInPreviewIsSelected, ::attackIsSelected,
-        ::heroIsSelectedForReposition, ::selectReposition, ::repositionLeft, ::repositionRight, ::selectMove, ::moveLeft, ::moveRight,
+        ::heroIsSelectedForReposition, ::selectReposition, ::selectMove,
+        { battleField.repositionHeroLeft() }, { battleField.repositionHeroRight() }, { battleField.moveHeroLeft() }, { battleField.moveHeroRight() },
         ::showInventoryScreenPreBattle, ::showInventoryScreen, ::showDelayTurnDialog, ::showFleeDialog, ::showPreviewDialog,
         ::showConfirmRestDialog, ::showConfirmMoveDialog, ::showConfirmAttackDialog, ::showConfirmPotionDialog, ::showConfirmWeaponDialog,
         ::returnToPreBattle, ::returnToHeroForReposition, ::returnToHeroForPrePreview, ::returnToPrePreviewAttack, ::returnToPreviewAttack, ::returnToAttack, ::returnToAction
@@ -119,7 +116,6 @@ class BattleScreen : Screen {
         enemies = EnemyContainer(battleId)
         turnManager = TurnManager(gameData.party.getAllHeroesAlive(), enemies.getAll())
         currentParticipant = turnManager.participants.first { it.character.id == Constant.PLAYER_ID }
-        battleField = BattleField(turnManager.participants)
 
         isLoaded = false
         isPreBattle = false
@@ -129,6 +125,8 @@ class BattleScreen : Screen {
         val camera = Camera()
         stage = Stage(camera.viewport)
 
+        battleField = BattleField(turnManager.participants, { currentParticipant })
+        tableManager = BattleTableManager(stage, screenBuilder, { currentParticipant })
         dialogManager = BattleDialogManager(stage, { currentParticipant })
 
         val battleTitle = screenBuilder.createBattleTitle()
@@ -179,16 +177,16 @@ class BattleScreen : Screen {
             return
         }
 
-        updateHeroTable()
-        updateEnemyTable()
-        updateTurnTable()
+        tableManager.updateHeroTable(gameData.party.getAllHeroes(), { turnManager.getParticipant(it).currentAP })
+        tableManager.updateEnemyTable(enemies.getAll())
+        tableManager.updateTurnTable(turnManager)
 
         if (isPreBattle) {
-            updateBattleField()
+            tableManager.updateBattleField(battleField)
             return
         }
         currentParticipant = turnManager.currentParticipant
-        updateBattleField()
+        tableManager.updateBattleField(battleField)
 
         when {
             enemies.getAll().none { it.isAlive } -> winBattle()
@@ -235,33 +233,6 @@ class BattleScreen : Screen {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private fun updateHeroTable() {
-        heroTable.remove()
-        heroTable = screenBuilder.createHeroTable(gameData.party.getAllHeroes(), turnManager.participants)
-        stage.addActor(heroTable)
-    }
-
-    private fun updateEnemyTable() {
-        enemyTable.remove()
-        enemyTable = screenBuilder.createEnemyTable(enemies.getAll())
-        stage.addActor(enemyTable)
-    }
-
-    private fun updateBattleField() {
-        battleFieldTable.remove()
-        battleField.removeDeadParticipants()
-        battleFieldTable = battleFieldBuilder.createBattleFieldTable(battleField, currentParticipant)
-        stage.addActor(battleFieldTable)
-    }
-
-    private fun updateTurnTable() {
-        turnTable.remove()
-        turnTable = screenBuilder.createTurnTable(turnManager.participants)
-        stage.addActor(turnTable)
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     private fun startBattle() {
         screenBuilder.buttonTableMainMenuIndex = 0
         buttonTablePreBattle.remove()
@@ -287,14 +258,6 @@ class BattleScreen : Screen {
         setupRepositionTable()
     }
 
-    private fun repositionLeft() {
-        battleField.repositionHeroLeft(currentParticipant)
-    }
-
-    private fun repositionRight() {
-        battleField.repositionHeroRight(currentParticipant)
-    }
-
     private fun heroIsSelectedForPrePreview(selectedHero: String) {
         currentParticipant = turnManager.participants.first { it.character.name == selectedHero }
         screenBuilder.buttonTableSelectHeroIndex = (buttonTableHero.children.last() as GdxList<*>).selectedIndex
@@ -312,14 +275,6 @@ class BattleScreen : Screen {
         screenBuilder.buttonTableMainMenuIndex = (buttonTableAction.children.last() as GdxList<*>).selectedIndex
         buttonTableAction.remove()
         setupMoveTable()
-    }
-
-    private fun moveLeft() {
-        battleField.moveHeroLeft(currentParticipant)
-    }
-
-    private fun moveRight() {
-        battleField.moveHeroRight(currentParticipant)
     }
 
     private fun selectPreviewAttack() {
@@ -430,15 +385,15 @@ class BattleScreen : Screen {
     }
 
     private fun setupActionTable() {
-        battleField.cancelMovement(currentParticipant)
+        battleField.cancelMovement()
         battleField.resetStartingSpace()
-        val areEnemiesInRange: Boolean = battleField.getTargetableEnemiesFor(currentParticipant).isNotEmpty()
+        val areEnemiesInRange: Boolean = battleField.getTargetableEnemiesForActingHero().isNotEmpty()
         buttonTableAction = screenBuilder.createButtonTableAction(currentParticipant, areEnemiesInRange)
         prepare(buttonTableAction, listeners.action)
     }
 
     private fun setupMoveTable() {
-        battleField.setStartingSpace(currentParticipant)
+        battleField.setStartingSpace()
         buttonTableMove = screenBuilder.createButtonTableMove()
         prepare(buttonTableMove, listeners.move)
     }
@@ -460,7 +415,7 @@ class BattleScreen : Screen {
     }
 
     private fun setupTargetTable(selectedAttack: BattleAbilityItem) {
-        val targetableEnemies: List<Participant> = battleField.getTargetableEnemiesFor(currentParticipant)
+        val targetableEnemies: List<Participant> = battleField.getTargetableEnemiesForActingHero()
         buttonTableTarget = screenBuilder.createButtonTableTarget(targetableEnemies)
         listeners.target.setSelectedAttack(selectedAttack)
         prepare(buttonTableTarget, listeners.target)
@@ -664,7 +619,7 @@ class BattleScreen : Screen {
         if (currentParticipant.currentAP == currentParticipant.maximumAP) {
             Thread.sleep(1000L)
         }
-        val heroTarget: Participant? = battleField.possibleGetHeroTargetAndMoveEnemy(currentParticipant)
+        val heroTarget: Participant? = battleField.possibleGetHeroTargetAndMoveEnemy()
         battleField.resetStartingSpace()
         isDelayingTurn = true
         val messages: ArrayDeque<String> = heroTarget
@@ -715,7 +670,7 @@ class BattleScreen : Screen {
         }
         messageDialog.show(stage, getAudioEventBasedOn(message))
         if (message.contains("did") && message.contains("damage.")) {
-            ShakeEffect(battleFieldTable, currentTarget.character.name).start()
+            ShakeEffect(tableManager.battleFieldTable, currentTarget.character.name).start()
         }
     }
 

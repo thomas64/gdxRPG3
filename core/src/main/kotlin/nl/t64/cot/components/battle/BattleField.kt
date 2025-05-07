@@ -8,7 +8,10 @@ import kotlin.math.abs
 
 private const val BATTLE_FIELD_SIZE = 20
 
-class BattleField(participants: List<Participant>) {
+class BattleField(
+    participants: List<Participant>,
+    private val currentParticipant: () -> Participant
+) {
 
     val heroSpaces: MutableList<Participant?> = MutableList(BATTLE_FIELD_SIZE) { null }
     val enemySpaces: MutableList<Participant?> = MutableList(BATTLE_FIELD_SIZE) { null }
@@ -29,13 +32,13 @@ class BattleField(participants: List<Participant>) {
         startingSpace = -1
     }
 
-    fun setStartingSpace(currentParticipant: Participant) {
-        startingSpace = currentParticipant.getCurrentSpaceIndex()
+    fun setStartingSpace() {
+        startingSpace = getSpaceIndexOfCurrentParticipant()
     }
 
-    fun cancelMovement(currentHero: Participant) {
+    fun cancelMovement() {
         if (startingSpace == -1) return
-        currentHero.moveHeroToSpace(startingSpace)
+        moveHeroToSpace(startingSpace)
     }
 
     fun removeDeadParticipants() {
@@ -49,74 +52,78 @@ class BattleField(participants: List<Participant>) {
             .eachCount()
     }
 
-    fun repositionHeroRight(currentHero: Participant) {
-        val currentIndex: Int = currentHero.getCurrentSpaceIndex()
+    fun repositionHeroRight() {
+        val currentIndex: Int = getSpaceIndexOfCurrentParticipant()
         val allSpacesFromHere: IntProgression = currentIndex + 1 until 8
-        currentHero.moveHero(allSpacesFromHere)
+        moveHero(allSpacesFromHere)
     }
 
-    fun repositionHeroLeft(currentHero: Participant) {
-        val currentIndex: Int = currentHero.getCurrentSpaceIndex()
+    fun repositionHeroLeft() {
+        val currentIndex: Int = getSpaceIndexOfCurrentParticipant()
         val allSpacesFromHere: IntProgression = currentIndex - 1 downTo 0
-        currentHero.moveHero(allSpacesFromHere)
+        moveHero(allSpacesFromHere)
     }
 
-    fun moveHeroRight(currentHero: Participant) {
-        val currentIndex: Int = currentHero.getCurrentSpaceIndex()
-        val actionPoints: Int = getModifiedApForHero(currentHero)
+    fun moveHeroRight() {
+        val currentIndex: Int = getSpaceIndexOfCurrentParticipant()
+        val actionPoints: Int = getModifiedApForHero()
         val upperBound: Int = minOf(startingSpace + 1 + actionPoints, BATTLE_FIELD_SIZE)
         val allSpacesFromHere: IntProgression = currentIndex + 1 until upperBound
-        currentHero.moveHero(allSpacesFromHere)
+        moveHero(allSpacesFromHere)
     }
 
-    fun moveHeroLeft(currentHero: Participant) {
-        val currentIndex: Int = currentHero.getCurrentSpaceIndex()
-        val actionPoints: Int = getModifiedApForHero(currentHero)
+    fun moveHeroLeft() {
+        val currentIndex: Int = getSpaceIndexOfCurrentParticipant()
+        val actionPoints: Int = getModifiedApForHero()
         val lowerBound: Int = maxOf(startingSpace - actionPoints, 0)
         val allSpacesFromHere: IntProgression = currentIndex - 1 downTo lowerBound
-        currentHero.moveHero(allSpacesFromHere)
+        moveHero(allSpacesFromHere)
     }
 
-    fun getModifiedApForHero(participant: Participant): Int {
-        return participant.currentAP - getPenaltyApForHero(participant)
+    fun getModifiedApForHero(): Int {
+        return currentParticipant.invoke().currentAP - getPenaltyApForHero()
     }
 
-    private fun getModifiedApForEnemy(participant: Participant, destinationSpace: Int): Int {
-        return participant.currentAP - getPenaltyApForEnemy(participant, destinationSpace)
+    private fun getModifiedApForEnemy(destinationSpace: Int): Int {
+        return currentParticipant.invoke().currentAP - getPenaltyApForEnemy(destinationSpace)
     }
 
-    fun getPenaltyApForHero(participant: Participant): Int {
-        return if (isHeroStartingSpaceNextToEnemy()) participant.getPenaltyAp() else 0
+    fun getPenaltyApForHero(): Int {
+        return if (isHeroStartingSpaceNextToEnemy()) currentParticipant.invoke().getPenaltyAp() else 0
     }
 
-    private fun getPenaltyApForEnemy(participant: Participant, destinationSpace: Int): Int {
+    private fun getPenaltyApForEnemy(destinationSpace: Int): Int {
         if (destinationSpace == startingSpace) return 0
-        return if (isEnemyStartingSpaceNextToHero()) participant.getPenaltyAp() else 0
+        return if (isEnemyStartingSpaceNextToHero()) currentParticipant.invoke().getPenaltyAp() else 0
     }
 
-    fun getCurrentSpace(participant: Participant): Int {
+    fun getSpaceIndexOfCurrentParticipant(): Int {
+        return getSpaceIndexOf(currentParticipant.invoke())
+    }
+
+    fun getSpaceIndexOf(participant: Participant): Int {
         return heroSpaces.indexOf(participant)
             .takeUnless { it == -1 }
             ?: enemySpaces.indexOf(participant)
     }
 
-    fun getTargetableEnemiesFor(currentHero: Participant): List<Participant> {
+    fun getTargetableEnemiesForActingHero(): List<Participant> {
         return enemySpaces.filterNotNull()
-            .filter { it.isInRangeOfHero(currentHero) }
+            .filter { it.isEnemyInRangeOfActingHero() }
     }
 
-    fun getRangeOfHero(currentHero: Participant): List<Int> {
-        return currentHero.getRange(0, -1)
+    fun getRangeOfActingHero(): List<Int> {
+        return getRange(0, -1)
     }
 
-    private fun Participant.getRangeOfEnemy(): List<Int> {
-        return this.getRange(1, 0)
+    private fun getRangeOfActingEnemy(): List<Int> {
+        return getRange(1, 0)
     }
 
-    private fun Participant.getRange(offsetLeft: Int, offSetRight: Int): List<Int> {
-        val currentSpace: Int = this.getCurrentSpaceIndex()
-        return this.getWeaponRanges()
-            .map { listOf(currentSpace - it + offsetLeft, currentSpace + it + offSetRight) }
+    private fun getRange(offsetLeft: Int, offSetRight: Int): List<Int> {
+        val currentIndex: Int = getSpaceIndexOfCurrentParticipant()
+        return currentParticipant.invoke().getWeaponRanges()
+            .map { listOf(currentIndex - it + offsetLeft, currentIndex + it + offSetRight) }
             .flatten()
             .filter { it in 0..BATTLE_FIELD_SIZE }
             .distinct()
@@ -124,48 +131,49 @@ class BattleField(participants: List<Participant>) {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    fun possibleGetHeroTargetAndMoveEnemy(currentEnemy: Participant): Participant? {
-        setStartingSpace(currentEnemy)
-        val heroIndicesByPrio: List<Int> = getOccupiedHeroIndicesSortedByPriorityFor(currentEnemy)
+    fun possibleGetHeroTargetAndMoveEnemy(): Participant? {
+        setStartingSpace()
+        val heroIndicesByPrio: List<Int> = getOccupiedHeroIndicesSortedByPriorityForActingEnemy()
         if (preferenceManager.isInDebugMode) {
             println("heroIndicesByPrio: $heroIndicesByPrio")
         }
 
         // if highest prio is already in range, don't move enemy.
-        val currentEnemyRangeIndices: List<Int> = currentEnemy.getRangeOfEnemy()
+        val actingEnemyRangeIndices: List<Int> = getRangeOfActingEnemy()
         val highestPrioHero: Int = heroIndicesByPrio.first()
-        if (highestPrioHero in currentEnemyRangeIndices) {
+        if (highestPrioHero in actingEnemyRangeIndices) {
             return heroSpaces[highestPrioHero]
         }
 
         // move enemy to where its range is closest to its highest prio hero which it can get with its AP.
-        currentEnemy.getMostPrioSpaceToMoveToForAnAttack(heroIndicesByPrio)?.let {
-            currentEnemy.takeApForMovingTo(it)
-            currentEnemy.moveEnemyToIndex(it)
+        getMostPrioSpaceToMoveToForAnAttack(heroIndicesByPrio)?.let {
+            takeApForMovingTo(it)
+            moveEnemyToIndex(it)
         } ?: return null // or don't move enemy if no such space is available.
 
         return heroIndicesByPrio
-            .firstOrNull { it in currentEnemy.getRangeOfEnemy() } // take the first hero that is now in range.
-            ?.let { heroSpaces[it] }                    // or null when the AP was not enough to reach the hero.
+            .firstOrNull { it in getRangeOfActingEnemy() }  // take the first hero that is now in range.
+            ?.let { heroSpaces[it] }                        // or null when the AP was not enough to reach the hero.
     }
 
-    private fun getOccupiedHeroIndicesSortedByPriorityFor(currentEnemy: Participant): List<Int> {
+    private fun getOccupiedHeroIndicesSortedByPriorityForActingEnemy(): List<Int> {
+        val actingEnemy: Participant = currentParticipant.invoke()
         return heroSpaces.filterNotNull()
-            .sortedBy { hero -> hero.getPriorityFor(currentEnemy, currentEnemy.isEnemyNextToHero(hero)) }
-            .map { hero -> hero.getCurrentSpaceIndex() }
+            .sortedBy { hero -> hero.getPriorityFor(actingEnemy, isActingEnemyNextTo(hero)) }
+            .map { hero -> getSpaceIndexOf(hero) }
     }
 
-    private fun Participant.getMostPrioSpaceToMoveToForAnAttack(heroIndicesByPrio: List<Int>): Int? {
-        return this.getAllEnemySpacesFromWhereToAttackByPrio(heroIndicesByPrio)
-            .onEach { if (this.isDestinationInRangeOfAP(it)) return it }
+    private fun getMostPrioSpaceToMoveToForAnAttack(heroIndicesByPrio: List<Int>): Int? {
+        return getAllEnemySpacesFromWhereToAttackByPrio(heroIndicesByPrio)
+            .onEach { if (isDestinationInRangeOfAP(it)) return it }
             .firstOrNull()
-            ?.let { this.findFarthestReachableSpaceTo(it) }
-            ?: this.getNextBestNearestEmptySpace(heroIndicesByPrio)
+            ?.let { findFarthestReachableSpaceTo(it) }
+            ?: getNextBestNearestEmptySpace(heroIndicesByPrio)
     }
 
-    private fun Participant.getAllEnemySpacesFromWhereToAttackByPrio(heroIndicesByPrio: List<Int>): List<Int> {
-        val currentEnemyIndex: Int = this.getCurrentSpaceIndex()
-        val enemyWeaponRanges: List<Int> = this.getWeaponRanges()
+    private fun getAllEnemySpacesFromWhereToAttackByPrio(heroIndicesByPrio: List<Int>): List<Int> {
+        val currentEnemyIndex: Int = getSpaceIndexOfCurrentParticipant()
+        val enemyWeaponRanges: List<Int> = currentParticipant.invoke().getWeaponRanges()
 
         return enemySpaces.indices
             .filter { it == currentEnemyIndex || enemySpaces[it] == null }
@@ -188,78 +196,81 @@ class BattleField(participants: List<Participant>) {
         return enemyWeaponRanges.any { range -> heroIndex == enemyIndex - range + 1 || heroIndex == enemyIndex + range }
     }
 
-    private fun Participant.isDestinationInRangeOfAP(destinationSpace: Int): Boolean {
-        val actionPoints: Int = getModifiedApForEnemy(this, destinationSpace)
-        val currentEnemyIndex: Int = this.getCurrentSpaceIndex()
+    private fun isDestinationInRangeOfAP(destinationSpace: Int): Boolean {
+        val actionPoints: Int = getModifiedApForEnemy(destinationSpace)
+        val currentEnemyIndex: Int = getSpaceIndexOfCurrentParticipant()
         return abs(destinationSpace - currentEnemyIndex) <= actionPoints
     }
 
-    private fun Participant.findFarthestReachableSpaceTo(destinationSpace: Int): Int? {
-        val currentEnemyIndex: Int = this.getCurrentSpaceIndex()
+    private fun findFarthestReachableSpaceTo(destinationSpace: Int): Int? {
+        val currentEnemyIndex: Int = getSpaceIndexOfCurrentParticipant()
         val direction: Int = if (destinationSpace > currentEnemyIndex) 1 else -1
-        val actionPoints: Int = getModifiedApForEnemy(this, destinationSpace)
+        val actionPoints: Int = getModifiedApForEnemy(destinationSpace)
         return (1..actionPoints)
             .map { currentEnemyIndex + it * direction }
             .lastOrNull { enemySpaces[it] == null }
     }
 
-    private fun Participant.getNextBestNearestEmptySpace(heroIndicesByPrio: List<Int>): Int? {
-        val currentEnemyIndex: Int = this.getCurrentSpaceIndex()
+    private fun getNextBestNearestEmptySpace(heroIndicesByPrio: List<Int>): Int? {
+        val currentEnemyIndex: Int = getSpaceIndexOfCurrentParticipant()
         return heroIndicesByPrio
             .flatMap { listOf(it - 1, it) }
             .map { destinationSpace ->
                 enemySpaces.indices
                     .filter { it == currentEnemyIndex || enemySpaces[it] == null }
-                    .filter { it.isInRangeOfApOf(this) }
+                    .filter { it.isInRangeOfApOfActingEnemy() }
                     .minBy { abs(it - destinationSpace) }
             }
             .minBy { abs(it - currentEnemyIndex) }
             .takeIf { it != currentEnemyIndex }
     }
 
-    private fun Int.isInRangeOfApOf(currentEnemy: Participant): Boolean {
+    private fun Int.isInRangeOfApOfActingEnemy(): Boolean {
         val specificSpace: Int = this
-        val currentEnemyIndex: Int = currentEnemy.getCurrentSpaceIndex()
+        val actingEnemyIndex: Int = getSpaceIndexOfCurrentParticipant()
+        val actingEnemy: Participant = currentParticipant.invoke()
 
-        return specificSpace in (currentEnemyIndex downTo currentEnemyIndex - currentEnemy.currentAP)
-            || specificSpace in (currentEnemyIndex until currentEnemyIndex + currentEnemy.currentAP)
+        return specificSpace in (actingEnemyIndex downTo actingEnemyIndex - actingEnemy.currentAP)
+            || specificSpace in (actingEnemyIndex until actingEnemyIndex + actingEnemy.currentAP)
     }
 
-    private fun Participant.takeApForMovingTo(destinationSpace: Int) {
+    private fun takeApForMovingTo(destinationSpace: Int) {
+        val actingEnemy: Participant = currentParticipant.invoke()
         if (preferenceManager.isInDebugMode) {
-            println("${this.character.name} AP: ${this.currentAP}")
+            println("${actingEnemy.character.name} AP: ${actingEnemy.currentAP}")
         }
 
-        val difference: Int = abs(destinationSpace - this.getCurrentSpaceIndex()) + getPenaltyApForEnemy(this, destinationSpace)
-        this.currentAP -= difference
+        val currentSpaceIndex: Int = getSpaceIndexOfCurrentParticipant()
+        val difference: Int = abs(destinationSpace - currentSpaceIndex) + getPenaltyApForEnemy(destinationSpace)
+        actingEnemy.currentAP -= difference
 
         if (preferenceManager.isInDebugMode) {
-            println("${this.character.name} AP: ${this.currentAP}")
+            println("${actingEnemy.character.name} AP: ${actingEnemy.currentAP}")
         }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private fun Participant.moveHero(allSpacesInTheChosenDirection: IntProgression) {
+    private fun moveHero(allSpacesInTheChosenDirection: IntProgression) {
         allSpacesInTheChosenDirection
             .firstOrNull { heroSpaces[it] == null }
             ?.let {
-                this.moveHeroToSpace(it)
+                moveHeroToSpace(it)
                 playSe(AudioEvent.SE_MENU_CURSOR)
             } ?: playSe(AudioEvent.SE_MENU_ERROR)
     }
 
-    private fun Participant.moveEnemyToIndex(destinationSpace: Int) {
-        this.getAllSpacesUntil(destinationSpace)
+    private fun moveEnemyToIndex(destinationSpace: Int) {
+        getAllSpacesUntil(destinationSpace)
             .filter { enemySpaces[it] == null }
             .forEach {
-                this.moveEnemyToSpace(it)
+                moveEnemyToSpace(it)
                 Thread.sleep(500L)
             }
     }
 
-    private fun Participant.getAllSpacesUntil(destinationSpace: Int): IntProgression {
-        val currentIndex: Int = this.getCurrentSpaceIndex()
+    private fun getAllSpacesUntil(destinationSpace: Int): IntProgression {
+        val currentIndex: Int = getSpaceIndexOfCurrentParticipant()
         return if (destinationSpace < currentIndex) {
             currentIndex - 1 downTo maxOf(destinationSpace, 0)
         } else {
@@ -267,24 +278,22 @@ class BattleField(participants: List<Participant>) {
         }
     }
 
-    private fun Participant.moveHeroToSpace(newSpace: Int) {
-        heroSpaces[heroSpaces.indexOf(this)] = null
-        heroSpaces[newSpace] = this
+    private fun moveHeroToSpace(newSpace: Int) {
+        val hero: Participant = currentParticipant.invoke()
+        heroSpaces[heroSpaces.indexOf(hero)] = null
+        heroSpaces[newSpace] = hero
     }
 
-    private fun Participant.moveEnemyToSpace(newSpace: Int) {
-        enemySpaces[enemySpaces.indexOf(this)] = null
-        enemySpaces[newSpace] = this
+    private fun moveEnemyToSpace(newSpace: Int) {
+        val enemy: Participant = currentParticipant.invoke()
+        enemySpaces[enemySpaces.indexOf(enemy)] = null
+        enemySpaces[newSpace] = enemy
     }
 
-    private fun Participant.isEnemyNextToHero(hero: Participant): Boolean {
-        val enemyIndex: Int = this.getCurrentSpaceIndex()
-        val heroIndex: Int = hero.getCurrentSpaceIndex()
+    private fun isActingEnemyNextTo(hero: Participant): Boolean {
+        val enemyIndex: Int = getSpaceIndexOfCurrentParticipant()
+        val heroIndex: Int = getSpaceIndexOf(hero)
         return enemyIndex == heroIndex || enemyIndex == heroIndex - 1
-    }
-
-    private fun Participant.getCurrentSpaceIndex(): Int {
-        return getCurrentSpace(this)
     }
 
     private fun isHeroStartingSpaceNextToEnemy(): Boolean {
@@ -299,9 +308,9 @@ class BattleField(participants: List<Participant>) {
             || (startingSpace < BATTLE_FIELD_SIZE - 1 && heroSpaces[startingSpace + 1] != null)
     }
 
-    private fun Participant.isInRangeOfHero(currentHero: Participant): Boolean {
+    private fun Participant.isEnemyInRangeOfActingHero(): Boolean {
         val enemySpace: Int = enemySpaces.indexOf(this)
-        val range: List<Int> = getRangeOfHero(currentHero)
+        val range: List<Int> = getRangeOfActingHero()
         return enemySpace in range
     }
 

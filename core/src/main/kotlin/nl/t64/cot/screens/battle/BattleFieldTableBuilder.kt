@@ -23,7 +23,7 @@ class BattleFieldTableBuilder {
         this.battleField = battleField
 
         val enemyTable: Table = if (currentParticipant.isHero) {
-            createTargetFieldTable(currentParticipant)
+            createTargetFieldTable()
         } else {
             createParticipantTable(battleField.enemySpaces)
         }
@@ -59,8 +59,8 @@ class BattleFieldTableBuilder {
         }
     }
 
-    private fun createTargetFieldTable(currentParticipant: Participant): Table {
-        val ranges: List<Int> = battleField.getRangeOfHero(currentParticipant)
+    private fun createTargetFieldTable(): Table {
+        val ranges: List<Int> = battleField.getRangeOfActingHero()
 
         return Table().apply {
             defaults().width(60f).height(60f).center()
@@ -78,8 +78,8 @@ class BattleFieldTableBuilder {
 
     private fun createHeroFieldTable(currentParticipant: Participant): Table {
         val startingSpace: Int = battleField.startingSpace
-        val currentSpace: Int = battleField.getCurrentSpace(currentParticipant)
-        val actionPoints: Int = battleField.getModifiedApForHero(currentParticipant)
+        val currentSpace: Int = battleField.getSpaceIndexOfCurrentParticipant()
+        val actionPoints: Int = battleField.getModifiedApForHero()
 
         return Table().apply {
             defaults().width(60f).height(60f).center()

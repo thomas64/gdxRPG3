@@ -9,9 +9,9 @@ class MoveAction(
     private val battleField: BattleField,
     private val currentParticipant: Participant,
 ) {
-    private val currentSpace: Int = battleField.getCurrentSpace(currentParticipant)
+    private val currentSpace: Int = battleField.getSpaceIndexOfCurrentParticipant()
     private val startingSpace: Int = battleField.startingSpace
-    private val penaltyAP: Int = battleField.getPenaltyApForHero(currentParticipant)
+    private val penaltyAP: Int = battleField.getPenaltyApForHero()
     private val difference: Int = abs(currentSpace - startingSpace) + penaltyAP
 
     fun createConfirmationMessage(): String {
@@ -31,7 +31,7 @@ class MoveAction(
 
     fun handle() {
         currentParticipant.currentAP -= difference
-        battleField.setStartingSpace(currentParticipant)
+        battleField.setStartingSpace()
     }
 
 }
