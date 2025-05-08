@@ -4,11 +4,9 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Screen
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
-import com.badlogic.gdx.scenes.scene2d.InputListener
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog
-import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.ScreenUtils
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.audioManager
@@ -22,8 +20,6 @@ import nl.t64.cot.components.battle.*
 import nl.t64.cot.components.party.abilities.BattleAbilityItem
 import nl.t64.cot.components.party.inventory.BattlePotionItem
 import nl.t64.cot.components.party.inventory.BattleWeaponItem
-import nl.t64.cot.components.party.inventory.InventoryGroup
-import nl.t64.cot.components.party.inventory.InventoryItem
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.dialog.MessageDialog
@@ -31,7 +27,6 @@ import nl.t64.cot.screens.inventory.InventoryScreen
 import nl.t64.cot.screens.menu.MenuPause
 import nl.t64.cot.screens.world.Camera
 import kotlin.concurrent.thread
-import com.badlogic.gdx.scenes.scene2d.ui.List as GdxList
 
 
 class BattleScreen : Screen {
@@ -47,31 +42,12 @@ class BattleScreen : Screen {
     private lateinit var currentTarget: Participant
 
     private lateinit var battleField: BattleField
-    private lateinit var dialogManager: BattleDialogManager
     private lateinit var tableManager: BattleTableManager
+    private lateinit var menuManager: BattleMenuManager
+    private lateinit var dialogManager: BattleDialogManager
 
     private val screenBuilder = BattleScreenBuilder()
     private val shapeRenderer = ShapeRenderer()
-
-    private var buttonTablePreBattle: Table = Table()
-    private var buttonTableHero: Table = Table()
-    private var buttonTableReposition: Table = Table()
-    private var buttonTableAction: Table = Table()
-    private var buttonTableMove: Table = Table()
-    private var buttonTableAttack: Table = Table()
-    private var buttonTableTarget: Table = Table()
-    private var buttonTablePotion: Table = Table()
-    private var buttonTableWeapon: Table = Table()
-    private val allButtonTables
-        get() = listOf(buttonTablePreBattle,
-                       buttonTableHero,
-                       buttonTableReposition,
-                       buttonTableAction,
-                       buttonTableMove,
-                       buttonTableAttack,
-                       buttonTableTarget,
-                       buttonTablePotion,
-                       buttonTableWeapon)
 
     private var isBgmFading: Boolean = false
     private var isLoaded: Boolean = false
@@ -82,16 +58,16 @@ class BattleScreen : Screen {
     private var hasLost: Boolean = false
     private var shouldKeepState: Boolean = false
 
-    private val listeners = BattleListeners(
-        ::winBattle, ::openPauseMenu, ::startBattle, ::endTurn,
-        ::selectPrePreviewAttack, ::selectPreviewAttack, ::selectAttack, ::selectPotion, ::selectWeapon,
-        ::heroIsSelectedForPrePreview, ::attackInPrePreviewIsSelected, ::attackInPreviewIsSelected, ::attackIsSelected,
-        ::heroIsSelectedForReposition, ::selectReposition, ::selectMove,
-        { battleField.repositionHeroLeft() }, { battleField.repositionHeroRight() }, { battleField.moveHeroLeft() }, { battleField.moveHeroRight() },
-        ::showInventoryScreenPreBattle, ::showInventoryScreen, ::showDelayTurnDialog, ::showFleeDialog, ::showPreviewDialog,
-        ::showConfirmRestDialog, ::showConfirmMoveDialog, ::showConfirmAttackDialog, ::showConfirmPotionDialog, ::showConfirmWeaponDialog,
-        ::returnToPreBattle, ::returnToHeroForReposition, ::returnToHeroForPrePreview, ::returnToPrePreviewAttack, ::returnToPreviewAttack, ::returnToAttack, ::returnToAction
-    )
+    private val listeners = BattleListeners().apply {
+        setScreenListeners(
+            ::winBattle, ::openPauseMenu, ::startBattle, ::endTurn,
+            ::heroIsSelectedForPrePreview, ::heroIsSelectedForReposition,
+            ::showInventoryScreenPreBattle, ::showInventoryScreen,
+            ::showDelayTurnDialog, ::showFleeDialog, ::showPreviewDialog,
+            ::showConfirmRestDialog, ::showConfirmMoveDialog, ::showConfirmAttackDialog,
+            ::showConfirmPotionDialog, ::showConfirmWeaponDialog
+        )
+    }
 
     companion object {
         fun load(battleId: String, battleObserver: BattleObserver) {
@@ -127,6 +103,7 @@ class BattleScreen : Screen {
 
         battleField = BattleField(turnManager.participants, { currentParticipant })
         tableManager = BattleTableManager(stage, screenBuilder, { currentParticipant })
+        menuManager = BattleMenuManager(stage, screenBuilder, listeners, turnManager, battleField, { currentParticipant })
         dialogManager = BattleDialogManager(stage, { currentParticipant })
 
         val battleTitle = screenBuilder.createBattleTitle()
@@ -148,7 +125,7 @@ class BattleScreen : Screen {
                 Utils.setGamepadInputProcessor(stage)
                 stage.addActor(Utils.createBattleBack(battleId))
                 isLoaded = true
-                setupPreBattleTable()
+                menuManager.setupPreBattleTable()
                 isPreBattle = true
                 render(0f)
 
@@ -235,222 +212,26 @@ class BattleScreen : Screen {
 
     private fun startBattle() {
         screenBuilder.buttonTableMainMenuIndex = 0
-        buttonTablePreBattle.remove()
+        menuManager.buttonTablePreBattle.remove()
         isPreBattle = false
-    }
-
-    private fun selectReposition() {
-        screenBuilder.buttonTableMainMenuIndex = (buttonTablePreBattle.children.last() as GdxList<*>).selectedIndex
-        buttonTablePreBattle.remove()
-        setupHeroTableForReposition()
-    }
-
-    private fun selectPrePreviewAttack() {
-        screenBuilder.buttonTableMainMenuIndex = (buttonTablePreBattle.children.last() as GdxList<*>).selectedIndex
-        buttonTablePreBattle.remove()
-        setupHeroTableForPrePreview()
     }
 
     private fun heroIsSelectedForReposition(selectedHero: String) {
         currentParticipant = turnManager.participants.first { it.character.name == selectedHero }
-        screenBuilder.buttonTableSelectHeroIndex = (buttonTableHero.children.last() as GdxList<*>).selectedIndex
-        buttonTableHero.remove()
-        setupRepositionTable()
+        menuManager.heroIsSelectedForReposition()
     }
 
     private fun heroIsSelectedForPrePreview(selectedHero: String) {
         currentParticipant = turnManager.participants.first { it.character.name == selectedHero }
-        screenBuilder.buttonTableSelectHeroIndex = (buttonTableHero.children.last() as GdxList<*>).selectedIndex
-        buttonTableHero.remove()
-        setupPrePreviewAttackTable()
-    }
-
-    private fun attackInPrePreviewIsSelected(attack: BattleAbilityItem) {
-        screenBuilder.buttonTableSelectAttackIndex = (buttonTableAttack.children.last() as GdxList<*>).selectedIndex
-        buttonTableAttack.remove()
-        setupPrePreviewTargetTable(attack)
-    }
-
-    private fun selectMove() {
-        screenBuilder.buttonTableMainMenuIndex = (buttonTableAction.children.last() as GdxList<*>).selectedIndex
-        buttonTableAction.remove()
-        setupMoveTable()
-    }
-
-    private fun selectPreviewAttack() {
-        screenBuilder.buttonTableMainMenuIndex = (buttonTableAction.children.last() as GdxList<*>).selectedIndex
-        buttonTableAction.remove()
-        setupPreviewAttackTable()
-    }
-
-    private fun attackInPreviewIsSelected(attack: BattleAbilityItem) {
-        screenBuilder.buttonTableSelectAttackIndex = (buttonTableAttack.children.last() as GdxList<*>).selectedIndex
-        buttonTableAttack.remove()
-        setupPreviewTargetTable(attack)
-    }
-
-    private fun selectAttack() {
-        screenBuilder.buttonTableMainMenuIndex = (buttonTableAction.children.last() as GdxList<*>).selectedIndex
-        buttonTableAction.remove()
-        setupAttackTable()
-    }
-
-    private fun attackIsSelected(attack: BattleAbilityItem) {
-        screenBuilder.buttonTableSelectAttackIndex = (buttonTableAttack.children.last() as GdxList<*>).selectedIndex
-        buttonTableAttack.remove()
-        setupTargetTable(attack)
-    }
-
-    private fun selectPotion() {
-        screenBuilder.buttonTableMainMenuIndex = (buttonTableAction.children.last() as GdxList<*>).selectedIndex
-        buttonTableAction.remove()
-        setupPotionTable()
-    }
-
-    private fun selectWeapon() {
-        screenBuilder.buttonTableMainMenuIndex = (buttonTableAction.children.last() as GdxList<*>).selectedIndex
-        buttonTableAction.remove()
-        setupWeaponTable()
-    }
-
-    private fun returnToPreBattle() {
-        buttonTableHero.remove()
-        setupPreBattleTable()
-    }
-
-    private fun returnToHeroForReposition() {
-        buttonTableReposition.remove()
-        setupHeroTableForReposition()
-    }
-
-    private fun returnToHeroForPrePreview() {
-        buttonTableAttack.remove()
-        setupHeroTableForPrePreview()
-    }
-
-    private fun returnToPrePreviewAttack() {
-        buttonTableTarget.remove()
-        setupPrePreviewAttackTable()
-    }
-
-    private fun returnToAction() {
-        buttonTableMove.remove()
-        buttonTableAttack.remove()
-        buttonTablePotion.remove()
-        buttonTableWeapon.remove()
-        setupActionTable()
-    }
-
-    private fun returnToPreviewAttack() {
-        buttonTableTarget.remove()
-        setupPreviewAttackTable()
-    }
-
-    private fun returnToAttack() {
-        buttonTableTarget.remove()
-        setupAttackTable()
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    private fun setupPreBattleTable() {
-        buttonTablePreBattle = screenBuilder.createButtonTablePreBattle()
-        prepare(buttonTablePreBattle, listeners.preBattle)
-    }
-
-    private fun setupHeroTableForReposition() {
-        buttonTableHero = screenBuilder.createButtonTableHero(turnManager.getOnlyHeroes())
-        prepare(buttonTableHero, listeners.heroForReposition)
-    }
-
-    private fun setupRepositionTable() {
-        buttonTableReposition = screenBuilder.createButtonTableMove()
-        prepare(buttonTableReposition, listeners.reposition)
-    }
-
-    private fun setupHeroTableForPrePreview() {
-        buttonTableHero = screenBuilder.createButtonTableHero(turnManager.getOnlyHeroes())
-        prepare(buttonTableHero, listeners.heroForPrePreview)
-    }
-
-    private fun setupPrePreviewAttackTable() {
-        buttonTableAttack = screenBuilder.createButtonTablePreviewAttack(currentParticipant)
-        prepare(buttonTableAttack, listeners.prePreviewAttack)
-    }
-
-    private fun setupPrePreviewTargetTable(selectedAttack: BattleAbilityItem) {
-        buttonTableTarget = screenBuilder.createButtonTableTarget(turnManager.getOnlyEnemies())
-        listeners.prePreviewTarget.setSelectedAttack(selectedAttack)
-        prepare(buttonTableTarget, listeners.prePreviewTarget)
-    }
-
-    private fun setupActionTable() {
-        battleField.cancelMovement()
-        battleField.resetStartingSpace()
-        val areEnemiesInRange: Boolean = battleField.getTargetableEnemiesForActingHero().isNotEmpty()
-        buttonTableAction = screenBuilder.createButtonTableAction(currentParticipant, areEnemiesInRange)
-        prepare(buttonTableAction, listeners.action)
-    }
-
-    private fun setupMoveTable() {
-        battleField.setStartingSpace()
-        buttonTableMove = screenBuilder.createButtonTableMove()
-        prepare(buttonTableMove, listeners.move)
-    }
-
-    private fun setupPreviewAttackTable() {
-        buttonTableAttack = screenBuilder.createButtonTablePreviewAttack(currentParticipant)
-        prepare(buttonTableAttack, listeners.previewAttack)
-    }
-
-    private fun setupAttackTable() {
-        buttonTableAttack = screenBuilder.createButtonTableAttack(currentParticipant)
-        prepare(buttonTableAttack, listeners.attack)
-    }
-
-    private fun setupPreviewTargetTable(selectedAttack: BattleAbilityItem) {
-        buttonTableTarget = screenBuilder.createButtonTableTarget(turnManager.getOnlyEnemies())
-        listeners.previewTarget.setSelectedAttack(selectedAttack)
-        prepare(buttonTableTarget, listeners.previewTarget)
-    }
-
-    private fun setupTargetTable(selectedAttack: BattleAbilityItem) {
-        val targetableEnemies: List<Participant> = battleField.getTargetableEnemiesForActingHero()
-        buttonTableTarget = screenBuilder.createButtonTableTarget(targetableEnemies)
-        listeners.target.setSelectedAttack(selectedAttack)
-        prepare(buttonTableTarget, listeners.target)
-    }
-
-    private fun setupPotionTable() {
-        val battlePotions: List<BattlePotionItem> = gameData.inventory.getAllOf(InventoryGroup.POTION)
-            .filter { it.name.contains(" Potion") }
-            .map { BattlePotionItem(it) }
-        buttonTablePotion = screenBuilder.createButtonTablePotion(battlePotions)
-        prepare(buttonTablePotion, listeners.potion)
-    }
-
-    private fun setupWeaponTable() {
-        val battleEquipment: List<BattleWeaponItem> =
-            (gameData.inventory.getAllOf(InventoryGroup.WEAPON) + gameData.inventory.getAllOf(InventoryGroup.SHIELD))
-                .map { BattleWeaponItem(it) }
-        val currentWeapon: InventoryItem? = currentParticipant.character.getInventoryItem(InventoryGroup.WEAPON)
-        val currentShield: InventoryItem? = currentParticipant.character.getInventoryItem(InventoryGroup.SHIELD)
-        buttonTableWeapon = screenBuilder.createButtonTableWeapon(battleEquipment, currentWeapon, currentShield)
-        prepare(buttonTableWeapon, listeners.weapon)
-    }
-
-    private fun prepare(table: Table, listener: InputListener) {
-        stage.addActor(table)
-        table.addListener(listener)
-        stage.keyboardFocus = table.children.last()
+        menuManager.heroIsSelectedForPrePreview()
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun showConfirmMoveDialog() {
         dialogManager.showConfirmMoveDialog(battleField = battleField,
-                                            onConfirmed = { it.handle(); returnToAction() },
-                                            onCancelled = { returnToAction() })
+                                            onConfirmed = { it.handle(); menuManager.returnToAction() },
+                                            onCancelled = { menuManager.returnToAction() })
     }
 
     private fun showPreviewDialog(selectedAttack: BattleAbilityItem, selectedTarget: String) {
@@ -496,7 +277,7 @@ class BattleScreen : Screen {
     private fun attackConfirmed(attackAction: AttackAction, target: Participant) {
         currentTarget = target
         val messages: ArrayDeque<String> = attackAction.handle()!!
-        buttonTableTarget.remove()
+        menuManager.buttonTableTarget.remove()
         isDelayingTurn = true
         Utils.runWithDelay(0.5f) {
             showMessages(messages)
@@ -505,7 +286,7 @@ class BattleScreen : Screen {
     }
 
     private fun potionConfirmed(potionAction: PotionAction) {
-        buttonTablePotion.remove()
+        menuManager.buttonTablePotion.remove()
         val (message, audioEvent) = potionAction.handle()
         val messageDialog = MessageDialog(message)
         messageDialog.setActionAfterHide {
@@ -518,7 +299,7 @@ class BattleScreen : Screen {
     }
 
     private fun weaponConfirmed(weaponAction: WeaponAction) {
-        buttonTableWeapon.remove()
+        menuManager.buttonTableWeapon.remove()
         val message: String = weaponAction.handle()
         val messageDialog = MessageDialog(message)
         messageDialog.setActionAfterHide {
@@ -532,7 +313,7 @@ class BattleScreen : Screen {
 
     private fun fleeConfirmed(fleeAction: FleeAction) {
         screenBuilder.buttonTableMainMenuIndex = 0
-        buttonTableAction.remove()
+        menuManager.buttonTableAction.remove()
         val (isSuccess, message) = fleeAction.handle()
         val messageDialog = MessageDialog(message)
         messageDialog.setActionAfterHide {
@@ -549,7 +330,7 @@ class BattleScreen : Screen {
 
     private fun delayTurnConfirmed(delayTurnAction: DelayTurnAction) {
         screenBuilder.buttonTableMainMenuIndex = 0
-        buttonTableAction.remove()
+        menuManager.buttonTableAction.remove()
         isDelayingTurn = true
         val message = delayTurnAction.handle()
         val messageDialog = MessageDialog(message)
@@ -563,7 +344,7 @@ class BattleScreen : Screen {
 
     private fun restConfirmed(restAction: RestAction) {
         screenBuilder.buttonTableMainMenuIndex = 0
-        buttonTableAction.remove()
+        menuManager.buttonTableAction.remove()
         val (message, audioEvent) = restAction.handle()
         val messageDialog = MessageDialog(message)
         messageDialog.setActionAfterHide {
@@ -578,7 +359,7 @@ class BattleScreen : Screen {
 
     private fun endTurn() {
         screenBuilder.buttonTableMainMenuIndex = 0
-        buttonTableAction.remove()
+        menuManager.buttonTableAction.remove()
         val message = EndTurnAction(currentParticipant).handle()
         val messageDialog = MessageDialog(message)
         messageDialog.setActionAfterHide {
@@ -595,10 +376,7 @@ class BattleScreen : Screen {
 
     private fun takeTurnHero() {
         if (isDelayingTurn) return
-        val isNoButtonTableVisible = stage.actors.items.none { it in allButtonTables }
-        if (isNoButtonTableVisible) {
-            setupActionTable()
-        }
+        menuManager.possibleSetupActionTable()
     }
 
     private fun takeTurnEnemy() {
