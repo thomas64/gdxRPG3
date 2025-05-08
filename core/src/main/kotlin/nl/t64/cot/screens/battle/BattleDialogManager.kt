@@ -129,10 +129,9 @@ class BattleDialogManager(
     }
 
     fun showDelayTurnDialog(
-        turnManager: TurnManager,
         onConfirmed: (DelayTurnAction) -> Unit
     ) {
-        val delayTurnAction = DelayTurnAction(turnManager, currentParticipant.invoke())
+        val delayTurnAction = DelayTurnAction(currentParticipant.invoke())
         val (isAble, message) = delayTurnAction.isAble()
         if (!isAble) {
             val dialog = MessageDialog(message)

@@ -63,6 +63,10 @@ class TurnManager(
         return participants.first { it.character == character }
     }
 
+    fun getCurrentApOf(character: Character): Int {
+        return participants.firstOrNull { it.character == character }?.currentAP ?: 0
+    }
+
     private fun increaseAllTurnCounters() {
         while (true) {
             if (participants.any { it.isTurnCounterAtMax() }) break

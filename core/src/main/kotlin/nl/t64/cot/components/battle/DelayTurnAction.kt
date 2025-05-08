@@ -4,7 +4,6 @@ package nl.t64.cot.components.battle
 private const val DELAY_AP: Int = 1
 
 class DelayTurnAction(
-    private val turnManager: TurnManager,
     private val currentParticipant: Participant
 ) {
     private val character: Character = currentParticipant.character
@@ -25,7 +24,6 @@ class DelayTurnAction(
 
     fun handle(): String {
         currentParticipant.currentAP -= DELAY_AP
-        turnManager.delayTurn()
         return """
             ${character.name} delayed ${character.gender} turn,
             becoming next in line.

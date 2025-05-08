@@ -15,7 +15,6 @@ import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playBgm
-import nl.t64.cot.audio.stopAllBgm
 import nl.t64.cot.components.battle.*
 import nl.t64.cot.components.party.abilities.BattleAbilityItem
 import nl.t64.cot.components.party.inventory.BattlePotionItem
@@ -45,6 +44,8 @@ class BattleScreen : Screen {
     private lateinit var tableManager: BattleTableManager
     private lateinit var menuManager: BattleMenuManager
     private lateinit var dialogManager: BattleDialogManager
+    private lateinit var confirmManager: BattleConfirmManager
+    private lateinit var resultManager: BattleResultManager
 
     private val screenBuilder = BattleScreenBuilder()
     private val shapeRenderer = ShapeRenderer()
@@ -101,10 +102,12 @@ class BattleScreen : Screen {
         val camera = Camera()
         stage = Stage(camera.viewport)
 
-        battleField = BattleField(turnManager.participants, { currentParticipant })
-        tableManager = BattleTableManager(stage, screenBuilder, { currentParticipant })
-        menuManager = BattleMenuManager(stage, screenBuilder, listeners, turnManager, battleField, { currentParticipant })
-        dialogManager = BattleDialogManager(stage, { currentParticipant })
+        battleField = BattleField(turnManager.participants, ::currentParticipant)
+        tableManager = BattleTableManager(stage, screenBuilder, ::currentParticipant)
+        menuManager = BattleMenuManager(stage, screenBuilder, listeners, turnManager, battleField, ::currentParticipant)
+        dialogManager = BattleDialogManager(stage, ::currentParticipant)
+        confirmManager = BattleConfirmManager(stage, { isDelayingTurn = it })
+        resultManager = BattleResultManager(stage, battleObserver, battleId, enemies, { isBgmFading = it })
 
         val battleTitle = screenBuilder.createBattleTitle()
         stage.addActor(battleTitle)
@@ -125,6 +128,7 @@ class BattleScreen : Screen {
                 Utils.setGamepadInputProcessor(stage)
                 stage.addActor(Utils.createBattleBack(battleId))
                 isLoaded = true
+                screenBuilder.buttonTableMainMenuIndex = 0
                 menuManager.setupPreBattleTable()
                 isPreBattle = true
                 render(0f)
@@ -154,7 +158,7 @@ class BattleScreen : Screen {
             return
         }
 
-        tableManager.updateHeroTable(gameData.party.getAllHeroes(), { turnManager.getParticipant(it).currentAP })
+        tableManager.updateHeroTable(gameData.party.getAllHeroes(), turnManager::getCurrentApOf)
         tableManager.updateEnemyTable(enemies.getAll())
         tableManager.updateTurnTable(turnManager)
 
@@ -264,8 +268,7 @@ class BattleScreen : Screen {
     }
 
     private fun showDelayTurnDialog() {
-        dialogManager.showDelayTurnDialog(turnManager = turnManager,
-                                          onConfirmed = { delayTurnConfirmed(it) })
+        dialogManager.showDelayTurnDialog(onConfirmed = { delayTurnConfirmed(it) })
     }
 
     private fun showConfirmRestDialog() {
@@ -287,89 +290,32 @@ class BattleScreen : Screen {
 
     private fun potionConfirmed(potionAction: PotionAction) {
         menuManager.buttonTablePotion.remove()
-        val (message, audioEvent) = potionAction.handle()
-        val messageDialog = MessageDialog(message)
-        messageDialog.setActionAfterHide {
-            isDelayingTurn = false
-        }
-        isDelayingTurn = true
-        Utils.runWithDelay(0.5f) {
-            messageDialog.show(stage, audioEvent)
-        }
+        confirmManager.potionConfirmed(potionAction)
     }
 
     private fun weaponConfirmed(weaponAction: WeaponAction) {
         menuManager.buttonTableWeapon.remove()
-        val message: String = weaponAction.handle()
-        val messageDialog = MessageDialog(message)
-        messageDialog.setActionAfterHide {
-            isDelayingTurn = false
-        }
-        isDelayingTurn = true
-        Utils.runWithDelay(0.5f) {
-            messageDialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT)
-        }
+        confirmManager.weaponConfirmed(weaponAction)
     }
 
     private fun fleeConfirmed(fleeAction: FleeAction) {
-        screenBuilder.buttonTableMainMenuIndex = 0
         menuManager.buttonTableAction.remove()
-        val (isSuccess, message) = fleeAction.handle()
-        val messageDialog = MessageDialog(message)
-        messageDialog.setActionAfterHide {
-            if (isSuccess) {
-                battleFledExitScreen()
-            }
-            isDelayingTurn = false
-        }
-        isDelayingTurn = true
-        Utils.runWithDelay(0.5f) {
-            messageDialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT)
-        }
+        confirmManager.fleeConfirmed(fleeAction, resultManager)
     }
 
     private fun delayTurnConfirmed(delayTurnAction: DelayTurnAction) {
-        screenBuilder.buttonTableMainMenuIndex = 0
         menuManager.buttonTableAction.remove()
-        isDelayingTurn = true
-        val message = delayTurnAction.handle()
-        val messageDialog = MessageDialog(message)
-        messageDialog.setActionAfterHide {
-            isDelayingTurn = false
-        }
-        Utils.runWithDelay(0.5f) {
-            messageDialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT)
-        }
+        confirmManager.delayTurnConfirmed(delayTurnAction, turnManager)
     }
 
     private fun restConfirmed(restAction: RestAction) {
-        screenBuilder.buttonTableMainMenuIndex = 0
         menuManager.buttonTableAction.remove()
-        val (message, audioEvent) = restAction.handle()
-        val messageDialog = MessageDialog(message)
-        messageDialog.setActionAfterHide {
-            turnManager.setNextTurn()
-            isDelayingTurn = false
-        }
-        isDelayingTurn = true
-        Utils.runWithDelay(0.5f) {
-            messageDialog.show(stage, audioEvent, 0.25f)
-        }
+        confirmManager.restConfirmed(restAction, turnManager)
     }
 
     private fun endTurn() {
-        screenBuilder.buttonTableMainMenuIndex = 0
         menuManager.buttonTableAction.remove()
-        val message = EndTurnAction(currentParticipant).handle()
-        val messageDialog = MessageDialog(message)
-        messageDialog.setActionAfterHide {
-            turnManager.setNextTurn()
-            isDelayingTurn = false
-        }
-        isDelayingTurn = true
-        Utils.runWithDelay(0.5f) {
-            messageDialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT)
-        }
+        confirmManager.endTurn(currentParticipant, turnManager)
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -469,92 +415,13 @@ class BattleScreen : Screen {
     private fun winBattle() {
         if (isDelayingTurn || hasWon) return
         hasWon = true
-
-        stage.addAction(Actions.sequence(
-            Actions.run { isBgmFading = true },
-            Actions.delay(Constant.FADE_DURATION),
-            Actions.run { isBgmFading = false },
-            Actions.run { stopAllBgm() },
-            Actions.run { playBgm(AudioEvent.BGM_WIN_BATTLE, false) },
-            Actions.run {
-                gameData.battles.setBattleWon(battleId)
-
-                val totalXpWon = enemies.getTotalXp()
-                gameData.party.gainXp(totalXpWon)
-                val winMessage = """
-                    The enemy is defeated!
-                    Party gained $totalXpWon XP.""".trimIndent()
-
-                val messageDialog = MessageDialog(winMessage)
-                messageDialog.setActionAfterHide { battleWonExitScreen() }
-                messageDialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT)
-            }
-        ))
-    }
-
-    private fun battleWonExitScreen() {
-        gameData.clock.takeHalfHour()
-        exitScreen { battleObserver.notifyBattleWon(battleId, enemies.getSpoils()) }
-    }
-
-    private fun battleFledExitScreen() {
-        screenBuilder.buttonTableMainMenuIndex = 0
-        gameData.clock.takeQuarterHour()
-        exitScreen { battleObserver.notifyBattleFled() }
+        resultManager.winBattle()
     }
 
     private fun gameOver() {
         if (isDelayingTurn) return
         hasLost = true
-
-        stage.addAction(Actions.sequence(
-            Actions.run { isBgmFading = true },
-            Actions.delay(Constant.FADE_DURATION),
-            Actions.run { isBgmFading = false },
-            Actions.run { stopAllBgm() },
-            Actions.run { playBgm(AudioEvent.BGM_LOSE_BATTLE, false) },
-            Actions.run {
-                val messageDialog = MessageDialog(createDeathMessage())
-                messageDialog.setActionAfterHide { gameOverExitScreen() }
-                messageDialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT)
-            }
-        ))
-    }
-
-    private fun createDeathMessage(): String {
-        val currentCycle = gameData.numberOfCycles
-        val isFacingArdorOrOrcGenerals = enemies.getAll().all { it.id in listOf("orc_general", "ardor") }
-
-        return when {
-
-            currentCycle in 1..3 && isFacingArdorOrOrcGenerals -> """
-                Mozes is knocked down.
-
-                The fight is over.""".trimIndent()
-
-            else -> """
-                Mozes took a fatal blow.
-
-                Game Over.""".trimIndent()
-        }
-    }
-
-    private fun gameOverExitScreen() {
-        exitScreen { battleObserver.notifyBattleLost() }
-    }
-
-    private fun exitScreen(actionAfterExit: () -> Unit) {
-        stage.addAction(Actions.sequence(
-            Actions.run {
-                Gdx.input.inputProcessor = null
-                Utils.setGamepadInputProcessor(null)
-            },
-            Actions.run { isBgmFading = true },
-            Actions.fadeOut(Constant.FADE_DURATION),
-            Actions.run { isBgmFading = false },
-            Actions.run { stopAllBgm() },
-            Actions.run { actionAfterExit.invoke() }
-        ))
+        resultManager.gameOver()
     }
 
 }

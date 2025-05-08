@@ -63,6 +63,7 @@ class BattleMenuManager(
     fun possibleSetupActionTable() {
         val isNoButtonTableVisible = stage.actors.items.none { it in allButtonTables }
         if (isNoButtonTableVisible) {
+            screenBuilder.buttonTableMainMenuIndex = 0
             setupActionTable()
         }
     }
