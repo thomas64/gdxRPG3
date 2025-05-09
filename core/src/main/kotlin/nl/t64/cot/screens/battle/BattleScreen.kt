@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog
+import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.utils.ScreenUtils
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.audioManager
@@ -38,7 +39,6 @@ class BattleScreen : Screen {
     private lateinit var enemies: EnemyContainer
     private lateinit var turnManager: TurnManager
     private lateinit var currentParticipant: Participant
-    private lateinit var currentTarget: Participant
 
     private lateinit var battleField: BattleField
     private lateinit var tableManager: BattleTableManager
@@ -46,6 +46,8 @@ class BattleScreen : Screen {
     private lateinit var dialogManager: BattleDialogManager
     private lateinit var confirmManager: BattleConfirmManager
     private lateinit var resultManager: BattleResultManager
+
+    private lateinit var currentTarget: Participant
 
     private val screenBuilder = BattleScreenBuilder()
     private val shapeRenderer = ShapeRenderer()
@@ -59,16 +61,6 @@ class BattleScreen : Screen {
     private var hasLost: Boolean = false
     private var shouldKeepState: Boolean = false
 
-    private val listeners = BattleListeners().apply {
-        setScreenListeners(
-            ::winBattle, ::openPauseMenu, ::startBattle, ::endTurn,
-            ::heroIsSelectedForPrePreview, ::heroIsSelectedForReposition,
-            ::showInventoryScreenPreBattle, ::showInventoryScreen,
-            ::showDelayTurnDialog, ::showFleeDialog, ::showPreviewDialog,
-            ::showConfirmRestDialog, ::showConfirmMoveDialog, ::showConfirmAttackDialog,
-            ::showConfirmPotionDialog, ::showConfirmWeaponDialog
-        )
-    }
 
     companion object {
         fun load(battleId: String, battleObserver: BattleObserver) {
@@ -90,10 +82,6 @@ class BattleScreen : Screen {
             return
         }
 
-        enemies = EnemyContainer(battleId)
-        turnManager = TurnManager(gameData.party.getAllHeroesAlive(), enemies.getAll())
-        currentParticipant = turnManager.participants.first { it.character.id == Constant.PLAYER_ID }
-
         isLoaded = false
         isPreBattle = false
         hasWon = false
@@ -102,14 +90,19 @@ class BattleScreen : Screen {
         val camera = Camera()
         stage = Stage(camera.viewport)
 
+        enemies = EnemyContainer(battleId)
+        turnManager = TurnManager(gameData.party.getAllHeroesAlive(), enemies.getAll())
+        currentParticipant = turnManager.participants.first { it.character.id == Constant.PLAYER_ID }
+
         battleField = BattleField(turnManager.participants, ::currentParticipant)
         tableManager = BattleTableManager(stage, screenBuilder, ::currentParticipant)
-        menuManager = BattleMenuManager(stage, screenBuilder, listeners, turnManager, battleField, ::currentParticipant)
+        menuManager = BattleMenuManager(stage, screenBuilder, turnManager, battleField, ::currentParticipant)
+        setMenuManagerListeners()
         dialogManager = BattleDialogManager(stage, ::currentParticipant)
         confirmManager = BattleConfirmManager(stage, { isDelayingTurn = it })
         resultManager = BattleResultManager(stage, battleObserver, battleId, enemies, { isBgmFading = it })
 
-        val battleTitle = screenBuilder.createBattleTitle()
+        val battleTitle: Label = screenBuilder.createBattleTitle()
         stage.addActor(battleTitle)
 
         stage.addAction(Actions.sequence(
@@ -422,6 +415,27 @@ class BattleScreen : Screen {
         if (isDelayingTurn) return
         hasLost = true
         resultManager.gameOver()
+    }
+
+    private fun setMenuManagerListeners() {
+        menuManager.setListeners(
+            ::winBattle,
+            ::openPauseMenu,
+            ::showInventoryScreenPreBattle,
+            ::startBattle,
+            ::heroIsSelectedForReposition,
+            ::heroIsSelectedForPrePreview,
+            ::showPreviewDialog,
+            ::showInventoryScreen,
+            ::showFleeDialog,
+            ::showDelayTurnDialog,
+            ::showConfirmRestDialog,
+            ::endTurn,
+            ::showConfirmMoveDialog,
+            ::showConfirmAttackDialog,
+            ::showConfirmPotionDialog,
+            ::showConfirmWeaponDialog
+        )
     }
 
 }
