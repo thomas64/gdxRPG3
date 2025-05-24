@@ -35,7 +35,7 @@ private fun String.toDialogHeight(): Float {
 }
 
 private fun String.toDialogContent(): Table {
-    val font: BitmapFont = FontSpectralRegular24Provider.font
+    val font: BitmapFont = FontInconsolataRegular24Provider.font
     val label = Label("[BLACK]$this", LabelStyle(font, null))
     label.setAlignment(Align.center)
 

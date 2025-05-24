@@ -15,7 +15,7 @@ import nl.t64.cot.Utils
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.constants.Constant
-import nl.t64.cot.screens.dialog.FontSpectralRegular24Provider
+import nl.t64.cot.screens.dialog.FontInconsolataRegular24Provider
 import nl.t64.cot.screens.dialog.MessageDialogListener
 
 
@@ -30,7 +30,7 @@ class MessageDialog(
     private val multiplexer: InputMultiplexer
 ) {
     private val stage = Stage()
-    private val font: BitmapFont = FontSpectralRegular24Provider.font
+    private val font: BitmapFont = FontInconsolataRegular24Provider.font
     private lateinit var label: Label
     private val dialog: Dialog = createDialog()
 

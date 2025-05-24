@@ -14,7 +14,7 @@ import nl.t64.cot.constants.Constant
 import nl.t64.cot.toDrawable
 
 
-private const val SCROLL_PANE_LINE_PAD = -4f
+private const val SCROLL_PANE_LINE_PAD = 2f
 private const val PAD = 25f
 
 class ConversationAnswers(

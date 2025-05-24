@@ -120,10 +120,10 @@ class BattleScreen : Screen {
                 Gdx.input.inputProcessor = stage
                 Utils.setGamepadInputProcessor(stage)
                 stage.addActor(Utils.createBattleBack(battleId))
-                isLoaded = true
                 screenBuilder.buttonTableMainMenuIndex = 0
                 menuManager.setupPreBattleTable()
                 isPreBattle = true
+                isLoaded = true
                 render(0f)
 
                 listOf("guide_event_battle_1",

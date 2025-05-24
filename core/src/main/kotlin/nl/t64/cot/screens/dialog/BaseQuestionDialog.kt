@@ -34,7 +34,7 @@ abstract class BaseQuestionDialog(
     private val content: Table,
     private val yesFunction: () -> Unit
 ) {
-    private val font: BitmapFont = FontSpectralRegular24Provider.font
+    private val font: BitmapFont = FontInconsolataRegular24Provider.font
     protected val dialog: Dialog = createDialog()
     private var selectedIndex = 0
 

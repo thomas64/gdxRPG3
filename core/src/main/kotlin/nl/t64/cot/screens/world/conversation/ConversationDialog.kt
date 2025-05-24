@@ -16,7 +16,6 @@ import ktx.collections.GdxArray
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.profileManager
-import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.conversation.ConversationChoice
@@ -29,6 +28,7 @@ import nl.t64.cot.components.party.XpRewarder
 import nl.t64.cot.components.quest.QuestGraph
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.academy.AcademyScreen
+import nl.t64.cot.screens.dialog.FontInconsolataRegular24Provider
 import nl.t64.cot.screens.loot.ReceiveScreen
 import nl.t64.cot.screens.loot.RewardScreen
 import nl.t64.cot.screens.loot.TradeScreen
@@ -37,10 +37,6 @@ import nl.t64.cot.screens.shop.ShopScreen
 import nl.t64.cot.sfx.TransitionPurpose
 import kotlin.concurrent.thread
 
-
-private const val FONT = "fonts/spectral_regular_24.ttf"
-private const val FONT_SIZE = 24
-private const val LINE_HEIGHT = 26f
 
 private const val SCROLL_PANE_LINE_HEIGHT = 32f
 private const val SCROLL_PANE_TOP_PAD = 10f
@@ -58,7 +54,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     private val conversationObserver: ConversationSubject = ConversationSubject(conversationObserver)
 
     private val stage: Stage = Stage()
-    private val font: BitmapFont = createFont()
+    private val font: BitmapFont = FontInconsolataRegular24Provider.font
     private val smallFont: BitmapFont = BitmapFont()
     private val label: TypingLabel = createLabel()
     private val answers: ConversationAnswers = ConversationAnswers(font)
@@ -540,13 +536,6 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    private fun createFont(): BitmapFont {
-        return resourceManager.getTrueTypeAsset(FONT, FONT_SIZE).apply {
-            data.setLineHeight(LINE_HEIGHT)
-            data.markupEnabled = true
-        }
-    }
 
     private fun createLabel(): TypingLabel {
         return TypingLabel("No Conversation", LabelStyle(font, Color.BLACK))

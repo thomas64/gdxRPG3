@@ -26,7 +26,7 @@ private fun Triple<String, String, String>.toDialogHeight(): Float {
 }
 
 private fun Triple<String, String, String>.toDialogTable(): Table {
-    val font: BitmapFont = FontSpectralRegular24Provider.font
+    val font: BitmapFont = FontInconsolataRegular24Provider.font
     val label1 = Label("[BLACK]${this.first}", LabelStyle(font, null))
     val label2 = Label("[BLACK]${this.second}", LabelStyle(font, null))
     val label3 = Label("[BLACK]${this.third}", LabelStyle(font, null))

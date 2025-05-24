@@ -3,8 +3,8 @@ package nl.t64.cot.screens.dialog
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import nl.t64.cot.Utils.resourceManager
 
-object FontSpectralRegular24Provider {
-    private const val FONT = "fonts/spectral_regular_24.ttf"
+object FontInconsolataRegular24Provider {
+    private const val FONT = "fonts/inconsolata_regular_24.ttf"
     private const val FONT_SIZE = 24
     private const val LINE_HEIGHT = 26f
 

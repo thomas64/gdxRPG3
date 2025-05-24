@@ -23,7 +23,7 @@ class MessageDialog(
     private val message: String
 ) {
     private val dialogHeight: Float = (message.lines().count() * FONT_SIZE + DIALOG_INIT_HEIGHT).toFloat()
-    private val font: BitmapFont = FontSpectralRegular24Provider.font
+    private val font: BitmapFont = FontInconsolataRegular24Provider.font
     private val dialog: Dialog = createDialog()
 
     @Null
