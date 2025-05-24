@@ -13,12 +13,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.utils.Align
 import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.gameData
-import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioCommand
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
+import nl.t64.cot.screens.FontProvider
 import nl.t64.cot.screens.cutscene.CutsceneActor
 import nl.t64.cot.toTexture
 import kotlin.random.Random
@@ -93,8 +93,7 @@ class EndOfTime(
     }
 
     private fun createTitle(): Label {
-        val font = resourceManager.getTrueTypeAsset("fonts/spectral_regular_24.ttf", 24)
-        val style = LabelStyle(font, Color.WHITE)
+        val style = LabelStyle(FontProvider.spectralRegular24, Color.WHITE)
         return Label("", style).apply {
             setAlignment(Align.center)
             isVisible = false

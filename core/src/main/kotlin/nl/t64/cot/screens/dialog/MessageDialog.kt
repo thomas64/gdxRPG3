@@ -10,9 +10,8 @@ import com.badlogic.gdx.utils.Null
 import nl.t64.cot.Utils
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
+import nl.t64.cot.screens.FontProvider
 
-
-private const val FONT_SIZE = 24
 
 private const val DIALOG_INIT_HEIGHT = 100L
 private const val DIALOG_PAD = 60f
@@ -22,8 +21,9 @@ private const val INPUT_DELAY = 0.5f
 class MessageDialog(
     private val message: String
 ) {
-    private val dialogHeight: Float = (message.lines().count() * FONT_SIZE + DIALOG_INIT_HEIGHT).toFloat()
-    private val font: BitmapFont = FontInconsolataRegular24Provider.font
+    private val font: BitmapFont = FontProvider.inconsolata24
+    private val fontSize: Int = font.data.name.takeLast(2).toInt()
+    private val dialogHeight: Float = (message.lines().count() * fontSize + DIALOG_INIT_HEIGHT).toFloat()
     private val dialog: Dialog = createDialog()
 
     @Null

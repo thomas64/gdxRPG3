@@ -1,13 +1,13 @@
 package nl.t64.cot.screens.inventory.inventoryslot
 
 import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.scenes.scene2d.Actor
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.utils.Align
 import nl.t64.cot.components.party.inventory.InventoryContainer
 import nl.t64.cot.components.party.inventory.InventoryGroup
+import nl.t64.cot.screens.FontProvider
 import nl.t64.cot.screens.inventory.itemslot.InventoryImage
 import nl.t64.cot.screens.inventory.itemslot.ItemSlot
 import nl.t64.cot.screens.inventory.tooltip.ItemSlotTooltip
@@ -25,7 +25,7 @@ open class InventorySlot(
     }
 
     private fun createAmountLabel(): Label {
-        val labelStyle = LabelStyle(BitmapFont(), Color.WHITE)
+        val labelStyle = LabelStyle(FontProvider.default, Color.WHITE)
         return Label(getAmount().toString(), labelStyle).apply {
             setAlignment(Align.bottomRight)
             isVisible = false

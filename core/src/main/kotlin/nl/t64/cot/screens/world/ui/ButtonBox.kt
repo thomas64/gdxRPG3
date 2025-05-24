@@ -2,13 +2,13 @@ package nl.t64.cot.screens.world.ui
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import nl.t64.cot.Utils
+import nl.t64.cot.screens.FontProvider
 
 
 private const val TABLE_POSITION = 30f
@@ -23,8 +23,8 @@ internal class ButtonBox {
     private val table: Table = createTable()
     private val stage: Stage = Stage().apply { addActor(table) }
     private val shapeRenderer: ShapeRenderer = ShapeRenderer()
-    private val whiteFontStyle = LabelStyle(BitmapFont(), Color.WHITE)
-    private val grayFontStyle = LabelStyle(BitmapFont(), Color.GRAY)
+    private val whiteFontStyle = LabelStyle(FontProvider.default, Color.WHITE)
+    private val grayFontStyle = LabelStyle(FontProvider.default, Color.GRAY)
 
     fun dispose() {
         stage.dispose()

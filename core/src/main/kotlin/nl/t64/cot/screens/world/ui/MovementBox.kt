@@ -2,7 +2,6 @@ package nl.t64.cot.screens.world.ui
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Container
@@ -12,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import nl.t64.cot.Utils
 import nl.t64.cot.constants.Constant
+import nl.t64.cot.screens.FontProvider
 
 
 private const val TABLE_POSITION_X = 30f
@@ -21,7 +21,7 @@ private const val PAD = 15f
 
 internal class MovementBox {
 
-    private val style: LabelStyle = LabelStyle(BitmapFont(), Color.WHITE)
+    private val style: LabelStyle = LabelStyle(FontProvider.default, Color.WHITE)
     private val table: Table = createTable()
     private val stage: Stage = Stage().apply { addActor(table) }
     private val shapeRenderer: ShapeRenderer = ShapeRenderer()

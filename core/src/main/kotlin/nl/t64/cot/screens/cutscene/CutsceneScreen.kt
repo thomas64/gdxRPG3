@@ -15,7 +15,6 @@ import com.badlogic.gdx.utils.ScreenUtils
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.mapManager
-import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
@@ -24,6 +23,7 @@ import nl.t64.cot.audio.stopAllSeExcept
 import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
+import nl.t64.cot.screens.FontProvider
 import nl.t64.cot.screens.battle.BattleObserver
 import nl.t64.cot.screens.world.Camera
 import nl.t64.cot.screens.world.WorldRenderer
@@ -34,8 +34,6 @@ import nl.t64.cot.sfx.TransitionImage
 import nl.t64.cot.sfx.TransitionType
 
 
-private const val TITLE_FONT = "fonts/spectral_regular_24.ttf"
-private const val FONT_SIZE = 24
 const val NORMAL_STEP = 0.5f
 const val FAST_STEP = 0.25f
 
@@ -62,8 +60,7 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
 
 
     private fun createTitle(): Label {
-        val font = resourceManager.getTrueTypeAsset(TITLE_FONT, FONT_SIZE)
-        val style = LabelStyle(font, Color.WHITE)
+        val style = LabelStyle(FontProvider.spectralRegular24, Color.WHITE)
         return Label("", style).apply {
             setAlignment(Align.center)
             isVisible = false

@@ -2,7 +2,6 @@ package nl.t64.cot.screens.questlog
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.scenes.scene2d.ui.List
 import com.badlogic.gdx.scenes.scene2d.ui.List.ListStyle
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane
@@ -10,23 +9,19 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Align
 import ktx.collections.GdxArray
 import nl.t64.cot.Utils
-import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.components.quest.QuestGraph
 import nl.t64.cot.components.quest.QuestState
 import nl.t64.cot.components.quest.QuestTask
+import nl.t64.cot.screens.FontProvider
 import nl.t64.cot.toDrawable
 
 
-private const val TEXT_FONT = "fonts/spectral_extra_bold_20.ttf"
-private const val TEXT_SIZE = 20
 private const val WIDTH = -102f
 private const val HEIGHT = 704f
 private const val PAD_LEFT = 20f
 
 internal class TaskListTable {
 
-    private val taskListFont: BitmapFont = resourceManager.getTrueTypeAsset(TEXT_FONT, TEXT_SIZE)
-        .apply { data.markupEnabled = true }
     private val taskList: List<QuestTask> = createList()
     private val scrollPane: ScrollPane = fillScrollPane()
     val container: Table = fillContainer()
@@ -45,7 +40,7 @@ internal class TaskListTable {
 
     private fun createList(): List<QuestTask> {
         return List(ListStyle().apply {
-            font = taskListFont
+            font = FontProvider.spectralExtraBold20
             fontColorSelected = Color.BLACK
             fontColorUnselected = Color.BLACK
             background = Color.CLEAR.toDrawable()

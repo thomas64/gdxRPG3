@@ -10,13 +10,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.utils.Align
 import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.gameData
-import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.constants.Constant
+import nl.t64.cot.screens.FontProvider
 
 
-private const val FONT = "fonts/calibri_light_28.ttf"
-private const val FONT_SIZE = 28
 private const val LABEL_WIDTH = 150f
 private const val LABEL_HEIGHT = 75f
 private const val RADIUS = 77f
@@ -100,7 +98,7 @@ internal class ClockBox {
     }
 
     private fun createClockLabel(): Label {
-        val labelStyle = Label.LabelStyle(resourceManager.getTrueTypeAsset(FONT, FONT_SIZE), Color.WHITE)
+        val labelStyle = Label.LabelStyle(FontProvider.calibriLight28, Color.WHITE)
         return Label(null, labelStyle).apply {
             setAlignment(Align.center)
             width = LABEL_WIDTH

@@ -11,12 +11,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
 import ktx.assets.disposeSafely
 import nl.t64.cot.Utils
-import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.audio.stopAllSe
 import nl.t64.cot.constants.ScreenType
+import nl.t64.cot.screens.FontProvider
 
 
 const val LOGO_PAD = 20f
@@ -26,8 +26,6 @@ const val TITLE_LOGO_B = "sprites/accot_b.png"
 const val TITLE_LOGO_NAME = "titleLogo"
 
 private const val LOGO_SCALE = 0.5f
-private const val MENU_FONT = "fonts/barlow_regular_45.ttf"
-private const val MENU_SIZE = 45
 
 abstract class MenuScreen : Screen {
 
@@ -37,7 +35,7 @@ abstract class MenuScreen : Screen {
     abstract val backScreen: ScreenType
 
     val stage: Stage = Stage()
-    val menuFont: BitmapFont = resourceManager.getTrueTypeAsset(MENU_FONT, MENU_SIZE)
+    val menuFont: BitmapFont = FontProvider.barlow45
 
     lateinit var table: Table
     private lateinit var background: Image

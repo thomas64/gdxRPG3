@@ -14,18 +14,17 @@ import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.PersonalityItem
 import nl.t64.cot.constants.Constant
+import nl.t64.cot.screens.FontProvider
 import nl.t64.cot.screens.inventory.tooltip.PersonalityTooltip
 
 
-private const val TEXT_FONT = "fonts/spectral_extra_bold_20.ttf"
-private const val TEXT_SIZE = 20
 private const val LINE_HEIGHT = 26f
 private const val PADDING = 20f
 private const val PADDING_RIGHT = 10f
 
 abstract class BaseTable(private val tooltip: PersonalityTooltip) : WindowSelector {
 
-    protected val font: BitmapFont = resourceManager.getTrueTypeAsset(TEXT_FONT, TEXT_SIZE)
+    protected val font: BitmapFont = FontProvider.spectralExtraBold20
     val container: Table = Table()
     val table: Table = Table(createSkin()).apply {
         defaults().height(LINE_HEIGHT)

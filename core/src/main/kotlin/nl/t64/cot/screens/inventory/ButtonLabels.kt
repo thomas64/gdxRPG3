@@ -2,17 +2,17 @@ package nl.t64.cot.screens.inventory
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import nl.t64.cot.Utils
+import nl.t64.cot.screens.FontProvider
 
 
 open class ButtonLabels(private val stage: Stage) {
 
     fun create() {
-        val labelStyle = LabelStyle(BitmapFont(), Color.BLACK)
+        val labelStyle = LabelStyle(FontProvider.default, Color.BLACK)
 
         val buttonTopLeftLabel = Label(createTopLeftText(), labelStyle)
         buttonTopLeftLabel.setPosition(35f, 996f)

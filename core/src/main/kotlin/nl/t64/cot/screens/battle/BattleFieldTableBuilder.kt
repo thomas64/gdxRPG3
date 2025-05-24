@@ -1,7 +1,6 @@
 package nl.t64.cot.screens.battle
 
 import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.scenes.scene2d.ui.*
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable
@@ -9,11 +8,12 @@ import com.badlogic.gdx.utils.Scaling
 import nl.t64.cot.Utils
 import nl.t64.cot.components.battle.BattleField
 import nl.t64.cot.components.battle.Participant
+import nl.t64.cot.screens.FontProvider
 
 
 class BattleFieldTableBuilder {
 
-    private val smallStyle = LabelStyle(BitmapFont(), Color.WHITE)
+    private val smallStyle = LabelStyle(FontProvider.default, Color.WHITE)
     private val transparent: Drawable = Utils.createTransparency()
     private val border: Drawable = Utils.createFullBorderWhite()
     private val combined: Drawable = Utils.createCombinedDrawable(transparent, border)

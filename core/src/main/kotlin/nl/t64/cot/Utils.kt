@@ -27,6 +27,7 @@ import nl.t64.cot.gamestate.ProfileManager
 import nl.t64.cot.gamestate.Scenario
 import nl.t64.cot.resources.ResourceManager
 import nl.t64.cot.resources.SpriteConfig
+import nl.t64.cot.screens.FontProvider
 import nl.t64.cot.screens.ScreenManager
 import nl.t64.cot.screens.world.WorldScreen
 import nl.t64.cot.screens.world.map.FogOfWarManager
@@ -34,8 +35,6 @@ import nl.t64.cot.screens.world.map.MapManager
 
 
 private const val TITLE_PADDING = 50f
-private const val TITLE_FONT = "fonts/spectral_extra_bold_28.ttf"
-private const val TITLE_SIZE = 28
 private const val SPRITE_BORDER_BLACK = "sprites/border_black.png"
 private const val SPRITE_BORDER_WHITE = "sprites/border_white.png"
 private const val SPRITE_BORDER_TOP = "sprites/border_top.png"
@@ -82,8 +81,7 @@ object Utils {
     }
 
     fun createDefaultWindow(title: String, table: Table, titleAlignment: Int = Align.left): Window {
-        val font = resourceManager.getTrueTypeAsset(TITLE_FONT, TITLE_SIZE)
-        val windowStyle = WindowStyle(font, Color.BLACK, createFullBorderBlack())
+        val windowStyle = WindowStyle(FontProvider.spectralExtraBold28, Color.BLACK, createFullBorderBlack())
         return Window(title, windowStyle).apply {
             add(table)
             padTop(TITLE_PADDING)
@@ -192,7 +190,7 @@ object Utils {
         val texture = resourceManager.getTextureAsset(SPRITE_TOOLTIP)
         val ninepatch = NinePatch(texture, 1, 1, 1, 1)
         val drawable = NinePatchDrawable(ninepatch)
-        return WindowStyle(BitmapFont(), Color.GREEN, drawable)
+        return WindowStyle(FontProvider.default, Color.GREEN, drawable)
     }
 
     fun createLightmap(lightmapId: String): Texture {

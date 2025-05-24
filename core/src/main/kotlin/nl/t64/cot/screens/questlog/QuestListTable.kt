@@ -2,7 +2,6 @@ package nl.t64.cot.screens.questlog
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.scenes.scene2d.ui.List
 import com.badlogic.gdx.scenes.scene2d.ui.List.ListStyle
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane
@@ -10,21 +9,17 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import ktx.collections.GdxArray
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
-import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.components.quest.QuestGraph
 import nl.t64.cot.constants.Constant
+import nl.t64.cot.screens.FontProvider
 
 
-private const val TEXT_FONT = "fonts/spectral_extra_bold_20.ttf"
-private const val TEXT_SIZE = 20
 private const val WIDTH = -102f
 private const val HEIGHT = -252f
 private const val PAD_LEFT = 20f
 
 internal class QuestListTable {
 
-    private val questListFont: BitmapFont = resourceManager.getTrueTypeAsset(TEXT_FONT, TEXT_SIZE)
-        .apply { data.markupEnabled = true }
     val questList: List<QuestGraph> = createList()
     val scrollPane: ScrollPane = fillScrollPane()
     val container: Table = fillContainer()
@@ -36,7 +31,7 @@ internal class QuestListTable {
 
     private fun createList(): List<QuestGraph> {
         return List(ListStyle().apply {
-            font = questListFont
+            font = FontProvider.spectralExtraBold20
             fontColorSelected = Constant.DARK_RED
             fontColorUnselected = Color.BLACK
             selection = Utils.createFullBorderBlack()

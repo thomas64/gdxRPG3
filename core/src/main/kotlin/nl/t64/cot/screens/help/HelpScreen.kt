@@ -10,16 +10,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Window
 import com.badlogic.gdx.utils.Align
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
-import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.constants.ScreenType
+import nl.t64.cot.screens.FontProvider
 import nl.t64.cot.screens.ParchmentScreen
 
 
-private const val TEXT_FONT = "fonts/spectral_regular_24.ttf"
-private const val TEXT_SIZE = 24
 private const val TITLE = "Tutorial messages"
 private const val SCROLL_SPEED = 600f
 private const val HINT_LINE_SPACE = 50f
@@ -28,8 +26,7 @@ private const val WINDOW_POS_Y = 80f
 
 class HelpScreen : ParchmentScreen() {
 
-    private val hintFont: BitmapFont = resourceManager.getTrueTypeAsset(TEXT_FONT, TEXT_SIZE)
-        .apply { data.markupEnabled = true }
+    private val hintFont: BitmapFont = FontProvider.spectralRegular24
     private val windowWidth: Float = Gdx.graphics.width - (WINDOW_POS_X * 2f)
     private val windowHeight: Float = Gdx.graphics.height - 200f
 
@@ -74,7 +71,8 @@ class HelpScreen : ParchmentScreen() {
     private fun Table.fillRow(text: String) {
         val label = Label("[BLACK]$text", createLabelStyle()).apply { setAlignment(Align.center) }
         val amountOfLines: Int = text.lines().count()
-        val height: Float = (amountOfLines * TEXT_SIZE) + HINT_LINE_SPACE
+        val fontSize: Int = hintFont.data.name.takeLast(2).toInt()
+        val height: Float = (amountOfLines * fontSize) + HINT_LINE_SPACE
         add(label).height(height).width(windowWidth).row()
     }
 

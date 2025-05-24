@@ -15,11 +15,9 @@ import nl.t64.cot.Utils
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.constants.Constant
-import nl.t64.cot.screens.dialog.FontInconsolataRegular24Provider
+import nl.t64.cot.screens.FontProvider
 import nl.t64.cot.screens.dialog.MessageDialogListener
 
-
-private const val FONT_SIZE = 24
 
 private const val DIALOG_INIT_HEIGHT = 100L
 private const val DIALOG_PAD = 60f
@@ -30,7 +28,7 @@ class MessageDialog(
     private val multiplexer: InputMultiplexer
 ) {
     private val stage = Stage()
-    private val font: BitmapFont = FontInconsolataRegular24Provider.font
+    private val font: BitmapFont = FontProvider.inconsolata24
     private lateinit var label: Label
     private val dialog: Dialog = createDialog()
 
@@ -75,7 +73,8 @@ class MessageDialog(
     }
 
     private fun fillDialog(message: String) {
-        val dialogHeight = ((message.lines().count() * FONT_SIZE) + DIALOG_INIT_HEIGHT).toFloat()
+        val fontSize: Int = font.data.name.takeLast(2).toInt()
+        val dialogHeight = ((message.lines().count() * fontSize) + DIALOG_INIT_HEIGHT).toFloat()
         label.setText("[BLACK]$message")
         dialog.contentTable.clear()
         dialog.contentTable.defaults().width(label.prefWidth)

@@ -2,7 +2,6 @@ package nl.t64.cot.screens.questlog
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.Window
@@ -15,6 +14,7 @@ import nl.t64.cot.components.quest.QuestGraph
 import nl.t64.cot.components.quest.QuestState
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
+import nl.t64.cot.screens.FontProvider
 import nl.t64.cot.screens.ParchmentScreen
 import nl.t64.cot.screens.dialog.MessageDialog
 import nl.t64.cot.screens.inventory.InventoryScreen
@@ -41,7 +41,7 @@ class QuestLogScreen : ParchmentScreen() {
     private val summaryWindow: Window = Utils.createDefaultWindow(TITLE_SUMMARY, summaryTable.container)
     private val taskListTable: TaskListTable = TaskListTable()
     private val taskListWindow: Window = Utils.createDefaultWindow(TITLE_TASKS, taskListTable.container)
-    private val buttonLabel: Label = Label(createText(), LabelStyle(BitmapFont(), Color.BLACK))
+    private val buttonLabel: Label = Label(createText(), LabelStyle(FontProvider.default, Color.BLACK))
 
     companion object {
         fun load() {

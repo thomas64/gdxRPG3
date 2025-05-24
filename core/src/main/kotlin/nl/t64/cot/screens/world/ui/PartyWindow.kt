@@ -3,6 +3,7 @@ package nl.t64.cot.screens.world.ui
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.GL20
+import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Label
@@ -11,22 +12,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import ktx.assets.disposeSafely
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
-import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.PartyContainer
 import nl.t64.cot.constants.Constant
+import nl.t64.cot.screens.FontProvider
 
-
-private const val FONT_PATH = "fonts/spectral_extra_bold_20.ttf"
-private const val FONT_BIG_PATH = "fonts/spectral_extra_bold_28.ttf"
 
 private val TRANSPARENT_BLACK = Color(0f, 0f, 0f, 0.8f)
 private val TRANSPARENT_WHITE = Color(1f, 1f, 1f, 0.3f)
 private val TRANSPARENT_FACES = Color(1f, 1f, 1f, 0.7f)
 private val TRANSPARENT_DEATH = Color(0.25f, 0.25f, 0.25f, 0.75f)
-
-private const val FONT_BIG_SIZE = 28
-private const val FONT_SIZE = 20
 
 private const val LINE_HEIGHT = 22f
 private const val PADDING = 10f
@@ -47,8 +42,8 @@ internal class PartyWindow {
 
     private val party: PartyContainer get() = gameData.party
 
-    private val font = resourceManager.getTrueTypeAsset(FONT_PATH, FONT_SIZE)
-    private val fontBig = resourceManager.getTrueTypeAsset(FONT_BIG_PATH, FONT_BIG_SIZE)
+    private val font: BitmapFont = FontProvider.spectralExtraBold20
+    private val fontBig: BitmapFont = FontProvider.spectralExtraBold28
     private val shapeRenderer = ShapeRenderer()
 
     private var xPos = LOW_X
@@ -136,7 +131,7 @@ internal class PartyWindow {
         renderBackground(invertedIndex)
         shapeRenderer.color = Utils.getHpColor(hero.currentHp, hero.maximumHp).apply { a = 0.5f }
         drawBar(invertedIndex, 0f, hero.hpBarWidth)
-        shapeRenderer.color = Color.ROYAL.apply { a = 0.5f}
+        shapeRenderer.color = Color.ROYAL.apply { a = 0.5f }
         drawBar(invertedIndex, 1f, hero.spBarWidth)
 
         shapeRenderer.end()

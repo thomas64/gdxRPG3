@@ -2,7 +2,6 @@ package nl.t64.cot.screens.world.debug
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
@@ -11,6 +10,7 @@ import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.constants.Constant
+import nl.t64.cot.screens.FontProvider
 import nl.t64.cot.screens.world.entity.Entity
 
 
@@ -143,7 +143,7 @@ internal class DebugBox(
 
     private fun createTable(): Table {
         val tableSkin = Skin()
-        tableSkin.add("default", LabelStyle(BitmapFont(), Color.WHITE))
+        tableSkin.add("default", LabelStyle(FontProvider.default, Color.WHITE))
 
         return Table(tableSkin).apply {
             defaults().width(TABLE_WIDTH)

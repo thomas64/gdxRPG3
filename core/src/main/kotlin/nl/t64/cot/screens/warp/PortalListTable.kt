@@ -9,20 +9,18 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import ktx.collections.GdxArray
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
-import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.components.portal.Portal
 import nl.t64.cot.constants.Constant
+import nl.t64.cot.screens.FontProvider
 
 
-private const val TEXT_FONT = "fonts/spectral_extra_bold_20.ttf"
-private const val TEXT_SIZE = 20
 private const val WIDTH = 330f
 private const val HEIGHT = 470f
 private const val PAD_LEFT = 30f
 
 internal class PortalListTable {
 
-    private val portalListFont: BitmapFont = resourceManager.getTrueTypeAsset(TEXT_FONT, TEXT_SIZE)
+    private val portalListFont: BitmapFont = FontProvider.spectralExtraBold20
     val portalList: List<Portal> = createList()
     val scrollPane: ScrollPane = fillScrollPane()
     val container: Table = fillContainer()

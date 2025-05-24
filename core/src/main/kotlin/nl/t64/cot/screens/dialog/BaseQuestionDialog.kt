@@ -12,6 +12,7 @@ import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.audio.stopAllSe
 import nl.t64.cot.constants.Constant
+import nl.t64.cot.screens.FontProvider
 import nl.t64.cot.screens.menu.ListenerKeyCancel
 import nl.t64.cot.screens.menu.ListenerKeyHorizontal
 import nl.t64.cot.toDrawable
@@ -34,7 +35,7 @@ abstract class BaseQuestionDialog(
     private val content: Table,
     private val yesFunction: () -> Unit
 ) {
-    private val font: BitmapFont = FontInconsolataRegular24Provider.font
+    private val font: BitmapFont = FontProvider.inconsolata24
     protected val dialog: Dialog = createDialog()
     private var selectedIndex = 0
 

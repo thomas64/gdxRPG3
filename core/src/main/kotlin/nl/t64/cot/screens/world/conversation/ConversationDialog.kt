@@ -27,8 +27,8 @@ import nl.t64.cot.components.party.SpellsRewarder
 import nl.t64.cot.components.party.XpRewarder
 import nl.t64.cot.components.quest.QuestGraph
 import nl.t64.cot.constants.Constant
+import nl.t64.cot.screens.FontProvider
 import nl.t64.cot.screens.academy.AcademyScreen
-import nl.t64.cot.screens.dialog.FontInconsolataRegular24Provider
 import nl.t64.cot.screens.loot.ReceiveScreen
 import nl.t64.cot.screens.loot.RewardScreen
 import nl.t64.cot.screens.loot.TradeScreen
@@ -54,8 +54,8 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     private val conversationObserver: ConversationSubject = ConversationSubject(conversationObserver)
 
     private val stage: Stage = Stage()
-    private val font: BitmapFont = FontInconsolataRegular24Provider.font
-    private val smallFont: BitmapFont = BitmapFont()
+    private val font: BitmapFont = FontProvider.inconsolata24
+    private val smallFont: BitmapFont = FontProvider.default
     private val label: TypingLabel = createLabel()
     private val answers: ConversationAnswers = ConversationAnswers(font)
     private val scrollPane: ScrollPane = createScrollPane()

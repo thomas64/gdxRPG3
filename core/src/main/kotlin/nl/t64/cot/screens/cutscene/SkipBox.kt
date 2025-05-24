@@ -1,13 +1,13 @@
 package nl.t64.cot.screens.cutscene
 
 import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import nl.t64.cot.Utils
+import nl.t64.cot.screens.FontProvider
 
 
 private const val TABLE_POSITION = 30f
@@ -49,7 +49,7 @@ internal class SkipBox {
 
     private fun createTable(): Table {
         val tableSkin = Skin()
-        tableSkin.add("default", LabelStyle(BitmapFont(), Color.WHITE))
+        tableSkin.add("default", LabelStyle(FontProvider.default, Color.WHITE))
 
         return Table(tableSkin).apply {
             defaults().width(TABLE_WIDTH)

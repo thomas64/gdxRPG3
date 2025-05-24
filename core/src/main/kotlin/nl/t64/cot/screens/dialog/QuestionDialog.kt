@@ -5,9 +5,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Align
+import nl.t64.cot.screens.FontProvider
 
 
-private const val FONT_SIZE = 24
 private const val DIALOG_INIT_HEIGHT = 150L
 private const val DIALOG_PAD = 20f
 
@@ -31,11 +31,12 @@ class QuestionDialog(
 }
 
 private fun String.toDialogHeight(): Float {
-    return ((this.lines().count() * FONT_SIZE) + DIALOG_INIT_HEIGHT).toFloat()
+    val fontSize: Int = FontProvider.inconsolata24.data.name.takeLast(2).toInt()
+    return ((this.lines().count() * fontSize) + DIALOG_INIT_HEIGHT).toFloat()
 }
 
 private fun String.toDialogContent(): Table {
-    val font: BitmapFont = FontInconsolataRegular24Provider.font
+    val font: BitmapFont = FontProvider.inconsolata24
     val label = Label("[BLACK]$this", LabelStyle(font, null))
     label.setAlignment(Align.center)
 

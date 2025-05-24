@@ -2,13 +2,13 @@ package nl.t64.cot.screens.loot
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.Window
 import nl.t64.cot.Utils
 import nl.t64.cot.components.loot.Loot
+import nl.t64.cot.screens.FontProvider
 import nl.t64.cot.screens.inventory.tooltip.LootSlotTooltip
 
 
@@ -21,7 +21,7 @@ class LootUI(resolveLootAndCloseScreen: (Boolean) -> Unit, loot: Loot, title: St
     private val lootSlotsContainer = LootSlotsTable(resolveLootAndCloseScreen, loot, tooltip)
     private val lootWindow: Window = Utils.createDefaultWindow(title, lootSlotsContainer)
         .apply { setWindowPosition() }
-    private val buttonLabel = Label(createText(), LabelStyle(BitmapFont(), Color.BLACK))
+    private val buttonLabel = Label(createText(), LabelStyle(FontProvider.default, Color.BLACK))
         .apply { setLabelPosition() }
 
     fun show(stage: Stage) {

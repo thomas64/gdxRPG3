@@ -11,18 +11,14 @@ import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Scaling
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
-import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.PartyContainer
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.disposeAndClear
+import nl.t64.cot.screens.FontProvider
 import nl.t64.cot.toTexture
 
 
-private const val FONT_PATH = "fonts/spectral_extra_bold_20.ttf"
-private const val FONT_BIG_PATH = "fonts/spectral_extra_bold_28.ttf"
-private const val FONT_BIG_SIZE = 28
-private const val FONT_SIZE = 20
 private const val STATS_COLUMN_WIDTH = 134f
 private const val STATS_COLUMN_PAD = 10f
 private const val EMPTY_ROW_HEIGHT = 6f
@@ -33,18 +29,11 @@ private const val BAR_HEIGHT = 18f
 
 class HeroesTable {
 
-    private val nameStyle: LabelStyle
-    private val textStyle: LabelStyle
+    private val nameStyle = LabelStyle(FontProvider.spectralExtraBold28, Color.BLACK)
+    private val textStyle = LabelStyle(FontProvider.spectralExtraBold20, Color.BLACK)
     private val party: PartyContainer = gameData.party
     val heroes = Table().apply { background = Utils.createTopBorder() }
     private val texturesToDispose: MutableSet<Texture> = mutableSetOf()
-
-    init {
-        val font = resourceManager.getTrueTypeAsset(FONT_PATH, FONT_SIZE)
-        val fontBig = resourceManager.getTrueTypeAsset(FONT_BIG_PATH, FONT_BIG_SIZE)
-        nameStyle = LabelStyle(fontBig, Color.BLACK)
-        textStyle = LabelStyle(font, Color.BLACK)
-    }
 
     fun update() {
         texturesToDispose.disposeAndClear()

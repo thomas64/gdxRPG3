@@ -7,13 +7,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import nl.t64.cot.Utils
-import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.components.quest.QuestGraph
 import nl.t64.cot.constants.Constant
+import nl.t64.cot.screens.FontProvider
 
 
-private const val TEXT_FONT = "fonts/spectral_extra_bold_20.ttf"
-private const val TEXT_SIZE = 20
 private const val WIDTH = -102f
 private const val PAD = 20f
 
@@ -32,8 +30,7 @@ internal class SummaryTable {
     }
 
     private fun createLabel(): Label {
-        val font = resourceManager.getTrueTypeAsset(TEXT_FONT, TEXT_SIZE)
-        val labelStyle = LabelStyle(font, Color.BLACK)
+        val labelStyle = LabelStyle(FontProvider.spectralExtraBold20, Color.BLACK)
         return Label("", labelStyle).apply { wrap = true }
     }
 

@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Align
+import nl.t64.cot.screens.FontProvider
 
 
 private const val FONT_SIZE = 24
@@ -38,7 +39,7 @@ private fun Triple<String, String, String>.toDialogHeight(): Float {
 }
 
 private fun Triple<String, String, String>.toDialogTable(): Table {
-    val font: BitmapFont = FontInconsolataRegular24Provider.font
+    val font: BitmapFont = FontProvider.inconsolata24
     val label1 = Label("[BLACK]${this.first}", LabelStyle(font, null))
     val label2 = Label("[BLACK]${this.second}", LabelStyle(font, null))
     val label3 = Label("[BLACK]${this.third}", LabelStyle(font, null))
