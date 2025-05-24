@@ -144,9 +144,8 @@ abstract class BaseTable(private val tooltip: PersonalityTooltip) : WindowSelect
     }
 
     private fun createSkin(): Skin {
-        return Skin().apply {
-            add("default", LabelStyle(font, Color.BLACK))
-        }
+        val style = LabelStyle(font, Color.BLACK)
+        return Skin().apply { add("default", style) }
     }
 
 }

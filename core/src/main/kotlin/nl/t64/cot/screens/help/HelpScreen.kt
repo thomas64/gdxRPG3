@@ -26,7 +26,7 @@ private const val WINDOW_POS_Y = 80f
 
 class HelpScreen : ParchmentScreen() {
 
-    private val hintFont: BitmapFont = FontProvider.spectralRegular24
+    private val hintFont: BitmapFont = FontProvider.inconsolata24
     private val windowWidth: Float = Gdx.graphics.width - (WINDOW_POS_X * 2f)
     private val windowHeight: Float = Gdx.graphics.height - 200f
 
@@ -63,9 +63,11 @@ class HelpScreen : ParchmentScreen() {
         renderStage(dt)
     }
 
-    private fun createTable() = Table().apply {
-        align(Align.top)
-        gameData.events.getAllPlayedGuideEvents().forEach { fillRow(it) }
+    private fun createTable(): Table {
+        return Table().apply {
+            align(Align.top)
+            gameData.events.getAllPlayedGuideEvents().forEach { fillRow(it) }
+        }
     }
 
     private fun Table.fillRow(text: String) {

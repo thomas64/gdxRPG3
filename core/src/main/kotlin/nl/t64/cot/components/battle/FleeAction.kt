@@ -30,7 +30,7 @@ class FleeAction(
         if (currentParticipant.currentAP < currentParticipant.maximumAP) {
             return Pair(false, (message + "Not enough AP!").trimIndent())
         }
-        return Pair(true, (message + "Do you want to flee (${currentParticipant.maximumAP} AP) ?").trimIndent())
+        return Pair(true, (message + "Do you want to flee? (${currentParticipant.maximumAP} AP)").trimIndent())
     }
 
     fun handle(): Pair<Boolean, String> {

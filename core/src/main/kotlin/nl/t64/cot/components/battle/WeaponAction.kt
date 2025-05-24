@@ -126,7 +126,7 @@ class WeaponAction(
 
                 $underscores
 
-                Unequip ($SWITCH_WEAPON_AP AP) ?
+                Unequip? ($SWITCH_WEAPON_AP AP)
             """.trimIndent())
     }
 
@@ -161,7 +161,7 @@ class WeaponAction(
 
                 ${underscores + underscores + "____"}
 
-                Equip ($SWITCH_WEAPON_AP AP) ?
+                Equip? ($SWITCH_WEAPON_AP AP)
             """.trimIndent())
     }
 
@@ -183,7 +183,7 @@ class WeaponAction(
 
                 $underscores
 
-                Equip ($SWITCH_WEAPON_AP AP) ?
+                Equip? ($SWITCH_WEAPON_AP AP)
             """.trimIndent())
     }
 
@@ -233,7 +233,7 @@ class WeaponAction(
 
                 $underscores
 
-                Unequip ($SWITCH_WEAPON_AP AP) ?
+                Unequip? ($SWITCH_WEAPON_AP AP)
             """.trimIndent())
     }
 
@@ -256,7 +256,7 @@ class WeaponAction(
 
                 ${underscores + underscores + "____"}
 
-                Equip ($SWITCH_WEAPON_AP AP) ?
+                Equip? ($SWITCH_WEAPON_AP AP)
             """.trimIndent())
     }
 
@@ -272,7 +272,7 @@ class WeaponAction(
 
                 $underscores
 
-                Equip ($SWITCH_WEAPON_AP AP) ?
+                Equip? ($SWITCH_WEAPON_AP AP)
             """.trimIndent())
     }
 
@@ -295,7 +295,7 @@ class WeaponAction(
     }
 
     private fun createUnderscoresWithLengthOf(vararg allLines: String): String {
-        val minLength = 18
+        val minLength = 17
         val maxLength = allLines.getLongestLineLength()
         return "_".repeat(maxOf(minLength, maxLength))
     }

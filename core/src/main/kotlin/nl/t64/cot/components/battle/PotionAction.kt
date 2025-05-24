@@ -21,7 +21,7 @@ class PotionAction(
         return if (currentParticipant.currentAP < POTION_AP) {
             Pair(false, (message + "Not enough AP!").trimIndent())
         } else {
-            Pair(true, (message + "Do you want to drink a ${selectedPotion.name} ($POTION_AP AP) ?").trimIndent())
+            Pair(true, (message + "Do you want to drink a ${selectedPotion.name}? ($POTION_AP AP)").trimIndent())
         }
     }
 

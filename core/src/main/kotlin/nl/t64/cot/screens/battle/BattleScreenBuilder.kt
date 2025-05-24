@@ -3,13 +3,13 @@ package nl.t64.cot.screens.battle
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.Texture
-import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.scenes.scene2d.ui.*
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.List.ListStyle
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Scaling
+import ktx.assets.disposeSafely
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.components.battle.Character
@@ -25,13 +25,12 @@ import nl.t64.cot.components.party.inventory.InventoryItem
 import nl.t64.cot.components.party.stats.StatItemId
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.disposeAndClear
+import nl.t64.cot.screens.FontProvider
 import nl.t64.cot.toDrawable
 import nl.t64.cot.toTexture
 import com.badlogic.gdx.scenes.scene2d.ui.List as GdxList
 
 
-private const val TEXT_FONT = "fonts/spectral_regular_24.ttf"
-private const val FONT_SIZE = 24
 private const val TITLE_TEXT = "Battle...!"
 private const val BAR_WIDTH = 100f
 private const val BAR_HEIGHT = 18f
@@ -39,7 +38,8 @@ private const val BAR_HEIGHT = 18f
 class BattleScreenBuilder {
 
     private val colorTextureCache: MutableMap<Color, Texture> = mutableMapOf()
-    private val barFontStyle = LabelStyle(BitmapFont(), Color.WHITE)
+    private val tableSkin: Skin = createSkin()
+    private val barFontStyle = LabelStyle(FontProvider.default, Color.WHITE)
     private val transparent: Drawable = Utils.createTransparency()
     private val border: Drawable = Utils.createFullBorderWhite()
     private val combined: Drawable = Utils.createCombinedDrawable(transparent, border)
@@ -57,12 +57,13 @@ class BattleScreenBuilder {
 
     fun dispose() {
         colorTextureCache.disposeAndClear()
+        tableSkin.disposeSafely()
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     fun createHeroTable(heroes: List<HeroItem>, getCurrentAp: (Character) -> Int): Table {
-        return Table(createSkin()).apply {
+        return Table(tableSkin).apply {
             defaults().height(Constant.FACE_SIZE).spaceBottom(4f)
             columnDefaults(0).width(Constant.FACE_SIZE)
             top().left()
@@ -75,7 +76,7 @@ class BattleScreenBuilder {
         val currentAp: Int = getCurrentAp.invoke(hero)
         val maximumAP: Int = hero.getCalculatedActionPoints()
 
-        val heroTable = Table(createSkin()).apply {
+        val heroTable = Table(tableSkin).apply {
             defaults().left().height(30f)
             add(hero.name).width(150f).colspan(2).padLeft(10f).padRight(10f).row()
             add("HP:").width(50f).padLeft(10f)
@@ -83,7 +84,7 @@ class BattleScreenBuilder {
             add("SP:").width(50f).padLeft(10f)
             add(createSpBar(hero)).width(BAR_WIDTH).height(BAR_HEIGHT).padRight(10f).row()
             add("AP:").width(50f).padLeft(10f)
-            add("$currentAp/ $maximumAP").width(BAR_WIDTH).height(BAR_HEIGHT).padRight(10f).row()
+            add("$currentAp/$maximumAP").width(BAR_WIDTH).height(BAR_HEIGHT).padRight(10f).row()
             background = transparent
         }
 
@@ -94,7 +95,7 @@ class BattleScreenBuilder {
             val textureRegion = resourceManager.getAtlasTexture(it.id)
             val image = Image(textureRegion).apply { setScaling(Scaling.fit) }
             val container = Container(image).top().right().size(35f).pad(5f)
-            val table = Table(createSkin()).apply { add(container).width(170f).height(Constant.FACE_SIZE) }
+            val table = Table(tableSkin).apply { add(container).width(170f).height(Constant.FACE_SIZE) }
             statsStack.add(table)
         }
 
@@ -102,7 +103,7 @@ class BattleScreenBuilder {
             val textureRegion = resourceManager.getAtlasTexture(it.id)
             val image = Image(textureRegion).apply { setScaling(Scaling.fit) }
             val container = Container(image).bottom().right().size(35f).pad(5f)
-            val table = Table(createSkin()).apply { add(container).width(170f).height(Constant.FACE_SIZE) }
+            val table = Table(tableSkin).apply { add(container).width(170f).height(Constant.FACE_SIZE) }
             statsStack.add(table)
         }
 
@@ -115,19 +116,19 @@ class BattleScreenBuilder {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     fun createEnemyTable(enemies: List<EnemyItem>): Table {
-        return Table(createSkin()).apply {
+        return Table(tableSkin).apply {
             defaults().height(Constant.FACE_SIZE).spaceBottom(4f)
             columnDefaults(1).width(Constant.FACE_SIZE)
             top().left()
-            setPosition(Gdx.graphics.width - Constant.FACE_SIZE - 150f - 40f, Gdx.graphics.height - 20f)
+            setPosition(Gdx.graphics.width - Constant.FACE_SIZE - 170f - 40f, Gdx.graphics.height - 20f)
             enemies.forEach { addEnemy(it) }
         }
     }
 
     private fun Table.addEnemy(enemy: EnemyItem) {
-        val enemyTable = Table(createSkin()).apply {
+        val enemyTable = Table(tableSkin).apply {
             defaults().left()
-            add(enemy.name).width(150f).height(28f).colspan(2).padLeft(10f).padRight(10f).row()
+            add(enemy.name).width(170f).height(28f).colspan(2).padLeft(10f).padRight(10f).row()
             add("HP:").width(50f).height(28f).padLeft(10f)
             add(createHpBar(enemy)).width(BAR_WIDTH).height(BAR_HEIGHT).padRight(10f).row()
             background = transparent
@@ -149,7 +150,7 @@ class BattleScreenBuilder {
             val textureRegion = resourceManager.getAtlasTexture(it)
             val image = Image(textureRegion).apply { setScaling(Scaling.fit) }
             val container = Container(image).top().left().size(35f).pad(5f)
-            val table = Table(createSkin()).apply { add(container).width(170f).height(Constant.FACE_SIZE) }
+            val table = Table(tableSkin).apply { add(container).width(190f).height(Constant.FACE_SIZE) }
             statsStack.add(table)
         }
 
@@ -157,7 +158,7 @@ class BattleScreenBuilder {
             val textureRegion = resourceManager.getAtlasTexture(it.id)
             val image = Image(textureRegion).apply { setScaling(Scaling.fit) }
             val container = Container(image).bottom().left().size(35f).pad(5f)
-            val table = Table(createSkin()).apply { add(container).width(170f).height(Constant.FACE_SIZE) }
+            val table = Table(tableSkin).apply { add(container).width(190f).height(Constant.FACE_SIZE) }
             statsStack.add(table)
         }
 
@@ -172,7 +173,7 @@ class BattleScreenBuilder {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     fun createTurnTable(participants: List<Participant>): Table {
-        return Table(createSkin()).apply {
+        return Table(tableSkin).apply {
             defaults().height(50f)
             columnDefaults(0).width(80f).padLeft(10f)
             columnDefaults(1).width(54f)
@@ -382,8 +383,8 @@ class BattleScreenBuilder {
 
     private fun GdxList<BattleWeaponItem>.fillWithWeapons(weapons: List<BattleWeaponItem>): GdxList<BattleWeaponItem> {
         this.setItems(*weapons.toTypedArray())
-        items.insert(0, BattleWeaponItem(InventoryItem(name = "Unequip Weapon", group = InventoryGroup.WEAPON)))
-        items.insert(1, BattleWeaponItem(InventoryItem(name = "Unequip Shield", group = InventoryGroup.SHIELD)))
+        items.add(BattleWeaponItem(InventoryItem(name = "Unequip Current Weapon", group = InventoryGroup.WEAPON)))
+        items.add(BattleWeaponItem(InventoryItem(name = "Unequip Current Shield", group = InventoryGroup.SHIELD)))
         items.add(BattleWeaponItem(InventoryItem(name = "Back")))
         this.selectedIndex = 0
         return this
@@ -442,10 +443,15 @@ class BattleScreenBuilder {
     private fun GdxList<BattleWeaponItem>.toWeaponTable(currentWeapon: InventoryItem?,
                                                         currentShield: InventoryItem?): Table {
         val listWithEquipment = this
+        val weapon: String = currentWeapon?.let { "${it.name} (${it.durability})" } ?: "None"
+        val shield: String = currentShield?.let { "${it.name} (${it.durability})" } ?: "None"
+
         return createSelectionTable().apply {
-            add("Select Weapon or Shield (Uses):").padBottom(10f).row()
-            currentWeapon?.let { add("Current Weapon: ${it.name} (${it.durability})").row() }
-            currentShield?.let { add("Current Shield: ${it.name} (${it.durability})").row() }
+            add("Current Weapon: $weapon").row()
+            add("Current Shield: $shield").row()
+            add("______________________________").padTop(-10f).padBottom(5f).row()
+            add("Select other Weapon or Shield:").row()
+            add("______________________________").padTop(-10f).padBottom(10f).row()
             finish(listWithEquipment)
         }
     }
@@ -499,25 +505,22 @@ class BattleScreenBuilder {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private fun <T> createStyledEmptyList(bottomHeight: Float = 0f): GdxList<T> {
+    private fun <T> createStyledEmptyList(): GdxList<T> {
         return GdxList<T>(ListStyle().apply {
-            font = resourceManager.getTrueTypeAsset(TEXT_FONT, FONT_SIZE).apply { data.markupEnabled = true }
+            font = FontProvider.inconsolata24
             fontColorSelected = Color.GOLD
             fontColorUnselected = Color.WHITE
             background = Color.CLEAR.toDrawable()
             selection = Color.CLEAR.toDrawable()
-            selection.bottomHeight = bottomHeight
+            selection.topHeight = 3f
+            selection.bottomHeight = 3f
         })
     }
 
-    private fun createLabelStyle(color: Color): LabelStyle {
-        val font: BitmapFont = resourceManager.getTrueTypeAsset(TEXT_FONT, FONT_SIZE)
-        return LabelStyle(font, color)
-    }
-
     private fun createSelectionTable(): Table {
-        return Table(createSkin()).apply {
+        return Table(tableSkin).apply {
             defaults().top().left()
+            padTop(5f)
             padLeft(10f)
             padRight(10f)
             x = 1050f
@@ -532,8 +535,12 @@ class BattleScreenBuilder {
     }
 
     private fun createSkin(): Skin {
-        val font: BitmapFont = resourceManager.getTrueTypeAsset(TEXT_FONT, FONT_SIZE)
-        return Skin().apply { add("default", LabelStyle(font, Color.WHITE)) }
+        val style = createLabelStyle(Color.WHITE)
+        return Skin().apply { add("default", style) }
+    }
+
+    private fun createLabelStyle(color: Color): LabelStyle {
+        return LabelStyle(FontProvider.inconsolata24, color)
     }
 
 }

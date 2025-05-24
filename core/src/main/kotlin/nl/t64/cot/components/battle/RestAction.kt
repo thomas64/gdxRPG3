@@ -23,7 +23,7 @@ class RestAction(
         return if (currentParticipant.currentAP < REST_AP) {
             Pair(false, (message + "Not enough AP!").trimIndent())
         } else {
-            Pair(true, (message + "Do you want to rest ($REST_AP AP) ?").trimIndent())
+            Pair(true, (message + "Do you want to rest? ($REST_AP AP)").trimIndent())
         }
     }
 

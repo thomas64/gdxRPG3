@@ -72,6 +72,16 @@
       "comparing the turn order with your party's speed."
     ]
   },
+  "guide_event_battle_4"             : {
+    "type": "messagebox",
+    "text": [
+      "Weapons and shields have limited durability.",
+      "You can see their durability in parentheses after",
+      "the item's name. Each use reduces durability by 1.",
+      "When durability reaches 0, the item breaks and is lost.",
+      "Always monitor your weapon's durability to avoid surprises!"
+    ]
+  },
   "guide_event_quest"                : {
     "type": "messagebox",
     "text": [

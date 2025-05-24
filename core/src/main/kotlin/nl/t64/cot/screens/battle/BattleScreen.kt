@@ -128,7 +128,8 @@ class BattleScreen : Screen {
 
                 listOf("guide_event_battle_1",
                        "guide_event_battle_2",
-                       "guide_event_battle_3")
+                       "guide_event_battle_3",
+                       "guide_event_battle_4")
                     .map { gameData.events.getEventById(it) }
                     .firstOrNull { !gameData.events.hasEventPlayed(it) }
                     ?.possibleStart(stage)

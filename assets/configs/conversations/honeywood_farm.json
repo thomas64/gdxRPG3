@@ -140,7 +140,8 @@
       },
       "3"   : {"face": "luana", "name": "luana", "text": ["(I helped out too, you know...)"]},
       "4"   : {"face": "oldman02", "name": "Mr. Isembert", "text": ["You're a hero! You saved the oldest farm in the village!"]},
-      "5"   : {"text": ["It will remain in our family for generations!"], "choices": [{"command": "RECEIVE_ITEM"}]},
+      "5"   : {"text": ["It will remain in our family for generations!"]},
+      "6"   : {"text": ["My home is your home. You're even welcome to use the back door if you like."], "choices": [{"command": "RECEIVE_ITEM"}]},
       "1199": {"text": ["Thank you, Mozes! You saved my farm!"], "choices": [{"nextId": "2"}]},
       "1200": {"text": ["I shall name all my horses after you!"], "choices": [{"command": "EXIT", "nextId": "1200"}]}
     }
@@ -187,8 +188,8 @@
       "1" : {"text": ["Hi Mozes! What's bothering you? You seem troubled."]},
       "2" : {
         "choices": [
-          {"text": "*Explain everything that's happened and ask her to join you.*", "nextId": "6"},
-          {"text": "*Say it's nothing. Take your leave.*", "command": "EXIT"}
+          {"text": "*Tell Luana everything and ask her to join you.*", "nextId": "6"},
+          {"text": "*Say it's nothing and take your leave.*", "command": "EXIT"}
         ]
       },
       "6" : {"text": ["{SPEED=0.2} . . . . ."]},
@@ -196,12 +197,13 @@
       "8" : {"text": ["Hell yeah! You're going on this HUGE adventure with all the big stuff, slaying monsters, taking loot, and and and..."]},
       "9" : {"text": ["Why wouldn't I want to go with you? What's wrong with you?!"]},
       "10": {"text": ["We've been friends since childhood, always adventuring together. Do you really think I'd leave you hanging?"]},
-      "11": {"text": ["Who will be there to protect you? You need protection... {WAIT=0.5}From me! You know that, right?"]},
+      "11": {"text": ["Who else is going to keep you out of trouble? You need me, Mozes. You know it!"]},
       "12": {"text": ["Alright, here's the deal: You're taking me with you, and maybe, just maybe, I'll forgive you for doubting my adventurous spirit."]},
       "13": {"face": "mozes", "name": "Mozes", "text": ["Sure..."]},
       "14": {"face": "luana", "name": "Luana", "text": ["Now we're talking! You are so not gonna regret this."]},
-      "15": {"text": ["But first, I need to finish my chores here for Mr. Isembert. I promised to help him out today."], "choices": [{"command": "ACCEPT_QUEST", "nextId": "16"}]},
-      "16": {"text": ["I'll be done by 10:00. Come back then, and not one minute later!"], "choices": [{"command": "AUTO_SAVE", "nextId": "20"}]},
+      "15": {"text": ["But first... {WAIT=0.5}I need to finish my chores here for Mr. Isembert. I promised to help him out today."]},
+      "16": {"text": ["I'll be done by 10:00. Come back then, and not one minute later!"], "choices": [{"command": "ACCEPT_QUEST", "nextId": "17"}]},
+      "17": {"text": ["Go buy some weapons or level up your attributes or something, I don't care. As long as you don't bother me here!"], "choices": [{"command": "AUTO_SAVE", "nextId": "20"}]},
       "20": {"text": ["Mozes, what did I tell you?! I won't be done with my chores until 10:00. Come back then, and not one minute later!"], "choices": [{"command": "EXIT", "nextId": "20"}]}
     }
   },
@@ -215,8 +217,8 @@
       "10": {"text": ["Hi Mozes! What's bothering you? You seem troubled."]},
       "11": {
         "choices": [
-          {"text": "*Explain everything that's happened and ask her to join you.*", "nextId": "21"},
-          {"text": "*Say it's nothing. Take your leave.*", "nextId": "20"}
+          {"text": "*Tell Luana everything and ask her to join you.*", "nextId": "21"},
+          {"text": "*Say it's nothing and take your leave.*", "nextId": "20"}
         ]
       },
       "20": {"text": ["No, no, no, wait! You can't just leave me hanging like that! I don't believe you. I know you far too well. Tell me what's going on."], "choices": [{"nextId": "11"}]},
@@ -225,7 +227,7 @@
       "23": {"text": ["Hell yeah! You're going on this HUGE adventure with all the big stuff, slaying monsters, taking loot, and and and..."]},
       "24": {"text": ["Why wouldn't I want to go with you? What's wrong with you?!"]},
       "25": {"text": ["We've been friends since childhood, always adventuring together. Do you really think I'd leave you hanging?"]},
-      "26": {"text": ["Who will be there to protect you? You need protection... {WAIT=0.5}From me! You know that, right?"]},
+      "26": {"text": ["Who else is going to keep you out of trouble? You need me, Mozes. You know it!"]},
       "27": {"text": ["Alright, here's the deal: You're taking me with you, and maybe, just maybe, I'll forgive you for doubting my adventurous spirit."]},
       "28": {"face": "mozes", "name": "Mozes", "text": ["Sure..."]},
       "29": {"face": "luana", "name": "Luana", "text": ["Now we're talking! You are so not gonna regret this."]},
@@ -250,7 +252,8 @@
       "1": {"text": ["We did it! High five!"]},
       "2": {"text": ["Yeah! We saved the farm from those raiders! That was awesome! I feel like a superhero!"]},
       "3": {"text": ["Mozes! What are you waiting for? Let's go already! Adventure awaits!"]},
-      "4": {"face": "mozes", "name": "mozes", "text": ["Luana, are you sure you're not a little bit too enthusiastic about this world-ending endeavor?"], "choices": [{"command": "EXIT"}]}
+      "4": {"face": "mozes", "name": "mozes", "text": ["Luana, are you sure you're not a little bit too enthusiastic about this world-ending endeavor?"]},
+      "5": {"face": "luana", "name": "Luana", "text": ["No, I'm not! Now go buy me some armor and weapons."], "choices": [{"command": "EXIT"}]}
     }
   },
   "farm_battle_after_win_alt"      : {
@@ -265,7 +268,7 @@
       "1": {"text": ["This is all terrible... Now Luana is also gone, same as Grace..."]},
       "2": {"text": ["If only I could have been here {COLOR=BLUE}sooner{COLOR=BLACK}..."]},
       "3": {"text": ["There isn't much for me to accomplish here now anymore..."]},
-      "4": {"text": ["I'll go back to that son of a bitch Ardor and take Grace back!"]},
+      "4": {"text": ["It's all because of that son of a bitch Ardor! I'm gonna take Grace back!"]},
       "5": {"face": "fairy_transp", "name": "Mother Fairy", "text": ["\"You cannot confront Ardor! Even if you were to face him, he's far beyond your capabilities.\""]},
       "6": {"face": "fairy_transp", "name": "Mother Fairy", "text": ["\"Watch out for Ardor! He is not to be trifled with!\""]},
       "7": {"face": "mozes", "name": "Mozes", "text": ["Screw that! Grace needs my help now!"], "choices": [{"command": "AUTO_SAVE"}]}

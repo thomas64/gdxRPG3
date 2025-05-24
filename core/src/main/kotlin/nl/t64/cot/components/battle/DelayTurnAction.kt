@@ -18,7 +18,7 @@ class DelayTurnAction(
         return if (currentParticipant.currentAP < DELAY_AP) {
             Pair(false, (message + "Not enough AP!").trimIndent())
         } else {
-            Pair(true, (message + "Do you want to delay your turn ($DELAY_AP AP) ?").trimIndent())
+            Pair(true, (message + "Do you want to delay your turn? ($DELAY_AP AP)").trimIndent())
         }
     }
 
