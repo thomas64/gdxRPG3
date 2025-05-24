@@ -284,17 +284,17 @@ data class InventoryItem(
     fun getRangeText(): String {
         val weaponRange: List<Int> = getWeaponRange()
         return if (weaponRange.size == 1) {
-            "Range: 1"
+            "1"
         } else {
-            "Range: ${weaponRange.first()} - ${weaponRange.last()}"
+            "${weaponRange.first()}-${weaponRange.last()}"
         }
     }
 
     fun getDurabilityText(): String {
         return if (durability > 5) {
-            "Durability: $durability"
+            "($durability)"
         } else {
-            "Durability: [FIREBRICK]$durability[BLACK]"
+            "([FIREBRICK]$durability[BLACK])"
         }
     }
 

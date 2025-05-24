@@ -30,26 +30,14 @@ class Stagger(
     override fun createPreviewMessage(): String {
         return currentWeapon?.let {
             """
-                $this
-                Hand-to-hand only!
-
-                Weapon: ${it.name}
-                ${it.getDurabilityText()}
-
-                Target: ${target.character.name}
-                Skill: ${it.skill?.title}
+                $name
+                ${it.name} ${it.getDurabilityText()}
                 ${possibleCreateEffectiveMessage()}
-                Chance to hit: ${calculateHitPercentageCapped()}%
-                Damage: ${calculateDamage()}
-                Critical chance: ${calculateCriticalHitPercentage()}%
-                Critical damage: ${calculateCriticalDamage()}
-
-                Chance to stagger: ${calculateStaggerPercentage()}%
-
-                When successful, Stagger
-                moves the target to the
-                bottom of the turn order.
-            """.trimIndent()
+                Hit:       ${String.format("%3d", calculateHitPercentageCapped())} %
+                Stagger:   ${String.format("%3d", calculateStaggerPercentage())} %
+                Damage:    ${String.format("%3d", calculateDamage())}
+                Crit:      ${String.format("%3d", calculateCriticalHitPercentage())} %
+            """.trimIndent().trimMargin()
         } ?: """
             $this
 

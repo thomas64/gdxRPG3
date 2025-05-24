@@ -23,19 +23,13 @@ class DoubleThrow(
     override fun createPreviewMessage(): String {
         return currentWeapon?.let {
             """
-                $this
-
-                Weapon: ${it.name}
-                ${it.getDurabilityText()}
-
-                Target: ${target.character.name}
-                Skill: ${it.skill?.title}
+                $name
+                ${it.name} ${it.getDurabilityText()}
                 ${possibleCreateEffectiveMessage()}
-                Chance to hit: ${calculateHitPercentageCapped()}%
-                Damage: ${calculateDamage()} (x2)
-                Critical chance: ${calculateCriticalHitPercentage()}%
-                Critical damage: ${calculateCriticalDamage()} (x2)
-            """.trimIndent()
+                Hit:      ${String.format("%3d", calculateHitPercentageCapped())} %
+                Damage:   ${String.format("%3d", calculateDamage())}[BLUE]x2[BLACK]
+                Crit:     ${String.format("%3d", calculateCriticalHitPercentage())} %
+            """.trimIndent().trimMargin()
         } ?: """
             $this
 

@@ -2,6 +2,7 @@ package nl.t64.cot.components.battle
 
 import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.components.party.abilities.BattleAbilityItem
+import nl.t64.cot.removeColorCoding
 
 
 class AttackAction(
@@ -49,12 +50,10 @@ class AttackAction(
     fun isCostingTooMuchApSp(): String? {
         return when {
             !selectedAttack.hasEnoughApSp() -> {
-                createPreviewMessage() +
-                    System.lineSeparator() +
-                    "_________________" +
-                    System.lineSeparator() +
-                    System.lineSeparator() +
-                    "[FIREBRICK]Not enough AP/SP!"
+                """${createPreviewMessage()}
+                    |_________________
+                    |
+                    |[FIREBRICK]Not enough AP/SP!""".trimIndent().trimMargin()
             }
             else -> null
         }
@@ -63,23 +62,24 @@ class AttackAction(
     fun isUnableWithCurrentWeapon(): String? {
         return when {
             !selectedAttack.isWeaponAllowed() -> {
-                createPreviewMessage() +
-                    System.lineSeparator() +
-                    "_________________" +
-                    System.lineSeparator() +
-                    System.lineSeparator() +
-                    "[FIREBRICK]Unable with current weapon!"
+                """${createPreviewMessage()}
+                    |_________________
+                    |
+                    |[FIREBRICK]Unable with current weapon!""".trimIndent().trimMargin()
             }
             else -> null
         }
     }
 
-    fun createConfirmationMessage(): String {
-        return createPreviewMessage() +
-            System.lineSeparator() +
-            "_________________" + """
+    fun createConfirmationMessage(): Triple<String, String, String> {
+        val message = createPreviewMessage()
+        val underscores: String = createUnderscoresWithLengthOf(message)
+        return Triple(message, "", """
 
-            Attack?"""
+            $underscores
+
+            Attack?""".trimIndent()
+        )
     }
 
     fun createPreviewMessage(): String {
@@ -109,6 +109,18 @@ class AttackAction(
                         "${selectedAttack.calculateCriticalHitPercentage()}% critHit, " +
                         "${selectedAttack.ap} AP.")
         }
+    }
+
+    private fun createUnderscoresWithLengthOf(allLines: String): String {
+        val minLength = 17
+        val maxLength = allLines.getLongestLineLength()
+        return "_".repeat(maxOf(minLength, maxLength))
+    }
+
+    private fun String.getLongestLineLength(): Int {
+        return this.lines()
+            .map { it.removeColorCoding().trim() }
+            .maxOf { it.length }
     }
 
 }

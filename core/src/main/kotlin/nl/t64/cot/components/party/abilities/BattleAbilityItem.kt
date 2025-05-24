@@ -139,12 +139,14 @@ abstract class BattleAbilityItem(
 
     protected fun possibleCreateEffectiveMessage(): String {
         return when {
-            hasWeaponTriangleAdvantage() -> """
-                [BLUE]Super effective![BLACK]
-                """
-            hasWeaponTriangleDisadvantage() -> """
-                [FIREBRICK]Not very effective...[BLACK]
-                """
+            hasWeaponTriangleAdvantage() -> {
+                """[BLUE]Advantage![BLACK]
+                   |"""
+            }
+            hasWeaponTriangleDisadvantage() -> {
+                """[FIREBRICK]Disadvantage![BLACK]
+                   |"""
+            }
             else -> ""
         }
     }

@@ -17,7 +17,19 @@ class TwoColumnsQuestionDialog(
     dialogHeight = message.toDialogHeight(),
     content = message.toDialogTable(),
     yesFunction = yesFunction
-)
+) {
+
+    init {
+        if (message.second.isBlank()) {
+            // see the three padding lines from QuestionDialog.kt
+                                                // padTop(20f) from below
+            dialog.contentTable.padLeft(5f)     // + 15f from below = padTop(20f)
+            dialog.contentTable.padRight(20f)   // padRight(20f)
+            dialog.background.minWidth = 0f
+        }
+    }
+
+}
 
 private fun Triple<String, String, String>.toDialogHeight(): Float {
     val firstLinesCount: Int = this.first.lines().count() * FONT_SIZE

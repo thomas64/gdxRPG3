@@ -364,3 +364,7 @@ fun Color.toTexture(): Texture {
     return Texture(pixmap)
         .also { pixmap.dispose() }
 }
+
+fun String.removeColorCoding(): String {
+    return replace(Regex("""\[[A-Z]+]"""), "")
+}

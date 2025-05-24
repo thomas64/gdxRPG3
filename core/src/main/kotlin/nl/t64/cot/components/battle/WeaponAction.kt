@@ -8,6 +8,7 @@ import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.components.party.inventory.InventoryItem
 import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.components.party.stats.StatItemId
+import nl.t64.cot.removeColorCoding
 
 
 private const val SWITCH_WEAPON_AP: Int = 3
@@ -108,73 +109,98 @@ class WeaponAction(
     }
 
     private fun InventoryItem.unequipWeapon(): Triple<String, String, String> {
+        val weaponSpecs: String = this.listWeaponSpecs()
+        val effectiveness: String = this.listEffectiveness()
+        val underscores: String = createUnderscoresWithLengthOf(weaponSpecs, effectiveness)
+
         return Triple("""
-                ${this.listWeaponSpecs()}
-                ______________
+                $weaponSpecs
+                $underscores
 
                 Advantage:
 
-                ${this.listEffectiveness()}
-                ______________
+                $effectiveness
+            """.trimIndent().trimMargin(),
+                      "",
+                      """
+
+                $underscores
 
                 Unequip ($SWITCH_WEAPON_AP AP) ?
-            """.trimIndent().trimMargin(), "", "")
+            """.trimIndent())
     }
 
     private fun InventoryItem.switchWeaponTo(newWeapon: InventoryItem): Triple<String, String, String> {
+        val currentWeaponSpecs: String = this.listWeaponSpecs()
+        val currentEffectiveness: String = this.listEffectiveness()
+        val newWeaponSpecs: String = newWeapon.listWeaponSpecs()
+        val newEffectiveness: String = newWeapon.listEffectiveness()
+        val underscores: String = createUnderscoresWithLengthOf(currentWeaponSpecs, currentEffectiveness, newWeaponSpecs, newEffectiveness)
+
         return Triple("""
                 Current weapon:
 
-                ${this.listWeaponSpecs()}
-                __________________
+                $currentWeaponSpecs
+                ${underscores + "____"}
 
                 Advantage:
 
-                ${this.listEffectiveness()}
+                $currentEffectiveness
             """.trimIndent().trimMargin(),
                       """
                 New weapon:
 
-                ${newWeapon.listWeaponSpecs()}
-                ______________
+                $newWeaponSpecs
+                $underscores
 
                 Advantage:
 
-                ${newWeapon.listEffectiveness()}
+                $newEffectiveness
             """.trimIndent().trimMargin(),
                       """
-                ________________________________
+
+                ${underscores + underscores + "____"}
 
                 Equip ($SWITCH_WEAPON_AP AP) ?
             """.trimIndent())
     }
 
     private fun InventoryItem.equipWeapon(): Triple<String, String, String> {
+        val weaponSpecs: String = this.listWeaponSpecs()
+        val effectiveness: String = this.listEffectiveness()
+        val underscores: String = createUnderscoresWithLengthOf(weaponSpecs, effectiveness)
+
         return Triple("""
-                ${this.listWeaponSpecs()}
-                ______________
+                $weaponSpecs
+                $underscores
 
                 Advantage:
 
-                ${this.listEffectiveness()}
-                ______________
+                $effectiveness
+            """.trimIndent().trimMargin(),
+                      "",
+                      """
 
-                   Equip ($SWITCH_WEAPON_AP AP) ?
-            """.trimIndent().trimMargin(), "", "")
+                $underscores
+
+                Equip ($SWITCH_WEAPON_AP AP) ?
+            """.trimIndent())
     }
 
     private fun InventoryItem.listWeaponSpecs(): String {
         return """
-                ${this.name}
-                Skill: ${this.skill?.title}
-                ${this.getRangeText()}
-                Durability: ${this.durability}
-                Chance to hit: ${this.getAttributeOfCalcAttributeId(CalcAttributeId.BASE_HIT)}
-                Damage: ${this.getAttributeOfCalcAttributeId(CalcAttributeId.DAMAGE)}
+                ${this.name} ${this.getDurabilityText()}
+                Range:    ${this.getRangeText()}
+                Hit:      ${this.getAttributeOfCalcAttributeId(CalcAttributeId.BASE_HIT)}%
+                Damage:   ${this.getAttributeOfCalcAttributeId(CalcAttributeId.DAMAGE)}
             """.trim()
     }
 
     private fun InventoryItem.listEffectiveness(): String {
+        if (enemies.map { it.getCurrentWeapon()!! }
+                .none { this.hasWeaponTriangleAdvantage(it) || this.hasWeaponTriangleDisadvantage(it) }
+        ) return "None"
+
         val result = enemies.joinToString(separator = "") { enemy ->
             val enemyWeapon = enemy.getCurrentWeapon()!!
             when {
@@ -196,49 +222,67 @@ class WeaponAction(
     }
 
     private fun InventoryItem.unequipShield(): Triple<String, String, String> {
+        val shieldSpecs: String = this.listShieldSpecs()
+        val underscores: String = createUnderscoresWithLengthOf(shieldSpecs)
+
         return Triple("""
-                ${this.listShieldSpecs()}
-                ______________
+                $shieldSpecs
+            """.trimIndent().trimMargin(),
+                      "",
+                      """
+
+                $underscores
 
                 Unequip ($SWITCH_WEAPON_AP AP) ?
-            """.trimIndent().trimMargin(), "", "")
+            """.trimIndent())
     }
 
     private fun InventoryItem.switchShieldTo(newShield: InventoryItem): Triple<String, String, String> {
+        val currentShieldSpecs: String = this.listShieldSpecs()
+        val newShieldSpecs: String = newShield.listShieldSpecs()
+        val underscores: String = createUnderscoresWithLengthOf(currentShieldSpecs, newShieldSpecs)
+
         return Triple("""
                 Current shield:
 
-                ${this.listShieldSpecs()}
+                $currentShieldSpecs
             """.trimIndent().trimMargin(),
                       """
                 New shield:
 
-                ${newShield.listShieldSpecs()}
+                $newShieldSpecs
             """.trimIndent().trimMargin(),
                       """
-                ________________________________
+
+                ${underscores + underscores + "____"}
 
                 Equip ($SWITCH_WEAPON_AP AP) ?
             """.trimIndent())
     }
 
     private fun InventoryItem.equipShield(): Triple<String, String, String> {
+        val shieldSpecs: String = this.listShieldSpecs()
+        val underscores: String = createUnderscoresWithLengthOf(shieldSpecs)
+
         return Triple("""
-                ${this.listShieldSpecs()}
-                ______________
+                $shieldSpecs
+            """.trimIndent().trimMargin(),
+                      "",
+                      """
+
+                $underscores
 
                 Equip ($SWITCH_WEAPON_AP AP) ?
-            """.trimIndent().trimMargin(), "", "")
+            """.trimIndent())
     }
 
     private fun InventoryItem.listShieldSpecs(): String {
         return """
-                ${this.name}
-                Durability: ${this.durability}
-                Protection: ${this.getAttributeOfCalcAttributeId(CalcAttributeId.PROTECTION)}
-                Defense: ${this.getAttributeOfCalcAttributeId(CalcAttributeId.DEFENSE)}
-                Speed: ${this.getAttributeOfStatItemId(StatItemId.SPEED)}
-                Stealth: ${this.getAttributeOfSkillItemId(SkillItemId.STEALTH)}
+                ${this.name} ${this.getDurabilityText()}
+                Protection: ${String.format("%3d", this.getAttributeOfCalcAttributeId(CalcAttributeId.PROTECTION))}
+                Defense:    ${String.format("%3d", this.getAttributeOfCalcAttributeId(CalcAttributeId.DEFENSE))}
+                Speed:      ${String.format("%3d", this.getAttributeOfStatItemId(StatItemId.SPEED))}
+                Stealth:    ${String.format("%3d", this.getAttributeOfSkillItemId(SkillItemId.STEALTH))}
             """.trim()
     }
 
@@ -248,6 +292,18 @@ class WeaponAction(
 
     private fun InventoryItem.hasWeaponTriangleDisadvantage(enemyWeapon: InventoryItem): Boolean {
         return this.skill!!.hasDisadvantageFrom(enemyWeapon.skill)
+    }
+
+    private fun createUnderscoresWithLengthOf(vararg allLines: String): String {
+        val minLength = 18
+        val maxLength = allLines.getLongestLineLength()
+        return "_".repeat(maxOf(minLength, maxLength))
+    }
+
+    private fun Array<out String>.getLongestLineLength(): Int {
+        return this.flatMap { it.lines() }
+            .map { it.removeColorCoding().trim() }
+            .maxOf { it.length }
     }
 
 }

@@ -62,8 +62,7 @@ class BattleDialogManager(
         }
 
         val message = attackAction.createConfirmationMessage()
-        val dialog = QuestionDialog(message) { onConfirmed(attackAction) }
-        dialog.setLeftAlignment()
+        val dialog = TwoColumnsQuestionDialog(message) { onConfirmed(attackAction) }
         dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0, 1f)
     }
 
@@ -104,12 +103,7 @@ class BattleDialogManager(
         }
 
         val message = weaponAction.createConfirmationMessage()
-        val dialog = if (message.second.isBlank() && message.third.isBlank()) {
-            QuestionDialog(message.first) { onConfirmed(weaponAction) }
-                .apply { setLeftAlignment() }
-        } else {
-            TwoColumnsQuestionDialog(message) { onConfirmed(weaponAction) }
-        }
+        val dialog = TwoColumnsQuestionDialog(message) { onConfirmed(weaponAction) }
         dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0, 0.5f)
     }
 
