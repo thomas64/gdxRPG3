@@ -24,6 +24,8 @@ Machiel Zijderveld
 Kevin Mulder
 Niels van Heijningen
 Robin van Leeuwen
+Daniel Rouw
+Timon Kooi
 
 ---
 

@@ -21,7 +21,7 @@ class ConversationAnswers(
     private val font: BitmapFont
 ) : List<ConversationChoice>(createAnswersStyle(font)) {
 
-    private val selectedIndexHistory: MutableMap<GdxArray<ConversationChoice>, Int> = mutableMapOf()
+    private val selectedIndexHistory: MutableMap<String, Int> = mutableMapOf()
 
     companion object {
         private fun createAnswersStyle(font: BitmapFont, drawable: Drawable = BaseDrawable()): ListStyle {
@@ -33,16 +33,16 @@ class ConversationAnswers(
     }
 
     fun populateChoices(choices: GdxArray<ConversationChoice>) {
-        if (!selectedIndexHistory.containsKey(choices)) {
-            selectedIndexHistory[choices] = -1
-        }
         super.setItems(choices)
         tryToSetLastChosenSelectedIndex(choices)
         setStyleBasedOnContent(choices)
     }
 
     fun storeSelectedIndex() {
-        selectedIndexHistory[items] = selectedIndex
+        if (super.items.size > 1) {
+            val firstAnswerText: String = super.items[0].text
+            selectedIndexHistory[firstAnswerText] = selectedIndex
+        }
     }
 
     fun clearSelectedIndexHistory() {
@@ -56,6 +56,7 @@ class ConversationAnswers(
             index == selectedIndex
                 && item.isMeetingCondition()
                 && !item.hasBeenSelectedEarlier -> style.fontColorSelected
+            super.items.size == 1 -> style.fontColorSelected
             !item.isMeetingCondition() -> Color.GRAY
             item.hasBeenSelectedEarlier -> Color.TEAL
             else -> style.fontColorUnselected
@@ -67,7 +68,8 @@ class ConversationAnswers(
         if (choices.size == 1) {
             selectedIndex = 0
         } else {
-            selectedIndex = selectedIndexHistory[choices]!!
+            val firstAnswerText: String = choices[0].text
+            selectedIndex = selectedIndexHistory[firstAnswerText] ?: -1
         }
     }
 
