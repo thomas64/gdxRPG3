@@ -14,7 +14,6 @@ import nl.t64.cot.constants.Constant
 import nl.t64.cot.toDrawable
 
 
-private const val SCROLL_PANE_LINE_PAD = 2f
 private const val PAD = 25f
 
 class ConversationAnswers(
@@ -74,15 +73,11 @@ class ConversationAnswers(
     }
 
     private fun setStyleBasedOnContent(choices: GdxArray<ConversationChoice>) {
-        val drawable = if (choices[0].isDefault()) {
-            Color.CLEAR.toDrawable()
+        if (choices[0].isDefault()) {
+            style = createAnswersStyle(font, Color.CLEAR.toDrawable())
         } else {
-            Utils.createFullBorderBlack()
-        }.apply {
-            topHeight = SCROLL_PANE_LINE_PAD
-            bottomHeight = SCROLL_PANE_LINE_PAD
+            style = createAnswersStyle(font, Utils.createFullBorderBlack())
         }
-        style = createAnswersStyle(font, drawable)
     }
 
 }

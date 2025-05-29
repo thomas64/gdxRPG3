@@ -18,7 +18,6 @@ import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.profileManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
-import nl.t64.cot.components.conversation.ConversationChoice
 import nl.t64.cot.components.conversation.ConversationCommand
 import nl.t64.cot.components.conversation.ConversationGraph
 import nl.t64.cot.components.conversation.NoteDatabase
@@ -38,10 +37,10 @@ import nl.t64.cot.sfx.TransitionPurpose
 import kotlin.concurrent.thread
 
 
-private const val SCROLL_PANE_LINE_HEIGHT = 32f
-private const val SCROLL_PANE_TOP_PAD = 10f
 private const val DIALOG_WIDTH = 1200f
 private const val DIALOG_HEIGHT = 300f
+private const val SCROLL_PANE_TOP_PAD = 24f
+private const val ARROW_PAD_LEFT = 780f
 private const val PAD = 25f
 private const val LEFT_PAD = PAD * 4f
 private const val RIGHT_PAD = PAD * 3f
@@ -123,15 +122,8 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         val mainTable = Table()
         mainTable.left()
         mainTable.add(createFaceTable())
+        mainTable.add(createTextTable())
 
-        val textTable = Table()
-        textTable.pad(PAD, PAD, PAD, RIGHT_PAD)
-        textTable.add<Actor>(label).width(DIALOG_WIDTH - ALL_PADS).row()
-        textTable.add().height(SCROLL_PANE_TOP_PAD).row()
-        textTable.add<Actor>(scrollPane).left().padLeft(PAD)
-        rowWithScrollPane = textTable.getCell(scrollPane)
-
-        mainTable.add(textTable)
         dialog.contentTable.clear()
         dialog.contentTable.add(mainTable)
     }
@@ -148,12 +140,19 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         }
     }
 
+    private fun createTextTable(): Table {
+        return Table().apply {
+            pad(PAD, PAD, PAD, RIGHT_PAD)
+            add<Actor>(label).width(DIALOG_WIDTH - ALL_PADS).row()
+            add<Actor>(scrollPane).left().padLeft(PAD)
+        }.also { rowWithScrollPane = it.getCell(scrollPane) }
+    }
+
     private fun fillDialogForNote() {
         label.setAlignment(Align.center)
         val textTable = Table()
         textTable.pad(PAD * 2f, PAD * 3f, PAD, PAD * 2f)
         textTable.add<Actor>(label).width(DIALOG_WIDTH - PAD * 5f).row()
-        textTable.add().height(SCROLL_PANE_TOP_PAD).row()
         textTable.add<Actor>(scrollPane).left().padLeft(PAD)
         rowWithScrollPane = textTable.getCell(scrollPane)
 
@@ -510,28 +509,14 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     private fun populateChoices() {
         val choices = GdxArray(graph.getAssociatedChoices())
         answers.populateChoices(choices)
-        repositionScrollPaneBasedOnContent(choices)
+        repositionScrollPaneBasedOnContent()
     }
 
-    private fun repositionScrollPaneBasedOnContent(choices: GdxArray<ConversationChoice>) {
-        setScrollPaneHeight(choices)
-        setScrollPanePadding()
-    }
-
-    private fun setScrollPaneHeight(choices: GdxArray<ConversationChoice>) {
-        val newHeight = if (choices.size % 2 == 0) {
-            choices.size * SCROLL_PANE_LINE_HEIGHT
-        } else {
-            choices.size * SCROLL_PANE_LINE_HEIGHT + 2f
-        }
-        rowWithScrollPane.height(newHeight)
-    }
-
-    private fun setScrollPanePadding() {
+    private fun repositionScrollPaneBasedOnContent() {
         if (label.text.isBlank()) {
-            rowWithScrollPane.padTop(-SCROLL_PANE_LINE_HEIGHT - SCROLL_PANE_TOP_PAD).padLeft(-(PAD / 2f))
+            rowWithScrollPane.padTop(-SCROLL_PANE_TOP_PAD).padLeft(-(PAD / 2f))
         } else {
-            rowWithScrollPane.padTop(0f).padLeft(-(PAD / 2f))
+            rowWithScrollPane.padTop(0f).padLeft(ARROW_PAD_LEFT)
         }
     }
 
