@@ -50,7 +50,7 @@
         ]
       },
       "5" : {"face": "mozes", "name": "Mozes", "text": ["I should probably take it off first."], "choices": [{"command": "EXIT"}]},
-      "10": {"text": ["I often come here to reminisce about this once-enormous tree and my late husband, Theodore. We had such nice summers together under this tree.", "I miss him..."]},
+      "10": {"text": ["I often come here to reminisce about this once-enormous tree and my late husband, Theodore. We had such nice summers together under this tree. I miss him..."]},
       "11": {"text": ["Life is over before you know it, don't you think?"]},
       "12": {"face": "mozes", "name": "Mozes", "text": ["You sure got that right."], "choices": [{"command": "EXIT"}]},
       "20": {"text": ["Mozes, that's wonderful news! Thank you."]},
@@ -488,7 +488,7 @@
           {"condition": ["i_r_==_a_q_this", "i_c_==_u_q_this"], "text": "*Explain again everything that's happened.*", "nextId": "60"},
           {"condition": ["i_c_==_a_q_this", "i_!fairy_portal_active"], "text": "*Complain about the warp crystal not working.*", "nextId": "70"},
           {"condition": ["i_c_!=_x_q_this", "i_c_==_a_q_this", "i_n_1_>=_item_fine_fairy_ring"], "text": "[Fairy Ring] *Present the package you received from the Fairy Shop.*", "command": "SHOW_QUEST_ITEM", "nextId": "80"},
-          {"condition": ["i_c_>=_a_q_quest_helping_horse", "i_c_<=_a_q_quest_get_horse", "i_time_before_17:00"], "text": "*Explain your need for a horse due to the blocked path to Honeywood Farm.*", "nextId": "10"},
+          {"condition": ["i_c_>=_a_q_quest_helping_horse", "i_c_<=_a_q_quest_get_horse", "i_time_before_17:00"], "text": "*You are in need of a horse due to the blocked path to Honeywood Farm.*", "nextId": "10"},
           {"condition": ["i_c_>=_a_q_quest_get_horse", "i_tn_7_q_quest_get_horse"], "text": "*Mention Angie's horse is unwell and ask if he can provide assistance.*", "nextId": "40"},
           {"condition": ["i_c_>=_a_q_quest_get_horse", "i_tn_8_q_quest_get_horse"], "text": "*Explain your quest to find horseshoes for Angie.*", "nextId": "20"},
           {"condition": ["i_c_>=_a_q_quest_helping_horse", "i_tn_11_q_quest_helping_horse", "i_time_before_17:00"], "text": "*Explain your requirement for tow ropes to clear the fallen tree.*", "nextId": "30"},

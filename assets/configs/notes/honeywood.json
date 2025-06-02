@@ -4,9 +4,9 @@
       "1": {
         "text"      : [
           "\"To mommy and daddy,",
-          "love you forever.          ",
+          "love you forever. ",
           "",
-          "                         Grace\""
+          "                Grace\""
         ], "choices": [{"command": "EXIT"}]
       }
     }

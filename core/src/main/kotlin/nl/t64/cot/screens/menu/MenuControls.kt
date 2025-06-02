@@ -111,8 +111,8 @@ abstract class MenuControls : MenuScreen() {
             Label("M", textStyle),
             Label("Party", textStyle),
             Label("P", textStyle),
-            Label("Manual", textStyle),
-            Label("H", textStyle),
+            Label("Tutorial", textStyle),
+            Label("T", textStyle),
             Label("Pause", textStyle),
             Label("Esc", textStyle)
         )

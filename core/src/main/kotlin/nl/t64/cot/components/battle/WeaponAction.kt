@@ -199,7 +199,7 @@ class WeaponAction(
     private fun InventoryItem.listEffectiveness(): String {
         if (enemies.map { it.getCurrentWeapon()!! }
                 .none { this.hasWeaponTriangleAdvantage(it) || this.hasWeaponTriangleDisadvantage(it) }
-        ) return "None"
+        ) return "[GRAY]None[BLACK]"
 
         val result = enemies.joinToString(separator = "") { enemy ->
             val enemyWeapon = enemy.getCurrentWeapon()!!
@@ -213,7 +213,7 @@ class WeaponAction(
                        |"""
                 }
                 else -> {
-                    """[o] ${enemy.character.name}
+                    """[GRAY][o] ${enemy.character.name}[BLACK]
                        |"""
                 }
             }

@@ -147,7 +147,11 @@ abstract class BattleAbilityItem(
                 """[FIREBRICK]Disadvantage![BLACK]
                    |"""
             }
-            else -> ""
+            else -> {
+                """[GRAY]Neither advantage
+                   |nor disadvantage.[BLACK]
+                   |"""
+            }
         }
     }
 

@@ -514,7 +514,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
 
     private fun repositionScrollPaneBasedOnContent() {
         if (label.text.isBlank()) {
-            rowWithScrollPane.padTop(-SCROLL_PANE_TOP_PAD).padLeft(-(PAD / 2f))
+            rowWithScrollPane.padTop(-SCROLL_PANE_TOP_PAD).padLeft(-PAD).padRight(-(PAD * 2f))
         } else {
             rowWithScrollPane.padTop(0f).padLeft(ARROW_PAD_LEFT)
         }

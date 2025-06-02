@@ -30,7 +30,7 @@
       "which can be used to improve your character."
     ]
   },
-  "guide_event_battle_1"             : {
+  "guide_event_battle_ap"             : {
     "type": "messagebox",
     "text": [
       "The battlefield consists of the two rows you can see below.",
@@ -38,30 +38,35 @@
       "The red spaces on the upper row indicate your attack range.",
       "",
       "Each turn, you get a certain amount of Action Points (AP).",
-      "With these AP, you can move, attack, or do other actions.",
-      "",
-      "Each enemy has an [BLUE]advantage[BLACK] and a [FIREBRICK]disadvantage[BLACK] to certain weapon types.",
-      "Try to use the [BLUE]right weapon type[BLACK] against the enemy's [FIREBRICK]disadvantage[BLACK]."
+      "With these AP, you can move, attack, or do other actions."
     ]
   },
-  "guide_event_battle_2"             : {
+  "guide_event_battle_advantage"             : {
+    "type": "messagebox",
+    "text": [
+      "",
+      "Each enemy has an [BLUE]advantage[BLACK] and a",
+      "[FIREBRICK]disadvantage[BLACK] to certain weapon types.",
+      "",
+      "Try to use the [BLUE]right weapon type[BLACK]",
+      "against the enemy's [FIREBRICK]disadvantage[BLACK]."
+    ]
+  },
+  "guide_event_battle_battle_lock"             : {
     "type": "messagebox",
     "text": [
       "At the start of each turn, if a character begins",
       "next to an enemy, they become locked in battle.",
       "",
       "This significantly increases the AP cost to move",
-      "away from that enemy and escape the battle lock.",
-      "",
-      "Increasing your Stealth skill will make it easier",
-      "to break free from battle lock."
+      "away from that enemy and escape the battle lock."
     ]
   },
-  "guide_event_battle_3"             : {
+  "guide_event_battle_turn_order"             : {
     "type": "messagebox",
     "text": [
       "At the top of the screen, you can see the Turn order.",
-      "The character highlighted in yellow will act first.",
+      "The character highlighted in [GOLD]yellow[BLACK] will act first.",
       "",
       "The turn order is based on the Speed attribute.",
       "Higher speed means acting earlier in the round.",
@@ -72,7 +77,7 @@
       "comparing the turn order with your party's speed."
     ]
   },
-  "guide_event_battle_4"             : {
+  "guide_event_battle_durability"             : {
     "type": "messagebox",
     "text": [
       "Weapons and shields have limited durability.",

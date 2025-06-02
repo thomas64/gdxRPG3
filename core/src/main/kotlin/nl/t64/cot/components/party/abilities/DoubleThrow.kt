@@ -27,7 +27,7 @@ class DoubleThrow(
                 ${it.name} ${it.getDurabilityText()}
                 ${possibleCreateEffectiveMessage()}
                 Hit:      ${String.format("%3d", calculateHitPercentageCapped())} %
-                Damage:   ${String.format("%3d", calculateDamage())}[BLUE]x2[BLACK]
+                Damage:   ${String.format("%3d", calculateDamage())} [BLUE]x2[BLACK]
                 Crit:     ${String.format("%3d", calculateCriticalHitPercentage())} %
             """.trimIndent().trimMargin()
         } ?: """

@@ -23,6 +23,7 @@ Nathan van der Stoep
 Machiel Zijderveld
 Kevin Mulder
 Niels van Heijningen
+Peter Hazendonk
 Robin van Leeuwen
 Daniel Rouw
 Timon Kooi

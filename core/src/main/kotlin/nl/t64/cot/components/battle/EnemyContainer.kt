@@ -41,12 +41,12 @@ class EnemyContainer(
     }
 
     private fun List<Battler>.toEnemies(): List<EnemyItem> {
-        return this.flatMap {
-            List(it.amount) { index ->
-                if (it.amount > 1) {
-                    EnemyDatabase.createEnemyWithIndexAfterName(it.id, index)
+        return this.flatMap { battler ->
+            List(battler.amount) { index ->
+                if (battler.amount > 1) {
+                    EnemyDatabase.createEnemyWithIndexAfterName(battler.id, index)
                 } else {
-                    EnemyDatabase.createEnemy(it.id)
+                    EnemyDatabase.createEnemy(battler.id)
                 }
             }
         }
@@ -59,7 +59,11 @@ class EnemyContainer(
             .flatMap { (prefix, battlersWithSamePrefix) ->
                 battlersWithSamePrefix.flatMap { battler ->
                     List(battler.amount) {
-                        EnemyDatabase.createEnemyWithIndexAfterNameAndPrefixId(battler.id, prefix, globalSpecialIndex++)
+                        if (battlersWithSamePrefix.size > 1) {
+                            EnemyDatabase.createEnemyWithIndexAfterNameAndPrefixId(battler.id, prefix, globalSpecialIndex++)
+                        } else {
+                            EnemyDatabase.createEnemyWithPrefixId(battler.id, prefix)
+                        }
                     }
                 }
             }

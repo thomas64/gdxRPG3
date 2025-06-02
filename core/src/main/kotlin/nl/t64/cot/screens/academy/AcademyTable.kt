@@ -41,6 +41,7 @@ internal class AcademyTable(academyId: String, tooltip: AcademyTooltip) : BaseTa
     }
 
     fun upgradeSkill() {
+        hideTooltip()
         val skillToUpgrade = skillsToTrain[selectedIndex]
         SkillUpgrader.upgradeSkill(skillToUpgrade, table.stage) { hasJustUpdated = true }
     }
