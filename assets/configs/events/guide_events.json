@@ -44,7 +44,6 @@
   "guide_event_battle_advantage"             : {
     "type": "messagebox",
     "text": [
-      "",
       "Each enemy has an [BLUE]advantage[BLACK] and a",
       "[FIREBRICK]disadvantage[BLACK] to certain weapon types.",
       "",
@@ -66,7 +65,7 @@
     "type": "messagebox",
     "text": [
       "At the top of the screen, you can see the Turn order.",
-      "The character highlighted in [GOLD]yellow[BLACK] will act first.",
+      "The character highlighted in [GOLDENROD]yellow[BLACK] will act first.",
       "",
       "The turn order is based on the Speed attribute.",
       "Higher speed means acting earlier in the round.",

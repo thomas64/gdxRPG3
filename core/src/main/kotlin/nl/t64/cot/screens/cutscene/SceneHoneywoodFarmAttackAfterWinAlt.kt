@@ -3,6 +3,9 @@ package nl.t64.cot.screens.cutscene
 import com.badlogic.gdx.scenes.scene2d.Action
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import nl.t64.cot.Utils.gameData
+import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playBgm
+import nl.t64.cot.audio.stopAllBgm
 import nl.t64.cot.screens.world.entity.Direction
 
 
@@ -40,7 +43,9 @@ class SceneHoneywoodFarmAttackAfterWinAlt : CutsceneScreen() {
     private fun everybodyIsHappy(): Action {
         return Actions.sequence(
             Actions.run {
-                setMapWithHardBgmBgs("honeywood_stable")
+                setMapWithNoSound("honeywood_stable")
+                stopAllBgm()
+                playBgm(AudioEvent.BGM_HOUSE)
                 setFixedCameraPosition(570f, 504f)
                 horse1.isVisible = true
                 horse1.setPosition(432f, 672f)

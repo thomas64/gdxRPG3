@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="26" height="42" tilewidth="24" tileheight="24" infinite="0" nextlayerid="28" nextobjectid="85">
+<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="26" height="42" tilewidth="24" tileheight="24" infinite="0" nextlayerid="28" nextobjectid="85">
  <properties>
   <property name="bgm" value="bgm_house"/>
   <property name="bgs" value="bgs_fireplace"/>
@@ -98,7 +98,7 @@
   <object id="61" name="note_bookcase" x="432" y="360" width="48" height="48"/>
   <object id="62" name="note_fireplace" x="192" y="360" width="48" height="48"/>
   <object id="63" name="note_shelves" x="432" y="120" width="48" height="48"/>
-  <object id="64" name="note_food" x="240" y="144" width="48" height="48"/>
+  <object id="64" name="note_food" x="240" y="144" width="48" height="30"/>
   <object id="65" name="note_food" x="336" y="144" width="48" height="48"/>
   <object id="68" name="note_closet" x="96" y="360" width="48" height="48"/>
   <object id="70" name="note_closet" x="48" y="168" width="36" height="60"/>

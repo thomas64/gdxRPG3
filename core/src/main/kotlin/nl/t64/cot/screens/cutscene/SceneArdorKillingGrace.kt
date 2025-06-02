@@ -55,6 +55,8 @@ class SceneArdorKillingGrace : CutsceneScreen() {
     private lateinit var tobin: CutsceneActor
 
     override fun prepare() {
+        isSkippable = true
+
         mozes = CutsceneActor.createCharacter("mozes")
         mozesDead = Utils.createImage("sprites/characters/damage1.png", 0, 0, 48, 48)
         graceDead = Utils.createImage("sprites/characters/damage2.png", 288, 240, 48, 48)

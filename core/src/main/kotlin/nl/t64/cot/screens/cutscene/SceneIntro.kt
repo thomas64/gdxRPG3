@@ -22,6 +22,8 @@ class SceneIntro : CutsceneScreen() {
     private lateinit var oldWoman: CutsceneActor
 
     override fun prepare() {
+        isSkippable = true
+
         door1 = CutsceneActor.createDoor("door_simple_left3")
         mozes = CutsceneActor.createCharacter("mozes")
         grace = CutsceneActor.createCharacter("girl01")

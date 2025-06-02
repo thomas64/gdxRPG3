@@ -49,7 +49,8 @@ class BattleScreenBuilder {
     var buttonTableSelectAttackIndex = 0
 
     fun createBattleTitle(): Label {
-        return Label(TITLE_TEXT, createLabelStyle(Color.WHITE)).apply {
+        val style = LabelStyle(FontProvider.spectralRegular24, Color.WHITE)
+        return Label(TITLE_TEXT, style).apply {
             setPosition((Gdx.graphics.width / 2f) - (width / 2f), (Gdx.graphics.height / 2f) - (height / 2f))
             isVisible = false
         }

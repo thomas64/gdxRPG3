@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Null
 import nl.t64.cot.Utils
+import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.screens.FontProvider
@@ -41,7 +42,11 @@ class MessageDialog(
     fun show(stage: Stage, event: AudioEvent? = null, confirmDelay: Float = 0f) {
         event?.let { playSe(it) }
         dialog.show(stage)
-        Utils.runWithDelay(confirmDelay) { applyListeners() }
+        if (preferenceManager.isInDebugMode) {
+            applyListeners()
+        } else {
+            Utils.runWithDelay(confirmDelay) { applyListeners() }
+        }
     }
 
     fun setLeftAlignment() {

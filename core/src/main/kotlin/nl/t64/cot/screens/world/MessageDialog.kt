@@ -52,9 +52,10 @@ class MessageDialog(
         fillDialog(message)
         playSe(audioEvent)
         dialog.show(stage)
-        Utils.runWithDelay(INPUT_DELAY) {
-            Gdx.input.inputProcessor = stage
-            Utils.setGamepadInputProcessor(stage)
+        if (Utils.preferenceManager.isInDebugMode) {
+            setInputToStage()
+        } else {
+            Utils.runWithDelay(INPUT_DELAY) { setInputToStage() }
         }
     }
 
@@ -84,6 +85,11 @@ class MessageDialog(
 
     private fun applyListeners() {
         dialog.addListener(MessageDialogListener { hide() })
+    }
+
+    private fun setInputToStage() {
+        Gdx.input.inputProcessor = stage
+        Utils.setGamepadInputProcessor(stage)
     }
 
     private fun hide() {

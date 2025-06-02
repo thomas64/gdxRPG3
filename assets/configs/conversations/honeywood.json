@@ -501,9 +501,9 @@
       "20"  : {"text": ["Hmmm..."]},
       "21"  : {
         "text": ["I believe there's one in {COLOR=BLUE}my basement{COLOR=BLACK}. It's quite dark down there, but you're welcome to see if you can find it."], "choices": [
-          {"condition": ["i_time_between_08:07_and_10:34"], "nextId": "22"},
+          {"condition": ["i_time_between_08:09_and_10:34"], "nextId": "22"},
           {"condition": ["i_time_after_10:34"], "nextId": "23"},
-          {"condition": ["i_time_before_08:07"], "nextId": "23"}
+          {"condition": ["i_time_before_08:09"], "nextId": "23"}
         ]
       },
       "22"  : {"text": ["I reckon there might be more {COLOR=BLUE}scattered around town{COLOR=BLACK}. However, if you find yourself short, our local blacksmith, who lives north of here but is here right now to help my wife, should be able to assist you."], "choices": [{"nextId": "2"}]},

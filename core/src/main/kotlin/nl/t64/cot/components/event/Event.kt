@@ -45,7 +45,7 @@ class Event(
 
     private fun start(stage: Stage?) {
         when {
-            stage != null -> MessageDialog(TextReplacer.replace(text)).show(stage, AudioEvent.SE_CONVERSATION_NEXT)
+            stage != null -> MessageDialog(TextReplacer.replace(text)).show(stage, AudioEvent.SE_CONVERSATION_NEXT, 2f)
             type == "conversation" -> worldScreen.showConversationDialogFromEvent(conversationId!!, entityId!!)
             type == "messagebox" -> worldScreen.showMessageDialog(TextReplacer.replace(text))
             type == "stop_bgm" -> audioManager.fadeBgmInThread()

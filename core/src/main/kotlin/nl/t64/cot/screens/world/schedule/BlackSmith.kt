@@ -16,26 +16,26 @@ class BlackSmith : EntitySchedule() {
 
     override val scheduleParts: List<SchedulePart> = listOf(
         // @formatter:off
-        SchedulePart("honeywood",             "07:34", "07:35", SOUTH, WALKING,  "smith1", "smith2"),
-        SchedulePart("honeywood",             "07:35", "07:37", SOUTH, WALKING,  "smith2", "smith3",   "black_smith_on_the_way"),
-        SchedulePart("honeywood",             "07:37", "07:47", SOUTH, IMMOBILE, "smith3", "smith3",   "black_and_lennor_meet"),
-        SchedulePart("honeywood",             "07:47", "07:52", SOUTH, WALKING,  "smith3", "smith4",   "black_smith_on_the_way"),
-        SchedulePart("honeywood",             "07:52", "07:54", EAST,  WALKING,  "smith4", "smith5",   "black_smith_on_the_way"),
-        SchedulePart("honeywood",             "07:54", "07:55", EAST,  WALKING,  "smith5", "smith6",   "black_smith_on_the_way"),
-        SchedulePart("honeywood",             "07:55", "07:57", NORTH, WALKING,  "smith6", "smith7"),
+        SchedulePart("honeywood",             "07:36", "07:37", SOUTH, WALKING,  "smith1", "smith2"),
+        SchedulePart("honeywood",             "07:37", "07:39", SOUTH, WALKING,  "smith2", "smith3",   "black_smith_on_the_way"),
+        SchedulePart("honeywood",             "07:39", "07:49", SOUTH, IMMOBILE, "smith3", "smith3",   "black_and_lennor_meet"),
+        SchedulePart("honeywood",             "07:49", "07:54", SOUTH, WALKING,  "smith3", "smith4",   "black_smith_on_the_way"),
+        SchedulePart("honeywood",             "07:54", "07:56", EAST,  WALKING,  "smith4", "smith5",   "black_smith_on_the_way"),
+        SchedulePart("honeywood",             "07:56", "07:57", EAST,  WALKING,  "smith5", "smith6",   "black_smith_on_the_way"),
+        SchedulePart("honeywood",             "07:57", "07:59", NORTH, WALKING,  "smith6", "smith7"),
 
-        SchedulePart("honeywood_house_elder", "07:57", "07:59", NORTH, WALKING,  "smith8",  "smith9"),
-        SchedulePart("honeywood_house_elder", "07:59", "08:03", EAST,  WALKING,  "smith9",  "smith10", "black_smith_on_the_job"),
-        SchedulePart("honeywood_house_elder", "08:03", "08:05", NORTH, WALKING,  "smith10", "smith11", "black_smith_on_the_job"),
-        SchedulePart("honeywood_house_elder", "08:05", "08:07", WEST,  WALKING,  "smith11", "smith12", "black_smith_on_the_job"),
-        SchedulePart("honeywood_house_elder", "08:07", "08:17", WEST,  IMMOBILE, "smith12", "smith12", "black_and_grahan_meet"),
-        SchedulePart("honeywood_house_elder", "08:17", "08:19", EAST,  WALKING,  "smith12", "smith11", "black_smith_on_the_job"),
-        SchedulePart("honeywood_house_elder", "08:19", "08:21", EAST,  WALKING,  "smith11", "smith13", "black_smith_on_the_job"),
-        SchedulePart("honeywood_house_elder", "08:21", "08:23", EAST,  WALKING,  "smith13", "smith14", "black_smith_on_the_job"),
-        SchedulePart("honeywood_house_elder", "08:23", "08:25", NORTH, WALKING,  "smith14", "smith15", "black_smith_on_the_job"),
-        SchedulePart("honeywood_house_elder", "08:25", "08:31", WEST,  WALKING,  "smith15", "smith16", "black_smith_on_the_job"),
-        SchedulePart("honeywood_house_elder", "08:31", "08:41", NORTH, IMMOBILE, "smith16", "smith16", "black_and_elenora_meet"),
-        SchedulePart("honeywood_house_elder", "08:41", "10:00", NORTH, IMMOBILE, "smith16", "smith16", "black_smith_on_the_job"),
+        SchedulePart("honeywood_house_elder", "07:59", "08:01", NORTH, WALKING,  "smith8",  "smith9"),
+        SchedulePart("honeywood_house_elder", "08:01", "08:05", EAST,  WALKING,  "smith9",  "smith10", "black_smith_on_the_job"),
+        SchedulePart("honeywood_house_elder", "08:05", "08:07", NORTH, WALKING,  "smith10", "smith11", "black_smith_on_the_job"),
+        SchedulePart("honeywood_house_elder", "08:07", "08:09", WEST,  WALKING,  "smith11", "smith12", "black_smith_on_the_job"),
+        SchedulePart("honeywood_house_elder", "08:09", "08:19", WEST,  IMMOBILE, "smith12", "smith12", "black_and_grahan_meet"),
+        SchedulePart("honeywood_house_elder", "08:19", "08:21", EAST,  WALKING,  "smith12", "smith11", "black_smith_on_the_job"),
+        SchedulePart("honeywood_house_elder", "08:21", "08:23", EAST,  WALKING,  "smith11", "smith13", "black_smith_on_the_job"),
+        SchedulePart("honeywood_house_elder", "08:23", "08:25", EAST,  WALKING,  "smith13", "smith14", "black_smith_on_the_job"),
+        SchedulePart("honeywood_house_elder", "08:25", "08:27", NORTH, WALKING,  "smith14", "smith15", "black_smith_on_the_job"),
+        SchedulePart("honeywood_house_elder", "08:27", "08:33", WEST,  WALKING,  "smith15", "smith16", "black_smith_on_the_job"),
+        SchedulePart("honeywood_house_elder", "08:33", "08:43", NORTH, IMMOBILE, "smith16", "smith16", "black_and_elenora_meet"),
+        SchedulePart("honeywood_house_elder", "08:43", "10:00", NORTH, IMMOBILE, "smith16", "smith16", "black_smith_on_the_job"),
         SchedulePart("honeywood_house_elder", "10:00", "10:10", NORTH, IMMOBILE, "smith16", "smith16", "black_smith_is_done"),
 
         SchedulePart("honeywood_house_elder", "10:10", "10:16", EAST,  WALKING,  "smith16", "smith15", "black_smith_on_the_job"),
@@ -69,8 +69,8 @@ class BlackSmith : EntitySchedule() {
     }
 
     private val doorsSchedule: Map<String, String> = mapOf(
-        "07:33" to "door_honeywood_smith",
-        "07:56" to "door_honeywood_elder",
+        "07:35" to "door_honeywood_smith",
+        "07:58" to "door_honeywood_elder",
         "10:43" to "door_honeywood_elder",
         "10:56" to "door_honeywood_smith"
     )

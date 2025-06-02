@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.ScreenUtils
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.mapManager
+import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
@@ -39,7 +40,7 @@ const val FAST_STEP = 0.25f
 
 abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
 
-    private val listener = CutSceneListener { exitScreen() }
+    private val listener = CutSceneListener { possibleExitScreen() }
     val camera = Camera()
     private val worldRenderer = WorldRenderer(camera)
     val actorsStage = Stage(camera.viewport)
@@ -49,6 +50,7 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
 
     lateinit var actions: List<Action>
     var isBgmFading: Boolean = false
+    var isSkippable: Boolean = false
 
     private lateinit var conversationDialog: ConversationDialog
     private var actionId = 0
@@ -70,6 +72,7 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
     override fun show() {
         conversationDialog = ConversationDialog(this)
         actionId = 0
+        isSkippable = preferenceManager.isInDebugMode
         isEnding = false
 
         title.setText("")
@@ -111,7 +114,7 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
             audioManager.certainFadeBgmBgs()
         }
         transitionStage.draw()
-        if (!conversationDialog.isVisible() && !isEnding) {
+        if (!conversationDialog.isVisible() && !isEnding && isSkippable) {
             skipBox.update(dt)
         }
     }
@@ -168,6 +171,10 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
     abstract fun prepare()
 
     abstract fun exitScreen()
+
+    private fun possibleExitScreen() {
+        if (isSkippable) exitScreen()
+    }
 
     fun endCutsceneAndOpenMapWithoutBgmFading(mapTitle: String, spawnId: String) {
         shouldBgmEndAfterCutscene = false
