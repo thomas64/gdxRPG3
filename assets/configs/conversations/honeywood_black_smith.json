@@ -6,12 +6,12 @@
       "2": {
         "choices": [
           {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "text": "*Ask Black if he's seen Grace this morning.*", "nextId": "3"},
-          {"condition": ["i_rc_>=_a_q_quest_royal_sacrifice"], "text": "*Take interest in his work.*", "nextId": "4"},
+          {"text": "*Take interest in his work.*", "nextId": "4"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
-      "3": {"text": ["No, I'm sorry, I just got outside. She might be out playing somewhere?"], "choices": [{"command": "EXIT"}]},
-      "4": {"text": ["The repairs aren't complex, just time-consuming. But I'm happy to lend my skills for their benefit."], "choices": [{"command": "EXIT"}]}
+      "3": {"text": ["No, I'm sorry, I just got outside. She might be out playing somewhere?"], "choices": [{"nextId": "2"}]},
+      "4": {"text": ["The repairs aren't complex, just time-consuming. But I'm happy to lend my skills for their benefit."], "choices": [{"nextId": "2"}]}
     }
   },
   "black_and_lennor_meet"      : {

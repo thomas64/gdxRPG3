@@ -154,27 +154,34 @@
   "bored_and_secluded"                  : {
     "name"   : "Malina",
     "phrases": {
-      "1" : {"text": ["Hi Mozes! You really should check out this priest fella.", "He is so funny! Ha ha!"]},
-      "2" : {
-        "text": ["It's a shame we're not allowed to leave the village by ourselves due to the rising monster threat, but I'm glad this fella came in. He can now brighten my dull and secluded life a bit."], "choices": [
-          {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "nextId": "20"},
-          {"condition": ["i_rc_>=_a_q_quest_royal_sacrifice"], "command": "EXIT"}
-        ]
-      },
-      "20": {
+      "1" : {"text": ["Hi Mozes! You really should check out this priest fella over here. He's so funny! Ha ha!"]},
+      "2" : {"text": ["It's a shame we're not allowed to leave the village by ourselves due to the rising monster threat, but I'm glad this fella came in. He can now brighten my dull and secluded life a bit."]},
+      "3" : {
         "choices": [
-          {"text": "*Ask Malina if she's seen Grace this morning.*", "nextId": "21"},
+          {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "text": "*Ask Malina if she's seen Grace this morning.*", "nextId": "31"},
+          {"text": "*Ask about her dull and secluded life.*", "nextId": "10"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
-      "21": {"face": "youngwoman01", "name": "Malina", "text": ["No, I haven't seen Grace this morning, Mozes. Is everything okay?"]},
-      "22": {"face": "mozes", "name": "Mozes", "text": ["I don't know where she is. She wasn't in her bed this morning."]},
-      "23": {"face": "youngwoman01", "name": "Malina", "text": ["Maybe she went to Honeywood Forest? She likes to go there."]},
-      "24": {"face": "mozes", "name": "Mozes", "text": ["I'm afraid she might have. There are orcs in the forest."]},
-      "25": {"face": "youngwoman01", "name": "Malina", "text": ["I'll accompany you on your search!"]},
-      "26": {"face": "mozes", "name": "Mozes", "text": ["Malina, would you mind looking for her here in the village instead?"]},
-      "27": {"face": "youngwoman01", "name": "Malina", "text": ["Of course, I will. Good luck finding her."], "choices": [{"command": "EXIT", "nextId": "30"}]},
-      "30": {"text": ["Have you found her yet? Hurry up! Go to Honeywood Forest."], "choices": [{"command": "EXIT", "nextId": "30"}]}
+      "10": {"text": ["Oh, you know, the usual."]},
+      "11": {"text": ["Well actually, I'm glad we're not allowed to leave the village by ourselves."]},
+      "12": {"text": ["The monsters are getting more aggressive every day. I'm afraid that if I leave the village, I might not come back alive."]},
+      "13": {"text": ["But I do know something that may come in handy against monsters with weapons."]},
+      "14": {"text": ["If you hit them with a weapon, they will die."]},
+      "15": {"text": [". . ."]},
+      "16": {"text": ["No? Nothing? No smile? No chuckle?"]},
+      "17": {"text": ["Then let me tell you something about weapon [BLUE]advantage[BLACK] and [FIREBRICK]disadvantage[BLACK]."]},
+      "18": {"text": ["Swords have advantage against axes, axes have advantage against spears, and spears have advantage against swords."]},
+      "19": {"text": ["This also means swords have disadvantage against spears, spears have disadvantage against axes, and axes have disadvantage against swords."]},
+      "20": {"text": ["So: swords > axes > spears > swords."]},
+      "21": {"text": ["Neat, right?"], "choices": [{"nextId": "3"}]},
+      "31": {"face": "youngwoman01", "name": "Malina", "text": ["No, I haven't seen Grace this morning, Mozes. Is everything okay?"]},
+      "32": {"face": "mozes", "name": "Mozes", "text": ["I don't know where she is. She wasn't in her bed this morning."]},
+      "33": {"face": "youngwoman01", "name": "Malina", "text": ["Maybe she went to Honeywood Forest? She likes to go there."]},
+      "34": {"face": "mozes", "name": "Mozes", "text": ["I'm afraid she might have. There are orcs in the forest."]},
+      "35": {"face": "youngwoman01", "name": "Malina", "text": ["I'll accompany you on your search!"]},
+      "36": {"face": "mozes", "name": "Mozes", "text": ["Malina, would you mind looking for her here in the village instead?"]},
+      "37": {"face": "youngwoman01", "name": "Malina", "text": ["Of course, I will. Good luck finding her."], "choices": [{"nextId": "3"}]}
     }
   },
   "priest_honeywood"                    : {

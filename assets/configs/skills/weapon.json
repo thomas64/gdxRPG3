@@ -7,9 +7,9 @@
       "- 'Sword' increases your chance to hit with swords in combat.",
       "  Each rank in 'Sword' increases 'Chance to hit' by 5%.",
       "",
-      "- Swords have an advantage against enemies with axes,",
-      "  and a disadvantage against enemies with spears.",
-      "  Swords also have an advantage or a disadvantage against",
+      "- Swords have advantage against enemies with axes,",
+      "  and disadvantage against enemies with spears.",
+      "  Swords also have advantage or disadvantage against",
       "  certain weaponless enemies."
     ]
   },
@@ -21,9 +21,9 @@
       "- 'Axe' increases your chance to hit with axes in combat.",
       "  Each rank in 'Axe' increases 'Chance to hit' by 5%.",
       "",
-      "- Axes have an advantage against enemies with spears,",
-      "  and a disadvantage against enemies with swords.",
-      "  Axes also have an advantage or a disadvantage against",
+      "- Axes have advantage against enemies with spears,",
+      "  and disadvantage against enemies with swords.",
+      "  Axes also have advantage or disadvantage against",
       "  certain weaponless enemies."
     ]
   },
@@ -35,9 +35,9 @@
       "- 'Spear' increases your chance to hit with spears in combat.",
       "  Each rank in 'Spear' increases 'Chance to hit' by 5%.",
       "",
-      "- Spears have an advantage against enemies with swords,",
-      "  and a disadvantage against enemies with axes.",
-      "  Spears also have an advantage or a disadvantage against",
+      "- Spears have advantage against enemies with swords,",
+      "  and disadvantage against enemies with axes.",
+      "  Spears also have advantage or disadvantage against",
       "  certain weaponless enemies."
     ]
   },
@@ -49,9 +49,9 @@
       "- 'Dagger' increases your chance to hit with daggers in combat.",
       "  Each rank in 'Dagger' increases 'Chance to hit' by 5%.",
       "",
-      "- Daggers have an advantage against enemies with throwing weapons,",
-      "  and a disadvantage against enemies with bows.",
-      "  Daggers also have an advantage or a disadvantage against",
+      "- Daggers have advantage against enemies with throwing weapons,",
+      "  and disadvantage against enemies with bows.",
+      "  Daggers also have advantage or disadvantage against",
       "  certain weaponless enemies."
     ]
   },
@@ -63,9 +63,9 @@
       "- 'Throw' increases your chance to hit with throwing weapons in combat.",
       "  Each rank in 'Throw' increases 'Chance to hit' by 5%.",
       "",
-      "- Throwing weapons have an advantage against enemies with bows,",
-      "  and a disadvantage against enemies with daggers.",
-      "  Throwing weapons also have an advantage or a disadvantage against",
+      "- Throwing weapons have advantage against enemies with bows,",
+      "  and disadvantage against enemies with daggers.",
+      "  Throwing weapons also have advantage or disadvantage against",
       "  certain weaponless enemies."
     ]
   },
@@ -77,9 +77,9 @@
       "- 'Bow' increases your chance to hit with bows in combat.",
       "  Each rank in 'Bow' increases 'Chance to hit' by 5%.",
       "",
-      "- Bows have an advantage against enemies with daggers,",
-      "  and a disadvantage against enemies with throwing weapons.",
-      "  Bows also have an advantage or a disadvantage against",
+      "- Bows have advantage against enemies with daggers,",
+      "  and disadvantage against enemies with throwing weapons.",
+      "  Bows also have advantage or disadvantage against",
       "  certain weaponless enemies."
     ]
   },
@@ -91,12 +91,12 @@
       "- 'Staff' increases your chance to hit with staffs in combat.",
       "  Each rank in 'Staff' increases 'Chance to hit' by 5%.",
       "",
-      "- Fire has an advantage against enemies with wind,",
-      "  and a disadvantage against enemies with thunder.",
-      "  Wind has an advantage against enemies with thunder,",
-      "  and a disadvantage against enemies with fire.",
-      "  Thunder has an advantage against enemies with fire,",
-      "  and a disadvantage against enemies with wind."
+      "- Fire has advantage against enemies with wind,",
+      "  and disadvantage against enemies with thunder.",
+      "  Wind has advantage against enemies with thunder,",
+      "  and disadvantage against enemies with fire.",
+      "  Thunder has advantage against enemies with fire,",
+      "  and disadvantage against enemies with wind."
     ]
   },
   "shield": {

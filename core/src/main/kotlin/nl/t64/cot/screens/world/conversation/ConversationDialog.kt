@@ -18,6 +18,7 @@ import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.profileManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
+import nl.t64.cot.components.conversation.ConversationChoice
 import nl.t64.cot.components.conversation.ConversationCommand
 import nl.t64.cot.components.conversation.ConversationGraph
 import nl.t64.cot.components.conversation.NoteDatabase
@@ -106,6 +107,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
 
     fun loadNote(noteId: String) {
         conversationId = noteId
+        faceId = ""
         graph = NoteDatabase.getNoteById(conversationId)
         fillDialogForNote()
         playSe(AudioEvent.SE_CONVERSATION_START)
@@ -473,7 +475,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun populateFace() {
-        val phraseFace = graph.getCurrentFace()
+        val phraseFace: String = graph.getCurrentFace()
         if (phraseFace.isNotBlank()) {
             val mainTable = dialog.contentTable.getChild(0) as Table
             val faceTable = mainTable.getChild(0) as Table
@@ -484,7 +486,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun populateName() {
-        val phraseName = graph.getCurrentName()
+        val phraseName: String = graph.getCurrentName()
         if (phraseName.isNotBlank()) {
             val mainTable = dialog.contentTable.getChild(0) as Table
             val faceTable = mainTable.getChild(0) as Table
@@ -495,7 +497,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun populatePhrase() {
-        val text = graph.getCurrentPhrase().joinToString(System.lineSeparator())
+        val text: String = graph.getCurrentPhrase().joinToString(System.lineSeparator())
         if (text.isNotBlank()) {
             label.restart("{COLOR=BLACK}$text")
             if (conversationId.startsWith("bury_")) {
@@ -507,7 +509,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun populateChoices() {
-        val choices = GdxArray(graph.getAssociatedChoices())
+        val choices = GdxArray<ConversationChoice>(graph.getAssociatedChoices())
         answers.populateChoices(choices)
         repositionScrollPaneBasedOnContent()
     }
@@ -515,6 +517,8 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     private fun repositionScrollPaneBasedOnContent() {
         if (label.text.isBlank()) {
             rowWithScrollPane.padTop(-SCROLL_PANE_TOP_PAD).padLeft(-PAD).padRight(-(PAD * 2f))
+        } else if (faceId.isBlank() && graph.getCurrentFace().isBlank()) {
+            rowWithScrollPane.padTop(0f).padLeft(PAD + Constant.FACE_SIZE + PAD + ARROW_PAD_LEFT)
         } else {
             rowWithScrollPane.padTop(0f).padLeft(ARROW_PAD_LEFT)
         }

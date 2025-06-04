@@ -58,7 +58,7 @@
       "30" : {"text": ["A tree this large? I'll probably be busy with it until about 17:00. Afterward, the road is clear and you'll be able to enter Honeywood Farm."], "choices": [{"nextId": "2"}]},
       "40" : {"text": ["I'm sorry, Mozes, I'm working as fast as I can. You'll have to wait until 17:00, or you could assist me to speed up the process."], "choices": [{"nextId": "2"}]},
       "50" : {"text": ["Aw come on! Really? I'm trying! It's one heavy tree, Mozes! I literally can't do it before 17:00 without any assistance!"], "choices": [{"nextId": "2"}]},
-      "60" : {"text": ["A month or so ago, I was thinking of buying a horse for myself. I even thought of a cool name for it, Horace. But then I thought, 'Why would I need a horse?' Haha, but today I could really use a horse!"]},
+      "60" : {"text": ["A month or so ago, I was thinking of buying a horse for myself. I even thought of a cool name for it, Horace. But then I thought, 'Why would I need a horse?' Ha ha, but today I could really use a horse!"]},
       "61" : {"text": ["So, if you somehow could lend me a horse, just for today, along with 2 tow ropes, I could clear the road for you immediately."], "choices": [{"command": "ACCEPT_QUEST", "nextId": "62"}]},
       "62" : {"text": ["You could ask the village elder about this matter. He's wise, he will probably have some suggestions."], "choices": [{"command": "EXIT", "nextId": "70"}]},
       "65" : {"text": ["That won't be necessary anymore. I'm almost done with the tree. I'll be finished by 17:00. But thanks for the offer."], "choices": [{"nextId": "2"}]},

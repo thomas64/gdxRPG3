@@ -44,7 +44,19 @@
   "fairy_general"         : {
     "name"   : "Fairy",
     "phrases": {
-      "1": {"text": ["Young lovely Mozes, it's wonderful to finally have you in our midst."], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["Young lovely Mozes, it's wonderful to finally welcome you among us."]},
+      "2": {
+        "choices": [
+          {"text": "*Ask if she has anything she'd like to share with you.*", "nextId": "3"},
+          {"text": "*Thank her for the warm welcome and take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "3": {"text": ["What a delightful question, dear Mozes. Of course I have something to share with you."]},
+      "4": {"text": ["Let me tell you about magic [BLUE]advantage[BLACK] and [FIREBRICK]disadvantage[BLACK]."]},
+      "5": {"text": ["Fire magic has advantage against wind magic, wind magic has advantage against thunder magic, and thunder magic has advantage against fire magic."]},
+      "6": {"text": ["This also means fire magic has disadvantage against thunder magic, thunder magic has disadvantage against wind magic, and wind magic has disadvantage against fire magic."]},
+      "7": {"text": ["So: fire > wind > thunder > fire."]},
+      "8": {"text": ["What do you think of that, Mozes?"], "choices": [{"nextId": "2"}]}
     }
   },
   "quest_mother_fairy"    : {
@@ -136,7 +148,7 @@
       "1": {"text": ["Dear young Mozes, shall we pray to the Goddess Tree so that your life will be in Her save hands?"]},
       "2": {
         "choices": [
-          {"text": "*How would praying to a tree would make you safe?* [BLUE](Save game)", "nextId": "3"},
+          {"text": "*How would praying to a tree make you safe? But sure.* [BLUE](Save game)", "nextId": "3"},
           {"text": "*Politely let her know that won't be necessary. Take your leave.*", "command": "EXIT"}
         ]
       },
@@ -149,7 +161,7 @@
       "1": {"text": ["Wonderful dear Mozes, please lie down here on this bed of healing flowers so that your weary bones may find some rest."]},
       "2": {
         "choices": [
-          {"text": "*Healing flowers? Is that a thing? Accept nonetheless.* [BLUE](Restore health)", "command": "HEAL_LIFE_01", "nextId": "3"},
+          {"text": "*Healing flowers? Is that a thing? Accept anyway.* [BLUE](Restore health)", "command": "HEAL_LIFE_01", "nextId": "3"},
           {"text": "*Kindly let her know that you'll pass this time. Take your leave.*", "command": "EXIT"}
         ]
       },
