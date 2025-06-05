@@ -203,7 +203,7 @@ class SceneHoneywoodFarmAttack1 : CutsceneScreen() {
                 gameData.party.addHero(luana)
             }
 
-            BattleScreen.load("farm_battle", this)
+            BattleScreen.load("farm_battle1", this)
         }
     }
 

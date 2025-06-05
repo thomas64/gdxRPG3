@@ -24,7 +24,7 @@
     "spells"   : {
     },
     "inventory": {
-      "weapon": "attack_80_10"
+      "weapon": "attack_80_15"
     }
   },
   "purple_bat": {
@@ -52,7 +52,7 @@
     "spells"   : {
     },
     "inventory": {
-      "weapon": "attack_80_20"
+      "weapon": "attack_80_25"
     }
   }
 }

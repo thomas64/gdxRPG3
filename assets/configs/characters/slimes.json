@@ -24,7 +24,7 @@
     "spells"   : {
     },
     "inventory": {
-      "weapon": "attack_65_13",
+      "weapon": "attack_65_20",
       "chest" : "armor_1"
     }
   },
@@ -53,7 +53,7 @@
     "spells"   : {
     },
     "inventory": {
-      "weapon": "attack_65_26",
+      "weapon": "attack_65_30",
       "chest" : "armor_6"
     }
   },
@@ -82,7 +82,7 @@
     "spells"   : {
     },
     "inventory": {
-      "weapon": "attack_65_26",
+      "weapon": "attack_65_30",
       "chest" : "armor_6"
     }
   }

@@ -70,6 +70,7 @@ internal class StatsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
 
     override fun doAction() {
         if (isCalcsSelected()) return
+        hideTooltip()
         val statToUpgrade = selectedHero.getAllStats()[selectedIndex]
         StatUpgrader.upgradeStat(statToUpgrade, table.stage) { hasJustUpdated = true }
     }

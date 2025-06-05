@@ -175,7 +175,7 @@ class SceneHoneywoodFarmAttack1Alt : CutsceneScreen() {
     }
 
     override fun exitScreen() {
-        endCutsceneAnd { BattleScreen.load("farm_battle", this) }
+        endCutsceneAnd { BattleScreen.load("farm_battle1", this) }
     }
 
     override fun onNotifyBattleWon(battleId: String, spoils: Loot) {
