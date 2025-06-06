@@ -33,7 +33,7 @@ fun handleWin(winBattle: () -> Unit) {
 }
 
 fun <T> InputEvent.selectPreviousNonGrayOption() {
-    var selected: T? = this.getSelected<T>()
+    var selected: T? = this.getSelected()
     while (selected != null && selected.toString().startsWith("[GRAY]")) {
         selected = this.getPreviousOption()
     }
@@ -41,7 +41,7 @@ fun <T> InputEvent.selectPreviousNonGrayOption() {
 }
 
 fun <T> InputEvent.selectNextNonGrayOption() {
-    var selected: T? = this.getSelected<T>()
+    var selected: T? = this.getSelected()
     while (selected != null && selected.toString().startsWith("[GRAY]")) {
         selected = this.getNextOption()
     }

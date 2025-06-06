@@ -375,6 +375,8 @@ class BattleScreen : Screen {
         }
 
         val message: String = messages.removeFirst()
+        handleEffectBasedOn(message)
+
         val messageDialog = MessageDialog(message)
         if (messages.isNotEmpty()) {
             messageDialog.disableClosingSound()
@@ -383,8 +385,16 @@ class BattleScreen : Screen {
             showMessages(messages)
         }
         messageDialog.show(stage, getAudioEventBasedOn(message))
-        if (message.contains("did") && message.contains("damage.")) {
-            ShakeEffect(tableManager.battleFieldTable, currentTarget.character.name).start()
+    }
+
+    private fun handleEffectBasedOn(message: String) {
+        when {
+            message.contains("is defeated.") -> {
+                FadeEffect(tableManager.battleFieldTable, currentTarget.character.name).start()
+            }
+            message.contains("did") && message.contains("damage.") -> {
+                ShakeEffect(tableManager.battleFieldTable, currentTarget.character.name).start()
+            }
         }
     }
 

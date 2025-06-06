@@ -65,7 +65,7 @@ internal class StorageUI(
     }
 
     override fun getCounterpartSlotsTable(): CounterpartSlotsTable {
-        return storageSlotsTable;
+        return storageSlotsTable
     }
 
     fun updateSelectedHero(updateHero: () -> Unit) {

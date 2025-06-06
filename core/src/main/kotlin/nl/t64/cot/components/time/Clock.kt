@@ -111,7 +111,7 @@ class Clock {
     }
 
     fun isCurrentTimeAfter(time: String): Boolean {
-        return currentTime.isNowOrAfter(time.toGameTime());
+        return currentTime.isNowOrAfter(time.toGameTime())
     }
 
     fun isCurrentTimeAt(time: String): Boolean {

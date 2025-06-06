@@ -163,14 +163,12 @@ class BattleFieldTableBuilder {
         add(Image(Utils.createFullBorderWhite()).apply { color = Color.RED }).padRight(1f)
     }
 
-    private fun createImageOf(participant: Participant): Container<Image> {
-        return Container(
-            Image(Utils.getCharImage(participant.character.id)[0][1])
-                .apply {
-                    setScaling(Scaling.none)
-                    name = participant.character.name
-                }
-        ).left()
+    private fun createImageOf(participant: Participant): Image {
+        return Image(Utils.getCharImage(participant.character.id)[0][1])
+            .apply {
+                setScaling(Scaling.none)
+                name = participant.character.name
+            }
     }
 
     private fun Stack.addPossibleCount(participant: Participant) {

@@ -54,7 +54,7 @@ class Stagger(
         target.character.takeDamage(damageDone)
         val staggerMessage: String = handleStagger()
 
-        val critMessage: String = if (isCriticalHit) "A critical hit!  " else ""
+        val critMessage: String = if (isCriticalHit) "A critical hit! " else ""
         messages.add("""
             ${possibleAddEffectiveMessage()}
             $critMessage$name did $damageDone damage.
