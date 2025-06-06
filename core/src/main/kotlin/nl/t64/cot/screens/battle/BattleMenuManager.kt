@@ -27,7 +27,6 @@ class BattleMenuManager(
     var buttonTablePreBattle: Table = Table()
     var buttonTableAction: Table = Table()
     private var buttonTableHero: Table = Table()
-    private var buttonTableReposition: Table = Table()
     private var buttonTableMove: Table = Table()
     private var buttonTableAttack: Table = Table()
     var buttonTableTarget: Table = Table()
@@ -37,7 +36,6 @@ class BattleMenuManager(
     private val allButtonTables: List<Table>
         get() = listOf(buttonTablePreBattle,
                        buttonTableHero,
-                       buttonTableReposition,
                        buttonTableAction,
                        buttonTableMove,
                        buttonTableAttack,
@@ -46,8 +44,6 @@ class BattleMenuManager(
                        buttonTableWeapon)
 
     private lateinit var preBattle: SelectPreBattleListener
-    private lateinit var heroForReposition: SelectHeroListener
-    private lateinit var reposition: SelectRepositionListener
     private lateinit var heroForPrePreview: SelectHeroListener
     private lateinit var prePreviewAttack: SelectAttackListener
     private lateinit var prePreviewTarget: SelectTargetListener
@@ -65,7 +61,6 @@ class BattleMenuManager(
         openPauseMenu: () -> Unit,
         showInventoryScreenPreBattle: () -> Unit,
         startBattle: () -> Unit,
-        heroIsSelectedForReposition: (String) -> Unit,
         heroIsSelectedForPrePreview: (String) -> Unit,
         showPreviewDialog: (BattleAbilityItem, String) -> Unit,
         showInventoryScreen: () -> Unit,
@@ -79,9 +74,7 @@ class BattleMenuManager(
         showConfirmWeaponDialog: (BattleWeaponItem) -> Unit
     ) {
         // @formatter:off
-        preBattle = SelectPreBattleListener(winBattle, openPauseMenu, ::selectReposition, showInventoryScreenPreBattle, ::selectPrePreviewAttack, startBattle)
-        heroForReposition = SelectHeroListener(heroIsSelectedForReposition, ::returnToPreBattle)
-        reposition = SelectRepositionListener(battleField::repositionHeroLeft, battleField::repositionHeroRight, ::returnToHeroForReposition, ::returnToHeroForReposition)
+        preBattle = SelectPreBattleListener(winBattle, openPauseMenu, showInventoryScreenPreBattle, ::selectPrePreviewAttack, startBattle)
         heroForPrePreview = SelectHeroListener(heroIsSelectedForPrePreview, ::returnToPreBattle)
         prePreviewAttack = SelectAttackListener(::attackInPrePreviewIsSelected, ::returnToHeroForPrePreview)
         prePreviewTarget = SelectTargetListener(showPreviewDialog, ::returnToPrePreviewAttack)
@@ -106,22 +99,10 @@ class BattleMenuManager(
     }
 
 
-    private fun selectReposition() {
-        screenBuilder.buttonTableMainMenuIndex = (buttonTablePreBattle.children.last() as GdxList<*>).selectedIndex
-        buttonTablePreBattle.remove()
-        setupHeroTableForReposition()
-    }
-
     private fun selectPrePreviewAttack() {
         screenBuilder.buttonTableMainMenuIndex = (buttonTablePreBattle.children.last() as GdxList<*>).selectedIndex
         buttonTablePreBattle.remove()
         setupHeroTableForPrePreview()
-    }
-
-    fun heroIsSelectedForReposition() {
-        screenBuilder.buttonTableSelectHeroIndex = (buttonTableHero.children.last() as GdxList<*>).selectedIndex
-        buttonTableHero.remove()
-        setupRepositionTable()
     }
 
     fun heroIsSelectedForPrePreview() {
@@ -183,11 +164,6 @@ class BattleMenuManager(
         setupPreBattleTable()
     }
 
-    private fun returnToHeroForReposition() {
-        buttonTableReposition.remove()
-        setupHeroTableForReposition()
-    }
-
     private fun returnToHeroForPrePreview() {
         buttonTableAttack.remove()
         setupHeroTableForPrePreview()
@@ -221,16 +197,6 @@ class BattleMenuManager(
     fun setupPreBattleTable() {
         buttonTablePreBattle = screenBuilder.createButtonTablePreBattle()
         setupTable(buttonTablePreBattle, preBattle)
-    }
-
-    private fun setupHeroTableForReposition() {
-        buttonTableHero = screenBuilder.createButtonTableHero(turnManager.getOnlyHeroes())
-        setupTable(buttonTableHero, heroForReposition)
-    }
-
-    private fun setupRepositionTable() {
-        buttonTableReposition = screenBuilder.createButtonTableMove()
-        setupTable(buttonTableReposition, reposition)
     }
 
     private fun setupHeroTableForPrePreview() {

@@ -18,11 +18,14 @@ class BattleField(
     var startingSpace: Int = -1
 
     init {
-        val heroParticipants = participants.filter { it.isHero }
-        val enemyParticipants = participants.filter { !it.isHero }
+        val heroParticipants: List<Participant> = participants.filter { it.isHero }
+        val enemyParticipants: List<Participant> = participants.filter { !it.isHero }
 
-        val heroIndices: List<Int> = (0 until 8).shuffled()
-        val enemyIndices: List<Int> = (12 until 20).shuffled()
+        val heroRange: Int = minOf(BATTLE_FIELD_SIZE, 10 + (6 - heroParticipants.size) * 2)
+        val enemyRange: Int = maxOf(0, BATTLE_FIELD_SIZE - (10 + (6 - enemyParticipants.size) * 2))
+
+        val heroIndices: List<Int> = (0 until heroRange).shuffled().take(heroParticipants.size)
+        val enemyIndices: List<Int> = (enemyRange until BATTLE_FIELD_SIZE).shuffled().take(enemyParticipants.size)
 
         heroParticipants.forEachIndexed { index, participant -> heroSpaces[heroIndices[index]] = participant }
         enemyParticipants.forEachIndexed { index, participant -> enemySpaces[enemyIndices[index]] = participant }
@@ -50,18 +53,6 @@ class BattleField(
         return enemySpaces.filterNotNull()
             .groupingBy { it.character.id }
             .eachCount()
-    }
-
-    fun repositionHeroRight() {
-        val currentIndex: Int = getSpaceIndexOfCurrentParticipant()
-        val allSpacesFromHere: IntProgression = currentIndex + 1 until 8
-        moveHero(allSpacesFromHere)
-    }
-
-    fun repositionHeroLeft() {
-        val currentIndex: Int = getSpaceIndexOfCurrentParticipant()
-        val allSpacesFromHere: IntProgression = currentIndex - 1 downTo 0
-        moveHero(allSpacesFromHere)
     }
 
     fun moveHeroRight() {

@@ -85,8 +85,8 @@ object ConditionDatabase {
         get() = !gameData.portals.isActivated(Portal.HONEYWOOD_GREAT_TREE.name)
             && gameData.portals.isActivated(Portal.HONEYWOOD_HOUSE_ELDER_B2.name)
     private val isBlackCurrentlyNotOpeningHisDoor
-        get() = gameData.clock.isCurrentTimeBefore("07:33")
-            || gameData.clock.isCurrentTimeAfter("07:36")
+        get() = gameData.clock.isCurrentTimeBefore("07:35")
+            || gameData.clock.isCurrentTimeAfter("07:38")
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

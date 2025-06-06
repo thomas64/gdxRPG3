@@ -284,7 +284,6 @@ class BattleScreenBuilder {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun GdxList<String>.fillWithPreBattleActions(): GdxList<String> {
-        items.add("Reposition party")
         items.add("Select equipment")
         items.add("Preview hit and damage")
         items.add("Start battle")

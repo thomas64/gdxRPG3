@@ -10,7 +10,6 @@ import nl.t64.cot.constants.Constant
 class SelectPreBattleListener(
     private val winBattle: () -> Unit,
     private val pauseMenu: () -> Unit,
-    private val reposition: () -> Unit,
     private val inventoryScreen: () -> Unit,
     private val selectPreview: () -> Unit,
     private val startBattle: () -> Unit
@@ -36,10 +35,6 @@ class SelectPreBattleListener(
     private fun InputEvent.handleEnter() {
         getSelected<String>()?.let { selected ->
             when {
-                "Reposition" in selected -> {
-                    playSe(AudioEvent.SE_MENU_CONFIRM)
-                    reposition.invoke()
-                }
                 "Select" in selected -> inventoryScreen.invoke()
                 "Preview" in selected -> {
                     playSe(AudioEvent.SE_MENU_CONFIRM)

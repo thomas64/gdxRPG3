@@ -64,7 +64,7 @@
   "guide_event_battle_turn_order"             : {
     "type": "messagebox",
     "text": [
-      "At the top of the screen, you can see the Turn order.",
+      "At the top of the screen, you can see the turn order.",
       "The character highlighted in [GOLDENROD]yellow[BLACK] will act first.",
       "",
       "The turn order is based on the Speed attribute.",

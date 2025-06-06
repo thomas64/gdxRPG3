@@ -215,11 +215,6 @@ class BattleScreen : Screen {
         isPreBattle = false
     }
 
-    private fun heroIsSelectedForReposition(selectedHero: String) {
-        currentParticipant = turnManager.participants.first { it.character.name == selectedHero }
-        menuManager.heroIsSelectedForReposition()
-    }
-
     private fun heroIsSelectedForPrePreview(selectedHero: String) {
         currentParticipant = turnManager.participants.first { it.character.name == selectedHero }
         menuManager.heroIsSelectedForPrePreview()
@@ -425,7 +420,6 @@ class BattleScreen : Screen {
             ::openPauseMenu,
             ::showInventoryScreenPreBattle,
             ::startBattle,
-            ::heroIsSelectedForReposition,
             ::heroIsSelectedForPrePreview,
             ::showPreviewDialog,
             ::showInventoryScreen,
