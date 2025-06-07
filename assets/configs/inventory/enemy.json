@@ -31,21 +31,13 @@
     "group"     : "CHEST",
     "protection": 1
   },
-  "armor_2"     : {
-    "group"     : "CHEST",
-    "protection": 2
-  },
-  "armor_3"     : {
-    "group"     : "CHEST",
-    "protection": 3
-  },
   "armor_6"     : {
     "group"     : "CHEST",
     "protection": 6
   },
-  "armor_10"     : {
+  "armor_8"     : {
     "group"     : "CHEST",
-    "protection": 10
+    "protection": 8
   },
   "armor_50"    : {
     "group"     : "CHEST",

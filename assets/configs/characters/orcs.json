@@ -39,7 +39,7 @@
     },
     "inventory": {
       "weapon": "basic_axe",
-      "chest" : "armor_10"
+      "chest" : "armor_8"
     }
   },
   "orc_scout_spear"   : {
@@ -82,7 +82,7 @@
     },
     "inventory": {
       "weapon": "basic_spear",
-      "chest" : "armor_10"
+      "chest" : "armor_8"
     }
   },
   "orc_scout_sword"   : {
@@ -125,7 +125,7 @@
     },
     "inventory": {
       "weapon": "basic_sword",
-      "chest" : "armor_10"
+      "chest" : "armor_8"
     }
   },
   "orc_sergeant_axe"  : {

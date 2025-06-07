@@ -384,7 +384,7 @@
         "choices": [
           {"condition": ["i_n_1_>=_item_horse_medicine"], "text": "[Horse Medicine] *Deliver the medicine from Elenora.*", "command": "PROVIDE_QUEST_ITEM", "nextId": "51"},
           {"text": "*Tell her you'll do your best. Take your leave.*", "command": "EXIT", "nextId": "40"},
-          {"text": "*Too much trouble. You'll go for another (better) horse. Take your leave.*", "command": "EXIT", "nextId": "41"}
+          {"text": "*Too much hassle. You'll find another (better) horse. Take your leave.*", "command": "EXIT", "nextId": "41"}
         ]
       },
       "40"  : {"text": ["Hi Mozes, do you have anything for Enopa?"], "choices": [{"nextId": "45"}]},
