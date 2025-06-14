@@ -38,13 +38,7 @@ class Stagger(
                 Damage:    ${String.format("%3d", calculateDamage())}
                 Crit:      ${String.format("%3d", calculateCriticalHitPercentage())} %
             """.trimIndent().trimMargin()
-        } ?: """
-            $this
-
-            Target: ${target.character.name}
-
-            No weapon equipped!
-        """.trimIndent()
+        } ?: createNoWeaponMessage()
     }
 
     override fun handleSuccess(messages: ArrayDeque<String>) {

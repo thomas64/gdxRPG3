@@ -130,6 +130,15 @@ abstract class BattleAbilityItem(
         return (damage / weaponTriangle).toInt().coerceAtLeast(1)
     }
 
+    protected fun createNoWeaponMessage(): String {
+        return """
+            $name
+
+            No weapon equipped.
+            [FIREBRICK]Disadvantage![BLACK]
+        """.trimIndent()
+    }
+
     protected fun possibleCreateGrayName(): AbilityItem {
         if (isWeaponAllowed() && hasEnoughApSp()) {
             return abilityItem
