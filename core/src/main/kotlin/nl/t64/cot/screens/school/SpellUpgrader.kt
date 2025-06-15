@@ -28,7 +28,6 @@ class SpellUpgrader private constructor(
     private val selectedHero: HeroItem = InventoryUtils.getSelectedHero()
     private val spellToUpgrade: SpellItem = selectedHero.getSpellById(teacherSpell.id)
     private val wizardSkill: Int = selectedHero.getSkillById(SkillItemId.WIZARD).rank
-    private val totalScholar: Int = selectedHero.getCalculatedTotalSkillOf(SkillItemId.SCHOLAR)
     private val spellName: String = spellToUpgrade.name
 
     private val isWizard: Boolean = selectedHero.school != SchoolType.NONE
@@ -38,7 +37,7 @@ class SpellUpgrader private constructor(
             || spellToUpgrade.school == SchoolType.NEUTRAL
             || selectedHero.school == SchoolType.UNKNOWN
     private val hasEnoughWizardSkill: Boolean = wizardSkill >= spellToUpgrade.minWizard
-    private val xpCost: Int = spellToUpgrade.getXpCostForNextRank(teacherSpell, wizardSkill, totalScholar)
+    private val xpCost: Int = spellToUpgrade.getXpCostForNextRank(teacherSpell, wizardSkill)
     private val hasEnoughXp: Boolean = selectedHero.hasEnoughXpFor(xpCost)
     private val goldCost: Int = spellToUpgrade.getGoldCostForNextRank(teacherSpell, wizardSkill)
     private val hasEnoughGold: Boolean = gameData.inventory.hasEnoughOfItem("gold", goldCost)

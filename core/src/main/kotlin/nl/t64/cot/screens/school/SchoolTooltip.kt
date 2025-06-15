@@ -9,11 +9,11 @@ import nl.t64.cot.screens.inventory.tooltip.PersonalityTooltip
 
 class SchoolTooltip : PersonalityTooltip() {
 
-    override fun getDescription(personalityItem: PersonalityItem, totalScholar: Int): String {
+    override fun getDescription(personalityItem: PersonalityItem): String {
         val teacherSpell = personalityItem as SpellItem
         val heroSpell = InventoryUtils.getSelectedHero().getSpellById(teacherSpell.id)
         val wizardRank = InventoryUtils.getSelectedHero().getSkillById(SkillItemId.WIZARD).rank
-        return heroSpell.getTeacherDescription(teacherSpell, wizardRank, totalScholar)
+        return heroSpell.getTeacherDescription(teacherSpell, wizardRank)
     }
 
 }

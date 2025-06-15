@@ -9,7 +9,6 @@ import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.skills.SkillDatabase
 import nl.t64.cot.components.party.skills.SkillItem
-import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.screens.inventory.BaseTable
 import nl.t64.cot.screens.inventory.InventoryUtils
 import nl.t64.cot.screens.inventory.ListenerKeyVertical
@@ -84,8 +83,7 @@ internal class AcademyTable(academyId: String, tooltip: AcademyTooltip) : BaseTa
     private fun canBeUpgradedBy(trainerSkill: SkillItem): Boolean {
         val selectedHero: HeroItem = InventoryUtils.getSelectedHero()
         val heroSkill: SkillItem = selectedHero.getSkillById(trainerSkill.id)
-        val heroScholarSkill: Int = selectedHero.getCalculatedTotalSkillOf(SkillItemId.SCHOLAR)
-        val xpCost: Int = heroSkill.getXpCostForNextRank(trainerSkill, heroScholarSkill)
+        val xpCost: Int = heroSkill.getXpCostForNextRank(trainerSkill)
         val goldCost: Int = heroSkill.getGoldCostForNextRank(trainerSkill)
 
         return selectedHero.isAlive

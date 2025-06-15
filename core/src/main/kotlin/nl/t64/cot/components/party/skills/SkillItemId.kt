@@ -19,7 +19,6 @@ enum class SkillItemId : SuperEnum {
     MECHANIC,
     RANGER,
     MERCHANT,
-    SCHOLAR,
 
     // Combat Skills
     STEALTH,
@@ -84,7 +83,7 @@ enum class SkillItemId : SuperEnum {
 
     fun isCivilSkill(): Boolean {
         return when (this) {
-            ALCHEMIST, MECHANIC, RANGER, MERCHANT, SCHOLAR -> true
+            ALCHEMIST, MECHANIC, RANGER, MERCHANT -> true
             else -> false
         }
     }

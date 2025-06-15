@@ -7,9 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.components.party.PersonalityItem
-import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.screens.FontProvider
-import nl.t64.cot.screens.inventory.InventoryUtils
 import nl.t64.cot.screens.inventory.itemslot.ItemSlot
 
 
@@ -43,8 +41,7 @@ open class PersonalityTooltip : BaseTooltip() {
     private fun updateDescription(personalityItem: PersonalityItem) {
         window.clear()
 
-        val totalScholar = InventoryUtils.getSelectedHero().getCalculatedTotalSkillOf(SkillItemId.SCHOLAR)
-        val description = getDescription(personalityItem, totalScholar)
+        val description = getDescription(personalityItem)
         val labelStyle = LabelStyle(FontProvider.default, Color.WHITE)
         val label = Label(description, labelStyle)
         window.add(label)
@@ -52,7 +49,7 @@ open class PersonalityTooltip : BaseTooltip() {
         window.pack()
     }
 
-    open fun getDescription(personalityItem: PersonalityItem, totalScholar: Int): String {
+    open fun getDescription(personalityItem: PersonalityItem): String {
         return personalityItem.getTotalDescription()
     }
 

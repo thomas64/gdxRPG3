@@ -36,9 +36,9 @@ data class SpellItem(
                 + "A teacher is needed to upgrade a spell.")
     }
 
-    fun getTeacherDescription(teacherSpell: SpellItem, wizardRank: Int, totalScholar: Int): String {
+    fun getTeacherDescription(teacherSpell: SpellItem, wizardRank: Int): String {
         return (getDescription()
-                + getNeededXpForNextRank(teacherSpell, wizardRank, totalScholar) + System.lineSeparator()
+                + getNeededXpForNextRank(teacherSpell, wizardRank) + System.lineSeparator()
                 + getNeededGoldForNextRank(teacherSpell, wizardRank))
     }
 
@@ -56,8 +56,8 @@ data class SpellItem(
         rank += 1
     }
 
-    private fun getNeededXpForNextRank(teacherSpell: SpellItem, wizardRank: Int, totalScholar: Int): String {
-        val xpNeeded = when (val cost = getXpCostForNextRank(teacherSpell, wizardRank, totalScholar).toString()) {
+    private fun getNeededXpForNextRank(teacherSpell: SpellItem, wizardRank: Int): String {
+        val xpNeeded = when (val cost = getXpCostForNextRank(teacherSpell, wizardRank).toString()) {
             "0" -> "Max"
             "-1",
             "-2" -> "N/A"
@@ -80,12 +80,12 @@ data class SpellItem(
         return if (rank <= 0) "first" else "next"
     }
 
-    fun getXpCostForNextRank(teacherSpell: SpellItem, wizardRank: Int, totalScholar: Int): Int {
+    fun getXpCostForNextRank(teacherSpell: SpellItem, wizardRank: Int): Int {
         return when {
             rank >= MAXIMUM -> 0
             wizardRank < 1 -> -1
             rank >= teacherSpell.rank -> -2
-            else -> (getUpgradeFormula() - ((getUpgradeFormula() / 100f) * totalScholar)).roundToInt()
+            else -> getUpgradeFormula()
         }
     }
 
@@ -99,9 +99,9 @@ data class SpellItem(
         }
     }
 
-    private fun getUpgradeFormula(): Float {
+    private fun getUpgradeFormula(): Int {
         val nextRank = rank + 1
-        return upgrade * (nextRank * nextRank)
+        return (upgrade * (nextRank * nextRank)).roundToInt()
     }
 
 }

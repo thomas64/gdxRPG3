@@ -8,10 +8,10 @@ import nl.t64.cot.screens.inventory.tooltip.PersonalityTooltip
 
 class AcademyTooltip : PersonalityTooltip() {
 
-    override fun getDescription(personalityItem: PersonalityItem, totalScholar: Int): String {
+    override fun getDescription(personalityItem: PersonalityItem): String {
         val trainerSkill = personalityItem as SkillItem
         val heroSkill = InventoryUtils.getSelectedHero().getSkillById(trainerSkill.id)
-        return heroSkill.getTrainerDescription(trainerSkill, totalScholar)
+        return heroSkill.getTrainerDescription(trainerSkill)
     }
 
 }

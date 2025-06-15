@@ -137,7 +137,6 @@ data class InventoryItem(
             SkillItemId.MERCHANT -> 0
             SkillItemId.STEALTH -> stealth
             SkillItemId.RANGER -> ranger
-            SkillItemId.SCHOLAR -> 0
             SkillItemId.THIEF -> thief
             SkillItemId.TROUBADOUR -> troubadour
             SkillItemId.WARRIOR -> warrior

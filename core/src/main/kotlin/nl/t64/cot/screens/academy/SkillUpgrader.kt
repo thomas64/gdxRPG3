@@ -6,7 +6,6 @@ import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.stopAllSe
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.skills.SkillItem
-import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.screens.dialog.MessageDialog
 import nl.t64.cot.screens.dialog.QuestionDialog
 import nl.t64.cot.screens.inventory.InventoryUtils
@@ -26,10 +25,9 @@ class SkillUpgrader private constructor(
 
     private val selectedHero: HeroItem = InventoryUtils.getSelectedHero()
     private val skillToUpgrade: SkillItem = selectedHero.getSkillById(trainerSkill.id)
-    private val totalScholar: Int = selectedHero.getCalculatedTotalSkillOf(SkillItemId.SCHOLAR)
     private val skillName: String = skillToUpgrade.name
 
-    private val xpCost: Int = skillToUpgrade.getXpCostForNextRank(trainerSkill, totalScholar)
+    private val xpCost: Int = skillToUpgrade.getXpCostForNextRank(trainerSkill)
     private val goldCost: Int = skillToUpgrade.getGoldCostForNextRank(trainerSkill)
     private val hasEnoughXp: Boolean = selectedHero.hasEnoughXpFor(xpCost)
     private val hasEnoughGold: Boolean = gameData.inventory.hasEnoughOfItem("gold", goldCost)

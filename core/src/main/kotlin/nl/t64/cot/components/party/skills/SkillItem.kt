@@ -27,10 +27,10 @@ data class SkillItem(
             + "- A trainer is needed to upgrade a skill.")
     }
 
-    fun getTrainerDescription(trainerSkill: SkillItem, totalScholar: Int): String {
+    fun getTrainerDescription(trainerSkill: SkillItem): String {
         return (description.joinToString(System.lineSeparator()) + System.lineSeparator()
             + System.lineSeparator()
-            + getNeededXpForNextRank(trainerSkill, totalScholar) + System.lineSeparator()
+            + getNeededXpForNextRank(trainerSkill) + System.lineSeparator()
             + getNeededGoldForNextRank(trainerSkill))
     }
 
@@ -38,8 +38,8 @@ data class SkillItem(
         rank += 1
     }
 
-    private fun getNeededXpForNextRank(trainerSkill: SkillItem, totalScholar: Int): String {
-        val xpNeeded = when (val cost = getXpCostForNextRank(trainerSkill, totalScholar).toString()) {
+    private fun getNeededXpForNextRank(trainerSkill: SkillItem): String {
+        val xpNeeded = when (val cost = getXpCostForNextRank(trainerSkill).toString()) {
             "0" -> "Max"
             "-1",
             "-2" -> "N/A"
@@ -62,12 +62,12 @@ data class SkillItem(
         return if (rank <= 0) "first" else "next"
     }
 
-    fun getXpCostForNextRank(trainerSkill: SkillItem, totalScholar: Int): Int {
+    fun getXpCostForNextRank(trainerSkill: SkillItem): Int {
         return when {
             rank == -1 -> -1
             rank >= MAXIMUM -> 0
             rank >= trainerSkill.rank -> -2
-            else -> (getXpCostForNextRank() - ((getXpCostForNextRank() / 100f) * totalScholar)).roundToInt()
+            else -> getXpCostForNextRank().roundToInt()
         }
     }
 
