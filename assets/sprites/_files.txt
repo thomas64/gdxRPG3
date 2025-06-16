@@ -1,5 +1,5 @@
 buttons.atlas
 abilities.atlas
-schools.atlas
 skills.atlas
+spells.atlas
 tiers.atlas

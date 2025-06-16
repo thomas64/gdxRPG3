@@ -1,0 +1,61 @@
+{
+  "fire"   : {
+    "name"             : "Fire",
+    "resource"         : "SPICE",
+    "ap"               : 3,
+    "sp"               : 2,
+    "skill"            : "WIZARD",
+    "min_skill"        : 1,
+    "weapon_skills"    : ["STAFF_FIRE"],
+    "damage_multiplier": 1.0,
+    "description"      : [
+      "A magical attack with a Fire Staff,",
+      "that deals damage to a single target."
+    ]
+  },
+  "elfire" : {
+    "name"             : "Elfire",
+    "resource"         : "SPICE",
+    "ap"               : 4,
+    "sp"               : 4,
+    "skill"            : "WIZARD",
+    "min_skill"        : 4,
+    "weapon_skills"    : ["STAFF_FIRE"],
+    "damage_multiplier": 1.5,
+    "description"      : [
+      "A magical attack with a Fire Staff,",
+      "that deals damage to a single target.",
+      "1.5 times more powerful than Fire."
+    ]
+  },
+  "arcfire": {
+    "name"             : "Arcfire",
+    "resource"         : "SPICE",
+    "ap"               : 5,
+    "sp"               : 6,
+    "skill"            : "WIZARD",
+    "min_skill"        : 7,
+    "weapon_skills"    : ["STAFF_FIRE"],
+    "damage_multiplier": 2.0,
+    "description"      : [
+      "A magical attack with a Fire Staff,",
+      "that deals damage to a single target.",
+      "2.0 times more powerful than Fire."
+    ]
+  },
+  "rexfire": {
+    "name"             : "Rexfire",
+    "resource"         : "SPICE",
+    "ap"               : 6,
+    "sp"               : 8,
+    "skill"            : "WIZARD",
+    "min_skill"        : 10,
+    "weapon_skills"    : ["STAFF_FIRE"],
+    "damage_multiplier": 2.5,
+    "description"      : [
+      "A magical attack with a Fire Staff,",
+      "that deals damage to a single target.",
+      "2.5 times more powerful than Fire."
+    ]
+  }
+}

@@ -1,60 +1,85 @@
 {
   "strike_2"    : {
-    "name"         : "Weak Strike",
-    "ap"           : 2,
-    "weapon_skills": ["SWORD", "AXE", "SPEAR", "DAGGER", "THROW", "BOW"],
-    "description"  : []
+    "name"             : "Weak Strike",
+    "ap"               : 2,
+    "weapon_skills"    : ["SWORD", "AXE", "SPEAR", "DAGGER", "THROW", "BOW"],
+    "damage_multiplier": 0.6,
+    "damage_formula"   : "(2f / 3f) * 0.9f",
+    "description"      : []
   },
   "strike_3"    : {
-    "name"         : "Strike",
-    "ap"           : 3,
-    "weapon_skills": ["SWORD", "AXE", "SPEAR", "DAGGER", "THROW", "BOW"],
-    "description"  : [
+    "name"             : "Strike",
+    "ap"               : 3,
+    "weapon_skills"    : ["SWORD", "AXE", "SPEAR", "DAGGER", "THROW", "BOW"],
+    "damage_multiplier": 1.0,
+    "damage_formula"   : "(3f / 3f) * 1.0f",
+    "description"      : [
       "A basic physical attack with a weapon,",
       "that deals damage to a single target."
     ]
   },
   "strike_4"    : {
-    "name"         : "Strong Strike",
-    "ap"           : 4,
-    "sp"           : 2,
-    "weapon_skills": ["SWORD", "AXE", "SPEAR", "DAGGER", "THROW", "BOW"],
-    "description"  : []
+    "name"             : "Strong Strike",
+    "ap"               : 4,
+    "sp"               : 2,
+    "weapon_skills"    : ["SWORD", "AXE", "SPEAR", "DAGGER", "THROW", "BOW"],
+    "damage_multiplier": 1.4666,
+    "damage_formula"   : "(4f / 3f) * 1.1f",
+    "description"      : []
   },
   "bite_3"      : {
-    "name"       : "Bite",
-    "ap"         : 3,
-    "description": []
+    "name"             : "Bite",
+    "ap"               : 3,
+    "damage_multiplier": 0.675,
+    "damage_formula"   : "(3f / 4f) * 0.9f",
+    "description"      : []
   },
   "bite_4"      : {
-    "name"       : "Bite",
-    "ap"         : 4,
-    "description": []
+    "name"             : "Bite",
+    "ap"               : 4,
+    "damage_multiplier": 1.0,
+    "damage_formula"   : "(4f / 4f) * 1.0f",
+    "description"      : []
   },
   "body_slam_2" : {
-    "name"       : "Body Slam",
-    "ap"         : 2,
-    "description": []
+    "name"             : "Body Slam",
+    "ap"               : 2,
+    "damage_multiplier": 1.0,
+    "damage_formula"   : "(2f / 2f) * 1.0f",
+    "description"      : []
   },
   "stagger"     : {
-    "name"         : "Stagger",
-    "ap"           : 6,
-    "sp"           : 8,
-    "skill"        : "WARRIOR",
-    "weapon_skills": ["SWORD", "AXE", "SPEAR", "DAGGER"],
-    "description"  : [
+    "name"             : "Stagger",
+    "ap"               : 6,
+    "sp"               : 8,
+    "skill"            : "WARRIOR",
+    "weapon_skills"    : ["SWORD", "AXE", "SPEAR"],
+    "damage_multiplier": 1.0,
+    "description"      : [
       "A hand-to-hand attack with a weapon, that deals damage to a single target.",
       "When successful, Stagger moves the target to the bottom of the turn order.",
       "Each successful Stagger reduces the chance of the next Stagger by half."
     ]
   },
   "double_throw": {
-    "name"         : "Double Throw",
-    "ap"           : 4,
-    "sp"           : 2,
-    "skill"        : "THIEF",
-    "weapon_skills": ["THROW"],
-    "description"  : [
+    "name"             : "Double Throw",
+    "ap"               : 4,
+    "sp"               : 2,
+    "skill"            : "THIEF",
+    "weapon_skills"    : ["THROW"],
+    "hit_multiplier"   : 0.727272,
+    "hit_formula"      : "8f / 11f",
+    "comment"          : [
+      "double throw:",
+      "Verwachte hits: 2 × 8/11 = 1.45",
+      "Verwachte damage output: 1.45 × 1.0 (multiplier) = 1.45",
+      "",
+      "strong strike:",
+      "Verwachte hits: 1 × 1 = 1",
+      "Verwachte damage output: 1.0 × 1.47 (multiplier) = 1.47"
+    ],
+    "damage_multiplier": 1.0,
+    "description"      : [
       "A ranged attack with a throw weapon, that deals damage to a single target.",
       "Double Throw attacks twice, but both attacks have a lower chance to hit."
     ]

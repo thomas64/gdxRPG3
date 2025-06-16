@@ -2,7 +2,6 @@
   "blue_bat"  : {
     "name"     : "Blue Bat",
     "gender"   : "its",
-    "school"   : "NONE",
     "ap"       : 5,
     "xp"       : 2,
     "drops"    : {"leather": 25},
@@ -21,8 +20,6 @@
     "abilities": [
       "bite_3", "bite_4"
     ],
-    "spells"   : {
-    },
     "inventory": {
       "weapon": "attack_80_15"
     }
@@ -30,7 +27,6 @@
   "purple_bat": {
     "name"     : "Purple Bat",
     "gender"   : "its",
-    "school"   : "NONE",
     "ap"       : 5,
     "xp"       : 6,
     "drops"    : {"leather": 25},
@@ -49,8 +45,6 @@
     "abilities": [
       "bite_3", "bite_4"
     ],
-    "spells"   : {
-    },
     "inventory": {
       "weapon": "attack_80_25"
     }

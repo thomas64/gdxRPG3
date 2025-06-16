@@ -3,6 +3,7 @@ key,                        name,                       group,      sort,   skil
 basic_mozes_sword,          Mozes' Sword,               WEAPON,     1000,   SWORD,   30,    25,         0,                  0,              10,             90,         6,
 basic_fairy_sword,          Fairy Sword,                WEAPON,     1001,   SWORD,   30,    20,         0,                  11,             0,              85,         7,
 basic_orc_sword,            Orc Sword,                  WEAPON,     1002,   SWORD,   30,    20,         0,                  0,              11,             80,         8,
+
 basic_sword,	            Basic Sword,	            WEAPON,	    1003,	SWORD,	 10,	30,			0,                  0,              10,	            80,	        10,
 fine_sword,	                Fine Sword,	                WEAPON,	    2000,	SWORD,	 30,    25,			0,                  0,              15,	            70,	        15,
 specialist_sword,	        Specialist Sword,	        WEAPON,	    3000,	SWORD,	 50,    20,			0,                  0,              20,	            60,	        20,
@@ -10,6 +11,7 @@ masterwork_sword,	        Masterwork Sword,	        WEAPON,	    4000,	SWORD,	 70
 
 basic_mozes_axe,            Mozes' Axe,                 WEAPON,     1098,   AXE,     30,    25,         0,                  0,              10,             75,         8,
 basic_orc_axe,              Orc Axe,                    WEAPON,     1099,   AXE,     30,    20,         0,                  0,              11,             70,         10,
+
 basic_axe,	                Basic Axe,	                WEAPON,	    1100,	AXE,	 15,	30,			0,                  0,              12,             65,         15,
 fine_axe,	                Fine Axe,	                WEAPON,	    2100,	AXE,	 40,    25,			0,                  0,              18,             55,         20,
 specialist_axe,	            Specialist Axe,	            WEAPON,	    3100,	AXE,	 65,    20,			0,                  0,              24,             45,         25,
@@ -33,30 +35,30 @@ masterwork_knife,	        Masterwork Knife,	        WEAPON,     4400,	THROW,	 35
 
 basic_mozes_bow,            Mozes' Bow,                 WEAPON,     1498,   BOW,     30,    15,         0,                  10,             0,              80,         4,
 basic_elven_bow,            Elven Bow,                  WEAPON,     1499,   BOW,     30,    10,         11,                 0,              0,              75,         5,
+
 basic_bow,                  Basic Bow,                  WEAPON,     1500,   BOW,     20,    30,         0,                  12,             0,              65,         5,
 fine_bow,                   Fine Bow,                   WEAPON,     2500,   BOW,     40,    25,         0,                  18,             0,              55,         10,
 specialist_bow,	            Specialist Bow,	            WEAPON,     3500,	BOW,     60,    20,         0,                  24,		        0,              45,        	15,
 masterwork_bow,	            Masterwork Bow,	            WEAPON,     4500,	BOW,     80,    15,	        0,                  30,		        0,              35,        	20,
 
-ToDo: de 3 typen staffen eigen hit percentages geven en damage etc.
 
-basic_staff_fire,	        Basic Fire Staff,           WEAPON,     1600,   STAFF,   10,    30,         15,                 0,              0,              95,         5,
-fine_staff_fire,	        Fine Fire Staff,	        WEAPON,     2600,	STAFF,   35,    25,         18,                 0,              0,              85,         10,
-specialist_staff_fire,	    Specialist Fire Staff,	    WEAPON,     3600,	STAFF,   60,    20,         21,                 0,              0,              75,         15,
-masterwork_staff_fire,      Masterwork Fire Staff,      WEAPON,     4600,	STAFF,   85,    15,         24,                 0,              0,              65,         20,
-epic_staff_fire,	        Epic Fire Staff,	        WEAPON,     5600,	STAFF,   110,   10,         27,                 0,              0,              55,         25,
-legendary_staff_fire,	    Legendary Fire Staff,	    WEAPON,     6600,	STAFF,   135,   5,          30,                 0,              0,              45,         30,
+basic_staff_fire,	        Basic Fire Staff,           WEAPON,     1600,   STAFF,   10,    30,         15,                 0,              0,              90,         5,
+fine_staff_fire,	        Fine Fire Staff,	        WEAPON,     2600,	STAFF,   35,    25,         18,                 0,              0,              80,         10,
+specialist_staff_fire,	    Specialist Fire Staff,	    WEAPON,     3600,	STAFF,   60,    20,         21,                 0,              0,              70,         15,
+masterwork_staff_fire,      Masterwork Fire Staff,      WEAPON,     4600,	STAFF,   85,    15,         24,                 0,              0,              60,         20,
+epic_staff_fire,	        Epic Fire Staff,	        WEAPON,     5600,	STAFF,   110,   10,         27,                 0,              0,              50,         25,
+legendary_staff_fire,	    Legendary Fire Staff,	    WEAPON,     6600,	STAFF,   135,   5,          30,                 0,              0,              40,         30,
 
-basic_staff_wind,	        Basic Wind Staff,           WEAPON,     1700,   STAFF,   10,    30,         15,                 0,              0,              95,         5,
-fine_staff_wind,	        Fine Wind Staff,	        WEAPON,     2700,	STAFF,   35,    25,         18,                 0,              0,              85,         10,
-specialist_staff_wind,	    Specialist Wind Staff,	    WEAPON,     3700,	STAFF,   60,    20,         21,                 0,              0,              75,         15,
-masterwork_staff_wind,      Masterwork Wind Staff,      WEAPON,     4700,	STAFF,   85,    15,         24,                 0,              0,              65,         20,
-epic_staff_wind,	        Epic Wind Staff,	        WEAPON,     5700,	STAFF,   110,   10,         27,                 0,              0,              55,         25,
-legendary_staff_wind,	    Legendary Wind Staff,	    WEAPON,     6700,	STAFF,   135,   5,          30,                 0,              0,              45,         30,
+basic_staff_wind,	        Basic Wind Staff,           WEAPON,     1700,   STAFF,   10,    30,         15,                 0,              0,              95,         4,
+fine_staff_wind,	        Fine Wind Staff,	        WEAPON,     2700,	STAFF,   35,    25,         18,                 0,              0,              85,         9,
+specialist_staff_wind,	    Specialist Wind Staff,	    WEAPON,     3700,	STAFF,   60,    20,         21,                 0,              0,              75,         14,
+masterwork_staff_wind,      Masterwork Wind Staff,      WEAPON,     4700,	STAFF,   85,    15,         24,                 0,              0,              65,         19,
+epic_staff_wind,	        Epic Wind Staff,	        WEAPON,     5700,	STAFF,   110,   10,         27,                 0,              0,              55,         24,
+legendary_staff_wind,	    Legendary Wind Staff,	    WEAPON,     6700,	STAFF,   135,   5,          30,                 0,              0,              45,         29,
 
-basic_staff_thunder,	    Basic Thunder Staff,        WEAPON,     1800,   STAFF,   10,    30,         15,                 0,              0,              95,         5,
-fine_staff_thunder,         Fine Thunder Staff,         WEAPON,     2800,	STAFF,   35,    25,         18,                 0,              0,              85,         10,
-specialist_staff_thunder,	Specialist Thunder Staff,   WEAPON,     3800,	STAFF,   60,    20,         21,                 0,              0,              75,         15,
-masterwork_staff_thunder,   Masterwork Thunder Staff,   WEAPON,     4800,	STAFF,   85,    15,         24,                 0,              0,              65,         20,
-epic_staff_thunder,	        Epic Thunder Staff,	        WEAPON,     5800,	STAFF,   110,   10,         27,                 0,              0,              55,         25,
-legendary_staff_thunder,    Legendary Thunder Staff,    WEAPON,     6800,	STAFF,   135,   5,          30,                 0,              0,              45,         30,
+basic_staff_thunder,	    Basic Thunder Staff,        WEAPON,     1800,   STAFF,   10,    30,         15,                 0,              0,              85,         6,
+fine_staff_thunder,         Fine Thunder Staff,         WEAPON,     2800,	STAFF,   35,    25,         18,                 0,              0,              75,         11,
+specialist_staff_thunder,	Specialist Thunder Staff,   WEAPON,     3800,	STAFF,   60,    20,         21,                 0,              0,              65,         16,
+masterwork_staff_thunder,   Masterwork Thunder Staff,   WEAPON,     4800,	STAFF,   85,    15,         24,                 0,              0,              55,         21,
+epic_staff_thunder,	        Epic Thunder Staff,	        WEAPON,     5800,	STAFF,   110,   10,         27,                 0,              0,              45,         26,
+legendary_staff_thunder,    Legendary Thunder Staff,    WEAPON,     6800,	STAFF,   135,   5,          30,                 0,              0,              35,         31,

@@ -1,9 +1,9 @@
 package nl.t64.cot.components.condition
 
 import nl.t64.cot.Utils.gameData
+import nl.t64.cot.components.party.abilities.AbilityItemId
 import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.components.portal.Portal
-import nl.t64.cot.components.quest.QuestState
 
 
 fun List<String>.areAllTrue(questId: String? = null): Boolean {
@@ -18,19 +18,21 @@ object ConditionDatabase {
 
     private val conditions: Map<String, () -> Boolean> = mapOf(
         // @formatter:off
-        "diplomat1"                 to { hasEnoughOfSkill(SkillItemId.DIPLOMAT,  1) },
-        "barbarian1"                to { hasEnoughOfSkill(SkillItemId.BARBARIAN, 1) },
-        "barbarian4"                to { hasEnoughOfSkill(SkillItemId.BARBARIAN, 4) },
-        "warrior4"                  to { hasEnoughOfSkill(SkillItemId.WARRIOR,   4) },
-        "druid1"                    to { hasEnoughOfSkill(SkillItemId.DRUID,     1) },
-        "i_druid1"                  to { hasEnoughOfSkill(SkillItemId.DRUID,     1) },
-        "ii_druid1"                 to { hasEnoughOfSkill(SkillItemId.DRUID,     1) },
+        "diplomat1"                 to { hasEnoughOfSkill(SkillItemId.DIPLOMAT,     1) },
+        "barbarian1"                to { hasEnoughOfSkill(SkillItemId.BARBARIAN,    1) },
+        "barbarian4"                to { hasEnoughOfSkill(SkillItemId.BARBARIAN,    4) },
+        "warrior4"                  to { hasEnoughOfSkill(SkillItemId.WARRIOR,      4) },
+        "wizard1"                   to { hasEnoughOfSkill(SkillItemId.WIZARD,       1) },
+        "mozes_wizard1"             to { hasMozesEnoughOfSkill(SkillItemId.WIZARD,  1) },
+        "druid1"                    to { hasEnoughOfSkill(SkillItemId.DRUID,        1) },
+        "i_druid1"                  to { hasEnoughOfSkill(SkillItemId.DRUID,        1) },
+        "ii_druid1"                 to { hasEnoughOfSkill(SkillItemId.DRUID,        1) },
 
         "xp_>=_15"                  to { isXpGreaterThan(15) },
         "!been_in_fairy_town"       to { !hasEventPlayed("enter_great_tree") },
         "been_in_fairy_town"        to { hasEventPlayed("enter_great_tree") },
         "defeated_orc_guards"       to { isBattleWon("quest_orc_guards") },
-        "starting_spells"           to { hasAnySpell("mozes") },
+        "shield_spell"              to { hasSpell("magic_shield", "mozes") },
         "!black_asked_four"         to { !blackAskedFour },
         "black_asked_four"          to { blackAskedFour },
         "alone_in_party"            to { isAloneInParty },
@@ -93,14 +95,14 @@ object ConditionDatabase {
     private fun isXpGreaterThan(requestedXp: Int): Boolean =
         gameData.party.getCertainHero("mozes").hasEnoughXpFor(requestedXp)
 
+    private fun hasMozesEnoughOfSkill(skillItemId: SkillItemId, rank: Int): Boolean =
+        gameData.party.getCertainHero("mozes").getCalculatedTotalSkillOf(skillItemId) >= rank
+
     private fun hasEnoughOfSkill(skillItemId: SkillItemId, rank: Int): Boolean =
         gameData.party.hasEnoughOfSkill(skillItemId, rank)
 
-    private fun hasAnySpell(heroId: String): Boolean =
-        gameData.party.getCertainHero(heroId).getAllSpells().isNotEmpty()
-
-    private fun hasAverageXpOf(requestedXp: Int): Boolean =
-        gameData.party.getAverageXp() >= requestedXp
+    private fun hasSpell(spellId: String, heroId: String): Boolean =
+        gameData.party.getCertainHero(heroId).getAllAbilities().any { it.id == AbilityItemId.valueOf(spellId.uppercase()) }
 
     private fun isTargetAlternateUsed(questId: String, questTaskId: String): Boolean =
         gameData.quests.getQuestById(questId).tasks[questTaskId]!!.isTargetAlternateUsed
@@ -113,13 +115,5 @@ object ConditionDatabase {
 
     private fun hasAmountOfPartyMembers(amount: Int): Boolean =
         gameData.party.size == amount
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    private infix fun String.hasOneOfBothStatesEqualOrHigherThan(questState: QuestState): Boolean =
-        gameData.quests.getQuestById(this).isOneOfBothStatesEqualOrHigherThan(questState)
-
-    private infix fun String.hasResetState(questState: QuestState): Boolean =
-        gameData.quests.getQuestById(this).resetState == questState
 
 }

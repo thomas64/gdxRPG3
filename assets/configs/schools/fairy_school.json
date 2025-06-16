@@ -1,4 +1,4 @@
-{
-  "air_shield": 4,
-  "strength"  : 4
-}
+[
+  "magic_shield",
+  "might"
+]

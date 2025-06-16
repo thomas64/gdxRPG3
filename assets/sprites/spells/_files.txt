@@ -1,5 +1,0 @@
-neutral.atlas
-elemental.atlas
-naming.atlas
-necromancy.atlas
-star.atlas

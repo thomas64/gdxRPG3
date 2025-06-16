@@ -2,7 +2,6 @@
   "ardor": {
     "name"     : "Ardor",
     "gender"   : "his",
-    "school"   : "UNKNOWN",
     "xp"       : 100,
     "drops"    : {"gold": 90},
     "stats"    : {
@@ -23,18 +22,6 @@
     "abilities": [
       "strike_2", "strike_3", "strike_4"
     ],
-    "spells"   : {
-      "mirror"         : 10,
-      "vs_naming"      : 10,
-      "debilitation"   : 10,
-      "fireball"       : 10,
-      "crushing_death" : 10,
-      "wraith_touch"   : 10,
-      "frozen_doom"    : 10,
-      "stellar_gravity": 10,
-      "stupidity"      : 10,
-      "teleportation"  : 10
-    },
     "inventory": {
       "weapon": "legendary_staff_fire",
       "chest" : "armor_400"

@@ -14,10 +14,17 @@ class AbilityContainer() {
             .forEach { this.abilities[it.id] = it }
     }
 
+    fun getById(abilityItemId: AbilityItemId): AbilityItem? {
+        return abilities[abilityItemId]
+    }
+
     fun getAll(): List<AbilityItem> {
         return AbilityItemId.entries.mapNotNull { abilities[it] }
     }
 
+    fun add(abilityItem: AbilityItem) {
+        abilities[abilityItem.id] = abilityItem
+    }
 }
 
 private class AbilityItemMap<K : Enum<K>, V> {

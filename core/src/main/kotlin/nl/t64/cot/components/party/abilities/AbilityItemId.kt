@@ -2,22 +2,48 @@ package nl.t64.cot.components.party.abilities
 
 import nl.t64.cot.components.party.SuperEnum
 
-enum class AbilityItemId(
-    val multiplier: Float
-) : SuperEnum {
+enum class AbilityItemId : SuperEnum {
 
-    STRIKE_2((2f / 3f) * 0.9f),
-    STRIKE_3((3f / 3f) * 1.0f),
-    STRIKE_4((4f / 3f) * 1.1f),
+    STRIKE_2,
+    STRIKE_3,
+    STRIKE_4,
 
-    BITE_3((3f / 4f) * 0.9f),
-    BITE_4((4f / 4f) * 1.0f),
+    BITE_3,
+    BITE_4,
 
-    BODY_SLAM_2((2f / 2f) * 1.0f),
+    BODY_SLAM_2,
 
-    STAGGER(1f),
+    STAGGER,
 
-    DOUBLE_THROW(1f);
+    DOUBLE_THROW,
+
+    FIRE,
+    ELFIRE,
+    ARCFIRE,
+    REXFIRE,
+
+    WIND,
+    ELWIND,
+    ARCWIND,
+    REXWIND,
+
+    THUNDER,
+    ELTHUNDER,
+    ARCTHUNDER,
+    REXTHUNDER,
+
+    MAGIC_SHIELD,
+    RESISTANCE,
+    TELEPORTATION,
+
+    BRILLIANCE,
+    STUPIDITY,
+    FINESSE,
+    CLUMSINESS,
+    MIGHT,
+    DEBILITATION,
+    HASTE,
+    SLUGGISHNESS;
 
     override val title: String = name.lowercase().replaceFirstChar { it.uppercase() }
 

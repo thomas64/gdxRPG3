@@ -5,7 +5,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import nl.t64.cot.Utils
 import nl.t64.cot.components.party.abilities.AbilityItem
-import nl.t64.cot.components.party.spells.SpellItem
 import nl.t64.cot.screens.inventory.tooltip.PersonalityTooltip
 
 
@@ -20,7 +19,6 @@ private const val SECOND_COLUMN_PAD_LEFT = 15f
 internal class SpellsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
 
     private val allAbilities: List<AbilityItem> get() = selectedHero.getAllAbilities().filterNot { it.getTotalDescription().isBlank() }
-    private val allSpells: List<SpellItem> get() = selectedHero.getAllSpells()
     private var deltaIndex = 0
 
     init {
@@ -32,12 +30,12 @@ internal class SpellsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
 
         container.add(scrollPane).height(CONTAINER_HEIGHT)
         container.background = Utils.createTopBorder()
-        container.addListener(ListenerKeyVertical { updateIndex(it, (allAbilities + allSpells).size) })
+        container.addListener(ListenerKeyVertical { updateIndex(it, allAbilities.size) })
     }
 
     override fun selectAnotherSlotWhenIndexBecameOutOfBounds() {
-        if (selectedIndex >= (allAbilities + allSpells).size) {
-            selectedIndex = (allAbilities + allSpells).size - 1
+        if (selectedIndex >= allAbilities.size) {
+            selectedIndex = allAbilities.size - 1
         }
     }
 
@@ -47,13 +45,7 @@ internal class SpellsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
     }
 
     override fun fillRows() {
-        allAbilities.forEach { fillAbilityRow(it) }
-        allSpells.forEach { fillSpellRow(it) }
-
-        (allAbilities + allSpells).forEachIndexed { index, item ->
-            table.findActor<Label>(item.id.name)
-                ?.let { super.possibleSetSelected(index, it, item) }
-        }
+        allAbilities.forEachIndexed { index, ability -> fillRow(ability, index) }
 
         if (deltaIndex != 0) {
             scrollScrollPane()
@@ -61,16 +53,12 @@ internal class SpellsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
         }
     }
 
-    private fun fillAbilityRow(ability: AbilityItem) {
+    private fun fillRow(ability: AbilityItem, index: Int) {
         table.add(createImageOf(ability.imageId))
-        val abilityName = Label(ability.name, LabelStyle(font, Color.BLACK)).apply { name = ability.id.name }
+        val abilityName = Label(ability.name, LabelStyle(font, Color.BLACK))
         table.add(abilityName).padLeft(SECOND_COLUMN_PAD_LEFT).row()
-    }
+        super.possibleSetSelected(index, abilityName, ability)
 
-    private fun fillSpellRow(spellItem: SpellItem) {
-        table.add(createImageOf(spellItem.id.name))
-        val spellName = Label(spellItem.name, LabelStyle(font, Color.BLACK)).apply { name = spellItem.id.name }
-        table.add(spellName).padLeft(SECOND_COLUMN_PAD_LEFT).row()
     }
 
     private fun scrollScrollPane() {

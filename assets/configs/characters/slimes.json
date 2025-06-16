@@ -2,7 +2,6 @@
   "green_slime"        : {
     "name"     : "Green Slime",
     "gender"   : "its",
-    "school"   : "NONE",
     "ap"       : 3,
     "xp"       : 3,
     "drops"    : {"green_jelly": 25},
@@ -21,8 +20,6 @@
     "abilities": [
       "body_slam_2"
     ],
-    "spells"   : {
-    },
     "inventory": {
       "weapon": "attack_65_20",
       "chest" : "armor_1"
@@ -31,7 +28,6 @@
   "blue_slime_medicine": {
     "name"     : "Blue Slime",
     "gender"   : "its",
-    "school"   : "NONE",
     "ap"       : 3,
     "xp"       : 7,
     "drops"    : {"blue_jelly": 100},
@@ -50,8 +46,6 @@
     "abilities": [
       "body_slam_2"
     ],
-    "spells"   : {
-    },
     "inventory": {
       "weapon": "attack_65_30",
       "chest" : "armor_6"
@@ -60,7 +54,6 @@
   "blue_slime"         : {
     "name"     : "Blue Slime",
     "gender"   : "its",
-    "school"   : "NONE",
     "ap"       : 3,
     "xp"       : 7,
     "drops"    : {"blue_jelly": 25},
@@ -79,8 +72,6 @@
     "abilities": [
       "body_slam_2"
     ],
-    "spells"   : {
-    },
     "inventory": {
       "weapon": "attack_65_30",
       "chest" : "armor_6"

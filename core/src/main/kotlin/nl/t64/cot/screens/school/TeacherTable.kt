@@ -14,11 +14,9 @@ private const val PADDING = 20f
 private val TEXT = """
     Welcome to my school!
 
-    On the left, you'll find the spells I can teach you, and on the right, the spells you've already acquired.
+    On the left, you'll find the spells or abilities I can teach you, and on the right, the spells and abilities you've already acquired.
 
-    The numbers on the left indicate the ranks at which I can instruct you, while those on the right represent your current proficiency levels.
-
-    Learning a spell requires both XP and gold.""".trimIndent()
+    Learning a spell or ability requires both XP and gold.""".trimIndent()
 
 internal class TeacherTable(npcId: String) : BaseTable(PersonalityTooltip()) {
 

@@ -123,6 +123,30 @@ class Participant(
             AbilityItemId.STRIKE_4 -> Strike(abilityItem, this)
             AbilityItemId.STAGGER -> Stagger(abilityItem, this)
             AbilityItemId.DOUBLE_THROW -> DoubleThrow(abilityItem, this)
+
+            AbilityItemId.FIRE,
+            AbilityItemId.ELFIRE,
+            AbilityItemId.ARCFIRE,
+            AbilityItemId.REXFIRE,
+            AbilityItemId.WIND,
+            AbilityItemId.ELWIND,
+            AbilityItemId.ARCWIND,
+            AbilityItemId.REXWIND,
+            AbilityItemId.THUNDER,
+            AbilityItemId.ELTHUNDER,
+            AbilityItemId.ARCTHUNDER,
+            AbilityItemId.REXTHUNDER,
+            AbilityItemId.MAGIC_SHIELD,
+            AbilityItemId.RESISTANCE,
+            AbilityItemId.TELEPORTATION,
+            AbilityItemId.BRILLIANCE,
+            AbilityItemId.STUPIDITY,
+            AbilityItemId.FINESSE,
+            AbilityItemId.CLUMSINESS,
+            AbilityItemId.MIGHT,
+            AbilityItemId.DEBILITATION,
+            AbilityItemId.HASTE,
+            AbilityItemId.SLUGGISHNESS -> Stagger(abilityItem, this) // todo, juiste spell classes maken.
         }
     }
 

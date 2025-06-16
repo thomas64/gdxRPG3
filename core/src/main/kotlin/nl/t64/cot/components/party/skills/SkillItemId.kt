@@ -76,7 +76,7 @@ enum class SkillItemId : SuperEnum {
 
     fun isCombatSkill(): Boolean {
         return when (this) {
-            STEALTH, GAMBLER, HEALER, TROUBADOUR, THIEF, WARRIOR -> true
+            STEALTH, GAMBLER, HEALER, TROUBADOUR, THIEF, WARRIOR, WIZARD -> true
             else -> false
         }
     }

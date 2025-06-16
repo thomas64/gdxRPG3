@@ -5,52 +5,45 @@ import nl.t64.cot.Utils.gameData
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.stopAllSe
 import nl.t64.cot.components.party.HeroItem
+import nl.t64.cot.components.party.abilities.AbilityItem
 import nl.t64.cot.components.party.skills.SkillItemId
-import nl.t64.cot.components.party.spells.SchoolType
-import nl.t64.cot.components.party.spells.SpellItem
 import nl.t64.cot.screens.dialog.MessageDialog
 import nl.t64.cot.screens.dialog.QuestionDialog
 import nl.t64.cot.screens.inventory.InventoryUtils
 
 
 class SpellUpgrader private constructor(
-    teacherSpell: SpellItem,
+    private val spellToUpgrade: AbilityItem,
     private val stage: Stage,
     private val setHasJustUpdatedToTrue: () -> Unit
 ) {
 
     companion object {
-        fun upgradeSpell(spellToUpgrade: SpellItem, stage: Stage, actionAfterSuccess: () -> Unit) {
+        fun upgradeSpell(spellToUpgrade: AbilityItem, stage: Stage, actionAfterSuccess: () -> Unit) {
             SpellUpgrader(spellToUpgrade, stage, actionAfterSuccess).upgrade()
         }
     }
 
     private val selectedHero: HeroItem = InventoryUtils.getSelectedHero()
-    private val spellToUpgrade: SpellItem = selectedHero.getSpellById(teacherSpell.id)
     private val wizardSkill: Int = selectedHero.getSkillById(SkillItemId.WIZARD).rank
     private val spellName: String = spellToUpgrade.name
 
-    private val isWizard: Boolean = selectedHero.school != SchoolType.NONE
+    private val hasSpell: Boolean = selectedHero.getAbilityById(spellToUpgrade.id) != null
+    private val isWizard: Boolean = wizardSkill != -1
     private val hasWizardSkill: Boolean = wizardSkill >= 1
-    private val isCompatibleWithSpellSchool: Boolean =
-        spellToUpgrade.school == selectedHero.school
-            || spellToUpgrade.school == SchoolType.NEUTRAL
-            || selectedHero.school == SchoolType.UNKNOWN
-    private val hasEnoughWizardSkill: Boolean = wizardSkill >= spellToUpgrade.minWizard
-    private val xpCost: Int = spellToUpgrade.getXpCostForNextRank(teacherSpell, wizardSkill)
+    private val hasEnoughWizardSkill: Boolean = wizardSkill >= spellToUpgrade.minSkill
+    private val xpCost: Int = spellToUpgrade.calculateXpCost(selectedHero.totalXp)
     private val hasEnoughXp: Boolean = selectedHero.hasEnoughXpFor(xpCost)
-    private val goldCost: Int = spellToUpgrade.getGoldCostForNextRank(teacherSpell, wizardSkill)
+    private val goldCost: Int = spellToUpgrade.goldCost
     private val hasEnoughGold: Boolean = gameData.inventory.hasEnoughOfItem("gold", goldCost)
 
     private fun upgrade() {
         when {
+            selectedHero.isDead -> showError("${selectedHero.name} is deceased.")
+            hasSpell -> showError("You already know $spellName.")
             !isWizard -> showError("Only wizards can learn spells.")
             !hasWizardSkill -> showError("You need the Wizard skill to learn spells.")
-            !isCompatibleWithSpellSchool -> showError("You cannot learn $spellName as you are from the wrong school.")
             !hasEnoughWizardSkill -> showError("Your Wizard skill is not high enough to learn $spellName.")
-            xpCost == -2 -> showError("I cannot teach you in $spellName any further.")
-            xpCost == -1 -> throw IllegalStateException("Should have been handled by '!hasWizardSkill'.")
-            xpCost == 0 -> showError("You cannot learn $spellName any further.")
             !hasEnoughXp -> showError("I'm sorry. You don't seem to have enough XP.")
             !hasEnoughGold -> showError("I'm sorry. You don't seem to have enough gold.")
             else -> showConfirmDialog()
@@ -71,17 +64,14 @@ class SpellUpgrader private constructor(
 
     private fun upgradeSpell() {
         gameData.inventory.autoRemoveItem("gold", goldCost)
-        selectedHero.doUpgrade(spellToUpgrade, xpCost)
+        selectedHero.learn(spellToUpgrade, xpCost)
         setHasJustUpdatedToTrue.invoke()
         showConfirmMessage()
     }
 
     private fun showConfirmMessage() {
         stopAllSe()
-        MessageDialog("""
-                ${spellToUpgrade.name}:
-                ${spellToUpgrade.rank - 1} -> ${spellToUpgrade.rank}""".trimIndent())
-            .show(stage, AudioEvent.SE_UPGRADE)
+        MessageDialog("${spellToUpgrade.name} learned.").show(stage, AudioEvent.SE_UPGRADE)
     }
 
 }

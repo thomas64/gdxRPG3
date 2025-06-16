@@ -95,8 +95,8 @@ abstract class BattleAbilityItem(
         return calculateHitPercentage().coerceAtMost(100)
     }
 
-    open fun calculateHitPercentage(): Int {
-        val attackerHitPercentage: Int = attacker.character.getCalculatedTotalHit()
+    fun calculateHitPercentage(): Int {
+        val attackerHitPercentage: Int = (attacker.character.getCalculatedTotalHit() * abilityItem.hitMultiplier).roundToInt()
 
         val weaponTriangle = when {
             hasWeaponTriangleAdvantage() -> 10
@@ -123,11 +123,11 @@ abstract class BattleAbilityItem(
     }
 
     fun calculateDamage(): Int {
-        val attack: Int = (attacker.character.getCalculatedTotalDamage() * id.multiplier).toInt()
+        val attack: Float = attacker.character.getCalculatedTotalDamage() * abilityItem.damageMultiplier
         val protection: Int = target.character.getCalculatedTotalProtection()
-        val damage: Int = (attack - protection)
+        val damage: Float = attack - protection
         val weaponTriangle: Float = if (hasWeaponTriangleDisadvantage()) 1.5f else 1f
-        return (damage / weaponTriangle).toInt().coerceAtLeast(1)
+        return (damage / weaponTriangle).roundToInt().coerceAtLeast(1)
     }
 
     protected fun createNoWeaponMessage(): String {

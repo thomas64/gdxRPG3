@@ -1,0 +1,54 @@
+{
+  "brilliance": {
+    "name"       : "Brilliance",
+    "resource"   : "GEMSTONE",
+    "ap"         : 4,
+    "sp"         : 5,
+    "skill"      : "WIZARD",
+    "min_skill"  : 1,
+    "description": [
+      "Friendly target of the spell gains 2",
+      "Intelligence for each rank in 'Wizard'.",
+      "May only be cast once on each target."
+    ]
+  },
+  "finesse"   : {
+    "name"       : "Finesse",
+    "resource"   : "SPICE",
+    "ap"         : 4,
+    "sp"         : 5,
+    "skill"      : "WIZARD",
+    "min_skill"  : 1,
+    "description": [
+      "Friendly target of the spell gains 2",
+      "Dexterity for each rank in 'Wizard'.",
+      "May only be cast once on each target."
+    ]
+  },
+  "might"     : {
+    "name"       : "Might",
+    "resource"   : "HERB",
+    "ap"         : 4,
+    "sp"         : 5,
+    "skill"      : "WIZARD",
+    "min_skill"  : 1,
+    "description": [
+      "Friendly target of the spell gains 2",
+      "Strength for each rank in 'Wizard'.",
+      "May only be cast once on each target."
+    ]
+  },
+  "haste"     : {
+    "name"       : "Haste",
+    "resource"   : "SPICE",
+    "ap"         : 4,
+    "sp"         : 5,
+    "skill"      : "WIZARD",
+    "min_skill"  : 1,
+    "description": [
+      "Friendly target of the spell gains 2",
+      "Speed for each rank in 'Wizard'.",
+      "May only be cast once on each target."
+    ]
+  }
+}

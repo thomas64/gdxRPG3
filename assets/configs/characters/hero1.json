@@ -2,7 +2,6 @@
   "mozes"   : {
     "name"     : "Mozes",
     "gender"   : "his",
-    "school"   : "UNKNOWN",
     "stats"    : {
       "intelligence": 10,
       "dexterity"   : 10,
@@ -24,8 +23,6 @@
       "strike_2", "strike_3", "strike_4",
       "stagger"
     ],
-    "spells"   : {
-    },
     "inventory": {
       "weapon": "basic_mozes_bow",
       "chest" : "basic_light_chest",
@@ -36,7 +33,6 @@
   "luana"   : {
     "name"     : "Luana",
     "gender"   : "her",
-    "school"   : "ELEMENTAL",
     "stats"    : {
       "intelligence": 10,
       "dexterity"   : 16,
@@ -60,8 +56,6 @@
       "strike_2", "strike_3", "strike_4",
       "double_throw"
     ],
-    "spells"   : {
-    },
     "inventory": {
       "weapon": "basic_knife",
       "chest" : "basic_light_chest",
@@ -73,7 +67,6 @@
   "reignald": {
     "name"     : "Reignald",
     "gender"   : "his",
-    "school"   : "NONE",
     "stats"    : {
       "intelligence": 10,
       "willpower"   : 8,
@@ -92,17 +85,15 @@
       "wizard"   : -1,
       "sword"    : 4,
       "dagger"   : -1,
-      "staff"    : -1,
       "throw"    : 2,
       "bow"      : -1,
+      "staff"    : -1,
       "shield"   : 2
     },
     "abilities": [
       "strike_2", "strike_3", "strike_4",
       "stagger"
     ],
-    "spells"   : {
-    },
     "inventory": {
       "weapon": "basic_sword",
       "shield": "fine_light_shield",
@@ -114,7 +105,6 @@
   "ryiah"   : {
     "name"     : "Ryiah",
     "gender"   : "her",
-    "school"   : "NAMING",
     "stats"    : {
       "intelligence": 22,
       "willpower"   : 16,
@@ -128,22 +118,18 @@
       "loremaster": 1,
       "merchant"  : 1,
       "wizard"    : 4,
-      "staff"     : 3,
-      "dagger"    : 3,
+      "dagger"    : 1,
       "throw"     : -1,
-      "bow"       : -1
+      "bow"       : -1,
+      "staff"     : 3
     },
     "abilities": [
-      "strike_2", "strike_3", "strike_4"
+      "strike_2", "strike_3", "strike_4",
+      "thunder",
+      "finesse", "clumsiness"
     ],
-    "spells"   : {
-      "vs_necromancy": 1,
-      "endurance"    : 4,
-      "sense_aura"   : 1,
-      "weakness"     : 4
-    },
     "inventory": {
-      "weapon": "basic_staff_wind",
+      "weapon": "basic_staff_thunder",
       "chest" : "basic_light_chest",
       "pants" : "basic_light_pants",
       "boots" : "basic_light_boots"
@@ -152,7 +138,6 @@
   "valter"  : {
     "name"     : "Valter",
     "gender"   : "his",
-    "school"   : "ELEMENTAL",
     "stats"    : {
       "intelligence": 22,
       "willpower"   : 18,
@@ -172,16 +157,15 @@
       "dagger"    : 1,
       "throw"     : 1,
       "bow"       : -1,
+      "staff"     : 1,
       "shield"    : -1
     },
     "abilities": [
-      "strike_2", "strike_3", "strike_4"
+      "strike_2", "strike_3", "strike_4",
+      "fire"
     ],
-    "spells"   : {
-      "dragon_flames": 2
-    },
     "inventory": {
-      "weapon": "basic_sword",
+      "weapon": "basic_staff_fire",
       "chest" : "basic_light_chest",
       "pants" : "basic_light_pants",
       "boots" : "basic_light_boots"
@@ -190,7 +174,6 @@
   "galen"   : {
     "name"     : "Galen",
     "gender"   : "his",
-    "school"   : "NONE",
     "stats"    : {
       "intelligence": 15,
       "willpower"   : 15,
@@ -208,17 +191,15 @@
       "wizard"   : -1,
       "sword"    : -1,
       "axe"      : 5,
-      "staff"    : -1,
       "throw"    : -1,
       "bow"      : 3,
+      "staff"    : -1,
       "shield"   : 3
     },
     "abilities": [
       "strike_2", "strike_3", "strike_4",
       "stagger"
     ],
-    "spells"   : {
-    },
     "inventory": {
       "weapon": "basic_axe",
       "shield": "basic_medium_shield",
@@ -230,7 +211,6 @@
   "jaspar"  : {
     "name"     : "Jaspar",
     "gender"   : "his",
-    "school"   : "NONE",
     "stats"    : {
       "intelligence": 6,
       "willpower"   : 11,
@@ -253,19 +233,17 @@
       "sword"     : 6,
       "spear"     : 6,
       "dagger"    : -1,
-      "staff"     : -1,
       "throw"     : -1,
       "bow"       : -1,
+      "staff"     : -1,
       "shield"    : 4
     },
     "abilities": [
       "strike_2", "strike_3", "strike_4",
       "stagger"
     ],
-    "spells"   : {
-    },
     "inventory": {
-      "weapon": "basic_sword",
+      "weapon": "basic_spear",
       "shield": "basic_heavy_shield",
       "chest" : "basic_heavy_chest",
       "pants" : "basic_heavy_pants",
@@ -275,7 +253,6 @@
   "kiara"   : {
     "name"     : "Kiara",
     "gender"   : "her",
-    "school"   : "ELEMENTAL",
     "stats"    : {
       "intelligence": 15,
       "willpower"   : 10,
@@ -292,20 +269,17 @@
       "thief"   : 8,
       "wizard"  : 4,
       "axe"     : -1,
-      "spear"   : 2,
       "dagger"  : 7,
       "throw"   : -1,
       "bow"     : 7,
+      "staff"   : 2,
       "shield"  : -1
     },
     "abilities": [
-      "strike_2", "strike_3", "strike_4"
+      "strike_2", "strike_3", "strike_4",
+      "wind",
+      "haste", "sluggishness"
     ],
-    "spells"   : {
-      "vs_elemental" : 2,
-      "remove_poison": 3,
-      "wind"         : 3
-    },
     "inventory": {
       "weapon": "fine_dagger",
       "chest" : "fine_light_chest",
@@ -316,7 +290,6 @@
   "luthais" : {
     "name"     : "Luthais",
     "gender"   : "his",
-    "school"   : "ELEMENTAL",
     "stats"    : {
       "intelligence": 30,
       "willpower"   : 30,
@@ -334,21 +307,17 @@
       "mechanic"  : 6,
       "stealth"   : 5,
       "wizard"    : 10,
-      "staff"     : 8,
       "throw"     : 8,
       "bow"       : -1,
+      "staff"     : 8,
       "shield"    : -1
     },
     "abilities": [
-      "strike_2", "strike_3", "strike_4"
+      "strike_2", "strike_3", "strike_4",
+      "fire", "elfire", "arcfire",
+      "resistance",
+      "brilliance", "stupidity"
     ],
-    "spells"   : {
-      "vs_star"          : 8,
-      "vs_necromancy"    : 10,
-      "fireball"         : 8,
-      "mirror"           : 8,
-      "dispel_necromancy": 10
-    },
     "inventory": {
       "weapon": "epic_staff_fire",
       "chest" : "specialist_light_chest",
@@ -359,7 +328,6 @@
   "elias"   : {
     "name"     : "Elias",
     "gender"   : "his",
-    "school"   : "NAMING",
     "stats"    : {
       "intelligence": 30,
       "willpower"   : 30,
@@ -378,20 +346,17 @@
       "sword"   : 7,
       "throw"   : -1,
       "bow"     : -1,
+      "staff"   : 5,
       "shield"  : -1
     },
     "abilities": [
       "strike_2", "strike_3", "strike_4",
-      "stagger"
+      "stagger",
+      "thunder", "elthunder",
+      "teleportation"
     ],
-    "spells"   : {
-      "vs_star"      : 7,
-      "banishing"    : 7,
-      "sense_aura"   : 7,
-      "teleportation": 7
-    },
     "inventory": {
-      "weapon": "basic_sword",
+      "weapon": "fine_sword",
       "chest" : "fine_medium_chest",
       "pants" : "fine_medium_pants",
       "boots" : "fine_medium_boots"
@@ -400,7 +365,6 @@
   "onarr"   : {
     "name"     : "Onarr",
     "gender"   : "his",
-    "school"   : "NONE",
     "stats"    : {
       "intelligence": 30,
       "willpower"   : 25,
@@ -421,19 +385,17 @@
       "sword"     : 5,
       "axe"       : 8,
       "spear"     : 8,
-      "staff"     : -1,
       "throw"     : 8,
       "bow"       : -1,
+      "staff"     : -1,
       "shield"    : 9
     },
     "abilities": [
       "strike_2", "strike_3", "strike_4",
       "stagger"
     ],
-    "spells"   : {
-    },
     "inventory": {
-      "weapon": "basic_sword",
+      "weapon": "fine_axe",
       "shield": "fine_medium_shield",
       "chest" : "fine_heavy_chest",
       "pants" : "fine_heavy_pants",
@@ -443,7 +405,6 @@
   "duilio"  : {
     "name"     : "Duilio",
     "gender"   : "his",
-    "school"   : "ELEMENTAL",
     "stats"    : {
       "intelligence": 25,
       "willpower"   : 25,
@@ -470,24 +431,20 @@
       "axe"       : 10,
       "spear"     : 10,
       "dagger"    : 10,
-      "staff"     : 10,
       "throw"     : 10,
       "bow"       : -1,
+      "staff"     : 10,
       "shield"    : 10
     },
     "abilities": [
       "strike_2", "strike_3", "strike_4",
-      "stagger"
+      "stagger",
+      "fire", "elfire",
+      "magic_shield", "resistance",
+      "might", "debilitation"
     ],
-    "spells"   : {
-      "fireball"    : 6,
-      "air_shield"  : 9,
-      "strength"    : 9,
-      "debilitation": 9,
-      "mirror"      : 9
-    },
     "inventory": {
-      "weapon": "basic_sword",
+      "weapon": "specialist_spear",
       "shield": "specialist_light_shield",
       "chest" : "specialist_medium_chest",
       "pants" : "specialist_medium_pants",
@@ -497,7 +454,6 @@
   "iellwen" : {
     "name"     : "Iellwen",
     "gender"   : "her",
-    "school"   : "STAR",
     "stats"    : {
       "intelligence": 35,
       "willpower"   : 25,
@@ -518,21 +474,17 @@
       "axe"    : 5,
       "throw"  : -1,
       "bow"    : 7,
+      "staff"  : 8,
       "shield" : -1
     },
     "abilities": [
       "strike_2", "strike_3", "strike_4",
-      "stagger"
+      "stagger",
+      "wind", "elwind", "arcwind",
+      "finesse", "might"
     ],
-    "spells"   : {
-      "web_of_starlight": 8,
-      "dispel_star"     : 8,
-      "stellar_gravity" : 8,
-      "dispel_naming"   : 8,
-      "solar_wrath"     : 8
-    },
     "inventory": {
-      "weapon": "basic_sword",
+      "weapon": "specialist_sword",
       "chest" : "specialist_medium_chest",
       "pants" : "specialist_medium_pants",
       "boots" : "specialist_medium_boots"
@@ -541,7 +493,6 @@
   "faeron"  : {
     "name"     : "Faeron",
     "gender"   : "his",
-    "school"   : "NAMING",
     "stats"    : {
       "intelligence": 30,
       "willpower"   : 30,
@@ -563,21 +514,22 @@
       "thief"     : 10,
       "troubadour": 10,
       "warrior"   : 10,
-      "wizard"    : -1,
+      "wizard"    : 10,
       "dagger"    : 10,
       "axe"       : 10,
-      "staff"     : -1,
       "throw"     : -1,
-      "bow"       : -1
+      "bow"       : -1,
+      "staff"     : 10
     },
     "abilities": [
       "strike_2", "strike_3", "strike_4",
-      "stagger"
+      "stagger",
+      "wind", "elwind", "arcwind",
+      "thunder", "elthunder", "arcthunder",
+      "stupidity", "clumsiness", "debilitation", "sluggishness"
     ],
-    "spells"   : {
-    },
     "inventory": {
-      "weapon": "basic_sword",
+      "weapon": "legendary_staff_wind",
       "chest" : "masterwork_light_chest",
       "pants" : "masterwork_light_pants",
       "boots" : "masterwork_light_boots"

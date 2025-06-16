@@ -23,6 +23,7 @@ import nl.t64.cot.components.conversation.ConversationCommand
 import nl.t64.cot.components.conversation.ConversationGraph
 import nl.t64.cot.components.conversation.NoteDatabase
 import nl.t64.cot.components.loot.Loot
+import nl.t64.cot.components.party.SkillsRewarder
 import nl.t64.cot.components.party.SpellsRewarder
 import nl.t64.cot.components.party.XpRewarder
 import nl.t64.cot.components.quest.QuestGraph
@@ -194,6 +195,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             ConversationCommand.HEAL_LIFE_18 -> healLife(nextId, "18:00")
             ConversationCommand.RECEIVE_XP -> receiveXp(nextId)
             ConversationCommand.RECEIVE_SPELLS -> receiveSpells(nextId)
+            ConversationCommand.RECEIVE_SKILLS -> receiveSkills(nextId)
             ConversationCommand.RECEIVE_ITEM -> receiveItem()
             ConversationCommand.START_BATTLE -> startBattle(nextId)
             ConversationCommand.RELOAD_NPCS -> fadeAndReloadNpcs(nextId)
@@ -306,6 +308,11 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
 
     private fun receiveSpells(nextId: String) {
         SpellsRewarder.receivePossibleSpells(conversationId)
+        continueConversation(nextId)
+    }
+
+    private fun receiveSkills(nextId: String) {
+        SkillsRewarder.receivePossibleSkills(conversationId)
         continueConversation(nextId)
     }
 

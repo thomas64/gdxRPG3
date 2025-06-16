@@ -7,7 +7,8 @@
     "price"           : 10,
     "durability"      : 30,
     "min_intelligence": 15,
-    "base_hit"        : 95,
+    "range"           : [2, 3],
+    "base_hit"        : 90,
     "damage"          : 5
   },
   "fine_staff_fire"      : {
@@ -18,7 +19,8 @@
     "price"           : 35,
     "durability"      : 25,
     "min_intelligence": 18,
-    "base_hit"        : 85,
+    "range"           : [2, 3, 4],
+    "base_hit"        : 80,
     "damage"          : 10
   },
   "specialist_staff_fire": {
@@ -29,7 +31,8 @@
     "price"           : 60,
     "durability"      : 20,
     "min_intelligence": 21,
-    "base_hit"        : 75,
+    "range"           : [2, 3, 4, 5],
+    "base_hit"        : 70,
     "damage"          : 15
   },
   "masterwork_staff_fire": {
@@ -40,7 +43,8 @@
     "price"           : 85,
     "durability"      : 15,
     "min_intelligence": 24,
-    "base_hit"        : 65,
+    "range"           : [2, 3, 4, 5, 6],
+    "base_hit"        : 60,
     "damage"          : 20
   },
   "epic_staff_fire"      : {
@@ -51,7 +55,8 @@
     "price"           : 110,
     "durability"      : 10,
     "min_intelligence": 27,
-    "base_hit"        : 55,
+    "range"           : [2, 3, 4, 5, 6, 7],
+    "base_hit"        : 50,
     "damage"          : 25
   },
   "legendary_staff_fire" : {
@@ -62,7 +67,8 @@
     "price"           : 135,
     "durability"      : 5,
     "min_intelligence": 30,
-    "base_hit"        : 45,
+    "range"           : [2, 3, 4, 5, 6, 7, 8],
+    "base_hit"        : 40,
     "damage"          : 30
   }
 }

@@ -2,6 +2,8 @@ package nl.t64.cot.components.party
 
 import nl.t64.cot.components.battle.Character
 import nl.t64.cot.components.party.abilities.AbilityContainer
+import nl.t64.cot.components.party.abilities.AbilityItem
+import nl.t64.cot.components.party.abilities.AbilityItemId
 import nl.t64.cot.components.party.inventory.EquipContainer
 import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.components.party.inventory.InventoryItem
@@ -9,10 +11,6 @@ import nl.t64.cot.components.party.inventory.InventoryMinimal
 import nl.t64.cot.components.party.skills.SkillContainer
 import nl.t64.cot.components.party.skills.SkillItem
 import nl.t64.cot.components.party.skills.SkillItemId
-import nl.t64.cot.components.party.spells.SchoolType
-import nl.t64.cot.components.party.spells.SpellContainer
-import nl.t64.cot.components.party.spells.SpellItem
-import nl.t64.cot.components.party.spells.SpellItemId
 import nl.t64.cot.components.party.stats.StatContainer
 import nl.t64.cot.components.party.stats.StatItem
 import nl.t64.cot.components.party.stats.StatItemId
@@ -23,17 +21,15 @@ class HeroItem(
     id: String = "",
     name: String = "",
     gender: String = "",
-    school: SchoolType = SchoolType.NONE,
     stats: StatContainer = StatContainer(),
     skills: SkillContainer = SkillContainer(),
     abilities: AbilityContainer = AbilityContainer(),
-    spells: SpellContainer = SpellContainer(),
     inventory: EquipContainer = EquipContainer(),
     isAlive: Boolean = true,
     var hasBeenRecruited: Boolean = false,
     private var isForVeryFirstSetup: Boolean = false
 ) : Character(
-    id, name, gender, school, stats, skills, abilities, spells, inventory, isAlive
+    id, name, gender, stats, skills, abilities, inventory, isAlive
 ) {
     val isPlayer: Boolean get() = id == Constant.PLAYER_ID
     var totalXp: Int = 0
@@ -52,16 +48,14 @@ class HeroItem(
         id: String,
         name: String = this.name,
         gender: String = this.gender,
-        school: SchoolType = this.school,
         stats: StatContainer = this.stats,
         skills: SkillContainer = this.skills,
         abilities: AbilityContainer = this.abilities,
-        spells: SpellContainer = this.spells,
         inventory: EquipContainer = this.inventory,
         isAlive: Boolean = this.isAlive,
         hasBeenRecruited: Boolean = this.hasBeenRecruited
     ): HeroItem {
-        return HeroItem(id, name, gender, school, stats, skills, abilities, spells, inventory, isAlive, hasBeenRecruited, isForVeryFirstSetup = true)
+        return HeroItem(id, name, gender, stats, skills, abilities, inventory, isAlive, hasBeenRecruited, isForVeryFirstSetup = true)
     }
 
     fun hasSameIdAs(candidateHero: HeroItem): Boolean {
@@ -98,12 +92,9 @@ class HeroItem(
         }
     }
 
-    fun doUpgrade(spellItem: SpellItem, xpCost: Int) {
+    fun learn(abilityItem: AbilityItem, xpCost: Int){
         xpPoints -= xpCost
-        spellItem.doUpgrade()
-        if (spellItem.rank == 1) {
-            spells.add(spellItem)
-        }
+        abilities.add(abilityItem)
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -116,13 +107,17 @@ class HeroItem(
         return skills.getById(skillItemId)
     }
 
-    fun getSpellById(spellId: SpellItemId): SpellItem {
-        return spells.getById(spellId)
+    fun getAbilityById(abilityItemId: AbilityItemId): AbilityItem? {
+        return abilities.getById(abilityItemId)
     }
 
-    fun getAllStats(): List<StatItem> = stats.getAll()
-    fun getAllSkillsAboveZero(): List<SkillItem> = skills.getAllAboveZero()
-    fun getAllSpells(): List<SpellItem> = spells.getAll()
+    fun getAllStats(): List<StatItem> {
+        return stats.getAll()
+    }
+
+    fun getAllSkillsAboveZero(): List<SkillItem> {
+        return skills.getAllAboveZero()
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

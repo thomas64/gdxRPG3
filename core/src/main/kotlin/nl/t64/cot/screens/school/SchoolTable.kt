@@ -5,8 +5,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.resourceManager
-import nl.t64.cot.components.party.spells.SpellDatabase
-import nl.t64.cot.components.party.spells.SpellItem
+import nl.t64.cot.components.party.abilities.AbilityDatabase
+import nl.t64.cot.components.party.abilities.AbilityItem
 import nl.t64.cot.screens.inventory.BaseTable
 import nl.t64.cot.screens.inventory.ListenerKeyVertical
 
@@ -21,8 +21,8 @@ private const val SECOND_COLUMN_PAD_LEFT = 15f
 
 class SchoolTable(schoolId: String, tooltip: SchoolTooltip) : BaseTable(tooltip) {
 
-    private val spellsToLearn: List<SpellItem> = resourceManager.getSchoolInventory(schoolId)
-        .map { SpellDatabase.createSpellItem(it.key, it.value) }
+    private val spellsToLearn: List<AbilityItem> = resourceManager.getSchoolInventory(schoolId)
+        .map { AbilityDatabase.createAbilityItem(it) }
 
     init {
         table.columnDefaults(0).width(FIRST_COLUMN_WIDTH)
@@ -37,6 +37,7 @@ class SchoolTable(schoolId: String, tooltip: SchoolTooltip) : BaseTable(tooltip)
     }
 
     fun upgradeSpell() {
+        hideTooltip()
         val spellToUpgrade = spellsToLearn[selectedIndex]
         SpellUpgrader.upgradeSpell(spellToUpgrade, table.stage) { hasJustUpdated = true }
     }
@@ -51,14 +52,14 @@ class SchoolTable(schoolId: String, tooltip: SchoolTooltip) : BaseTable(tooltip)
         spellsToLearn.forEachIndexed { index, spellItem -> fillRow(spellItem, index) }
     }
 
-    private fun fillRow(spellItem: SpellItem, index: Int) {
-        table.add(createImageOf(spellItem.id.name))
-        val spellName = Label(spellItem.name, LabelStyle(font, Color.BLACK))
+    private fun fillRow(abilityItem: AbilityItem, index: Int) {
+        table.add(createImageOf(abilityItem.id.name))
+        val spellName = Label(abilityItem.name, LabelStyle(font, Color.BLACK))
         table.add(spellName).padLeft(SECOND_COLUMN_PAD_LEFT)
-        table.add(spellItem.rank.toString())
+        table.add("")
         table.add("").row()
         scrollScrollPane()
-        super.possibleSetSelected(index, spellName, spellItem)
+        super.possibleSetSelected(index, spellName, abilityItem)
     }
 
     private fun scrollScrollPane() {

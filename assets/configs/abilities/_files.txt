@@ -1,0 +1,7 @@
+abilities.json
+fire.json
+wind.json
+thunder.json
+buff.json
+debuff.json
+other.json

@@ -9,8 +9,6 @@ import nl.t64.cot.components.party.inventory.InventoryItem
 import nl.t64.cot.components.party.skills.SkillContainer
 import nl.t64.cot.components.party.skills.SkillItem
 import nl.t64.cot.components.party.skills.SkillItemId
-import nl.t64.cot.components.party.spells.SchoolType
-import nl.t64.cot.components.party.spells.SpellContainer
 import nl.t64.cot.components.party.stats.StatContainer
 import nl.t64.cot.components.party.stats.StatItem
 import nl.t64.cot.components.party.stats.StatItemId
@@ -21,11 +19,9 @@ abstract class Character(
     val id: String = "",
     val name: String = "",
     val gender: String = "",
-    val school: SchoolType = SchoolType.NONE,
     protected val stats: StatContainer = StatContainer(),
     protected val skills: SkillContainer = SkillContainer(),
     protected val abilities: AbilityContainer = AbilityContainer(),
-    protected val spells: SpellContainer = SpellContainer(),
     protected val inventory: EquipContainer = EquipContainer(),
     var isAlive: Boolean = true
 ) {

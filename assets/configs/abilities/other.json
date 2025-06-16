@@ -1,0 +1,39 @@
+{
+  "magic_shield"       : {
+    "name"       : "Shield",
+    "resource"   : "GEMSTONE",
+    "ap"         : 4,
+    "sp"         : 5,
+    "skill"      : "WIZARD",
+    "min_skill"  : 1,
+    "description": [
+      "Friendly target of the spell add 2 to their",
+      "Protection value for each rank in 'Wizard'.",
+      "May only be cast once on each target."
+    ]
+  },
+  "resistance"   : {
+    "name"       : "Resistance",
+    "resource"   : "GEMSTONE",
+    "ap"         : 4,
+    "sp"         : 5,
+    "skill"      : "WIZARD",
+    "min_skill"  : 1,
+    "description": [
+      "Friendly target of the spell add 2 to their",
+      "Resistance value for each rank in 'Wizard'.",
+      "May only be cast once on each target."
+    ]
+  },
+  "teleportation": {
+    "name"       : "Teleportation",
+    "resource"   : "GEMSTONE",
+    "ap"         : 4,
+    "sp"         : 5,
+    "skill"      : "WIZARD",
+    "min_skill"  : 8,
+    "description": [
+      "Caster teleports to a chosen point on the battlefield."
+    ]
+  }
+}

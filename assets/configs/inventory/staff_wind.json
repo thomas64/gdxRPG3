@@ -7,8 +7,9 @@
     "price"           : 10,
     "durability"      : 30,
     "min_intelligence": 15,
+    "range"           : [2, 3],
     "base_hit"        : 95,
-    "damage"          : 5
+    "damage"          : 4
   },
   "fine_staff_wind"      : {
     "name"            : "Fine Wind Staff",
@@ -18,8 +19,9 @@
     "price"           : 35,
     "durability"      : 25,
     "min_intelligence": 18,
+    "range"           : [2, 3, 4],
     "base_hit"        : 85,
-    "damage"          : 10
+    "damage"          : 9
   },
   "specialist_staff_wind": {
     "name"            : "Specialist Wind Staff",
@@ -29,8 +31,9 @@
     "price"           : 60,
     "durability"      : 20,
     "min_intelligence": 21,
+    "range"           : [2, 3, 4, 5],
     "base_hit"        : 75,
-    "damage"          : 15
+    "damage"          : 14
   },
   "masterwork_staff_wind": {
     "name"            : "Masterwork Wind Staff",
@@ -40,8 +43,9 @@
     "price"           : 85,
     "durability"      : 15,
     "min_intelligence": 24,
+    "range"           : [2, 3, 4, 5, 6],
     "base_hit"        : 65,
-    "damage"          : 20
+    "damage"          : 19
   },
   "epic_staff_wind"      : {
     "name"            : "Epic Wind Staff",
@@ -51,8 +55,9 @@
     "price"           : 110,
     "durability"      : 10,
     "min_intelligence": 27,
+    "range"           : [2, 3, 4, 5, 6, 7],
     "base_hit"        : 55,
-    "damage"          : 25
+    "damage"          : 24
   },
   "legendary_staff_wind" : {
     "name"            : "Legendary Wind Staff",
@@ -62,7 +67,8 @@
     "price"           : 135,
     "durability"      : 5,
     "min_intelligence": 30,
+    "range"           : [2, 3, 4, 5, 6, 7, 8],
     "base_hit"        : 45,
-    "damage"          : 30
+    "damage"          : 29
   }
 }

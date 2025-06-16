@@ -185,7 +185,7 @@
     "phrases"  : {
       "1" : {
         "text": ["Young Mozes, would you like to learn a spell?"], "choices": [
-          {"condition": ["starting_spells"], "nextId": "2", "orElseId": "10"}
+          {"condition": ["shield_spell"], "nextId": "2", "orElseId": "3"}
         ]
       },
       "2" : {
@@ -194,12 +194,18 @@
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
-      "3" : {"text": ["It seems that you're not very familiar with spell casting yet.", "I will teach you my two spells at rank 1, free of charge."]},
-      "4" : {"text": ["Ready? Here we go!"]},
-      "5" : {"text": ["{SPEED=0.2} . . . . . . . . ."], "choices": [{"command": "RECEIVE_SPELLS", "nextId": "6"}]},
-      "6" : {"text": ["You can view all the spells you've learned in your Inventory Screen, and the best part is that you can now use these spells in battle!"]},
-      "7" : {"text": ["Feel free to come see me again if you'd like to learn more spells."], "choices": [{"command": "EXIT"}]},
-      "10": {"text": ["It seems that you're not very familiar with spell casting yet.", "Please come back to me when the developer has implemented a magic system."], "choices": [{"command": "EXIT"}]},
+      "3" : {
+        "text": ["It seems that you're not very familiar with spell casting yet."], "choices": [
+          {"condition": ["mozes_wizard1"], "nextId": "10", "orElseId": "5"}
+        ]
+      },
+      "5" : {"text": ["If you go to my neighbor here, she can train you in the Wizard skill."]},
+      "6" : {"text": ["Come back to me when you are trained in the Wizard skill, and I'll teach you a spell."], "choices": [{"command": "EXIT"}]},
+      "10": {"text": ["I will teach you to cast a spell, free of charge."]},
+      "11": {"text": ["Ready? Here we go!"]},
+      "12": {"text": ["{SPEED=0.2} . . . . . . . . ."], "choices": [{"command": "RECEIVE_SPELLS", "nextId": "13"}]},
+      "13": {"text": ["Now you can use the spell you've just learned in battle. (Note from developer: this is not implemented yet.)"]},
+      "14": {"text": ["Feel free to come see me again if you'd like to learn more spells."], "choices": [{"command": "EXIT"}]},
       "20": {"text": ["Ah, dear Mozes, we're so happy you've come to visit us."]},
       "21": {"text": ["First, please visit our Mother Fairy by the Great Tree."]},
       "22": {"text": ["And be sure to return to me after you've spoken with her."], "choices": [{"command": "EXIT"}]}
@@ -209,13 +215,23 @@
     "name"     : "Fairy Academy",
     "condition": ["_rc_===_u_q_quest_mother_fairy"], "startAt": "20",
     "phrases"  : {
-      "1" : {"text": ["Young Mozes, would you like to receive skill training?"]},
+      "1" : {
+        "text": ["Young Mozes, would you like to receive skill training?"], "choices": [
+          {"condition": ["mozes_wizard1"], "nextId": "2", "orElseId": "5"}
+        ]
+      },
       "2" : {
         "choices": [
           {"text": "*Visit the academy.*", "command": "LOAD_ACADEMY"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
+      "5" : {"text": ["It seems that you're not very familiar with spell casting yet."]},
+      "6" : {"text": ["I will train you in the Wizard skill, free of charge."]},
+      "7" : {"text": ["Ready? Here we go!"]},
+      "8" : {"text": ["{SPEED=0.2} . . . . . . . . ."], "choices": [{"command": "RECEIVE_SKILLS", "nextId": "9"}]},
+      "9" : {"text": ["With the Wizard skill, you are now able to learn spells. I hope you can make good use of this."]},
+      "10": {"text": ["Feel free to come see me again if you'd like to learn any more skills."], "choices": [{"command": "EXIT"}]},
       "20": {"text": ["Ah, dear Mozes, we're so happy you've come to visit us."]},
       "21": {"text": ["First, please visit our Mother Fairy by the Great Tree."]},
       "22": {"text": ["And be sure to return to me after you've spoken with her."], "choices": [{"command": "EXIT"}]}

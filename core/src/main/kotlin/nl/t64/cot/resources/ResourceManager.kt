@@ -40,8 +40,6 @@ private const val ATLAS_FILES = "sprites/"
 private const val FILE_LIST_ATLAS_FILES = ATLAS_FILES + FILE_LIST
 private const val ATLAS_FILES2 = "sprites/inventory/"
 private const val FILE_LIST_ATLAS_FILES2 = ATLAS_FILES2 + FILE_LIST
-private const val ATLAS_FILES3 = "sprites/spells/"
-private const val FILE_LIST_ATLAS_FILES3 = ATLAS_FILES3 + FILE_LIST
 private const val PARTICLES_PATH = "effects/"
 private const val PARTICLES_SUFFIX = ".p"
 
@@ -119,7 +117,6 @@ class ResourceManager {
         if (atlasList.isEmpty()) {
             loadAtlasTexture(FILE_LIST_ATLAS_FILES, ATLAS_FILES)
             loadAtlasTexture(FILE_LIST_ATLAS_FILES2, ATLAS_FILES2)
-            loadAtlasTexture(FILE_LIST_ATLAS_FILES3, ATLAS_FILES3)
         }
         return atlasList.firstNotNullOf { it.findRegion(atlasId) }
     }
@@ -144,10 +141,9 @@ class ResourceManager {
                              Gdx.files.internal(fullFileNamePath)) as OrderedMap<String, Int>
     }
 
-    fun getSchoolInventory(schoolId: String): GdxMap<String, Int> {
+    fun getSchoolInventory(schoolId: String): List<String> {
         val fullFileNamePath = SCHOOL_CONFIGS + schoolId + CONFIG_SUFFIX
-        return json.fromJson(OrderedMap::class.java, Int::class.java,
-                             Gdx.files.internal(fullFileNamePath)) as OrderedMap<String, Int>
+        return json.fromJson(Gdx.files.internal(fullFileNamePath))
     }
 
 }

@@ -51,7 +51,9 @@
       "",
       "- 'Warrior' allows the possibility of scoring critical hits with weapons in combat.",
       "  Each rank in 'Warrior' increases the probability of this by 4%.",
-      "  A critical hit inflicts damage equal to 175% of the normal damage."
+      "  A critical hit inflicts damage equal to 175% of the normal damage.",
+      "",
+      "- 'Warrior' increases the power of Warrior based abilities."
     ]
   },
   "wizard"    : {
@@ -59,7 +61,11 @@
     "description": [
       "- 'Wizard' allows the possibility to learn and cast magical spells in combat.",
       "",
-      "ToDo"
+      "- 'Wizard' allows the possibility of scoring critical hits with offensive spells in combat.",
+      "  Each rank in 'Wizard' increases the probability of this by 4%.",
+      "  A critical hit inflicts damage equal to 175% of the normal damage.",
+      "",
+      "- 'Wizard' increases the power of buff and debuff spells."
     ]
   }
 }
