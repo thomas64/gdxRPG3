@@ -55,6 +55,14 @@ class BattleField(
             .eachCount()
     }
 
+    fun isParticipantNextToOpponent(participant: Participant): Boolean {
+        return if (participant.isHero) {
+            participant.getSpaceIndex().isHeroSpaceNextToEnemy()
+        } else {
+            participant.getSpaceIndex().isEnemySpaceNextToHero()
+        }
+    }
+
     fun moveHeroRight() {
         val currentIndex: Int = getSpaceIndexOfCurrentParticipant()
         val actionPoints: Int = getModifiedApForHero()
@@ -89,13 +97,7 @@ class BattleField(
     }
 
     fun getSpaceIndexOfCurrentParticipant(): Int {
-        return getSpaceIndexOf(currentParticipant.invoke())
-    }
-
-    fun getSpaceIndexOf(participant: Participant): Int {
-        return heroSpaces.indexOf(participant)
-            .takeUnless { it == -1 }
-            ?: enemySpaces.indexOf(participant)
+        return currentParticipant.invoke().getSpaceIndex()
     }
 
     fun getTargetableEnemiesForActingHero(): List<Participant> {
@@ -151,7 +153,7 @@ class BattleField(
         val actingEnemy: Participant = currentParticipant.invoke()
         return heroSpaces.filterNotNull()
             .sortedBy { hero -> hero.getPriorityFor(actingEnemy, isActingEnemyNextTo(hero)) }
-            .map { hero -> getSpaceIndexOf(hero) }
+            .map { hero -> hero.getSpaceIndex() }
     }
 
     private fun getMostPrioSpaceToMoveToForAnAttack(heroIndicesByPrio: List<Int>): Int? {
@@ -283,20 +285,34 @@ class BattleField(
 
     private fun isActingEnemyNextTo(hero: Participant): Boolean {
         val enemyIndex: Int = getSpaceIndexOfCurrentParticipant()
-        val heroIndex: Int = getSpaceIndexOf(hero)
+        val heroIndex: Int = hero.getSpaceIndex()
         return enemyIndex == heroIndex || enemyIndex == heroIndex - 1
     }
 
     private fun isHeroStartingSpaceNextToEnemy(): Boolean {
         if (startingSpace == -1) return false
-        return (startingSpace > 0 && enemySpaces[startingSpace - 1] != null)
-            || enemySpaces[startingSpace] != null
+        return startingSpace.isHeroSpaceNextToEnemy()
     }
 
     private fun isEnemyStartingSpaceNextToHero(): Boolean {
         if (startingSpace == -1) return false
-        return heroSpaces[startingSpace] != null
-            || (startingSpace < BATTLE_FIELD_SIZE - 1 && heroSpaces[startingSpace + 1] != null)
+        return startingSpace.isEnemySpaceNextToHero()
+    }
+
+    private fun Int.isHeroSpaceNextToEnemy(): Boolean {
+        return (this > 0 && enemySpaces[this - 1] != null)
+            || enemySpaces[this] != null
+    }
+
+    private fun Int.isEnemySpaceNextToHero(): Boolean {
+        return heroSpaces[this] != null
+            || (this < BATTLE_FIELD_SIZE - 1 && heroSpaces[this + 1] != null)
+    }
+
+    private fun Participant.getSpaceIndex(): Int {
+        return heroSpaces.indexOf(this)
+            .takeUnless { it == -1 }
+            ?: enemySpaces.indexOf(this)
     }
 
     private fun Participant.isEnemyInRangeOfActingHero(): Boolean {

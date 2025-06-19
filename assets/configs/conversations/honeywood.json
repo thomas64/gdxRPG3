@@ -170,7 +170,7 @@
       "14": {"text": ["If you hit them with a weapon, they will die."]},
       "15": {"text": [". . ."]},
       "16": {"text": ["No? Nothing? No smile? No chuckle?"]},
-      "17": {"text": ["Then let me tell you something about weapon [BLUE]advantage[BLACK] and [FIREBRICK]disadvantage[BLACK]."]},
+      "17": {"text": ["Then let me tell you something about weapon {COLOR=BLUE}advantage{COLOR=BLACK} and {COLOR=FIREBRICK}disadvantage{COLOR=BLACK}."]},
       "18": {"text": ["Swords have advantage against axes, axes have advantage against spears, and spears have advantage against swords."]},
       "19": {"text": ["This also means swords have disadvantage against spears, spears have disadvantage against axes, and axes have disadvantage against swords."]},
       "20": {"text": ["So: swords > axes > spears > swords."]},
@@ -290,11 +290,11 @@
       "4"   : {"text": ["How long would you like to rest?"]},
       "5"   : {
         "choices": [
-          {"text": "* Just a 1 hour rest. *", "command": "HEAL_LIFE_01", "nextId": "3"},
-          {"condition": ["i_time_before_08:00"], "text": "* Until 09:00. *", "command": "HEAL_LIFE_09", "nextId": "3"},
-          {"condition": ["i_time_before_11:00"], "text": "* Until 12:00. *", "command": "HEAL_LIFE_12", "nextId": "3"},
-          {"condition": ["i_time_before_14:00"], "text": "* Until 15:00. *", "command": "HEAL_LIFE_15", "nextId": "3"},
-          {"condition": ["i_time_before_17:00"], "text": "* Until 18:00. *", "command": "HEAL_LIFE_18", "nextId": "3"},
+          {"text": "*Just a 1 hour rest.*", "command": "HEAL_LIFE_01", "nextId": "3"},
+          {"condition": ["i_time_before_08:00"], "text": "*Until 09:00.*", "command": "HEAL_LIFE_09", "nextId": "3"},
+          {"condition": ["i_time_before_11:00"], "text": "*Until 12:00.*", "command": "HEAL_LIFE_12", "nextId": "3"},
+          {"condition": ["i_time_before_14:00"], "text": "*Until 15:00.*", "command": "HEAL_LIFE_15", "nextId": "3"},
+          {"condition": ["i_time_before_17:00"], "text": "*Until 18:00.*", "command": "HEAL_LIFE_18", "nextId": "3"},
           {"text": "(Back)", "nextId": "2"}
         ]
       },
@@ -376,8 +376,8 @@
           {"text": "*Wish Angie and Enopa the best. Take your leave.*", "command": "EXIT"}
         ]
       },
-      "20"  : {"text": ["Let me think...", "Yes, there might be something you can do. Go talk to the village elder's wife, Elenora. She might have some medicine or knows where to find it."]},
-      "21"  : {"text": ["Regarding the horseshoes, I'll need you to get 4 of them. They might be lying around in the village, or you could ask the village elder. He's quite knowledgeable and might even know where to find horseshoes."], "choices": [{"nextId": "35"}]},
+      "20"  : {"text": ["Let me think...", "Yes, there might be something you can do. Go talk to the {COLOR=BLUE}village elder's wife, Elenora{COLOR=BLACK}. She might have some {COLOR=BLUE}medicine{COLOR=BLACK} or knows where to find it."]},
+      "21"  : {"text": ["Regarding the horseshoes, I'll need you to {COLOR=BLUE}get 4 of them{COLOR=BLACK}. They might be lying around in the village, or you could ask the {COLOR=BLUE}village elder{COLOR=BLACK}. He's quite knowledgeable and might even know where to find horseshoes."], "choices": [{"nextId": "35"}]},
       "30"  : {"text": ["Really? That would be a big help. Thank you!"], "choices": [{"nextId": "35"}]},
       "35"  : {"text": ["Once Enopa is fully recovered and has been shoed, I'll lend her to Lennor and you."]},
       "36"  : {
@@ -508,16 +508,14 @@
       "20"  : {"text": ["Hmmm..."]},
       "21"  : {
         "text": ["I believe there's one in {COLOR=BLUE}my basement{COLOR=BLACK}. It's quite dark down there, but you're welcome to see if you can find it."], "choices": [
-          {"condition": ["i_time_between_08:09_and_10:34"], "nextId": "22"},
-          {"condition": ["i_time_after_10:34"], "nextId": "23"},
-          {"condition": ["i_time_before_08:09"], "nextId": "23"}
+          {"condition": ["_time_between_08:09_and_10:35"], "nextId": "22", "orElseId": "23"}
         ]
       },
       "22"  : {"text": ["I reckon there might be more {COLOR=BLUE}scattered around town{COLOR=BLACK}. However, if you find yourself short, our local blacksmith, who lives north of here but is here right now to help my wife, should be able to assist you."], "choices": [{"nextId": "2"}]},
       "23"  : {"text": ["I reckon there might be more {COLOR=BLUE}scattered around town{COLOR=BLACK}. However, if you find yourself short, our local blacksmith, north of here, should be able to assist you."], "choices": [{"nextId": "2"}]},
       "30"  : {"text": ["Hmmm..."]},
       "31"  : {"text": ["I've got one {COLOR=BLUE}upstairs{COLOR=BLACK}; you may use it if you can find it."]},
-      "32"  : {"text": ["If I recall correctly, Jaron, who lives west of here, used to have a tow rope as well. It might be worth looking into."], "choices": [{"nextId": "2"}]},
+      "32"  : {"text": ["If I recall correctly, {COLOR=BLUE}Jaron{COLOR=BLACK}, who lives west of here, used to have a tow rope as well. It might be worth looking into."], "choices": [{"nextId": "2"}]},
       "40"  : {"text": ["Hmmm..."]},
       "41"  : {"text": ["You should definitely ask my wife."], "choices": [{"nextId": "2"}]},
       "50"  : {"text": ["Hmmm..."]},
@@ -604,7 +602,15 @@
       },
       "1202": {"text": ["I'm also finished here. Thanks for your help, and here's the rope."], "choices": [{"command": "REWARD_QUEST"}]},
       "1399": {"text": ["Don't you need it anymore?"], "choices": [{"command": "REWARD_QUEST"}]},
-      "1400": {"text": ["Are you finished with the rope? If so, I would like it back."], "choices": [{"command": "EXIT", "nextId": "1400"}]}
+      "1400": {
+        "text": ["Are you finished with the tow rope? If so, I would like it back."], "choices": [
+          {"condition": ["_c_==_f_q_quest_helping_horse"], "nextId": "1401", "orElseId": "1410"}
+        ]
+      },
+      "1401": {"text": [". . ."]},
+      "1402": {"text": ["You used it for towing! The rope is all dirty now. I don't want it back like this. Keep it or whatever."], "choices": [{"command": "EXIT", "nextId": "1403"}]},
+      "1403": {"text": ["I don't want the rope back like this. Just keep it or whatever."], "choices": [{"command": "EXIT", "nextId": "1403"}]},
+      "1410": {"text": ["Hurry up with it, will you? It's my tow rope."], "choices": [{"command": "EXIT", "nextId": "1400"}]}
     }
   },
   "honeywood_soldiers"                  : {
@@ -612,11 +618,11 @@
     "phrases": {
       "1"   : {"text": ["Sir, as per the {COLOR=BLUE}village elder's{COLOR=BLACK} orders, we are not permitted to allow anyone to leave the village {COLOR=BLUE}alone{COLOR=BLACK}."]},
       "2"   : {
-        "text": ["It's dangerous to go alone, particularly with the recent increase in monster activity."], "choices": [
+        "text": ["It's dangerous to go alone, particularly with the recent increase in monster activity. (What's up with that anyway?)"], "choices": [
           {"condition": ["alone_in_party"], "nextId": "3"}
         ]
       },
-      "3"   : {"text": ["What's up with that anyway?"], "choices": [{"command": "EXIT"}]},
+      "3"   : {"text": ["If you have a problem with that, it's not our call. You'll have to take it up with the village elder himself."], "choices": [{"command": "EXIT"}]},
       "2000": {"text": ["But it appears you are in good company. Move along."], "choices": [{"command": "EXIT"}]}
     }
   },

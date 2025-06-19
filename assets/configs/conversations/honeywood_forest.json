@@ -52,7 +52,7 @@
         ]
       },
       "3": {"text": ["What a delightful question, dear Mozes. Of course I have something to share with you."]},
-      "4": {"text": ["Let me tell you about magic [BLUE]advantage[BLACK] and [FIREBRICK]disadvantage[BLACK]."]},
+      "4": {"text": ["Let me tell you about magic {COLOR=BLUE}advantage{COLOR=BLACK} and {COLOR=FIREBRICK}disadvantage{COLOR=BLACK}."]},
       "5": {"text": ["Fire magic has advantage against wind magic, wind magic has advantage against thunder magic, and thunder magic has advantage against fire magic."]},
       "6": {"text": ["This also means fire magic has disadvantage against thunder magic, thunder magic has disadvantage against wind magic, and wind magic has disadvantage against fire magic."]},
       "7": {"text": ["So: fire > wind > thunder > fire."]},
@@ -129,7 +129,7 @@
       "106" : {"text": ["We're still trying to uncover the source of his power, but perhaps you already know more than we do."]},
       "107" : {"text": ["I would have said that you'll have to rely on us to deal with Ardor. That, in time, we will find a way to defeat him..."]},
       "108" : {"text": ["But if what you say is true, I don't know anymore. Please, Mozes, be careful."]},
-      "109" : {"text": ["If you need have of it again, within the cave south of here, we've hidden a magic scroll that may be of some assistance against any orcs here in Honeywood Forest."], "choices": [{"command": "ACCEPT_QUEST", "nextId": "110"}]},
+      "109" : {"text": ["Perhaps you don't need it at this moment again, but within the cave south of here, we've hidden a magic scroll that may be of some assistance against any orcs here in Honeywood Forest."], "choices": [{"command": "ACCEPT_QUEST", "nextId": "110"}]},
       "110" : {"text": ["I cannot stress this enough: Watch out for Ardor! He is not to be trifled with!"], "choices": [{"command": "EXIT", "nextId": "150"}]},
       "150" : {"text": ["Dear young Mozes, you've returned."], "choices": [{"nextId": "3"}]},
       "200" : {"text": ["That's terrible! Ardor and his orcs must pay for this!"]},
@@ -137,7 +137,7 @@
       "202" : {"text": ["Ardor {COLOR=BLUE}appears almost invulnerable {COLOR=BLACK}to all forms of attack. We're still trying to uncover the source of his power."]},
       "203" : {"text": ["You'll have to rely on us to deal with Ardor. In time, we will find a way to defeat him."]},
       "204" : {"text": ["I cannot stress this enough: Please stay away from him!"]},
-      "205" : {"face": "mozes", "name": "Mozes", "text": ["(No. Let's see about that. Grace needs my help. Right now!)"], "choices": [{"command": "EXIT", "nextId": "150"}]},
+      "205" : {"face": "mozes", "name": "Mozes", "text": ["(No. We'll see about that. Grace needs my help. Right now!)"], "choices": [{"command": "EXIT", "nextId": "150"}]},
       "1199": {"text": ["Watch out for Ardor! He is not to be trifled with!"], "choices": [{"command": "RECEIVE_ITEM"}]},
       "1200": {"text": ["Dear young Mozes, you've returned."], "choices": [{"nextId": "2"}]}
     }

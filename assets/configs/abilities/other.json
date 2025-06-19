@@ -1,6 +1,6 @@
 {
   "magic_shield"       : {
-    "name"       : "Shield",
+    "name"       : "Magic Shield",
     "resource"   : "GEMSTONE",
     "ap"         : 4,
     "sp"         : 5,

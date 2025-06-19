@@ -305,8 +305,8 @@ class BattleScreenBuilder {
         val attackAp: Int = if (areEnemiesInRange) 2 else 99
         val maxAp: Int = currentParticipant.maximumAP
         val actions: List<Pair<String, Int>> = listOf(
-            "Attack (X AP, X SP)" to attackAp,
-            "Move (X AP)" to 1,
+            "Attack (? AP, ? SP)" to attackAp,
+            "Move (? AP)" to 1,
             "Potion (3 AP)" to 3,
             "Switch equipment (3 AP)" to 3,
             "Preview hit and damage" to 0,
@@ -350,11 +350,16 @@ class BattleScreenBuilder {
             .map { it.possibleCreateCopyWithGrayName() }
         this.setItems(*abilities.toTypedArray())
         items.add(createBackButton(currentParticipant))
-        if (this.items[buttonTableSelectAttackIndex].toString().startsWith("[GRAY]")) {
+        this.setSelectedIndex()
+        return this
+    }
+
+    private fun GdxList<BattleAbilityItem>.setSelectedIndex() {
+        if (buttonTableSelectAttackIndex > this.items.size - 1
+            || this.items[buttonTableSelectAttackIndex].toString().startsWith("[GRAY]")) {
             buttonTableSelectAttackIndex = this.items.size - 1
         }
         this.selectedIndex = buttonTableSelectAttackIndex
-        return this
     }
 
     private fun createBackButton(currentParticipant: Participant): BattleAbilityItem {

@@ -1,6 +1,6 @@
 {
   "quest_royal_sacrifice"      : {
-    "title"     : "Royal sacrifice?",
+    "title"     : "Royal sacrifice? [M]",
     "entityId"  : "ardor",
     "summary"   : "You witnessed Grace being sacrificed by the wizard Ardor in an attempt to gain ultimate power from Ulrog, the God of Power. However, something seemed to go wrong, and everything was consumed by flames, including Ardor and yourself.",
     "linkedWith": ["quest_sub_royal_sacrifice"],
@@ -45,7 +45,7 @@
     }
   },
   "quest_to_lastdenn_then"     : {
-    "title"     : "To Lastdenn then",
+    "title"     : "To Lastdenn then [M]",
     "entityId"  : "voice_black",
     "summary"   : "Bathed in light, you heard a voice saying, 'You have been given another chance' and 'You must go to the city of Lastdenn'. Whose voice was that? And should you do as the voice said? And why Lastdenn? And why you?",
     "linkedWith": ["quest_honeywood_elder", "quest_luana_before_10"],
@@ -61,7 +61,7 @@
     }
   },
   "quest_to_lastdenn_then2"    : {
-    "title"     : "To Lastdenn then",
+    "title"     : "To Lastdenn then [M]",
     "entityId"  : "ylarus",
     "summary"   : "Adan inexplicably bursts into flames every time Grace is sacrificed by the wizard Ardor. Ylarus, the God of Time, his power is fading. He gave you the Crystal of Time and he sends you to the priest of Lastdenn for answers.",
     "linkedWith": ["quest_honeywood_elder", "quest_luana_before_10"],

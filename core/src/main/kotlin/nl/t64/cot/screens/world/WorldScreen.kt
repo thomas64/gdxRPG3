@@ -452,7 +452,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
 
     private fun createListener(): WorldScreenListener {
         return WorldScreenListener({ isInTransition },
-                                   { player.resetInput(); render(0f) },
+                                   { player.resetInputWithoutStance(); render(0f) },
                                    { partyWindow.showHide() },
                                    { openMiniMap() },
                                    { gridRenderer.setShowGrid() },

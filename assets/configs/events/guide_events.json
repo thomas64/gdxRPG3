@@ -30,7 +30,7 @@
       "which can be used to improve your character."
     ]
   },
-  "guide_event_battle_ap"             : {
+  "guide_event_battle_ap"            : {
     "type": "messagebox",
     "text": [
       "The battlefield consists of the two rows you can see below.",
@@ -41,7 +41,7 @@
       "With these AP, you can move, attack, or do other actions."
     ]
   },
-  "guide_event_battle_advantage"             : {
+  "guide_event_battle_advantage"     : {
     "type": "messagebox",
     "text": [
       "Each enemy has an [BLUE]advantage[BLACK] and a",
@@ -51,17 +51,18 @@
       "against the enemy's [FIREBRICK]disadvantage[BLACK]."
     ]
   },
-  "guide_event_battle_battle_lock"             : {
+  "guide_event_battle_battle_lock"   : {
     "type": "messagebox",
     "text": [
       "At the start of each turn, if a character begins",
       "next to an enemy, they become locked in battle.",
+      "This is marked by a small exclamation mark [!].",
       "",
       "This significantly increases the AP cost to move",
       "away from that enemy and escape the battle lock."
     ]
   },
-  "guide_event_battle_turn_order"             : {
+  "guide_event_battle_turn_order"    : {
     "type": "messagebox",
     "text": [
       "At the top of the screen, you can see the turn order.",
@@ -76,7 +77,7 @@
       "comparing the turn order with your party's speed."
     ]
   },
-  "guide_event_battle_durability"             : {
+  "guide_event_battle_durability"    : {
     "type": "messagebox",
     "text": [
       "Weapons and shields have limited durability.",
@@ -90,7 +91,8 @@
     "type": "messagebox",
     "text": [
       "Press the %logbook% to access your logbook.",
-      "Here, you can find all quest-related information."
+      "Here, you can find all quest-related information.",
+      "A main quest is marked with an [M]."
     ]
   },
   "guide_event_minimap"              : {
@@ -124,7 +126,7 @@
       "you have the opportunity to choose your responses.",
       "",
       "But certain responses are restricted by specific conditions.",
-      "These conditions are stated between brackets %brackets% in front of the response."
+      "These conditions are stated between brackets [ ] in front of the response."
     ]
   },
   "guide_event_slow"                 : {
@@ -189,6 +191,17 @@
       "People may share different information at different times.",
       "Keep this in mind!",
       "The village elder is a good example of this behavior."
+    ]
+  },
+  "guide_event_quest_failure"        : {
+    "type"     : "messagebox",
+    "condition": ["_r_!=_f_q_quest_honeywood_elder", "_c_==_x_q_quest_honeywood_elder"],
+    "text"     : [
+      "One of your main quests was failed.",
+      "Press the %logbook% to access your logbook.",
+      "An red [FIREBRICK]X[BLACK] indicates a failed quest.",
+      "",
+      "In this specific case, just follow the other main quest."
     ]
   },
   "guide_event_party_member"         : {

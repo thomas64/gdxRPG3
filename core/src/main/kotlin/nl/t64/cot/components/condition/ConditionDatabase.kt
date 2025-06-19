@@ -93,7 +93,7 @@ object ConditionDatabase {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun isXpGreaterThan(requestedXp: Int): Boolean =
-        gameData.party.getCertainHero("mozes").hasEnoughXpFor(requestedXp)
+        gameData.party.getCertainHero("mozes").totalXp >= requestedXp
 
     private fun hasMozesEnoughOfSkill(skillItemId: SkillItemId, rank: Int): Boolean =
         gameData.party.getCertainHero("mozes").getCalculatedTotalSkillOf(skillItemId) >= rank

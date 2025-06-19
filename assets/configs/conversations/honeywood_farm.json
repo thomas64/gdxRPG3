@@ -101,7 +101,7 @@
       },
       "3": {"text": ["Oh, Mozes, you actually did get me a horse!"]},
       "4": {"text": ["But you're too late, I've already finished the job."]},
-      "5": {"text": ["Thanks for the effort, though. I appreciate it."]},
+      "5": {"text": ["Thanks for the effort, though. I appreciate it."], "choices": [{"command": "EXIT", "nextId": "6"}]},
       "6": {"text": ["It took me a while, but the road to Honeywood Farm is finally clear."], "choices": [{"command": "EXIT", "nextId": "6"}]}
     }
   },

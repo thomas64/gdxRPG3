@@ -13,7 +13,6 @@ import nl.t64.cot.screens.FontProvider
 
 class BattleFieldTableBuilder {
 
-    private val smallStyle = LabelStyle(FontProvider.default, Color.WHITE)
     private val transparent: Drawable = Utils.createTransparency()
     private val border: Drawable = Utils.createFullBorderWhite()
     private val combined: Drawable = Utils.createCombinedDrawable(transparent, border)
@@ -122,6 +121,7 @@ class BattleFieldTableBuilder {
             add(Image(Utils.createFullBorderWhite()))
             add(Container(createImageOf(participant)))
             addPossibleCount(participant)
+            addPossibleBattleLock(participant)
         }).padRight(1f)
     }
 
@@ -129,6 +129,7 @@ class BattleFieldTableBuilder {
         add(Stack().apply {
             add(Image(Utils.createFullBorderWhite()).apply { color = Color.ORANGE })
             add(Container(createImageOf(participant)))
+            addPossibleBattleLock(participant)
         }).padRight(1f)
     }
 
@@ -136,6 +137,7 @@ class BattleFieldTableBuilder {
         add(Stack().apply {
             add(Image(Utils.createFullBorderWhite()).apply { color = Color.CHARTREUSE })
             add(Container(createImageOf(participant)))
+            addPossibleBattleLock(participant)
         }).padRight(1f)
     }
 
@@ -144,6 +146,7 @@ class BattleFieldTableBuilder {
             add(Image(Utils.createFullBorderWhite()).apply { color = Color.RED })
             add(Container(createImageOf(participant)))
             addPossibleCount(participant)
+            addPossibleBattleLock(participant)
         }).padRight(1f)
     }
 
@@ -174,7 +177,15 @@ class BattleFieldTableBuilder {
     private fun Stack.addPossibleCount(participant: Participant) {
         val enemyCountMap: Map<String, Int> = battleField.createEnemyCountMap()
         if ((enemyCountMap[participant.character.id] ?: 0) > 1) {
-            add(Container(Label(participant.character.name.last().toString(), smallStyle)).top().right().padRight(2f))
+            val style = LabelStyle(FontProvider.default, Color.WHITE)
+            add(Container(Label(participant.character.name.last().toString(), style)).top().right().padRight(2f))
+        }
+    }
+
+    private fun Stack.addPossibleBattleLock(participant: Participant) {
+        if (battleField.isParticipantNextToOpponent(participant)) {
+            val style = LabelStyle(FontProvider.default, Color.YELLOW)
+            add(Container(Label("!", style)).top().left().padLeft(4f))
         }
     }
 

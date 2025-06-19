@@ -35,7 +35,7 @@ class BattleResultManager(
                 gameData.party.gainXp(totalXpWon)
                 val winMessage = """
                     The enemy is defeated!
-                    Party gained $totalXpWon XP.""".trimIndent()
+                    Party gained [OLIVE]$totalXpWon XP[BLACK].""".trimIndent()
 
                 val messageDialog = MessageDialog(winMessage)
                 messageDialog.setActionAfterHide { battleWonExitScreen() }

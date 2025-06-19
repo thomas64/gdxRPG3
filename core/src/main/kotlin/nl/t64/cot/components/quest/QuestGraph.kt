@@ -26,6 +26,8 @@ data class QuestGraph(
     var isFailed: Boolean = false
     var wasFailed: Boolean = false
 
+    private val titleWithoutPrefix: String = title.removeSuffix(" [M]")
+
     override fun toString(): String {
         return when {
             isFailed -> "[FIREBRICK]x[GRAY]    $title"
@@ -312,7 +314,7 @@ data class QuestGraph(
     private fun showMessageTooltipQuestNew() {
         if (isHidingMessagesAfterFinishing && isOneOfBothStatesEqualOrHigherThan(QuestState.FINISHED)) return
         if (!isHidden && resetState == QuestState.UNKNOWN) {
-            worldScreen.showMessageTooltip("New quest:" + System.lineSeparator() + title)
+            worldScreen.showMessageTooltip("New quest:" + System.lineSeparator() + titleWithoutPrefix)
         }
     }
 
@@ -322,7 +324,7 @@ data class QuestGraph(
             && (currentState == QuestState.ACCEPTED || resetState == QuestState.ACCEPTED)
             && (!isReadyToBeFinished() || (isSubQuest && isReadyToBeFinished()))
         ) {
-            worldScreen.showMessageTooltip("Quest updated:" + System.lineSeparator() + title)
+            worldScreen.showMessageTooltip("Quest updated:" + System.lineSeparator() + titleWithoutPrefix)
         }
     }
 
@@ -331,7 +333,7 @@ data class QuestGraph(
         if (!isHidden && !isSubQuest) {
             stopAllSe()
             playSe(AudioEvent.SE_REWARD)
-            worldScreen.showMessageTooltip("Quest completed:" + System.lineSeparator() + title)
+            worldScreen.showMessageTooltip("Quest completed:" + System.lineSeparator() + titleWithoutPrefix)
         }
     }
 
@@ -340,7 +342,7 @@ data class QuestGraph(
         if (!isFailed && isOneOfBothStatesEqualOrHigherThan(QuestState.KNOWN)) {
             stopAllSe()
             playSe(AudioEvent.SE_QUEST_FAIL)
-            worldScreen.showMessageTooltip("Quest failed:" + System.lineSeparator() + title)
+            worldScreen.showMessageTooltip("Quest failed:" + System.lineSeparator() + titleWithoutPrefix)
         }
     }
 

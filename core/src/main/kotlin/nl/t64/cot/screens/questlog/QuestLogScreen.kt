@@ -99,6 +99,7 @@ class QuestLogScreen : ParchmentScreen() {
         val message = """
             These symbols mean:
 
+            M   -   Main quest.
             v   -   Quest finished or task complete.
             o   -   Quest finished, but reward unclaimed.
             r   -   Quest finished or task complete, but was reset.
