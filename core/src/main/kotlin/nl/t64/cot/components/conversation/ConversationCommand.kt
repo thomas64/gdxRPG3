@@ -25,6 +25,7 @@ enum class ConversationCommand {
 
     KNOW_QUEST,
     ACCEPT_QUEST,
+    FAIL_QUEST,
     TRADE_QUEST_ITEMS,
     SHOW_QUEST_ITEM,
     WEAR_QUEST_ITEM,
@@ -41,6 +42,5 @@ enum class ConversationCommand {
 
 
     BONUS_REWARD_QUEST,
-    FAIL_QUEST,
 
 }

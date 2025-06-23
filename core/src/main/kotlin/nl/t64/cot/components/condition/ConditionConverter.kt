@@ -9,7 +9,7 @@ object ConditionConverter {
 
     fun isMeetingQuestCondition(conditionId: String, questId: String?): Boolean {
         val questGraph: QuestGraph = getQuestGraph(conditionId, questId)
-        if (conditionId.contains("""_t[acn]_""".toRegex())) {
+        if (conditionId.contains("""_t[xacn]_""".toRegex())) {
             return isTaskInState(conditionId, questGraph)
         }
         val questState: List<QuestState> = getQuestState(conditionId, questGraph)
@@ -102,11 +102,17 @@ object ConditionConverter {
 
     private fun isTaskInState(conditionId: String, questGraph: QuestGraph): Boolean {
         return when {
+            conditionId.contains("_tx_") -> isTaskFailed(conditionId, questGraph)
             conditionId.contains("_ta_") -> isTaskCompleteAndNextTaskNotYet(conditionId, questGraph)
             conditionId.contains("_tc_") -> isTaskComplete("_tc_", conditionId, questGraph)
             conditionId.contains("_tn_") -> !isTaskComplete("_tn_", conditionId, questGraph)
             else -> throw IllegalArgumentException("No defined state found.")
         }
+    }
+
+    private fun isTaskFailed(conditionId: String, questGraph: QuestGraph): Boolean {
+        val taskId: Int = getTaskIdOrAmount("_tx_", conditionId)
+        return questGraph.isTaskFailed(taskId.toString())
     }
 
     private fun isTaskCompleteAndNextTaskNotYet(conditionId: String, questGraph: QuestGraph): Boolean {

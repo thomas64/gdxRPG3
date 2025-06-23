@@ -283,7 +283,7 @@
         "target"    : {"fine_fairy_ring": 1}
       },
       "7": {
-        "comment"     : "WARNING: One link to 7 from SceneHoneywoodFarmAttackAfterWin and one from honeywood_stable.tmx",
+        "comment"     : "WARNING: One link to 7 from SceneHoneywoodFarmAttackAfterWin(alt) and one from honeywood_stable.tmx. also in conversations: honeywood.json.",
         "taskPhrase"  : "            Get Luana to accompany you on your travels. She is at Honeywood Farm in the northeast of the village.",
         "type"        : "FREE",
         "isResettable": false,

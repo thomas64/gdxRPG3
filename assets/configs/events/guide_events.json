@@ -209,7 +209,7 @@
     "text"     : [
       "One of your main quests was failed.",
       "Press the %logbook% to access your logbook.",
-      "An red [FIREBRICK]X[BLACK] indicates a failed quest.",
+      "A red [FIREBRICK]X[BLACK] indicates a failed quest.",
       "",
       "In this specific case, just follow the other main quest."
     ]

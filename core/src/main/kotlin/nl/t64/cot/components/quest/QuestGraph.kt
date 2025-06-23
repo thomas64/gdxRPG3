@@ -89,6 +89,10 @@ data class QuestGraph(
         possibleFinish(true)
     }
 
+    fun fail() {
+        failAndAlsoParents()
+    }
+
     private fun setAcceptedAndPossiblyShowMessage() {
         currentState = QuestState.ACCEPTED
         if (isSubQuest) {
@@ -226,11 +230,7 @@ data class QuestGraph(
         val questTask = tasks[taskId]!!
         questTask.isFailed = true
         if (isOneOfBothStatesEqualOrHigherThan(QuestState.ACCEPTED)) {
-            showMessageTooltipQuestFailed()
-            isFailed = true
-            if (isSubQuest) {
-                gameData.quests.getParentsOf(id).forEach { it.isFailed = true }
-            }
+            failAndAlsoParents()
         }
     }
 
@@ -249,7 +249,11 @@ data class QuestGraph(
         }
     }
 
-    fun isTaskComplete(taskId: String?): Boolean {
+    fun isTaskFailed(taskId: String): Boolean {
+        return tasks[taskId]?.isFailed ?: false
+    }
+
+    fun isTaskComplete(taskId: String): Boolean {
         return tasks[taskId]?.isComplete ?: false
     }
 
@@ -309,6 +313,14 @@ data class QuestGraph(
         return tasks.values
             .filter { !it.isOptional }
             .all { it.isComplete }
+    }
+
+    private fun failAndAlsoParents() {
+        showMessageTooltipQuestFailed()
+        isFailed = true
+        if (isSubQuest) {
+            gameData.quests.getParentsOf(id).forEach { it.isFailed = true }
+        }
     }
 
     private fun showMessageTooltipQuestNew() {

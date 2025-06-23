@@ -203,6 +203,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
 
             ConversationCommand.KNOW_QUEST -> knowQuest(nextId)
             ConversationCommand.ACCEPT_QUEST -> acceptQuest(nextId)
+            ConversationCommand.FAIL_QUEST -> failQuest(nextId)
             ConversationCommand.TRADE_QUEST_ITEMS -> tradeQuestItems()
             ConversationCommand.SHOW_QUEST_ITEM -> showQuestItem(nextId)
             ConversationCommand.WEAR_QUEST_ITEM -> wearQuestItem(nextId)
@@ -351,6 +352,11 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
 
     private fun acceptQuest(nextId: String) {
         gameData.quests.getQuestById(conversationId).accept()
+        continueConversation(nextId)
+    }
+
+    private fun failQuest(nextId: String) {
+        gameData.quests.getQuestById(conversationId).fail()
         continueConversation(nextId)
     }
 
