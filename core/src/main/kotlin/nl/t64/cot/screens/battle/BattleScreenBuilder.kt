@@ -303,12 +303,13 @@ class BattleScreenBuilder {
     private fun GdxList<String>.fillWithActions(currentParticipant: Participant,
                                                 areEnemiesInRange: Boolean): GdxList<String> {
         val attackAp: Int = if (areEnemiesInRange) 2 else 99
+        val curAp: Int = currentParticipant.currentAP
         val maxAp: Int = currentParticipant.maximumAP
         val actions: List<Pair<String, Int>> = listOf(
             "Attack (? AP, ? SP)" to attackAp,
-            "Move (? AP)" to 1,
+            "Move (${if (curAp <= 1) "1" else "1-$curAp"} AP)" to 1,
             "Potion (3 AP)" to 3,
-            "Switch equipment (3 AP)" to 3,
+            "Switch equipment (1-3 AP)" to 1,
             "Preview hit and damage" to 0,
             "Inventory" to 0,
             "Flee battle ($maxAp AP)" to maxAp,
@@ -388,8 +389,8 @@ class BattleScreenBuilder {
 
     private fun GdxList<BattleWeaponItem>.fillWithWeapons(weapons: List<BattleWeaponItem>): GdxList<BattleWeaponItem> {
         this.setItems(*weapons.toTypedArray())
-        items.add(BattleWeaponItem(InventoryItem(name = "Unequip Current Weapon", group = InventoryGroup.WEAPON)))
-        items.add(BattleWeaponItem(InventoryItem(name = "Unequip Current Shield", group = InventoryGroup.SHIELD)))
+        items.add(BattleWeaponItem(InventoryItem(name = "Unequip Current Weapon (1 AP)", group = InventoryGroup.WEAPON)))
+        items.add(BattleWeaponItem(InventoryItem(name = "Unequip Current Shield (1 AP)", group = InventoryGroup.SHIELD)))
         items.add(BattleWeaponItem(InventoryItem(name = "Back")))
         this.selectedIndex = 0
         return this

@@ -12,6 +12,7 @@ import nl.t64.cot.removeColorCoding
 
 
 private const val SWITCH_WEAPON_AP: Int = 3
+private const val UNEQUIP_AP: Int = 1
 
 class WeaponAction(
     private val currentParticipant: Participant,
@@ -68,16 +69,17 @@ class WeaponAction(
     }
 
     private fun handleWeapon(): String {
-        currentParticipant.currentAP -= SWITCH_WEAPON_AP
         val currentWeapon: InventoryItem? = hero.getInventoryItem(InventoryGroup.WEAPON)
         val newWeapon: InventoryItem = selectedEquipment.inventoryItem
 
         if (newWeapon.name.contains("Unequip")) {
+            currentParticipant.currentAP -= UNEQUIP_AP
             hero.clearInventoryItemFor(InventoryGroup.WEAPON)
             currentWeapon?.let { gameData.inventory.autoSetItem(it) }
             return "${character.name} unequipped the ${currentWeapon?.name}."
         }
 
+        currentParticipant.currentAP -= SWITCH_WEAPON_AP
         gameData.inventory.forceRemoveItem(newWeapon)
         hero.forceSetInventoryItemFor(InventoryGroup.WEAPON, newWeapon)
         currentWeapon?.let { gameData.inventory.autoSetItem(it) }
@@ -85,16 +87,17 @@ class WeaponAction(
     }
 
     private fun handleShield(): String {
-        currentParticipant.currentAP -= SWITCH_WEAPON_AP
         val currentShield: InventoryItem? = hero.getInventoryItem(InventoryGroup.SHIELD)
         val newShield: InventoryItem = selectedEquipment.inventoryItem
 
         if (newShield.name.contains("Unequip")) {
+            currentParticipant.currentAP -= UNEQUIP_AP
             hero.clearInventoryItemFor(InventoryGroup.SHIELD)
             currentShield?.let { gameData.inventory.autoSetItem(it) }
             return "${character.name} unequipped the ${currentShield?.name}."
         }
 
+        currentParticipant.currentAP -= SWITCH_WEAPON_AP
         gameData.inventory.forceRemoveItem(newShield)
         hero.forceSetInventoryItemFor(InventoryGroup.SHIELD, newShield)
         currentShield?.let { gameData.inventory.autoSetItem(it) }
@@ -103,7 +106,11 @@ class WeaponAction(
 
     private fun createMessageIfCostingTooMuchAp(): String? {
         return when {
-            currentParticipant.currentAP < SWITCH_WEAPON_AP -> "Not enough AP!"
+            selectedEquipment.inventoryItem.name.contains("Unequip")
+                && currentParticipant.currentAP < UNEQUIP_AP -> "Not enough AP!"
+            !selectedEquipment.inventoryItem.name.contains("Unequip")
+                && selectedEquipment.inventoryItem.name != "Back"
+                && currentParticipant.currentAP < SWITCH_WEAPON_AP -> "Not enough AP!"
             else -> null
         }
     }
@@ -126,7 +133,7 @@ class WeaponAction(
 
                 $underscores
 
-                Unequip? ($SWITCH_WEAPON_AP AP)
+                Unequip? ($UNEQUIP_AP AP)
             """.trimIndent())
     }
 
@@ -233,7 +240,7 @@ class WeaponAction(
 
                 $underscores
 
-                Unequip? ($SWITCH_WEAPON_AP AP)
+                Unequip? ($UNEQUIP_AP AP)
             """.trimIndent())
     }
 
