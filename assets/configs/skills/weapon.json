@@ -7,8 +7,7 @@
       "- 'Sword' increases your chance to hit with swords in combat.",
       "  Each rank in 'Sword' increases 'Chance to hit' by 5%.",
       "",
-      "- Swords have advantage against enemies with axes,",
-      "  and disadvantage against enemies with spears.",
+      "- Sword advantage: Spear > Sword > Axe.",
       "  Swords also have advantage or disadvantage against",
       "  certain weaponless enemies."
     ]
@@ -21,8 +20,7 @@
       "- 'Axe' increases your chance to hit with axes in combat.",
       "  Each rank in 'Axe' increases 'Chance to hit' by 5%.",
       "",
-      "- Axes have advantage against enemies with spears,",
-      "  and disadvantage against enemies with swords.",
+      "- Axe advantage: Sword > Axe > Spear.",
       "  Axes also have advantage or disadvantage against",
       "  certain weaponless enemies."
     ]
@@ -35,8 +33,7 @@
       "- 'Spear' increases your chance to hit with spears in combat.",
       "  Each rank in 'Spear' increases 'Chance to hit' by 5%.",
       "",
-      "- Spears have advantage against enemies with swords,",
-      "  and disadvantage against enemies with axes.",
+      "- Spear advantage: Axe > Spear > Sword.",
       "  Spears also have advantage or disadvantage against",
       "  certain weaponless enemies."
     ]
@@ -49,8 +46,7 @@
       "- 'Dagger' increases your chance to hit with daggers in combat.",
       "  Each rank in 'Dagger' increases 'Chance to hit' by 5%.",
       "",
-      "- Daggers have advantage against enemies with throwing weapons,",
-      "  and disadvantage against enemies with bows.",
+      "- Dagger advantage: Bow > Dagger > Throw.",
       "  Daggers also have advantage or disadvantage against",
       "  certain weaponless enemies."
     ]
@@ -63,8 +59,7 @@
       "- 'Throw' increases your chance to hit with throwing weapons in combat.",
       "  Each rank in 'Throw' increases 'Chance to hit' by 5%.",
       "",
-      "- Throwing weapons have advantage against enemies with bows,",
-      "  and disadvantage against enemies with daggers.",
+      "- Throwing weapon advantage: Dagger > Throw > Bow.",
       "  Throwing weapons also have advantage or disadvantage against",
       "  certain weaponless enemies."
     ]
@@ -77,8 +72,7 @@
       "- 'Bow' increases your chance to hit with bows in combat.",
       "  Each rank in 'Bow' increases 'Chance to hit' by 5%.",
       "",
-      "- Bows have advantage against enemies with daggers,",
-      "  and disadvantage against enemies with throwing weapons.",
+      "- Bow advantage: Throw > Bow > Dagger.",
       "  Bows also have advantage or disadvantage against",
       "  certain weaponless enemies."
     ]
@@ -91,12 +85,7 @@
       "- 'Staff' increases your chance to hit with staffs in combat.",
       "  Each rank in 'Staff' increases 'Chance to hit' by 5%.",
       "",
-      "- Fire has advantage against enemies with wind,",
-      "  and disadvantage against enemies with thunder.",
-      "  Wind has advantage against enemies with thunder,",
-      "  and disadvantage against enemies with fire.",
-      "  Thunder has advantage against enemies with fire,",
-      "  and disadvantage against enemies with wind."
+      "- Magic advantage: Fire > Wind > Thunder > Fire."
     ]
   },
   "shield": {

@@ -52,6 +52,10 @@ object ConditionConverter {
                 val time = getOneTimeUnit("_at_", conditionId)
                 gameData.clock.isCurrentTimeAt(time)
             }
+            conditionId.contains("_!between_") -> {
+                val (startTime, endTime) = getTwoTimeUnits("_!between_", conditionId)
+                !gameData.clock.isCurrentTimeInBetween(startTime, endTime)
+            }
             conditionId.contains("_between_") -> {
                 val (startTime, endTime) = getTwoTimeUnits("_between_", conditionId)
                 gameData.clock.isCurrentTimeInBetween(startTime, endTime)

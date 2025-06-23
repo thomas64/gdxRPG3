@@ -8,6 +8,14 @@ import kotlin.math.roundToInt
 import kotlin.random.Random
 
 
+private const val HIT_ADVANTAGE = 10
+private const val HIT_DISADVANTAGE = -10
+private const val DAMAGE_NORMAL_DIVISOR = 1.0f
+private const val DAMAGE_DISADVANTAGE_DIVISOR = 1.5f
+private const val CRIT_HIT_ADVANTAGE = 30
+private const val CRIT_HIT_DISADVANTAGE = -30
+private const val CRIT_DAMAGE_MULTIPLIER = 1.75f
+
 abstract class BattleAbilityItem(
     val abilityItem: AbilityItem,
     val attacker: Participant
@@ -97,37 +105,26 @@ abstract class BattleAbilityItem(
 
     fun calculateHitPercentage(): Int {
         val attackerHitPercentage: Int = (attacker.character.getCalculatedTotalHit() * abilityItem.hitMultiplier).roundToInt()
-
-        val weaponTriangle = when {
-            hasWeaponTriangleAdvantage() -> 10
-            hasWeaponTriangleDisadvantage() -> -10
-            else -> 0
-        }
-
+        val weaponTriangle: Int = getAdvantageBonusHit()
         return (attackerHitPercentage + weaponTriangle).coerceAtLeast(0)
     }
 
     fun calculateCriticalHitPercentage(): Int {
         val attackerCriticalHitPercentage: Int = attacker.character.getCalculatedTotalSkillOf(SkillItemId.WARRIOR) * 4
-
-        val weaponTriangle = when {
-            hasWeaponTriangleAdvantage() -> 30
-            hasWeaponTriangleDisadvantage() -> -30
-            else -> 0
-        }
+        val weaponTriangle: Int = getAdvantageBonusCrit()
         return (attackerCriticalHitPercentage + weaponTriangle).coerceAtLeast(0)
     }
 
     protected fun calculateCriticalDamage(): Int {
-        return (calculateDamage() * 1.75f).roundToInt()
+        return (calculateDamage() * CRIT_DAMAGE_MULTIPLIER).roundToInt()
     }
 
     fun calculateDamage(): Int {
         val attack: Float = attacker.character.getCalculatedTotalDamage() * abilityItem.damageMultiplier
         val protection: Int = target.character.getCalculatedTotalProtection()
         val damage: Float = attack - protection
-        val weaponTriangle: Float = if (hasWeaponTriangleDisadvantage()) 1.5f else 1f
-        return (damage / weaponTriangle).roundToInt().coerceAtLeast(1)
+        val disadvantagePenalty: Float = getAdvantageBonusDamage()
+        return (damage / disadvantagePenalty).roundToInt().coerceAtLeast(1)
     }
 
     protected fun createNoWeaponMessage(): String {
@@ -179,6 +176,31 @@ abstract class BattleAbilityItem(
             else -> ""
         }
     }
+
+    private fun getAdvantageBonusHit(): Int {
+        return when {
+            hasWeaponTriangleAdvantage() -> HIT_ADVANTAGE
+            hasWeaponTriangleDisadvantage() -> HIT_DISADVANTAGE
+            else -> 0
+        }
+    }
+
+    private fun getAdvantageBonusCrit(): Int {
+        return when {
+            hasWeaponTriangleAdvantage() -> CRIT_HIT_ADVANTAGE
+            hasWeaponTriangleDisadvantage() -> CRIT_HIT_DISADVANTAGE
+            else -> 0
+        }
+    }
+
+    private fun getAdvantageBonusDamage(): Float {
+        return if (hasWeaponTriangleDisadvantage()) {
+            DAMAGE_DISADVANTAGE_DIVISOR
+        } else {
+            DAMAGE_NORMAL_DIVISOR
+        }
+    }
+
 
     private fun hasWeaponTriangleAdvantage(): Boolean {
         val attackSkill: SkillItemId = currentWeapon!!.skill!!

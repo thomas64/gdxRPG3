@@ -11,9 +11,11 @@
       }
     }
   },
-  "note_honeywood_smith"     : {
+  "note_honeywood_statue": {
     "phrases": {
-      "1": {"text": ["Black Smith Inc."], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["Here stands, immortalized in stone, the pride of our village: the Hero of Time."]},
+      "2": {"text": ["When you look closely, you notice a faint resemblance to yourself."]},
+      "3": {"text": [". . ."], "choices": [{"command": "EXIT"}]}
     }
   }
 }

@@ -231,18 +231,18 @@ class PhysicsPlayer : PhysicsComponent() {
     private fun getWest(): Rectangle {
         return Rectangle().apply {
             setWidth(Constant.HALF_TILE_SIZE - 1f)
-            setHeight(boundingBox.height)
+            setHeight(boundingBox.height - 4f)
             setX(boundingBox.x - Constant.HALF_TILE_SIZE + 1f)
-            setY(boundingBox.y)
+            setY(boundingBox.y + 2f)
         }
     }
 
     private fun getEast(): Rectangle {
         return Rectangle().apply {
             setWidth(Constant.HALF_TILE_SIZE - 1f)
-            setHeight(boundingBox.height)
+            setHeight(boundingBox.height - 4f)
             setX(boundingBox.x + boundingBox.width)
-            setY(boundingBox.y)
+            setY(boundingBox.y + 2f)
         }
     }
 
