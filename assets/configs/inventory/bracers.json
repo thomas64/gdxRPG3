@@ -86,7 +86,7 @@
     "price"       : 70,
     "min_strength": 22,
     "protection"  : 9,
-    "speed"       : -3,
+    "speed"       : -2,
     "stealth"     : -2
   },
   "fine_heavy_bracers"       : {
@@ -96,7 +96,7 @@
     "price"       : 80,
     "min_strength": 24,
     "protection"  : 10,
-    "speed"       : -3,
+    "speed"       : -2,
     "stealth"     : -2
   },
   "specialist_heavy_bracers" : {
@@ -106,7 +106,7 @@
     "price"       : 90,
     "min_strength": 26,
     "protection"  : 11,
-    "speed"       : -3,
+    "speed"       : -2,
     "stealth"     : -2
   },
   "masterwork_heavy_bracers" : {
@@ -116,7 +116,7 @@
     "price"       : 100,
     "min_strength": 28,
     "protection"  : 12,
-    "speed"       : -3,
+    "speed"       : -2,
     "stealth"     : -2
   },
   "epic_power_bracelet"      : {
