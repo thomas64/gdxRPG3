@@ -25,7 +25,7 @@ class ShopContainer {
         return InventoryContainer(NUMBER_OF_SLOTS).apply {
             resourceManager.getShopInventory(shopId)
                 .map { InventoryDatabase.createInventoryItemForShop(it) }
-                .forEach { autoSetItem(it) }
+                .forEachIndexed { index, item -> forceSetItemAt(index, item) }
         }
     }
 

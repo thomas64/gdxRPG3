@@ -7,8 +7,8 @@ object InventoryDatabase {
 
     private val inventoryItems: Map<String, InventoryItem> = ConfigDataLoader.createItems()
 
-    fun createInventoryItemForShop(itemId: String): InventoryItem {
-        val inventoryItem = inventoryItems[itemId]!!
+    fun createInventoryItemForShop(itemId: String): InventoryItem? {
+        val inventoryItem = inventoryItems[itemId] ?: return null
         val amount = inventoryItem.group.getDefaultShopAmount()
         return inventoryItem.createCopy(amount)
     }
