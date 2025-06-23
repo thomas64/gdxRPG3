@@ -42,7 +42,9 @@ class LootLoader(private val currentMap: GameMap) {
     private fun loadChests() {
         currentMap.chests.forEach {
             val chest = gameData.loot.getLoot(it.name)
-            loadChest(it, chest)
+            if (chest.conditions.areAllTrue()) {
+                loadChest(it, chest)
+            }
         }
     }
 

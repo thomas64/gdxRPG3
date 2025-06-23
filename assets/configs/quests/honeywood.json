@@ -187,6 +187,7 @@
         "linkedWith": ["10"]
       },
       "10": {
+        "comment"     : "WARNING: One link to 10 from chest01.json Loot.",
         "taskPhrase": "      Deliver 4 horseshoes to Angie.",
         "type"      : "PROVIDE_ITEM",
         "target"    : {"horseshoe": 4},

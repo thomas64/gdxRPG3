@@ -9,5 +9,5 @@
   "chest0012": {"content": {"wood": 2, "leather": 4, "cloth": 8, "gold": 15}, "lockLevel": 1},
   "chest0013": {"content": {"basic_silver_necklace": 1, "gold": 13}, "trapLevel": 1},
   "chest0014": {"content": {"basic_light_shoulders": 1, "gold": 9}, "lockLevel": 1},
-  "chest0015": {"content": {"horseshoe": 4}, "doesReset": true}
+  "chest0015": {"condition": ["_tc_10_q_quest_get_horse"], "content": {"horseshoe": 4}, "doesReset": true}
 }
