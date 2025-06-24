@@ -14,13 +14,13 @@ class SelectActionListener(
     private val selectAttack: () -> Unit,
     private val selectMove: () -> Unit,
     private val selectPotion: () -> Unit,
-    private val selectWeapon: () -> Unit,
+    private val selectEquipment: () -> Unit,
     private val selectPreview: () -> Unit,
-    private val inventoryScreen: () -> Unit,
-    private val fleeBattle: () -> Unit,
-    private val delayTurn: () -> Unit,
-    private val rest: () -> Unit,
-    private val endTurn: () -> Unit
+    private val selectParty: () -> Unit,
+    private val selectFlee: () -> Unit,
+    private val selectDelayTurn: () -> Unit,
+    private val selectRest: () -> Unit,
+    private val selectEndTurn: () -> Unit
 ) : InputListener() {
 
     override fun keyDown(event: InputEvent, keycode: Int): Boolean {
@@ -44,9 +44,9 @@ class SelectActionListener(
         getSelected<String>()?.let { selected ->
             if ("Attack" in selected
                 || "Move" in selected
-                || "Potion" in selected
-                || "Switch" in selected
+                || "Equipment" in selected
                 || "Preview" in selected
+                || "Potion" in selected
                 || "End" in selected
             ) {
                 playSe(AudioEvent.SE_MENU_CONFIRM)
@@ -54,14 +54,14 @@ class SelectActionListener(
             when {
                 "Attack" in selected -> selectAttack.invoke()
                 "Move" in selected -> selectMove.invoke()
-                "Potion" in selected -> selectPotion.invoke()
-                "Switch" in selected -> selectWeapon.invoke()
+                "Equipment" in selected -> selectEquipment.invoke()
                 "Preview" in selected -> selectPreview.invoke()
-                "Inventory" in selected -> inventoryScreen.invoke()
-                "Flee" in selected -> fleeBattle.invoke()
-                "Delay" in selected -> delayTurn.invoke()
-                "Rest" in selected -> rest.invoke()
-                "End" in selected -> endTurn.invoke()
+                "Potion" in selected -> selectPotion.invoke()
+                "Party" in selected -> selectParty.invoke()
+                "Flee" in selected -> selectFlee.invoke()
+                "Delay" in selected -> selectDelayTurn.invoke()
+                "Rest" in selected -> selectRest.invoke()
+                "End" in selected -> selectEndTurn.invoke()
             }
         }
     }

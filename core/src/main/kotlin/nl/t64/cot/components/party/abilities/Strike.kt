@@ -12,10 +12,13 @@ open class Strike(
 ) {
 
     override fun toString(): String {
-        if (sp > 0) {
-            return "$name ($ap AP, $sp SP)"
-        }
-        return "$name ($ap AP)"
+        val apField = String.format("%3d AP", ap)
+        val spField = if (sp > 0) " | $sp SP" else "       "
+        val totalWidth = 28
+        val leftPart = name
+        val rightPart = "$apField$spField"
+        val spaces = " ".repeat((totalWidth - leftPart.length - rightPart.length).coerceAtLeast(1))
+        return "$leftPart$spaces$rightPart"
     }
 
     override fun possibleCreateCopyWithGrayName(): BattleAbilityItem {

@@ -20,7 +20,7 @@ class Stagger(
 ) {
 
     override fun toString(): String {
-        return "$name ($ap AP, $sp SP)"
+        return "$name          $ap AP | $sp SP"
     }
 
     override fun possibleCreateCopyWithGrayName(): BattleAbilityItem {

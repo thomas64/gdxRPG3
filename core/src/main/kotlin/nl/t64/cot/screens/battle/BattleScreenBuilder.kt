@@ -285,7 +285,7 @@ class BattleScreenBuilder {
 
     private fun GdxList<String>.fillWithPreBattleActions(): GdxList<String> {
         items.add("Select equipment")
-        items.add("Preview hit and damage")
+        items.add("Preview advantage")
         items.add("Start battle")
         this.selectedIndex = buttonTableMainMenuIndex
         return this
@@ -306,16 +306,18 @@ class BattleScreenBuilder {
         val curAp: Int = currentParticipant.currentAP
         val maxAp: Int = currentParticipant.maximumAP
         val actions: List<Pair<String, Int>> = listOf(
-            "Attack (? AP, ? SP)" to attackAp,
-            "Move (${if (curAp <= 1) "1" else "1-$curAp"} AP)" to 1,
-            "Potion (3 AP)" to 3,
-            "Switch equipment (1-3 AP)" to 1,
-            "Preview hit and damage" to 0,
-            "Inventory" to 0,
-            "Flee battle ($maxAp AP)" to maxAp,
-            "Delay turn (1 AP)" to 1,
-            "Rest (1 AP)" to 1,
-            "End turn" to 0
+            // @formatter:off
+            String.format("%-12s%6s", "Attack",     "? AP")         to attackAp,
+            String.format("%-12s%6s", "Move",       if (curAp <= 1) "1 AP" else "1-$curAp AP") to 1,
+            String.format("%-12s%6s", "Equipment",  "3 AP")         to 3,
+            String.format("%-12s%6s", "Preview",    "")             to 0,
+            String.format("%-12s%6s", "Potion",     "3 AP")         to 3,
+            String.format("%-12s%6s", "Party",      "")             to 0,
+            String.format("%-12s%6s", "Flee",       "$maxAp AP")    to maxAp,
+            String.format("%-12s%6s", "Delay turn", "1 AP")         to 1,
+            String.format("%-12s%6s", "Rest",       "1 AP")         to 1,
+            String.format("%-12s%6s", "End turn",   "")             to 0
+            // @formatter:on
         )
         val actionStrings: List<String> = actions.map { (action, ap) ->
             "${currentParticipant.getColorBasedOn(ap)}$action"
