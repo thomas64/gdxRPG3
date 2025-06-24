@@ -7,11 +7,7 @@
     "skill"            : "WIZARD",
     "min_skill"        : 1,
     "weapon_skills"    : ["STAFF_FIRE"],
-    "damage_multiplier": 1.0,
-    "description"      : [
-      "A magical attack with a Fire Staff,",
-      "that deals damage to a single target."
-    ]
+    "damage_multiplier": 1.0
   },
   "elfire" : {
     "name"             : "Elfire",
@@ -21,12 +17,7 @@
     "skill"            : "WIZARD",
     "min_skill"        : 4,
     "weapon_skills"    : ["STAFF_FIRE"],
-    "damage_multiplier": 1.5,
-    "description"      : [
-      "A magical attack with a Fire Staff,",
-      "that deals damage to a single target.",
-      "1.5 times more powerful than Fire."
-    ]
+    "damage_multiplier": 1.5
   },
   "arcfire": {
     "name"             : "Arcfire",
@@ -36,12 +27,7 @@
     "skill"            : "WIZARD",
     "min_skill"        : 7,
     "weapon_skills"    : ["STAFF_FIRE"],
-    "damage_multiplier": 2.0,
-    "description"      : [
-      "A magical attack with a Fire Staff,",
-      "that deals damage to a single target.",
-      "2.0 times more powerful than Fire."
-    ]
+    "damage_multiplier": 2.0
   },
   "rexfire": {
     "name"             : "Rexfire",
@@ -51,11 +37,6 @@
     "skill"            : "WIZARD",
     "min_skill"        : 10,
     "weapon_skills"    : ["STAFF_FIRE"],
-    "damage_multiplier": 2.5,
-    "description"      : [
-      "A magical attack with a Fire Staff,",
-      "that deals damage to a single target.",
-      "2.5 times more powerful than Fire."
-    ]
+    "damage_multiplier": 2.5
   }
 }

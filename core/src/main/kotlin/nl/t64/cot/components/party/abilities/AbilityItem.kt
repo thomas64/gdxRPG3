@@ -12,7 +12,6 @@ import kotlin.math.roundToInt
 data class AbilityItem(
     override val id: AbilityItemId = AbilityItemId.STAGGER,  // Value will be replaced when constructed.
     override val name: String = "",
-    override val description: List<String> = emptyList(),
     val imageId: String = "",
     @JsonProperty("gold_cost") val goldCost: Int = 50,
     @JsonProperty("xp_cost") private val xpCost: Int = 200, // todo, eventueel goedkopere waarden in json voor fire, wind, etc?
@@ -37,13 +36,19 @@ data class AbilityItem(
     }
 
     override fun getTotalDescription(): String {
-        if (description.isEmpty()) return ""
-        return getDescription()
+        val descriptionLines: List<String> = AbilityDatabase.getDescription(id)
+        if (descriptionLines.isEmpty()) return ""
+        return (descriptionLines.joinToString(System.lineSeparator())
+            + System.lineSeparator()
+            + createRequiredSkill()
+            + createRequiredWeapon()
+            + createRequiredResource()
+            + createApCost()
+            + createSpCost())
     }
 
     fun getTeacherDescription(totalXp: Int): String {
-        return (getDescription()
-            + System.lineSeparator()
+        return (getTotalDescription() + System.lineSeparator()
             + System.lineSeparator()
             + "[GOLD]XP cost: ${calculateXpCost(totalXp)}" + System.lineSeparator()
             + "[GOLD]Gold cost: $goldCost")
@@ -51,15 +56,6 @@ data class AbilityItem(
 
     fun calculateXpCost(totalXp: Int): Int {
         return maxOf((totalXp * 0.1f).roundToInt(), xpCost)
-    }
-
-    private fun getDescription(): String {
-        return (description.joinToString(System.lineSeparator()) + System.lineSeparator()
-            + createRequiredSkill()
-            + createRequiredWeapon()
-            + createRequiredResource()
-            + createApCost()
-            + createSpCost())
     }
 
     private fun createRequiredSkill(): String {

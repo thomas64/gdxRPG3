@@ -1,54 +1,34 @@
 {
   "stupidity"   : {
-    "name"       : "Stupidity",
-    "resource"   : "HERB",
-    "ap"         : 4,
-    "sp"         : 5,
-    "skill"      : "WIZARD",
-    "min_skill"  : 1,
-    "description": [
-      "Enemy target of the spell loses 1",
-      "Intelligence for each rank in 'Wizard'.",
-      "May only be cast once on each target."
-    ]
+    "name"     : "Stupidity",
+    "resource" : "HERB",
+    "ap"       : 4,
+    "sp"       : 5,
+    "skill"    : "WIZARD",
+    "min_skill": 1
   },
   "clumsiness"  : {
-    "name"       : "Clumsiness",
-    "resource"   : "SPICE",
-    "ap"         : 4,
-    "sp"         : 5,
-    "skill"      : "WIZARD",
-    "min_skill"  : 1,
-    "description": [
-      "Enemy target of the spell loses 1",
-      "Dexterity for each rank in 'Wizard'.",
-      "May only be cast once on each target."
-    ]
+    "name"     : "Clumsiness",
+    "resource" : "SPICE",
+    "ap"       : 4,
+    "sp"       : 5,
+    "skill"    : "WIZARD",
+    "min_skill": 1
   },
   "debilitation": {
-    "name"       : "Debilitation",
-    "resource"   : "HERB",
-    "ap"         : 4,
-    "sp"         : 5,
-    "skill"      : "WIZARD",
-    "min_skill"  : 1,
-    "description": [
-      "Enemy target of the spell loses 1",
-      "Strength for each rank in 'Wizard'.",
-      "May only be cast once on each target."
-    ]
+    "name"     : "Debilitation",
+    "resource" : "HERB",
+    "ap"       : 4,
+    "sp"       : 5,
+    "skill"    : "WIZARD",
+    "min_skill": 1
   },
   "sluggishness": {
-    "name"       : "Sluggishness",
-    "resource"   : "SPICE",
-    "ap"         : 4,
-    "sp"         : 5,
-    "skill"      : "WIZARD",
-    "min_skill"  : 1,
-    "description": [
-      "Enemy target of the spell loses 1",
-      "Speed for each rank in 'Wizard'.",
-      "May only be cast once on each target."
-    ]
+    "name"     : "Sluggishness",
+    "resource" : "SPICE",
+    "ap"       : 4,
+    "sp"       : 5,
+    "skill"    : "WIZARD",
+    "min_skill": 1
   }
 }

@@ -1,71 +1,30 @@
 {
   "intelligence": {
-    "maximum"    : 30,
-    "upgrade"    : 0.12,
-    "description": [
-      "- 'Intelligence' increases the damage you inflict with intelligence based weapons in combat.",
-      "  Each rank in 'Intelligence' increases the 'Damage' of those weapons by 5%.",
-      "",
-      "- 'Intelligence' increases the damage you inflict with offensive magic spells in combat.",
-      "  Each rank in 'Intelligence' increases 'Spell Damage' by 5%.",
-      "",
-      "- Each 20 ranks in 'Intelligence' increases AP by 1."
-    ]
+    "maximum": 30,
+    "upgrade": 0.12
   },
   "dexterity"   : {
-    "maximum"    : 30,
-    "upgrade"    : 0.12,
-    "description": [
-      "- 'Dexterity' increases the damage you inflict with dexterity based weapons in combat.",
-      "  Each rank in 'Dexterity' increases the 'Damage' of those weapons by 5%.",
-      "",
-      "- Each 20 ranks in 'Dexterity' increases AP by 1."
-    ]
+    "maximum": 30,
+    "upgrade": 0.12
   },
   "strength"    : {
-    "maximum"    : 30,
-    "upgrade"    : 0.12,
-    "description": [
-      "- 'Strength' increases the damage you inflict with strength based weapons in combat.",
-      "  Each rank in 'Strength' increases the 'Damage' of those weapons by 5%.",
-      "",
-      "- Each 20 ranks in 'Strength' increases AP by 1."
-    ]
+    "maximum": 30,
+    "upgrade": 0.12
   },
   "speed"       : {
-    "maximum"    : 30,
-    "upgrade"    : 0.18,
-    "description": [
-      "- 'Speed' increases your combat initiative.",
-      "  More 'Speed' means a faster turn rate in combat.",
-      "",
-      "- Each 20 ranks in 'Speed' increases AP by 1."
-    ]
+    "maximum": 30,
+    "upgrade": 0.18
   },
   "willpower"   : {
-    "maximum"    : 30,
-    "upgrade"    : 0.18,
-    "description": [
-      "- 'Willpower' increases your defenses against enemy offensive magic spells in combat.",
-      "  Each rank in 'Willpower' increases 'Magic Protection' by 3."
-    ]
+    "maximum": 30,
+    "upgrade": 0.18
   },
   "constitution": {
-    "maximum"    : 60,
-    "upgrade"    : 0.08,
-    "description": [
-      "- 'Constitution' represents the real physical damage this",
-      "  character can take in combat before dying.",
-      "  Each rank in 'Constitution' increases 'HP' by 4 points."
-    ]
+    "maximum": 60,
+    "upgrade": 0.08
   },
   "stamina"     : {
-    "maximum"    : 60,
-    "upgrade"    : 0.06,
-    "description": [
-      "- 'Stamina' represents energy for magic spells and other",
-      "  special attacks in combat.",
-      "  Each rank in 'Stamina' increases 'SP' by 2 points."
-    ]
+    "maximum": 60,
+    "upgrade": 0.06
   }
 }

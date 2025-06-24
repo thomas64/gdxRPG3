@@ -7,7 +7,6 @@ import kotlin.math.roundToInt
 data class StatItem(
     override val id: StatItemId = StatItemId.INTELLIGENCE,   // Value will be replaced when constructed.
     override val name: String = "",
-    override val description: List<String> = emptyList(),
     var rank: Int = 0,
     private val maximum: Int = 0,                   // Constant value for maximum rank possible.
     private val upgrade: Float = 0f,                // Constant value for upgrading formula.
@@ -20,9 +19,10 @@ data class StatItem(
     }
 
     override fun getTotalDescription(): String {
-        return (description.joinToString(System.lineSeparator()) + System.lineSeparator()
-                + System.lineSeparator()
-                + getNeededXpForNextRank())
+        return (StatDatabase.getDescription(id).joinToString(System.lineSeparator())
+            + System.lineSeparator()
+            + System.lineSeparator()
+            + getNeededXpForNextRank())
     }
 
     private fun getNeededXpForNextRank(): String {

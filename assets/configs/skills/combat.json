@@ -1,71 +1,23 @@
 {
   "stealth"   : {
-    "upgrade"    : 6,
-    "description": [
-      "- 'Stealth' increases the chance to successfully flee combat.",
-      "  Each rank in 'Stealth' increases the probability of this by 2%.",
-      "",
-      "- 'Stealth' decreases the attention this character draws,",
-      "  in relation to other party members, from enemies in combat.",
-      "",
-      "- 'Stealth' decreases the amount of Action Points it takes to",
-      "  free this character from when they are locked in battle."
-    ]
+    "upgrade": 6
   },
   "gambler"   : {
-    "upgrade"    : 6,
-    "description": [
-      "- 'Gambler' randomly increases or decreases your chance to hit with all attacks in combat.",
-      "  Each rank in 'Gambler' increases or decreases 'Chance to hit' by 5%.",
-      "",
-      "- 'Gambler' randomly increases or decreases the damage you inflict with all attacks in combat.",
-      "  Each rank in 'Gambler' increases or decreases 'Damage' by 5%."
-    ]
+    "upgrade": 6
   },
   "healer"    : {
-    "upgrade"    : 8,
-    "description": [
-      "- 'Healer' allows for healing other party members in combat.",
-      "  It's also possible to use herbs to double the healing effect."
-    ]
+    "upgrade": 8
   },
   "troubadour": {
-    "upgrade"    : 8,
-    "description": [
-      "- 'Troubadour' allows the possibility to play and sing inspirationally in combat,",
-      "  increasing your party's 'Chance to hit' and decreasing the enemy's 'Chance to hit'."
-    ]
+    "upgrade": 8
   },
   "thief"     : {
-    "upgrade"    : 8,
-    "description": [
-      "- 'Thief' allows the possibility to use 'Thief' abilities in combat.",
-      "",
-      "- 'Thief' allows the possibility to pick locks on treasure chests."
-    ]
+    "upgrade": 8
   },
   "warrior"   : {
-    "upgrade"    : 8,
-    "description": [
-      "- 'Warrior' allows the possibility to use 'Warrior' abilities in combat.",
-      "",
-      "- 'Warrior' allows the possibility of scoring critical hits with weapons in combat.",
-      "  Each rank in 'Warrior' increases the probability of this by 4%.",
-      "  A critical hit inflicts damage equal to 175% of the normal damage.",
-      "",
-      "- 'Warrior' increases the power of Warrior based abilities."
-    ]
+    "upgrade": 8
   },
   "wizard"    : {
-    "upgrade"    : 12,
-    "description": [
-      "- 'Wizard' allows the possibility to learn and cast magical spells in combat.",
-      "",
-      "- 'Wizard' allows the possibility of scoring critical hits with offensive spells in combat.",
-      "  Each rank in 'Wizard' increases the probability of this by 4%.",
-      "  A critical hit inflicts damage equal to 175% of the normal damage.",
-      "",
-      "- 'Wizard' increases the power of buff and debuff spells."
-    ]
+    "upgrade": 12
   }
 }
