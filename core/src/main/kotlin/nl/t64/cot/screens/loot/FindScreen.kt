@@ -6,12 +6,15 @@ import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.constants.ScreenType
+import nl.t64.cot.screens.LoadScreen
 
 
 class FindScreen : LootScreen() {
 
     companion object {
         fun load(loot: Loot, event: AudioEvent) {
+            if (screenManager.currentScreen is LoadScreen) return
+
             playSe(event)
             val findScreen = screenManager.getScreen(ScreenType.FIND) as FindScreen
             findScreen.loot = loot

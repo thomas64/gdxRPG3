@@ -20,7 +20,7 @@ data class InventoryItem(
     @JsonProperty("is_two_handed")
     val isTwoHanded: Boolean = false,
     @JsonProperty("is_droppable")
-    val isDroppable: Boolean = false,
+    val isDroppable: Boolean = true,
     val skill: SkillItemId? = null,
     private val price: Int = 0,
     var durability: Int = 0,
