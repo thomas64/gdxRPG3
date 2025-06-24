@@ -11,12 +11,8 @@ class DoubleThrow(
     attacker
 ) {
 
-    override fun toString(): String {
-        return "$name     $ap AP | $sp SP"
-    }
-
-    override fun possibleCreateCopyWithGrayName(): BattleAbilityItem {
-        return DoubleThrow(possibleCreateGrayName(), attacker)
+    override fun createCopyForPreview(): BattleAbilityItem {
+        return DoubleThrow(abilityItem.copy(isPreview = true), attacker)
     }
 
     override fun createPreviewMessage(): String {
@@ -24,7 +20,7 @@ class DoubleThrow(
             """
                 $name
                 ${it.name} ${it.getDurabilityText()}
-                ${possibleCreateEffectiveMessage()}
+                ${createEffectiveMessage()}
                 Hit:      ${String.format("%3d", calculateHitPercentageCapped())} %
                 Damage:   ${String.format("%3d", calculateDamage())} [BLUE]x2[BLACK]
                 Crit:     ${String.format("%3d", calculateCriticalHitPercentage())} %

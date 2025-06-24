@@ -11,18 +11,8 @@ open class Strike(
     attacker
 ) {
 
-    override fun toString(): String {
-        val apField = String.format("%3d AP", ap)
-        val spField = if (sp > 0) " | $sp SP" else "       "
-        val totalWidth = 28
-        val leftPart = name
-        val rightPart = "$apField$spField"
-        val spaces = " ".repeat((totalWidth - leftPart.length - rightPart.length).coerceAtLeast(1))
-        return "$leftPart$spaces$rightPart"
-    }
-
-    override fun possibleCreateCopyWithGrayName(): BattleAbilityItem {
-        return Strike(possibleCreateGrayName(), attacker)
+    override fun createCopyForPreview(): BattleAbilityItem {
+        return Strike(abilityItem.copy(isPreview = true), attacker)
     }
 
     override fun createPreviewMessage(): String {
@@ -30,7 +20,7 @@ open class Strike(
             """
                 $name
                 ${it.name} ${it.getDurabilityText()}
-                ${possibleCreateEffectiveMessage()}
+                ${createEffectiveMessage()}
                 Hit:      ${String.format("%3d", calculateHitPercentageCapped())} %
                 Damage:   ${String.format("%3d", calculateDamage())}
                 Crit:     ${String.format("%3d", calculateCriticalHitPercentage())} %

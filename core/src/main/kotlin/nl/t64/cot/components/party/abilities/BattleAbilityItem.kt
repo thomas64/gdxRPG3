@@ -30,10 +30,16 @@ abstract class BattleAbilityItem(
     lateinit var target: Participant
 
     override fun toString(): String {
-        return name
+        val apField = if (name != "Back") String.format("%3d AP", ap) else ""
+        val spField = if (sp > 0) " | $sp SP" else "       "
+        val totalWidth = 28
+        val leftPart = name
+        val rightPart = "$apField$spField"
+        val spaces = " ".repeat((totalWidth - leftPart.length - rightPart.length).coerceAtLeast(1))
+        return "${possibleGetGrayPrefix()}$leftPart$spaces$rightPart"
     }
 
-    abstract fun possibleCreateCopyWithGrayName(): BattleAbilityItem
+    abstract fun createCopyForPreview(): BattleAbilityItem
     abstract fun createPreviewMessage(): String
     abstract fun handleSuccess(messages: ArrayDeque<String>)
 
@@ -136,14 +142,7 @@ abstract class BattleAbilityItem(
         """.trimIndent()
     }
 
-    protected fun possibleCreateGrayName(): AbilityItem {
-        if (isWeaponAllowed() && hasEnoughApSp()) {
-            return abilityItem
-        }
-        return abilityItem.copy(name = "[GRAY]$name")
-    }
-
-    protected fun possibleCreateEffectiveMessage(): String {
+    protected fun createEffectiveMessage(): String {
         return when {
             hasWeaponTriangleAdvantage() -> {
                 """[BLUE]Advantage![BLACK]
@@ -177,6 +176,11 @@ abstract class BattleAbilityItem(
         }
     }
 
+    private fun possibleGetGrayPrefix(): String {
+        if (abilityItem.isPreview) return ""
+        return if (!isWeaponAllowed() || !hasEnoughApSp()) "[GRAY]" else ""
+    }
+
     private fun getAdvantageBonusHit(): Int {
         return when {
             hasWeaponTriangleAdvantage() -> HIT_ADVANTAGE
@@ -200,7 +204,6 @@ abstract class BattleAbilityItem(
             DAMAGE_NORMAL_DIVISOR
         }
     }
-
 
     private fun hasWeaponTriangleAdvantage(): Boolean {
         val attackSkill: SkillItemId = currentWeapon!!.skill!!

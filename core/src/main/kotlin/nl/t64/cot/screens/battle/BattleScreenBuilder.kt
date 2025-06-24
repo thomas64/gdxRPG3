@@ -342,15 +342,15 @@ class BattleScreenBuilder {
 
     private fun GdxList<BattleAbilityItem>.fillWithPreviewAttacks(currentParticipant: Participant): GdxList<BattleAbilityItem> {
         val abilities: List<BattleAbilityItem> = currentParticipant.getBattleAbilities()
+            .map { it.createCopyForPreview() }
         this.setItems(*abilities.toTypedArray())
         items.add(createBackButton(currentParticipant))
-        this.selectedIndex = buttonTableSelectAttackIndex
+        this.setSelectedIndex()
         return this
     }
 
     private fun GdxList<BattleAbilityItem>.fillWithAttacks(currentParticipant: Participant): GdxList<BattleAbilityItem> {
         val abilities: List<BattleAbilityItem> = currentParticipant.getBattleAbilities()
-            .map { it.possibleCreateCopyWithGrayName() }
         this.setItems(*abilities.toTypedArray())
         items.add(createBackButton(currentParticipant))
         this.setSelectedIndex()
@@ -368,7 +368,7 @@ class BattleScreenBuilder {
 
     private fun createBackButton(currentParticipant: Participant): BattleAbilityItem {
         return object : BattleAbilityItem(AbilityItem(name = "Back"), currentParticipant) {
-            override fun possibleCreateCopyWithGrayName(): BattleAbilityItem = this
+            override fun createCopyForPreview(): BattleAbilityItem = this
             override fun createPreviewMessage(): String = ""
             override fun handleSuccess(messages: ArrayDeque<String>) {}
         }

@@ -19,12 +19,8 @@ class Stagger(
     attacker
 ) {
 
-    override fun toString(): String {
-        return "$name          $ap AP | $sp SP"
-    }
-
-    override fun possibleCreateCopyWithGrayName(): BattleAbilityItem {
-        return Stagger(possibleCreateGrayName(), attacker)
+    override fun createCopyForPreview(): BattleAbilityItem {
+        return Stagger(abilityItem.copy(isPreview = true), attacker)
     }
 
     override fun createPreviewMessage(): String {
@@ -32,7 +28,7 @@ class Stagger(
             """
                 $name
                 ${it.name} ${it.getDurabilityText()}
-                ${possibleCreateEffectiveMessage()}
+                ${createEffectiveMessage()}
                 Hit:       ${String.format("%3d", calculateHitPercentageCapped())} %
                 Stagger:   ${String.format("%3d", calculateStaggerPercentage())} %
                 Damage:    ${String.format("%3d", calculateDamage())}

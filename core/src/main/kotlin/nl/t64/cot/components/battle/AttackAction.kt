@@ -36,7 +36,7 @@ class AttackAction(
             val ability: BattleAbilityItem = this
             return object : BattleAbilityItem(ability.abilityItem, ability.attacker) {
                 override fun isHit(): Boolean = false
-                override fun possibleCreateCopyWithGrayName(): BattleAbilityItem = this
+                override fun createCopyForPreview(): BattleAbilityItem = this
                 override fun createPreviewMessage(): String = ""
                 override fun handleSuccess(messages: ArrayDeque<String>) = ability.handleSuccess(messages)
             }

@@ -23,6 +23,7 @@ data class AbilityItem(
     @JsonProperty("weapon_skills") private val weaponSkills: List<SkillItemId> = emptyList(),
     @JsonProperty("hit_multiplier") val hitMultiplier: Float = 1f,
     @JsonProperty("damage_multiplier") val damageMultiplier: Float = 1f,
+    val isPreview: Boolean = false
 ) : PersonalityItem() {
 
     fun createCopy(): AbilityItem {
