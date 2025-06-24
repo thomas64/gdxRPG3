@@ -30,10 +30,10 @@
       "which can be used to improve your character."
     ]
   },
-  "guide_event_battle_ap"            : {
+  "guide_event_battle_rows"          : {
     "type": "messagebox",
     "text": [
-      "Battle Tutorial (1/5)",
+      "Battle Tutorial (1/6)",
       "",
       "The battlefield consists of the two rows you can see below.",
       "One row for you and your party members, the other for the enemies.",
@@ -46,7 +46,7 @@
   "guide_event_battle_advantage"     : {
     "type": "messagebox",
     "text": [
-      "Battle Tutorial (2/5)",
+      "Battle Tutorial (2/6)",
       "",
       "Each enemy has an [BLUE]advantage[BLACK] and a",
       "[FIREBRICK]disadvantage[BLACK] to certain weapon types.",
@@ -58,20 +58,29 @@
   "guide_event_battle_battle_lock"   : {
     "type": "messagebox",
     "text": [
-      "Battle Tutorial (3/5)",
+      "Battle Tutorial (3/6)",
       "",
       "At the start of each turn, if a character begins",
       "next to an enemy, they become locked in battle.",
-      "This is marked by a small exclamation mark [[GOLDENROD]![BLACK]].",
+      "This is marked by a small exclamation mark [!].",
       "",
       "This significantly increases the AP cost to move",
       "away from that enemy and escape the battle lock."
     ]
   },
+  "guide_event_battle_ap"            : {
+    "type": "messagebox",
+    "text": [
+      "Battle Tutorial (4/6)",
+      "",
+      "When you end your turn, if there is any AP left,",
+      "up to 2 AP, will be added to your next turn's AP."
+    ]
+  },
   "guide_event_battle_turn_order"    : {
     "type": "messagebox",
     "text": [
-      "Battle Tutorial (4/5)",
+      "Battle Tutorial (5/6)",
       "",
       "At the top of the screen, you can see the turn order.",
       "The character highlighted in [GOLDENROD]yellow[BLACK] will act first.",
@@ -88,7 +97,7 @@
   "guide_event_battle_durability"    : {
     "type": "messagebox",
     "text": [
-      "Battle Tutorial (5/5)",
+      "Battle Tutorial (6/6)",
       "",
       "Weapons and shields have limited durability.",
       "You can see their durability in parentheses after",

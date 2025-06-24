@@ -357,7 +357,8 @@ class BattleScreenBuilder {
 
     private fun GdxList<BattleAbilityItem>.setSelectedIndex() {
         if (buttonTableSelectAttackIndex > this.items.size - 1
-            || this.items[buttonTableSelectAttackIndex].toString().startsWith("[GRAY]")) {
+            || this.items[buttonTableSelectAttackIndex].toString().startsWith("[GRAY]")
+        ) {
             buttonTableSelectAttackIndex = this.items.size - 1
         }
         this.selectedIndex = buttonTableSelectAttackIndex
@@ -389,8 +390,8 @@ class BattleScreenBuilder {
 
     private fun GdxList<BattleWeaponItem>.fillWithWeapons(weapons: List<BattleWeaponItem>): GdxList<BattleWeaponItem> {
         this.setItems(*weapons.toTypedArray())
-        items.add(BattleWeaponItem(InventoryItem(name = "Unequip Current Weapon (1 AP)", group = InventoryGroup.WEAPON)))
-        items.add(BattleWeaponItem(InventoryItem(name = "Unequip Current Shield (1 AP)", group = InventoryGroup.SHIELD)))
+        items.add(BattleWeaponItem(InventoryItem(name = "Unequip Current Weapon", group = InventoryGroup.WEAPON)))
+        items.add(BattleWeaponItem(InventoryItem(name = "Unequip Current Shield", group = InventoryGroup.SHIELD)))
         items.add(BattleWeaponItem(InventoryItem(name = "Back")))
         this.selectedIndex = 0
         return this
