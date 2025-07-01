@@ -6,6 +6,7 @@ cutscene_end_of_cycle1.json
 honeywood.json
 honeywood_black_smith.json
 honeywood_farm.json
+honeywood_deryk.json
 cutscene_end_of_cycle2.json
 cutscene_end_of_cycle3.json
 cutscene_ardor_later_time.json

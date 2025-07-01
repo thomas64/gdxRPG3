@@ -20,15 +20,32 @@ object SpellsRewarder {
     }
 
     private fun receiveSpells(reward: Loot) {
-        // todo, it's always Mozes now who gets the spells.
-        val mozes: HeroItem = gameData.party.getPlayer()
-
-        val spellsToLearn: List<AbilityItem> = reward.content.map { AbilityDatabase.createAbilityItem(it.key) }
-        spellsToLearn
-            .filter { mozes.getAbilityById(it.id) == null }
-            .forEach { mozes.learn(it, 0) }
-        showMessageTooltipRewardSpells(spellsToLearn)
+        val actuallyLearned = mutableListOf<AbilityItem>()
+        reward.content.forEach { possibleTeachSpellToParty(it, actuallyLearned) }
+        if (actuallyLearned.isNotEmpty()) {
+            showMessageTooltipRewardSpells(actuallyLearned)
+        }
         reward.clearContent()
+    }
+
+    private fun possibleTeachSpellToParty(rewardEntry: Map.Entry<String, Int>,
+                                          actuallyLearned: MutableList<AbilityItem>) {
+        val party: List<HeroItem> = gameData.party.getAllHeroesAlive()
+        val player: HeroItem = gameData.party.getPlayer()
+
+        val spellToLearn: AbilityItem = AbilityDatabase.createAbilityItem(rewardEntry.key)
+        if (rewardEntry.value == 99) {
+            party.forEach { it.possibleLearnSpell(spellToLearn, actuallyLearned) }
+        } else {
+            player.possibleLearnSpell(spellToLearn, actuallyLearned)
+        }
+    }
+
+    private fun HeroItem.possibleLearnSpell(spellToLearn: AbilityItem, actuallyLearned: MutableList<AbilityItem>) {
+        if (this.getAbilityById(spellToLearn.id) == null) {
+            this.learn(spellToLearn, 0)
+            actuallyLearned.add(spellToLearn)
+        }
     }
 
     private fun showMessageTooltipRewardSpells(spellItems: List<AbilityItem>) {

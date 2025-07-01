@@ -283,6 +283,7 @@
           {"text": "*Accept the offer for some rest.* [BLUE](Restore health)", "nextId": "4"},
           {"condition": ["i_r_>=_k_q_this", "i_c_==_u_q_this"], "text": "*Express your concern about the innkeeper's troubled demeanor.*", "nextId": "10"},
           {"condition": ["i_r_>=_k_q_this", "i_c_==_u_q_this"], "text": "*Offer to help with the bat situation she will mention.*", "command": "ACCEPT_QUEST", "nextId": "15"},
+          {"condition": ["i_time_before_18:45"], "text": "*Ask her about the current vacancies.*", "nextId": "70"},
           {"text": "*Decline the offer for now. Take your leave.*", "command": "EXIT"}
         ]
       },
@@ -315,6 +316,8 @@
       "50"  : {"text": ["Splendid! That's wonderful. I bet those bats must have been trained by an evil imp to harass my customers! Thank you!"]},
       "51"  : {"text": ["There was a reward, you know... five gold pieces. With these, you can stay five times for free, sort of. Isn't that great?"], "choices": [{"command": "REWARD_QUEST"}]},
       "60"  : {"text": ["Hey there Mozes! Did you already do something about those 'visitors', or would you like to rest here and be completely revitalized for just 1 gold piece?"], "choices": [{"nextId": "2"}]},
+      "70"  : {"text": ["It's a bit quiet here at the moment. I wouldn't mind some more customers."]},
+      "71"  : {"text": ["This evening however, I expect a special guest. I think he was asked by the village elder to come here."], "choices": [{"nextId": "2"}]},
       "1000": {"text": ["I'm sorry, Mozes, you don't have enough gold."], "choices": [{"command": "EXIT"}]},
       "1399": {"text": ["Such a brave yet modest hero! You didn't even take your reward."], "choices": [{"command": "REWARD_QUEST"}]},
       "1400": {"text": ["Welcome back, my fearless friend! Thanks again for your help. Would you like to rest here and be completely revitalized for just 1 gold piece?"], "choices": [{"nextId": "2"}]}

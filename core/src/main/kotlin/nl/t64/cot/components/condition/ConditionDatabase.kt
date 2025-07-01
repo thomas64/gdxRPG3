@@ -19,6 +19,7 @@ object ConditionDatabase {
     private val conditions: Map<String, () -> Boolean> = mapOf(
         // @formatter:off
         "diplomat1"                 to { hasEnoughOfSkill(SkillItemId.DIPLOMAT,     1) },
+        "diplomat2"                 to { hasEnoughOfSkill(SkillItemId.DIPLOMAT,     2) },
         "barbarian1"                to { hasEnoughOfSkill(SkillItemId.BARBARIAN,    1) },
         "barbarian4"                to { hasEnoughOfSkill(SkillItemId.BARBARIAN,    4) },
         "warrior4"                  to { hasEnoughOfSkill(SkillItemId.WARRIOR,      4) },

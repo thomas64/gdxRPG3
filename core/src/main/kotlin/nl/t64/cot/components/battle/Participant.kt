@@ -120,6 +120,7 @@ class Participant(
             AbilityItemId.BODY_SLAM_2 -> Strike(abilityItem, this)
             AbilityItemId.STRIKE_2,
             AbilityItemId.STRIKE_3,
+            AbilityItemId.STRIKE_3S,
             AbilityItemId.STRIKE_4 -> Strike(abilityItem, this)
             AbilityItemId.STAGGER -> Stagger(abilityItem, this)
             AbilityItemId.DOUBLE_THROW -> DoubleThrow(abilityItem, this)

@@ -1,6 +1,6 @@
 {
   "strike_2"    : {
-    "name"             : "Weak Strike",
+    "name"             : "Quick Strike",
     "ap"               : 2,
     "weapon_skills"    : ["SWORD", "AXE", "SPEAR", "DAGGER", "THROW", "BOW"],
     "damage_multiplier": 0.6,
@@ -12,6 +12,13 @@
     "weapon_skills"    : ["SWORD", "AXE", "SPEAR", "DAGGER", "THROW", "BOW"],
     "damage_multiplier": 1.0,
     "damage_formula"   : "(3f / 3f) * 1.0f"
+  },
+  "strike_3s"   : {
+    "name"             : "Focused Strike",
+    "ap"               : 3,
+    "sp"               : 6,
+    "weapon_skills"    : ["SWORD", "AXE", "SPEAR", "DAGGER", "THROW", "BOW"],
+    "damage_multiplier": 1.4666
   },
   "strike_4"    : {
     "name"             : "Strong Strike",

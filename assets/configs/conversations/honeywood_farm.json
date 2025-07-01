@@ -95,7 +95,7 @@
       },
       "2": {
         "choices": [
-          {"text": "*[A horse] Present the requested horse...*", "nextId": "3"},
+          {"text": "[A horse] *Present the requested horse...*", "nextId": "3"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },

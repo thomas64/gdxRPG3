@@ -16,6 +16,7 @@ object AbilityDatabase {
         return when (abilityId) {
             AbilityItemId.STRIKE_2 -> emptyList()
             AbilityItemId.STRIKE_3 -> strikeDescription()
+            AbilityItemId.STRIKE_3S -> emptyList()
             AbilityItemId.STRIKE_4 -> emptyList()
             AbilityItemId.BITE_3 -> throw IllegalArgumentException("AbilityItemId cannot be BITE_3.")
             AbilityItemId.BITE_4 -> throw IllegalArgumentException("AbilityItemId cannot be BITE_4.")

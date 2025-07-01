@@ -6,6 +6,7 @@ enum class AbilityItemId : SuperEnum {
 
     STRIKE_2,
     STRIKE_3,
+    STRIKE_3S,
     STRIKE_4,
 
     BITE_3,

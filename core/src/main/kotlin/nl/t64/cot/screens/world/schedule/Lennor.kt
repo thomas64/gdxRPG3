@@ -20,7 +20,7 @@ class Lennor : EntitySchedule() {
         SchedulePart("honeywood", "08:06", "08:09", EAST,  WALKING,  "lennor4", "lennor5", "lennor_on_the_way"),
         SchedulePart("honeywood", "08:09", "16:55", EAST,  IDLE,     "lennor5", "lennor5", "quest_helping_horse", listOf("_c_!=_f_q_quest_helping_horse")),
         SchedulePart("honeywood", "16:55", "17:01", EAST,  IMMOBILE, "lennor5", "lennor5", "lennor_is_finished",  listOf("_c_!=_f_q_quest_helping_horse")),
-        SchedulePart("honeywood", "17:01", "19:30", NORTH, IDLE,     "lennor6", "lennor6", "the_road_is_open",    listOf("_c_!=_f_q_quest_helping_horse")),
+        SchedulePart("honeywood", "17:01", "20:00", NORTH, IDLE,     "lennor6", "lennor6", "the_road_is_open",    listOf("_c_!=_f_q_quest_helping_horse")),
         // @formatter:on
     )
 

@@ -17,6 +17,7 @@ class WorldSchedule {
                                                                HoneywoodEquipShop(),
                                                                HoneywoodAcademy1(),
                                                                HoneywoodAcademy2(),
+                                                               Deryk(),
                                                                Garrin(),
                                                                Ghost(),
                                                                Paton(),
