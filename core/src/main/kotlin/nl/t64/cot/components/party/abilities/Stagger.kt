@@ -29,10 +29,10 @@ class Stagger(
                 $name
                 ${it.name} ${it.getDurabilityText()}
                 ${createEffectiveMessage()}
-                Hit:       ${String.format("%3d", calculateHitPercentageCapped())} %
-                Stagger:   ${String.format("%3d", calculateStaggerPercentage())} %
-                Damage:    ${String.format("%3d", calculateDamage())}
-                Crit:      ${String.format("%3d", calculateCriticalHitPercentage())} %
+                Mod hit: ${String.format("%3d", calculateHitPercentageCapped())} %
+                Stagger: ${String.format("%3d", calculateStaggerPercentage())} %
+                Damage:  ${String.format("%3d", calculateDamage())}
+                Crit:    ${String.format("%3d", calculateCriticalHitPercentage())} %
             """.trimIndent().trimMargin()
         } ?: createNoWeaponMessage()
     }

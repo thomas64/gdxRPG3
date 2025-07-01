@@ -218,15 +218,15 @@ class BattleScreen : Screen {
 
     private fun heroIsSelectedForPrePreview(selectedHero: String) {
         currentParticipant = turnManager.participants.first { it.character.name == selectedHero }
-        menuManager.heroIsSelectedForPrePreview()
+        menuManager.aHeroIsSelectedInPreviewAttacksInPreBattle()
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun showConfirmMoveDialog() {
         dialogManager.showConfirmMoveDialog(battleField = battleField,
-                                            onConfirmed = { it.handle(); menuManager.returnToAction() },
-                                            onCancelled = { menuManager.returnToAction() })
+                                            onConfirmed = { moveConfirmed(it) },
+                                            onCancelled = { menuManager.returnToActionMainMenu() })
     }
 
     private fun showPreviewDialog(selectedAttack: BattleAbilityItem, selectedTarget: String) {
@@ -245,6 +245,12 @@ class BattleScreen : Screen {
     private fun showConfirmPotionDialog(selectedPotion: BattlePotionItem) {
         dialogManager.showConfirmPotionDialog(selectedPotion = selectedPotion,
                                               onConfirmed = { potionConfirmed(it) })
+    }
+
+    private fun showConfirmWeaponDialogPreBattle(selectedWeapon: BattleWeaponItem) {
+        dialogManager.showConfirmWeaponDialogPreBattle(selectedWeapon = selectedWeapon,
+                                                       enemies = turnManager.getOnlyEnemies(),
+                                                       onConfirmed = { weaponPreBattleConfirmed(it) })
     }
 
     private fun showConfirmWeaponDialog(selectedWeapon: BattleWeaponItem) {
@@ -279,9 +285,19 @@ class BattleScreen : Screen {
         }
     }
 
+    private fun moveConfirmed(moveAction: MoveAction) {
+        moveAction.handle()
+        menuManager.returnToActionMainMenu()
+    }
+
     private fun potionConfirmed(potionAction: PotionAction) {
         menuManager.buttonTablePotion.remove()
         confirmManager.potionConfirmed(potionAction)
+    }
+
+    private fun weaponPreBattleConfirmed(weaponAction: WeaponAction) {
+        weaponAction.handle()
+        menuManager.returnToPreBattleMainMenu()
     }
 
     private fun weaponConfirmed(weaponAction: WeaponAction) {
@@ -430,10 +446,10 @@ class BattleScreen : Screen {
             ::winBattle,
             ::openPauseMenu,
             ::showInventoryScreenPreBattle,
+            ::showInventoryScreen,
             ::startBattle,
             ::heroIsSelectedForPrePreview,
             ::showPreviewDialog,
-            ::showInventoryScreen,
             ::showFleeDialog,
             ::showDelayTurnDialog,
             ::showConfirmRestDialog,
@@ -441,6 +457,7 @@ class BattleScreen : Screen {
             ::showConfirmMoveDialog,
             ::showConfirmAttackDialog,
             ::showConfirmPotionDialog,
+            ::showConfirmWeaponDialogPreBattle,
             ::showConfirmWeaponDialog
         )
     }

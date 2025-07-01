@@ -284,8 +284,9 @@ class BattleScreenBuilder {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun GdxList<String>.fillWithPreBattleActions(): GdxList<String> {
+        items.add("Party preparation")
         items.add("Select equipment")
-        items.add("Preview advantage")
+        items.add("Preview attacks")
         items.add("Start battle")
         this.selectedIndex = buttonTableMainMenuIndex
         return this
@@ -392,8 +393,8 @@ class BattleScreenBuilder {
 
     private fun GdxList<BattleWeaponItem>.fillWithWeapons(weapons: List<BattleWeaponItem>): GdxList<BattleWeaponItem> {
         this.setItems(*weapons.toTypedArray())
-        items.add(BattleWeaponItem(InventoryItem(name = "Unequip Current Weapon", group = InventoryGroup.WEAPON)))
-        items.add(BattleWeaponItem(InventoryItem(name = "Unequip Current Shield", group = InventoryGroup.SHIELD)))
+        items.add(BattleWeaponItem(InventoryItem(name = "Unequip current weapon", group = InventoryGroup.WEAPON)))
+        items.add(BattleWeaponItem(InventoryItem(name = "Unequip current shield", group = InventoryGroup.SHIELD)))
         items.add(BattleWeaponItem(InventoryItem(name = "Back")))
         this.selectedIndex = 0
         return this

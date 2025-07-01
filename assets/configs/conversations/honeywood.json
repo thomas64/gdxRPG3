@@ -376,8 +376,8 @@
           {"text": "*Wish Angie and Enopa the best. Take your leave.*", "command": "EXIT"}
         ]
       },
-      "20"  : {"text": ["Let me think...", "Yes, there might be something you can do. Go talk to the {COLOR=BLUE}village elder's wife, Elenora{COLOR=BLACK}. She might have some {COLOR=BLUE}medicine{COLOR=BLACK} or knows where to find it."]},
-      "21"  : {"text": ["Regarding the horseshoes, I'll need you to {COLOR=BLUE}get 4 of them{COLOR=BLACK}. They might be lying around in the village, or you could ask the {COLOR=BLUE}village elder{COLOR=BLACK}. He's quite knowledgeable and might even know where to find horseshoes."], "choices": [{"nextId": "35"}]},
+      "20"  : {"text": ["Let me think...", "Yes, there might be something you can do. Go talk to the village elder's wife, {COLOR=BLUE}Elenora{COLOR=BLACK}. She might have some {COLOR=BLUE}medicine{COLOR=BLACK} or knows where to find it."]},
+      "21"  : {"text": ["Regarding the horseshoes, I'll need you to get {COLOR=BLUE}four{COLOR=BLACK} of them. They might be lying around in the village, or you could ask the {COLOR=BLUE}village elder{COLOR=BLACK}. He's quite knowledgeable and might even know where to find horseshoes."], "choices": [{"nextId": "35"}]},
       "30"  : {"text": ["Really? That would be a big help. Thank you!"], "choices": [{"nextId": "35"}]},
       "35"  : {"text": ["Once Enopa is fully recovered and has been shoed, I'll lend her to Lennor and you."]},
       "36"  : {
@@ -401,7 +401,7 @@
       "53"  : {"text": ["{SPEED=0.2} . . . . ."]},
       "54"  : {"text": ["I think she even likes the taste of it! Thank you so much for your help."]},
       "55"  : {"text": ["Now, once she's been shoed, I'll lend her to Lennor and you."], "choices": [{"nextId": "60"}]},
-      "60"  : {"text": ["Were you able to gather 4 horseshoes for Enopa?"]},
+      "60"  : {"text": ["Were you able to gather four horseshoes for Enopa?"]},
       "61"  : {
         "choices": [
           {"condition": ["_n_4_>=_item_horseshoe"], "text": "[4 Horseshoes] *Hand over the horseshoes.*", "command": "PROVIDE_QUEST_ITEM", "nextId": "70"},
@@ -422,7 +422,7 @@
       "91"  : {"text": ["{SPEED=0.2} . . . . ."]},
       "92"  : {"text": ["I think she even likes the taste of it! Thank you so much for your help."]},
       "93"  : {"text": ["Now, once she's been shoed, I'll lend her to Lennor and you."]},
-      "94"  : {"text": ["Regarding the horseshoes, I'll need you to get 4 of them. They might be lying around in the village, or you could ask the village elder. He's quite knowledgeable and might even know where to find horseshoes."], "choices": [{"nextId": "61"}]}
+      "94"  : {"text": ["Regarding the horseshoes, I'll need you to get four of them. They might be lying around in the village, or you could ask the village elder. He's quite knowledgeable and might even know where to find horseshoes."], "choices": [{"nextId": "61"}]}
     }
   },
   "honeywood_horse"                     : {
@@ -490,7 +490,7 @@
       "1"   : {"text": ["Greetings, Mozes. How may I be of service today?"]},
       "2"   : {
         "choices": [
-          {"condition": ["i_c_==_x_q_this", "alone_in_party"], "text": "*Let him know about what happened with Luana at the farm.*", "nextId": "100"},
+          {"condition": ["i_c_==_x_q_this", "alone_in_party"], "text": "*Let him know about what happened with Luana at the farm.*", "nextId": "300"},
           {"condition": ["i_r_<=_k_q_this", "i_c_==_u_q_this"], "text": "*Explain everything that's happened and your need to go to Lastdenn.*", "nextId": "50"},
           {"condition": ["i_r_==_a_q_this", "i_c_==_u_q_this"], "text": "*Explain again everything that's happened.*", "nextId": "60"},
           {"condition": ["i_c_==_a_q_this", "i_!fairy_portal_active"], "text": "*Complain about the warp crystal not working.*", "nextId": "70"},
@@ -507,7 +507,7 @@
       "11"  : {"text": ["As you may know, Angie has a horse, and you're most likely to find her {COLOR=BLUE}behind the inn{COLOR=BLACK}. She often tends to her horse there."], "choices": [{"nextId": "2"}]},
       "20"  : {"text": ["Hmmm..."]},
       "21"  : {
-        "text": ["I believe there's one in {COLOR=BLUE}my basement{COLOR=BLACK}. It's quite dark down there, but you're welcome to see if you can find it."], "choices": [
+        "text": ["I believe there's one in my {COLOR=BLUE}basement{COLOR=BLACK}. It's quite dark down there, but you're welcome to see if you can find it."], "choices": [
           {"condition": ["_time_between_08:09_and_10:35"], "nextId": "22", "orElseId": "23"}
         ]
       },
@@ -528,7 +528,7 @@
       "57"  : {"text": ["{COLOR=BLUE}Luana{COLOR=BLACK} went to Honeywood Farm this morning. She's expressed her desire to leave the village more times than I can remember. You should go find her at the farm northeast of here, and ask her to accompany you on your journey."]},
       "58"  : {
         "text": ["Together, you are permitted to leave this village by the guards on your way to Lastdenn."], "choices": [
-          {"condition": ["_tx_7_q_this"], "nextId": "200", "orElseId": "59"}
+          {"condition": ["_tx_7_q_this"], "nextId": "100", "orElseId": "59"}
         ]
       },
       "59"  : {"text": ["Mozes, I wish you the best of luck on your journey."], "choices": [{"command": "RECEIVE_ITEM_FOR_QUEST"}]},
@@ -550,14 +550,19 @@
       "72"  : {"text": ["But for now, it's not really a problem. Keep the letter I gave you, and perhaps you can visit the Fairy Shop at a later time."], "choices": [{"nextId": "90"}]},
       "80"  : {"text": ["Mozes, that's wonderful, thank you. It's yours to keep. I hope it can be of assistance to you."], "choices": [{"nextId": "90"}]},
       "90"  : {"text": ["Mozes, I wish you the best of luck on your journey."], "choices": [{"command": "EXIT"}]},
-      "100" : {"text": ["Oh no! That's terrible! If only we had {COLOR=BLUE}known sooner{COLOR=BLACK}, I would have sent someone to help her."]},
-      "101" : {"text": ["But now it's too late. I don't know what to do anymore."]},
-      "102" : {"text": ["Perhaps the Fairies still know for you what to do..."], "choices": [{"command": "RECEIVE_ITEM_FOR_QUEST"}]},
-      "200" : {
+      "100" : {
         "choices": [
-          {"text": "*Tell what happened with Luana at the farm.*", "command": "FAIL_QUEST", "nextId": "100"}
+          {"text": "*Tell what happened with Luana at the farm.*", "command": "FAIL_QUEST", "nextId": "200"}
         ]
       },
+      "200" : {"text": ["Oh no! That's terrible! If only we had known {COLOR=BLUE}sooner{COLOR=BLACK}, I would have sent someone to help her."]},
+      "201" : {"text": ["But now it's too late. I don't know what to do anymore."]},
+      "202" : {"text": ["Perhaps the Fairies still know for you what to do..."], "choices": [{"command": "RECEIVE_ITEM_FOR_QUEST"}]},
+      "300" : {"text": ["Oh no! That's terrible! If only we had known {COLOR=BLUE}sooner{COLOR=BLACK}, I would have sent someone to help her."]},
+      "301" : {"text": ["But now it's too late. I don't know what to do anymore."]},
+      "302" : {"text": ["Perhaps the Fairies still know for you what to do..."], "choices": [{"command": "EXIT", "nextId": "310"}]},
+      "310" : {"text": ["It's too late now. I don't know what to do anymore."]},
+      "311" : {"text": ["Perhaps the Fairies still know for you what to do..."], "choices": [{"command": "EXIT", "nextId": "310"}]},
       "1199": {"text": ["Mozes, it seems you've forgotten something."], "choices": [{"command": "RECEIVE_ITEM_FOR_QUEST"}]},
       "1200": {"text": ["Greetings, Mozes. How may I be of service today?"], "choices": [{"nextId": "2"}]},
       "2000": {"text": ["Mozes, I've probably told you a dozen times already, but I really wish you the best of luck on your journey."], "choices": [{"command": "EXIT"}]}

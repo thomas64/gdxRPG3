@@ -10,8 +10,8 @@ class BattleWeaponItem(
 
     override fun toString(): String {
         return when (name) {
-            "Unequip Current Weapon",
-            "Unequip Current Shield",
+            "Unequip current weapon",
+            "Unequip current shield",
             "Back" -> name
             else -> "$name ($durability)"
         }

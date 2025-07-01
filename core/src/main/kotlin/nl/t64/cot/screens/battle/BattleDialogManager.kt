@@ -23,11 +23,11 @@ class BattleDialogManager(
     ) {
         val moveAction = MoveAction(battleField, currentParticipant.invoke())
         if (moveAction.didCharacterRemainOnTheSameSpace()) {
-            onCancelled()
+            onCancelled.invoke()
             return
         }
         val message = moveAction.createConfirmationMessage()
-        val dialog = QuestionDialog(message) { onConfirmed(moveAction) }
+        val dialog = QuestionDialog(message) { onConfirmed.invoke(moveAction) }
         dialog.show(stage, 0, 0.5f)
     }
 
@@ -62,7 +62,7 @@ class BattleDialogManager(
         }
 
         val message = attackAction.createConfirmationMessage()
-        val dialog = TwoColumnsQuestionDialog(message) { onConfirmed(attackAction) }
+        val dialog = TwoColumnsQuestionDialog(message) { onConfirmed.invoke(attackAction) }
         dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0, 1f)
     }
 
@@ -83,9 +83,18 @@ class BattleDialogManager(
             val dialog = MessageDialog(message)
             dialog.show(stage, AudioEvent.SE_MENU_ERROR)
         } else {
-            val dialog = QuestionDialog(message) { onConfirmed(potionAction) }
+            val dialog = QuestionDialog(message) { onConfirmed.invoke(potionAction) }
             dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0, 0.5f)
         }
+    }
+
+    fun showConfirmWeaponDialogPreBattle(
+        selectedWeapon: BattleWeaponItem,
+        enemies: List<Participant>,
+        onConfirmed: (WeaponAction) -> Unit
+    ) {
+        val weaponAction = WeaponAction(currentParticipant.invoke(), selectedWeapon, enemies, switchWeaponAp = 0)
+        showConfirmSwitchEquipmentDialog(weaponAction, onConfirmed)
     }
 
     fun showConfirmWeaponDialog(
@@ -94,7 +103,13 @@ class BattleDialogManager(
         onConfirmed: (WeaponAction) -> Unit
     ) {
         val weaponAction = WeaponAction(currentParticipant.invoke(), selectedWeapon, enemies)
+        showConfirmSwitchEquipmentDialog(weaponAction, onConfirmed)
+    }
 
+    private fun showConfirmSwitchEquipmentDialog(
+        weaponAction: WeaponAction,
+        onConfirmed: (WeaponAction) -> Unit
+    ) {
         val unableToEquipMessage: String? = weaponAction.isUnableToEquip()
         if (unableToEquipMessage != null) {
             val dialog = MessageDialog(unableToEquipMessage)
@@ -103,7 +118,7 @@ class BattleDialogManager(
         }
 
         val message = weaponAction.createConfirmationMessage()
-        val dialog = TwoColumnsQuestionDialog(message) { onConfirmed(weaponAction) }
+        val dialog = TwoColumnsQuestionDialog(message) { onConfirmed.invoke(weaponAction) }
         dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0, 0.5f)
     }
 
@@ -117,7 +132,7 @@ class BattleDialogManager(
             val dialog = MessageDialog(message)
             dialog.show(stage, AudioEvent.SE_MENU_ERROR)
         } else {
-            val dialog = QuestionDialog(message) { onConfirmed(fleeAction) }
+            val dialog = QuestionDialog(message) { onConfirmed.invoke(fleeAction) }
             dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0)
         }
     }
@@ -131,7 +146,7 @@ class BattleDialogManager(
             val dialog = MessageDialog(message)
             dialog.show(stage, AudioEvent.SE_MENU_ERROR)
         } else {
-            val dialog = QuestionDialog(message) { onConfirmed(delayTurnAction) }
+            val dialog = QuestionDialog(message) { onConfirmed.invoke(delayTurnAction) }
             dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0)
         }
     }
@@ -145,7 +160,7 @@ class BattleDialogManager(
             val dialog = MessageDialog(message)
             dialog.show(stage, AudioEvent.SE_MENU_ERROR)
         } else {
-            val dialog = QuestionDialog(message) { onConfirmed(restAction) }
+            val dialog = QuestionDialog(message) { onConfirmed.invoke(restAction) }
             dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0)
         }
     }

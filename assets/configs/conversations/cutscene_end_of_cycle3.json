@@ -11,7 +11,7 @@
       "8" : {"text": ["I have rewound time for you before, but my powers are weakening."]},
       "9" : {"text": ["Now, I no longer possess the strength for another reversal."]},
       "10": {"text": ["Thus, I have embedded a portion of my essence within this crystal."]},
-      "11": {"text": ["This crystal enables you to {COLOR=BLUE}rewind time by 12 hours before this disaster strikes, as often as needed."]},
+      "11": {"text": ["This crystal enables you to return, {COLOR=BLUE}as often as needed{COLOR=BLACK}, to the moment exactly {COLOR=BLUE}12 hours{COLOR=BLACK} before this disaster strikes."]},
       "12": {"text": [". . ."]},
       "13": {"text": ["{SPEED=0.3}My time has come to an end... Take the crystal now! And use it!"]},
       "14": {"text": ["{SPEED=0.2}Don't forget the priest of Lastdenn..."], "choices": [{"command": "EXIT"}]}

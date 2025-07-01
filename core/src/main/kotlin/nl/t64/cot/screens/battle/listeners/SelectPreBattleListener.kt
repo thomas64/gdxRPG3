@@ -11,6 +11,7 @@ class SelectPreBattleListener(
     private val winBattle: () -> Unit,
     private val pauseMenu: () -> Unit,
     private val inventoryScreen: () -> Unit,
+    private val selectEquipment: () -> Unit,
     private val selectPreview: () -> Unit,
     private val startBattle: () -> Unit
 ) : InputListener() {
@@ -34,16 +35,14 @@ class SelectPreBattleListener(
 
     private fun InputEvent.handleEnter() {
         getSelected<String>()?.let { selected ->
+            if (selected != "Party") {
+                playSe(AudioEvent.SE_MENU_CONFIRM)
+            }
             when {
-                "Select" in selected -> inventoryScreen.invoke()
-                "Preview" in selected -> {
-                    playSe(AudioEvent.SE_MENU_CONFIRM)
-                    selectPreview.invoke()
-                }
-                "Start" in selected -> {
-                    playSe(AudioEvent.SE_MENU_CONFIRM)
-                    startBattle.invoke()
-                }
+                "Party" in selected -> inventoryScreen.invoke()
+                "equipment" in selected -> selectEquipment.invoke()
+                "Preview" in selected -> selectPreview.invoke()
+                "Start" in selected -> startBattle.invoke()
             }
         }
     }

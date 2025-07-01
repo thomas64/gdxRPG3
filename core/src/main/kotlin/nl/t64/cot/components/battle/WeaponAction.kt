@@ -16,7 +16,8 @@ private const val SWITCH_WEAPON_AP: Int = 3
 class WeaponAction(
     private val currentParticipant: Participant,
     private val selectedEquipment: BattleWeaponItem,
-    private val enemies: List<Participant>
+    private val enemies: List<Participant>,
+    private val switchWeaponAp: Int = SWITCH_WEAPON_AP
 ) {
     private val character: Character = currentParticipant.character
     private val hero: HeroItem = character as HeroItem
@@ -68,7 +69,7 @@ class WeaponAction(
     }
 
     private fun handleWeapon(): String {
-        currentParticipant.currentAP -= SWITCH_WEAPON_AP
+        currentParticipant.currentAP -= switchWeaponAp
         val currentWeapon: InventoryItem? = hero.getInventoryItem(InventoryGroup.WEAPON)
         val newWeapon: InventoryItem = selectedEquipment.inventoryItem
 
@@ -85,7 +86,7 @@ class WeaponAction(
     }
 
     private fun handleShield(): String {
-        currentParticipant.currentAP -= SWITCH_WEAPON_AP
+        currentParticipant.currentAP -= switchWeaponAp
         val currentShield: InventoryItem? = hero.getInventoryItem(InventoryGroup.SHIELD)
         val newShield: InventoryItem = selectedEquipment.inventoryItem
 
@@ -103,7 +104,7 @@ class WeaponAction(
 
     private fun createMessageIfCostingTooMuchAp(): String? {
         return when {
-            currentParticipant.currentAP < SWITCH_WEAPON_AP -> "Not enough AP!"
+            currentParticipant.currentAP < switchWeaponAp -> "Not enough AP!"
             else -> null
         }
     }
@@ -126,7 +127,7 @@ class WeaponAction(
 
                 $underscores
 
-                Unequip? ($SWITCH_WEAPON_AP AP)
+                Unequip?${getApCostText()}
             """.trimIndent())
     }
 
@@ -141,7 +142,7 @@ class WeaponAction(
                 Current weapon:
 
                 $currentWeaponSpecs
-                ${underscores + "____"}
+                ${underscores + "____________"}
 
                 Advantage:
 
@@ -159,9 +160,9 @@ class WeaponAction(
             """.trimIndent().trimMargin(),
                       """
 
-                ${underscores + underscores + "____"}
+                ${underscores + underscores + "____________"}
 
-                Equip? ($SWITCH_WEAPON_AP AP)
+                Equip?${getApCostText()}
             """.trimIndent())
     }
 
@@ -183,16 +184,16 @@ class WeaponAction(
 
                 $underscores
 
-                Equip? ($SWITCH_WEAPON_AP AP)
+                Equip?${getApCostText()}
             """.trimIndent())
     }
 
     private fun InventoryItem.listWeaponSpecs(): String {
         return """
                 ${this.name} ${this.getDurabilityText()}
-                Range:    ${this.getRangeText()}
-                Hit:      ${this.getAttributeOfCalcAttributeId(CalcAttributeId.BASE_HIT)}%
-                Damage:   ${this.getAttributeOfCalcAttributeId(CalcAttributeId.DAMAGE)}
+                Range:    ${String.format("%3s", this.getRangeText())}
+                Base hit: ${String.format("%3d", this.getAttributeOfCalcAttributeId(CalcAttributeId.BASE_HIT))} %
+                Damage:   ${String.format("%3d", this.getAttributeOfCalcAttributeId(CalcAttributeId.DAMAGE))}
             """.trim()
     }
 
@@ -233,7 +234,7 @@ class WeaponAction(
 
                 $underscores
 
-                Unequip? ($SWITCH_WEAPON_AP AP)
+                Unequip?${getApCostText()}
             """.trimIndent())
     }
 
@@ -246,17 +247,17 @@ class WeaponAction(
                 Current shield:
 
                 $currentShieldSpecs
+                ${underscores + "________"}
             """.trimIndent().trimMargin(),
                       """
                 New shield:
 
                 $newShieldSpecs
+                $underscores
             """.trimIndent().trimMargin(),
                       """
 
-                ${underscores + underscores + "____"}
-
-                Equip? ($SWITCH_WEAPON_AP AP)
+                Equip?${getApCostText()}
             """.trimIndent())
     }
 
@@ -272,7 +273,7 @@ class WeaponAction(
 
                 $underscores
 
-                Equip? ($SWITCH_WEAPON_AP AP)
+                Equip?${getApCostText()}
             """.trimIndent())
     }
 
@@ -284,6 +285,10 @@ class WeaponAction(
                 Speed:      ${String.format("%3d", this.getAttributeOfStatItemId(StatItemId.SPEED))}
                 Stealth:    ${String.format("%3d", this.getAttributeOfSkillItemId(SkillItemId.STEALTH))}
             """.trim()
+    }
+
+    private fun getApCostText(): String {
+        return if (switchWeaponAp == 0) "" else " ($SWITCH_WEAPON_AP AP)"
     }
 
     private fun InventoryItem.hasWeaponTriangleAdvantage(enemyWeapon: InventoryItem): Boolean {

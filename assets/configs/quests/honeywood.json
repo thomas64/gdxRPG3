@@ -144,7 +144,7 @@
         "conversationIds": ["mrs_johanna"]
       },
       "16": {
-        "taskPhrase"     : "            Tell Kaidan to come home to Jaron.",
+        "taskPhrase"     : "            Tell Jaron's little brother Kaidan to come home to him.",
         "type"           : "DELIVER_MESSAGE",
         "conversationIds": ["kaidan_come_home"]
       },
