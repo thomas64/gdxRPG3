@@ -5,8 +5,7 @@ import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.screens.world.entity.*
 import nl.t64.cot.screens.world.entity.Direction.*
-import nl.t64.cot.screens.world.entity.EntityState.IMMOBILE
-import nl.t64.cot.screens.world.entity.EntityState.WALKING
+import nl.t64.cot.screens.world.entity.EntityState.*
 
 
 class BlackSmith : EntitySchedule() {
@@ -16,8 +15,9 @@ class BlackSmith : EntitySchedule() {
 
     override val scheduleParts: List<SchedulePart> = listOf(
         // @formatter:off
-        SchedulePart("honeywood",             "07:36", "07:37", SOUTH, WALKING,  "smith1", "smith2"),
-        SchedulePart("honeywood",             "07:37", "07:39", SOUTH, WALKING,  "smith2", "smith3",   "black_smith_on_the_way"),
+        SchedulePart("honeywood",             "07:35", "07:36", SOUTH, WALKING,  "smith1", "smith2"),
+        SchedulePart("honeywood",             "07:36", "07:38", SOUTH, WALKING,  "smith2", "smith3",   "black_smith_on_the_way"),
+        SchedulePart("honeywood",             "07:38", "07:39", SOUTH, IDLE,     "smith3", "smith3",   "black_smith_on_the_way"),
         SchedulePart("honeywood",             "07:39", "07:49", SOUTH, IMMOBILE, "smith3", "smith3",   "black_and_lennor_meet"),
         SchedulePart("honeywood",             "07:49", "07:54", SOUTH, WALKING,  "smith3", "smith4",   "black_smith_on_the_way"),
         SchedulePart("honeywood",             "07:54", "07:56", EAST,  WALKING,  "smith4", "smith5",   "black_smith_on_the_way"),

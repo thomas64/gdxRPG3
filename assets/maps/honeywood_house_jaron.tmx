@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.11.1" orientation="orthogonal" renderorder="right-down" width="26" height="26" tilewidth="24" tileheight="24" infinite="0" nextlayerid="16" nextobjectid="41">
+<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="26" height="26" tilewidth="24" tileheight="24" infinite="0" nextlayerid="16" nextobjectid="43">
  <properties>
   <property name="bgm" value="bgm_house"/>
   <property name="step_sound" value="wood"/>
@@ -60,7 +60,7 @@
   <object id="31" name="carpet" x="48" y="144" width="216" height="144"/>
   <object id="32" name="stone" x="264" y="144" width="312" height="144"/>
  </objectgroup>
- <objectgroup color="#aa0000" id="10" name="collision" visible="0">
+ <objectgroup color="#aa0000" id="10" name="collision">
   <object id="1" x="0" y="0" width="624" height="144"/>
   <object id="2" x="0" y="144" width="48" height="480"/>
   <object id="3" x="576" y="144" width="48" height="480"/>
@@ -72,10 +72,12 @@
   <object id="11" x="480" y="144" width="96" height="24"/>
   <object id="12" x="528" y="168" width="48" height="24"/>
   <object id="13" x="528" y="288" width="48" height="48"/>
-  <object id="14" x="144" y="336" width="192" height="96"/>
+  <object id="14" x="192" y="336" width="96" height="96"/>
   <object id="15" x="240" y="168" width="48" height="120"/>
   <object id="16" x="288" y="216" width="96" height="72"/>
   <object id="18" x="480" y="240" width="96" height="48"/>
+  <object id="41" x="288" y="342" width="36" height="78"/>
+  <object id="42" x="156" y="342" width="36" height="78"/>
  </objectgroup>
  <objectgroup color="#5500ff" id="13" name="rest">
   <object id="22" name="note_bed01" x="96" y="144" width="96" height="72"/>

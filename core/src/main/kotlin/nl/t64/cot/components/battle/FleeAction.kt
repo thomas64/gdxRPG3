@@ -12,8 +12,8 @@ class FleeAction(
 ) {
     private val character: Character = currentParticipant.character
     private val message = """
-        When successful, fleeing will return you to the the
-        location of your last save with all progress intact.
+        When successful, fleeing will return you to the
+        location of your save state with all progress intact.
 
         The higher your Stealth skill, the higher the chance
         to flee successfully. Each failure in fleeing will also
@@ -25,7 +25,7 @@ class FleeAction(
 
     fun isAble(): Pair<Boolean, String> {
         if (!gameData.battles.isBattleEscapable(battleId)) {
-            return Pair(false, (message + "You can't flee from this battle.").trimIndent())
+            return Pair(false, "You can't flee from this battle.")
         }
         if (currentParticipant.currentAP < currentParticipant.maximumAP) {
             return Pair(false, (message + "Not enough AP!").trimIndent())

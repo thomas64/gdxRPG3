@@ -33,7 +33,7 @@
   },
   "event_to_honeywood_farm"              : {
     "type"          : "conversation",
-    "condition"     : ["_c_==_f_q_quest_helping_horse"],
+    "condition"     : ["_time_before_10:30", "_c_==_f_q_quest_helping_horse"],
     "conversationId": "to_honeywood_farm",
     "entityId"      : "mozes"
   },

@@ -130,7 +130,10 @@ class ProfileManager {
     }
 
     fun getLastSaveLocation(): String {
-        return saveState["mapTitle"] as String
+        val (saveFileContent: Preferences, _) = getSaveFilesContentBy(currentIndex)
+        val saveStateJsonString: String = saveFileContent.getString(PROFILE_SAVE_STATE_KEY)
+        val loadedSaveState: GdxMap<String, Any?> = json.fromJson(saveStateJsonString)
+        return loadedSaveState["mapTitle"] as String
     }
 
     private fun writeProfileToDisk(profileIndex: Int) {
@@ -210,7 +213,7 @@ class ProfileManager {
         saveFileContent: Preferences,
         fogOfWarFileContent: Preferences?
     ): GdxMap<String, Any?> {
-        val saveStateJsonString = saveFileContent.getString(PROFILE_SAVE_STATE_KEY)
+        val saveStateJsonString: String = saveFileContent.getString(PROFILE_SAVE_STATE_KEY)
         val loadedSaveState: GdxMap<String, Any?> = json.fromJson(saveStateJsonString)
         fogOfWarFileContent
             ?.getString(PROFILE_FOG_OF_WAR_KEY)

@@ -425,7 +425,14 @@
       "91"  : {"text": ["{SPEED=0.2} . . . . ."]},
       "92"  : {"text": ["I think she even likes the taste of it! Thank you so much for your help."]},
       "93"  : {"text": ["Now, once she's been shoed, I'll lend her to Lennor and you."]},
-      "94"  : {"text": ["Regarding the horseshoes, I'll need you to get four of them. They might be lying around in the village, or you could ask the village elder. He's quite knowledgeable and might even know where to find horseshoes."], "choices": [{"nextId": "61"}]}
+      "94"  : {"text": ["Regarding the horseshoes, I'll need you to get four of them. They might be lying around in the village, or you could ask the village elder. He's quite knowledgeable and might even know where to find horseshoes."]},
+      "95"  : {
+        "choices": [
+          {"condition": ["_n_4_>=_item_horseshoe"], "text": "[4 Horseshoes] *Hand over the horseshoes.*", "command": "PROVIDE_QUEST_ITEM", "nextId": "96"},
+          {"text": "*Tell her you'll return when you have them. Take your leave.*", "command": "EXIT", "nextId": "60"}
+        ]
+      },
+      "96"  : {"text": ["Alright, now it's becoming weird. Do you always have horseshoes in your pockets?"], "choices": [{"nextId": "71"}]}
     }
   },
   "honeywood_horse"                     : {
@@ -482,7 +489,7 @@
       },
       "30"  : {"text": ["Perfect! Just a moment, my dear, while I brew this medicine for you."]},
       "31"  : {"text": ["{SPEED=0.2} . . . . . . . . ."]},
-      "32"  : {"text": ["Here it is. It seems it was enough for three doses. Good luck with it."], "choices": [{"command": "REWARD_QUEST"}]},
+      "32"  : {"text": ["Here it is. It seems it was enough for {COLOR=BLUE}three{COLOR=BLACK} doses. Good luck with it."], "choices": [{"command": "REWARD_QUEST"}]},
       "1399": {"text": ["Mozes dear, you seem to have forgotten something."], "choices": [{"command": "REWARD_QUEST"}]},
       "1400": {"text": ["Mozes dear, did the medicine cure the horse?"], "choices": [{"nextId": "2"}]}
     }
@@ -633,13 +640,26 @@
   "honeywood_soldiers"                  : {
     "name"   : "Soldier",
     "phrases": {
-      "1"   : {"text": ["Sir, as per the {COLOR=BLUE}village elder's{COLOR=BLACK} orders, we are not permitted to allow anyone to leave the village {COLOR=BLUE}alone{COLOR=BLACK}."]},
+      "1"   : {"text": ["Sir, as per the village elder's orders, we are not permitted to allow anyone to leave the village {COLOR=BLUE}alone{COLOR=BLACK}."]},
       "2"   : {
         "text": ["It's dangerous to go alone, particularly with the recent increase in monster activity. (What's up with that anyway?)"], "choices": [
           {"condition": ["alone_in_party"], "nextId": "3"}
         ]
       },
-      "3"   : {"text": ["If you have a problem with that, it's not our call. You'll have to take it up with the village elder himself."], "choices": [{"command": "EXIT"}]},
+      "3"   : {
+        "text": ["If you have a problem with that, it's not our call. You'll have to take it up with the {COLOR=BLUE}village elder{COLOR=BLACK} himself."], "choices": [
+          {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "nextId": "4", "orElseId": "10"}
+        ]
+      },
+      "4"   : {
+        "choices": [
+          {"text": "*Ask the guards if they've seen a little girl pass by this morning.*", "nextId": "5"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "5"   : {"text": ["No sir, we have been stationed here all night, and we haven't seen anyone passing through this gate."]},
+      "6"   : {"text": ["Certainly not a little girl. We can guarantee you that."], "choices": [{"command": "EXIT"}]},
+      "10"  : {"text": ["You can find the village elder in the big house, near the statue in the center of the village."], "choices": [{"command": "EXIT"}]},
       "2000": {"text": ["But it appears you are in good company. Move along."], "choices": [{"command": "EXIT"}]}
     }
   },

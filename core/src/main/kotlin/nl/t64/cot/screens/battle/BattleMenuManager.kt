@@ -43,19 +43,20 @@ class BattleMenuManager(
                        buttonTablePotion,
                        buttonTableWeapon)
 
-    private lateinit var preBattle: SelectPreBattleListener
-    private lateinit var action: SelectActionListener
-    private lateinit var preBattleWeapon: SelectWeaponListener
-    private lateinit var actionWeapon: SelectWeaponListener
-    private lateinit var preBattleSelectHeroForPreview: SelectHeroListener
-    private lateinit var preBattlePreviewAttacks: SelectAttackListener
-    private lateinit var actionPreviewAttacks: SelectAttackListener
-    private lateinit var preBattlePreviewTarget: SelectTargetListener
-    private lateinit var actionPreviewTarget: SelectTargetListener
-    private lateinit var actionMove: SelectMoveListener
-    private lateinit var actionAttack: SelectAttackListener
-    private lateinit var actionAttackTarget: SelectTargetListener
-    private lateinit var actionPotion: SelectPotionListener
+    private lateinit var preBattleMainMenuListener: SelectPreBattleListener
+    private lateinit var actionMainMenuListener: SelectActionListener
+    private lateinit var preBattleEquipmentListener: SelectWeaponListener
+    private lateinit var actionEquipmentListener: SelectWeaponListener
+    private lateinit var preBattleHeroForEquipmentListener: SelectHeroListener
+    private lateinit var preBattleHeroForPreviewListener: SelectHeroListener
+    private lateinit var preBattlePreviewAttacksListener: SelectAttackListener
+    private lateinit var actionPreviewAttacksListener: SelectAttackListener
+    private lateinit var actionAttackListener: SelectAttackListener
+    private lateinit var preBattlePreviewTargetListener: SelectTargetListener
+    private lateinit var actionPreviewTargetListener: SelectTargetListener
+    private lateinit var actionAttackTargetListener: SelectTargetListener
+    private lateinit var actionMoveListener: SelectMoveListener
+    private lateinit var actionPotionListener: SelectPotionListener
 
     fun setListeners(
         winBattle: () -> Unit,
@@ -63,6 +64,7 @@ class BattleMenuManager(
         showInventoryScreenPreBattle: () -> Unit,
         showInventoryScreen: () -> Unit,
         startBattle: () -> Unit,
+        heroIsSelectedForPreEquipment: (String) -> Unit,
         heroIsSelectedForPrePreview: (String) -> Unit,
         showPreviewDialog: (BattleAbilityItem, String) -> Unit,
         showFleeDialog: () -> Unit,
@@ -75,19 +77,20 @@ class BattleMenuManager(
         showConfirmWeaponDialogPreBattle: (BattleWeaponItem) -> Unit,
         showConfirmWeaponDialog: (BattleWeaponItem) -> Unit
     ) {
-        preBattle = SelectPreBattleListener(winBattle, openPauseMenu, showInventoryScreenPreBattle, ::selectEquipmentIsSelectedInPreBattle, ::previewAttacksIsSelectedInPreBattle, startBattle)
-        action = SelectActionListener(winBattle, openPauseMenu, ::attackIsSelectedInAction, ::moveIsSelectedInAction, ::potionIsSelectedInAction, ::equipmentIsSelectedInAction, ::previewIsSelectedInAction, showInventoryScreen, showFleeDialog, showDelayTurnDialog, showConfirmRestDialog, endTurn)
-        preBattleWeapon = SelectWeaponListener(showConfirmWeaponDialogPreBattle, ::returnToPreBattleMainMenu)
-        actionWeapon = SelectWeaponListener(showConfirmWeaponDialog, ::returnToActionMainMenu)
-        preBattleSelectHeroForPreview = SelectHeroListener(heroIsSelectedForPrePreview, ::returnToPreBattleMainMenu)
-        preBattlePreviewAttacks = SelectAttackListener({ anAttackIsSelectedInAttackListInPreview(it, preBattlePreviewTarget) }, ::returnToSelectHeroInPreviewAttacksInPreBattle)
-        actionPreviewAttacks = SelectAttackListener({ anAttackIsSelectedInAttackListInPreview(it, actionPreviewTarget) }, ::returnToActionMainMenu)
-        preBattlePreviewTarget = SelectTargetListener(showPreviewDialog, ::returnToSelectAttackInPreviewInPreBattle)
-        actionPreviewTarget = SelectTargetListener(showPreviewDialog, ::returnToSelectAttackInPreview)
-        actionMove = SelectMoveListener(battleField::moveHeroLeft, battleField::moveHeroRight, showConfirmMoveDialog, ::returnToActionMainMenu)
-        actionAttack = SelectAttackListener(::anAttackIsSelectedInAttackList, ::returnToActionMainMenu)
-        actionAttackTarget = SelectTargetListener(showConfirmAttackDialog, ::returnToSelectAttack)
-        actionPotion = SelectPotionListener(showConfirmPotionDialog, ::returnToActionMainMenu)
+        preBattleMainMenuListener = SelectPreBattleListener(winBattle, openPauseMenu, showInventoryScreenPreBattle, ::selectEquipmentIsSelectedInPreBattle, ::previewAttacksIsSelectedInPreBattle, startBattle)
+        actionMainMenuListener = SelectActionListener(winBattle, openPauseMenu, ::attackIsSelectedInAction, ::moveIsSelectedInAction, ::potionIsSelectedInAction, ::equipmentIsSelectedInAction, ::previewIsSelectedInAction, showInventoryScreen, showFleeDialog, showDelayTurnDialog, showConfirmRestDialog, endTurn)
+        preBattleEquipmentListener = SelectWeaponListener(showConfirmWeaponDialogPreBattle, ::returnToSelectHeroInEquipmentInPreBattle)
+        actionEquipmentListener = SelectWeaponListener(showConfirmWeaponDialog, ::returnToActionMainMenu)
+        preBattleHeroForEquipmentListener = SelectHeroListener(heroIsSelectedForPreEquipment, ::returnToPreBattleMainMenu)
+        preBattleHeroForPreviewListener = SelectHeroListener(heroIsSelectedForPrePreview, ::returnToPreBattleMainMenu)
+        preBattlePreviewAttacksListener = SelectAttackListener({ anAttackIsSelectedInAttackListInPreview(it, preBattlePreviewTargetListener) }, ::returnToSelectHeroInPreviewAttacksInPreBattle)
+        actionPreviewAttacksListener = SelectAttackListener({ anAttackIsSelectedInAttackListInPreview(it, actionPreviewTargetListener) }, ::returnToActionMainMenu)
+        actionAttackListener = SelectAttackListener(::anAttackIsSelectedInAttackList, ::returnToActionMainMenu)
+        preBattlePreviewTargetListener = SelectTargetListener(showPreviewDialog, ::returnToSelectAttackInPreviewInPreBattle)
+        actionPreviewTargetListener = SelectTargetListener(showPreviewDialog, ::returnToSelectAttackInPreview)
+        actionAttackTargetListener = SelectTargetListener(showConfirmAttackDialog, ::returnToSelectAttack)
+        actionMoveListener = SelectMoveListener(battleField::moveHeroLeft, battleField::moveHeroRight, showConfirmMoveDialog, ::returnToActionMainMenu)
+        actionPotionListener = SelectPotionListener(showConfirmPotionDialog, ::returnToActionMainMenu)
     }
 
 
@@ -104,7 +107,7 @@ class BattleMenuManager(
     private fun previewAttacksIsSelectedInPreBattle() {
         screenBuilder.buttonTableMainMenuIndex = (buttonTablePreBattle.children.last() as GdxList<*>).selectedIndex
         buttonTablePreBattle.remove()
-        setupHeroTableForPrePreview()
+        setupHeroTable(preBattleHeroForPreviewListener)
     }
 
     private fun previewIsSelectedInAction() {
@@ -117,6 +120,12 @@ class BattleMenuManager(
         screenBuilder.buttonTableMainMenuIndex = (buttonTableAction.children.last() as GdxList<*>).selectedIndex
         buttonTableAction.remove()
         setupAttackTable()
+    }
+
+    fun aHeroIsSelectedInPreviewEquipmentInPreBattle() {
+        screenBuilder.buttonTableSelectHeroIndex = (buttonTableHero.children.last() as GdxList<*>).selectedIndex
+        buttonTableHero.remove()
+        setupWeaponTable(preBattleEquipmentListener)
     }
 
     fun aHeroIsSelectedInPreviewAttacksInPreBattle() {
@@ -141,13 +150,13 @@ class BattleMenuManager(
     private fun selectEquipmentIsSelectedInPreBattle() {
         screenBuilder.buttonTableMainMenuIndex = (buttonTablePreBattle.children.last() as GdxList<*>).selectedIndex
         buttonTablePreBattle.remove()
-        setupWeaponTable(preBattleWeapon)
+        setupHeroTable(preBattleHeroForEquipmentListener)
     }
 
     private fun equipmentIsSelectedInAction() {
         screenBuilder.buttonTableMainMenuIndex = (buttonTableAction.children.last() as GdxList<*>).selectedIndex
         buttonTableAction.remove()
-        setupWeaponTable(actionWeapon)
+        setupWeaponTable(actionEquipmentListener)
     }
 
     private fun moveIsSelectedInAction() {
@@ -178,9 +187,14 @@ class BattleMenuManager(
         setupActionTable()
     }
 
+    private fun returnToSelectHeroInEquipmentInPreBattle() {
+        buttonTableWeapon.remove()
+        setupHeroTable(preBattleHeroForEquipmentListener)
+    }
+
     private fun returnToSelectHeroInPreviewAttacksInPreBattle() {
         buttonTableAttack.remove()
-        setupHeroTableForPrePreview()
+        setupHeroTable(preBattleHeroForPreviewListener)
     }
 
     private fun returnToSelectAttackInPreviewInPreBattle() {
@@ -202,17 +216,17 @@ class BattleMenuManager(
 
     fun setupPreBattleTable() {
         buttonTablePreBattle = screenBuilder.createButtonTablePreBattle()
-        setupTable(buttonTablePreBattle, preBattle)
+        setupTable(buttonTablePreBattle, preBattleMainMenuListener)
     }
 
-    private fun setupHeroTableForPrePreview() {
+    private fun setupHeroTable(selectHeroListener: SelectHeroListener) {
         buttonTableHero = screenBuilder.createButtonTableHero(turnManager.getOnlyHeroes())
-        setupTable(buttonTableHero, preBattleSelectHeroForPreview)
+        setupTable(buttonTableHero, selectHeroListener)
     }
 
     private fun setupPrePreviewAttackTable() {
         buttonTableAttack = screenBuilder.createButtonTablePreviewAttack(currentParticipant.invoke())
-        setupTable(buttonTableAttack, preBattlePreviewAttacks)
+        setupTable(buttonTableAttack, preBattlePreviewAttacksListener)
     }
 
     private fun setupActionTable() {
@@ -220,23 +234,23 @@ class BattleMenuManager(
         battleField.resetStartingSpace()
         val areEnemiesInRange: Boolean = battleField.getTargetableEnemiesForActingHero().isNotEmpty()
         buttonTableAction = screenBuilder.createButtonTableAction(currentParticipant.invoke(), areEnemiesInRange)
-        setupTable(buttonTableAction, action)
+        setupTable(buttonTableAction, actionMainMenuListener)
     }
 
     private fun setupMoveTable() {
         battleField.setStartingSpace()
         buttonTableMove = screenBuilder.createButtonTableMove()
-        setupTable(buttonTableMove, actionMove)
+        setupTable(buttonTableMove, actionMoveListener)
     }
 
     private fun setupPreviewAttackTable() {
         buttonTableAttack = screenBuilder.createButtonTablePreviewAttack(currentParticipant.invoke())
-        setupTable(buttonTableAttack, actionPreviewAttacks)
+        setupTable(buttonTableAttack, actionPreviewAttacksListener)
     }
 
     private fun setupAttackTable() {
         buttonTableAttack = screenBuilder.createButtonTableAttack(currentParticipant.invoke())
-        setupTable(buttonTableAttack, actionAttack)
+        setupTable(buttonTableAttack, actionAttackListener)
     }
 
     private fun setupPreviewTargetTable(selectedAttack: BattleAbilityItem, targetListener: SelectTargetListener) {
@@ -248,8 +262,8 @@ class BattleMenuManager(
     private fun setupTargetTable(selectedAttack: BattleAbilityItem) {
         val targetableEnemies: List<Participant> = battleField.getTargetableEnemiesForActingHero()
         buttonTableTarget = screenBuilder.createButtonTableTarget(targetableEnemies)
-        actionAttackTarget.setSelectedAttack(selectedAttack)
-        setupTable(buttonTableTarget, actionAttackTarget)
+        actionAttackTargetListener.setSelectedAttack(selectedAttack)
+        setupTable(buttonTableTarget, actionAttackTargetListener)
     }
 
     private fun setupPotionTable() {
@@ -257,7 +271,7 @@ class BattleMenuManager(
             .filter { it.name.contains(" Potion") }
             .map { BattlePotionItem(it) }
         buttonTablePotion = screenBuilder.createButtonTablePotion(battlePotions)
-        setupTable(buttonTablePotion, actionPotion)
+        setupTable(buttonTablePotion, actionPotionListener)
     }
 
     private fun setupWeaponTable(listener: SelectWeaponListener) {

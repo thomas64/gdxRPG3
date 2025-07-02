@@ -12,7 +12,7 @@ class Lennor : EntitySchedule() {
 
     override val scheduleParts: List<SchedulePart> = listOf(
         // @formatter:off
-        SchedulePart("honeywood", "07:34", "07:39", NORTH, RUNNING,  "lennor1", "lennor2", "lennor_on_the_way"),
+        SchedulePart("honeywood", "07:32", "07:39", NORTH, RUNNING,  "lennor1", "lennor2", "lennor_on_the_way"),
         SchedulePart("honeywood", "07:39", "07:49", NORTH, IMMOBILE, "lennor2", "lennor2", "black_and_lennor_meet"),
         SchedulePart("honeywood", "07:49", "07:51", EAST,  RUNNING,  "lennor2", "lennor3", "lennor_on_the_way"),
         SchedulePart("honeywood", "07:51", "07:56", EAST,  RUNNING,  "lennor3", "lennor4", "lennor_on_the_way"),

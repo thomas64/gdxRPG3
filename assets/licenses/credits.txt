@@ -25,6 +25,7 @@ Kevin Mulder
 Niels van Heijningen
 Peter Hazendonk
 Fijke Stellingwerf
+Frank de Jong
 Robin van Leeuwen
 Daniel Rouw
 Timon Kooi

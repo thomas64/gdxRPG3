@@ -216,6 +216,11 @@ class BattleScreen : Screen {
         isPreBattle = false
     }
 
+    private fun heroIsSelectedForPreEquipment(selectedHero: String) {
+        currentParticipant = turnManager.participants.first { it.character.name == selectedHero }
+        menuManager.aHeroIsSelectedInPreviewEquipmentInPreBattle()
+    }
+
     private fun heroIsSelectedForPrePreview(selectedHero: String) {
         currentParticipant = turnManager.participants.first { it.character.name == selectedHero }
         menuManager.aHeroIsSelectedInPreviewAttacksInPreBattle()
@@ -448,6 +453,7 @@ class BattleScreen : Screen {
             ::showInventoryScreenPreBattle,
             ::showInventoryScreen,
             ::startBattle,
+            ::heroIsSelectedForPreEquipment,
             ::heroIsSelectedForPrePreview,
             ::showPreviewDialog,
             ::showFleeDialog,

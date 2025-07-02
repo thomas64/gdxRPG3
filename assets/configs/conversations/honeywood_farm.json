@@ -59,7 +59,7 @@
       "40" : {"text": ["I'm sorry, Mozes, I'm working as fast as I can. You'll have to wait until 17:00, or you could assist me to speed up the process."], "choices": [{"nextId": "2"}]},
       "50" : {"text": ["Aw come on! Really? I'm trying! It's one heavy tree, Mozes! I literally can't do it before 17:00 without any assistance!"], "choices": [{"nextId": "2"}]},
       "60" : {"text": ["A month or so ago, I was thinking of buying a horse for myself. I even thought of a cool name for it, Horace. But then I thought, 'Why would I need a horse?' Ha ha, but today I could really use a horse!"]},
-      "61" : {"text": ["So, if you somehow could lend me a horse, just for today, along with 2 tow ropes, I could clear the road for you immediately."], "choices": [{"command": "ACCEPT_QUEST", "nextId": "62"}]},
+      "61" : {"text": ["So, if you somehow could lend me a horse, just for today, along with two tow ropes, I could clear the road for you immediately."], "choices": [{"command": "ACCEPT_QUEST", "nextId": "62"}]},
       "62" : {"text": ["You could ask the village elder about this matter. He's wise, he will probably have some suggestions."], "choices": [{"command": "EXIT", "nextId": "70"}]},
       "65" : {"text": ["That won't be necessary anymore. I'm almost done with the tree. I'll be finished by 17:00. But thanks for the offer."], "choices": [{"nextId": "2"}]},
       "70" : {"text": ["Hey Mozes, you can't go to Honeywood Farm at the moment. A large tree fell on the road this morning. I'm busy removing it, but I think it'll take me until 17:00."]},
@@ -108,7 +108,7 @@
   "to_honeywood_farm"              : {
     "name"   : "Mozes",
     "phrases": {
-      "1": {"text": ["Finally! On to Honeywood Farm!"], "choices": [{"command": "AUTO_SAVE"}]}
+      "1": {"text": ["Finally! On to Honeywood Farm! I hope I'm not too late this time."], "choices": [{"command": "AUTO_SAVE"}]}
     }
   },
   "mr_isembert_before_10"          : {
@@ -141,7 +141,7 @@
       "3"   : {"face": "luana", "name": "luana", "text": ["(I helped out too, you know...)"]},
       "4"   : {"face": "oldman02", "name": "Mr. Isembert", "text": ["You're a hero! You saved the oldest farm in the village!"]},
       "5"   : {"text": ["It will remain in our family for generations!"]},
-      "6"   : {"text": ["My home is your home. You're even welcome to use the back door if you like."], "choices": [{"command": "RECEIVE_ITEM"}]},
+      "6"   : {"text": ["My home is your home. You're even welcome to use the {COLOR=BLUE}back door{COLOR=BLACK} if you like."], "choices": [{"command": "RECEIVE_ITEM"}]},
       "1199": {"text": ["Thank you, Mozes! You saved my farm!"], "choices": [{"nextId": "2"}]},
       "1200": {"text": ["I shall name all my horses after you!"], "choices": [{"command": "EXIT", "nextId": "1200"}]}
     }
@@ -253,7 +253,8 @@
       "2": {"text": ["Yeah! We saved the farm from those raiders! That was awesome! I feel like a superhero!"]},
       "3": {"text": ["Mozes! What are you waiting for? Let's go already! Adventure awaits!"]},
       "4": {"face": "mozes", "name": "mozes", "text": ["Luana, are you sure you're not a little bit too enthusiastic about this world-ending endeavor?"]},
-      "5": {"face": "luana", "name": "Luana", "text": ["No, I'm not! Now go buy me some armor and weapons."], "choices": [{"command": "EXIT"}]}
+      "5": {"face": "luana", "name": "Luana", "text": ["No, I'm not! Now go buy me some armor and weapons."]},
+      "6": {"face": "mozes", "name": "Mozes", "text": ["Sure, sure. But first, let's check if Mr. Isembert and Miriel are okay."], "choices": [{"command": "EXIT"}]}
     }
   },
   "farm_battle_after_win_alt"      : {

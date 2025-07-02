@@ -318,7 +318,7 @@
     <property name="direction" value="south"/>
    </properties>
   </object>
-  <object id="355" name="girl03" type="p" x="828" y="1476" width="48" height="24">
+  <object id="355" name="girl03" type="p" x="804" y="1476" width="48" height="24">
    <properties>
     <property name="condition" value="_tn_16_q_quest_get_tow_rope"/>
     <property name="conversation" value="lynette_playing_catch"/>
@@ -330,7 +330,7 @@
     <property name="conversation" value="tobin_playing_catch"/>
    </properties>
   </object>
-  <object id="357" name="boy01" type="p" x="864" y="1524" width="48" height="24">
+  <object id="357" name="boy01" type="p" x="852" y="1536" width="48" height="24">
    <properties>
     <property name="condition" value="_tn_16_q_quest_get_tow_rope"/>
     <property name="conversation" value="kaidan_come_home"/>

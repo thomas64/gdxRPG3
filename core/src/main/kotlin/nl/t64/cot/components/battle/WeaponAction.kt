@@ -206,15 +206,15 @@ class WeaponAction(
             val enemyWeapon = enemy.getCurrentWeapon()!!
             when {
                 this.hasWeaponTriangleAdvantage(enemyWeapon) -> {
-                    """[BLUE][v] ${enemy.character.name}[BLACK]
+                    """[BLUE]${enemy.character.name}[BLACK]
                        |"""
                 }
                 this.hasWeaponTriangleDisadvantage(enemyWeapon) -> {
-                    """[FIREBRICK][x] ${enemy.character.name}[BLACK]
+                    """[FIREBRICK]${enemy.character.name}[BLACK]
                        |"""
                 }
                 else -> {
-                    """[GRAY][o] ${enemy.character.name}[BLACK]
+                    """[GRAY]${enemy.character.name}[BLACK]
                        |"""
                 }
             }

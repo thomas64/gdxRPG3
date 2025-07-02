@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="24" tileheight="24" infinite="0" nextlayerid="23" nextobjectid="42">
+<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="24" tileheight="24" infinite="0" nextlayerid="23" nextobjectid="44">
  <properties>
   <property name="bgm" value="bgm_house"/>
   <property name="step_sound" value="wood"/>
@@ -68,9 +68,11 @@
   <object id="8" x="408" y="144" width="96" height="103"/>
   <object id="9" x="504" y="144" width="48" height="24"/>
   <object id="10" x="600" y="144" width="48" height="24"/>
-  <object id="11" x="552" y="294" width="96" height="180"/>
+  <object id="11" x="552" y="336" width="96" height="108"/>
   <object id="12" x="312" y="312" width="144" height="144"/>
   <object id="13" x="312" y="456" width="48" height="120"/>
+  <object id="42" x="564" y="294" width="84" height="42"/>
+  <object id="43" x="564" y="444" width="84" height="24"/>
  </objectgroup>
  <objectgroup color="#5500ff" id="14" name="rest">
   <object id="29" name="storage" x="504" y="144" width="48" height="24">
