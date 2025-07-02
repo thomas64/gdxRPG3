@@ -2,7 +2,7 @@
   "basic_mozes_axe": {
     "name"        : "Mozes' Axe",
     "group"       : "WEAPON",
-    "sort"        : 1098,
+    "sort"        : 1198,
     "skill"       : "AXE",
     "price"       : 30,
     "durability"  : 25,
@@ -13,7 +13,7 @@
   "basic_orc_axe"  : {
     "name"        : "Orc Axe",
     "group"       : "WEAPON",
-    "sort"        : 1099,
+    "sort"        : 1199,
     "skill"       : "AXE",
     "price"       : 30,
     "durability"  : 20,
@@ -24,56 +24,56 @@
   "basic_axe"      : {
     "name"        : "Basic Axe",
     "group"       : "WEAPON",
-    "sort"        : 1100,
+    "sort"        : 1200,
     "skill"       : "AXE",
-    "price"       : 15,
+    "price"       : 14,
     "durability"  : 30,
     "min_strength": 12,
-    "base_hit"    : 65,
-    "damage"      : 15
+    "base_hit"    : 70,
+    "damage"      : 14
   },
   "fine_axe"       : {
     "name"        : "Fine Axe",
     "group"       : "WEAPON",
-    "sort"        : 2100,
+    "sort"        : 2200,
     "skill"       : "AXE",
-    "price"       : 40,
+    "price"       : 42,
     "durability"  : 25,
-    "min_strength": 18,
-    "base_hit"    : 55,
-    "damage"      : 20
+    "min_strength": 17,
+    "base_hit"    : 60,
+    "damage"      : 19
   },
   "specialist_axe" : {
     "name"        : "Specialist Axe",
     "group"       : "WEAPON",
-    "sort"        : 3100,
+    "sort"        : 3200,
     "skill"       : "AXE",
-    "price"       : 65,
+    "price"       : 70,
     "durability"  : 20,
-    "min_strength": 24,
-    "base_hit"    : 45,
-    "damage"      : 25
+    "min_strength": 22,
+    "base_hit"    : 50,
+    "damage"      : 24
   },
   "masterwork_axe" : {
     "name"        : "Masterwork Axe",
     "group"       : "WEAPON",
-    "sort"        : 4100,
+    "sort"        : 4200,
     "skill"       : "AXE",
-    "price"       : 90,
+    "price"       : 98,
     "durability"  : 15,
-    "min_strength": 30,
-    "base_hit"    : 35,
-    "damage"      : 30
+    "min_strength": 27,
+    "base_hit"    : 40,
+    "damage"      : 29
   },
   "epic_axe"       : {
     "name"        : "Epic Axe",
     "group"       : "WEAPON",
-    "sort"        : 5100,
+    "sort"        : 5200,
     "skill"       : "AXE",
-    "price"       : 115,
+    "price"       : 126,
     "durability"  : 10,
     "min_strength": 30,
-    "base_hit"    : 25,
-    "damage"      : 35
+    "base_hit"    : 30,
+    "damage"      : 34
   }
 }

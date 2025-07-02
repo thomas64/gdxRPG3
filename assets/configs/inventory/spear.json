@@ -2,49 +2,49 @@
   "basic_spear"     : {
     "name"        : "Basic Spear",
     "group"       : "WEAPON",
-    "sort"        : 1200,
+    "sort"        : 1100,
     "skill"       : "SPEAR",
-    "price"       : 5,
+    "price"       : 12,
     "durability"  : 30,
-    "min_strength": 10,
+    "min_strength": 11,
     "range"       : [1, 2],
-    "base_hit"    : 95,
-    "damage"      : 5
+    "base_hit"    : 75,
+    "damage"      : 12
   },
   "fine_spear"      : {
     "name"        : "Fine Spear",
     "group"       : "WEAPON",
-    "sort"        : 2200,
+    "sort"        : 2100,
     "skill"       : "SPEAR",
-    "price"       : 20,
+    "price"       : 36,
     "durability"  : 25,
-    "min_strength": 14,
+    "min_strength": 16,
     "range"       : [1, 2],
-    "base_hit"    : 85,
-    "damage"      : 10
+    "base_hit"    : 65,
+    "damage"      : 17
   },
   "specialist_spear": {
     "name"        : "Specialist Spear",
     "group"       : "WEAPON",
-    "sort"        : 3200,
+    "sort"        : 3100,
     "skill"       : "SPEAR",
-    "price"       : 35,
+    "price"       : 60,
     "durability"  : 20,
-    "min_strength": 18,
+    "min_strength": 21,
     "range"       : [1, 2],
-    "base_hit"    : 75,
-    "damage"      : 15
+    "base_hit"    : 55,
+    "damage"      : 22
   },
   "masterwork_spear": {
     "name"        : "Masterwork Spear",
     "group"       : "WEAPON",
-    "sort"        : 4200,
+    "sort"        : 4100,
     "skill"       : "SPEAR",
-    "price"       : 50,
+    "price"       : 84,
     "durability"  : 15,
-    "min_strength": 22,
+    "min_strength": 26,
     "range"       : [1, 2],
-    "base_hit"    : 65,
-    "damage"      : 20
+    "base_hit"    : 45,
+    "damage"      : 27
   }
 }

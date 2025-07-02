@@ -63,7 +63,7 @@ data class AbilityItem(
         if (skill == SkillItemId.NONE) {
             return ""
         } else {
-            return System.lineSeparator() + "Required skill: " + skill.title
+            return System.lineSeparator() + """Required skill: ${skill.title} $minSkill"""
         }
     }
 

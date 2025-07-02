@@ -8,8 +8,8 @@
     "durability"      : 30,
     "min_intelligence": 15,
     "range"           : [2, 3],
-    "base_hit"        : 85,
-    "damage"          : 6
+    "base_hit"        : 75,
+    "damage"          : 9
   },
   "fine_staff_thunder"      : {
     "name"            : "Fine Thunder Staff",
@@ -20,8 +20,8 @@
     "durability"      : 25,
     "min_intelligence": 18,
     "range"           : [2, 3, 4],
-    "base_hit"        : 75,
-    "damage"          : 11
+    "base_hit"        : 65,
+    "damage"          : 14
   },
   "specialist_staff_thunder": {
     "name"            : "Specialist Thunder Staff",
@@ -32,8 +32,8 @@
     "durability"      : 20,
     "min_intelligence": 21,
     "range"           : [2, 3, 4, 5],
-    "base_hit"        : 65,
-    "damage"          : 16
+    "base_hit"        : 55,
+    "damage"          : 19
   },
   "masterwork_staff_thunder": {
     "name"            : "Masterwork Thunder Staff",
@@ -44,8 +44,8 @@
     "durability"      : 15,
     "min_intelligence": 24,
     "range"           : [2, 3, 4, 5, 6],
-    "base_hit"        : 55,
-    "damage"          : 21
+    "base_hit"        : 45,
+    "damage"          : 24
   },
   "epic_staff_thunder"      : {
     "name"            : "Epic Thunder Staff",
@@ -56,8 +56,8 @@
     "durability"      : 10,
     "min_intelligence": 27,
     "range"           : [2, 3, 4, 5, 6, 7],
-    "base_hit"        : 45,
-    "damage"          : 26
+    "base_hit"        : 35,
+    "damage"          : 29
   },
   "legendary_staff_thunder" : {
     "name"            : "Legendary Thunder Staff",
@@ -68,7 +68,7 @@
     "durability"      : 5,
     "min_intelligence": 30,
     "range"           : [2, 3, 4, 5, 6, 7, 8],
-    "base_hit"        : 35,
-    "damage"          : 31
+    "base_hit"        : 25,
+    "damage"          : 34
   }
 }

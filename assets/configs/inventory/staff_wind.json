@@ -2,73 +2,73 @@
   "basic_staff_wind"     : {
     "name"            : "Basic Wind Staff",
     "group"           : "WEAPON",
-    "sort"            : 1700,
+    "sort"            : 1600,
     "skill"           : "STAFF_WIND",
     "price"           : 10,
     "durability"      : 30,
     "min_intelligence": 15,
     "range"           : [2, 3],
-    "base_hit"        : 95,
-    "damage"          : 4
+    "base_hit"        : 85,
+    "damage"          : 7
   },
   "fine_staff_wind"      : {
     "name"            : "Fine Wind Staff",
     "group"           : "WEAPON",
-    "sort"            : 2700,
+    "sort"            : 2600,
     "skill"           : "STAFF_WIND",
     "price"           : 35,
     "durability"      : 25,
     "min_intelligence": 18,
     "range"           : [2, 3, 4],
-    "base_hit"        : 85,
-    "damage"          : 9
+    "base_hit"        : 75,
+    "damage"          : 12
   },
   "specialist_staff_wind": {
     "name"            : "Specialist Wind Staff",
     "group"           : "WEAPON",
-    "sort"            : 3700,
+    "sort"            : 3600,
     "skill"           : "STAFF_WIND",
     "price"           : 60,
     "durability"      : 20,
     "min_intelligence": 21,
     "range"           : [2, 3, 4, 5],
-    "base_hit"        : 75,
-    "damage"          : 14
+    "base_hit"        : 65,
+    "damage"          : 17
   },
   "masterwork_staff_wind": {
     "name"            : "Masterwork Wind Staff",
     "group"           : "WEAPON",
-    "sort"            : 4700,
+    "sort"            : 4600,
     "skill"           : "STAFF_WIND",
     "price"           : 85,
     "durability"      : 15,
     "min_intelligence": 24,
     "range"           : [2, 3, 4, 5, 6],
-    "base_hit"        : 65,
-    "damage"          : 19
+    "base_hit"        : 55,
+    "damage"          : 22
   },
   "epic_staff_wind"      : {
     "name"            : "Epic Wind Staff",
     "group"           : "WEAPON",
-    "sort"            : 5700,
+    "sort"            : 5600,
     "skill"           : "STAFF_WIND",
     "price"           : 110,
     "durability"      : 10,
     "min_intelligence": 27,
     "range"           : [2, 3, 4, 5, 6, 7],
-    "base_hit"        : 55,
-    "damage"          : 24
+    "base_hit"        : 45,
+    "damage"          : 27
   },
   "legendary_staff_wind" : {
     "name"            : "Legendary Wind Staff",
     "group"           : "WEAPON",
-    "sort"            : 6700,
+    "sort"            : 6600,
     "skill"           : "STAFF_WIND",
     "price"           : 135,
     "durability"      : 5,
     "min_intelligence": 30,
     "range"           : [2, 3, 4, 5, 6, 7, 8],
-    "base_hit"        : 45,
-    "damage"          : 29
+    "base_hit"        : 35,
+    "damage"          : 32
   }
 }

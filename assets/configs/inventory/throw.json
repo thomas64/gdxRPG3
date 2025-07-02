@@ -4,47 +4,47 @@
     "group"        : "WEAPON",
     "sort"         : 1400,
     "skill"        : "THROW",
-    "price"        : 5,
+    "price"        : 8,
     "durability"   : 30,
     "min_dexterity": 12,
     "range"        : [3, 4, 5],
-    "base_hit"     : 70,
-    "damage"       : 5
+    "base_hit"     : 75,
+    "damage"       : 8
   },
   "fine_knife"      : {
     "name"         : "Fine Knife",
     "group"        : "WEAPON",
     "sort"         : 2400,
     "skill"        : "THROW",
-    "price"        : 15,
+    "price"        : 24,
     "durability"   : 25,
     "min_dexterity": 16,
     "range"        : [3, 4, 5],
     "base_hit"     : 65,
-    "damage"       : 10
+    "damage"       : 13
   },
   "specialist_knife": {
     "name"         : "Specialist Knife",
     "group"        : "WEAPON",
     "sort"         : 3400,
     "skill"        : "THROW",
-    "price"        : 25,
+    "price"        : 40,
     "durability"   : 20,
     "min_dexterity": 20,
     "range"        : [3, 4, 5],
-    "base_hit"     : 60,
-    "damage"       : 15
+    "base_hit"     : 55,
+    "damage"       : 18
   },
   "masterwork_knife": {
     "name"         : "Masterwork Knife",
     "group"        : "WEAPON",
     "sort"         : 4400,
     "skill"        : "THROW",
-    "price"        : 35,
+    "price"        : 56,
     "durability"   : 15,
     "min_dexterity": 24,
     "range"        : [3, 4, 5],
-    "base_hit"     : 55,
-    "damage"       : 20
+    "base_hit"     : 45,
+    "damage"       : 23
   }
 }

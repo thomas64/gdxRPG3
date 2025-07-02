@@ -23,7 +23,7 @@
     "min_intelligence": 11,
     "range"           : [6, 7, 8, 9],
     "base_hit"        : 75,
-    "damage"          : 5
+    "damage"          : 6
   },
   "basic_bow"      : {
     "name"         : "Basic Bow",
@@ -31,12 +31,12 @@
     "sort"         : 1500,
     "skill"        : "BOW",
     "is_two_handed": true,
-    "price"        : 20,
+    "price"        : 16,
     "durability"   : 30,
     "min_dexterity": 12,
     "range"        : [6, 7, 8, 9],
-    "base_hit"     : 65,
-    "damage"       : 5
+    "base_hit"     : 70,
+    "damage"       : 8
   },
   "fine_bow"       : {
     "name"         : "Fine Bow",
@@ -44,12 +44,12 @@
     "sort"         : 2500,
     "skill"        : "BOW",
     "is_two_handed": true,
-    "price"        : 40,
+    "price"        : 48,
     "durability"   : 25,
     "min_dexterity": 18,
     "range"        : [6, 7, 8, 9],
-    "base_hit"     : 55,
-    "damage"       : 10
+    "base_hit"     : 60,
+    "damage"       : 13
   },
   "specialist_bow" : {
     "name"         : "Specialist Bow",
@@ -57,12 +57,12 @@
     "sort"         : 3500,
     "skill"        : "BOW",
     "is_two_handed": true,
-    "price"        : 60,
+    "price"        : 80,
     "durability"   : 20,
     "min_dexterity": 24,
     "range"        : [6, 7, 8, 9],
-    "base_hit"     : 45,
-    "damage"       : 15
+    "base_hit"     : 50,
+    "damage"       : 18
   },
   "masterwork_bow" : {
     "name"         : "Masterwork Bow",
@@ -70,11 +70,11 @@
     "sort"         : 4500,
     "skill"        : "BOW",
     "is_two_handed": true,
-    "price"        : 80,
+    "price"        : 112,
     "durability"   : 15,
     "min_dexterity": 30,
     "range"        : [6, 7, 8, 9],
-    "base_hit"     : 35,
-    "damage"       : 20
+    "base_hit"     : 40,
+    "damage"       : 23
   }
 }

@@ -35,7 +35,7 @@
   "basic_sword"      : {
     "name"        : "Basic Sword",
     "group"       : "WEAPON",
-    "sort"        : 1001,
+    "sort"        : 1003,
     "skill"       : "SWORD",
     "price"       : 10,
     "durability"  : 30,

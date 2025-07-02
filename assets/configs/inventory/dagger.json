@@ -15,43 +15,43 @@
     "group"        : "WEAPON",
     "sort"         : 1300,
     "skill"        : "DAGGER",
-    "price"        : 5,
+    "price"        : 8,
     "durability"   : 30,
     "min_dexterity": 8,
-    "base_hit"     : 90,
-    "damage"       : 5
+    "base_hit"     : 85,
+    "damage"       : 8
   },
   "fine_dagger"      : {
     "name"         : "Fine Dagger",
     "group"        : "WEAPON",
     "sort"         : 2300,
     "skill"        : "DAGGER",
-    "price"        : 15,
+    "price"        : 24,
     "durability"   : 25,
     "min_dexterity": 12,
-    "base_hit"     : 80,
-    "damage"       : 10
+    "base_hit"     : 75,
+    "damage"       : 13
   },
   "specialist_dagger": {
     "name"         : "Specialist Dagger",
     "group"        : "WEAPON",
     "sort"         : 3300,
     "skill"        : "DAGGER",
-    "price"        : 25,
+    "price"        : 40,
     "durability"   : 20,
     "min_dexterity": 16,
-    "base_hit"     : 70,
-    "damage"       : 15
+    "base_hit"     : 65,
+    "damage"       : 18
   },
   "masterwork_dagger": {
     "name"         : "Masterwork Dagger",
     "group"        : "WEAPON",
     "sort"         : 4300,
     "skill"        : "DAGGER",
-    "price"        : 35,
+    "price"        : 56,
     "durability"   : 15,
     "min_dexterity": 20,
-    "base_hit"     : 60,
-    "damage"       : 20
+    "base_hit"     : 55,
+    "damage"       : 23
   }
 }
