@@ -8,9 +8,9 @@ class DelayTurnAction(
 ) {
     private val character: Character = currentParticipant.character
     private val message = """
-        Delaying will make the current character
-        end this turn and become next in line,
-        keeping ${character.gender} current AP for the next turn.
+        Delaying will make ${character.name} end this
+        turn and become next in line, keeping
+        ${character.gender} current AP for the next turn.
 
         """
 
@@ -22,12 +22,8 @@ class DelayTurnAction(
         }
     }
 
-    fun handle(): String {
+    fun handle() {
         currentParticipant.currentAP -= DELAY_AP
-        return """
-            ${character.name} delayed ${character.gender} turn,
-            becoming next in line.
-        """.trimIndent()
     }
 
 }

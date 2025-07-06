@@ -101,12 +101,12 @@ class Participant(
         return character.getAllAbilities().map { createBattleAbilityItemFrom(it) }
     }
 
-    fun getEndingTurnMessage(): ArrayDeque<String> {
+    fun handlePossibleStagger(): String? {
         if (isStaggered) {
             isStaggered = false
-            return ArrayDeque(listOf("${character.name} is staggered."))
+            return "${character.name} is staggered."
         }
-        return ArrayDeque(listOf("${character.name} ended ${character.gender} turn."))
+        return null
     }
 
     fun getCurrentWeapon(): InventoryItem? {

@@ -38,7 +38,7 @@ class AttackAction(
                 override fun isHit(): Boolean = false
                 override fun createCopyForPreview(): BattleAbilityItem = this
                 override fun createPreviewMessage(): String = ""
-                override fun handleSuccess(messages: ArrayDeque<String>) = ability.handleSuccess(messages)
+                override fun handleSuccess(attackData: AttackData) = ability.handleSuccess(attackData)
             }
         }
     }
@@ -86,20 +86,16 @@ class AttackAction(
         return selectedAttack.createPreviewMessage()
     }
 
-    fun handle(): ArrayDeque<String>? {
+    fun handle(): List<AttackData> {
         if (currentParticipant.currentAP < selectedAttack.ap) {
-            return null
+            return emptyList()
         }
 
         currentParticipant.currentAP -= selectedAttack.ap
         attacker.currentSp -= selectedAttack.sp
 
-        val messages = ArrayDeque<String>()
-        messages.add("${attacker.name} used ${selectedAttack.name} on ${target.name}.")
-
         createDebugMessage()
-        selectedAttack.handle(messages)
-        return messages
+        return selectedAttack.handle()
     }
 
     private fun createDebugMessage() {

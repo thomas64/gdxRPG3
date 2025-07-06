@@ -1,5 +1,6 @@
 package nl.t64.cot.components.party.abilities
 
+import nl.t64.cot.components.battle.AttackData
 import nl.t64.cot.components.battle.Participant
 import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.components.party.inventory.InventoryItem
@@ -41,31 +42,43 @@ abstract class BattleAbilityItem(
 
     abstract fun createCopyForPreview(): BattleAbilityItem
     abstract fun createPreviewMessage(): String
-    abstract fun handleSuccess(messages: ArrayDeque<String>)
+    abstract fun handleSuccess(attackData: AttackData)
 
-    open fun handle(messages: ArrayDeque<String>) {
+    open fun handle(): List<AttackData> {
+        val attackDataList = mutableListOf<AttackData>()
+        handleSingleAttack(attackDataList)
+        return attackDataList
+    }
+
+    protected fun handleSingleAttack(attackDataList: MutableList<AttackData>) {
+        val singleAttack = AttackData()
+        singleAttack.attacker = this.attacker.character.name
+        singleAttack.target = this.target.character.name
+
         if (isHit()) {
-            handleHit(messages)
+            handleHit(singleAttack)
         } else {
-            handleFailure(messages)
+            handleFailure(singleAttack)
         }
+
+        attackDataList.add(singleAttack)
     }
 
     protected open fun isHit(): Boolean {
         return calculateHitPercentage() > Random.nextInt(0, 100)
     }
 
-    private fun handleHit(messages: ArrayDeque<String>) {
+    private fun handleHit(attackData: AttackData) {
         if (isBlock()) {
-            handleBlock(messages)
+            handleBlock(attackData)
         } else {
-            handleSuccess(messages)
+            handleSuccess(attackData)
         }
 
-        handleDurability(messages)
+        handleDurability(attackData)
 
         if (target.character.isDead) {
-            messages.add("${target.character.name} is defeated.")
+            attackData.isTargetDead = true
         }
     }
 
@@ -73,25 +86,25 @@ abstract class BattleAbilityItem(
         return target.character.getCalculatedTotalDefense() > Random.nextInt(0, 100)
     }
 
-    private fun handleFailure(messages: ArrayDeque<String>) {
-        messages.add("${attacker.character.name}'s attack failed.")
+    private fun handleFailure(attackData: AttackData) {
+        attackData.isMissed = true
     }
 
-    private fun handleBlock(messages: ArrayDeque<String>) {
-        messages.add("${target.character.name} blocked the attack.")
+    private fun handleBlock(attackData: AttackData) {
+        attackData.isBlocked = true
         val shield: InventoryItem = target.character.getInventoryItem(InventoryGroup.SHIELD)!!
         shield.durability--
         if (shield.durability <= 0) {
-            messages.add("${shield.name} broke!")
+            attackData.targetShieldBrokeMessage = "${target.character.name} ${shield.name} broke!"
             target.character.clearInventoryItemFor(InventoryGroup.SHIELD)
         }
     }
 
-    private fun handleDurability(messages: ArrayDeque<String>) {
+    private fun handleDurability(attackData: AttackData) {
         val weapon = currentWeapon!!
         weapon.durability--
         if (attacker.isHero && weapon.durability <= 0) {
-            messages.add("${weapon.name} broke!")
+            attackData.attackerWeaponBrokeMessage = "Your ${weapon.name} broke!"
             attacker.character.clearInventoryItemFor(InventoryGroup.WEAPON)
         }
     }
@@ -160,23 +173,8 @@ abstract class BattleAbilityItem(
         }
     }
 
-    protected fun possibleAddEffectiveMessage(): String {
-        val weaponName = currentWeapon!!.name.takeUnless { it.isBlank() } ?: name
-
-        return when {
-            hasWeaponTriangleAdvantage() -> {
-                """$weaponName is super effective!
-                   |"""
-            }
-            hasWeaponTriangleDisadvantage() -> {
-                """$weaponName is not very effective...
-                   |"""
-            }
-            else -> ""
-        }
-    }
-
     private fun possibleGetGrayPrefix(): String {
+        if (name == "Back") return ""
         if (abilityItem.isPreview) return ""
         return if (!isWeaponAllowed() || !hasEnoughApSp()) "[GRAY]" else ""
     }
@@ -205,13 +203,13 @@ abstract class BattleAbilityItem(
         }
     }
 
-    private fun hasWeaponTriangleAdvantage(): Boolean {
+    protected fun hasWeaponTriangleAdvantage(): Boolean {
         val attackSkill: SkillItemId = currentWeapon!!.skill!!
         val targetSkill: SkillItemId? = target.character.getInventoryItem(InventoryGroup.WEAPON)?.skill
         return attackSkill.hasAdvantageOver(targetSkill)
     }
 
-    private fun hasWeaponTriangleDisadvantage(): Boolean {
+    protected fun hasWeaponTriangleDisadvantage(): Boolean {
         val attackSkill: SkillItemId = currentWeapon!!.skill!!
         val targetSkill: SkillItemId? = target.character.getInventoryItem(InventoryGroup.WEAPON)?.skill
         return attackSkill.hasDisadvantageFrom(targetSkill)

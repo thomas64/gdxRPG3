@@ -9,6 +9,7 @@ import nl.t64.cot.Utils
 import nl.t64.cot.components.battle.BattleField
 import nl.t64.cot.components.battle.Participant
 import nl.t64.cot.screens.FontProvider
+import kotlin.math.abs
 
 
 class BattleFieldTableBuilder {
@@ -22,14 +23,14 @@ class BattleFieldTableBuilder {
         this.battleField = battleField
 
         val enemyTable: Table = if (currentParticipant.isHero) {
-            createTargetFieldTable()
+            createEnemyRowWithTargetFields()
         } else {
-            createParticipantTable(battleField.enemySpaces)
+            createFullWhiteRow(battleField.enemySpaces)
         }
         val heroTable: Table = if (currentParticipant.isHero) {
-            createHeroFieldTable(currentParticipant)
+            createHeroRowWithWalkingFields(currentParticipant)
         } else {
-            createParticipantTable(battleField.heroSpaces)
+            createFullWhiteRow(battleField.heroSpaces)
         }
 
         return Table().apply {
@@ -37,16 +38,16 @@ class BattleFieldTableBuilder {
             add(enemyTable).padLeft(60f)
             row()
             add(heroTable).padTop(4f)
-            padLeft(-20f)
-            padRight(10f)
-            padBottom(10f)
-            padTop(10f)
+            padLeft(-5f)
+            padRight(25f)
+            padBottom(25f)
+            padTop(25f)
             background = combined
             pack()
         }
     }
 
-    private fun createParticipantTable(spaces: MutableList<Participant?>): Table {
+    private fun createFullWhiteRow(spaces: MutableList<Participant?>): Table {
         return Table().apply {
             defaults().width(60f).height(60f).center()
             spaces.forEach {
@@ -58,7 +59,7 @@ class BattleFieldTableBuilder {
         }
     }
 
-    private fun createTargetFieldTable(): Table {
+    private fun createEnemyRowWithTargetFields(): Table {
         val ranges: List<Int> = battleField.getRangeOfActingHero()
 
         return Table().apply {
@@ -75,15 +76,15 @@ class BattleFieldTableBuilder {
         }
     }
 
-    private fun createHeroFieldTable(currentParticipant: Participant): Table {
+    private fun createHeroRowWithWalkingFields(currentParticipant: Participant): Table {
         val startingSpace: Int = battleField.startingSpace
         val currentSpace: Int = battleField.getSpaceIndexOfCurrentParticipant()
-        val actionPoints: Int = battleField.getModifiedApForHero()
+        val penaltyAp: Int = battleField.getPenaltyApForHero()
 
         return Table().apply {
             defaults().width(60f).height(60f).center()
             battleField.heroSpaces.forEachIndexed { index, heroAtSpace ->
-                addHeroFieldCell(index, heroAtSpace, currentParticipant, startingSpace, currentSpace, actionPoints)
+                addHeroFieldCell(index, heroAtSpace, currentParticipant, startingSpace, currentSpace, penaltyAp)
             }
         }
     }
@@ -96,11 +97,16 @@ class BattleFieldTableBuilder {
         currentParticipant: Participant,
         startingSpace: Int,
         currentSpace: Int,
-        actionPoints: Int,
+        penaltyAp: Int,
     ) {
-        val isInRange = index in startingSpace - actionPoints..startingSpace + actionPoints
-        val isStartingSpace = index == startingSpace
-        val isCurrentSpace = index == currentSpace
+        val currentAp: Int = currentParticipant.currentAP
+        val modifiedAp: Int = currentAp - penaltyAp
+        val amountOfSteps: Int = abs(index - startingSpace)
+        val apCost: Int = getApCostFor(amountOfSteps, penaltyAp)
+
+        val isInRange: Boolean = index in startingSpace - modifiedAp..startingSpace + modifiedAp
+        val isStartingSpace: Boolean = index == startingSpace
+        val isCurrentSpace: Boolean = index == currentSpace
 
         when {
             startingSpace == -1 && heroAtSpace == currentParticipant -> addGoldParticipantCell(heroAtSpace)
@@ -108,11 +114,20 @@ class BattleFieldTableBuilder {
             startingSpace == -1 && heroAtSpace == null -> addWhiteCell()
 
             isStartingSpace && !isCurrentSpace -> addGoldCell()
-            isInRange && heroAtSpace == null -> addGreenCell()
+            isInRange && heroAtSpace == null -> addGreenCell(apCost, currentAp)
             isStartingSpace && isCurrentSpace -> addGoldParticipantCell(heroAtSpace!!)
-            !isStartingSpace && isCurrentSpace -> addGreenParticipantCell(heroAtSpace!!)
+            !isStartingSpace && isCurrentSpace -> addGreenParticipantCell(heroAtSpace!!, apCost, currentAp)
             heroAtSpace != null -> addWhiteParticipantCell(heroAtSpace)
             else -> addWhiteCell()
+        }
+    }
+
+    private fun getApCostFor(amountOfSteps: Int, penalty: Int): Int {
+        return when {
+            amountOfSteps == 0 -> 0
+            amountOfSteps == 1 -> 1 + penalty
+            amountOfSteps > 1 -> 1 + penalty + (amountOfSteps - 1)
+            else -> 0
         }
     }
 
@@ -133,9 +148,10 @@ class BattleFieldTableBuilder {
         }).padRight(1f)
     }
 
-    private fun Table.addGreenParticipantCell(participant: Participant) {
+    private fun Table.addGreenParticipantCell(participant: Participant, apCost: Int, actionPoints: Int) {
         add(Stack().apply {
             add(Image(Utils.createFullBorderWhite()).apply { color = Color.CHARTREUSE })
+            possibleAddApCosts(apCost, actionPoints)
             add(Container(createImageOf(participant)))
             addPossibleBattleLock(participant)
         }).padRight(1f)
@@ -158,8 +174,11 @@ class BattleFieldTableBuilder {
         add(Image(Utils.createFullBorderWhite()).apply { color = Color.ORANGE }).padRight(1f)
     }
 
-    private fun Table.addGreenCell() {
-        add(Image(Utils.createFullBorderWhite()).apply { color = Color.CHARTREUSE }).padRight(1f)
+    private fun Table.addGreenCell(apCost: Int, actionPoints: Int) {
+        add(Stack().apply {
+            add(Image(Utils.createFullBorderWhite()).apply { color = Color.CHARTREUSE })
+            possibleAddApCosts(apCost, actionPoints)
+        }).padRight(1f)
     }
 
     private fun Table.addRedCell() {
@@ -186,6 +205,13 @@ class BattleFieldTableBuilder {
         if (battleField.isParticipantNextToOpponent(participant)) {
             val style = LabelStyle(FontProvider.default, Color.YELLOW)
             add(Container(Label("!", style)).top().left().padLeft(4f))
+        }
+    }
+
+    private fun Stack.possibleAddApCosts(apCost: Int, actionPoints: Int) {
+        if (apCost > 0 && apCost <= actionPoints) {
+            val style = LabelStyle(FontProvider.default, Color.WHITE)
+            add(Container(Label("$apCost AP", style)).bottom().padBottom(-20f))
         }
     }
 

@@ -45,6 +45,7 @@ class BattleScreen : Screen {
     private lateinit var menuManager: BattleMenuManager
     private lateinit var dialogManager: BattleDialogManager
     private lateinit var confirmManager: BattleConfirmManager
+    private lateinit var attackOutcomeManager: AttackOutcomeManager
     private lateinit var resultManager: BattleResultManager
 
     private lateinit var currentTarget: Participant
@@ -99,7 +100,8 @@ class BattleScreen : Screen {
         menuManager = BattleMenuManager(stage, screenBuilder, turnManager, battleField, ::currentParticipant)
         setMenuManagerListeners()
         dialogManager = BattleDialogManager(stage, ::currentParticipant)
-        confirmManager = BattleConfirmManager(stage, { isDelayingTurn = it })
+        confirmManager = BattleConfirmManager(stage, turnManager, tableManager::battleFieldTable, ::currentParticipant, { isDelayingTurn = it })
+        attackOutcomeManager = AttackOutcomeManager(stage, turnManager, tableManager::battleFieldTable, { isDelayingTurn = it })
         resultManager = BattleResultManager(stage, battleObserver, battleId, enemies, { isBgmFading = it })
 
         val battleTitle: Label = screenBuilder.createBattleTitle()
@@ -228,12 +230,6 @@ class BattleScreen : Screen {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private fun showConfirmMoveDialog() {
-        dialogManager.showConfirmMoveDialog(battleField = battleField,
-                                            onConfirmed = { moveConfirmed(it) },
-                                            onCancelled = { menuManager.returnToActionMainMenu() })
-    }
-
     private fun showPreviewDialog(selectedAttack: BattleAbilityItem, selectedTarget: String) {
         val target: Participant = turnManager.getParticipant(enemies.getEnemy(selectedTarget))
         dialogManager.showPreviewDialog(selectedAttack = selectedAttack,
@@ -280,19 +276,20 @@ class BattleScreen : Screen {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun attackConfirmed(attackAction: AttackAction, target: Participant) {
-        currentTarget = target
-        val messages: ArrayDeque<String> = attackAction.handle()!!
         menuManager.buttonTableTarget.remove()
-        isDelayingTurn = true
-        Utils.runWithDelay(0.5f) {
-            showMessages(messages)
-            turnManager.removeKilledParticipants()
-        }
+        currentTarget = target
+        attackOutcomeManager.attackConfirmed(attackAction)
     }
 
-    private fun moveConfirmed(moveAction: MoveAction) {
-        moveAction.handle()
-        menuManager.returnToActionMainMenu()
+    private fun moveConfirmed() {
+        val moveAction = MoveAction(battleField, currentParticipant)
+        if (moveAction.didCharacterRemainOnTheSameSpace()) {
+            menuManager.returnToActionMainMenu()
+            return
+        } else {
+            moveAction.handle()
+            menuManager.returnToActionMainMenu()
+        }
     }
 
     private fun potionConfirmed(potionAction: PotionAction) {
@@ -301,7 +298,7 @@ class BattleScreen : Screen {
     }
 
     private fun weaponPreBattleConfirmed(weaponAction: WeaponAction) {
-        weaponAction.handle()
+        confirmManager.weaponConfirmed(weaponAction)
         menuManager.returnToPreBattleMainMenu()
     }
 
@@ -317,17 +314,17 @@ class BattleScreen : Screen {
 
     private fun delayTurnConfirmed(delayTurnAction: DelayTurnAction) {
         menuManager.buttonTableAction.remove()
-        confirmManager.delayTurnConfirmed(delayTurnAction, turnManager)
+        confirmManager.delayTurnConfirmed(delayTurnAction)
     }
 
     private fun restConfirmed(restAction: RestAction) {
         menuManager.buttonTableAction.remove()
-        confirmManager.restConfirmed(restAction, turnManager)
+        confirmManager.restConfirmed(restAction)
     }
 
     private fun endTurn() {
         menuManager.buttonTableAction.remove()
-        confirmManager.endTurn(currentParticipant, turnManager)
+        confirmManager.endTurn()
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -342,7 +339,7 @@ class BattleScreen : Screen {
         isEnemyActing = true
         thread {
             runCatching {
-                enemyAction()
+                startEnemyAction()
             }.onFailure {
                 if (preferenceManager.isInDebugMode) it.printStackTrace()
             }.also {
@@ -351,28 +348,52 @@ class BattleScreen : Screen {
         }
     }
 
-    private fun enemyAction() {
-        if (currentParticipant.currentAP == currentParticipant.maximumAP) {
+    private fun startEnemyAction() {
+        if (currentParticipant.currentAP >= currentParticipant.maximumAP) {
+            Thread.sleep(500L)
+            thread {
+                isDelayingTurn = true
+                BlinkEffect(tableManager.battleFieldTable, currentParticipant.character.name).start()
+                Utils.runWithDelay(0.5f) {
+                    isDelayingTurn = false
+                }
+            }
             Thread.sleep(1000L)
+            doEnemyAction()
+        } else {
+            doEnemyAction()
         }
+    }
+
+    private fun doEnemyAction() {
         val heroTarget: Participant? = battleField.possibleGetHeroTargetAndMoveEnemy()
         battleField.resetStartingSpace()
-        isDelayingTurn = true
-        val messages: ArrayDeque<String> = heroTarget
+        val attackData: List<AttackData>? = heroTarget
             ?.let { AttackAction.createForEnemy(currentParticipant, it, battleId).handle() }
             ?.also { currentTarget = heroTarget }
-            ?: currentParticipant.getEndingTurnMessage()
-        val isTurnEnded = messages.any {
-            (it.contains("ended") && it.contains("turn")) || (it.contains("is staggered"))
-        }
-        if (isTurnEnded) {
-            showMessages(messages)
-            Thread.sleep(1000L)
-            turnManager.setNextTurn()
+
+        if (attackData == null || attackData.isEmpty()) {
+            endEnemyAction()
         } else {
-            showMessages(messages)
-            turnManager.removeKilledParticipants()
+            attackOutcomeManager.enemyAttackConfirmed(attackData)
         }
+    }
+
+    private fun endEnemyAction() {
+        (currentParticipant.handlePossibleStagger()
+            ?.let { handleStagger(it) }
+            ?: run {
+                Thread.sleep(500L)
+                turnManager.setNextTurn()
+            })
+    }
+
+    private fun handleStagger(message: String) {
+        val messageDialog = MessageDialog(message)
+        messageDialog.setActionAfterHide {
+            turnManager.setNextTurn()
+        }
+        messageDialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT)
     }
 
     private fun openPauseMenu() {
@@ -388,48 +409,6 @@ class BattleScreen : Screen {
     private fun showInventoryScreen() {
         shouldKeepState = true
         InventoryScreen.loadForBattle()
-    }
-
-    private fun showMessages(messages: ArrayDeque<String>) {
-        if (messages.isEmpty()) {
-            isDelayingTurn = false
-            return
-        }
-
-        val message: String = messages.removeFirst()
-        handleEffectBasedOn(message)
-
-        val messageDialog = MessageDialog(message)
-        if (messages.isNotEmpty()) {
-            messageDialog.disableClosingSound()
-        }
-        messageDialog.setActionAfterHide {
-            showMessages(messages)
-        }
-        messageDialog.show(stage, getAudioEventBasedOn(message))
-    }
-
-    private fun handleEffectBasedOn(message: String) {
-        when {
-            message.contains("is defeated.") -> {
-                FadeEffect(tableManager.battleFieldTable, currentTarget.character.name).start()
-            }
-            message.contains("did") && message.contains("damage.") -> {
-                ShakeEffect(tableManager.battleFieldTable, currentTarget.character.name).start()
-            }
-        }
-    }
-
-    private fun getAudioEventBasedOn(message: String): AudioEvent {
-        return when {
-            message.contains("broke!") -> AudioEvent.SE_WEAPON_BREAK // todo, not when enemy shield breaks.
-            message.contains("blocked the attack.") -> AudioEvent.SE_BLOCK
-            message.contains("attack failed.") -> AudioEvent.SE_DODGE
-            message.contains("A critical hit!") -> AudioEvent.SE_CRIT_HIT
-            message.contains("did") && message.contains("damage.") -> AudioEvent.SE_DAMAGE
-            message.contains("is defeated.") -> AudioEvent.SE_VANISH
-            else -> AudioEvent.SE_CONVERSATION_NEXT
-        }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -460,7 +439,7 @@ class BattleScreen : Screen {
             ::showDelayTurnDialog,
             ::showConfirmRestDialog,
             ::endTurn,
-            ::showConfirmMoveDialog,
+            ::moveConfirmed,
             ::showConfirmAttackDialog,
             ::showConfirmPotionDialog,
             ::showConfirmWeaponDialogPreBattle,

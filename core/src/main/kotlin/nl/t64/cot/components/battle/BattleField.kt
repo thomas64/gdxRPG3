@@ -79,7 +79,7 @@ class BattleField(
         moveHero(allSpacesFromHere)
     }
 
-    fun getModifiedApForHero(): Int {
+    private fun getModifiedApForHero(): Int {
         return currentParticipant.invoke().currentAP - getPenaltyApForHero()
     }
 

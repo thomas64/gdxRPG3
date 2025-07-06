@@ -52,7 +52,10 @@
       "[FIREBRICK]disadvantage[BLACK] to certain weapon types.",
       "",
       "Try to use the [BLUE]right weapon type[BLACK]",
-      "against the enemy's [FIREBRICK]disadvantage[BLACK]."
+      "against the enemy's disadvantage.",
+      "",
+      "BEWARE! When having a disadvantage against an enemy,",
+      "means that the enemy has an advantage against you!"
     ]
   },
   "guide_event_battle_battle_lock"   : {

@@ -1,6 +1,7 @@
 package nl.t64.cot.components.party.abilities
 
 import nl.t64.cot.Utils.screenManager
+import nl.t64.cot.components.battle.AttackData
 import nl.t64.cot.components.battle.Participant
 import nl.t64.cot.components.battle.TurnManager
 import nl.t64.cot.components.party.skills.SkillItemId
@@ -37,33 +38,19 @@ class Stagger(
         } ?: createNoWeaponMessage()
     }
 
-    override fun handleSuccess(messages: ArrayDeque<String>) {
+    override fun handleSuccess(attackData: AttackData) {
         val isCriticalHit: Boolean = calculateCriticalHitPercentage() > Random.nextInt(0, 100)
         val damageDone: Int = if (isCriticalHit) calculateCriticalDamage() else calculateDamage()
-
-        target.character.takeDamage(damageDone)
-        val staggerMessage: String = handleStagger()
-
-        val critMessage: String = if (isCriticalHit) "A critical hit! " else ""
-        messages.add("""
-            ${possibleAddEffectiveMessage()}
-            $critMessage$name did $damageDone damage.
-
-            $staggerMessage
-            """.trimIndent().trimMargin())
-    }
-
-    private fun handleStagger(): String {
         val isStaggered: Boolean = calculateStaggerPercentage() > Random.nextInt(0, 100)
-        if (isStaggered) {
-            val turnManager: TurnManager = getTurnManagerTheUglyWay()
-            turnManager.stagger(target)
-        }
-        return if (isStaggered) {
-            "${target.character.name} was successfully staggered!"
-        } else {
-            "But failed to stagger ${target.character.name}..."
-        }
+
+        if (isStaggered) getTurnManagerTheUglyWay().stagger(target)
+        target.character.takeDamage(damageDone)
+
+        attackData.hasAdvantage = hasWeaponTriangleAdvantage()
+        attackData.hasDisadvantage = hasWeaponTriangleDisadvantage()
+        attackData.isCriticalHit = isCriticalHit
+        attackData.damage = damageDone
+        attackData.isStaggered = isStaggered
     }
 
     private fun calculateStaggerPercentage(): Int {

@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Label
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Align
 import nl.t64.cot.Utils
@@ -35,7 +36,7 @@ internal class ClockTable {
     }
 
     private fun createLabel(): Label {
-        val style = Label.LabelStyle(FontProvider.spectralExtraBold20, Color.BLACK)
+        val style = LabelStyle(FontProvider.spectralExtraBold20, Color.BLACK)
         val currentCycle = gameData.numberOfCycles
         val time = gameData.clock.getTimeOfDayFormatted()
 

@@ -1,5 +1,6 @@
 package nl.t64.cot.components.party.abilities
 
+import nl.t64.cot.components.battle.AttackData
 import nl.t64.cot.components.battle.Participant
 import kotlin.random.Random
 
@@ -28,17 +29,16 @@ open class Strike(
         } ?: createNoWeaponMessage()
     }
 
-    override fun handleSuccess(messages: ArrayDeque<String>) {
+    override fun handleSuccess(attackData: AttackData) {
         val isCriticalHit: Boolean = calculateCriticalHitPercentage() > Random.nextInt(0, 100)
         val damageDone: Int = if (isCriticalHit) calculateCriticalDamage() else calculateDamage()
 
         target.character.takeDamage(damageDone)
 
-        val critMessage: String = if (isCriticalHit) "A critical hit! " else ""
-        messages.add("""
-            ${possibleAddEffectiveMessage()}
-            $critMessage$name did $damageDone damage.
-            """.trimIndent().trimMargin())
+        attackData.hasAdvantage = hasWeaponTriangleAdvantage()
+        attackData.hasDisadvantage = hasWeaponTriangleDisadvantage()
+        attackData.isCriticalHit = isCriticalHit
+        attackData.damage = damageDone
     }
 
 }

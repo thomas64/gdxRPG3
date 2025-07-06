@@ -16,21 +16,6 @@ class BattleDialogManager(
     private val currentParticipant: () -> Participant
 ) {
 
-    fun showConfirmMoveDialog(
-        battleField: BattleField,
-        onConfirmed: (MoveAction) -> Unit,
-        onCancelled: () -> Unit
-    ) {
-        val moveAction = MoveAction(battleField, currentParticipant.invoke())
-        if (moveAction.didCharacterRemainOnTheSameSpace()) {
-            onCancelled.invoke()
-            return
-        }
-        val message = moveAction.createConfirmationMessage()
-        val dialog = QuestionDialog(message) { onConfirmed.invoke(moveAction) }
-        dialog.show(stage, 0, 0.5f)
-    }
-
     fun showPreviewDialog(
         selectedAttack: BattleAbilityItem,
         selectedTarget: Participant

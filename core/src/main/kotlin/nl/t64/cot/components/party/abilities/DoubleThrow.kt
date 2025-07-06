@@ -1,5 +1,6 @@
 package nl.t64.cot.components.party.abilities
 
+import nl.t64.cot.components.battle.AttackData
 import nl.t64.cot.components.battle.Participant
 
 
@@ -28,14 +29,17 @@ class DoubleThrow(
         } ?: createNoWeaponMessage()
     }
 
-    override fun handle(messages: ArrayDeque<String>) {
-        super.handle(messages)
+    override fun handle(): List<AttackData> {
+        val attackDataList = mutableListOf<AttackData>()
 
-        if (target.character.isDead) return
+        handleSingleAttack(attackDataList)
 
-        messages.add("${attacker.character.name} used $name on ${target.character.name}.")
+        if (attackDataList[0].isTargetDead) return attackDataList
+        if (attackDataList[0].attackerWeaponBrokeMessage != null) return attackDataList
 
-        super.handle(messages)
+        handleSingleAttack(attackDataList)
+
+        return attackDataList
     }
 
 }

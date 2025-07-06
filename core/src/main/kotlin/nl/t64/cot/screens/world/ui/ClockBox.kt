@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.Label
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.utils.Align
 import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.gameData
@@ -98,7 +99,7 @@ internal class ClockBox {
     }
 
     private fun createClockLabel(): Label {
-        val labelStyle = Label.LabelStyle(FontProvider.calibriLight28, Color.WHITE)
+        val labelStyle = LabelStyle(FontProvider.calibriLight28, Color.WHITE)
         return Label(null, labelStyle).apply {
             setAlignment(Align.center)
             width = LABEL_WIDTH

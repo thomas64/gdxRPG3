@@ -14,12 +14,6 @@ class MoveAction(
     private val penaltyAP: Int = battleField.getPenaltyApForHero()
     private val difference: Int = abs(currentSpace - startingSpace) + penaltyAP
 
-    fun createConfirmationMessage(): String {
-        playSe(AudioEvent.SE_MENU_CONFIRM)
-        return """
-            Do you want to move here for $difference AP?""".trimIndent()
-    }
-
     fun didCharacterRemainOnTheSameSpace(): Boolean {
         if (difference - penaltyAP == 0) {
             playSe(AudioEvent.SE_MENU_BACK)
@@ -30,6 +24,7 @@ class MoveAction(
     }
 
     fun handle() {
+        playSe(AudioEvent.SE_MENU_CONFIRM)
         currentParticipant.currentAP -= difference
         battleField.setStartingSpace()
     }

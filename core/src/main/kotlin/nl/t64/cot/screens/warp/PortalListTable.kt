@@ -3,6 +3,7 @@ package nl.t64.cot.screens.warp
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.scenes.scene2d.ui.Label
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.List
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane
 import com.badlogic.gdx.scenes.scene2d.ui.Table
@@ -38,7 +39,7 @@ internal class PortalListTable {
     }
 
     private fun createNoPortalsLabel(): Label {
-        val labelStyle = Label.LabelStyle(portalListFont, Color.BLACK)
+        val labelStyle = LabelStyle(portalListFont, Color.BLACK)
         return Label("No other portals activated.", labelStyle)
             .apply {
                 y = container.height / 1.5f

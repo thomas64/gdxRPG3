@@ -71,7 +71,7 @@ class BattleMenuManager(
         showDelayTurnDialog: () -> Unit,
         showConfirmRestDialog: () -> Unit,
         endTurn: () -> Unit,
-        showConfirmMoveDialog: () -> Unit,
+        confirmMovement: () -> Unit,
         showConfirmAttackDialog: (BattleAbilityItem, String) -> Unit,
         showConfirmPotionDialog: (BattlePotionItem) -> Unit,
         showConfirmWeaponDialogPreBattle: (BattleWeaponItem) -> Unit,
@@ -89,7 +89,7 @@ class BattleMenuManager(
         preBattlePreviewTargetListener = SelectTargetListener(showPreviewDialog, ::returnToSelectAttackInPreviewInPreBattle)
         actionPreviewTargetListener = SelectTargetListener(showPreviewDialog, ::returnToSelectAttackInPreview)
         actionAttackTargetListener = SelectTargetListener(showConfirmAttackDialog, ::returnToSelectAttack)
-        actionMoveListener = SelectMoveListener(battleField::moveHeroLeft, battleField::moveHeroRight, showConfirmMoveDialog, ::returnToActionMainMenu)
+        actionMoveListener = SelectMoveListener(battleField::moveHeroLeft, battleField::moveHeroRight, confirmMovement, ::returnToActionMainMenu)
         actionPotionListener = SelectPotionListener(showConfirmPotionDialog, ::returnToActionMainMenu)
     }
 

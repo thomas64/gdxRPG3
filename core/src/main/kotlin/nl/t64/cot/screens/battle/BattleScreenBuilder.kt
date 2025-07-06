@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.Scaling
 import ktx.assets.disposeSafely
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.resourceManager
+import nl.t64.cot.components.battle.AttackData
 import nl.t64.cot.components.battle.Character
 import nl.t64.cot.components.battle.EnemyItem
 import nl.t64.cot.components.battle.Participant
@@ -316,7 +317,7 @@ class BattleScreenBuilder {
             String.format("%-12s%6s", "Party",      "")             to 0,
             String.format("%-12s%6s", "Flee",       "$maxAp AP")    to maxAp,
             String.format("%-12s%6s", "Delay turn", "1 AP")         to 1,
-            String.format("%-12s%6s", "Rest",       "1 AP")         to 1,
+            String.format("%-12s%6s", "Rest",       "$curAp AP")    to 1,
             String.format("%-12s%6s", "End turn",   "")             to 0
             // @formatter:on
         )
@@ -371,7 +372,7 @@ class BattleScreenBuilder {
         return object : BattleAbilityItem(AbilityItem(name = "Back"), currentParticipant) {
             override fun createCopyForPreview(): BattleAbilityItem = this
             override fun createPreviewMessage(): String = ""
-            override fun handleSuccess(messages: ArrayDeque<String>) {}
+            override fun handleSuccess(attackData: AttackData) {}
         }
     }
 

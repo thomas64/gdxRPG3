@@ -1,7 +1,7 @@
 package nl.t64.cot.components.battle
 
+import com.badlogic.gdx.graphics.Color
 import nl.t64.cot.Utils.gameData
-import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.components.party.inventory.BattlePotionItem
 
 
@@ -25,30 +25,38 @@ class PotionAction(
         }
     }
 
-    fun handle(): Pair<String, AudioEvent> {
+    fun handle(): Pair<String, Color> {
         currentParticipant.currentAP -= POTION_AP
         gameData.inventory.autoRemoveItem(selectedPotion.id, 1)
-        val oldHp = character.currentHp
-        character.drink(selectedPotion)
-        val newHp = character.currentHp
-        val recoveredHp = newHp - oldHp // todo, dit gaat natuurlijk nog fout met niet-healing potions.
-        if (recoveredHp <= 0) {
-            return "${selectedPotion.name} had no effect." to AudioEvent.SE_CONVERSATION_NEXT
-        } else {
-            return "${character.name} used a ${selectedPotion.name} and recovered $recoveredHp HP." to AudioEvent.SE_POTION
+        return character.drink(selectedPotion)
+    }
+
+    private fun Character.drink(potion: BattlePotionItem): Pair<String, Color> {
+        return when (potion.id) {
+            "healing_potion" -> recoverHp { recoverPartHp(20) }
+            "curing_potion" -> recoverHp { recoverPartHp(80) }
+            "restore_potion" -> recoverHp { recoverFullHp() }
+            "energy_potion" -> recoverSp { recoverPartSp(20) }
+            "endurance_potion" -> recoverSp { recoverPartSp(80) }
+            "stamina_potion" -> recoverSp { recoverFullSp() }
+            else -> throw NotImplementedError("ToDo")
         }
     }
 
-    private fun Character.drink(potion: BattlePotionItem) {
-        when (potion.id) {
-            "healing_potion" -> this.recoverPartHp(20)
-            "curing_potion" -> this.recoverPartHp(80)
-            "restore_potion" -> this.recoverFullHp()
-            "energy_potion" -> this.recoverPartSp(20)
-            "endurance_potion" -> this.recoverPartSp(80)
-            "stamina_potion" -> this.recoverFullSp()
-            else -> throw NotImplementedError("ToDo")
-        }
+    private inline fun Character.recoverHp(action: Character.() -> Unit): Pair<String, Color> {
+        val oldHp = currentHp
+        action()
+        val recovered = currentHp - oldHp
+        val text = if (recovered <= 0) "0" else "$recovered"
+        return Pair(text, Color.GREEN)
+    }
+
+    private inline fun Character.recoverSp(action: Character.() -> Unit): Pair<String, Color> {
+        val oldSp = currentSp
+        action()
+        val recovered = currentSp - oldSp
+        val text = if (recovered <= 0) "0" else "$recovered"
+        return Pair(text, Color.CYAN)
     }
 
 }
