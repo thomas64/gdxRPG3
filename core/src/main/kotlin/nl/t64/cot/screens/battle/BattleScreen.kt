@@ -46,6 +46,7 @@ class BattleScreen : Screen {
     private lateinit var dialogManager: BattleDialogManager
     private lateinit var confirmManager: BattleConfirmManager
     private lateinit var attackOutcomeManager: AttackOutcomeManager
+    private lateinit var specialOutcomeManager: SpecialOutcomeManager
     private lateinit var resultManager: BattleResultManager
 
     private lateinit var currentTarget: Participant
@@ -58,6 +59,7 @@ class BattleScreen : Screen {
     private var isPreBattle: Boolean = false
     private var isDelayingTurn: Boolean = false
     private var isEnemyActing: Boolean = false
+    private var hasCharacterBlinked: Boolean = false
     private var hasWon: Boolean = false
     private var hasLost: Boolean = false
     private var shouldKeepState: Boolean = false
@@ -102,6 +104,7 @@ class BattleScreen : Screen {
         dialogManager = BattleDialogManager(stage, ::currentParticipant)
         confirmManager = BattleConfirmManager(stage, turnManager, tableManager::battleFieldTable, ::currentParticipant, { isDelayingTurn = it })
         attackOutcomeManager = AttackOutcomeManager(stage, turnManager, tableManager::battleFieldTable, { isDelayingTurn = it })
+        specialOutcomeManager = SpecialOutcomeManager(tableManager::battleFieldTable, { isDelayingTurn = it })
         resultManager = BattleResultManager(stage, battleObserver, battleId, enemies, { isBgmFading = it })
 
         val battleTitle: Label = screenBuilder.createBattleTitle()
@@ -164,7 +167,14 @@ class BattleScreen : Screen {
             tableManager.updateBattleField(battleField)
             return
         }
+
+        val tempParticipant1 = currentParticipant
         currentParticipant = turnManager.currentParticipant
+        val tempParticipant2 = currentParticipant
+        if (tempParticipant1 != tempParticipant2) {
+            hasCharacterBlinked = false
+        }
+
         tableManager.updateBattleField(battleField)
 
         when {
@@ -193,6 +203,8 @@ class BattleScreen : Screen {
         Gdx.input.inputProcessor = null
         Utils.setGamepadInputProcessor(null)
         if (shouldKeepState) return
+        hasCharacterBlinked = false
+        turnManager.resetTemporaryStatsAfterBattle()
         stage.clear()
     }
 
@@ -231,16 +243,23 @@ class BattleScreen : Screen {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun showPreviewDialog(selectedAttack: BattleAbilityItem, selectedTarget: String) {
-        val target: Participant = turnManager.getParticipant(enemies.getEnemy(selectedTarget))
+        val target: Participant = turnManager.getParticipant(selectedTarget)
         dialogManager.showPreviewDialog(selectedAttack = selectedAttack,
                                         selectedTarget = target)
     }
 
     private fun showConfirmAttackDialog(selectedAttack: BattleAbilityItem, selectedTarget: String) {
-        val target: Participant = turnManager.getParticipant(enemies.getEnemy(selectedTarget))
+        val target: Participant = turnManager.getParticipant(selectedTarget)
         dialogManager.showConfirmAttackDialog(selectedAttack = selectedAttack,
                                               selectedTarget = target,
                                               onConfirmed = { attackConfirmed(it, target) })
+    }
+
+    private fun showConfirmSpecialDialog(selectedSpecial: BattleAbilityItem, selectedTarget: String) {
+        val target: Participant = turnManager.getParticipant(selectedTarget)
+        dialogManager.showConfirmSpecialDialog(selectedSpecial = selectedSpecial,
+                                               selectedTarget = target,
+                                               onConfirmed = { specialConfirmed(it, target) })
     }
 
     private fun showConfirmPotionDialog(selectedPotion: BattlePotionItem) {
@@ -279,6 +298,12 @@ class BattleScreen : Screen {
         menuManager.buttonTableTarget.remove()
         currentTarget = target
         attackOutcomeManager.attackConfirmed(attackAction)
+    }
+
+    private fun specialConfirmed(specialAction: SpecialAction, target: Participant) {
+        menuManager.buttonTableTarget.remove()
+        currentTarget = target
+        specialOutcomeManager.specialConfirmed(specialAction)
     }
 
     private fun moveConfirmed() {
@@ -331,6 +356,7 @@ class BattleScreen : Screen {
 
     private fun takeTurnHero() {
         if (isDelayingTurn) return
+        possibleBlinkCurrentParticipant()
         menuManager.possibleSetupActionTable()
     }
 
@@ -349,20 +375,8 @@ class BattleScreen : Screen {
     }
 
     private fun startEnemyAction() {
-        if (currentParticipant.currentAP >= currentParticipant.maximumAP) {
-            Thread.sleep(500L)
-            thread {
-                isDelayingTurn = true
-                BlinkEffect(tableManager.battleFieldTable, currentParticipant.character.name).start()
-                Utils.runWithDelay(0.5f) {
-                    isDelayingTurn = false
-                }
-            }
-            Thread.sleep(1000L)
-            doEnemyAction()
-        } else {
-            doEnemyAction()
-        }
+        possibleBlinkCurrentParticipant()
+        doEnemyAction()
     }
 
     private fun doEnemyAction() {
@@ -386,6 +400,23 @@ class BattleScreen : Screen {
                 Thread.sleep(500L)
                 turnManager.setNextTurn()
             })
+    }
+
+    private fun possibleBlinkCurrentParticipant() {
+        if (hasCharacterBlinked) return
+        hasCharacterBlinked = true
+
+        if (isEnemyActing) Thread.sleep(500L)
+
+        thread {
+            isDelayingTurn = true
+            BlinkEffect(tableManager.battleFieldTable, currentParticipant.character.name, Color.BLACK).start()
+            Utils.runWithDelay(0.5f) {
+                isDelayingTurn = false
+            }
+        }
+
+        if (isEnemyActing) Thread.sleep(1000L)
     }
 
     private fun handleStagger(message: String) {
@@ -441,6 +472,7 @@ class BattleScreen : Screen {
             ::endTurn,
             ::moveConfirmed,
             ::showConfirmAttackDialog,
+            ::showConfirmSpecialDialog,
             ::showConfirmPotionDialog,
             ::showConfirmWeaponDialogPreBattle,
             ::showConfirmWeaponDialog

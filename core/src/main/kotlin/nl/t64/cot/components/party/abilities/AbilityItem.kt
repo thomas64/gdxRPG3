@@ -15,7 +15,9 @@ data class AbilityItem(
     val imageId: String = "",
     @JsonProperty("gold_cost") val goldCost: Int = 50,
     @JsonProperty("xp_cost") private val xpCost: Int = 200, // todo, eventueel goedkopere waarden in json voor fire, wind, etc?
-    @JsonProperty("resource") private val requiredResource: ResourceType = ResourceType.NONE,
+    @JsonProperty("resource") val requiredResource: ResourceType = ResourceType.NONE,
+    @JsonProperty("is_special") val isSpecial: Boolean = false,
+    @JsonProperty("is_target_party") val isTargetParty: Boolean = false,
     val ap: Int = 0,
     val sp: Int = 0,
     private val skill: SkillItemId = SkillItemId.NONE,
@@ -31,9 +33,9 @@ data class AbilityItem(
     }
 
     fun isWeaponAllowed(weapon: InventoryItem?): Boolean {
-        if (weapon == null) return false
+        if (weapon == null && weaponSkills.isNotEmpty()) return false
         if (weaponSkills.isEmpty()) return true
-        return weapon.skill in weaponSkills
+        return weapon!!.skill in weaponSkills
     }
 
     override fun getTotalDescription(): String {

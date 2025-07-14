@@ -258,6 +258,10 @@ class BattleScreenBuilder {
         return createStyledEmptyList<BattleAbilityItem>().fillWithAttacks(currentParticipant).toAttackTable()
     }
 
+    fun createButtonTableSpecial(currentParticipant: Participant): Table {
+        return createStyledEmptyList<BattleAbilityItem>().fillWithSpecials(currentParticipant).toSpecialTable()
+    }
+
     fun createButtonTableMove(): Table {
         return createSelectionTable().apply {
             add("Move left or right and confirm.")
@@ -310,6 +314,7 @@ class BattleScreenBuilder {
         val actions: List<Pair<String, Int>> = listOf(
             // @formatter:off
             String.format("%-12s%6s", "Attack",     "? AP")         to attackAp,
+            String.format("%-12s%6s", "Special",    "4 AP")         to 4,
             String.format("%-12s%6s", "Move",       if (curAp <= 1) "1 AP" else "1-$curAp AP") to 1,
             String.format("%-12s%6s", "Equipment",  "3 AP")         to 3,
             String.format("%-12s%6s", "Preview",    "")             to 0,
@@ -322,39 +327,51 @@ class BattleScreenBuilder {
             // @formatter:on
         )
         val actionStrings: List<String> = actions.map { (action, ap) ->
-            "${currentParticipant.getColorBasedOn(ap)}$action"
+            "${currentParticipant.getColorBasedOn(ap, action)}$action"
         }
         this.setItems(*actionStrings.toTypedArray())
 
         if (!areEnemiesInRange && buttonTableMainMenuIndex == 0) {
-            buttonTableMainMenuIndex = 1
+            buttonTableMainMenuIndex = 2
         }
         if (currentParticipant.currentAP <= 1
             || this.items[buttonTableMainMenuIndex].startsWith("[GRAY]")
         ) {
-            buttonTableMainMenuIndex = 9
+            buttonTableMainMenuIndex = 10
         }
         this.selectedIndex = buttonTableMainMenuIndex
         return this
     }
 
-    private fun Participant.getColorBasedOn(requestedAp: Int): String {
+    private fun Participant.getColorBasedOn(requestedAp: Int, action: String): String {
+        if (action.contains("Special") && this.getBattleAbilities().none { it.abilityItem.isSpecial }) return "[GRAY]"
         return if (this.currentAP < requestedAp) "[GRAY]" else ""
     }
 
     private fun GdxList<BattleAbilityItem>.fillWithPreviewAttacks(currentParticipant: Participant): GdxList<BattleAbilityItem> {
         val abilities: List<BattleAbilityItem> = currentParticipant.getBattleAbilities()
+            .filterNot { it.abilityItem.isSpecial }
             .map { it.createCopyForPreview() }
-        this.setItems(*abilities.toTypedArray())
-        items.add(createBackButton(currentParticipant))
+        val allItems: List<BattleAbilityItem> = abilities + createBackButton(currentParticipant)
+        this.setItems(*allItems.toTypedArray())
         this.setSelectedIndex()
         return this
     }
 
     private fun GdxList<BattleAbilityItem>.fillWithAttacks(currentParticipant: Participant): GdxList<BattleAbilityItem> {
         val abilities: List<BattleAbilityItem> = currentParticipant.getBattleAbilities()
-        this.setItems(*abilities.toTypedArray())
-        items.add(createBackButton(currentParticipant))
+            .filterNot { it.abilityItem.isSpecial }
+        val allItems: List<BattleAbilityItem> = abilities + createBackButton(currentParticipant)
+        this.setItems(*allItems.toTypedArray())
+        this.setSelectedIndex()
+        return this
+    }
+
+    private fun GdxList<BattleAbilityItem>.fillWithSpecials(currentParticipant: Participant): GdxList<BattleAbilityItem> {
+        val abilities: List<BattleAbilityItem> = currentParticipant.getBattleAbilities()
+            .filter { it.abilityItem.isSpecial }
+        val allItems: List<BattleAbilityItem> = abilities + createBackButton(currentParticipant)
+        this.setItems(*allItems.toTypedArray())
         this.setSelectedIndex()
         return this
     }
@@ -386,8 +403,8 @@ class BattleScreenBuilder {
     }
 
     private fun GdxList<BattlePotionItem>.fillWithPotions(potions: List<BattlePotionItem>): GdxList<BattlePotionItem> {
-        this.setItems(*potions.toTypedArray())
-        items.add(BattlePotionItem("Back"))
+        val allItems: List<BattlePotionItem> = potions + BattlePotionItem("Back")
+        this.setItems(*allItems.toTypedArray())
         this.selectedIndex = 0
         return this
     }
@@ -432,6 +449,14 @@ class BattleScreenBuilder {
         return createSelectionTable().apply {
             add("Select Attack:").padBottom(10f).row()
             finish(listWithAttacks)
+        }
+    }
+
+    private fun GdxList<BattleAbilityItem>.toSpecialTable(): Table {
+        val listWithSpecials = this
+        return createSelectionTable().apply {
+            add("Select Spell:").padBottom(10f).row()
+            finish(listWithSpecials)
         }
     }
 

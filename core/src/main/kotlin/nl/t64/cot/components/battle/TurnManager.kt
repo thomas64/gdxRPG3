@@ -59,12 +59,16 @@ class TurnManager(
         }
     }
 
-    fun getParticipant(character: Character): Participant {
-        return participants.first { it.character == character }
+    fun getParticipant(name: String): Participant {
+        return participants.first { it.character.name == name }
     }
 
     fun getCurrentApOf(character: Character): Int {
         return participants.firstOrNull { it.character == character }?.currentAP ?: 0
+    }
+
+    fun resetTemporaryStatsAfterBattle() {
+        participants.forEach { it.resetTemporaryStatsAfterBattle() }
     }
 
     private fun increaseAllTurnCounters() {

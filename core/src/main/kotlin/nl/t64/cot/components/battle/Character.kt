@@ -30,6 +30,7 @@ abstract class Character(
     var currentHp: Int = 0
     val maximumSp: Int get() = stats.maximumSp
     var currentSp: Int = 0
+    var temporaryProtection: Int = 0
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -164,15 +165,11 @@ abstract class Character(
     }
 
     fun getSumOfEquipmentOfCalc(calcAttributeId: CalcAttributeId): Int {
-        // todo, er moet nog wel een bonus komen voor protection en etc. bijv met een protection spell.
-        // of hieronder
         return inventory.getSumOfCalc(calcAttributeId)
     }
 
     fun getPossibleExtraProtection(): Int {
-        // todo, er moet nog wel een bonus komen voor protection en etc. bijv met een protection spell.
-        // of hierboven
-        return inventory.getBonusProtectionWhenArmorSetIsComplete()
+        return inventory.getBonusProtectionWhenArmorSetIsComplete() + temporaryProtection
     }
 
 }

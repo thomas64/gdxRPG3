@@ -51,6 +51,39 @@ class BattleDialogManager(
         dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0, 1f)
     }
 
+    fun showConfirmSpecialDialog(
+        selectedSpecial: BattleAbilityItem,
+        selectedTarget: Participant,
+        onConfirmed: (SpecialAction) -> Unit
+    ) {
+        val specialAction = SpecialAction(currentParticipant.invoke(), selectedTarget, selectedSpecial)
+
+        val notEnoughApSpMessage: String? = specialAction.isCostingTooMuchApSp()
+        if (notEnoughApSpMessage != null) {
+            showSmallLeftAlignMessageDialog(notEnoughApSpMessage)
+            return
+        }
+        val notEnoughRsMessage: String? = specialAction.isCostingTooMuchResources()
+        if (notEnoughRsMessage != null) {
+            showSmallLeftAlignMessageDialog(notEnoughRsMessage)
+            return
+        }
+        val notAllowedMessage: String? = specialAction.isAlreadyCast()
+        if (notAllowedMessage != null) {
+            showSmallLeftAlignMessageDialog(notAllowedMessage)
+            return
+        }
+        val unableMessage: String? = specialAction.isUnableWithCurrentWeapon()
+        if (unableMessage != null) {
+            showSmallLeftAlignMessageDialog(unableMessage)
+            return
+        }
+
+        val message = specialAction.createConfirmationMessage()
+        val dialog = TwoColumnsQuestionDialog(message) { onConfirmed.invoke(specialAction) }
+        dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0, 1f)
+    }
+
     private fun showSmallLeftAlignMessageDialog(message: String) {
         val dialog = MessageDialog(message)
         dialog.setLeftAlignment()

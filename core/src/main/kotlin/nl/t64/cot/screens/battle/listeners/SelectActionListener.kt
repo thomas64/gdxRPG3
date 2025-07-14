@@ -12,6 +12,7 @@ class SelectActionListener(
     private val winBattle: () -> Unit,
     private val pauseMenu: () -> Unit,
     private val selectAttack: () -> Unit,
+    private val selectSpecial: () -> Unit,
     private val selectMove: () -> Unit,
     private val selectPotion: () -> Unit,
     private val selectEquipment: () -> Unit,
@@ -43,6 +44,7 @@ class SelectActionListener(
     private fun InputEvent.handleEnter() {
         getSelected<String>()?.let { selected ->
             if ("Attack" in selected
+                || "Special" in selected
                 || "Move" in selected
                 || "Equipment" in selected
                 || "Preview" in selected
@@ -53,6 +55,7 @@ class SelectActionListener(
             }
             when {
                 "Attack" in selected -> selectAttack.invoke()
+                "Special" in selected -> selectSpecial.invoke()
                 "Move" in selected -> selectMove.invoke()
                 "Equipment" in selected -> selectEquipment.invoke()
                 "Preview" in selected -> selectPreview.invoke()

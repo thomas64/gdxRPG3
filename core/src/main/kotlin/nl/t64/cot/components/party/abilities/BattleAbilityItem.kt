@@ -1,5 +1,6 @@
 package nl.t64.cot.components.party.abilities
 
+import nl.t64.cot.Utils.gameData
 import nl.t64.cot.components.battle.AttackData
 import nl.t64.cot.components.battle.Participant
 import nl.t64.cot.components.party.inventory.InventoryGroup
@@ -31,7 +32,8 @@ abstract class BattleAbilityItem(
     lateinit var target: Participant
 
     override fun toString(): String {
-        val apField = if (name != "Back") String.format("%3d AP", ap) else ""
+        if (name == "Back") return name
+        val apField = String.format("%3d AP", ap)
         val spField = if (sp > 0) " | $sp SP" else "       "
         val totalWidth = 28
         val leftPart = name
@@ -114,6 +116,13 @@ abstract class BattleAbilityItem(
             && attacker.character.currentSp >= sp
     }
 
+    fun hasEnoughResources(): Boolean {
+        return when (abilityItem.requiredResource) {
+            ResourceType.NONE -> true
+            else -> gameData.inventory.hasEnoughOfItem(abilityItem.requiredResource.title.lowercase(), 1)
+        }
+    }
+
     fun isWeaponAllowed(): Boolean {
         return abilityItem.isWeaponAllowed(currentWeapon)
     }
@@ -174,7 +183,6 @@ abstract class BattleAbilityItem(
     }
 
     private fun possibleGetGrayPrefix(): String {
-        if (name == "Back") return ""
         if (abilityItem.isPreview) return ""
         return if (!isWeaponAllowed() || !hasEnoughApSp()) "[GRAY]" else ""
     }

@@ -22,6 +22,8 @@ class Participant(
     var staggerChance: Float = 65f
     var fleeChance: Int = 70
 
+    var isProtected: Boolean = false
+
     private var isDelayingTurn: Boolean = false
     private var isStaggered: Boolean = false
     private var amountOfTurns: Int = 0
@@ -113,6 +115,10 @@ class Participant(
         return character.getInventoryItem(InventoryGroup.WEAPON)
     }
 
+    fun resetTemporaryStatsAfterBattle() {
+        character.temporaryProtection = 0
+    }
+
     private fun createBattleAbilityItemFrom(abilityItem: AbilityItem): BattleAbilityItem {
         return when (abilityItem.id) {
             AbilityItemId.BITE_3,
@@ -137,7 +143,7 @@ class Participant(
             AbilityItemId.ELTHUNDER,
             AbilityItemId.ARCTHUNDER,
             AbilityItemId.REXTHUNDER,
-            AbilityItemId.MAGIC_SHIELD,
+            AbilityItemId.MAGIC_SHIELD -> MagicShield(abilityItem, this)
             AbilityItemId.RESISTANCE,
             AbilityItemId.TELEPORTATION,
             AbilityItemId.BRILLIANCE,

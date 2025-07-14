@@ -5,13 +5,13 @@ import nl.t64.cot.components.party.abilities.BattleAbilityItem
 import nl.t64.cot.removeColorCoding
 
 
-class AttackAction(
-    private val currentParticipant: Participant,
-    private val currentTarget: Participant,
-    private val selectedAttack: BattleAbilityItem,
+open class AttackAction(
+    protected val currentParticipant: Participant,
+    protected val currentTarget: Participant,
+    protected val selectedAbility: BattleAbilityItem,
 ) {
-    private val attacker: Character = currentParticipant.character
-    private val target: Character = currentTarget.character
+    protected val instigator: Character = currentParticipant.character
+    protected val target: Character = currentTarget.character
 
     companion object {
         fun createForEnemy(currentEnemy: Participant, targetHero: Participant, battleId: String): AttackAction {
@@ -44,12 +44,12 @@ class AttackAction(
     }
 
     init {
-        selectedAttack.target = currentTarget
+        selectedAbility.target = currentTarget
     }
 
     fun isCostingTooMuchApSp(): String? {
         return when {
-            !selectedAttack.hasEnoughApSp() -> {
+            !selectedAbility.hasEnoughApSp() -> {
                 """${createPreviewMessage()}
                     |_________________
                     |
@@ -61,7 +61,7 @@ class AttackAction(
 
     fun isUnableWithCurrentWeapon(): String? {
         return when {
-            !selectedAttack.isWeaponAllowed() -> {
+            !selectedAbility.isWeaponAllowed() -> {
                 """${createPreviewMessage()}
                     |_________________
                     |
@@ -78,32 +78,36 @@ class AttackAction(
 
             $underscores
 
-            Attack?""".trimIndent()
+            ${createCommand()}?""".trimIndent()
         )
     }
 
-    fun createPreviewMessage(): String {
-        return selectedAttack.createPreviewMessage()
+    open fun createCommand(): String {
+        return "Attack"
     }
 
-    fun handle(): List<AttackData> {
-        if (currentParticipant.currentAP < selectedAttack.ap) {
+    fun createPreviewMessage(): String {
+        return selectedAbility.createPreviewMessage()
+    }
+
+    open fun handle(): List<AttackData> {
+        if (currentParticipant.currentAP < selectedAbility.ap) {
             return emptyList()
         }
 
-        currentParticipant.currentAP -= selectedAttack.ap
-        attacker.currentSp -= selectedAttack.sp
+        currentParticipant.currentAP -= selectedAbility.ap
+        instigator.currentSp -= selectedAbility.sp
 
         createDebugMessage()
-        return selectedAttack.handle()
+        return selectedAbility.handle()
     }
 
     private fun createDebugMessage() {
         if (preferenceManager.isInDebugMode) {
-            println("${attacker.name}: " +
-                        "${selectedAttack.calculateHitPercentage()}% hit, " +
-                        "${selectedAttack.calculateCriticalHitPercentage()}% critHit, " +
-                        "${selectedAttack.ap} AP.")
+            println("${instigator.name}: " +
+                        "${selectedAbility.calculateHitPercentage()}% hit, " +
+                        "${selectedAbility.calculateCriticalHitPercentage()}% critHit, " +
+                        "${selectedAbility.ap} AP.")
         }
     }
 
