@@ -209,8 +209,10 @@
       "10": {"text": ["I will teach you to cast a spell, free of charge."]},
       "11": {"text": ["Ready? Here we go!"]},
       "12": {"text": ["{SPEED=0.2} . . . . . . . . ."], "choices": [{"command": "RECEIVE_SPELLS", "nextId": "13"}]},
-      "13": {"text": ["Now you can use the spell {COLOR=BLUE}Magic Shield{COLOR=BLACK}, in battle. It will raise the protection value from whoever you cast it on."]},
-      "14": {"text": ["Feel free to come see me again if you'd like to learn more spells."], "choices": [{"command": "EXIT"}]},
+      "13": {"text": ["The spell {COLOR=BLUE}Magic Shield{COLOR=BLACK} is added to your spellbook."]},
+      "14": {"text": ["Now you can use this spell in battle. It will increase the Protection of whoever you cast it on."]},
+      "15": {"text": ["Magic spells require {COLOR=BLUE}resources{COLOR=BLACK} each time you cast them. Magic Shield for example requires Gemstones."]},
+      "16": {"text": ["Feel free to come see me again if you'd like to learn more spells."], "choices": [{"command": "EXIT"}]},
       "20": {"text": ["Ah, dear Mozes, we're so happy you've come to visit us."]},
       "21": {"text": ["First, please visit our Mother Fairy by the Great Tree."]},
       "22": {"text": ["And be sure to return to me after you've spoken with her."], "choices": [{"command": "EXIT"}]}

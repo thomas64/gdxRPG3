@@ -16,13 +16,13 @@ object TextReplacer {
         }
         val hasGamePad = Utils.isGamepadConnected()
         return when (substr) {
-            "%action%" -> str.replace(substr, if (hasGamePad) "[A] button" else "[A] key")
-            "%inventory%" -> str.replace(substr, if (hasGamePad) "[Y] button" else "[I] key")
-            "%fast%" -> str.replace(substr, if (hasGamePad) "[RB] button" else "[Shift] key")
-            "%slow%" -> str.replace(substr, if (hasGamePad) "[LB] button" else "[Ctrl] key")
-            "%minimap%" -> str.replace(substr, if (hasGamePad) "[Select] button" else "[M] key")
-            "%logbook%" -> str.replace(substr, if (hasGamePad) "[X] button" else "[L] key")
-            "%manual%" -> str.replace(substr, if (hasGamePad) "[L] stick" else "[T] key")
+            "%action%" -> str.replace(substr, if (hasGamePad) "[A] [BLACK]button" else "[A] [BLACK]key")
+            "%inventory%" -> str.replace(substr, if (hasGamePad) "[Y] [BLACK]button" else "[I] [BLACK]key")
+            "%fast%" -> str.replace(substr, if (hasGamePad) "[RB] [BLACK]button" else "[Shift] [BLACK]key")
+            "%slow%" -> str.replace(substr, if (hasGamePad) "[LB] [BLACK]button" else "[Ctrl] [BLACK]key")
+            "%minimap%" -> str.replace(substr, if (hasGamePad) "[Select] [BLACK]button" else "[M] [BLACK]key")
+            "%logbook%" -> str.replace(substr, if (hasGamePad) "[X] [BLACK]button" else "[L] [BLACK]key")
+            "%manual%" -> str.replace(substr, if (hasGamePad) "[L] [BLACK]stick" else "[T] [BLACK]key")
             else -> throw IllegalArgumentException("Unexpected value: '$substr'")
         }
     }

@@ -77,7 +77,7 @@ class PhysicsChest(private val chest: Loot) : PhysicsComponent() {
         stringBuilder
             .append("There's a dangerous trap on this treasure chest.")
             .append(System.lineSeparator())
-            .append("You need a level ${chest.trapLevel} Mechanic to disarm the trap.")
+            .append("You need a Mechanic of rank ${chest.trapLevel} to disarm the trap.")
         worldScreen.showMessageDialog(stringBuilder.toString())
     }
 
@@ -118,7 +118,7 @@ class PhysicsChest(private val chest: Loot) : PhysicsComponent() {
                 .append("but it seems the treasure chest is also locked.")
                 .append(System.lineSeparator())
         }
-        stringBuilder.append("You need a level ${chest.lockLevel} Thief to pick the lock.")
+        stringBuilder.append("You need a Thief of rank ${chest.lockLevel} to pick the lock.")
         worldScreen.showMessageDialog(stringBuilder.toString())
     }
 

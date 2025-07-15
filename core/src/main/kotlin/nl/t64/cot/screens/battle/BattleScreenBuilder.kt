@@ -281,9 +281,11 @@ class BattleScreenBuilder {
 
     fun createButtonTableWeapon(equipment: List<BattleWeaponItem>,
                                 currentWeapon: InventoryItem?,
-                                currentShield: InventoryItem?): Table {
-        return createStyledEmptyList<BattleWeaponItem>().fillWithWeapons(equipment).toWeaponTable(currentWeapon,
-                                                                                                  currentShield)
+                                currentShield: InventoryItem?
+    ): Table {
+        return createStyledEmptyList<BattleWeaponItem>()
+            .fillWithWeapons(equipment, currentWeapon, currentShield)
+            .toWeaponTable(currentWeapon, currentShield)
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -409,11 +411,17 @@ class BattleScreenBuilder {
         return this
     }
 
-    private fun GdxList<BattleWeaponItem>.fillWithWeapons(weapons: List<BattleWeaponItem>): GdxList<BattleWeaponItem> {
-        this.setItems(*weapons.toTypedArray())
-        items.add(BattleWeaponItem(InventoryItem(name = "Unequip current weapon", group = InventoryGroup.WEAPON)))
-        items.add(BattleWeaponItem(InventoryItem(name = "Unequip current shield", group = InventoryGroup.SHIELD)))
-        items.add(BattleWeaponItem(InventoryItem(name = "Back")))
+    private fun GdxList<BattleWeaponItem>.fillWithWeapons(weapons: List<BattleWeaponItem>,
+                                                          currentWeapon: InventoryItem?,
+                                                          currentShield: InventoryItem?
+    ): GdxList<BattleWeaponItem> {
+        val allItems: List<BattleWeaponItem> = buildList {
+            addAll(weapons)
+            currentWeapon?.let { add(BattleWeaponItem(InventoryItem(name = "Unequip current weapon", group = InventoryGroup.WEAPON))) }
+            currentShield?.let { add(BattleWeaponItem(InventoryItem(name = "Unequip current shield", group = InventoryGroup.SHIELD))) }
+            add(BattleWeaponItem(InventoryItem(name = "Back")))
+        }
+        this.setItems(*allItems.toTypedArray())
         this.selectedIndex = 0
         return this
     }
@@ -486,7 +494,7 @@ class BattleScreenBuilder {
             add("Current Weapon: $weapon").row()
             add("Current Shield: $shield").row()
             add("______________________________").padTop(-10f).padBottom(5f).row()
-            add("Select other Weapon or Shield:").row()
+            add("Select Weapon or Shield:").row()
             add("______________________________").padTop(-10f).padBottom(10f).row()
             finish(listWithEquipment)
         }

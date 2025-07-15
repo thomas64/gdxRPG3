@@ -40,16 +40,16 @@
   "deryk_school"         : {
     "name"   : "Swordmaster Deryk",
     "phrases": {
-      "1": {"text": ["I will be teaching the villagers in self-defense starting tomorrow morning. If you wish to join, please come to the village square at 09:00."]},
+      "1": {"text": ["I will be teaching the villagers in self-defense, starting tomorrow morning. If you wish to join, please come to the village square at 09:00."]},
       "2": {
         "choices": [
           {"condition": ["diplomat2"], "text": "[Diplomat 2] *Request to be taught right now.*", "nextId": "3"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
-      "3": {"text": ["Ah, I see you are eager to learn. Very well, I will teach you and all your party members right now."]},
+      "3": {"text": ["Ah, I see you are eager to learn. Very well, I will teach everyone in your party right now."]},
       "4": {"text": ["{SPEED=0.2} . . . . . . . . ."], "choices": [{"command": "RECEIVE_SPELLS", "nextId": "5"}]},
-      "5": {"text": ["Now everyone can use the ability {COLOR=BLUE}Focused Strike{COLOR=BLACK}, in battle. It's variation of the regular Strike ability."]},
+      "5": {"text": ["Now everyone in your party can use the ability {COLOR=BLUE}Focused Strike{COLOR=BLACK} in battle. It's variation of the regular Strike ability."]},
       "6": {"text": ["If you want me to teach Focused Strike to other party members, please bring them here. I will teach them as well."], "choices": [{"command": "EXIT", "nextId": "6"}]}
     }
   }

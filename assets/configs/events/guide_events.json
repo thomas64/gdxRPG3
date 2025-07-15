@@ -2,7 +2,7 @@
   "guide_event_action"               : {
     "type": "messagebox",
     "text": [
-      "Press the %action% to interact.",
+      "Press the [BLUE]%action%[BLACK] to interact.",
       "Use it to interact with characters, chests, or doors."
     ]
   },
@@ -18,7 +18,7 @@
     "type"     : "messagebox",
     "condition": ["_n_3_>=_item_healing_potion"],
     "text"     : [
-      "Press the %inventory% to access your inventory,",
+      "Press the [BLUE]%inventory%[BLACK] to access your inventory,",
       "where you can view your equipment, attributes, skills, and more."
     ]
   },
@@ -26,18 +26,18 @@
     "type": "messagebox",
     "text": [
       "Approaching an enemy triggers a battle.",
-      "Victory in battles rewards you with XP,",
+      "Victory in battles rewards you with [FOREST]XP[BLACK],",
       "which can be used to improve your character."
     ]
   },
   "guide_event_battle_rows"          : {
     "type": "messagebox",
     "text": [
-      "Battle Tutorial (1/6)",
+      "Battle Tutorial (1/7)",
       "",
       "The battlefield consists of the two rows you can see below.",
-      "One row for you and your party members, the other for the enemies.",
-      "The red spaces on the upper row indicate your attack range.",
+      "The lower row for your party, the upper for the enemies.",
+      "The [FIREBRICK]red[BLACK] spaces on the upper row indicate your attack range.",
       "",
       "Each turn, you get a certain amount of Action Points (AP).",
       "With these AP, you can move, attack, or do other actions."
@@ -46,7 +46,7 @@
   "guide_event_battle_advantage"     : {
     "type": "messagebox",
     "text": [
-      "Battle Tutorial (2/6)",
+      "Battle Tutorial (2/7)",
       "",
       "Each enemy has an [BLUE]advantage[BLACK] and a",
       "[FIREBRICK]disadvantage[BLACK] to certain weapon types.",
@@ -54,41 +54,44 @@
       "Try to use the [BLUE]right weapon type[BLACK]",
       "against the enemy's disadvantage.",
       "",
-      "BEWARE! When having a disadvantage against an enemy,",
+      "[FIREBRICK]BEWARE![BLACK] When having a disadvantage against an enemy,",
       "means that the enemy has an advantage against you!"
     ]
   },
   "guide_event_battle_battle_lock"   : {
     "type": "messagebox",
     "text": [
-      "Battle Tutorial (3/6)",
+      "Battle Tutorial (3/7)",
       "",
       "At the start of each turn, if a character begins",
       "next to an enemy, they become locked in battle.",
       "This is marked by a small exclamation mark [!].",
       "",
-      "This significantly increases the AP cost to move",
+      "This [BLUE]significantly[BLACK] increases the AP cost to move",
       "away from that enemy and escape the battle lock."
     ]
   },
   "guide_event_battle_ap"            : {
     "type": "messagebox",
     "text": [
-      "Battle Tutorial (4/6)",
+      "Battle Tutorial (4/7)",
       "",
       "When you end your turn, if there is any AP left,",
-      "up to 2 AP, will be added to your next turn's AP."
+      "up to [BLUE]2 AP[BLACK] will be added to your next turn's AP.",
+      "",
+      "For now, with your current attributes,",
+      "it means you can have a maximum of 6 AP."
     ]
   },
   "guide_event_battle_turn_order"    : {
     "type": "messagebox",
     "text": [
-      "Battle Tutorial (5/6)",
+      "Battle Tutorial (5/7)",
       "",
       "At the top of the screen, you can see the turn order.",
       "The character highlighted in [GOLDENROD]yellow[BLACK] will act first.",
       "",
-      "The turn order is based on the Speed attribute.",
+      "The turn order is based on the [BLUE]Speed[BLACK] attribute.",
       "Higher speed means acting earlier in the round.",
       "",
       "The speed of your party members is displayed.",
@@ -100,19 +103,30 @@
   "guide_event_battle_durability"    : {
     "type": "messagebox",
     "text": [
-      "Battle Tutorial (6/6)",
+      "Battle Tutorial (6/7)",
       "",
-      "Weapons and shields have limited durability.",
+      "Weapons and shields have limited [BLUE]durability[BLACK].",
       "You can see their durability in parentheses after",
       "the item's name. Each use reduces durability by 1.",
       "When durability reaches [FIREBRICK]0[BLACK], the item breaks and is lost.",
       "Always monitor your weapon's durability to avoid surprises!"
     ]
   },
+  "guide_event_battle_special"       : {
+    "type": "messagebox",
+    "text": [
+      "Battle Tutorial (7/7)",
+      "",
+      "It is possible that you have acquired a magic spell by now.",
+      "If so, you can use it in the battle menu under [BLUE]Special[BLACK].",
+      "",
+      "Remember, magic spells require resources to cast."
+    ]
+  },
   "guide_event_quest"                : {
     "type": "messagebox",
     "text": [
-      "Press the %logbook% to access your logbook.",
+      "Press the [BLUE]%logbook%[BLACK] to access your logbook.",
       "Here, you can find all quest-related information.",
       "A main quest is marked with an [M]."
     ]
@@ -120,7 +134,7 @@
   "guide_event_minimap"              : {
     "type": "messagebox",
     "text": [
-      "Press the %minimap% in large areas to view an overview of that area.",
+      "Press the [BLUE]%minimap%[BLACK] in large areas to view an overview of that area.",
       "This helps prevent getting lost, especially in dark caves.",
       "(Note: Small areas do not offer this overview option.)"
     ]
@@ -129,14 +143,14 @@
     "type": "messagebox",
     "text": [
       "If you missed any of these messages or want to review them,",
-      "press the %manual% to see the history of these messages."
+      "press the [BLUE]%manual%[BLACK] to see the history of these messages."
     ]
   },
   "guide_event_equipment"            : {
     "type"     : "messagebox",
     "condition": ["_n_1_>=_item_basic_light_helmet"],
     "text"     : [
-      "Press the %inventory% to access your inventory.",
+      "Press the [BLUE]%inventory%[BLACK] to access your inventory.",
       "Here, you can equip various items such as armor and weapons.",
       "These items will help you in battles and other situations."
     ]
@@ -147,14 +161,15 @@
       "During conversations with other characters,",
       "you have the opportunity to choose your responses.",
       "",
-      "But certain responses are restricted by specific conditions.",
-      "These conditions are stated between brackets [ ] in front of the response."
+      "But certain responses are [BLUE]restricted[BLACK] by specific",
+      "conditions. These conditions are stated between",
+      "brackets [ ] in front of the response."
     ]
   },
   "guide_event_slow"                 : {
     "type": "messagebox",
     "text": [
-      "With the %slow% you can toggle to move stealthily.",
+      "With the [BLUE]%slow%[BLACK] you can toggle to move stealthily.",
       "Enemies will have a harder time detecting you,",
       "enabling you to avoid battles if necessary.",
       "The bottom right corner shows whether you're crouching."
@@ -164,25 +179,29 @@
     "type"     : "messagebox",
     "condition": ["xp_>=_15"],
     "text"     : [
-      "You've acquired enough XP to level up one of your attributes!",
+      "Weapons require a minimum rank of Intelligence, Dexterity, or",
+      "Strength. Check the weapon's description for that requirement.",
+      "If you meet the requirement, you can equip the weapon.",
       "",
-      "Perhaps you also acquired some other weapons on your journey already.",
-      "Weapons require a minimum level of Intelligence, Dexterity or Strength.",
-      "You can see the minimum attribute requirement in the description of",
-      "that weapon. If you meet the requirements, you can equip the weapon.",
-      "",
-      "To meet such requirements, you must level up your attributes:",
-      "Access your attributes by pressing the %inventory%.",
-      "Here you can utilize your XP to improve these attributes.",
-      "Choose an attribute and press the %action% to level it up.",
-      "A [PURPLE]purple arrow[BLACK] indicates that you have enough XP to level up that attribute."
+      "Access your attributes by pressing the [BLUE]%inventory%[BLACK].",
+      "Use [FOREST]XP[BLACK] to level them up with the [BLUE]%action%[BLACK].",
+      "A [PURPLE]purple arrow[BLACK] indicates your [FOREST]XP[BLACK] is sufficient."
+    ]
+  },
+  "guide_event_spell"                : {
+    "type"     : "messagebox",
+    "condition": ["shield_spell"],
+    "text"     : [
+      "You have learned a magic spell.",
+      "Press the [BLUE]%inventory%[BLACK] to view your spells.",
+      "New spells are added to your 'Spells/ Abilities' list."
     ]
   },
   "guide_event_fast"                 : {
     "type"     : "messagebox",
     "condition": ["been_in_fairy_town"],
     "text"     : [
-      "With the %fast% you can toggle to run.",
+      "With the [BLUE]%fast%[BLACK] you can toggle to run.",
       "You'll move faster, but enemies will detect you more easily.",
       "The bottom right corner shows whether you're running."
     ]
@@ -191,10 +210,10 @@
     "type"     : "messagebox",
     "condition": ["been_in_fairy_town"],
     "text"     : [
-      "Remember to press the %logbook% to access your logbook.",
+      "Remember to press the [BLUE]%logbook%[BLACK] to access your logbook.",
       "Here, you can find all quest-related information,",
       "like finding secret doors.",
-      "Also remember to press the %minimap% to view the area overview."
+      "Also remember to press the [BLUE]%minimap%[BLACK] to view the area overview."
     ]
   },
   "guide_event_storage"              : {
@@ -203,14 +222,14 @@
     "text"     : [
       "The closet behind you can be used for storage.",
       "When your inventory becomes full, store items in your closet.",
-      "They will be safe and kept there until you need them.",
+      "They will be [BLUE]safe[BLACK] and kept there until you need them.",
       "Perhaps some of your belongings are already stored there?"
     ]
   },
   "guide_event_conversation_reminder": {
     "type": "messagebox",
     "text": [
-      "People may share different information at different times.",
+      "People may share [BLUE]different[BLACK] information at different times.",
       "Keep this in mind!",
       "The village elder is a good example of this behavior."
     ]
@@ -220,7 +239,7 @@
     "condition": ["_r_!=_f_q_quest_honeywood_elder", "_c_==_x_q_quest_honeywood_elder"],
     "text"     : [
       "One of your main quests was failed.",
-      "Press the %logbook% to access your logbook.",
+      "Press the [BLUE]%logbook%[BLACK] to access your logbook.",
       "A red [FIREBRICK]X[BLACK] indicates a failed quest.",
       "",
       "In this specific case, just follow the other main quest."
@@ -231,7 +250,9 @@
     "condition": ["!alone_in_party"],
     "text"     : [
       "Luana has joined your party.",
-      "Press the %inventory% to view her equipment, attributes and skills.",
+      "Press the [BLUE]%inventory%[BLACK] to view her equipment, attributes and skills.",
+      "Luana is a Thief and a Mechanic. Check her skills to see what she can do.",
+      "",
       "If a party member dies, they cannot be revived, they are gone forever."
     ]
   }

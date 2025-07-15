@@ -136,7 +136,8 @@ class BattleScreen : Screen {
                        "guide_event_battle_battle_lock",
                        "guide_event_battle_ap",
                        "guide_event_battle_turn_order",
-                       "guide_event_battle_durability")
+                       "guide_event_battle_durability",
+                       "guide_event_battle_special")
                     .map { gameData.events.getEventById(it) }
                     .firstOrNull { !gameData.events.hasEventPlayed(it) }
                     ?.possibleStart(stage)
