@@ -12,10 +12,12 @@ private const val SETTINGS_FILE = "settings.dat"
 private const val SETTING_SCREEN = "isFullscreen"
 private const val SETTING_MUSIC = "isMusicOn"
 private const val SETTING_SOUND = "isSoundOn"
-private const val SETTING_DEBUG = "isInDebugMode"
+private const val SETTING_TUTORIAL = "isTutorialOn"
+private const val SETTING_DEBUG = "isDebugModeOn"
 private const val FULLSCREEN_DEFAULT = true
 private const val MUSIC_DEFAULT = true
 private const val SOUND_DEFAULT = true
+private const val TUTORIAL_DEFAULT = true
 private const val DEBUG_MODE_DEFAULT = false
 
 class PreferenceManager {
@@ -24,7 +26,8 @@ class PreferenceManager {
     var isFullscreen = preferences[SETTING_SCREEN, FULLSCREEN_DEFAULT]
     var isMusicOn = preferences[SETTING_MUSIC, MUSIC_DEFAULT]
     var isSoundOn = preferences[SETTING_SOUND, SOUND_DEFAULT]
-    var isInDebugMode = DEBUG_MODE_DEFAULT
+    var isTutorialOn = preferences[SETTING_TUTORIAL, TUTORIAL_DEFAULT]
+    var isDebugModeOn = DEBUG_MODE_DEFAULT
 
     fun toggleFullscreen() {
         if (Gdx.graphics.isFullscreen) {
@@ -53,8 +56,14 @@ class PreferenceManager {
         preferences.flush()
     }
 
+    fun toggleTutorial() {
+        isTutorialOn = isTutorialOn.not()
+        preferences[SETTING_TUTORIAL] = isTutorialOn
+        preferences.flush()
+    }
+
     fun toggleDebugMode() {
-        isInDebugMode = isInDebugMode.not()
+        isDebugModeOn = isDebugModeOn.not()
     }
 
     private fun setWindowedMode() {

@@ -256,7 +256,7 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
     }
 
     private fun cheatAddGold() {
-        if (preferenceManager.isInDebugMode) {
+        if (preferenceManager.isDebugModeOn) {
             val inventory = gameData.inventory
             if (inventory.hasRoomForResource("gold")
                 && inventory.hasRoomForResource("herb")
@@ -275,7 +275,7 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
     }
 
     private fun cheatRemoveGold() {
-        if (preferenceManager.isInDebugMode) {
+        if (preferenceManager.isDebugModeOn) {
             val inventory = gameData.inventory
             if (inventory.hasEnoughOfItem("gold", 1)) {
                 playSe(AudioEvent.SE_MENU_ERROR)

@@ -103,7 +103,7 @@ open class AttackAction(
     }
 
     private fun createDebugMessage() {
-        if (preferenceManager.isInDebugMode) {
+        if (preferenceManager.isDebugModeOn) {
             println("${instigator.name}: " +
                         "${selectedAbility.calculateHitPercentage()}% hit, " +
                         "${selectedAbility.calculateCriticalHitPercentage()}% critHit, " +

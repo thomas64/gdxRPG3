@@ -163,7 +163,7 @@ class InputPlayer(multiplexer: InputMultiplexer) : InputComponent(), InputProces
     }
 
     private fun processOtherInput() {
-        if (pressAlign && preferenceManager.isInDebugMode) {
+        if (pressAlign && preferenceManager.isDebugModeOn) {
             player.send(StateEvent(EntityState.ALIGNING))
         }
         if (pressAction) {
@@ -175,7 +175,7 @@ class InputPlayer(multiplexer: InputMultiplexer) : InputComponent(), InputProces
     private fun processPlayerSpeedInput() {
         var moveSpeed = Constant.MOVE_SPEED_2
         when {
-            pressAlt && preferenceManager.isInDebugMode -> moveSpeed = Constant.MOVE_SPEED_4
+            pressAlt && preferenceManager.isDebugModeOn -> moveSpeed = Constant.MOVE_SPEED_4
             pressShift -> moveSpeed = Constant.MOVE_SPEED_3
             pressCtrl -> moveSpeed = Constant.MOVE_SPEED_1
         }

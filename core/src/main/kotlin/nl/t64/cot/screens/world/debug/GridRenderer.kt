@@ -21,7 +21,7 @@ class GridRenderer(
     }
 
     fun setShowGrid() {
-        if (preferenceManager.isInDebugMode) {
+        if (preferenceManager.isDebugModeOn) {
             showGrid = !showGrid
         }
     }

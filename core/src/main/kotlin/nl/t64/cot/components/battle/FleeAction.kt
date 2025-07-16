@@ -35,7 +35,7 @@ class FleeAction(
 
     fun handle(): Pair<Boolean, String> {
         currentParticipant.currentAP -= currentParticipant.maximumAP
-        if (preferenceManager.isInDebugMode) {
+        if (preferenceManager.isDebugModeOn) {
             return Pair(true, "The party successfully debug fled the battle.")
         }
         return if (getChanceToFlee() >= Random.nextInt(0, 100)) {

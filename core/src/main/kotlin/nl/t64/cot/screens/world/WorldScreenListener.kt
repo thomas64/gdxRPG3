@@ -25,7 +25,7 @@ internal class WorldScreenListener(
     override fun keyDown(keycode: Int): Boolean {
         if (isInTransition.invoke()) return false
 
-        if (preferenceManager.isInDebugMode) {
+        if (preferenceManager.isDebugModeOn) {
             if (Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)
                 || (Gdx.input.isKeyPressed(Input.Keys.SHIFT_RIGHT))
             ) {

@@ -127,7 +127,7 @@ class BattleField(
     fun possibleGetHeroTargetAndMoveEnemy(): Participant? {
         setStartingSpace()
         val heroIndicesByPrio: List<Int> = getOccupiedHeroIndicesSortedByPriorityForActingEnemy()
-        if (preferenceManager.isInDebugMode) {
+        if (preferenceManager.isDebugModeOn) {
             println("heroIndicesByPrio: $heroIndicesByPrio")
         }
 
@@ -229,7 +229,7 @@ class BattleField(
 
     private fun takeApForMovingTo(destinationSpace: Int) {
         val actingEnemy: Participant = currentParticipant.invoke()
-        if (preferenceManager.isInDebugMode) {
+        if (preferenceManager.isDebugModeOn) {
             println("${actingEnemy.character.name} AP: ${actingEnemy.currentAP}")
         }
 
@@ -237,7 +237,7 @@ class BattleField(
         val difference: Int = abs(destinationSpace - currentSpaceIndex) + getPenaltyApForEnemy(destinationSpace)
         actingEnemy.currentAP -= difference
 
-        if (preferenceManager.isInDebugMode) {
+        if (preferenceManager.isDebugModeOn) {
             println("${actingEnemy.character.name} AP: ${actingEnemy.currentAP}")
         }
     }

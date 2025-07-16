@@ -72,7 +72,7 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
     override fun show() {
         conversationDialog = ConversationDialog(this)
         actionId = 0
-        isSkippable = preferenceManager.isInDebugMode
+        isSkippable = preferenceManager.isDebugModeOn
         isEnding = false
 
         title.setText("")

@@ -4,6 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage
 import com.fasterxml.jackson.annotation.JsonProperty
 import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.mapManager
+import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playBgm
@@ -45,13 +46,42 @@ class Event(
 
     private fun start(stage: Stage?) {
         when {
-            stage != null -> MessageDialog(TextReplacer.replace(text)).show(stage, AudioEvent.SE_CONVERSATION_NEXT, 3f)
-            type == "conversation" -> worldScreen.showConversationDialogFromEvent(conversationId!!, entityId!!)
-            type == "messagebox" -> worldScreen.showMessageDialog(TextReplacer.replace(text))
-            type == "stop_bgm" -> audioManager.fadeBgmInThread()
-            type == "start_bgm" -> playBgm(mapManager.currentMap.bgm)
-            type == "play_se" -> { stopAllSe(); playSe(AudioEvent.SE_REWARD) }
-            else -> throw IllegalArgumentException("Event does not recognize type: '$type'.")
+            type == "tutorial" && preferenceManager.isTutorialOn && stage != null -> {
+                MessageDialog(TextReplacer.replace(text)).show(stage, AudioEvent.SE_CONVERSATION_NEXT, 3f)
+            }
+
+            type == "tutorial" && preferenceManager.isTutorialOn && stage == null -> {
+                worldScreen.showMessageDialog(TextReplacer.replace(text))
+            }
+
+            type == "tutorial" && preferenceManager.isTutorialOn.not() -> {
+                // Do nothing, tutorial is off.
+            }
+
+            type == "conversation" -> {
+                worldScreen.showConversationDialogFromEvent(conversationId!!, entityId!!)
+            }
+
+            type == "messagebox" -> {
+                worldScreen.showMessageDialog(TextReplacer.replace(text))
+            }
+
+            type == "stop_bgm" -> {
+                audioManager.fadeBgmInThread()
+            }
+
+            type == "start_bgm" -> {
+                playBgm(mapManager.currentMap.bgm)
+            }
+
+            type == "play_se" -> {
+                stopAllSe()
+                playSe(AudioEvent.SE_REWARD)
+            }
+
+            else -> {
+                throw IllegalArgumentException("Event does not recognize type: '$type'.")
+            }
         }
     }
 

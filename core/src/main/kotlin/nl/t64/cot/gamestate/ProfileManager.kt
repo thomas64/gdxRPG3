@@ -165,7 +165,7 @@ class ProfileManager {
     private fun getVisualOf(profileIndex: Int, saveFileContent: Preferences): String {
         if (saveFileContent.contains(PROFILE_SAVE_STATE_KEY)) {
             try {
-                if (!preferenceManager.isInDebugMode) {
+                if (!preferenceManager.isDebugModeOn) {
                     createSaveStateFrom(saveFileContent, null)
                 }
                 return getFilledProfileView(profileIndex, saveFileContent)

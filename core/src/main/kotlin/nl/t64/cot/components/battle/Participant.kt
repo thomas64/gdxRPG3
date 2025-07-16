@@ -78,7 +78,7 @@ class Participant(
         val stealthScore: Int = character.getCalculatedTotalSkillOf(SkillItemId.STEALTH)
         val protectionScore: Float = character.getCalculatedTotalProtection() / 5f
 
-        if (preferenceManager.isInDebugMode) {
+        if (preferenceManager.isDebugModeOn) {
             println("A low score means a high priority in the queue!")
             println("${character.name} " +
                         "nextToTargetScore: $nextToTargetScore, " +

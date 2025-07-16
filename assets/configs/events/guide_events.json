@@ -1,13 +1,13 @@
 {
   "guide_event_action"               : {
-    "type": "messagebox",
+    "type": "tutorial",
     "text": [
       "Press the [BLUE]%action%[BLACK] to interact.",
       "Use it to interact with characters, chests, or doors."
     ]
   },
   "guide_event_clock"                : {
-    "type": "messagebox",
+    "type": "tutorial",
     "text": [
       "The clock to the right shows the current time.",
       "When the clock reaches 19:30, the day ends.",
@@ -15,7 +15,7 @@
     ]
   },
   "guide_event_inventory"            : {
-    "type"     : "messagebox",
+    "type"     : "tutorial",
     "condition": ["_n_3_>=_item_healing_potion"],
     "text"     : [
       "Press the [BLUE]%inventory%[BLACK] to access your inventory,",
@@ -23,7 +23,7 @@
     ]
   },
   "guide_event_enemy"                : {
-    "type": "messagebox",
+    "type": "tutorial",
     "text": [
       "Approaching an enemy triggers a battle.",
       "Victory in battles rewards you with [FOREST]XP[BLACK],",
@@ -31,7 +31,7 @@
     ]
   },
   "guide_event_battle_rows"          : {
-    "type": "messagebox",
+    "type": "tutorial",
     "text": [
       "Battle Tutorial (1/7)",
       "",
@@ -44,7 +44,7 @@
     ]
   },
   "guide_event_battle_advantage"     : {
-    "type": "messagebox",
+    "type": "tutorial",
     "text": [
       "Battle Tutorial (2/7)",
       "",
@@ -59,7 +59,7 @@
     ]
   },
   "guide_event_battle_battle_lock"   : {
-    "type": "messagebox",
+    "type": "tutorial",
     "text": [
       "Battle Tutorial (3/7)",
       "",
@@ -72,7 +72,7 @@
     ]
   },
   "guide_event_battle_ap"            : {
-    "type": "messagebox",
+    "type": "tutorial",
     "text": [
       "Battle Tutorial (4/7)",
       "",
@@ -84,7 +84,7 @@
     ]
   },
   "guide_event_battle_turn_order"    : {
-    "type": "messagebox",
+    "type": "tutorial",
     "text": [
       "Battle Tutorial (5/7)",
       "",
@@ -101,7 +101,7 @@
     ]
   },
   "guide_event_battle_durability"    : {
-    "type": "messagebox",
+    "type": "tutorial",
     "text": [
       "Battle Tutorial (6/7)",
       "",
@@ -113,7 +113,7 @@
     ]
   },
   "guide_event_battle_special"       : {
-    "type": "messagebox",
+    "type": "tutorial",
     "text": [
       "Battle Tutorial (7/7)",
       "",
@@ -124,7 +124,7 @@
     ]
   },
   "guide_event_quest"                : {
-    "type": "messagebox",
+    "type": "tutorial",
     "text": [
       "Press the [BLUE]%logbook%[BLACK] to access your logbook.",
       "Here, you can find all quest-related information.",
@@ -132,7 +132,7 @@
     ]
   },
   "guide_event_minimap"              : {
-    "type": "messagebox",
+    "type": "tutorial",
     "text": [
       "Press the [BLUE]%minimap%[BLACK] in large areas to view an overview of that area.",
       "This helps prevent getting lost, especially in dark caves.",
@@ -140,14 +140,14 @@
     ]
   },
   "guide_event_manual"               : {
-    "type": "messagebox",
+    "type": "tutorial",
     "text": [
       "If you missed any of these messages or want to review them,",
       "press the [BLUE]%manual%[BLACK] to see the history of these messages."
     ]
   },
   "guide_event_equipment"            : {
-    "type"     : "messagebox",
+    "type"     : "tutorial",
     "condition": ["_n_1_>=_item_basic_light_helmet"],
     "text"     : [
       "Press the [BLUE]%inventory%[BLACK] to access your inventory.",
@@ -156,7 +156,7 @@
     ]
   },
   "guide_event_conversation"         : {
-    "type": "messagebox",
+    "type": "tutorial",
     "text": [
       "During conversations with other characters,",
       "you have the opportunity to choose your responses.",
@@ -167,7 +167,7 @@
     ]
   },
   "guide_event_slow"                 : {
-    "type": "messagebox",
+    "type": "tutorial",
     "text": [
       "With the [BLUE]%slow%[BLACK] you can toggle to move stealthily.",
       "Enemies will have a harder time detecting you,",
@@ -176,7 +176,7 @@
     ]
   },
   "guide_event_xp"                   : {
-    "type"     : "messagebox",
+    "type"     : "tutorial",
     "condition": ["xp_>=_15"],
     "text"     : [
       "Weapons require a minimum rank of Intelligence, Dexterity, or",
@@ -189,7 +189,7 @@
     ]
   },
   "guide_event_spell"                : {
-    "type"     : "messagebox",
+    "type"     : "tutorial",
     "condition": ["shield_spell"],
     "text"     : [
       "You have learned a magic spell.",
@@ -198,7 +198,7 @@
     ]
   },
   "guide_event_fast"                 : {
-    "type"     : "messagebox",
+    "type"     : "tutorial",
     "condition": ["been_in_fairy_town"],
     "text"     : [
       "With the [BLUE]%fast%[BLACK] you can toggle to run.",
@@ -207,7 +207,7 @@
     ]
   },
   "guide_event_quest_reminder"       : {
-    "type"     : "messagebox",
+    "type"     : "tutorial",
     "condition": ["been_in_fairy_town"],
     "text"     : [
       "Remember to press the [BLUE]%logbook%[BLACK] to access your logbook.",
@@ -217,7 +217,7 @@
     ]
   },
   "guide_event_storage"              : {
-    "type"     : "messagebox",
+    "type"     : "tutorial",
     "condition": ["_c_==_a_q_quest_royal_sacrifice"],
     "text"     : [
       "The closet behind you can be used for storage.",
@@ -227,7 +227,7 @@
     ]
   },
   "guide_event_conversation_reminder": {
-    "type": "messagebox",
+    "type": "tutorial",
     "text": [
       "People may share [BLUE]different[BLACK] information at different times.",
       "Keep this in mind!",
@@ -235,7 +235,7 @@
     ]
   },
   "guide_event_quest_failure"        : {
-    "type"     : "messagebox",
+    "type"     : "tutorial",
     "condition": ["_r_!=_f_q_quest_honeywood_elder", "_c_==_x_q_quest_honeywood_elder"],
     "text"     : [
       "One of your main quests was failed.",
@@ -246,7 +246,7 @@
     ]
   },
   "guide_event_party_member"         : {
-    "type"     : "messagebox",
+    "type"     : "tutorial",
     "condition": ["!alone_in_party"],
     "text"     : [
       "Luana has joined your party.",

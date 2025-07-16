@@ -368,7 +368,7 @@ class BattleScreen : Screen {
             runCatching {
                 startEnemyAction()
             }.onFailure {
-                if (preferenceManager.isInDebugMode) it.printStackTrace()
+                if (preferenceManager.isDebugModeOn) it.printStackTrace()
             }.also {
                 isEnemyActing = false
             }

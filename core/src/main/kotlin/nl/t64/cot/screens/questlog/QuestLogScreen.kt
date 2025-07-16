@@ -132,7 +132,7 @@ class QuestLogScreen : ParchmentScreen() {
     }
 
     private fun cheatAllQuestsFinished() {
-        if (preferenceManager.isInDebugMode) {
+        if (preferenceManager.isDebugModeOn) {
             playSe(AudioEvent.SE_MENU_ERROR)
             questListTable.questList.selected.currentState = QuestState.FINISHED
         }

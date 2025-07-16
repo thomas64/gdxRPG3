@@ -20,14 +20,16 @@ private const val MENU_ITEM_MUSIC_ON = "Music: On"
 private const val MENU_ITEM_MUSIC_OFF = "Music: Off"
 private const val MENU_ITEM_SOUND_ON = "Sound: On"
 private const val MENU_ITEM_SOUND_OFF = "Sound: Off"
+private const val MENU_ITEM_TUTORIAL_ON = "Tutorial: On"
+private const val MENU_ITEM_TUTORIAL_OFF = "Tutorial: Off"
 private const val MENU_ITEM_DEBUG_MODE_ON = "Debug mode: On"
 private const val MENU_ITEM_DEBUG_MODE_OFF = "Debug mode: Off"
 private const val MENU_ITEM_CONTROLS = "View controls"
 private const val MENU_ITEM_BACK = "Back"
 
 private const val MENU_X = 604f
-private const val NUMBER_OF_ITEMS = 6
-private const val EXIT_INDEX = 5
+private const val NUMBER_OF_ITEMS = 7
+private const val EXIT_INDEX = 6
 
 class MenuSettingsMain : MenuSettings() {
     override val titleLogo: Texture = resourceManager.getTextureAsset(TITLE_LOGO_B)
@@ -68,6 +70,7 @@ abstract class MenuSettings : MenuScreen() {
     private lateinit var fullscreenButton: TextButton
     private lateinit var musicButton: TextButton
     private lateinit var soundButton: TextButton
+    private lateinit var tutorialButton: TextButton
     private lateinit var debugModeButton: TextButton
     private lateinit var listenerKeyVertical: ListenerKeyVertical
 
@@ -95,9 +98,10 @@ abstract class MenuSettings : MenuScreen() {
             0 -> processFullscreenButton()
             1 -> processMusicButton()
             2 -> processSoundButton()
-            3 -> processDebugModeButton()
-            4 -> processControlsButton()
-            5 -> processBackButton()
+            3 -> processTutorialButton()
+            4 -> processDebugModeButton()
+            5 -> processControlsButton()
+            6 -> processBackButton()
             else -> throw IllegalArgumentException("SelectedIndex not found.")
         }
     }
@@ -129,6 +133,11 @@ abstract class MenuSettings : MenuScreen() {
         }
     }
 
+    private fun processTutorialButton() {
+        preferenceManager.toggleTutorial()
+        tutorialButton.setText(getMenuItemTutorial())
+    }
+
     private fun processDebugModeButton() {
         preferenceManager.toggleDebugMode()
         debugModeButton.setText(getMenuItemDebugMode())
@@ -146,6 +155,7 @@ abstract class MenuSettings : MenuScreen() {
         fullscreenButton = TextButton(getMenuItemFullScreen(), TextButtonStyle(buttonStyle))
         musicButton = TextButton(getMenuItemMusic(), TextButtonStyle(buttonStyle))
         soundButton = TextButton(getMenuItemSound(), TextButtonStyle(buttonStyle))
+        tutorialButton = TextButton(getMenuItemTutorial(), TextButtonStyle(buttonStyle))
         debugModeButton = TextButton(getMenuItemDebugMode(), TextButtonStyle(buttonStyle))
         val controlsButton = TextButton(MENU_ITEM_CONTROLS, TextButtonStyle(buttonStyle))
         val backButton = TextButton(MENU_ITEM_BACK, TextButtonStyle(buttonStyle))
@@ -159,6 +169,7 @@ abstract class MenuSettings : MenuScreen() {
             add(fullscreenButton).row()
             add(musicButton).row()
             add(soundButton).row()
+            add(tutorialButton).row()
             add(debugModeButton).row()
             add(controlsButton).row()
             add(backButton)
@@ -176,8 +187,11 @@ abstract class MenuSettings : MenuScreen() {
     private fun getMenuItemSound(): String =
         if (preferenceManager.isSoundOn) MENU_ITEM_SOUND_ON else MENU_ITEM_SOUND_OFF
 
+    private fun getMenuItemTutorial(): String =
+        if (preferenceManager.isTutorialOn) MENU_ITEM_TUTORIAL_ON else MENU_ITEM_TUTORIAL_OFF
+
     private fun getMenuItemDebugMode(): String =
-        if (preferenceManager.isInDebugMode) MENU_ITEM_DEBUG_MODE_ON else MENU_ITEM_DEBUG_MODE_OFF
+        if (preferenceManager.isDebugModeOn) MENU_ITEM_DEBUG_MODE_ON else MENU_ITEM_DEBUG_MODE_OFF
 
     private fun applyListeners() {
         listenerKeyVertical = ListenerKeyVertical({ super.updateMenuIndex(it) }, NUMBER_OF_ITEMS)

@@ -18,7 +18,7 @@ class DebugRenderer(
     }
 
     fun setShowObjects() {
-        if (preferenceManager.isInDebugMode) {
+        if (preferenceManager.isDebugModeOn) {
             showObjects = !showObjects
         }
     }

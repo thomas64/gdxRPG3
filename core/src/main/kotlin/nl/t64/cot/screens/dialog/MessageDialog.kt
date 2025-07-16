@@ -42,7 +42,7 @@ class MessageDialog(
     fun show(stage: Stage, event: AudioEvent? = null, confirmDelay: Float = 0f) {
         event?.let { playSe(it) }
         dialog.show(stage)
-        if (preferenceManager.isInDebugMode) {
+        if (preferenceManager.isDebugModeOn) {
             applyListeners()
         } else {
             Utils.runWithDelay(confirmDelay) { applyListeners() }

@@ -52,7 +52,7 @@ class MessageDialog(
         fillDialog(message)
         playSe(audioEvent)
         dialog.show(stage)
-        if (Utils.preferenceManager.isInDebugMode) {
+        if (Utils.preferenceManager.isDebugModeOn) {
             setInputToStage()
         } else {
             Utils.runWithDelay(INPUT_DELAY) { setInputToStage() }

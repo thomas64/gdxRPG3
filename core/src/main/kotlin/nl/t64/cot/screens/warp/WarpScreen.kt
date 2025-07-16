@@ -82,7 +82,7 @@ class WarpScreen : ParchmentScreen() {
     }
 
     private fun cheatActivateAllPortals() {
-        if (preferenceManager.isInDebugMode) {
+        if (preferenceManager.isDebugModeOn) {
             playSe(AudioEvent.SE_MENU_ERROR)
             val portals = gameData.portals
             portals.getAllIds().forEach { portals.activate(it) }

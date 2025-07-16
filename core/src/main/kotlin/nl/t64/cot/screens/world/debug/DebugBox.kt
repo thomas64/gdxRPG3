@@ -29,7 +29,7 @@ internal class DebugBox(
     }
 
     fun setShowDebug() {
-        if (preferenceManager.isInDebugMode) {
+        if (preferenceManager.isDebugModeOn) {
             showDebug = !showDebug
         }
     }
