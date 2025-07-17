@@ -63,7 +63,11 @@ class ResourceManager {
 
     fun getTiledMapAsset(mapTitle: String?): TiledMap {
         return mapTitle?.let {
-            getAsset("$MAP_FILES_PATH$it$MAP_FILE_SUFFIX")
+            val parameters = TmxMapLoader.Parameters().apply {
+                textureMinFilter = Texture.TextureFilter.Nearest
+                textureMagFilter = Texture.TextureFilter.Nearest
+            }
+            getAsset<TiledMap>("$MAP_FILES_PATH$it$MAP_FILE_SUFFIX", parameters)
         } ?: TiledMap()
     }
 

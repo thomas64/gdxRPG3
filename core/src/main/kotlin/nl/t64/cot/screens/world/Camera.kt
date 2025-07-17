@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport
 import com.badlogic.gdx.utils.viewport.Viewport
 import nl.t64.cot.sfx.ShakeCamera
 import kotlin.math.max
+import kotlin.math.roundToInt
 
 
 private const val LERP_FACTOR: Float = 0.1f
@@ -19,6 +20,8 @@ class Camera : OrthographicCamera() {
     private val shakeCam: ShakeCamera = ShakeCamera()
     private var mapWidth: Float = 0f
     private var mapHeight: Float = 0f
+    private var originalPositionX: Float = 0f
+    private var originalPositionY: Float = 0f
 
     init {
         viewport.update(Gdx.graphics.width, Gdx.graphics.height)
@@ -64,7 +67,21 @@ class Camera : OrthographicCamera() {
         } else {
             position.lerp(Vector3(cameraPosition.x, cameraPosition.y, 0f), LERP_FACTOR)
         }
-        update()
+        super.update()
+    }
+
+    fun setPositionRoundedForPixelPerfectRendering() {
+        originalPositionX = position.x
+        originalPositionY = position.y
+        position.x = (position.x * 3f).roundToInt() / 3f
+        position.y = (position.y * 3f).roundToInt() / 3f
+        super.update()
+    }
+
+    fun restoreOriginalPositionForSmoothMovement() {
+        position.x = originalPositionX
+        position.y = originalPositionY
+        super.update()
     }
 
     fun setNewMapSize(mapWidth: Float, mapHeight: Float) {

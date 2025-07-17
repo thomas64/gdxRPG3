@@ -18,7 +18,9 @@ private val BOTTOM_LAYERS = intArrayOf(0, 1, 2, 3)
 private val UNDER_LAYERS = intArrayOf(4, 5)
 private val OVER_LAYERS = intArrayOf(6, 7, 8)
 
-class WorldRenderer(private val camera: Camera) : OrthogonalTiledMapRenderer(null) {
+class WorldRenderer(
+    private val camera: Camera
+) : OrthogonalTiledMapRenderer(null) {
 
     private val frameBuffer = FrameBuffer(Pixmap.Format.RGBA8888, Gdx.graphics.width, Gdx.graphics.height, false)
 
@@ -77,6 +79,9 @@ class WorldRenderer(private val camera: Camera) : OrthogonalTiledMapRenderer(nul
         batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA)
 
         renderPossibleBackground()
+
+        camera.setPositionRoundedForPixelPerfectRendering()
+
         batch.projectionMatrix = camera.combined
         render(BOTTOM_LAYERS)
         renderLowerTextures()
@@ -85,6 +90,8 @@ class WorldRenderer(private val camera: Camera) : OrthogonalTiledMapRenderer(nul
         render(OVER_LAYERS)
         renderParticles()
         renderLightmap()
+
+        camera.restoreOriginalPositionForSmoothMovement()
     }
 
     private fun renderPossibleBackground() {
