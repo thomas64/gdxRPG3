@@ -118,7 +118,8 @@ class WeaponAction(
                 $weaponSpecs
                 $underscores
 
-                Advantage:
+                [BLUE]+[BLACK] Advantage/
+                [FIREBRICK]-[BLACK] Disadvantage:
 
                 $effectiveness
             """.trimIndent().trimMargin(),
@@ -144,7 +145,8 @@ class WeaponAction(
                 $currentWeaponSpecs
                 ${underscores + "____________"}
 
-                Advantage:
+                [BLUE]+[BLACK] Advantage/
+                [FIREBRICK]-[BLACK] Disadvantage:
 
                 $currentEffectiveness
             """.trimIndent().trimMargin(),
@@ -154,7 +156,8 @@ class WeaponAction(
                 $newWeaponSpecs
                 $underscores
 
-                Advantage:
+
+
 
                 $newEffectiveness
             """.trimIndent().trimMargin(),
@@ -175,7 +178,8 @@ class WeaponAction(
                 $weaponSpecs
                 $underscores
 
-                Advantage:
+                [BLUE]+[BLACK] Advantage/
+                [FIREBRICK]-[BLACK] Disadvantage:
 
                 $effectiveness
             """.trimIndent().trimMargin(),
@@ -206,15 +210,15 @@ class WeaponAction(
             val enemyWeapon = enemy.getCurrentWeapon()!!
             when {
                 this.hasWeaponTriangleAdvantage(enemyWeapon) -> {
-                    """[BLUE]${enemy.character.name}[BLACK]
+                    """[BLUE]+ ${enemy.character.name}[BLACK]
                        |"""
                 }
                 this.hasWeaponTriangleDisadvantage(enemyWeapon) -> {
-                    """[FIREBRICK]${enemy.character.name}[BLACK]
+                    """[FIREBRICK]- ${enemy.character.name}[BLACK]
                        |"""
                 }
                 else -> {
-                    """[GRAY]${enemy.character.name}[BLACK]
+                    """[GRAY]  ${enemy.character.name}[BLACK]
                        |"""
                 }
             }
