@@ -7,10 +7,13 @@ import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.world.entity.events.*
 
 
+private const val CONVERSATION_COOLDOWN_IN_SECONDS = 1.0f
+
 class PhysicsNpc : PhysicsComponent() {
 
     lateinit var conversationId: String
     private var isSelected = false
+    private var conversationCooldown = 0f
 
     init {
         velocity = Constant.MOVE_SPEED_1
@@ -29,7 +32,7 @@ class PhysicsNpc : PhysicsComponent() {
             direction = event.direction
         }
         if (event is OnActionEvent) {
-            if (event.checkRect.overlaps(boundingBox)) {
+            if (event.checkRect.overlaps(boundingBox) && conversationCooldown <= 0f) {
                 isSelected = true
                 entity.send(WaitEvent(currentPosition, event.playerPosition))
             }
@@ -52,11 +55,17 @@ class PhysicsNpc : PhysicsComponent() {
 
     override fun update(entity: Entity, dt: Float) {
         this.entity = entity
+
+        if (conversationCooldown > 0f) {
+            conversationCooldown -= dt
+        }
+
         relocate(dt)
         checkObstacles()
         entity.send(PositionEvent(currentPosition))
         if (isSelected) {
             isSelected = false
+            conversationCooldown = CONVERSATION_COOLDOWN_IN_SECONDS
             worldScreen.showConversationDialogFromNpc(conversationId, entity)
         }
     }

@@ -7,6 +7,7 @@ import nl.t64.cot.screens.world.entity.events.*
 
 
 private const val DIRECTION_WAITING_TIME = 5f
+private const val CONVERSATION_COOLDOWN_IN_SECONDS = 1.0f
 
 class PhysicsScheduledNpc : PhysicsComponent() {
 
@@ -14,6 +15,7 @@ class PhysicsScheduledNpc : PhysicsComponent() {
     private var isSelected = false
     private var isBumped = false
     private var directionTime = 0f
+    private var conversationCooldown = 0f
 
     init {
         boundingBoxWidthPercentage = 0.80f
@@ -31,7 +33,7 @@ class PhysicsScheduledNpc : PhysicsComponent() {
             setBoundingBox()
         }
         if (event is OnActionEvent) {
-            if (event.checkRect.overlaps(boundingBox)) {
+            if (event.checkRect.overlaps(boundingBox) && conversationCooldown <= 0f) {
                 if (state != EntityState.IMMOBILE) {
                     direction = currentPosition.turnToPlayer(event.playerPosition, direction)
                 }
@@ -48,6 +50,10 @@ class PhysicsScheduledNpc : PhysicsComponent() {
     }
 
     override fun update(entity: Entity, dt: Float) {
+        if (conversationCooldown > 0f) {
+            conversationCooldown -= dt
+        }
+
         if (state != EntityState.IDLE) {
             isBumped = false
         }
@@ -65,6 +71,7 @@ class PhysicsScheduledNpc : PhysicsComponent() {
 
         if (isSelected) {
             isSelected = false
+            conversationCooldown = CONVERSATION_COOLDOWN_IN_SECONDS
             worldScreen.showConversationDialogFromNpc(conversationId, entity)
         }
     }
