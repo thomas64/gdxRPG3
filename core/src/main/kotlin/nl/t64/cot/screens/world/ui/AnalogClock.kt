@@ -9,21 +9,27 @@ import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import nl.t64.cot.disposeAndClear
-import kotlin.math.abs
-import kotlin.math.cbrt
-import kotlin.math.max
 
 
-private const val START_ANGLE = 90f
-private const val SIZE = 150f
-private const val PAD_RIGHT = 181f
-private const val PAD_BOTTOM = 287f
-private const val ALPHA = 0.8f
+private const val START_ANGLE: Float = 90f
+private const val SIZE: Float = 150f
+private const val CENTER: Float = SIZE / 2f
+private const val PAD_RIGHT: Float = 181f
+private const val PAD_BOTTOM: Float = 287f
+private const val ALPHA: Float = 0.8f
+private const val CIRCLE_SEGMENTS: Int = 48
+
+private const val TRANSITION_RANGE: Float = 0.25f
+private const val LIME_THRESHOLD: Float = 0.875f
+private const val GOLD_THRESHOLD: Float = 0.625f
+private const val ORANGE_THRESHOLD: Float = 0.375f
+private const val RED_THRESHOLD: Float = 0.125f
 
 class AnalogClock : Table() {
 
     private val display: Table = Table()
     private val texturesToDispose: MutableSet<Texture> = mutableSetOf()
+    private var lastPercentage: Float = -1f
 
     init {
         display.setPosition(0f, 0f)
@@ -32,11 +38,17 @@ class AnalogClock : Table() {
         super.setPosition(Gdx.graphics.width - PAD_RIGHT, PAD_BOTTOM)
     }
 
+    fun dispose() {
+        texturesToDispose.disposeAndClear()
+    }
+
     fun update(percentageOfCircle: Float) {
+        if (percentageOfCircle > 1f) return
+        if (percentageOfCircle == lastPercentage) return
+        lastPercentage = percentageOfCircle
+
         texturesToDispose.disposeAndClear()
         display.clear()
-
-        if (percentageOfCircle > 1f) return
 
         val clockColor = getColorBasedOnTime(percentageOfCircle)
         super.setColor(clockColor)
@@ -46,32 +58,30 @@ class AnalogClock : Table() {
     }
 
     private fun createTimer(percentageOfCircle: Float): Image {
-        val radius: Float = (width / 2f).coerceAtMost(height / 2f)
-        val angle = calculateAngle(percentageOfCircle)
-        val segments = calculateSegments(angle)
-        val pixmap = Pixmap(width.toInt(), height.toInt(), Pixmap.Format.RGBA8888)
-        val theta: Float = 2f * MathUtils.PI * (angle / 360f) / segments
+        val angle: Float = percentageOfCircle.calculateAngle()
+        val pixmap = Pixmap(SIZE.toInt(), SIZE.toInt(), Pixmap.Format.RGBA8888)
+        val theta: Float = 2f * MathUtils.PI * (angle / 360f) / CIRCLE_SEGMENTS
         val cos: Float = MathUtils.cos(theta)
         val sin: Float = MathUtils.sin(theta)
 
-        var cx: Float = radius * MathUtils.cos(START_ANGLE * MathUtils.degreesToRadians)
-        var cy: Float = radius * MathUtils.sin(-1 * START_ANGLE * MathUtils.degreesToRadians)
+        var cx: Float = CENTER * MathUtils.cos(START_ANGLE * MathUtils.degreesToRadians)
+        var cy: Float = CENTER * MathUtils.sin(-1 * START_ANGLE * MathUtils.degreesToRadians)
 
         pixmap.setColor(color)
 
-        (0 until segments).forEach { _ ->
+        repeat(CIRCLE_SEGMENTS) {
             val pcx = cx
             val pcy = cy
             val temp = cx
             cx = cos * cx - sin * cy
             cy = sin * temp + cos * cy
             pixmap.fillTriangle(
-                width.toInt() / 2,
-                height.toInt() / 2,
-                (width / 2f + pcx).toInt(),
-                (height / 2f + pcy).toInt(),
-                (width / 2f + cx).toInt(),
-                (height / 2f + cy).toInt()
+                CENTER.toInt(),
+                CENTER.toInt(),
+                (CENTER + pcx).toInt(),
+                (CENTER + pcy).toInt(),
+                (CENTER + cx).toInt(),
+                (CENTER + cy).toInt()
             )
         }
         pixmap.blending = Blending.None
@@ -85,40 +95,25 @@ class AnalogClock : Table() {
     private fun getColorBasedOnTime(percentageOfCircle: Float): Color {
         val clampedPercentage = MathUtils.clamp(percentageOfCircle, 0f, 1f)
         return when {
-            clampedPercentage <= 0.125 -> {
-                Color.RED
-            }
+            clampedPercentage <= RED_THRESHOLD ->
+                Color.RED.cpy()
 
-            clampedPercentage <= 0.375 -> {
-                val startColor = Color.RED.cpy()
-                val endColor = Color.ORANGE
-                startColor.lerp(endColor, (clampedPercentage - 0.125f) / 0.25f)
-            }
+            clampedPercentage <= ORANGE_THRESHOLD ->
+                Color.RED.cpy().lerp(Color.ORANGE, (clampedPercentage - RED_THRESHOLD) / TRANSITION_RANGE)
 
-            clampedPercentage <= 0.625 -> {
-                val startColor = Color.ORANGE.cpy()
-                val endColor = Color.GOLD
-                startColor.lerp(endColor, (clampedPercentage - 0.375f) / 0.25f)
-            }
+            clampedPercentage <= GOLD_THRESHOLD ->
+                Color.ORANGE.cpy().lerp(Color.GOLD, (clampedPercentage - ORANGE_THRESHOLD) / TRANSITION_RANGE)
 
-            clampedPercentage <= 0.875 -> {
-                val startColor = Color.GOLD.cpy()
-                val endColor = Color.LIME
-                startColor.lerp(endColor, (clampedPercentage - 0.625f) / 0.25f)
-            }
+            clampedPercentage <= LIME_THRESHOLD ->
+                Color.GOLD.cpy().lerp(Color.LIME, (clampedPercentage - GOLD_THRESHOLD) / TRANSITION_RANGE)
 
-            else -> {
-                Color.LIME
-            }
+            else ->
+                Color.LIME.cpy()
         }
     }
 
-    private fun calculateAngle(remainingPercentage: Float): Float {
+    private fun Float.calculateAngle(): Float {
+        val remainingPercentage = this
         return 360f - (360f * remainingPercentage)
     }
-
-    private fun calculateSegments(angle: Float): Int {
-        return max(1, (6f * cbrt(abs(angle).toDouble()) * (abs(angle) / 360f)).toInt())
-    }
-
 }
