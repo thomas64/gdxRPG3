@@ -280,10 +280,14 @@
           {"condition": ["i_c_==_k_q_this"], "text": "*Offer to help with the bat situation.*", "command": "ACCEPT_QUEST", "nextId": "20"},
           {"condition": ["i_c_==_a_q_this", "i_tn_1_q_this"], "text": "*Inquire further about the location of the bats.*", "nextId": "40"},
           {"condition": ["i_ta_1_q_this"], "text": "*Inform her that the bats have been dealt with.*", "nextId": "50"},
-          {"text": "*Accept the offer for some rest.* [BLUE](Restore health)", "nextId": "4"},
+          {"condition": ["i_time_before_18:15"], "text": "*Accept the offer for some rest.* [BLUE](Restore health)", "nextId": "4"},
+          {"condition": ["i_time_after_18:15"], "text": "*Accept the offer for some rest.* [BLUE](Restore health)", "nextId": "6"},
           {"condition": ["i_r_>=_k_q_this", "i_c_==_u_q_this"], "text": "*Express your concern about the innkeeper's troubled demeanor.*", "nextId": "10"},
           {"condition": ["i_r_>=_k_q_this", "i_c_==_u_q_this"], "text": "*Offer to help with the bat situation she will mention.*", "command": "ACCEPT_QUEST", "nextId": "15"},
-          {"condition": ["i_time_before_18:45"], "text": "*Ask her about the current vacancies.*", "nextId": "70"},
+          {"condition": ["i_time_before_18:15"], "text": "*Ask her about the current vacancies.*", "nextId": "70"},
+          {"condition": ["i_time_between_18:15_and_18:45"], "text": "*Ask her about the current vacancies.*", "nextId": "72"},
+          {"condition": ["i_time_between_18:45_and_19:00"], "text": "*Ask her about the current vacancies.*", "nextId": "74"},
+          {"condition": ["i_time_after_19:00"], "text": "*Ask her about the current vacancies.*", "nextId": "75"},
           {"text": "*Decline the offer for now. Take your leave.*", "command": "EXIT"}
         ]
       },
@@ -291,14 +295,15 @@
       "4"   : {"text": ["How long would you like to rest?"]},
       "5"   : {
         "choices": [
-          {"text": "*Just a 1 hour rest.*", "command": "HEAL_LIFE_01", "nextId": "3"},
-          {"condition": ["i_time_before_08:00"], "text": "*Until 09:00.*", "command": "HEAL_LIFE_09", "nextId": "3"},
-          {"condition": ["i_time_before_11:00"], "text": "*Until 12:00.*", "command": "HEAL_LIFE_12", "nextId": "3"},
-          {"condition": ["i_time_before_14:00"], "text": "*Until 15:00.*", "command": "HEAL_LIFE_15", "nextId": "3"},
-          {"condition": ["i_time_before_17:00"], "text": "*Until 18:00.*", "command": "HEAL_LIFE_18", "nextId": "3"},
+          {"text": "*Just a 1 hour rest.*", "command": "HEAL_LIFE_0060", "nextId": "3"},
+          {"condition": ["i_time_before_08:00"], "text": "*Until 09:00.*", "command": "HEAL_LIFE_0900", "nextId": "3"},
+          {"condition": ["i_time_before_11:00"], "text": "*Until 12:00.*", "command": "HEAL_LIFE_1200", "nextId": "3"},
+          {"condition": ["i_time_before_14:00"], "text": "*Until 15:00.*", "command": "HEAL_LIFE_1500", "nextId": "3"},
+          {"condition": ["i_time_before_17:00"], "text": "*Until 18:00.*", "command": "HEAL_LIFE_1800", "nextId": "3"},
           {"text": "(Back)", "nextId": "2"}
         ]
       },
+      "6"   : {"text": ["I'm sorry, Mozes, but there are no beds available right now. I shouldn't have mentioned it."], "choices": [{"nextId": "2"}]},
       "10"  : {"text": ["Trouble? In this establishment? Ridiculous! Nothing could be further from the truth. Why, you won't find a better resting place for miles around. Now... whoever's been spreading that silly gossip about upstairs is... well..."]},
       "11"  : {"text": ["... obviously just a no good tongue wagger, eager to mislead people. I've got nothing to hide here! It's nothing. A trifle. You have no need to be afraid or to find another inn. Those bats never did any harm. At least not very much."]},
       "12"  : {
@@ -318,6 +323,11 @@
       "60"  : {"text": ["Hey there Mozes! Did you already do something about those 'visitors', or would you like to rest here and be completely revitalized for just 1 gold piece?"], "choices": [{"nextId": "2"}]},
       "70"  : {"text": ["It's a bit quiet here at the moment. I wouldn't mind some more customers."]},
       "71"  : {"text": ["This evening however, I expect a special guest. I think he was asked by the village elder to come here."], "choices": [{"nextId": "2"}]},
+      "72"  : {"text": ["I'm sorry, Mozes, but there are no beds available right now. I shouldn't have mentioned it."]},
+      "73"  : {"text": ["This evening for example, I expect a special guest. I think he was asked by the village elder to come here."], "choices": [{"nextId": "2"}]},
+      "74"  : {"text": ["I'm sorry, Mozes, but there are no beds available right now. I shouldn't have mentioned it."], "choices": [{"nextId": "2"}]},
+      "75"  : {"text": ["I'm sorry, Mozes, but there are no beds available right now. I shouldn't have mentioned it."]},
+      "76"  : {"text": ["Right now, we even have a special guest staying here. I think he was asked by the village elder to come here."], "choices": [{"nextId": "2"}]},
       "1000": {"text": ["I'm sorry, Mozes, you don't have enough gold."], "choices": [{"command": "EXIT"}]},
       "1399": {"text": ["Such a brave yet modest hero! You didn't even take your reward."], "choices": [{"command": "REWARD_QUEST"}]},
       "1400": {"text": ["Welcome back, my fearless friend! Thanks again for your help. Would you like to rest here and be completely revitalized for just 1 gold piece?"], "choices": [{"nextId": "2"}]}

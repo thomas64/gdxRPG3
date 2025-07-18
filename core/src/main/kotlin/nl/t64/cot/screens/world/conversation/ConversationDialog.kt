@@ -188,11 +188,12 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             ConversationCommand.LOAD_SCHOOL -> loadSchool(nextId)
             ConversationCommand.AUTO_SAVE -> autoSave(nextId)
             ConversationCommand.SAVE_GAME -> saveGame(nextId)
-            ConversationCommand.HEAL_LIFE_01 -> healLife(nextId, "1 hour")
-            ConversationCommand.HEAL_LIFE_09 -> healLife(nextId, "09:00")
-            ConversationCommand.HEAL_LIFE_12 -> healLife(nextId, "12:00")
-            ConversationCommand.HEAL_LIFE_15 -> healLife(nextId, "15:00")
-            ConversationCommand.HEAL_LIFE_18 -> healLife(nextId, "18:00")
+            ConversationCommand.HEAL_LIFE_0015 -> healLife(nextId, "00:15")
+            ConversationCommand.HEAL_LIFE_0060 -> healLife(nextId, "00:60")
+            ConversationCommand.HEAL_LIFE_0900 -> healLife(nextId, "09:00")
+            ConversationCommand.HEAL_LIFE_1200 -> healLife(nextId, "12:00")
+            ConversationCommand.HEAL_LIFE_1500 -> healLife(nextId, "15:00")
+            ConversationCommand.HEAL_LIFE_1800 -> healLife(nextId, "18:00")
             ConversationCommand.RECEIVE_XP -> receiveXp(nextId)
             ConversationCommand.RECEIVE_SPELLS -> receiveSpells(nextId)
             ConversationCommand.RECEIVE_SKILLS -> receiveSkills(nextId)
@@ -282,15 +283,14 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         }
         delayInputListeners()
         Utils.runWithDelay(Constant.FADE_DURATION) {
-            if (time == "1 hour") {
-                gameData.clock.takeHour()
-            } else {
-                gameData.clock.setTimeOfDay(time)
+            when (time) {
+                "00:15" -> gameData.clock.takeQuarterHour()
+                "00:60" -> gameData.clock.takeHour()
+                else -> gameData.clock.setTimeOfDay(time)
             }
             gameData.party.fullRecover()
         }
-        conversationObserver.notifyFade(duration = 1f,
-                                        actionAfterFade = { continueConversation(nextId) })
+        conversationObserver.notifyFade(duration = 1f, actionAfterFade = { continueConversation(nextId) })
     }
 
     private fun pay(price: Int) {
