@@ -3,6 +3,7 @@ package nl.t64.cot.screens.battle
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.Texture
+import com.badlogic.gdx.scenes.scene2d.Actor
 import com.badlogic.gdx.scenes.scene2d.ui.*
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.List.ListStyle
@@ -64,17 +65,23 @@ class BattleScreenBuilder {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    fun createHeroTable(heroes: List<HeroItem>, getCurrentAp: (Character) -> Int): Table {
+    fun createHeroTable(heroes: List<HeroItem>,
+                        getCurrentAp: (Character) -> Int,
+                        currentParticipantName: String
+    ): Table {
         return Table(tableSkin).apply {
             defaults().height(Constant.FACE_SIZE).spaceBottom(4f)
             columnDefaults(0).width(Constant.FACE_SIZE)
             top().left()
             setPosition(20f, Gdx.graphics.height - 20f)
-            heroes.forEach { addHero(it, getCurrentAp) }
+            heroes.forEach { addHero(it, getCurrentAp, currentParticipantName) }
         }
     }
 
-    private fun Table.addHero(hero: HeroItem, getCurrentAp: (Character) -> Int) {
+    private fun Table.addHero(hero: HeroItem,
+                              getCurrentAp: (Character) -> Int,
+                              currentParticipantName: String
+    ) {
         val currentAp: Int = getCurrentAp.invoke(hero)
         val maximumAP: Int = hero.getCalculatedActionPoints()
 
@@ -111,23 +118,23 @@ class BattleScreenBuilder {
 
         statsStack.add(Image(Utils.createFullBorderWhite()))
 
-        add(Utils.getFaceImage(hero.id).apply { if (hero.isDead) color = Color.DARK_GRAY })
+        add(createFaceImage(hero, currentParticipantName, isFlipped = true))
         add(statsStack).row()
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    fun createEnemyTable(enemies: List<EnemyItem>): Table {
+    fun createEnemyTable(enemies: List<EnemyItem>, currentParticipantName: String): Table {
         return Table(tableSkin).apply {
             defaults().height(Constant.FACE_SIZE).spaceBottom(4f)
             columnDefaults(1).width(Constant.FACE_SIZE)
             top().left()
             setPosition(Gdx.graphics.width - Constant.FACE_SIZE - 170f - 40f, Gdx.graphics.height - 20f)
-            enemies.forEach { addEnemy(it) }
+            enemies.forEach { addEnemy(it, currentParticipantName) }
         }
     }
 
-    private fun Table.addEnemy(enemy: EnemyItem) {
+    private fun Table.addEnemy(enemy: EnemyItem, currentParticipantName: String) {
         val enemyTable = Table(tableSkin).apply {
             defaults().left()
             add(enemy.name).width(170f).height(28f).colspan(2).padLeft(10f).padRight(10f).row()
@@ -167,9 +174,7 @@ class BattleScreenBuilder {
         statsStack.add(Image(Utils.createFullBorderWhite()))
 
         add(statsStack)
-        val faceImage = Utils.getFaceImage(enemy.id, isFlipped = false)
-            .apply { if (enemy.isDead) color = Color.DARK_GRAY }
-        add(faceImage).row()
+        add(createFaceImage(enemy, currentParticipantName, isFlipped = false)).row()
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -501,6 +506,24 @@ class BattleScreenBuilder {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private fun createFaceImage(character: Character,
+                                currentParticipantName: String,
+                                isFlipped: Boolean
+    ): Actor {
+        val faceImage = Utils.getFaceImage(character.id, isFlipped)
+            .apply { if (character.isDead) color = Color.DARK_GRAY }
+
+        if (character.name == currentParticipantName) {
+            val stack = Stack()
+            stack.add(Constant.GRAY.toImage())
+            stack.add(faceImage)
+            stack.add(Image(Utils.createFullBorderWhite()).apply { color = Color.GOLD })
+            return stack
+        } else {
+            return faceImage
+        }
+    }
 
     private fun createHpBar(character: Character): Stack {
         return Stack().apply {

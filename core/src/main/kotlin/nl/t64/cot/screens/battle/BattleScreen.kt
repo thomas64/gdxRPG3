@@ -160,29 +160,35 @@ class BattleScreen : Screen {
             return
         }
 
-        tableManager.updateHeroTable(gameData.party.getAllHeroes(), turnManager::getCurrentApOf)
-        tableManager.updateEnemyTable(enemies.getAll())
-        tableManager.updateTurnTable(turnManager)
-
         if (isPreBattle) {
-            tableManager.updateBattleField(battleField)
+            updateAllTables()
             return
         }
 
-        val tempParticipant1 = currentParticipant
-        currentParticipant = turnManager.currentParticipant
-        val tempParticipant2 = currentParticipant
-        if (tempParticipant1 != tempParticipant2) {
-            hasCharacterBlinked = false
-        }
-
-        tableManager.updateBattleField(battleField)
+        updateCurrentParticipant()
+        updateAllTables()
 
         when {
             enemies.getAll().none { it.isAlive } -> winBattle()
             gameData.party.getPlayer().isDead -> gameOver()
             currentParticipant.isHero -> takeTurnHero()
             else -> takeTurnEnemy()
+        }
+    }
+
+    private fun updateAllTables() {
+        tableManager.updateHeroTable(gameData.party.getAllHeroes(), turnManager::getCurrentApOf)
+        tableManager.updateEnemyTable(enemies.getAll())
+        tableManager.updateTurnTable(turnManager)
+        tableManager.updateBattleField(battleField)
+    }
+
+    private fun updateCurrentParticipant() {
+        val tempParticipant1 = currentParticipant
+        currentParticipant = turnManager.currentParticipant
+        val tempParticipant2 = currentParticipant
+        if (tempParticipant1 != tempParticipant2) {
+            hasCharacterBlinked = false
         }
     }
 
@@ -357,7 +363,6 @@ class BattleScreen : Screen {
 
     private fun takeTurnHero() {
         if (isDelayingTurn) return
-        possibleBlinkCurrentParticipant()
         menuManager.possibleSetupActionTable()
     }
 

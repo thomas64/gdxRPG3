@@ -20,13 +20,13 @@ class BattleTableManager(
 
     fun updateHeroTable(heroes: List<HeroItem>, getCurrentAp: (Character) -> Int) {
         heroTable.remove()
-        heroTable = screenBuilder.createHeroTable(heroes, getCurrentAp)
+        heroTable = screenBuilder.createHeroTable(heroes, getCurrentAp, currentParticipant.invoke().character.name)
         stage.addActor(heroTable)
     }
 
     fun updateEnemyTable(enemies: List<EnemyItem>) {
         enemyTable.remove()
-        enemyTable = screenBuilder.createEnemyTable(enemies)
+        enemyTable = screenBuilder.createEnemyTable(enemies, currentParticipant.invoke().character.name)
         stage.addActor(enemyTable)
     }
 
