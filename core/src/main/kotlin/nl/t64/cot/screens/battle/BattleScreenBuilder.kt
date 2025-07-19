@@ -34,7 +34,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.List as GdxList
 
 
 private const val TITLE_TEXT = "Battle...!"
-private const val BAR_WIDTH = 100f
+private const val BAR_WIDTH = 145f
 private const val BAR_HEIGHT = 18f
 
 class BattleScreenBuilder {
@@ -82,44 +82,67 @@ class BattleScreenBuilder {
                               getCurrentAp: (Character) -> Int,
                               currentParticipantName: String
     ) {
-        val currentAp: Int = getCurrentAp.invoke(hero)
-        val maximumAP: Int = hero.getCalculatedActionPoints()
-
-        val heroTable = Table(tableSkin).apply {
-            defaults().left().height(30f)
-            add(hero.name).width(150f).colspan(2).padLeft(10f).padRight(10f).row()
-            add("HP:").width(50f).padLeft(10f)
-            add(createHpBar(hero)).width(BAR_WIDTH).height(BAR_HEIGHT).padRight(10f).row()
-            add("SP:").width(50f).padLeft(10f)
-            add(createSpBar(hero)).width(BAR_WIDTH).height(BAR_HEIGHT).padRight(10f).row()
-            add("AP:").width(50f).padLeft(10f)
-            add("$currentAp/$maximumAP").width(BAR_WIDTH).height(BAR_HEIGHT).padRight(10f).row()
-            background = transparent
-        }
-
         val statsStack = Stack()
-        statsStack.add(heroTable)
-
-        hero.getInventoryItem(InventoryGroup.WEAPON)?.let {
-            val textureRegion = resourceManager.getAtlasTexture(it.id)
-            val image = Image(textureRegion).apply { setScaling(Scaling.fit) }
-            val container = Container(image).top().right().size(35f).pad(5f)
-            val table = Table(tableSkin).apply { add(container).width(170f).height(Constant.FACE_SIZE) }
-            statsStack.add(table)
-        }
-
-        hero.getInventoryItem(InventoryGroup.SHIELD)?.let {
-            val textureRegion = resourceManager.getAtlasTexture(it.id)
-            val image = Image(textureRegion).apply { setScaling(Scaling.fit) }
-            val container = Container(image).bottom().right().size(35f).pad(5f)
-            val table = Table(tableSkin).apply { add(container).width(170f).height(Constant.FACE_SIZE) }
-            statsStack.add(table)
-        }
-
+        statsStack.add(createStatsTableFor(hero, getCurrentAp))
+        statsStack.add(createWeaponSlotFor(hero))
+        statsStack.add(createShieldSlotFor(hero))
         statsStack.add(Image(Utils.createFullBorderWhite()))
 
         add(createFaceImage(hero, currentParticipantName, isFlipped = true))
         add(statsStack).row()
+    }
+
+    private fun createStatsTableFor(hero: HeroItem, getCurrentAp: (Character) -> Int): Table {
+        val currentAp: Int = getCurrentAp.invoke(hero)
+        val maximumAP: Int = hero.getCalculatedActionPoints()
+
+        return Table(tableSkin).apply {
+            defaults().left().height(30f)
+            add(hero.name).width(185f).colspan(2).padLeft(10f).padRight(10f).row()
+            add("HP:").width(40f).padLeft(10f)
+            add(createHpBar(hero)).width(BAR_WIDTH).height(BAR_HEIGHT).padRight(10f).row()
+            add("SP:").width(40f).padLeft(10f)
+            add(createSpBar(hero)).width(BAR_WIDTH).height(BAR_HEIGHT).padRight(10f).row()
+            add("AP:").width(40f).padLeft(10f)
+            add(createApDots(currentAp, maximumAP)).width(BAR_WIDTH).height(BAR_HEIGHT).padRight(10f).row()
+            background = transparent
+        }
+    }
+
+    private fun createWeaponSlotFor(hero: HeroItem): Table {
+        val weaponItem: InventoryItem? = hero.getInventoryItem(InventoryGroup.WEAPON)
+        val weaponStack = Stack().apply {
+            if (weaponItem != null) {
+                val textureRegion = resourceManager.getAtlasTexture(weaponItem.id)
+                val image = Image(textureRegion).apply { setScaling(Scaling.fit) }
+                val container = Container(image).top().right().size(35f).padTop(5f).padRight(45f)
+                add(container)
+            }
+            val image = Image(Utils.createFullBorderWhite())
+            val container = Container(image).top().right().size(35f).padTop(5f).padRight(45f)
+            add(container)
+        }
+        return Table(tableSkin).apply {
+            add(weaponStack).width(205f).height(Constant.FACE_SIZE)
+        }
+    }
+
+    private fun createShieldSlotFor(hero: HeroItem): Table {
+        val shieldItem: InventoryItem? = hero.getInventoryItem(InventoryGroup.SHIELD)
+        val shieldStack = Stack().apply {
+            if (shieldItem != null) {
+                val textureRegion = resourceManager.getAtlasTexture(shieldItem.id)
+                val image = Image(textureRegion).apply { setScaling(Scaling.fit) }
+                val container = Container(image).top().right().size(35f).padTop(5f).padRight(5f)
+                add(container)
+            }
+            val image = Image(Utils.createFullBorderWhite())
+            val container = Container(image).top().right().size(35f).padTop(5f).padRight(5f)
+            add(container)
+        }
+        return Table(tableSkin).apply {
+            add(shieldStack).width(205f).height(Constant.FACE_SIZE)
+        }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -129,23 +152,33 @@ class BattleScreenBuilder {
             defaults().height(Constant.FACE_SIZE).spaceBottom(4f)
             columnDefaults(1).width(Constant.FACE_SIZE)
             top().left()
-            setPosition(Gdx.graphics.width - Constant.FACE_SIZE - 170f - 40f, Gdx.graphics.height - 20f)
+            setPosition(Gdx.graphics.width - Constant.FACE_SIZE - 185f - 40f, Gdx.graphics.height - 20f)
             enemies.forEach { addEnemy(it, currentParticipantName) }
         }
     }
 
     private fun Table.addEnemy(enemy: EnemyItem, currentParticipantName: String) {
-        val enemyTable = Table(tableSkin).apply {
+        val statsStack = Stack()
+        statsStack.add(createStatsTableFor(enemy))
+        statsStack.add(createWeaponSlotFor(enemy))
+        statsStack.add(createShieldSlotFor(enemy))
+        statsStack.add(Image(Utils.createFullBorderWhite()))
+
+        add(statsStack)
+        add(createFaceImage(enemy, currentParticipantName, isFlipped = false)).row()
+    }
+
+    private fun createStatsTableFor(enemy: EnemyItem): Table {
+        return Table(tableSkin).apply {
             defaults().left()
-            add(enemy.name).width(170f).height(28f).colspan(2).padLeft(10f).padRight(10f).row()
-            add("HP:").width(50f).height(28f).padLeft(10f)
+            add(enemy.name).width(185f).height(28f).colspan(2).padLeft(10f).padRight(10f).row()
+            add("HP:").width(40f).height(28f).padLeft(10f)
             add(createHpBar(enemy)).width(BAR_WIDTH).height(BAR_HEIGHT).padRight(10f).row()
             background = transparent
         }
+    }
 
-        val statsStack = Stack()
-        statsStack.add(enemyTable)
-
+    private fun createWeaponSlotFor(enemy: EnemyItem): Table {
         // todo, dit is een enorme tijdelijke regel, op deze manier aan de verwijderde bite skill komen, is niet heel flexibel.
         // idee om het op te lossen: attackName: String toevoegen aan EnemyItem, en alleen onderstaande in de json invullen.
         // neem attackName als deze gevuld is met bite of body_slam oid, en als deze leeg is pak het wapen.
@@ -155,26 +188,38 @@ class BattleScreenBuilder {
             else -> enemy.getInventoryItem(InventoryGroup.WEAPON)?.id
         }
 
-        skillName?.let {
-            val textureRegion = resourceManager.getAtlasTexture(it)
-            val image = Image(textureRegion).apply { setScaling(Scaling.fit) }
-            val container = Container(image).top().left().size(35f).pad(5f)
-            val table = Table(tableSkin).apply { add(container).width(190f).height(Constant.FACE_SIZE) }
-            statsStack.add(table)
+        val weaponStack = Stack().apply {
+            if (skillName != null) {
+                val textureRegion = resourceManager.getAtlasTexture(skillName)
+                val image = Image(textureRegion).apply { setScaling(Scaling.fit) }
+                val container = Container(image).top().left().size(35f).padTop(5f).padLeft(5f)
+                add(container)
+            }
+            val image = Image(Utils.createFullBorderWhite())
+            val container = Container(image).top().left().size(35f).padTop(5f).padLeft(5f)
+            add(container)
         }
-
-        enemy.getInventoryItem(InventoryGroup.SHIELD)?.let {
-            val textureRegion = resourceManager.getAtlasTexture(it.id)
-            val image = Image(textureRegion).apply { setScaling(Scaling.fit) }
-            val container = Container(image).bottom().left().size(35f).pad(5f)
-            val table = Table(tableSkin).apply { add(container).width(190f).height(Constant.FACE_SIZE) }
-            statsStack.add(table)
+        return Table(tableSkin).apply {
+            add(weaponStack).width(205f).height(Constant.FACE_SIZE)
         }
+    }
 
-        statsStack.add(Image(Utils.createFullBorderWhite()))
-
-        add(statsStack)
-        add(createFaceImage(enemy, currentParticipantName, isFlipped = false)).row()
+    private fun createShieldSlotFor(enemy: EnemyItem): Table {
+        val shieldItem = enemy.getInventoryItem(InventoryGroup.SHIELD)
+        val shieldStack = Stack().apply {
+            if (shieldItem != null) {
+                val textureRegion = resourceManager.getAtlasTexture(shieldItem.id)
+                val image = Image(textureRegion).apply { setScaling(Scaling.fit) }
+                val container = Container(image).top().left().size(35f).padTop(5f).padLeft(45f)
+                add(container)
+            }
+            val image = Image(Utils.createFullBorderWhite())
+            val container = Container(image).top().left().size(35f).padTop(5f).padLeft(45f)
+            add(container)
+        }
+        return Table(tableSkin).apply {
+            add(shieldStack).width(205f).height(Constant.FACE_SIZE)
+        }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -320,17 +365,17 @@ class BattleScreenBuilder {
         val maxAp: Int = currentParticipant.maximumAP
         val actions: List<Pair<String, Int>> = listOf(
             // @formatter:off
-            String.format("%-12s%6s", "Attack",     "? AP")         to attackAp,
-            String.format("%-12s%6s", "Special",    "4 AP")         to 4,
-            String.format("%-12s%6s", "Move",       if (curAp <= 1) "1 AP" else "1-$curAp AP") to 1,
-            String.format("%-12s%6s", "Equipment",  "3 AP")         to 3,
-            String.format("%-12s%6s", "Preview",    "")             to 0,
-            String.format("%-12s%6s", "Potion",     "3 AP")         to 3,
-            String.format("%-12s%6s", "Party",      "")             to 0,
-            String.format("%-12s%6s", "Flee",       "$maxAp AP")    to maxAp,
-            String.format("%-12s%6s", "Delay turn", "1 AP")         to 1,
-            String.format("%-12s%6s", "Rest",       "$curAp AP")    to 1,
-            String.format("%-12s%6s", "End turn",   "")             to 0
+            String.format("%-11s%7s", "Attack",     "? AP")         to attackAp,
+            String.format("%-11s%7s", "Special",    "4 AP")         to 4,
+            String.format("%-11s%7s", "Move",       if (curAp <= 1) "1 AP" else "1-$curAp AP") to 1,
+            String.format("%-11s%7s", "Equipment",  "3 AP")         to 3,
+            String.format("%-11s%7s", "Preview",    "")             to 0,
+            String.format("%-11s%7s", "Potion",     "3 AP")         to 3,
+            String.format("%-11s%7s", "Party",      "")             to 0,
+            String.format("%-11s%7s", "Flee",       "$maxAp AP")    to maxAp,
+            String.format("%-11s%7s", "Delay turn", "1 AP")         to 1,
+            String.format("%-11s%7s", "Rest",       "$curAp AP")    to 1,
+            String.format("%-11s%7s", "End turn",   "")             to 0
             // @formatter:on
         )
         val actionStrings: List<String> = actions.map { (action, ap) ->
@@ -563,6 +608,32 @@ class BattleScreenBuilder {
 
     private fun createSpLabel(hero: HeroItem): Label {
         return Label("${hero.currentSp} ", barFontStyle).apply { setAlignment(Align.right) }
+    }
+
+    private fun createApDots(currentAp: Int, maximumAP: Int): Table {
+        val apTable = Table().apply { left() }
+
+        repeat(currentAp.coerceAtMost(maximumAP)) {
+            val filledDot = Color.LIME.toImage()
+            apTable.add(filledDot).size(10f, 12f).padRight(5f)
+        }
+
+        when {
+            currentAp < maximumAP -> {
+                repeat(maximumAP - currentAp) {
+                    val emptyDot = Color.GRAY.toImage()
+                    apTable.add(emptyDot).size(10f, 12f).padRight(5f)
+                }
+            }
+            currentAp > maximumAP -> {
+                repeat(currentAp - maximumAP) {
+                    val bonusDot = Color.CYAN.toImage()
+                    apTable.add(bonusDot).size(10f, 12f).padRight(5f)
+                }
+            }
+        }
+
+        return apTable
     }
 
     private fun Color.toImage(): Image {

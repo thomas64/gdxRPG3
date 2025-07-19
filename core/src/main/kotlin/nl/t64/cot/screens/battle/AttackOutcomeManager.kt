@@ -68,10 +68,10 @@ class AttackOutcomeManager(
                 playDamageEffect(battleField, "${this.damage} !", Color.RED, AudioEvent.SE_CRIT_HIT)
             }
             this.hasAdvantage -> {
-                playDamageEffect(battleField, "${this.damage}", Color.RED, AudioEvent.SE_DAMAGE_ADVANTAGE)
+                playDamageEffect(battleField, "${this.damage} +", Color.RED, AudioEvent.SE_DAMAGE_ADVANTAGE)
             }
             this.hasDisadvantage -> {
-                playDamageEffect(battleField, "${this.damage}", Color.CORAL, AudioEvent.SE_DAMAGE_DISADVANTAGE)
+                playDamageEffect(battleField, "${this.damage} -", Color.CORAL, AudioEvent.SE_DAMAGE_DISADVANTAGE)
             }
             else -> {
                 playDamageEffect(battleField, "${this.damage}", Color.SCARLET, AudioEvent.SE_DAMAGE_REGULAR)
