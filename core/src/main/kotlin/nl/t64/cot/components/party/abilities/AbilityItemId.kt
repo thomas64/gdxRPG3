@@ -6,7 +6,7 @@ enum class AbilityItemId : SuperEnum {
 
     STRIKE_2,
     STRIKE_3,
-    STRIKE_3S,
+    STRIKE_3F,
     STRIKE_4,
 
     BITE_3,
@@ -16,7 +16,12 @@ enum class AbilityItemId : SuperEnum {
 
     STAGGER,
 
+    SNIPER_ARROW,
+    BRUTE_FORCE,
+    SHIELD_BASH,
     DOUBLE_THROW,
+    GHOST_TOUCH,
+    BACKSTAB,
 
     FIRE,
     ELFIRE,

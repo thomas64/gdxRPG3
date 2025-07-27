@@ -48,8 +48,8 @@
     "text": [
       "Battle Tutorial (2/7)",
       "",
-      "Each enemy has an [BLUE]advantage[BLACK] and a",
-      "[FIREBRICK]disadvantage[BLACK] to certain weapon types.",
+      "Each enemy has an [BLUE]advantage[BLACK] ([BLUE]+[BLACK]) and a",
+      "[FIREBRICK]disadvantage[BLACK] ([FIREBRICK]-[BLACK]) to certain weapon types.",
       "",
       "Try to use the [BLUE]right weapon type[BLACK]",
       "against the enemy's disadvantage.",

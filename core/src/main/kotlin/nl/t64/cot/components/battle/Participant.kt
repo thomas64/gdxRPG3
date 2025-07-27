@@ -126,10 +126,15 @@ class Participant(
             AbilityItemId.BODY_SLAM_2 -> Strike(abilityItem, this)
             AbilityItemId.STRIKE_2,
             AbilityItemId.STRIKE_3,
-            AbilityItemId.STRIKE_3S,
+            AbilityItemId.STRIKE_3F,
             AbilityItemId.STRIKE_4 -> Strike(abilityItem, this)
             AbilityItemId.STAGGER -> Stagger(abilityItem, this)
+            AbilityItemId.SNIPER_ARROW,
+            AbilityItemId.BRUTE_FORCE,
+            AbilityItemId.SHIELD_BASH,
             AbilityItemId.DOUBLE_THROW -> DoubleThrow(abilityItem, this)
+            AbilityItemId.GHOST_TOUCH,
+            AbilityItemId.BACKSTAB,
 
             AbilityItemId.FIRE,
             AbilityItemId.ELFIRE,

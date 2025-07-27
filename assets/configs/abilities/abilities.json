@@ -13,7 +13,7 @@
     "damage_multiplier": 1.0,
     "damage_formula"   : "(3f / 3f) * 1.0f"
   },
-  "strike_3s"   : {
+  "strike_3f"   : {
     "name"             : "Focused Strike",
     "ap"               : 3,
     "sp"               : 6,
@@ -21,7 +21,7 @@
     "damage_multiplier": 1.4666
   },
   "strike_4"    : {
-    "name"             : "Strong Strike",
+    "name"             : "Power Strike",
     "ap"               : 4,
     "sp"               : 2,
     "weapon_skills"    : ["SWORD", "AXE", "SPEAR", "DAGGER", "THROW", "BOW"],
@@ -55,23 +55,93 @@
     "weapon_skills"    : ["SWORD", "AXE", "SPEAR"],
     "damage_multiplier": 1.0
   },
+  "sniper_arrow": {
+    "name"             : "Sniper Arrow",
+    "ap"               : 3,
+    "sp"               : 6,
+    "weapon_skills"    : ["BOW"],
+    "hit_multiplier"   : 1.4666,
+    "damage_multiplier": 1.0,
+    "comment"          : ["ToDo: Deze ability heeft nog geen teacher en geen icon."]
+  },
+  "brute_force" : {
+    "name"             : "Brute Force",
+    "ap"               : 3,
+    "sp"               : 6,
+    "skill"            : "WARRIOR",
+    "min_skill"        : 1,
+    "weapon_skills"    : ["SWORD", "AXE", "SPEAR"],
+    "hit_multiplier"   : 0.5,
+    "damage_multiplier": 2.9332,
+    "comment"          : ["ToDo: Deze ability heeft nog geen teacher en geen icon."]
+  },
+  "shield_bash" : {
+    "name"             : "Shield Bash",
+    "ap"               : 3,
+    "sp"               : 6,
+    "skill"            : "WARRIOR",
+    "min_skill"        : 1,
+    "weapon_skills"    : ["SHIELD"],
+    "hit_multiplier"   : 1.0,
+    "damage_multiplier": 99.99,
+    "comment"          : [
+      "ToDo: Deze ability heeft nog geen teacher en geen icon.",
+      "Never advantage nor disadvantage. Never crit. Just the defense value as fixed damage.",
+      "Hit 100%."
+    ]
+  },
   "double_throw": {
     "name"             : "Double Throw",
-    "ap"               : 4,
-    "sp"               : 2,
+    "ap"               : 3,
+    "sp"               : 6,
     "skill"            : "THIEF",
     "min_skill"        : 1,
     "weapon_skills"    : ["THROW"],
     "hit_multiplier"   : 0.65,
-    "damage_multiplier": 1.13,
+    "damage_multiplier": 1.1282,
     "comment"          : [
+      "power strike:",
+      "Verwachte hits: 1 × 1 = 1",
+      "Verwachte damage output: 1.0 × 1.4666 (multiplier) = 1.4666",
+      "",
+      "sniper arrow:",
+      "Verwachte hits: 1 × 1.4666 = 1.4666",
+      "Verwachte damage output: 1.4666 × 1.0 (multiplier) = 1.4666",
+      "",
+      "brute force:",
+      "Verwachte hits: 1 × 0.5 = 0.5",
+      "Verwachte damage output: 0.5 × 2.9332 (multiplier) = 1.4666",
+      "",
       "double throw:",
       "Verwachte hits: 2 × 0.65 = 1.3",
-      "Verwachte damage output: 1.3 × 1.13 (multiplier) = 1.47",
+      "Verwachte damage output: 1.3 × 1.1282 (multiplier) = 1.4666",
       "",
-      "strong strike:",
-      "Verwachte hits: 1 × 1 = 1",
-      "Verwachte damage output: 1.0 × 1.47 (multiplier) = 1.47"
+      "ghost touch:",
+      "Verwachte hits: 1 × 2.0 = 2.0",
+      "Verwachte damage output: 2.0 × 0.7333 (multiplier) = 1.4666"
     ]
+  },
+  "ghost_touch" : {
+    "name"             : "Ghost Touch",
+    "ap"               : 3,
+    "sp"               : 6,
+    "skill"            : "THIEF",
+    "min_skill"        : 1,
+    "weapon_skills"    : ["DAGGER"],
+    "hit_multiplier"   : 2.0,
+    "damage_multiplier": 0.7333,
+    "comment"          : ["ToDo: Deze ability heeft nog geen teacher en geen icon."]
+  },
+  "backstab"    : {
+    "name"             : "Backstab",
+    "ap"               : 3,
+    "sp"               : 6,
+    "skill"            : "THIEF",
+    "min_skill"        : 1,
+    "weapon_skills"    : ["DAGGER"],
+    "hit_multiplier"   : 1.0,
+    "damage_multiplier": 1.0,
+    "crit_multiplier"  : 2.0,
+    "comment"          : ["ToDo: Deze ability heeft nog geen teacher en geen icon, en nog geen crit."]
   }
 }

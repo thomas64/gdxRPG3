@@ -16,13 +16,19 @@ object AbilityDatabase {
         return when (abilityId) {
             AbilityItemId.STRIKE_2 -> emptyList()
             AbilityItemId.STRIKE_3 -> strikeDescription()
-            AbilityItemId.STRIKE_3S -> emptyList()
+            AbilityItemId.STRIKE_3F -> emptyList()
             AbilityItemId.STRIKE_4 -> emptyList()
             AbilityItemId.BITE_3 -> throw IllegalArgumentException("AbilityItemId cannot be BITE_3.")
             AbilityItemId.BITE_4 -> throw IllegalArgumentException("AbilityItemId cannot be BITE_4.")
             AbilityItemId.BODY_SLAM_2 -> throw IllegalArgumentException("AbilityItemId cannot be BODY_SLAM_2.")
             AbilityItemId.STAGGER -> staggerDescription()
+            AbilityItemId.SNIPER_ARROW -> sniperArrowDescription()
+            AbilityItemId.BRUTE_FORCE -> bruteForceDescription()
+            AbilityItemId.SHIELD_BASH -> shieldBashDescription()
             AbilityItemId.DOUBLE_THROW -> doubleThrowDescription()
+            AbilityItemId.GHOST_TOUCH -> ghostTouchDescription()
+            AbilityItemId.BACKSTAB -> backstabDescription()
+
             AbilityItemId.FIRE -> fireDescription()
             AbilityItemId.ELFIRE -> elfireDescription()
             AbilityItemId.ARCFIRE -> arcfireDescription()
@@ -64,10 +70,46 @@ object AbilityDatabase {
         )
     }
 
+    private fun sniperArrowDescription(): List<String> {
+        return listOf(
+            "A ranged attack with a bow,",
+            "that deals damage to a single target.",
+            "Sniper Arrow has a higher chance to hit."
+        )
+    }
+
+    private fun bruteForceDescription(): List<String> {
+        return listOf(
+            "A hand-to-hand attack with a weapon, that deals damage to a single target.",
+            "Brute Force has a lower chance to hit, but deals more damage."
+        )
+    }
+
+    private fun shieldBashDescription(): List<String> {
+        return listOf(
+            "A hand-to-hand attack with a shield, that deals damage to a single target.",
+            "Shield Bash deals fixed damage equal to the shield's defense."
+        )
+    }
+
     private fun doubleThrowDescription(): List<String> {
         return listOf(
             "A ranged attack with a throw weapon, that deals damage to a single target.",
             "Double Throw attacks twice, but both attacks have a lower chance to hit."
+        )
+    }
+
+    private fun ghostTouchDescription(): List<String> {
+        return listOf(
+            "A hand-to-hand attack with a dagger, that deals damage to a single target.",
+            "Ghost Touch has a higher chance to hit, but deals less damage."
+        )
+    }
+
+    private fun backstabDescription(): List<String> {
+        return listOf(
+            "A hand-to-hand attack with a dagger, that deals damage to a single target.",
+            "Backstab has a higher chance to get a critical hit."
         )
     }
 
