@@ -24,7 +24,7 @@
     "upgrade": 0.08
   },
   "stamina"     : {
-    "maximum": 60,
-    "upgrade": 0.06
+    "maximum": 40,
+    "upgrade": 0.10
   }
 }

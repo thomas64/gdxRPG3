@@ -95,8 +95,8 @@ internal class SkillsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
 
     private fun SkillItem.canBeUpgraded(): Boolean {
         if (selectedHero.isDead) return false
-        val xpCost: Float = this.getXpCostForNextRank()
-        return xpCost > 0f && selectedHero.xpPoints >= xpCost
+        val xpCost: Int = this.getXpCostForNextRank()
+        return xpCost > 0 && selectedHero.xpPoints >= xpCost
     }
 
     private fun scrollScrollPane() {

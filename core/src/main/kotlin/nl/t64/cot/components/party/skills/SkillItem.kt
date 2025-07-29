@@ -70,7 +70,7 @@ data class SkillItem(
             rank == -1 -> -1
             rank >= MAXIMUM -> 0
             rank >= trainerSkill.rank -> -2
-            else -> getXpCostForNextRank().roundToInt()
+            else -> getXpCostForNextRank()
         }
     }
 
@@ -85,16 +85,16 @@ data class SkillItem(
     }
 
     fun getTotalXpCostFromRankZeroToCurrent(): Int {
-        return (1..rank).sumOf { it.getXpCost().roundToInt() }
+        return (1..rank).sumOf { it.getXpCost() }
     }
 
-    fun getXpCostForNextRank(): Float {
+    fun getXpCostForNextRank(): Int {
         val nextRank = rank + 1
         return nextRank.getXpCost()
     }
 
-    private fun Int.getXpCost(): Float {
-        return (upgrade * (this * this))
+    private fun Int.getXpCost(): Int {
+        return (upgrade * (this * this)).roundToInt()
     }
 
 }

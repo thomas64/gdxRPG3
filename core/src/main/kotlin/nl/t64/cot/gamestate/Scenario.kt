@@ -63,10 +63,12 @@ class Scenario {
     private fun addItemsToStorage() {
         val shoulders = InventoryDatabase.createInventoryItem("basic_light_cloak")
         val gold = InventoryDatabase.createInventoryItem("gold", 4)
-        val potion = InventoryDatabase.createInventoryItem("healing_potion")
+        val healingPotion = InventoryDatabase.createInventoryItem("healing_potion")
+        val energyPotion = InventoryDatabase.createInventoryItem("energy_potion")
         gameData.storage.autoSetItem(shoulders)
         gameData.storage.autoSetItem(gold)
-        gameData.storage.autoSetItem(potion)
+        gameData.storage.autoSetItem(healingPotion)
+        gameData.storage.autoSetItem(energyPotion)
     }
 
     private fun addQuestGraceToLogbook() {

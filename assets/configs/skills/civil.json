@@ -1,9 +1,9 @@
 {
   "alchemist": {
-    "upgrade": 8
+    "upgrade": 10
   },
   "mechanic" : {
-    "upgrade": 8
+    "upgrade": 10
   },
   "ranger"   : {
     "upgrade": 6
