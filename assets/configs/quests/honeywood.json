@@ -123,35 +123,40 @@
         "type"      : "FREE"
       },
       "13": {
-        "taskPhrase"     : "            Deliver 3 gold pieces to the blacksmith.",
-        "updatedPhrase"  : "            Deliver 3 (+1) gold pieces to the blacksmith.",
-        "type"           : "DELIVER_ITEM",
-        "target"         : {"gold": 3},
-        "targetAlternate": {"gold": 4},
-        "conversationIds": ["quest_get_horseshoes"]
+        "taskPhrase"          : "            Deliver 3 gold pieces to the blacksmith.",
+        "updatedPhrase"       : "            Deliver 3 (+1) gold pieces to the blacksmith.",
+        "type"                : "DELIVER_ITEM",
+        "target"              : {"gold": 3},
+        "targetAlternate"     : {"gold": 4},
+        "conversationIds"     : ["quest_get_horseshoes"],
+        "shouldHideAfterReset": true
       },
       "14": {
-        "taskPhrase": "                  [Optional] Get 1 extra gold piece from Jaron for the blacksmith.",
-        "type"      : "SAY_THE_RIGHT_THING",
-        "target"    : {"gold": 1},
-        "isHidden"  : true,
-        "isOptional": true
+        "taskPhrase"          : "                  [Optional] Get 1 extra gold piece from Jaron for the blacksmith.",
+        "type"                : "SAY_THE_RIGHT_THING",
+        "target"              : {"gold": 1},
+        "isHidden"            : true,
+        "isOptional"          : true,
+        "shouldHideAfterReset": true
       },
       "15": {
-        "taskPhrase"     : "            Deliver Theodore's lost ring to Mrs. Johanna.",
-        "type"           : "DELIVER_ITEM",
-        "target"         : {"basic_silver_ring": 1},
-        "conversationIds": ["mrs_johanna"]
+        "taskPhrase"          : "            Deliver Theodore's lost ring to Mrs. Johanna.",
+        "type"                : "DELIVER_ITEM",
+        "target"              : {"basic_silver_ring": 1},
+        "conversationIds"     : ["mrs_johanna"],
+        "shouldHideAfterReset": true
       },
       "16": {
-        "taskPhrase"     : "            Tell Jaron's little brother Kaidan to come home to him.",
-        "type"           : "DELIVER_MESSAGE",
-        "conversationIds": ["kaidan_come_home"]
+        "taskPhrase"          : "            Tell Jaron's little brother Kaidan to come home to him.",
+        "type"                : "DELIVER_MESSAGE",
+        "conversationIds"     : ["kaidan_come_home"],
+        "shouldHideAfterReset": true
       },
       "17": {
-        "taskPhrase": "            Report back to Jaron.",
-        "type"      : "RETURN",
-        "linkedWith": ["12"]
+        "taskPhrase"          : "            Report back to Jaron.",
+        "type"                : "RETURN",
+        "linkedWith"          : ["12"],
+        "shouldHideAfterReset": true
       }
     }
   },
@@ -187,7 +192,7 @@
         "linkedWith": ["10"]
       },
       "10": {
-        "comment"     : "WARNING: One link to 10 from chest01.json Loot.",
+        "comment"   : "WARNING: One link to 10 from chest01.json Loot.",
         "taskPhrase": "      Deliver 4 horseshoes to Angie.",
         "type"      : "PROVIDE_ITEM",
         "target"    : {"horseshoe": 4},
@@ -299,9 +304,9 @@
     "isSubQuest": true,
     "tasks"     : {
       "8": {
-        "taskPhrase"  : "                  Return to Luana by 10:00. She will be done with her chores at Honeywood Farm.",
-        "type"        : "FREE",
-        "linkedWith"  : ["9"]
+        "taskPhrase": "                  Return to Luana by 10:00. She will be done with her chores at Honeywood Farm.",
+        "type"      : "FREE",
+        "linkedWith": ["9"]
       },
       "9": {
         "comment"   : "WARNING: Five links to 9 from honeywood_stable.tmx",

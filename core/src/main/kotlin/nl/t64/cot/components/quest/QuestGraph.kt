@@ -44,25 +44,36 @@ data class QuestGraph(
     }
 
     fun getAllQuestTasksForVisual(): Array<QuestTask> {
-        return (tasks + getTasksOfAcceptedSubQuests())
+        return (tasks + getTasksOfAcceptedSubQuests() + getSpecificHiddenTasksOfAcceptedSubQuests())
             .toSortedMap(compareBy<String> { it.length }.thenBy { it })
             .map { it.value }
-            .filter { !it.isHidden }
+            .filterNot { it.isHidden }
             .toTypedArray()
     }
 
     private fun getTasksOfAcceptedSubQuests(): Map<String, QuestTask> {
         return linkedWith
             .map { gameData.quests.getQuestById(it) }
-            .filter { isAcceptedOrNotFinishedInThePast(it) }
+            .filter { isSubQuestAcceptedOrNotFinishedInThePast(it) }
             .map { it.tasks }
             .flatMap { it.toList() }
             .toMap()
+            .filterValues { !it.shouldHideAfterReset }
     }
 
-    private fun isAcceptedOrNotFinishedInThePast(subQuest: QuestGraph): Boolean {
+    private fun isSubQuestAcceptedOrNotFinishedInThePast(subQuest: QuestGraph): Boolean {
         return subQuest.currentState.isEqualOrHigherThan(QuestState.ACCEPTED)
             || (subQuest.resetState.isEqualOrHigherThan(QuestState.ACCEPTED) && subQuest.resetState != QuestState.FINISHED)
+    }
+
+    private fun getSpecificHiddenTasksOfAcceptedSubQuests(): Map<String, QuestTask> {
+        return linkedWith
+            .map { gameData.quests.getQuestById(it) }
+            .filter { it.currentState.isEqualOrHigherThan(QuestState.ACCEPTED) }
+            .map { it.tasks }
+            .flatMap { it.toList() }
+            .toMap()
+            .filterValues { it.shouldHideAfterReset }
     }
 
     fun reset() {

@@ -16,6 +16,7 @@ class QuestTask(
     val targetAlternate: Map<String, Int> = emptyMap(),
     val receive: Map<String, Int> = emptyMap(),
     val conversationIds: List<String> = emptyList(),
+    val shouldHideAfterReset: Boolean = false,
     val isOptional: Boolean = false,
     var isHidden: Boolean = false,
     private val isResettable: Boolean = true,
