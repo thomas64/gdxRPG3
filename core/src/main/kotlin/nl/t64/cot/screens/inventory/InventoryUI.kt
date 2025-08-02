@@ -85,6 +85,10 @@ internal class InventoryUI(
         getSelectedTable().selectCurrentSlot()
     }
 
+    fun doCrystalAction() {
+        getSelectedTable().doCrystalAction()
+    }
+
     fun doPreBattleAction() {
         getSelectedTable().doPreBattleAction()
     }

@@ -5,7 +5,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import nl.t64.cot.Utils
 import nl.t64.cot.components.party.skills.SkillItem
+import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.screens.inventory.tooltip.PersonalityTooltip
+import nl.t64.cot.screens.mechanic.MechanicScreen
 
 
 private const val FIRST_COLUMN_WIDTH = 48f
@@ -79,6 +81,14 @@ internal class SkillsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
         if (deltaIndex != 0) {
             scrollScrollPane()
             deltaIndex = 0
+        }
+    }
+
+    override fun doAction() {
+        val selectedSkill: SkillItem = allSkills[selectedIndex]
+        if (selectedSkill.id == SkillItemId.MECHANIC) {
+            hideTooltip()
+            MechanicScreen.load()
         }
     }
 

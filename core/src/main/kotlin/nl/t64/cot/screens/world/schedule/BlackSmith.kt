@@ -69,7 +69,7 @@ class BlackSmith : EntitySchedule() {
     }
 
     private val doorsSchedule: Map<String, String> = mapOf(
-        "07:35" to "door_honeywood_smith",
+        "07:34" to "door_honeywood_smith",
         "07:58" to "door_honeywood_elder",
         "10:43" to "door_honeywood_elder",
         "10:56" to "door_honeywood_smith"
