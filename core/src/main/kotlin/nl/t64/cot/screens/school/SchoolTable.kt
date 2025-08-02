@@ -19,10 +19,14 @@ private const val CONTAINER_HEIGHT = 704f
 private const val ROW_HEIGHT = 48f
 private const val SECOND_COLUMN_PAD_LEFT = 15f
 
-class SchoolTable(schoolId: String, tooltip: SchoolTooltip) : BaseTable(tooltip) {
+class SchoolTable(
+    schoolId: String,
+    tooltip: SchoolTooltip
+) : BaseTable(tooltip) {
 
     private val spellsToLearn: List<AbilityItem> = resourceManager.getSchoolInventory(schoolId)
         .map { AbilityDatabase.createAbilityItem(it) }
+    private val verticalKeyListener = ListenerKeyVertical { updateIndex(it, spellsToLearn.size) }
 
     init {
         table.columnDefaults(0).width(FIRST_COLUMN_WIDTH)
@@ -33,7 +37,7 @@ class SchoolTable(schoolId: String, tooltip: SchoolTooltip) : BaseTable(tooltip)
 
         container.add(scrollPane).height(CONTAINER_HEIGHT)
         container.background = Utils.createTopBorder()
-        container.addListener(ListenerKeyVertical { updateIndex(it, spellsToLearn.size) })
+        container.addListener(verticalKeyListener)
     }
 
     fun upgradeSpell() {
@@ -52,6 +56,10 @@ class SchoolTable(schoolId: String, tooltip: SchoolTooltip) : BaseTable(tooltip)
         spellsToLearn.forEachIndexed { index, spellItem -> fillRow(spellItem, index) }
     }
 
+    fun stopScrolling() {
+        verticalKeyListener.cleanup()
+    }
+
     private fun fillRow(abilityItem: AbilityItem, index: Int) {
         table.add(createImageOf(abilityItem.id.name))
         val spellName = Label(abilityItem.name, LabelStyle(font, Color.BLACK))
@@ -63,6 +71,7 @@ class SchoolTable(schoolId: String, tooltip: SchoolTooltip) : BaseTable(tooltip)
     }
 
     private fun scrollScrollPane() {
+        if (!table.hasKeyboardFocus()) return
         val selectedY = CONTAINER_HEIGHT - (ROW_HEIGHT * selectedIndex)
         scrollPane.scrollTo(0f, selectedY, 0f, 0f)
     }

@@ -45,6 +45,10 @@ class EquipSlotsTables(private val tooltip: ItemSlotTooltip) : WindowSelector {
         getCurrentEquipSlots().toggleCompare()
     }
 
+    override fun doPreBattleAction() {
+        doAction()
+    }
+
     override fun doAction() {
         getCurrentEquipSlots().dequipItem()
     }

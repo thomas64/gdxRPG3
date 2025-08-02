@@ -19,6 +19,11 @@ open class InventoryContainer(numberOfSlots: Int = 0) {
             .filter { it.group == group }
     }
 
+    fun getAllRepairableInventoryItems(mechanicRank: Int): List<InventoryItem> {
+        return getAllFilledSlots()
+            .filter { it.isRepairableForMechanicRank(mechanicRank) }
+    }
+
     fun getAllFilledSlots(): List<InventoryItem> {
         return inventory.filterNotNull()
     }

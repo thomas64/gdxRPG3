@@ -119,7 +119,7 @@ abstract class BattleAbilityItem(
     fun hasEnoughResources(): Boolean {
         return when (abilityItem.requiredResource) {
             ResourceType.NONE -> true
-            else -> gameData.inventory.hasEnoughOfItem(abilityItem.requiredResource.title.lowercase(), 1)
+            else -> gameData.inventory.hasEnoughOfItem(abilityItem.requiredResource.name.lowercase(), 1)
         }
     }
 

@@ -3,21 +3,14 @@ package nl.t64.cot.screens.inventory.tooltip
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
-import com.badlogic.gdx.scenes.scene2d.ui.Label
-import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
-import nl.t64.cot.components.party.CalcAttributeId
-import nl.t64.cot.components.party.SuperEnum
-import nl.t64.cot.components.party.inventory.AttributeState
 import nl.t64.cot.components.party.inventory.InventoryDescription
 import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.components.party.skills.SkillItemId
-import nl.t64.cot.constants.Constant
-import nl.t64.cot.screens.FontProvider
 import nl.t64.cot.screens.inventory.InventoryUtils
 import nl.t64.cot.screens.inventory.itemslot.InventoryImage
 import nl.t64.cot.screens.inventory.itemslot.ItemSlot
@@ -25,15 +18,13 @@ import nl.t64.cot.screens.inventory.itemslot.ItemSlot
 
 private const val SLOT_SIZE = 64f
 private const val THREE_QUARTERS = SLOT_SIZE * 0.75f
-private const val COLUMN_SPACING = 20f
 private const val HALF_SPACING = 10f
-private const val EMPTY_ROW = ""
-private const val LEFT_TITLE = EMPTY_ROW
-private const val RIGHT_TITLE = "Currently Equipped"
-private val ORANGE = Color(-0x6fff01)
+private const val RIGHT_HEADER = "Currently Equipped"
 private const val DELAY = 0.5f
 
 open class ItemSlotTooltip : BaseTooltip() {
+
+    private val totalMerchant: Int get() = gameData.party.getSumOfSkill(SkillItemId.MERCHANT)
 
     override fun toggle(itemSlot: ItemSlot?) {
         if (itemSlot?.hasItem() == true) {
@@ -109,26 +100,25 @@ open class ItemSlotTooltip : BaseTooltip() {
     }
 
     fun createResourceTooltip(inventoryImage: InventoryImage) {
-        val hoveredTable = createDefaultTooltip(inventoryImage)
+        val hoveredTable = createDefaultTooltipTable(inventoryImage)
         window.add(hoveredTable)
 
         window.add().row()
-        window.add(createLabel(EMPTY_ROW, Color.WHITE)).row()
+        window.add(createEmptyLine()).row()
         val description = inventoryImage.inventoryItem.description.joinToString(System.lineSeparator())
         window.add(createLabel(description, Color.WHITE))
     }
 
     open fun createSingleTooltip(inventoryImage: InventoryImage) {
-        val hoveredTable = createDefaultTooltip(inventoryImage)
-        addPossibleDescription(inventoryImage, hoveredTable)
+        val hoveredTable = createDefaultTooltipTable(inventoryImage)
+        hoveredTable.addPossibleDescription(inventoryImage)
         window.add(hoveredTable)
     }
 
-    private fun createDefaultTooltip(inventoryImage: InventoryImage): Table {
+    private fun createDefaultTooltipTable(inventoryImage: InventoryImage): Table {
         val hoveredTable = Table()
         hoveredTable.defaults().left()
 
-        val totalMerchant = gameData.party.getSumOfSkill(SkillItemId.MERCHANT)
         val descriptionList = inventoryImage.getSingleDescription(totalMerchant).toMutableList()
         removeLeftUnnecessaryAttributes(descriptionList)
         descriptionList.forEach { hoveredTable.addDescriptionLine(it, createSingleLabelStyle(it)) }
@@ -148,133 +138,40 @@ open class ItemSlotTooltip : BaseTooltip() {
             background = Utils.createTooltipRightBorder()
             padRight(HALF_SPACING)
             defaults().left()
-            add(createLabel(LEFT_TITLE, Color.WHITE)).row()
+            add(createEmptyLine()).row()
         }
-        val totalMerchant = gameData.party.getSumOfSkill(SkillItemId.MERCHANT)
         val descriptionList = hoveredImage.getDualDescription(equippedImage, totalMerchant).toMutableList()
         removeLeftUnnecessaryAttributes(descriptionList)
         descriptionList.forEach { hoveredTable.addDescriptionLine(it, createLeftLabelStyle(it)) }
         if (equippedImage.inventoryItem.description.isNotEmpty() && hoveredImage.inventoryItem.description.isEmpty()) {
-            hoveredTable.add(createLabel(EMPTY_ROW, Color.WHITE)).row()
+            hoveredTable.add(createEmptyLine()).row()
         }
-        addPossibleDescription(hoveredImage, hoveredTable)
+        hoveredTable.addPossibleDescription(hoveredImage)
         return hoveredTable
     }
 
     private fun createRightTooltip(equippedImage: InventoryImage, hoveredImage: InventoryImage): Table {
         val equippedTable = Table().apply {
             defaults().left()
-            add(createLabel(RIGHT_TITLE, Color.LIGHT_GRAY)).row()
+            add(createLabel(RIGHT_HEADER, Color.LIGHT_GRAY)).row()
         }
 
-        val totalMerchant = gameData.party.getSumOfSkill(SkillItemId.MERCHANT)
         val descriptionLines = equippedImage.getDualDescription(hoveredImage, totalMerchant).toMutableList()
         removeRightUnnecessaryAttributes(descriptionLines)
         descriptionLines.forEach { equippedTable.addDescriptionLine(it, createRightLabelStyle(it)) }
         if (equippedImage.inventoryItem.description.isEmpty() && hoveredImage.inventoryItem.description.isNotEmpty()) {
-            equippedTable.add(createLabel(EMPTY_ROW, Color.WHITE)).row()
+            equippedTable.add(createEmptyLine()).row()
         }
-        addPossibleDescription(equippedImage, equippedTable)
+        equippedTable.addPossibleDescription(equippedImage)
         return equippedTable
     }
 
-    fun addPossibleDescription(inventoryImage: InventoryImage, table: Table) {
-        if (inventoryImage.inventoryItem.description.isNotEmpty()) {
-            table.add(createLabel(EMPTY_ROW, Color.WHITE)).row()
-            val description = inventoryImage.inventoryItem.description.joinToString(System.lineSeparator())
-            table.add(createLabel(description, Color.WHITE)).colspan(2)
-        }
-    }
-
-    fun Table.addDescriptionLine(line: InventoryDescription, labelStyle: LabelStyle?) {
-        this.add(Label(getKey(line), labelStyle)).spaceRight(COLUMN_SPACING)
-        this.add(Label(getValue(line), labelStyle)).row()
-    }
-
     open fun removeLeftUnnecessaryAttributes(descriptionList: MutableList<InventoryDescription>) {
-        removeBuy(descriptionList)
-        removeSell(descriptionList)
+        descriptionList.removeUnnecessaryAttributes()
     }
 
     open fun removeRightUnnecessaryAttributes(descriptionList: MutableList<InventoryDescription>) {
-        removeBuy(descriptionList)
-        removeSell(descriptionList)
-    }
-
-    fun removeBuy(descriptionList: MutableList<InventoryDescription>) {
-        descriptionList.removeAll {
-            it.key in listOf(Constant.DESCRIPTION_KEY_BUY,
-                             Constant.DESCRIPTION_KEY_BUY_PIECE,
-                             Constant.DESCRIPTION_KEY_BUY_TOTAL)
-        }
-    }
-
-    fun removeSell(descriptionList: MutableList<InventoryDescription>) {
-        descriptionList.removeAll {
-            it.key in listOf(Constant.DESCRIPTION_KEY_SELL,
-                             Constant.DESCRIPTION_KEY_SELL_PIECE,
-                             Constant.DESCRIPTION_KEY_SELL_TOTAL)
-        }
-    }
-
-    fun createSingleLabelStyle(attribute: InventoryDescription): LabelStyle {
-        return if (isBuyOrSellValue(attribute)) {
-            createLabelStyle(Color.GOLD)
-        } else when (attribute.compare) {
-            AttributeState.SAME -> createLabelStyle(Color.WHITE)
-            AttributeState.CANNOT_USE -> createLabelStyle(Color.RED)
-            else -> throw IllegalArgumentException("Comparing to hero cannot be LESS or MORE.")
-        }
-    }
-
-    private fun createLeftLabelStyle(attribute: InventoryDescription): LabelStyle {
-        return if (isBuyOrSellValue(attribute)) {
-            createLabelStyle(Color.GOLD)
-        } else when (attribute.compare) {
-            AttributeState.CANNOT_USE -> createLabelStyle(Color.RED)
-            AttributeState.SAME -> createLabelStyle(Color.WHITE)
-            AttributeState.LESS -> createLabelStyle(ORANGE)
-            AttributeState.MORE -> createLabelStyle(Color.LIME)
-        }
-    }
-
-    private fun createRightLabelStyle(attribute: InventoryDescription): LabelStyle {
-        return when {
-            isBuyOrSellValue(attribute) -> createLabelStyle(Color.GOLD)
-            else -> createLabelStyle(Color.WHITE)
-        }
-    }
-
-    private fun getKey(attribute: InventoryDescription): String {
-        return when (attribute.key) {
-            is SuperEnum -> attribute.key.title
-            else -> attribute.key.toString()
-        }
-    }
-
-    private fun getValue(descriptionLine: InventoryDescription): String {
-        return when {
-            descriptionLine.value is SkillItemId -> descriptionLine.value.title
-            descriptionLine.key == CalcAttributeId.BASE_HIT -> "${descriptionLine.value}%"
-            else -> descriptionLine.value.toString()
-        }
-    }
-
-    private fun createLabel(text: String, color: Color): Label {
-        return Label(text, createLabelStyle(color))
-    }
-
-    private fun createLabelStyle(color: Color): LabelStyle {
-        return LabelStyle(FontProvider.default, color)
-    }
-
-    private fun isBuyOrSellValue(attribute: InventoryDescription): Boolean {
-        return attribute.key in listOf(Constant.DESCRIPTION_KEY_BUY_TOTAL,
-                                       Constant.DESCRIPTION_KEY_SELL_TOTAL,
-                                       Constant.DESCRIPTION_KEY_BUY_PIECE,
-                                       Constant.DESCRIPTION_KEY_SELL_PIECE,
-                                       Constant.DESCRIPTION_KEY_BUY,
-                                       Constant.DESCRIPTION_KEY_SELL)
+        descriptionList.removeUnnecessaryAttributes()
     }
 
 }

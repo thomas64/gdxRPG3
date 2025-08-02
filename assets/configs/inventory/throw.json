@@ -9,7 +9,10 @@
     "min_dexterity": 12,
     "range"        : [3, 4, 5],
     "base_hit"     : 75,
-    "damage"       : 8
+    "damage"       : 8,
+    "min_mechanic" : 1,
+    "leather"      : 2,
+    "metal"        : 2
   },
   "fine_knife"      : {
     "name"         : "Fine Knife",
@@ -21,7 +24,10 @@
     "min_dexterity": 16,
     "range"        : [3, 4, 5],
     "base_hit"     : 65,
-    "damage"       : 13
+    "damage"       : 13,
+    "min_mechanic" : 3,
+    "leather"      : 6,
+    "metal"        : 6
   },
   "specialist_knife": {
     "name"         : "Specialist Knife",
@@ -33,7 +39,10 @@
     "min_dexterity": 20,
     "range"        : [3, 4, 5],
     "base_hit"     : 55,
-    "damage"       : 18
+    "damage"       : 18,
+    "min_mechanic" : 5,
+    "leather"      : 10,
+    "metal"        : 10
   },
   "masterwork_knife": {
     "name"         : "Masterwork Knife",
@@ -45,6 +54,9 @@
     "min_dexterity": 24,
     "range"        : [3, 4, 5],
     "base_hit"     : 45,
-    "damage"       : 23
+    "damage"       : 23,
+    "min_mechanic" : 7,
+    "leather"      : 14,
+    "metal"        : 14
   }
 }

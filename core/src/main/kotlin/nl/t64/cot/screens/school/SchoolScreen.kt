@@ -47,7 +47,7 @@ class SchoolScreen : ParchmentScreen() {
 
     private fun createAndSetListener() {
         listener = AcademyScreenListener(stage,
-                                         { closeScreen() },
+                                         { beginWithClosingScreen() },
                                          { upgradeSpell() },
                                          { selectPreviousHero() },
                                          { selectNextHero() },
@@ -56,28 +56,37 @@ class SchoolScreen : ParchmentScreen() {
                                          { toggleTooltip() })
     }
 
+    private fun beginWithClosingScreen() {
+        schoolUI.stopTablesScrolling()
+        closeScreen()
+    }
+
     private fun upgradeSpell() {
         schoolUI.upgradeSpell()
     }
 
     private fun selectPreviousHero() {
+        schoolUI.stopTablesScrolling()
         playSe(AudioEvent.SE_MENU_CURSOR)
         schoolUI.updateSelectedHero { InventoryUtils.selectPreviousHero() }
     }
 
     private fun selectNextHero() {
+        schoolUI.stopTablesScrolling()
         playSe(AudioEvent.SE_MENU_CURSOR)
         schoolUI.updateSelectedHero { InventoryUtils.selectNextHero() }
     }
 
     private fun selectPreviousTable() {
         return
+        schoolUI.stopTablesScrolling()
         playSe(AudioEvent.SE_MENU_CURSOR)
         schoolUI.selectPreviousTable()
     }
 
     private fun selectNextTable() {
         return
+        schoolUI.stopTablesScrolling()
         playSe(AudioEvent.SE_MENU_CURSOR)
         schoolUI.selectNextTable()
     }

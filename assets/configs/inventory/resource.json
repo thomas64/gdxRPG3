@@ -52,39 +52,34 @@
     "price"      : 1,
     "description": ["ToDo", "ToDo"]
   },
-  "cloth"      : {
-    "name"       : "Cloth",
-    "group"      : "RESOURCE",
-    "sort"       : 90050,
-    "price"      : 1,
-    "description": ["ToDo", "ToDo"]
-  },
   "leather"    : {
     "name"       : "Leather",
     "group"      : "RESOURCE",
     "sort"       : 90060,
     "price"      : 1,
-    "description": ["ToDo", "ToDo"]
+    "description": [
+      "Leather can be used to repair or create",
+      "weapons and shields (Mechanic Skill)."
+    ]
   },
   "wood"       : {
     "name"       : "Wood",
     "group"      : "RESOURCE",
     "sort"       : 90070,
     "price"      : 1,
-    "description": ["ToDo", "ToDo"]
-  },
-  "stone"      : {
-    "name"       : "Stone",
-    "group"      : "RESOURCE",
-    "sort"       : 90080,
-    "price"      : 1,
-    "description": ["ToDo", "ToDo"]
+    "description": [
+      "Wood can be used to repair or create",
+      "weapons and shields (Mechanic Skill)."
+    ]
   },
   "metal"      : {
     "name"       : "Metal",
     "group"      : "RESOURCE",
     "sort"       : 90090,
     "price"      : 1,
-    "description": ["ToDo", "ToDo"]
+    "description": [
+      "Metal can be used to repair or create",
+      "weapons and shields (Mechanic Skill)."
+    ]
   }
 }

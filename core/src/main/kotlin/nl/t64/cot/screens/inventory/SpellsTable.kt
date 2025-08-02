@@ -16,9 +16,13 @@ private const val CONTAINER_HEIGHT = 704f
 private const val ROW_HEIGHT = 48f
 private const val SECOND_COLUMN_PAD_LEFT = 15f
 
-internal class SpellsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
+internal class SpellsTable(
+    tooltip: PersonalityTooltip
+) : BaseTable(tooltip) {
 
-    private val allAbilities: List<AbilityItem> get() = selectedHero.getAllAbilities().filterNot { it.getTotalDescription().isBlank() }
+    private val allAbilities: List<AbilityItem>
+        get() = selectedHero.getAllAbilities().filterNot { it.getTotalDescription().isBlank() }
+    private val verticalKeyListener = ListenerKeyVertical { updateIndex(it, allAbilities.size) }
     private var deltaIndex = 0
 
     init {
@@ -30,7 +34,9 @@ internal class SpellsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
 
         container.add(scrollPane).height(CONTAINER_HEIGHT)
         container.background = Utils.createTopBorder()
-        container.addListener(ListenerKeyVertical { updateIndex(it, allAbilities.size) })
+        container.addListener(verticalKeyListener)
+
+        super.update()
     }
 
     override fun selectAnotherSlotWhenIndexBecameOutOfBounds() {
@@ -51,6 +57,10 @@ internal class SpellsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
             scrollScrollPane()
             deltaIndex = 0
         }
+    }
+
+    fun stopScrolling() {
+        verticalKeyListener.cleanup()
     }
 
     private fun fillRow(ability: AbilityItem, index: Int) {

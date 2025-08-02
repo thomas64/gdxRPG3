@@ -53,9 +53,9 @@ abstract class ParchmentScreen : Screen {
     protected fun closeScreen(fadeToScreen: ScreenType = ScreenType.WORLD,
                               audioEvent: AudioEvent = AudioEvent.SE_SCROLL) {
         setInputProcessors(null)
+        removeTriggersListener()
         playSe(audioEvent)
         fadeParchment(fadeToScreen)
-        removeTriggersListener()
     }
 
     protected fun setInputProcessors(inputProcessor: InputProcessor?) {

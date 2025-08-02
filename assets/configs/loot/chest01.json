@@ -6,7 +6,7 @@
   "chest0009": {"content": {"basic_light_belt": 1, "gold": 6}},
   "chest0010": {"content": {"healing_potion": 1, "gold": 3, "basic_light_bracers": 1}},
   "chest0011": {"content": {"basic_light_gloves": 1, "gold": 8, "healing_potion": 1}},
-  "chest0012": {"content": {"wood": 2, "leather": 4, "cloth": 8, "gold": 15}, "lockLevel": 1},
+  "chest0012": {"content": {"metal": 2, "wood": 4, "leather": 8, "gold": 15}, "lockLevel": 1},
   "chest0013": {"content": {"basic_silver_necklace": 1, "gold": 13}, "trapLevel": 1},
   "chest0014": {"content": {"basic_light_shoulders": 1, "gold": 9}, "lockLevel": 1},
   "chest0015": {"condition": ["_tc_10_q_quest_get_horse"], "content": {"horseshoe": 4}, "doesReset": true}

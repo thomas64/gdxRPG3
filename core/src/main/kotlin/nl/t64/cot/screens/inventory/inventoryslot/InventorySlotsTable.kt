@@ -83,11 +83,19 @@ class InventorySlotsTable(
         taker.sellFull(selector.getCurrentSlot())
     }
 
+    override fun doCrystalTryAction() {
+        val currentSlot: ItemSlot = selector.getCurrentSlot()
+        val group: InventoryGroup? = currentSlot.getPossibleInventoryImage()?.inventoryGroup
+        if (group == InventoryGroup.ITEM) {
+            InventorySlotUser.doAction(currentSlot)
+        }
+    }
+
     override fun doPreBattleAction() {
         val currentSlot: ItemSlot = selector.getCurrentSlot()
         val group: InventoryGroup? = currentSlot.getPossibleInventoryImage()?.inventoryGroup
-        if (group == InventoryGroup.POTION || group == InventoryGroup.ITEM) {
-            InventorySlotUser.doPreBattleAction(currentSlot)
+        if (group == InventoryGroup.POTION) {
+            InventorySlotUser.doAction(currentSlot)
         } else {
             taker.equip(currentSlot)
         }

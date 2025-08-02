@@ -28,7 +28,11 @@ private const val FOUR_COLUMNS = 4
 private const val TOOLTIP_X = 130f
 private const val TOOLTIP_Y = -18f
 
-internal class StatsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
+internal class StatsTable(
+    tooltip: PersonalityTooltip
+) : BaseTable(tooltip) {
+
+    private val verticalKeyListener = ListenerKeyVertical { updateIndex(it, table.rows)}
 
     init {
         table.columnDefaults(0).width(FIRST_COLUMN_WIDTH)
@@ -38,7 +42,9 @@ internal class StatsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
 
         container.add(table).height(CONTAINER_HEIGHT)
         container.background = Utils.createTopBorder()
-        container.addListener(ListenerKeyVertical { updateIndex(it, table.rows) })
+        container.addListener(verticalKeyListener)
+
+        super.update()
     }
 
     override fun selectAnotherSlotWhenIndexBecameOutOfBounds() {
@@ -73,6 +79,10 @@ internal class StatsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
         hideTooltip()
         val statToUpgrade = selectedHero.getAllStats()[selectedIndex]
         StatUpgrader.upgradeStat(statToUpgrade, table.stage) { hasJustUpdated = true }
+    }
+
+    fun stopScrolling() {
+        verticalKeyListener.cleanup()
     }
 
     private fun fillStats() {

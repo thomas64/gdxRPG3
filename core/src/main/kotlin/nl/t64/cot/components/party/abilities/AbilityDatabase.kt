@@ -219,6 +219,9 @@ object AbilityDatabase {
             "Friendly target of the spell add 2 to their",
             "Resistance value for each rank in 'Wizard'.",
             "May only be cast once on each target."
+            // todo, vergeten: is resistance hetzelfde als 'magic protection' van willpower?
+            // het lijkt er op dat resistance de oude mirror en vs spells is.
+            // todo, moet resistance bij de calcs worden weergegeven?
         )
     }
 

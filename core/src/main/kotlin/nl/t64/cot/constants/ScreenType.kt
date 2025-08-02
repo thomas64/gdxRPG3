@@ -8,6 +8,7 @@ import nl.t64.cot.screens.cutscene.*
 import nl.t64.cot.screens.help.HelpScreen
 import nl.t64.cot.screens.inventory.InventoryScreen
 import nl.t64.cot.screens.loot.*
+import nl.t64.cot.screens.mechanic.MechanicScreen
 import nl.t64.cot.screens.menu.*
 import nl.t64.cot.screens.questlog.QuestLogScreen
 import nl.t64.cot.screens.school.SchoolScreen
@@ -40,6 +41,7 @@ enum class ScreenType(val screenClass: Class<out Screen>) {
     SHOP(ShopScreen::class.java),
     ACADEMY(AcademyScreen::class.java),
     SCHOOL(SchoolScreen::class.java),
+    MECHANIC(MechanicScreen::class.java),
     FIND(FindScreen::class.java),
     REWARD(RewardScreen::class.java),
     RECEIVE(ReceiveScreen::class.java),

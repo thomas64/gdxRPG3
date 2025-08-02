@@ -36,7 +36,11 @@
     "min_dexterity": 12,
     "range"        : [6, 7, 8, 9],
     "base_hit"     : 70,
-    "damage"       : 8
+    "damage"       : 8,
+    "min_mechanic" : 1,
+    "leather"      : 3,
+    "wood"         : 4,
+    "metal"        : 1
   },
   "fine_bow"       : {
     "name"         : "Fine Bow",
@@ -49,7 +53,11 @@
     "min_dexterity": 18,
     "range"        : [6, 7, 8, 9],
     "base_hit"     : 60,
-    "damage"       : 13
+    "damage"       : 13,
+    "min_mechanic" : 3,
+    "leather"      : 9,
+    "wood"         : 12,
+    "metal"        : 3
   },
   "specialist_bow" : {
     "name"         : "Specialist Bow",
@@ -62,7 +70,11 @@
     "min_dexterity": 24,
     "range"        : [6, 7, 8, 9],
     "base_hit"     : 50,
-    "damage"       : 18
+    "damage"       : 18,
+    "min_mechanic" : 5,
+    "leather"      : 15,
+    "wood"         : 20,
+    "metal"        : 5
   },
   "masterwork_bow" : {
     "name"         : "Masterwork Bow",
@@ -75,6 +87,10 @@
     "min_dexterity": 30,
     "range"        : [6, 7, 8, 9],
     "base_hit"     : 40,
-    "damage"       : 23
+    "damage"       : 23,
+    "min_mechanic" : 7,
+    "leather"      : 21,
+    "wood"         : 28,
+    "metal"        : 7
   }
 }

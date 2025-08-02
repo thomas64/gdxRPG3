@@ -3,11 +3,8 @@ package nl.t64.cot.screens.inventory.tooltip
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
-import com.badlogic.gdx.scenes.scene2d.ui.Label
-import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.components.party.PersonalityItem
-import nl.t64.cot.screens.FontProvider
 import nl.t64.cot.screens.inventory.itemslot.ItemSlot
 
 
@@ -26,6 +23,10 @@ open class PersonalityTooltip : BaseTooltip() {
     fun refresh(personalityItem: PersonalityItem, getUpdatedPosition: () -> Vector2) {
         hide()
         updateDescription(personalityItem)
+        show(getUpdatedPosition)
+    }
+
+    protected fun show(getUpdatedPosition: () -> Vector2) {
         window.toFront()
         if (gameData.isTooltipEnabled) {
             window.addAction(Actions.sequence(Actions.delay(DELAY),
@@ -40,12 +41,7 @@ open class PersonalityTooltip : BaseTooltip() {
 
     private fun updateDescription(personalityItem: PersonalityItem) {
         window.clear()
-
-        val description = getDescription(personalityItem)
-        val labelStyle = LabelStyle(FontProvider.default, Color.WHITE)
-        val label = Label(description, labelStyle)
-        window.add(label)
-
+        window.add(createLabel(getDescription(personalityItem), Color.WHITE))
         window.pack()
     }
 

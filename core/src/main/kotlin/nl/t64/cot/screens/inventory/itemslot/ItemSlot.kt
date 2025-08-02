@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.utils.Scaling
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.components.party.inventory.InventoryGroup
+import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.inventory.tooltip.ItemSlotTooltip
 import kotlin.math.floor
 
@@ -13,12 +14,6 @@ import kotlin.math.floor
 private const val SPRITE_BACKGROUND = "sprites/inventoryslot.png"
 private const val SPRITE_SELECTED = "sprites/selected.png"
 private const val NOTHING = "nothing"
-private const val BASIC = "basic"
-private const val FINE = "fine"
-private const val SPECIALIST = "specialist"
-private const val MASTERWORK = "masterwork"
-private const val EPIC = "epic"
-private const val LEGENDARY = "legendary"
 
 abstract class ItemSlot(
     val index: Int,
@@ -92,12 +87,12 @@ abstract class ItemSlot(
     private fun createTierColor(): Image {
         val itemId = getCertainInventoryImage().inventoryItem.id
         return when {
-            itemId.contains(BASIC) -> createTierColor(BASIC)
-            itemId.contains(FINE) -> createTierColor(FINE)
-            itemId.contains(SPECIALIST) -> createTierColor(SPECIALIST)
-            itemId.contains(MASTERWORK) -> createTierColor(MASTERWORK)
-            itemId.contains(EPIC) -> createTierColor(EPIC)
-            itemId.contains(LEGENDARY) -> createTierColor(LEGENDARY)
+            itemId.contains(Constant.BASIC) -> createTierColor(Constant.BASIC)
+            itemId.contains(Constant.FINE) -> createTierColor(Constant.FINE)
+            itemId.contains(Constant.SPECIALIST) -> createTierColor(Constant.SPECIALIST)
+            itemId.contains(Constant.MASTERWORK) -> createTierColor(Constant.MASTERWORK)
+            itemId.contains(Constant.EPIC) -> createTierColor(Constant.EPIC)
+            itemId.contains(Constant.LEGENDARY) -> createTierColor(Constant.LEGENDARY)
             else -> createTierColor(NOTHING)
         }
     }

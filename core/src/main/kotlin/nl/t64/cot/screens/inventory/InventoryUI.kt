@@ -33,6 +33,8 @@ private const val TITLE_HEROES = "   Heroes"
 
 internal class InventoryUI(
     stage: Stage,
+    selectedTableIndex: Int,
+    wasInventoryScreenLoadedFromMechanicScreen: Boolean,
 
     private val itemSlotTooltip: ItemSlotTooltip = ItemSlotTooltip(),
     private val personalityTooltip: PersonalityTooltip = PersonalityTooltip(),
@@ -46,7 +48,7 @@ internal class InventoryUI(
     private val spellsTable: SpellsTable = SpellsTable(personalityTooltip),
     private val spellsWindow: Window = createDefaultWindow(TITLE_SPELLS, spellsTable.container),
 
-    private val skillsTable: SkillsTable = SkillsTable(personalityTooltip),
+    private val skillsTable: SkillsTable = SkillsTable(personalityTooltip, wasInventoryScreenLoadedFromMechanicScreen),
     private val skillsWindow: Window = createDefaultWindow(TITLE_SKILLS, skillsTable.container),
 
     private val statsTable: StatsTable = StatsTable(personalityTooltip),
@@ -55,9 +57,7 @@ internal class InventoryUI(
     heroesTable: HeroesTable = HeroesTable(),
     private val heroesWindow: Window = createDefaultWindow(TITLE_HEROES, heroesTable.heroes),
 
-    tableList: List<WindowSelector> = listOf(statsTable, skillsTable, spellsTable, equipSlotsTables, inventorySlotsTable),
-    selectedTableIndex: Int = 4
-
+    tableList: List<WindowSelector> = listOf(statsTable, skillsTable, spellsTable, equipSlotsTables, inventorySlotsTable)
 ) : ScreenUI(stage, heroesTable, tableList, selectedTableIndex) {
 
     init {
@@ -83,6 +83,10 @@ internal class InventoryUI(
 
         setFocusOnSelectedTable()
         getSelectedTable().selectCurrentSlot()
+    }
+
+    fun doCrystalTryAction() {
+        getSelectedTable().doCrystalTryAction()
     }
 
     fun doPreBattleAction() {
@@ -111,6 +115,12 @@ internal class InventoryUI(
         skillsWindow.pack()
         statsWindow.pack()
         heroesWindow.pack()
+    }
+
+    fun stopTablesScrolling() {
+        statsTable.stopScrolling()
+        skillsTable.stopScrolling()
+        spellsTable.stopScrolling()
     }
 
     override fun setWindowPositions() {

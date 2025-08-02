@@ -365,17 +365,17 @@ class BattleScreenBuilder {
         val maxAp: Int = currentParticipant.maximumAP
         val actions: List<Pair<String, Int>> = listOf(
             // @formatter:off
-            String.format("%-11s%7s", "Attack",     "? AP")         to attackAp,
-            String.format("%-11s%7s", "Special",    "4 AP")         to 4,
-            String.format("%-11s%7s", "Move",       if (curAp <= 1) "1 AP" else "1-$curAp AP") to 1,
-            String.format("%-11s%7s", "Equipment",  "3 AP")         to 3,
-            String.format("%-11s%7s", "Preview",    "")             to 0,
-            String.format("%-11s%7s", "Potion",     "3 AP")         to 3,
-            String.format("%-11s%7s", "Party",      "")             to 0,
-            String.format("%-11s%7s", "Flee",       "$maxAp AP")    to maxAp,
-            String.format("%-11s%7s", "Delay turn", "1 AP")         to 1,
-            String.format("%-11s%7s", "Rest",       "$curAp AP")    to 1,
-            String.format("%-11s%7s", "End turn",   "")             to 0
+            String.format("%-11s%7s", "Attack",     "? AP")                         to attackAp,
+            String.format("%-11s%7s", "Special",    "4 AP")                         to 4,
+            String.format("%-11s%7s", "Move",       buildMoveApStringFrom(curAp))   to 1,
+            String.format("%-11s%7s", "Equipment",  "3 AP")                         to 3,
+            String.format("%-11s%7s", "Preview",    "")                             to 0,
+            String.format("%-11s%7s", "Potion",     "3 AP")                         to 3,
+            String.format("%-11s%7s", "Party",      "")                             to 0,
+            String.format("%-11s%7s", "Flee",       "$maxAp AP")                    to maxAp,
+            String.format("%-11s%7s", "Delay turn", "1 AP")                         to 1,
+            String.format("%-11s%7s", "Rest",       "$curAp AP")                    to 1,
+            String.format("%-11s%7s", "End turn",   "")                             to 0
             // @formatter:on
         )
         val actionStrings: List<String> = actions.map { (action, ap) ->
@@ -393,6 +393,10 @@ class BattleScreenBuilder {
         }
         this.selectedIndex = buttonTableMainMenuIndex
         return this
+    }
+
+    private fun buildMoveApStringFrom(curAp: Int): String {
+        return if (curAp <= 1) "1 AP" else "1-$curAp AP"
     }
 
     private fun Participant.getColorBasedOn(requestedAp: Int, action: String): String {

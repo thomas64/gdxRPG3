@@ -251,7 +251,10 @@
     "text"     : [
       "Luana has joined your party.",
       "Press the [BLUE]%inventory%[BLACK] to view her equipment, attributes and skills.",
-      "Luana is a Thief and a Mechanic. Check her skills to see what she can do.",
+      "",
+      "Luana has other skills than Mozes has. She is a Thief and a Mechanic.",
+      "With Mechanic, you can repair or craft new weapons and shields.",
+      "To do this, select the skill in her skill list in the inventory screen.",
       "",
       "If a party member dies, they cannot be revived, they are gone forever."
     ]

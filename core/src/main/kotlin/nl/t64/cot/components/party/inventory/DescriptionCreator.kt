@@ -9,7 +9,7 @@ import nl.t64.cot.constants.Constant
 
 class DescriptionCreator(
     private val inventoryItem: InventoryItem,
-    private val partySumOfMerchantSkill: Int,
+    private val partySumOfMerchantSkill: Int = -1,
 ) {
     private val descriptionLines: MutableList<InventoryDescription> = ArrayList()
     private lateinit var createLine: (Any, Any) -> InventoryDescription

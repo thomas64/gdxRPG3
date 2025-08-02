@@ -147,6 +147,10 @@ class HeroItem(
         inventory.forceSetInventoryItem(inventoryGroup, inventoryItem)
     }
 
+    fun getAllRepairableInventoryItems(mechanicRank: Int): List<InventoryItem> {
+        return inventory.getAllRepairableInventoryItems(mechanicRank)
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     fun createMessageIfNotAbleToEquip(inventoryItem: InventoryItem): String? {

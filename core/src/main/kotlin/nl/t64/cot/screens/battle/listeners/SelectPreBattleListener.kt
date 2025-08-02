@@ -35,7 +35,7 @@ class SelectPreBattleListener(
 
     private fun InputEvent.handleEnter() {
         getSelected<String>()?.let { selected ->
-            if (selected != "Party") {
+            if (selected != "Party preparation") {
                 playSe(AudioEvent.SE_MENU_CONFIRM)
             }
             when {

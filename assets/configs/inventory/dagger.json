@@ -19,7 +19,11 @@
     "durability"   : 30,
     "min_dexterity": 8,
     "base_hit"     : 85,
-    "damage"       : 8
+    "damage"       : 8,
+    "min_mechanic" : 1,
+    "leather"      : 1,
+    "wood"         : 1,
+    "metal"        : 2
   },
   "fine_dagger"      : {
     "name"         : "Fine Dagger",
@@ -30,7 +34,11 @@
     "durability"   : 25,
     "min_dexterity": 12,
     "base_hit"     : 75,
-    "damage"       : 13
+    "damage"       : 13,
+    "min_mechanic" : 3,
+    "leather"      : 3,
+    "wood"         : 3,
+    "metal"        : 6
   },
   "specialist_dagger": {
     "name"         : "Specialist Dagger",
@@ -41,7 +49,11 @@
     "durability"   : 20,
     "min_dexterity": 16,
     "base_hit"     : 65,
-    "damage"       : 18
+    "damage"       : 18,
+    "min_mechanic" : 5,
+    "leather"      : 5,
+    "wood"         : 5,
+    "metal"        : 10
   },
   "masterwork_dagger": {
     "name"         : "Masterwork Dagger",
@@ -52,6 +64,10 @@
     "durability"   : 15,
     "min_dexterity": 20,
     "base_hit"     : 55,
-    "damage"       : 23
+    "damage"       : 23,
+    "min_mechanic" : 7,
+    "leather"      : 7,
+    "wood"         : 7,
+    "metal"        : 14
   }
 }

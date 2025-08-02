@@ -38,8 +38,8 @@ class InventoryImage(val inventoryItem: InventoryItem) : Image() {
     fun isStackable(): Boolean = inventoryItem.isStackable
     fun getAmount(): Int = inventoryItem.amount
 
-    fun getComparelessDescription(totalMerchant: Int): List<InventoryDescription> {
-        val descriptionCreator = DescriptionCreator(inventoryItem, totalMerchant)
+    fun getComparelessDescription(): List<InventoryDescription> {
+        val descriptionCreator = DescriptionCreator(inventoryItem)
         return descriptionCreator.createItemDescription()
     }
 

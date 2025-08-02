@@ -9,7 +9,11 @@
     "min_strength": 11,
     "range"       : [1, 2],
     "base_hit"    : 75,
-    "damage"      : 12
+    "damage"      : 12,
+    "min_mechanic": 1,
+    "leather"     : 1,
+    "wood"        : 4,
+    "metal"       : 1
   },
   "fine_spear"      : {
     "name"        : "Fine Spear",
@@ -21,7 +25,11 @@
     "min_strength": 16,
     "range"       : [1, 2],
     "base_hit"    : 65,
-    "damage"      : 17
+    "damage"      : 17,
+    "min_mechanic": 3,
+    "leather"     : 3,
+    "wood"        : 12,
+    "metal"       : 3
   },
   "specialist_spear": {
     "name"        : "Specialist Spear",
@@ -33,7 +41,11 @@
     "min_strength": 21,
     "range"       : [1, 2],
     "base_hit"    : 55,
-    "damage"      : 22
+    "damage"      : 22,
+    "min_mechanic": 5,
+    "leather"     : 5,
+    "wood"        : 20,
+    "metal"       : 5
   },
   "masterwork_spear": {
     "name"        : "Masterwork Spear",
@@ -45,6 +57,10 @@
     "min_strength": 26,
     "range"       : [1, 2],
     "base_hit"    : 45,
-    "damage"      : 27
+    "damage"      : 27,
+    "min_mechanic": 7,
+    "leather"     : 7,
+    "wood"        : 28,
+    "metal"       : 7
   }
 }

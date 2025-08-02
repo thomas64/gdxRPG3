@@ -40,7 +40,7 @@ class EquipContainer() {
     }
 
     fun hasInventoryItem(itemId: String): Boolean {
-        return equipment.values.any { it?.id == itemId }
+        return equipment.values.filterNotNull().any { it.id == itemId }
     }
 
     fun getInventoryItem(inventoryGroup: InventoryGroup): InventoryItem? {
@@ -85,6 +85,10 @@ class EquipContainer() {
 
     fun getSumOfCalc(calcAttributeId: CalcAttributeId): Int {
         return equipment.values.filterNotNull().sumOf { it.getAttributeOfCalcAttributeId(calcAttributeId) }
+    }
+
+    fun getAllRepairableInventoryItems(mechanicRank: Int): List<InventoryItem> {
+        return equipment.values.filterNotNull().filter { it.isRepairableForMechanicRank(mechanicRank) }
     }
 
     fun getSkillOfCurrentWeapon(): SkillItemId? {

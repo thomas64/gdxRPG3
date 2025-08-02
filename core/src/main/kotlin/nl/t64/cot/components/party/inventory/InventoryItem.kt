@@ -2,6 +2,7 @@ package nl.t64.cot.components.party.inventory
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import nl.t64.cot.components.party.CalcAttributeId
+import nl.t64.cot.components.party.abilities.ResourceType
 import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.components.party.stats.StatItemId
 import kotlin.math.floor
@@ -67,7 +68,17 @@ data class InventoryItem(
     private val quickSwitch: Boolean = false,
     @JsonProperty("spell_boost")
     private val spellBoost: Boolean = false,
-    var isSoldToShop: Boolean = false
+    var isSoldToShop: Boolean = false,
+    @JsonProperty("min_mechanic")
+    private val minMechanic: Int = -1,
+    private val leather: Int = 0,
+    private val wood: Int = 0,
+    private val metal: Int = 0,
+    @JsonProperty("min_alchemist")
+    private val minAlchemist: Int = -1,
+    private val herb: Int = 0,
+    private val spice: Int = 0,
+    private val gemstone: Int = 0,
 ) {
     val isStackable: Boolean = group.isStackable()
     val isShield: Boolean = group == InventoryGroup.SHIELD
@@ -294,6 +305,41 @@ data class InventoryItem(
             "($durability/$maxDurability)"
         } else {
             "([FIREBRICK]$durability[BLACK]/$maxDurability)"
+        }
+    }
+
+    fun isCraftableForMechanicRank(rank: Int): Boolean {
+        return minMechanic > 0 && minMechanic < rank
+    }
+
+    fun isRepairableForMechanicRank(rank: Int): Boolean {
+        return minMechanic > 0 && minMechanic <= rank && durability < maxDurability
+    }
+
+    fun getRepairCosts(): Map<ResourceType, Int> {
+        if (maxDurability <= 0 || durability >= maxDurability) return emptyMap()
+
+        val repairPercentage: Float = 1f - (durability.toFloat() / maxDurability.toFloat())
+        return getCraftCosts()
+            .mapValues { maxOf(1f, it.value * repairPercentage).roundToInt() }
+    }
+
+    fun getCraftCosts(): Map<ResourceType, Int> {
+        return ResourceType.entries
+            .associateWith { getAttributeOfResourceType(it) }
+            .filterValues { it > 0 }
+    }
+
+    private fun getAttributeOfResourceType(resourceType: ResourceType): Int {
+        return when (resourceType) {
+            ResourceType.NONE -> 0
+            ResourceType.GOLD -> 0
+            ResourceType.HERB -> herb
+            ResourceType.SPICE -> spice
+            ResourceType.GEMSTONE -> gemstone
+            ResourceType.LEATHER -> leather
+            ResourceType.WOOD -> wood
+            ResourceType.METAL -> metal
         }
     }
 

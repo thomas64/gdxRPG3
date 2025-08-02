@@ -66,6 +66,9 @@ data class AbilityItem(
             return ""
         } else {
             return System.lineSeparator() + """Required skill: ${skill.title} $minSkill"""
+            // todo, moet minSkill hier wel weergegeven worden?
+            // nou, in de inventoryScreen hoeft het waarschijnlijk niet,
+            // maar in de schoolScreen is het wel relevant zover het lijkt.
         }
     }
 

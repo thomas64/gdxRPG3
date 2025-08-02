@@ -86,6 +86,11 @@ internal class AcademyUI(
         heroesWindow.pack()
     }
 
+    fun stopTablesScrolling() {
+        academyTable.stopScrolling()
+        skillsTable.stopScrolling()
+    }
+
     override fun setWindowPositions() {
         calcsWindow.setPosition(CALCS_WINDOW_POSITION_X, CALCS_WINDOW_POSITION_Y)
         skillsWindow.setPosition(SKILLS_WINDOW_POSITION_X, SKILLS_WINDOW_POSITION_Y)

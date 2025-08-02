@@ -30,7 +30,11 @@
     "durability"  : 30,
     "min_strength": 12,
     "base_hit"    : 70,
-    "damage"      : 14
+    "damage"      : 14,
+    "min_mechanic": 1,
+    "leather"     : 1,
+    "wood"        : 2,
+    "metal"       : 4
   },
   "fine_axe"       : {
     "name"        : "Fine Axe",
@@ -41,7 +45,11 @@
     "durability"  : 25,
     "min_strength": 17,
     "base_hit"    : 60,
-    "damage"      : 19
+    "damage"      : 19,
+    "min_mechanic": 3,
+    "leather"     : 3,
+    "wood"        : 6,
+    "metal"       : 12
   },
   "specialist_axe" : {
     "name"        : "Specialist Axe",
@@ -52,7 +60,11 @@
     "durability"  : 20,
     "min_strength": 22,
     "base_hit"    : 50,
-    "damage"      : 24
+    "damage"      : 24,
+    "min_mechanic": 5,
+    "leather"     : 5,
+    "wood"        : 10,
+    "metal"       : 20
   },
   "masterwork_axe" : {
     "name"        : "Masterwork Axe",
@@ -63,7 +75,11 @@
     "durability"  : 15,
     "min_strength": 27,
     "base_hit"    : 40,
-    "damage"      : 29
+    "damage"      : 29,
+    "min_mechanic": 7,
+    "leather"     : 7,
+    "wood"        : 14,
+    "metal"       : 28
   },
   "epic_axe"       : {
     "name"        : "Epic Axe",
@@ -74,6 +90,10 @@
     "durability"  : 10,
     "min_strength": 30,
     "base_hit"    : 30,
-    "damage"      : 34
+    "damage"      : 34,
+    "min_mechanic": 9,
+    "leather"     : 9,
+    "wood"        : 18,
+    "metal"       : 36
   }
 }

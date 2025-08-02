@@ -22,10 +22,14 @@ private const val CONTAINER_HEIGHT = 704f
 private const val ROW_HEIGHT = 48f
 private const val SECOND_COLUMN_PAD_LEFT = 15f
 
-internal class AcademyTable(academyId: String, tooltip: AcademyTooltip) : BaseTable(tooltip) {
+internal class AcademyTable(
+    academyId: String,
+    tooltip: AcademyTooltip
+) : BaseTable(tooltip) {
 
     private val skillsToTrain: List<SkillItem> = resourceManager.getAcademyInventory(academyId)
         .map { SkillDatabase.createSkillItem(it.key, it.value) }
+    private val verticalKeyListener = ListenerKeyVertical { updateIndex(it, skillsToTrain.size) }
 
     init {
         table.columnDefaults(0).width(FIRST_COLUMN_WIDTH)
@@ -36,7 +40,7 @@ internal class AcademyTable(academyId: String, tooltip: AcademyTooltip) : BaseTa
 
         container.add(scrollPane).height(CONTAINER_HEIGHT)
         container.background = Utils.createTopBorder()
-        container.addListener(ListenerKeyVertical { updateIndex(it, skillsToTrain.size) })
+        container.addListener(verticalKeyListener)
     }
 
     fun upgradeSkill() {
@@ -55,6 +59,10 @@ internal class AcademyTable(academyId: String, tooltip: AcademyTooltip) : BaseTa
         skillsToTrain.forEachIndexed { index, skillItem -> fillRow(skillItem, index) }
     }
 
+    fun stopScrolling() {
+        verticalKeyListener.cleanup()
+    }
+
     private fun fillRow(trainerSkill: SkillItem, index: Int) {
         val (imageColor, labelColor) = createColorsFrom(trainerSkill)
         table.add(createImageOf(trainerSkill.id.name).apply { color = imageColor })
@@ -68,6 +76,7 @@ internal class AcademyTable(academyId: String, tooltip: AcademyTooltip) : BaseTa
     }
 
     private fun scrollScrollPane() {
+        if (!table.hasKeyboardFocus()) return
         val selectedY = CONTAINER_HEIGHT - (ROW_HEIGHT * selectedIndex)
         scrollPane.scrollTo(0f, selectedY, 0f, 0f)
     }
