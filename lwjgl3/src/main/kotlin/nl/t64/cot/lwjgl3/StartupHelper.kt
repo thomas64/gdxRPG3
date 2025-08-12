@@ -15,7 +15,11 @@
 //Note, the above license and copyright applies to this file only.
 package nl.t64.cot.lwjgl3
 
+import com.badlogic.gdx.Version
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3NativesLoader
+import org.lwjgl.system.JNI
 import org.lwjgl.system.macosx.LibC
+import org.lwjgl.system.macosx.ObjCRuntime
 import java.io.BufferedReader
 import java.io.File
 import java.io.InputStreamReader
@@ -75,7 +79,16 @@ class StartupHelper private constructor() {
                     // By default, LWJGL3 extracts to the directory specified by "java.io.tmpdir", which is usually the user's home.
                     // If the user's name has non-ASCII (or some non-alphanumeric) characters in it, that would fail.
                     // By extracting to the relevant "ProgramData" folder, which is usually "C:\ProgramData", we avoid this.
-                    System.setProperty("java.io.tmpdir", System.getenv("ProgramData") + "/libGDX-temp")
+                    // We also temporarily change the "user.name" property to one without any chars that would be invalid.
+                    // We revert our changes immediately after loading LWJGL3 natives.
+                    val programData = System.getenv("ProgramData") ?: "C:\\Temp\\"
+                    val prevTmpDir = System.getProperty("java.io.tmpdir", programData)
+                    val prevUser = System.getProperty("user.name", "libGDX_User")
+                    System.setProperty("java.io.tmpdir", "$programData/libGDX-temp")
+                    System.setProperty("user.name", "User_${prevUser.hashCode()}_GDX${Version.VERSION}".replace('.', '_'))
+                    Lwjgl3NativesLoader.load()
+                    System.setProperty("java.io.tmpdir", prevTmpDir)
+                    System.setProperty("user.name", prevUser)
                 }
                 return false
             }
@@ -84,6 +97,13 @@ class StartupHelper private constructor() {
             if (System.getProperty("org.graalvm.nativeimage.imagecode", "").isNotEmpty()) {
                 return false
             }
+
+            // Checks if we are already on the main thread, such as from running via Construo.
+            val objcMsgSend = ObjCRuntime.getLibrary().getFunctionAddress("objc_msgSend")
+            val nsThread = ObjCRuntime.objc_getClass("NSThread")
+            val currentThread = JNI.invokePPP(nsThread, ObjCRuntime.sel_getUid("currentThread"), objcMsgSend)
+            val isMainThread = JNI.invokePPZ(currentThread, ObjCRuntime.sel_getUid("isMainThread"), objcMsgSend)
+            if (isMainThread) return false
 
             val pid = LibC.getpid()
 
@@ -103,7 +123,7 @@ class StartupHelper private constructor() {
 
             // Restart the JVM with -XstartOnFirstThread
             val jvmArgs = ArrayList<String?>()
-            val separator = System.getProperty("file.separator")
+            val separator = System.getProperty("file.separator", "/")
             // The following line is used assuming you target Java 8, the minimum for LWJGL3.
             val javaExecPath = System.getProperty("java.home") + separator + "bin" + separator + "java"
 

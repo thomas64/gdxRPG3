@@ -61,7 +61,7 @@ configure(subprojects) {
 }
 
 subprojects {
-  version = '$projectVersion'
+  version = "$projectVersion"
   ext.appName = 'CrystalOfTime'
   repositories {
     mavenCentral()
