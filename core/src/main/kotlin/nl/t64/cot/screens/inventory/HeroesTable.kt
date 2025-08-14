@@ -35,6 +35,10 @@ class HeroesTable {
     val heroes = Table().apply { background = Utils.createTopBorder() }
     private val texturesToDispose: MutableSet<Texture> = mutableSetOf()
 
+    init {
+        update()
+    }
+
     fun update() {
         texturesToDispose.disposeAndClear()
         heroes.clear()

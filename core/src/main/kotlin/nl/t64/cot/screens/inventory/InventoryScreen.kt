@@ -1,6 +1,7 @@
 package nl.t64.cot.screens.inventory
 
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
+import com.badlogic.gdx.scenes.scene2d.ui.Image
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.preferenceManager
@@ -24,64 +25,84 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
     private val conversationDialog: ConversationDialog = ConversationDialog(this)
     private lateinit var inventoryUI: InventoryUI
     private lateinit var listener: InventoryScreenListener
+    private var startingSelectedTableIndex: Int = 4
+    private var isLoadedFromMechanicScreen: Boolean = false
 
     companion object {
-        fun load() {
-            playSe(AudioEvent.SE_SCROLL)
-            screenManager.openParchmentLoadScreen(ScreenType.INVENTORY)
-            val inventoryScreen = (screenManager.getScreen(ScreenType.INVENTORY) as InventoryScreen)
+        fun loadFromMechanic(screenShot: Image, parchment: Image) {
+            playSe(AudioEvent.SE_MENU_CURSOR)
+            (screenManager.getScreen(ScreenType.INVENTORY) as InventoryScreen).apply {
+                this.setBackground(screenShot, parchment)
+                this.startingSelectedTableIndex = 1
+                this.isLoadedFromMechanicScreen = true
 
-            inventoryScreen.createAndSetListener(openQuestLogFunction = { inventoryScreen.openQuestLogScreen() },
-                                                 closeScreenFunction = { inventoryScreen.closeScreen() },
-                                                 doActionFunction = { inventoryScreen.doAction() },
-                                                 tryToDropItemFunction = { inventoryScreen.tryToDropItem() },
-                                                 tryToDismissHeroFunction = { inventoryScreen.tryToDismissHero() })
-            inventoryScreen.addInputListenerWithSmallDelay()
+                this.createAndSetListener(openQuestLogFunction = { this.openQuestLogScreen() },
+                                          closeScreenFunction = { this.closeScreen() },
+                                          doActionFunction = { this.doAction() },
+                                          tryToDropItemFunction = { this.tryToDropItem() },
+                                          tryToDismissHeroFunction = { this.tryToDismissHero() })
+                this.addInputListenerWithSmallDelay()
+            }
+            screenManager.setScreen(ScreenType.INVENTORY)
+        }
+
+        fun load() {
+            loadAndGetInventoryScreen().apply {
+                this.createAndSetListener(openQuestLogFunction = { this.openQuestLogScreen() },
+                                          closeScreenFunction = { this.closeScreen() },
+                                          doActionFunction = { this.doAction() },
+                                          tryToDropItemFunction = { this.tryToDropItem() },
+                                          tryToDismissHeroFunction = { this.tryToDismissHero() })
+                this.addInputListenerWithSmallDelay()
+            }
         }
 
         fun loadForCutsceneTryCrystal() {
-            playSe(AudioEvent.SE_SCROLL)
-            screenManager.openParchmentLoadScreen(ScreenType.INVENTORY)
-            val inventoryScreen = (screenManager.getScreen(ScreenType.INVENTORY) as InventoryScreen)
-
-            inventoryScreen.stage.addAction(Actions.sequence(
-                Actions.delay(0.5f),
-                Actions.run {
-                    val dialog = MessageDialog("Select and use the Crystal of Time to revert time by 12 hours.")
-                    dialog.show(inventoryScreen.stage, AudioEvent.SE_CONVERSATION_NEXT, 2f)
-                    inventoryScreen.createAndSetListener(openQuestLogFunction = { playSe(AudioEvent.SE_MENU_ERROR) },
-                                                         closeScreenFunction = { dialog.show(inventoryScreen.stage, AudioEvent.SE_CONVERSATION_NEXT) },
-                                                         doActionFunction = { inventoryScreen.doCrystalAction() },
-                                                         tryToDropItemFunction = {},
-                                                         tryToDismissHeroFunction = {})
-                    inventoryScreen.addInputListenerWithSmallDelay()
-                }))
+            loadAndGetInventoryScreen().apply {
+                this.stage.addAction(Actions.sequence(
+                    Actions.delay(0.5f),
+                    Actions.run {
+                        val dialog = MessageDialog("Select and use the Crystal of Time to revert time by 12 hours.")
+                        dialog.show(this.stage, AudioEvent.SE_CONVERSATION_NEXT, 2f)
+                        this.createAndSetListener(openQuestLogFunction = { playSe(AudioEvent.SE_MENU_ERROR) },
+                                                  closeScreenFunction = { dialog.show(this.stage, AudioEvent.SE_CONVERSATION_NEXT) },
+                                                  doActionFunction = { this.doCrystalAction() },
+                                                  tryToDropItemFunction = {},
+                                                  tryToDismissHeroFunction = {})
+                        this.addInputListenerWithSmallDelay()
+                    }))
+            }
         }
 
         fun loadForPreBattle() {
-            playSe(AudioEvent.SE_SCROLL)
-            screenManager.openParchmentLoadScreen(ScreenType.INVENTORY)
-            val inventoryScreen = (screenManager.getScreen(ScreenType.INVENTORY) as InventoryScreen)
-
-            inventoryScreen.createAndSetListener(openQuestLogFunction = { playSe(AudioEvent.SE_MENU_ERROR) },
-                                                 closeScreenFunction = { inventoryScreen.closeScreen(ScreenType.BATTLE) },
-                                                 doActionFunction = { inventoryScreen.doPreBattleAction() },
-                                                 tryToDropItemFunction = {},
-                                                 tryToDismissHeroFunction = {})
-            inventoryScreen.addInputListenerWithSmallDelay()
+            loadAndGetInventoryScreen().apply {
+                this.createAndSetListener(openQuestLogFunction = { playSe(AudioEvent.SE_MENU_ERROR) },
+                                          closeScreenFunction = { this.closeScreen(ScreenType.BATTLE) },
+                                          doActionFunction = { this.doPreBattleAction() },
+                                          tryToDropItemFunction = {},
+                                          tryToDismissHeroFunction = {})
+                this.addInputListenerWithSmallDelay()
+            }
         }
 
         fun loadForBattle() {
+            loadAndGetInventoryScreen().apply {
+                this.createAndSetListener(openQuestLogFunction = { playSe(AudioEvent.SE_MENU_ERROR) },
+                                          closeScreenFunction = { this.closeScreen(ScreenType.BATTLE) },
+                                          doActionFunction = { this.doBattleAction() },
+                                          tryToDropItemFunction = {},
+                                          tryToDismissHeroFunction = {})
+                this.addInputListenerWithSmallDelay()
+            }
+        }
+
+        private fun loadAndGetInventoryScreen(): InventoryScreen {
             playSe(AudioEvent.SE_SCROLL)
             screenManager.openParchmentLoadScreen(ScreenType.INVENTORY)
-            val inventoryScreen = (screenManager.getScreen(ScreenType.INVENTORY) as InventoryScreen)
-
-            inventoryScreen.createAndSetListener(openQuestLogFunction = { playSe(AudioEvent.SE_MENU_ERROR) },
-                                                 closeScreenFunction = { inventoryScreen.closeScreen(ScreenType.BATTLE) },
-                                                 doActionFunction = { inventoryScreen.doBattleAction() },
-                                                 tryToDropItemFunction = {},
-                                                 tryToDismissHeroFunction = {})
-            inventoryScreen.addInputListenerWithSmallDelay()
+            return (screenManager.getScreen(ScreenType.INVENTORY) as InventoryScreen).apply {
+                this.startingSelectedTableIndex = 4
+                this.isLoadedFromMechanicScreen = false
+            }
         }
 
     }
@@ -105,7 +126,7 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
 
     override fun show() {
         setInputProcessors(stage)
-        inventoryUI = InventoryUI(stage)
+        inventoryUI = InventoryUI(stage, startingSelectedTableIndex, isLoadedFromMechanicScreen)
         ButtonLabels(stage).create()
     }
 

@@ -39,6 +39,8 @@ internal class StatsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
         container.add(table).height(CONTAINER_HEIGHT)
         container.background = Utils.createTopBorder()
         container.addListener(ListenerKeyVertical { updateIndex(it, table.rows) })
+
+        super.update()
     }
 
     override fun selectAnotherSlotWhenIndexBecameOutOfBounds() {

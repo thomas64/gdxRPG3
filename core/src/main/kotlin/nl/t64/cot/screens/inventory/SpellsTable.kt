@@ -31,6 +31,8 @@ internal class SpellsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
         container.add(scrollPane).height(CONTAINER_HEIGHT)
         container.background = Utils.createTopBorder()
         container.addListener(ListenerKeyVertical { updateIndex(it, allAbilities.size) })
+
+        super.update()
     }
 
     override fun selectAnotherSlotWhenIndexBecameOutOfBounds() {

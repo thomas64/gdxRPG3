@@ -39,7 +39,7 @@ open class ButtonLabels(private val stage: Stage) {
         stage.addActor(buttonBottomRightLabel)
     }
 
-    private fun createTopLeftText(): String {
+    open fun createTopLeftText(): String {
         return if (Utils.isGamepadConnected()) {
             "[LB]"
         } else {
@@ -47,7 +47,7 @@ open class ButtonLabels(private val stage: Stage) {
         }
     }
 
-    private fun createTopRightText(): String {
+    open fun createTopRightText(): String {
         return if (Utils.isGamepadConnected()) {
             "[RB]"
         } else {
@@ -73,9 +73,9 @@ open class ButtonLabels(private val stage: Stage) {
 
     open fun createBottomLeftText(): String? {
         return if (Utils.isGamepadConnected()) {
-            "[A] De/Equip/Upgrade      [Select] Dismiss hero      [Start] Sort inventory"
+            "[A] Action      [Select] Dismiss hero      [Start] Sort inventory"
         } else {
-            "[A] De/Equip/Upgrade      [F] Dismiss hero      [Space] Sort inventory"
+            "[A] Action      [F] Dismiss hero      [Space] Sort inventory"
         }
     }
 

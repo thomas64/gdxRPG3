@@ -10,7 +10,7 @@ import nl.t64.cot.screens.inventory.BaseTable
 import nl.t64.cot.screens.inventory.tooltip.PersonalityTooltip
 
 
-private const val FIRST_COLUMN_WIDTH = 200f
+private const val FIRST_COLUMN_WIDTH = 150f
 private const val SECOND_COLUMN_WIDTH = 60f
 
 internal class CalcsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
@@ -32,7 +32,7 @@ internal class CalcsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
 
         table.add("").row()
 
-        table.add(Label("Wizard skill rank", createLabelStyle()))
+        table.add(Label("Wizard", createLabelStyle()))
         table.add(Label(getWizardRankForVisual(), createLabelStyle()))
     }
 

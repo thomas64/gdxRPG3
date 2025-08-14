@@ -1,5 +1,6 @@
 package nl.t64.cot.screens.mechanic
 
+import com.badlogic.gdx.scenes.scene2d.ui.Image
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
@@ -10,12 +11,18 @@ import nl.t64.cot.screens.inventory.InventoryScreen
 
 class MechanicScreen : ParchmentScreen() {
 
+    private lateinit var mechanicUI: MechanicUI
+    private lateinit var heroId: String
     private lateinit var listener: MechanicScreenListener
 
     companion object {
-        fun load() {
-            playSe(AudioEvent.SE_SCROLL)
-            screenManager.openParchmentLoadScreen(ScreenType.MECHANIC)
+        fun load(heroId: String, screenShot: Image, parchment: Image) {
+            playSe(AudioEvent.SE_MENU_CURSOR)
+            (screenManager.getScreen(ScreenType.MECHANIC) as MechanicScreen).apply {
+                this.heroId = heroId
+                this.setBackground(screenShot, parchment)
+            }
+            screenManager.setScreen(ScreenType.MECHANIC)
         }
     }
 
@@ -23,14 +30,42 @@ class MechanicScreen : ParchmentScreen() {
         setInputProcessors(stage)
         createAndSetListener()
         stage.addListener(listener)
+
+        mechanicUI = MechanicUI(stage, heroId)
+        MechanicButtonLabels(stage).create()
     }
 
     override fun render(dt: Float) {
         renderStage(dt)
+        mechanicUI.update()
+    }
+
+    override fun removeTriggersListener() {
+        listener.removeTriggers()
     }
 
     private fun createAndSetListener() {
-        listener = MechanicScreenListener({ InventoryScreen.load() })
+        val screenShot = stage.actors[0] as Image
+        val parchment = stage.actors[1] as Image
+        listener = MechanicScreenListener(stage,
+                                          { InventoryScreen.loadFromMechanic(screenShot, parchment) },
+                                          { selectPreviousTable() },
+                                          { selectNextTable() },
+                                          { toggleTooltip() })
+    }
+
+    private fun selectPreviousTable() {
+        playSe(AudioEvent.SE_MENU_CURSOR)
+        mechanicUI.selectPreviousTable()
+    }
+
+    private fun selectNextTable() {
+        playSe(AudioEvent.SE_MENU_CURSOR)
+        mechanicUI.selectNextTable()
+    }
+
+    private fun toggleTooltip() {
+        mechanicUI.toggleTooltip() // ToDo
     }
 
 }

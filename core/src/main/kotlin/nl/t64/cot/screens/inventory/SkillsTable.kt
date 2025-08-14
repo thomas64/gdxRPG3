@@ -1,6 +1,7 @@
 package nl.t64.cot.screens.inventory
 
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import nl.t64.cot.Utils
@@ -21,7 +22,10 @@ private const val SECOND_COLUMN_PAD_LEFT = 15f
 private const val TABLE_PAD_TOP = -3f
 private const val SUBTITLE_PAD_TOP = 10f
 
-internal class SkillsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
+internal class SkillsTable(
+    tooltip: PersonalityTooltip,
+    wasInventoryScreenLoadedFromMechanicScreen: Boolean = false
+) : BaseTable(tooltip) {
 
     private val allSkills: List<SkillItem> get() = selectedHero.getAllSkillsAboveZero()
     private var deltaIndex = 0
@@ -38,6 +42,12 @@ internal class SkillsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
         container.add(scrollPane).height(CONTAINER_HEIGHT)
         container.background = Utils.createTopBorder()
         container.addListener(ListenerKeyVertical { updateIndex(it, allSkills.size) })
+
+        super.update()
+
+        if (wasInventoryScreenLoadedFromMechanicScreen) {
+            selectedIndex = allSkills.indexOfFirst { it.id == SkillItemId.MECHANIC }
+        }
     }
 
     override fun selectAnotherSlotWhenIndexBecameOutOfBounds() {
@@ -88,7 +98,9 @@ internal class SkillsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
         val selectedSkill: SkillItem = allSkills[selectedIndex]
         if (selectedSkill.id == SkillItemId.MECHANIC) {
             hideTooltip()
-            MechanicScreen.load()
+            MechanicScreen.load(selectedHero.id,
+                                screenShot = table.stage.actors[0] as Image,
+                                parchment = table.stage.actors[1] as Image)
         }
     }
 

@@ -23,7 +23,7 @@ object SkillDatabase {
             SkillItemId.LOREMASTER -> loremasterDescription()
 
             SkillItemId.ALCHEMIST -> alchemistDescription()
-            SkillItemId.MECHANIC -> mechanicsDescription()
+            SkillItemId.MECHANIC -> mechanicDescription()
             SkillItemId.RANGER -> rangerDescription()
             SkillItemId.MERCHANT -> merchantDescription()
 
@@ -94,17 +94,19 @@ object SkillDatabase {
     private fun alchemistDescription(): List<String> {
         return listOf(
             "- 'Alchemist' allows for manufacturing various",
-            "  magical potions out of various resources."
+            "  magical potions out of various resources.",
+            "  To do this, you can select this skill now."
         )
     }
 
-    private fun mechanicsDescription(): List<String> {
+    private fun mechanicDescription(): List<String> {
         return listOf(
             "- 'Mechanic' allows the possibility to disarm",
             "  traps on treasure chests.",
             "",
             "- 'Mechanic' allows for manufacturing various",
-            "  weapons and armor out of various resources."
+            "  weapons and armor out of various resources.",
+            "  To do this, you can select this skill now."
         )
     }
 
