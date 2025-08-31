@@ -4,7 +4,8 @@ package nl.t64.cot.audio
 enum class AudioEvent(val filePath: String, val volume: Float = 1f) {
 
     BGM_TITLE("audio/bgm/brave.mp3", 0.1f),
-    BGM_FOREST("audio/bgm/journey.ogg", 0.1f),
+    BGM_FOREST("audio/bgm/decision_edit.ogg", 0.2f),
+    BGM_OVERWORLD("audio/bgm/journey.ogg", 0.1f),
     BGM_HONEYWOOD("audio/bgm/town.ogg", 0.1f),
     BGM_INN("audio/bgm/store.ogg", 0.1f),
     BGM_HOUSE("audio/bgm/wake_up.ogg", 0.1f),
