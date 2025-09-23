@@ -30,6 +30,10 @@ class InventorySlotsTableListener(
         return true
     }
 
+    fun cleanup() {
+        stopRepeatTask()
+    }
+
     private fun getDeltaForKey(keycode: Int): Int? {
         return when (keycode) {
             Input.Keys.UP -> -slotsPerRow

@@ -33,12 +33,13 @@ class InventorySlotsTable(
     }
     private val selector = ItemSlotSelector(inventory, inventorySlotTable, SLOTS_IN_ROW)
     private val taker = InventorySlotTaker(selector)
+    private val listener: InventorySlotsTableListener
 
     init {
         fillInventorySlots()
         selector.setNewCurrentByIndex(0)
 
-        val listener = InventorySlotsTableListener({ selector.selectNewSlot(it) }, SLOTS_IN_ROW)
+        listener = InventorySlotsTableListener({ selector.selectNewSlot(it) }, SLOTS_IN_ROW)
         inventorySlotTable.addAction(Actions.sequence(Actions.delay(0.1f),
                                                       Actions.addListener(listener, false)))
     }
@@ -49,6 +50,7 @@ class InventorySlotsTable(
     }
 
     override fun deselectCurrentSlot() {
+        listener.cleanup()
         selector.deselectCurrentSlot()
         InventoryUtils.setWindowDeselected(container)
     }
@@ -125,7 +127,6 @@ class InventorySlotsTable(
     fun clearAndFill() {
         val index = selector.getCurrentSlot().index
         val isSelected = selector.getCurrentSlot().isSelected()
-        val listener = inventorySlotTable.listeners[0]
         inventorySlotTable.clear()
         fillInventorySlots()
         inventorySlotTable.addListener(listener)
