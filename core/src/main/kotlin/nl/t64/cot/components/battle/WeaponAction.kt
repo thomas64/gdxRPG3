@@ -122,7 +122,7 @@ class WeaponAction(
                 [FIREBRICK]-[BLACK] Disadvantage:
 
                 $effectiveness
-            """.trimIndent().trimMargin(),
+            """.trimIndent().trimMargin(marginPrefix = ">"),
                       "",
                       """
 
@@ -135,35 +135,30 @@ class WeaponAction(
     private fun InventoryItem.switchWeaponTo(newWeapon: InventoryItem): Triple<String, String, String> {
         val currentWeaponSpecs: String = this.listWeaponSpecs()
         val currentEffectiveness: String = this.listEffectiveness()
-        val newWeaponSpecs: String = newWeapon.listWeaponSpecs()
-        val newEffectiveness: String = newWeapon.listEffectiveness()
-        val underscores: String = createUnderscoresWithLengthOf(currentWeaponSpecs, currentEffectiveness, newWeaponSpecs, newEffectiveness)
+        val currentUnderscores: String = createUnderscoresWithLengthOf(currentWeaponSpecs, currentEffectiveness)
+        val newWeaponSpecs: String = newWeapon.listWeaponSpecs("|  ")
+        val newEffectiveness: String = newWeapon.listEffectiveness("|  ")
+        val newUnderscores: String = createUnderscoresWithLengthOf(newWeaponSpecs, newEffectiveness)
 
         return Triple("""
                 Current weapon:
 
                 $currentWeaponSpecs
-                ${underscores + "____________"}
-
-                [BLUE]+[BLACK] Advantage/
-                [FIREBRICK]-[BLACK] Disadvantage:
+                ${currentUnderscores}__
 
                 $currentEffectiveness
-            """.trimIndent().trimMargin(),
+                ${currentUnderscores}__
+            """.trimIndent().trimMargin(marginPrefix = ">"),
                       """
-                New weapon:
-
+                |  New weapon:
+                |
                 $newWeaponSpecs
-                $underscores
-
-
-
-
+                |__${newUnderscores.dropLast(2)}
+                |
                 $newEffectiveness
-            """.trimIndent().trimMargin(),
+                |__${newUnderscores.dropLast(2)}
+            """.trimIndent().trimMargin(marginPrefix = ">"),
                       """
-
-                ${underscores + underscores + "____________"}
 
                 Equip?${getApCostText()}
             """.trimIndent())
@@ -182,7 +177,7 @@ class WeaponAction(
                 [FIREBRICK]-[BLACK] Disadvantage:
 
                 $effectiveness
-            """.trimIndent().trimMargin(),
+            """.trimIndent().trimMargin(marginPrefix = ">"),
                       "",
                       """
 
@@ -192,38 +187,39 @@ class WeaponAction(
             """.trimIndent())
     }
 
-    private fun InventoryItem.listWeaponSpecs(): String {
+    private fun InventoryItem.listWeaponSpecs(prefix: String = ""): String {
         return """
-                ${this.name} ${this.getDurabilityText()}
-                Range:    ${String.format("%3s", this.getRangeText())}
-                Base hit: ${String.format("%3d", this.getAttributeOfCalcAttributeId(CalcAttributeId.BASE_HIT))} %
-                Damage:   ${String.format("%3d", this.getAttributeOfCalcAttributeId(CalcAttributeId.DAMAGE))}
+                ${prefix}${this.name} ${this.getDurabilityText()}
+                ${prefix}Range:    ${String.format("%3s", this.getRangeText())}
+                ${prefix}Base hit: ${String.format("%3d", this.getAttributeOfCalcAttributeId(CalcAttributeId.BASE_HIT))} %
+                ${prefix}Damage:   ${String.format("%3d", this.getAttributeOfCalcAttributeId(CalcAttributeId.DAMAGE))}
             """.trim()
     }
 
-    private fun InventoryItem.listEffectiveness(): String {
-        if (enemies.map { it.getCurrentWeapon()!! }
+    private fun InventoryItem.listEffectiveness(prefix: String = ""): String {
+        if (enemies.size == 1 &&
+            enemies.map { it.getCurrentWeapon()!! }
                 .none { this.hasWeaponTriangleAdvantage(it) || this.hasWeaponTriangleDisadvantage(it) }
-        ) return "[GRAY]None[BLACK]"
+        ) return "${prefix}[GRAY]None[BLACK]"
 
         val result = enemies.joinToString(separator = "") { enemy ->
             val enemyWeapon = enemy.getCurrentWeapon()!!
             when {
                 this.hasWeaponTriangleAdvantage(enemyWeapon) -> {
-                    """[BLUE]+ ${enemy.character.name}[BLACK]
-                       |"""
+                    """${prefix}[BLUE]+ ${enemy.character.name}[BLACK]
+                       >"""
                 }
                 this.hasWeaponTriangleDisadvantage(enemyWeapon) -> {
-                    """[FIREBRICK]- ${enemy.character.name}[BLACK]
-                       |"""
+                    """${prefix}[FIREBRICK]- ${enemy.character.name}[BLACK]
+                       >"""
                 }
                 else -> {
-                    """[GRAY]  ${enemy.character.name}[BLACK]
-                       |"""
+                    """${prefix}[GRAY]o ${enemy.character.name}[BLACK]
+                       >"""
                 }
             }
         }
-        return result.replace(Regex("""[\n|\r]+$"""), "").trim()
+        return result.replace(Regex("""[\n>\r]+$"""), "").trim()
     }
 
     private fun InventoryItem.unequipShield(): Triple<String, String, String> {
@@ -244,21 +240,22 @@ class WeaponAction(
 
     private fun InventoryItem.switchShieldTo(newShield: InventoryItem): Triple<String, String, String> {
         val currentShieldSpecs: String = this.listShieldSpecs()
-        val newShieldSpecs: String = newShield.listShieldSpecs()
-        val underscores: String = createUnderscoresWithLengthOf(currentShieldSpecs, newShieldSpecs)
+        val currentUnderscores: String = createUnderscoresWithLengthOf(currentShieldSpecs)
+        val newShieldSpecs: String = newShield.listShieldSpecs("|  ")
+        val newUnderscores: String = createUnderscoresWithLengthOf(newShieldSpecs)
 
         return Triple("""
                 Current shield:
 
                 $currentShieldSpecs
-                ${underscores + "________"}
+                ${currentUnderscores}__
             """.trimIndent().trimMargin(),
                       """
-                New shield:
-
+                |  New shield:
+                |
                 $newShieldSpecs
-                $underscores
-            """.trimIndent().trimMargin(),
+                |__${newUnderscores.dropLast(2)}
+            """.trimIndent().trimMargin(marginPrefix = ";"),
                       """
 
                 Equip?${getApCostText()}
@@ -281,13 +278,13 @@ class WeaponAction(
             """.trimIndent())
     }
 
-    private fun InventoryItem.listShieldSpecs(): String {
+    private fun InventoryItem.listShieldSpecs(prefix: String = ""): String {
         return """
-                ${this.name} ${this.getDurabilityText()}
-                Protection: ${String.format("%3d", this.getAttributeOfCalcAttributeId(CalcAttributeId.PROTECTION))}
-                Defense:    ${String.format("%3d", this.getAttributeOfCalcAttributeId(CalcAttributeId.DEFENSE))}
-                Speed:      ${String.format("%3d", this.getAttributeOfStatItemId(StatItemId.SPEED))}
-                Stealth:    ${String.format("%3d", this.getAttributeOfSkillItemId(SkillItemId.STEALTH))}
+                ${prefix}${this.name} ${this.getDurabilityText()}
+                ${prefix}Protection: ${String.format("%3d", this.getAttributeOfCalcAttributeId(CalcAttributeId.PROTECTION))}
+                ${prefix}Defense:    ${String.format("%3d", this.getAttributeOfCalcAttributeId(CalcAttributeId.DEFENSE))}
+                ${prefix}Speed:      ${String.format("%3d", this.getAttributeOfStatItemId(StatItemId.SPEED))}
+                ${prefix}Stealth:    ${String.format("%3d", this.getAttributeOfSkillItemId(SkillItemId.STEALTH))}
             """.trim()
     }
 
@@ -304,7 +301,7 @@ class WeaponAction(
     }
 
     private fun createUnderscoresWithLengthOf(vararg allLines: String): String {
-        val minLength = 17
+        val minLength = 16
         val maxLength = allLines.getLongestLineLength()
         return "_".repeat(maxOf(minLength, maxLength))
     }

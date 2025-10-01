@@ -27,6 +27,9 @@ class TwoColumnsQuestionDialog(
             dialog.contentTable.padLeft(5f)     // + 15f from below = padTop(20f)
             dialog.contentTable.padRight(20f)   // padRight(20f)
             dialog.background.minWidth = 0f
+        } else {
+            val label1 = dialog.contentTable.findActor("label1") as Label
+            (label1.parent as Table).getCell(label1).padRight(6f)
         }
     }
 
@@ -47,6 +50,8 @@ private fun Triple<String, String, String>.toDialogTable(): Table {
     label2.setAlignment(Align.left)
     label3.setAlignment(Align.center)
 
+    label1.name = "label1"
+
     return Table().apply {
         padTop(20f)
         padLeft(15f)
@@ -55,5 +60,3 @@ private fun Triple<String, String, String>.toDialogTable(): Table {
         add(label3).colspan(2).padTop(-10f)
     }
 }
-
-
