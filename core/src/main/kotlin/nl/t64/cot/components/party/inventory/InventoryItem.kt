@@ -291,9 +291,9 @@ data class InventoryItem(
 
     fun getDurabilityText(): String {
         return if (durability > 5) {
-            "($durability)"
+            "($durability/$maxDurability)"
         } else {
-            "([FIREBRICK]$durability[BLACK])"
+            "([FIREBRICK]$durability[BLACK]/$maxDurability)"
         }
     }
 

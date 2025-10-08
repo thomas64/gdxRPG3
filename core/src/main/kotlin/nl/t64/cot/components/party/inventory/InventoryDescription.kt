@@ -42,6 +42,7 @@ class InventoryDescription {
             isHeroNotEnoughForItem(item1, hero) -> AttributeState.CANNOT_USE
             value is Int -> compareInt(item1, item2)
             value == "0" -> compareInt(item1, item2)
+            key == CalcAttributeId.DURABILITY && value is String -> compareDurability(item1, item2)
             key is String && key.contains("range", true) -> compareRange(item1, item2)
             else -> AttributeState.SAME
         }
@@ -83,6 +84,14 @@ class InventoryDescription {
         return when {
             item1.getAttributeOfCalcAttributeId(key) < item2.getAttributeOfCalcAttributeId(key) -> AttributeState.LESS
             item1.getAttributeOfCalcAttributeId(key) > item2.getAttributeOfCalcAttributeId(key) -> AttributeState.MORE
+            else -> AttributeState.SAME
+        }
+    }
+
+    private fun compareDurability(item1: InventoryItem, item2: InventoryItem): AttributeState {
+        return when {
+            item1.durability < item2.durability -> AttributeState.LESS
+            item1.durability > item2.durability -> AttributeState.MORE
             else -> AttributeState.SAME
         }
     }

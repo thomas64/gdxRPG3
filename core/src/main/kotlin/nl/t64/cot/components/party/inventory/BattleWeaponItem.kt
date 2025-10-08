@@ -5,6 +5,7 @@ class BattleWeaponItem(
     val inventoryItem: InventoryItem
 ) {
     private val durability: Int = inventoryItem.durability
+    private val maxDurability: Int = inventoryItem.maxDurability
     val name: String = inventoryItem.name
     val group: InventoryGroup = inventoryItem.group
 
@@ -13,7 +14,7 @@ class BattleWeaponItem(
             "Unequip current weapon",
             "Unequip current shield",
             "Back" -> name
-            else -> "$name ($durability)"
+            else -> String.format("%-25s%7s", name, "($durability/$maxDurability)")
         }
     }
 

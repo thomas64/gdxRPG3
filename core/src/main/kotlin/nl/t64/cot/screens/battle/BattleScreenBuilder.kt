@@ -537,17 +537,28 @@ class BattleScreenBuilder {
     private fun GdxList<BattleWeaponItem>.toWeaponTable(currentWeapon: InventoryItem?,
                                                         currentShield: InventoryItem?): Table {
         val listWithEquipment = this
-        val weapon: String = currentWeapon?.let { "${it.name} (${it.durability})" } ?: "None"
-        val shield: String = currentShield?.let { "${it.name} (${it.durability})" } ?: "None"
+        val weaponLine: String = createItemLine("Current Weapon:", currentWeapon)
+        val shieldLine: String = createItemLine("Current Shield:", currentShield)
+        val line: String = createLine(weaponLine, shieldLine)
 
         return createSelectionTable().apply {
-            add("Current Weapon: $weapon").row()
-            add("Current Shield: $shield").row()
-            add("______________________________").padTop(-10f).padBottom(5f).row()
+            add(weaponLine).row()
+            add(shieldLine).row()
+            add(line).padTop(-10f).padBottom(5f).row()
             add("Select Weapon or Shield:").row()
-            add("______________________________").padTop(-10f).padBottom(10f).row()
+            add(line).padTop(-10f).padBottom(10f).row()
             finish(listWithEquipment)
         }
+    }
+
+    private fun createItemLine(prefix: String, currentItem: InventoryItem?): String {
+        return currentItem?.let { "$prefix ${it.name} (${it.durability}/${it.maxDurability})" } ?: "$prefix None"
+    }
+
+    private fun createLine(weapon: String, shield: String): String {
+        val minLineLength = 32
+        val maxLength = maxOf(weapon.length, shield.length, minLineLength)
+        return "_".repeat(maxLength)
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

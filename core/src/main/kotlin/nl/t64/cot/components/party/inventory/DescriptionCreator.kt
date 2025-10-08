@@ -126,7 +126,13 @@ class DescriptionCreator(
 
     private fun addCalcs() {
         CalcAttributeId.entries.forEach {
-            val value = if (it in calcsYouDontHave) "0" else inventoryItem.getAttributeOfCalcAttributeId(it)
+            val value = if (it in calcsYouDontHave) "0" else {
+                if (it == CalcAttributeId.DURABILITY) {
+                    "${inventoryItem.durability} / ${inventoryItem.maxDurability}"
+                } else {
+                    inventoryItem.getAttributeOfCalcAttributeId(it)
+                }
+            }
             descriptionLines.add(createLine(it, value))
         }
     }
