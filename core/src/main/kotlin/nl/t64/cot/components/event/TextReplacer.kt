@@ -6,7 +6,7 @@ import nl.t64.cot.Utils
 object TextReplacer {
 
     fun replace(listOfStrings: List<String>): String {
-        return listOfStrings.joinToString(System.lineSeparator()) { replace(it) }
+        return listOfStrings.joinToString(separator = System.lineSeparator(), transform = { replace(it) })
     }
 
     private fun replace(str: String): String {

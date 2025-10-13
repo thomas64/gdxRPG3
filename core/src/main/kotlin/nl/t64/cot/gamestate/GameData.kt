@@ -7,6 +7,7 @@ import nl.t64.cot.components.conversation.PhraseIdContainer
 import nl.t64.cot.components.cutscene.CutsceneContainer
 import nl.t64.cot.components.door.DoorContainer
 import nl.t64.cot.components.event.EventContainer
+import nl.t64.cot.components.event.EventProgress
 import nl.t64.cot.components.loot.LootContainer
 import nl.t64.cot.components.loot.ShopContainer
 import nl.t64.cot.components.loot.SpoilsContainer
@@ -85,7 +86,7 @@ class GameData : ProfileObserver {
         profileManager.setProperty("battles", battles)
         profileManager.setProperty("conversations", conversations.createPhraseIdContainer())
         profileManager.setProperty("quests", quests)
-        profileManager.setProperty("events", events)
+        profileManager.setProperty("events", events.toProgress())
         profileManager.setProperty("loot", loot)
         profileManager.setProperty("spoils", spoils)
         profileManager.setProperty("doors", doors)
@@ -109,7 +110,10 @@ class GameData : ProfileObserver {
             this.setCurrentPhraseIds(container)
         }
         quests = profileManager.getProperty("quests")
-        events = profileManager.getProperty("events")
+        events = EventContainer().apply {
+            val progress: Map<String, EventProgress> = profileManager.getProperty("events")
+            this.applyProgress(progress)
+        }
         loot = profileManager.getProperty("loot")
         spoils = profileManager.getProperty("spoils")
         doors = profileManager.getProperty("doors")

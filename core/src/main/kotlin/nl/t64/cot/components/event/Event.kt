@@ -17,14 +17,25 @@ import nl.t64.cot.screens.dialog.MessageDialog
 class Event(
     private val type: String = "",
     @JsonProperty("condition")
-    val conditions: List<String> = emptyList(),
-    val conversationId: String? = null,
-    val entityId: String? = null,
-    val text: List<String> = emptyList(),
+    private val conditions: List<String> = emptyList(),
+    private val conversationId: String? = null,
+    private val entityId: String? = null,
+    private val text: List<String> = emptyList(),
     private val doesRepeat: Boolean = false,
     private var isRepeated: Boolean = false
 ) {
     var hasPlayed: Boolean = false
+
+    fun toProgress(): EventProgress {
+        return EventProgress(hasPlayed, isRepeated)
+    }
+
+    fun applyProgress(progress: EventProgress) {
+        hasPlayed = progress.hasPlayed
+        if (doesRepeat) {
+            isRepeated = progress.isRepeated
+        }
+    }
 
     fun possibleStart(stage: Stage? = null) {
         if ((!hasPlayed && isMeetingCondition())
@@ -40,18 +51,23 @@ class Event(
         isRepeated = false
     }
 
+    fun getReplacedText(): String {
+        return TextReplacer.replace(text)
+    }
+
     private fun isMeetingCondition(): Boolean {
         return ConditionDatabase.isMeetingConditions(conditions, conversationId)
     }
 
     private fun start(stage: Stage?) {
+        val replacedText: String = getReplacedText()
         when {
             type == "tutorial" && preferenceManager.isTutorialOn && stage != null -> {
-                MessageDialog(TextReplacer.replace(text)).show(stage, AudioEvent.SE_CONVERSATION_NEXT, 3f)
+                MessageDialog(replacedText).show(stage, AudioEvent.SE_CONVERSATION_NEXT, 3f)
             }
 
             type == "tutorial" && preferenceManager.isTutorialOn && stage == null -> {
-                worldScreen.showMessageDialog(TextReplacer.replace(text))
+                worldScreen.showMessageDialog(replacedText)
             }
 
             type == "tutorial" && preferenceManager.isTutorialOn.not() -> {
@@ -63,7 +79,7 @@ class Event(
             }
 
             type == "messagebox" -> {
-                worldScreen.showMessageDialog(TextReplacer.replace(text))
+                worldScreen.showMessageDialog(replacedText)
             }
 
             type == "stop_bgm" -> {
