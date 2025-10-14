@@ -9,9 +9,12 @@ import nl.t64.cot.screens.world.entity.events.*
 import kotlin.math.abs
 
 
+private const val ACTION_COOLDOWN_IN_SECONDS = 1.0f
+
 class PhysicsPlayer : PhysicsComponent() {
 
     private var isActionPressed = false
+    private var actionCooldown = 0f
 
     init {
         boundingBoxWidthPercentage = 0.80f
@@ -33,13 +36,18 @@ class PhysicsPlayer : PhysicsComponent() {
         if (event is SpeedEvent) {
             velocity = event.moveSpeed
         }
-        if (event is ActionEvent) {
+        if (event is ActionEvent && actionCooldown <= 0f) {
             isActionPressed = true
         }
     }
 
     override fun update(entity: Entity, dt: Float) {
         this.entity = entity
+
+        if (actionCooldown > 0f) {
+            actionCooldown -= dt
+        }
+
         checkActionPressed()
         relocate(dt)
         collisionObstacles(dt)
@@ -49,6 +57,7 @@ class PhysicsPlayer : PhysicsComponent() {
 
     private fun checkActionPressed() {
         if (isActionPressed) {
+            actionCooldown = ACTION_COOLDOWN_IN_SECONDS
             brokerManager.actionObservers.notifyActionPressed(getCheckRect(), direction, currentPosition)
             isActionPressed = false
         }
