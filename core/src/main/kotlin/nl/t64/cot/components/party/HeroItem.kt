@@ -26,8 +26,7 @@ class HeroItem(
     abilities: AbilityContainer = AbilityContainer(),
     inventory: EquipContainer = EquipContainer(),
     isAlive: Boolean = true,
-    var hasBeenRecruited: Boolean = false,
-    private var isForVeryFirstSetup: Boolean = false
+    var hasBeenRecruited: Boolean = false
 ) : Character(
     id, name, gender, stats, skills, abilities, inventory, isAlive
 ) {
@@ -35,13 +34,28 @@ class HeroItem(
     var totalXp: Int = 0
     var xpPoints: Int = 0
 
-    init {
-        if (isForVeryFirstSetup) {
-            isForVeryFirstSetup = false
-            totalXp = stats.getTotalXpCost() + skills.getTotalXpCost()
-            currentHp = maximumHp
-            currentSp = maximumSp
+    companion object {
+        fun createFullyInitialized(
+            id: String,
+            name: String,
+            gender: String,
+            stats: StatContainer,
+            skills: SkillContainer,
+            abilities: AbilityContainer,
+            inventory: EquipContainer,
+            isAlive: Boolean,
+            hasBeenRecruited: Boolean
+        ): HeroItem {
+            return HeroItem(id, name, gender, stats, skills, abilities, inventory, isAlive, hasBeenRecruited).apply {
+                initializeCalculatedValues()
+            }
         }
+    }
+
+    private fun initializeCalculatedValues() {
+        totalXp = stats.getTotalXpCost() + skills.getTotalXpCost()
+        currentHp = maximumHp
+        currentSp = maximumSp
     }
 
     fun createCopy(
@@ -55,7 +69,7 @@ class HeroItem(
         isAlive: Boolean = this.isAlive,
         hasBeenRecruited: Boolean = this.hasBeenRecruited
     ): HeroItem {
-        return HeroItem(id, name, gender, stats, skills, abilities, inventory, isAlive, hasBeenRecruited, isForVeryFirstSetup = true)
+        return createFullyInitialized(id, name, gender, stats, skills, abilities, inventory, isAlive, hasBeenRecruited)
     }
 
     fun hasSameIdAs(candidateHero: HeroItem): Boolean {
@@ -92,7 +106,7 @@ class HeroItem(
         }
     }
 
-    fun learn(abilityItem: AbilityItem, xpCost: Int){
+    fun learn(abilityItem: AbilityItem, xpCost: Int) {
         xpPoints -= xpCost
         abilities.add(abilityItem)
     }
