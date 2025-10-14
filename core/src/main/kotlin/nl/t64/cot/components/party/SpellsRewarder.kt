@@ -7,7 +7,7 @@ import nl.t64.cot.audio.playSe
 import nl.t64.cot.audio.stopAllSe
 import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.components.party.abilities.AbilityDatabase
-import nl.t64.cot.components.party.abilities.AbilityItem
+import nl.t64.cot.components.party.abilities.AbilityItemId
 
 
 object SpellsRewarder {
@@ -20,39 +20,41 @@ object SpellsRewarder {
     }
 
     private fun receiveSpells(reward: Loot) {
-        val actuallyLearned = mutableListOf<AbilityItem>()
-        reward.content.forEach { possibleTeachSpellToParty(it, actuallyLearned) }
-        if (actuallyLearned.isNotEmpty()) {
-            showMessageTooltipRewardSpells(actuallyLearned)
+        val spellsToShowInPopup = mutableListOf<AbilityItemId>()
+        reward.content.forEach { possibleTeachSpellToParty(it, spellsToShowInPopup) }
+        if (spellsToShowInPopup.isNotEmpty()) {
+            showMessageTooltipRewardSpells(spellsToShowInPopup)
         }
         reward.clearContent()
     }
 
     private fun possibleTeachSpellToParty(rewardEntry: Map.Entry<String, Int>,
-                                          actuallyLearned: MutableList<AbilityItem>) {
+                                          spellsToShowInPopup: MutableList<AbilityItemId>) {
         val party: List<HeroItem> = gameData.party.getAllHeroesAlive()
         val player: HeroItem = gameData.party.getPlayer()
 
-        val spellToLearn: AbilityItem = AbilityDatabase.createAbilityItem(rewardEntry.key)
+        val spellToLearn: AbilityItemId = AbilityItemId.valueOf(rewardEntry.key.uppercase())
         if (rewardEntry.value == 99) {
-            party.forEach { it.possibleLearnSpell(spellToLearn, actuallyLearned) }
+            party.forEach { it.possibleLearnSpell(spellToLearn, spellsToShowInPopup) }
         } else {
-            player.possibleLearnSpell(spellToLearn, actuallyLearned)
+            player.possibleLearnSpell(spellToLearn, spellsToShowInPopup)
         }
     }
 
-    private fun HeroItem.possibleLearnSpell(spellToLearn: AbilityItem, actuallyLearned: MutableList<AbilityItem>) {
-        if (this.getAbilityById(spellToLearn.id) == null) {
-            this.learn(spellToLearn, 0)
-            actuallyLearned.add(spellToLearn)
+    private fun HeroItem.possibleLearnSpell(spellIdToLearn: AbilityItemId,
+                                            spellsToShowInPopup: MutableList<AbilityItemId>) {
+        if (this.getAbilityById(spellIdToLearn) == null) {
+            this.learn(spellIdToLearn, 0)
+            spellsToShowInPopup.add(spellIdToLearn)
         }
     }
 
-    private fun showMessageTooltipRewardSpells(spellItems: List<AbilityItem>) {
+    private fun showMessageTooltipRewardSpells(spellItems: List<AbilityItemId>) {
+        val titlesToShow: List<String> = spellItems.map { AbilityDatabase.createAbilityItem(it).name }
         stopAllSe()
         playSe(AudioEvent.SE_REWARD)
         val builder = StringBuilder()
-        spellItems.forEach { builder.appendLine("+ ${it.name}") }
+        titlesToShow.forEach { builder.appendLine("+ $it") }
         builder.deleteAt(builder.lastIndex)
         worldScreen.showMessageTooltip(builder.toString())
     }

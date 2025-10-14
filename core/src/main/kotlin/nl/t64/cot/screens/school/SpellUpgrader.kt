@@ -64,7 +64,7 @@ class SpellUpgrader private constructor(
 
     private fun upgradeSpell() {
         gameData.inventory.autoRemoveItem("gold", goldCost)
-        selectedHero.learn(spellToUpgrade, xpCost)
+        selectedHero.learn(spellToUpgrade.id, xpCost)
         setHasJustUpdatedToTrue.invoke()
         showConfirmMessage()
     }

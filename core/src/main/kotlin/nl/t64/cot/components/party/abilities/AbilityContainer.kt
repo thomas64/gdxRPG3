@@ -5,32 +5,27 @@ import com.fasterxml.jackson.annotation.JsonCreator
 
 class AbilityContainer() {
 
-    private val abilities: AbilityItemMap<AbilityItemId, AbilityItem> = AbilityItemMap()
+    private val abilities: MutableList<AbilityItemId> = mutableListOf()
 
     @JsonCreator
     constructor(startingAbilities: List<String>) : this() {
         startingAbilities
-            .map { AbilityDatabase.createAbilityItem(it) }
-            .forEach { this.abilities[it.id] = it }
+            .map { AbilityItemId.valueOf(it.uppercase()) }
+            .let { abilities.addAll(it) }
     }
 
     fun getById(abilityItemId: AbilityItemId): AbilityItem? {
-        return abilities[abilityItemId]
+        return abilityItemId
+            .takeIf { it in abilities }
+            ?.let { AbilityDatabase.createAbilityItem(it) }
     }
 
     fun getAll(): List<AbilityItem> {
-        return AbilityItemId.entries.mapNotNull { abilities[it] }
+        return abilities.map { AbilityDatabase.createAbilityItem(it) }
     }
 
-    fun add(abilityItem: AbilityItem) {
-        abilities[abilityItem.id] = abilityItem
+    fun add(abilityItemId: AbilityItemId) {
+        abilities.add(abilityItemId)
     }
-}
 
-private class AbilityItemMap<K : Enum<K>, V> {
-    private val map: MutableMap<String, V> = HashMap()
-    operator fun get(key: Enum<K>): V? = map[key.name]
-    operator fun set(key: Enum<K>, value: V) {
-        map[key.name] = value
-    }
 }

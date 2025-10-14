@@ -106,9 +106,9 @@ class HeroItem(
         }
     }
 
-    fun learn(abilityItem: AbilityItem, xpCost: Int) {
+    fun learn(abilityItemId: AbilityItemId, xpCost: Int) {
         xpPoints -= xpCost
-        abilities.add(abilityItem)
+        abilities.add(abilityItemId)
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -7,6 +7,11 @@ object AbilityDatabase {
 
     private val abilityItems: Map<String, AbilityItem> = ConfigDataLoader.createAbilities()
 
+    fun createAbilityItem(abilityId: AbilityItemId): AbilityItem {
+        val abilityItem = abilityItems[abilityId.name.lowercase()]!!
+        return abilityItem.createCopy()
+    }
+
     fun createAbilityItem(abilityId: String): AbilityItem {
         val abilityItem = abilityItems[abilityId.lowercase()]!!
         return abilityItem.createCopy()
