@@ -96,6 +96,7 @@ class HeroItem(
     fun doUpgrade(statItem: StatItem, xpCost: Int) {
         xpPoints -= xpCost
         statItem.doUpgrade()
+        stats.upgrade(statItem.id)
     }
 
     fun doUpgrade(skillItem: SkillItem, xpCost: Int) {

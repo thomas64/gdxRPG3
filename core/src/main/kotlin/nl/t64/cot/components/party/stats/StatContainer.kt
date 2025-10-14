@@ -7,27 +7,31 @@ private const val TOTAL_XP_NECESSARY_FOR_MOZES_STARTING_ATTRIBUTES = 349
 
 class StatContainer() {
 
-    private val stats: StatItemMap<StatItemId, StatItem> = StatItemMap()
+    private val stats: StatItemMap<StatItemId, Int> = StatItemMap()
     val maximumHp: Int get() = (40f * (getById(StatItemId.CONSTITUTION).rank * 10f / 100f)).toInt()
     val maximumSp: Int get() = (20f * (getById(StatItemId.STAMINA).rank * 10f / 100f)).toInt()
 
     @JsonCreator
     constructor(startingStats: Map<String, Int>) : this() {
-        startingStats
-            .map { StatDatabase.createStatItem(it.key, it.value) }
-            .forEach { this.stats[it.id] = it }
+        startingStats.forEach { (statId, rank) ->
+            stats[StatItemId.valueOf(statId.uppercase())] = rank
+        }
     }
 
     fun getById(statItemId: StatItemId): StatItem {
-        return stats[statItemId]
+        return StatDatabase.createStatItem(statItemId, stats[statItemId])
     }
 
     fun getAll(): List<StatItem> {
-        return StatItemId.entries.map { stats[it] }
+        return StatItemId.entries.map { StatDatabase.createStatItem(it, stats[it]) }
     }
 
     fun getTotalXpCost(): Int {
         return getAll().sumOf { it.getTotalXpCostFromRankOneToCurrent() } - TOTAL_XP_NECESSARY_FOR_MOZES_STARTING_ATTRIBUTES
+    }
+
+    fun upgrade(statItemId: StatItemId) {
+        stats[statItemId] += 1
     }
 
 }
