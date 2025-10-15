@@ -30,8 +30,8 @@ class StatContainer() {
         return getAll().sumOf { it.getTotalXpCostFromRankOneToCurrent() } - TOTAL_XP_NECESSARY_FOR_MOZES_STARTING_ATTRIBUTES
     }
 
-    fun upgrade(statItemId: StatItemId) {
-        stats[statItemId] += 1
+    fun setRank(statItemId: StatItemId, rank: Int) {
+        stats[statItemId] = rank
     }
 
 }

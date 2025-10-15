@@ -96,15 +96,13 @@ class HeroItem(
     fun doUpgrade(statItem: StatItem, xpCost: Int) {
         xpPoints -= xpCost
         statItem.doUpgrade()
-        stats.upgrade(statItem.id)
+        stats.setRank(statItem.id, statItem.rank)
     }
 
     fun doUpgrade(skillItem: SkillItem, xpCost: Int) {
         xpPoints -= xpCost
         skillItem.doUpgrade()
-        if (skillItem.rank == 1) {
-            skills.add(skillItem)
-        }
+        skills.setRank(skillItem.id, skillItem.rank)
     }
 
     fun learn(abilityItemId: AbilityItemId, xpCost: Int) {
