@@ -32,9 +32,7 @@ class Event(
 
     fun applyProgress(progress: EventProgress) {
         hasPlayed = progress.hasPlayed
-        if (doesRepeat) {
-            isRepeated = progress.isRepeated
-        }
+        isRepeated = progress.isRepeated
     }
 
     fun possibleStart(stage: Stage? = null) {
