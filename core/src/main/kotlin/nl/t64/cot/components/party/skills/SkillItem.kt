@@ -10,6 +10,7 @@ private const val MAXIMUM = 10
 data class SkillItem(
     override val id: SkillItemId = SkillItemId.NONE,
     override val name: String = "",
+    override val description: List<String> = emptyList(),
     var rank: Int = 0,
     private val upgrade: Float = 0f,                        // Constant value for upgrading formula.
 ) : PersonalityItem() {
@@ -34,7 +35,7 @@ data class SkillItem(
     }
 
     private fun getDescription(): String {
-        return SkillDatabase.getDescription(id).joinToString(System.lineSeparator())
+        return description.joinToString(System.lineSeparator())
     }
 
     fun doUpgrade() {

@@ -1,14 +1,38 @@
 {
   "alchemist": {
-    "upgrade": 10
+    "upgrade"    : 10,
+    "description": [
+      "- 'Alchemist' allows for manufacturing various",
+      "  magical potions out of various resources.",
+      "  To do this, select the skill in the inventory screen."
+    ]
   },
   "mechanic" : {
-    "upgrade": 10
+    "upgrade"    : 10,
+    "description": [
+      "- 'Mechanic' allows the possibility to disarm",
+      "  traps on treasure chests.",
+      "",
+      "- 'Mechanic' allows for repairing and crafting",
+      "  various weapons and shields out of various resources.",
+      "  To do this, select the skill in the inventory screen."
+    ]
   },
   "ranger"   : {
-    "upgrade": 6
+    "upgrade"    : 6,
+    "description": [
+      "- 'Ranger' increases the amount of resources you'll find in the world.",
+      "  For every rank of 'Ranger', 2% more resources.",
+      "  'Ranger' ranks are stacked cumulative for all party members."
+    ]
   },
   "merchant" : {
-    "upgrade": 6
+    "upgrade"    : 6,
+    "description": [
+      "- 'Merchant' lowers the price of items in shops when buying,",
+      "  and raises the value of your items when selling.",
+      "  For every rank of 'Merchant', 1% of the value in your favor.",
+      "  'Merchant' ranks are stacked cumulative for all party members."
+    ]
   }
 }

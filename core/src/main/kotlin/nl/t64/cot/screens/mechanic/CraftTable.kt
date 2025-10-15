@@ -59,8 +59,21 @@ class CraftTable(
 
     override fun fillRows() {
         if (itemsToCraft.isEmpty()) {
-            table.add(Label("Nothing to craft at Mechanic rank $mechanicRank.", LabelStyle(font, Color.BLACK)))
-                .width(CONTAINER_WIDTH)
+            val label = """
+                Nothing to craft at Mechanic rank ${mechanicRank}.
+
+
+                Improve your Mechanic skill to
+                unlock more craftable items.
+
+                The required Mechanic ranks are:
+                - 2: Basic equipment
+                - 4: Fine equipment
+                - 6: Specialist equipment
+                - 8: Masterwork equipment
+            """.trimIndent()
+            table.add(Label(label, LabelStyle(font, Color.BLACK)))
+                .width(CONTAINER_WIDTH).padTop(150f)
         } else {
             fillRowsWithContent()
         }

@@ -1,26 +1,100 @@
 {
   "sword" : {
-    "upgrade": 6
+    "upgrade"    : 6,
+    "description": [
+      "- 'Sword' allows the possibility of equipping swords.",
+      "",
+      "- 'Sword' increases your chance to hit with swords in combat.",
+      "  Each rank in 'Sword' increases 'Chance to hit' by 5%.",
+      "",
+      "- Sword advantage: Spear > Sword > Axe.",
+      "  Swords also have advantage or disadvantage against",
+      "  certain weaponless enemies."
+    ]
   },
   "axe"   : {
-    "upgrade": 6
+    "upgrade"    : 6,
+    "description": [
+      "- 'Axe' allows the possibility of equipping axes.",
+      "",
+      "- 'Axe' increases your chance to hit with axes in combat.",
+      "  Each rank in 'Axe' increases 'Chance to hit' by 5%.",
+      "",
+      "- Axe advantage: Sword > Axe > Spear.",
+      "  Axes also have advantage or disadvantage against",
+      "  certain weaponless enemies."
+    ]
   },
   "spear" : {
-    "upgrade": 6
+    "upgrade"    : 6,
+    "description": [
+      "- 'Spear' allows the possibility of equipping spears.",
+      "",
+      "- 'Spear' increases your chance to hit with spears in combat.",
+      "  Each rank in 'Spear' increases 'Chance to hit' by 5%.",
+      "",
+      "- Spear advantage: Axe > Spear > Sword.",
+      "  Spears also have advantage or disadvantage against",
+      "  certain weaponless enemies."
+    ]
   },
   "dagger": {
-    "upgrade": 6
+    "upgrade"    : 6,
+    "description": [
+      "- 'Dagger' allows the possibility of equipping daggers.",
+      "",
+      "- 'Dagger' increases your chance to hit with daggers in combat.",
+      "  Each rank in 'Dagger' increases 'Chance to hit' by 5%.",
+      "",
+      "- Dagger advantage: Bow > Dagger > Throw.",
+      "  Daggers also have advantage or disadvantage against",
+      "  certain weaponless enemies."
+    ]
   },
   "throw" : {
-    "upgrade": 6
+    "upgrade"    : 6,
+    "description": [
+      "- 'Throw' allows the possibility of equipping throwing weapons.",
+      "",
+      "- 'Throw' increases your chance to hit with throwing weapons in combat.",
+      "  Each rank in 'Throw' increases 'Chance to hit' by 5%.",
+      "",
+      "- Throwing weapon advantage: Dagger > Throw > Bow.",
+      "  Throwing weapons also have advantage or disadvantage against",
+      "  certain weaponless enemies."
+    ]
   },
   "bow"   : {
-    "upgrade": 6
+    "upgrade"    : 6,
+    "description": [
+      "- 'Bow' allows the possibility of equipping bows.",
+      "",
+      "- 'Bow' increases your chance to hit with bows in combat.",
+      "  Each rank in 'Bow' increases 'Chance to hit' by 5%.",
+      "",
+      "- Bow advantage: Throw > Bow > Dagger.",
+      "  Bows also have advantage or disadvantage against",
+      "  certain weaponless enemies."
+    ]
   },
   "staff" : {
-    "upgrade": 6
+    "upgrade"    : 6,
+    "description": [
+      "- 'Staff' allows the possibility of equipping staffs.",
+      "",
+      "- 'Staff' increases your chance to hit with staffs in combat.",
+      "  Each rank in 'Staff' increases 'Chance to hit' by 5%.",
+      "",
+      "- Magic advantage: Fire > Wind > Thunder > Fire."
+    ]
   },
   "shield": {
-    "upgrade": 6
+    "upgrade"    : 6,
+    "description": [
+      "- 'Shield' allows the possibility of equipping shields.",
+      "",
+      "- In combat, a shield may block the enemy's attack with physical weapons.",
+      "  Each rank in 'Shield' increases 'Defense' by 10%."
+    ]
   }
 }

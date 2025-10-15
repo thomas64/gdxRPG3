@@ -191,6 +191,7 @@ internal class StatsTable(
         return object : PersonalityItem() {
             override val id: SuperEnum = SkillItemId.NONE
             override val name: String = ""
+            override val description: List<String> = emptyList()
             override fun getTotalDescription(): String {
                 return calcTitle.text.toString().toCalcAttributeId().getDescription()
             }

@@ -62,8 +62,23 @@ class RepairTable(
 
     override fun fillRows() {
         if (itemsToRepair.isEmpty()) {
-            table.add(Label("Nothing to repair at Mechanic rank $mechanicRank.", LabelStyle(font, Color.BLACK)))
-                .width(CONTAINER_WIDTH)
+            val label = """
+                You currently have no equipment with
+                reduced durability that you can repair.
+
+                Your Mechanic skill must be high
+                enough to repair certain equipment.
+
+                The required Mechanic ranks are:
+                - 1: Basic equipment
+                - 3: Fine equipment
+                - 5: Specialist equipment
+                - 7: Masterwork equipment
+                - 9: Epic equipment
+                - 10: Legendary equipment
+            """.trimIndent()
+            table.add(Label(label, LabelStyle(font, Color.BLACK)))
+                .width(CONTAINER_WIDTH).padTop(180f)
         } else {
             fillRowsWithContent()
         }
