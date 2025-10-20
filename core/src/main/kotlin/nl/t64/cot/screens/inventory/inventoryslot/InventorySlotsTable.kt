@@ -102,6 +102,7 @@ class InventorySlotsTable(
     }
 
     override fun doAction() {
+        listener.cleanup()
         val currentSlot: ItemSlot = selector.getCurrentSlot()
         val group: InventoryGroup? = currentSlot.getPossibleInventoryImage()?.inventoryGroup
         if (group == InventoryGroup.POTION || group == InventoryGroup.ITEM) {

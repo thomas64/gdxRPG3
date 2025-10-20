@@ -3,6 +3,7 @@ package nl.t64.cot.constants
 import com.badlogic.gdx.Screen
 import nl.t64.cot.screens.LoadScreen
 import nl.t64.cot.screens.academy.AcademyScreen
+import nl.t64.cot.screens.alchemist.AlchemistScreen
 import nl.t64.cot.screens.battle.BattleScreen
 import nl.t64.cot.screens.cutscene.*
 import nl.t64.cot.screens.help.HelpScreen
@@ -42,6 +43,7 @@ enum class ScreenType(val screenClass: Class<out Screen>) {
     ACADEMY(AcademyScreen::class.java),
     SCHOOL(SchoolScreen::class.java),
     MECHANIC(MechanicScreen::class.java),
+    ALCHEMIST(AlchemistScreen::class.java),
     FIND(FindScreen::class.java),
     REWARD(RewardScreen::class.java),
     RECEIVE(ReceiveScreen::class.java),

@@ -35,4 +35,10 @@ object InventoryDatabase {
             )
     }
 
+    fun getItemsToBrewForAlchemistRank(rank: Int): List<InventoryItem> {
+        return inventoryItems.values
+            .filter { it.isBrewableForAlchemistRank(rank) }
+            .sortedBy { it.sort }
+    }
+
 }

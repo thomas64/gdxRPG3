@@ -14,7 +14,7 @@ class BattlePotionItem(
     override fun toString(): String {
         return when (name) {
             "Back" -> name
-            else -> "$name ($amount)"
+            else -> String.format("%-23s%4s", name, "($amount)")
         }
     }
 

@@ -105,18 +105,25 @@ abstract class Character(
     }
 
     fun getCalculatedTotalHit(): Int {
-        // todo, is nu alleen nog maar voor wapens, niet voor potions. en ook niet voor ranged in de battle zelf.
-        return inventory.getSkillOfCurrentWeapon()?.toCalculatedTotalHit() ?: 0
+        val weaponSkill: SkillItemId = inventory.getSkillOfCurrentWeapon() ?: return 0
+
+        val weaponHit: Int = getSumOfEquipmentOfCalc(CalcAttributeId.BASE_HIT)
+        val weaponSkillAmount: Int = getCalculatedTotalSkillOf(weaponSkill)
+        val attackerHit: Float = (weaponHit / 100f) * (5f * weaponSkillAmount)
+        // + troubadour ?
+        // + gambler todo, overal
+        return (weaponHit + attackerHit).roundToInt()
     }
 
     fun getCalculatedTotalDamage(): Int {
-        // todo, is nu alleen nog maar voor wapens, niet voor potions.
-        val currentWeaponSkill: SkillItemId? = inventory.getSkillOfCurrentWeapon()
-        return when {
-            currentWeaponSkill == null -> 0
-            currentWeaponSkill.isHandToHandWeaponSkill() -> getCalculatedTotalDamageClose()
-            else -> getCalculatedTotalDamageRange()
-        }
+        if (inventory.getSkillOfCurrentWeapon() == null) return 0
+
+        val currentWeaponMinimal: StatItemId = inventory.getStatItemIdOfMinimalOfCurrentWeapon()!!
+        // todo, moet voor ranged wel sum of all equipment zijn? volgens mij geven andere item geen damage meer.
+        val totalDamageOfAllEquipment: Int = getSumOfEquipmentOfCalc(CalcAttributeId.DAMAGE)
+        val attributeAmount: Int = getCalculatedTotalStatOf(currentWeaponMinimal)
+        val attackerDamage: Float = (totalDamageOfAllEquipment / 100f) * (5f * attributeAmount)
+        return (totalDamageOfAllEquipment + attackerDamage).roundToInt()
     }
 
     fun getCalculatedTotalProtection(): Int {
@@ -133,35 +140,6 @@ abstract class Character(
                 return (shieldDefense + defenderDefense).roundToInt()
             }
         }
-    }
-
-    private fun SkillItemId.toCalculatedTotalHit(): Int {
-        val weaponSkill: SkillItemId = this
-        val weaponHit: Int = getSumOfEquipmentOfCalc(CalcAttributeId.BASE_HIT)
-        val weaponSkillAmount: Int = getCalculatedTotalSkillOf(weaponSkill)
-        val attackerHit: Float = (weaponHit / 100f) * (5f * weaponSkillAmount)
-        // + troubadour ?
-        // + backAttack Thief bonus hit ?
-        // + gambler todo, overal
-        return (weaponHit + attackerHit).roundToInt()
-    }
-
-    private fun getCalculatedTotalDamageClose(): Int {
-        val currentWeaponMinimal: StatItemId = inventory.getStatItemIdOfMinimalOfCurrentWeapon()!!
-        val totalDamageOfAllEquipment: Int = getSumOfEquipmentOfCalc(CalcAttributeId.DAMAGE)
-        val attributeAmount: Int = getCalculatedTotalStatOf(currentWeaponMinimal)
-        val attackerDamage: Float = (totalDamageOfAllEquipment / 100f) * (5f * attributeAmount)
-        // todo, + backAttack Thief bonus damage ?
-        return (totalDamageOfAllEquipment + attackerDamage).roundToInt()
-    }
-
-    private fun getCalculatedTotalDamageRange(): Int {
-        val currentWeaponMinimal: StatItemId = inventory.getStatItemIdOfMinimalOfCurrentWeapon()!!
-        // todo, moet wel voor ranged sum of all equipment zijn?
-        val totalDamageOfAllEquipment: Int = getSumOfEquipmentOfCalc(CalcAttributeId.DAMAGE)
-        val attributeAmount: Int = getCalculatedTotalStatOf(currentWeaponMinimal)
-        val attackerDamage: Float = (totalDamageOfAllEquipment / 100f) * (5f * attributeAmount)
-        return (totalDamageOfAllEquipment + attackerDamage).roundToInt()
     }
 
     fun getSumOfEquipmentOfCalc(calcAttributeId: CalcAttributeId): Int {

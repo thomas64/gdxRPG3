@@ -10,6 +10,7 @@ import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.party.inventory.InventoryDatabase
+import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.ParchmentScreen
@@ -26,7 +27,7 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
     private lateinit var inventoryUI: InventoryUI
     private lateinit var listener: InventoryScreenListener
     private var startingSelectedTableIndex: Int = 4
-    private var isLoadedFromMechanicScreen: Boolean = false
+    private var loadedFromSkillScreen: SkillItemId? = null
 
     companion object {
         fun loadFromMechanic(screenShot: Image, parchment: Image) {
@@ -34,7 +35,24 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
             (screenManager.getScreen(ScreenType.INVENTORY) as InventoryScreen).apply {
                 this.setBackground(screenShot, parchment)
                 this.startingSelectedTableIndex = 1
-                this.isLoadedFromMechanicScreen = true
+                this.loadedFromSkillScreen = SkillItemId.MECHANIC
+
+                this.createAndSetListener(openQuestLogFunction = { this.openQuestLogScreen() },
+                                          closeScreenFunction = { this.closeScreen() },
+                                          doActionFunction = { this.doAction() },
+                                          tryToDropItemFunction = { this.tryToDropItem() },
+                                          tryToDismissHeroFunction = { this.tryToDismissHero() })
+                this.addInputListenerWithSmallDelay()
+            }
+            screenManager.setScreen(ScreenType.INVENTORY)
+        }
+
+        fun loadFromAlchemist(screenShot: Image, parchment: Image) {
+            playSe(AudioEvent.SE_MENU_CURSOR)
+            (screenManager.getScreen(ScreenType.INVENTORY) as InventoryScreen).apply {
+                this.setBackground(screenShot, parchment)
+                this.startingSelectedTableIndex = 1
+                this.loadedFromSkillScreen = SkillItemId.ALCHEMIST
 
                 this.createAndSetListener(openQuestLogFunction = { this.openQuestLogScreen() },
                                           closeScreenFunction = { this.closeScreen() },
@@ -101,7 +119,7 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
             screenManager.openParchmentLoadScreen(ScreenType.INVENTORY)
             return (screenManager.getScreen(ScreenType.INVENTORY) as InventoryScreen).apply {
                 this.startingSelectedTableIndex = 4
-                this.isLoadedFromMechanicScreen = false
+                this.loadedFromSkillScreen = null
             }
         }
 
@@ -126,7 +144,7 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
 
     override fun show() {
         setInputProcessors(stage)
-        inventoryUI = InventoryUI(stage, startingSelectedTableIndex, isLoadedFromMechanicScreen)
+        inventoryUI = InventoryUI(stage, startingSelectedTableIndex, loadedFromSkillScreen)
         ButtonLabels(stage).create()
     }
 

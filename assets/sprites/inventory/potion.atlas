@@ -1,132 +1,63 @@
-
 potion.png
-size: 372, 186
-format: RGBA8888
-filter: Nearest, Nearest
-repeat: none
-acid_flask
-  rotate: false
-  xy: 0, 0
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
-antidote_potion
-  rotate: false
-  xy: 62, 0
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
-curing_potion
-  rotate: false
-  xy: 124, 0
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
+size:372,186
+repeat:none
 dexterity_potion
-  rotate: false
-  xy: 186, 0
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
-endurance_potion
-  rotate: false
-  xy: 248, 0
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
-energy_potion
-  rotate: false
-  xy: 310, 0
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
-fire_flask
-  rotate: false
-  xy: 0, 62
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
-healing_potion
-  rotate: false
-  xy: 62, 62
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
-inferno_flask
-  rotate: false
-  xy: 124, 62
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
+bounds:0,0,62,62
 intelligence_potion
-  rotate: false
-  xy: 186, 62
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
-protection_potion
-  rotate: false
-  xy: 248, 62
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
-restore_potion
-  rotate: false
-  xy: 310, 62
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
-sleep_flask
-  rotate: false
-  xy: 0, 124
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
+bounds:0,0,62,62
 speed_potion
-  rotate: false
-  xy: 62, 124
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
-stamina_potion
-  rotate: false
-  xy: 124, 124
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
-stealth_potion
-  rotate: false
-  xy: 186, 124
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
+bounds:0,0,62,62
 strength_potion
-  rotate: false
-  xy: 248, 124
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
+bounds:0,0,62,62
 willpower_potion
-  rotate: false
-  xy: 310, 124
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
+bounds:0,0,62,62
+energy_potion
+bounds:62,0,62,62
+energy_potion_+
+bounds:124,0,62,62
+energy_potion_++
+bounds:186,0,62,62
+healing_potion
+bounds:248,0,62,62
+healing_potion_+
+bounds:310,0,62,62
+healing_potion_++
+bounds:0,62,62,62
+intelligence_potion_+
+bounds:62,62,62,62
+dexterity_potion_+
+bounds:62,62,62,62
+speed_potion_+
+bounds:62,62,62,62
+strength_potion_+
+bounds:62,62,62,62
+willpower_potion_+
+bounds:62,62,62,62
+protection_potion
+bounds:124,62,62,62
+protection_potion_+
+bounds:186,62,62,62
+protection_potion_++
+bounds:248,62,62,62
+restore_potion
+bounds:310,62,62,62
+restore_potion_+
+bounds:0,124,62,62
+restore_potion_++
+bounds:62,124,62,62
+stealth_potion
+bounds:124,124,62,62
+stealth_potion_+
+bounds:186,124,62,62
+stealth_potion_++
+bounds:248,124,62,62
+willpower_potion_++
+bounds:310,124,62,62
+dexterity_potion_++
+bounds:310,124,62,62
+intelligence_potion_++
+bounds:310,124,62,62
+speed_potion_++
+bounds:310,124,62,62
+strength_potion_++
+bounds:310,124,62,62

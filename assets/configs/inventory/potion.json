@@ -1,5 +1,5 @@
 {
-  "healing_potion"     : {
+  "healing_potion"        : {
     "name"         : "Healing Potion",
     "group"        : "POTION",
     "sort"         : 80005,
@@ -10,218 +10,392 @@
       "Restores 20 HP of the drinker's lost health."
     ]
   },
-  "curing_potion"      : {
-    "name"         : "Curing Potion",
+  "healing_potion_+"      : {
+    "name"         : "Healing Potion +",
     "group"        : "POTION",
     "sort"         : 80010,
     "price"        : 8,
     "min_alchemist": 3,
-    "herb"         : 3,
-    "spice"        : 2,
-    "description"  : [
-      "A more powerful version of the Healing Potion,",
-      "restores 80 HP of the drinker's lost health."
-    ]
-  },
-  "restore_potion"     : {
-    "name"         : "Restore Potion",
-    "group"        : "POTION",
-    "sort"         : 80015,
-    "price"        : 15,
-    "min_alchemist": 7,
     "herb"         : 5,
-    "spice"        : 3,
     "description"  : [
-      "Restores full health to the drinker."
+      "Restores 80 HP of the drinker's lost health."
     ]
   },
-  "energy_potion"      : {
-    "name"         : "Energy Potion",
-    "group"        : "POTION",
-    "sort"         : 80018,
-    "price"        : 4,
-    "min_alchemist": 1,
-    "spice"        : 3,
-    "description"  : [
-      "Restores 20 SP of the drinker's lost energy."
-    ]
-  },
-  "endurance_potion"   : {
-    "name"         : "Endurance Potion",
-    "group"        : "POTION",
-    "sort"         : 80019,
-    "price"        : 8,
-    "min_alchemist": 3,
-    "herb"         : 2,
-    "spice"        : 3,
-    "description"  : [
-      "A more powerful version of the Energy Potion,",
-      "Restores 80 SP of the drinker's lost energy."
-    ]
-  },
-  "stamina_potion"     : {
-    "name"         : "Stamina Potion",
+  "healing_potion_++"     : {
+    "name"         : "Healing Potion ++",
     "group"        : "POTION",
     "sort"         : 80020,
     "price"        : 16,
     "min_alchemist": 7,
-    "herb"         : 3,
-    "spice"        : 5,
+    "herb"         : 9,
     "description"  : [
-      "Restores all energy to the drinker."
+      "Restores 200 HP of the drinker's lost health."
     ]
   },
-  "fire_flask"         : {
-    "name"         : "Fire Flask",
+  "energy_potion"         : {
+    "name"         : "Energy Potion",
     "group"        : "POTION",
     "sort"         : 80025,
     "price"        : 4,
     "min_alchemist": 1,
-    "spice"        : 1,
-    "gemstone"     : 2,
+    "spice"        : 3,
     "description"  : [
-      "A sticky, incendiary liquid that bursts into flame on contact with air."
+      "Restores 10 SP of the drinker's lost energy."
     ]
   },
-  "inferno_flask"      : {
-    "name"         : "Inferno Flask",
+  "energy_potion_+"       : {
+    "name"         : "Energy Potion +",
     "group"        : "POTION",
     "sort"         : 80030,
-    "price"        : 9,
+    "price"        : 8,
     "min_alchemist": 3,
-    "spice"        : 3,
-    "gemstone"     : 3,
+    "spice"        : 5,
     "description"  : [
-      "A more powerful version of the Fire Flask.",
-      "A sticky, incendiary liquid that bursts into flame on contact with air."
+      "Restores 30 SP of the drinker's lost energy."
     ]
   },
-  "acid_flask"         : {
-    "name"         : "Acid Flask",
-    "group"        : "POTION",
-    "sort"         : 80035,
-    "price"        : 10,
-    "min_alchemist": 5,
-    "spice"        : 2,
-    "gemstone"     : 3,
-    "description"  : [
-      "This vicious fluid eats into the flesh of any creature it touches, doing continuous damage."
-    ]
-  },
-  "sleep_flask"        : {
-    "name"         : "Sleep Gas Flask",
+  "energy_potion_++"      : {
+    "name"         : "Energy Potion ++",
     "group"        : "POTION",
     "sort"         : 80040,
-    "price"        : 13,
+    "price"        : 16,
     "min_alchemist": 7,
-    "herb"         : 3,
-    "gemstone"     : 3,
+    "spice"        : 9,
     "description"  : [
-      "A liquid that vaporizes when exposed to air,",
-      "forming a gas that drains the mobility of those who breathe it."
+      "Restores 70 SP of the drinker's lost energy."
     ]
   },
-  "antidote_potion"    : {
-    "name"         : "Antidote Potion",
+  "restore_potion"        : {
+    "name"         : "Restore Potion",
     "group"        : "POTION",
     "sort"         : 80045,
-    "price"        : 5,
+    "price"        : 8,
     "min_alchemist": 2,
-    "herb"         : 1,
-    "spice"        : 2,
+    "herb"         : 3,
+    "spice"        : 3,
     "description"  : [
-      "Halts the effects of poison, but does not restore damage already inflicted by poison."
+      "Restores 20 HP and 10 SP of the",
+      "drinker's lost health and energy."
     ]
   },
-  "protection_potion"  : {
-    "name"         : "Protection Potion",
+  "restore_potion_+"      : {
+    "name"         : "Restore Potion +",
     "group"        : "POTION",
     "sort"         : 80050,
+    "price"        : 14,
+    "min_alchemist": 4,
+    "herb"         : 5,
+    "spice"        : 5,
+    "description"  : [
+      "Restores 80 HP and 30 SP of the",
+      "drinker's lost health and energy."
+    ]
+  },
+  "restore_potion_++"     : {
+    "name"         : "Restore Potion ++",
+    "group"        : "POTION",
+    "sort"         : 80060,
+    "price"        : 26,
+    "min_alchemist": 8,
+    "herb"         : 9,
+    "spice"        : 9,
+    "description"  : [
+      "Restores 200 HP and 70 SP of the",
+      "drinker's lost health and energy."
+    ]
+  },
+  "protection_potion"     : {
+    "name"         : "Protection Potion",
+    "group"        : "POTION",
+    "sort"         : 80065,
     "price"        : 8,
     "min_alchemist": 2,
     "herb"         : 2,
     "spice"        : 3,
     "gemstone"     : 1,
     "description"  : [
-      "Temporarily increases the Protection of the drinker by 5 points during 1 battle."
+      "Temporarily increases the Protection of",
+      "the drinker by 3 points during 1 battle."
     ]
   },
-  "intelligence_potion": {
+  "protection_potion_+"   : {
+    "name"         : "Protection Potion +",
+    "group"        : "POTION",
+    "sort"         : 80070,
+    "price"        : 14,
+    "min_alchemist": 5,
+    "herb"         : 3,
+    "spice"        : 4,
+    "gemstone"     : 2,
+    "description"  : [
+      "Temporarily increases the Protection of",
+      "the drinker by 5 points during 1 battle."
+    ]
+  },
+  "protection_potion_++"  : {
+    "name"         : "Protection Potion ++",
+    "group"        : "POTION",
+    "sort"         : 80075,
+    "price"        : 20,
+    "min_alchemist": 8,
+    "herb"         : 4,
+    "spice"        : 5,
+    "gemstone"     : 3,
+    "description"  : [
+      "Temporarily increases the Protection of",
+      "the drinker by 7 points during 1 battle."
+    ]
+  },
+  "intelligence_potion"   : {
     "name"         : "Intelligence Potion",
     "group"        : "POTION",
-    "sort"         : 80055,
+    "sort"         : 80080,
     "price"        : 12,
     "min_alchemist": 6,
     "herb"         : 2,
     "spice"        : 1,
     "gemstone"     : 3,
     "description"  : [
-      "Temporarily increases the Intelligence of the drinker by 5 points during 1 battle."
+      "Temporarily increases the Intelligence of",
+      "the drinker by 3 points during 1 battle."
     ]
   },
-  "willpower_potion"   : {
+  "intelligence_potion_+" : {
+    "name"         : "Intelligence Potion +",
+    "group"        : "POTION",
+    "sort"         : 80085,
+    "price"        : 17,
+    "min_alchemist": 8,
+    "herb"         : 3,
+    "spice"        : 2,
+    "gemstone"     : 4,
+    "description"  : [
+      "Temporarily increases the Intelligence of",
+      "the drinker by 5 points during 1 battle."
+    ]
+  },
+  "intelligence_potion_++": {
+    "name"         : "Intelligence Potion ++",
+    "group"        : "POTION",
+    "sort"         : 80090,
+    "price"        : 22,
+    "min_alchemist": 10,
+    "herb"         : 4,
+    "spice"        : 3,
+    "gemstone"     : 5,
+    "description"  : [
+      "Temporarily increases the Intelligence of",
+      "the drinker by 7 points during 1 battle."
+    ]
+  },
+  "willpower_potion"      : {
     "name"         : "Willpower Potion",
     "group"        : "POTION",
-    "sort"         : 80060,
+    "sort"         : 80095,
     "price"        : 12,
     "min_alchemist": 6,
     "herb"         : 3,
     "spice"        : 2,
     "gemstone"     : 1,
     "description"  : [
-      "Temporarily increases the Willpower of the drinker by 5 points during 1 battle."
+      "Temporarily increases the Willpower of",
+      "the drinker by 3 points during 1 battle."
     ]
   },
-  "dexterity_potion"   : {
+  "willpower_potion_+"    : {
+    "name"         : "Willpower Potion +",
+    "group"        : "POTION",
+    "sort"         : 80100,
+    "price"        : 17,
+    "min_alchemist": 8,
+    "herb"         : 4,
+    "spice"        : 3,
+    "gemstone"     : 2,
+    "description"  : [
+      "Temporarily increases the Willpower of",
+      "the drinker by 5 points during 1 battle."
+    ]
+  },
+  "willpower_potion_++"   : {
+    "name"         : "Willpower Potion ++",
+    "group"        : "POTION",
+    "sort"         : 80105,
+    "price"        : 22,
+    "min_alchemist": 10,
+    "herb"         : 5,
+    "spice"        : 4,
+    "gemstone"     : 3,
+    "description"  : [
+      "Temporarily increases the Willpower of",
+      "the drinker by 7 points during 1 battle."
+    ]
+  },
+  "dexterity_potion"      : {
     "name"         : "Dexterity Potion",
     "group"        : "POTION",
-    "sort"         : 80065,
+    "sort"         : 80110,
     "price"        : 12,
     "min_alchemist": 6,
     "herb"         : 1,
     "spice"        : 3,
     "gemstone"     : 2,
     "description"  : [
-      "Temporarily increases the Dexterity of the drinker by 5 points during 1 battle."
+      "Temporarily increases the Dexterity of",
+      "the drinker by 3 points during 1 battle."
     ]
   },
-  "speed_potion"       : {
+  "dexterity_potion_+"    : {
+    "name"         : "Dexterity Potion +",
+    "group"        : "POTION",
+    "sort"         : 80115,
+    "price"        : 17,
+    "min_alchemist": 8,
+    "herb"         : 2,
+    "spice"        : 4,
+    "gemstone"     : 3,
+    "description"  : [
+      "Temporarily increases the Dexterity of",
+      "the drinker by 5 points during 1 battle."
+    ]
+  },
+  "dexterity_potion_++"   : {
+    "name"         : "Dexterity Potion ++",
+    "group"        : "POTION",
+    "sort"         : 80120,
+    "price"        : 22,
+    "min_alchemist": 10,
+    "herb"         : 3,
+    "spice"        : 5,
+    "gemstone"     : 4,
+    "description"  : [
+      "Temporarily increases the Dexterity of",
+      "the drinker by 7 points during 1 battle."
+    ]
+  },
+  "speed_potion"          : {
     "name"         : "Speed Potion",
     "group"        : "POTION",
-    "sort"         : 80070,
+    "sort"         : 80125,
     "price"        : 12,
     "min_alchemist": 6,
     "herb"         : 3,
     "spice"        : 1,
     "gemstone"     : 2,
     "description"  : [
-      "Temporarily increases the Speed of the drinker by 5 points during 1 battle."
+      "Temporarily increases the Speed of the",
+      "drinker by 3 points during 1 battle."
     ]
   },
-  "strength_potion"    : {
+  "speed_potion_+"        : {
+    "name"         : "Speed Potion +",
+    "group"        : "POTION",
+    "sort"         : 80130,
+    "price"        : 17,
+    "min_alchemist": 8,
+    "herb"         : 4,
+    "spice"        : 2,
+    "gemstone"     : 3,
+    "description"  : [
+      "Temporarily increases the Speed of the",
+      "drinker by 5 points during 1 battle."
+    ]
+  },
+  "speed_potion_++"       : {
+    "name"         : "Speed Potion ++",
+    "group"        : "POTION",
+    "sort"         : 80135,
+    "price"        : 22,
+    "min_alchemist": 10,
+    "herb"         : 5,
+    "spice"        : 3,
+    "gemstone"     : 4,
+    "description"  : [
+      "Temporarily increases the Speed of the",
+      "drinker by 7 points during 1 battle."
+    ]
+  },
+  "strength_potion"       : {
     "name"         : "Strength Potion",
     "group"        : "POTION",
-    "sort"         : 80075,
+    "sort"         : 80140,
     "price"        : 12,
     "min_alchemist": 6,
     "herb"         : 1,
     "spice"        : 2,
     "gemstone"     : 3,
     "description"  : [
-      "Temporarily increases the Strength of the drinker by 5 points during 1 battle."
+      "Temporarily increases the Strength of",
+      "the drinker by 3 points during 1 battle."
     ]
   },
-  "stealth_potion"     : {
+  "strength_potion_+"     : {
+    "name"         : "Strength Potion +",
+    "group"        : "POTION",
+    "sort"         : 80145,
+    "price"        : 17,
+    "min_alchemist": 8,
+    "herb"         : 2,
+    "spice"        : 3,
+    "gemstone"     : 4,
+    "description"  : [
+      "Temporarily increases the Strength of",
+      "the drinker by 5 points during 1 battle."
+    ]
+  },
+  "strength_potion_++"    : {
+    "name"         : "Strength Potion ++",
+    "group"        : "POTION",
+    "sort"         : 80150,
+    "price"        : 22,
+    "min_alchemist": 10,
+    "herb"         : 3,
+    "spice"        : 4,
+    "gemstone"     : 5,
+    "description"  : [
+      "Temporarily increases the Strength of",
+      "the drinker by 7 points during 1 battle."
+    ]
+  },
+  "stealth_potion"        : {
     "name"         : "Stealth Potion",
     "group"        : "POTION",
-    "sort"         : 80080,
+    "sort"         : 80155,
     "price"        : 10,
     "min_alchemist": 4,
     "herb"         : 2,
     "spice"        : 2,
     "gemstone"     : 2,
     "description"  : [
-      "Temporarily increases the Stealth rank of the drinker by 3 points during 1 battle."
+      "Temporarily increases the Stealth rank of",
+      "the drinker by 3 points during 1 battle."
+    ]
+  },
+  "stealth_potion_+"      : {
+    "name"         : "Stealth Potion +",
+    "group"        : "POTION",
+    "sort"         : 80160,
+    "price"        : 16,
+    "min_alchemist": 7,
+    "herb"         : 3,
+    "spice"        : 3,
+    "gemstone"     : 3,
+    "description"  : [
+      "Temporarily increases the Stealth rank of",
+      "the drinker by 5 points during 1 battle."
+    ]
+  },
+  "stealth_potion_++"     : {
+    "name"         : "Stealth Potion ++",
+    "group"        : "POTION",
+    "sort"         : 80165,
+    "price"        : 21,
+    "min_alchemist": 9,
+    "herb"         : 4,
+    "spice"        : 4,
+    "gemstone"     : 4,
+    "description"  : [
+      "Temporarily increases the Stealth rank of",
+      "the drinker by 7 points during 1 battle."
     ]
   }
 }

@@ -58,15 +58,6 @@ enum class SkillItemId : SuperEnum {
         )
     }
 
-
-    fun isHandToHandWeaponSkill(): Boolean {
-        return when (this) {
-            SWORD, AXE, SPEAR, DAGGER -> true
-            THROW, BOW, STAFF_FIRE, STAFF_WIND, STAFF_THUNDER -> false
-            else -> throw IllegalArgumentException("Only possible to ask a Weapon Skill.")
-        }
-    }
-
     fun isWeaponSkill(): Boolean {
         return when (this) {
             SWORD, AXE, SPEAR, DAGGER, THROW, BOW, STAFF, SHIELD -> true

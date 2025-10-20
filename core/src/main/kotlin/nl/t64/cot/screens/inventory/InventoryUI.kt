@@ -4,6 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Window
 import nl.t64.cot.Utils.createDefaultWindow
 import nl.t64.cot.components.loot.Loot
+import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.screens.ScreenUI
 import nl.t64.cot.screens.inventory.equipslot.EquipSlotsTables
 import nl.t64.cot.screens.inventory.inventoryslot.InventorySlotsTable
@@ -34,7 +35,7 @@ private const val TITLE_HEROES = "   Heroes"
 internal class InventoryUI(
     stage: Stage,
     selectedTableIndex: Int,
-    wasInventoryScreenLoadedFromMechanicScreen: Boolean,
+    loadedFromSkillScreen: SkillItemId?,
 
     private val itemSlotTooltip: ItemSlotTooltip = ItemSlotTooltip(),
     private val personalityTooltip: PersonalityTooltip = PersonalityTooltip(),
@@ -48,7 +49,7 @@ internal class InventoryUI(
     private val spellsTable: SpellsTable = SpellsTable(personalityTooltip),
     private val spellsWindow: Window = createDefaultWindow(TITLE_SPELLS, spellsTable.container),
 
-    private val skillsTable: SkillsTable = SkillsTable(personalityTooltip, wasInventoryScreenLoadedFromMechanicScreen),
+    private val skillsTable: SkillsTable = SkillsTable(personalityTooltip, loadedFromSkillScreen),
     private val skillsWindow: Window = createDefaultWindow(TITLE_SKILLS, skillsTable.container),
 
     private val statsTable: StatsTable = StatsTable(personalityTooltip),

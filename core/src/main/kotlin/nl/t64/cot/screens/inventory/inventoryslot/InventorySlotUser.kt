@@ -20,75 +20,86 @@ class InventorySlotUser private constructor(itemSlot: ItemSlot) {
     private val inventoryItem: InventoryItem = itemSlot.getCertainInventoryImage().inventoryItem
     private val selectedHero: HeroItem = InventoryUtils.getSelectedHero()
 
+    private enum class RecoveryType { HP, SP, BOTH }
+
+    private data class PotionEffect(
+        val recoveryType: RecoveryType,
+        val hpAmount: Int = 0,
+        val spAmount: Int = 0
+    )
+
     private fun selectActionBasedOnItemId() {
         when (inventoryItem.id) {
             "crystal_of_time" -> CrystalHandler.doAction()
-            "healing_potion" -> possibleHandleDrink(::hpCondition, ::doHealing)
-            "curing_potion" -> possibleHandleDrink(::hpCondition, ::doCuring)
-            "restore_potion" -> possibleHandleDrink(::hpCondition, ::doRestore)
-            "energy_potion" -> possibleHandleDrink(::spCondition, ::doEnergy)
-            "endurance_potion" -> possibleHandleDrink(::spCondition, ::doEndurance)
-            "stamina_potion" -> possibleHandleDrink(::spCondition, ::doStamina)
+            "healing_potion" -> handlePotion(PotionEffect(RecoveryType.HP, hpAmount = 20))
+            "healing_potion_+" -> handlePotion(PotionEffect(RecoveryType.HP, hpAmount = 80))
+            "healing_potion_++" -> handlePotion(PotionEffect(RecoveryType.HP, hpAmount = 200))
+            "energy_potion" -> handlePotion(PotionEffect(RecoveryType.SP, spAmount = 10))
+            "energy_potion_+" -> handlePotion(PotionEffect(RecoveryType.SP, spAmount = 30))
+            "energy_potion_++" -> handlePotion(PotionEffect(RecoveryType.SP, spAmount = 70))
+            "restore_potion" -> handlePotion(PotionEffect(RecoveryType.BOTH, hpAmount = 20, spAmount = 10))
+            "restore_potion_+" -> handlePotion(PotionEffect(RecoveryType.BOTH, hpAmount = 80, spAmount = 30))
+            "restore_potion_++" -> handlePotion(PotionEffect(RecoveryType.BOTH, hpAmount = 200, spAmount = 70))
+            // todo, other potions for pre battle
         }
     }
 
-    private fun possibleHandleDrink(condition: () -> Boolean, drinkAction: () -> Unit) {
-        if (condition.invoke()) certainHandleDrink(drinkAction) else showFailMessage()
+    private fun handlePotion(effect: PotionEffect) {
+        if (canUsePotion(effect.recoveryType)) {
+            usePotion(effect)
+        } else {
+            showFailMessage()
+        }
     }
 
-    private fun certainHandleDrink(drinkAction: () -> Unit) {
+    private fun canUsePotion(recoveryType: RecoveryType): Boolean {
+        if (!selectedHero.isAlive) return false
+
+        return when (recoveryType) {
+            RecoveryType.HP -> selectedHero.currentHp < selectedHero.maximumHp
+            RecoveryType.SP -> selectedHero.currentSp < selectedHero.maximumSp
+            RecoveryType.BOTH -> selectedHero.currentHp < selectedHero.maximumHp
+                || selectedHero.currentSp < selectedHero.maximumSp
+        }
+    }
+
+    private fun usePotion(effect: PotionEffect) {
         currentSlot.decrementAmountBy(1)
-        val recoveredHp = drinkPotion(drinkAction)
-        showSuccessMessage(recoveredHp)
+        val (recoveredHp, recoveredSp) = applyPotionEffect(effect)
+        showSuccessMessage(effect.recoveryType, recoveredHp, recoveredSp)
     }
 
-    private fun drinkPotion(drinkAction: () -> Unit): Int {
-        val oldHp = selectedHero.currentHp
-        drinkAction.invoke()
-        val newHp = selectedHero.currentHp
-        return newHp - oldHp
+    private fun applyPotionEffect(effect: PotionEffect): Pair<Int, Int> {
+        var recoveredHp = 0
+        var recoveredSp = 0
+
+        if (effect.hpAmount > 0) {
+            val oldHp = selectedHero.currentHp
+            selectedHero.recoverPartHp(effect.hpAmount)
+            recoveredHp = selectedHero.currentHp - oldHp
+        }
+
+        if (effect.spAmount > 0) {
+            val oldSp = selectedHero.currentSp
+            selectedHero.recoverPartSp(effect.spAmount)
+            recoveredSp = selectedHero.currentSp - oldSp
+        }
+
+        return Pair(recoveredHp, recoveredSp)
     }
 
-    private fun showSuccessMessage(recoveredHp: Int) {
-        MessageDialog("${selectedHero.name} used a ${inventoryItem.name} and recovered $recoveredHp HP.")
-            .show(currentSlot.stage, AudioEvent.SE_POTION)
+    private fun showSuccessMessage(recoveryType: RecoveryType, recoveredHp: Int, recoveredSp: Int) {
+        val message = when (recoveryType) {
+            RecoveryType.HP -> "${selectedHero.name} used a ${inventoryItem.name} and recovered $recoveredHp HP."
+            RecoveryType.SP -> "${selectedHero.name} used a ${inventoryItem.name} and recovered $recoveredSp SP."
+            RecoveryType.BOTH -> "${selectedHero.name} used a ${inventoryItem.name} and recovered $recoveredHp HP and $recoveredSp SP."
+        }
+        MessageDialog(message).show(currentSlot.stage, AudioEvent.SE_POTION)
     }
 
     private fun showFailMessage() {
         MessageDialog("A ${inventoryItem.name} cannot be used right now.")
             .show(currentSlot.stage, AudioEvent.SE_MENU_ERROR)
-    }
-
-    private fun hpCondition(): Boolean {
-        return selectedHero.isAlive && selectedHero.currentHp < selectedHero.maximumHp
-    }
-
-    private fun spCondition(): Boolean {
-        return selectedHero.isAlive && selectedHero.currentSp < selectedHero.maximumSp
-    }
-
-    private fun doHealing() {
-        selectedHero.recoverPartHp(20)
-    }
-
-    private fun doCuring() {
-        selectedHero.recoverPartHp(80)
-    }
-
-    private fun doRestore() {
-        selectedHero.recoverFullHp()
-    }
-
-    private fun doEnergy() {
-        selectedHero.recoverPartSp(20)
-    }
-
-    private fun doEndurance() {
-        selectedHero.recoverPartSp(80)
-    }
-
-    private fun doStamina() {
-        selectedHero.recoverFullSp()
     }
 
 }

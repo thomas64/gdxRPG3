@@ -29,7 +29,6 @@ class MechanicScreen : ParchmentScreen() {
     override fun show() {
         setInputProcessors(stage)
         createAndSetListener()
-        stage.addListener(listener)
 
         mechanicUI = MechanicUI(stage, heroId)
         MechanicButtonLabels(stage).create()
@@ -51,6 +50,7 @@ class MechanicScreen : ParchmentScreen() {
                                           { selectPreviousTable() },
                                           { selectNextTable() },
                                           { toggleTooltip() })
+        stage.addListener(listener)
     }
 
     private fun doAction() {

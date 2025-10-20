@@ -30,7 +30,6 @@ class SchoolScreen : ParchmentScreen() {
     override fun show() {
         setInputProcessors(stage)
         createAndSetListener()
-        stage.addListener(listener)
 
         schoolUI = SchoolUI(stage, npcId, schoolId)
         AcademyButtonLabels(stage).create()
@@ -54,6 +53,7 @@ class SchoolScreen : ParchmentScreen() {
                                          { selectPreviousTable() },
                                          { selectNextTable() },
                                          { toggleTooltip() })
+        stage.addListener(listener)
     }
 
     private fun beginWithClosingScreen() {

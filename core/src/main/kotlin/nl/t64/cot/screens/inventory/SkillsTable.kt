@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import nl.t64.cot.Utils
 import nl.t64.cot.components.party.skills.SkillItem
 import nl.t64.cot.components.party.skills.SkillItemId
+import nl.t64.cot.screens.alchemist.AlchemistScreen
 import nl.t64.cot.screens.inventory.tooltip.PersonalityTooltip
 import nl.t64.cot.screens.mechanic.MechanicScreen
 
@@ -24,7 +25,7 @@ private const val SUBTITLE_PAD_TOP = 10f
 
 internal class SkillsTable(
     tooltip: PersonalityTooltip,
-    wasInventoryScreenLoadedFromMechanicScreen: Boolean = false
+    loadedFromSkillScreen: SkillItemId? = null
 ) : BaseTable(tooltip) {
 
     private val allSkills: List<SkillItem> get() = selectedHero.getAllSkillsAboveZero()
@@ -46,8 +47,8 @@ internal class SkillsTable(
 
         super.update()
 
-        if (wasInventoryScreenLoadedFromMechanicScreen) {
-            selectedIndex = allSkills.indexOfFirst { it.id == SkillItemId.MECHANIC }
+        if (loadedFromSkillScreen != null) {
+            selectedIndex = allSkills.indexOfFirst { it.id == loadedFromSkillScreen }
         }
     }
 
@@ -97,11 +98,15 @@ internal class SkillsTable(
 
     override fun doAction() {
         val selectedSkill: SkillItem = allSkills[selectedIndex]
+        val screenshot = table.stage.actors[0] as Image
+        val parchment = table.stage.actors[1] as Image
+
         if (selectedSkill.id == SkillItemId.MECHANIC) {
             hideTooltip()
-            MechanicScreen.load(selectedHero.id,
-                                screenShot = table.stage.actors[0] as Image,
-                                parchment = table.stage.actors[1] as Image)
+            MechanicScreen.load(selectedHero.id, screenshot, parchment)
+        } else if (selectedSkill.id == SkillItemId.ALCHEMIST) {
+            hideTooltip()
+            AlchemistScreen.load(selectedHero.id, screenshot, parchment)
         }
     }
 

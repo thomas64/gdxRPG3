@@ -28,7 +28,6 @@ class AcademyScreen : ParchmentScreen() {
     override fun show() {
         setInputProcessors(stage)
         createAndSetListener()
-        stage.addListener(listener)
 
         academyUI = AcademyUI(stage, npcId, academyId)
         AcademyButtonLabels(stage).create()
@@ -52,6 +51,7 @@ class AcademyScreen : ParchmentScreen() {
                                          { selectPreviousTable() },
                                          { selectNextTable() },
                                          { toggleTooltip() })
+        stage.addListener(listener)
     }
 
     private fun beginWithClosingScreen() {

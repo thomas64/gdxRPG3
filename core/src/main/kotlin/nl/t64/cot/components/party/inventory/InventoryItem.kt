@@ -308,12 +308,20 @@ data class InventoryItem(
         }
     }
 
+    fun isBrewableForAlchemistRank(rank: Int): Boolean {
+        return minAlchemist in 1..rank
+    }
+
     fun isCraftableForMechanicRank(rank: Int): Boolean {
-        return minMechanic > 0 && minMechanic < rank
+        return minMechanic in 1..<rank
     }
 
     fun isRepairableForMechanicRank(rank: Int): Boolean {
-        return minMechanic > 0 && minMechanic <= rank && durability < maxDurability
+        return minMechanic in 1..rank && durability < maxDurability
+    }
+
+    fun getBrewCosts(): Map<ResourceType, Int> {
+        return getCraftCosts()
     }
 
     fun getRepairCosts(): Map<ResourceType, Int> {
