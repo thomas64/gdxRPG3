@@ -97,6 +97,8 @@ internal class SkillsTable(
     }
 
     override fun doAction() {
+        if (selectedHero.isDead) return
+
         val selectedSkill: SkillItem = allSkills[selectedIndex]
         val screenshot = table.stage.actors[0] as Image
         val parchment = table.stage.actors[1] as Image

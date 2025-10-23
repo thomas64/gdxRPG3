@@ -9,6 +9,8 @@ import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
+import nl.t64.cot.components.battle.Character
+import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.inventory.InventoryDatabase
 import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.constants.Constant
@@ -103,7 +105,8 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
             }
         }
 
-        fun loadForBattle() {
+        fun loadForBattle(character: Character) {
+            InventoryUtils.setSelectedHero(character as HeroItem)
             loadAndGetInventoryScreen().apply {
                 this.createAndSetListener(openQuestLogFunction = { playSe(AudioEvent.SE_MENU_ERROR) },
                                           closeScreenFunction = { this.closeScreen(ScreenType.BATTLE) },
@@ -208,14 +211,17 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
     }
 
     private fun doCrystalTryAction() {
+        inventoryUI.stopTablesScrolling()
         inventoryUI.doCrystalTryAction()
     }
 
     private fun doPreBattleAction() {
+        inventoryUI.stopTablesScrolling()
         inventoryUI.doPreBattleAction()
     }
 
     private fun doBattleAction() {
+        inventoryUI.stopTablesScrolling()
         MessageDialog("This action is not allowed here during battle.").show(stage, AudioEvent.SE_MENU_ERROR)
     }
 
@@ -270,6 +276,7 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
     }
 
     private fun sortInventory() {
+        inventoryUI.stopTablesScrolling()
         playSe(AudioEvent.SE_MENU_CONFIRM)
         gameData.inventory.sort()
         inventoryUI.reloadInventory()

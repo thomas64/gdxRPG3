@@ -115,6 +115,11 @@ internal class ShopUI(
         heroesWindow.pack()
     }
 
+    fun stopTablesScrolling() {
+        shopSlotsTable.stopScrolling()
+        inventorySlotsTable.stopScrolling()
+    }
+
     override fun setWindowPositions() {
         equipWindow.setPosition(EQUIP_WINDOW_POSITION_X, EQUIP_WINDOW_POSITION_Y)
         inventoryWindow.setPosition(INVENTORY_WINDOW_POSITION_X, INVENTORY_WINDOW_POSITION_Y)

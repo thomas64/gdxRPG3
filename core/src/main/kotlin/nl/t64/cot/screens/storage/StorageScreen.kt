@@ -41,6 +41,13 @@ class StorageScreen : ParchmentScreen() {
         storageUI.update()
     }
 
+    override fun hide() {
+        storageUI.stopTablesScrolling()
+        super.hide()
+        setInputProcessors(null)
+        removeTriggersListener()
+    }
+
     override fun removeTriggersListener() {
         listener.removeTriggers()
     }
@@ -67,42 +74,51 @@ class StorageScreen : ParchmentScreen() {
     }
 
     private fun takeOne() {
+        storageUI.stopTablesScrolling()
         storageUI.takeOne()
     }
 
     private fun takeHalf() {
+        storageUI.stopTablesScrolling()
         storageUI.takeHalf()
     }
 
     private fun takeFull() {
+        storageUI.stopTablesScrolling()
         storageUI.takeFull()
     }
 
     private fun equip() {
+        storageUI.stopTablesScrolling()
         storageUI.equip()
     }
 
     private fun selectPreviousHero() {
+        storageUI.stopTablesScrolling()
         playSe(AudioEvent.SE_MENU_CURSOR)
         storageUI.updateSelectedHero { InventoryUtils.selectPreviousHero() }
     }
 
     private fun selectNextHero() {
+        storageUI.stopTablesScrolling()
         playSe(AudioEvent.SE_MENU_CURSOR)
         storageUI.updateSelectedHero { InventoryUtils.selectNextHero() }
     }
 
     private fun selectPreviousTable() {
+        storageUI.stopTablesScrolling()
         playSe(AudioEvent.SE_MENU_CURSOR)
         storageUI.selectPreviousTable()
     }
 
     private fun selectNextTable() {
+        storageUI.stopTablesScrolling()
         playSe(AudioEvent.SE_MENU_CURSOR)
         storageUI.selectNextTable()
     }
 
     private fun sortStorage() {
+        storageUI.stopTablesScrolling()
         when (val selectedTable = storageUI.getSelectedTable()) {
             is StorageSlotsTable -> {
                 playSe(AudioEvent.SE_MENU_CONFIRM)

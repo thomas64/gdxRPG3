@@ -35,7 +35,7 @@ class WeaponAction(
         }
     }
 
-    fun handle(): String {
+    fun handle() {
         return when (selectedEquipment.group) {
             InventoryGroup.WEAPON -> handleWeapon()
             InventoryGroup.SHIELD -> handleShield()
@@ -68,38 +68,39 @@ class WeaponAction(
             ?: newShield.equipShield()
     }
 
-    private fun handleWeapon(): String {
+    private fun handleWeapon() {
         currentParticipant.currentAP -= switchWeaponAp
         val currentWeapon: InventoryItem? = hero.getInventoryItem(InventoryGroup.WEAPON)
         val newWeapon: InventoryItem = selectedEquipment.inventoryItem
 
         if (newWeapon.name.contains("Unequip")) {
-            hero.clearInventoryItemFor(InventoryGroup.WEAPON)
-            currentWeapon?.let { gameData.inventory.autoSetItem(it) }
-            return "${character.name} unequipped the ${currentWeapon?.name}."
+            unequip(InventoryGroup.WEAPON, currentWeapon)
+        } else {
+            equip(InventoryGroup.WEAPON, newWeapon, currentWeapon)
         }
-
-        gameData.inventory.forceRemoveItem(newWeapon)
-        hero.forceSetInventoryItemFor(InventoryGroup.WEAPON, newWeapon)
-        currentWeapon?.let { gameData.inventory.autoSetItem(it) }
-        return "${character.name} equipped the ${selectedEquipment.name}."
     }
 
-    private fun handleShield(): String {
+    private fun handleShield() {
         currentParticipant.currentAP -= switchWeaponAp
         val currentShield: InventoryItem? = hero.getInventoryItem(InventoryGroup.SHIELD)
         val newShield: InventoryItem = selectedEquipment.inventoryItem
 
         if (newShield.name.contains("Unequip")) {
-            hero.clearInventoryItemFor(InventoryGroup.SHIELD)
-            currentShield?.let { gameData.inventory.autoSetItem(it) }
-            return "${character.name} unequipped the ${currentShield?.name}."
+            unequip(InventoryGroup.SHIELD, currentShield)
+        } else {
+            equip(InventoryGroup.SHIELD, newShield, currentShield)
         }
+    }
 
-        gameData.inventory.forceRemoveItem(newShield)
-        hero.forceSetInventoryItemFor(InventoryGroup.SHIELD, newShield)
-        currentShield?.let { gameData.inventory.autoSetItem(it) }
-        return "${character.name} equipped the ${selectedEquipment.name}."
+    private fun unequip(group: InventoryGroup, currentItem: InventoryItem?) {
+        hero.clearInventoryItemFor(group)
+        currentItem?.let { gameData.inventory.autoSetItem(it) }
+    }
+
+    private fun equip(group: InventoryGroup, itemToEquip: InventoryItem, currentItem: InventoryItem?) {
+        gameData.inventory.forceRemoveItem(itemToEquip)
+        hero.forceSetInventoryItemFor(group, itemToEquip)
+        currentItem?.let { gameData.inventory.autoSetItem(it) }
     }
 
     private fun createMessageIfCostingTooMuchAp(): String? {

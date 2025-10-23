@@ -102,7 +102,6 @@ class InventorySlotsTable(
     }
 
     override fun doAction() {
-        listener.cleanup()
         val currentSlot: ItemSlot = selector.getCurrentSlot()
         val group: InventoryGroup? = currentSlot.getPossibleInventoryImage()?.inventoryGroup
         if (group == InventoryGroup.POTION || group == InventoryGroup.ITEM) {
@@ -121,6 +120,10 @@ class InventorySlotsTable(
                 currentSlot.clearStack()
                 Loot(mutableMapOf(it.id to it.amount))
             }
+    }
+
+    fun stopScrolling() {
+        listener.cleanup()
     }
 
     fun addResource(inventoryItem: InventoryItem) {

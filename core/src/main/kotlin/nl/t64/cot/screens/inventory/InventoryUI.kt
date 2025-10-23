@@ -122,6 +122,7 @@ internal class InventoryUI(
         statsTable.stopScrolling()
         skillsTable.stopScrolling()
         spellsTable.stopScrolling()
+        inventorySlotsTable.stopScrolling()
     }
 
     override fun setWindowPositions() {

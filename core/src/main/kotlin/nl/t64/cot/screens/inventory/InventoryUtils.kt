@@ -25,6 +25,10 @@ object InventoryUtils {
         return selectedHero!!
     }
 
+    fun setSelectedHero(newHero: HeroItem) {
+        selectedHero = newHero
+    }
+
     fun selectPreviousHero() {
         selectedHero = gameData.party.getPreviousHero(selectedHero!!)
     }

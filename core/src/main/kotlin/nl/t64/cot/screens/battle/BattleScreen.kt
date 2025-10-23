@@ -445,7 +445,7 @@ class BattleScreen : Screen {
 
     private fun showInventoryScreen() {
         shouldKeepState = true
-        InventoryScreen.loadForBattle()
+        InventoryScreen.loadForBattle(currentParticipant.character)
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

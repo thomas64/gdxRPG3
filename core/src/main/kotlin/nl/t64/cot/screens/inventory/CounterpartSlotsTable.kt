@@ -29,6 +29,7 @@ abstract class CounterpartSlotsTable(
     }
     val selector = ItemSlotSelector(inventory, counterpartSlotTable, slotsInRow)
     private val taker = ShopSlotTaker(selector)
+    private val listener = InventorySlotsTableListener({ selector.selectNewSlot(it) }, slotsInRow)
 
     override fun setKeyboardFocus(stage: Stage) {
         stage.keyboardFocus = counterpartSlotTable
@@ -68,6 +69,10 @@ abstract class CounterpartSlotsTable(
         taker.buyFull(selector.getCurrentSlot())
     }
 
+    fun stopScrolling() {
+        listener.cleanup()
+    }
+
     fun getPossibleSameStackableItemSlotWith(candidateItem: InventoryItem): ItemSlot? {
         return if (candidateItem.isStackable) getPossibleSameItemSlotWith(candidateItem) else null
     }
@@ -94,7 +99,7 @@ abstract class CounterpartSlotsTable(
         selector.setNewCurrentByIndex(0)
         counterpartSlotTable.addAction(Actions.sequence(
             Actions.delay(.1f),
-            Actions.addListener(InventorySlotsTableListener({ selector.selectNewSlot(it) }, slotsInRow), false)))
+            Actions.addListener(listener, false)))
     }
 
 }

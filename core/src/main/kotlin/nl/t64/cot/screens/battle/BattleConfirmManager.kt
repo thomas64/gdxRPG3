@@ -37,7 +37,7 @@ class BattleConfirmManager(
     }
 
     fun weaponConfirmed(weaponAction: WeaponAction) {
-        val message = weaponAction.handle()
+        weaponAction.handle()
         stopSe(AudioEvent.SE_MENU_CONFIRM)
         playSe(AudioEvent.SE_EQUIP)
     }

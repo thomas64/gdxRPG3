@@ -44,6 +44,13 @@ class ShopScreen : ParchmentScreen() {
         shopUI.update()
     }
 
+    override fun hide() {
+        shopUI.stopTablesScrolling()
+        super.hide()
+        setInputProcessors(null)
+        removeTriggersListener()
+    }
+
     override fun removeTriggersListener() {
         listener.removeTriggers()
     }
@@ -69,37 +76,45 @@ class ShopScreen : ParchmentScreen() {
     }
 
     private fun takeOne() {
+        shopUI.stopTablesScrolling()
         shopUI.takeOne()
     }
 
     private fun takeHalf() {
+        shopUI.stopTablesScrolling()
         shopUI.takeHalf()
     }
 
     private fun takeFull() {
+        shopUI.stopTablesScrolling()
         shopUI.takeFull()
     }
 
     private fun equip() {
+        shopUI.stopTablesScrolling()
         shopUI.equip()
     }
 
     private fun selectPreviousHero() {
+        shopUI.stopTablesScrolling()
         playSe(AudioEvent.SE_MENU_CURSOR)
         shopUI.updateSelectedHero { InventoryUtils.selectPreviousHero() }
     }
 
     private fun selectNextHero() {
+        shopUI.stopTablesScrolling()
         playSe(AudioEvent.SE_MENU_CURSOR)
         shopUI.updateSelectedHero { InventoryUtils.selectNextHero() }
     }
 
     private fun selectPreviousTable() {
+        shopUI.stopTablesScrolling()
         playSe(AudioEvent.SE_MENU_CURSOR)
         shopUI.selectPreviousTable()
     }
 
     private fun selectNextTable() {
+        shopUI.stopTablesScrolling()
         playSe(AudioEvent.SE_MENU_CURSOR)
         shopUI.selectNextTable()
     }
