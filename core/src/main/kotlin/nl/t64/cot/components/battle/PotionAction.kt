@@ -13,18 +13,6 @@ class PotionAction(
 ) {
     private val character: Character = currentParticipant.character
 
-    private enum class RecoveryType(val color: Color) {
-        HP(Color.GREEN),
-        SP(Color.CYAN),
-        BOTH(Color(0f, 1f, 0.5f, 1f)) // Exactly between GREEN and CYAN
-    }
-
-    private data class PotionEffect(
-        val type: RecoveryType,
-        val hpAmount: Int = 0,
-        val spAmount: Int = 0
-    )
-
     fun isAble(): Pair<Boolean, String> {
         return if (currentParticipant.currentAP < POTION_AP) {
             val message =
@@ -48,38 +36,63 @@ class PotionAction(
     }
 
     private fun Character.drink(potion: BattlePotionItem): Pair<String, Color> {
-        val effect: PotionEffect = when (potion.id) {
-            "healing_potion" -> PotionEffect(RecoveryType.HP, hpAmount = 20)
-            "healing_potion_+" -> PotionEffect(RecoveryType.HP, hpAmount = 80)
-            "healing_potion_++" -> PotionEffect(RecoveryType.HP, hpAmount = 200)
-            "energy_potion" -> PotionEffect(RecoveryType.SP, spAmount = 10)
-            "energy_potion_+" -> PotionEffect(RecoveryType.SP, spAmount = 30)
-            "energy_potion_++" -> PotionEffect(RecoveryType.SP, spAmount = 70)
-            "restore_potion" -> PotionEffect(RecoveryType.BOTH, hpAmount = 20, spAmount = 10)
-            "restore_potion_+" -> PotionEffect(RecoveryType.BOTH, hpAmount = 80, spAmount = 30)
-            "restore_potion_++" -> PotionEffect(RecoveryType.BOTH, hpAmount = 200, spAmount = 70)
-            else -> throw NotImplementedError("ToDo")
-        }
-        return this.applyEffect(effect)
+        val (recoveredHp, recoveredSp) = applyRecoveryEffects(potion)
+        applyBuffEffects(potion)
+        return determineDisplayResult(potion, recoveredHp, recoveredSp)
     }
 
-    private fun Character.applyEffect(effect: PotionEffect): Pair<String, Color> {
-        val oldHp = currentHp
-        val oldSp = currentSp
+    private fun Character.applyRecoveryEffects(potion: BattlePotionItem): Pair<Int, Int> {
+        val effect = potion.inventoryItem
 
-        if (effect.hpAmount > 0) recoverPartHp(effect.hpAmount)
-        if (effect.spAmount > 0) recoverPartSp(effect.spAmount)
+        val oldHp = this.currentHp
+        val oldSp = this.currentSp
 
-        val recoveredHp = currentHp - oldHp
-        val recoveredSp = currentSp - oldSp
+        if (effect.hp > 0) this.recoverPartHp(effect.hp)
+        if (effect.sp > 0) this.recoverPartSp(effect.sp)
 
-        val text: String = when (effect.type) {
-            RecoveryType.HP -> formatRecovery(recoveredHp)
-            RecoveryType.SP -> formatRecovery(recoveredSp)
-            RecoveryType.BOTH -> "${formatRecovery(recoveredHp)}/${formatRecovery(recoveredSp)}"
+        return Pair(this.currentHp - oldHp, this.currentSp - oldSp)
+    }
+
+    private fun Character.applyBuffEffects(potion: BattlePotionItem) {
+        val effect = potion.inventoryItem
+        with(this.bonus) {
+            when {
+                effect.protection > 0 -> this.protectionFromPotion = effect.protection
+                effect.intelligence > 0 -> this.intelligenceFromPotion = effect.intelligence
+                effect.dexterity > 0 -> this.dexterityFromPotion = effect.dexterity
+                effect.strength > 0 -> this.strengthFromPotion = effect.strength
+                effect.speed > 0 -> this.speedFromPotion = effect.speed
+                effect.willpower > 0 -> this.willpowerFromPotion = effect.willpower
+                effect.stealth > 0 -> this.stealthFromPotion = effect.stealth
+            }
         }
+    }
 
-        return Pair(text, effect.type.color)
+    private fun determineDisplayResult(potion: BattlePotionItem,
+                                       recoveredHp: Int,
+                                       recoveredSp: Int): Pair<String, Color> {
+        val effect = potion.inventoryItem
+
+        return when {
+            // @formatter:off
+            effect.hp > 0 && effect.sp > 0  -> displayResultForRestore(recoveredHp, recoveredSp)
+            effect.hp > 0                   -> Pair(formatRecovery(recoveredHp),    Color.GREEN)
+            effect.sp > 0                   -> Pair(formatRecovery(recoveredSp),    Color.CYAN)
+            effect.protection > 0           -> Pair("+${effect.protection} Prt",    Color.YELLOW)
+            effect.intelligence > 0         -> Pair("+${effect.intelligence} Int",  Color.MAGENTA)
+            effect.dexterity > 0            -> Pair("+${effect.dexterity} Dex",     Color.MAGENTA)
+            effect.strength > 0             -> Pair("+${effect.strength} Str",      Color.MAGENTA)
+            effect.speed > 0                -> Pair("+${effect.speed} Spd",         Color.MAGENTA)
+            effect.willpower > 0            -> Pair("+${effect.willpower} Wil",     Color.MAGENTA)
+            effect.stealth > 0              -> Pair("+${effect.stealth} Stl",       Color.LIGHT_GRAY)
+            // @formatter:on
+            else -> throw IllegalStateException("Effect of potion ${potion.name} unknown.")
+        }
+    }
+
+    private fun displayResultForRestore(recoveredHp: Int, recoveredSp: Int): Pair<String, Color> {
+        // Color exactly between GREEN and CYAN.
+        return Pair("${formatRecovery(recoveredHp)}/${formatRecovery(recoveredSp)}", Color(0f, 1f, 0.5f, 1f))
     }
 
     private fun formatRecovery(amount: Int): String {

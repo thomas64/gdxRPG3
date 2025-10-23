@@ -214,10 +214,9 @@ class HeroItem(
             ?.let { twoHandedWeapon -> shieldItem.createMessageFailToEquipTwoHanded(twoHandedWeapon) }
     }
 
-    private fun createMessageIfHeroHasNotEnoughFor(inventoryItem: InventoryItem): String? {
+    fun createMessageIfHeroHasNotEnoughFor(inventoryItem: InventoryItem): String? {
         return InventoryMinimal.entries
-            .mapNotNull { it.createMessageIfHeroHasNotEnoughFor(inventoryItem, this) }
-            .firstOrNull()
+            .firstNotNullOfOrNull { it.createMessageIfHeroHasNotEnoughFor(inventoryItem, this) }
     }
 
     private fun createMessageIfNothingToDequip(inventoryItem: InventoryItem): String? {
@@ -236,12 +235,12 @@ class HeroItem(
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     fun getExtraStatForVisualOf(statItem: StatItem): Int {
-        val extra = inventory.getSumOfStat(statItem.id) + statItem.bonus
+        val extra = inventory.getSumOfStat(statItem.id) + bonus.getStatBonus(statItem.id)
         return if (extra < 0 && extra < -statItem.rank) -statItem.rank else extra
     }
 
     fun getExtraSkillForVisualOf(skillItem: SkillItem): Int {
-        val extra = inventory.getSumOfSkill(skillItem.id) + skillItem.bonus
+        val extra = inventory.getSumOfSkill(skillItem.id) + bonus.getSkillBonus(skillItem.id)
         return if (extra < 0 && extra < -skillItem.rank) -skillItem.rank else extra
     }
 

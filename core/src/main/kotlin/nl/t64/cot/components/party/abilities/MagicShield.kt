@@ -39,7 +39,7 @@ class MagicShield(
 
         specialData.castMessage = "+$bonusProtection Prt"
         this.target.isProtected = true
-        this.target.character.temporaryProtection = bonusProtection
+        this.target.character.bonus.protectionFromSpell = bonusProtection
 
         return listOf(specialData)
     }

@@ -30,7 +30,8 @@ abstract class Character(
     var currentHp: Int = 0
     val maximumSp: Int get() = stats.maximumSp
     var currentSp: Int = 0
-    var temporaryProtection: Int = 0
+    @Transient
+    val bonus: BonusContainer = BonusContainer()
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -87,11 +88,11 @@ abstract class Character(
     }
 
     private fun getRealTotalStatOf(statItem: StatItem): Int {
-        return statItem.rank + inventory.getSumOfStat(statItem.id) + statItem.bonus
+        return statItem.rank + inventory.getSumOfStat(statItem.id) + bonus.getStatBonus(statItem.id)
     }
 
     private fun getRealTotalSkillOf(skillItem: SkillItem): Int {
-        return skillItem.rank + inventory.getSumOfSkill(skillItem.id) + skillItem.bonus
+        return skillItem.rank + inventory.getSumOfSkill(skillItem.id) + bonus.getSkillBonus(skillItem.id)
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -147,7 +148,7 @@ abstract class Character(
     }
 
     fun getPossibleExtraProtection(): Int {
-        return inventory.getBonusProtectionWhenArmorSetIsComplete() + temporaryProtection
+        return inventory.getBonusProtectionWhenArmorSetIsComplete() + bonus.getProtection()
     }
 
 }

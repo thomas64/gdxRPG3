@@ -84,10 +84,9 @@ class InventorySlotsTable(
     }
 
     override fun doCrystalTryAction() {
-        val currentSlot: ItemSlot = selector.getCurrentSlot()
-        val group: InventoryGroup? = currentSlot.getPossibleInventoryImage()?.inventoryGroup
-        if (group == InventoryGroup.ITEM) {
-            InventorySlotUser.doAction(currentSlot)
+        val itemId: String? = selector.getCurrentSlot().getPossibleInventoryImage()?.inventoryItem?.id
+        if (itemId == "crystal_of_time") {
+            CrystalHandler.doAction()
         }
     }
 
@@ -95,7 +94,7 @@ class InventorySlotsTable(
         val currentSlot: ItemSlot = selector.getCurrentSlot()
         val group: InventoryGroup? = currentSlot.getPossibleInventoryImage()?.inventoryGroup
         if (group == InventoryGroup.POTION) {
-            InventorySlotUser.doAction(currentSlot)
+            InventorySlotUser.doPreBattlePotionAction(currentSlot)
         } else {
             taker.equip(currentSlot)
         }
@@ -105,7 +104,7 @@ class InventorySlotsTable(
         val currentSlot: ItemSlot = selector.getCurrentSlot()
         val group: InventoryGroup? = currentSlot.getPossibleInventoryImage()?.inventoryGroup
         if (group == InventoryGroup.POTION || group == InventoryGroup.ITEM) {
-            InventorySlotUser.doAction(currentSlot)
+            InventorySlotUser.doRegularAction(currentSlot)
         } else {
             taker.equip(currentSlot)
         }

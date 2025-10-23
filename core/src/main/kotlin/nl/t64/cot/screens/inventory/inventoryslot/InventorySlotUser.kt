@@ -11,8 +11,12 @@ import nl.t64.cot.screens.inventory.itemslot.ItemSlot
 class InventorySlotUser private constructor(itemSlot: ItemSlot) {
 
     companion object {
-        fun doAction(itemSlot: ItemSlot) {
-            InventorySlotUser(itemSlot).selectActionBasedOnItemId()
+        fun doPreBattlePotionAction(itemSlot: ItemSlot) {
+            InventorySlotUser(itemSlot).onlyDoPotionActions()
+        }
+
+        fun doRegularAction(itemSlot: ItemSlot) {
+            InventorySlotUser(itemSlot).doRegularAction()
         }
     }
 
@@ -20,81 +24,88 @@ class InventorySlotUser private constructor(itemSlot: ItemSlot) {
     private val inventoryItem: InventoryItem = itemSlot.getCertainInventoryImage().inventoryItem
     private val selectedHero: HeroItem = InventoryUtils.getSelectedHero()
 
-    private enum class RecoveryType { HP, SP, BOTH }
-
-    private data class PotionEffect(
-        val recoveryType: RecoveryType,
-        val hpAmount: Int = 0,
-        val spAmount: Int = 0
-    )
-
-    private fun selectActionBasedOnItemId() {
-        when (inventoryItem.id) {
-            "crystal_of_time" -> CrystalHandler.doAction()
-            "healing_potion" -> handlePotion(PotionEffect(RecoveryType.HP, hpAmount = 20))
-            "healing_potion_+" -> handlePotion(PotionEffect(RecoveryType.HP, hpAmount = 80))
-            "healing_potion_++" -> handlePotion(PotionEffect(RecoveryType.HP, hpAmount = 200))
-            "energy_potion" -> handlePotion(PotionEffect(RecoveryType.SP, spAmount = 10))
-            "energy_potion_+" -> handlePotion(PotionEffect(RecoveryType.SP, spAmount = 30))
-            "energy_potion_++" -> handlePotion(PotionEffect(RecoveryType.SP, spAmount = 70))
-            "restore_potion" -> handlePotion(PotionEffect(RecoveryType.BOTH, hpAmount = 20, spAmount = 10))
-            "restore_potion_+" -> handlePotion(PotionEffect(RecoveryType.BOTH, hpAmount = 80, spAmount = 30))
-            "restore_potion_++" -> handlePotion(PotionEffect(RecoveryType.BOTH, hpAmount = 200, spAmount = 70))
-            // todo, other potions for pre battle
-        }
-    }
-
-    private fun handlePotion(effect: PotionEffect) {
-        if (canUsePotion(effect.recoveryType)) {
-            usePotion(effect)
+    private fun onlyDoPotionActions() {
+        if (canUsePotion()) {
+            usePotion()
         } else {
             showFailMessage()
         }
     }
 
-    private fun canUsePotion(recoveryType: RecoveryType): Boolean {
-        if (!selectedHero.isAlive) return false
-
-        return when (recoveryType) {
-            RecoveryType.HP -> selectedHero.currentHp < selectedHero.maximumHp
-            RecoveryType.SP -> selectedHero.currentSp < selectedHero.maximumSp
-            RecoveryType.BOTH -> selectedHero.currentHp < selectedHero.maximumHp
-                || selectedHero.currentSp < selectedHero.maximumSp
+    private fun doRegularAction() {
+        if (inventoryItem.id == "crystal_of_time") {
+            CrystalHandler.doAction()
+        } else if ((inventoryItem.hp > 0 || inventoryItem.sp > 0) && canUsePotion()) {
+            usePotion()
+        } else {
+            showFailMessage()
         }
     }
 
-    private fun usePotion(effect: PotionEffect) {
+    private fun canUsePotion(): Boolean {
+        if (selectedHero.isDead) return false
+
+        val needsHp: Boolean = inventoryItem.hp > 0 && selectedHero.currentHp < selectedHero.maximumHp
+        val needsSp: Boolean = inventoryItem.sp > 0 && selectedHero.currentSp < selectedHero.maximumSp
+        val canUseBuff: Boolean =
+            inventoryItem.protection > 0
+                || inventoryItem.intelligence > 0
+                || inventoryItem.dexterity > 0
+                || inventoryItem.strength > 0
+                || inventoryItem.speed > 0
+                || inventoryItem.willpower > 0
+                || inventoryItem.stealth > 0
+
+        return needsHp || needsSp || canUseBuff
+    }
+
+    private fun usePotion() {
         currentSlot.decrementAmountBy(1)
-        val (recoveredHp, recoveredSp) = applyPotionEffect(effect)
-        showSuccessMessage(effect.recoveryType, recoveredHp, recoveredSp)
+        val (recoveredHp, recoveredSp) = applyRecoveryEffects()
+        applyBuffEffects()
+        showSuccessMessage(recoveredHp, recoveredSp)
     }
 
-    private fun applyPotionEffect(effect: PotionEffect): Pair<Int, Int> {
-        var recoveredHp = 0
-        var recoveredSp = 0
+    private fun applyRecoveryEffects(): Pair<Int, Int> {
+        val oldHp = selectedHero.currentHp
+        val oldSp = selectedHero.currentSp
 
-        if (effect.hpAmount > 0) {
-            val oldHp = selectedHero.currentHp
-            selectedHero.recoverPartHp(effect.hpAmount)
-            recoveredHp = selectedHero.currentHp - oldHp
-        }
+        if (inventoryItem.hp > 0) selectedHero.recoverPartHp(inventoryItem.hp)
+        if (inventoryItem.sp > 0) selectedHero.recoverPartSp(inventoryItem.sp)
 
-        if (effect.spAmount > 0) {
-            val oldSp = selectedHero.currentSp
-            selectedHero.recoverPartSp(effect.spAmount)
-            recoveredSp = selectedHero.currentSp - oldSp
-        }
-
-        return Pair(recoveredHp, recoveredSp)
+        return Pair(selectedHero.currentHp - oldHp, selectedHero.currentSp - oldSp)
     }
 
-    private fun showSuccessMessage(recoveryType: RecoveryType, recoveredHp: Int, recoveredSp: Int) {
-        val message = when (recoveryType) {
-            RecoveryType.HP -> "${selectedHero.name} used a ${inventoryItem.name} and recovered $recoveredHp HP."
-            RecoveryType.SP -> "${selectedHero.name} used a ${inventoryItem.name} and recovered $recoveredSp SP."
-            RecoveryType.BOTH -> "${selectedHero.name} used a ${inventoryItem.name} and recovered $recoveredHp HP and $recoveredSp SP."
+    private fun applyBuffEffects() {
+        with(selectedHero.bonus) {
+            if (inventoryItem.protection > 0) this.protectionFromPotion = inventoryItem.protection
+            if (inventoryItem.intelligence > 0) this.intelligenceFromPotion = inventoryItem.intelligence
+            if (inventoryItem.dexterity > 0) this.dexterityFromPotion = inventoryItem.dexterity
+            if (inventoryItem.strength > 0) this.strengthFromPotion = inventoryItem.strength
+            if (inventoryItem.speed > 0) this.speedFromPotion = inventoryItem.speed
+            if (inventoryItem.willpower > 0) this.willpowerFromPotion = inventoryItem.willpower
+            if (inventoryItem.stealth > 0) this.stealthFromPotion = inventoryItem.stealth
         }
-        MessageDialog(message).show(currentSlot.stage, AudioEvent.SE_POTION)
+    }
+
+    private fun showSuccessMessage(recoveredHp: Int, recoveredSp: Int) {
+        val message1 = "${selectedHero.name} used a ${inventoryItem.name} "
+        val message2 = when {
+            // @formatter:off
+            inventoryItem.hp > 0 && inventoryItem.sp > 0 -> "and recovered $recoveredHp HP and $recoveredSp SP."
+            inventoryItem.hp > 0                         -> "and recovered $recoveredHp HP."
+            inventoryItem.sp > 0                         -> "and recovered $recoveredSp SP."
+            inventoryItem.protection > 0                 -> "and gained ${inventoryItem.protection} Protection."
+            inventoryItem.intelligence > 0               -> "and gained ${inventoryItem.intelligence} Intelligence."
+            inventoryItem.dexterity > 0                  -> "and gained ${inventoryItem.dexterity} Dexterity."
+            inventoryItem.strength > 0                   -> "and gained ${inventoryItem.strength} Strength."
+            inventoryItem.speed > 0                      -> "and gained ${inventoryItem.speed} Speed."
+            inventoryItem.willpower > 0                  -> "and gained ${inventoryItem.willpower} Willpower."
+            inventoryItem.stealth > 0                    -> "and gained ${inventoryItem.stealth} Stealth."
+            // @formatter:on
+            else -> throw IllegalStateException("Effect of potion ${inventoryItem.name} unknown.")
+        }
+        MessageDialog(message1 + message2).show(currentSlot.stage, AudioEvent.SE_POTION)
     }
 
     private fun showFailMessage() {

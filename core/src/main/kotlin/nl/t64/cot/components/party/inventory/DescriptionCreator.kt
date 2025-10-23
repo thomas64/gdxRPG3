@@ -193,6 +193,13 @@ class DescriptionCreator(
         if (descriptionLine.key == CalcAttributeId.TRANSFORMATION) {
             return false
         }
+        if (inventoryItem.group == InventoryGroup.POTION &&
+            (descriptionLine.key is StatItemId
+                || descriptionLine.key is SkillItemId
+                || descriptionLine.key == CalcAttributeId.PROTECTION)
+        ) {
+            return false
+        }
         if (descriptionLine.key in listOf(CalcAttributeId.PROTECTION,
                                           StatItemId.SPEED,
                                           SkillItemId.STEALTH)

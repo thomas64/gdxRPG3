@@ -15,8 +15,6 @@ data class SkillItem(
     private val upgrade: Float = 0f,                        // Constant value for upgrading formula.
 ) : PersonalityItem() {
 
-    var bonus: Int = 0
-
     fun createCopy(rank: Int): SkillItem {
         return copy(rank = rank)
     }

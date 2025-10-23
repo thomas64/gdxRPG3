@@ -2,7 +2,7 @@ package nl.t64.cot.components.party.inventory
 
 
 class BattlePotionItem(
-    private val inventoryItem: InventoryItem
+    val inventoryItem: InventoryItem
 ) {
     private val amount: Int = inventoryItem.amount
     val id: String = inventoryItem.id

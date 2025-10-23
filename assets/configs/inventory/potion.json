@@ -8,7 +8,8 @@
     "herb"         : 3,
     "description"  : [
       "Restores 20 HP of the drinker's lost health."
-    ]
+    ],
+    "hp"           : 20
   },
   "healing_potion_+"      : {
     "name"         : "Healing Potion +",
@@ -19,7 +20,8 @@
     "herb"         : 5,
     "description"  : [
       "Restores 80 HP of the drinker's lost health."
-    ]
+    ],
+    "hp"           : 80
   },
   "healing_potion_++"     : {
     "name"         : "Healing Potion ++",
@@ -30,7 +32,8 @@
     "herb"         : 9,
     "description"  : [
       "Restores 200 HP of the drinker's lost health."
-    ]
+    ],
+    "hp"           : 200
   },
   "energy_potion"         : {
     "name"         : "Energy Potion",
@@ -41,7 +44,8 @@
     "spice"        : 3,
     "description"  : [
       "Restores 10 SP of the drinker's lost energy."
-    ]
+    ],
+    "sp"           : 10
   },
   "energy_potion_+"       : {
     "name"         : "Energy Potion +",
@@ -52,7 +56,8 @@
     "spice"        : 5,
     "description"  : [
       "Restores 30 SP of the drinker's lost energy."
-    ]
+    ],
+    "sp"           : 30
   },
   "energy_potion_++"      : {
     "name"         : "Energy Potion ++",
@@ -63,7 +68,8 @@
     "spice"        : 9,
     "description"  : [
       "Restores 70 SP of the drinker's lost energy."
-    ]
+    ],
+    "sp"           : 70
   },
   "restore_potion"        : {
     "name"         : "Restore Potion",
@@ -76,7 +82,9 @@
     "description"  : [
       "Restores 20 HP and 10 SP of the",
       "drinker's lost health and energy."
-    ]
+    ],
+    "hp"           : 20,
+    "sp"           : 10
   },
   "restore_potion_+"      : {
     "name"         : "Restore Potion +",
@@ -89,7 +97,9 @@
     "description"  : [
       "Restores 80 HP and 30 SP of the",
       "drinker's lost health and energy."
-    ]
+    ],
+    "hp"           : 80,
+    "sp"           : 30
   },
   "restore_potion_++"     : {
     "name"         : "Restore Potion ++",
@@ -102,7 +112,9 @@
     "description"  : [
       "Restores 200 HP and 70 SP of the",
       "drinker's lost health and energy."
-    ]
+    ],
+    "hp"           : 200,
+    "sp"           : 70
   },
   "protection_potion"     : {
     "name"         : "Protection Potion",
@@ -116,7 +128,8 @@
     "description"  : [
       "Temporarily increases the Protection of",
       "the drinker by 3 points during 1 battle."
-    ]
+    ],
+    "protection"   : 3
   },
   "protection_potion_+"   : {
     "name"         : "Protection Potion +",
@@ -130,7 +143,8 @@
     "description"  : [
       "Temporarily increases the Protection of",
       "the drinker by 5 points during 1 battle."
-    ]
+    ],
+    "protection"   : 5
   },
   "protection_potion_++"  : {
     "name"         : "Protection Potion ++",
@@ -144,7 +158,8 @@
     "description"  : [
       "Temporarily increases the Protection of",
       "the drinker by 7 points during 1 battle."
-    ]
+    ],
+    "protection"   : 7
   },
   "intelligence_potion"   : {
     "name"         : "Intelligence Potion",
@@ -158,7 +173,8 @@
     "description"  : [
       "Temporarily increases the Intelligence of",
       "the drinker by 3 points during 1 battle."
-    ]
+    ],
+    "intelligence" : 3
   },
   "intelligence_potion_+" : {
     "name"         : "Intelligence Potion +",
@@ -172,7 +188,8 @@
     "description"  : [
       "Temporarily increases the Intelligence of",
       "the drinker by 5 points during 1 battle."
-    ]
+    ],
+    "intelligence" : 5
   },
   "intelligence_potion_++": {
     "name"         : "Intelligence Potion ++",
@@ -186,54 +203,13 @@
     "description"  : [
       "Temporarily increases the Intelligence of",
       "the drinker by 7 points during 1 battle."
-    ]
-  },
-  "willpower_potion"      : {
-    "name"         : "Willpower Potion",
-    "group"        : "POTION",
-    "sort"         : 80095,
-    "price"        : 12,
-    "min_alchemist": 6,
-    "herb"         : 3,
-    "spice"        : 2,
-    "gemstone"     : 1,
-    "description"  : [
-      "Temporarily increases the Willpower of",
-      "the drinker by 3 points during 1 battle."
-    ]
-  },
-  "willpower_potion_+"    : {
-    "name"         : "Willpower Potion +",
-    "group"        : "POTION",
-    "sort"         : 80100,
-    "price"        : 17,
-    "min_alchemist": 8,
-    "herb"         : 4,
-    "spice"        : 3,
-    "gemstone"     : 2,
-    "description"  : [
-      "Temporarily increases the Willpower of",
-      "the drinker by 5 points during 1 battle."
-    ]
-  },
-  "willpower_potion_++"   : {
-    "name"         : "Willpower Potion ++",
-    "group"        : "POTION",
-    "sort"         : 80105,
-    "price"        : 22,
-    "min_alchemist": 10,
-    "herb"         : 5,
-    "spice"        : 4,
-    "gemstone"     : 3,
-    "description"  : [
-      "Temporarily increases the Willpower of",
-      "the drinker by 7 points during 1 battle."
-    ]
+    ],
+    "intelligence" : 7
   },
   "dexterity_potion"      : {
     "name"         : "Dexterity Potion",
     "group"        : "POTION",
-    "sort"         : 80110,
+    "sort"         : 80095,
     "price"        : 12,
     "min_alchemist": 6,
     "herb"         : 1,
@@ -242,12 +218,13 @@
     "description"  : [
       "Temporarily increases the Dexterity of",
       "the drinker by 3 points during 1 battle."
-    ]
+    ],
+    "dexterity"    : 3
   },
   "dexterity_potion_+"    : {
     "name"         : "Dexterity Potion +",
     "group"        : "POTION",
-    "sort"         : 80115,
+    "sort"         : 80100,
     "price"        : 17,
     "min_alchemist": 8,
     "herb"         : 2,
@@ -256,12 +233,13 @@
     "description"  : [
       "Temporarily increases the Dexterity of",
       "the drinker by 5 points during 1 battle."
-    ]
+    ],
+    "dexterity"    : 5
   },
   "dexterity_potion_++"   : {
     "name"         : "Dexterity Potion ++",
     "group"        : "POTION",
-    "sort"         : 80120,
+    "sort"         : 80105,
     "price"        : 22,
     "min_alchemist": 10,
     "herb"         : 3,
@@ -270,7 +248,53 @@
     "description"  : [
       "Temporarily increases the Dexterity of",
       "the drinker by 7 points during 1 battle."
-    ]
+    ],
+    "dexterity"    : 7
+  },
+  "strength_potion"       : {
+    "name"         : "Strength Potion",
+    "group"        : "POTION",
+    "sort"         : 80110,
+    "price"        : 12,
+    "min_alchemist": 6,
+    "herb"         : 1,
+    "spice"        : 2,
+    "gemstone"     : 3,
+    "description"  : [
+      "Temporarily increases the Strength of",
+      "the drinker by 3 points during 1 battle."
+    ],
+    "strength"     : 3
+  },
+  "strength_potion_+"     : {
+    "name"         : "Strength Potion +",
+    "group"        : "POTION",
+    "sort"         : 80115,
+    "price"        : 17,
+    "min_alchemist": 8,
+    "herb"         : 2,
+    "spice"        : 3,
+    "gemstone"     : 4,
+    "description"  : [
+      "Temporarily increases the Strength of",
+      "the drinker by 5 points during 1 battle."
+    ],
+    "strength"     : 5
+  },
+  "strength_potion_++"    : {
+    "name"         : "Strength Potion ++",
+    "group"        : "POTION",
+    "sort"         : 80120,
+    "price"        : 22,
+    "min_alchemist": 10,
+    "herb"         : 3,
+    "spice"        : 4,
+    "gemstone"     : 5,
+    "description"  : [
+      "Temporarily increases the Strength of",
+      "the drinker by 7 points during 1 battle."
+    ],
+    "strength"     : 7
   },
   "speed_potion"          : {
     "name"         : "Speed Potion",
@@ -284,7 +308,8 @@
     "description"  : [
       "Temporarily increases the Speed of the",
       "drinker by 3 points during 1 battle."
-    ]
+    ],
+    "speed"        : 3
   },
   "speed_potion_+"        : {
     "name"         : "Speed Potion +",
@@ -298,7 +323,8 @@
     "description"  : [
       "Temporarily increases the Speed of the",
       "drinker by 5 points during 1 battle."
-    ]
+    ],
+    "speed"        : 5
   },
   "speed_potion_++"       : {
     "name"         : "Speed Potion ++",
@@ -312,49 +338,53 @@
     "description"  : [
       "Temporarily increases the Speed of the",
       "drinker by 7 points during 1 battle."
-    ]
+    ],
+    "speed"        : 7
   },
-  "strength_potion"       : {
-    "name"         : "Strength Potion",
+  "willpower_potion"      : {
+    "name"         : "Willpower Potion",
     "group"        : "POTION",
     "sort"         : 80140,
     "price"        : 12,
     "min_alchemist": 6,
-    "herb"         : 1,
+    "herb"         : 3,
     "spice"        : 2,
-    "gemstone"     : 3,
+    "gemstone"     : 1,
     "description"  : [
-      "Temporarily increases the Strength of",
+      "Temporarily increases the Willpower of",
       "the drinker by 3 points during 1 battle."
-    ]
+    ],
+    "willpower"    : 3
   },
-  "strength_potion_+"     : {
-    "name"         : "Strength Potion +",
+  "willpower_potion_+"    : {
+    "name"         : "Willpower Potion +",
     "group"        : "POTION",
     "sort"         : 80145,
     "price"        : 17,
     "min_alchemist": 8,
-    "herb"         : 2,
+    "herb"         : 4,
     "spice"        : 3,
-    "gemstone"     : 4,
+    "gemstone"     : 2,
     "description"  : [
-      "Temporarily increases the Strength of",
+      "Temporarily increases the Willpower of",
       "the drinker by 5 points during 1 battle."
-    ]
+    ],
+    "willpower"    : 5
   },
-  "strength_potion_++"    : {
-    "name"         : "Strength Potion ++",
+  "willpower_potion_++"   : {
+    "name"         : "Willpower Potion ++",
     "group"        : "POTION",
     "sort"         : 80150,
     "price"        : 22,
     "min_alchemist": 10,
-    "herb"         : 3,
+    "herb"         : 5,
     "spice"        : 4,
-    "gemstone"     : 5,
+    "gemstone"     : 3,
     "description"  : [
-      "Temporarily increases the Strength of",
+      "Temporarily increases the Willpower of",
       "the drinker by 7 points during 1 battle."
-    ]
+    ],
+    "willpower"    : 7
   },
   "stealth_potion"        : {
     "name"         : "Stealth Potion",
@@ -368,7 +398,8 @@
     "description"  : [
       "Temporarily increases the Stealth rank of",
       "the drinker by 3 points during 1 battle."
-    ]
+    ],
+    "stealth"      : 3
   },
   "stealth_potion_+"      : {
     "name"         : "Stealth Potion +",
@@ -382,7 +413,8 @@
     "description"  : [
       "Temporarily increases the Stealth rank of",
       "the drinker by 5 points during 1 battle."
-    ]
+    ],
+    "stealth"      : 5
   },
   "stealth_potion_++"     : {
     "name"         : "Stealth Potion ++",
@@ -396,6 +428,7 @@
     "description"  : [
       "Temporarily increases the Stealth rank of",
       "the drinker by 7 points during 1 battle."
-    ]
+    ],
+    "stealth"      : 7
   }
 }

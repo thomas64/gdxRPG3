@@ -37,6 +37,7 @@ class TurnManager(
     }
 
     fun removeKilledParticipants() {
+        getOnlyHeroes().filter { it.character.isDead }.forEach { it.resetTemporaryBonuses() }
         participants.removeIf { it.character.isDead }
     }
 
@@ -67,8 +68,8 @@ class TurnManager(
         return participants.firstOrNull { it.character == character }?.currentAP ?: 0
     }
 
-    fun resetTemporaryStatsAfterBattle() {
-        participants.forEach { it.resetTemporaryStatsAfterBattle() }
+    fun resetTemporaryBonusesAfterBattle() {
+        getOnlyHeroes().forEach { it.resetTemporaryBonuses() }
     }
 
     private fun increaseAllTurnCounters() {

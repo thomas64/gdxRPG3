@@ -211,7 +211,7 @@ class BattleScreen : Screen {
         Utils.setGamepadInputProcessor(null)
         if (shouldKeepState) return
         hasCharacterBlinked = false
-        turnManager.resetTemporaryStatsAfterBattle()
+        turnManager.resetTemporaryBonusesAfterBattle()
         stage.clear()
     }
 

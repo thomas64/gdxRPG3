@@ -1,5 +1,6 @@
 package nl.t64.cot.components.battle
 
+import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.abilities.*
@@ -115,8 +116,19 @@ class Participant(
         return character.getInventoryItem(InventoryGroup.WEAPON)
     }
 
-    fun resetTemporaryStatsAfterBattle() {
-        character.temporaryProtection = 0
+    fun resetTemporaryBonuses() {
+        character.bonus.reset()
+        dequipDisallowedWeapon()
+    }
+
+    private fun dequipDisallowedWeapon() {
+        val hero = character as HeroItem
+        hero.getInventoryItem(InventoryGroup.WEAPON)?.let { weapon ->
+            hero.createMessageIfHeroHasNotEnoughFor(weapon)?.let { _ ->
+                hero.clearInventoryItemFor(InventoryGroup.WEAPON)
+                gameData.inventory.autoSetItem(weapon)
+            }
+        }
     }
 
     private fun createBattleAbilityItemFrom(abilityItem: AbilityItem): BattleAbilityItem {
