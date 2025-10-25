@@ -1,11 +1,9 @@
 package nl.t64.cot.screens.world.entity
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
-import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.components.loot.Loot
-import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.screens.world.entity.events.Event
 import nl.t64.cot.screens.world.entity.events.LoadEntityEvent
 import nl.t64.cot.screens.world.entity.events.OnActionEvent
@@ -29,7 +27,6 @@ class PhysicsSparkle(private val sparkle: Loot) : PhysicsComponent() {
     override fun update(entity: Entity, dt: Float) {
         if (isSelected) {
             isSelected = false
-            sparkle.handleRanger(gameData.party.getSumOfSkill(SkillItemId.RANGER))
             worldScreen.showFindScreen(sparkle, AudioEvent.SE_SPARKLE)
         }
     }

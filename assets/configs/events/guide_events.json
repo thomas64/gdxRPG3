@@ -183,9 +183,9 @@
       "Strength. Check the weapon's description for that requirement.",
       "If you meet the requirement, you can equip the weapon.",
       "",
-      "Access your attributes by pressing the [BLUE]%inventory%[BLACK].",
-      "Use [FOREST]XP[BLACK] to level them up with the [BLUE]%action%[BLACK].",
-      "A [PURPLE]purple arrow[BLACK] indicates your [FOREST]XP[BLACK] is sufficient."
+      "Access your attributes by pressing the [BLUE]%inventory%[BLACK]. A [PURPLE]purple arrow[BLACK]",
+      "indicates your [FOREST]XP[BLACK] is sufficient to upgrade that attribute. Press",
+      "the attribute with the [BLUE]%action%[BLACK] to spend your [FOREST]XP[BLACK] and level it up."
     ]
   },
   "guide_event_spell"                : {

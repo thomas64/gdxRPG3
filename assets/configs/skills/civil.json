@@ -21,8 +21,7 @@
   "ranger"   : {
     "upgrade"    : 6,
     "description": [
-      "- 'Ranger' increases the amount of resources you'll find in the world.",
-      "  For every rank of 'Ranger', 2% more resources.",
+      "- 'Ranger' increases the amount of natural resources you'll find in the world.",
       "  'Ranger' ranks are stacked cumulative for all party members."
     ]
   },

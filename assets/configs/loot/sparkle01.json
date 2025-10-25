@@ -31,5 +31,6 @@
   "sparkle_farm_3"     : {"content": {"spice": 1}},
   "sparkle_farm_4"     : {"content": {"metal": 1}},
   "sparkle_farm_5"     : {"content": {"wood": 2}},
-  "sparkle_farm_6"     : {"content": {"herb": 1}}
+  "sparkle_farm_6"     : {"content": {"herb": 1}},
+  "sparkle_alva_1"     : {"condition": ["ranger1"], "content": {"wood": 1}}
 }

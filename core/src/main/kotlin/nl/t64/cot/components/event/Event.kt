@@ -22,8 +22,8 @@ class Event(
     private val entityId: String? = null,
     private val text: List<String> = emptyList(),
     private val doesRepeat: Boolean = false,
-    private var isRepeated: Boolean = false
 ) {
+    private var isRepeated: Boolean = false
     var hasPlayed: Boolean = false
 
     fun toProgress(): EventProgress {

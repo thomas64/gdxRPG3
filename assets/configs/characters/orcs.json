@@ -209,7 +209,7 @@
     "name"     : "Orc General",
     "gender"   : "its",
     "xp"       : 90,
-    "drops"    : {"masterwork_axe": 50, "masterwork_heavy_shield": 50, "stamina_potion": 90, "gold": 90},
+    "drops"    : {"masterwork_axe": 50, "masterwork_heavy_shield": 50, "energy_potion_++": 90, "gold": 90},
     "stats"    : {
       "intelligence": 30,
       "dexterity"   : 1,
@@ -240,7 +240,7 @@
     "name"     : "Orc General",
     "gender"   : "its",
     "xp"       : 90,
-    "drops"    : {"masterwork_spear": 50, "masterwork_heavy_shield": 50, "stamina_potion": 90, "gold": 90},
+    "drops"    : {"masterwork_spear": 50, "masterwork_heavy_shield": 50, "energy_potion_++": 90, "gold": 90},
     "stats"    : {
       "intelligence": 30,
       "dexterity"   : 1,

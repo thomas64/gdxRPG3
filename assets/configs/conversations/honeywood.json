@@ -27,7 +27,7 @@
       "1": {"text": ["It's early morning again!"]},
       "2": {"text": ["Everything has started over again..."]},
       "3": {"text": [". . ."]},
-      "4": {"text": ["This time, I might be able to make it to the farm in time to save Luana from her death."], "choices": [{"command": "EXIT"}]}
+      "4": {"text": ["Wait! This time, I might be able to make it to the farm in time to save Luana from her death!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "honeywood_ridiculous"                : {
@@ -160,16 +160,17 @@
         "choices": [
           {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "text": "*Ask Malina if she's seen Grace this morning.*", "nextId": "31"},
           {"text": "*Ask about her dull and secluded life.*", "nextId": "10"},
+          {"text": "*Inquire about her people skills.* (Visit academy)", "command": "LOAD_ACADEMY"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
       "10": {"text": ["Oh, you know, the usual."]},
       "11": {"text": ["Well actually, I'm glad we're not allowed to leave the village by ourselves."]},
       "12": {"text": ["The monsters are getting more aggressive every day. I'm afraid that if I leave the village, I might not come back alive."]},
-      "13": {"text": ["But I do know something that may come in handy against monsters with weapons."]},
-      "14": {"text": ["If you hit them with a weapon, they will die."]},
+      "13": {"text": ["But I do know something that may come in handy if you ever run into a monster..."]},
+      "14": {"text": ["RUN FOR YOUR LIFE!"]},
       "15": {"text": [". . ."]},
-      "16": {"text": ["No? Nothing? No smile? No chuckle?"]},
+      "16": {"text": ["No? Nothing? I was trying to be funny..."]},
       "17": {"text": ["Then let me tell you something about weapon {COLOR=BLUE}advantage{COLOR=BLACK} and {COLOR=FIREBRICK}disadvantage{COLOR=BLACK}."]},
       "18": {"text": ["Swords have advantage against axes, axes have advantage against spears, and spears have advantage against swords."]},
       "19": {"text": ["This also means swords have disadvantage against spears, spears have disadvantage against axes, and axes have disadvantage against swords."]},
@@ -349,7 +350,15 @@
   "pleasant_honeywood"                  : {
     "name"   : "Traveler",
     "phrases": {
-      "1": {"text": ["Honeywood is such a delightful little village. I enjoy staying here from time to time."], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["Honeywood is such a delightful little village. I enjoy staying here from time to time."]},
+      "2": {"text": ["On the road however, one must always be cautious. Monsters have been getting more aggressive lately."]},
+      "3": {"text": ["But I've got a skill to deal with them. Are you interested in receiving some training?"]},
+      "4": {
+        "choices": [
+          {"text": "*Visit the academy.*", "command": "LOAD_ACADEMY"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      }
     }
   },
   "honeywood_inn_cat"                   : {
@@ -474,7 +483,7 @@
       "2"   : {
         "choices": [
           {"condition": ["i_c_!=_f_q_this", "i_rc_>=_a_q_quest_get_horse", "_tn_7_q_quest_get_horse"], "text": "*Ask for help with Angie's ailing horse.*", "nextId": "3"},
-          {"text": "*Inquire about her potion brewing skill.* (Visit the academy)", "command": "LOAD_ACADEMY"},
+          {"text": "*Inquire about her potion brewing skill.* (Visit academy)", "command": "LOAD_ACADEMY"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
@@ -493,7 +502,7 @@
       "21"  : {
         "choices": [
           {"condition": ["_n_6_>=_item_herb", "_n_1_>=_item_blue_jelly"], "text": "[6 Herbs, 1 Blue Jelly] *Deliver the gathered ingredients.*", "command": "PROVIDE_QUEST_ITEM", "nextId": "30"},
-          {"text": "*Inquire about her potion brewing skill.* (Visit the academy)", "command": "LOAD_ACADEMY", "nextId": "20"},
+          {"text": "*Inquire about her potion brewing skill.* (Visit academy)", "command": "LOAD_ACADEMY", "nextId": "20"},
           {"text": "*Inform her that you're working on it. Take your leave.*", "command": "EXIT", "nextId": "20"}
         ]
       },

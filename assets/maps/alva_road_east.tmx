@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="160" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="17" nextobjectid="267">
+<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="160" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="17" nextobjectid="268">
  <properties>
   <property name="bgm" value="bgm_overworld"/>
   <property name="lightmap_camera" value="sunlight"/>
@@ -267,6 +267,7 @@
   <object id="242" name="note_honeywood_signpost" x="768" y="960" width="48" height="48"/>
   <object id="244" name="note_honeywood_ferry" x="672" y="1152" width="48" height="48"/>
   <object id="266" name="chest0013" x="816" y="72" width="48" height="48"/>
+  <object id="267" name="sparkle_alva_1" x="912" y="528" width="48" height="48"/>
  </objectgroup>
  <objectgroup color="#ff007f" id="16" name="enemy">
   <object id="245" name="blue_slime" type="w" x="456" y="504" width="48" height="24">

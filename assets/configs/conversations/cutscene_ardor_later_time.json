@@ -8,7 +8,7 @@
   },
   "ardor_turns_around"    : {
     "phrases": {
-      "1": {"face": "ardor", "name": "Ardor", "text": ["What do you mean, you're back? I don't even know who you are."]},
+      "1": {"face": "ardor", "name": "Ardor", "text": ["What do you mean, \"I'm back\"? I don't even know who you are."]},
       "2": {"face": "mozes", "name": "Mozes", "text": ["I'm here for my sister! Now let her go!"]},
       "3": {"face": "ardor", "name": "Ardor", "text": ["Sister? Hmmmm..."]},
       "4": {"face": "ardor", "name": "Ardor", "text": ["{SPEED=0.2} . . . . ."]},

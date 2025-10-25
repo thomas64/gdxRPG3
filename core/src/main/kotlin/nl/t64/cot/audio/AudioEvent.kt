@@ -9,7 +9,7 @@ enum class AudioEvent(val filePath: String, val volume: Float = 1f) {
     BGM_HONEYWOOD("audio/bgm/town.ogg", 0.1f),
     BGM_INN("audio/bgm/store.ogg", 0.1f),
     BGM_HOUSE("audio/bgm/wake_up.ogg", 0.1f),
-    BGM_CELLAR("audio/bgm/quiet_town.ogg", 0.1f),
+    BGM_CELLAR("audio/bgm/quiet_town.ogg", 0.2f),
     BGM_YLARUS("audio/bgm/woods.ogg", 0.1f),
     BGM_TENSION("audio/bgm/volcano.ogg", 0.1f),
     BGM_CAVE("audio/bgm/den.ogg", 0.1f),

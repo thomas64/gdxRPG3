@@ -1,9 +1,6 @@
 package nl.t64.cot.components.loot
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import nl.t64.cot.components.party.inventory.InventoryDatabase
-import nl.t64.cot.components.party.inventory.InventoryGroup
-import kotlin.math.roundToInt
 
 
 private const val BONUS_PREFIX = "bonus_"
@@ -95,14 +92,6 @@ class Loot(
 
     fun isXpGained(): Boolean {
         return xp == 0
-    }
-
-    fun handleRanger(totalRanger: Int) {
-        content
-            .map { InventoryDatabase.createInventoryItem(it.key, it.value) }
-            .filter { it.group == InventoryGroup.RESOURCE }
-            .map { Pair(it.id, (it.amount + ((it.amount / 100f) * (totalRanger * 2f))).roundToInt()) }
-            .forEach { content[it.first] = it.second }
     }
 
     fun handleBonus() {
