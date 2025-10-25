@@ -13,6 +13,7 @@ import nl.t64.cot.components.party.stats.StatContainer
 import nl.t64.cot.components.party.stats.StatItem
 import nl.t64.cot.components.party.stats.StatItemId
 import kotlin.math.roundToInt
+import kotlin.random.Random
 
 
 abstract class Character(
@@ -112,7 +113,6 @@ abstract class Character(
         val weaponSkillAmount: Int = getCalculatedTotalSkillOf(weaponSkill)
         val attackerHit: Float = (weaponHit / 100f) * (5f * weaponSkillAmount)
         // + troubadour ?
-        // + gambler todo, overal
         return (weaponHit + attackerHit).roundToInt()
     }
 
@@ -149,6 +149,14 @@ abstract class Character(
 
     fun getPossibleExtraProtection(): Int {
         return inventory.getBonusProtectionWhenArmorSetIsComplete() + bonus.getProtection()
+    }
+
+    fun applyGamblerBonusTo(amount: Float): Float {
+        val gamblerRank: Int = getCalculatedTotalSkillOf(SkillItemId.GAMBLER)
+        if (gamblerRank <= 0) return amount
+        val maxBonus: Float = amount * (gamblerRank * 0.05f)
+        val gamblerBonus: Float = Random.nextFloat() * (maxBonus * 2) - maxBonus
+        return amount + gamblerBonus
     }
 
 }

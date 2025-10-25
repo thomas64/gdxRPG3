@@ -127,14 +127,17 @@ abstract class BattleAbilityItem(
         return abilityItem.isWeaponAllowed(currentWeapon)
     }
 
-    protected fun calculateHitPercentageCapped(): Int {
-        return calculateHitPercentage().coerceAtMost(100)
+    fun calculateHitPercentage(): Int {
+        val baseHit: Float = attacker.character.getCalculatedTotalHit() * abilityItem.hitMultiplier
+        val hitWithGambler: Float = attacker.character.applyGamblerBonusTo(baseHit)
+        val weaponTriangle: Int = getAdvantageBonusHit()
+        return (hitWithGambler + weaponTriangle).roundToInt().coerceAtLeast(0)
     }
 
-    fun calculateHitPercentage(): Int {
-        val attackerHitPercentage: Int = (attacker.character.getCalculatedTotalHit() * abilityItem.hitMultiplier).roundToInt()
+    protected fun calculateHitPercentageForVisual(): Int {
+        val baseHit: Float = attacker.character.getCalculatedTotalHit() * abilityItem.hitMultiplier
         val weaponTriangle: Int = getAdvantageBonusHit()
-        return (attackerHitPercentage + weaponTriangle).coerceAtLeast(0)
+        return (baseHit + weaponTriangle).roundToInt().coerceAtLeast(0).coerceAtMost(100)
     }
 
     fun calculateCriticalHitPercentage(): Int {
@@ -148,11 +151,20 @@ abstract class BattleAbilityItem(
     }
 
     fun calculateDamage(): Int {
-        val attack: Float = attacker.character.getCalculatedTotalDamage() * abilityItem.damageMultiplier
+        val baseDamage: Float = attacker.character.getCalculatedTotalDamage() * abilityItem.damageMultiplier
+        val damageWithGambler: Float = attacker.character.applyGamblerBonusTo(baseDamage)
         val protection: Int = target.character.getCalculatedTotalProtection()
-        val damage: Float = attack - protection
-        val disadvantagePenalty: Float = getAdvantageBonusDamage()
-        return (damage / disadvantagePenalty).roundToInt().coerceAtLeast(1)
+        val modifiedDamage: Float = damageWithGambler - protection
+        val weaponTriangle: Float = getAdvantageBonusDamage()
+        return (modifiedDamage / weaponTriangle).roundToInt().coerceAtLeast(1)
+    }
+
+    protected fun calculateDamageForVisual(): Int {
+        val baseDamage: Float = attacker.character.getCalculatedTotalDamage() * abilityItem.damageMultiplier
+        val protection: Int = target.character.getCalculatedTotalProtection()
+        val modifiedDamage: Float = baseDamage - protection
+        val weaponTriangle: Float = getAdvantageBonusDamage()
+        return (modifiedDamage / weaponTriangle).roundToInt().coerceAtLeast(1)
     }
 
     protected fun createNoWeaponMessage(): String {
