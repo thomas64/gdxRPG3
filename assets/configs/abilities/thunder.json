@@ -2,6 +2,7 @@
   "thunder"   : {
     "name"             : "Thunder",
     "resource"         : "GEMSTONE",
+    "target"           : "ENEMY",
     "ap"               : 3,
     "sp"               : 2,
     "skill"            : "WIZARD",
@@ -16,6 +17,7 @@
   "elthunder" : {
     "name"             : "Elthunder",
     "resource"         : "GEMSTONE",
+    "target"           : "ENEMY",
     "ap"               : 4,
     "sp"               : 4,
     "skill"            : "WIZARD",
@@ -31,6 +33,7 @@
   "arcthunder": {
     "name"             : "Arcthunder",
     "resource"         : "GEMSTONE",
+    "target"           : "ENEMY",
     "ap"               : 5,
     "sp"               : 6,
     "skill"            : "WIZARD",
@@ -46,6 +49,7 @@
   "rexthunder": {
     "name"             : "Rexthunder",
     "resource"         : "GEMSTONE",
+    "target"           : "ENEMY",
     "ap"               : 6,
     "sp"               : 8,
     "skill"            : "WIZARD",

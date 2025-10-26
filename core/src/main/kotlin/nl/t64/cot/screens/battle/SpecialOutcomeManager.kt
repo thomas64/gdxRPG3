@@ -20,9 +20,14 @@ class SpecialOutcomeManager(
         val specialData: AttackData = specialAction.handle().single()
         setDelayingTurn.invoke(true)
         Utils.runWithDelay(0.5f) {
-            FloatingNumberEffect(battleFieldTable.invoke(), specialData.target, specialData.castMessage, Color.YELLOW).floatDown()
-            BlinkEffect(battleFieldTable.invoke(), specialData.target, Color.CYAN).start()
-            playSe(AudioEvent.SE_CAST_BUFF)
+            if (specialData.isHeal) {
+                FloatingNumberEffect(battleFieldTable.invoke(), specialData.target, specialData.castMessage, Color.GREEN).floatDown()
+                playSe(AudioEvent.SE_POTION)
+            } else {
+                FloatingNumberEffect(battleFieldTable.invoke(), specialData.target, specialData.castMessage, Color.YELLOW).floatDown()
+                BlinkEffect(battleFieldTable.invoke(), specialData.target, Color.CYAN).start()
+                playSe(AudioEvent.SE_CAST_BUFF)
+            }
             Utils.runWithDelay(DEFAULT_FLOATING_NUMBER_DELAY) {
                 setDelayingTurn.invoke(false)
             }

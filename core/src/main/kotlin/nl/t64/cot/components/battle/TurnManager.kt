@@ -17,6 +17,10 @@ class TurnManager(
         sortParticipants()
     }
 
+    fun getOnlyAllies(): List<Participant> {
+        return getOnlyHeroes().filterNot { it == currentParticipant }
+    }
+
     fun getOnlyHeroes(): List<Participant> {
         return participants.filter { it.isHero }
     }

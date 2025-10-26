@@ -400,6 +400,9 @@ class BattleScreen : Screen {
     }
 
     private fun endEnemyAction() {
+        if (preferenceManager.isDebugModeOn) {
+            println("------------------------------------------------")
+        }
         (currentParticipant.handlePossibleStagger()
             ?.let { handleStagger(it) }
             ?: run {

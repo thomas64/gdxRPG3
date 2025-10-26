@@ -18,7 +18,7 @@ data class AbilityItem(
     @JsonProperty("xp_cost") private val xpCost: Int = 200, // todo, eventueel goedkopere waarden in json voor fire, wind, etc?
     @JsonProperty("resource") val requiredResource: ResourceType = ResourceType.NONE,
     @JsonProperty("is_special") val isSpecial: Boolean = false,
-    @JsonProperty("is_target_party") val isTargetParty: Boolean = false,
+    val target: Target = Target.AREA,
     val ap: Int = 0,
     val sp: Int = 0,
     private val skill: SkillItemId = SkillItemId.NONE,

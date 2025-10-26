@@ -59,9 +59,9 @@ internal class SchoolUI(
         super.init()
     }
 
-    fun upgradeSpell() {
+    fun learnSpell() {
         if (getSelectedTable() is SchoolTable) {
-            schoolTable.upgradeSpell()
+            schoolTable.learnSpell()
         }
     }
 

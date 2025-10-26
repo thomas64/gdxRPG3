@@ -23,6 +23,9 @@ enum class AbilityItemId : SuperEnum {
     GHOST_TOUCH,
     BACKSTAB,
 
+    LAY_ON_HANDS,
+    HEAL_WITH_HERBS,
+
     FIRE,
     ELFIRE,
     ARCFIRE,

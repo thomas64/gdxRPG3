@@ -47,7 +47,7 @@ class SchoolScreen : ParchmentScreen() {
     private fun createAndSetListener() {
         listener = AcademyScreenListener(stage,
                                          { beginWithClosingScreen() },
-                                         { upgradeSpell() },
+                                         { learnSpell() },
                                          { selectPreviousHero() },
                                          { selectNextHero() },
                                          { selectPreviousTable() },
@@ -61,8 +61,8 @@ class SchoolScreen : ParchmentScreen() {
         closeScreen()
     }
 
-    private fun upgradeSpell() {
-        schoolUI.upgradeSpell()
+    private fun learnSpell() {
+        schoolUI.learnSpell()
     }
 
     private fun selectPreviousHero() {

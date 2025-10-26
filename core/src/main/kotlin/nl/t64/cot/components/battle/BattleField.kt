@@ -100,6 +100,12 @@ class BattleField(
         return currentParticipant.invoke().getSpaceIndex()
     }
 
+    fun getTargetableAlliesNextToActingHero(): List<Participant> {
+        return heroSpaces.filterNotNull()
+            .filter { it != currentParticipant.invoke() }
+            .filter { isActingHeroNextToAlly(it) }
+    }
+
     fun getTargetableEnemiesForActingHero(): List<Participant> {
         return enemySpaces.filterNotNull()
             .filter { it.isEnemyInRangeOfActingHero() }
@@ -128,6 +134,8 @@ class BattleField(
         setStartingSpace()
         val heroIndicesByPrio: List<Int> = getOccupiedHeroIndicesSortedByPriorityForActingEnemy()
         if (preferenceManager.isDebugModeOn) {
+            val actingEnemy: Participant = currentParticipant.invoke()
+            println("${actingEnemy.character.name}: At start of turn, AP: ${actingEnemy.currentAP}")
             println("heroIndicesByPrio: $heroIndicesByPrio")
         }
 
@@ -230,7 +238,7 @@ class BattleField(
     private fun takeApForMovingTo(destinationSpace: Int) {
         val actingEnemy: Participant = currentParticipant.invoke()
         if (preferenceManager.isDebugModeOn) {
-            println("${actingEnemy.character.name} AP: ${actingEnemy.currentAP}")
+            println("${actingEnemy.character.name}: Before moving, AP: ${actingEnemy.currentAP}")
         }
 
         val currentSpaceIndex: Int = getSpaceIndexOfCurrentParticipant()
@@ -238,7 +246,7 @@ class BattleField(
         actingEnemy.currentAP -= difference
 
         if (preferenceManager.isDebugModeOn) {
-            println("${actingEnemy.character.name} AP: ${actingEnemy.currentAP}")
+            println("${actingEnemy.character.name}: After moving, AP: ${actingEnemy.currentAP}")
         }
     }
 
@@ -307,6 +315,12 @@ class BattleField(
     private fun Int.isEnemySpaceNextToHero(): Boolean {
         return heroSpaces[this] != null
             || (this < BATTLE_FIELD_SIZE - 1 && heroSpaces[this + 1] != null)
+    }
+
+    private fun isActingHeroNextToAlly(ally: Participant): Boolean {
+        val actingHeroIndex: Int = getSpaceIndexOfCurrentParticipant()
+        val allyIndex: Int = ally.getSpaceIndex()
+        return actingHeroIndex - 1 == allyIndex || actingHeroIndex + 1 == allyIndex
     }
 
     private fun Participant.getSpaceIndex(): Int {

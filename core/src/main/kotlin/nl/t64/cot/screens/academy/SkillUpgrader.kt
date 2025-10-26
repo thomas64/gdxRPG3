@@ -5,10 +5,14 @@ import nl.t64.cot.Utils.gameData
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.stopAllSe
 import nl.t64.cot.components.party.HeroItem
+import nl.t64.cot.components.party.abilities.AbilityDatabase
+import nl.t64.cot.components.party.abilities.AbilityItemId
 import nl.t64.cot.components.party.skills.SkillItem
+import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.screens.dialog.MessageDialog
 import nl.t64.cot.screens.dialog.QuestionDialog
 import nl.t64.cot.screens.inventory.InventoryUtils
+import nl.t64.cot.screens.school.SpellLearner
 
 
 class SkillUpgrader private constructor(
@@ -59,8 +63,16 @@ class SkillUpgrader private constructor(
     private fun upgradeSkill() {
         gameData.inventory.autoRemoveItem("gold", goldCost)
         selectedHero.doUpgrade(skillToUpgrade, xpCost)
+        possibleLearnAbilitiesThatBelongToThisSkill()
         setHasJustUpdatedToTrue.invoke()
         showConfirmMessage()
+    }
+
+    private fun possibleLearnAbilitiesThatBelongToThisSkill() {
+        if (skillToUpgrade.id == SkillItemId.HEALER && skillToUpgrade.rank == 1) {
+            SpellLearner.learnSpellForFree(AbilityDatabase.createAbilityItem(AbilityItemId.LAY_ON_HANDS))
+            SpellLearner.learnSpellForFree(AbilityDatabase.createAbilityItem(AbilityItemId.HEAL_WITH_HERBS))
+        }
     }
 
     private fun showConfirmMessage() {

@@ -8,6 +8,7 @@ import nl.t64.cot.components.battle.BattleField
 import nl.t64.cot.components.battle.Participant
 import nl.t64.cot.components.battle.TurnManager
 import nl.t64.cot.components.party.abilities.BattleAbilityItem
+import nl.t64.cot.components.party.abilities.Target
 import nl.t64.cot.components.party.inventory.BattlePotionItem
 import nl.t64.cot.components.party.inventory.BattleWeaponItem
 import nl.t64.cot.components.party.inventory.InventoryGroup
@@ -290,11 +291,15 @@ class BattleMenuManager(
     }
 
     private fun setupTargetTable(selectedAttack: BattleAbilityItem, targetListener: SelectTargetListener) {
-        val availableTargets: List<Participant> = if (selectedAttack.abilityItem.isTargetParty) {
-            turnManager.getOnlyHeroes()
-        } else {
-            battleField.getTargetableEnemiesForActingHero()
-        }
+        val availableTargets: List<Participant> =
+            when (selectedAttack.abilityItem.target) {
+                Target.SELF -> TODO()
+                Target.ALLY -> turnManager.getOnlyAllies()
+                Target.ALLY_NEAR -> battleField.getTargetableAlliesNextToActingHero()
+                Target.ENEMY -> battleField.getTargetableEnemiesForActingHero()
+                Target.AREA -> TODO()
+                Target.SELF_OR_ALLY -> turnManager.getOnlyHeroes()
+            }
         buttonTableTarget = screenBuilder.createButtonTableTarget(availableTargets)
         targetListener.setSelectedAttack(selectedAttack)
         setupTable(buttonTableTarget, targetListener)

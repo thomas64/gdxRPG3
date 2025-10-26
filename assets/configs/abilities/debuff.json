@@ -2,6 +2,8 @@
   "stupidity"   : {
     "name"       : "Stupidity",
     "resource"   : "HERB",
+    "is_special" : true,
+    "target"     : "ENEMY",
     "ap"         : 4,
     "sp"         : 5,
     "skill"      : "WIZARD",
@@ -15,6 +17,8 @@
   "clumsiness"  : {
     "name"       : "Clumsiness",
     "resource"   : "SPICE",
+    "is_special" : true,
+    "target"     : "ENEMY",
     "ap"         : 4,
     "sp"         : 5,
     "skill"      : "WIZARD",
@@ -28,6 +32,8 @@
   "debilitation": {
     "name"       : "Debilitation",
     "resource"   : "HERB",
+    "is_special" : true,
+    "target"     : "ENEMY",
     "ap"         : 4,
     "sp"         : 5,
     "skill"      : "WIZARD",
@@ -41,6 +47,8 @@
   "sluggishness": {
     "name"       : "Sluggishness",
     "resource"   : "SPICE",
+    "is_special" : true,
+    "target"     : "ENEMY",
     "ap"         : 4,
     "sp"         : 5,
     "skill"      : "WIZARD",

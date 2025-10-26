@@ -40,10 +40,10 @@ class SchoolTable(
         container.addListener(verticalKeyListener)
     }
 
-    fun upgradeSpell() {
+    fun learnSpell() {
         hideTooltip()
-        val spellToUpgrade = spellsToLearn[selectedIndex]
-        SpellUpgrader.upgradeSpell(spellToUpgrade, table.stage) { hasJustUpdated = true }
+        val spellToLearn = spellsToLearn[selectedIndex]
+        SpellLearner.learnSpell(spellToLearn, table.stage) { hasJustUpdated = true }
     }
 
     override fun selectAnotherSlotWhenIndexBecameOutOfBounds() {

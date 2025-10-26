@@ -12,32 +12,36 @@ import nl.t64.cot.screens.dialog.QuestionDialog
 import nl.t64.cot.screens.inventory.InventoryUtils
 
 
-class SpellUpgrader private constructor(
-    private val spellToUpgrade: AbilityItem,
+class SpellLearner private constructor(
+    private val spellToLearn: AbilityItem,
     private val stage: Stage,
     private val setHasJustUpdatedToTrue: () -> Unit
 ) {
 
     companion object {
-        fun upgradeSpell(spellToUpgrade: AbilityItem, stage: Stage, actionAfterSuccess: () -> Unit) {
-            SpellUpgrader(spellToUpgrade, stage, actionAfterSuccess).upgrade()
+        fun learnSpell(spellToLearn: AbilityItem, stage: Stage, actionAfterSuccess: () -> Unit) {
+            SpellLearner(spellToLearn, stage, actionAfterSuccess).learn()
+        }
+
+        fun learnSpellForFree(spellToLearn: AbilityItem) {
+            InventoryUtils.getSelectedHero().learn(spellToLearn.id, 0)
         }
     }
 
     private val selectedHero: HeroItem = InventoryUtils.getSelectedHero()
     private val wizardSkill: Int = selectedHero.getSkillById(SkillItemId.WIZARD).rank
-    private val spellName: String = spellToUpgrade.name
+    private val spellName: String = spellToLearn.name
 
-    private val hasSpell: Boolean = selectedHero.getAbilityById(spellToUpgrade.id) != null
+    private val hasSpell: Boolean = selectedHero.getAbilityById(spellToLearn.id) != null
     private val isWizard: Boolean = wizardSkill != -1
     private val hasWizardSkill: Boolean = wizardSkill >= 1
-    private val hasEnoughWizardSkill: Boolean = wizardSkill >= spellToUpgrade.minSkill
-    private val xpCost: Int = spellToUpgrade.calculateXpCost(selectedHero.totalXp)
+    private val hasEnoughWizardSkill: Boolean = wizardSkill >= spellToLearn.minSkill
+    private val xpCost: Int = spellToLearn.calculateXpCost(selectedHero.totalXp)
     private val hasEnoughXp: Boolean = selectedHero.hasEnoughXpFor(xpCost)
-    private val goldCost: Int = spellToUpgrade.goldCost
+    private val goldCost: Int = spellToLearn.goldCost
     private val hasEnoughGold: Boolean = gameData.inventory.hasEnoughOfItem("gold", goldCost)
 
-    private fun upgrade() {
+    private fun learn() {
         when {
             selectedHero.isDead -> showError("${selectedHero.name} is deceased.")
             hasSpell -> showError("You already know $spellName.")
@@ -58,20 +62,20 @@ class SpellUpgrader private constructor(
         val question = """
             Are you sure you wish to learn
             $spellName for $xpCost XP and $goldCost gold?""".trimIndent()
-        val dialog = QuestionDialog(question) { upgradeSpell() }
+        val dialog = QuestionDialog(question) { learnSpell() }
         dialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT, 0)
     }
 
-    private fun upgradeSpell() {
+    private fun learnSpell() {
         gameData.inventory.autoRemoveItem("gold", goldCost)
-        selectedHero.learn(spellToUpgrade.id, xpCost)
+        selectedHero.learn(spellToLearn.id, xpCost)
         setHasJustUpdatedToTrue.invoke()
         showConfirmMessage()
     }
 
     private fun showConfirmMessage() {
         stopAllSe()
-        MessageDialog("${spellToUpgrade.name} learned.").show(stage, AudioEvent.SE_UPGRADE)
+        MessageDialog("${spellToLearn.name} learned.").show(stage, AudioEvent.SE_UPGRADE)
     }
 
 }

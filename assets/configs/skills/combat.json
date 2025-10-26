@@ -26,6 +26,7 @@
     "upgrade"    : 8,
     "description": [
       "- 'Healer' allows for healing other party members in combat.",
+      "  Each rank in 'Healer' increases the amount healed by 10 HP.",
       "  It's also possible to use herbs to double the healing effect."
     ]
   },

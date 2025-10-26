@@ -38,7 +38,6 @@ class MagicShield(
         val bonusProtection: Int = calculateProtection()
 
         specialData.castMessage = "+$bonusProtection Prt"
-        this.target.isProtected = true
         this.target.character.bonus.protectionFromSpell = bonusProtection
 
         return listOf(specialData)

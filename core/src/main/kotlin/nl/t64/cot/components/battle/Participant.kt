@@ -23,8 +23,6 @@ class Participant(
     var staggerChance: Float = 65f
     var fleeChance: Int = 70
 
-    var isProtected: Boolean = false
-
     private var isDelayingTurn: Boolean = false
     private var isStaggered: Boolean = false
     private var amountOfTurns: Int = 0
@@ -147,6 +145,9 @@ class Participant(
             AbilityItemId.DOUBLE_THROW -> DoubleThrow(abilityItem, this)
             AbilityItemId.GHOST_TOUCH,
             AbilityItemId.BACKSTAB,
+
+            AbilityItemId.LAY_ON_HANDS -> LayOnHands(abilityItem, this)
+            AbilityItemId.HEAL_WITH_HERBS -> HealWithHerbs(abilityItem, this)
 
             AbilityItemId.FIRE,
             AbilityItemId.ELFIRE,

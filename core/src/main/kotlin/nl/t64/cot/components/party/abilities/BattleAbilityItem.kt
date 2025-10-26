@@ -35,7 +35,7 @@ abstract class BattleAbilityItem(
         if (name == "Back") return name
         val apField = String.format("%3d AP", ap)
         val spField = if (sp > 0) " | $sp SP" else "       "
-        val totalWidth = 28
+        val totalWidth = 29
         val leftPart = name
         val rightPart = "$apField$spField"
         val spaces = " ".repeat((totalWidth - leftPart.length - rightPart.length).coerceAtLeast(1))

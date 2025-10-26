@@ -1,6 +1,7 @@
 {
   "strike_2"    : {
     "name"             : "Quick Strike",
+    "target"           : "ENEMY",
     "ap"               : 2,
     "weapon_skills"    : ["SWORD", "AXE", "SPEAR", "DAGGER", "THROW", "BOW"],
     "damage_multiplier": 0.6,
@@ -9,6 +10,7 @@
   },
   "strike_3"    : {
     "name"             : "Strike",
+    "target"           : "ENEMY",
     "ap"               : 3,
     "weapon_skills"    : ["SWORD", "AXE", "SPEAR", "DAGGER", "THROW", "BOW"],
     "damage_multiplier": 1.0,
@@ -20,6 +22,7 @@
   },
   "strike_3f"   : {
     "name"             : "Focused Strike",
+    "target"           : "ENEMY",
     "ap"               : 3,
     "sp"               : 6,
     "weapon_skills"    : ["SWORD", "AXE", "SPEAR", "DAGGER", "THROW", "BOW"],
@@ -28,6 +31,7 @@
   },
   "strike_4"    : {
     "name"             : "Power Strike",
+    "target"           : "ENEMY",
     "ap"               : 4,
     "sp"               : 2,
     "weapon_skills"    : ["SWORD", "AXE", "SPEAR", "DAGGER", "THROW", "BOW"],
@@ -37,6 +41,7 @@
   },
   "bite_3"      : {
     "name"             : "Bite",
+    "target"           : "ENEMY",
     "ap"               : 3,
     "damage_multiplier": 0.675,
     "damage_formula"   : "(3f / 4f) * 0.9f",
@@ -44,6 +49,7 @@
   },
   "bite_4"      : {
     "name"             : "Bite",
+    "target"           : "ENEMY",
     "ap"               : 4,
     "damage_multiplier": 1.0,
     "damage_formula"   : "(4f / 4f) * 1.0f",
@@ -51,6 +57,7 @@
   },
   "body_slam_2" : {
     "name"             : "Body Slam",
+    "target"           : "ENEMY",
     "ap"               : 2,
     "damage_multiplier": 1.0,
     "damage_formula"   : "(2f / 2f) * 1.0f",
@@ -58,6 +65,7 @@
   },
   "stagger"     : {
     "name"             : "Stagger",
+    "target"           : "ENEMY",
     "ap"               : 6,
     "sp"               : 8,
     "skill"            : "WARRIOR",
@@ -72,6 +80,7 @@
   },
   "sniper_arrow": {
     "name"             : "Sniper Arrow",
+    "target"           : "ENEMY",
     "ap"               : 3,
     "sp"               : 6,
     "weapon_skills"    : ["BOW"],
@@ -86,6 +95,7 @@
   },
   "brute_force" : {
     "name"             : "Brute Force",
+    "target"           : "ENEMY",
     "ap"               : 3,
     "sp"               : 6,
     "skill"            : "WARRIOR",
@@ -101,6 +111,7 @@
   },
   "shield_bash" : {
     "name"             : "Shield Bash",
+    "target"           : "ENEMY",
     "ap"               : 3,
     "sp"               : 6,
     "skill"            : "WARRIOR",
@@ -120,6 +131,7 @@
   },
   "double_throw": {
     "name"             : "Double Throw",
+    "target"           : "ENEMY",
     "ap"               : 3,
     "sp"               : 6,
     "skill"            : "THIEF",
@@ -155,6 +167,7 @@
   },
   "ghost_touch" : {
     "name"             : "Ghost Touch",
+    "target"           : "ENEMY",
     "ap"               : 3,
     "sp"               : 6,
     "skill"            : "THIEF",
@@ -170,6 +183,7 @@
   },
   "backstab"    : {
     "name"             : "Backstab",
+    "target"           : "ENEMY",
     "ap"               : 3,
     "sp"               : 6,
     "skill"            : "THIEF",

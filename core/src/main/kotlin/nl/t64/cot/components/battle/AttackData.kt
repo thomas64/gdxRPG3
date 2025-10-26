@@ -17,5 +17,7 @@ class AttackData {
     var attackerWeaponBrokeMessage: String? = null
     var isTargetDead: Boolean = false
 
+    var isHeal: Boolean = false
+
     var castMessage: String = ""
 }

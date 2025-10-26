@@ -50,10 +50,13 @@ open class AttackAction(
     fun isCostingTooMuchApSp(): String? {
         return when {
             !selectedAbility.hasEnoughApSp() -> {
-                """${createPreviewMessage()}
-                    |_________________
+                val previewMessage: String = createPreviewMessage()
+                val warningMessage = "[FIREBRICK]Not enough AP/SP!"
+                val underscores: String = createUnderscoresWithLengthOf(previewMessage, warningMessage)
+                """ |$previewMessage
+                    |$underscores
                     |
-                    |[FIREBRICK]Not enough AP/SP!""".trimIndent().trimMargin()
+                    |$warningMessage""".trimIndent().trimMargin()
             }
             else -> null
         }
@@ -62,17 +65,20 @@ open class AttackAction(
     fun isUnableWithCurrentWeapon(): String? {
         return when {
             !selectedAbility.isWeaponAllowed() -> {
-                """${createPreviewMessage()}
-                    |_________________
+                val previewMessage: String = createPreviewMessage()
+                val warningMessage = "[FIREBRICK]Unable with current weapon!"
+                val underscores: String = createUnderscoresWithLengthOf(previewMessage, warningMessage)
+                """ |$previewMessage
+                    |$underscores
                     |
-                    |[FIREBRICK]Unable with current weapon!""".trimIndent().trimMargin()
+                    |$warningMessage""".trimIndent().trimMargin()
             }
             else -> null
         }
     }
 
     fun createConfirmationMessage(): Triple<String, String, String> {
-        val message = createPreviewMessage()
+        val message: String = createPreviewMessage()
         val underscores: String = createUnderscoresWithLengthOf(message)
         return Triple(message, "", """
 
@@ -111,14 +117,14 @@ open class AttackAction(
         }
     }
 
-    private fun createUnderscoresWithLengthOf(allLines: String): String {
+    protected fun createUnderscoresWithLengthOf(vararg allLines: String): String {
         val minLength = 17
         val maxLength = allLines.getLongestLineLength()
         return "_".repeat(maxOf(minLength, maxLength))
     }
 
-    private fun String.getLongestLineLength(): Int {
-        return this.lines()
+    private fun Array<out String>.getLongestLineLength(): Int {
+        return this.flatMap { it.lines() }
             .map { it.removeColorCoding().trim() }
             .maxOf { it.length }
     }
