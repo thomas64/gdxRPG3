@@ -11,7 +11,11 @@ heal_with_herbs
 bounds:144,0,48,48
 lay_on_hands
 bounds:192,0,48,48
-stagger
+perform_beauty
 bounds:0,48,48,48
-strike
+perform_chaos
 bounds:48,48,48,48
+stagger
+bounds:96,48,48,48
+strike
+bounds:144,48,48,48

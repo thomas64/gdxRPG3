@@ -1,5 +1,8 @@
 package nl.t64.cot.components.battle
 
+import nl.t64.cot.components.party.abilities.AbilityItemId
+
+
 class AttackData {
     var attacker: String = ""
     var target: String = ""
@@ -18,6 +21,7 @@ class AttackData {
     var isTargetDead: Boolean = false
 
     var isHeal: Boolean = false
+    var perform: AbilityItemId? = null
 
     var castMessage: String = ""
 }

@@ -79,12 +79,8 @@ class MessageDialog(
         if (playClosingSound) {
             playSe(AudioEvent.SE_CONVERSATION_NEXT)
         }
-        actionAfterHide?.let { hideWithAction(it) } ?: dialog.hide()
-    }
-
-    private fun hideWithAction(action: () -> Unit) {
         dialog.hide()
-        action.invoke()
+        actionAfterHide?.invoke()
         actionAfterHide = null
     }
 

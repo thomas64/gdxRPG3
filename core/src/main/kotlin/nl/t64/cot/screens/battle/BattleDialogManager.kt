@@ -3,6 +3,7 @@ package nl.t64.cot.screens.battle
 import com.badlogic.gdx.scenes.scene2d.Stage
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.components.battle.*
+import nl.t64.cot.components.party.abilities.AbilityItem
 import nl.t64.cot.components.party.abilities.BattleAbilityItem
 import nl.t64.cot.components.party.inventory.BattlePotionItem
 import nl.t64.cot.components.party.inventory.BattleWeaponItem
@@ -13,7 +14,10 @@ import nl.t64.cot.screens.dialog.TwoColumnsQuestionDialog
 
 class BattleDialogManager(
     private val stage: Stage,
-    private val currentParticipant: () -> Participant
+    private val turnManager: TurnManager,
+    private val currentParticipant: () -> Participant,
+    private val setDelayingTurn: (Boolean) -> Unit,
+    private val setChooseContinuePerforming: (Boolean) -> Unit,
 ) {
 
     fun showPreviewDialog(
@@ -181,6 +185,41 @@ class BattleDialogManager(
             val dialog = QuestionDialog(message) { onConfirmed.invoke(restAction) }
             dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0)
         }
+    }
+
+    fun showContinuePerformDialog() {
+        setDelayingTurn(true)
+        val performer: Participant = currentParticipant.invoke()
+        val performingAbility: AbilityItem =
+            performer.character.getAllAbilities().first { it.id == performer.performingType }
+
+        if (performer.character.currentSp < performingAbility.sp) {
+            val message = "${performer.character.name} does not have enough SP to continue performing."
+            val messageDialog = MessageDialog(message)
+            messageDialog.setActionAfterHide {
+                stopPerforming(performer)
+            }
+            messageDialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT, 0.5f)
+
+        } else {
+            val question = "Should ${performer.character.name} continue with ${performingAbility.name} (${performingAbility.sp} SP)?"
+            val dialog = QuestionDialog(question) {
+                performer.currentAP = 0
+                performer.character.currentSp -= performingAbility.sp
+                setChooseContinuePerforming(true)
+                setDelayingTurn(false)
+            }
+            dialog.setActionAfterNo {
+                stopPerforming(performer)
+            }
+            dialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT, 0, 0.5f)
+        }
+    }
+
+    private fun stopPerforming(performer: Participant) {
+        performer.stopPerforming()
+        turnManager.removePerformanceEffectsFromAllParticipants()
+        setDelayingTurn(false)
     }
 
 }

@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Scaling
 import nl.t64.cot.Utils
 import nl.t64.cot.components.battle.BattleField
 import nl.t64.cot.components.battle.Participant
+import nl.t64.cot.components.party.abilities.AbilityItemId
 import nl.t64.cot.screens.FontProvider
 import kotlin.math.abs
 
@@ -137,6 +138,7 @@ class BattleFieldTableBuilder {
             add(Container(createImageOf(participant)))
             addPossibleCount(participant)
             addPossibleBattleLock(participant)
+            addPossiblePerformance(participant)
         }).padRight(1f)
     }
 
@@ -145,6 +147,7 @@ class BattleFieldTableBuilder {
             add(Image(Utils.createFullBorderWhite()).apply { color = Color.ORANGE })
             add(Container(createImageOf(participant)))
             addPossibleBattleLock(participant)
+            addPossiblePerformance(participant)
         }).padRight(1f)
     }
 
@@ -154,6 +157,7 @@ class BattleFieldTableBuilder {
             possibleAddApCosts(apCost, actionPoints)
             add(Container(createImageOf(participant)))
             addPossibleBattleLock(participant)
+            addPossiblePerformance(participant)
         }).padRight(1f)
     }
 
@@ -163,6 +167,7 @@ class BattleFieldTableBuilder {
             add(Container(createImageOf(participant)))
             addPossibleCount(participant)
             addPossibleBattleLock(participant)
+            addPossiblePerformance(participant)
         }).padRight(1f)
     }
 
@@ -205,6 +210,17 @@ class BattleFieldTableBuilder {
         if (battleField.isParticipantNextToOpponent(participant)) {
             val style = LabelStyle(FontProvider.default, Color.YELLOW)
             add(Container(Label("!", style)).top().left().padLeft(4f))
+        }
+    }
+
+    private fun Stack.addPossiblePerformance(participant: Participant) {
+        if (participant.isPerforming) {
+            val style = LabelStyle(FontProvider.default, Color.VIOLET)
+            when (participant.performingType) {
+                AbilityItemId.PERFORM_BEAUTY -> add(Container(Label("+++", style)).top().right().padRight(4f))
+                AbilityItemId.PERFORM_CHAOS -> add(Container(Label("---", style)).top().right().padRight(4f))
+                else -> throw IllegalStateException("Unknown performing AbilityItemId: ${participant.performingType}")
+            }
         }
     }
 

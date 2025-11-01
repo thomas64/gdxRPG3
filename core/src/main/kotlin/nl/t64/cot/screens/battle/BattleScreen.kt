@@ -58,6 +58,7 @@ class BattleScreen : Screen {
     private var isLoaded: Boolean = false
     private var isPreBattle: Boolean = false
     private var isDelayingTurn: Boolean = false
+    private var hasChosenToContinuePerforming: Boolean = false
     private var isEnemyActing: Boolean = false
     private var hasCharacterBlinked: Boolean = false
     private var hasWon: Boolean = false
@@ -101,7 +102,7 @@ class BattleScreen : Screen {
         tableManager = BattleTableManager(stage, screenBuilder, ::currentParticipant)
         menuManager = BattleMenuManager(stage, screenBuilder, turnManager, battleField, ::currentParticipant)
         setMenuManagerListeners()
-        dialogManager = BattleDialogManager(stage, ::currentParticipant)
+        dialogManager = BattleDialogManager(stage, turnManager, ::currentParticipant, { isDelayingTurn = it }, { hasChosenToContinuePerforming = it })
         confirmManager = BattleConfirmManager(stage, turnManager, tableManager::battleFieldTable, ::currentParticipant, { isDelayingTurn = it })
         attackOutcomeManager = AttackOutcomeManager(stage, turnManager, tableManager::battleFieldTable, { isDelayingTurn = it })
         specialOutcomeManager = SpecialOutcomeManager(tableManager::battleFieldTable, { isDelayingTurn = it })
@@ -210,6 +211,7 @@ class BattleScreen : Screen {
         Gdx.input.inputProcessor = null
         Utils.setGamepadInputProcessor(null)
         if (shouldKeepState) return
+        hasChosenToContinuePerforming = false
         hasCharacterBlinked = false
         turnManager.resetTemporaryBonusesAfterBattle()
         stage.clear()
@@ -263,7 +265,12 @@ class BattleScreen : Screen {
     }
 
     private fun showConfirmSpecialDialog(selectedSpecial: BattleAbilityItem, selectedTarget: String) {
-        val target: Participant = turnManager.getParticipant(selectedTarget)
+        val target: Participant =
+            if (selectedTarget in listOf("All enemies", "All allies")) {
+                currentParticipant // dummy, target is not used in this case
+            } else {
+                turnManager.getParticipant(selectedTarget)
+            }
         dialogManager.showConfirmSpecialDialog(selectedSpecial = selectedSpecial,
                                                selectedTarget = target,
                                                onConfirmed = { specialConfirmed(it, target) })
@@ -357,12 +364,19 @@ class BattleScreen : Screen {
     private fun endTurn() {
         menuManager.buttonTableAction.remove()
         confirmManager.endTurn()
+        hasChosenToContinuePerforming = false
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun takeTurnHero() {
         if (isDelayingTurn) return
+
+        if (currentParticipant.isPerforming && !hasChosenToContinuePerforming) {
+            dialogManager.showContinuePerformDialog()
+            return
+        }
+
         menuManager.possibleSetupActionTable()
     }
 

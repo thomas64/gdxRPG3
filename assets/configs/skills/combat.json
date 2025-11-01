@@ -34,7 +34,7 @@
     "upgrade"    : 8,
     "description": [
       "- 'Troubadour' allows the possibility to play and sing inspirationally in combat,",
-      "  increasing your party's 'Chance to hit' and decreasing the enemy's 'Chance to hit'."
+      "  increasing your party's 'Chance to hit' or decreasing the enemy's 'Chance to hit'."
     ]
   },
   "thief"     : {

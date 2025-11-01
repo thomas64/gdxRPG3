@@ -47,8 +47,8 @@ class SelectActionListener(
                 || "Special" in selected
                 || "Move" in selected
                 || "Equipment" in selected
-                || "Preview" in selected
                 || "Potion" in selected
+                || "Preview" in selected
                 || "End" in selected
             ) {
                 playSe(AudioEvent.SE_MENU_CONFIRM)
@@ -58,8 +58,8 @@ class SelectActionListener(
                 "Special" in selected -> selectSpecial.invoke()
                 "Move" in selected -> selectMove.invoke()
                 "Equipment" in selected -> selectEquipment.invoke()
-                "Preview" in selected -> selectPreview.invoke()
                 "Potion" in selected -> selectPotion.invoke()
+                "Preview" in selected -> selectPreview.invoke()
                 "Party" in selected -> selectParty.invoke()
                 "Flee" in selected -> selectFlee.invoke()
                 "Delay" in selected -> selectDelayTurn.invoke()

@@ -106,13 +106,16 @@ abstract class Character(
             .roundToInt() + 2
     }
 
+    fun getCalculatedTotalHitWithBonus(): Int {
+        return (getCalculatedTotalHit() + bonus.getHitBonus()).coerceAtLeast(1)
+    }
+
     fun getCalculatedTotalHit(): Int {
         val weaponSkill: SkillItemId = inventory.getSkillOfCurrentWeapon() ?: return 0
 
         val weaponHit: Int = getSumOfEquipmentOfCalc(CalcAttributeId.BASE_HIT)
         val weaponSkillAmount: Int = getCalculatedTotalSkillOf(weaponSkill)
         val attackerHit: Float = (weaponHit / 100f) * (5f * weaponSkillAmount)
-        // + troubadour ?
         return (weaponHit + attackerHit).roundToInt()
     }
 

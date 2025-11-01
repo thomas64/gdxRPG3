@@ -4,4 +4,5 @@ wind.json
 thunder.json
 buff.json
 debuff.json
+spells.json
 other.json

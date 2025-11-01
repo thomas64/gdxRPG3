@@ -114,7 +114,7 @@ internal class StatsTable(
         table.add("")
         val baseHit: Int = selectedHero.getCalcValueOf(InventoryGroup.WEAPON, CalcAttributeId.BASE_HIT)
         table.add(baseHit.toString())
-        val bonusHit: Int = selectedHero.getCalculatedTotalHit() - baseHit
+        val bonusHit: Int = selectedHero.getCalculatedTotalHitWithBonus() - baseHit
         addExtraToTable(bonusHit)
 
         table.add(Label(CalcAttributeId.DEFENSE.title + " (%)", createLabelStyle()))

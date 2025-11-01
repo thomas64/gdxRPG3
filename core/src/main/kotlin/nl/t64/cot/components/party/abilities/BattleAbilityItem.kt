@@ -22,14 +22,26 @@ abstract class BattleAbilityItem(
     val abilityItem: AbilityItem,
     val attacker: Participant
 ) {
-    private val id: AbilityItemId = abilityItem.id
+    protected val id: AbilityItemId = abilityItem.id
     val name: String = abilityItem.name
-    val ap: Int = abilityItem.ap
+    val ap: Int = calculateAp()
     val sp: Int = abilityItem.sp
 
     protected val currentWeapon: InventoryItem? get() = attacker.character.getInventoryItem(InventoryGroup.WEAPON)
 
     lateinit var target: Participant
+
+    private fun calculateAp(): Int {
+        if (abilityItem.ap == 99) {
+            if (attacker.currentAP > attacker.maximumAP) {
+                return attacker.currentAP
+            } else {
+                return attacker.maximumAP
+            }
+        } else {
+            return abilityItem.ap
+        }
+    }
 
     override fun toString(): String {
         if (name == "Back") return name
@@ -128,14 +140,14 @@ abstract class BattleAbilityItem(
     }
 
     fun calculateHitPercentage(): Int {
-        val baseHit: Float = attacker.character.getCalculatedTotalHit() * abilityItem.hitMultiplier
+        val baseHit: Float = attacker.character.getCalculatedTotalHitWithBonus() * abilityItem.hitMultiplier
         val hitWithGambler: Float = attacker.character.applyGamblerBonusTo(baseHit)
         val weaponTriangle: Int = getAdvantageBonusHit()
         return (hitWithGambler + weaponTriangle).roundToInt().coerceAtLeast(0)
     }
 
     protected fun calculateHitPercentageForVisual(): Int {
-        val baseHit: Float = attacker.character.getCalculatedTotalHit() * abilityItem.hitMultiplier
+        val baseHit: Float = attacker.character.getCalculatedTotalHitWithBonus() * abilityItem.hitMultiplier
         val weaponTriangle: Int = getAdvantageBonusHit()
         return (baseHit + weaponTriangle).roundToInt().coerceAtLeast(0).coerceAtMost(100)
     }

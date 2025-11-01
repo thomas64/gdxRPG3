@@ -25,6 +25,9 @@ class BonusContainer {
 
     var stealthFromPotion: Int = 0
 
+    var hitBonusFromTroubadour: Int = 0
+    var hitPenaltyFromTroubadour: Int = 0
+
     fun reset() {
         protectionFromSpell = 0
         protectionFromPotion = 0
@@ -38,10 +41,16 @@ class BonusContainer {
         speedFromPotion = 0
         willpowerFromPotion = 0
         stealthFromPotion = 0
+        hitBonusFromTroubadour = 0
+        hitPenaltyFromTroubadour = 0
     }
 
     fun getProtection(): Int {
         return protectionFromSpell + protectionFromPotion
+    }
+
+    fun getHitBonus(): Int {
+        return hitBonusFromTroubadour - hitPenaltyFromTroubadour
     }
 
     fun getStatBonus(statItemId: StatItemId): Int {

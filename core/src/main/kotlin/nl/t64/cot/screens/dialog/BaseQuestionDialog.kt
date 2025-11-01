@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Dialog
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle
+import com.badlogic.gdx.utils.Null
 import nl.t64.cot.Utils
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
@@ -38,6 +39,13 @@ abstract class BaseQuestionDialog(
     private val font: BitmapFont = FontProvider.inconsolata24
     protected val dialog: Dialog = createDialog()
     private var selectedIndex = 0
+    @Null
+    private var actionAfterNo: (() -> Unit)? = null
+
+
+    fun setActionAfterNo(actionAfterNo: () -> Unit) {
+        this.actionAfterNo = actionAfterNo
+    }
 
     fun show(stage: Stage, event: AudioEvent, startIndex: Int = EXIT_INDEX, confirmDelay: Float = 0f) {
         playSe(event)
@@ -75,6 +83,8 @@ abstract class BaseQuestionDialog(
         stopAllSe()
         playSe(AudioEvent.SE_MENU_BACK)
         dialog.hide()
+        actionAfterNo?.invoke()
+        actionAfterNo = null
     }
 
     private fun setAllTextButtonsToBlack() {

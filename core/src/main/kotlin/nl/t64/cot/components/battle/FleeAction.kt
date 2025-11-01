@@ -30,11 +30,11 @@ class FleeAction(
         if (currentParticipant.currentAP < currentParticipant.maximumAP) {
             return Pair(false, (message + "Not enough AP!").trimIndent())
         }
-        return Pair(true, (message + "Do you want to flee? (${currentParticipant.maximumAP} AP)").trimIndent())
+        return Pair(true, (message + "Do you want to flee? (${currentParticipant.currentAP} AP)").trimIndent())
     }
 
     fun handle(): Pair<Boolean, String> {
-        currentParticipant.currentAP -= currentParticipant.maximumAP
+        currentParticipant.currentAP = 0
         if (preferenceManager.isDebugModeOn) {
             return Pair(true, "The party successfully debug fled the battle.")
         }

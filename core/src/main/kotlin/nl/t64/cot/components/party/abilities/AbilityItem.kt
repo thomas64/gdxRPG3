@@ -89,7 +89,11 @@ data class AbilityItem(
     }
 
     private fun createApCost(): String {
-        return System.lineSeparator() + "AP cost: $ap"
+        if (ap == 99) {
+            return System.lineSeparator() + "AP cost: ?"
+        } else {
+            return System.lineSeparator() + "AP cost: $ap"
+        }
     }
 
     private fun createSpCost(): String {

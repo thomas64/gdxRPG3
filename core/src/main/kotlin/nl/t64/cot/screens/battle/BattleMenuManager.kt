@@ -285,20 +285,23 @@ class BattleMenuManager(
     }
 
     private fun setupPreviewTargetTable(selectedAttack: BattleAbilityItem, targetListener: SelectTargetListener) {
-        buttonTableTarget = screenBuilder.createButtonTableTarget(turnManager.getOnlyEnemies())
+        val allTargetNames: List<String> = turnManager.getOnlyEnemies().map { it.character.name }
+        buttonTableTarget = screenBuilder.createButtonTableTarget(allTargetNames)
         targetListener.setSelectedAttack(selectedAttack)
         setupTable(buttonTableTarget, targetListener)
     }
 
     private fun setupTargetTable(selectedAttack: BattleAbilityItem, targetListener: SelectTargetListener) {
-        val availableTargets: List<Participant> =
+        val availableTargets: List<String> =
             when (selectedAttack.abilityItem.target) {
                 Target.SELF -> TODO()
-                Target.ALLY -> turnManager.getOnlyAllies()
-                Target.ALLY_NEAR -> battleField.getTargetableAlliesNextToActingHero()
-                Target.ENEMY -> battleField.getTargetableEnemiesForActingHero()
+                Target.SELF_OR_ALLY -> turnManager.getOnlyHeroes().map { it.character.name }
+                Target.ALLY -> turnManager.getOnlyAllies().map { it.character.name }
+                Target.ALLY_NEAR -> battleField.getTargetableAlliesNextToActingHero().map { it.character.name }
+                Target.ALL_ALLIES -> listOf("All allies")
+                Target.ENEMY -> battleField.getTargetableEnemiesForActingHero().map { it.character.name }
+                Target.ALL_ENEMIES -> listOf("All enemies")
                 Target.AREA -> TODO()
-                Target.SELF_OR_ALLY -> turnManager.getOnlyHeroes()
             }
         buttonTableTarget = screenBuilder.createButtonTableTarget(availableTargets)
         targetListener.setSelectedAttack(selectedAttack)

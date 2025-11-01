@@ -97,6 +97,8 @@ enum class AudioEvent(val filePath: String, val volume: Float = 1f) {
     SE_DAMAGE_REGULAR("audio/se/mv_dlc_blow10_a.ogg", 0.1f),
     SE_DAMAGE_ADVANTAGE("audio/se/mv_dlc_blow9_a.ogg", 0.1f),
     SE_DAMAGE_DISADVANTAGE("audio/se/mv_dlc_blow9_b.ogg", 0.1f),
+    SE_PERFORM_BUFF("audio/se/storyblocks_harp_spell_classic_buff.ogg", 1.0f),
+    SE_PERFORM_DEBUFF("audio/se/storyblocks_harp_spell_classic_debuff.ogg", 1.0f),
 
     SE_STEP_CARPET1("audio/se/footsteps/oot_step_carpet1.wav", 0.9f),
     SE_STEP_CARPET2("audio/se/footsteps/oot_step_carpet2.wav", 0.9f),

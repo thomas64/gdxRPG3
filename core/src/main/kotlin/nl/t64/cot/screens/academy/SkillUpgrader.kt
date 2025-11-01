@@ -73,6 +73,10 @@ class SkillUpgrader private constructor(
             SpellLearner.learnSpellForFree(AbilityDatabase.createAbilityItem(AbilityItemId.LAY_ON_HANDS))
             SpellLearner.learnSpellForFree(AbilityDatabase.createAbilityItem(AbilityItemId.HEAL_WITH_HERBS))
         }
+        if (skillToUpgrade.id == SkillItemId.TROUBADOUR && skillToUpgrade.rank == 1) {
+            SpellLearner.learnSpellForFree(AbilityDatabase.createAbilityItem(AbilityItemId.PERFORM_BEAUTY))
+            SpellLearner.learnSpellForFree(AbilityDatabase.createAbilityItem(AbilityItemId.PERFORM_CHAOS))
+        }
     }
 
     private fun showConfirmMessage() {

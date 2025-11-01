@@ -7,6 +7,7 @@ import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.battle.AttackData
 import nl.t64.cot.components.battle.SpecialAction
+import nl.t64.cot.components.party.abilities.AbilityItemId
 
 
 private const val DEFAULT_FLOATING_NUMBER_DELAY = 1.2f
@@ -20,13 +21,24 @@ class SpecialOutcomeManager(
         val specialData: AttackData = specialAction.handle().single()
         setDelayingTurn.invoke(true)
         Utils.runWithDelay(0.5f) {
-            if (specialData.isHeal) {
-                FloatingNumberEffect(battleFieldTable.invoke(), specialData.target, specialData.castMessage, Color.GREEN).floatDown()
-                playSe(AudioEvent.SE_POTION)
-            } else {
-                FloatingNumberEffect(battleFieldTable.invoke(), specialData.target, specialData.castMessage, Color.YELLOW).floatDown()
-                BlinkEffect(battleFieldTable.invoke(), specialData.target, Color.CYAN).start()
-                playSe(AudioEvent.SE_CAST_BUFF)
+            when {
+                specialData.isHeal -> {
+                    FloatingNumberEffect(battleFieldTable.invoke(), specialData.target, specialData.castMessage, Color.GREEN).floatDown()
+                    playSe(AudioEvent.SE_POTION)
+                }
+                specialData.perform == AbilityItemId.PERFORM_BEAUTY -> {
+                    FloatingNumberEffect(battleFieldTable.invoke(), specialData.attacker, "~~+~~", Color.VIOLET).floatUp()
+                    playSe(AudioEvent.SE_PERFORM_BUFF)
+                }
+                specialData.perform == AbilityItemId.PERFORM_CHAOS -> {
+                    FloatingNumberEffect(battleFieldTable.invoke(), specialData.attacker, "~~-~~", Color.VIOLET).floatUp()
+                    playSe(AudioEvent.SE_PERFORM_DEBUFF)
+                }
+                else -> {
+                    FloatingNumberEffect(battleFieldTable.invoke(), specialData.target, specialData.castMessage, Color.YELLOW).floatDown()
+                    BlinkEffect(battleFieldTable.invoke(), specialData.target, Color.CYAN).start()
+                    playSe(AudioEvent.SE_CAST_BUFF)
+                }
             }
             Utils.runWithDelay(DEFAULT_FLOATING_NUMBER_DELAY) {
                 setDelayingTurn.invoke(false)

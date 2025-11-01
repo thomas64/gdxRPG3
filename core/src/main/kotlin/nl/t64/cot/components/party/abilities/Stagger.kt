@@ -1,13 +1,9 @@
 package nl.t64.cot.components.party.abilities
 
-import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.components.battle.AttackData
 import nl.t64.cot.components.battle.Participant
-import nl.t64.cot.components.battle.TurnManager
 import nl.t64.cot.components.party.skills.SkillItemId
-import nl.t64.cot.constants.ScreenType
-import nl.t64.cot.screens.battle.BattleScreen
-import java.lang.reflect.Field
+import nl.t64.cot.screens.battle.BattleUtils
 import kotlin.math.roundToInt
 import kotlin.random.Random
 
@@ -43,7 +39,7 @@ class Stagger(
         val damageDone: Int = if (isCriticalHit) calculateCriticalDamage() else calculateDamage()
         val isStaggered: Boolean = calculateStaggerPercentage() > Random.nextInt(0, 100)
 
-        if (isStaggered) getTurnManagerTheUglyWay().stagger(target)
+        if (isStaggered) BattleUtils.staggerTarget(target)
         target.character.takeDamage(damageDone)
 
         attackData.hasAdvantage = hasWeaponTriangleAdvantage()
@@ -58,13 +54,6 @@ class Stagger(
         if (attackerWarriorRank == 0) return 0
         val warriorChance: Float = (target.staggerChance / 100f) * (5f * attackerWarriorRank)
         return (target.staggerChance + warriorChance).roundToInt().coerceAtMost(100)
-    }
-
-    private fun getTurnManagerTheUglyWay(): TurnManager {
-        val battleScreen = screenManager.getScreen(ScreenType.BATTLE) as BattleScreen
-        val turnManager: Field = BattleScreen::class.java.getDeclaredField("turnManager")
-        turnManager.isAccessible = true
-        return turnManager.get(battleScreen) as TurnManager
     }
 
 }

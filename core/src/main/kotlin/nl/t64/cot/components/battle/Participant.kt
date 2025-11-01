@@ -8,6 +8,7 @@ import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.components.party.inventory.InventoryItem
 import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.components.party.stats.StatItemId
+import kotlin.math.roundToInt
 
 
 private const val PENALTY_AP: Int = 4
@@ -26,6 +27,10 @@ class Participant(
     private var isDelayingTurn: Boolean = false
     private var isStaggered: Boolean = false
     private var amountOfTurns: Int = 0
+
+    var performingType: AbilityItemId? = null
+    val isPerforming: Boolean = performingType != null
+
 
     fun updateTurnCounter() {
         turnCounter += 10 + character.getCalculatedTotalStatOf(StatItemId.SPEED)
@@ -114,9 +119,29 @@ class Participant(
         return character.getInventoryItem(InventoryGroup.WEAPON)
     }
 
-    fun resetTemporaryBonuses() {
+    fun resetAllTemporaryBattleEffects() {
         character.bonus.reset()
         dequipDisallowedWeapon()
+        stopPerforming()
+    }
+
+    fun startPerforming(abilityItemId: AbilityItemId) {
+        performingType = abilityItemId
+        currentAP = 0
+    }
+
+    fun stopPerforming() {
+        performingType = null
+    }
+
+    fun calculatePerformBonus(troubadourRank: Int): Int {
+        val baseHit: Int = character.getCalculatedTotalHit()
+        return (0.35f * (100 - baseHit) * (troubadourRank / 10f)).roundToInt()
+    }
+
+    fun calculatePerformPenalty(troubadourRank: Int): Int {
+        val baseHit: Int = character.getCalculatedTotalHit()
+        return (0.2f * baseHit * (troubadourRank / 10f)).roundToInt()
     }
 
     private fun dequipDisallowedWeapon() {
@@ -139,39 +164,41 @@ class Participant(
             AbilityItemId.STRIKE_3F,
             AbilityItemId.STRIKE_4 -> Strike(abilityItem, this)
             AbilityItemId.STAGGER -> Stagger(abilityItem, this)
-            AbilityItemId.SNIPER_ARROW,
-            AbilityItemId.BRUTE_FORCE,
-            AbilityItemId.SHIELD_BASH,
+            AbilityItemId.SNIPER_ARROW -> TODO()
+            AbilityItemId.BRUTE_FORCE -> TODO()
+            AbilityItemId.SHIELD_BASH -> TODO()
             AbilityItemId.DOUBLE_THROW -> DoubleThrow(abilityItem, this)
-            AbilityItemId.GHOST_TOUCH,
-            AbilityItemId.BACKSTAB,
+            AbilityItemId.GHOST_TOUCH -> TODO()
+            AbilityItemId.BACKSTAB -> TODO()
 
             AbilityItemId.LAY_ON_HANDS -> LayOnHands(abilityItem, this)
             AbilityItemId.HEAL_WITH_HERBS -> HealWithHerbs(abilityItem, this)
+            AbilityItemId.PERFORM_BEAUTY -> PerformBeauty(abilityItem, this)
+            AbilityItemId.PERFORM_CHAOS -> PerformChaos(abilityItem, this)
 
-            AbilityItemId.FIRE,
-            AbilityItemId.ELFIRE,
-            AbilityItemId.ARCFIRE,
-            AbilityItemId.REXFIRE,
-            AbilityItemId.WIND,
-            AbilityItemId.ELWIND,
-            AbilityItemId.ARCWIND,
-            AbilityItemId.REXWIND,
-            AbilityItemId.THUNDER,
-            AbilityItemId.ELTHUNDER,
-            AbilityItemId.ARCTHUNDER,
-            AbilityItemId.REXTHUNDER,
+            AbilityItemId.FIRE -> TODO()
+            AbilityItemId.ELFIRE -> TODO()
+            AbilityItemId.ARCFIRE -> TODO()
+            AbilityItemId.REXFIRE -> TODO()
+            AbilityItemId.WIND -> TODO()
+            AbilityItemId.ELWIND -> TODO()
+            AbilityItemId.ARCWIND -> TODO()
+            AbilityItemId.REXWIND -> TODO()
+            AbilityItemId.THUNDER -> TODO()
+            AbilityItemId.ELTHUNDER -> TODO()
+            AbilityItemId.ARCTHUNDER -> TODO()
+            AbilityItemId.REXTHUNDER -> TODO()
             AbilityItemId.MAGIC_SHIELD -> MagicShield(abilityItem, this)
-            AbilityItemId.RESISTANCE,
-            AbilityItemId.TELEPORTATION,
-            AbilityItemId.BRILLIANCE,
-            AbilityItemId.STUPIDITY,
-            AbilityItemId.FINESSE,
-            AbilityItemId.CLUMSINESS,
-            AbilityItemId.MIGHT,
-            AbilityItemId.DEBILITATION,
-            AbilityItemId.HASTE,
-            AbilityItemId.SLUGGISHNESS -> Stagger(abilityItem, this) // todo, juiste spell classes maken.
+            AbilityItemId.RESISTANCE -> TODO()
+            AbilityItemId.TELEPORTATION -> TODO()
+            AbilityItemId.BRILLIANCE -> TODO()
+            AbilityItemId.STUPIDITY -> TODO()
+            AbilityItemId.FINESSE -> TODO()
+            AbilityItemId.CLUMSINESS -> TODO()
+            AbilityItemId.MIGHT -> TODO()
+            AbilityItemId.DEBILITATION -> TODO()
+            AbilityItemId.HASTE -> TODO()
+            AbilityItemId.SLUGGISHNESS -> TODO()
         }
     }
 

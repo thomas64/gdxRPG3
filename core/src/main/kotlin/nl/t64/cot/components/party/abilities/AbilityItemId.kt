@@ -25,6 +25,8 @@ enum class AbilityItemId : SuperEnum {
 
     LAY_ON_HANDS,
     HEAL_WITH_HERBS,
+    PERFORM_BEAUTY,
+    PERFORM_CHAOS,
 
     FIRE,
     ELFIRE,
