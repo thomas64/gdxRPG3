@@ -5,7 +5,7 @@ import nl.t64.cot.components.battle.Participant
 import nl.t64.cot.components.party.skills.SkillItemId
 
 
-class MagicShield(
+abstract class BuffAbilityItem(
     abilityItem: AbilityItem,
     attacker: Participant
 ) : BattleAbilityItem(
@@ -14,11 +14,11 @@ class MagicShield(
 ) {
 
     override fun createCopyForPreview(): BattleAbilityItem {
-        throw IllegalStateException("MagicShield does not support preview copies.")
+        throw IllegalStateException("BuffAbilityItem does not support preview copies.")
     }
 
     override fun handleSuccess(attackData: AttackData) {
-        throw IllegalStateException("MagicShield does not support handleSuccess.")
+        throw IllegalStateException("BuffAbilityItem does not support handleSuccess.")
     }
 
     override fun createPreviewMessage(): String {
@@ -26,7 +26,7 @@ class MagicShield(
             $name on ${target.character.name}
 
             Effect:
-            +${calculateProtection()} Protection
+            ${getBuffDescription()}
         """.trimIndent().trimMargin()
     }
 
@@ -35,20 +35,22 @@ class MagicShield(
         specialData.attacker = attacker.character.name
         specialData.target = target.character.name
 
-        val bonusProtection: Int = calculateProtection()
+        val bonusValue: Int = calculateBonusValue()
 
-        specialData.castMessage = "+$bonusProtection Prt"
-        target.character.bonus.protectionFromSpell = bonusProtection
+        specialData.castMessage = getCastMessage(bonusValue)
+        applyBuff(bonusValue)
 
         return listOf(specialData)
     }
 
-    fun isShieldActive(): Boolean {
-        return target.character.bonus.protectionFromSpell > 0
+    protected fun calculateBonusValue(): Int {
+        return attacker.character.getCalculatedTotalSkillOf(SkillItemId.WIZARD)
     }
 
-    private fun calculateProtection(): Int {
-        return 2 * attacker.character.getCalculatedTotalSkillOf(SkillItemId.WIZARD)
-    }
+    abstract fun isBuffActive(): Boolean
+    protected abstract fun getBuffDescription(): String
+    protected abstract fun getCastMessage(bonusValue: Int): String
+    protected abstract fun applyBuff(bonusValue: Int)
 
 }
+

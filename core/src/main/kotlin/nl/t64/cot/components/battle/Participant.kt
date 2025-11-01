@@ -191,13 +191,13 @@ class Participant(
             AbilityItemId.MAGIC_SHIELD -> MagicShield(abilityItem, this)
             AbilityItemId.RESISTANCE -> TODO()
             AbilityItemId.TELEPORTATION -> TODO()
-            AbilityItemId.BRILLIANCE -> TODO()
+            AbilityItemId.BRILLIANCE -> Brilliance(abilityItem, this)
             AbilityItemId.STUPIDITY -> TODO()
-            AbilityItemId.FINESSE -> TODO()
+            AbilityItemId.FINESSE -> Finesse(abilityItem, this)
             AbilityItemId.CLUMSINESS -> TODO()
-            AbilityItemId.MIGHT -> TODO()
+            AbilityItemId.MIGHT -> Might(abilityItem, this)
             AbilityItemId.DEBILITATION -> TODO()
-            AbilityItemId.HASTE -> TODO()
+            AbilityItemId.HASTE -> Haste(abilityItem, this)
             AbilityItemId.SLUGGISHNESS -> TODO()
         }
     }

@@ -15,20 +15,8 @@ class SpecialAction(
 
     fun isAlreadyCast(): String? {
         return when (selectedAbility) {
-            is MagicShield -> {
-                if (currentTarget.character.bonus.protectionFromSpell > 0) {
-                    val previewMessage: String = createPreviewMessage()
-                    val warningMessage1 = "[FIREBRICK]${selectedAbility.name} is already"
-                    val warningMessage2 = "cast on ${target.name}!"
-                    val underscores: String = createUnderscoresWithLengthOf(previewMessage, warningMessage1, warningMessage2)
-                    """ |$previewMessage
-                        |$underscores
-                        |
-                        |$warningMessage1
-                        |$warningMessage2""".trimIndent().trimMargin()
-                } else null
-            }
-
+            is MagicShield -> if (selectedAbility.isShieldActive()) createAlreadyCastMessage() else null
+            is BuffAbilityItem -> if (selectedAbility.isBuffActive()) createAlreadyCastMessage() else null
             is HealingAbilityItem -> null
 
             is PerformingAbilityItem -> {
@@ -46,8 +34,21 @@ class SpecialAction(
                         |$warningMessage""".trimIndent().trimMargin()
                 } else null
             }
+
             else -> throw IllegalArgumentException("SpecialAction does not support ${selectedAbility.name}.")
         }
+    }
+
+    private fun createAlreadyCastMessage(): String {
+        val previewMessage: String = createPreviewMessage()
+        val warningMessage1 = "[FIREBRICK]${selectedAbility.name} is already"
+        val warningMessage2 = "cast on ${target.name}!"
+        val underscores: String = createUnderscoresWithLengthOf(previewMessage, warningMessage1, warningMessage2)
+        return """ |$previewMessage
+                   |$underscores
+                   |
+                   |$warningMessage1
+                   |$warningMessage2""".trimIndent().trimMargin()
     }
 
     fun isCostingTooMuchResources(): String? {

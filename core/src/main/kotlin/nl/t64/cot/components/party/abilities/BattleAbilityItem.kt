@@ -66,8 +66,8 @@ abstract class BattleAbilityItem(
 
     protected fun handleSingleAttack(attackDataList: MutableList<AttackData>) {
         val singleAttack = AttackData()
-        singleAttack.attacker = this.attacker.character.name
-        singleAttack.target = this.target.character.name
+        singleAttack.attacker = attacker.character.name
+        singleAttack.target = target.character.name
 
         if (isHit()) {
             handleHit(singleAttack)

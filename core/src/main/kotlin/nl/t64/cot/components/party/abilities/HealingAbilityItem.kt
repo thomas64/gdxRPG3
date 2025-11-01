@@ -22,14 +22,14 @@ abstract class HealingAbilityItem(
 
     override fun handle(): List<AttackData> {
         val specialData = AttackData()
-        specialData.attacker = this.attacker.character.name
-        specialData.target = this.target.character.name
+        specialData.attacker = attacker.character.name
+        specialData.target = target.character.name
 
         val healPoints: Int = calculateHealPoints()
 
         specialData.isHeal = true
         specialData.castMessage = "$healPoints"
-        this.target.character.currentHp += healPoints
+        target.character.currentHp += healPoints
 
         return listOf(specialData)
     }

@@ -40,18 +40,11 @@ data class AbilityItem(
     }
 
     override fun getTotalDescription(): String {
-        if (description.isEmpty()) return ""
-        return (description.joinToString(System.lineSeparator())
-            + System.lineSeparator()
-            + createRequiredSkill()
-            + createRequiredWeapon()
-            + createRequiredResource()
-            + createApCost()
-            + createSpCost())
+        return getTotalDescription(shouldShowMinSkill = false)
     }
 
     fun getTeacherDescription(totalXp: Int): String {
-        return (getTotalDescription() + System.lineSeparator()
+        return (getTotalDescription(shouldShowMinSkill = true) + System.lineSeparator()
             + System.lineSeparator()
             + "[GOLD]XP cost: ${calculateXpCost(totalXp)}" + System.lineSeparator()
             + "[GOLD]Gold cost: $goldCost")
@@ -61,14 +54,27 @@ data class AbilityItem(
         return maxOf((totalXp * 0.1f).roundToInt(), xpCost)
     }
 
-    private fun createRequiredSkill(): String {
+    private fun getTotalDescription(shouldShowMinSkill: Boolean): String {
+        if (description.isEmpty()) return ""
+        return (description.joinToString(System.lineSeparator())
+            + System.lineSeparator()
+            + createRequiredSkill(shouldShowMinSkill)
+            + createRequiredWeapon()
+            + createRequiredResource()
+            + createApCost()
+            + createSpCost())
+    }
+
+    private fun createRequiredSkill(shouldShowMinSkill: Boolean): String {
         if (skill == SkillItemId.NONE) {
             return ""
         } else {
-            return System.lineSeparator() + """Required skill: ${skill.title} $minSkill"""
-            // todo, moet minSkill hier wel weergegeven worden?
-            // nou, in de inventoryScreen hoeft het waarschijnlijk niet,
-            // maar in de schoolScreen is het wel relevant zover het lijkt.
+            val skillText = if (shouldShowMinSkill) {
+                "Required skill: ${skill.title} $minSkill"
+            } else {
+                "Required skill: ${skill.title}"
+            }
+            return System.lineSeparator() + skillText
         }
     }
 
