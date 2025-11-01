@@ -43,14 +43,20 @@
     "group"      : "RESOURCE",
     "sort"       : 90040,
     "price"      : 1,
-    "description": ["ToDo", "ToDo"]
+    "description": [
+      "Jelly from a Green Slime.",
+      "May be useful for various purposes."
+    ]
   },
   "blue_jelly" : {
     "name"       : "Blue Jelly",
     "group"      : "RESOURCE",
     "sort"       : 90041,
     "price"      : 1,
-    "description": ["ToDo", "ToDo"]
+    "description": [
+      "Jelly from a Blue Slime.",
+      "May be useful for various purposes."
+    ]
   },
   "leather"    : {
     "name"       : "Leather",

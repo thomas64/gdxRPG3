@@ -215,7 +215,7 @@
  </objectgroup>
  <objectgroup color="#55ff7f" id="14" name="npc"/>
  <objectgroup color="#55aaff" id="15" name="spawn">
-  <object id="1" name="alva_road_east" x="816" y="2664" width="48" height="24"/>
+  <object id="1" name="alva_road_west" x="816" y="2664" width="48" height="24"/>
   <object id="3" name="lastdenn_inn" x="576" y="2256" width="48" height="24"/>
   <object id="4" name="lastdenn_church" x="1152" y="2160" width="48" height="24"/>
   <object id="5" name="lastdenn_item_shop" x="624" y="1776" width="48" height="24"/>
@@ -236,7 +236,7 @@
   </object>
  </objectgroup>
  <objectgroup color="#ffff7f" id="16" name="portal">
-  <object id="2" name="alva_road_east" x="744" y="2688" width="192" height="24"/>
+  <object id="2" name="alva_road_west" x="744" y="2688" width="192" height="24"/>
   <object id="13" name="lastdenn_inn" x="576" y="2226" width="48" height="24"/>
   <object id="15" name="lastdenn_church" x="1128" y="2130" width="96" height="24"/>
   <object id="18" name="lastdenn_item_shop" x="624" y="1746" width="48" height="24"/>

@@ -4,8 +4,8 @@
   <property name="bgm" value="bgm_overworld"/>
   <property name="lightmap_camera" value="sunlight"/>
  </properties>
- <tileset firstgid="1" name="alva_road_east" tilewidth="24" tileheight="24" tilecount="14552" columns="214">
-  <image source="tilesets/alva_road_east.png" width="5136" height="1632"/>
+ <tileset firstgid="1" name="alva_road_west" tilewidth="24" tileheight="24" tilecount="14552" columns="214">
+  <image source="tilesets/alva_road_west.png" width="5136" height="1632"/>
  </tileset>
  <tileset firstgid="14553" source="tilesets/fsm_forest01_a1.tsx"/>
  <tileset firstgid="15321" source="tilesets/fsm_forest01_b.tsx"/>

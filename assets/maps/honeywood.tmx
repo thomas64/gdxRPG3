@@ -425,7 +425,7 @@
   <object id="384" name="honeywood_house_jaron" x="480" y="864" width="48" height="24"/>
   <object id="386" name="honeywood_house_smith" x="720" y="528" width="48" height="24"/>
   <object id="387" name="honeywood_house_elder" x="1056" y="864" width="48" height="24"/>
-  <object id="404" name="alva_road_east" x="1056" y="1848" width="48" height="24"/>
+  <object id="404" name="alva_road_west" x="1056" y="1848" width="48" height="24"/>
  </objectgroup>
  <objectgroup color="#ffff7f" id="12" name="portal">
   <object id="518" name="honeywood_farm_path" x="2304" y="360" width="24" height="96"/>
@@ -435,7 +435,7 @@
   <object id="383" name="honeywood_house_jaron" x="480" y="834" width="48" height="24"/>
   <object id="385" name="honeywood_house_smith" x="720" y="498" width="48" height="24"/>
   <object id="388" name="honeywood_house_elder" x="1056" y="834" width="48" height="24"/>
-  <object id="403" name="alva_road_east" x="744" y="1872" width="624" height="24"/>
+  <object id="403" name="alva_road_west" x="744" y="1872" width="624" height="24"/>
  </objectgroup>
  <objectgroup color="#ffaa7f" id="14" name="save"/>
  <objectgroup id="50" name="lower_texture" visible="0">
