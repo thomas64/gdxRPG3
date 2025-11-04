@@ -192,13 +192,13 @@ class Participant(
             AbilityItemId.RESISTANCE -> TODO()
             AbilityItemId.TELEPORTATION -> TODO()
             AbilityItemId.BRILLIANCE -> Brilliance(abilityItem, this)
-            AbilityItemId.STUPIDITY -> TODO()
+            AbilityItemId.STUPIDITY -> Stupidity(abilityItem, this)
             AbilityItemId.FINESSE -> Finesse(abilityItem, this)
-            AbilityItemId.CLUMSINESS -> TODO()
+            AbilityItemId.CLUMSINESS -> Clumsiness(abilityItem, this)
             AbilityItemId.MIGHT -> Might(abilityItem, this)
-            AbilityItemId.DEBILITATION -> TODO()
+            AbilityItemId.DEBILITATION -> Debilitation(abilityItem, this)
             AbilityItemId.HASTE -> Haste(abilityItem, this)
-            AbilityItemId.SLUGGISHNESS -> TODO()
+            AbilityItemId.SLUGGISHNESS -> Sluggishness(abilityItem, this)
         }
     }
 

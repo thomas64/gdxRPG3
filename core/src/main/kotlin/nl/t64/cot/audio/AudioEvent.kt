@@ -93,6 +93,7 @@ enum class AudioEvent(val filePath: String, val volume: Float = 1f) {
     SE_LARGE_DOOR("audio/se/mv_open5.ogg", 0.2f),
     SE_WOODEN_GATE("audio/se/mv_earth4.ogg", 0.2f),
     SE_CAST_BUFF("audio/se/mv_magic2.ogg", 0.2f),
+    SE_CAST_DEBUFF("audio/se/mv_magic3.ogg", 0.2f),
     SE_ACTIVATE("audio/se/mv_dlc_up10_a.ogg", 0.1f),
     SE_DAMAGE_REGULAR("audio/se/mv_dlc_blow10_a.ogg", 0.1f),
     SE_DAMAGE_ADVANTAGE("audio/se/mv_dlc_blow9_a.ogg", 0.1f),

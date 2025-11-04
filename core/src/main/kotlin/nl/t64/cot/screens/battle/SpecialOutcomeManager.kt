@@ -34,11 +34,17 @@ class SpecialOutcomeManager(
                     FloatingNumberEffect(battleFieldTable.invoke(), specialData.attacker, "~~-~~", Color.VIOLET).floatUp()
                     playSe(AudioEvent.SE_PERFORM_DEBUFF)
                 }
-                else -> {
+                specialData.castMessage.startsWith('+') -> {
                     FloatingNumberEffect(battleFieldTable.invoke(), specialData.target, specialData.castMessage, Color.YELLOW).floatDown()
                     BlinkEffect(battleFieldTable.invoke(), specialData.target, Color.CYAN).start()
                     playSe(AudioEvent.SE_CAST_BUFF)
                 }
+                specialData.castMessage.startsWith('-') -> {
+                    FloatingNumberEffect(battleFieldTable.invoke(), specialData.target, specialData.castMessage, Color.ORANGE).floatUp()
+                    BlinkEffect(battleFieldTable.invoke(), specialData.target, Color.ORANGE).start()
+                    playSe(AudioEvent.SE_CAST_DEBUFF)
+                }
+                else -> throw IllegalArgumentException("SpecialOutcomeManager does not support this special action.")
             }
             Utils.runWithDelay(DEFAULT_FLOATING_NUMBER_DELAY) {
                 setDelayingTurn.invoke(false)
