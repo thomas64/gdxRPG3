@@ -10,14 +10,13 @@
       "strength"    : 1,
       "speed"       : 30,
       "willpower"   : 30,
-      "constitution": 80,
-      "stamina"     : 80
+      "constitution": 60,
+      "stamina"     : 40
     },
     "skills"   : {
-      "thief"  : 10,
       "warrior": 10,
       "wizard" : 10,
-      "staff"  : 10
+      "staff"  : 30
     },
     "abilities": [
       "strike_2", "strike_3", "strike_4"

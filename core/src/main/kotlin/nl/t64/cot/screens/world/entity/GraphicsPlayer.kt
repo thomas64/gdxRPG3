@@ -116,21 +116,22 @@ class GraphicsPlayer : GraphicsComponent() {
     }
 
     private fun getOffsetFeetPosition(): Vector2 {
-        return if (lastFeetPosition == feetPosition) {
-            feetPosition
-        } else {
-            val quarterMoveSpeed: Float = moveSpeed / 4f
-            when (direction) {
-                Direction.NORTH -> Vector2(feetPosition.x, feetPosition.y + quarterMoveSpeed)
-                Direction.SOUTH -> Vector2(feetPosition.x, feetPosition.y - quarterMoveSpeed)
-                Direction.WEST -> Vector2(feetPosition.x - quarterMoveSpeed, feetPosition.y)
-                Direction.EAST -> Vector2(feetPosition.x + quarterMoveSpeed, feetPosition.y)
-                Direction.NORTH_WEST -> Vector2(feetPosition.x - quarterMoveSpeed, feetPosition.y + quarterMoveSpeed)
-                Direction.NORTH_EAST -> Vector2(feetPosition.x + quarterMoveSpeed, feetPosition.y + quarterMoveSpeed)
-                Direction.SOUTH_WEST -> Vector2(feetPosition.x - quarterMoveSpeed, feetPosition.y - quarterMoveSpeed)
-                Direction.SOUTH_EAST -> Vector2(feetPosition.x + quarterMoveSpeed, feetPosition.y - quarterMoveSpeed)
-                Direction.NONE -> throw IllegalArgumentException("Direction 'NONE' is not usable.")
-            }
+        if (lastFeetPosition.epsilonEquals(feetPosition, 0.01f)) {
+            return feetPosition
+        }
+        val straightOffset: Float = moveSpeed / 4f
+        val diagonalOffset: Float = straightOffset / 1.4142135f // √2
+
+        return when (direction) {
+            Direction.NORTH -> Vector2(feetPosition.x, feetPosition.y + straightOffset)
+            Direction.SOUTH -> Vector2(feetPosition.x, feetPosition.y - straightOffset)
+            Direction.WEST -> Vector2(feetPosition.x - straightOffset, feetPosition.y)
+            Direction.EAST -> Vector2(feetPosition.x + straightOffset, feetPosition.y)
+            Direction.NORTH_WEST -> Vector2(feetPosition.x - diagonalOffset, feetPosition.y + diagonalOffset)
+            Direction.NORTH_EAST -> Vector2(feetPosition.x + diagonalOffset, feetPosition.y + diagonalOffset)
+            Direction.SOUTH_WEST -> Vector2(feetPosition.x - diagonalOffset, feetPosition.y - diagonalOffset)
+            Direction.SOUTH_EAST -> Vector2(feetPosition.x + diagonalOffset, feetPosition.y - diagonalOffset)
+            Direction.NONE -> throw IllegalArgumentException("Direction 'NONE' is not usable.")
         }
     }
 

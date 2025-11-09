@@ -153,7 +153,7 @@
     ],
     "skills"   : {
       "warrior": 8,
-      "axe"    : 8,
+      "axe"    : 10,
       "shield" : 8
     },
     "inventory": {
@@ -196,7 +196,7 @@
     ],
     "skills"   : {
       "warrior": 8,
-      "spear"  : 8,
+      "spear"  : 10,
       "shield" : 8
     },
     "inventory": {
@@ -217,7 +217,7 @@
       "speed"       : 30,
       "willpower"   : 30,
       "constitution": 60,
-      "stamina"     : 60
+      "stamina"     : 40
     },
     "abilities": [
       "strike_2", "strike_3", "strike_4"
@@ -225,9 +225,7 @@
     "skills"   : {
       "warrior": 10,
       "wizard" : 10,
-      "axe"    : 10,
-      "bow"    : 10,
-      "sword"  : 10,
+      "axe"    : 20,
       "shield" : 10
     },
     "inventory": {
@@ -248,7 +246,7 @@
       "speed"       : 30,
       "willpower"   : 30,
       "constitution": 60,
-      "stamina"     : 60
+      "stamina"     : 40
     },
     "abilities": [
       "strike_2", "strike_3", "strike_4"
@@ -256,9 +254,7 @@
     "skills"   : {
       "warrior": 10,
       "wizard" : 10,
-      "spear"  : 10,
-      "bow"    : 10,
-      "sword"  : 10,
+      "spear"  : 20,
       "shield" : 10
     },
     "inventory": {
