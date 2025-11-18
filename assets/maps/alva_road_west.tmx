@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="160" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="17" nextobjectid="269">
+<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="160" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="18" nextobjectid="271">
  <properties>
   <property name="bgm" value="bgm_overworld"/>
+  <property name="bgs" value="bgs_creek"/>
   <property name="lightmap_camera" value="sunlight"/>
  </properties>
  <tileset firstgid="1" name="alva_road_west" tilewidth="24" tileheight="24" tilecount="14552" columns="214">
@@ -123,11 +124,11 @@
   <object id="237" name="sand" x="1488" y="816" width="48" height="48"/>
   <object id="238" name="sand" x="1440" y="864" width="96" height="48"/>
   <object id="239" name="wood" x="336" y="1032" width="276" height="174"/>
-  <object id="240" name="stone" x="3264" y="696" width="48" height="144"/>
+  <object id="240" name="stone" x="3240" y="696" width="96" height="144"/>
   <object id="268" name="wood" x="612" y="1068" width="60" height="120"/>
  </objectgroup>
- <objectgroup color="#aa5500" id="13" name="collision_low" visible="0">
-  <object id="95" x="2736" y="720" width="480" height="96"/>
+ <objectgroup color="#aa5500" id="13" name="collision_low">
+  <object id="95" x="2736" y="720" width="486" height="96"/>
   <object id="96" x="2832" y="624" width="192" height="96"/>
   <object id="97" x="3024" y="624" width="48" height="96"/>
   <object id="98" x="2736" y="816" width="384" height="48"/>
@@ -145,7 +146,7 @@
   <object id="131" x="624" y="1344" width="48" height="96"/>
   <object id="132" x="624" y="1536" width="48" height="144"/>
   <object id="133" x="672" y="1584" width="48" height="96"/>
-  <object id="135" x="3360" y="720" width="48" height="144"/>
+  <object id="135" x="3348" y="720" width="60" height="144"/>
   <object id="136" x="768" y="480" width="48" height="48"/>
   <object id="137" x="1296" y="624" width="192" height="96"/>
   <object id="138" x="1296" y="720" width="144" height="48"/>
@@ -177,7 +178,7 @@
   <object id="173" x="3360" y="144" height="24"/>
   <object id="241" x="2928" y="504" width="24" height="48"/>
  </objectgroup>
- <objectgroup color="#aa0000" id="12" name="collision">
+ <objectgroup color="#aa0000" id="12" name="collision" visible="0">
   <object id="3" x="0" y="0" width="288" height="624"/>
   <object id="4" x="0" y="672" width="288" height="96"/>
   <object id="5" x="0" y="624" width="240" height="48"/>
@@ -235,8 +236,8 @@
   <object id="72" x="3408" y="984" width="96" height="312"/>
   <object id="73" x="3456" y="1296" width="48" height="48"/>
   <object id="74" x="3456" y="816" width="48" height="168"/>
-  <object id="75" x="3216" y="672" width="48" height="192"/>
-  <object id="76" x="3312" y="672" width="48" height="192"/>
+  <object id="75" x="3222" y="672" width="30" height="192"/>
+  <object id="76" x="3318" y="672" width="30" height="192"/>
   <object id="77" x="1680" y="744" width="912" height="240"/>
   <object id="78" x="1776" y="984" width="816" height="48"/>
   <object id="79" x="1872" y="1032" width="672" height="48"/>
@@ -261,12 +262,10 @@
   <object id="141" x="336" y="144" width="144" height="48"/>
   <object id="142" x="336" y="120" width="48" height="24"/>
   <object id="143" x="720" y="120" width="48" height="24"/>
-  <object id="243" x="672" y="1152" width="48" height="48"/>
+  <object id="243" x="672" y="1152" width="36" height="48"/>
   <object id="252" x="2592" y="1152" width="48" height="48"/>
  </objectgroup>
  <objectgroup color="#5500ff" id="15" name="rest">
-  <object id="242" name="note_honeywood_signpost" x="768" y="960" width="48" height="48"/>
-  <object id="244" name="note_honeywood_ferry" x="672" y="1152" width="48" height="48"/>
   <object id="266" name="chest0013" x="816" y="72" width="48" height="48"/>
   <object id="267" name="sparkle_alva_1" x="912" y="528" width="48" height="48"/>
  </objectgroup>
@@ -359,5 +358,9 @@
  <objectgroup color="#ffff7f" id="11" name="portal">
   <object id="1" name="honeywood" x="264" y="-24" width="624" height="24"/>
   <object id="265" name="alva_road_east" x="3192" y="-24" width="192" height="24"/>
+ </objectgroup>
+ <objectgroup color="#ff55ff" id="17" name="event">
+  <object id="269" name="note_honeywood_signpost" type="check" x="768" y="960" width="48" height="48"/>
+  <object id="270" name="note_honeywood_ferry" type="check" x="672" y="1152" width="48" height="48"/>
  </objectgroup>
 </map>

@@ -116,7 +116,9 @@ class GraphicsPlayer : GraphicsComponent() {
     }
 
     private fun getOffsetFeetPosition(): Vector2 {
-        if (lastFeetPosition.epsilonEquals(feetPosition, 0.01f)) {
+        if (lastFeetPosition.epsilonEquals(feetPosition, 0.01f)
+            || mapManager.isSpecialDirectionNorth(feetPosition)
+        ) {
             return feetPosition
         }
         val straightOffset: Float = moveSpeed / 4f

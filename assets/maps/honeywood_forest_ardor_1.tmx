@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="72" height="48" tilewidth="24" tileheight="24" infinite="0" nextlayerid="19" nextobjectid="127">
+<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="72" height="48" tilewidth="24" tileheight="24" infinite="0" nextlayerid="19" nextobjectid="127">
  <properties>
   <property name="bgm" value="bgm_ardor"/>
   <property name="lightmap_map" value="fog"/>
@@ -22,7 +22,7 @@
  </layer>
  <layer id="3" name="under2_ground" width="72" height="48">
   <data encoding="base64" compression="zlib">
-   eJzt0DENAEAIwEAMYBcpr/ctMJDAcKegaQQAAAAAAAAAAADAvJfbBbeVPwAAQMMH+wABJw==
+   eJztwTEBAAAAwqD1T20ND6AAAAAAAAAAAAAAAAAAeDQ2AAAB
   </data>
  </layer>
  <layer id="4" name="under3_none" width="72" height="48">
@@ -42,7 +42,7 @@
  </layer>
  <layer id="7" name="over6_trees" width="72" height="48">
   <data encoding="base64" compression="zlib">
-   eJztmVlOwlAUhu8S6IXiA+geGF9E9+AY31yDY3xzI4hbcQuOb6hbcAxqTPwb0lKvnT3tLe35kj+kKbTlvz/nHFohorErf29XsV2T3u8tI6eKFx1sd9kfBzU/FjtG9teRV9T8WJywP75w/QmG6084Q/hzBo3YJyaE8wgZGXKOGAWvuScuRc6V19zDzIhSd+JA3e+i1kXus8WjyHWJmXJZEeIKuoZuoFvorqL7qvLDE7x4hl6gV+gNemd/HAxDCAlVoRpkQnW+r+HMPS140YY6UBfqQX32x5mb1+DFOrQBbUJb0Db74+RnD17sQwfQIXQEHbM/DFMqeE4LZt7ntLTXN+s5jfq+T9rrG2dOmxCc9wHHeJyj9Y06py0YhM99cZwvIo/SnsPjzGmUz30p7j9b5GUOH2O9R4TnpapDOudwq958QJ/QN3FPo8pPUhZNIZbM+J8zcN1STvNyn2Kf1/38YgXerEb0x52TFq67LenzoqI7P2FklRM/dOcnjKxy4oeJc9cTeNTAb6KZoG6EMc7Zf4YevOkn8GcZ3gxS8CdvUM/RNnbd8CNvOQniwpj1BYp5euLqL/Zx1Vdd9eS/NPCdmq51D8uBvV93n8mSgfw7Z/jlwN6vu88wDMMwTJn4AbMDhcQ=
+   eJztmVtOwkAUhmcJzAD6ILoHLvriZQ9e45tr8Brf3Ajimry+oWvwGtSY8Ddkaq2UTpGRmfb/ki+kKZDJP4czJ1QIM/bUz+syritq+HuLyFksiyauW8wnJF4/Abvy/9fhKvH6CThlPomw/4yG/SedNvI5hx3mRFK4MKiRNuuIWCDPdTVs7iHfmPSdLEz6vDPtizxn80ee+xIZcFkS4gpewxt4C+9K016VOzwiiyf4DF/gK3xjPiFSCqFgGVZgFc7wf42QOrJowCZswUW4xHxC1pHFBtyEW3Ab7jCfkH1kcQAP4RE8hifMh5BCwTltNL7Pabb31/c5zfb+ZpnTeg7Wle39NZ3TZqWbz31tz+FZ5jQXn/u6Mod38dvqOJjPNOfwoN+8ww/45WDv+QvzVSEWqtk/JxX6nRrUy33OMomyimzWDPOJ1kkd2TRU/uolK0Wpk3HxtU7m8JuojdE30uh6lkMSy8hmxUI+RUH3jSR8qxN9LnxOYN29yPmivzf+6ls/0Txg3bXIvqfVgb5fqHNG/p4zkupA3/f1nCGEEEJ8pA9inHol
   </data>
  </layer>
  <layer id="8" name="over7_none" width="72" height="48">
@@ -55,7 +55,7 @@
    eJztwTEBAAAAwqD1T20ND6AAAAAAAAAAAAAAAAAAeDQ2AAAB
   </data>
  </layer>
- <objectgroup color="#0055ff" id="14" name="sound" visible="0">
+ <objectgroup color="#0055ff" id="14" name="sound">
   <object id="95" name="sand" x="288" y="0" width="48" height="288"/>
   <object id="96" name="sand" x="336" y="240" width="96" height="48"/>
   <object id="97" name="sand" x="384" y="288" width="48" height="48"/>
