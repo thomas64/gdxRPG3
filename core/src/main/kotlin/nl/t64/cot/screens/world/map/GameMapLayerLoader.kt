@@ -7,57 +7,85 @@ import com.badlogic.gdx.maps.tiled.TiledMap
 import ktx.tiled.type
 
 
-internal class GameMapLayerLoader(private val tiledMap: TiledMap) {
+internal class GameMapLayerLoader(
+    private val tiledMap: TiledMap
+) {
 
-    private val noFilter: (RectangleMapObject) -> Boolean = { true }
-    private val noMapping: (RectangleMapObject) -> RectangleMapObject = { it }
-
-    fun wholeLayer(layerName: String): List<RectangleMapObject> {
-        return getMapLayer(layerName)?.let { getMapObjectsFrom(it, noFilter, noMapping) } ?: emptyList()
+    fun loadAllRectanglesFromLayer(layerName: String): List<RectangleMapObject> {
+        val layer: MapLayer = tiledMap.layers.get(layerName) ?: return emptyList()
+        return layer.objects
+            .map { it as RectangleMapObject }
     }
 
-    fun <T> wholeLayer(layerName: String, mapper: (RectangleMapObject) -> T): List<T> {
-        return getMapLayer(layerName)?.let { getMapObjectsFrom(it, noFilter, mapper) } ?: emptyList()
+    fun <T> loadAllAndTransform(layerName: String,
+                                transform: (RectangleMapObject) -> T
+    ): List<T> {
+        val layer: MapLayer = tiledMap.layers.get(layerName) ?: return emptyList()
+        return layer.objects
+            .map { it as RectangleMapObject }
+            .map(transform)
     }
 
-    fun nameStartsWith(layerName: String, match: String): List<RectangleMapObject> {
-        val filter: (RectangleMapObject) -> Boolean = { it.name.startsWith(match) }
-        return getMapLayer(layerName)?.let { getMapObjectsFrom(it, filter, noMapping) } ?: emptyList()
+    fun <T> loadAllTexturesAndTransform(layerName: String,
+                                        transform: (TextureMapObject) -> T
+    ): List<T> {
+        val layer: MapLayer = tiledMap.layers.get(layerName) ?: return emptyList()
+        return layer.objects
+            .map { it as TextureMapObject }
+            .map(transform)
     }
 
-    fun <T> nameStartsWith(layerName: String, match: String, mapper: (RectangleMapObject) -> T): List<T> {
-        val filter: (RectangleMapObject) -> Boolean = { it.name.startsWith(match) }
-        return getMapLayer(layerName)?.let { getMapObjectsFrom(it, filter, mapper) } ?: emptyList()
+    fun loadWhereNameStartsWith(layerName: String,
+                                namePrefix: String
+    ): List<RectangleMapObject> {
+        val layer: MapLayer = tiledMap.layers.get(layerName) ?: return emptyList()
+        return layer.objects
+            .map { it as RectangleMapObject }
+            .filter { it.name.startsWith(namePrefix) }
     }
 
-    fun <T> nameEqualsIgnoreCase(layerName: String, match: String, mapper: (RectangleMapObject) -> T): List<T> {
-        val filter: (RectangleMapObject) -> Boolean = { it.name.equals(match, true) }
-        return getMapLayer(layerName)?.let { getMapObjectsFrom(it, filter, mapper) } ?: emptyList()
+    fun <T> loadWhereNameStartsWithAndTransform(layerName: String,
+                                                namePrefix: String,
+                                                transform: (RectangleMapObject) -> T
+    ): List<T> {
+        val layer: MapLayer = tiledMap.layers.get(layerName) ?: return emptyList()
+        return layer.objects
+            .map { it as RectangleMapObject }
+            .filter { it.name.startsWith(namePrefix) }
+            .map(transform)
     }
 
-    fun <T> typeEqualsIgnoreCase(layerName: String, match: String, mapper: (RectangleMapObject) -> T): List<T> {
-        val filter: (RectangleMapObject) -> Boolean = { it.type.equals(match, true) }
-        return getMapLayer(layerName)?.let { getMapObjectsFrom(it, filter, mapper) } ?: emptyList()
+    fun <T> loadWhereNameEqualsAndTransform(layerName: String,
+                                            name: String,
+                                            transform: (RectangleMapObject) -> T
+    ): List<T> {
+        val layer: MapLayer = tiledMap.layers.get(layerName) ?: return emptyList()
+        return layer.objects
+            .map { it as RectangleMapObject }
+            .filter { it.name.equals(name, ignoreCase = true) }
+            .map(transform)
     }
 
-    fun <T> partOfLayer(layerName: String, filter: (RectangleMapObject) -> Boolean, mapper: (RectangleMapObject) -> T): List<T> {
-        return getMapLayer(layerName)?.let { getMapObjectsFrom(it, filter, mapper) } ?: emptyList()
+    fun <T> loadWhereTypeEqualsAndTransform(layerName: String,
+                                            type: String,
+                                            transform: (RectangleMapObject) -> T
+    ): List<T> {
+        val layer: MapLayer = tiledMap.layers.get(layerName) ?: return emptyList()
+        return layer.objects
+            .map { it as RectangleMapObject }
+            .filter { it.type.equals(type, ignoreCase = true) }
+            .map(transform)
     }
 
-    fun <T> wholeTextureLayer(layerName: String, mapper: (TextureMapObject) -> T): List<T> {
-        return getMapLayer(layerName)?.let { getTextureObjectsFrom(it, mapper) } ?: emptyList()
-    }
-
-    private fun <T> getMapObjectsFrom(mapLayer: MapLayer, filter: (RectangleMapObject) -> Boolean, mapper: (RectangleMapObject) -> T): List<T> {
-        return mapLayer.objects.map { it as RectangleMapObject }.filter(filter).map(mapper)
-    }
-
-    private fun <T> getTextureObjectsFrom(mapLayer: MapLayer, mapper: (TextureMapObject) -> T): List<T> {
-        return mapLayer.objects.map { it as TextureMapObject }.map(mapper)
-    }
-
-    private fun getMapLayer(layerName: String): MapLayer? {
-        return tiledMap.layers.get(layerName)
+    fun <T> loadWithCustomFilterAndTransform(layerName: String,
+                                             filter: (RectangleMapObject) -> Boolean,
+                                             transform: (RectangleMapObject) -> T
+    ): List<T> {
+        val layer: MapLayer = tiledMap.layers.get(layerName) ?: return emptyList()
+        return layer.objects
+            .map { it as RectangleMapObject }
+            .filter(filter)
+            .map(transform)
     }
 
 }
