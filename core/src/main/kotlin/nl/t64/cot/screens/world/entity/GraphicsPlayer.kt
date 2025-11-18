@@ -33,7 +33,7 @@ class GraphicsPlayer : GraphicsComponent() {
             state = event.state
         }
         if (event is DirectionEvent) {
-            direction = event.direction
+            direction = if (mapManager.isSpecialDirectionNorth(feetPosition)) Direction.NORTH else event.direction
         }
         if (event is PositionEvent) {
             setEventPosition(event.position)

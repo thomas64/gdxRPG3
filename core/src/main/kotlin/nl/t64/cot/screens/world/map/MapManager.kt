@@ -96,6 +96,10 @@ class MapManager : ProfileObserver {
         currentMap.lowerTextures.forEach { it.update() }
     }
 
+    fun isSpecialDirectionNorth(playerFeetPosition: Vector2): Boolean {
+        return currentMap.isSpecialDirectionNorth(playerFeetPosition)
+    }
+
     fun getGroundSound(x: Float, y: Float): AudioEvent {
         return getGroundSound(Vector2(x, y))
     }

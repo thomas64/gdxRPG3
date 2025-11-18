@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="26" height="42" tilewidth="24" tileheight="24" infinite="0" nextlayerid="28" nextobjectid="93">
+<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="26" height="42" tilewidth="24" tileheight="24" infinite="0" nextlayerid="29" nextobjectid="95">
  <properties>
   <property name="bgm" value="bgm_house"/>
   <property name="bgs" value="bgs_fireplace"/>
@@ -153,5 +153,8 @@
   <object id="87" name="deryk12" x="72" y="672" width="48" height="24"/>
   <object id="88" name="deryk13" x="72" y="480" width="48" height="24"/>
   <object id="89" name="deryk14" x="144" y="414" width="48" height="24"/>
+ </objectgroup>
+ <objectgroup color="#000000" id="28" name="direction_north">
+  <object id="94" x="540" y="744" width="24" height="24"/>
  </objectgroup>
 </map>

@@ -23,6 +23,7 @@ import java.util.*
 import kotlin.concurrent.thread
 
 
+private const val DIRECTION_LAYER = "direction_north"
 private const val SOUND_LAYER = "sound"
 private const val SCHEDULED_LAYER = "scheduled"
 private const val EVENT_LAYER = "event"
@@ -96,6 +97,7 @@ class GameMap(
     val doors: List<RectangleMapObject> = loader.nameStartsWith(REST_LAYER, "door")
     val storage: List<GameMapStorage> = loader.nameStartsWith(REST_LAYER, "storage") { GameMapStorage(it) }
 
+    private val specialDirections: List<RectangleMapObject> = loader.wholeLayer(DIRECTION_LAYER)
     private val sounds: List<RectangleMapObject> = loader.wholeLayer(SOUND_LAYER)
     private val blockers: List<GameMapBlocker> = loader.wholeLayer(COLLISION_LAYER) { GameMapBlocker(it) }
     private val lowBlockers: List<GameMapBlockerLow> = loader.wholeLayer(COLLISION_LOW_LAYER) { GameMapBlockerLow(it) }
@@ -128,6 +130,10 @@ class GameMap(
             .filter { it.rectangle.contains(point) }
             .map { it.name }
             .firstOrNull() ?: defaultStepSound
+    }
+
+    fun isSpecialDirectionNorth(point: Vector2): Boolean {
+        return specialDirections.any { it.rectangle.contains(point) }
     }
 
     fun setPlayerSpawnLocationWithId(id: String) {
