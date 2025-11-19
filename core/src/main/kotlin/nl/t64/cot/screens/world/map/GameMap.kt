@@ -25,6 +25,7 @@ import kotlin.concurrent.thread
 
 private const val DIRECTION_LAYER = "direction_north"
 private const val SOUND_LAYER = "sound"
+private const val BGS_VOLUME_LAYER = "bgs_volume"
 private const val SCHEDULED_LAYER = "scheduled"
 private const val EVENT_LAYER = "event"
 private const val CUTSCENE_LAYER = "cutscene"
@@ -99,6 +100,7 @@ class GameMap(
 
     private val specialDirections: List<RectangleMapObject> = loader.loadAllRectanglesFromLayer(DIRECTION_LAYER)
     private val sounds: List<RectangleMapObject> = loader.loadAllRectanglesFromLayer(SOUND_LAYER)
+    private val bgsVolumeZones: List<GameMapBgsVolume> = loader.loadAllAndTransform(BGS_VOLUME_LAYER) { GameMapBgsVolume(it) }
     private val blockers: List<GameMapBlocker> = loader.loadAllAndTransform(COLLISION_LAYER) { GameMapBlocker(it) }
     private val lowBlockers: List<GameMapBlockerLow> = loader.loadAllAndTransform(COLLISION_LOW_LAYER) { GameMapBlockerLow(it) }
     private val eventDiscovers: List<GameMapEventDiscover> = loader.loadWhereTypeEqualsAndTransform(EVENT_LAYER, "discover") { GameMapEventDiscover(it) }
@@ -130,6 +132,13 @@ class GameMap(
             .filter { it.rectangle.contains(point) }
             .map { it.name }
             .firstOrNull() ?: defaultStepSound
+    }
+
+    fun getBgsVolumeAdjustments(point: Vector2): Map<AudioEvent, Float> {
+        return bgsVolumeZones
+            .map { it.getVolumeAdjustment(point) }
+            .filterNot { it.second == 0f }
+            .toMap()
     }
 
     fun isSpecialDirectionNorth(point: Vector2): Boolean {

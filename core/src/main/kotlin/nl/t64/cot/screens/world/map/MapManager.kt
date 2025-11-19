@@ -108,6 +108,11 @@ class MapManager : ProfileObserver {
         return currentMap.getUnderground(playerFeetPosition).toAudioEvent()
     }
 
+    fun updateBgsVolumes(playerFeetPosition: Vector2) {
+        val volumeAdjustments: Map<AudioEvent, Float> = currentMap.getBgsVolumeAdjustments(playerFeetPosition)
+        audioManager.adjustBgsVolumes(volumeAdjustments)
+    }
+
     fun setNextMapTitleNull() {
         nextMapTitle = null
     }

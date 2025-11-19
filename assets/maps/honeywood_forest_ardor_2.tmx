@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="44" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="17" nextobjectid="64">
+<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="44" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="18" nextobjectid="65">
  <properties>
   <property name="bgm" value="bgm_ardor"/>
   <property name="bgs" value="bgs_creek"/>
@@ -56,6 +56,9 @@
    eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAAAAAIB3AzAgAAE=
   </data>
  </layer>
+ <objectgroup color="#aaffff" id="17" name="bgs_volume">
+  <object id="64" name="bgs_creek" type="400" x="192" y="864" width="672" height="288"/>
+ </objectgroup>
  <objectgroup color="#0055ff" id="11" name="sound" visible="0">
   <object id="48" name="sand" x="480" y="1296" width="48" height="384"/>
   <object id="49" name="sand" x="528" y="1104" width="48" height="240"/>

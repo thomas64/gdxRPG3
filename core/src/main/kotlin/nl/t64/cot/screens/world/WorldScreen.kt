@@ -121,6 +121,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     fun changeMap(currentMap: GameMap) {
         worldRenderer.map = currentMap.tiledMap
         player.send(LoadEntityEvent(currentMap.playerSpawnDirection, currentMap.playerSpawnLocation))
+        mapManager.updateBgsVolumes(player.position)
         camera.setNewMapSize(currentMap.pixelWidth, currentMap.pixelHeight)
         camera.setInitPosition(player.position)
         npcEntities = NpcEntitiesLoader(currentMap).createNpcs()
@@ -372,6 +373,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
             player.update(dt)
             worldSchedule.update()
             mapManager.updateConditionLayers()
+            mapManager.updateBgsVolumes(player.position)
         }
         doorList.forEach { it.update(dt) }
         lootList.forEach { it.update(dt) }

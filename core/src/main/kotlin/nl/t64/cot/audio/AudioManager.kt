@@ -129,6 +129,12 @@ class AudioManager {
         nextBgs.forEach { handle(AudioCommand.BGS_PLAY_LOOP, it) }
     }
 
+    fun adjustBgsVolumes(volumeAdjustments: Map<AudioEvent, Float>) {
+        queuedBgs
+            .filter { it.key in volumeAdjustments.keys }
+            .forEach { it.adjustVolume(volumeAdjustments) }
+    }
+
     fun handle(command: AudioCommand, event: AudioEvent) {
         when (command) {
             AudioCommand.BGM_PLAY_ONCE -> playBgm(event, false)
@@ -313,6 +319,17 @@ class AudioManager {
             se.setLooping(seId, isLooping)
         } else {
             se.stop()
+        }
+    }
+
+    private fun Map.Entry<AudioEvent, Music>.adjustVolume(volumeAdjustments: Map<AudioEvent, Float>) {
+        if (preferenceManager.isSoundOn) {
+            val adjustment: Float = volumeAdjustments[this.key] ?: 0f
+            val targetVolume: Float = this.key.volume + adjustment
+            val finalVolume: Float = max(0f, min(targetVolume, this.key.volume))
+
+            this.value.volume = finalVolume
+            this.value.play()
         }
     }
 

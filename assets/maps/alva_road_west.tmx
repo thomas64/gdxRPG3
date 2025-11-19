@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="160" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="18" nextobjectid="271">
+<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="160" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="19" nextobjectid="277">
  <properties>
   <property name="bgm" value="bgm_overworld"/>
   <property name="bgs" value="bgs_creek"/>
@@ -58,6 +58,9 @@
    eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeDCvAAAB
   </data>
  </layer>
+ <objectgroup color="#aaffff" id="18" name="bgs_volume">
+  <object id="271" name="bgs_creek" type="400" x="2688" y="576" width="960" height="432"/>
+ </objectgroup>
  <objectgroup color="#0055ff" id="14" name="sound" visible="0">
   <object id="174" name="sand" x="480" y="48" width="192" height="192"/>
   <object id="175" name="sand" x="528" y="240" width="144" height="48"/>
@@ -156,29 +159,31 @@
   <object id="148" x="1824" y="1200" width="48" height="48"/>
   <object id="149" x="1848" y="1176" width="24" height="24"/>
   <object id="150" x="1800" y="1224" width="24" height="96"/>
-  <object id="151" x="2496" y="1080" width="144" height="24"/>
-  <object id="152" x="2616" y="1032" width="96" height="24"/>
-  <object id="153" x="2544" y="1056" width="96" height="24"/>
-  <object id="155" x="2688" y="1056" width="96" height="48"/>
-  <object id="156" x="2760" y="1104" width="120" height="48"/>
-  <object id="158" x="3216" y="1104" width="144" height="48"/>
-  <object id="159" x="3360" y="1056" width="48" height="48"/>
-  <object id="160" x="3312" y="1080" width="48" height="24"/>
-  <object id="161" x="2688" y="288" width="24" height="120"/>
-  <object id="162" x="2688" y="408" width="48" height="72"/>
+  <object id="151" x="2496" y="1080" width="132" height="24"/>
+  <object id="152" x="2640" y="1026" width="48" height="30"/>
+  <object id="155" x="2700" y="1074" width="84" height="30"/>
+  <object id="156" x="2760" y="1122" width="120" height="30"/>
+  <object id="158" x="3216" y="1122" width="144" height="30"/>
+  <object id="159" x="3360" y="1074" width="48" height="30"/>
+  <object id="160" x="3336" y="1080" width="24" height="42"/>
+  <object id="161" x="2688" y="288" width="12" height="180"/>
+  <object id="162" x="2700" y="408" width="36" height="72"/>
   <object id="163" x="2736" y="480" height="24"/>
-  <object id="164" x="2832" y="408" width="24" height="96"/>
-  <object id="165" x="2832" y="504" width="96" height="72"/>
-  <object id="166" x="2928" y="552" width="240" height="72"/>
-  <object id="168" x="3144" y="504" width="24" height="48"/>
-  <object id="169" x="3432" y="552" width="168" height="72"/>
+  <object id="164" x="2832" y="408" width="12" height="156"/>
+  <object id="165" x="2844" y="504" width="84" height="72"/>
+  <object id="166" x="2940" y="552" width="216" height="72"/>
+  <object id="168" x="3156" y="504" width="12" height="108"/>
+  <object id="169" x="3420" y="552" width="180" height="72"/>
   <object id="170" x="3552" y="624" width="48" height="48"/>
-  <object id="171" x="3408" y="504" width="24" height="120"/>
+  <object id="171" x="3408" y="504" width="12" height="108"/>
   <object id="172" x="3216" y="144" height="24"/>
   <object id="173" x="3360" y="144" height="24"/>
-  <object id="241" x="2928" y="504" width="24" height="48"/>
+  <object id="241" x="2928" y="504" width="12" height="108"/>
+  <object id="274" x="2760" y="1104" width="24" height="18"/>
+  <object id="275" x="2688" y="1050" width="12" height="42"/>
+  <object id="276" x="2628" y="1050" width="12" height="42"/>
  </objectgroup>
- <objectgroup color="#aa0000" id="12" name="collision" visible="0">
+ <objectgroup color="#aa0000" id="12" name="collision">
   <object id="3" x="0" y="0" width="288" height="624"/>
   <object id="4" x="0" y="672" width="288" height="96"/>
   <object id="5" x="0" y="624" width="240" height="48"/>
