@@ -1,0 +1,30 @@
+{
+  "lastdenn_guard": {
+    "name"     : "Lastdenn Guard",
+    "gender"   : "his",
+    "ap"       : 6,
+    "xp"       : 20,
+    "stats"    : {
+      "intelligence": 1,
+      "dexterity"   : 1,
+      "strength"    : 20,
+      "speed"       : 20,
+      "willpower"   : 20,
+      "constitution": 20,
+      "stamina"     : 1
+    },
+    "abilities": [
+      "strike_2", "strike_3", "strike_4"
+    ],
+    "skills"   : {
+      "warrior": 10,
+      "spear"  : 10,
+      "shield" : 10
+    },
+    "inventory": {
+      "weapon": "specialist_spear",
+      "shield": "specialist_medium_shield",
+      "chest" : "armor_50"
+    }
+  }
+}

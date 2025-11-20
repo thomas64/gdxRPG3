@@ -2,4 +2,5 @@ guide_events.json
 note_events.json
 honeywood_forest.json
 honeywood.json
+lastdenn.json
 mysterious_tunnel.json

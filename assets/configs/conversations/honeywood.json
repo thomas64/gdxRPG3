@@ -657,8 +657,9 @@
     }
   },
   "honeywood_soldiers"                  : {
-    "name"   : "Soldier",
-    "phrases": {
+    "name"     : "Soldier",
+    "condition": ["!alone_in_party"], "startAt": "100",
+    "phrases"  : {
       "1"   : {"text": ["Sir, as per the village elder's orders, we are not permitted to allow anyone to leave the village {COLOR=BLUE}alone{COLOR=BLACK}."]},
       "2"   : {
         "text": ["It's dangerous to go alone, particularly with the recent increase in monster activity. (What's up with that anyway?)"], "choices": [
@@ -679,6 +680,7 @@
       "5"   : {"text": ["No sir, we have been stationed here all night, and we haven't seen anyone passing through this gate."]},
       "6"   : {"text": ["Certainly not a little girl. We can guarantee you that."], "choices": [{"command": "EXIT"}]},
       "10"  : {"text": ["You can find the village elder in the big house, near the statue in the center of the village."], "choices": [{"command": "EXIT"}]},
+      "100" : {"text": ["Sir, we advise you to take caution when venturing on the road. Increased monster activity has been reported lately."], "choices": [{"command": "EXIT"}]},
       "2000": {"text": ["But it appears you are in good company. Move along."], "choices": [{"command": "EXIT"}]}
     }
   },

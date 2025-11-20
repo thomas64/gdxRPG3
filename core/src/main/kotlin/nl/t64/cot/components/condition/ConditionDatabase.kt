@@ -18,32 +18,34 @@ object ConditionDatabase {
 
     private val conditions: Map<String, () -> Boolean> = mapOf(
         // @formatter:off
-        "ranger1"                   to { hasEnoughOfSkill(SkillItemId.RANGER,       1) },
-        "ranger2"                   to { hasEnoughOfSkill(SkillItemId.RANGER,       2) },
-        "ranger3"                   to { hasEnoughOfSkill(SkillItemId.RANGER,       3) },
-        "diplomat1"                 to { hasEnoughOfSkill(SkillItemId.DIPLOMAT,     1) },
-        "diplomat2"                 to { hasEnoughOfSkill(SkillItemId.DIPLOMAT,     2) },
-        "barbarian1"                to { hasEnoughOfSkill(SkillItemId.BARBARIAN,    1) },
-        "barbarian4"                to { hasEnoughOfSkill(SkillItemId.BARBARIAN,    4) },
-        "warrior4"                  to { hasEnoughOfSkill(SkillItemId.WARRIOR,      4) },
-        "wizard1"                   to { hasEnoughOfSkill(SkillItemId.WIZARD,       1) },
-        "mozes_wizard1"             to { hasMozesEnoughOfSkill(SkillItemId.WIZARD,  1) },
-        "druid1"                    to { hasEnoughOfSkill(SkillItemId.DRUID,        1) },
-        "i_druid1"                  to { hasEnoughOfSkill(SkillItemId.DRUID,        1) },
-        "ii_druid1"                 to { hasEnoughOfSkill(SkillItemId.DRUID,        1) },
+        "ranger1"                       to { hasEnoughOfSkill(SkillItemId.RANGER,       1) },
+        "ranger2"                       to { hasEnoughOfSkill(SkillItemId.RANGER,       2) },
+        "ranger3"                       to { hasEnoughOfSkill(SkillItemId.RANGER,       3) },
+        "diplomat1"                     to { hasEnoughOfSkill(SkillItemId.DIPLOMAT,     1) },
+        "diplomat2"                     to { hasEnoughOfSkill(SkillItemId.DIPLOMAT,     2) },
+        "diplomat3"                     to { hasEnoughOfSkill(SkillItemId.DIPLOMAT,     3) },
+        "barbarian1"                    to { hasEnoughOfSkill(SkillItemId.BARBARIAN,    1) },
+        "barbarian4"                    to { hasEnoughOfSkill(SkillItemId.BARBARIAN,    4) },
+        "warrior4"                      to { hasEnoughOfSkill(SkillItemId.WARRIOR,      4) },
+        "wizard1"                       to { hasEnoughOfSkill(SkillItemId.WIZARD,       1) },
+        "mozes_wizard1"                 to { hasMozesEnoughOfSkill(SkillItemId.WIZARD,  1) },
+        "druid1"                        to { hasEnoughOfSkill(SkillItemId.DRUID,        1) },
+        "i_druid1"                      to { hasEnoughOfSkill(SkillItemId.DRUID,        1) },
+        "ii_druid1"                     to { hasEnoughOfSkill(SkillItemId.DRUID,        1) },
 
-        "xp_>=_15"                  to { isXpGreaterThan(15) },
-        "!been_in_fairy_town"       to { !hasEventPlayed("enter_great_tree") },
-        "been_in_fairy_town"        to { hasEventPlayed("enter_great_tree") },
-        "defeated_orc_guards"       to { isBattleWon("quest_orc_guards") },
-        "shield_spell"              to { hasSpell("magic_shield", "mozes") },
-        "!black_asked_four"         to { !blackAskedFour },
-        "black_asked_four"          to { blackAskedFour },
-        "alone_in_party"            to { isAloneInParty },
-        "!alone_in_party"           to { !isAloneInParty },
-        "fairy_portal_active"       to { areBothPortalsActive },
-        "i_!fairy_portal_active"    to { isPortalFairyInactiveAndPortalHoneywoodActive },
-        "is_specific_time"          to { isBlackCurrentlyNotOpeningHisDoor },
+        "xp_>=_15"                      to { isXpGreaterThan(15) },
+        "!been_in_fairy_town"           to { !hasEventPlayed("enter_great_tree") },
+        "been_in_fairy_town"            to { hasEventPlayed("enter_great_tree") },
+        "defeated_orc_guards"           to { isBattleWon("quest_orc_guards") },
+        "shield_spell"                  to { hasSpell("magic_shield", "mozes") },
+        "!black_asked_four"             to { !blackAskedFour },
+        "black_asked_four"              to { blackAskedFour },
+        "alone_in_party"                to { isAloneInParty },
+        "!alone_in_party"               to { !isAloneInParty },
+        "fairy_portal_active"           to { areBothPortalsActive },
+        "i_!fairy_portal_active"        to { isPortalFairyInactiveAndPortalHoneywoodActive },
+        "is_specific_time"              to { isBlackCurrentlyNotOpeningHisDoor },
+        "is_lastdenn_entrance_closed"   to { isLastdennEntranceClosed }
         // @formatter:on
     )
 
@@ -93,6 +95,10 @@ object ConditionDatabase {
     private val isBlackCurrentlyNotOpeningHisDoor
         get() = gameData.clock.isCurrentTimeBefore("07:35")
             || gameData.clock.isCurrentTimeAfter("07:38")
+    private val isLastdennEntranceClosed
+        get() = gameData.clock.isCurrentTimeBefore("15:00")
+            && isMeetingCondition("_conv_lastdenn_entrance_guard_<_100", null)
+            && !isBattleWon("lastdenn_entrance_guard")
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

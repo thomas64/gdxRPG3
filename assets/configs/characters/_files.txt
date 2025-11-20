@@ -1,4 +1,5 @@
 slimes.json
 bats.json
 orcs.json
+humans.json
 enemy1.json

@@ -208,6 +208,7 @@
   "orc_general_axe"   : {
     "name"     : "Orc General",
     "gender"   : "its",
+    "ap"       : 8,
     "xp"       : 90,
     "drops"    : {"masterwork_axe": 50, "masterwork_heavy_shield": 50, "energy_potion_++": 90, "gold": 90},
     "stats"    : {
@@ -237,6 +238,7 @@
   "orc_general_spear" : {
     "name"     : "Orc General",
     "gender"   : "its",
+    "ap"       : 8,
     "xp"       : 90,
     "drops"    : {"masterwork_spear": 50, "masterwork_heavy_shield": 50, "energy_potion_++": 90, "gold": 90},
     "stats"    : {

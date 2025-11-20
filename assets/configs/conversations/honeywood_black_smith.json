@@ -69,6 +69,7 @@
   },
   "quest_get_horseshoes"       : {
     "name"   : "Black Smith",
+    "comment"  : "WARNING: phraseId 200 is used in a conv condition.",
     "phrases": {
       "1"   : {"text": ["Howdy, neighbor! I'm Black Smith, the blacksmith. It never gets old to say that, ha ha! Can I help you?"]},
       "2"   : {

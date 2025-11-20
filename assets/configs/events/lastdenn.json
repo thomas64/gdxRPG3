@@ -1,0 +1,9 @@
+{
+  "event_lastdenn_entrance_guard": {
+    "type"          : "conversation",
+    "condition"     : ["is_lastdenn_entrance_closed"],
+    "conversationId": "lastdenn_entrance_guard",
+    "entityId"      : "soldier01",
+    "doesRepeat"    : true
+  }
+}

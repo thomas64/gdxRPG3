@@ -1,11 +1,13 @@
 package nl.t64.cot.components.conversation
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 import nl.t64.cot.components.condition.areAllTrue
 
 
 private const val DEFAULT_STARTING_PHRASE_ID = "1"
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class ConversationGraph(
     private val id: String = "",
     @JsonProperty("name")
