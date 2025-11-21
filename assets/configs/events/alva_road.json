@@ -1,0 +1,9 @@
+{
+  "event_alva_road_bag": {
+    "type"          : "conversation",
+    "condition"     : ["_time_after_09:25", "_c_<=_a_q_quest_alva_road_bag"],
+    "conversationId": "quest_alva_road_bag",
+    "entityId"      : "mozes",
+    "doesRepeat"    : true
+  }
+}

@@ -16,7 +16,8 @@ data class QuestGraph(
     val summary: String = "",
     val isSubQuest: Boolean = false,
     var isHidden: Boolean = false,
-    val isHidingMessagesAfterFinishing: Boolean = false,
+    val shouldHideMessagesAfterAndIncludingFinished: Boolean = false,
+    val shouldHideMessagesAfterFinished: Boolean = false,
     val isResettable: Boolean = true,
     val linkedWith: List<String> = emptyList(),
     val tasks: Map<String, QuestTask> = emptyMap()
@@ -25,14 +26,16 @@ data class QuestGraph(
     var resetState: QuestState = QuestState.UNKNOWN
     var isFailed: Boolean = false
     var wasFailed: Boolean = false
+    var isUnclaimedOrFinishedButAlsoUnknown: Boolean = false
 
     private val titleWithoutPrefix: String = title.removeSuffix(" [M]")
 
     override fun toString(): String {
         return when {
             isFailed -> "[FIREBRICK]x[GRAY]    $title"
-            currentState == QuestState.FINISHED -> "[GRAY]v    $title"
             currentState == QuestState.UNCLAIMED -> "o    $title"
+            currentState == QuestState.FINISHED -> "[GRAY]v    $title"
+            resetState == QuestState.UNCLAIMED -> "o    $title"
             resetState == QuestState.FINISHED && !isResettable -> "[GRAY]v    $title"
             resetState == QuestState.FINISHED -> "[GRAY]r    $title"
             else -> "      $title"
@@ -62,8 +65,11 @@ data class QuestGraph(
     }
 
     private fun isSubQuestAcceptedOrNotFinishedInThePast(subQuest: QuestGraph): Boolean {
-        return subQuest.currentState.isEqualOrHigherThan(QuestState.ACCEPTED)
-            || (subQuest.resetState.isEqualOrHigherThan(QuestState.ACCEPTED) && subQuest.resetState != QuestState.FINISHED)
+        if (subQuest.currentState.isEqualOrHigherThan(QuestState.ACCEPTED)) {
+            return true
+        }
+        return subQuest.resetState.isEqualOrHigherThan(QuestState.ACCEPTED)
+            && subQuest.resetState != QuestState.FINISHED
     }
 
     private fun getSpecificHiddenTasksOfAcceptedSubQuests(): Map<String, QuestTask> {
@@ -89,6 +95,7 @@ data class QuestGraph(
     fun know() {
         if (currentState == QuestState.UNKNOWN) {
             currentState = QuestState.KNOWN
+            isUnclaimedOrFinishedButAlsoUnknown = false
         }
     }
 
@@ -106,6 +113,7 @@ data class QuestGraph(
 
     private fun setAcceptedAndPossiblyShowMessage() {
         currentState = QuestState.ACCEPTED
+        isUnclaimedOrFinishedButAlsoUnknown = false
         if (isSubQuest) {
             showMessageTooltipQuestUpdated()
         } else {
@@ -114,7 +122,16 @@ data class QuestGraph(
     }
 
     fun unclaim() {
+        if (resetState == QuestState.UNKNOWN && currentState == QuestState.UNKNOWN) {
+            isUnclaimedOrFinishedButAlsoUnknown = true
+        } else {
+            isUnclaimedOrFinishedButAlsoUnknown = false
+        }
         currentState = QuestState.UNCLAIMED
+    }
+
+    fun forceSetAllTasksComplete() {
+        tasks.keys.forEach { setTaskComplete(it, false) }
     }
 
     private fun setCompleteTasksComplete() {
@@ -245,6 +262,10 @@ data class QuestGraph(
         }
     }
 
+    fun hasTaskWithConversationId(conversationId: String): Boolean {
+        return tasks.values.any { conversationId in it.conversationIds }
+    }
+
     private fun unhideTaskWithLinkedTask(questTask: QuestTask) {
         questTask.isHidden = false
         handleLinkedTasksOf(questTask)
@@ -279,12 +300,6 @@ data class QuestGraph(
             .all { it.value.isComplete }
     }
 
-    fun forceFinish() {
-        if (currentState != QuestState.FINISHED) {
-            finish(false)
-        }
-    }
-
     private fun possibleFinish(showTooltip: Boolean) {
         if (isReadyToBeFinished()) {
             if (resetState == QuestState.FINISHED) {
@@ -304,8 +319,16 @@ data class QuestGraph(
     fun finish(showTooltip: Boolean) {
         XpRewarder.receivePossibleXp(id)
         possibleSetLastReturnTaskComplete()
-        currentState = QuestState.FINISHED
-        if (showTooltip) showMessageTooltipQuestCompleted()
+
+        if (resetState == QuestState.UNKNOWN && currentState == QuestState.UNKNOWN) {
+            currentState = QuestState.FINISHED
+            isUnclaimedOrFinishedButAlsoUnknown = true
+            // never showTooltip when finishing a quest directly from UNKNOWN to FINISHED
+        } else {
+            currentState = QuestState.FINISHED
+            isUnclaimedOrFinishedButAlsoUnknown = false
+            if (showTooltip) showMessageTooltipQuestCompleted()
+        }
     }
 
     private fun possibleSetLastReturnTaskComplete() {
@@ -335,15 +358,17 @@ data class QuestGraph(
     }
 
     private fun showMessageTooltipQuestNew() {
-        if (isHidingMessagesAfterFinishing && isOneOfBothStatesEqualOrHigherThan(QuestState.FINISHED)) return
-        if (!isHidden && resetState == QuestState.UNKNOWN) {
+        if (shouldShowMessage()
+            && !isHidden
+            && resetState == QuestState.UNKNOWN
+        ) {
             worldScreen.showMessageTooltip("New quest:" + System.lineSeparator() + titleWithoutPrefix)
         }
     }
 
     private fun showMessageTooltipQuestUpdated() {
-        if (isHidingMessagesAfterFinishing && isOneOfBothStatesEqualOrHigherThan(QuestState.FINISHED)) return
-        if (!isHidden
+        if (shouldShowMessage()
+            && !isHidden
             && (currentState == QuestState.ACCEPTED || resetState == QuestState.ACCEPTED)
             && (!isReadyToBeFinished() || (isSubQuest && isReadyToBeFinished()))
         ) {
@@ -352,8 +377,10 @@ data class QuestGraph(
     }
 
     private fun showMessageTooltipQuestCompleted() {
-        if (isHidingMessagesAfterFinishing && isOneOfBothStatesEqualOrHigherThan(QuestState.FINISHED)) return
-        if (!isHidden && !isSubQuest) {
+        if (shouldShowMessage()
+            && !isHidden
+            && !isSubQuest
+        ) {
             stopAllSe()
             playSe(AudioEvent.SE_REWARD)
             worldScreen.showMessageTooltip("Quest completed:" + System.lineSeparator() + titleWithoutPrefix)
@@ -361,12 +388,27 @@ data class QuestGraph(
     }
 
     private fun showMessageTooltipQuestFailed() {
-        if (isHidingMessagesAfterFinishing && isOneOfBothStatesEqualOrHigherThan(QuestState.FINISHED)) return
-        if (!isFailed && isOneOfBothStatesEqualOrHigherThan(QuestState.KNOWN)) {
+        if (shouldShowMessage()
+            && !isFailed
+            && isOneOfBothStatesEqualOrHigherThan(QuestState.KNOWN)
+        ) {
             stopAllSe()
             playSe(AudioEvent.SE_QUEST_FAIL)
             worldScreen.showMessageTooltip("Quest failed:" + System.lineSeparator() + titleWithoutPrefix)
         }
     }
 
+    private fun shouldShowMessage(): Boolean {
+        if (shouldHideMessagesAfterAndIncludingFinished
+            && isOneOfBothStatesEqualOrHigherThan(QuestState.FINISHED)
+        ) {
+            return false
+        }
+        if (shouldHideMessagesAfterFinished
+            && resetState == QuestState.FINISHED
+        ) {
+            return false
+        }
+        return true
+    }
 }

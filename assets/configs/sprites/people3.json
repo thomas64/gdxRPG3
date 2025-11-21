@@ -17,5 +17,6 @@
   "fairy6"        : {"source": "fairies", "col": 2, "row": 2},
   "fairy7"        : {"source": "fairies", "col": 3, "row": 2},
   "fairy8"        : {"source": "fairies", "col": 4, "row": 2},
-  "deryk"         : {"source": "hero3", "col": 3, "row": 2}
+  "deryk"         : {"source": "hero3", "col": 3, "row": 2},
+  "traveler"      : {"source": "hero3", "col": 2, "row": 2}
 }

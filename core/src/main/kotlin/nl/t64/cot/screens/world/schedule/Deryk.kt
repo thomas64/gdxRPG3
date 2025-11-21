@@ -7,6 +7,7 @@ import nl.t64.cot.screens.world.entity.*
 import nl.t64.cot.screens.world.entity.Direction.*
 import nl.t64.cot.screens.world.entity.EntityState.*
 
+
 class Deryk : EntitySchedule() {
 
     override val entity = Entity("deryk", InputEmpty(), PhysicsScheduledNpc(), GraphicsScheduledNpc("deryk"))

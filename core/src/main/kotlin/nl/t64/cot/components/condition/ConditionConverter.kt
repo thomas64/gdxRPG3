@@ -191,6 +191,7 @@ object ConditionConverter {
             conditionId.contains("_===_") -> questState.all { it == conditionState }
             conditionId.contains("_<=_") -> questState.any { it.isEqualOrLowerThan(conditionState) }
             conditionId.contains("_>=_") -> questState.any { it.isEqualOrHigherThan(conditionState) }
+            conditionId.contains("_>_") -> questState.any { it.isHigherThan(conditionState) }
             else -> throw IllegalArgumentException("No defined operator found.")
         }
     }

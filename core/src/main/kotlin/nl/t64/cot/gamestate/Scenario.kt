@@ -83,9 +83,9 @@ class Scenario {
 
     private fun setQuestGraceComplete() {
         val questGrace = gameData.quests.getQuestById("quest_grace_is_missing")
-        questGrace.setTaskComplete("9", showTooltip = false)
-        questGrace.setTaskComplete("10", showTooltip = false)
-        questGrace.forceFinish()
+        questGrace.setTaskComplete("9", showTooltip = false)    // "_9_"
+        questGrace.setTaskComplete("10", showTooltip = false)   // "_10_"
+        questGrace.finish(false)
     }
 
     private fun addQuestArdorToLogbook() {

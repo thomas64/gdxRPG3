@@ -18,6 +18,7 @@ class WorldSchedule {
                                                                HoneywoodAcademy1(),
                                                                HoneywoodAcademy2(),
                                                                Deryk(),
+                                                               AlvaTraveler(),
                                                                Garrin(),
                                                                Ghost(),
                                                                Paton(),

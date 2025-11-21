@@ -10,6 +10,7 @@ class QuestContainer {
     fun getAllKnownQuestsForVisual(): Array<QuestGraph> = quests.values
         .filterNot { it.isHidden }
         .filterNot { it.isSubQuest }
+        .filterNot { it.isUnclaimedOrFinishedButAlsoUnknown }
         .filter { it.isOneOfBothStatesEqualOrHigherThan(QuestState.KNOWN) }
         .sortedWith(compareBy({ it.resetState }, { it.isFailed }, { it.currentState }, { it.id }))
         .toTypedArray()
@@ -36,6 +37,10 @@ class QuestContainer {
 
     fun contains(questId: String): Boolean {
         return quests.containsKey(questId)
+    }
+
+    fun getSingleQuestByTaskWithConversationId(conversationId: String): QuestGraph {
+        return quests.values.single { it.hasTaskWithConversationId(conversationId) }
     }
 
     fun getQuestById(questId: String): QuestGraph {

@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.mapManager
+import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.world.entity.events.*
 import kotlin.math.abs
@@ -37,7 +38,10 @@ class PhysicsPlayer : PhysicsComponent() {
         }
         if (event is SpeedEvent) {
             val feetPosition = Vector2(currentPosition.x + Constant.HALF_TILE_SIZE, currentPosition.y)
-            velocity = if (mapManager.isSpecialDirectionNorth(feetPosition)) Constant.MOVE_SPEED_1 else event.moveSpeed
+            velocity = if (
+                !preferenceManager.isDebugModeOn
+                && mapManager.isSpecialDirectionNorth(feetPosition)
+            ) Constant.MOVE_SPEED_1 else event.moveSpeed
         }
         if (event is ActionEvent && actionCooldown <= 0f) {
             isActionPressed = true

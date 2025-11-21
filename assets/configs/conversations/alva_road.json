@@ -1,0 +1,30 @@
+{
+  "quest_alva_road_bag"  : {
+    "name"   : "Mozes",
+    "phrases": {
+      "1" : {
+        "text": ["It's an empty bag."], "choices": [
+          {"condition": ["i_r_==_u_q_this"], "text": "->", "command": "ACCEPT_QUEST", "nextId": "2"},
+          {"condition": ["i_r_==_a_q_this"], "text": "->", "command": "ACCEPT_QUEST", "nextId": "10"},
+          {"condition": ["i_r_>_a_q_this"], "text": "->", "command": "ACCEPT_QUEST", "nextId": "20"}
+        ]
+      },
+      "2" : {"text": ["Did someone lose this? Looks like it was dropped not long ago. Must have been this morning."]},
+      "3" : {"text": ["I wonder who it belongs to..."], "choices": [{"command": "EXIT", "nextId": "10"}]},
+      "10": {"text": ["I think it must belong to someone who traveled here this morning."], "choices": [{"command": "EXIT", "nextId": "10"}]},
+      "20": {"text": ["It belongs to the traveler I met earlier, in a different time cycle."], "choices": [{"command": "EXIT", "nextId": "20"}]}
+    }
+  },
+  "alva_traveler_waiting": {
+    "name"   : "Traveler",
+    "phrases": {
+      "1"   : {"text": ["Hi there! It's nice to see a friendly face on this road."]},
+      "2"   : {"text": ["Monsters everywhere, you know."]},
+      "3"   : {"text": ["But I can handle myself. I have something special that keeps me safe."]},
+      "4"   : {"text": ["Wear this cloak in battle, and you'll find that monsters will be somewhat less likely to attack you."]},
+      "5"   : {"text": ["Here, you can have it. I have another one."], "choices": [{"command": "FINISH_ALL_TASKS_AND_REWARD_QUEST_LINKED"}]},
+      "1399": {"text": ["Don't be shy, take it! I have a spare."], "choices": [{"command": "FINISH_ALL_TASKS_AND_REWARD_QUEST_LINKED"}]},
+      "1400": {"text": ["Pretty cool right? Take care on the road!"], "choices": [{"command": "EXIT", "nextId": "1400"}]}
+    }
+  }
+}

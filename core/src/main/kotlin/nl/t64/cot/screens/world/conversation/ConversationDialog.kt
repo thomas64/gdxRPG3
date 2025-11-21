@@ -216,6 +216,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             ConversationCommand.DELIVER_QUEST_MESSAGE -> deliverQuestMessage(nextId)
 
             ConversationCommand.REWARD_QUEST -> rewardQuest()
+            ConversationCommand.FINISH_ALL_TASKS_AND_REWARD_QUEST_LINKED -> finishAllAndRewardLinkedQuest()
 
             else -> throw IllegalArgumentException("ConversationCommand '$conversationCommand' cannot be reached here.")
         }
@@ -414,6 +415,13 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     private fun rewardQuest() {
         val quest = gameData.quests.getQuestById(conversationId)
         val reward = gameData.loot.getLoot(conversationId)
+        endConversationAndLoad { RewardScreen.load(reward, quest, graph) }
+    }
+
+    private fun finishAllAndRewardLinkedQuest() {
+        val quest = gameData.quests.getSingleQuestByTaskWithConversationId(conversationId)
+        quest.forceSetAllTasksComplete()
+        val reward = gameData.loot.getLoot(quest.id)
         endConversationAndLoad { RewardScreen.load(reward, quest, graph) }
     }
 

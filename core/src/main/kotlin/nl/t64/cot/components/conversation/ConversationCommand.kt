@@ -38,6 +38,7 @@ enum class ConversationCommand {
     DELIVER_QUEST_MESSAGE,
 
     REWARD_QUEST,
+    FINISH_ALL_TASKS_AND_REWARD_QUEST_LINKED,
 
     NONE,
 
