@@ -11,4 +11,12 @@ class DoorContainer {
         return doors[doorId]!!
     }
 
+    fun toProgress(): Map<String, DoorProgress> {
+        return doors.mapValues { it.value.toProgress() }
+    }
+
+    fun applyProgress(progress: Map<String, DoorProgress>) {
+        progress.forEach { (id, p) -> doors[id]!!.applyProgress(p) }
+    }
+
 }

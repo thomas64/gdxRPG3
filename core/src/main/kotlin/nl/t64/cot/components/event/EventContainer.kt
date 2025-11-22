@@ -34,7 +34,7 @@ class EventContainer {
     }
 
     fun applyProgress(progress: Map<String, EventProgress>) {
-        progress.forEach { (id, p) -> events[id]?.applyProgress(p) }
+        progress.forEach { (id, p) -> events[id]!!.applyProgress(p) }
     }
 
 }

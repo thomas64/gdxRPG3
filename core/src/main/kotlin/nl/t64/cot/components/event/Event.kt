@@ -14,6 +14,11 @@ import nl.t64.cot.components.condition.ConditionDatabase
 import nl.t64.cot.screens.dialog.MessageDialog
 
 
+data class EventProgress(
+    val hasPlayed: Boolean = false,
+    val isRepeated: Boolean = false
+)
+
 class Event(
     private val type: String = "",
     @JsonProperty("condition")

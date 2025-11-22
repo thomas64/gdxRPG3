@@ -63,7 +63,7 @@ internal class NpcEntitiesLoader(private val currentMap: GameMap) {
         if (gameMapEnemy.state == EntityState.IMMOBILE) {
             brokerManager.actionObservers.addObserver(enemyEntity)
         } else {
-            if (gameData.battles.doEnemiesWantToBattle(gameMapEnemy.battleId)) {
+            if (gameData.battles.doEnemiesWantToFight(gameMapEnemy.battleId)) {
                 brokerManager.detectionObservers.addObserver(enemyEntity)
             }
             brokerManager.bumpObservers.addObserver(enemyEntity)

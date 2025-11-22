@@ -4,6 +4,11 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import nl.t64.cot.audio.AudioEvent
 
 
+data class DoorProgress(
+    val isLocked: Boolean = false,
+    val isClosed: Boolean = true
+)
+
 class Door(
     val type: DoorType = DoorType.SMALL,    // this will become replaced by the correct json value.
     val spriteId: String = "",
@@ -21,6 +26,15 @@ class Door(
     var isLocked: Boolean = if (keyId == null) false else true
     var isClosed: Boolean = true
     val isOpen: Boolean get() = !isClosed
+
+    fun toProgress(): DoorProgress {
+        return DoorProgress(isLocked, isClosed)
+    }
+
+    fun applyProgress(progress: DoorProgress) {
+        isLocked = progress.isLocked
+        isClosed = progress.isClosed
+    }
 
     fun wasLockedOnce(): Boolean {
         return !isLocked && keyId != null

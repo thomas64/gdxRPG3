@@ -2,10 +2,12 @@ package nl.t64.cot.gamestate
 
 import nl.t64.cot.Utils.scenario
 import nl.t64.cot.components.battle.BattleContainer
+import nl.t64.cot.components.battle.BattleProgress
 import nl.t64.cot.components.conversation.ConversationContainer
 import nl.t64.cot.components.conversation.PhraseIdContainer
 import nl.t64.cot.components.cutscene.CutsceneContainer
 import nl.t64.cot.components.door.DoorContainer
+import nl.t64.cot.components.door.DoorProgress
 import nl.t64.cot.components.event.EventContainer
 import nl.t64.cot.components.event.EventProgress
 import nl.t64.cot.components.loot.LootContainer
@@ -83,13 +85,13 @@ class GameData : ProfileObserver {
         profileManager.setProperty("inventory", inventory)
         profileManager.setProperty("storage", storage)
         profileManager.setProperty("shops", shops)
-        profileManager.setProperty("battles", battles)
+        profileManager.setProperty("battles", battles.toProgress())
         profileManager.setProperty("conversations", conversations.createPhraseIdContainer())
         profileManager.setProperty("quests", quests)
         profileManager.setProperty("events", events.toProgress())
         profileManager.setProperty("loot", loot)
         profileManager.setProperty("spoils", spoils)
-        profileManager.setProperty("doors", doors)
+        profileManager.setProperty("doors", doors.toProgress())
         profileManager.setProperty("cutscenes", cutscenes)
         profileManager.setProperty("portals", portals)
         profileManager.setProperty("isTooltipEnabled", isTooltipEnabled)
@@ -104,7 +106,10 @@ class GameData : ProfileObserver {
         inventory = profileManager.getProperty("inventory")
         storage = profileManager.getProperty("storage")
         shops = profileManager.getProperty("shops")
-        battles = profileManager.getProperty("battles")
+        battles = BattleContainer().apply {
+            val progress: Map<String, BattleProgress> = profileManager.getProperty("battles")
+            this.applyProgress(progress)
+        }
         conversations = ConversationContainer().apply {
             val container: PhraseIdContainer = profileManager.getProperty("conversations")
             this.setCurrentPhraseIds(container)
@@ -116,7 +121,10 @@ class GameData : ProfileObserver {
         }
         loot = profileManager.getProperty("loot")
         spoils = profileManager.getProperty("spoils")
-        doors = profileManager.getProperty("doors")
+        doors = DoorContainer().apply {
+            val progress: Map<String, DoorProgress> = profileManager.getProperty("doors")
+            this.applyProgress(progress)
+        }
         cutscenes = profileManager.getProperty("cutscenes")
         portals = profileManager.getProperty("portals")
         isTooltipEnabled = profileManager.getProperty("isTooltipEnabled")
