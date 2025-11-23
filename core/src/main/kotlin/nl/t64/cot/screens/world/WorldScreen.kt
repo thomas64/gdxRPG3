@@ -351,6 +351,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
 
     override fun show() {
         if (gameState !in listOf(GameState.DIALOG, GameState.BATTLE)) mapManager.continueAudio()
+        mapManager.updateBgsVolumes(player.position)
         gameState = GameState.RUNNING
         setInputProcessors(multiplexer)
         Utils.disposeScreenshots()

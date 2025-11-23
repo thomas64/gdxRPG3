@@ -1,0 +1,16 @@
+{
+  "alva_battle_01": {"battlers": [{"id": "green_slime", "amount": 3}], "background": "field"},
+  "alva_battle_02": {"battlers": [{"id": "blue_slime", "amount": 1}, {"id": "green_slime", "amount": 2}], "background": "field"},
+  "alva_battle_03": {"battlers": [{"id": "blue_bat", "amount": 5}], "background": "field"},
+  "alva_battle_04": {"battlers": [{"id": "blue_slime", "amount": 2}, {"id": "green_slime", "amount": 1}], "background": "field"},
+  "alva_battle_05": {"battlers": [{"id": "purple_bat", "amount": 1}, {"id": "blue_bat", "amount": 2}], "background": "field"},
+  "alva_battle_06": {"battlers": [{"id": "purple_bat", "amount": 2}, {"id": "blue_bat", "amount": 1}], "background": "field"},
+  "alva_battle_07": {"battlers": [{"id": "blue_slime", "amount": 2}, {"id": "green_slime", "amount": 2}], "background": "field"},
+  "alva_battle_08": {"battlers": [{"id": "purple_bat", "amount": 2}, {"id": "blue_bat", "amount": 1}], "background": "field"},
+  "alva_battle_09": {"battlers": [{"id": "green_slime", "amount": 3}, {"id": "blue_bat", "amount": 3}], "background": "field"},
+  "alva_battle_10": {"battlers": [{"id": "green_imp", "amount": 1}], "background": "field"},
+  "alva_battle_11": {"battlers": [{"id": "orc_scout_spear", "amount": 2}], "background": "forest_alva"},
+  "alva_battle_12": {"battlers": [{"id": "blue_slime", "amount": 2}, {"id": "purple_bat", "amount": 2}], "background": "field"},
+  "alva_battle_13": {"battlers": [{"id": "purple_bat", "amount": 2}, {"id": "blue_bat", "amount": 2}], "background": "field"},
+  "alva_battle_14": {"battlers": [{"id": "green_slime", "amount": 5}], "background": "field"}
+}

@@ -11,7 +11,7 @@
       },
       "2" : {"text": ["Did someone lose this? Looks like it was dropped not long ago. Must have been this morning."]},
       "3" : {"text": ["I wonder who it belongs to..."], "choices": [{"command": "EXIT", "nextId": "10"}]},
-      "10": {"text": ["I think it must belong to someone who traveled here this morning."], "choices": [{"command": "EXIT", "nextId": "10"}]},
+      "10": {"text": ["I figured it must belong to someone who traveled here this morning."], "choices": [{"command": "EXIT", "nextId": "10"}]},
       "20": {"text": ["It belongs to the traveler I met earlier, in a different time cycle."], "choices": [{"command": "EXIT", "nextId": "20"}]}
     }
   },
@@ -25,6 +25,23 @@
       "5"   : {"text": ["Here, you can have it. I have another one."], "choices": [{"command": "FINISH_ALL_TASKS_AND_REWARD_QUEST_LINKED"}]},
       "1399": {"text": ["Don't be shy, take it! I have a spare."], "choices": [{"command": "FINISH_ALL_TASKS_AND_REWARD_QUEST_LINKED"}]},
       "1400": {"text": ["Pretty cool right? Take care on the road!"], "choices": [{"command": "EXIT", "nextId": "1400"}]}
+    }
+  },
+  "alva_heal_price-0"    : {
+    "name"     : "Fairy Healer",
+    "condition": ["_time_after_18:15"], "startAt": "10",
+    "phrases"  : {
+      "1" : {"text": ["Dear traveler, if you'd like, I can put you to sleep among my healing flowers for 1 hour. Your wounds will mend while you rest. Would you like to accept this healing?"]},
+      "2" : {
+        "choices": [
+          {"text": "*Gladly accept her healing offer.* [BLUE](Restore health)", "command": "HEAL_LIFE_0060", "nextId": "3"},
+          {"text": "*Politely decline her offer. Take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "3" : {"text": ["Your health has been fully restored. Go with my blessings, traveler."], "choices": [{"command": "EXIT"}]},
+      "10": {"text": ["Dear traveler, if it was a bit earlier, I could have put you to sleep among my healing flowers. Your wounds would have mended while you rested."]},
+      "11": {"text": ["But out here, it's hard to cultivate healing flowers, so these flowers lose their power in the evening."]},
+      "12": {"text": ["If you come back some other time in the morning of afternoon, I would be happy to help you. I'm very sorry."], "choices": [{"command": "EXIT"}]}
     }
   }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="160" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="20" nextobjectid="253">
+<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="160" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="22" nextobjectid="280">
  <properties>
   <property name="bgm" value="bgm_overworld"/>
   <property name="bgs" value="bgs_river"/>
@@ -28,7 +28,7 @@
  </layer>
  <layer id="4" name="under2_water" width="160" height="70">
   <data encoding="base64" compression="zlib">
-   eJzt3MtNw0AUhtFpg7BOorgDQn3QCVQAHfBoADrg0QNs8AYJQgJ2NMMPyTmS5e0srj7dkRKXAl8tu1KOus1vaGnSz9hBt/kNrXzXPf2jpZ+6p3+0MqR7+kcLQ7s3MXs0oHsk2ftI0j+S7H0k6R5J9j6S9I8k/SPpalHKdf/crHnfLtKnY9c99DP22D9Pa97P5o/G9I8k/SNJ/0jSP5Le+3falXLS6R+/671/5/3snXX6x++y/5Fk/yNptX8f90D9o7XV/n3cA/WP1ux/JNn/SNI/kvSPlKHfPYDaxnz3wO+gqW3o/379D4QW9I8k/SNJ/z67mJZyOU2fYn/oH0n6R5L+AfAfvMxKeZ2lT8G+msxLOZynT8G+Wvazd7xD8+f+S5L7L0n6R5L+kaR/JOkfSfpHkv6RpH8k6R9J+keS/pGkfyTpH0lj+ge16R5J9j5S7H2kuPeSMqZ7+kdNY7vn3kstNbrn+zxsY5vurdv77vrZuzd/DDS2d/Y+atq2e+691KB/JP31/r0B+GtA7Q==
+   eJzt3LFOFFEUx+HzCIZY6FIDYWosgHfwUXgLfRNtbbS0UylptKJF7XwAbJyGBHHRmc29/Nfd70sm097i5Jczm52pgj+dDFXHw/136GkxztjT4f479PK37ukfPf2re/pHL1O6p3/0MLV7C7NHB7pHkr2PJP0jyd5Hku6RZO8jSf9I0j+SPhxWfRyvT0vu54fp07HprsYZ+zpe35bcv5s/OtM/kvSPJP0jSf9Iuunfy6HqxaB/PKyb/r0eZ+/VoH88LPsfSfY/ku727/YeqH/0drd/t/dA/aM3+x9J9j+S9I8k/SNl6ncPoLU53z3wP2ham/rer/dA6EH/SNI/kvTvd2/3qt7tpU+xPfSPJP0jSf8A+B9c71f93E+fgm21OKjaPUifgm11Ms7e6QbNn+dfkjz/kqR/JOkfSfpHkv6RpH/r6fJJ1dmj9Cn607/1tPO46v1O+hT96R9J+keS/pGkfyTpH0n6R9Kc/kFrukeSvY+Unnvfj6OqN0ftz8xm6P3c+/xZ1YX5Y4k53bP/0dLc7nnupZUW3fN9HlaxSveW7X2fx9n7Yv6YaG7v7H20tGr3/O5HC/pH0rr37xdT6Ebe
   </data>
  </layer>
  <layer id="5" name="under3_water_rock" width="160" height="70">
@@ -48,7 +48,7 @@
  </layer>
  <layer id="8" name="over6_trees" width="160" height="70">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer id="9" name="over7_none" width="160" height="70">
@@ -61,7 +61,7 @@
    eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeDCvAAAB
   </data>
  </layer>
- <objectgroup color="#aaffff" id="19" name="bgs_volume">
+ <objectgroup color="#aaffff" id="19" name="bgs_volume" visible="0">
   <object id="251" name="bgs_river" type="1000" x="2928" y="456" width="576" height="624"/>
  </objectgroup>
  <objectgroup color="#0055ff" id="16" name="sound" visible="0">
@@ -155,6 +155,7 @@
   <object id="184" x="1488" y="864" width="48" height="24"/>
   <object id="192" x="3504" y="960" width="48" height="48"/>
   <object id="204" x="1836" y="984" width="24" height="30"/>
+  <object id="256" x="3648" y="1440" width="48" height="48"/>
  </objectgroup>
  <objectgroup color="#aa0000" id="13" name="collision">
   <object id="3" x="552" y="1440" width="72" height="48"/>
@@ -278,7 +279,68 @@
   <object id="201" x="3360" y="1032" width="48" height="12"/>
   <object id="202" x="3024" y="1032" width="48" height="12"/>
  </objectgroup>
- <objectgroup color="#5500ff" id="17" name="rest"/>
+ <objectgroup color="#5500ff" id="17" name="rest">
+  <object id="253" name="chest_alva_03" x="1680" y="1200" width="48" height="48"/>
+  <object id="255" name="chest_alva_04" x="3600" y="1440" width="48" height="48"/>
+  <object id="257" name="sparkle_alva_10" type="none" x="3648" y="1440" width="48" height="48"/>
+  <object id="258" name="sparkle_alva_11" x="192" y="1488" width="48" height="48"/>
+  <object id="259" name="sparkle_alva_12" x="1536" y="1218" width="48" height="48"/>
+  <object id="260" name="sparkle_alva_13" x="1728" y="1008" width="48" height="48"/>
+  <object id="261" name="sparkle_alva_14" x="1488" y="624" width="48" height="48"/>
+  <object id="262" name="sparkle_alva_15" x="2352" y="336" width="48" height="48"/>
+  <object id="263" name="sparkle_alva_16" x="1128" y="1344" width="48" height="48"/>
+  <object id="264" name="sparkle_alva_17" x="2166" y="804" width="48" height="48"/>
+  <object id="265" name="sparkle_alva_18" x="2052" y="1254" width="48" height="48"/>
+  <object id="266" name="sparkle_alva_19" x="3552" y="768" width="48" height="48"/>
+  <object id="267" name="sparkle_alva_20" x="3024" y="480" width="42" height="48"/>
+  <object id="268" name="sparkle_alva_21" x="2778" y="1176" width="48" height="48"/>
+  <object id="269" name="sparkle_alva_22" x="144" y="1170" width="48" height="48"/>
+  <object id="271" name="sparkle_alva_23" x="3360" y="480" width="48" height="48"/>
+ </objectgroup>
+ <objectgroup color="#ff007f" id="20" name="enemy">
+  <object id="272" name="purple_bat" type="f" x="192" y="1248" width="48" height="24">
+   <properties>
+    <property name="battleId" value="alva_battle_08"/>
+   </properties>
+  </object>
+  <object id="273" name="green_slime" type="w" x="1296" y="1176" width="48" height="24">
+   <properties>
+    <property name="battleId" value="alva_battle_09"/>
+   </properties>
+  </object>
+  <object id="275" name="green_imp" type="f" x="1872" y="1296" width="48" height="24">
+   <properties>
+    <property name="battleId" value="alva_battle_10"/>
+   </properties>
+  </object>
+  <object id="276" name="orc_scout" type="w" x="3456" y="1488" width="48" height="24">
+   <properties>
+    <property name="battleId" value="alva_battle_11"/>
+   </properties>
+  </object>
+  <object id="277" name="blue_slime" type="w" x="2856" y="1152" width="48" height="24">
+   <properties>
+    <property name="battleId" value="alva_battle_12"/>
+   </properties>
+  </object>
+  <object id="278" name="green_slime" type="w" x="2496" y="648" width="48" height="24">
+   <properties>
+    <property name="battleId" value="alva_battle_14"/>
+   </properties>
+  </object>
+  <object id="279" name="purple_bat" type="f" x="1944" y="360" width="48" height="24">
+   <properties>
+    <property name="battleId" value="alva_battle_13"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup color="#55ff7f" id="21" name="npc">
+  <object id="270" name="fairy6" type="f" x="912" y="864" width="48" height="24">
+   <properties>
+    <property name="conversation" value="alva_heal_price-0"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup color="#55aaff" id="12" name="spawn">
   <object id="2" name="alva_road_west" x="288" y="1656" width="48" height="24"/>
   <object id="248" name="lastdenn" x="3792" y="864" width="48" height="24"/>

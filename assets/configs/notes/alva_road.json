@@ -1,0 +1,20 @@
+{
+  "note_alva_save": {
+    "phrases": {
+      "1": {
+        "text": [
+          "This statue here looks like it depicts something of the Goddess Savia.",
+          "She is said to protect travelers savely on the road.",
+          "Perhaps praying to it would make you save?"
+        ]
+      },
+      "2": {
+        "choices": [
+          {"text": "*Kneel down and pray to the statue.* [BLUE](Save game)", "nextId": "3"},
+          {"text": "*You don't believe in such heathen things. Leave it be.*", "command": "EXIT"}
+        ]
+      },
+      "3": {"text": ["Your prayer probably has been heard."], "choices": [{"command": "SAVE_GAME"}]}
+    }
+  }
+}

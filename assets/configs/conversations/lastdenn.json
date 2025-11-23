@@ -29,7 +29,7 @@
       "16" : {"text": ["You may pass, but do not let word of this get out."], "choices": [{"command": "EXIT", "nextId": "200"}]},
       "20" : {"text": ["Wait... What?! Are you serious?"]},
       "21" : {"text": ["Guards! To me! I'm under attack!"], "choices": [{"command": "START_BATTLE"}]},
-      "100": {"text": ["It's after 15:00. The gate is open now. You may pass."], "choices": [{"command": "EXIT", "nextId": "100"}]},
+      "100": {"text": ["It's after 15:00. This passage is open now. Please, feel free to pass."], "choices": [{"command": "EXIT", "nextId": "100"}]},
       "200": {"text": ["I allowed you to pass. Please do not let word of this get out."], "choices": [{"command": "EXIT", "nextId": "200"}]}
     }
   },
