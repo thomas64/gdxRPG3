@@ -158,7 +158,8 @@ class Participant(
         return when (abilityItem.id) {
             AbilityItemId.BITE_3,
             AbilityItemId.BITE_4,
-            AbilityItemId.BODY_SLAM_2 -> Strike(abilityItem, this)
+            AbilityItemId.BODY_SLAM_2,
+            AbilityItemId.SCRATCH_2 -> Strike(abilityItem, this)
             AbilityItemId.STRIKE_2,
             AbilityItemId.STRIKE_3,
             AbilityItemId.STRIKE_3F,

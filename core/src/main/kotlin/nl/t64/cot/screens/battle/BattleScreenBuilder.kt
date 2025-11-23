@@ -185,6 +185,7 @@ class BattleScreenBuilder {
         val skillName: String? = when {
             enemy.id.endsWith("_bat") -> "bite"
             enemy.id.endsWith("_slime") || enemy.id.endsWith("_slime_medicine") -> "body_slam"
+            enemy.id.endsWith("_imp") -> "scratch"
             else -> enemy.getInventoryItem(InventoryGroup.WEAPON)?.id
         }
 

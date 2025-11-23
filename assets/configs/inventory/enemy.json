@@ -13,7 +13,7 @@
     "base_hit"    : 65,
     "damage"      : 30
   },
-  "attack_80_15" : {
+  "attack_80_15": {
     "group"       : "WEAPON",
     "skill"       : "AXE",
     "min_strength": 1,
@@ -27,9 +27,20 @@
     "base_hit"    : 80,
     "damage"      : 25
   },
+  "attack_90_15": {
+    "group"       : "WEAPON",
+    "skill"       : "DAGGER",
+    "min_strength": 1,
+    "base_hit"    : 90,
+    "damage"      : 15
+  },
   "armor_1"     : {
     "group"     : "CHEST",
     "protection": 1
+  },
+  "armor_2"     : {
+    "group"     : "CHEST",
+    "protection": 2
   },
   "armor_6"     : {
     "group"     : "CHEST",

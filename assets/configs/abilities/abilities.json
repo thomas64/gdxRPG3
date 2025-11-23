@@ -63,6 +63,14 @@
     "damage_formula"   : "(2f / 2f) * 1.0f",
     "description"      : []
   },
+  "scratch_2"   : {
+    "name"             : "Scratch",
+    "target"           : "ENEMY",
+    "ap"               : 2,
+    "damage_multiplier": 1.0,
+    "damage_formula"   : "(2f / 2f) * 1.0f",
+    "description"      : []
+  },
   "stagger"     : {
     "name"             : "Stagger",
     "target"           : "ENEMY",

@@ -15,7 +15,9 @@ perform_beauty
 bounds:0,48,48,48
 perform_chaos
 bounds:48,48,48,48
-stagger
+scratch
 bounds:96,48,48,48
-strike
+stagger
 bounds:144,48,48,48
+strike
+bounds:192,48,48,48

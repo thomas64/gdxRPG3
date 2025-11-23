@@ -11,8 +11,8 @@ enum class AbilityItemId : SuperEnum {
 
     BITE_3,
     BITE_4,
-
     BODY_SLAM_2,
+    SCRATCH_2,
 
     STAGGER,
 
