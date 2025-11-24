@@ -35,38 +35,54 @@ class EnemyContainer(
     }
 
     private fun createEnemies(battleId: String): List<EnemyItem> {
-        val (battlersWithPostfix, battlers) = gameData.battles.getBattlers(battleId)
-            .partition { battler -> battler.id.count { it == '_' } == 2 }
-        return battlers.toEnemies() + battlersWithPostfix.toEnemiesWithSameIdAndNameWithIndex()
+        val battlers: List<Battler> = gameData.battles.getBattlers(battleId)
+        val (variantEnemies, standardEnemies) = battlers.partition { it.isVariantEnemy() }
+
+        return standardEnemies.toStandardEnemies() +
+            variantEnemies.toVariantEnemiesWithGlobalIndexPerBaseType()
     }
 
-    private fun List<Battler>.toEnemies(): List<EnemyItem> {
+    private fun Battler.isVariantEnemy(): Boolean {
+        return this.id.count { it == '_' } == 2
+    }
+
+    private fun List<Battler>.toStandardEnemies(): List<EnemyItem> {
         return this.flatMap { battler ->
-            List(battler.amount) { index ->
+            List(battler.amount) { indexInGroup ->
                 if (battler.amount > 1) {
-                    EnemyDatabase.createEnemyWithIndexAfterName(battler.id, index)
+                    EnemyDatabase.createStandardEnemyWithIndex(battler.id, indexInGroup)
                 } else {
-                    EnemyDatabase.createEnemy(battler.id)
+                    EnemyDatabase.createStandardEnemy(battler.id)
                 }
             }
         }
     }
 
-    private fun List<Battler>.toEnemiesWithSameIdAndNameWithIndex(): List<EnemyItem> {
-        var globalSpecialIndex = 0
+    private fun List<Battler>.toVariantEnemiesWithGlobalIndexPerBaseType(): List<EnemyItem> {
         return this
-            .groupBy { it.id.substringBeforeLast('_') }
-            .flatMap { (prefix, battlersWithSamePrefix) ->
-                battlersWithSamePrefix.flatMap { battler ->
-                    List(battler.amount) {
-                        if (battlersWithSamePrefix.size > 1) {
-                            EnemyDatabase.createEnemyWithIndexAfterNameAndPrefixId(battler.id, prefix, globalSpecialIndex++)
+            .groupBy { it.extractBaseType() }
+            .flatMap { (baseType, variantsOfSameBaseType) ->
+                var globalIndexForCurrentBaseType = 0
+                val totalAmount = variantsOfSameBaseType.sumOf { it.amount }
+
+                variantsOfSameBaseType.flatMap { variant ->
+                    List(variant.amount) {
+                        if (totalAmount > 1) {
+                            EnemyDatabase.createVariantEnemyWithIndex(
+                                variant.id,
+                                baseType,
+                                globalIndexForCurrentBaseType++
+                            )
                         } else {
-                            EnemyDatabase.createEnemyWithPrefixId(battler.id, prefix)
+                            EnemyDatabase.createVariantEnemy(variant.id, baseType)
                         }
                     }
                 }
             }
+    }
+
+    private fun Battler.extractBaseType(): String {
+        return this.id.substringBeforeLast('_')
     }
 
 }

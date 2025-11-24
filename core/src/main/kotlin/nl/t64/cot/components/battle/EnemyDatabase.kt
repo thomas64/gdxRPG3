@@ -7,24 +7,24 @@ object EnemyDatabase {
 
     private val enemies: Map<String, EnemyItem> = ConfigDataLoader.createEnemies()
 
-    fun createEnemy(enemyId: String): EnemyItem {
+    fun createStandardEnemy(enemyId: String): EnemyItem {
         val enemyItem = enemies[enemyId]!!
         return enemyItem.createCopy()
     }
 
-    fun createEnemyWithIndexAfterName(enemyId: String, index: Int): EnemyItem {
+    fun createStandardEnemyWithIndex(enemyId: String, index: Int): EnemyItem {
         val enemyItem = enemies[enemyId]!!
         return enemyItem.createCopy(name = "${enemyItem.name} ${index + 1}")
     }
 
-    fun createEnemyWithPrefixId(enemyId: String, prefixOfEnemyId: String): EnemyItem {
+    fun createVariantEnemy(enemyId: String, baseId: String): EnemyItem {
         val enemyItem = enemies[enemyId]!!
-        return enemyItem.createCopy(id = prefixOfEnemyId)
+        return enemyItem.createCopy(id = baseId)
     }
 
-    fun createEnemyWithIndexAfterNameAndPrefixId(enemyId: String, prefixOfEnemyId: String, index: Int): EnemyItem {
+    fun createVariantEnemyWithIndex(enemyId: String, baseId: String, index: Int): EnemyItem {
         val enemyItem = enemies[enemyId]!!
-        return enemyItem.createCopy(id = prefixOfEnemyId, name = "${enemyItem.name} ${index + 1}")
+        return enemyItem.createCopy(id = baseId, name = "${enemyItem.name} ${index + 1}")
     }
 
 }
