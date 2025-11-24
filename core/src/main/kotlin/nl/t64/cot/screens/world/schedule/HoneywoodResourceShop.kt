@@ -14,17 +14,17 @@ class HoneywoodResourceShop : EntitySchedule() {
 
     override val scheduleParts: List<SchedulePart> = listOf(
         // @formatter:off
-        SchedulePart("honeywood", "08:59", "09:00", SOUTH, WALKING, "resource1", "resource2"),
-        SchedulePart("honeywood", "09:00", "17:00", SOUTH, IDLE,    "resource2", "resource2", "resourceshop_honeywood"),
-        SchedulePart("honeywood", "17:00", "17:01", NORTH, WALKING, "resource2", "resource1"),
+        SchedulePart("honeywood", "08:29", "08:30", SOUTH, WALKING, "resource1", "resource2"),
+        SchedulePart("honeywood", "08:30", "17:30", SOUTH, IDLE,    "resource2", "resource2", "resourceshop_honeywood"),
+        SchedulePart("honeywood", "17:30", "17:31", NORTH, WALKING, "resource2", "resource1"),
         // @formatter:on
     )
 
     override fun handleSideEffects() {
         if (mapManager.currentMap.mapTitle == "honeywood"
-            && gameData.clock.isCurrentTimeInBetween("09:00", "17:00")
+            && gameData.clock.isCurrentTimeInBetween("08:30", "17:30")
         ) {
-            val part = SchedulePart("honeywood", "09:00", "17:00", NONE, INVISIBLE, "resource3", "resource3", "resourceshop_honeywood")
+            val part = SchedulePart("honeywood", "08:30", "17:30", NONE, INVISIBLE, "resource3", "resource3", "resourceshop_honeywood")
             setupInvisibleTalking(part)
         } else {
             removeInvisibleTalking()

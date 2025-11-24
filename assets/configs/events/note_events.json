@@ -6,29 +6,29 @@
   },
   "note_resource_shop_timed" : {
     "type"      : "messagebox",
-    "condition" : ["_time_!between_08:55_and_17:05"],
-    "text"      : ["Resource Shop.", "Open from 09:00 to 17:00."],
+    "condition" : ["_time_!between_08:25_and_17:35"],
+    "text"      : ["Resource Shop.", "Open from 08:30 to 17:30."],
     "doesRepeat": true
   },
   "note_resource_shop"       : {
     "type"      : "messagebox",
-    "text"      : ["Resource Shop.", "Open from 09:00 to 17:00."],
+    "text"      : ["Resource Shop.", "Open from 08:30 to 17:30."],
     "doesRepeat": true
   },
   "note_equipment_shop_timed": {
     "type"      : "messagebox",
-    "condition" : ["_time_!between_08:55_and_17:05"],
-    "text"      : ["Equipment Shop.", "Open from 09:00 to 17:00."],
+    "condition" : ["_time_!between_08:25_and_17:35"],
+    "text"      : ["Equipment Shop.", "Open from 08:30 to 17:30."],
     "doesRepeat": true
   },
   "note_equipment_shop"      : {
     "type"      : "messagebox",
-    "text"      : ["Equipment Shop.", "Open from 09:00 to 17:00."],
+    "text"      : ["Equipment Shop.", "Open from 08:30 to 17:30."],
     "doesRepeat": true
   },
   "note_honeywood_academy"   : {
     "type"      : "messagebox",
-    "text"      : ["Honeywood Skill Training.", "From 09:00 to 17:00."],
+    "text"      : ["Honeywood Skill Training.", "From 08:30 to 17:30."],
     "doesRepeat": true
   },
   "note_honeywood_signpost"  : {
