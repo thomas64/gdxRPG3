@@ -47,7 +47,7 @@
       "body_slam_2"
     ],
     "inventory": {
-      "weapon": "attack_65_30",
+      "weapon": "attack_65_25",
       "chest" : "armor_6"
     }
   },
@@ -73,7 +73,7 @@
       "body_slam_2"
     ],
     "inventory": {
-      "weapon": "attack_65_30",
+      "weapon": "attack_65_25",
       "chest" : "armor_6"
     }
   }

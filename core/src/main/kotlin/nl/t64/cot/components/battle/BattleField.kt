@@ -21,11 +21,11 @@ class BattleField(
         val heroParticipants: List<Participant> = participants.filter { it.isHero }
         val enemyParticipants: List<Participant> = participants.filter { !it.isHero }
 
-        val heroRange: Int = minOf(BATTLE_FIELD_SIZE, 10 + (6 - heroParticipants.size) * 2)
-        val enemyRange: Int = maxOf(0, BATTLE_FIELD_SIZE - (10 + (6 - enemyParticipants.size) * 2))
+        // val heroRange: Int = minOf(BATTLE_FIELD_SIZE, 10 + (6 - heroParticipants.size) * 2)
+        // val enemyRange: Int = maxOf(0, BATTLE_FIELD_SIZE - (10 + (6 - enemyParticipants.size) * 2))
 
-        val heroIndices: List<Int> = (0 until heroRange).shuffled().take(heroParticipants.size)
-        val enemyIndices: List<Int> = (enemyRange until BATTLE_FIELD_SIZE).shuffled().take(enemyParticipants.size)
+        val heroIndices: List<Int> = (0 until 12).shuffled().take(heroParticipants.size)
+        val enemyIndices: List<Int> = (8 until BATTLE_FIELD_SIZE).shuffled().take(enemyParticipants.size)
 
         heroParticipants.forEachIndexed { index, participant -> heroSpaces[heroIndices[index]] = participant }
         enemyParticipants.forEachIndexed { index, participant -> enemySpaces[enemyIndices[index]] = participant }
