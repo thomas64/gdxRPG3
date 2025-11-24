@@ -3,7 +3,7 @@
     "name"     : "Orc Scout",
     "gender"   : "its",
     "ap"       : 4,
-    "xp"       : 12,
+    "xp"       : 8,
     "drops"    : {
       "basic_axe"            : 15,
       "basic_light_belt"     : 2,
@@ -43,7 +43,7 @@
     "name"     : "Orc Scout",
     "gender"   : "its",
     "ap"       : 4,
-    "xp"       : 12,
+    "xp"       : 8,
     "drops"    : {
       "basic_spear"          : 15,
       "basic_light_belt"     : 2,
@@ -83,7 +83,7 @@
     "name"     : "Orc Scout",
     "gender"   : "its",
     "ap"       : 4,
-    "xp"       : 12,
+    "xp"       : 8,
     "drops"    : {
       "basic_sword"          : 15,
       "basic_light_belt"     : 2,

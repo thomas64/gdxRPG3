@@ -536,7 +536,9 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun repositionScrollPaneBasedOnContent() {
-        if (label.text.isBlank()) {
+        if (label.text.isBlank() && faceId.isBlank() && graph.getCurrentFace().isBlank()) {
+            rowWithScrollPane.padTop(-SCROLL_PANE_TOP_PAD).padLeft(-PAD).center()
+        } else if (label.text.isBlank()) {
             rowWithScrollPane.padTop(-SCROLL_PANE_TOP_PAD).padLeft(-PAD).padRight(-(PAD * 2f))
         } else if (faceId.isBlank() && graph.getCurrentFace().isBlank()) {
             rowWithScrollPane.padTop(0f).padLeft(PAD + Constant.FACE_SIZE + PAD + ARROW_PAD_LEFT)

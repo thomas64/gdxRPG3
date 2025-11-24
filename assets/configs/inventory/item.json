@@ -3,7 +3,7 @@
     "name"        : "Crystal of Time",
     "group"       : "ITEM",
     "sort"        : 1,
-    "description" : ["A crystal from Ylarus, God of Time,", "to reset time 12 hours."],
+    "description" : ["A crystal from Ylarus, the God of Time.", "It enables you to reset time to 07:30."],
     "is_droppable": false
   },
   "key_honeywood_basement" : {

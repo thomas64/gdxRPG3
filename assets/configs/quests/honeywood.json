@@ -6,7 +6,7 @@
     "linkedWith": ["quest_sub_royal_sacrifice"],
     "tasks"     : {
       "4": {
-        "taskPhrase": "Receive the Crystal of Time to reset time to 12 hours before the disaster.",
+        "taskPhrase": "Receive the Crystal of Time to reset time to 07:30, 12 hours before the disaster.",
         "type"      : "FIND_ITEM",
         "target"    : {"crystal_of_time": 1},
         "isHidden"  : true,

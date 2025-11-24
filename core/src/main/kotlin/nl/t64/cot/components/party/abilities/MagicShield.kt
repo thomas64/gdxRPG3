@@ -25,6 +25,9 @@ class MagicShield(
         return """
             $name on ${target.character.name}
 
+            Requires:
+            ${abilityItem.requiredResource.title}
+
             Effect:
             +${calculateProtection()} Protection
         """.trimIndent().trimMargin()

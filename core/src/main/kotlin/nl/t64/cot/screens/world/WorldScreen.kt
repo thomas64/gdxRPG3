@@ -90,6 +90,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     //region public methods ////////////////////////////////////////////////////////////////////////////////////////////
 
     fun fadeWithFlames() {
+        gameState = GameState.ENDING
         player.resetInput()
         setInputProcessors(null)
         player.send(DirectionEvent(Direction.NORTH))
@@ -230,7 +231,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     }
 
     fun showBattleScreen(battleId: String, enemyEntity: Entity) {
-        if (player.moveSpeed == Constant.MOVE_SPEED_4 || isInMapTransition) return
+        if (player.moveSpeed == Constant.MOVE_SPEED_4 || isInMapTransition || gameState == GameState.ENDING) return
         setInputProcessors(null)
         currentNpcEntity = enemyEntity
         gameState = GameState.BATTLE
@@ -364,6 +365,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
             GameState.MINIMAP -> renderMiniMap()
             GameState.DIALOG,
             GameState.BATTLE -> renderAll(dt)
+            GameState.ENDING,
             GameState.RUNNING -> { update(dt); renderAll(dt) }
         }
     }

@@ -5,7 +5,7 @@ import java.time.LocalDateTime
 import kotlin.math.floor
 
 
-private const val START_OF_DAY = 27000L         // 7:30
+private const val START_OF_DAY = 27000L         // 07:30
 private const val TWELVE_HOURS = 43200f * 2f    // 12 * 60 * 60 (* 2)
 private const val HOUR = 7200f                  // 2 minute in realtime
 private const val HALF_HOUR = 3600f             // 1 minute in realtime

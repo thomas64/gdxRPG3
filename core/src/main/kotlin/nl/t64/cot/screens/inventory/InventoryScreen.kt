@@ -82,7 +82,7 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
                 this.stage.addAction(Actions.sequence(
                     Actions.delay(0.5f),
                     Actions.run {
-                        val dialog = MessageDialog("Select and use the Crystal of Time to revert time by 12 hours.")
+                        val dialog = MessageDialog("Select and use the Crystal of Time to revert time to 07:30.")
                         dialog.show(this.stage, AudioEvent.SE_CONVERSATION_NEXT, 2f)
                         this.createAndSetListener(openQuestLogFunction = { playSe(AudioEvent.SE_MENU_ERROR) },
                                                   closeScreenFunction = { dialog.show(this.stage, AudioEvent.SE_CONVERSATION_NEXT) },

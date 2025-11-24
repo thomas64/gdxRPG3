@@ -284,7 +284,7 @@
   <object id="266" name="chest_alva_01" x="816" y="72" width="48" height="48"/>
   <object id="322" name="chest_alva_02" x="2688" y="768" width="48" height="48"/>
   <object id="267" name="sparkle_alva_01" x="912" y="528" width="48" height="48"/>
-  <object id="315" name="sparkle_alva_02" x="240" y="624" width="48" height="48"/>
+  <object id="315" name="sparkle_alva_02" x="258" y="624" width="48" height="48"/>
   <object id="316" name="sparkle_alva_03" x="1638" y="816" width="48" height="48"/>
   <object id="317" name="sparkle_alva_04" x="2682" y="1080" width="48" height="48"/>
   <object id="318" name="sparkle_alva_05" x="3072" y="138" width="48" height="48"/>
@@ -295,7 +295,7 @@
   <object id="325" name="note_alva_save" x="3144" y="144" width="48" height="48"/>
  </objectgroup>
  <objectgroup color="#ff007f" id="16" name="enemy">
-  <object id="298" name="green_slime" type="w" x="456" y="720" width="48" height="24">
+  <object id="298" name="green_slime" type="w" x="576" y="792" width="48" height="24">
    <properties>
     <property name="battleId" value="alva_battle_01"/>
    </properties>
@@ -305,12 +305,12 @@
     <property name="battleId" value="alva_battle_02"/>
    </properties>
   </object>
-  <object id="301" name="blue_bat" type="f" x="1608" y="816" width="48" height="24">
+  <object id="301" name="blue_bat" type="f" x="1608" y="840" width="48" height="24">
    <properties>
     <property name="battleId" value="alva_battle_03"/>
    </properties>
   </object>
-  <object id="302" name="blue_slime" type="w" x="2688" y="624" width="48" height="24">
+  <object id="302" name="blue_slime" type="w" x="2592" y="408" width="48" height="24">
    <properties>
     <property name="battleId" value="alva_battle_04"/>
    </properties>
@@ -325,7 +325,7 @@
     <property name="battleId" value="alva_battle_06"/>
    </properties>
   </object>
-  <object id="313" name="blue_slime" type="w" x="3408" y="168" width="48" height="24">
+  <object id="313" name="blue_slime" type="w" x="3456" y="408" width="48" height="24">
    <properties>
     <property name="battleId" value="alva_battle_07"/>
    </properties>

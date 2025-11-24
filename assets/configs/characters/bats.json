@@ -28,7 +28,7 @@
     "name"     : "Purple Bat",
     "gender"   : "its",
     "ap"       : 5,
-    "xp"       : 6,
+    "xp"       : 4,
     "drops"    : {"leather": 25},
     "stats"    : {
       "intelligence": 1,

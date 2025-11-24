@@ -3,7 +3,7 @@
     "name"     : "Green Imp",
     "gender"   : "its",
     "ap"       : 6,
-    "xp"       : 8,
+    "xp"       : 6,
     "drops"    : {"spice": 25},
     "stats"    : {
       "intelligence": 1,

@@ -18,7 +18,7 @@ class Scenario {
     }
 
     fun startSecondCycle() {
-        reviveMozes()
+        reviveParty()
         setQuestGraceComplete()
         gameData.resetCycle()
         addQuestArdorToLogbook()
@@ -28,14 +28,14 @@ class Scenario {
     }
 
     fun startThirdCycle() {
-        reviveMozes()
+        reviveParty()
         gameData.resetCycle()
         gameData.clock.start()
         profileManager.saveProfile()
     }
 
     fun startFourthCycle() {
-        reviveMozes()
+        reviveParty()
         gameData.resetCycle()
         hideQuestVoiceFromLogbook()
         addQuestYlarusToLogbook()
@@ -76,9 +76,9 @@ class Scenario {
         questGrace.accept()
     }
 
-    private fun reviveMozes() {
-        val mozes = gameData.party.getPlayer()
-        mozes.revive()
+    private fun reviveParty() {
+        gameData.party.getPlayer().revive()
+        gameData.party.getAllHeroesAlive().forEach { it.revive() }
     }
 
     private fun setQuestGraceComplete() {

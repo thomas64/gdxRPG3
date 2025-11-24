@@ -298,7 +298,7 @@
   <object id="271" name="sparkle_alva_23" x="3360" y="480" width="48" height="48"/>
  </objectgroup>
  <objectgroup color="#ff007f" id="20" name="enemy">
-  <object id="272" name="purple_bat" type="f" x="192" y="1248" width="48" height="24">
+  <object id="272" name="purple_bat" type="f" x="216" y="1146" width="48" height="24">
    <properties>
     <property name="battleId" value="alva_battle_08"/>
    </properties>
@@ -318,12 +318,12 @@
     <property name="battleId" value="alva_battle_11"/>
    </properties>
   </object>
-  <object id="277" name="blue_slime" type="w" x="2856" y="1152" width="48" height="24">
+  <object id="277" name="blue_slime" type="w" x="2976" y="1176" width="48" height="24">
    <properties>
     <property name="battleId" value="alva_battle_12"/>
    </properties>
   </object>
-  <object id="278" name="green_slime" type="w" x="2496" y="648" width="48" height="24">
+  <object id="278" name="green_slime" type="w" x="2496" y="672" width="48" height="24">
    <properties>
     <property name="battleId" value="alva_battle_14"/>
    </properties>
