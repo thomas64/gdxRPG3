@@ -13,11 +13,13 @@ private const val SETTING_SCREEN = "isFullscreen"
 private const val SETTING_MUSIC = "isMusicOn"
 private const val SETTING_SOUND = "isSoundOn"
 private const val SETTING_TUTORIAL = "isTutorialOn"
+private const val SETTING_COMBAT_DETAILS = "isCombatDetailsOn"
 private const val SETTING_DEBUG = "isDebugModeOn"
 private const val FULLSCREEN_DEFAULT = true
 private const val MUSIC_DEFAULT = true
 private const val SOUND_DEFAULT = true
 private const val TUTORIAL_DEFAULT = true
+private const val COMBAT_DETAILS_DEFAULT = false
 private const val DEBUG_MODE_DEFAULT = false
 
 class PreferenceManager {
@@ -27,6 +29,7 @@ class PreferenceManager {
     var isMusicOn = preferences[SETTING_MUSIC, MUSIC_DEFAULT]
     var isSoundOn = preferences[SETTING_SOUND, SOUND_DEFAULT]
     var isTutorialOn = preferences[SETTING_TUTORIAL, TUTORIAL_DEFAULT]
+    var isCombatDetailsOn = preferences[SETTING_COMBAT_DETAILS, COMBAT_DETAILS_DEFAULT]
     var isDebugModeOn = DEBUG_MODE_DEFAULT
 
     fun toggleFullscreen() {
@@ -59,6 +62,12 @@ class PreferenceManager {
     fun toggleTutorial() {
         isTutorialOn = isTutorialOn.not()
         preferences[SETTING_TUTORIAL] = isTutorialOn
+        preferences.flush()
+    }
+
+    fun toggleCombatDetails() {
+        isCombatDetailsOn = isCombatDetailsOn.not()
+        preferences[SETTING_COMBAT_DETAILS] = isCombatDetailsOn
         preferences.flush()
     }
 

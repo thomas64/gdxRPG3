@@ -24,7 +24,7 @@ open class AttackAction(
                 ).apply { target = targetHero }
 
             if (battleId.contains("farm_battle") && targetHero.character.id == "luana"
-                && ability.calculateDamage() >= targetHero.character.currentHp
+                && ability.calculateDamageMinusProtection() >= targetHero.character.currentHp
             ) {
                 return AttackAction(currentEnemy, targetHero, ability.toAlwaysIsHitFalse())
             } else {

@@ -22,14 +22,16 @@ private const val MENU_ITEM_SOUND_ON = "Sound: On"
 private const val MENU_ITEM_SOUND_OFF = "Sound: Off"
 private const val MENU_ITEM_TUTORIAL_ON = "Tutorial: On"
 private const val MENU_ITEM_TUTORIAL_OFF = "Tutorial: Off"
+private const val MENU_ITEM_COMBAT_DETAILS_ON = "Combat details: On"
+private const val MENU_ITEM_COMBAT_DETAILS_OFF = "Combat details: Off"
 private const val MENU_ITEM_DEBUG_MODE_ON = "Debug mode: On"
 private const val MENU_ITEM_DEBUG_MODE_OFF = "Debug mode: Off"
 private const val MENU_ITEM_CONTROLS = "View controls"
 private const val MENU_ITEM_BACK = "Back"
 
 private const val MENU_X = 604f
-private const val NUMBER_OF_ITEMS = 7
-private const val EXIT_INDEX = 6
+private const val NUMBER_OF_ITEMS = 8
+private const val EXIT_INDEX = 7
 
 class MenuSettingsMain : MenuSettings() {
     override val titleLogo: Texture = resourceManager.getTextureAsset(TITLE_LOGO_B)
@@ -71,6 +73,7 @@ abstract class MenuSettings : MenuScreen() {
     private lateinit var musicButton: TextButton
     private lateinit var soundButton: TextButton
     private lateinit var tutorialButton: TextButton
+    private lateinit var combatDetailsButton: TextButton
     private lateinit var debugModeButton: TextButton
     private lateinit var listenerKeyVertical: ListenerKeyVertical
 
@@ -99,9 +102,10 @@ abstract class MenuSettings : MenuScreen() {
             1 -> processMusicButton()
             2 -> processSoundButton()
             3 -> processTutorialButton()
-            4 -> processDebugModeButton()
-            5 -> processControlsButton()
-            6 -> processBackButton()
+            4 -> processCombatDetailsButton()
+            5 -> processDebugModeButton()
+            6 -> processControlsButton()
+            7 -> processBackButton()
             else -> throw IllegalArgumentException("SelectedIndex not found.")
         }
     }
@@ -138,6 +142,11 @@ abstract class MenuSettings : MenuScreen() {
         tutorialButton.setText(getMenuItemTutorial())
     }
 
+    private fun processCombatDetailsButton() {
+        preferenceManager.toggleCombatDetails()
+        combatDetailsButton.setText(getMenuItemCombatDetails())
+    }
+
     private fun processDebugModeButton() {
         preferenceManager.toggleDebugMode()
         debugModeButton.setText(getMenuItemDebugMode())
@@ -156,6 +165,7 @@ abstract class MenuSettings : MenuScreen() {
         musicButton = TextButton(getMenuItemMusic(), TextButtonStyle(buttonStyle))
         soundButton = TextButton(getMenuItemSound(), TextButtonStyle(buttonStyle))
         tutorialButton = TextButton(getMenuItemTutorial(), TextButtonStyle(buttonStyle))
+        combatDetailsButton = TextButton(getMenuItemCombatDetails(), TextButtonStyle(buttonStyle))
         debugModeButton = TextButton(getMenuItemDebugMode(), TextButtonStyle(buttonStyle))
         val controlsButton = TextButton(MENU_ITEM_CONTROLS, TextButtonStyle(buttonStyle))
         val backButton = TextButton(MENU_ITEM_BACK, TextButtonStyle(buttonStyle))
@@ -170,6 +180,7 @@ abstract class MenuSettings : MenuScreen() {
             add(musicButton).row()
             add(soundButton).row()
             add(tutorialButton).row()
+            add(combatDetailsButton).row()
             add(debugModeButton).row()
             add(controlsButton).row()
             add(backButton)
@@ -189,6 +200,9 @@ abstract class MenuSettings : MenuScreen() {
 
     private fun getMenuItemTutorial(): String =
         if (preferenceManager.isTutorialOn) MENU_ITEM_TUTORIAL_ON else MENU_ITEM_TUTORIAL_OFF
+
+    private fun getMenuItemCombatDetails(): String =
+        if (preferenceManager.isCombatDetailsOn) MENU_ITEM_COMBAT_DETAILS_ON else MENU_ITEM_COMBAT_DETAILS_OFF
 
     private fun getMenuItemDebugMode(): String =
         if (preferenceManager.isDebugModeOn) MENU_ITEM_DEBUG_MODE_ON else MENU_ITEM_DEBUG_MODE_OFF
