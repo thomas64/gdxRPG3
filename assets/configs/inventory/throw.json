@@ -1,6 +1,6 @@
 {
   "basic_knife"     : {
-    "name"         : "Basic Knife",
+    "name"         : "Basic Throwing Knife",
     "group"        : "WEAPON",
     "sort"         : 1400,
     "skill"        : "THROW",
@@ -15,7 +15,7 @@
     "metal"        : 2
   },
   "fine_knife"      : {
-    "name"         : "Fine Knife",
+    "name"         : "Fine Throwing Knife",
     "group"        : "WEAPON",
     "sort"         : 2400,
     "skill"        : "THROW",
@@ -30,7 +30,7 @@
     "metal"        : 6
   },
   "specialist_knife": {
-    "name"         : "Specialist Knife",
+    "name"         : "Specialist Throwing Knife",
     "group"        : "WEAPON",
     "sort"         : 3400,
     "skill"        : "THROW",
@@ -45,7 +45,7 @@
     "metal"        : 10
   },
   "masterwork_knife": {
-    "name"         : "Masterwork Knife",
+    "name"         : "Masterwork Throwing Knife",
     "group"        : "WEAPON",
     "sort"         : 4400,
     "skill"        : "THROW",

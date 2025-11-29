@@ -1,0 +1,61 @@
+{
+  "guarding_till_1500"     : {
+    "name"   : "Lastdenn Guard",
+    "comment": "WARNING: phraseId 100 is used in a conv condition.",
+    "phrases": {
+      "1"  : {"text": ["Halt! The mayor has ordered me to stop anyone from passing through this town's entrance until 15:00."]},
+      "2"  : {"text": ["Only those with official business in or from Lastdenn may pass here before then."]},
+      "3"  : {"text": ["I'm sorry sir, but I have my orders."]},
+      "4"  : {
+        "choices": [
+          {"text": "*Apply for official business.*", "nextId": "5"},
+          {"text": "*Attack the guard for passage!*", "nextId": "20"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "5"  : {"text": ["I'm sorry sir, that's not how it works. Official business must be pre-approved by the mayor."]},
+      "6"  : {"text": ["[GRAY](It's quite scandalous that the mayor would close this passage for profit like this, if you ask me...)"]},
+      "7"  : {
+        "choices": [
+          {"text": "*Inquire about any exceptions.*", "nextId": "8"},
+          {"condition": ["diplomat3"], "text": "[Diplomat 3] *Make a formal request in the name of the priest.*", "nextId": "15"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "8"  : {"text": ["Well... There aren't really. Our priest is publicly opposed to this closure. He says that anyone on a religious pilgrimage should be allowed to pass freely."]},
+      "9"  : {"text": ["[GRAY](I think he does have a point there...)"], "choices": [{"nextId": "7"}]},
+      "15" : {"text": ["Hmm... I suppose I can make an exception for our priest."]},
+      "16" : {"text": ["You may pass, but do not let word of this get out."], "choices": [{"command": "EXIT", "nextId": "100"}]},
+      "20" : {"text": ["Wait... What?! Are you serious?"]},
+      "21" : {"text": ["Guards! To me! I'm under attack!"], "choices": [{"command": "START_BATTLE"}]},
+      "100": {"text": ["I allowed you to pass. Please do not let word of this get out."], "choices": [{"command": "EXIT", "nextId": "100"}]}
+    }
+  },
+  "walking_to_warp_crystal": {
+    "name"     : "Lastdenn Guard",
+    "condition": ["_conv_guarding_till_1500_==_100"], "startAt": "10",
+    "phrases"  : {
+      "1" : {"text": ["This is the city of Lastdenn."]},
+      "2" : {"text": ["Now that it's after 15:00, the city is open to everyone. Don't cause any disturbances."]},
+      "3" : {"text": ["[GRAY](The mayor's decision to close the city entrance until 15:00 is quite scandalous, if you ask me...)"], "choices": [{"command": "EXIT"}]},
+      "10": {"text": ["I allowed you to pass. Anyway, it's after 15:00 now, so the city is open to everyone. But still, do not let word of my earlier exception get out."], "choices": [{"command": "EXIT", "nextId": "10"}]}
+    }
+  },
+  "talking_to_other_guard" : {
+    "name"     : "Lastdenn Guard",
+    "condition": ["is_santino_murdered"], "startAt": "10",
+    "phrases"  : {
+      "1" : {"face": "soldier02", "text": ["Hey Zachary! What a boring day it was! Did anything worthwhile happen while you were standing guard here today?"]},
+      "2" : {"face": "soldier03", "text": ["Nah, nothing much. The mayor's closure of the city entrance until 15:00 made for a pretty slow day."]},
+      "3" : {"face": "soldier02", "text": ["Yeah. Still, at least we got to stand in the sun for a bit."]},
+      "4" : {"face": "soldier03", "text": ["Sure, beats being cooped up inside all day."], "choices": [{"command": "EXIT"}]},
+      "10": {"face": "soldier02", "text": ["Hey Zachary! What a day it was! Did anything worthwhile happen while you were standing guard here today?"]},
+      "11": {"face": "soldier03", "text": ["Oh yes, quite a bit actually. Have you heard about Father Santino?"]},
+      "12": {"face": "soldier02", "text": ["Yes, I heard he was murdered! They say he was killed by someone possessed by a ghost! Can you believe that?"]},
+      "13": {"face": "soldier03", "text": ["It's terrible. Poor Father Santino... He was such a bright light in these dark times."]},
+      "14": {"face": "soldier02", "text": ["Indeed. He was one of the few people who dared to stand up to the mayor's corrupt practices."]},
+      "15": {"face": "soldier03", "text": ["He will be sorely missed."]},
+      "16": {"face": "soldier02", "text": ["[GRAY](A ghost...? Why would they make up such a story...?)"], "choices": [{"command": "EXIT"}]}
+    }
+  }
+}

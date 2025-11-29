@@ -83,14 +83,14 @@
   },
   "santino_first_service"     : {
     "phrases": {
-      "1": {"text": ["[Preaching and praying.]"], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "2"}]},
-      "2": {"text": ["[More preaching and praying.]"], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["((Preaching and praying.))"], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "2"}]},
+      "2": {"text": ["((More preaching and praying.))"], "choices": [{"command": "EXIT"}]}
     }
   },
   "santino_first_counseling"  : {
     "phrases": {
-      "1": {"text": ["[Question about Ulrog?!]"], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "2"}]},
-      "2": {"text": ["[Come see me tonight at 18:00. ACCEPT_NEW_QUEST oid]"], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["((Question about Ulrog?!))"], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "2"}]},
+      "2": {"text": ["((Come see me tonight at 18:00. ACCEPT_NEW_QUEST oid))"], "choices": [{"command": "EXIT"}]}
     }
   },
   "santino_busy_errand"       : {

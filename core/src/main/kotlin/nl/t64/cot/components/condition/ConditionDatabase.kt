@@ -45,7 +45,9 @@ object ConditionDatabase {
         "fairy_portal_active"           to { areBothPortalsActive },
         "i_!fairy_portal_active"        to { isPortalFairyInactiveAndPortalHoneywoodActive },
         "is_specific_time"              to { isBlackCurrentlyNotOpeningHisDoor },
-        "is_lastdenn_entrance_closed"   to { isLastdennEntranceClosed }
+        "is_lastdenn_guard_alive"       to { !isBattleWon("guarding_till_1500") },
+        "is_lastdenn_entrance_closed"   to { isLastdennEntranceClosed },
+        "is_santino_murdered"           to { true }, // todo, placeholder for future condition
         // @formatter:on
     )
 
@@ -97,8 +99,8 @@ object ConditionDatabase {
             || gameData.clock.isCurrentTimeAfter("07:38")
     private val isLastdennEntranceClosed
         get() = gameData.clock.isCurrentTimeBefore("15:00")
-            && isMeetingCondition("_conv_lastdenn_entrance_guard_<_100", null)
-            && !isBattleWon("lastdenn_entrance_guard")
+            && isMeetingCondition("_conv_guarding_till_1500_<_100", null)
+            && !isBattleWon("guarding_till_1500")
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

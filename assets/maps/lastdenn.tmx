@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="76" height="116" tilewidth="24" tileheight="24" infinite="0" nextlayerid="23" nextobjectid="229">
+<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="76" height="116" tilewidth="24" tileheight="24" infinite="0" nextlayerid="23" nextobjectid="248">
  <properties>
   <property name="bgm" value="bgm_lastdenn"/>
   <property name="lightmap_camera" value="sunlight"/>
@@ -220,20 +220,18 @@
   <object id="169" name="door_forged_left" x="1440" y="1008" width="48" height="96"/>
   <object id="170" name="door_wooden_ring_shade_left" x="1248" y="480" width="48" height="96"/>
   <object id="171" name="door_wooden_left" x="528" y="1392" width="48" height="96"/>
-  <object id="179" name="note_resource_shop" x="576" y="1776" width="48" height="48"/>
-  <object id="180" name="note_equipment_shop" x="960" y="1632" width="48" height="48"/>
-  <object id="181" name="note_lastdenn_inn" x="528" y="2256" width="48" height="48"/>
-  <object id="182" name="note_lastdenn_bar" x="576" y="1104" width="48" height="48"/>
-  <object id="183" name="note_lastdenn_cell" x="1344" y="1104" width="48" height="48"/>
-  <object id="184" name="note_lastdenn_temple" x="1224" y="2184" width="48" height="48"/>
   <object id="185" name="note_well" x="1320" y="2424" width="96" height="72"/>
  </objectgroup>
  <objectgroup color="#55ff7f" id="14" name="npc">
-  <object id="224" name="soldier01" x="192" y="2400" width="48" height="24">
+  <object id="230" name="soldier02" type="inv" x="24" y="2280" width="6" height="6">
    <properties>
-    <property name="conversation" value="lastdenn_entrance_guard"/>
-    <property name="direction" value="south"/>
-    <property name="isEnemy" type="bool" value="true"/>
+    <property name="conversation" value="guarding_till_1500"/>
+   </properties>
+  </object>
+  <object id="247" name="soldier03" x="768" y="2400" width="48" height="24">
+   <properties>
+    <property name="conversation" value="standing_guard_near_crystal"/>
+    <property name="direction" value="east"/>
    </properties>
   </object>
  </objectgroup>
@@ -285,6 +283,11 @@
     <property name="condition" value="is_lastdenn_entrance_closed"/>
    </properties>
   </object>
+  <object id="240" type="blocker" x="912" y="2400" width="24" height="48">
+   <properties>
+    <property name="condition" value="_time_after_18:00"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup color="#ffaa7f" id="21" name="warp">
   <object id="162" x="1056" y="2400" width="48" height="48"/>
@@ -298,6 +301,12 @@
  </objectgroup>
  <objectgroup color="#ff55ff" id="19" name="event">
   <object id="225" name="event_lastdenn_entrance_guard" type="discover" x="210" y="2400" width="12" height="96"/>
+  <object id="241" name="note_lastdenn_inn" type="check" x="528" y="2256" width="48" height="48"/>
+  <object id="242" name="note_lastdenn_temple" type="check" x="1224" y="2184" width="48" height="48"/>
+  <object id="243" name="note_resource_shop" type="check" x="576" y="1776" width="48" height="48"/>
+  <object id="244" name="note_equipment_shop" type="check" x="960" y="1632" width="48" height="48"/>
+  <object id="245" name="note_lastdenn_cell" type="check" x="1344" y="1104" width="48" height="48"/>
+  <object id="246" name="note_lastdenn_bar" type="check" x="576" y="1104" width="48" height="48"/>
  </objectgroup>
  <objectgroup color="#aaff00" id="20" name="scheduled">
   <object id="172" name="santino11" x="1152" y="2136" width="48" height="24"/>
@@ -315,5 +324,12 @@
   <object id="202" name="garrin14" x="816" y="1152" width="48" height="24"/>
   <object id="203" name="garrin15" x="1440" y="1152" width="48" height="24"/>
   <object id="204" name="garrin16" x="1440" y="1056" width="48" height="24"/>
+  <object id="229" name="entrance_guard1" x="192" y="2400" width="48" height="24"/>
+  <object id="231" name="entrance_guard2" x="552" y="2400" width="48" height="24"/>
+  <object id="232" name="entrance_guard3" x="552" y="2304" width="48" height="24"/>
+  <object id="233" name="entrance_guard4" x="816" y="2304" width="48" height="24"/>
+  <object id="238" name="entrance_guard5" x="816" y="1176" width="48" height="24"/>
+  <object id="235" name="entrance_guard6" x="816" y="2376" width="48" height="24"/>
+  <object id="239" name="entrance_guard7" x="888" y="2406" width="48" height="24"/>
  </objectgroup>
 </map>

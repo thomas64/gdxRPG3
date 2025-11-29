@@ -7,28 +7,28 @@
   "note_resource_shop_timed" : {
     "type"      : "messagebox",
     "condition" : ["_time_!between_08:25_and_17:35"],
-    "text"      : ["Resource Shop.", "Open from 08:30 to 17:30."],
+    "text"      : ["Resource Shop.", "", "Open from 08:30 to 17:30."],
     "doesRepeat": true
   },
   "note_resource_shop"       : {
     "type"      : "messagebox",
-    "text"      : ["Resource Shop.", "Open from 08:30 to 17:30."],
+    "text"      : ["Resource Shop.", "", "Open from 08:30 to 17:30."],
     "doesRepeat": true
   },
   "note_equipment_shop_timed": {
     "type"      : "messagebox",
     "condition" : ["_time_!between_08:25_and_17:35"],
-    "text"      : ["Equipment Shop.", "Open from 08:30 to 17:30."],
+    "text"      : ["Equipment Shop.", "", "Open from 08:30 to 17:30."],
     "doesRepeat": true
   },
   "note_equipment_shop"      : {
     "type"      : "messagebox",
-    "text"      : ["Equipment Shop.", "Open from 08:30 to 17:30."],
+    "text"      : ["Equipment Shop.", "", "Open from 08:30 to 17:30."],
     "doesRepeat": true
   },
   "note_honeywood_academy"   : {
     "type"      : "messagebox",
-    "text"      : ["Honeywood Skill Training.", "From 08:30 to 17:30."],
+    "text"      : ["Honeywood Skill Training.", "", "From 08:30 to 17:30."],
     "doesRepeat": true
   },
   "note_honeywood_signpost"  : {
@@ -44,6 +44,26 @@
   "note_lastdenn_signpost"   : {
     "type"      : "messagebox",
     "text"      : ["East: Lastdenn", "West: Honeywood"],
+    "doesRepeat": true
+  },
+  "note_lastdenn_inn"        : {
+    "type"      : "messagebox",
+    "text"      : ["Lastdenn Inn", "", "Rooms affordable but not cheap!"],
+    "doesRepeat": true
+  },
+  "note_lastdenn_temple"     : {
+    "type"      : "messagebox",
+    "text"      : ["Lastdenn Temple", "", "Services daily at 10:00 and 15:00.", "Counseling daily at 11:00 and 16:00."],
+    "doesRepeat": true
+  },
+  "note_lastdenn_bar"        : {
+    "type"      : "messagebox",
+    "text"      : ["Lastdenn Bar", "", "Friendship and happiness for sale!"],
+    "doesRepeat": true
+  },
+  "note_lastdenn_cell"       : {
+    "type"      : "messagebox",
+    "text"      : ["Lastdenn Jail"],
     "doesRepeat": true
   }
 }

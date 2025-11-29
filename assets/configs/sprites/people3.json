@@ -4,7 +4,6 @@
   "santino"       : {"source": "people3", "col": 2, "row": 2},
   "priest01"      : {"source": "people2", "col": 2, "row": 1},
   "sister01"      : {"source": "people2", "col": 3, "row": 1},
-  "soldier01"     : {"source": "people3", "col": 4, "row": 2},
   "lastdenn_guard": {"source": "people3", "col": 4, "row": 2},
   "duke01"        : {"source": "people3", "col": 1, "row": 2},
   "maid01"        : {"source": "people2", "col": 2, "row": 2},
@@ -18,5 +17,8 @@
   "fairy7"        : {"source": "fairies", "col": 3, "row": 2},
   "fairy8"        : {"source": "fairies", "col": 4, "row": 2},
   "deryk"         : {"source": "hero3", "col": 3, "row": 2},
-  "traveler"      : {"source": "hero3", "col": 2, "row": 2}
+  "traveler"      : {"source": "hero3", "col": 2, "row": 2},
+  "soldier01"     : {"source": "soldiers1", "col": 1, "row": 1},
+  "soldier02"     : {"source": "soldiers2", "col": 2, "row": 1},
+  "soldier03"     : {"source": "soldiers2", "col": 2, "row": 2}
 }

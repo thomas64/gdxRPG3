@@ -56,7 +56,7 @@ class Garrin : EntitySchedule() {
             if (gameData.clock.isCurrentTimeAt("11:53")) {
                 worldScreen.useDoor("door_wooden_left")
             }
-            if (gameData.clock.isCurrentTimeAt("14:59")) {
+            if (gameData.clock.isCurrentTimeAt("14:58")) {
                 worldScreen.useDoor("door_forged_left")
             }
         }

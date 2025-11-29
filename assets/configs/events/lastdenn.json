@@ -2,7 +2,7 @@
   "event_lastdenn_entrance_guard": {
     "type"          : "conversation",
     "condition"     : ["is_lastdenn_entrance_closed"],
-    "conversationId": "lastdenn_entrance_guard",
+    "conversationId": "guarding_till_1500",
     "entityId"      : "soldier01",
     "doesRepeat"    : true
   }
