@@ -66,7 +66,7 @@ open class Strike(
                 ${it.name} ${it.getDurabilityText()}
                 ${createEffectiveMessage()}
                 Mod hit: ${String.format("%3d", calculateHitPercentageForVisual())} %
-                Damage:  ${String.format("%3d", calculateDamageForVisual())}
+                Damage:  ${String.format("%3d", calculateDamageForVisual().minusProtection())}
                 Crit:    ${String.format("%3d", calculateCriticalHitPercentage())} %
             """.trimIndent().trimMargin()
             } ?: createNoWeaponMessage()

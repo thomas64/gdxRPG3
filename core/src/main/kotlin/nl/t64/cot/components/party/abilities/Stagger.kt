@@ -73,7 +73,7 @@ class Stagger(
                 ${createEffectiveMessage()}
                 Mod hit: ${String.format("%3d", calculateHitPercentageForVisual())} %
                 Stagger: ${String.format("%3d", calculateStaggerPercentage())} %
-                Damage:  ${String.format("%3d", calculateDamageForVisual())}
+                Damage:  ${String.format("%3d", calculateDamageForVisual().minusProtection())}
                 Crit:    ${String.format("%3d", calculateCriticalHitPercentage())} %
             """.trimIndent().trimMargin()
             } ?: createNoWeaponMessage()
