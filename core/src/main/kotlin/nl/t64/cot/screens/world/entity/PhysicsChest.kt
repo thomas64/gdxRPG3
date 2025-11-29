@@ -25,9 +25,7 @@ class PhysicsChest(private val chest: Loot) : PhysicsComponent() {
             setBoundingBox()
         }
         if (event is OnActionEvent) {
-            if (event.playerDirection == Direction.NORTH
-                && event.checkRect.overlaps(boundingBox)
-            ) {
+            if (event.playerDirection == Direction.NORTH) {
                 isSelected = true
             }
         }

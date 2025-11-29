@@ -18,13 +18,14 @@ class GameMapStorage(rectObject: RectangleMapObject) : GameMapObject(rectObject.
         brokerManager.actionObservers.addObserver(this)
     }
 
-    override fun onNotifyActionPressed(checkRect: Rectangle, playerDirection: Direction, playerPosition: Vector2) {
-        if (checkRect.overlaps(rectangle)
+    override fun isTouching(checkRect: Rectangle, playerDirection: Direction, playerPosition: Vector2): Boolean {
+        return checkRect.overlaps(rectangle)
             && playerDirection == Direction.NORTH
             && conditions.areAllTrue()
-        ) {
-            worldScreen.showStorageScreen()
-        }
+    }
+
+    override fun onNotifyActionPressed(checkRect: Rectangle, playerDirection: Direction, playerPosition: Vector2) {
+        worldScreen.showStorageScreen()
     }
 
 }

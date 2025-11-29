@@ -29,10 +29,8 @@ class PhysicsNpc : PhysicsComponent() {
             direction = event.direction
         }
         if (event is OnActionEvent) {
-            if (event.checkRect.overlaps(boundingBox)) {
-                isSelected = true
-                entity.send(WaitEvent(currentPosition, event.playerPosition))
-            }
+            isSelected = true
+            entity.send(WaitEvent(currentPosition, event.playerPosition))
         }
         if (event is OnBumpEvent) {
             if (event.biggerBoundingBox.overlaps(boundingBox) || event.checkRect.overlaps(boundingBox)) {

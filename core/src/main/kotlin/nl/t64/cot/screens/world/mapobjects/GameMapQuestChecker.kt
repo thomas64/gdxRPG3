@@ -23,19 +23,21 @@ class GameMapQuestChecker(rectObject: RectangleMapObject) : GameMapObject(rectOb
         brokerManager.actionObservers.addObserver(this)
     }
 
+    override fun isTouching(checkRect: Rectangle, playerDirection: Direction, playerPosition: Vector2): Boolean {
+        return checkRect.overlaps(rectangle) && conditions.areAllTrue()
+    }
+
     override fun onNotifyActionPressed(checkRect: Rectangle, playerDirection: Direction, playerPosition: Vector2) {
-        if (checkRect.overlaps(rectangle) && conditions.areAllTrue()) {
-            when {
-                taskIdToComplete == null
-                    && taskIdToFail == null -> error("QuestChecker must have task or fail property.")
+        when {
+            taskIdToComplete == null
+                && taskIdToFail == null -> error("QuestChecker must have task or fail property.")
 
-                taskIdToComplete != null
-                    && taskIdToFail != null -> error("QuestChecker can't have both task and fail property.")
+            taskIdToComplete != null
+                && taskIdToFail != null -> error("QuestChecker can't have both task and fail property.")
 
-                taskIdToComplete != null -> quest.setTaskComplete(taskIdToComplete)
+            taskIdToComplete != null -> quest.setTaskComplete(taskIdToComplete)
 
-                taskIdToFail != null -> quest.setTaskFailed(taskIdToFail)
-            }
+            taskIdToFail != null -> quest.setTaskFailed(taskIdToFail)
         }
     }
 

@@ -92,9 +92,6 @@ abstract class PhysicsComponent : Component {
         setBoundingBox()
     }
 
-    fun getRectangle(): Rectangle =
-        Rectangle(currentPosition.x, currentPosition.y, Constant.TILE_SIZE, Constant.TILE_SIZE)
-
     fun checkObstacles() {
         when (state) {
             EntityState.WALKING,

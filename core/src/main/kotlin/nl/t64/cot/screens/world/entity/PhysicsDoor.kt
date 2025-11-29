@@ -28,10 +28,7 @@ class PhysicsDoor(private val door: Door) : PhysicsComponent() {
             setBoundingBox()
         }
         if (event is OnActionEvent) {
-            if ((event.playerDirection == Direction.NORTH
-                    || event.playerDirection == Direction.SOUTH)
-                && event.checkRect.overlaps(boundingBox)
-            ) {
+            if (event.playerDirection == Direction.NORTH || event.playerDirection == Direction.SOUTH) {
                 isSelected = true
             }
         }

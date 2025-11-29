@@ -7,6 +7,8 @@ import nl.t64.cot.screens.world.entity.Direction
 
 interface ActionObserver {
 
+    fun isTouching(checkRect: Rectangle, playerDirection: Direction, playerPosition: Vector2): Boolean
+
     fun onNotifyActionPressed(checkRect: Rectangle, playerDirection: Direction, playerPosition: Vector2)
 
 }

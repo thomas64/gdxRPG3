@@ -17,10 +17,12 @@ class GameMapNote(rectObject: RectangleMapObject) : GameMapObject(rectObject.rec
         brokerManager.actionObservers.addObserver(this)
     }
 
+    override fun isTouching(checkRect: Rectangle, playerDirection: Direction, playerPosition: Vector2): Boolean {
+        return checkRect.overlaps(rectangle)
+    }
+
     override fun onNotifyActionPressed(checkRect: Rectangle, playerDirection: Direction, playerPosition: Vector2) {
-        if (checkRect.overlaps(rectangle)) {
-            worldScreen.showNoteDialog(noteId)
-        }
+        worldScreen.showNoteDialog(noteId)
     }
 
 }
