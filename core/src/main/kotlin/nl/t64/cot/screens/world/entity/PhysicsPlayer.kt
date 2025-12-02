@@ -64,8 +64,8 @@ class PhysicsPlayer : PhysicsComponent() {
 
     private fun checkActionPressed() {
         if (isActionPressed) {
-            brokerManager.actionObservers.shouldNotifyActionPressed(getCheckRect(), direction, currentPosition)
-                ?.let {
+            brokerManager.actionObservers.getAllTouchedObservers(getCheckRect(), direction, currentPosition)
+                .forEach {
                     actionCooldown = ACTION_COOLDOWN_IN_SECONDS
                     it.onNotifyActionPressed(getCheckRect(), direction, currentPosition)
                 }

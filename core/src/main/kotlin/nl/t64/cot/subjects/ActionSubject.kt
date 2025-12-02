@@ -23,8 +23,11 @@ class ActionSubject {
         observers.clear()
     }
 
-    fun shouldNotifyActionPressed(checkRect: Rectangle, playerDirection: Direction, playerPosition: Vector2): ActionObserver? {
-        return ArrayList(observers).firstOrNull { it.isTouching(checkRect, playerDirection, playerPosition) }
+    fun getAllTouchedObservers(checkRect: Rectangle,
+                               playerDirection: Direction,
+                               playerPosition: Vector2
+    ): List<ActionObserver> {
+        return ArrayList(observers).filter { it.isTouching(checkRect, playerDirection, playerPosition) }
     }
 
 }

@@ -3,7 +3,7 @@
   "door_small_honeywood_cave"    : {"type": "SMALL_HIDDEN_CAVE_DOOR", "spriteId": "small_hidden_cave_door"},
   "door_honeywood_house_elder_b1": {"type": "SMALL", "spriteId": "forged_left", "keyId": "key_honeywood_basement"},
   "door_honeywood_smith"         : {"type": "SMALL", "spriteId": "simple_left", "condition": ["_rc_>=_a_q_quest_royal_sacrifice"], "openStartTime": "11:00", "openEndTime": "20:00", "message": "Black Smith Inc.\nCurrently out on the job. Back at 11:00."},
-  "door_honeywood_jaron"         : {"type": "SMALL", "spriteId": "simple_left", "condition": ["_rc_>=_a_q_quest_royal_sacrifice"], "openStartTime": "10:00", "openEndTime": "20:00", "message": "Jaron. Sleeping in.\n I won't answer the door until 10:00."},
+  "door_honeywood_jaron"         : {"type": "SMALL", "spriteId": "simple_left", "condition": ["_rc_>=_a_q_quest_royal_sacrifice"], "openStartTime": "10:00", "openEndTime": "20:00", "message": "Jaron. Sleeping in.\nI won't answer the door until 10:00."},
   "door_honeywood_inn"           : {"type": "SMALL", "spriteId": "simple_left", "condition": ["_rc_>=_a_q_quest_royal_sacrifice"]},
   "door_honeywood_elder"         : {"type": "SMALL", "spriteId": "forged_left", "condition": ["_rc_>=_a_q_quest_royal_sacrifice"]}
 }
