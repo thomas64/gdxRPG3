@@ -3,6 +3,7 @@ package nl.t64.cot.subjects
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
 import nl.t64.cot.constants.Constant
+import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.screens.world.entity.Entity
 import nl.t64.cot.screens.world.entity.EntityState
 
@@ -32,8 +33,11 @@ class BlockSubject {
             .forEach { removeObserver(it) }
     }
 
-    fun getCurrentBlockersFor(boundingBox: Rectangle, entityState: EntityState): List<Rectangle> {
-        return ArrayList(observers).mapNotNull { it.getBlockerFor(boundingBox, entityState) }
+    fun getCurrentBlockersFor(boundingBox: Rectangle,
+                              entityState: EntityState,
+                              entityDirection: Direction = Direction.NONE
+    ): List<Rectangle> {
+        return ArrayList(observers).mapNotNull { it.getBlockerFor(boundingBox, entityState, entityDirection) }
     }
 
     fun isBlockerBlockingGridPoint(x: Float, y: Float, entityState: EntityState): Boolean {

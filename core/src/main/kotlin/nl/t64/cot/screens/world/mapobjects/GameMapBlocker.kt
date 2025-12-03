@@ -4,6 +4,7 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
 import nl.t64.cot.Utils.brokerManager
+import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.screens.world.entity.EntityState
 import nl.t64.cot.subjects.BlockObserver
 
@@ -14,7 +15,7 @@ class GameMapBlocker(rectObject: RectangleMapObject) : GameMapObject(rectObject.
         brokerManager.blockObservers.addObserver(this)
     }
 
-    override fun getBlockerFor(boundingBox: Rectangle, state: EntityState): Rectangle? {
+    override fun getBlockerFor(boundingBox: Rectangle, state: EntityState, entityDirection: Direction): Rectangle? {
         return rectangle.takeIf { boundingBox.overlaps(it) }
     }
 

@@ -3,11 +3,13 @@ package nl.t64.cot.screens.world.mapobjects
 import com.badlogic.gdx.maps.objects.RectangleMapObject
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
+import ktx.tiled.propertyOrNull
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.components.condition.ConditionDatabase
 import nl.t64.cot.components.quest.QuestGraph
+import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.screens.world.entity.EntityState
 import nl.t64.cot.subjects.BlockObserver
 
@@ -16,10 +18,11 @@ class GameMapConditionBlocker(rectObject: RectangleMapObject) : GameMapObject(re
 
     private val quest: QuestGraph? = rectObject.name?.let { gameData.quests.getQuestById(it) }
     private val conditions: List<String> = createCertainConditions(rectObject)
+    private val allowedDirection: Direction = createDirection(rectObject)
     private var isActive: Boolean = false
 
-    override fun getBlockerFor(boundingBox: Rectangle, state: EntityState): Rectangle? {
-        return rectangle.takeIf { isActive && boundingBox.overlaps(it) }
+    override fun getBlockerFor(boundingBox: Rectangle, state: EntityState, entityDirection: Direction): Rectangle? {
+        return rectangle.takeIf { isActive && boundingBox.overlaps(it) && entityDirection != allowedDirection }
     }
 
     override fun isBlocking(point: Vector2, state: EntityState): Boolean {
@@ -47,6 +50,11 @@ class GameMapConditionBlocker(rectObject: RectangleMapObject) : GameMapObject(re
             brokerManager.blockObservers.removeObserver(this)
         }
         mapManager.setTiledGraph()
+    }
+
+    private fun createDirection(rectObject: RectangleMapObject): Direction {
+        return rectObject.propertyOrNull<String>("allowedDirection")
+            ?.uppercase()?.let { Direction.valueOf(it) } ?: Direction.NONE
     }
 
 }

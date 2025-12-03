@@ -38,7 +38,7 @@ open class GameMapNpc(rectObject: RectangleMapObject) : GameMapObject(rectObject
     }
 
     private fun createDirection(rectObject: RectangleMapObject): Direction {
-        val direction = rectObject.propertyOrNull<String>("direction")?.uppercase()
+        val direction: String? = rectObject.propertyOrNull<String>("direction")?.uppercase()
         return direction?.let { Direction.valueOf(it) } ?: Direction.getRandom()
     }
 

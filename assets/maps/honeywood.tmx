@@ -336,13 +336,13 @@
     <property name="conversation" value="kaidan_come_home"/>
    </properties>
   </object>
-  <object id="364" name="soldier01" x="1014" y="1776" width="48" height="24">
+  <object id="364" name="soldier01" x="1014" y="1770" width="48" height="24">
    <properties>
     <property name="conversation" value="honeywood_soldiers"/>
     <property name="direction" value="south"/>
    </properties>
   </object>
-  <object id="365" name="soldier01" x="1098" y="1776" width="48" height="24">
+  <object id="365" name="soldier01" x="1098" y="1770" width="48" height="24">
    <properties>
     <property name="conversation" value="honeywood_soldiers"/>
     <property name="direction" value="south"/>
@@ -482,17 +482,18 @@
  </objectgroup>
  <objectgroup id="51" name="upper_texture"/>
  <objectgroup color="#ffff00" id="44" name="quest">
-  <object id="367" type="blocker" x="1056" y="1800" width="48" height="6">
+  <object id="367" type="blocker" x="1056" y="1794" width="48" height="6">
    <properties>
+    <property name="allowedDirection" value="north"/>
     <property name="condition" value="alone_in_party"/>
    </properties>
   </object>
-  <object id="395" name="quest_to_lastdenn_then2" type="discover" x="1008" y="1806" width="102" height="42">
+  <object id="395" name="quest_to_lastdenn_then2" type="discover" x="1008" y="1800" width="102" height="24">
    <properties>
     <property name="task" value="1"/>
    </properties>
   </object>
-  <object id="521" name="quest_to_lastdenn_then" type="discover" x="1050" y="1806" width="102" height="42">
+  <object id="521" name="quest_to_lastdenn_then" type="discover" x="1050" y="1800" width="102" height="24">
    <properties>
     <property name="task" value="1"/>
    </properties>
@@ -507,7 +508,7 @@
  <objectgroup color="#ff55ff" id="54" name="event">
   <object id="527" name="event_outside_home_cycle_3" type="discover" x="522" y="534" width="60" height="24"/>
   <object id="360" name="event_outside_home_cycle_2" type="discover" x="522" y="534" width="60" height="24"/>
-  <object id="366" name="event_honeywood_soldiers" type="discover" x="1068" y="1794" width="24" height="6"/>
+  <object id="366" name="event_honeywood_soldiers" type="discover" x="1068" y="1788" width="24" height="6"/>
   <object id="449" name="guide_event_action" type="discover" x="480" y="528" width="24" height="96"/>
   <object id="437" name="guide_event_action" type="discover" x="672" y="528" width="24" height="120"/>
   <object id="450" name="guide_event_action" type="discover" x="480" y="624" width="192" height="24"/>
