@@ -24,10 +24,6 @@ class Entity(
     private val graphicsComponent: GraphicsComponent
 ) : ActionObserver, BlockObserver, BumpObserver, DetectionObserver {
 
-    override fun isTouching(checkRect: Rectangle, playerDirection: Direction, playerPosition: Vector2): Boolean {
-        return checkRect.overlaps(physicsComponent.boundingBox)
-    }
-
     override fun onNotifyActionPressed(checkRect: Rectangle, playerDirection: Direction, playerPosition: Vector2) {
         send(OnActionEvent(checkRect, playerDirection, playerPosition))
     }

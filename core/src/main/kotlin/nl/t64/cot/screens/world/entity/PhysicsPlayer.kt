@@ -12,7 +12,7 @@ import nl.t64.cot.screens.world.entity.events.*
 import kotlin.math.abs
 
 
-private const val ACTION_COOLDOWN_IN_SECONDS = 1.0f
+private const val ACTION_COOLDOWN_IN_SECONDS = 0.3f
 
 class PhysicsPlayer : PhysicsComponent() {
 
@@ -64,11 +64,8 @@ class PhysicsPlayer : PhysicsComponent() {
 
     private fun checkActionPressed() {
         if (isActionPressed) {
-            brokerManager.actionObservers.getAllTouchedObservers(getCheckRect(), direction, currentPosition)
-                .forEach {
-                    actionCooldown = ACTION_COOLDOWN_IN_SECONDS
-                    it.onNotifyActionPressed(getCheckRect(), direction, currentPosition)
-                }
+            actionCooldown = ACTION_COOLDOWN_IN_SECONDS
+            brokerManager.actionObservers.notifyActionPressed(getCheckRect(), direction, currentPosition)
             isActionPressed = false
         }
     }

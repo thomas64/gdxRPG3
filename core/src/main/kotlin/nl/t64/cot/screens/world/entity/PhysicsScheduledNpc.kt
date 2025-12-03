@@ -31,10 +31,12 @@ class PhysicsScheduledNpc : PhysicsComponent() {
             setBoundingBox()
         }
         if (event is OnActionEvent) {
-            if (state != EntityState.IMMOBILE) {
-                direction = currentPosition.turnToPlayer(event.playerPosition, direction)
+            if (event.checkRect.overlaps(boundingBox)) {
+                if (state != EntityState.IMMOBILE) {
+                    direction = currentPosition.turnToPlayer(event.playerPosition, direction)
+                }
+                isSelected = true
             }
-            isSelected = true
         }
         if (event is OnBumpEvent) {
             if (event.biggerBoundingBox.overlaps(boundingBox) || event.checkRect.overlaps(boundingBox)) {

@@ -29,8 +29,10 @@ class PhysicsNpc : PhysicsComponent() {
             direction = event.direction
         }
         if (event is OnActionEvent) {
-            isSelected = true
-            entity.send(WaitEvent(currentPosition, event.playerPosition))
+            if (event.checkRect.overlaps(boundingBox)) {
+                isSelected = true
+                entity.send(WaitEvent(currentPosition, event.playerPosition))
+            }
         }
         if (event is OnBumpEvent) {
             if (event.biggerBoundingBox.overlaps(boundingBox) || event.checkRect.overlaps(boundingBox)) {
@@ -50,7 +52,6 @@ class PhysicsNpc : PhysicsComponent() {
 
     override fun update(entity: Entity, dt: Float) {
         this.entity = entity
-
         relocate(dt)
         checkObstacles()
         entity.send(PositionEvent(currentPosition))

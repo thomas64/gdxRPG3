@@ -22,12 +22,10 @@ class GameMapWarpPortal(rectObject: RectangleMapObject, fromMapName: String) : G
         brokerManager.actionObservers.addObserver(this)
     }
 
-    override fun isTouching(checkRect: Rectangle, playerDirection: Direction, playerPosition: Vector2): Boolean {
-        return checkRect.overlaps(rectangle)
-    }
-
     override fun onNotifyActionPressed(checkRect: Rectangle, playerDirection: Direction, playerPosition: Vector2) {
-        activateOrUse()
+        if (checkRect.overlaps(rectangle)) {
+            activateOrUse()
+        }
     }
 
     private fun activateOrUse() {

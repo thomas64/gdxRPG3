@@ -52,7 +52,9 @@ class PhysicsEnemy : PhysicsComponent() {
             }
         }
         if (event is OnActionEvent) {
-            isSelected = true
+            if (event.checkRect.overlaps(boundingBox)) {
+                isSelected = true
+            }
         }
     }
 

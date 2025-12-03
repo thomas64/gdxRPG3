@@ -20,7 +20,9 @@ class PhysicsSparkle(private val sparkle: Loot) : PhysicsComponent() {
             setBoundingBox()
         }
         if (event is OnActionEvent) {
-            isSelected = true
+            if (event.checkRect.overlaps(boundingBox)) {
+                isSelected = true
+            }
         }
     }
 

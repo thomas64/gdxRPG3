@@ -15,12 +15,10 @@ class GameMapSavePoint(rectObject: RectangleMapObject) : GameMapObject(rectObjec
         brokerManager.actionObservers.addObserver(this)
     }
 
-    override fun isTouching(checkRect: Rectangle, playerDirection: Direction, playerPosition: Vector2): Boolean {
-        return checkRect.overlaps(rectangle)
-    }
-
     override fun onNotifyActionPressed(checkRect: Rectangle, playerDirection: Direction, playerPosition: Vector2) {
-        profileManager.saveProfile()
+        if (checkRect.overlaps(rectangle)) {
+            profileManager.saveProfile()
+        }
     }
 
 }

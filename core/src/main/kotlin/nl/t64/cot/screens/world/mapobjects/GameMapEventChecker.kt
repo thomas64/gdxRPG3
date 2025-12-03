@@ -18,13 +18,11 @@ class GameMapEventChecker(rectObject: RectangleMapObject) : GameMapObject(rectOb
         brokerManager.actionObservers.addObserver(this)
     }
 
-    override fun isTouching(checkRect: Rectangle, playerDirection: Direction, playerPosition: Vector2): Boolean {
-        return checkRect.overlaps(rectangle)
-    }
-
     override fun onNotifyActionPressed(checkRect: Rectangle, playerDirection: Direction, playerPosition: Vector2) {
-        event.possibleStart()
-        event.resetRepeat()
+        if (checkRect.overlaps(rectangle)) {
+            event.possibleStart()
+            event.resetRepeat()
+        }
     }
 
 }
