@@ -2,18 +2,18 @@
   "garrin_waiting"            : {
     "phrases": {
       "1": {"text": ["What are you doing in our home?"]},
-      "2": {"text": ["You must leave now. It's almost coming..."], "choices": [{"command": "EXIT"}]}
+      "2": {"text": ["You should leave. It's not safe here..."], "choices": [{"command": "EXIT"}]}
     }
   },
   "garrin_it_is_time"         : {
     "phrases": {
       "1": {"text": ["What are you doing in our home?"]},
-      "2": {"text": ["It's 9:00! Get out now! It's coming!"], "choices": [{"command": "EXIT"}]}
+      "2": {"text": ["It's 9:00! Get out now! It's not safe here!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "paton_hiding"              : {
     "phrases": {
-      "1": {"text": ["My dad told me to stay in hiding when it is coming."]},
+      "1": {"text": ["My dad told me to hide here."]},
       "2": {"text": ["But I'm scared!"], "choices": [{"command": "EXIT"}]}
     }
   },

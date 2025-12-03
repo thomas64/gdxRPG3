@@ -33,6 +33,7 @@
   "youngwoman18": {"source": "youngwomen2", "col": 4, "row": 2},
   "man11"       : {"source": "men2", "col": 1, "row": 1},
   "man12"       : {"source": "men2", "col": 2, "row": 1},
+  "man12_dead"  : {"source": "damage_men", "col": 1, "row": 2},
   "man13"       : {"source": "men2", "col": 3, "row": 1},
   "man14"       : {"source": "men2", "col": 4, "row": 1},
   "man15"       : {"source": "men2", "col": 1, "row": 2},

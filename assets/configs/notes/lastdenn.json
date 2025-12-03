@@ -1,7 +1,7 @@
 {
-  "note_holy_water"     : {
+  "note_holy_water": {
     "phrases": {
-      "1": {"text": ["Is this holy water? Better not fall in."], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["Is this holy water? It doesn't look any different from normal water..."], "choices": [{"command": "EXIT"}]}
     }
   }
 }
