@@ -29,8 +29,8 @@ private const val SUMMARY_WINDOW_POSITION_X = 18f
 private const val SUMMARY_WINDOW_POSITION_Y = 834f
 private const val TASKS_WINDOW_POSITION_X = 18f
 private const val TASKS_WINDOW_POSITION_Y = 50f
-private const val LABEL_PADDING_LEFT = 100f
-private const val LABEL_PADDING_BOTTOM = 26f
+private const val LABEL_PADDING_LEFT = 300f
+private const val LABEL_PADDING_BOTTOM = 36f
 
 class QuestLogScreen : ParchmentScreen() {
 
@@ -41,17 +41,13 @@ class QuestLogScreen : ParchmentScreen() {
     private val summaryWindow: Window = Utils.createDefaultWindow(TITLE_SUMMARY, summaryTable.container)
     private val taskListTable: TaskListTable = TaskListTable()
     private val taskListWindow: Window = Utils.createDefaultWindow(TITLE_TASKS, taskListTable.container)
-    private val buttonLabel: Label = Label(createText(), LabelStyle(FontProvider.default, Color.BLACK))
+    private val buttonLabel: Label = Label("", LabelStyle(FontProvider.default, Color.BLACK))
 
     companion object {
         fun load() {
             playSe(AudioEvent.SE_SCROLL)
             screenManager.openParchmentLoadScreen(ScreenType.QUEST_LOG)
         }
-    }
-
-    init {
-        setPositions()
     }
 
     override fun show() {
@@ -61,6 +57,7 @@ class QuestLogScreen : ParchmentScreen() {
         stage.scrollFocus = questListTable.scrollPane
         handleQuestList()
         clockTable.fill()
+        setPositions()
     }
 
     override fun render(dt: Float) {
@@ -72,6 +69,7 @@ class QuestLogScreen : ParchmentScreen() {
         clockTable.addTo(stage)
         stage.addActor(summaryWindow)
         stage.addActor(taskListWindow)
+        buttonLabel.setText(createText())
         stage.addActor(buttonLabel)
         stage.addListener(QuestLogScreenListener(questListTable.questList,
                                                  { closeScreen() },
@@ -127,8 +125,7 @@ class QuestLogScreen : ParchmentScreen() {
         val quarterOfScreenX = Gdx.graphics.width * .25f
         summaryWindow.setPosition(quarterOfScreenX + SUMMARY_WINDOW_POSITION_X, SUMMARY_WINDOW_POSITION_Y)
         taskListWindow.setPosition(quarterOfScreenX + TASKS_WINDOW_POSITION_X, TASKS_WINDOW_POSITION_Y)
-        val buttonLabelX = (LABEL_PADDING_LEFT + questListWindow.width) - (buttonLabel.width / 2f)
-        buttonLabel.setPosition(buttonLabelX, LABEL_PADDING_BOTTOM)
+        buttonLabel.setPosition(LABEL_PADDING_LEFT, LABEL_PADDING_BOTTOM)
     }
 
     private fun cheatAllQuestsFinished() {

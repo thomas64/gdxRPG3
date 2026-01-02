@@ -13,8 +13,17 @@ class EventContainer {
                                                       "Your save file is of an older version than the game."))
     }
 
-    fun getAllPlayedGuideEvents(): List<String> {
+    fun getOnlyBattleGuideEvents(): List<String> {
         return events
+            .filterKeys { it.startsWith("guide_event_battle_") }
+            .filterKeys { hasEventPlayed(it) }
+            .map { it.value.getReplacedText() }
+            .reversed()
+    }
+
+    fun getAllNonBattlePlayedGuideEvents(): List<String> {
+        return events
+            .filterKeys { !it.startsWith("guide_event_battle_") }
             .filterKeys { it.startsWith("guide_event_") }
             .filterKeys { hasEventPlayed(it) }
             .map { it.value.getReplacedText() }

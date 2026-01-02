@@ -8,6 +8,8 @@ import nl.t64.cot.constants.Constant
 
 internal class HelpScreenListener(
     private val closeScreenFunction: () -> Unit,
+    private val normalFilterFunction: () -> Unit,
+    private val battleFilterFunction: () -> Unit,
     private val startScrollUpFunction: () -> Unit,
     private val startScrollDownFunction: () -> Unit,
     private val stopScrollUpFunction: () -> Unit,
@@ -17,6 +19,8 @@ internal class HelpScreenListener(
     override fun keyDown(event: InputEvent, keycode: Int): Boolean {
         when (keycode) {
             Constant.KEYCODE_RIGHT, Input.Keys.T, Input.Keys.ESCAPE -> closeScreenFunction.invoke()
+            Constant.KEYCODE_L1, Input.Keys.Q -> normalFilterFunction.invoke()
+            Constant.KEYCODE_R1, Input.Keys.W -> battleFilterFunction.invoke()
             Input.Keys.UP -> startScrollUpFunction.invoke()
             Input.Keys.DOWN -> startScrollDownFunction.invoke()
         }

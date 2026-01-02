@@ -1,6 +1,7 @@
 package nl.t64.cot.screens.help
 
 import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
@@ -18,11 +19,13 @@ import nl.t64.cot.screens.FontProvider
 import nl.t64.cot.screens.ParchmentScreen
 
 
-private const val TITLE = "Tutorial messages"
 private const val SCROLL_SPEED = 600f
 private const val HINT_LINE_SPACE = 50f
 private const val WINDOW_POS_X = 100f
 private const val WINDOW_POS_Y = 80f
+private const val LABEL_PADDING_BOTTOM = 52f
+
+private enum class HelpFilter { NORMAL, BATTLE }
 
 class HelpScreen : ParchmentScreen() {
 
@@ -34,7 +37,9 @@ class HelpScreen : ParchmentScreen() {
     private lateinit var scrollPane: ScrollPane
     private lateinit var container: Table
     private lateinit var window: Window
+    private lateinit var buttonLabel: Label
 
+    private var currentFilter: HelpFilter = HelpFilter.NORMAL
     private var isScrollingUp: Boolean = false
     private var isScrollingDown: Boolean = false
 
@@ -50,6 +55,7 @@ class HelpScreen : ParchmentScreen() {
         scrollPane = createScrollPane()
         container = createContainer()
         window = createWindow()
+        buttonLabel = createLabel()
         setupStage()
     }
 
@@ -63,10 +69,43 @@ class HelpScreen : ParchmentScreen() {
         renderStage(dt)
     }
 
+    private fun setupStage() {
+        setInputProcessors(stage)
+
+        stage.addActor(window)
+        stage.addActor(buttonLabel)
+        stage.addListener(HelpScreenListener({ closeScreen() },
+                                             { changeFilter(HelpFilter.NORMAL) },
+                                             { changeFilter(HelpFilter.BATTLE) },
+                                             { isScrollingUp = true },
+                                             { isScrollingDown = true },
+                                             { isScrollingUp = false },
+                                             { isScrollingDown = false }))
+
+        stage.keyboardFocus = scrollPane
+        stage.scrollFocus = scrollPane
+    }
+
+    private fun changeFilter(filter: HelpFilter) {
+        playSe(AudioEvent.SE_MENU_CURSOR)
+        currentFilter = filter
+        table = createTable()
+        scrollPane.actor = table
+        scrollPane.scrollY = 0f
+        window.titleLabel.setText(createWindowTitle())
+    }
+
     private fun createTable(): Table {
         return Table().apply {
             align(Align.top)
-            gameData.events.getAllPlayedGuideEvents().forEach { fillRow(it) }
+            getAllPlayedGuideEvents().forEach { fillRow(it) }
+        }
+    }
+
+    private fun getAllPlayedGuideEvents(): List<String> {
+        return when (currentFilter) {
+            HelpFilter.NORMAL -> gameData.events.getAllNonBattlePlayedGuideEvents()
+            HelpFilter.BATTLE -> gameData.events.getOnlyBattleGuideEvents()
         }
     }
 
@@ -102,24 +141,35 @@ class HelpScreen : ParchmentScreen() {
     }
 
     private fun createWindow(): Window {
-        return Utils.createDefaultWindow(TITLE, container, Align.center).apply {
+        val title: String = createWindowTitle()
+        return Utils.createDefaultWindow(title, container, Align.center).apply {
             width = windowWidth
             setPosition(WINDOW_POS_X, WINDOW_POS_Y)
         }
     }
 
-    private fun setupStage() {
-        setInputProcessors(stage)
+    private fun createWindowTitle(): String {
+        return when (currentFilter) {
+            HelpFilter.NORMAL -> "Tutorial messages"
+            HelpFilter.BATTLE -> "Battle tutorial messages"
+        }
+    }
 
-        stage.addActor(window)
-        stage.addListener(HelpScreenListener({ closeScreen() },
-                                             { isScrollingUp = true },
-                                             { isScrollingDown = true },
-                                             { isScrollingUp = false },
-                                             { isScrollingDown = false }))
+    private fun createLabel(): Label {
+        val text: String = createButtonsText()
+        val style = LabelStyle(FontProvider.default, Color.BLACK)
+        return Label(text, style).apply {
+            val centerX: Float = (Gdx.graphics.width - width) / 2f
+            setPosition(centerX, LABEL_PADDING_BOTTOM)
+        }
+    }
 
-        stage.keyboardFocus = scrollPane
-        stage.scrollFocus = scrollPane
+    private fun createButtonsText(): String {
+        return if (Utils.isGamepadConnected()) {
+            "[LB] Messages            [RB] Battle messages           [B] Back"
+        } else {
+            "[Q] Messages            [W] Battle messages            [T] Back"
+        }
     }
 
 }
