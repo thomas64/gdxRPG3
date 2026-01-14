@@ -7,6 +7,7 @@ import nl.t64.cot.Utils.gameData
 import nl.t64.cot.components.battle.BattleField
 import nl.t64.cot.components.battle.Participant
 import nl.t64.cot.components.battle.TurnManager
+import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.abilities.BattleAbilityItem
 import nl.t64.cot.components.party.abilities.Target
 import nl.t64.cot.components.party.inventory.BattlePotionItem
@@ -310,21 +311,31 @@ class BattleMenuManager(
     }
 
     private fun setupPotionTable() {
-        val battlePotions: List<BattlePotionItem> = gameData.inventory.getAllOf(InventoryGroup.POTION)
+        val potions: List<InventoryItem> = gameData.inventory.getAllOf(InventoryGroup.POTION)
             .filter { it.name.contains(" Potion") }
-            .map { BattlePotionItem(it) }
-        buttonTablePotion = screenBuilder.createButtonTablePotion(battlePotions)
+        buttonTablePotion = screenBuilder.createButtonTablePotion(potions)
         setupTable(buttonTablePotion, actionPotionListener)
     }
 
     private fun setupWeaponTable(listener: SelectWeaponListener) {
-        val battleEquipment: List<BattleWeaponItem> =
-            (gameData.inventory.getAllOf(InventoryGroup.WEAPON) + gameData.inventory.getAllOf(InventoryGroup.SHIELD))
-                .map { BattleWeaponItem(it) }
-        val currentWeapon: InventoryItem? = currentParticipant.invoke().character.getInventoryItem(InventoryGroup.WEAPON)
-        val currentShield: InventoryItem? = currentParticipant.invoke().character.getInventoryItem(InventoryGroup.SHIELD)
-        buttonTableWeapon = screenBuilder.createButtonTableWeapon(battleEquipment, currentWeapon, currentShield)
+        val currentHero: HeroItem = currentParticipant.invoke().character as HeroItem
+        val equipment: List<InventoryItem> = currentHero.getAllItemsAbleToEquip()
+        val currentWeapon: InventoryItem? = currentHero.getInventoryItem(InventoryGroup.WEAPON)
+        val currentShield: InventoryItem? = currentHero.getInventoryItem(InventoryGroup.SHIELD)
+        buttonTableWeapon = screenBuilder.createButtonTableWeapon(equipment, currentWeapon, currentShield)
         setupTable(buttonTableWeapon, listener)
+    }
+
+    private fun HeroItem.getAllItemsAbleToEquip(): List<InventoryItem> {
+        val allWeaponsThisHeroIsAbleToEquip: List<InventoryItem> =
+            gameData.inventory.getAllOf(InventoryGroup.WEAPON)
+                .filter { this.createMessageIfHeroHasNotEnoughFor(it) == null }
+
+        val allShieldsThisHeroIsAbleToEquip: List<InventoryItem> =
+            gameData.inventory.getAllOf(InventoryGroup.SHIELD)
+                .filter { this.createMessageIfHeroHasNotEnoughFor(it) == null }
+
+        return allWeaponsThisHeroIsAbleToEquip + allShieldsThisHeroIsAbleToEquip
     }
 
     private fun setupTable(table: Table, listener: InputListener) {

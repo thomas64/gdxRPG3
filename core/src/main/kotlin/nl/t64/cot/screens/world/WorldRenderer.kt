@@ -8,7 +8,10 @@ import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.graphics.glutils.FrameBuffer
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer
+import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
+import com.badlogic.gdx.math.Vector3
+import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack
 import com.badlogic.gdx.utils.ScreenUtils
 import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.constants.Constant
@@ -96,10 +99,21 @@ class WorldRenderer(
 
     private fun renderPossibleBackground() {
         mapManager.getParallaxBackground()?.let {
+
+            val bottomLeft = Vector3(0f, 0f, 0f)
+            val topRight = Vector3(mapManager.currentMap.pixelWidth, mapManager.currentMap.pixelHeight, 0f)
+            camera.project(bottomLeft)
+            camera.project(topRight)
+
+            val scissors = Rectangle(0f, 0f, topRight.x, topRight.y)
+            ScissorStack.pushScissors(scissors)
+
             batch.begin()
             batch.projectionMatrix = camera.projection
             it.render(batch, camera)
             batch.end()
+
+            ScissorStack.popScissors()
         }
     }
 

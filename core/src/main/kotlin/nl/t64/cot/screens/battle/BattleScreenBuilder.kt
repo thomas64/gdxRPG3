@@ -326,11 +326,11 @@ class BattleScreenBuilder {
         return createStyledEmptyList<String>().fillWithTargets(enemies).toTargetTable()
     }
 
-    fun createButtonTablePotion(potions: List<BattlePotionItem>): Table {
+    fun createButtonTablePotion(potions: List<InventoryItem>): Table {
         return createStyledEmptyList<BattlePotionItem>().fillWithPotions(potions).toPotionTable()
     }
 
-    fun createButtonTableWeapon(equipment: List<BattleWeaponItem>,
+    fun createButtonTableWeapon(equipment: List<InventoryItem>,
                                 currentWeapon: InventoryItem?,
                                 currentShield: InventoryItem?
     ): Table {
@@ -464,19 +464,22 @@ class BattleScreenBuilder {
         return this
     }
 
-    private fun GdxList<BattlePotionItem>.fillWithPotions(potions: List<BattlePotionItem>): GdxList<BattlePotionItem> {
-        val allItems: List<BattlePotionItem> = potions + BattlePotionItem("Back")
+    private fun GdxList<BattlePotionItem>.fillWithPotions(potions: List<InventoryItem>): GdxList<BattlePotionItem> {
+        val allItems: List<BattlePotionItem> = buildList {
+            addAll(potions.map { BattlePotionItem(it) })
+            add(BattlePotionItem("Back"))
+        }
         this.setItems(*allItems.toTypedArray())
         this.selectedIndex = 0
         return this
     }
 
-    private fun GdxList<BattleWeaponItem>.fillWithWeapons(weapons: List<BattleWeaponItem>,
+    private fun GdxList<BattleWeaponItem>.fillWithWeapons(weapons: List<InventoryItem>,
                                                           currentWeapon: InventoryItem?,
                                                           currentShield: InventoryItem?
     ): GdxList<BattleWeaponItem> {
         val allItems: List<BattleWeaponItem> = buildList {
-            addAll(weapons)
+            addAll(weapons.map { BattleWeaponItem(it) })
             currentWeapon?.let { add(BattleWeaponItem(InventoryItem(name = "Unequip current weapon", group = InventoryGroup.WEAPON))) }
             currentShield?.let { add(BattleWeaponItem(InventoryItem(name = "Unequip current shield", group = InventoryGroup.SHIELD))) }
             add(BattleWeaponItem(InventoryItem(name = "Back")))

@@ -12,11 +12,12 @@ import com.badlogic.gdx.utils.ScreenUtils
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
+import nl.t64.cot.screens.FontProvider
 
 
 private const val CREDITS_PATH = "licenses/credits.txt"
-private const val SCROLL_SPEED = 100
-private const val EMPTY_LINES = 20
+private const val SCROLL_SPEED = 60
+private const val EMPTY_LINES = 44
 
 class MenuCredits : MenuScreen() {
 
@@ -30,7 +31,7 @@ class MenuCredits : MenuScreen() {
     init {
         val emptyLines = System.lineSeparator().repeat(EMPTY_LINES)
         val creditsText = emptyLines + Gdx.files.internal(CREDITS_PATH).readString() + emptyLines
-        val textStyle = LabelStyle(menuFont, Color.BLACK)
+        val textStyle = LabelStyle(FontProvider.inconsolata24, Color.BLACK)
         val credits = Label(creditsText, textStyle)
         credits.setAlignment(Align.top or Align.center)
         credits.wrap = true

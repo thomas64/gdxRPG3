@@ -304,15 +304,17 @@
     "isSubQuest": true,
     "tasks"     : {
       "8": {
-        "taskPhrase": "                  Return to Luana by 10:00. She will be done with her chores at Honeywood Farm.",
-        "type"      : "FREE",
-        "linkedWith": ["9"]
+        "taskPhrase"          : "                  Return to Luana by 10:00. She will be done with her chores at Honeywood Farm.",
+        "type"                : "FREE",
+        "linkedWith"          : ["9"],
+        "shouldHideAfterReset": true
       },
       "9": {
-        "comment"   : "WARNING: Five links to 9 from honeywood_stable.tmx",
-        "taskPhrase": "                  Defeat the Orc raiding party which attacks Honeywood Farm between 10:00 and 11:00.",
-        "type"      : "FREE",
-        "isHidden"  : true
+        "comment"             : "WARNING: Five links to 9 from honeywood_stable.tmx",
+        "taskPhrase"          : "                  Defeat the Orc raiding party which attacks Honeywood Farm between 10:00 and 11:00.",
+        "type"                : "FREE",
+        "isHidden"            : true,
+        "shouldHideAfterReset": true
       }
     }
   }
