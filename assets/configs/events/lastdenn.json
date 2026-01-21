@@ -3,7 +3,7 @@
     "type"          : "conversation",
     "condition"     : ["is_lastdenn_entrance_closed"],
     "conversationId": "guarding_till_1500",
-    "entityId"      : "soldier01",
+    "entityId"      : "soldier02",
     "doesRepeat"    : true
   }
 }

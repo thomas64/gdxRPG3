@@ -14,7 +14,7 @@
           {"text": "*You don't believe in such heathen things. Leave it be.*", "command": "EXIT"}
         ]
       },
-      "3": {"text": ["Your prayer probably has been heard."], "choices": [{"command": "SAVE_GAME"}]}
+      "3": {"text": ["Whether you believe in her or not, Savia's protection is said to be real."], "choices": [{"command": "SAVE_GAME"}]}
     }
   }
 }

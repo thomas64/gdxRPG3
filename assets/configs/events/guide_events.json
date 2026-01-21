@@ -109,7 +109,9 @@
       "You can see their durability in parentheses after",
       "the item's name. Each use reduces durability by 1.",
       "When durability reaches [FIREBRICK]0[BLACK], the item breaks and is lost.",
-      "Always monitor your weapon's durability to avoid surprises!"
+      "Always monitor your weapon's durability to avoid surprises!",
+      "",
+      "The Mechanic skill gives your party the ability to repair items."
     ]
   },
   "guide_event_battle_special"       : {
@@ -261,6 +263,13 @@
       "To do this, select the skill in her skill list in the inventory screen.",
       "",
       "If a party member dies, they cannot be revived, they are gone forever."
+    ]
+  },
+  "guide_event_enemy_aggro"          : {
+    "type"     : "tutorial",
+    "condition": ["cycle_>=_5"],
+    "text"     : [
+      "Enemies defeated in a previous cycle will react to you as if you were crouching."
     ]
   }
 }

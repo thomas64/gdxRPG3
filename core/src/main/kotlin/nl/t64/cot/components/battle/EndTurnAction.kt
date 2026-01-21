@@ -6,10 +6,11 @@ class EndTurnAction(
 ) {
 
     fun handle(): String {
-        if (currentParticipant.currentAP >= 1) {
-            return "${currentParticipant.currentAP.coerceAtMost(2)} AP"
-        } else {
-            return ""
+        val surplus: Int = currentParticipant.currentAP - currentParticipant.maximumAP
+        return when {
+            currentParticipant.currentAP == 0 || surplus == 2 -> ""
+            currentParticipant.currentAP == 1 || surplus == 1 -> "1 AP"
+            else -> "2 AP"
         }
     }
 

@@ -48,6 +48,7 @@ object ConditionDatabase {
         "is_lastdenn_guard_alive"       to { !isBattleWon("guarding_till_1500") },
         "is_lastdenn_entrance_closed"   to { isLastdennEntranceClosed },
         "is_santino_murdered"           to { true }, // todo, placeholder for future condition
+        "cycle_>=_5"                    to { gameData.numberOfCycles >= 5 }
         // @formatter:on
     )
 
