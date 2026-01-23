@@ -394,9 +394,10 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
         // todo, eventually remove shaperenderer and use sprite icons for minimap.
         shapeRenderer.projectionMatrix = camera.combined
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled)
-        player.renderOnMiniMap(worldRenderer.batch, shapeRenderer)
         npcEntities.forEach { it.renderOnMiniMap(worldRenderer.batch, shapeRenderer) }
         visibleScheduledEntities.forEach { it.renderOnMiniMap(worldRenderer.batch, shapeRenderer) }
+        mapManager.currentMap.minimapIcons.forEach { it.renderOnMiniMap(worldRenderer.batch, shapeRenderer) }
+        player.renderOnMiniMap(worldRenderer.batch, shapeRenderer)
         fogOfWarManager.draw(shapeRenderer)
         shapeRenderer.end()
     }

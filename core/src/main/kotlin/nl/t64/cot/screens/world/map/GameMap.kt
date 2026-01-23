@@ -97,6 +97,7 @@ class GameMap(
     val chests: List<RectangleMapObject> = loader.loadWhereNameStartsWith(REST_LAYER, "chest")
     val doors: List<RectangleMapObject> = loader.loadWhereNameStartsWith(REST_LAYER, "door")
     val storage: List<GameMapStorage> = loader.loadWhereNameStartsWithAndTransform(REST_LAYER, "storage") { GameMapStorage(it) }
+    val minimapIcons: List<GameMapIcon> = loader.loadWhereNameStartsWithAndTransform(REST_LAYER, "icon") { GameMapIcon(it) }
 
     private val specialDirections: List<RectangleMapObject> = loader.loadAllRectanglesFromLayer(DIRECTION_LAYER)
     private val sounds: List<RectangleMapObject> = loader.loadAllRectanglesFromLayer(SOUND_LAYER)

@@ -151,7 +151,7 @@
       "1": {"text": ["Boohoo! Now we're only with two! You big fat meanie!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "bored_and_secluded"                  : {
+  "bored_and_secluded_academy"          : {
     "name"   : "Malina",
     "phrases": {
       "1" : {"text": ["Hi Mozes! You really should check out this priest fella over here. He's so funny! Ha ha!"]},
@@ -347,7 +347,7 @@
       "1": {"text": ["What are you doing here? Please get out of the kitchen."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "pleasant_honeywood"                  : {
+  "pleasant_honeywood_academy"          : {
     "name"   : "Traveler",
     "phrases": {
       "1": {"text": ["Honeywood is such a delightful little village. I enjoy staying here from time to time."]},
@@ -476,7 +476,7 @@
       "7": {"text": ["Did I do well?"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "quest_get_medicine"                  : {
+  "quest_get_medicine_academy"          : {
     "name"   : "Elenora",
     "phrases": {
       "1"   : {"text": ["Mozes dear, how are you today?"]},

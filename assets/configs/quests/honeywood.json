@@ -86,7 +86,7 @@
     "title"     : "A helping horse",
     "entityId"  : "man13",
     "summary"   : "A tree has fallen on the path to Honeywood Farm, blocking the road. Lennor is busy removing the tree. He seeks your assistance in acquiring a strong horse and some tow ropes to speed up the road-clearing process. Otherwise, he will be done by 17:00.",
-    "linkedWith": ["quest_get_horse", "quest_get_tow_rope", "quest_get_medicine", "quest_get_horseshoes"],
+    "linkedWith": ["quest_get_horse", "quest_get_tow_rope", "quest_get_medicine_academy", "quest_get_horseshoes"],
     "tasks"     : {
       "1" : {
         "taskPhrase": "Bring a strong horse to Lennor.",
@@ -201,7 +201,7 @@
       }
     }
   },
-  "quest_get_medicine"         : {
+  "quest_get_medicine_academy" : {
     "title"     : "A helping horse",
     "entityId"  : "oldwoman11",
     "summary"   : "Get medicine",

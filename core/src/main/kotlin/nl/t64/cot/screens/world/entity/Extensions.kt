@@ -13,19 +13,12 @@ fun renderOnMiniMap(conversationId: String,
                     position: Vector2,
                     batch: Batch,
                     shapeRenderer: ShapeRenderer) {
-    if (state != EntityState.INVISIBLE) {
-        val colorMap = mapOf(
-            "shop" to Color.GOLD,
-            "academy" to Color.ROYAL,
-            "school" to Color.TEAL,
-            "heal" to Color.LIME,
-            "inn" to Color.LIME,
-            "priest" to Color.SALMON,
-            "save" to Color.SALMON
-        )
-        shapeRenderer.color = colorMap.entries.getColorBasedOn(conversationId) ?: return
-        shapeRenderer.drawCircleAt(position)
-    }
+
+    if (state == EntityState.INVISIBLE) return
+    shapeRenderer.color = getColorBasedOn(conversationId) ?: return
+    shapeRenderer.circle(position.x + Constant.HALF_TILE_SIZE,
+                         position.y + Constant.HALF_TILE_SIZE,
+                         Constant.HALF_TILE_SIZE)
 }
 
 fun Vector2.turnToPlayer(playerPosition: Vector2, npcDirection: Direction): Direction {
@@ -38,14 +31,10 @@ fun Vector2.turnToPlayer(playerPosition: Vector2, npcDirection: Direction): Dire
     }
 }
 
-private fun Set<Map.Entry<String, Color>>.getColorBasedOn(conversationId: String): Color? {
-    return this.find { conversationId.contains(it.key) }?.value
-}
-
-private fun ShapeRenderer.drawCircleAt(position: Vector2) {
-    this.circle(position.x + Constant.HALF_TILE_SIZE,
-                position.y + Constant.HALF_TILE_SIZE,
-                Constant.HALF_TILE_SIZE)
+private fun getColorBasedOn(conversationId: String): Color? {
+    return Constant.MINIMAP_ICONS.entries
+        .firstOrNull { it.key in conversationId }
+        ?.value
 }
 
 private fun Vector2.isWestOfPlayer(playerPosition: Vector2): Boolean {

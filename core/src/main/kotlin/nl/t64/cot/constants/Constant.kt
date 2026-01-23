@@ -72,4 +72,14 @@ object Constant {
     const val KEYCODE_L3 = 1008
     const val KEYCODE_R3 = 1009
 
+    val MINIMAP_ICONS = mapOf(
+        "shop" to Color.GOLD,
+        "academy" to Color.ROYAL,
+        "school" to Color.TEAL,
+        "heal" to Color.LIME,
+        "inn" to Color.LIME,
+        "priest" to Color.SALMON,
+        "save" to Color.SALMON,
+    )
+
 }

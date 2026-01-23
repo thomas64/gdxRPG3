@@ -299,7 +299,7 @@
  <objectgroup color="#ff007f" id="55" name="enemy">
   <object id="375" name="blue_slime" x="408" y="156" width="48" height="24">
    <properties>
-    <property name="battleId" value="quest_get_medicine"/>
+    <property name="battleId" value="quest_get_medicine_academy"/>
     <property name="condition" value="_c_==_a_q_this"/>
     <property name="direction" value="north"/>
    </properties>
@@ -408,7 +408,7 @@
   </object>
   <object id="520" name="youngwoman01" type="w" x="1152" y="1128" width="48" height="24">
    <properties>
-    <property name="conversation" value="bored_and_secluded"/>
+    <property name="conversation" value="bored_and_secluded_academy"/>
    </properties>
   </object>
  </objectgroup>
