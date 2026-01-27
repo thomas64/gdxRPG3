@@ -11,6 +11,6 @@
   "chest0015"    : {"condition": ["_tc_10_q_quest_get_horse"], "content": {"horseshoe": 4}, "doesReset": true},
   "chest_alva_01": {"content": {"basic_silver_necklace": 1, "gold": 13}, "trapLevel": 1},
   "chest_alva_02": {"content": {"healing_potion": 4, "energy_potion": 2, "gold": 6}},
-  "chest_alva_03": {"content": {"basic_medium_chest": 1}, "lockLevel": 2},
-  "chest_alva_04": {"content": {"basic_medium_pants": 1}, "trapLevel": 2}
+  "chest_alva_03": {"content": {"basic_medium_helmet": 1}, "lockLevel": 2},
+  "chest_alva_04": {"content": {"basic_medium_gloves": 1}, "trapLevel": 2}
 }

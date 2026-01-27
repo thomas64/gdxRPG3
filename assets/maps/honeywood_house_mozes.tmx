@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="24" tileheight="24" infinite="0" nextlayerid="23" nextobjectid="45">
+<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="24" tileheight="24" infinite="0" nextlayerid="23" nextobjectid="46">
  <properties>
   <property name="bgm" value="bgm_house"/>
   <property name="step_sound" value="wood"/>
@@ -93,6 +93,13 @@
   <object id="34" name="luana" x="552" y="306" width="48" height="24">
    <properties>
     <property name="conversation" value="luana_rejoin"/>
+    <property name="direction" value="south"/>
+    <property name="hasBeenRecruited" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="45" name="reignald" x="600" y="306" width="48" height="24">
+   <properties>
+    <property name="conversation" value="reignald_rejoin"/>
     <property name="direction" value="south"/>
     <property name="hasBeenRecruited" type="bool" value="true"/>
    </properties>

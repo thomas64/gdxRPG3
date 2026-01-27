@@ -1,0 +1,57 @@
+{
+  "reignald_join"   : {
+    "name"   : "Reignald",
+    "phrases": {
+      "1"   : {"text": ["Join?"]},
+      "2"   : {
+        "choices": [
+          {"text": "*Yes.* [BLUE] (Join party)", "nextId": "3"},
+          {"text": "*No.*", "nextId": "4"}
+        ]
+      },
+      "3"   : {"text": ["Excellent!"], "choices": [{"command": "HERO_JOIN"}]},
+      "4"   : {"text": ["Squire! Come back here!"], "choices": [{"command": "EXIT"}]},
+      "9000": {"text": ["I cannot join you if there's no room."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "dismiss_reignald": {
+    "name"   : "Reignald",
+    "phrases": {
+      "1": {"text": ["Dismiss?"]},
+      "2": {
+        "choices": [
+          {"text": "*Yes.* [BLUE](Dismiss Reignald)", "nextId": "3"},
+          {"text": "*No.*", "command": "EXIT"}
+        ]
+      },
+      "3": {"text": ["Okay."], "choices": [{"command": "HERO_DISMISS"}]}
+    }
+  },
+  "bury_reignald"   : {
+    "name"   : "Reignald",
+    "phrases": {
+      "1": {"text": ["All his equipment will also be gone once you bury him."]},
+      "2": {
+        "choices": [
+          {"text": "*Yes, let the funeral continue.* [RED](Dismiss Reignald)", "command": "HERO_DISMISS"},
+          {"text": "*No, take precautions first.*", "command": "EXIT"}
+        ]
+      }
+    }
+  },
+  "reignald_rejoin" : {
+    "name"   : "Reignald",
+    "phrases": {
+      "1"   : {"text": ["Rejoin?"]},
+      "2"   : {
+        "choices": [
+          {"text": "*Yes.* [BLUE] (Join party)", "nextId": "3"},
+          {"text": "*No.*", "nextId": "4"}
+        ]
+      },
+      "3"   : {"text": ["Good."], "choices": [{"command": "HERO_JOIN"}]},
+      "4"   : {"text": ["Fine."], "choices": [{"command": "EXIT"}]},
+      "9000": {"text": ["I cannot join you if there's no room."], "choices": [{"command": "EXIT"}]}
+    }
+  }
+}

@@ -54,5 +54,6 @@
   "sparkle_alva_20"    : {"content": {"metal": 1}},
   "sparkle_alva_21"    : {"content": {"herb": 1}},
   "sparkle_alva_22"    : {"content": {"spice": 1}},
-  "sparkle_alva_23"    : {"condition": ["ranger1"], "content": {"herb": 1}}
+  "sparkle_alva_23"    : {"condition": ["ranger1"], "content": {"herb": 1}},
+  "sparkle_alva_24"    : {"condition": ["ranger1"], "content": {"gemstone": 1}}
 }

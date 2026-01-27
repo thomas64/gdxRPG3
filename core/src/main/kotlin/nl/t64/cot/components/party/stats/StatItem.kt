@@ -4,6 +4,8 @@ import nl.t64.cot.components.party.PersonalityItem
 import kotlin.math.roundToInt
 
 
+private const val DEFAULT_FLAT_UPGRADE_COST = 20
+
 data class StatItem(
     override val id: StatItemId = StatItemId.INTELLIGENCE,   // Value will be replaced when constructed.
     override val name: String = "",
@@ -45,7 +47,7 @@ data class StatItem(
     }
 
     private fun Int.getXpCost(): Int {
-        return (upgrade * (this * this)).roundToInt()
+        return DEFAULT_FLAT_UPGRADE_COST + (upgrade * (this * this)).roundToInt()
     }
 
 }

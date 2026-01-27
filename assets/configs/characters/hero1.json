@@ -69,12 +69,12 @@
     "gender"   : "his",
     "stats"    : {
       "intelligence": 10,
-      "willpower"   : 8,
+      "dexterity"   : 12,
       "strength"    : 20,
-      "dexterity"   : 25,
+      "speed"       : 14,
+      "willpower"   : 8,
       "constitution": 20,
-      "stamina"     : 40,
-      "speed"       : 14
+      "stamina"     : 15
     },
     "skills"   : {
       "alchemist": -1,
@@ -96,10 +96,10 @@
     ],
     "inventory": {
       "weapon": "basic_sword",
-      "shield": "fine_light_shield",
-      "chest" : "fine_medium_chest",
-      "pants" : "fine_medium_pants",
-      "boots" : "fine_medium_boots"
+      "shield": "basic_medium_shield",
+      "chest" : "basic_medium_chest",
+      "pants" : "basic_medium_pants",
+      "boots" : "basic_medium_boots"
     }
   },
   "ryiah"   : {
@@ -107,12 +107,12 @@
     "gender"   : "her",
     "stats"    : {
       "intelligence": 22,
+      "dexterity"   : 14,
+      "strength"    : 8,
+      "speed"       : 13,
       "willpower"   : 16,
-      "strength"    : 10,
-      "dexterity"   : 20,
       "constitution": 16,
-      "stamina"     : 31,
-      "speed"       : 15
+      "stamina"     : 21
     },
     "skills"   : {
       "loremaster": 1,
@@ -140,12 +140,12 @@
     "gender"   : "his",
     "stats"    : {
       "intelligence": 22,
-      "willpower"   : 18,
-      "strength"    : 10,
       "dexterity"   : 15,
-      "constitution": 15,
-      "stamina"     : 20,
-      "speed"       : 14
+      "strength"    : 10,
+      "speed"       : 11,
+      "willpower"   : 18,
+      "constitution": 14,
+      "stamina"     : 13
     },
     "skills"   : {
       "alchemist" : 3,

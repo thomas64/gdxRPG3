@@ -24,7 +24,7 @@ class EnemyContainer(
 
     fun getTotalXp(): Int {
         val baseXp: Int = enemies.sumOf { it.xp }
-        val bonusMultiplier: Float = 1f + ((enemies.size - 1f) * 0.2f)
+        val bonusMultiplier: Float = 1f + ((enemies.size - 1f) * 0.1f)
         return (baseXp * bonusMultiplier).roundToInt()
     }
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="50" height="46" tilewidth="24" tileheight="24" infinite="0" nextlayerid="21" nextobjectid="5">
+<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="46" tilewidth="24" tileheight="24" infinite="0" nextlayerid="22" nextobjectid="6">
  <properties>
   <property name="bgm" value="bgm_house"/>
   <property name="step_sound" value="wood"/>
@@ -55,6 +55,14 @@
  <objectgroup color="#0055ff" id="11" name="sound"/>
  <objectgroup color="#aa0000" id="12" name="collision"/>
  <objectgroup color="#5500ff" id="13" name="rest"/>
+ <objectgroup color="#aa55ff" id="21" name="hero">
+  <object id="5" name="reignald" x="672" y="480" width="48" height="24">
+   <properties>
+    <property name="conversation" value="reignald_join"/>
+    <property name="direction" value="south"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup color="#55ff7f" id="14" name="npc"/>
  <objectgroup color="#55aaff" id="15" name="spawn">
   <object id="1" name="lastdenn" x="528" y="1008" width="48" height="24"/>

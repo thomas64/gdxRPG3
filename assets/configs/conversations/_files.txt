@@ -11,7 +11,8 @@ cutscene_end_of_cycle2.json
 cutscene_end_of_cycle3.json
 cutscene_ardor_later_time.json
 alva_road.json
-heroes.json
+hero_luana.json
+hero_reignald.json
 lastdenn.json
 lastdenn_entrance_guard.json
 lastdenn_santino.json
