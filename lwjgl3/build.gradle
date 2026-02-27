@@ -3,9 +3,9 @@ buildscript {
     gradlePluginPortal()
   }
   dependencies {
-    classpath "io.github.fourlastor:construo:1.7.1"
+    classpath "io.github.fourlastor:construo:2.1.0"
     if (enableGraalNative == 'true') {
-      classpath "org.graalvm.buildtools.native:org.graalvm.buildtools.native.gradle.plugin:0.11.0"
+      classpath "org.graalvm.buildtools.native:org.graalvm.buildtools.native.gradle.plugin:0.11.4"
     }
   }
 }
@@ -20,8 +20,8 @@ import io.github.fourlastor.construo.Target
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 sourceSets.main.resources.srcDirs += [rootProject.file('assets').path]
-mainClassName = 'nl.t64.cot.lwjgl3.Lwjgl3Launcher'
-application.setMainClass(mainClassName)
+application.mainClass = 'nl.t64.cot.lwjgl3.Lwjgl3Launcher'
+application.applicationName = appName
 eclipse.project.name = appName + '-lwjgl3'
 java.sourceCompatibility = 21
 java.targetCompatibility = 21
@@ -43,7 +43,7 @@ dependencies {
   }
 }
 
-def os = System.properties['os.name'].toLowerCase()
+def os = System.properties['os.name'].toLowerCase(Locale.ROOT)
 
 run {
   workingDir = rootProject.file('assets').path
@@ -57,14 +57,15 @@ jar {
   // sets the name of the .jar file this produces to the name of the game or app, with the version after.
   archiveFileName.set("${appName}-${projectVersion}.jar")
   // the duplicatesStrategy matters starting in Gradle 7.0; this setting works.
-  duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+  duplicatesStrategy = DuplicatesStrategy.EXCLUDE
   dependsOn configurations.runtimeClasspath
   from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
   // these "exclude" lines remove some unnecessary duplicate files in the output JAR.
   exclude('META-INF/INDEX.LIST', 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA')
   dependencies { exclude('META-INF/INDEX.LIST', 'META-INF/maven/**') }
   // setting the manifest makes the JAR runnable.
-  manifest { attributes 'Main-Class': project.mainClassName }
+  // enabling native access helps avoid a warning when Java 24 or later runs the JAR.
+  manifest { attributes 'Main-Class': application.mainClass, 'Enable-Native-Access': 'ALL-UNNAMED' }
   // this last step may help on some OSes that need extra instruction to make runnable JARs.
   doLast { file(archiveFile).setExecutable(true, false) }
 }
@@ -116,8 +117,6 @@ construo {
   name.set(appName)
   // human-readable name, used for example in the `.app` name for macOS
   humanName.set(appName)
-  // Optional, defaults to project version property
-  version.set("$projectVersion")
 
   targets.configure {
     register("linuxX64", Target.Linux) {

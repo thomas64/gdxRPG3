@@ -62,13 +62,14 @@ class ResourceManager {
     }
 
     fun getTiledMapAsset(mapTitle: String?): TiledMap {
-        return mapTitle?.let {
-            val parameters = TmxMapLoader.Parameters().apply {
-                textureMinFilter = Texture.TextureFilter.Nearest
-                textureMagFilter = Texture.TextureFilter.Nearest
+        if (mapTitle == null) return TiledMap()
+
+        return getAsset<TiledMap>("$MAP_FILES_PATH$mapTitle$MAP_FILE_SUFFIX").apply {
+            val nearest = Texture.TextureFilter.Nearest
+            tileSets.forEach { tileSet ->
+                tileSet.forEach { it.textureRegion?.texture?.setFilter(nearest, nearest) }
             }
-            getAsset<TiledMap>("$MAP_FILES_PATH$it$MAP_FILE_SUFFIX", parameters)
-        } ?: TiledMap()
+        }
     }
 
     fun getTrueTypeAsset(trueTypeFilenamePath: String, fontSize: Int): BitmapFont {
@@ -111,7 +112,9 @@ class ResourceManager {
 
     private fun loadSpriteConfigs() {
         Gdx.files.internal(FILE_LIST_SPRITE_CONFIGS).readString()
-            .split(System.lineSeparator())
+            .lineSequence()
+            .map { it.trim() }
+            .filter { it.isNotEmpty() }
             .map { Gdx.files.internal(SPRITE_CONFIGS + it) }
             .map { json.fromJson(GdxMap::class.java, SpriteConfig::class.java, it) }
             .forEach { spriteConfigs.putAll(it as GdxMap<String, SpriteConfig>) }
@@ -127,8 +130,9 @@ class ResourceManager {
 
     private fun loadAtlasTexture(fileName: String, directory: String) {
         Gdx.files.internal(fileName).readString()
-            .split(System.lineSeparator())
-            .filter { it.isNotBlank() }
+            .lineSequence()
+            .map { it.trim() }
+            .filter { it.isNotEmpty() }
             .map { Gdx.files.internal(directory + it) }
             .map { TextureAtlas(it) }
             .forEach { atlasList.add(it) }

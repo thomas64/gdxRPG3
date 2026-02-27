@@ -119,8 +119,10 @@ object ConfigDataLoader {
 
     private fun getListWithFilenames(path: String): List<String> {
         return readString(path, "_files.txt")
-            .split(System.lineSeparator())
-            .filter { it.isNotBlank() }
+            .lineSequence()
+            .map { it.trim() }
+            .filter { it.isNotEmpty() }
+            .toList()
     }
 
     private fun readString(path: String, filename: String): String {
