@@ -685,7 +685,7 @@ class BattleScreenBuilder {
             padTop(5f)
             padLeft(10f)
             padRight(10f)
-            x = 1050f
+            x = 900f
         }
     }
 

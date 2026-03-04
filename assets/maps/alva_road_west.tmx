@@ -317,14 +317,9 @@
     <property name="battleId" value="alva_battle_04"/>
    </properties>
   </object>
-  <object id="307" name="purple_bat" type="f" x="2544" y="1152" width="48" height="24">
+  <object id="307" name="purple_bat" type="f" x="2808" y="1080" width="48" height="24">
    <properties>
     <property name="battleId" value="alva_battle_05"/>
-   </properties>
-  </object>
-  <object id="312" name="purple_bat" type="f" x="3288" y="1032" width="48" height="24">
-   <properties>
-    <property name="battleId" value="alva_battle_06"/>
    </properties>
   </object>
   <object id="313" name="blue_slime" type="w" x="3456" y="408" width="48" height="24">

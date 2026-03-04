@@ -130,18 +130,26 @@ class BattleDialogManager(
 
     private fun showConfirmSwitchEquipmentDialog(
         weaponAction: WeaponAction,
-        onConfirmed: (WeaponAction) -> Unit
+        equipWeapon: (WeaponAction) -> Unit
+    ) {
+        val message = weaponAction.createConfirmationMessage()
+        val dialog = TwoColumnsQuestionDialog(message) {
+            whenAbleToEquipDoSo_OrShowErrorDialog(weaponAction, equipWeapon)
+        }
+        dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0, 0.5f)
+    }
+
+    private fun whenAbleToEquipDoSo_OrShowErrorDialog(
+        weaponAction: WeaponAction,
+        equipWeapon: (WeaponAction) -> Unit
     ) {
         val unableToEquipMessage: String? = weaponAction.isUnableToEquip()
         if (unableToEquipMessage != null) {
             val dialog = MessageDialog(unableToEquipMessage)
             dialog.show(stage, AudioEvent.SE_MENU_ERROR)
-            return
+        } else {
+            equipWeapon.invoke(weaponAction)
         }
-
-        val message = weaponAction.createConfirmationMessage()
-        val dialog = TwoColumnsQuestionDialog(message) { onConfirmed.invoke(weaponAction) }
-        dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0, 0.5f)
     }
 
     fun showFleeDialog(

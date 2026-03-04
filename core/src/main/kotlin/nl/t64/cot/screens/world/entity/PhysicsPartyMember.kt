@@ -10,6 +10,8 @@ import nl.t64.cot.screens.world.pathfinding.PathfindingObstacleChecker
 import nl.t64.cot.screens.world.pathfinding.TiledNode
 
 
+private const val SLOWER_MOVE_SPEED_THAN_PLAYER = 20f
+
 class PhysicsPartyMember : PhysicsComponent() {
 
     private var path: DefaultGraphPath<TiledNode> = DefaultGraphPath()
@@ -32,7 +34,7 @@ class PhysicsPartyMember : PhysicsComponent() {
             direction = event.direction
         }
         if (event is OnDetectionEvent) {
-            velocity = event.moveSpeed
+            velocity = event.moveSpeed - SLOWER_MOVE_SPEED_THAN_PLAYER
         }
         if (event is PathUpdateEvent) {
             path = event.path

@@ -68,7 +68,9 @@
       "This is marked by a small exclamation mark [!].",
       "",
       "This [BLUE]significantly[BLACK] increases the AP cost to move",
-      "away from that enemy and escape the battle lock."
+      "away from that enemy and escape the battle lock.",
+      "",
+      "The Stealth skill reduces the AP cost to escape battle lock."
     ]
   },
   "guide_event_battle_ap"            : {

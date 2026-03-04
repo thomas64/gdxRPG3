@@ -55,16 +55,8 @@ class InputPartyMember : InputComponent() {
         val nodePosition = Vector2(tiledNode.x.toFloat(), tiledNode.y.toFloat())
         val currentGridPosition = Vector2(partyMember.getPositionInGrid())
         partyMember.send(StateEvent(EntityState.WALKING))
-        setDirection(nodePosition, currentGridPosition)
-    }
-
-    private fun setDirection(nodePosition: Vector2, currentGridPosition: Vector2) {
-        when {
-            nodePosition.y > currentGridPosition.y -> partyMember.send(DirectionEvent(Direction.NORTH))
-            nodePosition.y < currentGridPosition.y -> partyMember.send(DirectionEvent(Direction.SOUTH))
-            nodePosition.x < currentGridPosition.x -> partyMember.send(DirectionEvent(Direction.WEST))
-            nodePosition.x > currentGridPosition.x -> partyMember.send(DirectionEvent(Direction.EAST))
-        }
+        val direction = getFollowDirection(nodePosition, currentGridPosition)
+        partyMember.send(DirectionEvent(direction))
     }
 
     private fun setIdle() {

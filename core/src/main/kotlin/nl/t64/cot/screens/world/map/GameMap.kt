@@ -116,12 +116,10 @@ class GameMap(
     private val warpPortals: List<GameMapWarpPortal> = loader.loadAllAndTransform(WARP_LAYER) { GameMapWarpPortal(it, mapTitle) }
 
     fun setTiledGraphs() {
-        if (enemies.any { it.isMeetingConditions() }) {
             thread {
                 tiledGraphs[EntityState.WALKING] = TiledGraph(width, height, EntityState.WALKING)
                 tiledGraphs[EntityState.FLYING] = TiledGraph(width, height, EntityState.FLYING)
             }
-        }
     }
 
     fun getTiledGraph(state: EntityState): TiledGraph? {

@@ -4,7 +4,6 @@
   "alva_battle_03": {"battlers": [{"id": "blue_bat", "amount": 5}], "background": "field"},
   "alva_battle_04": {"battlers": [{"id": "blue_slime", "amount": 2}, {"id": "green_slime", "amount": 1}], "background": "field"},
   "alva_battle_05": {"battlers": [{"id": "purple_bat", "amount": 1}, {"id": "blue_bat", "amount": 2}], "background": "field"},
-  "alva_battle_06": {"battlers": [{"id": "purple_bat", "amount": 2}, {"id": "blue_bat", "amount": 1}], "background": "field"},
   "alva_battle_07": {"battlers": [{"id": "blue_slime", "amount": 2}, {"id": "green_slime", "amount": 2}], "background": "field"},
   "alva_battle_08": {"battlers": [{"id": "purple_bat", "amount": 2}, {"id": "blue_bat", "amount": 1}], "background": "field"},
   "alva_battle_09": {"battlers": [{"id": "green_slime", "amount": 3}, {"id": "blue_bat", "amount": 3}], "background": "field"},

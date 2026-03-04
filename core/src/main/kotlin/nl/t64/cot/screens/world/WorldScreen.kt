@@ -44,6 +44,7 @@ import nl.t64.cot.screens.world.entity.events.NpcActionEvent
 import nl.t64.cot.screens.world.loaders.DoorLoader
 import nl.t64.cot.screens.world.loaders.LootLoader
 import nl.t64.cot.screens.world.loaders.NpcEntitiesLoader
+import nl.t64.cot.screens.world.loaders.PartyMembersLoader
 import nl.t64.cot.screens.world.map.GameMap
 import nl.t64.cot.screens.world.schedule.WorldSchedule
 import nl.t64.cot.screens.world.ui.ButtonBox
@@ -84,6 +85,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     private val visibleScheduledEntities: MutableList<Entity> = mutableListOf()
     private lateinit var npcEntities: List<Entity>
     private lateinit var currentNpcEntity: Entity
+    private lateinit var partyMembers: List<Entity>
     private lateinit var lootList: List<Entity>
     private lateinit var doorList: List<Entity>
 
@@ -128,6 +130,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
         npcEntities = NpcEntitiesLoader(currentMap).createNpcs()
         lootList = LootLoader(currentMap).createLoot()
         doorList = DoorLoader(currentMap).createDoors()
+        partyMembers = PartyMembersLoader(player).loadPartyMembers()
         currentMap.setTiledGraphs()
         mapManager.setNextMapTitleNull()
         fogOfWarManager.setNewMap(currentMap, camera)
@@ -242,7 +245,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     }
 
     fun updateParty() {
-        // atm no party update necessary.
+        partyMembers = PartyMembersLoader(player).loadPartyMembers()
     }
 
     fun updateNpcs(newNpcEntities: List<Entity>) {
@@ -301,6 +304,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     override fun onNotifyHeroJoined() {
         brokerManager.blockObservers.removeObserver(currentNpcEntity)
         npcEntities = npcEntities.filter { it != currentNpcEntity }
+        partyMembers = PartyMembersLoader(player).loadPartyMembers()
     }
 
     override fun onNotifyShowBattleScreen(battleId: String) {
@@ -384,6 +388,8 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
         npcEntities.forEach { it.update(dt) }
         npcEntities.forEach { it.send(FindPathEvent(playerGridPosition)) }
         visibleScheduledEntities.forEach { it.update(dt) }
+        partyMembers.forEach { it.update(dt) }
+        partyMembers.forEach { it.send(FindPathEvent(playerGridPosition, partyMembers)) }
         mapManager.getParticleEffects().forEach { it.update(dt) }
         fogOfWarManager.update(player.position, dt)
     }
@@ -406,7 +412,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
         updateCameraPosition()
         worldRenderer.renderAll(player.position) { renderEntities(it) }
         gridRenderer.possibleRender()
-        debugRenderer.possibleRenderObjects(doorList + lootList + npcEntities + visibleScheduledEntities + player)
+        debugRenderer.possibleRenderObjects(doorList + lootList + npcEntities + visibleScheduledEntities + partyMembers + player )
         debugBox.possibleUpdate(dt)
         buttonsBox.update(camera.isZoomPossible(), dt)
         movementBox.update(player.moveSpeed, dt)
@@ -429,7 +435,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
 
     private fun renderEntities(batch: Batch) {
         lootList.forEach { it.render(batch) }
-        (doorList + npcEntities + visibleScheduledEntities + player)
+        (doorList + npcEntities + visibleScheduledEntities + partyMembers + player)
             .sortedByDescending { it.position.y }
             .forEach { it.render(batch) }
     }
