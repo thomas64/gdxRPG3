@@ -26,6 +26,7 @@ import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.components.party.SkillsRewarder
 import nl.t64.cot.components.party.SpellsRewarder
 import nl.t64.cot.components.party.XpRewarder
+import nl.t64.cot.components.party.abilities.ResourceType
 import nl.t64.cot.components.quest.QuestGraph
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.FontProvider
@@ -449,6 +450,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
 
     private fun endConversation(nextId: String) {
         playSe(AudioEvent.SE_CONVERSATION_END)
+        possibleHidePersistentTooltip()
         endConversationWithoutSound(nextId)
     }
 
@@ -460,12 +462,14 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
 
     private fun endConversationBeforeLoadScreen(nextId: String) {
         graph.currentPhraseId = nextId
+        possibleHidePersistentTooltip()
         hide()
         conversationObserver.notifyExitConversation()
     }
 
     private fun endConversationAndLoad(lootScreen: () -> Unit) {
         playSe(AudioEvent.SE_CONVERSATION_END)
+        possibleHidePersistentTooltip()
         stage.addAction(Actions.sequence(Actions.run { hideWithFade() },
                                          Actions.delay(Constant.DIALOG_FADE_OUT_DURATION),
                                          Actions.run { lootScreen.invoke() }))
@@ -493,6 +497,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         populateName()
         populatePhrase()
         populateChoices()
+        possiblePersistentTooltip(phraseId)
     }
 
     private fun populateFace() {
@@ -535,6 +540,16 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         repositionScrollPaneBasedOnContent()
     }
 
+    private fun possiblePersistentTooltip(phraseId: String) {
+        if (conversationId.contains("price-") && conversationId.substringAfterLast("-").toInt() > 0) {
+            if (phraseId == "2") {
+                showGoldTooltip()
+            } else {
+                possibleHidePersistentTooltip()
+            }
+        }
+    }
+
     private fun repositionScrollPaneBasedOnContent() {
         if (label.text.isBlank() && faceId.isBlank() && graph.getCurrentFace().isBlank()) {
             rowWithScrollPane.padTop(-SCROLL_PANE_TOP_PAD).padLeft(-PAD).center()
@@ -570,6 +585,16 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             background.minHeight = DIALOG_HEIGHT
             setPosition(Gdx.graphics.width / 2f - DIALOG_WIDTH / 2f, 0f)
         }
+    }
+
+    private fun showGoldTooltip() {
+        val goldAmount = gameData.inventory.getTotalOfItem(ResourceType.GOLD.name)
+        val message = "Gold: $goldAmount"
+        conversationObserver.notifyShowPersistentMessageTooltip(message)
+    }
+
+    private fun possibleHidePersistentTooltip() {
+        conversationObserver.notifyHidePersistentMessageTooltip()
     }
 
 }

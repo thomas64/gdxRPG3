@@ -18,6 +18,9 @@ private const val SHOW_DURATION = 5f
 class MessageTooltip : BaseTooltip() {
 
     private val label: Label
+    private var isPersistent = false
+    private var isPersistentRequested = false
+    private var persistentRequestId = 0 // Only the latest persistent show request is allowed to materialize.
 
     init {
         super.window.padLeft(PAD)
@@ -35,8 +38,35 @@ class MessageTooltip : BaseTooltip() {
         }
     }
 
+    fun showPersistent(message: String, stage: Stage) {
+        isPersistentRequested = true
+        // Capture the current request version for this queued action.
+        val requestId = ++persistentRequestId
+        stage.addActor(window)
+        enqueuePersistentShow(message, requestId)
+    }
+
+    fun hidePersistent() {
+        // Invalidate queued persistent shows that have not started yet.
+        isPersistentRequested = false
+        persistentRequestId++
+        if (isPersistent) {
+            hidePersistentWindow()
+        }
+    }
+
+    private fun enqueuePersistentShow(message: String, requestId: Int) {
+        window.addAction(Actions.after(Actions.run {
+            // Skip stale queued actions after a newer show/hide invalidated this request.
+            if (isPersistentRequested && requestId == persistentRequestId) {
+                showPersistentWindow(message)
+            }
+        }))
+    }
+
     private fun showWindow(message: String) {
-        window.addAction(Actions.after(Actions.sequence(Actions.run { setupWindow(message) },
+        window.addAction(Actions.after(Actions.sequence(Actions.run { isPersistent = false },
+                                                        Actions.run { setupWindow(message) },
                                                         Actions.alpha(0f),
                                                         Actions.visible(true),
                                                         Actions.delay(DELAY),
@@ -44,6 +74,21 @@ class MessageTooltip : BaseTooltip() {
                                                         Actions.delay(SHOW_DURATION),
                                                         Actions.fadeOut(Constant.FADE_DURATION),
                                                         Actions.visible(false),
+                                                        Actions.run { label.setText("") })))
+    }
+
+    private fun showPersistentWindow(message: String) {
+        window.addAction(Actions.sequence(Actions.run { isPersistent = true },
+                                          Actions.run { setupWindow(message) },
+                                          Actions.alpha(0f),
+                                          Actions.visible(true),
+                                          Actions.fadeIn(Constant.FADE_DURATION)))
+    }
+
+    private fun hidePersistentWindow() {
+        window.addAction(Actions.after(Actions.sequence(Actions.fadeOut(Constant.FADE_DURATION),
+                                                        Actions.visible(false),
+                                                        Actions.run { isPersistent = false },
                                                         Actions.run { label.setText("") })))
     }
 

@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
+import nl.t64.cot.components.party.abilities.ResourceType
 import nl.t64.cot.screens.inventory.BaseTable
 import nl.t64.cot.screens.inventory.tooltip.PersonalityTooltip
 
@@ -26,7 +27,7 @@ internal class CalcsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
         table.add(Label("XP", createLabelStyle()))
         table.add(Label(selectedHero.xpPoints.toString(), createLabelStyle())).row()
         table.add(Label("Gold", createLabelStyle()))
-        table.add(Label(gameData.inventory.getTotalOfItem("gold").toString(), createLabelStyle())).row()
+        table.add(Label(gameData.inventory.getTotalOfItem(ResourceType.GOLD.name).toString(), createLabelStyle())).row()
     }
 
     private fun createLabelStyle(): LabelStyle {

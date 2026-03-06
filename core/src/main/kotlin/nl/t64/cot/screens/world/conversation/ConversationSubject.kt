@@ -39,4 +39,12 @@ class ConversationSubject(private val observer: ConversationObserver) {
                               actionAfterFade = actionAfterFade)
     }
 
+    fun notifyShowPersistentMessageTooltip(message: String) {
+        observer.onNotifyShowPersistentMessageTooltip(message)
+    }
+
+    fun notifyHidePersistentMessageTooltip() {
+        observer.onNotifyHidePersistentMessageTooltip()
+    }
+
 }

@@ -329,6 +329,13 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
                 actionAfterFade = actionAfterFade)
     }
 
+    override fun onNotifyShowPersistentMessageTooltip(message: String) {
+        messageTooltip.showPersistent(message, stage)
+    }
+
+    override fun onNotifyHidePersistentMessageTooltip() {
+        messageTooltip.hidePersistent()
+    }
     //endregion
 
     //region BattleObserver ////////////////////////////////////////////////////////////////////////////////////////////
@@ -412,7 +419,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
         updateCameraPosition()
         worldRenderer.renderAll(player.position) { renderEntities(it) }
         gridRenderer.possibleRender()
-        debugRenderer.possibleRenderObjects(doorList + lootList + npcEntities + visibleScheduledEntities + partyMembers + player )
+        debugRenderer.possibleRenderObjects(doorList + lootList + npcEntities + visibleScheduledEntities + partyMembers + player)
         debugBox.possibleUpdate(dt)
         buttonsBox.update(camera.isZoomPossible(), dt)
         movementBox.update(player.moveSpeed, dt)
