@@ -1,9 +1,11 @@
 package nl.t64.cot.screens.inventory.inventoryslot
 
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.stopSe
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.inventory.InventoryItem
 import nl.t64.cot.screens.dialog.MessageDialog
+import nl.t64.cot.screens.dialog.QuestionDialog
 import nl.t64.cot.screens.inventory.InventoryUtils
 import nl.t64.cot.screens.inventory.itemslot.ItemSlot
 
@@ -26,7 +28,7 @@ class InventorySlotUser private constructor(itemSlot: ItemSlot) {
 
     private fun onlyDoPotionActions() {
         if (canUsePotion()) {
-            usePotion()
+            showUsePotionConfirmDialog()
         } else {
             showFailMessage()
         }
@@ -36,7 +38,7 @@ class InventorySlotUser private constructor(itemSlot: ItemSlot) {
         if (inventoryItem.id == "crystal_of_time") {
             CrystalHandler.doAction()
         } else if ((inventoryItem.hp > 0 || inventoryItem.sp > 0) && canUsePotion()) {
-            usePotion()
+            showUsePotionConfirmDialog()
         } else {
             showFailMessage()
         }
@@ -57,6 +59,12 @@ class InventorySlotUser private constructor(itemSlot: ItemSlot) {
                 || inventoryItem.stealth > 0
 
         return needsHp || needsSp || canUseBuff
+    }
+
+    private fun showUsePotionConfirmDialog() {
+        val question = "Give ${inventoryItem.name} to ${selectedHero.name}?"
+        val dialog = QuestionDialog(question) { usePotion() }
+        dialog.show(currentSlot.stage, AudioEvent.SE_CONVERSATION_NEXT, 0, 0.5f)
     }
 
     private fun usePotion() {
@@ -105,6 +113,7 @@ class InventorySlotUser private constructor(itemSlot: ItemSlot) {
             // @formatter:on
             else -> throw IllegalStateException("Effect of potion ${inventoryItem.name} unknown.")
         }
+        stopSe(AudioEvent.SE_MENU_CONFIRM)
         MessageDialog(message1 + message2).show(currentSlot.stage, AudioEvent.SE_POTION)
     }
 
