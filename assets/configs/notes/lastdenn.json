@@ -1,7 +1,8 @@
 {
   "note_holy_water": {
     "phrases": {
-      "1": {"text": ["Is this holy water? It doesn't look any different from normal water..."], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["Is this holy water? It sure looks wet..."]},
+      "2": {"text": ["Let's not defile it!"], "choices": [{"command": "EXIT"}]}
     }
   }
 }

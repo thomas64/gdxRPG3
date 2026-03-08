@@ -24,7 +24,7 @@ class GameMapQuestChecker(rectObject: RectangleMapObject) : GameMapObject(rectOb
     }
 
     override fun onNotifyActionPressed(checkRect: Rectangle, playerDirection: Direction, playerPosition: Vector2) {
-        if (checkRect.overlaps(rectangle) && conditions.areAllTrue()) {
+        if (checkRect.overlaps(rectangle) && conditions.areAllTrue(quest.id)) {
             when {
                 taskIdToComplete == null
                     && taskIdToFail == null -> error("QuestChecker must have task or fail property.")

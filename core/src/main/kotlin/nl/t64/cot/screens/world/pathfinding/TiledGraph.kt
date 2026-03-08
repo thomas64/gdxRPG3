@@ -78,7 +78,8 @@ class TiledGraph(
     }
 
     private fun getNode(x: Int, y: Int): TiledNode {
-        return nodes[x * height + y]
+        val index = x * height + y
+        return if (index >= 0 && index < nodes.size) nodes[index] else nodes[0]
     }
 
     override fun getIndex(tiledNode: TiledNode): Int {

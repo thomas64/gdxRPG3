@@ -1,5 +1,6 @@
 package nl.t64.cot.components.time
 
+import nl.t64.cot.Utils.gameData
 import java.time.Duration
 import java.time.LocalDateTime
 import kotlin.math.floor
@@ -51,7 +52,11 @@ class Clock {
     }
 
     fun update(dt: Float) {
-        countdown -= (dt * RATE_OF_TIME)
+        if (gameData.numberOfCycles == 1 && countdown < HOUR * 1f) {
+            countdown -= (dt * (RATE_OF_TIME / 2f))
+        } else {
+            countdown -= (dt * RATE_OF_TIME)
+        }
         if (isFinished()) {
             stop()
         }
@@ -64,7 +69,7 @@ class Clock {
     }
 
     fun takeHalfHour() {
-        if (countdown > HOUR) {
+        if ((countdown > HOUR) || (gameData.numberOfCycles == 1 && countdown > HOUR * 2f)) {
             countdown -= HALF_HOUR
         }
     }

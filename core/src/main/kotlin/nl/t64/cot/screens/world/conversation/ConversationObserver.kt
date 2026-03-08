@@ -31,7 +31,8 @@ interface ConversationObserver {
     fun onNotifyShowPersistentMessageTooltip(message: String): Unit =
         throw IllegalStateException("Implement this method in child.")
 
-    fun onNotifyHidePersistentMessageTooltip(): Unit =
-        throw IllegalStateException("Implement this method in child.")
+    fun onNotifyHidePersistentMessageTooltip() {
+        // empty, do nothing here unless overridden in child.
+    }
 
 }

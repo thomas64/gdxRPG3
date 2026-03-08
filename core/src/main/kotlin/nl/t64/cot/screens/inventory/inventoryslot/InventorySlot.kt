@@ -96,7 +96,8 @@ open class InventorySlot(
     }
 
     private fun setVisibilityOfAmountLabel(amount: Int) {
-        val shouldAmountLabelBeVisible = amount >= 2
+        val itemGroup = getPossibleInventoryImage()?.inventoryItem?.group
+        val shouldAmountLabelBeVisible = (amount >= 2) || (amount == 1 && itemGroup == InventoryGroup.RESOURCE)
         amountLabel.isVisible = shouldAmountLabelBeVisible
     }
 

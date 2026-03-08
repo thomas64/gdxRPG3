@@ -224,6 +224,7 @@
   </object>
   <object id="208" name="quest_mother_fairy" type="check" x="1296" y="2382" width="48" height="12">
    <properties>
+    <property name="condition" value="_rc_!=_u_q_this"/>
     <property name="task" value="1"/>
    </properties>
   </object>

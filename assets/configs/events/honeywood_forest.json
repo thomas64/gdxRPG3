@@ -6,7 +6,8 @@
     "type": "start_bgm"
   },
   "play_se_hidden_door"   : {
-    "type": "play_se"
+    "type"     : "play_se",
+    "condition": ["_rc_!=_u_q_quest_mother_fairy"]
   },
   "play_se_hidden_cave"   : {
     "type": "play_se"
