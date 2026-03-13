@@ -27,7 +27,11 @@ class GraphicsPartyMember(spriteId: String) : GraphicsComponent() {
             position = event.position
         }
         if (event is OnDetectionEvent) {
-            setNewFrameDuration(event.moveSpeed)
+            if (event.state == EntityState.IDLE) {
+                setNewFrameDuration(Constant.MOVE_SPEED_2)
+            } else {
+                setNewFrameDuration(event.moveSpeed)
+            }
         }
     }
 

@@ -10,7 +10,8 @@ import nl.t64.cot.screens.world.pathfinding.PathfindingObstacleChecker
 import nl.t64.cot.screens.world.pathfinding.TiledNode
 
 
-private const val SLOWER_MOVE_SPEED_THAN_PLAYER = 20f
+private const val SLOWER_MOVE_SPEED_THAN_PLAYER = 16f
+private const val EIGHT_NODES = 8
 
 class PhysicsPartyMember : PhysicsComponent() {
 
@@ -34,7 +35,11 @@ class PhysicsPartyMember : PhysicsComponent() {
             direction = event.direction
         }
         if (event is OnDetectionEvent) {
-            velocity = event.moveSpeed - SLOWER_MOVE_SPEED_THAN_PLAYER
+            if (event.state == EntityState.IDLE && path.count <= EIGHT_NODES) {
+                velocity = Constant.MOVE_SPEED_1
+            } else {
+                velocity = event.moveSpeed - SLOWER_MOVE_SPEED_THAN_PLAYER
+            }
         }
         if (event is PathUpdateEvent) {
             path = event.path

@@ -40,8 +40,8 @@ class Entity(
         send(OnBumpEvent(biggerBoundingBox, checkRect, playerPosition))
     }
 
-    override fun onNotifyDetection(playerMoveSpeed: Float) {
-        send(OnDetectionEvent(playerMoveSpeed))
+    override fun onNotifyDetection(playerMoveSpeed: Float, playerState: EntityState) {
+        send(OnDetectionEvent(playerMoveSpeed, playerState))
     }
 
     fun send(event: Event) {

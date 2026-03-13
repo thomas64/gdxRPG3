@@ -1,5 +1,7 @@
 package nl.t64.cot.subjects
 
+import nl.t64.cot.screens.world.entity.EntityState
+
 
 class DetectionSubject {
 
@@ -17,8 +19,8 @@ class DetectionSubject {
         observers.clear()
     }
 
-    fun notifyDetection(playerMoveSpeed: Float) {
-        ArrayList(observers).forEach { it.onNotifyDetection(playerMoveSpeed) }
+    fun notifyDetection(playerMoveSpeed: Float, playerState: EntityState) {
+        ArrayList(observers).forEach { it.onNotifyDetection(playerMoveSpeed, playerState) }
     }
 
 }

@@ -58,7 +58,7 @@ class PhysicsPlayer : PhysicsComponent() {
         checkActionPressed()
         relocate(dt)
         collisionObstacles(dt)
-        brokerManager.detectionObservers.notifyDetection(velocity)
+        brokerManager.detectionObservers.notifyDetection(velocity, state)
         entity.send(PositionEvent(currentPosition))
     }
 
