@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.*
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.utils.Align
+import com.badlogic.gdx.utils.TimeUtils
 import com.rafaskoberg.gdx.typinglabel.TypingLabel
 import ktx.assets.disposeSafely
 import ktx.collections.GdxArray
@@ -69,6 +70,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     private lateinit var nameLabel: Label
     private lateinit var rowWithScrollPane: Cell<ScrollPane>
     private lateinit var graph: ConversationGraph
+    private var lockConfirmationKeyUntil: Long = 0L
 
     fun dispose() {
         stage.dispose()
@@ -104,7 +106,6 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         fillDialogForConversation()
         playSe(AudioEvent.SE_CONVERSATION_START)
         populateDialog(graph.currentPhraseId)
-        applyListeners()
     }
 
     fun loadNote(noteId: String) {
@@ -114,7 +115,6 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         fillDialogForNote()
         playSe(AudioEvent.SE_CONVERSATION_START)
         populateDialog(graph.currentPhraseId)
-        applyListeners()
     }
 
     fun setFaceColor(color: Color) {
@@ -167,6 +167,9 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun selectAnswer() {
+        if (isConfirmationInputLocked()) {
+            return
+        }
         if (!label.hasEnded()) {
             label.skipToTheEnd()
             return
@@ -283,7 +286,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         } else {
             playSe(AudioEvent.SE_RESTORE)
         }
-        delayInputListeners()
+        applyListeners(inputDelay = 2f)
         Utils.runWithDelay(Constant.FADE_DURATION) {
             when (time) {
                 "00:15" -> gameData.clock.takeQuarterHour()
@@ -428,19 +431,10 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private fun delayInputListeners() {
-        stage.addAction(Actions.sequence(
-            Actions.run { scrollPane.clearListeners() },
-            Actions.delay(1f),
-            Actions.run { applyListeners() }
-        ))
-    }
-
-    private fun applyListeners() {
-        scrollPane.addAction(Actions.sequence(
-            Actions.delay(0.5f),
-            Actions.addListener(ConversationDialogListener(answers) { selectAnswer() }, false)
-        ))
+    private fun applyListeners(inputDelay: Float) {
+        scrollPane.clearListeners()
+        lockConfirmationInput(inputDelay)
+        scrollPane.addListener(ConversationDialogListener(answers) { selectAnswer() })
     }
 
     private fun continueConversation(nextId: String) {
@@ -480,6 +474,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         answers.clearItems()
         answers.clearSelectedIndexHistory()
         graph.clearChosenAnswersHistory()
+        lockConfirmationKeyUntil = 0L
         scrollPane.clearListeners()
         dialog.hide()
     }
@@ -487,8 +482,22 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     private fun hide() {
         answers.clearSelectedIndexHistory()
         graph.clearChosenAnswersHistory()
+        lockConfirmationKeyUntil = 0L
         scrollPane.clearListeners()
         dialog.hide(null)
+    }
+
+    private fun lockConfirmationInput(seconds: Float) {
+        if (seconds <= 0f) return
+
+        val lockUntil: Long = TimeUtils.millis() + (seconds * 1000f).toLong()
+        if (lockUntil > lockConfirmationKeyUntil) {
+            lockConfirmationKeyUntil = lockUntil
+        }
+    }
+
+    private fun isConfirmationInputLocked(): Boolean {
+        return TimeUtils.millis() < lockConfirmationKeyUntil
     }
 
     private fun populateDialog(phraseId: String) {
@@ -538,6 +547,12 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         val choices = GdxArray<ConversationChoice>(graph.getAssociatedChoices())
         answers.populateChoices(choices)
         repositionScrollPaneBasedOnContent()
+
+        if (choices.size > 1) {
+            applyListeners(inputDelay = 0.6f)
+        } else {
+            applyListeners(inputDelay = 0.2f)
+        }
     }
 
     private fun possiblePersistentTooltip(phraseId: String) {

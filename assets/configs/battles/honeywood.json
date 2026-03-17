@@ -15,6 +15,6 @@
   "farm_battle3"               : {"battlers": [{"id": "orc_scout_sword", "amount": 1}], "background": "village", "isEscapable": false},
   "ardor_orc_generals"         : {"battlers": [{"id": "orc_general_axe", "amount": 1}, {"id": "orc_general_spear", "amount": 1}], "background": "ardor", "isEscapable": false},
   "ardor"                      : {"battlers": [{"id": "ardor", "amount": 1}], "background": "ardor", "isEscapable": false},
-  "quest_honeywood_inn_price-1": {"battlers": [{"id": "purple_bat", "amount": 2}], "background": "inside"},
+  "quest_honeywood_inn_price-1": {"battlers": [{"id": "purple_bat", "amount": 3}], "background": "inside"},
   "quest_get_medicine_academy" : {"battlers": [{"id": "blue_slime_medicine", "amount": 1}], "background": "village"}
 }

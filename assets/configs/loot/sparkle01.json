@@ -21,6 +21,7 @@
   "sparkle_honeywood_5": {"content": {"herb": 2}},
   "sparkle_honeywood_6": {"content": {"herb": 1}},
   "sparkle_honeywood_7": {"content": {"herb": 1}},
+  "sparkle_honeywood_8": {"condition": ["ranger1"], "content": {"metal": 1}},
   "sparkle0017"        : {"condition": ["_c_>=_k_q_quest_get_horse", "_n_4_<_item_horseshoe"], "content": {"horseshoe": 1}, "doesReset": true},
   "sparkle0018"        : {"condition": ["_c_>=_k_q_quest_get_horse", "_n_4_<_item_horseshoe"], "content": {"horseshoe": 1}, "doesReset": true},
   "sparkle0019"        : {"condition": ["_c_>=_k_q_quest_get_horse", "_n_4_<_item_horseshoe"], "content": {"horseshoe": 1}, "doesReset": true},

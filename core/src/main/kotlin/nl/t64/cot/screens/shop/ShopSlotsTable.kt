@@ -25,7 +25,10 @@ class ShopSlotsTable(
     }
 
     fun refreshPurchaseColor() {
-        counterpartSlotTable.children.forEach { (it as ShopSlot).refreshPurchaseColor() }
+        // this method makes shop items dark when not having enough gold.
+        // this is temporarily disabled as a try-out. because I don't like the dark items myself.
+
+        // counterpartSlotTable.children.forEach { (it as ShopSlot).refreshPurchaseColor() }
     }
 
     override fun createSlot(index: Int) {

@@ -82,11 +82,14 @@ internal class AcademyTable(
     }
 
     private fun createColorsFrom(trainerSkill: SkillItem): Pair<Color, Color> {
-        if (canBeUpgradedBy(trainerSkill)) {
-            return Color.WHITE to Color.BLACK
-        } else {
-            return Color.BLACK to Color.LIGHT_GRAY
-        }
+        // this method makes academy items dark when not having enough gold or xp.
+        // this is temporarily disabled as a try-out. because I don't like the dark items myself.
+
+        // if (canBeUpgradedBy(trainerSkill)) {
+        return Color.WHITE to Color.BLACK
+        // } else {
+        // return Color.BLACK to Color.LIGHT_GRAY
+        // }
     }
 
     private fun canBeUpgradedBy(trainerSkill: SkillItem): Boolean {

@@ -10,7 +10,8 @@
     "min_skill"  : 1,
     "description": [
       "Friendly target of the spell add 2 to their",
-      "Protection value for each rank in 'Wizard'.",
+      "Protection value for the rest of the battle",
+      "for each rank in 'Wizard'.",
       "May only be cast once on each target."
     ]
   },
@@ -25,7 +26,8 @@
     "min_skill"  : 1,
     "description": [
       "Friendly target of the spell add 2 to their",
-      "Resistance value for each rank in 'Wizard'.",
+      "Resistance value for the rest of the battle",
+      "for each rank in 'Wizard'.",
       "May only be cast once on each target."
     ],
     "comment"    : [

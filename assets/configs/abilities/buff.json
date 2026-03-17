@@ -10,7 +10,8 @@
     "min_skill"  : 1,
     "description": [
       "Friendly target of the spell gains 1",
-      "Intelligence for each rank in 'Wizard'.",
+      "Intelligence for the rest of the battle",
+      "for each rank in 'Wizard'.",
       "May only be cast once on each target."
     ]
   },
@@ -25,7 +26,8 @@
     "min_skill"  : 1,
     "description": [
       "Friendly target of the spell gains 1",
-      "Dexterity for each rank in 'Wizard'.",
+      "Dexterity for the rest of the battle",
+      "for each rank in 'Wizard'.",
       "May only be cast once on each target."
     ]
   },
@@ -40,7 +42,8 @@
     "min_skill"  : 1,
     "description": [
       "Friendly target of the spell gains 1",
-      "Strength for each rank in 'Wizard'.",
+      "Strength for the rest of the battle",
+      "for each rank in 'Wizard'.",
       "May only be cast once on each target."
     ]
   },
@@ -55,7 +58,8 @@
     "min_skill"  : 1,
     "description": [
       "Friendly target of the spell gains 1",
-      "Speed for each rank in 'Wizard'.",
+      "Speed for the rest of the battle",
+      "for each rank in 'Wizard'.",
       "May only be cast once on each target."
     ]
   }
