@@ -225,7 +225,7 @@ class SceneArdorFirstTime : CutsceneScreen() {
         SpoilsCutsceneScreen.load(spoils, ScreenType.SCENE_ARDOR_FIRST_TIME_AFTER_WIN_FROM_GENERALS)
     }
 
-    override fun onNotifyBattleLost() {
+    override fun onNotifyBattleLost(battleId: String) {
         (screenManager.getScreen(ScreenType.SCENE_ARDOR_KILLING_GRACE) as SceneArdorKillingGrace).apply {
             areGeneralsAlive = true
             nextScreen = ScreenType.SCENE_CYCLE_1_IN_HEAVEN

@@ -37,6 +37,7 @@ object ConfigDataLoader {
 
     fun createEvents(): Map<String, Event> {
         return loadConfigData<Event>("events")
+            .mapValues { it.value.copy(id = it.key) }
     }
 
     fun createLoot(): Map<String, Loot> {

@@ -88,7 +88,7 @@ class BattleResultManager(
     }
 
     private fun gameOverExitScreen() {
-        exitScreen { battleObserver.notifyBattleLost() }
+        exitScreen { battleObserver.notifyBattleLost(battleId) }
     }
 
     private fun exitScreen(actionAfterExit: () -> Unit) {

@@ -128,7 +128,7 @@ class SceneArdorLaterTime : CutsceneScreen() {
         SpoilsCutsceneScreen.load(spoils, ScreenType.SCENE_ARDOR_LATER_TIME_AFTER_WIN_FROM_GENERALS)
     }
 
-    override fun onNotifyBattleLost() {
+    override fun onNotifyBattleLost(battleId: String) {
         when (gameData.numberOfCycles) {
             2 -> {
                 (screenManager.getScreen(ScreenType.SCENE_ARDOR_KILLING_GRACE) as SceneArdorKillingGrace).apply {

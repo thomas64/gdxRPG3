@@ -3,6 +3,7 @@ package nl.t64.cot.components.event
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.fasterxml.jackson.annotation.JsonProperty
 import nl.t64.cot.Utils.audioManager
+import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.Utils.worldScreen
@@ -11,6 +12,7 @@ import nl.t64.cot.audio.playBgm
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.audio.stopAllSe
 import nl.t64.cot.components.condition.ConditionDatabase
+import nl.t64.cot.components.quest.QuestGraph
 import nl.t64.cot.screens.dialog.MessageDialog
 
 
@@ -19,7 +21,8 @@ data class EventProgress(
     val isRepeated: Boolean = false
 )
 
-class Event(
+data class Event(
+    private val id: String = "",
     private val type: String = "",
     @JsonProperty("condition")
     private val conditions: List<String> = emptyList(),
@@ -96,6 +99,12 @@ class Event(
             type == "play_se" -> {
                 stopAllSe()
                 playSe(AudioEvent.SE_REWARD)
+            }
+
+            type == "unhide_optional_task" -> {
+                val questId: String = id.substringAfter("event_")
+                val quest: QuestGraph = gameData.quests.getQuestById(questId)
+                quest.forceUnhideAllOptionalTasks()
             }
 
             else -> {

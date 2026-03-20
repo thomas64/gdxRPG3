@@ -350,8 +350,16 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
         if (gameState == GameState.RUNNING) mapManager.continueAudio()
     }
 
-    override fun onNotifyBattleLost() {
-        screenManager.setScreen(ScreenType.MENU_MAIN)
+    override fun onNotifyBattleLost(battleId: String) {
+        if (battleId == "luana_body") {
+            when (gameData.numberOfCycles) {
+                2 -> screenManager.setScreen(ScreenType.SCENE_CYCLE_2_IN_HEAVEN)
+                3 -> screenManager.setScreen(ScreenType.SCENE_CYCLE_3_IN_HEAVEN)
+                else -> screenManager.setScreen(ScreenType.MENU_MAIN)
+            }
+        } else {
+            screenManager.setScreen(ScreenType.MENU_MAIN)
+        }
     }
 
     override fun onNotifyBattleFled() {

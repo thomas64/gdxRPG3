@@ -270,12 +270,12 @@
  <objectgroup color="#ffff00" id="18" name="quest">
   <object id="205" name="quest_to_lastdenn_then2" type="discover" x="468" y="2256" width="12" height="336">
    <properties>
-    <property name="task" value="10"/>
+    <property name="task" value="11"/>
    </properties>
   </object>
   <object id="206" name="quest_to_lastdenn_then" type="discover" x="456" y="2256" width="12" height="336">
    <properties>
-    <property name="task" value="10"/>
+    <property name="task" value="11"/>
    </properties>
   </object>
   <object id="223" type="blocker" x="216" y="2376" height="144">

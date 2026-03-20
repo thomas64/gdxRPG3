@@ -269,10 +269,7 @@
       "1": {"text": ["This is all terrible... Now Luana is also gone, same as Grace..."]},
       "2": {"text": ["If only I could have been here {COLOR=BLUE}sooner{COLOR=BLACK}..."]},
       "3": {"text": ["There isn't much for me to accomplish here now anymore..."]},
-      "4": {"text": ["It's all because of that son of a bitch Ardor! I'm gonna take Grace back!"]},
-      "5": {"face": "fairy_transp", "name": "Mother Fairy", "text": ["\"You cannot confront Ardor! Even if you were to face him, he's far beyond your capabilities.\""]},
-      "6": {"face": "fairy_transp", "name": "Mother Fairy", "text": ["\"Watch out for Ardor! He is not to be trifled with!\""]},
-      "7": {"face": "mozes", "name": "Mozes", "text": ["Screw that! Grace needs my help now!"], "choices": [{"command": "AUTO_SAVE"}]}
+      "4": {"text": ["If Luana was taken, maybe I can still find her in Honeywood Forest..."], "choices": [{"command": "AUTO_SAVE"}]}
     }
   },
   "stable_horse_1"                 : {

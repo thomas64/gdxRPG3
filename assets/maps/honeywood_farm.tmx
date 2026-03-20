@@ -130,8 +130,7 @@
  </objectgroup>
  <objectgroup color="#ff55ff" id="17" name="event">
   <object id="80" name="event_failed_to_save_luana" type="discover" x="372" y="1008" width="168" height="24"/>
-  <object id="87" name="guide_event_quest_failure" type="discover" x="372" y="1032" width="168" height="24"/>
-  <object id="88" name="event_failed_to_save_luana" type="discover" x="372" y="1056" width="168" height="24"/>
+  <object id="87" name="event_quest_honeywood_elder" type="discover" x="372" y="1014" width="168" height="12"/>
  </objectgroup>
  <objectgroup color="#ff00ff" id="18" name="cutscene">
   <object id="82" name="scene_honeywood_farm_too_late" type="discover" x="600" y="510" width="96" height="12">

@@ -39,9 +39,14 @@
   },
   "event_failed_to_save_luana"           : {
     "type"          : "conversation",
-    "condition"     : ["_r_!=_f_q_quest_honeywood_elder", "_c_==_x_q_quest_honeywood_elder"],
+    "condition"     : ["_c_==_x_q_quest_honeywood_elder", "alone_in_party"],
     "conversationId": "failed_to_save_luana",
     "entityId"      : "mozes"
+  },
+  "event_quest_honeywood_elder"          : {
+    "type"      : "unhide_optional_task",
+    "condition" : ["_c_==_x_q_quest_honeywood_elder", "alone_in_party"],
+    "doesRepeat": true
   },
   "event_honeywood_farm_back_door_before": {
     "type"          : "conversation",

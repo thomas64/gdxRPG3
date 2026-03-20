@@ -238,17 +238,6 @@
       "The village elder is a good example of this behavior."
     ]
   },
-  "guide_event_quest_failure"        : {
-    "type"     : "tutorial",
-    "condition": ["_r_!=_f_q_quest_honeywood_elder", "_c_==_x_q_quest_honeywood_elder"],
-    "text"     : [
-      "One of the two open main [M] quests was failed.",
-      "Press the [BLUE]%logbook%[BLACK] to access your logbook.",
-      "A red [FIREBRICK]X[BLACK] indicates a failed quest.",
-      "",
-      "In this specific case, just follow the other main [M] quest."
-    ]
-  },
   "guide_event_party_member"         : {
     "type"     : "tutorial",
     "condition": ["!alone_in_party"],

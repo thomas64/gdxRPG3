@@ -183,7 +183,7 @@ class SceneHoneywoodFarmAttack1Alt : CutsceneScreen() {
         SpoilsCutsceneScreen.load(spoils, ScreenType.SCENE_HONEYWOOD_FARM_ATTACK_2_ALT)
     }
 
-    override fun onNotifyBattleLost() {
+    override fun onNotifyBattleLost(battleId: String) {
         screenManager.setScreen(ScreenType.MENU_MAIN)
     }
 

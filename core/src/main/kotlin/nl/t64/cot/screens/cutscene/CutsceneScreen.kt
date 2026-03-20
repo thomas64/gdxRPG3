@@ -160,7 +160,7 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
         throw IllegalStateException("Implement this method in child.")
     }
 
-    override fun onNotifyBattleLost() {
+    override fun onNotifyBattleLost(battleId: String) {
         throw IllegalStateException("Implement this method in child.")
     }
 

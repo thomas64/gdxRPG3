@@ -54,7 +54,7 @@
         "taskPhrase": "Leave Honeywood Village through the south past the guards.",
         "type"      : "DISCOVER"
       },
-      "10": {
+      "11": {
         "taskPhrase": "Travel to Lastdenn to find answers.",
         "type"      : "DISCOVER"
       }
@@ -70,11 +70,11 @@
         "taskPhrase": "Leave Honeywood Village through the south past the guards.",
         "type"      : "DISCOVER"
       },
-      "10": {
+      "11": {
         "taskPhrase": "Travel to Lastdenn to find answers.",
         "type"      : "DISCOVER"
       },
-      "11": {
+      "12": {
         "taskPhrase"     : "Find the priest of Lastdenn.",
         "type"           : "DELIVER_MESSAGE",
         "conversationIds": ["santino_prepare", "santino_service_start", "santino_first_service", "santino_first_counseling", "santino_busy_errand"],
@@ -262,38 +262,45 @@
     "isSubQuest": true,
     "linkedWith": ["quest_luana_before_10"],
     "tasks"     : {
-      "2": {
+      "2" : {
         "taskPhrase"  : "      Get permission from the elder to leave the village.",
         "type"        : "FREE",
         "isResettable": false
       },
-      "3": {
+      "3" : {
         "taskPhrase": "            Unlock the door in the elder's basement.",
         "type"      : "CHECK_WITH_ITEM",
         "target"    : {"key_honeywood_basement": 1}
       },
-      "4": {
+      "4" : {
         "taskPhrase": "            Activate and pass through the portal.",
         "type"      : "CHECK"
       },
-      "5": {
+      "5" : {
         "taskPhrase"     : "            Deliver the letter to the Fairy Shop.",
         "type"           : "DELIVER_ITEM",
         "target"         : {"letter_to_fairy_shop": 1},
         "conversationIds": ["fairy_shop"],
         "isResettable"   : false
       },
-      "6": {
+      "6" : {
         "taskPhrase": "            Return to the elder with the package from the Fairy Shop.",
         "type"      : "SHOW_ITEM",
         "target"    : {"fine_fairy_ring": 1}
       },
-      "7": {
+      "7" : {
         "comment"     : "WARNING: One link to 7 from SceneHoneywoodFarmAttackAfterWin(alt) and one from honeywood_stable.tmx. also in conversations: honeywood.json.",
         "taskPhrase"  : "            Get Luana to accompany you on your travels. She is at Honeywood Farm in the northeast of the village.",
         "type"        : "FREE",
         "isResettable": false,
         "linkedWith"  : ["2", "8"]
+      },
+      "10": {
+        "taskPhrase"          : "                  [Optional] Locate Luana's body in Ardor's domain.",
+        "type"                : "KILL",
+        "isHidden"            : true,
+        "isOptional"          : true,
+        "shouldHideAfterReset": true
       }
     }
   },

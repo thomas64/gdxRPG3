@@ -9,8 +9,8 @@ class BattleSubject(private val observer: BattleObserver) {
         observer.onNotifyBattleWon(battleId, spoils)
     }
 
-    fun notifyBattleLost() {
-        observer.onNotifyBattleLost()
+    fun notifyBattleLost(battleId: String) {
+        observer.onNotifyBattleLost(battleId)
     }
 
     fun notifyBattleFled() {
