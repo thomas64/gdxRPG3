@@ -124,7 +124,7 @@ abstract class PhysicsComponent : Component {
     }
 
     private fun doesBoundingBoxOverlapsBlockers(): Boolean {
-        return brokerManager.blockObservers.getCurrentBlockersFor(boundingBox, state)
+        return brokerManager.blockObservers.getCurrentBlockersFor(boundingBox, state, direction)
             .filter { boundingBox != it }
             .any { boundingBox.overlaps(it) }
     }

@@ -35,7 +35,7 @@ class BlockSubject {
 
     fun getCurrentBlockersFor(boundingBox: Rectangle,
                               entityState: EntityState,
-                              entityDirection: Direction = Direction.NONE
+                              entityDirection: Direction
     ): List<Rectangle> {
         return ArrayList(observers).mapNotNull { it.getBlockerFor(boundingBox, entityState, entityDirection) }
     }

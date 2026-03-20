@@ -54,7 +54,7 @@ class PhysicsPartyMember : PhysicsComponent() {
     }
 
     private fun checkObstacles(dt: Float) {
-        if (brokerManager.blockObservers.getCurrentBlockersFor(boundingBox, state).isNotEmpty()) {
+        if (brokerManager.blockObservers.getCurrentBlockersFor(boundingBox, state, direction).isNotEmpty()) {
             val positionInGrid = entity.getPositionInGrid()
             direction = PathfindingObstacleChecker(positionInGrid, direction, state).getNewDirection()
             currentPosition.set(oldPosition)
