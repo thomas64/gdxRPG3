@@ -56,6 +56,7 @@ internal class NpcEntitiesLoader(private val currentMap: GameMap) {
         enemyEntity.send(LoadEntityEvent(gameMapEnemy.state,
                                          gameMapEnemy.direction,
                                          gameMapEnemy.position,
+                                         gameMapEnemy.wanderBoxSize,
                                          gameMapEnemy.battleId))
     }
 
@@ -78,6 +79,7 @@ internal class NpcEntitiesLoader(private val currentMap: GameMap) {
         npcEntity.send(LoadEntityEvent(gameMapNpc.state,
                                        gameMapNpc.direction,
                                        gameMapNpc.position,
+                                       gameMapNpc.wanderBoxSize,
                                        gameMapNpc.conversation))
     }
 

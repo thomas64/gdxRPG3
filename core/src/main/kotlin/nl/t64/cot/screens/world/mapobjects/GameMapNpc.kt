@@ -10,6 +10,8 @@ import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.screens.world.entity.EntityState
 
 
+private const val DEFAULT_WANDER_BOX_SIZE: Float = 240f
+
 open class GameMapNpc(rectObject: RectangleMapObject) : GameMapObject(rectObject.rectangle) {
 
     val name: String = rectObject.name
@@ -19,6 +21,7 @@ open class GameMapNpc(rectObject: RectangleMapObject) : GameMapObject(rectObject
     val conditions: List<String> = createConditions(rectObject)
     val position: Vector2 get() = Vector2(rectangle.x, rectangle.y)
     val isEnemy: Boolean = createIsEnemy(rectObject)
+    val wanderBoxSize: Float = createWanderBoxSize(rectObject)
 
     open fun isMeetingConditions(): Boolean {
         return ConditionDatabase.isMeetingConditions(conditions, conversation)
@@ -49,4 +52,9 @@ open class GameMapNpc(rectObject: RectangleMapObject) : GameMapObject(rectObject
     private fun createIsEnemy(rectObject: RectangleMapObject): Boolean {
         return rectObject.property("isEnemy", false)
     }
+
+    private fun createWanderBoxSize(rectObject: RectangleMapObject): Float {
+        return rectObject.property<Float>("wanderBoxSize", DEFAULT_WANDER_BOX_SIZE)
+    }
+
 }

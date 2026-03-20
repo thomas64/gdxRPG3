@@ -10,9 +10,6 @@ import kotlin.math.roundToInt
 import kotlin.math.sqrt
 
 
-private const val WANDER_BOX_SIZE = 240f
-private const val WANDER_BOX_POSITION = -96f
-
 abstract class PhysicsComponent : Component {
 
     lateinit var entity: Entity
@@ -43,10 +40,9 @@ abstract class PhysicsComponent : Component {
         boundingBox.set(x, y, width, height)
     }
 
-    fun setWanderBox() {
-        wanderBox = Rectangle(currentPosition.x + WANDER_BOX_POSITION,
-                              currentPosition.y + WANDER_BOX_POSITION,
-                              WANDER_BOX_SIZE, WANDER_BOX_SIZE)
+    fun setWanderBox(size: Float) {
+        val position: Float = -(size - Constant.TILE_SIZE) / 2f
+        wanderBox = Rectangle(currentPosition.x + position, currentPosition.y + position, size, size)
     }
 
     fun relocate(dt: Float) {

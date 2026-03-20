@@ -46,7 +46,7 @@ class PhysicsNpc : PhysicsComponent() {
         currentPosition = loadEvent.position
         direction = loadEvent.direction!!
         conversationId = loadEvent.conversationOrBattleId!!
-        if (state != EntityState.INVISIBLE) setWanderBox()
+        if (state != EntityState.INVISIBLE) setWanderBox(loadEvent.wanderBoxSize!!)
         setBoundingBox()
     }
 

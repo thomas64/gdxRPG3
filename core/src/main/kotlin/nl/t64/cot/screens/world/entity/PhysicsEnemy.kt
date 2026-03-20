@@ -63,7 +63,7 @@ class PhysicsEnemy : PhysicsComponent() {
         currentPosition = loadEvent.position
         direction = loadEvent.direction!!
         battleId = loadEvent.conversationOrBattleId!!
-        setWanderBox()
+        setWanderBox(loadEvent.wanderBoxSize!!)
         setBoundingBox()
     }
 
@@ -90,7 +90,7 @@ class PhysicsEnemy : PhysicsComponent() {
     }
 
     private fun checkObstaclesWhileDetecting(dt: Float) {
-        setWanderBox()
+        setWanderBox(wanderBox.width) // width equals height equals size.
         if (brokerManager.blockObservers.getCurrentBlockersFor(boundingBox, state).isNotEmpty()) {
             val positionInGrid = entity.getPositionInGrid()
             direction = PathfindingObstacleChecker(positionInGrid, direction, state).getNewDirection()
