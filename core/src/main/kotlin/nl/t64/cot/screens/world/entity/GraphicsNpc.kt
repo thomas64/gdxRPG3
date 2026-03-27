@@ -6,7 +6,7 @@ import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.world.entity.events.*
 
 
-class GraphicsNpc(spriteId: String) : GraphicsComponent() {
+open class GraphicsNpc(spriteId: String) : GraphicsComponent() {
 
     init {
         frameDuration = Constant.NORMAL_FRAMES

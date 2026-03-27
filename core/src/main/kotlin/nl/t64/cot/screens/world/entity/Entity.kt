@@ -83,19 +83,23 @@ class Entity(
         inputComponent.reset()
     }
 
-    fun getAnimation(): Animation<TextureRegion> =
-        graphicsComponent.getAnimation()
+    fun getAnimation(): Animation<TextureRegion> {
+        return graphicsComponent.getAnimation()
+    }
 
-    fun getPositionInGrid(): Vector2 =
-        Vector2(((position.x + Constant.HALF_TILE_SIZE) / Constant.HALF_TILE_SIZE).toInt().toFloat(),
-                ((position.y + (Constant.TILE_SIZE / 4f)) / Constant.HALF_TILE_SIZE).toInt().toFloat())
+    fun getPositionInGrid(): Vector2 {
+        return Vector2(((position.x + Constant.HALF_TILE_SIZE) / Constant.HALF_TILE_SIZE).toInt().toFloat(),
+                       ((position.y + (Constant.TILE_SIZE / 4f)) / Constant.HALF_TILE_SIZE).toInt().toFloat())
+    }
 
     val position: Vector2 get() = physicsComponent.currentPosition
     val direction: Direction get() = physicsComponent.direction
     val state: EntityState get() = physicsComponent.state
     val moveSpeed: Float get() = physicsComponent.velocity
 
-    fun isNpc(): Boolean = physicsComponent is PhysicsNpc
+    fun isNpc(): Boolean {
+        return physicsComponent is PhysicsNpc
+    }
 
     fun getConversationId(): String {
         return when (physicsComponent) {

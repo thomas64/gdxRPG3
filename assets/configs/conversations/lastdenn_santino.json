@@ -1,20 +1,17 @@
 {
-  "garrin_waiting"            : {
+  "garrin_early_morning"      : {
     "phrases": {
-      "1": {"text": ["What are you doing in our home?"]},
-      "2": {"text": ["You should leave. It's not safe here..."], "choices": [{"command": "EXIT"}]}
-    }
-  },
-  "garrin_it_is_time"         : {
-    "phrases": {
-      "1": {"text": ["What are you doing in our home?"]},
-      "2": {"text": ["It's 9:00! Get out now! It's not safe here!"], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["There's a scary story about ghosts in this part of town."]},
+      "2": {"text": ["We moved here recently because I don't believe in that kind of thing!"]},
+      "3": {"text": ["Even so, I went to the priest once to talk about it. I'd heard he had something that protects against ghosts. But he said it wasn't necessary."]},
+      "4": {"text": ["I guess the priest doesn't believe in ghosts either."]},
+      "5": {"text": ["My son Paton, however, is acting a little strange this morning."], "choices": [{"command": "EXIT"}]}
     }
   },
   "paton_hiding"              : {
     "phrases": {
-      "1": {"text": ["My dad told me to hide here."]},
-      "2": {"text": ["But I'm scared!"], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["I'm scared!"]},
+      "2": {"text": ["I think it's coming..."], "choices": [{"command": "EXIT"}]}
     }
   },
   "paton_silent"              : {
@@ -24,45 +21,65 @@
   },
   "ghost_booing"              : {
     "phrases": {
-      "1": {"text": ["huuuuuuuuuuuuuuuuuu"], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["huuuuuuuuuuuuuuuuuu reveeenge"], "choices": [{"command": "EXIT"}]}
     }
   },
   "ghost_entering"            : {
     "phrases": {
-      "1": {"face": "ghost1", "text": ["huuuuuuuuuuuuuuuuuu"]},
-      "2": {"face": "boy17", "text": ["Aaaaaah!!"]},
-      "3": {"face": "man12", "text": ["No! Paton! Come here, quick!"], "choices": [{"command": "EXIT"}]}
+      "1": {"face": "ghost1", "text": ["huuuuuuuuuuuuuuuuuu reveeenge"]},
+      "2": {"face": "boy17", "text": ["Daddy! Aaaaaah!!"]},
+      "3": {"face": "man12", "text": ["Paton! What's wrong?"], "choices": [{"command": "EXIT"}]}
     }
   },
   "paton_hiding_behind_garrin": {
     "phrases": {
-      "1": {"face": "ghost1", "text": ["huuuuuuuuuuuuuuuuuu"]},
+      "1": {"face": "ghost1", "text": ["huuuuuuuuuuuuuuuuuu reveeenge"]},
       "2": {"face": "boy17", "text": ["Aaaaaah!!"]},
       "3": {"face": "man12", "text": ["Paton, stay behind me!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "ghost_scaring"             : {
     "phrases": {
-      "1": {"face": "ghost1", "text": ["huuuuuuuuuuuuuuuuuu"]},
+      "1": {"face": "ghost1", "text": ["huuuuuuuuuuuuuuuuuu reveeenge"]},
       "2": {"face": "boy17", "text": ["Aaaaaah!!"]},
       "3": {"face": "man12", "text": [". . ."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "garrin_leave_us"           : {
+  "garrin_takes_a_stand"      : {
     "phrases": {
-      "1": {"face": "man12", "text": ["Please leave..."]},
-      "2": {"face": "man12", "text": ["There's nothing you can do..."]},
-      "3": {"face": "boy17", "text": ["Boohoo! Daddy, I'm scared!"]},
-      "4": {"face": "man12", "text": ["It's alright Paton, I will protect you... Somehow..."], "choices": [{"command": "EXIT"}]}
+      "1": {"face": "man12", "text": ["That's it! I won't let you hurt my son!"]},
+      "2": {"face": "ghost1", "text": ["huuuuuuuuuuuuuuuuuu reveeenge"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "garrin_what_to_do"         : {
+  "garrin_steps_back"         : {
     "phrases": {
-      "1": {"text": ["What to do... What to do..."]},
-      "2": {"text": ["I have to protect Paton..."]},
-      "3": {"text": [". . ."]},
-      "4": {"text": ["Huh?"]},
-      "5": {"text": ["Don't bother me!"], "choices": [{"command": "EXIT"}]}
+      "1": {"face": "man12", "text": ["Y-you... you stay away now!"]},
+      "2": {"face": "ghost1", "text": ["huuuuuuuuuuuuuuuuuu reveeenge"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "paton_shouts_nooo"         : {
+    "phrases": {
+      "1": {"face": "boy17", "text": ["Nooo! Daddy!!"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "paton_runs_to_garrin"      : {
+    "phrases": {
+      "1": {"face": "boy17", "text": ["Nooo! Daddy!!"]},
+      "2": {"face": "boy17", "text": ["Are you okay?!"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "ghost_has_garrin"          : {
+    "phrases": {
+      "1": {"face": "ghost1", "text": ["goooo awaaay reveeenge"]},
+      "2": {"face": "boy17", "text": ["What have you done to my daddy?!"]},
+      "3": {"face": "ghost1", "text": ["goooo awaaay reveeenge"]},
+      "4": {"face": "boy17", "text": ["Daddy, I'm scared!"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "paton_hiding_again"        : {
+    "phrases": {
+      "1": {"text": ["Is my daddy gonna be okay?"]},
+      "2": {"text": ["Please save him!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "santino_prepare"           : {

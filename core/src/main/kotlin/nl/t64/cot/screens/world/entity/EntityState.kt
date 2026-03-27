@@ -15,7 +15,7 @@ enum class EntityState {
     INVISIBLE,
     OPENED,
     CLOSING,
-    CRAWLING,   // only for scheduled npc's.
+    CRAWLING,   // only for scheduled npc's and cutscenes.
     RUNNING;    // only for scheduled npc's and cutscenes.
 
 

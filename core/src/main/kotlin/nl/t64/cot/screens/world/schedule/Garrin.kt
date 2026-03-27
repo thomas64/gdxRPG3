@@ -15,10 +15,8 @@ class Garrin : EntitySchedule() {
 
     override val scheduleParts: List<SchedulePart> = listOf(
         // @formatter:off
-        SchedulePart("lastdenn_house_garrin", "07:30", "08:59", NORTH, IDLE,     "garrin1",  "garrin1",  "garrin_waiting"),
-        SchedulePart("lastdenn_house_garrin", "08:59", "09:04", NORTH, IDLE,     "garrin1",  "garrin1",  "garrin_it_is_time"),
-        SchedulePart("lastdenn_house_garrin", "09:04", "09:06", NORTH, IDLE,     "garrin1",  "garrin1",  "ghost_entering"),
-        SchedulePart("lastdenn_house_garrin", "09:06", "09:07", WEST,  IDLE,     "garrin1",  "garrin1",  "ghost_entering"),
+        SchedulePart("lastdenn_house_garrin", "07:30", "09:04", NORTH, IDLE,     "garrin1",  "garrin1",  "garrin_early_morning"),
+        SchedulePart("lastdenn_house_garrin", "09:04", "09:07", WEST,  IMMOBILE, "garrin1",  "garrin1",  "ghost_entering"),
         SchedulePart("lastdenn_house_garrin", "09:07", "09:08", WEST,  RUNNING,  "garrin1",  "garrin2",  "ghost_entering"),
         SchedulePart("lastdenn_house_garrin", "09:08", "09:21", NORTH, IMMOBILE, "garrin2",  "garrin2",  "paton_hiding_behind_garrin"),
         SchedulePart("lastdenn_house_garrin", "09:21", "09:22", EAST,  RUNNING,  "garrin2",  "garrin3",  "ghost_scaring"),
@@ -26,24 +24,12 @@ class Garrin : EntitySchedule() {
         SchedulePart("lastdenn_house_garrin", "09:29", "09:31", NORTH, RUNNING,  "garrin3",  "garrin4",  "ghost_scaring"),
         SchedulePart("lastdenn_house_garrin", "09:31", "09:36", SOUTH, IMMOBILE, "garrin4",  "garrin4",  "paton_hiding_behind_garrin"),
         SchedulePart("lastdenn_house_garrin", "09:36", "09:38", WEST,  RUNNING,  "garrin4",  "garrin5",  "ghost_scaring"),
-        SchedulePart("lastdenn_house_garrin", "09:38", "09:50", EAST,  IMMOBILE, "garrin5",  "garrin5"),
-        SchedulePart("lastdenn_house_garrin", "09:50", "09:54", EAST,  WALKING,  "garrin5",  "garrin6"),
-        SchedulePart("lastdenn_house_garrin", "10:05", "10:08", SOUTH, IMMOBILE, "garrin6",  "garrin6"),
-        SchedulePart("lastdenn_house_garrin", "10:08", "10:12", EAST,  CRAWLING, "garrin6",  "ghost4"),
-        SchedulePart("lastdenn_house_garrin", "10:12", "10:19", SOUTH, CRAWLING, "ghost4",   "garrin2"),
-        SchedulePart("lastdenn_house_garrin", "10:19", "10:24", EAST,  CRAWLING, "garrin2",  "garrin8"),
-        SchedulePart("lastdenn_house_garrin", "10:24", "10:29", SOUTH, CRAWLING, "garrin8",  "garrin9"),
-
-
-//        SchedulePart("lastdenn_house_garrin", "09:26", "09:28", SOUTH, RUNNING,  "ghost3",   "paton2",   "ghost_scaring"),
-//        SchedulePart("lastdenn_house_garrin", "09:28", "10:02", NORTH, IMMOBILE, "paton2",   "paton2",   "ghost_scaring"),
-//        SchedulePart("lastdenn_house_garrin", "10:02", "11:34", NORTH, IDLE,     "paton2",   "paton2",   "garrin_leave_us"),
-        // todo, eerder gaan lopen
-        SchedulePart("lastdenn_house_garrin", "11:34", "11:41", NORTH, WALKING, "paton2",   "ghost3",   "garrin_what_to_do"),
-        SchedulePart("lastdenn_house_garrin", "11:41", "11:45", EAST,  WALKING, "ghost3",   "paton3",   "garrin_what_to_do"),
-        SchedulePart("lastdenn_house_garrin", "11:45", "11:49", SOUTH, WALKING, "paton3",   "garrin2",  "garrin_what_to_do"),
-        SchedulePart("lastdenn_house_garrin", "11:49", "11:52", EAST,  WALKING, "garrin2",  "garrin4",  "garrin_what_to_do"),
-        SchedulePart("lastdenn_house_garrin", "11:52", "11:54", SOUTH, WALKING, "garrin4",  "garrin5",  "garrin_what_to_do"),
+        SchedulePart("lastdenn_house_garrin", "09:38", "09:50", EAST,  IMMOBILE, "garrin5",  "garrin5",  "ghost_scaring"),
+        SchedulePart("lastdenn_house_garrin", "11:00", "11:03", NORTH, IMMOBILE, "garrin6",  "garrin6"),
+        SchedulePart("lastdenn_house_garrin", "11:03", "11:07", EAST,  CRAWLING, "garrin6",  "ghost4"),
+        SchedulePart("lastdenn_house_garrin", "11:07", "11:14", SOUTH, CRAWLING, "ghost4",   "garrin2"),
+        SchedulePart("lastdenn_house_garrin", "11:14", "11:19", EAST,  CRAWLING, "garrin2",  "garrin8"),
+        SchedulePart("lastdenn_house_garrin", "11:19", "11:24", SOUTH, CRAWLING, "garrin8",  "garrin9"),
 
         SchedulePart("lastdenn",              "11:54", "11:55", SOUTH, WALKING, "garrin6",  "garrin7"),
         SchedulePart("lastdenn",              "11:55", "12:05", EAST,  WALKING, "garrin7",  "garrin8",  "garrin_what_to_do"),
@@ -63,7 +49,7 @@ class Garrin : EntitySchedule() {
 
     override fun handleSideEffects() {
         if (mapManager.currentMap.mapTitle == "lastdenn") {
-            if (gameData.clock.isCurrentTimeAt("11:53")) {
+            if (gameData.clock.isCurrentTimeAt("11:23")) {
                 worldScreen.useDoor("door_wooden_left")
             }
             if (gameData.clock.isCurrentTimeAt("14:58")) {

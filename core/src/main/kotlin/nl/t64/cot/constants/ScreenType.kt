@@ -70,6 +70,7 @@ enum class ScreenType(val screenClass: Class<out Screen>) {
     SCENE_HONEYWOOD_FARM_ATTACK_3_ALT(SceneHoneywoodFarmAttack3Alt::class.java),
     SCENE_HONEYWOOD_FARM_ATTACK_AFTER_WIN_ALT(SceneHoneywoodFarmAttackAfterWinAlt::class.java),
     SCENE_HONEYWOOD_FARM_TOO_LATE(SceneHoneywoodFarmTooLate::class.java),
+    SCENE_GHOST_POSSESSES_GARRIN(SceneGhostPossessesGarrin::class.java),
     SCENE_SANTINO_MURDERED(SceneSantinoMurdered::class.java),
     SCENE_ARDOR_LATER_TIME(SceneArdorLaterTime::class.java),
     SCENE_ARDOR_LATER_TIME_AFTER_WIN_FROM_GENERALS(SceneArdorLaterTimeAfterWinFromGenerals::class.java),

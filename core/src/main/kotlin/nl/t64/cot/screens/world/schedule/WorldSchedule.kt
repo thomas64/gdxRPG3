@@ -21,7 +21,6 @@ class WorldSchedule {
                                                                AlvaTraveler(),
                                                                LastdennEntranceGuard(),
                                                                Garrin(),
-                                                               GarrinDead(),
                                                                Ghost(),
                                                                Paton(),
                                                                Santino())

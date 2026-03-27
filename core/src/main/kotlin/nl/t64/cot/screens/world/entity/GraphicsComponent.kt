@@ -18,10 +18,10 @@ abstract class GraphicsComponent : Component {
     protected lateinit var state: EntityState
     protected lateinit var position: Vector2
     protected lateinit var direction: Direction
-    private lateinit var walkNorthAnimation: Animation<TextureRegion>
-    private lateinit var walkSouthAnimation: Animation<TextureRegion>
-    private lateinit var walkWestAnimation: Animation<TextureRegion>
-    private lateinit var walkEastAnimation: Animation<TextureRegion>
+    protected lateinit var walkNorthAnimation: Animation<TextureRegion>
+    protected lateinit var walkSouthAnimation: Animation<TextureRegion>
+    protected lateinit var walkWestAnimation: Animation<TextureRegion>
+    protected lateinit var walkEastAnimation: Animation<TextureRegion>
 
     abstract fun update(dt: Float)
     abstract fun render(batch: Batch)
@@ -103,18 +103,7 @@ abstract class GraphicsComponent : Component {
     }
 
     open fun getAnimation(): Animation<TextureRegion> {
-        if (state == EntityState.RUNNING) {
-            setNewFrameDuration(Constant.MOVE_SPEED_3)
-        } else {
-            setNewFrameDuration(Constant.MOVE_SPEED_2)
-        }
-        return when (direction) {
-            Direction.NORTH -> walkNorthAnimation
-            Direction.SOUTH -> walkSouthAnimation
-            Direction.WEST, Direction.NORTH_WEST, Direction.SOUTH_WEST -> walkWestAnimation
-            Direction.EAST, Direction.NORTH_EAST, Direction.SOUTH_EAST -> walkEastAnimation
-            Direction.NONE -> throw IllegalArgumentException("No animation for direction NONE.")
-        }
+        throw IllegalStateException("Implement this method in child if necessary.")
     }
 
 }

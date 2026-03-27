@@ -48,14 +48,16 @@
     "text": [
       "Battle Tutorial (2/7)",
       "",
-      "Each enemy has an [BLUE]advantage[BLACK] ([BLUE]+[BLACK]) and a",
-      "[FIREBRICK]disadvantage[BLACK] ([FIREBRICK]-[BLACK]) to certain weapon types.",
+      "Advantage greatly increases your hit and critical hit chance,",
+      "while disadvantage greatly decreases it.",
       "",
-      "Try to use the [BLUE]right weapon type[BLACK]",
-      "against the enemy's disadvantage.",
+      "Each enemy has an [BLUE]advantage[BLACK] ([BLUE]+[BLACK]) and a [FIREBRICK]disadvantage[BLACK] ([FIREBRICK]-[BLACK])",
+      "against specific weapon types, such as a sword type or an axe type.",
       "",
-      "[FIREBRICK]BEWARE![BLACK] When having a disadvantage against an enemy,",
-      "means that the enemy has an advantage against you!"
+      "Try to use the right weapon type against each enemy.",
+      "",
+      "[FIREBRICK]BEWARE![BLACK] When you have a disadvantage with your weapon against",
+      "an enemy, it means that the enemy has an advantage against you!"
     ]
   },
   "guide_event_battle_battle_lock"   : {

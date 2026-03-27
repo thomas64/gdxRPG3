@@ -26,15 +26,8 @@ class Paton : EntitySchedule() {
         SchedulePart("lastdenn_house_garrin", "09:35", "09:37", WEST,  RUNNING,  "paton6", "ghost3", "ghost_scaring"),
         SchedulePart("lastdenn_house_garrin", "09:37", "09:39", SOUTH, RUNNING,  "ghost3", "paton2", "ghost_scaring"),
         SchedulePart("lastdenn_house_garrin", "09:39", "09:40", EAST,  WALKING,  "paton2", "paton1", "ghost_scaring"),
-        SchedulePart("lastdenn_house_garrin", "09:40", "09:55", NORTH, IMMOBILE, "paton1", "paton1"),
-        SchedulePart("lastdenn_house_garrin", "09:55", "09:56", WEST,  WALKING,  "paton1", "paton2"),
-        SchedulePart("lastdenn_house_garrin", "09:56", "09:58", NORTH, RUNNING,  "paton2", "paton7"),
-        SchedulePart("lastdenn_house_garrin", "09:58", "10:05", EAST,  IMMOBILE, "paton7", "paton7"),
-
-
-
-
-//        SchedulePart("lastdenn_house_garrin", "10:02", "20:00", NORTH, IDLE,     "paton1", "paton1"),
+        SchedulePart("lastdenn_house_garrin", "09:40", "09:50", NORTH, IMMOBILE, "paton1", "paton1", "ghost_scaring"),
+        SchedulePart("lastdenn_house_garrin", "11:00", "20:00", NORTH, IDLE,     "paton1", "paton1", "paton_hiding_again"),
         // @formatter:on
     )
 

@@ -50,7 +50,7 @@ class CutsceneActor : Image {
 
     companion object {
         fun createCharacter(characterId: String): CutsceneActor {
-            val entity = Entity(characterId, InputEmpty(), PhysicsNpc(), GraphicsNpc(characterId))
+            val entity = Entity(characterId, InputEmpty(), PhysicsNpc(), GraphicsCutsceneActor(characterId))
             return CutsceneActor(entity, Direction.SOUTH)
         }
 
@@ -77,7 +77,7 @@ class CutsceneActor : Image {
 
     private fun getStateTime(dt: Float): Float {
         return when (entityState) {
-            EntityState.WALKING, EntityState.RUNNING -> (stateTime + dt) % 12
+            EntityState.WALKING, EntityState.RUNNING, EntityState.CRAWLING -> (stateTime + dt) % 12
             EntityState.OPENED -> stateTime + dt
             else -> Constant.NO_FRAMES
         }
