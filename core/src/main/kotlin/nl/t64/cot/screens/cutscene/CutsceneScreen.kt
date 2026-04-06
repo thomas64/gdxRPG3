@@ -56,6 +56,8 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
     private var actionId = 0
     private var followingActor = Actor()
     private var isCameraFixed: Boolean = true
+    private var fixedCameraX: Float = 0f
+    private var fixedCameraY: Float = 0f
     private val skipBox = SkipBox()
     private var isEnding: Boolean = false
     private var shouldBgmEndAfterCutscene: Boolean = true
@@ -74,6 +76,8 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
         actionId = 0
         isSkippable = preferenceManager.isDebugModeOn
         isEnding = false
+        fixedCameraX = camera.position.x
+        fixedCameraY = camera.position.y
 
         title.setText("")
         title.clear()
@@ -96,7 +100,7 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
         ScreenUtils.clear(Color.BLACK)
 
         if (isCameraFixed) {
-            camera.update()
+            camera.setPosition(fixedCameraX, fixedCameraY)
         } else {
             camera.setPosition(followingActor.x, followingActor.y)
         }
@@ -282,6 +286,8 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
     }
 
     fun setFixedCameraPosition(x: Float, y: Float) {
+        fixedCameraX = x
+        fixedCameraY = y
         camera.setInitPosition(x, y)
         isCameraFixed = true
     }

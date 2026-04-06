@@ -67,12 +67,12 @@ class CutsceneActor : Image {
     }
 
     override fun act(dt: Float) {
+        super.act(dt)
         entity.send(StateEvent(entityState))
         entity.send(DirectionEvent(direction))
         stateTime = getStateTime(dt)
         val region = entity.getAnimation().getKeyFrame(stateTime)
         (drawable as TextureRegionDrawable).region = region
-        super.act(dt)
     }
 
     private fun getStateTime(dt: Float): Float {

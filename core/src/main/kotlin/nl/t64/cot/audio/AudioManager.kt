@@ -54,7 +54,7 @@ class AudioManager {
 
     fun stopBgmAndPlayBgm(toStop: AudioEvent, toPlay: AudioEvent) {
         if (isBgmPlaying(toStop)) {
-            handle(AudioCommand.BGM_STOP_ALL)
+            handle(AudioCommand.BGM_STOP, toStop)
             handle(AudioCommand.BGM_PLAY_LOOP, toPlay)
         }
     }
