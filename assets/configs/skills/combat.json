@@ -5,8 +5,8 @@
       "- 'Stealth' increases the chance to successfully flee combat.",
       "  Each rank in 'Stealth' increases the probability of this by 2%.",
       "",
-      "- 'Stealth' decreases the attention this character draws,",
-      "  in relation to other party members, from enemies in combat.",
+      "- In combat, 'Stealth' decreases the attention this character",
+      "  draws from enemies, in relation to other party members.",
       "",
       "- 'Stealth' decreases the amount of Action Points it takes to",
       "  free this character from when they are locked in battle."

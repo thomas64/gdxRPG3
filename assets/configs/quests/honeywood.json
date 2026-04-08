@@ -296,11 +296,12 @@
         "linkedWith"  : ["2", "8"]
       },
       "10": {
-        "taskPhrase"          : "                  [Optional] Locate Luana's body in Ardor's domain.",
-        "type"                : "KILL",
-        "isHidden"            : true,
-        "isOptional"          : true,
-        "shouldHideAfterReset": true
+        "comment"                 : "WARNING: One link to 10 from honeywood_forest_ardor_1.tmx",
+        "taskPhrase"              : "                  [Optional] Locate Luana's body in Ardor's domain.",
+        "type"                    : "KILL",
+        "isHidden"                : true,
+        "forceSetHiddenAfterReset": true,
+        "isOptional"              : true
       }
     }
   },

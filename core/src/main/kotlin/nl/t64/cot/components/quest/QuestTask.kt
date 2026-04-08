@@ -17,6 +17,7 @@ class QuestTask(
     val receive: Map<String, Int> = emptyMap(),
     val conversationIds: List<String> = emptyList(),
     val shouldHideAfterReset: Boolean = false,
+    val forceSetHiddenAfterReset: Boolean = false,
     val isOptional: Boolean = false,
     var isHidden: Boolean = false,
     private val isResettable: Boolean = true,
@@ -41,6 +42,10 @@ class QuestTask(
     }
 
     fun possibleReset() {
+        if (forceSetHiddenAfterReset) {
+            isHidden = true
+        }
+
         isFailed = false
         if (isComplete && isResettable()) {
             isReset = true

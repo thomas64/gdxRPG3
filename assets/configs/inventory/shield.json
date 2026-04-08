@@ -4,7 +4,7 @@
     "group"           : "SHIELD",
     "sort"            : 50099,
     "skill"           : "SHIELD",
-    "price"           : 3,
+    "price"           : 21,
     "durability"      : 10,
     "min_constitution": 8,
     "protection"      : 1,

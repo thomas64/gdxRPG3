@@ -73,5 +73,12 @@
     "type"          : "conversation",
     "conversationId": "notice_dense_fog",
     "entityId"      : "mozes"
+  },
+  "event_luana_body"      : {
+    "type"          : "conversation",
+    "condition"     : ["_c_==_x_q_quest_honeywood_elder", "alone_in_party"],
+    "conversationId": "luana_body",
+    "entityId"      : "mozes",
+    "doesRepeat"    : true
   }
 }

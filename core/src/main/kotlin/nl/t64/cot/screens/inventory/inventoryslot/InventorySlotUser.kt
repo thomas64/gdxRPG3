@@ -118,7 +118,10 @@ class InventorySlotUser private constructor(itemSlot: ItemSlot) {
     }
 
     private fun showFailMessage() {
-        MessageDialog("A ${inventoryItem.name} cannot be used right now.")
+        MessageDialog("""
+                ${inventoryItem.name}:
+                It cannot be used right now,
+                or it would have no effect.""".trimIndent())
             .show(currentSlot.stage, AudioEvent.SE_MENU_ERROR)
     }
 

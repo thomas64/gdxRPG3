@@ -25,6 +25,7 @@ class PhysicsPartyMember : PhysicsComponent() {
     override fun receive(event: Event) {
         if (event is LoadEntityEvent) {
             state = event.state!!
+            direction = event.direction!!
             currentPosition = event.position
             setBoundingBox()
         }

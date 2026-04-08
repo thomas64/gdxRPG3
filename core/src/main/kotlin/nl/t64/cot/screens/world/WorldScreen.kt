@@ -93,11 +93,12 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
 
     fun fadeWithFlames() {
         gameState = GameState.ENDING
-        player.resetInput()
+        player.resetInputWithoutStance()
         setInputProcessors(null)
         player.send(DirectionEvent(Direction.NORTH))
 
         EndOfTime(stage, camera).fadeWithFlamesAnd {
+            player.resetInput()
             conversationDialog.tryToClose()
             gameState = GameState.OFF
             Utils.runWithDelay(1f) { stage.clear() }

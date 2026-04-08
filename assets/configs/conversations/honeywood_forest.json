@@ -273,5 +273,13 @@
     "phrases": {
       "1": {"text": ["What a dense fog all of a sudden.", "How peculiar..."], "choices": [{"command": "AUTO_SAVE"}]}
     }
+  },
+  "luana_body"            : {
+    "name"   : "Mozes",
+    "phrases": {
+      "1": {"text": ["Luana..."]},
+      "2": {"text": ["She's dead..."]},
+      "3": {"text": [". . ."], "choices": [{"command": "AUTO_SAVE"}]}
+    }
   }
 }
