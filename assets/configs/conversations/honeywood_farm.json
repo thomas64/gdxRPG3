@@ -86,6 +86,7 @@
   },
   "the_road_is_open"               : {
     "name"   : "Lennor",
+    "comment": "WARNING: phraseId 1 is used in a conv condition.",
     "phrases": {
       "1": {
         "text": ["It took me a while, but the road to Honeywood Farm is finally clear."], "choices": [

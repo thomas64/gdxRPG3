@@ -61,9 +61,9 @@
     "text"      : ["Lastdenn Bar", "", "Friendship and happiness for sale!"],
     "doesRepeat": true
   },
-  "note_lastdenn_cell"       : {
+  "note_lastdenn_jail"       : {
     "type"      : "messagebox",
-    "text"      : ["Lastdenn Jail"],
+    "text"      : ["Lastdenn Jail", "", "Open from 18:00 to 20:00."],
     "doesRepeat": true
   }
 }

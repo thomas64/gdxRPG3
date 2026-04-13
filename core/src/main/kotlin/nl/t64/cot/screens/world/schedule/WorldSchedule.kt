@@ -23,7 +23,9 @@ class WorldSchedule {
                                                                Garrin(),
                                                                Ghost(),
                                                                Paton(),
-                                                               Santino())
+                                                               Santino(),
+                                                               LastdennEscordGuard1(),
+                                                               LastdennEscordGuard2())
 
     fun update() {
         entitySchedules.forEach { it.update() }

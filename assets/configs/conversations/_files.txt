@@ -14,5 +14,5 @@ alva_road.json
 hero_luana.json
 hero_reignald.json
 lastdenn.json
-lastdenn_entrance_guard.json
+lastdenn_guards.json
 lastdenn_santino.json

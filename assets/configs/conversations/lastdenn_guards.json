@@ -1,7 +1,7 @@
 {
   "guarding_till_1500"     : {
     "name"   : "Lastdenn Guard",
-    "comment": "WARNING: phraseId 100 is used in a conv condition.",
+    "comment": "WARNING: phraseId 100 is used in 2 conv conditions.",
     "phrases": {
       "1"  : {"text": ["Halt! The mayor has ordered me to stop anyone from passing through this town's entrance until 15:00."]},
       "2"  : {"text": ["Only those with official business in or from Lastdenn may pass here before then."]},
@@ -43,7 +43,7 @@
   },
   "talking_to_other_guard" : {
     "name"     : "Lastdenn Guard",
-    "condition": ["is_santino_murdered"], "startAt": "10",
+    "condition": ["is_garrin_possessed"], "startAt": "10",
     "phrases"  : {
       "1" : {"face": "soldier02", "text": ["Hey Zachary! What a boring day it was! Did anything worthwhile happen while you were standing guard here today?"]},
       "2" : {"face": "soldier03", "text": ["Nah, nothing much. The mayor's closure of the city entrance until 15:00 made for a pretty slow day."]},
@@ -56,6 +56,19 @@
       "14": {"face": "soldier02", "text": ["Indeed. He was one of the few people who dared to stand up to the mayor's corrupt practices."]},
       "15": {"face": "soldier03", "text": ["He will be sorely missed."]},
       "16": {"face": "soldier02", "text": ["[GRAY](A ghost...? Why would they make up such a story...?)"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "guarding_house_garrin"  : {
+    "name"   : "Lastdenn Guard",
+    "phrases": {
+      "1": {"text": ["I'm sorry sir, but this house is off limits."]},
+      "2": {"text": ["We are investigating a crime that occurred here."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "guard_escorting_garrin" : {
+    "name"   : "Lastdenn Guard",
+    "phrases": {
+      "1": {"text": ["Let us through. Nothing to see here. Move along."], "choices": [{"command": "EXIT"}]}
     }
   }
 }
