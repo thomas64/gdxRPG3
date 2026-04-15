@@ -19,6 +19,7 @@ import nl.t64.cot.components.party.stats.StatItem
 import nl.t64.cot.components.party.stats.StatItemId
 import nl.t64.cot.components.quest.QuestGraph
 import nl.t64.cot.components.schedule.MapSchedule
+import nl.t64.cot.constants.Constant
 
 
 object ConfigDataLoader {
@@ -81,9 +82,14 @@ object ConfigDataLoader {
 
     fun createHeroes(): MutableMap<String, HeroItem> {
         val json = readString("characters", "hero1.json")
-        return readValue<HeroItem>(json)
+        val heroes = readValue<HeroItem>(json)
             .mapValues { it.value.createCopy(id = it.key) }
             .toMutableMap()
+
+        val mozesBaseline: Int = heroes[Constant.PLAYER_ID]!!.totalXp
+        heroes.values.forEach { it.totalXp -= mozesBaseline }
+
+        return heroes
     }
 
     fun createEnemies(): Map<String, EnemyItem> {

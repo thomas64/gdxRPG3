@@ -3,8 +3,6 @@ package nl.t64.cot.components.party.stats
 import com.fasterxml.jackson.annotation.JsonCreator
 
 
-private const val TOTAL_XP_NECESSARY_FOR_MOZES_STARTING_ATTRIBUTES = 1609
-
 class StatContainer() {
 
     private val stats: StatItemMap<StatItemId, Int> = StatItemMap()
@@ -27,7 +25,7 @@ class StatContainer() {
     }
 
     fun getTotalXpCost(): Int {
-        return getAll().sumOf { it.getTotalXpCostFromRankOneToCurrent() } - TOTAL_XP_NECESSARY_FOR_MOZES_STARTING_ATTRIBUTES
+        return getAll().sumOf { it.getTotalXpCostFromRankOneToCurrent() }
     }
 
     fun setRank(statItemId: StatItemId, rank: Int) {
