@@ -10,7 +10,7 @@ class QuestContainer {
     fun getAllKnownQuestsForVisual(): Array<QuestGraph> = quests.values
         .filterNot { it.isHidden }
         .filterNot { it.isSubQuest }
-        .filterNot { it.isUnclaimedOrFinishedButAlsoUnknown }
+        .filterNot { it.isHiddenInQuestLog }
         .filter { it.isOneOfBothStatesEqualOrHigherThan(QuestState.KNOWN) }
         .sortedWith(compareBy({ it.resetState }, { it.isFailed }, { it.currentState }, { it.id }))
         .toTypedArray()

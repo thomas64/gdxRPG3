@@ -26,7 +26,7 @@ data class QuestGraph(
     var resetState: QuestState = QuestState.UNKNOWN
     var isFailed: Boolean = false
     var wasFailed: Boolean = false
-    var isUnclaimedOrFinishedButAlsoUnknown: Boolean = false
+    var isHiddenInQuestLog: Boolean = false
 
     private val titleWithoutPrefix: String = title.removeSuffix(" [M]")
 
@@ -95,7 +95,7 @@ data class QuestGraph(
     fun know() {
         if (currentState == QuestState.UNKNOWN) {
             currentState = QuestState.KNOWN
-            isUnclaimedOrFinishedButAlsoUnknown = false
+            isHiddenInQuestLog = false
         }
     }
 
@@ -113,7 +113,7 @@ data class QuestGraph(
 
     private fun setAcceptedAndPossiblyShowMessage() {
         currentState = QuestState.ACCEPTED
-        isUnclaimedOrFinishedButAlsoUnknown = false
+        isHiddenInQuestLog = false
         if (isSubQuest) {
             showMessageTooltipQuestUpdated()
         } else {
@@ -122,11 +122,7 @@ data class QuestGraph(
     }
 
     fun unclaim() {
-        if (resetState == QuestState.UNKNOWN && currentState == QuestState.UNKNOWN) {
-            isUnclaimedOrFinishedButAlsoUnknown = true
-        } else {
-            isUnclaimedOrFinishedButAlsoUnknown = false
-        }
+        isHiddenInQuestLog = shouldRemainHiddenInQuestLog()
         currentState = QuestState.UNCLAIMED
     }
 
@@ -325,16 +321,26 @@ data class QuestGraph(
     fun finish(showTooltip: Boolean) {
         XpRewarder.receivePossibleXp(id)
         possibleSetLastReturnTaskComplete()
+        val shouldHideInQuestLog = shouldRemainHiddenInQuestLog()
 
-        if (resetState == QuestState.UNKNOWN && currentState == QuestState.UNKNOWN) {
-            currentState = QuestState.FINISHED
-            isUnclaimedOrFinishedButAlsoUnknown = true
-            // never showTooltip when finishing a quest directly from UNKNOWN to FINISHED
-        } else {
-            currentState = QuestState.FINISHED
-            isUnclaimedOrFinishedButAlsoUnknown = false
-            if (showTooltip) showMessageTooltipQuestCompleted()
+        currentState = QuestState.FINISHED
+        isHiddenInQuestLog = shouldHideInQuestLog
+        if (!shouldHideInQuestLog && showTooltip) {
+            showMessageTooltipQuestCompleted()
         }
+    }
+
+    private fun shouldRemainHiddenInQuestLog(): Boolean {
+        return isHiddenInQuestLog
+            || (resetState == QuestState.UNKNOWN && currentState == QuestState.UNKNOWN)
+
+        // H = isHiddenInQuestLog
+        // U = (resetState == UNKNOWN && currentState == UNKNOWN)
+        // H=false, U=false => false
+        // H=false, U=true => true
+        // H=true, U=false => true
+        // H=true, U=true => true
+        // Only the first case results in false.
     }
 
     private fun possibleSetLastReturnTaskComplete() {
