@@ -12,7 +12,7 @@ class FleeAction(
 ) {
     private val character: Character = currentParticipant.character
     private val message = """
-        When successful, fleeing will return you to the
+        When successful, fleeing will return the party to the
         location of your save state with all progress intact.
 
         The higher your Stealth skill, the higher the chance

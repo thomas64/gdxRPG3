@@ -6,6 +6,7 @@ import kotlin.math.roundToInt
 
 private val TRAINING_COSTS = listOf(20, 8, 12, 16, 20, 24, 28, 32, 36, 40)
 private const val MAXIMUM = 10
+private const val DEFAULT_FLAT_UPGRADE_COST = 20
 
 data class SkillItem(
     override val id: SkillItemId = SkillItemId.NONE,
@@ -93,7 +94,7 @@ data class SkillItem(
     }
 
     private fun Int.getXpCost(): Int {
-        return (upgrade * (this * this)).roundToInt()
+        return DEFAULT_FLAT_UPGRADE_COST + (upgrade * (this * this)).roundToInt()
     }
 
 }
