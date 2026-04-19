@@ -26,5 +26,6 @@
   "magic_trainer" : {"source": "hero5", "col": 4, "row": 2},
   "soldier01"     : {"source": "soldiers1", "col": 1, "row": 1},
   "soldier02"     : {"source": "soldiers2", "col": 2, "row": 1},
-  "soldier03"     : {"source": "soldiers2", "col": 2, "row": 2}
+  "soldier03"     : {"source": "soldiers2", "col": 2, "row": 2},
+  "rich_man07"    : {"source": "richmen", "col": 3, "row": 2}
 }

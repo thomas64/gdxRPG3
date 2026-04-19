@@ -42,7 +42,7 @@
   "sparkle_alva_07"    : {"condition": ["ranger1"], "content": {"gemstone": 1}},
   "sparkle_alva_08"    : {"condition": ["ranger2"], "content": {"wood": 2}},
   "sparkle_alva_09"    : {"content": {"herb": 1}},
-  "sparkle_alva_10"    : {"content": {"gold": 1, "gemstone": 1, "leather": 4, "healing_potion": 5, "energy_potion": 3}},
+  "sparkle_alva_10"    : {"content": {"lambertus_gold_ring": 1, "gold": 17, "gemstone": 2, "leather": 4, "healing_potion": 5, "energy_potion": 3}},
   "sparkle_alva_11"    : {"condition": ["ranger1"], "content": {"herb": 1}},
   "sparkle_alva_12"    : {"content": {"gemstone": 1}},
   "sparkle_alva_13"    : {"condition": ["ranger1"], "content": {"wood": 1}},

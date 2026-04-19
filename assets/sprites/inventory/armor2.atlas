@@ -18,6 +18,13 @@ basic_gold_ring
   orig: 62, 62
   offset: 0, 0
   index: -1
+lambertus_gold_ring
+  rotate: false
+  xy: 62, 0
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
 basic_silver_necklace
   rotate: false
   xy: 124, 0
@@ -26,6 +33,13 @@ basic_silver_necklace
   offset: 0, 0
   index: -1
 basic_silver_ring
+  rotate: false
+  xy: 186, 0
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+theodore_silver_ring
   rotate: false
   xy: 186, 0
   size: 62, 62

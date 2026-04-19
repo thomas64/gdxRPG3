@@ -5,11 +5,35 @@
     "sort" : 60100,
     "price": 5
   },
+  "theodore_silver_ring": {
+    "name"       : "Theodore's Silver Ring",
+    "group"      : "RING",
+    "sort"       : 60100,
+    "price"      : 5,
+    "description": [
+      "A worn silver ring that",
+      "once belonged to Theodore."
+    ]
+  },
   "basic_gold_ring"     : {
     "name" : "Gold Ring",
     "group": "RING",
     "sort" : 60100,
     "price": 10
+  },
+  "lambertus_gold_ring" : {
+    "name"        : "Lambertus' Golden Ring",
+    "group"       : "RING",
+    "sort"        : 60100,
+    "price"       : 100,
+    "is_unique"   : true,
+    "description" : [
+      "A golden ring with the name",
+      "'Lambertus' engraved on the inside.",
+      "It appears to be very valuable,",
+      "but it is also very old and worn."
+    ],
+    "is_droppable": false
   },
   "epic_namers_ring"    : {
     "name"         : "Namer's Ring",
@@ -46,6 +70,9 @@
     "sort"       : 61000,
     "price"      : 50,
     "cheat_death": true,
-    "description": ["Once per battle, survive", "against an otherwise killing blow."]
+    "description": [
+      "Once per battle, survive against",
+      "an otherwise killing blow."
+    ]
   }
 }

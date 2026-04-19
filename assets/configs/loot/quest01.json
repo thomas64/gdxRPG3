@@ -8,5 +8,6 @@
   "quest_honeywood_inn_price-1": {"content": {"gold": 5}, "xp": 10},
   "quest_get_medicine_academy" : {"content": {"horse_medicine": 3}},
   "quest_get_tow_rope"         : {"content": {"tow_rope": 1}},
-  "quest_alva_road_bag"        : {"content": {"fine_light_cloak": 1}}
+  "quest_alva_road_bag"        : {"content": {"fine_light_cloak": 1}},
+  "quest_lastdenn_ring"        : {"content": {"gold": 35}, "xp": 20}
 }

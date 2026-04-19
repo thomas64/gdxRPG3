@@ -1,0 +1,19 @@
+{
+  "quest_lastdenn_ring": {
+    "title"   : "A ring to rob them all",
+    "entityId": "rich_man07",
+    "summary" : "Lambertus was robbed by orcs very near the waterfall and bridge of Lastdenn. He said that the orcs took a very valuable golden ring from him. He wants you to get it back for him.",
+    "tasks"   : {
+      "1": {
+        "taskPhrase": "Get the golden ring from the orcs to the south of the bridge.",
+        "type"      : "FIND_ITEM",
+        "target"    : {"lambertus_gold_ring": 1}
+      },
+      "2": {
+        "taskPhrase": "Deliver the golden ring to Lambertus.",
+        "type"      : "PROVIDE_ITEM",
+        "target"    : {"lambertus_gold_ring": 1}
+      }
+    }
+  }
+}

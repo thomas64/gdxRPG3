@@ -1,6 +1,7 @@
 honeywood_forest.json
 honeywood.json
 alva_road.json
+lastdenn.json
 starter_path.json
 hero_s_hometown.json
 mysterious_tunnel.json

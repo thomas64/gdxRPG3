@@ -142,7 +142,7 @@
       "15": {
         "taskPhrase"          : "            Deliver Theodore's lost ring to Mrs. Johanna.",
         "type"                : "DELIVER_ITEM",
-        "target"              : {"basic_silver_ring": 1},
+        "target"              : {"theodore_silver_ring": 1},
         "conversationIds"     : ["mrs_johanna"],
         "shouldHideAfterReset": true
       },

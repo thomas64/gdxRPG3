@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.12.1" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="24" tileheight="24" infinite="0" nextlayerid="21" nextobjectid="48">
+<map version="1.11" tiledversion="1.12.1" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="24" tileheight="24" infinite="0" nextlayerid="21" nextobjectid="50">
  <properties>
   <property name="bgm" value="bgm_inn"/>
   <property name="step_sound" value="wood"/>
@@ -88,8 +88,8 @@
  <objectgroup color="#5500ff" id="13" name="rest">
   <object id="42" name="note_kitchen" x="636" y="144" width="84" height="30"/>
   <object id="43" name="note_closet" x="834" y="120" width="60" height="30"/>
-  <object id="45" name="note_bed02" x="480" y="144" width="48" height="96"/>
-  <object id="46" name="note_closet" x="288" y="120" width="96" height="48"/>
+  <object id="45" name="note_bed02" x="480" y="144" width="48" height="78"/>
+  <object id="46" name="note_closet" x="288" y="120" width="96" height="30"/>
   <object id="47" name="note_plant" x="192" y="240" width="48" height="42"/>
  </objectgroup>
  <objectgroup color="#55ff7f" id="14" name="npc">
@@ -115,10 +115,20 @@
     <property name="conversation" value="get_out_of_kitchen"/>
    </properties>
   </object>
+  <object id="48" name="rich_man07" type="w" x="408" y="216" width="48" height="24">
+   <properties>
+    <property name="conversation" value="quest_lastdenn_ring"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup color="#55aaff" id="15" name="spawn">
   <object id="1" name="lastdenn" x="672" y="624" width="48" height="24"/>
   <object id="3" name="lastdenn_inn_2f" x="96" y="168" width="48" height="24"/>
+  <object id="49" name="lastdenn_inn" x="384" y="336" width="48" height="24">
+   <properties>
+    <property name="direction" value="north"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup color="#ffff7f" id="16" name="portal">
   <object id="2" name="lastdenn" x="672" y="648" width="48" height="24"/>

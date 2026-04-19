@@ -39,31 +39,31 @@
   "mrs_johanna"                         : {
     "name"   : "Mrs. Johanna",
     "phrases": {
-      "1" : {"text": ["Mozes, my dear, how are you? What a beautiful day, isn't it?"]},
+      "1" : {"text": ["Mozes, dear boy, how are you? What a lovely day, isn't it?"]},
       "2" : {
         "choices": [
           {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "text": "*Ask Mrs. Johanna if she's seen Grace this morning.*", "nextId": "30"},
-          {"condition": ["i_c_==_a_q_quest_get_tow_rope", "_tn_15_q_quest_get_tow_rope", "_n_1_>=_item_eqp_basic_silver_ring"], "text": "[Silver Ring] *Deliver the news that Jaron has found her lost ring.*", "nextId": "5"},
-          {"condition": ["i_c_==_a_q_quest_get_tow_rope", "_tn_15_q_quest_get_tow_rope", "_n_0_==_item_eqp_basic_silver_ring", "_n_1_>=_item_inv_basic_silver_ring"], "text": "[Silver Ring] *Deliver the news that Jaron has found her lost ring.*", "nextId": "20"},
+          {"condition": ["i_c_==_a_q_quest_get_tow_rope", "_tn_15_q_quest_get_tow_rope", "_n_1_>=_item_eqp_theodore_silver_ring"], "text": "[Silver Ring] *Deliver the news that Jaron found her lost ring.*", "nextId": "5"},
+          {"condition": ["i_c_==_a_q_quest_get_tow_rope", "_tn_15_q_quest_get_tow_rope", "_n_0_==_item_eqp_theodore_silver_ring", "_n_1_>=_item_inv_theodore_silver_ring"], "text": "[Silver Ring] *Deliver the news that Jaron found her lost ring.*", "nextId": "20"},
           {"condition": ["i_rc_>=_a_q_quest_royal_sacrifice"], "text": "*Listen to an old woman's rambling.*", "nextId": "10"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
       "5" : {"face": "mozes", "name": "Mozes", "text": ["I should probably take it off first."], "choices": [{"command": "EXIT"}]},
-      "10": {"text": ["I often come here to reminisce about this once-enormous tree and my late husband, Theodore. We had such nice summers together under this tree. I miss him..."]},
+      "10": {"text": ["I often come here to reminisce about this once-enormous tree and my late husband, Theodore. We spent such lovely summers beneath its shade. I miss him dearly."]},
       "11": {"text": ["Life is over before you know it, don't you think?"]},
       "12": {"face": "mozes", "name": "Mozes", "text": ["You sure got that right."], "choices": [{"command": "EXIT"}]},
-      "20": {"text": ["Mozes, that's wonderful news! Thank you."]},
+      "20": {"text": ["Mozes, that is wonderful news! Thank you, dear."]},
       "21": {"text": ["Now I can die in peace."]},
       "22": {"face": "mozes", "name": "Mozes", "text": ["Really?"], "choices": [{"command": "DELIVER_QUEST_ITEM", "nextId": "23"}]},
       "23": {"face": "oldwoman01", "name": "Mrs. Johanna", "text": ["Nah! Of course not. I've got so much to live for. See ya!"], "choices": [{"command": "EXIT"}]},
-      "30": {"face": "oldwoman01", "name": "Mrs. Johanna", "text": ["I'm sorry, dear. I haven't seen Grace this morning. Is everything alright?"]},
+      "30": {"face": "oldwoman01", "name": "Mrs. Johanna", "text": ["I'm sorry, dear. I haven't seen Grace this morning. Is everything all right?"]},
       "31": {"face": "mozes", "name": "Mozes", "text": ["I don't know where she is. She wasn't in her bed this morning."]},
       "32": {"face": "oldwoman01", "name": "Mrs. Johanna", "text": ["Perhaps she went north? She likes to go there."]},
       "33": {"face": "mozes", "name": "Mozes", "text": ["I'm afraid she did. There are orcs in the forest."]},
-      "34": {"face": "oldwoman01", "name": "Mrs. Johanna", "text": ["I'll ask around in the village to see if anyone else saw her."]},
+      "34": {"face": "oldwoman01", "name": "Mrs. Johanna", "text": ["I'll ask around the village and see whether anyone spotted her."]},
       "35": {"face": "mozes", "name": "Mozes", "text": ["Please do. I'll head north."], "choices": [{"command": "EXIT", "nextId": "40"}]},
-      "40": {"text": ["Have you found her yet? Quickly dear, go to Honeywood Forest."], "choices": [{"command": "EXIT", "nextId": "40"}]}
+      "40": {"text": ["Have you found her yet, dear? Hurry to Honeywood Forest."], "choices": [{"command": "EXIT", "nextId": "40"}]}
     }
   },
   "lynette_playing_catch"               : {

@@ -169,5 +169,41 @@
         ]
       }
     }
+  },
+  "quest_lastdenn_ring"     : {
+    "name"   : "Lambertus",
+    "phrases": {
+      "1"   : {"text": ["You there. Yes, you. You look like someone in need of proper employment. I have a task for you, boy."]},
+      "2"   : {"text": ["I am Lambertus, a man of considerable wealth and taste. A very valuable ring of mine was stolen by orcs near Lastdenn, of all dreadful places. Retrieve it, and I may reward you well enough to matter."]},
+      "3"   : {"text": ["The orcs are camped south of the bridge, near the waterfall. Filthy brutes. Aggressive too. Still, my ring is worth your inconvenience."]},
+      "4"   : {"text": ["A handsome reward awaits the one who returns what is mine."]},
+      "5"   : {
+        "choices": [
+          {"condition": ["i_n_1_>=_item_eqp_lambertus_gold_ring"], "text": "[Gold Ring] *Deliver the ring he asked for.*", "nextId": "6"},
+          {"condition": ["i_n_0_==_item_eqp_lambertus_gold_ring", "_n_1_>=_item_inv_lambertus_gold_ring"], "text": "[Gold Ring] *Deliver the ring he asked for.*", "command": "PROVIDE_QUEST_ITEM", "nextId": "10"},
+          {"condition": ["i_n_0_==_item_lambertus_gold_ring"], "text": "*Reluctantly accept his request.*", "command": "ACCEPT_QUEST", "nextId": "20"},
+          {"text": "*You are not his personal errand boy. Take your leave.*", "command": "AUTO_SAVE"}
+        ]
+      },
+      "6"   : {"face": "mozes", "name": "Mozes", "text": ["I should probably take it off first."], "choices": [{"command": "EXIT"}]},
+      "10"  : {"text": ["Oh? You already have my ring? It's mine. Hand it over." ]},
+      "11"  : {"text": ["Here. This should suffice."], "choices": [{"command": "REWARD_QUEST"}]},
+      "20"  : {"text": ["Of course. I expected you to come to your senses."]},
+      "21"  : {"text": ["Now go fetch it. Quickly. Don't keep me waiting."], "choices": [{"command": "AUTO_SAVE", "nextId": "22"}]},
+      "22"  : {"text": ["Well? I am still waiting for my ring."]},
+      "23"  : {
+        "choices": [
+          {"condition": ["i_n_1_>=_item_eqp_lambertus_gold_ring"], "text": "[Gold Ring] *Deliver the ring he asked for.*", "nextId": "26"},
+          {"condition": ["i_n_0_==_item_eqp_lambertus_gold_ring", "_n_1_>=_item_inv_lambertus_gold_ring"], "text": "[Gold Ring] *Deliver the ring he asked for.*", "command": "PROVIDE_QUEST_ITEM", "nextId": "30"},
+          {"condition": ["ii_n_1_>=_item_lambertus_gold_ring"], "text": "[Gold Ring] *Deliver the ring he asked for.*", "nextId": "9999"},
+          {"text": "*Whatever. Take your leave.*", "command": "AUTO_SAVE", "nextId": "22"}
+        ]
+      },
+      "26"  : {"face": "mozes", "name": "Mozes", "text": ["I should probably take it off first."], "choices": [{"command": "EXIT", "nextId": "22"}]},
+      "30"  : {"text": ["You finally brought it? About time."]},
+      "31"  : {"text": ["Here. This is your reward."], "choices": [{"command": "REWARD_QUEST"}]},
+      "1399": {"text": ["Don't tell me you forgot your reward. Honestly. I know you need it."], "choices": [{"command": "REWARD_QUEST"}]},
+      "1400": {"text": ["Move along, boy. I have no more use for you."], "choices": [{"command": "AUTO_SAVE", "nextId": "1400"}]}
+    }
   }
 }
