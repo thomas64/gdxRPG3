@@ -110,6 +110,22 @@
       "11": {"face": "soldier02", "name": "Lastdenn Guard", "text": ["You be quiet!"], "choices": [{"command": "EXIT"}]}
     }
   },
+  "garrin_in_jail"            : {
+    "name"     : "Garrin",
+    "condition": ["witnessed_garrin_possession"], "startAt": "10",
+    "phrases"  : {
+      "1" : {"text": [". . ."], "choices": [{"command": "EXIT"}]},
+      "10": {"text": ["You were there, weren't you? You saw what happened."]},
+      "11": {"text": ["It was a strange feeling. To be driven by something else. I couldn't control myself at all."]},
+      "12": {"text": ["I just wanted to protect my son. I didn't want to hurt anyone. I didn't even know what I was doing."]},
+      "13": {"text": ["I wish I could go back and change what happened."]},
+      "14": {"text": ["It's ironic, isn't it? The priest himself had something against ghosts. If he would have given me that, he himself would still be alive."]},
+      "15": {"text": ["In my home, there's a letter to the priest about that exact thing. You should get the letter and the item to maybe prevent something like this from happening again."]},
+      "16": {"text": ["You can find the letter in a drawer with a picture of my wife on it."]},
+      "17": {"text": ["It's too late now to prevent any of this from happening, but who knows, like I said, maybe it can prevent something like this from happening again."]},
+      "18": {"text": ["Anyway, thank you for coming to see me. Say hi to my son for me."], "choices": [{"command": "EXIT"}]}
+    }
+  },
   "santino_prepare"           : {
     "phrases": {
       "1": {"text": ["Blessings upon you my child."]},

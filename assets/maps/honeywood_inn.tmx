@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="34" height="30" tilewidth="24" tileheight="24" infinite="0" nextlayerid="20" nextobjectid="80">
+<map version="1.11" tiledversion="1.12.1" orientation="orthogonal" renderorder="right-down" width="34" height="30" tilewidth="24" tileheight="24" infinite="0" nextlayerid="20" nextobjectid="80">
  <properties>
   <property name="bgm" value="bgm_inn"/>
   <property name="bgs" value="bgs_fireplace"/>
@@ -118,7 +118,7 @@
     <property name="conversation" value="dont_go_up_there"/>
    </properties>
   </object>
-  <object id="50" name="maid01" x="576" y="168" width="48" height="24">
+  <object id="50" name="maid01" x="576" y="156" width="48" height="24">
    <properties>
     <property name="conversation" value="get_out_of_kitchen"/>
     <property name="direction" value="north"/>

@@ -1,3 +1,5 @@
 fairy_shop
 equipshop_honeywood
+equipshop_lastdenn
 resourceshop_honeywood
+resourceshop_lastdenn

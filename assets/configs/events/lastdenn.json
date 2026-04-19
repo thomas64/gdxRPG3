@@ -5,5 +5,11 @@
     "conversationId": "guarding_till_1500",
     "entityId"      : "soldier02",
     "doesRepeat"    : true
+  },
+  "event_lastdenn_item_shop"     : {
+    "type"          : "conversation",
+    "conversationId": "lastdenn_item_shop_dont",
+    "entityId"      : "man03",
+    "doesRepeat"    : true
   }
 }

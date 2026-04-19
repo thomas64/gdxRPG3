@@ -1,0 +1,57 @@
+{
+  "ryiah_join"   : {
+    "name"   : "Ryiah",
+    "phrases": {
+      "1"   : {"text": ["Join?"]},
+      "2"   : {
+        "choices": [
+          {"text": "*Yes.* [BLUE] (Join party)", "nextId": "3"},
+          {"text": "*No.*", "nextId": "4"}
+        ]
+      },
+      "3"   : {"text": ["I'll join."], "choices": [{"command": "HERO_JOIN"}]},
+      "4"   : {"text": ["I wont join."], "choices": [{"command": "EXIT"}]},
+      "9000": {"text": ["I cannot join you if there's no room."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "dismiss_ryiah": {
+    "name"   : "Ryiah",
+    "phrases": {
+      "1": {"text": ["Dismiss?"]},
+      "2": {
+        "choices": [
+          {"text": "*Yes.* [BLUE](Dismiss Ryiah)", "nextId": "3"},
+          {"text": "*No.*", "command": "EXIT"}
+        ]
+      },
+      "3": {"text": ["Okay."], "choices": [{"command": "HERO_DISMISS"}]}
+    }
+  },
+  "bury_ryiah"   : {
+    "name"   : "Ryiah",
+    "phrases": {
+      "1": {"text": ["All her equipment will also be gone once you bury her."]},
+      "2": {
+        "choices": [
+          {"text": "*Yes, let the funeral continue.* [RED](Dismiss Ryiah)", "command": "HERO_DISMISS"},
+          {"text": "*No, take precautions first.*", "command": "EXIT"}
+        ]
+      }
+    }
+  },
+  "ryiah_rejoin" : {
+    "name"   : "Ryiah",
+    "phrases": {
+      "1"   : {"text": ["Rejoin?"]},
+      "2"   : {
+        "choices": [
+          {"text": "*Yes.* [BLUE] (Join party)", "nextId": "3"},
+          {"text": "*No.*", "nextId": "4"}
+        ]
+      },
+      "3"   : {"text": ["Good."], "choices": [{"command": "HERO_JOIN"}]},
+      "4"   : {"text": ["Fine."], "choices": [{"command": "EXIT"}]},
+      "9000": {"text": ["I cannot join you if there's no room."], "choices": [{"command": "EXIT"}]}
+    }
+  }
+}

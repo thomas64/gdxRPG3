@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="24" tileheight="24" infinite="0" nextlayerid="21" nextobjectid="3">
+<map version="1.11" tiledversion="1.12.1" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="24" tileheight="24" infinite="0" nextlayerid="21" nextobjectid="47">
  <properties>
   <property name="bgm" value="bgm_inn"/>
   <property name="step_sound" value="wood"/>
@@ -7,6 +7,7 @@
  <tileset firstgid="1" name="lastdenn_inn_2f" tilewidth="24" tileheight="24" tilecount="666" columns="37">
   <image source="tilesets/lastdenn_inn_2f.png" width="888" height="432"/>
  </tileset>
+ <tileset firstgid="667" source="tilesets/fsm_inside01_b.tsx"/>
  <layer id="2" name="under0_none" width="40" height="26">
   <data encoding="base64" compression="zlib">
    eJztwYEAAAAAw6D5U9/gBFUBAAAAfAMQQAAB
@@ -14,12 +15,12 @@
  </layer>
  <layer id="1" name="under1_ground" width="40" height="26">
   <data encoding="base64" compression="zlib">
-   eJzNlsdy1EAQhmfmSj6Qc7gQTAZnnDCZG5kCipzDC4AxDoDhIcjPwgGMbbDNI0BRJBcPwKdauqat1WgWyot9+PZXd0/3rP6VVrLGGDvB2cDHWliXo+ttaevGsk++30Y+OqEjR0dKXDeWffL9VvLx3RT4Ct+USn6NHb0utv4Na2c63ydxrE/vp/2T/DlmnHZeJT+SWneG2lkXXt/D2l+q7y3McuF9ZJ7eT/v3Hu2DfhhQKnnx4SnHz+A5PIHzzOzNWP+ItY+t7+uF2a54H+mXeTI/7d99dDt6ED1gvO60hbz4cIF5F+EF8Uvj40vwivoHcic4fsfxHOf7JJb6STjlwvPS/lWiDTApuR6ID6G30V2wRfmwClarvMSXmXkFBukbgpsc31LXXx/MVfVh+GjC89L+VaGNMDn5/YkPo3dssX+L2eOL8lXi5ehVuAbXYSEsUv712+x6aF7av2q0CabAVDgCbRn+LaF/qfN5iZe5gj/z4IYL+5euh+al/atBm6EFpsFRuJvhn1ynkhcV/+bDghz/0vX0HL2f9q8WrUv2hlY4BsdNsX/dphBLXnRFcm8m9wcMwhAMq74Bm11Pz9H7af8eovUm/3zy/CtHn/avJ/nPMvnnk+dfOfq0f5tgc+R8qtBq2BrQGrV+9598hfV9WfXQvAo72r/Y+e2x8feO2sj6WD3v/SV2feyFOmjjPqh0Pm6n77WqyxyJ5X2k1Hro/eVBxL9O6l3Jfw7frR32kauHe+Q6jK/L7yBxF8fTXen10PtL7P5thRmqfz/xNutjqYs/Encn6kqv/4CfGc+P2P27AxqS3yfxOicWf/613gifMvyL3b//S5vgc4Z/f/v/VC5thhYbfv8bb/9Cz4+J4l/W8yP2XBgP1c+PicxvIC9Q7g==
+   eJzNltdu1EAUhmfmln5B7+WGEnqUAIE0AohyB6EJEL2XF4AQUkCBh6A/CxcQkkASHgGEaBEPwDdaHflk1vZ4URKtpW+Pz5wy9r8ztq0xxlY5W/jZCJty7GZbLG8i6+T6tvLTDV05dqxg3kTWyfWt5eeXKfEDfior4xvs+LxY/nty57qkTvxYnZ5P6yfjl+hx3iVWxseCvAvELrrs/D5y/6q6DzDPZc8j/fR8Wr9P2AEYhCFlZVx0eMH5S3gFz+EyPftT8p+S+8wmdf0w35XPI/XST/qH+j3G7sUewx41id1vS+OiwxX6XYXX+G9M4l+Dt8Q/M3aG84+cL3BJnfgSPwvnXHa/UL86bCNM8+sBvx17H3sAapUO62C9Ghf/Oj1vwDB1I3CX83tq/Q3AQhUfhS8mu1+oXz22Cab7/x//OPaBLddvOXN8V7qKvxp7E27BbVgKy5R+gzY9ntUv1G8HthlmwEw4AR0p+q2gfqVLxsVf5Ur6LII7Llu/MJ7VL9RvJ7YFWmEWnISHKfrJOpVxsaLfYliSo18YD/vo+bR+vdgGPze0wSk4bcr183m1Slexa/ze9PsDhmEERlXdkE2Ph330fGn7N+9+iuRNZJ3Wr88/s0z+/eTpNxl1Wr9tsD1yP/U+OXJIvhw1dnxdGM86amz5+su7n4M2/t2xK5Ifi+d9v8TWxyFogA72QZ1L/E7q3qm49BFfvkeKxrO+X2L6dRPv8c8crq0TDjO2Gx4x1mWSuPQRv4fz2a54POv7JaZfG8xR9Ufw99jEl7j0Eb/XW1c8/hv+mMr37z5o9PcBT3J80ed/403wNUW/2P6dKtsM31L0q/T5NFm2BVpt5etvqm216pf2/ijyXpjqQ78/qpl/F7pEvw==
   </data>
  </layer>
- <layer id="3" name="under2_none" width="40" height="26">
+ <layer id="3" name="under2_objects" width="40" height="26">
   <data encoding="base64" compression="zlib">
-   eJztwYEAAAAAw6D5U9/gBFUBAAAAfAMQQAAB
+   eJztzjENAAAIA7BdmMc0MkiWVkETAOi18z0AAOhwW10Akg==
   </data>
  </layer>
  <layer id="4" name="under3_none" width="40" height="26">
@@ -37,14 +38,14 @@
    eJztwYEAAAAAw6D5U9/gBFUBAAAAfAMQQAAB
   </data>
  </layer>
- <layer id="7" name="over6_none" width="40" height="26">
+ <layer id="7" name="over6_objects" width="40" height="26">
   <data encoding="base64" compression="zlib">
-   eJztwYEAAAAAw6D5U9/gBFUBAAAAfAMQQAAB
+   eJzt1b0JACAMhNG7pQTdwP0XshG0iLYS+V5zkL82EgAAwN+qpeI4m9dcn/V9L+qf7gEAcrj9hReZxQAcWAyF
   </data>
  </layer>
- <layer id="8" name="over7_none" width="40" height="26">
+ <layer id="8" name="over7_lights" width="40" height="26">
   <data encoding="base64" compression="zlib">
-   eJztwYEAAAAAw6D5U9/gBFUBAAAAfAMQQAAB
+   eJzt0zENACAMAMEmHcAJ+FcIBpjbkDsFv3wEAPxrZMTM6oq3ddt24z6o5F+AXg7T4wDV
   </data>
  </layer>
  <layer id="9" name="over8_none" width="40" height="26">
@@ -52,10 +53,72 @@
    eJztwYEAAAAAw6D5U9/gBFUBAAAAfAMQQAAB
   </data>
  </layer>
- <objectgroup color="#0055ff" id="11" name="sound"/>
- <objectgroup color="#aa0000" id="12" name="collision"/>
- <objectgroup color="#5500ff" id="13" name="rest"/>
- <objectgroup color="#55ff7f" id="14" name="npc"/>
+ <objectgroup color="#0055ff" id="11" name="sound">
+  <object id="3" name="carpet" x="432" y="144" width="336" height="144"/>
+ </objectgroup>
+ <objectgroup color="#aa0000" id="12" name="collision">
+  <object id="5" x="0" y="0" width="960" height="144"/>
+  <object id="6" x="0" y="144" width="48" height="480"/>
+  <object id="7" x="48" y="600" width="912" height="24"/>
+  <object id="8" x="912" y="144" width="48" height="456"/>
+  <object id="9" x="720" y="360" width="192" height="120"/>
+  <object id="10" x="528" y="360" width="144" height="120"/>
+  <object id="11" x="240" y="360" width="240" height="120"/>
+  <object id="12" x="240" y="144" width="48" height="216"/>
+  <object id="13" x="288" y="144" width="48" height="96"/>
+  <object id="14" x="384" y="144" width="48" height="96"/>
+  <object id="15" x="336" y="144" width="48" height="24"/>
+  <object id="16" x="528" y="144" width="144" height="24"/>
+  <object id="17" x="576" y="168" width="48" height="192"/>
+  <object id="18" x="768" y="144" width="48" height="96"/>
+  <object id="19" x="864" y="144" width="48" height="96"/>
+  <object id="20" x="816" y="144" width="48" height="24"/>
+  <object id="22" x="48" y="168" width="48" height="96"/>
+  <object id="23" x="144" y="168" width="24" height="96"/>
+  <object id="24" x="96" y="252" width="48" height="12"/>
+  <object id="25" x="480" y="192" width="48" height="60"/>
+  <object id="26" x="672" y="192" width="48" height="60"/>
+  <object id="27" x="672" y="144" width="36" height="48"/>
+  <object id="28" x="684" y="252" width="24" height="30"/>
+  <object id="30" x="492" y="144" width="36" height="48"/>
+  <object id="31" x="492" y="252" width="24" height="30"/>
+  <object id="32" x="864" y="480" width="48" height="42"/>
+ </objectgroup>
+ <objectgroup color="#5500ff" id="13" name="rest">
+  <object id="33" name="note_bed02" x="288" y="144" width="48" height="96"/>
+  <object id="34" name="note_bed02" x="384" y="144" width="48" height="96"/>
+  <object id="37" name="note_bed02" x="768" y="144" width="48" height="96"/>
+  <object id="38" name="note_bed02" x="864" y="144" width="48" height="96"/>
+  <object id="39" name="note_closet" x="528" y="120" width="144" height="48"/>
+  <object id="40" name="note_closet" x="816" y="120" width="48" height="24"/>
+  <object id="41" name="note_closet" x="336" y="120" width="48" height="24"/>
+  <object id="42" name="note_plant" x="864" y="480" width="48" height="42"/>
+ </objectgroup>
+ <objectgroup color="#55ff7f" id="14" name="npc">
+  <object id="43" name="weapon_trainer" x="336" y="264" width="48" height="24">
+   <properties>
+    <property name="conversation" value="lastdenn_academy1"/>
+    <property name="direction" value="south"/>
+   </properties>
+  </object>
+  <object id="44" name="battle_trainer" type="w" x="120" y="432" width="48" height="24">
+   <properties>
+    <property name="conversation" value="lastdenn_academy2"/>
+   </properties>
+  </object>
+  <object id="45" name="heal_trainer" x="720" y="144" width="48" height="24">
+   <properties>
+    <property name="conversation" value="lastdenn_academy3"/>
+    <property name="direction" value="north"/>
+   </properties>
+  </object>
+  <object id="46" name="magic_trainer" x="792" y="522" width="48" height="24">
+   <properties>
+    <property name="conversation" value="lastdenn_academy4"/>
+    <property name="direction" value="west"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup color="#55aaff" id="15" name="spawn">
   <object id="2" name="lastdenn_inn" x="96" y="216" width="48" height="24"/>
  </objectgroup>

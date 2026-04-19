@@ -49,7 +49,17 @@
       "1": {"text": ["Are you planning to prepare a meal or something?"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "note_coffee"      : {
+  "note_plant"      : {
+    "phrases": {
+      "1": {"text": ["It's a plant. It looks healthy. Don't mess with it."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "note_empty"      : {
+    "phrases": {
+      "1": {"text": ["It seems to be empty. You'd better leave it that way."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "note_coffee"     : {
     "phrases": {
       "1": {"text": ["You'd like some caffeine, don't you?"], "choices": [{"command": "EXIT"}]}
     }

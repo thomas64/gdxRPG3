@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="24" tileheight="24" infinite="0" nextlayerid="21" nextobjectid="5">
+<map version="1.11" tiledversion="1.12.1" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="24" tileheight="24" infinite="0" nextlayerid="21" nextobjectid="48">
  <properties>
   <property name="bgm" value="bgm_inn"/>
   <property name="step_sound" value="wood"/>
@@ -7,6 +7,7 @@
  <tileset firstgid="1" name="lastdenn_inn" tilewidth="24" tileheight="24" tilecount="828" columns="36">
   <image source="tilesets/lastdenn_inn.png" width="864" height="552"/>
  </tileset>
+ <tileset firstgid="829" source="tilesets/fsm_inside01_b.tsx"/>
  <layer id="2" name="under0_none" width="40" height="30">
   <data encoding="base64" compression="zlib">
    eJztwTEBAAAAwqD1T20ND6AAAAAA4NcAEsAAAQ==
@@ -14,7 +15,7 @@
  </layer>
  <layer id="1" name="under1_ground" width="40" height="30">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer id="3" name="under2_none" width="40" height="30">
@@ -37,14 +38,14 @@
    eJztwTEBAAAAwqD1T20ND6AAAAAA4NcAEsAAAQ==
   </data>
  </layer>
- <layer id="7" name="over6_none" width="40" height="30">
+ <layer id="7" name="over6_objects" width="40" height="30">
   <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T20ND6AAAAAA4NcAEsAAAQ==
+   eJzt1bEJACAMRNHL1LqEY7injWAQESwUlf8gHASSIk0kAACAvwWTcs1orZ/U+nlhn5/z+wAAb/B/YVfO/k2fGLv9PlYLZxQvEhp2
   </data>
  </layer>
- <layer id="8" name="over7_none" width="40" height="30">
+ <layer id="8" name="over7_lights" width="40" height="30">
   <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T20ND6AAAAAA4NcAEsAAAQ==
+   eJzt00ENACAMALEl8y8EnIAqEADvEdIquM9FAACctYzoWV1xN3bbfLgPKvkXgJ8sZlcF5Q==
   </data>
  </layer>
  <layer id="9" name="over8_none" width="40" height="30">
@@ -52,10 +53,69 @@
    eJztwTEBAAAAwqD1T20ND6AAAAAA4NcAEsAAAQ==
   </data>
  </layer>
- <objectgroup color="#0055ff" id="11" name="sound"/>
- <objectgroup color="#aa0000" id="12" name="collision"/>
- <objectgroup color="#5500ff" id="13" name="rest"/>
- <objectgroup color="#55ff7f" id="14" name="npc"/>
+ <objectgroup color="#0055ff" id="11" name="sound">
+  <object id="32" name="stone" x="576" y="174" width="144" height="66"/>
+  <object id="38" name="carpet" x="624" y="480" width="144" height="48"/>
+ </objectgroup>
+ <objectgroup color="#aa0000" id="12" name="collision">
+  <object id="5" x="0" y="600" width="672" height="120"/>
+  <object id="6" x="720" y="600" width="240" height="120"/>
+  <object id="7" x="672" y="672" width="48" height="48"/>
+  <object id="9" x="0" y="0" width="960" height="144"/>
+  <object id="10" x="912" y="144" width="48" height="456"/>
+  <object id="11" x="0" y="144" width="48" height="456"/>
+  <object id="12" x="240" y="144" width="48" height="336"/>
+  <object id="14" x="288" y="360" width="96" height="120"/>
+  <object id="15" x="432" y="360" width="144" height="120"/>
+  <object id="16" x="528" y="144" width="48" height="216"/>
+  <object id="17" x="480" y="144" width="48" height="96"/>
+  <object id="18" x="288" y="144" width="96" height="24"/>
+  <object id="19" x="816" y="144" width="96" height="24"/>
+  <object id="20" x="576" y="144" width="144" height="30"/>
+  <object id="21" x="768" y="360" width="96" height="120"/>
+  <object id="22" x="624" y="432" width="144" height="48"/>
+  <object id="23" x="336" y="240" width="48" height="60"/>
+  <object id="24" x="348" y="198" width="24" height="42"/>
+  <object id="25" x="768" y="240" width="48" height="60"/>
+  <object id="26" x="780" y="198" width="24" height="42"/>
+  <object id="27" x="780" y="300" width="24" height="30"/>
+  <object id="29" x="816" y="246" width="36" height="36"/>
+  <object id="30" x="576" y="240" width="144" height="144"/>
+  <object id="31" x="576" y="384" width="48" height="96"/>
+  <object id="33" x="48" y="144" width="48" height="138"/>
+  <object id="34" x="144" y="144" width="96" height="138"/>
+ </objectgroup>
+ <objectgroup color="#5500ff" id="13" name="rest">
+  <object id="42" name="note_kitchen" x="636" y="144" width="84" height="30"/>
+  <object id="43" name="note_closet" x="834" y="120" width="60" height="30"/>
+  <object id="45" name="note_bed02" x="480" y="144" width="48" height="96"/>
+  <object id="46" name="note_closet" x="288" y="120" width="96" height="48"/>
+  <object id="47" name="note_plant" x="192" y="240" width="48" height="42"/>
+ </objectgroup>
+ <objectgroup color="#55ff7f" id="14" name="npc">
+  <object id="39" name="woman06" x="672" y="408" width="48" height="24">
+   <properties>
+    <property name="conversation" value="lastdenn_inn_behind"/>
+    <property name="direction" value="south"/>
+   </properties>
+  </object>
+  <object id="40" name="woman06" type="inv" x="672" y="456" width="48" height="12">
+   <properties>
+    <property name="conversation" value="lastdenn_inn_price-2"/>
+   </properties>
+  </object>
+  <object id="41" name="maid02" x="576" y="162" width="48" height="24">
+   <properties>
+    <property name="conversation" value="get_out_of_kitchen"/>
+    <property name="direction" value="north"/>
+   </properties>
+  </object>
+  <object id="44" name="maid03" type="w" x="816" y="216" width="48" height="24">
+   <properties>
+    <property name="conversation" value="get_out_of_kitchen"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup color="#55aaff" id="15" name="spawn">
   <object id="1" name="lastdenn" x="672" y="624" width="48" height="24"/>
   <object id="3" name="lastdenn_inn_2f" x="96" y="168" width="48" height="24"/>

@@ -50,6 +50,7 @@ object ConditionDatabase {
         "is_lastdenn_entrance_closed"   to { isLastdennEntranceClosed },
         "is_garrin_possessed"           to { true }, // todo, placeholder for future condition
         "witnessed_garrin_possession"   to { gameData.cutscenes.isPlayed(CutsceneId.SCENE_GHOST_POSSESSES_GARRIN) },
+        "talked_to_garrin_in_prison"    to { false }, // todo, will become a certain quest step
         "cycle_>=_5"                    to { gameData.numberOfCycles >= 5 }
         // @formatter:on
     )

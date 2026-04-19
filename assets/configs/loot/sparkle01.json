@@ -56,5 +56,6 @@
   "sparkle_alva_21"    : {"content": {"herb": 1}},
   "sparkle_alva_22"    : {"content": {"spice": 1}},
   "sparkle_alva_23"    : {"condition": ["ranger1"], "content": {"herb": 1}},
-  "sparkle_alva_24"    : {"condition": ["ranger1"], "content": {"gemstone": 1}}
+  "sparkle_alva_24"    : {"condition": ["ranger1"], "content": {"gemstone": 1}},
+  "sparkle_garrin_01"  : {"condition": ["talked_to_garrin_in_prison"], "content": {"letter_to_santino": 1}}
 }

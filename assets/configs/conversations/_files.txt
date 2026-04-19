@@ -13,6 +13,7 @@ cutscene_ardor_later_time.json
 alva_road.json
 hero_luana.json
 hero_reignald.json
+hero_ryiah.json
 lastdenn.json
 lastdenn_guards.json
 lastdenn_santino.json

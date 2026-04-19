@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.12.1" orientation="orthogonal" renderorder="right-down" width="46" height="43" tilewidth="24" tileheight="24" infinite="0" nextlayerid="21" nextobjectid="84">
+<map version="1.11" tiledversion="1.12.1" orientation="orthogonal" renderorder="right-down" width="46" height="43" tilewidth="24" tileheight="24" infinite="0" nextlayerid="21" nextobjectid="85">
  <properties>
   <property name="bgm" value="bgm_temple"/>
   <property name="step_sound" value="wood"/>
@@ -105,6 +105,7 @@
   <object id="80" name="note_holy_bible" x="540" y="414" width="24" height="6"/>
   <object id="81" name="note_holy_water" x="864" y="600" width="144" height="144"/>
   <object id="82" name="note_closet" x="120" y="528" width="120" height="48"/>
+  <object id="84" name="note_plant" x="240" y="576" width="48" height="24"/>
  </objectgroup>
  <objectgroup color="#55ff7f" id="14" name="npc">
   <object id="15" name="sister01" x="480" y="816" width="48" height="24">

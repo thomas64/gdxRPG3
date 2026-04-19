@@ -3,6 +3,7 @@ package nl.t64.cot.screens.world.entity
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
+import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.condition.areAllTrue
@@ -149,6 +150,7 @@ class PhysicsDoor(private val door: Door) : PhysicsComponent() {
             door.open()
             entity.send(StateEvent(EntityState.OPENED))
             brokerManager.blockObservers.removeObserver(entity)
+            mapManager.setTiledGraph()
         }
     }
 
@@ -158,6 +160,7 @@ class PhysicsDoor(private val door: Door) : PhysicsComponent() {
             door.close()
             entity.send(StateEvent(EntityState.CLOSING))
             brokerManager.blockObservers.addObserver(entity)
+            mapManager.setTiledGraph()
             isOpenedByNpc = false
         }
     }

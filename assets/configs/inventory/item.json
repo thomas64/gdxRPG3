@@ -50,5 +50,21 @@
     "is_unique"   : true,
     "description" : ["A letter from the village elder to the Fairy Shop.", "What does it say?"],
     "is_droppable": false
+  },
+  "key_lastdenn_jail"      : {
+    "name"        : "Cell door 2 key",
+    "group"       : "ITEM",
+    "sort"        : 70040,
+    "is_unique"   : true,
+    "description" : ["Key to Lastdenn Jail cell door 2."],
+    "is_droppable": false
+  },
+  "letter_to_santino"      : {
+    "name"        : "Letter to Father Santino",
+    "group"       : "ITEM",
+    "sort"        : 70045,
+    "is_unique"   : true,
+    "description" : ["A letter from Garrin to Father Santino about ghosts."],
+    "is_droppable": false
   }
 }

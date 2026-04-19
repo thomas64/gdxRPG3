@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="38" height="28" tilewidth="24" tileheight="24" infinite="0" nextlayerid="21" nextobjectid="8">
+<map version="1.11" tiledversion="1.12.1" orientation="orthogonal" renderorder="right-down" width="38" height="28" tilewidth="24" tileheight="24" infinite="0" nextlayerid="21" nextobjectid="72">
  <properties>
   <property name="bgm" value="bgm_inn"/>
   <property name="step_sound" value="wood"/>
@@ -8,6 +8,7 @@
   <image source="tilesets/lastdenn_weapon_shop.png" width="1008" height="624"/>
  </tileset>
  <tileset firstgid="1093" source="tilesets/fsm_inside01_d.tsx"/>
+ <tileset firstgid="2117" source="tilesets/fsm_inside01_b.tsx"/>
  <layer id="2" name="under0_none" width="38" height="28">
   <data encoding="base64" compression="zlib">
    eJztwTEBAAAAwqD1T20MH6AAAAAAvgYQoAAB
@@ -15,7 +16,7 @@
  </layer>
  <layer id="1" name="under1_ground" width="38" height="28">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer id="3" name="under2_shade" width="38" height="28">
@@ -38,14 +39,14 @@
    eJztwTEBAAAAwqD1T20MH6AAAAAAvgYQoAAB
   </data>
  </layer>
- <layer id="7" name="over6_none" width="38" height="28">
+ <layer id="7" name="over6_objects" width="38" height="28">
   <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T20MH6AAAAAAvgYQoAAB
+   eJxjYBgFo2AUjBRwlp2B4Rw7bvnzQLkLeORpBd4C7XyHx973QLkPA+CuUTAKRsHgAaEsDAxhLAPtCkxQCnRT2SB01ygYBaOAdPAdiH9D6R9I4o6MCHF60EMVDFb3M0LxKBgaAABPnykv
   </data>
  </layer>
- <layer id="8" name="over7_none" width="38" height="28">
+ <layer id="8" name="over7_lights" width="38" height="28">
   <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T20MH6AAAAAAvgYQoAAB
+   eJztzrERABAABLAv7b8JmzARnULrjiKZIAkAAGy1JK28Xpz6Oo0PXwDcMQGABQMn
   </data>
  </layer>
  <layer id="9" name="over8_none" width="38" height="28">
@@ -53,19 +54,217 @@
    eJztwTEBAAAAwqD1T20MH6AAAAAAvgYQoAAB
   </data>
  </layer>
- <objectgroup color="#0055ff" id="11" name="sound"/>
- <objectgroup color="#aa0000" id="12" name="collision"/>
+ <objectgroup color="#0055ff" id="11" name="sound">
+  <object id="8" name="carpet" x="48" y="330" width="240" height="102"/>
+  <object id="31" name="carpet" x="360" y="276" width="96" height="12"/>
+ </objectgroup>
+ <objectgroup color="#aa0000" id="12" name="collision">
+  <object id="9" x="192" y="552" width="720" height="120"/>
+  <object id="10" x="0" y="552" width="144" height="120"/>
+  <object id="11" x="144" y="624" width="48" height="48"/>
+  <object id="12" x="864" y="0" width="48" height="552"/>
+  <object id="13" x="0" y="0" width="48" height="552"/>
+  <object id="14" x="240" y="0" width="624" height="144"/>
+  <object id="15" x="288" y="144" width="96" height="192"/>
+  <object id="16" x="432" y="144" width="96" height="192"/>
+  <object id="17" x="48" y="288" width="240" height="48"/>
+  <object id="19" x="48" y="0" width="96" height="240"/>
+  <object id="20" x="816" y="390" width="48" height="78"/>
+  <object id="21" x="576" y="384" width="192" height="96"/>
+  <object id="22" x="576" y="192" width="240" height="96"/>
+  <object id="23" x="576" y="288" width="48" height="48"/>
+  <object id="24" x="144" y="180" width="96" height="12"/>
+  <object id="25" x="144" y="174" width="90" height="6"/>
+  <object id="26" x="144" y="168" width="84" height="6"/>
+  <object id="27" x="144" y="162" width="78" height="6"/>
+  <object id="28" x="144" y="0" width="96" height="96"/>
+  <object id="29" x="48" y="336" width="48" height="96"/>
+  <object id="32" x="624" y="480" width="144" height="6"/>
+  <object id="70" x="624" y="288" width="144" height="6"/>
+ </objectgroup>
  <objectgroup color="#5500ff" id="13" name="rest"/>
- <objectgroup color="#55ff7f" id="14" name="npc"/>
+ <objectgroup color="#55ff7f" id="14" name="npc">
+  <object id="34" name="man04" x="144" y="264" width="48" height="24">
+   <properties>
+    <property name="conversation" value="equipshop_lastdenn_dont"/>
+    <property name="direction" value="south"/>
+   </properties>
+  </object>
+  <object id="35" name="man04" type="inv" x="144" y="312" width="48" height="12">
+   <properties>
+    <property name="conversation" value="equipshop_lastdenn"/>
+   </properties>
+  </object>
+  <object id="37" name="man04" type="inv" x="48" y="408" width="48" height="24">
+   <properties>
+    <property name="conversation" value="equipshop_lastdenn_come"/>
+   </properties>
+  </object>
+  <object id="38" name="man04" type="inv" x="48" y="360" width="48" height="24">
+   <properties>
+    <property name="conversation" value="equipshop_lastdenn_come"/>
+   </properties>
+  </object>
+  <object id="41" name="man04" type="inv" x="576" y="432" width="48" height="24">
+   <properties>
+    <property name="conversation" value="equipshop_lastdenn_come"/>
+   </properties>
+  </object>
+  <object id="42" name="man04" type="inv" x="576" y="384" width="48" height="24">
+   <properties>
+    <property name="conversation" value="equipshop_lastdenn_come"/>
+   </properties>
+  </object>
+  <object id="43" name="man04" type="inv" x="576" y="192" width="48" height="24">
+   <properties>
+    <property name="conversation" value="equipshop_lastdenn_come"/>
+   </properties>
+  </object>
+  <object id="44" name="man04" type="inv" x="576" y="288" width="48" height="24">
+   <properties>
+    <property name="conversation" value="equipshop_lastdenn_come"/>
+   </properties>
+  </object>
+  <object id="45" name="man04" type="inv" x="576" y="216" width="48" height="24">
+   <properties>
+    <property name="conversation" value="equipshop_lastdenn_come"/>
+   </properties>
+  </object>
+  <object id="46" name="man04" type="inv" x="624" y="384" width="48" height="24">
+   <properties>
+    <property name="conversation" value="equipshop_lastdenn_come"/>
+   </properties>
+  </object>
+  <object id="47" name="man04" type="inv" x="672" y="384" width="48" height="24">
+   <properties>
+    <property name="conversation" value="equipshop_lastdenn_come"/>
+   </properties>
+  </object>
+  <object id="48" name="man04" type="inv" x="672" y="456" width="48" height="24">
+   <properties>
+    <property name="conversation" value="equipshop_lastdenn_come"/>
+   </properties>
+  </object>
+  <object id="49" name="man04" type="inv" x="720" y="456" width="48" height="24">
+   <properties>
+    <property name="conversation" value="equipshop_lastdenn_come"/>
+   </properties>
+  </object>
+  <object id="50" name="man04" type="inv" x="624" y="264" width="48" height="24">
+   <properties>
+    <property name="conversation" value="equipshop_lastdenn_come"/>
+   </properties>
+  </object>
+  <object id="51" name="man04" type="inv" x="672" y="264" width="48" height="24">
+   <properties>
+    <property name="conversation" value="equipshop_lastdenn_come"/>
+   </properties>
+  </object>
+  <object id="52" name="man04" type="inv" x="720" y="264" width="48" height="24">
+   <properties>
+    <property name="conversation" value="equipshop_lastdenn_come"/>
+   </properties>
+  </object>
+  <object id="53" name="man04" type="inv" x="768" y="240" width="48" height="24">
+   <properties>
+    <property name="conversation" value="equipshop_lastdenn_come"/>
+   </properties>
+  </object>
+  <object id="54" name="man04" type="inv" x="624" y="192" width="48" height="24">
+   <properties>
+    <property name="conversation" value="equipshop_lastdenn_come"/>
+   </properties>
+  </object>
+  <object id="55" name="man04" type="inv" x="672" y="192" width="48" height="24">
+   <properties>
+    <property name="conversation" value="equipshop_lastdenn_come"/>
+   </properties>
+  </object>
+  <object id="56" name="man04" type="inv" x="720" y="192" width="48" height="24">
+   <properties>
+    <property name="conversation" value="equipshop_lastdenn_come"/>
+   </properties>
+  </object>
+  <object id="57" name="man04" type="inv" x="768" y="192" width="48" height="24">
+   <properties>
+    <property name="conversation" value="equipshop_lastdenn_come"/>
+   </properties>
+  </object>
+  <object id="58" name="man04" type="inv" x="768" y="216" width="48" height="24">
+   <properties>
+    <property name="conversation" value="equipshop_lastdenn_come"/>
+   </properties>
+  </object>
+  <object id="59" name="man04" type="inv" x="624" y="108" width="48" height="24">
+   <properties>
+    <property name="conversation" value="equipshop_lastdenn_come"/>
+   </properties>
+  </object>
+  <object id="60" name="man04" type="inv" x="672" y="108" width="48" height="24">
+   <properties>
+    <property name="conversation" value="equipshop_lastdenn_come"/>
+   </properties>
+  </object>
+  <object id="61" name="man04" type="inv" x="48" y="384" width="48" height="24">
+   <properties>
+    <property name="conversation" value="equipshop_lastdenn_come"/>
+   </properties>
+  </object>
+  <object id="62" name="man04" type="inv" x="48" y="336" width="48" height="24">
+   <properties>
+    <property name="conversation" value="equipshop_lastdenn_come"/>
+   </properties>
+  </object>
+  <object id="63" name="man04" type="inv" x="576" y="240" width="48" height="24">
+   <properties>
+    <property name="conversation" value="equipshop_lastdenn_come"/>
+   </properties>
+  </object>
+  <object id="64" name="man04" type="inv" x="576" y="264" width="48" height="24">
+   <properties>
+    <property name="conversation" value="equipshop_lastdenn_come"/>
+   </properties>
+  </object>
+  <object id="65" name="man04" type="inv" x="576" y="312" width="48" height="24">
+   <properties>
+    <property name="conversation" value="equipshop_lastdenn_come"/>
+   </properties>
+  </object>
+  <object id="66" name="man04" type="inv" x="576" y="408" width="48" height="24">
+   <properties>
+    <property name="conversation" value="equipshop_lastdenn_come"/>
+   </properties>
+  </object>
+  <object id="67" name="man04" type="inv" x="576" y="456" width="48" height="24">
+   <properties>
+    <property name="conversation" value="equipshop_lastdenn_come"/>
+   </properties>
+  </object>
+  <object id="68" name="man04" type="inv" x="768" y="264" width="48" height="24">
+   <properties>
+    <property name="conversation" value="equipshop_lastdenn_come"/>
+   </properties>
+  </object>
+  <object id="69" name="man04" type="inv" x="720" y="432" width="48" height="24">
+   <properties>
+    <property name="conversation" value="equipshop_lastdenn_come"/>
+   </properties>
+  </object>
+  <object id="71" name="girl11" type="w" x="672" y="144" width="48" height="24">
+   <properties>
+    <property name="conversation" value="armor_in_pink"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup color="#55aaff" id="15" name="spawn">
   <object id="1" name="lastdenn" x="144" y="576" width="48" height="24"/>
   <object id="5" name="lastdenn_weapon_shop_2f" type="1" x="384" y="168" width="48" height="24"/>
-  <object id="7" name="lastdenn_weapon_shop_2f" type="2" x="216" y="144" width="48" height="24"/>
+  <object id="7" name="lastdenn_weapon_shop_2f" type="2" x="216" y="144" width="48" height="18"/>
  </objectgroup>
  <objectgroup color="#ffff7f" id="16" name="portal">
   <object id="2" name="lastdenn" x="144" y="600" width="48" height="24"/>
   <object id="3" name="lastdenn_weapon_shop_2f" type="1" x="384" y="144" width="48" height="24"/>
-  <object id="6" name="lastdenn_weapon_shop_2f" type="2" x="192" y="120" width="24" height="48"/>
+  <object id="6" name="lastdenn_weapon_shop_2f" type="2" x="192" y="96" width="24" height="66"/>
  </objectgroup>
  <objectgroup color="#ff00ff" id="18" name="quest"/>
  <objectgroup color="#ff55ff" id="19" name="event"/>

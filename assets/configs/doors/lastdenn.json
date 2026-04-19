@@ -3,5 +3,6 @@
   "door_lastdenn_weapon_shop": {"type": "SMALL", "spriteId": "luxurious_left", "openStartTime": "08:30", "openEndTime": "17:30", "message": "Equipment Shop.\n\nOpen from 08:30 to 17:30."},
   "door_lastdenn_bar"        : {"type": "SMALL", "spriteId": "luxurious_shade_left", "openStartTime": "17:00", "openEndTime": "20:00", "message": "Lastdenn Bar.\n\nOpen from 17:00 to 01:00."},
   "door_lastdenn_garrin"     : {"type": "SMALL", "spriteId": "wooden_left", "openStartTime": "07:00", "openEndTime": "14:00", "message": "Garrin's house is cordoned off by the guards."},
-  "door_lastdenn_jail"       : {"type": "SMALL", "spriteId": "forged_left", "openStartTime": "18:00", "openEndTime": "20:00", "message": "Lastdenn Jail.\n\nOpen from 18:00 to 20:00."}
+  "door_lastdenn_jail"       : {"type": "SMALL", "spriteId": "forged_left", "openStartTime": "18:00", "openEndTime": "20:00", "message": "Lastdenn Jail.\n\nOpen from 18:00 to 20:00."},
+  "door_lastdenn_jail_b1"    : {"type": "GATE", "spriteId": "gate_with_lock", "keyId": "key_lastdenn_jail"}
 }

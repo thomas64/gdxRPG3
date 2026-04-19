@@ -1,55 +1,21 @@
-
 item.png
-size: 434, 62
-format: RGBA8888
-filter: Nearest, Nearest
-repeat: none
+size:496,124
+repeat:none
 crystal_of_time
-  rotate: false
-  xy: 0, 0
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
+bounds:0,0,62,62
 horse_medicine
-  rotate: false
-  xy: 62, 0
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
+bounds:62,0,62,62
 horseshoe
-  rotate: false
-  xy: 124, 0
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
+bounds:124,0,62,62
 key_honeywood_basement
-  rotate: false
-  xy: 186, 0
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
+bounds:186,0,62,62
+key_lastdenn_jail
+bounds:248,0,62,62
 letter_to_fairy_shop
-  rotate: false
-  xy: 248, 0
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
+bounds:310,0,62,62
+letter_to_santino
+bounds:372,0,62,62
 scroll_of_orc_obedience
-  rotate: false
-  xy: 310, 0
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
+bounds:434,0,62,62
 tow_rope
-  rotate: false
-  xy: 372, 0
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
+bounds:0,62,62,62

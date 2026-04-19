@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.12.1" orientation="orthogonal" renderorder="right-down" width="36" height="24" tilewidth="24" tileheight="24" infinite="0" nextlayerid="22" nextobjectid="56">
+<map version="1.11" tiledversion="1.12.1" orientation="orthogonal" renderorder="right-down" width="36" height="24" tilewidth="24" tileheight="24" infinite="0" nextlayerid="23" nextobjectid="62">
  <properties>
   <property name="bgm" value="bgm_cell"/>
   <property name="lightmap_player" value="light_player"/>
@@ -27,9 +27,9 @@
    eJxjYBgFo2AUDHWwmmugXYAKRt2DH4y6Bz8YdQ9+MOoe/IBS9+TyMTDk8VFPPaXuaQWa3UaCewipJ9U9wy1+qQ1G3TMKyAEARwAPjQ==
   </data>
  </layer>
- <layer id="4" name="under3_none" width="36" height="24">
+ <layer id="4" name="under3_door" width="36" height="24">
   <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T20LL6AAAAB4GA2AAAE=
+   eJztzjERACAMBMFvoEscgH9zQQN0KRAQmLlVsBIAAMAfwqRl1YvUXOpevUjjXOZDHwC3DUbvAnQ=
   </data>
  </layer>
  <layer id="5" name="under4_none" width="36" height="24">
@@ -71,20 +71,41 @@
   <object id="31" x="0" y="144" width="48" height="432"/>
   <object id="33" x="48" y="552" width="768" height="24"/>
   <object id="34" x="792" y="528" width="24" height="24"/>
-  <object id="35" x="528" y="312" width="96" height="120"/>
-  <object id="36" x="240" y="312" width="144" height="120"/>
+  <object id="36" x="240" y="312" width="384" height="120"/>
   <object id="37" x="48" y="312" width="48" height="120"/>
   <object id="38" x="288" y="144" width="48" height="168"/>
   <object id="39" x="576" y="144" width="48" height="168"/>
   <object id="40" x="528" y="144" width="48" height="48"/>
   <object id="41" x="240" y="144" width="48" height="48"/>
-  <object id="42" x="480" y="384" width="48" height="48"/>
-  <object id="43" x="384" y="384" width="48" height="48"/>
   <object id="44" x="192" y="384" width="48" height="48"/>
   <object id="45" x="96" y="384" width="48" height="48"/>
  </objectgroup>
- <objectgroup color="#5500ff" id="13" name="rest"/>
- <objectgroup color="#55ff7f" id="14" name="npc"/>
+ <objectgroup color="#5500ff" id="13" name="rest">
+  <object id="57" name="door_lastdenn_jail_b1" x="144" y="336" width="48" height="96"/>
+ </objectgroup>
+ <objectgroup color="#aa55ff" id="22" name="hero">
+  <object id="56" name="ryiah" x="192" y="360" width="48" height="24">
+   <properties>
+    <property name="conversation" value="ryiah_join"/>
+    <property name="direction" value="south"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup color="#55ff7f" id="14" name="npc">
+  <object id="59" name="man12" x="432" y="306" width="48" height="24">
+   <properties>
+    <property name="condition" value="is_garrin_possessed"/>
+    <property name="conversation" value="garrin_in_jail"/>
+    <property name="direction" value="south"/>
+   </properties>
+  </object>
+  <object id="61" name="man12" type="inv" x="432" y="408" width="48" height="12">
+   <properties>
+    <property name="condition" value="is_garrin_possessed"/>
+    <property name="conversation" value="garrin_in_jail"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup color="#55aaff" id="15" name="spawn">
   <object id="2" name="lastdenn_jail" x="648" y="144" width="48" height="18"/>
  </objectgroup>

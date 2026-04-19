@@ -1,5 +1,5 @@
 {
-  "save_lastdenn"              : {
+  "save_lastdenn"           : {
     "name"   : "Sister Margarita",
     "phrases": {
       "1": {"text": ["Welcome to Lastdenn's Temple. I'm sister Margarita.", "Do you want me to pray for you, so you can feel save on your journey?"]},
@@ -12,11 +12,162 @@
       "3": {"face": "sister01", "text": ["Mighty Evdos, bless this traveler into savety."], "choices": [{"command": "SAVE_GAME"}]}
     }
   },
-  "standing_guard_near_crystal": {
-    "name"   : "Lastdenn Guard",
+  "resourceshop_lastdenn"   : {
+    "name"   : "Resource Shop",
     "phrases": {
-      "1": {"text": ["This is the city of Lastdenn."]},
-      "2": {"text": ["Don't cause any disturbances."], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["Welcome to the Resource Shop! We have all kinds of items for sale here."]},
+      "2": {
+        "choices": [
+          {"text": "*Visit the shop.*", "command": "LOAD_SHOP"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      }
+    }
+  },
+  "lastdenn_item_shop_come" : {
+    "name"   : "Resource Shop",
+    "phrases": {
+      "1": {"text": ["If you need anything, please come see me at the counter."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "lastdenn_item_shop_dont" : {
+    "name"   : "Resource Shop",
+    "phrases": {
+      "1": {"text": ["Please don't go there. That's private property."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "equipshop_lastdenn"      : {
+    "name"   : "Equipment Shop",
+    "phrases": {
+      "1": {"text": ["Welcome to Lastdenn's Equipment Shop! You can find all kinds of weapons and armor here."]},
+      "2": {
+        "choices": [
+          {"text": "*Visit the shop.*", "command": "LOAD_SHOP"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      }
+    }
+  },
+  "equipshop_lastdenn_dont" : {
+    "name"   : "Equipment Shop",
+    "phrases": {
+      "1": {"text": ["Sir, I'd rather you not come over here."]},
+      "2": {"text": ["You know how these things work. You buy things from over the counter."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "equipshop_lastdenn_come" : {
+    "name"   : "Equipment Shop",
+    "phrases": {
+      "1": {"text": ["If you find anything you like, please come see me at the counter."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "armor_in_pink"           : {
+    "name"   : "Lisa",
+    "phrases": {
+      "1": {"text": ["Hey there mister. I'm looking for armor in pink."]},
+      "2": {"text": ["Do you think that's a real thing somewhere?"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "equipshop_upstairs_woman": {
+    "name"   : "Manilde",
+    "phrases": {
+      "1": {"text": ["Goodness gracious! The fact that our store has a staircase, doesn't mean you can just go upstairs!"]},
+      "2": {"text": ["Why would you do such a thing? Please leave our home!"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "equipshop_upstairs_girl" : {
+    "name"   : "Alisa",
+    "phrases": {
+      "1": {"text": ["Hi mister! I'm Alisa, the daughter of the shop owner."]},
+      "2": {"text": ["My mommy doesn't like it when customers go upstairs, teehee!"]},
+      "3": {"text": ["A lot of people do go upstairs though, and my daddy always says: 'The customer is always right!'"]},
+      "4": {"text": ["So, are customers allowed to go upstairs or not?"]},
+      "5": {"text": [". . ."]},
+      "6": {"text": ["I love horsies! Do you like horsies?"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "lastdenn_inn_price-2"    : {
+    "name"   : "Innkeeper",
+    "phrases": {
+      "1"   : {"text": ["Welcome to the Lastdenn Inn! Our rooms are very comfortable and we have a great view of the city. The price to rest here and be completely revitalized is just 2 gold coins."]},
+      "2"   : {
+        "choices": [
+          {"condition": ["i_time_before_18:15"], "text": "[2 Gold] *Accept the offer for some rest.* [BLUE](Restore health)", "nextId": "4"},
+          {"condition": ["i_time_after_18:15"], "text": "[2 Gold] *Accept the offer for some rest.* [BLUE](Restore health)", "nextId": "6"},
+          {"text": "*Ask her about the current vacancies.*", "nextId": "10"},
+          {"text": "*Decline the offer. Take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "3"   : {"text": ["Your health has been fully restored. Please come back anytime you feel weary."], "choices": [{"command": "EXIT"}]},
+      "4"   : {"text": ["How long would you like to rest?"]},
+      "5"   : {
+        "choices": [
+          {"text": "*Just a 1 hour rest.*", "command": "HEAL_LIFE_0060", "nextId": "3"},
+          {"condition": ["i_time_before_08:00"], "text": "*Until 09:00.*", "command": "HEAL_LIFE_0900", "nextId": "3"},
+          {"condition": ["i_time_before_11:00"], "text": "*Until 12:00.*", "command": "HEAL_LIFE_1200", "nextId": "3"},
+          {"condition": ["i_time_before_14:00"], "text": "*Until 15:00.*", "command": "HEAL_LIFE_1500", "nextId": "3"},
+          {"condition": ["i_time_before_17:00"], "text": "*Until 18:00.*", "command": "HEAL_LIFE_1800", "nextId": "3"},
+          {"text": "(Back)", "nextId": "2"}
+        ]
+      },
+      "6"   : {"text": ["I'm sorry, Sir, but there are no rooms available right now. I don't know why I even bothered to tell you the price. Habits die hard, I guess."], "choices": [{"command": "EXIT"}]},
+      "10"  : {"text": ["At the moment, we have an academy traveling group staying with us. If you want to meet them, you can find them on the second floor."]},
+      "11"  : {"text": ["Besides that, the mayor's enforced daily city closure has been a bit of a burden for our business. We used to have quite a few pilgrims visiting our city, but it's not so easy to get in or out of the city anymore."], "choices": [{"nextId": "2"}]},
+      "1000": {"text": ["I'm sorry, Sir, you don't have enough gold."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "lastdenn_inn_behind"     : {
+    "name"   : "Innkeeper",
+    "phrases": {
+      "1": {"text": ["I would rather you didn't come behind the counter. People are working back there, and it's not really a place for customers."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "lastdenn_academy1"       : {
+    "name"   : "Skill Trainer",
+    "phrases": {
+      "1": {"text": ["A fair day to you, good sir. We are a traveling academy that offers training in various skills. If you're interested, I can teach you some new skills to help you on your journey."]},
+      "2": {
+        "choices": [
+          {"text": "*Visit the academy.*", "command": "LOAD_ACADEMY"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      }
+    }
+  },
+  "lastdenn_academy2"       : {
+    "name"   : "Skill Trainer",
+    "phrases": {
+      "1": {"text": ["Well met, young sir. I am an instructor of our traveling academy. If you're interested, I can guide your training and help you grow stronger on your journey."]},
+      "2": {
+        "choices": [
+          {"text": "*Visit the academy.*", "command": "LOAD_ACADEMY"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      }
+    }
+  },
+  "lastdenn_academy3"       : {
+    "name"   : "Skill Trainer",
+    "phrases": {
+      "1": {"text": ["Peace be with you, seeker. I serve as a mentor of this traveling academy. Should you wish to learn, I will help you refine your abilities and prepare for the trials on your path."]},
+      "2": {
+        "choices": [
+          {"text": "*Visit the academy.*", "command": "LOAD_ACADEMY"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      }
+    }
+  },
+  "lastdenn_academy4"       : {
+    "name"   : "Skill Trainer",
+    "phrases": {
+      "1": {"text": ["Greetings, traveler. I'm a trainer with this traveling academy. If you feel like improving yourself, let me help you sharpen your talents for the road ahead."]},
+      "2": {
+        "choices": [
+          {"text": "*Visit the academy.*", "command": "LOAD_ACADEMY"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      }
     }
   }
 }

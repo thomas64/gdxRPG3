@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="24" tileheight="24" infinite="0" nextlayerid="18" nextobjectid="93">
+<map version="1.11" tiledversion="1.12.1" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="24" tileheight="24" infinite="0" nextlayerid="18" nextobjectid="94">
  <properties>
   <property name="bgm" value="bgm_house"/>
   <property name="step_sound" value="sand"/>
@@ -99,6 +99,7 @@
  <objectgroup color="#5500ff" id="14" name="rest">
   <object id="56" name="chest0015" x="480" y="702" width="48" height="48"/>
   <object id="88" name="chest0012" x="324" y="366" width="48" height="48"/>
+  <object id="93" name="note_empty" x="486" y="774" width="42" height="42"/>
  </objectgroup>
  <objectgroup color="#55ff7f" id="13" name="npc">
   <object id="30" name="horse1" type="w" x="432" y="240" width="48" height="24">

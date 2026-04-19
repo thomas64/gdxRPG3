@@ -12,19 +12,6 @@
       "  certain weaponless enemies."
     ]
   },
-  "axe"   : {
-    "upgrade"    : 6,
-    "description": [
-      "- 'Axe' allows the possibility of equipping axes.",
-      "",
-      "- 'Axe' increases your chance to hit with axes in combat.",
-      "  Each rank in 'Axe' increases 'Chance to hit' by 5%.",
-      "",
-      "- Axe advantage: Sword > Axe > Spear.",
-      "  Axes also have advantage or disadvantage against",
-      "  certain weaponless enemies."
-    ]
-  },
   "spear" : {
     "upgrade"    : 6,
     "description": [
@@ -35,6 +22,19 @@
       "",
       "- Spear advantage: Axe > Spear > Sword.",
       "  Spears also have advantage or disadvantage against",
+      "  certain weaponless enemies."
+    ]
+  },
+  "axe"   : {
+    "upgrade"    : 6,
+    "description": [
+      "- 'Axe' allows the possibility of equipping axes.",
+      "",
+      "- 'Axe' increases your chance to hit with axes in combat.",
+      "  Each rank in 'Axe' increases 'Chance to hit' by 5%.",
+      "",
+      "- Axe advantage: Sword > Axe > Spear.",
+      "  Axes also have advantage or disadvantage against",
       "  certain weaponless enemies."
     ]
   },

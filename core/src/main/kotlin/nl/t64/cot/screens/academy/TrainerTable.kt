@@ -16,7 +16,7 @@ private val TEXT = """
 
     On the left, you'll find the skills I can train you in, and on the right, the skills you've already acquired.
 
-    The numbers on the left indicate the ranks at which I can instruct you, while those on the right represent your current proficiency levels.
+    The numbers on the left indicate the maximum ranks at which I can instruct you, while those on the right represent your current proficiency levels.
 
     Training a skill requires both XP and gold.""".trimIndent()
 

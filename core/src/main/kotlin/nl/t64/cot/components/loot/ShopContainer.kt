@@ -13,7 +13,8 @@ class ShopContainer {
     private val shops: Map<String, InventoryContainer> = fillShopContainer()
 
     fun getShop(shopId: String): InventoryContainer {
-        return shops[shopId]!!
+        return shops[shopId]
+            ?: createShopInventoryContainer(shopId) // when shop does not exist in save file.
     }
 
     private fun fillShopContainer(): Map<String, InventoryContainer> {

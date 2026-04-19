@@ -1,7 +1,7 @@
 [
   "basic_sword",
-  "basic_axe",
   "basic_spear",
+  "basic_axe",
   "basic_dagger",
   "basic_knife",
   "basic_bow",
@@ -9,8 +9,8 @@
   "basic_light_shield",
   "basic_medium_shield",
   "basic_sword",
-  "basic_axe",
   "basic_spear",
+  "basic_axe",
   "basic_dagger",
   "basic_knife",
   "basic_bow",
