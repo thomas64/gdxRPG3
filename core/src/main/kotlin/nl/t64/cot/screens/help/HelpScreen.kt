@@ -6,8 +6,10 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane.ScrollPaneStyle
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.Window
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable
 import com.badlogic.gdx.utils.Align
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
@@ -24,6 +26,9 @@ private const val HINT_LINE_SPACE = 50f
 private const val WINDOW_POS_X = 100f
 private const val WINDOW_POS_Y = 80f
 private const val LABEL_PADDING_BOTTOM = 52f
+private const val SCROLLBAR_WIDTH = 16f
+private const val SCROLLBAR_KNOB_MIN_HEIGHT = 36f
+private const val SCROLLBAR_CONTENT_PADDING = 16f
 
 private enum class HelpFilter { NORMAL, BATTLE }
 
@@ -92,6 +97,7 @@ class HelpScreen : ParchmentScreen() {
         table = createTable()
         scrollPane.actor = table
         scrollPane.scrollY = 0f
+        scrollPane.layout()
         window.titleLabel.setText(createWindowTitle())
     }
 
@@ -114,7 +120,8 @@ class HelpScreen : ParchmentScreen() {
         val amountOfLines: Int = text.lines().count()
         val fontSize: Int = hintFont.data.name.takeLast(2).toInt()
         val height: Float = (amountOfLines * fontSize) + HINT_LINE_SPACE
-        add(label).height(height).width(windowWidth).row()
+        val contentWidth: Float = windowWidth - SCROLLBAR_WIDTH - SCROLLBAR_CONTENT_PADDING
+        add(label).height(height).width(contentWidth).row()
     }
 
     private fun createLabelStyle(): LabelStyle {
@@ -124,19 +131,21 @@ class HelpScreen : ParchmentScreen() {
     }
 
     private fun createScrollPane(): ScrollPane {
-        return ScrollPane(table).apply {
+        val style: ScrollPaneStyle = createScrollPaneStyle()
+        return ScrollPane(table, style).apply {
             setOverscroll(false, false)
             fadeScrollBars = false
             setScrollingDisabled(true, false)
             setForceScroll(false, false)
-            setScrollBarPositions(false, false)
+            setScrollBarPositions(false, true)
+            setScrollbarsOnTop(true)
         }
     }
 
     private fun createContainer(): Table {
         return Table().apply {
             background = Utils.createTopBorder()
-            add(scrollPane).height(windowHeight)
+            add(scrollPane).width(windowWidth).height(windowHeight)
         }
     }
 
@@ -148,10 +157,24 @@ class HelpScreen : ParchmentScreen() {
         }
     }
 
+    private fun createScrollPaneStyle(): ScrollPaneStyle {
+        val track: Drawable = Utils.createRightBorder().apply {
+            minWidth = SCROLLBAR_WIDTH
+        }
+        val knob: Drawable = Utils.createFullBorderBlack().apply {
+            minWidth = SCROLLBAR_WIDTH
+            minHeight = SCROLLBAR_KNOB_MIN_HEIGHT
+        }
+        return ScrollPaneStyle().apply {
+            vScroll = track
+            vScrollKnob = knob
+        }
+    }
+
     private fun createWindowTitle(): String {
         return when (currentFilter) {
-            HelpFilter.NORMAL -> "Tutorial messages"
-            HelpFilter.BATTLE -> "Battle tutorial messages"
+            HelpFilter.NORMAL -> "Tutorial messages - [W]"
+            HelpFilter.BATTLE -> "[Q] - Battle tutorial messages"
         }
     }
 
