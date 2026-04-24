@@ -246,6 +246,7 @@
     "summary" : "The innkeeper of Honeywood is facing an issue with some unwelcome visitors upstairs. Her guests are reluctant to stay at the inn while these bats are roaming free. She would greatly appreciate your assistance in removing them.",
     "tasks"   : {
       "1": {
+        "comment"   : "WARNING: 2 links to 1 from conversation with millie the cat.",
         "taskPhrase": "Remove all the bats upstairs.",
         "type"      : "KILL"
       },

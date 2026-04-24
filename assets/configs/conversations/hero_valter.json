@@ -1,0 +1,130 @@
+{
+  "valter_join"   : {
+    "name"   : "Valter",
+    "phrases": {
+      "1"   : {"text": ["Shh. Not so loud. I am in a very important staring contest with this wall, and I am finally gaining ground."]},
+      "2"   : {"text": ["You there. Stranger. If you stand in that corner, do you also hear the plaster whispering tactical advice, or is that just me?"]},
+      "3"   : {
+        "choices": [
+          {"text": "*Ask what he is doing.*", "nextId": "10"},
+          {"text": "*Introduce yourself politely.*", "nextId": "11"},
+          {"text": "*Take one careful step back.*", "nextId": "12"}
+        ]
+      },
+      "10"  : {"text": ["I am collecting intelligence. Walls hear everything. Floors mostly gossip."], "choices": [{"nextId": "20"}]},
+      "11"  : {"text": ["Polite. Good. I am Valter, licensed alchemist, unlicensed thinker, and occasional problem."], "choices": [{"nextId": "20"}]},
+      "12"  : {"text": ["Ah, retreating already. Reasonable. Most people need at least one minute before the wall strategy bothers them."], "choices": [{"nextId": "20"}]},
+      "20"  : {"text": ["Now then, where were we? Right. Introductions. I am Valter."]},
+      "21"  : {"text": ["I make potions, powders, salves, tonics, and one beverage that is definitely not legal in three villages."]},
+      "22"  : {"text": ["My shelves are chaos, my notes are worse, but my mixtures work. Usually in the intended order."]},
+      "23"  : {"text": ["Did you know the old river-forts in western Adan were built with lime, ash, and goat blood? Strong mortar. Terrible smell."]},
+      "24"  : {"text": ["Anyway. You look like trouble with a mission. Why are you really here?"]},
+      "25"  : {
+        "choices": [
+          {"text": "*Ask about his alchemy work.*", "nextId": "30"},
+          {"text": "*Ask for a random history fact.*", "nextId": "40"},
+          {"text": "*Ask him to join your party.* [BLUE](Join party)", "nextId": "50"},
+          {"text": "*Decide this is too much wall-related energy for one day.*", "nextId": "90"}
+        ]
+      },
+      "30"  : {"text": ["Alchemy is simple. Heat, timing, and not panicking when the bottle starts hissing."]},
+      "31"  : {"text": ["People think it is magic. It is mostly patience, labels, and respecting fumes."]},
+      "32"  : {"text": ["Do you need healing, smoke cover, sleep draughts, or something that removes rust and regrettable tattoos?"]},
+      "33"  : {
+        "choices": [
+          {"text": "*Say you need someone exactly like that in your party.* [BLUE](Join party)", "nextId": "50"},
+          {"text": "*Ask for that history fact first.*", "nextId": "40"},
+          {"text": "*Not now. Leave him to his wall meeting.*", "nextId": "90"}
+        ]
+      },
+      "40"  : {"text": ["History fact? Good choice. In old Lastdenn, taverns paid tax in salt, not coin, for six weird years."]},
+      "41"  : {"text": ["The council said salt was stable value. Then the docks flooded, everyone had salt, and the economy became soup."]},
+      "42"  : {"text": ["Never trust men who define wealth as seasoning."]},
+      "43"  : {
+        "choices": [
+          {"text": "*Ask him to join your party.* [BLUE](Join party)", "nextId": "50"},
+          {"text": "*Ask one more alchemy question.*", "nextId": "30"},
+          {"text": "*Thank him for the history lesson and leave him to his wall meeting.*", "nextId": "90"}
+        ]
+      },
+      "50"  : {"text": ["Join your party? Hm. Dangerous roads, uncertain meals, probable explosions..."]},
+      "51"  : {"text": ["Yes. That sounds meaningfully better than arguing with architecture."]},
+      "52"  : {"text": ["Three field rules. First: if I shout \"duck\", you duck first and ask questions later."]},
+      "53"  : {"text": ["Second: never drink unlabeled blue liquids, even if they sparkle encouragingly."]},
+      "54"  : {"text": ["Third: if someone says \"this potion smells fine\", hand it to me first."]},
+      "55"  : {"text": ["Done? Good. I am in. If anyone explodes, it will be strategic"], "choices": [{"command": "HERO_JOIN"}]},
+      "90"  : {"text": ["Fair. I will remain here and continue my interrogation of this suspicious corner."]},
+      "91"  : {"text": ["If destiny changes its mind, you know where to find me. Unless another wall has caught my attention by then. They can be quite persuasive."], "choices": [{"command": "EXIT"}]},
+      "9000": {"text": ["I would join, but your party is full. The numbers refuse to bend, and I already tried arguing with them."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "dismiss_valter": {
+    "name"   : "Valter",
+    "phrases": {
+      "1" : {"text": ["You are dismissing me? Understandable. I am both an alchemist and an occasional fire hazard."]},
+      "2" : {"text": ["Before you commit, inventory update: one healing tincture, one smoke bomb, and one flask that is either soup or acid."]},
+      "3" : {"text": ["One label says soup, one says solvent, and one says \"probably fine\". The rain disagreed with my handwriting."]},
+      "4" : {
+        "choices": [
+          {"text": "*Confirm: let Valter go.* [BLUE](Dismiss Valter)", "nextId": "10"},
+          {"text": "*Ask if he is offended.*", "nextId": "20"},
+          {"text": "*Never mind, keep him in the party.*", "command": "EXIT"}
+        ]
+      },
+      "10": {"text": ["Understood. I shall continue my research on masonry, morally questionable fumes, and social misunderstandings."]},
+      "11": {"text": ["If needed, I respond well to decisive footsteps."], "choices": [{"command": "HERO_DISMISS"}]},
+      "20": {"text": ["Offended? No. I am many things, but surprised by command reshuffles is not one of them."]},
+      "21": {"text": ["Besides, I have overdue arguments waiting for me in the corner. I can't just leave them hanging."]},
+      "22": {
+        "choices": [
+          {"text": "*Proceed with dismissal anyway.* [BLUE](Dismiss Valter)", "nextId": "10"},
+          {"text": "*Change your mind and keep him.*", "command": "EXIT"}
+        ]
+      }
+    }
+  },
+  "bury_valter"   : {
+    "name"   : "Valter",
+    "phrases": {
+      "1": {"text": ["All his equipment will also be gone once you bury him."]},
+      "2": {
+        "choices": [
+          {"text": "*Yes, let the funeral continue.* [RED](Dismiss Valter)", "command": "HERO_DISMISS"},
+          {"text": "*No, take precautions first.*", "command": "EXIT"}
+        ]
+      }
+    }
+  },
+  "valter_rejoin" : {
+    "name"   : "Valter",
+    "phrases": {
+      "1"   : {"text": ["Ah! You. Good timing. The candle agreed with my route plan but objected to the ration schedule."]},
+      "2"   : {"text": ["Were we discussing tactics, medicine, or pickled onions last time? No matter. I have fresh ideas."]},
+      "3"   : {"text": ["Wait... you are Mozes, right? Sword. Purposeful frown. Chronically surrounded by danger."]},
+      "4"   : {"text": ["Names blur, patterns stay. Yours is \"trouble, then bravery, then more trouble\"."]},
+      "5"   : {"text": ["So. Do you need an alchemist again, or are you just checking whether I won the argument against furniture?"]},
+      "6"   : {
+        "choices": [
+          {"text": "*Ask Valter to rejoin your party.* [BLUE](Join party)", "nextId": "10"},
+          {"text": "*Ask what his fresh ideas are first.*", "nextId": "30"},
+          {"text": "*Leave him to his candle council.*", "nextId": "20"}
+        ]
+      },
+      "10"  : {"text": ["Good answer. I missed field work. Tables are terrible sparring partners."]},
+      "11"  : {"text": ["I packed reagents, clean bandages, and two emergency powders labeled \"maybe\" and \"definitely not\"."]},
+      "12"  : {"text": ["No promises about sanity. Full promises about effort."], "choices": [{"command": "HERO_JOIN"}]},
+      "20"  : {"text": ["Very well. I shall remain in strategic reserve, facing north-ish."]},
+      "21"  : {"text": ["If you change your mind, knock on the table twice. If I'm not there, the wall will brief me."], "choices": [{"command": "EXIT"}]},
+      "30"  : {"text": ["Fresh idea one: smoke at ankle height during ambushes. People watch eye level and miss the feet."]},
+      "31"  : {"text": ["Fresh idea two: label antidotes with symbols, not words. Panic reads poorly."]},
+      "32"  : {"text": ["Fresh idea four: never trust a quiet swamp."]},
+      "33"  : {
+        "choices": [
+          {"text": "*Good ideas. Rejoin the party.* [BLUE](Join party)", "nextId": "10"},
+          {"text": "*Tell him maybe later.*", "nextId": "20"}
+        ]
+      },
+      "9000": {"text": ["I cannot rejoin you yet. Your party is full, and even my worst arithmetic still reaches that conclusion."], "choices": [{"command": "EXIT"}]}
+    }
+  }
+}

@@ -292,7 +292,7 @@
           {"text": "*Decline the offer for now. Take your leave.*", "command": "EXIT"}
         ]
       },
-      "3"   : {"text": ["Your health has been fully restored. Please come back anytime you feel weary."], "choices": [{"command": "EXIT"}]},
+      "3"   : {"text": ["Your health and energy are fully restored. Please come back anytime you feel weary."], "choices": [{"command": "EXIT"}]},
       "4"   : {"text": ["How long would you like to rest?"]},
       "5"   : {
         "choices": [
@@ -367,11 +367,15 @@
       "1": {"text": ["Meow."]},
       "2": {
         "choices": [
-          {"condition": ["druid1"], "text": "[Druid 1] *Listen to Millie.*", "nextId": "3"},
+          {"condition": ["i_druid1", "_tn_1_q_quest_honeywood_inn_price-1"], "text": "[Druid 1] *Listen to Millie.*", "nextId": "3"},
+          {"condition": ["i_druid1", "_tc_1_q_quest_honeywood_inn_price-1"], "text": "[Druid 1] *Listen to Millie.*", "nextId": "6"},
+          {"condition": ["ii_druid1"], "text": "[Druid 1] *Listen to Millie.*", "nextId": "9999"},
           {"text": "*Pet Millie on the head and take your leave.*", "command": "EXIT"}
         ]
       },
-      "3": {"text": ["I'm here only for the mice; there's no way I'll deal with bats."], "choices": [{"command": "EXIT"}]}
+      "3": {"text": ["I'm here only for the mice; there's no way I'll deal with bats."]},
+      "4": {"text": ["Flying mice... that's just not right."], "choices": [{"command": "EXIT"}]},
+      "6": {"text": ["You got rid of the bats! Now I can go back to hunting plain old, non-flying mice."], "choices": [{"command": "EXIT"}]}
     }
   },
   "quest_get_horse"                     : {

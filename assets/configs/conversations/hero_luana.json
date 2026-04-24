@@ -30,7 +30,7 @@
       "1"   : {"text": ["Are you back to beg me to join you?"]},
       "2"   : {
         "choices": [
-          {"text": "*Yes, you would like her to come back.* [BLUE] (Join party)", "nextId": "3"},
+          {"text": "*Yes, you would like her to come back.* [BLUE](Join party)", "nextId": "3"},
           {"text": "*No, you're just here to gloat at her.*", "nextId": "4"}
         ]
       },

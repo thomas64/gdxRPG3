@@ -44,7 +44,7 @@
           {"text": "*Politely decline her offer. Take your leave.*", "command": "EXIT"}
         ]
       },
-      "3" : {"text": ["Your health has been fully restored. Go with my blessings, traveler."], "choices": [{"command": "EXIT"}]},
+      "3" : {"text": ["Your health and energy are fully restored. Go with my blessings, traveler."], "choices": [{"command": "EXIT"}]},
       "10": {"text": ["Dear traveler, if it was a bit earlier, I could have put you to sleep among my healing flowers. Your wounds would have mended while you rested."]},
       "11": {"text": ["But out here, it's hard to cultivate healing flowers, so these flowers lose their power in the evening."]},
       "12": {"text": ["If you come back some other time in the morning of afternoon, I would be happy to help you. I'm very sorry."], "choices": [{"command": "EXIT"}]}

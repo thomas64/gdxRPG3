@@ -98,7 +98,7 @@
           {"text": "*Decline the offer. Take your leave.*", "command": "EXIT"}
         ]
       },
-      "3"   : {"text": ["Your health has been fully restored. Please come back anytime you feel weary."], "choices": [{"command": "EXIT"}]},
+      "3"   : {"text": ["Your health and energy are fully restored. Please come back anytime you feel weary."], "choices": [{"command": "EXIT"}]},
       "4"   : {"text": ["How long would you like to rest?"]},
       "5"   : {
         "choices": [

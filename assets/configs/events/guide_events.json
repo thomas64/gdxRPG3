@@ -49,7 +49,7 @@
       "Battle Tutorial (2/7)",
       "",
       "Advantage greatly increases your hit and critical hit chance,",
-      "while disadvantage greatly decreases it.",
+      "while disadvantage greatly decreases it, along with your damage.",
       "",
       "Each enemy has an [BLUE]advantage[BLACK] ([BLUE]+[BLACK]) and a [FIREBRICK]disadvantage[BLACK] ([FIREBRICK]-[BLACK])",
       "against specific weapon types, such as a sword type or an axe type.",
@@ -262,7 +262,8 @@
     "type"     : "tutorial",
     "condition": ["cycle_>=_5"],
     "text"     : [
-      "Enemies defeated in a previous cycle will react to you as if you were crouching."
+      "Enemies in the wild, that are defeated in a previous",
+      "cycle, won't attack you, unless you bump into them."
     ]
   }
 }
