@@ -28,6 +28,16 @@ object ConditionConverter {
         }
     }
 
+    fun isMeetingCycleCondition(conditionId: String): Boolean {
+        val requestedCycle: Int = conditionId.substringAfterLast("_").toInt()
+        val currentCycle: Int = gameData.numberOfCycles
+        return when {
+            conditionId.contains("_==_") -> currentCycle == requestedCycle
+            conditionId.contains("_>=_") -> currentCycle >= requestedCycle
+            else -> throw IllegalArgumentException("No defined operator found.")
+        }
+    }
+
     fun isMeetingItemInventoryCondition(conditionId: String): Boolean {
         val requestedAmount: Int = getTaskIdOrAmount("_n_", conditionId)
         val inventoryItemId: String = conditionId.substringAfter("_item_inv_")

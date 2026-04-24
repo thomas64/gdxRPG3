@@ -5,7 +5,7 @@
       "1": {"text": ["Howdy, neighbor! I'm heading to the village elder to do some repairs. If you need me, I'll be back by 11:00."]},
       "2": {
         "choices": [
-          {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "text": "*Ask Black if he's seen Grace this morning.*", "nextId": "3"},
+          {"condition": ["i_cycle_==_1"], "text": "*Ask Black if he's seen Grace this morning.*", "nextId": "3"},
           {"text": "*Take interest in his work.*", "nextId": "4"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
@@ -76,7 +76,7 @@
         "choices": [
           {"condition": ["i_c_==_a_q_quest_get_tow_rope", "i_tn_13_q_quest_get_tow_rope"], "text": "*Inform you're here to pay Jaron's outstanding bill.*", "nextId": "100"},
           {"condition": ["i_rc_>=_a_q_quest_get_horse", "i_tn_8_q_quest_get_horse"], "text": "*Inquire about his horseshoe offerings.*", "nextId": "3"},
-          {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "text": "*No time for jokes. Ask Black if he's seen Grace this morning.*", "nextId": "30"},
+          {"condition": ["i_cycle_==_1"], "text": "*No time for jokes. Ask Black if he's seen Grace this morning.*", "nextId": "30"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },

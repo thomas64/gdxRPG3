@@ -224,7 +224,7 @@
   },
   "guide_event_storage"              : {
     "type"     : "tutorial",
-    "condition": ["_c_==_a_q_quest_royal_sacrifice"],
+    "condition": ["_cycle_>=_2"],
     "text"     : [
       "The closet behind you can be used for storage.",
       "When your inventory becomes full, store items in your closet.",
@@ -260,7 +260,7 @@
   },
   "guide_event_enemy_aggro"          : {
     "type"     : "tutorial",
-    "condition": ["cycle_>=_5"],
+    "condition": ["_cycle_>=_5"],
     "text"     : [
       "Enemies in the wild, that are defeated in a previous",
       "cycle, won't attack you, unless you bump into them."

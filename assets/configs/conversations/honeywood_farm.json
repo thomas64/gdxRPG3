@@ -5,7 +5,7 @@
       "1" : {"text": ["Hey Mozes, I'm on my way to Honeywood Farm. A large tree has fallen on the road this morning. I've been asked to remove it."]},
       "2" : {
         "choices": [
-          {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "text": "*Ask Lennor if he's seen Grace this morning.*", "nextId": "3"},
+          {"condition": ["i_cycle_==_1"], "text": "*Ask Lennor if he's seen Grace this morning.*", "nextId": "3"},
           {"text": "*Inquire about the fallen tree.*", "nextId": "20"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
@@ -36,14 +36,14 @@
       "1"  : {"text": ["Hey Mozes, you can't go to Honeywood Farm at the moment. A large tree has fallen on the road this morning. I'm busy removing it, but I think it'll take me until 17:00."]},
       "2"  : {
         "choices": [
-          {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "text": "*Ask Lennor if he's seen Grace this morning.*", "nextId": "3"},
+          {"condition": ["i_cycle_==_1"], "text": "*Ask Lennor if he's seen Grace this morning.*", "nextId": "3"},
           {"condition": ["i_tc_1_q_this", "i_tc_11_q_this"], "text": "[2 Ropes, 1 Horse] *Tada! Present what he would ask for.*", "command": "SHOW_QUEST_ITEM", "nextId": "80"},
-          {"condition": ["i_rc_>=_a_q_quest_royal_sacrifice"], "text": "*Find out if he knows what happened to the tree.*", "nextId": "20"},
-          {"condition": ["i_rc_>=_a_q_quest_royal_sacrifice"], "text": "*Inform how long it'll take him to clear the road.*", "nextId": "30"},
-          {"condition": ["i_rc_>=_a_q_quest_royal_sacrifice", "i_rc_>=_a_q_quest_honeywood_elder"], "text": "*Express your need to reach Honeywood Farm.*", "nextId": "40"},
-          {"condition": ["i_rc_>=_a_q_quest_royal_sacrifice", "i_rc_>=_a_q_quest_honeywood_elder"], "text": "*Press him. Urge him on. Bother him persistently.*", "nextId": "50"},
-          {"condition": ["i_time_before_16:00", "i_rc_>=_a_q_quest_royal_sacrifice", "i_rc_>=_a_q_quest_honeywood_elder"], "text": "*Offer your assistance.*", "nextId": "60"},
-          {"condition": ["i_time_after_16:00", "i_rc_>=_a_q_quest_royal_sacrifice", "i_rc_>=_a_q_quest_honeywood_elder"], "text": "*Offer your assistance.*", "nextId": "65"},
+          {"condition": ["i_cycle_>=_2"], "text": "*Find out if he knows what happened to the tree.*", "nextId": "20"},
+          {"condition": ["i_cycle_>=_2"], "text": "*Inform how long it'll take him to clear the road.*", "nextId": "30"},
+          {"condition": ["i_cycle_>=_2", "i_rc_>=_a_q_quest_honeywood_elder"], "text": "*Express your need to reach Honeywood Farm.*", "nextId": "40"},
+          {"condition": ["i_cycle_>=_2", "i_rc_>=_a_q_quest_honeywood_elder"], "text": "*Press him. Urge him on. Bother him persistently.*", "nextId": "50"},
+          {"condition": ["i_time_before_16:00", "i_cycle_>=_2", "i_rc_>=_a_q_quest_honeywood_elder"], "text": "*Offer your assistance.*", "nextId": "60"},
+          {"condition": ["i_time_after_16:00", "i_cycle_>=_2", "i_rc_>=_a_q_quest_honeywood_elder"], "text": "*Offer your assistance.*", "nextId": "65"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },

@@ -64,8 +64,8 @@
     "phrases": {
       "1"   : {
         "text": ["Dear young Mozes, I'm so glad you've finally entered our peaceful domain. You need not fear any orcs here."], "choices": [
-          {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "command": "RECEIVE_XP", "nextId": "2"},
-          {"condition": ["i_rc_>=_a_q_quest_royal_sacrifice"], "nextId": "3"}
+          {"condition": ["i_cycle_==_1"], "command": "RECEIVE_XP", "nextId": "2"},
+          {"condition": ["i_cycle_>=_2"], "nextId": "3"}
         ]
       },
       "2"   : {
@@ -109,8 +109,8 @@
       "62"  : {"text": ["Farewell, our beloved Mozes. Grace is blessed to have a brother like you. May the Goddess Tree smile upon you and your quest."]},
       "63"  : {
         "text": ["And watch out for Ardor! He is not to be trifled with!"], "choices": [
-          {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "command": "RECEIVE_ITEM"},
-          {"condition": ["i_rc_>=_a_q_quest_royal_sacrifice"], "command": "EXIT", "nextId": "70"}
+          {"condition": ["i_cycle_==_1"], "command": "RECEIVE_ITEM"},
+          {"condition": ["i_cycle_>=_2"], "command": "EXIT", "nextId": "70"}
         ]
       },
       "70"  : {"text": ["Dear young Mozes, you've returned."], "choices": [{"nextId": "2"}]},

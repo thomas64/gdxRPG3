@@ -42,10 +42,10 @@
       "1" : {"text": ["Mozes, dear boy, how are you? What a lovely day, isn't it?"]},
       "2" : {
         "choices": [
-          {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "text": "*Ask Mrs. Johanna if she's seen Grace this morning.*", "nextId": "30"},
+          {"condition": ["i_cycle_==_1"], "text": "*Ask Mrs. Johanna if she's seen Grace this morning.*", "nextId": "30"},
           {"condition": ["i_c_==_a_q_quest_get_tow_rope", "_tn_15_q_quest_get_tow_rope", "_n_1_>=_item_eqp_theodore_silver_ring"], "text": "[Silver Ring] *Deliver the news that Jaron found her lost ring.*", "nextId": "5"},
           {"condition": ["i_c_==_a_q_quest_get_tow_rope", "_tn_15_q_quest_get_tow_rope", "_n_0_==_item_eqp_theodore_silver_ring", "_n_1_>=_item_inv_theodore_silver_ring"], "text": "[Silver Ring] *Deliver the news that Jaron found her lost ring.*", "nextId": "20"},
-          {"condition": ["i_rc_>=_a_q_quest_royal_sacrifice"], "text": "*Listen to an old woman's rambling.*", "nextId": "10"},
+          {"condition": ["i_cycle_>=_2"], "text": "*Listen to an old woman's rambling.*", "nextId": "10"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
@@ -71,8 +71,8 @@
     "phrases": {
       "1": {
         "text": ["We're playing catch, teehee! Can Grace come and join us?"], "choices": [
-          {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "nextId": "2"},
-          {"condition": ["i_rc_>=_a_q_quest_royal_sacrifice"], "command": "EXIT"}
+          {"condition": ["i_cycle_==_1"], "nextId": "2"},
+          {"condition": ["i_cycle_>=_2"], "command": "EXIT"}
         ]
       },
       "2": {
@@ -89,8 +89,8 @@
     "phrases": {
       "1": {
         "text": ["We're playing catch, teehee! Can Grace come and join us?"], "choices": [
-          {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "nextId": "2"},
-          {"condition": ["i_rc_>=_a_q_quest_royal_sacrifice"], "command": "EXIT"}
+          {"condition": ["i_cycle_==_1"], "nextId": "2"},
+          {"condition": ["i_cycle_>=_2"], "command": "EXIT"}
         ]
       },
       "2": {
@@ -107,9 +107,9 @@
     "phrases": {
       "1" : {
         "text": ["We're playing catch, teehee! Can Grace come and join us?"], "choices": [
-          {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "nextId": "10"},
+          {"condition": ["i_cycle_==_1"], "nextId": "10"},
           {"condition": ["i_c_==_a_q_quest_get_tow_rope"], "nextId": "2"},
-          {"condition": ["i_c_==_u_q_quest_get_tow_rope", "i_rc_>=_a_q_quest_royal_sacrifice"], "command": "EXIT"}
+          {"condition": ["i_c_==_u_q_quest_get_tow_rope", "i_cycle_>=_2"], "command": "EXIT"}
         ]
       },
       "2" : {
@@ -158,7 +158,7 @@
       "2" : {"text": ["It's a shame we're not allowed to leave the village by ourselves due to the rising monster threat, but I'm glad this fella came in. He can now brighten my dull and secluded life a bit."]},
       "3" : {
         "choices": [
-          {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "text": "*Ask Malina if she's seen Grace this morning.*", "nextId": "31"},
+          {"condition": ["i_cycle_==_1"], "text": "*Ask Malina if she's seen Grace this morning.*", "nextId": "31"},
           {"text": "*Ask about her dull and secluded life.*", "nextId": "10"},
           {"text": "*Inquire about her people skills.* (Visit academy)", "command": "LOAD_ACADEMY"},
           {"text": "*Take your leave.*", "command": "EXIT"}
@@ -384,7 +384,7 @@
       "1"   : {"text": ["Hi Mozes. Won't you say hi to Enopa? She's not feeling well."]},
       "2"   : {
         "choices": [
-          {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "text": "*Ask Angie if she's seen Grace this morning.*", "nextId": "5"},
+          {"condition": ["i_cycle_==_1"], "text": "*Ask Angie if she's seen Grace this morning.*", "nextId": "5"},
           {"condition": ["i_tn_7_q_this"], "text": "*Express your concern about Enopa's condition.*", "nextId": "3"},
           {"condition": ["i_rc_>=_a_q_quest_helping_horse", "i_time_before_17:00"], "text": "*Inquire about borrowing Enopa to help Lennor with the fallen tree.*", "nextId": "10"},
           {"text": "*Greet Enopa and take your leave.*", "command": "EXIT"}
@@ -672,7 +672,7 @@
       },
       "3"   : {
         "text": ["If you have a problem with that, it's not our call. You'll have to take it up with the {COLOR=BLUE}village elder{COLOR=BLACK} himself."], "choices": [
-          {"condition": ["i_rc_===_u_q_quest_royal_sacrifice"], "nextId": "4", "orElseId": "10"}
+          {"condition": ["i_cycle_==_1"], "nextId": "4", "orElseId": "10"}
         ]
       },
       "4"   : {

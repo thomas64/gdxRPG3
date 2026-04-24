@@ -1,14 +1,14 @@
 {
   "go_to_the_forest_2"                   : {
     "type"          : "conversation",
-    "condition"     : ["_rc_===_u_q_quest_royal_sacrifice", "is_specific_time"],
+    "condition"     : ["_cycle_==_1", "is_specific_time"],
     "conversationId": "should_really_be_going_to_the_forest",
     "entityId"      : "mozes",
     "doesRepeat"    : true
   },
   "event_outside_home_cycle_2"           : {
     "type"          : "conversation",
-    "condition"     : ["_c_==_a_q_quest_royal_sacrifice"],
+    "condition"     : ["_cycle_==_2"],
     "conversationId": "outside_home_cycle_2",
     "entityId"      : "mozes"
   },
