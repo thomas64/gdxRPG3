@@ -38,10 +38,14 @@ class PhysicsPlayer : PhysicsComponent() {
         }
         if (event is SpeedEvent) {
             val feetPosition = Vector2(currentPosition.x + Constant.HALF_TILE_SIZE, currentPosition.y)
-            velocity = if (
-                !preferenceManager.isDebugModeOn
+            if (!preferenceManager.isDebugModeOn
                 && mapManager.isSpecialDirectionNorth(feetPosition)
-            ) Constant.MOVE_SPEED_1 else event.moveSpeed
+            ) {
+                velocity = Constant.MOVE_SPEED_1
+                state = EntityState.WALKING
+            } else {
+                velocity = event.moveSpeed
+            }
         }
         if (event is ActionEvent && actionCooldown <= 0f) {
             isActionPressed = true

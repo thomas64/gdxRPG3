@@ -39,8 +39,8 @@ class GraphicsPlayer : GraphicsComponent() {
             setEventPosition(event.position)
         }
         if (event is SpeedEvent) {
-            setNewFrameDuration(event.moveSpeed)
-            moveSpeed = event.moveSpeed
+            moveSpeed = if (mapManager.isSpecialDirectionNorth(feetPosition)) Constant.MOVE_SPEED_2 else event.moveSpeed
+            setNewFrameDuration(moveSpeed)
         }
     }
 
