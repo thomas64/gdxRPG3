@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.12.1" orientation="orthogonal" renderorder="right-down" width="36" height="24" tilewidth="24" tileheight="24" infinite="0" nextlayerid="23" nextobjectid="62">
+<map version="1.11" tiledversion="1.12.1" orientation="orthogonal" renderorder="right-down" width="36" height="24" tilewidth="24" tileheight="24" infinite="0" nextlayerid="23" nextobjectid="64">
  <properties>
   <property name="bgm" value="bgm_cell"/>
   <property name="lightmap_player" value="light_player"/>
@@ -105,6 +105,12 @@
     <property name="conversation" value="garrin_in_jail"/>
    </properties>
   </object>
+  <object id="62" name="ryiah" type="inv" x="192" y="408" width="48" height="12">
+   <properties>
+    <property name="condition" value="is_lastdenn_cell_locked"/>
+    <property name="conversation" value="quest_lastdenn_ryiah"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup color="#55aaff" id="15" name="spawn">
   <object id="2" name="lastdenn_jail" x="648" y="144" width="48" height="18"/>
@@ -112,7 +118,15 @@
  <objectgroup color="#ffff7f" id="16" name="portal">
   <object id="1" name="lastdenn_jail" x="696" y="96" width="24" height="66"/>
  </objectgroup>
- <objectgroup color="#ff00ff" id="18" name="quest"/>
+ <objectgroup color="#ffff00" id="18" name="quest">
+  <object id="63" name="quest_lastdenn_ryiah" type="check" x="144" y="408" width="48" height="24">
+   <properties>
+    <property name="comment" value="the condition below is not for unlocking the door, but only for completing the task."/>
+    <property name="condition" value="_n_1_&gt;=_item_key_lastdenn_jail"/>
+    <property name="task" value="2"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup color="#ff55ff" id="19" name="event"/>
  <objectgroup color="#aaff00" id="20" name="scheduled"/>
  <objectgroup color="#ffffff" id="21" name="lights">

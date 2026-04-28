@@ -9,7 +9,7 @@
           {"text": "*You don't believe in her false god. Take your leave.*", "command": "EXIT"}
         ]
       },
-      "3": {"face": "sister01", "text": ["Mighty Evdos, bless this traveler into savety."], "choices": [{"command": "SAVE_GAME"}]}
+      "3": {"text": ["Mighty Evdos, bless this traveler into savety."], "choices": [{"command": "SAVE_GAME"}]}
     }
   },
   "resourceshop_lastdenn"   : {
@@ -186,7 +186,7 @@
         ]
       },
       "6"   : {"face": "mozes", "name": "Mozes", "text": ["I should probably take it off first."], "choices": [{"command": "EXIT"}]},
-      "10"  : {"text": ["Oh? You already have my ring? It's mine. Hand it over." ]},
+      "10"  : {"text": ["Oh? You already have my ring? It's mine. Hand it over."]},
       "11"  : {"text": ["Here. This should suffice."], "choices": [{"command": "REWARD_QUEST"}]},
       "20"  : {"text": ["Of course. I expected you to come to your senses."]},
       "21"  : {"text": ["Now go fetch it. Quickly. Don't keep me waiting."], "choices": [{"command": "AUTO_SAVE", "nextId": "22"}]},
@@ -204,6 +204,91 @@
       "31"  : {"text": ["Here. This is your reward."], "choices": [{"command": "REWARD_QUEST"}]},
       "1399": {"text": ["Don't tell me you forgot your reward. Honestly. I know you need it."], "choices": [{"command": "REWARD_QUEST"}]},
       "1400": {"text": ["Move along, boy. I have no more use for you."], "choices": [{"command": "AUTO_SAVE", "nextId": "1400"}]}
+    }
+  },
+  "lastdenn_bar_keeper"     : {
+    "name"   : "Barkeeper",
+    "phrases": {
+      "1" : {"text": ["What'll it be."]},
+      "2" : {
+        "choices": [
+          {"text": "*Ask about the city gate rules.*", "nextId": "10"},
+          {"text": "*Ask if anything interesting has happened lately.*", "nextId": "20"},
+          {"text": "*Ask how business is going.*", "nextId": "30"},
+          {"text": "*Nod and take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "10": {"text": ["Mayor's orders. People can enter and leave only after 15:00."]},
+      "11": {"text": ["Before that, the gate guards check everyone and turn most people around."]},
+      "12": {"text": ["He calls it order. Everyone else calls it trouble."], "choices": [{"nextId": "2"}]},
+      "20": {"text": ["A merchant swore his crate was full of silk."]},
+      "21": {"text": ["Turned out it was onions."]},
+      "22": {"text": ["I've stopped asking follow-up questions."], "choices": [{"nextId": "2"}]},
+      "30": {"text": ["Steady enough. Travelers wait until 15:00, then half of them come here first."]},
+      "31": {"text": ["Nervous people drink more. Tired guards drink fastest."]},
+      "32": {"text": ["I pour. They complain. It's a system."], "choices": [{"nextId": "2"}]}
+    }
+  },
+  "lastdenn_bar_kealis"  : {
+    "name"   : "Kaelis",
+    "phrases": {
+      "1" : {"text": ["You new here? I can tell. People from Lastdenn don't look around that much."]},
+      "2" : {"text": ["I'm Kaelis. I'm going to be an adventurer. Professionally. Once I figure out how to start."]},
+      "3" : {
+        "choices": [
+          {"text": "*Ask what is stopping him.*", "nextId": "10"},
+          {"text": "*Ask him where he's from.*", "nextId": "20"},
+          {"text": "*Wish him luck and take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "10": {"text": ["Timing, mostly. If I leave before 15:00, the guards send me right back."]},
+      "11": {"text": ["So every morning I plan my big departure. Every afternoon I find another reason to delay."]},
+      "12": {"text": ["And yes, my mother is still one of those reasons."], "choices": [{"nextId": "3"}]},
+      "20": {"text": ["Born here. Never left. That's sort of the whole problem."]},
+      "21": {"text": ["I've read about twelve books on adventuring though. And two on monsters."]},
+      "22": {"text": ["One of the monster books was mostly pictures, but it still counts."], "choices": [{"nextId": "3"}]}
+    }
+  },
+  "lastdenn_bar_sailor"     : {
+    "name"   : "Sailor",
+    "phrases": {
+      "1" : {"text": ["Don't talk to me about this city. I have opinions and none of them are polite."]},
+      "2" : {
+        "choices": [
+          {"text": "*Ask what his problem is.*", "nextId": "10"},
+          {"text": "*Ask where he sails from.*", "nextId": "20"},
+          {"text": "*Respect his wishes and take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "10": {"text": ["My ship is in port. Has been for nine days."]},
+      "11": {"text": ["Every morning we can unload, but we can't move crew through the gate before 15:00 without a headache."]},
+      "12": {"text": ["Half-day restrictions wreck full-day schedules. That's sailor math."], "choices": [{"nextId": "2"}]},
+      "20": {"text": ["Western coast. We run goods between four ports."]},
+      "21": {"text": ["Good work. Honest work. Until you get stuck waiting on city policy and losing coin to the captain at cards."]},
+      "22": {"text": ["Don't play cards with the captain, by the way. Just a tip."], "choices": [{"nextId": "2"}]}
+    }
+  },
+  "lastdenn_bar_captain"    : {
+    "name"   : "Captain",
+    "phrases": {
+      "1" : {"text": ["At ease. You're not one of mine, but the habit sticks."]},
+      "2" : {
+        "choices": [
+          {"text": "*Ask how long he has been in Lastdenn.*", "nextId": "10"},
+          {"text": "*Ask what he thinks of the city.*", "nextId": "20"},
+          {"text": "*Ask if he knows anything about the prison.*", "nextId": "30"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "10": {"text": ["Nine days. We were supposed to be here for two."]},
+      "11": {"text": ["The port works, but gate traffic is throttled until 15:00 every day."]},
+      "12": {"text": ["A half-open city is still a delay."], "choices": [{"nextId": "2"}]},
+      "20": {"text": ["Fine city. Good port. Reasonable ale."]},
+      "21": {"text": ["The administration is overcautious and the guard is stretched thin."]},
+      "22": {"text": ["Other than that, no complaints."], "choices": [{"nextId": "2"}]},
+      "30": {"text": ["The prison? I know they've had some trouble keeping it orderly lately."]},
+      "31": {"text": ["No details worth repeating in a crowded bar."]},
+      "32": {"text": ["Let's just say the guards have had a long week."], "choices": [{"nextId": "2"}]}
     }
   }
 }

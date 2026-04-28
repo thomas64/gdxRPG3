@@ -35,6 +35,8 @@ class GameMapQuestChecker(rectObject: RectangleMapObject) : GameMapObject(rectOb
                 taskIdToComplete != null -> quest.setTaskComplete(taskIdToComplete)
 
                 taskIdToFail != null -> quest.setTaskFailed(taskIdToFail)
+
+                else -> error("Unexpected state in QuestChecker.")
             }
         }
     }

@@ -258,7 +258,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
                 actionAfterFade = { reloadNpcs() })
     }
 
-    private fun reloadNpcs() {
+    fun reloadNpcs() {
         brokerManager.blockObservers.removeAllNpcObservers()
         npcEntities = NpcEntitiesLoader(mapManager.currentMap).createNpcs()
     }

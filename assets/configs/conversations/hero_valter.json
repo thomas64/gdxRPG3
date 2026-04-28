@@ -12,7 +12,7 @@
         ]
       },
       "10"  : {"text": ["I am collecting intelligence. Walls hear everything. Floors mostly gossip."], "choices": [{"nextId": "20"}]},
-      "11"  : {"text": ["Polite. Good. I am Valter, licensed alchemist, unlicensed thinker, and occasional problem."], "choices": [{"nextId": "20"}]},
+      "11"  : {"text": ["Polite. Good. I am Valter, licensed alchemist, unlicensed thinker, and occasional problem."], "choices": [{"nextId": "21"}]},
       "12"  : {"text": ["Ah, retreating already. Reasonable. Most people need at least one minute before the wall strategy bothers them."], "choices": [{"nextId": "20"}]},
       "20"  : {"text": ["Now then, where were we? Right. Introductions. I am Valter."]},
       "21"  : {"text": ["I make potions, powders, salves, tonics, and one beverage that is definitely not legal in three villages."]},

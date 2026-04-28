@@ -63,7 +63,7 @@ internal class InventorySlotTaker(private val selector: ItemSlotSelector) {
         this.sourceSlot = sourceSlot
         sourceSlot
             .getPossibleInventoryImage()
-            ?.takeUnless { it.inventoryItem.id == "crystal_of_time" }
+            ?.takeUnless { it.inventoryItem.isUnique }
             ?.let { tryPutInventorySlotToCounterpartSlot(it) }
     }
 

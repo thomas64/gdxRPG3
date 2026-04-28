@@ -1,5 +1,5 @@
 {
-  "quest_lastdenn_ring": {
+  "quest_lastdenn_ring" : {
     "title"   : "A ring to rob them all",
     "entityId": "rich_man07",
     "summary" : "Lambertus was robbed by orcs very near the waterfall and bridge of Lastdenn. He said that the orcs took a very valuable golden ring from him. He wants you to get it back for him.",
@@ -13,6 +13,23 @@
         "taskPhrase": "Deliver the golden ring to Lambertus.",
         "type"      : "PROVIDE_ITEM",
         "target"    : {"lambertus_gold_ring": 1}
+      }
+    }
+  },
+  "quest_lastdenn_ryiah": {
+    "title"   : "Prison break",
+    "entityId": "ryiah",
+    "summary" : "Ryiah is a witch who got arrested for suspicion of being a witch. Which she is. She is currently being held in Lastdenn jail, and she needs your help to get out.",
+    "tasks"   : {
+      "1": {
+        "taskPhrase": "Retrieve the jail key from the off duty guard in the bar.",
+        "type"      : "FIND_ITEM",
+        "target"    : {"key_lastdenn_jail": 1}
+      },
+      "2": {
+        "taskPhrase": "Open the jail door with the jail key and break Ryiah out of jail.",
+        "type"      : "CHECK_WITH_ITEM",
+        "target"    : {"key_lastdenn_jail": 1}
       }
     }
   }

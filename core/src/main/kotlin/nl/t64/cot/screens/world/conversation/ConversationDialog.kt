@@ -532,15 +532,26 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun populatePhrase() {
-        val text: String = graph.getCurrentPhrase().joinToString(System.lineSeparator())
+        val rawText: String = graph.getCurrentPhrase().joinToString(System.lineSeparator())
+        val (text, shouldRenderInstantly) = parseInstantPhraseText(rawText)
         if (text.isNotBlank()) {
             label.restart("{COLOR=BLACK}$text")
-            if (conversationId.startsWith("bury_")) {
+            if (shouldRenderInstantly || conversationId.startsWith("bury_")) {
                 label.skipToTheEnd()
             }
         } else {
             label.setText("")
         }
+    }
+
+    private fun parseInstantPhraseText(rawText: String): Pair<String, Boolean> {
+        val shouldRenderInstantly: Boolean = rawText.startsWith("{INSTANT}")
+        val parsedText: String = if (shouldRenderInstantly) {
+            rawText.removePrefix("{INSTANT}").trimStart()
+        } else {
+            rawText
+        }
+        return parsedText to shouldRenderInstantly
     }
 
     private fun populateChoices() {

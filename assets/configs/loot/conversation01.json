@@ -4,5 +4,6 @@
   "fairy_school"                  : {"content": {"magic_shield": 0}},
   "fairy_shop"                    : {"content": {"fine_fairy_ring": 1}},
   "mr_isembert_after_11_after_win": {"xp": 10, "content": {"gold": 10, "basic_dagger": 1}},
-  "deryk_school"                  : {"content": {"strike_3f": 99}}
+  "deryk_school"                  : {"content": {"strike_3f": 99}},
+  "drunken_lastdenn_guard"        : {"content": {"key_lastdenn_jail": 1}}
 }

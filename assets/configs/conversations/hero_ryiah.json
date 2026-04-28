@@ -1,33 +1,141 @@
 {
-  "ryiah_join"   : {
+  "quest_lastdenn_ryiah"  : {
     "name"   : "Ryiah",
     "phrases": {
-      "1"   : {"text": ["Join?"]},
-      "2"   : {
+      "1" : {"text": ["Psst. You there, with the face that says \"bad ideas welcome\"."]},
+      "2" : {"text": ["They threw me in this cell because they think I'm a witch."]},
+      "3" : {"text": ["And true, I am a witch. But that's not the point."]},
+      "4" : {"text": ["Witches don't belong in jail. They belong outside jails, where they can be free to do witchy things."]},
+      "5" : {"text": ["If you'll help me achieve that, perhaps I can use those witchy things to help you out in return."], "choices": [{"command": "KNOW_QUEST", "nextId": "6"}]},
+      "6" : {
         "choices": [
-          {"text": "*Yes.* [BLUE] (Join party)", "nextId": "3"},
-          {"text": "*No.*", "nextId": "4"}
+          {"text": "*Ask what she needs.*", "command": "ACCEPT_QUEST", "nextId": "10"},
+          {"text": "*No illegal prison break for you. Back away slowly.*", "command": "EXIT"}
         ]
       },
-      "3"   : {"text": ["I'll join."], "choices": [{"command": "HERO_JOIN"}]},
-      "4"   : {"text": ["I wont join."], "choices": [{"command": "EXIT"}]},
-      "9000": {"text": ["I cannot join you if there's no room."], "choices": [{"command": "EXIT"}]}
+      "10": {"text": ["A guard is off duty somewhere in the bar."]},
+      "11": {"text": ["How do I know that? Because I'm a witch. I know things."]},
+      "12": {"text": ["He has my jail key. And you need to get it from him."]},
+      "13": {"text": ["He is probably drunk, so this shouldn't be too difficult, but also not easy."]},
+      "14": {"text": ["Don't forget, my freedom is on the line here. Good luck!"], "choices": [{"command": "EXIT", "nextId": "10"}]}
     }
   },
-  "dismiss_ryiah": {
+  "drunken_lastdenn_guard": {
+    "name"     : "Guard off duty",
+    "condition": ["should_guard_be_giving_key"], "startAt": "100",
+    "phrases"  : {
+      "1"   : {"text": ["*Hic*"], "choices": [{"command": "EXIT"}]},
+      "100" : {"text": ["Hullooo. You look like... like... yeah."]},
+      "101" : {"text": ["Wait. Are you from my shift, your shift, or a *Hic* fish?"]},
+      "102" : {"text": ["No, wait, don't answer. I can smell paperwork from here."]},
+      "103" : {"text": ["If you are paperwork, I surrender. If not, state your business-ish."]},
+      "104" : {
+        "choices": [
+          {"text": "*Act very serious and demand cooperation immediately.*", "nextId": "300"},
+          {"text": "*Offer to buy him another drink.*", "nextId": "310"},
+          {"text": "*Ask what he is doing off duty.*", "nextId": "360"},
+          {"condition": ["jester1"], "text": "[Jester 1] *Open with a ridiculous joke to get him laughing first.*", "nextId": "200"},
+          {"text": "*Leave him to his drink.*", "command": "EXIT"}
+        ]
+      },
+      "200" : {"text": ["Hah! That's... that's a very good terrible joke. *Hic*"]},
+      "201" : {"text": ["You have earned one official audience with Officer... hold on... Officer Me."]},
+      "202" : {"text": ["What do you want, comedian? Make it lawful-ish."]},
+      "203" : {
+        "choices": [
+          {"text": "*Try another joke instead of answering.*", "nextId": "330"},
+          {"text": "*Say you forgot, but it was probably important.*", "nextId": "320"},
+          {"condition": ["diplomat1"], "text": "[Diplomat 1] *Frame this as official civic detention business.*", "nextId": "220"},
+          {"text": "*Leave him to his drink.*", "command": "EXIT"}
+        ]
+      },
+      "220" : {"text": ["Detention business... that sounds official-ish. I respect-ish that."]},
+      "221" : {"text": ["What kind of detention business? Transfer forms? Inspection duty? *Hic* Speak."]},
+      "222" : {
+        "choices": [
+          {"text": "*Mention you need access to a specific jail cell.*", "nextId": "225"},
+          {"text": "*Say it's classified. Need-to-know only.*", "nextId": "370"},
+          {"text": "*Leave him to his drink.*", "command": "EXIT"}
+        ]
+      },
+      "225" : {"text": ["Cell access. Right. That requires a key. *Hic*"]},
+      "226" : {"text": ["Rules say I cannot hand over duty equipment while off duty."]},
+      "227" : {"text": ["Counter-rules say I should avoid captain yelling. Very complex legal battlefield."]},
+      "228" : {
+        "choices": [
+          {"text": "*Ask politely one more time.*", "nextId": "340"},
+          {"text": "*Back off and apologize.*", "nextId": "350"},
+          {"condition": ["barbarian1"], "text": "[Barbarian 1] *Threaten to make this a reportable incident.*", "nextId": "240"},
+          {"text": "*Leave him to his drink.*", "command": "EXIT"}
+        ]
+      },
+      "240" : {"text": ["Right! Yes! Reportable is bad. Very bad. No reports."]},
+      "241" : {"text": ["You have command voice. I dislike it. I obey it."]},
+      "242" : {"text": ["Take the jail key. You were never here. I was never sober."]},
+      "243" : {"text": ["If anyone asks, this was a coordinated anti-paperwork maneuver."], "choices": [{"command": "RECEIVE_ITEM"}]},
+      "300" : {"text": ["Demanding tone detected. Rejected by tavern protocol."]},
+      "301" : {"text": ["No cooperation for storm voices. *Hic* Try being funny or useful."]},
+      "302" : {"text": ["Preferably funny. Useful people bring forms."], "choices": [{"nextId": "104"}]},
+      "310" : {"text": ["Tempting. But last time I accepted a drink, I promoted a barrel to captain."]},
+      "311" : {"text": ["Captain Barrel gave terrible orders, but morale was high."]},
+      "312" : {"text": ["No policy decisions after barrel incidents."], "choices": [{"nextId": "104"}]},
+      "320" : {"text": ["You forgot? Excellent. We are colleagues now."]},
+      "321" : {"text": ["Still no. Come back when your memory sobers up."]},
+      "322" : {"text": ["Or when mine does. Which is strategically unlikely."], "choices": [{"nextId": "203"}]},
+      "330" : {"text": ["No no, first answer, then joke. That's procedure. Maybe."]},
+      "331" : {"text": ["I enforce procedure when I can still see it."]},
+      "332" : {"text": ["Right now I can see two procedures and one of them is a lamp."], "choices": [{"nextId": "203"}]},
+      "340" : {"text": ["If you're that polite, you are probably plotting something."]},
+      "341" : {"text": ["No key. My suspicion outranks your manners."]},
+      "342" : {"text": ["Also manners make me nervous. *Hic*"], "choices": [{"nextId": "228"}]},
+      "350" : {"text": ["Accepted. Very respectful. Still no key."]},
+      "351" : {"text": ["You may keep the apology though. Good quality apology."]},
+      "352" : {"text": ["One of the better apologies this week, actually."], "choices": [{"nextId": "228"}]},
+      "360" : {"text": ["I am performing undercover hydration. Very advanced guard work."]},
+      "361" : {"text": ["Also observing suspicious chairs. One of them moved."]},
+      "362" : {"text": ["I warned it. It moved again. Brave chair."], "choices": [{"nextId": "104"}]},
+      "370" : {"text": ["Classified? I love classified. Very mysterious."]},
+      "371" : {"text": ["Still no. Classified things need classified clearance. *Hic* Which I also don't have."], "choices": [{"nextId": "222"}]},
+      "1199": {"text": ["Oh! You. Still here. Or again. *Hic* Either way, you forgot the key. Take it. Before I lose it or promote it."], "choices": [{"command": "RECEIVE_ITEM"}]},
+      "1200": {"text": ["You were never here. I was never coherent. Good arrangement."], "choices": [{"command": "EXIT", "nextId": "1200"}]}
+    }
+  },
+  "ryiah_join"            : {
+    "name"     : "Ryiah",
+    "condition": ["_conv_quest_lastdenn_ryiah_==_10"], "startAt": "10",
+    "phrases"  : {
+      "1"   : {"text": ["Wait. Who are you? My new guard, or my new favorite person?"]},
+      "2"   : {"text": ["Actually, do not answer. I am deciding you are my new favorite person."]},
+      "3"   : {"text": ["Before I make my dramatic exit, anything you want to say?"], "choices": [{"nextId": "12"}]},
+      "10"  : {"text": ["You did it! You actually did it! I am out!"]},
+      "11"  : {"text": ["I know I can be a handful, but I promised to be useful, and I keep my promises."]},
+      "12"  : {"face": "mozes", "name": "Mozes", "text": ["{INSTANT}*Explain a short version of your time traveling situation to defeat Ardor.*"]},
+      "13"  : {
+        "choices": [
+          {"text": "*Ask Ryiah to join you on your quest.* [BLUE](Join party)", "nextId": "14"},
+          {"text": "*Tell her you don't need her help right now.*", "nextId": "20"}
+        ]
+      },
+      "14"  : {"face": "ryiah", "name": "Ryiah", "text": ["You just broke a witch out of jail. Let's make it worth the trouble."], "choices": [{"command": "HERO_JOIN"}]},
+      "20"  : {"face": "ryiah", "name": "Ryiah", "text": ["Fine, but don't forget that I owe you one. If you ever need my help, just ask."], "choices": [{"command": "EXIT"}]},
+      "9000": {"face": "ryiah", "name": "Ryiah", "text": ["I cannot repay my debt to you if I cannot join you. Make some room in your party and then talk to me again."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "dismiss_ryiah"         : {
     "name"   : "Ryiah",
     "phrases": {
-      "1": {"text": ["Dismiss?"]},
-      "2": {
+      "1": {"text": ["You're dismissing a witch. Bold move."]},
+      "2": {"text": ["I do hope you've thought about what you're giving up here."]},
+      "3": {
         "choices": [
-          {"text": "*Yes.* [BLUE](Dismiss Ryiah)", "nextId": "3"},
-          {"text": "*No.*", "command": "EXIT"}
+          {"text": "*Yes, you've thought about it. She can go.* [BLUE](Dismiss Ryiah)", "nextId": "4"},
+          {"text": "*On reflection, no. Witches are useful.*", "command": "EXIT"}
         ]
       },
-      "3": {"text": ["Okay."], "choices": [{"command": "HERO_DISMISS"}]}
+      "4": {"text": ["Fine. Don't come crying to me when things go sideways without magical backup."], "choices": [{"command": "HERO_DISMISS"}]}
     }
   },
-  "bury_ryiah"   : {
+  "bury_ryiah"            : {
     "name"   : "Ryiah",
     "phrases": {
       "1": {"text": ["All her equipment will also be gone once you bury her."]},
@@ -39,19 +147,19 @@
       }
     }
   },
-  "ryiah_rejoin" : {
+  "ryiah_rejoin"          : {
     "name"   : "Ryiah",
     "phrases": {
-      "1"   : {"text": ["Rejoin?"]},
+      "1"   : {"text": ["Oh, you came back. Ran into trouble without your witch, did you?"]},
       "2"   : {
         "choices": [
-          {"text": "*Yes.* [BLUE] (Join party)", "nextId": "3"},
-          {"text": "*No.*", "nextId": "4"}
+          {"text": "*Yes. Without a witch, this party is just problems.* [BLUE](Join party)", "nextId": "3"},
+          {"text": "*No, you just happened to walk past.*", "nextId": "4"}
         ]
       },
-      "3"   : {"text": ["Good."], "choices": [{"command": "HERO_JOIN"}]},
-      "4"   : {"text": ["Fine."], "choices": [{"command": "EXIT"}]},
-      "9000": {"text": ["I cannot join you if there's no room."], "choices": [{"command": "EXIT"}]}
+      "3"   : {"text": ["Thought so. I still owe you one anyway. Let's go."], "choices": [{"command": "HERO_JOIN"}]},
+      "4"   : {"text": ["Sure you did. I'll be here when you're ready to stop lying to yourself."], "choices": [{"command": "EXIT"}]},
+      "9000": {"text": ["I would love nothing more than to rejoin you. But even a witch can see there's no room. Come back when you've made space."], "choices": [{"command": "EXIT"}]}
     }
   }
 }

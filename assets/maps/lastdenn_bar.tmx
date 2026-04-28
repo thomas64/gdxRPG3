@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.12.1" orientation="orthogonal" renderorder="right-down" width="34" height="36" tilewidth="24" tileheight="24" infinite="0" nextlayerid="22" nextobjectid="48">
+<map version="1.11" tiledversion="1.12.1" orientation="orthogonal" renderorder="right-down" width="34" height="36" tilewidth="24" tileheight="24" infinite="0" nextlayerid="22" nextobjectid="49">
  <properties>
   <property name="bgm" value="bgm_bar"/>
   <property name="step_sound" value="stone"/>
@@ -29,7 +29,7 @@
  </layer>
  <layer id="3" name="under3_bottles" width="34" height="36">
   <data encoding="base64" compression="zlib">
-   eJztzlEJACAQBbAHF0GbaP9sWsEvFbYESwD4Wauk1+1FMvZhPvAAAAA4tQDfTQCb
+   eJzt0lsNACAMxdCbTAEPIwz8a2MiSBikR0E/KgEAXtZM6na7QprRsBJ04G8lHqsJPhvR4Ak6AAAAcMYGlfsBLQ==
   </data>
  </layer>
  <layer id="5" name="under4_chairs" width="34" height="36">
@@ -113,18 +113,30 @@
   </object>
   <object id="43" name="captain01" x="144" y="216" width="48" height="24">
    <properties>
+    <property name="conversation" value="lastdenn_bar_captain"/>
     <property name="direction" value="south"/>
    </properties>
   </object>
   <object id="44" name="youngman01" x="720" y="306" width="48" height="24">
    <properties>
+    <property name="conversation" value="lastdenn_bar_kealis"/>
     <property name="direction" value="north"/>
    </properties>
   </object>
-  <object id="45" name="man06" type="inv" x="624" y="288" width="48" height="12"/>
+  <object id="45" name="man06" type="inv" x="624" y="288" width="48" height="12">
+   <properties>
+    <property name="conversation" value="lastdenn_bar_keeper"/>
+   </properties>
+  </object>
   <object id="46" name="sailor01" x="432" y="210" width="48" height="24">
    <properties>
+    <property name="conversation" value="lastdenn_bar_sailor"/>
     <property name="direction" value="east"/>
+   </properties>
+  </object>
+  <object id="48" name="soldier01" type="w" x="336" y="360" width="48" height="24">
+   <properties>
+    <property name="conversation" value="drunken_lastdenn_guard"/>
    </properties>
   </object>
  </objectgroup>

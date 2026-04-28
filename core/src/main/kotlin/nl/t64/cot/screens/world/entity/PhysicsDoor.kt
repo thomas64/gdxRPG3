@@ -87,6 +87,7 @@ class PhysicsDoor(private val door: Door) : PhysicsComponent() {
             door.unlock()
             stringBuilder.append("You used the key to unlock the door.")
             worldScreen.showMessageDialog(stringBuilder.toString())
+            worldScreen.reloadNpcs()
             return true
         } else {
             stringBuilder.append("This door is locked.")

@@ -27,6 +27,7 @@ object ConditionDatabase {
         "diplomat3"                     to { hasEnoughOfSkill(SkillItemId.DIPLOMAT,     3) },
         "barbarian1"                    to { hasEnoughOfSkill(SkillItemId.BARBARIAN,    1) },
         "barbarian4"                    to { hasEnoughOfSkill(SkillItemId.BARBARIAN,    4) },
+        "jester1"                       to { hasEnoughOfSkill(SkillItemId.JESTER,       1) },
         "warrior4"                      to { hasEnoughOfSkill(SkillItemId.WARRIOR,      4) },
         "wizard1"                       to { hasEnoughOfSkill(SkillItemId.WIZARD,       1) },
         "mozes_wizard1"                 to { hasMozesEnoughOfSkill(SkillItemId.WIZARD,  1) },
@@ -51,6 +52,8 @@ object ConditionDatabase {
         "is_garrin_possessed"           to { true }, // todo, placeholder for future condition
         "witnessed_garrin_possession"   to { gameData.cutscenes.isPlayed(CutsceneId.SCENE_GHOST_POSSESSES_GARRIN) },
         "talked_to_garrin_in_prison"    to { false }, // todo, will become a certain quest step
+        "is_lastdenn_cell_locked"       to { gameData.doors.getDoor("door_lastdenn_jail_b1").isLocked },
+        "should_guard_be_giving_key"    to { shouldGuardBeGivingKey },
         // @formatter:on
     )
 
@@ -106,6 +109,10 @@ object ConditionDatabase {
         get() = gameData.clock.isCurrentTimeBefore("15:00")
             && isMeetingCondition("_conv_guarding_till_1500_<_100", null)
             && !isBattleWon("guarding_till_1500")
+    private val shouldGuardBeGivingKey
+        get() = !gameData.inventory.contains("key_lastdenn_jail")
+            && ("_c_==_a_q_quest_lastdenn_ryiah".isTrue()
+                || ("_r_==_a_q_quest_lastdenn_ryiah".isTrue() && "_c_!=_f_q_quest_lastdenn_ryiah".isTrue()))
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
