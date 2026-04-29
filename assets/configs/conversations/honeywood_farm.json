@@ -81,7 +81,7 @@
   "lennor_is_finished"             : {
     "name"   : "Lennor",
     "phrases": {
-      "1": {"text": ["*Phew* It is finally done. The tree is gone."], "choices": [{"command": "FADE_TO_BLACK_17"}]}
+      "1": {"text": ["*Phew* It is finally done. The tree is gone."], "choices": [{"command": "RELOAD_NPCS_1"}]}
     }
   },
   "the_road_is_open"               : {

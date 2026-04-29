@@ -253,13 +253,8 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
         npcEntities = newNpcEntities
     }
 
-    fun justFadeAndReloadNpcs() {
-        fadeOut(duration = 1.5f,
-                actionAfterFade = { reloadNpcs() })
-    }
-
     fun reloadNpcs() {
-        brokerManager.blockObservers.removeAllNpcObservers()
+        npcEntities.forEach { removeEntityFromObserverSubjects(it) }
         npcEntities = NpcEntitiesLoader(mapManager.currentMap).createNpcs()
     }
 
@@ -303,7 +298,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     }
 
     override fun onNotifyHeroJoined() {
-        brokerManager.blockObservers.removeObserver(currentNpcEntity)
+        removeEntityFromObserverSubjects(currentNpcEntity)
         npcEntities = npcEntities.filter { it != currentNpcEntity }
         partyMembers = PartyMembersLoader(player).loadPartyMembers()
     }
@@ -314,8 +309,17 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
                 actionAfterFade = { BattleScreen.load(battleId, this) })
     }
 
-    override fun onNotifyJustFadeAndReloadNpcs() {
-        justFadeAndReloadNpcs()
+    override fun onNotifyFadeAndReloadNpcs() {
+        fadeOut(duration = 1.5f,
+                transitionPurpose = TransitionPurpose.JUST_FADE,
+                actionAfterFade = { reloadNpcs() })
+    }
+
+    override fun onNotifyFadeAndReloadNpcsPlusOneMinute() {
+        val oneMinute = 2f
+        fadeOut(duration = oneMinute,
+                transitionPurpose = TransitionPurpose.UPDATE,
+                actionAfterFade = { reloadNpcs() })
     }
 
     override fun onNotifyFade(transitionColor: Color,
@@ -454,6 +458,13 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
         (doorList + npcEntities + visibleScheduledEntities + partyMembers + player)
             .sortedByDescending { it.position.y }
             .forEach { it.render(batch) }
+    }
+
+    private fun removeEntityFromObserverSubjects(entity: Entity) {
+        brokerManager.actionObservers.removeObserver(entity)
+        brokerManager.blockObservers.removeObserver(entity)
+        brokerManager.bumpObservers.removeObserver(entity)
+        brokerManager.detectionObservers.removeObserver(entity)
     }
 
     private fun openMiniMap() {

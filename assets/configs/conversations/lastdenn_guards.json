@@ -45,17 +45,17 @@
     "name"     : "Lastdenn Guard",
     "condition": ["is_garrin_possessed"], "startAt": "10",
     "phrases"  : {
-      "1" : {"face": "soldier02", "text": ["Hey Zachary! What a boring day it was! Did anything worthwhile happen while you were standing guard here today?"]},
-      "2" : {"face": "soldier03", "text": ["Nah, nothing much. The mayor's closure of the city entrance until 15:00 made for a pretty slow day."]},
-      "3" : {"face": "soldier02", "text": ["Yeah. Still, at least we got to stand in the sun for a bit."]},
-      "4" : {"face": "soldier03", "text": ["Sure, beats being cooped up inside all day."], "choices": [{"command": "EXIT"}]},
-      "10": {"face": "soldier02", "text": ["Hey Zachary! What a day it was! Did anything worthwhile happen while you were standing guard here today?"]},
-      "11": {"face": "soldier03", "text": ["Oh yes, quite a bit actually. Have you heard about Father Santino?"]},
-      "12": {"face": "soldier02", "text": ["Yes, I heard he was murdered! They say he was killed by someone possessed by a ghost! Can you believe that?"]},
-      "13": {"face": "soldier03", "text": ["It's terrible. Poor Father Santino... He was such a bright light in these dark times."]},
-      "14": {"face": "soldier02", "text": ["Indeed. He was one of the few people who dared to stand up to the mayor's corrupt practices."]},
-      "15": {"face": "soldier03", "text": ["He will be sorely missed."]},
-      "16": {"face": "soldier02", "text": ["[GRAY](A ghost...? Why would they make up such a story...?)"], "choices": [{"command": "EXIT"}]}
+      "1" : {"face": "soldier12", "text": ["Hey Zachary! What a boring day it was! Did anything worthwhile happen while you were standing guard here today?"]},
+      "2" : {"face": "soldier16", "text": ["Nah, nothing much. The mayor's closure of the city entrance until 15:00 made for a pretty slow day."]},
+      "3" : {"face": "soldier12", "text": ["Yeah. Still, at least we got to stand in the sun for a bit."]},
+      "4" : {"face": "soldier16", "text": ["Sure, beats being cooped up inside all day."], "choices": [{"command": "EXIT"}]},
+      "10": {"face": "soldier12", "text": ["Hey Zachary! What a day it was! Did anything worthwhile happen while you were standing guard here today?"]},
+      "11": {"face": "soldier16", "text": ["Oh yes, quite a bit actually. Have you heard about Father Santino?"]},
+      "12": {"face": "soldier12", "text": ["Yes, I heard he was murdered! They say he was killed by someone possessed by a ghost! Can you believe that?"]},
+      "13": {"face": "soldier16", "text": ["It's terrible. Poor Father Santino... He was such a bright light in these dark times."]},
+      "14": {"face": "soldier12", "text": ["Indeed. He was one of the few people who dared to stand up to the mayor's corrupt practices."]},
+      "15": {"face": "soldier16", "text": ["He will be sorely missed."]},
+      "16": {"face": "soldier12", "text": ["[GRAY](A ghost...? Why would they make up such a story...?)"], "choices": [{"command": "EXIT"}]}
     }
   },
   "standing_guard_near_crystal": {

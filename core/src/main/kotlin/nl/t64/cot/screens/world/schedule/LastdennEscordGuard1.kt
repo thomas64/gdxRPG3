@@ -8,7 +8,7 @@ import nl.t64.cot.screens.world.entity.EntityState.WALKING
 
 class LastdennEscordGuard1 : EntitySchedule() {
 
-    override val entity = Entity("soldier02", InputEmpty(), PhysicsScheduledNpc(), GraphicsScheduledNpc("soldier02"))
+    override val entity = Entity("soldier12", InputEmpty(), PhysicsScheduledNpc(), GraphicsScheduledNpc("soldier12"))
     override val invisibleTalking = Entity("", InputEmpty(), PhysicsEmpty(), GraphicsEmpty())
 
     override val scheduleParts: List<SchedulePart> = listOf(

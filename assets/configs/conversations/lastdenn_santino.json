@@ -107,7 +107,7 @@
     "phrases"  : {
       "1" : {"text": [". . ."], "choices": [{"command": "EXIT"}]},
       "10": {"text": ["I'm innocent! It wasn't me! It was a ghost!"]},
-      "11": {"face": "soldier02", "name": "Lastdenn Guard", "text": ["You be quiet!"], "choices": [{"command": "EXIT"}]}
+      "11": {"face": "soldier12", "name": "Lastdenn Guard", "text": ["You be quiet!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "garrin_in_jail"            : {

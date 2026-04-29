@@ -37,7 +37,6 @@ import nl.t64.cot.screens.loot.RewardScreen
 import nl.t64.cot.screens.loot.TradeScreen
 import nl.t64.cot.screens.school.SchoolScreen
 import nl.t64.cot.screens.shop.ShopScreen
-import nl.t64.cot.sfx.TransitionPurpose
 import kotlin.concurrent.thread
 
 
@@ -204,7 +203,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             ConversationCommand.RECEIVE_ITEM -> receiveItem()
             ConversationCommand.START_BATTLE -> startBattle(nextId)
             ConversationCommand.RELOAD_NPCS -> fadeAndReloadNpcs(nextId)
-            ConversationCommand.FADE_TO_BLACK_17 -> fadeAndSetTime("17:01", nextId)
+            ConversationCommand.RELOAD_NPCS_1 -> fadeAndReloadNpcsPlusOneMinute(nextId)
 
             ConversationCommand.KNOW_QUEST -> knowQuest(nextId)
             ConversationCommand.ACCEPT_QUEST -> acceptQuest(nextId)
@@ -339,15 +338,14 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     private fun fadeAndReloadNpcs(nextId: String) {
         // in dialog state, scheduled npc's won't update. that's why we first reload them with a fade to black.
         // and then, when the conversation ends, they disappear, because they are updated, but then it's already black.
-        conversationObserver.notifyJustFadeAndReloadNpcs()
+        // the fade uses update, that means time will pass, and thus one minute will have passed in-game.
+        conversationObserver.notifyFadeAndReloadNpcs()
         endConversation(nextId)
     }
 
-    private fun fadeAndSetTime(time: String, nextId: String) {
+    private fun fadeAndReloadNpcsPlusOneMinute(nextId: String) {
+        conversationObserver.notifyFadeAndReloadNpcsPlusOneMinute()
         endConversation(nextId)
-        conversationObserver.notifyFade(duration = 2f,
-                                        transitionPurpose = TransitionPurpose.UPDATE,
-                                        actionDuringFade = { gameData.clock.setTimeOfDay(time) })
     }
 
     private fun knowQuest(nextId: String) {

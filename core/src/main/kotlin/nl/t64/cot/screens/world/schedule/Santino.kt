@@ -65,8 +65,7 @@ class Santino : EntitySchedule() {
     override fun handleSideEffects() {
         if (mapManager.currentMap.mapTitle == "lastdenn_church") {
             if (gameData.clock.isCurrentTimeAt("09:59")) {
-                worldScreen.justFadeAndReloadNpcs()
-                gameData.clock.setTimeOfDay("10:00")
+                worldScreen.onNotifyFadeAndReloadNpcsPlusOneMinute()
             }
             if (gameData.clock.isCurrentTimeInBetween("10:00", "11:00")) {
                 val part = SchedulePart("lastdenn_church", "10:00", "11:00", NONE, INVISIBLE, "santino5a", "santino5a", "santino_first_service")
@@ -75,8 +74,7 @@ class Santino : EntitySchedule() {
                 removeInvisibleTalking()
             }
             if (gameData.clock.isCurrentTimeAt("10:59")) {
-                worldScreen.justFadeAndReloadNpcs()
-                gameData.clock.setTimeOfDay("11:00")
+                worldScreen.onNotifyFadeAndReloadNpcsPlusOneMinute()
             }
         }
         if (mapManager.currentMap.mapTitle == "lastdenn") {

@@ -17,7 +17,10 @@ interface ConversationObserver {
     fun onNotifyShowBattleScreen(battleId: String): Unit =
         throw IllegalStateException("Implement this method in child.")
 
-    fun onNotifyJustFadeAndReloadNpcs(): Unit =
+    fun onNotifyFadeAndReloadNpcs(): Unit =
+        throw IllegalStateException("Implement this method in child.")
+
+    fun onNotifyFadeAndReloadNpcsPlusOneMinute(): Unit =
         throw IllegalStateException("Implement this method in child.")
 
     fun onNotifyFade(transitionColor: Color,

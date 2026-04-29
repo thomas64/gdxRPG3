@@ -224,18 +224,18 @@
   <object id="185" name="note_well" x="1320" y="2424" width="96" height="72"/>
  </objectgroup>
  <objectgroup color="#55ff7f" id="14" name="npc">
-  <object id="230" name="soldier02" type="inv" x="24" y="2280" width="6" height="6">
+  <object id="230" name="soldier12" type="inv" x="24" y="2280" width="6" height="6">
    <properties>
     <property name="conversation" value="guarding_till_1500"/>
    </properties>
   </object>
-  <object id="247" name="soldier03" x="768" y="2400" width="48" height="24">
+  <object id="247" name="soldier16" x="768" y="2400" width="48" height="24">
    <properties>
     <property name="conversation" value="standing_guard_near_crystal"/>
     <property name="direction" value="east"/>
    </properties>
   </object>
-  <object id="258" name="soldier02" x="528" y="1476" width="48" height="24">
+  <object id="258" name="soldier12" x="528" y="1476" width="48" height="24">
    <properties>
     <property name="condition" value="_time_after_14:00"/>
     <property name="conversation" value="guarding_house_garrin"/>
