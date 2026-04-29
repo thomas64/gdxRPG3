@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2
 import ktx.tiled.propertyOrNull
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
-import nl.t64.cot.components.condition.areAllTrue
+import nl.t64.cot.components.condition.ConditionDatabase
 import nl.t64.cot.components.quest.QuestGraph
 import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.subjects.ActionObserver
@@ -24,7 +24,7 @@ class GameMapQuestChecker(rectObject: RectangleMapObject) : GameMapObject(rectOb
     }
 
     override fun onNotifyActionPressed(checkRect: Rectangle, playerDirection: Direction, playerPosition: Vector2) {
-        if (checkRect.overlaps(rectangle) && conditions.areAllTrue(quest.id)) {
+        if (checkRect.overlaps(rectangle) && ConditionDatabase.isMeetingConditions(conditions, quest.id)) {
             when {
                 taskIdToComplete == null
                     && taskIdToFail == null -> error("QuestChecker must have task or fail property.")

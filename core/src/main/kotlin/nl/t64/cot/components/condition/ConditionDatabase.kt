@@ -49,7 +49,8 @@ object ConditionDatabase {
         "is_specific_time"              to { isBlackCurrentlyNotOpeningHisDoor },
         "is_lastdenn_guard_alive"       to { !isBattleWon("guarding_till_1500") },
         "is_lastdenn_entrance_closed"   to { isLastdennEntranceClosed },
-        "is_garrin_possessed"           to { true }, // todo, placeholder for future condition
+        "is_garrin_possessed"           to { false }, // todo, placeholder for future condition
+        "!is_garrin_possessed"          to { true },  // todo, placeholder for future condition
         "witnessed_garrin_possession"   to { gameData.cutscenes.isPlayed(CutsceneId.SCENE_GHOST_POSSESSES_GARRIN) },
         "talked_to_garrin_in_prison"    to { false }, // todo, will become a certain quest step
         "is_lastdenn_cell_locked"       to { gameData.doors.getDoor("door_lastdenn_jail_b1").isLocked },

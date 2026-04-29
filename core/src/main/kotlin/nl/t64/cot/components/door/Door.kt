@@ -15,6 +15,8 @@ class Door(
     val keyId: String? = null,
     @JsonProperty("condition")
     val conditions: List<String> = emptyList(),
+    @JsonProperty("schedule")
+    val scheduleConditions: List<String> = emptyList(),
     val openStartTime: String? = null,
     val openEndTime: String? = null,
     val message: String? = null

@@ -105,10 +105,14 @@ class PhysicsDoor(private val door: Door) : PhysicsComponent() {
     }
 
     private fun possibleLockOrUnlockBySchedule() {
-        door.openStartTime?.let { openStartTime ->
-            door.openEndTime?.let { openEndTime ->
-                lockOrUnlockBySchedule(openStartTime, openEndTime)
+        if (door.scheduleConditions.areAllTrue()) {
+
+            door.openStartTime?.let { openStartTime ->
+                door.openEndTime?.let { openEndTime ->
+                    lockOrUnlockBySchedule(openStartTime, openEndTime)
+                }
             }
+
         }
     }
 
