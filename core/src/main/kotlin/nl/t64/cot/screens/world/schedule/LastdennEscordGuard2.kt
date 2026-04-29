@@ -13,9 +13,9 @@ class LastdennEscordGuard2 : EntitySchedule() {
 
     override val scheduleParts: List<SchedulePart> = listOf(
         // @formatter:off
-        SchedulePart("lastdenn", "14:00", "14:30", NORTH, WALKING,  "santino14",     "garrinToJail1", "guard_escorting_garrin"),
-        SchedulePart("lastdenn", "14:30", "14:59", EAST,  WALKING,  "garrinToJail1", "garrinToJail2", "guard_escorting_garrin"),
-        SchedulePart("lastdenn", "14:59", "15:02", NORTH, WALKING,  "garrinToJail2", "garrinToJail3", "guard_escorting_garrin"),
+        SchedulePart("lastdenn", "14:00", "14:30", NORTH, WALKING,  "santino14",     "garrinToJail1", "guard_escorting_garrin", listOf("is_garrin_possessed")),
+        SchedulePart("lastdenn", "14:30", "14:59", EAST,  WALKING,  "garrinToJail1", "garrinToJail2", "guard_escorting_garrin", listOf("is_garrin_possessed")),
+        SchedulePart("lastdenn", "14:59", "15:02", NORTH, WALKING,  "garrinToJail2", "garrinToJail3", "guard_escorting_garrin", listOf("is_garrin_possessed")),
         // @formatter:on
     )
 

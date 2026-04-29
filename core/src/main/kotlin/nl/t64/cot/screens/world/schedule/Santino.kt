@@ -50,15 +50,16 @@ class Santino : EntitySchedule() {
 
     private fun toTheMayorOutside() = listOf(
         // @formatter:off
-        SchedulePart("lastdenn",        "12:30", "12:35", SOUTH, WALKING,  "santino11", "santino12", "santino_busy_errand"),
-        SchedulePart("lastdenn",        "12:35", "12:45", WEST,  WALKING,  "santino12", "santino13", "santino_busy_errand"),
-        SchedulePart("lastdenn",        "12:45", "13:00", NORTH, WALKING,  "santino13", "santino14", "santino_busy_errand"),
+        SchedulePart("lastdenn",        "12:30", "12:35", SOUTH, WALKING,  "santino11", "santino12",       "santino_busy_errand"),
+        SchedulePart("lastdenn",        "12:35", "12:45", WEST,  WALKING,  "santino12", "santino13",       "santino_busy_errand"),
+        SchedulePart("lastdenn",        "12:45", "13:00", NORTH, WALKING,  "santino13", "santino14",       "santino_busy_errand"),
+        SchedulePart("lastdenn",        "13:00", "13:20", NORTH, WALKING,  "santino14", "entrance_guard5", "santino_busy_errand", listOf("!is_garrin_possessed")),
         // @formatter:on
     )
 
     private fun beingMurdered() = listOf(
         // @formatter:off
-        SchedulePart("lastdenn",        "13:00", "14:00", NORTH, IMMOBILE, "santino14", "santino14"),
+        SchedulePart("lastdenn",        "13:00", "14:00", NORTH, IMMOBILE, "santino14", "santino14", "", listOf("is_garrin_possessed")),
         // @formatter:on
     )
 

@@ -9,6 +9,7 @@ import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playBgm
+import nl.t64.cot.audio.playSe
 import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.screens.world.entity.EntityState
 import nl.t64.cot.sfx.TransitionAction
@@ -18,34 +19,33 @@ import nl.t64.cot.sfx.TransitionType
 
 class SceneSantinoMurdered : CutsceneScreen() {
 
+    private lateinit var garrin: CutsceneActor
+    private lateinit var ghost: CutsceneActor
     private lateinit var santino: CutsceneActor
     private lateinit var santinoDead: Image
-    private lateinit var garrin: CutsceneActor
     private lateinit var guard1: CutsceneActor
     private lateinit var guard2: CutsceneActor
     private lateinit var bloodFlash: Actor
 
     override fun prepare() {
+        garrin = CutsceneActor.createCharacter("man12")
+        ghost = CutsceneActor.createCharacter("ghost1")
         santino = CutsceneActor.createCharacter("santino")
         santinoDead = Utils.createImage("sprites/characters/damage3.png", 144, 240, 48, 48)
-        garrin = CutsceneActor.createCharacter("man12")
         guard1 = CutsceneActor.createCharacter("soldier01")
-        guard2 = CutsceneActor.createCharacter("soldier01")
+        guard2 = CutsceneActor.createCharacter("soldier12")
         bloodFlash = TransitionImage(color = Color.RED)
 
+        actorsStage.addActor(garrin)
+        actorsStage.addActor(ghost)
         actorsStage.addActor(santino)
         actorsStage.addActor(santinoDead)
-        actorsStage.addActor(garrin)
         actorsStage.addActor(guard1)
         actorsStage.addActor(guard2)
         transitionStage.addActor(bloodFlash)
 
         actions = listOf(start(),
-                         conversation("2"),
-                         conversation("3"),
-                         conversation("4"),
                          guardsWalkDown(),
-                         conversation("6"),
                          santinoDies(),
                          guardsSeeGarrin(),
                          end())
@@ -56,85 +56,71 @@ class SceneSantinoMurdered : CutsceneScreen() {
             Actions.run {
                 setMapWithBgsOnly("lastdenn")
                 playBgm(AudioEvent.BGM_MURDER)
-                setFixedCameraPosition(768f, 1296f)
-                santinoDead.isVisible = false
-                santinoDead.setPosition(576f, 1248f)
-                santino.isVisible = true
-                santino.setPosition(816f, 1272f)
-                santino.direction = Direction.EAST
+                setFixedCameraPosition(840f, 960f)
                 garrin.isVisible = true
-                garrin.setPosition(864f, 1272f)
-                garrin.direction = Direction.WEST
+                garrin.setPosition(816f, 984f)
+                garrin.direction = Direction.SOUTH
+                ghost.isVisible = false
+                ghost.setPosition(816f, 936f)
+                ghost.direction = Direction.SOUTH
+                ghost.entityState = EntityState.CRAWLING
+                santinoDead.isVisible = false
+                santinoDead.setPosition(816f, 900f)
+                santino.isVisible = true
+                santino.setPosition(816f, 936f)
+                santino.direction = Direction.NORTH
                 guard1.isVisible = true
-                guard1.setPosition(792f, 1584f)
+                guard1.setPosition(792f, 1296f)
                 guard1.direction = Direction.SOUTH
                 guard2.isVisible = true
-                guard2.setPosition(840f, 1584f)
+                guard2.setPosition(840f, 1296f)
                 guard2.direction = Direction.SOUTH
                 bloodFlash.isVisible = false
             },
 
             actionFadeIn(),
 
-            Actions.delay(1f),
+            Actions.delay(2f),
 
-            Actions.run { showConversationDialog("garrin_vs_santino_1", "") }
-        )
-    }
-
-    private fun conversation(conversationNumber: String): Action {
-        return Actions.sequence(
-            Actions.delay(0.4f),
-            Actions.addAction(Actions.sequence(
-                Actions.run { garrin.entityState = EntityState.WALKING },
-                Actions.moveBy(-48f, 0f, 1f),
-                Actions.run { garrin.entityState = EntityState.IDLE }
-            ), garrin),
-            Actions.delay(0.2f),
-            Actions.addAction(Actions.sequence(
-                Actions.run { santino.entityState = EntityState.WALKING },
-                Actions.moveBy(-48f, 0f, 1f),
-                Actions.run { santino.entityState = EntityState.IDLE }
-            ), santino),
-            actionWalkSound(garrin, 1f, NORMAL_STEP),
-
-            Actions.delay(0.4f),
-
-            Actions.run { showConversationDialog("garrin_vs_santino_$conversationNumber", "") }
+            Actions.run { showConversationDialog("garrin_vs_santino_1", "santino") }
         )
     }
 
     private fun guardsWalkDown(): Action {
         return Actions.sequence(
             Actions.addAction(Actions.sequence(
+                Actions.delay(3f),
                 Actions.run { guard1.entityState = EntityState.WALKING },
-                Actions.moveTo(792f, 1272f, 5f),
+                Actions.moveBy(0f, -240f, 9f),
                 Actions.run { guard1.entityState = EntityState.IDLE },
-                Actions.run { guard1.direction = Direction.WEST },
             ), guard1),
             Actions.addAction(Actions.sequence(
+                Actions.delay(3f),
                 Actions.run { guard2.entityState = EntityState.WALKING },
-                actionMoveTo(guard2, 840f, 1248f, 5.2f, NORMAL_STEP),
+                Actions.moveBy(0f, -216f, 9.2f),
                 Actions.run { guard2.entityState = EntityState.IDLE },
-                Actions.run { guard2.direction = Direction.WEST },
             ), guard2),
             Actions.delay(0.4f),
             Actions.addAction(Actions.sequence(
                 Actions.run { garrin.entityState = EntityState.WALKING },
-                Actions.moveBy(-48f, 0f, 1f),
+                Actions.moveBy(0f, -48f, 1f),
                 Actions.run { garrin.entityState = EntityState.IDLE }
             ), garrin),
             Actions.delay(0.2f),
             Actions.addAction(Actions.sequence(
                 Actions.run { santino.entityState = EntityState.WALKING },
-                Actions.moveBy(-48f, 0f, 1f),
+                Actions.moveBy(0f, -24f, 1f),
                 Actions.run { santino.entityState = EntityState.IDLE }
             ), santino),
             actionWalkSound(garrin, 1f, NORMAL_STEP),
 
             Actions.delay(0.4f),
 
-            Actions.run { showConversationDialog("garrin_vs_santino_5", "") }
+            Actions.run { showConversationDialog("garrin_vs_santino_2", "ghost1") },
+
+            Actions.delay(3f),
+
+            actionWalkSound(guard2, 7f, NORMAL_STEP),
         )
     }
 
@@ -144,6 +130,7 @@ class SceneSantinoMurdered : CutsceneScreen() {
                 Actions.alpha(0f),
                 Actions.visible(true),
                 Actions.delay(0.2f),
+                Actions.run { playSe(AudioEvent.SE_MAGIC_BANG) },
                 Actions.parallel(
                     Actions.repeat(6, Actions.sequence(
                         Actions.addAction(TransitionAction(TransitionType.FADE_OUT, 0.05f), bloodFlash),
@@ -160,22 +147,36 @@ class SceneSantinoMurdered : CutsceneScreen() {
                     )
                 )
             ), bloodFlash),
-            Actions.delay(1.5f),
-            Actions.run { showConversationDialog("garrin_vs_santino_dead", "") },
+
+            Actions.delay(4f),
+
+            Actions.run { ghost.isVisible = true },
+
+            Actions.delay(3f),
+
+            Actions.addAction(Actions.sequence(
+                Actions.run { ghost.direction = Direction.WEST },
+                Actions.moveBy(-500f, 0f, 20f),
+            ), ghost),
+
+            Actions.delay(1f),
+
+            Actions.run { showConversationDialog("garrin_vs_santino_dead", "man12") },
         )
     }
 
     private fun guardsSeeGarrin(): Action {
         return Actions.sequence(
             Actions.delay(1f),
-            Actions.run { garrin.direction = Direction.EAST },
-            Actions.run { showConversationDialog("guards_see_garrin", "") },
+            Actions.run { showConversationDialog("guards_see_garrin", "soldier01") },
+            Actions.delay(1f),
+            Actions.run { garrin.direction = Direction.NORTH },
         )
     }
 
     private fun end(): Action {
         return Actions.sequence(
-            Actions.delay(0.5f),
+            Actions.delay(2f),
             Actions.run { exitScreen() }
         )
     }
@@ -183,7 +184,7 @@ class SceneSantinoMurdered : CutsceneScreen() {
 
     override fun exitScreen() {
         gameData.clock.setTimeOfDay("14:00")
-        endCutsceneAndOpenMap("lastdenn", "scene_santino_murdered")
+        endCutsceneAndOpenMap("lastdenn", "scene_santino_murdered", delay = 2f)
     }
 
 }

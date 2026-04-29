@@ -182,19 +182,19 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
 
     fun endCutsceneAndOpenMapWithoutBgmFading(mapTitle: String, spawnId: String) {
         shouldBgmEndAfterCutscene = false
-        endCutsceneAnd {
+        endCutsceneAnd(delay = 1f) {
             openMap(mapTitle, spawnId)
         }
     }
 
-    fun endCutsceneAndOpenMap(mapTitle: String, spawnId: String) {
-        endCutsceneAnd {
+    fun endCutsceneAndOpenMap(mapTitle: String, spawnId: String, delay: Float = 1f) {
+        endCutsceneAnd(delay) {
             openMap(mapTitle, spawnId)
         }
     }
 
     fun endCutsceneAndOpenMapAnd(mapTitle: String, spawnId: String = mapTitle, actionAfter: () -> Unit) {
-        endCutsceneAnd {
+        endCutsceneAnd(delay = 1f) {
             openMap(mapTitle, spawnId)
             actionAfter.invoke()
         }
@@ -208,10 +208,10 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
         ))
     }
 
-    fun endCutsceneAnd(actionAfter: () -> Unit) {
+    fun endCutsceneAnd(delay: Float = 1f, actionAfter: () -> Unit) {
         endCutscene()
         actorsStage.addAction(Actions.sequence(
-            if (title.isVisible) fadeFromTitle() else fadeFromMap(),
+            if (title.isVisible) fadeFromTitle() else fadeFromMap(delay),
             Actions.run { actionAfter.invoke() }
         ))
     }
@@ -240,10 +240,10 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
         )
     }
 
-    private fun fadeFromMap(): Action {
+    private fun fadeFromMap(delay: Float): Action {
         return Actions.sequence(
             actionFadeOut(),
-            Actions.delay(1f),
+            Actions.delay(delay),
             Actions.addAction(Actions.alpha(1f), transition)
         )
     }

@@ -127,6 +127,7 @@
     }
   },
   "santino_prepare"           : {
+    "name"   : "Father Santino",
     "phrases": {
       "1": {"text": ["Blessings upon you my child."]},
       "2": {"text": ["Welcome to this temple. I am Father Santino."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "3"}]},
@@ -135,6 +136,7 @@
     }
   },
   "santino_service_start"     : {
+    "name"   : "Father Santino",
     "phrases": {
       "1": {"text": ["Blessings upon you my child."]},
       "2": {"text": ["Welcome to this temple. I am Father Santino."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "3"}]},
@@ -143,18 +145,21 @@
     }
   },
   "santino_first_service"     : {
+    "name"   : "Father Santino",
     "phrases": {
       "1": {"text": ["((Preaching and praying.))"], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "2"}]},
       "2": {"text": ["((More preaching and praying.))"], "choices": [{"command": "EXIT"}]}
     }
   },
   "santino_first_counseling"  : {
+    "name"   : "Father Santino",
     "phrases": {
       "1": {"text": ["((Question about Ulrog?!))"], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "2"}]},
       "2": {"text": ["((Come see me tonight at 18:00. ACCEPT_NEW_QUEST oid))"], "choices": [{"command": "EXIT"}]}
     }
   },
   "santino_busy_errand"       : {
+    "name"   : "Father Santino",
     "phrases": {
       "1": {"text": ["I'm on my way to the mayor. If you need my counseling, come see me at 16:00 after the afternoon service."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "2"}]},
       "2": {"text": ["The afternoon service itself starts at 15:00. Come join us if you'd like."], "choices": [{"command": "EXIT"}]}
@@ -162,62 +167,43 @@
   },
   "garrin_vs_santino_1"       : {
     "phrases": {
-      "1": {"face": "man12", "text": ["It came again!"]},
-      "2": {"face": "santino", "text": ["You're drunk."], "choices": [{"command": "EXIT"}]}
+      "1": {"face": "santino", "name": "Father Santino", "text": ["Good afternoon, Garrin. How are you doing today?"]},
+      "2": {"face": "santino", "name": "Father Santino", "text": ["I'm on my way to the mayor. I need to talk to him about the gate closure."]},
+      "3": {"face": "ghost1", "name": "Garrin", "text": ["reveeenge on youuuuuuuuuuuuuuuu"]},
+      "4": {"face": "santino", "name": "Father Santino", "text": ["Garrin? Are you okay?"], "choices": [{"command": "EXIT"}]}
     }
   },
   "garrin_vs_santino_2"       : {
     "phrases": {
-      "1": {"face": "man12", "text": ["I tell you! It came again!"]},
-      "2": {"face": "santino", "text": ["What do you mean?"]},
-      "3": {"face": "man12", "text": ["This morning! At 9:00! Even before your service started!"], "choices": [{"command": "EXIT"}]}
-    }
-  },
-  "garrin_vs_santino_3"       : {
-    "phrases": {
-      "1": {"face": "santino", "text": ["Are you certain that you saw it again?"]},
-      "2": {"face": "man12", "text": ["Yes of course!"], "choices": [{"command": "EXIT"}]}
-    }
-  },
-  "garrin_vs_santino_4"       : {
-    "phrases": {
-      "1": {"face": "man12", "text": ["Paton is really scared."]},
-      "2": {"face": "santino", "text": ["I'm truly sorry to hear that."]},
-      "3": {"face": "man12", "text": ["I didn't know what to do!"], "choices": [{"command": "EXIT"}]}
-    }
-  },
-  "garrin_vs_santino_5"       : {
-    "phrases": {
-      "1": {"face": "man12", "text": ["I'm desperate!"], "choices": [{"command": "EXIT"}]}
-    }
-  },
-  "garrin_vs_santino_6"       : {
-    "phrases": {
-      "1": {"face": "man12", "text": ["All I needed was some ho..."]},
-      "2": {"face": "santino", "text": ["Stop pushing me!"]},
-      "3": {"face": "santino", "text": ["Aaaah!"], "choices": [{"command": "EXIT"}]}
+      "1": {"face": "ghost1", "name": "Garrin", "text": ["reveeenge on youuuuuuuuuuuuuuuu"]},
+      "2": {"face": "santino", "name": "Father Santino", "text": ["What are you doing?! Stop it!"]},
+      "3": {"face": "santino", "name": "Father Santino", "text": ["Aaaah!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "garrin_vs_santino_dead"    : {
+    "name"   : "Garrin",
     "phrases": {
-      "1": {"face": "santino", "text": [". . ."]},
-      "2": {"face": "man12", "text": ["Oh no!"]},
-      "3": {"face": "man12", "text": ["Father...?"]},
-      "4": {"face": "man12", "text": ["Father Santino...?"]},
-      "5": {"face": "man12", "text": ["What have I done?"], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["Oh no!"]},
+      "2": {"text": ["Father...?"]},
+      "3": {"text": ["Father Santino...?"]},
+      "4": {"text": ["What have I done?"], "choices": [{"command": "EXIT"}]}
     }
   },
   "guards_see_garrin"         : {
     "phrases": {
-      "1": {"face": "soldier01", "text": ["Halt!"]},
-      "2": {"face": "soldier01", "text": ["I saw that!"]},
-      "3": {"face": "man12", "text": ["It... It was an accident."]},
-      "4": {"face": "man12", "text": ["He, he... He fell with his head on that stone..."]},
-      "5": {"face": "soldier01", "text": ["We saw you push him!", "You killed him!"]},
-      "6": {"face": "man12", "text": ["But... but..."]},
-      "7": {"face": "soldier01", "text": ["You are under arrest!", "Come with me."]},
-      "8": {"face": "soldier01", "text": ["You take care of the body."]},
-      "9": {"face": "soldier01", "text": ["Yes sir."], "choices": [{"command": "EXIT"}]}
+      "1": {"face": "soldier01", "name": "Lastdenn Guard", "text": ["Halt!"]},
+      "2": {"face": "soldier01", "name": "Lastdenn Guard", "text": ["We saw that!"]},
+      "3": {"face": "man12", "name": "Garrin", "text": ["I... I... I..."]},
+      "4": {"face": "soldier01", "name": "Lastdenn Guard", "text": ["You killed him!"]},
+      "5": {"face": "man12", "name": "Garrin", "text": ["But... but..."]},
+      "6": {"face": "soldier01", "name": "Lastdenn Guard", "text": ["You are under arrest!", "Come with me."]},
+      "7": {"face": "soldier01", "name": "Lastdenn Guard", "text": ["Elian, you make sure to take the body of the priest away from this public place. Finlay and I will take care of this guy."]},
+      "8": {"face": "soldier12", "name": "Lastdenn Guard Elian", "text": ["Yes sir."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "garrin_shouts_nooo"           : {
+    "phrases": {
+      "1": {"text": ["Noooooo!!!"], "choices": [{"command": "RELOAD_NPCS_1"}]}
     }
   }
 }

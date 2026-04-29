@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.12.1" orientation="orthogonal" renderorder="right-down" width="76" height="116" tilewidth="24" tileheight="24" infinite="0" nextlayerid="23" nextobjectid="262">
+<map version="1.11" tiledversion="1.12.1" orientation="orthogonal" renderorder="right-down" width="76" height="116" tilewidth="24" tileheight="24" infinite="0" nextlayerid="23" nextobjectid="268">
  <properties>
   <property name="bgm" value="bgm_lastdenn"/>
   <property name="lightmap_camera" value="sunlight"/>
@@ -237,9 +237,14 @@
   </object>
   <object id="258" name="soldier12" x="528" y="1476" width="48" height="24">
    <properties>
-    <property name="condition" value="_time_after_14:00"/>
+    <property name="condition" value="_time_after_14:00, is_garrin_possessed"/>
     <property name="conversation" value="guarding_house_garrin"/>
     <property name="direction" value="south"/>
+   </properties>
+  </object>
+  <object id="267" name="man12" type="inv" x="1032" y="1896">
+   <properties>
+    <property name="conversation" value="garrin_shouts_nooo"/>
    </properties>
   </object>
  </objectgroup>
@@ -258,7 +263,7 @@
     <property name="direction" value="west"/>
    </properties>
   </object>
-  <object id="200" name="scene_santino_murdered" x="948" y="1314" width="48" height="24">
+  <object id="200" name="scene_santino_murdered" x="720" y="1728" width="48" height="24">
    <properties>
     <property name="direction" value="east"/>
    </properties>
@@ -302,9 +307,9 @@
   <object id="162" x="1056" y="2400" width="48" height="48"/>
  </objectgroup>
  <objectgroup color="#ff00ff" id="22" name="cutscene">
-  <object id="199" name="scene_santino_murdered" type="discover" x="1008" y="1362" width="288" height="144">
+  <object id="199" name="scene_santino_murdered" type="discover" x="576" y="1632" width="528" height="288">
    <properties>
-    <property name="condition" value="_time_between_13:00_and_14:00"/>
+    <property name="condition" value="_time_between_13:00_and_14:00, is_garrin_possessed"/>
    </properties>
   </object>
   <object id="248" name="scene_ghost_possesses_garrin" type="discover" x="528" y="1470" width="48" height="12">
@@ -322,6 +327,7 @@
   <object id="244" name="note_equipment_shop" type="check" x="960" y="1632" width="48" height="48"/>
   <object id="245" name="note_lastdenn_jail" type="check" x="1344" y="1104" width="48" height="48"/>
   <object id="246" name="note_lastdenn_bar" type="check" x="576" y="1104" width="48" height="48"/>
+  <object id="263" name="event_lastdenn_shout" type="discover" x="240" y="1488" width="1104" height="600"/>
  </objectgroup>
  <objectgroup color="#aaff00" id="20" name="scheduled">
   <object id="172" name="santino11" x="1152" y="2136" width="48" height="24"/>
