@@ -53,6 +53,7 @@ abstract class PhysicsComponent : Component {
             EntityState.ALIGNING -> alignToGrid()
             EntityState.IDLE,
             EntityState.IMMOBILE,
+            EntityState.NO_BUMP,
             EntityState.INVISIBLE,
             EntityState.IDLE_ANIMATING -> Unit
             else -> throw IllegalArgumentException("EntityState '$state' not usable.")
@@ -95,6 +96,7 @@ abstract class PhysicsComponent : Component {
             EntityState.PLAYING -> possibleSendCollisionEvent()
             EntityState.IDLE,
             EntityState.IMMOBILE,
+            EntityState.NO_BUMP,
             EntityState.INVISIBLE,
             EntityState.IDLE_ANIMATING -> Unit
             else -> throw IllegalStateException("EntityState '$state' not usable.")

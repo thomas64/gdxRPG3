@@ -52,7 +52,7 @@
       "52"  : {"text": ["Three field rules. First: if I shout \"duck\", you duck first and ask questions later."]},
       "53"  : {"text": ["Second: never drink unlabeled blue liquids, even if they sparkle encouragingly."]},
       "54"  : {"text": ["Third: if someone says \"this potion smells fine\", hand it to me first."]},
-      "55"  : {"text": ["Done? Good. I am in. If anyone explodes, it will be strategic"], "choices": [{"command": "HERO_JOIN"}]},
+      "55"  : {"text": ["Done? Good. I am in. If anyone explodes, it will be strategic."], "choices": [{"command": "HERO_JOIN"}]},
       "90"  : {"text": ["Fair. I will remain here and continue my interrogation of this suspicious corner."]},
       "91"  : {"text": ["If destiny changes its mind, you know where to find me. Unless another wall has caught my attention by then. They can be quite persuasive."], "choices": [{"command": "EXIT"}]},
       "9000": {"text": ["I would join, but your party is full. The numbers refuse to bend, and I already tried arguing with them."], "choices": [{"command": "EXIT"}]}

@@ -36,7 +36,8 @@ abstract class GraphicsComponent : Component {
             EntityState.INVISIBLE -> return
             EntityState.IDLE,
             EntityState.ALIGNING,
-            EntityState.IMMOBILE -> {
+            EntityState.IMMOBILE,
+            EntityState.NO_BUMP -> {
                 setCurrentFrame(Constant.NO_FRAMES)
                 // the next line sets player always just 1 dt moment before the end of normal stance when standing still.
                 frameTime = frameDuration - dt

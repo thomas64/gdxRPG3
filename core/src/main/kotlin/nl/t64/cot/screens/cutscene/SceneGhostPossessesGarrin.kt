@@ -46,7 +46,6 @@ class SceneGhostPossessesGarrin : CutsceneScreen() {
                 garrinLying.isVisible = false
                 garrinLying.setPosition(276f, 444f)
                 garrinLying.direction = Direction.WEST
-                garrinLying.entityState = EntityState.IMMOBILE
 
                 garrin.isVisible = true
                 garrin.setPosition(324f, 456f)

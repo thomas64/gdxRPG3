@@ -75,7 +75,7 @@ internal class NpcEntitiesLoader(private val currentMap: GameMap) {
         val entityId = gameMapNpc.name
         val npcEntity = Entity(entityId, InputNpc(), PhysicsNpc(), GraphicsNpc(entityId))
         npcEntities.add(npcEntity)
-        addObserversForNpc(npcEntity)
+        addObserversForNpc(gameMapNpc, npcEntity)
         npcEntity.send(LoadEntityEvent(gameMapNpc.state,
                                        gameMapNpc.direction,
                                        gameMapNpc.position,
@@ -83,9 +83,10 @@ internal class NpcEntitiesLoader(private val currentMap: GameMap) {
                                        gameMapNpc.conversation))
     }
 
-    private fun addObserversForNpc(npcEntity: Entity) {
+    private fun addObserversForNpc(gameMapNpc: GameMapNpc, npcEntity: Entity) {
         brokerManager.actionObservers.addObserver(npcEntity)
         brokerManager.blockObservers.addObserver(npcEntity)
+        if (gameMapNpc.state == EntityState.NO_BUMP) return
         brokerManager.bumpObservers.addObserver(npcEntity)
     }
 

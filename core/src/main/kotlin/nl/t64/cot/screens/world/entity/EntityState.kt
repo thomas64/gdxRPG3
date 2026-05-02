@@ -11,6 +11,7 @@ enum class EntityState {
     PLAYING,
     FLYING,
     IMMOBILE,
+    NO_BUMP,
     ALIGNING,
     INVISIBLE,
     OPENED,

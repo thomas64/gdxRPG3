@@ -58,7 +58,9 @@ class InputNpc : InputComponent() {
             EntityState.FLYING -> {
                 direction = Direction.getRandom()
             }
-            EntityState.IMMOBILE, EntityState.IDLE_ANIMATING -> {
+            EntityState.IMMOBILE,
+            EntityState.NO_BUMP,
+            EntityState.IDLE_ANIMATING -> {
                 state = originalState
                 direction = originalDirection
             }
@@ -79,6 +81,7 @@ class InputNpc : InputComponent() {
             EntityState.WALKING -> EntityState.IDLE
             EntityState.FLYING, EntityState.PLAYING -> EntityState.IDLE_ANIMATING
             EntityState.IMMOBILE,
+            EntityState.NO_BUMP,
             EntityState.IDLE,
             EntityState.IDLE_ANIMATING,
             EntityState.INVISIBLE -> state

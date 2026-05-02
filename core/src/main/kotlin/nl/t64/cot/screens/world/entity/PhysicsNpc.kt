@@ -64,6 +64,7 @@ class PhysicsNpc : PhysicsComponent() {
     override fun debug(shapeRenderer: ShapeRenderer) {
         shapeRenderer.color = Color.PURPLE
         if (state != EntityState.IMMOBILE
+            && state != EntityState.NO_BUMP
             && state != EntityState.IDLE_ANIMATING
             && state != EntityState.INVISIBLE
         ) {
