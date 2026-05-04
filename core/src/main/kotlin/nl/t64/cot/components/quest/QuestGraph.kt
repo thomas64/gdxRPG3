@@ -20,6 +20,7 @@ data class QuestGraph(
     val shouldHideMessagesAfterFinished: Boolean = false,
     val isResettable: Boolean = true,
     val linkedWith: List<String> = emptyList(),
+    val followUpAccept: String = "",
     val tasks: Map<String, QuestTask> = emptyMap()
 ) {
     var currentState: QuestState = QuestState.UNKNOWN
@@ -327,6 +328,11 @@ data class QuestGraph(
         isHiddenInQuestLog = shouldHideInQuestLog
         if (!shouldHideInQuestLog && showTooltip) {
             showMessageTooltipQuestCompleted()
+        }
+
+        if (followUpAccept.isNotEmpty()) {
+            val followUpQuestToAccept: QuestGraph = gameData.quests.getQuestById(followUpAccept)
+            followUpQuestToAccept.accept()
         }
     }
 

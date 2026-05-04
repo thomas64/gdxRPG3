@@ -84,6 +84,7 @@ enum class AudioEvent(val filePath: String, val volume: Float = 1f) {
     SE_BLOCK("audio/se/unknown_block.wav", 0.4f),
     SE_DODGE("audio/se/unknown_dodge.wav", 0.4f),
 
+    SE_BELL("audio/se/mv_bell1.ogg", 0.2f),
     SE_REPAIR("audio/se/mv_fsm_chime2.ogg", 0.2f),
     SE_MAGIC_BANG("audio/se/mv_collapse2.ogg", 0.2f),
     SE_SCROLL("audio/se/mv_book2.ogg", 0.2f),

@@ -129,45 +129,76 @@
   "santino_prepare"           : {
     "name"   : "Father Santino",
     "phrases": {
-      "1": {"text": ["Blessings upon you my child."]},
-      "2": {"text": ["Welcome to this temple. I am Father Santino."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "3"}]},
-      "3": {"text": ["I'm busy preparing this morning's service.", "Feel free to join us at 10:00."]},
-      "4": {"text": ["But if you're here for counseling, please come see me after the service."], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["Blessings upon you my child."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "2"}]},
+      "2": {"text": ["Welcome to the Temple of Evdos, God of Knowledge. I am Father Santino."]},
+      "3": {"text": ["I'm busy preparing this morning's sermon. Feel free to join us at 10:00."]},
+      "4": {"text": ["But if you're here for a pastoral conversation, please come see me after the service at 11:00."], "choices": [{"command": "EXIT"}]}
     }
   },
   "santino_service_start"     : {
     "name"   : "Father Santino",
     "phrases": {
-      "1": {"text": ["Blessings upon you my child."]},
-      "2": {"text": ["Welcome to this temple. I am Father Santino."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "3"}]},
+      "1": {"text": ["Blessings upon you my child."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "2"}]},
+      "2": {"text": ["Welcome to the Temple of Evdos, God of Knowledge. I am Father Santino."]},
       "3": {"text": ["The service is about to start. Please join us if you'd like."]},
-      "4": {"text": ["But if you're here for counseling, please come see me after the service."], "choices": [{"command": "EXIT"}]}
+      "4": {"text": ["But if you're here for a pastoral conversation, please come see me after the service at 11:00."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "santino_first_service"     : {
+  "santino_service"           : {
     "name"   : "Father Santino",
     "phrases": {
-      "1": {"text": ["((Preaching and praying.))"], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "2"}]},
-      "2": {"text": ["((More preaching and praying.))"], "choices": [{"command": "EXIT"}]}
+      "1" : {"text": ["People of Lastdenn, let us begin in stillness and gratitude. We stand before Evdos, God of Knowledge, whose light reveals what is true and what only pretends to be true."]},
+      "2" : {"text": ["To honor Evdos is to open both mind and heart. We do not worship ignorance, and we do not fear honest questions. A question asked in humility is already a prayer."]},
+      "3" : {"text": ["Knowledge is not pride, and wisdom is not noise. The wise listen first, test their words, and speak only what can heal, guide, or protect. The patient soul does not fear waiting, because truth is not diminished by time."]},
+      "4" : {"text": ["Remember this well: truth does not tremble before scrutiny. Lies demand silence, but truth invites examination. That is why the path of Evdos is a path of learning, discipline, and endurance. And as Ylarus, God of Time, reminds all who listen: no truth worth knowing was ever rushed into being."]},
+      "5" : {"text": ["Ulrog is the God of Power, and his temptation is simple. He whispers, 'Rule first. Understand later.' He says, 'Take now. Reflect never.' But power without understanding becomes cruelty faster than steel leaves its sheath."]},
+      "6" : {"text": ["Evdos teaches another order: understand first, act with discipline, and govern your strength. Even a righteous act can become a foolish one when done in haste. Knowledge without mercy becomes cold, but power without knowledge becomes blind."]},
+      "7" : {"text": ["In your homes, teach your children to read, to reason, and to remember. In your work, choose precision over haste and honesty over applause. In your conflicts, let truth speak before anger does, and let patience stand guard at the door of your tongue."]},
+      "8" : {"text": ["If you must be strong, be strong in patience. If you must be feared, let it be feared that you cannot be bribed away from the truth. If you must lead, lead by understanding, and do not despise the slow wisdom that keeps a city from destroying itself."]},
+      "9" : {"text": ["May Evdos sharpen your mind, steady your tongue, and humble your spirit. May he also grant you patience enough to wait for the right moment before speaking or acting. Walk from this temple as seekers of knowledge, not servants of domination."]},
+      "10": {"text": ["Go in peace, children of Lastdenn. Choose the light of Evdos, God of Knowledge, and turn away from Ulrog, God of Power."], "choices": [{"command": "EXIT", "nextId": "11"}]},
+      "11": {"text": ["People of Lastdenn, let us begin in stillness and gratitude. We stand before Evdos, God of Knowledge, whose light reveals what is true and what only pretends to be true."]},
+      "12": {
+        "choices": [
+          {"text": "*Listen to his message.*", "nextId": "2"},
+          {"text": "*You've heard it all before. Stop listening.*", "command": "EXIT", "nextId": "11"}
+        ]
+      }
     }
   },
-  "santino_first_counseling"  : {
+  "santino_counseling"        : {
     "name"   : "Father Santino",
     "phrases": {
-      "1": {"text": ["((Question about Ulrog?!))"], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "2"}]},
-      "2": {"text": ["((Come see me tonight at 18:00. ACCEPT_NEW_QUEST oid))"], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["Blessings upon you my child."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "2"}]},
+      "2": {"text": ["Welcome to the Temple of Evdos, God of Knowledge. I am Father Santino."]},
+      "3": {"text": ["Are you in need of pastoral counseling?"]},
+      "4": {
+        "choices": [
+          {"text": "*Explain everything that's happened with Ardor, Ulrog and Ylarus.*", "nextId": "5"}
+        ]
+      },
+      "5": {"text": ["Ulrog you say..."]},
+      "6": {"text": ["I can help you with that, but not right now. I need some time to think and prepare for that kind of information."]},
+      "7": {"text": ["Come see me again tonight at 18:00, and I'll help you understand what you need to know about Ulrog."], "choices": [{"command": "EXIT", "nextId": "7"}]}
     }
   },
   "santino_busy_errand"       : {
-    "name"   : "Father Santino",
-    "phrases": {
-      "1": {"text": ["I'm on my way to the mayor. If you need my counseling, come see me at 16:00 after the afternoon service."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "2"}]},
-      "2": {"text": ["The afternoon service itself starts at 15:00. Come join us if you'd like."], "choices": [{"command": "EXIT"}]}
+    "name"     : "Father Santino",
+    "condition": ["_tc_1_q_quest_lastdenn_santino"], "startAt": "10",
+    "phrases"  : {
+      "1" : {"text": ["Blessings upon you my child."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "2"}]},
+      "2" : {"text": ["I am Father Santino, priest of the Temple of Evdos, God of Knowledge."]},
+      "3" : {"text": ["I'm on my way to the mayor. I need to talk to him about the daily gate closure."]},
+      "4" : {"text": ["If you need a pastoral conversation, I'm available every day after the service at 11:00."]},
+      "5" : {"text": ["The service itself is every day at 10:00. Come join us if you'd like."], "choices": [{"command": "EXIT"}]},
+      "10": {"text": ["I'm on my way to the mayor. I need to talk to him about the daily gate closure."]},
+      "11": {"text": ["If you want to know more about Ulrog, come see me tonight at 18:00."]},
+      "12": {"text": ["I need some time to think and prepare for that kind of information."], "choices": [{"command": "EXIT"}]}
     }
   },
   "garrin_vs_santino_1"       : {
     "phrases": {
-      "1": {"face": "santino", "name": "Father Santino", "text": ["Good afternoon, Garrin. How are you doing today?"]},
+      "1": {"face": "santino", "name": "Father Santino", "text": ["Blessings upon you, Garrin. How are you doing today?"]},
       "2": {"face": "santino", "name": "Father Santino", "text": ["I'm on my way to the mayor. I need to talk to him about the gate closure."]},
       "3": {"face": "ghost1", "name": "Garrin", "text": ["reveeenge on youuuuuuuuuuuuuuuu"]},
       "4": {"face": "santino", "name": "Father Santino", "text": ["Garrin? Are you okay?"], "choices": [{"command": "EXIT"}]}
@@ -201,7 +232,7 @@
       "8": {"face": "soldier12", "name": "Lastdenn Guard Elian", "text": ["Yes sir."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "garrin_shouts_nooo"           : {
+  "garrin_shouts_nooo"        : {
     "phrases": {
       "1": {"text": ["Noooooo!!!"], "choices": [{"command": "RELOAD_NPCS_1"}]}
     }

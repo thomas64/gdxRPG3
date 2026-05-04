@@ -213,7 +213,8 @@
       "2" : {
         "choices": [
           {"text": "*Ask about the city gate rules.*", "nextId": "10"},
-          {"text": "*Ask if anything interesting has happened lately.*", "nextId": "20"},
+          {"condition": ["i_!is_garrin_possessed"], "text": "*Ask if anything interesting has happened lately.*", "nextId": "20"},
+          {"condition": ["i_is_garrin_possessed"], "text": "*Ask if anything interesting has happened lately.*", "nextId": "40"},
           {"text": "*Ask how business is going.*", "nextId": "30"},
           {"text": "*Nod and take your leave.*", "command": "EXIT"}
         ]
@@ -226,10 +227,15 @@
       "22": {"text": ["I've stopped asking follow-up questions."], "choices": [{"nextId": "2"}]},
       "30": {"text": ["Steady enough. Travelers wait until 15:00, then half of them come here first."]},
       "31": {"text": ["Nervous people drink more. Tired guards drink fastest."]},
-      "32": {"text": ["I pour. They complain. It's a system."], "choices": [{"nextId": "2"}]}
+      "32": {"text": ["I pour. They complain. It's a system."], "choices": [{"nextId": "2"}]},
+      "40": {"text": ["A man killed the city's priest. Out in the street, in broad daylight."]},
+      "41": {"text": ["Guards took him in. Some say he was possessed by a ghost. Others say he just snapped."]},
+      "42": {"text": ["Father Santino was one of the few around here who pushed back against the mayor."]},
+      "43": {"text": ["Now he's gone. The man is in jail. And the city is a little darker without Father Santino."]},
+      "44": {"text": ["But I pour drinks. I don't take sides."], "choices": [{"nextId": "2"}]}
     }
   },
-  "lastdenn_bar_kealis"  : {
+  "lastdenn_bar_kealis"     : {
     "name"   : "Kaelis",
     "phrases": {
       "1" : {"text": ["You new here? I can tell. People from Lastdenn don't look around that much."]},
@@ -289,6 +295,81 @@
       "30": {"text": ["The prison? I know they've had some trouble keeping it orderly lately."]},
       "31": {"text": ["No details worth repeating in a crowded bar."]},
       "32": {"text": ["Let's just say the guards have had a long week."], "choices": [{"nextId": "2"}]}
+    }
+  },
+  "lastdenn_temple01"       : {
+    "phrases": {
+      "1": {"text": ["Father Santino is quite a good preacher, isn't he?"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "lastdenn_temple02"       : {
+    "phrases": {
+      "1": {"text": ["Can you please find a seat? We are in the middle of a sermon."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "lastdenn_temple03"       : {
+    "phrases": {
+      "1": {"text": ["What is he saying? I can't hear him from here."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "lastdenn_temple04"       : {
+    "phrases": {
+      "1": {"text": ["I don't understand what he's saying. It sounds like he's speaking in tongues."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "lastdenn_temple05"       : {
+    "phrases": {
+      "1": {"text": ["Hallelujah!"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "lastdenn_temple06"       : {
+    "phrases": {
+      "1": {"text": ["Praise Evdos!"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "lastdenn_temple07"       : {
+    "phrases": {
+      "1": {"text": ["When at sea, I always pray to Evdos for safe passage."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "lastdenn_temple08"       : {
+    "phrases": {
+      "1": {"text": ["I don't want to be here, but my captain said I have to attend the sermon."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "lastdenn_temple09"       : {
+    "phrases": {
+      "1": {"text": ["I don't know much about the gods, but my wife is a devout follower of Evdos. She says he's the best god to pray to for knowledge."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "lastdenn_temple10"       : {
+    "phrases": {
+      "1": {"text": ["My husband doesn't know much about the gods, but I am a devout follower of Evdos. He's the best god to pray to for knowledge."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "lastdenn_temple11"       : {
+    "phrases": {
+      "1": {"text": ["Do you also always fall asleep during sermons? It's quite embarrassing, I think."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "lastdenn_temple12"       : {
+    "phrases": {
+      "1": {"text": ["ZZZzzzz..."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "lastdenn_temple14"       : {
+    "phrases": {
+      "1": {"text": ["You can sit next to me if you want."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "lastdenn_temple15"       : {
+    "phrases": {
+      "1": {"text": ["All hail the mighty Evdos! The one true God! The source of all knowledge!"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "lastdenn_temple16"       : {
+    "phrases": {
+      "1": {"text": ["Everything looks so expensive. Religion is profitable business it seems. Perhaps I should become a priest..."], "choices": [{"command": "EXIT"}]}
     }
   }
 }

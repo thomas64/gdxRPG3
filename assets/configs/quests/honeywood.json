@@ -61,11 +61,12 @@
     }
   },
   "quest_to_lastdenn_then2"    : {
-    "title"     : "To Lastdenn then [M]",
-    "entityId"  : "ylarus",
-    "summary"   : "Adan inexplicably bursts into flames every time Grace is sacrificed by the wizard Ardor. Ylarus, the God of Time, his power is fading. He gave you the Crystal of Time and he sends you to the priest of Lastdenn for answers.",
-    "linkedWith": ["quest_honeywood_elder", "quest_luana_before_10"],
-    "tasks"     : {
+    "title"         : "To Lastdenn then [M]",
+    "entityId"      : "ylarus",
+    "summary"       : "Adan inexplicably bursts into flames every time Grace is sacrificed by the wizard Ardor. Ylarus, the God of Time, his power is fading. He gave you the Crystal of Time and he sends you to the priest of Lastdenn for answers.",
+    "linkedWith"    : ["quest_honeywood_elder", "quest_luana_before_10"],
+    "followUpAccept": "quest_lastdenn_santino",
+    "tasks"         : {
       "1" : {
         "taskPhrase": "Leave Honeywood Village through the south past the guards.",
         "type"      : "DISCOVER"
@@ -77,7 +78,7 @@
       "12": {
         "taskPhrase"     : "Find the priest of Lastdenn.",
         "type"           : "DELIVER_MESSAGE",
-        "conversationIds": ["santino_prepare", "santino_service_start", "santino_first_service", "santino_first_counseling", "santino_busy_errand"],
+        "conversationIds": ["santino_prepare", "santino_service_start", "santino_counseling", "santino_busy_errand"],
         "isResettable"   : false
       }
     }

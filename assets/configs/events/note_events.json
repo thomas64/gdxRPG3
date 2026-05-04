@@ -53,7 +53,7 @@
   },
   "note_lastdenn_temple"     : {
     "type"      : "messagebox",
-    "text"      : ["Lastdenn Temple", "", "Services daily at 10:00 and 15:00.", "Counseling daily at 11:00 and 16:00."],
+    "text"      : ["Lastdenn Temple", "", "Daily service at 10:00.", "Pastoral counseling after the service daily at 11:00."],
     "doesRepeat": true
   },
   "note_lastdenn_bar"        : {
