@@ -28,6 +28,7 @@
   "soldier12"     : {"source": "soldiers2", "col": 2, "row": 1},
   "soldier16"     : {"source": "soldiers2", "col": 2, "row": 2},
   "rich_man01"    : {"source": "richmen", "col": 1, "row": 1},
+  "rich_man03"    : {"source": "richmen", "col": 3, "row": 1},
   "rich_man07"    : {"source": "richmen", "col": 3, "row": 2},
   "captain01"     : {"source": "captains", "col": 1, "row": 1},
   "sailor01"      : {"source": "sailors", "col": 1, "row": 1}

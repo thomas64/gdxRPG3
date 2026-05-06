@@ -78,7 +78,7 @@
       "12": {
         "taskPhrase"     : "Find the priest of Lastdenn.",
         "type"           : "DELIVER_MESSAGE",
-        "conversationIds": ["santino_prepare", "santino_service_start", "santino_counseling", "santino_busy_errand"],
+        "conversationIds": ["santino_prepare_morning", "santino_service_start", "santino_counseling", "santino_busy_errand"],
         "isResettable"   : false
       }
     }

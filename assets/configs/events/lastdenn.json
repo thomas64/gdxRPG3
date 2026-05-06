@@ -12,11 +12,17 @@
     "entityId"      : "man03",
     "doesRepeat"    : true
   },
-  "event_lastdenn_shout"        : {
+  "event_lastdenn_shout"         : {
     "type"          : "conversation",
     "condition"     : ["_time_at_13:59", "is_garrin_possessed"],
     "conversationId": "garrin_shouts_nooo",
     "entityId"      : "man12",
+    "doesRepeat"    : true
+  },
+  "event_lastdenn_guard_mayor"   : {
+    "type"          : "conversation",
+    "conversationId": "default",
+    "entityId"      : "soldier16",
     "doesRepeat"    : true
   }
 }

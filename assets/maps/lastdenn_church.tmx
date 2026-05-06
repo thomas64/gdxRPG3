@@ -100,11 +100,11 @@
   <object id="77" x="144" y="648" width="48" height="60"/>
  </objectgroup>
  <objectgroup color="#5500ff" id="13" name="rest">
-  <object id="78" name="note_bookcase" x="48" y="528" width="48" height="30"/>
+  <object id="78" name="note_bookcase" x="48" y="528" width="42" height="36"/>
   <object id="79" name="note_holy_symbol" x="528" y="264" width="48" height="48"/>
   <object id="80" name="note_holy_bible" x="540" y="414" width="24" height="6"/>
   <object id="81" name="note_holy_water" x="864" y="600" width="144" height="144"/>
-  <object id="82" name="note_closet" x="120" y="528" width="120" height="48"/>
+  <object id="82" name="note_closet" x="102" y="528" width="138" height="36"/>
   <object id="84" name="note_plant" x="240" y="576" width="48" height="24"/>
  </objectgroup>
  <objectgroup color="#55ff7f" id="14" name="npc">

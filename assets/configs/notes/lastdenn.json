@@ -1,8 +1,37 @@
 {
-  "note_holy_water": {
+  "note_holy_water" : {
     "phrases": {
       "1": {"text": ["Is this holy water? It sure looks wet..."]},
       "2": {"text": ["Let's not defile it!"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "note_holy_symbol": {
+    "phrases": {
+      "1": {"text": ["It looks like a holy symbol for Evdos."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "note_holy_bible" : {
+    "phrases": {
+      "1" : {"text": ["That's probably not meant for heathen eyes."]},
+      "2" : {
+        "choices": [
+          {"condition": ["loremaster2"], "text": "[Loremaster 2] *Read the holy scripture.*", "nextId": "3"},
+          {"text": "*Leave it alone.*", "command": "EXIT"}
+        ]
+      },
+      "3" : {"text": ["\"UNTO THE PEOPLE OF LASTDENN\""]},
+      "4" : {"text": ["\"Evdos, Keeper of Knowledge, speaks unto you this day. Bend not only the knee, but also the mind, for reverence without understanding is but an empty gesture.\""]},
+      "5" : {"text": ["\"A city built on strength alone shall fall like a tower of stone in water. But a city built on knowledge, mercy, memory, and honest trade shall stand against tempests seen and unseen.\""]},
+      "6" : {"text": ["\"Honor also Ylarus, God of Time, who measures the hour, appoints the season, and reminds all mortal hearts that nothing ripens before its proper moment.\""]},
+      "7" : {"text": ["\"For knowledge without patience becomes arrogance, and patience without knowledge becomes slumber. Evdos gives the light to understand, and Ylarus gives the hour in which understanding may bear fruit.\""]},
+      "8" : {"text": ["\"Therefore despise not the slow lesson, the late harvest, or the hard-earned truth. What is learned in due time stands longer than what is seized in haste.\""]},
+      "9" : {"text": ["\"I warn you gravely: Ulrog, God of Power, walks another road. His servants whisper in the ears of those who thirst for dominion, telling them that might is wisdom and conquest is proof.\""]},
+      "10": {"text": ["\"They promise swift victory and glory beyond measure. I tell you truly: they deliver only swift ruin, broken households, and ashes that choke the throat.\""]},
+      "11": {"text": ["\"The possessed know no peace in their possession. The dominated know no home, for home is built on love, memory, and trust, not terror.\""]},
+      "12": {"text": ["\"This is why I command you: Guard your children's minds as you guard their bodies. Teach them to read, to reason, to remember, and to question with humility, that they may not mistake a loud voice for a true one.\""]},
+      "13": {"text": ["\"For ignorance is the gate through which Ulrog enters. Wisdom is the lamp through which Evdos reveals, and patience is the watch through which Ylarus preserves. These gifts do not strive against one another. They stand together against domination.\""]},
+      "14": {"text": ["\"When fear takes root in your streets, when neighbor turns against neighbor, when brother turns against brother, do not say, 'We are abandoned.' Say instead, 'We are being weighed by truth, and our hour has come to choose well.'\""]},
+      "15": {"text": ["\"In that dark hour, choose knowledge over ignorance, choose patience over panic, and choose truth over power. For Evdos does not conquer; he enlightens. Ylarus does not flatter; he endures. Ulrog does not build; he consumes.\""], "choices": [{"command": "EXIT"}]}
     }
   }
 }

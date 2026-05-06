@@ -154,8 +154,8 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     private fun fillDialogForNote() {
         label.setAlignment(Align.center)
         val textTable = Table()
-        textTable.pad(PAD * 2f, PAD * 3f, PAD, PAD * 2f)
-        textTable.add<Actor>(label).width(DIALOG_WIDTH - PAD * 5f).row()
+        textTable.pad(PAD * 2f, PAD * 3f, PAD, PAD * 3f)
+        textTable.add<Actor>(label).width(DIALOG_WIDTH - PAD * 6f).row()
         textTable.add<Actor>(scrollPane).left().padLeft(PAD)
         rowWithScrollPane = textTable.getCell(scrollPane)
 

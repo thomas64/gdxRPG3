@@ -126,7 +126,7 @@
       "18": {"text": ["Anyway, thank you for coming to see me. Say hi to my son for me."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "santino_prepare"           : {
+  "santino_prepare_morning"   : {
     "name"   : "Father Santino",
     "phrases": {
       "1": {"text": ["Blessings upon you my child."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "2"}]},
@@ -235,6 +235,55 @@
   "garrin_shouts_nooo"        : {
     "phrases": {
       "1": {"text": ["Noooooo!!!"], "choices": [{"command": "RELOAD_NPCS_1"}]}
+    }
+  },
+  "santino_to_reignald"       : {
+    "name"   : "Father Santino",
+    "phrases": {
+      "1": {"text": ["((Placeholder Reignald))"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "santino_to_mayor_guard"    : {
+    "name"   : "Father Santino",
+    "phrases": {
+      "1": {"text": ["((Placeholder mayor guard))"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "santino_back_from_mayor"   : {
+    "name"   : "Father Santino",
+    "phrases": {
+      "1": {"text": ["Blessings upon you my child."]},
+      "2": {"text": ["I just got back from talking to the mayor. I told him that anyone on a religious pilgrimage should be allowed to pass freely through the gate."]},
+      "3": {
+        "text": ["He said he would think about it, but I don't have high hopes."], "choices": [
+          {"condition": ["i_tc_1_q_quest_lastdenn_santino"], "text": "->", "nextId": "5"},
+          {"condition": ["i_tn_1_q_quest_lastdenn_santino"], "text": "->", "command": "EXIT"}
+        ]
+      },
+      "5": {"text": ["Anyway, if you want to know more about Ulrog, come see me tonight at 18:00."]},
+      "6": {"text": ["I need some time to think and prepare for that kind of information."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "santino_preparing_answer"  : {
+    "name"   : "Father Santino",
+    "phrases": {
+      "1": {"text": ["Blessings upon you my child."]},
+      "2": {"text": ["I'm busy preparing the information you need about Ulrog. Come see me again tonight at 18:00."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "santino_answer_ulrog"      : {
+    "name"   : "Father Santino",
+    "phrases": {
+      "1": {"text": ["Blessings upon you my child."]},
+      "2": {"text": ["YOU FINISHED THE GAME! CONGRATS!"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "santino_prepare_evening"   : {
+    "name"   : "Father Santino",
+    "phrases": {
+      "1": {"text": ["Blessings upon you my child."]},
+      "2": {"text": ["I'm busy preparing tomorrow's sermon. Feel free to join us at 10:00."]},
+      "3": {"text": ["But if you're here for a pastoral conversation, please come see me after the service at 11:00."], "choices": [{"command": "EXIT"}]}
     }
   }
 }
