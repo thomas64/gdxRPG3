@@ -6,6 +6,7 @@ private const val SORTING_SPLIT = 70000 // atm, item.json starts with this numbe
 open class InventoryContainer(numberOfSlots: Int = 0) {
 
     private val inventory: MutableList<InventoryItem?> = MutableList(numberOfSlots) { null }
+    private var isSortAscending = true
 
     fun getAllContent(): MutableMap<String, Int> {
         return inventory
@@ -103,7 +104,12 @@ open class InventoryContainer(numberOfSlots: Int = 0) {
     fun sort() {
         InventoryStacksMerger(this).searchAll()
         val comparator: Comparator<InventoryItem?> = compareBy({ it.getSort() }, { it.getInventoryGroup() })
-        inventory.sortWith(comparator)
+        if (isSortAscending) {
+            inventory.sortWith(comparator)
+        } else {
+            inventory.sortWith(comparator.reversed())
+        }
+        isSortAscending = !isSortAscending
     }
 
     fun contains(items: Map<String, Int>): Boolean {
