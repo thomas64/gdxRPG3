@@ -101,6 +101,10 @@ class Entity(
         return physicsComponent is PhysicsNpc
     }
 
+    fun isInActionRect(checkRect: Rectangle): Boolean {
+        return checkRect.overlaps(physicsComponent.boundingBox)
+    }
+
     fun getConversationId(): String {
         return when (physicsComponent) {
             is PhysicsNpc -> physicsComponent.conversationId
