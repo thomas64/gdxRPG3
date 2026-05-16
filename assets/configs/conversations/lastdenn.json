@@ -297,6 +297,21 @@
       "32": {"text": ["Let's just say the guards have had a long week."], "choices": [{"nextId": "2"}]}
     }
   },
+  "lastdenn_workload"       : {
+    "name"   : "Clerk",
+    "phrases": {
+      "1": {"text": ["So much to do. I can't handle the workload."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "lastdenn_library"        : {
+    "name"   : "Clerk",
+    "phrases": {
+      "1": {"text": ["Oh! Sorry, I didn't see you there. These books are taller than my future."]},
+      "2": {"text": ["I organize tax records, council notes, gate permits, and whatever this is. It might be soup stains on ancient law."]},
+      "3": {"text": ["The mayor says: 'Knowledge is power.' I say: 'Knowledge is heavy,' and this shelf agrees with me."]},
+      "4": {"text": ["Anyway, I'll be right here, bravely losing a duel against alphabetical order."], "choices": [{"command": "EXIT"}]}
+    }
+  },
   "lastdenn_temple01"       : {
     "phrases": {
       "1": {"text": ["Father Santino is quite a good preacher, isn't he?"], "choices": [{"command": "EXIT"}]}
@@ -370,6 +385,50 @@
   "lastdenn_temple16"       : {
     "phrases": {
       "1": {"text": ["Everything looks so expensive. Religion is profitable business it seems. Perhaps I should become a priest..."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "lastdenn_crying_fan1"    : {
+    "phrases": {
+      "1": {"text": ["I just... I can't believe he's gone. Father Santino was such a good man, and he was always so kind to me. I don't know how I'm going to go on without him."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "lastdenn_crying_fan2"    : {
+    "phrases": {
+      "1": {"text": ["He was there... We were there... This morning. And it was beautiful. I can't believe that was the last time we'll ever hear him preach..."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "lastdenn_jail_dog"       : {
+    "name"   : "Guard dog",
+    "phrases": {
+      "1": {"text": ["Grrrr!"]},
+      "2": {
+        "choices": [
+          {"condition": ["i_druid2"], "text": "[Druid 2] *Listen to the guard dog.*", "nextId": "3"},
+          {"condition": ["ii_druid2"], "text": "[Druid 2] *Listen to the guard dog.*", "nextId": "9999"},
+          {"text": "*Back away slowly and take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "3": {"text": ["*Whimper...* I'm... I'm not actually a very good guard dog, am I?"]},
+      "4": {"text": ["I try so hard to be fierce and intimidating, but honestly? I just want everyone to be my friend."]},
+      "5": {"text": ["Am I a good boi? Tell me I'm a good boi. I know I'm not doing a very good job at this whole 'scary prison guard' thing, but I love humans so much..."]},
+      "6": {"text": ["*Happy tail wag despite the ferocious disguise*"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "lastdenn_child1"         : {
+    "name"   : "Hyon",
+    "phrases": {
+      "1": {"text": ["Hi mister! We're playing Gate Guard and Hero."]},
+      "2": {"text": ["I always make Baruw be the gate guard, because he sounds very serious when he says: 'No entry before 15:00!'"]},
+      "3": {"text": ["Do grown-ups also make up rules first and reasons later?"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "lastdenn_child2"         : {
+    "name"   : "Baruw",
+    "phrases": {
+      "1": {"text": ["Hi mister. I am the guard. Officially. Hyon says so."]},
+      "2": {"text": ["My duty is to protect this grass from dangerous criminals, chickens, and suspicious butterflies."]},
+      "3": {"text": ["If you need to pass, the fee is one heroic story..."]},
+      "4": {"text": ["... or a cookie."], "choices": [{"command": "EXIT"}]}
     }
   }
 }

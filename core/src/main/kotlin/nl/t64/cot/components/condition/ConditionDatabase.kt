@@ -32,6 +32,7 @@ object ConditionDatabase {
         "wizard1"                       to { hasEnoughOfSkill(SkillItemId.WIZARD,       1) },
         "mozes_wizard1"                 to { hasMozesEnoughOfSkill(SkillItemId.WIZARD,  1) },
         "druid1"                        to { hasEnoughOfSkill(SkillItemId.DRUID,        1) },
+        "druid2"                        to { hasEnoughOfSkill(SkillItemId.DRUID,        2) },
         "loremaster2"                   to { hasEnoughOfSkill(SkillItemId.LOREMASTER,   2) },
 
         "xp_>=_15"                      to { isXpGreaterThan(15) },

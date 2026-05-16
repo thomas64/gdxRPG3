@@ -2,7 +2,7 @@
   "reignald_join"   : {
     "name"   : "Reignald",
     "phrases": {
-      "1"   : {"text": ["Join?"]},
+      "1"   : {"text": ["I'm Reignald, commander of the guards. My role in the story is not fully developed yet."], "choices": [{"command": "EXIT"}]},
       "2"   : {
         "choices": [
           {"text": "*Yes.* [BLUE](Join party)", "nextId": "3"},

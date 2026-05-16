@@ -78,5 +78,10 @@
     "phrases": {
       "1": {"text": ["It looks dirty. What did you put in it?"], "choices": [{"command": "EXIT"}]}
     }
+  },
+  "note_forms"    : {
+    "phrases": {
+      "1": {"text": ["These forms look official. Should they lie here in the open like this?"], "choices": [{"command": "EXIT"}]}
+    }
   }
 }

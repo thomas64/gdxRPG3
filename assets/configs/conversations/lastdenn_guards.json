@@ -1,5 +1,5 @@
 {
-  "guarding_till_1500"         : {
+  "guarding_till_1500"               : {
     "name"   : "Lastdenn Guard",
     "comment": "WARNING: phraseId 100 is used in 2 conv conditions.",
     "phrases": {
@@ -31,7 +31,7 @@
       "100": {"text": ["I allowed you to pass. Please do not let word of this get out."], "choices": [{"command": "EXIT", "nextId": "100"}]}
     }
   },
-  "walking_to_warp_crystal"    : {
+  "walking_to_warp_crystal"          : {
     "name"     : "Lastdenn Guard",
     "condition": ["_conv_guarding_till_1500_==_100"], "startAt": "10",
     "phrases"  : {
@@ -41,7 +41,7 @@
       "10": {"text": ["I allowed you to pass. Anyway, it's after 15:00 now, so the city is open to everyone. But still, do not let word of my earlier exception get out."], "choices": [{"command": "EXIT", "nextId": "10"}]}
     }
   },
-  "talking_to_other_guard"     : {
+  "talking_to_other_guard"           : {
     "name"     : "Lastdenn Guard",
     "condition": ["is_garrin_possessed"], "startAt": "10",
     "phrases"  : {
@@ -58,24 +58,43 @@
       "16": {"face": "soldier12", "text": ["[GRAY](A ghost...? Why would they make up such a story...?)"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "standing_guard_near_crystal": {
+  "standing_guard_near_crystal"      : {
     "name"   : "Lastdenn Guard",
     "phrases": {
       "1": {"text": ["This is the city of Lastdenn."]},
       "2": {"text": ["Don't cause any disturbances."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "guarding_house_garrin"      : {
+  "guarding_house_garrin"            : {
     "name"   : "Lastdenn Guard",
     "phrases": {
       "1": {"text": ["I'm sorry sir, but this house is off limits."]},
       "2": {"text": ["We are investigating a crime that occurred here."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "guard_escorting_garrin"     : {
+  "guard_escorting_garrin"           : {
     "name"   : "Lastdenn Guard",
     "phrases": {
       "1": {"text": ["Let us through. Nothing to see here. Move along."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "lastdenn_guard_mayor"             : {
+    "name"   : "Lastdenn Guard",
+    "phrases": {
+      "1": {"text": ["I'm sorry sir, but the mayor does not wish to see you right now."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "lastdenn_mayor_guard_not_upstairs": {
+    "name"   : "Lastdenn Guard",
+    "phrases": {
+      "1": {"text": ["I'm sorry sir, upstairs is off limits."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "lastdenn_pier_guards"             : {
+    "name"   : "Lastdenn Guard",
+    "phrases": {
+      "1": {"text": ["There are no boats coming in or out of this pier today."]},
+      "2": {"text": ["There is nothing to see here for you."], "choices": [{"command": "EXIT"}]}
     }
   }
 }

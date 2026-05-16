@@ -21,8 +21,14 @@
   },
   "event_lastdenn_guard_mayor"   : {
     "type"          : "conversation",
-    "conversationId": "default",
+    "conversationId": "lastdenn_guard_mayor",
     "entityId"      : "soldier16",
+    "doesRepeat"    : true
+  },
+  "event_lastdenn_pier_guards"   : {
+    "type"          : "conversation",
+    "conversationId": "lastdenn_pier_guards",
+    "entityId"      : "soldier12",
     "doesRepeat"    : true
   }
 }

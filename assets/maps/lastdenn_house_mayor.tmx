@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.12.1" orientation="orthogonal" renderorder="right-down" width="50" height="46" tilewidth="24" tileheight="24" infinite="0" nextlayerid="22" nextobjectid="73">
+<map version="1.11" tiledversion="1.12.1" orientation="orthogonal" renderorder="right-down" width="50" height="46" tilewidth="24" tileheight="24" infinite="0" nextlayerid="22" nextobjectid="80">
  <properties>
   <property name="bgm" value="bgm_house"/>
   <property name="bgs" value="bgs_fireplace"/>
@@ -112,7 +112,11 @@
   <object id="68" x="696" y="480" width="24" height="72"/>
   <object id="69" x="372" y="162" width="78" height="6"/>
  </objectgroup>
- <objectgroup color="#5500ff" id="13" name="rest"/>
+ <objectgroup color="#5500ff" id="13" name="rest">
+  <object id="73" name="note_bookcase" x="48" y="132" width="288" height="36"/>
+  <object id="75" name="note_forms" x="96" y="822" width="96" height="42"/>
+  <object id="76" name="note_forms" x="240" y="822" width="96" height="42"/>
+ </objectgroup>
  <objectgroup color="#aa55ff" id="21" name="hero">
   <object id="5" name="reignald" x="528" y="456" width="48" height="24">
    <properties>
@@ -124,16 +128,36 @@
  <objectgroup color="#55ff7f" id="14" name="npc">
   <object id="66" name="soldier16" x="384" y="168" width="48" height="24">
    <properties>
+    <property name="conversation" value="lastdenn_mayor_guard_not_upstairs"/>
     <property name="direction" value="south"/>
    </properties>
   </object>
   <object id="67" name="soldier16" x="672" y="480" width="48" height="24">
    <properties>
+    <property name="conversation" value="lastdenn_guard_mayor"/>
     <property name="direction" value="south"/>
    </properties>
   </object>
   <object id="70" name="rich_man03" x="912" y="240" width="48" height="24">
    <properties>
+    <property name="direction" value="north"/>
+   </properties>
+  </object>
+  <object id="77" name="youngman06" type="p" x="192" y="840" width="48" height="24">
+   <properties>
+    <property name="conversation" value="lastdenn_workload"/>
+    <property name="wanderBoxSize" type="float" value="120"/>
+   </properties>
+  </object>
+  <object id="78" name="youngman07" type="w" x="792" y="912" width="48" height="24">
+   <properties>
+    <property name="conversation" value="lastdenn_workload"/>
+    <property name="wanderBoxSize" type="float" value="120"/>
+   </properties>
+  </object>
+  <object id="79" name="youngman05" type="nb" x="168" y="162" width="48" height="24">
+   <properties>
+    <property name="conversation" value="lastdenn_library"/>
     <property name="direction" value="north"/>
    </properties>
   </object>
