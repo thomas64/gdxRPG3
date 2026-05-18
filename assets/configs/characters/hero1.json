@@ -69,7 +69,7 @@
     "gender"   : "his",
     "stats"    : {
       "intelligence": 10,
-      "dexterity"   : 12,
+      "dexterity"   : 7,
       "strength"    : 20,
       "speed"       : 14,
       "willpower"   : 8,
@@ -78,14 +78,17 @@
     },
     "skills"   : {
       "alchemist": -1,
+      "barbarian": 1,
+      "diplomat" : -1,
       "druid"    : -1,
+      "jester"   : -1,
       "stealth"  : 1,
       "thief"    : -1,
       "warrior"  : 4,
       "wizard"   : -1,
       "sword"    : 4,
+      "spear"    : 2,
       "dagger"   : -1,
-      "throw"    : 2,
       "bow"      : -1,
       "staff"    : -1,
       "shield"   : 2

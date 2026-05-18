@@ -240,13 +240,30 @@
   "santino_to_reignald"       : {
     "name"   : "Father Santino",
     "phrases": {
-      "1": {"text": ["((Placeholder Reignald))"], "choices": [{"command": "EXIT"}]}
+      "1" : {"face": "santino", "name": "Father Santino", "text": ["Blessings upon you, Commander Reignald. I have an appointment with the mayor."]},
+      "2" : {"face": "reignald", "name": "Reignald", "text": ["Welcome, Father Santino. It is an honor to have you here. The mayor is expecting you."]},
+      "3" : {"face": "santino", "name": "Father Santino", "text": ["Thank you. I hope to have a productive conversation with him."]},
+      "4" : {"face": "santino", "name": "Father Santino", "text": ["But before I go in, may I ask you something? I can see something is on your mind. Tell me this: are duty and fear the same thing?"]},
+      "5" : {"face": "reignald", "name": "Reignald", "text": ["No. But duty is the reason the city still has order."]},
+      "6" : {"face": "santino", "name": "Father Santino", "text": ["Order is good until it hardens into habit. You are Commander Reignald, not meant to stand in one place forever."]},
+      "7" : {"face": "reignald", "name": "Reignald", "text": ["If I choose poorly and something fails, the blame is mine."]},
+      "8" : {"face": "santino", "name": "Father Santino", "text": ["Then choose wisely. You know this city, its people, and its needs. That is exactly why your judgement matters more than a rigid routine."]},
+      "9" : {"face": "reignald", "name": "Reignald", "text": ["I have thought about leaving my post more than once. I simply do not know if I have the right to do it."]},
+      "10": {"face": "santino", "name": "Father Santino", "text": ["You have the right to use your judgement. A commander who never questions his own position becomes a prisoner of it."]},
+      "11": {"face": "reignald", "name": "Reignald", "text": [". . ."]},
+      "12": {"face": "santino", "name": "Father Santino", "text": ["The mayor's house is not the whole of Lastdenn. If trouble ever comes from beyond these walls, it will not be enough to guard the familiar and ignore the unfamiliar."]},
+      "13": {"face": "reignald", "name": "Reignald", "text": ["You are saying I have held on too tightly to the same duty."]},
+      "14": {"face": "santino", "name": "Father Santino", "text": ["I am saying you have carried it long enough to know the difference between service and fear. If you need permission to step back and think, you have it from me."]},
+      "15": {"face": "reignald", "name": "Reignald", "text": [". . ."]},
+      "16": {"face": "reignald", "name": "Reignald", "text": ["Very well. I will think on it. Perhaps I have been measuring my duty too narrowly."]},
+      "17": {"face": "santino", "name": "Father Santino", "text": ["That is all I asked. May Evdos give you clarity, Commander."], "choices": [{"command": "EXIT"}]}
     }
   },
   "santino_to_mayor_guard"    : {
-    "name"   : "Father Santino",
     "phrases": {
-      "1": {"text": ["((Placeholder mayor guard))"], "choices": [{"command": "EXIT"}]}
+      "1": {"face": "santino", "name": "Father Santino", "text": ["Blessings upon you, good guard. I have an appointment with the mayor."]},
+      "2": {"face": "soldier16", "name": "Lastdenn Guard", "text": ["Welcome, Father Santino. It is an honor to have you here. The mayor is expecting you."]},
+      "3": {"face": "santino", "name": "Father Santino", "text": ["Thank you. I hope to have a productive conversation with him."], "choices": [{"command": "EXIT"}]}
     }
   },
   "santino_back_from_mayor"   : {

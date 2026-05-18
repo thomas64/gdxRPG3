@@ -2,29 +2,84 @@
   "reignald_join"   : {
     "name"   : "Reignald",
     "phrases": {
-      "1"   : {"text": ["I'm Reignald, commander of the guards. My role in the story is not fully developed yet."], "choices": [{"command": "EXIT"}]},
-      "2"   : {
-        "choices": [
-          {"text": "*Yes.* [BLUE](Join party)", "nextId": "3"},
-          {"text": "*No.*", "nextId": "4"}
+      "1"   : {
+        "text": ["I'm Reignald, Commander of the Lastdenn guards."], "choices": [
+          {"condition": ["i_time_before_14:05"], "text": "->", "nextId": "10"},
+          {"condition": ["i_time_between_14:05_and_14:15"], "text": "->", "nextId": "30"},
+          {"condition": ["i_time_between_14:15_and_14:20"], "text": "->", "nextId": "40"},
+          {"condition": ["i_time_after_14:20"], "text": "->", "nextId": "50"}
         ]
       },
-      "3"   : {"text": ["Excellent!"], "choices": [{"command": "HERO_JOIN"}]},
-      "4"   : {"text": ["Squire! Come back here!"], "choices": [{"command": "EXIT"}]},
-      "9000": {"text": ["I cannot join you if there's no room."], "choices": [{"command": "EXIT"}]}
+      "10"  : {"text": ["Three years. Two months. Every single day in command. No excuses. No drift!"]},
+      "11"  : {"text": ["At dawn I inspect the watch. At noon I correct mistakes. At dusk I correct them again."]},
+      "12"  : {"text": ["The mayor gives orders. The guards carry them out. I hold the line between command and panic."]},
+      "13"  : {"text": ["When recruits get sloppy, people get hurt. So I drill them until sloppiness leaves their bones."]},
+      "14"  : {"text": ["I have watched this city change shape a hundred times. Guards rotate. Citizens move. I stay."]},
+      "15"  : {"text": ["Do I think about leaving? Yes. More than I like to admit."]},
+      "16"  : {"text": ["Then I picture the gap. A weak captain. A late order. A broken response."]},
+      "17"  : {"text": ["That gap becomes chaos in one bad night. So I stay where I am useful."]},
+      "18"  : {
+        "choices": [
+          {"text": "*Ask Commander Reignald to join your party.* [BLUE](Join party)", "nextId": "19"},
+          {"text": "*That's some strong loyalty. Take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "19"  : {"text": ["Negative!"]},
+      "20"  : {"text": ["I cannot walk away from command. I cannot abandon this duty!"]},
+      "21"  : {"text": ["Lastdenn does not need one more sword. It needs its commander!"]},
+      "22"  : {"text": ["I will not join you. I will not leave this city. I will not be pulled off assignment!"]},
+      "23"  : {"text": ["Only the priest himself could convince me otherwise!"], "choices": [{"command": "EXIT"}]},
+      "30"  : {"text": ["Do not interrupt me! I am in conversation with Father Santino!"], "choices": [{"command": "EXIT"}]},
+      "40"  : {"text": ["I just had a hard conversation with Father Santino. I need to think for a moment."]},
+      "41"  : {"text": ["Come back in a few minutes. I will be here."], "choices": [{"command": "EXIT"}]},
+      "50"  : {"text": ["Three years. Two months. Every single day in command. No excuses. No drift!"]},
+      "51"  : {"text": ["But Father Santino challenged my thinking. A commander who never moves becomes a wall."]},
+      "52"  : {"text": ["And walls get studied, mapped, and climbed."]},
+      "53"  : {"text": ["I still believe in duty. I just stopped confusing duty with fear of change."]},
+      "54"  : {"text": ["Someone else can hold the day-to-day command here. They can learn."]},
+      "55"  : {"text": ["If Lastdenn is going to stay standing, I need to read the roads beyond these walls."]},
+      "56"  : {"text": ["Threats do not announce themselves. They gather out there while we stare in here."]},
+      "57"  : {"text": ["So this is not desertion. This is a wider patrol with sharper purpose."]},
+      "58"  : {"text": ["I remain a commander. The field just got larger."]},
+      "59"  : {
+        "choices": [
+          {"text": "*Ask Commander Reignald to join your party.* [BLUE](Join party)", "nextId": "60"},
+          {"text": "*Not now. Take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "60"  : {"text": ["Accepted!"]},
+      "61"  : {"text": ["I will brief the duty captain and hand off the roster."]},
+      "62"  : {"text": ["After that, I move with you."]},
+      "63"  : {"text": ["If we march together, you keep pace, hold formation, and listen the first time!"]},
+      "64"  : {"text": ["Do that, and I will make you harder to kill!"]},
+      "65"  : {"text": ["Keep your gear ready! Keep your head clear! I will do the same!"]},
+      "66"  : {"text": ["And if the road gets ugly, good! I know how to handle ugly."], "choices": [{"command": "HERO_JOIN"}]},
+      "9000": {"text": ["Your party is full. Make room, then come back. I do not wait forever!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "dismiss_reignald": {
     "name"   : "Reignald",
     "phrases": {
-      "1": {"text": ["Dismiss?"]},
-      "2": {
+      "1" : {"text": ["You are relieving me from active formation?"]},
+      "2" : {"text": ["That is a command decision. Make it clean, not sloppy!"]},
+      "3" : {
         "choices": [
-          {"text": "*Yes.* [BLUE](Dismiss Reignald)", "nextId": "3"},
-          {"text": "*No.*", "command": "EXIT"}
+          {"text": "*Confirm dismissal orders.* [BLUE](Dismiss Reignald)", "nextId": "10"},
+          {"text": "*Ask if he takes this personally.*", "nextId": "20"},
+          {"text": "*Stand down. Keep Reignald in the party.*", "command": "EXIT"}
         ]
       },
-      "3": {"text": ["Okay."], "choices": [{"command": "HERO_DISMISS"}]}
+      "10": {"text": ["Understood! I will leave and whip some peasants into shape."]},
+      "11": {"text": ["You did not fail me. You restructured the unit. There is a difference."]},
+      "12": {"text": ["If you call again, be ready to move when I accept!"], "choices": [{"command": "HERO_DISMISS"}]},
+      "20": {"text": ["Personally? I am a commander, not a poet."]},
+      "21": {"text": ["I measure results: fewer mistakes, faster response, everyone breathing at sunset."]},
+      "22": {
+        "choices": [
+          {"text": "*Proceed with dismissal anyway.* [BLUE](Dismiss Reignald)", "nextId": "10"},
+          {"text": "*Keep him. You still need that discipline.*", "command": "EXIT"}
+        ]
+      }
     }
   },
   "bury_reignald"   : {
@@ -42,16 +97,32 @@
   "reignald_rejoin" : {
     "name"   : "Reignald",
     "phrases": {
-      "1"   : {"text": ["Rejoin?"]},
-      "2"   : {
+      "1"   : {"text": ["Report! Is this a social visit, or do you finally need a commander again?"]},
+      "2"   : {"text": ["I have been training recruits who think \"ready\" means \"eventually\". My patience is wounded!"]},
+      "3"   : {
         "choices": [
-          {"text": "*Yes.* [BLUE](Join party)", "nextId": "3"},
-          {"text": "*No.*", "nextId": "4"}
+          {"text": "*Request that Reignald rejoins the party.* [BLUE](Join party)", "nextId": "10"},
+          {"text": "*Ask what he has been doing since dismissal.*", "nextId": "30"},
+          {"text": "*Say you are just checking in.*", "nextId": "20"}
         ]
       },
-      "3"   : {"text": ["Good."], "choices": [{"command": "HERO_JOIN"}]},
-      "4"   : {"text": ["Fine."], "choices": [{"command": "EXIT"}]},
-      "9000": {"text": ["I cannot join you if there's no room."], "choices": [{"command": "EXIT"}]}
+      "10"  : {"text": ["Good! You made the correct tactical correction."]},
+      "11"  : {"text": ["I rejoin on three conditions: pace, discipline, and immediate response to orders."]},
+      "12"  : {"text": ["Break those, and I will retrain you in the rain until your boots cry!"]},
+      "13"  : {"text": ["Now tighten formation. We move!"], "choices": [{"command": "HERO_JOIN"}]},
+      "20"  : {"text": ["Checking in is not a mission. Missions have objectives."]},
+      "21"  : {"text": ["Return when you have one. Bring maps, not small talk!"], "choices": [{"command": "EXIT"}]},
+      "30"  : {"text": ["Dawn drills. Midday inspections. Night patrol audits. Repeat."]},
+      "31"  : {"text": ["Two recruits tried to skip shield stance. They now dream in proper posture."]},
+      "32"  : {"text": ["Why? Because laziness in training becomes funerals in battle."]},
+      "33"  : {
+        "choices": [
+          {"text": "*That is exactly why you need him back.* [BLUE](Join party)", "nextId": "10"},
+          {"text": "*Tell him to carry on.*", "nextId": "20"}
+        ]
+      },
+      "9000": {"text": ["Your unit is full. I cannot join a formation with no slot on the line. Make room, then report back!"], "choices": [{"command": "EXIT"}]}
     }
   }
 }
+

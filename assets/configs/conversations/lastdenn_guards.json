@@ -79,9 +79,11 @@
     }
   },
   "lastdenn_guard_mayor"             : {
-    "name"   : "Lastdenn Guard",
-    "phrases": {
-      "1": {"text": ["I'm sorry sir, but the mayor does not wish to see you right now."], "choices": [{"command": "EXIT"}]}
+    "name"     : "Lastdenn Guard",
+    "condition": ["_time_between_14:08_and_14:18", "!is_garrin_possessed", "is_reignald_recruited"], "startAt": "5",
+    "phrases"  : {
+      "1": {"text": ["I'm sorry sir, but the mayor does not wish to see you right now."], "choices": [{"command": "EXIT"}]},
+      "5": {"text": ["Hang on a minute! I'm talking to Father Santino right now. And the mayor is not expecting you at all."], "choices": [{"command": "EXIT"}]}
     }
   },
   "lastdenn_mayor_guard_not_upstairs": {
