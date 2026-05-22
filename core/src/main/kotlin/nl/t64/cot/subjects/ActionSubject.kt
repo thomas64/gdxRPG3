@@ -29,7 +29,7 @@ class ActionSubject {
         val allObservers = ArrayList(observers)
         val npcObserver: Entity? = allObservers
             .filterIsInstance<Entity>()
-            .filter { it.isNpc() }
+            .filter { it.isNpc() || it.isScheduledNpc() }
             .firstOrNull { it.isInActionRect(checkRect) }
         val nonEntityAndNonNoteObservers: List<ActionObserver> = allObservers
             .filterNot { it is Entity }

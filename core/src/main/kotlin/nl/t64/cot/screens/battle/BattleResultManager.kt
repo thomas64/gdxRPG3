@@ -72,6 +72,7 @@ class BattleResultManager(
     private fun createDeathMessage(): String {
         val currentCycle = gameData.numberOfCycles
         val isFacingArdorOrOrcGenerals = enemies.getAll().all { it.id in listOf("orc_general", "ardor") }
+        val isFightingForLuanaBody = battleId == "luana_body"
 
         return when {
 
@@ -79,6 +80,9 @@ class BattleResultManager(
                 Mozes is knocked down.
 
                 The fight is over.""".trimIndent()
+
+            currentCycle in 2..3 && isFightingForLuanaBody ->
+                "Mozes took a fatal blow."
 
             else -> """
                 Mozes took a fatal blow.

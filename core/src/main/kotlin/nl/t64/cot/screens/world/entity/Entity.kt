@@ -101,6 +101,10 @@ class Entity(
         return physicsComponent is PhysicsNpc
     }
 
+    fun isScheduledNpc(): Boolean {
+        return physicsComponent is PhysicsScheduledNpc
+    }
+
     fun isInActionRect(checkRect: Rectangle): Boolean {
         return checkRect.overlaps(physicsComponent.boundingBox)
     }

@@ -38,6 +38,8 @@ class PhysicsPartyMember : PhysicsComponent() {
         if (event is OnDetectionEvent) {
             if (event.state == EntityState.IDLE && path.count <= EIGHT_NODES) {
                 velocity = Constant.MOVE_SPEED_1
+            } else if (event.moveSpeed == Constant.MOVE_SPEED_1) {
+                velocity = event.moveSpeed - (SLOWER_MOVE_SPEED_THAN_PLAYER / 2f)
             } else {
                 velocity = event.moveSpeed - SLOWER_MOVE_SPEED_THAN_PLAYER
             }
