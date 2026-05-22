@@ -60,12 +60,28 @@
     "description" : ["Key to Lastdenn Jail cell door 2."],
     "is_droppable": false
   },
-  "letter_to_santino"      : {
-    "name"        : "Letter to Father Santino",
+  "key_garrin"             : {
+    "name"        : "Garrin's key",
     "group"       : "ITEM",
     "sort"        : 70045,
     "is_unique"   : true,
+    "description" : ["Key from Garrin's cabinet."],
+    "is_droppable": false
+  },
+  "letter_to_santino"      : {
+    "name"        : "Letter to Father Santino",
+    "group"       : "ITEM",
+    "sort"        : 70050,
+    "is_unique"   : true,
     "description" : ["A letter from Garrin to Father Santino about ghosts."],
+    "is_droppable": false
+  },
+  "ghost_repeller"         : {
+    "name"        : "Ghost repeller",
+    "group"       : "ITEM",
+    "sort"        : 70055,
+    "is_unique"   : true,
+    "description" : ["A holy item from Father Santino that makes ghosts interactable.", "It doesn't work on possessed people though."],
     "is_droppable": false
   }
 }
