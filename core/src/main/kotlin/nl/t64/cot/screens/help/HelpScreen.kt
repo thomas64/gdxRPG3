@@ -154,6 +154,7 @@ class HelpScreen : ParchmentScreen() {
         return Utils.createDefaultWindow(title, container, Align.center).apply {
             width = windowWidth
             setPosition(WINDOW_POS_X, WINDOW_POS_Y)
+            titleLabel.style = LabelStyle(titleLabel.style).apply { fontColor = Color.WHITE }
         }
     }
 
@@ -173,8 +174,8 @@ class HelpScreen : ParchmentScreen() {
 
     private fun createWindowTitle(): String {
         return when (currentFilter) {
-            HelpFilter.NORMAL -> "Tutorial messages - [W]"
-            HelpFilter.BATTLE -> "[Q] - Battle tutorial messages"
+            HelpFilter.NORMAL -> "[BLACK][Q] [FIREBRICK]Tutorial messages | [BLACK]Battle tutorial messages [W]"
+            HelpFilter.BATTLE -> "[BLACK][Q] Tutorial messages | [FIREBRICK]Battle tutorial messages [BLACK][W]"
         }
     }
 

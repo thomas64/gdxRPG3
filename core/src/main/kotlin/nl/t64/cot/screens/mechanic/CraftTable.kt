@@ -20,6 +20,7 @@ import nl.t64.cot.screens.inventory.ListenerKeyVertical
 
 private const val FIRST_COLUMN_WIDTH = 64f
 private const val SECOND_COLUMN_WIDTH = 300f
+private const val THIRD_COLUMN_WIDTH = 50f
 private const val CONTAINER_HEIGHT = 704f
 private const val ROW_HEIGHT = 64f
 private const val SECOND_COLUMN_PAD_LEFT = 15f
@@ -40,6 +41,7 @@ class CraftTable(
     init {
         table.columnDefaults(0).width(FIRST_COLUMN_WIDTH)
         table.columnDefaults(1).width(SECOND_COLUMN_WIDTH)
+        table.columnDefaults(2).width(THIRD_COLUMN_WIDTH)
         table.defaults().height(ROW_HEIGHT)
         table.padTop(TABLE_PAD_TOP)
 
@@ -141,7 +143,12 @@ class CraftTable(
     private fun fillRow(item: InventoryItem, index: Int) {
         table.add(createImageOf(item.id))
         val itemName = Label(item.name, LabelStyle(font, Color.BLACK))
-        table.add(itemName).padLeft(SECOND_COLUMN_PAD_LEFT).row()
+        table.add(itemName).padLeft(SECOND_COLUMN_PAD_LEFT)
+
+        val currentAmount = gameData.inventory.getTotalOfItem(item.id)
+        val amountLabel = Label("($currentAmount)", LabelStyle(font, Color.DARK_GRAY))
+        table.add(amountLabel).row()
+
         possibleSetSelectedInventoryItem(index, itemName, item)
     }
 
