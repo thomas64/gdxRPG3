@@ -23,6 +23,8 @@ enum class ConversationCommand {
     START_BATTLE,
     RELOAD_NPCS,
     RELOAD_NPCS_1,
+    RELOAD_NPCS_1101,
+    HARD_SKIP_TO_1056,
 
     KNOW_QUEST,
     ACCEPT_QUEST,

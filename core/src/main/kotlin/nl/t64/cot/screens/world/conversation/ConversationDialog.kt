@@ -204,6 +204,8 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             ConversationCommand.START_BATTLE -> startBattle(nextId)
             ConversationCommand.RELOAD_NPCS -> fadeAndReloadNpcs(nextId)
             ConversationCommand.RELOAD_NPCS_1 -> fadeAndReloadNpcsPlusOneMinute(nextId)
+            ConversationCommand.RELOAD_NPCS_1101 -> fadeAndReloadNpcsToTime(nextId, "11:01")
+            ConversationCommand.HARD_SKIP_TO_1056 -> skipToTime(nextId, "10:56")
 
             ConversationCommand.KNOW_QUEST -> knowQuest(nextId)
             ConversationCommand.ACCEPT_QUEST -> acceptQuest(nextId)
@@ -346,6 +348,18 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
 
     private fun fadeAndReloadNpcsPlusOneMinute(nextId: String) {
         conversationObserver.notifyFadeAndReloadNpcsPlusOneMinute()
+        endConversation(nextId)
+    }
+
+    private fun fadeAndReloadNpcsToTime(nextId: String, time: String) {
+        gameData.clock.setTimeOfDay(time)
+        playSe(AudioEvent.SE_MAGIC_BANG) // todo, this line should not be hardcoded here.
+        conversationObserver.notifyFadeAndReloadNpcs()
+        endConversation(nextId)
+    }
+
+    private fun skipToTime(nextId: String, time: String) {
+        gameData.clock.setTimeOfDay(time)
         endConversation(nextId)
     }
 
