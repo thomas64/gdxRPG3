@@ -216,6 +216,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             ConversationCommand.RECEIVE_ITEM_FOR_QUEST -> receiveItemForQuest()
             ConversationCommand.DELIVER_QUEST_ITEM -> deliverQuestItem(nextId)
             ConversationCommand.DELIVER_QUEST_ITEM_ALTERNATE -> deliverQuestItemAlternate(nextId)
+            ConversationCommand.DELIVER_QUEST_ITEM_TO_SHOW -> deliverQuestItemToSow(nextId)
             ConversationCommand.DELIVER_QUEST_MESSAGE -> deliverQuestMessage(nextId)
 
             ConversationCommand.REWARD_QUEST -> rewardQuest()
@@ -406,6 +407,11 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
 
     private fun deliverQuestItemAlternate(nextId: String) {
         gameData.quests.updateDeliverItemAlternate(conversationId)
+        continueConversation(nextId)
+    }
+
+    private fun deliverQuestItemToSow(nextId: String) {
+        gameData.quests.updateDeliverItemToShow(conversationId)
         continueConversation(nextId)
     }
 

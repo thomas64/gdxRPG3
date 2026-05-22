@@ -31,6 +31,10 @@ class QuestContainer {
         quests.values.forEach { it.possibleSetDeliverItemAlternateTaskComplete(conversationId) }
     }
 
+    fun updateDeliverItemToShow(conversationId: String) {
+        quests.values.forEach { it.possibleSetDeliverItemToShowTaskComplete(conversationId) }
+    }
+
     fun updateDeliverMessage(conversationId: String) {
         quests.values.forEach { it.possibleSetDeliverMessageTaskComplete(conversationId) }
     }

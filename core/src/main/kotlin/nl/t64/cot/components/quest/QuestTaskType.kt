@@ -10,6 +10,7 @@ enum class QuestTaskType {
     PROVIDE_ITEM,
     TRADE_ITEMS,
     DELIVER_ITEM,
+    DELIVER_ITEM_TO_SHOW,
     DELIVER_MESSAGE,
     SAY_THE_RIGHT_THING,
     KILL,

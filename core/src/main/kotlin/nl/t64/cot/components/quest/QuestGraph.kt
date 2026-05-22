@@ -225,6 +225,17 @@ data class QuestGraph(
         }
     }
 
+    fun possibleSetDeliverItemToShowTaskComplete(conversationId: String) {
+        // This is used with destroying the ghost of Garrin. In a previous cycle, the quest should have accepted.
+        if (resetState.isEqualOrHigherThan(QuestState.ACCEPTED)) {
+            tasks.filterValues { it.type == QuestTaskType.DELIVER_ITEM_TO_SHOW }
+                .filterValues { conversationId in it.conversationIds }
+                .filterValues { !it.isComplete }
+                .filterValues { it.hasTargetInInventory() }
+                .forEach { setTaskComplete(it.key) }
+        }
+    }
+
     fun possibleSetDeliverMessageTaskComplete(conversationId: String) {
         if (currentState.isEqualOrLowerThan(QuestState.ACCEPTED)) {
             tasks.filterValues { it.type == QuestTaskType.DELIVER_MESSAGE }

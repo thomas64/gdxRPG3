@@ -85,6 +85,7 @@ class QuestTask(
             QuestTaskType.SHOW_ITEM,
             QuestTaskType.WEAR_ITEM,
             QuestTaskType.SAY_THE_RIGHT_THING,
+            QuestTaskType.DELIVER_ITEM_TO_SHOW,
             QuestTaskType.DELIVER_MESSAGE,
             QuestTaskType.KILL,
             QuestTaskType.RETURN -> completeTask()
