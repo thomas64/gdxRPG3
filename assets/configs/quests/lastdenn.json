@@ -51,5 +51,57 @@
         "isHidden"       : true
       }
     }
+  },
+  "quest_lastdenn_garrin" : {
+    "title"   : "Garrin's ghost",
+    "entityId": "man12",
+    "summary" : "Garrin was possessed by a ghost, and the ghost of Garrin has murdered Father Santino. The guards of Lastdenn arrested Garrin, while the ghost already left his body.",
+    "tasks"   : {
+      "1": {
+        "taskPhrase": "Prevent the murder of Father Santino.",
+        "type"      : "FREE"
+      },
+      "2": {
+        "comment"      : "WARNING: One link to 2 in SceneGhostPossessesGarrin.exitScreen()",
+        "taskPhrase"   : "      Find out what has happened with Garrin.",
+        "updatedPhrase": "      Witness the possession of Garrin by the ghost.",
+        "type"         : "FREE",
+        "isResettable" : false,
+        "linkedWith"   : ["3"]
+      },
+      "3": {
+        "taskPhrase"   : "      Search for answers.",
+        "updatedPhrase": "      Receive information from Garrin in jail.",
+        "type"         : "FIND_ITEM",
+        "target"       : {"key_garrin": 1},
+        "isHidden"     : true,
+        "isResettable" : false,
+        "linkedWith"   : ["4"]
+      },
+      "4": {
+        "taskPhrase"  : "      Find the letter from Garrin to Father Santino in drawer in Garrin's house.",
+        "type"        : "FIND_ITEM",
+        "target"      : {"letter_to_santino": 1},
+        "isHidden"    : true,
+        "isResettable": false,
+        "linkedWith"  : ["5"]
+      },
+      "5": {
+        "taskPhrase"  : "      Show the letter from Garrin to Father Santino.",
+        "type"        : "FIND_ITEM",
+        "target"      : {"ghost_repeller": 1},
+        "isHidden"    : true,
+        "isResettable": false,
+        "linkedWith"  : ["6"]
+      },
+      "6": {
+        "taskPhrase"     : "      Destroy the ghost before it possesses Garrin.",
+        "type"           : "DELIVER_ITEM_TO_SHOW",
+        "target"         : {"ghost_repeller": 1},
+        "conversationIds": ["ghost_booing", "paton_hiding_behind_garrin2", "ghost_scaring2"],
+        "isHidden"       : true,
+        "linkedWith"     : ["1"]
+      }
+    }
   }
 }

@@ -2,7 +2,7 @@
   "save_lastdenn"           : {
     "name"   : "Sister Margarita",
     "phrases": {
-      "1": {"text": ["Welcome to Lastdenn's Temple. I'm sister Margarita.", "Do you want me to pray for you, so you can feel save on your journey?"]},
+      "1": {"text": ["Welcome to the Temple of Lord Evdos. I'm sister Margarita.", "Do you want me to pray for you, so you can feel save on your journey?"]},
       "2": {
         "choices": [
           {"text": "*Doesn't she mean safe?* [BLUE](Save game)", "nextId": "3"},

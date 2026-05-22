@@ -9,14 +9,14 @@
       "5" : {"text": ["If you'll help me achieve that, perhaps I can use those witchy things to help you out in return."], "choices": [{"command": "KNOW_QUEST", "nextId": "6"}]},
       "6" : {
         "choices": [
-          {"text": "*Ask what she needs.*", "command": "ACCEPT_QUEST", "nextId": "10"},
+          {"text": "*Ask what she needs.*", "nextId": "10"},
           {"text": "*No illegal prison break for you. Back away slowly.*", "command": "EXIT"}
         ]
       },
       "10": {"text": ["A guard is off duty somewhere in the bar."]},
       "11": {"text": ["How do I know that? Because I'm a witch. I know things."]},
       "12": {"text": ["He has my jail key. And you need to get it from him."]},
-      "13": {"text": ["He is probably drunk, so this shouldn't be too difficult, but also not easy."]},
+      "13": {"text": ["He is probably drunk, so this shouldn't be too difficult, but also not easy."], "choices": [{"command": "ACCEPT_QUEST", "nextId": "14"}]},
       "14": {"text": ["Don't forget, my freedom is on the line here. Good luck!"], "choices": [{"command": "EXIT", "nextId": "10"}]}
     }
   },

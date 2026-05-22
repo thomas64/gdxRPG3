@@ -5,9 +5,10 @@
       "1"   : {
         "text": ["I'm Reignald, Commander of the Lastdenn guards."], "choices": [
           {"condition": ["i_time_before_14:05"], "text": "->", "nextId": "10"},
-          {"condition": ["i_time_between_14:05_and_14:15"], "text": "->", "nextId": "30"},
-          {"condition": ["i_time_between_14:15_and_14:20"], "text": "->", "nextId": "40"},
-          {"condition": ["i_time_after_14:20"], "text": "->", "nextId": "50"}
+          {"condition": ["is_garrin_possessed", "i_time_after_14:05"], "text": "->", "nextId": "10"},
+          {"condition": ["!is_garrin_possessed", "i_time_between_14:05_and_14:15"], "text": "->", "nextId": "30"},
+          {"condition": ["!is_garrin_possessed", "i_time_between_14:15_and_14:20"], "text": "->", "nextId": "40"},
+          {"condition": ["!is_garrin_possessed", "i_time_after_14:20"], "text": "->", "nextId": "50"}
         ]
       },
       "10"  : {"text": ["Three years. Two months. Every single day in command. No excuses. No drift!"]},

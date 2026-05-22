@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.12.1" orientation="orthogonal" renderorder="right-down" width="76" height="116" tilewidth="24" tileheight="24" infinite="0" nextlayerid="24" nextobjectid="295">
+<map version="1.11" tiledversion="1.12.1" orientation="orthogonal" renderorder="right-down" width="76" height="116" tilewidth="24" tileheight="24" infinite="0" nextlayerid="24" nextobjectid="297">
  <properties>
   <property name="bgm" value="bgm_lastdenn"/>
   <property name="lightmap_camera" value="sunlight"/>
@@ -101,7 +101,7 @@
   <object id="25" x="624" y="2016" width="96" height="240"/>
   <object id="26" x="576" y="2016" width="48" height="216"/>
   <object id="27" x="528" y="2256" width="48" height="48"/>
-  <object id="30" x="240" y="2592" width="456" height="156"/>
+  <object id="30" x="192" y="2592" width="504" height="156"/>
   <object id="31" x="192" y="1488" width="48" height="912"/>
   <object id="32" x="672" y="1584" width="48" height="192"/>
   <object id="33" x="384" y="1584" width="240" height="192"/>
@@ -201,14 +201,14 @@
   <object id="186" x="1224" y="2184" width="48" height="48"/>
   <object id="187" x="930" y="2160" width="156" height="48"/>
   <object id="188" x="1266" y="2160" width="156" height="48"/>
-  <object id="207" x="192" y="2496" width="48" height="120"/>
+  <object id="207" x="192" y="2496" width="48" height="96"/>
   <object id="208" x="240" y="2256" width="96" height="48"/>
   <object id="211" x="624" y="2424" width="96" height="48"/>
   <object id="216" x="0" y="2256" width="144" height="90"/>
   <object id="217" x="0" y="2346" width="48" height="54"/>
   <object id="219" x="0" y="2520" width="72" height="264"/>
   <object id="220" x="72" y="2568" width="72" height="216"/>
-  <object id="221" x="144" y="2616" width="96" height="132"/>
+  <object id="221" x="144" y="2616" width="48" height="132"/>
   <object id="261" x="600" y="786" width="192" height="12"/>
   <object id="287" x="144" y="2772" width="600" height="12"/>
   <object id="294" x="744" y="2592" width="744" height="192"/>
@@ -359,6 +359,16 @@
    <properties>
     <property name="allowedDirection" value="west"/>
     <property name="condition" value="_time_after_18:00"/>
+   </properties>
+  </object>
+  <object id="295" name="quest_to_lastdenn_then" type="discover" x="480" y="2496" width="192" height="12">
+   <properties>
+    <property name="task" value="11"/>
+   </properties>
+  </object>
+  <object id="296" name="quest_to_lastdenn_then2" type="discover" x="480" y="2508" width="192" height="12">
+   <properties>
+    <property name="task" value="11"/>
    </properties>
   </object>
  </objectgroup>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.12.1" orientation="orthogonal" renderorder="right-down" width="32" height="30" tilewidth="24" tileheight="24" infinite="0" nextlayerid="22" nextobjectid="70">
+<map version="1.11" tiledversion="1.12.1" orientation="orthogonal" renderorder="right-down" width="32" height="30" tilewidth="24" tileheight="24" infinite="0" nextlayerid="22" nextobjectid="72">
  <properties>
   <property name="bgm" value="bgm_house"/>
   <property name="step_sound" value="wood"/>
@@ -91,7 +91,21 @@
   <object id="68" name="sparkle_garrin_01" type="none" x="300" y="120" width="30" height="48"/>
   <object id="69" name="note_plant" x="348" y="120" width="24" height="48"/>
  </objectgroup>
- <objectgroup color="#55ff7f" id="14" name="npc"/>
+ <objectgroup color="#55ff7f" id="14" name="npc">
+  <object id="70" name="boy17" type="p" x="552" y="216" width="48" height="24">
+   <properties>
+    <property name="condition" value="_time_after_11:00, !is_garrin_possessed"/>
+    <property name="conversation" value="paton_happy"/>
+   </properties>
+  </object>
+  <object id="71" name="man12" x="528" y="306" width="48" height="24">
+   <properties>
+    <property name="condition" value="_time_after_11:00, !is_garrin_possessed"/>
+    <property name="conversation" value="garrin_happy"/>
+    <property name="direction" value="south"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup color="#55aaff" id="15" name="spawn">
   <object id="1" name="lastdenn" x="528" y="624" width="48" height="24"/>
   <object id="67" name="scene_ghost_possesses_garrin" x="168" y="240" width="48" height="24">

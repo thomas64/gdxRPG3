@@ -172,8 +172,8 @@ class SceneGhostPossessesGarrin : CutsceneScreen() {
 
     override fun exitScreen() {
         gameData.clock.setTimeOfDay("11:00")
+        gameData.quests.getQuestById("quest_lastdenn_garrin").setTaskComplete("2") // "_2_"
         endCutsceneAndOpenMap("lastdenn_house_garrin", "scene_ghost_possesses_garrin")
-
     }
 
 }

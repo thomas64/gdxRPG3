@@ -184,6 +184,7 @@ class SceneSantinoMurdered : CutsceneScreen() {
 
     override fun exitScreen() {
         gameData.clock.setTimeOfDay("14:00")
+        gameData.quests.getQuestById("quest_lastdenn_garrin").accept()
         endCutsceneAndOpenMap("lastdenn", "scene_santino_murdered", delay = 2f)
     }
 

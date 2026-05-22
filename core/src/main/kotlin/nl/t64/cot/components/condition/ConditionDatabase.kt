@@ -5,6 +5,7 @@ import nl.t64.cot.components.cutscene.CutsceneId
 import nl.t64.cot.components.party.abilities.AbilityItemId
 import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.components.portal.Portal
+import nl.t64.cot.components.quest.QuestState
 
 
 fun List<String>.areAllTrue(questId: String? = null): Boolean {
@@ -22,12 +23,14 @@ object ConditionDatabase {
         "ranger1"                       to { hasEnoughOfSkill(SkillItemId.RANGER,       1) },
         "ranger2"                       to { hasEnoughOfSkill(SkillItemId.RANGER,       2) },
         "ranger3"                       to { hasEnoughOfSkill(SkillItemId.RANGER,       3) },
+        "barbarian1"                    to { hasEnoughOfSkill(SkillItemId.BARBARIAN,    1) },
+        "barbarian3"                    to { hasEnoughOfSkill(SkillItemId.BARBARIAN,    3) },
+        "barbarian4"                    to { hasEnoughOfSkill(SkillItemId.BARBARIAN,    4) },
         "diplomat1"                     to { hasEnoughOfSkill(SkillItemId.DIPLOMAT,     1) },
         "diplomat2"                     to { hasEnoughOfSkill(SkillItemId.DIPLOMAT,     2) },
         "diplomat3"                     to { hasEnoughOfSkill(SkillItemId.DIPLOMAT,     3) },
-        "barbarian1"                    to { hasEnoughOfSkill(SkillItemId.BARBARIAN,    1) },
-        "barbarian4"                    to { hasEnoughOfSkill(SkillItemId.BARBARIAN,    4) },
         "jester1"                       to { hasEnoughOfSkill(SkillItemId.JESTER,       1) },
+        "jester3"                       to { hasEnoughOfSkill(SkillItemId.JESTER,       3) },
         "warrior4"                      to { hasEnoughOfSkill(SkillItemId.WARRIOR,      4) },
         "wizard1"                       to { hasEnoughOfSkill(SkillItemId.WIZARD,       1) },
         "mozes_wizard1"                 to { hasMozesEnoughOfSkill(SkillItemId.WIZARD,  1) },
@@ -50,10 +53,9 @@ object ConditionDatabase {
         "is_lastdenn_guard_alive"       to { !isBattleWon("guarding_till_1500") },
         "!is_lastdenn_guard_alive"      to { isBattleWon("guarding_till_1500") },
         "is_lastdenn_entrance_closed"   to { isLastdennEntranceClosed },
-        "is_garrin_possessed"           to { false }, // todo, placeholder for future condition
-        "!is_garrin_possessed"          to { true },  // todo, placeholder for future condition
+        "is_garrin_possessed"           to { isGarrinPossessed },
+        "!is_garrin_possessed"          to { !isGarrinPossessed },
         "witnessed_garrin_possession"   to { gameData.cutscenes.isPlayed(CutsceneId.SCENE_GHOST_POSSESSES_GARRIN) },
-        "talked_to_garrin_in_prison"    to { false }, // todo, will become a certain quest step
         "is_reignald_recruited"         to { hasReignaldBeenRecruited },
         "!is_reignald_recruited"        to { !hasReignaldBeenRecruited },
         "is_lastdenn_cell_locked"       to { gameData.doors.getDoor("door_lastdenn_jail_b1").isLocked },
@@ -127,6 +129,8 @@ object ConditionDatabase {
         get() = !gameData.heroes.contains("reignald")
             || gameData.party.contains("reignald")
             || gameData.heroes.getCertainHero("reignald").hasBeenRecruited
+    private val isGarrinPossessed
+        get() = gameData.quests.getQuestById("quest_lastdenn_garrin").currentState.isLowerThan(QuestState.FINISHED)
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

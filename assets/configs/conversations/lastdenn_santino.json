@@ -1,5 +1,5 @@
 {
-  "garrin_early_morning"      : {
+  "garrin_early_morning"       : {
     "name"   : "Garrin",
     "phrases": {
       "1": {"text": ["There's a scary story about ghosts in this part of town."]},
@@ -9,72 +9,122 @@
       "5": {"text": ["My son Paton, however, is acting a little strange this morning."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "paton_hiding"              : {
+  "paton_hiding"               : {
     "name"   : "Paton",
     "phrases": {
       "1": {"text": ["I'm scared!"]},
       "2": {"text": ["I think it's coming..."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "paton_silent"              : {
+  "paton_silent"               : {
     "name"   : "Paton",
     "phrases": {
       "1": {"text": [". . ."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "ghost_booing"              : {
+  "ghost_booing"               : {
     "name"   : "Ghost",
     "phrases": {
-      "1": {"text": ["huuuuuuuuuuuuuuuuuu reveeenge"], "choices": [{"command": "EXIT"}]}
+      "1" : {
+        "text": ["huuuuuuuuuuuuuuuuuu reveeenge"], "choices": [
+          {"condition": ["i_n_0_==_item_ghost_repeller"], "text": "->", "command": "EXIT"},
+          {"condition": ["i_n_1_>=_item_ghost_repeller"], "text": "->", "nextId": "4"}
+        ]
+      },
+      "4" : {
+        "choices": [
+          {"text": "[Ghost repeller] *Destroy the ghost in name of Evdos!*", "command": "DELIVER_QUEST_ITEM_TO_SHOW", "nextId": "10"},
+          {"text": "*See how this plays out. Do nothing.*", "command": "EXIT"}
+        ]
+      },
+      "10": {"text": ["! ! ! ! ! ! ! ! !"], "choices": [{"command": "RELOAD_NPCS_1101"}]}
     }
   },
-  "ghost_entering"            : {
+  "ghost_entering"             : {
     "phrases": {
       "1": {"face": "ghost1", "name": "Ghost", "text": ["huuuuuuuuuuuuuuuuuu reveeenge"]},
       "2": {"face": "boy17", "name": "Paton", "text": ["Daddy! Aaaaaah!!"]},
       "3": {"face": "man12", "name": "Garrin", "text": ["Paton! What's wrong?"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "paton_hiding_behind_garrin": {
+  "paton_hiding_behind_garrin" : {
     "phrases": {
       "1": {"face": "ghost1", "name": "Ghost", "text": ["huuuuuuuuuuuuuuuuuu reveeenge"]},
       "2": {"face": "boy17", "name": "Paton", "text": ["Aaaaaah!!"]},
       "3": {"face": "man12", "name": "Garrin", "text": ["Paton, stay behind me!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "ghost_scaring"             : {
+  "paton_hiding_behind_garrin2": {
+    "phrases": {
+      "1" : {"face": "ghost1", "name": "Ghost", "text": ["huuuuuuuuuuuuuuuuuu reveeenge"]},
+      "2" : {"face": "boy17", "name": "Paton", "text": ["Aaaaaah!!"]},
+      "3" : {
+        "face": "man12", "name": "Garrin", "text": ["Paton, stay behind me!"], "choices": [
+          {"condition": ["i_n_0_==_item_ghost_repeller"], "text": "->", "command": "EXIT"},
+          {"condition": ["i_n_1_>=_item_ghost_repeller"], "text": "->", "nextId": "4"}
+        ]
+      },
+      "4" : {
+        "face": "ghost1", "name": "Ghost", "text": [""], "choices": [
+          {"text": "[Ghost repeller] *Destroy the ghost in name of Evdos!*", "command": "DELIVER_QUEST_ITEM_TO_SHOW", "nextId": "10"},
+          {"text": "*See how this plays out. Do nothing.*", "command": "EXIT"}
+        ]
+      },
+      "10": {"face": "ghost1", "name": "Ghost", "text": ["! ! ! ! ! ! ! ! !"], "choices": [{"command": "RELOAD_NPCS_1101"}]}
+    }
+  },
+  "ghost_scaring"              : {
     "phrases": {
       "1": {"face": "ghost1", "name": "Ghost", "text": ["huuuuuuuuuuuuuuuuuu reveeenge"]},
       "2": {"face": "boy17", "name": "Paton", "text": ["Aaaaaah!!"]},
       "3": {"face": "man12", "name": "Garrin", "text": [". . ."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "garrin_takes_a_stand"      : {
+  "ghost_scaring2"             : {
+    "phrases": {
+      "1" : {"face": "ghost1", "name": "Ghost", "text": ["huuuuuuuuuuuuuuuuuu reveeenge"]},
+      "2" : {"face": "boy17", "name": "Paton", "text": ["Aaaaaah!!"]},
+      "3" : {
+        "face": "man12", "name": "Garrin", "text": [". . ."], "choices": [
+          {"condition": ["i_n_0_==_item_ghost_repeller"], "text": "->", "command": "EXIT"},
+          {"condition": ["i_n_1_>=_item_ghost_repeller"], "text": "->", "nextId": "4"}
+        ]
+      },
+      "4" : {
+        "face": "ghost1", "name": "Ghost", "text": [""], "choices": [
+          {"text": "[Ghost repeller] *Destroy the ghost in name of Evdos!*", "command": "DELIVER_QUEST_ITEM_TO_SHOW", "nextId": "10"},
+          {"text": "*See how this plays out. Do nothing.*", "command": "EXIT"}
+        ]
+      },
+      "10": {"face": "ghost1", "name": "Ghost", "text": ["! ! ! ! ! ! ! ! !"], "choices": [{"command": "RELOAD_NPCS_1101"}]}
+    }
+  },
+  "garrin_takes_a_stand"       : {
     "phrases": {
       "1": {"face": "man12", "name": "Garrin", "text": ["That's it! I won't let you hurt my son!"]},
       "2": {"face": "ghost1", "name": "Ghost", "text": ["huuuuuuuuuuuuuuuuuu reveeenge"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "garrin_steps_back"         : {
+  "garrin_steps_back"          : {
     "phrases": {
       "1": {"face": "man12", "name": "Garrin", "text": ["Y-you... you stay away now!"]},
       "2": {"face": "ghost1", "name": "Ghost", "text": ["huuuuuuuuuuuuuuuuuu reveeenge"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "paton_shouts_nooo"         : {
+  "paton_shouts_nooo"          : {
     "name"   : "Paton",
     "phrases": {
       "1": {"text": ["Nooo! Daddy!!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "paton_runs_to_garrin"      : {
+  "paton_runs_to_garrin"       : {
     "name"   : "Paton",
     "phrases": {
       "1": {"text": ["Nooo! Daddy!!"]},
       "2": {"text": ["Are you okay?!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "ghost_has_garrin"          : {
+  "ghost_has_garrin"           : {
     "phrases": {
       "1": {"face": "ghost1", "name": "Garrin", "text": ["goooo awaaay reveeenge"]},
       "2": {"face": "boy17", "name": "Paton", "text": ["What have you done to my daddy?!"]},
@@ -82,26 +132,40 @@
       "4": {"face": "boy17", "name": "Paton", "text": ["Daddy, I'm scared!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "paton_hiding_again"        : {
+  "paton_hiding_again"         : {
     "name"   : "Paton",
     "phrases": {
       "1": {"text": ["Is my daddy gonna be okay?"]},
       "2": {"text": ["Please save him!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "garrin_possessed_nothing"  : {
+  "garrin_possessed_nothing"   : {
     "name"   : "Garrin",
     "phrases": {
       "1": {"face": "ghost1", "text": [". . ."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "garrin_possessed_go_away"  : {
+  "garrin_possessed_go_away"   : {
     "name"   : "Garrin",
     "phrases": {
       "1": {"face": "ghost1", "text": ["goooo awaaay reveeenge"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "garrin_to_jail"            : {
+  "garrin_happy"               : {
+    "name"   : "Garrin",
+    "phrases": {
+      "1": {"text": ["I'm so glad that you came just in time to save us!"]},
+      "2": {"text": ["So in the end, Father Santino handed over that ghost protector after all!"]},
+      "3": {"text": ["Thank you so much for helping us!"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "paton_happy"                : {
+    "name"   : "Paton",
+    "phrases": {
+      "1": {"text": ["Weeeee! No more scary ghosts! Ever! Yay!"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "garrin_to_jail"             : {
     "name"     : "Garrin",
     "condition": ["witnessed_garrin_possession"], "startAt": "10",
     "phrases"  : {
@@ -110,23 +174,25 @@
       "11": {"face": "soldier12", "name": "Lastdenn Guard", "text": ["You be quiet!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "garrin_in_jail"            : {
+  "garrin_in_jail"             : {
     "name"     : "Garrin",
     "condition": ["witnessed_garrin_possession"], "startAt": "10",
     "phrases"  : {
-      "1" : {"text": [". . ."], "choices": [{"command": "EXIT"}]},
-      "10": {"text": ["You were there, weren't you? You saw what happened."]},
-      "11": {"text": ["It was a strange feeling. To be driven by something else. I couldn't control myself at all."]},
-      "12": {"text": ["I just wanted to protect my son. I didn't want to hurt anyone. I didn't even know what I was doing."]},
-      "13": {"text": ["I wish I could go back and change what happened."]},
-      "14": {"text": ["It's ironic, isn't it? The priest himself had something against ghosts. If he would have given me that, he himself would still be alive."]},
-      "15": {"text": ["In my home, there's a letter to the priest about that exact thing. You should get the letter and the item to maybe prevent something like this from happening again."]},
-      "16": {"text": ["You can find the letter in a drawer with a picture of my wife on it."]},
-      "17": {"text": ["It's too late now to prevent any of this from happening, but who knows, like I said, maybe it can prevent something like this from happening again."]},
-      "18": {"text": ["Anyway, thank you for coming to see me. Say hi to my son for me."], "choices": [{"command": "EXIT"}]}
+      "1"   : {"text": [". . ."], "choices": [{"command": "EXIT"}]},
+      "10"  : {"text": ["You were there, weren't you? You saw what happened."]},
+      "11"  : {"text": ["It was a strange feeling. To be driven by something else. I couldn't control myself at all."]},
+      "12"  : {"text": ["I just wanted to protect my son. I didn't want to hurt anyone. I didn't even know what I was doing."]},
+      "13"  : {"text": ["I wish I could go back and change what happened."]},
+      "14"  : {"text": ["It's ironic, isn't it? The priest himself had something against ghosts. If he would have given me that, he himself would still be alive."]},
+      "15"  : {"text": ["In my home, there's a letter to the priest about that exact thing. You should get the letter and the item to maybe prevent something like this from happening again."]},
+      "16"  : {"text": ["You can find the letter in a drawer with a picture of my wife on it."]},
+      "17"  : {"text": ["It's too late now to prevent any of this from happening, but who knows, like I said, maybe it can prevent something like this from happening again."]},
+      "18"  : {"text": ["Anyway, thank you for coming to see me. Say hi to my son for me."], "choices": [{"command": "RECEIVE_ITEM"}]},
+      "1199": {"text": ["Here's the key of the drawer where the letter is. I hope it can be of use to you."], "choices": [{"command": "RECEIVE_ITEM"}]},
+      "1200": {"text": ["Say hi to my son for me."], "choices": [{"command": "EXIT", "nextId": "1200"}]}
     }
   },
-  "santino_prepare_morning"   : {
+  "santino_prepare_morning"    : {
     "name"   : "Father Santino",
     "phrases": {
       "1": {"text": ["Blessings upon you my child."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "2"}]},
@@ -135,7 +201,7 @@
       "4": {"text": ["But if you're here for a pastoral conversation, please come see me after the service at 11:00."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "santino_service_start"     : {
+  "santino_service_start"      : {
     "name"   : "Father Santino",
     "phrases": {
       "1": {"text": ["Blessings upon you my child."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "2"}]},
@@ -144,45 +210,89 @@
       "4": {"text": ["But if you're here for a pastoral conversation, please come see me after the service at 11:00."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "santino_service"           : {
+  "santino_service"            : {
     "name"   : "Father Santino",
     "phrases": {
-      "1" : {"text": ["People of Lastdenn, let us begin in stillness and gratitude. We stand before Evdos, God of Knowledge, whose light reveals what is true and what only pretends to be true."]},
-      "2" : {"text": ["To honor Evdos is to open both mind and heart. We do not worship ignorance, and we do not fear honest questions. A question asked in humility is already a prayer."]},
-      "3" : {"text": ["Knowledge is not pride, and wisdom is not noise. The wise listen first, test their words, and speak only what can heal, guide, or protect. The patient soul does not fear waiting, because truth is not diminished by time."]},
-      "4" : {"text": ["Remember this well: truth does not tremble before scrutiny. Lies demand silence, but truth invites examination. That is why the path of Evdos is a path of learning, discipline, and endurance. And as Ylarus, God of Time, reminds all who listen: no truth worth knowing was ever rushed into being."]},
-      "5" : {"text": ["Ulrog is the God of Power, and his temptation is simple. He whispers, 'Rule first. Understand later.' He says, 'Take now. Reflect never.' But power without understanding becomes cruelty faster than steel leaves its sheath."]},
-      "6" : {"text": ["Evdos teaches another order: understand first, act with discipline, and govern your strength. Even a righteous act can become a foolish one when done in haste. Knowledge without mercy becomes cold, but power without knowledge becomes blind."]},
-      "7" : {"text": ["In your homes, teach your children to read, to reason, and to remember. In your work, choose precision over haste and honesty over applause. In your conflicts, let truth speak before anger does, and let patience stand guard at the door of your tongue."]},
-      "8" : {"text": ["If you must be strong, be strong in patience. If you must be feared, let it be feared that you cannot be bribed away from the truth. If you must lead, lead by understanding, and do not despise the slow wisdom that keeps a city from destroying itself."]},
-      "9" : {"text": ["May Evdos sharpen your mind, steady your tongue, and humble your spirit. May he also grant you patience enough to wait for the right moment before speaking or acting. Walk from this temple as seekers of knowledge, not servants of domination."]},
-      "10": {"text": ["Go in peace, children of Lastdenn. Choose the light of Evdos, God of Knowledge, and turn away from Ulrog, God of Power."], "choices": [{"command": "EXIT", "nextId": "11"}]},
-      "11": {"text": ["People of Lastdenn, let us begin in stillness and gratitude. We stand before Evdos, God of Knowledge, whose light reveals what is true and what only pretends to be true."]},
-      "12": {
+      "1": {"text": ["People of Lastdenn, let us begin in stillness and gratitude. We stand before Evdos, God of Knowledge, whose light reveals what is true."]},
+      "2": {
         "choices": [
-          {"text": "*Listen to his message.*", "nextId": "2"},
-          {"text": "*You've heard it all before. Stop listening.*", "command": "EXIT", "nextId": "11"}
+          {"text": "*Listen to his message.*", "nextId": "3"},
+          {"text": "*You've heard it all before. Stop listening.*", "command": "EXIT"},
+          {"text": "*Doze off and miss the whole sermon.*", "command": "HARD_SKIP_TO_1056"}
         ]
-      }
+      },
+      "3": {"text": ["To honor Evdos is to open both mind and heart. We do not fear honest questions. A question asked in humility is already a prayer."]},
+      "4": {"text": ["Knowledge is not pride, and wisdom is not noise. The wise listen first, test their words, and speak what can heal, guide, or protect. Ylarus, God of Time, teaches that no truth worth knowing is rushed."]},
+      "5": {"text": ["Ulrog is the God of Power, and his temptation is simple. He whispers, 'Rule first. Understand later.' He says, 'Take now. Reflect never.' Power without understanding soon becomes cruelty."]},
+      "6": {"text": ["Evdos teaches another order: understand first, act with discipline, and govern your strength. Even a righteous act becomes foolish in haste. Knowledge without mercy grows cold, but power without knowledge grows blind."]},
+      "7": {"text": ["In your homes, teach your children to read, to reason, and to remember. In your work, choose precision over haste and honesty over applause. In your conflicts, let truth speak before anger does."]},
+      "8": {"text": ["If you must be strong, be strong in patience. If you must lead, lead by understanding. Walk from this temple as seekers of knowledge, not servants of domination."]},
+      "9": {"text": ["Go in peace, children of Lastdenn. Choose the light of Evdos, God of Knowledge, and turn away from Ulrog, God of Power."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "santino_counseling"        : {
-    "name"   : "Father Santino",
-    "phrases": {
-      "1": {"text": ["Blessings upon you my child."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "2"}]},
-      "2": {"text": ["Welcome to the Temple of Evdos, God of Knowledge. I am Father Santino."]},
-      "3": {"text": ["Are you in need of pastoral counseling?"]},
-      "4": {
+  "santino_counseling"         : {
+    "name"     : "Father Santino",
+    "condition": ["_rc_>=_a_q_quest_lastdenn_santino"], "startAt": "100",
+    "phrases"  : {
+      "1"   : {"text": ["Blessings upon you my child."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "2"}]},
+      "2"   : {"text": ["Welcome to the Temple of Evdos, God of Knowledge. I am Father Santino."]},
+      "3"   : {"text": ["Are you in need of pastoral counseling?"]},
+      "4"   : {
         "choices": [
           {"text": "*Explain everything that's happened with Ardor, Ulrog and Ylarus.*", "nextId": "5"}
         ]
       },
-      "5": {"text": ["Ulrog you say..."]},
-      "6": {"text": ["I can help you with that, but not right now. I need some time to think and prepare for that kind of information."]},
-      "7": {"text": ["Come see me again tonight at 18:00, and I'll help you understand what you need to know about Ulrog."], "choices": [{"command": "EXIT", "nextId": "7"}]}
+      "5"   : {"text": ["Ulrog you say..."]},
+      "6"   : {"text": ["I can help you with that, but not right now. I need some time to think and prepare for that kind of information."]},
+      "7"   : {"text": ["Come see me again tonight at 18:00, and I'll help you understand what you need to know about Ulrog."], "choices": [{"nextId": "51"}]},
+      "49"  : {"text": ["-------------------------------------------------------------------------------------------"]},
+      "50"  : {"text": ["Blessings upon you my child."]},
+      "51"  : {"text": ["Did you want to discuss something else?"]},
+      "52"  : {
+        "choices": [
+          {"condition": ["i_n_1_>=_item_letter_to_santino", "i_n_0_==_item_ghost_repeller"], "text": "[Letter to Father Santino] *Show Garrin's letter.*", "nextId": "110"},
+          {"condition": ["i_c_>=_a_q_quest_lastdenn_santino"], "text": "*Nothing for now. Take your leave.*", "nextId": "53"},
+          {"condition": ["i_c_!=_a_q_quest_lastdenn_santino"], "text": "*Nothing for now. Take your leave.*", "nextId": "54"}
+        ]
+      },
+      "53"  : {"text": ["May Evdos be with you."], "choices": [{"command": "EXIT", "nextId": "7"}]},
+      "54"  : {"text": ["May Evdos be with you."], "choices": [{"command": "EXIT", "nextId": "50"}]},
+      "99"  : {"text": ["-------------------------------------------------------------------------------------------"]},
+      "100" : {"text": ["Blessings upon you my child."]},
+      "101" : {"text": ["Welcome to the Temple of Evdos, God of Knowledge. I am Father Santino."]},
+      "102" : {"text": ["Are you in need of pastoral counseling?"]},
+      "103" : {
+        "choices": [
+          {"condition": ["i_n_1_>=_item_letter_to_santino", "i_n_0_==_item_ghost_repeller"], "text": "[Letter to Father Santino] *Show Garrin's letter.*", "nextId": "110"},
+          {"condition": ["i_c_!=_a_q_quest_lastdenn_santino"], "text": "*Explain everything that's happened with Ardor, Ulrog and Ylarus.*", "command": "DELIVER_QUEST_MESSAGE", "nextId": "5"},
+          {"text": "*Counseling is for wimps. Take your leave.*", "nextId": "104"}
+        ]
+      },
+      "104" : {"text": ["May Evdos be with you."], "choices": [{"command": "EXIT"}]},
+      "109" : {"text": ["------------------------------------------------------------------------------------------"]},
+      "110" : {"text": ["What's this? A letter to me? From Garrin? Let me see..."]},
+      "111" : {"text": ["{SPEED=0.2} . . . . ."]},
+      "112" : {"text": ["No, no, no, I can't help you with that right now. It's a holy item! No, I won't give you that!"]},
+      "113" : {
+        "choices": [
+          {"condition": ["barbarian3"], "text": "[Barbarian 3] *Corner him with the consequences of refusing you.*", "nextId": "120"},
+          {"condition": ["diplomat3"], "text": "[Diplomat 3] *Appeal to his duty to protect the innocent.*", "nextId": "130"},
+          {"condition": ["jester3"], "text": "[Jester 3] *Joke that even holy relics shouldn't gather dust.*", "nextId": "140"},
+          {"text": "*Accept it for now and take your leave.*", "nextId": "114"}
+        ]
+      },
+      "114" : {"text": ["May Evdos be with you."], "choices": [{"command": "EXIT", "nextId": "50"}]},
+      "120" : {"text": [". . ."]},
+      "121" : {"text": ["Enough... I hear you. If my refusal costs even one more innocent life, that burden is on me. Take it."], "choices": [{"command": "RECEIVE_ITEM"}]},
+      "130" : {"text": [". . ."]},
+      "131" : {"text": ["You are right to remind me. A priest's duty is to protect the innocent first. I will place it in your hands."], "choices": [{"command": "RECEIVE_ITEM"}]},
+      "140" : {"text": [". . ."]},
+      "141" : {"text": ["Heh... perhaps you've struck closer to truth than you meant. A relic locked away protects no one. Better it serves the living."], "choices": [{"command": "RECEIVE_ITEM"}]},
+      "1199": {"text": ["You should have it. It's the right thing to do."], "choices": [{"command": "RECEIVE_ITEM"}]},
+      "1200": {"text": ["Blessings upon you my child. I hope my holy item has been of use to you."], "choices": [{"nextId": "102"}]}
     }
   },
-  "santino_busy_errand"       : {
+  "santino_busy_errand"        : {
     "name"     : "Father Santino",
     "condition": ["_tc_1_q_quest_lastdenn_santino"], "startAt": "10",
     "phrases"  : {
@@ -190,13 +300,20 @@
       "2" : {"text": ["I am Father Santino, priest of the Temple of Evdos, God of Knowledge."]},
       "3" : {"text": ["I'm on my way to the mayor. I need to talk to him about the daily gate closure."]},
       "4" : {"text": ["If you need a pastoral conversation, I'm available every day after the service at 11:00."]},
-      "5" : {"text": ["The service itself is every day at 10:00. Come join us if you'd like."], "choices": [{"command": "EXIT"}]},
+      "5" : {"text": ["The service itself is every day at 10:00. Come join us if you'd like."], "choices": [{"nextId": "20"}]},
       "10": {"text": ["I'm on my way to the mayor. I need to talk to him about the daily gate closure."]},
       "11": {"text": ["If you want to know more about Ulrog, come see me tonight at 18:00."]},
-      "12": {"text": ["I need some time to think and prepare for that kind of information."], "choices": [{"command": "EXIT"}]}
+      "12": {"text": ["I need some time to think and prepare for that kind of information."], "choices": [{"nextId": "20"}]},
+      "20": {
+        "choices": [
+          {"condition": ["i_r_!=_u_q_quest_lastdenn_garrin", "i_time_before_13:00", "is_garrin_possessed"], "text": "*Warn him for his upcoming murder!*", "nextId": "21"},
+          {"text": "*Wish him luck at the mayor's office. Take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "21": {"text": ["Murdered? What nonsense! Who in their right mind would want to harm a servant of Evdos?"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "garrin_vs_santino_1"       : {
+  "garrin_vs_santino_1"        : {
     "phrases": {
       "1": {"face": "santino", "name": "Father Santino", "text": ["Blessings upon you, Garrin. How are you doing today?"]},
       "2": {"face": "santino", "name": "Father Santino", "text": ["I'm on my way to the mayor. I need to talk to him about the gate closure."]},
@@ -204,14 +321,14 @@
       "4": {"face": "santino", "name": "Father Santino", "text": ["Garrin? Are you okay?"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "garrin_vs_santino_2"       : {
+  "garrin_vs_santino_2"        : {
     "phrases": {
       "1": {"face": "ghost1", "name": "Garrin", "text": ["reveeenge on youuuuuuuuuuuuuuuu"]},
       "2": {"face": "santino", "name": "Father Santino", "text": ["What are you doing?! Stop it!"]},
       "3": {"face": "santino", "name": "Father Santino", "text": ["Aaaah!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "garrin_vs_santino_dead"    : {
+  "garrin_vs_santino_dead"     : {
     "name"   : "Garrin",
     "phrases": {
       "1": {"text": ["Oh no!"]},
@@ -220,7 +337,7 @@
       "4": {"text": ["What have I done?"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "guards_see_garrin"         : {
+  "guards_see_garrin"          : {
     "phrases": {
       "1": {"face": "soldier01", "name": "Lastdenn Guard", "text": ["Halt!"]},
       "2": {"face": "soldier01", "name": "Lastdenn Guard", "text": ["We saw that!"]},
@@ -232,12 +349,12 @@
       "8": {"face": "soldier12", "name": "Lastdenn Guard Elian", "text": ["Yes sir."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "garrin_shouts_nooo"        : {
+  "garrin_shouts_nooo"         : {
     "phrases": {
       "1": {"text": ["Noooooo!!!"], "choices": [{"command": "RELOAD_NPCS_1"}]}
     }
   },
-  "santino_to_reignald"       : {
+  "santino_to_reignald"        : {
     "name"   : "Father Santino",
     "phrases": {
       "1" : {"face": "santino", "name": "Father Santino", "text": ["Blessings upon you, Commander Reignald. I have an appointment with the mayor."]},
@@ -259,14 +376,14 @@
       "17": {"face": "santino", "name": "Father Santino", "text": ["That is all I asked. May Evdos give you clarity, Commander."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "santino_to_mayor_guard"    : {
+  "santino_to_mayor_guard"     : {
     "phrases": {
       "1": {"face": "santino", "name": "Father Santino", "text": ["Blessings upon you, good guard. I have an appointment with the mayor."]},
       "2": {"face": "soldier16", "name": "Lastdenn Guard", "text": ["Welcome, Father Santino. It is an honor to have you here. The mayor is expecting you."]},
       "3": {"face": "santino", "name": "Father Santino", "text": ["Thank you. I hope to have a productive conversation with him."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "santino_back_from_mayor"   : {
+  "santino_back_from_mayor"    : {
     "name"   : "Father Santino",
     "phrases": {
       "1": {"text": ["Blessings upon you my child."]},
@@ -281,21 +398,21 @@
       "6": {"text": ["I need some time to think and prepare for that kind of information."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "santino_preparing_answer"  : {
+  "santino_preparing_answer"   : {
     "name"   : "Father Santino",
     "phrases": {
       "1": {"text": ["Blessings upon you my child."]},
       "2": {"text": ["I'm busy preparing the information you need about Ulrog. Come see me again tonight at 18:00."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "santino_answer_ulrog"      : {
+  "santino_answer_ulrog"       : {
     "name"   : "Father Santino",
     "phrases": {
       "1": {"text": ["Blessings upon you my child."]},
       "2": {"text": ["YOU FINISHED THE GAME! CONGRATS!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "santino_prepare_evening"   : {
+  "santino_prepare_evening"    : {
     "name"   : "Father Santino",
     "phrases": {
       "1": {"text": ["Blessings upon you my child."]},

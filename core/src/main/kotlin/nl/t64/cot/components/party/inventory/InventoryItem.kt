@@ -81,6 +81,7 @@ data class InventoryItem(
     private val herb: Int = 0,
     private val spice: Int = 0,
     private val gemstone: Int = 0,
+    val replaces: List<String> = emptyList(),
 ) {
     val isStackable: Boolean = group.isStackable()
     val isShield: Boolean = group == InventoryGroup.SHIELD

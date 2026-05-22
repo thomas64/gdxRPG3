@@ -17,7 +17,14 @@ class PlayerInventoryContainer(numberOfSlots: Int = 0) : InventoryContainer(numb
 
     override fun forceSetItemAt(index: Int, newItem: InventoryItem?) {
         super.forceSetItemAt(index, newItem)
+        possibleReplaceItem(newItem)
         gameData.quests.updateFindItem()
+    }
+
+    private fun possibleReplaceItem(newItem: InventoryItem?) {
+        newItem?.replaces
+            ?.filter { contains(it) }
+            ?.forEach { autoRemoveItem(it, 1) }
     }
 
 }

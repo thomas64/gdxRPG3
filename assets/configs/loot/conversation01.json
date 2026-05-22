@@ -5,5 +5,7 @@
   "fairy_shop"                    : {"content": {"fine_fairy_ring": 1}},
   "mr_isembert_after_11_after_win": {"xp": 10, "content": {"gold": 10, "basic_dagger": 1}},
   "deryk_school"                  : {"content": {"strike_3f": 99}},
-  "drunken_lastdenn_guard"        : {"content": {"key_lastdenn_jail": 1}}
+  "drunken_lastdenn_guard"        : {"content": {"key_lastdenn_jail": 1}},
+  "garrin_in_jail"                : {"content": {"key_garrin": 1}},
+  "santino_counseling"            : {"content": {"ghost_repeller": 1}}
 }

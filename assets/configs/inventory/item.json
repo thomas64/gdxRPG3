@@ -74,7 +74,8 @@
     "sort"        : 70050,
     "is_unique"   : true,
     "description" : ["A letter from Garrin to Father Santino about ghosts."],
-    "is_droppable": false
+    "is_droppable": false,
+    "replaces"    : ["key_garrin"]
   },
   "ghost_repeller"         : {
     "name"        : "Ghost repeller",
@@ -82,6 +83,7 @@
     "sort"        : 70055,
     "is_unique"   : true,
     "description" : ["A holy item from Father Santino that makes ghosts interactable.", "It doesn't work on possessed people though."],
-    "is_droppable": false
+    "is_droppable": false,
+    "replaces"    : ["letter_to_santino"]
   }
 }

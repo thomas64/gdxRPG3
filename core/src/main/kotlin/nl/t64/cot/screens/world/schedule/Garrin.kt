@@ -26,11 +26,12 @@ class Garrin : EntitySchedule() {
         SchedulePart("lastdenn_house_garrin", "09:31", "09:36", SOUTH, IMMOBILE, "garrin4",       "garrin4",       "paton_hiding_behind_garrin"),
         SchedulePart("lastdenn_house_garrin", "09:36", "09:38", WEST,  RUNNING,  "garrin4",       "garrin5",       "ghost_scaring"),
         SchedulePart("lastdenn_house_garrin", "09:38", "09:50", EAST,  IMMOBILE, "garrin5",       "garrin5",       "ghost_scaring"),
-        SchedulePart("lastdenn_house_garrin", "11:00", "11:03", NORTH, IMMOBILE, "garrin6",       "garrin6",       "garrin_possessed_nothing"),
-        SchedulePart("lastdenn_house_garrin", "11:03", "11:07", EAST,  CRAWLING, "garrin6",       "ghost4",        "garrin_possessed_go_away"),
-        SchedulePart("lastdenn_house_garrin", "11:07", "11:14", SOUTH, CRAWLING, "ghost4",        "garrin2",       "garrin_possessed_go_away"),
-        SchedulePart("lastdenn_house_garrin", "11:14", "11:19", EAST,  CRAWLING, "garrin2",       "garrin8",       "garrin_possessed_go_away"),
-        SchedulePart("lastdenn_house_garrin", "11:19", "11:24", SOUTH, CRAWLING, "garrin8",       "garrin9",       "garrin_possessed_go_away"),
+
+        SchedulePart("lastdenn_house_garrin", "11:00", "11:03", NORTH, IMMOBILE, "garrin6",       "garrin6",       "garrin_possessed_nothing", listOf("is_garrin_possessed")),
+        SchedulePart("lastdenn_house_garrin", "11:03", "11:07", EAST,  CRAWLING, "garrin6",       "ghost4",        "garrin_possessed_go_away", listOf("is_garrin_possessed")),
+        SchedulePart("lastdenn_house_garrin", "11:07", "11:14", SOUTH, CRAWLING, "ghost4",        "garrin2",       "garrin_possessed_go_away", listOf("is_garrin_possessed")),
+        SchedulePart("lastdenn_house_garrin", "11:14", "11:19", EAST,  CRAWLING, "garrin2",       "garrin8",       "garrin_possessed_go_away", listOf("is_garrin_possessed")),
+        SchedulePart("lastdenn_house_garrin", "11:19", "11:24", SOUTH, CRAWLING, "garrin8",       "garrin9",       "garrin_possessed_go_away", listOf("is_garrin_possessed")),
 
         SchedulePart("lastdenn",              "11:24", "11:25", SOUTH, CRAWLING, "possessed1",    "possessed2",    "garrin_possessed_go_away", listOf("is_garrin_possessed")),
         SchedulePart("lastdenn",              "11:25", "11:35", EAST,  CRAWLING, "possessed2",    "possessed3",    "garrin_possessed_go_away", listOf("is_garrin_possessed")),
