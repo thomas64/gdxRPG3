@@ -159,7 +159,7 @@
     "inventory": {
       "weapon": "specialist_axe",
       "shield": "specialist_medium_shield",
-      "chest" : "armor_50"
+      "chest" : "armor_20"
     }
   },
   "orc_sergeant_spear": {
@@ -202,7 +202,7 @@
     "inventory": {
       "weapon": "specialist_spear",
       "shield": "specialist_medium_shield",
-      "chest" : "armor_50"
+      "chest" : "armor_20"
     }
   },
   "orc_general_axe"   : {

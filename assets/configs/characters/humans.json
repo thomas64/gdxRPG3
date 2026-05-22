@@ -24,7 +24,7 @@
     "inventory": {
       "weapon": "specialist_spear",
       "shield": "specialist_medium_shield",
-      "chest" : "armor_50"
+      "chest" : "armor_20"
     }
   }
 }
