@@ -18,8 +18,8 @@
   "jester"    : {
     "upgrade"    : 4,
     "description": [
-      "- 'Jester' allows for additional conversation responses,",
-      "  mostly used for joking and lying to people,",
+      "- 'Jester' allows for additional conversation",
+      "  responses, mostly used for joking to people,",
       "  with possibly more favorable outcomes."
     ]
   },

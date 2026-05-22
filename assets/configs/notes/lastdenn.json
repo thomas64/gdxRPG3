@@ -20,18 +20,13 @@
         ]
       },
       "3" : {"text": ["\"UNTO THE PEOPLE OF LASTDENN\""]},
-      "4" : {"text": ["\"Evdos, Keeper of Knowledge, speaks unto you this day. Bend not only the knee, but also the mind, for reverence without understanding is but an empty gesture.\""]},
-      "5" : {"text": ["\"A city built on strength alone shall fall like a tower of stone in water. But a city built on knowledge, mercy, memory, and honest trade shall stand against tempests seen and unseen.\""]},
-      "6" : {"text": ["\"Honor also Ylarus, God of Time, who measures the hour, appoints the season, and reminds all mortal hearts that nothing ripens before its proper moment.\""]},
-      "7" : {"text": ["\"For knowledge without patience becomes arrogance, and patience without knowledge becomes slumber. Evdos gives the light to understand, and Ylarus gives the hour in which understanding may bear fruit.\""]},
-      "8" : {"text": ["\"Therefore despise not the slow lesson, the late harvest, or the hard-earned truth. What is learned in due time stands longer than what is seized in haste.\""]},
-      "9" : {"text": ["\"I warn you gravely: Ulrog, God of Power, walks another road. His servants whisper in the ears of those who thirst for dominion, telling them that might is wisdom and conquest is proof.\""]},
-      "10": {"text": ["\"They promise swift victory and glory beyond measure. I tell you truly: they deliver only swift ruin, broken households, and ashes that choke the throat.\""]},
-      "11": {"text": ["\"The possessed know no peace in their possession. The dominated know no home, for home is built on love, memory, and trust, not terror.\""]},
-      "12": {"text": ["\"This is why I command you: Guard your children's minds as you guard their bodies. Teach them to read, to reason, to remember, and to question with humility, that they may not mistake a loud voice for a true one.\""]},
-      "13": {"text": ["\"For ignorance is the gate through which Ulrog enters. Wisdom is the lamp through which Evdos reveals, and patience is the watch through which Ylarus preserves. These gifts do not strive against one another. They stand together against domination.\""]},
-      "14": {"text": ["\"When fear takes root in your streets, when neighbor turns against neighbor, when brother turns against brother, do not say, 'We are abandoned.' Say instead, 'We are being weighed by truth, and our hour has come to choose well.'\""]},
-      "15": {"text": ["\"In that dark hour, choose knowledge over ignorance, choose patience over panic, and choose truth over power. For Evdos does not conquer; he enlightens. Ylarus does not flatter; he endures. Ulrog does not build; he consumes.\""], "choices": [{"command": "EXIT"}]}
+      "4" : {"text": ["\"Evdos, Keeper of Knowledge, speaks unto you this day. Bend not only the knee, but also the mind. Reverence without understanding is empty.\""]},
+      "5" : {"text": ["\"A city built on strength alone shall fall. But a city built on knowledge, mercy, memory, and honest trade shall endure.\""]},
+      "6" : {"text": ["\"Honor also Ylarus, God of Time, who measures the hour and appoints the season. Nothing ripens before its proper moment.\""]},
+      "7" : {"text": ["\"Knowledge without patience becomes arrogance, and patience without knowledge becomes slumber. Evdos gives light to understand, and Ylarus gives the hour for understanding to bear fruit.\""]},
+      "8" : {"text": ["\"Beware Ulrog, God of Power. His servants whisper that might is wisdom and conquest is proof. They promise glory, yet they bring ruin, broken households, and ashes.\""]},
+      "9" : {"text": ["\"Guard your children's minds as you guard their bodies. Teach them to read, to reason, to remember, and to question with humility. Ignorance is Ulrog's gate, but wisdom is the lamp of Evdos, and patience the watch of Ylarus.\""]},
+      "10": {"text": ["\"When fear takes root in your streets, say not, 'We are abandoned,' but, 'Our hour has come to choose well.' Choose knowledge over ignorance, patience over panic, and truth over power. Evdos enlightens, Ylarus endures, and Ulrog consumes.\""], "choices": [{"command": "EXIT"}]}
     }
   }
 }

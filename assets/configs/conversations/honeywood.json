@@ -1,4 +1,13 @@
 {
+  "test"                                : {
+    "comment"  : "testing starting conditions vs phrase looping. phrase looping wins from startAt.",
+    "condition": ["_n_100_==_item_herb"], "startAt": "10",
+    "phrases"  : {
+      "1" : {"text": ["starting phrase"]},
+      "2" : {"text": ["phrase looping"], "choices": [{"command": "EXIT", "nextId": "2"}]},
+      "10": {"text": ["phrase 100 herbs"], "choices": [{"command": "EXIT"}]}
+    }
+  },
   "should_really_be_going_to_the_forest": {
     "name"   : "Mozes",
     "phrases": {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="160" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="24" nextobjectid="329">
+<map version="1.11" tiledversion="1.12.1" orientation="orthogonal" renderorder="right-down" width="160" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="24" nextobjectid="329">
  <properties>
   <property name="bgm" value="bgm_overworld"/>
   <property name="bgs" value="bgs_creek"/>
@@ -284,7 +284,7 @@
   <object id="266" name="chest_alva_01" x="816" y="72" width="48" height="48"/>
   <object id="322" name="chest_alva_02" x="2688" y="768" width="48" height="48"/>
   <object id="267" name="sparkle_alva_01" x="912" y="528" width="48" height="48"/>
-  <object id="315" name="sparkle_alva_02" x="258" y="624" width="48" height="48"/>
+  <object id="315" name="sparkle_alva_02" x="259" y="624" width="48" height="48"/>
   <object id="316" name="sparkle_alva_03" x="1638" y="816" width="48" height="48"/>
   <object id="317" name="sparkle_alva_04" x="2682" y="1080" width="48" height="48"/>
   <object id="318" name="sparkle_alva_05" x="3072" y="138" width="48" height="48"/>

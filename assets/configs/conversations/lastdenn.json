@@ -256,45 +256,27 @@
     }
   },
   "lastdenn_bar_sailor"     : {
-    "name"   : "Sailor",
-    "phrases": {
+    "name"     : "Sailor",
+    "condition": ["is_garrin_possessed"], "startAt": "10",
+    "phrases"  : {
       "1" : {"text": ["Don't talk to me about this city. I have opinions and none of them are polite."]},
-      "2" : {
-        "choices": [
-          {"text": "*Ask what his problem is.*", "nextId": "10"},
-          {"text": "*Ask where he sails from.*", "nextId": "20"},
-          {"text": "*Respect his wishes and take your leave.*", "command": "EXIT"}
-        ]
-      },
-      "10": {"text": ["My ship is in port. Has been for nine days."]},
-      "11": {"text": ["Every morning we can unload, but we can't move crew through the gate before 15:00 without a headache."]},
-      "12": {"text": ["Half-day restrictions wreck full-day schedules. That's sailor math."], "choices": [{"nextId": "2"}]},
-      "20": {"text": ["Western coast. We run goods between four ports."]},
-      "21": {"text": ["Good work. Honest work. Until you get stuck waiting on city policy and losing coin to the captain at cards."]},
-      "22": {"text": ["Don't play cards with the captain, by the way. Just a tip."], "choices": [{"nextId": "2"}]}
+      "2" : {"text": ["Our ship is in port. Has been for nine days. Every morning we can unload, but moving crew through the gate before 15:00 is a fight."]},
+      "3" : {"text": ["Half-day restrictions wreck full-day schedules. That's sailor math."], "choices": [{"command": "EXIT"}]},
+      "10": {"text": ["You heard about the murder, right? Priest cut down in broad daylight. In the street."]},
+      "11": {"text": ["Some say possession. Some say madness. Some even say revenge."]},
+      "12": {"text": ["Me? I just know this: when a city starts drinking to forget by daylight, the night is going to be ugly."], "choices": [{"command": "EXIT"}]}
     }
   },
   "lastdenn_bar_captain"    : {
-    "name"   : "Captain",
-    "phrases": {
+    "name"     : "Captain",
+    "condition": ["is_garrin_possessed"], "startAt": "10",
+    "phrases"  : {
       "1" : {"text": ["At ease. You're not one of mine, but the habit sticks."]},
-      "2" : {
-        "choices": [
-          {"text": "*Ask how long he has been in Lastdenn.*", "nextId": "10"},
-          {"text": "*Ask what he thinks of the city.*", "nextId": "20"},
-          {"text": "*Ask if he knows anything about the prison.*", "nextId": "30"},
-          {"text": "*Take your leave.*", "command": "EXIT"}
-        ]
-      },
-      "10": {"text": ["Nine days. We were supposed to be here for two."]},
-      "11": {"text": ["The port works, but gate traffic is throttled until 15:00 every day."]},
-      "12": {"text": ["A half-open city is still a delay."], "choices": [{"nextId": "2"}]},
-      "20": {"text": ["Fine city. Good port. Reasonable ale."]},
-      "21": {"text": ["The administration is overcautious and the guard is stretched thin."]},
-      "22": {"text": ["Other than that, no complaints."], "choices": [{"nextId": "2"}]},
-      "30": {"text": ["The prison? I know they've had some trouble keeping it orderly lately."]},
-      "31": {"text": ["No details worth repeating in a crowded bar."]},
-      "32": {"text": ["Let's just say the guards have had a long week."], "choices": [{"nextId": "2"}]}
+      "2" : {"text": ["Nine days in Lastdenn. We were scheduled for two. The port works, but the gate bottleneck before 15:00 slows everything."]},
+      "3" : {"text": ["A half-open city is still a delay."], "choices": [{"command": "EXIT"}]},
+      "10": {"text": ["A priest murdered in open daylight changes a city in a single breath. Father Santino's death did exactly that."]},
+      "11": {"text": ["Shops still open, ale still pours, but nobody means their laughter. Every street sounds like people talking around a wound."]},
+      "12": {"text": ["Storms break masts and move on. This kind of grief sits in the timber and creaks for years."], "choices": [{"command": "EXIT"}]}
     }
   },
   "lastdenn_workload"       : {
@@ -388,11 +370,13 @@
     }
   },
   "lastdenn_crying_fan1"    : {
+    "name"   : "Maulou",
     "phrases": {
       "1": {"text": ["I just... I can't believe he's gone. Father Santino was such a good man, and he was always so kind to me. I don't know how I'm going to go on without him."], "choices": [{"command": "EXIT"}]}
     }
   },
   "lastdenn_crying_fan2"    : {
+    "name"   : "Tallis",
     "phrases": {
       "1": {"text": ["He was there... We were there... This morning. And it was beautiful. I can't believe that was the last time we'll ever hear him preach..."], "choices": [{"command": "EXIT"}]}
     }

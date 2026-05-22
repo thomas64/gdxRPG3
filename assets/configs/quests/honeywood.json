@@ -286,9 +286,11 @@
         "isResettable"   : false
       },
       "6" : {
-        "taskPhrase": "            Return to the elder with the package from the Fairy Shop.",
-        "type"      : "SHOW_ITEM",
-        "target"    : {"fine_fairy_ring": 1}
+        "taskPhrase"  : "            Return to the elder with the package from the Fairy Shop.",
+        "type"        : "SHOW_ITEM",
+        "target"      : {"fine_fairy_ring": 1},
+        "isResettable": false,
+        "comment"     : "het is een test om isResettable op false te zetten. waarom was deze eigenlijk resettable in de eerste plaats?"
       },
       "7" : {
         "comment"     : "WARNING: One link to 7 from SceneHoneywoodFarmAttackAfterWin(alt) and one from honeywood_stable.tmx. also in conversations: honeywood.json.",
