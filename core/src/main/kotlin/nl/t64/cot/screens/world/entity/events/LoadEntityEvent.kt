@@ -11,6 +11,7 @@ class LoadEntityEvent : Event {
     val direction: Direction?
     val position: Vector2
     val wanderBoxSize: Float?
+    val detectionRange: Int?
     val conversationOrBattleId: String?
 
     constructor(position: Vector2) {
@@ -18,6 +19,7 @@ class LoadEntityEvent : Event {
         this.direction = null
         this.position = position
         this.wanderBoxSize = null
+        this.detectionRange = null
         this.conversationOrBattleId = null
     }
 
@@ -27,6 +29,7 @@ class LoadEntityEvent : Event {
         this.direction = direction
         this.position = position
         this.wanderBoxSize = null
+        this.detectionRange = null
         this.conversationOrBattleId = null
     }
 
@@ -36,6 +39,7 @@ class LoadEntityEvent : Event {
         this.direction = null
         this.position = position
         this.wanderBoxSize = null
+        this.detectionRange = null
         this.conversationOrBattleId = null
     }
 
@@ -46,6 +50,7 @@ class LoadEntityEvent : Event {
         this.direction = direction
         this.position = position
         this.wanderBoxSize = null
+        this.detectionRange = null
         this.conversationOrBattleId = null
     }
 
@@ -58,6 +63,21 @@ class LoadEntityEvent : Event {
         this.direction = direction
         this.position = position
         this.wanderBoxSize = wanderBoxSize
+        this.detectionRange = null
+        this.conversationOrBattleId = conversationOrBattleId
+    }
+
+    constructor(state: EntityState,
+                direction: Direction,
+                position: Vector2,
+                wanderBoxSize: Float,
+                detectionRange: Int?,
+                conversationOrBattleId: String) {
+        this.state = state
+        this.direction = direction
+        this.position = position
+        this.wanderBoxSize = wanderBoxSize
+        this.detectionRange = detectionRange
         this.conversationOrBattleId = conversationOrBattleId
     }
 

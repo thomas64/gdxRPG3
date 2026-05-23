@@ -21,11 +21,13 @@ class InputEnemy : InputComponent() {
     private var path: DefaultGraphPath<TiledNode> = DefaultGraphPath()
     private var stateTime = 0f
     private var isDetectingPlayer = false
+    private var detectionRangeOverride: Int? = null
 
     override fun receive(event: Event) {
         if (event is LoadEntityEvent) {
             state = event.state!!
             direction = event.direction!!
+            detectionRangeOverride = event.detectionRange
         }
         if (event is CollisionEvent) {
             stateTime = 0f
@@ -53,19 +55,44 @@ class InputEnemy : InputComponent() {
         if (onDetectionEvent.moveSpeed == Constant.MOVE_SPEED_4) {
             isDetectingPlayer = false
             enemyEntity.send(SpeedEvent(Constant.MOVE_SPEED_1))
-        } else if (path.count > 0
-            && path.count < onDetectionEvent.moveSpeed / DETECTION_RANGE_DIVIDER
-        ) {
-            isDetectingPlayer = true
-            enemyEntity.send(SpeedEvent(Constant.MOVE_SPEED_2))
-        } else if (path.count > MAXIMUM_DETECTION_RANGE) {
+        } else {
+            updateDetectionState(onDetectionEvent.moveSpeed)
+        }
+        enemyEntity.send(DetectionEvent(isDetectingPlayer))
+    }
+
+    private fun updateDetectionState(moveSpeed: Float) {
+        if (isDetectingPlayer) {
+            updateExistingDetection()
+        } else {
+            possibleStartDetection(moveSpeed)
+        }
+    }
+
+    private fun updateExistingDetection() {
+        if (path.count == 0 || path.count > MAXIMUM_DETECTION_RANGE) {
             isDetectingPlayer = false
             enemyEntity.send(SpeedEvent(Constant.MOVE_SPEED_1))
-        } else if (path.count == 0) {
+        } else {
+            isDetectingPlayer = true
+            enemyEntity.send(SpeedEvent(Constant.MOVE_SPEED_2))
+        }
+    }
+
+    private fun possibleStartDetection(moveSpeed: Float) {
+        val detectionRange: Int = getDetectionRange(moveSpeed)
+        if (path.count in 1 until detectionRange) {
+            isDetectingPlayer = true
+            enemyEntity.send(SpeedEvent(Constant.MOVE_SPEED_2))
+        } else {
             isDetectingPlayer = false
             enemyEntity.send(SpeedEvent(Constant.MOVE_SPEED_1))
         }
-        enemyEntity.send(DetectionEvent(isDetectingPlayer))
+    }
+
+    private fun getDetectionRange(moveSpeed: Float): Int {
+        return detectionRangeOverride
+            ?: (moveSpeed / DETECTION_RANGE_DIVIDER).toInt().coerceIn(MINIMUM_DETECTION_RANGE, MAXIMUM_DETECTION_RANGE)
     }
 
     override fun update(entity: Entity, dt: Float) {

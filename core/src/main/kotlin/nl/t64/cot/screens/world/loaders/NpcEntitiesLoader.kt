@@ -57,6 +57,7 @@ internal class NpcEntitiesLoader(private val currentMap: GameMap) {
                                          gameMapEnemy.direction,
                                          gameMapEnemy.position,
                                          gameMapEnemy.wanderBoxSize,
+                                         gameMapEnemy.detectionRange,
                                          gameMapEnemy.battleId))
     }
 
