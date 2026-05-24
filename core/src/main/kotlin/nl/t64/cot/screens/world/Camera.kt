@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import com.badlogic.gdx.utils.viewport.Viewport
+import nl.t64.cot.screens.world.mapobjects.GameMapCameraBlocker
 import nl.t64.cot.sfx.ShakeCamera
 import kotlin.math.max
 import kotlin.math.roundToInt
@@ -20,6 +21,7 @@ class Camera : OrthographicCamera() {
     private val shakeCam: ShakeCamera = ShakeCamera()
     private var mapWidth: Float = 0f
     private var mapHeight: Float = 0f
+    private var cameraBlockers: List<GameMapCameraBlocker> = emptyList()
     private var originalPositionX: Float = 0f
     private var originalPositionY: Float = 0f
 
@@ -89,11 +91,66 @@ class Camera : OrthographicCamera() {
         this.mapHeight = mapHeight
     }
 
+    fun setCameraBlockers(blockers: List<GameMapCameraBlocker>) {
+        cameraBlockers = blockers
+    }
+
     private fun Vector2.toOffsetPositionForMapEdges(): Vector2 {
-        val halfCameraWidth = zoomedCameraWidth / 2 - getHorizontalSpaceBetweenCameraAndMapEdge()
-        val halfCameraHeight = zoomedCameraHeight / 2 - getVerticalSpaceBetweenCameraAndMapEdge()
-        return Vector2(MathUtils.clamp(this.x, halfCameraWidth, mapWidth - halfCameraWidth),
-                       MathUtils.clamp(this.y, halfCameraHeight, mapHeight - halfCameraHeight))
+        // Calculate visible half-sizes of camera on both axis
+        val halfCameraWidth: Float = zoomedCameraWidth / 2 - getHorizontalSpaceBetweenCameraAndMapEdge()
+        val halfCameraHeight: Float = zoomedCameraHeight / 2 - getVerticalSpaceBetweenCameraAndMapEdge()
+
+        // Calculate boundaries: how far left/right/up/down camera center can go while staying on map
+        val minXofCenterOfCameraPosition: Float = halfCameraWidth
+        val maxXofCenterOfCameraPosition: Float = mapWidth - halfCameraWidth
+        val minYofCenterOfCameraPosition: Float = halfCameraHeight
+        val maxYofCenterOfCameraPosition: Float = mapHeight - halfCameraHeight
+
+        // Start with map boundaries as the allowed range
+        var finalMinX: Float = minXofCenterOfCameraPosition
+        var finalMaxX: Float = maxXofCenterOfCameraPosition
+        var finalMinY: Float = minYofCenterOfCameraPosition
+        var finalMaxY: Float = maxYofCenterOfCameraPosition
+
+        // Apply blockers to ranges
+        cameraBlockers.forEach { blocker ->
+            when (blocker.axis) {
+                GameMapCameraBlocker.Axis.HORIZONTAL -> {
+                    val range: ClosedFloatingPointRange<Float> = minXofCenterOfCameraPosition..maxXofCenterOfCameraPosition
+                    val (min, max) = blocker.calculateRestrictedAxisRange(currentRange = finalMinX..finalMaxX,
+                                                                          edgeRange = range,
+                                                                          playerPosition = this,
+                                                                          halfCameraWidth = halfCameraWidth,
+                                                                          halfCameraHeight = halfCameraHeight)
+                    finalMinX = min
+                    finalMaxX = max
+                }
+                GameMapCameraBlocker.Axis.VERTICAL -> {
+                    val range: ClosedFloatingPointRange<Float> = minYofCenterOfCameraPosition..maxYofCenterOfCameraPosition
+                    val (min, max) = blocker.calculateRestrictedAxisRange(currentRange = finalMinY..finalMaxY,
+                                                                          edgeRange = range,
+                                                                          playerPosition = this,
+                                                                          halfCameraWidth = halfCameraWidth,
+                                                                          halfCameraHeight = halfCameraHeight)
+                    finalMinY = min
+                    finalMaxY = max
+                }
+            }
+        }
+
+        // Validate final ranges: if blockers created invalid ranges (min > max), reset to map boundaries
+        if (finalMinX > finalMaxX) {
+            finalMinX = minXofCenterOfCameraPosition
+            finalMaxX = maxXofCenterOfCameraPosition
+        }
+        if (finalMinY > finalMaxY) {
+            finalMinY = minYofCenterOfCameraPosition
+            finalMaxY = maxYofCenterOfCameraPosition
+        }
+
+        // Clamp camera position within final allowed ranges
+        return Vector2(MathUtils.clamp(this.x, finalMinX, finalMaxX),
+                       MathUtils.clamp(this.y, finalMinY, finalMaxY))
     }
 
     fun getHorizontalSpaceBetweenCameraAndMapEdge(): Float {

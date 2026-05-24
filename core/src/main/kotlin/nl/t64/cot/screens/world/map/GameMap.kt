@@ -26,6 +26,7 @@ import kotlin.concurrent.thread
 private const val DIRECTION_LAYER = "direction_north"
 private const val SOUND_LAYER = "sound"
 private const val BGS_VOLUME_LAYER = "bgs_volume"
+private const val CAMERA_BLOCKER_LAYER = "camera_blocker"
 private const val SCHEDULED_LAYER = "scheduled"
 private const val EVENT_LAYER = "event"
 private const val CUTSCENE_LAYER = "cutscene"
@@ -84,6 +85,7 @@ class GameMap(
     var playerSpawnDirection: Direction = Direction.NONE
     private val tiledGraphs: EnumMap<EntityState, TiledGraph> = EnumMap(EntityState::class.java)
 
+    val cameraBlockers: List<GameMapCameraBlocker> = loader.loadAllAndTransform(CAMERA_BLOCKER_LAYER) { GameMapCameraBlocker(it) }
     val schedules: List<RectangleMapObject> = loader.loadAllRectanglesFromLayer(SCHEDULED_LAYER)
     val npcs: List<GameMapNpc> = loader.loadAllAndTransform(NPC_LAYER) { GameMapNpc(it) }
     val heroes: List<GameMapHero> = loader.loadWithCustomFilterAndTransform(HERO_LAYER, { gameData.heroes.contains(it.name) }, { GameMapHero(it) })

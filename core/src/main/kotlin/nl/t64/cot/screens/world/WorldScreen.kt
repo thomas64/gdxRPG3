@@ -127,6 +127,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
         player.send(LoadEntityEvent(currentMap.playerSpawnDirection, currentMap.playerSpawnLocation))
         mapManager.updateBgsVolumes(player.position)
         camera.setNewMapSize(currentMap.pixelWidth, currentMap.pixelHeight)
+        camera.setCameraBlockers(currentMap.cameraBlockers)
         camera.setInitPosition(player.position)
         npcEntities = NpcEntitiesLoader(currentMap).createNpcs()
         lootList = LootLoader(currentMap).createLoot()
