@@ -69,7 +69,7 @@
     "gender"   : "his",
     "stats"    : {
       "intelligence": 10,
-      "dexterity"   : 7,
+      "dexterity"   : 5,
       "strength"    : 20,
       "speed"       : 14,
       "willpower"   : 8,
@@ -109,12 +109,12 @@
     "name"     : "Ryiah",
     "gender"   : "her",
     "stats"    : {
-      "intelligence": 22,
-      "dexterity"   : 14,
-      "strength"    : 8,
+      "intelligence": 15,
+      "dexterity"   : 8,
+      "strength"    : 6,
       "speed"       : 13,
       "willpower"   : 16,
-      "constitution": 16,
+      "constitution": 12,
       "stamina"     : 21
     },
     "skills"   : {
@@ -146,9 +146,9 @@
       "dexterity"   : 15,
       "strength"    : 10,
       "speed"       : 11,
-      "willpower"   : 18,
+      "willpower"   : 6,
       "constitution": 14,
-      "stamina"     : 13
+      "stamina"     : 9
     },
     "skills"   : {
       "alchemist" : 3,

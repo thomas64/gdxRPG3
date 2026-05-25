@@ -176,7 +176,7 @@
   },
   "garrin_in_jail"             : {
     "name"     : "Garrin",
-    "condition": ["witnessed_garrin_possession"], "startAt": "10",
+    "condition": ["_rc_==_a_q_quest_lastdenn_garrin", "witnessed_garrin_possession"], "startAt": "10",
     "phrases"  : {
       "1"   : {"text": [". . ."], "choices": [{"command": "EXIT"}]},
       "10"  : {"text": ["You were there, weren't you? You saw what happened."]},

@@ -19,7 +19,7 @@ class Participant(
     val isHero: Boolean get() = character is HeroItem
     var turnCounter: Int = 0
 
-    val maximumAP: Int = character.getCalculatedActionPoints()
+    val maximumAP: Int = character.getCalculatedActionPoints() // todo, kan deze verhoogd worden door bepaalde buffs?
     var currentAP: Int = maximumAP
     var staggerChance: Float = 65f
     var fleeChance: Int = 70
@@ -29,7 +29,7 @@ class Participant(
     private var amountOfTurns: Int = 0
 
     var performingType: AbilityItemId? = null
-    val isPerforming: Boolean = performingType != null
+    val isPerforming: Boolean = performingType != null  // todo, stuk vanwege val zonder getter?
 
 
     fun updateTurnCounter() {
@@ -80,7 +80,9 @@ class Participant(
         val attackerHasAdvantageScore: Int = if (attackSkill.hasAdvantageOver(targetSkill)) -4 else 0
         val attackerHasDisadvantageScore: Int = if (attackSkill.hasDisadvantageFrom(targetSkill)) 4 else 0
         val stealthScore: Int = character.getCalculatedTotalSkillOf(SkillItemId.STEALTH)
-        val protectionScore: Float = character.getCalculatedTotalProtection() / 5f // todo, magic attackers moeten letten op magic protection
+        val woundedScore: Float = (character.currentHp.toFloat() / character.maximumHp.coerceAtLeast(1)) * 6f
+        val protectionScore: Float = character.getCalculatedTotalProtection() / 8f // todo, magic attackers moeten letten op magic protection
+        val defenseScore: Float = character.getCalculatedTotalDefense() / 6f
 
         if (preferenceManager.isDebugModeOn) {
             println("A low score means a high priority in the queue!")
@@ -89,10 +91,12 @@ class Participant(
                         "attackerHasAdvantageScore: $attackerHasAdvantageScore, " +
                         "attackerHasDisadvantageScore: $attackerHasDisadvantageScore, " +
                         "stealthScore: $stealthScore, " +
-                        "protectionScore: $protectionScore = " +
-                        "total: ${stealthScore + protectionScore + attackerHasAdvantageScore + attackerHasDisadvantageScore + nextToTargetScore}")
+                        "woundedScore: $woundedScore, " +
+                        "protectionScore: $protectionScore, " +
+                        "defenseScore: $defenseScore = " +
+                        "total: ${stealthScore + woundedScore + protectionScore + defenseScore + attackerHasAdvantageScore + attackerHasDisadvantageScore + nextToTargetScore}")
         }
-        return stealthScore + protectionScore + attackerHasAdvantageScore + attackerHasDisadvantageScore + nextToTargetScore
+        return stealthScore + woundedScore + protectionScore + defenseScore + attackerHasAdvantageScore + attackerHasDisadvantageScore + nextToTargetScore
     }
 
     fun getPenaltyAp(): Int {
