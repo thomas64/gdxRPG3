@@ -80,7 +80,7 @@ class Participant(
         val attackerHasAdvantageScore: Int = if (attackSkill.hasAdvantageOver(targetSkill)) -4 else 0
         val attackerHasDisadvantageScore: Int = if (attackSkill.hasDisadvantageFrom(targetSkill)) 4 else 0
         val stealthScore: Int = character.getCalculatedTotalSkillOf(SkillItemId.STEALTH)
-        val protectionScore: Float = character.getCalculatedTotalProtection() / 5f
+        val protectionScore: Float = character.getCalculatedTotalProtection() / 5f // todo, magic attackers moeten letten op magic protection
 
         if (preferenceManager.isDebugModeOn) {
             println("A low score means a high priority in the queue!")

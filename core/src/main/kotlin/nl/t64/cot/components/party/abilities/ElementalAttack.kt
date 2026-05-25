@@ -59,7 +59,7 @@ class ElementalAttack(
                 Critical hit damage:                ${String.format("%3.0f", calculateCriticalDamageForVisual())}
                 -------------------------------------------
 
-                Enemy magic protection:             ${String.format("%3d", target.character.getCalculatedTotalMagicProtection())}
+                Enemy magic protection:             ${String.format("%3d", target.character.getCalculatedTotalMagicProtection())} %
                 Damage to inflict:                  ${String.format("%3d", calculateDamageForVisual().minusProtection())}
                 Damage to inflict if critical hit:  ${String.format("%3d", calculateCriticalDamageForVisual().minusProtection())}
 
@@ -95,8 +95,8 @@ class ElementalAttack(
         return false
     }
 
-    override fun getDamageMitigation(): Int {
-        return target.character.getCalculatedTotalMagicProtection()
+    override fun getDamageReductionPercentage(): Float {
+        return target.character.getCalculatedTotalMagicProtection().toFloat()
     }
 
     override fun getCriticalHitSkillId(): SkillItemId {

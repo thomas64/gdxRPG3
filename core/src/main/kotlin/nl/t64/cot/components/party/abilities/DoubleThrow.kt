@@ -51,7 +51,7 @@ class DoubleThrow(
                 Critical hit damage:                ${String.format("%3.0f", calculateCriticalDamageForVisual())}
                 -------------------------------------------
 
-                Enemy protection:                   ${String.format("%3d", target.character.getCalculatedTotalProtection())}
+                Enemy protection:                   ${String.format("%3d", target.character.getCalculatedTotalProtection())} %
                 Damage to inflict:                  ${String.format("%3d", calculateDamageForVisual().minusProtection())} [BLUE]x2[BLACK]
                 Damage to inflict if critical hit:  ${String.format("%3d", calculateCriticalDamageForVisual().minusProtection())}
 

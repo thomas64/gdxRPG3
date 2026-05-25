@@ -43,11 +43,11 @@
     ]
   },
   "willpower"   : {
-    "maximum"    : 30,
-    "upgrade"    : 0.18,
+    "maximum"    : 40,
+    "upgrade"    : 0.16,
     "description": [
       "- 'Willpower' increases your defenses against enemy offensive magic spells in combat.",
-      "  Each rank in 'Willpower' increases 'Magic Protection' by 3."
+      "  Each rank in 'Willpower' increases 'Magic Protection' by 2%."
     ]
   },
   "constitution": {

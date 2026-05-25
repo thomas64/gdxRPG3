@@ -17,7 +17,7 @@ import nl.t64.cot.components.party.stats.StatItemId
 import nl.t64.cot.screens.inventory.tooltip.PersonalityTooltip
 
 
-private const val FIRST_COLUMN_WIDTH = 175f
+private const val FIRST_COLUMN_WIDTH = 200f
 private const val SECOND_COLUMN_WIDTH = 15f
 private const val THIRD_COLUMN_WIDTH = 40f
 private const val FOURTH_COLUMN_WIDTH = 35f
@@ -109,14 +109,14 @@ internal class StatsTable(
         table.add(selectedHero.getCalculatedActionPoints().toString())
         table.add("").row()
 
-        table.add(createCalcLabel(CalcAttributeId.BASE_HIT, "Chance to hit (%)"))
+        table.add(createCalcLabel(CalcAttributeId.BASE_HIT, "Chance to hit", isPercentage = true))
         table.add("")
         val baseHit: Int = selectedHero.getCalcValueOf(InventoryGroup.WEAPON, CalcAttributeId.BASE_HIT)
         table.add(baseHit.toString())
         val bonusHit: Int = selectedHero.getCalculatedTotalHitWithBonus() - baseHit
         addExtraToTable(bonusHit)
 
-        table.add(createCalcLabel(CalcAttributeId.DEFENSE, CalcAttributeId.DEFENSE.title + " (%)"))
+        table.add(createCalcLabel(CalcAttributeId.DEFENSE, isPercentage = true))
         table.add("")
         table.add(selectedHero.getCalculatedTotalDefense().toString())
         table.add("").row()
@@ -128,14 +128,14 @@ internal class StatsTable(
         val bonusDamage: Int = selectedHero.getCalculatedTotalDamage() - baseDamage
         addExtraToTable(bonusDamage)
 
-        table.add(createCalcLabel(CalcAttributeId.PROTECTION))
+        table.add(createCalcLabel(CalcAttributeId.PROTECTION, isPercentage = true))
         table.add("")
-        table.add(selectedHero.getSumOfEquipmentOfCalc(CalcAttributeId.PROTECTION).toString())
+        table.add(selectedHero.getCalculatedProtection().toString())
         addExtraToTable(selectedHero.getPossibleExtraProtection())
 
-        table.add(createCalcLabel(CalcAttributeId.MAGIC_PROTECTION))
+        table.add(createCalcLabel(CalcAttributeId.MAGIC_PROTECTION, isPercentage = true))
         table.add("")
-        table.add(selectedHero.getCalculatedTotalMagicProtection().toString())
+        table.add(selectedHero.getCalculatedMagicProtection().toString())
         addExtraToTable(selectedHero.getPossibleExtraMagicProtection())
 
         table.add(createCalcLabel(CalcAttributeId.SPELL_BATTERY))
@@ -202,7 +202,10 @@ internal class StatsTable(
         }
     }
 
-    private fun createCalcLabel(calcAttributeId: CalcAttributeId, text: String = calcAttributeId.title): Label {
+    private fun createCalcLabel(calcAttributeId: CalcAttributeId,
+                                title: String = calcAttributeId.title,
+                                isPercentage: Boolean = false): Label {
+        val text = if (isPercentage) "$title (%)" else title
         return Label(text, createLabelStyle()).apply { name = calcAttributeId.name }
     }
 

@@ -16,6 +16,9 @@ import kotlin.math.roundToInt
 import kotlin.random.Random
 
 
+// the higher this factor, the less effective armor is at high values. when K is 0, armor is 100% effective.
+private const val ARMOR_K_FACTOR = 20f
+
 abstract class Character(
     val id: String = "",
     val name: String = "",
@@ -131,11 +134,29 @@ abstract class Character(
     }
 
     fun getCalculatedTotalProtection(): Int {
-        return getSumOfEquipmentOfCalc(CalcAttributeId.PROTECTION) + getPossibleExtraProtection()
+        return getCalculatedProtection() + getPossibleExtraProtection()
+    }
+
+    fun getCalculatedProtection(): Int {
+        val protection: Int = getSumOfEquipmentOfCalc(CalcAttributeId.PROTECTION)
+        val reductionFraction: Float = protection / (ARMOR_K_FACTOR + protection)
+        return (reductionFraction * 100f).roundToInt()
+    }
+
+    fun getPossibleExtraProtection(): Int {
+        return inventory.getBonusProtectionWhenArmorSetIsComplete() + bonus.getProtection()
     }
 
     fun getCalculatedTotalMagicProtection(): Int {
-        return (getCalculatedTotalStatOf(StatItemId.WILLPOWER) * 3f).roundToInt() // todo
+        return getCalculatedMagicProtection() + getPossibleExtraMagicProtection()
+    }
+
+    fun getCalculatedMagicProtection(): Int {
+        return getCalculatedTotalStatOf(StatItemId.WILLPOWER) * 2
+    }
+
+    fun getPossibleExtraMagicProtection(): Int {
+        return 0 // todo
     }
 
     fun getCalculatedTotalDefense(): Int {
@@ -152,14 +173,6 @@ abstract class Character(
 
     fun getSumOfEquipmentOfCalc(calcAttributeId: CalcAttributeId): Int {
         return inventory.getSumOfCalc(calcAttributeId)
-    }
-
-    fun getPossibleExtraProtection(): Int {
-        return inventory.getBonusProtectionWhenArmorSetIsComplete() + bonus.getProtection()
-    }
-
-    fun getPossibleExtraMagicProtection(): Int {
-        return 0 // todo
     }
 
     fun applyGamblerBonusTo(amount: Float): Float {

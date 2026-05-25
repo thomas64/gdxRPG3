@@ -191,12 +191,13 @@ abstract class BattleAbilityItem(
     }
 
     protected fun Float.minusProtection(): Int {
-        val modifiedDamage: Float = this - getDamageMitigation()
+        val reductionPercentage: Float = getDamageReductionPercentage()
+        val modifiedDamage: Float = this * (1f - (reductionPercentage / 100f))
         return modifiedDamage.roundToInt().coerceAtLeast(1)
     }
 
-    protected open fun getDamageMitigation(): Int {
-        return target.character.getCalculatedTotalProtection()
+    protected open fun getDamageReductionPercentage(): Float {
+        return target.character.getCalculatedTotalProtection().toFloat()
     }
 
     protected fun createNoWeaponMessage(): String {
