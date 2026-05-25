@@ -6,18 +6,18 @@
     "xp"       : 100,
     "drops"    : {"gold": 90},
     "stats"    : {
-      "intelligence": 60,
-      "dexterity"   : 1,
-      "strength"    : 1,
+      "intelligence": 30,
+      "dexterity"   : 10,
+      "strength"    : 10,
       "speed"       : 30,
-      "willpower"   : 30,
+      "willpower"   : 40,
       "constitution": 60,
       "stamina"     : 40
     },
     "skills"   : {
       "warrior": 10,
       "wizard" : 10,
-      "staff"  : 30
+      "staff"  : 40
     },
     "abilities": [
       "strike_2", "strike_3", "strike_4"

@@ -6,13 +6,13 @@
     "xp"       : 6,
     "drops"    : {"spice": 25},
     "stats"    : {
-      "intelligence": 1,
-      "dexterity"   : 1,
-      "strength"    : 1,
+      "intelligence": 8,
+      "dexterity"   : 14,
+      "strength"    : 4,
       "speed"       : 30,
       "willpower"   : 10,
       "constitution": 8,
-      "stamina"     : 1
+      "stamina"     : 12
     },
     "skills"   : {
       "dagger": 1
@@ -21,8 +21,8 @@
       "scratch_2"
     ],
     "inventory": {
-      "weapon": "attack_90_15",
-      "chest" : "armor_2"
+      "weapon": "attack_dagger_dex_90_9",
+      "chest" : "armor_4"
     }
   }
 }

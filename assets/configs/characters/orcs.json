@@ -19,13 +19,13 @@
       "gold"                 : 60
     },
     "stats"    : {
-      "intelligence": 1,
-      "dexterity"   : 1,
+      "intelligence": 5,
+      "dexterity"   : 5,
       "strength"    : 12,
       "speed"       : 12,
       "willpower"   : 12,
       "constitution": 12,
-      "stamina"     : 1
+      "stamina"     : 12
     },
     "abilities": [
       "strike_2", "strike_3", "strike_4"
@@ -59,13 +59,13 @@
       "gold"                 : 60
     },
     "stats"    : {
-      "intelligence": 1,
-      "dexterity"   : 1,
+      "intelligence": 5,
+      "dexterity"   : 5,
       "strength"    : 12,
       "speed"       : 12,
       "willpower"   : 12,
       "constitution": 12,
-      "stamina"     : 1
+      "stamina"     : 12
     },
     "abilities": [
       "strike_2", "strike_3", "strike_4"
@@ -99,13 +99,13 @@
       "gold"                 : 60
     },
     "stats"    : {
-      "intelligence": 1,
-      "dexterity"   : 1,
+      "intelligence": 5,
+      "dexterity"   : 5,
       "strength"    : 12,
       "speed"       : 12,
       "willpower"   : 12,
       "constitution": 12,
-      "stamina"     : 1
+      "stamina"     : 12
     },
     "abilities": [
       "strike_2", "strike_3", "strike_4"
@@ -140,13 +140,13 @@
       "gold"                       : 75
     },
     "stats"    : {
-      "intelligence": 1,
-      "dexterity"   : 1,
+      "intelligence": 10,
+      "dexterity"   : 10,
       "strength"    : 18,
       "speed"       : 18,
       "willpower"   : 18,
       "constitution": 18,
-      "stamina"     : 1
+      "stamina"     : 18
     },
     "abilities": [
       "strike_2", "strike_3", "strike_4"
@@ -159,7 +159,7 @@
     "inventory": {
       "weapon": "specialist_axe",
       "shield": "specialist_medium_shield",
-      "chest" : "armor_20"
+      "chest" : "armor_50"
     }
   },
   "orc_sergeant_spear": {
@@ -183,13 +183,13 @@
       "gold"                       : 75
     },
     "stats"    : {
-      "intelligence": 1,
-      "dexterity"   : 1,
+      "intelligence": 10,
+      "dexterity"   : 10,
       "strength"    : 18,
       "speed"       : 18,
       "willpower"   : 18,
       "constitution": 18,
-      "stamina"     : 1
+      "stamina"     : 18
     },
     "abilities": [
       "strike_2", "strike_3", "strike_4"
@@ -202,7 +202,7 @@
     "inventory": {
       "weapon": "specialist_spear",
       "shield": "specialist_medium_shield",
-      "chest" : "armor_20"
+      "chest" : "armor_50"
     }
   },
   "orc_general_axe"   : {
@@ -212,11 +212,11 @@
     "xp"       : 90,
     "drops"    : {"masterwork_axe": 50, "masterwork_heavy_shield": 50, "energy_potion_++": 90, "gold": 90},
     "stats"    : {
-      "intelligence": 30,
-      "dexterity"   : 1,
+      "intelligence": 10,
+      "dexterity"   : 10,
       "strength"    : 30,
       "speed"       : 30,
-      "willpower"   : 30,
+      "willpower"   : 40,
       "constitution": 60,
       "stamina"     : 40
     },
@@ -232,7 +232,7 @@
     "inventory": {
       "weapon": "masterwork_axe",
       "shield": "masterwork_heavy_shield",
-      "chest" : "armor_100"
+      "chest" : "armor_200"
     }
   },
   "orc_general_spear" : {
@@ -242,11 +242,11 @@
     "xp"       : 90,
     "drops"    : {"masterwork_spear": 50, "masterwork_heavy_shield": 50, "energy_potion_++": 90, "gold": 90},
     "stats"    : {
-      "intelligence": 30,
-      "dexterity"   : 1,
+      "intelligence": 10,
+      "dexterity"   : 10,
       "strength"    : 30,
       "speed"       : 30,
-      "willpower"   : 30,
+      "willpower"   : 40,
       "constitution": 60,
       "stamina"     : 40
     },
@@ -262,7 +262,7 @@
     "inventory": {
       "weapon": "masterwork_spear",
       "shield": "masterwork_heavy_shield",
-      "chest" : "armor_100"
+      "chest" : "armor_200"
     }
   }
 }

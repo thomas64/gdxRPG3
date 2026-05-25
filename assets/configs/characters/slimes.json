@@ -6,13 +6,13 @@
     "xp"       : 3,
     "drops"    : {"green_jelly": 25},
     "stats"    : {
-      "intelligence": 1,
-      "dexterity"   : 1,
-      "strength"    : 1,
+      "intelligence": 2,
+      "dexterity"   : 5,
+      "strength"    : 10,
       "speed"       : 5,
-      "willpower"   : 1,
+      "willpower"   : 2,
       "constitution": 6,
-      "stamina"     : 1
+      "stamina"     : 3
     },
     "skills"   : {
       "spear": 1
@@ -21,8 +21,8 @@
       "body_slam_2"
     ],
     "inventory": {
-      "weapon": "attack_65_20",
-      "chest" : "armor_1"
+      "weapon": "attack_spear_str_65_13",
+      "chest" : "armor_2"
     }
   },
   "blue_slime_medicine": {
@@ -32,13 +32,13 @@
     "xp"       : 5,
     "drops"    : {"blue_jelly": 100},
     "stats"    : {
-      "intelligence": 1,
-      "dexterity"   : 1,
-      "strength"    : 1,
+      "intelligence": 2,
+      "dexterity"   : 5,
+      "strength"    : 14,
       "speed"       : 5,
-      "willpower"   : 1,
+      "willpower"   : 2,
       "constitution": 10,
-      "stamina"     : 1
+      "stamina"     : 5
     },
     "skills"   : {
       "spear": 1
@@ -47,7 +47,7 @@
       "body_slam_2"
     ],
     "inventory": {
-      "weapon": "attack_65_25",
+      "weapon": "attack_spear_str_65_15",
       "chest" : "armor_6"
     }
   },
@@ -58,13 +58,13 @@
     "xp"       : 5,
     "drops"    : {"blue_jelly": 25},
     "stats"    : {
-      "intelligence": 1,
-      "dexterity"   : 1,
-      "strength"    : 1,
+      "intelligence": 2,
+      "dexterity"   : 5,
+      "strength"    : 14,
       "speed"       : 5,
-      "willpower"   : 1,
+      "willpower"   : 2,
       "constitution": 10,
-      "stamina"     : 1
+      "stamina"     : 5
     },
     "skills"   : {
       "spear": 1
@@ -73,7 +73,7 @@
       "body_slam_2"
     ],
     "inventory": {
-      "weapon": "attack_65_25",
+      "weapon": "attack_spear_str_65_15",
       "chest" : "armor_6"
     }
   }

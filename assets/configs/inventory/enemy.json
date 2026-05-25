@@ -1,68 +1,64 @@
 {
-  "attack_65_20": {
+  "attack_spear_str_65_13": {
     "group"       : "WEAPON",
     "skill"       : "SPEAR",
     "min_strength": 1,
     "base_hit"    : 65,
-    "damage"      : 20
+    "damage"      : 13
   },
-  "attack_65_25": {
+  "attack_spear_str_65_15": {
     "group"       : "WEAPON",
     "skill"       : "SPEAR",
     "min_strength": 1,
     "base_hit"    : 65,
-    "damage"      : 25
-  },
-  "attack_80_15": {
-    "group"       : "WEAPON",
-    "skill"       : "AXE",
-    "min_strength": 1,
-    "base_hit"    : 80,
     "damage"      : 15
   },
-  "attack_80_20": {
-    "group"       : "WEAPON",
-    "skill"       : "AXE",
-    "min_strength": 1,
-    "base_hit"    : 80,
-    "damage"      : 20
+  "attack_axe_dex_80_10"  : {
+    "group"        : "WEAPON",
+    "skill"        : "AXE",
+    "min_dexterity": 1,
+    "base_hit"     : 80,
+    "damage"       : 10
   },
-  "attack_90_15": {
-    "group"       : "WEAPON",
-    "skill"       : "DAGGER",
-    "min_strength": 1,
-    "base_hit"    : 90,
-    "damage"      : 15
+  "attack_axe_dex_80_12"  : {
+    "group"        : "WEAPON",
+    "skill"        : "AXE",
+    "min_dexterity": 1,
+    "base_hit"     : 80,
+    "damage"       : 12
   },
-  "armor_1"     : {
-    "group"     : "CHEST",
-    "protection": 1
+  "attack_dagger_dex_90_9": {
+    "group"        : "WEAPON",
+    "skill"        : "DAGGER",
+    "min_dexterity": 1,
+    "base_hit"     : 90,
+    "damage"       : 9
   },
-  "armor_2"     : {
+  "armor_2"               : {
     "group"     : "CHEST",
     "protection": 2
   },
-  "armor_6"     : {
+  "armor_4"               : {
+    "group"     : "CHEST",
+    "protection": 4
+  },
+  "armor_6"               : {
     "group"     : "CHEST",
     "protection": 6
   },
-  "armor_8"     : {
+  "armor_8"               : {
     "group"     : "CHEST",
     "protection": 8
   },
-  "armor_20"    : {
-    "group"     : "CHEST",
-    "protection": 20
-  },
-  "armor_50"    : {
+  "armor_50"              : {
     "group"     : "CHEST",
     "protection": 50
   },
-  "armor_100"   : {
+  "armor_200"             : {
     "group"     : "CHEST",
-    "protection": 100
+    "protection": 200
   },
-  "armor_400"   : {
+  "armor_400"             : {
     "group"     : "CHEST",
     "protection": 400
   }

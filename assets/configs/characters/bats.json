@@ -6,13 +6,13 @@
     "xp"       : 2,
     "drops"    : {"leather": 25},
     "stats"    : {
-      "intelligence": 1,
-      "dexterity"   : 1,
-      "strength"    : 1,
+      "intelligence": 3,
+      "dexterity"   : 10,
+      "strength"    : 2,
       "speed"       : 20,
-      "willpower"   : 1,
+      "willpower"   : 3,
       "constitution": 4,
-      "stamina"     : 1
+      "stamina"     : 2
     },
     "skills"   : {
       "axe": 1
@@ -21,7 +21,7 @@
       "bite_3", "bite_4"
     ],
     "inventory": {
-      "weapon": "attack_80_15"
+      "weapon": "attack_axe_dex_80_10"
     }
   },
   "purple_bat": {
@@ -31,13 +31,13 @@
     "xp"       : 4,
     "drops"    : {"leather": 25},
     "stats"    : {
-      "intelligence": 1,
-      "dexterity"   : 1,
-      "strength"    : 1,
+      "intelligence": 3,
+      "dexterity"   : 13,
+      "strength"    : 2,
       "speed"       : 20,
-      "willpower"   : 1,
+      "willpower"   : 3,
       "constitution": 6,
-      "stamina"     : 1
+      "stamina"     : 2
     },
     "skills"   : {
       "axe": 1
@@ -46,7 +46,7 @@
       "bite_3", "bite_4"
     ],
     "inventory": {
-      "weapon": "attack_80_20"
+      "weapon": "attack_axe_dex_80_12"
     }
   }
 }
