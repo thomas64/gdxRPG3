@@ -22,6 +22,7 @@ class AttackData {
 
     var isHeal: Boolean = false
     var perform: AbilityItemId? = null
+    var magicAbility: AbilityItemId? = null
 
     var castMessage: String = ""
 }

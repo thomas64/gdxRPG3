@@ -1,5 +1,6 @@
 package nl.t64.cot.components.party.abilities
 
+import nl.t64.cot.Utils.gameData
 import nl.t64.cot.components.battle.AttackData
 import nl.t64.cot.components.battle.Participant
 import nl.t64.cot.components.party.skills.SkillItemId
@@ -25,6 +26,9 @@ abstract class BuffAbilityItem(
         return """
             $name on ${target.character.name}
 
+            Requires:
+            ${abilityItem.requiredResource.title} (${gameData.inventory.getTotalOfItem(abilityItem.requiredResource.title)})
+
             Effect:
             ${getBuffDescription()}
         """.trimIndent().trimMargin()
@@ -43,7 +47,7 @@ abstract class BuffAbilityItem(
         return listOf(specialData)
     }
 
-    protected fun calculateBonusValue(): Int {
+    protected open fun calculateBonusValue(): Int {
         return attacker.character.getCalculatedTotalSkillOf(SkillItemId.WIZARD)
     }
 

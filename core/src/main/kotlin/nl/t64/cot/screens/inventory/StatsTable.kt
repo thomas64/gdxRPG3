@@ -14,7 +14,6 @@ import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.components.party.stats.StatItem
 import nl.t64.cot.components.party.stats.StatItemId
-import nl.t64.cot.components.party.toCalcAttributeId
 import nl.t64.cot.screens.inventory.tooltip.PersonalityTooltip
 
 
@@ -32,7 +31,7 @@ internal class StatsTable(
     tooltip: PersonalityTooltip
 ) : BaseTable(tooltip) {
 
-    private val verticalKeyListener = ListenerKeyVertical { updateIndex(it, table.rows)}
+    private val verticalKeyListener = ListenerKeyVertical { updateIndex(it, table.rows) }
 
     init {
         table.columnDefaults(0).width(FIRST_COLUMN_WIDTH)
@@ -105,36 +104,41 @@ internal class StatsTable(
         fillRow("Derived Attributes:")
         fillEmptyRow()
 
-        table.add(Label(CalcAttributeId.ACTION_POINTS.title, createLabelStyle()))
+        table.add(createCalcLabel(CalcAttributeId.ACTION_POINTS))
         table.add("")
         table.add(selectedHero.getCalculatedActionPoints().toString())
         table.add("").row()
 
-        table.add(Label("Chance to hit (%)", createLabelStyle()))
+        table.add(createCalcLabel(CalcAttributeId.BASE_HIT, "Chance to hit (%)"))
         table.add("")
         val baseHit: Int = selectedHero.getCalcValueOf(InventoryGroup.WEAPON, CalcAttributeId.BASE_HIT)
         table.add(baseHit.toString())
         val bonusHit: Int = selectedHero.getCalculatedTotalHitWithBonus() - baseHit
         addExtraToTable(bonusHit)
 
-        table.add(Label(CalcAttributeId.DEFENSE.title + " (%)", createLabelStyle()))
+        table.add(createCalcLabel(CalcAttributeId.DEFENSE, CalcAttributeId.DEFENSE.title + " (%)"))
         table.add("")
         table.add(selectedHero.getCalculatedTotalDefense().toString())
         table.add("").row()
 
-        table.add(Label(CalcAttributeId.DAMAGE.title, createLabelStyle()))
+        table.add(createCalcLabel(CalcAttributeId.DAMAGE))
         table.add("")
         val baseDamage: Int = selectedHero.getCalcValueOf(InventoryGroup.WEAPON, CalcAttributeId.DAMAGE)
         table.add(baseDamage.toString())
         val bonusDamage: Int = selectedHero.getCalculatedTotalDamage() - baseDamage
         addExtraToTable(bonusDamage)
 
-        table.add(Label(CalcAttributeId.PROTECTION.title, createLabelStyle()))
+        table.add(createCalcLabel(CalcAttributeId.PROTECTION))
         table.add("")
         table.add(selectedHero.getSumOfEquipmentOfCalc(CalcAttributeId.PROTECTION).toString())
         addExtraToTable(selectedHero.getPossibleExtraProtection())
 
-        table.add(Label(CalcAttributeId.SPELL_BATTERY.title, createLabelStyle()))
+        table.add(createCalcLabel(CalcAttributeId.MAGIC_PROTECTION))
+        table.add("")
+        table.add(selectedHero.getCalculatedTotalMagicProtection().toString())
+        addExtraToTable(selectedHero.getPossibleExtraMagicProtection())
+
+        table.add(createCalcLabel(CalcAttributeId.SPELL_BATTERY))
         table.add("")
         table.add(selectedHero.getSumOfEquipmentOfCalc(CalcAttributeId.SPELL_BATTERY).toString())
         table.add("").row()
@@ -193,9 +197,13 @@ internal class StatsTable(
             override val name: String = ""
             override val description: List<String> = emptyList()
             override fun getTotalDescription(): String {
-                return calcTitle.text.toString().toCalcAttributeId().getDescription()
+                return CalcAttributeId.valueOf(calcTitle.name).getDescription()
             }
         }
+    }
+
+    private fun createCalcLabel(calcAttributeId: CalcAttributeId, text: String = calcAttributeId.title): Label {
+        return Label(text, createLabelStyle()).apply { name = calcAttributeId.name }
     }
 
     private fun createLabelStyle(): LabelStyle {

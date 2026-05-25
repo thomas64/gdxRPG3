@@ -10,14 +10,17 @@ import kotlin.random.Random
 
 class ShakeEffect(
     private val battleFieldTable: Table,
-    private val currentTargetName: String
+    private val currentTargetName: String,
+    private val intensity: Float = 20f,
+    private val duration: Float = 0.3f,
+    private val initialDelay: Float = 0.2f
 ) {
 
     fun start() {
         val target: Actor? = findActorIn(battleFieldTable)
         target?.addAction(Actions.sequence(
-            Actions.delay(0.2f),
-            ShakeAction()
+            Actions.delay(initialDelay),
+            ShakeAction(intensity, duration)
         ))
     }
 
@@ -32,8 +35,8 @@ class ShakeEffect(
 
 
 private class ShakeAction(
-    private val intensity: Float = 20f,
-    private val duration: Float = 0.3f
+    private val intensity: Float,
+    private val duration: Float
 ) : Action() {
     private var elapsedTime = 0f
     private var originalX = 0f

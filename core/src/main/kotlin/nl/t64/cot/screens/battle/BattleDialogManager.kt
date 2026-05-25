@@ -39,16 +39,9 @@ class BattleDialogManager(
     ) {
         val attackAction = AttackAction(currentParticipant.invoke(), selectedTarget, selectedAttack)
 
-        val notEnoughApSpMessage: String? = attackAction.isCostingTooMuchApSp()
-        if (notEnoughApSpMessage != null) {
-            showSmallLeftAlignMessageDialog(notEnoughApSpMessage)
-            return
-        }
-        val unableMessage: String? = attackAction.isUnableWithCurrentWeapon()
-        if (unableMessage != null) {
-            showSmallLeftAlignMessageDialog(unableMessage)
-            return
-        }
+        if (shouldShowErrorMessage(attackAction.isCostingTooMuchApSp())) return
+        if (shouldShowErrorMessage(attackAction.isCostingTooMuchResources())) return
+        if (shouldShowErrorMessage(attackAction.isUnableWithCurrentWeapon())) return
 
         val message = attackAction.createConfirmationMessage()
         val dialog = TwoColumnsQuestionDialog(message) { onConfirmed.invoke(attackAction) }
@@ -62,30 +55,23 @@ class BattleDialogManager(
     ) {
         val specialAction = SpecialAction(currentParticipant.invoke(), selectedTarget, selectedSpecial)
 
-        val notEnoughApSpMessage: String? = specialAction.isCostingTooMuchApSp()
-        if (notEnoughApSpMessage != null) {
-            showSmallLeftAlignMessageDialog(notEnoughApSpMessage)
-            return
-        }
-        val notEnoughRsMessage: String? = specialAction.isCostingTooMuchResources()
-        if (notEnoughRsMessage != null) {
-            showSmallLeftAlignMessageDialog(notEnoughRsMessage)
-            return
-        }
-        val notAllowedMessage: String? = specialAction.isAlreadyCast()
-        if (notAllowedMessage != null) {
-            showSmallLeftAlignMessageDialog(notAllowedMessage)
-            return
-        }
-        val unableMessage: String? = specialAction.isUnableWithCurrentWeapon()
-        if (unableMessage != null) {
-            showSmallLeftAlignMessageDialog(unableMessage)
-            return
-        }
+        if (shouldShowErrorMessage(specialAction.isCostingTooMuchApSp())) return
+        if (shouldShowErrorMessage(specialAction.isCostingTooMuchResources())) return
+        if (shouldShowErrorMessage(specialAction.isAlreadyCast())) return
+        if (shouldShowErrorMessage(specialAction.isUnableWithCurrentWeapon())) return
 
         val message = specialAction.createConfirmationMessage()
         val dialog = TwoColumnsQuestionDialog(message) { onConfirmed.invoke(specialAction) }
         dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0, 1f)
+    }
+
+    private fun shouldShowErrorMessage(possibleErrorMessage: String?): Boolean {
+        if (possibleErrorMessage != null) {
+            showSmallLeftAlignMessageDialog(possibleErrorMessage)
+            return true
+        } else {
+            return false
+        }
     }
 
     private fun showSmallLeftAlignMessageDialog(message: String) {

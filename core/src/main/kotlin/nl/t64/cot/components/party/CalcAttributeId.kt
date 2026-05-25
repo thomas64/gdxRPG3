@@ -10,7 +10,8 @@ enum class CalcAttributeId(override val title: String) : SuperEnum {
                   character is able to do each turn in combat.
 
                 - Each 20 ranks in 'Intelligence', 'Dexterity',
-                  'Strength' and 'Speed' together increases AP by 1.""".trimIndent()
+                  'Strength' and 'Speed' together increases AP by 1.
+                  Plus 2.""".trimIndent()
         }
     },
 
@@ -62,6 +63,16 @@ enum class CalcAttributeId(override val title: String) : SuperEnum {
         }
     },
 
+    MAGIC_PROTECTION("Magic Protection") {
+        override fun getDescription(): String {
+            return """
+                - '$title' decreases the enemy's damage it inflicts
+                  to you with magic spells in combat.
+
+                - '$title' is the counterpart of 'Damage'.""".trimIndent()
+        }
+    },
+
     DEFENSE("Defense") {
         override fun getDescription(): String {
             return """
@@ -86,11 +97,4 @@ enum class CalcAttributeId(override val title: String) : SuperEnum {
 
     abstract fun getDescription(): String
 
-}
-
-fun String.toCalcAttributeId(): CalcAttributeId {
-    return when {
-        this.lowercase().contains("hit") -> CalcAttributeId.BASE_HIT
-        else -> CalcAttributeId.entries.first { this.lowercase().contains(it.title.lowercase()) }
-    }
 }

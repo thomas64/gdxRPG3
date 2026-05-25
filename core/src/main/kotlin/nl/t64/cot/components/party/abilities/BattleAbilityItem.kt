@@ -96,7 +96,7 @@ abstract class BattleAbilityItem(
         }
     }
 
-    private fun isBlock(): Boolean {
+    protected open fun isBlock(): Boolean {
         return target.character.getCalculatedTotalDefense() > Random.nextInt(0, 100)
     }
 
@@ -153,9 +153,14 @@ abstract class BattleAbilityItem(
     }
 
     fun calculateCriticalHitPercentage(): Int {
-        val attackerCriticalHitPercentage: Int = attacker.character.getCalculatedTotalSkillOf(SkillItemId.WARRIOR) * 4
+        val critSkill: SkillItemId = getCriticalHitSkillId()
+        val attackerCriticalHitPercentage: Int = attacker.character.getCalculatedTotalSkillOf(critSkill) * 4
         val weaponTriangle: Int = getAdvantageBonusCrit()
         return (attackerCriticalHitPercentage + weaponTriangle).coerceAtLeast(0)
+    }
+
+    protected open fun getCriticalHitSkillId(): SkillItemId {
+        return SkillItemId.WARRIOR
     }
 
     protected fun calculateCriticalDamageMinusProtection(): Int {
@@ -186,9 +191,12 @@ abstract class BattleAbilityItem(
     }
 
     protected fun Float.minusProtection(): Int {
-        val protection: Int = target.character.getCalculatedTotalProtection()
-        val modifiedDamage: Float = this - protection
+        val modifiedDamage: Float = this - getDamageMitigation()
         return modifiedDamage.roundToInt().coerceAtLeast(1)
+    }
+
+    protected open fun getDamageMitigation(): Int {
+        return target.character.getCalculatedTotalProtection()
     }
 
     protected fun createNoWeaponMessage(): String {

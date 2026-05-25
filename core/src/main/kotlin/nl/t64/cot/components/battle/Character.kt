@@ -134,6 +134,10 @@ abstract class Character(
         return getSumOfEquipmentOfCalc(CalcAttributeId.PROTECTION) + getPossibleExtraProtection()
     }
 
+    fun getCalculatedTotalMagicProtection(): Int {
+        return (getCalculatedTotalStatOf(StatItemId.WILLPOWER) * 3f).roundToInt() // todo
+    }
+
     fun getCalculatedTotalDefense(): Int {
         return when {
             inventory.getInventoryItem(InventoryGroup.SHIELD) == null -> 0
@@ -152,6 +156,10 @@ abstract class Character(
 
     fun getPossibleExtraProtection(): Int {
         return inventory.getBonusProtectionWhenArmorSetIsComplete() + bonus.getProtection()
+    }
+
+    fun getPossibleExtraMagicProtection(): Int {
+        return 0 // todo
     }
 
     fun applyGamblerBonusTo(amount: Float): Float {

@@ -177,18 +177,18 @@ class Participant(
             AbilityItemId.PERFORM_BEAUTY -> PerformBeauty(abilityItem, this)
             AbilityItemId.PERFORM_CHAOS -> PerformChaos(abilityItem, this)
 
-            AbilityItemId.FIRE -> TODO()
-            AbilityItemId.ELFIRE -> TODO()
-            AbilityItemId.ARCFIRE -> TODO()
-            AbilityItemId.REXFIRE -> TODO()
-            AbilityItemId.WIND -> TODO()
-            AbilityItemId.ELWIND -> TODO()
-            AbilityItemId.ARCWIND -> TODO()
-            AbilityItemId.REXWIND -> TODO()
-            AbilityItemId.THUNDER -> TODO()
-            AbilityItemId.ELTHUNDER -> TODO()
-            AbilityItemId.ARCTHUNDER -> TODO()
-            AbilityItemId.REXTHUNDER -> TODO()
+            AbilityItemId.FIRE,
+            AbilityItemId.ELFIRE,
+            AbilityItemId.ARCFIRE,
+            AbilityItemId.REXFIRE,
+            AbilityItemId.WIND,
+            AbilityItemId.ELWIND,
+            AbilityItemId.ARCWIND,
+            AbilityItemId.REXWIND,
+            AbilityItemId.THUNDER,
+            AbilityItemId.ELTHUNDER,
+            AbilityItemId.ARCTHUNDER,
+            AbilityItemId.REXTHUNDER -> ElementalAttack(abilityItem, this)
             AbilityItemId.MAGIC_SHIELD -> MagicShield(abilityItem, this)
             AbilityItemId.RESISTANCE -> TODO()
             AbilityItemId.TELEPORTATION -> TODO()

@@ -1,7 +1,9 @@
 package nl.t64.cot.components.battle
 
+import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.components.party.abilities.BattleAbilityItem
+import nl.t64.cot.components.party.abilities.ResourceType
 import nl.t64.cot.removeColorCoding
 
 
@@ -12,6 +14,7 @@ open class AttackAction(
 ) {
     protected val instigator: Character = currentParticipant.character
     protected val target: Character = currentTarget.character
+    protected val requiredResourceName: String = selectedAbility.abilityItem.requiredResource.title
 
     companion object {
         fun createForEnemy(currentEnemy: Participant, targetHero: Participant, battleId: String): AttackAction {
@@ -77,6 +80,22 @@ open class AttackAction(
         }
     }
 
+    fun isCostingTooMuchResources(): String? {
+        return when {
+            !currentParticipant.isHero -> null
+            !selectedAbility.hasEnoughResources() -> {
+                val previewMessage: String = createPreviewMessage()
+                val warningMessage = "[FIREBRICK]Not enough ${requiredResourceName}s!"
+                val underscores: String = createUnderscoresWithLengthOf(previewMessage, warningMessage)
+                """ |$previewMessage
+                    |$underscores
+                    |
+                    |$warningMessage""".trimIndent().trimMargin()
+            }
+            else -> null
+        }
+    }
+
     fun createConfirmationMessage(): Triple<String, String, String> {
         val message: String = createPreviewMessage()
         val underscores: String = createUnderscoresWithLengthOf(message)
@@ -96,13 +115,19 @@ open class AttackAction(
         return selectedAbility.createPreviewMessage()
     }
 
-    open fun handle(): List<AttackData> {
+    fun handle(): List<AttackData> {
         if (currentParticipant.currentAP < selectedAbility.ap) {
+            return emptyList()
+        }
+        if (currentParticipant.isHero && !selectedAbility.hasEnoughResources()) {
             return emptyList()
         }
 
         currentParticipant.currentAP -= selectedAbility.ap
         instigator.currentSp -= selectedAbility.sp
+        if (currentParticipant.isHero && selectedAbility.abilityItem.requiredResource != ResourceType.NONE) {
+            gameData.inventory.autoRemoveItem(requiredResourceName.lowercase(), 1)
+        }
 
         createDebugMessage()
         return selectedAbility.handle()

@@ -99,6 +99,10 @@ enum class AudioEvent(val filePath: String, val volume: Float = 1f) {
     SE_DAMAGE_REGULAR("audio/se/mv_dlc_blow10_a.ogg", 0.1f),
     SE_DAMAGE_ADVANTAGE("audio/se/mv_dlc_blow9_a.ogg", 0.1f),
     SE_DAMAGE_DISADVANTAGE("audio/se/mv_dlc_blow9_b.ogg", 0.1f),
+    SE_DAMAGE_FIRE("audio/se/mv_dlc_fire10_a.ogg", 0.2f),
+    SE_DAMAGE_WIND("audio/se/mv_dlc_wind12_b.ogg", 0.2f),
+    SE_DAMAGE_THUNDER("audio/se/mv_dlc_thunder13_b.ogg", 0.2f),
+    SE_MAGIC_MISS("audio/se/mv_dlc_up9_a.ogg", 0.2f),
     SE_PERFORM_BUFF("audio/se/storyblocks_harp_spell_classic_buff.ogg", 1.0f),
     SE_PERFORM_DEBUFF("audio/se/storyblocks_harp_spell_classic_debuff.ogg", 1.0f),
 

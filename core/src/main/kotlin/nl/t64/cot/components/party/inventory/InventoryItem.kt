@@ -176,6 +176,7 @@ data class InventoryItem(
             CalcAttributeId.BASE_HIT -> baseHit
             CalcAttributeId.DAMAGE -> damage
             CalcAttributeId.PROTECTION -> protection
+            CalcAttributeId.MAGIC_PROTECTION -> 0
             CalcAttributeId.DEFENSE -> defense
             CalcAttributeId.SPELL_BATTERY -> spellBattery
             CalcAttributeId.TRANSFORMATION -> transformation

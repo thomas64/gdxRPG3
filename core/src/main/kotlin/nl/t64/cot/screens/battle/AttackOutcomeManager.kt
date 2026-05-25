@@ -9,6 +9,7 @@ import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.battle.AttackAction
 import nl.t64.cot.components.battle.AttackData
 import nl.t64.cot.components.battle.TurnManager
+import nl.t64.cot.components.party.abilities.AbilityItemId
 import nl.t64.cot.screens.dialog.MessageDialog
 
 
@@ -57,7 +58,7 @@ class AttackOutcomeManager(
         val battleField = battleFieldTable.invoke()
         when {
             this.isMissed -> {
-                playSe(AudioEvent.SE_DODGE)
+                playSe(this.getMissSe())
                 FloatingNumberEffect(battleField, this.target, "Miss", Color.WHITE).floatUp()
             }
             this.isBlocked -> {
@@ -65,28 +66,30 @@ class AttackOutcomeManager(
                 FloatingNumberEffect(battleField, this.target, "Block", Color.WHITE).floatUp()
             }
             this.isCriticalHit -> {
-                playDamageEffect(battleField, "${this.damage} !", Color.RED, AudioEvent.SE_CRIT_HIT)
+                this.playDamageEffect(battleField, "${this.damage} !", Color.RED, this.getDamageSe() ?: AudioEvent.SE_CRIT_HIT)
             }
             this.hasAdvantage -> {
-                playDamageEffect(battleField, "${this.damage} +", Color.RED, AudioEvent.SE_DAMAGE_ADVANTAGE)
+                this.playDamageEffect(battleField, "${this.damage} +", Color.RED, this.getDamageSe() ?: AudioEvent.SE_DAMAGE_ADVANTAGE)
             }
             this.hasDisadvantage -> {
-                playDamageEffect(battleField, "${this.damage} -", Color.CORAL, AudioEvent.SE_DAMAGE_DISADVANTAGE)
+                this.playDamageEffect(battleField, "${this.damage} -", Color.CORAL, this.getDamageSe() ?: AudioEvent.SE_DAMAGE_DISADVANTAGE)
             }
             else -> {
-                playDamageEffect(battleField, "${this.damage}", Color.SCARLET, AudioEvent.SE_DAMAGE_REGULAR)
+                this.playDamageEffect(battleField, "${this.damage}", Color.SCARLET, this.getDamageSe() ?: AudioEvent.SE_DAMAGE_REGULAR)
             }
         }
     }
 
     private fun AttackData.playDamageEffect(battleField: Table,
                                             damageText: String,
-                                            color: Color,
+                                            damageTextColor: Color,
                                             audioEvent: AudioEvent) {
+        val blinkColors: Array<Color> = this.getBlinkColors().toTypedArray()
+        BlinkEffect(battleField, this.target, *blinkColors).start()
         ShakeEffect(battleField, this.target).start()
         playSe(audioEvent)
         Utils.runWithDelay(0.5f) {
-            FloatingNumberEffect(battleField, this.target, damageText, color).floatUp()
+            FloatingNumberEffect(battleField, this.target, damageText, damageTextColor).floatUp()
             if (this.isTargetDead) {
                 Utils.runWithDelay(0.9f) {
                     playSe(AudioEvent.SE_VANISH)
@@ -94,6 +97,38 @@ class AttackOutcomeManager(
                     turnManager.removeKilledParticipants()
                 }
             }
+        }
+    }
+
+    private fun AttackData.getMissSe(): AudioEvent {
+        return if (magicAbility != null) {
+            AudioEvent.SE_MAGIC_MISS
+        } else {
+            AudioEvent.SE_DODGE
+        }
+    }
+
+    private fun AttackData.getDamageSe(): AudioEvent? {
+        return when (magicAbility) {
+            AbilityItemId.FIRE, AbilityItemId.ELFIRE, AbilityItemId.ARCFIRE, AbilityItemId.REXFIRE ->
+                AudioEvent.SE_DAMAGE_FIRE
+            AbilityItemId.WIND, AbilityItemId.ELWIND, AbilityItemId.ARCWIND, AbilityItemId.REXWIND ->
+                AudioEvent.SE_DAMAGE_WIND
+            AbilityItemId.THUNDER, AbilityItemId.ELTHUNDER, AbilityItemId.ARCTHUNDER, AbilityItemId.REXTHUNDER ->
+                AudioEvent.SE_DAMAGE_THUNDER
+            else -> null
+        }
+    }
+
+    private fun AttackData.getBlinkColors(): List<Color> {
+        return when (magicAbility) {
+            AbilityItemId.FIRE, AbilityItemId.ELFIRE, AbilityItemId.ARCFIRE, AbilityItemId.REXFIRE ->
+                listOf(Color.ORANGE, Color.RED, Color.SCARLET, Color.RED, Color.ORANGE, Color.YELLOW)
+            AbilityItemId.WIND, AbilityItemId.ELWIND, AbilityItemId.ARCWIND, AbilityItemId.REXWIND ->
+                listOf(Color.SKY, Color.CYAN, Color.BLUE, Color.CYAN, Color.SKY, Color.BLUE)
+            AbilityItemId.THUNDER, AbilityItemId.ELTHUNDER, AbilityItemId.ARCTHUNDER, AbilityItemId.REXTHUNDER ->
+                listOf(Color.YELLOW, Color.SKY, Color.YELLOW, Color.CYAN, Color.YELLOW)
+            else -> emptyList()
         }
     }
 
