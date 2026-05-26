@@ -8,7 +8,7 @@
     "stats"    : {
       "intelligence": 2,
       "dexterity"   : 5,
-      "strength"    : 10,
+      "strength"    : 9,
       "speed"       : 5,
       "willpower"   : 2,
       "constitution": 6,
@@ -34,7 +34,7 @@
     "stats"    : {
       "intelligence": 2,
       "dexterity"   : 5,
-      "strength"    : 14,
+      "strength"    : 12,
       "speed"       : 5,
       "willpower"   : 2,
       "constitution": 10,
@@ -60,7 +60,7 @@
     "stats"    : {
       "intelligence": 2,
       "dexterity"   : 5,
-      "strength"    : 14,
+      "strength"    : 12,
       "speed"       : 5,
       "willpower"   : 2,
       "constitution": 10,

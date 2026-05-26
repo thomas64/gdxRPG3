@@ -19,7 +19,7 @@ class FleeAction(
         to flee successfully. Each failure in fleeing will also
         raise this chance to flee.
 
-        Your chance to flee is ${getChanceToFlee()}%.
+        Your chance to successfully flee is ${getChanceToFlee()}%.
 
         """
 

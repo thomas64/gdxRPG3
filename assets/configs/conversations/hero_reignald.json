@@ -50,11 +50,9 @@
       },
       "60"  : {"text": ["Accepted!"]},
       "61"  : {"text": ["I will brief the duty captain and hand off the roster."]},
-      "62"  : {"text": ["After that, I move with you."]},
-      "63"  : {"text": ["If we march together, you keep pace, hold formation, and listen the first time!"]},
-      "64"  : {"text": ["Do that, and I will make you harder to kill!"]},
-      "65"  : {"text": ["Keep your gear ready! Keep your head clear! I will do the same!"]},
-      "66"  : {"text": ["And if the road gets ugly, good! I know how to handle ugly."], "choices": [{"command": "HERO_JOIN"}]},
+      "62"  : {"text": ["If we march together, you keep pace, hold formation, and listen the first time!"]},
+      "63"  : {"text": ["Do that, and I will make you harder to kill!"]},
+      "64"  : {"text": ["When the road gets ugly, good! I know how to handle ugly."], "choices": [{"command": "HERO_JOIN"}]},
       "9000": {"text": ["Your party is full. Make room, then come back. I do not wait forever!"], "choices": [{"command": "EXIT"}]}
     }
   },

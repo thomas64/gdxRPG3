@@ -44,7 +44,7 @@
       "203" : {
         "choices": [
           {"text": "*Try another joke instead of answering.*", "nextId": "330"},
-          {"text": "*Say you forgot, but it was probably important.*", "nextId": "320"},
+          {"text": "*Say you forgot, but it was something very important.*", "nextId": "320"},
           {"condition": ["diplomat1"], "text": "[Diplomat 1] *Frame this as official civic detention business.*", "nextId": "220"},
           {"text": "*Leave him to his drink.*", "command": "EXIT"}
         ]

@@ -376,7 +376,7 @@ class BattleScreenBuilder {
             String.format("%-11s%7s", "Potion",     "3 AP")         to 3,
             String.format("%-11s%7s", "Preview",    "")             to 0,
             String.format("%-11s%7s", "Party",      "")             to 0,
-            String.format("%-11s%7s", "Flee",       "$fleeAp AP")   to fleeAp.toInt(),
+            String.format("%-11s%7s", "Flee party", "$fleeAp AP")   to fleeAp.toInt(),
             String.format("%-11s%7s", "Delay turn", "1 AP")         to 1,
             String.format("%-11s%7s", "Rest",       "$curAp AP")    to 1,
             String.format("%-11s%7s", "End turn",   "")             to 0

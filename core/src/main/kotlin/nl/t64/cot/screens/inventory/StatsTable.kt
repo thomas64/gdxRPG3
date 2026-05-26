@@ -131,7 +131,7 @@ internal class StatsTable(
         table.add(createCalcLabel(CalcAttributeId.PROTECTION, isPercentage = true))
         table.add("")
         table.add(selectedHero.getCalculatedProtection().toString())
-        addExtraToTable(selectedHero.getPossibleExtraProtection())
+        addExtraToTable(selectedHero.getEffectiveExtraProtection())
 
         table.add(createCalcLabel(CalcAttributeId.MAGIC_PROTECTION, isPercentage = true))
         table.add("")

@@ -12,7 +12,7 @@
       "The clock to the right shows the current time.",
       "When the clock reaches 19:30, the day ends.",
       "The time flashes [FIREBRICK]red[BLACK] when it's almost night.",
-      "If it becomes night, Grace is gone, game over."
+      "If it becomes night, Grace is gone, game over!"
     ]
   },
   "guide_event_inventory"            : {

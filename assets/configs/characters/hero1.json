@@ -39,8 +39,8 @@
       "strength"    : 4,
       "speed"       : 15,
       "willpower"   : 10,
-      "constitution": 6,
-      "stamina"     : 8
+      "constitution": 8,
+      "stamina"     : 9
     },
     "skills"   : {
       "mechanic": 1,

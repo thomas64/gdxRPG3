@@ -80,8 +80,8 @@
     "phrases": {
       "1": {"text": ["Hi mister! I'm Alisa, the daughter of the shop owner."]},
       "2": {"text": ["My mommy doesn't like it when customers go upstairs, teehee!"]},
-      "3": {"text": ["A lot of people do go upstairs though, and my daddy always says: 'The customer is always right!'"]},
-      "4": {"text": ["So, are customers allowed to go upstairs or not?"]},
+      "3": {"text": ["A lot of people do go upstairs though, but my daddy says: 'The customer is always right!'"]},
+      "4": {"text": ["So, I think that if customers are always right, they are allowed to go upstairs."]},
       "5": {"text": [". . ."]},
       "6": {"text": ["I love horsies! Do you like horsies?"], "choices": [{"command": "EXIT"}]}
     }

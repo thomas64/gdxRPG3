@@ -13,6 +13,13 @@
     "base_hit"    : 65,
     "damage"      : 15
   },
+  "attack_axe_dex_80_8"  : {
+    "group"        : "WEAPON",
+    "skill"        : "AXE",
+    "min_dexterity": 1,
+    "base_hit"     : 80,
+    "damage"       : 8
+  },
   "attack_axe_dex_80_10"  : {
     "group"        : "WEAPON",
     "skill"        : "AXE",
@@ -20,19 +27,12 @@
     "base_hit"     : 80,
     "damage"       : 10
   },
-  "attack_axe_dex_80_12"  : {
-    "group"        : "WEAPON",
-    "skill"        : "AXE",
-    "min_dexterity": 1,
-    "base_hit"     : 80,
-    "damage"       : 12
-  },
-  "attack_dagger_dex_90_9": {
+  "attack_dagger_dex_90_6": {
     "group"        : "WEAPON",
     "skill"        : "DAGGER",
     "min_dexterity": 1,
     "base_hit"     : 90,
-    "damage"       : 9
+    "damage"       : 6
   },
   "armor_2"               : {
     "group"     : "CHEST",

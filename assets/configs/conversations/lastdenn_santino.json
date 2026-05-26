@@ -218,7 +218,7 @@
         "choices": [
           {"text": "*Listen to his message.*", "nextId": "3"},
           {"text": "*You've heard it all before. Stop listening.*", "command": "EXIT"},
-          {"text": "*Doze off and miss the whole sermon.*", "command": "HARD_SKIP_TO_1056"}
+          {"text": "*Doze off and skip the whole sermon.*", "command": "HARD_SKIP_TO_1056"}
         ]
       },
       "3": {"text": ["To honor Evdos is to open both mind and heart. We do not fear honest questions. A question asked in humility is already a prayer."]},
@@ -368,7 +368,7 @@
       "9" : {"face": "reignald", "name": "Reignald", "text": ["I have thought about leaving my post more than once. I simply do not know if I have the right to do it."]},
       "10": {"face": "santino", "name": "Father Santino", "text": ["You have the right to use your judgement. A commander who never questions his own position becomes a prisoner of it."]},
       "11": {"face": "reignald", "name": "Reignald", "text": [". . ."]},
-      "12": {"face": "santino", "name": "Father Santino", "text": ["The mayor's house is not the whole of Lastdenn. If trouble ever comes from beyond these walls, it will not be enough to guard the familiar and ignore the unfamiliar."]},
+      "12": {"face": "santino", "name": "Father Santino", "text": ["Lastdenn is not the whole of Adan. If trouble ever comes from beyond these walls, it will not be enough to guard the familiar and ignore the unfamiliar."]},
       "13": {"face": "reignald", "name": "Reignald", "text": ["You are saying I have held on too tightly to the same duty."]},
       "14": {"face": "santino", "name": "Father Santino", "text": ["I am saying you have carried it long enough to know the difference between service and fear. If you need permission to step back and think, you have it from me."]},
       "15": {"face": "reignald", "name": "Reignald", "text": [". . ."]},

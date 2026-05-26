@@ -134,7 +134,9 @@ abstract class Character(
     }
 
     fun getCalculatedTotalProtection(): Int {
-        return getCalculatedProtection() + getPossibleExtraProtection()
+        val totalRaw: Int = getSumOfEquipmentOfCalc(CalcAttributeId.PROTECTION) + getRawExtraProtection()
+        val reductionFraction: Float = totalRaw / (ARMOR_K_FACTOR + totalRaw)
+        return (reductionFraction * 100f).roundToInt()
     }
 
     fun getCalculatedProtection(): Int {
@@ -143,7 +145,11 @@ abstract class Character(
         return (reductionFraction * 100f).roundToInt()
     }
 
-    fun getPossibleExtraProtection(): Int {
+    fun getEffectiveExtraProtection(): Int {
+        return getCalculatedTotalProtection() - getCalculatedProtection()
+    }
+
+    private fun getRawExtraProtection(): Int {
         return inventory.getBonusProtectionWhenArmorSetIsComplete() + bonus.getProtection()
     }
 
