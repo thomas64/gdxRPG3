@@ -16,8 +16,7 @@ import kotlin.math.roundToInt
 import kotlin.random.Random
 
 
-// the higher this factor, the less effective armor is at high values. when K is 0, armor is 100% effective.
-private const val ARMOR_K_FACTOR = 20f
+private val armorReductionCalculator = ArmorReductionCalculator()
 
 abstract class Character(
     val id: String = "",
@@ -135,14 +134,12 @@ abstract class Character(
 
     fun getCalculatedTotalProtection(): Int {
         val totalRaw: Int = getSumOfEquipmentOfCalc(CalcAttributeId.PROTECTION) + getRawExtraProtection()
-        val reductionFraction: Float = totalRaw / (ARMOR_K_FACTOR + totalRaw)
-        return (reductionFraction * 100f).roundToInt()
+        return getArmorReductionPercentage(totalRaw)
     }
 
     fun getCalculatedProtection(): Int {
         val protection: Int = getSumOfEquipmentOfCalc(CalcAttributeId.PROTECTION)
-        val reductionFraction: Float = protection / (ARMOR_K_FACTOR + protection)
-        return (reductionFraction * 100f).roundToInt()
+        return getArmorReductionPercentage(protection)
     }
 
     fun getEffectiveExtraProtection(): Int {
@@ -151,6 +148,10 @@ abstract class Character(
 
     private fun getRawExtraProtection(): Int {
         return inventory.getBonusProtectionWhenArmorSetIsComplete() + bonus.getProtection()
+    }
+
+    private fun getArmorReductionPercentage(rawProtection: Int): Int {
+        return armorReductionCalculator.toPercent(rawProtection)
     }
 
     fun getCalculatedTotalMagicProtection(): Int {

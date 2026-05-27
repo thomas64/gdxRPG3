@@ -45,7 +45,7 @@
     "sort"        : 60120,
     "price"       : 40,
     "min_strength": 12,
-    "protection"  : 5,
+    "protection"  : 7,
     "speed"       : -1,
     "stealth"     : -1
   },
@@ -55,7 +55,7 @@
     "sort"        : 60220,
     "price"       : 50,
     "min_strength": 14,
-    "protection"  : 6,
+    "protection"  : 8,
     "speed"       : -1,
     "stealth"     : -1
   },
@@ -65,7 +65,7 @@
     "sort"        : 60320,
     "price"       : 60,
     "min_strength": 16,
-    "protection"  : 7,
+    "protection"  : 9,
     "speed"       : -1,
     "stealth"     : -1
   },
@@ -75,7 +75,7 @@
     "sort"        : 60420,
     "price"       : 70,
     "min_strength": 18,
-    "protection"  : 8,
+    "protection"  : 10,
     "speed"       : -1,
     "stealth"     : -1
   },
@@ -85,7 +85,7 @@
     "sort"        : 60140,
     "price"       : 70,
     "min_strength": 22,
-    "protection"  : 9,
+    "protection"  : 13,
     "speed"       : -2,
     "stealth"     : -2
   },
@@ -95,7 +95,7 @@
     "sort"        : 60240,
     "price"       : 80,
     "min_strength": 24,
-    "protection"  : 10,
+    "protection"  : 14,
     "speed"       : -2,
     "stealth"     : -2
   },
@@ -105,7 +105,7 @@
     "sort"        : 60340,
     "price"       : 90,
     "min_strength": 26,
-    "protection"  : 11,
+    "protection"  : 15,
     "speed"       : -2,
     "stealth"     : -2
   },
@@ -115,7 +115,7 @@
     "sort"        : 60440,
     "price"       : 100,
     "min_strength": 28,
-    "protection"  : 12,
+    "protection"  : 16,
     "speed"       : -2,
     "stealth"     : -2
   }

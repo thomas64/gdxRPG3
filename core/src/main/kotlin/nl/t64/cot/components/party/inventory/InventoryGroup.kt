@@ -10,20 +10,20 @@ enum class InventoryGroup(override val title: String) : SuperEnum {
     LOOT_ITEM(""),
 
     WEAPON("Weapon"),
-    SHIELD("Shield"),               // 12 prt / 30 def
+    SHIELD("Shield"),
     ACCESSORY("Accessory"),
 
-    HELMET("Helmet"),               // 12 prt
+    HELMET("Helmet"),
     NECKLACE("Necklace"),
-    SHOULDERS("Shoulders"),         // 12 prt
-    CHEST("Chest"),                 // 12 prt
-    CLOAK("Cloak"),                 // 2 prt    extra stealth
-    BRACERS("Bracers"),             // 12 prt
-    GLOVES("Gloves"),               // 12 prt
+    SHOULDERS("Shoulders"),
+    CHEST("Chest"),
+    CLOAK("Cloak"),
+    BRACERS("Bracers"),
+    GLOVES("Gloves"),
     RING("Ring"),
-    BELT("Belt"),                   // 2 prt    extra speed
-    PANTS("Pants"),                 // 12 prt
-    BOOTS("Boots"),                 // 12 prt   bij complete set prt omhoog
+    BELT("Belt"),
+    PANTS("Pants"),
+    BOOTS("Boots"),
 
     EMPTY(""),
 
