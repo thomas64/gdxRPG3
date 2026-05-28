@@ -1,8 +1,9 @@
 {
   "guarding_till_1500"               : {
-    "name"   : "Lastdenn Guard",
-    "comment": "WARNING: phraseId 100 is used in 2 conv conditions.",
-    "phrases": {
+    "name"     : "Lastdenn Guard",
+    "comment"  : "WARNING: phraseId 100 is used in 2 conv conditions.",
+    "condition": ["_time_after_14:58"], "startAt": "30",
+    "phrases"  : {
       "1"  : {"text": ["Halt! The mayor has ordered me to stop anyone from passing through this town's entrance until 15:00."]},
       "2"  : {"text": ["Only those with official business in or from Lastdenn may pass here before then."]},
       "3"  : {"text": ["I'm sorry sir, but I have my orders."]},
@@ -13,7 +14,7 @@
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
-      "5"  : {"text": ["I'm sorry sir, that's not how it works. Official business must be pre-approved by the mayor."]},
+      "5"  : {"text": ["I'm sorry, sir, that's not how it works. Official business must be pre-approved by the mayor."]},
       "6"  : {"text": ["[GRAY](It's quite scandalous that the mayor would close this passage for profit like this, if you ask me...)"]},
       "7"  : {
         "choices": [
@@ -23,11 +24,21 @@
         ]
       },
       "8"  : {"text": ["Well... There aren't really. Our priest is publicly opposed to this closure. He says that anyone on a religious pilgrimage should be allowed to pass freely."]},
-      "9"  : {"text": ["[GRAY](I think he does have a point there...)"], "choices": [{"nextId": "7"}]},
+      "9"  : {"text": ["[GRAY](I think he does have a point there...)"]},
+      "10" : {"text": ["Ahem. I'm sorry, sir, but the only other option I can think of is to go back or wait until 15:00."]},
+      "11" : {
+        "choices": [
+          {"text": "*All right, stand by and wait until 15:00.* [BLUE](Skip time)", "command": "RELOAD_NPCS_1458"},
+          {"text": "*Inquire about any exceptions.*", "nextId": "8"},
+          {"condition": ["diplomat3"], "text": "[Diplomat 3] *Make a formal request in the name of the priest.*", "nextId": "15"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      },
       "15" : {"text": ["Hmm... I suppose I can make an exception for our priest."]},
       "16" : {"text": ["You may pass, but do not let word of this get out."], "choices": [{"command": "EXIT", "nextId": "100"}]},
       "20" : {"text": ["Wait... What?! Are you serious?"]},
       "21" : {"text": ["Guards! To me! I'm under attack!"], "choices": [{"command": "START_BATTLE"}]},
+      "30" : {"text": ["Almost there..."], "choices": [{"command": "EXIT"}]},
       "100": {"text": ["I allowed you to pass. Please do not let word of this get out."], "choices": [{"command": "EXIT", "nextId": "100"}]}
     }
   },

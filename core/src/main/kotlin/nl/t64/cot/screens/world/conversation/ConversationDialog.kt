@@ -205,6 +205,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             ConversationCommand.RELOAD_NPCS -> fadeAndReloadNpcs(nextId)
             ConversationCommand.RELOAD_NPCS_1 -> fadeAndReloadNpcsPlusOneMinute(nextId)
             ConversationCommand.RELOAD_NPCS_1101 -> fadeAndReloadNpcsToTime(nextId, "11:01")
+            ConversationCommand.RELOAD_NPCS_1458 -> fadeAndReloadNpcsToTime(nextId, "14:58")
             ConversationCommand.HARD_SKIP_TO_1056 -> skipToTime(nextId, "10:56")
 
             ConversationCommand.KNOW_QUEST -> knowQuest(nextId)
@@ -342,7 +343,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         // in dialog state, scheduled npc's won't update. that's why we first reload them with a fade to black.
         // and then, when the conversation ends, they disappear, because they are updated, but then it's already black.
         // the fade uses update, that means time will pass, and thus one minute will have passed in-game.
-        conversationObserver.notifyFadeAndReloadNpcs()
+        conversationObserver.notifyFadeAndReloadNpcs(1.5f)
         endConversation(nextId)
     }
 
@@ -352,9 +353,19 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun fadeAndReloadNpcsToTime(nextId: String, time: String) {
-        gameData.clock.setTimeOfDay(time)
-        playSe(AudioEvent.SE_MAGIC_BANG) // todo, this line should not be hardcoded here.
-        conversationObserver.notifyFadeAndReloadNpcs()
+        // todo, these lines should not be hardcoded here.
+        if (conversationId.contains("ghost") || conversationId.contains("garrin2")) {
+            Utils.runWithDelay(1f) {
+                gameData.clock.setTimeOfDay(time)
+                playSe(AudioEvent.SE_MAGIC_BANG)
+            }
+        } else if (conversationId == "guarding_till_1500") {
+            Utils.runWithDelay(1f) {
+                gameData.clock.setTimeOfDay(time)
+                playSe(AudioEvent.SE_CLOCK_TICKING)
+            }
+        }
+        conversationObserver.notifyFadeAndReloadNpcs(5f)
         endConversation(nextId)
     }
 

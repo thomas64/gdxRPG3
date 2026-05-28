@@ -310,8 +310,8 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
                 actionAfterFade = { BattleScreen.load(battleId, this) })
     }
 
-    override fun onNotifyFadeAndReloadNpcs() {
-        fadeOut(duration = 1.5f,
+    override fun onNotifyFadeAndReloadNpcs(duration: Float) {
+        fadeOut(duration = duration,
                 transitionPurpose = TransitionPurpose.JUST_FADE,
                 actionAfterFade = { reloadNpcs() })
     }

@@ -2,7 +2,6 @@
   "orc_scout_axe"     : {
     "name"     : "Orc Scout",
     "gender"   : "its",
-    "ap"       : 4,
     "xp"       : 8,
     "drops"    : {
       "basic_axe"            : 15,
@@ -42,7 +41,6 @@
   "orc_scout_spear"   : {
     "name"     : "Orc Scout",
     "gender"   : "its",
-    "ap"       : 4,
     "xp"       : 8,
     "drops"    : {
       "basic_spear"          : 15,
@@ -82,7 +80,6 @@
   "orc_scout_sword"   : {
     "name"     : "Orc Scout",
     "gender"   : "its",
-    "ap"       : 4,
     "xp"       : 8,
     "drops"    : {
       "basic_sword"          : 15,
@@ -122,7 +119,6 @@
   "orc_sergeant_axe"  : {
     "name"     : "Orc Sergeant",
     "gender"   : "its",
-    "ap"       : 6,
     "xp"       : 18,
     "drops"    : {
       "specialist_axe"             : 15,
@@ -165,7 +161,6 @@
   "orc_sergeant_spear": {
     "name"     : "Orc Sergeant",
     "gender"   : "its",
-    "ap"       : 6,
     "xp"       : 18,
     "drops"    : {
       "specialist_spear"           : 15,

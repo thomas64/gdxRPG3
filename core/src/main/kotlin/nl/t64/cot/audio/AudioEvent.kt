@@ -83,6 +83,7 @@ enum class AudioEvent(val filePath: String, val volume: Float = 1f) {
     SE_UPGRADE("audio/se/unknown_upgrade.ogg", 0.5f),
     SE_BLOCK("audio/se/unknown_block.wav", 0.4f),
     SE_DODGE("audio/se/unknown_dodge.wav", 0.4f),
+    SE_CLOCK_TICKING("audio/se/clock_ticking.ogg", 0.2f),
 
     SE_BELL("audio/se/mv_bell1.ogg", 0.2f),
     SE_REPAIR("audio/se/mv_fsm_chime2.ogg", 0.2f),

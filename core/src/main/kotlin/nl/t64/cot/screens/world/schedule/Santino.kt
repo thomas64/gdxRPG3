@@ -141,7 +141,7 @@ class Santino : EntitySchedule() {
 
         if (mapManager.currentMap.mapTitle == "lastdenn_church") {
             if (gameData.clock.isCurrentTimeAt("09:59")) {
-                worldScreen.onNotifyFadeAndReloadNpcs()
+                worldScreen.onNotifyFadeAndReloadNpcs(duration = 1.5f)
                 Utils.runWithDelay(Constant.FADE_DURATION) { gameData.clock.setTimeOfDay("10:00") }
             }
             if (gameData.clock.isCurrentTimeInBetween("10:00", "11:00")) {
@@ -151,7 +151,7 @@ class Santino : EntitySchedule() {
                 removeInvisibleTalking()
             }
             if (gameData.clock.isCurrentTimeAt("10:59")) {
-                worldScreen.onNotifyFadeAndReloadNpcs()
+                worldScreen.onNotifyFadeAndReloadNpcs(duration = 1.5f)
                 Utils.runWithDelay(Constant.FADE_DURATION) { gameData.clock.setTimeOfDay("11:00") }
             }
         }

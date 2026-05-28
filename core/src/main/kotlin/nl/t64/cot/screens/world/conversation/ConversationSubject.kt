@@ -22,8 +22,8 @@ class ConversationSubject(private val observer: ConversationObserver) {
         observer.onNotifyShowBattleScreen(battleId)
     }
 
-    fun notifyFadeAndReloadNpcs() {
-        observer.onNotifyFadeAndReloadNpcs()
+    fun notifyFadeAndReloadNpcs(duration: Float) {
+        observer.onNotifyFadeAndReloadNpcs(duration)
     }
 
     fun notifyFadeAndReloadNpcsPlusOneMinute() {

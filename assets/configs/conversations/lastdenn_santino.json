@@ -218,7 +218,7 @@
         "choices": [
           {"text": "*Listen to his message.*", "nextId": "3"},
           {"text": "*You've heard it all before. Stop listening.*", "command": "EXIT"},
-          {"text": "*Doze off and skip the whole sermon.*", "command": "HARD_SKIP_TO_1056"}
+          {"text": "*Doze off and miss the whole sermon.* [BLUE](Skip time)", "command": "HARD_SKIP_TO_1056"}
         ]
       },
       "3": {"text": ["To honor Evdos is to open both mind and heart. We do not fear honest questions. A question asked in humility is already a prayer."]},

@@ -24,6 +24,7 @@ enum class ConversationCommand {
     RELOAD_NPCS,
     RELOAD_NPCS_1,
     RELOAD_NPCS_1101,
+    RELOAD_NPCS_1458,
     HARD_SKIP_TO_1056,
 
     KNOW_QUEST,

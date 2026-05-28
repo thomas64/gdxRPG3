@@ -2,7 +2,6 @@
   "lastdenn_guard": {
     "name"     : "Lastdenn Guard",
     "gender"   : "his",
-    "ap"       : 6,
     "xp"       : 20,
     "stats"    : {
       "intelligence": 10,
