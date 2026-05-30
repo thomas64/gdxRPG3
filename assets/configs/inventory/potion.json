@@ -129,7 +129,7 @@
       "Temporarily increases the Protection of",
       "the drinker by 3 points during 1 battle."
     ],
-    "protection"   : 3
+    "protection"   : 5
   },
   "protection_potion_+"   : {
     "name"         : "Protection Potion +",
@@ -144,7 +144,7 @@
       "Temporarily increases the Protection of",
       "the drinker by 5 points during 1 battle."
     ],
-    "protection"   : 5
+    "protection"   : 10
   },
   "protection_potion_++"  : {
     "name"         : "Protection Potion ++",
@@ -159,7 +159,7 @@
       "Temporarily increases the Protection of",
       "the drinker by 7 points during 1 battle."
     ],
-    "protection"   : 7
+    "protection"   : 15
   },
   "intelligence_potion"   : {
     "name"         : "Intelligence Potion",

@@ -9,7 +9,7 @@
     "skill"      : "WIZARD",
     "min_skill"  : 1,
     "description": [
-      "Friendly target of the spell add 2 to their",
+      "Friendly target of the spell add 2-3 to their",
       "Protection value for the rest of the battle",
       "for each rank in 'Wizard'.",
       "May only be cast once on each target."

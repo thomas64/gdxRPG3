@@ -1,6 +1,7 @@
 package nl.t64.cot.components.party.abilities
 
 import nl.t64.cot.components.battle.Participant
+import kotlin.math.ln
 
 
 class MagicShield(
@@ -28,7 +29,9 @@ class MagicShield(
     }
 
     override fun calculateBonusValue(): Int {
-        return super.calculateBonusValue() * 2
+        val base: Float = super.calculateBonusValue().toFloat()
+        val normalizedLog10: Float = ln(base) / ln(10f) // 0.0 bij 1, 1.0 bij 10
+        return (4f + normalizedLog10 * 16f).toInt() // map naar [4,20]
     }
 
 }
