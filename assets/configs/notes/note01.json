@@ -1,87 +1,112 @@
 {
-  "note_bed01"    : {
+  "note_bed01"        : {
     "phrases": {
       "1": {"text": ["This is clearly someone else's bed. What are you even considering?"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "note_bed02"    : {
+  "note_bed02"        : {
     "phrases": {
       "1": {"text": ["If you require rest, talk to the innkeeper."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "note_bed03"    : {
+  "note_bed03"        : {
     "phrases": {
       "1": {"text": ["It appears quite comfortable, but now is not the time."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "note_apples"   : {
+  "note_apples"       : {
     "phrases": {
       "1": {"text": ["How do you like them apples?"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "note_food"     : {
+  "note_food"         : {
     "phrases": {
       "1": {"text": ["It's food. Did you wash your hands before touching it?"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "note_bookcase" : {
+  "note_bookcase"     : {
     "phrases": {
       "1": {"text": ["So many books, so little time."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "note_closet"   : {
+  "note_closet"       : {
     "phrases": {
       "1": {"text": ["How would you like it if random people opened your closet?"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "note_shelves"  : {
+  "note_shelves"      : {
     "phrases": {
       "1": {"text": ["Looks organized. Better not touch it."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "note_fireplace": {
+  "note_fireplace"    : {
     "phrases": {
       "1": {"text": ["The fire feels warm and inviting."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "note_kitchen"  : {
+  "note_kitchen"      : {
     "phrases": {
-      "1": {"text": ["Are you planning to prepare a meal or something?"], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["About to make dinner? Do you even know how to cook?"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "note_plant"    : {
+  "note_plant"        : {
     "phrases": {
       "1": {"text": ["It's a plant. It looks healthy. Don't mess with it."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "note_empty"    : {
+  "note_empty"        : {
     "phrases": {
       "1": {"text": ["It seems to be empty. You'd better leave it that way."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "note_coffee"   : {
+  "note_coffee"       : {
     "phrases": {
       "1": {"text": ["You'd like some caffeine, don't you?"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "note_green"    : {
-    "phrases": {
-      "1": {"text": ["You painted it green; Grace's favorite color."], "choices": [{"command": "EXIT"}]}
-    }
-  },
-  "note_bag"      : {
-    "phrases": {
-      "1": {"text": ["It's a bag. What do you want to do with it?"], "choices": [{"command": "EXIT"}]}
-    }
-  },
-  "note_bucket"   : {
-    "phrases": {
-      "1": {"text": ["It looks dirty. What did you put in it?"], "choices": [{"command": "EXIT"}]}
-    }
-  },
-  "note_forms"    : {
+  "note_forms"        : {
     "phrases": {
       "1": {"text": ["These forms look official. Should they lie here in the open like this?"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "note_flowers"      : {
+    "phrases": {
+      "1": {"text": ["Flowers love people, they say."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "note_clock"        : {
+    "phrases": {
+      "1": {"text": ["Time is a construct, but it still keeps ticking."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "note_art"          : {
+    "phrases": {
+      "1": {"text": ["Is this what they call art? It's safe to say, art is subjective."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "note_notice_board" : {
+    "phrases": {
+      "1": {"text": ["Don't you already have enough to read in this game?"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "note_stained_glass": {
+    "phrases": {
+      "1": {"text": ["These stained-glass windows are beautiful. But it's hard to tell what they're supposed to be depicting."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "note_tea"          : {
+    "phrases": {
+      "1": {"text": ["Tea is just leaf soup pretending to be sophisticated."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "note_armor"        : {
+    "phrases": {
+      "1": {"text": ["The armor is old and rusty, but it still looks sturdy."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "note_not_yours"    : {
+    "phrases": {
+      "1": {"text": ["That's not yours."], "choices": [{"command": "EXIT"}]}
     }
   }
 }

@@ -106,8 +106,8 @@
   "lastdenn_pier_guards"             : {
     "name"   : "Lastdenn Guard",
     "phrases": {
-      "1": {"text": ["There are no boats coming in or out of this pier today."]},
-      "2": {"text": ["There is nothing to see here for you."], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["No boats are coming in or out of the docks today."]},
+      "2": {"text": ["There is nothing here for you to see."], "choices": [{"command": "EXIT"}]}
     }
   }
 }

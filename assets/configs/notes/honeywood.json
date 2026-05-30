@@ -17,5 +17,20 @@
       "2": {"text": ["When you look closely, you notice a faint resemblance to yourself."]},
       "3": {"text": [". . ."], "choices": [{"command": "EXIT"}]}
     }
+  },
+  "note_green"           : {
+    "phrases": {
+      "1": {"text": ["You painted it green; Grace's favorite color."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "note_bag"             : {
+    "phrases": {
+      "1": {"text": ["It’s a bag full of potatoes. Or is it ‘potatos’?"], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "note_bucket"          : {
+    "phrases": {
+      "1": {"text": ["The bucket smells awful. You really should have cleaned it."], "choices": [{"command": "EXIT"}]}
+    }
   }
 }

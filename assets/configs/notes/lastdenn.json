@@ -1,16 +1,16 @@
 {
-  "note_holy_water" : {
+  "note_holy_water"    : {
     "phrases": {
       "1": {"text": ["Is this holy water? It sure looks wet..."]},
       "2": {"text": ["Let's not defile it!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "note_holy_symbol": {
+  "note_holy_symbol"   : {
     "phrases": {
       "1": {"text": ["It looks like a holy symbol for Evdos."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "note_holy_bible" : {
+  "note_holy_bible"    : {
     "phrases": {
       "1" : {"text": ["That's probably not meant for heathen eyes."]},
       "2" : {
@@ -27,6 +27,11 @@
       "8" : {"text": ["\"Beware Ulrog, God of Power. His servants whisper that might is wisdom and conquest is proof. They promise glory, yet they bring ruin, broken households, and ashes.\""]},
       "9" : {"text": ["\"Guard your children's minds as you guard their bodies. Teach them to read, to reason, to remember, and to question with humility. Ignorance is Ulrog's gate, but wisdom is the lamp of Evdos, and patience the watch of Ylarus.\""]},
       "10": {"text": ["\"When fear takes root in your streets, say not, 'We are abandoned,' but, 'Our hour has come to choose well.' Choose knowledge over ignorance, patience over panic, and truth over power. Evdos enlightens, Ylarus endures, and Ulrog consumes.\""], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "note_map_lastdenn"  : {
+    "phrases": {
+      "1": {"text": ["The map of Lastdenn is old and worn, but it still shows the layout of the city."], "choices": [{"command": "EXIT"}]}
     }
   }
 }

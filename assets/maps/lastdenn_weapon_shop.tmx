@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.12.1" orientation="orthogonal" renderorder="right-down" width="38" height="28" tilewidth="24" tileheight="24" infinite="0" nextlayerid="21" nextobjectid="72">
+<map version="1.11" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="38" height="28" tilewidth="24" tileheight="24" infinite="0" nextlayerid="21" nextobjectid="73">
  <properties>
   <property name="bgm" value="bgm_inn"/>
   <property name="step_sound" value="wood"/>
@@ -82,7 +82,9 @@
   <object id="32" x="624" y="480" width="144" height="6"/>
   <object id="70" x="624" y="288" width="144" height="6"/>
  </objectgroup>
- <objectgroup color="#5500ff" id="13" name="rest"/>
+ <objectgroup color="#5500ff" id="13" name="rest">
+  <object id="72" name="note_armor" x="96" y="192" width="48" height="48"/>
+ </objectgroup>
  <objectgroup color="#55ff7f" id="14" name="npc">
   <object id="34" name="man04" x="144" y="264" width="48" height="24">
    <properties>

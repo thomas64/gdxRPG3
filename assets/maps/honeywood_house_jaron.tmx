@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.12.1" orientation="orthogonal" renderorder="right-down" width="26" height="26" tilewidth="24" tileheight="24" infinite="0" nextlayerid="16" nextobjectid="44">
+<map version="1.11" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="26" height="26" tilewidth="24" tileheight="24" infinite="0" nextlayerid="16" nextobjectid="45">
  <properties>
   <property name="bgm" value="bgm_house"/>
   <property name="step_sound" value="wood"/>
@@ -87,6 +87,7 @@
   <object id="39" name="note_kitchen" x="480" y="120" width="48" height="48"/>
   <object id="37" name="sparkle0018" x="342" y="216" width="42" height="48"/>
   <object id="43" name="note_plant" x="528" y="288" width="48" height="48"/>
+  <object id="44" name="note_coffee" x="264" y="348" width="24" height="24"/>
  </objectgroup>
  <objectgroup color="#55ff7f" id="14" name="npc">
   <object id="38" name="youngman01" type="w" x="120" y="264" width="48" height="24">

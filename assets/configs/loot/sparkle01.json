@@ -57,5 +57,6 @@
   "sparkle_alva_22"    : {"content": {"spice": 1}},
   "sparkle_alva_23"    : {"condition": ["ranger1"], "content": {"herb": 1}},
   "sparkle_alva_24"    : {"condition": ["ranger1"], "content": {"gemstone": 1}},
+  "sparkle_alva_25"    : {"condition": ["ranger1"], "content": {"wood": 1}},
   "sparkle_garrin_01"  : {"condition": ["_n_1_>=_item_key_garrin"], "content": {"letter_to_santino": 1}}
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.12.1" orientation="orthogonal" renderorder="right-down" width="160" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="23" nextobjectid="286">
+<map version="1.11" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="160" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="23" nextobjectid="287">
  <properties>
   <property name="bgm" value="bgm_overworld"/>
   <property name="bgs" value="bgs_river"/>
@@ -195,8 +195,8 @@
   <object id="46" x="672" y="840" width="240" height="24"/>
   <object id="47" x="672" y="864" width="144" height="24"/>
   <object id="55" x="1056" y="888" width="96" height="120"/>
-  <object id="56" x="1152" y="1008" height="24"/>
-  <object id="57" x="1056" y="816" height="72"/>
+  <object id="56" x="1146" y="1008" width="6" height="18"/>
+  <object id="57" x="1056" y="744" width="6" height="144"/>
   <object id="58" x="912" y="1128" width="48" height="120"/>
   <object id="59" x="960" y="1176" width="48" height="120"/>
   <object id="60" x="1008" y="1224" width="144" height="120"/>
@@ -299,6 +299,7 @@
   <object id="268" name="sparkle_alva_21" x="2778" y="1176" width="48" height="48"/>
   <object id="269" name="sparkle_alva_22" x="144" y="1170" width="48" height="48"/>
   <object id="271" name="sparkle_alva_23" x="3360" y="480" width="48" height="48"/>
+  <object id="286" name="sparkle_alva_25" x="2544" y="912" width="48" height="48"/>
  </objectgroup>
  <objectgroup color="#ff007f" id="20" name="enemy">
   <object id="272" name="purple_bat" type="f" x="216" y="1146" width="48" height="24">

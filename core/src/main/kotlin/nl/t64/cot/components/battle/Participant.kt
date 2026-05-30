@@ -80,7 +80,7 @@ class Participant(
         val attackerHasAdvantageScore: Int = if (attackSkill.hasAdvantageOver(targetSkill)) -4 else 0
         val attackerHasDisadvantageScore: Int = if (attackSkill.hasDisadvantageFrom(targetSkill)) 4 else 0
         val stealthScore: Int = character.getCalculatedTotalSkillOf(SkillItemId.STEALTH)
-        val woundedScore: Float = (character.currentHp.toFloat() / character.maximumHp.coerceAtLeast(1)) * 6f
+        val lowHpScore: Float = character.currentHp / 50f
         val protectionScore: Float = character.getCalculatedTotalProtection() / 8f // todo, magic attackers moeten letten op magic protection
         val defenseScore: Float = character.getCalculatedTotalDefense() / 6f
 
@@ -91,12 +91,12 @@ class Participant(
                         "attackerHasAdvantageScore: $attackerHasAdvantageScore, " +
                         "attackerHasDisadvantageScore: $attackerHasDisadvantageScore, " +
                         "stealthScore: $stealthScore, " +
-                        "woundedScore: $woundedScore, " +
+                        "lowHpScore: $lowHpScore, " +
                         "protectionScore: $protectionScore, " +
                         "defenseScore: $defenseScore = " +
-                        "total: ${stealthScore + woundedScore + protectionScore + defenseScore + attackerHasAdvantageScore + attackerHasDisadvantageScore + nextToTargetScore}")
+                        "total: ${stealthScore + lowHpScore + protectionScore + defenseScore + attackerHasAdvantageScore + attackerHasDisadvantageScore + nextToTargetScore}")
         }
-        return stealthScore + woundedScore + protectionScore + defenseScore + attackerHasAdvantageScore + attackerHasDisadvantageScore + nextToTargetScore
+        return stealthScore + lowHpScore + protectionScore + defenseScore + attackerHasAdvantageScore + attackerHasDisadvantageScore + nextToTargetScore
     }
 
     fun getPenaltyAp(): Int {
