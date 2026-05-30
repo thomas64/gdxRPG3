@@ -89,11 +89,13 @@
   "lastdenn_inn_price-2"    : {
     "name"   : "Innkeeper",
     "phrases": {
-      "1"   : {"text": ["Welcome to the Lastdenn Inn! Our rooms are very comfortable and we have a great view of the city. The price to rest here and be completely revitalized is just 2 gold coins."]},
+      "1"   : {"text": ["Welcome to the Lastdenn Inn! Our rooms are very comfortable and we have a great view of the city. The price to rest here and be completely revitalized is just 2 gold coins. But you can also just stay here and pass some time for free if you like."]},
       "2"   : {
         "choices": [
           {"condition": ["i_time_before_18:15"], "text": "[2 Gold] *Accept the offer for some rest.* [BLUE](Restore health)", "nextId": "4"},
           {"condition": ["i_time_after_18:15"], "text": "[2 Gold] *Accept the offer for some rest.* [BLUE](Restore health)", "nextId": "6"},
+          {"condition": ["i_time_before_18:15"], "text": "*Just stay and pass some time.* [BLUE](Skip time)", "nextId": "20"},
+          {"condition": ["i_time_after_18:15"], "text": "*Just stay and pass some time.* [BLUE](Skip time)", "nextId": "22"},
           {"text": "*Ask her about the current vacancies.*", "nextId": "10"},
           {"text": "*Decline the offer. Take your leave.*", "command": "EXIT"}
         ]
@@ -110,10 +112,21 @@
           {"text": "(Back)", "nextId": "2"}
         ]
       },
-      "6"   : {"text": ["I'm sorry, Sir, but there are no rooms available right now. I don't know why I even bothered to tell you the price. Habits die hard, I guess."], "choices": [{"command": "EXIT"}]},
+      "6"   : {"text": ["I'm sorry, sir, but there are no rooms available right now. I don't know why I even bothered to tell you the price. Habits die hard, I guess."], "choices": [{"command": "EXIT"}]},
       "10"  : {"text": ["At the moment, we have an academy traveling group staying with us. If you want to meet them, you can find them on the second floor."]},
       "11"  : {"text": ["Besides that, the mayor's enforced daily city closure has been a bit of a burden for our business. We used to have quite a few pilgrims visiting our city, but it's not so easy to get in or out of the city anymore."], "choices": [{"nextId": "2"}]},
-      "1000": {"text": ["I'm sorry, Sir, you don't have enough gold."], "choices": [{"command": "EXIT"}]}
+      "20"  : {"text": ["How long would you like to stay?"]},
+      "21"  : {
+        "choices": [
+          {"text": "*Just for 1 hour.*", "command": "FADE_SKIP_0060"},
+          {"condition": ["i_time_before_08:00"], "text": "*Until 09:00.*", "command": "FADE_SKIP_0900"},
+          {"condition": ["i_time_before_11:00"], "text": "*Until 12:00.*", "command": "FADE_SKIP_1200"},
+          {"condition": ["i_time_before_14:00"], "text": "*Until 15:00.*", "command": "FADE_SKIP_1500"},
+          {"condition": ["i_time_before_17:00"], "text": "*Until 18:00.*", "command": "FADE_SKIP_1800"},
+          {"text": "(Back)", "nextId": "2"}
+        ]
+      },
+      "22"  : {"text": ["Oh, it's evening already. I'm sorry, sir, but our guests usually wish to keep it down at this hour. Please come back another time if you only want to pass the time."], "choices": [{"nextId": "2"}]},      "1000": {"text": ["I'm sorry, Sir, you don't have enough gold."], "choices": [{"command": "EXIT"}]}
     }
   },
   "lastdenn_inn_behind"     : {

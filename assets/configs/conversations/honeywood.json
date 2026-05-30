@@ -283,7 +283,7 @@
     "name"     : "Innkeeper",
     "condition": ["_c_==_a_q_this", "_tn_1_q_this"], "startAt": "60",
     "phrases"  : {
-      "1"   : {"text": ["Hey there Mozes! Would you like to rest here and be completely revitalized for just 1 gold piece?"]},
+      "1"   : {"text": ["Hey there Mozes! Would you like to rest here and be completely revitalized for just 1 gold piece? Or you can just hang around here, wait, and pass some time?"]},
       "2"   : {
         "choices": [
           {"condition": ["i_rc_===_u_q_this"], "text": "*Express your concern about the innkeeper's troubled demeanor.*", "nextId": "10"},
@@ -292,6 +292,8 @@
           {"condition": ["i_ta_1_q_this"], "text": "*Inform her that the bats have been dealt with.*", "nextId": "50"},
           {"condition": ["i_time_before_18:15"], "text": "[1 Gold] *Accept the offer for some rest.* [BLUE](Restore health)", "nextId": "4"},
           {"condition": ["i_time_after_18:15"], "text": "[1 Gold] *Accept the offer for some rest.* [BLUE](Restore health)", "nextId": "6"},
+          {"condition": ["i_time_before_18:15"], "text": "*Just stay and pass some time.* [BLUE](Skip time)", "nextId": "80"},
+          {"condition": ["i_time_after_18:15"], "text": "*Just stay and pass some time.* [BLUE](Skip time)", "nextId": "82"},
           {"condition": ["i_r_>=_k_q_this", "i_c_==_u_q_this"], "text": "*Express your concern about the innkeeper's troubled demeanor.*", "nextId": "10"},
           {"condition": ["i_r_>=_k_q_this", "i_c_==_u_q_this"], "text": "*Offer to help with the bat situation she will mention.*", "command": "ACCEPT_QUEST", "nextId": "15"},
           {"condition": ["i_time_before_18:15"], "text": "*Ask her about the current vacancies.*", "nextId": "70"},
@@ -314,6 +316,18 @@
         ]
       },
       "6"   : {"text": ["I'm sorry, Mozes, but there are no beds available right now. I shouldn't have mentioned it."], "choices": [{"nextId": "2"}]},
+      "80"  : {"text": ["How long would you like to stay?"]},
+      "81"  : {
+        "choices": [
+          {"text": "*Just for 1 hour.*", "command": "FADE_SKIP_0060"},
+          {"condition": ["i_time_before_08:00"], "text": "*Until 09:00.*", "command": "FADE_SKIP_0900"},
+          {"condition": ["i_time_before_11:00"], "text": "*Until 12:00.*", "command": "FADE_SKIP_1200"},
+          {"condition": ["i_time_before_14:00"], "text": "*Until 15:00.*", "command": "FADE_SKIP_1500"},
+          {"condition": ["i_time_before_17:00"], "text": "*Until 18:00.*", "command": "FADE_SKIP_1800"},
+          {"text": "(Back)", "nextId": "2"}
+        ]
+      },
+      "82"  : {"text": ["Oh, wait, it's evening already. I can't have you lingering here when I still need to prepare for tonight's special guest."], "choices": [{"nextId": "2"}]},
       "10"  : {"text": ["Trouble? In this establishment? Ridiculous! Nothing could be further from the truth. Why, you won't find a better resting place for miles around. Now... whoever's been spreading that silly gossip about upstairs is... well..."]},
       "11"  : {"text": ["... obviously just a no good tongue wagger, eager to mislead people. I've got nothing to hide here! It's nothing. A trifle. You have no need to be afraid or to find another inn. Those bats never did any harm. At least not very much."]},
       "12"  : {

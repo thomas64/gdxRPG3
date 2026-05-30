@@ -207,6 +207,11 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             ConversationCommand.RELOAD_NPCS_1101 -> fadeAndReloadNpcsToTime(nextId, "11:01")
             ConversationCommand.RELOAD_NPCS_1458 -> fadeAndReloadNpcsToTime(nextId, "14:58")
             ConversationCommand.HARD_SKIP_TO_1056 -> skipToTime(nextId, "10:56")
+            ConversationCommand.FADE_SKIP_0060 -> fadeAndSkipTime(nextId, "00:60")
+            ConversationCommand.FADE_SKIP_0900 -> fadeAndSkipTime(nextId, "09:00")
+            ConversationCommand.FADE_SKIP_1200 -> fadeAndSkipTime(nextId, "12:00")
+            ConversationCommand.FADE_SKIP_1500 -> fadeAndSkipTime(nextId, "15:00")
+            ConversationCommand.FADE_SKIP_1800 -> fadeAndSkipTime(nextId, "18:00")
 
             ConversationCommand.KNOW_QUEST -> knowQuest(nextId)
             ConversationCommand.ACCEPT_QUEST -> acceptQuest(nextId)
@@ -372,6 +377,19 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     private fun skipToTime(nextId: String, time: String) {
         gameData.clock.setTimeOfDay(time)
         endConversation(nextId)
+    }
+
+    private fun fadeAndSkipTime(nextId: String, time: String) {
+        Utils.runWithDelay(Constant.FADE_DURATION) {
+            endConversation(nextId)
+            playSe(AudioEvent.SE_CLOCK_TICKING)
+            when (time) {
+                "00:15" -> gameData.clock.takeQuarterHour()
+                "00:60" -> gameData.clock.takeHour()
+                else -> gameData.clock.setTimeOfDay(time)
+            }
+        }
+        conversationObserver.notifyFade(duration = 4f)
     }
 
     private fun knowQuest(nextId: String) {
