@@ -1,0 +1,87 @@
+{
+  "guide_event_battle_rows"       : {
+    "type": "tutorial",
+    "text": [
+      "The battlefield consists of the two rows you can see below.",
+      "The lower row for your party, the upper for the enemies.",
+      "The [FIREBRICK]red[BLACK] spaces on the upper row indicate your attack range.",
+      "",
+      "Each turn, you get a certain amount of Action Points (AP).",
+      "With these AP, you can move, attack, or do other actions."
+    ]
+  },
+  "guide_event_battle_advantage"  : {
+    "type": "tutorial",
+    "text": [
+      "Advantage greatly increases your hit and critical hit chance,",
+      "while disadvantage greatly decreases it, along with your damage.",
+      "",
+      "Each enemy has an [BLUE]advantage[BLACK] ([BLUE]+[BLACK]) and a [FIREBRICK]disadvantage[BLACK] ([FIREBRICK]-[BLACK])",
+      "against specific weapon types, such as a sword type or an axe type.",
+      "",
+      "Try to use the right weapon type against each enemy.",
+      "",
+      "[FIREBRICK]BEWARE![BLACK] When you have a disadvantage with your weapon against",
+      "an enemy, it means that the enemy has an advantage against you!"
+    ]
+  },
+  "guide_event_battle_battle_lock": {
+    "type": "tutorial",
+    "text": [
+      "At the start of each turn, if a character begins",
+      "next to an enemy, they become locked in battle.",
+      "This is marked by a small exclamation mark [!].",
+      "",
+      "This [BLUE]significantly[BLACK] increases the AP cost to move",
+      "away from that enemy and escape the battle lock.",
+      "",
+      "The Stealth skill reduces the AP cost to escape battle lock."
+    ]
+  },
+  "guide_event_battle_ap"         : {
+    "type": "tutorial",
+    "text": [
+      "When you end your turn, if there is any AP left,",
+      "up to [BLUE]2 AP[BLACK] will be added to your next turn's AP.",
+      "",
+      "For now, with your current attributes,",
+      "it means you can have a maximum of 6 AP."
+    ]
+  },
+  "guide_event_battle_turn_order" : {
+    "type": "tutorial",
+    "text": [
+      "At the top of the screen, you can see the turn order.",
+      "The character highlighted in [GOLDENROD]yellow[BLACK] will act first.",
+      "",
+      "The turn order is based on the [BLUE]Speed[BLACK] attribute.",
+      "Higher speed means acting earlier in the round.",
+      "",
+      "The speed of your party members is displayed.",
+      "The enemy's speed is unknown and shown as a",
+      "question mark. However, you can estimate it by",
+      "comparing the turn order with your party's speed."
+    ]
+  },
+  "guide_event_battle_durability" : {
+    "type": "tutorial",
+    "text": [
+      "Weapons and shields have limited [BLUE]durability[BLACK].",
+      "You can see their durability in parentheses after",
+      "the item's name. Each use reduces durability by 1.",
+      "When durability reaches [FIREBRICK]0[BLACK], the item breaks and is lost.",
+      "Always monitor your weapon's durability to avoid surprises!",
+      "",
+      "The Mechanic skill gives your party the ability to repair items."
+    ]
+  },
+  "guide_event_battle_special"    : {
+    "type": "tutorial",
+    "text": [
+      "It is possible that you have acquired a magic spell by now.",
+      "If so, you can use it in the battle menu under [BLUE]Special[BLACK].",
+      "",
+      "Remember, magic spells require resources to cast."
+    ]
+  }
+}

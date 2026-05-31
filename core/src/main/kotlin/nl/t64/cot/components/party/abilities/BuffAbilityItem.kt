@@ -27,7 +27,7 @@ abstract class BuffAbilityItem(
             $name on ${target.character.name}
 
             Requires:
-            ${abilityItem.requiredResource.title} (${gameData.inventory.getTotalOfItem(abilityItem.requiredResource.title)})
+            ${abilityItem.requiredResource.title} (1/${gameData.inventory.getTotalOfItem(abilityItem.requiredResource.title)})
 
             Effect:
             ${getBuffDescription()}

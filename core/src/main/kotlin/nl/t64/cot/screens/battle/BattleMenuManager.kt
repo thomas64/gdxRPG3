@@ -260,7 +260,8 @@ class BattleMenuManager(
         battleField.cancelMovement()
         battleField.resetStartingSpace()
         val areEnemiesInRange: Boolean = battleField.getTargetableEnemiesForActingHero().isNotEmpty()
-        buttonTableAction = screenBuilder.createButtonTableAction(currentParticipant.invoke(), areEnemiesInRange)
+        val isAbleToMove: Boolean = battleField.getModifiedApForHero() > 0
+        buttonTableAction = screenBuilder.createButtonTableAction(currentParticipant.invoke(), areEnemiesInRange, isAbleToMove)
         setupTable(buttonTableAction, actionMainMenuListener)
     }
 

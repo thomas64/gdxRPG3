@@ -33,7 +33,7 @@ class ElementalAttack(
                 val weaponHit: Int = it.getAttributeOfCalcAttributeId(CalcAttributeId.BASE_HIT)
                 val weaponDamage: Int = it.getAttributeOfCalcAttributeId(CalcAttributeId.DAMAGE)
                 """
-                $name (${abilityItem.requiredResource.title}: ${gameData.inventory.getTotalOfItem(abilityItem.requiredResource.title)})
+                $name (${abilityItem.requiredResource.title}: 1/${gameData.inventory.getTotalOfItem(abilityItem.requiredResource.title)})
                 ${it.name} ${it.getDurabilityText()}
                 ${createEffectiveMessage()}
                 -------------------------------------------
@@ -70,7 +70,7 @@ class ElementalAttack(
 
             return currentWeapon?.let {
                 """
-                $name (${abilityItem.requiredResource.title}: ${gameData.inventory.getTotalOfItem(abilityItem.requiredResource.title)})
+                $name (${abilityItem.requiredResource.title}: 1/${gameData.inventory.getTotalOfItem(abilityItem.requiredResource.title)})
                 ${it.name} ${it.getDurabilityText()}
                 ${createEffectiveMessage()}
                 Mod hit: ${String.format("%3d", calculateHitPercentageForVisual())} %
@@ -84,7 +84,7 @@ class ElementalAttack(
 
     private fun createNoWeaponMessageWithResource(): String {
         return """
-            $name (${abilityItem.requiredResource.title}: ${gameData.inventory.getTotalOfItem(abilityItem.requiredResource.title)})
+            $name (${abilityItem.requiredResource.title}: 1/${gameData.inventory.getTotalOfItem(abilityItem.requiredResource.title)})
 
             No weapon equipped.
             [FIREBRICK]Disadvantage![BLACK]

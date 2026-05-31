@@ -8,6 +8,8 @@ import nl.t64.cot.components.party.skills.SkillItemId
 import kotlin.math.roundToInt
 
 
+private const val AP_UNKNOWN = 99
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class AbilityItem(
     override val id: AbilityItemId = AbilityItemId.STAGGER,  // Value will be replaced when constructed.
@@ -95,7 +97,7 @@ data class AbilityItem(
     }
 
     private fun createApCost(): String {
-        if (ap == 99) {
+        if (ap == AP_UNKNOWN) {
             return System.lineSeparator() + "AP cost: ?"
         } else {
             return System.lineSeparator() + "AP cost: $ap"

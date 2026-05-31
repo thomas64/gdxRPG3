@@ -25,6 +25,9 @@ class BattleDialogManager(
         selectedTarget: Participant
     ) {
         val attackAction = AttackAction(currentParticipant.invoke(), selectedTarget, selectedAttack)
+
+        if (shouldShowErrorMessage(attackAction.isUnableWithCurrentWeapon())) return
+
         val message = attackAction.createPreviewMessage()
         val dialog = MessageDialog(message)
         dialog.setLeftAlignment()

@@ -17,6 +17,7 @@ private const val DAMAGE_DISADVANTAGE_DIVISOR = 1.5f
 private const val CRIT_HIT_ADVANTAGE = 30
 private const val CRIT_HIT_DISADVANTAGE = -30
 private const val CRIT_DAMAGE_MULTIPLIER = 1.5f
+private const val AP_USE_ALL = 99
 
 abstract class BattleAbilityItem(
     val abilityItem: AbilityItem,
@@ -32,7 +33,7 @@ abstract class BattleAbilityItem(
     lateinit var target: Participant
 
     private fun calculateAp(): Int {
-        if (abilityItem.ap == 99) {
+        if (abilityItem.ap == AP_USE_ALL) {
             if (attacker.currentAP > attacker.maximumAP) {
                 return attacker.currentAP
             } else {
@@ -249,7 +250,9 @@ abstract class BattleAbilityItem(
     }
 
     private fun possibleGetGrayPrefix(): String {
-        if (abilityItem.isPreview) return ""
+        if (abilityItem.isPreview) {
+            return if (!isWeaponAllowed()) "[GRAY]" else ""
+        }
         return if (!isWeaponAllowed() || !hasEnoughApSp()) "[GRAY]" else ""
     }
 

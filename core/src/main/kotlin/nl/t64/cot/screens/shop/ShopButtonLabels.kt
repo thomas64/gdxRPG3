@@ -9,9 +9,9 @@ internal class ShopButtonLabels(stage: Stage) : ButtonLabels(stage) {
 
     override fun createBottomLeftText(): String {
         return if (Utils.isGamepadConnected()) {
-            "Buy / Sell:      [A] One      [X] Half      [Y] Full"
+            "Buy / Sell:      [A] One      [X] Half      [Y] All"
         } else {
-            "Buy / Sell:      [A] One      [S] Half      [D] Full"
+            "Buy / Sell:      [A] One      [S] Half      [D] All"
         }
     }
 

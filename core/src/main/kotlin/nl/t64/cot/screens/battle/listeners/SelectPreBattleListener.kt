@@ -28,6 +28,7 @@ class SelectPreBattleListener(
             Input.Keys.DOWN -> playSe(AudioEvent.SE_MENU_CURSOR)
             Constant.KEYCODE_RIGHT -> event.dontLoseFocusAfterEsc()
             Constant.KEYCODE_BOTTOM, Input.Keys.ENTER, Input.Keys.A -> event.handleEnter()
+            Constant.KEYCODE_TOP, Input.Keys.I -> inventoryScreen.invoke()
             Input.Keys.W -> handleWin(winBattle)
         }
         return true

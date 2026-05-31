@@ -10,6 +10,8 @@ import nl.t64.cot.components.party.abilities.AbilityDatabase
 import nl.t64.cot.components.party.abilities.AbilityItemId
 
 
+private const val REWARD_FOR_ALL = 99
+
 object SpellsRewarder {
 
     fun receivePossibleSpells(lootId: String) {
@@ -34,7 +36,7 @@ object SpellsRewarder {
         val player: HeroItem = gameData.party.getPlayer()
 
         val spellToLearn: AbilityItemId = AbilityItemId.valueOf(rewardEntry.key.uppercase())
-        if (rewardEntry.value == 99) {
+        if (rewardEntry.value == REWARD_FOR_ALL) {
             party.forEach { it.possibleLearnSpell(spellToLearn, spellsToShowInPopup) }
         } else {
             player.possibleLearnSpell(spellToLearn, spellsToShowInPopup)

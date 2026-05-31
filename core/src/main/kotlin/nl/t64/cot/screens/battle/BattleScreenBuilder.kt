@@ -36,6 +36,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.List as GdxList
 private const val TITLE_TEXT = "Battle...!"
 private const val BAR_WIDTH = 145f
 private const val BAR_HEIGHT = 18f
+private const val AP_UNAVAILABLE = 99
 
 class BattleScreenBuilder {
 
@@ -297,8 +298,12 @@ class BattleScreenBuilder {
         return createStyledEmptyList<String>().fillWithHeroes(heroes).toHeroTable()
     }
 
-    fun createButtonTableAction(currentParticipant: Participant, areEnemiesInRange: Boolean): Table {
-        return createStyledEmptyList<String>().fillWithActions(currentParticipant, areEnemiesInRange).toActionTable()
+    fun createButtonTableAction(currentParticipant: Participant,
+                                areEnemiesInRange: Boolean,
+                                isAbleToMove: Boolean): Table {
+        return createStyledEmptyList<String>()
+            .fillWithActions(currentParticipant, areEnemiesInRange, isAbleToMove)
+            .toActionTable()
     }
 
     fun createButtonTablePreviewAttack(currentParticipant: Participant): Table {
@@ -360,26 +365,28 @@ class BattleScreenBuilder {
     }
 
     private fun GdxList<String>.fillWithActions(currentParticipant: Participant,
-                                                areEnemiesInRange: Boolean): GdxList<String> {
-        val attackAp: Int = if (areEnemiesInRange) 2 else 99
+                                                areEnemiesInRange: Boolean,
+                                                isAbleToMove: Boolean): GdxList<String> {
+        val attackAp: Int = if (areEnemiesInRange) 2 else AP_UNAVAILABLE
+        val moveApInt: Int = if (isAbleToMove) 1 else AP_UNAVAILABLE
         val curAp: Int = maxOf(1, currentParticipant.currentAP)
         val maxAp: Int = currentParticipant.maximumAP
-        val moveAp: String = buildMoveApStringFrom(curAp)
+        val moveApString: String = buildMoveApStringFrom(curAp)
         val fleeAp: String = buildFleeApStringFrom(curAp, maxAp)
 
         val actions: List<Pair<String, Int>> = listOf(
             // @formatter:off
-            String.format("%-11s%7s", "Attack",     "? AP")         to attackAp,
-            String.format("%-11s%7s", "Special",    "? AP")         to 3,
-            String.format("%-11s%7s", "Move",       "$moveAp AP")   to 1,
-            String.format("%-11s%7s", "Equipment",  "3 AP")         to 3,
-            String.format("%-11s%7s", "Potion",     "3 AP")         to 3,
-            String.format("%-11s%7s", "Preview",    "")             to 0,
-            String.format("%-11s%7s", "Party",      "")             to 0,
-            String.format("%-11s%7s", "Flee party", "$fleeAp AP")   to fleeAp.toInt(),
-            String.format("%-11s%7s", "Delay turn", "1 AP")         to 1,
-            String.format("%-11s%7s", "Rest",       "$curAp AP")    to 1,
-            String.format("%-11s%7s", "End turn",   "")             to 0
+            String.format("%-11s%7s", "Attack",     "? AP")             to attackAp,
+            String.format("%-11s%7s", "Special",    "? AP")             to 3,
+            String.format("%-11s%7s", "Move",       "$moveApString AP") to moveApInt,
+            String.format("%-11s%7s", "Equipment",  "3 AP")             to 3,
+            String.format("%-11s%7s", "Potion",     "3 AP")             to 3,
+            String.format("%-11s%7s", "Preview",    "")                 to 0,
+            String.format("%-11s%7s", "Party",      "")                 to 0,
+            String.format("%-11s%7s", "Flee party", "$fleeAp AP")       to fleeAp.toInt(),
+            String.format("%-11s%7s", "Delay turn", "1 AP")             to 1,
+            String.format("%-11s%7s", "Rest",       "$curAp AP")        to 1,
+            String.format("%-11s%7s", "End turn",   "")                 to 0
             // @formatter:on
         )
         val actionStrings: List<String> = actions.map { (action, ap) ->

@@ -79,7 +79,7 @@ class BattleField(
         moveHero(allSpacesFromHere)
     }
 
-    private fun getModifiedApForHero(): Int {
+    fun getModifiedApForHero(): Int {
         return currentParticipant.invoke().currentAP - getPenaltyApForHero()
     }
 
@@ -92,8 +92,7 @@ class BattleField(
     }
 
     private fun getPenaltyApForEnemy(destinationSpace: Int): Int {
-        if (destinationSpace == startingSpace) return 0
-        return if (isEnemyStartingSpaceNextToHero()) currentParticipant.invoke().getPenaltyAp() else 0
+        return if (isEnemyStartingSpaceNextToHero(destinationSpace)) currentParticipant.invoke().getPenaltyAp() else 0
     }
 
     fun getSpaceIndexOfCurrentParticipant(): Int {
@@ -298,13 +297,17 @@ class BattleField(
     }
 
     private fun isHeroStartingSpaceNextToEnemy(): Boolean {
-        if (startingSpace == -1) return false
-        return startingSpace.isHeroSpaceNextToEnemy()
+        return getEffectiveStartingSpace().isHeroSpaceNextToEnemy()
     }
 
-    private fun isEnemyStartingSpaceNextToHero(): Boolean {
-        if (startingSpace == -1) return false
-        return startingSpace.isEnemySpaceNextToHero()
+    private fun isEnemyStartingSpaceNextToHero(destinationSpace: Int): Boolean {
+        val effectiveStartingSpace: Int = getEffectiveStartingSpace()
+        if (destinationSpace == effectiveStartingSpace) return false
+        return effectiveStartingSpace.isEnemySpaceNextToHero()
+    }
+
+    private fun getEffectiveStartingSpace(): Int {
+        return if (startingSpace == -1) getSpaceIndexOfCurrentParticipant() else startingSpace
     }
 
     private fun Int.isHeroSpaceNextToEnemy(): Boolean {

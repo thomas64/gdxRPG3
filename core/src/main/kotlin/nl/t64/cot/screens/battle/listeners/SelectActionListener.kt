@@ -36,6 +36,7 @@ class SelectActionListener(
             Input.Keys.DOWN -> event.selectNextNonGrayOption<String>()
             Constant.KEYCODE_RIGHT -> event.dontLoseFocusAfterEsc()
             Constant.KEYCODE_BOTTOM, Input.Keys.ENTER, Input.Keys.A -> event.handleEnter()
+            Constant.KEYCODE_TOP, Input.Keys.I -> selectParty.invoke()
             Input.Keys.W -> handleWin(winBattle)
         }
         return true
