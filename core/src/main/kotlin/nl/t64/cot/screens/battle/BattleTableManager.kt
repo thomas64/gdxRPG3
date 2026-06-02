@@ -24,9 +24,9 @@ class BattleTableManager(
         stage.addActor(heroTable)
     }
 
-    fun updateEnemyTable(enemies: List<EnemyItem>) {
+    fun updateEnemyTable(enemies: List<EnemyItem>, getCurrentAp: (Character) -> Int) {
         enemyTable.remove()
-        enemyTable = screenBuilder.createEnemyTable(enemies, currentParticipant.invoke().character.name)
+        enemyTable = screenBuilder.createEnemyTable(enemies, getCurrentAp, currentParticipant.invoke().character.name)
         stage.addActor(enemyTable)
     }
 

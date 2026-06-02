@@ -153,6 +153,12 @@ open class InventoryContainer(numberOfSlots: Int = 0) {
         return getSize() - 1
     }
 
+    fun containsBook(enemyId: String): Boolean {
+        return inventory
+            .filterNotNull()
+            .any { it.id.startsWith("book_${enemyId.take(15)}") }
+    }
+
     fun contains(itemId: String): Boolean {
         return inventory
             .filterNotNull()

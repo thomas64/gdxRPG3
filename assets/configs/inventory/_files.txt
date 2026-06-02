@@ -1,6 +1,7 @@
 accessory.json
 axe.json
 belt.json
+book.json
 boots.json
 bow.json
 bracers.json

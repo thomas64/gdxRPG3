@@ -179,7 +179,7 @@ class BattleScreen : Screen {
 
     private fun updateAllTables() {
         tableManager.updateHeroTable(gameData.party.getAllHeroes(), turnManager::getCurrentApOf)
-        tableManager.updateEnemyTable(enemies.getAll())
+        tableManager.updateEnemyTable(enemies.getAll(), turnManager::getCurrentApOf)
         tableManager.updateTurnTable(turnManager)
         tableManager.updateBattleField(battleField)
     }

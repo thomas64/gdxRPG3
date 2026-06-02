@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Scaling
 import ktx.assets.disposeSafely
 import nl.t64.cot.Utils
+import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.components.battle.AttackData
 import nl.t64.cot.components.battle.Character
@@ -101,7 +102,7 @@ class BattleScreenBuilder {
             defaults().left().height(30f)
             add(hero.name).width(185f).colspan(2).padLeft(10f).padRight(10f).row()
             add("HP:").width(40f).padLeft(10f)
-            add(createHpBar(hero)).width(BAR_WIDTH).height(BAR_HEIGHT).padRight(10f).row()
+            add(createHpBar(hero, true)).width(BAR_WIDTH).height(BAR_HEIGHT).padRight(10f).row()
             add("SP:").width(40f).padLeft(10f)
             add(createSpBar(hero)).width(BAR_WIDTH).height(BAR_HEIGHT).padRight(10f).row()
             add("AP:").width(40f).padLeft(10f)
@@ -148,19 +149,25 @@ class BattleScreenBuilder {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    fun createEnemyTable(enemies: List<EnemyItem>, currentParticipantName: String): Table {
+    fun createEnemyTable(enemies: List<EnemyItem>,
+                         getCurrentAp: (Character) -> Int,
+                         currentParticipantName: String
+    ): Table {
         return Table(tableSkin).apply {
             defaults().height(Constant.FACE_SIZE).spaceBottom(4f)
             columnDefaults(1).width(Constant.FACE_SIZE)
             top().left()
             setPosition(Gdx.graphics.width - Constant.FACE_SIZE - 185f - 40f, Gdx.graphics.height - 20f)
-            enemies.forEach { addEnemy(it, currentParticipantName) }
+            enemies.forEach { addEnemy(it, getCurrentAp, currentParticipantName) }
         }
     }
 
-    private fun Table.addEnemy(enemy: EnemyItem, currentParticipantName: String) {
+    private fun Table.addEnemy(enemy: EnemyItem,
+                               getCurrentAp: (Character) -> Int,
+                               currentParticipantName: String
+    ) {
         val statsStack = Stack()
-        statsStack.add(createStatsTableFor(enemy))
+        statsStack.add(createStatsTableFor(enemy, getCurrentAp))
         statsStack.add(createWeaponSlotFor(enemy))
         statsStack.add(createShieldSlotFor(enemy))
         statsStack.add(Image(Utils.createFullBorderWhite()))
@@ -169,12 +176,21 @@ class BattleScreenBuilder {
         add(createFaceImage(enemy, currentParticipantName, isFlipped = false)).row()
     }
 
-    private fun createStatsTableFor(enemy: EnemyItem): Table {
+    private fun createStatsTableFor(enemy: EnemyItem, getCurrentAp: (Character) -> Int): Table {
+        val isEnemyKnown: Boolean = gameData.inventory.containsBook(enemy.id)
+        val currentAp: Int = getCurrentAp.invoke(enemy)
+        val maximumAP: Int = enemy.getCalculatedActionPoints()
+
         return Table(tableSkin).apply {
-            defaults().left()
-            add(enemy.name).width(185f).height(28f).colspan(2).padLeft(10f).padRight(10f).row()
-            add("HP:").width(40f).height(28f).padLeft(10f)
-            add(createHpBar(enemy)).width(BAR_WIDTH).height(BAR_HEIGHT).padRight(10f).row()
+            defaults().left().height(30f)
+            top().padTop(42f)
+            add(enemy.name).width(185f).colspan(2).padLeft(10f).padRight(10f).row()
+            add("HP:").width(40f).padLeft(10f)
+            add(createHpBar(enemy, isEnemyKnown)).width(BAR_WIDTH).height(BAR_HEIGHT).padRight(10f).row()
+            if (isEnemyKnown) {
+                add("AP:").width(40f).padLeft(10f)
+                add(createApDots(currentAp, maximumAP)).width(BAR_WIDTH).height(BAR_HEIGHT).padRight(10f).row()
+            }
             background = transparent
         }
     }
@@ -275,6 +291,9 @@ class BattleScreenBuilder {
 
     private fun Table.addSpeedCell(participant: Participant, color: Color = Color.WHITE): Cell<Label> {
         if (participant.isHero) {
+            return add(Label(participant.character.getCalculatedTotalStatOf(StatItemId.SPEED).toString(),
+                             createLabelStyle(color)))
+        } else if (gameData.inventory.containsBook(participant.character.id)) {
             return add(Label(participant.character.getCalculatedTotalStatOf(StatItemId.SPEED).toString(),
                              createLabelStyle(color)))
         } else {
@@ -601,10 +620,10 @@ class BattleScreenBuilder {
         }
     }
 
-    private fun createHpBar(character: Character): Stack {
+    private fun createHpBar(character: Character, showLabel: Boolean): Stack {
         return Stack().apply {
             add(createHpFill(character))
-            if (character is HeroItem) add(createHpLabel(character))
+            if (showLabel) add(createHpLabel(character))
             add(Image(Utils.createFullBorderWhite()))
         }
     }

@@ -1,0 +1,42 @@
+{
+  "book_blue_bat"   : {
+    "name"       : "Encyclopedia of the Blue Bat",
+    "group"      : "ITEM",
+    "sort"       : 70010,
+    "price"      : 50,
+    "description": [
+      "This book contains information about the Blue Bat.",
+      "Keep it with you to understand it's battle attributes."
+    ]
+  },
+  "book_purple_bat" : {
+    "name"       : "Encyclopedia of the Purple Bat",
+    "group"      : "ITEM",
+    "sort"       : 70015,
+    "price"      : 50,
+    "description": [
+      "This book contains information about the Purple Bat.",
+      "Keep it with you to understand it's battle attributes."
+    ]
+  },
+  "book_green_slime": {
+    "name"       : "Encyclopedia of the Green Slime",
+    "group"      : "ITEM",
+    "sort"       : 70020,
+    "price"      : 50,
+    "description": [
+      "This book contains information about the Green Slime.",
+      "Keep it with you to understand it's battle attributes."
+    ]
+  },
+  "book_blue_slime" : {
+    "name"       : "Encyclopedia of the Blue Slime",
+    "group"      : "ITEM",
+    "sort"       : 70025,
+    "price"      : 50,
+    "description": [
+      "This book contains information about the Blue Slime.",
+      "Keep it with you to understand it's battle attributes."
+    ]
+  }
+}

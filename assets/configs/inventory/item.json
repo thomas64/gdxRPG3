@@ -10,7 +10,7 @@
   "key_honeywood_basement" : {
     "name"        : "Basement key",
     "group"       : "ITEM",
-    "sort"        : 70010,
+    "sort"        : 70110,
     "is_unique"   : true,
     "description" : ["Key to the elder's basement, given to you by the elder himself."],
     "is_droppable": false
@@ -18,7 +18,7 @@
   "scroll_of_orc_obedience": {
     "name"        : "Scroll of Orc Obedience",
     "group"       : "ITEM",
-    "sort"        : 70015,
+    "sort"        : 70115,
     "is_unique"   : true,
     "description" : ["Makes an orc follow your command unconditionally.", "This specific scroll only works in Honeywood Forest."],
     "is_droppable": false
@@ -26,28 +26,28 @@
   "horse_medicine"         : {
     "name"        : "Horse Medicine",
     "group"       : "ITEM",
-    "sort"        : 70020,
+    "sort"        : 70120,
     "description" : ["A medicine made by Elenora for Enopa."],
     "is_droppable": false
   },
   "horseshoe"              : {
     "name"        : "Horseshoe",
     "group"       : "ITEM",
-    "sort"        : 70025,
+    "sort"        : 70125,
     "description" : ["Just a regular horseshoe."],
     "is_droppable": true
   },
   "tow_rope"               : {
     "name"        : "Tow Rope",
     "group"       : "ITEM",
-    "sort"        : 70030,
+    "sort"        : 70130,
     "description" : ["A strong rope which can be used by a horse."],
     "is_droppable": false
   },
   "letter_to_fairy_shop"   : {
     "name"        : "Letter to the Fairy Shop",
     "group"       : "ITEM",
-    "sort"        : 70035,
+    "sort"        : 70135,
     "is_unique"   : true,
     "description" : ["A letter from the village elder to the Fairy Shop.", "What does it say?"],
     "is_droppable": false
@@ -55,7 +55,7 @@
   "key_lastdenn_jail"      : {
     "name"        : "Cell door 2 key",
     "group"       : "ITEM",
-    "sort"        : 70040,
+    "sort"        : 70140,
     "is_unique"   : true,
     "description" : ["Key to Lastdenn Jail cell door 2."],
     "is_droppable": false
@@ -63,7 +63,7 @@
   "key_garrin"             : {
     "name"        : "Garrin's key",
     "group"       : "ITEM",
-    "sort"        : 70045,
+    "sort"        : 70145,
     "is_unique"   : true,
     "description" : ["Key from Garrin's cabinet."],
     "is_droppable": false
@@ -71,7 +71,7 @@
   "letter_to_santino"      : {
     "name"        : "Letter to Father Santino",
     "group"       : "ITEM",
-    "sort"        : 70050,
+    "sort"        : 70150,
     "is_unique"   : true,
     "description" : ["A letter from Garrin to Father Santino about ghosts."],
     "is_droppable": false,
@@ -80,7 +80,7 @@
   "ghost_repeller"         : {
     "name"        : "Ghost repeller",
     "group"       : "ITEM",
-    "sort"        : 70055,
+    "sort"        : 70155,
     "is_unique"   : true,
     "description" : ["A holy item from Father Santino that makes ghosts interactable.", "It doesn't work on possessed people though."],
     "is_droppable": false,
