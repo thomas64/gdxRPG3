@@ -128,10 +128,10 @@ internal class StatsTable(
         val bonusDamage: Int = selectedHero.getCalculatedTotalDamage() - baseDamage
         addExtraToTable(bonusDamage)
 
-        table.add(createCalcLabel(CalcAttributeId.PROTECTION, isPercentage = true))
+        table.add(createCalcLabel(CalcAttributeId.PROTECTION))
         table.add("")
-        table.add(selectedHero.getCalculatedProtection().toString())
-        addExtraToTable(selectedHero.getEffectiveExtraProtection())
+        table.add(selectedHero.getRawProtection().toString())
+        addExtraToTable(selectedHero.getRawExtraProtection())
 
         table.add(createCalcLabel(CalcAttributeId.MAGIC_PROTECTION, isPercentage = true))
         table.add("")

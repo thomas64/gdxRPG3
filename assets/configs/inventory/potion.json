@@ -127,7 +127,7 @@
     "gemstone"     : 1,
     "description"  : [
       "Temporarily increases the Protection of",
-      "the drinker by 3 points during 1 battle."
+      "the drinker by 5 points during 1 battle."
     ],
     "protection"   : 5
   },
@@ -142,7 +142,7 @@
     "gemstone"     : 2,
     "description"  : [
       "Temporarily increases the Protection of",
-      "the drinker by 5 points during 1 battle."
+      "the drinker by 10 points during 1 battle."
     ],
     "protection"   : 10
   },
@@ -157,7 +157,7 @@
     "gemstone"     : 3,
     "description"  : [
       "Temporarily increases the Protection of",
-      "the drinker by 7 points during 1 battle."
+      "the drinker by 15 points during 1 battle."
     ],
     "protection"   : 15
   },

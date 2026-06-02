@@ -133,20 +133,15 @@ abstract class Character(
     }
 
     fun getCalculatedTotalProtection(): Int {
-        val totalRaw: Int = getSumOfEquipmentOfCalc(CalcAttributeId.PROTECTION) + getRawExtraProtection()
+        val totalRaw: Int = getRawProtection() + getRawExtraProtection()
         return getArmorReductionPercentage(totalRaw)
     }
 
-    fun getCalculatedProtection(): Int {
-        val protection: Int = getSumOfEquipmentOfCalc(CalcAttributeId.PROTECTION)
-        return getArmorReductionPercentage(protection)
+    fun getRawProtection(): Int {
+        return getSumOfEquipmentOfCalc(CalcAttributeId.PROTECTION)
     }
 
-    fun getEffectiveExtraProtection(): Int {
-        return getCalculatedTotalProtection() - getCalculatedProtection()
-    }
-
-    private fun getRawExtraProtection(): Int {
+    fun getRawExtraProtection(): Int {
         return inventory.getBonusProtectionWhenArmorSetIsComplete() + bonus.getProtection()
     }
 

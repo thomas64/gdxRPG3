@@ -20,12 +20,12 @@ private const val SOFT_CAP_PERCENT: Float = 92f
 private const val POST_CURVE_GROWTH: Float = 0.03f
 
 private val TARGET_CURVE: List<ArmorCurvePoint> = listOf(ArmorCurvePoint(0f, 0f),
-                                                         ArmorCurvePoint(7f, 20f),
-                                                         ArmorCurvePoint(28f, 30f),
-                                                         ArmorCurvePoint(49f, 45f),
-                                                         ArmorCurvePoint(70f, 55f),
-                                                         ArmorCurvePoint(91f, 70f),
-                                                         ArmorCurvePoint(112f, 80f))
+                                                         ArmorCurvePoint(7f, 20f),      // 7 * 1
+                                                         ArmorCurvePoint(28f, 30f),     // 7 * 4
+                                                         ArmorCurvePoint(51f, 45f),     // 7 * 7  + 2
+                                                         ArmorCurvePoint(72f, 55f),     // 7 * 10 + 2
+                                                         ArmorCurvePoint(95f, 70f),     // 7 * 13 + 4
+                                                         ArmorCurvePoint(116f, 80f))    // 7 * 16 + 4,
 
 class ArmorReductionCalculator(
     private val armorReductionChoice: ArmorReductionChoice = ArmorReductionChoice.TARGET_CURVE
