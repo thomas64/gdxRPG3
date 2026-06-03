@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.12.1" orientation="orthogonal" renderorder="right-down" width="76" height="116" tilewidth="24" tileheight="24" infinite="0" nextlayerid="24" nextobjectid="297">
+<map version="1.11" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="76" height="116" tilewidth="24" tileheight="24" infinite="0" nextlayerid="24" nextobjectid="297">
  <properties>
   <property name="bgm" value="bgm_lastdenn"/>
   <property name="lightmap_camera" value="sunlight"/>
@@ -211,7 +211,7 @@
   <object id="221" x="144" y="2616" width="48" height="132"/>
   <object id="261" x="600" y="786" width="192" height="12"/>
   <object id="287" x="144" y="2772" width="600" height="12"/>
-  <object id="294" x="744" y="2592" width="744" height="192"/>
+  <object id="294" x="744" y="2544" width="744" height="240"/>
  </objectgroup>
  <objectgroup color="#5500ff" id="13" name="rest">
   <object id="164" name="door_luxurious_left" x="576" y="2184" width="48" height="72"/>

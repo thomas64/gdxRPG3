@@ -184,7 +184,7 @@
       "12"  : {"text": ["I just wanted to protect my son. I didn't want to hurt anyone. I didn't even know what I was doing."]},
       "13"  : {"text": ["I wish I could go back and change what happened."]},
       "14"  : {"text": ["It's ironic, isn't it? The priest himself had something against ghosts. If he would have given me that, he himself would still be alive."]},
-      "15"  : {"text": ["In my home, there's a letter to the priest about that exact thing. You should get the letter and the item to maybe prevent something like this from happening again."]},
+      "15"  : {"text": ["In my home, there's a letter to the priest about that exact thing. You should get that letter and the thing to maybe prevent something like this from happening again."]},
       "16"  : {"text": ["You can find the letter in a drawer with a picture of my wife on it."]},
       "17"  : {"text": ["It's too late now to prevent any of this from happening, but who knows, like I said, maybe it can prevent something like this from happening again."]},
       "18"  : {"text": ["Anyway, thank you for coming to see me. Say hi to my son for me."], "choices": [{"command": "RECEIVE_ITEM"}]},
@@ -211,23 +211,27 @@
     }
   },
   "santino_service"            : {
-    "name"   : "Father Santino",
-    "phrases": {
-      "1": {"text": ["People of Lastdenn, let us begin in stillness and gratitude. We stand before Evdos, God of Knowledge, whose light reveals what is true."]},
-      "2": {
+    "name"     : "Father Santino",
+    "condition": ["_time_after_10:56"], "startAt": "20",
+    "phrases"  : {
+      "1" : {"text": ["People of Lastdenn, let us begin in stillness and gratitude. We stand before Evdos, God of Knowledge, whose light reveals what is true."]},
+      "2" : {
         "choices": [
           {"text": "*Listen to his message.*", "nextId": "3"},
           {"text": "*You've heard it all before. Stop listening.*", "command": "EXIT"},
           {"text": "*Doze off and miss the whole sermon.* [BLUE](Skip time)", "command": "HARD_SKIP_TO_1056"}
         ]
       },
-      "3": {"text": ["To honor Evdos is to open both mind and heart. We do not fear honest questions. A question asked in humility is already a prayer."]},
-      "4": {"text": ["Knowledge is not pride, and wisdom is not noise. The wise listen first, test their words, and speak what can heal, guide, or protect. Ylarus, God of Time, teaches that no truth worth knowing is rushed."]},
-      "5": {"text": ["Ulrog is the God of Power, and his temptation is simple. He whispers, 'Rule first. Understand later.' He says, 'Take now. Reflect never.' Power without understanding soon becomes cruelty."]},
-      "6": {"text": ["Evdos teaches another order: understand first, act with discipline, and govern your strength. Even a righteous act becomes foolish in haste. Knowledge without mercy grows cold, but power without knowledge grows blind."]},
-      "7": {"text": ["In your homes, teach your children to read, to reason, and to remember. In your work, choose precision over haste and honesty over applause. In your conflicts, let truth speak before anger does."]},
-      "8": {"text": ["If you must be strong, be strong in patience. If you must lead, lead by understanding. Walk from this temple as seekers of knowledge, not servants of domination."]},
-      "9": {"text": ["Go in peace, children of Lastdenn. Choose the light of Evdos, God of Knowledge, and turn away from Ulrog, God of Power."], "choices": [{"command": "EXIT"}]}
+      "3" : {"text": ["To honor Evdos is to open both mind and heart. We do not fear honest questions. A question asked in humility is already a prayer."]},
+      "4" : {"text": ["Knowledge is not pride, and wisdom is not noise. The wise listen first, test their words, and speak what can heal, guide, or protect. Ylarus, God of Time, teaches that no truth worth knowing is rushed."]},
+      "5" : {"text": ["Ulrog is the God of Power, and his temptation is simple. He whispers, 'Rule first. Understand later.' He says, 'Take now. Reflect never.' Power without understanding soon becomes cruelty."]},
+      "6" : {"text": ["Evdos teaches another order: understand first, act with discipline, and govern your strength. Even a righteous act becomes foolish in haste. Knowledge without mercy grows cold, but power without knowledge grows blind."]},
+      "7" : {"text": ["In your homes, teach your children to read, to reason, and to remember. In your work, choose precision over haste and honesty over applause. In your conflicts, let truth speak before anger does."]},
+      "8" : {"text": ["If you must be strong, be strong in patience. If you must lead, lead by understanding. Walk from this temple as seekers of knowledge, not servants of domination."]},
+      "9" : {"text": ["Go in peace, children of Lastdenn. Choose the light of Evdos, God of Knowledge, and turn away from Ulrog, God of Power."], "choices": [{"command": "EXIT"}]},
+      "20": {"text": ["And that concludes this amazing sermon."]},
+      "21": {"text": ["If you have any questions or would like to discuss anything further, please feel free to come see me after the service."]},
+      "22": {"text": ["May Evdos be with you."], "choices": [{"command": "EXIT", "nextId": "20"}]}
     }
   },
   "santino_counseling"         : {
@@ -339,14 +343,14 @@
   },
   "guards_see_garrin"          : {
     "phrases": {
-      "1": {"face": "soldier01", "name": "Lastdenn Guard", "text": ["Halt!"]},
-      "2": {"face": "soldier01", "name": "Lastdenn Guard", "text": ["We saw that!"]},
+      "1": {"face": "soldier12", "name": "Lastdenn Guard", "text": ["Halt!"]},
+      "2": {"face": "soldier12", "name": "Lastdenn Guard", "text": ["We saw that!"]},
       "3": {"face": "man12", "name": "Garrin", "text": ["I... I... I..."]},
-      "4": {"face": "soldier01", "name": "Lastdenn Guard", "text": ["You killed him!"]},
+      "4": {"face": "soldier12", "name": "Lastdenn Guard", "text": ["You killed him!"]},
       "5": {"face": "man12", "name": "Garrin", "text": ["But... but..."]},
-      "6": {"face": "soldier01", "name": "Lastdenn Guard", "text": ["You are under arrest!", "Come with me."]},
-      "7": {"face": "soldier01", "name": "Lastdenn Guard", "text": ["Elian, you make sure to take the body of the priest away from this public place. Finlay and I will take care of this guy."]},
-      "8": {"face": "soldier12", "name": "Lastdenn Guard Elian", "text": ["Yes sir."], "choices": [{"command": "EXIT"}]}
+      "6": {"face": "soldier12", "name": "Lastdenn Guard", "text": ["You are under arrest!", "Come with me."]},
+      "7": {"face": "soldier12", "name": "Lastdenn Guard", "text": ["Corvin, you make sure to take the body of the priest away from this public place. Halric and I will take care of this guy."]},
+      "8": {"face": "soldier01", "name": "Lastdenn Guard Corvin", "text": ["Yes sir."], "choices": [{"command": "EXIT"}]}
     }
   },
   "garrin_shouts_nooo"         : {

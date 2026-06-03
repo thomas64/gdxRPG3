@@ -109,7 +109,11 @@
       "3"   : {"text": ["Before I make my dramatic exit, anything you want to say?"], "choices": [{"nextId": "12"}]},
       "10"  : {"text": ["You did it! You actually did it! I am out!"]},
       "11"  : {"text": ["I know I can be a handful, but I promised to be useful, and I keep my promises."]},
-      "12"  : {"face": "mozes", "name": "Mozes", "text": ["{INSTANT}*Briefly explain your time-travel predicament to defeat Ardor.*"]},
+      "12"  : {
+        "face": "mozes", "name": "Mozes", "choices": [
+          {"text": "*Briefly explain your time-travel predicament to defeat Ardor.*", "nextId": "13"}
+        ]
+      },
       "13"  : {
         "choices": [
           {"text": "*Ask Ryiah to join you on your quest.* [BLUE](Join party)", "nextId": "14"},

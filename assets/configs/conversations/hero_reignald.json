@@ -29,7 +29,7 @@
       "20"  : {"text": ["I cannot walk away from command. I cannot abandon this duty!"]},
       "21"  : {"text": ["Lastdenn does not need one more sword. It needs its commander!"]},
       "22"  : {"text": ["I will not join you. I will not leave this city. I will not be pulled off assignment!"]},
-      "23"  : {"text": ["Only the priest himself could convince me otherwise!"], "choices": [{"command": "EXIT"}]},
+      "23"  : {"text": ["Only the {COLOR=BLUE}priest{COLOR=BLACK} himself could convince me otherwise!"], "choices": [{"command": "EXIT"}]},
       "30"  : {"text": ["Do not interrupt me! I am in conversation with Father Santino!"], "choices": [{"command": "EXIT"}]},
       "40"  : {"text": ["I just had a hard conversation with Father Santino. I need to think for a moment."]},
       "41"  : {"text": ["Come back in a few minutes. I will be here."], "choices": [{"command": "EXIT"}]},

@@ -22,7 +22,7 @@
       "2"   : {"text": ["Monsters everywhere, you know."]},
       "3"   : {"text": ["But I can handle myself. I have something special that keeps me safe."]},
       "4"   : {
-        "text": ["Wear this cloak in battle, and you'll find that monsters will be somewhat less likely to attack you."], "choices": [
+        "text": ["Wear this cloak in {COLOR=BLUE}battle{COLOR=BLACK}, and you'll find that monsters will be somewhat less likely to attack you."], "choices": [
           {"condition": ["i_r_!=_f_q_quest_alva_road_bag"], "nextId": "5", "orElseId": "10"}
         ]
       },

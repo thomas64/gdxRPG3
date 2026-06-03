@@ -2,11 +2,11 @@
   "quest_alva_road_bag": {
     "title"                          : "A Lonely Bag",
     "entityId"                       : "mozes",
-    "summary"                        : "You found an empty bag near the road to Lastdenn. Who could it belong to? It was dropped this morning, but at what time exactly?",
+    "summary"                        : "You found an empty bag just south of the small stone bridge on the road to Lastdenn. Who could it belong to? It was dropped this morning, but at what time exactly?",
     "shouldHideMessagesAfterFinished": true,
     "tasks"                          : {
       "1": {
-        "taskPhrase"     : "Find out at what time the bag was dropped this morning, and by whom.",
+        "taskPhrase"     : "Find out at what time the bag was dropped this morning, and thereby discover who dropped it.",
         "updatedPhrase"  : "Talk to the traveler standing near the road shortly after 09:00 and receive a gift from her.",
         "type"           : "DELIVER_MESSAGE",
         "conversationIds": ["alva_traveler_waiting"]

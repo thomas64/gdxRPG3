@@ -113,7 +113,7 @@
   <object id="69" x="372" y="162" width="78" height="6"/>
  </objectgroup>
  <objectgroup color="#5500ff" id="13" name="rest">
-  <object id="73" name="note_bookcase" x="48" y="132" width="288" height="36"/>
+  <object id="73" name="note_bookcase" x="48" y="132" width="288" height="24"/>
   <object id="75" name="note_forms" x="96" y="822" width="96" height="42"/>
   <object id="76" name="note_forms" x="240" y="822" width="96" height="42"/>
   <object id="80" name="note_flowers" x="432" y="696" width="48" height="30"/>

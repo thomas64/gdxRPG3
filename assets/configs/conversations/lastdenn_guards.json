@@ -4,7 +4,7 @@
     "comment"  : "WARNING: phraseId 100 is used in 2 conv conditions.",
     "condition": ["_time_after_14:58"], "startAt": "30",
     "phrases"  : {
-      "1"  : {"text": ["Halt! The mayor has ordered me to stop anyone from passing through this town's entrance until 15:00."]},
+      "1"  : {"text": ["Halt! The mayor of Lastdenn has ordered me to stop anyone from passing through the town's entrance until 15:00."]},
       "2"  : {"text": ["Only those with official business in or from Lastdenn may pass here before then."]},
       "3"  : {"text": ["I'm sorry sir, but I have my orders."]},
       "4"  : {

@@ -65,7 +65,7 @@
     "name"   : "Lisa",
     "phrases": {
       "1": {"text": ["Hey there mister. I'm looking for armor in pink."]},
-      "2": {"text": ["Do you think that's a real thing somewhere?"], "choices": [{"command": "EXIT"}]}
+      "2": {"text": ["Do you think that exists somewhere in the world?"], "choices": [{"command": "EXIT"}]}
     }
   },
   "equipshop_upstairs_woman": {
