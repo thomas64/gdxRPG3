@@ -1,5 +1,5 @@
 {
-  "reignald_join"   : {
+  "quest_lastdenn_reignald": {
     "name"   : "Reignald",
     "phrases": {
       "1"   : {
@@ -11,17 +11,17 @@
           {"condition": ["!is_garrin_possessed", "i_time_after_14:20"], "text": "->", "nextId": "50"}
         ]
       },
-      "10"  : {"text": ["Three years. Two months. Every single day in command. No excuses. No drift!"]},
-      "11"  : {"text": ["At dawn I inspect the watch. At noon I correct mistakes. At dusk I correct them again."]},
-      "12"  : {"text": ["The mayor gives orders. The guards carry them out. I hold the line between command and panic."]},
-      "13"  : {"text": ["When recruits get sloppy, people get hurt. So I drill them until sloppiness leaves their bones."]},
-      "14"  : {"text": ["I have watched this city change shape a hundred times. Guards rotate. Citizens move. I stay."]},
-      "15"  : {"text": ["Do I think about leaving? Yes. More than I like to admit."]},
-      "16"  : {"text": ["Then I picture the gap. A weak captain. A late order. A broken response."]},
-      "17"  : {"text": ["That gap becomes chaos in one bad night. So I stay where I am useful."]},
+      "10"  : {"text": ["Three years, two months in command. Long enough to learn that uniforms do not hold a city together."]},
+      "11"  : {"text": ["Discipline does! It keeps tired men steady, frightened men useful, and angry men under command!"]},
+      "12"  : {"text": ["People think guard work is glory. It is mostly quarrels, hunger, fear, and one bad rumor away from panic."]},
+      "13"  : {"text": ["Our job is simple and ugly: keep neighbors from becoming enemies before sunset."]},
+      "14"  : {"text": ["Seven months into my command, I sent a patrol to the wrong district. The south quay burned while we were late."]},
+      "15"  : {"text": ["By sunrise, nine civilians were dead. Two of my guards with them. Their families still pass my office door."]},
+      "16"  : {"text": ["So when I drill discipline, it is not theater. It is what remains after you learn what one mistake costs."]},
+      "17"  : {"text": ["That is why I stay. Not because this post is comfortable, but because I still owe this city a better night."], "choices": [{"command": "KNOW_QUEST", "nextId": "18"}]},
       "18"  : {
         "choices": [
-          {"text": "*Ask Commander Reignald to join your party.* [BLUE](Join party)", "nextId": "19"},
+          {"text": "*Ask Commander Reignald to join your party.* [BLUE](Join party)", "command": "ACCEPT_QUEST", "nextId": "19"},
           {"text": "*That's some strong loyalty. Take your leave.*", "command": "EXIT"}
         ]
       },
@@ -33,22 +33,20 @@
       "30"  : {"text": ["Do not interrupt me! I am in conversation with Father Santino!"], "choices": [{"command": "EXIT"}]},
       "40"  : {"text": ["I just had a hard conversation with Father Santino. I need to think for a moment."]},
       "41"  : {"text": ["Come back in a few minutes. I will be here."], "choices": [{"command": "EXIT"}]},
-      "50"  : {"text": ["Three years. Two months. Every single day in command. No excuses. No drift!"]},
-      "51"  : {"text": ["But Father Santino challenged my thinking. A commander who never moves becomes a wall."]},
-      "52"  : {"text": ["And walls get studied, mapped, and climbed."]},
-      "53"  : {"text": ["I still believe in duty. I just stopped confusing duty with fear of change."]},
-      "54"  : {"text": ["Someone else can hold the day-to-day command here. They can learn."]},
-      "55"  : {"text": ["If Lastdenn is going to stay standing, I need to read the roads beyond these walls."]},
-      "56"  : {"text": ["Threats do not announce themselves. They gather out there while we stare in here."]},
-      "57"  : {"text": ["So this is not desertion. This is a wider patrol with sharper purpose."]},
-      "58"  : {"text": ["I remain a commander. The field just got larger."]},
+      "50"  : {"text": ["I just had hard words with Father Santino. He said I had turned duty into a hiding place."]},
+      "51"  : {"text": ["I wanted to argue. Then I realized he was right. I told myself I was protecting Lastdenn by never leaving it."]},
+      "52"  : {"text": ["Truth is, I was also protecting myself from failing anywhere I could not control."]},
+      "53"  : {"text": ["That is not discipline! That is fear wearing a uniform!"]},
+      "54"  : {"text": ["If danger is gathering beyond these walls, I meet it there, not after it reaches our gates."]},
+      "55"  : {"text": ["I am not abandoning this city. I am extending its defense."]},
+      "56"  : {"text": ["I remain a commander; my patrol line is simply wider now."], "choices": [{"command": "KNOW_QUEST", "nextId": "59"}]},
       "59"  : {
         "choices": [
-          {"text": "*Ask Commander Reignald to join your party.* [BLUE](Join party)", "nextId": "60"},
+          {"text": "*Ask Commander Reignald to join your party.* [BLUE](Join party)", "command": "ACCEPT_QUEST", "nextId": "60"},
           {"text": "*Not now. Take your leave.*", "command": "EXIT"}
         ]
       },
-      "60"  : {"text": ["Accepted!"]},
+      "60"  : {"text": ["Accepted!"], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "61"}]},
       "61"  : {"text": ["I will brief the duty captain and hand off the roster."]},
       "62"  : {"text": ["If we march together, you keep pace, hold formation, and listen the first time!"]},
       "63"  : {"text": ["Do that, and I will make you harder to kill!"]},
@@ -56,7 +54,7 @@
       "9000": {"text": ["Your party is full. Make room, then come back. I do not wait forever!"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "dismiss_reignald": {
+  "dismiss_reignald"       : {
     "name"   : "Reignald",
     "phrases": {
       "1" : {"text": ["You are relieving me from active formation?"]},
@@ -81,7 +79,7 @@
       }
     }
   },
-  "bury_reignald"   : {
+  "bury_reignald"          : {
     "name"   : "Reignald",
     "phrases": {
       "1": {"text": ["All his equipment will also be gone once you bury him."]},
@@ -93,7 +91,7 @@
       }
     }
   },
-  "reignald_rejoin" : {
+  "reignald_rejoin"        : {
     "name"   : "Reignald",
     "phrases": {
       "1"   : {"text": ["Report! Is this a social visit, or do you finally need a commander again?"]},
@@ -111,8 +109,8 @@
       "13"  : {"text": ["Now tighten formation. We move!"], "choices": [{"command": "HERO_JOIN"}]},
       "20"  : {"text": ["Checking in is not a mission. Missions have objectives."]},
       "21"  : {"text": ["Return when you have one. Bring maps, not small talk!"], "choices": [{"command": "EXIT"}]},
-      "30"  : {"text": ["Dawn drills. Midday inspections. Night patrol audits. Repeat."]},
-      "31"  : {"text": ["Two recruits tried to skip shield stance. They now dream in proper posture."]},
+      "30"  : {"text": ["Writing down improved drills for lazy soldiers."]},
+      "31"  : {"text": ["Two recruits once tried to skip shield stance. They now dream in proper posture."]},
       "32"  : {"text": ["Why? Because laziness in training becomes funerals in battle."]},
       "33"  : {
         "choices": [

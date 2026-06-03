@@ -1,5 +1,5 @@
 {
-  "quest_lastdenn_ring"   : {
+  "quest_lastdenn_ring"    : {
     "title"   : "A ring to rob them all",
     "entityId": "rich_man07",
     "summary" : "Lambertus was robbed by orcs very near the waterfall and bridge of Lastdenn. He said that the orcs took a very valuable golden ring from him. He wants you to get it back for him.",
@@ -16,7 +16,7 @@
       }
     }
   },
-  "quest_lastdenn_ryiah"  : {
+  "quest_lastdenn_ryiah"   : {
     "title"   : "Prison break",
     "entityId": "ryiah",
     "summary" : "Ryiah is a witch who got arrested for suspicion of being a witch. Which she is. She is currently being held in Lastdenn jail, and she needs your help to get out.",
@@ -33,7 +33,19 @@
       }
     }
   },
-  "quest_lastdenn_santino": {
+  "quest_lastdenn_reignald": {
+    "title"   : "Commander Conquer",
+    "entityId": "reignald",
+    "summary" : "Commander Reignald leads the Lastdenn guard with absolute discipline and loyalty to the city. Though he secretly longs to leave, his sense of duty keeps him in place. Who can convince him that serving Lastdenn might mean fighting beyond its walls?",
+    "tasks"   : {
+      "1": {
+        "taskPhrase"     : "Ask Reignald to join your party after he had a conversation with Father Santino.",
+        "type"           : "DELIVER_MESSAGE",
+        "conversationIds": ["quest_lastdenn_reignald"]
+      }
+    }
+  },
+  "quest_lastdenn_santino" : {
     "title"   : "Meet the priest",
     "entityId": "santino",
     "summary" : "It seems that the priest of Lastdenn is Father Santino. As he is the priest of the Temple of Evdos, the God of Knowledge, he should know a thing or two about Ulrog, the God of Power. That is the reason why Ylarus, the God of Time, sent you to him, right? Information is key here.",
@@ -52,7 +64,7 @@
       }
     }
   },
-  "quest_lastdenn_garrin" : {
+  "quest_lastdenn_garrin"  : {
     "title"   : "Garrin's ghost",
     "entityId": "man12",
     "summary" : "Garrin was possessed by a ghost, and the ghost of Garrin has murdered Father Santino. The guards of Lastdenn arrested Garrin, while the ghost already left his body.",

@@ -126,7 +126,7 @@
  <objectgroup color="#aa55ff" id="21" name="hero">
   <object id="5" name="reignald" x="528" y="456" width="48" height="24">
    <properties>
-    <property name="conversation" value="reignald_join"/>
+    <property name="conversation" value="quest_lastdenn_reignald"/>
     <property name="direction" value="south"/>
    </properties>
   </object>
