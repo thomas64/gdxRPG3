@@ -1,11 +1,11 @@
 package nl.t64.cot.components.condition
 
 import nl.t64.cot.Utils.gameData
-import nl.t64.cot.components.cutscene.CutsceneId
 import nl.t64.cot.components.party.abilities.AbilityItemId
 import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.components.portal.Portal
 import nl.t64.cot.components.quest.QuestState
+import nl.t64.cot.constants.ScreenType
 
 
 fun List<String>.areAllTrue(questId: String? = null): Boolean {
@@ -55,7 +55,7 @@ object ConditionDatabase {
         "is_lastdenn_entrance_closed"   to { isLastdennEntranceClosed },
         "is_garrin_possessed"           to { isGarrinPossessed },
         "!is_garrin_possessed"          to { !isGarrinPossessed },
-        "witnessed_garrin_possession"   to { gameData.cutscenes.isPlayed(CutsceneId.SCENE_GHOST_POSSESSES_GARRIN) },
+        "witnessed_garrin_possession"   to { gameData.cutscenes.isPlayedThisCycle(ScreenType.SCENE_GHOST_POSSESSES_GARRIN) },
         "is_reignald_recruited"         to { hasReignaldBeenRecruited },
         "!is_reignald_recruited"        to { !hasReignaldBeenRecruited },
         "is_lastdenn_cell_locked"       to { gameData.doors.getDoor("door_lastdenn_jail_b1").isLocked },

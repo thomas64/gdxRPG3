@@ -13,8 +13,8 @@ import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playBgm
 import nl.t64.cot.audio.playBgs
 import nl.t64.cot.audio.toAudioEvent
-import nl.t64.cot.components.cutscene.CutsceneId
 import nl.t64.cot.constants.Constant
+import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.gamestate.ProfileManager
 import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.screens.world.entity.EntityState
@@ -51,7 +51,7 @@ class MapManager : ProfileObserver {
     override fun onNotifyLoadProfile(profileManager: ProfileManager) {
         val mapTitle = profileManager.getProperty<String?>("mapTitleAfterBattle")
             ?: profileManager.getProperty<String>("mapTitle")
-        if (gameData.cutscenes.isPlayed(CutsceneId.SCENE_INTRO)) {
+        if (gameData.cutscenes.isEverPlayedBefore(ScreenType.SCENE_INTRO)) {
             loadMapWithBgmBgs(mapTitle)
         } else {
             loadMap(mapTitle)

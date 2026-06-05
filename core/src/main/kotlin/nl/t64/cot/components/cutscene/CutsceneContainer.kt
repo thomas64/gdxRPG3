@@ -1,39 +1,35 @@
 package nl.t64.cot.components.cutscene
 
+import nl.t64.cot.constants.ScreenType
+
 
 class CutsceneContainer {
 
-    private val cutscenes: MutableMap<String, Boolean> = mutableMapOf(
-        CutsceneId.SCENE_INTRO to false,
-        CutsceneId.SCENE_ARDOR_FIRST_TIME to false,
-        CutsceneId.SCENE_HONEYWOOD_FARM_ATTACK_1 to false,
-        CutsceneId.SCENE_HONEYWOOD_FARM_ATTACK_1_ALT to false,
-        CutsceneId.SCENE_HONEYWOOD_FARM_TOO_LATE to false,
-        CutsceneId.SCENE_GHOST_POSSESSES_GARRIN to false,
-        CutsceneId.SCENE_SANTINO_MURDERED to false,
-        CutsceneId.SCENE_ARDOR_LATER_TIME to false
-    )
+    private val cutscenes: Map<String, Boolean> = ScreenType.entries
+        .filter { it.isCutscene() }
+        .associate { it.id to false }
 
-    fun isPlayed(cutsceneId: String): Boolean {
-        return cutscenes[cutsceneId]!!
+    private val cutscenesPlayedThisCycle: MutableMap<String, Boolean> = cutscenes.toMutableMap()
+    private val cutsceneEverPlayedBefore: MutableMap<String, Boolean> = cutscenes.toMutableMap()
+
+    fun isPlayedThisCycle(cutsceneType: ScreenType): Boolean {
+        return cutscenesPlayedThisCycle[cutsceneType.id]!!
     }
 
-    fun setPlayed(cutsceneId: String) {
-        cutscenes[cutsceneId] = true
+    fun isEverPlayedBefore(cutsceneType: ScreenType): Boolean {
+        return cutsceneEverPlayedBefore[cutsceneType.id]!!
+    }
+
+    fun setPlayedThisCycle(cutsceneType: ScreenType) {
+        cutscenesPlayedThisCycle[cutsceneType.id] = true
+    }
+
+    fun setPlayedEver(cutsceneType: ScreenType) {
+        cutsceneEverPlayedBefore[cutsceneType.id] = true
     }
 
     fun reset() {
-        cutscenes
-            .filter { isResettable(it.key) }
-            .forEach { cutscenes[it.key] = false }
-    }
-
-    private fun isResettable(cutsceneId: String): Boolean {
-        return cutsceneId in listOf(CutsceneId.SCENE_HONEYWOOD_FARM_ATTACK_1_ALT,
-                                    CutsceneId.SCENE_HONEYWOOD_FARM_TOO_LATE,
-                                    CutsceneId.SCENE_GHOST_POSSESSES_GARRIN,
-                                    CutsceneId.SCENE_SANTINO_MURDERED,
-                                    CutsceneId.SCENE_ARDOR_LATER_TIME)
+        cutscenesPlayedThisCycle.forEach { cutscenesPlayedThisCycle[it.key] = false }
     }
 
 }

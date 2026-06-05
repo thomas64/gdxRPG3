@@ -76,6 +76,14 @@ enum class ScreenType(val screenClass: Class<out Screen>) {
     SCENE_ARDOR_LATER_TIME_AFTER_WIN_FROM_GENERALS(SceneArdorLaterTimeAfterWinFromGenerals::class.java),
     SCENE_GAME_ENDING(SceneGameEnding::class.java);
 
+    val id: String get() = name.lowercase()
+
+    fun isCutscene(): Boolean = name.startsWith("SCENE_")
+
+    companion object {
+        fun fromId(screenId: String): ScreenType = valueOf(screenId.uppercase())
+    }
+
     fun hasSmallParchment(): Boolean {
         return this in listOf(FIND, REWARD, RECEIVE, RECEIVE_CUTSCENE, TRADE, SPOILS, SPOILS_CUTSCENE)
     }

@@ -23,7 +23,6 @@ import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.audio.stopAllBgm
 import nl.t64.cot.audio.stopSe
-import nl.t64.cot.components.cutscene.CutsceneId
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.gamestate.AUTOSAVE_INDEX
@@ -163,10 +162,10 @@ class MenuLoadMain : MenuScreen() {
         mapManager.disposeOldMaps()
         screenManager.getScreen(ScreenType.WORLD) // just load the constructor.
         profileManager.loadProfileFromMain(selectedListIndex)
-        if (gameData.cutscenes.isPlayed(CutsceneId.SCENE_INTRO)) {
+        if (gameData.cutscenes.isEverPlayedBefore(ScreenType.SCENE_INTRO)) {
             screenManager.setScreen(ScreenType.WORLD)
         } else {
-            gameData.cutscenes.setPlayed(CutsceneId.SCENE_INTRO)
+            gameData.cutscenes.setPlayedEver(ScreenType.SCENE_INTRO)
             screenManager.setScreen(ScreenType.SCENE_INTRO)
         }
     }

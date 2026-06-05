@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.ScreenUtils
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.audioManager
+import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.Utils.screenManager
@@ -72,9 +73,11 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
     }
 
     override fun show() {
+        val cutsceneScreenType: ScreenType = ScreenType.entries.first { it.screenClass == javaClass }
+
         conversationDialog = ConversationDialog(this)
         actionId = 0
-        isSkippable = preferenceManager.isDebugModeOn
+        isSkippable = preferenceManager.isDebugModeOn || gameData.cutscenes.isEverPlayedBefore(cutsceneScreenType)
         isEnding = false
         fixedCameraX = camera.position.x
         fixedCameraY = camera.position.y
@@ -92,6 +95,7 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
         actorsStage.addAction(Actions.sequence(Actions.delay(Constant.FADE_DURATION),
                                                Actions.addListener(listener, false)))
 
+        gameData.cutscenes.setPlayedEver(cutsceneScreenType)
         prepare()
         actorsStage.addAction(actions[actionId])
     }

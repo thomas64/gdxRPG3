@@ -7,6 +7,7 @@ import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.components.condition.areAllTrue
+import nl.t64.cot.components.cutscene.CutsceneContainer
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.subjects.CollisionObserver
@@ -14,7 +15,7 @@ import nl.t64.cot.subjects.CollisionObserver
 
 class GameMapCutscene(rectObject: RectangleMapObject) : GameMapObject(rectObject.rectangle), CollisionObserver {
 
-    private val cutsceneId: String = rectObject.name
+    private val cutsceneScreenType: ScreenType = ScreenType.fromId(rectObject.name)
     private val conditions: List<String> = createConditions(rectObject)
     private val mustContinueBgm: Boolean = rectObject.propertyOrNull<Boolean>("mustContinueBgm") ?: false
 
@@ -29,14 +30,13 @@ class GameMapCutscene(rectObject: RectangleMapObject) : GameMapObject(rectObject
     }
 
     private fun possibleStartCutscene() {
-        val cutscenes = gameData.cutscenes
-        if (!cutscenes.isPlayed(cutsceneId)) {
-            cutscenes.setPlayed(cutsceneId)
-            val cutsceneType = ScreenType.valueOf(cutsceneId.uppercase())
+        val cutscenes: CutsceneContainer = gameData.cutscenes
+        if (!cutscenes.isPlayedThisCycle(cutsceneScreenType)) {
+            cutscenes.setPlayedThisCycle(cutsceneScreenType)
             if (mustContinueBgm) {
-                worldScreen.startCutsceneWithoutBgmFading(cutsceneType)
+                worldScreen.startCutsceneWithoutBgmFading(cutsceneScreenType)
             } else {
-                worldScreen.startCutscene(cutsceneType)
+                worldScreen.startCutscene(cutsceneScreenType)
             }
         }
     }

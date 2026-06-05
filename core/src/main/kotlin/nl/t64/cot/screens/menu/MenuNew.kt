@@ -16,7 +16,6 @@ import nl.t64.cot.Utils.profileManager
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.stopAllBgm
-import nl.t64.cot.components.cutscene.CutsceneId
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 
@@ -106,7 +105,7 @@ class MenuNew : MenuScreen() {
     private fun createNewGame() {
         screenManager.getScreen(ScreenType.WORLD) // just load the constructor.
         profileManager.createNewProfile(finalProfileName)
-        gameData.cutscenes.setPlayed(CutsceneId.SCENE_INTRO)
+        gameData.cutscenes.setPlayedEver(ScreenType.SCENE_INTRO)
         screenManager.setScreen(ScreenType.SCENE_INTRO)
     }
 
