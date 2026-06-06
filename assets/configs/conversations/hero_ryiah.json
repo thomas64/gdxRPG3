@@ -9,15 +9,15 @@
       "5" : {"text": ["If you'll help me achieve that, perhaps I can use those witchy things to help you out in return."], "choices": [{"command": "KNOW_QUEST", "nextId": "6"}]},
       "6" : {
         "choices": [
-          {"text": "*Ask what she needs.*", "nextId": "10"},
+          {"text": "*Ask what she needs.*", "command": "ACCEPT_QUEST", "nextId": "10"},
           {"text": "*No illegal prison break for you. Back away slowly.*", "command": "EXIT"}
         ]
       },
       "10": {"text": ["A guard is off duty somewhere in the bar."]},
       "11": {"text": ["How do I know that? Because I'm a witch. I know things."]},
       "12": {"text": ["He has my jail key. And you need to get it from him."]},
-      "13": {"text": ["He is probably drunk, so this shouldn't be too difficult, but also not easy."], "choices": [{"command": "ACCEPT_QUEST", "nextId": "14"}]},
-      "14": {"text": ["Don't forget, my freedom is on the line here. Good luck!"], "choices": [{"command": "EXIT", "nextId": "10"}]}
+      "13": {"text": ["He is probably drunk, so this shouldn't be too difficult, but also not easy."]},
+      "14": {"text": ["Don't forget, my freedom is on the line here. Good luck!"], "choices": [{"command": "AUTO_SAVE", "nextId": "10"}]}
     }
   },
   "drunken_lastdenn_guard": {
@@ -25,79 +25,134 @@
     "condition": ["should_guard_be_giving_key"], "startAt": "100",
     "phrases"  : {
       "1"   : {"text": ["*Hic*"], "choices": [{"command": "EXIT"}]},
-      "100" : {"text": ["Hullooo. You look like... like... yeah."]},
-      "101" : {"text": ["Wait. Are you from my shift, your shift, or a *Hic* fish?"]},
-      "102" : {"text": ["No, wait, don't answer. I can smell paperwork from here."]},
-      "103" : {"text": ["If you are paperwork, I surrender. If not, state your business-ish."]},
-      "104" : {
+      "100" : {"text": ["Hey. I'm off duty. *Hic* Way off duty."]},
+      "101" : {"text": ["Whatever it is... talk to the night shift. They're on. I'm not. Not until morning."]},
+      "102" : {"text": ["{SPEED=0.2} . . . . ."]},
+      "103" : {"text": ["You're actually going to stand there until I hear you out?"]},
+      "104" : {"text": ["Fine. I've had a few drinks and I've got a few minutes. *Hic* What."]},
+      "105" : {
         "choices": [
-          {"text": "*Act very serious and demand cooperation immediately.*", "nextId": "300"},
-          {"text": "*Offer to buy him another drink.*", "nextId": "310"},
-          {"text": "*Ask what he is doing off duty.*", "nextId": "360"},
-          {"condition": ["jester1"], "text": "[Jester 1] *Open with a ridiculous joke to get him laughing first.*", "nextId": "200"},
+          {"text": "*Ask him directly if he's still carrying the jail key from his shift.*", "nextId": "300"},
+          {"text": "*Tell him there's been a complaint about something on his block tonight.*", "nextId": "310"},
+          {"condition": ["barbarian1"], "text": "[Barbarian 1] *Step in close. Make clear this won't be polite.*", "nextId": "110"},
+          {"condition": ["diplomat1"], "text": "[Diplomat 1] *Appeal to his experience - you need his jail key tonight.*", "nextId": "130"},
+          {"condition": ["jester1"], "text": "[Jester 1] *Claim you're the entertainment for his shift break.*", "nextId": "150"},
           {"text": "*Leave him to his drink.*", "command": "EXIT"}
         ]
       },
-      "200" : {"text": ["Hah! That's... that's a very good terrible joke. *Hic*"]},
-      "201" : {"text": ["You have earned one official audience with Officer... hold on... Officer Me."]},
-      "202" : {"text": ["What do you want, comedian? Make it lawful-ish."]},
-      "203" : {
+      "110" : {"text": ["Alright. Back up. Now."]},
+      "111" : {"text": ["I've had a few but I know that look. *Hic* I'm not looking for trouble. But I'm also not... scared."]},
+      "112" : {
         "choices": [
-          {"text": "*Try another joke instead of answering.*", "nextId": "330"},
-          {"text": "*Say you forgot, but it was something very important.*", "nextId": "320"},
-          {"condition": ["diplomat1"], "text": "[Diplomat 1] *Frame this as official civic detention business.*", "nextId": "220"},
-          {"text": "*Leave him to his drink.*", "command": "EXIT"}
+          {"text": "*Demand he cooperate and stop wasting your time.*", "nextId": "400"},
+          {"condition": ["diplomat1"], "text": "[Diplomat 1] *De-escalate and explain his jail key is needed urgently.*", "nextId": "113"},
+          {"condition": ["jester1"], "text": "[Jester 1] *Offer to buy him another round to talk this out.*", "nextId": "115"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
-      "220" : {"text": ["Detention business... that sounds official-ish. I respect-ish that."]},
-      "221" : {"text": ["What kind of detention business? Transfer forms? Inspection duty? *Hic* Speak."]},
-      "222" : {
+      "113" : {"text": ["De-escalate. Explain the urgency. You threaten me and now... you're being reasonable."]},
+      "114" : {
         "choices": [
-          {"text": "*Mention you need access to a specific jail cell.*", "nextId": "225"},
-          {"text": "*Say it's classified. Need-to-know only.*", "nextId": "370"},
-          {"text": "*Leave him to his drink.*", "command": "EXIT"}
+          {"text": "*Tell him you need his jail key in the next ten minutes.*", "nextId": "430"},
+          {"condition": ["jester1"], "text": "[Jester 1] *Lighten the mood and ask for his jail key.*", "nextId": "200"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
-      "225" : {"text": ["Cell access. Right. That requires a key. *Hic*"]},
-      "226" : {"text": ["Rules say I cannot hand over duty equipment while off duty."]},
-      "227" : {"text": ["Counter-rules say I should avoid captain yelling. Very complex legal battlefield."]},
-      "228" : {
+      "115" : {"text": ["Wait. You threaten me and now... you're buying rounds? *Hic*"]},
+      "116" : {
         "choices": [
-          {"text": "*Ask politely one more time.*", "nextId": "340"},
-          {"text": "*Back off and apologize.*", "nextId": "350"},
-          {"condition": ["barbarian1"], "text": "[Barbarian 1] *Threaten to make this a reportable incident.*", "nextId": "240"},
-          {"text": "*Leave him to his drink.*", "command": "EXIT"}
+          {"text": "*Ask him quietly to help you with one small favour.*", "nextId": "440"},
+          {"condition": ["diplomat1"], "text": "[Diplomat 1] *Assure him you need his jail key - this is serious.*", "nextId": "210"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
-      "240" : {"text": ["Right! Yes! Reportable is bad. Very bad. No reports."]},
-      "241" : {"text": ["You have command voice. I dislike it. I obey it."]},
-      "242" : {"text": ["Take the jail key. You were never here. I was never sober."]},
-      "243" : {"text": ["If anyone asks, this was a coordinated anti-paperwork maneuver."], "choices": [{"command": "RECEIVE_ITEM"}]},
-      "300" : {"text": ["Demanding tone detected. Rejected by tavern protocol."]},
-      "301" : {"text": ["No cooperation for storm voices. *Hic* Try being funny or useful."]},
-      "302" : {"text": ["Preferably funny. Useful people bring forms."], "choices": [{"nextId": "104"}]},
-      "310" : {"text": ["Tempting. But last time I accepted a drink, I promoted a barrel to captain."]},
-      "311" : {"text": ["Captain Barrel gave terrible orders, but morale was high."]},
-      "312" : {"text": ["No policy decisions after barrel incidents."], "choices": [{"nextId": "104"}]},
-      "320" : {"text": ["You forgot? Excellent. We are colleagues now."]},
-      "321" : {"text": ["Still no. Come back when your memory sobers up."]},
-      "322" : {"text": ["Or when mine does. Which is strategically unlikely."], "choices": [{"nextId": "203"}]},
-      "330" : {"text": ["No no, first answer, then joke. That's procedure. Maybe."]},
-      "331" : {"text": ["I enforce procedure when I can still see it."]},
-      "332" : {"text": ["Right now I can see two procedures and one of them is a lamp."], "choices": [{"nextId": "203"}]},
-      "340" : {"text": ["If you're that polite, you are probably plotting something."]},
-      "341" : {"text": ["No key. My suspicion outranks your manners."]},
-      "342" : {"text": ["Also manners make me nervous. *Hic*"], "choices": [{"nextId": "228"}]},
-      "350" : {"text": ["Accepted. Very respectful. Still no key."]},
-      "351" : {"text": ["You may keep the apology though. Good quality apology."]},
-      "352" : {"text": ["One of the better apologies this week, actually."], "choices": [{"nextId": "228"}]},
-      "360" : {"text": ["I am performing undercover hydration. Very advanced guard work."]},
-      "361" : {"text": ["Also observing suspicious chairs. One of them moved."]},
-      "362" : {"text": ["I warned it. It moved again. Brave chair."], "choices": [{"nextId": "104"}]},
-      "370" : {"text": ["Classified? I love classified. Very mysterious."]},
-      "371" : {"text": ["Still no. Classified things need classified clearance. *Hic* Which I also don't have."], "choices": [{"nextId": "222"}]},
-      "1199": {"text": ["Oh! You. Still here. Or again. *Hic* Either way, you forgot the key. Take it. Before I lose it or promote it."], "choices": [{"command": "RECEIVE_ITEM"}]},
-      "1200": {"text": ["You were never here. I was never coherent. Good arrangement."], "choices": [{"command": "EXIT", "nextId": "1200"}]}
+      "130" : {"text": ["My experience. My jail key. *Hic* You know how to talk to people."]},
+      "131" : {"text": ["Alright. What's this about?"]},
+      "132" : {
+        "choices": [
+          {"text": "*Ask him where you can find someone in charge tonight.*", "nextId": "410"},
+          {"condition": ["barbarian1"], "text": "[Barbarian 1] *Lean in closer. Make it clear he's running out of options.*", "nextId": "133"},
+          {"condition": ["jester1"], "text": "[Jester 1] *Point out his shift's over - so is his responsibility.*", "nextId": "135"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "133" : {"text": ["Alright. You're... you're making a point. *Hic* I get it."]},
+      "134" : {
+        "choices": [
+          {"text": "*Tell him this is coming from someone above his rank.*", "nextId": "450"},
+          {"condition": ["jester1"], "text": "[Jester 1] *Suggest passing the jail key and calling it a night.*", "nextId": "220"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "135" : {"text": ["Shift's over, responsibility's over. *Hic* I like the logic. Terrible logic, but I like it."]},
+      "136" : {
+        "choices": [
+          {"text": "*Offer to put something in writing right now to cover him.*", "nextId": "460"},
+          {"condition": ["barbarian1"], "text": "[Barbarian 1] *Demand his jail key. The talking's over.*", "nextId": "230"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "150" : {"text": ["Entertainment. For my shift break. That's... that's a new one."]},
+      "151" : {"text": ["Alright. You've got my attention. What is it?"]},
+      "152" : {
+        "choices": [
+          {"text": "*Tell him you just need to borrow his jail key for about an hour.*", "nextId": "420"},
+          {"condition": ["barbarian1"], "text": "[Barbarian 1] *Drop the charm. Demand his jail key now.*", "nextId": "153"},
+          {"condition": ["diplomat1"], "text": "[Diplomat 1] *Make it clear - you need his jail key and it matters.*", "nextId": "155"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "153" : {"text": ["Alright alright. That look's back. *Hic* What do you actually need?"]},
+      "154" : {
+        "choices": [
+          {"text": "*Tell him you'll make it worth his while.*", "nextId": "470"},
+          {"condition": ["diplomat1"], "text": "[Diplomat 1] *Persuade him you're trusting him with the jail key.*", "nextId": "240"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "155" : {"text": ["You need it and it matters. *Hic* You're making this sound important."]},
+      "156" : {
+        "choices": [
+          {"text": "*Ask him directly if his answer is yes.*", "nextId": "480"},
+          {"condition": ["barbarian1"], "text": "[Barbarian 1] *Lock eyes. His jail key. Now.*", "nextId": "250"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "200" : {"text": ["Threats... explaining urgency... now jokes about the key. *Hic* Fine."], "choices": [{"nextId": "260"}]},
+      "210" : {"text": ["Threats, then jokes, now you need my jail key and it's serious. *Hic* Alright."], "choices": [{"nextId": "260"}]},
+      "220" : {"text": ["Persuasion... then pressure... now jokes about the key. *Hic* Why not."], "choices": [{"nextId": "260"}]},
+      "230" : {"text": ["Jokes, then persuasion, then demands. *Hic* Should've seen that."], "choices": [{"nextId": "260"}]},
+      "240" : {"text": ["Jokes, then threats, now trust. *Hic* That's quite a performance. Alright."], "choices": [{"nextId": "260"}]},
+      "250" : {"text": ["Jokes, then explaining... then that stare. *Hic* You're pushy. Fine. Take it."], "choices": [{"nextId": "260"}]},
+      "260" : {"text": ["I want that back before morning shift. Not... not one minute after."]},
+      "261" : {"text": ["If anyone asks, you found it somewhere. I wasn't anywhere near this."]},
+      "262" : {"text": ["And if this comes back on me... *Hic* I'll remember. I will."], "choices": [{"command": "RECEIVE_ITEM"}]},
+      "300" : {"text": ["Why would you... ask me that?"]},
+      "301" : {"text": ["I don't talk about duty equipment. Not with strangers. Not off duty. Not ever."]},
+      "302" : {"text": ["If you've got a real reason... say it."], "choices": [{"nextId": "105"}]},
+      "310" : {"text": ["A complaint. About... my block?"]},
+      "311" : {"text": ["If there's a complaint, that goes through the duty sergeant. Not me. Not in a bar."]},
+      "312" : {"text": ["Come back in the morning. With something written down."], "choices": [{"nextId": "105"}]},
+      "400" : {"text": ["Cooperate with what? You haven't... you haven't told me anything."]},
+      "401" : {"text": ["Whatever it is, just say it."], "choices": [{"nextId": "112"}]},
+      "410" : {"text": ["Someone in charge... that's Sergeant Farren. *Hic* He's doing rounds. Until... two, I think."]},
+      "411" : {"text": ["If you wait for him though... he doesn't like interruptions. At all."], "choices": [{"nextId": "132"}]},
+      "420" : {"text": ["Borrow it. For an hour."]},
+      "421" : {"text": ["I like you. You're... direct. But the answer's no."], "choices": [{"nextId": "152"}]},
+      "430" : {"text": ["Ten minutes or ten days... doesn't change anything."]},
+      "431" : {"text": ["That's not... that's not how this works."], "choices": [{"nextId": "114"}]},
+      "440" : {"text": ["A favour. You were threatening me and now... you're asking favours."]},
+      "441" : {"text": ["You need to tell me what the favour is first."], "choices": [{"nextId": "116"}]},
+      "450" : {"text": ["Then whoever's giving that order can... can come down here themselves."]},
+      "451" : {"text": ["I don't act on authority I can't see."], "choices": [{"nextId": "134"}]},
+      "460" : {"text": ["In writing. Right now. In... a bar."]},
+      "461" : {"text": ["I've done this job twelve years. A napkin doesn't count."], "choices": [{"nextId": "136"}]},
+      "470" : {"text": ["I'm going to pretend... I didn't hear that."]},
+      "471" : {"text": ["Keep talking. Before I end this."], "choices": [{"nextId": "154"}]},
+      "480" : {"text": ["You're asking if... if my answer is yes."]},
+      "481" : {"text": ["Give me a reason. Not questions."], "choices": [{"nextId": "156"}]},
+      "1199": {"text": ["You again. *Hic* I still have it. Just... take it before I think about this too much."], "choices": [{"command": "RECEIVE_ITEM"}]},
+      "1200": {"text": ["I already said everything. Go."], "choices": [{"command": "EXIT", "nextId": "1200"}]}
     }
   },
   "ryiah_join"            : {
