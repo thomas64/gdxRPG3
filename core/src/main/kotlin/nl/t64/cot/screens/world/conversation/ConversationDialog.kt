@@ -70,6 +70,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     private lateinit var rowWithScrollPane: Cell<ScrollPane>
     private lateinit var graph: ConversationGraph
     private var lockConfirmationKeyUntil: Long = 0L
+    private var hasProcessedCurrentChoiceSelection: Boolean = false
 
     fun dispose() {
         stage.dispose()
@@ -169,6 +170,9 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         if (isConfirmationInputLocked()) {
             return
         }
+        if (hasProcessedCurrentChoiceSelection) {
+            return
+        }
         if (!label.hasEnded()) {
             label.skipToTheEnd()
             return
@@ -178,6 +182,8 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             playSe(AudioEvent.SE_MENU_ERROR)
             return
         }
+        hasProcessedCurrentChoiceSelection = true
+        scrollPane.clearListeners()
         answers.storeSelectedIndex()
         selectedChoice.hasBeenSelectedEarlier = true
         val nextId = selectedChoice.nextId
@@ -479,6 +485,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun applyListeners(inputDelay: Float) {
+        hasProcessedCurrentChoiceSelection = false
         scrollPane.clearListeners()
         lockConfirmationInput(inputDelay)
         scrollPane.addListener(ConversationDialogListener(answers) { selectAnswer() })
@@ -521,6 +528,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         answers.clearItems()
         answers.clearSelectedIndexHistory()
         graph.clearChosenAnswersHistory()
+        hasProcessedCurrentChoiceSelection = false
         lockConfirmationKeyUntil = 0L
         scrollPane.clearListeners()
         dialog.hide()
@@ -529,6 +537,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     private fun hide() {
         answers.clearSelectedIndexHistory()
         graph.clearChosenAnswersHistory()
+        hasProcessedCurrentChoiceSelection = false
         lockConfirmationKeyUntil = 0L
         scrollPane.clearListeners()
         dialog.hide(null)
