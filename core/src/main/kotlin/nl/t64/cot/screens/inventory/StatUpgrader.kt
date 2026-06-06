@@ -42,7 +42,7 @@ class StatUpgrader private constructor(
     private fun showConfirmDialog() {
         val question = """
             Are you sure you wish to train
-            $statName for $xpCost XP?""".trimIndent()
+            ${selectedHero.name} with $statName for $xpCost XP?""".trimIndent()
         val dialog = QuestionDialog(question) { upgradeStat() }
         dialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT, 0)
     }

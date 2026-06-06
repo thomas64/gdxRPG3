@@ -59,7 +59,7 @@ enum class CalcAttributeId(override val title: String) : SuperEnum {
                 - '$title' is the counterpart of 'Damage'.
 
                 - A complete armor set from the same
-                  type results into bonus '$title'.""".trimIndent()
+                  type results in bonus '$title'.""".trimIndent()
         }
     },
 

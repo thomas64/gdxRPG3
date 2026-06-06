@@ -9,9 +9,9 @@
     "skill"      : "WIZARD",
     "min_skill"  : 1,
     "description": [
-      "Friendly target of the spell gains 1",
-      "Intelligence for the rest of the battle",
-      "for each rank in 'Wizard'.",
+      "Target: Friendly.",
+      "Gain 1 Intelligence for the rest of",
+      "the battle for each rank in 'Wizard'.",
       "May only be cast once on each target."
     ]
   },
@@ -25,9 +25,9 @@
     "skill"      : "WIZARD",
     "min_skill"  : 1,
     "description": [
-      "Friendly target of the spell gains 1",
-      "Dexterity for the rest of the battle",
-      "for each rank in 'Wizard'.",
+      "Target: Friendly.",
+      "Gain 1 Dexterity for the rest of the",
+      "battle for each rank in 'Wizard'.",
       "May only be cast once on each target."
     ]
   },
@@ -41,9 +41,9 @@
     "skill"      : "WIZARD",
     "min_skill"  : 1,
     "description": [
-      "Friendly target of the spell gains 1",
-      "Strength for the rest of the battle",
-      "for each rank in 'Wizard'.",
+      "Target: Friendly.",
+      "Gain 1 Strength for the rest of the",
+      "battle for each rank in 'Wizard'.",
       "May only be cast once on each target."
     ]
   },
@@ -57,9 +57,9 @@
     "skill"      : "WIZARD",
     "min_skill"  : 1,
     "description": [
-      "Friendly target of the spell gains 1",
-      "Speed for the rest of the battle",
-      "for each rank in 'Wizard'.",
+      "Target: Friendly.",
+      "Gain 1 Speed for the rest of the",
+      "battle for each rank in 'Wizard'.",
       "May only be cast once on each target."
     ]
   }

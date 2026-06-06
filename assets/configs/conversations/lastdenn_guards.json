@@ -71,7 +71,7 @@
   },
   "standing_guard_near_crystal"      : {
     "name"     : "Lastdenn Guard",
-    "condition": ["_r_!=_u_q_quest_lastdenn_garrin", "time_between_12:00_and_13:00", "is_garrin_possessed"], "startAt": "50",
+    "condition": ["_r_!=_u_q_quest_lastdenn_garrin", "_time_between_12:00_and_13:00", "is_garrin_possessed"], "startAt": "50",
     "phrases"  : {
       "1" : {"text": ["This is the city of Lastdenn."]},
       "2" : {"text": ["Don't cause any disturbances."], "choices": [{"command": "EXIT"}]},
@@ -115,7 +115,7 @@
   },
   "lastdenn_pier_guards"             : {
     "name"     : "Lastdenn Guard",
-    "condition": ["_r_!=_u_q_quest_lastdenn_garrin", "time_between_12:00_and_13:00", "is_garrin_possessed"], "startAt": "50",
+    "condition": ["_r_!=_u_q_quest_lastdenn_garrin", "_time_between_12:00_and_13:00", "is_garrin_possessed"], "startAt": "50",
     "phrases"  : {
       "1" : {"text": ["No boats are coming in or out of the docks today."]},
       "2" : {"text": ["There is nothing here for you to see."], "choices": [{"command": "EXIT"}]},

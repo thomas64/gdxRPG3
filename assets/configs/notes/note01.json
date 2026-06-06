@@ -108,5 +108,10 @@
     "phrases": {
       "1": {"text": ["That's not yours."], "choices": [{"command": "EXIT"}]}
     }
+  },
+  "note_prison_bucket": {
+    "phrases": {
+      "1": {"text": ["You do not want to touch that!"], "choices": [{"command": "EXIT"}]}
+    }
   }
 }

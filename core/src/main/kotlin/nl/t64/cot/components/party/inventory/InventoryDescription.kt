@@ -90,8 +90,8 @@ class InventoryDescription {
 
     private fun compareDurability(item1: InventoryItem, item2: InventoryItem): AttributeState {
         return when {
-            item1.durability < item2.durability -> AttributeState.LESS
-            item1.durability > item2.durability -> AttributeState.MORE
+            item1.maxDurability < item2.maxDurability -> AttributeState.LESS
+            item1.maxDurability > item2.maxDurability -> AttributeState.MORE
             else -> AttributeState.SAME
         }
     }

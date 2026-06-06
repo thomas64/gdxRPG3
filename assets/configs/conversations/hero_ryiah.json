@@ -1,6 +1,7 @@
 {
   "quest_lastdenn_ryiah"  : {
     "name"   : "Ryiah",
+    "comment"  : "WARNING: phraseId 20 is used in a conv condition.",
     "phrases": {
       "1" : {"text": ["Psst. You there, with the face that says \"bad ideas welcome\"."]},
       "2" : {"text": ["They threw me in this cell because they think I'm a witch."]},
@@ -10,14 +11,21 @@
       "6" : {
         "choices": [
           {"text": "*Ask what she needs.*", "command": "ACCEPT_QUEST", "nextId": "10"},
-          {"text": "*No illegal prison break for you. Back away slowly.*", "command": "EXIT"}
+          {"text": "*No illegal prison break for you. Back away slowly.*", "command": "AUTO_SAVE"}
         ]
       },
       "10": {"text": ["A guard is off duty somewhere in the bar."]},
-      "11": {"text": ["How do I know that? Because I'm a witch. I know things."]},
+      "11": {"text": ["How do I know that? Because I'm a witch! I know things."]},
       "12": {"text": ["He has my jail key. And you need to get it from him."]},
       "13": {"text": ["He is probably drunk, so this shouldn't be too difficult, but also not easy."]},
-      "14": {"text": ["Don't forget, my freedom is on the line here. Good luck!"], "choices": [{"command": "AUTO_SAVE", "nextId": "10"}]}
+      "14": {"text": ["Don't forget, my freedom is on the line here. Good luck!"], "choices": [{"command": "AUTO_SAVE", "nextId": "20"}]},
+      "20": {
+        "text": ["You're back?"], "choices": [
+          {"condition": ["i_n_0_==_item_key_lastdenn_jail"], "text": "->", "nextId": "10"},
+          {"condition": ["i_n_1_>=_item_key_lastdenn_jail"], "text": "->", "nextId": "21"}
+        ]
+      },
+      "21": {"text": ["Do you have the jail key? Are you serious? What are you waiting for?"], "choices": [{"command": "AUTO_SAVE", "nextId": "20"}]}
     }
   },
   "drunken_lastdenn_guard": {
@@ -71,7 +79,7 @@
       "132" : {
         "choices": [
           {"text": "*Ask him where you can find someone in charge tonight.*", "nextId": "410"},
-          {"condition": ["barbarian1"], "text": "[Barbarian 1] *Lean in closer. Make it clear he's running out of options.*", "nextId": "133"},
+          {"condition": ["barbarian1"], "text": "[Barbarian 1] *Lean in closer. Make it clear there are no other options.*", "nextId": "133"},
           {"condition": ["jester1"], "text": "[Jester 1] *Point out his shift's over - so is his responsibility.*", "nextId": "135"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
@@ -157,7 +165,7 @@
   },
   "ryiah_join"            : {
     "name"     : "Ryiah",
-    "condition": ["_conv_quest_lastdenn_ryiah_==_10"], "startAt": "10",
+    "condition": ["_conv_quest_lastdenn_ryiah_==_20"], "startAt": "10",
     "phrases"  : {
       "1"   : {"text": ["Wait. Who are you? My new guard, or my new favorite person?"]},
       "2"   : {"text": ["Actually, do not answer. I am deciding you are my new favorite person."]},

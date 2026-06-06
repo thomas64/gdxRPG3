@@ -9,9 +9,9 @@
     "skill"      : "WIZARD",
     "min_skill"  : 1,
     "description": [
-      "Friendly target of the spell add 2-4 to their",
-      "Protection value for the rest of the battle",
-      "for each rank in 'Wizard'.",
+      "Target: Friendly.",
+      "Add 2-4 Protection for the rest of",
+      "the battle for each rank in 'Wizard'.",
       "May only be cast once on each target."
     ]
   },
@@ -25,15 +25,16 @@
     "skill"      : "WIZARD",
     "min_skill"  : 1,
     "description": [
-      "Friendly target of the spell add 2 to their",
-      "Resistance value for the rest of the battle",
-      "for each rank in 'Wizard'.",
+      "Target: Friendly.",
+      "Add 2% Magic Protection for the rest of",
+      "the battle for each rank in 'Wizard'.",
       "May only be cast once on each target."
     ],
     "comment"    : [
       "// todo, vergeten: is resistance hetzelfde als 'magic protection' van willpower?",
       "// het lijkt er op dat resistance de oude mirror en vs spells is.",
-      "// todo, moet resistance bij de calcs worden weergegeven?"
+      "// todo, moet resistance bij de calcs worden weergegeven?",
+      "en ook, 2x 10 = 20% + 80% van zichzelf = 100% damage reduction. dat moet wellicht anders."
     ]
   },
   "teleportation": {

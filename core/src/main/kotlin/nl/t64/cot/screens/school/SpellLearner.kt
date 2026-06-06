@@ -61,7 +61,7 @@ class SpellLearner private constructor(
     private fun showConfirmDialog() {
         val question = """
             Are you sure you wish to learn
-            $spellName for $xpCost XP and $goldCost gold?""".trimIndent()
+            ${selectedHero.name} with $spellName for $xpCost XP and $goldCost gold?""".trimIndent()
         val dialog = QuestionDialog(question) { learnSpell() }
         dialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT, 0)
     }

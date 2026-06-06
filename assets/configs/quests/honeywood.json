@@ -63,7 +63,7 @@
   "quest_to_lastdenn_then2"    : {
     "title"         : "To Lastdenn then [M]",
     "entityId"      : "ylarus",
-    "summary"       : "Adan inexplicably bursts into flames every time Grace is sacrificed by the wizard Ardor. Ylarus, the God of Time, his power is fading. He gave you the Crystal of Time and he sends you to the priest of Lastdenn for answers.",
+    "summary"       : "Adan inexplicably bursts into flames every time Grace is sacrificed by the wizard Ardor. The power of Ylarus, the God of Time, is fading. He gave you the Crystal of Time and sent you to the priest of Lastdenn for answers.",
     "linkedWith"    : ["quest_honeywood_elder", "quest_luana_before_10"],
     "followUpAccept": "quest_lastdenn_santino",
     "tasks"         : {

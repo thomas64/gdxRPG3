@@ -40,7 +40,7 @@ class SkillUpgrader private constructor(
         when {
             selectedHero.isDead -> showError("${selectedHero.name} is deceased.")
             xpCost == -2 -> showError("I cannot train you in the $skillName skill any further.")
-            xpCost == -1 -> showError("${selectedHero.name} is not capable to train in the $skillName skill.")
+            xpCost == -1 -> showError("${selectedHero.name} is not capable to acquire the $skillName skill.")
             xpCost == 0 -> showError("You cannot train in the $skillName skill any further.")
             !hasEnoughXp -> showError("I'm sorry. You don't seem to have enough XP.")
             !hasEnoughGold -> showError("I'm sorry. You don't seem to have enough gold.")
@@ -55,7 +55,7 @@ class SkillUpgrader private constructor(
     private fun showConfirmDialog() {
         val question = """
             Are you sure you wish to train
-            $skillName for $xpCost XP and $goldCost gold?""".trimIndent()
+            ${selectedHero.name} with $skillName for $xpCost XP and $goldCost gold?""".trimIndent()
         val dialog = QuestionDialog(question) { upgradeSkill() }
         dialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT, 0)
     }
