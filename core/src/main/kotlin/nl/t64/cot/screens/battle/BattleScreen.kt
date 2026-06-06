@@ -406,7 +406,7 @@ class BattleScreen : Screen {
             ?.let { AttackAction.createForEnemy(currentParticipant, it, battleId).handle() }
             ?.also { currentTarget = heroTarget }
 
-        if (attackData == null || attackData.isEmpty()) {
+        if (attackData.isNullOrEmpty()) {
             endEnemyAction()
         } else {
             attackOutcomeManager.enemyAttackConfirmed(attackData)
@@ -419,10 +419,7 @@ class BattleScreen : Screen {
         }
         (currentParticipant.handlePossibleStagger()
             ?.let { handleStagger(it) }
-            ?: run {
-                Thread.sleep(500L)
-                turnManager.setNextTurn()
-            })
+            ?: run { endEnemyTurn() })
     }
 
     private fun possibleBlinkCurrentParticipant() {
@@ -448,6 +445,20 @@ class BattleScreen : Screen {
             turnManager.setNextTurn()
         }
         messageDialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT)
+    }
+
+    private fun endEnemyTurn() {
+        if (preferenceManager.isCombatDetailsOn) {
+            val message = "${currentParticipant.character.name} ended ${currentParticipant.character.gender} turn."
+            val messageDialog = MessageDialog(message)
+            messageDialog.setActionAfterHide {
+                turnManager.setNextTurn()
+            }
+            messageDialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT)
+        } else {
+            Thread.sleep(500L)
+            turnManager.setNextTurn()
+        }
     }
 
     private fun openPauseMenu() {
