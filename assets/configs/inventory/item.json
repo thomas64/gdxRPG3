@@ -73,7 +73,7 @@
     "group"       : "ITEM",
     "sort"        : 70150,
     "is_unique"   : true,
-    "description" : ["A letter from Garrin to Father Santino about ghosts."],
+    "description" : ["A letter from Garrin to Father Santino about a ghost repelling item."],
     "is_droppable": false,
     "replaces"    : ["key_garrin"]
   },

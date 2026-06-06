@@ -189,7 +189,7 @@
       "1"   : {"text": ["You there. Yes, you. You look like someone in need of proper employment. I have a task for you, boy."]},
       "2"   : {"text": ["I am Lambertus, a man of considerable wealth and taste. A very valuable ring of mine was stolen by orcs near Lastdenn, of all dreadful places. Retrieve it, and I may reward you well enough to matter."]},
       "3"   : {"text": ["The orcs are camped south of the bridge, near the waterfall. Filthy brutes. Aggressive too. Still, my ring is worth your inconvenience."]},
-      "4"   : {"text": ["A handsome reward awaits the one who returns what is mine."]},
+      "4"   : {"text": ["A handsome reward awaits the one who returns what is mine."], "choices": [{"command": "KNOW_QUEST", "nextId": "5"}]},
       "5"   : {
         "choices": [
           {"condition": ["i_n_1_>=_item_eqp_lambertus_gold_ring"], "text": "[Gold Ring] *Deliver the ring he asked for.*", "nextId": "6"},
@@ -301,10 +301,10 @@
   "lastdenn_library"        : {
     "name"   : "Clerk",
     "phrases": {
-      "1": {"text": ["Oh! Sorry, I didn't see you there. These books are taller than my future."]},
-      "2": {"text": ["I organize tax records, council notes, gate permits, and whatever this is. It might be soup stains on ancient law."]},
-      "3": {"text": ["The mayor says: 'Knowledge is power.' I say: 'Knowledge is heavy,' and this shelf agrees with me."]},
-      "4": {"text": ["Anyway, I'll be right here, bravely losing a duel against alphabetical order."], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["Oh! Sorry, I didn't see you there. I'm buried in gate permits and council records."]},
+      "2": {"text": ["Every new rule means three new ledgers, two new stamps, and one fresh headache."]},
+      "3": {"text": ["The mayor says: 'Knowledge is power.' But knowledge is mostly paperwork."]},
+      "4": {"text": ["If you need me, I'll be here pretending these shelves are organized on purpose."], "choices": [{"command": "EXIT"}]}
     }
   },
   "lastdenn_temple01"       : {

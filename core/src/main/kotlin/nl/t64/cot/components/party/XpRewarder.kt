@@ -10,22 +10,24 @@ import nl.t64.cot.components.loot.Loot
 
 object XpRewarder {
 
-    fun receivePossibleXp(lootId: String) {
+    fun receivePossibleXp(lootId: String, playReward: Boolean = true) {
         val reward = gameData.loot.getLoot(lootId)
         if (!reward.isXpGained()) {
-            receiveXp(reward)
+            receiveXp(reward, playReward)
         }
     }
 
-    private fun receiveXp(reward: Loot) {
+    private fun receiveXp(reward: Loot, playReward: Boolean) {
         gameData.party.gainXp(reward.xp)
-        showMessageTooltipRewardXp(reward.xp)
+        showMessageTooltipRewardXp(reward.xp, playReward)
         reward.clearXp()
     }
 
-    private fun showMessageTooltipRewardXp(xp: Int) {
-        stopAllSe()
-        playSe(AudioEvent.SE_REWARD)
+    private fun showMessageTooltipRewardXp(xp: Int, playReward: Boolean) {
+        if (playReward) {
+            stopAllSe()
+            playSe(AudioEvent.SE_REWARD)
+        }
         worldScreen.showMessageTooltip("+ $xp XP")
     }
 

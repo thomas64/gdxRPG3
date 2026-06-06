@@ -255,12 +255,14 @@
       "52"  : {
         "choices": [
           {"condition": ["i_n_1_>=_item_letter_to_santino", "i_n_0_==_item_ghost_repeller"], "text": "[Letter to Father Santino] *Show Garrin's letter.*", "nextId": "110"},
+          {"condition": ["i_r_!=_u_q_quest_lastdenn_garrin", "is_garrin_possessed"], "text": "*Warn him for his upcoming murder!*", "nextId": "60"},
           {"condition": ["i_c_>=_a_q_quest_lastdenn_santino"], "text": "*Nothing for now. Take your leave.*", "nextId": "53"},
           {"condition": ["i_c_!=_a_q_quest_lastdenn_santino"], "text": "*Nothing for now. Take your leave.*", "nextId": "54"}
         ]
       },
       "53"  : {"text": ["May Evdos be with you."], "choices": [{"command": "EXIT", "nextId": "7"}]},
       "54"  : {"text": ["May Evdos be with you."], "choices": [{"command": "EXIT", "nextId": "50"}]},
+      "60"  : {"text": ["Murdered? What nonsense! Who in their right mind would want to harm a servant of Evdos?"], "choices": [{"nextId": "52"}]},
       "99"  : {"text": ["-------------------------------------------------------------------------------------------"]},
       "100" : {"text": ["Blessings upon you my child."]},
       "101" : {"text": ["Welcome to the Temple of Evdos, God of Knowledge. I am Father Santino."]},
@@ -268,6 +270,7 @@
       "103" : {
         "choices": [
           {"condition": ["i_n_1_>=_item_letter_to_santino", "i_n_0_==_item_ghost_repeller"], "text": "[Letter to Father Santino] *Show Garrin's letter.*", "nextId": "110"},
+          {"condition": ["i_r_!=_u_q_quest_lastdenn_garrin", "is_garrin_possessed"], "text": "*Warn him for his upcoming murder!*", "nextId": "150"},
           {"condition": ["i_c_!=_a_q_quest_lastdenn_santino"], "text": "*Explain everything that's happened with Ardor, Ulrog and Ylarus.*", "command": "DELIVER_QUEST_MESSAGE", "nextId": "5"},
           {"text": "*Counseling is for wimps. Take your leave.*", "nextId": "104"}
         ]
@@ -279,9 +282,9 @@
       "112" : {"text": ["No, no, no, I can't help you with that right now. It's a holy item! No, I won't give you that!"]},
       "113" : {
         "choices": [
-          {"condition": ["barbarian3"], "text": "[Barbarian 3] *Corner him with the consequences of refusing you.*", "nextId": "120"},
-          {"condition": ["diplomat3"], "text": "[Diplomat 3] *Appeal to his duty to protect the innocent.*", "nextId": "130"},
-          {"condition": ["jester3"], "text": "[Jester 3] *Joke that even holy relics shouldn't gather dust.*", "nextId": "140"},
+          {"condition": ["barbarian2"], "text": "[Barbarian 2] *Corner him with the consequences of refusing you.*", "nextId": "120"},
+          {"condition": ["diplomat2"], "text": "[Diplomat 2] *Appeal to his duty to protect the innocent.*", "nextId": "130"},
+          {"condition": ["jester2"], "text": "[Jester 2] *Joke that even holy relics shouldn't gather dust.*", "nextId": "140"},
           {"text": "*Accept it for now and take your leave.*", "nextId": "114"}
         ]
       },
@@ -291,6 +294,7 @@
       "130" : {"text": [". . ."]},
       "131" : {"text": ["You are right to remind me. A priest's duty is to protect the innocent first. I will place it in your hands."], "choices": [{"command": "RECEIVE_ITEM"}]},
       "140" : {"text": [". . ."]},
+      "150" : {"text": ["Murdered? What nonsense! Who in their right mind would want to harm a servant of Evdos?"], "choices": [{"nextId": "103"}]},
       "141" : {"text": ["Heh... perhaps you've struck closer to truth than you meant. A relic locked away protects no one. Better it serves the living."], "choices": [{"command": "RECEIVE_ITEM"}]},
       "1199": {"text": ["You should have it. It's the right thing to do."], "choices": [{"command": "RECEIVE_ITEM"}]},
       "1200": {"text": ["Blessings upon you my child. I hope my holy item has been of use to you."], "choices": [{"nextId": "102"}]}

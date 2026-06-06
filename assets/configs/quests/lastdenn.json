@@ -67,7 +67,7 @@
   "quest_lastdenn_garrin"  : {
     "title"   : "Garrin's ghost",
     "entityId": "man12",
-    "summary" : "Garrin was possessed by a ghost, and the ghost of Garrin has murdered Father Santino. The guards of Lastdenn arrested Garrin, while the ghost already left his body.",
+    "summary" : "Garrin was possessed by a ghost, and the ghost of Garrin has murdered Father Santino at 13:00 in the streets of Lastdenn. Two passing guards arrested Garrin, while the ghost already left his body.",
     "tasks"   : {
       "1": {
         "taskPhrase": "Prevent the murder of Father Santino.",

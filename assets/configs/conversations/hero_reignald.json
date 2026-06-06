@@ -11,7 +11,7 @@
           {"condition": ["!is_garrin_possessed", "i_time_after_14:20"], "text": "->", "nextId": "50"}
         ]
       },
-      "10"  : {"text": ["Three years, two months in command. Long enough to learn that uniforms do not hold a city together."]},
+      "10"  : {"text": ["Three years, nine months in command. Long enough to learn that uniforms do not hold a city together."]},
       "11"  : {"text": ["Discipline does! It keeps tired men steady, frightened men useful, and angry men under command!"]},
       "12"  : {"text": ["People think guard work is glory. It is mostly quarrels, hunger, fear, and one bad rumor away from panic."]},
       "13"  : {"text": ["Our job is simple and ugly: keep neighbors from becoming enemies before sunset."]},
@@ -26,10 +26,9 @@
         ]
       },
       "19"  : {"text": ["Negative!"]},
-      "20"  : {"text": ["I cannot walk away from command. I cannot abandon this duty!"]},
-      "21"  : {"text": ["Lastdenn does not need one more sword. It needs its commander!"]},
-      "22"  : {"text": ["I will not join you. I will not leave this city. I will not be pulled off assignment!"]},
-      "23"  : {"text": ["Only the {COLOR=BLUE}priest{COLOR=BLACK} himself could convince me otherwise!"], "choices": [{"command": "EXIT"}]},
+      "20"  : {"text": ["I do have to say, I think about leaving this city more than I like to admit."]},
+      "21"  : {"text": ["But I cannot walk away from command. I cannot abandon this duty!"]},
+      "22"  : {"text": ["Only the {COLOR=BLUE}priest{COLOR=BLACK} himself could convince me otherwise!"], "choices": [{"command": "EXIT"}]},
       "30"  : {"text": ["Do not interrupt me! I am in conversation with Father Santino!"], "choices": [{"command": "EXIT"}]},
       "40"  : {"text": ["I just had a hard conversation with Father Santino. I need to think for a moment."]},
       "41"  : {"text": ["Come back in a few minutes. I will be here."], "choices": [{"command": "EXIT"}]},

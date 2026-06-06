@@ -70,10 +70,20 @@
     }
   },
   "standing_guard_near_crystal"      : {
-    "name"   : "Lastdenn Guard",
-    "phrases": {
-      "1": {"text": ["This is the city of Lastdenn."]},
-      "2": {"text": ["Don't cause any disturbances."], "choices": [{"command": "EXIT"}]}
+    "name"     : "Lastdenn Guard",
+    "condition": ["_r_!=_u_q_quest_lastdenn_garrin", "time_between_12:00_and_13:00", "is_garrin_possessed"], "startAt": "50",
+    "phrases"  : {
+      "1" : {"text": ["This is the city of Lastdenn."]},
+      "2" : {"text": ["Don't cause any disturbances."], "choices": [{"command": "EXIT"}]},
+      "50": {"text": ["This is the city of Lastdenn."]},
+      "51": {"text": ["Don't cause any disturbances."]},
+      "52": {
+        "choices": [
+          {"text": "*Warn the guard for the murder on Santino!*", "nextId": "53"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "53": {"text": ["Murder? No way! Our priest is very much beloved. Nobody would ever want him dead."], "choices": [{"command": "EXIT"}]}
     }
   },
   "guarding_house_garrin"            : {
@@ -104,10 +114,20 @@
     }
   },
   "lastdenn_pier_guards"             : {
-    "name"   : "Lastdenn Guard",
-    "phrases": {
-      "1": {"text": ["No boats are coming in or out of the docks today."]},
-      "2": {"text": ["There is nothing here for you to see."], "choices": [{"command": "EXIT"}]}
+    "name"     : "Lastdenn Guard",
+    "condition": ["_r_!=_u_q_quest_lastdenn_garrin", "time_between_12:00_and_13:00", "is_garrin_possessed"], "startAt": "50",
+    "phrases"  : {
+      "1" : {"text": ["No boats are coming in or out of the docks today."]},
+      "2" : {"text": ["There is nothing here for you to see."], "choices": [{"command": "EXIT"}]},
+      "50": {"text": ["No boats are coming in or out of the docks today."]},
+      "51": {"text": ["There is nothing here for you to see."]},
+      "52": {
+        "choices": [
+          {"text": "*Warn the guards for the murder on Santino!*", "nextId": "53"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "53": {"text": ["What? Murder? Who would want to kill our priest? He's such a kind soul."], "choices": [{"command": "EXIT"}]}
     }
   }
 }
