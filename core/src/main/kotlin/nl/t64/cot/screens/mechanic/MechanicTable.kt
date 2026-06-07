@@ -14,7 +14,7 @@ private const val PADDING = 20f
 private val TEXT = """
     Welcome to my workshop!
 
-    I can repair damaged equipment or craft new equipment from your resources.
+    I can repair damaged equipment or craft new equipment from your resources based on my Mechanic rank.
 
     Use the left panel to repair damaged equipment. Use the right panel to craft new equipment.
 

@@ -132,13 +132,17 @@ class BattleScreen : Screen {
                 isLoaded = true
                 render(0f)
 
-                listOf("guide_event_battle_rows",
-                       "guide_event_battle_advantage",
-                       "guide_event_battle_battle_lock",
-                       "guide_event_battle_ap",
-                       "guide_event_battle_turn_order",
-                       "guide_event_battle_durability",
-                       "guide_event_battle_special")
+                sequenceOf(listOf("guide_event_battle_rows",
+                                  "guide_event_battle_advantage",
+                                  "guide_event_battle_battle_lock",
+                                  "guide_event_battle_ap",
+                                  "guide_event_battle_turn_order",
+                                  "guide_event_battle_durability",
+                                  "guide_event_battle_special"),
+                           if (gameData.party.getAllHeroesAlive().size > 1)
+                               listOf("guide_event_battle_enemy_focus") else emptyList()
+                )
+                    .flatten()
                     .map { gameData.events.getEventById(it) }
                     .firstOrNull { !gameData.events.hasEventPlayed(it) }
                     ?.possibleStart(stage)

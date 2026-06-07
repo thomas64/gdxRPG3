@@ -205,7 +205,7 @@
       "15": {"text": ["But first... {WAIT=0.5}I need to finish my chores here for Mr. Isembert. I promised to help him out today."]},
       "16": {"text": ["I'll be done by 10:00. Come back then, and not one minute later!"], "choices": [{"command": "ACCEPT_QUEST", "nextId": "17"}]},
       "17": {"text": ["Go buy some weapons or level up your attributes or something, I don't care. As long as you don't bother me here!"], "choices": [{"command": "AUTO_SAVE", "nextId": "20"}]},
-      "20": {"text": ["Mozes, what did I tell you?! I won't be done with my chores until 10:00. Come back then, and not one minute later!"], "choices": [{"command": "EXIT", "nextId": "20"}]}
+      "20": {"text": ["Mozes, what did I tell you?! I won't be done with my chores until 10:00. Come back then, and not one minute later!"], "choices": [{"nextId": "17"}]}
     }
   },
   "luana_joins_party"              : {

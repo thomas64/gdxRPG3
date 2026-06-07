@@ -83,5 +83,16 @@
       "",
       "Remember, magic spells require resources to cast."
     ]
+  },
+  "guide_event_battle_enemy_focus": {
+    "type": "tutorial",
+    "text": [
+      "Enemies will try to choose their target based on the most",
+      "damage they can deal. Weaker, less protected heroes, with no",
+      " advantage, and within range, are more likely to be targeted.",
+      "",
+      "The Stealth skill however, helps to make a hero less likely",
+      "to be targeted by enemies."
+    ]
   }
 }
