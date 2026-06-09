@@ -2,14 +2,17 @@
   "stealth"   : {
     "upgrade"    : 6,
     "description": [
-      "- 'Stealth' increases the chance to successfully flee combat.",
-      "  Each rank in 'Stealth' increases the probability of this by 2%.",
+      "- At the start of battle, 'Stealth' increases a character's",
+      "  chance to start in a space further away from enemies.",
       "",
-      "- In combat, 'Stealth' decreases the attention this character",
-      "  draws from enemies, in relation to other party members.",
+      "- During combat, 'Stealth' reduces how much attention enemies",
+      "  pay to a character compared to other party members.",
       "",
-      "- 'Stealth' decreases the amount of Action Points it takes to",
-      "  free this character from when they are locked in battle."
+      "- 'Stealth' lowers the Action Point cost required to free",
+      "  a character from when they are locked in battle.",
+      "",
+      "- 'Stealth' increases the chance to successfully flee the party",
+      "  from combat. Each rank in 'Stealth' raises this chance by 2%."
     ]
   },
   "gambler"   : {

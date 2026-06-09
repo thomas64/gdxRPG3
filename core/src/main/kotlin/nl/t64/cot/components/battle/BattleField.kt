@@ -3,6 +3,7 @@ package nl.t64.cot.components.battle
 import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
+import nl.t64.cot.components.party.skills.SkillItemId
 import kotlin.math.abs
 
 
@@ -21,14 +22,16 @@ class BattleField(
         val heroParticipants: List<Participant> = participants.filter { it.isHero }
         val enemyParticipants: List<Participant> = participants.filter { !it.isHero }
 
-        // val heroRange: Int = minOf(BATTLE_FIELD_SIZE, 10 + (6 - heroParticipants.size) * 2)
-        // val enemyRange: Int = maxOf(0, BATTLE_FIELD_SIZE - (10 + (6 - enemyParticipants.size) * 2))
+        val orderedHeroes: List<Participant> = heroParticipants
+            .sortedByDescending { it.character.getCalculatedTotalSkillOf(SkillItemId.STEALTH) + (Math.random() * 10f) }
+        val orderedEnemies: List<Participant> = enemyParticipants
+            .sortedBy { it.character.getCalculatedTotalSkillOf(SkillItemId.STEALTH) + (Math.random() * 10f) }
 
-        val heroIndices: List<Int> = (0 until 12).shuffled().take(heroParticipants.size)
-        val enemyIndices: List<Int> = (8 until BATTLE_FIELD_SIZE).shuffled().take(enemyParticipants.size)
+        val heroIndices: List<Int> = (0 until 12).shuffled().take(orderedHeroes.size).sorted()
+        val enemyIndices: List<Int> = (8 until BATTLE_FIELD_SIZE).shuffled().take(orderedEnemies.size).sorted()
 
-        heroParticipants.forEachIndexed { index, participant -> heroSpaces[heroIndices[index]] = participant }
-        enemyParticipants.forEachIndexed { index, participant -> enemySpaces[enemyIndices[index]] = participant }
+        orderedHeroes.forEachIndexed { index, participant -> heroSpaces[heroIndices[index]] = participant }
+        orderedEnemies.forEachIndexed { index, participant -> enemySpaces[enemyIndices[index]] = participant }
     }
 
     fun resetStartingSpace() {
