@@ -306,6 +306,13 @@
         "isHidden"                : true,
         "forceSetHiddenAfterReset": true,
         "isOptional"              : true
+      },
+      "11": {
+        "taskPhrase"     : "            [Optional] Talk to mr. Isembert after defeating the Orc Raiders to receive a reward.",
+        "type"           : "DELIVER_MESSAGE",
+        "conversationIds": ["mr_isembert_after_11_after_win"],
+        "isHidden"       : true,
+        "isOptional"     : true
       }
     }
   },
@@ -314,6 +321,7 @@
     "entityId"  : "luana",
     "summary"   : "Luana before 10:00",
     "isSubQuest": true,
+    "linkedWith": ["quest_honeywood_elder"],
     "tasks"     : {
       "8": {
         "taskPhrase"          : "                  Return to Luana by 10:00. She will be done with her chores at Honeywood Farm.",
@@ -326,6 +334,7 @@
         "taskPhrase"          : "                  Defeat the Orc raiding party which attacks Honeywood Farm between 10:00 and 11:00.",
         "type"                : "FREE",
         "isHidden"            : true,
+        "linkedWith"          : ["11"],
         "shouldHideAfterReset": true
       }
     }

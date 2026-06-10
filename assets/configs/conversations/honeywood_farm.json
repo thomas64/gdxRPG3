@@ -141,7 +141,7 @@
       },
       "3"   : {"face": "luana", "name": "luana", "text": ["(I helped out too, you know...)"]},
       "4"   : {"face": "oldman02", "name": "Mr. Isembert", "text": ["You're a hero! You saved the oldest farm in the village!"]},
-      "5"   : {"text": ["It will remain in our family for generations!"]},
+      "5"   : {"text": ["It will remain in our family for generations!"], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "6"}]},
       "6"   : {"text": ["My home is your home. You're even welcome to use the {COLOR=BLUE}back door{COLOR=BLACK} if you like."], "choices": [{"command": "RECEIVE_ITEM"}]},
       "1199": {"text": ["Thank you, Mozes! You saved my farm!"], "choices": [{"nextId": "2"}]},
       "1200": {"text": ["I shall name all my horses after you!"], "choices": [{"command": "EXIT", "nextId": "1200"}]}
