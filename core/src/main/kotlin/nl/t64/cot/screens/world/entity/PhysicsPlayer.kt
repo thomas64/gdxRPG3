@@ -76,7 +76,7 @@ class PhysicsPlayer : PhysicsComponent() {
 
     private fun collisionObstacles(dt: Float) {
         if (velocity != Constant.MOVE_SPEED_4) {
-            brokerManager.bumpObservers.notifyBump(getALittleBitBiggerBoundingBox(), getCheckRect(), currentPosition)
+            brokerManager.bumpObservers.notifyBump(getALittleBitBiggerBoundingBox(), getCheckRect(), currentPosition, direction)
             if (state == EntityState.WALKING) {
                 collisionBlockers(dt)
             }

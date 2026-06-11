@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="160" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="23" nextobjectid="287">
+<map version="1.11" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="160" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="24" nextobjectid="289">
  <properties>
   <property name="bgm" value="bgm_overworld"/>
   <property name="bgs" value="bgs_river"/>
@@ -356,6 +356,18 @@
   <object id="1" name="alva_road_west" x="240" y="1680" width="144" height="24"/>
   <object id="247" name="lastdenn" type="main" x="3840" y="792" width="24" height="144"/>
   <object id="280" name="lastdenn" type="secret" x="3792" y="1176" width="48" height="24"/>
+ </objectgroup>
+ <objectgroup color="#ffff00" id="23" name="quest">
+  <object id="287" type="tempBlocker" x="3552" y="1152" width="48" height="24">
+   <properties>
+    <property name="allowedDirection" value="north"/>
+   </properties>
+  </object>
+  <object id="288" name="quest_lastdenn_ring" type="blocker" x="3456" y="1152" width="48" height="24">
+   <properties>
+    <property name="condition" value="_rc_===_u_q_this"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup color="#ff55ff" id="18" name="event">
   <object id="250" name="note_lastdenn_signpost" type="check" x="3504" y="960" width="48" height="48"/>

@@ -2,6 +2,7 @@ package nl.t64.cot.subjects
 
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
+import nl.t64.cot.screens.world.entity.Direction
 
 
 class BumpSubject {
@@ -22,8 +23,8 @@ class BumpSubject {
         observers.clear()
     }
 
-    fun notifyBump(biggerBoundingBox: Rectangle, checkRect: Rectangle, playerPosition: Vector2) {
-        ArrayList(observers).forEach { it.onNotifyBump(biggerBoundingBox, checkRect, playerPosition) }
+    fun notifyBump(biggerBoundingBox: Rectangle, checkRect: Rectangle, playerPosition: Vector2, playerDirection: Direction) {
+        ArrayList(observers).forEach { it.onNotifyBump(biggerBoundingBox, checkRect, playerPosition, playerDirection) }
     }
 
 }

@@ -36,8 +36,8 @@ class Entity(
         return physicsComponent.boundingBox.contains(point)
     }
 
-    override fun onNotifyBump(biggerBoundingBox: Rectangle, checkRect: Rectangle, playerPosition: Vector2) {
-        send(OnBumpEvent(biggerBoundingBox, checkRect, playerPosition))
+    override fun onNotifyBump(biggerBoundingBox: Rectangle, checkRect: Rectangle, playerPosition: Vector2, playerDirection: Direction) {
+        send(OnBumpEvent(biggerBoundingBox, checkRect, playerPosition, playerDirection))
     }
 
     override fun onNotifyDetection(playerMoveSpeed: Float, playerState: EntityState) {

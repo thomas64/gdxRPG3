@@ -1,5 +1,6 @@
 package nl.t64.cot.gamestate
 
+import com.badlogic.gdx.math.Rectangle
 import nl.t64.cot.Utils.scenario
 import nl.t64.cot.components.battle.BattleContainer
 import nl.t64.cot.components.battle.BattleProgress
@@ -40,6 +41,7 @@ class GameData : ProfileObserver {
     lateinit var doors: DoorContainer
     lateinit var cutscenes: CutsceneContainer
     lateinit var portals: PortalContainer
+    lateinit var removedMapBlockers: BlockerContainer
     var isTooltipEnabled = false
     var isComparingEnabled = false
     var numberOfCycles = 0
@@ -72,6 +74,7 @@ class GameData : ProfileObserver {
         doors = DoorContainer()
         cutscenes = CutsceneContainer()
         portals = PortalContainer()
+        removedMapBlockers = BlockerContainer()
         isTooltipEnabled = true
         isComparingEnabled = true
         scenario.startNewGame()
@@ -94,6 +97,7 @@ class GameData : ProfileObserver {
         profileManager.setProperty("doors", doors.toProgress())
         profileManager.setProperty("cutscenes", cutscenes)
         profileManager.setProperty("portals", portals)
+        profileManager.setProperty("removedMapBlockers", removedMapBlockers)
         profileManager.setProperty("isTooltipEnabled", isTooltipEnabled)
         profileManager.setProperty("isComparingEnabled", isComparingEnabled)
         profileManager.setProperty("numberOfCycles", numberOfCycles)
@@ -127,9 +131,12 @@ class GameData : ProfileObserver {
         }
         cutscenes = profileManager.getProperty("cutscenes")
         portals = profileManager.getProperty("portals")
+        removedMapBlockers = profileManager.getProperty("removedMapBlockers")
         isTooltipEnabled = profileManager.getProperty("isTooltipEnabled")
         isComparingEnabled = profileManager.getProperty("isComparingEnabled")
         numberOfCycles = profileManager.getProperty("numberOfCycles")
     }
 
 }
+
+class BlockerContainer : ArrayList<Rectangle>()
