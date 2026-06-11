@@ -68,6 +68,7 @@ enum class AudioEvent(val filePath: String, val volume: Float = 1f) {
     SE_COINS_BUY("audio/se/kenney_handle_coins.ogg", 0.5f),
     SE_COINS_SELL("audio/se/kenney_handle_coins2.ogg", 0.5f),
 
+    SE_BATTLE_START("audio/se/just_whoosh_004.ogg", 0.4f),
     SE_WARP("audio/se/whooshes_impacts_impact_01.ogg", 0.4f),
     SE_BANG("audio/se/whooshes_impacts2_whooshes_032.ogg", 0.4f),
     SE_MAGIC("audio/se/just_transitions_creepy_008.ogg", 0.5f),

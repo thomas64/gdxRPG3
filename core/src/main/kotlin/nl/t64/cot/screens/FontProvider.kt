@@ -41,4 +41,9 @@ object FontProvider {
             .apply { data.markupEnabled = true }
     }
 
+    val fffTusjBold200: BitmapFont by lazy {
+        Utils.resourceManager.getTrueTypeAsset("fonts/fff_tusj_bold_30.ttf", 200)
+            .apply { data.markupEnabled = true }
+    }
+
 }

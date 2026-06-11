@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog
 import com.badlogic.gdx.scenes.scene2d.ui.Label
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.utils.ScreenUtils
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.audioManager
@@ -16,12 +17,14 @@ import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playBgm
+import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.battle.*
 import nl.t64.cot.components.party.abilities.BattleAbilityItem
 import nl.t64.cot.components.party.inventory.BattlePotionItem
 import nl.t64.cot.components.party.inventory.BattleWeaponItem
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
+import nl.t64.cot.screens.FontProvider
 import nl.t64.cot.screens.dialog.MessageDialog
 import nl.t64.cot.screens.inventory.InventoryScreen
 import nl.t64.cot.screens.menu.MenuPause
@@ -240,7 +243,25 @@ class BattleScreen : Screen {
     private fun startBattle() {
         screenBuilder.buttonTableMainMenuIndex = 0
         menuManager.buttonTablePreBattle.remove()
-        isPreBattle = false
+
+        val labelStyle = LabelStyle(FontProvider.fffTusjBold200, Color.BLACK)
+        val battleStartLabel = Label("Battle  Start", labelStyle)
+        val centerY: Float = (Gdx.graphics.height / 2f) - (battleStartLabel.height / 2f)
+        val centerX: Float = (Gdx.graphics.width / 2f) - (battleStartLabel.width / 2f)
+        battleStartLabel.setPosition(Gdx.graphics.width.toFloat(), centerY)
+
+        playSe(AudioEvent.SE_BATTLE_START)
+        stage.addActor(battleStartLabel)
+        stage.addAction(Actions.sequence(
+            Actions.addAction(Actions.moveTo(centerX, centerY, 0.5f), battleStartLabel),
+            Actions.delay(0.5f),
+            Actions.addAction(Actions.fadeOut(1f), battleStartLabel),
+            Actions.delay(1.5f),
+            Actions.run {
+                battleStartLabel.remove()
+                isPreBattle = false
+            }
+        ))
     }
 
     private fun heroIsSelectedForPreEquipment(selectedHero: String) {
