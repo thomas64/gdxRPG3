@@ -1,5 +1,6 @@
 fairy_shop
 equipshop_honeywood
 equipshop_lastdenn
+quest_get_medicine_academy_shop
 resourceshop_honeywood
 resourceshop_lastdenn

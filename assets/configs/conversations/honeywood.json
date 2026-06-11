@@ -503,7 +503,7 @@
       "7": {"text": ["Did I do well?"], "choices": [{"command": "EXIT"}]}
     }
   },
-  "quest_get_medicine_academy"          : {
+  "quest_get_medicine_academy_shop"     : {
     "name"   : "Elenora",
     "phrases": {
       "1"   : {"text": ["Mozes dear, how are you today?"]},
@@ -511,6 +511,7 @@
         "choices": [
           {"condition": ["i_c_!=_f_q_this", "i_rc_>=_a_q_quest_get_horse", "_tn_7_q_quest_get_horse"], "text": "*Ask for help with Angie's ailing horse.*", "nextId": "3"},
           {"text": "*Inquire about her potion brewing skill.* (Visit academy)", "command": "LOAD_ACADEMY"},
+          {"text": "*Request to view her potion stock.* (Visit shop)", "command": "LOAD_SHOP"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },

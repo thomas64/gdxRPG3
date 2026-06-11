@@ -300,7 +300,7 @@
  <objectgroup color="#ff007f" id="55" name="enemy">
   <object id="375" name="blue_slime" x="408" y="156" width="48" height="24">
    <properties>
-    <property name="battleId" value="quest_get_medicine_academy"/>
+    <property name="battleId" value="quest_get_medicine_academy_shop"/>
     <property name="condition" value="_rc_==_a_q_this"/>
     <property name="direction" value="north"/>
    </properties>

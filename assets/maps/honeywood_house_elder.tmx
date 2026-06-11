@@ -111,7 +111,7 @@
  <objectgroup color="#55ff7f" id="23" name="npc">
   <object id="67" name="oldwoman11" type="w" x="192" y="192" width="48" height="24">
    <properties>
-    <property name="conversation" value="quest_get_medicine_academy"/>
+    <property name="conversation" value="quest_get_medicine_academy_shop"/>
    </properties>
   </object>
   <object id="69" name="oldman11" x="192" y="432" width="48" height="24">
