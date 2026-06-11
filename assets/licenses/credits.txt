@@ -48,14 +48,15 @@ by F. Stellingwerf
 
 Music Copyright Notice
 
-    "Approach"     "Find"         "Store"    
-    "Battle"       "Go out"       "The earth"
-    "Brave"        "Journey"      "Town"     
-    "Cave"         "Quiet town"   "Volcano"  
-    "Combat"       "Search"       "Wake up"  
-    "Conclusion"   "Seashore"     "Wayfarer" 
-    "Confront"     "Shadow"       "Woods"    
-    "Den"          "Spelunk"                 
+    "Approach"     "Find"         "Spelunk"  
+    "Battle"       "Go out"       "Store"    
+    "Brave"        "Journey"      "The earth"
+    "Cave"         "Plunder"      "Town"     
+    "Combat"       "Quiet town"   "Volcano"  
+    "Conclusion"   "Search"       "Wake up"  
+    "Confront"     "Seashore"     "Wayfarer" 
+    "Decision"     "Shadow"       "Woods"    
+    "Den"                                    
 
 by Yusaku Kishigami
 www.presence-of-music.com

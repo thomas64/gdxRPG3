@@ -33,6 +33,7 @@ enum class AudioEvent(val filePath: String, val volume: Float = 1f) {
 
     BGM_END_NEAR("audio/bgm/final_hours.ogg", 0.05f),
     BGM_VICTORY("audio/bgm/riverside_ride.ogg", 0.1f),
+    BGM_AIDYN_CAVE("audio/bgm/aidyn_cave.ogg", 0.2f),
 
     BGS_BIRDS("audio/bgs/birds.ogg", 0.2f),
     BGS_CREEK("audio/bgs/creek.ogg", 0.3f),
