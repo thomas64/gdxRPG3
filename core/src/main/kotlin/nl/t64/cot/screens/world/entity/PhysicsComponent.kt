@@ -53,6 +53,7 @@ abstract class PhysicsComponent : Component {
             EntityState.ALIGNING -> alignToGrid()
             EntityState.IDLE,
             EntityState.IMMOBILE,
+            EntityState.IMMOBILE_AWARE,
             EntityState.NO_BUMP,
             EntityState.INVISIBLE,
             EntityState.IDLE_ANIMATING -> Unit
@@ -96,6 +97,7 @@ abstract class PhysicsComponent : Component {
             EntityState.PLAYING -> possibleSendCollisionEvent()
             EntityState.IDLE,
             EntityState.IMMOBILE,
+            EntityState.IMMOBILE_AWARE,
             EntityState.NO_BUMP,
             EntityState.INVISIBLE,
             EntityState.IDLE_ANIMATING -> Unit

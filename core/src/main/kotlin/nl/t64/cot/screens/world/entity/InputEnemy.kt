@@ -112,6 +112,7 @@ class InputEnemy : InputComponent() {
         state = when (state) {
             EntityState.IDLE, EntityState.WALKING -> EntityState.IDLE
             EntityState.IDLE_ANIMATING, EntityState.FLYING -> EntityState.IDLE_ANIMATING
+            EntityState.IMMOBILE_AWARE -> EntityState.IMMOBILE_AWARE
             else -> throw IllegalArgumentException("Unexpected value: $state")
         }
     }
@@ -128,6 +129,7 @@ class InputEnemy : InputComponent() {
         return when (state) {
             EntityState.IDLE, EntityState.WALKING -> EntityState.WALKING
             EntityState.IDLE_ANIMATING, EntityState.FLYING -> EntityState.FLYING
+            EntityState.IMMOBILE_AWARE -> EntityState.IMMOBILE_AWARE
             else -> throw IllegalArgumentException("Unexpected value: $state")
         }
     }
@@ -151,6 +153,7 @@ class InputEnemy : InputComponent() {
             EntityState.FLYING -> direction = Direction.getRandom()
             EntityState.IDLE_ANIMATING -> state = EntityState.FLYING
             EntityState.IMMOBILE -> state = EntityState.IMMOBILE
+            EntityState.IMMOBILE_AWARE -> state = EntityState.IMMOBILE_AWARE
             else -> throw IllegalArgumentException("Unexpected value: $state")
         }
     }

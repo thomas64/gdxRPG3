@@ -107,6 +107,7 @@ class PhysicsEnemy : PhysicsComponent() {
         shapeRenderer.color = Color.PURPLE
         if (state != EntityState.IMMOBILE
             && state != EntityState.IDLE_ANIMATING
+            && state != EntityState.IMMOBILE_AWARE
         ) {
             shapeRenderer.rect(wanderBox.x, wanderBox.y, wanderBox.width, wanderBox.height)
         }

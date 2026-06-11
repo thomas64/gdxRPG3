@@ -317,11 +317,10 @@
     <property name="battleId" value="alva_battle_10"/>
    </properties>
   </object>
-  <object id="276" name="orc_scout" type="w" x="3624" y="1488" width="48" height="24">
+  <object id="276" name="orc_scout" type="aw" x="3624" y="1488" width="48" height="24">
    <properties>
     <property name="battleId" value="alva_battle_11"/>
-    <property name="detectionRange" type="int" value="8"/>
-    <property name="wanderBoxSize" type="float" value="96"/>
+    <property name="direction" value="west"/>
    </properties>
   </object>
   <object id="277" name="blue_slime" type="w" x="2976" y="1176" width="48" height="24">

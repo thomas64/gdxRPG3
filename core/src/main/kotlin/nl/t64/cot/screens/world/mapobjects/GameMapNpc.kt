@@ -31,6 +31,7 @@ open class GameMapNpc(rectObject: RectangleMapObject) : GameMapObject(rectObject
         val entityState = rectObject.type
         return when {
             entityState == null -> EntityState.IMMOBILE
+            entityState.equals("aw", true) -> EntityState.IMMOBILE_AWARE // for enemies only
             entityState.equals("nb", true) -> EntityState.NO_BUMP
             entityState.equals("inv", true) -> EntityState.INVISIBLE
             entityState.equals("w", true) -> EntityState.getRandomIdleOrWalking()

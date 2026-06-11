@@ -11,6 +11,7 @@ enum class EntityState {
     PLAYING,
     FLYING,
     IMMOBILE,
+    IMMOBILE_AWARE, // only for enemies. no movement, but does enter battle when within range.
     NO_BUMP,
     ALIGNING,
     INVISIBLE,
