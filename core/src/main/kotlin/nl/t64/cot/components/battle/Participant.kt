@@ -76,7 +76,7 @@ class Participant(
         val attackSkill: SkillItemId = currentEnemy.getCurrentWeapon()!!.skill!!
         val targetSkill: SkillItemId? = getCurrentWeapon()?.skill
 
-        val nextToTargetScore: Int = if (isEnemyNextToHero) -2 else 0
+        val nextToTargetScore: Int = if (isEnemyNextToHero) -8 else 0
         val attackerHasAdvantageScore: Int = if (attackSkill.hasAdvantageOver(targetSkill)) -4 else 0
         val attackerHasDisadvantageScore: Int = if (attackSkill.hasDisadvantageFrom(targetSkill)) 4 else 0
         val stealthScore: Int = character.getCalculatedTotalSkillOf(SkillItemId.STEALTH)

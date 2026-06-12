@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.ParticleEffect
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.graphics.g2d.TextureRegion
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader
 import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader
 import com.badlogic.gdx.maps.tiled.TiledMap
@@ -76,7 +77,17 @@ class ResourceManager {
         val parameters = FreetypeFontLoader.FreeTypeFontLoaderParameter()
         parameters.fontFileName = trueTypeFilenamePath
         parameters.fontParameters.size = fontSize
+
+        possibleUnknowBugSolvedByAi(parameters)
+
         return getAsset(trueTypeFilenamePath, parameters)
+    }
+
+    private fun possibleUnknowBugSolvedByAi(parameters: FreetypeFontLoader.FreeTypeFontLoaderParameter) {
+        val defaultChars = FreeTypeFontGenerator.DEFAULT_CHARS
+        val extraChars = "[]–—…‘’“”€"
+        parameters.fontParameters.characters = defaultChars + extraChars
+        parameters.fontParameters.incremental = true
     }
 
     fun getTextureAsset(textureFilenamePath: String): Texture {

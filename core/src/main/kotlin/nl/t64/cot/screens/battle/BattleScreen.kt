@@ -97,6 +97,8 @@ class BattleScreen : Screen {
         val camera = Camera()
         stage = Stage(camera.viewport)
 
+        Label("preLoadFont", LabelStyle(FontProvider.fffTusjBold200, Color.BLACK))
+
         enemies = EnemyContainer(battleId)
         turnManager = TurnManager(gameData.party.getAllHeroesAlive(), enemies.getAll())
         currentParticipant = turnManager.participants.first { it.character.id == Constant.PLAYER_ID }
