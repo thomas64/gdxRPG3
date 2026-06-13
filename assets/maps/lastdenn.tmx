@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="76" height="116" tilewidth="24" tileheight="24" infinite="0" nextlayerid="24" nextobjectid="299">
+<map version="1.11" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="76" height="116" tilewidth="24" tileheight="24" infinite="0" nextlayerid="24" nextobjectid="300">
  <properties>
   <property name="bgm" value="bgm_lastdenn"/>
   <property name="lightmap_camera" value="sunlight"/>
@@ -326,6 +326,11 @@
   <object id="200" name="scene_santino_murdered" x="720" y="1728" width="48" height="24">
    <properties>
     <property name="direction" value="east"/>
+   </properties>
+  </object>
+  <object id="299" name="lastdenn" x="1008" y="2424" width="48" height="24">
+   <properties>
+    <property name="direction" value="west"/>
    </properties>
   </object>
  </objectgroup>

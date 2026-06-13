@@ -15,6 +15,7 @@ import nl.t64.cot.screens.questlog.QuestLogScreen
 import nl.t64.cot.screens.school.SchoolScreen
 import nl.t64.cot.screens.shop.ShopScreen
 import nl.t64.cot.screens.storage.StorageScreen
+import nl.t64.cot.screens.warp.ResetTimeScreen
 import nl.t64.cot.screens.warp.WarpScreen
 import nl.t64.cot.screens.world.WorldScreen
 
@@ -35,6 +36,7 @@ enum class ScreenType(val screenClass: Class<out Screen>) {
     BATTLE(BattleScreen::class.java),
     LOAD_SCREEN(LoadScreen::class.java),
     WARP(WarpScreen::class.java),
+    RESET_TIME(ResetTimeScreen::class.java),
     INVENTORY(InventoryScreen::class.java),
     QUEST_LOG(QuestLogScreen::class.java),
     HELP(HelpScreen::class.java),
@@ -86,6 +88,10 @@ enum class ScreenType(val screenClass: Class<out Screen>) {
 
     fun hasSmallParchment(): Boolean {
         return this in listOf(FIND, REWARD, RECEIVE, RECEIVE_CUTSCENE, TRADE, SPOILS, SPOILS_CUTSCENE)
+    }
+
+    fun hasMediumParchment(): Boolean {
+        return this in listOf(WARP, RESET_TIME)
     }
 
 }

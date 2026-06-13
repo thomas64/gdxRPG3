@@ -177,6 +177,12 @@ class MapManager : ProfileObserver {
         audioManager.possibleBgsSwitch(prevBgs, nextBgs)
     }
 
+    fun loadMapWithBgsSwitch(mapTitle: String) {
+        val prevBgs = if (isMapLoaded) currentMap.bgs else listOf(AudioEvent.NONE)
+        loadMap(mapTitle)
+        audioManager.possibleBgsSwitch(prevBgs, currentMap.bgs)
+    }
+
     fun loadMapWithBgs(mapTitle: String) {
         val prevBgs = if (isMapLoaded) currentMap.bgs else listOf(AudioEvent.NONE)
         loadMap(mapTitle)

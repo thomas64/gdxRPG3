@@ -70,7 +70,7 @@ class LoadScreen : Screen {
     private fun createParchment(): Image {
         return if (screenTypeToLoad.hasSmallParchment()) {
             Utils.createSmallParchment()
-        } else if (screenTypeToLoad == ScreenType.WARP) {
+        } else if (screenTypeToLoad.hasMediumParchment()) {
             Utils.createMediumParchment()
         } else {
             Utils.createLargeParchment()

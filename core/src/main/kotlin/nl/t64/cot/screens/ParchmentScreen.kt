@@ -81,7 +81,7 @@ abstract class ParchmentScreen : Screen {
         return parchment
     }
 
-    fun setBackground(screenshot: Image, parchment: Image) {
+    open fun setBackground(screenshot: Image, parchment: Image) {
         stage.addActor(screenshot)
         stage.addActor(parchment)
     }

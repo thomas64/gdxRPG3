@@ -30,6 +30,8 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
     private lateinit var listener: InventoryScreenListener
     private var startingSelectedTableIndex: Int = 4
     private var loadedFromSkillScreen: SkillItemId? = null
+    private var savedBackground: Pair<Image, Image>? = null
+    private var isBackgroundSet: Boolean = false
 
     companion object {
         fun loadFromMechanic(screenShot: Image, parchment: Image) {
@@ -38,13 +40,7 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
                 this.setBackground(screenShot, parchment)
                 this.startingSelectedTableIndex = 1
                 this.loadedFromSkillScreen = SkillItemId.MECHANIC
-
-                this.createAndSetListener(openQuestLogFunction = { this.openQuestLogScreen() },
-                                          closeScreenFunction = { this.closeScreen() },
-                                          doActionFunction = { this.doAction() },
-                                          tryToDropItemFunction = { this.tryToDropItem() },
-                                          tryToDismissHeroFunction = { this.tryToDismissHero() })
-                this.addInputListenerWithSmallDelay()
+                this.createRegularListener()
             }
             screenManager.setScreen(ScreenType.INVENTORY)
         }
@@ -55,26 +51,22 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
                 this.setBackground(screenShot, parchment)
                 this.startingSelectedTableIndex = 1
                 this.loadedFromSkillScreen = SkillItemId.ALCHEMIST
-
-                this.createAndSetListener(openQuestLogFunction = { this.openQuestLogScreen() },
-                                          closeScreenFunction = { this.closeScreen() },
-                                          doActionFunction = { this.doAction() },
-                                          tryToDropItemFunction = { this.tryToDropItem() },
-                                          tryToDismissHeroFunction = { this.tryToDismissHero() })
-                this.addInputListenerWithSmallDelay()
+                this.createRegularListener()
             }
             screenManager.setScreen(ScreenType.INVENTORY)
         }
 
-        fun load() {
-            loadAndGetInventoryScreen().apply {
-                this.createAndSetListener(openQuestLogFunction = { this.openQuestLogScreen() },
-                                          closeScreenFunction = { this.closeScreen() },
-                                          doActionFunction = { this.doAction() },
-                                          tryToDropItemFunction = { this.tryToDropItem() },
-                                          tryToDismissHeroFunction = { this.tryToDismissHero() })
-                this.addInputListenerWithSmallDelay()
+        fun loadFromCancelCrystal() {
+            (screenManager.getScreen(ScreenType.INVENTORY) as InventoryScreen).apply {
+                this.possibleSetBackground()
+                this.startingSelectedTableIndex = 4
+                this.loadedFromSkillScreen = null
+                this.createRegularListener()
             }
+        }
+
+        fun load() {
+            loadAndGetInventoryScreen().createRegularListener()
         }
 
         fun loadForCutsceneTryCrystal() {
@@ -125,7 +117,6 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
                 this.loadedFromSkillScreen = null
             }
         }
-
     }
 
     override fun onNotifyExitConversation() {
@@ -145,6 +136,20 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
         return inventoryUI
     }
 
+    private fun possibleSetBackground() {
+        if (!isBackgroundSet) {
+            val (screenshot, parchment) = savedBackground
+                ?: (Utils.createScreenshot(true) to Utils.createLargeParchment())
+            setBackground(screenshot, parchment)
+        }
+    }
+
+    override fun setBackground(screenshot: Image, parchment: Image) {
+        savedBackground = screenshot to parchment
+        super.setBackground(screenshot, parchment)
+        isBackgroundSet = true
+    }
+
     override fun show() {
         setInputProcessors(stage)
         inventoryUI = InventoryUI(stage, startingSelectedTableIndex, loadedFromSkillScreen)
@@ -158,6 +163,7 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
     }
 
     override fun hide() {
+        isBackgroundSet = false
         inventoryUI.stopTablesScrolling()
         super.hide()
         setInputProcessors(null)
@@ -173,14 +179,18 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
         listener.removeTriggers()
     }
 
+    private fun createRegularListener() {
+        createAndSetListener(openQuestLogFunction = { openQuestLogScreen() },
+                             closeScreenFunction = { closeScreen() },
+                             doActionFunction = { doAction() },
+                             tryToDropItemFunction = { tryToDropItem() },
+                             tryToDismissHeroFunction = { tryToDismissHero() })
+        addInputListenerWithSmallDelay()
+    }
+
     private fun addInputListenerWithSmallDelay() {
         stage.addAction(Actions.sequence(Actions.delay(0.1f),
                                          Actions.addListener(listener, false)))
-    }
-
-    fun closeScreenAnd(actionAfter: () -> Unit) {
-        closeScreen()
-        actionAfter.invoke()
     }
 
     private fun createAndSetListener(openQuestLogFunction: () -> Unit,

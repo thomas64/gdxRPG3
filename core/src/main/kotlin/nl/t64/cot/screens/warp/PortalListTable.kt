@@ -19,7 +19,7 @@ private const val WIDTH = 330f
 private const val HEIGHT = 470f
 private const val PAD_LEFT = 30f
 
-internal class PortalListTable {
+class PortalListTable {
 
     private val portalListFont: BitmapFont = FontProvider.spectralExtraBold20
     val portalList: List<Portal> = createList()
@@ -27,7 +27,12 @@ internal class PortalListTable {
     val container: Table = fillContainer()
     private lateinit var noPortalsLabel: Label
 
-    fun populatePortalList(currentMapName: String) {
+    fun populateResetTimePortalList() {
+        val activatedPortals = gameData.portals.getAllActivatedPortalsIncludingBed()
+        portalList.setItems(GdxArray(activatedPortals))
+    }
+
+    fun populateWarpPortalList(currentMapName: String) {
         val activatedPortals = gameData.portals.getAllActivatedPortalsExcept(currentMapName)
         if (activatedPortals.isEmpty()) {
             if (!::noPortalsLabel.isInitialized) noPortalsLabel = createNoPortalsLabel()
