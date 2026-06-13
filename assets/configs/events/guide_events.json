@@ -142,6 +142,20 @@
       "The village elder is a good example of this behavior."
     ]
   },
+  "guide_event_skills"               : {
+    "type"     : "tutorial",
+    "condition": ["_cycle_>=_2"],
+    "text"     : [
+      "You can level up skills, just like attributes.",
+      "You can do this at an academy, or on your own.",
+      "",
+      "Learning a [BLUE]new[BLACK] skill, however, can only be done at an academy.",
+      "",
+      "Keep in mind: an academy trainer levels a skill for [BLUE]less [FOREST]XP[BLACK]",
+      "than you would on your own, but a trainer also asks for [BLUE]gold[BLACK],",
+      "which you never need when leveling up by yourself."
+    ]
+  },
   "guide_event_party_member"         : {
     "type"     : "tutorial",
     "condition": ["!alone_in_party"],

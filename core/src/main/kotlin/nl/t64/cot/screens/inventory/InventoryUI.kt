@@ -98,6 +98,10 @@ internal class InventoryUI(
         getSelectedTable().doAction()
     }
 
+    fun doSecondaryAction(): Boolean {
+        return getSelectedTable().doSecondaryAction()
+    }
+
     fun getItemsToDrop(): Loot? {
         return getSelectedTable().getItemsToDrop()
     }

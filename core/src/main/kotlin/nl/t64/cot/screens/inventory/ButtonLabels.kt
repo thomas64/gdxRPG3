@@ -81,9 +81,9 @@ open class ButtonLabels(private val stage: Stage) {
 
     open fun createBottomRightText(): String? {
         return if (Utils.isGamepadConnected()) {
-            "[L-Stick] Toggle tooltip      [R-Stick] Toggle compare      [B] Back                                                                        [Y] Drop item"
+            "[L-Stick] Toggle tooltip      [R-Stick] Toggle compare      [B] Back                                                                        [Y] Drop item / Craft / Brew"
         } else {
-            "[T] Toggle tooltip      [C] Toggle compare      [ I ] Back                                                                        [D] Drop item"
+            "[T] Toggle tooltip      [C] Toggle compare      [ I ] Back                                                                        [D] Drop item / Craft / Brew"
         }
     }
 

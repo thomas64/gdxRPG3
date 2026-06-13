@@ -265,6 +265,8 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
     }
 
     private fun tryToDropItem() {
+        inventoryUI.stopTablesScrolling()
+        if (inventoryUI.doSecondaryAction()) return
         inventoryUI.getItemsToDrop()
             ?.let {
                 playSe(AudioEvent.SE_DROP)

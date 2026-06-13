@@ -3,8 +3,7 @@
     "upgrade"    : 10,
     "description": [
       "- 'Alchemist' allows for manufacturing various",
-      "  magical potions out of various resources.",
-      "  To do this, select the skill in the inventory screen."
+      "  magical potions out of various resources."
     ]
   },
   "mechanic" : {
@@ -14,8 +13,7 @@
       "  traps on treasure chests.",
       "",
       "- 'Mechanic' allows for repairing and crafting",
-      "  various weapons and shields out of various resources.",
-      "  To do this, select the skill in the inventory screen."
+      "  various weapons and shields out of various resources."
     ]
   },
   "ranger"   : {

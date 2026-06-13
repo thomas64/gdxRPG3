@@ -98,17 +98,30 @@ internal class SkillsTable(
 
     override fun doAction() {
         if (selectedHero.isDead) return
+        hideTooltip()
+        val selectedSkill: SkillItem = allSkills[selectedIndex]
+        SkillSelfUpgrader.upgradeSkill(selectedSkill, table.stage) { hasJustUpdated = true }
+    }
+
+    override fun doSecondaryAction(): Boolean {
+        if (selectedHero.isDead) return false
 
         val selectedSkill: SkillItem = allSkills[selectedIndex]
         val screenshot = table.stage.actors[0] as Image
         val parchment = table.stage.actors[1] as Image
 
-        if (selectedSkill.id == SkillItemId.MECHANIC) {
-            hideTooltip()
-            MechanicScreen.load(selectedHero.id, screenshot, parchment)
-        } else if (selectedSkill.id == SkillItemId.ALCHEMIST) {
-            hideTooltip()
-            AlchemistScreen.load(selectedHero.id, screenshot, parchment)
+        return when (selectedSkill.id) {
+            SkillItemId.MECHANIC -> {
+                hideTooltip()
+                MechanicScreen.load(selectedHero.id, screenshot, parchment)
+                true
+            }
+            SkillItemId.ALCHEMIST -> {
+                hideTooltip()
+                AlchemistScreen.load(selectedHero.id, screenshot, parchment)
+                true
+            }
+            else -> false
         }
     }
 
@@ -129,7 +142,7 @@ internal class SkillsTable(
 
     private fun SkillItem.canBeUpgraded(): Boolean {
         if (selectedHero.isDead) return false
-        val xpCost: Int = this.getXpCostForNextRank()
+        val xpCost: Int = this.getSelfXpCostForNextRank()
         return xpCost > 0 && selectedHero.xpPoints >= xpCost
     }
 

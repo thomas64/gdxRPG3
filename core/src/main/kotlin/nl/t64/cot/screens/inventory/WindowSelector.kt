@@ -17,5 +17,6 @@ interface WindowSelector {
     fun doCrystalTryAction() {}
     fun doPreBattleAction() {}
     fun doAction() {}
+    fun doSecondaryAction(): Boolean { return false }
     fun getItemsToDrop(): Loot? { return null }
 }

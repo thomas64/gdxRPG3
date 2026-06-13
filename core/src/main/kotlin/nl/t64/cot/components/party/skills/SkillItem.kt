@@ -1,5 +1,6 @@
 package nl.t64.cot.components.party.skills
 
+import nl.t64.cot.Utils
 import nl.t64.cot.components.party.PersonalityItem
 import kotlin.math.roundToInt
 
@@ -7,6 +8,7 @@ import kotlin.math.roundToInt
 private val TRAINING_COSTS = listOf(20, 8, 12, 16, 20, 24, 28, 32, 36, 40)
 private const val MAXIMUM = 10
 private const val DEFAULT_FLAT_UPGRADE_COST = 20
+private const val SELF_UPGRADE_XP_MULTIPLIER = 1.25
 
 data class SkillItem(
     override val id: SkillItemId = SkillItemId.NONE,
@@ -21,9 +23,10 @@ data class SkillItem(
     }
 
     override fun getTotalDescription(): String {
-        return (getDescription() + System.lineSeparator()
+        return (getDescription()
+            + getPossibleCraftingHint() + System.lineSeparator()
             + System.lineSeparator()
-            + "- A trainer is needed to upgrade a skill.")
+            + getNeededSelfXpForNextRank())
     }
 
     fun getTrainerDescription(trainerSkill: SkillItem): String {
@@ -39,6 +42,20 @@ data class SkillItem(
 
     fun doUpgrade() {
         rank += 1
+    }
+
+    private fun getPossibleCraftingHint(): String {
+        val button = if (id == SkillItemId.MECHANIC || id == SkillItemId.ALCHEMIST) {
+            if (Utils.isGamepadConnected()) "[Y]" else "[D]"
+        } else {
+            return ""
+        }
+        return System.lineSeparator() + "  To do this, press $button to open this skill's screen."
+    }
+
+    private fun getNeededSelfXpForNextRank(): String {
+        val xpNeeded = getSelfXpCostForNextRank().toString().takeIf { it != "0" } ?: "Max"
+        return "- [GOLD]XP needed for ${getFirstOrNext()} rank: $xpNeeded"
     }
 
     private fun getNeededXpForNextRank(trainerSkill: SkillItem): String {
@@ -86,6 +103,11 @@ data class SkillItem(
 
     fun getTotalXpCostFromRankZeroToCurrent(): Int {
         return (1..rank).sumOf { it.getXpCost() }
+    }
+
+    fun getSelfXpCostForNextRank(): Int {
+        if (rank >= MAXIMUM) return 0
+        return (getXpCostForNextRank() * SELF_UPGRADE_XP_MULTIPLIER).roundToInt()
     }
 
     fun getXpCostForNextRank(): Int {
