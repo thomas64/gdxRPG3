@@ -2,11 +2,15 @@ package nl.t64.cot.screens.world.entity
 
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
+import com.badlogic.gdx.math.Vector2
+import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.world.entity.events.*
 
 
 class GraphicsPartyMember(spriteId: String) : GraphicsComponent() {
+
+    private var feetPosition = Vector2()
 
     init {
         loadWalkingAnimation(spriteId)
@@ -21,10 +25,11 @@ class GraphicsPartyMember(spriteId: String) : GraphicsComponent() {
             state = event.state
         }
         if (event is DirectionEvent) {
-            direction = event.direction
+            direction = if (mapManager.isSpecialDirectionNorth(feetPosition)) Direction.NORTH else event.direction
         }
         if (event is PositionEvent) {
             position = event.position
+            feetPosition = Vector2(position.x + Constant.HALF_TILE_SIZE, position.y)
         }
         if (event is OnDetectionEvent) {
             if (event.state == EntityState.IDLE) {
