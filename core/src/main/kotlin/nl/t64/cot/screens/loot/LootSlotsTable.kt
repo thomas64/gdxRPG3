@@ -88,12 +88,19 @@ class LootSlotsTable(
 
     private fun fillLootInventoryContainer() {
         loot.content
-            .map { createInventoryItem(it) }
+            .map { createInventoryItemFrom(it) }
             .forEach { inventory.autoSetItem(it) }
     }
 
-    private fun createInventoryItem(loot: Map.Entry<String, Int>): InventoryItem {
-        return InventoryDatabase.createInventoryItem(loot.key, loot.value)
+    private fun createInventoryItemFrom(lootEntry: Map.Entry<String, Int>): InventoryItem {
+        return InventoryDatabase.createInventoryItem(lootEntry.key, lootEntry.value)
+            .applyPossibleDroppedDurability()
+    }
+
+    private fun InventoryItem.applyPossibleDroppedDurability(): InventoryItem {
+        val inventoryItem = this
+        loot.getDurabilityFor(inventoryItem.id)?.let { inventoryItem.durability = it }
+        return this
     }
 
     private fun fillLootSlotsTable() {

@@ -117,7 +117,7 @@ class InventorySlotsTable(
             ?.takeIf { it.isDroppable }
             ?.let {
                 currentSlot.clearStack()
-                Loot(mutableMapOf(it.id to it.amount))
+                Loot.createWithDurability(it.id, it.amount, it.durability)
             }
     }
 

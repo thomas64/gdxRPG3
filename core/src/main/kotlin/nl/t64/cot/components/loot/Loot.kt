@@ -13,12 +13,22 @@ class Loot(
     var lockLevel: Int = 0,
     var xp: Int = 0,
     private val doesReset: Boolean = false,
+    private var durability: MutableMap<String, Int> = mutableMapOf(),
 ) {
 
     companion object {
         fun createSingleItem(itemId: String): Loot {
             return Loot(mutableMapOf(itemId to 1))
         }
+
+        fun createWithDurability(itemId: String, amount: Int, durability: Int): Loot {
+            return Loot(mutableMapOf(itemId to amount),
+                        durability = mutableMapOf(itemId to durability))
+        }
+    }
+
+    fun getDurabilityFor(itemId: String): Int? {
+        return durability[itemId]
     }
 
     fun resetChest(originalLoot: Loot) {
