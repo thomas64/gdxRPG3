@@ -60,7 +60,7 @@ import kotlin.concurrent.thread
 class WorldScreen : Screen, ConversationObserver, BattleObserver {
 
     private var previousGameState: GameState = GameState.OFF
-    private var gameState: GameState = GameState.OFF
+    var gameState: GameState = GameState.OFF; private set
 
     private val stage = Stage()
     private val camera = Camera()

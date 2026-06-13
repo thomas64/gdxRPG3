@@ -9,6 +9,7 @@ import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.condition.isTrue
 import nl.t64.cot.constants.Constant
+import nl.t64.cot.constants.GameState
 import nl.t64.cot.screens.world.entity.*
 import nl.t64.cot.screens.world.entity.Direction.*
 import nl.t64.cot.screens.world.entity.EntityState.*
@@ -201,6 +202,9 @@ class Santino : EntitySchedule() {
                     stopTimedBells()
                     return
                 }
+                if (worldScreen.gameState == GameState.PAUSED ||
+                    worldScreen.gameState == GameState.DIALOG
+                ) return
                 playSe(AudioEvent.SE_BELL)
             }
         }
