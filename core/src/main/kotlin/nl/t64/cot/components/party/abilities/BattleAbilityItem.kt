@@ -156,8 +156,9 @@ abstract class BattleAbilityItem(
     fun calculateCriticalHitPercentage(): Int {
         val critSkill: SkillItemId = getCriticalHitSkillId()
         val attackerCriticalHitPercentage: Int = attacker.character.getCalculatedTotalSkillOf(critSkill) * 4
+        val weaponCrit: Int = currentWeapon?.critHit ?: 0
         val weaponTriangle: Int = getAdvantageBonusCrit()
-        return (attackerCriticalHitPercentage + weaponTriangle).coerceAtLeast(0)
+        return (attackerCriticalHitPercentage + weaponCrit + weaponTriangle).coerceAtLeast(0).coerceAtMost(100)
     }
 
     protected open fun getCriticalHitSkillId(): SkillItemId {

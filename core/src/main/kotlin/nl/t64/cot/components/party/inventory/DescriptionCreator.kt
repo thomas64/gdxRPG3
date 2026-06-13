@@ -48,6 +48,7 @@ class DescriptionCreator(
         addMinimals()
         addRange()
         addCalcs()
+        addCrit()
         addStats()
         addSkills()
         addPossibleEmptyLines()
@@ -134,6 +135,17 @@ class DescriptionCreator(
                 }
             }
             descriptionLines.add(createLine(it, value))
+        }
+    }
+
+    private fun addCrit() {
+        if (inventoryItem.group != InventoryGroup.WEAPON) return
+
+        val myCrit: Int = inventoryItem.critHit
+        val otherCrit: Int = otherItem?.critHit ?: 0
+        when {
+            myCrit > 0 -> descriptionLines.add(createLine("Critical Hit", "$myCrit%"))
+            otherCrit > 0 -> descriptionLines.add(createLine("Critical Hit", "0%"))
         }
     }
 

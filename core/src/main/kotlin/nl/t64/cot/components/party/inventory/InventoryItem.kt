@@ -39,6 +39,8 @@ data class InventoryItem(
     private val range: List<Int> = emptyList(),
     @JsonProperty("base_hit")
     private val baseHit: Int = 0,
+    @JsonProperty("crit_hit")
+    val critHit: Int = 0,
     private val damage: Int = 0,
     val protection: Int = 0,
     private val defense: Int = 0,
