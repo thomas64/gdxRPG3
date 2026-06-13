@@ -470,7 +470,8 @@ class BattleScreenBuilder {
         if (buttonTableSelectAttackIndex > this.items.size - 1
             || this.items[buttonTableSelectAttackIndex].toString().startsWith("[GRAY]")
         ) {
-            buttonTableSelectAttackIndex = this.items.size - 1
+            val firstAvailableIndex: Int = this.items.indexOfFirst { !it.toString().startsWith("[GRAY]") }
+            buttonTableSelectAttackIndex = if (firstAvailableIndex == -1) this.items.size - 1 else firstAvailableIndex
         }
         this.selectedIndex = buttonTableSelectAttackIndex
     }
