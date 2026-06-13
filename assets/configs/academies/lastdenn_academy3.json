@@ -1,8 +1,8 @@
 {
-  "druid"     : 5,
-  "healer"    : 5,
-  "mechanic"  : 5,
-  "merchant"  : 5,
-  "thief"     : 5,
-  "troubadour": 5
+  "druid"     : 3,
+  "healer"    : 3,
+  "mechanic"  : 3,
+  "merchant"  : 3,
+  "thief"     : 3,
+  "troubadour": 3
 }

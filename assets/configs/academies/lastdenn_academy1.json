@@ -1,8 +1,8 @@
 {
-  "sword" : 5,
-  "spear" : 5,
-  "axe"   : 5,
-  "dagger": 5,
-  "throw" : 5,
-  "bow"   : 5
+  "sword" : 3,
+  "axe"   : 3,
+  "spear" : 3,
+  "dagger": 3,
+  "throw" : 3,
+  "bow"   : 3
 }

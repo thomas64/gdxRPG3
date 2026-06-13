@@ -1,6 +1,6 @@
 {
-  "shield" : 3,
-  "sword"  : 3,
-  "axe"    : 3,
-  "bow"    : 3
+  "sword" : 2,
+  "axe"   : 2,
+  "bow"   : 2,
+  "shield": 2
 }

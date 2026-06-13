@@ -1,8 +1,8 @@
 {
-  "barbarian": 5,
-  "gambler"  : 5,
-  "ranger"   : 5,
-  "shield"   : 5,
+  "barbarian": 3,
+  "gambler"  : 3,
+  "ranger"   : 3,
+  "shield"   : 3,
   "stealth"  : 5,
-  "warrior"  : 5
+  "warrior"  : 3
 }

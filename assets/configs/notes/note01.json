@@ -96,7 +96,7 @@
   },
   "note_tea"          : {
     "phrases": {
-      "1": {"text": ["Tea is just leaf soup pretending to be sophisticated."], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["A nice cup of tea solves most problems. Sadly, none of yours."], "choices": [{"command": "EXIT"}]}
     }
   },
   "note_armor"        : {
