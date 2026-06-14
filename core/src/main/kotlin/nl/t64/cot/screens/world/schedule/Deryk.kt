@@ -50,7 +50,7 @@ class Deryk : EntitySchedule() {
         SchedulePart("honeywood_inn",         "19:07", "19:10", NORTH, WALKING,  "deryk22", "deryk23", "deryk_one_moment"),
         SchedulePart("honeywood_inn",         "19:10", "19:12", WEST,  WALKING,  "deryk23", "deryk24", "deryk_one_moment"),
         SchedulePart("honeywood_inn",         "19:12", "19:15", NORTH, WALKING,  "deryk24", "deryk25", "deryk_one_moment"),
-        SchedulePart("honeywood_inn",         "19:15", "20:00", NORTH, IDLE,     "deryk25", "deryk25", "deryk_school"),
+        SchedulePart("honeywood_inn",         "19:15", "20:00", NORTH, IDLE,     "deryk25", "deryk25", "quest_honeywood_swordmaster_school"),
         // @formatter:on
     )
 

@@ -1,5 +1,5 @@
 {
-  "quest_royal_sacrifice"          : {
+  "quest_royal_sacrifice"             : {
     "title"     : "Royal sacrifice? [M]",
     "entityId"  : "ardor",
     "summary"   : "You witnessed Grace being sacrificed by the wizard Ardor in an attempt to gain ultimate power from Ulrog, the God of Power. However, something seemed to go wrong, and everything was consumed by flames, including Ardor and yourself.",
@@ -23,7 +23,7 @@
       }
     }
   },
-  "quest_sub_royal_sacrifice"      : {
+  "quest_sub_royal_sacrifice"         : {
     "title"     : "Royal sacrifice?",
     "entityId"  : "ardor",
     "summary"   : "Sub royal sacrifice",
@@ -44,7 +44,7 @@
       }
     }
   },
-  "quest_to_lastdenn_then"         : {
+  "quest_to_lastdenn_then"            : {
     "title"     : "To Lastdenn then [M]",
     "entityId"  : "voice_black",
     "summary"   : "Bathed in light, you heard a voice saying, 'You have been given another chance' and 'You must go to the city of Lastdenn'. Whose voice was that? And should you do as the voice said? And why Lastdenn? And why you?",
@@ -60,7 +60,7 @@
       }
     }
   },
-  "quest_to_lastdenn_then2"        : {
+  "quest_to_lastdenn_then2"           : {
     "title"         : "To Lastdenn then [M]",
     "entityId"      : "ylarus",
     "summary"       : "Adan inexplicably bursts into flames every time Grace is sacrificed by the wizard Ardor. The power of Ylarus, the God of Time, is fading. He gave you the Crystal of Time and sent you to the priest of Lastdenn for answers.",
@@ -83,7 +83,7 @@
       }
     }
   },
-  "quest_helping_horse"            : {
+  "quest_helping_horse"               : {
     "title"     : "A helping horse",
     "entityId"  : "man13",
     "summary"   : "A tree has fallen on the path to Honeywood Farm, blocking the road. Lennor is busy removing the tree. He seeks your assistance in acquiring a strong horse and some tow ropes to speed up the road-clearing process. Otherwise, he will be done by 17:00.",
@@ -113,7 +113,7 @@
       }
     }
   },
-  "quest_get_tow_rope"             : {
+  "quest_get_tow_rope"                : {
     "title"     : "A helping horse",
     "entityId"  : "youngman01",
     "summary"   : "Get tow rope",
@@ -161,7 +161,7 @@
       }
     }
   },
-  "quest_get_horse"                : {
+  "quest_get_horse"                   : {
     "title"     : "A helping horse",
     "entityId"  : "woman03",
     "summary"   : "Get horse",
@@ -202,7 +202,7 @@
       }
     }
   },
-  "quest_get_medicine_academy_shop": {
+  "quest_get_medicine_academy_shop"   : {
     "title"     : "A helping horse",
     "entityId"  : "oldwoman11",
     "summary"   : "Get medicine",
@@ -225,7 +225,7 @@
       }
     }
   },
-  "quest_get_horseshoes"           : {
+  "quest_get_horseshoes"              : {
     "title"     : "A helping horse",
     "entityId"  : "man07",
     "summary"   : "Get horseshoes",
@@ -241,7 +241,7 @@
       }
     }
   },
-  "quest_honeywood_inn_price-1"    : {
+  "quest_honeywood_inn_price-1"       : {
     "title"   : "Pest removal",
     "entityId": "woman02",
     "summary" : "The innkeeper of Honeywood is facing an issue with some unwelcome visitors upstairs. Her guests are reluctant to stay at the inn while these bats are roaming free. She would greatly appreciate your assistance in removing them.",
@@ -257,7 +257,27 @@
       }
     }
   },
-  "quest_honeywood_elder"          : {
+  "quest_honeywood_swordmaster_school": {
+    "title"             : "A special guest",
+    "entityId"          : "woman02",
+    "summary"           : "The innkeeper of Honeywood mentioned that she is expecting a special guest at the inn this evening. She thinks this guest was asked by the village elder to come here. It might be worth dropping by the inn tonight to see who shows up.",
+    "hasCompletionSound": false,
+    "tasks"             : {
+      "1": {
+        "taskPhrase"   : "Visit the Honeywood inn in the evening to find out who the special guest is.",
+        "updatedPhrase": "Meet Swordmaster Deryk, who came to teach the villagers how to defend themselves.",
+        "type"         : "MEET_PERSON",
+        "linkedWith"   : ["2"]
+      },
+      "2": {
+        "taskPhrase"   : "Learn the new self-defense ability Swordmaster Deryk has to teach.",
+        "updatedPhrase": "Learn the Focused Strike ability from Swordmaster Deryk.",
+        "type"         : "RECEIVE_ABILITY",
+        "isHidden"     : true
+      }
+    }
+  },
+  "quest_honeywood_elder"             : {
     "title"     : "To Lastdenn then",
     "entityId"  : "oldman11",
     "summary"   : "Honeywood elder",
@@ -316,7 +336,7 @@
       }
     }
   },
-  "quest_luana_before_10"          : {
+  "quest_luana_before_10"             : {
     "title"     : "To Lastdenn then",
     "entityId"  : "luana",
     "summary"   : "Luana before 10:00",

@@ -88,6 +88,8 @@ class QuestTask(
             QuestTaskType.DELIVER_ITEM_TO_SHOW,
             QuestTaskType.DELIVER_MESSAGE,
             QuestTaskType.KILL,
+            QuestTaskType.MEET_PERSON,
+            QuestTaskType.RECEIVE_ABILITY,
             QuestTaskType.RETURN -> completeTask()
             QuestTaskType.DELIVER_ITEM,
             QuestTaskType.TRADE_ITEMS,

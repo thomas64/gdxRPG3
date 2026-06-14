@@ -19,6 +19,7 @@ data class QuestGraph(
     val shouldHideMessagesAfterAndIncludingFinished: Boolean = false,
     val shouldHideMessagesAfterFinished: Boolean = false,
     val isResettable: Boolean = true,
+    val hasCompletionSound: Boolean = true,
     val linkedWith: List<String> = emptyList(),
     val followUpAccept: String = "",
     val tasks: Map<String, QuestTask> = emptyMap()
@@ -177,6 +178,17 @@ data class QuestGraph(
             .onEach { setTaskComplete(it.key) }
             .map { Loot(it.value.receive.toMutableMap()) }
             .single()
+    }
+
+    fun setMeetPersonTaskComplete() {
+        tasks.filterValues { it.type == QuestTaskType.MEET_PERSON }
+            .filterValues { !it.isComplete }
+            .forEach { setTaskComplete(it.key) }
+    }
+
+    fun completeRemainingTasks() {
+        tasks.filterValues { !it.isComplete }
+            .forEach { setTaskComplete(it.key) }
     }
 
     fun setSayTheRightThingTaskCompleteAndReceivePossibleTarget(): Loot {
@@ -410,8 +422,10 @@ data class QuestGraph(
             && !isHidden
             && !isSubQuest
         ) {
-            stopAllSe()
-            playSe(AudioEvent.SE_REWARD)
+            if (hasCompletionSound) {
+                stopAllSe()
+                playSe(AudioEvent.SE_REWARD)
+            }
             worldScreen.showMessageTooltip("Quest completed:" + System.lineSeparator() + titleWithoutPrefix)
         }
     }

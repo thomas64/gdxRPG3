@@ -1,12 +1,12 @@
 {
-  "quest_mother_fairy"            : {"xp": 30, "content": {"basic_elven_bow": 1, "basic_fairy_sword": 1}},
-  "fairy_academy"                 : {"content": {"wizard": 1}},
-  "fairy_school"                  : {"content": {"magic_shield": 0}},
-  "fairy_shop"                    : {"content": {"fine_fairy_ring": 1}},
-  "mr_isembert_after_11_after_win": {"xp": 10, "content": {"gold": 10, "basic_dagger": 1}},
-  "deryk_school"                  : {"content": {"strike_3f": 99}},
-  "drunken_lastdenn_guard"        : {"content": {"key_lastdenn_jail": 1}},
-  "garrin_in_jail"                : {"content": {"key_garrin": 1}},
-  "santino_counseling"            : {"content": {"ghost_repeller": 1}},
-  "garrin_happy"                  : {"xp": 10}
+  "quest_mother_fairy"                : {"xp": 30, "content": {"basic_elven_bow": 1, "basic_fairy_sword": 1}},
+  "fairy_academy"                     : {"content": {"wizard": 1}},
+  "fairy_school"                      : {"content": {"magic_shield": 0}},
+  "fairy_shop"                        : {"content": {"fine_fairy_ring": 1}},
+  "mr_isembert_after_11_after_win"    : {"xp": 10, "content": {"gold": 10, "basic_dagger": 1}},
+  "quest_honeywood_swordmaster_school": {"content": {"strike_3f": 99}},
+  "drunken_lastdenn_guard"            : {"content": {"key_lastdenn_jail": 1}},
+  "garrin_in_jail"                    : {"content": {"key_garrin": 1}},
+  "santino_counseling"                : {"content": {"ghost_repeller": 1}},
+  "garrin_happy"                      : {"xp": 10}
 }

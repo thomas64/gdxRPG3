@@ -15,6 +15,7 @@ class ConversationChoice(
     val text: String = DEFAULT_ANSWER_TEXT,
     val nextId: String = DEFAULT_NEXT_ID,
     val command: ConversationCommand = DEFAULT_CONVERSATION_COMMAND,
+    val questId: String = "",
     @JsonProperty("condition")
     val conditions: List<String> = emptyList(),
     private val orElseId: String = ""

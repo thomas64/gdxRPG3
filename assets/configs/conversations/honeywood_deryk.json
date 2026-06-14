@@ -1,17 +1,17 @@
 {
-  "deryk_on_the_way"     : {
+  "deryk_on_the_way"                  : {
     "name"   : "Swordmaster Deryk",
     "phrases": {
       "1": {"text": ["What a quaint little village... I think I will like it here."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "deryk_by_the_statue"  : {
+  "deryk_by_the_statue"               : {
     "name"   : "Swordmaster Deryk",
     "phrases": {
       "1": {"text": ["This statue is quite impressive. I wonder who it represents."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "deryk_and_grahan_meet": {
+  "deryk_and_grahan_meet"             : {
     "phrases": {
       "1": {"face": "deryk", "name": "Swordmaster Deryk", "text": ["Good evening, sir. I am Swordmaster Deryk, at your service. I have come to offer my skills to the village."]},
       "2": {"face": "oldman11", "name": "Village elder Grahan", "text": ["Ah, Swordmaster Deryk, welcome to our village. We could use your expertise."]},
@@ -21,13 +21,13 @@
       "6": {"face": "oldman11", "name": "Village elder Grahan", "text": ["Thank you, Deryk. I am sure the villagers will benefit greatly from your knowledge."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "deryk_one_moment"     : {
+  "deryk_one_moment"                  : {
     "name"   : "Swordmaster Deryk",
     "phrases": {
       "1": {"text": ["One moment, please. I'd like to settle in first."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "deryk_checking_in"    : {
+  "deryk_checking_in"                 : {
     "phrases": {
       "1": {"face": "deryk", "name": "Swordmaster Deryk", "text": ["Good evening, madam innkeeper. I am Swordmaster Deryk. I have a reservation for a room and I would like to check in."]},
       "2": {"face": "woman02", "name": "Innkeeper", "text": ["Good evening, Swordmaster Deryk. Welcome to our inn. I have your room ready."]},
@@ -37,10 +37,10 @@
       "6": {"face": "woman02", "name": "Innkeeper", "text": ["That sounds wonderful. The villagers will surely benefit from your expertise."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "deryk_school"         : {
+  "quest_honeywood_swordmaster_school": {
     "name"   : "Swordmaster Deryk",
     "phrases": {
-      "1": {"text": ["I will be teaching the villagers in self-defense, starting tomorrow morning. If you wish to join, please come to the village square at 09:00."]},
+      "1": {"text": ["I will be teaching the villagers in self-defense, starting tomorrow morning. If you wish to join, please come to the village square at 09:00."], "choices": [{"command": "MEET_QUEST_PERSON", "nextId": "2"}]},
       "2": {
         "choices": [
           {"condition": ["diplomat2"], "text": "[Diplomat 2] *Request to be taught right now.*", "nextId": "3"},
@@ -50,7 +50,7 @@
       "3": {"text": ["Ah, I see you are eager to learn. Very well, I will teach everyone in your party right now."]},
       "4": {"text": ["{SPEED=0.2} . . . . . . . . ."], "choices": [{"command": "RECEIVE_SPELLS", "nextId": "5"}]},
       "5": {"text": ["Now everyone in your party can use the ability {COLOR=BLUE}Focused Strike{COLOR=BLACK} in battle. It's variation of the regular Strike ability."]},
-      "6": {"text": ["If you want me to teach Focused Strike to other party members, please bring them here. I will teach them as well."], "choices": [{"command": "EXIT", "nextId": "6"}]}
+      "6": {"text": ["If you want me to teach Focused Strike to other party members, please bring them here. I will teach them as well."], "choices": [{"command": "COMPLETE_QUEST", "nextId": "6"}]}
     }
   }
 }

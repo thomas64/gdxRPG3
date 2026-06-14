@@ -21,7 +21,7 @@ class AbilityContainer() {
     }
 
     fun getAll(): List<AbilityItem> {
-        return abilities.map { AbilityDatabase.createAbilityItem(it) }
+        return abilities.map { AbilityDatabase.createAbilityItem(it) }.sortedBy { it.id }
     }
 
     fun add(abilityItemId: AbilityItemId) {
