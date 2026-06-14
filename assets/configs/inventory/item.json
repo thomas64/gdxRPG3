@@ -82,7 +82,7 @@
     "group"       : "ITEM",
     "sort"        : 70155,
     "is_unique"   : true,
-    "description" : ["A holy item from Father Santino that makes ghosts interactable.", "It doesn't work on possessed people though."],
+    "description" : ["A holy staff from Father Santino that makes ghosts interactable.", "It doesn't work on possessed people though."],
     "is_droppable": false,
     "replaces"    : ["letter_to_santino"]
   }

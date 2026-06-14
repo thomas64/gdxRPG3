@@ -19,6 +19,7 @@ import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.profileManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
+import nl.t64.cot.audio.stopAllBgm
 import nl.t64.cot.components.conversation.ConversationChoice
 import nl.t64.cot.components.conversation.ConversationCommand
 import nl.t64.cot.components.conversation.ConversationGraph
@@ -369,6 +370,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             Utils.runWithDelay(1f) {
                 gameData.clock.setTimeOfDay(time)
                 playSe(AudioEvent.SE_MAGIC_BANG)
+                stopAllBgm()
             }
         } else if (conversationId == "guarding_till_1500") {
             Utils.runWithDelay(1f) {

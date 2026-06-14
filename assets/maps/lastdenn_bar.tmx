@@ -101,7 +101,7 @@
   <object id="52" name="note_not_yours" x="156" y="252" width="24" height="12"/>
  </objectgroup>
  <objectgroup color="#aa55ff" id="21" name="hero">
-  <object id="47" name="valter" x="48" y="816" width="48" height="24">
+  <object id="47" name="valter" type="nb" x="48" y="816" width="48" height="24">
    <properties>
     <property name="conversation" value="valter_join"/>
     <property name="direction" value="west"/>
@@ -128,7 +128,7 @@
   </object>
   <object id="45" name="man06" type="inv" x="624" y="288" width="48" height="12">
    <properties>
-    <property name="conversation" value="lastdenn_bar_keeper"/>
+    <property name="conversation" value="lastdenn_barkeeper_shop"/>
    </properties>
   </object>
   <object id="46" name="sailor01" x="432" y="210" width="48" height="24">

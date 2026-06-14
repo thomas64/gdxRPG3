@@ -169,7 +169,7 @@
         "choices": [
           {"condition": ["i_cycle_==_1"], "text": "*Ask Malina if she's seen Grace this morning.*", "nextId": "31"},
           {"text": "*Ask about her dull and secluded life.*", "nextId": "10"},
-          {"text": "*Inquire about her people skills.* (Visit academy)", "command": "LOAD_ACADEMY"},
+          {"text": "*Inquire about her people skills.* [BLUE](Visit academy)", "command": "LOAD_ACADEMY"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
@@ -510,8 +510,8 @@
       "2"   : {
         "choices": [
           {"condition": ["i_c_!=_f_q_this", "i_rc_>=_a_q_quest_get_horse", "_tn_7_q_quest_get_horse"], "text": "*Ask for help with Angie's ailing horse.*", "nextId": "3"},
-          {"text": "*Inquire about her potion brewing skill.* (Visit academy)", "command": "LOAD_ACADEMY"},
-          {"text": "*Request to view her potion stock.* (Visit shop)", "command": "LOAD_SHOP"},
+          {"text": "*Inquire about her potion brewing skill.* [BLUE](Visit academy)", "command": "LOAD_ACADEMY"},
+          {"text": "*Request to view her potion stock.* [BLUE](Visit shop)", "command": "LOAD_SHOP"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
@@ -530,7 +530,7 @@
       "21"  : {
         "choices": [
           {"condition": ["_n_6_>=_item_herb", "_n_1_>=_item_blue_jelly"], "text": "[6 Herbs, 1 Blue Jelly] *Deliver the gathered ingredients.*", "command": "PROVIDE_QUEST_ITEM", "nextId": "30"},
-          {"text": "*Inquire about her potion brewing skill.* (Visit academy)", "command": "LOAD_ACADEMY", "nextId": "20"},
+          {"text": "*Inquire about her potion brewing skill.* [BLUE](Visit academy)", "command": "LOAD_ACADEMY", "nextId": "20"},
           {"text": "*Inform her that you're working on it. Take your leave.*", "command": "EXIT", "nextId": "20"}
         ]
       },

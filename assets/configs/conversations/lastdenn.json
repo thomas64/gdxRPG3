@@ -219,12 +219,13 @@
       "1400": {"text": ["Move along, boy. I have no more use for you."], "choices": [{"command": "AUTO_SAVE", "nextId": "1400"}]}
     }
   },
-  "lastdenn_bar_keeper"     : {
+  "lastdenn_barkeeper_shop" : {
     "name"   : "Barkeeper",
     "phrases": {
       "1" : {"text": ["What'll it be."]},
       "2" : {
         "choices": [
+          {"text": "*Have a drink.* [BLUE](Visit shop)", "nextId": "5"},
           {"text": "*Ask about the city gate rules.*", "nextId": "10"},
           {"condition": ["i_!is_garrin_possessed"], "text": "*Ask if anything interesting has happened lately.*", "nextId": "20"},
           {"condition": ["i_is_garrin_possessed"], "text": "*Ask if anything interesting has happened lately.*", "nextId": "40"},
@@ -232,6 +233,7 @@
           {"text": "*Nod and take your leave.*", "command": "EXIT"}
         ]
       },
+      "5" : {"text": ["You look like you need stronger stuff than a glass of ale."], "choices": [{"command": "LOAD_SHOP"}]},
       "10": {"text": ["Mayor's orders. People can enter and leave only after 15:00."]},
       "11": {"text": ["Before that, the gate guards check everyone and turn most people around."]},
       "12": {"text": ["He calls it order. Everyone else calls it trouble."], "choices": [{"nextId": "2"}]},

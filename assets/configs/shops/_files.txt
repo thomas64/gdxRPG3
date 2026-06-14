@@ -4,3 +4,4 @@ equipshop_lastdenn
 quest_get_medicine_academy_shop
 resourceshop_honeywood
 resourceshop_lastdenn
+lastdenn_barkeeper_shop

@@ -6,7 +6,19 @@
       "2": {"text": ["We moved here recently because I don't believe in that kind of thing!"]},
       "3": {"text": ["Even so, I went to the priest once to talk about it. I'd heard he had something that protects against ghosts. But he said it wasn't necessary."]},
       "4": {"text": ["I guess the priest doesn't believe in ghosts either."]},
-      "5": {"text": ["My son Paton, however, is acting a little strange this morning."], "choices": [{"command": "EXIT"}]}
+      "5": {
+        "text": ["My son Paton, however, is acting a little strange this morning."], "choices": [
+          {"condition": ["i_n_1_>=_item_ghost_repeller"], "text": "->", "nextId": "6"},
+          {"condition": ["i_n_0_==_item_ghost_repeller"], "text": "->", "command": "EXIT"}
+        ]
+      },
+      "6": {
+        "choices": [
+          {"text": "[Ghost repeller] *Tell him Father Santino gave it to you.*", "nextId": "7"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "7": {"text": ["Ha ha! Now if you run into any ghosts, you can destroy them in the name of Evdos! Ha ha!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "paton_hiding"               : {
@@ -26,7 +38,7 @@
     "name"   : "Ghost",
     "phrases": {
       "1" : {
-        "text": ["huuuuuuuuuuuuuuuuuu reveeenge"], "choices": [
+        "text": ["reveeenge iii waaant bodyyy"], "choices": [
           {"condition": ["i_n_0_==_item_ghost_repeller"], "text": "->", "command": "EXIT"},
           {"condition": ["i_n_1_>=_item_ghost_repeller"], "text": "->", "nextId": "4"}
         ]
@@ -37,26 +49,26 @@
           {"text": "*See how this plays out. Do nothing.*", "command": "EXIT"}
         ]
       },
-      "10": {"text": ["! ! ! ! ! ! ! ! !"], "choices": [{"command": "RELOAD_NPCS_1101"}]}
+      "10": {"text": ["nooo evdooos whyyy ! ! ! nooo ! ! !"], "choices": [{"command": "RELOAD_NPCS_1101"}]}
     }
   },
   "ghost_entering"             : {
     "phrases": {
-      "1": {"face": "ghost1", "name": "Ghost", "text": ["huuuuuuuuuuuuuuuuuu reveeenge"]},
+      "1": {"face": "ghost1", "name": "Ghost", "text": ["reveeenge iii waaant bodyyy"]},
       "2": {"face": "boy17", "name": "Paton", "text": ["Daddy! Aaaaaah!!"]},
       "3": {"face": "man12", "name": "Garrin", "text": ["Paton! What's wrong?"], "choices": [{"command": "EXIT"}]}
     }
   },
   "paton_hiding_behind_garrin" : {
     "phrases": {
-      "1": {"face": "ghost1", "name": "Ghost", "text": ["huuuuuuuuuuuuuuuuuu reveeenge"]},
+      "1": {"face": "ghost1", "name": "Ghost", "text": ["reveeenge iii waaant bodyyy"]},
       "2": {"face": "boy17", "name": "Paton", "text": ["Aaaaaah!!"]},
       "3": {"face": "man12", "name": "Garrin", "text": ["Paton, stay behind me!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "paton_hiding_behind_garrin2": {
     "phrases": {
-      "1" : {"face": "ghost1", "name": "Ghost", "text": ["huuuuuuuuuuuuuuuuuu reveeenge"]},
+      "1" : {"face": "ghost1", "name": "Ghost", "text": ["reveeenge iii waaant bodyyy"]},
       "2" : {"face": "boy17", "name": "Paton", "text": ["Aaaaaah!!"]},
       "3" : {
         "face": "man12", "name": "Garrin", "text": ["Paton, stay behind me!"], "choices": [
@@ -70,19 +82,19 @@
           {"text": "*See how this plays out. Do nothing.*", "command": "EXIT"}
         ]
       },
-      "10": {"face": "ghost1", "name": "Ghost", "text": ["! ! ! ! ! ! ! ! !"], "choices": [{"command": "RELOAD_NPCS_1101"}]}
+      "10": {"face": "ghost1", "name": "Ghost", "text": ["nooo evdooos whyyy ! ! ! nooo ! ! !"], "choices": [{"command": "RELOAD_NPCS_1101"}]}
     }
   },
   "ghost_scaring"              : {
     "phrases": {
-      "1": {"face": "ghost1", "name": "Ghost", "text": ["huuuuuuuuuuuuuuuuuu reveeenge"]},
+      "1": {"face": "ghost1", "name": "Ghost", "text": ["reveeenge iii waaant bodyyy"]},
       "2": {"face": "boy17", "name": "Paton", "text": ["Aaaaaah!!"]},
       "3": {"face": "man12", "name": "Garrin", "text": [". . ."], "choices": [{"command": "EXIT"}]}
     }
   },
   "ghost_scaring2"             : {
     "phrases": {
-      "1" : {"face": "ghost1", "name": "Ghost", "text": ["huuuuuuuuuuuuuuuuuu reveeenge"]},
+      "1" : {"face": "ghost1", "name": "Ghost", "text": ["reveeenge iii waaant bodyyy"]},
       "2" : {"face": "boy17", "name": "Paton", "text": ["Aaaaaah!!"]},
       "3" : {
         "face": "man12", "name": "Garrin", "text": [". . ."], "choices": [
@@ -96,19 +108,19 @@
           {"text": "*See how this plays out. Do nothing.*", "command": "EXIT"}
         ]
       },
-      "10": {"face": "ghost1", "name": "Ghost", "text": ["! ! ! ! ! ! ! ! !"], "choices": [{"command": "RELOAD_NPCS_1101"}]}
+      "10": {"face": "ghost1", "name": "Ghost", "text": ["nooo evdooos whyyy ! ! ! nooo ! ! !"], "choices": [{"command": "RELOAD_NPCS_1101"}]}
     }
   },
   "garrin_takes_a_stand"       : {
     "phrases": {
       "1": {"face": "man12", "name": "Garrin", "text": ["That's it! I won't let you hurt my son!"]},
-      "2": {"face": "ghost1", "name": "Ghost", "text": ["huuuuuuuuuuuuuuuuuu reveeenge"], "choices": [{"command": "EXIT"}]}
+      "2": {"face": "ghost1", "name": "Ghost", "text": ["reveeenge iii waaant bodyyy"], "choices": [{"command": "EXIT"}]}
     }
   },
   "garrin_steps_back"          : {
     "phrases": {
       "1": {"face": "man12", "name": "Garrin", "text": ["Y-you... you stay away now!"]},
-      "2": {"face": "ghost1", "name": "Ghost", "text": ["huuuuuuuuuuuuuuuuuu reveeenge"], "choices": [{"command": "EXIT"}]}
+      "2": {"face": "ghost1", "name": "Ghost", "text": ["reveeenge iii waaant bodyyy"], "choices": [{"command": "EXIT"}]}
     }
   },
   "paton_shouts_nooo"          : {
@@ -126,9 +138,9 @@
   },
   "ghost_has_garrin"           : {
     "phrases": {
-      "1": {"face": "ghost1", "name": "Garrin", "text": ["goooo awaaay reveeenge"]},
+      "1": {"face": "ghost1", "name": "Garrin", "text": ["gooo awaaay iii waaant reveeenge"]},
       "2": {"face": "boy17", "name": "Paton", "text": ["What have you done to my daddy?!"]},
-      "3": {"face": "ghost1", "name": "Garrin", "text": ["goooo awaaay reveeenge"]},
+      "3": {"face": "ghost1", "name": "Garrin", "text": ["gooo awaaay iii waaant reveeenge"]},
       "4": {"face": "boy17", "name": "Paton", "text": ["Daddy, I'm scared!"], "choices": [{"command": "EXIT"}]}
     }
   },
@@ -148,13 +160,13 @@
   "garrin_possessed_go_away"   : {
     "name"   : "Garrin",
     "phrases": {
-      "1": {"face": "ghost1", "text": ["goooo awaaay reveeenge"], "choices": [{"command": "EXIT"}]}
+      "1": {"face": "ghost1", "text": ["iii waaant reveeenge"], "choices": [{"command": "EXIT"}]}
     }
   },
   "garrin_happy"               : {
     "name"   : "Garrin",
     "phrases": {
-      "1": {"text": ["I'm so glad that you came just in time to save us!"]},
+      "1": {"text": ["I'm so glad that you came just in time to save us!"], "choices": [{"command": "RECEIVE_XP", "nextId": "2"}]},
       "2": {"text": ["So in the end, Father Santino handed over that ghost protector after all!"]},
       "3": {"text": ["Thank you so much for helping us!"], "choices": [{"command": "EXIT"}]}
     }

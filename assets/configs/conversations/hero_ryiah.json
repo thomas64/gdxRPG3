@@ -11,7 +11,7 @@
       "6" : {
         "choices": [
           {"text": "*Ask what she needs.*", "command": "ACCEPT_QUEST", "nextId": "10"},
-          {"text": "*No illegal prison break for you. Back away slowly.*", "command": "AUTO_SAVE"}
+          {"text": "*No illegal prison break for you. Take your leave.*", "command": "AUTO_SAVE"}
         ]
       },
       "10": {"text": ["A guard is off duty somewhere in the bar."]},
