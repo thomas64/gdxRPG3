@@ -28,6 +28,7 @@ class GraphicsPlayer : GraphicsComponent() {
         if (event is LoadEntityEvent) {
             direction = event.direction!!
             setEventPosition(event.position)
+            refreshCurrentFrame() // show the spawn direction now, even while the world is frozen
         }
         if (event is StateEvent) {
             state = event.state

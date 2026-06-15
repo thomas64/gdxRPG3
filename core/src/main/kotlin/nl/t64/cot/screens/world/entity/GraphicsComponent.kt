@@ -31,6 +31,11 @@ abstract class GraphicsComponent : Component {
         // empty
     }
 
+    /** Recomputes [currentFrame] right away (e.g. after a direction change while the world is frozen). */
+    protected fun refreshCurrentFrame() {
+        if (::state.isInitialized && ::direction.isInitialized) setFrame(0f)
+    }
+
     open fun setFrame(dt: Float) {
         when (state) {
             EntityState.INVISIBLE -> return

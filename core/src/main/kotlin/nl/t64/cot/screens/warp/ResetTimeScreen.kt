@@ -1,6 +1,5 @@
 package nl.t64.cot.screens.warp
 
-import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.mapManager
@@ -12,7 +11,6 @@ import nl.t64.cot.components.portal.Portal
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.inventory.InventoryScreen
-import nl.t64.cot.sfx.TransitionPurpose
 
 
 class ResetTimeScreen : PortalSelectionScreen("   Reset and return to") {
@@ -30,9 +28,17 @@ class ResetTimeScreen : PortalSelectionScreen("   Reset and return to") {
         if (portalListTable.portalList.selectedIndex == -1) return
 
         val parchment = prepareBackgroundForFade()
+        val inventorySnapshot = stage.actors.first()
 
+        // put the inventory's own grey blurred world background underneath, so the inventory
+        // and the parchment can fade out together onto it - exactly like closing the inventory -
+        // instead of the inventory screen popping straight to the world.
+        val inventoryScreen = screenManager.getScreen(ScreenType.INVENTORY) as InventoryScreen
+        inventoryScreen.createBlurredBackgroundCopy()?.let { stage.root.addActorAt(0, it) }
+
+        playSe(AudioEvent.SE_SCROLL)
+        inventorySnapshot.addAction(Actions.fadeOut(Constant.FADE_DURATION))
         parchment.addAction(Actions.sequence(
-            Actions.run { playSe(AudioEvent.SE_SCROLL) },
             Actions.fadeOut(Constant.FADE_DURATION),
             Actions.run {
                 val selectedPortal = portalListTable.portalList.selected
@@ -56,10 +62,7 @@ class ResetTimeScreen : PortalSelectionScreen("   Reset and return to") {
             mapManager.currentMap.setPlayerSpawnLocationWithId(warpToMapName)
             worldScreen.changeMap(mapManager.currentMap)
         }
-        worldScreen.fadeOut(transitionColor = Color.GRAY,
-                            duration = 1f,
-                            transitionPurpose = TransitionPurpose.MAP_CHANGE,
-                            actionAfterFade = actionAfterFade)
+        worldScreen.warpReset(actionAfterFade)
     }
 
 }

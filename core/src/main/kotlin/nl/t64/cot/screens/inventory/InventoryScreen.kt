@@ -136,6 +136,9 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
         return inventoryUI
     }
 
+    /** A fresh actor sharing the grey, blurred world screenshot this inventory faded in over. */
+    fun createBlurredBackgroundCopy(): Image? = savedBackground?.first?.drawable?.let { Image(it) }
+
     private fun possibleSetBackground() {
         if (!isBackgroundSet) {
             val (screenshot, parchment) = savedBackground

@@ -7,6 +7,8 @@ import com.badlogic.gdx.Screen
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
+import com.badlogic.gdx.math.Vector2
+import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import nl.t64.cot.Utils
@@ -51,6 +53,8 @@ import nl.t64.cot.screens.world.ui.ButtonBox
 import nl.t64.cot.screens.world.ui.ClockBox
 import nl.t64.cot.screens.world.ui.MovementBox
 import nl.t64.cot.screens.world.ui.PartyWindow
+import nl.t64.cot.sfx.TimeWarpEffect
+import nl.t64.cot.sfx.Transition
 import nl.t64.cot.sfx.TransitionImage
 import nl.t64.cot.sfx.TransitionPurpose
 import java.util.*
@@ -122,7 +126,19 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
                                               Actions.removeActor()))
     }
 
+    fun warpReset(actionAfterFade: () -> Unit) {
+        render(0f) // draw the world so the effect can snapshot it
+        val projected = camera.project(Vector3(player.position.x + Constant.HALF_TILE_SIZE,
+                                               player.position.y + Constant.HALF_TILE_SIZE,
+                                               0f))
+        val center = Vector2(projected.x / Gdx.graphics.width, projected.y / Gdx.graphics.height)
+        val effect = TimeWarpEffect(center.x, center.y)
+        stage.addActor(effect)
+        effect.play(actionAfterFade)
+    }
+
     fun changeMap(currentMap: GameMap) {
+        visibleScheduledEntities.clear()
         worldRenderer.map = currentMap.tiledMap
         player.send(LoadEntityEvent(currentMap.playerSpawnDirection, currentMap.playerSpawnLocation))
         mapManager.updateBgsVolumes(player.position)
@@ -506,13 +522,13 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     }
 
     private val isInMapTransition: Boolean
-        get() = isInTransition && (stage.actors.peek() as TransitionImage).purpose == TransitionPurpose.MAP_CHANGE
+        get() = isInTransition && (stage.actors.peek() as Transition).purpose == TransitionPurpose.MAP_CHANGE
     private val isInUpdateTransition: Boolean
-        get() = isInTransition && (stage.actors.peek() as TransitionImage).purpose == TransitionPurpose.UPDATE
+        get() = isInTransition && (stage.actors.peek() as Transition).purpose == TransitionPurpose.UPDATE
     private val isJustInTransition: Boolean
-        get() = isInTransition && (stage.actors.peek() as TransitionImage).purpose == TransitionPurpose.JUST_FADE
+        get() = isInTransition && (stage.actors.peek() as Transition).purpose == TransitionPurpose.JUST_FADE
     private val isInTransition: Boolean
-        get() = stage.actors.notEmpty() && gameState != GameState.DIALOG && stage.actors.peek() is TransitionImage
+        get() = stage.actors.notEmpty() && gameState != GameState.DIALOG && stage.actors.peek() is Transition
 
     override fun resize(width: Int, height: Int) {
         // empty
