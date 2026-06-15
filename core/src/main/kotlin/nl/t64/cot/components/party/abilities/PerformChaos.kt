@@ -18,8 +18,8 @@ class PerformChaos(
             $name
 
             Effect:
-            Penalty to hit to all enemies, as long as you are performing.
-            (Exact penalty depends on their own chance to hit.)
+            Penalty to hit to all enemies,
+            as long as you are performing.
         """.trimIndent().trimMargin()
     }
 

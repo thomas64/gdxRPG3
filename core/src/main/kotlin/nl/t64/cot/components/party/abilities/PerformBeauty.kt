@@ -18,8 +18,8 @@ class PerformBeauty(
             $name
 
             Effect:
-            Bonus to hit for all allies, as long as you are performing.
-            (Exact bonus depends on their own chance to hit.)
+            Bonus to hit for all allies,
+            as long as you are performing.
         """.trimIndent().trimMargin()
     }
 

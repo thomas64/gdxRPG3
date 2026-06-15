@@ -29,7 +29,7 @@ class Participant(
     private var amountOfTurns: Int = 0
 
     var performingType: AbilityItemId? = null
-    val isPerforming: Boolean = performingType != null  // todo, stuk vanwege val zonder getter?
+    val isPerforming: Boolean get() = performingType != null
 
 
     fun updateTurnCounter() {
