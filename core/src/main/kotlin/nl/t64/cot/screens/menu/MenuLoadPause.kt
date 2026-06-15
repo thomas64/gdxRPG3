@@ -81,9 +81,14 @@ class MenuLoadPause : MenuScreen() {
         setCurrentTextButtonToSelected()
 
         thread {
-            loadProfiles()
-            applyAllListeners()
-            isLoaded = true
+            val loadedProfiles = profileManager.getVisualProfileArrayForLoadedProfile()
+            Gdx.app.postRunnable {
+                profiles = loadedProfiles
+                listItems.setItems(profiles)
+                listItems.selectedIndex = 0
+                applyAllListeners()
+                isLoaded = true
+            }
         }
     }
 
@@ -137,12 +142,6 @@ class MenuLoadPause : MenuScreen() {
             gameData.cutscenes.setPlayedEver(ScreenType.SCENE_INTRO)
             screenManager.setScreen(ScreenType.SCENE_INTRO)
         }
-    }
-
-    private fun loadProfiles() {
-        profiles = profileManager.getVisualProfileArrayForLoadedProfile()
-        listItems.setItems(profiles)
-        listItems.selectedIndex = 0
     }
 
     private fun createTables() {

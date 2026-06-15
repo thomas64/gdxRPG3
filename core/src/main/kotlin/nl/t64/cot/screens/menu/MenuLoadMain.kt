@@ -181,11 +181,14 @@ class MenuLoadMain : MenuScreen() {
     }
 
     private fun loadProfiles() {
-        profiles = profileManager.getVisualProfileArray()
-        listItems.setItems(profiles)
-        if (areAllProfilesEmpty()) selectedListIndex = 0
-        listItems.selectedIndex = selectedListIndex
-        isLoaded = true
+        val loadedProfiles = profileManager.getVisualProfileArray()
+        Gdx.app.postRunnable {
+            profiles = loadedProfiles
+            listItems.setItems(profiles)
+            if (areAllProfilesEmpty()) selectedListIndex = 0
+            listItems.selectedIndex = selectedListIndex
+            isLoaded = true
+        }
     }
 
     private fun areAllProfilesEmpty(): Boolean {
