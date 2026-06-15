@@ -113,17 +113,32 @@ class BattleField(
             .filter { it.isEnemyInRangeOfActingHero() }
     }
 
-    fun getRangeOfActingHero(): List<Int> {
-        return getRange(0, -1)
+    fun getTargetableEnemiesInRangeOfActingHero(maxRange: Int): List<Participant> {
+        val range: List<Int> = getRange(0, -1, (1..maxRange).toList())
+        return enemySpaces.filterNotNull()
+            .filter { enemySpaces.indexOf(it) in range }
     }
 
-    private fun getRangeOfActingEnemy(): List<Int> {
-        return getRange(1, 0)
+    fun getTargetableAlliesInRangeOfActingHero(range: Int): List<Participant> {
+        val casterIndex: Int = getSpaceIndexOfCurrentParticipant()
+        return heroSpaces.filterNotNull()
+            .filter { it != currentParticipant.invoke() }
+            .filter { abs(heroSpaces.indexOf(it) - casterIndex) <= range }
     }
 
-    private fun getRange(offsetLeft: Int, offSetRight: Int): List<Int> {
+    fun getWeaponRangeOfActingHero(): List<Int> {
+        val ranges: List<Int> = currentParticipant.invoke().getWeaponRanges()
+        return getRange(0, -1, ranges)
+    }
+
+    private fun getWeaponRangeOfActingEnemy(): List<Int> {
+        val ranges: List<Int> = currentParticipant.invoke().getWeaponRanges()
+        return getRange(1, 0, ranges)
+    }
+
+    private fun getRange(offsetLeft: Int, offSetRight: Int, ranges: List<Int>): List<Int> {
         val currentIndex: Int = getSpaceIndexOfCurrentParticipant()
-        return currentParticipant.invoke().getWeaponRanges()
+        return ranges
             .map { listOf(currentIndex - it + offsetLeft, currentIndex + it + offSetRight) }
             .flatten()
             .filter { it in 0..BATTLE_FIELD_SIZE }
@@ -142,7 +157,7 @@ class BattleField(
         }
 
         // if highest prio is already in range, don't move enemy.
-        val actingEnemyRangeIndices: List<Int> = getRangeOfActingEnemy()
+        val actingEnemyRangeIndices: List<Int> = getWeaponRangeOfActingEnemy()
         val highestPrioHero: Int = heroIndicesByPrio.first()
         if (highestPrioHero in actingEnemyRangeIndices) {
             return heroSpaces[highestPrioHero]
@@ -155,8 +170,8 @@ class BattleField(
         } ?: return null // or don't move enemy if no such space is available.
 
         return heroIndicesByPrio
-            .firstOrNull { it in getRangeOfActingEnemy() }  // take the first hero that is now in range.
-            ?.let { heroSpaces[it] }                        // or null when the AP was not enough to reach the hero.
+            .firstOrNull { it in getWeaponRangeOfActingEnemy() }    // take the first hero that is now in range.
+            ?.let { heroSpaces[it] }                                // or null when the AP was not enough to reach the hero.
     }
 
     private fun getOccupiedHeroIndicesSortedByPriorityForActingEnemy(): List<Int> {
@@ -337,7 +352,7 @@ class BattleField(
 
     private fun Participant.isEnemyInRangeOfActingHero(): Boolean {
         val enemySpace: Int = enemySpaces.indexOf(this)
-        val range: List<Int> = getRangeOfActingHero()
+        val range: List<Int> = getWeaponRangeOfActingHero()
         return enemySpace in range
     }
 

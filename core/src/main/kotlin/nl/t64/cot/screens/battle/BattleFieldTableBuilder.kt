@@ -61,7 +61,7 @@ class BattleFieldTableBuilder {
     }
 
     private fun createEnemyRowWithTargetFields(): Table {
-        val ranges: List<Int> = battleField.getRangeOfActingHero()
+        val ranges: List<Int> = battleField.getWeaponRangeOfActingHero()
 
         return Table().apply {
             defaults().width(60f).height(60f).center()

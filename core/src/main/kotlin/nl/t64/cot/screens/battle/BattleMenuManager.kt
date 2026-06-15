@@ -299,9 +299,11 @@ class BattleMenuManager(
                 Target.SELF -> TODO()
                 Target.SELF_OR_ALLY -> turnManager.getOnlyHeroes().map { it.character.name }
                 Target.ALLY_ANYWHERE -> turnManager.getOnlyAllies().map { it.character.name }
+                Target.ALLY_RANGE_3 -> battleField.getTargetableAlliesInRangeOfActingHero(3).map { it.character.name }
                 Target.ALLY_NEAR -> battleField.getTargetableAlliesNextToActingHero().map { it.character.name }
                 Target.ALL_ALLIES -> listOf("All allies")
                 Target.ENEMY_ANYWHERE -> turnManager.getOnlyEnemies().map { it.character.name }
+                Target.ENEMY_RANGE_3 -> battleField.getTargetableEnemiesInRangeOfActingHero(3).map { it.character.name }
                 Target.ENEMY -> battleField.getTargetableEnemiesForActingHero().map { it.character.name }
                 Target.ALL_ENEMIES -> listOf("All enemies")
                 Target.AREA -> TODO()

@@ -63,8 +63,17 @@ data class AbilityItem(
             + createRequiredSkill(shouldShowMinSkill)
             + createRequiredWeapon()
             + createRequiredResource()
+            + createRange()
             + createApCost()
             + createSpCost())
+    }
+
+    private fun createRange(): String {
+        return when (target) {
+            Target.ALLY_RANGE_3,
+            Target.ENEMY_RANGE_3 -> System.lineSeparator() + "Range: 1-3"
+            else -> ""
+        }
     }
 
     private fun createRequiredSkill(shouldShowMinSkill: Boolean): String {
