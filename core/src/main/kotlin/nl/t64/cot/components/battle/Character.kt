@@ -13,6 +13,7 @@ import nl.t64.cot.components.party.stats.StatContainer
 import nl.t64.cot.components.party.stats.StatItem
 import nl.t64.cot.components.party.stats.StatItemId
 import kotlin.math.roundToInt
+import kotlin.math.sqrt
 import kotlin.random.Random
 
 
@@ -77,6 +78,37 @@ abstract class Character(
 
     fun getAllAbilities(): List<AbilityItem> {
         return abilities.getAll()
+    }
+
+    /**
+     * Een ruwe inschatting van de gevechtskracht: overlevingsvermogen × offense-over-tijd.
+     * Bewust gebaseerd op de afgeleide gevechtswaarden i.p.v. de bestede xp, zodat "dump stats"
+     * die een vijand niet gebruikt (bv. een lage intelligence bij een melee-vechter) niet meetellen.
+     *
+     * De offense telt niet alleen damage per beurt, maar ook hoe vaak een character aan de beurt komt:
+     * speed bepaalt de beurt-frequentie (zie Participant.updateTurnCounter), dus een snelle vijand met
+     * lage stats (zoals de green imp) deelt veel meer schade uit dan z'n losse stats doen vermoeden.
+     */
+    fun getCombatPower(): Float {
+        val effectiveHp: Float = maximumHp.coerceAtLeast(1) * getSurvivabilityMultiplier()
+        val damage: Int = getCalculatedTotalDamage().coerceAtLeast(1)
+        val hitChance: Float = getCalculatedTotalHit().coerceIn(1, 100) / 100f
+        val actionsPerTurn: Int = getCalculatedActionPoints().coerceAtLeast(1)
+        val turnFrequency: Int = 10 + getCalculatedTotalStatOf(StatItemId.SPEED)
+        val offenseOverTime: Float = damage * hitChance * actionsPerTurn * turnFrequency
+        return sqrt(effectiveHp * offenseOverTime)
+    }
+
+    /**
+     * Hoeveel langer een character het uithoudt door bescherming. Alle drie de bronnen zijn percentages:
+     * fysieke en magische bescherming zijn alternatieve damage-types, dus die middelen we; defense is een
+     * blokkans die daar als aparte laag bovenop komt.
+     */
+    private fun getSurvivabilityMultiplier(): Float {
+        val averageProtection: Float =
+            (getCalculatedTotalProtection() + getCalculatedTotalMagicProtection()).coerceAtLeast(0) / 2f
+        val blockChance: Int = getCalculatedTotalDefense().coerceIn(0, 100)
+        return (1f + averageProtection / 100f) * (1f + blockChance / 100f)
     }
 
     fun getCalculatedTotalStatOf(statItemId: StatItemId): Int {
