@@ -56,26 +56,14 @@
   "dismiss_reignald"       : {
     "name"   : "Reignald",
     "phrases": {
-      "1" : {"text": ["You are relieving me from active formation?"]},
-      "2" : {"text": ["That is a command decision. Make it clean, not sloppy!"]},
-      "3" : {
+      "1": {"text": ["You are relieving me from active formation?"]},
+      "2": {
         "choices": [
-          {"text": "*Confirm dismissal orders.* [BLUE](Dismiss Reignald)", "nextId": "10"},
-          {"text": "*Ask if he takes this personally.*", "nextId": "20"},
-          {"text": "*Stand down. Keep Reignald in the party.*", "command": "EXIT"}
-        ]
-      },
-      "10": {"text": ["Understood! I will leave and whip some peasants into shape."]},
-      "11": {"text": ["You did not fail me. You restructured the unit. There is a difference."]},
-      "12": {"text": ["If you call again, be ready to move when I accept!"], "choices": [{"command": "HERO_DISMISS"}]},
-      "20": {"text": ["Personally? I am a commander, not a poet."]},
-      "21": {"text": ["I measure results: fewer mistakes, faster response, everyone breathing at sunset."]},
-      "22": {
-        "choices": [
-          {"text": "*Proceed with dismissal anyway.* [BLUE](Dismiss Reignald)", "nextId": "10"},
+          {"text": "*Confirm dismissal orders.* [BLUE](Dismiss Reignald)", "nextId": "3"},
           {"text": "*Keep him. You still need that discipline.*", "command": "EXIT"}
         ]
-      }
+      },
+      "3": {"text": ["If you call again, be ready to move when I accept!"], "choices": [{"command": "HERO_DISMISS"}]}
     }
   },
   "bury_reignald"          : {
@@ -98,25 +86,13 @@
       "3"   : {
         "choices": [
           {"text": "*Request that Reignald rejoins the party.* [BLUE](Join party)", "nextId": "10"},
-          {"text": "*Ask what he has been doing since dismissal.*", "nextId": "30"},
           {"text": "*Say you are just checking in.*", "nextId": "20"}
         ]
       },
-      "10"  : {"text": ["Good! You made the correct tactical correction."]},
-      "11"  : {"text": ["I rejoin on three conditions: pace, discipline, and immediate response to orders."]},
-      "12"  : {"text": ["Break those, and I will retrain you in the rain until your boots cry!"]},
-      "13"  : {"text": ["Now tighten formation. We move!"], "choices": [{"command": "HERO_JOIN"}]},
-      "20"  : {"text": ["Checking in is not a mission. Missions have objectives."]},
-      "21"  : {"text": ["Return when you have one. Bring maps, not small talk!"], "choices": [{"command": "EXIT"}]},
-      "30"  : {"text": ["Writing down improved drills for lazy soldiers."]},
-      "31"  : {"text": ["Two recruits once tried to skip shield stance. They now dream in proper posture."]},
-      "32"  : {"text": ["Why? Because laziness in training becomes funerals in battle."]},
-      "33"  : {
-        "choices": [
-          {"text": "*That is exactly why you need him back.* [BLUE](Join party)", "nextId": "10"},
-          {"text": "*Tell him to carry on.*", "nextId": "20"}
-        ]
-      },
+      "10"  : {"text": ["Good! You made the correct tactical correction!"]},
+      "11"  : {"text": ["Now tighten formation. We move!"], "choices": [{"command": "HERO_JOIN"}]},
+      "20"  : {"text": ["Checking in is not a mission. Missions have objectives!"]},
+      "21"  : {"text": ["Return when you have one. Bring objectives, not small talk!"], "choices": [{"command": "EXIT"}]},
       "9000": {"text": ["Your unit is full. I cannot join a formation with no slot on the line. Make room, then report back!"], "choices": [{"command": "EXIT"}]}
     }
   }

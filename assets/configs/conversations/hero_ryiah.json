@@ -114,7 +114,7 @@
       "213" : {"text": ["Report me? *Hic* I'm OFF duty. Look at me. Does this look on-duty? This is a man at peace. Leave the peace be."], "choices": [{"nextId": "212"}]},
       "214" : {"text": ["*Hic* Heh. Funny. You're a funny one. Funny gets you my respect. Gets you no keys. Just respect."], "choices": [{"nextId": "212"}]},
       "220" : {"text": ["That warm, reasonable voice had iron under it all along, hadn't it. *Hic* Sneaky. I shouldn't like sneaky. The ale does."]},
-      "221" : {"text": ["...Gods. Alright. You've got my attention. *Hic* Both kinds. All the kinds I've got left."]},
+      "221" : {"text": ["...By Evdos. Alright. You've got my attention. *Hic* Both kinds. All the kinds I've got left."]},
       "222" : {
         "choices": [
           {"condition": ["jester1"], "text": "[Jester 1] *Ease the menace with a grin.*", "nextId": "320"},
@@ -150,7 +150,7 @@
       "243" : {"text": ["Hands. *Hic* Hands off the coat. It's all that's holding me upright."], "choices": [{"nextId": "242"}]},
       "244" : {"text": ["Empty cells? *Hic* There's a witch in one of 'em, friend. That's the whole trouble, isn't it."], "choices": [{"nextId": "242"}]},
       "250" : {"text": ["All those jokes, and underneath you're steady as a judge. *Hic*"]},
-      "251" : {"text": ["...Gods. It's working, isn't it. *Hic* I can feel it working. Stop being so persuasive at me."]},
+      "251" : {"text": ["...By Evdos. It's working, isn't it. *Hic* I can feel it working. Stop being so persuasive at me."]},
       "252" : {
         "choices": [
           {"condition": ["barbarian1"], "text": "[Barbarian 1] *Go quiet, hard, immovable.*", "nextId": "350"},
@@ -161,12 +161,12 @@
       },
       "253" : {"text": ["Look the other way? *Hic* I've stared at the bottom of this cup all night. That's the only way I look now."], "choices": [{"nextId": "252"}]},
       "254" : {"text": ["*Hic* Heh. Good company, you. Bad influence, good company. *Hic* Still no."], "choices": [{"nextId": "252"}]},
-      "300" : {"text": ["*Hic* Ah, blast it. You've gone and made me laugh, and a laughing man can't say no. It's practically medical. ...You win. Gods help me, you win."], "choices": [{"nextId": "360"}]},
+      "300" : {"text": ["*Hic* Ah, blast it. You've gone and made me laugh, and a laughing man can't say no. It's practically medical. ...You win. Evdos help me, you win."], "choices": [{"nextId": "360"}]},
       "310" : {"text": ["*Hic* You and that reasonable voice of yours. I've run clean out of arguments to throw back. ...Fine. Fine."], "choices": [{"nextId": "360"}]},
       "320" : {"text": ["*Hic* Look at me. Grinning like a fool into my own cup. *Hic* Can't refuse a man who does that to me. New rule. ...You've won."], "choices": [{"nextId": "360"}]},
       "330" : {"text": ["*Hic* That cold look of yours. I'm too drunk and too old to stare it down. *Hic* My staring's all spent. ...Alright. You've got me."], "choices": [{"nextId": "360"}]},
       "340" : {"text": ["*Hic* No... no, you're right, aren't you. And I'm too tired to keep saying you're not. ...Alright. *Hic* Alright."], "choices": [{"nextId": "360"}]},
-      "350" : {"text": ["*Hic* Gods, that quiet of yours gets right into a man's bones. *Hic* Stop it. Stop. ...You've won."], "choices": [{"nextId": "360"}]},
+      "350" : {"text": ["*Hic* By Evdos, that quiet of yours gets right into a man's bones. *Hic* Stop it. Stop. ...You've won."], "choices": [{"nextId": "360"}]},
       "360" : {"text": ["Here. *Hic* The jail key. Don't make me regret this more than the morning already will. And it will."]},
       "361" : {"text": ["I want it back before the dawn bell. *Hic* Not one toll after. Or I'll be... I'll be very disappointed at you."]},
       "362" : {"text": ["And if anyone asks - you never saw me. *Hic* I was home. Fast asleep. Dreaming of a job where folk stop asking me for keys."], "choices": [{"command": "RECEIVE_ITEM"}]},

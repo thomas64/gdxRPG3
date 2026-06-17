@@ -5,7 +5,7 @@
       "1": {"text": ["No Mozes, if I leave, who is gonna tell you when you're being stupid?"]},
       "2": {
         "choices": [
-          {"text": "*No, you think you can manage. She can go.* [BLUE](Dismiss Luana)", "nextId": "3"},
+          {"text": "*You think you can manage. She can go.* [BLUE](Dismiss Luana)", "nextId": "3"},
           {"text": "*Acknowledge your stupidity and ask Luana to stay.*", "command": "EXIT"}
         ]
       },
