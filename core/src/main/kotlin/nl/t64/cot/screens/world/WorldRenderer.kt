@@ -106,14 +106,15 @@ class WorldRenderer(
             camera.project(topRight)
 
             val scissors = Rectangle(0f, 0f, topRight.x, topRight.y)
-            ScissorStack.pushScissors(scissors)
+            if (ScissorStack.pushScissors(scissors)) {
 
-            batch.begin()
-            batch.projectionMatrix = camera.projection
-            it.render(batch, camera)
-            batch.end()
+                batch.begin()
+                batch.projectionMatrix = camera.projection
+                it.render(batch, camera)
+                batch.end()
 
-            ScissorStack.popScissors()
+                ScissorStack.popScissors()
+            }
         }
     }
 
