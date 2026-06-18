@@ -139,6 +139,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
 
     fun changeMap(currentMap: GameMap) {
         visibleScheduledEntities.clear()
+        worldSchedule.update()
         worldRenderer.map = currentMap.tiledMap
         player.send(LoadEntityEvent(currentMap.playerSpawnDirection, currentMap.playerSpawnLocation))
         mapManager.updateBgsVolumes(player.position)

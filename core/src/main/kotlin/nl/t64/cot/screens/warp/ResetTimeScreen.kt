@@ -3,6 +3,7 @@ package nl.t64.cot.screens.warp
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.mapManager
+import nl.t64.cot.Utils.profileManager
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.audio.AudioEvent
@@ -60,6 +61,7 @@ class ResetTimeScreen : PortalSelectionScreen("   Reset and return to") {
             gameData.resetCycle()
             mapManager.loadMapWithBgsSwitch(warpToMapName)
             mapManager.currentMap.setPlayerSpawnLocationWithId(warpToMapName)
+            profileManager.autoSave()
             worldScreen.changeMap(mapManager.currentMap)
         }
         worldScreen.warpReset(actionAfterFade)

@@ -1,6 +1,6 @@
 {
   "quest_alva_road_bag": {
-    "title"                          : "A Lonely Bag",
+    "title"                          : "A lonely bag",
     "entityId"                       : "mozes",
     "summary"                        : "You found an empty bag just south of the small stone bridge on the road to Lastdenn. Who could it belong to? It was dropped this morning, but at what time exactly?",
     "shouldHideMessagesAfterFinished": true,
