@@ -90,9 +90,18 @@ abstract class Character(
      * lage stats (zoals de green imp) deelt veel meer schade uit dan z'n losse stats doen vermoeden.
      */
     fun getCombatPower(): Float {
+        val isUnarmed: Boolean = inventory.getSkillOfCurrentWeapon() == null
         val effectiveHp: Float = maximumHp.coerceAtLeast(1) * getSurvivabilityMultiplier()
-        val damage: Int = getCalculatedTotalDamage().coerceAtLeast(1)
-        val hitChance: Float = getCalculatedTotalHit().coerceIn(1, 100) / 100f
+        val damage: Int = if (isUnarmed) {
+            6       // placeholder for minimal damage
+        } else {
+            getCalculatedTotalDamage().coerceAtLeast(1)
+        }
+        val hitChance: Float = if (isUnarmed) {
+            0.6f     // 60%. placeholder for minimal hit chance, both are only used for threat level calculation.
+        } else {
+            getCalculatedTotalHit().coerceIn(1, 100) / 100f
+        }
         val actionsPerTurn: Int = getCalculatedActionPoints().coerceAtLeast(1)
         val turnFrequency: Int = 10 + getCalculatedTotalStatOf(StatItemId.SPEED)
         val offenseOverTime: Float = damage * hitChance * actionsPerTurn * turnFrequency
