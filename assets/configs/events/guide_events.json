@@ -144,7 +144,7 @@
   },
   "guide_event_skills"               : {
     "type"     : "tutorial",
-    "condition": ["_cycle_>=_2"],
+    "condition": ["_cycle_>=_2", "_time_after_08:30"],
     "text"     : [
       "You can level up skills, just like attributes.",
       "You can do this at an academy, or on your own.",

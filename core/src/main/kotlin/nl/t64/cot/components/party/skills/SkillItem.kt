@@ -8,7 +8,7 @@ import kotlin.math.roundToInt
 private val TRAINING_COSTS = listOf(20, 8, 12, 16, 20, 24, 28, 32, 36, 40)
 private const val MAXIMUM = 10
 private const val DEFAULT_FLAT_UPGRADE_COST = 20
-private const val SELF_UPGRADE_XP_MULTIPLIER = 1.25
+private const val SELF_UPGRADE_XP_MULTIPLIER = 1.5
 
 data class SkillItem(
     override val id: SkillItemId = SkillItemId.NONE,

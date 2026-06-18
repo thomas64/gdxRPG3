@@ -527,7 +527,7 @@
   <object id="514" name="go_to_the_forest_2" type="check" x="480" y="840" width="48" height="24"/>
   <object id="522" name="event_ridiculous" type="discover" x="1248" y="384" width="24" height="96"/>
   <object id="523" name="event_ridiculous" type="discover" x="1920" y="1032" width="48" height="24"/>
-  <object id="547" name="guide_event_skills" type="discover" x="1524" y="1344" width="96" height="24"/>
+  <object id="547" name="guide_event_skills" type="discover" x="1524" y="1350" width="96" height="48"/>
  </objectgroup>
  <objectgroup color="#aaff00" id="57" name="scheduled">
   <object id="456" name="resource1" x="1488" y="1128" width="48" height="24"/>
