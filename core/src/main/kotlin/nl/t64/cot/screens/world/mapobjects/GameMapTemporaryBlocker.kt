@@ -22,7 +22,9 @@ class GameMapTemporaryBlocker(
     private var isActive: Boolean = !gameData.removedMapBlockers.contains(rectangle)
 
     init {
-        changeBlocker()
+        if (isActive) {
+            registerObservers()
+        }
     }
 
     override fun getBlockerFor(boundingBox: Rectangle, state: EntityState, entityDirection: Direction): Rectangle? {
@@ -49,13 +51,21 @@ class GameMapTemporaryBlocker(
 
     private fun changeBlocker() {
         if (isActive) {
-            brokerManager.blockObservers.addObserver(this)
-            brokerManager.bumpObservers.addObserver(this)
+            registerObservers()
         } else {
-            brokerManager.blockObservers.removeObserver(this)
-            brokerManager.bumpObservers.removeObserver(this)
+            unregisterObservers()
         }
         mapManager.setTiledGraph()
+    }
+
+    private fun registerObservers() {
+        brokerManager.blockObservers.addObserver(this)
+        brokerManager.bumpObservers.addObserver(this)
+    }
+
+    private fun unregisterObservers() {
+        brokerManager.blockObservers.removeObserver(this)
+        brokerManager.bumpObservers.removeObserver(this)
     }
 
     private fun createDirection(rectObject: RectangleMapObject): Direction {
