@@ -2,6 +2,7 @@ package nl.t64.cot.screens.world.loaders
 
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
+import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.screens.world.entity.*
 import nl.t64.cot.screens.world.entity.events.LoadEntityEvent
 import nl.t64.cot.screens.world.map.GameMap
@@ -42,9 +43,13 @@ internal class NpcEntitiesLoader(private val currentMap: GameMap) {
     }
 
     private fun loadHero(gameMapHero: GameMapHero) {
-        val hero = gameData.heroes.getCertainHero(gameMapHero.name)
+        val hero: HeroItem = gameData.heroes.getCertainHero(gameMapHero.name)
         if (hero.isAlive && gameMapHero.hasBeenRecruited == hero.hasBeenRecruited) {
-            loadNpcEntity(gameMapHero)
+            if (hero.hasBeenRecruited) {
+                loadNpcEntity(gameMapHero)
+            } else {
+                loadNpcEntity(gameMapHero, GraphicsRecruitableHero(gameMapHero.name))
+            }
         }
     }
 
@@ -72,9 +77,9 @@ internal class NpcEntitiesLoader(private val currentMap: GameMap) {
         }
     }
 
-    private fun loadNpcEntity(gameMapNpc: GameMapNpc) {
+    private fun loadNpcEntity(gameMapNpc: GameMapNpc, graphicsNpc: GraphicsNpc = GraphicsNpc(gameMapNpc.name)) {
         val entityId = gameMapNpc.name
-        val npcEntity = Entity(entityId, InputNpc(), PhysicsNpc(), GraphicsNpc(entityId))
+        val npcEntity = Entity(entityId, InputNpc(), PhysicsNpc(), graphicsNpc)
         npcEntities.add(npcEntity)
         addObserversForNpc(gameMapNpc, npcEntity)
         npcEntity.send(LoadEntityEvent(gameMapNpc.state,
