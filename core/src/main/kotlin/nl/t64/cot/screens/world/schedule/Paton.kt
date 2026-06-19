@@ -27,7 +27,7 @@ class Paton : EntitySchedule() {
         SchedulePart("lastdenn_house_garrin", "09:37", "09:39", SOUTH, RUNNING,  "ghost3", "paton2", "ghost_scaring"),
         SchedulePart("lastdenn_house_garrin", "09:39", "09:40", EAST,  WALKING,  "paton2", "paton1", "ghost_scaring"),
         SchedulePart("lastdenn_house_garrin", "09:40", "09:50", NORTH, IMMOBILE, "paton1", "paton1", "ghost_scaring"),
-        SchedulePart("lastdenn_house_garrin", "11:00", "20:00", NORTH, IDLE,     "paton1", "paton1", "paton_hiding_again", listOf("is_garrin_possessed")),
+        SchedulePart("lastdenn_house_garrin", "11:00", "20:00", NORTH, IDLE,     "paton1", "paton1", "paton_hiding_again", conditions = listOf("is_garrin_possessed")),
         // @formatter:on
     )
 

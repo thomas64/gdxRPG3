@@ -29,7 +29,7 @@ class Deryk : EntitySchedule() {
         SchedulePart("honeywood_house_elder", "18:05", "18:06", WEST,  WALKING,  "deryk11", "deryk12", "deryk_on_the_way"),
         SchedulePart("honeywood_house_elder", "18:06", "18:09", NORTH, WALKING,  "deryk12", "deryk13", "deryk_on_the_way"),
         SchedulePart("honeywood_house_elder", "18:09", "18:10", EAST,  WALKING,  "deryk13", "deryk14", "deryk_on_the_way"),
-        SchedulePart("honeywood_house_elder", "18:10", "18:20", EAST,  IMMOBILE, "deryk14", "deryk14", "deryk_and_grahan_meet"),
+        SchedulePart("honeywood_house_elder", "18:10", "18:20", EAST,  IMMOBILE, "deryk14", "deryk14", "deryk_and_grahan_meet", StateIcon.TALK),
         SchedulePart("honeywood_house_elder", "18:20", "18:21", WEST,  WALKING,  "deryk14", "deryk13", "deryk_on_the_way"),
         SchedulePart("honeywood_house_elder", "18:21", "18:24", SOUTH, WALKING,  "deryk13", "deryk12", "deryk_on_the_way"),
         SchedulePart("honeywood_house_elder", "18:24", "18:25", EAST,  WALKING,  "deryk12", "deryk11", "deryk_on_the_way"),
@@ -45,7 +45,7 @@ class Deryk : EntitySchedule() {
 
         SchedulePart("honeywood_inn",         "18:46", "18:48", NORTH, WALKING,  "deryk19", "deryk20"),
         SchedulePart("honeywood_inn",         "18:48", "18:50", NORTH, WALKING,  "deryk20", "deryk21", "deryk_one_moment"),
-        SchedulePart("honeywood_inn",         "18:50", "19:00", NORTH, IMMOBILE, "deryk21", "deryk21", "deryk_checking_in"),
+        SchedulePart("honeywood_inn",         "18:50", "19:00", NORTH, IMMOBILE, "deryk21", "deryk21", "deryk_checking_in",     StateIcon.TALK),
         SchedulePart("honeywood_inn",         "19:00", "19:07", WEST,  WALKING,  "deryk21", "deryk22", "deryk_one_moment"),
         SchedulePart("honeywood_inn",         "19:07", "19:10", NORTH, WALKING,  "deryk22", "deryk23", "deryk_one_moment"),
         SchedulePart("honeywood_inn",         "19:10", "19:12", WEST,  WALKING,  "deryk23", "deryk24", "deryk_one_moment"),

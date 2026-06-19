@@ -6,6 +6,7 @@ import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.components.condition.areAllTrue
 import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.screens.world.entity.EntityState
+import nl.t64.cot.screens.world.entity.StateIcon
 import kotlin.math.abs
 
 
@@ -18,6 +19,7 @@ class SchedulePart(
     private val startPositionId: String,
     private val endPositionId: String,
     val conversationId: String = "",
+    val stateIcon: StateIcon? = null,
     private val conditions: List<String> = emptyList()
 ) {
 

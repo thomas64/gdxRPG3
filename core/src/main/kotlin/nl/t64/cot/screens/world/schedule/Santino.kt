@@ -40,7 +40,7 @@ class Santino : EntitySchedule() {
         SchedulePart("lastdenn_church", "09:20", "09:45", NORTH, WALKING,  "santino3",  "santino4",  "santino_service_start"),
         SchedulePart("lastdenn_church", "09:45", "09:55", EAST,  WALKING,  "santino4",  "santino5",  "santino_service_start"),
         SchedulePart("lastdenn_church", "09:55", "10:00", SOUTH, IDLE,     "santino5",  "santino5",  "santino_service_start"),
-        SchedulePart("lastdenn_church", "10:00", "11:00", SOUTH, IMMOBILE, "santino5",  "santino5",  "santino_service"),
+        SchedulePart("lastdenn_church", "10:00", "11:00", SOUTH, IMMOBILE, "santino5",  "santino5",  "santino_service",          StateIcon.TALK),
         SchedulePart("lastdenn_church", "11:00", "11:02", WEST,  WALKING,  "santino5",  "santino4"),
         SchedulePart("lastdenn_church", "11:02", "12:00", SOUTH, IDLE,     "santino4",  "santino4",  "santino_counseling"),
         // @formatter:on
@@ -68,72 +68,72 @@ class Santino : EntitySchedule() {
         SchedulePart("lastdenn",             "12:45", "13:00", NORTH, WALKING,  "santino13",       "santino14",       "santino_busy_errand"),
 
         // being murdered
-        SchedulePart("lastdenn",             "13:00", "14:00", NORTH, IMMOBILE, "santino14",       "santino14",       "",                         listOf("is_garrin_possessed")),
+        SchedulePart("lastdenn",             "13:00", "14:00", NORTH, IMMOBILE, "santino14",       "santino14",       "",                         conditions = listOf("is_garrin_possessed")),
 
         // not being murdered
-        SchedulePart("lastdenn",             "13:00", "13:20", NORTH, WALKING,  "santino14",       "entrance_guard5", "santino_busy_errand",      listOf("!is_garrin_possessed")),
-        SchedulePart("lastdenn",             "13:20", "13:30", EAST,  WALKING,  "entrance_guard5", "santino15",       "santino_busy_errand",      listOf("!is_garrin_possessed")),
-        SchedulePart("lastdenn",             "13:30", "13:50", NORTH, WALKING,  "santino15",       "santino16",       "santino_busy_errand",      listOf("!is_garrin_possessed")),
+        SchedulePart("lastdenn",             "13:00", "13:20", NORTH, WALKING,  "santino14",       "entrance_guard5", "santino_busy_errand",      conditions = listOf("!is_garrin_possessed")),
+        SchedulePart("lastdenn",             "13:20", "13:30", EAST,  WALKING,  "entrance_guard5", "santino15",       "santino_busy_errand",      conditions = listOf("!is_garrin_possessed")),
+        SchedulePart("lastdenn",             "13:30", "13:50", NORTH, WALKING,  "santino15",       "santino16",       "santino_busy_errand",      conditions = listOf("!is_garrin_possessed")),
         // @formatter:on
     )
 
     private fun withTheMayorInside() = listOf(
         // @formatter:off
-        SchedulePart("lastdenn_house_mayor", "13:50", "14:05", NORTH, WALKING,  "santino17",       "santino18",       "santino_busy_errand",      listOf("!is_garrin_possessed")),
+        SchedulePart("lastdenn_house_mayor", "13:50", "14:05", NORTH, WALKING,  "santino17",       "santino18",       "santino_busy_errand",      conditions = listOf("!is_garrin_possessed")),
 
         // has reignald not been recruited
-        SchedulePart("lastdenn_house_mayor", "14:05", "14:15", NORTH, IMMOBILE, "santino18",       "santino18",       "santino_to_reignald",      listOf("!is_garrin_possessed", "!is_reignald_recruited")),
-        SchedulePart("lastdenn_house_mayor", "14:15", "14:20", EAST,  WALKING,  "santino18",       "santino19",       "santino_busy_errand",      listOf("!is_garrin_possessed", "!is_reignald_recruited")),
+        SchedulePart("lastdenn_house_mayor", "14:05", "14:15", NORTH, IMMOBILE, "santino18",       "santino18",       "santino_to_reignald",      StateIcon.TALK, conditions = listOf("!is_garrin_possessed", "!is_reignald_recruited")),
+        SchedulePart("lastdenn_house_mayor", "14:15", "14:20", EAST,  WALKING,  "santino18",       "santino19",       "santino_busy_errand",      conditions = listOf("!is_garrin_possessed", "!is_reignald_recruited")),
 
         // has reignald been recruited
-        SchedulePart("lastdenn_house_mayor", "14:05", "14:08", EAST,  WALKING,  "santino18",       "santino18b",      "santino_busy_errand",      listOf("!is_garrin_possessed", "is_reignald_recruited")),
-        SchedulePart("lastdenn_house_mayor", "14:08", "14:18", NORTH, IMMOBILE, "santino18b",      "santino18b",      "santino_to_mayor_guard",   listOf("!is_garrin_possessed", "is_reignald_recruited")),
-        SchedulePart("lastdenn_house_mayor", "14:18", "14:20", EAST,  WALKING,  "santino18b",      "santino19",       "santino_busy_errand",      listOf("!is_garrin_possessed", "is_reignald_recruited")),
+        SchedulePart("lastdenn_house_mayor", "14:05", "14:08", EAST,  WALKING,  "santino18",       "santino18b",      "santino_busy_errand",      conditions = listOf("!is_garrin_possessed", "is_reignald_recruited")),
+        SchedulePart("lastdenn_house_mayor", "14:08", "14:18", NORTH, IMMOBILE, "santino18b",      "santino18b",      "santino_to_mayor_guard",   StateIcon.TALK, conditions = listOf("!is_garrin_possessed", "is_reignald_recruited")),
+        SchedulePart("lastdenn_house_mayor", "14:18", "14:20", EAST,  WALKING,  "santino18b",      "santino19",       "santino_busy_errand",      conditions = listOf("!is_garrin_possessed", "is_reignald_recruited")),
 
-        SchedulePart("lastdenn_house_mayor", "14:20", "14:25", NORTH, WALKING,  "santino19",       "santino20",       "",                         listOf("!is_garrin_possessed")),
-        SchedulePart("lastdenn_house_mayor", "14:25", "14:27", EAST,  WALKING,  "santino20",       "santino21",       "",                         listOf("!is_garrin_possessed")),
-        SchedulePart("lastdenn_house_mayor", "14:27", "14:37", EAST,  IMMOBILE, "santino21",       "santino21",       "",                         listOf("!is_garrin_possessed")),
-        SchedulePart("lastdenn_house_mayor", "14:37", "14:39", WEST,  WALKING,  "santino21",       "santino20",       "",                         listOf("!is_garrin_possessed")),
-        SchedulePart("lastdenn_house_mayor", "14:39", "14:44", SOUTH, WALKING,  "santino20",       "santino19",       "",                         listOf("!is_garrin_possessed")),
-        SchedulePart("lastdenn_house_mayor", "14:44", "14:49", WEST,  WALKING,  "santino19",       "santino18",       "santino_back_from_mayor",  listOf("!is_garrin_possessed")),
-        SchedulePart("lastdenn_house_mayor", "14:49", "15:04", SOUTH, WALKING,  "santino18",       "santino17",       "santino_back_from_mayor",  listOf("!is_garrin_possessed")),
+        SchedulePart("lastdenn_house_mayor", "14:20", "14:25", NORTH, WALKING,  "santino19",       "santino20",       "",                         conditions = listOf("!is_garrin_possessed")),
+        SchedulePart("lastdenn_house_mayor", "14:25", "14:27", EAST,  WALKING,  "santino20",       "santino21",       "",                         conditions = listOf("!is_garrin_possessed")),
+        SchedulePart("lastdenn_house_mayor", "14:27", "14:37", EAST,  IMMOBILE, "santino21",       "santino21",       "",                         conditions = listOf("!is_garrin_possessed")),
+        SchedulePart("lastdenn_house_mayor", "14:37", "14:39", WEST,  WALKING,  "santino21",       "santino20",       "",                         conditions = listOf("!is_garrin_possessed")),
+        SchedulePart("lastdenn_house_mayor", "14:39", "14:44", SOUTH, WALKING,  "santino20",       "santino19",       "",                         conditions = listOf("!is_garrin_possessed")),
+        SchedulePart("lastdenn_house_mayor", "14:44", "14:49", WEST,  WALKING,  "santino19",       "santino18",       "santino_back_from_mayor",  conditions = listOf("!is_garrin_possessed")),
+        SchedulePart("lastdenn_house_mayor", "14:49", "15:04", SOUTH, WALKING,  "santino18",       "santino17",       "santino_back_from_mayor",  conditions = listOf("!is_garrin_possessed")),
         // @formatter:on
     )
 
     private fun backToTheChurch() = listOf(
         // @formatter:off
-        SchedulePart("lastdenn",             "15:04", "15:24", SOUTH, WALKING,  "santino16",       "santino15",       "santino_back_from_mayor",  listOf("!is_garrin_possessed")),
-        SchedulePart("lastdenn",             "15:24", "15:34", WEST,  WALKING,  "santino15",       "entrance_guard5", "santino_back_from_mayor",  listOf("!is_garrin_possessed")),
+        SchedulePart("lastdenn",             "15:04", "15:24", SOUTH, WALKING,  "santino16",       "santino15",       "santino_back_from_mayor",  conditions = listOf("!is_garrin_possessed")),
+        SchedulePart("lastdenn",             "15:24", "15:34", WEST,  WALKING,  "santino15",       "entrance_guard5", "santino_back_from_mayor",  conditions = listOf("!is_garrin_possessed")),
 
         // walk around the guard
-        SchedulePart("lastdenn",             "15:34", "15:50", SOUTH, WALKING,  "entrance_guard5", "possessed12",     "santino_back_from_mayor",  listOf("!is_garrin_possessed", "is_lastdenn_guard_alive")),
-        SchedulePart("lastdenn",             "15:50", "15:53", EAST,  WALKING,  "possessed12",     "santino13a",      "santino_back_from_mayor",  listOf("!is_garrin_possessed", "is_lastdenn_guard_alive")),
-        SchedulePart("lastdenn",             "15:53", "16:10", SOUTH, WALKING,  "santino13a",      "santino13",       "santino_back_from_mayor",  listOf("!is_garrin_possessed", "is_lastdenn_guard_alive")),
+        SchedulePart("lastdenn",             "15:34", "15:50", SOUTH, WALKING,  "entrance_guard5", "possessed12",     "santino_back_from_mayor",  conditions = listOf("!is_garrin_possessed", "is_lastdenn_guard_alive")),
+        SchedulePart("lastdenn",             "15:50", "15:53", EAST,  WALKING,  "possessed12",     "santino13a",      "santino_back_from_mayor",  conditions = listOf("!is_garrin_possessed", "is_lastdenn_guard_alive")),
+        SchedulePart("lastdenn",             "15:53", "16:10", SOUTH, WALKING,  "santino13a",      "santino13",       "santino_back_from_mayor",  conditions = listOf("!is_garrin_possessed", "is_lastdenn_guard_alive")),
 
         // dont walk around the guard
-        SchedulePart("lastdenn",             "15:34", "16:10", SOUTH, WALKING,  "entrance_guard5", "santino13",       "santino_back_from_mayor",  listOf("!is_garrin_possessed", "!is_lastdenn_guard_alive")),
+        SchedulePart("lastdenn",             "15:34", "16:10", SOUTH, WALKING,  "entrance_guard5", "santino13",       "santino_back_from_mayor",  conditions = listOf("!is_garrin_possessed", "!is_lastdenn_guard_alive")),
 
-        SchedulePart("lastdenn",             "16:10", "16:20", EAST,  WALKING,  "santino13",       "santino12",       "santino_back_from_mayor",  listOf("!is_garrin_possessed")),
-        SchedulePart("lastdenn",             "16:20", "16:25", NORTH, WALKING,  "santino12",       "santino11",       "santino_back_from_mayor",  listOf("!is_garrin_possessed")),
+        SchedulePart("lastdenn",             "16:10", "16:20", EAST,  WALKING,  "santino13",       "santino12",       "santino_back_from_mayor",  conditions = listOf("!is_garrin_possessed")),
+        SchedulePart("lastdenn",             "16:20", "16:25", NORTH, WALKING,  "santino12",       "santino11",       "santino_back_from_mayor",  conditions = listOf("!is_garrin_possessed")),
         // @formatter:on
     )
 
     private fun backToTheOffice() = listOf(
         // @formatter:off
-        SchedulePart("lastdenn_church",      "16:25", "16:30", NORTH, WALKING,  "santino10",       "santino9",        "santino_back_from_mayor",  listOf("!is_garrin_possessed")),
-        SchedulePart("lastdenn_church",      "16:30", "16:35", WEST,  WALKING,  "santino9",        "santino3",        "santino_back_from_mayor",  listOf("!is_garrin_possessed")),
+        SchedulePart("lastdenn_church",      "16:25", "16:30", NORTH, WALKING,  "santino10",       "santino9",        "santino_back_from_mayor",  conditions = listOf("!is_garrin_possessed")),
+        SchedulePart("lastdenn_church",      "16:30", "16:35", WEST,  WALKING,  "santino9",        "santino3",        "santino_back_from_mayor",  conditions = listOf("!is_garrin_possessed")),
 
         // ulrog meeting scheduled
-        SchedulePart("lastdenn_church",      "16:35", "16:37", WEST,  WALKING,  "santino3",        "santino6",        "santino_back_from_mayor",  listOf("!is_garrin_possessed", "_tc_1_q_quest_lastdenn_santino")),
-        SchedulePart("lastdenn_church",      "16:37", "16:39", NORTH, WALKING,  "santino6",        "santino7",        "santino_back_from_mayor",  listOf("!is_garrin_possessed", "_tc_1_q_quest_lastdenn_santino")),
-        SchedulePart("lastdenn_church",      "16:39", "16:43", WEST,  WALKING,  "santino7",        "santino11",       "santino_back_from_mayor",  listOf("!is_garrin_possessed", "_tc_1_q_quest_lastdenn_santino")),
-        SchedulePart("lastdenn_church",      "16:43", "18:00", NORTH, IDLE,     "santino11",       "santino11",       "santino_preparing_answer", listOf("!is_garrin_possessed", "_tc_1_q_quest_lastdenn_santino")),
-        SchedulePart("lastdenn_church",      "18:00", "20:00", SOUTH, IDLE,     "santino11",       "santino11",       "santino_answer_ulrog",     listOf("!is_garrin_possessed", "_tc_1_q_quest_lastdenn_santino")),
+        SchedulePart("lastdenn_church",      "16:35", "16:37", WEST,  WALKING,  "santino3",        "santino6",        "santino_back_from_mayor",  conditions = listOf("!is_garrin_possessed", "_tc_1_q_quest_lastdenn_santino")),
+        SchedulePart("lastdenn_church",      "16:37", "16:39", NORTH, WALKING,  "santino6",        "santino7",        "santino_back_from_mayor",  conditions = listOf("!is_garrin_possessed", "_tc_1_q_quest_lastdenn_santino")),
+        SchedulePart("lastdenn_church",      "16:39", "16:43", WEST,  WALKING,  "santino7",        "santino11",       "santino_back_from_mayor",  conditions = listOf("!is_garrin_possessed", "_tc_1_q_quest_lastdenn_santino")),
+        SchedulePart("lastdenn_church",      "16:43", "18:00", NORTH, IDLE,     "santino11",       "santino11",       "santino_preparing_answer", conditions = listOf("!is_garrin_possessed", "_tc_1_q_quest_lastdenn_santino")),
+        SchedulePart("lastdenn_church",      "18:00", "20:00", SOUTH, IDLE,     "santino11",       "santino11",       "santino_answer_ulrog",     conditions = listOf("!is_garrin_possessed", "_tc_1_q_quest_lastdenn_santino")),
 
         // no ulrog meeting scheduled
-        SchedulePart("lastdenn_church",      "16:35", "16:40", WEST,  WALKING,  "santino3",        "santino2",        "santino_back_from_mayor",  listOf("!is_garrin_possessed", "_tn_1_q_quest_lastdenn_santino")),
-        SchedulePart("lastdenn_church",      "16:40", "16:41", NORTH, WALKING,  "santino2",        "santino1",        "santino_back_from_mayor",  listOf("!is_garrin_possessed", "_tn_1_q_quest_lastdenn_santino")),
-        SchedulePart("lastdenn_church",      "16:41", "20:00", EAST,  IDLE,     "santino1",        "santino1",        "santino_prepare_evening",  listOf("!is_garrin_possessed", "_tn_1_q_quest_lastdenn_santino")),
+        SchedulePart("lastdenn_church",      "16:35", "16:40", WEST,  WALKING,  "santino3",        "santino2",        "santino_back_from_mayor",  conditions = listOf("!is_garrin_possessed", "_tn_1_q_quest_lastdenn_santino")),
+        SchedulePart("lastdenn_church",      "16:40", "16:41", NORTH, WALKING,  "santino2",        "santino1",        "santino_back_from_mayor",  conditions = listOf("!is_garrin_possessed", "_tn_1_q_quest_lastdenn_santino")),
+        SchedulePart("lastdenn_church",      "16:41", "20:00", EAST,  IDLE,     "santino1",        "santino1",        "santino_prepare_evening",  conditions = listOf("!is_garrin_possessed", "_tn_1_q_quest_lastdenn_santino")),
         // @formatter:on
     )
 

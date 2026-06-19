@@ -24,7 +24,7 @@ abstract class EntitySchedule {
     }
 
     private fun SchedulePart.handle() {
-        entity.send(UpdateScheduledEntityEvent(state, direction, getCurrentPosition(), conversationId))
+        entity.send(UpdateScheduledEntityEvent(state, direction, getCurrentPosition(), conversationId, stateIcon))
         worldScreen.addScheduledEntity(entity)
         handleTalking()
         handleBlocking()
@@ -65,7 +65,7 @@ abstract class EntitySchedule {
     protected abstract fun handleSideEffects()
 
     protected fun setupInvisibleTalking(part: SchedulePart) {
-        val event = UpdateScheduledEntityEvent(part.state, part.direction, part.getCurrentPosition(), part.conversationId)
+        val event = UpdateScheduledEntityEvent(part.state, part.direction, part.getCurrentPosition(), part.conversationId, null)
         invisibleTalking.send(event)
         worldScreen.addScheduledEntity(invisibleTalking)
         brokerManager.actionObservers.addObserver(invisibleTalking)
