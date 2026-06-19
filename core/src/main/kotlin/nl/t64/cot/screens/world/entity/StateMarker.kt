@@ -18,9 +18,9 @@ enum class StateIcon(val row: Int) {
     TALK(2),
 }
 
-class OverheadIcon(
+class StateMarker(
     stateIcon: StateIcon
-) {
+) : OverheadMarker {
     private var frameTime: Float = 0f
     private val animation: Animation<TextureRegion> = createAnimation(stateIcon)
 
@@ -30,11 +30,11 @@ class OverheadIcon(
         }
     }
 
-    fun update(dt: Float) {
+    override fun update(dt: Float) {
         frameTime += dt
     }
 
-    fun render(batch: Batch, position: Vector2) {
+    override fun render(batch: Batch, position: Vector2) {
         val frame: TextureRegion = animation.getKeyFrame(frameTime)
         val x: Float = position.x + (Constant.TILE_SIZE / 2f) - (ICON_SIZE / 2f)
         val y: Float = position.y

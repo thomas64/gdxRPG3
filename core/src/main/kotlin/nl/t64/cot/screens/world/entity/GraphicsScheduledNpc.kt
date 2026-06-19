@@ -10,7 +10,7 @@ import nl.t64.cot.screens.world.entity.events.UpdateScheduledEntityEvent
 
 class GraphicsScheduledNpc(spriteId: String) : GraphicsComponent() {
 
-    private var overheadIcon: OverheadIcon? = null
+    private var stateMarker: StateMarker? = null
     private var currentStateIcon: StateIcon? = null
 
     init {
@@ -25,7 +25,7 @@ class GraphicsScheduledNpc(spriteId: String) : GraphicsComponent() {
             direction = event.direction
             if (event.stateIcon != currentStateIcon) {
                 currentStateIcon = event.stateIcon
-                overheadIcon = event.stateIcon?.let { OverheadIcon(it) }
+                stateMarker = event.stateIcon?.let { StateMarker(it) }
             }
             setNewFrameDuration()
         }
@@ -49,13 +49,13 @@ class GraphicsScheduledNpc(spriteId: String) : GraphicsComponent() {
 
     override fun update(dt: Float) {
         setFrame(dt)
-        overheadIcon?.update(dt)
+        stateMarker?.update(dt)
     }
 
     override fun render(batch: Batch) {
         batch.draw(currentFrame, position.x, position.y, Constant.TILE_SIZE, Constant.TILE_SIZE)
         if (state != EntityState.INVISIBLE) {
-            overheadIcon?.render(batch, position)
+            stateMarker?.render(batch, position)
         }
     }
 

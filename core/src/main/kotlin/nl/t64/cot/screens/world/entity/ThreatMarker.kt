@@ -16,6 +16,7 @@ private const val DASH_WIDTH = 16f
 private const val DASH_HEIGHT = 4f
 private const val OUTLINE = 2f
 private const val STACK_STEP = 7f
+
 private const val MARGIN_ABOVE_HEAD = 6f
 private const val BOB_AMPLITUDE = 3f
 private const val BOB_SPEED = 4f
@@ -27,14 +28,14 @@ private const val BOB_SPEED = 4f
  */
 class ThreatMarker(
     private val threatLevel: ThreatLevel
-) {
+): OverheadMarker {
     private var bobTime = 0f
 
-    fun update(dt: Float) {
+    override fun update(dt: Float) {
         bobTime += dt
     }
 
-    fun render(batch: Batch, position: Vector2) {
+    override fun render(batch: Batch, position: Vector2) {
         val centerX: Float = position.x + Constant.TILE_SIZE / 2f
         val baseY: Float = position.y + Constant.TILE_SIZE + MARGIN_ABOVE_HEAD + sin(bobTime * BOB_SPEED) * BOB_AMPLITUDE
         val previousColor: Float = batch.packedColor

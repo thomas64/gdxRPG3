@@ -15,6 +15,7 @@ private const val DOT_WIDTH = 5f
 private const val DOT_HEIGHT = 5f
 private const val GAP = 4f
 private const val OUTLINE = 2f
+
 private const val MARGIN_ABOVE_HEAD = 6f
 private const val BOB_AMPLITUDE = 3f
 private const val BOB_SPEED = 4f
