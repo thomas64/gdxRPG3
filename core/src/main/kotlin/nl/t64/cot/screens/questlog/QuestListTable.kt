@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.List.ListStyle
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import ktx.collections.GdxArray
+import ktx.collections.toGdxArray
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.components.quest.QuestGraph
@@ -25,7 +26,7 @@ internal class QuestListTable {
     val container: Table = fillContainer()
 
     fun populateQuestList() {
-        val knownQuests = GdxArray(gameData.quests.getAllKnownQuestsForVisual())
+        val knownQuests: GdxArray<QuestGraph> = gameData.quests.getAllKnownQuestsForVisual().toGdxArray()
         questList.setItems(knownQuests)
     }
 

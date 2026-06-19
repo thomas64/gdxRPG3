@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.List
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane
 import com.badlogic.gdx.scenes.scene2d.ui.Table
-import ktx.collections.GdxArray
+import ktx.collections.toGdxArray
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.components.portal.Portal
@@ -28,18 +28,18 @@ class PortalListTable {
     private lateinit var noPortalsLabel: Label
 
     fun populateResetTimePortalList() {
-        val activatedPortals = gameData.portals.getAllActivatedPortalsIncludingBed()
-        portalList.setItems(GdxArray(activatedPortals))
+        val activatedPortals: Array<Portal> = gameData.portals.getAllActivatedPortalsIncludingBed()
+        portalList.setItems(activatedPortals.toGdxArray())
     }
 
     fun populateWarpPortalList(currentMapName: String) {
-        val activatedPortals = gameData.portals.getAllActivatedPortalsExcept(currentMapName)
+        val activatedPortals: Array<Portal> = gameData.portals.getAllActivatedPortalsExcept(currentMapName)
         if (activatedPortals.isEmpty()) {
             if (!::noPortalsLabel.isInitialized) noPortalsLabel = createNoPortalsLabel()
             container.addActor(noPortalsLabel)
         } else {
             if (::noPortalsLabel.isInitialized) container.removeActor(noPortalsLabel)
-            portalList.setItems(GdxArray(activatedPortals))
+            portalList.setItems(activatedPortals.toGdxArray())
         }
     }
 

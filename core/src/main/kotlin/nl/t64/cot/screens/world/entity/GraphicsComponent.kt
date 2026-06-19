@@ -5,7 +5,8 @@ import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Vector2
-import com.badlogic.gdx.utils.Array
+import ktx.collections.GdxArray
+import ktx.collections.gdxArrayOf
 import nl.t64.cot.Utils
 import nl.t64.cot.constants.Constant
 
@@ -86,12 +87,12 @@ abstract class GraphicsComponent : Component {
     }
 
     fun loadWalkingAnimation(spriteId: String) {
-        val textureFrames = Utils.getCharImage(spriteId)
+        val textureFrames: Array<Array<TextureRegion>> = Utils.getCharImage(spriteId)
 
-        val walkSouthFrames = Array(arrayOf(textureFrames[0][1], textureFrames[0][0], textureFrames[0][1], textureFrames[0][2]))
-        val walkWestFrames = Array(arrayOf(textureFrames[1][1], textureFrames[1][0], textureFrames[1][1], textureFrames[1][2]))
-        val walkEastFrames = Array(arrayOf(textureFrames[2][1], textureFrames[2][0], textureFrames[2][1], textureFrames[2][2]))
-        val walkNorthFrames = Array(arrayOf(textureFrames[3][1], textureFrames[3][0], textureFrames[3][1], textureFrames[3][2]))
+        val walkSouthFrames: GdxArray<TextureRegion> = gdxArrayOf(textureFrames[0][1], textureFrames[0][0], textureFrames[0][1], textureFrames[0][2])
+        val walkWestFrames: GdxArray<TextureRegion> = gdxArrayOf(textureFrames[1][1], textureFrames[1][0], textureFrames[1][1], textureFrames[1][2])
+        val walkEastFrames: GdxArray<TextureRegion> = gdxArrayOf(textureFrames[2][1], textureFrames[2][0], textureFrames[2][1], textureFrames[2][2])
+        val walkNorthFrames: GdxArray<TextureRegion> = gdxArrayOf(textureFrames[3][1], textureFrames[3][0], textureFrames[3][1], textureFrames[3][2])
 
         walkSouthAnimation = Animation(frameDuration, walkSouthFrames, Animation.PlayMode.LOOP)
         walkWestAnimation = Animation(frameDuration, walkWestFrames, Animation.PlayMode.LOOP)

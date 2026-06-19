@@ -4,7 +4,8 @@ import com.badlogic.gdx.graphics.g2d.Animation
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
-import com.badlogic.gdx.utils.Array
+import ktx.collections.GdxArray
+import ktx.collections.gdxArrayOf
 import nl.t64.cot.Utils
 import nl.t64.cot.components.door.Door
 import nl.t64.cot.components.door.DoorType
@@ -69,8 +70,8 @@ class GraphicsDoor(private val door: Door) : GraphicsComponent() {
     }
 
     private fun loadAnimation(isShadow: Boolean): Animation<TextureRegion> {
-        val textureFrames = Utils.getDoorImage(door.spriteId, door.width.toInt(), isShadow)
-        val frames = Array(arrayOf(textureFrames[0][0], textureFrames[1][0], textureFrames[2][0], textureFrames[3][0]))
+        val textureFrames: Array<Array<TextureRegion>> = Utils.getDoorImage(door.spriteId, door.width.toInt(), isShadow)
+        val frames: GdxArray<TextureRegion> = gdxArrayOf(textureFrames[0][0], textureFrames[1][0], textureFrames[2][0], textureFrames[3][0])
         return Animation(Constant.FAST_FRAMES, frames, Animation.PlayMode.NORMAL)
     }
 

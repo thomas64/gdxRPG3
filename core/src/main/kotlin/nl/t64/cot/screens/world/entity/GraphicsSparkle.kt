@@ -4,7 +4,8 @@ import com.badlogic.gdx.graphics.g2d.Animation
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
-import com.badlogic.gdx.utils.Array
+import ktx.collections.GdxArray
+import ktx.collections.toGdxArray
 import nl.t64.cot.Utils
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.world.entity.events.Event
@@ -61,7 +62,7 @@ class GraphicsSparkle(animationType: AnimationType) : GraphicsComponent() {
         val firstFiveEmptyFrames = 5
         val randomIndexToPutSparkle: Int = Random(hashCode()).nextInt(firstFiveEmptyFrames, thirtyEmptyFrames.size + 1)
         thirtyEmptyFrames.addAll(randomIndexToPutSparkle, framesOfOneSparkle)
-        val allTheFramesIncludingOneRandomPlacedSparkle: Array<TextureRegion> = Array(thirtyEmptyFrames.toTypedArray())
+        val allTheFramesIncludingOneRandomPlacedSparkle: GdxArray<TextureRegion> = thirtyEmptyFrames.toGdxArray()
 
         return Animation(Constant.FAST_FRAMES, allTheFramesIncludingOneRandomPlacedSparkle, Animation.PlayMode.LOOP)
     }
@@ -76,7 +77,7 @@ class GraphicsSparkle(animationType: AnimationType) : GraphicsComponent() {
                                                              textures[3][1],
                                                              textures[3][2])
         fiveEmptyFrames.addAll(framesOfOneSparkle)
-        val fiveEmptyFramesFollowedByFiveSparkleFrames: Array<TextureRegion> = Array(fiveEmptyFrames.toTypedArray())
+        val fiveEmptyFramesFollowedByFiveSparkleFrames: GdxArray<TextureRegion> = fiveEmptyFrames.toGdxArray()
         return Animation(Constant.FAST_FRAMES, fiveEmptyFramesFollowedByFiveSparkleFrames, Animation.PlayMode.LOOP)
     }
 

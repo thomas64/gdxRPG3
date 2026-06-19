@@ -5,9 +5,7 @@ import com.badlogic.gdx.Preferences
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.Json
 import com.badlogic.gdx.utils.SerializationException
-import ktx.collections.GdxArray
-import ktx.collections.GdxMap
-import ktx.collections.set
+import ktx.collections.*
 import ktx.json.fromJson
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.preferenceManager
@@ -109,24 +107,24 @@ class ProfileManager {
     }
 
     fun getVisualLoadingArray(): GdxArray<String> {
-        return GdxArray(LOADING.split(",").toTypedArray())
+        return LOADING.split(",").toGdxArray()
     }
 
     fun getVisualLoadingArrayForLoadedProfile(): GdxArray<String> {
-        return GdxArray(arrayOf("Loading...", ""))
+        return gdxArrayOf("Loading...", "")
     }
 
     fun getVisualProfileArray(): GdxArray<String> {
-        return GdxArray(getSaveFileNames().indices.map { getVisualOf(it) }.toTypedArray())
+        return getSaveFileNames().indices.map { getVisualOf(it) }.toGdxArray()
     }
 
     fun getVisualProfileArrayForLoadedProfile(): GdxArray<String> {
-        return GdxArray(getSaveFileNames().indices
-                            .map { index -> index to getSaveFilesContentBy(index) }
-                            // 0 is the default value, which can actually be a valid value. So -9 is a never valid value.
-                            .filter { (_, saveFileContent) -> saveFileContent.first.getInteger(PROFILE_INDEX_KEY, -9) == currentIndex }
-                            .map { (index, saveFileContent) -> getVisualOf(index, saveFileContent.first) }
-                            .toTypedArray())
+        return getSaveFileNames().indices
+            .map { index -> index to getSaveFilesContentBy(index) }
+            // 0 is the default value, which can actually be a valid value. So -9 is a never valid value.
+            .filter { (_, saveFileContent) -> saveFileContent.first.getInteger(PROFILE_INDEX_KEY, -9) == currentIndex }
+            .map { (index, saveFileContent) -> getVisualOf(index, saveFileContent.first) }
+            .toGdxArray()
     }
 
     fun getLastSaveLocation(): String {

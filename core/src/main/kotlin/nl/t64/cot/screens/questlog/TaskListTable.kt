@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Align
 import ktx.collections.GdxArray
+import ktx.collections.toGdxArray
 import nl.t64.cot.Utils
 import nl.t64.cot.components.quest.QuestGraph
 import nl.t64.cot.components.quest.QuestState
@@ -29,12 +30,12 @@ internal class TaskListTable {
     fun populateTaskList(quest: QuestGraph) {
         taskList.clearItems()
         if (quest.isOneOfBothStatesEqualOrHigherThan(QuestState.ACCEPTED)) {
-            val questTasks = GdxArray(quest.getAllQuestTasksForVisual())
+            val questTasks: GdxArray<QuestTask> = quest.getAllQuestTasksForVisual().toGdxArray()
             taskList.setItems(questTasks)
-            taskList.setAlignment(Align.left)
+            taskList.alignment = Align.left
         } else {
             taskList.setItems(QuestTask(taskPhrase = "(No tasks visible until this quest is accepted)"))
-            taskList.setAlignment(Align.center)
+            taskList.alignment = Align.center
         }
     }
 

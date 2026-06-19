@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.TimeUtils
 import com.rafaskoberg.gdx.typinglabel.TypingLabel
 import ktx.assets.disposeSafely
 import ktx.collections.GdxArray
+import ktx.collections.toGdxArray
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.profileManager
@@ -637,7 +638,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun populateChoices() {
-        val choices = GdxArray<ConversationChoice>(graph.getAssociatedChoices())
+        val choices: GdxArray<ConversationChoice> = graph.getAssociatedChoices().toGdxArray()
         answers.populateChoices(choices)
         repositionScrollPaneBasedOnContent()
 
