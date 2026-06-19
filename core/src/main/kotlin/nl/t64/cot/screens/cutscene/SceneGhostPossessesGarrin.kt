@@ -40,7 +40,7 @@ class SceneGhostPossessesGarrin : CutsceneScreen() {
         return Actions.sequence(
             Actions.run {
                 setMapWithBgsOnly("lastdenn_house_garrin")
-                playBgm(AudioEvent.BGM_MURDER)
+                playBgm(AudioEvent.BGM_GHOST)
                 setFixedCameraPosition(0f, 460f)
 
                 garrinLying.isVisible = false
