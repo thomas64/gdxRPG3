@@ -4,7 +4,6 @@ import nl.t64.cot.Utils.gameData
 import nl.t64.cot.components.party.abilities.AbilityItemId
 import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.components.portal.Portal
-import nl.t64.cot.components.quest.QuestState
 import nl.t64.cot.constants.ScreenType
 
 
@@ -130,7 +129,7 @@ object ConditionDatabase {
             || gameData.party.contains("reignald")
             || gameData.heroes.getCertainHero("reignald").hasBeenRecruited
     private val isGarrinPossessed
-        get() = gameData.quests.getQuestById("quest_lastdenn_garrin").currentState.isLowerThan(QuestState.FINISHED)
+        get() = gameData.quests.getQuestById("quest_lastdenn_garrin").tasks["2"]!!.isComplete.not() // "_2_"
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

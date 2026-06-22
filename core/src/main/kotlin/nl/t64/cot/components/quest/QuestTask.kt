@@ -89,6 +89,7 @@ class QuestTask(
             QuestTaskType.DELIVER_MESSAGE,
             QuestTaskType.KILL,
             QuestTaskType.MEET_PERSON,
+            QuestTaskType.TALK_TO_PERSON,
             QuestTaskType.RECEIVE_ABILITY,
             QuestTaskType.RETURN -> completeTask()
             QuestTaskType.DELIVER_ITEM,

@@ -226,6 +226,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             ConversationCommand.KNOW_OTHER_QUEST -> knowOtherQuest(selectedChoice.questId, nextId)
             ConversationCommand.ACCEPT_OTHER_QUEST -> acceptOtherQuest(selectedChoice.questId, nextId)
             ConversationCommand.MEET_QUEST_PERSON -> meetQuestPerson(nextId)
+            ConversationCommand.TALK_TO_QUEST_PERSON -> talkToQuestPerson(nextId)
             ConversationCommand.COMPLETE_QUEST -> completeQuest(nextId)
             ConversationCommand.FAIL_QUEST -> failQuest(nextId)
             ConversationCommand.TRADE_QUEST_ITEMS -> tradeQuestItems()
@@ -427,6 +428,11 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
 
     private fun meetQuestPerson(nextId: String) {
         gameData.quests.getQuestById(conversationId).setMeetPersonTaskComplete()
+        continueConversation(nextId)
+    }
+
+    private fun talkToQuestPerson(nextId: String) {
+        gameData.quests.updateTalkToPerson(conversationId)
         continueConversation(nextId)
     }
 

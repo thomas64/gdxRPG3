@@ -57,6 +57,7 @@
         "linkedWith"     : ["2"]
       },
       "2": {
+        "comment"        : "WARNING: 1 link to 2 in Santino.handleSideEffects()",
         "taskPhrase"     : "Meet with Father Santino at 18:00 to let him prepare the information you need about Ulrog.",
         "type"           : "DELIVER_MESSAGE",
         "conversationIds": ["to_be_added"],
@@ -70,49 +71,65 @@
     "summary" : "Garrin was possessed by a ghost, and the ghost of Garrin has murdered Father Santino at 13:00 in the streets of Lastdenn. Two passing guards arrested Garrin, while the ghost already left his body.",
     "tasks"   : {
       "1": {
-        "taskPhrase": "Prevent the murder of Father Santino.",
-        "type"      : "FREE"
+        "comment"      : "WARNING: One link to 1 in SceneGhostPossessesGarrin.exitScreen()",
+        "taskPhrase"   : "[Optional] Find out what has happened with Garrin.",
+        "updatedPhrase": "[Optional] Witness the possession of Garrin by the ghost around 09:00.",
+        "type"         : "FREE",
+        "isOptional"   : true,
+        "isResettable" : false
       },
       "2": {
-        "comment"      : "WARNING: One link to 2 in SceneGhostPossessesGarrin.exitScreen()",
-        "taskPhrase"   : "      Find out what has happened with Garrin.",
-        "updatedPhrase": "      Witness the possession of Garrin by the ghost around 09:00.",
-        "type"         : "FREE",
-        "isResettable" : false,
-        "linkedWith"   : ["3"]
+        "comment"   : "WARNING: 1 link to 2 in ConditionDatabase.isGarrinPossessed",
+        "taskPhrase": "Prevent the murder of Father Santino.",
+        "type"      : "FREE",
+        "linkedWith": ["8"]
       },
       "3": {
-        "taskPhrase"   : "      Follow the trail of Garrin's case.",
-        "updatedPhrase": "      Receive information from Garrin in jail.",
-        "type"         : "FIND_ITEM",
-        "target"       : {"key_garrin": 1},
-        "isHidden"     : true,
-        "isResettable" : false,
-        "linkedWith"   : ["4"]
+        "comment"        : "WARNING: 4 links in garrin_early_morning and 2 links in garrin_in_jail and 1 link in santino_counseling.",
+        "taskPhrase"     : "      Find out about the proof hidden away in Garrin's drawer.",
+        "type"           : "TALK_TO_PERSON",
+        "conversationIds": ["paton_hiding"],
+        "isHidden"       : true,
+        "isResettable"   : false,
+        "linkedWith"     : ["4"]
       },
       "4": {
-        "taskPhrase"  : "      Find the letter from Garrin to Father Santino in a drawer in Garrin's house.",
+        "taskPhrase"  : "      Get the key from Garrin for his wife's drawer.",
         "type"        : "FIND_ITEM",
-        "target"      : {"letter_to_santino": 1},
+        "target"      : {"key_garrin": 1},
         "isHidden"    : true,
         "isResettable": false,
         "linkedWith"  : ["5"]
       },
       "5": {
-        "taskPhrase"  : "      Show the letter from Garrin to Father Santino.",
+        "taskPhrase"  : "      Open the drawer in Garrin's house and take the proof.",
         "type"        : "FIND_ITEM",
-        "target"      : {"ghost_repeller": 1},
+        "target"      : {"ghost_proof": 1},
         "isHidden"    : true,
         "isResettable": false,
         "linkedWith"  : ["6"]
       },
       "6": {
+        "taskPhrase"  : "      Show Father Santino the proof and claim his holy staff.",
+        "type"        : "FIND_ITEM",
+        "target"      : {"ghost_repeller": 1},
+        "isHidden"    : true,
+        "isResettable": false,
+        "linkedWith"  : ["7"]
+      },
+      "7": {
         "taskPhrase"     : "      Destroy the ghost before it possesses Garrin.",
         "type"           : "DELIVER_ITEM_TO_SHOW",
         "target"         : {"ghost_repeller": 1},
         "conversationIds": ["ghost_booing", "paton_hiding_behind_garrin2", "ghost_scaring2"],
         "isHidden"       : true,
-        "linkedWith"     : ["1"]
+        "linkedWith"     : ["2"]
+      },
+      "8": {
+        "taskPhrase"     : "Report back to Father Santino about the ghost you destroyed.",
+        "type"           : "TALK_TO_PERSON",
+        "conversationIds": ["santino_counseling"],
+        "isHidden"       : true
       }
     }
   }

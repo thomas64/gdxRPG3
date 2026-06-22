@@ -186,6 +186,12 @@ data class QuestGraph(
             .forEach { setTaskComplete(it.key) }
     }
 
+    fun setTalkToPersonTaskComplete(conversationId: String) {
+        tasks.filterValues { it.type == QuestTaskType.TALK_TO_PERSON }
+            .filterValues { conversationId in it.conversationIds }
+            .forEach { setTaskComplete(it.key) }
+    }
+
     fun completeRemainingTasks() {
         tasks.filterValues { !it.isComplete }
             .forEach { setTaskComplete(it.key) }

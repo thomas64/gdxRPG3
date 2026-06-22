@@ -8,6 +8,8 @@ import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.condition.isTrue
+import nl.t64.cot.components.quest.QuestGraph
+import nl.t64.cot.components.quest.QuestState
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.GameState
 import nl.t64.cot.screens.world.entity.*
@@ -139,6 +141,7 @@ class Santino : EntitySchedule() {
 
     override fun handleSideEffects() {
         handleTimedBells()
+        possibleFailQuestSantino()
 
         if (mapManager.currentMap.mapTitle == "lastdenn_church") {
             if (gameData.clock.isCurrentTimeAt("09:59")) {
@@ -169,6 +172,17 @@ class Santino : EntitySchedule() {
             if (gameData.clock.isCurrentTimeAt("16:24") && "!is_garrin_possessed".isTrue()) {
                 worldScreen.useDoor("door_large_round")
             }
+        }
+    }
+
+    private fun possibleFailQuestSantino() {
+        val questSantino: QuestGraph = gameData.quests.getQuestById("quest_lastdenn_santino")
+        if (gameData.clock.isCurrentTimeAfter("14:01")
+            && "is_garrin_possessed".isTrue()
+            && !questSantino.isOneOfBothStatesEqualOrHigherThan(QuestState.FINISHED)
+            && !questSantino.isTaskFailed("2")
+        ) {
+            questSantino.setTaskFailed("2") // "_2_"
         }
     }
 

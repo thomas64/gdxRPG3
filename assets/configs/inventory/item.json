@@ -65,7 +65,7 @@
     "group"       : "ITEM",
     "sort"        : 70145,
     "is_unique"   : true,
-    "description" : ["Key from Garrin's cabinet."],
+    "description" : ["Key from Garrin's wife's drawer."],
     "is_droppable": false
   },
   "letter_to_santino"      : {
@@ -77,6 +77,15 @@
     "is_droppable": false,
     "replaces"    : ["key_garrin"]
   },
+  "ghost_proof"            : {
+    "name"        : "Ghost proof",
+    "group"       : "ITEM",
+    "sort"        : 70151,
+    "is_unique"   : true,
+    "description" : ["Documents containing 'proof' that ghosts exist.", "However that would be possible."],
+    "is_droppable": false,
+    "replaces"    : ["key_garrin"]
+  },
   "ghost_repeller"         : {
     "name"        : "Ghost repeller",
     "group"       : "ITEM",
@@ -84,6 +93,6 @@
     "is_unique"   : true,
     "description" : ["A holy staff from Father Santino that makes ghosts interactable.", "It doesn't work on possessed people though."],
     "is_droppable": false,
-    "replaces"    : ["letter_to_santino"]
+    "replaces"    : ["ghost_proof"]
   }
 }

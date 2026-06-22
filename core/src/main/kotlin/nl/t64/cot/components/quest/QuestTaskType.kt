@@ -15,6 +15,7 @@ enum class QuestTaskType {
     SAY_THE_RIGHT_THING,
     KILL,
     MEET_PERSON,
+    TALK_TO_PERSON,
     RECEIVE_ABILITY,
 
     RETURN,
