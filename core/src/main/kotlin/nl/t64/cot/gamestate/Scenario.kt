@@ -1,6 +1,7 @@
 package nl.t64.cot.gamestate
 
 import nl.t64.cot.Utils.gameData
+import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.Utils.profileManager
 import nl.t64.cot.components.party.inventory.InventoryDatabase
 import nl.t64.cot.constants.Constant
@@ -15,6 +16,10 @@ class Scenario {
         addQuestGraceToLogbook()
         gameData.clock.start()
         gameData.numberOfCycles = 1
+
+        if (preferenceManager.isDebugModeOn) {
+            setupDebugMode()
+        }
     }
 
     fun startSecondCycle() {
@@ -47,6 +52,23 @@ class Scenario {
         val mozes = gameData.heroes.getCertainHero(Constant.PLAYER_ID)
         gameData.heroes.removeHero(Constant.PLAYER_ID)
         gameData.party.addHero(mozes)
+    }
+
+    private fun setupDebugMode() {
+        val luana = gameData.heroes.getCertainHero("luana")
+        gameData.heroes.removeHero("luana")
+        gameData.party.addHero(luana)
+
+        val crystalOfTime = InventoryDatabase.createInventoryItem("crystal_of_time")
+        gameData.inventory.autoSetItem(crystalOfTime)
+
+        setQuestGraceComplete()
+        addQuestArdorToLogbook()
+        addQuestVoiceToLogbook()
+        hideQuestVoiceFromLogbook()
+        addQuestYlarusToLogbook()
+
+        gameData.numberOfCycles = 5
     }
 
     private fun addItemsToInventory() {

@@ -138,8 +138,6 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     }
 
     fun changeMap(currentMap: GameMap) {
-        visibleScheduledEntities.clear()
-        worldSchedule.update()
         worldRenderer.map = currentMap.tiledMap
         player.send(LoadEntityEvent(currentMap.playerSpawnDirection, currentMap.playerSpawnLocation))
         mapManager.updateBgsVolumes(player.position)
@@ -153,6 +151,9 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
         currentMap.setTiledGraphs()
         mapManager.setNextMapTitleNull()
         fogOfWarManager.setNewMap(currentMap, camera)
+
+        visibleScheduledEntities.clear()
+        worldSchedule.update()
     }
 
     fun shakeCamera() {
