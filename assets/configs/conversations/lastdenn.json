@@ -271,9 +271,9 @@
     }
   },
   "lastdenn_bar_sailor"     : {
-    "name"     : "Sailor",
-    "condition": ["is_garrin_possessed"], "startAt": "10",
-    "phrases"  : {
+    "name"   : "Sailor",
+    "startAt": [{"condition": ["is_garrin_possessed"], "startId": "10"}],
+    "phrases": {
       "1" : {"text": ["Don't talk to me about this city. I have opinions and none of them are polite."]},
       "2" : {"text": ["Our ship is in port. Has been for nine days. Every morning we can unload, but moving crew through the gate before 15:00 is a fight."]},
       "3" : {"text": ["Half-day restrictions wreck full-day schedules. That's sailor math."], "choices": [{"command": "EXIT"}]},
@@ -283,9 +283,9 @@
     }
   },
   "lastdenn_bar_captain"    : {
-    "name"     : "Captain",
-    "condition": ["is_garrin_possessed"], "startAt": "10",
-    "phrases"  : {
+    "name"   : "Captain",
+    "startAt": [{"condition": ["is_garrin_possessed"], "startId": "10"}],
+    "phrases": {
       "1" : {"text": ["At ease. You're not one of mine, but the habit sticks."]},
       "2" : {"text": ["Nine days in Lastdenn. We were scheduled for two. The port works, but the gate bottleneck before 15:00 slows everything."]},
       "3" : {"text": ["A half-open city is still a delay."], "choices": [{"command": "EXIT"}]},
@@ -441,9 +441,9 @@
     }
   },
   "lastdenn_talia"          : {
-    "name"     : "Talia",
-    "condition": ["_time_after_15:00", "is_garrin_possessed"], "startAt": "10",
-    "phrases"  : {
+    "name"   : "Talia",
+    "startAt": [{"condition": ["_time_after_15:00", "is_garrin_possessed"], "startId": "10"}],
+    "phrases": {
       "1" : {"text": ["The well is a perfect place to hear about the latest gossip. Do you want to know what's been going on in Lastdenn?"]},
       "2" : {"text": ["Except for the mayor's closure rules, not much. And that is because of the mayor's closure rules."], "choices": [{"command": "EXIT"}]},
       "10": {"text": ["The well is a perfect place to hear about the latest gossip. Do you want to know what's been going on in Lastdenn?"]},
@@ -452,9 +452,9 @@
     }
   },
   "lastdenn_bramwell"       : {
-    "name"     : "Bramwell",
-    "condition": ["_time_after_15:00", "is_garrin_possessed"], "startAt": "10",
-    "phrases"  : {
+    "name"   : "Bramwell",
+    "startAt": [{"condition": ["_time_after_15:00", "is_garrin_possessed"], "startId": "10"}],
+    "phrases": {
       "1" : {"text": ["The streets of Lastdenn are empty today. I don't know if it's the weather or the mayor's closure rules, but it's not as lively as it can be."], "choices": [{"command": "EXIT"}]},
       "10": {"text": ["The streets of Lastdenn are empty today. Is it because of the murder today? That sure would explain something..."], "choices": [{"command": "EXIT"}]}
     }

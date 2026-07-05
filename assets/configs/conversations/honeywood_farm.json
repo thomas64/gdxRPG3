@@ -120,9 +120,9 @@
     }
   },
   "mr_isembert_after_11_after_loss": {
-    "name"     : "Mr. Isembert",
-    "condition": ["_hero_luana"], "startAt": "5",
-    "phrases"  : {
+    "name"   : "Mr. Isembert",
+    "startAt": [{"condition": ["_hero_luana"], "startId": "5"}],
+    "phrases": {
       "1": {"text": ["It's terrible! This morning! They killed Luana and took her body! Evdos knows why!"]},
       "2": {"text": ["They also took my horses! My horses! My livelihood! I don't know what to do!"], "choices": [{"nextId": "6"}]},
       "5": {"text": ["It's terrible! This morning! They took my horses! My horses! My livelihood! I don't know what to do!"]},
@@ -209,9 +209,9 @@
     }
   },
   "luana_joins_party"              : {
-    "name"     : "Luana",
-    "condition": ["_c_!=_a_q_quest_luana_before_10"], "startAt": "10",
-    "phrases"  : {
+    "name"   : "Luana",
+    "startAt": [{"condition": ["_c_!=_a_q_quest_luana_before_10"], "startId": "10"}],
+    "phrases": {
       "1" : {"text": ["Mozes, you're late!"]},
       "2" : {"text": ["But I'm ready to go."]},
       "3" : {"text": ["Let's do this! It's time for adventure!"], "choices": [{"command": "EXIT"}]},

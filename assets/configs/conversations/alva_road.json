@@ -33,9 +33,9 @@
     }
   },
   "alva_heal_price-0"    : {
-    "name"     : "Fairy Healer",
-    "condition": ["_time_after_18:15"], "startAt": "10",
-    "phrases"  : {
+    "name"   : "Fairy Healer",
+    "startAt": [{"condition": ["_time_after_18:15"], "startId": "10"}],
+    "phrases": {
       "1" : {"text": ["Dear traveler, if you'd like, I can put you to sleep among my healing flowers for 1 hour. Your wounds will mend while you rest. Would you like to accept this healing?"]},
       "2" : {
         "choices": [

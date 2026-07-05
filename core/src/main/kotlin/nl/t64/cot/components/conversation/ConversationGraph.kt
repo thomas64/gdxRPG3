@@ -13,9 +13,8 @@ data class ConversationGraph(
     @JsonProperty("name")
     val npcName: String = "",
     val phrases: Map<String, ConversationPhrase> = emptyMap(),
-    @JsonProperty("condition")
-    private val conditions: List<String>?,
-    private val startAt: String?
+    @JsonProperty("startAt")
+    private val alternateStarts: List<AlternateStart> = emptyList()
 ) {
     var currentPhraseId: String = DEFAULT_STARTING_PHRASE_ID
 
@@ -28,9 +27,12 @@ data class ConversationGraph(
     }
 
     fun possibleSetAlternateStartingPhraseId() {
-        if (currentPhraseId == DEFAULT_STARTING_PHRASE_ID) {
-            currentPhraseId = conditions?.takeIf { it.areAllTrue(id) }?.let { startAt } ?: DEFAULT_STARTING_PHRASE_ID
-        }
+        if (currentPhraseId != DEFAULT_STARTING_PHRASE_ID) return
+
+        currentPhraseId = alternateStarts
+            .firstOrNull { it.conditions.areAllTrue(id) }
+            ?.startId
+            ?: DEFAULT_STARTING_PHRASE_ID
     }
 
     fun getCurrentFace(): String {

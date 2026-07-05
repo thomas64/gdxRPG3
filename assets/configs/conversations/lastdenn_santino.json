@@ -195,9 +195,9 @@
     }
   },
   "garrin_to_jail"             : {
-    "name"     : "Garrin",
-    "condition": ["_rc_==_a_q_quest_lastdenn_garrin"], "startAt": "2",
-    "phrases"  : {
+    "name"   : "Garrin",
+    "startAt": [{"condition": ["_rc_==_a_q_quest_lastdenn_garrin"], "startId": "2"}],
+    "phrases": {
       "1": {"text": ["I'm innocent! It wasn't me! It was..."], "choices": [{"nextId": "3"}]},
       "2": {"text": ["I'm innocent! It wasn't me! It was a ghost!"], "choices": [{"nextId": "3"}]},
       "3": {"face": "soldier12", "name": "Lastdenn Guard", "text": ["You be quiet!"], "choices": [{"command": "EXIT"}]}
@@ -253,9 +253,9 @@
     }
   },
   "santino_service"            : {
-    "name"     : "Father Santino",
-    "condition": ["_time_after_10:56"], "startAt": "20",
-    "phrases"  : {
+    "name"   : "Father Santino",
+    "startAt": [{"condition": ["_time_after_10:56"], "startId": "20"}],
+    "phrases": {
       "1" : {"text": ["People of Lastdenn, let us begin in stillness and gratitude. We stand before Evdos, God of Knowledge, whose light reveals what is true."]},
       "2" : {
         "choices": [
@@ -277,9 +277,9 @@
     }
   },
   "santino_counseling"         : {
-    "name"     : "Father Santino",
-    "condition": ["_rc_>=_a_q_quest_lastdenn_santino"], "startAt": "100",
-    "phrases"  : {
+    "name"   : "Father Santino",
+    "startAt": [{"condition": ["_rc_>=_a_q_quest_lastdenn_santino"], "startId": "100"}],
+    "phrases": {
       "1"   : {"text": ["Blessings upon you my child."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "2"}]},
       "2"   : {"text": ["Welcome to the Temple of Evdos, God of Knowledge. I am Father Santino."]},
       "3"   : {"text": ["Are you in need of pastoral counseling?"]},
@@ -358,9 +358,9 @@
     }
   },
   "santino_busy_errand"        : {
-    "name"     : "Father Santino",
-    "condition": ["_tc_1_q_quest_lastdenn_santino"], "startAt": "10",
-    "phrases"  : {
+    "name"   : "Father Santino",
+    "startAt": [{"condition": ["_tc_1_q_quest_lastdenn_santino"], "startId": "10"}],
+    "phrases": {
       "1" : {"text": ["Blessings upon you my child."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "2"}]},
       "2" : {"text": ["I am Father Santino, priest of the Temple of Evdos, God of Knowledge."]},
       "3" : {"text": ["I'm on my way to the mayor. I need to talk to him about the daily gate closure."]},

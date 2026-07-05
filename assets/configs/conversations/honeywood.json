@@ -1,8 +1,8 @@
 {
   "test"                                : {
-    "comment"  : "testing starting conditions vs phrase looping. phrase looping wins from startAt.",
-    "condition": ["_n_100_==_item_herb"], "startAt": "10",
-    "phrases"  : {
+    "comment": "testing starting conditions vs phrase looping. phrase looping wins from startAt.",
+    "startAt": [{"condition": ["_n_100_==_item_herb"], "startId": "10"}],
+    "phrases": {
       "1" : {"text": ["starting phrase"]},
       "2" : {"text": ["phrase looping"], "choices": [{"command": "EXIT", "nextId": "2"}]},
       "10": {"text": ["phrase 100 herbs"], "choices": [{"command": "EXIT"}]}
@@ -280,9 +280,9 @@
     }
   },
   "quest_honeywood_inn_price-1"         : {
-    "name"     : "Innkeeper",
-    "condition": ["_c_==_a_q_this", "_tn_1_q_this"], "startAt": "60",
-    "phrases"  : {
+    "name"   : "Innkeeper",
+    "startAt": [{"condition": ["_c_==_a_q_this", "_tn_1_q_this"], "startId": "60"}],
+    "phrases": {
       "1"   : {"text": ["Hey there Mozes! Would you like to rest here and be completely revitalized for just 1 gold piece? Or you can just hang around here, wait, and pass some time?"]},
       "2"   : {
         "choices": [
@@ -685,9 +685,9 @@
     }
   },
   "honeywood_soldiers"                  : {
-    "name"     : "Soldier",
-    "condition": ["!alone_in_party"], "startAt": "100",
-    "phrases"  : {
+    "name"   : "Soldier",
+    "startAt": [{"condition": ["!alone_in_party"], "startId": "100"}],
+    "phrases": {
       "1"   : {"text": ["Sir, as per the village elder's orders, we are not permitted to allow anyone to leave the village {COLOR=BLUE}alone{COLOR=BLACK}."]},
       "2"   : {
         "text": ["It's dangerous to go alone, particularly with the recent increase in monster activity. (What's up with that anyway?)"], "choices": [

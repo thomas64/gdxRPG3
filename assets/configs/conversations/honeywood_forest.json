@@ -185,9 +185,9 @@
     }
   },
   "fairy_school"          : {
-    "name"     : "Fairy School",
-    "condition": ["_rc_===_u_q_quest_mother_fairy"], "startAt": "20",
-    "phrases"  : {
+    "name"   : "Fairy School",
+    "startAt": [{"condition": ["_rc_===_u_q_quest_mother_fairy"], "startId": "20"}],
+    "phrases": {
       "1" : {
         "text": ["Young Mozes, would you like to learn a spell?"], "choices": [
           {"condition": ["shield_spell"], "nextId": "2", "orElseId": "3"}
@@ -219,9 +219,9 @@
     }
   },
   "fairy_academy"         : {
-    "name"     : "Fairy Academy",
-    "condition": ["_rc_===_u_q_quest_mother_fairy"], "startAt": "20",
-    "phrases"  : {
+    "name"   : "Fairy Academy",
+    "startAt": [{"condition": ["_rc_===_u_q_quest_mother_fairy"], "startId": "20"}],
+    "phrases": {
       "1" : {
         "text": ["Young Mozes, would you like to receive skill training?"], "choices": [
           {"condition": ["mozes_wizard1"], "nextId": "2", "orElseId": "5"}
@@ -246,9 +246,9 @@
     }
   },
   "fairy_shop"            : {
-    "name"     : "Fairy Shop",
-    "condition": ["_rc_===_u_q_quest_mother_fairy"], "startAt": "20",
-    "phrases"  : {
+    "name"   : "Fairy Shop",
+    "startAt": [{"condition": ["_rc_===_u_q_quest_mother_fairy"], "startId": "20"}],
+    "phrases": {
       "1"   : {"text": ["Young Mozes, can I help you with anything?"]},
       "2"   : {
         "choices": [

@@ -29,9 +29,9 @@
     }
   },
   "drunken_lastdenn_guard": {
-    "name"     : "Guard off duty",
-    "condition": ["should_guard_be_giving_key"], "startAt": "100",
-    "phrases"  : {
+    "name"   : "Guard off duty",
+    "startAt": [{"condition": ["should_guard_be_giving_key"], "startId": "100"}],
+    "phrases": {
       "1"   : {"text": ["*Hic*"], "choices": [{"command": "EXIT"}]},
       "100" : {"text": ["Hn. If it's the barkeep you want, he's the sod behind the bar. If it's me - *Hic* I'm off duty, and fresh out of favours."]},
       "101" : {"text": ["Twelve years a jailer, and this hour with a bottle is the only quiet I *Hic* get. So make it quick."]},
@@ -147,9 +147,9 @@
     }
   },
   "ryiah_join"            : {
-    "name"     : "Ryiah",
-    "condition": ["_conv_quest_lastdenn_ryiah_==_20"], "startAt": "10",
-    "phrases"  : {
+    "name"   : "Ryiah",
+    "startAt": [{"condition": ["_conv_quest_lastdenn_ryiah_==_20"], "startId": "10"}],
+    "phrases": {
       "1"   : {"text": ["Wait. Who are you? My new guard, or my new favorite person?"]},
       "2"   : {"text": ["Actually, do not answer. I am deciding you are my new favorite person."]},
       "3"   : {"text": ["Before I make my dramatic exit, anything you want to say?"], "choices": [{"nextId": "12"}]},

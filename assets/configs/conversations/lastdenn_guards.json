@@ -1,9 +1,9 @@
 {
   "guarding_till_1500"               : {
-    "name"     : "Lastdenn Guard",
-    "comment"  : "WARNING: phraseId 100 is used in 2 conv conditions.",
-    "condition": ["_time_after_14:58"], "startAt": "30",
-    "phrases"  : {
+    "name"   : "Lastdenn Guard",
+    "comment": "WARNING: phraseId 100 is used in 2 conv conditions.",
+    "startAt": [{"condition": ["_time_after_14:58"], "startId": "30"}],
+    "phrases": {
       "1"  : {"text": ["Halt! The mayor of Lastdenn has ordered me to stop anyone from passing through the town's entrance until 15:00."]},
       "2"  : {"text": ["Only those with official business in or from Lastdenn may pass here before then."]},
       "3"  : {"text": ["I'm sorry sir, but I have my orders."]},
@@ -43,9 +43,9 @@
     }
   },
   "walking_to_warp_crystal"          : {
-    "name"     : "Lastdenn Guard",
-    "condition": ["_conv_guarding_till_1500_==_100"], "startAt": "10",
-    "phrases"  : {
+    "name"   : "Lastdenn Guard",
+    "startAt": [{"condition": ["_conv_guarding_till_1500_==_100"], "startId": "10"}],
+    "phrases": {
       "1" : {"text": ["This is the city of Lastdenn."]},
       "2" : {"text": ["Now that it's after 15:00, the city is open to everyone. Don't cause any disturbances."]},
       "3" : {"text": ["[GRAY](The mayor's decision to close the city entrance until 15:00 is quite scandalous, if you ask me...)"], "choices": [{"command": "EXIT"}]},
@@ -53,9 +53,9 @@
     }
   },
   "talking_to_other_guard"           : {
-    "name"     : "Lastdenn Guard",
-    "condition": ["is_garrin_possessed"], "startAt": "10",
-    "phrases"  : {
+    "name"   : "Lastdenn Guard",
+    "startAt": [{"condition": ["is_garrin_possessed"], "startId": "10"}],
+    "phrases": {
       "1" : {"face": "soldier12", "text": ["Hey Zachary! What a boring day it was! Did anything worthwhile happen while you were standing guard here today?"]},
       "2" : {"face": "soldier16", "text": ["Nah, nothing much. The mayor's closure of the city entrance until 15:00 made for a pretty slow day."]},
       "3" : {"face": "soldier12", "text": ["Yeah. Still, at least we got to stand in the sun for a bit."]},
@@ -70,9 +70,9 @@
     }
   },
   "standing_guard_near_crystal"      : {
-    "name"     : "Lastdenn Guard",
-    "condition": ["_r_!=_u_q_quest_lastdenn_garrin", "_r_!=_f_q_quest_lastdenn_garrin", "_time_between_12:00_and_13:00", "is_garrin_possessed"], "startAt": "50",
-    "phrases"  : {
+    "name"   : "Lastdenn Guard",
+    "startAt": [{"condition": ["_r_!=_u_q_quest_lastdenn_garrin", "_r_!=_f_q_quest_lastdenn_garrin", "_time_between_12:00_and_13:00", "is_garrin_possessed"], "startId": "50"}],
+    "phrases": {
       "1" : {"text": ["This is the city of Lastdenn."]},
       "2" : {"text": ["Don't cause any disturbances."], "choices": [{"command": "EXIT"}]},
       "50": {"text": ["This is the city of Lastdenn."]},
@@ -100,9 +100,9 @@
     }
   },
   "lastdenn_guard_mayor"             : {
-    "name"     : "Lastdenn Guard",
-    "condition": ["_time_between_14:08_and_14:18", "!is_garrin_possessed", "is_reignald_recruited"], "startAt": "5",
-    "phrases"  : {
+    "name"   : "Lastdenn Guard",
+    "startAt": [{"condition": ["_time_between_14:08_and_14:18", "!is_garrin_possessed", "is_reignald_recruited"], "startId": "5"}],
+    "phrases": {
       "1": {"text": ["I'm sorry sir, but the mayor does not wish to see you right now."], "choices": [{"command": "EXIT"}]},
       "5": {"text": ["Hang on a minute! I'm talking to Father Santino right now. And the mayor is not expecting you at all."], "choices": [{"command": "EXIT"}]}
     }
