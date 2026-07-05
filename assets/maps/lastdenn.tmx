@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="76" height="116" tilewidth="24" tileheight="24" infinite="0" nextlayerid="24" nextobjectid="300">
+<map version="1.11" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="76" height="116" tilewidth="24" tileheight="24" infinite="0" nextlayerid="24" nextobjectid="308">
  <properties>
   <property name="bgm" value="bgm_lastdenn"/>
   <property name="lightmap_camera" value="sunlight"/>
@@ -36,7 +36,7 @@
  </layer>
  <layer id="3" name="under2_objects" width="76" height="116">
   <data encoding="base64" compression="zlib">
-   eJzt1sFLFGEYx/HnEFlE6rKKkKAoOM4GQi5C3lY8aN3K/g1JTa1r3qPU0ixBb3oXQTC0/yEM/wIDj4rgKfAnHtZtRidz32bf9fuBhwdmZ1+e+fHuu2MGAACqxUTObDKX9hT++KSs5sgr0ctes5HetKfwx3tl9eEG5TWaNxvLpz2FP6aV1Qx5AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAq2FK/2XJ/2lP4Y1tZfScvL+1nzH5lih3x1gfMNlQ/lFFbXbEj3o6y2h1Ie4rKdKdgdrdQeu1IWR3/Q17PArPnqiFVNijPfJUmVFa5P/JqGDRrGozeO9x5+VqjymhM9Uo1Htycc69HWT2Oyeud8rofmtWG0V4Xlu6vF0F5zr2fD6/3/XJ4pGfpVuXL3A87/m5/PcjqN6/rzS3FvnHr4nnfdplNdbnLI8n5feCqX7a/mpXXoj773V7s8/cunndBWX1JMa/z54yrfrq/QlUu5tzf1F6abI32SjWtZ5hRzTrsH1VPVE9j8vqmfF63Rrvv9h39t21p3bVMtPvmtt4ragrJ913Xqv4XVjqi3TeBsur8D3kBLnzWGTVVn9xxplHvXQ3Z5O6bgzdu1q3W/fW1z826C8pjL5PcfeMqr2pFXldDXldDXqVOAKf9n3E=
+   eJzt1k9LVFEcxvHfQlKJtGEMISFR8HpHECwE3U240Nr5522ElaVucx+ZaWkFtat9CIKhvQdRfAUKLhXBldATLcbx3pnrnzndOdP3Az8emLlzOffhzJkxAwAAteJlzmw6l/Yq/LGkrt7TV6LJQbOng2mvwh9v1NU8fQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE99GTL7OpT2Kvyxqa5+0ZeXDjJm+5lCIt7qsNmaZksddTQXEvG21dXucNqrqE4NebPGfPFrx+rq5Ap9jQZmY5pxTTaozPqqTaiucuf6ahkxax2JXvuku/y9nqmj55opzYvg/zn3+tXVQExfr9XXrdCsKYxmc1i8vyaCypx7Oz3X+3wl9OlZ7mseVDiPui62v+5m9Z3X6233CrlWV3q9r3rN5nrd9ZHk7D5wleX2V5v6+qz3TjsL+eFm6fWuqKuPKfZ19pxxlX/2V6jJxZz769pL0+3RrFZv9QwLmncOc1HzSPM4pq+f6memPZq+O3D027ah+/7IRNM3N/S/oj6ffN11fdfvwreuaPomUFfd/6AvwIVlnVFzt5MTf93R/66WbHL65nDWzX1rdX99eujmvivqYy+TnL5x1Vetoq/Loa/Loa9ivwGNiZyn
   </data>
  </layer>
  <layer id="4" name="under3_objects" width="76" height="116">
@@ -56,7 +56,7 @@
  </layer>
  <layer id="7" name="over6_objects" width="76" height="116">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer id="8" name="over7_objects" width="76" height="116">
@@ -209,9 +209,9 @@
   <object id="219" x="0" y="2520" width="72" height="264"/>
   <object id="220" x="72" y="2568" width="72" height="216"/>
   <object id="221" x="144" y="2616" width="48" height="132"/>
-  <object id="261" x="600" y="786" width="192" height="12"/>
   <object id="287" x="144" y="2772" width="600" height="12"/>
   <object id="294" x="744" y="2544" width="744" height="240"/>
+  <object id="301" x="528" y="336" width="24" height="96"/>
  </objectgroup>
  <objectgroup color="#5500ff" id="13" name="rest">
   <object id="164" name="door_luxurious_left" x="576" y="2184" width="48" height="72"/>
@@ -274,9 +274,21 @@
     <property name="direction" value="south"/>
    </properties>
   </object>
-  <object id="278" name="sailor01" type="w" x="816" y="456" width="48" height="24"/>
-  <object id="279" name="sailor01" type="w" x="648" y="360" width="48" height="24"/>
-  <object id="280" name="sailor01" type="w" x="696" y="552" width="48" height="24"/>
+  <object id="278" name="sailor01" type="w" x="816" y="456" width="48" height="24">
+   <properties>
+    <property name="conversation" value="lastdenn_pier"/>
+   </properties>
+  </object>
+  <object id="279" name="sailor01" type="w" x="648" y="360" width="48" height="24">
+   <properties>
+    <property name="conversation" value="lastdenn_pier"/>
+   </properties>
+  </object>
+  <object id="280" name="sailor01" type="w" x="696" y="552" width="48" height="24">
+   <properties>
+    <property name="conversation" value="lastdenn_pier"/>
+   </properties>
+  </object>
   <object id="281" name="boy15" type="p" x="1464" y="1320" width="48" height="24">
    <properties>
     <property name="condition" value="_time_before_15:00"/>
@@ -304,6 +316,22 @@
    <properties>
     <property name="conversation" value="lastdenn_fisherman"/>
     <property name="direction" value="west"/>
+   </properties>
+  </object>
+  <object id="302" name="soldier12" x="540" y="360" width="48" height="24">
+   <properties>
+    <property name="conversation" value="lastdenn_pier_guard"/>
+    <property name="direction" value="south"/>
+   </properties>
+  </object>
+  <object id="305" name="sailor01" x="672" y="264" width="48" height="24">
+   <properties>
+    <property name="direction" value="south"/>
+   </properties>
+  </object>
+  <object id="306" name="sailor01" type="inv" x="672" y="312" width="48" height="12">
+   <properties>
+    <property name="conversation" value="lastdenn_school"/>
    </properties>
   </object>
  </objectgroup>
@@ -378,6 +406,11 @@
     <property name="task" value="11"/>
    </properties>
   </object>
+  <object id="307" type="blocker" x="600" y="786" width="192" height="12">
+   <properties>
+    <property name="condition" value="_time_before_19:15"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup color="#ffaa7f" id="21" name="warp">
   <object id="162" x="1056" y="2400" width="48" height="48"/>
@@ -405,6 +438,7 @@
   <object id="246" name="note_lastdenn_bar" type="check" x="576" y="1104" width="48" height="48"/>
   <object id="263" name="event_lastdenn_shout" type="discover" x="240" y="1488" width="1104" height="600"/>
   <object id="277" name="event_lastdenn_pier_guards" type="discover" x="672" y="798" width="48" height="6"/>
+  <object id="304" name="event_lastdenn_pier_guard" type="discover" x="552" y="336" width="6" height="96"/>
  </objectgroup>
  <objectgroup color="#aaff00" id="20" name="scheduled">
   <object id="172" name="santino11" x="1152" y="2136" width="48" height="24"/>

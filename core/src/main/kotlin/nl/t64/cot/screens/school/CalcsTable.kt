@@ -31,10 +31,12 @@ internal class CalcsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
         table.add(Label("Gold", createLabelStyle()))
         table.add(Label(gameData.inventory.getTotalOfItem(ResourceType.GOLD.name).toString(), createLabelStyle())).row()
 
-        table.add("").row()
-
-        table.add(Label("Wizard", createLabelStyle()))
-        table.add(Label(getWizardRankForVisual(), createLabelStyle()))
+// Uitgezet, want schools leren niet meer alleen aan wizards. Deze stat is niet relevant meer om zichtbaar te zijn.
+// Of definitief verwijderen, of ook thief en warrior erbij zetten?
+//        table.add("").row()
+//
+//        table.add(Label("Wizard", createLabelStyle()))
+//        table.add(Label(getWizardRankForVisual(), createLabelStyle()))
     }
 
     private fun getWizardRankForVisual(): String {

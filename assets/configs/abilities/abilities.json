@@ -92,6 +92,8 @@
     "target"           : "ENEMY",
     "ap"               : 3,
     "sp"               : 6,
+    "skill"            : "BOW",
+    "min_skill"        : 1,
     "weapon_skills"    : ["BOW"],
     "hit_multiplier"   : 1.4666,
     "damage_multiplier": 1.0,
@@ -99,8 +101,7 @@
       "A ranged attack with a bow,",
       "that deals damage to a single target.",
       "Sniper Arrow has a higher chance to hit."
-    ],
-    "comment"          : ["ToDo: Deze ability heeft nog geen teacher en geen icon."]
+    ]
   },
   "brute_force" : {
     "name"             : "Brute Force",
@@ -115,8 +116,7 @@
     "description"      : [
       "A hand-to-hand attack with a weapon, that deals damage to a single target.",
       "Brute Force has a lower chance to hit, but deals more damage."
-    ],
-    "comment"          : ["ToDo: Deze ability heeft nog geen teacher en geen icon."]
+    ]
   },
   "shield_bash" : {
     "name"             : "Shield Bash",
@@ -126,16 +126,14 @@
     "skill"            : "WARRIOR",
     "min_skill"        : 1,
     "weapon_skills"    : ["SHIELD"],
-    "hit_multiplier"   : 1.0,
-    "damage_multiplier": 99.99,
+    "hit_multiplier"   : 0.0,
+    "damage_multiplier": 0.0,
     "description"      : [
       "A hand-to-hand attack with a shield, that deals damage to a single target.",
       "Shield Bash deals fixed damage equal to the shield's defense."
     ],
     "comment"          : [
-      "ToDo: Deze ability heeft nog geen teacher en geen icon.",
-      "Never advantage nor disadvantage. Never crit. Just the defense value as fixed damage.",
-      "Hit 100%."
+      "Never advantage nor disadvantage. Never crit. Just the defense value as fixed damage. Hit 100%."
     ]
   },
   "double_throw": {

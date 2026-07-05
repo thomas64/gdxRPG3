@@ -458,5 +458,24 @@
       "1" : {"text": ["The streets of Lastdenn are empty today. I don't know if it's the weather or the mayor's closure rules, but it's not as lively as it can be."], "choices": [{"command": "EXIT"}]},
       "10": {"text": ["The streets of Lastdenn are empty today. Is it because of the murder today? That sure would explain something..."], "choices": [{"command": "EXIT"}]}
     }
+  },
+  "lastdenn_pier"           : {
+    "name"   : "Sailor",
+    "phrases": {
+      "1": {"text": ["Work, work, work."]},
+      "2": {"text": ["Busy, busy, busy."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "lastdenn_school"         : {
+    "name"   : "Lastdenn School",
+    "phrases": {
+      "1": {"text": ["Good evening, young man. I just came ashore, but ready to teach! If you've a mind for it, I could show you a few new tricks."]},
+      "2": {
+        "choices": [
+          {"text": "*Visit the school.*", "command": "LOAD_SCHOOL"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      }
+    }
   }
 }

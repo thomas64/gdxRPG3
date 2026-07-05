@@ -25,8 +25,15 @@
     "entityId"      : "soldier16",
     "doesRepeat"    : true
   },
+  "event_lastdenn_pier_guard"    : {
+    "type"          : "conversation",
+    "conversationId": "lastdenn_pier_guard",
+    "entityId"      : "soldier12",
+    "doesRepeat"    : true
+  },
   "event_lastdenn_pier_guards"   : {
     "type"          : "conversation",
+    "condition"     : ["_time_before_19:15"],
     "conversationId": "lastdenn_pier_guards",
     "entityId"      : "soldier12",
     "doesRepeat"    : true

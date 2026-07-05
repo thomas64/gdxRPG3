@@ -40,7 +40,7 @@ class SkillUpgrader private constructor(
         when {
             selectedHero.isDead -> showError("${selectedHero.name} is deceased.")
             xpCost == -2 -> showError("I cannot train you in the $skillName skill any further.")
-            xpCost == -1 -> showError("${selectedHero.name} is not capable to acquire the $skillName skill.")
+            xpCost == -1 -> showError("${selectedHero.name} is not capable of acquiring the $skillName skill.")
             xpCost == 0 -> showError("You cannot train in the $skillName skill any further.")
             !hasEnoughXp -> showError("I'm sorry. You don't seem to have enough XP.")
             !hasEnoughGold -> showError("I'm sorry. You don't seem to have enough gold.")

@@ -113,21 +113,34 @@
       "1": {"text": ["I'm sorry sir, upstairs is off limits."], "choices": [{"command": "EXIT"}]}
     }
   },
+  "lastdenn_pier_guard"              : {
+    "name"   : "Lastdenn Guard",
+    "phrases": {
+      "1": {"text": ["This area is off limits for civilians."], "choices": [{"command": "EXIT"}]}
+    }
+  },
   "lastdenn_pier_guards"             : {
-    "name"     : "Lastdenn Guard",
-    "condition": ["_r_!=_u_q_quest_lastdenn_garrin", "_r_!=_f_q_quest_lastdenn_garrin", "_time_between_12:00_and_13:00", "is_garrin_possessed"], "startAt": "50",
-    "phrases"  : {
-      "1" : {"text": ["No boats are coming in or out of the docks today."]},
-      "2" : {"text": ["There is nothing here for you to see."], "choices": [{"command": "EXIT"}]},
-      "50": {"text": ["No boats are coming in or out of the docks today."]},
-      "51": {"text": ["There is nothing here for you to see."]},
-      "52": {
+    "name"   : "Lastdenn Guard",
+    "startAt": [
+      {"condition": ["_r_!=_u_q_quest_lastdenn_garrin", "_r_!=_f_q_quest_lastdenn_garrin", "_time_between_12:00_and_13:00", "is_garrin_possessed"], "startId": "50"},
+      {"condition": ["_time_after_19:15"], "startId": "20"}
+    ],
+    "phrases": {
+      "1" : {"text": ["There is nothing here for you to see now."]},
+      "2" : {"text": ["No boats are coming in or out of the docks."]},
+      "3" : {"text": ["This evening however, around 19:30, we expect a boat to arrive."], "choices": [{"command": "EXIT"}]},
+      "20": {"text": ["It seems the boat arrived a bit earlier than expected."]},
+      "21": {"text": ["The sailor seems to be some sort of teacher. What does he teach?"], "choices": [{"command": "EXIT"}]},
+      "50": {"text": ["There is nothing here for you to see."]},
+      "51": {"text": ["No boats are coming in or out of the docks."]},
+      "52": {"text": ["This evening however, around 19:30, we expect a boat to arrive."]},
+      "53": {
         "choices": [
-          {"text": "*Warn the guards for the murder on Santino!*", "nextId": "53"},
+          {"text": "*Warn the guards for the murder on Santino!*", "nextId": "54"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
-      "53": {"text": ["What? Murder? Who would want to kill our priest? He's such a kind soul."], "choices": [{"command": "EXIT"}]}
+      "54": {"text": ["What? Murder? Who would want to kill our priest? He's such a kind soul."], "choices": [{"command": "EXIT"}]}
     }
   }
 }

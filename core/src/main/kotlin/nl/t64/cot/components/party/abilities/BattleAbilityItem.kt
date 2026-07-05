@@ -115,8 +115,8 @@ abstract class BattleAbilityItem(
         }
     }
 
-    private fun handleDurability(attackData: AttackData) {
-        val weapon = currentWeapon!!
+    protected open fun handleDurability(attackData: AttackData) {
+        val weapon: InventoryItem = currentWeapon!!
         weapon.durability--
         if (attacker.isHero && weapon.durability <= 0) {
             attackData.attackerWeaponBrokeMessage = "Your ${weapon.name} broke!"
@@ -136,7 +136,7 @@ abstract class BattleAbilityItem(
         }
     }
 
-    fun isWeaponAllowed(): Boolean {
+    open fun isWeaponAllowed(): Boolean {
         return abilityItem.isWeaponAllowed(currentWeapon)
     }
 

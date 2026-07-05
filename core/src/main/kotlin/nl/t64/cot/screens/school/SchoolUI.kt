@@ -23,8 +23,8 @@ private const val CALCS_WINDOW_POSITION_Y = 610f
 
 private const val TITLE_HEROES = "   Heroes"
 private const val TITLE_TEACHER = "   Teacher"
-private const val TITLE_SCHOOL = "   Spells to learn"
-private const val TITLE_SPELLS = "   Known Spells"
+private const val TITLE_SCHOOL = "   To Learn"
+private const val TITLE_SPELLS = "   Learned"
 private const val TITLE_CALCS = "   Your Stats"
 
 internal class SchoolUI(

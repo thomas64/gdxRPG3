@@ -312,6 +312,11 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
                 && inventory.hasRoomForResource("herb")
                 && inventory.hasRoomForResource("spice")
                 && inventory.hasRoomForResource("gemstone")
+                && inventory.hasRoomForResource("leather")
+                && inventory.hasRoomForResource("wood")
+                && inventory.hasRoomForResource("metal")
+                && inventory.hasRoomForResource("green_jelly")
+                && inventory.hasRoomForResource("blue_jelly")
             ) {
                 playSe(AudioEvent.SE_MENU_ERROR)
                 gameData.party.gainXp(100)
@@ -319,6 +324,11 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
                 inventory.autoSetItem(InventoryDatabase.createInventoryItem("herb", 100))
                 inventory.autoSetItem(InventoryDatabase.createInventoryItem("spice", 100))
                 inventory.autoSetItem(InventoryDatabase.createInventoryItem("gemstone", 100))
+                inventory.autoSetItem(InventoryDatabase.createInventoryItem("leather", 100))
+                inventory.autoSetItem(InventoryDatabase.createInventoryItem("wood", 100))
+                inventory.autoSetItem(InventoryDatabase.createInventoryItem("metal", 100))
+                inventory.autoSetItem(InventoryDatabase.createInventoryItem("green_jelly", 100))
+                inventory.autoSetItem(InventoryDatabase.createInventoryItem("blue_jelly", 100))
                 inventoryUI.reloadInventory()
             }
         }

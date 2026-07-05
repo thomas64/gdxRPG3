@@ -9,6 +9,7 @@ import kotlin.math.roundToInt
 
 
 private const val AP_UNKNOWN = 99
+private const val XP_COST_MULTIPLIER = 0.12f
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class AbilityItem(
@@ -23,7 +24,7 @@ data class AbilityItem(
     val target: Target = Target.AREA,
     val ap: Int = 0,
     val sp: Int = 0,
-    private val skill: SkillItemId = SkillItemId.NONE,
+    val skill: SkillItemId = SkillItemId.NONE,
     @JsonProperty("min_skill") val minSkill: Int = 0,
     @JsonProperty("weapon_skills") private val weaponSkills: List<SkillItemId> = emptyList(),
     @JsonProperty("hit_multiplier") val hitMultiplier: Float = 1f,
@@ -53,7 +54,7 @@ data class AbilityItem(
     }
 
     fun calculateXpCost(totalXp: Int): Int {
-        return maxOf((totalXp * 0.1f).roundToInt(), xpCost)
+        return maxOf((totalXp * XP_COST_MULTIPLIER).roundToInt(), xpCost)
     }
 
     private fun getTotalDescription(shouldShowMinSkill: Boolean): String {

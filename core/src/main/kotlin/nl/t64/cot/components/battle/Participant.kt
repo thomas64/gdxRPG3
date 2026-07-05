@@ -169,9 +169,9 @@ class Participant(
             AbilityItemId.STRIKE_3F,
             AbilityItemId.STRIKE_4 -> Strike(abilityItem, this)
             AbilityItemId.STAGGER -> Stagger(abilityItem, this)
-            AbilityItemId.SNIPER_ARROW -> TODO()
-            AbilityItemId.BRUTE_FORCE -> TODO()
-            AbilityItemId.SHIELD_BASH -> TODO()
+            AbilityItemId.SNIPER_ARROW -> Strike(abilityItem, this)
+            AbilityItemId.BRUTE_FORCE -> Strike(abilityItem, this)
+            AbilityItemId.SHIELD_BASH -> ShieldBash(abilityItem, this)
             AbilityItemId.DOUBLE_THROW -> DoubleThrow(abilityItem, this)
             AbilityItemId.GHOST_TOUCH -> TODO()
             AbilityItemId.BACKSTAB -> TODO()

@@ -161,14 +161,16 @@ class AttackOutcomeManager(
     private fun possibleCreateMessagesFrom(attackData: List<AttackData>): Pair<String, AudioEvent> {
         val isEnemyStaggeredMessage: String? = attackData.getPossibleStaggerMessage()
         val yourWeaponBrokeMessage: String? = attackData.firstNotNullOfOrNull { it.attackerWeaponBrokeMessage }
+        val yourShieldBrokeMessage: String? = attackData.firstNotNullOfOrNull { it.attackerShieldBrokeMessage }
         val enemyShieldBrokeMessage: String? = attackData.firstNotNullOfOrNull { it.targetShieldBrokeMessage }
 
         val messages: String = listOfNotNull(
             isEnemyStaggeredMessage,
             yourWeaponBrokeMessage,
+            yourShieldBrokeMessage,
             enemyShieldBrokeMessage
         ).joinToString(System.lineSeparator())
-        val audioEvent: AudioEvent = if (yourWeaponBrokeMessage != null) {
+        val audioEvent: AudioEvent = if (yourWeaponBrokeMessage != null || yourShieldBrokeMessage != null) {
             AudioEvent.SE_WEAPON_BREAK
         } else {
             AudioEvent.SE_CONVERSATION_NEXT

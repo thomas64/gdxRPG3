@@ -18,6 +18,7 @@ class AttackData {
     var isBlocked: Boolean = false
     var targetShieldBrokeMessage: String? = null
     var attackerWeaponBrokeMessage: String? = null
+    var attackerShieldBrokeMessage: String? = null
     var isTargetDead: Boolean = false
 
     var isHeal: Boolean = false
