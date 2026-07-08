@@ -19,6 +19,7 @@ enum class ThreatLevel(val color: Color) {
     WEAKER(Color.GREEN),
     EVEN(Color.YELLOW),
     STRONGER(Color.ORANGE),
+    DANGEROUS(Color.RED),
     DEADLY(Color.RED);
 
     companion object {
@@ -36,13 +37,15 @@ enum class ThreatLevel(val color: Color) {
         }
 
         // Grenzen geijkt op de werkelijke combat-power-spreiding van de vijanden (slime ~132 t/m orc general ~4064).
-        // EVEN ligt rond ratio 1.0 (eerlijk gevecht); DEADLY begint al bij 1.8 zodat boss-fights betrouwbaar rood worden.
+        // EVEN ligt rond ratio 1.0 (eerlijk gevecht); DANGEROUS begint bij 1.8 (boss-territorium) en
+        // DEADLY pas vanaf 2.3, gereserveerd voor een echt overweldigende overmacht waar je van weg wilt blijven.
         private fun fromRatio(ratio: Float): ThreatLevel {
             return when {
-                ratio < 0.45f -> TRIVIAL
-                ratio < 0.85f -> WEAKER
+                ratio < 0.3f -> TRIVIAL
+                ratio < 0.8f -> WEAKER
                 ratio < 1.3f -> EVEN
                 ratio < 1.8f -> STRONGER
+                ratio < 2.3f -> DANGEROUS
                 else -> DEADLY
             }
         }
