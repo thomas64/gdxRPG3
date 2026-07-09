@@ -13,7 +13,7 @@
     "base_hit"    : 65,
     "damage"      : 15
   },
-  "attack_axe_dex_80_8"  : {
+  "attack_axe_dex_80_8"   : {
     "group"        : "WEAPON",
     "skill"        : "AXE",
     "min_dexterity": 1,
@@ -49,6 +49,10 @@
   "armor_8"               : {
     "group"     : "CHEST",
     "protection": 8
+  },
+  "armor_25"              : {
+    "group"     : "CHEST",
+    "protection": 25
   },
   "armor_50"              : {
     "group"     : "CHEST",

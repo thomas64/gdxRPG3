@@ -121,19 +121,19 @@
     "gender"   : "its",
     "xp"       : 18,
     "drops"    : {
-      "specialist_axe"             : 15,
-      "specialist_medium_shield"   : 15,
-      "specialist_medium_belt"     : 2,
-      "specialist_medium_boots"    : 2,
-      "specialist_medium_bracers"  : 2,
-      "specialist_medium_chest"    : 2,
-      "specialist_medium_cloak"    : 2,
-      "specialist_medium_gloves"   : 2,
-      "specialist_medium_helmet"   : 2,
-      "specialist_medium_pants"    : 2,
-      "specialist_medium_shoulders": 2,
-      "healing_potion"             : 5,
-      "gold"                       : 75
+      "fine_axe"             : 15,
+      "fine_medium_shield"   : 10,
+      "fine_medium_belt"     : 2,
+      "fine_medium_boots"    : 2,
+      "fine_medium_bracers"  : 2,
+      "fine_medium_chest"    : 2,
+      "fine_medium_cloak"    : 2,
+      "fine_medium_gloves"   : 2,
+      "fine_medium_helmet"   : 2,
+      "fine_medium_pants"    : 2,
+      "fine_medium_shoulders": 2,
+      "healing_potion"       : 5,
+      "gold"                 : 60
     },
     "stats"    : {
       "intelligence": 10,
@@ -148,14 +148,14 @@
       "strike_2", "strike_3", "strike_4"
     ],
     "skills"   : {
-      "warrior": 8,
-      "axe"    : 10,
-      "shield" : 8
+      "warrior": 4,
+      "axe"    : 4,
+      "shield" : 2
     },
     "inventory": {
-      "weapon": "specialist_axe",
-      "shield": "specialist_medium_shield",
-      "chest" : "armor_50"
+      "weapon": "fine_axe",
+      "shield": "fine_medium_shield",
+      "chest" : "armor_25"
     }
   },
   "orc_sergeant_spear": {
@@ -163,19 +163,19 @@
     "gender"   : "its",
     "xp"       : 18,
     "drops"    : {
-      "specialist_spear"           : 15,
-      "specialist_medium_shield"   : 15,
-      "specialist_medium_belt"     : 2,
-      "specialist_medium_boots"    : 2,
-      "specialist_medium_bracers"  : 2,
-      "specialist_medium_chest"    : 2,
-      "specialist_medium_cloak"    : 2,
-      "specialist_medium_gloves"   : 2,
-      "specialist_medium_helmet"   : 2,
-      "specialist_medium_pants"    : 2,
-      "specialist_medium_shoulders": 2,
-      "healing_potion"             : 5,
-      "gold"                       : 75
+      "fine_spear"           : 15,
+      "fine_medium_shield"   : 10,
+      "fine_medium_belt"     : 2,
+      "fine_medium_boots"    : 2,
+      "fine_medium_bracers"  : 2,
+      "fine_medium_chest"    : 2,
+      "fine_medium_cloak"    : 2,
+      "fine_medium_gloves"   : 2,
+      "fine_medium_helmet"   : 2,
+      "fine_medium_pants"    : 2,
+      "fine_medium_shoulders": 2,
+      "healing_potion"       : 5,
+      "gold"                 : 60
     },
     "stats"    : {
       "intelligence": 10,
@@ -190,14 +190,14 @@
       "strike_2", "strike_3", "strike_4"
     ],
     "skills"   : {
-      "warrior": 8,
-      "spear"  : 10,
-      "shield" : 8
+      "warrior": 4,
+      "spear"  : 4,
+      "shield" : 2
     },
     "inventory": {
-      "weapon": "specialist_spear",
-      "shield": "specialist_medium_shield",
-      "chest" : "armor_50"
+      "weapon": "fine_spear",
+      "shield": "fine_medium_shield",
+      "chest" : "armor_25"
     }
   },
   "orc_general_axe"   : {

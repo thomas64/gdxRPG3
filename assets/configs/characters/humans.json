@@ -16,13 +16,13 @@
       "strike_2", "strike_3", "strike_4"
     ],
     "skills"   : {
-      "warrior": 10,
-      "spear"  : 10,
-      "shield" : 10
+      "warrior": 4,
+      "spear"  : 4,
+      "shield" : 3
     },
     "inventory": {
-      "weapon": "specialist_spear",
-      "shield": "specialist_medium_shield",
+      "weapon": "fine_spear",
+      "shield": "fine_medium_shield",
       "chest" : "armor_50"
     }
   }
