@@ -19,6 +19,7 @@ import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playBgm
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.battle.*
+import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.abilities.BattleAbilityItem
 import nl.t64.cot.components.party.inventory.BattlePotionItem
 import nl.t64.cot.components.party.inventory.BattleWeaponItem
@@ -30,6 +31,7 @@ import nl.t64.cot.screens.inventory.InventoryScreen
 import nl.t64.cot.screens.menu.MenuPause
 import nl.t64.cot.screens.world.Camera
 import kotlin.concurrent.thread
+import kotlin.math.roundToInt
 
 
 class BattleScreen : Screen {
@@ -102,6 +104,7 @@ class BattleScreen : Screen {
         enemies = EnemyContainer(battleId)
         turnManager = TurnManager(gameData.party.getAllHeroesAlive(), enemies.getAll())
         currentParticipant = turnManager.participants.first { it.character.id == Constant.PLAYER_ID }
+        if (preferenceManager.isDebugModeOn) printCombatPowers()
 
         battleField = BattleField(turnManager.participants, ::currentParticipant)
         tableManager = BattleTableManager(stage, screenBuilder, ::currentParticipant)
@@ -184,6 +187,17 @@ class BattleScreen : Screen {
             currentParticipant.isHero -> takeTurnHero()
             else -> takeTurnEnemy()
         }
+    }
+
+    private fun printCombatPowers() {
+        val heroes: List<HeroItem> = gameData.party.getAllHeroesAlive()
+        val allEnemies: List<EnemyItem> = enemies.getAll()
+
+        println("Combat powers for battle '$battleId':")
+        heroes.forEach { println("  hero  ${it.name}: ${it.getCombatPower().roundToInt()}") }
+        allEnemies.forEach { println("  enemy ${it.name}: ${it.getCombatPower().roundToInt()}") }
+        println("  party total: ${heroes.sumOf { it.getCombatPower().toDouble() }.roundToInt()}")
+        println("  enemy total: ${allEnemies.sumOf { it.getCombatPower().toDouble() }.roundToInt()}")
     }
 
     private fun updateAllTables() {

@@ -22,10 +22,6 @@ class EnemyContainer(
         return enemies
     }
 
-    fun getTotalCombatPower(): Float {
-        return enemies.map { it.getCombatPower() }.sum()
-    }
-
     fun getTotalXp(): Int {
         val baseXp: Int = enemies.sumOf { it.xp }
         val bonusMultiplier: Float = 1f + ((enemies.size - 1f) * 0.1f)

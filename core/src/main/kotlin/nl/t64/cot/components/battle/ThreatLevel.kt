@@ -2,6 +2,7 @@ package nl.t64.cot.components.battle
 
 import com.badlogic.gdx.graphics.Color
 import nl.t64.cot.Utils.gameData
+import kotlin.math.pow
 
 
 /**
@@ -25,27 +26,34 @@ enum class ThreatLevel(val color: Color) {
     companion object {
         /**
          * Bijstelknop voor de hele indicator. < 1 laat vijanden zwakker tonen, > 1 sterker.
-         * Verlaag dit als alle vijanden net iets te sterk worden ingeschat.
-         * Verhoog dit als alle vijanden net iets te zwak worden ingeschat.
+         * Verlaag dit als alle vijanden te sterk worden ingeschat.
+         * Verhoog dit als alle vijanden te zwak worden ingeschat.
          */
-        private const val CALIBRATION = 0.8f
+        private const val CALIBRATION = 1.0f
+        private const val CROWD_DAMPENER = 0.8f // < 1: meer vijanden tellen minder mee, > 1: meer vijanden tellen zwaarder mee
 
         fun forBattle(battleId: String): ThreatLevel {
-            val partyPower: Float = gameData.party.getAllHeroes().map { it.getCombatPower() }.sum().coerceAtLeast(1f)
-            val enemyPower: Float = EnemyContainer(battleId).getTotalCombatPower()
-            return fromRatio(enemyPower / partyPower * CALIBRATION)
+            val partyPower: List<Float> = gameData.party.getAllHeroesAlive().map { it.getCombatPower() }
+            val enemyPower: List<Float> = EnemyContainer(battleId).getAll().map { it.getCombatPower() }
+            val dampenedPartyPower: Float = dampenedPowerOf(partyPower)
+            val dampenedEnemyPower: Float = dampenedPowerOf(enemyPower)
+            return fromRatio(dampenedEnemyPower / dampenedPartyPower * CALIBRATION)
+        }
+
+        private fun dampenedPowerOf(powers: List<Float>): Float {
+            return powers.sum() * powers.size.toFloat().pow(CROWD_DAMPENER - 1f)
         }
 
         // Grenzen geijkt op de werkelijke combat-power-spreiding van de vijanden (slime ~132 t/m orc general ~4064).
-        // EVEN ligt rond ratio 1.0 (eerlijk gevecht); DANGEROUS begint bij 1.8 (boss-territorium) en
-        // DEADLY pas vanaf 2.3, gereserveerd voor een echt overweldigende overmacht waar je van weg wilt blijven.
+        // EVEN ligt rond ratio 1.0 (eerlijk gevecht); DANGEROUS begint bij 1.9 (boss-territorium) en
+        // DEADLY pas vanaf 2.5, gereserveerd voor een echt overweldigende overmacht waar je van weg wilt blijven.
         private fun fromRatio(ratio: Float): ThreatLevel {
             return when {
-                ratio < 0.3f -> TRIVIAL
-                ratio < 0.8f -> WEAKER
+                ratio < 0.1f -> TRIVIAL
+                ratio < 0.7f -> WEAKER
                 ratio < 1.3f -> EVEN
-                ratio < 1.8f -> STRONGER
-                ratio < 2.3f -> DANGEROUS
+                ratio < 1.9f -> STRONGER
+                ratio < 2.5f -> DANGEROUS
                 else -> DEADLY
             }
         }
