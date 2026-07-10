@@ -11,7 +11,6 @@ class EquipContainer() {
     private val equipment: MutableMap<String, InventoryItem?> = mutableMapOf(
         Pair(InventoryGroup.WEAPON.name, null),
         Pair(InventoryGroup.SHIELD.name, null),
-        Pair(InventoryGroup.ACCESSORY.name, null),
         Pair(InventoryGroup.HELMET.name, null),
         Pair(InventoryGroup.NECKLACE.name, null),
         Pair(InventoryGroup.SHOULDERS.name, null),
@@ -22,21 +21,24 @@ class EquipContainer() {
         Pair(InventoryGroup.RING.name, null),
         Pair(InventoryGroup.BELT.name, null),
         Pair(InventoryGroup.PANTS.name, null),
-        Pair(InventoryGroup.BOOTS.name, null))
+        Pair(InventoryGroup.BOOTS.name, null),
+        Pair(InventoryGroup.ACCESSORY.name, null))
 
-    @ConstructorProperties("weapon", "shield", "chest", "cloak", "pants", "boots")
+    @ConstructorProperties("weapon", "shield", "chest", "cloak", "pants", "boots", "accessory")
     constructor(weaponId: String?,
                 shieldId: String?,
                 chestId: String?,
                 cloakId: String?,
                 pantsId: String?,
-                bootsId: String?) : this() {
+                bootsId: String?,
+                accessoryId: String?) : this() {
         weaponId?.let { this.equipment[InventoryGroup.WEAPON.name] = InventoryDatabase.createInventoryItem(it) }
         shieldId?.let { this.equipment[InventoryGroup.SHIELD.name] = InventoryDatabase.createInventoryItem(it) }
         chestId?.let { this.equipment[InventoryGroup.CHEST.name] = InventoryDatabase.createInventoryItem(it) }
         cloakId?.let { this.equipment[InventoryGroup.CLOAK.name] = InventoryDatabase.createInventoryItem(it) }
         pantsId?.let { this.equipment[InventoryGroup.PANTS.name] = InventoryDatabase.createInventoryItem(it) }
         bootsId?.let { this.equipment[InventoryGroup.BOOTS.name] = InventoryDatabase.createInventoryItem(it) }
+        accessoryId?.let { this.equipment[InventoryGroup.ACCESSORY.name] = InventoryDatabase.createInventoryItem(it) }
     }
 
     fun hasInventoryItem(itemId: String): Boolean {

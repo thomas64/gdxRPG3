@@ -1,6 +1,9 @@
 package nl.t64.cot.screens.inventory.equipslot
 
+import nl.t64.cot.Utils.gameData
 import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playSe
+import nl.t64.cot.components.party.inventory.InventoryDatabase
 import nl.t64.cot.screens.dialog.MessageDialog
 import nl.t64.cot.screens.inventory.InventoryUtils
 import nl.t64.cot.screens.inventory.itemslot.InventoryImage
@@ -20,34 +23,48 @@ internal class EquipSlotTaker(private val selector: EquipSlotSelector) {
     }
 
     private fun tryPutEquipSlotToInventorySlot() {
-        sourceSlot.getPossibleInventoryImage()?.let {
-            tryPutEquipSlotToInventorySlot(it)
-        }
+        sourceSlot.getPossibleInventoryImage()
+            ?.let { tryPutEquipSlotToInventorySlot(it) }
     }
 
     private fun tryPutEquipSlotToInventorySlot(candidateItem: InventoryImage) {
         this.candidateItem = candidateItem
-        InventoryUtils.getScreenUI().getInventorySlotsTable().getPossibleEmptySlot()?.let {
-            exchangeWithEmptyInventorySlot(it)
+        if (candidateItem.inventoryItem.goldPouch > 0) {
+            tryConvertPouchToGold()
+        } else {
+            InventoryUtils.getScreenUI().getInventorySlotsTable().getPossibleEmptySlot()
+                ?.let { exchangeWithEmptyInventorySlot(it) }
+        }
+    }
+
+    private fun tryConvertPouchToGold() {
+        if (gameData.inventory.hasRoomForResource("gold")) {
+            dequipSourceSlot {
+                val gold = InventoryDatabase.createInventoryItem("gold", candidateItem.inventoryItem.goldPouch)
+                InventoryUtils.getScreenUI().getInventorySlotsTable().addResource(gold)
+                playSe(AudioEvent.SE_COINS_SELL)
+            }
+        } else {
+            showErrorMessage("Inventory is full.")
         }
     }
 
     private fun exchangeWithEmptyInventorySlot(targetSlot: ItemSlot) {
         this.targetSlot = targetSlot
         InventoryUtils.getSelectedHero()
-            .createMessageIfNotAbleToDequip(candidateItem.inventoryItem)?.let {
-                showErrorMessage(it)
-            } ?: exchange()
+            .createMessageIfNotAbleToDequip(candidateItem.inventoryItem)
+            ?.let { showErrorMessage(it) }
+            ?: dequipSourceSlot { ItemSlotsExchanger(candidateItem, sourceSlot, targetSlot).exchange() }
     }
 
     private fun showErrorMessage(message: String) {
         MessageDialog(message).show(sourceSlot.stage, AudioEvent.SE_MENU_ERROR)
     }
 
-    private fun exchange() {
+    private fun dequipSourceSlot(addToTarget: () -> Unit) {
         sourceSlot.deselect()
         sourceSlot.clearStack()
-        ItemSlotsExchanger(candidateItem, sourceSlot, targetSlot).exchange()
+        addToTarget.invoke()
         selector.setNewSelected(sourceSlot)
     }
 

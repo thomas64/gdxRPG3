@@ -57,11 +57,12 @@
       "double_throw"
     ],
     "inventory": {
-      "weapon": "basic_knife",
-      "chest" : "basic_light_chest",
-      "cloak" : "basic_light_cloak",
-      "pants" : "basic_light_pants",
-      "boots" : "basic_light_boots"
+      "weapon"   : "basic_knife",
+      "chest"    : "basic_light_chest",
+      "cloak"    : "basic_light_cloak",
+      "pants"    : "basic_light_pants",
+      "boots"    : "basic_light_boots",
+      "accessory": "gold_pouch_5"
     }
   },
   "reignald": {
@@ -98,11 +99,12 @@
       "stagger"
     ],
     "inventory": {
-      "weapon": "basic_sword",
-      "shield": "basic_medium_shield",
-      "chest" : "basic_medium_chest",
-      "pants" : "basic_medium_pants",
-      "boots" : "basic_medium_boots"
+      "weapon"   : "basic_sword",
+      "shield"   : "basic_medium_shield",
+      "chest"    : "basic_medium_chest",
+      "pants"    : "basic_medium_pants",
+      "boots"    : "basic_medium_boots",
+      "accessory": "gold_pouch_40"
     }
   },
   "ryiah"   : {
@@ -132,10 +134,9 @@
       "finesse", "clumsiness"
     ],
     "inventory": {
-      "weapon": "basic_staff_thunder",
-      "chest" : "basic_light_chest",
-      "pants" : "basic_light_pants",
-      "boots" : "basic_light_boots"
+      "chest": "basic_light_chest",
+      "pants": "basic_light_pants",
+      "boots": "basic_light_boots"
     }
   },
   "valter"  : {
@@ -168,10 +169,11 @@
       "fire"
     ],
     "inventory": {
-      "weapon": "basic_staff_fire",
-      "chest" : "basic_light_chest",
-      "pants" : "basic_light_pants",
-      "boots" : "basic_light_boots"
+      "weapon"   : "basic_staff_fire",
+      "chest"    : "basic_light_chest",
+      "pants"    : "basic_light_pants",
+      "boots"    : "basic_light_boots",
+      "accessory": "gold_pouch_10"
     }
   },
   "galen"   : {

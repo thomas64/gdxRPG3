@@ -29,7 +29,14 @@
       "2": {
         "taskPhrase": "Open the jail door with the jail key and break Ryiah out of jail.",
         "type"      : "CHECK_WITH_ITEM",
-        "target"    : {"key_lastdenn_jail": 1}
+        "target"    : {"key_lastdenn_jail": 1},
+        "linkedWith": ["3"]
+      },
+      "3": {
+        "comment"   : "WARNING: 1 link to 3 in ryiah's lastdenn sparkle quest checker",
+        "taskPhrase": "Find Ryiah's belongings in a crate in front of Lastdenn's Equipment Shop.",
+        "type"      : "CHECK",
+        "isHidden"  : true
       }
     }
   },

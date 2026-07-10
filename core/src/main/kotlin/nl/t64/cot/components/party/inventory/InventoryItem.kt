@@ -83,6 +83,8 @@ data class InventoryItem(
     private val herb: Int = 0,
     private val spice: Int = 0,
     private val gemstone: Int = 0,
+    @JsonProperty("gold_pouch")
+    val goldPouch: Int = 0,
     val replaces: List<String> = emptyList(),
 ) {
     val isStackable: Boolean = group.isStackable()

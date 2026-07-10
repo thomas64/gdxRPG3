@@ -72,5 +72,32 @@
     "price"           : 50,
     "min_intelligence": 27,
     "wizard"          : 2
+  },
+  "gold_pouch_5"           : {
+    "name"       : "Gold Pouch",
+    "group"      : "ACCESSORY",
+    "gold_pouch" : 5,
+    "description": [
+      "Contains 5 gold coins.",
+      "Unequip to add to your gold."
+    ]
+  },
+  "gold_pouch_10"          : {
+    "name"       : "Gold Pouch",
+    "group"      : "ACCESSORY",
+    "gold_pouch" : 10,
+    "description": [
+      "Contains 10 gold coins.",
+      "Unequip to add to your gold."
+    ]
+  },
+  "gold_pouch_40"          : {
+    "name"       : "Gold Pouch",
+    "group"      : "ACCESSORY",
+    "gold_pouch" : 40,
+    "description": [
+      "Contains 40 gold coins.",
+      "Unequip to add to your gold."
+    ]
   }
 }

@@ -166,7 +166,8 @@
           {"text": "*Tell her you don't need her help right now.*", "nextId": "20"}
         ]
       },
-      "14"  : {"face": "ryiah", "name": "Ryiah", "text": ["You just broke a witch out of jail. Let's make it worth the trouble."], "choices": [{"command": "HERO_JOIN"}]},
+      "14"  : {"face": "ryiah", "name": "Ryiah", "text": ["You just broke a witch out of jail. Let's make it worth the trouble."]},
+      "15"  : {"text": ["By the way, I have hidden a few of my belongings in a crate in front of the equipment shop. We should really go pick them up before we leave town."], "choices": [{"command": "HERO_JOIN"}]},
       "20"  : {"face": "ryiah", "name": "Ryiah", "text": ["Fine, but don't forget that I owe you one. If you ever need my help, just ask."], "choices": [{"command": "EXIT"}]},
       "9000": {"face": "ryiah", "name": "Ryiah", "text": ["I cannot repay my debt to you if I cannot join you. Make some room in your party and then talk to me again."], "choices": [{"command": "EXIT"}]}
     }
