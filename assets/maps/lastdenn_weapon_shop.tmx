@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="38" height="28" tilewidth="24" tileheight="24" infinite="0" nextlayerid="21" nextobjectid="73">
+<map version="1.11" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="38" height="28" tilewidth="24" tileheight="24" infinite="0" nextlayerid="21" nextobjectid="75">
  <properties>
   <property name="bgm" value="bgm_inn"/>
   <property name="step_sound" value="wood"/>
@@ -255,6 +255,11 @@
   <object id="71" name="girl11" type="w" x="672" y="144" width="48" height="24">
    <properties>
     <property name="conversation" value="armor_in_pink"/>
+   </properties>
+  </object>
+  <object id="74" name="man04" type="inv" x="720" y="108" width="48" height="24">
+   <properties>
+    <property name="conversation" value="equipshop_lastdenn_come"/>
    </properties>
   </object>
  </objectgroup>

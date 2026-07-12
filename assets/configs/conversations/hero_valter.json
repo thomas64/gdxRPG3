@@ -54,7 +54,8 @@
       "54"  : {"text": ["Third: if someone says \"this potion smells fine\", hand it to me first."]},
       "55"  : {"text": ["Done? Good. I am in. If anyone explodes, it will be strategic."], "choices": [{"command": "HERO_JOIN"}]},
       "90"  : {"text": ["Fair. I will remain here and continue my interrogation of this suspicious corner."]},
-      "91"  : {"text": ["If destiny changes its mind, you know where to find me. Unless another wall has caught my attention by then. They can be quite persuasive."], "choices": [{"command": "EXIT"}]},
+      "91"  : {"text": ["If destiny changes its mind, you know where to find me. Unless another wall has caught my attention by then. They can be quite persuasive."], "choices": [{"command": "EXIT", "nextId": "100"}]},
+      "100" : {"text": ["Have we met? The wall says yes. The wall also lies, but it is usually right about people."], "choices": [{"nextId": "24"}]},
       "9000": {"text": ["I would join, but your party is full. The numbers refuse to bend, and I already tried arguing with them."], "choices": [{"command": "EXIT"}]}
     }
   },

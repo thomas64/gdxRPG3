@@ -6,7 +6,7 @@
     "linkedWith": ["quest_sub_royal_sacrifice"],
     "tasks"     : {
       "4": {
-        "taskPhrase": "Receive the Crystal of Time to reset time to 07:30, 12 hours before the disaster.",
+        "taskPhrase": "Receive the Crystal of Time from Ylarus to reset time to 07:30, 12 hours before the disaster.",
         "type"      : "FIND_ITEM",
         "target"    : {"crystal_of_time": 1},
         "isHidden"  : true,
@@ -17,7 +17,7 @@
         "type"      : "DISCOVER"
       },
       "6": {
-        "taskPhrase": "Stop Ardor from destroying Adan.",
+        "taskPhrase": "Stop Ardor from destroying Adan at 19:30.",
         "type"      : "DISCOVER",
         "isHidden"  : true
       }

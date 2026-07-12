@@ -53,7 +53,7 @@
     }
   },
   "quest_lastdenn_santino" : {
-    "title"   : "Meet the priest",
+    "title"   : "Meet the priest [M]",
     "entityId": "santino",
     "summary" : "It seems that the priest of Lastdenn is Father Santino. As he is the priest of the Temple of Evdos, the God of Knowledge, he should know a thing or two about Ulrog, the God of Power. That is the reason why Ylarus, the God of Time, sent you to him, right? Information is key here.",
     "tasks"   : {
