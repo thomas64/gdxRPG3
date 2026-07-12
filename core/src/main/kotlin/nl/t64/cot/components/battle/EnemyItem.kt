@@ -2,6 +2,9 @@ package nl.t64.cot.components.battle
 
 import nl.t64.cot.components.party.abilities.AbilityContainer
 import nl.t64.cot.components.party.inventory.EquipContainer
+import nl.t64.cot.components.party.inventory.InventoryDatabase
+import nl.t64.cot.components.party.inventory.InventoryGroup
+import nl.t64.cot.components.party.inventory.InventoryItem
 import nl.t64.cot.components.party.skills.SkillContainer
 import nl.t64.cot.components.party.stats.StatContainer
 import nl.t64.cot.components.party.stats.StatItemId
@@ -20,6 +23,7 @@ class EnemyItem(
     skills: SkillContainer = SkillContainer(),
     abilities: AbilityContainer = AbilityContainer(),
     inventory: EquipContainer = EquipContainer(),
+    val meleeWeapon: String? = null,
     isAlive: Boolean = true,
     val xp: Int = 0,
     private val drops: Map<String, Int> = emptyMap()
@@ -27,6 +31,8 @@ class EnemyItem(
     id, name, gender, stats, skills, abilities, inventory, isAlive
 ) {
     override val maximumHp: Int get() = if (stats.getById(StatItemId.CONSTITUTION).rank == 0) hp else stats.maximumHp
+    @Transient
+    var stashedWeapon: InventoryItem? = meleeWeapon?.let { InventoryDatabase.createInventoryItem(it) }
 
     init {
         currentHp = maximumHp
@@ -43,15 +49,22 @@ class EnemyItem(
         skills: SkillContainer = this.skills,
         abilities: AbilityContainer = this.abilities,
         inventory: EquipContainer = this.inventory,
+        meleeWeapon: String? = this.meleeWeapon,
         isAlive: Boolean = this.isAlive,
         xp: Int = this.xp,
         drops: Map<String, Int> = this.drops
     ): EnemyItem {
-        return EnemyItem(id, name, gender, hp, ap, stats, skills, abilities, inventory, isAlive, xp, drops)
+        return EnemyItem(id, name, gender, hp, ap, stats, skills, abilities, inventory, meleeWeapon, isAlive, xp, drops)
     }
 
     override fun getCalculatedActionPoints(): Int {
         return ap.takeUnless { it == 0 } ?: super.getCalculatedActionPoints()
+    }
+
+    fun swapToStashedWeapon() {
+        val current: InventoryItem = getInventoryItem(InventoryGroup.WEAPON)!!
+        forceSetInventoryItemFor(InventoryGroup.WEAPON, stashedWeapon!!)
+        stashedWeapon = current
     }
 
     fun addDropsTo(spoils: MutableMap<String, Int>) {

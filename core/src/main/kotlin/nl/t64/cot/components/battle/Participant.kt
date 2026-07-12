@@ -103,8 +103,23 @@ class Participant(
         return (PENALTY_AP - (character.getCalculatedTotalSkillOf(SkillItemId.STEALTH) / 3f)).toInt().coerceAtLeast(0)
     }
 
+    fun hasRangedWeapon(): Boolean {
+        val currentRanges: List<Int> = getWeaponRanges()
+        if (currentRanges.isEmpty()) return false
+        return currentRanges.contains(1).not()
+    }
+
     fun getWeaponRanges(): List<Int> {
         return getCurrentWeapon()?.getWeaponRange().orEmpty()
+    }
+
+    fun getStashedWeaponRanges(): List<Int> {
+        val enemy = character as EnemyItem
+        return enemy.stashedWeapon?.getWeaponRange().orEmpty()
+    }
+
+    fun getCheapestAbilityAp(): Int {
+        return getBattleAbilities().minOf { it.ap }
     }
 
     fun getBattleAbilities(): List<BattleAbilityItem> {
@@ -117,6 +132,17 @@ class Participant(
             return "${character.name} is staggered."
         }
         return null
+    }
+
+    fun canSwitchWeapon(): Boolean {
+        val enemy = character as EnemyItem
+        return enemy.stashedWeapon != null && currentAP >= SWITCH_WEAPON_AP
+    }
+
+    fun switchWeapon() {
+        val enemy = character as EnemyItem
+        enemy.swapToStashedWeapon()
+        currentAP -= SWITCH_WEAPON_AP
     }
 
     fun getCurrentWeapon(): InventoryItem? {

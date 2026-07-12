@@ -116,6 +116,48 @@
       "chest" : "armor_8"
     }
   },
+  "orc_scout_bow"     : {
+    "name"       : "Orc Scout",
+    "gender"     : "its",
+    "xp"         : 8,
+    "drops"      : {
+      "basic_bow"            : 15,
+      "basic_light_belt"     : 2,
+      "basic_light_boots"    : 2,
+      "basic_light_bracers"  : 2,
+      "basic_light_chest"    : 2,
+      "basic_light_cloak"    : 2,
+      "basic_light_gloves"   : 2,
+      "basic_light_helmet"   : 2,
+      "basic_light_pants"    : 2,
+      "basic_light_shoulders": 2,
+      "healing_potion"       : 5,
+      "gold"                 : 60
+    },
+    "stats"      : {
+      "intelligence": 5,
+      "dexterity"   : 12,
+      "strength"    : 5,
+      "speed"       : 12,
+      "willpower"   : 12,
+      "constitution": 12,
+      "stamina"     : 12
+    },
+    "abilities"  : [
+      "strike_2", "strike_3", "strike_4"
+    ],
+    "skills"     : {
+      "bow"    : 2,
+      "dagger" : 2,
+      "warrior": 2,
+      "stealth": 10
+    },
+    "inventory"  : {
+      "weapon": "basic_bow",
+      "chest" : "armor_8"
+    },
+    "meleeWeapon": "basic_dagger"
+  },
   "orc_sergeant_axe"  : {
     "name"     : "Orc Sergeant",
     "gender"   : "its",

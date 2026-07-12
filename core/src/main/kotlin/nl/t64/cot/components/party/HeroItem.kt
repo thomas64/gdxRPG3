@@ -156,10 +156,6 @@ class HeroItem(
         inventory.clearAll()
     }
 
-    fun forceSetInventoryItemFor(inventoryGroup: InventoryGroup, inventoryItem: InventoryItem) {
-        inventory.forceSetInventoryItem(inventoryGroup, inventoryItem)
-    }
-
     fun getAllRepairableInventoryItems(mechanicRank: Int): List<InventoryItem> {
         return inventory.getAllRepairableInventoryItems(mechanicRank)
     }

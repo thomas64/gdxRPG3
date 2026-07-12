@@ -11,7 +11,7 @@ import nl.t64.cot.components.party.stats.StatItemId
 import nl.t64.cot.removeColorCoding
 
 
-private const val SWITCH_WEAPON_AP: Int = 3
+const val SWITCH_WEAPON_AP: Int = 3
 
 class WeaponAction(
     private val currentParticipant: Participant,

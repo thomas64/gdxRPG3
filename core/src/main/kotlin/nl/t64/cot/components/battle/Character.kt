@@ -74,6 +74,10 @@ abstract class Character(
         inventory.clearInventoryItem(inventoryGroup)
     }
 
+    fun forceSetInventoryItemFor(inventoryGroup: InventoryGroup, inventoryItem: InventoryItem) {
+        inventory.forceSetInventoryItem(inventoryGroup, inventoryItem)
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     fun getAllAbilities(): List<AbilityItem> {

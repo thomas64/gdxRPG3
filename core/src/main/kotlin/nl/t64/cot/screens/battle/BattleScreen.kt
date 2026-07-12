@@ -441,6 +441,7 @@ class BattleScreen : Screen {
     }
 
     private fun doEnemyAction() {
+        battleField.possibleSwitchWeaponOfActingEnemy()
         val heroTarget: Participant? = battleField.possibleGetHeroTargetAndMoveEnemy()
         battleField.resetStartingSpace()
         val attackData: List<AttackData>? = heroTarget
