@@ -11,6 +11,9 @@ import nl.t64.cot.components.party.stats.StatItemId
 import kotlin.math.roundToInt
 
 
+internal const val TURN_THRESHOLD: Int = 200
+private const val BASE_TICK: Int = 10
+private const val MAX_CARRY_OVER_AP: Int = 2
 private const val PENALTY_AP: Int = 4
 
 class Participant(
@@ -18,6 +21,7 @@ class Participant(
 ) {
     val isHero: Boolean get() = character is HeroItem
     var turnCounter: Int = 0
+    val tickRate: Int get() = BASE_TICK + character.getCalculatedTotalStatOf(StatItemId.SPEED)
 
     val maximumAP: Int = character.getCalculatedActionPoints() // todo, kan deze verhoogd worden door bepaalde buffs?
     var currentAP: Int = maximumAP
@@ -33,19 +37,19 @@ class Participant(
 
 
     fun updateTurnCounter() {
-        turnCounter += 10 + character.getCalculatedTotalStatOf(StatItemId.SPEED)
+        turnCounter += tickRate
     }
 
     fun setNegativeTurnCounter() {
-        turnCounter = 0 - (10 + character.getCalculatedTotalStatOf(StatItemId.SPEED))
+        turnCounter = 0 - tickRate
     }
 
     fun isTurnCounterAtMax(): Boolean {
-        return turnCounter >= 200
+        return turnCounter >= TURN_THRESHOLD
     }
 
     fun resetTurnCounter() {
-        turnCounter -= 200
+        turnCounter -= TURN_THRESHOLD
         amountOfTurns++
     }
 
@@ -67,7 +71,7 @@ class Participant(
             return
         }
 
-        currentAP = maximumAP + currentAP.coerceAtMost(2)
+        currentAP = maximumAP + currentAP.coerceAtMost(MAX_CARRY_OVER_AP)
     }
 
     fun getPriorityFor(currentEnemy: Participant, isEnemyNextToHero: Boolean): Float {

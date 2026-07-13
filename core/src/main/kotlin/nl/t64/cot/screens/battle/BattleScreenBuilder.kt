@@ -43,7 +43,7 @@ class BattleScreenBuilder {
 
     private val colorTextureCache: MutableMap<Color, Texture> = mutableMapOf()
     private val tableSkin: Skin = createSkin()
-    private val barFontStyle = LabelStyle(FontProvider.default, Color.WHITE)
+    private val smallFontStyle = LabelStyle(FontProvider.default, Color.WHITE)
     private val transparent: Drawable = Utils.createTransparency()
     private val border: Drawable = Utils.createFullBorderWhite()
     private val combined: Drawable = Utils.createCombinedDrawable(transparent, border)
@@ -242,68 +242,50 @@ class BattleScreenBuilder {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    fun createTurnTable(participants: List<Participant>): Table {
+    fun createTurnTable(participants: List<Participant>, enemyCountMap: Map<String, Int>): Table {
         return Table(tableSkin).apply {
-            defaults().height(50f)
-            columnDefaults(0).width(80f).padLeft(10f)
-            columnDefaults(1).width(54f)
-            columnDefaults(2).width(200f)
-            columnDefaults(3).width(70f)
-
-            add("").padBottom(5f)
-            add("Turn order").padBottom(5f)
-            add("").padBottom(5f)
-            add("Speed").padBottom(5f).row()
-
-            add(Label("Now:", createLabelStyle(Color.GOLD))).padBottom(5f)
-            add(createImageOf(participants[0])).padBottom(5f)
-            add(Label(participants[0].character.name, createLabelStyle(Color.GOLD))).padBottom(5f)
-            addSpeedCell(participants[0], Color.GOLD).padBottom(5f).row()
-            possibleAddPadBottom(participants[0], participants)
-
-            add("Next:")
-            if (participants.size > 1) {
-                add(createImageOf(participants[1]))
-                add(participants[1].character.name)
-                addSpeedCell(participants[1]).row()
-                possibleAddPadBottom(participants[1], participants)
-
-                participants.drop(2).forEach {
-                    add("")
-                    add(createImageOf(it))
-                    add(it.character.name)
-                    addSpeedCell(it).row()
-                    possibleAddPadBottom(it, participants)
-                }
+            defaults().size(60f).padRight(1f)
+            pad(8f)
+            participants.forEachIndexed { index, participant ->
+                add(createForecastCell(participant, isCurrent = index == 0, enemyCountMap))
             }
             background = combined
             pack()
-            setPosition(450f, Gdx.graphics.height - height - 20f)
+            setPosition((Gdx.graphics.width - width) / 2f, Gdx.graphics.height - height - 20f)
         }
+    }
+
+    private fun createForecastCell(participant: Participant, isCurrent: Boolean, enemyCountMap: Map<String, Int>): Stack {
+        return Stack().apply {
+            if (isCurrent) {
+                add(Constant.GRAY.toImage())
+            }
+            add(createImageOf(participant))
+            add(Image(Utils.createFullBorderWhite()).apply { if (isCurrent) color = Color.GOLD })
+            addPossibleForecastCount(participant, enemyCountMap)
+            addSpeedOverlay(participant)
+        }
+    }
+
+    private fun Stack.addSpeedOverlay(participant: Participant) {
+        val speedText: String = if (participant.isHero || gameData.inventory.containsBook(participant.character.id)) {
+            participant.character.getCalculatedTotalStatOf(StatItemId.SPEED).toString()
+        } else {
+            "?"
+        }
+        add(Container(Label(speedText, smallFontStyle)).bottom().right().padRight(2f))
     }
 
     private fun createImageOf(participant: Participant): Container<Image> {
         return Container(
             Image(Utils.getCharImage(participant.character.id)[0][1])
                 .apply { setScaling(Scaling.none) }
-        ).left()
+        )
     }
 
-    private fun Table.addSpeedCell(participant: Participant, color: Color = Color.WHITE): Cell<Label> {
-        if (participant.isHero) {
-            return add(Label(participant.character.getCalculatedTotalStatOf(StatItemId.SPEED).toString(),
-                             createLabelStyle(color)))
-        } else if (gameData.inventory.containsBook(participant.character.id)) {
-            return add(Label(participant.character.getCalculatedTotalStatOf(StatItemId.SPEED).toString(),
-                             createLabelStyle(color)))
-        } else {
-            return add("?")
-        }
-    }
-
-    private fun Table.possibleAddPadBottom(participant: Participant, participants: List<Participant>) {
-        if (participant == participants.last()) {
-            padBottom(10f)
+    private fun Stack.addPossibleForecastCount(participant: Participant, enemyCountMap: Map<String, Int>) {
+        if ((enemyCountMap[participant.character.id] ?: 0) > 1) {
+            add(Container(Label(participant.character.name.last().toString(), smallFontStyle)).top().right().padRight(2f))
         }
     }
 
@@ -342,7 +324,8 @@ class BattleScreenBuilder {
             add("Move left or right and confirm.")
             background = combined
             pack()
-            y = Gdx.graphics.height - height - 20f
+            x = (Gdx.graphics.width - width) / 2f
+            y = Gdx.graphics.height * 0.85f - height
         }
     }
 
@@ -638,7 +621,7 @@ class BattleScreenBuilder {
     }
 
     private fun createHpLabel(character: Character): Label {
-        return Label("${character.currentHp} ", barFontStyle).apply { setAlignment(Align.right) }
+        return Label("${character.currentHp} ", smallFontStyle).apply { setAlignment(Align.right) }
     }
 
     private fun createSpBar(hero: HeroItem): Stack {
@@ -658,7 +641,7 @@ class BattleScreenBuilder {
     }
 
     private fun createSpLabel(hero: HeroItem): Label {
-        return Label("${hero.currentSp} ", barFontStyle).apply { setAlignment(Align.right) }
+        return Label("${hero.currentSp} ", smallFontStyle).apply { setAlignment(Align.right) }
     }
 
     private fun createApDots(currentAp: Int, maximumAP: Int): Table {
@@ -712,7 +695,6 @@ class BattleScreenBuilder {
             padTop(5f)
             padLeft(10f)
             padRight(10f)
-            x = 900f
         }
     }
 
@@ -720,7 +702,8 @@ class BattleScreenBuilder {
         add(listWithActions)
         background = combined
         pack()
-        y = Gdx.graphics.height - height - 20f
+        x = (Gdx.graphics.width - width) / 2f
+        y = Gdx.graphics.height * 0.85f - height
     }
 
     private fun createSkin(): Skin {

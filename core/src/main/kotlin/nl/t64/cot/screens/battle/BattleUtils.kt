@@ -16,7 +16,7 @@ object BattleUtils {
 
     fun applyEffectsOfPerformance() {
         val turnManager = getTurnManagerTheUglyWay()
-        turnManager.possibleApplyPerformanceEffects()
+        turnManager.troubadourEffects.possibleApply()
         setIsPerformingTrueInBattleScreenTheUglyWay()
     }
 

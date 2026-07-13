@@ -32,7 +32,11 @@ class BattleTableManager(
 
     fun updateTurnTable(turnManager: TurnManager) {
         turnTable.remove()
-        turnTable = screenBuilder.createTurnTable(turnManager.participants)
+        val forecast: List<Participant> = turnManager.simulateForecast(18)
+        val enemyCountMap: Map<String, Int> = turnManager.getOnlyEnemies()
+            .groupingBy { it.character.id }
+            .eachCount()
+        turnTable = screenBuilder.createTurnTable(forecast, enemyCountMap)
         stage.addActor(turnTable)
     }
 

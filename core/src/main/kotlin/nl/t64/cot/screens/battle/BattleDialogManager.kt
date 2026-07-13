@@ -215,7 +215,7 @@ class BattleDialogManager(
 
     private fun stopPerforming(performer: Participant) {
         performer.stopPerforming()
-        turnManager.removePerformanceEffectsFromAllParticipants()
+        turnManager.troubadourEffects.removeFromAllParticipants()
         setDelayingTurn(false)
     }
 

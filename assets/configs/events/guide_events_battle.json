@@ -52,15 +52,14 @@
     "type": "tutorial",
     "text": [
       "At the top of the screen, you can see the turn order.",
-      "The character highlighted in [GOLDENROD]yellow[BLACK] will act first.",
+      "It shows the upcoming turns from left to right, with",
+      "the character acting now highlighted on the far left.",
       "",
       "The turn order is based on the [BLUE]Speed[BLACK] attribute.",
-      "Higher speed means acting earlier in the round.",
+      "Each party member's speed is shown in the",
+      "bottom-right corner of their portrait.",
       "",
-      "The speed of your party members is displayed.",
-      "The enemy's speed is unknown and shown as a",
-      "question mark. However, you can estimate it by",
-      "comparing the turn order with your party's speed."
+      "A faster character acts more often."
     ]
   },
   "guide_event_battle_durability" : {

@@ -82,7 +82,7 @@
     "damage_multiplier": 1.0,
     "description"      : [
       "A hand-to-hand attack with a weapon, that deals damage to a single target.",
-      "When successful, Stagger moves the target to the bottom of the turn order.",
+      "When successful, Stagger delays the target's next turn, pushing it back in the turn order.",
       "The chance for a successful Stagger increases for each rank in 'Warrior'.",
       "Each successful Stagger reduces the chance of the next Stagger by half."
     ]

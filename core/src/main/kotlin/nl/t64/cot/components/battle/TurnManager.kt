@@ -1,10 +1,7 @@
 package nl.t64.cot.components.battle
 
 import nl.t64.cot.components.party.HeroItem
-import nl.t64.cot.components.party.abilities.AbilityItemId
-import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.components.party.stats.StatItemId
-import kotlin.random.Random
 
 
 class TurnManager(
@@ -13,11 +10,18 @@ class TurnManager(
 ) {
     val participants: MutableList<Participant> = createParticipants()
     val currentParticipant: Participant get() = participants.first()
+    val troubadourEffects = TroubadourEffectHandler(participants)
 
     init {
         increaseAllTurnCounters()
         sortParticipants()
     }
+
+    private class Sim(
+        val participant: Participant,
+        var counter: Int,
+        val rate: Int
+    )
 
     fun getOnlyAllies(): List<Participant> {
         return getOnlyHeroes().filterNot { it == currentParticipant }
@@ -31,21 +35,48 @@ class TurnManager(
         return participants.filterNot { it.isHero }
     }
 
+    fun simulateForecast(count: Int): List<Participant> {
+        val sim: MutableList<Sim> = participants
+            .map { Sim(it, it.turnCounter, it.tickRate) }
+            .toMutableList()
+        val forecast: MutableList<Participant> = mutableListOf()
+
+        forecast.add(sim.first().participant)
+        repeat(count - 1) {
+            advanceSim(sim)
+            forecast.add(sim.first().participant)
+        }
+        return forecast
+    }
+
+    // Mirrors the turn-order logic of setNextTurn (reset first, tick, sort) on throwaway copies.
+    // Keep in sync with setNextTurn, otherwise the forecast no longer matches the real order.
+    private fun advanceSim(sim: MutableList<Sim>) {
+        if (sim.size == 1) return
+
+        sim[0].counter -= TURN_THRESHOLD
+        while (sim.none { it.counter >= TURN_THRESHOLD }) {
+            sim.forEach { it.counter += it.rate }
+        }
+        sim.sortByDescending { it.counter }
+    }
+
+    // Turn-order logic (reset acted participant, tick, sort) is mirrored by advanceSim for the forecast.
+    // Keep both in sync.
     fun setNextTurn() {
+        val actedParticipant: Participant = currentParticipant
         removeKilledParticipants()
         if (participants.size == 1) return
-        val nextInLine = participants[1]
-        currentParticipant.resetTurnCounter()
+        actedParticipant.resetTurnCounter()
         increaseAllTurnCounters()
         sortParticipants()
-        nextInLine.moveToTop()
-        nextInLine.refreshActionPoints()
-        possibleApplyPerformanceEffects()
+        currentParticipant.refreshActionPoints()
+        troubadourEffects.possibleApply()
     }
 
     fun removeKilledParticipants() {
         val deadHeroes = getOnlyHeroes().filter { it.character.isDead }
-        if (deadHeroes.any { it.isPerforming }) removePerformanceEffectsFromAllParticipants()
+        if (deadHeroes.any { it.isPerforming }) troubadourEffects.removeFromAllParticipants()
         deadHeroes.forEach { it.resetAllTemporaryBattleEffects() }
         participants.removeIf { it.character.isDead }
     }
@@ -81,46 +112,15 @@ class TurnManager(
         getOnlyHeroes().forEach { it.resetAllTemporaryBattleEffects() }
     }
 
-    fun removePerformanceEffectsFromAllParticipants() {
-        participants.forEach {
-            it.character.bonus.hitBonusFromTroubadour = 0
-            it.character.bonus.hitPenaltyFromTroubadour = 0
-        }
-    }
-
-    fun possibleApplyPerformanceEffects() {
-        val performer: Participant = participants.firstOrNull { it.isPerforming } ?: return
-
-        val performance: AbilityItemId = performer.performingType!!
-        val skillRank: Int = performer.character.getCalculatedTotalSkillOf(SkillItemId.TROUBADOUR)
-
-        when (performance) {
-            AbilityItemId.PERFORM_BEAUTY -> getOnlyHeroes()
-                .filterNot { it == performer }
-                .forEach { it.character.bonus.hitBonusFromTroubadour = it.calculatePerformBonus(skillRank) }
-
-            AbilityItemId.PERFORM_CHAOS -> getOnlyEnemies()
-                .forEach { it.character.bonus.hitPenaltyFromTroubadour = it.calculatePerformPenalty(skillRank) }
-
-            else -> throw IllegalStateException("Unknown performing AbilityItemId: $performance")
-        }
-    }
-
     private fun increaseAllTurnCounters() {
-        while (true) {
-            if (participants.any { it.isTurnCounterAtMax() }) break
+        while (participants.none { it.isTurnCounterAtMax() }) {
             participants.forEach { it.updateTurnCounter() }
         }
     }
 
     private fun sortParticipants() {
-        val comparator = compareByDescending<Participant> { it.turnCounter }.thenBy { Random.nextInt() }
+        val comparator: Comparator<Participant> = compareByDescending { it.turnCounter }
         participants.sortWith(comparator)
-    }
-
-    private fun Participant.moveToTop() {
-        participants.remove(this)
-        participants.add(0, this)
     }
 
     private fun Participant.moveToBottom() {
