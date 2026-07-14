@@ -30,9 +30,9 @@ class BattleTableManager(
         stage.addActor(enemyTable)
     }
 
-    fun updateTurnTable(turnManager: TurnManager) {
+    fun updateTurnTable(turnManager: TurnManager, visionSlots: Int) {
         turnTable.remove()
-        val forecast: List<Participant> = turnManager.simulateForecast(18)
+        val forecast: List<Participant> = turnManager.simulateForecast(visionSlots)
         val enemyCountMap: Map<String, Int> = turnManager.getOnlyEnemies()
             .groupingBy { it.character.id }
             .eachCount()

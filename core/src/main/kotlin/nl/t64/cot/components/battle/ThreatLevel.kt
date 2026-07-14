@@ -20,7 +20,7 @@ enum class ThreatLevel(val color: Color) {
     WEAKER(Color.GREEN),
     EVEN(Color.YELLOW),
     STRONGER(Color.ORANGE),
-    DANGEROUS(Color.RED),
+    DANGEROUS(Color.SCARLET),
     DEADLY(Color.RED);
 
     companion object {
@@ -29,7 +29,7 @@ enum class ThreatLevel(val color: Color) {
          * Verlaag dit als alle vijanden te sterk worden ingeschat.
          * Verhoog dit als alle vijanden te zwak worden ingeschat.
          */
-        private const val CALIBRATION = 0.9f
+        private const val CALIBRATION = 0.8f
         private const val CROWD_DAMPENER = 0.8f // < 1: meer vijanden tellen minder mee, > 1: meer vijanden tellen zwaarder mee
 
         fun forBattle(battleId: String): ThreatLevel {

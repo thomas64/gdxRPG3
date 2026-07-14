@@ -65,7 +65,7 @@
       },
       "2": {
         "comment"        : "WARNING: 1 link to 2 in Santino.handleSideEffects()",
-        "taskPhrase"     : "Meet with Father Santino at 18:00 to let him prepare the information you need about Ulrog.",
+        "taskPhrase"     : "Meet with Father Santino at 18:00 after he finished his study about Ulrog you requested.",
         "type"           : "DELIVER_MESSAGE",
         "conversationIds": ["to_be_added"],
         "isHidden"       : true
@@ -101,7 +101,7 @@
         "linkedWith"     : ["4"]
       },
       "4": {
-        "taskPhrase"  : "      Get the key from Garrin for his wife's drawer.",
+        "taskPhrase"  : "      Get the key to his wife's drawer from Garrin.",
         "type"        : "FIND_ITEM",
         "target"      : {"key_garrin": 1},
         "isHidden"    : true,
@@ -125,6 +125,7 @@
         "linkedWith"  : ["7"]
       },
       "7": {
+        "comment"        : "WARNING: 2 links in santino_counseling.",
         "taskPhrase"     : "      Destroy the ghost before it possesses Garrin.",
         "type"           : "DELIVER_ITEM_TO_SHOW",
         "target"         : {"ghost_repeller": 1},
@@ -133,7 +134,7 @@
         "linkedWith"     : ["2"]
       },
       "8": {
-        "taskPhrase"     : "Report back to Father Santino about the ghost you destroyed.",
+        "taskPhrase"     : "Return the holy staff to Father Santino.",
         "type"           : "TALK_TO_PERSON",
         "conversationIds": ["santino_counseling"],
         "isHidden"       : true

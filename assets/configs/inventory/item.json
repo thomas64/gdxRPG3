@@ -65,7 +65,7 @@
     "group"       : "ITEM",
     "sort"        : 70145,
     "is_unique"   : true,
-    "description" : ["Key from Garrin's wife's drawer."],
+    "description" : ["Key to Garrin's wife's drawer."],
     "is_droppable": false
   },
   "letter_to_santino"      : {

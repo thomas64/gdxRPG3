@@ -67,7 +67,7 @@
   "ghost_entering"             : {
     "phrases": {
       "1": {"face": "ghost1", "name": "Ghost", "text": ["reveeenge iii waaant bodyyy"]},
-      "2": {"face": "boy17", "name": "Paton", "text": ["Daddy! Aaaaaah!!"]},
+      "2": {"face": "boy17", "name": "Paton", "text": ["Papa! Aaaaaah!!"]},
       "3": {"face": "man12", "name": "Garrin", "text": ["Paton! What's wrong?"], "choices": [{"command": "EXIT"}]}
     }
   },
@@ -138,28 +138,28 @@
   "paton_shouts_nooo"          : {
     "name"   : "Paton",
     "phrases": {
-      "1": {"text": ["Nooo! Daddy!!"], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["Nooo! Papa!!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "paton_runs_to_garrin"       : {
     "name"   : "Paton",
     "phrases": {
-      "1": {"text": ["Nooo! Daddy!!"]},
+      "1": {"text": ["Nooo! Papa!!"]},
       "2": {"text": ["Are you okay?!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "ghost_has_garrin"           : {
     "phrases": {
       "1": {"face": "ghost1", "name": "Garrin", "text": ["gooo awaaay iii waaant reveeenge"]},
-      "2": {"face": "boy17", "name": "Paton", "text": ["What have you done to my daddy?!"]},
+      "2": {"face": "boy17", "name": "Paton", "text": ["What have you done to Papa?!"]},
       "3": {"face": "ghost1", "name": "Garrin", "text": ["gooo awaaay iii waaant reveeenge"]},
-      "4": {"face": "boy17", "name": "Paton", "text": ["Daddy, I'm scared!"], "choices": [{"command": "EXIT"}]}
+      "4": {"face": "boy17", "name": "Paton", "text": ["Papa, I'm scared!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "paton_hiding_again"         : {
     "name"   : "Paton",
     "phrases": {
-      "1": {"text": ["Is my daddy gonna be okay?"]},
+      "1": {"text": ["Is Papa gonna be okay?"]},
       "2": {"text": ["Please save him!"], "choices": [{"command": "EXIT"}]}
     }
   },
@@ -183,7 +183,8 @@
       "3": {"text": ["My wife tried to tell me, years ago. And I told her she was imagining things."]},
       "4": {"text": ["But no more. She was right — about every last thing."]},
       "5": {"text": ["So in the end, Father Santino really handed over his holy staff after all!"]},
-      "6": {"text": ["Thank you so much for helping us! Thank you. For my son. For her."], "choices": [{"command": "EXIT"}]}
+      "6": {"text": ["You should give it back to him, with my thanks. It should be protecting the next soul that needs it."]},
+      "7": {"text": ["Thank you so much for helping us! Thank you. For my son. For her."], "choices": [{"command": "EXIT"}]}
     }
   },
   "paton_happy"                : {
@@ -237,7 +238,7 @@
   "santino_prepare_morning"    : {
     "name"   : "Father Santino",
     "phrases": {
-      "1": {"text": ["Blessings upon you my child."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "2"}]},
+      "1": {"text": ["Blessings upon you, my child."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "2"}]},
       "2": {"text": ["Welcome to the Temple of Evdos, God of Knowledge. I am Father Santino."]},
       "3": {"text": ["I'm busy preparing this morning's sermon. Feel free to join us at 10:00."]},
       "4": {"text": ["But if you're here for a pastoral conversation, please come see me after the service at 11:00."], "choices": [{"command": "EXIT"}]}
@@ -246,7 +247,7 @@
   "santino_service_start"      : {
     "name"   : "Father Santino",
     "phrases": {
-      "1": {"text": ["Blessings upon you my child."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "2"}]},
+      "1": {"text": ["Blessings upon you, my child."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "2"}]},
       "2": {"text": ["Welcome to the Temple of Evdos, God of Knowledge. I am Father Santino."]},
       "3": {"text": ["The service is about to start. Please join us if you'd like."]},
       "4": {"text": ["But if you're here for a pastoral conversation, please come see me after the service at 11:00."], "choices": [{"command": "EXIT"}]}
@@ -280,7 +281,7 @@
     "name"   : "Father Santino",
     "startAt": [{"condition": ["_rc_>=_a_q_quest_lastdenn_santino"], "startId": "100"}],
     "phrases": {
-      "1"   : {"text": ["Blessings upon you my child."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "2"}]},
+      "1"   : {"text": ["Blessings upon you, my child."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "2"}]},
       "2"   : {"text": ["Welcome to the Temple of Evdos, God of Knowledge. I am Father Santino."]},
       "3"   : {"text": ["Are you in need of pastoral counseling?"]},
       "4"   : {
@@ -296,14 +297,14 @@
       "10"  : {"text": ["I also have an appointment with the mayor this afternoon... Let me think... Hmmm..."]},
       "11"  : {"text": ["Come see me again tonight at 18:00! I will have gathered everything you need to know about Ulrog by then."], "choices": [{"nextId": "51"}]},
       "49"  : {"text": ["-------------------------------------------------------------------------------------------"]},
-      "50"  : {"text": ["Blessings upon you my child."]},
+      "50"  : {"text": ["Blessings upon you, my child."]},
       "51"  : {"text": ["Did you want to discuss something else?"]},
       "52"  : {
         "choices": [
           {"condition": ["i_n_0_==_item_ghost_repeller", "_tc_3_q_quest_lastdenn_garrin"], "text": "*Ask him for his holy staff to ward off ghosts.*", "nextId": "70"},
           {"condition": ["i_n_1_>=_item_ghost_proof", "i_n_0_==_item_ghost_repeller"], "text": "[Ghost proof] *Show him the proof to get the holy staff.*", "nextId": "110"},
           {"condition": ["i_r_!=_u_q_quest_lastdenn_garrin", "_r_!=_f_q_quest_lastdenn_garrin", "is_garrin_possessed"], "text": "*Warn him for his upcoming murder!*", "nextId": "60"},
-          {"condition": ["i_ta_7_q_quest_lastdenn_garrin"], "text": "*Tell him the ghost has been destroyed.*", "command": "TALK_TO_QUEST_PERSON", "nextId": "160"},
+          {"condition": ["i_ta_7_q_quest_lastdenn_garrin"], "text": "[Ghost repeller] *Return his holy staff, its work now done.*", "command": "TALK_TO_QUEST_PERSON", "nextId": "160"},
           {"condition": ["i_tn_1_q_quest_lastdenn_santino"], "text": "*Explain everything that's happened with Ardor, Ulrog and Ylarus.*", "command": "DELIVER_QUEST_MESSAGE", "nextId": "5"},
           {"condition": ["i_c_>=_a_q_quest_lastdenn_santino"], "text": "*Nothing for now. Take your leave.*", "nextId": "53"},
           {"condition": ["i_c_!=_a_q_quest_lastdenn_santino"], "text": "*Nothing for now. Take your leave.*", "nextId": "54"}
@@ -314,7 +315,7 @@
       "60"  : {"text": ["Murdered? What nonsense! Who in their right mind would want to harm a servant of Evdos?"], "choices": [{"nextId": "52"}]},
       "70"  : {"text": ["My holy staff? I cannot hand it over to you without proof that ghosts are real."], "choices": [{"nextId": "52"}]},
       "99"  : {"text": ["-------------------------------------------------------------------------------------------"]},
-      "100" : {"text": ["Blessings upon you my child."]},
+      "100" : {"text": ["Blessings upon you, my child."]},
       "101" : {"text": ["Welcome to the Temple of Evdos, God of Knowledge. I am Father Santino."]},
       "102" : {"text": ["Are you in need of pastoral counseling?"]},
       "103" : {
@@ -322,7 +323,7 @@
           {"condition": ["i_n_0_==_item_ghost_repeller", "_tc_3_q_quest_lastdenn_garrin"], "text": "*Ask him for his holy staff to ward off ghosts.*", "nextId": "155"},
           {"condition": ["i_n_1_>=_item_ghost_proof", "i_n_0_==_item_ghost_repeller"], "text": "[Ghost proof] *Show him the proof to get the holy staff.*", "nextId": "110"},
           {"condition": ["i_r_!=_u_q_quest_lastdenn_garrin", "_r_!=_f_q_quest_lastdenn_garrin", "is_garrin_possessed"], "text": "*Warn him for his upcoming murder!*", "nextId": "150"},
-          {"condition": ["i_ta_7_q_quest_lastdenn_garrin"], "text": "*Tell him the ghost has been destroyed.*", "command": "TALK_TO_QUEST_PERSON", "nextId": "160"},
+          {"condition": ["i_ta_7_q_quest_lastdenn_garrin"], "text": "[Ghost repeller] *Return his holy staff, its work now done.*", "command": "TALK_TO_QUEST_PERSON", "nextId": "160"},
           {"condition": ["i_tn_1_q_quest_lastdenn_santino"], "text": "*Explain everything that's happened with Ardor, Ulrog and Ylarus.*", "command": "DELIVER_QUEST_MESSAGE", "nextId": "5"},
           {"text": "*Counseling is for wimps. Take your leave.*", "nextId": "104"}
         ]
@@ -350,18 +351,18 @@
       "141" : {"text": ["Heh... perhaps you've struck closer to truth than you meant. A relic locked away protects no one. Better it serves the living."], "choices": [{"command": "RECEIVE_ITEM"}]},
       "150" : {"text": ["Murdered? What nonsense! Who in their right mind would want to harm a servant of Evdos?"], "choices": [{"nextId": "103"}]},
       "155" : {"text": ["My holy staff? I cannot hand it over to you without proof that ghosts are real."], "choices": [{"nextId": "103"}]},
-      "160" : {"text": ["So it is done? The spirit that haunted that poor family — gone for good?"]},
-      "161" : {"text": ["Then the staff served as it was meant to. I clung to it too tightly... a holy thing is only holy in the using."]},
-      "162" : {"text": ["You have my thanks, child. The temple owes you a debt."], "choices": [{"nextId": "51"}]},
+      "160" : {"text": ["That staff you carry... hold it to the light a moment. Strange — it is the very likeness of my own holy staff."]},
+      "161" : {"text": ["How did it come into your hands? I have no memory of parting with it... and yet I feel no want of it either."]},
+      "162" : {"text": ["Keep it, my child. Whatever road brought it to you, Evdos surely meant it for your hands, not mine."], "choices": [{"nextId": "51"}]},
       "1199": {"text": ["You should have it. It's the right thing to do."], "choices": [{"command": "RECEIVE_ITEM"}]},
-      "1200": {"text": ["Blessings upon you my child. I hope my holy staff has been of use to you."], "choices": [{"nextId": "102"}]}
+      "1200": {"text": ["Blessings upon you, my child. I hope my holy staff has been of use to you."], "choices": [{"nextId": "102"}]}
     }
   },
   "santino_busy_errand"        : {
     "name"   : "Father Santino",
     "startAt": [{"condition": ["_tc_1_q_quest_lastdenn_santino"], "startId": "10"}],
     "phrases": {
-      "1" : {"text": ["Blessings upon you my child."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "2"}]},
+      "1" : {"text": ["Blessings upon you, my child."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "2"}]},
       "2" : {"text": ["I am Father Santino, priest of the Temple of Evdos, God of Knowledge."]},
       "3" : {"text": ["I'm on my way to the mayor. I need to talk to him about the daily gate closure."]},
       "4" : {"text": ["If you need a pastoral conversation, I'm available every day after the service at 11:00."]},
@@ -451,7 +452,7 @@
   "santino_back_from_mayor"    : {
     "name"   : "Father Santino",
     "phrases": {
-      "1": {"text": ["Blessings upon you my child."]},
+      "1": {"text": ["Blessings upon you, my child."]},
       "2": {"text": ["I just got back from talking to the mayor. I told him that anyone on a religious pilgrimage should be allowed to pass freely through the gate."]},
       "3": {
         "text": ["He said he would think about it, but I don't have high hopes."], "choices": [
@@ -466,21 +467,21 @@
   "santino_preparing_answer"   : {
     "name"   : "Father Santino",
     "phrases": {
-      "1": {"text": ["Blessings upon you my child."]},
+      "1": {"text": ["Blessings upon you, my child."]},
       "2": {"text": ["I'm now actually busy searching for the knowledge you need about Ulrog. Come back tonight at 18:00 and I will have gathered everything you need to know by then."], "choices": [{"command": "EXIT"}]}
     }
   },
   "santino_answer_ulrog"       : {
     "name"   : "Father Santino",
     "phrases": {
-      "1": {"text": ["Blessings upon you my child."]},
+      "1": {"text": ["Blessings upon you, my child."]},
       "2": {"text": ["YOU FINISHED THE GAME! CONGRATS!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "santino_prepare_evening"    : {
     "name"   : "Father Santino",
     "phrases": {
-      "1": {"text": ["Blessings upon you my child."]},
+      "1": {"text": ["Blessings upon you, my child."]},
       "2": {"text": ["I'm busy preparing tomorrow's sermon. Feel free to join us at 10:00."]},
       "3": {"text": ["But if you're here for a pastoral conversation, please come see me after the service at 11:00."], "choices": [{"command": "EXIT"}]}
     }

@@ -145,6 +145,7 @@ class BattleScreen : Screen {
                                   "guide_event_battle_battle_lock",
                                   "guide_event_battle_ap",
                                   "guide_event_battle_turn_order",
+                                  "guide_event_battle_turn_order_visibility",
                                   "guide_event_battle_durability",
                                   "guide_event_battle_special"),
                            if (gameData.party.getAllHeroesAlive().size > 1)
@@ -203,7 +204,8 @@ class BattleScreen : Screen {
     private fun updateAllTables() {
         tableManager.updateHeroTable(gameData.party.getAllHeroes(), turnManager::getCurrentApOf)
         tableManager.updateEnemyTable(enemies.getAll(), turnManager::getCurrentApOf)
-        tableManager.updateTurnTable(turnManager)
+        val visionSlots = (gameData.party.size + 2) + gameData.inventory.getTotalOfItem("vision_thingy")
+        tableManager.updateTurnTable(turnManager, visionSlots)
         tableManager.updateBattleField(battleField)
     }
 

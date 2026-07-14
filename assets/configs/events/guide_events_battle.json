@@ -1,5 +1,5 @@
 {
-  "guide_event_battle_rows"       : {
+  "guide_event_battle_rows"                 : {
     "type": "tutorial",
     "text": [
       "The battlefield consists of the two rows you can see below.",
@@ -10,7 +10,7 @@
       "With these AP, you can move, attack, or do other actions."
     ]
   },
-  "guide_event_battle_advantage"  : {
+  "guide_event_battle_advantage"            : {
     "type": "tutorial",
     "text": [
       "Advantage greatly increases your hit and critical hit chance,",
@@ -25,7 +25,7 @@
       "an enemy, it means that the enemy has an advantage against you!"
     ]
   },
-  "guide_event_battle_battle_lock": {
+  "guide_event_battle_battle_lock"          : {
     "type": "tutorial",
     "text": [
       "At the start of each turn, if a character begins",
@@ -38,7 +38,7 @@
       "The Stealth skill reduces the AP cost to escape battle lock."
     ]
   },
-  "guide_event_battle_ap"         : {
+  "guide_event_battle_ap"                   : {
     "type": "tutorial",
     "text": [
       "When you end your turn, if there is any AP left,",
@@ -48,12 +48,12 @@
       "it means you can have a maximum of 6 AP."
     ]
   },
-  "guide_event_battle_turn_order" : {
+  "guide_event_battle_turn_order"           : {
     "type": "tutorial",
     "text": [
       "At the top of the screen, you can see the turn order.",
       "It shows the upcoming turns from left to right, with",
-      "the character acting now highlighted on the far left.",
+      "the currently acting character highlighted on the left.",
       "",
       "The turn order is based on the [BLUE]Speed[BLACK] attribute.",
       "Each party member's speed is shown in the",
@@ -62,7 +62,17 @@
       "A faster character acts more often."
     ]
   },
-  "guide_event_battle_durability" : {
+  "guide_event_battle_turn_order_visibility": {
+    "type": "tutorial",
+    "text": [
+      "The amount of visible spaces in the turn order",
+      "is only at 3 now. But as your party grows, more",
+      "spaces will become visible.",
+      "",
+      "Specific items will also increase this amount."
+    ]
+  },
+  "guide_event_battle_durability"           : {
     "type": "tutorial",
     "text": [
       "Weapons and shields have limited [BLUE]durability[BLACK].",
@@ -74,7 +84,7 @@
       "The Mechanic skill gives your party the ability to repair items."
     ]
   },
-  "guide_event_battle_special"    : {
+  "guide_event_battle_special"              : {
     "type": "tutorial",
     "text": [
       "It is possible that you have acquired a magic spell by now.",
@@ -83,7 +93,7 @@
       "Remember, magic spells require resources to cast."
     ]
   },
-  "guide_event_battle_enemy_focus": {
+  "guide_event_battle_enemy_focus"          : {
     "type": "tutorial",
     "text": [
       "Enemies will try to choose their target based on the most",
