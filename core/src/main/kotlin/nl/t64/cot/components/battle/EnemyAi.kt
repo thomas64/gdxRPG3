@@ -11,7 +11,7 @@ class EnemyAi(
     private val actingEnemy: Participant get() = currentParticipant.invoke()
     private val actingEnemyIndex: Int get() = grid.getSpaceIndexOf(actingEnemy)
 
-    fun possibleSwitchWeaponOfActingEnemy() {
+    fun possibleSwitchWeapon() {
         if (!actingEnemy.canSwitchWeapon()) return
 
         if (actingEnemy.hasRangedWeapon()) {
@@ -39,7 +39,7 @@ class EnemyAi(
     private fun List<Int>.getMeleeHeroTargetAndMove(): Participant? {
         val heroIndicesByPrio: List<Int> = this
         val highestPrioHero: Int = heroIndicesByPrio.first()
-        if (highestPrioHero in getWeaponRangeOfActingEnemy()) {
+        if (highestPrioHero in getWeaponRange()) {
             return grid.heroSpaces[highestPrioHero]   // already in range: attack without moving.
         }
 
@@ -227,11 +227,11 @@ class EnemyAi(
 
     private fun getHighestPrioHeroInRangeFrom(heroIndicesByPrio: List<Int>): Participant? {
         return heroIndicesByPrio
-            .firstOrNull { it in getWeaponRangeOfActingEnemy() }
+            .firstOrNull { it in getWeaponRange() }
             ?.let { grid.heroSpaces[it] }
     }
 
-    private fun getWeaponRangeOfActingEnemy(): List<Int> {
+    fun getWeaponRange(): List<Int> {
         val ranges: List<Int> = actingEnemy.getWeaponRanges()
         return grid.getRange(actingEnemyIndex, 1, 0, ranges)
     }

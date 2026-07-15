@@ -24,14 +24,14 @@ class BattleFieldTableBuilder {
         this.battleField = battleField
 
         val enemyTable: Table = if (currentParticipant.isHero) {
-            createEnemyRowWithTargetFields()
+            createEnemyRowWithHeroRangeFields()
         } else {
-            createFullWhiteRow(battleField.enemySpaces)
+            createEnemyRowWithActingEnemy(currentParticipant)
         }
         val heroTable: Table = if (currentParticipant.isHero) {
             createHeroRowWithWalkingFields(currentParticipant)
         } else {
-            createFullWhiteRow(battleField.heroSpaces)
+            createHeroRowWithEnemyRangeFields()
         }
 
         return Table().apply {
@@ -48,19 +48,20 @@ class BattleFieldTableBuilder {
         }
     }
 
-    private fun createFullWhiteRow(spaces: MutableList<Participant?>): Table {
+    private fun createEnemyRowWithActingEnemy(currentParticipant: Participant): Table {
         return Table().apply {
             defaults().width(60f).height(60f).center()
-            spaces.forEach {
+            battleField.enemySpaces.forEach {
                 when (it) {
                     null -> addWhiteCell()
+                    currentParticipant -> addGoldParticipantCell(it)
                     else -> addWhiteParticipantCell(it)
                 }
             }
         }
     }
 
-    private fun createEnemyRowWithTargetFields(): Table {
+    private fun createEnemyRowWithHeroRangeFields(): Table {
         val ranges: List<Int> = battleField.getWeaponRangeOfActingHero()
 
         return Table().apply {
@@ -72,6 +73,23 @@ class BattleFieldTableBuilder {
                     enemyAtSpace == null -> addWhiteCell()
                     index in ranges -> addRedParticipantCell(enemyAtSpace)
                     else -> addWhiteParticipantCell(enemyAtSpace)
+                }
+            }
+        }
+    }
+
+    private fun createHeroRowWithEnemyRangeFields(): Table {
+        val ranges: List<Int> = battleField.getWeaponRangeOfActingEnemy()
+
+        return Table().apply {
+            defaults().width(60f).height(60f).center()
+            battleField.heroSpaces.forEachIndexed { index, heroAtSpace ->
+
+                when {
+                    heroAtSpace == null && index in ranges -> addRedCell()
+                    heroAtSpace == null -> addWhiteCell()
+                    index in ranges -> addRedParticipantCell(heroAtSpace)
+                    else -> addWhiteParticipantCell(heroAtSpace)
                 }
             }
         }
@@ -146,6 +164,7 @@ class BattleFieldTableBuilder {
         add(Stack().apply {
             add(Image(Utils.createFullBorderWhite()).apply { color = Color.ORANGE })
             add(Container(createImageOf(participant)))
+            addPossibleCount(participant)
             addPossibleBattleLock(participant)
             addPossiblePerformance(participant)
         }).padRight(1f)

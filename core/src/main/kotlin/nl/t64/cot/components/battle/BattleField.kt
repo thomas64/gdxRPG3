@@ -106,8 +106,12 @@ class BattleField(
         return grid.getRange(getSpaceIndexOfCurrentParticipant(), 0, -1, ranges)
     }
 
+    fun getWeaponRangeOfActingEnemy(): List<Int> {
+        return enemyAi.getWeaponRange()
+    }
+
     fun possibleSwitchWeaponOfActingEnemy() {
-        enemyAi.possibleSwitchWeaponOfActingEnemy()
+        enemyAi.possibleSwitchWeapon()
     }
 
     fun possibleGetHeroTargetAndMoveEnemy(): Participant? {
