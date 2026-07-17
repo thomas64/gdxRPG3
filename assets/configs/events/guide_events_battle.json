@@ -72,6 +72,15 @@
       "Specific items will also increase this amount."
     ]
   },
+  "guide_event_battle_special"              : {
+    "type": "tutorial",
+    "text": [
+      "It is possible that you have acquired a magic spell by now.",
+      "If so, you can use it in the battle menu under [BLUE]Special[BLACK].",
+      "",
+      "Remember, magic spells require resources to cast."
+    ]
+  },
   "guide_event_battle_durability"           : {
     "type": "tutorial",
     "text": [
@@ -82,15 +91,6 @@
       "Always monitor your weapon's durability to avoid surprises!",
       "",
       "The Mechanic skill gives your party the ability to repair items."
-    ]
-  },
-  "guide_event_battle_special"              : {
-    "type": "tutorial",
-    "text": [
-      "It is possible that you have acquired a magic spell by now.",
-      "If so, you can use it in the battle menu under [BLUE]Special[BLACK].",
-      "",
-      "Remember, magic spells require resources to cast."
     ]
   },
   "guide_event_battle_enemy_focus"          : {

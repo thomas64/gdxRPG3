@@ -146,8 +146,8 @@ class BattleScreen : Screen {
                                   "guide_event_battle_ap",
                                   "guide_event_battle_turn_order",
                                   "guide_event_battle_turn_order_visibility",
-                                  "guide_event_battle_durability",
-                                  "guide_event_battle_special"),
+                                  "guide_event_battle_special",
+                                  "guide_event_battle_durability"),
                            if (gameData.party.getAllHeroesAlive().size > 1)
                                listOf("guide_event_battle_enemy_focus") else emptyList()
                 )

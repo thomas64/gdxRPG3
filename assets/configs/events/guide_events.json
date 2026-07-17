@@ -39,6 +39,20 @@
       "A main quest is marked with an [M]."
     ]
   },
+  "guide_event_threat"               : {
+    "type": "tutorial",
+    "text": [
+      "The floating markers above enemies show how dangerous",
+      "a battle would be for your [BLUE]current[BLACK] party.",
+      "",
+      "Downward [GREEN]chevrons[BLACK] mean the enemy is weaker, a [GOLD]dash[BLACK]",
+      "means an even match, and upward [ORANGE]chevrons[BLACK] mean stronger.",
+      "More chevrons means a bigger gap.",
+      "",
+      "A [RED]red cross[BLACK] warns the enemy far outmatches you.",
+      "Better to avoid that fight until your party has grown stronger."
+    ]
+  },
   "guide_event_minimap"              : {
     "type": "tutorial",
     "text": [
