@@ -1,7 +1,6 @@
 package nl.t64.cot.components.battle
 
 import nl.t64.cot.components.party.HeroItem
-import nl.t64.cot.components.party.stats.StatItemId
 
 
 class TurnManager(
@@ -13,8 +12,8 @@ class TurnManager(
     val troubadourEffects = TroubadourEffectHandler(participants)
 
     init {
-        increaseAllTurnCounters()
-        sortParticipants()
+        participants.increaseTurnCounters()
+        participants.sort()
     }
 
     private class Sim(
@@ -58,7 +57,7 @@ class TurnManager(
         while (sim.none { it.counter >= TURN_THRESHOLD }) {
             sim.forEach { it.counter += it.rate }
         }
-        sim.sortByDescending { it.counter }
+        sim.sortWith(compareByDescending<Sim> { it.counter }.thenBy { it.participant.character.name })
     }
 
     // Turn-order logic (reset acted participant, tick, sort) is mirrored by advanceSim for the forecast.
@@ -68,8 +67,8 @@ class TurnManager(
         removeKilledParticipants()
         if (participants.size == 1) return
         actedParticipant.resetTurnCounter()
-        increaseAllTurnCounters()
-        sortParticipants()
+        participants.increaseTurnCounters()
+        participants.sort()
         currentParticipant.refreshActionPoints()
         troubadourEffects.possibleApply()
     }
@@ -82,8 +81,13 @@ class TurnManager(
     }
 
     fun delayTurn() {
-        currentParticipant.delayTurn()
-        participants.swap(0, 1)
+        val delayingParticipant: Participant = currentParticipant
+        val others: List<Participant> = participants.filterNot { it == delayingParticipant }
+        delayingParticipant.delayTurn()
+        others.increaseTurnCounters()
+        delayingParticipant.raiseTurnCounterAboveMaxOf(others)
+        participants.sort()
+        participants.swapFirstAndSecond()
         currentParticipant.refreshActionPoints()
     }
 
@@ -112,15 +116,20 @@ class TurnManager(
         getOnlyHeroes().forEach { it.resetAllTemporaryBattleEffects() }
     }
 
-    private fun increaseAllTurnCounters() {
-        while (participants.none { it.isTurnCounterAtMax() }) {
-            participants.forEach { it.updateTurnCounter() }
+    private fun Participant.raiseTurnCounterAboveMaxOf(group: List<Participant>) {
+        this.turnCounter = this.turnCounter.coerceAtLeast(group.maxOf { it.turnCounter } + 1)
+    }
+
+    private fun List<Participant>.increaseTurnCounters() {
+        while (this.none { it.isTurnCounterAtMax() }) {
+            this.forEach { it.updateTurnCounter() }
         }
     }
 
-    private fun sortParticipants() {
-        val comparator: Comparator<Participant> = compareByDescending { it.turnCounter }
-        participants.sortWith(comparator)
+    private fun MutableList<Participant>.sort() {
+        val comparator: Comparator<Participant> = compareByDescending<Participant> { it.turnCounter }
+            .thenBy { it.character.name }
+        this.sortWith(comparator)
     }
 
     private fun Participant.moveToBottom() {
@@ -131,15 +140,15 @@ class TurnManager(
     private fun createParticipants(): MutableList<Participant> {
         val heroParticipants = heroes.map { Participant(it) }
         val enemyParticipants = enemies.map { Participant(it) }
-        return (heroParticipants + enemyParticipants)
-            .sortedByDescending { it.character.getCalculatedTotalStatOf(StatItemId.SPEED) }
-            .toMutableList()
+        return (heroParticipants + enemyParticipants).toMutableList()
     }
 
-    private fun MutableList<Participant>.swap(index1: Int, index2: Int) {
-        val temp = this[index1]
-        this[index1] = this[index2]
-        this[index2] = temp
+    private fun MutableList<Participant>.swapFirstAndSecond() {
+        val first = 0
+        val second = 1
+        val temp = this[first]
+        this[first] = this[second]
+        this[second] = temp
     }
 
 }
