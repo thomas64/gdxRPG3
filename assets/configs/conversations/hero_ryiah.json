@@ -33,117 +33,114 @@
     "startAt": [{"condition": ["should_guard_be_giving_key"], "startId": "100"}],
     "phrases": {
       "1"   : {"text": ["*Hic*"], "choices": [{"command": "EXIT"}]},
-      "100" : {"text": ["Hn. If it's the barkeep you want, he's the sod behind the bar. If it's me - *Hic* I'm off duty, and fresh out of favours."]},
-      "101" : {"text": ["Twelve years a jailer, and this hour with a bottle is the only quiet I *Hic* get. So make it quick."]},
-      "102" : {"text": ["Well? Out with it. What does a stranger want, badgering a man *Hic* at his cups?"]},
-      "103" : {
+      "100" : {"text": ["Hn. If it's the barkeep you want, he's the one behind the bar. If it's me - *Hic* I'm off duty. Way... way off duty."]},
+      "101" : {
         "choices": [
-          {"text": "*Tell him you're here for the key to his jail cell.*", "nextId": "104"},
+          {"text": "*Tell him you're here for the key of Ryiah's jail cell.*", "nextId": "104"},
           {"text": "*Let him be with his drink. Take your leave.*", "command": "EXIT"}
         ]
       },
-      "104" : {"text": ["...The cell key. Ha - should've known. It's always the key. No, and no again. ...This bottle's the only thing in here *Hic* not after something off me. Leave me to it."]},
+      "104" : {"text": ["...The witch's cell key? *Hic* I can't give you that... Why should you give me taht? I mean... Why should I give you that?"]},
       "105" : {
         "choices": [
           {"condition": ["barbarian1"], "text": "[Barbarian 1] *Warn him a witch remembers the man who caged her.*", "nextId": "110"},
-          {"condition": ["diplomat1"], "text": "[Diplomat 1] *Argue the one in the cell has done nothing wrong.*", "nextId": "120"},
-          {"condition": ["jester1"], "text": "[Jester 1] *Joke that no sane man guards a witch for the mayor's wage.*", "nextId": "130"},
+          {"condition": ["diplomat1"], "text": "[Diplomat 1] *Argue Ryiah has done nothing wrong.*", "nextId": "113"},
+          {"condition": ["jester1"], "text": "[Jester 1] *Joke that no sane man guards a witch for the mayor's wage.*", "nextId": "116"},
           {"text": "*Remind him you could just take it off a drunk.*", "nextId": "106"},
-          {"text": "*Press coin in his palm.*", "nextId": "107"},
+          {"text": "*Press a coin in his palm.*", "nextId": "107"},
           {"text": "*Leave him to his bottle.*", "command": "EXIT"}
         ]
       },
-      "106" : {"text": ["Try it. Twelve years I've been thumped, bitten, and thrown down cell stairs. I bruise, friend. *Hic* I don't fold. And I scream loud - you want the whole watch in here?"], "choices": [{"nextId": "105"}]},
-      "107" : {"text": ["Coin. You reckon I'm cheap because I'm drunk. Cheap and drunk *Hic* aren't the same sin. Put it away."], "choices": [{"nextId": "105"}]},
-      "110" : {"text": ["A witch's curse, is it. Twelve years I've been threatened with fists, blades, and the mayor's own displeasure. A hex is a new one, *Hic* I'll grant you."]},
-      "111" : {"text": ["But I don't buy a cell open *Hic* on the strength of a ghost story. The key stays where it is."]},
-      "112" : {
+      "106" : {"text": ["Hah! I may be durnk, but I'm not stupid. *Hic* Try it. One scream and the whole watch comes running - that what you want?"], "choices": [{"nextId": "105"}]},
+      "107" : {"text": ["Gold? You think drunk and cheap are teh same? *Hic* Put it away."], "choices": [{"nextId": "105"}]},
+      "110" : {"text": ["I've been threatened before with fitsts and blades. A curse is a new one, *Hic* I'll grant you that."]},
+      "111" : {"text": ["But threats are part of the *Hic* job. I can't let a wicht go free."], "choices": [{"nextId": "1000"}]},
+      "113" : {"text": ["Done nothing wrhong. That's what they all say, all the time. I never set anyone *Hic* free on say-so."]},
+      "114" : {"text": ["The mayor fills those cells and the mayor empties them. Take your case to the major - *Hic* the mayor, if you've teh stomach for him."], "choices": [{"nextId": "1010"}]},
+      "116" : {"text": ["Hah! No sane man! I sh... sh... should ask for a *Hic* raise!"]},
+      "117" : {"text": ["Higher raise, more sanity. That's just how the *Hic* maths works. Wage or no wage, mayor or no... m... mayor."], "choices": [{"nextId": "1020"}]},
+      "1000": {
         "choices": [
-          {"condition": ["diplomat1"], "text": "[Diplomat 1] *Press him: the arrest was never just, and he knows it.*", "nextId": "200"},
-          {"condition": ["jester1"], "text": "[Jester 1] *Quip the mayor would charge admission to her cell.*", "nextId": "210"},
-          {"text": "*Grab a fistful of his collar.*", "nextId": "113"},
-          {"text": "*Threaten to report a guard drunk with the cell keys.*", "nextId": "114"},
+          {"condition": ["diplomat1"], "text": "[Diplomat 1] *Press him: the arrest was never just, and he knows it.*", "nextId": "1004"},
+          {"condition": ["jester1"], "text": "[Jester 1] *Quip the mayor would charge admission to her cell.*", "nextId": "1007"},
+          {"text": "*Grab a fistful of his collar.*", "nextId": "1001"},
+          {"text": "*Threaten to report a guard drunk with the cell keys.*", "nextId": "1002"},
           {"text": "*Leave him to his bottle.*", "command": "EXIT"}
         ]
       },
-      "113" : {"text": ["Hands off the coat. The keys are ringed to my belt on good iron - you'll not tear them loose, and I'll not unclasp them *Hic* for the hand that's throttling me. You get nothing this way."], "choices": [{"nextId": "112"}]},
-      "114" : {"text": ["Report it - a guard drunk with the keys on his belt? Aye, a breach. Take it to Farren. He'll shrug and pour himself one. *Hic* He's no more love for this job than I've got left."], "choices": [{"nextId": "112"}]},
-      "120" : {"text": ["Done nothing. None of them ever did, to hear it told over a stranger's drink. ...No. I don't turn a key *Hic* on a say-so."]},
-      "121" : {"text": ["The mayor fills those cells and the mayor empties them. Take your case to him, *Hic* if you've the belly for the man."]},
-      "122" : {
+      "1001": {"text": ["Hands off the coat. Off duty or not, my *Hic* collea... colla... the whole watch will be here in an instant if I call for them."], "choices": [{"nextId": "1000"}]},
+      "1002": {"text": ["Report it - a guard drunk with the keys on his belt? Aye, a breach. But that doens't get you the *Hic* key from me."], "choices": [{"nextId": "1000"}]},
+      "1004": {"text": ["...You may be *Hic* right, but it's not my... c... call."]},
+      "1005": {"text": ["Same as nots my call to let her free. The mayor will have my *Hic* my hide..."], "choices": [{"nextId": "2000"}]},
+      "1007": {"text": ["Hah! ...Aye, he would and all, the greasy little toad. A copper a gawk, *Hic* and the coin straithhg... in his purse."]},
+      "1008": {"text": ["You funny g... guy. *Hic*"], "choices": [{"nextId": "2010"}]},
+      "1010": {
         "choices": [
-          {"condition": ["barbarian1"], "text": "[Barbarian 1] *Promise a witch's curse for every night she's caged.*", "nextId": "220"},
-          {"condition": ["jester1"], "text": "[Jester 1] *Quip the mayor would charge admission to her cell.*", "nextId": "230"},
-          {"text": "*Grab a fistful of his collar.*", "nextId": "123"},
-          {"text": "*Threaten to report a guard drunk with the cell keys.*", "nextId": "124"},
+          {"condition": ["barbarian1"], "text": "[Barbarian 1] *Promise a witch's curse for every night she's caged.*", "nextId": "1014"},
+          {"condition": ["jester1"], "text": "[Jester 1] *Quip the mayor would charge admission to her cell.*", "nextId": "1017"},
+          {"text": "*Grab a fistful of his collar.*", "nextId": "1011"},
+          {"text": "*Threaten to report a guard drunk with the cell keys.*", "nextId": "1012"},
           {"text": "*Leave him to his bottle.*", "command": "EXIT"}
         ]
       },
-      "123" : {"text": ["Hands off the coat. The keys are ringed to my belt on good iron - you'll not tear them loose, and I'll not unclasp them *Hic* for the hand that's throttling me. You get nothing this way."], "choices": [{"nextId": "122"}]},
-      "124" : {"text": ["Report it - a guard drunk with the keys on his belt? Aye, a breach. Take it to Farren. He'll shrug and pour himself one. *Hic* He's no more love for this job than I've got left."], "choices": [{"nextId": "122"}]},
-      "130" : {"text": ["Hah! The mayor's wage. Don't set me off on the mayor's wage - *Hic* we'll be here till the barrels run dry."]},
-      "131" : {"text": ["The key, though - that stays on my belt. Wage or no wage, *Hic* mayor or no mayor."]},
-      "132" : {
+      "1011": {"text": ["Hands off the coat. Off duty or not, my *Hic* collea... colla... the whole watch will be here in an instant if I call for them."], "choices": [{"nextId": "1010"}]},
+      "1012": {"text": ["Report it - a guard drunk with the keys on his belt? Aye, a breach. But that doens't get you the *Hic* key from me."], "choices": [{"nextId": "1010"}]},
+      "1014": {"text": ["...Stop that. Don't - don't gow calling her curse down on me."]},
+      "1015": {"text": ["This doesn't give her *Hic* her freedoem, but it does give me nightmares."], "choices": [{"nextId": "2000"}]},
+      "1017": {"text": ["Hah! ...Aye, he would and all, the greasy little toad. A copper a gawk, *Hic* and the coin straithhg... in his purse."]},
+      "1018": {"text": ["You funny g... guy. *Hic*"], "choices": [{"nextId": "2020"}]},
+      "1020": {
         "choices": [
-          {"condition": ["barbarian1"], "text": "[Barbarian 1] *Promise a witch's curse for every night she's caged.*", "nextId": "240"},
-          {"condition": ["diplomat1"], "text": "[Diplomat 1] *Press him: the arrest was never just, and he knows it.*", "nextId": "250"},
-          {"text": "*Grab a fistful of his collar.*", "nextId": "133"},
-          {"text": "*Threaten to report a guard drunk with the cell keys.*", "nextId": "134"},
+          {"condition": ["barbarian1"], "text": "[Barbarian 1] *Promise a witch's curse for every night she's caged.*", "nextId": "1024"},
+          {"condition": ["diplomat1"], "text": "[Diplomat 1] *Press him: the arrest was never just, and he knows it.*", "nextId": "1027"},
+          {"text": "*Grab a fistful of his collar.*", "nextId": "1021"},
+          {"text": "*Threaten to report a guard drunk with the cell keys.*", "nextId": "1022"},
           {"text": "*Leave him to his bottle.*", "command": "EXIT"}
         ]
       },
-      "133" : {"text": ["Hands off the coat. The keys are ringed to my belt on good iron - you'll not tear them loose, and I'll not unclasp them *Hic* for the hand that's throttling me. You get nothing this way."], "choices": [{"nextId": "132"}]},
-      "134" : {"text": ["Report it - a guard drunk with the keys on his belt? Aye, a breach. Take it to Farren. He'll shrug and pour himself one. *Hic* He's no more love for this job than I've got left."], "choices": [{"nextId": "132"}]},
-      "200" : {"text": ["...You want to argue what's just with a man who was the law's blunt instrument for twelve years? *Hic* I know precisely how just it was. That's the whole trouble."]},
-      "201" : {"text": ["...No. The key stays put. But you'll get no argument from me - I've caged plenty who'd no business in one, on the mayor's say-so, and held my tongue each time. *Hic* You've gone and said it for me, and it's soured the drink. Leave it there."]},
-      "202" : {
+      "1021": {"text": ["Hands off the coat. Off duty or not, my *Hic* collea... colla... the whole watch will be here in an instant if I call for them."], "choices": [{"nextId": "1020"}]},
+      "1022": {"text": ["Report it - a guard drunk with the keys on his belt? Aye, a breach. But that doens't get you the *Hic* key from me."], "choices": [{"nextId": "1020"}]},
+      "1024": {"text": ["...Stop that. Don't - don't gow calling her curse down on me."]},
+      "1025": {"text": ["This doesn't give her *Hic* her freedoem, but it does give me nightmares."], "choices": [{"nextId": "2010"}]},
+      "1027": {"text": ["...You may be *Hic* right, but it's not my... c... call."]},
+      "1028": {"text": ["Same as nots my call to let her free. The mayor will have my *Hic* my hide..."], "choices": [{"nextId": "2020"}]},
+      "2000": {
         "choices": [
-          {"condition": ["jester1"], "text": "[Jester 1] *Make the whole sorry arrest sound like the joke it is.*", "nextId": "300"},
-          {"text": "*Snap at him to just hand it over.*", "nextId": "203"},
-          {"text": "*Beg him outright.*", "nextId": "204"},
+          {"condition": ["jester1"], "text": "[Jester 1] *Make the whole sorry arrest sound like the joke it is.*", "nextId": "2004"},
+          {"text": "*Snap at him to just hand it over.*", "nextId": "2001"},
+          {"text": "*Beg him outright.*", "nextId": "2002"},
           {"text": "*Leave him to his bottle.*", "command": "EXIT"}
         ]
       },
-      "203" : {"text": ["Barking at me now? Raise your voice and all you do is remind me *Hic* why I put men like you behind bars in the first place."], "choices": [{"nextId": "202"}]},
-      "204" : {"text": ["Don't beg. I heard a thousand men beg through those bars, and it never once moved me. *Hic* I'll not be moved now by the likes of you."], "choices": [{"nextId": "202"}]},
-      "210" : {"text": ["Hah! ...Aye, he would and all, the greasy little toad. A copper a gawk, *Hic* and the coin straight in his purse."]},
-      "211" : {"text": ["...No. Still no. ...Though you're better company than I've had at this bar in a long while. *Hic* ...Longer than I'd care to count."]},
-      "212" : {
+      "2001": {"text": ["As a guard, I can *Hic* ha... handle anrgy men. You go away now."], "choices": [{"nextId": "2000"}]},
+      "2002": {"text": ["Prisoners also sometimes beg. I've been trained *Hic* not to give in to beggars."], "choices": [{"nextId": "2000"}]},
+      "2004": {"text": ["Hah... ha. The whole rotten farce of it. ...You're rihgt. It's a joke, all of *Hic* it."]},
+      "2005": {"text": ["You know waht? Here's the *Hic* key. Let the both of us have the last l... laugh on the mayor for once."], "choices": [{"nextId": "3000"}]},
+      "2010": {
         "choices": [
-          {"condition": ["diplomat1"], "text": "[Diplomat 1] *Make the quiet case that freeing her harms no one.*", "nextId": "310"},
-          {"text": "*Snap at him to just hand it over.*", "nextId": "213"},
-          {"text": "*Beg him outright.*", "nextId": "214"},
+          {"condition": ["diplomat1"], "text": "[Diplomat 1] *Make the quiet case that freeing her harms no one.*", "nextId": "2014"},
+          {"text": "*Snap at him to just hand it over.*", "nextId": "2011"},
+          {"text": "*Beg him outright.*", "nextId": "2012"},
           {"text": "*Leave him to his bottle.*", "command": "EXIT"}
         ]
       },
-      "213" : {"text": ["Barking at me now? Raise your voice and all you do is remind me *Hic* why I put men like you behind bars in the first place."], "choices": [{"nextId": "212"}]},
-      "214" : {"text": ["Don't beg. I heard a thousand men beg through those bars, and it never once moved me. *Hic* I'll not be moved now by the likes of you."], "choices": [{"nextId": "212"}]},
-      "220" : {"text": ["...Stop that. Don't - don't go putting her eyes in the dark for me. It's late, I'm drunk, *Hic* and this town's seen stranger things come true than a hex."]},
-      "221" : {"text": ["The answer holds. ...But now I'll not sleep for thinking on it, *Hic* and that's a cruel thing to do to a tired man."], "choices": [{"nextId": "202"}]},
-      "230" : {"text": ["Hah! ...Aye, he would and all, the greasy little toad. A copper a gawk, *Hic* and the coin straight in his purse."]},
-      "231" : {"text": ["...No. Still no. ...Though you're better company than I've had at this bar in a long while. *Hic* ...Longer than I'd care to count."]},
-      "232" : {
+      "2011": {"text": ["As a guard, I can *Hic* ha... handle anrgy men. You go away now."], "choices": [{"nextId": "2010"}]},
+      "2012": {"text": ["Prisoners also sometimes beg. I've been trained *Hic* not to give in to beggars."], "choices": [{"nextId": "2010"}]},
+      "2014": {"text": ["...Aye. Maybe you are right... I dunno anymure... Take *Hic* the key. Let one of them walk free for once."], "choices": [{"nextId": "3000"}]},
+      "2020": {
         "choices": [
-          {"condition": ["barbarian1"], "text": "[Barbarian 1] *Go silent, and let him picture what she'll do to him.*", "nextId": "330"},
-          {"text": "*Snap at him to just hand it over.*", "nextId": "233"},
-          {"text": "*Beg him outright.*", "nextId": "234"},
+          {"condition": ["barbarian1"], "text": "[Barbarian 1] *Give examples of what witches do to mere mortal jailers.*", "nextId": "2024"},
+          {"text": "*Snap at him to just hand it over.*", "nextId": "2021"},
+          {"text": "*Beg him outright.*", "nextId": "2022"},
           {"text": "*Leave him to his bottle.*", "command": "EXIT"}
         ]
       },
-      "233" : {"text": ["Barking at me now? Raise your voice and all you do is remind me *Hic* why I put men like you behind bars in the first place."], "choices": [{"nextId": "232"}]},
-      "234" : {"text": ["Don't beg. I heard a thousand men beg through those bars, and it never once moved me. *Hic* I'll not be moved now by the likes of you."], "choices": [{"nextId": "232"}]},
-      "240" : {"text": ["...Stop that. Don't - don't go putting her eyes in the dark for me. It's late, I'm drunk, *Hic* and this town's seen stranger things come true than a hex."]},
-      "241" : {"text": ["The answer holds. ...But now I'll not sleep for thinking on it, *Hic* and that's a cruel thing to do to a tired man."], "choices": [{"nextId": "212"}]},
-      "250" : {"text": ["...You want to argue what's just with a man who was the law's blunt instrument for twelve years? *Hic* I know precisely how just it was. That's the whole trouble."]},
-      "251" : {"text": ["...No. The key stays put. But you'll get no argument from me - I've caged plenty who'd no business in one, on the mayor's say-so, and held my tongue each time. *Hic* You've gone and said it for me, and it's soured the drink. Leave it there."], "choices": [{"nextId": "232"}]},
-      "300" : {"text": ["Hah... ha. The whole rotten farce of it. ...You're right. It's a joke, all of it, and here I sit, *Hic* the fool still guarding the punchline. ...Here. Take it. Let the both of us have the last laugh on him for once."], "choices": [{"nextId": "360"}]},
-      "310" : {"text": ["...Aye. You've the right of it, and I've known it longer than you've been alive. More than a few I turned the key on had done less wrong than the man who jailed them. *Hic* ...Not tonight. Take it. Let one of them walk free for once."], "choices": [{"nextId": "360"}]},
-      "330" : {"text": ["...Aye. Aye, and maybe she would, at that. I've seen enough in this town not to wager against it. ...I'll not lie awake the rest of my nights over the mayor's grudge. *Hic* Take the key. Let her be someone else's dread."], "choices": [{"nextId": "360"}]},
-      "360" : {"text": ["Have it back on this bar before the dawn bell, mind. *Hic* Not a toll after - or I'm a hunted man and you're a wanted one."]},
-      "361" : {"text": ["And you never saw me. I was home, asleep, *Hic* dreaming of a posting where folk want nothing off me at all."]},
-      "362" : {"text": ["Now go. Before the ale thins out *Hic* and I recall I once had a conscience."], "choices": [{"command": "RECEIVE_ITEM"}]},
-      "1199": {"text": ["You again. I still have it. Just... *Hic* take it before I sober up and reconsider."], "choices": [{"command": "RECEIVE_ITEM"}]},
-      "1200": {"text": ["I've said my piece. Go on. *Hic* Go home, the both of us."], "choices": [{"command": "EXIT", "nextId": "1200"}]}
+      "2021": {"text": ["As a guard, I can *Hic* ha... handle anrgy men. You go away now."], "choices": [{"nextId": "2020"}]},
+      "2022": {"text": ["Prisoners also sometimes beg. I've been trained *Hic* not to give in to beggars."], "choices": [{"nextId": "2020"}]},
+      "2024": {"text": ["...Aye. Aye, alright, alright... An angry witch is much worse tahn an angry *Hic* mayor. Take the key. Please tell her I gave it to you. Don't let her be agnry."], "choices": [{"nextId": "3000"}]},
+      "3000": {"text": ["You never saw me... I nevur saw you. I was home, asleep, *Hic* dreaming of a job where folk stop asking me for keys. Or keys stop asking me for folk... Either one."], "choices": [{"command": "RECEIVE_ITEM"}]},
+      "1199": {"text": ["You again. Just... *Hic* take it befure I re... reconsider."], "choices": [{"command": "RECEIVE_ITEM"}]},
+      "1200": {"text": ["I shoudl go home... Tomorrow I'll have *Hic* regrets."], "choices": [{"command": "EXIT", "nextId": "1200"}]}
     }
   },
   "ryiah_join"            : {
