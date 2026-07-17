@@ -65,5 +65,10 @@
     "type"      : "messagebox",
     "text"      : ["Lastdenn Jail", "", "Open from 18:00 to 20:00."],
     "doesRepeat": true
+  },
+  "note_alva_south_signpost" : {
+    "type"      : "messagebox",
+    "text"      : ["North: Honeywood", "East: Cragmere", "South: Road block"],
+    "doesRepeat": true
   }
 }

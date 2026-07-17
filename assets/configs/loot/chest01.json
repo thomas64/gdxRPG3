@@ -1,5 +1,4 @@
 {
-  "chest000x"      : {"content": {"gold": 10}, "trapLevel": 1, "lockLevel": 1},
   "chest0001"      : {"content": {"healing_potion": 3}},
   "chest0007"      : {"content": {"basic_light_helmet": 1, "healing_potion": 1, "energy_potion": 1, "gold": 4}},
   "chest0008"      : {"content": {"scroll_of_orc_obedience": 1}, "doesReset": true},
@@ -13,5 +12,6 @@
   "chest_alva_02"  : {"content": {"healing_potion": 4, "energy_potion": 2, "protection_potion": 1, "gold": 6}},
   "chest_alva_03"  : {"content": {"basic_medium_helmet": 1}, "lockLevel": 2},
   "chest_alva_04"  : {"content": {"basic_medium_gloves": 1}, "trapLevel": 2},
-  "chest_alva_cave": {"content": {"gold": 21, "basic_medium_bracers": 1, "stealth_potion": 1, "strength_potion": 1}, "trapLevel": 1, "lockLevel": 1}
+  "chest_alva_cave": {"content": {"gold": 21, "basic_medium_bracers": 1, "stealth_potion": 1, "strength_potion": 1}, "trapLevel": 1, "lockLevel": 1},
+  "chest_alva_05"  : {"content": {"fine_spear": 1}, "trapLevel": 2, "lockLevel": 2}
 }
