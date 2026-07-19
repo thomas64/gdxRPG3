@@ -338,5 +338,23 @@
       "5": {"text": ["Why were all the other horses taken out by those nice orcs, and not me?"], "choices": [{"command": "EXIT"}]},
       "7": {"text": ["Why didn't the orcs take us out? I want to go outside. I'm tired of being locked up in here."], "choices": [{"command": "EXIT"}]}
     }
+  },
+  "honeywood_chick"                : {
+    "name"   : "Chicken",
+    "phrases": {
+      "1": {"text": ["Cluck cluck."]},
+      "2": {
+        "choices": [
+          {"condition": ["i_druid1", "_loot_!taken_sparkle_farm_1"], "text": "[Druid 1] *Listen to the chicken.*", "nextId": "3"},
+          {"condition": ["i_druid1", "_loot_taken_sparkle_farm_1"], "text": "[Druid 1] *Listen to the chicken.*", "nextId": "6"},
+          {"condition": ["ii_druid1"], "text": "[Druid 1] *Listen to the chicken.*", "nextId": "9999"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "3": {"text": ["I was scratching about for a bite to eat, but I found something else down in that bucket."]},
+      "4": {"text": ["What is that, anyway? Can't eat it."], "choices": [{"command": "EXIT"}]},
+      "6": {"text": ["I'm on the hunt for something tasty to peck at."]},
+      "7": {"text": ["There was something in that bucket. Did you take it?"], "choices": [{"command": "EXIT"}]}
+    }
   }
 }

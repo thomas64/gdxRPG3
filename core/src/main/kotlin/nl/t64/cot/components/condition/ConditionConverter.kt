@@ -97,6 +97,16 @@ object ConditionConverter {
         }
     }
 
+    fun isMeetingLootCondition(conditionId: String): Boolean {
+        return when {
+            conditionId.contains("_loot_!taken_") ->
+                !gameData.loot.getLoot(conditionId.substringAfter("_loot_!taken_")).isTaken()
+            conditionId.contains("_loot_taken_") ->
+                gameData.loot.getLoot(conditionId.substringAfter("_loot_taken_")).isTaken()
+            else -> throw IllegalArgumentException("No defined state found.")
+        }
+    }
+
     fun isMeetingHeroCondition(conditionId: String): Boolean {
         val heroId: String = conditionId.substringAfter("_hero_")
         return gameData.party.contains(heroId)
