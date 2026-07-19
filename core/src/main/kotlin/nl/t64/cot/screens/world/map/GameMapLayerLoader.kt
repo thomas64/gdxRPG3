@@ -1,6 +1,7 @@
 package nl.t64.cot.screens.world.map
 
 import com.badlogic.gdx.maps.MapLayer
+import com.badlogic.gdx.maps.MapObject
 import com.badlogic.gdx.maps.objects.RectangleMapObject
 import com.badlogic.gdx.maps.objects.TextureMapObject
 import com.badlogic.gdx.maps.tiled.TiledMap
@@ -17,13 +18,20 @@ internal class GameMapLayerLoader(
             .map { it as RectangleMapObject }
     }
 
-    fun <T> loadAllAndTransform(layerName: String,
-                                transform: (RectangleMapObject) -> T
+    fun <T> loadAllRectanglesAndTransform(layerName: String,
+                                          transform: (RectangleMapObject) -> T
     ): List<T> {
         val layer: MapLayer = tiledMap.layers.get(layerName) ?: return emptyList()
         return layer.objects
             .map { it as RectangleMapObject }
             .map(transform)
+    }
+
+    fun <T> loadAllObjectsAndTransform(layerName: String,
+                                       transform: (MapObject) -> T
+    ): List<T> {
+        val layer: MapLayer = tiledMap.layers.get(layerName) ?: return emptyList()
+        return layer.objects.map(transform)
     }
 
     fun <T> loadAllTexturesAndTransform(layerName: String,

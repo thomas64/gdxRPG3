@@ -85,12 +85,12 @@ class GameMap(
     var playerSpawnDirection: Direction = Direction.NONE
     private val tiledGraphs: EnumMap<EntityState, TiledGraph> = EnumMap(EntityState::class.java)
 
-    val cameraBlockers: List<GameMapCameraBlocker> = loader.loadAllAndTransform(CAMERA_BLOCKER_LAYER) { GameMapCameraBlocker(it) }
+    val cameraBlockers: List<GameMapCameraBlocker> = loader.loadAllRectanglesAndTransform(CAMERA_BLOCKER_LAYER) { GameMapCameraBlocker(it) }
     val schedules: List<RectangleMapObject> = loader.loadAllRectanglesFromLayer(SCHEDULED_LAYER)
-    val npcs: List<GameMapNpc> = loader.loadAllAndTransform(NPC_LAYER) { GameMapNpc(it) }
+    val npcs: List<GameMapNpc> = loader.loadAllRectanglesAndTransform(NPC_LAYER) { GameMapNpc(it) }
     val heroes: List<GameMapHero> = loader.loadWithCustomFilterAndTransform(HERO_LAYER, { gameData.heroes.contains(it.name) }, { GameMapHero(it) })
-    val enemies: List<GameMapEnemy> = loader.loadAllAndTransform(ENEMY_LAYER) { GameMapEnemy(it) }
-    val lights: List<GameMapLight> = loader.loadAllAndTransform(LIGHTS_LAYER) { GameMapLight(it) }
+    val enemies: List<GameMapEnemy> = loader.loadAllRectanglesAndTransform(ENEMY_LAYER) { GameMapEnemy(it) }
+    val lights: List<GameMapLight> = loader.loadAllRectanglesAndTransform(LIGHTS_LAYER) { GameMapLight(it) }
     val torches: List<GameMapParticle> = loader.loadWhereNameEqualsAndTransform(PARTICLES_LAYER, "torch") { GameMapParticle(it) }
     val conditionBlockers: List<GameMapConditionBlocker> = loader.loadWhereTypeEqualsAndTransform(QUEST_LAYER, "blocker") { GameMapConditionBlocker(it) }
     val temporaryBlockers: List<GameMapTemporaryBlocker> = loader.loadWhereTypeEqualsAndTransform(QUEST_LAYER, "tempBlocker") { GameMapTemporaryBlocker(it) }
@@ -103,20 +103,20 @@ class GameMap(
     val minimapIcons: List<GameMapIcon> = loader.loadWhereNameStartsWithAndTransform(REST_LAYER, "icon") { GameMapIcon(it) }
 
     private val specialDirections: List<RectangleMapObject> = loader.loadAllRectanglesFromLayer(DIRECTION_LAYER)
-    private val sounds: List<RectangleMapObject> = loader.loadAllRectanglesFromLayer(SOUND_LAYER)
-    private val bgsVolumeZones: List<GameMapBgsVolume> = loader.loadAllAndTransform(BGS_VOLUME_LAYER) { GameMapBgsVolume(it) }
-    private val blockers: List<GameMapBlocker> = loader.loadAllAndTransform(COLLISION_LAYER) { GameMapBlocker(it) }
-    private val lowBlockers: List<GameMapBlockerLow> = loader.loadAllAndTransform(COLLISION_LOW_LAYER) { GameMapBlockerLow(it) }
+    private val sounds: List<GameMapSound> = loader.loadAllObjectsAndTransform(SOUND_LAYER) { GameMapSound(it) }
+    private val bgsVolumeZones: List<GameMapBgsVolume> = loader.loadAllRectanglesAndTransform(BGS_VOLUME_LAYER) { GameMapBgsVolume(it) }
+    private val blockers: List<GameMapBlocker> = loader.loadAllRectanglesAndTransform(COLLISION_LAYER) { GameMapBlocker(it) }
+    private val lowBlockers: List<GameMapBlockerLow> = loader.loadAllRectanglesAndTransform(COLLISION_LOW_LAYER) { GameMapBlockerLow(it) }
     private val eventDiscovers: List<GameMapEventDiscover> = loader.loadWhereTypeEqualsAndTransform(EVENT_LAYER, "discover") { GameMapEventDiscover(it) }
     private val eventCheckers: List<GameMapEventChecker> = loader.loadWhereTypeEqualsAndTransform(EVENT_LAYER, "check") { GameMapEventChecker(it) }
     private val cutsceneDiscovers: List<GameMapCutscene> = loader.loadWhereTypeEqualsAndTransform(CUTSCENE_LAYER, "discover") { GameMapCutscene(it) }
     private val questDiscovers: List<GameMapQuestDiscover> = loader.loadWhereTypeEqualsAndTransform(QUEST_LAYER, "discover") { GameMapQuestDiscover(it) }
     private val questCheckers: List<GameMapQuestChecker> = loader.loadWhereTypeEqualsAndTransform(QUEST_LAYER, "check") { GameMapQuestChecker(it) }
     private val notes: List<GameMapNote> = loader.loadWhereNameStartsWithAndTransform(REST_LAYER, "note") { GameMapNote(it) }
-    private val savePoints: List<GameMapSavePoint> = loader.loadAllAndTransform(SAVE_LAYER) { GameMapSavePoint(it) }
-    private val spawnPoints: List<GameMapSpawnPoint> = loader.loadAllAndTransform(SPAWN_LAYER) { GameMapSpawnPoint(it) }
-    private val portals: List<GameMapPortal> = loader.loadAllAndTransform(PORTAL_LAYER) { GameMapPortal(it, mapTitle) }
-    private val warpPortals: List<GameMapWarpPortal> = loader.loadAllAndTransform(WARP_LAYER) { GameMapWarpPortal(it, mapTitle) }
+    private val savePoints: List<GameMapSavePoint> = loader.loadAllRectanglesAndTransform(SAVE_LAYER) { GameMapSavePoint(it) }
+    private val spawnPoints: List<GameMapSpawnPoint> = loader.loadAllRectanglesAndTransform(SPAWN_LAYER) { GameMapSpawnPoint(it) }
+    private val portals: List<GameMapPortal> = loader.loadAllRectanglesAndTransform(PORTAL_LAYER) { GameMapPortal(it, mapTitle) }
+    private val warpPortals: List<GameMapWarpPortal> = loader.loadAllRectanglesAndTransform(WARP_LAYER) { GameMapWarpPortal(it, mapTitle) }
 
     fun setTiledGraphs() {
             thread {
@@ -131,7 +131,7 @@ class GameMap(
 
     fun getUnderground(point: Vector2): String {
         return sounds
-            .filter { it.rectangle.contains(point) }
+            .filter { it.contains(point) }
             .map { it.name }
             .firstOrNull() ?: defaultStepSound
     }
