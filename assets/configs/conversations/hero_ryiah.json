@@ -172,9 +172,8 @@
   "dismiss_ryiah"         : {
     "name"   : "Ryiah",
     "phrases": {
-      "1": {"text": ["You're dismissing a witch. Bold move."]},
-      "2": {"text": ["I do hope you've thought about what you're giving up here."]},
-      "3": {
+      "1": {"text": ["You're dismissing a witch. Bold move. I do hope you've thought about what you're giving up here."]},
+      "2": {
         "choices": [
           {"text": "*Yes, you've thought about it. She can go.* [BLUE](Dismiss Ryiah)", "nextId": "4"},
           {"text": "*On reflection, no. Witches are useful.*", "command": "EXIT"}

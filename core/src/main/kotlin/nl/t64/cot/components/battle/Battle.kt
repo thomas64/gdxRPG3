@@ -1,5 +1,7 @@
 package nl.t64.cot.components.battle
 
+import com.fasterxml.jackson.annotation.JsonProperty
+
 
 data class BattleProgress(
     val isDefeated: Boolean = false,
@@ -8,6 +10,8 @@ data class BattleProgress(
 
 class Battle(
     val battlers: List<Battler> = emptyList(),
+    @JsonProperty("combat_power")
+    val combatPowerOverride: Float? = null,
     val background: String = "",
     val isEscapable: Boolean = true,
     var isDefeated: Boolean = false,

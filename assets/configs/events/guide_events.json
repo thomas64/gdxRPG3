@@ -193,7 +193,9 @@
     "condition": ["_cycle_>=_5"],
     "text"     : [
       "Enemies in the wild, that are defeated in a previous",
-      "cycle, won't attack you, unless you bump into them."
+      "cycle, won't attack you, unless you bump into them.",
+      "",
+      "Defeated enemies are marked with a laurel wreath."
     ]
   }
 }

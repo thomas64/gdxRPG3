@@ -34,10 +34,12 @@ enum class ThreatLevel(val color: Color) {
 
         fun forBattle(battleId: String): ThreatLevel {
             val partyPower: List<Float> = gameData.party.getAllHeroesAlive().map { it.getCombatPower() }
-            val enemyPower: List<Float> = EnemyContainer(battleId).getAll().map { it.getCombatPower() }
             val dampenedPartyPower: Float = dampenedPowerOf(partyPower)
-            val dampenedEnemyPower: Float = dampenedPowerOf(enemyPower)
-            return fromRatio(dampenedEnemyPower / dampenedPartyPower * CALIBRATION)
+
+            val dampenedEnemyPower: Float = gameData.battles.getCombatPowerOverride(battleId)
+                ?: dampenedPowerOf(EnemyContainer(battleId).getAll().map { it.getCombatPower() })
+
+            return fromRatio((dampenedEnemyPower / dampenedPartyPower) * CALIBRATION)
         }
 
         private fun dampenedPowerOf(powers: List<Float>): Float {
