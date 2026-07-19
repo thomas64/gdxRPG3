@@ -41,6 +41,14 @@ class EquipContainer() {
         accessoryId?.let { this.equipment[InventoryGroup.ACCESSORY.name] = InventoryDatabase.createInventoryItem(it) }
     }
 
+    fun createCopy(): EquipContainer {
+        val copy = EquipContainer()
+        equipment.forEach { (group, item) ->
+            copy.equipment[group] = item?.createCopy(item.amount)
+        }
+        return copy
+    }
+
     fun hasInventoryItem(itemId: String): Boolean {
         return equipment.values.filterNotNull().any { it.id == itemId }
     }

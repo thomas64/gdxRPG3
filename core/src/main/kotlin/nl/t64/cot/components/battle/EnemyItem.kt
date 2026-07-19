@@ -48,7 +48,7 @@ class EnemyItem(
         stats: StatContainer = this.stats,
         skills: SkillContainer = this.skills,
         abilities: AbilityContainer = this.abilities,
-        inventory: EquipContainer = this.inventory,
+        inventory: EquipContainer = this.inventory.createCopy(),
         meleeWeapon: String? = this.meleeWeapon,
         isAlive: Boolean = this.isAlive,
         xp: Int = this.xp,
