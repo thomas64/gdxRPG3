@@ -11,7 +11,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.*
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.TimeUtils
-import com.rafaskoberg.gdx.typinglabel.TypingLabel
+import com.github.tommyettinger.textra.Font
+import com.github.tommyettinger.textra.Styles
+import com.github.tommyettinger.textra.TypingConfig
+import com.github.tommyettinger.textra.TypingLabel
 import ktx.assets.disposeSafely
 import ktx.collections.GdxArray
 import ktx.collections.toGdxArray
@@ -52,6 +55,8 @@ private const val RIGHT_PAD = PAD * 3f
 private const val ALL_PADS = LEFT_PAD + Constant.FACE_SIZE + PAD + RIGHT_PAD
 private const val NAME_LABEL_PAD_LEFT = -Constant.FACE_SIZE + 3f
 private const val NAME_LABEL_PAD_BOTTOM = -18f
+private const val TYPING_SPEED_PER_CHAR = 0.035f
+private const val FACE_ROW_HEIGHT = 240f
 
 class ConversationDialog(conversationObserver: ConversationObserver) {
 
@@ -60,6 +65,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     private val stage: Stage = Stage()
     private val font: BitmapFont = FontProvider.inconsolata24
     private val smallFont: BitmapFont = FontProvider.default
+    private val typingFont: Font = Font(font)
     private val label: TypingLabel = createLabel()
     private val answers: ConversationAnswers = ConversationAnswers(font)
     private val scrollPane: ScrollPane = createScrollPane()
@@ -76,6 +82,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
 
     fun dispose() {
         stage.dispose()
+        typingFont.dispose()
         font.disposeSafely()
         smallFont.disposeSafely()
     }
@@ -127,7 +134,8 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         label.setAlignment(Align.left)
         val mainTable = Table()
         mainTable.left()
-        mainTable.add(createFaceTable())
+        // A fixed minimal row height keeps the face from shifting a pixel per phrase.
+        mainTable.add(createFaceTable()).minHeight(FACE_ROW_HEIGHT)
         mainTable.add(createTextTable())
 
         dialog.contentTable.clear()
@@ -621,26 +629,15 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun populatePhrase() {
-        val rawText: String = graph.getCurrentPhrase().joinToString(System.lineSeparator())
-        val (text, shouldRenderInstantly) = parseInstantPhraseText(rawText)
-        if (text.isNotBlank()) {
-            label.restart("{COLOR=BLACK}$text")
-            if (shouldRenderInstantly || conversationId.startsWith("bury_")) {
+        val phraseText: String = getCurrentPhraseText()
+        if (phraseText.isNotBlank()) {
+            label.restart("{COLOR=BLACK}$phraseText")
+            if (conversationId.startsWith("bury_")) {
                 label.skipToTheEnd()
             }
         } else {
             label.setText("")
         }
-    }
-
-    private fun parseInstantPhraseText(rawText: String): Pair<String, Boolean> {
-        val shouldRenderInstantly: Boolean = rawText.startsWith("{INSTANT}")
-        val parsedText: String = if (shouldRenderInstantly) {
-            rawText.removePrefix("{INSTANT}").trimStart()
-        } else {
-            rawText
-        }
-        return parsedText to shouldRenderInstantly
     }
 
     private fun populateChoices() {
@@ -666,9 +663,10 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun repositionScrollPaneBasedOnContent() {
-        if (label.text.isBlank() && faceId.isBlank() && graph.getCurrentFace().isBlank()) {
+        val isPhraseTextEmpty: Boolean = getCurrentPhraseText().isBlank()
+        if (isPhraseTextEmpty && faceId.isBlank() && graph.getCurrentFace().isBlank()) {
             rowWithScrollPane.padTop(-SCROLL_PANE_TOP_PAD).padLeft(-PAD).center()
-        } else if (label.text.isBlank()) {
+        } else if (isPhraseTextEmpty) {
             rowWithScrollPane.padTop(-SCROLL_PANE_TOP_PAD).padLeft(-PAD).padRight(-(PAD * 2f))
         } else if (faceId.isBlank() && graph.getCurrentFace().isBlank()) {
             rowWithScrollPane.padTop(0f).padLeft(PAD + Constant.FACE_SIZE + PAD + ARROW_PAD_LEFT)
@@ -677,11 +675,16 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         }
     }
 
+    private fun getCurrentPhraseText(): String {
+        return graph.getCurrentPhrase().joinToString(System.lineSeparator())
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun createLabel(): TypingLabel {
-        return TypingLabel("No Conversation", LabelStyle(font, Color.BLACK))
-            .apply { wrap = true }
+        TypingConfig.DEFAULT_SPEED_PER_CHAR = TYPING_SPEED_PER_CHAR
+        return TypingLabel("No Conversation", Styles.LabelStyle(typingFont, Color.BLACK))
+            .apply { setWrap(true) }
     }
 
     private fun createScrollPane(): ScrollPane {

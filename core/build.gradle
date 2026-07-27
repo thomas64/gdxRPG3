@@ -14,7 +14,7 @@ dependencies {
   api "io.github.libktx:ktx-freetype:$ktxVersion"
   api "io.github.libktx:ktx-preferences:$ktxVersion"
   api "io.github.libktx:ktx-json:$ktxVersion"
-  api "com.rafaskoberg.gdx:typing-label:$typingLabelVersion"
+  api "com.github.tommyettinger:textratypist:$typingLabelVersion"
   api "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
   api "com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion"
 
@@ -28,6 +28,10 @@ dependencies {
   if (enableGraalNative == 'true') {
     implementation "io.github.berstanio:gdx-svmhelper-annotations:$graalHelperVersion"
   }
+}
+
+jar {
+  duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 test {

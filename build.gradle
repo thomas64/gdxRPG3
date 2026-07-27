@@ -30,6 +30,7 @@ configure(subprojects) {
   apply plugin: 'java-library'
   apply plugin: 'kotlin'
   java.sourceCompatibility = 21
+  java.targetCompatibility = 21
 
   // From https://lyze.dev/2021/04/29/libGDX-Internal-Assets-List/
   // The article can be helpful when using assets.txt in your project.
