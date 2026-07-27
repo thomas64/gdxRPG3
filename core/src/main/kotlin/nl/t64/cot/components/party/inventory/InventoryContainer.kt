@@ -11,7 +11,8 @@ open class InventoryContainer(numberOfSlots: Int = 0) {
     fun getAllContent(): MutableMap<String, Int> {
         return inventory
             .filterNotNull()
-            .associate { it.id to it.amount }
+            .groupBy { it.id }
+            .mapValues { (_, items) -> items.sumOf { it.amount } }
             .toMutableMap()
     }
 

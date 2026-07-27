@@ -38,7 +38,7 @@ class FleeAction(
         if (preferenceManager.isDebugModeOn) {
             return Pair(true, "The party successfully debug fled the battle.")
         }
-        return if (getChanceToFlee() >= Random.nextInt(0, 100)) {
+        return if (getChanceToFlee() > Random.nextInt(0, 100)) {
             Pair(true, "The party successfully fled the battle.")
         } else {
             currentParticipant.fleeChance += 5

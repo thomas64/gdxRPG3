@@ -72,7 +72,7 @@ class EnemyItem(
     }
 
     private fun Map.Entry<String, Int>.addPossibleDropTo(spoils: MutableMap<String, Int>) {
-        if (value >= Random.nextInt(0, 100)) {
+        if (value > Random.nextInt(0, 100)) {
             addDropTo(spoils)
         }
     }

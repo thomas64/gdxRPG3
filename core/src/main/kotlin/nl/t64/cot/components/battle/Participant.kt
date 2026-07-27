@@ -170,7 +170,7 @@ class Participant(
 
     fun calculatePerformBonus(troubadourRank: Int): Int {
         val baseHit: Int = character.getCalculatedTotalHit()
-        return (0.35f * (100 - baseHit) * (troubadourRank / 10f)).roundToInt()
+        return (0.35f * (100 - baseHit) * (troubadourRank / 10f)).roundToInt().coerceAtLeast(0)
     }
 
     fun calculatePerformPenalty(troubadourRank: Int): Int {

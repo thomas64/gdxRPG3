@@ -88,13 +88,17 @@ class LootSlotsTable(
 
     private fun fillLootInventoryContainer() {
         loot.content
-            .map { createInventoryItemFrom(it) }
+            .flatMap { createInventoryItemsFrom(it) }
             .forEach { inventory.autoSetItem(it) }
     }
 
-    private fun createInventoryItemFrom(lootEntry: Map.Entry<String, Int>): InventoryItem {
-        return InventoryDatabase.createInventoryItem(lootEntry.key, lootEntry.value)
-            .applyPossibleDroppedDurability()
+    private fun createInventoryItemsFrom(lootEntry: Map.Entry<String, Int>): List<InventoryItem> {
+        val item: InventoryItem = InventoryDatabase.createInventoryItem(lootEntry.key, lootEntry.value)
+        val items: List<InventoryItem> = when {
+            item.isStackable -> listOf(item)
+            else -> List(item.amount) { item.createCopy(1) }
+        }
+        return items.map { it.applyPossibleDroppedDurability() }
     }
 
     private fun InventoryItem.applyPossibleDroppedDurability(): InventoryItem {
