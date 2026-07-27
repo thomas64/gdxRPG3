@@ -80,20 +80,5 @@
     "leather"     : 7,
     "wood"        : 14,
     "metal"       : 28
-  },
-  "epic_axe"       : {
-    "name"        : "Epic Axe",
-    "group"       : "WEAPON",
-    "sort"        : 5200,
-    "skill"       : "AXE",
-    "price"       : 126,
-    "durability"  : 10,
-    "min_strength": 30,
-    "base_hit"    : 30,
-    "damage"      : 34,
-    "min_mechanic": 9,
-    "leather"     : 9,
-    "wood"        : 18,
-    "metal"       : 36
   }
 }

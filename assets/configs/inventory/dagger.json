@@ -1,15 +1,4 @@
 {
-  "basic_orc_dagger" : {
-    "name"         : "Orc Dagger",
-    "group"        : "WEAPON",
-    "sort"         : 1299,
-    "skill"        : "DAGGER",
-    "price"        : 30,
-    "durability"   : 20,
-    "min_dexterity": 11,
-    "base_hit"     : 85,
-    "damage"       : 8
-  },
   "basic_dagger"     : {
     "name"         : "Basic Dagger",
     "group"        : "WEAPON",

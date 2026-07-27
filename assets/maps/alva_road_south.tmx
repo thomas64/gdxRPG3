@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="74" height="104" tilewidth="24" tileheight="24" infinite="0" nextlayerid="23" nextobjectid="192">
+<map version="1.11" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="74" height="104" tilewidth="24" tileheight="24" infinite="0" nextlayerid="23" nextobjectid="193">
  <properties>
   <property name="bgm" value="bgm_overworld"/>
   <property name="lightmap_camera" value="sunlight"/>
@@ -229,6 +229,7 @@
  <objectgroup color="#ffff00" id="20" name="quest"/>
  <objectgroup color="#ff55ff" id="21" name="event">
   <object id="170" name="note_alva_south_signpost" type="check" x="816" y="1584" width="48" height="48"/>
+  <object id="192" name="guide_event_claymore" type="discover" x="576" y="384" width="120" height="24"/>
  </objectgroup>
  <objectgroup color="#000000" id="22" name="direction_north">
   <object id="167" x="240" y="1566" width="48" height="66"/>

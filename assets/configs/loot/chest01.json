@@ -13,5 +13,5 @@
   "chest_alva_03"  : {"content": {"basic_medium_helmet": 1}, "lockLevel": 2},
   "chest_alva_04"  : {"content": {"basic_medium_gloves": 1}, "trapLevel": 2},
   "chest_alva_cave": {"content": {"gold": 21, "basic_medium_bracers": 1, "stealth_potion": 1, "strength_potion": 1}, "trapLevel": 1, "lockLevel": 1},
-  "chest_alva_05"  : {"content": {"fine_spear": 1}, "trapLevel": 2, "lockLevel": 2}
+  "chest_alva_05"  : {"content": {"specialist_claymore": 1, "strength_potion_+": 1}, "trapLevel": 2, "lockLevel": 2}
 }

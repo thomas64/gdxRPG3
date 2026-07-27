@@ -2,14 +2,9 @@ armor.atlas
 armor2.atlas
 armor3.atlas
 group.atlas
-axe.atlas
-bow.atlas
-dagger.atlas
 item.atlas
 potion.atlas
 resource.atlas
 shield.atlas
-spear.atlas
-staff.atlas
-sword.atlas
-throw.atlas
+weapon1.atlas
+weapon2.atlas

@@ -6,6 +6,7 @@ boots.json
 bow.json
 bracers.json
 chest.json
+claymore.json
 cloak.json
 dagger.json
 gloves.json

@@ -197,5 +197,23 @@
       "",
       "Defeated enemies are marked with a laurel wreath."
     ]
+  },
+  "guide_event_claymore"             : {
+    "type"     : "tutorial",
+    "condition": ["_n_1_>=_item_specialist_claymore"],
+    "text"     : [
+      "A claymore deals very high damage, but it's hard to land a hit.",
+      "Its base hit chance is much lower than a one-handed sword's.",
+      "",
+      "To improve that hit chance, raise the skill rank of the",
+      "matching weapon type. In this case, that is the [BLUE]Sword[BLACK] skill.",
+      "",
+      "Other skills can help as well. For example, a party member",
+      "performing with the [BLUE]Troubadour[BLACK] skill raises the hit chance",
+      "of the rest of the party.",
+      "",
+      "A claymore is [BLUE]two-handed[BLACK], like a bow,",
+      "so you cannot equip a shield with it."
+    ]
   }
 }

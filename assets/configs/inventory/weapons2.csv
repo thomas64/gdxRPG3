@@ -25,7 +25,11 @@ basic_axe,                  Basic Axe,                  WEAPON,   1200,   AXE,  
 fine_axe,                   Fine Axe,                   WEAPON,   2200,   AXE,      42,     25,     0,       0,       17,      60,     19,
 specialist_axe,             Specialist Axe,             WEAPON,   3200,   AXE,      70,     20,     0,       0,       22,      50,     24,
 masterwork_axe,             Masterwork Axe,             WEAPON,   4200,   AXE,      98,     15,     0,       0,       27,      40,     29,
-epic_axe,                   Epic Axe,                   WEAPON,   5200,   AXE,      126,    10,     0,       0,       30,      30,     34,
+
+basic_claymore,             Basic Claymore,             WEAPON,   1050,   SWORD,    20,     30,     0,       0,       15,      65,     20,
+fine_claymore,              Fine Claymore,              WEAPON,   2050,   SWORD,    60,     25,     0,       0,       20,      55,     25,
+specialist_claymore,        Specialist Claymore,        WEAPON,   3050,   SWORD,    100,    20,     0,       0,       25,      45,     30,
+masterwork_claymore,        Masterwork Claymore,        WEAPON,   4050,   SWORD,    140,    15,     0,       0,       30,      35,     35,
 
 
 basic_dagger,               Basic Dagger,               WEAPON,   1300,   DAGGER,   8,      30,     0,       8,       0,       85,     8,
