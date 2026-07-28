@@ -7,6 +7,9 @@
   "orc_scout"   : {"source": "orcs", "col": 1, "row": 1},
   "orc_sergeant": {"source": "orcs", "col": 4, "row": 2},
   "orc_general" : {"source": "orcs", "col": 2, "row": 2},
+  "orc_fire"    : {"source": "orcs", "col": 4, "row": 1},
+  "orc_thunder" : {"source": "orcs", "col": 1, "row": 2},
+  "orc_wind"    : {"source": "orcs", "col": 3, "row": 1},
   "ardor"       : {"source": "warlocks", "col": 1, "row": 2},
   "ghost1"      : {"source": "ghosts", "col": 1, "row": 1}
 }

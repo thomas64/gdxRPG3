@@ -57,7 +57,9 @@ class TurnManager(
         while (sim.none { it.counter >= TURN_THRESHOLD }) {
             sim.forEach { it.counter += it.rate }
         }
-        sim.sortWith(compareByDescending<Sim> { it.counter }.thenBy { it.participant.character.name })
+        sim.sortWith(turnOrderComparator({ it.counter },
+                                         { it.participant.isHero },
+                                         { it.participant.character.name }))
     }
 
     // Turn-order logic (reset acted participant, tick, sort) is mirrored by advanceSim for the forecast.
@@ -127,9 +129,19 @@ class TurnManager(
     }
 
     private fun MutableList<Participant>.sort() {
-        val comparator: Comparator<Participant> = compareByDescending<Participant> { it.turnCounter }
-            .thenBy { it.character.name }
-        this.sortWith(comparator)
+        this.sortWith(turnOrderComparator({ it.turnCounter },
+                                          { it.isHero },
+                                          { it.character.name }))
+    }
+
+    // Single source of truth for the turn-order tie-break rule, shared by the engine sort and the forecast sort.
+    private fun <T> turnOrderComparator(counterOf: (T) -> Int,
+                                        isHeroOf: (T) -> Boolean,
+                                        nameOf: (T) -> String
+    ): Comparator<T> {
+        return compareByDescending(counterOf)
+            .thenByDescending(isHeroOf)
+            .thenBy(nameOf)
     }
 
     private fun Participant.moveToBottom() {

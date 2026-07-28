@@ -20,7 +20,7 @@
       "staff"  : 40
     },
     "abilities": [
-      "strike_2", "strike_3", "strike_4"
+      "fire", "elfire", "arcfire", "rexfire"
     ],
     "inventory": {
       "weapon": "legendary_staff_fire",

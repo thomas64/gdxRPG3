@@ -10,7 +10,7 @@
       "dexterity"   : 8,
       "strength"    : 2,
       "speed"       : 20,
-      "willpower"   : 3,
+      "willpower"   : 1,
       "constitution": 4,
       "stamina"     : 2
     },
@@ -35,7 +35,7 @@
       "dexterity"   : 11,
       "strength"    : 2,
       "speed"       : 20,
-      "willpower"   : 3,
+      "willpower"   : 1,
       "constitution": 6,
       "stamina"     : 2
     },

@@ -10,7 +10,7 @@
       "dexterity"   : 14,
       "strength"    : 4,
       "speed"       : 30,
-      "willpower"   : 10,
+      "willpower"   : 1,
       "constitution": 8,
       "stamina"     : 12
     },

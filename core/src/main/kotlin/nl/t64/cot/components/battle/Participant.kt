@@ -123,7 +123,11 @@ class Participant(
     }
 
     fun getCheapestAbilityAp(): Int {
-        return getBattleAbilities().minOf { it.ap }
+        return getUsableBattleAbilities().minOf { it.ap }
+    }
+
+    fun getUsableBattleAbilities(): List<BattleAbilityItem> {
+        return getBattleAbilities().filter { it.isWeaponAllowed() }
     }
 
     fun getBattleAbilities(): List<BattleAbilityItem> {

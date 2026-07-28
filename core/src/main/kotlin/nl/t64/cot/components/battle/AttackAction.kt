@@ -18,12 +18,12 @@ open class AttackAction(
 
     companion object {
         fun createForEnemy(currentEnemy: Participant, targetHero: Participant, battleId: String): AttackAction {
-            val allAbilities: List<BattleAbilityItem> = currentEnemy.getBattleAbilities()
+            val usableAbilities: List<BattleAbilityItem> = currentEnemy.getUsableBattleAbilities()
             val ability: BattleAbilityItem = (
-                allAbilities
+                usableAbilities
                     .filter { it.ap <= currentEnemy.currentAP }
                     .maxByOrNull { it.ap }
-                    ?: allAbilities.first()
+                    ?: usableAbilities.first()
                 ).apply { target = targetHero }
 
             if (battleId.contains("farm_battle") && targetHero.character.id == "luana"
