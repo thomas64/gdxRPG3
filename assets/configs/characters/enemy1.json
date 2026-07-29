@@ -3,7 +3,6 @@
     "name"     : "Ardor",
     "gender"   : "his",
     "ap"       : 10,
-    "xp"       : 100,
     "drops"    : {"gold": 90},
     "stats"    : {
       "intelligence": 30,

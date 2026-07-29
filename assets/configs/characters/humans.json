@@ -1,8 +1,7 @@
 {
-  "lastdenn_guard": {
+  "lastdenn_guard"    : {
     "name"     : "Lastdenn Guard",
     "gender"   : "his",
-    "xp"       : 20,
     "stats"    : {
       "intelligence": 10,
       "dexterity"   : 10,
@@ -18,12 +17,92 @@
     "skills"   : {
       "warrior": 4,
       "spear"  : 4,
-      "shield" : 3
+      "shield" : 4
     },
     "inventory": {
       "weapon": "fine_spear",
       "shield": "fine_medium_shield",
       "chest" : "armor_50"
+    }
+  },
+  "brown_bandit_sword": {
+    "name"     : "Bandit",
+    "gender"   : "his",
+    "drops"    : {
+      "specialist_sword"           : 15,
+      "specialist_medium_shield"   : 10,
+      "specialist_medium_belt"     : 2,
+      "specialist_medium_boots"    : 2,
+      "specialist_medium_bracers"  : 2,
+      "specialist_medium_chest"    : 2,
+      "specialist_medium_cloak"    : 2,
+      "specialist_medium_gloves"   : 2,
+      "specialist_medium_helmet"   : 2,
+      "specialist_medium_pants"    : 2,
+      "specialist_medium_shoulders": 2,
+      "gold"                       : 80
+    },
+    "stats"    : {
+      "intelligence": 15,
+      "dexterity"   : 15,
+      "strength"    : 24,
+      "speed"       : 20,
+      "willpower"   : 15,
+      "constitution": 26,
+      "stamina"     : 24
+    },
+    "abilities": [
+      "strike_2", "strike_3", "strike_4"
+    ],
+    "skills"   : {
+      "warrior": 6,
+      "sword"  : 6,
+      "shield" : 6
+    },
+    "inventory": {
+      "weapon": "specialist_sword",
+      "shield": "specialist_medium_shield",
+      "chest" : "armor_65"
+    }
+  },
+  "brown_bandit_axe"  : {
+    "name"     : "Bandit",
+    "gender"   : "his",
+    "drops"    : {
+      "specialist_axe"             : 15,
+      "specialist_medium_shield"   : 10,
+      "specialist_medium_belt"     : 2,
+      "specialist_medium_boots"    : 2,
+      "specialist_medium_bracers"  : 2,
+      "specialist_medium_chest"    : 2,
+      "specialist_medium_cloak"    : 2,
+      "specialist_medium_gloves"   : 2,
+      "specialist_medium_helmet"   : 2,
+      "specialist_medium_pants"    : 2,
+      "specialist_medium_shoulders": 2,
+      "gold"                       : 80
+    },
+    "stats"    : {
+      "intelligence": 15,
+      "dexterity"   : 15,
+      "strength"    : 24,
+      "speed"       : 20,
+      "willpower"   : 15,
+      "constitution": 26,
+      "stamina"     : 24
+    },
+    "abilities": [
+      "strike_2", "strike_3", "strike_4"
+    ],
+    "skills"   : {
+      "warrior": 6,
+      "axe"    : 6,
+      "shield" : 6
+    },
+    "inventory": {
+      "weapon": "specialist_axe",
+      "shield": "specialist_medium_shield",
+      "chest" : "armor_65"
     }
   }
 }

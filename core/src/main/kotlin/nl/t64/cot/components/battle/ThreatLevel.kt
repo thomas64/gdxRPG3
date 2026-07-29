@@ -46,9 +46,6 @@ enum class ThreatLevel(val color: Color) {
             return powers.sum() * powers.size.toFloat().pow(CROWD_DAMPENER - 1f)
         }
 
-        // Grenzen geijkt op de werkelijke combat-power-spreiding van de vijanden (slime ~132 t/m orc general ~4064).
-        // EVEN ligt rond ratio 1.0 (eerlijk gevecht); DANGEROUS begint bij 1.9 (boss-territorium) en
-        // DEADLY pas vanaf 2.5, gereserveerd voor een echt overweldigende overmacht waar je van weg wilt blijven.
         private fun fromRatio(ratio: Float): ThreatLevel {
             return when {
                 ratio < 0.1f -> TRIVIAL

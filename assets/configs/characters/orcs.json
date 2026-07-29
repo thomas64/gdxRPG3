@@ -2,7 +2,6 @@
   "orc_scout_axe"     : {
     "name"     : "Orc Scout",
     "gender"   : "its",
-    "xp"       : 8,
     "drops"    : {
       "basic_axe"            : 15,
       "basic_light_belt"     : 2,
@@ -41,7 +40,6 @@
   "orc_scout_spear"   : {
     "name"     : "Orc Scout",
     "gender"   : "its",
-    "xp"       : 8,
     "drops"    : {
       "basic_spear"          : 15,
       "basic_light_belt"     : 2,
@@ -80,7 +78,6 @@
   "orc_scout_sword"   : {
     "name"     : "Orc Scout",
     "gender"   : "its",
-    "xp"       : 8,
     "drops"    : {
       "basic_sword"          : 15,
       "basic_light_belt"     : 2,
@@ -119,7 +116,6 @@
   "orc_scout_bow"     : {
     "name"       : "Orc Scout",
     "gender"     : "its",
-    "xp"         : 8,
     "drops"      : {
       "basic_bow"            : 15,
       "basic_light_belt"     : 2,
@@ -131,7 +127,7 @@
       "basic_light_helmet"   : 2,
       "basic_light_pants"    : 2,
       "basic_light_shoulders": 2,
-      "healing_potion"       : 5,
+      "stealth_potion"       : 5,
       "gold"                 : 60
     },
     "stats"      : {
@@ -161,7 +157,6 @@
   "orc_fire"          : {
     "name"       : "Fire Orc",
     "gender"     : "its",
-    "xp"         : 10,
     "drops"      : {
       "basic_staff_fire"     : 15,
       "basic_light_belt"     : 2,
@@ -173,7 +168,7 @@
       "basic_light_helmet"   : 2,
       "basic_light_pants"    : 2,
       "basic_light_shoulders": 2,
-      "healing_potion"       : 5,
+      "spice"                : 50,
       "gold"                 : 60
     },
     "stats"      : {
@@ -202,7 +197,6 @@
   "orc_thunder"       : {
     "name"       : "Thunder Orc",
     "gender"     : "its",
-    "xp"         : 10,
     "drops"      : {
       "basic_staff_thunder"  : 15,
       "basic_light_belt"     : 2,
@@ -214,7 +208,7 @@
       "basic_light_helmet"   : 2,
       "basic_light_pants"    : 2,
       "basic_light_shoulders": 2,
-      "healing_potion"       : 5,
+      "gemstone"             : 50,
       "gold"                 : 60
     },
     "stats"      : {
@@ -243,7 +237,6 @@
   "orc_wind"          : {
     "name"       : "Wind Orc",
     "gender"     : "its",
-    "xp"         : 10,
     "drops"      : {
       "basic_staff_wind"     : 15,
       "basic_light_belt"     : 2,
@@ -255,7 +248,7 @@
       "basic_light_helmet"   : 2,
       "basic_light_pants"    : 2,
       "basic_light_shoulders": 2,
-      "healing_potion"       : 5,
+      "herb"                 : 50,
       "gold"                 : 60
     },
     "stats"      : {
@@ -284,7 +277,6 @@
   "orc_sergeant_axe"  : {
     "name"     : "Orc Sergeant",
     "gender"   : "its",
-    "xp"       : 18,
     "drops"    : {
       "fine_axe"             : 15,
       "fine_medium_shield"   : 10,
@@ -315,7 +307,7 @@
     "skills"   : {
       "warrior": 4,
       "axe"    : 4,
-      "shield" : 2
+      "shield" : 4
     },
     "inventory": {
       "weapon": "fine_axe",
@@ -326,7 +318,6 @@
   "orc_sergeant_spear": {
     "name"     : "Orc Sergeant",
     "gender"   : "its",
-    "xp"       : 18,
     "drops"    : {
       "fine_spear"           : 15,
       "fine_medium_shield"   : 10,
@@ -357,7 +348,7 @@
     "skills"   : {
       "warrior": 4,
       "spear"  : 4,
-      "shield" : 2
+      "shield" : 4
     },
     "inventory": {
       "weapon": "fine_spear",
@@ -369,7 +360,6 @@
     "name"     : "Orc General",
     "gender"   : "its",
     "ap"       : 8,
-    "xp"       : 90,
     "drops"    : {"masterwork_axe": 50, "masterwork_heavy_shield": 50, "energy_potion_++": 90, "gold": 90},
     "stats"    : {
       "intelligence": 10,
@@ -399,7 +389,6 @@
     "name"     : "Orc General",
     "gender"   : "its",
     "ap"       : 8,
-    "xp"       : 90,
     "drops"    : {"masterwork_spear": 50, "masterwork_heavy_shield": 50, "energy_potion_++": 90, "gold": 90},
     "stats"    : {
       "intelligence": 10,

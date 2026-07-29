@@ -13,6 +13,8 @@ import kotlin.math.roundToInt
 import kotlin.random.Random
 
 
+private val xpCalculator = XpCalculator()
+
 class EnemyItem(
     id: String = "",
     name: String = "",
@@ -25,12 +27,12 @@ class EnemyItem(
     inventory: EquipContainer = EquipContainer(),
     val meleeWeapon: String? = null,
     isAlive: Boolean = true,
-    val xp: Int = 0,
     private val drops: Map<String, Int> = emptyMap()
 ) : Character(
     id, name, gender, stats, skills, abilities, inventory, isAlive
 ) {
     override val maximumHp: Int get() = if (stats.getById(StatItemId.CONSTITUTION).rank == 0) hp else stats.maximumHp
+    val xp: Int = xpCalculator.calculate(getCombatPower())
     @Transient
     var stashedWeapon: InventoryItem? = meleeWeapon?.let { InventoryDatabase.createInventoryItem(it) }
 
@@ -51,10 +53,9 @@ class EnemyItem(
         inventory: EquipContainer = this.inventory.createCopy(),
         meleeWeapon: String? = this.meleeWeapon,
         isAlive: Boolean = this.isAlive,
-        xp: Int = this.xp,
         drops: Map<String, Int> = this.drops
     ): EnemyItem {
-        return EnemyItem(id, name, gender, hp, ap, stats, skills, abilities, inventory, meleeWeapon, isAlive, xp, drops)
+        return EnemyItem(id, name, gender, hp, ap, stats, skills, abilities, inventory, meleeWeapon, isAlive, drops)
     }
 
     override fun getCalculatedActionPoints(): Int {

@@ -3,7 +3,6 @@
     "name"     : "Green Slime",
     "gender"   : "its",
     "ap"       : 3,
-    "xp"       : 3,
     "drops"    : {"green_jelly": 25},
     "stats"    : {
       "intelligence": 2,
@@ -29,7 +28,6 @@
     "name"     : "Blue Slime",
     "gender"   : "its",
     "ap"       : 3,
-    "xp"       : 5,
     "drops"    : {"blue_jelly": 100},
     "stats"    : {
       "intelligence": 2,
@@ -55,7 +53,6 @@
     "name"     : "Blue Slime",
     "gender"   : "its",
     "ap"       : 3,
-    "xp"       : 5,
     "drops"    : {"blue_jelly": 25},
     "stats"    : {
       "intelligence": 2,
