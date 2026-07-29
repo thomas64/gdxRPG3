@@ -54,10 +54,10 @@ class PhysicsChest(private val chest: Loot) : PhysicsComponent() {
     }
 
     private fun isFailingOnTrap(): Boolean {
-        return chest.isTrapped() && isTrapToDifficult()
+        return chest.isTrapped() && isTrapTooDifficult()
     }
 
-    private fun isTrapToDifficult(): Boolean {
+    private fun isTrapTooDifficult(): Boolean {
         val bestMechanic = gameData.party.getHeroWithHighestSkill(SkillItemId.MECHANIC)
         return if (canHandleTrapWith(bestMechanic)) {
             doHandleTrapWith(bestMechanic)
@@ -87,10 +87,10 @@ class PhysicsChest(private val chest: Loot) : PhysicsComponent() {
     }
 
     private fun isFailingOnLock(): Boolean {
-        return chest.isLocked() && isLockToDifficult()
+        return chest.isLocked() && isLockTooDifficult()
     }
 
-    private fun isLockToDifficult(): Boolean {
+    private fun isLockTooDifficult(): Boolean {
         val bestThief = gameData.party.getHeroWithHighestSkill(SkillItemId.THIEF)
         return if (canHandleLockWith(bestThief)) {
             doHandleLockWith(bestThief)

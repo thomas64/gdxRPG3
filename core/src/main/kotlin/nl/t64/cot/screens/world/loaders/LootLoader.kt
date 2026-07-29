@@ -52,7 +52,7 @@ class LootLoader(private val currentMap: GameMap) {
         val entity = Entity(spoil.key,
                             InputEmpty(),
                             PhysicsSparkle(spoil.value.loot),
-                            GraphicsSparkle(AnimationType.SHORT))
+                            GraphicsSparkle(AnimationType.SHORT, SparkleShape.STAR))
         lootList.add(entity)
         brokerManager.actionObservers.addObserver(entity)
         val position = Vector2(spoil.value.x, spoil.value.y)
@@ -63,11 +63,15 @@ class LootLoader(private val currentMap: GameMap) {
         val entity = Entity(gameMapSparkle.name,
                             InputEmpty(),
                             PhysicsSparkle(sparkle),
-                            GraphicsSparkle(gameMapSparkle.animationType))
+                            GraphicsSparkle(gameMapSparkle.animationType, getSparkleShape(sparkle)))
         lootList.add(entity)
         brokerManager.actionObservers.addObserver(entity)
         val position = Vector2(gameMapSparkle.rectangle.x, gameMapSparkle.rectangle.y)
         entity.send(LoadEntityEvent(position))
+    }
+
+    private fun getSparkleShape(sparkle: Loot): SparkleShape {
+        return if (sparkle.canBeGatheredByParty()) SparkleShape.STAR else SparkleShape.ORB
     }
 
     private fun loadChest(gameMapChest: RectangleMapObject, chest: Loot) {

@@ -2,6 +2,7 @@ package nl.t64.cot.screens.academy
 
 import com.badlogic.gdx.scenes.scene2d.Stage
 import nl.t64.cot.Utils.gameData
+import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.stopAllSe
 import nl.t64.cot.components.party.HeroItem
@@ -64,8 +65,15 @@ class SkillUpgrader private constructor(
         gameData.inventory.autoRemoveItem("gold", goldCost)
         selectedHero.doUpgrade(skillToUpgrade, xpCost)
         possibleLearnAbilitiesThatBelongToThisSkill()
+        possibleUpdateSparkles()
         setHasJustUpdatedToTrue.invoke()
         showConfirmMessage()
+    }
+
+    private fun possibleUpdateSparkles() {
+        if (skillToUpgrade.id == SkillItemId.RANGER) {
+            worldScreen.updateLoot()
+        }
     }
 
     private fun possibleLearnAbilitiesThatBelongToThisSkill() {

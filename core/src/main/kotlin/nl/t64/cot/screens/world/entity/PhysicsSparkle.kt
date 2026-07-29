@@ -10,9 +10,11 @@ import nl.t64.cot.screens.world.entity.events.LoadEntityEvent
 import nl.t64.cot.screens.world.entity.events.OnActionEvent
 
 
-class PhysicsSparkle(private val sparkle: Loot) : PhysicsComponent() {
+class PhysicsSparkle(
+    private val sparkle: Loot
+) : PhysicsComponent() {
 
-    private var isSelected = false
+    private var isSelected: Boolean = false
 
     override fun receive(event: Event) {
         if (event is LoadEntityEvent) {
@@ -29,12 +31,26 @@ class PhysicsSparkle(private val sparkle: Loot) : PhysicsComponent() {
     override fun update(entity: Entity, dt: Float) {
         if (isSelected) {
             isSelected = false
-            worldScreen.showFindScreen(sparkle, AudioEvent.SE_SPARKLE)
+            tryToGatherSparkle()
         }
     }
 
     override fun setBoundingBox() {
         boundingBox.set(currentPosition.x, currentPosition.y, Constant.TILE_SIZE, Constant.TILE_SIZE)
+    }
+
+    private fun tryToGatherSparkle() {
+        if (sparkle.canBeGatheredByParty()) {
+            worldScreen.showFindScreen(sparkle, AudioEvent.SE_SPARKLE)
+        } else {
+            showRangerTooLowMessage()
+        }
+    }
+
+    private fun showRangerTooLowMessage() {
+        val message: String = ("There's something here, but you can't tell what it is."
+            + System.lineSeparator() + "You need a Ranger of rank ${sparkle.gatherLevel} to gather it.")
+        worldScreen.showMessageDialog(message)
     }
 
     override fun debug(shapeRenderer: ShapeRenderer) {

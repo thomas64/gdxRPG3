@@ -93,7 +93,11 @@ class PartyContainer {
     }
 
     fun hasEnoughOfSkill(skillItemId: SkillItemId, rank: Int): Boolean {
-        return getBestSkillLevel(skillItemId) >= rank
+        return getBestSkillRank(skillItemId) >= rank
+    }
+
+    fun getBestSkillRank(skillItemId: SkillItemId): Int {
+        return getAllCalculatedTotalSkillsOf(skillItemId).maxOfOrNull { it } ?: 0
     }
 
     fun hasItemInEquipment(inventoryItemId: String, amount: Int): Boolean {
@@ -134,10 +138,6 @@ class PartyContainer {
 
     private fun getPossibleHero(heroId: String): HeroItem? {
         return party[heroId]
-    }
-
-    private fun getBestSkillLevel(skillItemId: SkillItemId): Int {
-        return getAllCalculatedTotalSkillsOf(skillItemId).maxOfOrNull { it } ?: 0
     }
 
     private fun getAllCalculatedTotalSkillsOf(skillItemId: SkillItemId): List<Int> {

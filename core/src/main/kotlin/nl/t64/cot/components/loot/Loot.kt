@@ -1,6 +1,8 @@
 package nl.t64.cot.components.loot
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import nl.t64.cot.Utils.gameData
+import nl.t64.cot.components.party.skills.SkillItemId
 
 
 private const val BONUS_PREFIX = "bonus_"
@@ -11,6 +13,7 @@ class Loot(
     val conditions: List<String> = emptyList(),
     var trapLevel: Int = 0,
     var lockLevel: Int = 0,
+    val gatherLevel: Int = 0,
     var xp: Int = 0,
     private val doesReset: Boolean = false,
     private var durability: MutableMap<String, Int> = mutableMapOf(),
@@ -94,6 +97,11 @@ class Loot(
 
     fun pickLock() {
         lockLevel = 0
+    }
+
+    fun canBeGatheredByParty(): Boolean {
+        val bestRangerRankFromParty: Int = gameData.party.getBestSkillRank(SkillItemId.RANGER)
+        return bestRangerRankFromParty >= gatherLevel
     }
 
     fun clearXp() {

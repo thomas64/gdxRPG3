@@ -171,6 +171,11 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
         super.hide()
         setInputProcessors(null)
         removeTriggersListener()
+        updateSparklesForPossibleRangerChange()
+    }
+
+    private fun updateSparklesForPossibleRangerChange() {
+        worldScreen.updateLoot()
     }
 
     override fun dispose() {

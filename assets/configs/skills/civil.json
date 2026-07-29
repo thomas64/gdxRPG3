@@ -19,8 +19,8 @@
   "ranger"   : {
     "upgrade"    : 6,
     "description": [
-      "- 'Ranger' increases the amount of natural resources you'll find in the world.",
-      "  'Ranger' ranks are stacked cumulative for all party members."
+      "- 'Ranger' allows the possibility to gather natural",
+      "  resources that are hidden to the untrained eye."
     ]
   },
   "merchant" : {
