@@ -48,6 +48,7 @@ object ConditionDatabase {
         "is_specific_time"              to { isBlackCurrentlyNotOpeningHisDoor },
         "is_lastdenn_guard_alive"       to { !isBattleWon("guarding_till_1500") },
         "!is_lastdenn_guard_alive"      to { isBattleWon("guarding_till_1500") },
+        "are_ferry_bandits_alive"       to { !isBattleWon("alva_ferry_bandits") },
         "is_lastdenn_entrance_closed"   to { isLastdennEntranceClosed },
         "is_garrin_possessed"           to { isGarrinPossessed },
         "!is_garrin_possessed"          to { !isGarrinPossessed },

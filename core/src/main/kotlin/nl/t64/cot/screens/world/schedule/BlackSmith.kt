@@ -11,7 +11,6 @@ import nl.t64.cot.screens.world.entity.EntityState.*
 class BlackSmith : EntitySchedule() {
 
     override val entity = Entity("man07", InputEmpty(), PhysicsScheduledNpc(), GraphicsScheduledNpc("man07"))
-    override val invisibleTalking = Entity("", InputEmpty(), PhysicsScheduledNpc(), GraphicsEmpty())
 
     override val scheduleParts: List<SchedulePart> = listOf(
         // @formatter:off

@@ -8,7 +8,6 @@ import nl.t64.cot.screens.world.entity.EntityState.*
 class LastdennEntranceGuard : EntitySchedule() {
 
     override val entity = Entity("soldier12", InputEmpty(), PhysicsScheduledNpc(), GraphicsScheduledNpc("soldier12"))
-    override val invisibleTalking = Entity("", InputEmpty(), PhysicsScheduledNpc(), GraphicsEmpty())
 
     override val scheduleParts: List<SchedulePart> = listOf(
         // @formatter:off

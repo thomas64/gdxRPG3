@@ -58,6 +58,18 @@ enum class SkillItemId : SuperEnum {
         )
     }
 
+    /**
+     * De elementaire staf-ids bestaan alleen voor de wapendriehoek; getraind wordt er enkel [STAFF].
+     * Een wapen levert dus een id op waar geen rank bij hoort, en die moet je hierlangs halen
+     * voordat je hem als skill opzoekt.
+     */
+    fun toTrainableSkill(): SkillItemId {
+        return when (this) {
+            STAFF_FIRE, STAFF_WIND, STAFF_THUNDER -> STAFF
+            else -> this
+        }
+    }
+
     fun isWeaponSkill(): Boolean {
         return when (this) {
             SWORD, AXE, SPEAR, DAGGER, THROW, BOW, STAFF, SHIELD -> true

@@ -10,6 +10,7 @@ enum class ConversationCommand {
     LOAD_SCHOOL,
     AUTO_SAVE,
     SAVE_GAME,
+    PAY_GOLD_0500,
     HEAL_LIFE_0015,
     HEAL_LIFE_0060,
     HEAL_LIFE_0900,

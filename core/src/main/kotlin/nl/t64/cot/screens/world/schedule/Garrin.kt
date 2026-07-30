@@ -12,7 +12,6 @@ import nl.t64.cot.screens.world.entity.EntityState.*
 class Garrin : EntitySchedule() {
 
     override val entity = Entity("man12", InputEmpty(), PhysicsScheduledNpc(), GraphicsScheduledNpc("man12"))
-    override val invisibleTalking = Entity("", InputEmpty(), PhysicsScheduledNpc(), GraphicsEmpty())
 
     override val scheduleParts: List<SchedulePart> = listOf(
         // @formatter:off

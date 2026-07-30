@@ -2,15 +2,14 @@ package nl.t64.cot.screens.world.schedule
 
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.worldScreen
-import nl.t64.cot.screens.world.entity.Entity
-import nl.t64.cot.screens.world.entity.EntityState
+import nl.t64.cot.screens.world.entity.*
 import nl.t64.cot.screens.world.entity.events.UpdateScheduledEntityEvent
 
 
 abstract class EntitySchedule {
 
     protected abstract val entity: Entity
-    protected abstract val invisibleTalking: Entity
+    protected open val invisibleTalking: Entity = Entity("", InputEmpty(), PhysicsEmpty(), GraphicsEmpty())
     protected abstract val scheduleParts: List<SchedulePart>
 
     fun update() {

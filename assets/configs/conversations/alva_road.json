@@ -32,6 +32,45 @@
       "1400": {"text": ["Pretty cool right? Take care on the road!"], "choices": [{"command": "EXIT", "nextId": "1400"}]}
     }
   },
+  "alva_ferry_bandits"   : {
+    "name"   : "Bandit",
+    "phrases": {
+      "1"  : {"text": ["Nobody boards that ship without settling with me first."]},
+      "2"  : {"text": ["The ferryman isn't sailing anyone across today, so I'm collecting his fares from here on."]},
+      "3"  : {"text": ["A crossing costs five hundred gold, and the price doesn't move."]},
+      "4"  : {
+        "choices": [
+          {"text": "*Ask what happened to the ferryman.*", "nextId": "5"},
+          {"condition": ["_n_500_>=_item_inv_gold"], "text": "[500 Gold] *Hand over the fare.*", "command": "PAY_GOLD_0500", "nextId": "10"},
+          {"text": "*Draw your weapon rather than pay their toll.*", "nextId": "20"}
+        ]
+      },
+      "5"  : {"text": ["He had objections about the new fares, so he's making the crossing underneath us."]},
+      "6"  : {"text": ["So it's your gold or your life, and I'd much rather it was your gold."]},
+      "7"  : {
+        "choices": [
+          {"condition": ["_n_500_>=_item_inv_gold"], "text": "[500 Gold] *Hand over the fare.*", "command": "PAY_GOLD_0500", "nextId": "10"},
+          {"text": "*Draw your weapon and make them answer for the ferryman.*", "nextId": "20"}
+        ]
+      },
+      "10" : {"text": ["Wise choice."]},
+      "11" : {"text": ["We cast off at 15:00, so keep to the pier until then."]},
+      "12" : {
+        "choices": [
+          {"text": "*Wait on the pier until she casts off.* [BLUE](Skip time)", "command": "RELOAD_NPCS_1458", "nextId": "100"},
+          {"text": "*Step away and see to your own business first.*", "command": "EXIT", "nextId": "100"}
+        ]
+      },
+      "20" : {"text": ["Wrong answer."], "choices": [{"command": "START_BATTLE"}]},
+      "100": {"text": ["Your fare is paid, so keep to the pier until we cast off at 15:00."]},
+      "101": {
+        "choices": [
+          {"text": "*Wait on the pier until she casts off.* [BLUE](Skip time)", "command": "RELOAD_NPCS_1458", "nextId": "100"},
+          {"text": "*Step away and see to your own business first.*", "command": "EXIT", "nextId": "100"}
+        ]
+      }
+    }
+  },
   "alva_heal_price-0"    : {
     "name"   : "Fairy Healer",
     "startAt": [{"condition": ["_time_after_18:15"], "startId": "10"}],

@@ -207,6 +207,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             ConversationCommand.LOAD_SCHOOL -> loadSchool(nextId)
             ConversationCommand.AUTO_SAVE -> autoSave(nextId)
             ConversationCommand.SAVE_GAME -> saveGame(nextId)
+            ConversationCommand.PAY_GOLD_0500 -> payGold(nextId, 500)
             ConversationCommand.HEAL_LIFE_0015 -> healLife(nextId, "00:15")
             ConversationCommand.HEAL_LIFE_0060 -> healLife(nextId, "00:60")
             ConversationCommand.HEAL_LIFE_0900 -> healLife(nextId, "09:00")
@@ -303,6 +304,12 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         thread { profileManager.saveProfile() }
     }
 
+    private fun payGold(nextId: String, price: Int) {
+        gameData.inventory.autoRemoveItem("gold", price)
+        playSe(AudioEvent.SE_COINS_BUY)
+        continueConversation(nextId)
+    }
+
     private fun healLife(nextId: String, time: String) {
         val price = conversationId.substringAfterLast("-").toInt()
         if (price > 0) {
@@ -379,16 +386,13 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun fadeAndReloadNpcsToTime(nextId: String, time: String) {
-        // todo, these lines should not be hardcoded here.
-        if (conversationId.contains("ghost") || conversationId.contains("garrin2")) {
-            Utils.runWithDelay(1f) {
-                gameData.clock.setTimeOfDay(time)
+        Utils.runWithDelay(1f) {
+            gameData.clock.setTimeOfDay(time)
+            // todo, these lines should not be hardcoded here.
+            if (conversationId.contains("ghost") || conversationId.contains("garrin2")) {
                 playSe(AudioEvent.SE_MAGIC_BANG)
                 stopAllBgm()
-            }
-        } else if (conversationId == "guarding_till_1500") {
-            Utils.runWithDelay(1f) {
-                gameData.clock.setTimeOfDay(time)
+            } else {
                 playSe(AudioEvent.SE_CLOCK_TICKING)
             }
         }

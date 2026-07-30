@@ -8,7 +8,6 @@ import nl.t64.cot.screens.world.entity.EntityState.*
 class Lennor : EntitySchedule() {
 
     override val entity = Entity("man13", InputEmpty(), PhysicsScheduledNpc(), GraphicsScheduledNpc("man13"))
-    override val invisibleTalking = Entity("", InputEmpty(), PhysicsScheduledNpc(), GraphicsEmpty())
 
     override val scheduleParts: List<SchedulePart> = listOf(
         // @formatter:off

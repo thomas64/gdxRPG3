@@ -1,15 +1,17 @@
 package nl.t64.cot.screens.world.schedule
 
-import nl.t64.cot.screens.world.entity.*
 import nl.t64.cot.screens.world.entity.Direction.*
+import nl.t64.cot.screens.world.entity.Entity
 import nl.t64.cot.screens.world.entity.EntityState.IDLE
 import nl.t64.cot.screens.world.entity.EntityState.WALKING
+import nl.t64.cot.screens.world.entity.GraphicsScheduledNpc
+import nl.t64.cot.screens.world.entity.InputEmpty
+import nl.t64.cot.screens.world.entity.PhysicsScheduledNpc
 
 
 class AlvaTraveler : EntitySchedule() {
 
     override val entity = Entity("traveler", InputEmpty(), PhysicsScheduledNpc(), GraphicsScheduledNpc("traveler"))
-    override val invisibleTalking = Entity("", InputEmpty(), PhysicsScheduledNpc(), GraphicsEmpty())
 
     override val scheduleParts: List<SchedulePart> = listOf(
         // @formatter:off

@@ -1,15 +1,17 @@
 package nl.t64.cot.screens.world.schedule
 
-import nl.t64.cot.screens.world.entity.*
 import nl.t64.cot.screens.world.entity.Direction.EAST
 import nl.t64.cot.screens.world.entity.Direction.NORTH
+import nl.t64.cot.screens.world.entity.Entity
 import nl.t64.cot.screens.world.entity.EntityState.WALKING
+import nl.t64.cot.screens.world.entity.GraphicsScheduledNpc
+import nl.t64.cot.screens.world.entity.InputEmpty
+import nl.t64.cot.screens.world.entity.PhysicsScheduledNpc
 
 
 class LastdennEscordGuard2 : EntitySchedule() {
 
     override val entity = Entity("soldier12", InputEmpty(), PhysicsScheduledNpc(), GraphicsScheduledNpc("soldier12"))
-    override val invisibleTalking = Entity("", InputEmpty(), PhysicsEmpty(), GraphicsEmpty())
 
     override val scheduleParts: List<SchedulePart> = listOf(
         // @formatter:off
