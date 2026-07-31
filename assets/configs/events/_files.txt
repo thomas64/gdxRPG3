@@ -1,3 +1,4 @@
+general.json
 guide_events.json
 guide_events_battle.json
 note_events.json

@@ -1,0 +1,8 @@
+{
+  "event_almost_1930": {
+    "type"          : "conversation",
+    "condition"     : ["_cycle_>=_4", "_time_after_19:15"],
+    "conversationId": "almost_1930",
+    "entityId"      : "mozes"
+  }
+}
