@@ -468,14 +468,36 @@
     "name"   : "Father Santino",
     "phrases": {
       "1": {"text": ["Blessings upon you, my child."]},
-      "2": {"text": ["I'm now actually busy searching for the knowledge you need about Ulrog. Come back tonight at 18:00 and I will have gathered everything you need to know by then."], "choices": [{"command": "EXIT"}]}
+      "2": {"text": ["I am in the middle of it. Some of these books have not been opened for a long time. Come back at 18:00 and I will have it all for you."], "choices": [{"command": "EXIT"}]}
     }
   },
   "santino_answer_ulrog"       : {
     "name"   : "Father Santino",
     "phrases": {
-      "1": {"text": ["Blessings upon you, my child."]},
-      "2": {"text": ["YOU FINISHED THE GAME! CONGRATS!"], "choices": [{"command": "EXIT"}]}
+      "1"  : {"text": ["Blessings upon you, my child."]},
+      "2"  : {"text": ["At last. I have everything you asked me for. But you must let me say one other thing first, or I shall burst."]},
+      "3"  : {"text": ["Ylarus himself sent you to me?! He could have pointed you at any door in Adan, and he chose the one with the books behind it."]},
+      "4"  : {"text": ["Do not mistake me, I am no servant of his. Ylarus is a good God and I keep his hours gladly, but the light I read by is Evdos's."]},
+      "5"  : {"text": ["And this is what shakes me. He gave you the time he had left, and then sent you here! You needed knowledge. My God's own gift."]},
+      "6"  : {"text": ["So let us deserve it. I have preached against Ulrog from that pulpit for thirty years. Nothing I said up there comes close to what is written about him."]},
+      "7"  : {"text": ["It stands in the oldest of the holy books, under its own name. The Sovereign Rite. Do everything Ulrog asks, in the order he asks it, and be paid in power without limit."]},
+      "8"  : {"text": ["Understand this. Offering up a daughter of the crowned line is the last act of it. It is not the first. Ardor has been paying for years."]},
+      "9"  : {"text": ["And from his first payment onward, Ulrog protects what he has bought. A blade meant for Ardor turns aside. A fire lit under him goes out. Nothing you carry will touch him."]},
+      "10" : {"text": ["But he is not the first man Ulrog has held, and that same book says how the others were brought down."]},
+      "11" : {"text": ["With a blade, a shield, a ring and a torc, made long ago by hands that asked no God for a blessing. The book calls them the Godless Arms."]},
+      "12" : {"text": ["A God cannot shield his servant from a thing he has no claim upon. Against any other man they are trinkets and plain iron. Against Ardor they are the only things that will touch him."]},
+      "13" : {"text": ["They were scattered so that no one man could gather them in a hurry. I have four places for you, my child, not four maps."]},
+      "14" : {"text": ["The blade lies in the deep workings under Cragmere. The shield in the drowned chapel off the Farshell coast."]},
+      "15" : {"text": ["The ring lies deep in the sunken ground of Sedgewater. And the torc up on Stonehowe, in the tomb that gave the place its name."]},
+      "16" : {"text": ["One thing still bothers me, and I have turned it over and over without getting anywhere."]},
+      "17" : {"text": ["I told you what the last act demands. A daughter of the crowned line. Not a noble girl. Not a rich girl. On that one point the book leaves no room at all."]},
+      "18" : {"text": ["He made the offering, and then it all turned to fire and took him with it, and you along with him. By your own account he was as surprised as you were."]},
+      "19" : {"text": ["Something in that rite did not match what Ulrog demanded. I cannot tell you what, and my books will not tell me either."]},
+      "20" : {"text": ["Now go. Gather all four, and what is left of Ardor is a man."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "21"}]},
+      "21" : {"text": ["May Evdos light your way, my child. And may Ylarus grant you the hour."], "choices": [{"command": "EXIT", "nextId": "100"}]},
+      "100": {"text": ["Blessings upon you, my child."]},
+      "101": {"text": ["Blade, shield, ring and torc. The Godless Arms. Gather all four and Ardor is nothing but a man."]},
+      "102": {"text": ["I will be here with the holy books until the candles give out. May Evdos light your way."], "choices": [{"command": "EXIT", "nextId": "100"}]}
     }
   },
   "santino_prepare_evening"    : {

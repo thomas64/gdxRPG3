@@ -53,10 +53,11 @@
     }
   },
   "quest_lastdenn_santino" : {
-    "title"   : "Meet the priest [M]",
-    "entityId": "santino",
-    "summary" : "It seems that the priest of Lastdenn is Father Santino. As he is the priest of the Temple of Evdos, the God of Knowledge, he should know a thing or two about Ulrog, the God of Power. That is the reason why Ylarus, the God of Time, sent you to him, right? Information is key here.",
-    "tasks"   : {
+    "title"         : "Meet the priest [M]",
+    "entityId"      : "santino",
+    "summary"       : "It seems that the priest of Lastdenn is Father Santino. As he is the priest of the Temple of Evdos, the God of Knowledge, he should know a thing or two about Ulrog, the God of Power. That is the reason why Ylarus, the God of Time, sent you to him, right? Information is key here.",
+    "followUpAccept": "quest_godless_arms",
+    "tasks"         : {
       "1": {
         "taskPhrase"     : "Meet with Father Santino at 11:00 and ask him about Ulrog.",
         "type"           : "DELIVER_MESSAGE",
@@ -65,10 +66,34 @@
       },
       "2": {
         "comment"        : "WARNING: 1 link to 2 in Santino.handleSideEffects()",
-        "taskPhrase"     : "Meet with Father Santino at 18:00 after he finished his study about Ulrog you requested.",
+        "taskPhrase"     : "Meet with Father Santino at 18:00, after he has finished the study of Ulrog you asked him for.",
         "type"           : "DELIVER_MESSAGE",
-        "conversationIds": ["to_be_added"],
+        "conversationIds": ["santino_answer_ulrog"],
         "isHidden"       : true
+      }
+    }
+  },
+  "quest_godless_arms"     : {
+    "title"   : "The Godless Arms [M]",
+    "entityId": "santino",
+    "summary" : "Father Santino found the Sovereign Rite in the oldest of the holy books. Ardor has been paying Ulrog for years, and Ulrog protects what he has bought: no blade will land on him and no fire will catch. But no God has any claim upon the Godless Arms: a blade, a shield, a ring and a torc, made long ago by hands that asked for no blessing. Gather all four and what is left of Ardor is a man.",
+    "tasks"   : {
+      "1": {
+        "comment"   : "TODO: the four items and the four locations do not exist yet. Change type to FIND_ITEM once they do.",
+        "taskPhrase": "Find the Godless Blade in the deep workings under Cragmere.",
+        "type"      : "DISCOVER"
+      },
+      "2": {
+        "taskPhrase": "Find the Godless Shield in the drowned chapel off the Farshell coast.",
+        "type"      : "DISCOVER"
+      },
+      "3": {
+        "taskPhrase": "Find the Godless Ring in the sunken ground of Sedgewater.",
+        "type"      : "DISCOVER"
+      },
+      "4": {
+        "taskPhrase": "Find the Godless Torc in the tomb on Stonehowe.",
+        "type"      : "DISCOVER"
       }
     }
   },
