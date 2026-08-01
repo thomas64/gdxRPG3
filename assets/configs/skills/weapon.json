@@ -80,9 +80,9 @@
   "staff" : {
     "upgrade"    : 6,
     "description": [
-      "- 'Staff' allows the possibility of equipping staffs.",
+      "- 'Staff' allows the possibility of equipping staves.",
       "",
-      "- 'Staff' increases your chance to hit with staffs in combat.",
+      "- 'Staff' increases your chance to hit with staves in combat.",
       "  Each rank in 'Staff' increases 'Chance to hit' by 5%.",
       "",
       "- Magic advantage: Fire > Wind > Thunder > Fire."

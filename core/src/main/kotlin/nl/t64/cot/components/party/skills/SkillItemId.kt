@@ -3,6 +3,10 @@ package nl.t64.cot.components.party.skills
 import nl.t64.cot.components.party.SuperEnum
 
 
+private fun String.toTitleCase(): String {
+    return lowercase().replaceFirstChar { it.uppercase() }
+}
+
 enum class SkillItemId : SuperEnum {
 
     NONE,
@@ -42,7 +46,8 @@ enum class SkillItemId : SuperEnum {
     STAFF_THUNDER,
     SHIELD;
 
-    override val title: String = name.substringBefore("_").lowercase().replaceFirstChar { it.uppercase() }
+    override val title: String = name.substringBefore("_").toTitleCase()
+    val elementalTitle: String = name.substringAfter("_").toTitleCase()
 
     companion object {
         private val advantages: Map<SkillItemId, SkillItemId> = mapOf(

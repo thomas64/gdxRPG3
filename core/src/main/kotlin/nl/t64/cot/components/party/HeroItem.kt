@@ -213,6 +213,20 @@ class HeroItem(
     fun createMessageIfHeroHasNotEnoughFor(inventoryItem: InventoryItem): String? {
         return InventoryMinimal.entries
             .firstNotNullOfOrNull { it.createMessageIfHeroHasNotEnoughFor(inventoryItem, this) }
+            ?: createMessageIfHeroKnowsNoAbilityFor(inventoryItem)
+    }
+
+    private fun createMessageIfHeroKnowsNoAbilityFor(inventoryItem: InventoryItem): String? {
+        return inventoryItem.skill
+            ?.takeIf { inventoryItem.group == InventoryGroup.WEAPON }
+            ?.takeIf { knowsNoAbilityFor(inventoryItem) }
+            ?.let { "$name needs a ${it.elementalTitle} ability\nto use that ${inventoryItem.name}." }
+    }
+
+    private fun knowsNoAbilityFor(weapon: InventoryItem): Boolean {
+        return getAllAbilities()
+            .filterNot { it.isSpecial }
+            .none { it.isWeaponAllowed(weapon) }
     }
 
     private fun createMessageIfNothingToDequip(inventoryItem: InventoryItem): String? {
