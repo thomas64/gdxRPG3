@@ -89,7 +89,7 @@ data class Event(
             }
 
             type == "stop_bgm" -> {
-                audioManager.fadeBgmInThread()
+                audioManager.fadeAndStopBgmInThread()
             }
 
             type == "start_bgm" -> {

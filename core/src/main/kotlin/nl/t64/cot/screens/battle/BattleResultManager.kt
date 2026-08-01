@@ -9,6 +9,7 @@ import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playBgm
 import nl.t64.cot.audio.stopAllBgm
 import nl.t64.cot.components.battle.EnemyContainer
+import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.dialog.MessageDialog
 
@@ -46,7 +47,8 @@ class BattleResultManager(
 
     private fun battleWonExitScreen() {
         gameData.clock.takeHalfHour()
-        exitScreen { battleObserver.notifyBattleWon(battleId, enemies.getSpoils()) }
+        val spoils: Loot = enemies.getSpoils()
+        exitScreen(shouldBgmFadeOut = spoils.isEmpty()) { battleObserver.notifyBattleWon(battleId, spoils) }
     }
 
     fun battleFledExitScreen() {
@@ -95,18 +97,30 @@ class BattleResultManager(
         exitScreen { battleObserver.notifyBattleLost(battleId) }
     }
 
-    private fun exitScreen(actionAfterExit: () -> Unit) {
+    private fun exitScreen(shouldBgmFadeOut: Boolean = true, actionAfterExit: () -> Unit) {
         stage.addAction(Actions.sequence(
             Actions.run {
                 Gdx.input.inputProcessor = null
                 Utils.setGamepadInputProcessor(null)
             },
-            Actions.run { setBgmFading.invoke(true) },
+            Actions.run { startPossibleBgmFade(shouldBgmFadeOut) },
             Actions.fadeOut(Constant.FADE_DURATION),
-            Actions.run { setBgmFading.invoke(false) },
-            Actions.run { stopAllBgm() },
+            Actions.run { endPossibleBgmFade(shouldBgmFadeOut) },
             Actions.run { actionAfterExit.invoke() }
         ))
+    }
+
+    private fun startPossibleBgmFade(shouldBgmFadeOut: Boolean) {
+        if (shouldBgmFadeOut) {
+            setBgmFading.invoke(true)
+        }
+    }
+
+    private fun endPossibleBgmFade(shouldBgmFadeOut: Boolean) {
+        if (shouldBgmFadeOut) {
+            setBgmFading.invoke(false)
+            stopAllBgm()
+        }
     }
 
 }

@@ -1,5 +1,6 @@
 package nl.t64.cot.screens.loot
 
+import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.audio.AudioEvent
@@ -21,6 +22,7 @@ open class SpoilsScreen : LootScreen() {
     }
 
     override fun resolveLootAndCloseScreen(notUsedHere: Boolean) {
+        audioManager.fadeAndStopBgmInThread()
         worldScreen.updateLoot()
         closeScreen(audioEvent = AudioEvent.SE_CONVERSATION_NEXT)
     }
