@@ -369,7 +369,7 @@ class BattleScreenBuilder {
     private fun GdxList<String>.fillWithActions(currentParticipant: Participant,
                                                 areEnemiesInRange: Boolean,
                                                 isAbleToMove: Boolean): GdxList<String> {
-        val attackAp: Int = if (areEnemiesInRange) 2 else AP_UNAVAILABLE
+        val attackAp: Int = currentParticipant.getCheapestUsableAttackApAnd(areEnemiesInRange)
         val moveApInt: Int = if (isAbleToMove) 1 else AP_UNAVAILABLE
         val curAp: Int = maxOf(1, currentParticipant.currentAP)
         val maxAp: Int = currentParticipant.maximumAP
@@ -406,6 +406,16 @@ class BattleScreenBuilder {
         }
         this.selectedIndex = buttonTableMainMenuIndex
         return this
+    }
+
+    private fun Participant.getCheapestUsableAttackApAnd(areEnemiesInRange: Boolean): Int {
+        if (!areEnemiesInRange) return AP_UNAVAILABLE
+
+        return getBattleAbilities()
+            .filterNot { it.abilityItem.isSpecial }
+            .filter { it.isWeaponAllowed() && it.hasEnoughApSp() }
+            .minOfOrNull { it.ap }
+            ?: AP_UNAVAILABLE
     }
 
     private fun buildMoveApStringFrom(curAp: Int): String {
