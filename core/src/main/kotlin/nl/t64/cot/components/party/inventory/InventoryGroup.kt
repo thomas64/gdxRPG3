@@ -22,7 +22,7 @@ enum class InventoryGroup(override val title: String) : SuperEnum {
     GLOVES("Gloves"),
     RING("Ring"),
     BELT("Belt"),
-    PANTS("Pants"),
+    PANTS("Leggings"),
     BOOTS("Boots"),
 
     EMPTY(""),
