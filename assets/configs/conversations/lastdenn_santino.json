@@ -324,7 +324,7 @@
           {"condition": ["i_n_1_>=_item_ghost_proof", "i_n_0_==_item_ghost_repeller"], "text": "[Ghost proof] *Show him the proof to get the holy staff.*", "nextId": "110"},
           {"condition": ["i_r_!=_u_q_quest_lastdenn_garrin", "_r_!=_f_q_quest_lastdenn_garrin", "is_garrin_possessed"], "text": "*Warn him for his upcoming murder!*", "nextId": "150"},
           {"condition": ["i_ta_7_q_quest_lastdenn_garrin"], "text": "[Ghost repeller] *Return his holy staff, its work now done.*", "command": "TALK_TO_QUEST_PERSON", "nextId": "160"},
-          {"condition": ["i_tn_1_q_quest_lastdenn_santino"], "text": "*Explain everything that's happened with Ardor, Ulrog and Ylarus.*", "command": "DELIVER_QUEST_MESSAGE", "nextId": "5"},
+          {"condition": ["i_r_!=_f_q_quest_lastdenn_santino", "i_tn_1_q_quest_lastdenn_santino"], "text": "*Explain everything that's happened with Ardor, Ulrog and Ylarus.*", "command": "DELIVER_QUEST_MESSAGE", "nextId": "5"},
           {"text": "*Counseling is for wimps. Take your leave.*", "nextId": "104"}
         ]
       },

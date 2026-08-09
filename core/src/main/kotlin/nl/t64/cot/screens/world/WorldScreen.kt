@@ -277,6 +277,10 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
         npcEntities = NpcEntitiesLoader(mapManager.currentMap).createNpcs()
     }
 
+    fun isNpcLoaded(npcId: String): Boolean {
+        return npcEntities.any { it.id == npcId }
+    }
+
     fun addScheduledEntity(entity: Entity) {
         if (entity !in visibleScheduledEntities) {
             visibleScheduledEntities.add(entity)

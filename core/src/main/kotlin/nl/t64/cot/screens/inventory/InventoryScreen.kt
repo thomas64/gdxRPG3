@@ -91,7 +91,7 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
                 this.createAndSetListener(openQuestLogFunction = { playSe(AudioEvent.SE_MENU_ERROR) },
                                           closeScreenFunction = { this.closeScreen(ScreenType.BATTLE) },
                                           doActionFunction = { this.doPreBattleAction() },
-                                          tryToDropItemFunction = {},
+                                          tryToDropItemFunction = { this.refuseActionDuringBattle() },
                                           tryToDismissHeroFunction = {})
                 this.addInputListenerWithSmallDelay()
             }
@@ -102,8 +102,8 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
             loadAndGetInventoryScreen().apply {
                 this.createAndSetListener(openQuestLogFunction = { playSe(AudioEvent.SE_MENU_ERROR) },
                                           closeScreenFunction = { this.closeScreen(ScreenType.BATTLE) },
-                                          doActionFunction = { this.doBattleAction() },
-                                          tryToDropItemFunction = {},
+                                          doActionFunction = { this.refuseActionDuringBattle() },
+                                          tryToDropItemFunction = { this.refuseActionDuringBattle() },
                                           tryToDismissHeroFunction = {})
                 this.addInputListenerWithSmallDelay()
             }
@@ -238,7 +238,7 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
         inventoryUI.doPreBattleAction()
     }
 
-    private fun doBattleAction() {
+    private fun refuseActionDuringBattle() {
         inventoryUI.stopTablesScrolling()
         MessageDialog("This action is not allowed here during battle.").show(stage, AudioEvent.SE_MENU_ERROR)
     }

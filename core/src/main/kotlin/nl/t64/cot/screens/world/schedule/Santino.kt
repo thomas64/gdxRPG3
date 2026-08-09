@@ -17,6 +17,13 @@ import nl.t64.cot.screens.world.entity.Direction.*
 import nl.t64.cot.screens.world.entity.EntityState.*
 
 
+private const val CHURCH_MAP = "lastdenn_church"
+private const val CONGREGATION_NPC = "captain01" // one of the churchgoers that only exist during the service.
+private const val SERVICE_FADE_IN = "09:59"
+private const val SERVICE_START = "10:00"
+private const val SERVICE_FADE_OUT = "10:59"
+private const val SERVICE_END = "11:00"
+
 class Santino : EntitySchedule() {
 
     override val entity = Entity("santino", InputEmpty(), PhysicsScheduledNpc(), GraphicsScheduledNpc("santino"))
@@ -143,21 +150,9 @@ class Santino : EntitySchedule() {
         handleTimedBells()
         possibleFailQuestSantino()
 
-        if (mapManager.currentMap.mapTitle == "lastdenn_church") {
-            if (gameData.clock.isCurrentTimeAt("09:59")) {
-                worldScreen.onNotifyFadeAndReloadNpcs(duration = 1.5f)
-                Utils.runWithDelay(Constant.FADE_DURATION) { gameData.clock.setTimeOfDay("10:00") }
-            }
-            if (gameData.clock.isCurrentTimeInBetween("10:00", "11:00")) {
-                val part = SchedulePart("lastdenn_church", "10:00", "11:00", NONE, INVISIBLE, "santino5a", "santino5a", "santino_service")
-                setupInvisibleTalking(part)
-            } else {
-                removeInvisibleTalking()
-            }
-            if (gameData.clock.isCurrentTimeAt("10:59")) {
-                worldScreen.onNotifyFadeAndReloadNpcs(duration = 1.5f)
-                Utils.runWithDelay(Constant.FADE_DURATION) { gameData.clock.setTimeOfDay("11:00") }
-            }
+        if (isInsideChurch()) {
+            handleServiceTransition()
+            handleServiceTalking()
         }
         if (mapManager.currentMap.mapTitle == "lastdenn") {
             if (gameData.clock.isCurrentTimeAt("12:29")) {
@@ -175,6 +170,34 @@ class Santino : EntitySchedule() {
         }
     }
 
+    private fun handleServiceTransition() {
+        if (!isCongregationLoaded() && gameData.clock.isCurrentTimeInBetween(SERVICE_FADE_IN, SERVICE_END)) {
+            startServiceTransition(SERVICE_START)
+        } else if (isCongregationLoaded() && gameData.clock.isCurrentTimeAfter(SERVICE_FADE_OUT)) {
+            startServiceTransition(SERVICE_END)
+        }
+    }
+
+    private fun startServiceTransition(newTime: String) {
+        worldScreen.onNotifyFadeAndReloadNpcs(duration = 1.5f)
+        Utils.runWithDelay(Constant.FADE_DURATION) { possibleSkipToTime(newTime) }
+    }
+
+    private fun possibleSkipToTime(newTime: String) {
+        if (gameData.clock.isCurrentTimeBefore(newTime)) {
+            gameData.clock.setTimeOfDay(newTime)
+        }
+    }
+
+    private fun handleServiceTalking() {
+        if (isServiceInProgress()) {
+            val part = SchedulePart(CHURCH_MAP, SERVICE_START, SERVICE_END, NONE, INVISIBLE, "santino5a", "santino5a", "santino_service")
+            setupInvisibleTalking(part)
+        } else {
+            removeInvisibleTalking()
+        }
+    }
+
     private fun possibleFailQuestSantino() {
         val questSantino: QuestGraph = gameData.quests.getQuestById("quest_lastdenn_santino")
         if (gameData.clock.isCurrentTimeAfter("14:01")
@@ -187,7 +210,7 @@ class Santino : EntitySchedule() {
     }
 
     private fun isIndoorBellWindow(): Boolean {
-        return mapManager.currentMap.mapTitle == "lastdenn_church"
+        return isInsideChurch()
             && (gameData.clock.isCurrentTimeAt("09:56")
             || gameData.clock.isCurrentTimeAt("10:56"))
     }
@@ -246,6 +269,18 @@ class Santino : EntitySchedule() {
                 isBellRinging = false
             }
         }, 3.0f)
+    }
+
+    private fun isInsideChurch(): Boolean {
+        return mapManager.currentMap.mapTitle == CHURCH_MAP
+    }
+
+    private fun isCongregationLoaded(): Boolean {
+        return worldScreen.isNpcLoaded(CONGREGATION_NPC)
+    }
+
+    private fun isServiceInProgress(): Boolean {
+        return gameData.clock.isCurrentTimeInBetween(SERVICE_START, SERVICE_END)
     }
 
 }
