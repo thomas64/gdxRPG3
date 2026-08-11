@@ -332,7 +332,7 @@
   </object>
   <object id="306" name="sailor01" type="inv" x="672" y="312" width="48" height="12">
    <properties>
-    <property name="conversation" value="lastdenn_school"/>
+    <property name="conversation" value="quest_lastdenn_school"/>
    </properties>
   </object>
  </objectgroup>

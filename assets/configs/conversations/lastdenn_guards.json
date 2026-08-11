@@ -123,17 +123,21 @@
     "name"   : "Lastdenn Guard",
     "startAt": [
       {"condition": ["_r_!=_u_q_quest_lastdenn_garrin", "_r_!=_f_q_quest_lastdenn_garrin", "_time_between_12:00_and_13:00", "is_garrin_possessed"], "startId": "50"},
-      {"condition": ["_time_after_19:15"], "startId": "20"}
+      {"condition": ["_time_after_19:15", "_c_!=_u_q_quest_lastdenn_school"], "startId": "20"},
+      {"condition": ["_time_after_19:15"], "startId": "30"}
     ],
     "phrases": {
       "1" : {"text": ["There is nothing here for you to see now."]},
       "2" : {"text": ["No boats are coming in or out of the docks."]},
-      "3" : {"text": ["This evening however, around 19:30, we expect a boat to arrive."], "choices": [{"command": "EXIT"}]},
-      "20": {"text": ["It seems the boat arrived a bit earlier than expected."]},
+      "3" : {"text": ["This evening however, around 19:30, we expect a boat to arrive."], "choices": [{"command": "ACCEPT_OTHER_QUEST", "questId": "quest_lastdenn_school", "nextId": "4"}]},
+      "4" : {"text": ["Crates and gulls, most likely. Come back tonight and see for yourself."], "choices": [{"command": "EXIT"}]},
+      "20": {"text": ["It seems the boat arrived a little bit earlier than expected."]},
       "21": {"text": ["The sailor seems to be some sort of teacher. What does he teach?"], "choices": [{"command": "EXIT"}]},
+      "30": {"text": ["The docks are open again, sir. The evening boat moored a little bit ahead of schedule."]},
+      "31": {"text": ["No cargo worth guarding. The sailor himself seems to be some sort of teacher. What does he teach?"], "choices": [{"command": "EXIT"}]},
       "50": {"text": ["There is nothing here for you to see."]},
       "51": {"text": ["No boats are coming in or out of the docks."]},
-      "52": {"text": ["This evening however, around 19:30, we expect a boat to arrive."]},
+      "52": {"text": ["This evening however, around 19:30, we expect a boat to arrive."], "choices": [{"command": "ACCEPT_OTHER_QUEST", "questId": "quest_lastdenn_school", "nextId": "53"}]},
       "53": {
         "choices": [
           {"text": "*Warn the guards for the murder on Santino!*", "nextId": "54"},

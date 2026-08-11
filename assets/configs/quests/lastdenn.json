@@ -40,6 +40,18 @@
       }
     }
   },
+  "quest_lastdenn_school"  : {
+    "title"   : "The evening boat",
+    "entityId": "soldier12",
+    "summary" : "The guards at the docks of Lastdenn are expecting a boat this evening, around 19:30. The docks are closed to civilians until it comes in. Whatever that boat is carrying, the guards do not seem to know either. It might be worth being there when it moors.",
+    "tasks"   : {
+      "1": {
+        "taskPhrase"   : "Be at the docks of Lastdenn in the evening to see what the boat brings in.",
+        "updatedPhrase": "Meet Harkon, who sells fighting lessons in every port his boat calls at.",
+        "type"         : "MEET_PERSON"
+      }
+    }
+  },
   "quest_lastdenn_reignald": {
     "title"   : "Commander Conquer",
     "entityId": "reignald",

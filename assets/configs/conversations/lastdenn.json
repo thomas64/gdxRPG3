@@ -466,11 +466,13 @@
       "2": {"text": ["Busy, busy, busy."], "choices": [{"command": "EXIT"}]}
     }
   },
-  "lastdenn_school"         : {
-    "name"   : "Lastdenn School",
+  "quest_lastdenn_school"   : {
+    "name"   : "Harkon School",
     "phrases": {
-      "1": {"text": ["Good evening, young man. I just came ashore, but ready to teach! If you've a mind for it, I could show you a few new tricks."]},
-      "2": {
+      "1": {"text": ["Good evening, young man. Harkon is the name. I work my passage from port to port, and I will be ashore for a while."]},
+      "2": {"text": ["What I carry is not in the hold. Blade, bow and shield, and I sell what I know of them to whoever can pay for the lesson."], "choices": [{"command": "MEET_QUEST_PERSON", "nextId": "3"}]},
+      "3": {"text": ["You carry your weapons like a man who uses them. If you've a mind for it, I could teach you a trick or two tonight."]},
+      "4": {
         "choices": [
           {"text": "*Visit the school.*", "command": "LOAD_SCHOOL"},
           {"text": "*Take your leave.*", "command": "EXIT"}
