@@ -2,6 +2,7 @@ package nl.t64.cot.components.party
 
 import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.constants.Constant
+import java.util.*
 
 
 class PartyContainer {
@@ -51,6 +52,33 @@ class PartyContainer {
             isHeroLast(hero) -> firstHero
             else -> getHero(getIndex(hero) + 1)
         }
+    }
+
+    fun canMoveHeroLeft(hero: HeroItem): Boolean {
+        return getIndex(hero) > 1
+    }
+
+    fun canMoveHeroRight(hero: HeroItem): Boolean {
+        val index: Int = getIndex(hero)
+        return index in 1..<lastIndex
+    }
+
+    fun moveHeroLeft(hero: HeroItem) {
+        val index: Int = getIndex(hero)
+        swapHeroes(index, index - 1)
+    }
+
+    fun moveHeroRight(hero: HeroItem) {
+        val index: Int = getIndex(hero)
+        swapHeroes(index, index + 1)
+    }
+
+    private fun swapHeroes(indexA: Int, indexB: Int) {
+        require(indexA != 0 && indexB != 0) { "Cannot move the party leader." }
+        val allHeroes: MutableList<HeroItem> = getAllHeroes().toMutableList()
+        Collections.swap(allHeroes, indexA, indexB)
+        party.clear()
+        allHeroes.forEach { party[it.id] = it }
     }
 
     fun addHero(hero: HeroItem) {

@@ -73,17 +73,17 @@ open class ButtonLabels(private val stage: Stage) {
 
     open fun createBottomLeftText(): String? {
         return if (Utils.isGamepadConnected()) {
-            "[A] Action      [Select] Dismiss hero      [Start] Sort inventory"
+            "[A] Action      [Select] Dismiss hero     [Select]+[LB/RB] Reorder hero"
         } else {
-            "[A] Action      [F] Dismiss hero      [Space] Sort inventory"
+            "[A] Action      [F] Dismiss hero      [Shift]+[Q/W] Reorder hero"
         }
     }
 
     open fun createBottomRightText(): String? {
         return if (Utils.isGamepadConnected()) {
-            "[L-Stick] Toggle tooltip      [R-Stick] Toggle compare      [B] Back                                                                        [Y] Drop item / Craft / Brew"
+            "[L-Stick] Toggle tooltip      [R-Stick] Toggle compare      [B] Close                                                      [Start] Sort inventory      [Y] Drop item"
         } else {
-            "[T] Toggle tooltip      [C] Toggle compare      [ I ] Back                                                                        [D] Drop item / Craft / Brew"
+            "[T] Toggle tooltip      [C] Toggle compare      [ I ] Close                                                                        [Space] Sort inventory      [D] Drop item"
         }
     }
 

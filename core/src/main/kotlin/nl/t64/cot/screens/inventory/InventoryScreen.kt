@@ -80,7 +80,9 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
                                                   closeScreenFunction = { dialog.show(this.stage, AudioEvent.SE_CONVERSATION_NEXT) },
                                                   doActionFunction = { this.doCrystalTryAction() },
                                                   tryToDropItemFunction = {},
-                                                  tryToDismissHeroFunction = {})
+                                                  tryToDismissHeroFunction = {},
+                                                  tryToMoveHeroLeftFunction = {},
+                                                  tryToMoveHeroRightFunction = {})
                         this.addInputListenerWithSmallDelay()
                     }))
             }
@@ -92,7 +94,9 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
                                           closeScreenFunction = { this.closeScreen(ScreenType.BATTLE) },
                                           doActionFunction = { this.doPreBattleAction() },
                                           tryToDropItemFunction = { this.refuseActionDuringBattle() },
-                                          tryToDismissHeroFunction = {})
+                                          tryToDismissHeroFunction = { this.refuseActionDuringBattle() },
+                                          tryToMoveHeroLeftFunction = { this.refuseActionDuringBattle() },
+                                          tryToMoveHeroRightFunction = { this.refuseActionDuringBattle() })
                 this.addInputListenerWithSmallDelay()
             }
         }
@@ -104,7 +108,9 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
                                           closeScreenFunction = { this.closeScreen(ScreenType.BATTLE) },
                                           doActionFunction = { this.refuseActionDuringBattle() },
                                           tryToDropItemFunction = { this.refuseActionDuringBattle() },
-                                          tryToDismissHeroFunction = {})
+                                          tryToDismissHeroFunction = { this.refuseActionDuringBattle() },
+                                          tryToMoveHeroLeftFunction = { this.refuseActionDuringBattle() },
+                                          tryToMoveHeroRightFunction = { this.refuseActionDuringBattle() })
                 this.addInputListenerWithSmallDelay()
             }
         }
@@ -192,7 +198,9 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
                              closeScreenFunction = { closeScreen() },
                              doActionFunction = { doAction() },
                              tryToDropItemFunction = { tryToDropItem() },
-                             tryToDismissHeroFunction = { tryToDismissHero() })
+                             tryToDismissHeroFunction = { tryToDismissHero() },
+                             tryToMoveHeroLeftFunction = { moveHeroLeft() },
+                             tryToMoveHeroRightFunction = { moveHeroRight() })
         addInputListenerWithSmallDelay()
     }
 
@@ -205,13 +213,17 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
                                      closeScreenFunction: () -> Unit,
                                      doActionFunction: () -> Unit,
                                      tryToDropItemFunction: () -> Unit,
-                                     tryToDismissHeroFunction: () -> Unit) {
+                                     tryToDismissHeroFunction: () -> Unit,
+                                     tryToMoveHeroLeftFunction: () -> Unit,
+                                     tryToMoveHeroRightFunction: () -> Unit) {
         listener = InventoryScreenListener(stage,
                                            closeScreenFunction,
                                            openQuestLogFunction,
                                            doActionFunction,
                                            { selectPreviousHero() },
                                            { selectNextHero() },
+                                           tryToMoveHeroLeftFunction,
+                                           tryToMoveHeroRightFunction,
                                            { selectPreviousTable() },
                                            { selectNextTable() },
                                            tryToDropItemFunction,
@@ -258,6 +270,26 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
         inventoryUI.stopTablesScrolling()
         playSe(AudioEvent.SE_MENU_CURSOR)
         inventoryUI.updateSelectedHero { InventoryUtils.selectNextHero() }
+    }
+
+    private fun moveHeroLeft() {
+        moveHero({ gameData.party.canMoveHeroLeft(it) }, { gameData.party.moveHeroLeft(it) })
+    }
+
+    private fun moveHeroRight() {
+        moveHero({ gameData.party.canMoveHeroRight(it) }, { gameData.party.moveHeroRight(it) })
+    }
+
+    private fun moveHero(canMoveHeroFunction: (HeroItem) -> Boolean, moveHeroFunction: (HeroItem) -> Unit) {
+        inventoryUI.stopTablesScrolling()
+        val selectedHero: HeroItem = InventoryUtils.getSelectedHero()
+        if (canMoveHeroFunction.invoke(selectedHero)) {
+            playSe(AudioEvent.SE_MENU_CONFIRM)
+            moveHeroFunction.invoke(selectedHero)
+            worldScreen.updateParty()
+        } else {
+            playSe(AudioEvent.SE_MENU_ERROR)
+        }
     }
 
     private fun selectPreviousTable() {
