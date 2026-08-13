@@ -69,9 +69,16 @@ enum class SkillItemId : SuperEnum {
      * voordat je hem als skill opzoekt.
      */
     fun toTrainableSkill(): SkillItemId {
-        return when (this) {
-            STAFF_FIRE, STAFF_WIND, STAFF_THUNDER -> STAFF
+        return when {
+            isElementalStaff() -> STAFF
             else -> this
+        }
+    }
+
+    fun isElementalStaff(): Boolean {
+        return when (this) {
+            STAFF_FIRE, STAFF_WIND, STAFF_THUNDER -> true
+            else -> false
         }
     }
 

@@ -85,8 +85,8 @@ class Participant(
         val attackerHasDisadvantageScore: Int = if (attackSkill.hasDisadvantageFrom(targetSkill)) 4 else 0
         val stealthScore: Int = character.getCalculatedTotalSkillOf(SkillItemId.STEALTH)
         val lowHpScore: Float = character.currentHp / 50f
-        val protectionScore: Float = character.getCalculatedTotalProtection() / 8f // todo, magic attackers moeten letten op magic protection
-        val defenseScore: Float = character.getCalculatedTotalDefense() / 6f
+        val protectionScore: Float = getRelevantProtectionAgainst(attackSkill) / 8f
+        val defenseScore: Float = getRelevantDefenseAgainst(attackSkill) / 6f
 
         if (preferenceManager.isDebugModeOn) {
             println("A low score means a high priority in the queue!")
@@ -101,6 +101,22 @@ class Participant(
                         "total: ${stealthScore + lowHpScore + protectionScore + defenseScore + attackerHasAdvantageScore + attackerHasDisadvantageScore + nextToTargetScore}")
         }
         return stealthScore + lowHpScore + protectionScore + defenseScore + attackerHasAdvantageScore + attackerHasDisadvantageScore + nextToTargetScore
+    }
+
+    private fun getRelevantProtectionAgainst(attackSkill: SkillItemId): Int {
+        return if (attackSkill.isElementalStaff()) {
+            character.getCalculatedTotalMagicProtection()
+        } else {
+            character.getCalculatedTotalProtection()
+        }
+    }
+
+    private fun getRelevantDefenseAgainst(attackSkill: SkillItemId): Int {
+        return if (attackSkill.isElementalStaff()) {
+            0
+        } else {
+            character.getCalculatedTotalDefense()
+        }
     }
 
     fun getPenaltyAp(): Int {
