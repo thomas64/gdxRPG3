@@ -43,7 +43,7 @@ class BattleScreen : Screen {
 
     private lateinit var enemies: EnemyContainer
     private lateinit var turnManager: TurnManager
-    private lateinit var currentParticipant: Participant
+    private lateinit var preBattleSelectedHero: Participant
 
     private lateinit var battleField: BattleField
     private lateinit var tableManager: BattleTableManager
@@ -54,7 +54,8 @@ class BattleScreen : Screen {
     private lateinit var specialOutcomeManager: SpecialOutcomeManager
     private lateinit var resultManager: BattleResultManager
 
-    private lateinit var currentTarget: Participant
+    private val currentParticipant: Participant
+        get() = if (isPreBattle) preBattleSelectedHero else turnManager.currentParticipant
 
     private val screenBuilder = BattleScreenBuilder()
     private val shapeRenderer = ShapeRenderer()
@@ -62,10 +63,12 @@ class BattleScreen : Screen {
     private var isBgmFading: Boolean = false
     private var isLoaded: Boolean = false
     private var isPreBattle: Boolean = false
+    @Volatile
     private var isDelayingTurn: Boolean = false
     private var hasChosenToContinuePerforming: Boolean = false
+    @Volatile
     private var isEnemyActing: Boolean = false
-    private var hasCharacterBlinked: Boolean = false
+    private var turnOfLastBlink: Int = -1
     private var hasWon: Boolean = false
     private var hasLost: Boolean = false
     private var shouldKeepState: Boolean = false
@@ -103,7 +106,7 @@ class BattleScreen : Screen {
 
         enemies = EnemyContainer(battleId)
         turnManager = TurnManager(gameData.party.getAllHeroesAlive(), enemies.getAll())
-        currentParticipant = turnManager.participants.first { it.character.id == Constant.PLAYER_ID }
+        preBattleSelectedHero = turnManager.participants.first { it.character.id == Constant.PLAYER_ID }
         if (preferenceManager.isDebugModeOn) printCombatPowers()
 
         battleField = BattleField(turnManager.participants, ::currentParticipant)
@@ -174,15 +177,10 @@ class BattleScreen : Screen {
             return
         }
 
-        if (isPreBattle) {
-            updateAllTables()
-            return
-        }
-
-        updateCurrentParticipant()
         updateAllTables()
 
         when {
+            isPreBattle -> return
             enemies.getAll().none { it.isAlive } -> winBattle()
             gameData.party.getPlayer().isDead -> gameOver()
             currentParticipant.isHero -> takeTurnHero()
@@ -209,15 +207,6 @@ class BattleScreen : Screen {
         tableManager.updateBattleField(battleField)
     }
 
-    private fun updateCurrentParticipant() {
-        val tempParticipant1 = currentParticipant
-        currentParticipant = turnManager.currentParticipant
-        val tempParticipant2 = currentParticipant
-        if (tempParticipant1 != tempParticipant2) {
-            hasCharacterBlinked = false
-        }
-    }
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     override fun resize(width: Int, height: Int) {
@@ -237,7 +226,7 @@ class BattleScreen : Screen {
         Utils.setGamepadInputProcessor(null)
         if (shouldKeepState) return
         hasChosenToContinuePerforming = false
-        hasCharacterBlinked = false
+        turnOfLastBlink = -1
         turnManager.resetTemporaryBonusesAfterBattle()
         stage.clear()
     }
@@ -283,12 +272,12 @@ class BattleScreen : Screen {
     }
 
     private fun heroIsSelectedForPreEquipment(selectedHero: String) {
-        currentParticipant = turnManager.participants.first { it.character.name == selectedHero }
+        preBattleSelectedHero = turnManager.getParticipant(selectedHero)
         menuManager.aHeroIsSelectedInPreviewEquipmentInPreBattle()
     }
 
     private fun heroIsSelectedForPrePreview(selectedHero: String) {
-        currentParticipant = turnManager.participants.first { it.character.name == selectedHero }
+        preBattleSelectedHero = turnManager.getParticipant(selectedHero)
         menuManager.aHeroIsSelectedInPreviewAttacksInPreBattle()
     }
 
@@ -304,7 +293,7 @@ class BattleScreen : Screen {
         val target: Participant = turnManager.getParticipant(selectedTarget)
         dialogManager.showConfirmAttackDialog(selectedAttack = selectedAttack,
                                               selectedTarget = target,
-                                              onConfirmed = { attackConfirmed(it, target) })
+                                              onConfirmed = { attackConfirmed(it) })
     }
 
     private fun showConfirmSpecialDialog(selectedSpecial: BattleAbilityItem, selectedTarget: String) {
@@ -316,7 +305,7 @@ class BattleScreen : Screen {
             }
         dialogManager.showConfirmSpecialDialog(selectedSpecial = selectedSpecial,
                                                selectedTarget = target,
-                                               onConfirmed = { specialConfirmed(it, target) })
+                                               onConfirmed = { specialConfirmed(it) })
     }
 
     private fun showConfirmPotionDialog(selectedPotion: BattlePotionItem) {
@@ -351,15 +340,13 @@ class BattleScreen : Screen {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private fun attackConfirmed(attackAction: AttackAction, target: Participant) {
+    private fun attackConfirmed(attackAction: AttackAction) {
         menuManager.buttonTableTarget.remove()
-        currentTarget = target
         attackOutcomeManager.attackConfirmed(attackAction)
     }
 
-    private fun specialConfirmed(specialAction: SpecialAction, target: Participant) {
+    private fun specialConfirmed(specialAction: SpecialAction) {
         menuManager.buttonTableTarget.remove()
-        currentTarget = target
         specialOutcomeManager.specialConfirmed(specialAction)
     }
 
@@ -423,6 +410,10 @@ class BattleScreen : Screen {
         menuManager.possibleSetupActionTable()
     }
 
+    // isEnemyActing stays true until the step that was handed to the render thread has actually run there,
+    // otherwise a frame could start a second action while the first one is still queued. So every path
+    // through startEnemyAction ends in an onRenderThread block that sets it back to false; here it is only
+    // set back when the enemy failed to act at all.
     private fun takeTurnEnemy() {
         if (isEnemyActing) return
         isEnemyActing = true
@@ -431,7 +422,7 @@ class BattleScreen : Screen {
                 startEnemyAction()
             }.onFailure {
                 if (preferenceManager.isDebugModeOn) it.printStackTrace()
-            }.also {
+                isDelayingTurn = false
                 isEnemyActing = false
             }
         }
@@ -446,14 +437,19 @@ class BattleScreen : Screen {
         battleField.possibleSwitchWeaponOfActingEnemy()
         val heroTarget: Participant? = battleField.possibleGetHeroTargetAndMoveEnemy()
         battleField.resetStartingSpace()
-        val attackData: List<AttackData>? = heroTarget
-            ?.let { AttackAction.createForEnemy(currentParticipant, it, battleId).handle() }
-            ?.also { currentTarget = heroTarget }
+        val attackData: List<AttackData>? = heroTarget?.let {
+            isDelayingTurn = true
+            AttackAction.createForEnemy(currentParticipant, it, battleId).handle()
+        }
 
         if (attackData.isNullOrEmpty()) {
+            isDelayingTurn = false
             endEnemyAction()
         } else {
-            attackOutcomeManager.enemyAttackConfirmed(attackData)
+            onRenderThread {
+                attackOutcomeManager.enemyAttackConfirmed(attackData)
+                isEnemyActing = false
+            }
         }
     }
 
@@ -467,14 +463,15 @@ class BattleScreen : Screen {
     }
 
     private fun possibleBlinkCurrentParticipant() {
-        if (hasCharacterBlinked) return
-        hasCharacterBlinked = true
+        if (turnOfLastBlink == turnManager.amountOfTurns) return
+        turnOfLastBlink = turnManager.amountOfTurns
+        val participantToBlink: Participant = currentParticipant
 
         if (isEnemyActing) Thread.sleep(500L)
 
-        thread {
+        onRenderThread {
             isDelayingTurn = true
-            BlinkEffect(tableManager.battleFieldTable, currentParticipant.character.name, Color.BLACK).start()
+            BlinkEffect(tableManager.battleFieldTable, participantToBlink.character.name, Color.BLACK).start()
             Utils.runWithDelay(0.5f) {
                 isDelayingTurn = false
             }
@@ -484,6 +481,29 @@ class BattleScreen : Screen {
     }
 
     private fun handleStagger(message: String) {
+        onRenderThread {
+            showEndOfTurnDialog(message)
+            isEnemyActing = false
+        }
+    }
+
+    private fun endEnemyTurn() {
+        if (preferenceManager.isCombatDetailsOn) {
+            val message = "${currentParticipant.character.name} ended ${currentParticipant.character.gender} turn."
+            onRenderThread {
+                showEndOfTurnDialog(message)
+                isEnemyActing = false
+            }
+        } else {
+            Thread.sleep(500L)
+            onRenderThread {
+                turnManager.setNextTurn()
+                isEnemyActing = false
+            }
+        }
+    }
+
+    private fun showEndOfTurnDialog(message: String) {
         val messageDialog = MessageDialog(message)
         messageDialog.setActionAfterHide {
             turnManager.setNextTurn()
@@ -491,18 +511,8 @@ class BattleScreen : Screen {
         messageDialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT)
     }
 
-    private fun endEnemyTurn() {
-        if (preferenceManager.isCombatDetailsOn) {
-            val message = "${currentParticipant.character.name} ended ${currentParticipant.character.gender} turn."
-            val messageDialog = MessageDialog(message)
-            messageDialog.setActionAfterHide {
-                turnManager.setNextTurn()
-            }
-            messageDialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT)
-        } else {
-            Thread.sleep(500L)
-            turnManager.setNextTurn()
-        }
+    private fun onRenderThread(action: () -> Unit) {
+        Gdx.app.postRunnable { action.invoke() }
     }
 
     private fun openPauseMenu() {

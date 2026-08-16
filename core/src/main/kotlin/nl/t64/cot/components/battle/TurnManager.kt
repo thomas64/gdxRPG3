@@ -10,6 +10,7 @@ class TurnManager(
     val participants: MutableList<Participant> = createParticipants()
     val currentParticipant: Participant get() = participants.first()
     val troubadourEffects = TroubadourEffectHandler(participants)
+    var amountOfTurns: Int = 0; private set
 
     init {
         participants.increaseTurnCounters()
@@ -71,6 +72,7 @@ class TurnManager(
         actedParticipant.resetTurnCounter()
         participants.increaseTurnCounters()
         participants.sort()
+        amountOfTurns++
         currentParticipant.refreshActionPoints()
         troubadourEffects.possibleApply()
     }
