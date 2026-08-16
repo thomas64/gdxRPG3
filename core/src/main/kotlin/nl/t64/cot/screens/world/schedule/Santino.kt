@@ -154,20 +154,6 @@ class Santino : EntitySchedule() {
             handleServiceTransition()
             handleServiceTalking()
         }
-        if (mapManager.currentMap.mapTitle == "lastdenn") {
-            if (gameData.clock.isCurrentTimeAt("12:29")) {
-                worldScreen.useDoor("door_large_round")
-            }
-            if (gameData.clock.isCurrentTimeAt("13:49") && "!is_garrin_possessed".isTrue()) {
-                worldScreen.useDoor("door_wooden_ring_shade_left")
-            }
-            if (gameData.clock.isCurrentTimeAt("15:03") && "!is_garrin_possessed".isTrue()) {
-                worldScreen.useDoor("door_wooden_ring_shade_left")
-            }
-            if (gameData.clock.isCurrentTimeAt("16:24") && "!is_garrin_possessed".isTrue()) {
-                worldScreen.useDoor("door_large_round")
-            }
-        }
     }
 
     private fun handleServiceTransition() {

@@ -15,9 +15,11 @@ import nl.t64.cot.screens.world.entity.events.LoadEntityEvent
 import nl.t64.cot.screens.world.entity.events.StateEvent
 
 
-class GraphicsDoor(private val door: Door) : GraphicsComponent() {
-
+class GraphicsDoor(
+    private val door: Door
+) : GraphicsComponent() {
     private val openAnimation: Animation<TextureRegion> = loadAnimation(false)
+    private val animationDuration: Float = openAnimation.animationDuration
     private val shadowAnimation: Animation<TextureRegion>? =
         if (door.type == DoorType.LARGE_WOODEN_CAVE_GATE) loadAnimation(true) else null
     private var shadowFrame: TextureRegion? = null
@@ -26,6 +28,7 @@ class GraphicsDoor(private val door: Door) : GraphicsComponent() {
         if (event is LoadEntityEvent) {
             position = event.position
             state = event.state!!
+            frameTime = if (state == EntityState.OPENED) animationDuration else 0f
         }
         if (event is StateEvent) {
             state = event.state
@@ -56,7 +59,7 @@ class GraphicsDoor(private val door: Door) : GraphicsComponent() {
 
     override fun setFrame(dt: Float) {
         frameTime = when {
-            frameTime >= 1f -> 1f
+            frameTime >= animationDuration -> animationDuration
             state == EntityState.OPENED -> frameTime + dt
             state == EntityState.CLOSING -> frameTime + dt
             else -> 0f

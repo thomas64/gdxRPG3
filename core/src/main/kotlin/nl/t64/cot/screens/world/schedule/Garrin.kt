@@ -1,9 +1,5 @@
 package nl.t64.cot.screens.world.schedule
 
-import nl.t64.cot.Utils.gameData
-import nl.t64.cot.Utils.mapManager
-import nl.t64.cot.Utils.worldScreen
-import nl.t64.cot.components.condition.isTrue
 import nl.t64.cot.screens.world.entity.*
 import nl.t64.cot.screens.world.entity.Direction.*
 import nl.t64.cot.screens.world.entity.EntityState.*
@@ -54,14 +50,7 @@ class Garrin : EntitySchedule() {
     )
 
     override fun handleSideEffects() {
-        if (mapManager.currentMap.mapTitle == "lastdenn") {
-            if (gameData.clock.isCurrentTimeAt("11:23") && "is_garrin_possessed".isTrue()) {
-                worldScreen.useDoor("door_lastdenn_garrin")
-            }
-            if (gameData.clock.isCurrentTimeInBetween("14:56", "15:00") && "is_garrin_possessed".isTrue()) {
-                worldScreen.useDoor("door_lastdenn_jail")
-            }
-        }
+        // empty
     }
 
 }

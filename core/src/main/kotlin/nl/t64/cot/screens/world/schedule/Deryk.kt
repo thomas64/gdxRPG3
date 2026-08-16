@@ -1,8 +1,5 @@
 package nl.t64.cot.screens.world.schedule
 
-import nl.t64.cot.Utils.gameData
-import nl.t64.cot.Utils.mapManager
-import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.screens.world.entity.*
 import nl.t64.cot.screens.world.entity.Direction.*
 import nl.t64.cot.screens.world.entity.EntityState.*
@@ -54,19 +51,7 @@ class Deryk : EntitySchedule() {
     )
 
     override fun handleSideEffects() {
-        if (mapManager.currentMap.mapTitle == "honeywood") {
-            doorsSchedule
-                .filterKeys { gameData.clock.isCurrentTimeAt(it) }
-                .values
-                .singleOrNull()
-                ?.let { worldScreen.useDoor(it) }
-        }
+        // empty
     }
-
-    private val doorsSchedule: Map<String, String> = mapOf(
-        "18:00" to "door_honeywood_elder",
-        "18:28" to "door_honeywood_elder",
-        "18:45" to "door_honeywood_inn",
-    )
 
 }

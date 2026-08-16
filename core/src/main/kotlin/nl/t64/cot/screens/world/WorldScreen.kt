@@ -42,7 +42,6 @@ import nl.t64.cot.screens.world.entity.*
 import nl.t64.cot.screens.world.entity.events.DirectionEvent
 import nl.t64.cot.screens.world.entity.events.FindPathEvent
 import nl.t64.cot.screens.world.entity.events.LoadEntityEvent
-import nl.t64.cot.screens.world.entity.events.NpcActionEvent
 import nl.t64.cot.screens.world.loaders.DoorLoader
 import nl.t64.cot.screens.world.loaders.LootLoader
 import nl.t64.cot.screens.world.loaders.NpcEntitiesLoader
@@ -289,10 +288,6 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
 
     fun removeScheduledEntity(entity: Entity) {
         visibleScheduledEntities.remove(entity)
-    }
-
-    fun useDoor(doorId: String) {
-        doorList.single { it.id == doorId }.send(NpcActionEvent())
     }
 
     fun dropItems(drops: Loot) {

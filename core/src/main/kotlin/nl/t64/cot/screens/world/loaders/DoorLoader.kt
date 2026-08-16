@@ -4,13 +4,16 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject
 import com.badlogic.gdx.math.Vector2
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
+import nl.t64.cot.components.door.Door
 import nl.t64.cot.screens.world.entity.*
 import nl.t64.cot.screens.world.entity.events.LoadEntityEvent
 import nl.t64.cot.screens.world.map.GameMap
+import nl.t64.cot.screens.world.schedule.DoorScheduleDatabase
 
 
-class DoorLoader(private val currentMap: GameMap) {
-
+class DoorLoader(
+    private val currentMap: GameMap
+) {
     private val doorList: MutableList<Entity> = ArrayList()
 
     fun createDoors(): List<Entity> {
@@ -23,14 +26,20 @@ class DoorLoader(private val currentMap: GameMap) {
     }
 
     private fun loadDoor(gameMapDoor: RectangleMapObject) {
-        val door = gameData.doors.getDoor(gameMapDoor.name)
-        door.close()
+        val door: Door = gameData.doors.getDoor(gameMapDoor.name)
         val entity = Entity(gameMapDoor.name, InputEmpty(), PhysicsDoor(door), GraphicsDoor(door))
-        doorList.add(entity)
-        brokerManager.actionObservers.addObserver(entity)
-        brokerManager.blockObservers.addObserver(entity)
         val position = Vector2(gameMapDoor.rectangle.x, gameMapDoor.rectangle.y)
-        entity.send(LoadEntityEvent(EntityState.IMMOBILE, position))
+        doorList.add(entity)
+        brokerManager.blockObservers.addObserver(entity)
+
+        if (DoorScheduleDatabase.shouldBeOpen(gameMapDoor.name)) {
+            door.open()
+            entity.send(LoadEntityEvent(EntityState.OPENED, position))
+        } else {
+            door.close()
+            brokerManager.actionObservers.addObserver(entity)
+            entity.send(LoadEntityEvent(EntityState.IMMOBILE, position))
+        }
     }
 
 }

@@ -9,19 +9,19 @@ import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.condition.areAllTrue
 import nl.t64.cot.components.door.Door
 import nl.t64.cot.constants.Constant
-import nl.t64.cot.screens.world.entity.events.*
+import nl.t64.cot.screens.world.entity.events.Event
+import nl.t64.cot.screens.world.entity.events.LoadEntityEvent
+import nl.t64.cot.screens.world.entity.events.OnActionEvent
+import nl.t64.cot.screens.world.entity.events.StateEvent
+import nl.t64.cot.screens.world.schedule.DoorScheduleDatabase
 
 
-private const val NPC_DOOR_OPEN_TIME = 3f
-private const val DEFAULT_CLOSE_TIME = -1f
-
-class PhysicsDoor(private val door: Door) : PhysicsComponent() {
-
+class PhysicsDoor(
+    private val door: Door
+) : PhysicsComponent() {
     private val stringBuilder: StringBuilder = StringBuilder()
     private var isSelected: Boolean = false
-    private var isSelectedByNpc: Boolean = false
-    private var isOpenedByNpc: Boolean = false
-    private var closingDoorTime: Float = DEFAULT_CLOSE_TIME
+    private var isOpenedBySchedule: Boolean = false
 
     override fun receive(event: Event) {
         if (event is LoadEntityEvent) {
@@ -36,22 +36,15 @@ class PhysicsDoor(private val door: Door) : PhysicsComponent() {
                 isSelected = true
             }
         }
-        if (event is NpcActionEvent) {
-            isSelectedByNpc = true
-        }
     }
 
     override fun update(entity: Entity, dt: Float) {
         this.entity = entity
+        possibleOpenOrCloseBySchedule()
         possibleLockOrUnlockBySchedule()
-        possibleAutoClose(dt)
         if (isSelected) {
             isSelected = false
             useDoor()
-        }
-        if (isSelectedByNpc) {
-            isSelectedByNpc = false
-            openDoorByNpc()
         }
     }
 
@@ -121,30 +114,29 @@ class PhysicsDoor(private val door: Door) : PhysicsComponent() {
             door.unlock()
         } else {
             door.lock()
-            if (isOpenedByNpc) return
+            if (isOpenedBySchedule) return
             closeWhenOpenAndAddBlocker(false)
         }
     }
 
-    private fun openDoorByNpc() {
-        isOpenedByNpc = true
-        closingDoorTime = NPC_DOOR_OPEN_TIME
+    private fun possibleOpenOrCloseBySchedule() {
+        val shouldBeOpen: Boolean = DoorScheduleDatabase.shouldBeOpen(entity.id)
+        if (shouldBeOpen && !isOpenedBySchedule) {
+            openBySchedule()
+        } else if (!shouldBeOpen && isOpenedBySchedule) {
+            closeBySchedule()
+        }
+    }
+
+    private fun openBySchedule() {
+        isOpenedBySchedule = true
         openWhenClosedAndRemoveBlocker(false)
         brokerManager.blockObservers.addObserver(entity)
         brokerManager.actionObservers.removeObserver(entity)
     }
 
-    private fun possibleAutoClose(dt: Float) {
-        if (closingDoorTime >= 0f) {
-            closingDoorTime -= dt
-            if (closingDoorTime < 0f) {
-                autoClose()
-            }
-        }
-    }
-
-    private fun autoClose() {
-        closingDoorTime = DEFAULT_CLOSE_TIME
+    private fun closeBySchedule() {
+        isOpenedBySchedule = false
         closeWhenOpenAndAddBlocker(false)
         brokerManager.actionObservers.addObserver(entity)
     }
@@ -166,7 +158,6 @@ class PhysicsDoor(private val door: Door) : PhysicsComponent() {
             entity.send(StateEvent(EntityState.CLOSING))
             brokerManager.blockObservers.addObserver(entity)
             mapManager.setTiledGraph()
-            isOpenedByNpc = false
         }
     }
 
