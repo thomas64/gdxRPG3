@@ -64,6 +64,16 @@ abstract class Character(
         currentSp = (currentSp + recoverPoints).coerceAtMost(maximumSp)
     }
 
+    fun canUsePotion(potion: InventoryItem): Boolean {
+        if (isDead) return false
+
+        val needsHp: Boolean = potion.hp > 0 && currentHp < maximumHp
+        val needsSp: Boolean = potion.sp > 0 && currentSp < maximumSp
+        val canUseBuff: Boolean = bonus.wouldPotionHaveEffect(potion)
+
+        return needsHp || needsSp || canUseBuff
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     fun getInventoryItem(inventoryGroup: InventoryGroup): InventoryItem? {

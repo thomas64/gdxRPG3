@@ -1,5 +1,6 @@
 package nl.t64.cot.components.battle
 
+import nl.t64.cot.components.party.inventory.InventoryItem
 import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.components.party.stats.StatItemId
 
@@ -43,6 +44,40 @@ class BonusContainer {
         stealthFromPotion = 0
         hitBonusFromTroubadour = 0
         hitPenaltyFromTroubadour = 0
+    }
+
+    fun wouldPotionHaveEffect(potion: InventoryItem): Boolean {
+        return potion.protection > protectionFromPotion
+            || potion.intelligence > intelligenceFromPotion
+            || potion.dexterity > dexterityFromPotion
+            || potion.strength > strengthFromPotion
+            || potion.speed > speedFromPotion
+            || potion.willpower > willpowerFromPotion
+            || potion.stealth > stealthFromPotion
+    }
+
+    fun applyPotion(potion: InventoryItem) {
+        if (potion.protection > protectionFromPotion) {
+            protectionFromPotion = potion.protection
+        }
+        if (potion.intelligence > intelligenceFromPotion) {
+            intelligenceFromPotion = potion.intelligence
+        }
+        if (potion.dexterity > dexterityFromPotion) {
+            dexterityFromPotion = potion.dexterity
+        }
+        if (potion.strength > strengthFromPotion) {
+            strengthFromPotion = potion.strength
+        }
+        if (potion.speed > speedFromPotion) {
+            speedFromPotion = potion.speed
+        }
+        if (potion.willpower > willpowerFromPotion) {
+            willpowerFromPotion = potion.willpower
+        }
+        if (potion.stealth > stealthFromPotion) {
+            stealthFromPotion = potion.stealth
+        }
     }
 
     fun getProtection(): Int {

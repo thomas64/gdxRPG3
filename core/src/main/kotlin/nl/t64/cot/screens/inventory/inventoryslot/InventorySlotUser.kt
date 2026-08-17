@@ -27,7 +27,7 @@ class InventorySlotUser private constructor(itemSlot: ItemSlot) {
     private val selectedHero: HeroItem = InventoryUtils.getSelectedHero()
 
     private fun onlyDoPotionActions() {
-        if (canUsePotion()) {
+        if (selectedHero.canUsePotion(inventoryItem)) {
             showUsePotionConfirmDialog()
         } else {
             showFailMessage()
@@ -37,28 +37,14 @@ class InventorySlotUser private constructor(itemSlot: ItemSlot) {
     private fun doRegularAction() {
         if (inventoryItem.id == "crystal_of_time") {
             CrystalHandler.doAction()
-        } else if ((inventoryItem.hp > 0 || inventoryItem.sp > 0) && canUsePotion()) {
+        } else if (
+            (inventoryItem.hp > 0 || inventoryItem.sp > 0)
+            && selectedHero.canUsePotion(inventoryItem)
+        ) {
             showUsePotionConfirmDialog()
         } else {
             showFailMessage()
         }
-    }
-
-    private fun canUsePotion(): Boolean {
-        if (selectedHero.isDead) return false
-
-        val needsHp: Boolean = inventoryItem.hp > 0 && selectedHero.currentHp < selectedHero.maximumHp
-        val needsSp: Boolean = inventoryItem.sp > 0 && selectedHero.currentSp < selectedHero.maximumSp
-        val canUseBuff: Boolean =
-            inventoryItem.protection > 0
-                || inventoryItem.intelligence > 0
-                || inventoryItem.dexterity > 0
-                || inventoryItem.strength > 0
-                || inventoryItem.speed > 0
-                || inventoryItem.willpower > 0
-                || inventoryItem.stealth > 0
-
-        return needsHp || needsSp || canUseBuff
     }
 
     private fun showUsePotionConfirmDialog() {
@@ -85,15 +71,7 @@ class InventorySlotUser private constructor(itemSlot: ItemSlot) {
     }
 
     private fun applyBuffEffects() {
-        with(selectedHero.bonus) {
-            if (inventoryItem.protection > 0) this.protectionFromPotion = inventoryItem.protection
-            if (inventoryItem.intelligence > 0) this.intelligenceFromPotion = inventoryItem.intelligence
-            if (inventoryItem.dexterity > 0) this.dexterityFromPotion = inventoryItem.dexterity
-            if (inventoryItem.strength > 0) this.strengthFromPotion = inventoryItem.strength
-            if (inventoryItem.speed > 0) this.speedFromPotion = inventoryItem.speed
-            if (inventoryItem.willpower > 0) this.willpowerFromPotion = inventoryItem.willpower
-            if (inventoryItem.stealth > 0) this.stealthFromPotion = inventoryItem.stealth
-        }
+        selectedHero.bonus.applyPotion(inventoryItem)
     }
 
     private fun showSuccessMessage(recoveredHp: Int, recoveredSp: Int) {

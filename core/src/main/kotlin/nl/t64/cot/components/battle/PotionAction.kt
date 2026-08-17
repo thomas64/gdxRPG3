@@ -14,7 +14,13 @@ class PotionAction(
     private val character: Character = currentParticipant.character
 
     fun isAble(): Pair<Boolean, String> {
-        return if (currentParticipant.currentAP < POTION_AP) {
+        return if (!character.canUsePotion(selectedPotion.inventoryItem)) {
+            val message =
+                """${selectedPotion.description}
+                    |
+                    |It would have no effect!""".trimIndent().trimMargin()
+            Pair(false, message)
+        } else if (currentParticipant.currentAP < POTION_AP) {
             val message =
                 """${selectedPotion.description}
                     |
@@ -36,8 +42,8 @@ class PotionAction(
     }
 
     private fun Character.drink(potion: BattlePotionItem): Pair<String, Color> {
-        val (recoveredHp, recoveredSp) = applyRecoveryEffects(potion)
-        applyBuffEffects(potion)
+        val (recoveredHp, recoveredSp) = this.applyRecoveryEffects(potion)
+        this.applyBuffEffects(potion)
         return determineDisplayResult(potion, recoveredHp, recoveredSp)
     }
 
@@ -54,18 +60,7 @@ class PotionAction(
     }
 
     private fun Character.applyBuffEffects(potion: BattlePotionItem) {
-        val effect = potion.inventoryItem
-        with(this.bonus) {
-            when {
-                effect.protection > 0 -> this.protectionFromPotion = effect.protection
-                effect.intelligence > 0 -> this.intelligenceFromPotion = effect.intelligence
-                effect.dexterity > 0 -> this.dexterityFromPotion = effect.dexterity
-                effect.strength > 0 -> this.strengthFromPotion = effect.strength
-                effect.speed > 0 -> this.speedFromPotion = effect.speed
-                effect.willpower > 0 -> this.willpowerFromPotion = effect.willpower
-                effect.stealth > 0 -> this.stealthFromPotion = effect.stealth
-            }
-        }
+        this.bonus.applyPotion(potion.inventoryItem)
     }
 
     private fun determineDisplayResult(potion: BattlePotionItem,
