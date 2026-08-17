@@ -37,8 +37,8 @@
     "description": [
       "Increases your party's 'Chance to hit' for each",
       "rank in 'Troubadour', as long as you are performing.",
-      "High increase to low hit chances,",
-      "low increase to already high hit chances."
+      "A high increase to low hit chances,",
+      "a low increase to already high hit chances."
     ]
   },
   "perform_chaos"  : {
@@ -52,8 +52,8 @@
     "description": [
       "Decreases the enemy's 'Chance to hit' for each",
       "rank in 'Troubadour', as long as you are performing.",
-      "High decrease to high hit chances,",
-      "low decrease to already low hit chances."
+      "A high decrease to high hit chances,",
+      "a low decrease to already low hit chances."
     ]
   }
 }

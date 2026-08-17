@@ -99,5 +99,14 @@
       "Contains 40 gold coins.",
       "Unequip to add to your gold."
     ]
+  },
+  "gold_pouch_65"          : {
+    "name"       : "Gold Pouch",
+    "group"      : "ACCESSORY",
+    "gold_pouch" : 65,
+    "description": [
+      "Contains 65 gold coins.",
+      "Unequip to add to your gold."
+    ]
   }
 }

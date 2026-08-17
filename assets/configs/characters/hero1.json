@@ -12,16 +12,18 @@
       "stamina"     : 10
     },
     "skills"   : {
-      "stealth": 1,
-      "warrior": 1,
-      "sword"  : 1,
-      "axe"    : 1,
-      "bow"    : 1,
-      "shield" : 1
+      "stealth"   : 1,
+      "troubadour": 1,
+      "warrior"   : 1,
+      "sword"     : 1,
+      "axe"       : 1,
+      "bow"       : 1,
+      "shield"    : 1
     },
     "abilities": [
       "strike_2", "strike_3", "strike_4",
-      "stagger"
+      "stagger",
+      "perform_beauty", "perform_chaos"
     ],
     "inventory": {
       "weapon": "basic_mozes_bow",
@@ -183,16 +185,16 @@
     "gender"   : "his",
     "stats"    : {
       "intelligence": 15,
-      "willpower"   : 15,
-      "strength"    : 25,
       "dexterity"   : 18,
-      "constitution": 20,
-      "stamina"     : 40,
-      "speed"       : 12
+      "strength"    : 25,
+      "speed"       : 12,
+      "willpower"   : 15,
+      "constitution": 28,
+      "stamina"     : 8
     },
     "skills"   : {
       "alchemist": -1,
-      "ranger"   : 4,
+      "ranger"   : 2,
       "stealth"  : 3,
       "warrior"  : 5,
       "wizard"   : -1,
@@ -208,11 +210,12 @@
       "stagger"
     ],
     "inventory": {
-      "weapon": "basic_axe",
-      "shield": "basic_medium_shield",
-      "chest" : "basic_medium_chest",
-      "pants" : "basic_medium_pants",
-      "boots" : "basic_medium_boots"
+      "weapon"   : "fine_axe",
+      "shield"   : "fine_medium_shield",
+      "chest"    : "fine_medium_chest",
+      "pants"    : "fine_medium_pants",
+      "boots"    : "fine_medium_boots",
+      "accessory": "gold_pouch_65"
     }
   },
   "jaspar"  : {
