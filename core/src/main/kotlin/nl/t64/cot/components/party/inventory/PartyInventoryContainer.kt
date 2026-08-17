@@ -3,7 +3,11 @@ package nl.t64.cot.components.party.inventory
 import nl.t64.cot.Utils.gameData
 
 
-class PlayerInventoryContainer(numberOfSlots: Int = 0) : InventoryContainer(numberOfSlots) {
+class PartyInventoryContainer(numberOfSlots: Int = 0) : InventoryContainer(numberOfSlots) {
+
+    fun getTotalOfItemIncludingPartyEquipment(itemId: String): Int {
+        return getTotalOfItem(itemId) + gameData.party.getAmountOfItemInEquipment(itemId)
+    }
 
     override fun incrementAmountAt(index: Int, amount: Int) {
         super.incrementAmountAt(index, amount)

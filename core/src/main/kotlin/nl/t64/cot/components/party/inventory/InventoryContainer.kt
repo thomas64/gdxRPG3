@@ -118,7 +118,7 @@ open class InventoryContainer(numberOfSlots: Int = 0) {
             || items.all { (itemId, amount) -> hasEnoughOfItem(itemId, amount) }
     }
 
-    fun hasEnoughOfItem(itemId: String?, amount: Int): Boolean {
+    fun hasEnoughOfItem(itemId: String, amount: Int): Boolean {
         return getTotalOfItem(itemId) >= amount
     }
 
@@ -166,7 +166,7 @@ open class InventoryContainer(numberOfSlots: Int = 0) {
             .any { it.hasSameIdAs(itemId) }
     }
 
-    fun getTotalOfItem(itemId: String?): Int {
+    fun getTotalOfItem(itemId: String): Int {
         return inventory
             .filterNotNull()
             .filter { it.hasSameIdAs(itemId) }

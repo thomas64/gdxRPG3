@@ -231,7 +231,7 @@ data class InventoryItem(
         return hasSameIdAs(candidateItem.id)
     }
 
-    fun hasSameIdAs(candidateId: String?): Boolean {
+    fun hasSameIdAs(candidateId: String): Boolean {
         return id.equals(candidateId, true)
     }
 

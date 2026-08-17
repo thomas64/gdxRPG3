@@ -145,7 +145,7 @@ class CraftTable(
         val itemName = Label(item.name, LabelStyle(font, Color.BLACK))
         table.add(itemName).padLeft(SECOND_COLUMN_PAD_LEFT)
 
-        val currentAmount = gameData.inventory.getTotalOfItem(item.id)
+        val currentAmount: Int = gameData.inventory.getTotalOfItemIncludingPartyEquipment(item.id)
         val amountLabel = Label("($currentAmount)", LabelStyle(font, Color.DARK_GRAY))
         table.add(amountLabel).row()
 

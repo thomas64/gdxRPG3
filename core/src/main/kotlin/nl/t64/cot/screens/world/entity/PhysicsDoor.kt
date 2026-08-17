@@ -92,8 +92,10 @@ class PhysicsDoor(
     }
 
     private fun removeKeyFromInventoryIfDoorWasAlreadyUnlockedInThePast() {
-        if (door.wasLockedOnce() && gameData.inventory.hasEnoughOfItem(door.keyId, 1)) {
-            gameData.inventory.autoRemoveItem(door.keyId!!, 1)
+        if (!door.wasLockedOnce()) return
+        val keyId: String = door.keyId!!
+        if (gameData.inventory.hasEnoughOfItem(keyId, 1)) {
+            gameData.inventory.autoRemoveItem(keyId, 1)
         }
     }
 

@@ -244,7 +244,7 @@ object ConditionConverter {
     private fun doesInventoryAndEquipmentContain(conditionId: String,
                                                  inventoryItemId: String,
                                                  requestedAmount: Int): Boolean {
-        val combinedAmount: Int = gameData.inventory.getTotalOfItem(inventoryItemId) + gameData.party.getAmountOfItemInEquipment(inventoryItemId)
+        val combinedAmount: Int = gameData.inventory.getTotalOfItemIncludingPartyEquipment(inventoryItemId)
         return when {
             conditionId.contains("_==_") -> combinedAmount == requestedAmount
             conditionId.contains("_>=_") -> combinedAmount >= requestedAmount

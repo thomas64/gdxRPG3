@@ -17,7 +17,7 @@ import nl.t64.cot.components.loot.SpoilsContainer
 import nl.t64.cot.components.party.HeroContainer
 import nl.t64.cot.components.party.PartyContainer
 import nl.t64.cot.components.party.inventory.InventoryContainer
-import nl.t64.cot.components.party.inventory.PlayerInventoryContainer
+import nl.t64.cot.components.party.inventory.PartyInventoryContainer
 import nl.t64.cot.components.portal.PortalContainer
 import nl.t64.cot.components.quest.QuestContainer
 import nl.t64.cot.components.time.Clock
@@ -29,7 +29,7 @@ class GameData : ProfileObserver {
     lateinit var clock: Clock
     lateinit var heroes: HeroContainer
     lateinit var party: PartyContainer
-    lateinit var inventory: PlayerInventoryContainer
+    lateinit var inventory: PartyInventoryContainer
     lateinit var storage: InventoryContainer
     lateinit var shops: ShopContainer
     lateinit var battles: BattleContainer
@@ -62,7 +62,7 @@ class GameData : ProfileObserver {
         clock = Clock()
         heroes = HeroContainer()
         party = PartyContainer()
-        inventory = PlayerInventoryContainer(66)
+        inventory = PartyInventoryContainer(66)
         storage = InventoryContainer(176)
         shops = ShopContainer()
         battles = BattleContainer()
