@@ -121,6 +121,7 @@
     },
     "skills"   : {
       "loremaster": 1,
+      "stealth"   : 1,
       "merchant"  : 1,
       "wizard"    : 4,
       "dagger"    : 1,
@@ -156,6 +157,7 @@
       "jester"    : 1,
       "loremaster": 2,
       "mechanic"  : 2,
+      "stealth"   : 1,
       "wizard"    : 2,
       "axe"       : -1,
       "dagger"    : 1,

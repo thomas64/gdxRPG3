@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="36" height="24" tilewidth="24" tileheight="24" infinite="0" nextlayerid="23" nextobjectid="66">
+<map version="1.11" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="36" height="24" tilewidth="24" tileheight="24" infinite="0" nextlayerid="23" nextobjectid="67">
  <properties>
   <property name="bgm" value="bgm_cell"/>
   <property name="lightmap_player" value="light_player"/>
@@ -83,6 +83,7 @@
  <objectgroup color="#5500ff" id="13" name="rest">
   <object id="57" name="door_lastdenn_jail_b1" x="144" y="336" width="48" height="96"/>
   <object id="65" name="note_prison_bucket" x="240" y="144" width="48" height="48"/>
+  <object id="66" name="chest_jail_01" x="768" y="408" width="48" height="48"/>
  </objectgroup>
  <objectgroup color="#aa55ff" id="22" name="hero">
   <object id="56" name="ryiah" x="192" y="360" width="48" height="24">

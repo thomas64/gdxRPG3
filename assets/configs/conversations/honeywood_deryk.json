@@ -40,17 +40,18 @@
   "quest_honeywood_swordmaster_school": {
     "name"   : "Swordmaster Deryk",
     "phrases": {
-      "1": {"text": ["I will be teaching the villagers in self-defense, starting tomorrow morning. If you wish to join, please come to the village square at 09:00."], "choices": [{"command": "MEET_QUEST_PERSON", "nextId": "2"}]},
-      "2": {
+      "1": {"text": ["Good evening. I'm swordmaster Deryk."], "choices": [{"command": "MEET_QUEST_PERSON", "nextId": "2"}]},
+      "2": {"text": ["I will be teaching the villagers in self-defense, starting tomorrow morning. If you wish to join, please come to the village square at 09:00."]},
+      "3": {
         "choices": [
-          {"condition": ["diplomat2"], "text": "[Diplomat 2] *Request to be taught right now.*", "nextId": "3"},
+          {"condition": ["diplomat2"], "text": "[Diplomat 2] *Request to be taught right now.*", "nextId": "4"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
-      "3": {"text": ["Ah, I see you are eager to learn. Very well, I will teach everyone in your party right now."]},
-      "4": {"text": ["{SPEED=0.2} . . . . . . . . ."], "choices": [{"command": "RECEIVE_SPELLS", "nextId": "5"}]},
-      "5": {"text": ["Now everyone in your party can use the ability {COLOR=BLUE}Focused Strike{COLOR=BLACK} in battle. It's variation of the regular Strike ability."]},
-      "6": {"text": ["If you want me to teach Focused Strike to other party members, please bring them here. I will teach them as well."], "choices": [{"command": "COMPLETE_QUEST", "nextId": "6"}]}
+      "4": {"text": ["Ah, I see you are eager to learn. Very well, I will teach everyone in your party right now."]},
+      "5": {"text": ["{SPEED=0.2} . . . . . . . . ."], "choices": [{"command": "RECEIVE_SPELLS", "nextId": "6"}]},
+      "6": {"text": ["Now everyone in your party can use the ability {COLOR=BLUE}Focused Strike{COLOR=BLACK} in battle. It's variation of the regular Strike ability."]},
+      "7": {"text": ["If you want me to teach Focused Strike to other party members, please bring them here. I will teach them as well."], "choices": [{"command": "COMPLETE_QUEST", "nextId": "7"}]}
     }
   }
 }

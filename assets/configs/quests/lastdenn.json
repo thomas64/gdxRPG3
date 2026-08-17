@@ -88,7 +88,7 @@
   "quest_godless_arms"     : {
     "title"   : "The Godless Arms [M]",
     "entityId": "santino",
-    "summary" : "Father Santino found the Sovereign Rite in the oldest of the holy books. Ardor has been paying Ulrog for years, and Ulrog protects what he has bought: no blade will land on him and no fire will catch. But no God has any claim upon the Godless Arms: a blade, a shield, a ring and a torc, made long ago by hands that asked for no blessing. Gather all four and what is left of Ardor is a man.",
+    "summary" : "Father Santino found the Sovereign Rite in the oldest of the holy books. Ulrog protects what Ardor has bought: no blade will land on him and no fire will catch. But no God has any claim upon the Godless Arms: a blade, a shield, a ring and a torc, made long ago by hands that asked for no blessing. Gather all four and what is left of Ardor is only a man.",
     "tasks"   : {
       "1": {
         "comment"   : "TODO: the four items and the four locations do not exist yet. Change type to FIND_ITEM once they do.",
