@@ -92,6 +92,7 @@ class MapManager : ProfileObserver {
 
     fun updateConditionLayers() {
         currentMap.conditionBlockers.forEach { it.update() }
+        currentMap.temporaryBlockers.forEach { it.update() }
         currentMap.upperTextures.forEach { it.update() }
         currentMap.lowerTextures.forEach { it.update() }
     }

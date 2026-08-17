@@ -7,23 +7,30 @@ import ktx.tiled.propertyOrNull
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.mapManager
+import nl.t64.cot.components.condition.areAllTrue
 import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.screens.world.entity.EntityState
 import nl.t64.cot.subjects.BlockObserver
 import nl.t64.cot.subjects.BumpObserver
 
 
-// todo, naam van de maptitle opslaan bij de rectangle in de savegame.
 class GameMapTemporaryBlocker(
+    private val mapTitle: String,
     rectObject: RectangleMapObject
 ) : GameMapObject(rectObject.rectangle), BlockObserver, BumpObserver {
 
+    private val conditions: List<String> = createConditions(rectObject)
     private val allowedDirection: Direction = createDirection(rectObject)
-    private var isActive: Boolean = !gameData.removedMapBlockers.contains(rectangle)
+    private val isUnlocked: Boolean get() = gameData.removedBlockers.contains(mapTitle, rectangle)
+    private val shouldBeActive: Boolean get() = !isUnlocked && conditions.areAllTrue()
+    private var isActive: Boolean = shouldBeActive
 
     init {
+        if (!isUnlocked) {
+            brokerManager.bumpObservers.addObserver(this)
+        }
         if (isActive) {
-            registerObservers()
+            brokerManager.blockObservers.addObserver(this)
         }
     }
 
@@ -40,32 +47,28 @@ class GameMapTemporaryBlocker(
                               playerPosition: Vector2,
                               playerDirection: Direction
     ) {
-        if (!isActive) return
         if (!checkRect.overlaps(rectangle)) return
         if (playerDirection != allowedDirection) return
 
-        gameData.removedMapBlockers.add(rectangle)
-        isActive = false
+        gameData.removedBlockers.add(mapTitle, rectangle)
+        brokerManager.bumpObservers.removeObserver(this)
+        update()
+    }
+
+    fun update() {
+        if (isActive == shouldBeActive) return
+
+        isActive = shouldBeActive
         changeBlocker()
     }
 
     private fun changeBlocker() {
         if (isActive) {
-            registerObservers()
+            brokerManager.blockObservers.addObserver(this)
         } else {
-            unregisterObservers()
+            brokerManager.blockObservers.removeObserver(this)
         }
         mapManager.setTiledGraph()
-    }
-
-    private fun registerObservers() {
-        brokerManager.blockObservers.addObserver(this)
-        brokerManager.bumpObservers.addObserver(this)
-    }
-
-    private fun unregisterObservers() {
-        brokerManager.blockObservers.removeObserver(this)
-        brokerManager.bumpObservers.removeObserver(this)
     }
 
     private fun createDirection(rectObject: RectangleMapObject): Direction {

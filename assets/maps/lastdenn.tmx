@@ -391,7 +391,7 @@
     <property name="condition" value="is_lastdenn_entrance_closed"/>
    </properties>
   </object>
-  <object id="240" type="blocker" x="912" y="2400" width="24" height="48">
+  <object id="240" type="tempblocker" x="912" y="2400" width="24" height="48">
    <properties>
     <property name="allowedDirection" value="west"/>
     <property name="condition" value="_time_after_18:00"/>

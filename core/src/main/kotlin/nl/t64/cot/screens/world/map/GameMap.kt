@@ -93,7 +93,7 @@ class GameMap(
     val lights: List<GameMapLight> = loader.loadAllRectanglesAndTransform(LIGHTS_LAYER) { GameMapLight(it) }
     val torches: List<GameMapParticle> = loader.loadWhereNameEqualsAndTransform(PARTICLES_LAYER, "torch") { GameMapParticle(it) }
     val conditionBlockers: List<GameMapConditionBlocker> = loader.loadWhereTypeEqualsAndTransform(QUEST_LAYER, "blocker") { GameMapConditionBlocker(it) }
-    val temporaryBlockers: List<GameMapTemporaryBlocker> = loader.loadWhereTypeEqualsAndTransform(QUEST_LAYER, "tempBlocker") { GameMapTemporaryBlocker(it) }
+    val temporaryBlockers: List<GameMapTemporaryBlocker> = loader.loadWhereTypeEqualsAndTransform(QUEST_LAYER, "tempBlocker") { GameMapTemporaryBlocker(mapTitle, it) }
     val upperTextures: List<GameMapConditionTexture> = loader.loadAllTexturesAndTransform(UPPER_TEXTURE_LAYER) { GameMapConditionTexture(it) }
     val lowerTextures: List<GameMapConditionTexture> = loader.loadAllTexturesAndTransform(LOWER_TEXTURE_LAYER) { GameMapConditionTexture(it) }
     val sparkles: List<GameMapSparkle> = loader.loadWhereNameStartsWithAndTransform(REST_LAYER, "sparkle") { GameMapSparkle(it) }
