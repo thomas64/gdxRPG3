@@ -179,11 +179,6 @@ class GameMap(
             }
     }
 
-    fun isOutsideMap(point: Vector2): Boolean {
-        return point.x < 0 || point.x >= pixelWidth
-            || point.y < 0 || point.y >= pixelHeight
-    }
-
     fun dispose() {
         torches.forEach { it.dispose() }
         tiledMap.dispose()

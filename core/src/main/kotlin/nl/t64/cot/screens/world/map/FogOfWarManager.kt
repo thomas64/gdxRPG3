@@ -7,10 +7,13 @@ import nl.t64.cot.screens.world.Camera
 import nl.t64.cot.subjects.ProfileObserver
 
 
+private const val UPDATE_INTERVAL = 0.25f
+
 class FogOfWarManager : ProfileObserver {
 
     private lateinit var fogOfWar: FogOfWar
     private lateinit var currentMap: GameMap
+    private var timer: Float = 0f
 
     override fun onNotifyCreateProfile(profileManager: ProfileManager) {
         fogOfWar = FogOfWar()
@@ -33,7 +36,11 @@ class FogOfWarManager : ProfileObserver {
     }
 
     fun update(playerPosition: Vector2, dt: Float) {
-        fogOfWar.update(playerPosition, currentMap, dt)
+        timer += dt
+        if (timer > UPDATE_INTERVAL) {
+            timer -= UPDATE_INTERVAL
+            fogOfWar.update(playerPosition, currentMap)
+        }
     }
 
     fun draw(shapeRenderer: ShapeRenderer) {
