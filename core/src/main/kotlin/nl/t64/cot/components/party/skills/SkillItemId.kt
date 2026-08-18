@@ -54,9 +54,9 @@ enum class SkillItemId : SuperEnum {
             SWORD to AXE,
             AXE to SPEAR,
             SPEAR to SWORD,
-            DAGGER to THROW,
-            THROW to BOW,
-            BOW to DAGGER,
+            DAGGER to BOW,
+            BOW to THROW,
+            THROW to DAGGER,
             STAFF_FIRE to STAFF_WIND,
             STAFF_WIND to STAFF_THUNDER,
             STAFF_THUNDER to STAFF_FIRE

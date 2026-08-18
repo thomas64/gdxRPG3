@@ -53,7 +53,7 @@ class ElementalAttack(
                 Character modifier:                 ${String.format("%3d", attacker.character.getCalculatedTotalDamage() - weaponDamage)}
                 Attack type multiplier:             ${getMultiplierForVisual(abilityItem.damageMultiplier)}
                 Gambler modifier (+/-):             ${String.format("%3d", getGamblerBonusForVisual())}
-                Disadvantage multiplier:            ${getDisadvantagePenaltyDamageForVisual()}
+                (Dis)advantage multiplier:          ${getAdvantageMultiplierDamageForVisual()}
                 -------------------------------------------
                 Total damage:                       ${String.format("%3.0f", calculateDamageForVisual())}
                 Critical hit damage:                ${String.format("%3.0f", calculateCriticalDamageForVisual())}

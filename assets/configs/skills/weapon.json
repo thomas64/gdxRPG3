@@ -46,7 +46,7 @@
       "- 'Dagger' increases your chance to hit with daggers in combat.",
       "  Each rank in 'Dagger' increases 'Chance to hit' by 5%.",
       "",
-      "- Dagger advantage: Bow > Dagger > Throw.",
+      "- Dagger advantage: Throw > Dagger > Bow.",
       "  Daggers also have advantage or disadvantage against",
       "  certain weaponless enemies."
     ]
@@ -59,7 +59,7 @@
       "- 'Throw' increases your chance to hit with throwing weapons in combat.",
       "  Each rank in 'Throw' increases 'Chance to hit' by 5%.",
       "",
-      "- Throwing weapon advantage: Dagger > Throw > Bow.",
+      "- Throwing weapon advantage: Bow > Throw > Dagger.",
       "  Throwing weapons also have advantage or disadvantage against",
       "  certain weaponless enemies."
     ]
@@ -72,7 +72,7 @@
       "- 'Bow' increases your chance to hit with bows in combat.",
       "  Each rank in 'Bow' increases 'Chance to hit' by 5%.",
       "",
-      "- Bow advantage: Throw > Bow > Dagger.",
+      "- Bow advantage: Dagger > Bow > Throw.",
       "  Bows also have advantage or disadvantage against",
       "  certain weaponless enemies."
     ]

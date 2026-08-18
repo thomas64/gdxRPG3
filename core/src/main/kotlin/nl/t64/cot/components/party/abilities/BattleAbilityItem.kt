@@ -12,10 +12,11 @@ import kotlin.random.Random
 
 private const val HIT_ADVANTAGE = 10
 private const val HIT_DISADVANTAGE = -10
-private const val DAMAGE_NORMAL_DIVISOR = 1.0f
-private const val DAMAGE_DISADVANTAGE_DIVISOR = 1.5f
-private const val CRIT_HIT_ADVANTAGE = 30
-private const val CRIT_HIT_DISADVANTAGE = -30
+private const val DAMAGE_ADVANTAGE_MULTIPLIER = 1.0f
+private const val DAMAGE_NORMAL_MULTIPLIER = 1.0f
+private const val DAMAGE_DISADVANTAGE_MULTIPLIER = 0.75f
+private const val CRIT_HIT_ADVANTAGE = 25
+private const val CRIT_HIT_DISADVANTAGE = -25
 private const val CRIT_DAMAGE_MULTIPLIER = 1.5f
 private const val AP_USE_ALL = 99
 
@@ -184,12 +185,12 @@ abstract class BattleAbilityItem(
     private fun calculateDamage(): Float {
         val baseDamage: Float = attacker.character.getCalculatedTotalDamage() * abilityItem.damageMultiplier
         val damageWithGambler: Float = attacker.character.applyGamblerBonusTo(baseDamage)
-        return damageWithGambler / getDisadvantageDamageDivisor()
+        return damageWithGambler * getAdvantageMultiplierDamage()
     }
 
     protected fun calculateDamageForVisual(): Float {
         val baseDamage: Float = attacker.character.getCalculatedTotalDamage() * abilityItem.damageMultiplier
-        return baseDamage / getDisadvantageDamageDivisor()
+        return baseDamage * getAdvantageMultiplierDamage()
     }
 
     protected fun Float.minusProtection(): Int {
@@ -246,8 +247,8 @@ abstract class BattleAbilityItem(
             ?: 0
     }
 
-    protected fun getDisadvantagePenaltyDamageForVisual(): String {
-        return if (hasWeaponTriangleDisadvantage()) "x 0.666" else "x 1.0"
+    protected fun getAdvantageMultiplierDamageForVisual(): String {
+        return getMultiplierForVisual(getAdvantageMultiplierDamage())
     }
 
     private fun possibleGetGrayPrefix(): String {
@@ -273,11 +274,11 @@ abstract class BattleAbilityItem(
         }
     }
 
-    private fun getDisadvantageDamageDivisor(): Float {
-        return if (hasWeaponTriangleDisadvantage()) {
-            DAMAGE_DISADVANTAGE_DIVISOR
-        } else {
-            DAMAGE_NORMAL_DIVISOR
+    private fun getAdvantageMultiplierDamage(): Float {
+        return when {
+            hasWeaponTriangleAdvantage() -> DAMAGE_ADVANTAGE_MULTIPLIER
+            hasWeaponTriangleDisadvantage() -> DAMAGE_DISADVANTAGE_MULTIPLIER
+            else -> DAMAGE_NORMAL_MULTIPLIER
         }
     }
 
