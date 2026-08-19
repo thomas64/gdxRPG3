@@ -19,6 +19,10 @@ class LootContainer {
             .forEach { it.value.possibleResetSparkle(originalLoot[it.key]!!) }
 
         loot.filter { it.key.startsWith("quest") }
+            // the rewards for mother fairy should not be reset. they should only be given once and aren't even quest related.
+            // they are given when they first meet mother fairy. not when they complete the quest. without this filter,
+            // that could happen, in another cycle, when completing the quest. that's not what we want.
+            .filterNot { it.key == "quest_mother_fairy" }
             .forEach { it.value.resetQuest(originalLoot[it.key]!!) }
 
         loot.filterNot { it.key.startsWith("chest") }
