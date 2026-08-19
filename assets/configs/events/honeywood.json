@@ -44,8 +44,9 @@
     "entityId"      : "mozes"
   },
   "event_quest_honeywood_elder"          : {
-    "type"      : "unhide_optional_task",
+    "type"      : "unhide_task",
     "condition" : ["_c_==_x_q_quest_honeywood_elder", "alone_in_party"],
+    "taskId"    : "10",
     "doesRepeat": true
   },
   "event_honeywood_farm_back_door_before": {

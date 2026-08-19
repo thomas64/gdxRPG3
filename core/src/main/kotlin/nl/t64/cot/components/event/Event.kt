@@ -28,6 +28,7 @@ data class Event(
     private val conditions: List<String> = emptyList(),
     private val conversationId: String? = null,
     private val entityId: String? = null,
+    private val taskId: String? = null,
     private val text: List<String> = emptyList(),
     private val doesRepeat: Boolean = false,
 ) {
@@ -101,10 +102,10 @@ data class Event(
                 playSe(AudioEvent.SE_REWARD)
             }
 
-            type == "unhide_optional_task" -> {
+            type == "unhide_task" -> {
                 val questId: String = id.substringAfter("event_")
                 val quest: QuestGraph = gameData.quests.getQuestById(questId)
-                quest.forceUnhideAllOptionalTasks()
+                quest.forceUnhideTaskBy(taskId!!)
             }
 
             else -> {

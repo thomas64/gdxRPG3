@@ -320,7 +320,7 @@
         "linkedWith"  : ["2", "8"]
       },
       "10": {
-        "comment"                 : "WARNING: One link to 10 from honeywood_forest_ardor_1.tmx",
+        "comment"                 : "WARNING: One link to 10 from honeywood_forest_ardor_1.tmx, and one from event_quest_honeywood_elder.",
         "taskPhrase"              : "                  [Optional] Locate Luana's body in Ardor's domain.",
         "type"                    : "KILL",
         "isHidden"                : true,

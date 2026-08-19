@@ -292,10 +292,8 @@ data class QuestGraph(
         return tasks.values.any { conversationId in it.conversationIds }
     }
 
-    fun forceUnhideAllOptionalTasks() {
-        tasks.filterValues { it.isOptional }
-            .filterValues { it.isHidden }
-            .forEach { it.value.isHidden = false }
+    fun forceUnhideTaskBy(taskId: String) {
+        tasks[taskId]!!.isHidden = false
     }
 
     private fun unhideTaskWithLinkedTask(questTask: QuestTask) {
