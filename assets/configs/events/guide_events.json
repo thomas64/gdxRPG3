@@ -45,8 +45,8 @@
       "The floating markers above enemies show how dangerous",
       "a battle would be for your [BLUE]current[BLACK] party.",
       "",
-      "Downward [GREEN]chevrons[BLACK] mean the enemy is weaker, a [GOLD]dash[BLACK]",
-      "means an even match, and upward [ORANGE]chevrons[BLACK] mean stronger.",
+      "[GREEN]Downward chevrons[BLACK] mean the enemy is weaker, a [GOLD]dash[BLACK]",
+      "means an even match, and [ORANGE]upward chevrons[BLACK] mean stronger.",
       "More chevrons means a bigger gap.",
       "",
       "A [RED]red cross[BLACK] warns the enemy far outmatches you.",
@@ -99,7 +99,7 @@
   },
   "guide_event_xp"                   : {
     "type"     : "tutorial",
-    "condition": ["xp_>=_15"],
+    "condition": ["xp_>=_30"],
     "text"     : [
       "Weapons require a minimum rank of Intelligence, Dexterity, or",
       "Strength. Check the weapon's description for that requirement.",

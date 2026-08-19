@@ -265,7 +265,7 @@
     "tasks"             : {
       "1": {
         "taskPhrase"   : "Visit the Honeywood inn in the evening to find out who the special guest is.",
-        "updatedPhrase": "Meet Swordmaster Deryk, who came to teach the villagers how to defend themselves.",
+        "updatedPhrase": "Meet Swordmaster Deryk at the inn at 19:15; he has come to teach the villagers how to defend themselves.",
         "type"         : "MEET_PERSON",
         "linkedWith"   : ["2"]
       },

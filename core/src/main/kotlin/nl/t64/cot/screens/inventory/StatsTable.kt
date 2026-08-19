@@ -73,6 +73,10 @@ internal class StatsTable(
         fillCalcs()
     }
 
+    override fun doPreBattleAction() {
+        playSe(AudioEvent.SE_MENU_ERROR)
+    }
+
     override fun doAction() {
         if (isCalcsSelected()) return
         hideTooltip()
