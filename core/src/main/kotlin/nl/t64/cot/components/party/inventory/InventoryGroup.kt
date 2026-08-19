@@ -40,7 +40,7 @@ enum class InventoryGroup(override val title: String) : SuperEnum {
     }
 
     fun isStackable(): Boolean {
-        return this in listOf(POTION, RESOURCE)
+        return this in listOf(POTION, ITEM, RESOURCE)
     }
 
     fun getDefaultShopAmount(): Int {

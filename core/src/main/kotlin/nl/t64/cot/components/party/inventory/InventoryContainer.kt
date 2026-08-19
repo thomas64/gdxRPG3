@@ -50,12 +50,15 @@ open class InventoryContainer(numberOfSlots: Int = 0) {
         return inventory[index]
     }
 
+    // todo, of een item unique is, wordt alleen in deze container gecontroleerd.
+    //  als je een uniek item in de storage doet, en wordt er een reset kopie opgepakt in een nieuwe cycle,
+    //  dan zijn er twee, die InventoryStacksMerger zal samenvoegen tot één stack.
     fun autoSetItem(newItem: InventoryItem) {
-        if (newItem.isStackable) {
-            addResource(newItem)
-        } else if (newItem.isUnique) {
+        if (newItem.isUnique) {
             findFirstSlotIndexWithItem(newItem.id)
                 ?: addItemAtEmptySlot(newItem)
+        } else if (newItem.isStackable) {
+            addResource(newItem)
         } else {
             addItemAtEmptySlot(newItem)
         }
