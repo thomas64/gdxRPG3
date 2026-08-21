@@ -14,10 +14,7 @@ import ktx.assets.disposeSafely
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.resourceManager
-import nl.t64.cot.components.battle.AttackData
-import nl.t64.cot.components.battle.Character
-import nl.t64.cot.components.battle.EnemyItem
-import nl.t64.cot.components.battle.Participant
+import nl.t64.cot.components.battle.*
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.abilities.AbilityItem
 import nl.t64.cot.components.party.abilities.BattleAbilityItem
@@ -369,8 +366,10 @@ class BattleScreenBuilder {
     private fun GdxList<String>.fillWithActions(currentParticipant: Participant,
                                                 areEnemiesInRange: Boolean,
                                                 isAbleToMove: Boolean): GdxList<String> {
+        val curSp: Int = currentParticipant.character.currentSp
         val attackAp: Int = currentParticipant.getCheapestUsableAttackApAnd(areEnemiesInRange)
         val moveApInt: Int = if (isAbleToMove) 1 else AP_UNAVAILABLE
+        val pushOnApInt: Int = if (curSp >= PUSH_ON_SP) 0 else AP_UNAVAILABLE
         val curAp: Int = maxOf(1, currentParticipant.currentAP)
         val maxAp: Int = currentParticipant.maximumAP
         val moveApString: String = buildMoveApStringFrom(curAp)
@@ -387,6 +386,7 @@ class BattleScreenBuilder {
             String.format("%-11s%7s", "Party",      "")                 to 0,
             String.format("%-11s%7s", "Flee party", "$fleeAp AP")       to fleeAp.toInt(),
             String.format("%-11s%7s", "Delay turn", "1 AP")             to 1,
+            String.format("%-11s%7s", "Push on",    "$PUSH_ON_SP SP")   to pushOnApInt,
             String.format("%-11s%7s", "Rest",       "$curAp AP")        to 1,
             String.format("%-11s%7s", "End turn",   "")                 to 0
             // @formatter:on
@@ -402,7 +402,7 @@ class BattleScreenBuilder {
         if (currentParticipant.currentAP <= 1
             || this.items[buttonTableMainMenuIndex].startsWith("[GRAY]")
         ) {
-            buttonTableMainMenuIndex = 10
+            buttonTableMainMenuIndex = 11
         }
         this.selectedIndex = buttonTableMainMenuIndex
         return this

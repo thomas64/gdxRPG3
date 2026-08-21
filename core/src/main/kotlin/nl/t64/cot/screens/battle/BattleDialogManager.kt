@@ -170,6 +170,20 @@ class BattleDialogManager(
         }
     }
 
+    fun showPushOnDialog(
+        onConfirmed: (PushOnAction) -> Unit
+    ) {
+        val pushOnAction = PushOnAction(currentParticipant.invoke())
+        val (isAble, message) = pushOnAction.isAble()
+        if (!isAble) {
+            val dialog = MessageDialog(message)
+            dialog.show(stage, AudioEvent.SE_MENU_ERROR)
+        } else {
+            val dialog = QuestionDialog(message) { onConfirmed.invoke(pushOnAction) }
+            dialog.show(stage, AudioEvent.SE_MENU_CONFIRM, 0)
+        }
+    }
+
     fun showConfirmRestDialog(
         onConfirmed: (RestAction) -> Unit
     ) {

@@ -334,6 +334,10 @@ class BattleScreen : Screen {
         dialogManager.showDelayTurnDialog(onConfirmed = { delayTurnConfirmed(it) })
     }
 
+    private fun showPushOnDialog() {
+        dialogManager.showPushOnDialog(onConfirmed = { pushOnConfirmed(it) })
+    }
+
     private fun showConfirmRestDialog() {
         dialogManager.showConfirmRestDialog(onConfirmed = { restConfirmed(it) })
     }
@@ -384,6 +388,11 @@ class BattleScreen : Screen {
     private fun delayTurnConfirmed(delayTurnAction: DelayTurnAction) {
         menuManager.buttonTableAction.remove()
         confirmManager.delayTurnConfirmed(delayTurnAction)
+    }
+
+    private fun pushOnConfirmed(pushOnAction: PushOnAction) {
+        menuManager.buttonTableAction.remove()
+        confirmManager.pushOnConfirmed(pushOnAction)
     }
 
     private fun restConfirmed(restAction: RestAction) {
@@ -556,6 +565,7 @@ class BattleScreen : Screen {
             ::showPreviewDialog,
             ::showFleeDialog,
             ::showDelayTurnDialog,
+            ::showPushOnDialog,
             ::showConfirmRestDialog,
             ::endTurn,
             ::moveConfirmed,

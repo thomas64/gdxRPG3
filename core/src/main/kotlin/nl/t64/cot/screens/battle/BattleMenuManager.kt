@@ -75,6 +75,7 @@ class BattleMenuManager(
         showPreviewDialog: (BattleAbilityItem, String) -> Unit,
         showFleeDialog: () -> Unit,
         showDelayTurnDialog: () -> Unit,
+        showPushOnDialog: () -> Unit,
         showConfirmRestDialog: () -> Unit,
         endTurn: () -> Unit,
         confirmMovement: () -> Unit,
@@ -85,7 +86,7 @@ class BattleMenuManager(
         showConfirmWeaponDialog: (BattleWeaponItem) -> Unit
     ) {
         preBattleMainMenuListener = SelectPreBattleListener(winBattle, openPauseMenu, showInventoryScreenPreBattle, ::selectEquipmentIsSelectedInPreBattle, ::previewAttacksIsSelectedInPreBattle, startBattle)
-        actionMainMenuListener = SelectActionListener(winBattle, openPauseMenu, ::attackIsSelectedInAction, ::specialIsSelectedInAction, ::moveIsSelectedInAction, ::potionIsSelectedInAction, ::equipmentIsSelectedInAction, ::previewIsSelectedInAction, showInventoryScreen, showFleeDialog, showDelayTurnDialog, showConfirmRestDialog, endTurn)
+        actionMainMenuListener = SelectActionListener(winBattle, openPauseMenu, ::attackIsSelectedInAction, ::specialIsSelectedInAction, ::moveIsSelectedInAction, ::potionIsSelectedInAction, ::equipmentIsSelectedInAction, ::previewIsSelectedInAction, showInventoryScreen, showFleeDialog, showDelayTurnDialog, showPushOnDialog, showConfirmRestDialog, endTurn)
         preBattleEquipmentListener = SelectWeaponListener(showConfirmWeaponDialogPreBattle, ::returnToSelectHeroInEquipmentInPreBattle)
         actionEquipmentListener = SelectWeaponListener(showConfirmWeaponDialog, ::returnToActionMainMenu)
         preBattleHeroForEquipmentListener = SelectHeroListener(heroIsSelectedForPreEquipment, ::returnToPreBattleMainMenu)

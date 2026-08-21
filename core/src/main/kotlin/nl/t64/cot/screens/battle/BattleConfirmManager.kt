@@ -27,7 +27,8 @@ class BattleConfirmManager(
         Utils.runWithDelay(0.5f) {
             FloatingNumberEffect(battleFieldTable.invoke(),
                                  currentParticipant.invoke().character.name,
-                                 message, color)
+                                 message,
+                                 color)
                 .floatDown()
             playSe(AudioEvent.SE_POTION)
             Utils.runWithDelay(DEFAULT_FLOATING_NUMBER_DELAY) {
@@ -66,13 +67,30 @@ class BattleConfirmManager(
         }
     }
 
+    fun pushOnConfirmed(pushOnAction: PushOnAction) {
+        val message: String = pushOnAction.handle()
+        setDelayingTurn.invoke(true)
+        Utils.runWithDelay(0.5f) {
+            FloatingNumberEffect(battleFieldTable.invoke(),
+                                 currentParticipant.invoke().character.name,
+                                 message,
+                                 Color.YELLOW)
+                .floatDown()
+            playSe(AudioEvent.SE_CAST_BUFF)
+            Utils.runWithDelay(DEFAULT_FLOATING_NUMBER_DELAY) {
+                setDelayingTurn.invoke(false)
+            }
+        }
+    }
+
     fun restConfirmed(restAction: RestAction) {
         val message: String = restAction.handle()
         setDelayingTurn.invoke(true)
         Utils.runWithDelay(0.5f) {
             FloatingNumberEffect(battleFieldTable.invoke(),
                                  currentParticipant.invoke().character.name,
-                                 message, Color.GREEN)
+                                 message,
+                                 Color.GREEN)
                 .floatDown()
             playSe(AudioEvent.SE_POTION)
             Utils.runWithDelay(DEFAULT_FLOATING_NUMBER_DELAY) {

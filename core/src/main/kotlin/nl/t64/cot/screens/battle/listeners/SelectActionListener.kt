@@ -20,6 +20,7 @@ class SelectActionListener(
     private val selectParty: () -> Unit,
     private val selectFlee: () -> Unit,
     private val selectDelayTurn: () -> Unit,
+    private val selectPushOn: () -> Unit,
     private val selectRest: () -> Unit,
     private val selectEndTurn: () -> Unit
 ) : InputListener() {
@@ -64,6 +65,7 @@ class SelectActionListener(
                 "Party" in selected -> selectParty.invoke()
                 "Flee" in selected -> selectFlee.invoke()
                 "Delay" in selected -> selectDelayTurn.invoke()
+                "Push" in selected -> selectPushOn.invoke()
                 "Rest" in selected -> selectRest.invoke()
                 "End" in selected -> selectEndTurn.invoke()
             }
