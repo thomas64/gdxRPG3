@@ -4,7 +4,7 @@
     "is_special" : true,
     "target"     : "ALLY_NEAR",
     "ap"         : 3,
-    "sp"         : 4,
+    "sp"         : 6,
     "skill"      : "HEALER",
     "min_skill"  : 1,
     "description": [
@@ -18,7 +18,7 @@
     "is_special" : true,
     "target"     : "ALLY_NEAR",
     "ap"         : 4,
-    "sp"         : 5,
+    "sp"         : 10,
     "skill"      : "HEALER",
     "min_skill"  : 1,
     "description": [
@@ -31,7 +31,7 @@
     "is_special" : true,
     "target"     : "ALL_ALLIES",
     "ap"         : 99,
-    "sp"         : 5,
+    "sp"         : 8,
     "skill"      : "TROUBADOUR",
     "min_skill"  : 1,
     "description": [
@@ -46,7 +46,7 @@
     "is_special" : true,
     "target"     : "ALL_ENEMIES",
     "ap"         : 99,
-    "sp"         : 5,
+    "sp"         : 8,
     "skill"      : "TROUBADOUR",
     "min_skill"  : 1,
     "description": [

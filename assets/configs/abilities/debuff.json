@@ -5,7 +5,7 @@
     "is_special" : true,
     "target"     : "ENEMY_RANGE_3",
     "ap"         : 4,
-    "sp"         : 5,
+    "sp"         : 8,
     "skill"      : "WIZARD",
     "min_skill"  : 1,
     "description": [
@@ -21,7 +21,7 @@
     "is_special" : true,
     "target"     : "ENEMY_RANGE_3",
     "ap"         : 4,
-    "sp"         : 5,
+    "sp"         : 8,
     "skill"      : "WIZARD",
     "min_skill"  : 1,
     "description": [
@@ -37,7 +37,7 @@
     "is_special" : true,
     "target"     : "ENEMY_RANGE_3",
     "ap"         : 4,
-    "sp"         : 5,
+    "sp"         : 8,
     "skill"      : "WIZARD",
     "min_skill"  : 1,
     "description": [
@@ -53,7 +53,7 @@
     "is_special" : true,
     "target"     : "ENEMY_RANGE_3",
     "ap"         : 4,
-    "sp"         : 5,
+    "sp"         : 8,
     "skill"      : "WIZARD",
     "min_skill"  : 1,
     "description": [

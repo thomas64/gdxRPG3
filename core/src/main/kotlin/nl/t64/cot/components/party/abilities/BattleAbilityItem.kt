@@ -20,6 +20,9 @@ private const val CRIT_HIT_DISADVANTAGE = -25
 private const val CRIT_DAMAGE_MULTIPLIER = 1.5f
 private const val AP_USE_ALL = 99
 
+private const val MENU_LINE_WIDTH: Int = 30
+private const val SP_FIELD_WIDTH: Int = 8
+
 abstract class BattleAbilityItem(
     val abilityItem: AbilityItem,
     val attacker: Participant
@@ -47,13 +50,10 @@ abstract class BattleAbilityItem(
 
     override fun toString(): String {
         if (name == "Back") return name
-        val apField = String.format("%3d AP", ap)
-        val spField = if (sp > 0) " | $sp SP" else "       "
-        val totalWidth = 29
-        val leftPart = name
-        val rightPart = "$apField$spField"
-        val spaces = " ".repeat((totalWidth - leftPart.length - rightPart.length).coerceAtLeast(1))
-        return "${possibleGetGrayPrefix()}$leftPart$spaces$rightPart"
+        val apField: String = String.format("%3d AP", ap)
+        val spField: String = if (sp > 0) String.format(" | %2d SP", sp) else " ".repeat(SP_FIELD_WIDTH)
+        val rightPart: String = apField + spField
+        return possibleGetGrayPrefix() + name.padEnd(MENU_LINE_WIDTH - rightPart.length) + rightPart
     }
 
     abstract fun createCopyForPreview(): BattleAbilityItem
