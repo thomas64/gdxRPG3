@@ -13,7 +13,6 @@ import kotlin.math.roundToInt
 
 internal const val TURN_THRESHOLD: Int = 200
 private const val BASE_TICK: Int = 10
-private const val MAX_CARRY_OVER_AP: Int = 2
 private const val PENALTY_AP: Int = 4
 
 class Participant(
@@ -71,7 +70,9 @@ class Participant(
             return
         }
 
-        currentAP = maximumAP + currentAP.coerceAtMost(MAX_CARRY_OVER_AP)
+        val stamina: Int = character.getCalculatedTotalStatOf(StatItemId.STAMINA)
+        val maxCarryOverAp: Int = stamina / 10    // min: 0, max: 4
+        currentAP = maximumAP + currentAP.coerceAtMost(maxCarryOverAp)
     }
 
     fun getPriorityFor(currentEnemy: Participant, isEnemyNextToHero: Boolean): Float {

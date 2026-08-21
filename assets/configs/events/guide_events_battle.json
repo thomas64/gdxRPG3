@@ -41,11 +41,14 @@
   "guide_event_battle_ap"                   : {
     "type": "tutorial",
     "text": [
-      "When you end your turn, if there is any AP left,",
-      "up to [BLUE]2 AP[BLACK] will be added to your next turn's AP.",
+      "When you end your turn, any AP you did not",
+      "spend can be added to your next turn's AP.",
+      "",
+      "Each 10 ranks in [BLUE]Stamina[BLACK] lets you",
+      "carry over 1 more AP.",
       "",
       "For now, with your current attributes,",
-      "it means you can have a maximum of 6 AP."
+      "it means you can have a maximum of 5 AP."
     ]
   },
   "guide_event_battle_turn_order"           : {

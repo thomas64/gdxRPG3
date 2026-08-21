@@ -63,9 +63,11 @@
     "maximum"    : 40,
     "upgrade"    : 0.10,
     "description": [
-      "- 'Stamina' represents energy for magic spells and other",
-      "  special attacks in combat.",
-      "  Each rank in 'Stamina' increases 'SP' by 2 points."
+      "- 'Stamina' represents energy for magic spells and other special attacks in combat.",
+      "  Each rank in 'Stamina' increases 'SP' by 2 points.",
+      "",
+      "- 'Stamina' lets you save unspent AP for your next turn in combat.",
+      "  Each 10 ranks in 'Stamina' lets you carry over 1 more AP."
     ]
   }
 }
