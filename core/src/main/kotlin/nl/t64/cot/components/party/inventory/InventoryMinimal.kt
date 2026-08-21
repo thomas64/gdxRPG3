@@ -32,9 +32,9 @@ enum class InventoryMinimal(override val title: String) : SuperEnum {
             return createMinimalMessage(item, StatItemId.WILLPOWER, hero)
         }
     },
-    MIN_CONSTITUTION("Min. Constitution") {
+    MIN_STAMINA("Min. Stamina") {
         override fun createMessageIfHeroHasNotEnoughFor(item: InventoryItem, hero: HeroItem): String? {
-            return createMinimalMessage(item, StatItemId.CONSTITUTION, hero)
+            return createMinimalMessage(item, StatItemId.STAMINA, hero)
         }
     };
 

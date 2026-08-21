@@ -34,8 +34,8 @@ data class InventoryItem(
     private val minStrength: Int = 0,
     @JsonProperty("min_willpower")
     private val minWillpower: Int = 0,
-    @JsonProperty("min_constitution")
-    private val minConstitution: Int = 0,
+    @JsonProperty("min_stamina")
+    private val minStamina: Int = 0,
     private val range: List<Int> = emptyList(),
     @JsonProperty("base_hit")
     private val baseHit: Int = 0,
@@ -101,7 +101,7 @@ data class InventoryItem(
             InventoryMinimal.MIN_DEXTERITY -> minDexterity
             InventoryMinimal.MIN_STRENGTH -> minStrength
             InventoryMinimal.MIN_WILLPOWER -> minWillpower
-            InventoryMinimal.MIN_CONSTITUTION -> minConstitution
+            InventoryMinimal.MIN_STAMINA -> minStamina
         }
     }
 
@@ -111,8 +111,8 @@ data class InventoryItem(
             StatItemId.DEXTERITY -> minDexterity
             StatItemId.STRENGTH -> minStrength
             StatItemId.WILLPOWER -> minWillpower
-            StatItemId.CONSTITUTION -> minConstitution
-            StatItemId.STAMINA,
+            StatItemId.STAMINA -> minStamina
+            StatItemId.CONSTITUTION,
             StatItemId.SPEED -> 0
         }
     }

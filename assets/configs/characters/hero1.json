@@ -76,8 +76,8 @@
       "strength"    : 20,
       "speed"       : 14,
       "willpower"   : 8,
-      "constitution": 20,
-      "stamina"     : 15
+      "constitution": 19,
+      "stamina"     : 16
     },
     "skills"   : {
       "alchemist": -1,
@@ -189,8 +189,8 @@
       "strength"    : 25,
       "speed"       : 12,
       "willpower"   : 15,
-      "constitution": 28,
-      "stamina"     : 8
+      "constitution": 17,
+      "stamina"     : 20
     },
     "skills"   : {
       "alchemist": -1,
