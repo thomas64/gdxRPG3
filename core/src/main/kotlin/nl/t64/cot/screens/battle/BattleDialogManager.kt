@@ -84,11 +84,26 @@ class BattleDialogManager(
         dialog.show(stage, AudioEvent.SE_MENU_ERROR)
     }
 
+    fun showConfirmPotionDialogPreBattle(
+        selectedPotion: BattlePotionItem,
+        onConfirmed: (PotionAction) -> Unit
+    ) {
+        val potionAction = PotionAction(currentParticipant.invoke(), selectedPotion, potionAp = 0)
+        showConfirmDrinkPotionDialog(potionAction, onConfirmed)
+    }
+
     fun showConfirmPotionDialog(
         selectedPotion: BattlePotionItem,
         onConfirmed: (PotionAction) -> Unit
     ) {
         val potionAction = PotionAction(currentParticipant.invoke(), selectedPotion)
+        showConfirmDrinkPotionDialog(potionAction, onConfirmed)
+    }
+
+    private fun showConfirmDrinkPotionDialog(
+        potionAction: PotionAction,
+        onConfirmed: (PotionAction) -> Unit
+    ) {
         val (isAble, message) = potionAction.isAble()
         if (!isAble) {
             val dialog = MessageDialog(message)

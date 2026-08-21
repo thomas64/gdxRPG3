@@ -276,6 +276,11 @@ class BattleScreen : Screen {
         menuManager.aHeroIsSelectedInPreviewEquipmentInPreBattle()
     }
 
+    private fun heroIsSelectedForPrePotion(selectedHero: String) {
+        preBattleSelectedHero = turnManager.getParticipant(selectedHero)
+        menuManager.aHeroIsSelectedInPotionInPreBattle()
+    }
+
     private fun heroIsSelectedForPrePreview(selectedHero: String) {
         preBattleSelectedHero = turnManager.getParticipant(selectedHero)
         menuManager.aHeroIsSelectedInPreviewAttacksInPreBattle()
@@ -306,6 +311,11 @@ class BattleScreen : Screen {
         dialogManager.showConfirmSpecialDialog(selectedSpecial = selectedSpecial,
                                                selectedTarget = target,
                                                onConfirmed = { specialConfirmed(it) })
+    }
+
+    private fun showConfirmPotionDialogPreBattle(selectedPotion: BattlePotionItem) {
+        dialogManager.showConfirmPotionDialogPreBattle(selectedPotion = selectedPotion,
+                                                       onConfirmed = { potionPreBattleConfirmed(it) })
     }
 
     private fun showConfirmPotionDialog(selectedPotion: BattlePotionItem) {
@@ -363,6 +373,11 @@ class BattleScreen : Screen {
             moveAction.handle()
             menuManager.returnToActionMainMenu()
         }
+    }
+
+    private fun potionPreBattleConfirmed(potionAction: PotionAction) {
+        confirmManager.potionConfirmed(potionAction)
+        menuManager.returnToSelectPotionInPreBattle()
     }
 
     private fun potionConfirmed(potionAction: PotionAction) {
@@ -561,6 +576,7 @@ class BattleScreen : Screen {
             ::showInventoryScreen,
             ::startBattle,
             ::heroIsSelectedForPreEquipment,
+            ::heroIsSelectedForPrePotion,
             ::heroIsSelectedForPrePreview,
             ::showPreviewDialog,
             ::showFleeDialog,
@@ -571,6 +587,7 @@ class BattleScreen : Screen {
             ::moveConfirmed,
             ::showConfirmAttackDialog,
             ::showConfirmSpecialDialog,
+            ::showConfirmPotionDialogPreBattle,
             ::showConfirmPotionDialog,
             ::showConfirmWeaponDialogPreBattle,
             ::showConfirmWeaponDialog

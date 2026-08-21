@@ -348,6 +348,7 @@ class BattleScreenBuilder {
     private fun GdxList<String>.fillWithPreBattleActions(): GdxList<String> {
         items.add("Party preparation")
         items.add("Select equipment")
+        items.add("Drink potion")
         items.add("Preview attacks")
         items.add("Start battle")
         this.selectedIndex = buttonTableMainMenuIndex

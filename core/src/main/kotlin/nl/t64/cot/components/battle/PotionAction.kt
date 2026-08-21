@@ -9,7 +9,8 @@ private const val POTION_AP: Int = 3
 
 class PotionAction(
     private val currentParticipant: Participant,
-    private val selectedPotion: BattlePotionItem
+    private val selectedPotion: BattlePotionItem,
+    private val potionAp: Int = POTION_AP
 ) {
     private val character: Character = currentParticipant.character
 
@@ -20,7 +21,7 @@ class PotionAction(
                     |
                     |It would have no effect!""".trimIndent().trimMargin()
             Pair(false, message)
-        } else if (currentParticipant.currentAP < POTION_AP) {
+        } else if (currentParticipant.currentAP < potionAp) {
             val message =
                 """${selectedPotion.description}
                     |
@@ -30,15 +31,19 @@ class PotionAction(
             val message =
                 """${selectedPotion.description}
                     |
-                    |Do you want to drink a ${selectedPotion.name}? ($POTION_AP AP)""".trimIndent().trimMargin()
+                    |Do you want to drink a ${selectedPotion.name}?${getApCostText()}""".trimIndent().trimMargin()
             Pair(true, message)
         }
     }
 
     fun handle(): Pair<String, Color> {
-        currentParticipant.currentAP -= POTION_AP
+        currentParticipant.currentAP -= potionAp
         gameData.inventory.autoRemoveItem(selectedPotion.id, 1)
         return character.drink(selectedPotion)
+    }
+
+    private fun getApCostText(): String {
+        return if (potionAp == 0) "" else " ($potionAp AP)"
     }
 
     private fun Character.drink(potion: BattlePotionItem): Pair<String, Color> {

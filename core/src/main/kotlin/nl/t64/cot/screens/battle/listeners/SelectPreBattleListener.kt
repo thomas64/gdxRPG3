@@ -12,6 +12,7 @@ class SelectPreBattleListener(
     private val pauseMenu: () -> Unit,
     private val inventoryScreen: () -> Unit,
     private val selectEquipment: () -> Unit,
+    private val selectPotion: () -> Unit,
     private val selectPreview: () -> Unit,
     private val startBattle: () -> Unit
 ) : InputListener() {
@@ -42,6 +43,7 @@ class SelectPreBattleListener(
             when {
                 "Party" in selected -> inventoryScreen.invoke()
                 "equipment" in selected -> selectEquipment.invoke()
+                "potion" in selected -> selectPotion.invoke()
                 "Preview" in selected -> selectPreview.invoke()
                 "Start" in selected -> startBattle.invoke()
             }
