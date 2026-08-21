@@ -34,7 +34,7 @@ object ConditionDatabase {
         "druid2"                        to { hasEnoughOfSkill(SkillItemId.DRUID,        2) },
         "loremaster2"                   to { hasEnoughOfSkill(SkillItemId.LOREMASTER,   2) },
 
-        "xp_>=_15"                      to { isXpGreaterThan(15) },
+        "xp_>=_30"                      to { isXpGreaterThan(30) },
         "!been_in_fairy_town"           to { !hasEventPlayed("enter_great_tree") },
         "been_in_fairy_town"            to { hasEventPlayed("enter_great_tree") },
         "defeated_orc_guards"           to { isBattleWon("quest_orc_guards") },
@@ -94,7 +94,7 @@ object ConditionDatabase {
             } else if (conditionId.startsWith("i_")) {
                 conditions[conditionId.removePrefix("i_")]!!.invoke()
             } else {
-                conditions[conditionId]!!.invoke()
+                conditions.getValue(conditionId).invoke()
             }
         }
     }

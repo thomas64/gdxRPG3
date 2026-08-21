@@ -205,19 +205,17 @@ abstract class Character(
     }
 
     fun getCalculatedTotalMagicProtection(): Int {
-        return (getCalculatedMagicProtection() + getPossibleExtraMagicProtection()).coerceAtMost(95)
-        // todo, max 95% protection, net zoals in armorReductionCalculator, want anders is er geen damage meer mogelijk.
-        // maar dit moet uberhaupt op een andere manier worden opgelost, zie onderstaande todo.
+        return (getCalculatedMagicProtection() + getPossibleExtraMagicProtection()).coerceAtMost(90)
+        // maximaal 90% protection, net zoals normale protection, zie armorReductionCalculator.
     }
 
-    // todo, willpower schaalt lineair terwijl fysieke protection via de curve met afnemende meeropbrengst loopt.
-    // hierdoor is willpower 40 al 80% reductie zonder iets extra's.
     fun getCalculatedMagicProtection(): Int {
+        // todo, moet nog een betere formule komen, maar dit is voorlopig een start. een curve ook?
         return getCalculatedTotalStatOf(StatItemId.WILLPOWER) * 2
     }
 
     fun getPossibleExtraMagicProtection(): Int {
-        return 0 // todo
+        return 0 // todo, resistance spell? magic protection potion? wat moet hier komen?
     }
 
     fun getCalculatedTotalDefense(): Int {

@@ -23,7 +23,9 @@ dependencies {
   testApi "org.assertj:assertj-core:$assertjVersion"
   testApi "org.mockito:mockito-core:$mockitoVersion"
   testApi "org.mockito.kotlin:mockito-kotlin:$kockitoVersion"
+  testApi platform("org.junit:junit-bom:$junitVersion")
   testApi "org.junit.jupiter:junit-jupiter:$junitVersion"
+  testRuntimeOnly "org.junit.platform:junit-platform-launcher"
 
   if (enableGraalNative == 'true') {
     implementation "io.github.berstanio:gdx-svmhelper-annotations:$graalHelperVersion"
