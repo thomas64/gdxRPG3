@@ -6,12 +6,10 @@ class EndTurnAction(
 ) {
 
     fun handle(): String {
-        val surplus: Int = currentParticipant.currentAP - currentParticipant.maximumAP
-        return when {
-            currentParticipant.currentAP == 0 || surplus == 2 -> ""
-            currentParticipant.currentAP == 1 || surplus == 1 -> "1 AP"
-            else -> "2 AP"
-        }
+        val carryOver: Int = currentParticipant.currentAP.coerceAtMost(currentParticipant.maxCarryOverAp)
+        val alreadyCarried: Int = (currentParticipant.currentAP - currentParticipant.maximumAP).coerceAtLeast(0)
+        val gain: Int = carryOver - alreadyCarried
+        return if (gain <= 0) "" else "$gain AP"
     }
 
 }

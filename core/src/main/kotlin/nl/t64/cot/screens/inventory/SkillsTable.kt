@@ -25,7 +25,8 @@ private const val SUBTITLE_PAD_TOP = 10f
 
 internal class SkillsTable(
     tooltip: PersonalityTooltip,
-    loadedFromSkillScreen: SkillItemId? = null
+    loadedFromSkillScreen: SkillItemId? = null,
+    private val shouldShowUpgradeArrows: Boolean = true
 ) : BaseTable(tooltip) {
 
     private val allSkills: List<SkillItem> get() = selectedHero.getAllSkillsAboveZero()
@@ -133,11 +134,18 @@ internal class SkillsTable(
         table.add(createImageOf(skillItem.id.name))
         val skillName = Label(skillItem.name, LabelStyle(font, Color.BLACK)).apply { name = skillItem.id.name }
         table.add(skillName).padLeft(SECOND_COLUMN_PAD_LEFT)
-        val upgrade = Label("^", LabelStyle(font, Color.PURPLE))
-        if (skillItem.canBeUpgraded()) table.add(upgrade) else table.add("")
+        possibleAddUpgradeArrowToTable(skillItem)
         table.add(skillItem.rank.toString())
         val totalExtra = selectedHero.getExtraSkillForVisualOf(skillItem)
         addExtraToTable(totalExtra)
+    }
+
+    private fun possibleAddUpgradeArrowToTable(skillItem: SkillItem) {
+        if (shouldShowUpgradeArrows && skillItem.canBeUpgraded()) {
+            table.add(Label("^", LabelStyle(font, Color.PURPLE)))
+        } else {
+            table.add("")
+        }
     }
 
     private fun SkillItem.canBeUpgraded(): Boolean {

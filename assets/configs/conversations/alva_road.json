@@ -15,6 +15,14 @@
       "20": {"text": ["It belongs to the traveler I met earlier, in a different time cycle."], "choices": [{"command": "EXIT", "nextId": "20"}]}
     }
   },
+  "alva_notice_no_bag"   : {
+    "name"   : "Mozes",
+    "phrases": {
+      "1": {"text": ["There's no bag here yet, but it will be here soon."]},
+      "2": {"text": ["It has to be!"]},
+      "3": {"text": ["I wonder who it belongs to..."], "choices": [{"command": "EXIT"}]}
+    }
+  },
   "alva_traveler_waiting": {
     "name"   : "Traveler",
     "phrases": {

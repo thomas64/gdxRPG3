@@ -38,7 +38,7 @@ internal class AcademyUI(
     private val calcsTable: CalcsTable = CalcsTable(personalityTooltip),
     private val calcsWindow: Window = Utils.createDefaultWindow(TITLE_CALCS, calcsTable.container),
 
-    private val skillsTable: SkillsTable = SkillsTable(personalityTooltip),
+    private val skillsTable: SkillsTable = SkillsTable(personalityTooltip, shouldShowUpgradeArrows = false),
     private val skillsWindow: Window = Utils.createDefaultWindow(TITLE_SKILLS, skillsTable.container),
 
     private val academyTable: AcademyTable = AcademyTable(academyId, academyTooltip),

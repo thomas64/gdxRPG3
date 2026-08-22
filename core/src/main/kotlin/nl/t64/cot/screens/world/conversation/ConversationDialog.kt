@@ -223,6 +223,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             ConversationCommand.RELOAD_NPCS_1 -> fadeAndReloadNpcsPlusOneMinute(nextId)
             ConversationCommand.RELOAD_NPCS_1101 -> fadeAndReloadNpcsToTime(nextId, "11:01")
             ConversationCommand.RELOAD_NPCS_1458 -> fadeAndReloadNpcsToTime(nextId, "14:58")
+            ConversationCommand.HARD_SKIP_TO_0956 -> skipToTime(nextId, "09:56")
             ConversationCommand.HARD_SKIP_TO_1056 -> skipToTime(nextId, "10:56")
             ConversationCommand.FADE_SKIP_0060 -> fadeAndSkipTime(nextId, "00:60")
             ConversationCommand.FADE_SKIP_0900 -> fadeAndSkipTime(nextId, "09:00")
@@ -401,6 +402,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun skipToTime(nextId: String, time: String) {
+        playSe(AudioEvent.SE_CLOCK_TICKING)
         gameData.clock.setTimeOfDay(time)
         endConversation(nextId)
     }

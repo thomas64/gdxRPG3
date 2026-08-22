@@ -259,6 +259,17 @@ data class QuestGraph(
             tasks.filterValues { it.type == QuestTaskType.DELIVER_MESSAGE }
                 .filterValues { conversationId in it.conversationIds }
                 .forEach { setTaskComplete(it.key) }
+        } else {
+            // the DELIVER_MESSAGE task from quest_honeywood_elder is optional.
+            // and the only way to complete that optional task is after the quest is finished.
+            // so that's why this else branch is created. to bugfix.
+            // it's the same as the above branch, but it only completes optional tasks.
+            // ai did not agree with me that this is a good solution.
+            // he said to only take the content of the if branch without any if or else.
+            tasks.filterValues { it.type == QuestTaskType.DELIVER_MESSAGE }
+                .filterValues { conversationId in it.conversationIds }
+                .filterValues { it.isOptional }
+                .forEach { setTaskComplete(it.key) }
         }
     }
 

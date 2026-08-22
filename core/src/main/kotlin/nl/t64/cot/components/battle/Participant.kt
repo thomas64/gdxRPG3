@@ -24,6 +24,7 @@ class Participant(
 
     val maximumAP: Int = character.getCalculatedActionPoints() // todo, kan deze verhoogd worden door bepaalde buffs?
     var currentAP: Int = maximumAP
+    val maxCarryOverAp: Int get() = character.getCalculatedTotalStatOf(StatItemId.STAMINA) / 10    // min: 0, max: 4
     var staggerChance: Float = 65f
     var fleeChance: Int = 70
 
@@ -70,8 +71,6 @@ class Participant(
             return
         }
 
-        val stamina: Int = character.getCalculatedTotalStatOf(StatItemId.STAMINA)
-        val maxCarryOverAp: Int = stamina / 10    // min: 0, max: 4
         currentAP = maximumAP + currentAP.coerceAtMost(maxCarryOverAp)
     }
 

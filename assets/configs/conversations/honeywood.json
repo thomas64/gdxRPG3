@@ -532,6 +532,7 @@
         "choices": [
           {"condition": ["_n_6_>=_item_herb", "_n_1_>=_item_blue_jelly"], "text": "[6 Herbs, 1 Blue Jelly] *Deliver the gathered ingredients.*", "command": "PROVIDE_QUEST_ITEM", "nextId": "30"},
           {"text": "*Inquire about her potion brewing skill.* [BLUE](Visit academy)", "command": "LOAD_ACADEMY", "nextId": "20"},
+          {"text": "*Request to view her potion stock.* [BLUE](Visit shop)", "command": "LOAD_SHOP"},
           {"text": "*Inform her that you're working on it. Take your leave.*", "command": "EXIT", "nextId": "20"}
         ]
       },

@@ -59,6 +59,7 @@ internal class ConversationDialogListener(
     }
 
     private fun inputCancel() {
+        playSe(AudioEvent.SE_CONVERSATION_CURSOR)
         answers.selectedIndex = answers.items.indexOfFirst {
             it.text.contains("(Back)")
                 || it.text.contains("Take your leave", true)
