@@ -44,7 +44,6 @@ enum class AbilityItemId : SuperEnum {
     REXTHUNDER,
 
     MAGIC_SHIELD,
-    RESISTANCE,
     TELEPORTATION,
 
     BRILLIANCE,
@@ -54,7 +53,8 @@ enum class AbilityItemId : SuperEnum {
     MIGHT,
     DEBILITATION,
     HASTE,
-    SLUGGISHNESS;
+    SLUGGISHNESS,
+    RESISTANCE;
 
     override val title: String = name.lowercase().replaceFirstChar { it.uppercase() }
 

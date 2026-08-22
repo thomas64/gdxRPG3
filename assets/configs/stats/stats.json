@@ -47,7 +47,7 @@
     "upgrade"    : 0.16,
     "description": [
       "- 'Willpower' increases your defenses against enemy offensive magic spells in combat.",
-      "  Each rank in 'Willpower' increases 'Magic Protection' by 2%."
+      "  This is represented by 'Magic Protection'."
     ]
   },
   "constitution": {

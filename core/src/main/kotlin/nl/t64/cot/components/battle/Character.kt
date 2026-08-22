@@ -205,17 +205,11 @@ abstract class Character(
     }
 
     fun getCalculatedTotalMagicProtection(): Int {
-        return (getCalculatedMagicProtection() + getPossibleExtraMagicProtection()).coerceAtMost(90)
-        // maximaal 90% protection, net zoals normale protection, zie armorReductionCalculator.
-    }
-
-    fun getCalculatedMagicProtection(): Int {
-        // todo, moet nog een betere formule komen, maar dit is voorlopig een start. een curve ook?
-        return getCalculatedTotalStatOf(StatItemId.WILLPOWER) * 2
-    }
-
-    fun getPossibleExtraMagicProtection(): Int {
-        return 0 // todo, resistance spell? magic protection potion? wat moet hier komen?
+        val maxMagicProtection = 90          // net zoals normale protection, zie armorReductionCalculator.
+        val willpowerForMaxProtection = 50f  // 40 max attr + 10 van spell of potion of equipment.
+        val willpower: Int = getCalculatedTotalStatOf(StatItemId.WILLPOWER)
+        return ((willpower * maxMagicProtection) / willpowerForMaxProtection)
+            .roundToInt().coerceAtMost(maxMagicProtection)
     }
 
     fun getCalculatedTotalDefense(): Int {

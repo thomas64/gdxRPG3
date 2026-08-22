@@ -62,5 +62,21 @@
       "battle for each rank in 'Wizard'.",
       "May only be cast once on each target."
     ]
+  },
+  "resistance": {
+    "name"       : "Resistance",
+    "resource"   : "GEMSTONE",
+    "is_special" : true,
+    "target"     : "ALLY_RANGE_3",
+    "ap"         : 4,
+    "sp"         : 8,
+    "skill"      : "WIZARD",
+    "min_skill"  : 1,
+    "description": [
+      "Target: Friendly.",
+      "Gain 1 Willpower for the rest of the",
+      "battle for each rank in 'Wizard'.",
+      "May only be cast once on each target."
+    ]
   }
 }

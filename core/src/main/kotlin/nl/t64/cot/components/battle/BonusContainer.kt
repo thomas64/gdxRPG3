@@ -22,6 +22,7 @@ class BonusContainer {
     var speedFromSpell: Int = 0
     var speedFromPotion: Int = 0
 
+    var willpowerFromSpell: Int = 0
     var willpowerFromPotion: Int = 0
 
     var stealthFromPotion: Int = 0
@@ -40,6 +41,7 @@ class BonusContainer {
         strengthFromPotion = 0
         speedFromSpell = 0
         speedFromPotion = 0
+        willpowerFromSpell = 0
         willpowerFromPotion = 0
         stealthFromPotion = 0
         hitBonusFromTroubadour = 0
@@ -94,7 +96,7 @@ class BonusContainer {
             StatItemId.DEXTERITY -> dexterityFromSpell + dexterityFromPotion
             StatItemId.STRENGTH -> strengthFromSpell + strengthFromPotion
             StatItemId.SPEED -> speedFromSpell + speedFromPotion
-            StatItemId.WILLPOWER -> willpowerFromPotion
+            StatItemId.WILLPOWER -> willpowerFromSpell + willpowerFromPotion
             StatItemId.CONSTITUTION -> 0
             StatItemId.STAMINA -> 0
         }

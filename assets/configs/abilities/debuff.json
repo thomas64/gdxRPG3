@@ -1,7 +1,7 @@
 {
   "stupidity"   : {
     "name"       : "Stupidity",
-    "resource"   : "HERB",
+    "resource"   : "GEMSTONE",
     "is_special" : true,
     "target"     : "ENEMY_RANGE_3",
     "ap"         : 4,

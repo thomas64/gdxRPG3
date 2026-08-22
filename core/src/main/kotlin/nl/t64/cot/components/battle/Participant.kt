@@ -245,7 +245,6 @@ class Participant(
             AbilityItemId.ARCTHUNDER,
             AbilityItemId.REXTHUNDER -> ElementalAttack(abilityItem, this)
             AbilityItemId.MAGIC_SHIELD -> MagicShield(abilityItem, this)
-            AbilityItemId.RESISTANCE -> TODO()
             AbilityItemId.TELEPORTATION -> TODO()
             AbilityItemId.BRILLIANCE -> Brilliance(abilityItem, this)
             AbilityItemId.STUPIDITY -> Stupidity(abilityItem, this)
@@ -255,6 +254,7 @@ class Participant(
             AbilityItemId.DEBILITATION -> Debilitation(abilityItem, this)
             AbilityItemId.HASTE -> Haste(abilityItem, this)
             AbilityItemId.SLUGGISHNESS -> Sluggishness(abilityItem, this)
+            AbilityItemId.RESISTANCE -> Resistance(abilityItem, this)
         }
     }
 

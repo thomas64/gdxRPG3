@@ -139,8 +139,8 @@ internal class StatsTable(
 
         table.add(createCalcLabel(CalcAttributeId.MAGIC_PROTECTION, isPercentage = true))
         table.add("")
-        table.add(selectedHero.getCalculatedMagicProtection().toString())
-        addExtraToTable(selectedHero.getPossibleExtraMagicProtection())
+        table.add(selectedHero.getCalculatedTotalMagicProtection().toString())
+        table.add("").row()
 
         table.add(createCalcLabel(CalcAttributeId.SPELL_BATTERY))
         table.add("")
