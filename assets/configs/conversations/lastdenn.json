@@ -402,8 +402,7 @@
       "1": {"text": ["Grrrr!"]},
       "2": {
         "choices": [
-          {"condition": ["i_druid2"], "text": "[Druid 2] *Listen to the guard dog.*", "nextId": "3"},
-          {"condition": ["ii_druid2"], "text": "[Druid 2] *Listen to the guard dog.*", "nextId": "9999"},
+          {"condition": ["druid2"], "text": "[Druid 2] *Listen to the guard dog.*", "nextId": "3"},
           {"text": "*Back away slowly and take your leave.*", "command": "EXIT"}
         ]
       },
@@ -478,6 +477,34 @@
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       }
+    }
+  },
+  "lastdenn_book"           : {
+    "name"     : "Shop dog",
+    "doesReset": false,
+    "phrases"  : {
+      "1"  : {"text": ["Woof! Woof woof woof!"]},
+      "2"  : {
+        "choices": [
+          {"condition": ["druid2"], "text": "[Druid 2] *Listen to the shop dog.*", "nextId": "3"},
+          {"text": "*Scratch him behind the ears and take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "3"  : {"text": ["You smell like far away. I like far away. Sit down, I have to tell you a thing."]},
+      "4"  : {"text": ["My human had a book. A thick one, smelling of glue, with the wobbly green ones in it. The ones from down by the water."]},
+      "5"  : {"text": ["It was on the low shelf. Everything on the low shelf is mine, that is the rule, so I chewed one corner."]},
+      "6"  : {"text": ["One corner! And he made the loud voice, and he put it in the barrel by the wall, and he never took it out again."]},
+      "7"  : {"text": ["But the words are all still in there. I checked. Every page. And you have thumbs. Go on."], "choices": [{"command": "EXIT", "nextId": "100"}]},
+      "100": {"text": ["Woof! Woof woof woof!"]},
+      "101": {
+        "choices": [
+          {"condition": ["druid2"], "text": "[Druid 2] *Listen to the shop dog.*", "nextId": "102"},
+          {"text": "*Scratch him behind the ears and take your leave.*", "command": "EXIT", "nextId": "100"}
+        ]
+      },
+      "102": {"text": ["You smell like far away. I like far away."], "choices": [{"condition": ["_loot_!taken_sparkle_lastdenn_barrel"], "nextId": "103", "orElseId": "104"}]},
+      "103": {"text": ["There is a book in the barrel by the wall. A good one, with the wobbly green ones in it. Nobody reads it, and I have no thumbs."], "choices": [{"command": "EXIT", "nextId": "100"}]},
+      "104": {"text": ["And you smell of glue and old paper. That is a good smell. Sit down with me."], "choices": [{"command": "EXIT", "nextId": "100"}]}
     }
   }
 }

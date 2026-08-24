@@ -12,6 +12,7 @@ data class ConversationGraph(
     private val id: String = "",
     @JsonProperty("name")
     val npcName: String = "",
+    private val doesReset: Boolean = true,
     val phrases: Map<String, ConversationPhrase> = emptyMap(),
     @JsonProperty("startAt")
     private val alternateStarts: List<AlternateStart> = emptyList()
@@ -19,7 +20,9 @@ data class ConversationGraph(
     var currentPhraseId: String = DEFAULT_STARTING_PHRASE_ID
 
     fun reset() {
-        currentPhraseId = DEFAULT_STARTING_PHRASE_ID
+        if (doesReset) {
+            currentPhraseId = DEFAULT_STARTING_PHRASE_ID
+        }
     }
 
     fun initId() {

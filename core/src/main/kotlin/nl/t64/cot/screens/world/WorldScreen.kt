@@ -310,6 +310,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     //region ConversationObserver //////////////////////////////////////////////////////////////////////////////////////
 
     override fun onNotifyExitConversation() {
+        updateLoot()
         show()
         player.resetInput()
         render(0f)

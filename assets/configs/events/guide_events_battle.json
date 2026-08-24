@@ -89,9 +89,9 @@
     "text": [
       "Weapons and shields have limited [BLUE]durability[BLACK].",
       "You can see their durability in parentheses after",
-      "the item's name. Each use reduces durability by 1.",
-      "When durability reaches [FIREBRICK]0[BLACK], the item breaks and is lost.",
-      "Always monitor your weapon's durability to avoid surprises!",
+      "the items' names. Each use reduces durability by 1.",
+      "When durability reaches [FIREBRICK]0[BLACK], the item breaks and is [FIREBRICK]lost[BLACK].",
+      "Always monitor your weapons' durability to avoid surprises!",
       "",
       "The Mechanic skill gives your party the ability to repair items."
     ]

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="76" height="116" tilewidth="24" tileheight="24" infinite="0" nextlayerid="24" nextobjectid="319">
+<map version="1.11" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="76" height="116" tilewidth="24" tileheight="24" infinite="0" nextlayerid="24" nextobjectid="323">
  <properties>
   <property name="bgm" value="bgm_lastdenn"/>
   <property name="lightmap_camera" value="sunlight"/>
@@ -36,12 +36,12 @@
  </layer>
  <layer id="3" name="under2_objects" width="76" height="116">
   <data encoding="base64" compression="zlib">
-   eJzt3N1LFFEYx/Hnwt6oTZc1ghaSxB1no4WKoL2b8ELzLuvfkMrMvNV7qbQ3Ncg7vZdgQan+hyj8Cwq8NISuBH/hxSgzOmo7zZzt+4GHB/blcObH2TMzLIwZAABoFU+rZmPVrGfhjtfK6g15JXpYN3tUz3oW7niurF6Ql7UFZieCrGfhjh5lVSEvAAAAAAAAAAAAtIjTgdkZ/v86NF9ZVckLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOfKhz2yhL+tZ7DgXmBVy/nyOz8rqS07yuqasajnPK0/Wi2Y/i2FHvI/9Zg3VV2V0pT3siPdNWa31Zz2LfIp7RtWmsvp9jLzueWZDqvuqktec+eVN3DOqOgfMLg5EPzvce/BYj5XRiOqJatT7f/a9W8rqdkxeU8qr4Jud96O93d+7vh54zdn3vl/9u+83w3Udyw3VzSb3X5XDra9LJf3m9Xr5ctgbbfvPd6JmNllLL48ku9dBWv2g9VVWXu/13lZ32N+e3X++s8pqLsO8du8zafU/68tXVWP2/RWtpbGuaM+rlzqGadVMiv2V6q5qMCavVeXzrCvaXbee0rntk8ZdLka7a07quuLUP7hfXNJ5YbES7a7xlFUv99dw1DvtUZMdyR07Lui6q7OU3F2zMZ7OuK26vubvpDPurPL4UUzurkkrr1ZFXkdDXkdDXnttA5fHoME=
+   eJzt3M9LFHEYx/HnoJmY2bIrQUKStONstJAR5G3Dw2o3zX8j7Kd61bvkj6zUoG51j0Ao0v9BlP4CBY+G4CnoIxKrzLijtuPMd3u/4OGBXR2e/fDd7+7yhTEDAAD14mXBbLSQ9BTumFdWb8gr0kiv2ZPepKdwxytlNU1e1lAyaywlPYU7biqrPHkBAAAAAAAAAACgTlwsmTVz/nVivrIqkBcAAAAAAAAAAAAAAAAAAMCZbWfMtjJJT+GONWV1oy3pKQAAAAAAAAAAQNp96DP72Jf0FAculcxaU35/jhVltZqSvG4rq2LK80qTv+eNnDtW97VstlyunDdy7ljdurL6WU56inQKu0fVrrLaO0Neg57ZkOqRKuvVZr60CbtHVa7f7Gp/8G8fd1e/1lNl9Ez1XPXC+3/2vXvK6n5IXlPKq9U3u+wHe5t/dH0Ne7XZ9zZu/dv/18IdvZYe1d0a91/5k62va1m95/V4x/VKX244ft6JotlkMb48ohxeB3H1auurQ3m913O/uyr9bcvx8y4oq8UE8zq8z8TV99eXryqE7PvftJZGO4M9rWb0GmZVczH216oB1cOQvL4rn7HOYHfddkyfbT903S+ZYHfNBX2vaDqH34uf9bnwKR/srvGUVTe/r+God9qjJq9Edxxo1/euXDa6u2ZnPJ7r1uv6WnoQz3UXlMdmJrq7Jq686hV5nQ55nQ55HfUHZ4ajxQ==
   </data>
  </layer>
  <layer id="4" name="under3_objects" width="76" height="116">
   <data encoding="base64" compression="zlib">
-   eJzt1zdOA0EYhuGpCQeym9UgwkUIFyFchHARQg8tJdjQQkNo+DpLlgChKdZenkd6tfq7mb9ZTSkAwLKbjEqZpqf0POr7NIvvLTt6Tx/p075+tTIuZTWtpfVx36cBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgv7jf6PsEy8W+/ua2K+Wum3352Ut29NrNvgBAu8taylW6Tje179Msvofs6DFN0tS+AFhym/mXbaXttFPb56HbzR330n46qO3z0B3mjkfpOJ3U9nnoTnPHs3SeLmr7PHTz75jWeejm3zGtM/C9L6gZgus=
+   eJzt1zdOxGAQgNGpCQ3cBKrdxjYiXIRwEcJFCBch9NBSwi600BAaprO0Ekl/4bX1nvTJmm48jeUIAKDvJqOIafaUPY+63mb+veWN3rOP7NO9frUwjljMlrLlcdfbAAAAAAAAAAAAAAAAAAAAAAAAtFbqiNW66y36Y62OWK+73gIAAAAAAODv7je63qBf3Ot/bquIu6p98rOXvNFr1T4BgHKXTcRVdp3dNF1vM/8e8kaP2SSbuhcAPbeZ37KtbDvbacrnodvNd9zL9rODpnweusN8x6PsODtpyuehO813PMvOs4umfB662f+Y0nnoZv9jSmfge19U/oR1
   </data>
  </layer>
  <layer id="5" name="under4_water" width="76" height="116">
@@ -232,6 +232,7 @@
   <object id="316" name="sparkle_lastdenn_07" x="1584" y="1728" width="48" height="48"/>
   <object id="318" name="sparkle_lastdenn_08" x="816" y="240" width="48" height="48"/>
   <object id="308" name="sparkle_ryiah_crate" type="none" x="1344" y="1632" width="48" height="48"/>
+  <object id="319" name="sparkle_lastdenn_barrel" type="none" x="336" y="1680" width="48" height="48"/>
  </objectgroup>
  <objectgroup color="#55ff7f" id="14" name="npc">
   <object id="230" name="soldier12" type="inv" x="24" y="2280" width="6" height="6">
@@ -339,6 +340,11 @@
   <object id="306" name="sailor01" type="inv" x="672" y="312" width="48" height="12">
    <properties>
     <property name="conversation" value="quest_lastdenn_school"/>
+   </properties>
+  </object>
+  <object id="322" name="dog1" type="w" x="384" y="1776" width="48" height="24">
+   <properties>
+    <property name="conversation" value="lastdenn_book"/>
    </properties>
   </object>
  </objectgroup>

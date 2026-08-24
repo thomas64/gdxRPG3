@@ -19,11 +19,11 @@ private const val PAD_BOTTOM: Float = 287f
 private const val ALPHA: Float = 0.8f
 private const val CIRCLE_SEGMENTS: Int = 48
 
-private const val TRANSITION_RANGE: Float = 0.25f
-private const val LIME_THRESHOLD: Float = 0.875f
-private const val GOLD_THRESHOLD: Float = 0.625f
-private const val ORANGE_THRESHOLD: Float = 0.375f
-private const val RED_THRESHOLD: Float = 0.125f
+private const val TRANSITION_RANGE: Float = 0.15f
+private const val LIME_THRESHOLD: Float = 0.5f
+private const val GOLD_THRESHOLD: Float = 0.35f
+private const val ORANGE_THRESHOLD: Float = 0.2f
+private const val RED_THRESHOLD: Float = 0.05f
 
 class AnalogClock : Table() {
 
