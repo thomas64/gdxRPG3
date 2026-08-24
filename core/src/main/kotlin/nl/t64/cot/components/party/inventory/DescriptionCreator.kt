@@ -44,6 +44,7 @@ class DescriptionCreator(
     private fun createDescriptionList(): List<InventoryDescription> {
         addName()
         addHandiness()
+        addRepairability()
         addPrices()
         addMinimals()
         addRange()
@@ -60,10 +61,24 @@ class DescriptionCreator(
     }
 
     private fun addHandiness() {
-        if (inventoryItem.group == InventoryGroup.WEAPON) {
-            val handinessTitle = if (inventoryItem.isTwoHanded) "(Two-handed)" else "(One-handed)"
-            descriptionLines.add(createLine(handinessTitle, ""))
+        if (inventoryItem.group != InventoryGroup.WEAPON) return
+
+        val handinessTitle: String = if (inventoryItem.isTwoHanded) "(Two-handed)" else "(One-handed)"
+        descriptionLines.add(createLine(handinessTitle, ""))
+    }
+
+    private fun addRepairability() {
+        when {
+            inventoryItem.isNonRepairableEquipment() -> descriptionLines.add(createLine("(Non-repairable)", ""))
+            otherItem?.isNonRepairableEquipment() == true -> descriptionLines.add(createEmptyLine())
         }
+    }
+
+    private fun InventoryItem.isNonRepairableEquipment(): Boolean {
+        if (group !in listOf(InventoryGroup.WEAPON, InventoryGroup.SHIELD)) return false
+        if (skill!!.isElementalStaff()) return false
+
+        return !isRepairable()
     }
 
     private fun addPrices() {

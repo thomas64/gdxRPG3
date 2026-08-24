@@ -324,6 +324,10 @@ data class InventoryItem(
         return minMechanic in 1..<rank
     }
 
+    fun isRepairable(): Boolean {
+        return minMechanic >= 1
+    }
+
     fun isRepairableForMechanicRank(rank: Int): Boolean {
         return minMechanic in 1..rank && durability < maxDurability
     }
