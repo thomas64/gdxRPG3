@@ -5,7 +5,15 @@ import nl.t64.cot.resources.ConfigDataLoader
 
 class LootContainer {
 
-    private val loot: Map<String, Loot> = ConfigDataLoader.createLoot()
+    private val loot: MutableMap<String, Loot> = ConfigDataLoader.createLoot().toMutableMap()
+
+    fun updateOutdatedData() {
+        val currentLoot: Map<String, Loot> = ConfigDataLoader.createLoot()
+        currentLoot
+            .filterKeys { it !in loot }
+            .forEach { loot[it.key] = it.value }
+        loot.keys.retainAll(currentLoot.keys)
+    }
 
     fun reset() {
         val originalLoot: Map<String, Loot> = ConfigDataLoader.createLoot()

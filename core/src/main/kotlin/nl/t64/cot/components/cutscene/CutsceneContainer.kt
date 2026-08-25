@@ -5,12 +5,13 @@ import nl.t64.cot.constants.ScreenType
 
 class CutsceneContainer {
 
-    private val cutscenes: Map<String, Boolean> = ScreenType.entries
-        .filter { it.isCutscene() }
-        .associate { it.id to false }
+    private val cutscenesPlayedThisCycle: MutableMap<String, Boolean> = createCutsceneMap()
+    private val cutsceneEverPlayedBefore: MutableMap<String, Boolean> = createCutsceneMap()
 
-    private val cutscenesPlayedThisCycle: MutableMap<String, Boolean> = cutscenes.toMutableMap()
-    private val cutsceneEverPlayedBefore: MutableMap<String, Boolean> = cutscenes.toMutableMap()
+    fun updateOutdatedData() {
+        updateOutdatedData(cutscenesPlayedThisCycle)
+        updateOutdatedData(cutsceneEverPlayedBefore)
+    }
 
     fun isPlayedThisCycle(cutsceneType: ScreenType): Boolean {
         return cutscenesPlayedThisCycle[cutsceneType.id]!!
@@ -30,6 +31,21 @@ class CutsceneContainer {
 
     fun reset() {
         cutscenesPlayedThisCycle.forEach { cutscenesPlayedThisCycle[it.key] = false }
+    }
+
+    private fun updateOutdatedData(playedCutscenes: MutableMap<String, Boolean>) {
+        val currentCutscenes: Map<String, Boolean> = createCutsceneMap()
+        currentCutscenes
+            .filterKeys { it !in playedCutscenes }
+            .forEach { playedCutscenes[it.key] = it.value }
+        playedCutscenes.keys.retainAll(currentCutscenes.keys)
+    }
+
+    private fun createCutsceneMap(): MutableMap<String, Boolean> {
+        return ScreenType.entries
+            .filter { it.isCutscene() }
+            .associate { it.id to false }
+            .toMutableMap()
     }
 
 }

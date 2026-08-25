@@ -31,7 +31,8 @@ const val INVALID_PROFILE_VIEW = " [Invalid]"
 
 class ProfileManager {
 
-    private val json = Json()
+    // an unknown field is a field that was removed from the game after the save file was written.
+    private val json = Json().apply { ignoreUnknownFields = true }
     private var saveState = GdxMap<String, Any?>()
     private var currentProfileId: String = ""
     private var currentIndex = -1

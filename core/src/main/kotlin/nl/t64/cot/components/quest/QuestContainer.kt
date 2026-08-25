@@ -5,14 +5,24 @@ import nl.t64.cot.resources.ConfigDataLoader
 
 class QuestContainer {
 
-    private val quests: Map<String, QuestGraph> = ConfigDataLoader.createQuests()
+    private val quests: MutableMap<String, QuestGraph> = ConfigDataLoader.createQuests().toMutableMap()
+
+    fun updateOutdatedData() {
+        val currentQuests: Map<String, QuestGraph> = ConfigDataLoader.createQuests()
+        currentQuests
+            .filterKeys { it !in quests }
+            .forEach { quests[it.key] = it.value }
+        quests.keys.retainAll(currentQuests.keys)
+    }
 
     fun getAllKnownQuestsForVisual(): Array<QuestGraph> = quests.values
+        .asSequence()
         .filterNot { it.isHidden }
         .filterNot { it.isSubQuest }
         .filterNot { it.isHiddenInQuestLog }
         .filter { it.isOneOfBothStatesEqualOrHigherThan(QuestState.KNOWN) }
         .sortedWith(compareBy({ it.resetState }, { it.isFailed }, { it.currentState }, { it.id }))
+        .toList()
         .toTypedArray()
 
     fun reset() {

@@ -10,15 +10,22 @@ private const val NUMBER_OF_SLOTS = 99
 
 class ShopContainer {
 
-    private val shops: Map<String, InventoryContainer> = fillShopContainer()
+    private val shops: MutableMap<String, InventoryContainer> = fillShopContainer()
 
-    fun getShop(shopId: String): InventoryContainer {
-        return shops[shopId]
-            ?: createShopInventoryContainer(shopId) // when shop does not exist in save file.
+    fun updateOutdatedData() {
+        val currentShopIds: Set<String> = ConfigDataLoader.getShopIds().toSet()
+        currentShopIds
+            .filterNot { it in shops }
+            .forEach { shops[it] = createShopInventoryContainer(it) }
+        shops.keys.retainAll(currentShopIds)
     }
 
-    private fun fillShopContainer(): Map<String, InventoryContainer> {
-        return ConfigDataLoader.getShopIds().associateWith { createShopInventoryContainer(it) }
+    fun getShop(shopId: String): InventoryContainer {
+        return shops[shopId]!!
+    }
+
+    private fun fillShopContainer(): MutableMap<String, InventoryContainer> {
+        return ConfigDataLoader.getShopIds().associateWith { createShopInventoryContainer(it) }.toMutableMap()
         //                           means: .map { it to createShopInventoryContainer(it) }.toMap()
     }
 

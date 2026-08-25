@@ -3,12 +3,15 @@ package nl.t64.cot.components.portal
 
 class PortalContainer {
 
-    private val portals: MutableMap<String, Boolean> = mutableMapOf(
-        Portal.HONEYWOOD_HOUSE_MOZES.name to true,
-        Portal.HONEYWOOD_GREAT_TREE.name to false,
-        Portal.HONEYWOOD_HOUSE_ELDER_B2.name to false,
-        Portal.LASTDENN.name to false
-    )
+    private val portals: MutableMap<String, Boolean> = createPortalMap()
+
+    fun updateOutdatedData() {
+        val currentPortals: Map<String, Boolean> = createPortalMap()
+        currentPortals
+            .filterKeys { it !in portals }
+            .forEach { portals[it.key] = it.value }
+        portals.keys.retainAll(currentPortals.keys)
+    }
 
     fun getAllIds(): Array<String> {
         return portals.keys.toTypedArray()
@@ -40,6 +43,10 @@ class PortalContainer {
 
     fun activate(portalId: String) {
         portals[portalId] = true
+    }
+
+    private fun createPortalMap(): MutableMap<String, Boolean> {
+        return Portal.entries.associate { it.name to it.isActivatedAtStart }.toMutableMap()
     }
 
 }

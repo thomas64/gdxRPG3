@@ -135,6 +135,16 @@ class GameData : ProfileObserver {
         isTooltipEnabled = profileManager.getProperty("isTooltipEnabled")
         isComparingEnabled = profileManager.getProperty("isComparingEnabled")
         numberOfCycles = profileManager.getProperty("numberOfCycles")
+
+        updateOutdatedSaveGame()
+    }
+
+    private fun updateOutdatedSaveGame() {
+        shops.updateOutdatedData()
+        quests.updateOutdatedData()
+        loot.updateOutdatedData()
+        cutscenes.updateOutdatedData()
+        portals.updateOutdatedData()
     }
 
 }
