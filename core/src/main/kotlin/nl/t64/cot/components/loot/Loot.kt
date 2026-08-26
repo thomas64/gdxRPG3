@@ -7,6 +7,19 @@ import nl.t64.cot.components.party.skills.SkillItemId
 
 private const val BONUS_PREFIX = "bonus_"
 
+data class LootProgress(
+    val changedContent: Map<String, Int>? = null,
+    val isTrapDisarmed: Boolean = false,
+    val isLockPicked: Boolean = false,
+    val isXpGained: Boolean = false
+) {
+
+    // loot that nobody touched has no progress at all, so it does not have to be stored.
+    fun isChanged(): Boolean {
+        return this != LootProgress()
+    }
+}
+
 class Loot(
     var content: MutableMap<String, Int> = mutableMapOf(),
     @JsonProperty("condition")
@@ -27,6 +40,27 @@ class Loot(
         fun createWithDurability(itemId: String, amount: Int, durability: Int): Loot {
             return Loot(mutableMapOf(itemId to amount),
                         durability = mutableMapOf(itemId to durability))
+        }
+    }
+
+    fun toProgress(lootFromConfig: Loot): LootProgress {
+        return LootProgress(changedContent = getContentIfChanged(lootFromConfig),
+                            isTrapDisarmed = hasDisarmedTrap(lootFromConfig),
+                            isLockPicked = hasPickedLock(lootFromConfig),
+                            isXpGained = hasGainedXp(lootFromConfig))
+    }
+
+    fun applyProgress(progress: LootProgress) {
+        possibleChangeContent(progress.changedContent)
+
+        if (progress.isTrapDisarmed) {
+            disarmTrap()
+        }
+        if (progress.isLockPicked) {
+            pickLock()
+        }
+        if (progress.isXpGained) {
+            clearXp()
         }
     }
 
@@ -131,6 +165,29 @@ class Loot(
         } else {
             content[itemId] = bonusAmount
         }
+    }
+
+    // null means the content from save file was never touched, so the content from the config is kept.
+    private fun getContentIfChanged(lootFromConfig: Loot): Map<String, Int>? {
+        if (content == lootFromConfig.content) return null
+        return content.toMutableMap()
+    }
+
+    private fun hasDisarmedTrap(lootFromConfig: Loot): Boolean {
+        return trapLevel < lootFromConfig.trapLevel
+    }
+
+    private fun hasPickedLock(lootFromConfig: Loot): Boolean {
+        return lockLevel < lootFromConfig.lockLevel
+    }
+
+    private fun hasGainedXp(lootFromConfig: Loot): Boolean {
+        return xp < lootFromConfig.xp
+    }
+
+    private fun possibleChangeContent(changedContent: Map<String, Int>?) {
+        if (changedContent == null) return
+        content = changedContent.toMutableMap()
     }
 
 }

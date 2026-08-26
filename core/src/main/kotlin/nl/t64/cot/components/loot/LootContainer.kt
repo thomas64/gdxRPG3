@@ -5,14 +5,17 @@ import nl.t64.cot.resources.ConfigDataLoader
 
 class LootContainer {
 
-    private val loot: MutableMap<String, Loot> = ConfigDataLoader.createLoot().toMutableMap()
+    private val loot: Map<String, Loot> = ConfigDataLoader.createLoot()
 
-    fun updateOutdatedData() {
-        val currentLoot: Map<String, Loot> = ConfigDataLoader.createLoot()
-        currentLoot
-            .filterKeys { it !in loot }
-            .forEach { loot[it.key] = it.value }
-        loot.keys.retainAll(currentLoot.keys)
+    fun toProgress(): Map<String, LootProgress> {
+        val lootFromConfig: Map<String, Loot> = ConfigDataLoader.createLoot()
+        return loot
+            .mapValues { (lootId, currentLoot) -> currentLoot.toProgress(lootFromConfig[lootId]!!) }
+            .filterValues { it.isChanged() }
+    }
+
+    fun applyProgress(progress: Map<String, LootProgress>) {
+        progress.forEach { (id, p) -> loot[id]!!.applyProgress(p) }
     }
 
     fun reset() {

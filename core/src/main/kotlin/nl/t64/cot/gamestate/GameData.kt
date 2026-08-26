@@ -12,6 +12,7 @@ import nl.t64.cot.components.door.DoorProgress
 import nl.t64.cot.components.event.EventContainer
 import nl.t64.cot.components.event.EventProgress
 import nl.t64.cot.components.loot.LootContainer
+import nl.t64.cot.components.loot.LootProgress
 import nl.t64.cot.components.loot.ShopContainer
 import nl.t64.cot.components.loot.SpoilsContainer
 import nl.t64.cot.components.party.HeroContainer
@@ -92,7 +93,7 @@ class GameData : ProfileObserver {
         profileManager.setProperty("conversations", conversations.createPhraseIdContainer())
         profileManager.setProperty("quests", quests)
         profileManager.setProperty("events", events.toProgress())
-        profileManager.setProperty("loot", loot)
+        profileManager.setProperty("loot", loot.toProgress())
         profileManager.setProperty("spoils", spoils)
         profileManager.setProperty("doors", doors.toProgress())
         profileManager.setProperty("cutscenes", cutscenes)
@@ -123,7 +124,10 @@ class GameData : ProfileObserver {
             val progress: Map<String, EventProgress> = profileManager.getProperty("events")
             this.applyProgress(progress)
         }
-        loot = profileManager.getProperty("loot")
+        loot = LootContainer().apply {
+            val progress: Map<String, LootProgress> = profileManager.getProperty("loot")
+            this.applyProgress(progress)
+        }
         spoils = profileManager.getProperty("spoils")
         doors = DoorContainer().apply {
             val progress: Map<String, DoorProgress> = profileManager.getProperty("doors")
@@ -142,7 +146,6 @@ class GameData : ProfileObserver {
     private fun updateOutdatedSaveGame() {
         shops.updateOutdatedData()
         quests.updateOutdatedData()
-        loot.updateOutdatedData()
         cutscenes.updateOutdatedData()
         portals.updateOutdatedData()
     }
