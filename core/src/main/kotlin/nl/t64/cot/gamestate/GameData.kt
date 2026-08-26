@@ -23,6 +23,7 @@ import nl.t64.cot.components.party.inventory.InventoryProgress
 import nl.t64.cot.components.party.inventory.PartyInventoryContainer
 import nl.t64.cot.components.portal.PortalContainer
 import nl.t64.cot.components.quest.QuestContainer
+import nl.t64.cot.components.quest.QuestProgress
 import nl.t64.cot.components.time.Clock
 import nl.t64.cot.subjects.ProfileObserver
 
@@ -96,7 +97,7 @@ class GameData : ProfileObserver {
         profileManager.setProperty("shops", shops.toProgress())
         profileManager.setProperty("battles", battles.toProgress())
         profileManager.setProperty("conversations", conversations.toProgress())
-        profileManager.setProperty("quests", quests)
+        profileManager.setProperty("quests", quests.toProgress())
         profileManager.setProperty("events", events.toProgress())
         profileManager.setProperty("loot", loot.toProgress())
         profileManager.setProperty("spoils", spoils)
@@ -139,7 +140,10 @@ class GameData : ProfileObserver {
             val progress: ConversationProgress = profileManager.getProperty("conversations")
             this.applyProgress(progress)
         }
-        quests = profileManager.getProperty("quests")
+        quests = QuestContainer().apply {
+            val progress: Map<String, QuestProgress> = profileManager.getProperty("quests")
+            this.applyProgress(progress)
+        }
         events = EventContainer().apply {
             val progress: Map<String, EventProgress> = profileManager.getProperty("events")
             this.applyProgress(progress)
@@ -160,11 +164,6 @@ class GameData : ProfileObserver {
         isComparingEnabled = profileManager.getProperty("isComparingEnabled")
         numberOfCycles = profileManager.getProperty("numberOfCycles")
 
-        updateOutdatedSaveGame()
-    }
-
-    private fun updateOutdatedSaveGame() {
-        quests.updateOutdatedData()
         cutscenes.updateOutdatedData()
         portals.updateOutdatedData()
     }

@@ -9,6 +9,22 @@ import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.components.party.XpRewarder
 
 
+data class QuestProgress(
+    val currentState: QuestState = QuestState.UNKNOWN,
+    val resetState: QuestState = QuestState.UNKNOWN,
+    val isFailed: Boolean = false,
+    val wasFailed: Boolean = false,
+    val isHidden: Boolean = false,
+    val isHiddenInQuestLog: Boolean = false,
+    val tasks: Map<String, QuestTaskProgress> = emptyMap()
+) {
+
+    // a quest that nobody touched has no progress at all, so it does not have to be stored.
+    fun isChanged(): Boolean {
+        return this != QuestProgress()
+    }
+}
+
 data class QuestGraph(
     val id: String = "",
     val title: String = "",
@@ -31,6 +47,28 @@ data class QuestGraph(
     var isHiddenInQuestLog: Boolean = false
 
     private val titleWithoutPrefix: String = title.removeSuffix(" [M]")
+
+    fun toProgress(): QuestProgress {
+        return QuestProgress(currentState = currentState,
+                             resetState = resetState,
+                             isFailed = isFailed,
+                             wasFailed = wasFailed,
+                             isHidden = isHidden,
+                             isHiddenInQuestLog = isHiddenInQuestLog,
+                             tasks = tasks
+                                 .mapValues { (_, task) -> task.toProgress() }
+                                 .filterValues { it.isChanged() })
+    }
+
+    fun applyProgress(progress: QuestProgress) {
+        currentState = progress.currentState
+        resetState = progress.resetState
+        isFailed = progress.isFailed
+        wasFailed = progress.wasFailed
+        isHidden = progress.isHidden
+        isHiddenInQuestLog = progress.isHiddenInQuestLog
+        progress.tasks.forEach { (taskId, taskProgress) -> tasks[taskId]!!.applyProgress(taskProgress) }
+    }
 
     override fun toString(): String {
         return when {

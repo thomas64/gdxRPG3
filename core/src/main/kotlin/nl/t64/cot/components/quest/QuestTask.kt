@@ -7,12 +7,27 @@ import nl.t64.cot.audio.playSe
 import nl.t64.cot.audio.stopAllSe
 
 
+data class QuestTaskProgress(
+    val isHidden: Boolean = false,
+    val isReset: Boolean = false,
+    val isComplete: Boolean = false,
+    val isFailed: Boolean = false,
+    val isTargetAlternateUsed: Boolean = false,
+    val isPhraseUpdated: Boolean = false
+) {
+
+    // a task that nobody touched has no progress at all, so it does not have to be stored.
+    fun isChanged(): Boolean {
+        return this != QuestTaskProgress()
+    }
+}
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 class QuestTask(
     var taskPhrase: String = "",
     private val updatedPhrase: String? = null,
     val type: QuestTaskType = QuestTaskType.NONE,
-    val target: MutableMap<String, Int> = mutableMapOf(),
+    val target: Map<String, Int> = emptyMap(),
     val targetAlternate: Map<String, Int> = emptyMap(),
     val receive: Map<String, Int> = emptyMap(),
     val conversationIds: List<String> = emptyList(),
@@ -21,15 +36,34 @@ class QuestTask(
     val isOptional: Boolean = false,
     var isHidden: Boolean = false,
     private val isResettable: Boolean = true,
-    private var isRepeatable: Boolean = false,
-    private var hasRewardSound: Boolean = false,
+    private val isRepeatable: Boolean = false,
+    private val hasRewardSound: Boolean = false,
     val linkedWith: List<String> = emptyList()
 ) {
     var isReset: Boolean = false
     var isComplete: Boolean = false
     var isFailed: Boolean = false
-    var isQuestFinished: Boolean = false
     var isTargetAlternateUsed: Boolean = false
+
+    fun toProgress(): QuestTaskProgress {
+        return QuestTaskProgress(isHidden = isHidden,
+                                 isReset = isReset,
+                                 isComplete = isComplete,
+                                 isFailed = isFailed,
+                                 isTargetAlternateUsed = isTargetAlternateUsed,
+                                 isPhraseUpdated = taskPhrase == updatedPhrase)
+    }
+
+    fun applyProgress(progress: QuestTaskProgress) {
+        isHidden = progress.isHidden
+        isReset = progress.isReset
+        isComplete = progress.isComplete
+        isFailed = progress.isFailed
+        isTargetAlternateUsed = progress.isTargetAlternateUsed
+        if (progress.isPhraseUpdated) {
+            updatedPhrase?.let { taskPhrase = it }
+        }
+    }
 
     override fun toString(): String {
         return when {

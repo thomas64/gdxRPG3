@@ -5,14 +5,16 @@ import nl.t64.cot.resources.ConfigDataLoader
 
 class QuestContainer {
 
-    private val quests: MutableMap<String, QuestGraph> = ConfigDataLoader.createQuests().toMutableMap()
+    private val quests: Map<String, QuestGraph> = ConfigDataLoader.createQuests()
 
-    fun updateOutdatedData() {
-        val currentQuests: Map<String, QuestGraph> = ConfigDataLoader.createQuests()
-        currentQuests
-            .filterKeys { it !in quests }
-            .forEach { quests[it.key] = it.value }
-        quests.keys.retainAll(currentQuests.keys)
+    fun toProgress(): Map<String, QuestProgress> {
+        return quests
+            .mapValues { (_, quest) -> quest.toProgress() }
+            .filterValues { it.isChanged() }
+    }
+
+    fun applyProgress(progress: Map<String, QuestProgress>) {
+        progress.forEach { (questId, questProgress) -> quests[questId]!!.applyProgress(questProgress) }
     }
 
     fun getAllKnownQuestsForVisual(): Array<QuestGraph> = quests.values
