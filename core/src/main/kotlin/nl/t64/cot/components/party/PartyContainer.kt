@@ -2,6 +2,7 @@ package nl.t64.cot.components.party
 
 import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.constants.Constant
+import nl.t64.cot.resources.ConfigDataLoader
 import java.util.*
 
 
@@ -17,6 +18,20 @@ class PartyContainer {
     private val lastIndex: Int get() = size - 1
     val isFull: Boolean get() = size >= MAXIMUM
     val size: Int get() = party.size
+
+    fun toProgress(): Map<String, HeroProgress> {
+        return party.mapValues { (_, hero) -> hero.toProgress() }
+    }
+
+    fun applyProgress(progress: Map<String, HeroProgress>) {
+        val heroesFromConfig: Map<String, HeroItem> = ConfigDataLoader.createHeroes()
+        party.clear()
+        progress.forEach { (heroId, heroProgress) ->
+            val heroItem: HeroItem = heroesFromConfig[heroId]!!
+            val heroItemWithProgress: HeroItem = heroItem.apply { applyProgress(heroProgress) }
+            party[heroId] = heroItemWithProgress
+        }
+    }
 
     fun forEachWithInvertedIndex(action: (index: Int, hero: HeroItem) -> Unit) {
         party.entries.forEachIndexed { index, entry ->

@@ -41,6 +41,22 @@ class EquipContainer() {
         accessoryId?.let { this.equipment[InventoryGroup.ACCESSORY.name] = InventoryDatabase.createInventoryItem(it) }
     }
 
+    fun toProgress(): Map<String, ItemProgress> {
+        return equipment
+            .filterValues { it != null }
+            .mapValues { (_, item) -> item!!.toProgress() }
+    }
+
+    // the starting equipment from the config is cleared first,
+    // otherwise a hero would wear again what the player took off.
+    fun applyProgress(progress: Map<String, ItemProgress>) {
+        clearAll()
+        progress.forEach { (group, item) ->
+            val inventoryItem: InventoryItem = InventoryDatabase.createInventoryItem(item)
+            equipment[group] = inventoryItem
+        }
+    }
+
     fun createCopy(): EquipContainer {
         val copy = EquipContainer()
         equipment.forEach { (group, item) ->

@@ -9,6 +9,15 @@ class HeroContainer {
     private val heroes: MutableMap<String, HeroItem> = ConfigDataLoader.createHeroes()
     val size: Int get() = heroes.size
 
+    fun toProgress(): Map<String, HeroProgress> {
+        return heroes.mapValues { (_, hero) -> hero.toProgress() }
+    }
+
+    fun applyProgress(progress: Map<String, HeroProgress>) {
+        heroes.keys.retainAll(progress.keys)
+        heroes.forEach { (heroId, hero) -> hero.applyProgress(progress[heroId]!!) }
+    }
+
     fun addHero(hero: HeroItem) {
         heroes[hero.id] = hero
     }

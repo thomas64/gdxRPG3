@@ -16,6 +16,7 @@ import nl.t64.cot.components.loot.LootProgress
 import nl.t64.cot.components.loot.ShopContainer
 import nl.t64.cot.components.loot.SpoilsContainer
 import nl.t64.cot.components.party.HeroContainer
+import nl.t64.cot.components.party.HeroProgress
 import nl.t64.cot.components.party.PartyContainer
 import nl.t64.cot.components.party.inventory.InventoryContainer
 import nl.t64.cot.components.party.inventory.InventoryProgress
@@ -88,8 +89,8 @@ class GameData : ProfileObserver {
 
     override fun onNotifySaveProfile(profileManager: ProfileManager) {
         profileManager.setProperty("clock", clock)
-        profileManager.setProperty("heroes", heroes)
-        profileManager.setProperty("party", party)
+        profileManager.setProperty("heroes", heroes.toProgress())
+        profileManager.setProperty("party", party.toProgress())
         profileManager.setProperty("inventory", inventory.toProgress())
         profileManager.setProperty("storage", storage.toProgress())
         profileManager.setProperty("shops", shops.toProgress())
@@ -110,8 +111,14 @@ class GameData : ProfileObserver {
 
     override fun onNotifyLoadProfile(profileManager: ProfileManager) {
         clock = profileManager.getProperty<Clock>("clock").apply { possibleAddSomeExtraLoadingTime() }
-        heroes = profileManager.getProperty("heroes")
-        party = profileManager.getProperty("party")
+        heroes = HeroContainer().apply {
+            val progress: Map<String, HeroProgress> = profileManager.getProperty("heroes")
+            this.applyProgress(progress)
+        }
+        party = PartyContainer().apply {
+            val progress: Map<String, HeroProgress> = profileManager.getProperty("party")
+            this.applyProgress(progress)
+        }
         inventory = PartyInventoryContainer(INVENTORY_SLOTS).apply {
             val progress: InventoryProgress = profileManager.getProperty("inventory")
             this.applyProgress(progress)

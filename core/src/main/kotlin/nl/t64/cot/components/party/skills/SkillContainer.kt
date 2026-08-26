@@ -1,16 +1,28 @@
 package nl.t64.cot.components.party.skills
 
 import com.fasterxml.jackson.annotation.JsonCreator
+import java.util.*
 
 
 class SkillContainer() {
 
-    private val skills: SkillItemMap<SkillItemId, Int> = SkillItemMap()
+    private val skills: MutableMap<SkillItemId, Int> = EnumMap(SkillItemId::class.java)
 
     @JsonCreator
     constructor(startingSkills: Map<String, Int>) : this() {
         startingSkills.forEach { (skillId, rank) ->
             skills[SkillItemId.valueOf(skillId.uppercase())] = rank
+        }
+    }
+
+    fun toProgress(): Map<String, Int> {
+        return skills.entries.associate { (skillItemId, rank) -> skillItemId.name to rank }
+    }
+
+    fun applyProgress(ranks: Map<String, Int>) {
+        ranks.forEach { (skillId, rank) ->
+            val skillItemId = SkillItemId.valueOf(skillId)
+            skills[skillItemId] = rank
         }
     }
 
@@ -35,12 +47,4 @@ class SkillContainer() {
         return getAllAboveZero().sumOf { it.getTotalXpCostFromRankZeroToCurrent() }
     }
 
-}
-
-private class SkillItemMap<K : Enum<K>, V> {
-    private val map: MutableMap<String, V> = HashMap()
-    operator fun get(key: Enum<K>): V? = map[key.name]
-    operator fun set(key: Enum<K>, value: V) {
-        map[key.name] = value
-    }
 }

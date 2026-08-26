@@ -1,11 +1,12 @@
 package nl.t64.cot.components.party.stats
 
 import com.fasterxml.jackson.annotation.JsonCreator
+import java.util.*
 
 
 class StatContainer() {
 
-    private val stats: StatItemMap<StatItemId, Int> = StatItemMap()
+    private val stats: MutableMap<StatItemId, Int> = EnumMap(StatItemId::class.java)
     val maximumHp: Int get() = (40f * (getById(StatItemId.CONSTITUTION).rank * 10f / 100f)).toInt()
     val maximumSp: Int get() = (20f * (getById(StatItemId.STAMINA).rank * 10f / 100f)).toInt()
 
@@ -16,12 +17,23 @@ class StatContainer() {
         }
     }
 
-    fun getById(statItemId: StatItemId): StatItem {
-        return StatDatabase.createStatItem(statItemId, stats[statItemId])
+    fun toProgress(): Map<String, Int> {
+        return stats.entries.associate { (statItemId, rank) -> statItemId.name to rank }
+    }
+
+    fun applyProgress(ranks: Map<String, Int>) {
+        ranks.forEach { (statId, rank) ->
+            val statItemId = StatItemId.valueOf(statId)
+            stats[statItemId] = rank
+        }
     }
 
     fun getAll(): List<StatItem> {
-        return StatItemId.entries.map { StatDatabase.createStatItem(it, stats[it]) }
+        return StatItemId.entries.map { getById(it) }
+    }
+
+    fun getById(statItemId: StatItemId): StatItem {
+        return StatDatabase.createStatItem(statItemId, stats[statItemId]!!)
     }
 
     fun getTotalXpCost(): Int {
@@ -32,13 +44,4 @@ class StatContainer() {
         stats[statItemId] = rank
     }
 
-}
-
-private class StatItemMap<K : Enum<K>, V> {
-    private val map: MutableMap<String, V> = HashMap(StatItemId.entries.size)
-    fun contains(key: Enum<K>): Boolean = map.containsKey(key.name)
-    operator fun get(key: Enum<K>): V = map[key.name]!!
-    operator fun set(key: Enum<K>, value: V) {
-        map[key.name] = value
-    }
 }

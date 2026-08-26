@@ -14,6 +14,17 @@ class AbilityContainer() {
             .let { abilities.addAll(it) }
     }
 
+    // toMutableList and not toList, because toList gives back an EmptyList or a SingletonList
+    // for the smallest sizes, and libGDX cannot create those again while reading.
+    fun toProgress(): List<AbilityItemId> {
+        return abilities.toMutableList()
+    }
+
+    fun applyProgress(abilityIds: List<AbilityItemId>) {
+        abilities.clear()
+        abilities.addAll(abilityIds)
+    }
+
     fun getById(abilityItemId: AbilityItemId): AbilityItem? {
         return abilityItemId
             .takeIf { it in abilities }

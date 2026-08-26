@@ -99,7 +99,8 @@ data class InventoryItem(
     val isStackable: Boolean = group.isStackable()
     val isShield: Boolean = group == InventoryGroup.SHIELD
 
-    fun toProgress(slot: Int): ItemProgress {
+    // equipment has no slot number, it is keyed by its inventory group.
+    fun toProgress(slot: Int = 0): ItemProgress {
         return ItemProgress(id = id,
                             slot = slot,
                             amount = amount,

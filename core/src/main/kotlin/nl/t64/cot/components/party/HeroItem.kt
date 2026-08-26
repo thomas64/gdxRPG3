@@ -4,10 +4,7 @@ import nl.t64.cot.components.battle.Character
 import nl.t64.cot.components.party.abilities.AbilityContainer
 import nl.t64.cot.components.party.abilities.AbilityItem
 import nl.t64.cot.components.party.abilities.AbilityItemId
-import nl.t64.cot.components.party.inventory.EquipContainer
-import nl.t64.cot.components.party.inventory.InventoryGroup
-import nl.t64.cot.components.party.inventory.InventoryItem
-import nl.t64.cot.components.party.inventory.InventoryMinimal
+import nl.t64.cot.components.party.inventory.*
 import nl.t64.cot.components.party.skills.SkillContainer
 import nl.t64.cot.components.party.skills.SkillItem
 import nl.t64.cot.components.party.skills.SkillItemId
@@ -16,6 +13,19 @@ import nl.t64.cot.components.party.stats.StatItem
 import nl.t64.cot.components.party.stats.StatItemId
 import nl.t64.cot.constants.Constant
 
+
+data class HeroProgress(
+    val statRanks: Map<String, Int> = emptyMap(),
+    val skillRanks: Map<String, Int> = emptyMap(),
+    val abilities: List<AbilityItemId> = emptyList(),
+    val equipment: Map<String, ItemProgress> = emptyMap(),
+    val isAlive: Boolean = true,
+    val currentHp: Int = 0,
+    val currentSp: Int = 0,
+    val hasBeenRecruited: Boolean = false,
+    val totalXp: Int = 0,
+    val xpPoints: Int = 0
+)
 
 class HeroItem(
     id: String = "",
@@ -50,6 +60,32 @@ class HeroItem(
                 initializeCalculatedValues()
             }
         }
+    }
+
+    fun toProgress(): HeroProgress {
+        return HeroProgress(statRanks = stats.toProgress(),
+                            skillRanks = skills.toProgress(),
+                            abilities = abilities.toProgress(),
+                            equipment = inventory.toProgress(),
+                            isAlive = isAlive,
+                            currentHp = currentHp,
+                            currentSp = currentSp,
+                            hasBeenRecruited = hasBeenRecruited,
+                            totalXp = totalXp,
+                            xpPoints = xpPoints)
+    }
+
+    fun applyProgress(progress: HeroProgress) {
+        stats.applyProgress(progress.statRanks)
+        skills.applyProgress(progress.skillRanks)
+        abilities.applyProgress(progress.abilities)
+        inventory.applyProgress(progress.equipment)
+        isAlive = progress.isAlive
+        currentHp = progress.currentHp
+        currentSp = progress.currentSp
+        hasBeenRecruited = progress.hasBeenRecruited
+        totalXp = progress.totalXp
+        xpPoints = progress.xpPoints
     }
 
     private fun initializeCalculatedValues() {
