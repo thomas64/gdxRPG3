@@ -25,7 +25,9 @@ class BattleContainer {
     }
 
     fun toProgress(): Map<String, BattleProgress> {
-        return battles.mapValues { it.value.toProgress() }
+        return battles
+            .mapValues { (_, battle) -> battle.toProgress() }
+            .filterValues { it.isChanged() }
     }
 
     fun applyProgress(progress: Map<String, BattleProgress>) {

@@ -19,7 +19,13 @@ import nl.t64.cot.screens.dialog.MessageDialog
 data class EventProgress(
     val hasPlayed: Boolean = false,
     val isRepeated: Boolean = false
-)
+) {
+
+    // an event that never played has no progress at all, so it does not have to be stored.
+    fun isChanged(): Boolean {
+        return this != EventProgress()
+    }
+}
 
 data class Event(
     private val id: String = "",

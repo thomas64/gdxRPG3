@@ -6,7 +6,13 @@ import com.fasterxml.jackson.annotation.JsonProperty
 data class BattleProgress(
     val isDefeated: Boolean = false,
     val wantsToFight: Boolean = true
-)
+) {
+
+    // a battle that nobody fought has no progress at all, so it does not have to be stored.
+    fun isChanged(): Boolean {
+        return this != BattleProgress()
+    }
+}
 
 class Battle(
     val battlers: List<Battler> = emptyList(),

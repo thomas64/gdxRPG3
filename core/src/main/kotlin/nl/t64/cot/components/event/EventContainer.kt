@@ -39,7 +39,9 @@ class EventContainer {
     }
 
     fun toProgress(): Map<String, EventProgress> {
-        return events.mapValues { it.value.toProgress() }
+        return events
+            .mapValues { (_, event) -> event.toProgress() }
+            .filterValues { it.isChanged() }
     }
 
     fun applyProgress(progress: Map<String, EventProgress>) {
