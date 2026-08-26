@@ -19,6 +19,10 @@ data class ConversationGraph(
 ) {
     var currentPhraseId: String = DEFAULT_STARTING_PHRASE_ID
 
+    fun isAtDefaultStartingPhrase(): Boolean {
+        return currentPhraseId == DEFAULT_STARTING_PHRASE_ID
+    }
+
     fun reset() {
         if (doesReset) {
             currentPhraseId = DEFAULT_STARTING_PHRASE_ID

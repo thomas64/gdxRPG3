@@ -5,7 +5,7 @@ import nl.t64.cot.components.battle.BattleContainer
 import nl.t64.cot.components.battle.BattleProgress
 import nl.t64.cot.components.blocker.RemovedBlockerContainer
 import nl.t64.cot.components.conversation.ConversationContainer
-import nl.t64.cot.components.conversation.PhraseIdContainer
+import nl.t64.cot.components.conversation.ConversationProgress
 import nl.t64.cot.components.cutscene.CutsceneContainer
 import nl.t64.cot.components.door.DoorContainer
 import nl.t64.cot.components.door.DoorProgress
@@ -95,7 +95,7 @@ class GameData : ProfileObserver {
         profileManager.setProperty("storage", storage.toProgress())
         profileManager.setProperty("shops", shops.toProgress())
         profileManager.setProperty("battles", battles.toProgress())
-        profileManager.setProperty("conversations", conversations.createPhraseIdContainer())
+        profileManager.setProperty("conversations", conversations.toProgress())
         profileManager.setProperty("quests", quests)
         profileManager.setProperty("events", events.toProgress())
         profileManager.setProperty("loot", loot.toProgress())
@@ -136,8 +136,8 @@ class GameData : ProfileObserver {
             this.applyProgress(progress)
         }
         conversations = ConversationContainer().apply {
-            val container: PhraseIdContainer = profileManager.getProperty("conversations")
-            this.setCurrentPhraseIds(container)
+            val progress: ConversationProgress = profileManager.getProperty("conversations")
+            this.applyProgress(progress)
         }
         quests = profileManager.getProperty("quests")
         events = EventContainer().apply {
