@@ -5,9 +5,15 @@ import nl.t64.cot.audio.AudioEvent
 
 
 data class DoorProgress(
-    val isLocked: Boolean = false,
-    val isClosed: Boolean = true
-)
+    val isUnlocked: Boolean = false,
+    val isOpened: Boolean = false
+) {
+
+    // a door that nobody touched has no progress at all, so it does not have to be stored.
+    fun isChanged(): Boolean {
+        return this != DoorProgress()
+    }
+}
 
 class Door(
     val type: DoorType = DoorType.SMALL,    // this will become replaced by the correct json value.
@@ -29,13 +35,19 @@ class Door(
     var isClosed: Boolean = true
     val isOpen: Boolean get() = !isClosed
 
+    // only the deviation from the config is stored. the lock itself comes from the keyId in the config,
+    // so removing or adding a keyId lands in an existing save file.
     fun toProgress(): DoorProgress {
-        return DoorProgress(isLocked, isClosed)
+        return DoorProgress(wasLockedOnce(), isOpen)
     }
 
     fun applyProgress(progress: DoorProgress) {
-        isLocked = progress.isLocked
-        isClosed = progress.isClosed
+        if (progress.isUnlocked) {
+            unlock()
+        }
+        if (progress.isOpened) {
+            open()
+        }
     }
 
     fun wasLockedOnce(): Boolean {

@@ -12,7 +12,9 @@ class DoorContainer {
     }
 
     fun toProgress(): Map<String, DoorProgress> {
-        return doors.mapValues { it.value.toProgress() }
+        return doors
+            .mapValues { it.value.toProgress() }
+            .filterValues { it.isChanged() }
     }
 
     fun applyProgress(progress: Map<String, DoorProgress>) {
