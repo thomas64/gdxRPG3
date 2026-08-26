@@ -9,6 +9,15 @@ import kotlin.math.floor
 import kotlin.math.roundToInt
 
 
+data class ItemProgress(
+    val id: String = "",
+    val slot: Int = 0,
+    val amount: Int = 0,
+    // null means the item was never worn down, so the durability from the config is kept.
+    val changedDurability: Int? = null,
+    val isSoldToShop: Boolean = false
+)
+
 data class InventoryItem(
     var amount: Int = 0,
     val id: String = "",
@@ -89,6 +98,14 @@ data class InventoryItem(
 ) {
     val isStackable: Boolean = group.isStackable()
     val isShield: Boolean = group == InventoryGroup.SHIELD
+
+    fun toProgress(slot: Int): ItemProgress {
+        return ItemProgress(id = id,
+                            slot = slot,
+                            amount = amount,
+                            changedDurability = getDurabilityIfChanged(),
+                            isSoldToShop = isSoldToShop)
+    }
 
     fun createCopy(amount: Int): InventoryItem {
         return copy(amount = amount)
@@ -361,6 +378,11 @@ data class InventoryItem(
             ResourceType.WOOD -> wood
             ResourceType.METAL -> metal
         }
+    }
+
+    private fun getDurabilityIfChanged(): Int? {
+        if (durability == maxDurability) return null
+        return durability
     }
 
 }

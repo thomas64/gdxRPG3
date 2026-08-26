@@ -3,10 +3,26 @@ package nl.t64.cot.components.party.inventory
 
 private const val SORTING_SPLIT = 70000 // atm, item.json starts with this number.
 
+// the items are wrapped in this class on purpose. libGDX writes a bare list without its type,
+// and reads it back as a gdx Array instead of a java List. as a field it does keep its type.
+data class InventoryProgress(
+    val items: List<ItemProgress> = emptyList()
+)
+
 open class InventoryContainer(numberOfSlots: Int = 0) {
 
     private val inventory: MutableList<InventoryItem?> = MutableList(numberOfSlots) { null }
     private var isSortAscending = true
+
+    fun toProgress(): InventoryProgress {
+        return InventoryProgress(inventory.mapIndexedNotNull { slot, item -> item?.toProgress(slot) })
+    }
+
+    // the items are put in the list directly, because the overridden forceSetItemAt of
+    // PartyInventoryContainer reaches for game data that is not loaded yet at this moment.
+    fun applyProgress(progress: InventoryProgress) {
+        progress.items.forEach { inventory[it.slot] = InventoryDatabase.createInventoryItem(it) }
+    }
 
     fun getAllContent(): MutableMap<String, Int> {
         return inventory

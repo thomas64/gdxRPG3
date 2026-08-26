@@ -18,12 +18,16 @@ import nl.t64.cot.components.loot.SpoilsContainer
 import nl.t64.cot.components.party.HeroContainer
 import nl.t64.cot.components.party.PartyContainer
 import nl.t64.cot.components.party.inventory.InventoryContainer
+import nl.t64.cot.components.party.inventory.InventoryProgress
 import nl.t64.cot.components.party.inventory.PartyInventoryContainer
 import nl.t64.cot.components.portal.PortalContainer
 import nl.t64.cot.components.quest.QuestContainer
 import nl.t64.cot.components.time.Clock
 import nl.t64.cot.subjects.ProfileObserver
 
+
+private const val INVENTORY_SLOTS = 66
+private const val STORAGE_SLOTS = 176
 
 class GameData : ProfileObserver {
 
@@ -63,8 +67,8 @@ class GameData : ProfileObserver {
         clock = Clock()
         heroes = HeroContainer()
         party = PartyContainer()
-        inventory = PartyInventoryContainer(66)
-        storage = InventoryContainer(176)
+        inventory = PartyInventoryContainer(INVENTORY_SLOTS)
+        storage = InventoryContainer(STORAGE_SLOTS)
         shops = ShopContainer()
         battles = BattleContainer()
         conversations = ConversationContainer()
@@ -86,9 +90,9 @@ class GameData : ProfileObserver {
         profileManager.setProperty("clock", clock)
         profileManager.setProperty("heroes", heroes)
         profileManager.setProperty("party", party)
-        profileManager.setProperty("inventory", inventory)
-        profileManager.setProperty("storage", storage)
-        profileManager.setProperty("shops", shops)
+        profileManager.setProperty("inventory", inventory.toProgress())
+        profileManager.setProperty("storage", storage.toProgress())
+        profileManager.setProperty("shops", shops.toProgress())
         profileManager.setProperty("battles", battles.toProgress())
         profileManager.setProperty("conversations", conversations.createPhraseIdContainer())
         profileManager.setProperty("quests", quests)
@@ -108,9 +112,18 @@ class GameData : ProfileObserver {
         clock = profileManager.getProperty<Clock>("clock").apply { possibleAddSomeExtraLoadingTime() }
         heroes = profileManager.getProperty("heroes")
         party = profileManager.getProperty("party")
-        inventory = profileManager.getProperty("inventory")
-        storage = profileManager.getProperty("storage")
-        shops = profileManager.getProperty("shops")
+        inventory = PartyInventoryContainer(INVENTORY_SLOTS).apply {
+            val progress: InventoryProgress = profileManager.getProperty("inventory")
+            this.applyProgress(progress)
+        }
+        storage = InventoryContainer(STORAGE_SLOTS).apply {
+            val progress: InventoryProgress = profileManager.getProperty("storage")
+            this.applyProgress(progress)
+        }
+        shops = ShopContainer().apply {
+            val progress: Map<String, InventoryProgress> = profileManager.getProperty("shops")
+            this.applyProgress(progress)
+        }
         battles = BattleContainer().apply {
             val progress: Map<String, BattleProgress> = profileManager.getProperty("battles")
             this.applyProgress(progress)
@@ -144,7 +157,6 @@ class GameData : ProfileObserver {
     }
 
     private fun updateOutdatedSaveGame() {
-        shops.updateOutdatedData()
         quests.updateOutdatedData()
         cutscenes.updateOutdatedData()
         portals.updateOutdatedData()

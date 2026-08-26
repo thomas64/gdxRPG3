@@ -19,6 +19,13 @@ object InventoryDatabase {
         return inventoryItem.createCopy(amount)
     }
 
+    fun createInventoryItem(progress: ItemProgress): InventoryItem {
+        return createInventoryItem(progress.id, progress.amount).apply {
+            progress.changedDurability?.let { durability = it }
+            isSoldToShop = progress.isSoldToShop
+        }
+    }
+
     fun getItemsToCraftForMechanicRank(rank: Int): List<InventoryItem> {
         return inventoryItems.values
             .filter { it.isCraftableForMechanicRank(rank) }
