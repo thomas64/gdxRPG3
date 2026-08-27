@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Savegame Viewer</title>
+<style>
+    :root {
+        --bg: #14171c;
+        --panel: #1b1f27;
+        --panel-2: #222833;
+        --line: #2e3644;
+        --text: #dfe4ec;
+        --dim: #8d97a8;
+        --accent: #6fd3c7;
+        --accent-2: #e0b25f;
+        --good: #77c97a;
+        --bad: #d97070;
+        --radius: 8px;
+        --mono: "JetBrains Mono", "Cascadia Mono", Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font: 14px/1.5 "Segoe UI", system-ui, sans-serif;
+    }
+
+    header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 12px 20px;
+        background: var(--panel);
+        border-bottom: 1px solid var(--line);
+    }
+
+    h1 {
+        font-size: 16px;
+        margin: 0;
+        letter-spacing: .5px;
+        color: var(--accent);
+    }
+
+    button, label.btn {
+        font: inherit;
+        color: var(--text);
+        background: var(--panel-2);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 6px 12px;
+        cursor: pointer;
+    }
+
+    button:hover, label.btn:hover { border-color: var(--accent); }
+
+    input[type=file] { display: none; }
+
+    #filter {
+        font: inherit;
+        color: var(--text);
+        background: var(--panel-2);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 6px 12px;
+        min-width: 220px;
+    }
+
+    #filename { color: var(--dim); margin-left: auto; font-family: var(--mono); font-size: 12px; }
+
+    main { padding: 20px; max-width: 1400px; margin: 0 auto; }
+
+    #drop {
+        border: 2px dashed var(--line);
+        border-radius: var(--radius);
+        padding: 60px 20px;
+        text-align: center;
+        color: var(--dim);
+    }
+
+    #drop.over { border-color: var(--accent); color: var(--accent); }
+
+    #drop code { font-family: var(--mono); color: var(--accent-2); }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+
+    .chip {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 8px 14px;
+        min-width: 110px;
+    }
+
+    .chip .k { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .6px; color: var(--dim); }
+    .chip .v { font-size: 17px; font-weight: 600; color: var(--accent-2); }
+
+    details.sec {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        margin-bottom: 12px;
+    }
+
+    details.sec > summary {
+        cursor: pointer;
+        padding: 10px 14px;
+        font-weight: 600;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+
+    summary::before {
+        content: "▸";
+        color: var(--accent);
+        transition: transform .12s;
+        display: inline-block;
+    }
+
+    details[open] > summary::before { transform: rotate(90deg); }
+
+    .count {
+        margin-left: auto;
+        font: 12px var(--mono);
+        color: var(--dim);
+        background: var(--panel-2);
+        border-radius: 10px;
+        padding: 1px 8px;
+    }
+
+    /* a wide table scrolls inside its own section instead of dragging the whole page sideways. */
+    .body { padding: 4px 14px 14px; overflow-x: auto; }
+
+    details.sub {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        margin: 6px 0;
+        background: var(--panel-2);
+    }
+
+    details.sub > summary { padding: 6px 12px; font-weight: 500; }
+
+    table { border-collapse: collapse; width: 100%; font-size: 13px; }
+    th, td { text-align: left; padding: 4px 10px; border-bottom: 1px solid var(--line); }
+    th { color: var(--dim); font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: .5px; }
+    tr:last-child td { border-bottom: none; }
+    td.num, th.num { text-align: right; }
+    td.num, td.val { font-family: var(--mono); }
+    td.id { font-family: var(--mono); color: var(--accent); }
+    /* these columns size to their content instead of wrapping into a narrow column */
+    th, td.id, td.num, td.val { white-space: nowrap; }
+    td.wide { min-width: 320px; }
+    td.dim { opacity: .4; }
+    /* absorbs the leftover width, so the real columns stay next to each other */
+    .spacer { width: 100%; padding: 0; }
+
+    .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 12px; }
+
+    .card {
+        background: var(--panel-2);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 12px;
+    }
+
+    .card h3 {
+        margin: 0 0 8px;
+        font-size: 15px;
+        color: var(--accent);
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+    }
+
+    .card h3 small { color: var(--dim); font-weight: 400; font-size: 12px; margin-left: auto; }
+
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+
+    /* fills top to bottom first, then the second column */
+    .cols2 { columns: 2; column-gap: 16px; }
+    .cols2 .kv { break-inside: avoid; }
+
+    .kv { display: flex; justify-content: space-between; gap: 8px; border-bottom: 1px solid var(--line); padding: 2px 0; }
+    .kv:last-child { border-bottom: none; }
+    .kv .k { color: var(--dim); }
+    .kv .v { font-family: var(--mono); }
+    .kv.off { opacity: .35; }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+
+    .tag {
+        font: 11px var(--mono);
+        background: var(--bg);
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        padding: 1px 6px;
+    }
+
+    .tag.on { color: var(--good); border-color: #3d5c3f; }
+    .tag.off { color: var(--dim); opacity: .55; }
+    .tag.warn { color: var(--accent-2); border-color: #5c4d2c; }
+
+    .label { color: var(--dim); font-size: 11px; text-transform: uppercase; letter-spacing: .5px; margin-top: 10px; }
+
+    .tree { font: 12.5px/1.6 var(--mono); }
+    .tree details { margin-left: 14px; }
+    .tree summary { cursor: pointer; }
+    .tree .key { color: var(--accent); }
+    .tree .val { color: var(--text); }
+    .tree .val.str { color: var(--accent-2); }
+    .tree .val.bool { color: var(--good); }
+    .tree .val.null { color: var(--dim); }
+    .tree .row { margin-left: 28px; }
+    .tree .cls { color: var(--dim); font-style: italic; }
+
+    .fow { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+    .fow figure { margin: 0; text-align: center; }
+    .fow canvas { image-rendering: pixelated; background: #0d0f13; border: 1px solid var(--line); border-radius: 4px; max-width: 100%; }
+    .fow figcaption { font: 11px var(--mono); color: var(--dim); margin-top: 4px; }
+
+    .hidden { display: none !important; }
+    .empty { color: var(--dim); font-style: italic; }
+    .err { color: var(--bad); font-family: var(--mono); white-space: pre-wrap; }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>SAVEGAME VIEWER</h1>
+    <label class="btn">Open .dat<input type="file" id="file" accept=".dat" multiple></label>
+    <input type="search" id="filter" placeholder="Filter (id, quest, item…)">
+    <button id="expand">Expand all</button>
+    <button id="collapse">Collapse all</button>
+    <span id="filename"></span>
+</header>
+
+<main>
+    <div id="drop">
+        Drop <code>save5.dat</code> here (and optionally <code>fow5.dat</code>) — or use “Open .dat”.<br>
+        <code>%USERPROFILE%\T64.nl\</code>
+    </div>
+    <div id="out"></div>
+</main>
+
+<script>
+"use strict";
+
+// ---------------------------------------------------------------- parsing ---
+
+function parseLibGdxJson(text) {
+    let i = 0;
+
+    function skipWhitespace() {
+        while (i < text.length) {
+            const c = text[i];
+            if (c === " " || c === "\t" || c === "\n" || c === "\r") {
+                i++;
+            } else if (c === "/" && text[i + 1] === "/") {
+                while (i < text.length && text[i] !== "\n") i++;
+            } else if (c === "/" && text[i + 1] === "*") {
+                i += 2;
+                while (i < text.length && !(text[i] === "*" && text[i + 1] === "/")) i++;
+                i += 2;
+            } else {
+                break;
+            }
+        }
+    }
+
+    function skipSeparators() {
+        skipWhitespace();
+        while (text[i] === ",") {
+            i++;
+            skipWhitespace();
+        }
+    }
+
+    function readQuoted() {
+        i++;
+        let out = "";
+        while (i < text.length) {
+            const c = text[i++];
+            if (c === "\\") {
+                const e = text[i++];
+                if (e === "u") {
+                    out += String.fromCharCode(parseInt(text.substr(i, 4), 16));
+                    i += 4;
+                } else {
+                    out += { n: "\n", t: "\t", r: "\r", b: "\b", f: "\f" }[e] ?? e;
+                }
+            } else if (c === '"') {
+                return out;
+            } else {
+                out += c;
+            }
+        }
+        return out;
+    }
+
+    function coerce(token) {
+        if (token === "null") return null;
+        if (token === "true") return true;
+        if (token === "false") return false;
+        if (token !== "" && /^-?\d+(\.\d+)?([eE][-+]?\d+)?$/.test(token)) return Number(token);
+        return token;
+    }
+
+    function readName() {
+        skipWhitespace();
+        if (text[i] === '"') {
+            const name = readQuoted();
+            skipWhitespace();
+            i++; // colon
+            return name;
+        }
+        const start = i;
+        while (i < text.length && text[i] !== ":" && text[i] !== "\n" && text[i] !== "\r") i++;
+        const name = text.slice(start, i).trim();
+        i++; // colon
+        return name;
+    }
+
+    function readValue() {
+        skipWhitespace();
+        const c = text[i];
+        if (c === "{") return readObject();
+        if (c === "[") return readArray();
+        if (c === '"') return readQuoted();
+        const start = i;
+        while (i < text.length && !",}]\n\r".includes(text[i])) i++;
+        return coerce(text.slice(start, i).trim());
+    }
+
+    function readObject() {
+        i++;
+        const map = new Map();
+        for (;;) {
+            skipSeparators();
+            if (i >= text.length) break;
+            if (text[i] === "}") { i++; break; }
+            map.set(readName(), readValue());
+        }
+        return map;
+    }
+
+    function readArray() {
+        i++;
+        const list = [];
+        for (;;) {
+            skipSeparators();
+            if (i >= text.length) break;
+            if (text[i] === "]") { i++; break; }
+            list.push(readValue());
+        }
+        return list;
+    }
+
+    skipWhitespace();
+    return readValue();
+}
+
+function readPreferences(xmlText) {
+    const doc = new DOMParser().parseFromString(xmlText.trim(), "application/xml");
+    if (doc.querySelector("parsererror")) throw new Error("not a valid preferences file");
+    const entries = new Map();
+    for (const node of doc.querySelectorAll("entry")) {
+        entries.set(node.getAttribute("key"), node.textContent);
+    }
+    return entries;
+}
+
+// ---------------------------------------------------------------- helpers ---
+
+const isMap = (value) => value instanceof Map;
+const get = (map, key) => (isMap(map) ? map.get(key) : undefined);
+const entriesOf = (map) => (isMap(map) ? [...map].filter(([key]) => key !== "class") : []);
+const sizeOf = (value) => (Array.isArray(value) ? value.length : isMap(value) ? entriesOf(value).length : 0);
+const unwrap = (value) => (isMap(value) && value.has("value") ? value.get("value") : value);
+
+function titled(id) {
+    return String(id).split(/[_\s]+/).map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+}
+
+function el(tag, className, text) {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text !== undefined) node.textContent = text;
+    return node;
+}
+
+function section(title, count, isOpen = false) {
+    const details = el("details", "sec f-item");
+    details.open = isOpen;
+    const summary = el("summary");
+    summary.append(el("span", null, title));
+    if (count !== null && count !== undefined) summary.append(el("span", "count", String(count)));
+    details.append(summary);
+    const body = el("div", "body");
+    details.append(body);
+    return { details, body };
+}
+
+function subsection(title, count) {
+    const details = el("details", "sub f-item");
+    const summary = el("summary");
+    summary.append(el("span", null, title));
+    if (count !== null && count !== undefined) summary.append(el("span", "count", String(count)));
+    details.append(summary);
+    const body = el("div", "body");
+    details.append(body);
+    return { details, body };
+}
+
+function keyValue(key, value, isOff = false) {
+    const row = el("div", isOff ? "kv off" : "kv");
+    row.append(el("span", "k", key), el("span", "v", String(value)));
+    return row;
+}
+
+function tagged(text, state) {
+    return el("span", "tag " + state, text);
+}
+
+function table(headers, rows) {
+    const node = el("table");
+    const head = el("tr");
+    // a header follows the alignment of its own column, so it stays above its values.
+    headers.forEach((header, index) => {
+        const isNumeric = rows.length > 0 && rows[0][index].cls?.includes("num");
+        head.append(el("th", isNumeric ? "num" : null, header));
+    });
+    head.append(el("th", "spacer"));
+    node.append(head);
+    for (const cells of rows) {
+        const row = el("tr", "f-item");
+        cells.forEach((cell, index) => {
+            const td = el("td", cell.cls ?? (index === 0 ? "id" : null));
+            // a value that is not in the save file at all falls back to its default, shown dimmed.
+            if (cell.isDefault) td.classList.add("dim");
+            if (cell.node) td.append(cell.node); else td.textContent = cell.text ?? "";
+            row.append(td);
+        });
+        row.append(el("td", "spacer"));
+        node.append(row);
+    }
+    return node;
+}
+
+function flagTags(map) {
+    const tags = el("div", "tags");
+    for (const [key, value] of entriesOf(map)) {
+        if (value === true) tags.append(tagged(key, "on"));
+        else if (value === false) tags.append(tagged(key, "off"));
+        else tags.append(tagged(key + ": " + value, "warn"));
+    }
+    if (!tags.children.length) tags.append(el("span", "empty", "—"));
+    return tags;
+}
+
+// ------------------------------------------------------------- game logic ---
+
+const TWELVE_HOURS = 86400;
+const START_OF_DAY = 27000;
+
+function timeOfDay(countdown) {
+    const seconds = START_OF_DAY + (TWELVE_HOURS - countdown) / 2;
+    const hours = Math.floor((seconds / 3600) % 24);
+    const minutes = Math.floor((seconds / 60) % 60);
+    return String(hours).padStart(2, "0") + ":" + String(minutes).padStart(2, "0");
+}
+
+// --------------------------------------------------------------- renderers --
+
+function renderSummary(prefs, state, saveFileName) {
+    const clock = get(state, "clock");
+    const countdown = get(clock, "countdown") ?? TWELVE_HOURS;
+    const hasStarted = get(clock, "hasStarted") === true;
+    const items = get(get(state, "inventory"), "items") ?? [];
+    const gold = items.find((item) => get(item, "id") === "gold");
+    const isAutosave = String(saveFileName).startsWith("autosave");
+    const slot = isAutosave ? "Autosave" : Number(prefs.get("index")) + 1;
+
+    const chips = el("div", "chips");
+    const add = (key, value) => {
+        const chip = el("div", "chip f-item");
+        chip.append(el("span", "k", key), el("span", "v", String(value)));
+        chips.append(chip);
+    };
+
+    add("Profile", prefs.get("id") ?? "—");
+    add("Slot", slot);
+    add("Saved on", prefs.get("saveDate") ?? "—");
+    add("Location", titled(unwrap(get(state, "mapTitle")) ?? "—"));
+    add("Cycle", unwrap(get(state, "numberOfCycles")) ?? "—");
+    add("Clock", hasStarted ? timeOfDay(countdown) : "not started");
+    add("Time left", hasStarted ? Math.round((countdown / TWELVE_HOURS) * 100) + "%" : "—");
+    add("Gold", gold ? get(gold, "amount") : 0);
+    add("Party", sizeOf(get(state, "party")));
+    add("Heroes", sizeOf(get(state, "heroes")));
+    return chips;
+}
+
+function renderHero(name, hero) {
+    const card = el("div", "card f-item");
+    const heading = el("h3");
+    heading.append(el("span", null, titled(name)));
+    heading.append(el("small", null, "XP " + (get(hero, "totalXp") ?? 0)));
+    card.append(heading);
+
+    const vitals = el("div", "grid2");
+    vitals.append(keyValue("HP", get(hero, "currentHp") ?? "—"));
+    vitals.append(keyValue("SP", get(hero, "currentSp") ?? "—"));
+    vitals.append(keyValue("XP to spend", get(hero, "xpPoints") ?? 0));
+    vitals.append(keyValue("Recruited", get(hero, "hasBeenRecruited") === true ? "yes" : "no"));
+    card.append(vitals);
+
+    const stats = entriesOf(get(hero, "statRanks"));
+    if (stats.length) {
+        card.append(el("div", "label", "Attributes"));
+        const grid = el("div", "cols2");
+        for (const [key, value] of stats) grid.append(keyValue(titled(key), value));
+        card.append(grid);
+    }
+
+    const skills = entriesOf(get(hero, "skillRanks"));
+    if (skills.length) {
+        const known = skills.filter(([, value]) => value > 0);
+        card.append(el("div", "label", "Skills (" + known.length + " learned)"));
+        const grid = el("div", "cols2");
+        for (const [key, value] of skills) grid.append(keyValue(titled(key), value, value < 0));
+        card.append(grid);
+    }
+
+    const equipment = entriesOf(get(hero, "equipment"));
+    if (equipment.length) {
+        card.append(el("div", "label", "Equipment"));
+        for (const [slot, item] of equipment) {
+            const durability = get(item, "changedDurability");
+            const suffix = durability === undefined ? "" : "  (dur " + durability + ")";
+            card.append(keyValue(titled(slot), titled(get(item, "id")) + suffix));
+        }
+    }
+
+    const abilities = get(hero, "abilities") ?? [];
+    if (abilities.length) {
+        card.append(el("div", "label", "Abilities"));
+        const tags = el("div", "tags");
+        for (const ability of abilities) tags.append(tagged(ability, "on"));
+        card.append(tags);
+    }
+    return card;
+}
+
+function renderHeroes(title, heroes, isOpen) {
+    const { details, body } = section(title, sizeOf(heroes), isOpen);
+    const cards = el("div", "cards");
+    for (const [name, hero] of entriesOf(heroes)) cards.append(renderHero(name, hero));
+    body.append(cards.children.length ? cards : el("div", "empty", "empty"));
+    return details;
+}
+
+function renderInventory(title, inventory) {
+    const { details, body } = section(title, sizeOf(get(inventory, "items")));
+    body.append(renderItemTable(inventory));
+    return details;
+}
+
+function renderItemTable(inventory) {
+    const items = get(inventory, "items") ?? [];
+    const rows = items.map((item) => [
+        { text: titled(get(item, "id")), cls: "id wide" },
+        { text: get(item, "amount") ?? 1, cls: "num" },
+        { text: get(item, "changedDurability") ?? "—", cls: "num" },
+        { text: get(item, "slot") ?? "—", cls: "num" },
+    ]);
+    if (!rows.length) return el("div", "empty", "empty");
+    return table(["Item", "Amount", "Durability", "Slot"], rows);
+}
+
+function renderQuests(quests) {
+    const all = entriesOf(quests);
+    const finished = all.filter(([, quest]) => get(quest, "resetState") === "FINISHED").length;
+    const { details, body } = section("Quests", finished + " / " + all.length + " finished");
+
+    for (const [id, quest] of all) {
+        const tasks = entriesOf(get(quest, "tasks"));
+        const complete = tasks.filter(([, task]) => get(task, "isComplete") === true).length;
+        const sub = subsection(titled(id.replace(/^quest_/, "")), complete + "/" + tasks.length);
+        for (const [field, value] of entriesOf(quest).filter(([key]) => key !== "tasks")) {
+            sub.body.append(keyValue(field, value));
+        }
+        for (const [taskId, task] of tasks) {
+            const row = el("div", "kv f-item");
+            row.append(el("span", "k", "Task " + taskId));
+            const value = el("span", "v");
+            value.append(flagTags(task));
+            row.append(value);
+            sub.body.append(row);
+        }
+        body.append(sub.details);
+    }
+    if (!all.length) body.append(el("div", "empty", "empty"));
+    return details;
+}
+
+// for a plain id to boolean map, where the boolean itself has no field name in the save file.
+function renderBooleanTable(title, map, column) {
+    const all = entriesOf(map);
+    const onCount = all.filter(([, value]) => value === true).length;
+    const { details, body } = section(title, onCount + " / " + all.length);
+    const rows = all.map(([id, value]) => [
+        { text: id, cls: "id wide" },
+        { text: String(value), cls: "val" },
+    ]);
+    body.append(rows.length ? table(["Id", column], rows) : el("div", "empty", "empty"));
+    return details;
+}
+
+function renderProgressTable(title, map, columns, defaults = {}) {
+    const all = entriesOf(map);
+    const { details, body } = section(title, all.length);
+    const rows = all.map(([id, progress]) => [
+        { text: id, cls: "id wide" },
+        ...columns.map((column) => {
+            const stored = get(progress, column);
+            const value = stored === undefined ? defaults[column] : stored;
+            return {
+                text: value === undefined ? "—" : String(value),
+                cls: typeof value === "number" ? "num" : "val",
+                isDefault: stored === undefined,
+            };
+        }),
+    ]);
+    body.append(rows.length ? table(["Id", ...columns], rows) : el("div", "empty", "empty"));
+    return details;
+}
+
+// conversations is a single ConversationProgress, not a map of them: the ids sit inside phraseIds.
+function renderConversations(conversations) {
+    const all = entriesOf(get(conversations, "phraseIds"));
+    const { details, body } = section("Conversations", all.length);
+    const rows = all.map(([id, phraseId]) => [
+        { text: id, cls: "id wide" },
+        { text: String(phraseId), cls: "val" },
+    ]);
+    body.append(rows.length ? table(["Conversation", "Phrase id"], rows) : el("div", "empty", "empty"));
+    return details;
+}
+
+function renderShops(shops) {
+    const all = entriesOf(shops);
+    const { details, body } = section("Shops", all.length);
+    for (const [id, inventory] of all) {
+        const sub = subsection(titled(id), sizeOf(get(inventory, "items")));
+        sub.body.append(renderItemTable(inventory));
+        body.append(sub.details);
+    }
+    if (!all.length) body.append(el("div", "empty", "empty"));
+    return details;
+}
+
+function renderLoot(title, loot) {
+    const all = entriesOf(loot);
+    const { details, body } = section(title, all.length);
+    for (const [id, progress] of all) {
+        const row = el("div", "kv f-item");
+        row.append(el("span", "k", id));
+        const value = el("span", "v");
+        const content = get(progress, "changedContent");
+        const parts = entriesOf(content).map(([item, amount]) => item + " ×" + amount);
+        const flags = entriesOf(progress).filter(([key]) => key !== "changedContent").map(([key, val]) => key + ": " + val);
+        value.textContent = [...parts, ...flags].join("   ") || "—";
+        row.append(value);
+        body.append(row);
+    }
+    if (!all.length) body.append(el("div", "empty", "empty"));
+    return details;
+}
+
+function renderSpoils(spoils) {
+    const all = entriesOf(get(spoils, "spoils"));
+    const { details, body } = section("Spoils on the ground", all.length);
+    const rows = all.map(([id, spoil]) => [
+        { text: id, cls: "id" },
+        { text: get(spoil, "mapId") ?? "—" },
+        { text: Math.round(get(spoil, "x") ?? 0), cls: "num" },
+        { text: Math.round(get(spoil, "y") ?? 0), cls: "num" },
+        { text: entriesOf(get(spoil, "loot")).map(([item, amount]) => item + " ×" + amount).join(", ") || "empty" },
+    ]);
+    body.append(rows.length ? table(["Id", "Map", "X", "Y", "Loot"], rows) : el("div", "empty", "empty"));
+    return details;
+}
+
+function renderBlockers(container) {
+    const all = get(container, "removedBlockers") ?? [];
+    const { details, body } = section("Removed blockers", all.length);
+    const rows = all.map((blocker) => {
+        const rect = get(blocker, "rectangle");
+        return [
+            { text: get(blocker, "id"), cls: "id" },
+            { text: get(rect, "x"), cls: "num" },
+            { text: get(rect, "y"), cls: "num" },
+            { text: get(rect, "width") + " × " + get(rect, "height"), cls: "num" },
+        ];
+    });
+    body.append(rows.length ? table(["Map", "X", "Y", "Size"], rows) : el("div", "empty", "empty"));
+    return details;
+}
+
+function renderTree(value, key) {
+    if (isMap(value) || Array.isArray(value)) {
+        const details = el("details", "f-item");
+        const summary = el("summary");
+        summary.append(el("span", "key", key));
+        const type = Array.isArray(value) ? "[" + value.length + "]" : "{" + entriesOf(value).length + "}";
+        summary.append(el("span", "val null", " " + type));
+        const className = get(value, "class");
+        if (className) summary.append(el("span", "cls", "  " + String(className).split(".").pop()));
+        details.append(summary);
+        const pairs = Array.isArray(value) ? value.map((item, index) => [String(index), item]) : entriesOf(value);
+        for (const [childKey, childValue] of pairs) details.append(renderTree(childValue, childKey));
+        return details;
+    }
+    const row = el("div", "row f-item");
+    row.append(el("span", "key", key + ": "));
+    const type = value === null ? "null" : typeof value === "boolean" ? "bool" : typeof value === "string" ? "str" : "";
+    row.append(el("span", "val " + type, String(value)));
+    return row;
+}
+
+function renderFogOfWar(fogOfWar) {
+    const all = entriesOf(fogOfWar);
+    const explored = all.map(([map, rows]) => {
+        const grid = (rows ?? []).map(String);
+        const seen = grid.reduce((total, row) => total + (row.match(/#/g) ?? []).length, 0);
+        const cells = grid.reduce((total, row) => total + row.length, 0);
+        return { map, grid, seen, cells };
+    });
+    const { details, body } = section("Fog of war", explored.length);
+    const gallery = el("div", "fow");
+
+    for (const { map, grid, seen, cells } of explored) {
+        const width = Math.max(0, ...grid.map((row) => row.length));
+        const figure = el("figure", "f-item");
+        const canvas = el("canvas");
+        canvas.width = width;
+        canvas.height = grid.length;
+        canvas.style.width = Math.min(240, width * 3) + "px";
+        const context = canvas.getContext("2d");
+        context.fillStyle = "#6fd3c7";
+        grid.forEach((row, y) => {
+            for (let x = 0; x < row.length; x++) {
+                if (row[x] === "#") context.fillRect(x, y, 1, 1);
+            }
+        });
+        figure.append(canvas);
+        const percentage = cells ? Math.round((seen / cells) * 100) : 0;
+        figure.append(el("figcaption", null, titled(map) + " — " + percentage + "%"));
+        gallery.append(figure);
+    }
+    body.append(explored.length ? gallery : el("div", "empty", "empty"));
+    return details;
+}
+
+// ------------------------------------------------------------------ build ---
+
+const KNOWN_KEYS = new Set(["party", "heroes", "inventory", "storage", "shops", "quests", "cutscenes",
+    "portals", "doors", "battles", "events", "conversations", "loot", "spoils", "removedBlockers",
+    "clock", "mapTitle", "numberOfCycles", "fogOfWar"]);
+
+function build(prefs, state, fogOfWar, saveFileName) {
+    const out = document.getElementById("out");
+    out.textContent = "";
+
+    if (state) {
+        out.append(renderSummary(prefs, state, saveFileName));
+        out.append(renderHeroes("Party", get(state, "party"), true));
+        out.append(renderHeroes("Heroes (not in party)", get(state, "heroes"), false));
+
+        out.append(renderInventory("Inventory", get(state, "inventory")));
+        out.append(renderInventory("Storage", get(state, "storage")));
+
+        out.append(renderShops(get(state, "shops")));
+        out.append(renderQuests(get(state, "quests")));
+        out.append(renderProgressTable("Events", get(state, "events"), ["hasPlayed", "isRepeated"],
+                                      { hasPlayed: false, isRepeated: false }));
+        out.append(renderBooleanTable("Cutscenes", get(get(state, "cutscenes"), "cutsceneEverPlayedBefore"),
+                                     "hasEverPlayedBefore"));
+        out.append(renderBooleanTable("Portals", get(get(state, "portals"), "portals"), "isActivated"));
+        out.append(renderProgressTable("Doors", get(state, "doors"), ["isUnlocked", "isOpened"],
+                                      { isUnlocked: false, isOpened: false }));
+        out.append(renderProgressTable("Battles", get(state, "battles"), ["wantsToFight", "isDefeated"],
+                                      { wantsToFight: true, isDefeated: false }));
+        out.append(renderConversations(get(state, "conversations")));
+        out.append(renderLoot("Loot containers", get(state, "loot")));
+        out.append(renderSpoils(get(state, "spoils")));
+        out.append(renderBlockers(get(state, "removedBlockers")));
+
+        const leftovers = entriesOf(state).filter(([key]) => !KNOWN_KEYS.has(key));
+        if (leftovers.length) {
+            const other = section("Other keys", leftovers.length);
+            for (const [key, wrapped] of leftovers) {
+                // most of these are a java.lang.Boolean/String wrapper around a single value.
+                const value = unwrap(wrapped);
+                if (isMap(value) || Array.isArray(value)) {
+                    const tree = el("div", "tree");
+                    tree.append(renderTree(value, key));
+                    other.body.append(tree);
+                } else {
+                    other.body.append(keyValue(key, value === null ? "—" : value));
+                }
+            }
+            out.append(other.details);
+        }
+
+        const raw = section("Raw save state", entriesOf(state).length);
+        raw.body.classList.add("tree");
+        for (const [key, value] of entriesOf(state)) raw.body.append(renderTree(value, key));
+        out.append(raw.details);
+    }
+
+    if (fogOfWar) out.append(renderFogOfWar(fogOfWar));
+
+    for (const node of out.querySelectorAll(".f-item")) {
+        node.dataset.txt = node.textContent.toLowerCase();
+    }
+    applyFilter(document.getElementById("filter").value);
+}
+
+// ------------------------------------------------------------------- glue ---
+
+function applyFilter(query) {
+    const needle = query.trim().toLowerCase();
+    const items = document.querySelectorAll("#out .f-item");
+    if (!needle) {
+        for (const item of items) item.classList.remove("hidden");
+        return;
+    }
+    for (const item of items) {
+        const matches = item.dataset.txt.includes(needle);
+        item.classList.toggle("hidden", !matches);
+        if (matches) {
+            let parent = item.parentElement;
+            while (parent) {
+                if (parent.tagName === "DETAILS") parent.open = true;
+                parent = parent.parentElement;
+            }
+        }
+    }
+}
+
+// a save and its fog of war live in two separate files, so they can be dropped one at a time.
+const loaded = { prefs: new Map(), state: null, fogOfWar: null, saveName: "", fogName: "" };
+
+function loadFiles(files) {
+    const failures = [];
+    let pending = files.length;
+
+    for (const file of files) {
+        const reader = new FileReader();
+        reader.onload = () => {
+            try {
+                readIntoLoaded(file.name, reader.result);
+            } catch (error) {
+                failures.push(file.name + ": " + error.message);
+            }
+            if (--pending === 0) showLoaded(failures);
+        };
+        reader.readAsText(file);
+    }
+}
+
+function readIntoLoaded(fileName, text) {
+    const entries = readPreferences(text);
+    if (entries.has("saveState")) {
+        loaded.prefs = entries;
+        loaded.state = parseLibGdxJson(entries.get("saveState"));
+        loaded.saveName = fileName;
+    } else if (entries.has("fogOfWar")) {
+        loaded.fogOfWar = parseLibGdxJson(entries.get("fogOfWar"));
+        loaded.fogName = fileName;
+    } else {
+        throw new Error("holds no saveState or fogOfWar, so there is nothing to show");
+    }
+}
+
+function showLoaded(failures) {
+    document.getElementById("drop").classList.toggle("hidden", loaded.state !== null || loaded.fogOfWar !== null);
+    document.getElementById("filename").textContent = [loaded.saveName, loaded.fogName].filter(Boolean).join("  +  ");
+    build(loaded.prefs, loaded.state, loaded.fogOfWar, loaded.saveName);
+    for (const failure of failures) {
+        document.getElementById("out").prepend(el("div", "err", failure));
+    }
+}
+
+document.getElementById("file").addEventListener("change", (event) => loadFiles([...event.target.files]));
+document.getElementById("filter").addEventListener("input", (event) => applyFilter(event.target.value));
+document.getElementById("expand").addEventListener("click", () => {
+    for (const details of document.querySelectorAll("#out details")) details.open = true;
+});
+document.getElementById("collapse").addEventListener("click", () => {
+    for (const details of document.querySelectorAll("#out details")) details.open = false;
+});
+
+const dropZone = document.getElementById("drop");
+document.addEventListener("dragover", (event) => {
+    event.preventDefault();
+    dropZone.classList.add("over");
+});
+// only a dragleave without a next element is a drag that left the window, the rest is hovering.
+document.addEventListener("dragleave", (event) => {
+    if (event.relatedTarget === null) dropZone.classList.remove("over");
+});
+document.addEventListener("drop", (event) => {
+    event.preventDefault();
+    dropZone.classList.remove("over");
+    loadFiles([...event.dataTransfer.files]);
+});
+</script>
+</body>
+</html>
