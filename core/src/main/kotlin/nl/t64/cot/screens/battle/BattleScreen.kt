@@ -387,7 +387,7 @@ class BattleScreen : Screen {
 
     private fun weaponPreBattleConfirmed(weaponAction: WeaponAction) {
         confirmManager.weaponConfirmed(weaponAction)
-        menuManager.returnToPreBattleMainMenu()
+        menuManager.returnToSelectWeaponInPreBattle()
     }
 
     private fun weaponConfirmed(weaponAction: WeaponAction) {

@@ -213,11 +213,16 @@ class BattleMenuManager(
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    fun returnToPreBattleMainMenu() {
+    private fun returnToPreBattleMainMenu() {
         buttonTableWeapon.remove()
         buttonTablePotion.remove()
         buttonTableHero.remove()
         setupPreBattleTable()
+    }
+
+    fun returnToSelectWeaponInPreBattle() {
+        buttonTableWeapon.remove()
+        setupWeaponTable(preBattleEquipmentListener)
     }
 
     fun returnToSelectPotionInPreBattle() {
