@@ -19,7 +19,7 @@ import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.screens.world.entity.EntityState
 import nl.t64.cot.screens.world.mapobjects.*
 import nl.t64.cot.screens.world.pathfinding.TiledGraph
-import java.util.*
+import java.util.concurrent.atomic.AtomicInteger
 import kotlin.concurrent.thread
 
 
@@ -83,7 +83,11 @@ class GameMap(
 
     var playerSpawnLocation: Vector2 = Vector2()
     var playerSpawnDirection: Direction = Direction.NONE
-    private val tiledGraphs: EnumMap<EntityState, TiledGraph> = EnumMap(EntityState::class.java)
+    // Built on a background thread and handed over in one go. Volatile, so the render thread either sees the
+    // previous set or the complete new one, and never a graph that is still being filled.
+    @Volatile
+    private var tiledGraphs: Map<EntityState, TiledGraph> = emptyMap()
+    private val graphRequestCount: AtomicInteger = AtomicInteger()
 
     val cameraBlockers: List<GameMapCameraBlocker> = loader.loadAllRectanglesAndTransform(CAMERA_BLOCKER_LAYER) { GameMapCameraBlocker(it) }
     val schedules: List<RectangleMapObject> = loader.loadAllRectanglesFromLayer(SCHEDULED_LAYER)
@@ -118,15 +122,24 @@ class GameMap(
     private val portals: List<GameMapPortal> = loader.loadAllRectanglesAndTransform(PORTAL_LAYER) { GameMapPortal(it, mapTitle) }
     private val warpPortals: List<GameMapWarpPortal> = loader.loadAllRectanglesAndTransform(WARP_LAYER) { GameMapWarpPortal(it, mapTitle) }
 
+    // A door or a blocker can ask for a rebuild while an earlier one is still running. Every request gets a
+    // number, and only the newest one is allowed to publish, so a slow older build cannot overwrite it.
     fun setTiledGraphs() {
-            thread {
-                tiledGraphs[EntityState.WALKING] = TiledGraph(width, height, EntityState.WALKING)
-                tiledGraphs[EntityState.FLYING] = TiledGraph(width, height, EntityState.FLYING)
+        val requestNumber: Int = graphRequestCount.incrementAndGet()
+        thread {
+            val newGraphs: Map<EntityState, TiledGraph> =
+                mapOf(EntityState.WALKING to TiledGraph(width, height, EntityState.WALKING),
+                      EntityState.FLYING to TiledGraph(width, height, EntityState.FLYING))
+            if (requestNumber == graphRequestCount.get()) {
+                tiledGraphs = newGraphs
             }
+        }
     }
 
+    // Read the volatile once, so a rebuild that lands halfway cannot make one call consult two generations.
     fun getTiledGraph(state: EntityState): TiledGraph? {
-        return tiledGraphs[state] ?: tiledGraphs[EntityState.WALKING]
+        val currentGraphs: Map<EntityState, TiledGraph> = tiledGraphs
+        return currentGraphs[state] ?: currentGraphs[EntityState.WALKING]
     }
 
     fun getUnderground(point: Vector2): String {
@@ -181,7 +194,6 @@ class GameMap(
 
     fun dispose() {
         torches.forEach { it.dispose() }
-        tiledMap.dispose()
     }
 
     fun debug(shapeRenderer: ShapeRenderer) {

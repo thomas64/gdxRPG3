@@ -59,8 +59,16 @@ class CrystalOfTime : Game() {
     }
 
     private fun updateTitleBar() {
+        val previousRuntime: Float = runtime
         runtime += Gdx.graphics.deltaTime
+        if (isSameInterval(previousRuntime, runtime)) return
+
         Gdx.graphics.setTitle("${Constant.TITLE} - FPS: ${Gdx.graphics.framesPerSecond} - runtime: ${runtime.toTitle()}")
+    }
+
+    private fun isSameInterval(previousRuntime: Float, currentRuntime: Float): Boolean {
+        val titleBarInterval = 0.5f
+        return (previousRuntime / titleBarInterval).toInt() == (currentRuntime / titleBarInterval).toInt()
     }
 
     private fun Float.toTitle(): String {

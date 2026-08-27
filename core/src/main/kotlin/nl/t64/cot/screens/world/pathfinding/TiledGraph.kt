@@ -15,27 +15,28 @@ class TiledGraph(
     private val state: EntityState
 ) : IndexedGraph<TiledNode> {
 
-    private val nodes: Array<TiledNode> = Array(width * height)
+    private val nodes: Array<TiledNode> = createFilledNodes()
+    private val heuristic: TiledHeuristic = TiledHeuristic()
+    private val pathFinder: IndexedAStarPathFinder<TiledNode> = IndexedAStarPathFinder(this)
 
     init {
-        fillNodes()
         addConnections()
     }
 
     fun findPath(startPoint: Vector2, endPoint: Vector2): DefaultGraphPath<TiledNode> {
-        val pathFinder = IndexedAStarPathFinder(this)
-        val tiledHeuristic = TiledHeuristic()
         val path = DefaultGraphPath<TiledNode>()
-        pathFinder.searchNodePath(getNode(startPoint), getNode(endPoint), tiledHeuristic, path)
+        pathFinder.searchNodePath(getNode(startPoint), getNode(endPoint), heuristic, path)
         return path
     }
 
-    private fun fillNodes() {
+    private fun createFilledNodes(): Array<TiledNode> {
+        val filledNodes: Array<TiledNode> = Array(width * height)
         (0 until width).forEach { x: Int ->
             (0 until height).forEach { y: Int ->
-                nodes.add(TiledNode(x, y))
+                filledNodes.add(TiledNode(x, y))
             }
         }
+        return filledNodes
     }
 
     private fun addConnections() {

@@ -7,6 +7,8 @@ import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.world.entity.events.*
 import nl.t64.cot.screens.world.pathfinding.TiledNode
+import kotlin.math.abs
+import kotlin.math.max
 
 
 private const val SECOND_NODE = 1
@@ -46,9 +48,17 @@ class InputEnemy : InputComponent() {
     }
 
     private fun getPathToPlayer(event: FindPathEvent): DefaultGraphPath<TiledNode> {
-        val startPoint = enemyEntity.getPositionInGrid()
-        val endPoint = event.playerGridPosition
+        val startPoint: Vector2 = enemyEntity.getPositionInGrid()
+        val endPoint: Vector2 = event.playerGridPosition
+        if (isTooFarAwayToEverDetect(startPoint, endPoint)) {
+            return DefaultGraphPath()
+        }
         return mapManager.findPath(startPoint, endPoint, state)
+    }
+
+    private fun isTooFarAwayToEverDetect(startPoint: Vector2, endPoint: Vector2): Boolean {
+        val distanceInNodes: Float = max(abs(endPoint.x - startPoint.x), abs(endPoint.y - startPoint.y))
+        return distanceInNodes > MAXIMUM_DETECTION_RANGE + 2
     }
 
     private fun setIsDetectingPlayer(onDetectionEvent: OnDetectionEvent) {
