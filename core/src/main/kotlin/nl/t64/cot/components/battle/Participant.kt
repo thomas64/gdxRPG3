@@ -8,6 +8,7 @@ import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.components.party.inventory.InventoryItem
 import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.components.party.stats.StatItemId
+import nl.t64.cot.screens.battle.BattleUtils
 import kotlin.math.roundToInt
 
 
@@ -167,6 +168,7 @@ class Participant(
         val enemy = character as EnemyItem
         enemy.swapToStashedWeapon()
         currentAP -= SWITCH_WEAPON_AP
+        BattleUtils.reapplyEffectsOfPerformance()
     }
 
     fun getCurrentWeapon(): InventoryItem? {

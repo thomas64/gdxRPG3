@@ -20,6 +20,11 @@ object BattleUtils {
         setIsPerformingTrueInBattleScreenTheUglyWay()
     }
 
+    fun reapplyEffectsOfPerformance() {
+        val turnManager = getTurnManagerTheUglyWay()
+        turnManager.troubadourEffects.possibleApply()
+    }
+
     fun staggerTarget(target: Participant) {
         val turnManager = getTurnManagerTheUglyWay()
         turnManager.stagger(target)

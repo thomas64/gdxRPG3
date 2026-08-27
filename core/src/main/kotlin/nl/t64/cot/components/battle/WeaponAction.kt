@@ -9,6 +9,7 @@ import nl.t64.cot.components.party.inventory.InventoryItem
 import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.components.party.stats.StatItemId
 import nl.t64.cot.removeColorCoding
+import nl.t64.cot.screens.battle.BattleUtils
 
 
 const val SWITCH_WEAPON_AP: Int = 3
@@ -78,6 +79,7 @@ class WeaponAction(
         } else {
             equip(InventoryGroup.WEAPON, newWeapon, currentWeapon)
         }
+        BattleUtils.reapplyEffectsOfPerformance()
     }
 
     private fun handleShield() {
