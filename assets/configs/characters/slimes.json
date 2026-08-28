@@ -33,20 +33,20 @@
       "intelligence": 2,
       "dexterity"   : 5,
       "strength"    : 12,
-      "speed"       : 5,
+      "speed"       : 7,
       "willpower"   : 1,
       "constitution": 10,
-      "stamina"     : 5
+      "stamina"     : 7
     },
     "skills"   : {
-      "spear": 1
+      "spear": 2
     },
     "abilities": [
       "body_slam_2"
     ],
     "inventory": {
       "weapon": "attack_spear_str_65_15",
-      "chest" : "armor_6"
+      "chest" : "armor_7"
     }
   },
   "blue_slime"         : {
@@ -58,20 +58,45 @@
       "intelligence": 2,
       "dexterity"   : 5,
       "strength"    : 12,
-      "speed"       : 5,
+      "speed"       : 7,
       "willpower"   : 1,
       "constitution": 10,
-      "stamina"     : 5
+      "stamina"     : 7
     },
     "skills"   : {
-      "spear": 1
+      "spear": 2
     },
     "abilities": [
       "body_slam_2"
     ],
     "inventory": {
       "weapon": "attack_spear_str_65_15",
-      "chest" : "armor_6"
+      "chest" : "armor_7"
+    }
+  },
+  "yellow_slime"       : {
+    "name"     : "Yellow Slime",
+    "gender"   : "its",
+    "ap"       : 3,
+    "drops"    : {"yellow_jelly": 25},
+    "stats"    : {
+      "intelligence": 2,
+      "dexterity"   : 5,
+      "strength"    : 15,
+      "speed"       : 9,
+      "willpower"   : 1,
+      "constitution": 14,
+      "stamina"     : 11
+    },
+    "skills"   : {
+      "spear": 3
+    },
+    "abilities": [
+      "body_slam_2"
+    ],
+    "inventory": {
+      "weapon": "attack_spear_str_65_17",
+      "chest" : "armor_28"
     }
   }
 }

@@ -1,90 +1,27 @@
-
 resource.png
-size: 248, 186
-format: RGBA8888
-filter: Nearest, Nearest
-repeat: none
+size:248,186
+repeat:none
 blue_jelly
-  rotate: false
-  xy: 0, 0
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
+bounds:0,0,62,62
 cloth
-  rotate: false
-  xy: 62, 0
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
+bounds:62,0,62,62
 gemstone
-  rotate: false
-  xy: 124, 0
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
+bounds:124,0,62,62
 gold
-  rotate: false
-  xy: 186, 0
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
+bounds:186,0,62,62
 green_jelly
-  rotate: false
-  xy: 0, 62
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
+bounds:0,62,62,62
 herb
-  rotate: false
-  xy: 62, 62
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
-horseshoe
-  rotate: false
-  xy: 124, 62
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
+bounds:62,62,62,62
 leather
-  rotate: false
-  xy: 186, 62
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
+bounds:124,62,62,62
 metal
-  rotate: false
-  xy: 0, 124
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
+bounds:186,62,62,62
 spice
-  rotate: false
-  xy: 62, 124
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
+bounds:0,124,62,62
 stone
-  rotate: false
-  xy: 124, 124
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
+bounds:62,124,62,62
 wood
-  rotate: false
-  xy: 186, 124
-  size: 62, 62
-  orig: 62, 62
-  offset: 0, 0
-  index: -1
+bounds:124,124,62,62
+yellow_jelly
+bounds:186,124,62,62

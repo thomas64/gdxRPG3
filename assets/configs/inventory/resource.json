@@ -1,5 +1,5 @@
 {
-  "gold"       : {
+  "gold"        : {
     "name"       : "Gold",
     "group"      : "RESOURCE",
     "sort"       : 90500,
@@ -7,7 +7,7 @@
       "Gold can be used to pay for goods or services."
     ]
   },
-  "herb"       : {
+  "herb"        : {
     "name"       : "Herb",
     "group"      : "RESOURCE",
     "sort"       : 90010,
@@ -18,7 +18,7 @@
       "They also contain healing possibilities (Healer Skill)."
     ]
   },
-  "spice"      : {
+  "spice"       : {
     "name"       : "Spice",
     "group"      : "RESOURCE",
     "sort"       : 90020,
@@ -28,7 +28,7 @@
       "and in creating potions (Alchemist Skill)."
     ]
   },
-  "gemstone"   : {
+  "gemstone"    : {
     "name"       : "Gemstone",
     "group"      : "RESOURCE",
     "sort"       : 90030,
@@ -38,7 +38,7 @@
       "and in creating potions (Alchemist Skill)."
     ]
   },
-  "green_jelly": {
+  "green_jelly" : {
     "name"       : "Green Jelly",
     "group"      : "RESOURCE",
     "sort"       : 90040,
@@ -48,7 +48,7 @@
       "May be useful for various purposes."
     ]
   },
-  "blue_jelly" : {
+  "blue_jelly"  : {
     "name"       : "Blue Jelly",
     "group"      : "RESOURCE",
     "sort"       : 90041,
@@ -58,7 +58,17 @@
       "May be useful for various purposes."
     ]
   },
-  "leather"    : {
+  "yellow_jelly": {
+    "name"       : "Yellow Jelly",
+    "group"      : "RESOURCE",
+    "sort"       : 90042,
+    "price"      : 1,
+    "description": [
+      "Jelly from a Yellow Slime.",
+      "May be useful for various purposes."
+    ]
+  },
+  "leather"     : {
     "name"       : "Leather",
     "group"      : "RESOURCE",
     "sort"       : 90060,
@@ -68,7 +78,7 @@
       "weapons and shields (Mechanic Skill)."
     ]
   },
-  "wood"       : {
+  "wood"        : {
     "name"       : "Wood",
     "group"      : "RESOURCE",
     "sort"       : 90070,
@@ -78,7 +88,7 @@
       "weapons and shields (Mechanic Skill)."
     ]
   },
-  "metal"      : {
+  "metal"       : {
     "name"       : "Metal",
     "group"      : "RESOURCE",
     "sort"       : 90090,

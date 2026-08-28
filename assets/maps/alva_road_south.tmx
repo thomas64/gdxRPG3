@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="74" height="104" tilewidth="24" tileheight="24" infinite="0" nextlayerid="23" nextobjectid="195">
+<map version="1.11" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="74" height="104" tilewidth="24" tileheight="24" infinite="0" nextlayerid="23" nextobjectid="201">
  <properties>
   <property name="bgm" value="bgm_overworld"/>
   <property name="lightmap_camera" value="sunlight"/>
@@ -58,7 +58,7 @@
  </layer>
  <objectgroup id="14" name="camera_blocker"/>
  <objectgroup color="#aaffff" id="15" name="bgs_volume"/>
- <objectgroup color="#0055ff" id="10" name="sound">
+ <objectgroup color="#0055ff" id="10" name="sound" visible="0">
   <object id="96" name="stone" x="336" y="2448">
    <polygon points="288,-1248 264,-1248 240,-1200 240,-864 216,-864 192,-816 192,-672 168,-672 144,-624 144,-528 120,-528 96,-480 96,-384 72,-384 48,-336 48,-288 24,-288 0,-240 0,48 144,48 144,-336 192,-360 192,-480 240,-504 240,-576 288,-576 336,-600 336,-624 384,-624 432,-624 480,-624 528,-624 576,-624 576,-600 624,-576 672,-600 672,-624 720,-648 672,-672 624,-672 576,-672 576,-696 528,-720 480,-720 480,-744 432,-768 384,-768 408,-744 384,-720 360,-696 336,-720 336,-768 360,-792 384,-768 432,-768 432,-792 384,-816 384,-840 336,-864 336,-1200 384,-1224 384,-1296 432,-1320 432,-1392 480,-1416 480,-1488 528,-1512 528,-1536 576,-1560 576,-1728 624,-1752 624,-1824 672,-1848 672,-1920 720,-1920 768,-1944 768,-1968 816,-1992 816,-2040 768,-2064 768,-2088 720,-2112 696,-2112 672,-2064 648,-2064 624,-2016 624,-1968 600,-1968 576,-1920 552,-1920 528,-1872 528,-1776 504,-1776 480,-1728 480,-1584 456,-1584 432,-1536 408,-1536 384,-1488 384,-1440 360,-1440 336,-1392 336,-1344 312,-1344 288,-1296"/>
   </object>
@@ -88,7 +88,7 @@
  <objectgroup color="#aa5500" id="16" name="collision_low">
   <object id="173" x="240" y="1512" width="30" height="30"/>
  </objectgroup>
- <objectgroup color="#aa0000" id="11" name="collision">
+ <objectgroup color="#aa0000" id="11" name="collision" visible="0">
   <object id="4" x="1248" y="0" width="528" height="144"/>
   <object id="5" x="1392" y="144" width="384" height="192"/>
   <object id="6" x="1488" y="336" width="288" height="48"/>
@@ -190,29 +190,30 @@
   <object id="182" name="sparkle_alva_south_08" x="1104" y="1992" width="48" height="48"/>
   <object id="183" name="sparkle_alva_south_09" x="192" y="2064" width="48" height="48"/>
   <object id="184" name="sparkle_alva_south_10" x="1248" y="1584" width="48" height="48"/>
+  <object id="197" name="chest_alva_06" x="528" y="2160" width="48" height="48"/>
  </objectgroup>
  <objectgroup color="#ff007f" id="18" name="enemy">
-  <object id="185" name="orc_scout" type="w" x="1272" y="312" width="48" height="24">
-   <properties>
-    <property name="battleId" value="alva_battle_15"/>
-   </properties>
-  </object>
-  <object id="188" name="orc_scout" type="w" x="744" y="960" width="48" height="24">
-   <properties>
-    <property name="battleId" value="alva_battle_16"/>
-   </properties>
-  </object>
   <object id="189" name="blue_slime" type="w" x="432" y="744" width="48" height="24">
    <properties>
     <property name="battleId" value="alva_battle_19"/>
    </properties>
   </object>
-  <object id="190" name="green_imp" type="w" x="384" y="2208" width="48" height="24">
+  <object id="190" name="green_imp" type="f" x="1272" y="312" width="48" height="24">
    <properties>
     <property name="battleId" value="alva_battle_17"/>
    </properties>
   </object>
-  <object id="191" name="orc_scout" type="w" x="1440" y="1800" width="48" height="24">
+  <object id="198" name="yellow_slime" type="w" x="288" y="2208" width="48" height="24">
+   <properties>
+    <property name="battleId" value="alva_battle_20"/>
+   </properties>
+  </object>
+  <object id="199" name="green_bat" type="f" x="672" y="1104" width="48" height="24">
+   <properties>
+    <property name="battleId" value="alva_battle_21"/>
+   </properties>
+  </object>
+  <object id="200" name="green_imp" type="f" x="1464" y="1800" width="48" height="24">
    <properties>
     <property name="battleId" value="alva_battle_18"/>
    </properties>

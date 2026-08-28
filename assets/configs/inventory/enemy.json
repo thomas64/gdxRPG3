@@ -13,6 +13,13 @@
     "base_hit"    : 65,
     "damage"      : 15
   },
+  "attack_spear_str_65_17": {
+    "group"       : "WEAPON",
+    "skill"       : "SPEAR",
+    "min_strength": 1,
+    "base_hit"    : 65,
+    "damage"      : 17
+  },
   "attack_axe_dex_80_8"   : {
     "group"        : "WEAPON",
     "skill"        : "AXE",
@@ -26,6 +33,13 @@
     "min_dexterity": 1,
     "base_hit"     : 80,
     "damage"       : 10
+  },
+  "attack_axe_dex_80_12"  : {
+    "group"        : "WEAPON",
+    "skill"        : "AXE",
+    "min_dexterity": 1,
+    "base_hit"     : 80,
+    "damage"       : 12
   },
   "attack_dagger_dex_90_6": {
     "group"        : "WEAPON",
@@ -42,9 +56,9 @@
     "group"     : "CHEST",
     "protection": 4
   },
-  "armor_6"               : {
+  "armor_7"               : {
     "group"     : "CHEST",
-    "protection": 6
+    "protection": 7
   },
   "armor_8"               : {
     "group"     : "CHEST",
@@ -53,6 +67,10 @@
   "armor_25"              : {
     "group"     : "CHEST",
     "protection": 25
+  },
+  "armor_28"              : {
+    "group"     : "CHEST",
+    "protection": 28
   },
   "armor_50"              : {
     "group"     : "CHEST",

@@ -11,7 +11,7 @@
       "speed"       : 20,
       "willpower"   : 1,
       "constitution": 4,
-      "stamina"     : 2
+      "stamina"     : 3
     },
     "skills"   : {
       "axe": 1
@@ -35,16 +35,40 @@
       "speed"       : 20,
       "willpower"   : 1,
       "constitution": 6,
-      "stamina"     : 2
+      "stamina"     : 7
     },
     "skills"   : {
-      "axe": 1
+      "axe": 2
     },
     "abilities": [
       "bite_3", "bite_4"
     ],
     "inventory": {
       "weapon": "attack_axe_dex_80_10"
+    }
+  },
+  "green_bat" : {
+    "name"     : "Green Bat",
+    "gender"   : "its",
+    "ap"       : 5,
+    "drops"    : {"leather": 25},
+    "stats"    : {
+      "intelligence": 3,
+      "dexterity"   : 14,
+      "strength"    : 2,
+      "speed"       : 20,
+      "willpower"   : 1,
+      "constitution": 8,
+      "stamina"     : 11
+    },
+    "skills"   : {
+      "axe": 3
+    },
+    "abilities": [
+      "bite_3", "bite_4"
+    ],
+    "inventory": {
+      "weapon": "attack_axe_dex_80_12"
     }
   }
 }
