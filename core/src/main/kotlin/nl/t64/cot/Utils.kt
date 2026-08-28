@@ -51,7 +51,6 @@ private const val SMALL_PARCHMENT_WIDTH = 400f
 private const val SMALL_PARCHMENT_HEIGHT = 280f
 private const val MEDIUM_PARCHMENT_WIDTH = 400f
 private const val MEDIUM_PARCHMENT_HEIGHT = 600f
-private const val LIGHTMAP_PATH = "sprites/lightmaps/%s.png"
 
 
 object Utils {
@@ -191,10 +190,6 @@ object Utils {
         val ninepatch = NinePatch(texture, 1, 1, 1, 1)
         val drawable = NinePatchDrawable(ninepatch)
         return WindowStyle(FontProvider.default, Color.GREEN, drawable)
-    }
-
-    fun createLightmap(lightmapId: String): Texture {
-        return resourceManager.getTextureAsset(String.format(LIGHTMAP_PATH, lightmapId))
     }
 
     fun createImage(path: String, x: Int, y: Int, width: Int, height: Int): Image {

@@ -78,8 +78,8 @@ class MapManager : ProfileObserver {
 
     fun getTiledMap(): TiledMap = currentMap.tiledMap
     fun getParallaxBackground(): GameMapParallaxBackground? = currentMap.parallaxBackground
-    fun getLightmapCamera(): GameMapLightmapCamera = currentMap.lightmapCamera
-    fun getLightmapMap(): GameMapLightmapMap = currentMap.lightmapMap
+    fun getLightmapCamera(): GameMapLightmapCamera? = currentMap.lightmapCamera
+    fun getLightmapMap(): GameMapLightmapMap? = currentMap.lightmapMap
     fun getGameMapLights(): List<GameMapLight> = currentMap.lights
     fun getLightmapPlayer(): Sprite? = currentMap.lightmapPlayer
     fun getParticleEffects(): List<GameMapParticle> = currentMap.torches

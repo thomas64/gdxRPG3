@@ -6,14 +6,11 @@ import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.maps.objects.RectangleMapObject
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.reflect.ClassReflection
-import nl.t64.cot.Utils
 
-
-private const val LIGHTMAP_ID = "light_object"
 
 class GameMapLight(rectObject: RectangleMapObject) : GameMapObject(rectObject.rectangle) {
 
-    private val texture: Texture = Utils.createLightmap(LIGHTMAP_ID)
+    private val texture: Texture = Lightmap.LIGHT_OBJECT.texture
     private val color: Color = rectObject.name?.toColor() ?: Color.WHITE
     private val center: Vector2 = rectObject.getCenter()
     private val x: Float = center.x - texture.width / 2f

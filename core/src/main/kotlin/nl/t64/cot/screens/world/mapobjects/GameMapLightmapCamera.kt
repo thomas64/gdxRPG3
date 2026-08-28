@@ -2,21 +2,16 @@ package nl.t64.cot.screens.world.mapobjects
 
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.Sprite
-import nl.t64.cot.Utils
 import nl.t64.cot.screens.world.Camera
 import kotlin.math.min
 
 
 class GameMapLightmapCamera(
-    ids: String,
+    lightmaps: List<Lightmap>,
     private val mapPixelWidth: Float,
     private val mapPixelHeight: Float
 ) {
-    private val sprites: List<Sprite> = ids
-        .split(",")
-        .map { it.trim() }
-        .map { Utils.createLightmap(it) }
-        .map { Sprite(it) }
+    private val sprites: Map<Lightmap, Sprite> = lightmaps.associateWith { Sprite(it.texture) }
 
     fun render(batch: Batch, camera: Camera) {
         val cameraWidth = camera.viewportWidth
@@ -30,10 +25,12 @@ class GameMapLightmapCamera(
         val quarterWidth = minWidth * (camera.zoom / 2f)
         val quarterHeight = minHeight * (camera.zoom / 2f)
 
-        sprites
-            .onEach { it.setSize(halfWidth, halfHeight) }
-            .onEach { it.setPosition(-quarterWidth, -quarterHeight) }
-            .forEach { it.draw(batch) }
+        sprites.forEach { (lightmap, sprite) ->
+            lightmap.blend.applyTo(batch)
+            sprite.setSize(halfWidth, halfHeight)
+            sprite.setPosition(-quarterWidth, -quarterHeight)
+            sprite.draw(batch)
+        }
     }
 
 }

@@ -7,7 +7,6 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject
 import com.badlogic.gdx.maps.tiled.TiledMap
 import com.badlogic.gdx.math.Vector2
 import ktx.tiled.*
-import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.Utils.resourceManager
@@ -57,7 +56,6 @@ private const val PARALLAX_BACKGROUND = "parallax_background"
 private const val LIGHTMAP_CAMERA_PROPERTY = "lightmap_camera"
 private const val LIGHTMAP_MAP_PROPERTY = "lightmap_map"
 private const val LIGHTMAP_PLAYER_PROPERTY = "lightmap_player"
-private const val DEFAULT_LIGHTMAP = "default"
 
 class GameMap(
     val mapTitle: String
@@ -74,11 +72,13 @@ class GameMap(
     val height: Int = tiledMap.height
 
     val parallaxBackground: GameMapParallaxBackground? = tiledMap.propertyOrNull<String>(PARALLAX_BACKGROUND)
-        ?.let { GameMapParallaxBackground(it) }
-    val lightmapCamera = GameMapLightmapCamera(tiledMap.property(LIGHTMAP_CAMERA_PROPERTY, DEFAULT_LIGHTMAP), pixelWidth, pixelHeight)
-    val lightmapMap = GameMapLightmapMap(tiledMap.property(LIGHTMAP_MAP_PROPERTY, DEFAULT_LIGHTMAP))
+        ?.let { GameMapParallaxBackground(Lightmap.of(it)) }
+    val lightmapCamera: GameMapLightmapCamera? = tiledMap.propertyOrNull<String>(LIGHTMAP_CAMERA_PROPERTY)
+        ?.let { GameMapLightmapCamera(Lightmap.ofAll(it), pixelWidth, pixelHeight) }
+    val lightmapMap: GameMapLightmapMap? = tiledMap.propertyOrNull<String>(LIGHTMAP_MAP_PROPERTY)
+        ?.let { GameMapLightmapMap(Lightmap.of(it)) }
     val lightmapPlayer: Sprite? = tiledMap.propertyOrNull<String>(LIGHTMAP_PLAYER_PROPERTY)
-        ?.let { Sprite(Utils.createLightmap(it)) }
+        ?.let { Sprite(Lightmap.of(it).texture) }
     private val defaultStepSound: String = tiledMap.property(STEP_SOUND_PROPERTY, DEFAULT_STEP_SOUND)
 
     var playerSpawnLocation: Vector2 = Vector2()

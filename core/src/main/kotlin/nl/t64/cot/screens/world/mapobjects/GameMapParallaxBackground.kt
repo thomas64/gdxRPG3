@@ -4,18 +4,17 @@ import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.graphics.g2d.TextureRegion
-import nl.t64.cot.Utils
 import nl.t64.cot.screens.world.Camera
 
 
 private const val BACKGROUND_REGION_MULTIPLIER = 2
 
-class GameMapParallaxBackground(id: String) {
+class GameMapParallaxBackground(lightmap: Lightmap) {
 
     private val sprite: Sprite
 
     init {
-        val texture = Utils.createLightmap(id).apply {
+        val texture: Texture = lightmap.texture.apply {
             setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat)
         }
         val region = TextureRegion(texture).apply {

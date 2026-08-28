@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack
 import com.badlogic.gdx.utils.ScreenUtils
 import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.constants.Constant
+import nl.t64.cot.screens.world.mapobjects.LightmapBlend
 
 
 private val BOTTOM_LAYERS = intArrayOf(0, 1, 2, 3)
@@ -58,7 +59,7 @@ class WorldRenderer(
     }
 
     private fun renderFrameBuffer() {
-        batch.setBlendFunction(GL20.GL_ZERO, GL20.GL_SRC_COLOR)
+        LightmapBlend.MULTIPLY.applyTo(batch)
         batch.projectionMatrix = batch.projectionMatrix.idt()
 
         batch.begin()
@@ -67,7 +68,7 @@ class WorldRenderer(
     }
 
     private fun renderLightmapPlayer(playerPosition: Vector2, lightmapPlayer: Sprite) {
-        batch.setBlendFunction(GL20.GL_ONE, GL20.GL_ONE)
+        LightmapBlend.ADDITIVE.applyTo(batch)
 
         batch.begin()
         val x = playerPosition.x + Constant.HALF_TILE_SIZE - lightmapPlayer.width / 2f
@@ -139,20 +140,23 @@ class WorldRenderer(
 
     private fun renderLightmap() {
         batch.begin()
-        batch.setBlendFunction(GL20.GL_ONE, GL20.GL_ONE)
         renderLightmapCamera()
         renderLightmapMap()
         batch.end()
     }
 
     private fun renderLightmapCamera() {
-        batch.projectionMatrix = camera.projection
-        mapManager.getLightmapCamera().render(batch, camera)
+        mapManager.getLightmapCamera()?.let {
+            batch.projectionMatrix = camera.projection
+            it.render(batch, camera)
+        }
     }
 
     private fun renderLightmapMap() {
-        batch.projectionMatrix = camera.combined
-        mapManager.getLightmapMap().render(batch, camera)
+        mapManager.getLightmapMap()?.let {
+            batch.projectionMatrix = camera.combined
+            it.render(batch, camera)
+        }
     }
 
 }
