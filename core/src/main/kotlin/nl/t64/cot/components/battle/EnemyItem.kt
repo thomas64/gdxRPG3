@@ -13,6 +13,7 @@ import kotlin.math.roundToInt
 import kotlin.random.Random
 
 
+private val combatPowerCalculator = CombatPowerCalculator()
 private val xpCalculator = XpCalculator()
 
 class EnemyItem(
@@ -32,7 +33,8 @@ class EnemyItem(
     id, name, gender, stats, skills, abilities, inventory, isAlive
 ) {
     override val maximumHp: Int get() = if (stats.getById(StatItemId.CONSTITUTION).rank == 0) hp else stats.maximumHp
-    val xp: Int = xpCalculator.calculate(getCombatPower())
+    override val hasUnlimitedSp: Boolean = true
+    val xp: Int = xpCalculator.calculate(combatPowerCalculator.calculate(this))
     @Transient
     var stashedWeapon: InventoryItem? = meleeWeapon?.let { InventoryDatabase.createInventoryItem(it) }
 

@@ -5,14 +5,12 @@ import nl.t64.cot.Utils.gameData
 import kotlin.math.pow
 
 
+private val combatPowerCalculator = CombatPowerCalculator()
+
 /**
  * Een inschatting van hoe zwaar een battle is voor de huidige party.
  *
- * De maatstaf is de afgeleide gevechtskracht ([Character.getCombatPower]): overlevingsvermogen × offense.
- * Bewust NIET de bestede xp, want "dump stats" die een vijand niet gebruikt (bv. een lage intelligence bij
- * een melee-vechter) drukken de build-xp onterecht omlaag. Combat power kijkt alleen naar wat het gevecht
- * echt bepaalt (hp, bescherming, damage, hit, actiepunten) en negeert zulke ongebruikte stats vanzelf.
- * Beide kanten worden op identieke wijze berekend, zodat het een eerlijke vergelijking is.
+ * De maatstaf is de gevechtskracht van beide kanten, zie [CombatPowerCalculator].
  * De drempels hieronder zijn smaak en mogen vrij getuned worden.
  */
 enum class ThreatLevel(val color: Color) {
@@ -29,15 +27,16 @@ enum class ThreatLevel(val color: Color) {
          * Verlaag dit als alle vijanden te sterk worden ingeschat.
          * Verhoog dit als alle vijanden te zwak worden ingeschat.
          */
-        private const val CALIBRATION = 0.8f
-        private const val CROWD_DAMPENER = 0.8f // < 1: meer vijanden tellen minder mee, > 1: meer vijanden tellen zwaarder mee
+        private const val CALIBRATION = 1f
+        private const val CROWD_DAMPENER = 0.9f // < 1: meer vijanden tellen minder mee, > 1: meer vijanden tellen zwaarder mee
 
         fun forBattle(battleId: String): ThreatLevel {
-            val partyPower: List<Float> = gameData.party.getAllHeroesAlive().map { it.getCombatPower() }
+            val partyPower: List<Float> =
+                gameData.party.getAllHeroesAlive().map { combatPowerCalculator.calculate(it) }
             val dampenedPartyPower: Float = dampenedPowerOf(partyPower)
 
             val dampenedEnemyPower: Float = gameData.battles.getCombatPowerOverride(battleId)
-                ?: dampenedPowerOf(EnemyContainer(battleId).getAll().map { it.getCombatPower() })
+                ?: dampenedPowerOf(EnemyContainer(battleId).getAll().map { combatPowerCalculator.calculate(it) })
 
             return fromRatio((dampenedEnemyPower / dampenedPartyPower) * CALIBRATION)
         }

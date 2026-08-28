@@ -34,6 +34,8 @@ import kotlin.concurrent.thread
 import kotlin.math.roundToInt
 
 
+private val combatPowerCalculator = CombatPowerCalculator()
+
 class BattleScreen : Screen {
 
     private lateinit var battleObserver: BattleSubject
@@ -193,10 +195,10 @@ class BattleScreen : Screen {
         val allEnemies: List<EnemyItem> = enemies.getAll()
 
         println("Combat powers for battle '$battleId':")
-        heroes.forEach { println("  hero  ${it.name}: ${it.getCombatPower().roundToInt()}") }
-        allEnemies.forEach { println("  enemy ${it.name}: ${it.getCombatPower().roundToInt()}") }
-        println("  party total: ${heroes.sumOf { it.getCombatPower().toDouble() }.roundToInt()}")
-        println("  enemy total: ${allEnemies.sumOf { it.getCombatPower().toDouble() }.roundToInt()}")
+        heroes.forEach { println("  hero  ${it.name}: ${combatPowerCalculator.calculate(it).roundToInt()}") }
+        allEnemies.forEach { println("  enemy ${it.name}: ${combatPowerCalculator.calculate(it).roundToInt()}") }
+        println("  party total: ${heroes.sumOf { combatPowerCalculator.calculate(it).toDouble() }.roundToInt()}")
+        println("  enemy total: ${allEnemies.sumOf { combatPowerCalculator.calculate(it).toDouble() }.roundToInt()}")
     }
 
     private fun updateAllTables() {
