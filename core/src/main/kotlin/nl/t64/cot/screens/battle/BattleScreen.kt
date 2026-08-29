@@ -115,8 +115,7 @@ class BattleScreen : Screen {
 
         battleField = BattleField(turnManager.participants, ::currentParticipant)
         tableManager = BattleTableManager(stage, screenBuilder, ::currentParticipant)
-        menuManager = BattleMenuManager(stage, screenBuilder, turnManager, battleField, ::currentParticipant)
-        setMenuManagerListeners()
+        menuManager = BattleMenuManager(stage, screenBuilder, turnManager, battleField, ::currentParticipant, createMenuHandlers())
         dialogManager = BattleDialogManager(stage, turnManager, ::currentParticipant, { isDelayingTurn = it }, { hasChosenToContinuePerforming = it })
         confirmManager = BattleConfirmManager(stage, turnManager, tableManager::battleFieldTable, ::currentParticipant, { isDelayingTurn = it })
         attackOutcomeManager = AttackOutcomeManager(stage, turnManager, tableManager::battleFieldTable, { isDelayingTurn = it })
@@ -588,30 +587,33 @@ class BattleScreen : Screen {
         resultManager.gameOver()
     }
 
-    private fun setMenuManagerListeners() {
-        menuManager.setListeners(
-            BattleMenuHandlers(::showInventoryScreenPreBattle,
-                               ::startStealthMovementPhase,
-                               ::showInventoryScreen,
-                               ::showFleeDialog,
-                               ::showDelayTurnDialog,
-                               ::showPushOnDialog,
-                               ::showConfirmRestDialog,
-                               ::endTurn),
-            ::winBattle,
-            ::openPauseMenu,
-            ::heroIsSelectedForPreEquipment,
-            ::heroIsSelectedForPrePotion,
-            ::heroIsSelectedForPrePreview,
-            ::showPreviewDialog,
-            ::moveConfirmed,
-            ::stealthMovementConfirmed,
-            ::showConfirmAttackDialog,
-            ::showConfirmSpecialDialog,
-            ::showConfirmPotionDialogPreBattle,
-            ::showConfirmPotionDialog,
-            ::showConfirmWeaponDialogPreBattle,
-            ::showConfirmWeaponDialog
+    private fun createMenuHandlers(): BattleMenuHandlers {
+        return BattleMenuHandlers(
+            winBattle = ::winBattle,
+            openPauseMenu = ::openPauseMenu,
+
+            showInventoryScreenPreBattle = ::showInventoryScreenPreBattle,
+            startBattle = ::startStealthMovementPhase,
+            heroIsSelectedForPreEquipment = ::heroIsSelectedForPreEquipment,
+            heroIsSelectedForPrePotion = ::heroIsSelectedForPrePotion,
+            heroIsSelectedForPrePreview = ::heroIsSelectedForPrePreview,
+            showConfirmWeaponDialogPreBattle = ::showConfirmWeaponDialogPreBattle,
+            showConfirmPotionDialogPreBattle = ::showConfirmPotionDialogPreBattle,
+
+            showInventoryScreen = ::showInventoryScreen,
+            showFleeDialog = ::showFleeDialog,
+            showDelayTurnDialog = ::showDelayTurnDialog,
+            showPushOnDialog = ::showPushOnDialog,
+            showConfirmRestDialog = ::showConfirmRestDialog,
+            endTurn = ::endTurn,
+            showConfirmAttackDialog = ::showConfirmAttackDialog,
+            showConfirmSpecialDialog = ::showConfirmSpecialDialog,
+            showConfirmWeaponDialog = ::showConfirmWeaponDialog,
+            showConfirmPotionDialog = ::showConfirmPotionDialog,
+            showPreviewDialog = ::showPreviewDialog,
+
+            confirmMovement = ::moveConfirmed,
+            confirmStealthMovement = ::stealthMovementConfirmed
         )
     }
 

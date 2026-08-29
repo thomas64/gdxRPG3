@@ -14,6 +14,8 @@ class BattleMenuOption(
     private val label: String = possibleGetGrayPrefix() + createLabelLine()
 
     fun select() {
+        if (!isEnabled) return
+
         if (playsConfirmSound) {
             playSe(AudioEvent.SE_MENU_CONFIRM)
         }

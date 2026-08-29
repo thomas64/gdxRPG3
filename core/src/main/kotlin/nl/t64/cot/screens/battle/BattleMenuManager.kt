@@ -8,8 +8,6 @@ import nl.t64.cot.components.battle.*
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.abilities.BattleAbilityItem
 import nl.t64.cot.components.party.abilities.Target
-import nl.t64.cot.components.party.inventory.BattlePotionItem
-import nl.t64.cot.components.party.inventory.BattleWeaponItem
 import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.components.party.inventory.InventoryItem
 import nl.t64.cot.screens.battle.listeners.*
@@ -29,7 +27,8 @@ class BattleMenuManager(
     private val screenBuilder: BattleScreenBuilder,
     private val turnManager: TurnManager,
     private val battleField: BattleField,
-    private val currentParticipant: () -> Participant
+    private val currentParticipant: () -> Participant,
+    private val menuHandlers: BattleMenuHandlers
 ) {
 
     private val currentHero: HeroItem get() = currentParticipant.invoke().character as HeroItem
@@ -39,62 +38,23 @@ class BattleMenuManager(
     private var currentTable: Table = Table()
     private var mainMenuIndex: Int = 0
 
-    private lateinit var menuHandlers: BattleMenuHandlers
-
-    private lateinit var preBattleMainMenuListener: SelectPreBattleListener
-    private lateinit var actionMainMenuListener: SelectActionListener
-    private lateinit var preBattleEquipmentListener: SelectWeaponListener
-    private lateinit var actionEquipmentListener: SelectWeaponListener
-    private lateinit var preBattleHeroForEquipmentListener: SelectHeroListener
-    private lateinit var preBattleHeroForPotionListener: SelectHeroListener
-    private lateinit var preBattleHeroForPreviewListener: SelectHeroListener
-    private lateinit var previewAttacksListener: SelectAttackListener
-    private lateinit var actionAttackListener: SelectAttackListener
-    private lateinit var actionSpecialListener: SelectAttackListener
-    private lateinit var previewTargetListener: SelectTargetListener
-    private lateinit var actionAttackTargetListener: SelectTargetListener
-    private lateinit var actionSpecialTargetListener: SelectTargetListener
-    private lateinit var actionMoveListener: SelectMoveListener
-    private lateinit var stealthMovementListener: SelectMoveListener
-    private lateinit var preBattlePotionListener: SelectPotionListener
-    private lateinit var actionPotionListener: SelectPotionListener
-
-    fun setListeners(
-        menuHandlers: BattleMenuHandlers,
-        winBattle: () -> Unit,
-        openPauseMenu: () -> Unit,
-        heroIsSelectedForPreEquipment: (String) -> Unit,
-        heroIsSelectedForPrePotion: (String) -> Unit,
-        heroIsSelectedForPrePreview: (String) -> Unit,
-        showPreviewDialog: (BattleAbilityItem, String) -> Unit,
-        confirmMovement: () -> Unit,
-        confirmStealthMovement: () -> Unit,
-        showConfirmAttackDialog: (BattleAbilityItem, String) -> Unit,
-        showConfirmSpecialDialog: (BattleAbilityItem, String) -> Unit,
-        showConfirmPotionDialogPreBattle: (BattlePotionItem) -> Unit,
-        showConfirmPotionDialog: (BattlePotionItem) -> Unit,
-        showConfirmWeaponDialogPreBattle: (BattleWeaponItem) -> Unit,
-        showConfirmWeaponDialog: (BattleWeaponItem) -> Unit
-    ) {
-        this.menuHandlers = menuHandlers
-        preBattleMainMenuListener = SelectPreBattleListener(winBattle, openPauseMenu, menuHandlers.showInventoryScreenPreBattle)
-        actionMainMenuListener = SelectActionListener(winBattle, openPauseMenu, menuHandlers.showInventoryScreen)
-        preBattleEquipmentListener = SelectWeaponListener(showConfirmWeaponDialogPreBattle, ::goBack)
-        actionEquipmentListener = SelectWeaponListener(showConfirmWeaponDialog, ::goBack)
-        preBattleHeroForEquipmentListener = SelectHeroListener(heroIsSelectedForPreEquipment, ::goBack)
-        preBattleHeroForPotionListener = SelectHeroListener(heroIsSelectedForPrePotion, ::goBack)
-        preBattleHeroForPreviewListener = SelectHeroListener(heroIsSelectedForPrePreview, ::goBack)
-        previewAttacksListener = SelectAttackListener(::anAttackIsSelectedInPreview, ::goBack)
-        actionAttackListener = SelectAttackListener(::anAttackIsSelectedInAttackList, ::goBack)
-        actionSpecialListener = SelectAttackListener(::aSpecialIsSelectedInSpecialList, ::goBack)
-        previewTargetListener = SelectTargetListener(showPreviewDialog, ::goBack)
-        actionAttackTargetListener = SelectTargetListener(showConfirmAttackDialog, ::goBack)
-        actionSpecialTargetListener = SelectTargetListener(showConfirmSpecialDialog, ::goBack)
-        actionMoveListener = SelectMoveListener(battleField::moveHeroLeft, battleField::moveHeroRight, confirmMovement, ::goBack)
-        stealthMovementListener = SelectMoveListener(battleField::moveHeroLeftWithStealth, battleField::moveHeroRightWithStealth, confirmStealthMovement, battleField::cancelMovement)
-        preBattlePotionListener = SelectPotionListener(showConfirmPotionDialogPreBattle, ::goBack)
-        actionPotionListener = SelectPotionListener(showConfirmPotionDialog, ::goBack)
-    }
+    private val preBattleMainMenuListener = SelectPreBattleListener(menuHandlers.winBattle, menuHandlers.openPauseMenu, menuHandlers.showInventoryScreenPreBattle)
+    private val actionMainMenuListener = SelectActionListener(menuHandlers.winBattle, menuHandlers.openPauseMenu, menuHandlers.showInventoryScreen)
+    private val preBattleEquipmentListener = SelectWeaponListener(menuHandlers.showConfirmWeaponDialogPreBattle, ::goBack)
+    private val actionEquipmentListener = SelectWeaponListener(menuHandlers.showConfirmWeaponDialog, ::goBack)
+    private val preBattleHeroForEquipmentListener = SelectHeroListener(menuHandlers.heroIsSelectedForPreEquipment, ::goBack)
+    private val preBattleHeroForPotionListener = SelectHeroListener(menuHandlers.heroIsSelectedForPrePotion, ::goBack)
+    private val preBattleHeroForPreviewListener = SelectHeroListener(menuHandlers.heroIsSelectedForPrePreview, ::goBack)
+    private val previewAttacksListener = SelectAttackListener(::anAttackIsSelectedInPreview, ::goBack)
+    private val actionAttackListener = SelectAttackListener(::anAttackIsSelectedInAttackList, ::goBack)
+    private val actionSpecialListener = SelectAttackListener(::aSpecialIsSelectedInSpecialList, ::goBack)
+    private val previewTargetListener = SelectTargetListener(menuHandlers.showPreviewDialog, ::goBack)
+    private val actionAttackTargetListener = SelectTargetListener(menuHandlers.showConfirmAttackDialog, ::goBack)
+    private val actionSpecialTargetListener = SelectTargetListener(menuHandlers.showConfirmSpecialDialog, ::goBack)
+    private val actionMoveListener = SelectMoveListener(battleField::moveHeroLeft, battleField::moveHeroRight, menuHandlers.confirmMovement, ::goBack)
+    private val stealthMovementListener = SelectMoveListener(battleField::moveHeroLeftWithStealth, battleField::moveHeroRightWithStealth, menuHandlers.confirmStealthMovement, battleField::cancelMovement)
+    private val preBattlePotionListener = SelectPotionListener(menuHandlers.showConfirmPotionDialogPreBattle, ::goBack)
+    private val actionPotionListener = SelectPotionListener(menuHandlers.showConfirmPotionDialog, ::goBack)
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -1,5 +1,6 @@
 package nl.t64.cot.screens.battle.listeners
 
+import com.badlogic.gdx.Input
 import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog
 import com.badlogic.gdx.scenes.scene2d.ui.List
@@ -30,6 +31,13 @@ fun InputEvent.handlePause(pauseMenu: () -> Unit) {
 fun handleWin(winBattle: () -> Unit) {
     playSe(AudioEvent.SE_MENU_ERROR)
     winBattle.invoke()
+}
+
+fun <T> InputEvent.possibleSelectNonGrayOption(keycode: Int) {
+    when (keycode) {
+        Input.Keys.UP -> selectPreviousNonGrayOption<T>()
+        Input.Keys.DOWN -> selectNextNonGrayOption<T>()
+    }
 }
 
 fun <T> InputEvent.selectPreviousNonGrayOption() {

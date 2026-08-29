@@ -125,6 +125,11 @@ abstract class BattleAbilityItem(
         }
     }
 
+    fun isUsable(): Boolean {
+        if (abilityItem.isPreview) return isWeaponAllowed()
+        return isWeaponAllowed() && hasEnoughApSp()
+    }
+
     fun hasEnoughApSp(): Boolean {
         return attacker.currentAP >= ap
             && attacker.character.currentSp >= sp
@@ -252,10 +257,7 @@ abstract class BattleAbilityItem(
     }
 
     private fun possibleGetGrayPrefix(): String {
-        if (abilityItem.isPreview) {
-            return if (!isWeaponAllowed()) "[GRAY]" else ""
-        }
-        return if (!isWeaponAllowed() || !hasEnoughApSp()) "[GRAY]" else ""
+        return if (isUsable()) "" else "[GRAY]"
     }
 
     protected fun getAdvantageBonusHit(): Int {

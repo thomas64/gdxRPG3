@@ -15,6 +15,7 @@ class SelectActionListener(
 
     override fun keyDown(event: InputEvent, keycode: Int): Boolean {
         if (event.isDialogOpen()) {
+            event.possibleSelectNonGrayOption<BattleMenuOption>(keycode)
             event.dontLoseFocusAfterEsc()
             return true
         }

@@ -15,7 +15,10 @@ class SelectAttackListener(
 ) : InputListener() {
 
     override fun keyDown(event: InputEvent, keycode: Int): Boolean {
-        if (event.isDialogOpen()) return true
+        if (event.isDialogOpen()) {
+            event.possibleSelectNonGrayOption<BattleAbilityItem>(keycode)
+            return true
+        }
 
         when (keycode) {
             Input.Keys.UP -> event.selectPreviousNonGrayOption<BattleAbilityItem>()
@@ -30,7 +33,7 @@ class SelectAttackListener(
         val selected: BattleAbilityItem = getSelected() ?: return
         when {
             selected.name == "Back" -> handleEscape(back)
-            else -> {
+            selected.isUsable() -> {
                 playSe(AudioEvent.SE_MENU_CONFIRM)
                 attack.invoke(selected)
             }
