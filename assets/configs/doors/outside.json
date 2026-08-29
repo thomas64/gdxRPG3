@@ -1,0 +1,3 @@
+{
+  "door_forest_trail_cabin": {"type": "SMALL", "spriteId": "forest_left", "condition": ["_hero_galen"]}
+}

@@ -1,4 +1,5 @@
 default.json
 honeywood.json
 lastdenn.json
+outside.json
 mysterious_tunnel.json

@@ -80,6 +80,10 @@
     "group"     : "CHEST",
     "protection": 65
   },
+  "armor_95"              : {
+    "group"     : "CHEST",
+    "protection": 95
+  },
   "armor_200"             : {
     "group"     : "CHEST",
     "protection": 200

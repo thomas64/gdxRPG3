@@ -1,4 +1,13 @@
 {
+  "strike_2e"   : {
+    "name"             : "Enemy Strike",
+    "target"           : "ENEMY",
+    "ap"               : 2,
+    "weapon_skills"    : ["SWORD", "AXE", "SPEAR"],
+    "damage_multiplier": 1.0,
+    "damage_formula"   : "(2f / 2f) * 1.0f",
+    "description"      : []
+  },
   "strike_2"    : {
     "name"             : "Quick Strike",
     "target"           : "ENEMY",

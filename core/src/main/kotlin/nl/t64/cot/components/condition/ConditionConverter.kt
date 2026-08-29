@@ -108,8 +108,17 @@ object ConditionConverter {
     }
 
     fun isMeetingHeroCondition(conditionId: String): Boolean {
-        val heroId: String = conditionId.substringAfter("_hero_")
-        return gameData.party.contains(heroId)
+        return when {
+            conditionId.contains("_hero_!") -> {
+                val heroId: String = conditionId.substringAfter("_hero_!")
+                !gameData.party.contains(heroId)
+            }
+            conditionId.contains("_hero_") -> {
+                val heroId: String = conditionId.substringAfter("_hero_")
+                gameData.party.contains(heroId)
+            }
+            else -> throw IllegalArgumentException("No defined state found.")
+        }
     }
 
     private fun getQuestGraph(conditionId: String, questId: String?): QuestGraph {

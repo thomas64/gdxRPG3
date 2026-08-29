@@ -70,5 +70,11 @@
     "type"      : "messagebox",
     "text"      : ["North: Honeywood", "East: Cragmere", "South: Road block"],
     "doesRepeat": true
+  },
+  "note_forest_trail_cabin"  : {
+    "type"      : "messagebox",
+    "condition" : ["_hero_!galen"],
+    "text"      : ["Out chopping wood. I’ll be back around 11:00."],
+    "doesRepeat": true
   }
 }

@@ -154,6 +154,46 @@
     },
     "meleeWeapon": "basic_dagger"
   },
+  "orc_tank"          : {
+    "name"     : "Orc Tank",
+    "gender"   : "its",
+    "ap"       : 2,
+    "drops"    : {
+      "basic_axe"            : 15,
+      "basic_heavy_shield"   : 10,
+      "basic_heavy_belt"     : 2,
+      "basic_heavy_boots"    : 2,
+      "basic_heavy_bracers"  : 2,
+      "basic_heavy_chest"    : 2,
+      "basic_heavy_cloak"    : 2,
+      "basic_heavy_gloves"   : 2,
+      "basic_heavy_helmet"   : 2,
+      "basic_heavy_pants"    : 2,
+      "basic_heavy_shoulders": 2,
+      "protection_potion"    : 5,
+      "gold"                 : 60
+    },
+    "stats"    : {
+      "intelligence": 5,
+      "dexterity"   : 5,
+      "strength"    : 30,
+      "speed"       : 9,
+      "willpower"   : 5,
+      "constitution": 30,
+      "stamina"     : 20
+    },
+    "abilities": ["strike_2e"],
+    "skills"   : {
+      "axe"    : 6,
+      "shield" : 6,
+      "warrior": 1
+    },
+    "inventory": {
+      "weapon": "basic_axe",
+      "shield": "basic_heavy_shield",
+      "chest" : "armor_95"
+    }
+  },
   "orc_fire"          : {
     "name"       : "Fire Orc",
     "gender"     : "its",

@@ -1,0 +1,4 @@
+{
+  "forest_trail_01": {"battlers": [{"id": "orc_tank", "amount": 2}], "background": "forest_path"},
+  "forest_trail_02": {"battlers": [{"id": "orc_scout_axe", "amount": 4}], "background": "forest_path"}
+}

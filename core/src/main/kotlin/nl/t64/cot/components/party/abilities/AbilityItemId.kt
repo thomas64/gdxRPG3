@@ -9,6 +9,7 @@ enum class AbilityItemId : SuperEnum {
     STRIKE_3F,
     STRIKE_4,
 
+    STRIKE_2E,
     BITE_3,
     BITE_4,
     BODY_SLAM_2,
