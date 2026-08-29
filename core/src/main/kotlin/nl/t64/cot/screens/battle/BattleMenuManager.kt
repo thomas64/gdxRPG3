@@ -4,9 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import nl.t64.cot.Utils.gameData
-import nl.t64.cot.components.battle.BattleField
-import nl.t64.cot.components.battle.Participant
-import nl.t64.cot.components.battle.TurnManager
+import nl.t64.cot.components.battle.*
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.abilities.BattleAbilityItem
 import nl.t64.cot.components.party.abilities.Target
@@ -17,6 +15,14 @@ import nl.t64.cot.components.party.inventory.InventoryItem
 import nl.t64.cot.screens.battle.listeners.*
 import com.badlogic.gdx.scenes.scene2d.ui.List as GdxList
 
+
+private const val AP_UNAVAILABLE: Int = 99
+private const val MOVE_AP: Int = 1
+private const val REST_AP: Int = 1
+
+private const val ATTACK: String = "Attack"
+private const val MOVE: String = "Move"
+private const val END_TURN: String = "End turn"
 
 class BattleMenuManager(
     private val stage: Stage,
@@ -31,6 +37,9 @@ class BattleMenuManager(
     private val menuStack: ArrayDeque<() -> Unit> = ArrayDeque()
     private var currentMenu: () -> Unit = {}
     private var currentTable: Table = Table()
+    private var mainMenuIndex: Int = 0
+
+    private lateinit var actionMenuHandlers: ActionMenuHandlers
 
     private lateinit var preBattleMainMenuListener: SelectPreBattleListener
     private lateinit var actionMainMenuListener: SelectActionListener
@@ -51,20 +60,15 @@ class BattleMenuManager(
     private lateinit var actionPotionListener: SelectPotionListener
 
     fun setListeners(
+        actionMenuHandlers: ActionMenuHandlers,
         winBattle: () -> Unit,
         openPauseMenu: () -> Unit,
         showInventoryScreenPreBattle: () -> Unit,
-        showInventoryScreen: () -> Unit,
         startBattle: () -> Unit,
         heroIsSelectedForPreEquipment: (String) -> Unit,
         heroIsSelectedForPrePotion: (String) -> Unit,
         heroIsSelectedForPrePreview: (String) -> Unit,
         showPreviewDialog: (BattleAbilityItem, String) -> Unit,
-        showFleeDialog: () -> Unit,
-        showDelayTurnDialog: () -> Unit,
-        showPushOnDialog: () -> Unit,
-        showConfirmRestDialog: () -> Unit,
-        endTurn: () -> Unit,
         confirmMovement: () -> Unit,
         confirmStealthMovement: () -> Unit,
         showConfirmAttackDialog: (BattleAbilityItem, String) -> Unit,
@@ -74,8 +78,9 @@ class BattleMenuManager(
         showConfirmWeaponDialogPreBattle: (BattleWeaponItem) -> Unit,
         showConfirmWeaponDialog: (BattleWeaponItem) -> Unit
     ) {
+        this.actionMenuHandlers = actionMenuHandlers
         preBattleMainMenuListener = SelectPreBattleListener(winBattle, openPauseMenu, showInventoryScreenPreBattle, ::equipmentIsSelectedInPreBattle, ::potionIsSelectedInPreBattle, ::previewIsSelectedInPreBattle, startBattle)
-        actionMainMenuListener = SelectActionListener(winBattle, openPauseMenu, ::attackIsSelectedInAction, ::specialIsSelectedInAction, ::moveIsSelectedInAction, ::potionIsSelectedInAction, ::equipmentIsSelectedInAction, ::previewIsSelectedInAction, showInventoryScreen, showFleeDialog, showDelayTurnDialog, showPushOnDialog, showConfirmRestDialog, endTurn)
+        actionMainMenuListener = SelectActionListener(winBattle, openPauseMenu, actionMenuHandlers.showInventoryScreen)
         preBattleEquipmentListener = SelectWeaponListener(showConfirmWeaponDialogPreBattle, ::goBack)
         actionEquipmentListener = SelectWeaponListener(showConfirmWeaponDialog, ::goBack)
         preBattleHeroForEquipmentListener = SelectHeroListener(heroIsSelectedForPreEquipment, ::goBack)
@@ -96,7 +101,7 @@ class BattleMenuManager(
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     fun openPreBattleMenu() {
-        screenBuilder.buttonTableMainMenuIndex = 0
+        mainMenuIndex = 0
         openRootMenu(::showPreBattleTable)
     }
 
@@ -106,23 +111,20 @@ class BattleMenuManager(
 
     fun possibleOpenActionMenu() {
         if (currentTable.hasParent()) return
-        screenBuilder.buttonTableMainMenuIndex = 0
+        mainMenuIndex = 0
         openRootMenu(::showActionTable)
     }
 
     fun openWeaponMenuForSelectedHero() {
-        rememberSelectHeroIndex()
-        openSubMenu(::showPreBattleWeaponTable)
+        openSubMenuFromHeroMenu(::showPreBattleWeaponTable)
     }
 
     fun openPotionMenuForSelectedHero() {
-        rememberSelectHeroIndex()
-        openSubMenu { showPotionTable(preBattlePotionListener) }
+        openSubMenuFromHeroMenu { showPotionTable(preBattlePotionListener) }
     }
 
     fun openPreviewAttackMenuForSelectedHero() {
-        rememberSelectHeroIndex()
-        openSubMenu(::showPreviewAttackTable)
+        openSubMenuFromHeroMenu(::showPreviewAttackTable)
     }
 
     fun goBack() {
@@ -140,69 +142,33 @@ class BattleMenuManager(
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun equipmentIsSelectedInPreBattle() {
-        rememberMainMenuIndex()
-        openSubMenu { showHeroTable(preBattleHeroForEquipmentListener) }
+        openSubMenuFromMainMenu { showHeroTable(preBattleHeroForEquipmentListener) }
     }
 
     private fun potionIsSelectedInPreBattle() {
-        rememberMainMenuIndex()
-        openSubMenu { showHeroTable(preBattleHeroForPotionListener) }
+        openSubMenuFromMainMenu { showHeroTable(preBattleHeroForPotionListener) }
     }
 
     private fun previewIsSelectedInPreBattle() {
-        rememberMainMenuIndex()
-        openSubMenu { showHeroTable(preBattleHeroForPreviewListener) }
-    }
-
-    private fun attackIsSelectedInAction() {
-        rememberMainMenuIndex()
-        openSubMenu(::showAttackTable)
-    }
-
-    private fun specialIsSelectedInAction() {
-        rememberMainMenuIndex()
-        openSubMenu(::showSpecialTable)
-    }
-
-    private fun moveIsSelectedInAction() {
-        rememberMainMenuIndex()
-        openSubMenu(::showMoveTable)
-    }
-
-    private fun potionIsSelectedInAction() {
-        rememberMainMenuIndex()
-        openSubMenu { showPotionTable(actionPotionListener) }
-    }
-
-    private fun equipmentIsSelectedInAction() {
-        rememberMainMenuIndex()
-        openSubMenu(::showActionWeaponTable)
-    }
-
-    private fun previewIsSelectedInAction() {
-        rememberMainMenuIndex()
-        openSubMenu(::showPreviewAttackTable)
+        openSubMenuFromMainMenu { showHeroTable(preBattleHeroForPreviewListener) }
     }
 
     private fun anAttackIsSelectedInPreview(attack: BattleAbilityItem) {
-        rememberSelectAttackIndex()
-        openSubMenu { showPreviewTargetTable(attack) }
+        openSubMenuFromAttackMenu { showPreviewTargetTable(attack) }
     }
 
     private fun anAttackIsSelectedInAttackList(attack: BattleAbilityItem) {
-        rememberSelectAttackIndex()
-        openSubMenu { showTargetTable(attack, actionAttackTargetListener) }
+        openSubMenuFromAttackMenu { showTargetTable(attack, actionAttackTargetListener) }
     }
 
     private fun aSpecialIsSelectedInSpecialList(special: BattleAbilityItem) {
-        rememberSelectAttackIndex()
-        openSubMenu { showTargetTable(special, actionSpecialTargetListener) }
+        openSubMenuFromAttackMenu { showTargetTable(special, actionSpecialTargetListener) }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun showPreBattleTable() {
-        showTable(screenBuilder.createButtonTablePreBattle(), preBattleMainMenuListener)
+        showTable(screenBuilder.createButtonTablePreBattle(mainMenuIndex), preBattleMainMenuListener)
     }
 
     private fun showStealthMovementTable() {
@@ -221,10 +187,9 @@ class BattleMenuManager(
         battleField.cancelMovement()
         battleField.resetStartingSpace()
         val areEnemiesInRange: Boolean = battleField.getTargetableEnemiesForActingHero().isNotEmpty()
-        val isAbleToMove: Boolean = battleField.getModifiedApForHero() > 0
-        val actionTable: Table =
-            screenBuilder.createButtonTableAction(currentParticipant.invoke(), areEnemiesInRange, isAbleToMove)
-        showTable(actionTable, actionMainMenuListener)
+        val options: List<BattleMenuOption> = createActionOptions(areEnemiesInRange)
+        moveCursorToUsableOption(options, areEnemiesInRange)
+        showTable(screenBuilder.createButtonTableAction(options, mainMenuIndex), actionMainMenuListener)
     }
 
     private fun showMoveTable() {
@@ -304,9 +269,89 @@ class BattleMenuManager(
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    private fun createActionOptions(areEnemiesInRange: Boolean): List<BattleMenuOption> {
+        val participant: Participant = currentParticipant.invoke()
+        val currentAp: Int = participant.currentAP
+        val currentSp: Int = participant.character.currentSp
+        val shownAp: Int = maxOf(1, currentAp)
+        val fleeAp: Int = maxOf(shownAp, participant.maximumAP)
+        val moveApRange: String = if (shownAp <= 1) "1" else "1-$shownAp"
+
+        val canAttack: Boolean = currentAp >= participant.getCheapestUsableAttackAp(areEnemiesInRange)
+        val canUseSpecial: Boolean = currentAp >= participant.getCheapestUsableSpecialAp()
+        val canMove: Boolean = battleField.getModifiedApForHero() > 0 && currentAp >= MOVE_AP
+        val canSwitchEquipment: Boolean = currentAp >= SWITCH_WEAPON_AP
+        val canDrinkPotion: Boolean = currentAp >= POTION_AP
+        val canFlee: Boolean = currentAp >= fleeAp
+        val canDelayTurn: Boolean = currentAp >= DELAY_AP
+        val canPushOn: Boolean = currentSp >= PUSH_ON_SP
+        val canRest: Boolean = currentAp >= REST_AP
+
+        return listOf(
+            // @formatter:off
+            BattleMenuOption(ATTACK,       "? AP",                 canAttack,          { openSubMenuFromMainMenu(::showAttackTable) }),
+            BattleMenuOption("Special",    "? AP",                 canUseSpecial,      { openSubMenuFromMainMenu(::showSpecialTable) }),
+            BattleMenuOption(MOVE,         "$moveApRange AP",      canMove,            { openSubMenuFromMainMenu(::showMoveTable) }),
+            BattleMenuOption("Equipment",  "$SWITCH_WEAPON_AP AP", canSwitchEquipment, { openSubMenuFromMainMenu(::showActionWeaponTable) }),
+            BattleMenuOption("Potion",     "$POTION_AP AP",        canDrinkPotion,     { openSubMenuFromMainMenu { showPotionTable(actionPotionListener) } }),
+            BattleMenuOption("Preview",    "",                     true,               { openSubMenuFromMainMenu(::showPreviewAttackTable) }),
+            BattleMenuOption("Party",      "",                     true,               actionMenuHandlers.showInventoryScreen,   playsConfirmSound = false),
+            BattleMenuOption("Flee party", "$fleeAp AP",           canFlee,            actionMenuHandlers.showFleeDialog,        playsConfirmSound = false),
+            BattleMenuOption("Delay turn", "$DELAY_AP AP",         canDelayTurn,       actionMenuHandlers.showDelayTurnDialog,   playsConfirmSound = false),
+            BattleMenuOption("Push on",    "$PUSH_ON_SP SP",       canPushOn,          actionMenuHandlers.showPushOnDialog,      playsConfirmSound = false),
+            BattleMenuOption("Rest",       "$shownAp AP",          canRest,            actionMenuHandlers.showConfirmRestDialog, playsConfirmSound = false),
+            BattleMenuOption(END_TURN,     "",                     true,               actionMenuHandlers.endTurn)
+            // @formatter:on
+        )
+    }
+
+    private fun moveCursorToUsableOption(options: List<BattleMenuOption>, areEnemiesInRange: Boolean) {
+        if (!areEnemiesInRange && options[mainMenuIndex].name == ATTACK) {
+            mainMenuIndex = options.indexOfFirst { it.name == MOVE }
+        }
+        if (currentParticipant.invoke().currentAP <= 1 || !options[mainMenuIndex].isEnabled) {
+            mainMenuIndex = options.indexOfFirst { it.name == END_TURN }
+        }
+    }
+
+    private fun Participant.getCheapestUsableAttackAp(areEnemiesInRange: Boolean): Int {
+        if (!areEnemiesInRange) return AP_UNAVAILABLE
+
+        return getCheapestUsableAp { !it.abilityItem.isSpecial }
+    }
+
+    private fun Participant.getCheapestUsableSpecialAp(): Int {
+        return getCheapestUsableAp { it.abilityItem.isSpecial }
+    }
+
+    private fun Participant.getCheapestUsableAp(isWantedAbility: (BattleAbilityItem) -> Boolean): Int {
+        return getBattleAbilities()
+            .filter(isWantedAbility)
+            .filter { it.isWeaponAllowed() && it.hasEnoughApSp() }
+            .minOfOrNull { it.ap }
+            ?: AP_UNAVAILABLE
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     private fun openRootMenu(menu: () -> Unit) {
         menuStack.clear()
         openMenu(menu)
+    }
+
+    private fun openSubMenuFromMainMenu(menu: () -> Unit) {
+        mainMenuIndex = currentSelectedIndex
+        openSubMenu(menu)
+    }
+
+    private fun openSubMenuFromHeroMenu(menu: () -> Unit) {
+        screenBuilder.buttonTableSelectHeroIndex = currentSelectedIndex
+        openSubMenu(menu)
+    }
+
+    private fun openSubMenuFromAttackMenu(menu: () -> Unit) {
+        screenBuilder.buttonTableSelectAttackIndex = currentSelectedIndex
+        openSubMenu(menu)
     }
 
     private fun openSubMenu(menu: () -> Unit) {
@@ -325,18 +370,6 @@ class BattleMenuManager(
         stage.addActor(table)
         table.addListener(listener)
         stage.keyboardFocus = table.children.last()
-    }
-
-    private fun rememberMainMenuIndex() {
-        screenBuilder.buttonTableMainMenuIndex = currentSelectedIndex
-    }
-
-    private fun rememberSelectHeroIndex() {
-        screenBuilder.buttonTableSelectHeroIndex = currentSelectedIndex
-    }
-
-    private fun rememberSelectAttackIndex() {
-        screenBuilder.buttonTableSelectAttackIndex = currentSelectedIndex
     }
 
     private val currentSelectedIndex: Int

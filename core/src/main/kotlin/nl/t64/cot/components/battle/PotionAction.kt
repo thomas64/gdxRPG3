@@ -5,7 +5,7 @@ import nl.t64.cot.Utils.gameData
 import nl.t64.cot.components.party.inventory.BattlePotionItem
 
 
-private const val POTION_AP: Int = 3
+const val POTION_AP: Int = 3
 
 class PotionAction(
     private val currentParticipant: Participant,

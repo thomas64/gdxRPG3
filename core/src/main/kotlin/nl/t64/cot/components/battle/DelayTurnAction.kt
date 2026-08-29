@@ -1,7 +1,7 @@
 package nl.t64.cot.components.battle
 
 
-private const val DELAY_AP: Int = 1
+const val DELAY_AP: Int = 1
 
 class DelayTurnAction(
     private val currentParticipant: Participant

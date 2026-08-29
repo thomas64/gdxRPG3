@@ -14,7 +14,10 @@ import ktx.assets.disposeSafely
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.resourceManager
-import nl.t64.cot.components.battle.*
+import nl.t64.cot.components.battle.AttackData
+import nl.t64.cot.components.battle.Character
+import nl.t64.cot.components.battle.EnemyItem
+import nl.t64.cot.components.battle.Participant
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.abilities.AbilityItem
 import nl.t64.cot.components.party.abilities.BattleAbilityItem
@@ -34,7 +37,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.List as GdxList
 private const val TITLE_TEXT = "Battle...!"
 private const val BAR_WIDTH = 145f
 private const val BAR_HEIGHT = 18f
-private const val AP_UNAVAILABLE = 99
 
 class BattleScreenBuilder {
 
@@ -46,7 +48,6 @@ class BattleScreenBuilder {
     private val combined: Drawable = Utils.createCombinedDrawable(transparent, border)
 
     var buttonTableSelectHeroIndex = 0
-    var buttonTableMainMenuIndex = 0
     var buttonTableSelectAttackIndex = 0
 
     fun createBattleTitle(): Label {
@@ -288,19 +289,17 @@ class BattleScreenBuilder {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    fun createButtonTablePreBattle(): Table {
-        return createStyledEmptyList<String>().fillWithPreBattleActions().toPreBattleTable()
+    fun createButtonTablePreBattle(selectedIndex: Int): Table {
+        return createStyledEmptyList<String>().fillWithPreBattleActions(selectedIndex).toPreBattleTable()
     }
 
     fun createButtonTableHero(heroes: List<Participant>): Table {
         return createStyledEmptyList<String>().fillWithHeroes(heroes).toHeroTable()
     }
 
-    fun createButtonTableAction(currentParticipant: Participant,
-                                areEnemiesInRange: Boolean,
-                                isAbleToMove: Boolean): Table {
-        return createStyledEmptyList<String>()
-            .fillWithActions(currentParticipant, areEnemiesInRange, isAbleToMove)
+    fun createButtonTableAction(options: List<BattleMenuOption>, selectedIndex: Int): Table {
+        return createStyledEmptyList<BattleMenuOption>()
+            .fillWithActions(options, selectedIndex)
             .toActionTable()
     }
 
@@ -357,13 +356,13 @@ class BattleScreenBuilder {
         y = Gdx.graphics.height * 0.85f - height
     }
 
-    private fun GdxList<String>.fillWithPreBattleActions(): GdxList<String> {
+    private fun GdxList<String>.fillWithPreBattleActions(selectedIndex: Int): GdxList<String> {
         items.add("Party preparation")
         items.add("Select equipment")
         items.add("Drink potion")
         items.add("Preview attacks")
         items.add("Start battle")
-        this.selectedIndex = buttonTableMainMenuIndex
+        this.selectedIndex = selectedIndex
         return this
     }
 
@@ -376,72 +375,11 @@ class BattleScreenBuilder {
         return this
     }
 
-    private fun GdxList<String>.fillWithActions(currentParticipant: Participant,
-                                                areEnemiesInRange: Boolean,
-                                                isAbleToMove: Boolean): GdxList<String> {
-        val curSp: Int = currentParticipant.character.currentSp
-        val attackAp: Int = currentParticipant.getCheapestUsableAttackApAnd(areEnemiesInRange)
-        val moveApInt: Int = if (isAbleToMove) 1 else AP_UNAVAILABLE
-        val pushOnApInt: Int = if (curSp >= PUSH_ON_SP) 0 else AP_UNAVAILABLE
-        val curAp: Int = maxOf(1, currentParticipant.currentAP)
-        val maxAp: Int = currentParticipant.maximumAP
-        val moveApString: String = buildMoveApStringFrom(curAp)
-        val fleeAp: String = buildFleeApStringFrom(curAp, maxAp)
-
-        val actions: List<Pair<String, Int>> = listOf(
-            // @formatter:off
-            String.format("%-11s%7s", "Attack",     "? AP")             to attackAp,
-            String.format("%-11s%7s", "Special",    "? AP")             to 3,
-            String.format("%-11s%7s", "Move",       "$moveApString AP") to moveApInt,
-            String.format("%-11s%7s", "Equipment",  "3 AP")             to 3,
-            String.format("%-11s%7s", "Potion",     "3 AP")             to 3,
-            String.format("%-11s%7s", "Preview",    "")                 to 0,
-            String.format("%-11s%7s", "Party",      "")                 to 0,
-            String.format("%-11s%7s", "Flee party", "$fleeAp AP")       to fleeAp.toInt(),
-            String.format("%-11s%7s", "Delay turn", "1 AP")             to 1,
-            String.format("%-11s%7s", "Push on",    "$PUSH_ON_SP SP")   to pushOnApInt,
-            String.format("%-11s%7s", "Rest",       "$curAp AP")        to 1,
-            String.format("%-11s%7s", "End turn",   "")                 to 0
-            // @formatter:on
-        )
-        val actionStrings: List<String> = actions.map { (action, ap) ->
-            "${currentParticipant.getColorBasedOn(ap, action)}$action"
-        }
-        this.setItems(*actionStrings.toTypedArray())
-
-        if (!areEnemiesInRange && buttonTableMainMenuIndex == 0) {
-            buttonTableMainMenuIndex = 2
-        }
-        if (currentParticipant.currentAP <= 1
-            || this.items[buttonTableMainMenuIndex].startsWith("[GRAY]")
-        ) {
-            buttonTableMainMenuIndex = 11
-        }
-        this.selectedIndex = buttonTableMainMenuIndex
+    private fun GdxList<BattleMenuOption>.fillWithActions(options: List<BattleMenuOption>,
+                                                          selectedIndex: Int): GdxList<BattleMenuOption> {
+        this.setItems(*options.toTypedArray())
+        this.selectedIndex = selectedIndex
         return this
-    }
-
-    private fun Participant.getCheapestUsableAttackApAnd(areEnemiesInRange: Boolean): Int {
-        if (!areEnemiesInRange) return AP_UNAVAILABLE
-
-        return getBattleAbilities()
-            .filterNot { it.abilityItem.isSpecial }
-            .filter { it.isWeaponAllowed() && it.hasEnoughApSp() }
-            .minOfOrNull { it.ap }
-            ?: AP_UNAVAILABLE
-    }
-
-    private fun buildMoveApStringFrom(curAp: Int): String {
-        return if (curAp <= 1) "1" else "1-$curAp"
-    }
-
-    private fun buildFleeApStringFrom(curAp: Int, maxAp: Int): String {
-        return if (curAp >= maxAp) "$curAp" else "$maxAp"
-    }
-
-    private fun Participant.getColorBasedOn(requestedAp: Int, action: String): String {
-        if (action.contains("Special") && this.getBattleAbilities().none { it.abilityItem.isSpecial }) return "[GRAY]"
-        return if (this.currentAP < requestedAp) "[GRAY]" else ""
     }
 
     private fun GdxList<BattleAbilityItem>.fillWithPreviewAttacks(currentParticipant: Participant): GdxList<BattleAbilityItem> {
@@ -540,7 +478,7 @@ class BattleScreenBuilder {
         }
     }
 
-    private fun GdxList<String>.toActionTable(): Table {
+    private fun GdxList<BattleMenuOption>.toActionTable(): Table {
         val listWithActions = this
         return createSelectionTable().apply {
             add("Select Action:").padBottom(10f).row()
