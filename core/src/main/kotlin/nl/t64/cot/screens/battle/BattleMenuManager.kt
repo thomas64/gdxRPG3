@@ -39,7 +39,7 @@ class BattleMenuManager(
     private var currentTable: Table = Table()
     private var mainMenuIndex: Int = 0
 
-    private lateinit var actionMenuHandlers: ActionMenuHandlers
+    private lateinit var menuHandlers: BattleMenuHandlers
 
     private lateinit var preBattleMainMenuListener: SelectPreBattleListener
     private lateinit var actionMainMenuListener: SelectActionListener
@@ -60,11 +60,9 @@ class BattleMenuManager(
     private lateinit var actionPotionListener: SelectPotionListener
 
     fun setListeners(
-        actionMenuHandlers: ActionMenuHandlers,
+        menuHandlers: BattleMenuHandlers,
         winBattle: () -> Unit,
         openPauseMenu: () -> Unit,
-        showInventoryScreenPreBattle: () -> Unit,
-        startBattle: () -> Unit,
         heroIsSelectedForPreEquipment: (String) -> Unit,
         heroIsSelectedForPrePotion: (String) -> Unit,
         heroIsSelectedForPrePreview: (String) -> Unit,
@@ -78,9 +76,9 @@ class BattleMenuManager(
         showConfirmWeaponDialogPreBattle: (BattleWeaponItem) -> Unit,
         showConfirmWeaponDialog: (BattleWeaponItem) -> Unit
     ) {
-        this.actionMenuHandlers = actionMenuHandlers
-        preBattleMainMenuListener = SelectPreBattleListener(winBattle, openPauseMenu, showInventoryScreenPreBattle, ::equipmentIsSelectedInPreBattle, ::potionIsSelectedInPreBattle, ::previewIsSelectedInPreBattle, startBattle)
-        actionMainMenuListener = SelectActionListener(winBattle, openPauseMenu, actionMenuHandlers.showInventoryScreen)
+        this.menuHandlers = menuHandlers
+        preBattleMainMenuListener = SelectPreBattleListener(winBattle, openPauseMenu, menuHandlers.showInventoryScreenPreBattle)
+        actionMainMenuListener = SelectActionListener(winBattle, openPauseMenu, menuHandlers.showInventoryScreen)
         preBattleEquipmentListener = SelectWeaponListener(showConfirmWeaponDialogPreBattle, ::goBack)
         actionEquipmentListener = SelectWeaponListener(showConfirmWeaponDialog, ::goBack)
         preBattleHeroForEquipmentListener = SelectHeroListener(heroIsSelectedForPreEquipment, ::goBack)
@@ -141,18 +139,6 @@ class BattleMenuManager(
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private fun equipmentIsSelectedInPreBattle() {
-        openSubMenuFromMainMenu { showHeroTable(preBattleHeroForEquipmentListener) }
-    }
-
-    private fun potionIsSelectedInPreBattle() {
-        openSubMenuFromMainMenu { showHeroTable(preBattleHeroForPotionListener) }
-    }
-
-    private fun previewIsSelectedInPreBattle() {
-        openSubMenuFromMainMenu { showHeroTable(preBattleHeroForPreviewListener) }
-    }
-
     private fun anAttackIsSelectedInPreview(attack: BattleAbilityItem) {
         openSubMenuFromAttackMenu { showPreviewTargetTable(attack) }
     }
@@ -168,7 +154,8 @@ class BattleMenuManager(
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun showPreBattleTable() {
-        showTable(screenBuilder.createButtonTablePreBattle(mainMenuIndex), preBattleMainMenuListener)
+        val options: List<BattleMenuOption> = createPreBattleOptions()
+        showTable(screenBuilder.createButtonTablePreBattle(options, mainMenuIndex), preBattleMainMenuListener)
     }
 
     private fun showStealthMovementTable() {
@@ -269,6 +256,18 @@ class BattleMenuManager(
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    private fun createPreBattleOptions(): List<BattleMenuOption> {
+        return listOf(
+            // @formatter:off
+            BattleMenuOption("Party preparation", "", true, menuHandlers.showInventoryScreenPreBattle, playsConfirmSound = false),
+            BattleMenuOption("Select equipment",  "", true, { openSubMenuFromMainMenu { showHeroTable(preBattleHeroForEquipmentListener) } }),
+            BattleMenuOption("Drink potion",      "", true, { openSubMenuFromMainMenu { showHeroTable(preBattleHeroForPotionListener) } }),
+            BattleMenuOption("Preview attacks",   "", true, { openSubMenuFromMainMenu { showHeroTable(preBattleHeroForPreviewListener) } }),
+            BattleMenuOption("Start battle",      "", true, menuHandlers.startBattle)
+            // @formatter:on
+        )
+    }
+
     private fun createActionOptions(areEnemiesInRange: Boolean): List<BattleMenuOption> {
         val participant: Participant = currentParticipant.invoke()
         val currentAp: Int = participant.currentAP
@@ -295,12 +294,12 @@ class BattleMenuManager(
             BattleMenuOption("Equipment",  "$SWITCH_WEAPON_AP AP", canSwitchEquipment, { openSubMenuFromMainMenu(::showActionWeaponTable) }),
             BattleMenuOption("Potion",     "$POTION_AP AP",        canDrinkPotion,     { openSubMenuFromMainMenu { showPotionTable(actionPotionListener) } }),
             BattleMenuOption("Preview",    "",                     true,               { openSubMenuFromMainMenu(::showPreviewAttackTable) }),
-            BattleMenuOption("Party",      "",                     true,               actionMenuHandlers.showInventoryScreen,   playsConfirmSound = false),
-            BattleMenuOption("Flee party", "$fleeAp AP",           canFlee,            actionMenuHandlers.showFleeDialog,        playsConfirmSound = false),
-            BattleMenuOption("Delay turn", "$DELAY_AP AP",         canDelayTurn,       actionMenuHandlers.showDelayTurnDialog,   playsConfirmSound = false),
-            BattleMenuOption("Push on",    "$PUSH_ON_SP SP",       canPushOn,          actionMenuHandlers.showPushOnDialog,      playsConfirmSound = false),
-            BattleMenuOption("Rest",       "$shownAp AP",          canRest,            actionMenuHandlers.showConfirmRestDialog, playsConfirmSound = false),
-            BattleMenuOption(END_TURN,     "",                     true,               actionMenuHandlers.endTurn)
+            BattleMenuOption("Party",      "",                     true,               menuHandlers.showInventoryScreen,   playsConfirmSound = false),
+            BattleMenuOption("Flee party", "$fleeAp AP",           canFlee,            menuHandlers.showFleeDialog,        playsConfirmSound = false),
+            BattleMenuOption("Delay turn", "$DELAY_AP AP",         canDelayTurn,       menuHandlers.showDelayTurnDialog,   playsConfirmSound = false),
+            BattleMenuOption("Push on",    "$PUSH_ON_SP SP",       canPushOn,          menuHandlers.showPushOnDialog,      playsConfirmSound = false),
+            BattleMenuOption("Rest",       "$shownAp AP",          canRest,            menuHandlers.showConfirmRestDialog, playsConfirmSound = false),
+            BattleMenuOption(END_TURN,     "",                     true,               menuHandlers.endTurn)
             // @formatter:on
         )
     }

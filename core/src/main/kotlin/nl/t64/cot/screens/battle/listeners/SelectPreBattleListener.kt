@@ -6,15 +6,12 @@ import com.badlogic.gdx.scenes.scene2d.InputListener
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.constants.Constant
+import nl.t64.cot.screens.battle.BattleMenuOption
 
 class SelectPreBattleListener(
     private val winBattle: () -> Unit,
     private val pauseMenu: () -> Unit,
-    private val inventoryScreen: () -> Unit,
-    private val selectEquipment: () -> Unit,
-    private val selectPotion: () -> Unit,
-    private val selectPreview: () -> Unit,
-    private val startBattle: () -> Unit
+    private val inventoryScreen: () -> Unit
 ) : InputListener() {
 
     override fun keyDown(event: InputEvent, keycode: Int): Boolean {
@@ -36,18 +33,7 @@ class SelectPreBattleListener(
     }
 
     private fun InputEvent.handleEnter() {
-        getSelected<String>()?.let { selected ->
-            if (selected != "Party preparation") {
-                playSe(AudioEvent.SE_MENU_CONFIRM)
-            }
-            when {
-                "Party" in selected -> inventoryScreen.invoke()
-                "equipment" in selected -> selectEquipment.invoke()
-                "potion" in selected -> selectPotion.invoke()
-                "Preview" in selected -> selectPreview.invoke()
-                "Start" in selected -> startBattle.invoke()
-            }
-        }
+        getSelected<BattleMenuOption>()?.select()
     }
 
 }

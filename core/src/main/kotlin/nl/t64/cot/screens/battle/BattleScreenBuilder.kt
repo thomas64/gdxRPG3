@@ -289,8 +289,10 @@ class BattleScreenBuilder {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    fun createButtonTablePreBattle(selectedIndex: Int): Table {
-        return createStyledEmptyList<String>().fillWithPreBattleActions(selectedIndex).toPreBattleTable()
+    fun createButtonTablePreBattle(options: List<BattleMenuOption>, selectedIndex: Int): Table {
+        return createStyledEmptyList<BattleMenuOption>()
+            .fillWithOptions(options, selectedIndex)
+            .toPreBattleTable()
     }
 
     fun createButtonTableHero(heroes: List<Participant>): Table {
@@ -299,7 +301,7 @@ class BattleScreenBuilder {
 
     fun createButtonTableAction(options: List<BattleMenuOption>, selectedIndex: Int): Table {
         return createStyledEmptyList<BattleMenuOption>()
-            .fillWithActions(options, selectedIndex)
+            .fillWithOptions(options, selectedIndex)
             .toActionTable()
     }
 
@@ -356,16 +358,6 @@ class BattleScreenBuilder {
         y = Gdx.graphics.height * 0.85f - height
     }
 
-    private fun GdxList<String>.fillWithPreBattleActions(selectedIndex: Int): GdxList<String> {
-        items.add("Party preparation")
-        items.add("Select equipment")
-        items.add("Drink potion")
-        items.add("Preview attacks")
-        items.add("Start battle")
-        this.selectedIndex = selectedIndex
-        return this
-    }
-
     private fun GdxList<String>.fillWithHeroes(heroes: List<Participant>): GdxList<String> {
         heroes
             .filter { it.character.isAlive }
@@ -375,7 +367,7 @@ class BattleScreenBuilder {
         return this
     }
 
-    private fun GdxList<BattleMenuOption>.fillWithActions(options: List<BattleMenuOption>,
+    private fun GdxList<BattleMenuOption>.fillWithOptions(options: List<BattleMenuOption>,
                                                           selectedIndex: Int): GdxList<BattleMenuOption> {
         this.setItems(*options.toTypedArray())
         this.selectedIndex = selectedIndex
@@ -462,7 +454,7 @@ class BattleScreenBuilder {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private fun GdxList<String>.toPreBattleTable(): Table {
+    private fun GdxList<BattleMenuOption>.toPreBattleTable(): Table {
         val listWithActions = this
         return createSelectionTable().apply {
             add("Prepare for Battle:").padBottom(10f).row()

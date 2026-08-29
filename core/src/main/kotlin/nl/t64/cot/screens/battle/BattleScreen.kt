@@ -590,7 +590,9 @@ class BattleScreen : Screen {
 
     private fun setMenuManagerListeners() {
         menuManager.setListeners(
-            ActionMenuHandlers(::showInventoryScreen,
+            BattleMenuHandlers(::showInventoryScreenPreBattle,
+                               ::startStealthMovementPhase,
+                               ::showInventoryScreen,
                                ::showFleeDialog,
                                ::showDelayTurnDialog,
                                ::showPushOnDialog,
@@ -598,8 +600,6 @@ class BattleScreen : Screen {
                                ::endTurn),
             ::winBattle,
             ::openPauseMenu,
-            ::showInventoryScreenPreBattle,
-            ::startStealthMovementPhase,
             ::heroIsSelectedForPreEquipment,
             ::heroIsSelectedForPrePotion,
             ::heroIsSelectedForPrePreview,

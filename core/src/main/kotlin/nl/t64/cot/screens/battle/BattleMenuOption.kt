@@ -11,8 +11,7 @@ class BattleMenuOption(
     private val onSelect: () -> Unit,
     private val playsConfirmSound: Boolean = true
 ) {
-
-    private val label: String = possibleGetGrayPrefix() + String.format("%-11s%7s", name, cost)
+    private val label: String = possibleGetGrayPrefix() + createLabelLine()
 
     fun select() {
         if (playsConfirmSound) {
@@ -27,6 +26,11 @@ class BattleMenuOption(
 
     private fun possibleGetGrayPrefix(): String {
         return if (isEnabled) "" else "[GRAY]"
+    }
+
+    private fun createLabelLine(): String {
+        if (cost.isEmpty()) return name
+        return String.format("%-11s%7s", name, cost)
     }
 
 }
