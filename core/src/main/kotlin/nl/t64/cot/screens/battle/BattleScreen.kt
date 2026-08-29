@@ -141,8 +141,7 @@ class BattleScreen : Screen {
                 Gdx.input.inputProcessor = stage
                 Utils.setGamepadInputProcessor(stage)
                 stage.addActor(Utils.createBattleBack(battleId))
-                screenBuilder.buttonTableMainMenuIndex = 0
-                menuManager.setupPreBattleTable()
+                menuManager.openPreBattleMenu()
                 isLoaded = true
                 render(0f)
 
@@ -251,8 +250,7 @@ class BattleScreen : Screen {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun startStealthMovementPhase() {
-        screenBuilder.buttonTableMainMenuIndex = 0
-        menuManager.buttonTablePreBattle.remove()
+        menuManager.closeMenu()
         phase = BattlePhase.STEALTH_MOVEMENT
         heroesToSneak = ArrayDeque(turnManager.getOnlyHeroes().filter { it.getFreeStealthSteps() > 0 })
         letNextHeroSneak()
@@ -265,13 +263,13 @@ class BattleScreen : Screen {
             startBattle()
         } else {
             preBattleSelectedHero = nextHero
-            menuManager.setupStealthMovementTable()
+            menuManager.openStealthMovementMenu()
         }
     }
 
     private fun stealthMovementConfirmed() {
         playSe(AudioEvent.SE_MENU_CONFIRM)
-        menuManager.removeStealthMovementTable()
+        menuManager.closeMenu()
         letNextHeroSneak()
     }
 
@@ -298,17 +296,17 @@ class BattleScreen : Screen {
 
     private fun heroIsSelectedForPreEquipment(selectedHero: String) {
         preBattleSelectedHero = turnManager.getParticipant(selectedHero)
-        menuManager.aHeroIsSelectedInPreviewEquipmentInPreBattle()
+        menuManager.openWeaponMenuForSelectedHero()
     }
 
     private fun heroIsSelectedForPrePotion(selectedHero: String) {
         preBattleSelectedHero = turnManager.getParticipant(selectedHero)
-        menuManager.aHeroIsSelectedInPotionInPreBattle()
+        menuManager.openPotionMenuForSelectedHero()
     }
 
     private fun heroIsSelectedForPrePreview(selectedHero: String) {
         preBattleSelectedHero = turnManager.getParticipant(selectedHero)
-        menuManager.aHeroIsSelectedInPreviewAttacksInPreBattle()
+        menuManager.openPreviewAttackMenuForSelectedHero()
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -380,68 +378,65 @@ class BattleScreen : Screen {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun attackConfirmed(attackAction: AttackAction) {
-        menuManager.buttonTableTarget.remove()
+        menuManager.closeMenu()
         attackOutcomeManager.attackConfirmed(attackAction)
     }
 
     private fun specialConfirmed(specialAction: SpecialAction) {
-        menuManager.buttonTableTarget.remove()
+        menuManager.closeMenu()
         specialOutcomeManager.specialConfirmed(specialAction)
     }
 
     private fun moveConfirmed() {
         val moveAction = MoveAction(battleField, currentParticipant)
-        if (moveAction.didCharacterRemainOnTheSameSpace()) {
-            menuManager.returnToActionMainMenu()
-            return
-        } else {
+        if (!moveAction.didCharacterRemainOnTheSameSpace()) {
             moveAction.handle()
-            menuManager.returnToActionMainMenu()
         }
+        menuManager.goBack()
     }
 
     private fun potionPreBattleConfirmed(potionAction: PotionAction) {
         confirmManager.potionConfirmed(potionAction)
-        menuManager.returnToSelectPotionInPreBattle()
+        menuManager.reopenCurrentMenu()
     }
 
     private fun potionConfirmed(potionAction: PotionAction) {
-        menuManager.buttonTablePotion.remove()
+        menuManager.closeMenu()
         confirmManager.potionConfirmed(potionAction)
     }
 
     private fun weaponPreBattleConfirmed(weaponAction: WeaponAction) {
         confirmManager.weaponConfirmed(weaponAction)
-        menuManager.returnToSelectWeaponInPreBattle()
+        menuManager.reopenCurrentMenu()
     }
 
     private fun weaponConfirmed(weaponAction: WeaponAction) {
-        menuManager.buttonTableWeapon.remove()
+        menuManager.closeMenu()
         confirmManager.weaponConfirmed(weaponAction)
     }
 
     private fun fleeConfirmed(fleeAction: FleeAction) {
-        menuManager.buttonTableAction.remove()
+        menuManager.closeMenu()
         confirmManager.fleeConfirmed(fleeAction, resultManager)
     }
 
     private fun delayTurnConfirmed(delayTurnAction: DelayTurnAction) {
-        menuManager.buttonTableAction.remove()
+        menuManager.closeMenu()
         confirmManager.delayTurnConfirmed(delayTurnAction)
     }
 
     private fun pushOnConfirmed(pushOnAction: PushOnAction) {
-        menuManager.buttonTableAction.remove()
+        menuManager.closeMenu()
         confirmManager.pushOnConfirmed(pushOnAction)
     }
 
     private fun restConfirmed(restAction: RestAction) {
-        menuManager.buttonTableAction.remove()
+        menuManager.closeMenu()
         confirmManager.restConfirmed(restAction)
     }
 
     private fun endTurn() {
-        menuManager.buttonTableAction.remove()
+        menuManager.closeMenu()
         confirmManager.endTurn()
         hasChosenToContinuePerforming = false
     }
@@ -456,7 +451,7 @@ class BattleScreen : Screen {
             return
         }
 
-        menuManager.possibleSetupActionTable()
+        menuManager.possibleOpenActionMenu()
     }
 
     // isEnemyActing stays true until the step that was handed to the render thread has actually run there,
