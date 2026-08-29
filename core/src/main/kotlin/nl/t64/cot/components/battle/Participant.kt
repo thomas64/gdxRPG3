@@ -122,6 +122,10 @@ class Participant(
         }
     }
 
+    fun getFreeStealthSteps(): Int {
+        return character.getCalculatedTotalSkillOf(SkillItemId.STEALTH)
+    }
+
     fun getPenaltyAp(): Int {
         return (PENALTY_AP - (character.getCalculatedTotalSkillOf(SkillItemId.STEALTH) / 3f)).toInt().coerceAtLeast(0)
     }

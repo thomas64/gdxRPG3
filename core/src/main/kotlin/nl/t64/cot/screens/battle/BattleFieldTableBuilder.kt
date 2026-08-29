@@ -20,7 +20,7 @@ class BattleFieldTableBuilder {
     private val combined: Drawable = Utils.createCombinedDrawable(transparent, border)
     private lateinit var battleField: BattleField
 
-    fun createBattleFieldTable(battleField: BattleField, currentParticipant: Participant): Table {
+    fun createBattleFieldTable(battleField: BattleField, currentParticipant: Participant, phase: BattlePhase): Table {
         this.battleField = battleField
 
         val enemyTable: Table = if (currentParticipant.isHero) {
@@ -29,7 +29,7 @@ class BattleFieldTableBuilder {
             createEnemyRowWithActingEnemy(currentParticipant)
         }
         val heroTable: Table = if (currentParticipant.isHero) {
-            createHeroRowWithWalkingFields(currentParticipant)
+            createHeroRowWithWalkingFields(currentParticipant, phase)
         } else {
             createHeroRowWithEnemyRangeFields()
         }
@@ -95,17 +95,40 @@ class BattleFieldTableBuilder {
         }
     }
 
-    private fun createHeroRowWithWalkingFields(currentParticipant: Participant): Table {
-        val startingSpace: Int = battleField.startingSpace
-        val currentSpace: Int = battleField.getSpaceIndexOfCurrentParticipant()
-        val penaltyAp: Int = battleField.getPenaltyApForHero()
+    private fun createHeroRowWithWalkingFields(currentParticipant: Participant, phase: BattlePhase): Table {
+        val walkingFields: WalkingFields = when (phase) {
+            BattlePhase.STEALTH_MOVEMENT -> createStealthWalkingFields()
+            else -> createBattleWalkingFields(currentParticipant)
+        }
 
         return Table().apply {
             defaults().width(60f).height(60f).center()
             battleField.heroSpaces.forEachIndexed { index, heroAtSpace ->
-                addHeroFieldCell(index, heroAtSpace, currentParticipant, startingSpace, currentSpace, penaltyAp)
+                addHeroFieldCell(index, heroAtSpace, currentParticipant, walkingFields)
             }
         }
+    }
+
+    private fun createBattleWalkingFields(currentParticipant: Participant): WalkingFields {
+        val penaltyAp: Int = battleField.getPenaltyApForHero()
+        return WalkingFields(startingSpace = battleField.startingSpace,
+                             currentSpace = battleField.getSpaceIndexOfCurrentParticipant(),
+                             range = currentParticipant.currentAP - penaltyAp,
+                             budget = currentParticipant.currentAP,
+                             extraCost = penaltyAp,
+                             costSuffix = " AP",
+                             cellColor = Color.CHARTREUSE)
+    }
+
+    private fun createStealthWalkingFields(): WalkingFields {
+        val stealthSteps: Int = battleField.getFreeStealthStepsForHero()
+        return WalkingFields(startingSpace = battleField.startingSpace,
+                             currentSpace = battleField.getSpaceIndexOfCurrentParticipant(),
+                             range = stealthSteps,
+                             budget = stealthSteps,
+                             extraCost = 0,
+                             costSuffix = "",
+                             cellColor = Color.PURPLE)
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -114,18 +137,14 @@ class BattleFieldTableBuilder {
         index: Int,
         heroAtSpace: Participant?,
         currentParticipant: Participant,
-        startingSpace: Int,
-        currentSpace: Int,
-        penaltyAp: Int,
+        walkingFields: WalkingFields,
     ) {
-        val currentAp: Int = currentParticipant.currentAP
-        val modifiedAp: Int = currentAp - penaltyAp
-        val amountOfSteps: Int = abs(index - startingSpace)
-        val apCost: Int = getApCostFor(amountOfSteps, penaltyAp)
+        val startingSpace: Int = walkingFields.startingSpace
+        val costLabel: String? = walkingFields.createCostLabelFor(index)
 
-        val isInRange: Boolean = index in startingSpace - modifiedAp..startingSpace + modifiedAp
+        val isInRange: Boolean = walkingFields.isInRange(index)
         val isStartingSpace: Boolean = index == startingSpace
-        val isCurrentSpace: Boolean = index == currentSpace
+        val isCurrentSpace: Boolean = index == walkingFields.currentSpace
 
         when {
             startingSpace == -1 && heroAtSpace == currentParticipant -> addGoldParticipantCell(heroAtSpace)
@@ -133,20 +152,11 @@ class BattleFieldTableBuilder {
             startingSpace == -1 && heroAtSpace == null -> addWhiteCell()
 
             isStartingSpace && !isCurrentSpace -> addGoldCell()
-            isInRange && heroAtSpace == null -> addGreenCell(apCost, currentAp)
+            isInRange && heroAtSpace == null -> addReachableCell(costLabel, walkingFields.cellColor)
             isStartingSpace && isCurrentSpace -> addGoldParticipantCell(heroAtSpace!!)
-            !isStartingSpace && isCurrentSpace -> addGreenParticipantCell(heroAtSpace!!, apCost, currentAp)
+            !isStartingSpace && isCurrentSpace -> addReachableParticipantCell(heroAtSpace!!, costLabel, walkingFields.cellColor)
             heroAtSpace != null -> addWhiteParticipantCell(heroAtSpace)
             else -> addWhiteCell()
-        }
-    }
-
-    private fun getApCostFor(amountOfSteps: Int, penalty: Int): Int {
-        return when {
-            amountOfSteps == 0 -> 0
-            amountOfSteps == 1 -> 1 + penalty
-            amountOfSteps > 1 -> 1 + penalty + (amountOfSteps - 1)
-            else -> 0
         }
     }
 
@@ -170,10 +180,10 @@ class BattleFieldTableBuilder {
         }).padRight(1f)
     }
 
-    private fun Table.addGreenParticipantCell(participant: Participant, apCost: Int, actionPoints: Int) {
+    private fun Table.addReachableParticipantCell(participant: Participant, costLabel: String?, cellColor: Color) {
         add(Stack().apply {
-            add(Image(Utils.createFullBorderWhite()).apply { color = Color.CHARTREUSE })
-            possibleAddApCosts(apCost, actionPoints)
+            add(Image(Utils.createFullBorderWhite()).apply { color = cellColor })
+            possibleAddCostLabel(costLabel)
             add(Container(createImageOf(participant)))
             addPossibleBattleLock(participant)
             addPossiblePerformance(participant)
@@ -198,10 +208,10 @@ class BattleFieldTableBuilder {
         add(Image(Utils.createFullBorderWhite()).apply { color = Color.ORANGE }).padRight(1f)
     }
 
-    private fun Table.addGreenCell(apCost: Int, actionPoints: Int) {
+    private fun Table.addReachableCell(costLabel: String?, cellColor: Color) {
         add(Stack().apply {
-            add(Image(Utils.createFullBorderWhite()).apply { color = Color.CHARTREUSE })
-            possibleAddApCosts(apCost, actionPoints)
+            add(Image(Utils.createFullBorderWhite()).apply { color = cellColor })
+            possibleAddCostLabel(costLabel)
         }).padRight(1f)
     }
 
@@ -243,11 +253,34 @@ class BattleFieldTableBuilder {
         }
     }
 
-    private fun Stack.possibleAddApCosts(apCost: Int, actionPoints: Int) {
-        if (apCost > 0 && apCost <= actionPoints) {
+    private fun Stack.possibleAddCostLabel(costLabel: String?) {
+        costLabel?.let {
             val style = LabelStyle(FontProvider.default, Color.WHITE)
-            add(Container(Label("$apCost AP", style)).bottom().padBottom(-20f))
+            add(Container(Label(it, style)).bottom().padBottom(-20f))
         }
+    }
+
+    private class WalkingFields(
+        val startingSpace: Int,
+        val currentSpace: Int,
+        private val range: Int,
+        private val budget: Int,
+        private val extraCost: Int,
+        private val costSuffix: String,
+        val cellColor: Color
+    ) {
+
+        fun isInRange(index: Int): Boolean {
+            return index in startingSpace - range..startingSpace + range
+        }
+
+        fun createCostLabelFor(index: Int): String? {
+            val amountOfSteps: Int = abs(index - startingSpace)
+            if (amountOfSteps == 0) return null
+            val cost: Int = amountOfSteps + extraCost
+            return if (cost <= budget) "$cost$costSuffix" else null
+        }
+
     }
 
 }

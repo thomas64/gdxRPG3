@@ -2,8 +2,8 @@
   "stealth"   : {
     "upgrade"    : 6,
     "description": [
-      "- At the start of battle, 'Stealth' increases a character's",
-      "  chance to start in a space further away from enemies.",
+      "- Before battle, 'Stealth' lets a character get into position.",
+      "  Each rank grants one free space of movement.",
       "",
       "- During combat, 'Stealth' reduces how much attention enemies",
       "  pay to a character compared to other party members.",

@@ -56,15 +56,17 @@ class BattleScreen : Screen {
     private lateinit var specialOutcomeManager: SpecialOutcomeManager
     private lateinit var resultManager: BattleResultManager
 
+    private var phase: BattlePhase = BattlePhase.PRE_BATTLE
+    private var heroesToSneak: ArrayDeque<Participant> = ArrayDeque()
+
     private val currentParticipant: Participant
-        get() = if (isPreBattle) preBattleSelectedHero else turnManager.currentParticipant
+        get() = if (phase == BattlePhase.BATTLE) turnManager.currentParticipant else preBattleSelectedHero
 
     private val screenBuilder = BattleScreenBuilder()
     private val shapeRenderer = ShapeRenderer()
 
     private var isBgmFading: Boolean = false
     private var isLoaded: Boolean = false
-    private var isPreBattle: Boolean = false
     @Volatile
     private var isDelayingTurn: Boolean = false
     private var hasChosenToContinuePerforming: Boolean = false
@@ -97,7 +99,7 @@ class BattleScreen : Screen {
         }
 
         isLoaded = false
-        isPreBattle = false
+        phase = BattlePhase.PRE_BATTLE
         hasWon = false
         hasLost = false
 
@@ -141,7 +143,6 @@ class BattleScreen : Screen {
                 stage.addActor(Utils.createBattleBack(battleId))
                 screenBuilder.buttonTableMainMenuIndex = 0
                 menuManager.setupPreBattleTable()
-                isPreBattle = true
                 isLoaded = true
                 render(0f)
 
@@ -182,7 +183,7 @@ class BattleScreen : Screen {
         updateAllTables()
 
         when {
-            isPreBattle -> return
+            phase != BattlePhase.BATTLE -> return
             enemies.getAll().none { it.isAlive } -> winBattle()
             gameData.party.getPlayer().isDead -> gameOver()
             currentParticipant.isHero -> takeTurnHero()
@@ -206,7 +207,7 @@ class BattleScreen : Screen {
         tableManager.updateEnemyTable(enemies.getAll(), turnManager::getCurrentApOf)
         val visionSlots = (gameData.party.size + 2) + gameData.inventory.getTotalOfItem("vision_thingy")
         tableManager.updateTurnTable(turnManager, visionSlots)
-        tableManager.updateBattleField(battleField)
+        tableManager.updateBattleField(battleField, phase)
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -249,10 +250,32 @@ class BattleScreen : Screen {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private fun startBattle() {
+    private fun startStealthMovementPhase() {
         screenBuilder.buttonTableMainMenuIndex = 0
         menuManager.buttonTablePreBattle.remove()
+        phase = BattlePhase.STEALTH_MOVEMENT
+        heroesToSneak = ArrayDeque(turnManager.getOnlyHeroes().filter { it.getFreeStealthSteps() > 0 })
+        letNextHeroSneak()
+    }
 
+    private fun letNextHeroSneak() {
+        val nextHero: Participant? = heroesToSneak.removeFirstOrNull()
+        if (nextHero == null) {
+            battleField.resetStartingSpace()
+            startBattle()
+        } else {
+            preBattleSelectedHero = nextHero
+            menuManager.setupStealthMovementTable()
+        }
+    }
+
+    private fun stealthMovementConfirmed() {
+        playSe(AudioEvent.SE_MENU_CONFIRM)
+        menuManager.removeStealthMovementTable()
+        letNextHeroSneak()
+    }
+
+    private fun startBattle() {
         val labelStyle = LabelStyle(FontProvider.fffTusjBold200, Color.BLACK)
         val battleStartLabel = Label("Battle  Start", labelStyle)
         val centerY: Float = (Gdx.graphics.height / 2f) - (battleStartLabel.height / 2f)
@@ -268,7 +291,7 @@ class BattleScreen : Screen {
             Actions.delay(1.5f),
             Actions.run {
                 battleStartLabel.remove()
-                isPreBattle = false
+                phase = BattlePhase.BATTLE
             }
         ))
     }
@@ -576,7 +599,7 @@ class BattleScreen : Screen {
             ::openPauseMenu,
             ::showInventoryScreenPreBattle,
             ::showInventoryScreen,
-            ::startBattle,
+            ::startStealthMovementPhase,
             ::heroIsSelectedForPreEquipment,
             ::heroIsSelectedForPrePotion,
             ::heroIsSelectedForPrePreview,
@@ -587,6 +610,7 @@ class BattleScreen : Screen {
             ::showConfirmRestDialog,
             ::endTurn,
             ::moveConfirmed,
+            ::stealthMovementConfirmed,
             ::showConfirmAttackDialog,
             ::showConfirmSpecialDialog,
             ::showConfirmPotionDialogPreBattle,

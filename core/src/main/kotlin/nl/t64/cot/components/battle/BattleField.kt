@@ -50,19 +50,19 @@ class BattleField(
     }
 
     fun moveHeroRight() {
-        val currentIndex: Int = getSpaceIndexOfCurrentParticipant()
-        val actionPoints: Int = getModifiedApForHero()
-        val upperBound: Int = minOf(startingSpace + 1 + actionPoints, BATTLE_FIELD_SIZE)
-        val allSpacesFromHere: IntProgression = currentIndex + 1 until upperBound
-        moveHero(allSpacesFromHere)
+        moveHeroRightWithin(getModifiedApForHero())
     }
 
     fun moveHeroLeft() {
-        val currentIndex: Int = getSpaceIndexOfCurrentParticipant()
-        val actionPoints: Int = getModifiedApForHero()
-        val lowerBound: Int = maxOf(startingSpace - actionPoints, 0)
-        val allSpacesFromHere: IntProgression = currentIndex - 1 downTo lowerBound
-        moveHero(allSpacesFromHere)
+        moveHeroLeftWithin(getModifiedApForHero())
+    }
+
+    fun moveHeroRightWithStealth() {
+        moveHeroRightWithin(getFreeStealthStepsForHero())
+    }
+
+    fun moveHeroLeftWithStealth() {
+        moveHeroLeftWithin(getFreeStealthStepsForHero())
     }
 
     fun getModifiedApForHero(): Int {
@@ -71,6 +71,10 @@ class BattleField(
 
     fun getPenaltyApForHero(): Int {
         return if (isHeroStartingSpaceNextToEnemy()) currentParticipant.invoke().getPenaltyAp() else 0
+    }
+
+    fun getFreeStealthStepsForHero(): Int {
+        return currentParticipant.invoke().getFreeStealthSteps()
     }
 
     fun getSpaceIndexOfCurrentParticipant(): Int {
@@ -116,6 +120,20 @@ class BattleField(
 
     fun possibleGetHeroTargetAndMoveEnemy(): Participant? {
         return enemyAi.possibleGetHeroTargetAndMove()
+    }
+
+    private fun moveHeroRightWithin(range: Int) {
+        val currentIndex: Int = getSpaceIndexOfCurrentParticipant()
+        val upperBound: Int = minOf(startingSpace + 1 + range, BATTLE_FIELD_SIZE)
+        val allSpacesFromHere: IntProgression = currentIndex + 1 until upperBound
+        moveHero(allSpacesFromHere)
+    }
+
+    private fun moveHeroLeftWithin(range: Int) {
+        val currentIndex: Int = getSpaceIndexOfCurrentParticipant()
+        val lowerBound: Int = maxOf(startingSpace - range, 0)
+        val allSpacesFromHere: IntProgression = currentIndex - 1 downTo lowerBound
+        moveHero(allSpacesFromHere)
     }
 
     private fun moveHero(allSpacesInTheChosenDirection: IntProgression) {

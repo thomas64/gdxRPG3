@@ -13,17 +13,17 @@ class BattleGrid(participants: List<Participant>) {
 
     init {
         val heroParticipants: List<Participant> = participants.filter { it.isHero }
-        val enemyParticipants: List<Participant> = participants.filter { !it.isHero }
+        val enemyParticipants: List<Participant> = participants.filterNot { it.isHero }
 
-        val orderedHeroes: List<Participant> = heroParticipants
-            .sortedByDescending { it.character.getCalculatedTotalSkillOf(SkillItemId.STEALTH) + (Math.random() * 10f) }
+        val randomHeroes: List<Participant> = heroParticipants
+            .shuffled()
         val orderedEnemies: List<Participant> = enemyParticipants
             .sortedBy { it.character.getCalculatedTotalSkillOf(SkillItemId.STEALTH) + (Math.random() * 10f) }
 
-        val heroIndices: List<Int> = (0 until 12).shuffled().take(orderedHeroes.size).sorted()
+        val heroIndices: List<Int> = (0 until 12).shuffled().take(randomHeroes.size).sorted()
         val enemyIndices: List<Int> = (8 until BATTLE_FIELD_SIZE).shuffled().take(orderedEnemies.size).sorted()
 
-        orderedHeroes.forEachIndexed { index, participant -> heroSpaces[heroIndices[index]] = participant }
+        randomHeroes.forEachIndexed { index, participant -> heroSpaces[heroIndices[index]] = participant }
         orderedEnemies.forEachIndexed { index, participant -> enemySpaces[enemyIndices[index]] = participant }
     }
 
@@ -59,7 +59,7 @@ class BattleGrid(participants: List<Participant>) {
         return ranges
             .map { listOf(fromIndex - it + offsetLeft, fromIndex + it + offSetRight) }
             .flatten()
-            .filter { it in 0..BATTLE_FIELD_SIZE }
+            .filter { it in 0 until BATTLE_FIELD_SIZE }
             .distinct()
     }
 

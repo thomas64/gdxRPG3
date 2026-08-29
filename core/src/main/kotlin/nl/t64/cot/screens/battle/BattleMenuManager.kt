@@ -36,6 +36,8 @@ class BattleMenuManager(
     var buttonTablePotion: Table = Table()
     var buttonTableWeapon: Table = Table()
 
+    val currentHero: HeroItem = currentParticipant.invoke().character as HeroItem
+
     private val allButtonTables: List<Table>
         get() = listOf(buttonTablePreBattle,
                        buttonTableHero,
@@ -63,6 +65,7 @@ class BattleMenuManager(
     private lateinit var actionAttackTargetListener: SelectTargetListener
     private lateinit var actionSpecialTargetListener: SelectTargetListener
     private lateinit var actionMoveListener: SelectMoveListener
+    private lateinit var stealthMovementListener: SelectMoveListener
     private lateinit var preBattlePotionListener: SelectPotionListener
     private lateinit var actionPotionListener: SelectPotionListener
 
@@ -82,6 +85,7 @@ class BattleMenuManager(
         showConfirmRestDialog: () -> Unit,
         endTurn: () -> Unit,
         confirmMovement: () -> Unit,
+        confirmStealthMovement: () -> Unit,
         showConfirmAttackDialog: (BattleAbilityItem, String) -> Unit,
         showConfirmSpecialDialog: (BattleAbilityItem, String) -> Unit,
         showConfirmPotionDialogPreBattle: (BattlePotionItem) -> Unit,
@@ -105,6 +109,7 @@ class BattleMenuManager(
         actionAttackTargetListener = SelectTargetListener(showConfirmAttackDialog, ::returnToSelectAttack)
         actionSpecialTargetListener = SelectTargetListener(showConfirmSpecialDialog, ::returnToSelectSpecial)
         actionMoveListener = SelectMoveListener(battleField::moveHeroLeft, battleField::moveHeroRight, confirmMovement, ::returnToActionMainMenu)
+        stealthMovementListener = SelectMoveListener(battleField::moveHeroLeftWithStealth, battleField::moveHeroRightWithStealth, confirmStealthMovement, battleField::cancelMovement)
         preBattlePotionListener = SelectPotionListener(showConfirmPotionDialogPreBattle, ::returnToSelectHeroInPotionInPreBattle)
         actionPotionListener = SelectPotionListener(showConfirmPotionDialog, ::returnToActionMainMenu)
     }
@@ -147,7 +152,7 @@ class BattleMenuManager(
     fun aHeroIsSelectedInPreviewEquipmentInPreBattle() {
         screenBuilder.buttonTableSelectHeroIndex = (buttonTableHero.children.last() as GdxList<*>).selectedIndex
         buttonTableHero.remove()
-        setupWeaponTable(preBattleEquipmentListener)
+        setupWeaponTableInPreBattle()
     }
 
     fun aHeroIsSelectedInPotionInPreBattle() {
@@ -196,7 +201,7 @@ class BattleMenuManager(
     private fun equipmentIsSelectedInAction() {
         screenBuilder.buttonTableMainMenuIndex = (buttonTableAction.children.last() as GdxList<*>).selectedIndex
         buttonTableAction.remove()
-        setupWeaponTable(actionEquipmentListener)
+        setupWeaponTableInAction()
     }
 
     private fun moveIsSelectedInAction() {
@@ -222,7 +227,7 @@ class BattleMenuManager(
 
     fun returnToSelectWeaponInPreBattle() {
         buttonTableWeapon.remove()
-        setupWeaponTable(preBattleEquipmentListener)
+        setupWeaponTableInPreBattle()
     }
 
     fun returnToSelectPotionInPreBattle() {
@@ -279,6 +284,17 @@ class BattleMenuManager(
     fun setupPreBattleTable() {
         buttonTablePreBattle = screenBuilder.createButtonTablePreBattle()
         setupTable(buttonTablePreBattle, preBattleMainMenuListener)
+    }
+
+    fun setupStealthMovementTable() {
+        battleField.setStartingSpace()
+        buttonTableMove = screenBuilder.createButtonTableStealthMovement(currentParticipant.invoke().character.name,
+                                                                         battleField.getFreeStealthStepsForHero())
+        setupTable(buttonTableMove, stealthMovementListener)
+    }
+
+    fun removeStealthMovementTable() {
+        buttonTableMove.remove()
     }
 
     private fun setupHeroTable(selectHeroListener: SelectHeroListener) {
@@ -355,25 +371,31 @@ class BattleMenuManager(
         setupTable(buttonTablePotion, listener)
     }
 
-    private fun setupWeaponTable(listener: SelectWeaponListener) {
-        val currentHero: HeroItem = currentParticipant.invoke().character as HeroItem
-        val equipment: List<InventoryItem> = currentHero.getAllItemsAbleToEquip()
+    private fun setupWeaponTableInPreBattle() {
+        val weaponsAndShield: List<InventoryItem> = currentHero.getAllWeaponsAbleToEquip() + currentHero.getAllShieldsAbleToEquip()
+        setupWeaponTable(weaponsAndShield, preBattleEquipmentListener)
+    }
+
+    private fun setupWeaponTableInAction() {
+        val weapons: List<InventoryItem> = currentHero.getAllWeaponsAbleToEquip()
+        setupWeaponTable(weapons, actionEquipmentListener)
+    }
+
+    private fun setupWeaponTable(equipment: List<InventoryItem>, listener: SelectWeaponListener) {
         val currentWeapon: InventoryItem? = currentHero.getInventoryItem(InventoryGroup.WEAPON)
         val currentShield: InventoryItem? = currentHero.getInventoryItem(InventoryGroup.SHIELD)
         buttonTableWeapon = screenBuilder.createButtonTableWeapon(equipment, currentWeapon, currentShield)
         setupTable(buttonTableWeapon, listener)
     }
 
-    private fun HeroItem.getAllItemsAbleToEquip(): List<InventoryItem> {
-        val allWeaponsThisHeroIsAbleToEquip: List<InventoryItem> =
-            gameData.inventory.getAllOf(InventoryGroup.WEAPON)
-                .filter { this.createMessageIfHeroHasNotEnoughFor(it) == null }
+    private fun HeroItem.getAllWeaponsAbleToEquip(): List<InventoryItem> {
+        return gameData.inventory.getAllOf(InventoryGroup.WEAPON)
+            .filter { this.createMessageIfHeroHasNotEnoughFor(it) == null }
+    }
 
-        val allShieldsThisHeroIsAbleToEquip: List<InventoryItem> =
-            gameData.inventory.getAllOf(InventoryGroup.SHIELD)
-                .filter { this.createMessageIfHeroHasNotEnoughFor(it) == null }
-
-        return allWeaponsThisHeroIsAbleToEquip + allShieldsThisHeroIsAbleToEquip
+    private fun HeroItem.getAllShieldsAbleToEquip(): List<InventoryItem> {
+        return gameData.inventory.getAllOf(InventoryGroup.SHIELD)
+            .filter { this.createMessageIfHeroHasNotEnoughFor(it) == null }
     }
 
     private fun setupTable(table: Table, listener: InputListener) {

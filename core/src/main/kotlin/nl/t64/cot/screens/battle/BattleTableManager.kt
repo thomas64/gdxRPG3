@@ -40,10 +40,10 @@ class BattleTableManager(
         stage.addActor(turnTable)
     }
 
-    fun updateBattleField(battleField: BattleField) {
+    fun updateBattleField(battleField: BattleField, phase: BattlePhase) {
         battleFieldTable.remove()
         battleField.removeDeadParticipants()
-        battleFieldTable = battleFieldBuilder.createBattleFieldTable(battleField, currentParticipant.invoke())
+        battleFieldTable = battleFieldBuilder.createBattleFieldTable(battleField, currentParticipant.invoke(), phase)
         stage.addActor(battleFieldTable)
     }
 

@@ -319,10 +319,15 @@ class BattleScreenBuilder {
     fun createButtonTableMove(): Table {
         return createSelectionTable().apply {
             add("Move left or right and confirm.")
-            background = combined
-            pack()
-            x = (Gdx.graphics.width - width) / 2f
-            y = Gdx.graphics.height * 0.85f - height
+            placeAboveBattleField()
+        }
+    }
+
+    fun createButtonTableStealthMovement(heroName: String, stealthSteps: Int): Table {
+        return createSelectionTable().apply {
+            add("Take position: $heroName - Stealth $stealthSteps").padBottom(5f).row()
+            add("Move left or right and confirm.")
+            placeAboveBattleField()
         }
     }
 
@@ -344,6 +349,13 @@ class BattleScreenBuilder {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private fun Table.placeAboveBattleField() {
+        background = combined
+        pack()
+        x = (Gdx.graphics.width - width) / 2f
+        y = Gdx.graphics.height * 0.85f - height
+    }
 
     private fun GdxList<String>.fillWithPreBattleActions(): GdxList<String> {
         items.add("Party preparation")
@@ -706,6 +718,7 @@ class BattleScreenBuilder {
             padTop(5f)
             padLeft(10f)
             padRight(10f)
+            padBottom(5f)
         }
     }
 

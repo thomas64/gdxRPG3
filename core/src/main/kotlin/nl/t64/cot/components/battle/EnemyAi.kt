@@ -216,7 +216,7 @@ class EnemyAi(
         return if (destinationSpace < actingEnemyIndex) {
             actingEnemyIndex - 1 downTo maxOf(destinationSpace, 0)
         } else {
-            actingEnemyIndex + 1..minOf(destinationSpace, BATTLE_FIELD_SIZE)
+            actingEnemyIndex + 1..minOf(destinationSpace, BATTLE_FIELD_SIZE - 1)
         }
     }
 
