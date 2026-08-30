@@ -57,11 +57,10 @@ class BattleScreen : Screen {
     private lateinit var specialOutcomeManager: SpecialOutcomeManager
     private lateinit var resultManager: BattleResultManager
 
-    private var phase: BattlePhase = BattlePhase.PRE_BATTLE
     private var heroesToSneak: ArrayDeque<Participant> = ArrayDeque()
 
     private val currentParticipant: Participant
-        get() = if (phase == BattlePhase.BATTLE) turnManager.currentParticipant else preBattleSelectedHero
+        get() = if (battleState.phase == BattlePhase.BATTLE) turnManager.currentParticipant else preBattleSelectedHero
 
     private val screenBuilder = BattleScreenBuilder()
     private val shapeRenderer = ShapeRenderer()
@@ -96,7 +95,6 @@ class BattleScreen : Screen {
         }
 
         isLoaded = false
-        phase = BattlePhase.PRE_BATTLE
         hasWon = false
         hasLost = false
 
@@ -112,7 +110,7 @@ class BattleScreen : Screen {
         if (preferenceManager.isDebugModeOn) printCombatPowers()
 
         battleField = BattleField(turnManager.participants, ::currentParticipant)
-        tableManager = BattleTableManager(stage, screenBuilder, ::currentParticipant)
+        tableManager = BattleTableManager(stage, screenBuilder, ::currentParticipant, battleState)
         menuManager = BattleMenuManager(stage, screenBuilder, turnManager, battleField, ::currentParticipant, createMenuHandlers())
         dialogManager = BattleDialogManager(stage, turnManager, ::currentParticipant, battleState)
         confirmManager = BattleConfirmManager(stage, turnManager, tableManager::battleFieldTable, ::currentParticipant, battleState)
@@ -179,7 +177,7 @@ class BattleScreen : Screen {
         updateAllTables()
 
         when {
-            phase != BattlePhase.BATTLE -> return
+            battleState.phase != BattlePhase.BATTLE -> return
             enemies.getAll().none { it.isAlive } -> winBattle()
             gameData.party.getPlayer().isDead -> gameOver()
             currentParticipant.isHero -> takeTurnHero()
@@ -203,7 +201,7 @@ class BattleScreen : Screen {
         tableManager.updateEnemyTable(enemies.getAll(), turnManager::getCurrentApOf)
         val visionSlots = (gameData.party.size + 2) + gameData.inventory.getTotalOfItem("vision_thingy")
         tableManager.updateTurnTable(turnManager, visionSlots)
-        tableManager.updateBattleField(battleField, phase)
+        tableManager.updateBattleField(battleField)
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -247,7 +245,7 @@ class BattleScreen : Screen {
 
     private fun startStealthMovementPhase() {
         menuManager.closeMenu()
-        phase = BattlePhase.STEALTH_MOVEMENT
+        battleState.phase = BattlePhase.STEALTH_MOVEMENT
         heroesToSneak = ArrayDeque(turnManager.getOnlyHeroes().filter { it.getFreeStealthSteps() > 0 })
         letNextHeroSneak()
     }
@@ -285,7 +283,7 @@ class BattleScreen : Screen {
             Actions.delay(1.5f),
             Actions.run {
                 battleStartLabel.remove()
-                phase = BattlePhase.BATTLE
+                battleState.phase = BattlePhase.BATTLE
             }
         ))
     }

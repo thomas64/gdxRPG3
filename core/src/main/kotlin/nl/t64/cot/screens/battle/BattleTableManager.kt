@@ -8,7 +8,8 @@ import nl.t64.cot.components.party.HeroItem
 class BattleTableManager(
     private val stage: Stage,
     private val screenBuilder: BattleScreenBuilder,
-    private val currentParticipant: () -> Participant
+    private val currentParticipant: () -> Participant,
+    private val battleState: BattleState
 ) {
     private val battleFieldBuilder = BattleFieldTableBuilder()
 
@@ -40,10 +41,10 @@ class BattleTableManager(
         stage.addActor(turnTable)
     }
 
-    fun updateBattleField(battleField: BattleField, phase: BattlePhase) {
+    fun updateBattleField(battleField: BattleField) {
         battleFieldTable.remove()
         battleField.removeDeadParticipants()
-        battleFieldTable = battleFieldBuilder.createBattleFieldTable(battleField, currentParticipant.invoke(), phase)
+        battleFieldTable = battleFieldBuilder.createBattleFieldTable(battleField, currentParticipant.invoke(), battleState.phase)
         stage.addActor(battleFieldTable)
     }
 

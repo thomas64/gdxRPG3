@@ -7,6 +7,8 @@ class BattleState(
     val turnManager: TurnManager
 ) {
 
+    var phase: BattlePhase = BattlePhase.PRE_BATTLE
+
     @Volatile
     var isDelayingTurn: Boolean = false
     var isBgmFading: Boolean = false
