@@ -19,20 +19,20 @@ class AttackOutcomeManager(
     private val stage: Stage,
     private val turnManager: TurnManager,
     private val battleFieldTable: () -> Table,
-    private val setDelayingTurn: (Boolean) -> Unit
+    private val battleState: BattleState
 ) {
 
     fun enemyAttackConfirmed(attackData: List<AttackData>) {
-        setDelayingTurn.invoke(true)
+        battleState.isDelayingTurn = true
         attackData.playEffectsSequentially()
         Utils.runWithDelay(attackData.getDelay()) {
-            setDelayingTurn.invoke(false)
+            battleState.isDelayingTurn = false
         }
     }
 
     fun attackConfirmed(attackAction: AttackAction) {
         val attackData: List<AttackData> = attackAction.handle()
-        setDelayingTurn.invoke(true)
+        battleState.isDelayingTurn = true
 
         Utils.runWithDelay(0.5f) {
             attackData.playEffectsSequentially()
@@ -150,11 +150,11 @@ class AttackOutcomeManager(
         if (messages.isNotEmpty()) {
             val messageDialog = MessageDialog(messages)
             messageDialog.setActionAfterHide {
-                setDelayingTurn.invoke(false)
+                battleState.isDelayingTurn = false
             }
             messageDialog.show(stage, audioEvent)
         } else {
-            setDelayingTurn.invoke(false)
+            battleState.isDelayingTurn = false
         }
     }
 

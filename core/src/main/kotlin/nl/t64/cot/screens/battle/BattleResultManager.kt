@@ -19,14 +19,14 @@ class BattleResultManager(
     private val battleObserver: BattleSubject,
     private val battleId: String,
     private val enemies: EnemyContainer,
-    private val setBgmFading: (Boolean) -> Unit
+    private val battleState: BattleState
 ) {
 
     fun winBattle() {
         stage.addAction(Actions.sequence(
-            Actions.run { setBgmFading.invoke(true) },
+            Actions.run { battleState.isBgmFading = true },
             Actions.delay(Constant.FADE_DURATION),
-            Actions.run { setBgmFading.invoke(false) },
+            Actions.run { battleState.isBgmFading = false },
             Actions.run { stopAllBgm() },
             Actions.run { playBgm(AudioEvent.BGM_WIN_BATTLE, false) },
             Actions.run {
@@ -58,9 +58,9 @@ class BattleResultManager(
 
     fun gameOver() {
         stage.addAction(Actions.sequence(
-            Actions.run { setBgmFading.invoke(true) },
+            Actions.run { battleState.isBgmFading = true },
             Actions.delay(Constant.FADE_DURATION),
-            Actions.run { setBgmFading.invoke(false) },
+            Actions.run { battleState.isBgmFading = false },
             Actions.run { stopAllBgm() },
             Actions.run { playBgm(AudioEvent.BGM_LOSE_BATTLE, false) },
             Actions.run {
@@ -112,13 +112,13 @@ class BattleResultManager(
 
     private fun startPossibleBgmFade(shouldBgmFadeOut: Boolean) {
         if (shouldBgmFadeOut) {
-            setBgmFading.invoke(true)
+            battleState.isBgmFading = true
         }
     }
 
     private fun endPossibleBgmFade(shouldBgmFadeOut: Boolean) {
         if (shouldBgmFadeOut) {
-            setBgmFading.invoke(false)
+            battleState.isBgmFading = false
             stopAllBgm()
         }
     }

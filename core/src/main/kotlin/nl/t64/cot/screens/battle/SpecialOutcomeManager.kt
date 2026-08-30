@@ -14,12 +14,12 @@ private const val DEFAULT_FLOATING_NUMBER_DELAY = 1.2f
 
 class SpecialOutcomeManager(
     private val battleFieldTable: () -> Table,
-    private val setDelayingTurn: (Boolean) -> Unit
+    private val battleState: BattleState
 ) {
 
     fun specialConfirmed(specialAction: SpecialAction) {
         val specialData: AttackData = specialAction.handle().single()
-        setDelayingTurn.invoke(true)
+        battleState.isDelayingTurn = true
         Utils.runWithDelay(0.5f) {
             when {
                 specialData.isHeal -> {
@@ -47,7 +47,7 @@ class SpecialOutcomeManager(
                 else -> throw IllegalArgumentException("SpecialOutcomeManager does not support this special action.")
             }
             Utils.runWithDelay(DEFAULT_FLOATING_NUMBER_DELAY) {
-                setDelayingTurn.invoke(false)
+                battleState.isDelayingTurn = false
             }
         }
     }

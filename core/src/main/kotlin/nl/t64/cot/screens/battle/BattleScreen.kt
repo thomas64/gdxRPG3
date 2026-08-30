@@ -45,6 +45,7 @@ class BattleScreen : Screen {
 
     private lateinit var enemies: EnemyContainer
     private lateinit var turnManager: TurnManager
+    lateinit var battleState: BattleState; private set
     private lateinit var preBattleSelectedHero: Participant
 
     private lateinit var battleField: BattleField
@@ -65,11 +66,7 @@ class BattleScreen : Screen {
     private val screenBuilder = BattleScreenBuilder()
     private val shapeRenderer = ShapeRenderer()
 
-    private var isBgmFading: Boolean = false
     private var isLoaded: Boolean = false
-    @Volatile
-    private var isDelayingTurn: Boolean = false
-    private var hasChosenToContinuePerforming: Boolean = false
     @Volatile
     private var isEnemyActing: Boolean = false
     private var turnOfLastBlink: Int = -1
@@ -110,17 +107,18 @@ class BattleScreen : Screen {
 
         enemies = EnemyContainer(battleId)
         turnManager = TurnManager(gameData.party.getAllHeroesAlive(), enemies.getAll())
+        battleState = BattleState(turnManager)
         preBattleSelectedHero = turnManager.participants.first { it.character.id == Constant.PLAYER_ID }
         if (preferenceManager.isDebugModeOn) printCombatPowers()
 
         battleField = BattleField(turnManager.participants, ::currentParticipant)
         tableManager = BattleTableManager(stage, screenBuilder, ::currentParticipant)
         menuManager = BattleMenuManager(stage, screenBuilder, turnManager, battleField, ::currentParticipant, createMenuHandlers())
-        dialogManager = BattleDialogManager(stage, turnManager, ::currentParticipant, { isDelayingTurn = it }, { hasChosenToContinuePerforming = it })
-        confirmManager = BattleConfirmManager(stage, turnManager, tableManager::battleFieldTable, ::currentParticipant, { isDelayingTurn = it })
-        attackOutcomeManager = AttackOutcomeManager(stage, turnManager, tableManager::battleFieldTable, { isDelayingTurn = it })
-        specialOutcomeManager = SpecialOutcomeManager(tableManager::battleFieldTable, { isDelayingTurn = it })
-        resultManager = BattleResultManager(stage, battleObserver, battleId, enemies, { isBgmFading = it })
+        dialogManager = BattleDialogManager(stage, turnManager, ::currentParticipant, battleState)
+        confirmManager = BattleConfirmManager(stage, turnManager, tableManager::battleFieldTable, ::currentParticipant, battleState)
+        attackOutcomeManager = AttackOutcomeManager(stage, turnManager, tableManager::battleFieldTable, battleState)
+        specialOutcomeManager = SpecialOutcomeManager(tableManager::battleFieldTable, battleState)
+        resultManager = BattleResultManager(stage, battleObserver, battleId, enemies, battleState)
 
         val battleTitle: Label = screenBuilder.createBattleTitle()
         stage.addActor(battleTitle)
@@ -170,7 +168,7 @@ class BattleScreen : Screen {
         handleAudioFading()
         stage.draw()
 
-        if (!isLoaded || isBgmFading || isDelayingTurn || hasWon || hasLost) {
+        if (!isLoaded || battleState.isBgmFading || battleState.isDelayingTurn || hasWon || hasLost) {
             return
         }
 
@@ -226,7 +224,6 @@ class BattleScreen : Screen {
         Gdx.input.inputProcessor = null
         Utils.setGamepadInputProcessor(null)
         if (shouldKeepState) return
-        hasChosenToContinuePerforming = false
         turnOfLastBlink = -1
         turnManager.resetTemporaryBonusesAfterBattle()
         stage.clear()
@@ -241,7 +238,7 @@ class BattleScreen : Screen {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun handleAudioFading() {
-        if (isBgmFading) {
+        if (battleState.isBgmFading) {
             audioManager.certainFadeBgmBgs()
         }
     }
@@ -437,15 +434,15 @@ class BattleScreen : Screen {
     private fun endTurn() {
         menuManager.closeMenu()
         confirmManager.endTurn()
-        hasChosenToContinuePerforming = false
+        battleState.hasChosenToContinuePerforming = false
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun takeTurnHero() {
-        if (isDelayingTurn) return
+        if (battleState.isDelayingTurn) return
 
-        if (currentParticipant.isPerforming && !hasChosenToContinuePerforming) {
+        if (currentParticipant.isPerforming && !battleState.hasChosenToContinuePerforming) {
             dialogManager.showContinuePerformDialog()
             return
         }
@@ -465,7 +462,7 @@ class BattleScreen : Screen {
                 startEnemyAction()
             }.onFailure {
                 if (preferenceManager.isDebugModeOn) it.printStackTrace()
-                isDelayingTurn = false
+                battleState.isDelayingTurn = false
                 isEnemyActing = false
             }
         }
@@ -481,12 +478,12 @@ class BattleScreen : Screen {
         val heroTarget: Participant? = battleField.possibleGetHeroTargetAndMoveEnemy()
         battleField.resetStartingSpace()
         val attackData: List<AttackData>? = heroTarget?.let {
-            isDelayingTurn = true
+            battleState.isDelayingTurn = true
             AttackAction.createForEnemy(currentParticipant, it, battleId).handle()
         }
 
         if (attackData.isNullOrEmpty()) {
-            isDelayingTurn = false
+            battleState.isDelayingTurn = false
             endEnemyAction()
         } else {
             onRenderThread {
@@ -513,10 +510,10 @@ class BattleScreen : Screen {
         if (isEnemyActing) Thread.sleep(500L)
 
         onRenderThread {
-            isDelayingTurn = true
+            battleState.isDelayingTurn = true
             BlinkEffect(tableManager.battleFieldTable, participantToBlink.character.name, Color.BLACK).start()
             Utils.runWithDelay(0.5f) {
-                isDelayingTurn = false
+                battleState.isDelayingTurn = false
             }
         }
 
@@ -576,13 +573,13 @@ class BattleScreen : Screen {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun winBattle() {
-        if (isDelayingTurn || hasWon) return
+        if (battleState.isDelayingTurn || hasWon) return
         hasWon = true
         resultManager.winBattle()
     }
 
     private fun gameOver() {
-        if (isDelayingTurn) return
+        if (battleState.isDelayingTurn) return
         hasLost = true
         resultManager.gameOver()
     }

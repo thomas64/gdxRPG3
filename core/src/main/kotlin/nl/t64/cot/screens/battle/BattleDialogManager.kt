@@ -16,8 +16,7 @@ class BattleDialogManager(
     private val stage: Stage,
     private val turnManager: TurnManager,
     private val currentParticipant: () -> Participant,
-    private val setDelayingTurn: (Boolean) -> Unit,
-    private val setChooseContinuePerforming: (Boolean) -> Unit,
+    private val battleState: BattleState,
 ) {
 
     fun showPreviewDialog(
@@ -214,7 +213,7 @@ class BattleDialogManager(
     }
 
     fun showContinuePerformDialog() {
-        setDelayingTurn(true)
+        battleState.isDelayingTurn = true
         val performer: Participant = currentParticipant.invoke()
         val performingAbility: AbilityItem =
             performer.character.getAllAbilities().first { it.id == performer.performingType }
@@ -232,8 +231,8 @@ class BattleDialogManager(
             val dialog = QuestionDialog(question) {
                 performer.currentAP = 0
                 performer.character.currentSp -= performingAbility.sp
-                setChooseContinuePerforming(true)
-                setDelayingTurn(false)
+                battleState.hasChosenToContinuePerforming = true
+                battleState.isDelayingTurn = false
             }
             dialog.setActionAfterNo {
                 stopPerforming(performer)
@@ -245,7 +244,7 @@ class BattleDialogManager(
     private fun stopPerforming(performer: Participant) {
         performer.stopPerforming()
         turnManager.troubadourEffects.removeFromAllParticipants()
-        setDelayingTurn(false)
+        battleState.isDelayingTurn = false
     }
 
 }
