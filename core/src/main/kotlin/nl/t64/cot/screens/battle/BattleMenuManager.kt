@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.components.battle.*
 import nl.t64.cot.components.party.HeroItem
+import nl.t64.cot.components.party.abilities.AbilityItem
 import nl.t64.cot.components.party.abilities.BattleAbilityItem
 import nl.t64.cot.components.party.abilities.Target
 import nl.t64.cot.components.party.inventory.InventoryGroup
@@ -21,6 +22,7 @@ private const val REST_AP: Int = 1
 private const val ATTACK: String = "Attack"
 private const val MOVE: String = "Move"
 private const val END_TURN: String = "End turn"
+private const val BACK: String = "Back"
 
 class BattleMenuManager(
     private val stage: Stage,
@@ -37,6 +39,8 @@ class BattleMenuManager(
     private var currentMenu: () -> Unit = {}
     private var currentTable: Table = Table()
     private var mainMenuIndex: Int = 0
+    private var heroMenuIndex: Int = 0
+    private var attackMenuIndex: Int = 0
 
     private val preBattleMainMenuListener = SelectPreBattleListener(menuHandlers.winBattle, menuHandlers.openPauseMenu, menuHandlers.showInventoryScreenPreBattle)
     private val actionMainMenuListener = SelectActionListener(menuHandlers.winBattle, menuHandlers.openPauseMenu, menuHandlers.showInventoryScreen)
@@ -127,7 +131,8 @@ class BattleMenuManager(
     }
 
     private fun showHeroTable(selectHeroListener: SelectHeroListener) {
-        showTable(screenBuilder.createButtonTableHero(turnManager.getOnlyHeroes()), selectHeroListener)
+        val heroTable: Table = screenBuilder.createButtonTableHero(turnManager.getOnlyHeroes(), heroMenuIndex)
+        showTable(heroTable, selectHeroListener)
     }
 
     private fun showActionTable() {
@@ -145,15 +150,21 @@ class BattleMenuManager(
     }
 
     private fun showPreviewAttackTable() {
-        showTable(screenBuilder.createButtonTablePreviewAttack(currentParticipant.invoke()), previewAttacksListener)
+        val abilities: List<BattleAbilityItem> = createPreviewAbilities()
+        moveCursorToUsableAbility(abilities)
+        showTable(screenBuilder.createButtonTableAttack(abilities, attackMenuIndex), previewAttacksListener)
     }
 
     private fun showAttackTable() {
-        showTable(screenBuilder.createButtonTableAttack(currentParticipant.invoke()), actionAttackListener)
+        val abilities: List<BattleAbilityItem> = createAttackAbilities()
+        moveCursorToUsableAbility(abilities)
+        showTable(screenBuilder.createButtonTableAttack(abilities, attackMenuIndex), actionAttackListener)
     }
 
     private fun showSpecialTable() {
-        showTable(screenBuilder.createButtonTableSpecial(currentParticipant.invoke()), actionSpecialListener)
+        val abilities: List<BattleAbilityItem> = createSpecialAbilities()
+        moveCursorToUsableAbility(abilities)
+        showTable(screenBuilder.createButtonTableSpecial(abilities, attackMenuIndex), actionSpecialListener)
     }
 
     private fun showPreviewTargetTable(selectedAttack: BattleAbilityItem) {
@@ -264,6 +275,46 @@ class BattleMenuManager(
         )
     }
 
+    private fun createPreviewAbilities(): List<BattleAbilityItem> {
+        val participant: Participant = currentParticipant.invoke()
+        val abilities: List<BattleAbilityItem> = participant.getBattleAbilities()
+            .filterNot { it.abilityItem.isSpecial }
+            .map { it.createCopyForPreview() }
+        return abilities + createBackButton(participant)
+    }
+
+    private fun createAttackAbilities(): List<BattleAbilityItem> {
+        val participant: Participant = currentParticipant.invoke()
+        val abilities: List<BattleAbilityItem> = participant.getBattleAbilities()
+            .filterNot { it.abilityItem.isSpecial }
+        return abilities + createBackButton(participant)
+    }
+
+    private fun createSpecialAbilities(): List<BattleAbilityItem> {
+        val participant: Participant = currentParticipant.invoke()
+        val abilities: List<BattleAbilityItem> = participant.getBattleAbilities()
+            .filter { it.abilityItem.isSpecial }
+        return abilities + createBackButton(participant)
+    }
+
+    private fun createBackButton(participant: Participant): BattleAbilityItem {
+        return object : BattleAbilityItem(AbilityItem(name = BACK), participant) {
+            override fun createCopyForPreview(): BattleAbilityItem = this
+            override fun createPreviewMessage(): String = ""
+            override fun handleSuccess(attackData: AttackData) {}
+        }
+    }
+
+    private fun moveCursorToUsableAbility(abilities: List<BattleAbilityItem>) {
+        if (attackMenuIndex > abilities.lastIndex || !abilities[attackMenuIndex].isSelectable()) {
+            attackMenuIndex = abilities.indexOfFirst { it.isSelectable() }
+        }
+    }
+
+    private fun BattleAbilityItem.isSelectable(): Boolean {
+        return name == BACK || isUsable()
+    }
+
     private fun moveCursorToUsableOption(options: List<BattleMenuOption>, areEnemiesInRange: Boolean) {
         if (!areEnemiesInRange && options[mainMenuIndex].name == ATTACK) {
             mainMenuIndex = options.indexOfFirst { it.name == MOVE }
@@ -304,12 +355,12 @@ class BattleMenuManager(
     }
 
     private fun openSubMenuFromHeroMenu(menu: () -> Unit) {
-        screenBuilder.buttonTableSelectHeroIndex = currentSelectedIndex
+        heroMenuIndex = currentSelectedIndex
         openSubMenu(menu)
     }
 
     private fun openSubMenuFromAttackMenu(menu: () -> Unit) {
-        screenBuilder.buttonTableSelectAttackIndex = currentSelectedIndex
+        attackMenuIndex = currentSelectedIndex
         openSubMenu(menu)
     }
 

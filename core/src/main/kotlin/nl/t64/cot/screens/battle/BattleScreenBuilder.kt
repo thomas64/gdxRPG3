@@ -14,12 +14,10 @@ import ktx.assets.disposeSafely
 import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.resourceManager
-import nl.t64.cot.components.battle.AttackData
 import nl.t64.cot.components.battle.Character
 import nl.t64.cot.components.battle.EnemyItem
 import nl.t64.cot.components.battle.Participant
 import nl.t64.cot.components.party.HeroItem
-import nl.t64.cot.components.party.abilities.AbilityItem
 import nl.t64.cot.components.party.abilities.BattleAbilityItem
 import nl.t64.cot.components.party.inventory.BattlePotionItem
 import nl.t64.cot.components.party.inventory.BattleWeaponItem
@@ -46,9 +44,6 @@ class BattleScreenBuilder {
     private val transparent: Drawable = Utils.createTransparency()
     private val border: Drawable = Utils.createFullBorderWhite()
     private val combined: Drawable = Utils.createCombinedDrawable(transparent, border)
-
-    var buttonTableSelectHeroIndex = 0
-    var buttonTableSelectAttackIndex = 0
 
     fun createBattleTitle(): Label {
         val style = LabelStyle(FontProvider.spectralRegular24, Color.WHITE)
@@ -291,30 +286,30 @@ class BattleScreenBuilder {
 
     fun createButtonTablePreBattle(options: List<BattleMenuOption>, selectedIndex: Int): Table {
         return createStyledEmptyList<BattleMenuOption>()
-            .fillWithOptions(options, selectedIndex)
+            .fillWith(options.toTypedArray(), selectedIndex)
             .toPreBattleTable()
     }
 
-    fun createButtonTableHero(heroes: List<Participant>): Table {
-        return createStyledEmptyList<String>().fillWithHeroes(heroes).toHeroTable()
+    fun createButtonTableHero(heroes: List<Participant>, selectedIndex: Int): Table {
+        return createStyledEmptyList<String>().fillWithHeroes(heroes, selectedIndex).toHeroTable()
     }
 
     fun createButtonTableAction(options: List<BattleMenuOption>, selectedIndex: Int): Table {
         return createStyledEmptyList<BattleMenuOption>()
-            .fillWithOptions(options, selectedIndex)
+            .fillWith(options.toTypedArray(), selectedIndex)
             .toActionTable()
     }
 
-    fun createButtonTablePreviewAttack(currentParticipant: Participant): Table {
-        return createStyledEmptyList<BattleAbilityItem>().fillWithPreviewAttacks(currentParticipant).toAttackTable()
+    fun createButtonTableAttack(abilities: List<BattleAbilityItem>, selectedIndex: Int): Table {
+        return createStyledEmptyList<BattleAbilityItem>()
+            .fillWith(abilities.toTypedArray(), selectedIndex)
+            .toAttackTable()
     }
 
-    fun createButtonTableAttack(currentParticipant: Participant): Table {
-        return createStyledEmptyList<BattleAbilityItem>().fillWithAttacks(currentParticipant).toAttackTable()
-    }
-
-    fun createButtonTableSpecial(currentParticipant: Participant): Table {
-        return createStyledEmptyList<BattleAbilityItem>().fillWithSpecials(currentParticipant).toSpecialTable()
+    fun createButtonTableSpecial(abilities: List<BattleAbilityItem>, selectedIndex: Int): Table {
+        return createStyledEmptyList<BattleAbilityItem>()
+            .fillWith(abilities.toTypedArray(), selectedIndex)
+            .toSpecialTable()
     }
 
     fun createButtonTableMove(): Table {
@@ -358,66 +353,20 @@ class BattleScreenBuilder {
         y = Gdx.graphics.height * 0.85f - height
     }
 
-    private fun GdxList<String>.fillWithHeroes(heroes: List<Participant>): GdxList<String> {
+    private fun GdxList<String>.fillWithHeroes(heroes: List<Participant>,
+                                               selectedIndex: Int): GdxList<String> {
         heroes
             .filter { it.character.isAlive }
             .forEach { items.add(it.character.name) }
         items.add("Back")
-        this.selectedIndex = buttonTableSelectHeroIndex
-        return this
-    }
-
-    private fun GdxList<BattleMenuOption>.fillWithOptions(options: List<BattleMenuOption>,
-                                                          selectedIndex: Int): GdxList<BattleMenuOption> {
-        this.setItems(*options.toTypedArray())
         this.selectedIndex = selectedIndex
         return this
     }
 
-    private fun GdxList<BattleAbilityItem>.fillWithPreviewAttacks(currentParticipant: Participant): GdxList<BattleAbilityItem> {
-        val abilities: List<BattleAbilityItem> = currentParticipant.getBattleAbilities()
-            .filterNot { it.abilityItem.isSpecial }
-            .map { it.createCopyForPreview() }
-        val allItems: List<BattleAbilityItem> = abilities + createBackButton(currentParticipant)
-        this.setItems(*allItems.toTypedArray())
-        this.setSelectedIndex()
+    private fun <T> GdxList<T>.fillWith(items: Array<T>, selectedIndex: Int): GdxList<T> {
+        this.setItems(*items)
+        this.selectedIndex = selectedIndex
         return this
-    }
-
-    private fun GdxList<BattleAbilityItem>.fillWithAttacks(currentParticipant: Participant): GdxList<BattleAbilityItem> {
-        val abilities: List<BattleAbilityItem> = currentParticipant.getBattleAbilities()
-            .filterNot { it.abilityItem.isSpecial }
-        val allItems: List<BattleAbilityItem> = abilities + createBackButton(currentParticipant)
-        this.setItems(*allItems.toTypedArray())
-        this.setSelectedIndex()
-        return this
-    }
-
-    private fun GdxList<BattleAbilityItem>.fillWithSpecials(currentParticipant: Participant): GdxList<BattleAbilityItem> {
-        val abilities: List<BattleAbilityItem> = currentParticipant.getBattleAbilities()
-            .filter { it.abilityItem.isSpecial }
-        val allItems: List<BattleAbilityItem> = abilities + createBackButton(currentParticipant)
-        this.setItems(*allItems.toTypedArray())
-        this.setSelectedIndex()
-        return this
-    }
-
-    private fun GdxList<BattleAbilityItem>.setSelectedIndex() {
-        if (buttonTableSelectAttackIndex > this.items.size - 1
-            || this.items[buttonTableSelectAttackIndex].toString().startsWith("[GRAY]")
-        ) {
-            val firstAvailableIndex: Int = this.items.indexOfFirst { !it.toString().startsWith("[GRAY]") }
-            buttonTableSelectAttackIndex = if (firstAvailableIndex == -1) this.items.size - 1 else firstAvailableIndex
-        }
-        this.selectedIndex = buttonTableSelectAttackIndex
-    }
-
-    private fun createBackButton(currentParticipant: Participant): BattleAbilityItem {
-        return object : BattleAbilityItem(AbilityItem(name = "Back"), currentParticipant) {
-            override fun createCopyForPreview(): BattleAbilityItem = this
-            override fun createPreviewMessage(): String = ""
-            override fun handleSuccess(attackData: AttackData) {}
-        }
     }
 
     private fun GdxList<String>.fillWithTargets(enemies: List<String>): GdxList<String> {
