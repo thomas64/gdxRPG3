@@ -312,7 +312,7 @@ class BattleScreen : Screen {
 
     private fun heroIsSelectedForPrePotion(selectedHero: String) {
         preBattleSelectedHero = turnManager.getParticipant(selectedHero)
-        menuManager.openPotionMenuForSelectedHero()
+        menuManager.confirmPotionForSelectedHero()
     }
 
     private fun heroIsSelectedForPrePreview(selectedHero: String) {
@@ -407,8 +407,8 @@ class BattleScreen : Screen {
     }
 
     private fun potionPreBattleConfirmed(potionAction: PotionAction) {
-        confirmManager.potionConfirmed(potionAction)
-        menuManager.reopenCurrentMenu()
+        menuManager.closeMenu()
+        confirmManager.potionConfirmed(potionAction) { menuManager.goBack() }
     }
 
     private fun potionConfirmed(potionAction: PotionAction) {

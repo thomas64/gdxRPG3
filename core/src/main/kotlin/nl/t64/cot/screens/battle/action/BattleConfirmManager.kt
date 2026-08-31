@@ -24,7 +24,7 @@ class BattleConfirmManager(
     private val battleState: BattleState
 ) {
 
-    fun potionConfirmed(potionAction: PotionAction) {
+    fun potionConfirmed(potionAction: PotionAction, onFinished: () -> Unit = {}) {
         val (message, color) = potionAction.handle()
         battleState.isDelayingTurn = true
         Utils.runWithDelay(0.5f) {
@@ -36,6 +36,7 @@ class BattleConfirmManager(
             playSe(AudioEvent.SE_POTION)
             Utils.runWithDelay(DEFAULT_FLOATING_NUMBER_DELAY) {
                 battleState.isDelayingTurn = false
+                onFinished.invoke()
             }
         }
     }

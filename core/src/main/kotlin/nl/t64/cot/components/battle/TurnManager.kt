@@ -92,6 +92,7 @@ class TurnManager(
         delayingParticipant.raiseTurnCounterAboveMaxOf(others)
         participants.sort()
         participants.swapFirstAndSecond()
+        amountOfTurns++
         currentParticipant.refreshActionPoints()
     }
 

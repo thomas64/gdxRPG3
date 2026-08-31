@@ -9,6 +9,7 @@ import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.abilities.AbilityItem
 import nl.t64.cot.components.party.abilities.BattleAbilityItem
 import nl.t64.cot.components.party.abilities.Target
+import nl.t64.cot.components.party.inventory.BattlePotionItem
 import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.components.party.inventory.InventoryItem
 import nl.t64.cot.screens.battle.menu.listeners.*
@@ -41,6 +42,9 @@ class BattleMenuManager(
     private var mainMenuIndex: Int = 0
     private var heroMenuIndex: Int = 0
     private var attackMenuIndex: Int = 0
+    private var lastActionMenuTurn: Int = -1
+
+    private lateinit var selectedPotion: BattlePotionItem
 
     private val preBattleMainMenuListener = SelectPreBattleListener(menuHandlers.winBattle, menuHandlers.openPauseMenu, menuHandlers.showInventoryScreenPreBattle)
     private val actionMainMenuListener = SelectActionListener(menuHandlers.winBattle, menuHandlers.openPauseMenu, menuHandlers.showInventoryScreen)
@@ -57,7 +61,7 @@ class BattleMenuManager(
     private val actionSpecialTargetListener = SelectTargetListener(menuHandlers.showConfirmSpecialDialog, ::goBack)
     private val actionMoveListener = SelectMoveListener(battleField::moveHeroLeft, battleField::moveHeroRight, menuHandlers.confirmMovement, ::goBack)
     private val stealthMovementListener = SelectMoveListener(battleField::moveHeroLeftWithStealth, battleField::moveHeroRightWithStealth, menuHandlers.confirmStealthMovement, battleField::cancelMovement)
-    private val preBattlePotionListener = SelectPotionListener(menuHandlers.showConfirmPotionDialogPreBattle, ::goBack)
+    private val preBattlePotionListener = SelectPotionListener(::aPotionIsSelectedInPreBattle, ::goBack)
     private val actionPotionListener = SelectPotionListener(menuHandlers.showConfirmPotionDialog, ::goBack)
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -73,7 +77,7 @@ class BattleMenuManager(
 
     fun possibleOpenActionMenu() {
         if (currentTable.hasParent()) return
-        mainMenuIndex = 0
+        possibleResetCursorForNewTurn()
         openRootMenu(::showActionTable)
     }
 
@@ -81,8 +85,9 @@ class BattleMenuManager(
         openSubMenuFromHeroMenu(::showPreBattleWeaponTable)
     }
 
-    fun openPotionMenuForSelectedHero() {
-        openSubMenuFromHeroMenu { showPotionTable(preBattlePotionListener) }
+    fun confirmPotionForSelectedHero() {
+        heroMenuIndex = currentSelectedIndex
+        menuHandlers.showConfirmPotionDialogPreBattle(selectedPotion)
     }
 
     fun openPreviewAttackMenuForSelectedHero() {
@@ -99,9 +104,21 @@ class BattleMenuManager(
 
     fun closeMenu() {
         currentTable.remove()
+        stage.keyboardFocus = null
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private fun possibleResetCursorForNewTurn() {
+        if (lastActionMenuTurn == turnManager.amountOfTurns) return
+        lastActionMenuTurn = turnManager.amountOfTurns
+        mainMenuIndex = 0
+    }
+
+    private fun aPotionIsSelectedInPreBattle(potion: BattlePotionItem) {
+        selectedPotion = potion
+        openSubMenu { showHeroTable(preBattleHeroForPotionListener) }
+    }
 
     private fun anAttackIsSelectedInPreview(attack: BattleAbilityItem) {
         openSubMenuFromAttackMenu { showPreviewTargetTable(attack) }
@@ -232,7 +249,7 @@ class BattleMenuManager(
             // @formatter:off
             BattleMenuOption("Party preparation", "", true, menuHandlers.showInventoryScreenPreBattle, playsConfirmSound = false),
             BattleMenuOption("Select equipment",  "", true, { openSubMenuFromMainMenu { showHeroTable(preBattleHeroForEquipmentListener) } }),
-            BattleMenuOption("Drink potion",      "", true, { openSubMenuFromMainMenu { showHeroTable(preBattleHeroForPotionListener) } }),
+            BattleMenuOption("Drink potion",      "", true, { openSubMenuFromMainMenu { showPotionTable(preBattlePotionListener) } }),
             BattleMenuOption("Preview attacks",   "", true, { openSubMenuFromMainMenu { showHeroTable(preBattleHeroForPreviewListener) } }),
             BattleMenuOption("Start battle",      "", true, menuHandlers.startBattle)
             // @formatter:on
@@ -319,8 +336,10 @@ class BattleMenuManager(
         if (!areEnemiesInRange && options[mainMenuIndex].name == ATTACK) {
             mainMenuIndex = options.indexOfFirst { it.name == MOVE }
         }
-        if (currentParticipant.invoke().currentAP <= 1 || !options[mainMenuIndex].isEnabled) {
+        if (currentParticipant.invoke().currentAP <= 1) {
             mainMenuIndex = options.indexOfFirst { it.name == END_TURN }
+        } else if (!options[mainMenuIndex].isEnabled) {
+            mainMenuIndex = options.indexOfFirst { it.isEnabled }
         }
     }
 
