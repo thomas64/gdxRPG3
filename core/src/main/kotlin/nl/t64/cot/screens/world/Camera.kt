@@ -7,9 +7,11 @@ import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import com.badlogic.gdx.utils.viewport.Viewport
+import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.world.mapobjects.GameMapCameraBlocker
 import nl.t64.cot.sfx.ShakeCamera
 import kotlin.math.max
+import kotlin.math.pow
 import kotlin.math.roundToInt
 
 
@@ -57,17 +59,18 @@ class Camera : OrthographicCamera() {
         position.set(playerPosition.toOffsetPositionForMapEdges(), 0f)
     }
 
-    fun setPosition(x: Float, y: Float) {
-        setPosition(Vector2(x, y))
+    fun setPosition(x: Float, y: Float, dt: Float) {
+        setPosition(Vector2(x, y), dt)
     }
 
-    fun setPosition(playerPosition: Vector2) {
+    fun setPosition(playerPosition: Vector2, dt: Float) {
         val cameraPosition: Vector2 = playerPosition.toOffsetPositionForMapEdges()
         if (shakeCam.isShaking) {
-            val shakeCamPosition: Vector2 = shakeCam.getNewShakePosition().add(cameraPosition)
+            val shakeCamPosition: Vector2 = shakeCam.getNewShakePosition(dt).add(cameraPosition)
             position.set(shakeCamPosition, 0f)
         } else {
-            position.lerp(Vector3(cameraPosition.x, cameraPosition.y, 0f), LERP_FACTOR)
+            val lerpFactor: Float = 1f - (1f - LERP_FACTOR).pow(dt * Constant.TUNED_AT_FRAMES_PER_SECOND)
+            position.lerp(Vector3(cameraPosition.x, cameraPosition.y, 0f), lerpFactor)
         }
         super.update()
     }

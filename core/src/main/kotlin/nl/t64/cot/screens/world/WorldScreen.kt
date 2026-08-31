@@ -405,7 +405,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
         when (gameState) {
             GameState.OFF,
             GameState.PAUSED -> Unit
-            GameState.MINIMAP -> renderMiniMap()
+            GameState.MINIMAP -> renderMiniMap(dt)
             GameState.DIALOG,
             GameState.BATTLE -> renderAll(dt)
             GameState.ENDING,
@@ -433,8 +433,8 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
         fogOfWarManager.update(player.position, dt)
     }
 
-    private fun renderMiniMap() {
-        updateCameraPosition()
+    private fun renderMiniMap(dt: Float) {
+        updateCameraPosition(dt)
         worldRenderer.renderMapWithoutEntities()
         // todo, eventually remove shaperenderer and use sprite icons for minimap.
         shapeRenderer.projectionMatrix = camera.combined
@@ -448,7 +448,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     }
 
     private fun renderAll(dt: Float) {
-        updateCameraPosition()
+        updateCameraPosition(dt)
         worldRenderer.renderAll(player.position) { renderEntities(it) }
         gridRenderer.possibleRender()
         debugRenderer.possibleRenderObjects(doorList + lootList + npcEntities + visibleScheduledEntities + partyMembers + player)
@@ -467,8 +467,8 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
         stage.draw()
     }
 
-    private fun updateCameraPosition() {
-        camera.setPosition(player.position)
+    private fun updateCameraPosition(dt: Float) {
+        camera.setPosition(player.position, dt)
         worldRenderer.updateCamera()
     }
 

@@ -22,6 +22,11 @@ object Constant {
     const val MOVE_SPEED_3 = 192f   // 48 * 4
     const val MOVE_SPEED_4 = 720f   // 48 * 15
 
+    // Camera follow and screen shake were tuned as a fraction per frame, back when the game ran at this rate.
+    // Their formulas turn that into a rate per second, and for that they need to know what a frame was worth.
+    // It records where those numbers come from; it is not a target and changing it changes how they feel.
+    const val TUNED_AT_FRAMES_PER_SECOND = 60f
+
     const val SLOW_FRAMES = 0.50f
     const val NORMAL_FRAMES = 0.25f
     const val FAST_FRAMES = 0.15f

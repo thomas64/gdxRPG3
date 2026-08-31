@@ -104,9 +104,9 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
         ScreenUtils.clear(Color.BLACK)
 
         if (isCameraFixed) {
-            camera.setPosition(fixedCameraX, fixedCameraY)
+            camera.setPosition(fixedCameraX, fixedCameraY, dt)
         } else {
-            camera.setPosition(followingActor.x, followingActor.y)
+            camera.setPosition(followingActor.x, followingActor.y, dt)
         }
 
         listener.update(dt)
