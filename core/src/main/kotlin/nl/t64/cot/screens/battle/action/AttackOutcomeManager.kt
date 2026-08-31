@@ -1,4 +1,4 @@
-package nl.t64.cot.screens.battle
+package nl.t64.cot.screens.battle.action
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.Stage
@@ -10,6 +10,11 @@ import nl.t64.cot.components.battle.AttackAction
 import nl.t64.cot.components.battle.AttackData
 import nl.t64.cot.components.battle.TurnManager
 import nl.t64.cot.components.party.abilities.AbilityItemId
+import nl.t64.cot.screens.battle.BattleState
+import nl.t64.cot.screens.battle.effects.BlinkEffect
+import nl.t64.cot.screens.battle.effects.FadeEffect
+import nl.t64.cot.screens.battle.effects.FloatingNumberEffect
+import nl.t64.cot.screens.battle.effects.ShakeEffect
 import nl.t64.cot.screens.dialog.MessageDialog
 
 

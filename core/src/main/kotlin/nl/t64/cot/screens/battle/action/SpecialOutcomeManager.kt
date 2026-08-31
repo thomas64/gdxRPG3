@@ -1,4 +1,4 @@
-package nl.t64.cot.screens.battle
+package nl.t64.cot.screens.battle.action
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.ui.Table
@@ -8,6 +8,9 @@ import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.battle.AttackData
 import nl.t64.cot.components.battle.SpecialAction
 import nl.t64.cot.components.party.abilities.AbilityItemId
+import nl.t64.cot.screens.battle.BattleState
+import nl.t64.cot.screens.battle.effects.BlinkEffect
+import nl.t64.cot.screens.battle.effects.FloatingNumberEffect
 
 
 private const val DEFAULT_FLOATING_NUMBER_DELAY = 1.2f

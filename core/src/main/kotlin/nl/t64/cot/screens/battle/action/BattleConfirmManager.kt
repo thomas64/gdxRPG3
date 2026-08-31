@@ -1,4 +1,4 @@
-package nl.t64.cot.screens.battle
+package nl.t64.cot.screens.battle.action
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.Stage
@@ -8,6 +8,9 @@ import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.audio.stopSe
 import nl.t64.cot.components.battle.*
+import nl.t64.cot.screens.battle.BattleResultManager
+import nl.t64.cot.screens.battle.BattleState
+import nl.t64.cot.screens.battle.effects.FloatingNumberEffect
 import nl.t64.cot.screens.dialog.MessageDialog
 
 

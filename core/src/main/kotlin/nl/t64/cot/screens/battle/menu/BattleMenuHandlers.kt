@@ -1,4 +1,4 @@
-package nl.t64.cot.screens.battle
+package nl.t64.cot.screens.battle.menu
 
 import nl.t64.cot.components.party.abilities.BattleAbilityItem
 import nl.t64.cot.components.party.inventory.BattlePotionItem

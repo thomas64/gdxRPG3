@@ -1,4 +1,4 @@
-package nl.t64.cot.screens.battle.listeners
+package nl.t64.cot.screens.battle.menu.listeners
 
 import com.badlogic.gdx.Input
 import com.badlogic.gdx.scenes.scene2d.InputEvent

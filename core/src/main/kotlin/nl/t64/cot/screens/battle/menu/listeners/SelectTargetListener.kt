@@ -1,18 +1,19 @@
-package nl.t64.cot.screens.battle.listeners
+package nl.t64.cot.screens.battle.menu.listeners
 
 import com.badlogic.gdx.Input
 import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.InputListener
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
-import nl.t64.cot.components.party.inventory.BattleWeaponItem
+import nl.t64.cot.components.party.abilities.BattleAbilityItem
 import nl.t64.cot.constants.Constant
 
 
-class SelectWeaponListener(
-    private val weapon: (BattleWeaponItem) -> Unit,
+class SelectTargetListener(
+    private val enemy: (BattleAbilityItem, String) -> Unit,
     private val back: () -> Unit
 ) : InputListener() {
+    private lateinit var selectedAttack: BattleAbilityItem
 
     override fun keyDown(event: InputEvent, keycode: Int): Boolean {
         if (event.isDialogOpen()) {
@@ -29,11 +30,15 @@ class SelectWeaponListener(
         return true
     }
 
+    fun setSelectedAttack(attack: BattleAbilityItem) {
+        selectedAttack = attack
+    }
+
     private fun InputEvent.handleEnter() {
-        val selected: BattleWeaponItem = getSelected() ?: return
-        when {
-            selected.name == "Back" -> handleEscape(back)
-            else -> weapon.invoke(selected)
+        val selectedTarget: String = getSelected() ?: return
+        when (selectedTarget) {
+            "Back" -> handleEscape(back)
+            else -> enemy.invoke(selectedAttack, selectedTarget)
         }
     }
 

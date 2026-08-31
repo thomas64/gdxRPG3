@@ -1,4 +1,4 @@
-package nl.t64.cot.screens.battle
+package nl.t64.cot.screens.battle.hud
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.ui.*
@@ -10,6 +10,7 @@ import nl.t64.cot.components.battle.BattleField
 import nl.t64.cot.components.battle.Participant
 import nl.t64.cot.components.party.abilities.AbilityItemId
 import nl.t64.cot.screens.FontProvider
+import nl.t64.cot.screens.battle.BattlePhase
 import kotlin.math.abs
 
 

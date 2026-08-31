@@ -1,4 +1,4 @@
-package nl.t64.cot.screens.battle
+package nl.t64.cot.screens.battle.menu
 
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe

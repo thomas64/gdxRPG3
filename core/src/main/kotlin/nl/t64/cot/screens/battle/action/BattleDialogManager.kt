@@ -1,4 +1,4 @@
-package nl.t64.cot.screens.battle
+package nl.t64.cot.screens.battle.action
 
 import com.badlogic.gdx.scenes.scene2d.Stage
 import nl.t64.cot.audio.AudioEvent
@@ -7,6 +7,7 @@ import nl.t64.cot.components.party.abilities.AbilityItem
 import nl.t64.cot.components.party.abilities.BattleAbilityItem
 import nl.t64.cot.components.party.inventory.BattlePotionItem
 import nl.t64.cot.components.party.inventory.BattleWeaponItem
+import nl.t64.cot.screens.battle.BattleState
 import nl.t64.cot.screens.dialog.MessageDialog
 import nl.t64.cot.screens.dialog.QuestionDialog
 import nl.t64.cot.screens.dialog.TwoColumnsQuestionDialog

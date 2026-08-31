@@ -26,6 +26,16 @@ import nl.t64.cot.components.party.inventory.BattleWeaponItem
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.FontProvider
+import nl.t64.cot.screens.battle.action.AttackOutcomeManager
+import nl.t64.cot.screens.battle.action.BattleConfirmManager
+import nl.t64.cot.screens.battle.action.BattleDialogManager
+import nl.t64.cot.screens.battle.action.SpecialOutcomeManager
+import nl.t64.cot.screens.battle.effects.BlinkEffect
+import nl.t64.cot.screens.battle.hud.BattleHud
+import nl.t64.cot.screens.battle.hud.BattleHudBuilder
+import nl.t64.cot.screens.battle.menu.BattleMenuBuilder
+import nl.t64.cot.screens.battle.menu.BattleMenuHandlers
+import nl.t64.cot.screens.battle.menu.BattleMenuManager
 import nl.t64.cot.screens.dialog.MessageDialog
 import nl.t64.cot.screens.inventory.InventoryScreen
 import nl.t64.cot.screens.menu.MenuPause
@@ -33,6 +43,11 @@ import nl.t64.cot.screens.world.Camera
 import kotlin.concurrent.thread
 import kotlin.math.roundToInt
 
+
+private const val BLINK_DELAY_IN_MILLIS: Long = 500L
+private const val ACTION_DELAY_IN_MILLIS: Long = 1000L
+private const val END_TURN_DELAY_IN_MILLIS: Long = 500L
+private const val BLINK_DURATION: Float = 0.5f
 
 private val combatPowerCalculator = CombatPowerCalculator()
 
@@ -49,7 +64,7 @@ class BattleScreen : Screen {
     private lateinit var preBattleSelectedHero: Participant
 
     private lateinit var battleField: BattleField
-    private lateinit var tableManager: BattleTableManager
+    private lateinit var battleHud: BattleHud
     private lateinit var menuManager: BattleMenuManager
     private lateinit var dialogManager: BattleDialogManager
     private lateinit var confirmManager: BattleConfirmManager
@@ -62,13 +77,14 @@ class BattleScreen : Screen {
     private val currentParticipant: Participant
         get() = if (battleState.phase == BattlePhase.BATTLE) turnManager.currentParticipant else preBattleSelectedHero
 
-    private val screenBuilder = BattleScreenBuilder()
+    private val hudBuilder = BattleHudBuilder()
+    private val menuBuilder = BattleMenuBuilder()
     private val shapeRenderer = ShapeRenderer()
 
     private var isLoaded: Boolean = false
     @Volatile
     private var isEnemyActing: Boolean = false
-    private var turnOfLastBlink: Int = -1
+    private var lastBlinkedTurn: Int = -1
     private var hasWon: Boolean = false
     private var hasLost: Boolean = false
     private var shouldKeepState: Boolean = false
@@ -110,15 +126,15 @@ class BattleScreen : Screen {
         if (preferenceManager.isDebugModeOn) printCombatPowers()
 
         battleField = BattleField(turnManager.participants, ::currentParticipant)
-        tableManager = BattleTableManager(stage, screenBuilder, ::currentParticipant, battleState)
-        menuManager = BattleMenuManager(stage, screenBuilder, turnManager, battleField, ::currentParticipant, createMenuHandlers())
+        battleHud = BattleHud(stage, hudBuilder, ::currentParticipant, battleState)
+        menuManager = BattleMenuManager(stage, menuBuilder, turnManager, battleField, ::currentParticipant, createMenuHandlers())
         dialogManager = BattleDialogManager(stage, turnManager, ::currentParticipant, battleState)
-        confirmManager = BattleConfirmManager(stage, turnManager, tableManager::battleFieldTable, ::currentParticipant, battleState)
-        attackOutcomeManager = AttackOutcomeManager(stage, turnManager, tableManager::battleFieldTable, battleState)
-        specialOutcomeManager = SpecialOutcomeManager(tableManager::battleFieldTable, battleState)
+        confirmManager = BattleConfirmManager(stage, turnManager, battleHud::battleFieldTable, ::currentParticipant, battleState)
+        attackOutcomeManager = AttackOutcomeManager(stage, turnManager, battleHud::battleFieldTable, battleState)
+        specialOutcomeManager = SpecialOutcomeManager(battleHud::battleFieldTable, battleState)
         resultManager = BattleResultManager(stage, battleObserver, battleId, enemies, battleState)
 
-        val battleTitle: Label = screenBuilder.createBattleTitle()
+        val battleTitle: Label = hudBuilder.createBattleTitle()
         stage.addActor(battleTitle)
 
         stage.addAction(Actions.sequence(
@@ -197,11 +213,11 @@ class BattleScreen : Screen {
     }
 
     private fun updateAllTables() {
-        tableManager.updateHeroTable(gameData.party.getAllHeroes(), turnManager::getCurrentApOf)
-        tableManager.updateEnemyTable(enemies.getAll(), turnManager::getCurrentApOf)
+        battleHud.updateHeroTable(gameData.party.getAllHeroes(), turnManager::getCurrentApOf)
+        battleHud.updateEnemyTable(enemies.getAll(), turnManager::getCurrentApOf)
         val visionSlots = (gameData.party.size + 2) + gameData.inventory.getTotalOfItem("vision_thingy")
-        tableManager.updateTurnTable(turnManager, visionSlots)
-        tableManager.updateBattleField(battleField)
+        battleHud.updateTurnTable(turnManager, visionSlots)
+        battleHud.updateBattleField(battleField)
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -222,13 +238,14 @@ class BattleScreen : Screen {
         Gdx.input.inputProcessor = null
         Utils.setGamepadInputProcessor(null)
         if (shouldKeepState) return
-        turnOfLastBlink = -1
+        lastBlinkedTurn = -1
         turnManager.resetTemporaryBonusesAfterBattle()
         stage.clear()
     }
 
     override fun dispose() {
-        screenBuilder.dispose()
+        hudBuilder.dispose()
+        menuBuilder.dispose()
         stage.dispose()
         shapeRenderer.dispose()
     }
@@ -448,10 +465,10 @@ class BattleScreen : Screen {
         menuManager.possibleOpenActionMenu()
     }
 
+    // The enemy acts on its own thread because the movement in EnemyAi walks one space per sleep,
+    // which only shows up as an animation while the render thread keeps drawing the grid.
     // isEnemyActing stays true until the step that was handed to the render thread has actually run there,
-    // otherwise a frame could start a second action while the first one is still queued. So every path
-    // through startEnemyAction ends in an onRenderThread block that sets it back to false; here it is only
-    // set back when the enemy failed to act at all.
+    // otherwise a frame could start a second action while the first one is still queued.
     private fun takeTurnEnemy() {
         if (isEnemyActing) return
         isEnemyActing = true
@@ -501,21 +518,25 @@ class BattleScreen : Screen {
     }
 
     private fun possibleBlinkCurrentParticipant() {
-        if (turnOfLastBlink == turnManager.amountOfTurns) return
-        turnOfLastBlink = turnManager.amountOfTurns
+        if (hasBlinkedThisTurn()) return
+        lastBlinkedTurn = turnManager.amountOfTurns
         val participantToBlink: Participant = currentParticipant
 
-        if (isEnemyActing) Thread.sleep(500L)
+        if (isEnemyActing) Thread.sleep(BLINK_DELAY_IN_MILLIS)
 
         onRenderThread {
             battleState.isDelayingTurn = true
-            BlinkEffect(tableManager.battleFieldTable, participantToBlink.character.name, Color.BLACK).start()
-            Utils.runWithDelay(0.5f) {
+            BlinkEffect(battleHud.battleFieldTable, participantToBlink.character.name, Color.BLACK).start()
+            Utils.runWithDelay(BLINK_DURATION) {
                 battleState.isDelayingTurn = false
             }
         }
 
-        if (isEnemyActing) Thread.sleep(1000L)
+        if (isEnemyActing) Thread.sleep(ACTION_DELAY_IN_MILLIS)
+    }
+
+    private fun hasBlinkedThisTurn(): Boolean {
+        return lastBlinkedTurn == turnManager.amountOfTurns
     }
 
     private fun handleStagger(message: String) {
@@ -533,7 +554,7 @@ class BattleScreen : Screen {
                 isEnemyActing = false
             }
         } else {
-            Thread.sleep(500L)
+            Thread.sleep(END_TURN_DELAY_IN_MILLIS)
             onRenderThread {
                 turnManager.setNextTurn()
                 isEnemyActing = false

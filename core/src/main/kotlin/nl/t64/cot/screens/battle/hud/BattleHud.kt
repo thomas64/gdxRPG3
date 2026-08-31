@@ -1,13 +1,14 @@
-package nl.t64.cot.screens.battle
+package nl.t64.cot.screens.battle.hud
 
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import nl.t64.cot.components.battle.*
 import nl.t64.cot.components.party.HeroItem
+import nl.t64.cot.screens.battle.BattleState
 
-class BattleTableManager(
+class BattleHud(
     private val stage: Stage,
-    private val screenBuilder: BattleScreenBuilder,
+    private val hudBuilder: BattleHudBuilder,
     private val currentParticipant: () -> Participant,
     private val battleState: BattleState
 ) {
@@ -21,13 +22,13 @@ class BattleTableManager(
 
     fun updateHeroTable(heroes: List<HeroItem>, getCurrentAp: (Character) -> Int) {
         heroTable.remove()
-        heroTable = screenBuilder.createHeroTable(heroes, getCurrentAp, currentParticipant.invoke().character.name)
+        heroTable = hudBuilder.createHeroTable(heroes, getCurrentAp, currentParticipant.invoke().character.name)
         stage.addActor(heroTable)
     }
 
     fun updateEnemyTable(enemies: List<EnemyItem>, getCurrentAp: (Character) -> Int) {
         enemyTable.remove()
-        enemyTable = screenBuilder.createEnemyTable(enemies, getCurrentAp, currentParticipant.invoke().character.name)
+        enemyTable = hudBuilder.createEnemyTable(enemies, getCurrentAp, currentParticipant.invoke().character.name)
         stage.addActor(enemyTable)
     }
 
@@ -37,7 +38,7 @@ class BattleTableManager(
         val enemyCountMap: Map<String, Int> = turnManager.getOnlyEnemies()
             .groupingBy { it.character.id }
             .eachCount()
-        turnTable = screenBuilder.createTurnTable(forecast, enemyCountMap)
+        turnTable = hudBuilder.createTurnTable(forecast, enemyCountMap)
         stage.addActor(turnTable)
     }
 

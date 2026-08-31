@@ -1,4 +1,4 @@
-package nl.t64.cot.screens.battle
+package nl.t64.cot.screens.battle.menu
 
 import com.badlogic.gdx.scenes.scene2d.InputListener
 import com.badlogic.gdx.scenes.scene2d.Stage
@@ -11,7 +11,7 @@ import nl.t64.cot.components.party.abilities.BattleAbilityItem
 import nl.t64.cot.components.party.abilities.Target
 import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.components.party.inventory.InventoryItem
-import nl.t64.cot.screens.battle.listeners.*
+import nl.t64.cot.screens.battle.menu.listeners.*
 import com.badlogic.gdx.scenes.scene2d.ui.List as GdxList
 
 
@@ -26,7 +26,7 @@ private const val BACK: String = "Back"
 
 class BattleMenuManager(
     private val stage: Stage,
-    private val screenBuilder: BattleScreenBuilder,
+    private val menuBuilder: BattleMenuBuilder,
     private val turnManager: TurnManager,
     private val battleField: BattleField,
     private val currentParticipant: () -> Participant,
@@ -119,19 +119,19 @@ class BattleMenuManager(
 
     private fun showPreBattleTable() {
         val options: List<BattleMenuOption> = createPreBattleOptions()
-        showTable(screenBuilder.createButtonTablePreBattle(options, mainMenuIndex), preBattleMainMenuListener)
+        showTable(menuBuilder.createButtonTablePreBattle(options, mainMenuIndex), preBattleMainMenuListener)
     }
 
     private fun showStealthMovementTable() {
         battleField.setStartingSpace()
         val stealthMovementTable: Table =
-            screenBuilder.createButtonTableStealthMovement(currentParticipant.invoke().character.name,
+            menuBuilder.createButtonTableStealthMovement(currentParticipant.invoke().character.name,
                                                            battleField.getFreeStealthStepsForHero())
         showTable(stealthMovementTable, stealthMovementListener)
     }
 
     private fun showHeroTable(selectHeroListener: SelectHeroListener) {
-        val heroTable: Table = screenBuilder.createButtonTableHero(turnManager.getOnlyHeroes(), heroMenuIndex)
+        val heroTable: Table = menuBuilder.createButtonTableHero(turnManager.getOnlyHeroes(), heroMenuIndex)
         showTable(heroTable, selectHeroListener)
     }
 
@@ -141,36 +141,36 @@ class BattleMenuManager(
         val areEnemiesInRange: Boolean = battleField.getTargetableEnemiesForActingHero().isNotEmpty()
         val options: List<BattleMenuOption> = createActionOptions(areEnemiesInRange)
         moveCursorToUsableOption(options, areEnemiesInRange)
-        showTable(screenBuilder.createButtonTableAction(options, mainMenuIndex), actionMainMenuListener)
+        showTable(menuBuilder.createButtonTableAction(options, mainMenuIndex), actionMainMenuListener)
     }
 
     private fun showMoveTable() {
         battleField.setStartingSpace()
-        showTable(screenBuilder.createButtonTableMove(), actionMoveListener)
+        showTable(menuBuilder.createButtonTableMove(), actionMoveListener)
     }
 
     private fun showPreviewAttackTable() {
         val abilities: List<BattleAbilityItem> = createPreviewAbilities()
         moveCursorToUsableAbility(abilities)
-        showTable(screenBuilder.createButtonTableAttack(abilities, attackMenuIndex), previewAttacksListener)
+        showTable(menuBuilder.createButtonTableAttack(abilities, attackMenuIndex), previewAttacksListener)
     }
 
     private fun showAttackTable() {
         val abilities: List<BattleAbilityItem> = createAttackAbilities()
         moveCursorToUsableAbility(abilities)
-        showTable(screenBuilder.createButtonTableAttack(abilities, attackMenuIndex), actionAttackListener)
+        showTable(menuBuilder.createButtonTableAttack(abilities, attackMenuIndex), actionAttackListener)
     }
 
     private fun showSpecialTable() {
         val abilities: List<BattleAbilityItem> = createSpecialAbilities()
         moveCursorToUsableAbility(abilities)
-        showTable(screenBuilder.createButtonTableSpecial(abilities, attackMenuIndex), actionSpecialListener)
+        showTable(menuBuilder.createButtonTableSpecial(abilities, attackMenuIndex), actionSpecialListener)
     }
 
     private fun showPreviewTargetTable(selectedAttack: BattleAbilityItem) {
         val allTargetNames: List<String> = turnManager.getOnlyEnemies().map { it.character.name }
         previewTargetListener.setSelectedAttack(selectedAttack)
-        showTable(screenBuilder.createButtonTableTarget(allTargetNames), previewTargetListener)
+        showTable(menuBuilder.createButtonTableTarget(allTargetNames), previewTargetListener)
     }
 
     private fun showTargetTable(selectedAttack: BattleAbilityItem, targetListener: SelectTargetListener) {
@@ -189,13 +189,13 @@ class BattleMenuManager(
                 Target.AREA -> TODO()
             }
         targetListener.setSelectedAttack(selectedAttack)
-        showTable(screenBuilder.createButtonTableTarget(availableTargets), targetListener)
+        showTable(menuBuilder.createButtonTableTarget(availableTargets), targetListener)
     }
 
     private fun showPotionTable(potionListener: SelectPotionListener) {
         val potions: List<InventoryItem> = gameData.inventory.getAllOf(InventoryGroup.POTION)
             .filter { it.name.contains(" Potion") }
-        showTable(screenBuilder.createButtonTablePotion(potions), potionListener)
+        showTable(menuBuilder.createButtonTablePotion(potions), potionListener)
     }
 
     private fun showPreBattleWeaponTable() {
@@ -211,7 +211,7 @@ class BattleMenuManager(
     private fun showWeaponTable(equipment: List<InventoryItem>, weaponListener: SelectWeaponListener) {
         val currentWeapon: InventoryItem? = currentHero.getInventoryItem(InventoryGroup.WEAPON)
         val currentShield: InventoryItem? = currentHero.getInventoryItem(InventoryGroup.SHIELD)
-        val weaponTable: Table = screenBuilder.createButtonTableWeapon(equipment, currentWeapon, currentShield)
+        val weaponTable: Table = menuBuilder.createButtonTableWeapon(equipment, currentWeapon, currentShield)
         showTable(weaponTable, weaponListener)
     }
 
