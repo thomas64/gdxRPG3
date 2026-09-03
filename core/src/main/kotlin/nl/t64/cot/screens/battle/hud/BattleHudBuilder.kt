@@ -29,6 +29,7 @@ import nl.t64.cot.toTexture
 private const val TITLE_TEXT = "Battle...!"
 private const val BAR_WIDTH = 145f
 private const val BAR_HEIGHT = 18f
+private const val FLED_FACE_ALPHA = 0.4f
 
 class BattleHudBuilder {
 
@@ -55,6 +56,7 @@ class BattleHudBuilder {
 
     fun createHeroTable(heroes: List<HeroItem>,
                         getCurrentAp: (Character) -> Int,
+                        hasFled: (Character) -> Boolean,
                         currentParticipantName: String
     ): Table {
         return Table(tableSkin).apply {
@@ -62,12 +64,13 @@ class BattleHudBuilder {
             columnDefaults(0).width(Constant.FACE_SIZE)
             top().left()
             setPosition(20f, Gdx.graphics.height - 20f)
-            heroes.forEach { addHero(it, getCurrentAp, currentParticipantName) }
+            heroes.forEach { addHero(it, getCurrentAp, hasFled, currentParticipantName) }
         }
     }
 
     private fun Table.addHero(hero: HeroItem,
                               getCurrentAp: (Character) -> Int,
+                              hasFled: (Character) -> Boolean,
                               currentParticipantName: String
     ) {
         val statsStack = Stack()
@@ -76,7 +79,11 @@ class BattleHudBuilder {
         statsStack.add(createShieldSlotFor(hero))
         statsStack.add(Image(Utils.createFullBorderWhite()))
 
-        add(createFaceImage(hero, currentParticipantName, isFlipped = true))
+        if (hasFled.invoke(hero)) {
+            add(createFledFaceImage(hero))
+        } else {
+            add(createFaceImage(hero, currentParticipantName, isFlipped = true))
+        }
         add(statsStack).row()
     }
 
@@ -276,6 +283,11 @@ class BattleHudBuilder {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private fun createFledFaceImage(hero: HeroItem): Image {
+        return Utils.getFaceImage(hero.id, isFlipped = true)
+            .apply { color.a = FLED_FACE_ALPHA }
+    }
 
     private fun createFaceImage(character: Character,
                                 currentParticipantName: String,

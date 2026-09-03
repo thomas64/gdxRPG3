@@ -8,13 +8,15 @@ import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.audio.stopSe
 import nl.t64.cot.components.battle.*
-import nl.t64.cot.screens.battle.BattleResultManager
 import nl.t64.cot.screens.battle.BattleState
+import nl.t64.cot.screens.battle.effects.FadeEffect
 import nl.t64.cot.screens.battle.effects.FloatingNumberEffect
 import nl.t64.cot.screens.dialog.MessageDialog
 
 
 private const val DEFAULT_FLOATING_NUMBER_DELAY = 1.2f
+private const val FLEE_DELAY = 0.5f
+private const val FLEE_FADE_DURATION = 1f
 
 class BattleConfirmManager(
     private val stage: Stage,
@@ -47,16 +49,21 @@ class BattleConfirmManager(
         playSe(AudioEvent.SE_EQUIP)
     }
 
-    fun fleeConfirmed(fleeAction: FleeAction, resultManager: BattleResultManager) {
+    fun fleeConfirmed(fleeAction: FleeAction, onFled: () -> Unit) {
         val (isSuccess, message) = fleeAction.handle()
+        battleState.isDelayingTurn = true
+
+        if (isSuccess) {
+            Utils.runWithDelay(FLEE_DELAY) {
+                fadeOutFledHero(onFled)
+            }
+            return
+        }
+
         val messageDialog = MessageDialog(message)
         messageDialog.setActionAfterHide {
-            if (isSuccess) {
-                resultManager.battleFledExitScreen()
-            }
             battleState.isDelayingTurn = false
         }
-        battleState.isDelayingTurn = true
         Utils.runWithDelay(0.5f) {
             messageDialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT)
         }
@@ -124,6 +131,19 @@ class BattleConfirmManager(
                     battleState.isDelayingTurn = false
                 }
             }
+        }
+    }
+
+    private fun fadeOutFledHero(onFled: () -> Unit) {
+        playSe(AudioEvent.SE_FLEE)
+        FadeEffect(battleFieldTable.invoke(),
+                   currentParticipant.invoke().character.name,
+                   initialDelay = 0f,
+                   fadeDuration = FLEE_FADE_DURATION)
+            .start()
+        onFled.invoke()
+        Utils.runWithDelay(FLEE_FADE_DURATION) {
+            battleState.isDelayingTurn = false
         }
     }
 

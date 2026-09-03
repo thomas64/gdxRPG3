@@ -9,6 +9,7 @@ import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playBgm
 import nl.t64.cot.audio.stopAllBgm
 import nl.t64.cot.components.battle.EnemyContainer
+import nl.t64.cot.components.battle.TurnManager
 import nl.t64.cot.components.loot.Loot
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.dialog.MessageDialog
@@ -19,6 +20,7 @@ class BattleResultManager(
     private val battleObserver: BattleSubject,
     private val battleId: String,
     private val enemies: EnemyContainer,
+    private val turnManager: TurnManager,
     private val battleState: BattleState
 ) {
 
@@ -32,17 +34,31 @@ class BattleResultManager(
             Actions.run {
                 gameData.battles.setBattleWon(battleId)
 
-                val totalXpWon = enemies.getTotalXp()
-                gameData.party.gainXp(totalXpWon)
-                val winMessage = """
-                    The enemy is defeated!
-                    Every party member gained [FOREST]$totalXpWon XP[BLACK].""".trimIndent()
+                val totalXpWon: Int = enemies.getTotalXp()
+                turnManager.getHeroesStillFighting().forEach { it.gainXp(totalXpWon) }
 
-                val messageDialog = MessageDialog(winMessage)
+                val messageDialog = MessageDialog(createWinMessage(totalXpWon))
                 messageDialog.setActionAfterHide { battleWonExitScreen() }
                 messageDialog.show(stage, AudioEvent.SE_CONVERSATION_NEXT)
             }
         ))
+    }
+
+    private fun createWinMessage(totalXpWon: Int): String {
+        return if (turnManager.getHeroesStillFighting().size == 1) {
+            val heroName = turnManager.getHeroesStillFighting().first().name
+            """
+            The enemy is defeated!
+            $heroName gained [FOREST]$totalXpWon XP[BLACK].""".trimIndent()
+        } else if (turnManager.fledParticipants.isEmpty()) {
+            """
+            The enemy is defeated!
+            Every party member gained [FOREST]$totalXpWon XP[BLACK].""".trimIndent()
+        } else {
+            """
+            The enemy is defeated!
+            Every remaining party member gained [FOREST]$totalXpWon XP[BLACK].""".trimIndent()
+        }
     }
 
     private fun battleWonExitScreen() {

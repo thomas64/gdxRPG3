@@ -271,7 +271,7 @@ class BattleMenuManager(
         val canDrinkPotion: Boolean = currentAp >= POTION_AP
         val canFlee: Boolean = currentAp >= fleeAp
         val canDelayTurn: Boolean = currentAp >= DELAY_AP
-        val canPushOn: Boolean = currentSp >= PUSH_ON_SP
+        val canPushOn: Boolean = currentSp >= PUSH_ON_SP && !participant.isPerforming && !participant.hasFailedToFlee
         val canRest: Boolean = currentAp >= REST_AP
 
         return listOf(
@@ -283,7 +283,7 @@ class BattleMenuManager(
             BattleMenuOption("Potion",     "$POTION_AP AP",        canDrinkPotion,     { openSubMenuFromMainMenu { showPotionTable(actionPotionListener) } }),
             BattleMenuOption("Preview",    "",                     true,               { openSubMenuFromMainMenu(::showPreviewAttackTable) }),
             BattleMenuOption("Party",      "",                     true,               menuHandlers.showInventoryScreen,   playsConfirmSound = false),
-            BattleMenuOption("Flee party", "$fleeAp AP",           canFlee,            menuHandlers.showFleeDialog,        playsConfirmSound = false),
+            BattleMenuOption("Flee",       "$fleeAp AP",           canFlee,            menuHandlers.showFleeDialog,        playsConfirmSound = false),
             BattleMenuOption("Delay turn", "$DELAY_AP AP",         canDelayTurn,       menuHandlers.showDelayTurnDialog,   playsConfirmSound = false),
             BattleMenuOption("Push on",    "$PUSH_ON_SP SP",       canPushOn,          menuHandlers.showPushOnDialog,      playsConfirmSound = false),
             BattleMenuOption("Rest",       "$shownAp AP",          canRest,            menuHandlers.showConfirmRestDialog, playsConfirmSound = false),

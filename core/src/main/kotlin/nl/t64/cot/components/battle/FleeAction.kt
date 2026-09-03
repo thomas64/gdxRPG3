@@ -6,14 +6,19 @@ import nl.t64.cot.components.party.skills.SkillItemId
 import kotlin.random.Random
 
 
+private const val FAILED_BONUS_PERCENTAGE = 5
+private const val STEALTH_BONUS_PERCENTAGE = 4
+private const val MAX_FLEE_PERCENTAGE = 95
+
 class FleeAction(
     private val currentParticipant: Participant,
     private val battleId: String
 ) {
     private val character: Character = currentParticipant.character
     private val message = """
-        When successful, fleeing will return the party to the
-        location of your save state with all progress intact.
+        When successful, ${character.name} will leave the battle
+        and take no further part in it. A hero that fled gains no
+        XP from this battle, but rejoins the party right after it.
 
         The higher your Stealth skill, the higher the chance
         to flee successfully. Each failure in fleeing will also
@@ -35,21 +40,21 @@ class FleeAction(
 
     fun handle(): Pair<Boolean, String> {
         currentParticipant.currentAP = 0
-        if (preferenceManager.isDebugModeOn) {
-            return Pair(true, "The party successfully debug fled the battle.")
-        }
-        return if (getChanceToFlee() > Random.nextInt(0, 100)) {
-            Pair(true, "The party successfully fled the battle.")
+        return if (preferenceManager.isDebugModeOn) {
+            Pair(true, "${character.name} successfully debug fled the battle. (This text is not used)")
+        } else if (getChanceToFlee() > Random.nextInt(0, 100)) {
+            Pair(true, "${character.name} fled the battle. (This text is not used)")
         } else {
-            currentParticipant.fleeChance += 5
-            Pair(false, "The party failed to flee the battle.")
+            currentParticipant.fleeChance += FAILED_BONUS_PERCENTAGE
+            currentParticipant.hasFailedToFlee = true
+            Pair(false, "${character.name} failed to flee the battle.")
         }
     }
 
     private fun getChanceToFlee(): Int {
         return (currentParticipant.fleeChance
-            + (character.getCalculatedTotalSkillOf(SkillItemId.STEALTH) * 2)
-            ).coerceAtMost(95)
+            + (character.getCalculatedTotalSkillOf(SkillItemId.STEALTH) * STEALTH_BONUS_PERCENTAGE)
+            ).coerceAtMost(MAX_FLEE_PERCENTAGE)
     }
 
 }

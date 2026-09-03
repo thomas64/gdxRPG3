@@ -30,6 +30,10 @@ class BattleField(
         grid.moveHeroToSpace(currentParticipant.invoke(), grid.startingSpace)
     }
 
+    fun removeFledHero(hero: Participant) {
+        grid.removeFledHero(hero)
+    }
+
     fun removeDeadParticipants() {
         grid.removeDeadParticipants()
     }

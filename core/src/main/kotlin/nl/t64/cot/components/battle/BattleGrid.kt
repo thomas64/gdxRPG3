@@ -73,6 +73,10 @@ class BattleGrid(participants: List<Participant>) {
         enemySpaces[newSpace] = enemy
     }
 
+    fun removeFledHero(hero: Participant) {
+        heroSpaces[heroSpaces.indexOf(hero)] = null
+    }
+
     fun removeDeadParticipants() {
         heroSpaces.removeDeadParticipants()
         enemySpaces.removeDeadParticipants()

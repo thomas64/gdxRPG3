@@ -48,6 +48,7 @@ private const val BLINK_DELAY_IN_MILLIS: Long = 500L
 private const val ACTION_DELAY_IN_MILLIS: Long = 1000L
 private const val END_TURN_DELAY_IN_MILLIS: Long = 500L
 private const val BLINK_DURATION: Float = 0.5f
+private const val FLED_EXIT_DELAY: Float = 1f
 
 private val combatPowerCalculator = CombatPowerCalculator()
 
@@ -87,6 +88,7 @@ class BattleScreen : Screen {
     private var lastBlinkedTurn: Int = -1
     private var hasWon: Boolean = false
     private var hasLost: Boolean = false
+    private var hasFled: Boolean = false
     private var shouldKeepState: Boolean = false
 
 
@@ -113,6 +115,7 @@ class BattleScreen : Screen {
         isLoaded = false
         hasWon = false
         hasLost = false
+        hasFled = false
 
         val camera = Camera()
         stage = Stage(camera.viewport)
@@ -132,7 +135,7 @@ class BattleScreen : Screen {
         confirmManager = BattleConfirmManager(stage, turnManager, battleHud::battleFieldTable, ::currentParticipant, battleState)
         attackOutcomeManager = AttackOutcomeManager(stage, turnManager, battleHud::battleFieldTable, battleState)
         specialOutcomeManager = SpecialOutcomeManager(battleHud::battleFieldTable, battleState)
-        resultManager = BattleResultManager(stage, battleObserver, battleId, enemies, battleState)
+        resultManager = BattleResultManager(stage, battleObserver, battleId, enemies, turnManager, battleState)
 
         val battleTitle: Label = hudBuilder.createBattleTitle()
         stage.addActor(battleTitle)
@@ -182,7 +185,7 @@ class BattleScreen : Screen {
         handleAudioFading()
         stage.draw()
 
-        if (!isLoaded || battleState.isBgmFading || battleState.isDelayingTurn || hasWon || hasLost) {
+        if (!isLoaded || battleState.isBgmFading || battleState.isDelayingTurn || hasWon || hasLost || hasFled) {
             return
         }
 
@@ -195,6 +198,7 @@ class BattleScreen : Screen {
         when {
             battleState.phase != BattlePhase.BATTLE -> return
             enemies.getAll().none { it.isAlive } -> winBattle()
+            turnManager.getOnlyHeroes().isEmpty() -> fleeBattle()
             gameData.party.getPlayer().isDead -> gameOver()
             currentParticipant.isHero -> takeTurnHero()
             else -> takeTurnEnemy()
@@ -213,7 +217,7 @@ class BattleScreen : Screen {
     }
 
     private fun updateAllTables() {
-        battleHud.updateHeroTable(gameData.party.getAllHeroes(), turnManager::getCurrentApOf)
+        battleHud.updateHeroTable(gameData.party.getAllHeroes(), turnManager::getCurrentApOf, turnManager::hasFled)
         battleHud.updateEnemyTable(enemies.getAll(), turnManager::getCurrentApOf)
         val visionSlots = (gameData.party.size + 2) + gameData.inventory.getTotalOfItem("vision_thingy")
         battleHud.updateTurnTable(turnManager, visionSlots)
@@ -428,7 +432,12 @@ class BattleScreen : Screen {
 
     private fun fleeConfirmed(fleeAction: FleeAction) {
         menuManager.closeMenu()
-        confirmManager.fleeConfirmed(fleeAction, resultManager)
+        confirmManager.fleeConfirmed(fleeAction, ::heroFled)
+    }
+
+    private fun heroFled() {
+        val fledParticipant: Participant = turnManager.fleeHero()
+        battleField.removeFledHero(fledParticipant)
     }
 
     private fun delayTurnConfirmed(delayTurnAction: DelayTurnAction) {
@@ -595,6 +604,13 @@ class BattleScreen : Screen {
         if (battleState.isDelayingTurn || hasWon) return
         hasWon = true
         resultManager.winBattle()
+    }
+
+    private fun fleeBattle() {
+        hasFled = true
+        Utils.runWithDelay(FLED_EXIT_DELAY) {
+            resultManager.battleFledExitScreen()
+        }
     }
 
     private fun gameOver() {

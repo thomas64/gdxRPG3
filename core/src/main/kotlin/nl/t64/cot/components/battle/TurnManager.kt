@@ -8,6 +8,7 @@ class TurnManager(
     private val enemies: List<EnemyItem>
 ) {
     val participants: MutableList<Participant> = createParticipants()
+    val fledParticipants: MutableList<Participant> = mutableListOf()
     val currentParticipant: Participant get() = participants.first()
     val troubadourEffects = TroubadourEffectHandler(participants)
     var amountOfTurns: Int = 0; private set
@@ -49,8 +50,8 @@ class TurnManager(
         return forecast
     }
 
-    // Mirrors the turn-order logic of setNextTurn (reset first, tick, sort) on throwaway copies.
-    // Keep in sync with setNextTurn, otherwise the forecast no longer matches the real order.
+    // Mirrors the turn-order logic of startTurnOfNextParticipant (tick, sort) on throwaway copies.
+    // Keep in sync with startTurnOfNextParticipant, otherwise the forecast no longer matches the real order.
     private fun advanceSim(sim: MutableList<Sim>) {
         if (sim.size == 1) return
 
@@ -63,18 +64,12 @@ class TurnManager(
                                          { it.participant.character.name }))
     }
 
-    // Turn-order logic (reset acted participant, tick, sort) is mirrored by advanceSim for the forecast.
-    // Keep both in sync.
     fun setNextTurn() {
         val actedParticipant: Participant = currentParticipant
         removeKilledParticipants()
         if (participants.size == 1) return
         actedParticipant.resetTurnCounter()
-        participants.increaseTurnCounters()
-        participants.sort()
-        amountOfTurns++
-        currentParticipant.refreshActionPoints()
-        troubadourEffects.possibleApply()
+        startTurnOfNextParticipant()
     }
 
     fun removeKilledParticipants() {
@@ -82,6 +77,32 @@ class TurnManager(
         if (deadHeroes.any { it.isPerforming }) troubadourEffects.removeFromAllParticipants()
         deadHeroes.forEach { it.resetAllTemporaryBattleEffects() }
         participants.removeIf { it.character.isDead }
+    }
+
+    fun fleeHero(): Participant {
+        val heroToFlee: Participant = currentParticipant
+        heroToFlee.remove()
+        if (getOnlyHeroes().isNotEmpty()) {
+            startTurnOfNextParticipant()
+        }
+        return heroToFlee
+    }
+
+    // Tick-and-sort logic is mirrored by advanceSim for the forecast. Keep both in sync.
+    private fun startTurnOfNextParticipant() {
+        participants.increaseTurnCounters()
+        participants.sort()
+        amountOfTurns++
+        currentParticipant.refreshActionPoints()
+        troubadourEffects.possibleApply()
+    }
+
+    fun hasFled(character: Character): Boolean {
+        return fledParticipants.any { it.character == character }
+    }
+
+    fun getHeroesStillFighting(): List<HeroItem> {
+        return getOnlyHeroes().map { it.character as HeroItem }
     }
 
     fun delayTurn() {
@@ -119,6 +140,15 @@ class TurnManager(
 
     fun resetTemporaryBonusesAfterBattle() {
         getOnlyHeroes().forEach { it.resetAllTemporaryBattleEffects() }
+    }
+
+    private fun Participant.remove() {
+        if (this.isPerforming) {
+            troubadourEffects.removeFromAllParticipants()
+        }
+        this.resetAllTemporaryBattleEffects()
+        participants.remove(this)
+        fledParticipants.add(this)
     }
 
     private fun Participant.raiseTurnCounterAboveMaxOf(group: List<Participant>) {

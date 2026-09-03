@@ -29,7 +29,7 @@ class Participant(
     var currentAP: Int = maximumAP
     val maxCarryOverAp: Int get() = character.getCalculatedTotalStatOf(StatItemId.STAMINA) / 10    // min: 0, max: 4
     var staggerChance: Float = 65f
-    var fleeChance: Int = 70
+    var fleeChance: Int = 50
 
     private var isDelayingTurn: Boolean = false
     private var isStaggered: Boolean = false
@@ -37,6 +37,7 @@ class Participant(
 
     var performingType: AbilityItemId? = null
     val isPerforming: Boolean get() = performingType != null
+    var hasFailedToFlee: Boolean = false
 
 
     fun updateTurnCounter() {
@@ -54,6 +55,7 @@ class Participant(
     fun resetTurnCounter() {
         turnCounter -= TURN_THRESHOLD
         amountOfTurns++
+        hasFailedToFlee = false
     }
 
     fun delayTurn() {

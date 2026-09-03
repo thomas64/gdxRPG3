@@ -11,8 +11,8 @@
       "- 'Stealth' lowers the Action Point cost required to free",
       "  a character from when they are locked in battle.",
       "",
-      "- 'Stealth' increases the chance to successfully flee the party",
-      "  from combat. Each rank in 'Stealth' raises this chance by 2%."
+      "- 'Stealth' increases the chance for a character to successfully",
+      "  flee from combat. Each rank in 'Stealth' raises this chance by 4%."
     ]
   },
   "gambler"   : {
