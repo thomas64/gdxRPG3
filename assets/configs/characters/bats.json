@@ -34,7 +34,7 @@
       "strength"    : 2,
       "speed"       : 20,
       "willpower"   : 1,
-      "constitution": 6,
+      "constitution": 8,
       "stamina"     : 7
     },
     "skills"   : {
@@ -58,7 +58,7 @@
       "strength"    : 2,
       "speed"       : 20,
       "willpower"   : 1,
-      "constitution": 8,
+      "constitution": 12,
       "stamina"     : 11
     },
     "skills"   : {

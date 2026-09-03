@@ -16,5 +16,6 @@
   "chest_alva_cave": {"content": {"gold": 21, "basic_medium_bracers": 1, "stealth_potion": 1, "strength_potion": 1}, "trapLevel": 1, "lockLevel": 1},
   "chest_jail_01"  : {"content": {"specialist_spear": 1}, "lockLevel": 6},
   "chest_alva_05"  : {"content": {"specialist_claymore": 1, "strength_potion_+": 1}, "trapLevel": 2, "lockLevel": 2},
-  "chest_alva_06"  : {"content": {"healing_potion_+": 1, "energy_potion_+": 1, "healing_potion": 3, "energy_potion": 3, "restore_potion": 1}}
+  "chest_alva_06"  : {"content": {"healing_potion_+": 1, "energy_potion_+": 1, "healing_potion": 3, "energy_potion": 3, "restore_potion": 1}},
+  "chest_trail_01" : {"content": {"fine_light_helmet": 1, "fine_knife": 1, "gold": 5, "stealth_potion": 1, "dexterity_potion": 1}}
 }

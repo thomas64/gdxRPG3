@@ -1,4 +1,6 @@
 {
   "forest_trail_01": {"battlers": [{"id": "orc_tank", "amount": 2}], "background": "forest_path"},
-  "forest_trail_02": {"battlers": [{"id": "orc_scout_axe", "amount": 4}], "background": "forest_path"}
+  "forest_trail_02": {"battlers": [{"id": "orc_scout_axe", "amount": 4}], "background": "forest_path"},
+  "forest_trail_03": {"battlers": [{"id": "green_bat", "amount": 5}], "background": "forest_path"},
+  "forest_trail_04": {"battlers": [{"id": "orc_scout_axe", "amount": 2}, {"id": "orc_scout_bow", "amount": 2}], "background": "forest_path"}
 }

@@ -185,6 +185,9 @@
   },
   "quest_lastdenn_ring"     : {
     "name"   : "Lambertus",
+    "startAt": [
+      {"condition": ["_r_==_f_q_quest_lastdenn_ring"], "startId": "50"}
+    ],
     "phrases": {
       "1"   : {"text": ["You there. Yes, you. You look like someone in need of proper employment. I have a task for you, boy."]},
       "2"   : {"text": ["I am Lambertus, a man of considerable wealth and taste. A very valuable ring of mine was stolen by orcs near Lastdenn, of all dreadful places. Retrieve it, and I may reward you well enough to matter."]},
@@ -215,6 +218,10 @@
       "26"  : {"face": "mozes", "name": "Mozes", "text": ["I should probably take it off first."], "choices": [{"command": "EXIT", "nextId": "22"}]},
       "30"  : {"text": ["You finally brought it? About time."]},
       "31"  : {"text": ["Here. This is your reward."], "choices": [{"command": "REWARD_QUEST"}]},
+      "50"  : {"text": ["What do you want from me, boy?"]},
+      "51"  : {"text": ["Whatever it is you imagine you have to offer, it is not something a man of my standing would ever require."]},
+      "52"  : {"text": ["There is no universe in which you could do anything for me, boy."]},
+      "53"  : {"text": ["Off you go, then."], "choices": [{"command": "EXIT"}]},
       "1399": {"text": ["Don't tell me you forgot your reward. Honestly. I know you need it."], "choices": [{"command": "REWARD_QUEST"}]},
       "1400": {"text": ["Move along, boy. I have no more use for you."], "choices": [{"command": "AUTO_SAVE", "nextId": "1400"}]}
     }

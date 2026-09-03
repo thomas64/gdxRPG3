@@ -82,5 +82,8 @@
   "sparkle_alva_south_07"  : {"content": {"herb": 1}},
   "sparkle_alva_south_08"  : {"content": {"spice": 1}},
   "sparkle_alva_south_09"  : {"content": {"metal": 1}},
-  "sparkle_alva_south_10"  : {"content": {"metal": 2}, "gatherLevel": 2}
+  "sparkle_alva_south_10"  : {"content": {"metal": 2}, "gatherLevel": 2},
+  "sparkle_trail_01"       : {"content": {"spice": 1}},
+  "sparkle_trail_02"       : {"content": {"spice": 2}, "gatherLevel": 2},
+  "sparkle_trail_03"       : {"content": {"wood": 2}, "gatherLevel": 2}
 }

@@ -1,77 +1,82 @@
 {
-  "note_honeywood_smith"     : {
+  "note_honeywood_smith"           : {
     "type"      : "messagebox",
     "text"      : ["Black Smith Inc."],
     "doesRepeat": true
   },
-  "note_resource_shop_timed" : {
+  "note_resource_shop_timed"       : {
     "type"      : "messagebox",
     "condition" : ["_time_!between_08:25_and_17:35"],
     "text"      : ["Resource Shop.", "", "Open from 08:30 to 17:30."],
     "doesRepeat": true
   },
-  "note_resource_shop"       : {
+  "note_resource_shop"             : {
     "type"      : "messagebox",
     "text"      : ["Resource Shop.", "", "Open from 08:30 to 17:30."],
     "doesRepeat": true
   },
-  "note_equipment_shop_timed": {
+  "note_equipment_shop_timed"      : {
     "type"      : "messagebox",
     "condition" : ["_time_!between_08:25_and_17:35"],
     "text"      : ["Equipment Shop.", "", "Open from 08:30 to 17:30."],
     "doesRepeat": true
   },
-  "note_equipment_shop"      : {
+  "note_equipment_shop"            : {
     "type"      : "messagebox",
     "text"      : ["Equipment Shop.", "", "Open from 08:30 to 17:30."],
     "doesRepeat": true
   },
-  "note_honeywood_academy"   : {
+  "note_honeywood_academy"         : {
     "type"      : "messagebox",
     "text"      : ["Honeywood Skill Training.", "", "From 08:30 to 17:30."],
     "doesRepeat": true
   },
-  "note_honeywood_signpost"  : {
+  "note_honeywood_signpost"        : {
     "type"      : "messagebox",
     "text"      : ["North: Honeywood", "East: Lastdenn", "South: Farshell", "West: Cragmere"],
     "doesRepeat": true
   },
-  "note_honeywood_ferry"     : {
+  "note_honeywood_ferry"           : {
     "type"      : "messagebox",
     "text"      : ["Cragmere Ferry: Daily at 14:00"],
     "doesRepeat": true
   },
-  "note_lastdenn_signpost"   : {
+  "note_lastdenn_signpost"         : {
     "type"      : "messagebox",
     "text"      : ["East: Lastdenn", "West: Honeywood"],
     "doesRepeat": true
   },
-  "note_lastdenn_inn"        : {
+  "note_lastdenn_inn"              : {
     "type"      : "messagebox",
     "text"      : ["Lastdenn Inn", "", "Rooms affordable but not cheap!"],
     "doesRepeat": true
   },
-  "note_lastdenn_temple"     : {
+  "note_lastdenn_temple"           : {
     "type"      : "messagebox",
     "text"      : ["Lastdenn Temple", "", "Daily service at 10:00.", "Pastoral counseling after the service daily at 11:00."],
     "doesRepeat": true
   },
-  "note_lastdenn_bar"        : {
+  "note_lastdenn_bar"              : {
     "type"      : "messagebox",
     "text"      : ["Lastdenn Bar", "", "Friendship and happiness for sale!"],
     "doesRepeat": true
   },
-  "note_lastdenn_jail"       : {
+  "note_lastdenn_jail"             : {
     "type"      : "messagebox",
     "text"      : ["Lastdenn Jail", "", "Open from 18:00 to 20:00."],
     "doesRepeat": true
   },
-  "note_alva_south_signpost" : {
+  "note_alva_south_signpost"       : {
     "type"      : "messagebox",
     "text"      : ["North: Honeywood", "East: Cragmere", "South: Road block"],
     "doesRepeat": true
   },
-  "note_forest_trail_cabin"  : {
+  "note_forest_trail_west_signpost": {
+    "type"      : "messagebox",
+    "text"      : ["East: Cragmere", "West: Galen's Cabin"],
+    "doesRepeat": true
+  },
+  "note_forest_trail_cabin"        : {
     "type"      : "messagebox",
     "condition" : ["_hero_!galen"],
     "text"      : ["Out chopping wood. I’ll be back around 11:00."],
