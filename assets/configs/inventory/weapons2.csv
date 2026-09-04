@@ -32,6 +32,8 @@ specialist_claymore,        Specialist Claymore,        WEAPON,   3050,   SWORD,
 masterwork_claymore,        Masterwork Claymore,        WEAPON,   4050,   SWORD,    140,    15,     0,       0,       30,      35,     35,
 
 
+key,                        name,                       group,    sort,   skill,    price,  dura,   min_int, min_dex, min_str, hit,    dam,
+-------------------------------------------------------------------------------------------------------------------------------------------
 basic_dagger,               Basic Dagger,               WEAPON,   1300,   DAGGER,   8,      30,     0,       8,       0,       85,     8,
 fine_dagger,                Fine Dagger,                WEAPON,   2300,   DAGGER,   24,     25,     0,       12,      0,       75,     13,
 specialist_dagger,          Specialist Dagger,          WEAPON,   3300,   DAGGER,   40,     20,     0,       16,      0,       65,     18,

@@ -4,15 +4,15 @@ import kotlin.math.roundToInt
 
 
 /**
- * Hoeveel gevechtskracht ([CombatPowerCalculator]) één xp waard is.
- * Dit is de globale xp-kraan: verlaag de waarde om overal meer xp uit te delen, verhoog hem voor minder.
+ * How much xp an enemy is worth per 1000 combat power ([CombatPowerCalculator]).
+ * This is the global xp tap: raise the value to hand out more xp everywhere, lower it for less.
  */
-private const val COMBAT_POWER_PER_XP: Float = 22f
+private const val XP_PER_1000_COMBAT_POWER: Float = 40f
 
 class XpCalculator {
 
     fun calculate(combatPower: Float): Int {
-        return (combatPower / COMBAT_POWER_PER_XP).roundToInt().coerceAtLeast(1)
+        return (combatPower * XP_PER_1000_COMBAT_POWER / 1000f).roundToInt().coerceAtLeast(1)
     }
 
 }
