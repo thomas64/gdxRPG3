@@ -33,4 +33,52 @@
    <frame tileid="267" duration="200"/>
   </animation>
  </tile>
+ <tile id="432">
+  <animation>
+   <frame tileid="432" duration="200"/>
+   <frame tileid="434" duration="200"/>
+   <frame tileid="436" duration="200"/>
+   <frame tileid="434" duration="200"/>
+  </animation>
+ </tile>
+ <tile id="433">
+  <animation>
+   <frame tileid="433" duration="200"/>
+   <frame tileid="435" duration="200"/>
+   <frame tileid="437" duration="200"/>
+   <frame tileid="435" duration="200"/>
+  </animation>
+ </tile>
+ <tile id="456">
+  <animation>
+   <frame tileid="456" duration="200"/>
+   <frame tileid="458" duration="200"/>
+   <frame tileid="460" duration="200"/>
+   <frame tileid="458" duration="200"/>
+  </animation>
+ </tile>
+ <tile id="457">
+  <animation>
+   <frame tileid="457" duration="200"/>
+   <frame tileid="459" duration="200"/>
+   <frame tileid="461" duration="200"/>
+   <frame tileid="459" duration="200"/>
+  </animation>
+ </tile>
+ <tile id="480">
+  <animation>
+   <frame tileid="480" duration="200"/>
+   <frame tileid="482" duration="200"/>
+   <frame tileid="484" duration="200"/>
+   <frame tileid="482" duration="200"/>
+  </animation>
+ </tile>
+ <tile id="481">
+  <animation>
+   <frame tileid="481" duration="200"/>
+   <frame tileid="483" duration="200"/>
+   <frame tileid="485" duration="200"/>
+   <frame tileid="483" duration="200"/>
+  </animation>
+ </tile>
 </tileset>

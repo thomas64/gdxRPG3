@@ -1,5 +1,5 @@
 {
-  "note_alva_save": {
+  "note_alva_save" : {
     "phrases": {
       "1": {
         "text": [
@@ -15,6 +15,18 @@
         ]
       },
       "3": {"text": ["Whether you believe in her or not, Savia's protection is said to be real."], "choices": [{"command": "SAVE_GAME"}]}
+    }
+  },
+  "note_galen_fire": {
+    "phrases": {
+      "1": {"text": ["The fire has burned down to charred wood, still smoking."], "choices": [{"command": "EXIT"}]}
+    }
+  },
+  "note_galen_saw" : {
+    "phrases": {
+      "1": {"text": ["It's a saw."]},
+      "2": {"text": ["On a stump."]},
+      "3": {"text": ["One might think a tree was cut down here."], "choices": [{"command": "EXIT"}]}
     }
   }
 }
