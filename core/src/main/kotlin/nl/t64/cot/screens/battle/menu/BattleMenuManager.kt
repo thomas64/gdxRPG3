@@ -21,6 +21,7 @@ private const val MOVE_AP: Int = 1
 private const val REST_AP: Int = 1
 
 private const val ATTACK: String = "Attack"
+private const val SPECIAL: String = "Special"
 private const val MOVE: String = "Move"
 private const val END_TURN: String = "End turn"
 private const val BACK: String = "Back"
@@ -143,7 +144,7 @@ class BattleMenuManager(
         battleField.setStartingSpace()
         val stealthMovementTable: Table =
             menuBuilder.createButtonTableStealthMovement(currentParticipant.invoke().character.name,
-                                                           battleField.getFreeStealthStepsForHero())
+                                                         battleField.getFreeStealthStepsForHero())
         showTable(stealthMovementTable, stealthMovementListener)
     }
 
@@ -277,7 +278,7 @@ class BattleMenuManager(
         return listOf(
             // @formatter:off
             BattleMenuOption(ATTACK,       "? AP",                 canAttack,          { openSubMenuFromMainMenu(::showAttackTable) }),
-            BattleMenuOption("Special",    "? AP",                 canUseSpecial,      { openSubMenuFromMainMenu(::showSpecialTable) }),
+            BattleMenuOption(SPECIAL,      "? AP",                 canUseSpecial,      { openSubMenuFromMainMenu(::showSpecialTable) }),
             BattleMenuOption(MOVE,         "$moveApRange AP",      canMove,            { openSubMenuFromMainMenu(::showMoveTable) }),
             BattleMenuOption("Equipment",  "$SWITCH_WEAPON_AP AP", canSwitchEquipment, { openSubMenuFromMainMenu(::showActionWeaponTable) }),
             BattleMenuOption("Potion",     "$POTION_AP AP",        canDrinkPotion,     { openSubMenuFromMainMenu { showPotionTable(actionPotionListener) } }),
@@ -336,11 +337,23 @@ class BattleMenuManager(
         if (!areEnemiesInRange && options[mainMenuIndex].name == ATTACK) {
             mainMenuIndex = options.indexOfFirst { it.name == MOVE }
         }
-        if (currentParticipant.invoke().currentAP <= 1) {
+        if (isOutOfOffensiveOptions(options, areEnemiesInRange)) {
             mainMenuIndex = options.indexOfFirst { it.name == END_TURN }
         } else if (!options[mainMenuIndex].isEnabled) {
             mainMenuIndex = options.indexOfFirst { it.isEnabled }
         }
+    }
+
+    private fun isOutOfOffensiveOptions(options: List<BattleMenuOption>, areEnemiesInRange: Boolean): Boolean {
+        return if (areEnemiesInRange) {
+            !options.isEnabled(ATTACK) && !options.isEnabled(SPECIAL)
+        } else {
+            currentParticipant.invoke().currentAP <= 1
+        }
+    }
+
+    private fun List<BattleMenuOption>.isEnabled(optionName: String): Boolean {
+        return single { it.name == optionName }.isEnabled
     }
 
     private fun Participant.getCheapestUsableAttackAp(areEnemiesInRange: Boolean): Int {
