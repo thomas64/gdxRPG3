@@ -9,7 +9,6 @@ import nl.t64.cot.components.party.inventory.InventoryItem
 import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.components.party.stats.StatItemId
 import nl.t64.cot.screens.battle.BattleUtils
-import kotlin.math.roundToInt
 
 
 internal const val TURN_THRESHOLD: Int = 200
@@ -196,16 +195,6 @@ class Participant(
 
     fun stopPerforming() {
         performingType = null
-    }
-
-    fun calculatePerformBonus(troubadourRank: Int): Int {
-        val baseHit: Int = character.getCalculatedTotalHit()
-        return (0.35f * (100 - baseHit) * (troubadourRank / 10f)).roundToInt().coerceAtLeast(0)
-    }
-
-    fun calculatePerformPenalty(troubadourRank: Int): Int {
-        val baseHit: Int = character.getCalculatedTotalHit()
-        return (0.2f * baseHit * (troubadourRank / 10f)).roundToInt()
     }
 
     private fun dequipDisallowedWeapon() {

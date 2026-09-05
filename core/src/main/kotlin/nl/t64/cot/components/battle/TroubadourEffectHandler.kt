@@ -1,6 +1,8 @@
 package nl.t64.cot.components.battle
 
 import nl.t64.cot.components.party.abilities.AbilityItemId
+import nl.t64.cot.components.party.abilities.calculatePerformBonus
+import nl.t64.cot.components.party.abilities.calculatePerformPenalty
 import nl.t64.cot.components.party.skills.SkillItemId
 
 
@@ -17,11 +19,17 @@ class TroubadourEffectHandler(
             AbilityItemId.PERFORM_BEAUTY -> participants
                 .filter { it.isHero }
                 .filterNot { it == performer }
-                .forEach { it.character.bonus.hitBonusFromTroubadour = it.calculatePerformBonus(skillRank) }
+                .forEach {
+                    it.character.bonus.hitBonusFromTroubadour =
+                        calculatePerformBonus(it.character.getCalculatedTotalHit(), skillRank)
+                }
 
             AbilityItemId.PERFORM_CHAOS -> participants
                 .filterNot { it.isHero }
-                .forEach { it.character.bonus.hitPenaltyFromTroubadour = it.calculatePerformPenalty(skillRank) }
+                .forEach {
+                    it.character.bonus.hitPenaltyFromTroubadour =
+                        calculatePerformPenalty(it.character.getCalculatedTotalHit(), skillRank)
+                }
 
             else -> throw IllegalStateException("Unknown performing AbilityItemId: $performance")
         }
