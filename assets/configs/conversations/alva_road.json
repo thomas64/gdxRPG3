@@ -79,7 +79,7 @@
       }
     }
   },
-  "alva_heal_price-0"    : {
+  "world_heal_price-0"    : {
     "name"   : "Fairy Healer",
     "startAt": [{"condition": ["_time_after_18:15"], "startId": "10"}],
     "phrases": {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="96" height="66" tilewidth="24" tileheight="24" infinite="0" nextlayerid="25" nextobjectid="126">
+<map version="1.11" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="96" height="66" tilewidth="24" tileheight="24" infinite="0" nextlayerid="25" nextobjectid="129">
  <properties>
   <property name="bgm" value="bgm_cave"/>
   <property name="lightmap_camera" value="dark_forest"/>
@@ -24,7 +24,7 @@
  </layer>
  <layer id="3" name="under2_ground" width="96" height="66">
   <data encoding="base64" compression="zlib">
-   eJzt2jEOwjAMBVALKhi6tQNIHeGWsHEMuEu5BdwERsLMiBqr6nsHSKzvKPLgCAAAAAAAvsYh4j5kV5Fn3UY0bd79j5L9c8H5H0r2x8r5v7u6983JqfTiPHE/9v2058/ZtWR/S/yPAAAA/rHdZFewbJdVdgUAAAAA+V6dvZBMu95eSCbvP5f3DwD1mX9ymX8AAAAAAADg1wduIA9u
+   eJzt2j1Ow0AQBtBRiEKRguDEAikl6TkgdDlGuAvcgJ8m3CKBJimzdJZwB/Yo8nvSaDrv6NuVtcVGAAAAAADw43kZ8bLMniLPxTRiPM1bf1uy/xxw/ncl+1XP+R+rftc7Jw9lLx473o/bebffP2ebkv1T4v8IAADgLy4n2RMM23qUPQEAAABAvkPlXUimm7l3IW1eFxFvpd4b/WPx/+s4/+12Jet9qa9G/+4gf+e/3VUdMSt13ehVnT3VcNzX/Zx/gCzuP7ncfwAAAAAAAOC3E9K+ISE=
   </data>
  </layer>
  <layer id="4" name="under3_shadow" width="96" height="66">
@@ -100,6 +100,8 @@
   <object id="114" x="288" y="336" width="48" height="48"/>
   <object id="115" x="336" y="240" width="48" height="48"/>
   <object id="116" x="576" y="288" width="48" height="144"/>
+  <object id="127" x="1248" y="912" width="48" height="48"/>
+  <object id="128" x="1344" y="912" width="48" height="48"/>
  </objectgroup>
  <objectgroup color="#aa0000" id="14" name="collision">
   <object id="3" x="0" y="1200" width="288" height="384"/>
@@ -146,7 +148,6 @@
   <object id="50" x="1296" y="336" width="48" height="48"/>
   <object id="51" x="816" y="960" width="96" height="48"/>
   <object id="52" x="1008" y="1056" width="96" height="48"/>
-  <object id="53" x="1248" y="912" width="48" height="48"/>
   <object id="54" x="672" y="1200" width="48" height="48"/>
   <object id="55" x="960" y="816" height="24"/>
   <object id="56" x="1152" y="744" width="144" height="72"/>
@@ -165,7 +166,7 @@
   <object id="69" x="1776" y="1152" width="48" height="48"/>
   <object id="70" x="1152" y="1104" width="144" height="96"/>
   <object id="71" x="960" y="1152" width="192" height="48"/>
-  <object id="72" x="1344" y="672" width="48" height="288"/>
+  <object id="72" x="1344" y="672" width="48" height="240"/>
   <object id="73" x="1296" y="792" width="48" height="72"/>
   <object id="74" x="1392" y="624" width="240" height="48"/>
   <object id="75" x="1440" y="576" width="192" height="48"/>
@@ -208,7 +209,13 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup color="#55ff7f" id="17" name="npc"/>
+ <objectgroup color="#55ff7f" id="17" name="npc">
+  <object id="126" name="fairy6" type="f" x="1296" y="1008" width="48" height="24">
+   <properties>
+    <property name="conversation" value="world_heal_price-0"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup color="#55aaff" id="18" name="spawn">
   <object id="1" name="alva_road_south" x="0" y="1128" width="48" height="24"/>
   <object id="86" name="forest_trail_west" x="888" y="840" width="48" height="24">

@@ -343,7 +343,7 @@
  <objectgroup color="#55ff7f" id="21" name="npc">
   <object id="270" name="fairy6" type="f" x="912" y="864" width="48" height="24">
    <properties>
-    <property name="conversation" value="alva_heal_price-0"/>
+    <property name="conversation" value="world_heal_price-0"/>
    </properties>
   </object>
  </objectgroup>
