@@ -16,6 +16,7 @@ import kotlin.math.roundToInt
 import kotlin.random.Random
 
 
+const val MAXIMUM_AP: Int = 10
 private val armorReductionCalculator = ArmorReductionCalculator()
 
 abstract class Character(
@@ -117,11 +118,12 @@ abstract class Character(
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     open fun getCalculatedActionPoints(): Int {
-        return ((getCalculatedTotalStatOf(StatItemId.INTELLIGENCE)
-            + getCalculatedTotalStatOf(StatItemId.DEXTERITY)
-            + getCalculatedTotalStatOf(StatItemId.STRENGTH)
-            + getCalculatedTotalStatOf(StatItemId.SPEED)) / 20f)
-            .roundToInt() + 2
+        val sumOfStats: Int = getCalculatedTotalStatOf(StatItemId.INTELLIGENCE) +
+            getCalculatedTotalStatOf(StatItemId.DEXTERITY) +
+            getCalculatedTotalStatOf(StatItemId.STRENGTH) +
+            getCalculatedTotalStatOf(StatItemId.SPEED)
+        val actionPoints: Int = (sumOfStats / 20f).roundToInt() + 2
+        return actionPoints.coerceAtMost(MAXIMUM_AP)
     }
 
     fun getCalculatedTotalHitWithBonus(): Int {

@@ -15,10 +15,16 @@ class PushOnAction(
         """
 
     fun isAble(): Pair<Boolean, String> {
-        return if (character.currentSp < PUSH_ON_SP) {
-            Pair(false, (message + "Not enough SP!").trimIndent())
-        } else {
-            Pair(true, (message + "Do you want to push on? ($PUSH_ON_SP SP)").trimIndent())
+        return when {
+            currentParticipant.currentAP >= MAXIMUM_AP -> {
+                Pair(false, (message + "Already at maximum AP!").trimIndent())
+            }
+            character.currentSp < PUSH_ON_SP -> {
+                Pair(false, (message + "Not enough SP!").trimIndent())
+            }
+            else -> {
+                Pair(true, (message + "Do you want to push on? ($PUSH_ON_SP SP)").trimIndent())
+            }
         }
     }
 

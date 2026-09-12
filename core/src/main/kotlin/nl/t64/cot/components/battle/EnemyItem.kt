@@ -61,7 +61,9 @@ class EnemyItem(
     }
 
     override fun getCalculatedActionPoints(): Int {
-        return ap.takeUnless { it == 0 } ?: super.getCalculatedActionPoints()
+        return ap.coerceAtMost(MAXIMUM_AP)
+            .takeUnless { it == 0 }
+            ?: super.getCalculatedActionPoints()
     }
 
     fun swapToStashedWeapon() {

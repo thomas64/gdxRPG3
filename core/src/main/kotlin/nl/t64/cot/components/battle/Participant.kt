@@ -22,10 +22,8 @@ class Participant(
     var turnCounter: Int = 0
     val tickRate: Int get() = BASE_TICK + character.getCalculatedTotalStatOf(StatItemId.SPEED)
 
-    // todo, wil ik dat buffs en debuffs de maximum ap kunnen veranderen?
-    // zo nee, dan moet de get() weg, maar visueel in een battle komt er nog wel een bolletje bij. dat moet dan anders.
     val maximumAP: Int get() = character.getCalculatedActionPoints()
-    var currentAP: Int = maximumAP
+    var currentAP: Int = maximumAP; set(value) { field = value.coerceAtMost(MAXIMUM_AP) }
     val maxCarryOverAp: Int get() = character.getCalculatedTotalStatOf(StatItemId.STAMINA) / 10    // min: 0, max: 4
     var staggerChance: Float = 65f
     var fleeChance: Int = 50
