@@ -44,9 +44,8 @@ enum class CalcAttributeId(override val title: String) : SuperEnum {
                 - An enemy's 'Protection' decreases the '$title' you inflict.
 
                 - '$title' is derived from the weapon you are currently holding
-                  and the rank of your 'Strength' for hand-to-hand combat,
-                  or the rank of your 'Dexterity' for ranged combat.
-                  Or even your 'Intelligence' for some weapons.""".trimIndent()
+                  and the rank of your 'Intelligence', 'Dexterity' or 'Strength'.
+                  Which one depends on the weapon's skill type.""".trimIndent()
         }
     },
 
@@ -56,10 +55,7 @@ enum class CalcAttributeId(override val title: String) : SuperEnum {
                 - '$title' decreases the enemy's damage it inflicts
                   to you with physical weapons in combat.
 
-                - '$title' is the counterpart of 'Damage'.
-
-                - A complete armor set from the same
-                  type results in bonus '$title'.""".trimIndent()
+                - '$title' is the counterpart of 'Damage'.""".trimIndent()
         }
     },
 

@@ -158,7 +158,7 @@ abstract class Character(
     }
 
     fun getRawExtraProtection(): Int {
-        return inventory.getBonusProtectionWhenArmorSetIsComplete() + bonus.getProtection()
+        return bonus.getProtection()
     }
 
     private fun getArmorReductionPercentage(rawProtection: Int): Int {

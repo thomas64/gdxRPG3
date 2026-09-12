@@ -39,6 +39,9 @@
       "- 'Speed' increases your combat initiative.",
       "  More 'Speed' means a faster turn rate in combat.",
       "",
+      "- A complete armor set from the same type",
+      "  results in bonus 'Speed'.",
+      "",
       "- Each 20 ranks in 'Speed' increases AP by 1."
     ]
   },

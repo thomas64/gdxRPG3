@@ -102,7 +102,7 @@ class EquipContainer() {
     }
 
     fun getSumOfStat(statItemId: StatItemId): Int {
-        return equipment.values.filterNotNull().sumOf { it.getAttributeOfStatItemId(statItemId) }
+        return getSumOfItemStats(statItemId) + getPossibleSetBonusOf(statItemId)
     }
 
     fun getSumOfSkill(skillItemId: SkillItemId): Int {
@@ -125,11 +125,26 @@ class EquipContainer() {
         return getInventoryItem(InventoryGroup.WEAPON)?.getStatItemIdOfMinimalTypeOfWeapon()
     }
 
-    fun getBonusProtectionWhenArmorSetIsComplete(): Int {
-        return getInventoryItem(InventoryGroup.HELMET)
-            ?.takeIf { doesEquippedArmorAllHaveSamePrefix(getPrefixOfId(it)) }
-            ?.getAttributeOfCalcAttributeId(CalcAttributeId.PROTECTION)
-            ?: 0
+    private fun getSumOfItemStats(statItemId: StatItemId): Int {
+        return equipment.values.filterNotNull().sumOf { it.getAttributeOfStatItemId(statItemId) }
+    }
+
+    private fun getPossibleSetBonusOf(statItemId: StatItemId): Int {
+        return if (statItemId == StatItemId.SPEED) getBonusSpeedWhenArmorSetIsComplete() else 0
+    }
+
+    private fun getBonusSpeedWhenArmorSetIsComplete(): Int {
+        val item: InventoryItem = getInventoryItem(InventoryGroup.HELMET) ?: return 0
+        val itemPrefix: String = getPrefixOfId(item)
+        val hasCompleteSet: Boolean = doesEquippedArmorAllHaveSamePrefix(itemPrefix)
+        return if (hasCompleteSet) {
+            when {
+                itemPrefix.contains("light") -> 1
+                itemPrefix.contains("medium") -> 2
+                itemPrefix.contains("heavy") -> 3
+                else -> 0
+            }
+        } else 0
     }
 
     private fun getPrefixOfId(inventoryItem: InventoryItem): String {
