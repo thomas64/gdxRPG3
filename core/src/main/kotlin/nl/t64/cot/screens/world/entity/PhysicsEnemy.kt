@@ -90,6 +90,8 @@ class PhysicsEnemy : PhysicsComponent() {
     }
 
     private fun checkObstaclesWhileDetecting(dt: Float) {
+        if (state == EntityState.IMMOBILE_AWARE) return
+
         setWanderBox(wanderBox.width) // width equals height equals size.
         if (brokerManager.blockObservers.getCurrentBlockersFor(boundingBox, state, direction).isNotEmpty()) {
             val positionInGrid = entity.getPositionInGrid()

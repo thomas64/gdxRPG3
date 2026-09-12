@@ -128,6 +128,8 @@ class InputEnemy : InputComponent() {
     }
 
     private fun setFollowPath() {
+        if (state == EntityState.IMMOBILE_AWARE) return
+
         val tiledNode = path[SECOND_NODE]
         val nodePosition = Vector2(tiledNode.x.toFloat(), tiledNode.y.toFloat())
         val currentGridPosition = Vector2(enemyEntity.getPositionInGrid())
@@ -139,7 +141,6 @@ class InputEnemy : InputComponent() {
         return when (state) {
             EntityState.IDLE, EntityState.WALKING -> EntityState.WALKING
             EntityState.IDLE_ANIMATING, EntityState.FLYING -> EntityState.FLYING
-            EntityState.IMMOBILE_AWARE -> EntityState.IMMOBILE_AWARE
             else -> throw IllegalArgumentException("Unexpected value: $state")
         }
     }
