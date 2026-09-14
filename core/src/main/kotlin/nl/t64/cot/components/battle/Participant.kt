@@ -12,7 +12,7 @@ import nl.t64.cot.screens.battle.BattleUtils
 
 
 internal const val TURN_THRESHOLD: Int = 200
-private const val BASE_TICK: Int = 10
+private const val BASE_TURN_COUNTER_GAIN: Int = 10
 private const val PENALTY_AP: Int = 4
 
 class Participant(
@@ -20,17 +20,17 @@ class Participant(
 ) {
     val isHero: Boolean get() = character is HeroItem
     var turnCounter: Int = 0
-    val tickRate: Int get() = BASE_TICK + character.getCalculatedTotalStatOf(StatItemId.SPEED)
+    val turnCounterGain: Int get() = BASE_TURN_COUNTER_GAIN + character.getCalculatedTotalStatOf(StatItemId.SPEED)
 
     val maximumAP: Int get() = character.getCalculatedActionPoints()
-    var currentAP: Int = maximumAP; set(value) { field = value.coerceAtMost(MAXIMUM_AP) }
-    val maxCarryOverAp: Int get() = character.getCalculatedTotalStatOf(StatItemId.STAMINA) / 10    // min: 0, max: 4
+    var currentAP: Int = maximumAP; set(value) { field = value.coerceAtMost(AP_CAP) }
     var staggerChance: Float = 65f
     var fleeChance: Int = 50
 
+    val maxCarryOverAp: Int get() = character.getCalculatedTotalStatOf(StatItemId.STAMINA) / 10    // min: 0, max: 4
+    private var carryOverAp: Int = 0
     private var isDelayingTurn: Boolean = false
-    private var isStaggered: Boolean = false
-    private var amountOfTurns: Int = 0
+    val projectedAP: Int get() = if (isDelayingTurn || isPerforming) currentAP else (maximumAP + carryOverAp).coerceAtMost(AP_CAP)
 
     var performingType: AbilityItemId? = null
     val isPerforming: Boolean get() = performingType != null
@@ -38,11 +38,7 @@ class Participant(
 
 
     fun updateTurnCounter() {
-        turnCounter += tickRate
-    }
-
-    fun setNegativeTurnCounter() {
-        turnCounter = 0 - tickRate
+        turnCounter += turnCounterGain
     }
 
     fun isTurnCounterAtMax(): Boolean {
@@ -51,8 +47,13 @@ class Participant(
 
     fun resetTurnCounter() {
         turnCounter -= TURN_THRESHOLD
-        amountOfTurns++
+        carryOverAp = calculateCarryOverAp()
         hasFailedToFlee = false
+    }
+
+    fun calculateCarryOverAp(): Int {
+        val roomUntilCap: Int = AP_CAP - maximumAP
+        return currentAP.coerceAtMost(maxCarryOverAp).coerceAtMost(roomUntilCap)
     }
 
     fun delayTurn() {
@@ -60,20 +61,17 @@ class Participant(
     }
 
     fun stagger() {
-        isStaggered = true
+        turnCounter -= TURN_THRESHOLD
+        carryOverAp = 0
     }
 
     fun refreshActionPoints() {
-        if (isDelayingTurn || isStaggered) {
+        if (isDelayingTurn) {
             isDelayingTurn = false
             return
         }
 
-        if (amountOfTurns == 0) {
-            return
-        }
-
-        currentAP = maximumAP + currentAP.coerceAtMost(maxCarryOverAp)
+        currentAP = maximumAP + carryOverAp
     }
 
     fun getPriorityFor(currentEnemy: Participant, isEnemyNextToHero: Boolean): Float {
@@ -154,14 +152,6 @@ class Participant(
 
     fun getBattleAbilities(): List<BattleAbilityItem> {
         return character.getAllAbilities().map { createBattleAbilityItemFrom(it) }
-    }
-
-    fun handlePossibleStagger(): String? {
-        if (isStaggered) {
-            isStaggered = false
-            return "${character.name} is staggered."
-        }
-        return null
     }
 
     fun canSwitchWeapon(): Boolean {

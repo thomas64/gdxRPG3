@@ -16,7 +16,7 @@ class PushOnAction(
 
     fun isAble(): Pair<Boolean, String> {
         return when {
-            currentParticipant.currentAP >= MAXIMUM_AP -> {
+            currentParticipant.currentAP >= AP_CAP -> {
                 Pair(false, (message + "Already at maximum AP!").trimIndent())
             }
             character.currentSp < PUSH_ON_SP -> {

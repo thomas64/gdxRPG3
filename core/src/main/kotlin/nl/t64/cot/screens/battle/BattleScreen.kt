@@ -217,8 +217,8 @@ class BattleScreen : Screen {
     }
 
     private fun updateAllTables() {
-        battleHud.updateHeroTable(gameData.party.getAllHeroes(), turnManager::getCurrentApOf, turnManager::hasFled)
-        battleHud.updateEnemyTable(enemies.getAll(), turnManager::getCurrentApOf)
+        battleHud.updateHeroTable(gameData.party.getAllHeroes(), turnManager::getDisplayedApOf, turnManager::hasFled)
+        battleHud.updateEnemyTable(enemies.getAll(), turnManager::getDisplayedApOf)
         val visionSlots = (gameData.party.size + 2) + gameData.inventory.getTotalOfItem("vision_thingy")
         battleHud.updateTurnTable(turnManager, visionSlots)
         battleHud.updateBattleField(battleField)
@@ -267,6 +267,7 @@ class BattleScreen : Screen {
     private fun startStealthMovementPhase() {
         menuManager.closeMenu()
         battleState.phase = BattlePhase.STEALTH_MOVEMENT
+        turnManager.determineTurnOrder()
         heroesToSneak = ArrayDeque(turnManager.getOnlyHeroes().filter { it.getFreeStealthSteps() > 0 })
         letNextHeroSneak()
     }
@@ -305,6 +306,7 @@ class BattleScreen : Screen {
             Actions.run {
                 battleStartLabel.remove()
                 battleState.phase = BattlePhase.BATTLE
+                turnManager.startFirstTurn()
             }
         ))
     }
@@ -508,22 +510,13 @@ class BattleScreen : Screen {
 
         if (attackData.isNullOrEmpty()) {
             battleState.isDelayingTurn = false
-            endEnemyAction()
+            endEnemyTurn()
         } else {
             onRenderThread {
                 attackOutcomeManager.enemyAttackConfirmed(attackData)
                 isEnemyActing = false
             }
         }
-    }
-
-    private fun endEnemyAction() {
-        if (preferenceManager.isDebugModeOn) {
-            println("------------------------------------------------")
-        }
-        (currentParticipant.handlePossibleStagger()
-            ?.let { handleStagger(it) }
-            ?: run { endEnemyTurn() })
     }
 
     private fun possibleBlinkCurrentParticipant() {
@@ -548,14 +541,10 @@ class BattleScreen : Screen {
         return lastBlinkedTurn == turnManager.amountOfTurns
     }
 
-    private fun handleStagger(message: String) {
-        onRenderThread {
-            showEndOfTurnDialog(message)
-            isEnemyActing = false
-        }
-    }
-
     private fun endEnemyTurn() {
+        if (preferenceManager.isDebugModeOn) {
+            println("------------------------------------------------")
+        }
         if (preferenceManager.isCombatDetailsOn) {
             val message = "${currentParticipant.character.name} ended ${currentParticipant.character.gender} turn."
             onRenderThread {

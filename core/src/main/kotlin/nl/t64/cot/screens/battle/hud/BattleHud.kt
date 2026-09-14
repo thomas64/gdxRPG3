@@ -20,15 +20,15 @@ class BattleHud(
     var battleFieldTable: Table = Table()
 
 
-    fun updateHeroTable(heroes: List<HeroItem>, getCurrentAp: (Character) -> Int, hasFled: (Character) -> Boolean) {
+    fun updateHeroTable(heroes: List<HeroItem>, getDisplayedAp: (Character) -> Int, hasFled: (Character) -> Boolean) {
         heroTable.remove()
-        heroTable = hudBuilder.createHeroTable(heroes, getCurrentAp, hasFled, currentParticipant.invoke().character.name)
+        heroTable = hudBuilder.createHeroTable(heroes, getDisplayedAp, hasFled, currentParticipant.invoke().character.name)
         stage.addActor(heroTable)
     }
 
-    fun updateEnemyTable(enemies: List<EnemyItem>, getCurrentAp: (Character) -> Int) {
+    fun updateEnemyTable(enemies: List<EnemyItem>, getDisplayedAp: (Character) -> Int) {
         enemyTable.remove()
-        enemyTable = hudBuilder.createEnemyTable(enemies, getCurrentAp, currentParticipant.invoke().character.name)
+        enemyTable = hudBuilder.createEnemyTable(enemies, getDisplayedAp, currentParticipant.invoke().character.name)
         stage.addActor(enemyTable)
     }
 

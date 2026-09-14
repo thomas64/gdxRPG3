@@ -12,16 +12,16 @@ class TurnManager(
     val currentParticipant: Participant get() = participants.first()
     val troubadourEffects = TroubadourEffectHandler(participants)
     var amountOfTurns: Int = 0; private set
+    private var isBattleStarted: Boolean = false
 
     init {
-        participants.increaseTurnCounters()
-        participants.sort()
+        determineTurnOrder()
     }
 
     private class Sim(
         val participant: Participant,
         var counter: Int,
-        val rate: Int
+        val gain: Int
     )
 
     fun getOnlyAllies(): List<Participant> {
@@ -38,9 +38,13 @@ class TurnManager(
 
     fun simulateForecast(count: Int): List<Participant> {
         val sim: MutableList<Sim> = participants
-            .map { Sim(it, it.turnCounter, it.tickRate) }
+            .map { Sim(it, it.turnCounter, it.turnCounterGain) }
             .toMutableList()
         val forecast: MutableList<Participant> = mutableListOf()
+
+        if (!isBattleStarted) {
+            sim.determineSimOrder()
+        }
 
         forecast.add(sim.first().participant)
         repeat(count - 1) {
@@ -50,18 +54,38 @@ class TurnManager(
         return forecast
     }
 
-    // Mirrors the turn-order logic of startTurnOfNextParticipant (tick, sort) on throwaway copies.
+    // Mirrors the turn-order logic of startTurnOfNextParticipant (increase counters, sort) on throwaway copies.
     // Keep in sync with startTurnOfNextParticipant, otherwise the forecast no longer matches the real order.
     private fun advanceSim(sim: MutableList<Sim>) {
         if (sim.size == 1) return
 
         sim[0].counter -= TURN_THRESHOLD
-        while (sim.none { it.counter >= TURN_THRESHOLD }) {
-            sim.forEach { it.counter += it.rate }
+        sim.increaseCountersAndSort()
+    }
+
+    private fun MutableList<Sim>.determineSimOrder() {
+        this.forEach { it.counter = 0 }
+        this.increaseCountersAndSort()
+    }
+
+    private fun MutableList<Sim>.increaseCountersAndSort() {
+        while (this.none { it.counter >= TURN_THRESHOLD }) {
+            this.forEach { it.counter += it.gain }
         }
-        sim.sortWith(turnOrderComparator({ it.counter },
-                                         { it.participant.isHero },
-                                         { it.participant.character.name }))
+        this.sortWith(turnOrderComparator({ it.counter },
+                                          { it.participant.isHero },
+                                          { it.participant.character.name }))
+    }
+
+    fun startFirstTurn() {
+        isBattleStarted = true
+        currentParticipant.refreshActionPoints()
+    }
+
+    fun determineTurnOrder() {
+        participants.forEach { it.turnCounter = 0 }
+        participants.increaseTurnCounters()
+        participants.sort()
     }
 
     fun setNextTurn() {
@@ -88,7 +112,7 @@ class TurnManager(
         return heroToFlee
     }
 
-    // Tick-and-sort logic is mirrored by advanceSim for the forecast. Keep both in sync.
+    // Increase-counters-and-sort logic is mirrored by advanceSim for the forecast. Keep both in sync.
     private fun startTurnOfNextParticipant() {
         participants.increaseTurnCounters()
         participants.sort()
@@ -119,23 +143,16 @@ class TurnManager(
 
     fun stagger(target: Participant) {
         target.staggerChance /= 2f
-        target.currentAP = 0
-        if (participants.size == 2) {
-            target.stagger()
-        } else if (target == participants.last()) {
-            target.setNegativeTurnCounter()
-        } else {
-            target.turnCounter = 0
-            target.moveToBottom()
-        }
+        target.stagger()
     }
 
     fun getParticipant(name: String): Participant {
         return participants.first { it.character.name == name }
     }
 
-    fun getCurrentApOf(character: Character): Int {
-        return participants.firstOrNull { it.character == character }?.currentAP ?: 0
+    fun getDisplayedApOf(character: Character): Int {
+        val participant: Participant = participants.firstOrNull { it.character == character } ?: return 0
+        return if (isBattleStarted && participant == currentParticipant) participant.currentAP else participant.projectedAP
     }
 
     fun resetTemporaryBonusesAfterBattle() {
@@ -175,11 +192,6 @@ class TurnManager(
         return compareByDescending(counterOf)
             .thenByDescending(isHeroOf)
             .thenBy(nameOf)
-    }
-
-    private fun Participant.moveToBottom() {
-        participants.remove(this)
-        participants.add(this)
     }
 
     private fun createParticipants(): MutableList<Participant> {

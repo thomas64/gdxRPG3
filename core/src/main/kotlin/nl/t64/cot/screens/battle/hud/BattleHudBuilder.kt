@@ -55,7 +55,7 @@ class BattleHudBuilder {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     fun createHeroTable(heroes: List<HeroItem>,
-                        getCurrentAp: (Character) -> Int,
+                        getDisplayedAp: (Character) -> Int,
                         hasFled: (Character) -> Boolean,
                         currentParticipantName: String
     ): Table {
@@ -64,17 +64,17 @@ class BattleHudBuilder {
             columnDefaults(0).width(Constant.FACE_SIZE)
             top().left()
             setPosition(20f, Gdx.graphics.height - 20f)
-            heroes.forEach { addHero(it, getCurrentAp, hasFled, currentParticipantName) }
+            heroes.forEach { addHero(it, getDisplayedAp, hasFled, currentParticipantName) }
         }
     }
 
     private fun Table.addHero(hero: HeroItem,
-                              getCurrentAp: (Character) -> Int,
+                              getDisplayedAp: (Character) -> Int,
                               hasFled: (Character) -> Boolean,
                               currentParticipantName: String
     ) {
         val statsStack = Stack()
-        statsStack.add(createStatsTableFor(hero, getCurrentAp))
+        statsStack.add(createStatsTableFor(hero, getDisplayedAp))
         statsStack.add(createWeaponSlotFor(hero))
         statsStack.add(createShieldSlotFor(hero))
         statsStack.add(Image(Utils.createFullBorderWhite()))
@@ -87,8 +87,8 @@ class BattleHudBuilder {
         add(statsStack).row()
     }
 
-    private fun createStatsTableFor(hero: HeroItem, getCurrentAp: (Character) -> Int): Table {
-        val currentAp: Int = getCurrentAp.invoke(hero)
+    private fun createStatsTableFor(hero: HeroItem, getDisplayedAp: (Character) -> Int): Table {
+        val displayedAp: Int = getDisplayedAp.invoke(hero)
         val maximumAP: Int = hero.getCalculatedActionPoints()
 
         return Table(tableSkin).apply {
@@ -99,7 +99,7 @@ class BattleHudBuilder {
             add("SP:").width(40f).padLeft(10f)
             add(createSpBar(hero)).width(BAR_WIDTH).height(BAR_HEIGHT).padRight(10f).row()
             add("AP:").width(40f).padLeft(10f)
-            add(createApDots(currentAp, maximumAP)).width(BAR_WIDTH).height(BAR_HEIGHT).padRight(10f).row()
+            add(createApDots(displayedAp, maximumAP)).width(BAR_WIDTH).height(BAR_HEIGHT).padRight(10f).row()
             background = transparent
         }
     }
@@ -143,7 +143,7 @@ class BattleHudBuilder {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     fun createEnemyTable(enemies: List<EnemyItem>,
-                         getCurrentAp: (Character) -> Int,
+                         getDisplayedAp: (Character) -> Int,
                          currentParticipantName: String
     ): Table {
         return Table(tableSkin).apply {
@@ -151,16 +151,16 @@ class BattleHudBuilder {
             columnDefaults(1).width(Constant.FACE_SIZE)
             top().left()
             setPosition(Gdx.graphics.width - Constant.FACE_SIZE - 185f - 40f, Gdx.graphics.height - 20f)
-            enemies.forEach { addEnemy(it, getCurrentAp, currentParticipantName) }
+            enemies.forEach { addEnemy(it, getDisplayedAp, currentParticipantName) }
         }
     }
 
     private fun Table.addEnemy(enemy: EnemyItem,
-                               getCurrentAp: (Character) -> Int,
+                               getDisplayedAp: (Character) -> Int,
                                currentParticipantName: String
     ) {
         val statsStack = Stack()
-        statsStack.add(createStatsTableFor(enemy, getCurrentAp))
+        statsStack.add(createStatsTableFor(enemy, getDisplayedAp))
         statsStack.add(createWeaponSlotFor(enemy))
         statsStack.add(createShieldSlotFor(enemy))
         statsStack.add(Image(Utils.createFullBorderWhite()))
@@ -169,9 +169,9 @@ class BattleHudBuilder {
         add(createFaceImage(enemy, currentParticipantName, isFlipped = false)).row()
     }
 
-    private fun createStatsTableFor(enemy: EnemyItem, getCurrentAp: (Character) -> Int): Table {
+    private fun createStatsTableFor(enemy: EnemyItem, getDisplayedAp: (Character) -> Int): Table {
         val isEnemyKnown: Boolean = gameData.inventory.containsBook(enemy.id)
-        val currentAp: Int = getCurrentAp.invoke(enemy)
+        val displayedAp: Int = getDisplayedAp.invoke(enemy)
         val maximumAP: Int = enemy.getCalculatedActionPoints()
 
         return Table(tableSkin).apply {
@@ -182,7 +182,7 @@ class BattleHudBuilder {
             add(createHpBar(enemy, isEnemyKnown)).width(BAR_WIDTH).height(BAR_HEIGHT).padRight(10f).row()
             if (isEnemyKnown) {
                 add("AP:").width(40f).padLeft(10f)
-                add(createApDots(currentAp, maximumAP)).width(BAR_WIDTH).height(BAR_HEIGHT).padRight(10f).row()
+                add(createApDots(displayedAp, maximumAP)).width(BAR_WIDTH).height(BAR_HEIGHT).padRight(10f).row()
             }
             background = transparent
         }
@@ -347,23 +347,23 @@ class BattleHudBuilder {
         return Label("${hero.currentSp} ", smallFontStyle).apply { setAlignment(Align.right) }
     }
 
-    private fun createApDots(currentAp: Int, maximumAP: Int): Table {
+    private fun createApDots(displayedAp: Int, maximumAP: Int): Table {
         val apTable = Table().apply { left() }
 
-        repeat(currentAp.coerceAtMost(maximumAP)) {
+        repeat(displayedAp.coerceAtMost(maximumAP)) {
             val filledDot = Color.LIME.toImage()
             apTable.add(filledDot).size(10f, 12f).padRight(5f)
         }
 
         when {
-            currentAp < maximumAP -> {
-                repeat(maximumAP - currentAp) {
+            displayedAp < maximumAP -> {
+                repeat(maximumAP - displayedAp) {
                     val emptyDot = Color.GRAY.toImage()
                     apTable.add(emptyDot).size(10f, 12f).padRight(5f)
                 }
             }
-            currentAp > maximumAP -> {
-                repeat(currentAp - maximumAP) {
+            displayedAp > maximumAP -> {
+                repeat(displayedAp - maximumAP) {
                     val bonusDot = Color.CYAN.toImage()
                     apTable.add(bonusDot).size(10f, 12f).padRight(5f)
                 }

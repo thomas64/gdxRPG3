@@ -61,7 +61,7 @@ class EnemyItem(
     }
 
     override fun getCalculatedActionPoints(): Int {
-        return ap.coerceAtMost(MAXIMUM_AP)
+        return ap.coerceAtMost(AP_CAP)
             .takeUnless { it == 0 }
             ?: super.getCalculatedActionPoints()
     }
