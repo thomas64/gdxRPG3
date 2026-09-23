@@ -58,11 +58,11 @@ class GraphicsEnemy(spriteId: String) : GraphicsComponent() {
     }
 
     private fun createMarker(event: LoadEntityEvent): OverheadMarker {
+        val conversationOrBattleId: String = event.conversationOrBattleId!!
+        val threatLevel: ThreatLevel = ThreatLevel.forBattle(conversationOrBattleId)
         if (isAlreadyDefeated) {
-            return LaurelMarker()
+            return LaurelMarker(threatLevel)
         } else {
-            val conversationOrBattleId: String = event.conversationOrBattleId!!
-            val threatLevel = ThreatLevel.forBattle(conversationOrBattleId)
             return ThreatMarker(threatLevel)
         }
     }
