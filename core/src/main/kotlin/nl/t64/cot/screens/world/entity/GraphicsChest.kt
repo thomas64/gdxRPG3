@@ -18,6 +18,7 @@ class GraphicsChest : GraphicsComponent() {
         if (event is LoadEntityEvent) {
             position = event.position
             state = event.state!!
+            setFrame(0f)
         }
         if (event is StateEvent) {
             state = event.state

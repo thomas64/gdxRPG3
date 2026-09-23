@@ -28,6 +28,7 @@ class GraphicsScheduledNpc(spriteId: String) : GraphicsComponent() {
                 stateMarker = event.stateIcon?.let { StateMarker(it) }
             }
             setNewFrameDuration()
+            refreshCurrentFrame()
         }
         if (event is DirectionEvent) {
             direction = event.direction

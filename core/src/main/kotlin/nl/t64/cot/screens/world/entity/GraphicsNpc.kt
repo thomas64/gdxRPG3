@@ -17,6 +17,8 @@ open class GraphicsNpc(spriteId: String) : GraphicsComponent() {
         if (event is LoadEntityEvent) {
             state = event.state!!
             direction = event.direction!!
+            position = event.position
+            refreshCurrentFrame()
         }
         if (event is StateEvent) {
             state = event.state

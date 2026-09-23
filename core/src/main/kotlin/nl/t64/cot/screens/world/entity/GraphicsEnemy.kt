@@ -22,6 +22,8 @@ class GraphicsEnemy(spriteId: String) : GraphicsComponent() {
         if (event is LoadEntityEvent) {
             state = event.state!!
             direction = event.direction!!
+            position = event.position
+            refreshCurrentFrame()
             isAlreadyDefeated = determineDefeatedInPreviousCycle(event)
             overheadMarker = createMarker(event)
         }

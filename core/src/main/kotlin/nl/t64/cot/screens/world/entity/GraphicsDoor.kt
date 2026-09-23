@@ -29,6 +29,7 @@ class GraphicsDoor(
             position = event.position
             state = event.state!!
             frameTime = if (state == EntityState.OPENED) animationDuration else 0f
+            setFrame(0f)
         }
         if (event is StateEvent) {
             state = event.state

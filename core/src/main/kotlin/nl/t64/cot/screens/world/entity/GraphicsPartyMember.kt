@@ -20,6 +20,8 @@ class GraphicsPartyMember(spriteId: String) : GraphicsComponent() {
         if (event is LoadEntityEvent) {
             state = event.state!!
             direction = event.direction!!
+            setEventPosition(event.position)
+            refreshCurrentFrame()
         }
         if (event is StateEvent) {
             state = event.state
@@ -28,8 +30,7 @@ class GraphicsPartyMember(spriteId: String) : GraphicsComponent() {
             direction = if (mapManager.isSpecialDirectionNorth(feetPosition)) Direction.NORTH else event.direction
         }
         if (event is PositionEvent) {
-            position = event.position
-            feetPosition = Vector2(position.x + Constant.HALF_TILE_SIZE, position.y)
+            setEventPosition(event.position)
         }
         if (event is OnDetectionEvent) {
             if (event.state == EntityState.IDLE) {
@@ -50,6 +51,11 @@ class GraphicsPartyMember(spriteId: String) : GraphicsComponent() {
 
     override fun renderOnMiniMap(entity: Entity, batch: Batch, shapeRenderer: ShapeRenderer) {
         // empty
+    }
+
+    private fun setEventPosition(eventPosition: Vector2) {
+        position = eventPosition
+        feetPosition = Vector2(position.x + Constant.HALF_TILE_SIZE, position.y)
     }
 
 }

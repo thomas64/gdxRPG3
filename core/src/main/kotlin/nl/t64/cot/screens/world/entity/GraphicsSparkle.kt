@@ -25,6 +25,7 @@ class GraphicsSparkle(
     override fun receive(event: Event) {
         if (event is LoadEntityEvent) {
             position = event.position
+            setFrame(0f)
         }
     }
 
