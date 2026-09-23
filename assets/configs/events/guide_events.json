@@ -91,7 +91,7 @@
   "guide_event_slow"                 : {
     "type": "tutorial",
     "text": [
-      "With the [BLUE]%slow%[BLACK] you can toggle to move stealthily.",
+      "Press the [BLUE]%slow%[BLACK] once to crouch; press it again to walk.",
       "Enemies will have a harder time detecting you,",
       "enabling you to avoid battles if necessary.",
       "The bottom right corner shows whether you're crouching."
@@ -123,7 +123,7 @@
     "type"     : "tutorial",
     "condition": ["been_in_fairy_town"],
     "text"     : [
-      "With the [BLUE]%fast%[BLACK] you can toggle to run.",
+      "Press the [BLUE]%fast%[BLACK] once to run; press it again to walk.",
       "You'll move faster, but enemies will detect you more easily.",
       "The bottom right corner shows whether you're running."
     ]

@@ -19,7 +19,7 @@ object DoorScheduleDatabase {
 
         // garrin
         DoorSchedulePart("lastdenn",  "11:23", "11:25", "door_lastdenn_garrin",         listOf("is_garrin_possessed")),
-        DoorSchedulePart("lastdenn",  "14:56", "15:00", "door_lastdenn_jail",           listOf("is_garrin_possessed")),
+        DoorSchedulePart("lastdenn",  "14:56", "15:02", "door_lastdenn_jail",           listOf("is_garrin_possessed")),
 
         // santino
         DoorSchedulePart("lastdenn",  "12:29", "12:31", "door_large_round"),

@@ -19,16 +19,16 @@ private const val X_WIDTH = 24f
 private const val X_HEIGHT = 24f
 private const val OUTLINE = 2f
 private const val STACK_STEP = 7f
-private const val DIAGONAL = 0.70710678f // 1/√2: component van een diagonale eenheidsvector.
+private const val DIAGONAL = 0.70710677f // 1/√2: component of a diagonal unit vector.
 
 private const val MARGIN_ABOVE_HEAD = 6f
 private const val BOB_AMPLITUDE = 3f
 private const val BOB_SPEED = 4f
 
 /**
- * Tekent boven een vijand een zwevende threat-indicator: chevrons waarvan vorm en kleur aangeven hoe
- * zwaar de battle is voor de huidige party (zie [ThreatLevel]). ▼▼ trivial, ▼ zwakker, ▬ gelijk,
- * ▲ sterker, ▲▲ gevaarlijk, ✖ dodelijk. Elke glyph krijgt een zwarte rand voor contrast tegen elke achtergrond.
+ * Draws a floating threat indicator above an enemy: chevrons whose shape and color show how
+ * hard the battle is for the current party (see [ThreatLevel]). ▼▼ trivial, ▼ weaker, ▬ even,
+ * ▲ stronger, ▲▲ dangerous, ✖ deadly. Every glyph gets a black outline for contrast against any background.
  */
 class ThreatMarker(
     private val threatLevel: ThreatLevel
@@ -74,8 +74,8 @@ class ThreatMarker(
     }
 
     private fun drawX(batch: Batch, centerX: Float, bottomY: Float) {
-        // De zwarte rand zit al in de texture gebakken (zie createXTexture), dus géén drawWithOutline:
-        // een opgeschaalde losse outline laat bij de spitse tips zwarte punten uitsteken.
+        // The black outline is already baked into the texture (see createXTexture), so no drawWithOutline:
+        // a scaled-up separate outline would make black points stick out at the sharp tips.
         val x: Float = centerX - X_WIDTH / 2f
         batch.color = threatLevel.color
         batch.draw(xTexture, x, bottomY, X_WIDTH, X_HEIGHT)
@@ -104,7 +104,7 @@ class ThreatMarker(
             val height = 28
             val pixmap = Pixmap(width, height, Pixmap.Format.RGBA8888)
             pixmap.setColor(Color.WHITE)
-            // Pixmap-y loopt van boven (0) naar onder; een opwaartse pijl heeft de punt dus bovenaan.
+            // Pixmap y runs from top (0) to bottom, so an upward arrow has its point at the top.
             if (pointsUp) {
                 pixmap.fillTriangle(width / 2, 0, 0, height - 1, width - 1, height - 1)
             } else {
@@ -116,12 +116,12 @@ class ThreatMarker(
             }
         }
 
-        // Een schuin kruis (✖): twee diagonale balken van hoek naar hoek, met de zwarte rand meteen
-        // ingebakken. Bewust géén medisch plus-kruis, dat leest als healing. Elke balk is een gedraaide
-        // rechthoek (box), zodat de uiteinden recht afgesneden zijn — scherp en agressief, niet rond.
-        // Wit als de pixel in de smalle box valt; daaromheen tot border = zwart.
-        // De texture is bewust ruimer dan de X zelf: de zwarte rand steekt bij de tips schuin naar buiten
-        // en zou anders tegen de texture-rand afgekapt worden (geen zwart in de buitenhoeken).
+        // A diagonal cross (✖): two diagonal bars from corner to corner, with the black outline baked in.
+        // Deliberately not a medical plus sign, which reads as healing. Each bar is a rotated
+        // rectangle (box), so the ends are cut off square — sharp and aggressive, not round.
+        // White if the pixel falls within the narrow box; around it, up to border, black.
+        // The texture is deliberately larger than the X itself: the black outline sticks out diagonally at the tips
+        // and would otherwise be clipped by the texture edge (no black in the outer corners).
         private fun createXTexture(): Texture {
             val size = 60
             val center: Float = (size - 1) / 2f
@@ -153,8 +153,8 @@ class ThreatMarker(
             }
         }
 
-        // Zit (relX, relY) binnen de gedraaide rechthoek met as-richting (dirX, dirY)? halfLength is de halve
-        // lengte langs de as, halfWidth de halve dikte er loodrecht op. De rechte hoeken maken de scherpe tips.
+        // Is (relX, relY) inside the rotated rectangle with axis direction (dirX, dirY)? halfLength is half the
+        // length along the axis, halfWidth half the thickness perpendicular to it. The right angles make the sharp tips.
         private fun isInsideArm(
             relX: Float, relY: Float, dirX: Float, dirY: Float, halfLength: Float, halfWidth: Float,
         ): Boolean {

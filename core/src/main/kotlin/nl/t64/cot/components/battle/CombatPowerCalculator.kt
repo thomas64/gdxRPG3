@@ -3,8 +3,11 @@ package nl.t64.cot.components.battle
 import nl.t64.cot.components.party.abilities.Target
 import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.components.party.stats.StatItemId
+import kotlin.math.pow
 import kotlin.math.sqrt
 
+
+private const val SPEED_AND_AP_WEIGHT = 1.2f   // > 1: speed and ap count a bit more than linear
 
 class CombatPowerCalculator {
 
@@ -15,9 +18,9 @@ class CombatPowerCalculator {
         } else {
             character.getCalculatedTotalDamage().coerceAtLeast(1)
         }
-        val attackPowerPerTurn: Float =
-            character.getCalculatedActionPoints().coerceAtLeast(1) * character.getBestDamagePerAp()
-        val turnFrequency: Int = 10 + character.getCalculatedTotalStatOf(StatItemId.SPEED)
+        val actionPoints: Float = character.getCalculatedActionPoints().coerceAtLeast(1).toFloat().pow(SPEED_AND_AP_WEIGHT)
+        val turnFrequency: Float = (10 + character.getCalculatedTotalStatOf(StatItemId.SPEED)).toFloat().pow(SPEED_AND_AP_WEIGHT)
+        val attackPowerPerTurn: Float = actionPoints * character.getBestDamagePerAp()
         val offenseOverTime: Float = damage * attackPowerPerTurn * turnFrequency
         return sqrt(effectiveHp * offenseOverTime)
     }

@@ -197,9 +197,9 @@ class BattleScreen : Screen {
 
         when {
             battleState.phase != BattlePhase.BATTLE -> return
+            gameData.party.getPlayer().isDead -> gameOver()
             enemies.getAll().none { it.isAlive } -> winBattle()
             turnManager.getOnlyHeroes().isEmpty() -> fleeBattle()
-            gameData.party.getPlayer().isDead -> gameOver()
             currentParticipant.isHero -> takeTurnHero()
             else -> takeTurnEnemy()
         }
