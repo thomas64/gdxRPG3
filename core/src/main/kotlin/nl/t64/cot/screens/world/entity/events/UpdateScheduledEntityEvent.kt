@@ -11,5 +11,6 @@ class UpdateScheduledEntityEvent(
     val direction: Direction,
     val position: Vector2,
     val conversationId: String,
-    val stateIcon: StateIcon?
+    val stateIcon: StateIcon?,
+    val isEnemy: Boolean
 ) : Event

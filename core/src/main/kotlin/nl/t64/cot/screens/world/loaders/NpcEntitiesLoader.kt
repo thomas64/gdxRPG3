@@ -26,7 +26,7 @@ internal class NpcEntitiesLoader(private val currentMap: GameMap) {
         currentMap.npcs
             .filter { it.isMeetingConditions() }
             .filterNot { it.isEnemy && gameData.battles.isBattleWon(it.conversation) }
-            .forEach { loadNpcEntity(it) }
+            .forEach { loadNpc(it) }
     }
 
     private fun loadHeroes() {
@@ -40,6 +40,14 @@ internal class NpcEntitiesLoader(private val currentMap: GameMap) {
             .filter { it.isMeetingConditions() }
             .filterNot { gameData.battles.isBattleWon(it.battleId) }
             .forEach { loadEnemy(it) }
+    }
+
+    private fun loadNpc(gameMapNpc: GameMapNpc) {
+        if (gameMapNpc.isEnemy) {
+            loadNpcEntity(gameMapNpc, GraphicsEnemyNpc(gameMapNpc.name))
+        } else {
+            loadNpcEntity(gameMapNpc)
+        }
     }
 
     private fun loadHero(gameMapHero: GameMapHero) {

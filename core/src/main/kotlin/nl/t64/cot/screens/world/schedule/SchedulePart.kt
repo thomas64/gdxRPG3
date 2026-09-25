@@ -20,6 +20,7 @@ class SchedulePart(
     private val endPositionId: String,
     val conversationId: String = "",
     val stateIcon: StateIcon? = null,
+    val isEnemy: Boolean = false,
     private val conditions: List<String> = emptyList()
 ) {
 

@@ -3,6 +3,7 @@ package nl.t64.cot.screens.world.schedule
 import nl.t64.cot.Utils.brokerManager
 import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.screens.world.entity.*
+import nl.t64.cot.screens.world.entity.events.RemoveScheduledEntityEvent
 import nl.t64.cot.screens.world.entity.events.UpdateScheduledEntityEvent
 
 
@@ -23,7 +24,7 @@ abstract class EntitySchedule {
     }
 
     private fun SchedulePart.handle() {
-        entity.send(UpdateScheduledEntityEvent(state, direction, getCurrentPosition(), conversationId, stateIcon))
+        entity.send(UpdateScheduledEntityEvent(state, direction, getCurrentPosition(), conversationId, stateIcon, isEnemy))
         worldScreen.addScheduledEntity(entity)
         handleTalking()
         handleBlocking()
@@ -55,6 +56,7 @@ abstract class EntitySchedule {
     }
 
     private fun remove() {
+        entity.send(RemoveScheduledEntityEvent)
         brokerManager.bumpObservers.removeObserver(entity)
         brokerManager.blockObservers.removeObserver(entity)
         brokerManager.actionObservers.removeObserver(entity)
@@ -64,7 +66,7 @@ abstract class EntitySchedule {
     protected abstract fun handleSideEffects()
 
     protected fun setupInvisibleTalking(part: SchedulePart) {
-        val event = UpdateScheduledEntityEvent(part.state, part.direction, part.getCurrentPosition(), part.conversationId, null)
+        val event = UpdateScheduledEntityEvent(part.state, part.direction, part.getCurrentPosition(), part.conversationId, null, false)
         invisibleTalking.send(event)
         worldScreen.addScheduledEntity(invisibleTalking)
         brokerManager.actionObservers.addObserver(invisibleTalking)
