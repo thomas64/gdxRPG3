@@ -144,6 +144,7 @@ data class QuestGraph(
             setCompleteTasksComplete()
             setAcceptedAndPossiblyShowMessage()
         }
+        completeFindItemTasksWithUsedTarget()
         possibleFinish(true)
     }
 
@@ -323,6 +324,7 @@ data class QuestGraph(
         if (!isTaskComplete(taskId)) {
             val questTask = tasks[taskId]!!
             questTask.setComplete()
+            completeFindItemTasksWithUsedTarget()
             unhideTaskWithLinkedTask(questTask)
             if (showTooltip && !questTask.isReset) showMessageTooltipQuestUpdated()
             possibleFinish(showTooltip)
@@ -387,6 +389,21 @@ data class QuestGraph(
                 finish(showTooltip)
             }
         }
+    }
+
+    // a FIND_ITEM task can be reset while its item is already used by a CHECK_WITH_ITEM task, which never resets.
+    // this should not get in the way of finishing the quest.
+    // so if a CHECK_WITH_ITEM task is complete, then the corresponding FIND_ITEM task should also be set to complete.
+    private fun completeFindItemTasksWithUsedTarget() {
+        val usedTargets: List<Map<String, Int>> = tasks.values
+            .filter { it.type == QuestTaskType.CHECK_WITH_ITEM }
+            .filter { it.isComplete }
+            .map { it.target }
+        tasks.values
+            .filter { it.type == QuestTaskType.FIND_ITEM }
+            .filter { !it.isComplete }
+            .filter { it.target in usedTargets }
+            .forEach { it.setComplete() }
     }
 
     private fun isReadyToBeFinished(): Boolean {
