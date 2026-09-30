@@ -71,7 +71,7 @@
   },
   "standing_guard_near_crystal"      : {
     "name"   : "Lastdenn Guard",
-    "startAt": [{"condition": ["_r_!=_u_q_quest_lastdenn_garrin", "_r_!=_f_q_quest_lastdenn_garrin", "_time_between_12:00_and_13:00", "is_garrin_possessed"], "startId": "50"}],
+    "startAt": [{"condition": ["_r_!=_u_q_quest_lastdenn_garrin", "_r_!=_f_q_quest_lastdenn_garrin", "_time_between_11:00_and_13:00", "is_garrin_possessed"], "startId": "50"}],
     "phrases": {
       "1" : {"text": ["This is the city of Lastdenn."]},
       "2" : {"text": ["Don't cause any disturbances."], "choices": [{"command": "EXIT"}]},
@@ -122,7 +122,7 @@
   "lastdenn_pier_guards"             : {
     "name"   : "Lastdenn Guard",
     "startAt": [
-      {"condition": ["_r_!=_u_q_quest_lastdenn_garrin", "_r_!=_f_q_quest_lastdenn_garrin", "_time_between_12:00_and_13:00", "is_garrin_possessed"], "startId": "50"},
+      {"condition": ["_r_!=_u_q_quest_lastdenn_garrin", "_r_!=_f_q_quest_lastdenn_garrin", "_time_between_11:00_and_13:00", "is_garrin_possessed"], "startId": "50"},
       {"condition": ["_time_after_19:15", "_c_!=_u_q_quest_lastdenn_school"], "startId": "20"},
       {"condition": ["_time_after_19:15"], "startId": "30"}
     ],

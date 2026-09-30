@@ -23,7 +23,8 @@
       },
       "8" : {"text": ["Ha ha! Sure! Now if you run into any ghosts, you can destroy them in the name of Evdos! Ha ha!"], "choices": [{"command": "EXIT"}]},
       "20": {"text": ["But Paton says what now? He told you there's 'proof' in my drawer, and now you want the key for it?"]},
-      "21": {"text": ["No. That drawer was my wife's, and it stays shut. Ghosts, proof — none of it. Leave us be."], "choices": [{"command": "EXIT"}]}
+      "21": {"text": ["No. That drawer was my wife's. The keys stays on me, and the drawer stays shut!"]},
+      "22": {"text": ["Ghosts, proof — none of it. She wa... No! Leave us be."], "choices": [{"command": "EXIT"}]}
     }
   },
   "paton_hiding"               : {
@@ -216,7 +217,7 @@
           {"condition": ["i_rc_>=_a_q_quest_lastdenn_garrin", "i_tc_3_q_quest_lastdenn_garrin"], "text": "->", "nextId": "20"}
         ]
       },
-      "11"  : {"text": ["Just go. I have nothing to say to you."], "choices": [{"command": "EXIT"}]},
+      "11"  : {"text": ["Just go. I don't know what came over me out there..."], "choices": [{"command": "EXIT"}]},
       "20"  : {"text": ["I don't believe in such things. Ghosts. Nonsense. There must be another explanation."]},
       "21"  : {
         "choices": [
