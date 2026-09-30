@@ -17,13 +17,7 @@ data class QuestProgress(
     val isHidden: Boolean = false,
     val isHiddenInQuestLog: Boolean = false,
     val tasks: Map<String, QuestTaskProgress> = emptyMap()
-) {
-
-    // a quest that nobody touched has no progress at all, so it does not have to be stored.
-    fun isChanged(): Boolean {
-        return this != QuestProgress()
-    }
-}
+)
 
 data class QuestGraph(
     val id: String = "",
@@ -47,6 +41,11 @@ data class QuestGraph(
     var isHiddenInQuestLog: Boolean = false
 
     private val titleWithoutPrefix: String = title.removeSuffix(" [M]")
+    private val isInitiallyHidden: Boolean = isHidden
+
+    fun isChanged(): Boolean {
+        return toProgress() != QuestProgress(isHidden = isInitiallyHidden)
+    }
 
     fun toProgress(): QuestProgress {
         return QuestProgress(currentState = currentState,
@@ -56,8 +55,8 @@ data class QuestGraph(
                              isHidden = isHidden,
                              isHiddenInQuestLog = isHiddenInQuestLog,
                              tasks = tasks
-                                 .mapValues { (_, task) -> task.toProgress() }
-                                 .filterValues { it.isChanged() })
+                                 .filterValues { it.isChanged() }
+                                 .mapValues { (_, task) -> task.toProgress() })
     }
 
     fun applyProgress(progress: QuestProgress) {

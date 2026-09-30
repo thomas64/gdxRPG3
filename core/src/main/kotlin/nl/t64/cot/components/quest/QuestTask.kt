@@ -14,13 +14,7 @@ data class QuestTaskProgress(
     val isFailed: Boolean = false,
     val isTargetAlternateUsed: Boolean = false,
     val isPhraseUpdated: Boolean = false
-) {
-
-    // a task that nobody touched has no progress at all, so it does not have to be stored.
-    fun isChanged(): Boolean {
-        return this != QuestTaskProgress()
-    }
-}
+)
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 class QuestTask(
@@ -44,6 +38,12 @@ class QuestTask(
     var isComplete: Boolean = false
     var isFailed: Boolean = false
     var isTargetAlternateUsed: Boolean = false
+    private val initialIsHidden: Boolean = isHidden
+
+
+    fun isChanged(): Boolean {
+        return toProgress() != QuestTaskProgress(isHidden = initialIsHidden)
+    }
 
     fun toProgress(): QuestTaskProgress {
         return QuestTaskProgress(isHidden = isHidden,

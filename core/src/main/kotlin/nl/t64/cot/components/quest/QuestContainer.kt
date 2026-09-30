@@ -9,8 +9,8 @@ class QuestContainer {
 
     fun toProgress(): Map<String, QuestProgress> {
         return quests
-            .mapValues { (_, quest) -> quest.toProgress() }
             .filterValues { it.isChanged() }
+            .mapValues { (_, quest) -> quest.toProgress() }
     }
 
     fun applyProgress(progress: Map<String, QuestProgress>) {
