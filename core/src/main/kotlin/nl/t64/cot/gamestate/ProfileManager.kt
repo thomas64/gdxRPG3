@@ -16,16 +16,16 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 
-private const val SAVE_FILES = "save1.dat,save2.dat,save3.dat,save4.dat,save5.dat,autosave.dat"
-private const val FOW_FILES = "fow1.dat,fow2.dat,fow3.dat,fow4.dat,fow5.dat,autofow.dat"
-private const val LOADING = ",,Loading...,,,"
+private const val SAVE_FILES = "save1.dat,save2.dat,save3.dat,save4.dat,save5.dat,save6.dat,save7.dat,autosave.dat"
+private const val FOW_FILES = "fow1.dat,fow2.dat,fow3.dat,fow4.dat,fow5.dat,fow6.dat,fow7.dat,autofow.dat"
+private const val LOADING = ",,,Loading...,,,,"
 private const val PROFILE_ID_KEY = "id"
 private const val PROFILE_INDEX_KEY = "index"
 private const val PROFILE_SAVE_DATE_KEY = "saveDate"
 private const val PROFILE_SAVE_STATE_KEY = "saveState"
 private const val PROFILE_FOG_OF_WAR_KEY = "fogOfWar"
 private const val DATE_PATTERN = "yyyy-MM-dd HH:mm"
-const val AUTOSAVE_INDEX = 5
+const val AUTOSAVE_INDEX = 7
 const val DEFAULT_EMPTY_PROFILE_VIEW = " [...]"
 const val INVALID_PROFILE_VIEW = " [Invalid]"
 
