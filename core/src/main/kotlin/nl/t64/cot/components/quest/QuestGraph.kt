@@ -175,11 +175,21 @@ data class QuestGraph(
             .forEach { setTaskComplete(it.key) }
     }
 
-    fun possibleSetFindItemTaskComplete() {
+    fun updateFindItemTasks(changedItemId: String) {
         if (currentState.isEqualOrLowerThan(QuestState.ACCEPTED)) {
             tasks.filterValues { it.type == QuestTaskType.FIND_ITEM }
-                .filterValues { it.hasTargetInInventoryOrEquipment() }
-                .forEach { setTaskComplete(it.key) }
+                .filterValues { !it.isComplete }
+                .filterValues { changedItemId in it.target }
+                .forEach { (taskId, task) -> updateFindItemTask(taskId, task) }
+        }
+    }
+
+    private fun updateFindItemTask(taskId: String, task: QuestTask) {
+        val progress: String? = task.getFindItemProgressForTooltip().takeUnless { task.isHidden || task.isReset }
+        if (task.hasTargetInInventoryOrEquipment()) {
+            setTaskComplete(taskId, progress = progress)
+        } else if (progress != null) {
+            showMessageTooltipQuestUpdated(progress)
         }
     }
 
@@ -319,13 +329,13 @@ data class QuestGraph(
             .forEach { setTaskComplete(it.key) }
     }
 
-    fun setTaskComplete(taskId: String, showTooltip: Boolean = true) {
+    fun setTaskComplete(taskId: String, showTooltip: Boolean = true, progress: String? = null) {
         if (!isTaskComplete(taskId)) {
             val questTask = tasks[taskId]!!
             questTask.setComplete()
             completeFindItemTasksWithUsedTarget()
             unhideTaskWithLinkedTask(questTask)
-            if (showTooltip && !questTask.isReset) showMessageTooltipQuestUpdated()
+            if (showTooltip && !questTask.isReset) showMessageTooltipQuestUpdated(progress)
             possibleFinish(showTooltip)
         }
     }
@@ -476,13 +486,16 @@ data class QuestGraph(
         }
     }
 
-    private fun showMessageTooltipQuestUpdated() {
+    private fun showMessageTooltipQuestUpdated(progress: String? = null) {
         if (shouldShowMessage()
             && !isHidden
             && (currentState == QuestState.ACCEPTED || resetState == QuestState.ACCEPTED)
             && (!isReadyToBeFinished() || (isSubQuest && isReadyToBeFinished()))
         ) {
-            worldScreen.showMessageTooltip("Quest updated:" + System.lineSeparator() + titleWithoutPrefix)
+            val message = listOfNotNull("Quest updated:",
+                                        titleWithoutPrefix,
+                                        progress).joinToString(System.lineSeparator())
+            worldScreen.showMessageTooltip(message)
         }
     }
 

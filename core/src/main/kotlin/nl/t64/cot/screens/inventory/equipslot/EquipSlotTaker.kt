@@ -63,8 +63,10 @@ internal class EquipSlotTaker(private val selector: EquipSlotSelector) {
 
     private fun dequipSourceSlot(addToTarget: () -> Unit) {
         sourceSlot.deselect()
-        sourceSlot.clearStack()
-        addToTarget.invoke()
+        gameData.inventory.updateQuestsOnceAfter {
+            sourceSlot.clearStack()
+            addToTarget.invoke()
+        }
         selector.setNewSelected(sourceSlot)
     }
 

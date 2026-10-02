@@ -1,5 +1,6 @@
 package nl.t64.cot.screens.inventory.inventoryslot
 
+import nl.t64.cot.Utils.gameData
 import nl.t64.cot.screens.inventory.InventoryUtils
 import nl.t64.cot.screens.inventory.itemslot.InventoryImage
 import nl.t64.cot.screens.inventory.itemslot.ItemSlot
@@ -37,8 +38,10 @@ internal class InventorySlotTaker(private val selector: ItemSlotSelector) {
 
     private fun exchangeWithEquipSlotOfSameInventoryGroup(targetSlot: ItemSlot) {
         sourceSlot.deselect()
-        sourceSlot.clearStack()
-        ItemSlotsExchanger(candidateItem, sourceSlot, targetSlot).exchange()
+        gameData.inventory.updateQuestsOnceAfter {
+            sourceSlot.clearStack()
+            ItemSlotsExchanger(candidateItem, sourceSlot, targetSlot).exchange()
+        }
         selector.setNewSelectedByIndex(sourceSlot.index)
     }
 
@@ -85,8 +88,10 @@ internal class InventorySlotTaker(private val selector: ItemSlotSelector) {
 
     private fun exchangeWithCounterpartSlot(targetSlot: ItemSlot) {
         sourceSlot.deselect()
-        val takeAmount: Int = getAndTakeAmount()
-        ItemSlotsExchanger(candidateItem, takeAmount, sourceSlot, targetSlot).exchange()
+        gameData.inventory.updateQuestsOnceAfter {
+            val takeAmount: Int = getAndTakeAmount()
+            ItemSlotsExchanger(candidateItem, takeAmount, sourceSlot, targetSlot).exchange()
+        }
         selector.setNewSelectedByIndex(sourceSlot.index)
     }
 

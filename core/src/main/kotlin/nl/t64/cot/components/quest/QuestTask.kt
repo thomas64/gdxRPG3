@@ -5,6 +5,7 @@ import nl.t64.cot.Utils.gameData
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.audio.stopAllSe
+import nl.t64.cot.components.party.inventory.InventoryDatabase
 
 
 data class QuestTaskProgress(
@@ -71,7 +72,7 @@ class QuestTask(
             isFailed -> "[FIREBRICK]x    $taskPhrase[BLACK]"
             isComplete -> "v    $taskPhrase"
             isReset -> "r    $taskPhrase"
-            else -> "      $taskPhrase"
+            else -> "      $taskPhrase${getFindItemProgressForQuestLog()}"
         }
     }
 
@@ -174,6 +175,41 @@ class QuestTask(
 
     private fun getTargetEntry(): Map.Entry<String, Int> {
         return target.iterator().next()
+    }
+
+    fun getFindItemProgressForTooltip(): String? {
+        return getCountableFindItemTargets()
+            .map { (itemId, requiredAmount) -> "${getPluralName(itemId)}: ${getProgress(itemId, requiredAmount)}" }
+            .takeIf { it.isNotEmpty() }
+            ?.joinToString()
+    }
+
+    private fun getFindItemProgressForQuestLog(): String {
+        return getCountableFindItemTargets()
+            .map { (itemId, requiredAmount) -> getProgress(itemId, requiredAmount) }
+            .takeIf { it.isNotEmpty() }
+            ?.joinToString(prefix = " (", postfix = ")")
+            .orEmpty()
+    }
+
+    private fun getCountableFindItemTargets(): Map<String, Int> {
+        if (type != QuestTaskType.FIND_ITEM) return emptyMap()
+        val minimumAmountToCount = 2
+        return target.filterValues { it >= minimumAmountToCount }
+    }
+
+    private fun getProgress(itemId: String, requiredAmount: Int): String {
+        val amountFound: Int = gameData.inventory.getTotalOfItemIncludingPartyEquipment(itemId)
+        return "${amountFound.coerceAtMost(requiredAmount)}/$requiredAmount"
+    }
+
+    private fun getPluralName(itemId: String): String {
+        val name: String = InventoryDatabase.createInventoryItem(itemId).name
+        return when {
+            name.endsWith("y") -> name.dropLast(1) + "ies"
+            name.endsWith("s") -> name
+            else -> name + "s"
+        }
     }
 
 }

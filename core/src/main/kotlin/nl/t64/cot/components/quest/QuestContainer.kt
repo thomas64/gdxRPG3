@@ -31,8 +31,8 @@ class QuestContainer {
         quests.values.forEach { it.reset() }
     }
 
-    fun updateFindItem() {
-        quests.values.forEach { it.possibleSetFindItemTaskComplete() }
+    fun updateFindItem(changedItemId: String) {
+        quests.values.forEach { it.updateFindItemTasks(changedItemId) }
     }
 
     fun updateDeliverItem(conversationId: String) {
