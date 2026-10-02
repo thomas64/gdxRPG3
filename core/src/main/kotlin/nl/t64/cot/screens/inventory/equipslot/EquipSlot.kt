@@ -13,6 +13,7 @@ import nl.t64.cot.screens.inventory.itemslot.ItemSlot
 import nl.t64.cot.screens.inventory.tooltip.ItemSlotTooltip
 
 
+private const val INVENTORY_GROUP_SHADOW_NAME = "shadow"
 private val TRANSPARENT = Color(1f, 1f, 1f, 0.3f)
 
 private fun createShadowImageOf(inventoryGroup: InventoryGroup): Image {
@@ -20,7 +21,7 @@ private fun createShadowImageOf(inventoryGroup: InventoryGroup): Image {
     val textureRegion = resourceManager.getAtlasTexture(groupId)
     return Image(textureRegion).apply {
         color = TRANSPARENT
-        name = "shadow"
+        name = INVENTORY_GROUP_SHADOW_NAME
     }
 }
 
@@ -52,7 +53,18 @@ internal class EquipSlot(
     }
 
     override fun doesAcceptItem(draggedItem: InventoryImage): Boolean {
-        return filterGroup == draggedItem.inventoryGroup && doesHeroAcceptItem(draggedItem)
+        if (filterGroup != draggedItem.inventoryGroup) return false
+        if (isPouchEquipped_ShowWarning_Else()) return false
+
+        return doesHeroAcceptItem(draggedItem)
+    }
+
+    private fun isPouchEquipped_ShowWarning_Else(): Boolean {
+        val pouchItem = getPossibleInventoryImage()?.inventoryItem ?: return false
+        if (pouchItem.goldPouch <= 0) return false
+
+        showDialogHeroDoesNotAccept(pouchItem.createMessageFailToReplace())
+        return true
     }
 
     override fun clearStack() {
@@ -100,7 +112,9 @@ internal class EquipSlot(
     }
 
     private fun setShadowVisible(visible: Boolean) {
-        imagesBackground.getChild(1).isVisible = visible // 1 is index of actor named shadow
+        imagesBackground.children
+            .firstOrNull { it.name == INVENTORY_GROUP_SHADOW_NAME }
+            ?.isVisible = visible
     }
 
 }

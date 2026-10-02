@@ -311,6 +311,10 @@ data class InventoryItem(
             The ${dependantItem.name} depends on it.""".trimIndent()
     }
 
+    fun createMessageFailToReplace(): String {
+        return "First unequip the $name."
+    }
+
     fun createMessageFailToEquipTwoHanded(otherItem: InventoryItem): String {
         return """
             Cannot equip the $name.

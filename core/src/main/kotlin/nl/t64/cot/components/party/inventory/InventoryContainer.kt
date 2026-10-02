@@ -197,8 +197,8 @@ open class InventoryContainer(numberOfSlots: Int = 0) {
     }
 
     private fun addResource(newItem: InventoryItem) {
-        getItem(newItem.id)
-            ?.increaseAmountWith(newItem)
+        findFirstSlotIndexWithItem(newItem.id)
+            ?.let { incrementAmountAt(it, newItem.amount) }
             ?: addItemAtEmptySlot(newItem)
     }
 
@@ -210,12 +210,6 @@ open class InventoryContainer(numberOfSlots: Int = 0) {
 
     private fun slotIsEmptySoSetItemAt(index: Int, newItem: InventoryItem) {
         forceSetItemAt(index, newItem)
-    }
-
-    private fun getItem(itemId: String): InventoryItem? {
-        return inventory
-            .filterNotNull()
-            .firstOrNull { it.hasSameIdAs(itemId) }
     }
 
     private fun findAllIndexesWithAmountOfItem(itemId: String): Map<Int, Int> {

@@ -108,7 +108,7 @@
       "111" : {"text": ["I'm sorry, business is business."], "choices": [{"command": "DELIVER_QUEST_ITEM_ALTERNATE", "nextId": "130"}]},
       "120" : {"text": ["Alright alright, I'll settle for three for now. It's better than nothing. I will see to it that I get that fourth one later."], "choices": [{"command": "DELIVER_QUEST_ITEM", "nextId": "130"}]},
       "130" : {"text": ["Thank you very much on behalf of Black Smith Inc. We appreciate your business."]},
-      "131" : {"text": ["(Jaron, you lazy bum.)"], "choices": [{"command": "EXIT"}]},
+      "131" : {"text": ["[GRAY](Jaron, you lazy bum.)"], "choices": [{"command": "EXIT"}]},
       "200" : {"text": ["Welcome back, neighbor! You're here for that four gold bill from Jaron?"], "choices": [{"nextId": "102"}]},
       "1199": {"text": ["You forgot to take your horseshoe."], "choices": [{"command": "TRADE_QUEST_ITEMS"}]},
       "1200": {"text": ["Hello neighbor, you're back."], "choices": [{"nextId": "2"}]}

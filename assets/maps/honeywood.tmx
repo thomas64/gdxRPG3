@@ -300,7 +300,7 @@
   <object id="378" name="sparkle_honeywood_2" x="276" y="1032" width="48" height="48"/>
   <object id="430" name="sparkle_honeywood_1" x="708" y="144" width="48" height="48"/>
   <object id="546" name="sparkle_honeywood_8" x="1968" y="96" width="48" height="48"/>
-  <object id="555" name="sparkle_honeywood_9" x="1584" y="840" width="48" height="48"/>
+  <object id="555" name="sparkle_honeywood_9" x="1584" y="834" width="48" height="48"/>
  </objectgroup>
  <objectgroup color="#aa55ff" id="13" name="hero"/>
  <objectgroup color="#ff007f" id="55" name="enemy">

@@ -2,24 +2,24 @@
   "mozes_finds_grace"              : {
     "name"   : "Mozes",
     "phrases": {
-      "1" : {"face": "mozes", "text": ["(There's Grace! I've found her!)"]},
+      "1" : {"face": "mozes", "text": ["[GRAY](There's Grace! I've found her!)"]},
       "2" : {"face": "mozes", "text": [". . ."]},
-      "3" : {"face": "mozes", "text": ["(Who is that guy? He's no orc.)"]},
-      "4" : {"face": "mozes", "text": ["(What's happening here?)"]},
-      "5" : {"face": "mozes", "text": ["(Why are they holding her?)"]},
+      "3" : {"face": "mozes", "text": ["[GRAY](Who is that guy? He's no orc.)"]},
+      "4" : {"face": "mozes", "text": ["[GRAY](What's happening here?)"]},
+      "5" : {"face": "mozes", "text": ["[GRAY](Why are they holding her?)"]},
       "6" : {"face": "mozes", "text": [". . ."]},
       "7" : {"face": "ardor", "name": "? ? ?", "text": ["Oh great Lord Ulrog, God of Power, the time has come!"]},
       "8" : {"face": "ardor", "name": "? ? ?", "text": ["The Royal Sacrifice is prepared!"]},
       "9" : {"face": "girl01", "name": "Grace", "text": ["Let me go!"]},
       "10": {"face": "ardor", "name": "? ? ?", "text": ["Guards, bring forth the princess."]},
-      "11": {"face": "mozes", "name": "Mozes", "text": ["(Princess? What is he talking about?)"], "choices": [{"command": "EXIT"}]}
+      "11": {"face": "mozes", "name": "Mozes", "text": ["[GRAY](Princess? What is he talking about?)"], "choices": [{"command": "EXIT"}]}
     }
   },
   "grace_is_no_princess"           : {
     "name"   : "Mozes",
     "phrases": {
-      "1": {"text": ["(Huh?)"]},
-      "2": {"text": ["(Grace is no princess...?)"], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["[GRAY](Huh?)"]},
+      "2": {"text": ["[GRAY](Grace is no princess...?)"], "choices": [{"command": "EXIT"}]}
     }
   },
   "ardor_starts_to_pray"           : {

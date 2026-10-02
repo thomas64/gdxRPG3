@@ -692,7 +692,7 @@
     "phrases": {
       "1"   : {"text": ["Sir, as per the village elder's orders, we are not permitted to allow anyone to leave the village {COLOR=BLUE}alone{COLOR=BLACK}."]},
       "2"   : {
-        "text": ["It's dangerous to go alone, particularly with the recent increase in monster activity. (What's up with that anyway?)"], "choices": [
+        "text": ["It's dangerous to go alone, particularly with the recent increase in monster activity. [GRAY](What's up with that anyway?)"], "choices": [
           {"condition": ["alone_in_party"], "nextId": "3"}
         ]
       },

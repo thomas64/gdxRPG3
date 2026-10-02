@@ -139,7 +139,7 @@
           {"condition": ["_hero_luana"], "nextId": "3", "orElseId": "4"}
         ]
       },
-      "3"   : {"face": "luana", "name": "luana", "text": ["(I helped out too, you know...)"]},
+      "3"   : {"face": "luana", "name": "luana", "text": ["[GRAY](I helped out too, you know...)"]},
       "4"   : {"face": "oldman02", "name": "Mr. Isembert", "text": ["You're a hero! You saved the oldest farm in the village!"]},
       "5"   : {"text": ["It will remain in our family for generations!"], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "6"}]},
       "6"   : {"text": ["My home is your home. You're even welcome to use the {COLOR=BLUE}back door{COLOR=BLACK} if you like."], "choices": [{"command": "RECEIVE_ITEM"}]},
@@ -168,7 +168,7 @@
       "3": {"text": ["Wouldn't you be happy here...?"]},
       "4": {"text": ["With me...?"]},
       "5": {"text": ["As my husband?"]},
-      "6": {"face": "mozes", "name": "Mozes", "text": [". . ."], "choices": [{"command": "EXIT"}]}
+      "6": {"face": "mozes", "name": "Mozes", "text": ["Uuh...?"], "choices": [{"command": "EXIT"}]}
     }
   },
   "honeywood_farm_back_door_before": {
@@ -207,11 +207,13 @@
       "17": {"text": ["Go buy some weapons or level up your attributes or something, I don't care. As long as you don't bother me here!"]},
       "18": {
         "choices": [
-          {"text": "*Be annoyingly persistent and just stand here watching.* [BLUE](Skip time)", "command": "HARD_SKIP_TO_0956"},
+          {"text": "*Be annoyingly persistent and just stand here watching.* [BLUE](Skip time)", "nextId": "21"},
           {"text": "*Accept her advise and take your leave.*", "command": "AUTO_SAVE", "nextId": "20"}
         ]
       },
-      "20": {"text": ["Mozes, what did I tell you?! I won't be done with my chores until 10:00. Come back then, and not one minute later!"], "choices": [{"nextId": "17"}]}
+      "20": {"text": ["Mozes, what did I tell you?! I won't be done with my chores until 10:00. Come back then, and not one minute later!"], "choices": [{"nextId": "17"}]},
+      "21": {"text": ["Ugh!"], "choices": [{"command": "HARD_SKIP_TO_0956", "nextId": "25"}]},
+      "25": {"text": ["Mozes, stop being so annoying! Just a few more minutes and I'll be done. Go away!"], "choices": [{"command": "AUTO_SAVE", "nextId": "25"}]}
     }
   },
   "luana_joins_party"              : {
