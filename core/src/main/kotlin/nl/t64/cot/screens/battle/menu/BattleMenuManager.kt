@@ -44,6 +44,7 @@ class BattleMenuManager(
     private var heroMenuIndex: Int = 0
     private var attackMenuIndex: Int = 0
     private var lastActionMenuTurn: Int = -1
+    private val lastTargetPerHero: MutableMap<String, String> = mutableMapOf()
 
     private lateinit var selectedPotion: BattlePotionItem
 
@@ -58,8 +59,8 @@ class BattleMenuManager(
     private val actionAttackListener = SelectAttackListener(::anAttackIsSelectedInAttackList, ::goBack)
     private val actionSpecialListener = SelectAttackListener(::aSpecialIsSelectedInSpecialList, ::goBack)
     private val previewTargetListener = SelectTargetListener(menuHandlers.showPreviewDialog, ::goBack)
-    private val actionAttackTargetListener = SelectTargetListener(menuHandlers.showConfirmAttackDialog, ::goBack)
-    private val actionSpecialTargetListener = SelectTargetListener(menuHandlers.showConfirmSpecialDialog, ::goBack)
+    private val actionAttackTargetListener = SelectTargetListener(::aTargetIsSelectedForAttack, ::goBack)
+    private val actionSpecialTargetListener = SelectTargetListener(::aTargetIsSelectedForSpecial, ::goBack)
     private val actionMoveListener = SelectMoveListener(battleField::moveHeroLeft, battleField::moveHeroRight, menuHandlers.confirmMovement, ::goBack)
     private val stealthMovementListener = SelectMoveListener(battleField::moveHeroLeftWithStealth, battleField::moveHeroRightWithStealth, menuHandlers.confirmStealthMovement, battleField::cancelMovement)
     private val preBattlePotionListener = SelectPotionListener(::aPotionIsSelectedInPreBattle, ::goBack)
@@ -133,6 +134,16 @@ class BattleMenuManager(
         openSubMenuFromAttackMenu { showTargetTable(special, actionSpecialTargetListener) }
     }
 
+    private fun aTargetIsSelectedForAttack(attack: BattleAbilityItem, target: String) {
+        lastTargetPerHero[currentHero.name] = target
+        menuHandlers.showConfirmAttackDialog.invoke(attack, target)
+    }
+
+    private fun aTargetIsSelectedForSpecial(special: BattleAbilityItem, target: String) {
+        lastTargetPerHero[currentHero.name] = target
+        menuHandlers.showConfirmSpecialDialog.invoke(special, target)
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun showPreBattleTable() {
@@ -188,7 +199,7 @@ class BattleMenuManager(
     private fun showPreviewTargetTable(selectedAttack: BattleAbilityItem) {
         val allTargetNames: List<String> = turnManager.getOnlyEnemies().map { it.character.name }
         previewTargetListener.setSelectedAttack(selectedAttack)
-        showTable(menuBuilder.createButtonTableTarget(allTargetNames), previewTargetListener)
+        showTable(menuBuilder.createButtonTableTarget(allTargetNames, 0), previewTargetListener)
     }
 
     private fun showTargetTable(selectedAttack: BattleAbilityItem, targetListener: SelectTargetListener) {
@@ -206,8 +217,9 @@ class BattleMenuManager(
                 Target.ALL_ENEMIES -> listOf("All enemies")
                 Target.AREA -> TODO()
             }
+        val targetIndex: Int = availableTargets.indexOfFirst { it == lastTargetPerHero[currentHero.name] }.coerceAtLeast(0)
         targetListener.setSelectedAttack(selectedAttack)
-        showTable(menuBuilder.createButtonTableTarget(availableTargets), targetListener)
+        showTable(menuBuilder.createButtonTableTarget(availableTargets, targetIndex), targetListener)
     }
 
     private fun showPotionTable(potionListener: SelectPotionListener) {

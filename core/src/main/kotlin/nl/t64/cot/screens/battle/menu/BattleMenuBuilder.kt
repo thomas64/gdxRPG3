@@ -75,8 +75,8 @@ class BattleMenuBuilder {
         }
     }
 
-    fun createButtonTableTarget(enemies: List<String>): Table {
-        return createStyledEmptyList<String>().fillWithTargets(enemies).toTargetTable()
+    fun createButtonTableTarget(enemies: List<String>, selectedIndex: Int): Table {
+        return createStyledEmptyList<String>().fillWithTargets(enemies, selectedIndex).toTargetTable()
     }
 
     fun createButtonTablePotion(potions: List<InventoryItem>): Table {
@@ -117,10 +117,10 @@ class BattleMenuBuilder {
         return this
     }
 
-    private fun GdxList<String>.fillWithTargets(enemies: List<String>): GdxList<String> {
+    private fun GdxList<String>.fillWithTargets(enemies: List<String>, selectedIndex: Int): GdxList<String> {
         enemies.forEach { items.add(it) }
         items.add("Back")
-        this.selectedIndex = 0
+        this.selectedIndex = selectedIndex
         return this
     }
 
