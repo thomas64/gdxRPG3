@@ -18,13 +18,7 @@ open class AttackAction(
 
     companion object {
         fun createForEnemy(currentEnemy: Participant, targetHero: Participant, battleId: String): AttackAction {
-            val usableAbilities: List<BattleAbilityItem> = currentEnemy.getUsableBattleAbilities()
-            val ability: BattleAbilityItem = (
-                usableAbilities
-                    .filter { it.ap <= currentEnemy.currentAP }
-                    .maxByOrNull { it.ap }
-                    ?: usableAbilities.first()
-                ).apply { target = targetHero }
+            val ability: BattleAbilityItem = currentEnemy.getPreferredAttackAbility().apply { target = targetHero }
 
             if (battleId.contains("farm_battle") && targetHero.character.id == "luana"
                 && ability.calculateDamageMinusProtection() >= targetHero.character.currentHp

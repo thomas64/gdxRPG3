@@ -102,8 +102,20 @@ class EnemyAi(
 
     private fun getOccupiedHeroIndicesSortedByPriorityForActingEnemy(): List<Int> {
         return grid.heroSpaces.filterNotNull()
-            .sortedBy { hero -> hero.getPriorityFor(actingEnemy, isActingEnemyNextTo(hero)) }
+            .sortedBy { hero -> hero.getPriorityFor(actingEnemy, isActingEnemyNextTo(hero), getApLeftAfterMovingToAttack(hero)) }
             .map { hero -> grid.getSpaceIndexOf(hero) }
+    }
+
+    private fun getApLeftAfterMovingToAttack(hero: Participant): Int? {
+        val heroIndex: Int = grid.getSpaceIndexOf(hero)
+        val enemyWeaponRanges: List<Int> = actingEnemy.getWeaponRanges()
+        val shouldAvoidBattleLock: Boolean = actingEnemy.hasRangedWeapon()
+        return grid.enemySpaces.indices
+            .filter { it.isVacantOrOwnSpace() }
+            .filterNot { shouldAvoidBattleLock && grid.isEnemySpaceNextToHero(it) }
+            .filter { heroIndex.isHeroInWeaponRangeFrom(it, enemyWeaponRanges) }
+            .minOfOrNull { getMoveCostTo(it) }
+            ?.let { actingEnemy.currentAP - it }
     }
 
     private fun List<Int>.getRangedHeroTargetAndMove(): Participant? {
@@ -125,9 +137,12 @@ class EnemyAi(
             ?: getNextBestNearestEmptySpace(heroIndicesByPrio, shouldAvoidBattleLock = true)
     }
 
+    // a melee enemy only picks a spot from where it can still attack this turn, so it never walks past a hero
+    // it could have hit. only when no hero is attackable at all does it walk towards its highest-prio target.
     private fun getBestMeleeDestinationFrom(heroIndicesByPrio: List<Int>): Int? {
+        val budgetForMovingAndAttacking: Int = actingEnemy.currentAP - actingEnemy.getCheapestAbilityAp()
         return getAllIndicesFromWhereToAttackByPrio(heroIndicesByPrio, shouldAvoidBattleLock = false)
-            .onEach { if (it.isReachableThisTurn()) return it }
+            .onEach { if (getMoveCostTo(it) <= budgetForMovingAndAttacking) return it }
             .firstOrNull()
             ?.let { findFarthestReachableSpaceTo(it) }
             ?: getNextBestNearestEmptySpace(heroIndicesByPrio, shouldAvoidBattleLock = false)
@@ -161,7 +176,8 @@ class EnemyAi(
     private fun findFarthestReachableSpaceTo(destinationIndex: Int): Int? {
         val direction: Int = if (destinationIndex > actingEnemyIndex) 1 else -1
         val actionPoints: Int = getApWithPenaltyTo(destinationIndex)
-        return (1..actionPoints)
+        val distance: Int = abs(destinationIndex - actingEnemyIndex)
+        return (1..minOf(actionPoints, distance))
             .map { actingEnemyIndex + it * direction }
             .lastOrNull { grid.enemySpaces[it] == null }
     }

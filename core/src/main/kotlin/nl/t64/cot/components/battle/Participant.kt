@@ -74,33 +74,51 @@ class Participant(
         currentAP = maximumAP + carryOverAp
     }
 
-    fun getPriorityFor(currentEnemy: Participant, isEnemyNextToHero: Boolean): Float {
+    fun getPriorityFor(currentEnemy: Participant, isEnemyNextToHero: Boolean, apLeftForAttacking: Int?): Float {
         // todo, weaker character types? weapon types, or bow and throw?
 
         val attackSkill: SkillItemId = currentEnemy.getCurrentWeapon()!!.skill!!
         val targetSkill: SkillItemId? = getCurrentWeapon()?.skill
 
         val nextToTargetScore: Int = if (isEnemyNextToHero) -8 else 0
+        val killableScore: Int = if (isKillableBy(currentEnemy, apLeftForAttacking)) -10 else 0
         val attackerHasAdvantageScore: Int = if (attackSkill.hasAdvantageOver(targetSkill)) -4 else 0
         val attackerHasDisadvantageScore: Int = if (attackSkill.hasDisadvantageFrom(targetSkill)) 4 else 0
         val stealthScore: Int = character.getCalculatedTotalSkillOf(SkillItemId.STEALTH)
-        val lowHpScore: Float = character.currentHp / 50f
+        val lowHpScore: Float = character.currentHp / 25f
         val protectionScore: Float = getRelevantProtectionAgainst(attackSkill) / 8f
         val defenseScore: Float = getRelevantDefenseAgainst(attackSkill) / 6f
+        val totalScore: Float =
+            stealthScore +
+                lowHpScore +
+                protectionScore +
+                defenseScore +
+                attackerHasAdvantageScore +
+                attackerHasDisadvantageScore +
+                nextToTargetScore +
+                killableScore
 
         if (preferenceManager.isDebugModeOn) {
             println("A low score means a high priority in the queue!")
             println("${character.name} " +
                         "nextToTargetScore: $nextToTargetScore, " +
+                        "killableScore: $killableScore, " +
                         "attackerHasAdvantageScore: $attackerHasAdvantageScore, " +
                         "attackerHasDisadvantageScore: $attackerHasDisadvantageScore, " +
                         "stealthScore: $stealthScore, " +
                         "lowHpScore: $lowHpScore, " +
                         "protectionScore: $protectionScore, " +
                         "defenseScore: $defenseScore = " +
-                        "total: ${stealthScore + lowHpScore + protectionScore + defenseScore + attackerHasAdvantageScore + attackerHasDisadvantageScore + nextToTargetScore}")
+                        "total: $totalScore")
         }
-        return stealthScore + lowHpScore + protectionScore + defenseScore + attackerHasAdvantageScore + attackerHasDisadvantageScore + nextToTargetScore
+        return totalScore
+    }
+
+    private fun isKillableBy(currentEnemy: Participant, apLeftForAttacking: Int?): Boolean {
+        val availableAp: Int = apLeftForAttacking ?: return false
+        val ability: BattleAbilityItem = currentEnemy.getAffordableAttackAbility(availableAp) ?: return false
+        ability.target = this
+        return ability.calculateDamageMinusProtection() >= character.currentHp
     }
 
     private fun getRelevantProtectionAgainst(attackSkill: SkillItemId): Int {
@@ -144,6 +162,16 @@ class Participant(
 
     fun getCheapestAbilityAp(): Int {
         return getUsableBattleAbilities().minOf { it.ap }
+    }
+
+    fun getPreferredAttackAbility(): BattleAbilityItem {
+        return getAffordableAttackAbility(currentAP) ?: getUsableBattleAbilities().first()
+    }
+
+    private fun getAffordableAttackAbility(availableAp: Int): BattleAbilityItem? {
+        return getUsableBattleAbilities()
+            .filter { it.ap <= availableAp }
+            .maxByOrNull { it.ap }
     }
 
     fun getUsableBattleAbilities(): List<BattleAbilityItem> {
