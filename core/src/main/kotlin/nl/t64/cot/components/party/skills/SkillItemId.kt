@@ -89,6 +89,20 @@ enum class SkillItemId : SuperEnum {
         }
     }
 
+    fun isRangedWeapon(): Boolean {
+        return when (this) {
+            BOW, THROW -> true
+            else -> false
+        }
+    }
+
+    fun isSwungWeapon(): Boolean {
+        return when (this) {
+            SWORD, AXE -> true
+            else -> false
+        }
+    }
+
     fun isCombatSkill(): Boolean {
         return when (this) {
             STEALTH, GAMBLER, HEALER, TROUBADOUR, THIEF, WARRIOR, WIZARD -> true

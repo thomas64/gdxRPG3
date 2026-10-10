@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion
 private const val HERO_FRAME_SIZE = 64
 private const val FRAMES_PER_MOTION = 3
 private const val WAIT_FRAME_DURATION = 0.2f
+private const val MOTION_FRAME_DURATION = 0.08f
+const val HERO_TIME_UNTIL_LAST_FRAME: Float = MOTION_FRAME_DURATION * (FRAMES_PER_MOTION - 1)
 
 // a looping motion goes back and forth: 0, 1, 2, 1, 0, 1, 2, 1, ...
 private val LOOPING_FRAME_ORDER: List<Int> = listOf(0, 1, 2, 1)
@@ -16,12 +18,16 @@ class HeroCombatantActor(
     combatantScale: Float
 ) : CombatantActor(CombatantImages.getHeroRegion(heroId)) {
 
-    private val motion: CombatantMotion = CombatantMotion.WAIT
-    private val frameDuration: Float = WAIT_FRAME_DURATION
+    private var motion: CombatantMotion = CombatantMotion.WAIT
     private var motionTime: Float = 0f
 
     init {
         setSize(HERO_FRAME_SIZE * combatantScale, HERO_FRAME_SIZE * combatantScale)
+    }
+
+    fun playMotion(newMotion: CombatantMotion) {
+        motion = newMotion
+        motionTime = 0f
     }
 
     override fun act(delta: Float) {
@@ -37,20 +43,24 @@ class HeroCombatantActor(
     }
 
     private fun getCurrentFrameIndex(): Int {
-        val step: Int = (motionTime / frameDuration).toInt()
+        val elapsedFrames: Int = (motionTime / getFrameDuration()).toInt()
         return if (motion.isLooping) {
-            getLoopingFrameIndex(step)
+            getLoopingFrameIndex(elapsedFrames)
         } else {
-            getFrameIndexHeldAtLast(step)
+            getFrameIndexHeldAtLast(elapsedFrames)
         }
     }
 
-    private fun getLoopingFrameIndex(step: Int): Int {
-        return LOOPING_FRAME_ORDER[step % LOOPING_FRAME_ORDER.size]
+    private fun getFrameDuration(): Float {
+        return if (motion == CombatantMotion.WAIT) WAIT_FRAME_DURATION else MOTION_FRAME_DURATION
     }
 
-    private fun getFrameIndexHeldAtLast(step: Int): Int {
-        return SINGLE_FRAME_ORDER[step.coerceAtMost(SINGLE_FRAME_ORDER.lastIndex)]
+    private fun getLoopingFrameIndex(elapsedFrames: Int): Int {
+        return LOOPING_FRAME_ORDER[elapsedFrames % LOOPING_FRAME_ORDER.size]
+    }
+
+    private fun getFrameIndexHeldAtLast(elapsedFrames: Int): Int {
+        return SINGLE_FRAME_ORDER[elapsedFrames.coerceAtMost(SINGLE_FRAME_ORDER.lastIndex)]
     }
 
 }

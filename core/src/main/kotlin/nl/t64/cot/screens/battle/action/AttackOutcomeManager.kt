@@ -48,7 +48,7 @@ class AttackOutcomeManager(
     private fun playAttackScene(attackData: List<AttackData>, onFinished: () -> Unit) {
         val hero: Character = turnManager.getParticipant(attackData.first().attacker).character
         val enemy: Character = turnManager.getParticipant(attackData.first().target).character
-        AttackScene(hero, enemy, onFinished).play(stage)
+        AttackScene(hero, enemy, attackData, onFinished).play(stage)
     }
 
     private fun playOutcomeOnBattleField(attackData: List<AttackData>) {

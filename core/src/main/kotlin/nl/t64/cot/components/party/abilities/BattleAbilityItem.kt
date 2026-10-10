@@ -70,6 +70,7 @@ abstract class BattleAbilityItem(
         val singleAttack = AttackData()
         singleAttack.attacker = attacker.character.name
         singleAttack.target = target.character.name
+        singleAttack.weaponSkill = currentWeapon?.skill
 
         if (isHit()) {
             handleHit(singleAttack)

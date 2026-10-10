@@ -14,8 +14,8 @@ enum class CombatantMotion(val isLooping: Boolean) {
     THRUST(false),      // frames 4-6 of row 1
     SWING(false),       // frames 4-6 of row 2
     RANGE(false),       // frames 4-6 of row 3
-    SKILL(false),       // frames 4-6 of row 4
-    SPELL(false),       // frames 4-6 of row 5
+    SPELL(false),       // frames 4-6 of row 4
+    SUPPORT(false),     // frames 4-6 of row 5
     ITEM(false),        // frames 4-6 of row 6
     ESCAPE(true),       // frames 7-9 of row 1
     VICTORY(true),      // frames 7-9 of row 2

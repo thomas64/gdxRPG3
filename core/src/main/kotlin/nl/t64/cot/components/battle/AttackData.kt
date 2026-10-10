@@ -1,11 +1,13 @@
 package nl.t64.cot.components.battle
 
 import nl.t64.cot.components.party.abilities.AbilityItemId
+import nl.t64.cot.components.party.skills.SkillItemId
 
 
 class AttackData {
     var attacker: String = ""
     var target: String = ""
+    var weaponSkill: SkillItemId? = null
 
     var hasAdvantage: Boolean = false
     var hasDisadvantage: Boolean = false
@@ -26,4 +28,20 @@ class AttackData {
     var magicAbility: AbilityItemId? = null
 
     var castMessage: String = ""
+
+    fun isMelee(): Boolean {
+        return !isMagic() && !isRanged()
+    }
+
+    fun isMagic(): Boolean {
+        return magicAbility != null
+    }
+
+    fun isRanged(): Boolean {
+        return weaponSkill?.isRangedWeapon() == true
+    }
+
+    fun isSwung(): Boolean {
+        return weaponSkill?.isSwungWeapon() == true
+    }
 }
