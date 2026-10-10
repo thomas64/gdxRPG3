@@ -8,9 +8,11 @@ $sheetDir = "$game\sprites\animations"
 
 # MV sheet name -> our sheet name, named after what it shows.
 # a strike is shown on every physical attack, an impact only when a spell hits.
-$sheetNames = [ordered]@{ Slash = 'physical_strike'; HitFire = 'fire_impact'; Wind1 = 'wind_impact'; HitThunder = 'thunder_impact' }
+$sheetNames = [ordered]@{ Slash = 'physical_strike'; Claw = 'claw_strike'; Hit1 = 'hit_strike';
+                          HitFire = 'fire_impact'; Wind1 = 'wind_impact'; HitThunder = 'thunder_impact' }
 # our animation id -> MV animation id, for the animations that are taken over as they are.
-$takenOver = @{ swing = 6 }
+# claw is for a scratch, hit is for a bite and a body slam.
+$takenOver = @{ swing = 6; claw = 16; hit = 1 }
 # our animation id -> MV animation id, for the elements. MV puts its element sheet on top of a general Hit2 base,
 # but the element sheet is complete on its own. So only that second sheet is taken over, starting at frame 0.
 $elements = @{ fire = 3; thunder = 5 }
@@ -114,6 +116,8 @@ function Wind {
 $entries = @(
     (TakeOver 'swing'),
     (Thrust),
+    (TakeOver 'claw'),
+    (TakeOver 'hit'),
     (TakeOverElement 'fire'),
     (Wind),
     (TakeOverElement 'thunder')

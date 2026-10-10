@@ -59,6 +59,18 @@ enum class AbilityItemId : SuperEnum {
 
     override val title: String = name.lowercase().replaceFirstChar { it.uppercase() }
 
+    fun isScratch(): Boolean {
+        return this == SCRATCH_2
+    }
+
+    fun isBite(): Boolean {
+        return this in listOf(BITE_3, BITE_4)
+    }
+
+    fun isBodySlam(): Boolean {
+        return this == BODY_SLAM_2
+    }
+
     fun isFireSpell(): Boolean {
         return this in listOf(FIRE, ELFIRE, ARCFIRE, REXFIRE)
     }

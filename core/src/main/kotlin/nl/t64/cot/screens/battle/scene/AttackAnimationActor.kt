@@ -15,10 +15,12 @@ private const val BLEND_ADD = 1
 
 class AttackAnimationActor(
     private val attackAnimation: AttackAnimation,
-    private val animationScale: Float
+    private val animationScale: Float,
+    private val isAttackFromRight: Boolean
 ) : Actor() {
 
     private val texture: Texture = resourceManager.getTextureAsset("$SPRITE_PATH${attackAnimation.spriteName}.png")
+    private val direction: Float = if (isAttackFromRight) -1f else 1f
     private var elapsedTime: Float = 0f
     private val currentFrame: Int get() = (elapsedTime / attackAnimation.frameDurationInSeconds).toInt()
 
@@ -52,14 +54,14 @@ class AttackAnimationActor(
         batch.setColor(1f, 1f, 1f, cell.opacity * color.a * parentAlpha)
         // the data counts y downwards and rotates clockwise, libGDX does both the other way around.
         batch.draw(texture,
-                   x + (cell.x * animationScale) - half,
+                   x + (cell.x * animationScale * direction) - half,
                    y - (cell.y * animationScale) - half,
                    half, half,
                    CELL_SIZE.toFloat(), CELL_SIZE.toFloat(),
                    cellScale, cellScale,
-                   -cell.rotation,
+                   -cell.rotation * direction,
                    srcX, srcY, CELL_SIZE, CELL_SIZE,
-                   cell.mirror, false)
+                   cell.mirror != isAttackFromRight, false)
     }
 
 }

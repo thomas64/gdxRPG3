@@ -8,6 +8,7 @@ class AttackData {
     var attacker: String = ""
     var target: String = ""
     var weaponSkill: SkillItemId? = null
+    var ability: AbilityItemId? = null
 
     var hasAdvantage: Boolean = false
     var hasDisadvantage: Boolean = false
@@ -47,6 +48,18 @@ class AttackData {
 
     fun isThunder(): Boolean {
         return magicAbility?.isThunderSpell() == true
+    }
+
+    fun isScratch(): Boolean {
+        return ability?.isScratch() == true
+    }
+
+    fun isBite(): Boolean {
+        return ability?.isBite() == true
+    }
+
+    fun isBodySlam(): Boolean {
+        return ability?.isBodySlam() == true
     }
 
     fun isRanged(): Boolean {

@@ -10,6 +10,7 @@ import nl.t64.cot.components.battle.AttackAction
 import nl.t64.cot.components.battle.AttackData
 import nl.t64.cot.components.battle.Character
 import nl.t64.cot.components.battle.TurnManager
+import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.screens.battle.BattleState
 import nl.t64.cot.screens.battle.effects.BlinkEffect
 import nl.t64.cot.screens.battle.effects.FadeEffect
@@ -30,31 +31,47 @@ class AttackOutcomeManager(
 
     fun enemyAttackConfirmed(attackData: List<AttackData>) {
         battleState.isDelayingTurn = true
-        attackData.playEffectsSequentially()
-        Utils.runWithDelay(attackData.getDelay()) {
-            battleState.isDelayingTurn = false
+        val hero: Character = attackData.getTarget()
+        playEnemyAttackScene(attackData) {
+            playOutcomeOnBattleField(attackData, hero)
         }
     }
 
     fun attackConfirmed(attackAction: AttackAction) {
         val attackData: List<AttackData> = attackAction.handle()
         battleState.isDelayingTurn = true
-        playAttackScene(attackData) {
-            playOutcomeOnBattleField(attackData)
+        val enemy: Character = attackData.getTarget()
+        playHeroAttackScene(attackData) {
+            playOutcomeOnBattleField(attackData, enemy)
         }
     }
 
-    private fun playAttackScene(attackData: List<AttackData>, onFinished: () -> Unit) {
-        val hero: Character = turnManager.getParticipant(attackData.first().attacker).character
-        val enemy: Character = turnManager.getParticipant(attackData.first().target).character
-        AttackScene(hero, enemy, attackData, onFinished).play(stage)
+    private fun playEnemyAttackScene(attackData: List<AttackData>, onFinished: () -> Unit) {
+        val enemy: Character = attackData.getAttacker()
+        val hero: Character = attackData.getTarget()
+        AttackScene(hero, enemy, isHeroAttacking = false, attackData, onFinished).play(stage)
     }
 
-    private fun playOutcomeOnBattleField(attackData: List<AttackData>) {
+    private fun playHeroAttackScene(attackData: List<AttackData>, onFinished: () -> Unit) {
+        val hero: Character = attackData.getAttacker()
+        val enemy: Character = attackData.getTarget()
+        AttackScene(hero, enemy, isHeroAttacking = true, attackData, onFinished).play(stage)
+    }
+
+    // the target is known from the start, because it may already be removed from the battle when the messages show.
+    private fun playOutcomeOnBattleField(attackData: List<AttackData>, target: Character) {
         attackData.playEffectsSequentially()
         Utils.runWithDelay(attackData.getDelay()) {
-            attackData.possibleShowMessagesAndSetDelayingTurnToFalse()
+            attackData.possibleShowMessagesAndSetDelayingTurnToFalse(target)
         }
+    }
+
+    private fun List<AttackData>.getAttacker(): Character {
+        return turnManager.getParticipant(this.first().attacker).character
+    }
+
+    private fun List<AttackData>.getTarget(): Character {
+        return turnManager.getParticipant(this.first().target).character
     }
 
     private fun List<AttackData>.playEffectsSequentially(index: Int = 0) {
@@ -154,8 +171,8 @@ class AttackOutcomeManager(
         }
     }
 
-    private fun List<AttackData>.possibleShowMessagesAndSetDelayingTurnToFalse() {
-        val (messages, audioEvent) = possibleCreateMessagesFrom(this)
+    private fun List<AttackData>.possibleShowMessagesAndSetDelayingTurnToFalse(target: Character) {
+        val (messages, audioEvent) = possibleCreateMessagesFrom(this, target)
         if (messages.isNotEmpty()) {
             val messageDialog = MessageDialog(messages)
             messageDialog.setActionAfterHide {
@@ -167,19 +184,20 @@ class AttackOutcomeManager(
         }
     }
 
-    private fun possibleCreateMessagesFrom(attackData: List<AttackData>): Pair<String, AudioEvent> {
+    private fun possibleCreateMessagesFrom(attackData: List<AttackData>, target: Character): Pair<String, AudioEvent> {
         val isEnemyStaggeredMessage: String? = attackData.getPossibleStaggerMessage()
-        val yourWeaponBrokeMessage: String? = attackData.firstNotNullOfOrNull { it.attackerWeaponBrokeMessage }
-        val yourShieldBrokeMessage: String? = attackData.firstNotNullOfOrNull { it.attackerShieldBrokeMessage }
-        val enemyShieldBrokeMessage: String? = attackData.firstNotNullOfOrNull { it.targetShieldBrokeMessage }
+        val attackerWeaponBrokeMessage: String? = attackData.firstNotNullOfOrNull { it.attackerWeaponBrokeMessage }
+        val attackerShieldBrokeMessage: String? = attackData.firstNotNullOfOrNull { it.attackerShieldBrokeMessage }
+        val targetShieldBrokeMessage: String? = attackData.firstNotNullOfOrNull { it.targetShieldBrokeMessage }
+        val isHeroShieldBroken: Boolean = targetShieldBrokeMessage != null && target is HeroItem
 
         val messages: String = listOfNotNull(
             isEnemyStaggeredMessage,
-            yourWeaponBrokeMessage,
-            yourShieldBrokeMessage,
-            enemyShieldBrokeMessage
+            attackerWeaponBrokeMessage,
+            attackerShieldBrokeMessage,
+            targetShieldBrokeMessage
         ).joinToString(System.lineSeparator())
-        val audioEvent: AudioEvent = if (yourWeaponBrokeMessage != null || yourShieldBrokeMessage != null) {
+        val audioEvent: AudioEvent = if (attackerWeaponBrokeMessage != null || attackerShieldBrokeMessage != null || isHeroShieldBroken) {
             AudioEvent.SE_WEAPON_BREAK
         } else {
             AudioEvent.SE_CONVERSATION_NEXT

@@ -71,6 +71,7 @@ abstract class BattleAbilityItem(
         singleAttack.attacker = attacker.character.name
         singleAttack.target = target.character.name
         singleAttack.weaponSkill = currentWeapon?.skill
+        singleAttack.ability = id
 
         if (isHit()) {
             handleHit(singleAttack)
@@ -111,7 +112,7 @@ abstract class BattleAbilityItem(
         attackData.isBlocked = true
         val shield: InventoryItem = target.character.getInventoryItem(InventoryGroup.SHIELD)!!
         shield.durability--
-        if (target.isHero && shield.durability <= 0) {
+        if (shield.durability <= 0) {
             attackData.targetShieldBrokeMessage = "${target.character.name} ${shield.name} broke!"
             target.character.clearInventoryItemFor(InventoryGroup.SHIELD)
         }

@@ -19,6 +19,27 @@
       [{"spriteCellIndex": 4, "x": -115, "y": 0, "scale": 2, "rotation": -45, "mirror": true, "opacity": 1, "blend": 1}]
     ]
   },
+  "claw"   : {
+    "spriteName": "claw_strike",
+    "frames"    : [
+      [{"spriteCellIndex": 0, "x": 0, "y": -26, "scale": 1.7, "rotation": 0, "mirror": false, "opacity": 1, "blend": 1}],
+      [{"spriteCellIndex": 1, "x": 0, "y": -26, "scale": 1.7, "rotation": 0, "mirror": false, "opacity": 1, "blend": 1}],
+      [{"spriteCellIndex": 2, "x": 0, "y": -26, "scale": 1.7, "rotation": 0, "mirror": false, "opacity": 1, "blend": 1}],
+      [{"spriteCellIndex": 3, "x": 0, "y": -26, "scale": 1.7, "rotation": 0, "mirror": false, "opacity": 1, "blend": 1}],
+      [{"spriteCellIndex": 4, "x": 0, "y": -26, "scale": 1.7, "rotation": 0, "mirror": false, "opacity": 1, "blend": 1}],
+      [{"spriteCellIndex": 5, "x": 0, "y": -26, "scale": 1.7, "rotation": 0, "mirror": false, "opacity": 1, "blend": 1}]
+    ]
+  },
+  "hit"    : {
+    "spriteName": "hit_strike",
+    "frames"    : [
+      [],
+      [{"spriteCellIndex": 0, "x": 0, "y": 0, "scale": 2.5, "rotation": 0, "mirror": false, "opacity": 1, "blend": 1}],
+      [{"spriteCellIndex": 1, "x": 0, "y": 0, "scale": 2, "rotation": 0, "mirror": false, "opacity": 1, "blend": 1}],
+      [{"spriteCellIndex": 2, "x": 0, "y": 0, "scale": 2, "rotation": 0, "mirror": false, "opacity": 1, "blend": 1}],
+      [{"spriteCellIndex": 3, "x": 0, "y": 0, "scale": 2, "rotation": 0, "mirror": false, "opacity": 1, "blend": 1}]
+    ]
+  },
   "fire"   : {
     "spriteName"   : "fire_impact",
     "frameDuration": 0.0875,
