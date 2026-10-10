@@ -8,6 +8,7 @@ import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.battle.AttackAction
 import nl.t64.cot.components.battle.AttackData
+import nl.t64.cot.components.battle.Character
 import nl.t64.cot.components.battle.TurnManager
 import nl.t64.cot.components.party.abilities.AbilityItemId
 import nl.t64.cot.screens.battle.BattleState
@@ -15,6 +16,7 @@ import nl.t64.cot.screens.battle.effects.BlinkEffect
 import nl.t64.cot.screens.battle.effects.FadeEffect
 import nl.t64.cot.screens.battle.effects.FloatingNumberEffect
 import nl.t64.cot.screens.battle.effects.ShakeEffect
+import nl.t64.cot.screens.battle.scene.AttackScene
 import nl.t64.cot.screens.dialog.MessageDialog
 
 
@@ -38,12 +40,21 @@ class AttackOutcomeManager(
     fun attackConfirmed(attackAction: AttackAction) {
         val attackData: List<AttackData> = attackAction.handle()
         battleState.isDelayingTurn = true
+        playAttackScene(attackData) {
+            playOutcomeOnBattleField(attackData)
+        }
+    }
 
-        Utils.runWithDelay(0.5f) {
-            attackData.playEffectsSequentially()
-            Utils.runWithDelay(attackData.getDelay()) {
-                attackData.possibleShowMessagesAndSetDelayingTurnToFalse()
-            }
+    private fun playAttackScene(attackData: List<AttackData>, onFinished: () -> Unit) {
+        val hero: Character = turnManager.getParticipant(attackData.first().attacker).character
+        val enemy: Character = turnManager.getParticipant(attackData.first().target).character
+        AttackScene(hero, enemy, onFinished).play(stage)
+    }
+
+    private fun playOutcomeOnBattleField(attackData: List<AttackData>) {
+        attackData.playEffectsSequentially()
+        Utils.runWithDelay(attackData.getDelay()) {
+            attackData.possibleShowMessagesAndSetDelayingTurnToFalse()
         }
     }
 

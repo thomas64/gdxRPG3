@@ -110,7 +110,7 @@ abstract class BattleAbilityItem(
         attackData.isBlocked = true
         val shield: InventoryItem = target.character.getInventoryItem(InventoryGroup.SHIELD)!!
         shield.durability--
-        if (shield.durability <= 0) {
+        if (target.isHero && shield.durability <= 0) {
             attackData.targetShieldBrokeMessage = "${target.character.name} ${shield.name} broke!"
             target.character.clearInventoryItemFor(InventoryGroup.SHIELD)
         }
