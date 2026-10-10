@@ -5,6 +5,8 @@ import com.badlogic.gdx.scenes.scene2d.Action
 import com.badlogic.gdx.scenes.scene2d.Group
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
+import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.battle.AttackData
 import nl.t64.cot.components.battle.Character
 
@@ -112,6 +114,7 @@ class AttackScene(
     }
 
     private fun playImpact(singleData: AttackData) {
+        singleData.getImpactSounds().forEach { playSe(it) }
         possiblePlayAnimation(singleData)
         possibleReact(singleData)
     }
@@ -203,6 +206,43 @@ class AttackScene(
             this.isBite() || this.isBodySlam() -> AttackAnimationId.HIT
             this.isSwung() -> AttackAnimationId.SWING
             else -> AttackAnimationId.THRUST
+        }
+    }
+
+    private fun AttackData.getImpactSounds(): List<AudioEvent> {
+        return when {
+            this.isMissed -> listOf(this.getMissSound())
+            this.isBlocked -> listOf(AudioEvent.SE_BLOCK)
+            this.isCriticalHit -> this.getCriticalSounds()
+            this.hasAdvantage -> listOf(this.getElementSound() ?: AudioEvent.SE_DAMAGE_ADVANTAGE)
+            this.hasDisadvantage -> listOf(this.getElementSound() ?: AudioEvent.SE_DAMAGE_DISADVANTAGE)
+            else -> listOf(this.getElementSound() ?: AudioEvent.SE_DAMAGE_REGULAR)
+        }
+    }
+
+    private fun AttackData.getMissSound(): AudioEvent {
+        return if (this.isMagic()) {
+            AudioEvent.SE_MAGIC_MISS
+        } else {
+            AudioEvent.SE_DODGE
+        }
+    }
+
+    private fun AttackData.getCriticalSounds(): List<AudioEvent> {
+        val elementSound: AudioEvent? = this.getElementSound()
+        return if (elementSound != null) {
+            listOf(elementSound, AudioEvent.SE_MAGIC_CRIT)
+        } else {
+            listOf(AudioEvent.SE_CRIT_HIT)
+        }
+    }
+
+    private fun AttackData.getElementSound(): AudioEvent? {
+        return when {
+            this.isFire() -> AudioEvent.SE_DAMAGE_FIRE
+            this.isWind() -> AudioEvent.SE_DAMAGE_WIND
+            this.isThunder() -> AudioEvent.SE_DAMAGE_THUNDER
+            else -> null
         }
     }
 

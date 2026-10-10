@@ -89,37 +89,19 @@ class AttackOutcomeManager(
     private fun AttackData.playEffect() {
         val battleField = battleFieldTable.invoke()
         when {
-            this.isMissed -> {
-                playSe(this.getMissSe())
-                FloatingNumberEffect(battleField, this.target, "Miss", Color.WHITE).floatUp()
-            }
-            this.isBlocked -> {
-                playSe(AudioEvent.SE_BLOCK)
-                FloatingNumberEffect(battleField, this.target, "Block", Color.WHITE).floatUp()
-            }
-            this.isCriticalHit -> {
-                this.playDamageEffect(battleField, "${this.damage} !", Color.RED, this.getDamageSe() ?: AudioEvent.SE_CRIT_HIT)
-            }
-            this.hasAdvantage -> {
-                this.playDamageEffect(battleField, "${this.damage} +", Color.RED, this.getDamageSe() ?: AudioEvent.SE_DAMAGE_ADVANTAGE)
-            }
-            this.hasDisadvantage -> {
-                this.playDamageEffect(battleField, "${this.damage} -", Color.CORAL, this.getDamageSe() ?: AudioEvent.SE_DAMAGE_DISADVANTAGE)
-            }
-            else -> {
-                this.playDamageEffect(battleField, "${this.damage}", Color.SCARLET, this.getDamageSe() ?: AudioEvent.SE_DAMAGE_REGULAR)
-            }
+            this.isMissed -> FloatingNumberEffect(battleField, this.target, "Miss", Color.WHITE).floatUp()
+            this.isBlocked -> FloatingNumberEffect(battleField, this.target, "Block", Color.WHITE).floatUp()
+            this.isCriticalHit -> this.playDamageEffect(battleField, "${this.damage} !", Color.RED)
+            this.hasAdvantage -> this.playDamageEffect(battleField, "${this.damage} +", Color.RED)
+            this.hasDisadvantage -> this.playDamageEffect(battleField, "${this.damage} -", Color.CORAL)
+            else -> this.playDamageEffect(battleField, "${this.damage}", Color.SCARLET)
         }
     }
 
-    private fun AttackData.playDamageEffect(battleField: Table,
-                                            damageText: String,
-                                            damageTextColor: Color,
-                                            audioEvent: AudioEvent) {
+    private fun AttackData.playDamageEffect(battleField: Table, damageText: String, damageTextColor: Color) {
         val blinkColors: Array<Color> = this.getPossibleElementColors().toTypedArray()
         BlinkEffect(battleField, this.target, *blinkColors).start()
         ShakeEffect(battleField, this.target).start()
-        playSe(audioEvent)
         Utils.runWithDelay(0.5f) {
             FloatingNumberEffect(battleField, this.target, damageText, damageTextColor).floatUp()
             if (this.isTargetDead) {
@@ -129,23 +111,6 @@ class AttackOutcomeManager(
                     turnManager.removeKilledParticipants()
                 }
             }
-        }
-    }
-
-    private fun AttackData.getMissSe(): AudioEvent {
-        return if (this.isMagic()) {
-            AudioEvent.SE_MAGIC_MISS
-        } else {
-            AudioEvent.SE_DODGE
-        }
-    }
-
-    private fun AttackData.getDamageSe(): AudioEvent? {
-        return when {
-            this.isFire() -> AudioEvent.SE_DAMAGE_FIRE
-            this.isWind() -> AudioEvent.SE_DAMAGE_WIND
-            this.isThunder() -> AudioEvent.SE_DAMAGE_THUNDER
-            else -> null
         }
     }
 
