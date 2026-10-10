@@ -10,6 +10,9 @@ abstract class CombatantActor(
     protected val region: TextureRegion
 ) : Actor() {
 
+    val centerX: Float get() = x + (width / 2f)
+    val centerY: Float get() = y + (height / 2f)
+
     override fun draw(batch: Batch, parentAlpha: Float) {
         batch.setColor(color.r, color.g, color.b, color.a * parentAlpha)
         drawMirrored(batch, getCurrentRegion())

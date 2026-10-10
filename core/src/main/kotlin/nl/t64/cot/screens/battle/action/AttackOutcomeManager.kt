@@ -10,7 +10,6 @@ import nl.t64.cot.components.battle.AttackAction
 import nl.t64.cot.components.battle.AttackData
 import nl.t64.cot.components.battle.Character
 import nl.t64.cot.components.battle.TurnManager
-import nl.t64.cot.components.party.abilities.AbilityItemId
 import nl.t64.cot.screens.battle.BattleState
 import nl.t64.cot.screens.battle.effects.BlinkEffect
 import nl.t64.cot.screens.battle.effects.FadeEffect
@@ -100,7 +99,7 @@ class AttackOutcomeManager(
                                             damageText: String,
                                             damageTextColor: Color,
                                             audioEvent: AudioEvent) {
-        val blinkColors: Array<Color> = this.getBlinkColors().toTypedArray()
+        val blinkColors: Array<Color> = this.getPossibleElementColors().toTypedArray()
         BlinkEffect(battleField, this.target, *blinkColors).start()
         ShakeEffect(battleField, this.target).start()
         playSe(audioEvent)
@@ -117,7 +116,7 @@ class AttackOutcomeManager(
     }
 
     private fun AttackData.getMissSe(): AudioEvent {
-        return if (magicAbility != null) {
+        return if (this.isMagic()) {
             AudioEvent.SE_MAGIC_MISS
         } else {
             AudioEvent.SE_DODGE
@@ -125,25 +124,19 @@ class AttackOutcomeManager(
     }
 
     private fun AttackData.getDamageSe(): AudioEvent? {
-        return when (magicAbility) {
-            AbilityItemId.FIRE, AbilityItemId.ELFIRE, AbilityItemId.ARCFIRE, AbilityItemId.REXFIRE ->
-                AudioEvent.SE_DAMAGE_FIRE
-            AbilityItemId.WIND, AbilityItemId.ELWIND, AbilityItemId.ARCWIND, AbilityItemId.REXWIND ->
-                AudioEvent.SE_DAMAGE_WIND
-            AbilityItemId.THUNDER, AbilityItemId.ELTHUNDER, AbilityItemId.ARCTHUNDER, AbilityItemId.REXTHUNDER ->
-                AudioEvent.SE_DAMAGE_THUNDER
+        return when {
+            this.isFire() -> AudioEvent.SE_DAMAGE_FIRE
+            this.isWind() -> AudioEvent.SE_DAMAGE_WIND
+            this.isThunder() -> AudioEvent.SE_DAMAGE_THUNDER
             else -> null
         }
     }
 
-    private fun AttackData.getBlinkColors(): List<Color> {
-        return when (magicAbility) {
-            AbilityItemId.FIRE, AbilityItemId.ELFIRE, AbilityItemId.ARCFIRE, AbilityItemId.REXFIRE ->
-                listOf(Color.ORANGE, Color.RED, Color.SCARLET, Color.RED, Color.ORANGE, Color.YELLOW)
-            AbilityItemId.WIND, AbilityItemId.ELWIND, AbilityItemId.ARCWIND, AbilityItemId.REXWIND ->
-                listOf(Color.SKY, Color.CYAN, Color.BLUE, Color.CYAN, Color.SKY, Color.BLUE)
-            AbilityItemId.THUNDER, AbilityItemId.ELTHUNDER, AbilityItemId.ARCTHUNDER, AbilityItemId.REXTHUNDER ->
-                listOf(Color.YELLOW, Color.SKY, Color.YELLOW, Color.CYAN, Color.YELLOW)
+    private fun AttackData.getPossibleElementColors(): List<Color> {
+        return when {
+            this.isFire() -> listOf(Color.ORANGE, Color.RED, Color.SCARLET, Color.RED, Color.ORANGE, Color.YELLOW)
+            this.isWind() -> listOf(Color.SKY, Color.CYAN, Color.BLUE, Color.CYAN, Color.SKY, Color.BLUE)
+            this.isThunder() -> listOf(Color.YELLOW, Color.SKY, Color.YELLOW, Color.CYAN, Color.YELLOW)
             else -> emptyList()
         }
     }

@@ -10,6 +10,7 @@ import nl.t64.cot.components.battle.Character
 
 private const val HERO_SCALE = 3f
 private const val ENEMY_SCALE = 3.75f
+private const val ATTACK_ANIMATION_SCALE = 1.5f
 
 private const val GROUND_Y = 300f
 private const val HERO_X = 520f
@@ -72,9 +73,21 @@ class AttackScene(
 
     private fun createAttack(singleData: AttackData): Action {
         return Actions.sequence(
-            Actions.run { heroCombatant.playMotion(singleData.getAttackMotion()) },
-            Actions.delay(HIT_MOMENT + ATTACK_HOLD_DURATION)
+            Actions.run { heroCombatant.playMotion(singleData.getHeroAttackMotion()) },
+            Actions.delay(HIT_MOMENT),
+            Actions.run { possiblePlayAnimation(singleData) },
+            Actions.delay(ATTACK_HOLD_DURATION)
         )
+    }
+
+    private fun possiblePlayAnimation(singleData: AttackData) {
+        val isFailedMagic: Boolean = singleData.isMagic() && (singleData.isMissed || singleData.isBlocked)
+        if (isFailedMagic) return
+
+        val animationId: AttackAnimationId = singleData.getAttackAnimationId()
+        val animation = AttackAnimationActor(AttackAnimationDatabase.getAnimation(animationId), ATTACK_ANIMATION_SCALE)
+        animation.setPosition(enemyCombatant.centerX, enemyCombatant.centerY)
+        addActor(animation)
     }
 
     private fun createStepBack(): Action {
@@ -93,12 +106,22 @@ class AttackScene(
         )
     }
 
-    private fun AttackData.getAttackMotion(): CombatantMotion {
+    private fun AttackData.getHeroAttackMotion(): CombatantMotion {
         return when {
-            isMagic() -> CombatantMotion.SPELL
-            isRanged() -> CombatantMotion.RANGE
-            isSwung() -> CombatantMotion.SWING
+            this.isMagic() -> CombatantMotion.SPELL
+            this.isRanged() -> CombatantMotion.RANGE
+            this.isSwung() -> CombatantMotion.SWING
             else -> CombatantMotion.THRUST
+        }
+    }
+
+    private fun AttackData.getAttackAnimationId(): AttackAnimationId {
+        return when {
+            this.isFire() -> AttackAnimationId.FIRE
+            this.isWind() -> AttackAnimationId.WIND
+            this.isThunder() -> AttackAnimationId.THUNDER
+            this.isSwung() -> AttackAnimationId.SWING
+            else -> AttackAnimationId.THRUST
         }
     }
 

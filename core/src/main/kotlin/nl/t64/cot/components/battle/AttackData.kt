@@ -37,6 +37,18 @@ class AttackData {
         return magicAbility != null
     }
 
+    fun isFire(): Boolean {
+        return magicAbility?.isFireSpell() == true
+    }
+
+    fun isWind(): Boolean {
+        return magicAbility?.isWindSpell() == true
+    }
+
+    fun isThunder(): Boolean {
+        return magicAbility?.isThunderSpell() == true
+    }
+
     fun isRanged(): Boolean {
         return weaponSkill?.isRangedWeapon() == true
     }

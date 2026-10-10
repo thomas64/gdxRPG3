@@ -20,6 +20,7 @@ import nl.t64.cot.components.party.stats.StatItemId
 import nl.t64.cot.components.quest.QuestGraph
 import nl.t64.cot.components.schedule.MapSchedule
 import nl.t64.cot.constants.Constant
+import nl.t64.cot.screens.battle.scene.AttackAnimation
 
 
 object ConfigDataLoader {
@@ -30,6 +31,10 @@ object ConfigDataLoader {
 
     fun createBattles(): Map<String, Battle> {
         return loadConfigData<Battle>("battles")
+    }
+
+    fun createAttackAnimations(): Map<String, AttackAnimation> {
+        return loadConfigData<AttackAnimation>("animations")
     }
 
     fun createDoors(): Map<String, Door> {
