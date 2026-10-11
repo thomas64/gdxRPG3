@@ -20,6 +20,8 @@ private const val HERO_X = 520f
 private const val ENEMY_CENTER_X = 1340f
 private const val STEP_DISTANCE = 200f
 private const val LUNGE_DISTANCE = 120f
+private const val DODGE_DISTANCE = 60f
+private const val SHAKE_INTENSITY = 40f
 
 private const val SCENE_FADE_DURATION = 0.2f
 private const val PAUSE_AFTER_FADE_IN = 0.7f
@@ -31,6 +33,10 @@ private const val ENEMY_WHITEN_DURATION = 0.3f
 private const val LUNGE_DURATION = 0.1f
 private const val LUNGE_BACK_DURATION = 0.25f
 private const val REACTION_DURATION = 0.5f
+private const val DODGE_DURATION = 0.1f
+private const val DODGE_HOLD_DURATION = 0.2f
+private const val DODGE_BACK_DURATION = 0.15f
+private const val SHAKE_DURATION = 0.3f
 
 class AttackScene(
     heroCharacter: Character,
@@ -116,6 +122,7 @@ class AttackScene(
     private fun playImpact(singleData: AttackData) {
         singleData.getImpactSounds().forEach { playSe(it) }
         possiblePlayAnimation(singleData)
+        shakeOrDodgeTarget(singleData)
         possibleReact(singleData)
     }
 
@@ -130,6 +137,27 @@ class AttackScene(
                                              singleData.getTargetFlash())
         animation.setPosition(targetCombatant.centerX, targetCombatant.centerY)
         addActor(animation)
+    }
+
+    private fun shakeOrDodgeTarget(singleData: AttackData) {
+        if (singleData.isMissed) {
+            dodgeTarget()
+        } else {
+            shakeTarget()
+        }
+    }
+
+    private fun dodgeTarget() {
+        val awayFromAttacker: Float = if (isHeroAttacking) DODGE_DISTANCE else -DODGE_DISTANCE
+        targetCombatant.addAction(Actions.sequence(
+            Actions.moveBy(awayFromAttacker, 0f, DODGE_DURATION),
+            Actions.delay(DODGE_HOLD_DURATION),
+            Actions.moveBy(-awayFromAttacker, 0f, DODGE_BACK_DURATION)
+        ))
+    }
+
+    private fun shakeTarget() {
+        targetCombatant.addAction(ShakeAction(SHAKE_INTENSITY, SHAKE_DURATION))
     }
 
     private fun possibleReact(singleData: AttackData) {

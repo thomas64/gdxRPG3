@@ -14,7 +14,6 @@ import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.screens.battle.BattleState
 import nl.t64.cot.screens.battle.effects.FadeEffect
 import nl.t64.cot.screens.battle.effects.FloatingNumberEffect
-import nl.t64.cot.screens.battle.effects.ShakeEffect
 import nl.t64.cot.screens.battle.scene.AttackScene
 import nl.t64.cot.screens.dialog.MessageDialog
 
@@ -98,7 +97,6 @@ class AttackOutcomeManager(
     }
 
     private fun AttackData.playDamageEffect(battleField: Table, damageText: String, damageTextColor: Color) {
-        ShakeEffect(battleField, this.target).start()
         Utils.runWithDelay(0.5f) {
             FloatingNumberEffect(battleField, this.target, damageText, damageTextColor).floatUp()
             if (this.isTargetDead) {
