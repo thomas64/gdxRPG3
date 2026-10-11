@@ -2,6 +2,7 @@ package nl.t64.cot.components.battle
 
 import nl.t64.cot.Utils.preferenceManager
 import kotlin.math.abs
+import kotlin.math.ceil
 
 
 class EnemyAi(
@@ -138,14 +139,22 @@ class EnemyAi(
     }
 
     // a melee enemy only picks a spot from where it can still attack this turn, so it never walks past a hero
-    // it could have hit. only when no hero is attackable at all does it walk towards its highest-prio target.
+    // it could have hit. only when no hero is attackable at all does it walk towards the hero it can attack soonest,
+    // so a far away high-prio hero does not lure it past a nearby one. among equally near heroes the prio decides.
     private fun getBestMeleeDestinationFrom(heroIndicesByPrio: List<Int>): Int? {
-        val budgetForMovingAndAttacking: Int = actingEnemy.currentAP - actingEnemy.getCheapestAbilityAp()
-        return getAllIndicesFromWhereToAttackByPrio(heroIndicesByPrio, shouldAvoidBattleLock = false)
-            .onEach { if (getMoveCostTo(it) <= budgetForMovingAndAttacking) return it }
-            .firstOrNull()
-            ?.let { findFarthestReachableSpaceTo(it) }
+        val cheapestAbilityAp: Int = actingEnemy.getCheapestAbilityAp()
+        val budgetForMovingAndAttacking: Int = actingEnemy.currentAP - cheapestAbilityAp
+        val attackSpacesByPrio: List<Int> = getAllIndicesFromWhereToAttackByPrio(heroIndicesByPrio, shouldAvoidBattleLock = false)
+        return attackSpacesByPrio.firstOrNull { getMoveCostTo(it) <= budgetForMovingAndAttacking }
+            ?: attackSpacesByPrio.minByOrNull { getExtraTurnsNeededToAttackFrom(it, cheapestAbilityAp) }
+                ?.let { findFarthestReachableSpaceTo(it) }
             ?: getNextBestNearestEmptySpace(heroIndicesByPrio, shouldAvoidBattleLock = false)
+    }
+
+    private fun getExtraTurnsNeededToAttackFrom(attackSpace: Int, cheapestAbilityAp: Int): Int {
+        val apNeeded: Int = getMoveCostTo(attackSpace) + cheapestAbilityAp
+        val apShortThisTurn: Int = apNeeded - actingEnemy.currentAP
+        return ceil(apShortThisTurn / actingEnemy.maximumAP.toFloat()).toInt()
     }
 
     private fun getAllIndicesFromWhereToAttackByPrio(heroIndicesByPrio: List<Int>,
