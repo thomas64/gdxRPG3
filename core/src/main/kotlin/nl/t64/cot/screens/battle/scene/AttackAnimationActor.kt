@@ -16,12 +16,14 @@ private const val BLEND_ADD = 1
 class AttackAnimationActor(
     private val attackAnimation: AttackAnimation,
     private val animationScale: Float,
-    private val isAttackFromRight: Boolean
+    private val isAttackFromRight: Boolean,
+    private val onTargetFlash: (Color, Float) -> Unit
 ) : Actor() {
 
     private val texture: Texture = resourceManager.getTextureAsset("$SPRITE_PATH${attackAnimation.spriteName}.png")
     private val direction: Float = if (isAttackFromRight) -1f else 1f
     private var elapsedTime: Float = 0f
+    private var lastHandledFrame: Int = -1
     private val currentFrame: Int get() = (elapsedTime / attackAnimation.frameDurationInSeconds).toInt()
 
     override fun act(delta: Float) {
@@ -29,6 +31,8 @@ class AttackAnimationActor(
         elapsedTime += delta
         if (currentFrame >= attackAnimation.frames.size) {
             remove()
+        } else {
+            handleFlashesUntil(currentFrame)
         }
     }
 
@@ -38,6 +42,16 @@ class AttackAnimationActor(
         attackAnimation.frames[currentFrame].forEach { drawCell(batch, it, parentAlpha) }
         batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA)
         batch.color = Color.WHITE
+    }
+
+    // frames can be skipped in a slow moment, so every frame since the last one is handled.
+    private fun handleFlashesUntil(frame: Int) {
+        for (frameToHandle in (lastHandledFrame + 1)..frame) {
+            attackAnimation.flashes
+                .filter { it.atAnimationFrame == frameToHandle }
+                .forEach { onTargetFlash.invoke(it.toColor(), it.frameCount * attackAnimation.frameDurationInSeconds) }
+        }
+        lastHandledFrame = frame
     }
 
     private fun drawCell(batch: Batch, cell: AnimationCell, parentAlpha: Float) {

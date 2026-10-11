@@ -7,6 +7,9 @@
       [{"spriteCellIndex": 2, "x": 0, "y": -18, "scale": 1.8, "rotation": 0, "mirror": false, "opacity": 1, "blend": 1}],
       [{"spriteCellIndex": 3, "x": 0, "y": -18, "scale": 1.8, "rotation": 0, "mirror": false, "opacity": 1, "blend": 1}],
       [{"spriteCellIndex": 4, "x": 0, "y": -18, "scale": 1.8, "rotation": 0, "mirror": false, "opacity": 1, "blend": 1}]
+    ],
+    "flashes"   : [
+      {"atAnimationFrame": 0, "frameCount": 2, "color": [1, 1, 1, 0.75]}
     ]
   },
   "thrust" : {
@@ -17,6 +20,9 @@
       [{"spriteCellIndex": 2, "x": -120, "y": 0, "scale": 2, "rotation": -45, "mirror": true, "opacity": 1, "blend": 1}],
       [{"spriteCellIndex": 3, "x": -115, "y": 0, "scale": 2, "rotation": -45, "mirror": true, "opacity": 1, "blend": 1}],
       [{"spriteCellIndex": 4, "x": -115, "y": 0, "scale": 2, "rotation": -45, "mirror": true, "opacity": 1, "blend": 1}]
+    ],
+    "flashes"   : [
+      {"atAnimationFrame": 2, "frameCount": 2, "color": [1, 1, 1, 0.75]}
     ]
   },
   "claw"   : {
@@ -28,6 +34,9 @@
       [{"spriteCellIndex": 3, "x": 0, "y": -26, "scale": 1.7, "rotation": 0, "mirror": false, "opacity": 1, "blend": 1}],
       [{"spriteCellIndex": 4, "x": 0, "y": -26, "scale": 1.7, "rotation": 0, "mirror": false, "opacity": 1, "blend": 1}],
       [{"spriteCellIndex": 5, "x": 0, "y": -26, "scale": 1.7, "rotation": 0, "mirror": false, "opacity": 1, "blend": 1}]
+    ],
+    "flashes"   : [
+      {"atAnimationFrame": 1, "frameCount": 2, "color": [1, 1, 1, 1]}
     ]
   },
   "hit"    : {
@@ -38,6 +47,9 @@
       [{"spriteCellIndex": 1, "x": 0, "y": 0, "scale": 2, "rotation": 0, "mirror": false, "opacity": 1, "blend": 1}],
       [{"spriteCellIndex": 2, "x": 0, "y": 0, "scale": 2, "rotation": 0, "mirror": false, "opacity": 1, "blend": 1}],
       [{"spriteCellIndex": 3, "x": 0, "y": 0, "scale": 2, "rotation": 0, "mirror": false, "opacity": 1, "blend": 1}]
+    ],
+    "flashes"   : [
+      {"atAnimationFrame": 0, "frameCount": 2, "color": [1, 1, 1, 1]}
     ]
   },
   "fire"   : {
@@ -52,6 +64,13 @@
       [{"spriteCellIndex": 5, "x": 0, "y": -12, "scale": 2.25, "rotation": 0, "mirror": false, "opacity": 1, "blend": 1}],
       [{"spriteCellIndex": 6, "x": 0, "y": -12, "scale": 2.25, "rotation": 0, "mirror": false, "opacity": 1, "blend": 1}],
       [{"spriteCellIndex": 7, "x": 0, "y": -12, "scale": 2.25, "rotation": 0, "mirror": false, "opacity": 1, "blend": 1}]
+    ],
+    "flashes"      : [
+      {"atAnimationFrame": 0, "frameCount": 2, "color": [1, 1, 1, 0.85]},
+      {"atAnimationFrame": 2, "frameCount": 2, "color": [1, 1, 1, 0.85]},
+      {"atAnimationFrame": 4, "frameCount": 2, "color": [1, 1, 1, 0.85]},
+      {"atAnimationFrame": 6, "frameCount": 2, "color": [1, 1, 1, 0.85]},
+      {"atAnimationFrame": 8, "frameCount": 2, "color": [1, 1, 1, 0.85]}
     ]
   },
   "wind"   : {
@@ -68,6 +87,14 @@
       [{"spriteCellIndex": 22, "x": 0, "y": -55, "scale": 2.25, "rotation": 0, "mirror": false, "opacity": 1, "blend": 1}],
       [{"spriteCellIndex": 23, "x": 0, "y": -55, "scale": 2.25, "rotation": 0, "mirror": false, "opacity": 1, "blend": 1}],
       [{"spriteCellIndex": 24, "x": 0, "y": -55, "scale": 2.25, "rotation": 0, "mirror": false, "opacity": 1, "blend": 1}]
+    ],
+    "flashes"      : [
+      {"atAnimationFrame": 0, "frameCount": 2, "color": [1, 1, 1, 0.85]},
+      {"atAnimationFrame": 2, "frameCount": 2, "color": [1, 1, 1, 0.85]},
+      {"atAnimationFrame": 4, "frameCount": 2, "color": [1, 1, 1, 0.85]},
+      {"atAnimationFrame": 6, "frameCount": 2, "color": [1, 1, 1, 0.85]},
+      {"atAnimationFrame": 8, "frameCount": 2, "color": [1, 1, 1, 0.85]},
+      {"atAnimationFrame": 10, "frameCount": 2, "color": [1, 1, 1, 0.85]}
     ]
   },
   "thunder": {
@@ -81,6 +108,13 @@
       [{"spriteCellIndex": 4, "x": 0, "y": -12, "scale": 2.25, "rotation": 0, "mirror": false, "opacity": 1, "blend": 1}],
       [{"spriteCellIndex": 5, "x": 0, "y": -12, "scale": 2.25, "rotation": 0, "mirror": false, "opacity": 1, "blend": 1}],
       [{"spriteCellIndex": 6, "x": 0, "y": -12, "scale": 2.25, "rotation": 0, "mirror": false, "opacity": 1, "blend": 1}]
+    ],
+    "flashes"      : [
+      {"atAnimationFrame": 0, "frameCount": 2, "color": [1, 1, 1, 0.85]},
+      {"atAnimationFrame": 2, "frameCount": 2, "color": [1, 1, 1, 0.85]},
+      {"atAnimationFrame": 4, "frameCount": 2, "color": [1, 1, 1, 0.85]},
+      {"atAnimationFrame": 6, "frameCount": 2, "color": [1, 1, 1, 0.85]},
+      {"atAnimationFrame": 8, "frameCount": 2, "color": [1, 1, 1, 0.85]}
     ]
   }
 }

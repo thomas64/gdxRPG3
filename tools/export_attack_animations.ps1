@@ -1,6 +1,9 @@
 # Exports the battle animations of the attack scene from RPG Maker MV:
 # the sheets to assets/sprites/animations/ and the frame data to assets/configs/animations/attack_animations.json.
 # Run from anywhere: powershell -File tools/export_attack_animations.ps1 [-mv <path to MV's NewData>]
+#
+# This made the first version of attack_animations.json. Since then the json is adjusted by hand, and it is leading.
+# Running this again overwrites those adjustments, so only use it as a start for a new animation from MV.
 param([string]$mv = 'D:\SteamLibrary\steamapps\common\RPG Maker MV\NewData')
 
 $game = Join-Path $PSScriptRoot '..\assets'
@@ -26,8 +29,7 @@ New-Item -ItemType Directory -Force $sheetDir | Out-Null
 New-Item -ItemType Directory -Force "$game\configs\animations" | Out-Null
 foreach ($s in $sheetNames.Keys) { Copy-Item "$mv\img\animations\$s.png" "$sheetDir\$($sheetNames[$s]).png" -Force }
 
-# MV's wind is mint green (hue 156). it is turned to the blue that the target lights up in (sky, cyan, blue),
-# keeping its saturation and brightness.
+# MV's wind is mint green (hue 156). it is turned to blue (hue 200), keeping its saturation and brightness.
 Add-Type -ReferencedAssemblies System.Drawing -TypeDefinition @"
 using System; using System.Drawing;
 public static class HueShift {
@@ -57,12 +59,27 @@ function CellJson($p, $x, $y, $s, $r, $m, $o, $b) {
     '        {"spriteCellIndex":' + $p + ', "x": ' + $x + ', "y": ' + $y + ', "scale": ' + (Number ($s / 100)) + ', "rotation": ' + $r + ', "mirror": ' + $m + ', "opacity": ' + (Number ($o / 255)) + ', "blend": ' + $b + '}'
 }
 function FrameJson($cells) { if ($cells) { "      [`n" + ($cells -join ",`n") + "`n      ]" } else { "      []" } }
-function EntryJson($key, $spriteName, $frames, $frameDuration) {
+function EntryJson($key, $spriteName, $frames, $flashes, $frameDuration) {
     $frameDurationJson = if ($frameDuration) { "    `"frameDuration`": " + (Number $frameDuration) + ",`n" } else { "" }
+    $flashesJson = if ($flashes) { ",`n    `"flashes`": [`n" + ($flashes -join ",`n") + "`n    ]" } else { "" }
     "  `"$key`": {`n" +
     "    `"spriteName`": `"$spriteName`",`n" +
     $frameDurationJson +
-    "    `"frames`": [`n" + ($frames -join ",`n") + "`n    ]`n  }"
+    "    `"frames`": [`n" + ($frames -join ",`n") + "`n    ]" +
+    $flashesJson + "`n  }"
+}
+# a flash of the target, from atAnimationFrame on for frameCount frames, with its color as factors.
+function FlashJson($atAnimationFrame, $frameCount, $color) {
+    '      {"atAnimationFrame": ' + $atAnimationFrame + ', "frameCount": ' + $frameCount + ', "color": [' + (($color | ForEach-Object { Number $_ }) -join ', ') + ']}'
+}
+# MV gives a color as 0-255. as factors it is rounded to steps of 0.05, a difference that can't be seen.
+function ToRoundedFactors($mvColor) { $mvColor | ForEach-Object { [Math]::Round($_ / 255 * 20) / 20 } }
+# an element lets the target blink as long as its animation lasts: one flash per frame, between its color and white.
+function ElementBlinkFlashes($frameCount, $elementColor) {
+    $white = @(1, 1, 1, 0.85)
+    for ($frame = 0; $frame -lt $frameCount; $frame++) {
+        FlashJson $frame 1 $(if ($frame % 2 -eq 0) { $elementColor } else { $white })
+    }
 }
 
 function TakeOver($key) {
@@ -73,10 +90,11 @@ function TakeOver($key) {
             CellJson $c[0] $c[1] $c[2] $c[3] $c[4] ($c[5] -eq 1).ToString().ToLower() $c[6] $c[7]
         })
     }
-    EntryJson $key $sheetNames[$a.animation1Name] $frames
+    $flashes = foreach ($t in $a.timings) { if ($t.flashScope -eq 1) { FlashJson $t.frame $t.flashDuration (ToRoundedFactors $t.flashColor) } }
+    EntryJson $key $sheetNames[$a.animation1Name] $frames $flashes
 }
 
-# a cell that MV shows again is left out, so every cell is used once.
+# a cell that MV shows again is left out, so every cell is used once. the color of the blink is MV's flash color.
 function TakeOverElement($key) {
     $a = $all[$elements[$key]]
     $usedCells = @{}
@@ -88,7 +106,9 @@ function TakeOverElement($key) {
         })
         if ($cells) { FrameJson $cells }
     }
-    EntryJson $key $sheetNames[$a.animation2Name] $frames ($elementDuration / @($frames).Count)
+    $elementColor = ToRoundedFactors ($a.timings | Where-Object { $_.flashScope -eq 1 } | Select-Object -First 1).flashColor
+    $flashes = ElementBlinkFlashes @($frames).Count $elementColor
+    EntryJson $key $sheetNames[$a.animation2Name] $frames $flashes ($elementDuration / @($frames).Count)
 }
 
 # MV's pierce animations are starbursts, not a thrust. So 'thrust' is composed:
@@ -103,14 +123,18 @@ function Thrust {
         @((Streak 3 -115)),
         @((Streak 4 -115))
     ) | ForEach-Object { FrameJson $_ }
-    EntryJson 'thrust' 'physical_strike' $frames
+    # the same flash as 'swing', at the frame where the streak reaches the enemy.
+    EntryJson 'thrust' 'physical_strike' $frames @((FlashJson 2 2 @(1, 1, 1, 0.75)))
 }
 
 # MV has no 'Hit Wind', so it is composed from the 10 whirlwind cells (15-24) of the wind sheet.
 # the whirlwind is tall, so it is placed higher than fire and thunder (-12), to stand over the enemy.
+# without a flash of its own, it blinks in the flash color of MV's 'Hit Ice', which is blue like this wind.
 function Wind {
     $frames = foreach ($cell in 15..24) { FrameJson @((CellJson $cell 0 -55 225 0 'false' 255 1)) }
-    EntryJson 'wind' 'wind_impact' $frames ($elementDuration / @($frames).Count)
+    $elementColor = ToRoundedFactors ($all[4].timings | Where-Object { $_.flashScope -eq 1 } | Select-Object -First 1).flashColor
+    $flashes = ElementBlinkFlashes @($frames).Count $elementColor
+    EntryJson 'wind' 'wind_impact' $frames $flashes ($elementDuration / @($frames).Count)
 }
 
 $entries = @(

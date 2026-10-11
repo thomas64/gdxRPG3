@@ -12,7 +12,6 @@ import nl.t64.cot.components.battle.Character
 import nl.t64.cot.components.battle.TurnManager
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.screens.battle.BattleState
-import nl.t64.cot.screens.battle.effects.BlinkEffect
 import nl.t64.cot.screens.battle.effects.FadeEffect
 import nl.t64.cot.screens.battle.effects.FloatingNumberEffect
 import nl.t64.cot.screens.battle.effects.ShakeEffect
@@ -99,8 +98,6 @@ class AttackOutcomeManager(
     }
 
     private fun AttackData.playDamageEffect(battleField: Table, damageText: String, damageTextColor: Color) {
-        val blinkColors: Array<Color> = this.getPossibleElementColors().toTypedArray()
-        BlinkEffect(battleField, this.target, *blinkColors).start()
         ShakeEffect(battleField, this.target).start()
         Utils.runWithDelay(0.5f) {
             FloatingNumberEffect(battleField, this.target, damageText, damageTextColor).floatUp()
@@ -111,15 +108,6 @@ class AttackOutcomeManager(
                     turnManager.removeKilledParticipants()
                 }
             }
-        }
-    }
-
-    private fun AttackData.getPossibleElementColors(): List<Color> {
-        return when {
-            this.isFire() -> listOf(Color.ORANGE, Color.RED, Color.SCARLET, Color.RED, Color.ORANGE, Color.YELLOW)
-            this.isWind() -> listOf(Color.SKY, Color.CYAN, Color.BLUE, Color.CYAN, Color.SKY, Color.BLUE)
-            this.isThunder() -> listOf(Color.YELLOW, Color.SKY, Color.YELLOW, Color.CYAN, Color.YELLOW)
-            else -> emptyList()
         }
     }
 

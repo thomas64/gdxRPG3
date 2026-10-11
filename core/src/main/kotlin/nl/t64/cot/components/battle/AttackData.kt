@@ -69,4 +69,8 @@ class AttackData {
     fun isSwung(): Boolean {
         return weaponSkill?.isSwungWeapon() == true
     }
+
+    fun isHit(): Boolean {
+        return !isMissed && !isBlocked
+    }
 }

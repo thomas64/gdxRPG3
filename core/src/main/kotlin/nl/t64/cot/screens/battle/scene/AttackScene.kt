@@ -120,13 +120,14 @@ class AttackScene(
     }
 
     private fun possiblePlayAnimation(singleData: AttackData) {
-        val isFailedMagic: Boolean = singleData.isMagic() && (singleData.isMissed || singleData.isBlocked)
+        val isFailedMagic: Boolean = singleData.isMagic() && !singleData.isHit()
         if (isFailedMagic) return
 
         val animationId: AttackAnimationId = singleData.getAttackAnimationId()
         val animation = AttackAnimationActor(AttackAnimationDatabase.getAnimation(animationId),
                                              ATTACK_ANIMATION_SCALE,
-                                             isAttackFromRight = !isHeroAttacking)
+                                             isAttackFromRight = !isHeroAttacking,
+                                             singleData.getTargetFlash())
         animation.setPosition(targetCombatant.centerX, targetCombatant.centerY)
         addActor(animation)
     }
@@ -195,6 +196,10 @@ class AttackScene(
         } else {
             CombatantMotion.WAIT
         }
+    }
+
+    private fun AttackData.getTargetFlash(): (Color, Float) -> Unit {
+        return if (this.isHit()) targetCombatant::flash else { _, _ -> } // no target flash.
     }
 
     private fun AttackData.getAttackAnimationId(): AttackAnimationId {
