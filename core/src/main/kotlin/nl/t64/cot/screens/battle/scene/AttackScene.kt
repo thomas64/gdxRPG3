@@ -1,10 +1,12 @@
 package nl.t64.cot.screens.battle.scene
 
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.scenes.scene2d.Action
 import com.badlogic.gdx.scenes.scene2d.Group
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
+import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.Table
@@ -14,6 +16,7 @@ import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.battle.AttackData
 import nl.t64.cot.components.battle.Character
 import nl.t64.cot.screens.FontProvider
+import nl.t64.cot.toTexture
 
 
 private const val HERO_SCALE = 3f
@@ -44,7 +47,12 @@ private const val DODGE_DURATION = 0.1f
 private const val DODGE_HOLD_DURATION = 0.2f
 private const val DODGE_BACK_DURATION = 0.15f
 private const val SHAKE_INTENSITY = 40f
+private const val CRITICAL_SHAKE_INTENSITY = 80f
 private const val SHAKE_DURATION = 0.3f
+
+private const val HIT_STOP_DURATION = 0.2f
+private const val SCREEN_FLASH_ALPHA = 0.8f
+private const val SCREEN_FLASH_FADE_DURATION = 0.1f
 
 private const val NUMBER_RISE = 60f
 private const val NUMBER_DURATION = 1.5f
@@ -55,6 +63,9 @@ private const val CRITICAL_POP_DURATION = 0.15f
 
 private const val LYING_DURATION = 0.3f
 private const val DEATH_DURATION = 0.8f
+
+// lazy, because a texture can only be made once the game is running.
+private val WHITE_TEXTURE: Texture by lazy { Color.WHITE.toTexture() }
 
 class AttackScene(
     heroCharacter: Character,
@@ -68,6 +79,7 @@ class AttackScene(
     private val enemyCombatant = EnemyCombatantActor(enemyCharacter.id, ENEMY_SCALE)
     private val targetCombatant: CombatantActor = if (isHeroAttacking) enemyCombatant else heroCombatant
     private val isMelee: Boolean = attackData.first().isMelee()
+    private var hitStopTimeLeft: Float = 0f
 
     init {
         heroCombatant.setPosition(HERO_X, GROUND_Y)
@@ -89,6 +101,15 @@ class AttackScene(
             Actions.run { onFinished.invoke() },
             Actions.removeActor()
         ))
+    }
+
+    // during a hit-stop everything in the scene freezes, including the steps that are still to come.
+    override fun act(delta: Float) {
+        if (hitStopTimeLeft > 0f) {
+            hitStopTimeLeft -= delta
+            return
+        }
+        super.act(delta)
     }
 
     private fun createStepForward(): Action {
@@ -143,6 +164,7 @@ class AttackScene(
         possiblePlayAnimation(singleData)
         shakeOrDodgeTarget(singleData)
         possibleReact(singleData)
+        possibleStartHitStopWithScreenFlash(singleData)
         showNumberWhenReady(singleData)
     }
 
@@ -163,7 +185,7 @@ class AttackScene(
         if (singleData.isMissed) {
             dodgeTarget()
         } else {
-            shakeTarget()
+            shakeTarget(singleData)
         }
     }
 
@@ -176,8 +198,8 @@ class AttackScene(
         ))
     }
 
-    private fun shakeTarget() {
-        targetCombatant.addAction(ShakeAction(SHAKE_INTENSITY, SHAKE_DURATION))
+    private fun shakeTarget(singleData: AttackData) {
+        targetCombatant.addAction(ShakeAction(singleData.getShakeIntensity(), SHAKE_DURATION))
     }
 
     private fun possibleReact(singleData: AttackData) {
@@ -185,6 +207,26 @@ class AttackScene(
 
         heroCombatant.playMotion(singleData.getHeroReactionMotion())
         addAction(Actions.delay(REACTION_DURATION, createHeroWait()))
+    }
+
+    private fun possibleStartHitStopWithScreenFlash(singleData: AttackData) {
+        if (!singleData.isCriticalHit) return
+
+        hitStopTimeLeft = HIT_STOP_DURATION
+        showScreenFlash()
+    }
+
+    // the flash is put on the stage instead of in this scene, so it does not freeze with the hit-stop.
+    // it is gone quickly, so that the frozen moment itself can be seen.
+    private fun showScreenFlash() {
+        val screenFlash = Image(WHITE_TEXTURE)
+        screenFlash.setSize(stage.width, stage.height)
+        screenFlash.color.a = SCREEN_FLASH_ALPHA
+        stage.addActor(screenFlash)
+        screenFlash.addAction(Actions.sequence(
+            Actions.fadeOut(SCREEN_FLASH_FADE_DURATION),
+            Actions.removeActor()
+        ))
     }
 
     private fun showNumberWhenReady(singleData: AttackData) {
@@ -315,6 +357,10 @@ class AttackScene(
             this.isBlocked -> CombatantMotion.GUARD
             else -> CombatantMotion.DAMAGE
         }
+    }
+
+    private fun AttackData.getShakeIntensity(): Float {
+        return if (this.isCriticalHit) CRITICAL_SHAKE_INTENSITY else SHAKE_INTENSITY
     }
 
     private fun AttackData.getNumberDelay(): Float {
