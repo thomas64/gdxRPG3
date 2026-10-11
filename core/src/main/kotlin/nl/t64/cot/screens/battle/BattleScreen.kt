@@ -133,7 +133,7 @@ class BattleScreen : Screen {
         menuManager = BattleMenuManager(stage, menuBuilder, turnManager, battleField, ::currentParticipant, createMenuHandlers())
         dialogManager = BattleDialogManager(stage, turnManager, ::currentParticipant, battleState)
         confirmManager = BattleConfirmManager(stage, turnManager, battleHud::battleFieldTable, ::currentParticipant, battleState)
-        attackOutcomeManager = AttackOutcomeManager(stage, turnManager, battleHud::battleFieldTable, battleState)
+        attackOutcomeManager = AttackOutcomeManager(stage, turnManager, battleState)
         specialOutcomeManager = SpecialOutcomeManager(battleHud::battleFieldTable, battleState)
         resultManager = BattleResultManager(stage, battleObserver, battleId, enemies, turnManager, battleState)
 

@@ -1,28 +1,20 @@
 package nl.t64.cot.screens.battle.action
 
 import com.badlogic.gdx.scenes.scene2d.Stage
-import com.badlogic.gdx.scenes.scene2d.ui.Table
-import nl.t64.cot.Utils
 import nl.t64.cot.audio.AudioEvent
-import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.battle.AttackAction
 import nl.t64.cot.components.battle.AttackData
 import nl.t64.cot.components.battle.Character
 import nl.t64.cot.components.battle.TurnManager
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.screens.battle.BattleState
-import nl.t64.cot.screens.battle.effects.FadeEffect
 import nl.t64.cot.screens.battle.scene.AttackScene
 import nl.t64.cot.screens.dialog.MessageDialog
 
 
-private const val DEFAULT_FLOATING_NUMBER_DELAY = 1.2f
-private const val DEATH_DELAY = 1.4f
-
 class AttackOutcomeManager(
     private val stage: Stage,
     private val turnManager: TurnManager,
-    private val battleFieldTable: () -> Table,
     private val battleState: BattleState
 ) {
 
@@ -30,7 +22,7 @@ class AttackOutcomeManager(
         battleState.isDelayingTurn = true
         val hero: Character = attackData.getTarget()
         playEnemyAttackScene(attackData) {
-            playOutcomeOnBattleField(attackData, hero)
+            finishAttack(attackData, hero)
         }
     }
 
@@ -39,7 +31,7 @@ class AttackOutcomeManager(
         battleState.isDelayingTurn = true
         val enemy: Character = attackData.getTarget()
         playHeroAttackScene(attackData) {
-            playOutcomeOnBattleField(attackData, enemy)
+            finishAttack(attackData, enemy)
         }
     }
 
@@ -55,12 +47,10 @@ class AttackOutcomeManager(
         AttackScene(hero, enemy, isHeroAttacking = true, attackData, onFinished).play(stage)
     }
 
-    // the target is known from the start, because it may already be removed from the battle when the messages show.
-    private fun playOutcomeOnBattleField(attackData: List<AttackData>, target: Character) {
-        attackData.playEffectsSequentially()
-        Utils.runWithDelay(attackData.getDelay()) {
-            attackData.possibleShowMessagesAndSetDelayingTurnToFalse(target)
-        }
+    // the target is known from the start, because a killed target is removed from the battle before the messages show.
+    private fun finishAttack(attackData: List<AttackData>, target: Character) {
+        turnManager.removeKilledParticipants()
+        attackData.possibleShowMessagesAndSetDelayingTurnToFalse(target)
     }
 
     private fun List<AttackData>.getAttacker(): Character {
@@ -69,41 +59,6 @@ class AttackOutcomeManager(
 
     private fun List<AttackData>.getTarget(): Character {
         return turnManager.getParticipant(this.first().target).character
-    }
-
-    private fun List<AttackData>.playEffectsSequentially(index: Int = 0) {
-        if (index >= this.size) return
-
-        val singleData = this[index]
-        singleData.possiblePlayDeath()
-
-        val delay: Float = if (index == 0 && this.size > 1) singleData.getDelay().toFloat() + 0.2f else 0f
-        Utils.runWithDelay(delay) {
-            playEffectsSequentially(index + 1)
-        }
-    }
-
-    private fun AttackData.possiblePlayDeath() {
-        if (!this.isTargetDead) return
-
-        Utils.runWithDelay(DEATH_DELAY) {
-            playSe(AudioEvent.SE_VANISH)
-            FadeEffect(battleFieldTable.invoke(), this.target).start()
-            turnManager.removeKilledParticipants()
-        }
-    }
-
-    private fun List<AttackData>.getDelay(): Float {
-        return this.sumOf { it.getDelay() }.toFloat()
-    }
-
-    private fun AttackData.getDelay(): Double {
-        return when {
-            isMissed -> DEFAULT_FLOATING_NUMBER_DELAY.toDouble()
-            isBlocked -> DEFAULT_FLOATING_NUMBER_DELAY.toDouble()
-            isTargetDead -> 3.5
-            else -> 1.6
-        }
     }
 
     private fun List<AttackData>.possibleShowMessagesAndSetDelayingTurnToFalse(target: Character) {

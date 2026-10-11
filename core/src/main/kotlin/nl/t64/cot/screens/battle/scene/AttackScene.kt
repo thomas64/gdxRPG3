@@ -53,6 +53,9 @@ private const val SPELL_NUMBER_DELAY = 0.35f
 private const val CRITICAL_POP_SCALE = 1.6f
 private const val CRITICAL_POP_DURATION = 0.15f
 
+private const val LYING_DURATION = 0.3f
+private const val DEATH_DURATION = 0.8f
+
 class AttackScene(
     heroCharacter: Character,
     enemyCharacter: Character,
@@ -106,10 +109,9 @@ class AttackScene(
         return Actions.sequence(
             createAttackStart(singleData),
             Actions.run { playImpact(singleData) },
-            Actions.parallel(
-                createHoldThen(attackEnd),
-                createWaitForNumber(singleData)
-            )
+            Actions.parallel(createHoldThen(attackEnd),
+                             createWaitForNumber(singleData)),
+            createPossibleDeath(singleData)
         )
     }
 
@@ -182,9 +184,7 @@ class AttackScene(
         if (isHeroAttacking) return
 
         heroCombatant.playMotion(singleData.getHeroReactionMotion())
-        addAction(Actions.delay(REACTION_DURATION, Actions.run {
-            heroCombatant.playMotion(singleData.getHeroMotionAfterReaction())
-        }))
+        addAction(Actions.delay(REACTION_DURATION, createHeroWait()))
     }
 
     private fun showNumberWhenReady(singleData: AttackData) {
@@ -227,6 +227,33 @@ class AttackScene(
 
     private fun createWaitForNumber(singleData: AttackData): Action {
         return Actions.delay(singleData.getNumberDelay() + NUMBER_DURATION)
+    }
+
+    private fun createPossibleDeath(singleData: AttackData): Action {
+        return if (singleData.isTargetDead) {
+            createDeath()
+        } else {
+            Actions.sequence()
+        }
+    }
+
+    private fun createDeath(): Action {
+        return Actions.sequence(
+            createPossibleLieDown(),
+            Actions.run { playSe(AudioEvent.SE_VANISH) },
+            Actions.targeting(targetCombatant, Actions.fadeOut(DEATH_DURATION))
+        )
+    }
+
+    private fun createPossibleLieDown(): Action {
+        return if (isHeroAttacking) {
+            Actions.sequence()
+        } else {
+            Actions.sequence(
+                Actions.run { heroCombatant.playMotion(CombatantMotion.DEAD) },
+                Actions.delay(HERO_TIME_UNTIL_LAST_FRAME + LYING_DURATION)
+            )
+        }
     }
 
     private fun createAttackEnd(): Action {
@@ -287,14 +314,6 @@ class AttackScene(
             this.isMissed -> CombatantMotion.EVADE
             this.isBlocked -> CombatantMotion.GUARD
             else -> CombatantMotion.DAMAGE
-        }
-    }
-
-    private fun AttackData.getHeroMotionAfterReaction(): CombatantMotion {
-        return if (this.isTargetDead) {
-            CombatantMotion.DEAD
-        } else {
-            CombatantMotion.WAIT
         }
     }
 
