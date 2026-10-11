@@ -1,7 +1,7 @@
 package nl.t64.cot.screens.battle.scene
 
 
-enum class AttackAnimationId {
+enum class BattleSceneAnimationId {
     SWING,
     THRUST,
     CLAW,

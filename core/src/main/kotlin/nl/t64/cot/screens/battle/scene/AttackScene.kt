@@ -175,11 +175,11 @@ class AttackScene(
         val isFailedMagic: Boolean = singleData.isMagic() && !singleData.isHit()
         if (isFailedMagic) return
 
-        val animationId: AttackAnimationId = singleData.getAttackAnimationId()
-        val animation = AttackAnimationActor(AttackAnimationDatabase.getAnimation(animationId),
-                                             ATTACK_ANIMATION_SCALE,
-                                             isAttackFromRight = !isHeroAttacking,
-                                             singleData.getTargetFlash())
+        val animationId: BattleSceneAnimationId = singleData.getAttackAnimationId()
+        val animation = BattleSceneAnimationActor(BattleSceneAnimationDatabase.getAnimation(animationId),
+                                                  ATTACK_ANIMATION_SCALE,
+                                                  isAttackFromRight = !isHeroAttacking,
+                                                  singleData.getTargetFlash())
         animation.setPosition(targetCombatant.centerX, targetCombatant.centerY)
         addActor(animation)
     }
@@ -396,15 +396,15 @@ class AttackScene(
     }
 
     // the flat streak of the thrust is used for the bow and throwing as well.
-    private fun AttackData.getAttackAnimationId(): AttackAnimationId {
+    private fun AttackData.getAttackAnimationId(): BattleSceneAnimationId {
         return when {
-            this.isFire() -> AttackAnimationId.FIRE
-            this.isWind() -> AttackAnimationId.WIND
-            this.isThunder() -> AttackAnimationId.THUNDER
-            this.isScratch() -> AttackAnimationId.CLAW
-            this.isBite() || this.isBodySlam() -> AttackAnimationId.HIT
-            this.isSwung() -> AttackAnimationId.SWING
-            else -> AttackAnimationId.THRUST
+            this.isFire() -> BattleSceneAnimationId.FIRE
+            this.isWind() -> BattleSceneAnimationId.WIND
+            this.isThunder() -> BattleSceneAnimationId.THUNDER
+            this.isScratch() -> BattleSceneAnimationId.CLAW
+            this.isBite() || this.isBodySlam() -> BattleSceneAnimationId.HIT
+            this.isSwung() -> BattleSceneAnimationId.SWING
+            else -> BattleSceneAnimationId.THRUST
         }
     }
 

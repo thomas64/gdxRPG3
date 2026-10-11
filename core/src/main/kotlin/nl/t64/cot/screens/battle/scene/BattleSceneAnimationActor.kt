@@ -13,23 +13,23 @@ private const val CELL_SIZE = 192
 private const val CELLS_PER_ROW = 5
 private const val BLEND_ADD = 1
 
-class AttackAnimationActor(
-    private val attackAnimation: AttackAnimation,
+class BattleSceneAnimationActor(
+    private val animation: BattleSceneAnimation,
     private val animationScale: Float,
     private val isAttackFromRight: Boolean,
     private val onTargetFlash: (Color, Float) -> Unit
 ) : Actor() {
 
-    private val texture: Texture = resourceManager.getTextureAsset("$SPRITE_PATH${attackAnimation.spriteName}.png")
+    private val texture: Texture = resourceManager.getTextureAsset("$SPRITE_PATH${animation.spriteName}.png")
     private val direction: Float = if (isAttackFromRight) -1f else 1f
     private var elapsedTime: Float = 0f
     private var lastHandledFrame: Int = -1
-    private val currentFrame: Int get() = (elapsedTime / attackAnimation.frameDurationInSeconds).toInt()
+    private val currentFrame: Int get() = (elapsedTime / animation.frameDurationInSeconds).toInt()
 
     override fun act(delta: Float) {
         super.act(delta)
         elapsedTime += delta
-        if (currentFrame >= attackAnimation.frames.size) {
+        if (currentFrame >= animation.frames.size) {
             remove()
         } else {
             handleFlashesUntil(currentFrame)
@@ -37,9 +37,9 @@ class AttackAnimationActor(
     }
 
     override fun draw(batch: Batch, parentAlpha: Float) {
-        if (currentFrame >= attackAnimation.frames.size) return
+        if (currentFrame >= animation.frames.size) return
 
-        attackAnimation.frames[currentFrame].forEach { drawCell(batch, it, parentAlpha) }
+        animation.frames[currentFrame].forEach { drawCell(batch, it, parentAlpha) }
         batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA)
         batch.color = Color.WHITE
     }
@@ -47,9 +47,9 @@ class AttackAnimationActor(
     // frames can be skipped in a slow moment, so every frame since the last one is handled.
     private fun handleFlashesUntil(frame: Int) {
         for (frameToHandle in (lastHandledFrame + 1)..frame) {
-            attackAnimation.flashes
+            animation.flashes
                 .filter { it.atAnimationFrame == frameToHandle }
-                .forEach { onTargetFlash.invoke(it.toColor(), it.frameCount * attackAnimation.frameDurationInSeconds) }
+                .forEach { onTargetFlash.invoke(it.toColor(), it.frameCount * animation.frameDurationInSeconds) }
         }
         lastHandledFrame = frame
     }

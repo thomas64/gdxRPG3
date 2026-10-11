@@ -1,1 +1,1 @@
-attack_animations.json
+battle_scene_animations.json

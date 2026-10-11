@@ -1,8 +1,8 @@
-# Exports the battle animations of the attack scene from RPG Maker MV:
-# the sheets to assets/sprites/animations/ and the frame data to assets/configs/animations/attack_animations.json.
-# Run from anywhere: powershell -File tools/export_attack_animations.ps1 [-mv <path to MV's NewData>]
+# Exports the animations of the battle scenes from RPG Maker MV:
+# the sheets to assets/sprites/animations/ and the frame data to assets/configs/animations/battle_scene_animations.json.
+# Run from anywhere: powershell -File tools/export_battle_scene_animations.ps1 [-mv <path to MV's NewData>]
 #
-# This made the first version of attack_animations.json. Since then the json is adjusted by hand, and it is leading.
+# This made the first version of battle_scene_animations.json. Since then the json is adjusted by hand, and it is leading.
 # Running this again overwrites those adjustments, so only use it as a start for a new animation from MV.
 param([string]$mv = 'D:\SteamLibrary\steamapps\common\RPG Maker MV\NewData')
 
@@ -147,6 +147,6 @@ $entries = @(
     (TakeOverElement 'thunder')
 )
 $json = "{`n" + ($entries -join ",`n") + "`n}`n"
-[System.IO.File]::WriteAllText("$game\configs\animations\attack_animations.json", $json)
-[System.IO.File]::WriteAllText("$game\configs\animations\_files.txt", "attack_animations.json`n")
+[System.IO.File]::WriteAllText("$game\configs\animations\battle_scene_animations.json", $json)
+[System.IO.File]::WriteAllText("$game\configs\animations\_files.txt", "battle_scene_animations.json`n")
 Get-ChildItem $sheetDir | Select-Object -ExpandProperty Name
