@@ -69,8 +69,7 @@
       {"atAnimationFrame": 0, "frameCount": 2, "color": [1, 1, 1, 0.85]},
       {"atAnimationFrame": 2, "frameCount": 2, "color": [1, 1, 1, 0.85]},
       {"atAnimationFrame": 4, "frameCount": 2, "color": [1, 1, 1, 0.85]},
-      {"atAnimationFrame": 6, "frameCount": 2, "color": [1, 1, 1, 0.85]},
-      {"atAnimationFrame": 8, "frameCount": 2, "color": [1, 1, 1, 0.85]}
+      {"atAnimationFrame": 6, "frameCount": 2, "color": [1, 1, 1, 0.85]}
     ]
   },
   "wind"   : {
@@ -93,8 +92,7 @@
       {"atAnimationFrame": 2, "frameCount": 2, "color": [1, 1, 1, 0.85]},
       {"atAnimationFrame": 4, "frameCount": 2, "color": [1, 1, 1, 0.85]},
       {"atAnimationFrame": 6, "frameCount": 2, "color": [1, 1, 1, 0.85]},
-      {"atAnimationFrame": 8, "frameCount": 2, "color": [1, 1, 1, 0.85]},
-      {"atAnimationFrame": 10, "frameCount": 2, "color": [1, 1, 1, 0.85]}
+      {"atAnimationFrame": 8, "frameCount": 2, "color": [1, 1, 1, 0.85]}
     ]
   },
   "thunder": {
@@ -113,8 +111,7 @@
       {"atAnimationFrame": 0, "frameCount": 2, "color": [1, 1, 1, 0.85]},
       {"atAnimationFrame": 2, "frameCount": 2, "color": [1, 1, 1, 0.85]},
       {"atAnimationFrame": 4, "frameCount": 2, "color": [1, 1, 1, 0.85]},
-      {"atAnimationFrame": 6, "frameCount": 2, "color": [1, 1, 1, 0.85]},
-      {"atAnimationFrame": 8, "frameCount": 2, "color": [1, 1, 1, 0.85]}
+      {"atAnimationFrame": 6, "frameCount": 2, "color": [1, 1, 1, 0.85]}
     ]
   }
 }

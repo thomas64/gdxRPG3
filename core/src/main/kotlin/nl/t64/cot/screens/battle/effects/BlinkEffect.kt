@@ -12,39 +12,17 @@ private const val BLINK_DURATION = 0.1f
 class BlinkEffect(
     private val battleFieldTable: Table,
     private val currentTargetName: String,
-    private vararg val blinkColors: Color
+    private val blinkColor: Color
 ) {
 
     fun start() {
         val target: Actor = findActorIn(battleFieldTable) ?: return
-        val colorSequence: List<Color> = createColorSequence()
-        if (colorSequence.isEmpty()) return
-
         target.addAction(Actions.sequence(
-            *colorSequence.map { Actions.color(it, BLINK_DURATION) }.toTypedArray()
+            Actions.color(blinkColor, BLINK_DURATION),
+            Actions.color(Color.WHITE, BLINK_DURATION),
+            Actions.color(blinkColor, BLINK_DURATION),
+            Actions.color(Color.WHITE, BLINK_DURATION)
         ))
-    }
-
-    private fun createColorSequence(): List<Color> {
-        if (blinkColors.isEmpty()) return emptyList()
-
-        if (blinkColors.size == 1) {
-            return listOf(blinkColors[0], Color.WHITE, blinkColors[0], Color.WHITE)
-        }
-
-        val sequence = mutableListOf<Color>()
-        blinkColors.forEachIndexed { index, color ->
-            sequence.add(color)
-            if (color != Color.WHITE && index < blinkColors.lastIndex) {
-                sequence.add(Color.WHITE)
-            }
-        }
-
-        if (sequence.lastOrNull() != Color.WHITE) {
-            sequence.add(Color.WHITE)
-        }
-
-        return sequence
     }
 
     private fun findActorIn(root: Group): Actor? {

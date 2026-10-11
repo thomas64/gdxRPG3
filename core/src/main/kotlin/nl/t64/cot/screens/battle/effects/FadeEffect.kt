@@ -9,14 +9,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 class FadeEffect(
     private val battleFieldTable: Table,
     private val currentTargetName: String,
-    private val initialDelay: Float = 0.2f,
-    private val fadeDuration: Float = 1f
+    private val fadeDuration: Float
 ) {
 
     fun start() {
         val target: Actor? = findActorIn(battleFieldTable)
         target?.addAction(Actions.sequence(
-            Actions.delay(initialDelay),
             Actions.fadeOut(fadeDuration),
             Actions.removeActor()
         ))

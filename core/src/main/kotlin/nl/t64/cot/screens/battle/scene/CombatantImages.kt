@@ -7,6 +7,7 @@ import nl.t64.cot.resources.SpriteConfig
 
 
 private const val COMBATANT_PATH = "sprites/combatants/"
+// an enemy sheet has the same layout as the walking sprite sheet of that enemy: 4 x 2 color variants.
 private const val ENEMY_SHEET_COLS = 4
 private const val ENEMY_SHEET_ROWS = 2
 

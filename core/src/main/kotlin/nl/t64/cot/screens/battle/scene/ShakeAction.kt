@@ -4,13 +4,14 @@ import com.badlogic.gdx.scenes.scene2d.Action
 import kotlin.random.Random
 
 
-class ShakeAction(
+internal class ShakeAction(
     private val intensity: Float,
     private val duration: Float
 ) : Action() {
-    private var elapsedTime = 0f
-    private var originalX = 0f
-    private var originalY = 0f
+
+    private var elapsedTime: Float = 0f
+    private var originalX: Float = 0f
+    private var originalY: Float = 0f
 
     override fun act(delta: Float): Boolean {
         if (elapsedTime == 0f) {
@@ -30,4 +31,5 @@ class ShakeAction(
         actor.setPosition(originalX, originalY)
         return true
     }
+
 }

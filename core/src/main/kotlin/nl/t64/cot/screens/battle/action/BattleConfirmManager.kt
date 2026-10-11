@@ -138,8 +138,7 @@ class BattleConfirmManager(
         playSe(AudioEvent.SE_FLEE)
         FadeEffect(battleFieldTable.invoke(),
                    currentParticipant.invoke().character.name,
-                   initialDelay = 0f,
-                   fadeDuration = FLEE_FADE_DURATION)
+                   FLEE_FADE_DURATION)
             .start()
         onFled.invoke()
         Utils.runWithDelay(FLEE_FADE_DURATION) {

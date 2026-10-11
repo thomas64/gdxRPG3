@@ -57,13 +57,15 @@ private const val SCREEN_FLASH_FADE_DURATION = 0.1f
 private const val NUMBER_RISE = 60f
 private const val NUMBER_DURATION = 1.5f
 private const val NUMBER_FADE_DURATION = 0.1f
+// a spell takes longer to build up than a weapon strike, so its number waits until the spell has hit.
 private const val SPELL_NUMBER_DELAY = 0.35f
 private const val CRITICAL_POP_SCALE = 1.6f
 private const val CRITICAL_POP_DURATION = 0.15f
 
-private const val LYING_DURATION = 0.3f
+private const val LYING_DURATION = 0.45f
 private const val DEATH_DURATION = 0.8f
 
+private val NO_TARGET_FLASH: (Color, Float) -> Unit = { _, _ -> }
 // lazy, because a texture can only be made once the game is running.
 private val WHITE_TEXTURE: Texture by lazy { Color.WHITE.toTexture() }
 
@@ -151,6 +153,7 @@ class AttackScene(
         )
     }
 
+    // an enemy is one still image without motions, so it lights up white first to show that it attacks.
     private fun createEnemyAttackStart(): Action {
         return Actions.sequence(
             Actions.run { enemyCombatant.flash(Color.WHITE, ENEMY_WHITEN_DURATION) },
@@ -239,6 +242,7 @@ class AttackScene(
         number.setPosition(targetCombatant.centerX - (number.width / 2f), targetCombatant.y + targetCombatant.height)
         val startScale: Float = if (style == NumberStyle.CRITICAL) CRITICAL_POP_SCALE else 1f
         number.setScale(startScale)
+        // the fade-in of the rise starts from the current alpha, so the number has to start invisible.
         number.color.a = 0f
         addActor(number)
         number.addAction(createNumberRise())
@@ -293,7 +297,7 @@ class AttackScene(
         } else {
             Actions.sequence(
                 Actions.run { heroCombatant.playMotion(CombatantMotion.DEAD) },
-                Actions.delay(HERO_TIME_UNTIL_LAST_FRAME + LYING_DURATION)
+                Actions.delay(LYING_DURATION)
             )
         }
     }
@@ -342,6 +346,8 @@ class AttackScene(
         return Actions.run { heroCombatant.playMotion(CombatantMotion.WAIT) }
     }
 
+    // a staff only casts spells, and a hero always attacks with a weapon. so the thrust is left for the spear
+    // and the dagger.
     private fun AttackData.getHeroAttackMotion(): CombatantMotion {
         return when {
             this.isMagic() -> CombatantMotion.SPELL
@@ -386,9 +392,10 @@ class AttackScene(
     }
 
     private fun AttackData.getTargetFlash(): (Color, Float) -> Unit {
-        return if (this.isHit()) targetCombatant::flash else { _, _ -> } // no target flash.
+        return if (this.isHit()) targetCombatant::flash else NO_TARGET_FLASH
     }
 
+    // the flat streak of the thrust is used for the bow and throwing as well.
     private fun AttackData.getAttackAnimationId(): AttackAnimationId {
         return when {
             this.isFire() -> AttackAnimationId.FIRE

@@ -51,6 +51,8 @@ abstract class CombatantActor(
         batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA)
     }
 
+    // the sheets have the heroes facing left and the enemies facing right. here the hero stands on the left and
+    // the enemy on the right, so both are mirrored to face each other.
     private fun drawMirrored(batch: Batch, region: TextureRegion) {
         batch.draw(region, x + width, y, -width, height)
     }
