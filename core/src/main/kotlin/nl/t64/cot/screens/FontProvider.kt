@@ -3,7 +3,10 @@ package nl.t64.cot.screens
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import nl.t64.cot.Utils
 
+
 object FontProvider {
+
+    private const val OUTLINE_WIDTH = 1.5f
 
     val default: BitmapFont by lazy {
         BitmapFont().apply { data.markupEnabled = true }
@@ -20,6 +23,13 @@ object FontProvider {
         Utils.resourceManager.getTrueTypeAsset("fonts/barlow_regular_45.ttf", 45)
             .apply { data.markupEnabled = true }
     }
+
+    // with a thin black border, for the damage numbers in the attack scene.
+    val barlowOutlined20: BitmapFont by lazy { createBarlowOutlined(20) }
+    val barlowOutlined60: BitmapFont by lazy { createBarlowOutlined(60) }
+    val barlowOutlined68: BitmapFont by lazy { createBarlowOutlined(68) }
+    val barlowOutlined76: BitmapFont by lazy { createBarlowOutlined(76) }
+    val barlowOutlined88: BitmapFont by lazy { createBarlowOutlined(88) }
 
     val calibriLight28: BitmapFont by lazy {
         Utils.resourceManager.getTrueTypeAsset("fonts/calibri_light_28.ttf", 28)
@@ -44,6 +54,11 @@ object FontProvider {
     val fffTusjBold200: BitmapFont by lazy {
         Utils.resourceManager.getTrueTypeAsset("fonts/fff_tusj_bold_30.ttf", 200)
             .apply { data.markupEnabled = true }
+    }
+
+    // every size needs its own copy of the ttf, because the asset manager keeps one font per file.
+    private fun createBarlowOutlined(fontSize: Int): BitmapFont {
+        return Utils.resourceManager.getTrueTypeAsset("fonts/barlow_regular_$fontSize.ttf", fontSize, OUTLINE_WIDTH)
     }
 
 }

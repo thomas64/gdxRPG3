@@ -8,6 +8,7 @@ import com.badlogic.gdx.assets.loaders.SoundLoader
 import com.badlogic.gdx.assets.loaders.TextureLoader
 import com.badlogic.gdx.audio.Music
 import com.badlogic.gdx.audio.Sound
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.ParticleEffect
@@ -73,10 +74,12 @@ class ResourceManager {
         }
     }
 
-    fun getTrueTypeAsset(trueTypeFilenamePath: String, fontSize: Int): BitmapFont {
+    fun getTrueTypeAsset(trueTypeFilenamePath: String, fontSize: Int, borderWidth: Float = 0f): BitmapFont {
         val parameters = FreetypeFontLoader.FreeTypeFontLoaderParameter()
         parameters.fontFileName = trueTypeFilenamePath
         parameters.fontParameters.size = fontSize
+        parameters.fontParameters.borderWidth = borderWidth
+        parameters.fontParameters.borderColor = Color.BLACK
 
         possibleUnknowBugSolvedByAi(parameters)
 

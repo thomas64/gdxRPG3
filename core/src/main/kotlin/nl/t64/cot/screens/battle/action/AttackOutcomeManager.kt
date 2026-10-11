@@ -1,6 +1,5 @@
 package nl.t64.cot.screens.battle.action
 
-import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import nl.t64.cot.Utils
@@ -13,12 +12,12 @@ import nl.t64.cot.components.battle.TurnManager
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.screens.battle.BattleState
 import nl.t64.cot.screens.battle.effects.FadeEffect
-import nl.t64.cot.screens.battle.effects.FloatingNumberEffect
 import nl.t64.cot.screens.battle.scene.AttackScene
 import nl.t64.cot.screens.dialog.MessageDialog
 
 
 private const val DEFAULT_FLOATING_NUMBER_DELAY = 1.2f
+private const val DEATH_DELAY = 1.4f
 
 class AttackOutcomeManager(
     private val stage: Stage,
@@ -76,7 +75,7 @@ class AttackOutcomeManager(
         if (index >= this.size) return
 
         val singleData = this[index]
-        singleData.playEffect()
+        singleData.possiblePlayDeath()
 
         val delay: Float = if (index == 0 && this.size > 1) singleData.getDelay().toFloat() + 0.2f else 0f
         Utils.runWithDelay(delay) {
@@ -84,28 +83,13 @@ class AttackOutcomeManager(
         }
     }
 
-    private fun AttackData.playEffect() {
-        val battleField = battleFieldTable.invoke()
-        when {
-            this.isMissed -> FloatingNumberEffect(battleField, this.target, "Miss", Color.WHITE).floatUp()
-            this.isBlocked -> FloatingNumberEffect(battleField, this.target, "Block", Color.WHITE).floatUp()
-            this.isCriticalHit -> this.playDamageEffect(battleField, "${this.damage} !", Color.RED)
-            this.hasAdvantage -> this.playDamageEffect(battleField, "${this.damage} +", Color.RED)
-            this.hasDisadvantage -> this.playDamageEffect(battleField, "${this.damage} -", Color.CORAL)
-            else -> this.playDamageEffect(battleField, "${this.damage}", Color.SCARLET)
-        }
-    }
+    private fun AttackData.possiblePlayDeath() {
+        if (!this.isTargetDead) return
 
-    private fun AttackData.playDamageEffect(battleField: Table, damageText: String, damageTextColor: Color) {
-        Utils.runWithDelay(0.5f) {
-            FloatingNumberEffect(battleField, this.target, damageText, damageTextColor).floatUp()
-            if (this.isTargetDead) {
-                Utils.runWithDelay(0.9f) {
-                    playSe(AudioEvent.SE_VANISH)
-                    FadeEffect(battleField, this.target).start()
-                    turnManager.removeKilledParticipants()
-                }
-            }
+        Utils.runWithDelay(DEATH_DELAY) {
+            playSe(AudioEvent.SE_VANISH)
+            FadeEffect(battleFieldTable.invoke(), this.target).start()
+            turnManager.removeKilledParticipants()
         }
     }
 
