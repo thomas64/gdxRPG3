@@ -1,24 +1,17 @@
 package nl.t64.cot.screens.battle.menu
 
-import nl.t64.cot.audio.AudioEvent
-import nl.t64.cot.audio.playSe
-
 
 class BattleMenuOption(
     val name: String,
     private val cost: String,
     val isEnabled: Boolean,
-    private val onSelect: () -> Unit,
-    private val playsConfirmSound: Boolean = true
+    private val onSelect: () -> Unit
 ) {
     private val label: String = possibleGetGrayPrefix() + createLabelLine()
 
     fun select() {
         if (!isEnabled) return
 
-        if (playsConfirmSound) {
-            playSe(AudioEvent.SE_MENU_CONFIRM)
-        }
         onSelect.invoke()
     }
 

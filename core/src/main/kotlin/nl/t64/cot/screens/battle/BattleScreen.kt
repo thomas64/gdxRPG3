@@ -265,6 +265,7 @@ class BattleScreen : Screen {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun startStealthMovementPhase() {
+        playSe(AudioEvent.SE_MENU_CONFIRM)
         menuManager.closeMenu()
         battleState.phase = BattlePhase.STEALTH_MOVEMENT
         turnManager.determineTurnOrder()
@@ -458,6 +459,7 @@ class BattleScreen : Screen {
     }
 
     private fun endTurn() {
+        playSe(AudioEvent.SE_MENU_CONFIRM)
         menuManager.closeMenu()
         confirmManager.endTurn()
         battleState.hasChosenToContinuePerforming = false

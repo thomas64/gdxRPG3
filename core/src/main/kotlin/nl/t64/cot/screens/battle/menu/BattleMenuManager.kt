@@ -4,6 +4,8 @@ import com.badlogic.gdx.scenes.scene2d.InputListener
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import nl.t64.cot.Utils.gameData
+import nl.t64.cot.audio.AudioEvent
+import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.battle.*
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.abilities.AbilityItem
@@ -260,7 +262,7 @@ class BattleMenuManager(
     private fun createPreBattleOptions(): List<BattleMenuOption> {
         return listOf(
             // @formatter:off
-            BattleMenuOption("Party preparation", "", true, menuHandlers.showInventoryScreenPreBattle, playsConfirmSound = false),
+            BattleMenuOption("Party preparation", "", true, menuHandlers.showInventoryScreenPreBattle),
             BattleMenuOption("Select equipment",  "", true, { openSubMenuFromMainMenu { showHeroTable(preBattleHeroForEquipmentListener) } }),
             BattleMenuOption("Drink potion",      "", true, { openSubMenuFromMainMenu { showPotionTable(preBattlePotionListener) } }),
             BattleMenuOption("Preview attacks",   "", true, { openSubMenuFromMainMenu { showHeroTable(preBattleHeroForPreviewListener) } }),
@@ -295,11 +297,11 @@ class BattleMenuManager(
             BattleMenuOption("Equipment",  "$SWITCH_WEAPON_AP AP", canSwitchEquipment, { openSubMenuFromMainMenu(::showActionWeaponTable) }),
             BattleMenuOption("Potion",     "$POTION_AP AP",        canDrinkPotion,     { openSubMenuFromMainMenu { showPotionTable(actionPotionListener) } }),
             BattleMenuOption("Preview",    "",                     true,               { openSubMenuFromMainMenu(::showPreviewAttackTable) }),
-            BattleMenuOption("Party",      "",                     true,               menuHandlers.showInventoryScreen,   playsConfirmSound = false),
-            BattleMenuOption("Flee",       "$fleeAp AP",           canFlee,            menuHandlers.showFleeDialog,        playsConfirmSound = false),
-            BattleMenuOption("Delay turn", "$DELAY_AP AP",         canDelayTurn,       menuHandlers.showDelayTurnDialog,   playsConfirmSound = false),
-            BattleMenuOption("Push on",    "$PUSH_ON_SP SP",       canPushOn,          menuHandlers.showPushOnDialog,      playsConfirmSound = false),
-            BattleMenuOption("Rest",       "$shownAp AP",          canRest,            menuHandlers.showConfirmRestDialog, playsConfirmSound = false),
+            BattleMenuOption("Party",      "",                     true,               menuHandlers.showInventoryScreen),
+            BattleMenuOption("Flee",       "$fleeAp AP",           canFlee,            menuHandlers.showFleeDialog),
+            BattleMenuOption("Delay turn", "$DELAY_AP AP",         canDelayTurn,       menuHandlers.showDelayTurnDialog),
+            BattleMenuOption("Push on",    "$PUSH_ON_SP SP",       canPushOn,          menuHandlers.showPushOnDialog),
+            BattleMenuOption("Rest",       "$shownAp AP",          canRest,            menuHandlers.showConfirmRestDialog),
             BattleMenuOption(END_TURN,     "",                     true,               menuHandlers.endTurn)
             // @formatter:on
         )
@@ -409,6 +411,7 @@ class BattleMenuManager(
     }
 
     private fun openSubMenu(menu: () -> Unit) {
+        playSe(AudioEvent.SE_MENU_CONFIRM)
         menuStack.addLast(currentMenu)
         openMenu(menu)
     }

@@ -2,7 +2,6 @@ package nl.t64.cot.screens.battle.menu.listeners
 
 import com.badlogic.gdx.Input
 import com.badlogic.gdx.scenes.scene2d.InputEvent
-import com.badlogic.gdx.scenes.scene2d.InputListener
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.battle.menu.BattleMenuOption
 
@@ -11,15 +10,9 @@ class SelectActionListener(
     private val winBattle: () -> Unit,
     private val pauseMenu: () -> Unit,
     private val selectParty: () -> Unit
-) : InputListener() {
+) : BattleMenuListener() {
 
-    override fun keyDown(event: InputEvent, keycode: Int): Boolean {
-        if (event.isDialogOpen()) {
-            event.possibleSelectNonGrayOption<BattleMenuOption>(keycode)
-            event.dontLoseFocusAfterEsc()
-            return true
-        }
-
+    override fun keyDownInMenu(event: InputEvent, keycode: Int) {
         when (keycode) {
             Constant.KEYCODE_START, Input.Keys.ESCAPE -> event.handlePause(pauseMenu)
             Input.Keys.UP -> event.selectPreviousNonGrayOption<BattleMenuOption>()
@@ -29,7 +22,10 @@ class SelectActionListener(
             Constant.KEYCODE_TOP, Input.Keys.I -> selectParty.invoke()
             Input.Keys.W -> handleWin(winBattle)
         }
-        return true
+    }
+
+    override fun keyDownWhileDialogOpen(event: InputEvent, keycode: Int) {
+        event.possibleSelectNonGrayOption<BattleMenuOption>(keycode)
     }
 
     private fun InputEvent.handleEnter() {
