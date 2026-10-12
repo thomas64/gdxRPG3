@@ -99,16 +99,15 @@ class Participant(
                 killableScore
 
         if (preferenceManager.isDebugModeOn) {
-            println("A low score means a high priority in the queue!")
             println("${character.name} " +
-                        "nextToTargetScore: $nextToTargetScore, " +
-                        "killableScore: $killableScore, " +
-                        "attackerHasAdvantageScore: $attackerHasAdvantageScore, " +
-                        "attackerHasDisadvantageScore: $attackerHasDisadvantageScore, " +
-                        "stealthScore: $stealthScore, " +
-                        "lowHpScore: $lowHpScore, " +
-                        "protectionScore: $protectionScore, " +
-                        "defenseScore: $defenseScore = " +
+                        "nextToTarget: $nextToTargetScore, " +
+                        "killable: $killableScore, " +
+                        "attackerHasAdvantage: $attackerHasAdvantageScore, " +
+                        "attackerHasDisadvantage: $attackerHasDisadvantageScore, " +
+                        "stealth: $stealthScore, " +
+                        "lowHp: $lowHpScore, " +
+                        "protection: $protectionScore, " +
+                        "defense: $defenseScore = " +
                         "total: $totalScore")
         }
         return totalScore

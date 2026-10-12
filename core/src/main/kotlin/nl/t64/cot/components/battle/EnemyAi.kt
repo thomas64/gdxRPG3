@@ -24,9 +24,12 @@ class EnemyAi(
 
     fun possibleGetHeroTargetAndMove(): Participant? {
         grid.setStartingSpace(actingEnemyIndex)
-        val heroIndicesByPrio: List<Int> = getOccupiedHeroIndicesSortedByPriorityForActingEnemy()
         if (preferenceManager.isDebugModeOn) {
             println("${actingEnemy.character.name}: At start of turn, AP: ${actingEnemy.currentAP}")
+            println("A low score means a high priority in the queue!")
+        }
+        val heroIndicesByPrio: List<Int> = getOccupiedHeroIndicesSortedByPriorityForActingEnemy()
+        if (preferenceManager.isDebugModeOn) {
             println("heroIndicesByPrio: $heroIndicesByPrio")
         }
 
@@ -152,9 +155,17 @@ class EnemyAi(
     }
 
     private fun getExtraTurnsNeededToAttackFrom(attackSpace: Int, cheapestAbilityAp: Int): Int {
-        val apNeeded: Int = getMoveCostTo(attackSpace) + cheapestAbilityAp
+        val apNeeded: Int = getMoveCostTo(attackSpace) + getPenaltyApNextTurnOnWayTo(attackSpace) + cheapestAbilityAp
         val apShortThisTurn: Int = apNeeded - actingEnemy.currentAP
         return ceil(apShortThisTurn / actingEnemy.maximumAP.toFloat()).toInt()
+    }
+
+    // walking towards a far hero can end this turn next to another hero, and leaving that space next turn costs
+    // penalty AP. without counting it, a far hero seems as near (in turns) as the hero it gets locked by on the way.
+    private fun getPenaltyApNextTurnOnWayTo(attackSpace: Int): Int {
+        val endOfTurnSpace: Int = findFarthestReachableSpaceTo(attackSpace) ?: return 0
+        val isLockedByOtherHero: Boolean = endOfTurnSpace != attackSpace && grid.isEnemySpaceNextToHero(endOfTurnSpace)
+        return if (isLockedByOtherHero) actingEnemy.getPenaltyAp() else 0
     }
 
     private fun getAllIndicesFromWhereToAttackByPrio(heroIndicesByPrio: List<Int>,
