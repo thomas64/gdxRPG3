@@ -23,6 +23,14 @@ object CombatantImages {
         val cellWidth: Int = sheet.width / ENEMY_SHEET_COLS
         val cellHeight: Int = sheet.height / ENEMY_SHEET_ROWS
         return TextureRegion(sheet, (config.col - 1) * cellWidth, (config.row - 1) * cellHeight, cellWidth, cellHeight)
+            .apply { insetHalfTexel(sheet) }
+    }
+
+    // when scaled, nearest sampling at the edge can hit the first texel of the neighboring cell.
+    private fun TextureRegion.insetHalfTexel(sheet: Texture) {
+        val halfTexelU: Float = 0.5f / sheet.width
+        val halfTexelV: Float = 0.5f / sheet.height
+        this.setRegion(this.u + halfTexelU, this.v + halfTexelV, this.u2 - halfTexelU, this.v2 - halfTexelV)
     }
 
     private fun loadTexture(imageName: String): Texture {

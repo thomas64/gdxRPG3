@@ -20,7 +20,7 @@ import nl.t64.cot.toTexture
 
 
 private const val HERO_SCALE = 3f
-private const val ENEMY_SCALE = 3.75f
+private const val ENEMY_SCALE = 1.75f
 private const val ATTACK_ANIMATION_SCALE = 1.5f
 
 private const val GROUND_Y = 300f
@@ -70,17 +70,15 @@ private val NO_TARGET_FLASH: (Color, Float) -> Unit = { _, _ -> }
 private val WHITE_TEXTURE: Texture by lazy { Color.WHITE.toTexture() }
 
 class AttackScene(
-    heroCharacter: Character,
-    enemyCharacter: Character,
+    private val heroCharacter: Character,
+    private val enemyCharacter: Character,
     private val isHeroAttacking: Boolean,
-    private val attackData: List<AttackData>,
-    private val onFinished: () -> Unit
+    private val isMelee: Boolean
 ) : Group() {
 
     private val heroCombatant = HeroCombatantActor(heroCharacter.id, HERO_SCALE)
     private val enemyCombatant = EnemyCombatantActor(enemyCharacter.id, ENEMY_SCALE)
     private val targetCombatant: CombatantActor = if (isHeroAttacking) enemyCombatant else heroCombatant
-    private val isMelee: Boolean = attackData.first().isMelee()
     private var hitStopTimeLeft: Float = 0f
 
     init {
@@ -90,19 +88,38 @@ class AttackScene(
         addActor(heroCombatant)
     }
 
-    fun play(stage: Stage) {
+    // the scene stays on the stage after the attacks, until it is closed.
+    fun play(stage: Stage, attackData: List<AttackData>, onFinished: () -> Unit) {
         stage.addActor(this)
         addAction(Actions.sequence(
             Actions.alpha(0f),
             Actions.fadeIn(SCENE_FADE_DURATION),
             Actions.delay(PAUSE_AFTER_FADE_IN),
             createStepForward(),
-            createAttacks(),
+            createAttacks(attackData),
+            Actions.run { onFinished.invoke() }
+        ))
+    }
+
+    fun playNext(attackData: List<AttackData>, onFinished: () -> Unit) {
+        addAction(Actions.sequence(
+            createAttacks(attackData),
+            Actions.run { onFinished.invoke() }
+        ))
+    }
+
+    fun close(onClosed: () -> Unit) {
+        addAction(Actions.sequence(
             Actions.delay(PAUSE_BEFORE_FADE_OUT),
             Actions.fadeOut(SCENE_FADE_DURATION),
-            Actions.run { onFinished.invoke() },
+            Actions.run { onClosed.invoke() },
             Actions.removeActor()
         ))
+    }
+
+    // a weapon switch always starts a new scene, so a scene only knows one kind of attack.
+    fun isContinuedBy(hero: Character, enemy: Character, isMeleeAttack: Boolean): Boolean {
+        return heroCharacter == hero && enemyCharacter == enemy && isMelee == isMeleeAttack
     }
 
     // during a hit-stop everything in the scene freezes, including the steps that are still to come.
@@ -122,7 +139,7 @@ class AttackScene(
         }
     }
 
-    private fun createAttacks(): Action {
+    private fun createAttacks(attackData: List<AttackData>): Action {
         val attacksBeforeLast: List<Action> = attackData.dropLast(1).map { createAttack(it, createAttackEnd()) }
         val lastAttack: Action = createAttack(attackData.last(), createStepBack())
         return Actions.sequence(*(attacksBeforeLast + lastAttack).toTypedArray())

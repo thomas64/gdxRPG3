@@ -46,8 +46,8 @@ import kotlin.math.roundToInt
 
 private const val BLINK_DELAY_IN_MILLIS: Long = 500L
 private const val ACTION_DELAY_IN_MILLIS: Long = 1000L
-private const val END_TURN_DELAY_IN_MILLIS: Long = 500L
 private const val BLINK_DURATION: Float = 0.5f
+private const val END_TURN_DELAY: Float = 1f
 private const val FLED_EXIT_DELAY: Float = 1f
 
 private val combatPowerCalculator = CombatPowerCalculator()
@@ -550,14 +550,19 @@ class BattleScreen : Screen {
         if (preferenceManager.isCombatDetailsOn) {
             val message = "${currentParticipant.character.name} ended ${currentParticipant.character.gender} turn."
             onRenderThread {
-                showEndOfTurnDialog(message)
-                isEnemyActing = false
+                attackOutcomeManager.closeEnemyAttackScene {
+                    showEndOfTurnDialog(message)
+                    isEnemyActing = false
+                }
             }
         } else {
-            Thread.sleep(END_TURN_DELAY_IN_MILLIS)
             onRenderThread {
-                turnManager.setNextTurn()
-                isEnemyActing = false
+                attackOutcomeManager.closeEnemyAttackScene {
+                    Utils.runWithDelay(END_TURN_DELAY) {
+                        turnManager.setNextTurn()
+                        isEnemyActing = false
+                    }
+                }
             }
         }
     }

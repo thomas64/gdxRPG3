@@ -41,6 +41,8 @@ class MessageDialog(
 
     fun show(stage: Stage, event: AudioEvent? = null, confirmDelay: Float = 0f) {
         event?.let { playSe(it) }
+        // when shown during stage.act(), the dialog is drawn once before its fade-in has started.
+        dialog.color.a = 0f
         dialog.show(stage)
         if (preferenceManager.isDebugModeOn) {
             applyListeners()

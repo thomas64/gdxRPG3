@@ -18,39 +18,64 @@ class AttackOutcomeManager(
     private val battleState: BattleState
 ) {
 
+    private var openEnemyAttackScene: AttackScene? = null
+
     fun enemyAttackConfirmed(attackData: List<AttackData>) {
         battleState.isDelayingTurn = true
+        val enemy: Character = attackData.getAttacker()
         val hero: Character = attackData.getTarget()
-        playEnemyAttackScene(attackData) {
-            finishAttack(attackData, hero)
+        val isMelee: Boolean = attackData.first().isMelee()
+        val onFinished: () -> Unit = { finishEnemyAttack(attackData, hero) }
+        val openScene: AttackScene? = openEnemyAttackScene
+        if (openScene != null && openScene.isContinuedBy(hero, enemy, isMelee)) {
+            openScene.playNext(attackData, onFinished)
+        } else {
+            closeEnemyAttackScene {
+                val scene = AttackScene(hero, enemy, isHeroAttacking = false, isMelee)
+                openEnemyAttackScene = scene
+                scene.play(stage, attackData, onFinished)
+            }
         }
     }
 
     fun attackConfirmed(attackAction: AttackAction) {
         val attackData: List<AttackData> = attackAction.handle()
         battleState.isDelayingTurn = true
+        val hero: Character = attackData.getAttacker()
         val enemy: Character = attackData.getTarget()
-        playHeroAttackScene(attackData) {
-            finishAttack(attackData, enemy)
+        val scene = AttackScene(hero, enemy, isHeroAttacking = true, attackData.first().isMelee())
+        scene.play(stage, attackData) {
+            scene.close { finishAttack(possibleCreateMessagesFrom(attackData, enemy)) }
         }
     }
 
-    private fun playEnemyAttackScene(attackData: List<AttackData>, onFinished: () -> Unit) {
-        val enemy: Character = attackData.getAttacker()
-        val hero: Character = attackData.getTarget()
-        AttackScene(hero, enemy, isHeroAttacking = false, attackData, onFinished).play(stage)
+    fun closeEnemyAttackScene(onClosed: () -> Unit) {
+        val openScene: AttackScene? = openEnemyAttackScene
+        openEnemyAttackScene = null
+        if (openScene == null) {
+            onClosed.invoke()
+        } else {
+            openScene.close(onClosed)
+        }
     }
 
-    private fun playHeroAttackScene(attackData: List<AttackData>, onFinished: () -> Unit) {
-        val hero: Character = attackData.getAttacker()
-        val enemy: Character = attackData.getTarget()
-        AttackScene(hero, enemy, isHeroAttacking = true, attackData, onFinished).play(stage)
+    private fun finishEnemyAttack(attackData: List<AttackData>, hero: Character) {
+        val messagesWithSound: Pair<String, AudioEvent> = possibleCreateMessagesFrom(attackData, hero)
+        if (attackData.isInterruptingAttacks(messagesWithSound.first)) {
+            closeEnemyAttackScene { finishAttack(messagesWithSound) }
+        } else {
+            finishAttack(messagesWithSound)
+        }
     }
 
-    // the target is known from the start, because a killed target is removed from the battle before the messages show.
-    private fun finishAttack(attackData: List<AttackData>, target: Character) {
+    // a message is shown on the battlefield, not in the scene. and a killed hero cannot be attacked again.
+    private fun List<AttackData>.isInterruptingAttacks(messages: String): Boolean {
+        return this.any { it.isTargetDead } || messages.isNotEmpty()
+    }
+
+    private fun finishAttack(messagesWithSound: Pair<String, AudioEvent>) {
         turnManager.removeKilledParticipants()
-        attackData.possibleShowMessagesAndSetDelayingTurnToFalse(target)
+        possibleShowMessagesAndSetDelayingTurnToFalse(messagesWithSound)
     }
 
     private fun List<AttackData>.getAttacker(): Character {
@@ -61,8 +86,8 @@ class AttackOutcomeManager(
         return turnManager.getParticipant(this.first().target).character
     }
 
-    private fun List<AttackData>.possibleShowMessagesAndSetDelayingTurnToFalse(target: Character) {
-        val (messages, audioEvent) = possibleCreateMessagesFrom(this, target)
+    private fun possibleShowMessagesAndSetDelayingTurnToFalse(messagesWithSound: Pair<String, AudioEvent>) {
+        val (messages, audioEvent) = messagesWithSound
         if (messages.isNotEmpty()) {
             val messageDialog = MessageDialog(messages)
             messageDialog.setActionAfterHide {
@@ -74,6 +99,7 @@ class AttackOutcomeManager(
         }
     }
 
+    // the target is known from the start, because a killed target is removed from the battle before the messages show.
     private fun possibleCreateMessagesFrom(attackData: List<AttackData>, target: Character): Pair<String, AudioEvent> {
         val isEnemyStaggeredMessage: String? = attackData.getPossibleStaggerMessage()
         val attackerWeaponBrokeMessage: String? = attackData.firstNotNullOfOrNull { it.attackerWeaponBrokeMessage }
