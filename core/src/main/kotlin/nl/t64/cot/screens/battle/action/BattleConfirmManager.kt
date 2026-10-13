@@ -11,6 +11,7 @@ import nl.t64.cot.components.battle.*
 import nl.t64.cot.screens.battle.BattleState
 import nl.t64.cot.screens.battle.effects.FadeEffect
 import nl.t64.cot.screens.battle.effects.FloatingNumberEffect
+import nl.t64.cot.screens.battle.scene.PotionScene
 import nl.t64.cot.screens.dialog.MessageDialog
 
 
@@ -27,16 +28,11 @@ class BattleConfirmManager(
 ) {
 
     fun potionConfirmed(potionAction: PotionAction, onFinished: () -> Unit = {}) {
-        val (message, color) = potionAction.handle()
+        val effects: List<PotionEffect> = potionAction.handle()
         battleState.isDelayingTurn = true
-        Utils.runWithDelay(0.5f) {
-            FloatingNumberEffect(battleFieldTable.invoke(),
-                                 currentParticipant.invoke().character.name,
-                                 message,
-                                 color)
-                .floatDown()
-            playSe(AudioEvent.SE_POTION)
-            Utils.runWithDelay(DEFAULT_FLOATING_NUMBER_DELAY) {
+        val scene = PotionScene(currentParticipant.invoke().character)
+        scene.play(stage, effects) {
+            scene.close {
                 battleState.isDelayingTurn = false
                 onFinished.invoke()
             }

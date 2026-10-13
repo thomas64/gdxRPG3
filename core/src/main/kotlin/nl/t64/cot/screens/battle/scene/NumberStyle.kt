@@ -9,16 +9,16 @@ enum class NumberStyle(val label: String?, val color: Color) {
 
     MISS_OR_BLOCK(null, Color.LIGHT_GRAY),
     NORMAL(null, Color.WHITE),
-    ADVANTAGE("Advantage", Color.ORANGE),
-    DISADVANTAGE("Disadvantage", Color.SKY),
+    ADVANTAGE("Effective", Color.ORANGE),
+    DISADVANTAGE("Resisted", Color.SKY),
     CRITICAL("Critical!", Color.RED);
 
     fun getFont(): BitmapFont {
         return when (this) {
-            MISS_OR_BLOCK, NORMAL -> FontProvider.barlowOutlined68
-            ADVANTAGE -> FontProvider.barlowOutlined76
-            DISADVANTAGE -> FontProvider.barlowOutlined60
-            CRITICAL -> FontProvider.barlowOutlined88
+            MISS_OR_BLOCK, NORMAL -> FontProvider.barlowOutlined54
+            ADVANTAGE -> FontProvider.barlowOutlined60
+            DISADVANTAGE -> FontProvider.barlowOutlined48
+            CRITICAL -> FontProvider.barlowOutlined66
         }
     }
 

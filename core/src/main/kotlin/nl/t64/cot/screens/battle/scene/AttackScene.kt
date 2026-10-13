@@ -3,33 +3,21 @@ package nl.t64.cot.screens.battle.scene
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.scenes.scene2d.Action
-import com.badlogic.gdx.scenes.scene2d.Group
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.Image
-import com.badlogic.gdx.scenes.scene2d.ui.Label
-import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.Table
-import com.badlogic.gdx.utils.Align
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.battle.AttackData
 import nl.t64.cot.components.battle.Character
-import nl.t64.cot.screens.FontProvider
 import nl.t64.cot.toTexture
 
 
-private const val HERO_SCALE = 3f
 private const val ENEMY_SCALE = 1.75f
 private const val ATTACK_ANIMATION_SCALE = 1.5f
 
-private const val GROUND_Y = 300f
-private const val HERO_X = 520f
 private const val ENEMY_CENTER_X = 1340f
-
-private const val SCENE_FADE_DURATION = 0.2f
-private const val PAUSE_AFTER_FADE_IN = 0.7f
-private const val PAUSE_BEFORE_FADE_OUT = 0.5f
 
 private const val STEP_DISTANCE = 200f
 private const val STEP_DURATION = 0.25f
@@ -54,13 +42,9 @@ private const val HIT_STOP_DURATION = 0.2f
 private const val SCREEN_FLASH_ALPHA = 0.8f
 private const val SCREEN_FLASH_FADE_DURATION = 0.1f
 
-private const val NUMBER_RISE = 60f
-private const val NUMBER_DURATION = 1.5f
-private const val NUMBER_FADE_DURATION = 0.1f
 // a spell takes longer to build up than a weapon strike, so its number waits until the spell has hit.
 private const val SPELL_NUMBER_DELAY = 0.35f
 private const val CRITICAL_POP_SCALE = 1.6f
-private const val CRITICAL_POP_DURATION = 0.15f
 
 private const val LYING_DURATION = 0.45f
 private const val DEATH_DURATION = 0.8f
@@ -74,46 +58,26 @@ class AttackScene(
     private val enemyCharacter: Character,
     private val isHeroAttacking: Boolean,
     private val isMelee: Boolean
-) : Group() {
+) : BattleScene(heroCharacter) {
 
-    private val heroCombatant = HeroCombatantActor(heroCharacter.id, HERO_SCALE)
     private val enemyCombatant = EnemyCombatantActor(enemyCharacter.id, ENEMY_SCALE)
     private val targetCombatant: CombatantActor = if (isHeroAttacking) enemyCombatant else heroCombatant
     private var hitStopTimeLeft: Float = 0f
 
+    // the enemy is put behind the hero, so that a hero who steps forward stands in front of it.
     init {
-        heroCombatant.setPosition(HERO_X, GROUND_Y)
-        enemyCombatant.setPosition(ENEMY_CENTER_X - (enemyCombatant.width / 2f), GROUND_Y)
-        addActor(enemyCombatant)
-        addActor(heroCombatant)
+        enemyCombatant.setPosition(ENEMY_CENTER_X - (enemyCombatant.width / 2f), heroCombatant.y)
+        addActorBefore(heroCombatant, enemyCombatant)
     }
 
-    // the scene stays on the stage after the attacks, until it is closed.
     fun play(stage: Stage, attackData: List<AttackData>, onFinished: () -> Unit) {
-        stage.addActor(this)
-        addAction(Actions.sequence(
-            Actions.alpha(0f),
-            Actions.fadeIn(SCENE_FADE_DURATION),
-            Actions.delay(PAUSE_AFTER_FADE_IN),
-            createStepForward(),
-            createAttacks(attackData),
-            Actions.run { onFinished.invoke() }
-        ))
+        fadeInAndPlay(stage, Actions.sequence(createStepForward(), createAttacks(attackData)), onFinished)
     }
 
     fun playNext(attackData: List<AttackData>, onFinished: () -> Unit) {
         addAction(Actions.sequence(
             createAttacks(attackData),
             Actions.run { onFinished.invoke() }
-        ))
-    }
-
-    fun close(onClosed: () -> Unit) {
-        addAction(Actions.sequence(
-            Actions.delay(PAUSE_BEFORE_FADE_OUT),
-            Actions.fadeOut(SCENE_FADE_DURATION),
-            Actions.run { onClosed.invoke() },
-            Actions.removeActor()
         ))
     }
 
@@ -150,7 +114,7 @@ class AttackScene(
             createAttackStart(singleData),
             Actions.run { playImpact(singleData) },
             Actions.parallel(createHoldThen(attackEnd),
-                             createWaitForNumber(singleData)),
+                             createWaitForNumber(singleData.getNumberDelay())),
             createPossibleDeath(singleData)
         )
     }
@@ -255,41 +219,15 @@ class AttackScene(
 
     private fun showNumber(singleData: AttackData) {
         val style: NumberStyle = singleData.getNumberStyle()
-        val number: Table = createNumber(style, singleData.getNumberText())
-        number.setPosition(targetCombatant.centerX - (number.width / 2f), targetCombatant.y + targetCombatant.height)
-        val startScale: Float = if (style == NumberStyle.CRITICAL) CRITICAL_POP_SCALE else 1f
-        number.setScale(startScale)
-        // the fade-in of the rise starts from the current alpha, so the number has to start invisible.
-        number.color.a = 0f
-        addActor(number)
-        number.addAction(createNumberRise())
-    }
-
-    private fun createNumber(style: NumberStyle, text: String): Table {
-        val number = Table()
-        style.label?.let { number.add(Label(it, LabelStyle(FontProvider.barlowOutlined20, style.color))).row() }
-        number.add(Label(text, LabelStyle(style.getFont(), style.color)))
-        number.pack()
-        number.isTransform = true
-        number.setOrigin(Align.center)
-        return number
-    }
-
-    private fun createNumberRise(): Action {
-        return Actions.sequence(
-            Actions.parallel(Actions.fadeIn(NUMBER_FADE_DURATION), Actions.scaleTo(1f, 1f, CRITICAL_POP_DURATION)),
-            Actions.moveBy(0f, NUMBER_RISE, NUMBER_DURATION - CRITICAL_POP_DURATION - NUMBER_FADE_DURATION),
-            Actions.fadeOut(NUMBER_FADE_DURATION),
-            Actions.removeActor()
-        )
+        val number: Table = createNumber(singleData.getNumberText(), style.getFont(), style.color, style.label)
+        if (style == NumberStyle.CRITICAL) {
+            number.setScale(CRITICAL_POP_SCALE)
+        }
+        showNumberRisingFrom(targetCombatant, number)
     }
 
     private fun createHoldThen(attackEnd: Action): Action {
         return Actions.sequence(Actions.delay(ATTACK_HOLD_DURATION), attackEnd)
-    }
-
-    private fun createWaitForNumber(singleData: AttackData): Action {
-        return Actions.delay(singleData.getNumberDelay() + NUMBER_DURATION)
     }
 
     private fun createPossibleDeath(singleData: AttackData): Action {
@@ -357,10 +295,6 @@ class AttackScene(
             Actions.targeting(heroCombatant, Actions.moveBy(distance, 0f, STEP_DURATION)),
             createHeroWait()
         )
-    }
-
-    private fun createHeroWait(): Action {
-        return Actions.run { heroCombatant.playMotion(CombatantMotion.WAIT) }
     }
 
     // a staff only casts spells, and a hero always attacks with a weapon. so the thrust is left for the spear

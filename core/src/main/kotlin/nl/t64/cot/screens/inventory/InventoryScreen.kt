@@ -377,7 +377,10 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
             val inventory = gameData.inventory
             if (inventory.hasEnoughOfItem("gold", 1)) {
                 playSe(AudioEvent.SE_MENU_ERROR)
-                gameData.party.getAllHeroesAlive().forEach { it.takeDamage(1) }
+                gameData.party.getAllHeroesAlive().forEach {
+                    it.takeDamage(1)
+                    it.currentSp -= 1
+                }
                 inventory.autoRemoveItem("gold", 1)
                 inventoryUI.reloadInventory()
             }

@@ -24,12 +24,12 @@ object FontProvider {
             .apply { data.markupEnabled = true }
     }
 
-    // with a thin black border, for the damage numbers in the attack scene.
-    val barlowOutlined20: BitmapFont by lazy { createBarlowOutlined(20) }
+    // with a thin black border, for the numbers in the battle scenes.
+    val barlowOutlined24: BitmapFont by lazy { createBarlowOutlined(24) }
+    val barlowOutlined48: BitmapFont by lazy { createBarlowOutlined(48) }
+    val barlowOutlined54: BitmapFont by lazy { createBarlowOutlined(54) }
     val barlowOutlined60: BitmapFont by lazy { createBarlowOutlined(60) }
-    val barlowOutlined68: BitmapFont by lazy { createBarlowOutlined(68) }
-    val barlowOutlined76: BitmapFont by lazy { createBarlowOutlined(76) }
-    val barlowOutlined88: BitmapFont by lazy { createBarlowOutlined(88) }
+    val barlowOutlined66: BitmapFont by lazy { createBarlowOutlined(66) }
 
     val calibriLight28: BitmapFont by lazy {
         Utils.resourceManager.getTrueTypeAsset("fonts/calibri_light_28.ttf", 28)
