@@ -49,13 +49,27 @@ enum class CalcAttributeId(override val title: String) : SuperEnum {
         }
     },
 
+    ARMOR("Armor") {
+        override fun getDescription(): String {
+            return """
+                - '$title' is the sum of the armor points
+                  of all the equipment you are wearing.
+
+                - '$title' is converted to 'Protection' in %.
+                  The first points count the most.""".trimIndent()
+        }
+    },
+
     PROTECTION("Protection") {
         override fun getDescription(): String {
             return """
                 - '$title' decreases the enemy's damage it inflicts
                   to you with physical weapons in combat.
 
-                - '$title' is the counterpart of 'Damage'.""".trimIndent()
+                - '$title' is the counterpart of 'Damage'.
+
+                - '$title' is derived from your 'Armor',
+                  plus the bonus of potions and spells.""".trimIndent()
         }
     },
 

@@ -25,7 +25,7 @@
     "sort"         : 61000,
     "price"        : 50,
     "min_willpower": 22,
-    "protection"   : 10
+    "armor"        : 10
   },
   "transformation_orc"   : {
     "name"          : "Amulet of Orc",

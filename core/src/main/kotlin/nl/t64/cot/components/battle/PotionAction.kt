@@ -96,7 +96,7 @@ class PotionAction(
 
         return when {
             // @formatter:off
-            effect.protection > 0   -> PotionEffect("+${effect.protection}",   CalcAttributeId.PROTECTION.title, Color.YELLOW)
+            effect.protection > 0   -> PotionEffect("+${effect.protection}%",  CalcAttributeId.PROTECTION.title, Color.YELLOW)
             effect.intelligence > 0 -> PotionEffect("+${effect.intelligence}", StatItemId.INTELLIGENCE.title,    Color.MAGENTA)
             effect.dexterity > 0    -> PotionEffect("+${effect.dexterity}",    StatItemId.DEXTERITY.title,       Color.MAGENTA)
             effect.strength > 0     -> PotionEffect("+${effect.strength}",     StatItemId.STRENGTH.title,        Color.MAGENTA)

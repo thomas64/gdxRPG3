@@ -51,18 +51,18 @@
     "wizard"          : 2
   },
   "fine_fairy_ring"     : {
-    "name"      : "Fairy Ring",
-    "group"     : "RING",
-    "sort"      : 61000,
-    "price"     : 50,
-    "protection": 1
+    "name" : "Fairy Ring",
+    "group": "RING",
+    "sort" : 61000,
+    "price": 50,
+    "armor": 1
   },
   "epic_ethereal_ring"  : {
-    "name"      : "Ethereal Ring",
-    "group"     : "RING",
-    "sort"      : 61000,
-    "price"     : 50,
-    "protection": 5
+    "name" : "Ethereal Ring",
+    "group": "RING",
+    "sort" : 61000,
+    "price": 50,
+    "armor": 5
   },
   "epic_ring_of_healing": {
     "name"       : "Ring of Healing",

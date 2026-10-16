@@ -126,10 +126,10 @@
     "spice"        : 3,
     "gemstone"     : 1,
     "description"  : [
-      "Temporarily increases the Protection of",
-      "the drinker by 5 points during 1 battle."
+      "Increases Protection by 10%",
+      "for the rest of the battle."
     ],
-    "protection"   : 5
+    "protection"   : 10
   },
   "protection_potion_+"   : {
     "name"         : "Protection Potion +",
@@ -141,10 +141,10 @@
     "spice"        : 4,
     "gemstone"     : 2,
     "description"  : [
-      "Temporarily increases the Protection of",
-      "the drinker by 10 points during 1 battle."
+      "Increases Protection by 15%",
+      "for the rest of the battle."
     ],
-    "protection"   : 10
+    "protection"   : 15
   },
   "protection_potion_++"  : {
     "name"         : "Protection Potion ++",
@@ -156,10 +156,10 @@
     "spice"        : 5,
     "gemstone"     : 3,
     "description"  : [
-      "Temporarily increases the Protection of",
-      "the drinker by 15 points during 1 battle."
+      "Increases Protection by 20%",
+      "for the rest of the battle."
     ],
-    "protection"   : 15
+    "protection"   : 20
   },
   "intelligence_potion"   : {
     "name"         : "Intelligence Potion",
@@ -171,8 +171,8 @@
     "spice"        : 1,
     "gemstone"     : 3,
     "description"  : [
-      "Temporarily increases the Intelligence of",
-      "the drinker by 3 points during 1 battle."
+      "Increases Intelligence by 3 points",
+      "for the rest of the battle."
     ],
     "intelligence" : 3
   },
@@ -186,8 +186,8 @@
     "spice"        : 2,
     "gemstone"     : 4,
     "description"  : [
-      "Temporarily increases the Intelligence of",
-      "the drinker by 5 points during 1 battle."
+      "Increases Intelligence by 5 points",
+      "for the rest of the battle."
     ],
     "intelligence" : 5
   },
@@ -201,8 +201,8 @@
     "spice"        : 3,
     "gemstone"     : 5,
     "description"  : [
-      "Temporarily increases the Intelligence of",
-      "the drinker by 7 points during 1 battle."
+      "Increases Intelligence by 7 points",
+      "for the rest of the battle."
     ],
     "intelligence" : 7
   },
@@ -216,8 +216,8 @@
     "spice"        : 3,
     "gemstone"     : 2,
     "description"  : [
-      "Temporarily increases the Dexterity of",
-      "the drinker by 3 points during 1 battle."
+      "Increases Dexterity by 3 points",
+      "for the rest of the battle."
     ],
     "dexterity"    : 3
   },
@@ -231,8 +231,8 @@
     "spice"        : 4,
     "gemstone"     : 3,
     "description"  : [
-      "Temporarily increases the Dexterity of",
-      "the drinker by 5 points during 1 battle."
+      "Increases Dexterity by 5 points",
+      "for the rest of the battle."
     ],
     "dexterity"    : 5
   },
@@ -246,8 +246,8 @@
     "spice"        : 5,
     "gemstone"     : 4,
     "description"  : [
-      "Temporarily increases the Dexterity of",
-      "the drinker by 7 points during 1 battle."
+      "Increases Dexterity by 7 points",
+      "for the rest of the battle."
     ],
     "dexterity"    : 7
   },
@@ -261,8 +261,8 @@
     "spice"        : 2,
     "gemstone"     : 3,
     "description"  : [
-      "Temporarily increases the Strength of",
-      "the drinker by 3 points during 1 battle."
+      "Increases Strength by 3 points",
+      "for the rest of the battle."
     ],
     "strength"     : 3
   },
@@ -276,8 +276,8 @@
     "spice"        : 3,
     "gemstone"     : 4,
     "description"  : [
-      "Temporarily increases the Strength of",
-      "the drinker by 5 points during 1 battle."
+      "Increases Strength by 5 points",
+      "for the rest of the battle."
     ],
     "strength"     : 5
   },
@@ -291,8 +291,8 @@
     "spice"        : 4,
     "gemstone"     : 5,
     "description"  : [
-      "Temporarily increases the Strength of",
-      "the drinker by 7 points during 1 battle."
+      "Increases Strength by 7 points",
+      "for the rest of the battle."
     ],
     "strength"     : 7
   },
@@ -306,8 +306,8 @@
     "spice"        : 1,
     "gemstone"     : 2,
     "description"  : [
-      "Temporarily increases the Speed of the",
-      "drinker by 3 points during 1 battle."
+      "Increases Speed by 3 points",
+      "for the rest of the battle."
     ],
     "speed"        : 3
   },
@@ -321,8 +321,8 @@
     "spice"        : 2,
     "gemstone"     : 3,
     "description"  : [
-      "Temporarily increases the Speed of the",
-      "drinker by 5 points during 1 battle."
+      "Increases Speed by 5 points",
+      "for the rest of the battle."
     ],
     "speed"        : 5
   },
@@ -336,8 +336,8 @@
     "spice"        : 3,
     "gemstone"     : 4,
     "description"  : [
-      "Temporarily increases the Speed of the",
-      "drinker by 7 points during 1 battle."
+      "Increases Speed by 7 points",
+      "for the rest of the battle."
     ],
     "speed"        : 7
   },
@@ -351,8 +351,8 @@
     "spice"        : 2,
     "gemstone"     : 1,
     "description"  : [
-      "Temporarily increases the Willpower of",
-      "the drinker by 3 points during 1 battle."
+      "Increases Willpower by 3 points",
+      "for the rest of the battle."
     ],
     "willpower"    : 3
   },
@@ -366,8 +366,8 @@
     "spice"        : 3,
     "gemstone"     : 2,
     "description"  : [
-      "Temporarily increases the Willpower of",
-      "the drinker by 5 points during 1 battle."
+      "Increases Willpower by 5 points",
+      "for the rest of the battle."
     ],
     "willpower"    : 5
   },
@@ -381,8 +381,8 @@
     "spice"        : 4,
     "gemstone"     : 3,
     "description"  : [
-      "Temporarily increases the Willpower of",
-      "the drinker by 7 points during 1 battle."
+      "Increases Willpower by 7 points",
+      "for the rest of the battle."
     ],
     "willpower"    : 7
   },
@@ -396,8 +396,8 @@
     "spice"        : 2,
     "gemstone"     : 2,
     "description"  : [
-      "Temporarily increases the Stealth rank of",
-      "the drinker by 3 points during 1 battle."
+      "Increases Stealth by 3 points",
+      "for the rest of the battle."
     ],
     "stealth"      : 3
   },
@@ -411,8 +411,8 @@
     "spice"        : 3,
     "gemstone"     : 3,
     "description"  : [
-      "Temporarily increases the Stealth rank of",
-      "the drinker by 5 points during 1 battle."
+      "Increases Stealth by 5 points",
+      "for the rest of the battle."
     ],
     "stealth"      : 5
   },
@@ -426,8 +426,8 @@
     "spice"        : 4,
     "gemstone"     : 4,
     "description"  : [
-      "Temporarily increases the Stealth rank of",
-      "the drinker by 7 points during 1 battle."
+      "Increases Stealth by 7 points",
+      "for the rest of the battle."
     ],
     "stealth"      : 7
   }

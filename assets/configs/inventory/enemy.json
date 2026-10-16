@@ -49,47 +49,47 @@
     "damage"       : 6
   },
   "armor_2"               : {
-    "group"     : "CHEST",
-    "protection": 2
+    "group": "CHEST",
+    "armor": 2
   },
   "armor_4"               : {
-    "group"     : "CHEST",
-    "protection": 4
+    "group": "CHEST",
+    "armor": 4
   },
   "armor_7"               : {
-    "group"     : "CHEST",
-    "protection": 7
+    "group": "CHEST",
+    "armor": 7
   },
   "armor_8"               : {
-    "group"     : "CHEST",
-    "protection": 8
+    "group": "CHEST",
+    "armor": 8
   },
   "armor_25"              : {
-    "group"     : "CHEST",
-    "protection": 25
+    "group": "CHEST",
+    "armor": 25
   },
   "armor_28"              : {
-    "group"     : "CHEST",
-    "protection": 28
+    "group": "CHEST",
+    "armor": 28
   },
   "armor_50"              : {
-    "group"     : "CHEST",
-    "protection": 50
+    "group": "CHEST",
+    "armor": 50
   },
   "armor_65"              : {
-    "group"     : "CHEST",
-    "protection": 65
+    "group": "CHEST",
+    "armor": 65
   },
   "armor_95"              : {
-    "group"     : "CHEST",
-    "protection": 95
+    "group": "CHEST",
+    "armor": 95
   },
   "armor_200"             : {
-    "group"     : "CHEST",
-    "protection": 200
+    "group": "CHEST",
+    "armor": 200
   },
   "armor_400"             : {
-    "group"     : "CHEST",
-    "protection": 400
+    "group": "CHEST",
+    "armor": 400
   }
 }

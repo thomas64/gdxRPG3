@@ -10,8 +10,8 @@
     "min_skill"  : 1,
     "description": [
       "Target: Friendly.",
-      "Add 2-4 Protection for the rest of",
-      "the battle for each rank in 'Wizard'.",
+      "Add 4-20% Protection for the rest of the",
+      "battle, depending on the rank in 'Wizard'.",
       "May only be cast once on each target."
     ]
   },

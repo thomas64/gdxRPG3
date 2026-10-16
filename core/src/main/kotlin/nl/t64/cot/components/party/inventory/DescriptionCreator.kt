@@ -227,10 +227,10 @@ class DescriptionCreator(
         ) {
             return false
         }
-        if (descriptionLine.key in listOf(CalcAttributeId.PROTECTION,
+        if (descriptionLine.key in listOf(CalcAttributeId.ARMOR,
                                           StatItemId.SPEED,
                                           SkillItemId.STEALTH)
-            && inventoryItem.group.hasImpactOnPrtSpdStl()
+            && inventoryItem.group.hasImpactOnArmorSpeedStealth()
         ) {
             return true
         }
