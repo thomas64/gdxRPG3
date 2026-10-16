@@ -51,6 +51,7 @@ data class InventoryItem(
     @JsonProperty("crit_hit")
     val critHit: Int = 0,
     private val damage: Int = 0,
+    private val armor: Int = 0,
     val protection: Int = 0,
     private val defense: Int = 0,
     @JsonProperty("spell_battery")
@@ -197,6 +198,7 @@ data class InventoryItem(
             CalcAttributeId.ACTION_POINTS -> 0
             CalcAttributeId.BASE_HIT -> baseHit
             CalcAttributeId.DAMAGE -> damage
+            CalcAttributeId.ARMOR -> armor
             CalcAttributeId.PROTECTION -> protection
             CalcAttributeId.MAGIC_PROTECTION -> 0
             CalcAttributeId.DEFENSE -> defense

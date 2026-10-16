@@ -5,11 +5,11 @@ import kotlin.math.roundToInt
 
 
 private data class ArmorCurvePoint(
-    val protection: Float,
+    val armor: Float,
     val reductionPercent: Float
 )
 
-private const val CAP_PERCENT: Float = 90f
+const val MAX_PROTECTION_PERCENT: Int = 90
 private const val POST_CURVE_GROWTH: Float = 0.03f
 
 private val TARGET_CURVE: List<ArmorCurvePoint> = listOf(ArmorCurvePoint(0f, 0f),
@@ -20,46 +20,47 @@ private val TARGET_CURVE: List<ArmorCurvePoint> = listOf(ArmorCurvePoint(0f, 0f)
                                                          ArmorCurvePoint(95f, 70f),     // 7 * 13 + 4  basic heavy
                                                          ArmorCurvePoint(116f, 80f))    // 7 * 16 + 4  masterwork heavy
 
-class ArmorReductionCalculator {
+class ArmorReductionCalculator(
+    private val armor: Int
+) {
 
-    fun toPercent(rawProtection: Int): Int {
-        if (rawProtection <= 0) return 0
+    fun toPercent(): Int {
+        if (armor <= 0) return 0
 
-        return calculateTargetCurveReduction(rawProtection).roundToInt()
+        return calculateTargetCurveReduction().roundToInt()
     }
 
-    private fun calculateTargetCurveReduction(rawProtection: Int): Float {
-        return findReductionWithinCurve(rawProtection)
-            ?: growPastLastPoint(rawProtection)
+    private fun calculateTargetCurveReduction(): Float {
+        return findReductionWithinCurve()
+            ?: growPastLastPoint()
     }
 
-    private fun findReductionWithinCurve(rawProtection: Int): Float? {
+    private fun findReductionWithinCurve(): Float? {
         (0 until TARGET_CURVE.lastIndex).forEach { index: Int ->
             val currentPoint: ArmorCurvePoint = TARGET_CURVE[index]
             val nextPoint: ArmorCurvePoint = TARGET_CURVE[index + 1]
-            val isWithinThisSegment: Boolean = rawProtection <= nextPoint.protection
+            val isWithinThisSegment: Boolean = armor <= nextPoint.armor
 
             if (isWithinThisSegment) {
-                return getReductionBetween(currentPoint, nextPoint, rawProtection)
+                return getReductionBetween(currentPoint, nextPoint)
             }
         }
         return null
     }
 
     private fun getReductionBetween(currentPoint: ArmorCurvePoint,
-                                    nextPoint: ArmorCurvePoint,
-                                    rawProtection: Int): Float {
-        val protectionRangeBetweenTheTwoPoints: Float = nextPoint.protection - currentPoint.protection
-        val progressOfTotalProtectionBetweenTheTwoPoints: Float = (rawProtection - currentPoint.protection) / protectionRangeBetweenTheTwoPoints
+                                    nextPoint: ArmorCurvePoint): Float {
+        val armorRangeBetweenTheTwoPoints: Float = nextPoint.armor - currentPoint.armor
+        val progressOfTotalArmorBetweenTheTwoPoints: Float = (armor - currentPoint.armor) / armorRangeBetweenTheTwoPoints
         val reductionRangeBetweenTheTwoPoints: Float = nextPoint.reductionPercent - currentPoint.reductionPercent
-        return currentPoint.reductionPercent + (progressOfTotalProtectionBetweenTheTwoPoints * reductionRangeBetweenTheTwoPoints)
+        return currentPoint.reductionPercent + (progressOfTotalArmorBetweenTheTwoPoints * reductionRangeBetweenTheTwoPoints)
     }
 
-    private fun growPastLastPoint(rawProtection: Int): Float {
+    private fun growPastLastPoint(): Float {
         val lastPoint: ArmorCurvePoint = TARGET_CURVE.last()
-        val extraProtectionAboveList: Float = rawProtection - lastPoint.protection
-        val growthFactor: Float = 1f - exp(-POST_CURVE_GROWTH * extraProtectionAboveList)
-        val remainingHeadroom: Float = CAP_PERCENT - lastPoint.reductionPercent
+        val extraArmorAboveList: Float = armor - lastPoint.armor
+        val growthFactor: Float = 1f - exp(-POST_CURVE_GROWTH * extraArmorAboveList)
+        val remainingHeadroom: Float = MAX_PROTECTION_PERCENT - lastPoint.reductionPercent
         return lastPoint.reductionPercent + (remainingHeadroom * growthFactor)
     }
 

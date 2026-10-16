@@ -55,14 +55,14 @@
     "group"     : "RING",
     "sort"      : 61000,
     "price"     : 50,
-    "protection": 1
+    "protection": 3
   },
   "epic_ethereal_ring"  : {
     "name"      : "Ethereal Ring",
     "group"     : "RING",
     "sort"      : 61000,
     "price"     : 50,
-    "protection": 5
+    "protection": 6
   },
   "epic_ring_of_healing": {
     "name"       : "Ring of Healing",

@@ -284,7 +284,7 @@ class WeaponAction(
     private fun InventoryItem.listShieldSpecs(prefix: String = ""): String {
         return """
                 ${prefix}${this.name} ${this.getDurabilityText()}
-                ${prefix}Protection: ${String.format("%3d", this.getAttributeOfCalcAttributeId(CalcAttributeId.PROTECTION))}
+                ${prefix}Armor:      ${String.format("%3d", this.getAttributeOfCalcAttributeId(CalcAttributeId.ARMOR))}
                 ${prefix}Defense:    ${String.format("%3d", this.getAttributeOfCalcAttributeId(CalcAttributeId.DEFENSE))}
                 ${prefix}Speed:      ${String.format("%3d", this.getAttributeOfStatItemId(StatItemId.SPEED))}
                 ${prefix}Stealth:    ${String.format("%3d", this.getAttributeOfSkillItemId(SkillItemId.STEALTH))}

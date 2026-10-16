@@ -81,7 +81,7 @@ class InventorySlotUser private constructor(itemSlot: ItemSlot) {
             inventoryItem.hp > 0 && inventoryItem.sp > 0 -> "and recovered $recoveredHp HP and $recoveredSp SP."
             inventoryItem.hp > 0                         -> "and recovered $recoveredHp HP."
             inventoryItem.sp > 0                         -> "and recovered $recoveredSp SP."
-            inventoryItem.protection > 0                 -> "and gained ${inventoryItem.protection} Protection."
+            inventoryItem.protection > 0                 -> "and gained ${inventoryItem.protection}% Protection."
             inventoryItem.intelligence > 0               -> "and gained ${inventoryItem.intelligence} Intelligence."
             inventoryItem.dexterity > 0                  -> "and gained ${inventoryItem.dexterity} Dexterity."
             inventoryItem.strength > 0                   -> "and gained ${inventoryItem.strength} Strength."

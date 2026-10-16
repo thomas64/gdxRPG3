@@ -98,7 +98,6 @@ internal class StatsTable(
         fillRow("Total XP", selectedHero.totalXp)
         fillEmptyRow()
         fillEmptyRow()
-        fillEmptyRow()
     }
 
     private fun fillCalcs() {
@@ -132,10 +131,17 @@ internal class StatsTable(
         val bonusDamage: Int = selectedHero.getCalculatedTotalDamage() - baseDamage
         addExtraToTable(bonusDamage)
 
-        table.add(createCalcLabel(CalcAttributeId.PROTECTION))
+        table.add(createCalcLabel(CalcAttributeId.ARMOR))
         table.add("")
-        table.add(selectedHero.getRawProtection().toString())
-        addExtraToTable(selectedHero.getRawExtraProtection())
+        table.add(selectedHero.getArmorOfEquipment().toString())
+        table.add("").row()
+
+        table.add(createCalcLabel(CalcAttributeId.PROTECTION, isPercentage = true))
+        table.add("")
+        val baseProtection: Int = selectedHero.getProtectionFromArmor()
+        table.add(baseProtection.toString())
+        val bonusProtection: Int = selectedHero.getCalculatedTotalProtection() - baseProtection
+        addExtraToTable(bonusProtection)
 
         table.add(createCalcLabel(CalcAttributeId.MAGIC_PROTECTION, isPercentage = true))
         table.add("")

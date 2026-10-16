@@ -17,11 +17,11 @@ class MagicShield(
     }
 
     override fun getBuffDescription(): String {
-        return "+${calculateBonusValue()} Protection"
+        return "+${calculateBonusValue()}% Protection"
     }
 
     override fun getCastMessage(bonusValue: Int): String {
-        return "+$bonusValue Prt"
+        return "+$bonusValue% Prt"
     }
 
     override fun applyBuff(bonusValue: Int) {
@@ -37,7 +37,7 @@ class MagicShield(
 }
 
 /*
-Wizard -> Protection
+Wizard -> Protection (%)
     1  -> 4
     2  -> 8
     3  -> 11

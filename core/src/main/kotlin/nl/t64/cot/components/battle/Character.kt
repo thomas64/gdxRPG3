@@ -17,7 +17,6 @@ import kotlin.random.Random
 
 
 const val AP_CAP: Int = 10
-private val armorReductionCalculator = ArmorReductionCalculator()
 
 abstract class Character(
     val id: String = "",
@@ -151,28 +150,27 @@ abstract class Character(
     }
 
     fun getCalculatedTotalProtection(): Int {
-        val totalRaw: Int = getRawProtection() + getRawExtraProtection()
-        return getArmorReductionPercentage(totalRaw)
+        val totalProtection: Int = getProtectionFromArmor() + getDirectProtectionOfEquipment() + bonus.getProtection()
+        return totalProtection.coerceAtMost(MAX_PROTECTION_PERCENT)
     }
 
-    fun getRawProtection(): Int {
+    fun getProtectionFromArmor(): Int {
+        return ArmorReductionCalculator(getArmorOfEquipment()).toPercent()
+    }
+
+    private fun getDirectProtectionOfEquipment(): Int {
         return getSumOfEquipmentOfCalc(CalcAttributeId.PROTECTION)
     }
 
-    fun getRawExtraProtection(): Int {
-        return bonus.getProtection()
-    }
-
-    private fun getArmorReductionPercentage(rawProtection: Int): Int {
-        return armorReductionCalculator.toPercent(rawProtection)
+    fun getArmorOfEquipment(): Int {
+        return getSumOfEquipmentOfCalc(CalcAttributeId.ARMOR)
     }
 
     fun getCalculatedTotalMagicProtection(): Int {
-        val maxMagicProtection = 90          // net zoals normale protection, zie armorReductionCalculator.
         val willpowerForMaxProtection = 50f  // 40 max attr + 10 van spell of potion of equipment.
         val willpower: Int = getCalculatedTotalStatOf(StatItemId.WILLPOWER)
-        return ((willpower * maxMagicProtection) / willpowerForMaxProtection)
-            .roundToInt().coerceAtMost(maxMagicProtection)
+        return ((willpower * MAX_PROTECTION_PERCENT) / willpowerForMaxProtection)
+            .roundToInt().coerceAtMost(MAX_PROTECTION_PERCENT)
     }
 
     fun getCalculatedTotalDefense(): Int {
