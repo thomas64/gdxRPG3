@@ -58,14 +58,16 @@ class SceneCycle4Begins : CutsceneScreen() {
     private fun toLastdennThen(): Action {
         return Actions.sequence(
             Actions.delay(2f),
-            Actions.run { mozes.direction = Direction.EAST },
-            Actions.run { mozes.entityState = EntityState.WALKING },
-            Actions.moveBy(48f, 0f, 2f),
-            Actions.run { mozes.entityState = EntityState.IDLE },
-            Actions.delay(0.5f),
-            Actions.run { mozes.direction = Direction.SOUTH },
-            Actions.delay(2f),
-            Actions.run { showConversationDialog("out_of_bed_cycle_4", "mozes") }
+            Actions.addAction(Actions.sequence(
+                Actions.run { mozes.direction = Direction.EAST },
+                Actions.run { mozes.entityState = EntityState.WALKING },
+                Actions.moveBy(48f, 0f, 2f),
+                Actions.run { mozes.entityState = EntityState.IDLE },
+                Actions.delay(0.5f),
+                Actions.run { mozes.direction = Direction.SOUTH },
+                Actions.delay(2f),
+                Actions.run { showConversationDialog("out_of_bed_cycle_4", "mozes") }
+            ), mozes)
         )
     }
 

@@ -32,6 +32,10 @@ class PortalListTable {
         portalList.setItems(activatedPortals.toGdxArray())
     }
 
+    fun populateHomePortalOnly() {
+        portalList.setItems(arrayOf(Portal.HONEYWOOD_HOUSE_MOZES).toGdxArray())
+    }
+
     fun populateWarpPortalList(currentMapName: String) {
         val activatedPortals: Array<Portal> = gameData.portals.getAllActivatedPortalsExcept(currentMapName)
         if (activatedPortals.isEmpty()) {

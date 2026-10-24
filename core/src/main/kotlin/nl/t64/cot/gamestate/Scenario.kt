@@ -37,14 +37,14 @@ class Scenario {
         addQuestArdorToLogbook()
         addQuestVoiceToLogbook()
         gameData.clock.start()
-        profileManager.saveProfile()
+        profileManager.autoSave()
     }
 
     fun startThirdCycle() {
         reviveParty()
         gameData.resetCycle()
         gameData.clock.start()
-        profileManager.saveProfile()
+        profileManager.autoSave()
     }
 
     fun startFourthCycle() {
@@ -53,7 +53,7 @@ class Scenario {
         hideQuestVoiceFromLogbook()
         addQuestYlarusToLogbook()
         gameData.clock.start()
-        profileManager.saveProfile()
+        profileManager.autoSave()
     }
 
     private fun addMozesToParty() {

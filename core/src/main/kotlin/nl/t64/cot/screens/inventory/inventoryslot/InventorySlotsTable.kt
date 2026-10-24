@@ -16,6 +16,7 @@ import nl.t64.cot.screens.inventory.itemslot.InventoryImage
 import nl.t64.cot.screens.inventory.itemslot.ItemSlot
 import nl.t64.cot.screens.inventory.itemslot.ItemSlotSelector
 import nl.t64.cot.screens.inventory.tooltip.ItemSlotTooltip
+import nl.t64.cot.screens.warp.ResetTimeScreen
 
 
 private const val SLOT_SIZE = 64f
@@ -86,7 +87,7 @@ class InventorySlotsTable(
     override fun doCrystalTryAction() {
         val itemId: String? = selector.getCurrentSlot().getPossibleInventoryImage()?.inventoryItem?.id
         if (itemId == "crystal_of_time") {
-            CrystalHandler.doAction()
+            ResetTimeScreen.load()
         }
     }
 

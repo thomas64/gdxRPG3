@@ -8,6 +8,7 @@ import nl.t64.cot.screens.dialog.MessageDialog
 import nl.t64.cot.screens.dialog.QuestionDialog
 import nl.t64.cot.screens.inventory.InventoryUtils
 import nl.t64.cot.screens.inventory.itemslot.ItemSlot
+import nl.t64.cot.screens.warp.ResetTimeScreen
 
 
 class InventorySlotUser private constructor(itemSlot: ItemSlot) {
@@ -36,7 +37,7 @@ class InventorySlotUser private constructor(itemSlot: ItemSlot) {
 
     private fun doRegularAction() {
         if (inventoryItem.id == "crystal_of_time") {
-            CrystalHandler.doAction()
+            ResetTimeScreen.load()
         } else if (
             (inventoryItem.hp > 0 || inventoryItem.sp > 0)
             && selectedHero.canUsePotion(inventoryItem)

@@ -23,6 +23,8 @@ import nl.t64.cot.screens.world.conversation.ConversationDialog
 import nl.t64.cot.screens.world.conversation.ConversationObserver
 
 
+private const val TRY_CRYSTAL_MESSAGE = "Select and use the Crystal of Time to revert time to 07:30."
+
 class InventoryScreen : ParchmentScreen(), ConversationObserver {
 
     private val conversationDialog: ConversationDialog = ConversationDialog(this)
@@ -57,12 +59,11 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
         }
 
         fun loadFromCancelCrystal() {
-            (screenManager.getScreen(ScreenType.INVENTORY) as InventoryScreen).apply {
-                this.possibleSetBackground()
-                this.startingSelectedTableIndex = 4
-                this.loadedFromSkillScreen = null
-                this.createRegularListener()
-            }
+            prepareReturnFromCrystal().createRegularListener()
+        }
+
+        fun loadFromCancelTryCrystal() {
+            prepareReturnFromCrystal().createTryCrystalListener()
         }
 
         fun load() {
@@ -74,16 +75,8 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
                 this.stage.addAction(Actions.sequence(
                     Actions.delay(0.5f),
                     Actions.run {
-                        val dialog = MessageDialog("Select and use the Crystal of Time to revert time to 07:30.")
-                        dialog.show(this.stage, AudioEvent.SE_CONVERSATION_NEXT, 2f)
-                        this.createAndSetListener(openQuestLogFunction = { playSe(AudioEvent.SE_MENU_ERROR) },
-                                                  closeScreenFunction = { dialog.show(this.stage, AudioEvent.SE_CONVERSATION_NEXT) },
-                                                  doActionFunction = { this.doCrystalTryAction() },
-                                                  tryToDropItemFunction = {},
-                                                  tryToDismissHeroFunction = {},
-                                                  tryToMoveHeroLeftFunction = {},
-                                                  tryToMoveHeroRightFunction = {})
-                        this.addInputListenerWithSmallDelay()
+                        MessageDialog(TRY_CRYSTAL_MESSAGE).show(this.stage, AudioEvent.SE_CONVERSATION_NEXT, 2f)
+                        this.createTryCrystalListener()
                     }))
             }
         }
@@ -123,6 +116,14 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
                 this.loadedFromSkillScreen = null
             }
         }
+
+        private fun prepareReturnFromCrystal(): InventoryScreen {
+            return (screenManager.getScreen(ScreenType.INVENTORY) as InventoryScreen).apply {
+                this.possibleSetBackground()
+                this.startingSelectedTableIndex = 4
+                this.loadedFromSkillScreen = null
+            }
+        }
     }
 
     override fun onNotifyExitConversation() {
@@ -142,8 +143,8 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
         return inventoryUI
     }
 
-    /** A fresh actor sharing the grey, blurred world screenshot this inventory faded in over. */
-    fun createBlurredBackgroundCopy(): Image? = savedBackground?.first?.drawable?.let { Image(it) }
+    /** A fresh actor of the world screenshot this inventory faded in over, without the inventory's dark tint. */
+    fun createWorldScreenshotCopy(): Image? = savedBackground?.first?.drawable?.let { Image(it) }
 
     private fun possibleSetBackground() {
         if (!isBackgroundSet) {
@@ -201,6 +202,18 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
                              tryToDismissHeroFunction = { tryToDismissHero() },
                              tryToMoveHeroLeftFunction = { moveHeroLeft() },
                              tryToMoveHeroRightFunction = { moveHeroRight() })
+        addInputListenerWithSmallDelay()
+    }
+
+    private fun createTryCrystalListener() {
+        val tryCrystalMessage = MessageDialog(TRY_CRYSTAL_MESSAGE)
+        createAndSetListener(openQuestLogFunction = { playSe(AudioEvent.SE_MENU_ERROR) },
+                             closeScreenFunction = { tryCrystalMessage.show(stage, AudioEvent.SE_CONVERSATION_NEXT) },
+                             doActionFunction = { doCrystalTryAction() },
+                             tryToDropItemFunction = {},
+                             tryToDismissHeroFunction = {},
+                             tryToMoveHeroLeftFunction = {},
+                             tryToMoveHeroRightFunction = {})
         addInputListenerWithSmallDelay()
     }
 
