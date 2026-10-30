@@ -290,7 +290,7 @@
           {"condition": ["i_c_==_k_q_this"], "text": "*Offer to help with the bat situation.*", "command": "ACCEPT_QUEST", "nextId": "20"},
           {"condition": ["i_c_==_a_q_this", "i_tn_1_q_this"], "text": "*Inquire further about the location of the bats.*", "nextId": "40"},
           {"condition": ["i_ta_1_q_this"], "text": "*Inform her that the bats have been dealt with.*", "nextId": "50"},
-          {"condition": ["i_time_before_18:15"], "text": "[1 Gold] *Accept the offer for some rest.* [BLUE](Restore health)", "nextId": "4"},
+          {"condition": ["i_time_before_18:15"], "text": "[1 Gold] *Accept the offer for some rest.* [BLUE](Restore health)", "command": "HEAL_LIFE_0060", "nextId": "3"},
           {"condition": ["i_time_after_18:15"], "text": "[1 Gold] *Accept the offer for some rest.* [BLUE](Restore health)", "nextId": "6"},
           {"condition": ["i_time_before_18:15"], "text": "*Just stay and pass some time.* [BLUE](Skip time)", "nextId": "80"},
           {"condition": ["i_time_after_18:15"], "text": "*Just stay and pass some time.* [BLUE](Skip time)", "nextId": "82"},
@@ -304,17 +304,6 @@
         ]
       },
       "3"   : {"text": ["Your health and energy are fully restored. Please come back anytime you feel weary."], "choices": [{"command": "EXIT"}]},
-      "4"   : {"text": ["How long would you like to rest?"]},
-      "5"   : {
-        "choices": [
-          {"text": "*Just a 1 hour rest.*", "command": "HEAL_LIFE_0060", "nextId": "3"},
-          {"condition": ["i_time_before_08:00"], "text": "*Until 09:00.*", "command": "HEAL_LIFE_0900", "nextId": "3"},
-          {"condition": ["i_time_before_11:00"], "text": "*Until 12:00.*", "command": "HEAL_LIFE_1200", "nextId": "3"},
-          {"condition": ["i_time_before_14:00"], "text": "*Until 15:00.*", "command": "HEAL_LIFE_1500", "nextId": "3"},
-          {"condition": ["i_time_before_17:00"], "text": "*Until 18:00.*", "command": "HEAL_LIFE_1800", "nextId": "3"},
-          {"text": "(Back)", "nextId": "2"}
-        ]
-      },
       "6"   : {"text": ["I'm sorry, Mozes, but there are no beds available right now. I shouldn't have mentioned it."], "choices": [{"nextId": "2"}]},
       "80"  : {"text": ["How long would you like to stay?"]},
       "81"  : {

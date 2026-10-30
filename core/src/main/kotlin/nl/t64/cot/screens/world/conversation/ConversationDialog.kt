@@ -208,12 +208,8 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             ConversationCommand.AUTO_SAVE -> autoSave(nextId)
             ConversationCommand.SAVE_GAME -> saveGame(nextId)
             ConversationCommand.PAY_GOLD_0500 -> payGold(nextId, 500)
-            ConversationCommand.HEAL_LIFE_0015 -> healLife(nextId, "00:15")
-            ConversationCommand.HEAL_LIFE_0060 -> healLife(nextId, "00:60")
-            ConversationCommand.HEAL_LIFE_0900 -> healLife(nextId, "09:00")
-            ConversationCommand.HEAL_LIFE_1200 -> healLife(nextId, "12:00")
-            ConversationCommand.HEAL_LIFE_1500 -> healLife(nextId, "15:00")
-            ConversationCommand.HEAL_LIFE_1800 -> healLife(nextId, "18:00")
+            ConversationCommand.HEAL_LIFE_0015 -> healLife(nextId) { gameData.clock.takeQuarterHour() }
+            ConversationCommand.HEAL_LIFE_0060 -> healLife(nextId) { gameData.clock.takeHour() }
             ConversationCommand.RECEIVE_XP -> receiveXp(nextId)
             ConversationCommand.RECEIVE_SPELLS -> receiveSpells(nextId)
             ConversationCommand.RECEIVE_SKILLS -> receiveSkills(nextId)
@@ -225,11 +221,11 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             ConversationCommand.RELOAD_NPCS_1458 -> fadeAndReloadNpcsToTime(nextId, "14:58")
             ConversationCommand.HARD_SKIP_TO_0956 -> skipToTime(nextId, "09:56")
             ConversationCommand.HARD_SKIP_TO_1056 -> skipToTime(nextId, "10:56")
-            ConversationCommand.FADE_SKIP_0060 -> fadeAndSkipTime(nextId, "00:60")
-            ConversationCommand.FADE_SKIP_0900 -> fadeAndSkipTime(nextId, "09:00")
-            ConversationCommand.FADE_SKIP_1200 -> fadeAndSkipTime(nextId, "12:00")
-            ConversationCommand.FADE_SKIP_1500 -> fadeAndSkipTime(nextId, "15:00")
-            ConversationCommand.FADE_SKIP_1800 -> fadeAndSkipTime(nextId, "18:00")
+            ConversationCommand.FADE_SKIP_0060 -> fadeAndSkipTime(nextId) { gameData.clock.takeHour() }
+            ConversationCommand.FADE_SKIP_0900 -> fadeAndSkipTime(nextId) { gameData.clock.setTimeOfDay("09:00") }
+            ConversationCommand.FADE_SKIP_1200 -> fadeAndSkipTime(nextId) { gameData.clock.setTimeOfDay("12:00") }
+            ConversationCommand.FADE_SKIP_1500 -> fadeAndSkipTime(nextId) { gameData.clock.setTimeOfDay("15:00") }
+            ConversationCommand.FADE_SKIP_1800 -> fadeAndSkipTime(nextId) { gameData.clock.setTimeOfDay("18:00") }
 
             ConversationCommand.KNOW_QUEST -> knowQuest(nextId)
             ConversationCommand.ACCEPT_QUEST -> acceptQuest(nextId)
@@ -247,7 +243,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
             ConversationCommand.RECEIVE_ITEM_FOR_QUEST -> receiveItemForQuest()
             ConversationCommand.DELIVER_QUEST_ITEM -> deliverQuestItem(nextId)
             ConversationCommand.DELIVER_QUEST_ITEM_ALTERNATE -> deliverQuestItemAlternate(nextId)
-            ConversationCommand.DELIVER_QUEST_ITEM_TO_SHOW -> deliverQuestItemToSow(nextId)
+            ConversationCommand.DELIVER_QUEST_ITEM_TO_SHOW -> deliverQuestItemToShow(nextId)
             ConversationCommand.DELIVER_QUEST_MESSAGE -> deliverQuestMessage(nextId)
 
             ConversationCommand.REWARD_QUEST -> rewardQuest()
@@ -311,8 +307,8 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         continueConversation(nextId)
     }
 
-    private fun healLife(nextId: String, time: String) {
-        val price = conversationId.substringAfterLast("-").toInt()
+    private fun healLife(nextId: String, takeTime: () -> Unit) {
+        val price = getPriceFromConversationId()
         if (price > 0) {
             if (gameData.inventory.hasEnoughOfItem("gold", price)) {
                 pay(price)
@@ -323,13 +319,9 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         } else {
             playSe(AudioEvent.SE_RESTORE)
         }
-        applyListeners(inputDelay = 2f)
+
         Utils.runWithDelay(Constant.FADE_DURATION) {
-            when (time) {
-                "00:15" -> gameData.clock.takeQuarterHour()
-                "00:60" -> gameData.clock.takeHour()
-                else -> gameData.clock.setTimeOfDay(time)
-            }
+            takeTime.invoke()
             gameData.party.fullRecover()
         }
         conversationObserver.notifyFade(duration = 1f, actionAfterFade = { continueConversation(nextId) })
@@ -407,15 +399,11 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         endConversation(nextId)
     }
 
-    private fun fadeAndSkipTime(nextId: String, time: String) {
+    private fun fadeAndSkipTime(nextId: String, takeTime: () -> Unit) {
         Utils.runWithDelay(Constant.FADE_DURATION) {
             endConversation(nextId)
             playSe(AudioEvent.SE_CLOCK_TICKING)
-            when (time) {
-                "00:15" -> gameData.clock.takeQuarterHour()
-                "00:60" -> gameData.clock.takeHour()
-                else -> gameData.clock.setTimeOfDay(time)
-            }
+            takeTime.invoke()
         }
         conversationObserver.notifyFade(duration = 4f)
     }
@@ -506,7 +494,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         continueConversation(nextId)
     }
 
-    private fun deliverQuestItemToSow(nextId: String) {
+    private fun deliverQuestItemToShow(nextId: String) {
         gameData.quests.updateDeliverItemToShow(conversationId)
         continueConversation(nextId)
     }
@@ -573,21 +561,21 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     private fun hideWithFade() {
         label.setText("")
         answers.clearItems()
-        answers.clearSelectedIndexHistory()
-        graph.clearChosenAnswersHistory()
-        hasProcessedCurrentChoiceSelection = false
-        lockConfirmationKeyUntil = 0L
-        scrollPane.clearListeners()
+        resetConversationState()
         dialog.hide()
     }
 
     private fun hide() {
+        resetConversationState()
+        dialog.hide(null)
+    }
+
+    private fun resetConversationState() {
         answers.clearSelectedIndexHistory()
         graph.clearChosenAnswersHistory()
         hasProcessedCurrentChoiceSelection = false
         lockConfirmationKeyUntil = 0L
         scrollPane.clearListeners()
-        dialog.hide(null)
     }
 
     private fun lockConfirmationInput(seconds: Float) {
@@ -615,9 +603,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     private fun populateFace() {
         val phraseFace: String = graph.getCurrentFace()
         if (phraseFace.isNotBlank()) {
-            val mainTable = dialog.contentTable.getChild(0) as Table
-            val faceTable = mainTable.getChild(0) as Table
-            val faceCell = faceTable.getCell(faceImage)
+            val faceCell = getFaceTable().getCell(faceImage)
             faceImage = Utils.getFaceImage(phraseFace)
             faceCell.setActor<Actor>(faceImage)
         }
@@ -626,12 +612,15 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     private fun populateName() {
         val phraseName: String = graph.getCurrentName()
         if (phraseName.isNotBlank()) {
-            val mainTable = dialog.contentTable.getChild(0) as Table
-            val faceTable = mainTable.getChild(0) as Table
-            val nameCell = faceTable.getCell(nameLabel)
+            val nameCell = getFaceTable().getCell(nameLabel)
             nameLabel = Label(phraseName, LabelStyle(smallFont, Color.BLACK))
             nameCell.setActor<Actor>(nameLabel)
         }
+    }
+
+    private fun getFaceTable(): Table {
+        val mainTable = dialog.contentTable.getChild(0) as Table
+        return mainTable.getChild(0) as Table
     }
 
     private fun populatePhrase() {
@@ -659,13 +648,17 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun possiblePersistentTooltip(phraseId: String) {
-        if (conversationId.contains("price-") && conversationId.substringAfterLast("-").toInt() > 0) {
+        if (conversationId.contains("price-") && getPriceFromConversationId() > 0) {
             if (phraseId == "2") {
                 showGoldTooltip()
             } else {
                 possibleHidePersistentTooltip()
             }
         }
+    }
+
+    private fun getPriceFromConversationId(): Int {
+        return conversationId.substringAfterLast("-").toInt()
     }
 
     private fun repositionScrollPaneBasedOnContent() {
