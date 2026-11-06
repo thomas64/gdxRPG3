@@ -32,6 +32,7 @@ enum class ConversationCommand {
 
     KNOW_QUEST,
     ACCEPT_QUEST,
+    ACCEPT_QUEST_AND_EXIT,
     KNOW_OTHER_QUEST,
     ACCEPT_OTHER_QUEST,
     MEET_QUEST_PERSON,

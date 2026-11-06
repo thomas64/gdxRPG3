@@ -144,7 +144,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
 
     private fun createFaceTable(): Table {
         faceImage = Utils.getFaceImage(faceId)
-        if (conversationId.startsWith("bury_")) {
+        if (isBuryConversation()) {
             faceImage.color = Color.DARK_GRAY
         }
         nameLabel = Label(graph.npcName, LabelStyle(smallFont, Color.BLACK))
@@ -229,6 +229,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
 
             ConversationCommand.KNOW_QUEST -> knowQuest(nextId)
             ConversationCommand.ACCEPT_QUEST -> acceptQuest(nextId)
+            ConversationCommand.ACCEPT_QUEST_AND_EXIT -> acceptQuestAndExit(nextId)
             ConversationCommand.KNOW_OTHER_QUEST -> knowOtherQuest(selectedChoice.questId, nextId)
             ConversationCommand.ACCEPT_OTHER_QUEST -> acceptOtherQuest(selectedChoice.questId, nextId)
             ConversationCommand.MEET_QUEST_PERSON -> meetQuestPerson(nextId)
@@ -416,6 +417,11 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     private fun acceptQuest(nextId: String) {
         gameData.quests.getQuestById(conversationId).accept()
         continueConversation(nextId)
+    }
+
+    private fun acceptQuestAndExit(nextId: String) {
+        gameData.quests.getQuestById(conversationId).accept()
+        endConversation(nextId)
     }
 
     private fun knowOtherQuest(questId: String, nextId: String) {
@@ -627,7 +633,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
         val phraseText: String = getCurrentPhraseText()
         if (phraseText.isNotBlank()) {
             label.restart("{COLOR=BLACK}$phraseText")
-            if (conversationId.startsWith("bury_")) {
+            if (isBuryConversation()) {
                 label.skipToTheEnd()
             }
         } else {
@@ -659,6 +665,10 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
 
     private fun getPriceFromConversationId(): Int {
         return conversationId.substringAfterLast("-").toInt()
+    }
+
+    private fun isBuryConversation(): Boolean {
+        return conversationId.startsWith("bury_")
     }
 
     private fun repositionScrollPaneBasedOnContent() {

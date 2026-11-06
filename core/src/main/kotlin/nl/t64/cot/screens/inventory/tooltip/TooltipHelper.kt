@@ -101,7 +101,9 @@ private fun getKey(attribute: InventoryDescription): String {
 private fun getValue(descriptionLine: InventoryDescription): String {
     return when {
         descriptionLine.value is SkillItemId -> descriptionLine.value.title
-        descriptionLine.key in listOf(CalcAttributeId.BASE_HIT, CalcAttributeId.PROTECTION) -> "${descriptionLine.value}%"
+        descriptionLine.key in listOf(CalcAttributeId.BASE_HIT,
+                                      CalcAttributeId.PROTECTION,
+                                      CalcAttributeId.DEFENSE) -> "${descriptionLine.value}%"
         else -> descriptionLine.value.toString()
     }
 }

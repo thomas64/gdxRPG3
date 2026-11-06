@@ -312,7 +312,6 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
     override fun onNotifyExitConversation() {
         updateLoot()
         show()
-        player.resetInput()
         render(0f)
     }
 

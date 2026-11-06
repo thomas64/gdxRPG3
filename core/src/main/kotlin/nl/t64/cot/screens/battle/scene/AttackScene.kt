@@ -34,11 +34,11 @@ private const val DODGE_DISTANCE = 60f
 private const val DODGE_DURATION = 0.1f
 private const val DODGE_HOLD_DURATION = 0.2f
 private const val DODGE_BACK_DURATION = 0.15f
-private const val SHAKE_INTENSITY = 40f
-private const val CRITICAL_SHAKE_INTENSITY = 80f
+private const val SHAKE_INTENSITY = 60f
+private const val CRITICAL_SHAKE_INTENSITY = 120f
 private const val SHAKE_DURATION = 0.3f
 
-private const val HIT_STOP_DURATION = 0.2f
+private const val HIT_STOP_DURATION = 0.3f
 private const val SCREEN_FLASH_ALPHA = 0.8f
 private const val SCREEN_FLASH_FADE_DURATION = 0.1f
 

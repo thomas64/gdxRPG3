@@ -4,15 +4,15 @@
     "phrases": {
       "1" : {
         "text": ["It's an empty bag."], "choices": [
-          {"condition": ["i_r_==_u_q_this"], "text": "->", "command": "ACCEPT_QUEST", "nextId": "2"},
-          {"condition": ["i_r_==_a_q_this"], "text": "->", "command": "ACCEPT_QUEST", "nextId": "10"},
-          {"condition": ["i_r_>_a_q_this"], "text": "->", "command": "ACCEPT_QUEST", "nextId": "20"}
+          {"condition": ["i_r_==_u_q_this"], "text": "->", "nextId": "2"},
+          {"condition": ["i_r_==_a_q_this"], "text": "->", "nextId": "10"},
+          {"condition": ["i_r_>_a_q_this"], "text": "->", "nextId": "20"}
         ]
       },
       "2" : {"text": ["Did someone lose this? Looks like it was dropped not long ago. Must have been this morning."]},
-      "3" : {"text": ["I wonder who it belongs to..."], "choices": [{"command": "EXIT", "nextId": "10"}]},
-      "10": {"text": ["I figured it must belong to someone who traveled here this morning."], "choices": [{"command": "EXIT", "nextId": "10"}]},
-      "20": {"text": ["It belongs to the traveler I met earlier, in a different time cycle."], "choices": [{"command": "EXIT", "nextId": "20"}]}
+      "3" : {"text": ["I wonder who it belongs to..."], "choices": [{"command": "ACCEPT_QUEST_AND_EXIT", "nextId": "10"}]},
+      "10": {"text": ["I figured it must belong to someone who traveled here this morning."], "choices": [{"command": "ACCEPT_QUEST_AND_EXIT", "nextId": "10"}]},
+      "20": {"text": ["It belongs to the traveler I met earlier, in a different time cycle."], "choices": [{"command": "ACCEPT_QUEST_AND_EXIT", "nextId": "20"}]}
     }
   },
   "alva_notice_no_bag"   : {

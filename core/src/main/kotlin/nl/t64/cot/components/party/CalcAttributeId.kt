@@ -45,7 +45,7 @@ enum class CalcAttributeId(override val title: String) : SuperEnum {
 
                 - '$title' is derived from the weapon you are currently holding
                   and the rank of your 'Intelligence', 'Dexterity' or 'Strength'.
-                  Which one depends on the weapon's skill type.""".trimIndent()
+                  Which of the three depends on the attribute the weapon requires.""".trimIndent()
         }
     },
 
@@ -87,8 +87,13 @@ enum class CalcAttributeId(override val title: String) : SuperEnum {
     DEFENSE("Defense") {
         override fun getDescription(): String {
             return """
-                '$title' defines your possibility to block an
-                enemy's attack with physical weapons in combat.""".trimIndent()
+            - '$title' defines your chance to block an
+              enemy's attack with physical weapons in combat.
+
+            - '$title' is derived from the shield you are
+              currently holding and the rank of your Shield skill.
+
+            - Without a shield, '$title' is 0.""".trimIndent()
         }
     },
 
