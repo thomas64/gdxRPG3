@@ -27,7 +27,7 @@ internal class CalcsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
         table.add(Label("XP", createLabelStyle()))
         table.add(Label(selectedHero.xpPoints.toString(), createLabelStyle())).row()
         table.add(Label("Gold", createLabelStyle()))
-        table.add(Label(gameData.inventory.getTotalOfItem(ResourceType.GOLD.name).toString(), createLabelStyle())).row()
+        table.add(Label(gameData.inventory.getTotalOfItem(ResourceType.GOLD.id).toString(), createLabelStyle())).row()
     }
 
     private fun createLabelStyle(): LabelStyle {

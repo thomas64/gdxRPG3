@@ -7,6 +7,7 @@ import nl.t64.cot.Utils
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.components.party.HeroItem
+import nl.t64.cot.components.party.abilities.ResourceType
 import nl.t64.cot.components.party.skills.SkillDatabase
 import nl.t64.cot.components.party.skills.SkillItem
 import nl.t64.cot.screens.inventory.BaseTable
@@ -100,7 +101,7 @@ internal class AcademyTable(
 
         return selectedHero.isAlive
             && xpCost > 0 && selectedHero.hasEnoughXpFor(xpCost)
-            && goldCost > 0 && gameData.inventory.hasEnoughOfItem("gold", goldCost)
+            && goldCost > 0 && gameData.inventory.hasEnoughOfItem(ResourceType.GOLD.id, goldCost)
     }
 
 }

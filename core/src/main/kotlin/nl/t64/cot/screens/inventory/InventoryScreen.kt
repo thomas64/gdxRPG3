@@ -11,6 +11,7 @@ import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
 import nl.t64.cot.components.battle.Character
 import nl.t64.cot.components.party.HeroItem
+import nl.t64.cot.components.party.abilities.ResourceType
 import nl.t64.cot.components.party.inventory.InventoryDatabase
 import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.constants.Constant
@@ -358,25 +359,25 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
     private fun cheatAddGold() {
         if (preferenceManager.isDebugModeOn) {
             val inventory = gameData.inventory
-            if (inventory.hasRoomForResource("gold")
-                && inventory.hasRoomForResource("herb")
-                && inventory.hasRoomForResource("spice")
-                && inventory.hasRoomForResource("gemstone")
-                && inventory.hasRoomForResource("leather")
-                && inventory.hasRoomForResource("wood")
-                && inventory.hasRoomForResource("metal")
+            if (inventory.hasRoomForResource(ResourceType.GOLD.id)
+                && inventory.hasRoomForResource(ResourceType.HERB.id)
+                && inventory.hasRoomForResource(ResourceType.SPICE.id)
+                && inventory.hasRoomForResource(ResourceType.GEMSTONE.id)
+                && inventory.hasRoomForResource(ResourceType.LEATHER.id)
+                && inventory.hasRoomForResource(ResourceType.WOOD.id)
+                && inventory.hasRoomForResource(ResourceType.METAL.id)
                 && inventory.hasRoomForResource("green_jelly")
                 && inventory.hasRoomForResource("blue_jelly")
             ) {
                 playSe(AudioEvent.SE_MENU_ERROR)
                 gameData.party.gainXp(400)
-                inventory.autoSetItem(InventoryDatabase.createInventoryItem("gold", 99))
-                inventory.autoSetItem(InventoryDatabase.createInventoryItem("herb", 10))
-                inventory.autoSetItem(InventoryDatabase.createInventoryItem("spice", 10))
-                inventory.autoSetItem(InventoryDatabase.createInventoryItem("gemstone", 10))
-                inventory.autoSetItem(InventoryDatabase.createInventoryItem("leather", 10))
-                inventory.autoSetItem(InventoryDatabase.createInventoryItem("wood", 10))
-                inventory.autoSetItem(InventoryDatabase.createInventoryItem("metal", 10))
+                inventory.autoSetItem(InventoryDatabase.createInventoryItem(ResourceType.GOLD.id, 99))
+                inventory.autoSetItem(InventoryDatabase.createInventoryItem(ResourceType.HERB.id, 10))
+                inventory.autoSetItem(InventoryDatabase.createInventoryItem(ResourceType.SPICE.id, 10))
+                inventory.autoSetItem(InventoryDatabase.createInventoryItem(ResourceType.GEMSTONE.id, 10))
+                inventory.autoSetItem(InventoryDatabase.createInventoryItem(ResourceType.LEATHER.id, 10))
+                inventory.autoSetItem(InventoryDatabase.createInventoryItem(ResourceType.WOOD.id, 10))
+                inventory.autoSetItem(InventoryDatabase.createInventoryItem(ResourceType.METAL.id, 10))
                 inventory.autoSetItem(InventoryDatabase.createInventoryItem("green_jelly", 10))
                 inventory.autoSetItem(InventoryDatabase.createInventoryItem("blue_jelly", 10))
                 inventory.autoSetItem(InventoryDatabase.createInventoryItem("yellow_jelly", 10))
@@ -388,13 +389,13 @@ class InventoryScreen : ParchmentScreen(), ConversationObserver {
     private fun cheatRemoveGold() {
         if (preferenceManager.isDebugModeOn) {
             val inventory = gameData.inventory
-            if (inventory.hasEnoughOfItem("gold", 1)) {
+            if (inventory.hasEnoughOfItem(ResourceType.GOLD.id, 1)) {
                 playSe(AudioEvent.SE_MENU_ERROR)
                 gameData.party.getAllHeroesAlive().forEach {
                     it.takeDamage(1)
                     it.currentSp -= 1
                 }
-                inventory.autoRemoveItem("gold", 1)
+                inventory.autoRemoveItem(ResourceType.GOLD.id, 1)
                 inventoryUI.reloadInventory()
             }
         }

@@ -30,17 +30,17 @@ internal class ResourcesTable() : BaseTable(PersonalityTooltip()) {
     }
 
     override fun fillRows() {
-        table.add(createImageOf(ResourceType.HERB.name))
+        table.add(createImageOf(ResourceType.HERB.id))
         table.add(Label(ResourceType.HERB.title, createLabelStyle())).padLeft(SECOND_COLUMN_PAD_LEFT)
-        table.add(Label(gameData.inventory.getTotalOfItem(ResourceType.HERB.name).toString(), createLabelStyle())).row()
+        table.add(Label(gameData.inventory.getTotalOfItem(ResourceType.HERB.id).toString(), createLabelStyle())).row()
 
-        table.add(createImageOf(ResourceType.SPICE.name))
+        table.add(createImageOf(ResourceType.SPICE.id))
         table.add(Label(ResourceType.SPICE.title, createLabelStyle())).padLeft(SECOND_COLUMN_PAD_LEFT)
-        table.add(Label(gameData.inventory.getTotalOfItem(ResourceType.SPICE.name).toString(), createLabelStyle())).row()
+        table.add(Label(gameData.inventory.getTotalOfItem(ResourceType.SPICE.id).toString(), createLabelStyle())).row()
 
-        table.add(createImageOf(ResourceType.GEMSTONE.name))
+        table.add(createImageOf(ResourceType.GEMSTONE.id))
         table.add(Label(ResourceType.GEMSTONE.title, createLabelStyle())).padLeft(SECOND_COLUMN_PAD_LEFT)
-        table.add(Label(gameData.inventory.getTotalOfItem(ResourceType.GEMSTONE.name).toString(), createLabelStyle())).row()
+        table.add(Label(gameData.inventory.getTotalOfItem(ResourceType.GEMSTONE.id).toString(), createLabelStyle())).row()
 
         table.add("").row()
 

@@ -6,6 +6,7 @@ import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.stopAllSe
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.abilities.AbilityItem
+import nl.t64.cot.components.party.abilities.ResourceType
 import nl.t64.cot.screens.dialog.MessageDialog
 import nl.t64.cot.screens.dialog.QuestionDialog
 import nl.t64.cot.screens.inventory.InventoryUtils
@@ -38,7 +39,7 @@ class SpellLearner private constructor(
     private val xpCost: Int = spellToLearn.calculateXpCost(selectedHero.totalXp)
     private val hasEnoughXp: Boolean = selectedHero.hasEnoughXpFor(xpCost)
     private val goldCost: Int = spellToLearn.goldCost
-    private val hasEnoughGold: Boolean = gameData.inventory.hasEnoughOfItem("gold", goldCost)
+    private val hasEnoughGold: Boolean = gameData.inventory.hasEnoughOfItem(ResourceType.GOLD.id, goldCost)
 
     private fun learn() {
         val requiredSkillName: String = spellToLearn.skill.title
@@ -67,7 +68,7 @@ class SpellLearner private constructor(
     }
 
     private fun learnSpell() {
-        gameData.inventory.autoRemoveItem("gold", goldCost)
+        gameData.inventory.autoRemoveItem(ResourceType.GOLD.id, goldCost)
         selectedHero.learn(spellToLearn.id, xpCost)
         setHasJustUpdatedToTrue.invoke()
         showConfirmMessage()

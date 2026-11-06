@@ -30,17 +30,17 @@ internal class ResourcesTable() : BaseTable(PersonalityTooltip()) {
     }
 
     override fun fillRows() {
-        table.add(createImageOf(ResourceType.LEATHER.name))
+        table.add(createImageOf(ResourceType.LEATHER.id))
         table.add(Label(ResourceType.LEATHER.title, createLabelStyle())).padLeft(SECOND_COLUMN_PAD_LEFT)
-        table.add(Label(gameData.inventory.getTotalOfItem(ResourceType.LEATHER.name).toString(), createLabelStyle())).row()
+        table.add(Label(gameData.inventory.getTotalOfItem(ResourceType.LEATHER.id).toString(), createLabelStyle())).row()
 
-        table.add(createImageOf(ResourceType.WOOD.name))
+        table.add(createImageOf(ResourceType.WOOD.id))
         table.add(Label(ResourceType.WOOD.title, createLabelStyle())).padLeft(SECOND_COLUMN_PAD_LEFT)
-        table.add(Label(gameData.inventory.getTotalOfItem(ResourceType.WOOD.name).toString(), createLabelStyle())).row()
+        table.add(Label(gameData.inventory.getTotalOfItem(ResourceType.WOOD.id).toString(), createLabelStyle())).row()
 
-        table.add(createImageOf(ResourceType.METAL.name))
+        table.add(createImageOf(ResourceType.METAL.id))
         table.add(Label(ResourceType.METAL.title, createLabelStyle())).padLeft(SECOND_COLUMN_PAD_LEFT)
-        table.add(Label(gameData.inventory.getTotalOfItem(ResourceType.METAL.name).toString(), createLabelStyle())).row()
+        table.add(Label(gameData.inventory.getTotalOfItem(ResourceType.METAL.id).toString(), createLabelStyle())).row()
 
         table.add("").row()
 

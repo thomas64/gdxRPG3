@@ -3,6 +3,7 @@ package nl.t64.cot.screens.inventory.equipslot
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
+import nl.t64.cot.components.party.abilities.ResourceType
 import nl.t64.cot.components.party.inventory.InventoryDatabase
 import nl.t64.cot.screens.dialog.MessageDialog
 import nl.t64.cot.screens.inventory.InventoryUtils
@@ -38,9 +39,9 @@ internal class EquipSlotTaker(private val selector: EquipSlotSelector) {
     }
 
     private fun tryConvertPouchToGold() {
-        if (gameData.inventory.hasRoomForResource("gold")) {
+        if (gameData.inventory.hasRoomForResource(ResourceType.GOLD.id)) {
             dequipSourceSlot {
-                val gold = InventoryDatabase.createInventoryItem("gold", candidateItem.inventoryItem.goldPouch)
+                val gold = InventoryDatabase.createInventoryItem(ResourceType.GOLD.id, candidateItem.inventoryItem.goldPouch)
                 InventoryUtils.getScreenUI().getInventorySlotsTable().addResource(gold)
                 playSe(AudioEvent.SE_COINS_SELL)
             }

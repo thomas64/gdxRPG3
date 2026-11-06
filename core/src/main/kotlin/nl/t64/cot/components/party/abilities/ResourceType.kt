@@ -16,4 +16,6 @@ enum class ResourceType(
     WOOD("Wood"),
     METAL("Metal");
 
+    val id: String get() = name.lowercase()
+
 }

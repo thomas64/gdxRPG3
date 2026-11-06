@@ -1,6 +1,7 @@
 package nl.t64.cot.components.battle
 
 import nl.t64.cot.components.party.abilities.AbilityContainer
+import nl.t64.cot.components.party.abilities.ResourceType
 import nl.t64.cot.components.party.inventory.EquipContainer
 import nl.t64.cot.components.party.inventory.InventoryDatabase
 import nl.t64.cot.components.party.inventory.InventoryGroup
@@ -87,7 +88,7 @@ class EnemyItem(
     }
 
     private fun Map.Entry<String, Int>.getDropAmount(): Int {
-        return if (key == "gold") createRandomAmount() else 1
+        return if (key == ResourceType.GOLD.id) createRandomAmount() else 1
     }
 
     private fun createRandomAmount(): Int {

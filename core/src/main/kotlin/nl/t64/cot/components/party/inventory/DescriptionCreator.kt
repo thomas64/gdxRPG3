@@ -2,6 +2,7 @@ package nl.t64.cot.components.party.inventory
 
 import nl.t64.cot.components.party.CalcAttributeId
 import nl.t64.cot.components.party.HeroItem
+import nl.t64.cot.components.party.abilities.ResourceType
 import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.components.party.stats.StatItemId
 import nl.t64.cot.constants.Constant
@@ -83,7 +84,7 @@ class DescriptionCreator(
 
     private fun addPrices() {
         when {
-            inventoryItem.id == "gold" -> return
+            inventoryItem.id == ResourceType.GOLD.id -> return
             inventoryItem.amount == 1 -> createLinesWithSinglePrice()
             inventoryItem.getSellValueTotal(partySumOfMerchantSkill) == 0 -> createLinesWithSinglePriceForSellOnly()
             inventoryItem.amount > 1 -> createLinesWithMultiPrices()

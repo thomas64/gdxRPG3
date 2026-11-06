@@ -302,7 +302,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun payGold(nextId: String, price: Int) {
-        gameData.inventory.autoRemoveItem("gold", price)
+        gameData.inventory.autoRemoveItem(ResourceType.GOLD.id, price)
         playSe(AudioEvent.SE_COINS_BUY)
         continueConversation(nextId)
     }
@@ -310,7 +310,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     private fun healLife(nextId: String, takeTime: () -> Unit) {
         val price = getPriceFromConversationId()
         if (price > 0) {
-            if (gameData.inventory.hasEnoughOfItem("gold", price)) {
+            if (gameData.inventory.hasEnoughOfItem(ResourceType.GOLD.id, price)) {
                 pay(price)
             } else {
                 continueConversation(Constant.PHRASE_ID_INN_NEGATIVE)
@@ -328,7 +328,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun pay(price: Int) {
-        gameData.inventory.autoRemoveItem("gold", price)
+        gameData.inventory.autoRemoveItem(ResourceType.GOLD.id, price)
         stage.addAction(Actions.sequence(
             Actions.run { playSe(AudioEvent.SE_COINS_BUY) },
             Actions.delay(1f),
@@ -705,7 +705,7 @@ class ConversationDialog(conversationObserver: ConversationObserver) {
     }
 
     private fun showGoldTooltip() {
-        val goldAmount = gameData.inventory.getTotalOfItem(ResourceType.GOLD.name)
+        val goldAmount = gameData.inventory.getTotalOfItem(ResourceType.GOLD.id)
         val message = "Gold: $goldAmount"
         conversationObserver.notifyShowPersistentMessageTooltip(message)
     }

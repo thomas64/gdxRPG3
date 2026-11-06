@@ -29,7 +29,7 @@ internal class CalcsTable(tooltip: PersonalityTooltip) : BaseTable(tooltip) {
         table.add(Label(selectedHero.xpPoints.toString(), createLabelStyle())).row()
 
         table.add(Label("Gold", createLabelStyle()))
-        table.add(Label(gameData.inventory.getTotalOfItem(ResourceType.GOLD.name).toString(), createLabelStyle())).row()
+        table.add(Label(gameData.inventory.getTotalOfItem(ResourceType.GOLD.id).toString(), createLabelStyle())).row()
 
 // Uitgezet, want schools leren niet meer alleen aan wizards. Deze stat is niet relevant meer om zichtbaar te zijn.
 // Of definitief verwijderen, of ook thief en warrior erbij zetten?

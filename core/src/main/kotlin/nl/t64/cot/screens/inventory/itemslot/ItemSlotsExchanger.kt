@@ -3,6 +3,7 @@ package nl.t64.cot.screens.inventory.itemslot
 import nl.t64.cot.Utils.gameData
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playSe
+import nl.t64.cot.components.party.abilities.ResourceType
 import nl.t64.cot.components.party.inventory.InventoryDatabase
 import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.components.party.skills.SkillItemId
@@ -52,11 +53,11 @@ class ItemSlotsExchanger {
     private fun handlePurchase() {
         val totalMerchant = gameData.party.getSumOfSkill(SkillItemId.MERCHANT)
         val totalPrice = draggedItem.inventoryItem.getBuyPriceTotal(totalMerchant)
-        if (gameData.inventory.hasEnoughOfItem("gold", totalPrice)) {
+        if (gameData.inventory.hasEnoughOfItem(ResourceType.GOLD.id, totalPrice)) {
             handlePossibleExchange()
             if (isSuccessfullyExchanged) {
                 draggedItem.inventoryItem.isSoldToShop = false
-                InventoryUtils.getScreenUI().getInventorySlotsTable().removeResource("gold", totalPrice)
+                InventoryUtils.getScreenUI().getInventorySlotsTable().removeResource(ResourceType.GOLD.id, totalPrice)
             }
         } else {
             val errorMessage = "I'm sorry. You don't seem to have enough gold."
@@ -75,11 +76,11 @@ class ItemSlotsExchanger {
             sourceSlot.putItemBack(draggedItem)
             return
         }
-        if (gameData.inventory.hasRoomForResource("gold")) {
+        if (gameData.inventory.hasRoomForResource(ResourceType.GOLD.id)) {
             handlePossibleExchange()
             if (isSuccessfullyExchanged) {
                 draggedItem.inventoryItem.isSoldToShop = true
-                val gold = InventoryDatabase.createInventoryItem("gold", totalValue)
+                val gold = InventoryDatabase.createInventoryItem(ResourceType.GOLD.id, totalValue)
                 InventoryUtils.getScreenUI().getInventorySlotsTable().addResource(gold)
             }
         } else {

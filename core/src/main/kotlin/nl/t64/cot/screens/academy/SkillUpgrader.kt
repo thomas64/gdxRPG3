@@ -8,6 +8,7 @@ import nl.t64.cot.audio.stopAllSe
 import nl.t64.cot.components.party.HeroItem
 import nl.t64.cot.components.party.abilities.AbilityDatabase
 import nl.t64.cot.components.party.abilities.AbilityItemId
+import nl.t64.cot.components.party.abilities.ResourceType
 import nl.t64.cot.components.party.skills.SkillItem
 import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.screens.dialog.MessageDialog
@@ -35,7 +36,7 @@ class SkillUpgrader private constructor(
     private val xpCost: Int = skillToUpgrade.getXpCostForNextRank(trainerSkill)
     private val goldCost: Int = skillToUpgrade.getGoldCostForNextRank(trainerSkill)
     private val hasEnoughXp: Boolean = selectedHero.hasEnoughXpFor(xpCost)
-    private val hasEnoughGold: Boolean = gameData.inventory.hasEnoughOfItem("gold", goldCost)
+    private val hasEnoughGold: Boolean = gameData.inventory.hasEnoughOfItem(ResourceType.GOLD.id, goldCost)
 
     private fun upgrade() {
         when {
@@ -62,7 +63,7 @@ class SkillUpgrader private constructor(
     }
 
     private fun upgradeSkill() {
-        gameData.inventory.autoRemoveItem("gold", goldCost)
+        gameData.inventory.autoRemoveItem(ResourceType.GOLD.id, goldCost)
         selectedHero.doUpgrade(skillToUpgrade, xpCost)
         possibleLearnAbilitiesThatBelongToThisSkill()
         possibleUpdateSparkles()

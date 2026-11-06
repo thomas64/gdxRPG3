@@ -15,6 +15,7 @@ open class AttackAction(
     protected val instigator: Character = currentParticipant.character
     protected val target: Character = currentTarget.character
     protected val requiredResourceName: String = selectedAbility.abilityItem.requiredResource.title
+    protected val requiredResourceId: String = selectedAbility.abilityItem.requiredResource.id
 
     companion object {
         fun createForEnemy(currentEnemy: Participant, targetHero: Participant, battleId: String): AttackAction {
@@ -120,7 +121,7 @@ open class AttackAction(
         currentParticipant.currentAP -= selectedAbility.ap
         instigator.currentSp -= selectedAbility.sp
         if (currentParticipant.isHero && selectedAbility.abilityItem.requiredResource != ResourceType.NONE) {
-            gameData.inventory.autoRemoveItem(requiredResourceName.lowercase(), 1)
+            gameData.inventory.autoRemoveItem(requiredResourceId, 1)
         }
 
         createDebugMessage()

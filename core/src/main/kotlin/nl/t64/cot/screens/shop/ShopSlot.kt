@@ -2,6 +2,7 @@ package nl.t64.cot.screens.shop
 
 import com.badlogic.gdx.graphics.Color
 import nl.t64.cot.Utils.gameData
+import nl.t64.cot.components.party.abilities.ResourceType
 import nl.t64.cot.components.party.inventory.InventoryContainer
 import nl.t64.cot.components.party.inventory.InventoryGroup
 import nl.t64.cot.components.party.skills.SkillItemId
@@ -20,7 +21,7 @@ internal class ShopSlot(index: Int, tooltip: ItemSlotTooltip, inventory: Invento
     private fun refreshPurchaseColor(image: InventoryImage) {
         val totalMerchant = gameData.party.getSumOfSkill(SkillItemId.MERCHANT)
         val costsToBuy = image.inventoryItem.getBuyPricePiece(totalMerchant)
-        if (gameData.inventory.hasEnoughOfItem("gold", costsToBuy)) {
+        if (gameData.inventory.hasEnoughOfItem(ResourceType.GOLD.id, costsToBuy)) {
             image.color = Color.WHITE
         } else {
             image.color = Color.DARK_GRAY

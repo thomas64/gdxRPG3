@@ -2,6 +2,7 @@ package nl.t64.cot.components.loot
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import nl.t64.cot.Utils.gameData
+import nl.t64.cot.components.party.abilities.ResourceType
 import nl.t64.cot.components.party.skills.SkillItemId
 
 
@@ -73,7 +74,7 @@ class Loot(
         lockLevel = originalLoot.lockLevel
         content = when {
             doesReset -> originalLoot.content
-            else -> mutableMapOf("gold" to 1)
+            else -> mutableMapOf(ResourceType.GOLD.id to 1)
         }
     }
 
