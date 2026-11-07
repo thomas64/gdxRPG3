@@ -1,5 +1,6 @@
 package nl.t64.cot.components.battle
 
+import com.badlogic.gdx.graphics.Color
 import nl.t64.cot.components.party.HeroItem
 import kotlin.math.roundToInt
 
@@ -13,7 +14,7 @@ class RestAction(
     private val amount: Int = calculateAmount().coerceAtMost(hero.maximumHp - hero.currentHp)
     private val message = """
         Resting will make ${character.name} end
-        this turn and recover ${calculateAmount()} HP.
+        this turn and recover $amount HP.
 
         """
 
@@ -27,10 +28,10 @@ class RestAction(
         }
     }
 
-    fun handle(): String {
+    fun handle(): StatChange {
         currentParticipant.currentAP = 0
         hero.recoverPartHp(amount)
-        return "$amount"
+        return StatChange("+$amount", "Hit Points", Color.GREEN)
     }
 
     private fun calculateAmount(): Int {

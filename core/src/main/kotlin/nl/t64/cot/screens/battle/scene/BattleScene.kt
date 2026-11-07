@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Align
 import nl.t64.cot.components.battle.Character
+import nl.t64.cot.components.battle.StatChange
 import nl.t64.cot.screens.FontProvider
 
 
@@ -61,6 +62,15 @@ abstract class BattleScene(
         ))
     }
 
+    // the change comes over the hero, so its number sinks onto the hero, unlike damage that springs off.
+    protected fun showFloatingStatChange(statChange: StatChange, offsetX: Float) {
+        val number: Table = createNumber(statChange.amount,
+                                         NumberStyle.NORMAL.getFont(),
+                                         statChange.color,
+                                         statChange.affects)
+        showNumberSinkingOnto(heroCombatant, number, offsetX)
+    }
+
     protected fun createNumber(text: String, font: BitmapFont, color: Color, label: String?): Table {
         val number = Table()
         number.add(Label(text, LabelStyle(font, color))).row()
@@ -72,7 +82,9 @@ abstract class BattleScene(
     }
 
     protected fun showNumberRisingFrom(combatant: CombatantActor, number: Table) {
-        showFloatingNumber(combatant, number, offsetX = 0f, startHeightAboveHead = 0f, distanceY = NUMBER_FLOAT_DISTANCE)
+        showFloatingNumber(combatant, number, offsetX = 0f,
+                           startHeightAboveHead = 0f,
+                           distanceY = NUMBER_FLOAT_DISTANCE)
     }
 
     protected fun showNumberSinkingOnto(combatant: CombatantActor, number: Table, offsetX: Float) {

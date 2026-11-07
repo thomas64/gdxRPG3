@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion
 
 private const val HERO_FRAME_SIZE = 64
 private const val FRAMES_PER_MOTION = 3
-private const val WAIT_FRAME_DURATION = 0.2f
+private const val CALM_FRAME_DURATION = 0.2f
 private const val MOTION_FRAME_DURATION = 0.08f
 const val HERO_TIME_UNTIL_LAST_FRAME: Float = MOTION_FRAME_DURATION * (FRAMES_PER_MOTION - 1)
 
@@ -52,7 +52,10 @@ class HeroCombatantActor(
     }
 
     private fun getFrameDuration(): Float {
-        return if (motion == CombatantMotion.WAIT) WAIT_FRAME_DURATION else MOTION_FRAME_DURATION
+        return when (motion) {
+            CombatantMotion.WAIT, CombatantMotion.SLEEP -> CALM_FRAME_DURATION
+            else -> MOTION_FRAME_DURATION
+        }
     }
 
     private fun getLoopingFrameIndex(elapsedFrames: Int): Int {

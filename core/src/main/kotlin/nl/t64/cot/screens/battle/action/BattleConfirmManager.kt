@@ -12,12 +12,14 @@ import nl.t64.cot.screens.battle.BattleState
 import nl.t64.cot.screens.battle.effects.FadeEffect
 import nl.t64.cot.screens.battle.effects.FloatingNumberEffect
 import nl.t64.cot.screens.battle.scene.PotionScene
+import nl.t64.cot.screens.battle.scene.RestScene
 import nl.t64.cot.screens.dialog.MessageDialog
 
 
 private const val DEFAULT_FLOATING_NUMBER_DELAY = 1.2f
 private const val FLEE_DELAY = 0.5f
 private const val FLEE_FADE_DURATION = 1f
+private const val TURN_SWITCH_DELAY_AFTER_REST = 0.5f
 
 class BattleConfirmManager(
     private val stage: Stage,
@@ -28,10 +30,10 @@ class BattleConfirmManager(
 ) {
 
     fun potionConfirmed(potionAction: PotionAction, onFinished: () -> Unit = {}) {
-        val effects: List<PotionEffect> = potionAction.handle()
+        val statChanges: List<StatChange> = potionAction.handle()
         battleState.isDelayingTurn = true
         val scene = PotionScene(currentParticipant.invoke().character)
-        scene.play(stage, effects) {
+        scene.play(stage, statChanges) {
             scene.close {
                 battleState.isDelayingTurn = false
                 onFinished.invoke()
@@ -91,18 +93,15 @@ class BattleConfirmManager(
     }
 
     fun restConfirmed(restAction: RestAction) {
-        val message: String = restAction.handle()
+        val statChange: StatChange = restAction.handle()
         battleState.isDelayingTurn = true
-        Utils.runWithDelay(0.5f) {
-            FloatingNumberEffect(battleFieldTable.invoke(),
-                                 currentParticipant.invoke().character.name,
-                                 message,
-                                 Color.GREEN)
-                .floatDown()
-            playSe(AudioEvent.SE_POTION)
-            Utils.runWithDelay(DEFAULT_FLOATING_NUMBER_DELAY) {
-                turnManager.setNextTurn()
-                battleState.isDelayingTurn = false
+        val scene = RestScene(currentParticipant.invoke().character)
+        scene.play(stage, statChange) {
+            scene.close {
+                Utils.runWithDelay(TURN_SWITCH_DELAY_AFTER_REST) {
+                    turnManager.setNextTurn()
+                    battleState.isDelayingTurn = false
+                }
             }
         }
     }
