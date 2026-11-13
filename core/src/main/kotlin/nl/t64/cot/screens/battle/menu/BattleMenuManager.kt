@@ -285,7 +285,7 @@ class BattleMenuManager(
         val canSwitchEquipment: Boolean = currentAp >= SWITCH_WEAPON_AP
         val canDrinkPotion: Boolean = currentAp >= POTION_AP
         val canFlee: Boolean = currentAp >= fleeAp
-        val canDelayTurn: Boolean = currentAp >= DELAY_AP
+        val canDelayTurn: Boolean = currentAp >= DELAY_AP + 1
         val canPushOn: Boolean = currentSp >= PUSH_ON_SP && !participant.isPerforming && !participant.hasFailedToFlee
         val canRest: Boolean = currentAp >= REST_AP
 

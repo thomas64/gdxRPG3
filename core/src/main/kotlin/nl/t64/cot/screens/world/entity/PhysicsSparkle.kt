@@ -40,10 +40,10 @@ class PhysicsSparkle(
     }
 
     private fun tryToGatherSparkle() {
-        if (sparkle.canBeGatheredByParty()) {
-            worldScreen.showFindScreen(sparkle, AudioEvent.SE_SPARKLE)
-        } else {
-            showRangerTooLowMessage()
+        when {
+            sparkle.isBlockedByCondition() -> worldScreen.showMessageDialog(sparkle.conditionMessage!!)
+            sparkle.canBeGatheredByParty() -> worldScreen.showFindScreen(sparkle, AudioEvent.SE_SPARKLE)
+            else -> showRangerTooLowMessage()
         }
     }
 

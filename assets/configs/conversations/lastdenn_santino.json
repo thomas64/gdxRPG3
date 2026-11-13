@@ -411,7 +411,7 @@
       "3": {"face": "man12", "name": "Garrin", "text": ["I... I... I..."]},
       "4": {"face": "soldier12", "name": "Lastdenn Guard", "text": ["You killed him!"]},
       "5": {"face": "man12", "name": "Garrin", "text": ["But... but..."]},
-      "6": {"face": "soldier12", "name": "Lastdenn Guard", "text": ["You are under arrest!", "Come with me."]},
+      "6": {"face": "soldier12", "name": "Lastdenn Guard", "text": ["You are under arrest!", "Come with us!"]},
       "7": {"face": "soldier12", "name": "Lastdenn Guard", "text": ["Corvin, you make sure to take the body of the priest away from this public place. Halric and I will take care of this guy."]},
       "8": {"face": "soldier01", "name": "Lastdenn Guard Corvin", "text": ["Yes sir."], "choices": [{"command": "EXIT"}]}
     }

@@ -2,6 +2,7 @@ package nl.t64.cot.components.loot
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import nl.t64.cot.Utils.gameData
+import nl.t64.cot.components.condition.areAllTrue
 import nl.t64.cot.components.party.abilities.ResourceType
 import nl.t64.cot.components.party.skills.SkillItemId
 
@@ -25,6 +26,7 @@ class Loot(
     var content: MutableMap<String, Int> = mutableMapOf(),
     @JsonProperty("condition")
     val conditions: List<String> = emptyList(),
+    val conditionMessage: String? = null,
     var trapLevel: Int = 0,
     var lockLevel: Int = 0,
     val gatherLevel: Int = 0,
@@ -92,6 +94,18 @@ class Loot(
     fun resetConversation(originalLoot: Loot) {
         content = originalLoot.content
         xp = originalLoot.xp
+    }
+
+    fun isPresentOnMap(): Boolean {
+        return !isTaken() && (conditions.areAllTrue() || hasConditionMessage())
+    }
+
+    fun isBlockedByCondition(): Boolean {
+        return !conditions.areAllTrue() && hasConditionMessage()
+    }
+
+    private fun hasConditionMessage(): Boolean {
+        return conditionMessage != null
     }
 
     fun isEmpty(): Boolean {

@@ -33,7 +33,7 @@ class LootLoader(private val currentMap: GameMap) {
     private fun loadSparkles() {
         currentMap.sparkles.forEach {
             val sparkle = gameData.loot.getLoot(it.name)
-            if (!sparkle.isTaken() && sparkle.conditions.areAllTrue()) {
+            if (sparkle.isPresentOnMap()) {
                 loadSparkle(it, sparkle)
             }
         }

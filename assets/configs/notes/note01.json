@@ -71,7 +71,7 @@
   },
   "note_flowers"      : {
     "phrases": {
-      "1": {"text": ["Flowers love people, they say."], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["Flowers love people, they say. But do they love you?"], "choices": [{"command": "EXIT"}]}
     }
   },
   "note_clock"        : {
