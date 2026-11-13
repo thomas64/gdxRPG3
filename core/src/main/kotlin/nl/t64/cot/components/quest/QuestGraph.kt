@@ -85,11 +85,12 @@ data class QuestGraph(
         return resetState.isEqualOrHigherThan(questState) || currentState.isEqualOrHigherThan(questState)
     }
 
-    fun getAllQuestTasksForVisual(): Array<QuestTask> {
+    fun getQuestTaskLines(): Array<String> {
         return (tasks + getTasksOfAcceptedSubQuests() + getSpecificHiddenTasksOfAcceptedSubQuests())
             .toSortedMap(compareBy<String> { it.length }.thenBy { it })
             .map { it.value }
             .filterNot { it.isHidden }
+            .map { it.toQuestLogLine(isFailed) }
             .toTypedArray()
     }
 

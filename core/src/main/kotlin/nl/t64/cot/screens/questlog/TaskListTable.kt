@@ -12,7 +12,6 @@ import ktx.collections.toGdxArray
 import nl.t64.cot.Utils
 import nl.t64.cot.components.quest.QuestGraph
 import nl.t64.cot.components.quest.QuestState
-import nl.t64.cot.components.quest.QuestTask
 import nl.t64.cot.screens.FontProvider
 import nl.t64.cot.toDrawable
 
@@ -23,23 +22,23 @@ private const val PAD_LEFT = 20f
 
 internal class TaskListTable {
 
-    private val taskList: List<QuestTask> = createList()
+    private val taskList: List<String> = createList()
     private val scrollPane: ScrollPane = fillScrollPane()
     val container: Table = fillContainer()
 
     fun populateTaskList(quest: QuestGraph) {
         taskList.clearItems()
         if (quest.isOneOfBothStatesEqualOrHigherThan(QuestState.ACCEPTED)) {
-            val questTasks: GdxArray<QuestTask> = quest.getAllQuestTasksForVisual().toGdxArray()
-            taskList.setItems(questTasks)
+            val questTaskLines: GdxArray<String> = quest.getQuestTaskLines().toGdxArray()
+            taskList.setItems(questTaskLines)
             taskList.alignment = Align.left
         } else {
-            taskList.setItems(QuestTask(taskPhrase = "(No tasks visible until this quest is accepted)"))
+            taskList.setItems(System.lineSeparator().repeat(3) + "(No tasks visible until this quest is accepted)")
             taskList.alignment = Align.center
         }
     }
 
-    private fun createList(): List<QuestTask> {
+    private fun createList(): List<String> {
         return List(ListStyle().apply {
             font = FontProvider.spectralExtraBold20
             fontColorSelected = Color.BLACK

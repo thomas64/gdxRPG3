@@ -61,6 +61,7 @@
     "isResettable": false,
     "tasks"       : {
       "1": {
+        "comment"        : "WARNING: 1 link to 1 in Santino.handleSideEffects()",
         "taskPhrase"     : "Ask Reignald to join your party after he had a conversation with Father Santino.",
         "type"           : "DELIVER_MESSAGE",
         "conversationIds": ["quest_lastdenn_reignald"]

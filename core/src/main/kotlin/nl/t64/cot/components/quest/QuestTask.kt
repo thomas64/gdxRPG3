@@ -66,10 +66,9 @@ class QuestTask(
         }
     }
 
-    override fun toString(): String {
+    fun toQuestLogLine(isQuestFailed: Boolean): String {
         return when {
-            type == QuestTaskType.NONE -> System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + taskPhrase
-            isFailed -> "[FIREBRICK]x    $taskPhrase[BLACK]"
+            isFailed && isQuestFailed -> "[FIREBRICK]x    $taskPhrase[BLACK]"
             isComplete -> "v    $taskPhrase"
             isReset -> "r    $taskPhrase"
             else -> "      $taskPhrase${getFindItemProgressForQuestLog()}"

@@ -148,7 +148,7 @@ class Santino : EntitySchedule() {
 
     override fun handleSideEffects() {
         handleTimedBells()
-        possibleFailQuestSantino()
+        possibleFailQuestsAfterMurder()
 
         if (isInsideChurch()) {
             handleServiceTransition()
@@ -184,14 +184,21 @@ class Santino : EntitySchedule() {
         }
     }
 
-    private fun possibleFailQuestSantino() {
-        val questSantino: QuestGraph = gameData.quests.getQuestById("quest_lastdenn_santino")
+    private fun possibleFailQuestsAfterMurder() {
         if (gameData.clock.isCurrentTimeAfter("14:01")
             && "is_garrin_possessed".isTrue()
-            && !questSantino.isOneOfBothStatesEqualOrHigherThan(QuestState.FINISHED)
-            && !questSantino.isTaskFailed("2")
         ) {
-            questSantino.setTaskFailed("2") // "_2_"
+            failTaskWhenStillOpen("quest_lastdenn_santino", "2") // "_2_"
+            failTaskWhenStillOpen("quest_lastdenn_reignald", "1") // "_1_"
+        }
+    }
+
+    private fun failTaskWhenStillOpen(questId: String, taskId: String) {
+        val quest: QuestGraph = gameData.quests.getQuestById(questId)
+        if (!quest.isOneOfBothStatesEqualOrHigherThan(QuestState.FINISHED)
+            && !quest.isTaskFailed(taskId)
+        ) {
+            quest.setTaskFailed(taskId)
         }
     }
 
