@@ -3,7 +3,7 @@
     "name"   : "Garrin",
     "phrases": {
       "1" : {"text": ["There's a scary story about ghosts in this part of town."]},
-      "2" : {"text": ["We moved here recently, just my boy and me. Stories like that don't scare me."]},
+      "2" : {"text": ["It's just my boy and me these days, but stories like that don't scare me."]},
       "3" : {"text": ["They say the priest, Father Santino, keeps a holy staff that wards off ghosts."]},
       "4" : {"text": ["And he'd hand it to anyone who brings him 'proof' that ghosts are real."]},
       "5" : {"text": ["What nonsense. Ghosts don't exist."]},
@@ -22,8 +22,8 @@
         ]
       },
       "8" : {"text": ["Ha ha! Sure! Now if you run into any ghosts, you can destroy them in the name of Evdos! Ha ha!"], "choices": [{"command": "EXIT"}]},
-      "20": {"text": ["But Paton says what now? He told you there's 'proof' in my drawer, and now you want the key for it?"]},
-      "21": {"text": ["No. That drawer was my wife's. The keys stays on me, and the drawer stays shut!"]},
+      "20": {"text": ["Paton said what? 'Proof' in my drawer? And now you want the key?"]},
+      "21": {"text": ["No. That drawer was my wife's. The key stays on me, and the drawer stays shut!"]},
       "22": {"text": ["Ghosts, proof — none of it. She wa... No! Leave us be."], "choices": [{"command": "EXIT"}]}
     }
   },
@@ -58,7 +58,7 @@
       },
       "4" : {
         "choices": [
-          {"text": "[Ghost repeller] *Destroy the ghost in name of Evdos!*", "command": "DELIVER_QUEST_ITEM_TO_SHOW", "nextId": "10"},
+          {"text": "[Ghost repeller] *Destroy the ghost in the name of Evdos!*", "command": "DELIVER_QUEST_ITEM_TO_SHOW", "nextId": "10"},
           {"text": "*See how this plays out. Do nothing.*", "command": "EXIT"}
         ]
       },
@@ -91,7 +91,7 @@
       },
       "4" : {
         "face": "ghost1", "name": "Ghost", "text": [""], "choices": [
-          {"text": "[Ghost repeller] *Destroy the ghost in name of Evdos!*", "command": "DELIVER_QUEST_ITEM_TO_SHOW", "nextId": "10"},
+          {"text": "[Ghost repeller] *Destroy the ghost in the name of Evdos!*", "command": "DELIVER_QUEST_ITEM_TO_SHOW", "nextId": "10"},
           {"text": "*See how this plays out. Do nothing.*", "command": "EXIT"}
         ]
       },
@@ -117,7 +117,7 @@
       },
       "4" : {
         "face": "ghost1", "name": "Ghost", "text": [""], "choices": [
-          {"text": "[Ghost repeller] *Destroy the ghost in name of Evdos!*", "command": "DELIVER_QUEST_ITEM_TO_SHOW", "nextId": "10"},
+          {"text": "[Ghost repeller] *Destroy the ghost in the name of Evdos!*", "command": "DELIVER_QUEST_ITEM_TO_SHOW", "nextId": "10"},
           {"text": "*See how this plays out. Do nothing.*", "command": "EXIT"}
         ]
       },
@@ -173,7 +173,19 @@
   "garrin_possessed_go_away"   : {
     "name"   : "Garrin",
     "phrases": {
-      "1": {"face": "ghost1", "text": ["iii waaant reveeenge"], "choices": [{"command": "EXIT"}]}
+      "1" : {
+        "face": "ghost1", "text": ["iii waaant reveeenge"], "choices": [
+          {"condition": ["i_n_0_==_item_ghost_repeller"], "text": "->", "command": "EXIT"},
+          {"condition": ["i_n_1_>=_item_ghost_repeller"], "text": "->", "nextId": "2"}
+        ]
+      },
+      "2" : {
+        "choices": [
+          {"text": "[Ghost repeller] *Drive the ghost out of Garrin in the name of Evdos!*", "nextId": "10"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "10": {"face": "ghost1", "text": ["evdooos cannooot touch meee insiiide hiiim"], "choices": [{"command": "EXIT"}]}
     }
   },
   "garrin_happy"               : {
@@ -218,7 +230,7 @@
         ]
       },
       "11"  : {"text": ["Just go. I don't know what came over me out there..."], "choices": [{"command": "EXIT"}]},
-      "20"  : {"text": ["I don't believe in such things. Ghosts. Nonsense. There must be another explanation."]},
+      "20"  : {"text": ["I told them it was a ghost. I must have lost my mind out there. I don't believe in such things. There must be another explanation."]},
       "21"  : {
         "choices": [
           {"text": "*Point out the proof his wife left in her drawer.*", "nextId": "22"},
@@ -231,8 +243,8 @@
       "25"  : {"text": ["Then it took her. And today I felt it myself. My own hands, moving without me."]},
       "26"  : {"text": ["She was right all along, and I called her a fool to keep from breaking. Evdos forgive me."]},
       "27"  : {"text": ["Don't let it take Paton too. Whatever it is, put an end to it!"]},
-      "28"  : {"text": ["Here. The key to her drawer. Take the proof from the drawer to the priest, and make him hand over his holy staff."], "choices": [{"command": "RECEIVE_ITEM"}]},
-      "1199": {"text": ["Here. The key to her drawer. Take the proof from the drawer to the priest, and make him hand over his holy staff."], "choices": [{"command": "RECEIVE_ITEM"}]},
+      "28"  : {"text": ["Here. The key to her drawer. If I had opened it sooner, if I had only believed her, Father Santino might still be alive."], "choices": [{"command": "RECEIVE_ITEM"}]},
+      "1199": {"text": ["Here. The key to her drawer. If I had opened it sooner, if I had only believed her, Father Santino might still be alive."], "choices": [{"command": "RECEIVE_ITEM"}]},
       "1200": {"text": ["Take care of my son for me..."], "choices": [{"command": "EXIT", "nextId": "1200"}]}
     }
   },
@@ -241,8 +253,21 @@
     "phrases": {
       "1": {"text": ["Blessings upon you, my child."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "2"}]},
       "2": {"text": ["Welcome to the Temple of Evdos, God of Knowledge. I am Father Santino."]},
-      "3": {"text": ["I'm busy preparing this morning's sermon. Feel free to join us at 10:00."]},
-      "4": {"text": ["But if you're here for a pastoral conversation, please come see me after the service at 11:00."], "choices": [{"command": "EXIT"}]}
+      "3" : {"text": ["I'm busy preparing this morning's sermon. Feel free to join us at 10:00."]},
+      "4" : {
+        "text": ["But if you're here for a pastoral conversation, please come see me after the service at 11:00."], "choices": [
+          {"condition": ["i_n_1_>=_item_ghost_proof", "i_n_0_==_item_ghost_repeller"], "text": "->", "nextId": "5"},
+          {"condition": ["i_n_0_==_item_ghost_proof"], "text": "->", "command": "EXIT"},
+          {"condition": ["i_n_1_>=_item_ghost_proof", "i_n_1_>=_item_ghost_repeller"], "text": "->", "command": "EXIT"}
+        ]
+      },
+      "5" : {
+        "choices": [
+          {"text": "[Ghost proof] *Show him the proof to get the holy staff.*", "nextId": "10"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "10": {"text": ["Proof of the restless dead? That deserves more than a word between sermon drafts. Bring it to me after the service, at 11:00, and we will look at it properly."], "choices": [{"command": "EXIT"}]}
     }
   },
   "santino_service_start"      : {
@@ -250,8 +275,21 @@
     "phrases": {
       "1": {"text": ["Blessings upon you, my child."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "2"}]},
       "2": {"text": ["Welcome to the Temple of Evdos, God of Knowledge. I am Father Santino."]},
-      "3": {"text": ["The service is about to start. Please join us if you'd like."]},
-      "4": {"text": ["But if you're here for a pastoral conversation, please come see me after the service at 11:00."], "choices": [{"command": "EXIT"}]}
+      "3" : {"text": ["The service is about to start. Please join us if you'd like."]},
+      "4" : {
+        "text": ["But if you're here for a pastoral conversation, please come see me after the service at 11:00."], "choices": [
+          {"condition": ["i_n_1_>=_item_ghost_proof", "i_n_0_==_item_ghost_repeller"], "text": "->", "nextId": "5"},
+          {"condition": ["i_n_0_==_item_ghost_proof"], "text": "->", "command": "EXIT"},
+          {"condition": ["i_n_1_>=_item_ghost_proof", "i_n_1_>=_item_ghost_repeller"], "text": "->", "command": "EXIT"}
+        ]
+      },
+      "5" : {
+        "choices": [
+          {"text": "[Ghost proof] *Show him the proof to get the holy staff.*", "nextId": "10"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "10": {"text": ["Not now, my child. The service is just about to start, and I'm afraid I can't give this the time it deserves. Bring it to me after the service, at 11:00, and we will look at it properly."], "choices": [{"command": "EXIT"}]}
     }
   },
   "santino_service"            : {
@@ -293,7 +331,7 @@
       "5"   : {"text": ["Ulrog you say..."]},
       "6"   : {"text": ["{SPEED=0.2} . . . . ."]},
       "7"   : {"text": ["That is some serious business you're dealing with!"]},
-      "8"   : {"text": ["I want to help you with knowledge and I can help you with knowledge."]},
+      "8"   : {"text": ["Then you have come to the right door. Knowledge is the one thing I can truly offer you."]},
       "9"   : {"text": ["Evdos is the God of Knowledge after all. But I really would need some time first to find and study that knowledge in my books and scrolls."]},
       "10"  : {"text": ["I also have an appointment with the mayor this afternoon... Let me think... Hmmm..."]},
       "11"  : {"text": ["Come see me again tonight at 18:00! I will have gathered everything you need to know about Ulrog by then."], "choices": [{"nextId": "51"}]},
@@ -304,7 +342,7 @@
         "choices": [
           {"condition": ["i_n_0_==_item_ghost_repeller", "_tc_3_q_quest_lastdenn_garrin"], "text": "*Ask him for his holy staff to ward off ghosts.*", "nextId": "70"},
           {"condition": ["i_n_1_>=_item_ghost_proof", "i_n_0_==_item_ghost_repeller"], "text": "[Ghost proof] *Show him the proof to get the holy staff.*", "nextId": "110"},
-          {"condition": ["i_r_!=_u_q_quest_lastdenn_garrin", "_r_!=_f_q_quest_lastdenn_garrin", "is_garrin_possessed"], "text": "*Warn him for his upcoming murder!*", "nextId": "60"},
+          {"condition": ["i_r_!=_u_q_quest_lastdenn_garrin", "_r_!=_f_q_quest_lastdenn_garrin", "is_garrin_possessed"], "text": "*Warn him of his upcoming murder!*", "nextId": "60"},
           {"condition": ["i_ta_7_q_quest_lastdenn_garrin"], "text": "[Ghost repeller] *Return his holy staff, its work now done.*", "command": "TALK_TO_QUEST_PERSON", "nextId": "160"},
           {"condition": ["i_tn_1_q_quest_lastdenn_santino"], "text": "*Explain everything that's happened with Ardor, Ulrog and Ylarus.*", "command": "DELIVER_QUEST_MESSAGE", "nextId": "5"},
           {"condition": ["i_c_>=_a_q_quest_lastdenn_santino"], "text": "*Nothing for now. Take your leave.*", "nextId": "53"},
@@ -323,7 +361,7 @@
         "choices": [
           {"condition": ["i_n_0_==_item_ghost_repeller", "_tc_3_q_quest_lastdenn_garrin"], "text": "*Ask him for his holy staff to ward off ghosts.*", "nextId": "155"},
           {"condition": ["i_n_1_>=_item_ghost_proof", "i_n_0_==_item_ghost_repeller"], "text": "[Ghost proof] *Show him the proof to get the holy staff.*", "nextId": "110"},
-          {"condition": ["i_r_!=_u_q_quest_lastdenn_garrin", "_r_!=_f_q_quest_lastdenn_garrin", "is_garrin_possessed"], "text": "*Warn him for his upcoming murder!*", "nextId": "150"},
+          {"condition": ["i_r_!=_u_q_quest_lastdenn_garrin", "_r_!=_f_q_quest_lastdenn_garrin", "is_garrin_possessed"], "text": "*Warn him of his upcoming murder!*", "nextId": "150"},
           {"condition": ["i_ta_7_q_quest_lastdenn_garrin"], "text": "[Ghost repeller] *Return his holy staff, its work now done.*", "command": "TALK_TO_QUEST_PERSON", "nextId": "160"},
           {"condition": ["i_r_!=_f_q_quest_lastdenn_santino", "i_tn_1_q_quest_lastdenn_santino"], "text": "*Explain everything that's happened with Ardor, Ulrog and Ylarus.*", "command": "DELIVER_QUEST_MESSAGE", "nextId": "5"},
           {"text": "*Counseling is for wimps. Take your leave.*", "nextId": "104"}
@@ -373,11 +411,14 @@
       "12": {"text": ["I will have gathered everything you need to know about Ulrog by then."], "choices": [{"nextId": "20"}]},
       "20": {
         "choices": [
-          {"condition": ["i_r_!=_u_q_quest_lastdenn_garrin", "i_time_before_13:00", "is_garrin_possessed"], "text": "*Warn him for his upcoming murder!*", "nextId": "21"},
+          {"condition": ["i_n_1_>=_item_ghost_proof", "i_n_0_==_item_ghost_repeller"], "text": "[Ghost proof] *Show him the proof to get the holy staff.*", "nextId": "30"},
+          {"condition": ["i_r_!=_u_q_quest_lastdenn_garrin", "i_time_before_13:00", "is_garrin_possessed"], "text": "*Warn him of his upcoming murder!*", "nextId": "21"},
           {"text": "*Wish him luck at the mayor's office. Take your leave.*", "command": "EXIT"}
         ]
       },
-      "21": {"text": ["Murdered? What nonsense! Who in their right mind would want to harm a servant of Evdos?"], "choices": [{"command": "EXIT"}]}
+      "21": {"text": ["Murdered? What nonsense! Who in their right mind would want to harm a servant of Evdos?"], "choices": [{"command": "EXIT"}]},
+      "30": {"text": ["Ah, my child, I'm afraid the mayor is expecting me, and this deserves more than a hurried glance in passing."]},
+      "31": {"text": ["Come see me once I'm back from the mayor. That should be around 16:30, and then we will look at it properly."], "choices": [{"command": "EXIT"}]}
     }
   },
   "garrin_vs_santino_1"        : {

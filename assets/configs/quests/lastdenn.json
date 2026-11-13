@@ -158,7 +158,7 @@
         "linkedWith"  : ["6"]
       },
       "6": {
-        "taskPhrase"  : "      Show Father Santino the proof and claim his holy staff.",
+        "taskPhrase"  : "      Show Father Santino the proof during the pastoral conversation at 11:00, and claim his holy staff.",
         "type"        : "FIND_ITEM",
         "target"      : {"ghost_repeller": 1},
         "isHidden"    : true,
