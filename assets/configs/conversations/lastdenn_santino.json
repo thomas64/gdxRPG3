@@ -30,15 +30,40 @@
   "paton_hiding"               : {
     "name"   : "Paton",
     "phrases": {
-      "1": {"text": ["I'm scared!"]},
-      "2": {"text": ["I think it's coming..."]},
-      "3": {"text": ["Papa doesn't believe me."]},
-      "4": {"text": ["But there is proof!"]},
-      "5": {"text": ["It's in the drawer with the picture of Mama on it."]},
-      "6": {"text": ["And Papa has the key to that drawer."]},
-      "7": {"text": ["But he won't give it to me. I think he's still sad about Mama."], "choices": [{"command": "TALK_TO_QUEST_PERSON", "nextId": "8"}]},
-      "8": {"text": ["I'm scared!"]},
-      "9": {"text": ["I think it's coming..."], "choices": [{"command": "EXIT"}]}
+      "1" : {"text": ["I'm scared!"]},
+      "2" : {"text": ["I think it's coming..."]},
+      "3" : {"text": ["Papa doesn't believe me."]},
+      "4" : {"text": ["But there is proof!"]},
+      "5" : {"text": ["It's in the drawer with the picture of Mama on it."]},
+      "6" : {"text": ["And Papa has the key to that drawer."]},
+      "7" : {"text": ["But he won't give it to me. I think he's still sad about Mama."], "choices": [{"command": "TALK_TO_QUEST_PERSON", "nextId": "8"}]},
+      "8" : {"text": ["I'm scared!"]},
+      "9" : {
+        "text": ["I think it's coming..."], "choices": [
+          {"condition": ["i_n_0_==_item_ghost_proof", "i_n_0_==_item_ghost_repeller"], "text": "->", "command": "EXIT"},
+          {"condition": ["i_n_1_>=_item_ghost_proof", "i_n_0_==_item_ghost_repeller"], "text": "->", "nextId": "10"},
+          {"condition": ["i_n_1_>=_item_ghost_repeller"], "text": "->", "nextId": "20"}
+        ]
+      },
+      "10": {
+        "choices": [
+          {"text": "[Ghost proof] *Show him that you already have the proof.*", "nextId": "11"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "11": {"text": ["That's it! That's Mama's! But Papa has the key... How did you get it?"]},
+      "12": {"text": ["Did Papa really give you Mama's proof?"]},
+      "13": {"text": ["Show it to Father Santino! Then he has to give you his holy staff!"], "choices": [{"command": "EXIT", "nextId": "15"}]},
+      "15": {"text": ["Did you show Mama's proof to Father Santino yet?"], "choices": [{"command": "EXIT", "nextId": "15"}]},
+      "20": {
+        "choices": [
+          {"text": "[Ghost repeller] *Show him Father Santino's holy staff.*", "nextId": "21"},
+          {"text": "*Take your leave.*", "command": "EXIT"}
+        ]
+      },
+      "21": {"text": ["Is that really Father Santino's holy staff?! You really got it?"]},
+      "22": {"text": ["Does that mean you can whoosh the ghost away when it comes?"], "choices": [{"command": "EXIT", "nextId": "25"}]},
+      "25": {"text": ["You're gonna whoosh the ghost away, right? Promise?"], "choices": [{"command": "EXIT", "nextId": "25"}]}
     }
   },
   "paton_silent"               : {
