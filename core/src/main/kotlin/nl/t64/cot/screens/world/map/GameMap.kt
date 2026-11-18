@@ -56,6 +56,7 @@ private const val PARALLAX_BACKGROUND = "parallax_background"
 private const val LIGHTMAP_CAMERA_PROPERTY = "lightmap_camera"
 private const val LIGHTMAP_MAP_PROPERTY = "lightmap_map"
 private const val LIGHTMAP_PLAYER_PROPERTY = "lightmap_player"
+private const val AMBIENT_LIGHT_PROPERTY = "ambient_light"
 
 class GameMap(
     val mapTitle: String
@@ -73,8 +74,10 @@ class GameMap(
 
     val parallaxBackground: GameMapParallaxBackground? = tiledMap.propertyOrNull<String>(PARALLAX_BACKGROUND)
         ?.let { GameMapParallaxBackground(Lightmap.of(it)) }
+    val ambientLight: AmbientLight? = tiledMap.propertyOrNull<String>(AMBIENT_LIGHT_PROPERTY)
+        ?.let { AmbientLight.of(it) }
     val lightmapCamera: GameMapLightmapCamera? = tiledMap.propertyOrNull<String>(LIGHTMAP_CAMERA_PROPERTY)
-        ?.let { GameMapLightmapCamera(Lightmap.ofAll(it), pixelWidth, pixelHeight) }
+        ?.let { GameMapLightmapCamera(Lightmap.ofAll(it), pixelWidth, pixelHeight, ambientLight == AmbientLight.DAY_CYCLE) }
     val lightmapMap: GameMapLightmapMap? = tiledMap.propertyOrNull<String>(LIGHTMAP_MAP_PROPERTY)
         ?.let { GameMapLightmapMap(Lightmap.of(it)) }
     val lightmapPlayer: Sprite? = tiledMap.propertyOrNull<String>(LIGHTMAP_PLAYER_PROPERTY)

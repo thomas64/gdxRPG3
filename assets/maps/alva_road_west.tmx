@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.11" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="160" height="70" tilewidth="24" tileheight="24" infinite="0" nextlayerid="25" nextobjectid="344">
  <properties>
+  <property name="ambient_light" value="day_cycle"/>
   <property name="bgm" value="bgm_overworld"/>
   <property name="bgs" value="bgs_creek"/>
   <property name="lightmap_camera" value="sunlight"/>

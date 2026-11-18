@@ -18,7 +18,6 @@ enum class Lightmap(
     val scroll: LightmapScroll = LightmapScroll.NONE
 ) {
     BUBBLES(scroll = LightmapScroll.VERTICAL),
-    DARK_FOREST(blend = LightmapBlend.MULTIPLY),
     FOG(LightmapBlend.INVERSE_ALPHA, LightmapScroll.VERTICAL),
     FOREST(scroll = LightmapScroll.DIAGONAL),
     HEAVEN,

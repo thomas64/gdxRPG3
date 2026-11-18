@@ -33,29 +33,39 @@ class WorldRenderer(
     }
 
     fun renderMapWithoutEntities() {
-        renderWithoutPlayerLight {}
+        renderWithoutLighting {}
     }
 
     fun renderAll(playerPosition: Vector2, renderEntities: (Batch) -> Unit) {
-        mapManager.getLightmapPlayer()
-            ?.let { renderWithPlayerLight(playerPosition, it, renderEntities) }
-            ?: renderWithoutPlayerLight(renderEntities)
+        if (hasLighting()) {
+            renderWithLighting(playerPosition, renderEntities)
+        } else {
+            renderWithoutLighting(renderEntities)
+        }
     }
 
-    private fun renderWithPlayerLight(playerPosition: Vector2,
-                                      lightmapPlayer: Sprite,
-                                      renderEntities: (Batch) -> Unit) {
+    private fun hasLighting(): Boolean {
+        return mapManager.getLightmapPlayer() != null
+            || mapManager.getAmbientLight() != null
+    }
+
+    private fun renderWithLighting(playerPosition: Vector2,
+                                   renderEntities: (Batch) -> Unit) {
         frameBuffer.begin()
-        ScreenUtils.clear(Color.BLACK)
-        renderLightmapPlayer(playerPosition, lightmapPlayer)
+        ScreenUtils.clear(getAmbientLightColor())
+        renderLights(playerPosition)
         frameBuffer.end()
         renderMapLayers(renderEntities)
         renderFrameBuffer()
     }
 
-    private fun renderWithoutPlayerLight(renderEntities: (Batch) -> Unit) {
+    private fun renderWithoutLighting(renderEntities: (Batch) -> Unit) {
         ScreenUtils.clear(Color.BLACK)
         renderMapLayers(renderEntities)
+    }
+
+    private fun getAmbientLightColor(): Color {
+        return mapManager.getAmbientLight()?.color ?: Color.BLACK
     }
 
     private fun renderFrameBuffer() {
@@ -67,16 +77,20 @@ class WorldRenderer(
         batch.end()
     }
 
-    private fun renderLightmapPlayer(playerPosition: Vector2, lightmapPlayer: Sprite) {
+    private fun renderLights(playerPosition: Vector2) {
         LightmapBlend.ADDITIVE.applyTo(batch)
 
         batch.begin()
+        mapManager.getLightmapPlayer()?.let { renderLightmapPlayer(playerPosition, it) }
+        mapManager.getGameMapLights().forEach { it.render(batch) }
+        batch.end()
+    }
+
+    private fun renderLightmapPlayer(playerPosition: Vector2, lightmapPlayer: Sprite) {
         val x = playerPosition.x + Constant.HALF_TILE_SIZE - lightmapPlayer.width / 2f
         val y = playerPosition.y + Constant.HALF_TILE_SIZE - lightmapPlayer.height / 2f
         lightmapPlayer.setPosition(x, y)
         lightmapPlayer.draw(batch)
-        mapManager.getGameMapLights().forEach { it.render(batch) }
-        batch.end()
     }
 
     private fun renderMapLayers(renderEntities: (Batch) -> Unit) {
