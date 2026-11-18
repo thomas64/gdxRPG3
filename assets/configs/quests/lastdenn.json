@@ -49,7 +49,7 @@
     "tasks"   : {
       "1": {
         "taskPhrase"   : "Be at the docks of Lastdenn in the evening to see what the boat brings in.",
-        "updatedPhrase": "Meet Harkon, who sells fighting lessons in every port his boat calls at.",
+        "updatedPhrase": "Meet Harkon at the docks after 19:15. He sells fighting lessons in every port his boat calls at.",
         "type"         : "MEET_PERSON"
       }
     }
@@ -92,7 +92,7 @@
   "quest_godless_arms"     : {
     "title"   : "The Godless Arms [M]",
     "entityId": "santino",
-    "summary" : "Father Santino found the Sovereign Rite in the oldest of the holy books. Ulrog protects what Ardor has bought: blades glance off him and his blows land like a God's. But no God has any claim upon the Godless Arms: a blade, a shield, a ring and an amulet, made long ago by hands that asked for no blessing. Every one found takes something of Ulrog back from him. Gather all four and what is left of Ardor is only a man.",
+    "summary" : "Father Santino read about the power Ulrog can give to men in the oldest of the holy books. The so-called Godless Arms – a blade, a shield, a ring and an amulet – were made long ago by hands that asked for no blessing, and no God has any claim upon them, not even Ulrog. Gather all four and what is left of Ardor is only a man.",
     "tasks"   : {
       "1": {
         "comment"   : "TODO: the four items and the four locations do not exist yet. Change type to FIND_ITEM once they do.",

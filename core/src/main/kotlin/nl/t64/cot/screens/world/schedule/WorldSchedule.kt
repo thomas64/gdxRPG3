@@ -27,7 +27,9 @@ class WorldSchedule {
                                                                Paton(),
                                                                Santino(),
                                                                LastdennEscordGuard1(),
-                                                               LastdennEscordGuard2())
+                                                               LastdennEscordGuard2(),
+                                                               LastdennPierGuard1(),
+                                                               LastdennPierGuard2())
 
     fun update() {
         entitySchedules.forEach { it.update() }
