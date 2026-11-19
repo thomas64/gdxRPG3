@@ -323,7 +323,10 @@ object Utils {
     fun createBattleBack(battleId: String): Image {
         val battleBackName: String = gameData.battles.getBackground(battleId)
         return Image(resourceManager.getTextureAsset("sprites/battle/$battleBackName.jpg"))
-            .apply { setSize(Gdx.graphics.width.toFloat(), Gdx.graphics.height.toFloat()) }
+            .apply {
+                setSize(Gdx.graphics.width.toFloat(), Gdx.graphics.height.toFloat())
+                color = mapManager.getAmbientLightColor() ?: Color.WHITE
+            }
     }
 
     fun runWithDelay(delayInSeconds: Float, action: () -> Unit) {

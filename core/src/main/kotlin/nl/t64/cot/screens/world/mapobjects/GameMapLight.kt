@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.maps.objects.RectangleMapObject
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.reflect.ClassReflection
+import nl.t64.cot.screens.world.lighting.Lightmap
 
 
 class GameMapLight(rectObject: RectangleMapObject) : GameMapObject(rectObject.rectangle) {

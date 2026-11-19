@@ -15,7 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack
 import com.badlogic.gdx.utils.ScreenUtils
 import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.constants.Constant
-import nl.t64.cot.screens.world.mapobjects.LightmapBlend
+import nl.t64.cot.screens.world.lighting.LightmapBlend
 
 
 private val BOTTOM_LAYERS = intArrayOf(0, 1, 2, 3)

@@ -5,7 +5,7 @@ import nl.t64.cot.components.party.abilities.AbilityItemId
 import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.components.portal.Portal
 import nl.t64.cot.constants.ScreenType
-import nl.t64.cot.screens.world.RainCycle
+import nl.t64.cot.screens.world.atmosphere.RainCycle
 
 
 fun List<String>.areAllTrue(questId: String? = null): Boolean {

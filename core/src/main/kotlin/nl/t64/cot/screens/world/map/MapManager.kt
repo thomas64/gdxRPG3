@@ -17,9 +17,16 @@ import nl.t64.cot.audio.toAudioEvent
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.gamestate.ProfileManager
+import nl.t64.cot.screens.world.atmosphere.GameMapRain
 import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.screens.world.entity.EntityState
-import nl.t64.cot.screens.world.mapobjects.*
+import nl.t64.cot.screens.world.lighting.GameMapLightmapCamera
+import nl.t64.cot.screens.world.lighting.GameMapLightmapMap
+import nl.t64.cot.screens.world.lighting.GameMapParallaxBackground
+import nl.t64.cot.screens.world.mapobjects.GameMapConditionTexture
+import nl.t64.cot.screens.world.mapobjects.GameMapLight
+import nl.t64.cot.screens.world.mapobjects.GameMapParticle
+import nl.t64.cot.screens.world.mapobjects.GameMapPortal
 import nl.t64.cot.screens.world.pathfinding.TiledNode
 import nl.t64.cot.sfx.TransitionPurpose
 import nl.t64.cot.subjects.ProfileObserver

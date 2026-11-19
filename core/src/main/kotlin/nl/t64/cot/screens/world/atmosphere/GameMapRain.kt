@@ -1,4 +1,4 @@
-package nl.t64.cot.screens.world.mapobjects
+package nl.t64.cot.screens.world.atmosphere
 
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.ParticleEffect
@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.ParticleEmitter
 import com.badlogic.gdx.math.Vector2
 import nl.t64.cot.Utils.resourceManager
 import nl.t64.cot.screens.world.Camera
-import nl.t64.cot.screens.world.RainCycle
 import kotlin.math.abs
 import kotlin.math.min
 

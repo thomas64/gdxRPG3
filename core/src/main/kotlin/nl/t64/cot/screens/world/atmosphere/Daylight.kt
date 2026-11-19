@@ -1,8 +1,7 @@
-package nl.t64.cot.screens.world
+package nl.t64.cot.screens.world.atmosphere
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.math.MathUtils
-import nl.t64.cot.screens.world.mapobjects.AmbientLight
 
 
 private val KEYFRAMES: List<DaylightKeyframe> = listOf(

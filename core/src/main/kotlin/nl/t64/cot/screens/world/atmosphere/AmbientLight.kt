@@ -1,7 +1,6 @@
-package nl.t64.cot.screens.world.mapobjects
+package nl.t64.cot.screens.world.atmosphere
 
 import com.badlogic.gdx.graphics.Color
-import nl.t64.cot.screens.world.Daylight
 
 
 enum class AmbientLight {

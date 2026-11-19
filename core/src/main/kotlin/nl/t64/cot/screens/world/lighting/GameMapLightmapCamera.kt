@@ -1,4 +1,4 @@
-package nl.t64.cot.screens.world.mapobjects
+package nl.t64.cot.screens.world.lighting
 
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.Sprite
