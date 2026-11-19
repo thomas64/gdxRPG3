@@ -14,6 +14,8 @@ import nl.t64.cot.Utils.screenManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.screens.cutscene.CutsceneScreen
 import nl.t64.cot.screens.cutscene.SceneIntro
+import nl.t64.cot.screens.world.Daylight
+import nl.t64.cot.screens.world.RainCycle
 import nl.t64.cot.screens.world.entity.Direction
 import nl.t64.cot.screens.world.entity.EntityState
 import nl.t64.cot.screens.world.mapobjects.*
@@ -57,6 +59,7 @@ private const val LIGHTMAP_CAMERA_PROPERTY = "lightmap_camera"
 private const val LIGHTMAP_MAP_PROPERTY = "lightmap_map"
 private const val LIGHTMAP_PLAYER_PROPERTY = "lightmap_player"
 private const val AMBIENT_LIGHT_PROPERTY = "ambient_light"
+private const val RAIN_PROPERTY = "rain"
 
 class GameMap(
     val mapTitle: String
@@ -76,8 +79,11 @@ class GameMap(
         ?.let { GameMapParallaxBackground(Lightmap.of(it)) }
     val ambientLight: AmbientLight? = tiledMap.propertyOrNull<String>(AMBIENT_LIGHT_PROPERTY)
         ?.let { AmbientLight.of(it) }
+    private val rainType: RainType? = tiledMap.rainType
+    val rain: GameMapRain? = rainType?.let { GameMapRain(pixelWidth, pixelHeight) }
     val lightmapCamera: GameMapLightmapCamera? = tiledMap.propertyOrNull<String>(LIGHTMAP_CAMERA_PROPERTY)
-        ?.let { GameMapLightmapCamera(Lightmap.ofAll(it), pixelWidth, pixelHeight, ambientLight == AmbientLight.DAY_CYCLE) }
+        ?.let { GameMapLightmapCamera(Lightmap.ofAll(it), pixelWidth, pixelHeight) { getSunlightStrength() } }
+    private val ambientLightColor: Color = Color()
     val lightmapMap: GameMapLightmapMap? = tiledMap.propertyOrNull<String>(LIGHTMAP_MAP_PROPERTY)
         ?.let { GameMapLightmapMap(Lightmap.of(it)) }
     val lightmapPlayer: Sprite? = tiledMap.propertyOrNull<String>(LIGHTMAP_PLAYER_PROPERTY)
@@ -152,11 +158,28 @@ class GameMap(
             .firstOrNull() ?: defaultStepSound
     }
 
+    /** Null betekent geen basislicht: de map is gewoon zichtbaar, of donker als er een player-light is. */
+    fun getAmbientLightColor(): Color? {
+        if (rainType?.isGreyingLight == true) {
+            return getOvercastLightColor()
+        } else {
+            return ambientLight?.color
+        }
+    }
+
     fun getBgsVolumeAdjustments(point: Vector2): Map<AudioEvent, Float> {
-        return bgsVolumeZones
+        val zoneAdjustments: Map<AudioEvent, Float> = bgsVolumeZones
             .map { it.getVolumeAdjustment(point) }
             .filterNot { it.second == 0f }
             .toMap()
+        return zoneAdjustments + getRainVolumeAdjustments()
+    }
+
+    /** Ook bij volle regen (0f) meegeven, anders blijft het volume hangen op de laatste tussenstand. */
+    fun getRainVolumeAdjustments(): Map<AudioEvent, Float> {
+        if (rainType == null) return emptyMap()
+        val volumeToRemove: Float = AudioEvent.BGS_RAIN.volume * (1f - RainCycle.getRainStrength())
+        return mapOf(AudioEvent.BGS_RAIN to -volumeToRemove)
     }
 
     fun isSpecialDirectionNorth(point: Vector2): Boolean {
@@ -197,6 +220,7 @@ class GameMap(
 
     fun dispose() {
         torches.forEach { it.dispose() }
+        rain?.dispose()
     }
 
     fun debug(shapeRenderer: ShapeRenderer) {
@@ -217,6 +241,17 @@ class GameMap(
         (chests + doors)
             .map { it.rectangle }
             .forEach { shapeRenderer.rect(it.x, it.y, it.width, it.height) }
+    }
+
+    private fun getOvercastLightColor(): Color {
+        val baseColor: Color = ambientLight?.color ?: Color.WHITE
+        return ambientLightColor.set(baseColor).mul(RainCycle.getOvercastTint())
+    }
+
+    private fun getSunlightStrength(): Float {
+        val dayCycleStrength: Float = if (ambientLight == AmbientLight.DAY_CYCLE) Daylight.getSunlightStrength() else 1f
+        val rainStrength: Float = if (rainType?.isDimmingSunlight == true) RainCycle.getRainStrength() else 0f
+        return dayCycleStrength * (1f - rainStrength)
     }
 
 }
@@ -253,9 +288,15 @@ val TiledMap.bgm: AudioEvent
 val TiledMap.bgs: List<AudioEvent>
     get() {
         val audioEvents: String = property(BGS_PROPERTY, DEFAULT_BG)
-        return audioEvents
+        val mapBgs: List<AudioEvent> = audioEvents
             .uppercase()
             .split(",")
             .map { it.trim() }
             .map { AudioEvent.valueOf(it) }
+        return if (this.rainType == null) mapBgs else mapBgs + AudioEvent.BGS_RAIN
+    }
+
+val TiledMap.rainType: RainType?
+    get() {
+        return this.propertyOrNull<String>(RAIN_PROPERTY)?.let { RainType.of(it) }
     }

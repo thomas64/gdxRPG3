@@ -4,6 +4,7 @@
   <property name="ambient_light" value="day_cycle"/>
   <property name="bgm" value="bgm_lastdenn"/>
   <property name="lightmap_camera" value="sunlight"/>
+  <property name="rain" value="grey"/>
  </properties>
  <tileset firstgid="1" name="lastdenn" tilewidth="24" tileheight="24" tilecount="9699" columns="159">
   <image source="tilesets/lastdenn.png" width="3816" height="1464"/>

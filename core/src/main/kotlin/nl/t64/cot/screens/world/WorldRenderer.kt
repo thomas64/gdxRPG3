@@ -33,20 +33,20 @@ class WorldRenderer(
     }
 
     fun renderMapWithoutEntities() {
-        renderWithoutLighting {}
+        renderWithoutLighting(renderEntities = {}, renderWeather = {})
     }
 
     fun renderAll(playerPosition: Vector2, renderEntities: (Batch) -> Unit) {
         if (hasLighting()) {
             renderWithLighting(playerPosition, renderEntities)
         } else {
-            renderWithoutLighting(renderEntities)
+            renderWithoutLighting(renderEntities) { renderRain() }
         }
     }
 
     private fun hasLighting(): Boolean {
         return mapManager.getLightmapPlayer() != null
-            || mapManager.getAmbientLight() != null
+            || mapManager.getAmbientLightColor() != null
     }
 
     private fun renderWithLighting(playerPosition: Vector2,
@@ -55,17 +55,17 @@ class WorldRenderer(
         ScreenUtils.clear(getAmbientLightColor())
         renderLights(playerPosition)
         frameBuffer.end()
-        renderMapLayers(renderEntities)
+        renderMapLayers(renderEntities) { renderRain() }
         renderFrameBuffer()
     }
 
-    private fun renderWithoutLighting(renderEntities: (Batch) -> Unit) {
+    private fun renderWithoutLighting(renderEntities: (Batch) -> Unit, renderWeather: () -> Unit) {
         ScreenUtils.clear(Color.BLACK)
-        renderMapLayers(renderEntities)
+        renderMapLayers(renderEntities, renderWeather)
     }
 
     private fun getAmbientLightColor(): Color {
-        return mapManager.getAmbientLight()?.color ?: Color.BLACK
+        return mapManager.getAmbientLightColor() ?: Color.BLACK
     }
 
     private fun renderFrameBuffer() {
@@ -93,7 +93,7 @@ class WorldRenderer(
         lightmapPlayer.draw(batch)
     }
 
-    private fun renderMapLayers(renderEntities: (Batch) -> Unit) {
+    private fun renderMapLayers(renderEntities: (Batch) -> Unit, renderWeather: () -> Unit) {
         batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA)
 
         renderPossibleBackground()
@@ -106,7 +106,8 @@ class WorldRenderer(
         render(UNDER_LAYERS)
         renderDynamicMapEntities(renderEntities)
         render(OVER_LAYERS)
-        renderParticles()
+        renderTorches()
+        renderWeather.invoke()
         renderLightmap()
 
         camera.restoreOriginalPositionForSmoothMovement()
@@ -146,10 +147,18 @@ class WorldRenderer(
         batch.end()
     }
 
-    private fun renderParticles() {
+    private fun renderTorches() {
         batch.begin()
-        mapManager.getParticleEffects().forEach { it.render(batch) }
+        mapManager.getTorches().forEach { it.render(batch) }
         batch.end()
+    }
+
+    private fun renderRain() {
+        mapManager.getRain()?.let {
+            batch.begin()
+            it.render(batch, camera)
+            batch.end()
+        }
     }
 
     private fun renderLightmap() {

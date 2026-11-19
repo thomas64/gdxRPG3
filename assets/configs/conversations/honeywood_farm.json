@@ -32,11 +32,13 @@
   },
   "quest_helping_horse"            : {
     "name"   : "Lennor",
+    "startAt": [{"condition": ["is_raining"], "startId": "2"}],
     "phrases": {
-      "1"  : {"text": ["Hey Mozes, you can't go to Honeywood Farm at the moment. A large tree has fallen on the road this morning. I'm busy removing it, but I think it'll take me until 17:00."]},
-      "2"  : {
+      "1"  : {"text": ["Hey Mozes, you can't go to Honeywood Farm at the moment. A large tree has fallen on the road this morning. I'm busy removing it, but I think it'll take me until 17:00."], "choices": [{"nextId": "3"}]},
+      "2"  : {"text": ["Hey Mozes, you can't go to Honeywood Farm at the moment. A large tree has fallen on the road, and this rain makes the wood twice as heavy. I think it'll take me until 17:00."]},
+      "3"  : {
         "choices": [
-          {"condition": ["i_cycle_==_1"], "text": "*Ask Lennor if he's seen Grace this morning.*", "nextId": "3"},
+          {"condition": ["i_cycle_==_1"], "text": "*Ask Lennor if he's seen Grace this morning.*", "nextId": "4"},
           {"condition": ["i_tc_1_q_this", "i_tc_11_q_this"], "text": "[2 Ropes, 1 Horse] *Tada! Present what he would ask for.*", "command": "SHOW_QUEST_ITEM", "nextId": "80"},
           {"condition": ["i_cycle_>=_2"], "text": "*Find out if he knows what happened to the tree.*", "nextId": "20"},
           {"condition": ["i_cycle_>=_2"], "text": "*Inform how long it'll take him to clear the road.*", "nextId": "30"},
@@ -47,24 +49,29 @@
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
-      "3"  : {"face": "man13", "name": "Lennor", "text": ["Grace? No, I haven't seen her. Why? What happened?"]},
-      "4"  : {"face": "mozes", "name": "Mozes", "text": ["She's missing. I woke up this morning and she wasn't in her bed."]},
-      "5"  : {"face": "man13", "name": "Lennor", "text": ["That's concerning. Are you sure she's not just playing somewhere in the village?"]},
-      "6"  : {"face": "mozes", "name": "Mozes", "text": ["I'm not certain, but I fear she might have gone to Honeywood Forest, and there are orcs."]},
-      "7"  : {"face": "man13", "name": "Lennor", "text": ["Is there anything I can do to help?"]},
-      "8"  : {"face": "mozes", "name": "Mozes", "text": ["I appreciate the offer, Lennor, but I think I'll manage. Please keep an eye out for Grace."], "choices": [{"command": "EXIT", "nextId": "10"}]},
+      "4"  : {"face": "man13", "name": "Lennor", "text": ["Grace? No, I haven't seen her. Why? What happened?"]},
+      "5"  : {"face": "mozes", "name": "Mozes", "text": ["She's missing. I woke up this morning and she wasn't in her bed."]},
+      "6"  : {"face": "man13", "name": "Lennor", "text": ["That's concerning. Are you sure she's not just playing somewhere in the village?"]},
+      "7"  : {"face": "mozes", "name": "Mozes", "text": ["I'm not certain, but I fear she might have gone to Honeywood Forest, and there are orcs."]},
+      "8"  : {"face": "man13", "name": "Lennor", "text": ["Is there anything I can do to help?"]},
+      "9"  : {"face": "mozes", "name": "Mozes", "text": ["I appreciate the offer, Lennor, but I think I'll manage. Please keep an eye out for Grace."], "choices": [{"command": "EXIT", "nextId": "10"}]},
       "10" : {"face": "man13", "name": "Lennor", "text": ["Weren't you heading to Honeywood Forest? Did you find her?"], "choices": [{"command": "EXIT", "nextId": "10"}]},
-      "20" : {"text": ["This morning I heard that a tree had fallen on this road. I was asked to remove it, so I came straight this way to see what happened. Luckily, no one was hurt when it fell."], "choices": [{"nextId": "2"}]},
-      "30" : {"text": ["A tree this large? I'll probably be busy with it until about 17:00. Afterward, the road is clear and you'll be able to enter Honeywood Farm."], "choices": [{"nextId": "2"}]},
-      "40" : {"text": ["I'm sorry, Mozes, I'm working as fast as I can. You'll have to wait until 17:00, or you could assist me to speed up the process."], "choices": [{"nextId": "2"}]},
-      "50" : {"text": ["Aw come on! Really? I'm trying! It's one heavy tree, Mozes! I literally can't do it before 17:00 without any assistance!"], "choices": [{"nextId": "2"}]},
+      "20" : {"text": ["This morning I heard that a tree had fallen on this road. I was asked to remove it, so I came straight this way to see what happened. Luckily, no one was hurt when it fell."], "choices": [{"nextId": "3"}]},
+      "30" : {"text": ["A tree this large? I'll probably be busy with it until about 17:00. Afterward, the road is clear and you'll be able to enter Honeywood Farm."], "choices": [{"nextId": "3"}]},
+      "40" : {"text": ["I'm sorry, Mozes, I'm working as fast as I can. You'll have to wait until 17:00, or you could assist me to speed up the process."], "choices": [{"nextId": "3"}]},
+      "50" : {"text": ["Aw come on! Really? I'm trying! It's one heavy tree, Mozes! I literally can't do it before 17:00 without any assistance!"], "choices": [{"nextId": "3"}]},
       "60" : {"text": ["A month or so ago, I was thinking of buying a horse for myself. I even thought of a cool name for it, Horace. But then I thought, 'Why would I need a horse?' Ha ha, but today I could really use a horse!"]},
       "61" : {"text": ["So, if you somehow could lend me a horse, just for today, along with two tow ropes, I could clear the road for you immediately."], "choices": [{"command": "ACCEPT_QUEST", "nextId": "62"}]},
       "62" : {"text": ["You could ask the village elder about this matter. He's wise, he will probably have some suggestions."], "choices": [{"command": "EXIT", "nextId": "70"}]},
-      "65" : {"text": ["That won't be necessary anymore. I'm almost done with the tree. I'll be finished by 17:00. But thanks for the offer."], "choices": [{"nextId": "2"}]},
-      "70" : {"text": ["Hey Mozes, you can't go to Honeywood Farm at the moment. A large tree fell on the road this morning. I'm busy removing it, but I think it'll take me until 17:00."]},
-      "71" : {"text": ["Did you manage to get me the requested assistance?"]},
-      "72" : {
+      "65" : {"text": ["That won't be necessary anymore. I'm almost done with the tree. I'll be finished by 17:00. But thanks for the offer."], "choices": [{"nextId": "3"}]},
+      "70" : {
+        "text": ["Hey Mozes, you can't go to Honeywood Farm at the moment. A large tree fell on the road this morning. I'm busy removing it, but I think it'll take me until 17:00."], "choices": [
+          {"condition": ["is_raining"], "nextId": "71", "orElseId": "72"}
+        ]
+      },
+      "71" : {"text": ["And this rain isn't helping either. Everything's slippery and soaked through."]},
+      "72" : {"text": ["Did you manage to get me the requested assistance?"]},
+      "73" : {
         "choices": [
           {"condition": ["i_time_before_16:00", "_tc_1_q_this", "_tc_11_q_this"], "text": "[2 Ropes, 1 Horse] *Present the requested horse and ropes.*", "command": "SHOW_QUEST_ITEM", "nextId": "85"},
           {"condition": ["i_time_after_16:00", "_tc_1_q_this", "_tc_11_q_this"], "text": "[2 Ropes, 1 Horse] *Present the requested horse and ropes.*", "command": "SHOW_QUEST_ITEM", "nextId": "90"},

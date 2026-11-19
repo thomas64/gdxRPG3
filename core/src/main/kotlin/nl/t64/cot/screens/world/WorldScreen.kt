@@ -428,7 +428,6 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
         visibleScheduledEntities.forEach { it.update(dt) }
         partyMembers.forEach { it.update(dt) }
         partyMembers.forEach { it.send(FindPathEvent(playerGridPosition, partyMembers)) }
-        mapManager.getParticleEffects().forEach { it.update(dt) }
         fogOfWarManager.update(player.position, dt)
     }
 
@@ -448,6 +447,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
 
     private fun renderAll(dt: Float) {
         updateCameraPosition(dt)
+        mapManager.updateParticleEffects(dt)
         worldRenderer.renderAll(player.position) { renderEntities(it) }
         gridRenderer.possibleRender()
         debugRenderer.possibleRenderObjects(doorList + lootList + npcEntities + visibleScheduledEntities + partyMembers + player)

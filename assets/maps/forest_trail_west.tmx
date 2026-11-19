@@ -3,6 +3,7 @@
  <properties>
   <property name="bgm" value="bgm_cave"/>
   <property name="ambient_light" value="dusk"/>
+  <property name="rain" value="sunny"/>
  </properties>
  <tileset firstgid="1" name="forest_trail" tilewidth="24" tileheight="24" tilecount="2806" columns="61">
   <image source="tilesets/forest_trail_west.png" width="1464" height="1104"/>

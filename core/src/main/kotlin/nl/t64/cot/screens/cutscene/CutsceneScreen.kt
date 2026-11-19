@@ -111,7 +111,7 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
 
         listener.update(dt)
         worldRenderer.updateCamera()
-        mapManager.getParticleEffects().forEach { it.update(dt) }
+        mapManager.updateParticleEffects(dt)
         actorsStage.act(dt)
         worldRenderer.renderAll(Vector2(followingActor.x, followingActor.y)) { actorsStage.draw() }
 
@@ -254,6 +254,7 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
 
     fun setMapWithHardBgmBgs(mapId: String) {
         mapManager.loadMapWithHardBgmBgsSwitch(mapId)
+        mapManager.updateRainVolume()
         setNewMap()
     }
 
@@ -264,11 +265,13 @@ abstract class CutsceneScreen : Screen, ConversationObserver, BattleObserver {
 
     fun setMapWithBgmBgs(mapId: String) {
         mapManager.loadMapWithBgmBgs(mapId)
+        mapManager.updateRainVolume()
         setNewMap()
     }
 
     fun setMapWithBgsOnly(mapId: String) {
         mapManager.loadMapWithBgs(mapId)
+        mapManager.updateRainVolume()
         setNewMap()
     }
 

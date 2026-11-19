@@ -2,6 +2,7 @@ package nl.t64.cot.screens.cutscene
 
 import com.badlogic.gdx.scenes.scene2d.Action
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
+import nl.t64.cot.Utils.gameData
 import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.audio.AudioEvent
 import nl.t64.cot.audio.playBgm
@@ -41,6 +42,7 @@ class SceneIntro : CutsceneScreen() {
     private fun callGraceToBed(): Action {
         return Actions.sequence(
             Actions.run {
+                gameData.clock.setTimeOfDay("19:05")
                 setMapWithBgmBgs("honeywood")
                 setFixedCameraPosition(0f, 1380f)
                 title.setText("""
@@ -260,6 +262,7 @@ class SceneIntro : CutsceneScreen() {
         // actorsStage.clear()  // this actually isn't such a bad line. it clears the stage when exiting. maybe some day I will use it.
         // ------
 
+        gameData.clock.setTimeOfDay("07:30")
         endCutsceneAndOpenMap(Constant.STARTING_MAP, "scene_intro")
     }
 

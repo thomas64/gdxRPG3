@@ -3,7 +3,6 @@ package nl.t64.cot.screens.world.mapobjects
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.Sprite
 import nl.t64.cot.screens.world.Camera
-import nl.t64.cot.screens.world.Daylight
 import kotlin.math.min
 
 
@@ -11,7 +10,7 @@ class GameMapLightmapCamera(
     lightmaps: List<Lightmap>,
     private val mapPixelWidth: Float,
     private val mapPixelHeight: Float,
-    private val isFollowingDayCycle: Boolean
+    private val sunlightStrength: () -> Float
 ) {
     private val sprites: Map<Lightmap, Sprite> = lightmaps.associateWith { Sprite(it.texture) }
 
@@ -29,8 +28,8 @@ class GameMapLightmapCamera(
 
         sprites.forEach { (lightmap, sprite) ->
             lightmap.blend.applyTo(batch)
-            if (isFadingWithDayCycle(lightmap)) {
-                fadeWithDayCycle(sprite)
+            if (lightmap == Lightmap.SUNLIGHT) {
+                fadeSunlight(sprite)
             }
             sprite.setSize(halfWidth, halfHeight)
             sprite.setPosition(-quarterWidth, -quarterHeight)
@@ -38,12 +37,9 @@ class GameMapLightmapCamera(
         }
     }
 
-    private fun isFadingWithDayCycle(lightmap: Lightmap): Boolean {
-        return isFollowingDayCycle && lightmap == Lightmap.SUNLIGHT
-    }
-
-    private fun fadeWithDayCycle(sprite: Sprite) {
-        val strength: Float = Daylight.getSunlightStrength()
+    /** Sunlight wordt additief getekend, waarbij alpha niet meetelt; daarom dimt de kleur hem. */
+    private fun fadeSunlight(sprite: Sprite) {
+        val strength: Float = sunlightStrength.invoke()
         sprite.setColor(strength, strength, strength, 1f)
     }
 

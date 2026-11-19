@@ -4,6 +4,7 @@
   <property name="ambient_light" value="day_cycle"/>
   <property name="bgm" value="bgm_honeywood"/>
   <property name="lightmap_camera" value="sunlight"/>
+  <property name="rain" value="grey"/>
  </properties>
  <tileset firstgid="1" name="honeywood" tilewidth="24" tileheight="24" tilecount="8294" columns="143">
   <image source="tilesets/honeywood.png" width="3432" height="1392"/>

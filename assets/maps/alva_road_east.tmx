@@ -6,6 +6,7 @@
   <property name="bgs" value="bgs_river"/>
   <property name="lightmap_camera" value="sunlight"/>
   <property name="parallax_background" value="mountains"/>
+  <property name="rain" value="grey"/>
  </properties>
  <tileset firstgid="1" name="alva_road_east" tilewidth="24" tileheight="24" tilecount="9639" columns="153">
   <image source="tilesets/alva_road_east.png" width="3672" height="1512"/>

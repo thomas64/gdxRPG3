@@ -6,7 +6,12 @@
     "phrases": {
       "1"  : {"text": ["Halt! The mayor of Lastdenn has ordered me to stop anyone from passing through the town's entrance until 15:00."]},
       "2"  : {"text": ["Only those with official business in or from Lastdenn may pass here before then."]},
-      "3"  : {"text": ["I'm sorry sir, but I have my orders."]},
+      "3"  : {
+        "text": ["I'm sorry sir, but I have my orders."], "choices": [
+          {"condition": ["is_raining"], "nextId": "200", "orElseId": "4"}
+        ]
+      },
+      "200": {"text": ["[GRAY](Orders to stand out here in this weather, no less...)"], "choices": [{"nextId": "4"}]},
       "4"  : {
         "choices": [
           {"text": "*Apply for official business.*", "nextId": "5"},
@@ -73,17 +78,27 @@
     "name"   : "Lastdenn Guard",
     "startAt": [{"condition": ["_r_!=_u_q_quest_lastdenn_garrin", "_r_!=_f_q_quest_lastdenn_garrin", "_time_between_11:00_and_13:00", "is_garrin_possessed"], "startId": "50"}],
     "phrases": {
-      "1" : {"text": ["This is the city of Lastdenn."]},
-      "2" : {"text": ["Don't cause any disturbances."], "choices": [{"command": "EXIT"}]},
-      "50": {"text": ["This is the city of Lastdenn."]},
-      "51": {"text": ["Don't cause any disturbances."]},
-      "52": {
+      "1" : {
+        "text": ["This is the city of Lastdenn."], "choices": [
+          {"condition": ["is_raining"], "nextId": "2", "orElseId": "3"}
+        ]
+      },
+      "2" : {"text": ["A wet one, at the moment."]},
+      "3" : {"text": ["Don't cause any disturbances."], "choices": [{"command": "EXIT"}]},
+      "50": {
+        "text": ["This is the city of Lastdenn."], "choices": [
+          {"condition": ["is_raining"], "nextId": "51", "orElseId": "52"}
+        ]
+      },
+      "51": {"text": ["A wet one, at the moment."]},
+      "52": {"text": ["Don't cause any disturbances."]},
+      "53": {
         "choices": [
-          {"text": "*Warn the guard for the murder on Santino!*", "nextId": "53"},
+          {"text": "*Warn the guard for the murder on Santino!*", "nextId": "54"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
-      "53": {"text": ["Murder? No way! Our priest is very much beloved. Nobody would ever want him dead."], "choices": [{"command": "EXIT"}]}
+      "54": {"text": ["Murder? No way! Our priest is very much beloved. Nobody would ever want him dead."], "choices": [{"command": "EXIT"}]}
     }
   },
   "guarding_house_garrin"            : {
@@ -128,23 +143,33 @@
     ],
     "phrases": {
       "1" : {"text": ["There is nothing here for you to see now."]},
-      "2" : {"text": ["No boats are coming in or out of the docks."]},
-      "3" : {"text": ["This evening however, around 19:30, we expect a boat to arrive."], "choices": [{"command": "ACCEPT_OTHER_QUEST", "questId": "quest_lastdenn_school", "nextId": "4"}]},
-      "4" : {"text": ["Crates and gulls, most likely. Come back tonight and see for yourself."], "choices": [{"command": "EXIT"}]},
+      "2" : {
+        "text": ["No boats are coming in or out of the docks."], "choices": [
+          {"condition": ["is_raining"], "nextId": "3", "orElseId": "4"}
+        ]
+      },
+      "3" : {"text": ["Not in this weather, anyway."]},
+      "4" : {"text": ["This evening however, around 19:30, we expect a boat to arrive."], "choices": [{"command": "ACCEPT_OTHER_QUEST", "questId": "quest_lastdenn_school", "nextId": "5"}]},
+      "5" : {"text": ["Crates and gulls, most likely. Come back tonight and see for yourself."], "choices": [{"command": "EXIT"}]},
       "20": {"text": ["It seems the boat arrived a little bit earlier than expected."]},
       "21": {"text": ["The sailor seems to be some sort of teacher. What does he teach?"], "choices": [{"command": "EXIT"}]},
       "30": {"text": ["The docks are open again, sir. The evening boat moored a little bit ahead of schedule."]},
       "31": {"text": ["No cargo worth guarding. The sailor himself seems to be some sort of teacher. What does he teach?"], "choices": [{"command": "EXIT"}]},
       "50": {"text": ["There is nothing here for you to see."]},
-      "51": {"text": ["No boats are coming in or out of the docks."]},
-      "52": {"text": ["This evening however, around 19:30, we expect a boat to arrive."], "choices": [{"command": "ACCEPT_OTHER_QUEST", "questId": "quest_lastdenn_school", "nextId": "53"}]},
-      "53": {
+      "51": {
+        "text": ["No boats are coming in or out of the docks."], "choices": [
+          {"condition": ["is_raining"], "nextId": "52", "orElseId": "53"}
+        ]
+      },
+      "52": {"text": ["Not in this weather, anyway."]},
+      "53": {"text": ["This evening however, around 19:30, we expect a boat to arrive."], "choices": [{"command": "ACCEPT_OTHER_QUEST", "questId": "quest_lastdenn_school", "nextId": "54"}]},
+      "54": {
         "choices": [
-          {"text": "*Warn the guards for the murder on Santino!*", "nextId": "54"},
+          {"text": "*Warn the guards for the murder on Santino!*", "nextId": "55"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
-      "54": {"text": ["What? Murder? Who would want to kill our priest? He's such a kind soul."], "choices": [{"command": "EXIT"}]}
+      "55": {"text": ["What? Murder? Who would want to kill our priest? He's such a kind soul."], "choices": [{"command": "EXIT"}]}
     }
   }
 }

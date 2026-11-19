@@ -1,6 +1,7 @@
 package nl.t64.cot.screens.world.map
 
 import com.badlogic.gdx.ai.pfa.DefaultGraphPath
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.maps.tiled.TiledMap
 import com.badlogic.gdx.math.Vector2
@@ -82,8 +83,9 @@ class MapManager : ProfileObserver {
     fun getLightmapMap(): GameMapLightmapMap? = currentMap.lightmapMap
     fun getGameMapLights(): List<GameMapLight> = currentMap.lights
     fun getLightmapPlayer(): Sprite? = currentMap.lightmapPlayer
-    fun getAmbientLight(): AmbientLight? = currentMap.ambientLight
-    fun getParticleEffects(): List<GameMapParticle> = currentMap.torches
+    fun getAmbientLightColor(): Color? = currentMap.getAmbientLightColor()
+    fun getTorches(): List<GameMapParticle> = currentMap.torches
+    fun getRain(): GameMapRain? = currentMap.rain
     fun getLowerConditionTextures(): List<GameMapConditionTexture> = currentMap.lowerTextures
     fun getUpperConditionTextures(): List<GameMapConditionTexture> = currentMap.upperTextures
 
@@ -96,6 +98,11 @@ class MapManager : ProfileObserver {
         currentMap.temporaryBlockers.forEach { it.update() }
         currentMap.upperTextures.forEach { it.update() }
         currentMap.lowerTextures.forEach { it.update() }
+    }
+
+    fun updateParticleEffects(dt: Float) {
+        currentMap.torches.forEach { it.update(dt) }
+        currentMap.rain?.update(dt)
     }
 
     fun isSpecialDirectionNorth(playerFeetPosition: Vector2): Boolean {
@@ -113,6 +120,11 @@ class MapManager : ProfileObserver {
     fun updateBgsVolumes(playerFeetPosition: Vector2) {
         val volumeAdjustments: Map<AudioEvent, Float> = currentMap.getBgsVolumeAdjustments(playerFeetPosition)
         audioManager.adjustBgsVolumes(volumeAdjustments)
+    }
+
+    /** Voor cutscenes: daar loopt de klok niet, dus één keer zetten na het starten van de bgs is genoeg. */
+    fun updateRainVolume() {
+        audioManager.adjustBgsVolumes(currentMap.getRainVolumeAdjustments())
     }
 
     fun setNextMapTitleNull() {

@@ -47,9 +47,11 @@
   },
   "mrs_johanna"                         : {
     "name"   : "Mrs. Johanna",
+    "startAt": [{"condition": ["is_raining"], "startId": "2"}],
     "phrases": {
-      "1" : {"text": ["Mozes, dear boy, how are you? What a lovely day, isn't it?"]},
-      "2" : {
+      "1" : {"text": ["Mozes, dear boy, how are you? What a lovely day, isn't it?"], "choices": [{"nextId": "3"}]},
+      "2" : {"text": ["Mozes, dear boy, how are you? Don't mind the rain, dear. At my age, I don't melt that easily."]},
+      "3" : {
         "choices": [
           {"condition": ["i_cycle_==_1"], "text": "*Ask Mrs. Johanna if she's seen Grace this morning.*", "nextId": "30"},
           {"condition": ["i_c_==_a_q_quest_get_tow_rope", "_tn_15_q_quest_get_tow_rope", "_n_1_>=_item_eqp_theodore_silver_ring"], "text": "[Silver Ring] *Deliver the news that Jaron found her lost ring.*", "nextId": "5"},
@@ -59,9 +61,14 @@
         ]
       },
       "5" : {"face": "mozes", "name": "Mozes", "text": ["I should probably take it off first."], "choices": [{"command": "EXIT"}]},
-      "10": {"text": ["I often come here to reminisce about this once-enormous tree and my late husband, Theodore. We spent such lovely summers beneath its shade. I miss him dearly."]},
-      "11": {"text": ["Life is over before you know it, don't you think?"]},
-      "12": {"face": "mozes", "name": "Mozes", "text": ["You sure got that right."], "choices": [{"command": "EXIT"}]},
+      "10": {
+        "text": ["I often come here to reminisce about this once-enormous tree and my late husband, Theodore. We spent such lovely summers beneath its shade. I miss him dearly."], "choices": [
+          {"condition": ["is_raining"], "nextId": "11", "orElseId": "12"}
+        ]
+      },
+      "11": {"text": ["And back then, it never rained. Not once. Or perhaps my memory is just kinder than the weather."]},
+      "12": {"text": ["Life is over before you know it, don't you think?"]},
+      "13": {"face": "mozes", "name": "Mozes", "text": ["You sure got that right."], "choices": [{"command": "EXIT"}]},
       "20": {"text": ["Mozes, that is wonderful news! Thank you, dear."]},
       "21": {"text": ["Now I can die in peace."]},
       "22": {"face": "mozes", "name": "Mozes", "text": ["Really?"], "choices": [{"command": "DELIVER_QUEST_ITEM", "nextId": "23"}]},
@@ -77,62 +84,84 @@
   },
   "lynette_playing_catch"               : {
     "name"   : "Lynette",
+    "startAt": [{"condition": ["is_raining"], "startId": "3"}],
     "phrases": {
       "1": {
-        "text": ["We're playing catch, teehee! Can Grace come and join us?"], "choices": [
-          {"condition": ["i_cycle_==_1"], "nextId": "2"},
+        "text": ["We're playing tag, teehee! Can Grace come and join us?"], "choices": [
+          {"condition": ["i_cycle_==_1"], "nextId": "7"},
           {"condition": ["i_cycle_>=_2"], "command": "EXIT"}
         ]
       },
-      "2": {
+      "3": {
+        "text": ["It's raining, weeee! Can Grace come and join us?"], "choices": [
+          {"condition": ["i_cycle_==_1"], "nextId": "7"},
+          {"condition": ["i_cycle_>=_2"], "command": "EXIT"}
+        ]
+      },
+      "7": {
         "choices": [
-          {"text": "*Ask Lynette if she's seen Grace this morning.*", "nextId": "3"},
+          {"text": "*Ask Lynette if she's seen Grace this morning.*", "nextId": "8"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
-      "3": {"text": ["No, but if I do, I'll ask her to join us, teehee!"], "choices": [{"command": "EXIT"}]}
+      "8": {"text": ["No, but if I do, I'll ask her to join us, teehee!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "tobin_playing_catch"                 : {
     "name"   : "Tobin",
+    "startAt": [{"condition": ["is_raining"], "startId": "3"}],
     "phrases": {
       "1": {
-        "text": ["We're playing catch, teehee! Can Grace come and join us?"], "choices": [
-          {"condition": ["i_cycle_==_1"], "nextId": "2"},
+        "text": ["Three is too few for tag! Can Grace come and play with us?"], "choices": [
+          {"condition": ["i_cycle_==_1"], "nextId": "7"},
           {"condition": ["i_cycle_>=_2"], "command": "EXIT"}
         ]
       },
-      "2": {
+      "3": {
+        "text": ["The grass is all slippery now, teehee! Does Grace like playing in the rain?"], "choices": [
+          {"condition": ["i_cycle_==_1"], "nextId": "7"},
+          {"condition": ["i_cycle_>=_2"], "command": "EXIT"}
+        ]
+      },
+      "7": {
         "choices": [
-          {"text": "*Ask Tobin if he's seen Grace this morning.*", "nextId": "3"},
+          {"text": "*Ask Tobin if he's seen Grace this morning.*", "nextId": "8"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
-      "3": {"text": ["No, where is she then? Four is better than three, teehee!"], "choices": [{"command": "EXIT"}]}
+      "8": {"text": ["No, where is she then? Four is better than three, teehee!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "kaidan_come_home"                    : {
     "name"   : "Kaidan",
+    "startAt": [{"condition": ["is_raining"], "startId": "2"}],
     "phrases": {
       "1" : {
-        "text": ["We're playing catch, teehee! Can Grace come and join us?"], "choices": [
+        "text": ["I'm the best at tag, teehee! Tell Grace to come, I'll tag her too!"], "choices": [
           {"condition": ["i_cycle_==_1"], "nextId": "10"},
-          {"condition": ["i_c_==_a_q_quest_get_tow_rope"], "nextId": "2"},
+          {"condition": ["i_c_==_a_q_quest_get_tow_rope"], "nextId": "3"},
           {"condition": ["i_c_==_u_q_quest_get_tow_rope", "i_cycle_>=_2"], "command": "EXIT"}
         ]
       },
       "2" : {
+        "text": ["I'm not going inside! Is Grace scared of a little rain?"], "choices": [
+          {"condition": ["i_cycle_==_1"], "nextId": "10"},
+          {"condition": ["i_c_==_a_q_quest_get_tow_rope"], "nextId": "3"},
+          {"condition": ["i_c_==_u_q_quest_get_tow_rope", "i_cycle_>=_2"], "command": "EXIT"}
+        ]
+      },
+      "3" : {
         "choices": [
-          {"text": "*Let him know that Jaron has asked for him to return home.*", "nextId": "3"},
+          {"text": "*Let him know that Jaron has asked for him to return home.*", "nextId": "4"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
-      "3" : {"face": "boy01", "text": ["Awww man! Right now?"]},
-      "4" : {"face": "mozes", "name": "Mozes", "text": ["I'm afraid so."]},
-      "5" : {"face": "boy01", "name": "Kaidan", "text": ["It's not fair! I wanna play! You're dumb!"]},
-      "6" : {"face": "mozes", "name": "Mozes", "text": ["Don't shoot the messenger."]},
-      "7" : {"face": "boy01", "name": "Kaidan", "text": ["You're right, I'll go home and shoot Jaron."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "8"}]},
-      "8" : {"face": "mozes", "name": "Mozes", "text": [". . ."], "choices": [{"command": "RELOAD_NPCS"}]},
+      "4" : {"face": "boy01", "text": ["Awww man! Right now?"]},
+      "5" : {"face": "mozes", "name": "Mozes", "text": ["I'm afraid so."]},
+      "6" : {"face": "boy01", "name": "Kaidan", "text": ["It's not fair! I wanna play! You're dumb!"]},
+      "7" : {"face": "mozes", "name": "Mozes", "text": ["Don't shoot the messenger."]},
+      "8" : {"face": "boy01", "name": "Kaidan", "text": ["You're right, I'll go home and shoot Jaron."], "choices": [{"command": "DELIVER_QUEST_MESSAGE", "nextId": "9"}]},
+      "9" : {"face": "mozes", "name": "Mozes", "text": [". . ."], "choices": [{"command": "RELOAD_NPCS"}]},
       "10": {
         "choices": [
           {"text": "*Ask Kaidan if he's seen Grace this morning.*", "nextId": "11"},
@@ -150,22 +179,28 @@
   },
   "lynette_life_is_boring"              : {
     "name"   : "Lynette",
+    "startAt": [{"condition": ["is_raining"], "startId": "2"}],
     "phrases": {
-      "1": {"text": ["Boohoo! You took Kaidan away from us! You're mean!"], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["Boohoo! You took Kaidan away from us! You're mean!"], "choices": [{"command": "EXIT"}]},
+      "2": {"text": ["Boohoo! Kaidan's gone, and now it's raining too! You're mean!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "tobin_life_is_boring"                : {
     "name"   : "Tobin",
+    "startAt": [{"condition": ["is_raining"], "startId": "2"}],
     "phrases": {
-      "1": {"text": ["Boohoo! Now we're only with two! You big fat meanie!"], "choices": [{"command": "EXIT"}]}
+      "1": {"text": ["Boohoo! Now we're only with two! You big fat meanie!"], "choices": [{"command": "EXIT"}]},
+      "2": {"text": ["Boohoo! Only two of us, and we're soaking wet! You big fat meanie!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "bored_and_secluded_academy"          : {
     "name"   : "Malina",
+    "startAt": [{"condition": ["is_raining"], "startId": "2"}],
     "phrases": {
-      "1" : {"text": ["Hi Mozes! You really should check out this priest fella over here. He's so funny! Ha ha!"]},
-      "2" : {"text": ["It's a shame we're not allowed to leave the village by ourselves due to the rising monster threat, but I'm glad this fella came in. He can now brighten my dull and secluded life a bit."]},
-      "3" : {
+      "1" : {"text": ["Hi Mozes! You really should check out this priest fella over here. He's so funny! Ha ha!"], "choices": [{"nextId": "3"}]},
+      "2" : {"text": ["Hi Mozes! I'd run inside, but this priest fella is too funny to leave, rain or no rain. Ha ha!"]},
+      "3" : {"text": ["It's a shame we're not allowed to leave the village by ourselves due to the rising monster threat, but I'm glad this fella came in. He can now brighten my dull and secluded life a bit."]},
+      "4" : {
         "choices": [
           {"condition": ["i_cycle_==_1"], "text": "*Ask Malina if she's seen Grace this morning.*", "nextId": "31"},
           {"text": "*Ask about her dull and secluded life.*", "nextId": "10"},
@@ -184,34 +219,38 @@
       "18": {"text": ["Swords have advantage against axes, axes have advantage against spears, and spears have advantage against swords."]},
       "19": {"text": ["This also means swords have disadvantage against spears, spears have disadvantage against axes, and axes have disadvantage against swords."]},
       "20": {"text": ["So: swords > axes > spears > swords."]},
-      "21": {"text": ["Neat, right?"], "choices": [{"nextId": "3"}]},
+      "21": {"text": ["Neat, right?"], "choices": [{"nextId": "4"}]},
       "31": {"face": "youngwoman01", "name": "Malina", "text": ["No, I haven't seen Grace this morning, Mozes. Is everything okay?"]},
       "32": {"face": "mozes", "name": "Mozes", "text": ["I don't know where she is. She wasn't in her bed this morning."]},
       "33": {"face": "youngwoman01", "name": "Malina", "text": ["Maybe she went to Honeywood Forest? She likes to go there."]},
       "34": {"face": "mozes", "name": "Mozes", "text": ["I'm afraid she might have. There are orcs in the forest."]},
       "35": {"face": "youngwoman01", "name": "Malina", "text": ["I'll accompany you on your search!"]},
       "36": {"face": "mozes", "name": "Mozes", "text": ["Malina, would you mind looking for her here in the village instead?"]},
-      "37": {"face": "youngwoman01", "name": "Malina", "text": ["Of course, I will. Good luck finding her."], "choices": [{"nextId": "3"}]}
+      "37": {"face": "youngwoman01", "name": "Malina", "text": ["Of course, I will. Good luck finding her."], "choices": [{"nextId": "4"}]}
     }
   },
   "priest_honeywood"                    : {
     "name"   : "Priest",
+    "startAt": [{"condition": ["is_raining"], "startId": "2"}],
     "phrases": {
-      "1": {"text": ["I'm a traveling priest from the city.", "Young man, do you want to be saved?"]},
-      "2": {
+      "1": {"text": ["I'm a traveling priest from the city.", "Young man, do you want to be saved?"], "choices": [{"nextId": "3"}]},
+      "2": {"text": ["I'm a traveling priest from the city. Even the heavens weep today. Young man, do you want to be saved?"]},
+      "3": {
         "choices": [
-          {"text": "*What is it you need to be saved from?* [BLUE](Save game)", "nextId": "3"},
+          {"text": "*What is it you need to be saved from?* [BLUE](Save game)", "nextId": "4"},
           {"text": "*Not necessary, you're doing pretty well. Take your leave.*", "command": "EXIT"}
         ]
       },
-      "3": {"text": ["Your soul is now destined for God."], "choices": [{"command": "SAVE_GAME"}]}
+      "4": {"text": ["Your soul is now destined for God."], "choices": [{"command": "SAVE_GAME"}]}
     }
   },
   "resourceshop_honeywood"              : {
     "name"   : "Resource Shop",
+    "startAt": [{"condition": ["is_raining"], "startId": "2"}],
     "phrases": {
-      "1": {"text": ["Hi Mozes, can I help you with anything?"]},
-      "2": {
+      "1": {"text": ["Hi Mozes, can I help you with anything?"], "choices": [{"nextId": "3"}]},
+      "2": {"text": ["Hi Mozes, can I help you with anything? Rain or shine, I'm open for business."]},
+      "3": {
         "choices": [
           {"text": "*Visit the shop.*", "command": "LOAD_SHOP"},
           {"text": "*Take your leave.*", "command": "EXIT"}
@@ -221,9 +260,11 @@
   },
   "equipshop_honeywood"                 : {
     "name"   : "Equipment Shop",
+    "startAt": [{"condition": ["is_raining"], "startId": "2"}],
     "phrases": {
-      "1": {"text": ["Hello Mozes, what can I do for you today?"]},
-      "2": {
+      "1": {"text": ["Hello Mozes, what can I do for you today?"], "choices": [{"nextId": "3"}]},
+      "2": {"text": ["Hello Mozes, what can I do for you on this rainy day?"]},
+      "3": {
         "choices": [
           {"text": "*Visit the shop.*", "command": "LOAD_SHOP"},
           {"text": "*Take your leave.*", "command": "EXIT"}
@@ -239,9 +280,11 @@
   },
   "honeywood_academy1"                  : {
     "name"   : "Skill Trainer",
+    "startAt": [{"condition": ["is_raining"], "startId": "2"}],
     "phrases": {
-      "1": {"text": ["Good day, young sir, would you like to receive skill training?"]},
-      "2": {
+      "1": {"text": ["Good day, young sir, would you like to receive skill training?"], "choices": [{"nextId": "3"}]},
+      "2": {"text": ["Good day, young sir. A little rain never stopped a good lesson. Would you like to receive skill training?"]},
+      "3": {
         "choices": [
           {"text": "*Visit the academy.*", "command": "LOAD_ACADEMY"},
           {"text": "*Take your leave.*", "command": "EXIT"}
@@ -263,9 +306,11 @@
   },
   "honeywood_academy2"                  : {
     "name"   : "Skill Trainer",
+    "startAt": [{"condition": ["is_raining"], "startId": "2"}],
     "phrases": {
-      "1": {"text": ["Hey Mozes, don't say a word. You want to receive skill training."]},
-      "2": {
+      "1": {"text": ["Hey Mozes, don't say a word. You want to receive skill training."], "choices": [{"nextId": "3"}]},
+      "2": {"text": ["Hey Mozes, don't say a word. You want to receive skill training, even in this rain."]},
+      "3": {
         "choices": [
           {"text": "*Visit the academy.*", "command": "LOAD_ACADEMY"},
           {"text": "*Take your leave.*", "command": "EXIT"}
@@ -393,18 +438,20 @@
   },
   "quest_get_horse"                     : {
     "name"   : "Angie",
+    "startAt": [{"condition": ["is_raining"], "startId": "2"}],
     "phrases": {
-      "1"   : {"text": ["Hi Mozes. Won't you say hi to Enopa? She's not feeling well."]},
-      "2"   : {
+      "1"   : {"text": ["Hi Mozes. Won't you say hi to Enopa? She's not feeling well."], "choices": [{"nextId": "3"}]},
+      "2"   : {"text": ["Hi Mozes. Won't you say hi to Enopa? She's not feeling well, and this rain surely isn't helping."]},
+      "3"   : {
         "choices": [
           {"condition": ["i_cycle_==_1"], "text": "*Ask Angie if she's seen Grace this morning.*", "nextId": "5"},
-          {"condition": ["i_tn_7_q_this"], "text": "*Express your concern about Enopa's condition.*", "nextId": "3"},
+          {"condition": ["i_tn_7_q_this"], "text": "*Express your concern about Enopa's condition.*", "nextId": "4"},
           {"condition": ["i_rc_>=_a_q_quest_helping_horse", "i_time_before_17:00"], "text": "*Inquire about borrowing Enopa to help Lennor with the fallen tree.*", "nextId": "10"},
           {"text": "*Greet Enopa and take your leave.*", "command": "EXIT"}
         ]
       },
-      "3"   : {"text": ["Thank you. Maybe she ate something wrong, but I think just a couple of days' rest will help her recover."], "choices": [{"nextId": "2"}]},
-      "5"   : {"text": ["I haven't seen Grace or much of anything else, I'm afraid. My whole morning has been consumed with tending to Enopa. I've had eyes for nothing else."], "choices": [{"nextId": "2"}]},
+      "4"   : {"text": ["Thank you. Maybe she ate something wrong, but I think just a couple of days' rest will help her recover."], "choices": [{"nextId": "3"}]},
+      "5"   : {"text": ["I haven't seen Grace or much of anything else, I'm afraid. My whole morning has been consumed with tending to Enopa. I've had eyes for nothing else."], "choices": [{"nextId": "3"}]},
       "10"  : {"text": ["She can't! Enopa needs to recover first before she can be of any use."]},
       "11"  : {"text": ["And even if she recovers, she'll need horseshoes before she can go anywhere. I don't have any right now, so it's not possible."]},
       "12"  : {
@@ -426,8 +473,17 @@
           {"text": "*Too much hassle. You'll find another (better) horse. Take your leave.*", "command": "EXIT", "nextId": "41"}
         ]
       },
-      "40"  : {"text": ["Hi Mozes, do you have anything for Enopa?"], "choices": [{"nextId": "45"}]},
-      "41"  : {"text": ["Hi Mozes, did you change your mind?"], "choices": [{"nextId": "45"}]},
+      "40"  : {
+        "text": ["Hi Mozes, do you have anything for Enopa?"], "choices": [
+          {"condition": ["is_raining"], "nextId": "42", "orElseId": "45"}
+        ]
+      },
+      "41"  : {
+        "text": ["Hi Mozes, did you change your mind?"], "choices": [
+          {"condition": ["is_raining"], "nextId": "42", "orElseId": "45"}
+        ]
+      },
+      "42"  : {"text": ["A bit of rain won't bother Enopa, but I'm not leaving her side while she's this ill."], "choices": [{"nextId": "45"}]},
       "45"  : {
         "choices": [
           {"condition": ["_n_1_>=_item_horse_medicine"], "text": "[Horse Medicine] *Deliver the medicine from Elenora.*", "command": "PROVIDE_QUEST_ITEM", "nextId": "52"},
@@ -436,12 +492,17 @@
         ]
       },
       "51"  : {"text": ["Wow, really? That's awesome! I'll administer it to her right away."], "choices": [{"nextId": "53"}]},
-      "52"  : {"text": ["Great! I'll administer it to her right away."], "choices": [{"nextId": "53"}]},
+      "52"  : {"text": ["Great! I'll administer it to her right away."]},
       "53"  : {"text": ["{SPEED=0.2} . . . . ."]},
       "54"  : {"text": ["I think she even likes the taste of it! Thank you so much for your help."]},
       "55"  : {"text": ["Now, once she's been shoed, I'll lend her to Lennor and you."], "choices": [{"nextId": "60"}]},
-      "60"  : {"text": ["Were you able to gather four horseshoes for Enopa?"]},
-      "61"  : {
+      "60"  : {
+        "text": ["Were you able to gather four horseshoes for Enopa?"], "choices": [
+          {"condition": ["is_raining"], "nextId": "61", "orElseId": "62"}
+        ]
+      },
+      "61"  : {"text": ["And don't go catching a cold out there while you're looking for them."]},
+      "62"  : {
         "choices": [
           {"condition": ["_n_4_>=_item_horseshoe"], "text": "[4 Horseshoes] *Hand over the horseshoes.*", "command": "PROVIDE_QUEST_ITEM", "nextId": "70"},
           {"text": "*Tell her you'll return when you have them. Take your leave.*", "command": "EXIT", "nextId": "60"}
@@ -677,29 +738,35 @@
   },
   "honeywood_soldiers"                  : {
     "name"   : "Soldier",
-    "startAt": [{"condition": ["!alone_in_party"], "startId": "100"}],
+    "startAt": [
+      {"condition": ["alone_in_party", "is_raining"], "startId": "2"},
+      {"condition": ["!alone_in_party", "is_raining"], "startId": "101"},
+      {"condition": ["!alone_in_party"], "startId": "100"}
+    ],
     "phrases": {
-      "1"   : {"text": ["Sir, as per the village elder's orders, we are not permitted to allow anyone to leave the village {COLOR=BLUE}alone{COLOR=BLACK}."]},
-      "2"   : {
-        "text": ["It's dangerous to go alone, particularly with the recent increase in monster activity. [GRAY](What's up with that anyway?)"], "choices": [
-          {"condition": ["alone_in_party"], "nextId": "3"}
-        ]
-      },
+      "1"   : {"text": ["Sir, as per the village elder's orders, we are not permitted to allow anyone to leave the village {COLOR=BLUE}alone{COLOR=BLACK}."], "choices": [{"nextId": "3"}]},
+      "2"   : {"text": ["Sir, as per the village elder's orders, we are not permitted to allow anyone to leave the village {COLOR=BLUE}alone{COLOR=BLACK}. Certainly not in this weather."]},
       "3"   : {
-        "text": ["If you have a problem with that, it's not our call. You'll have to take it up with the {COLOR=BLUE}village elder{COLOR=BLACK} himself."], "choices": [
-          {"condition": ["i_cycle_==_1"], "nextId": "4", "orElseId": "10"}
+        "text": ["It's dangerous to go alone, particularly with the recent increase in monster activity. [GRAY](What's up with that anyway?)"], "choices": [
+          {"condition": ["alone_in_party"], "nextId": "4"}
         ]
       },
       "4"   : {
+        "text": ["If you have a problem with that, it's not our call. You'll have to take it up with the {COLOR=BLUE}village elder{COLOR=BLACK} himself."], "choices": [
+          {"condition": ["i_cycle_==_1"], "nextId": "5", "orElseId": "10"}
+        ]
+      },
+      "5"   : {
         "choices": [
-          {"text": "*Ask the guards if they've seen a little girl pass by this morning.*", "nextId": "5"},
+          {"text": "*Ask the guards if they've seen a little girl pass by this morning.*", "nextId": "6"},
           {"text": "*Take your leave.*", "command": "EXIT"}
         ]
       },
-      "5"   : {"text": ["No sir, we have been stationed here all night, and we haven't seen anyone passing through this gate."]},
-      "6"   : {"text": ["Certainly not a little girl. We can guarantee you that."], "choices": [{"command": "EXIT"}]},
+      "6"   : {"text": ["No sir, we have been stationed here all night, and we haven't seen anyone passing through this gate."]},
+      "7"   : {"text": ["Certainly not a little girl. We can guarantee you that."], "choices": [{"command": "EXIT"}]},
       "10"  : {"text": ["You can find the village elder in the big house, near the statue in the center of the village."], "choices": [{"command": "EXIT"}]},
       "100" : {"text": ["Sir, we advise you to take caution when venturing on the road. Increased monster activity has been reported lately."], "choices": [{"command": "EXIT"}]},
+      "101" : {"text": ["Sir, we advise you to take caution when venturing on the road. Increased monster activity has been reported lately, and this rain makes them harder to spot."], "choices": [{"command": "EXIT"}]},
       "2000": {"text": ["But it appears you are in good company. Move along."], "choices": [{"command": "EXIT"}]}
     }
   },

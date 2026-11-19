@@ -430,10 +430,19 @@
       "2" : {"text": ["I am Father Santino, priest of the Temple of Evdos, God of Knowledge."]},
       "3" : {"text": ["I'm on my way to the mayor. I need to talk to him about the daily gate closure."]},
       "4" : {"text": ["If you need a pastoral conversation, I'm available every day after the service at 11:00."]},
-      "5" : {"text": ["The service itself is every day at 10:00. Come join us if you'd like."], "choices": [{"nextId": "20"}]},
+      "5" : {
+        "text": ["The service itself is every day at 10:00. Come join us if you'd like."], "choices": [
+          {"condition": ["is_raining"], "nextId": "19", "orElseId": "20"}
+        ]
+      },
       "10": {"text": ["I'm on my way to the mayor. I need to talk to him about the daily gate closure."]},
       "11": {"text": ["If you want to know more about Ulrog, come see me tonight at 18:00."]},
-      "12": {"text": ["I will have gathered everything you need to know about Ulrog by then."], "choices": [{"nextId": "20"}]},
+      "12": {
+        "text": ["I will have gathered everything you need to know about Ulrog by then."], "choices": [
+          {"condition": ["is_raining"], "nextId": "19", "orElseId": "20"}
+        ]
+      },
+      "19": {"text": ["Now forgive my haste, my child. I'd rather reach the mayor before this rain soaks me to the bone."]},
       "20": {
         "choices": [
           {"condition": ["i_n_1_>=_item_ghost_proof", "i_n_0_==_item_ghost_repeller"], "text": "[Ghost proof] *Show him the proof to get the holy staff.*", "nextId": "30"},

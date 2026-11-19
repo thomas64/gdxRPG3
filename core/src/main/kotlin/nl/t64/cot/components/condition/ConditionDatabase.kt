@@ -5,6 +5,7 @@ import nl.t64.cot.components.party.abilities.AbilityItemId
 import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.components.portal.Portal
 import nl.t64.cot.constants.ScreenType
+import nl.t64.cot.screens.world.RainCycle
 
 
 fun List<String>.areAllTrue(questId: String? = null): Boolean {
@@ -57,6 +58,7 @@ object ConditionDatabase {
         "!is_reignald_recruited"        to { !hasReignaldBeenRecruited },
         "is_lastdenn_cell_locked"       to { gameData.doors.getDoor("door_lastdenn_jail_b1").isLocked },
         "should_guard_be_giving_key"    to { shouldGuardBeGivingKey },
+        "is_raining"                    to { RainCycle.isRaining() },
         // @formatter:on
     )
 

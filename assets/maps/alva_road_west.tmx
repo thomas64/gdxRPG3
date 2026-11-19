@@ -5,6 +5,7 @@
   <property name="bgm" value="bgm_overworld"/>
   <property name="bgs" value="bgs_creek"/>
   <property name="lightmap_camera" value="sunlight"/>
+  <property name="rain" value="grey"/>
  </properties>
  <tileset firstgid="1" name="alva_road_west" tilewidth="24" tileheight="24" tilecount="14552" columns="214">
   <image source="tilesets/alva_road_west.png" width="5136" height="1632"/>

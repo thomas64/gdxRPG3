@@ -81,19 +81,23 @@
   },
   "world_heal_price-0"    : {
     "name"   : "Fairy Healer",
-    "startAt": [{"condition": ["_time_after_18:15"], "startId": "10"}],
+    "startAt": [
+      {"condition": ["is_raining"], "startId": "2"},
+      {"condition": ["_time_after_18:15"], "startId": "10"}
+    ],
     "phrases": {
-      "1" : {"text": ["Dear traveler, if you'd like, I can put you to sleep among my healing flowers for 1 hour. Your wounds will mend while you rest. Would you like to accept this healing?"]},
-      "2" : {
+      "1" : {"text": ["Dear traveler, if you'd like, I can put you to sleep among my healing flowers for 1 hour. Your wounds will mend while you rest. Would you like to accept this healing?"], "choices": [{"nextId": "3"}]},
+      "2" : {"text": ["Dear traveler, if you'd like, I can put you to sleep among my healing flowers for 1 hour. Your wounds will mend while you rest, though you may get a little wet. Would you like to accept this healing?"]},
+      "3" : {
         "choices": [
-          {"text": "*Gladly accept her healing offer.* [BLUE](Restore health)", "command": "HEAL_LIFE_0060", "nextId": "3"},
+          {"text": "*Gladly accept her healing offer.* [BLUE](Restore health)", "command": "HEAL_LIFE_0060", "nextId": "4"},
           {"text": "*Politely decline her offer. Take your leave.*", "command": "EXIT"}
         ]
       },
-      "3" : {"text": ["Your health and energy are fully restored. Go with my blessings, traveler."], "choices": [{"command": "EXIT"}]},
+      "4" : {"text": ["Your health and energy are fully restored. Go with my blessings, traveler."], "choices": [{"command": "EXIT"}]},
       "10": {"text": ["Dear traveler, if it was a bit earlier, I could have put you to sleep among my healing flowers. Your wounds would have mended while you rested."]},
       "11": {"text": ["But out here, it's hard to cultivate healing flowers, so these flowers lose their power in the evening."]},
-      "12": {"text": ["If you come back some other time in the morning of afternoon, I would be happy to help you. I'm very sorry."], "choices": [{"command": "EXIT"}]}
+      "12": {"text": ["If you come back some other time in the morning or afternoon, I would be happy to help you. I'm very sorry."], "choices": [{"command": "EXIT"}]}
     }
   }
 }

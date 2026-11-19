@@ -5,6 +5,7 @@
   <property name="bgm" value="bgm_forest"/>
   <property name="bgs" value="bgs_birds"/>
   <property name="lightmap_camera" value="sunlight, forest"/>
+  <property name="rain" value="grey"/>
  </properties>
  <tileset firstgid="1" name="honeywood_forest_cave" tilewidth="24" tileheight="24" tilecount="3294" columns="122">
   <image source="tilesets/honeywood_forest_cave.png" width="2928" height="648"/>
