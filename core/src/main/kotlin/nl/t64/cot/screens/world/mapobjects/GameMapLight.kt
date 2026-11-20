@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.reflect.ClassReflection
 import nl.t64.cot.Utils.gameData
+import nl.t64.cot.components.condition.areAllTrue
 import nl.t64.cot.screens.world.atmosphere.LitSchedule
 import nl.t64.cot.screens.world.entity.GraphicsDoor
 import nl.t64.cot.screens.world.lighting.Lightmap
@@ -27,6 +28,7 @@ class GameMapLight(rectObject: RectangleMapObject,
     private val height: Float = texture.height * rectangle.height / FULL_SIZE_RECTANGLE
     private val x: Float = center.x - width / 2f
     private val y: Float = center.y - height / 2f
+    private val conditions: List<String> = createConditions(rectObject)
     private val litSchedule = LitSchedule(rectObject.properties)
     // A light whose center lies within a door belongs to that door, and only shines while it is open.
     private val doorId: String? = doors.find { it.rectangle.contains(center) }?.name
@@ -39,11 +41,15 @@ class GameMapLight(rectObject: RectangleMapObject,
     }
 
     fun render(batch: Batch) {
-        if (!litSchedule.isLit() || brightness == 0f) return
+        if (!isShining()) return
 
         batch.setColor(color.r * brightness, color.g * brightness, color.b * brightness, 1f)
         batch.draw(texture, x, y, width, height)
         batch.color = Color.WHITE
+    }
+
+    private fun isShining(): Boolean {
+        return brightness > 0f && litSchedule.isLit() && conditions.areAllTrue()
     }
 
     private fun isDoorClosed(): Boolean {

@@ -1,6 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.11" tiledversion="1.12.2" name="fsm_flame01" tilewidth="24" tileheight="24" tilecount="768" columns="24">
+<tileset version="1.10" tiledversion="1.12.2" name="fsm_flame01" tilewidth="24" tileheight="24" tilecount="768" columns="24">
  <image source="fsm_flame01.png" width="576" height="768"/>
+ <tile id="138">
+  <animation>
+   <frame tileid="138" duration="200"/>
+   <frame tileid="140" duration="200"/>
+   <frame tileid="142" duration="200"/>
+   <frame tileid="140" duration="200"/>
+  </animation>
+ </tile>
+ <tile id="139">
+  <animation>
+   <frame tileid="139" duration="200"/>
+   <frame tileid="141" duration="200"/>
+   <frame tileid="143" duration="200"/>
+   <frame tileid="141" duration="200"/>
+  </animation>
+ </tile>
+ <tile id="144">
+  <animation>
+   <frame tileid="144" duration="200"/>
+   <frame tileid="146" duration="200"/>
+   <frame tileid="148" duration="200"/>
+   <frame tileid="146" duration="200"/>
+  </animation>
+ </tile>
+ <tile id="145">
+  <animation>
+   <frame tileid="145" duration="200"/>
+   <frame tileid="147" duration="200"/>
+   <frame tileid="149" duration="200"/>
+   <frame tileid="147" duration="200"/>
+  </animation>
+ </tile>
+ <tile id="162">
+  <animation>
+   <frame tileid="162" duration="200"/>
+   <frame tileid="164" duration="200"/>
+   <frame tileid="166" duration="200"/>
+   <frame tileid="164" duration="200"/>
+  </animation>
+ </tile>
+ <tile id="163">
+  <animation>
+   <frame tileid="163" duration="200"/>
+   <frame tileid="165" duration="200"/>
+   <frame tileid="167" duration="200"/>
+   <frame tileid="165" duration="200"/>
+  </animation>
+ </tile>
+ <tile id="168">
+  <animation>
+   <frame tileid="168" duration="200"/>
+   <frame tileid="170" duration="200"/>
+   <frame tileid="172" duration="200"/>
+   <frame tileid="170" duration="200"/>
+  </animation>
+ </tile>
+ <tile id="169">
+  <animation>
+   <frame tileid="169" duration="200"/>
+   <frame tileid="171" duration="200"/>
+   <frame tileid="173" duration="200"/>
+   <frame tileid="171" duration="200"/>
+  </animation>
+ </tile>
  <tile id="240">
   <animation>
    <frame tileid="240" duration="200"/>

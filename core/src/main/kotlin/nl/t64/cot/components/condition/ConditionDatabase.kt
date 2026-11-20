@@ -8,6 +8,8 @@ import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.screens.world.atmosphere.RainCycle
 
 
+private const val OR_SEPARATOR = "|"
+
 fun List<String>.areAllTrue(questId: String? = null): Boolean {
     return ConditionDatabase.isMeetingConditions(this, questId)
 }
@@ -62,11 +64,19 @@ object ConditionDatabase {
         // @formatter:on
     )
 
+    /**
+     * Every condition in the list must be met (AND). One condition may hold several or-conditions
+     * separated by |, of which only one has to be met (OR).
+     *
+     * In Tiled the list is written with commas, so `a | b, c` means: (a OR b) AND c.
+     */
     fun isMeetingConditions(conditionIds: List<String?>, questId: String? = null): Boolean {
-        return when {
-            conditionIds.isEmpty() -> true
-            else -> conditionIds.all { isMeetingCondition(it!!, questId) }
-        }
+        return conditionIds.all { isMeetingAnyOrCondition(it!!, questId) }
+    }
+
+    private fun isMeetingAnyOrCondition(conditionId: String, questId: String?): Boolean {
+        val orConditions: List<String> = conditionId.split(OR_SEPARATOR).map { it.trim() }
+        return orConditions.any { isMeetingCondition(it, questId) }
     }
 
     private fun isMeetingCondition(conditionId: String, questId: String?): Boolean {

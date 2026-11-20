@@ -18,14 +18,14 @@ object DoorScheduleDatabase {
         DoorSchedulePart("honeywood", "18:45", "18:47", "door_honeywood_inn"),
 
         // garrin
-        DoorSchedulePart("lastdenn",  "11:23", "11:25", "door_lastdenn_garrin",         listOf("is_garrin_possessed")),
-        DoorSchedulePart("lastdenn",  "14:56", "15:02", "door_lastdenn_jail",           listOf("is_garrin_possessed")),
+        DoorSchedulePart("lastdenn",  "11:23", "11:25", "door_lastdenn_garrin",  listOf("is_garrin_possessed")),
+        DoorSchedulePart("lastdenn",  "14:56", "15:02", "door_lastdenn_jail",    listOf("is_garrin_possessed")),
 
         // santino
         DoorSchedulePart("lastdenn",  "12:29", "12:31", "door_large_round"),
-        DoorSchedulePart("lastdenn",  "13:49", "13:51", "door_wooden_ring_shade_left",  listOf("!is_garrin_possessed")),
-        DoorSchedulePart("lastdenn",  "15:03", "15:05", "door_wooden_ring_shade_left",  listOf("!is_garrin_possessed")),
-        DoorSchedulePart("lastdenn",  "16:24", "16:26", "door_large_round",             listOf("!is_garrin_possessed")),
+        DoorSchedulePart("lastdenn",  "13:49", "13:51", "door_wooden_ring_left", listOf("!is_garrin_possessed")),
+        DoorSchedulePart("lastdenn",  "15:03", "15:05", "door_wooden_ring_left", listOf("!is_garrin_possessed")),
+        DoorSchedulePart("lastdenn",  "16:24", "16:26", "door_large_round",      listOf("!is_garrin_possessed")),
 
         // @formatter:on
     )
