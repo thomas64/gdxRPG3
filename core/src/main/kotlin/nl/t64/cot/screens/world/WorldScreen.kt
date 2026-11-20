@@ -447,7 +447,7 @@ class WorldScreen : Screen, ConversationObserver, BattleObserver {
 
     private fun renderAll(dt: Float) {
         updateCameraPosition(dt)
-        mapManager.updateParticleEffects(dt)
+        mapManager.updateMapEffects(dt)
         worldRenderer.renderAll(player.position) { renderEntities(it) }
         gridRenderer.possibleRender()
         debugRenderer.possibleRenderObjects(doorList + lootList + npcEntities + visibleScheduledEntities + partyMembers + player)

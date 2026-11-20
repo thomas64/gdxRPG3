@@ -110,8 +110,9 @@ class MapManager : ProfileObserver {
         currentMap.lowerTextures.forEach { it.update() }
     }
 
-    fun updateParticleEffects(dt: Float) {
+    fun updateMapEffects(dt: Float) {
         currentMap.torches.forEach { it.update(dt) }
+        currentMap.lights.forEach { it.update(dt) }
         currentMap.rain?.update(dt)
     }
 

@@ -110,8 +110,6 @@ class GameMap(
     val npcs: List<GameMapNpc> = loader.loadAllRectanglesAndTransform(NPC_LAYER) { GameMapNpc(it) }
     val heroes: List<GameMapHero> = loader.loadWithCustomFilterAndTransform(HERO_LAYER, { gameData.heroes.contains(it.name) }, { GameMapHero(it) })
     val enemies: List<GameMapEnemy> = loader.loadAllRectanglesAndTransform(ENEMY_LAYER) { GameMapEnemy(it) }
-    val lights: List<GameMapLight> = loader.loadAllRectanglesAndTransform(LIGHTS_LAYER) { GameMapLight(it) }
-    val torches: List<GameMapParticle> = loader.loadWhereNameEqualsAndTransform(PARTICLES_LAYER, "torch") { GameMapParticle(it) }
     val conditionBlockers: List<GameMapConditionBlocker> = loader.loadWhereTypeEqualsAndTransform(QUEST_LAYER, "blocker") { GameMapConditionBlocker(it) }
     val temporaryBlockers: List<GameMapTemporaryBlocker> = loader.loadWhereTypeEqualsAndTransform(QUEST_LAYER, "tempBlocker") { GameMapTemporaryBlocker(mapTitle, it) }
     val upperTextures: List<GameMapConditionTexture> = loader.loadAllTexturesAndTransform(UPPER_TEXTURE_LAYER) { GameMapConditionTexture(it) }
@@ -119,6 +117,8 @@ class GameMap(
     val sparkles: List<GameMapSparkle> = loader.loadWhereNameStartsWithAndTransform(REST_LAYER, "sparkle") { GameMapSparkle(it) }
     val chests: List<RectangleMapObject> = loader.loadWhereNameStartsWith(REST_LAYER, "chest")
     val doors: List<RectangleMapObject> = loader.loadWhereNameStartsWith(REST_LAYER, "door")
+    val lights: List<GameMapLight> = loader.loadAllRectanglesAndTransform(LIGHTS_LAYER) { GameMapLight(it, doors) }
+    val torches: List<GameMapParticle> = loader.loadWhereNameEqualsAndTransform(PARTICLES_LAYER, "torch") { GameMapParticle(it) }
     val storage: List<GameMapStorage> = loader.loadWhereNameStartsWithAndTransform(REST_LAYER, "storage") { GameMapStorage(it) }
     val minimapIcons: List<GameMapIcon> = loader.loadWhereNameStartsWithAndTransform(REST_LAYER, "icon") { GameMapIcon(it) }
 

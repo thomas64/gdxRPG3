@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="96" height="78" tilewidth="24" tileheight="24" infinite="0" nextlayerid="66" nextobjectid="591">
+<map version="1.11" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="96" height="78" tilewidth="24" tileheight="24" infinite="0" nextlayerid="66" nextobjectid="596">
  <properties>
   <property name="ambient_light" value="day_cycle"/>
   <property name="bgm" value="bgm_honeywood"/>
@@ -681,6 +681,31 @@
    </properties>
   </object>
   <object id="590" x="684" y="456" width="24" height="24">
+   <properties>
+    <property name="litFrom" value="19:00"/>
+   </properties>
+  </object>
+  <object id="591" x="546" y="486" width="12" height="30">
+   <properties>
+    <property name="litFrom" value="19:00"/>
+   </properties>
+  </object>
+  <object id="592" x="738" y="486" width="12" height="30">
+   <properties>
+    <property name="litFrom" value="19:00"/>
+   </properties>
+  </object>
+  <object id="593" x="498" y="822" width="12" height="30">
+   <properties>
+    <property name="litFrom" value="19:00"/>
+   </properties>
+  </object>
+  <object id="594" x="1074" y="822" width="12" height="30">
+   <properties>
+    <property name="litFrom" value="19:00"/>
+   </properties>
+  </object>
+  <object id="595" x="642" y="1350" width="12" height="30">
    <properties>
     <property name="litFrom" value="19:00"/>
    </properties>

@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import ktx.collections.GdxArray
-import ktx.collections.gdxArrayOf
+import ktx.collections.toGdxArray
 import nl.t64.cot.Utils
 import nl.t64.cot.components.door.Door
 import nl.t64.cot.components.door.DoorType
@@ -16,13 +16,15 @@ import nl.t64.cot.screens.world.entity.events.LoadEntityEvent
 import nl.t64.cot.screens.world.entity.events.StateEvent
 
 
+private const val FRAME_COUNT = 4
+private const val FRAME_DURATION = Constant.FAST_FRAMES
+
 class GraphicsDoor(
     private val door: Door,
     private val litSchedule: LitSchedule? = null
 ) : GraphicsComponent() {
     private val openAnimation: Animation<TextureRegion> = loadAnimation(door.spriteId, false)
     private val litAnimation: Animation<TextureRegion>? = litSchedule?.let { loadAnimation(door.litSpriteId, false) }
-    private val animationDuration: Float = openAnimation.animationDuration
     private val shadowAnimation: Animation<TextureRegion>? =
         if (door.type == DoorType.LARGE_WOODEN_CAVE_GATE) loadAnimation(door.spriteId, true) else null
     private var shadowFrame: TextureRegion? = null
@@ -31,7 +33,7 @@ class GraphicsDoor(
         if (event is LoadEntityEvent) {
             position = event.position
             state = event.state!!
-            frameTime = if (state == EntityState.OPENED) animationDuration else 0f
+            frameTime = if (state == EntityState.OPENED) ANIMATION_DURATION else 0f
             setFrame(0f)
         }
         if (event is StateEvent) {
@@ -54,16 +56,9 @@ class GraphicsDoor(
         // empty
     }
 
-    private fun setPlayMode() {
-        getCurrentAnimation().playMode = when (state) {
-            EntityState.CLOSING -> Animation.PlayMode.REVERSED
-            else -> Animation.PlayMode.NORMAL
-        }
-    }
-
     override fun setFrame(dt: Float) {
         frameTime = when {
-            frameTime >= animationDuration -> animationDuration
+            frameTime >= ANIMATION_DURATION -> ANIMATION_DURATION
             state == EntityState.OPENED -> frameTime + dt
             state == EntityState.CLOSING -> frameTime + dt
             else -> 0f
@@ -76,6 +71,13 @@ class GraphicsDoor(
         return openAnimation    // todo, doorshadow is not possible in cutscenes this way atm.
     }
 
+    private fun setPlayMode() {
+        getCurrentAnimation().playMode = when (state) {
+            EntityState.CLOSING -> Animation.PlayMode.REVERSED
+            else -> Animation.PlayMode.NORMAL
+        }
+    }
+
     private fun getCurrentAnimation(): Animation<TextureRegion> {
         return if (isLit()) litAnimation!! else openAnimation
     }
@@ -86,8 +88,12 @@ class GraphicsDoor(
 
     private fun loadAnimation(spriteId: String, isShadow: Boolean): Animation<TextureRegion> {
         val textureFrames: Array<Array<TextureRegion>> = Utils.getDoorImage(spriteId, door.width.toInt(), isShadow)
-        val frames: GdxArray<TextureRegion> = gdxArrayOf(textureFrames[0][0], textureFrames[1][0], textureFrames[2][0], textureFrames[3][0])
-        return Animation(Constant.FAST_FRAMES, frames, Animation.PlayMode.NORMAL)
+        val frames: GdxArray<TextureRegion> = (0 until FRAME_COUNT).map { textureFrames[it][0] }.toGdxArray()
+        return Animation(FRAME_DURATION, frames, Animation.PlayMode.NORMAL)
+    }
+
+    companion object {
+        const val ANIMATION_DURATION = FRAME_COUNT * FRAME_DURATION
     }
 
 }
