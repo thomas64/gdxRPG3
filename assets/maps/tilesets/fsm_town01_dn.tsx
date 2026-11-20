@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tileset version="1.11" tiledversion="1.12.2" name="fsm_town01_dn" tilewidth="24" tileheight="24" tilecount="1024" columns="32">
+ <image source="fsm_town01_dn.png" width="768" height="768"/>
+</tileset>

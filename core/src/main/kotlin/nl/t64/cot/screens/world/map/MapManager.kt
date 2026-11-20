@@ -4,6 +4,7 @@ import com.badlogic.gdx.ai.pfa.DefaultGraphPath
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.maps.tiled.TiledMap
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer
 import com.badlogic.gdx.math.Vector2
 import nl.t64.cot.Utils.audioManager
 import nl.t64.cot.Utils.brokerManager
@@ -92,6 +93,8 @@ class MapManager : ProfileObserver {
     fun getLightmapPlayer(): Sprite? = currentMap.lightmapPlayer
     fun getAmbientLightColor(): Color? = currentMap.getAmbientLightColor()
     fun getTorches(): List<GameMapParticle> = currentMap.torches
+    fun getCurrentUnderLampLayer(): TiledMapTileLayer? = currentMap.underLampLayers.getCurrentLayer()
+    fun getCurrentOverLampLayer(): TiledMapTileLayer? = currentMap.overLampLayers.getCurrentLayer()
     fun getRain(): GameMapRain? = currentMap.rain
     fun getLowerConditionTextures(): List<GameMapConditionTexture> = currentMap.lowerTextures
     fun getUpperConditionTextures(): List<GameMapConditionTexture> = currentMap.upperTextures

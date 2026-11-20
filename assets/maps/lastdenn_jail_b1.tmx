@@ -137,11 +137,11 @@
  <objectgroup color="#ff55ff" id="19" name="event"/>
  <objectgroup color="#aaff00" id="20" name="scheduled"/>
  <objectgroup color="#ffffff" id="21" name="lights">
-  <object id="49" x="642" y="78" width="12" height="12"/>
-  <object id="50" x="804" y="222" width="12" height="12"/>
-  <object id="51" x="804" y="366" width="12" height="12"/>
-  <object id="52" x="594" y="366" width="12" height="12"/>
-  <object id="53" x="306" y="366" width="12" height="12"/>
-  <object id="54" x="48" y="414" width="12" height="12"/>
+  <object id="49" x="624" y="60" width="48" height="48"/>
+  <object id="50" x="786" y="204" width="48" height="48"/>
+  <object id="51" x="786" y="348" width="48" height="48"/>
+  <object id="52" x="576" y="348" width="48" height="48"/>
+  <object id="53" x="288" y="348" width="48" height="48"/>
+  <object id="54" x="30" y="396" width="48" height="48"/>
  </objectgroup>
 </map>

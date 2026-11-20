@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.ParticleEffect
 import com.badlogic.gdx.maps.objects.RectangleMapObject
 import com.badlogic.gdx.math.Vector2
 import nl.t64.cot.Utils.resourceManager
+import nl.t64.cot.screens.world.atmosphere.LitSchedule
 
 
 private const val TORCH_SCALE = 0.3f
@@ -16,18 +17,38 @@ class GameMapParticle(rectObject: RectangleMapObject) : GameMapObject(rectObject
 
     private val name: String = rectObject.name
     private val center: Vector2 = rectObject.getCenter()
+    private val litSchedule = LitSchedule(rectObject.properties)
+    private var isLit: Boolean = litSchedule.isLit()
     private val particle: ParticleEffect = createParticle()
 
     fun update(dt: Float) {
-        particle.update(dt)
+        updateLitState()
+        if (isLit) {
+            particle.update(dt)
+        }
     }
 
     fun render(batch: Batch) {
-        particle.draw(batch)
+        if (isLit) {
+            particle.draw(batch)
+        }
     }
 
     fun dispose() {
         particle.dispose()
+    }
+
+    private fun updateLitState() {
+        val wasLit: Boolean = isLit
+        isLit = litSchedule.isLit()
+        if (!wasLit && isLit) {
+            ignite()
+        }
+    }
+
+    /** Without pre-warming, so the player sees the flame rise. */
+    private fun ignite() {
+        particle.reset(false)
     }
 
     private fun createParticle(): ParticleEffect {

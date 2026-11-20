@@ -28,6 +28,7 @@ class Door(
     val message: String? = null
 ) {
 
+    val litSpriteId: String = "${spriteId}_lit"
     val audio: AudioEvent = type.audioEvent
     val width: Float = type.width
     val height: Float = type.height

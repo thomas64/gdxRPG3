@@ -35,6 +35,8 @@ private const val SCHEDULED_LAYER = "scheduled"
 private const val EVENT_LAYER = "event"
 private const val CUTSCENE_LAYER = "cutscene"
 private const val QUEST_LAYER = "quest"
+private const val UNDER_LAMP_LAYERS_PREFIX = "under"
+private const val OVER_LAMP_LAYERS_PREFIX = "over"
 private const val UPPER_TEXTURE_LAYER = "upper_texture"
 private const val LOWER_TEXTURE_LAYER = "lower_texture"
 private const val SAVE_LAYER = "save"
@@ -92,6 +94,8 @@ class GameMap(
     val lightmapPlayer: Sprite? = tiledMap.propertyOrNull<String>(LIGHTMAP_PLAYER_PROPERTY)
         ?.let { Sprite(Lightmap.of(it).texture) }
     private val defaultStepSound: String = tiledMap.property(STEP_SOUND_PROPERTY, DEFAULT_STEP_SOUND)
+    val underLampLayers = GameMapLampLayers(tiledMap, UNDER_LAMP_LAYERS_PREFIX)
+    val overLampLayers = GameMapLampLayers(tiledMap, OVER_LAMP_LAYERS_PREFIX)
 
     var playerSpawnLocation: Vector2 = Vector2()
     var playerSpawnDirection: Direction = Direction.NONE

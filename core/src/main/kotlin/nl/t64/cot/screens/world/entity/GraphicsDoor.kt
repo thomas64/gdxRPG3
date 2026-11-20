@@ -10,18 +10,21 @@ import nl.t64.cot.Utils
 import nl.t64.cot.components.door.Door
 import nl.t64.cot.components.door.DoorType
 import nl.t64.cot.constants.Constant
+import nl.t64.cot.screens.world.atmosphere.LitSchedule
 import nl.t64.cot.screens.world.entity.events.Event
 import nl.t64.cot.screens.world.entity.events.LoadEntityEvent
 import nl.t64.cot.screens.world.entity.events.StateEvent
 
 
 class GraphicsDoor(
-    private val door: Door
+    private val door: Door,
+    private val litSchedule: LitSchedule? = null
 ) : GraphicsComponent() {
-    private val openAnimation: Animation<TextureRegion> = loadAnimation(false)
+    private val openAnimation: Animation<TextureRegion> = loadAnimation(door.spriteId, false)
+    private val litAnimation: Animation<TextureRegion>? = litSchedule?.let { loadAnimation(door.litSpriteId, false) }
     private val animationDuration: Float = openAnimation.animationDuration
     private val shadowAnimation: Animation<TextureRegion>? =
-        if (door.type == DoorType.LARGE_WOODEN_CAVE_GATE) loadAnimation(true) else null
+        if (door.type == DoorType.LARGE_WOODEN_CAVE_GATE) loadAnimation(door.spriteId, true) else null
     private var shadowFrame: TextureRegion? = null
 
     override fun receive(event: Event) {
@@ -52,7 +55,7 @@ class GraphicsDoor(
     }
 
     private fun setPlayMode() {
-        openAnimation.playMode = when (state) {
+        getCurrentAnimation().playMode = when (state) {
             EntityState.CLOSING -> Animation.PlayMode.REVERSED
             else -> Animation.PlayMode.NORMAL
         }
@@ -65,7 +68,7 @@ class GraphicsDoor(
             state == EntityState.CLOSING -> frameTime + dt
             else -> 0f
         }
-        currentFrame = openAnimation.getKeyFrame(frameTime)
+        currentFrame = getCurrentAnimation().getKeyFrame(frameTime)
         shadowFrame = shadowAnimation?.getKeyFrame(frameTime)
     }
 
@@ -73,8 +76,16 @@ class GraphicsDoor(
         return openAnimation    // todo, doorshadow is not possible in cutscenes this way atm.
     }
 
-    private fun loadAnimation(isShadow: Boolean): Animation<TextureRegion> {
-        val textureFrames: Array<Array<TextureRegion>> = Utils.getDoorImage(door.spriteId, door.width.toInt(), isShadow)
+    private fun getCurrentAnimation(): Animation<TextureRegion> {
+        return if (isLit()) litAnimation!! else openAnimation
+    }
+
+    private fun isLit(): Boolean {
+        return litSchedule?.isLit() == true
+    }
+
+    private fun loadAnimation(spriteId: String, isShadow: Boolean): Animation<TextureRegion> {
+        val textureFrames: Array<Array<TextureRegion>> = Utils.getDoorImage(spriteId, door.width.toInt(), isShadow)
         val frames: GdxArray<TextureRegion> = gdxArrayOf(textureFrames[0][0], textureFrames[1][0], textureFrames[2][0], textureFrames[3][0])
         return Animation(Constant.FAST_FRAMES, frames, Animation.PlayMode.NORMAL)
     }

@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Pixmap
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.graphics.glutils.FrameBuffer
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
@@ -104,8 +105,10 @@ class WorldRenderer(
         render(BOTTOM_LAYERS)
         renderLowerTextures()
         render(UNDER_LAYERS)
+        renderLampLayer(mapManager.getCurrentUnderLampLayer())
         renderDynamicMapEntities(renderEntities)
         render(OVER_LAYERS)
+        renderLampLayer(mapManager.getCurrentOverLampLayer())
         renderTorches()
         renderWeather.invoke()
         renderLightmap()
@@ -145,6 +148,14 @@ class WorldRenderer(
         renderEntities.invoke(batch)
         mapManager.getUpperConditionTextures().forEach { it.render(batch) }
         batch.end()
+    }
+
+    private fun renderLampLayer(lampLayer: TiledMapTileLayer?) {
+        lampLayer?.let {
+            beginRender()
+            renderTileLayer(it)
+            endRender()
+        }
     }
 
     private fun renderTorches() {
