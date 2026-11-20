@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="76" height="116" tilewidth="24" tileheight="24" infinite="0" nextlayerid="25" nextobjectid="332">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="76" height="116" tilewidth="24" tileheight="24" infinite="0" nextlayerid="27" nextobjectid="363">
  <properties>
   <property name="ambient_light" value="day_cycle"/>
   <property name="bgm" value="bgm_lastdenn"/>
@@ -26,6 +26,7 @@
  </tileset>
  <tileset firstgid="29291" source="tilesets/fsm_forest01_c.tsx"/>
  <tileset firstgid="30315" source="tilesets/fsm_forest01_b.tsx"/>
+ <tileset firstgid="31339" source="tilesets/fsm_flame01.tsx"/>
  <layer id="2" name="under0_none" width="76" height="116">
   <data encoding="base64" compression="zlib">
    eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAvgyJwAAB
@@ -69,6 +70,22 @@
  <layer id="9" name="over8_smoke" width="76" height="116">
   <data encoding="base64" compression="zlib">
    eJzt1cdOVGEchvFPmiau3JnQq25E3VKn0Da6QFwxQ28LVgRMlN65AU2UXvUGdEOvegHqhl71Hmg+LIjuzEmGD03eJ/lllufkPZP8jVFKKaWUUkoppZRSSimllFJKKaWUUkoppZSyU3KKMQ/xCI9Trvtt/v1cbOSGB17t9dfy2egZCvBceymllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSv03pdYbk4Z0ZCATLrjhgRdZyEZO/XW/7fVXyAY++FGEYpSgFGUoRwUqUaW9TCMbNKEZLWhFG9rRgU50oRs92sv0s8EABjGEYYxgFGMYxwQmMaW9zDQbzGAWc5jHAhaxhGWsYBVr2suss8EGNrGFbexgF3vYxwEOcaS9zDEbnOAUZzi/2KTBmBsIQjBCEIqwhqt/H6f3Ohd5Fr9jOBtEIBJRiEYMYhGHeCQgEUkW9nJ6r6tRY3GvVDZIQzoykAkX3PDAiyxkI8fCXk7vdS/6LO5VyAY++FGEYpSgFGUoRwUqUWVhL6f3+j0+WNyrkQ2a0IwWtKIN7ehAJ7rQjR4Lezm915/xxeJe/WwwgEEMYRgjGMUYxjGBSUxZ2Mvpvf6Bnxb3mmaDGcxiDvNYwCKWsIwVrGINXwuMqc035nWdMW/qAv8+Tu/1Tdyy8B0vW+dZG9jEFraxg13sYR8HOMQR7vqMuY2XbPXqCvZyeq/v4b7FvY551glOcYbzi2e/4HsiCMEIQSjC8ICtkp8a85at3tUF/n/m9F7nIs/iXuFsEIFIRCEaMYhFHOKRgEQkoe+JMXf8v38/stWnAO7l9F5Xo8biXqlskIZ0ZCATLrjhgRdZyEbOH/+vy99vbPU9gHs5vde96LO4VyEb+OBHEYpRglKUoRwVqEQVfgFAenBM
+  </data>
+ </layer>
+ <layer id="26" name="under_lit" width="76" height="116">
+  <properties>
+   <property name="litFrom" value="19:00"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt2LENgDAQA0DvANMmo0NBnSr6KnpxN4ErW3ICAAAAAAAAAAAAAAAAAAAAANDTM5J3nE7RxzWTe55OAUAXdrbGzgL0Yudq7BwAAADAv+z+M//aavef+ddgT6/U6BUAAAAAAACA1QeByxgx
+  </data>
+ </layer>
+ <layer id="25" name="over_lit" width="76" height="116">
+  <properties>
+   <property name="litFrom" value="19:00"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt2bENgDAQBMFrAAq264aYmABZFhLWi5kKLv39BAAAAAAAgDeOlpxt9Yo6tp7sffUKAACAetyfc9yfAAAAAFDfqIvqpnejLqqbAgAAAAAA8Gf+i3P8FwEAAAAA+IJ+P0e/BwAAAACAZxdX/heh
   </data>
  </layer>
  <objectgroup color="#0055ff" id="11" name="sound" visible="0">
@@ -236,7 +253,7 @@
   <object id="308" name="sparkle_ryiah_crate" type="none" x="1344" y="1632" width="48" height="48"/>
   <object id="319" name="sparkle_lastdenn_barrel" type="none" x="336" y="1680" width="48" height="48"/>
  </objectgroup>
- <objectgroup color="#55ff7f" id="14" name="npc">
+ <objectgroup color="#55ff7f" id="14" name="npc" visible="0">
   <object id="230" name="soldier12" type="inv" x="24" y="2280" width="6" height="6">
    <properties>
     <property name="conversation" value="guarding_till_1500"/>
@@ -343,7 +360,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup color="#55aaff" id="15" name="spawn">
+ <objectgroup color="#55aaff" id="15" name="spawn" visible="0">
   <object id="1" name="alva_road_east" type="main" x="0" y="2448" width="48" height="24"/>
   <object id="289" name="alva_road_east" type="secret" x="192" y="2748" width="48" height="24"/>
   <object id="3" name="lastdenn_inn" x="576" y="2256" width="48" height="24"/>
@@ -370,7 +387,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup color="#ffff7f" id="16" name="portal">
+ <objectgroup color="#ffff7f" id="16" name="portal" visible="0">
   <object id="2" name="alva_road_east" type="main" x="-24" y="2376" width="24" height="168"/>
   <object id="292" name="alva_road_east" type="secret" x="144" y="2748" width="48" height="24"/>
   <object id="13" name="lastdenn_inn" x="576" y="2226" width="48" height="24"/>
@@ -454,7 +471,7 @@
   <object id="277" name="event_lastdenn_pier_guards" type="discover" x="672" y="798" width="48" height="6"/>
   <object id="304" name="event_lastdenn_pier_guard" type="discover" x="552" y="336" width="6" height="96"/>
  </objectgroup>
- <objectgroup color="#aaff00" id="20" name="scheduled">
+ <objectgroup color="#aaff00" id="20" name="scheduled" visible="0">
   <object id="172" name="santino11" x="1152" y="2136" width="48" height="24"/>
   <object id="173" name="santino12" x="1152" y="2232" width="48" height="24"/>
   <object id="174" name="santino13" x="816" y="2232" width="48" height="24"/>
@@ -493,5 +510,100 @@
  </objectgroup>
  <objectgroup color="#ffffff" id="24" name="lights">
   <object id="331" x="1056" y="2376" width="48" height="48"/>
+  <object id="343" x="774" y="510" width="36" height="30">
+   <properties>
+    <property name="litFrom" value="19:00"/>
+   </properties>
+  </object>
+  <object id="345" x="726" y="1230" width="36" height="30">
+   <properties>
+    <property name="litFrom" value="19:00"/>
+   </properties>
+  </object>
+  <object id="346" x="918" y="1230" width="36" height="30">
+   <properties>
+    <property name="litFrom" value="19:00"/>
+   </properties>
+  </object>
+  <object id="347" x="1158" y="798" width="36" height="30">
+   <properties>
+    <property name="litFrom" value="19:00"/>
+   </properties>
+  </object>
+  <object id="348" x="726" y="2286" width="36" height="30">
+   <properties>
+    <property name="litFrom" value="19:00"/>
+   </properties>
+  </object>
+  <object id="349" x="726" y="1806" width="36" height="30">
+   <properties>
+    <property name="litFrom" value="19:00"/>
+   </properties>
+  </object>
+  <object id="350" x="594" y="2214" width="12" height="30">
+   <properties>
+    <property name="litFrom" value="19:00"/>
+   </properties>
+  </object>
+  <object id="351" x="642" y="1734" width="12" height="30">
+   <properties>
+    <property name="litFrom" value="19:00"/>
+   </properties>
+  </object>
+  <object id="352" x="1074" y="1590" width="12" height="30">
+   <properties>
+    <property name="litFrom" value="19:00"/>
+   </properties>
+  </object>
+  <object id="353" x="546" y="1446" width="12" height="30">
+   <properties>
+    <property name="litFrom" value="19:00"/>
+   </properties>
+  </object>
+  <object id="354" x="546" y="1068" width="12" height="30">
+   <properties>
+    <property name="litFrom" value="19:00"/>
+   </properties>
+  </object>
+  <object id="355" x="1266" y="534" width="12" height="30">
+   <properties>
+    <property name="litFrom" value="19:00"/>
+   </properties>
+  </object>
+  <object id="356" x="1158" y="2118" width="36" height="30">
+   <properties>
+    <property name="litFrom" value="19:00"/>
+   </properties>
+  </object>
+  <object id="357" x="588" y="1416" width="24" height="24">
+   <properties>
+    <property name="litFrom" value="19:00"/>
+   </properties>
+  </object>
+  <object id="358" x="684" y="1704" width="24" height="24">
+   <properties>
+    <property name="litFrom" value="19:00"/>
+   </properties>
+  </object>
+  <object id="359" x="636" y="2184" width="24" height="24">
+   <properties>
+    <property name="litFrom" value="19:00"/>
+   </properties>
+  </object>
+  <object id="360" x="1068" y="2088" width="24" height="24">
+   <properties>
+    <property name="litFrom" value="19:00"/>
+   </properties>
+  </object>
+  <object id="361" x="1260" y="2088" width="24" height="24">
+   <properties>
+    <property name="litFrom" value="19:00"/>
+   </properties>
+  </object>
+  <object id="362" x="1020" y="1560" width="24" height="24">
+   <properties>
+    <property name="litFrom" value="19:00"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
