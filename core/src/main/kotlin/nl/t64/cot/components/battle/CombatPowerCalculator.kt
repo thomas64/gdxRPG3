@@ -7,7 +7,8 @@ import kotlin.math.pow
 import kotlin.math.sqrt
 
 
-private const val SPEED_AND_AP_WEIGHT = 1.2f   // > 1: speed and ap count a bit more than linear
+private const val AP_WEIGHT = 1.2f      // > 1: ap counts a bit more than linear
+private const val SPEED_WEIGHT = 2.5f   // well above 1: a fast character strikes several times before slower ones can act
 
 class CombatPowerCalculator {
 
@@ -18,8 +19,8 @@ class CombatPowerCalculator {
         } else {
             character.getCalculatedTotalDamage().coerceAtLeast(1)
         }
-        val actionPoints: Float = character.getCalculatedActionPoints().coerceAtLeast(1).toFloat().pow(SPEED_AND_AP_WEIGHT)
-        val turnFrequency: Float = (10 + character.getCalculatedTotalStatOf(StatItemId.SPEED)).toFloat().pow(SPEED_AND_AP_WEIGHT)
+        val actionPoints: Float = character.getCalculatedActionPoints().coerceAtLeast(1).toFloat().pow(AP_WEIGHT)
+        val turnFrequency: Float = (10 + character.getCalculatedTotalStatOf(StatItemId.SPEED)).toFloat().pow(SPEED_WEIGHT)
         val attackPowerPerTurn: Float = actionPoints * character.getBestDamagePerAp()
         val offenseOverTime: Float = damage * attackPowerPerTurn * turnFrequency
         return sqrt(effectiveHp * offenseOverTime)
