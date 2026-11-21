@@ -12,7 +12,7 @@ import nl.t64.cot.screens.battle.BattleUtils
 
 
 internal const val TURN_THRESHOLD: Int = 200
-private const val BASE_TURN_COUNTER_GAIN: Int = 10
+internal const val BASE_TURN_COUNTER_GAIN: Int = 10
 private const val PENALTY_AP: Int = 4
 
 class Participant(
