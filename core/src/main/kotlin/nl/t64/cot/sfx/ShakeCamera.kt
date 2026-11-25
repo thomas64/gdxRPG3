@@ -50,7 +50,7 @@ class ShakeCamera(x: Float = 0f, y: Float = 0f, aShakeRadius: Float = SHAKE_RADI
         secondsSinceNewAngle += dt
         if (secondsSinceNewAngle < SECONDS_BETWEEN_ANGLES) return
 
-        secondsSinceNewAngle = 0f
+        secondsSinceNewAngle %= SECONDS_BETWEEN_ANGLES
         seedRandomAngle()
     }
 

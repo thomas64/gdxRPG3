@@ -34,7 +34,7 @@ private const val DODGE_DISTANCE = 60f
 private const val DODGE_DURATION = 0.1f
 private const val DODGE_HOLD_DURATION = 0.2f
 private const val DODGE_BACK_DURATION = 0.15f
-private const val SHAKE_INTENSITY = 60f
+private const val SHAKE_INTENSITY = 80f
 private const val CRITICAL_SHAKE_INTENSITY = 120f
 private const val SHAKE_DURATION = 0.3f
 
@@ -146,7 +146,7 @@ class AttackScene(
     private fun playImpact(singleData: AttackData) {
         singleData.getImpactSounds().forEach { playSe(it) }
         possiblePlayAnimation(singleData)
-        shakeOrDodgeTarget(singleData)
+        possibleShakeOrDodgeTarget(singleData)
         possibleReact(singleData)
         possibleStartHitStopWithScreenFlash(singleData)
         showNumberWhenReady(singleData)
@@ -165,11 +165,11 @@ class AttackScene(
         addActor(animation)
     }
 
-    private fun shakeOrDodgeTarget(singleData: AttackData) {
-        if (singleData.isMissed) {
-            dodgeTarget()
-        } else {
-            shakeTarget(singleData)
+    private fun possibleShakeOrDodgeTarget(singleData: AttackData) {
+        when {
+            singleData.isMissed -> dodgeTarget()
+            singleData.isBlocked -> return
+            else -> shakeTarget(singleData)
         }
     }
 
