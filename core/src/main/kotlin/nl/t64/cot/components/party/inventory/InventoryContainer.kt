@@ -174,9 +174,7 @@ open class InventoryContainer(numberOfSlots: Int = 0) {
     }
 
     fun containsBook(enemyId: String): Boolean {
-        return inventory
-            .filterNotNull()
-            .any { it.id.startsWith("book_${enemyId.take(15)}") }
+        return contains("book_$enemyId")
     }
 
     fun contains(itemId: String): Boolean {

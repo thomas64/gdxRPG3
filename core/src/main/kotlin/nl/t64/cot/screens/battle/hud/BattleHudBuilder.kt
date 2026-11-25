@@ -24,6 +24,7 @@ import nl.t64.cot.constants.Constant
 import nl.t64.cot.disposeAndClear
 import nl.t64.cot.screens.FontProvider
 import nl.t64.cot.toTexture
+import kotlin.math.abs
 
 
 private const val TITLE_TEXT = "Battle...!"
@@ -159,18 +160,22 @@ class BattleHudBuilder {
                                getDisplayedAp: (Character) -> Int,
                                currentParticipantName: String
     ) {
+        val isEnemyKnown: Boolean = gameData.inventory.containsBook(enemy.id)
         val statsStack = Stack()
-        statsStack.add(createStatsTableFor(enemy, getDisplayedAp))
+        statsStack.add(createStatsTableFor(enemy, getDisplayedAp, isEnemyKnown))
         statsStack.add(createWeaponSlotFor(enemy))
         statsStack.add(createShieldSlotFor(enemy))
+        statsStack.add(createWeaponStatLabelFor(enemy, isEnemyKnown))
         statsStack.add(Image(Utils.createFullBorderWhite()))
 
         add(statsStack)
         add(createFaceImage(enemy, currentParticipantName, isFlipped = false)).row()
     }
 
-    private fun createStatsTableFor(enemy: EnemyItem, getDisplayedAp: (Character) -> Int): Table {
-        val isEnemyKnown: Boolean = gameData.inventory.containsBook(enemy.id)
+    private fun createStatsTableFor(enemy: EnemyItem,
+                                    getDisplayedAp: (Character) -> Int,
+                                    isEnemyKnown: Boolean
+    ): Table {
         val displayedAp: Int = getDisplayedAp.invoke(enemy)
         val maximumAP: Int = enemy.getCalculatedActionPoints()
 
@@ -230,6 +235,27 @@ class BattleHudBuilder {
         }
         return Table(tableSkin).apply {
             add(shieldStack).width(205f).height(Constant.FACE_SIZE)
+        }
+    }
+
+    private fun createWeaponStatLabelFor(enemy: EnemyItem, isEnemyKnown: Boolean): Container<Label> {
+        val label = Label(createWeaponStatText(enemy, isEnemyKnown), smallFontStyle)
+        return Container(label).top().left().height(35f).padTop(5f).padLeft(84f)
+    }
+
+    private fun createWeaponStatText(enemy: EnemyItem, isEnemyKnown: Boolean): String {
+        val weaponStat: StatItemId = enemy.getMinimalOfCurrentWeapon()
+        val statWithoutBonus: Int = enemy.getStatWithoutBonusOf(weaponStat)
+        val effectiveBonus: Int = enemy.getCalculatedTotalStatOf(weaponStat) - statWithoutBonus
+        val statText: String = if (isEnemyKnown) statWithoutBonus.toString() else "?"
+        return "${weaponStat.title} $statText${createBonusText(effectiveBonus)}"
+    }
+
+    private fun createBonusText(bonus: Int): String {
+        return when {
+            bonus > 0 -> " + $bonus"
+            bonus < 0 -> " - ${abs(bonus)}"
+            else -> ""
         }
     }
 

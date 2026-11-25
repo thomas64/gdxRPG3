@@ -6,7 +6,7 @@
     "price"      : 50,
     "description": [
       "This book contains information about the Blue Bat.",
-      "Keep it with you to understand it's battle attributes."
+      "Keep it with you to understand its battle attributes."
     ]
   },
   "book_purple_bat" : {
@@ -16,7 +16,7 @@
     "price"      : 50,
     "description": [
       "This book contains information about the Purple Bat.",
-      "Keep it with you to understand it's battle attributes."
+      "Keep it with you to understand its battle attributes."
     ]
   },
   "book_green_slime": {
@@ -26,7 +26,7 @@
     "price"      : 50,
     "description": [
       "This book contains information about the Green Slime.",
-      "Keep it with you to understand it's battle attributes."
+      "Keep it with you to understand its battle attributes."
     ]
   },
   "book_blue_slime" : {
@@ -36,7 +36,7 @@
     "price"      : 50,
     "description": [
       "This book contains information about the Blue Slime.",
-      "Keep it with you to understand it's battle attributes."
+      "Keep it with you to understand its battle attributes."
     ]
   }
 }

@@ -10,7 +10,6 @@ import nl.t64.cot.components.party.skills.SkillContainer
 import nl.t64.cot.components.party.skills.SkillItem
 import nl.t64.cot.components.party.skills.SkillItemId
 import nl.t64.cot.components.party.stats.StatContainer
-import nl.t64.cot.components.party.stats.StatItem
 import nl.t64.cot.components.party.stats.StatItemId
 import kotlin.math.roundToInt
 import kotlin.random.Random
@@ -96,8 +95,7 @@ abstract class Character(
     }
 
     fun getCalculatedTotalStatOf(statItemId: StatItemId): Int {
-        val statItem = stats.getById(statItemId)
-        return getRealTotalStatOf(statItem).takeIf { it > 0 } ?: 1
+        return getRealTotalStatOf(statItemId).takeIf { it > 0 } ?: 1
     }
 
     fun getCalculatedTotalSkillOf(skillItemId: SkillItemId): Int {
@@ -106,8 +104,12 @@ abstract class Character(
         return getRealTotalSkillOf(skillItem).takeIf { it > 0 } ?: 0
     }
 
-    private fun getRealTotalStatOf(statItem: StatItem): Int {
-        return statItem.rank + inventory.getSumOfStat(statItem.id) + bonus.getStatBonus(statItem.id)
+    private fun getRealTotalStatOf(statItemId: StatItemId): Int {
+        return getStatWithoutBonusOf(statItemId) + bonus.getStatBonus(statItemId)
+    }
+
+    fun getStatWithoutBonusOf(statItemId: StatItemId): Int {
+        return stats.getById(statItemId).rank + inventory.getSumOfStat(statItemId)
     }
 
     private fun getRealTotalSkillOf(skillItem: SkillItem): Int {
@@ -141,12 +143,15 @@ abstract class Character(
     fun getCalculatedTotalDamage(): Int {
         if (isUnarmed) return 0
 
-        val currentWeaponMinimal: StatItemId = inventory.getStatItemIdOfMinimalOfCurrentWeapon()!!
         // todo, moet voor ranged wel sum of all equipment zijn? volgens mij geven andere item geen damage meer.
         val totalDamageOfAllEquipment: Int = getSumOfEquipmentOfCalc(CalcAttributeId.DAMAGE)
-        val attributeAmount: Int = getCalculatedTotalStatOf(currentWeaponMinimal)
+        val attributeAmount: Int = getCalculatedTotalStatOf(getMinimalOfCurrentWeapon())
         val attackerDamage: Float = (totalDamageOfAllEquipment / 100f) * (5f * attributeAmount)
         return (totalDamageOfAllEquipment + attackerDamage).roundToInt()
+    }
+
+    fun getMinimalOfCurrentWeapon(): StatItemId {
+        return inventory.getStatItemIdOfMinimalOfCurrentWeapon()!!
     }
 
     fun getCalculatedTotalProtection(): Int {
