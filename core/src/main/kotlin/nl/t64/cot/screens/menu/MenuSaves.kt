@@ -6,37 +6,29 @@ import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.*
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
-import com.badlogic.gdx.scenes.scene2d.ui.List
 import com.badlogic.gdx.scenes.scene2d.ui.List.ListStyle
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Array
-import com.badlogic.gdx.utils.ScreenUtils
-import nl.t64.cot.Utils
-import nl.t64.cot.Utils.gameData
-import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.Utils.profileManager
 import nl.t64.cot.Utils.resourceManager
-import nl.t64.cot.Utils.screenManager
-import nl.t64.cot.audio.AudioEvent
-import nl.t64.cot.audio.playSe
-import nl.t64.cot.audio.stopAllBgm
-import nl.t64.cot.audio.stopSe
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
 import nl.t64.cot.gamestate.INVALID_PROFILE_VIEW
+import nl.t64.cot.gamestate.SaveFile
 import nl.t64.cot.screens.dialog.QuestionDialog
 import nl.t64.cot.toDrawable
 import kotlin.concurrent.thread
+import com.badlogic.gdx.scenes.scene2d.ui.List as GdxList
 
 
-private const val TITLE_LABEL = "Load profile"
+private const val TITLE_LABEL = "Load save"
 private const val MENU_ITEM_LOAD = "Load"
 private const val MENU_ITEM_BACK = "Back"
 
 private val LOAD_MESSAGE = """
     All progress after the last save will be lost.
-    Are you sure you want to load this profile?""".trimIndent()
+    Are you sure you want to load this save?""".trimIndent()
 
 private const val MENU_X = 604f
 private const val TITLE_SPACE_BOTTOM = 45f
@@ -46,17 +38,35 @@ private const val BUTTON_SPACE_RIGHT = 20f
 private const val NUMBER_OF_ITEMS = 2
 private const val EXIT_INDEX = 1
 
-class MenuLoadPause : MenuScreen() {
+class MenuSavesMain : MenuSaves() {
+    override val titleLogo: Texture = resourceManager.getTextureAsset(TITLE_LOGO_B)
+    override val fontColor: Color = Color.BLACK
+    override val selectColor: Color = Constant.LIGHT_RED
+    override val backScreen: ScreenType = ScreenType.MENU_LOAD_MAIN
 
+    override fun loadSelectedSave() {
+        fadeBeforeOpenWorldScreen(selectedSaveFile)
+    }
+}
+
+class MenuSavesPause : MenuSaves() {
     override val titleLogo: Texture = resourceManager.getTextureAsset(TITLE_LOGO_W)
     override val fontColor: Color = Color.WHITE
     override val selectColor: Color = Constant.DARK_RED
     override val backScreen: ScreenType = ScreenType.MENU_PAUSE
 
-    private lateinit var profiles: Array<String>
+    override fun loadSelectedSave() {
+        QuestionDialog(LOAD_MESSAGE) { fadeBeforeOpenWorldScreen(selectedSaveFile) }.show(stage)
+    }
+}
+
+abstract class MenuSaves : MenuLoad() {
+
+    private lateinit var saveFiles: List<SaveFile>
+    private lateinit var saves: Array<ListRow>
 
     private lateinit var topTable: Table
-    private lateinit var listItems: List<String>
+    private lateinit var listItems: GdxList<ListRow>
     private lateinit var group: VerticalGroup
 
     private lateinit var listenerKeyVertical: ListenerKeyVertical
@@ -65,9 +75,13 @@ class MenuLoadPause : MenuScreen() {
     private var selectedListIndex = 0
     private var isLoaded = false
 
+    protected val selectedSaveFile: SaveFile get() = saveFiles[selectedListIndex]
+
+    protected abstract fun loadSelectedSave()
+
     override fun setupScreen() {
         isLoaded = false
-        profiles = profileManager.getVisualLoadingArrayForLoadedProfile()
+        saves = profileManager.getVisualLoadingArrayForSaves().toListRows()
 
         createTables()
         applyHorizontalListener()
@@ -80,27 +94,29 @@ class MenuLoadPause : MenuScreen() {
         super.selectedMenuIndex = 0
         setCurrentTextButtonToSelected()
 
-        thread {
-            val loadedProfiles = profileManager.getVisualProfileArrayForLoadedProfile()
-            Gdx.app.postRunnable {
-                profiles = loadedProfiles
-                listItems.setItems(profiles)
-                listItems.selectedIndex = 0
-                applyAllListeners()
-                isLoaded = true
-            }
-        }
+        thread { loadSaves() }
     }
 
-    override fun render(dt: Float) {
-        ScreenUtils.clear(Color.BLACK)
-        stage.act(dt)
+    override fun updateSelectedIndices() {
         if (isLoaded) {
             selectedListIndex = listItems.selectedIndex
             listenerKeyVertical.updateSelectedIndex(selectedListIndex)
         }
         listenerKeyHorizontal.updateSelectedIndex(selectedMenuIndex)
-        stage.draw()
+    }
+
+    private fun loadSaves() {
+        val loadedSaveFiles: List<SaveFile> = profileManager.getSaveFilesOfSelectedProfile()
+        val loadedSaves: Array<ListRow> = profileManager.getVisualSaveArray(loadedSaveFiles).toListRows()
+        Gdx.app.postRunnable {
+            saveFiles = loadedSaveFiles
+            saves = loadedSaves
+            listItems.setItems(saves)
+            listItems.selectedIndex = 0
+            placeButtonsBelowList()
+            applyAllListeners()
+            isLoaded = true
+        }
     }
 
     private fun selectMenuItem() {
@@ -112,35 +128,10 @@ class MenuLoadPause : MenuScreen() {
     }
 
     private fun processLoadButton() {
-        if (!isLoaded || profiles[selectedListIndex].contains(INVALID_PROFILE_VIEW)) {
+        if (!isLoaded || saves[selectedListIndex].text.contains(INVALID_PROFILE_VIEW)) {
             errorSound()
         } else {
-            QuestionDialog(LOAD_MESSAGE) { fadeBeforeOpenWorldScreen() }.show(stage)
-        }
-    }
-
-    private fun errorSound() {
-        stopSe(AudioEvent.SE_MENU_CONFIRM)
-        playSe(AudioEvent.SE_MENU_ERROR)
-    }
-
-    private fun fadeBeforeOpenWorldScreen() {
-        Gdx.input.inputProcessor = null
-        Utils.setGamepadInputProcessor(null)
-        stage.addAction(Actions.sequence(Actions.fadeOut(Constant.FADE_DURATION),
-                                         Actions.run { stopAllBgm() },
-                                         Actions.run { openWorldScreen() }))
-    }
-
-    private fun openWorldScreen() {
-        mapManager.disposeOldMaps()
-        screenManager.getScreen(ScreenType.WORLD) // just load the constructor.
-        profileManager.loadProfileFromPause(selectedListIndex)
-        if (gameData.cutscenes.isEverPlayedBefore(ScreenType.SCENE_INTRO)) {
-            screenManager.setScreen(ScreenType.WORLD)
-        } else {
-            gameData.cutscenes.setPlayedEver(ScreenType.SCENE_INTRO)
-            screenManager.setScreen(ScreenType.SCENE_INTRO)
+            loadSelectedSave()
         }
     }
 
@@ -162,8 +153,8 @@ class MenuLoadPause : MenuScreen() {
         val loadButton = TextButton(MENU_ITEM_LOAD, TextButtonStyle(buttonStyle))
         val backButton = TextButton(MENU_ITEM_BACK, TextButtonStyle(buttonStyle))
 
-        listItems = List(listStyle)
-        listItems.setItems(profiles)
+        listItems = GdxList(listStyle)
+        listItems.setItems(saves)
         listItems.alignment = Align.center
         group = VerticalGroup()
         group.addActor(listItems)
@@ -182,8 +173,14 @@ class MenuLoadPause : MenuScreen() {
         table.setFillParent(true)
         table.add(loadButton).spaceRight(BUTTON_SPACE_RIGHT)
         table.add(backButton)
-        table.top().padTop(TITLE_SPACE_BOTTOM + topTable.prefHeight + BUTTON_SPACE_TOP)
-            .right().padRight(((logo.width * logo.scaleX) / 2f) - (table.prefWidth / 2f) + LOGO_PAD)
+        table.top().right().padRight(((logo.width * logo.scaleX) / 2f) - (table.prefWidth / 2f) + LOGO_PAD)
+        placeButtonsBelowList()
+    }
+
+    private fun placeButtonsBelowList() {
+        table.padTop(TITLE_SPACE_BOTTOM + topTable.prefHeight + BUTTON_SPACE_TOP)
+        // changing the padding doesn't trigger a new layout, so after loading the buttons would stay in place.
+        table.invalidate()
     }
 
     private fun applyHorizontalListener() {

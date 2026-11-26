@@ -1,7 +1,5 @@
 package nl.t64.cot.gamestate
 
-import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.Preferences
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.Json
 import com.badlogic.gdx.utils.SerializationException
@@ -12,20 +10,13 @@ import nl.t64.cot.Utils.preferenceManager
 import nl.t64.cot.Utils.worldScreen
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.screens.world.map.FogOfWar
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 
-private const val SAVE_FILES = "save1.dat,save2.dat,save3.dat,save4.dat,save5.dat,save6.dat,save7.dat,autosave.dat"
-private const val FOW_FILES = "fow1.dat,fow2.dat,fow3.dat,fow4.dat,fow5.dat,fow6.dat,fow7.dat,autofow.dat"
-private const val LOADING = ",,,Loading...,,,,"
-private const val PROFILE_ID_KEY = "id"
-private const val PROFILE_INDEX_KEY = "index"
-private const val PROFILE_SAVE_DATE_KEY = "saveDate"
-private const val PROFILE_SAVE_STATE_KEY = "saveState"
-private const val PROFILE_FOG_OF_WAR_KEY = "fogOfWar"
-private const val DATE_PATTERN = "yyyy-MM-dd HH:mm"
-const val AUTOSAVE_INDEX = 7
+private const val NUMBER_OF_PROFILES = 7
+private const val AUTOSAVE_SUFFIXES = "a,b,c"
+private const val LOADING_PROFILES = ",,,Loading...,,,"
+private const val LOADING_SAVES = "Loading..."
+private const val AUTOSAVE_NAME = "Autosave"
 const val DEFAULT_EMPTY_PROFILE_VIEW = " [...]"
 const val INVALID_PROFILE_VIEW = " [Invalid]"
 
@@ -35,22 +26,25 @@ class ProfileManager {
     private val json = Json().apply { ignoreUnknownFields = true }
     private var saveState = GdxMap<String, Any?>()
     private var currentProfileId: String = ""
-    private var currentIndex = -1
+    private var selectedProfileIndex = -1
 
     fun doesProfileExist(profileIndex: Int): Boolean {
-        val (saveFileContent: Preferences, _) = getSaveFilesContentBy(profileIndex)
-        return saveFileContent.contains(PROFILE_SAVE_STATE_KEY)
+        return getSaveFilesOf(profileIndex).any { it.exists() }
     }
 
-    fun selectNewProfile(profileIndex: Int) {
-        currentIndex = profileIndex
+    fun selectProfile(profileIndex: Int) {
+        selectedProfileIndex = profileIndex
+    }
+
+    fun getSaveFilesOfSelectedProfile(): List<SaveFile> {
+        return getExistingSaveFilesNewestFirstOf(selectedProfileIndex)
     }
 
     fun createNewProfile(profileId: String) {
         currentProfileId = profileId.ifEmpty { getDefaultId() }
         saveState.clear()
         brokerManager.profileObservers.notifyCreateProfile(this)
-        writeProfileToDisk(currentIndex)
+        writeProfileTo(getManualSaveFileOf(selectedProfileIndex))
     }
 
     @Suppress("NON_PUBLIC_CALL_FROM_PUBLIC_INLINE")
@@ -64,167 +58,125 @@ class ProfileManager {
 
     fun autoSaveAfterBattle(playerPosition: Vector2) {
         brokerManager.profileObservers.notifySaveProfileAfterBattle(this, playerPosition)
-        writeProfileToDisk(AUTOSAVE_INDEX)
+        writeProfileTo(getOldestAutosaveFileOf(selectedProfileIndex))
         worldScreen.showMessageTooltip("Game saved.")
     }
 
     fun autoSave() {
         brokerManager.profileObservers.notifySaveProfile(this)
-        writeProfileToDisk(AUTOSAVE_INDEX)
+        writeProfileTo(getOldestAutosaveFileOf(selectedProfileIndex))
         worldScreen.showMessageTooltip("Game saved.")
     }
 
     fun saveProfile() {
-        removeProfile(AUTOSAVE_INDEX)
+        getAutosaveFilesOf(selectedProfileIndex).forEach { it.remove() }
         brokerManager.profileObservers.notifySaveProfile(this)
-        writeProfileToDisk(currentIndex)
+        writeProfileTo(getManualSaveFileOf(selectedProfileIndex))
         worldScreen.showMessageTooltip("Game saved.")
     }
 
-    fun loadProfileFromMain(profileIndex: Int) {
-        val (saveFileContent: Preferences, fogOfWarFileContent: Preferences) = getSaveFilesContentBy(profileIndex)
-        currentProfileId = saveFileContent.getString(PROFILE_ID_KEY)
-        currentIndex = saveFileContent.getInteger(PROFILE_INDEX_KEY)
-        loadProfile(saveFileContent, fogOfWarFileContent)
-    }
-
-    fun loadProfileFromPause(profileIndex: Int) {
-        val modIndex: Int = if (profileIndex == 0) currentIndex else AUTOSAVE_INDEX
-        val (saveFileContent: Preferences, fogOfWarFileContent: Preferences) = getSaveFilesContentBy(modIndex)
-        loadProfile(saveFileContent, fogOfWarFileContent)
-    }
-
-    private fun loadProfile(saveFileContent: Preferences, fogOfWarFileContent: Preferences) {
-        saveState = createSaveStateFrom(saveFileContent, fogOfWarFileContent)
+    fun loadProfile(saveFile: SaveFile) {
+        currentProfileId = saveFile.profileId
+        saveState = createSaveStateFrom(saveFile)
+        saveState["fogOfWar"] = json.fromJson<FogOfWar>(saveFile.fogOfWarJson)
         brokerManager.profileObservers.notifyLoadProfile(this)
     }
 
     fun removeProfile(profileIndex: Int) {
-        val (saveFileContent: Preferences, fogOfWarContent: Preferences) = getSaveFilesContentBy(profileIndex)
-        saveFileContent.clear()
-        saveFileContent.flush()
-        fogOfWarContent.clear()
-        fogOfWarContent.flush()
+        getSaveFilesOf(profileIndex).forEach { it.remove() }
     }
 
-    fun getVisualLoadingArray(): GdxArray<String> {
-        return LOADING.split(",").toGdxArray()
+    fun getVisualLoadingArrayForProfiles(): GdxArray<String> {
+        return LOADING_PROFILES.split(",").toGdxArray()
     }
 
-    fun getVisualLoadingArrayForLoadedProfile(): GdxArray<String> {
-        return gdxArrayOf("Loading...", "")
+    fun getVisualLoadingArrayForSaves(): GdxArray<String> {
+        return gdxArrayOf(LOADING_SAVES)
     }
 
     fun getVisualProfileArray(): GdxArray<String> {
-        return getSaveFileNames().indices.map { getVisualOf(it) }.toGdxArray()
+        return (0 until NUMBER_OF_PROFILES).map { getVisualOfProfile(it) }.toGdxArray()
     }
 
-    fun getVisualProfileArrayForLoadedProfile(): GdxArray<String> {
-        return getSaveFileNames().indices
-            .map { index -> index to getSaveFilesContentBy(index) }
-            // 0 is the default value, which can actually be a valid value. So -9 is a never valid value.
-            .filter { (_, saveFileContent) -> saveFileContent.first.getInteger(PROFILE_INDEX_KEY, -9) == currentIndex }
-            .map { (index, saveFileContent) -> getVisualOf(index, saveFileContent.first) }
-            .toGdxArray()
+    fun getVisualSaveArray(saveFiles: List<SaveFile>): GdxArray<String> {
+        return saveFiles.map { getVisualOf(it, getNameOf(it)) }.toGdxArray()
     }
 
     fun getLastSaveLocation(): String {
-        val (saveFileContent: Preferences, _) = getSaveFilesContentBy(currentIndex)
-        val saveStateJsonString: String = saveFileContent.getString(PROFILE_SAVE_STATE_KEY)
-        val loadedSaveState: GdxMap<String, Any?> = json.fromJson(saveStateJsonString)
-        return loadedSaveState["mapTitle"] as String
+        val lastSaveState: GdxMap<String, Any?> = createSaveStateFrom(getManualSaveFileOf(selectedProfileIndex))
+        return lastSaveState["mapTitle"] as String
     }
 
-    private fun writeProfileToDisk(profileIndex: Int) {
-        val fogOfWar = saveState["fogOfWar"]
-        saveState.remove("fogOfWar")
+    private fun getExistingSaveFilesNewestFirstOf(profileIndex: Int): List<SaveFile> {
+        return getSaveFilesOf(profileIndex)
+            .filter { it.exists() }
+            .sortedByDescending { it.saveTime }
+    }
 
-        val (saveFileContent: Preferences, fogOfWarFileContent: Preferences) = getSaveFilesContentBy(profileIndex)
+    private fun getOldestAutosaveFileOf(profileIndex: Int): SaveFile {
+        // an empty autosave file has saveTime 0, so it is always picked before an existing one.
+        return getAutosaveFilesOf(profileIndex).minBy { it.saveTime }
+    }
 
-        saveFileContent.putString(PROFILE_ID_KEY, currentProfileId)
-        saveFileContent.putInteger(PROFILE_INDEX_KEY, currentIndex)
-        saveFileContent.putString(PROFILE_SAVE_DATE_KEY,
-                                  DateTimeFormatter.ofPattern(DATE_PATTERN).format(LocalDateTime.now()))
-        saveFileContent.putString(PROFILE_SAVE_STATE_KEY,
-                                  json.prettyPrint(json.toJson(saveState)))
-        fogOfWarFileContent.putString(PROFILE_FOG_OF_WAR_KEY,
-                                      json.prettyPrint(json.toJson(fogOfWar)))
+    private fun getSaveFilesOf(profileIndex: Int): List<SaveFile> {
+        return listOf(getManualSaveFileOf(profileIndex)) + getAutosaveFilesOf(profileIndex)
+    }
 
-        saveFileContent.flush()
-        fogOfWarFileContent.flush()
+    private fun getManualSaveFileOf(profileIndex: Int): SaveFile {
+        val profileNumber: Int = profileIndex + 1
+        return SaveFile("save$profileNumber.dat", "fow$profileNumber.dat", isAutosave = false)
+    }
 
+    private fun getAutosaveFilesOf(profileIndex: Int): List<SaveFile> {
+        val profileNumber: Int = profileIndex + 1
+        return AUTOSAVE_SUFFIXES.split(",").map {
+            SaveFile("autosave$profileNumber$it.dat", "autofow$profileNumber$it.dat", isAutosave = true)
+        }
+    }
+
+    private fun writeProfileTo(saveFile: SaveFile) {
+        val fogOfWar: Any? = saveState.remove("fogOfWar")
+        saveFile.write(currentProfileId,
+                       json.prettyPrint(json.toJson(saveState)),
+                       json.prettyPrint(json.toJson(fogOfWar)))
         saveState["fogOfWar"] = fogOfWar
     }
 
-    private fun getVisualOf(profileIndex: Int): String {
-        val (saveFileContent: Preferences, _) = getSaveFilesContentBy(profileIndex)
-        return getVisualOf(profileIndex, saveFileContent)
+    private fun getVisualOfProfile(profileIndex: Int): String {
+        val newestSaveFile: SaveFile? = getExistingSaveFilesNewestFirstOf(profileIndex).firstOrNull()
+        return newestSaveFile
+            ?.let { getVisualOf(it, it.profileId) }
+            ?: "${profileIndex + 1} $DEFAULT_EMPTY_PROFILE_VIEW"
     }
 
-    private fun getVisualOf(profileIndex: Int, saveFileContent: Preferences): String {
-        if (saveFileContent.contains(PROFILE_SAVE_STATE_KEY)) {
-            try {
-                if (!preferenceManager.isDebugModeOn) {
-                    createSaveStateFrom(saveFileContent, null)
-                }
-                return getFilledProfileView(profileIndex, saveFileContent)
-            } catch (e: SerializationException) {
-                return getInvalidProfileView(profileIndex)
-            }
+    private fun getNameOf(saveFile: SaveFile): String {
+        return if (saveFile.isAutosave) AUTOSAVE_NAME else saveFile.profileId
+    }
+
+    private fun getVisualOf(saveFile: SaveFile, name: String): String {
+        if (isValid(saveFile)) {
+            return "$name [${saveFile.saveDate}]"
         } else {
-            return getEmptyProfileView(profileIndex)
+            return "$name $INVALID_PROFILE_VIEW"
         }
     }
 
-    private fun getFilledProfileView(profileIndex: Int, saveFileContent: Preferences): String {
-        val saveDate: String = saveFileContent.getString(PROFILE_SAVE_DATE_KEY)
-        if (profileIndex == AUTOSAVE_INDEX) {
-            return "Autosave [$saveDate]"
-        } else {
-            val profileId: String = saveFileContent.getString(PROFILE_ID_KEY)
-            return "$profileId [$saveDate]"
+    private fun isValid(saveFile: SaveFile): Boolean {
+        if (preferenceManager.isDebugModeOn) return true
+        try {
+            createSaveStateFrom(saveFile)
+            return true
+        } catch (e: SerializationException) {
+            return false
         }
     }
 
-    private fun getInvalidProfileView(profileIndex: Int): String {
-        if (profileIndex == AUTOSAVE_INDEX) {
-            return "Autosave $INVALID_PROFILE_VIEW"
-        } else {
-            return "${profileIndex + 1} $INVALID_PROFILE_VIEW"
-        }
-    }
-
-    private fun getEmptyProfileView(profileIndex: Int): String {
-        if (profileIndex == AUTOSAVE_INDEX) {
-            return "Autosave $DEFAULT_EMPTY_PROFILE_VIEW"
-        } else {
-            return "${profileIndex + 1} $DEFAULT_EMPTY_PROFILE_VIEW"
-        }
-    }
-
-    private fun getSaveFilesContentBy(profileIndex: Int): Pair<Preferences, Preferences> {
-        val saveFileName: String = getSaveFileNames()[profileIndex]
-        val fogOfWarFileName: String = getFogOfWarFileNames()[profileIndex]
-        return Gdx.app.getPreferences(saveFileName) to Gdx.app.getPreferences(fogOfWarFileName)
-    }
-
-    private fun createSaveStateFrom(
-        saveFileContent: Preferences,
-        fogOfWarFileContent: Preferences?
-    ): GdxMap<String, Any?> {
-        val saveStateJsonString: String = saveFileContent.getString(PROFILE_SAVE_STATE_KEY)
-        val loadedSaveState: GdxMap<String, Any?> = json.fromJson(saveStateJsonString)
-        fogOfWarFileContent
-            ?.getString(PROFILE_FOG_OF_WAR_KEY)
-            ?.let { loadedSaveState["fogOfWar"] = json.fromJson<FogOfWar>(it) }
-        return loadedSaveState
+    private fun createSaveStateFrom(saveFile: SaveFile): GdxMap<String, Any?> {
+        return json.fromJson(saveFile.saveStateJson)
     }
 
     private fun getDefaultId(): String {
         return Constant.PLAYER_ID.replaceFirstChar { it.uppercase() }
     }
-
-    private fun getSaveFileNames(): List<String> = SAVE_FILES.split(",")
-    private fun getFogOfWarFileNames(): List<String> = FOW_FILES.split(",")
 
 }

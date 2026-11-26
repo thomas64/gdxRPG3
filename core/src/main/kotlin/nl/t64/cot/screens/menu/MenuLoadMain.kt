@@ -6,31 +6,21 @@ import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.*
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
-import com.badlogic.gdx.scenes.scene2d.ui.List
 import com.badlogic.gdx.scenes.scene2d.ui.List.ListStyle
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Array
-import com.badlogic.gdx.utils.ScreenUtils
-import nl.t64.cot.Utils
-import nl.t64.cot.Utils.audioManager
-import nl.t64.cot.Utils.gameData
-import nl.t64.cot.Utils.mapManager
 import nl.t64.cot.Utils.profileManager
 import nl.t64.cot.Utils.resourceManager
-import nl.t64.cot.Utils.screenManager
-import nl.t64.cot.audio.AudioEvent
-import nl.t64.cot.audio.playSe
-import nl.t64.cot.audio.stopAllBgm
-import nl.t64.cot.audio.stopSe
 import nl.t64.cot.constants.Constant
 import nl.t64.cot.constants.ScreenType
-import nl.t64.cot.gamestate.AUTOSAVE_INDEX
 import nl.t64.cot.gamestate.DEFAULT_EMPTY_PROFILE_VIEW
 import nl.t64.cot.gamestate.INVALID_PROFILE_VIEW
+import nl.t64.cot.gamestate.SaveFile
 import nl.t64.cot.screens.dialog.QuestionDialog
 import nl.t64.cot.toDrawable
 import kotlin.concurrent.thread
+import com.badlogic.gdx.scenes.scene2d.ui.List as GdxList
 
 
 private const val TITLE_LABEL = "Select profile"
@@ -39,11 +29,7 @@ private const val MENU_ITEM_DELETE = "Delete"
 private const val MENU_ITEM_BACK = "Back"
 
 private val DELETE_MESSAGE = """
-    This save file will be removed. Any
-    autosave file will ALSO be removed.
-    Are you sure?""".trimIndent()
-private val DELETE_MESSAGE_AUTOSAVE = """
-    This save file will be removed.
+    This profile and its autosaves will be removed.
     Are you sure?""".trimIndent()
 
 private const val MENU_X = 604f
@@ -55,29 +41,28 @@ private const val NUMBER_OF_ITEMS = 3
 private const val DELETE_INDEX = 1
 private const val EXIT_INDEX = 2
 
-class MenuLoadMain : MenuScreen() {
+class MenuLoadMain : MenuLoad() {
 
     override val titleLogo: Texture = resourceManager.getTextureAsset(TITLE_LOGO_B)
     override val fontColor: Color = Color.BLACK
     override val selectColor: Color = Constant.LIGHT_RED
     override val backScreen: ScreenType = ScreenType.MENU_MAIN
 
-    private lateinit var profiles: Array<String>
+    private lateinit var profiles: Array<ListRow>
 
     private lateinit var topTable: Table
-    private lateinit var listItems: List<String>
+    private lateinit var listItems: GdxList<ListRow>
     private lateinit var group: VerticalGroup
 
     private lateinit var listenerKeyVertical: ListenerKeyVertical
     private lateinit var listenerKeyHorizontal: ListenerKeyHorizontal
 
     private var selectedListIndex = 0
-    private var isBgmFading = false
     private var isLoaded = false
 
     override fun setupScreen() {
         isLoaded = false
-        profiles = profileManager.getVisualLoadingArray()
+        profiles = profileManager.getVisualLoadingArrayForProfiles().toListRows()
 
         createTables()
         createSomeListeners()
@@ -94,94 +79,68 @@ class MenuLoadMain : MenuScreen() {
         applyAllListeners()
     }
 
-    override fun render(dt: Float) {
-        ScreenUtils.clear(Color.BLACK)
-        stage.act(dt)
+    override fun updateSelectedIndices() {
         if (isLoaded) {
             selectedListIndex = listItems.selectedIndex
         }
         listenerKeyVertical.updateSelectedIndex(selectedListIndex)
         listenerKeyHorizontal.updateSelectedIndex(selectedMenuIndex)
-        if (isBgmFading) {
-            audioManager.certainFadeBgmBgs()
-        }
-        stage.draw()
     }
 
     private fun selectMenuItem() {
         when (selectedMenuIndex) {
-            0 -> processLoadButton()
+            0 -> processStartButton()
             1 -> processDeleteButton()
             2 -> processBackButton()
             else -> throw IllegalArgumentException("SelectedIndex not found.")
         }
     }
 
-    private fun processLoadButton() {
-        if (!isLoaded || profiles[selectedListIndex].contains(INVALID_PROFILE_VIEW)) {
-            errorSound()
-        } else if (profileManager.doesProfileExist(selectedListIndex)) {
-            fadeBeforeOpenWorldScreen()
-        } else if (selectedListIndex == AUTOSAVE_INDEX) {
-            errorSound()
+    private fun processStartButton() {
+        if (isLoaded) {
+            startSelectedProfile()
         } else {
-            newGame()
+            errorSound()
         }
     }
 
     private fun processDeleteButton() {
         if (isLoaded && profileManager.doesProfileExist(selectedListIndex)) {
-            val question = if (selectedListIndex == AUTOSAVE_INDEX) DELETE_MESSAGE_AUTOSAVE else DELETE_MESSAGE
-            QuestionDialog(question) { deleteSaveFile() }.show(stage)
+            QuestionDialog(DELETE_MESSAGE) { deleteProfile() }.show(stage)
         } else {
             errorSound()
         }
     }
 
-    private fun newGame() {
-        profileManager.selectNewProfile(selectedListIndex)
-        processButton(ScreenType.MENU_NEW)
-    }
-
-    private fun errorSound() {
-        stopSe(AudioEvent.SE_MENU_CONFIRM)
-        playSe(AudioEvent.SE_MENU_ERROR)
-    }
-
-    private fun fadeBeforeOpenWorldScreen() {
-        Gdx.input.inputProcessor = null
-        Utils.setGamepadInputProcessor(null)
-        stage.addAction(Actions.sequence(Actions.run { isBgmFading = true },
-                                         Actions.fadeOut(Constant.FADE_DURATION),
-                                         Actions.run { isBgmFading = false },
-                                         Actions.run { stopAllBgm() },
-                                         Actions.run { openWorldScreen() }))
-    }
-
-    private fun openWorldScreen() {
-        mapManager.disposeOldMaps()
-        screenManager.getScreen(ScreenType.WORLD) // just load the constructor.
-        profileManager.loadProfileFromMain(selectedListIndex)
-        if (gameData.cutscenes.isEverPlayedBefore(ScreenType.SCENE_INTRO)) {
-            screenManager.setScreen(ScreenType.WORLD)
-        } else {
-            gameData.cutscenes.setPlayedEver(ScreenType.SCENE_INTRO)
-            screenManager.setScreen(ScreenType.SCENE_INTRO)
+    private fun startSelectedProfile() {
+        profileManager.selectProfile(selectedListIndex)
+        val saveFiles: List<SaveFile> = profileManager.getSaveFilesOfSelectedProfile()
+        when (saveFiles.size) {
+            0 -> processButton(ScreenType.MENU_NEW)
+            1 -> loadOnlySave(saveFiles.single())
+            else -> processButton(ScreenType.MENU_SAVES_MAIN)
         }
     }
 
-    private fun deleteSaveFile() {
-        profileManager.removeProfile(AUTOSAVE_INDEX)
+    private fun loadOnlySave(saveFile: SaveFile) {
+        if (profiles[selectedListIndex].text.contains(INVALID_PROFILE_VIEW)) {
+            errorSound()
+        } else {
+            fadeBeforeOpenWorldScreen(saveFile)
+        }
+    }
+
+    private fun deleteProfile() {
         profileManager.removeProfile(selectedListIndex)
         isLoaded = false
-        profiles = profileManager.getVisualLoadingArray()
+        profiles = profileManager.getVisualLoadingArrayForProfiles().toListRows()
         listItems.setItems(profiles)
         updateMenuIndex(0)
         thread { loadProfiles() }
     }
 
     private fun loadProfiles() {
-        val loadedProfiles = profileManager.getVisualProfileArray()
+        val loadedProfiles: Array<ListRow> = profileManager.getVisualProfileArray().toListRows()
         Gdx.app.postRunnable {
             profiles = loadedProfiles
             listItems.setItems(profiles)
@@ -192,7 +151,7 @@ class MenuLoadMain : MenuScreen() {
     }
 
     private fun areAllProfilesEmpty(): Boolean {
-        return profiles.all { it.contains(DEFAULT_EMPTY_PROFILE_VIEW) }
+        return profiles.all { it.text.contains(DEFAULT_EMPTY_PROFILE_VIEW) }
     }
 
     private fun createTables() {
@@ -210,11 +169,11 @@ class MenuLoadMain : MenuScreen() {
 
         // actors
         val titleLabel = Label(TITLE_LABEL, titleStyle)
-        val loadButton = TextButton(MENU_ITEM_START, TextButtonStyle(buttonStyle))
+        val startButton = TextButton(MENU_ITEM_START, TextButtonStyle(buttonStyle))
         val deleteButton = TextButton(MENU_ITEM_DELETE, TextButtonStyle(buttonStyle))
         val backButton = TextButton(MENU_ITEM_BACK, TextButtonStyle(buttonStyle))
 
-        listItems = List(listStyle)
+        listItems = GdxList(listStyle)
         listItems.setItems(profiles)
         listItems.alignment = Align.center
         group = VerticalGroup()
@@ -232,7 +191,7 @@ class MenuLoadMain : MenuScreen() {
         // bottom table
         table = Table()
         table.setFillParent(true)
-        table.add(loadButton).spaceRight(BUTTON_SPACE_RIGHT)
+        table.add(startButton).spaceRight(BUTTON_SPACE_RIGHT)
         table.add(deleteButton).spaceRight(BUTTON_SPACE_RIGHT)
         table.add(backButton)
         table.top().padTop(TITLE_SPACE_BOTTOM + topTable.prefHeight + BUTTON_SPACE_TOP)

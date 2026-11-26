@@ -90,7 +90,7 @@ class MenuPause : MenuScreen() {
         pauseAllBg()
         when (selectedMenuIndex) {
             0 -> processContinueButton()
-            1 -> processButton(ScreenType.MENU_LOAD_PAUSE)
+            1 -> processButton(ScreenType.MENU_SAVES_PAUSE)
             2 -> processButton(ScreenType.MENU_SETTINGS_PAUSE)
             3 -> processMainMenuButton()
             else -> throw IllegalArgumentException("SelectedIndex not found.")
