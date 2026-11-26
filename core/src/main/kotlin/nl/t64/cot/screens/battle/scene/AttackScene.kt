@@ -14,7 +14,7 @@ import nl.t64.cot.components.battle.Character
 import nl.t64.cot.toTexture
 
 
-private const val ENEMY_SCALE = 1.75f
+private const val ENEMY_SCALE = 2.5f
 private const val ATTACK_ANIMATION_SCALE = 1.5f
 
 private const val ENEMY_CENTER_X = 1340f
