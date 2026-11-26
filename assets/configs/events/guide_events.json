@@ -213,7 +213,12 @@
       "of the rest of the party.",
       "",
       "A claymore is [BLUE]two-handed[BLACK], like a bow,",
-      "so you cannot equip a shield with it."
+      "so you cannot equip a shield with it.",
+      "",
+      "A claymore requires a lot of Strength to equip.",
+      "Chances are no one in your party is strong enough yet.",
+      "Drinking a [BLUE]Strength Potion[BLACK] at the start of a battle raises your",
+      "Strength for that one battle, which may be enough to equip the claymore."
     ]
   }
 }
