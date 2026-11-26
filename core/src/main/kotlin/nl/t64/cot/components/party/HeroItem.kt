@@ -131,8 +131,15 @@ class HeroItem(
 
     fun doUpgrade(statItem: StatItem, xpCost: Int) {
         xpPoints -= xpCost
+
+        val oldMaximumHp: Int = maximumHp
+        val oldMaximumSp: Int = maximumSp
+
         statItem.doUpgrade()
         stats.setRank(statItem.id, statItem.rank)
+
+        currentHp += maximumHp - oldMaximumHp
+        currentSp += maximumSp - oldMaximumSp
     }
 
     fun doUpgrade(skillItem: SkillItem, xpCost: Int) {
