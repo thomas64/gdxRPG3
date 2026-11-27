@@ -8,6 +8,8 @@
   "boy07"       : {"source": "boys1", "col": 3, "row": 2},
   "boy08"       : {"source": "boys1", "col": 4, "row": 2},
   "girl01"      : {"source": "girls1", "col": 1, "row": 1},
+  "girl01_happy": {"source": "grace", "col": 2, "row": 1},
+  "girl01_cry"  : {"source": "grace", "col": 2, "row": 2},
   "girl02"      : {"source": "girls1", "col": 2, "row": 1},
   "girl03"      : {"source": "girls1", "col": 3, "row": 1},
   "girl04"      : {"source": "girls1", "col": 4, "row": 1},

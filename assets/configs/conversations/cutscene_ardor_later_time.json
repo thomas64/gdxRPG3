@@ -2,7 +2,7 @@
   "mozes_returns_to_ardor": {
     "phrases": {
       "1": {"face": "mozes", "name": "Mozes", "text": ["Ardor! I'm back!"]},
-      "2": {"face": "girl01", "name": "Grace", "text": ["Mozes!"]},
+      "2": {"face": "girl01_happy", "name": "Grace", "text": ["Mozes!"]},
       "3": {"face": "mozes", "name": "Mozes", "text": ["Face me!!"], "choices": [{"command": "EXIT"}]}
     }
   },

@@ -10,7 +10,7 @@
       "6" : {"face": "mozes", "text": [". . ."]},
       "7" : {"face": "ardor", "name": "? ? ?", "text": ["Oh great Lord Ulrog, God of Power, the time has come!"]},
       "8" : {"face": "ardor", "name": "? ? ?", "text": ["The Royal Sacrifice is prepared!"]},
-      "9" : {"face": "girl01", "name": "Grace", "text": ["Let me go!"]},
+      "9" : {"face": "girl01_cry", "name": "Grace", "text": ["Let me go!"]},
       "10": {"face": "ardor", "name": "? ? ?", "text": ["Guards, bring forth the princess."]},
       "11": {"face": "mozes", "name": "Mozes", "text": ["[GRAY](Princess? What is he talking about?)"], "choices": [{"command": "EXIT"}]}
     }
@@ -36,7 +36,7 @@
   },
   "mozes_steps_in"                 : {
     "phrases": {
-      "1": {"face": "girl01", "name": "Grace", "text": ["Mozes!"]},
+      "1": {"face": "girl01_happy", "name": "Grace", "text": ["Mozes!"]},
       "2": {"face": "mozes", "name": "Mozes", "text": ["You will not harm my sister!!"]},
       "3": {"face": "mozes", "name": "Mozes", "text": ["Face me!!"], "choices": [{"command": "EXIT"}]}
     }
@@ -74,7 +74,7 @@
       "4": {"text": ["My quest for ultimate power is finally fulfilled!"]},
       "5": {"text": ["With the blood of this princess, I shall rule over all of Adan!"]},
       "6": {"text": ["Now, slay her and take her life!"]},
-      "7": {"face": "girl01", "name": "Grace", "text": ["Aaaaaah!"], "choices": [{"command": "EXIT"}]}
+      "7": {"face": "girl01_cry", "name": "Grace", "text": ["Aaaaaah!"], "choices": [{"command": "EXIT"}]}
     }
   },
   "grace_dies"                     : {
